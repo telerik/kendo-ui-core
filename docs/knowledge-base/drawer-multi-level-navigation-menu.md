@@ -1,21 +1,21 @@
 ---
-title: Drawer Multi-Level Navigation Menu
+title: Create a Multi-Level Navigation Menu in the Drawer
 description: "An example showcasing how to create a multi-level navigational menu using the Kendo UI Drawer for jQuery."
 type: how-to
-page_title: Drawer Multi-Level Navigation Menu | Kendo UI Drawer for jQuery
+page_title: Create a Multi-Level Navigation Menu in the Drawer
 slug: drawer-multi-level-navigation-menu
-position: 
-tags: 
+tags: telerik, kendo, jquery, drawer, create, multilevel, nav, navigation, menu 
 ticketid: 
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>Drawer for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Drawer for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -23,17 +23,19 @@ res_type: kb
 
 ## Description
 
-This example demonstrates how you can create a multi-level menu similar to the one on the [Kendo UI](https://demos.telerik.com/kendo-ui/drawer/index) demo pages.
+You may need to create a multi-level menu in the Drawer similar to the one on the [Kendo UI](https://demos.telerik.com/kendo-ui/drawer/index) demo pages.
 
 ## Solution
 
+To achieve the desired scenario: 
+
 1. Add two separate `ul` elements to the [`template`](/api/javascript/ui/drawer/configuration/template) configuration of the Drawer.
-1. Fill the first `ul` element with all of the main menu options.
+1. List all main menu options in the first `ul` element.
 1. Leave the second `ul` element empty.
 1. Attach a handler to the [`itemClick`](/api/javascript/ui/drawer/events/itemclick) event of the Drawer.
 1. Inside the handling function, check which `ul` element is currently visible.
 1. If the main menu is currently visible, hide it and display one of the submenus.
-1. If a submenu has been activated, fill the second `ul` element with the possible options.
+1. If a submenu has been activated, list the possible options in the second `ul` element.
 
 ```dojo
     <div id="drawer">

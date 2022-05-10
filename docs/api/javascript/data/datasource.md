@@ -1503,24 +1503,43 @@ The following options are sent to the server when server paging is enabled:
 - `skip` - The number of data items to skip.
 - `take` - The number of data items to return (the same as `pageSize`).
 
+The `skip` and `take` values are automatically calculated based on the current `page` and `pageSize`. This means that a dataSource with `page` = 3 and `pageSize` = 20 will generate a request that has `skip` = 40 and `take` = 20.
+
 Use the [`parameterMap`](/api/javascript/data/datasource#configuration-transport.parameterMap) option to send the paging options in a different format.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
 
 For a runnable example with enabled server paging, you can visit [the Grid remote data binding demo.](https://demos.telerik.com/kendo-ui/grid/remote-data-binding)
 
 #### Example - enable server paging
 
+    <div id="container"></div>
+    
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        /* transport configuration */
-      },
-      serverPaging: true,
-      schema: {
-        total: "total" // total is returned in the "total" field of the response
-      }
-    });
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          // The remote endpoint which will receive the request parameters and return the response containing the data.
+          read: {
+            dataType: "jsonp",
+            url: "https://demos.telerik.com/kendo-ui/service/Products/Read",
+          }
+        },
+        serverPaging: true,
+        pageSize: 10, // The number of items per page.
+        page: 3 // Change the page property to see a different set of items. The endpoint contains 77 items in total. This means that there are eight pages (eight pages multiplied by 10 records each).
+      });
+      
+      // The remote endpoint is configured to return the items in descending order. The first item is with ID = 77, the last item is with ID = 1
+      dataSource.fetch(function() {
+        let data = this.data(),
+            currentPage = this.page();
+        
+        // For demo purposes, each item in the current page is rendered on the screen.
+        data.forEach((item) => {
+          let element = `<p>ID - ${item.ProductID}, Name = ${item.ProductName}, Page = ${currentPage}</p>`;
+          $("#container").append($(element));
+        });
+      });
     </script>
 
 ### serverSorting `Boolean` *(default: false)*
