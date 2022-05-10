@@ -1,21 +1,20 @@
 ---
 title: Show Drawer on Initial Load
-description: How to Show Drawer on Initial Load
+page_title: Show Drawer on Initial Load
+description: "An example showcasing how to show a Kendo UI Drawer for jQuery on initial load."
 type: how-to
-page_title: How to Show Drawer on Initial Load | Kendo UI Drawer for jQuery
 slug: drawer-show-on-initial-load
-position: 
-tags: 
-ticketid: 
+tags: telerik, kendo, jquery, drawer, show, on, initial, load 
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>Drawer for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Drawer for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -23,8 +22,11 @@ res_type: kb
 
 ## Description
 
-This sample demonstrates how you can show the Drawer initially.
+Some scenarios might require you to initially show the Kendo UI for jQuery Drawer.
+
 ## Solution
+
+The following example demonstrates how to achieve the desired scenario. 
 
 ```dojo
   

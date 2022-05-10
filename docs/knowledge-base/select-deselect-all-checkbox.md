@@ -33,13 +33,13 @@ res_type: kb
 
 ## Description
 
-How can I select or deselect all rows in the Kendo UI Grid for jQuery with a **Select All** header checkbox?
+How can I select or deselect all rows on the current page of the Kendo UI Grid for jQuery with a **Select All** header checkbox?
 
 ## Solution
 
-The following example demonstrates how to select or deselect all rows in a Grid by checking the **Select All** column header of the template checkbox.
+The following example demonstrates how to select or deselect all rows on the current page of the Grid by checking the **Select All** column header of the template checkbox. To select all checkboxes across all Grid pages, refer to the [dedicated KB scenario]({% slug checkbox-selection-select-all-rows-all-pages %}).
 
-You can also select multiple rows by using the checkboxes and apply custom styling of the checkboxes.
+You can also select multiple rows by using the checkboxes and applying custom styling to the checkboxes.
 
 ```dojo
 <div id="grid"></div>

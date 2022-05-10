@@ -2873,6 +2873,12 @@ Each table row consists of table cells (`<td>`) which represent the grid columns
 
 > Use the `template` to customize the way the column displays its value.
 
+For additional and more complex examples that utilize column templates, visit the [`Knowledge Base`](https://docs.telerik.com/kendo-ui/knowledge-base) documentation, and use the following search terms:
+
+- column template
+- grid column template
+- Column Template | Kendo UI Grid
+
 #### Example - set the template as a string (wrap the column value in HTML)
 
     <div id="grid"></div>
@@ -3622,29 +3628,37 @@ The text message displayed in the column menu for unlocking a column.
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
-instance.
+The data source of the Grid holds the items that will be rendered inside the widget. An item can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array, the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance by using that value as a data source configuration.
 
 If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
-#### Example - set dataSource as a JavaScript object
+> For live demos and more complex configurations, refer to the article on [binding the Grid to local data](https://demos.telerik.com/kendo-ui/grid/local-data-binding) and [binding the Grid to remote data](https://demos.telerik.com/kendo-ui/grid/remote-data-binding).
+
+#### Example - set dataSource as a JavaScript object with data, page and pageSize properties
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { name: "Jane Doe", age: 30 },
-          { name: "John Doe", age: 33 }
-        ]
-      }
-    });
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        pageable: true,
+        // The dataSource configuration is an object which contains some data and a couple of configurations.
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+            { name: "Mike Doe", age: 31 },
+            { name: "Tom Doe", age: 35 },
+            { name: "Danny Doe", age: 37 }
+          ],
+          pageSize: 2, // The number of items displayed per page
+          page: 2 // Page 2 will be opened by default when the Grid loads.
+        }
+      });
     </script>
 
 #### Example - set dataSource as a JavaScript array
@@ -3656,6 +3670,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
         { field: "name" },
         { field: "age" }
       ],
+      // The dataSource configuration is a simple array with no additional configurations.
       dataSource: [
         { name: "Jane Doe", age: 30 },
         { name: "John Doe", age: 33 }
@@ -3667,22 +3682,24 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
     <div id="grid"></div>
     <script>
+    // The dataSource is initialized as a stand-alone widget that can be bound to the Grid.
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
+          // The remote endpoint from which the data is retrieved.
           url: "https://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp"
         }
       },
       pageSize: 10
     });
+
     $("#grid").kendoGrid({
+      // The dataSource configuration is set to an existing DataSource instance.
       dataSource: dataSource,
       pageable: true
     });
     </script>
-
-> Check [Binding to local data](https://demos.telerik.com/kendo-ui/grid/local-data-binding) and [Binding to remote data](https://demos.telerik.com/kendo-ui/grid/remote-data-binding) for live demos.
 
 ### detailTemplate `String|Function`
 
@@ -9572,27 +9589,34 @@ Fires the [edit](/api/javascript/ui/grid/events/edit) event.
 
 #### Example - add a new data item
 
+    <button id="add">Add a new row</button>
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-        ],
-        schema: {
-          model: { id: "id" }
+      $("#add").kendoButton({
+        themeColor: "success",
+        click: function() {
+          var grid = $("#grid").data("kendoGrid");
+          grid.addRow();
         }
-      },
-      editable: true,
-      toolbar: ["save"]
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.addRow();
+      });
+
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        editable: true,
+        toolbar: ["save"]
+      });
     </script>
 
 ### autoFitColumn

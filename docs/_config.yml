@@ -673,9 +673,9 @@ navigation:
     "*popover":
         isNew: true
         title: "Popover"
-    "*progressbar":
+    "*/progressbar":
         title: "ProgressBar"
-    "*circularprogressbar":
+    "*/circularprogressbar":
         title: "CircularProgressBar"
     "*rangeslider":
         title: "RangeSlider"

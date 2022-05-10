@@ -151,7 +151,10 @@ function gatherWithRequireJS(stream, file) {
         baseUrl: "src",
         optimize: "none",
         paths: paths,
-        logLevel: 2
+        logLevel: 2,
+        onBuildWrite: function (moduleName, path, contents) {
+            return contents.replace(/(\.+\/)+(kendo[\.\w]+)/gm, '$2');
+        }
     }));
 }
 
