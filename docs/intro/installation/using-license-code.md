@@ -31,7 +31,7 @@ The license key installation process involves two steps:
     product-name="Kendo UI for jQuery";
     purchase-url="https://www.telerik.com/purchase/kendo-ui"
     trial-url="https://www.telerik.com/try/kendo-ui"
-    download-code-url="https://www.telerik.com/kendo-react-ui/my-license/download">
+    download-code-url="https://docs.telerik.com/kendo-ui/my-license/download">
 </license-download-link>
 
 ## Registering the License key

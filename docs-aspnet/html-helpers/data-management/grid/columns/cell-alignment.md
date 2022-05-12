@@ -50,12 +50,12 @@ You can set the alignment of the column headers through the `HeaderHtmlAttribute
 ```HtmlHelper
     .Columns(columns =>
         {
-            columns.Bound(o => o.OrderID).HeaderHtmlAttributes(new { style = "text-align: right" });
+            columns.Bound(o => o.OrderID).HeaderHtmlAttributes(new { style = "text-align: right; justify-content: flex-end;" });
         })
 ```
 {% if site.core %}
 ```TagHelper
-<column field="OrderID" header-html-attributes='new Dictionary<string,object> { ["style"] = "text-align: right" }'/>
+<column field="OrderID" header-html-attributes='new Dictionary<string,object> { ["style"] = "text-align: right; justify-content: flex-end;" }'/>
 ```
 {% endif %}
 

@@ -55,16 +55,3 @@ The {{site.product}} Visual Studio Code Productivity Tools provide snippets for 
 | [Form Item](https://docs.telerik.com/{{site.platform}}/html-helpers/layout/dialog/itmes) | `tc-formitem-html` | `tc-formitem-tag` |
 
 For further details on using snipets, creating personalized snippets or disabling snippets refer to the [official Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/userdefinedsnippets).
-
-## {{site.product}} Scaffolder
-
-The {{site.product}} Visual Studio Code scaffolder allows you to quickly generate Views with some of the most popular components:
-
-* [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [Chart]({% slug htmlhelpers_charts_aspnetcore %})
-* [Form]({% slug htmlhelpers_form_aspnetcore_overview %})
-* [ListView]({% slug htmlhelpers_listview_aspnetcore %})
-* [Gantt]({% slug htmlhelpers_gantt_aspnetcore %})
-* [Scheduler]({% slug htmlhelpers_scheduler_aspnetcore %})
-
-The Visual Studio Code scaffolder allows you to configure multiple component-specific properties. It will prompt you for input on the controller handling the CRUD operataions, if applicable, component name and model names. For example, if you scaffold a new page with the Telerik UI for ASP.NET Core Grid, you will be able to set its the CRUD endpoints for the DataSource, set the configuration for sorting, filtering, grouping, column resizing and more properties.
