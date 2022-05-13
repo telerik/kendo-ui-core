@@ -36,3 +36,42 @@ Using the {{site.product}} Visual Studio Code Scaffolder you can quickly gener
 1. Confirming the options will generate a View containig the selected component, with the provided configuration options.
 
 For example, if you scaffold a new page with the {{site.product}} Grid component, you will be able to set the CRUD endpoints for the DataSource, set the configuration for sorting, filtering, grouping, column resizing and along with additional configuration settings.
+
+## Using the CLI
+
+The {{site.product}} Visual Studio Code Scaffolder also supports scaffolding items via the CLI. To scaffold a View run `tks <command-name> [options]`. Run `tks <command-name> --help` for a list of available options for each command. The following commands are available:
+
+| Command | Description |
+|---|---|
+|`core-grid-page`       | Scaffold a Grid View      |
+|`core-chart-page`      | Scaffold a Chart View     |
+|`core-form-page`       | Scaffold a Form View      |
+|`core-listview-page`   | Scaffold a ListView View  |
+|`core-gantt-page`      | Scaffold a Gantt View     |
+|`core-scheduler-page`  | Scaffold a Scheduler View |
+
+For example, the `tks core-grid-page --help` command will list all available options for scaffolging a Grid View. Running the `tks core-grid-page --name OrdersGrid --component-name grid --model OrderViewModel --columns OrderID Freight ShipAddress OrderDate IsShipped --controller Orders --action-read GetOrders --filterable --pageable --sortable` command will generate an **OrdersGrid.cshtml** file in `~/Views/Orders/` folder with the following configuration:
+
+```
+    @(Html.Kendo().Grid<OrderViewModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.OrderID);
+            columns.Bound(c => c.Freight);
+            columns.Bound(c => c.ShipAddress);
+            columns.Bound(c => c.OrderDate);
+            columns.Bound(c => c.IsShipped);
+        
+        })
+        .Pageable()
+        .Sortable()
+        .Filterable()
+        .HtmlAttributes(new { style = "height:430px;" })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(20)
+            .Read(read => read.Action("GetOrders", "Orders"))
+        )
+    )
+```

@@ -2053,12 +2053,18 @@ var __meta__ = { // jshint ignore:line
 
         _itemEsc: function (item, belongsToVertical) {
             var that = this,
-                nextItem;
+                nextItem, groupId;
 
             if (!belongsToVertical) {
                 return item;
             } else {
                 nextItem = item.parent().closest(".k-item");
+
+                if (nextItem.length === 0) {
+                    groupId = item.closest(".k-group").data("group");
+                    nextItem = that.wrapper.find(".k-item[data-groupparent='" + groupId + "']");
+                }
+
                 that.close(nextItem);
                 that._moveHover(item, nextItem);
             }

@@ -1162,7 +1162,7 @@
             },
 
             _actionable: function(element) {
-                return $(element).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon, :input, a, .k-input, .k-icon, [role='gridcell']");
+                return $(element).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon, :input, a, .k-input, .k-icon, [role='gridcell'], .k-input-value-text");
             },
 
             _shouldFocus: function(target) {

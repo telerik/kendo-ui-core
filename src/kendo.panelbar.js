@@ -1182,10 +1182,6 @@ var __meta__ = { // jshint ignore:line
                 next = this._first();
             }
 
-            if (next.hasClass(DISABLEDCLASS)) {
-                next = this._nextItem(next);
-            }
-
             return next;
         },
 
@@ -1210,10 +1206,6 @@ var __meta__ = { // jshint ignore:line
                         prev = result;
                     }
                 }
-            }
-
-            if (prev.hasClass(DISABLEDCLASS)) {
-                prev = this._prevItem(prev);
             }
 
             return prev;

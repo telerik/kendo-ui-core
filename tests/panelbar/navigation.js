@@ -63,7 +63,7 @@
             assert.isOk(!ul.children(":first").children(".k-link").hasClass("k-state-focused"));
         });
 
-        it("PanelBar misses next item if disabled", function() {
+        it("PanelBar focuses next item if disabled", function() {
             addItems(3);
 
             panelbar.enable(ul.children().eq(1), false);
@@ -75,7 +75,7 @@
                 keyCode: keys.DOWN
             });
 
-            assert.isOk(ul.children(":last").children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children().eq(1).children(".k-link").hasClass("k-state-focused"));
         });
 
         it("PanelBar selects first item of group", function() {
@@ -232,7 +232,7 @@
                 .hasClass("k-state-focused"));
         });
 
-        it("PanelBar misses prev item if disabled", function() {
+        it("PanelBar focuses prev item if disabled", function() {
             addItems(3);
 
             panelbar.enable(ul.children().eq(1), false);
@@ -245,7 +245,7 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children().eq(1).children(".k-link").hasClass("k-state-focused"));
         });
 
         it("PanelBar moves focus to last element in the last expanded group", function() {

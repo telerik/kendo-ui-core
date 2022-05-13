@@ -435,14 +435,14 @@ var __meta__ = { // jshint ignore:line
 
                     that.content.html(data);
 
-                    that.contentLoading = false;
+                    if (kendo._outerHeight(that.popup.element) > kendo._outerHeight(that.popup.wrapper)) {
+                        that.popup.wrapper.css("height", kendo._outerHeight(that.popup.element) + "px");
+                        that.popup.position();
+                        that._positionCallout();
+                    }
 
                     that.trigger(CONTENTLOAD);
-
-                    that._openPopup();
                 };
-
-            that.contentLoading = true;
 
             jQuery.ajax(extend({
                 type: "GET",
@@ -502,9 +502,7 @@ var __meta__ = { // jshint ignore:line
                 DOCUMENT.off("keydown" + NS, that._documentKeyDownHandler);
             });
 
-            if (!that.contentLoading) {
-                that._openPopup();
-            }
+            that._openPopup();
         },
 
         _initPopup: function() {

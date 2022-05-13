@@ -23,16 +23,10 @@
             $.mockjax.clear();
         });
 
-        function triggerEvent(element, type, info) {
-            element.trigger($.Event(type, info));
-
-            return element;
-        };
-
         it("ajax request is made when popup is shown", function(done) {
             $.mockjax({
                 url: "foo/baz",
-                response: function(request) {
+                response: function() {
                     assert.isOk(true);
                     done();
                 }
@@ -47,11 +41,11 @@
             tooltip.show(container);
         });
 
-        it("ajax request content is appended to popup element before it is opened", function(done) {
+        it("popup element is opened before the ajax request content is appended to it", function(done) {
             $.mockjax({
                 url: "foo/baz",
-                response: function(request) {
-                    assert.isOk(!tooltip.popup.visible());
+                response: function() {
+                    assert.isOk(tooltip.popup.visible());
                     done();
                 }
             });
