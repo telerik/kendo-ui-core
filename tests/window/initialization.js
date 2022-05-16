@@ -628,6 +628,16 @@
 
             assert.equal(dialog.wrapper.css("left"), "1px");
         });
+
+        it("k-window-content has its tabindex set to 0", function() {
+            var dialog = createWindow({
+                position: {
+                    left: "1px"
+                }
+            });
+
+            assert.equal(dialog.element.attr("tabindex"), "0");
+        });
     });
 
     describe("appendTo option", function() {

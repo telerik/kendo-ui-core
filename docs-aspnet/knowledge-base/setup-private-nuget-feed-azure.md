@@ -28,7 +28,7 @@ How can I set up the private NuGet feed in Azure to publish an ASP.NET Core appl
 * A Service Connection
 * Azure Artifacts
 
-Both require that a privat NuGet feed is set up along with a *nuget.config* file.
+Both require that a private NuGet feed is set up along with a *nuget.config* file.
 
 ### Package Sources
 

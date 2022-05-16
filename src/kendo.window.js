@@ -208,6 +208,7 @@
 
                 if (!element.is(".k-window-content") || !wrapper[0]) {
                     element.addClass("k-window-content");
+                    element.attr("tabindex", 0);
                     that._createWindow(element, options);
                     wrapper = that.wrapper = element.closest(KWINDOW);
 

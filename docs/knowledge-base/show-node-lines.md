@@ -37,65 +37,75 @@ How can I show lines between the nodes of the Kendo UI for jQuery TreeView?
 
 ## Solution
 
+Depending on the [TreeView rendering and styling options]({% slug appearance_kendoui_treeview_widget%}) that you use, apply either the solution for the [new rendering](#new-rendering) or the [old rendering](#new-rendering).
+
+### New Rendering
+
 The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <div id="treeview"></div>
 
     <script>
-      $("#treeview").kendoTreeView({
-        dataSource: [
-          { text: "Furniture", items: [
-            { text: "Tables & Chairs" },
-            { text: "Sofas" },
-            { text: "Occasional Furniture" }
-          ] },
-          { text: "Decor", items: [
-            { text: "Bed Linen" },
-            { text: "Curtains & Blinds" },
-            { text: "Carpets" }
-          ] }
-        ]
-      });
-
+          $("#treeview").kendoTreeView({
+            dataSource: [
+              { text: "Furniture", items: [
+                { text: "Tables & Chairs" },
+                { text: "Sofas" },
+                { text: "Occasional Furniture" }
+              ] },
+              { text: "Decor", items: [
+                { text: "Bed Linen" },
+                { text: "Curtains & Blinds" },
+                { text: "Carpets" }
+              ] }
+            ]
+          });
     </script>
 
-
+   
+      
     <style>
       body {
         font-size: 12px;
       }
 
-      .k-treeview .k-top,
-      .k-treeview .k-mid,
-      .k-treeview .k-bot {
+      .k-treeview .k-treeview-top,
+      .k-treeview .k-treeview-mid,
+      .k-treeview .k-treeview-bot {
         background-image: url('https://d35islomi5rx1v.cloudfront.net/mvc/2012.2.607/Default/treeview-nodes.png');
         background-repeat: no-repeat;
         margin-left: -16px;
         padding-left: 16px;
       }
 
-      .k-treeview .k-item { background-image: url('https://d35islomi5rx1v.cloudfront.net/mvc/2012.2.607/Default/treeview-line.png'); }
-      .k-treeview .k-last { background-image: none; }
+      .k-treeview .k-treeview-item { background-image: url('https://d35islomi5rx1v.cloudfront.net/mvc/2012.2.607/Default/treeview-line.png'); }
+      .k-treeview .k-treeview-last { background-image: none; }
 
 
-      .k-treeview .k-top { background-position: -91px 0; }
-      .k-treeview .k-bot { background-position: -69px -22px; }
-      .k-treeview .k-mid { background-position: -47px -44px; }
-      .k-treeview .k-last .k-top { background-position: -25px -66px; }
-      .k-treeview .k-group .k-last .k-bot { background-position: -69px -22px; }
+      .k-treeview .k-treeview-top { background-position: -91px 0; }
+      .k-treeview .k-treeview-bot { background-position: -69px -22px; }
+      .k-treeview .k-treeview-mid { background-position: -47px -44px; }
+      .k-treeview .k-treeview-last .k-treeview-top { background-position: -25px -66px; }
+      .k-treeview .k-treeview-group .k-treeview-last .k-treeview-bot { background-position: -69px -22px; }
 
-      .k-treeview .k-item {
+      .k-treeview .k-treeview-item {
         background-repeat: no-repeat;
       }
 
-      .k-treeview .k-first {
+      .k-treeview .k-treeview-first {
         background-repeat: no-repeat;
         background-position: 0 16px;
       }
 
     </style>
 ```
+
+
+### Old Rendering
+
+[This Dojo](https://dojo.telerik.com/@Stoyan/UMUyexoW) demonstrates how to achieve the behavior with versions earlier than [R1 2022](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2022-(version-2022-1-119))
+
 
 ## See Also
 
