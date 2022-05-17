@@ -6,7 +6,7 @@
         beforeEach(function() {
             window.change = function() {
                 assert.isOk(true);
-            }
+            };
         });
         afterEach(function() {
             delete window.change;
@@ -205,7 +205,7 @@
             dom.kendoDateTimePicker();
 
             var value = new Date(2011, 1, 2);
-            observable.set("value", value)
+            observable.set("value", value);
             assert.equal(dom.data("kendoDateTimePicker").value().getTime(), value.getTime());
         });
 

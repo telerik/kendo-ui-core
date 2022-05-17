@@ -67,18 +67,25 @@
             assert.equal(element.find(".k-dropdownlist").attr("aria-label"), "Page sizes drop down");
         });
 
+        it("prev button is disabled on the first page", function() {
+            var pager = setup({}, { navigatable: true, previousNext: true });
+
+            assert.isOk(pager.find(".k-i-arrow-60-left").parent().hasClass("k-state-disabled"));
+            assert.equal(pager.find(".k-i-arrow-60-left").parent().attr("aria-disabled"), "true");
+        });
+
         it("when navigatable is not enabled prev/next buttons don't have aria-describedby", function() {
             var element = setup(null, { pageSizes: [1, 2], buttonCount: 2 });
             pager.page(1);
             var ariaFound = false;
             var buttons = element.find("> a");
 
-            buttons.each(function () {
+            buttons.each(function() {
                 var button = $(this);
                 if (button.attr("aria-describedby")) {
-                    ariaFound=true;
+                    ariaFound = true;
                 }
-            })
+            });
 
             assert.isNotOk(ariaFound);
         });
@@ -94,7 +101,7 @@
 
         it("pager is accessible", function(done) {
             var element = setup(null, { navigatable: true, input: true,
-                numeric: true,  refresh: true,  pageSizes: [1, 2] });
+                numeric: true, refresh: true, pageSizes: [1, 2] });
 
             element.getKendoPager().dataSource.fetch();
 

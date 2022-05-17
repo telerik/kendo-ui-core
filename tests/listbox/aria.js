@@ -57,12 +57,12 @@
         });
     });
 
-    describe("ListBox aria", function () {
+    describe("ListBox aria", function() {
         beforeEach(function() {
             var elementA = $('<select id="listA"></select>').appendTo(Mocha.fixture);
             var elementB = $('<select id="listB"></select>').appendTo(Mocha.fixture);
 
-            listA  = createListBoxWithToolbar({
+            listA = createListBoxWithToolbar({
                 dataSource: [ { name: "Tim", id: 4 }, { name: "Johny", id: 5 }, { name: "Dicky", id: 6 }],
                 dataTextField: "name",
                 selectable: true,
@@ -70,7 +70,7 @@
                 connectWith: "listB"
             }, elementA);
 
-            listB  = createListBoxWithToolbar({
+            listB = createListBoxWithToolbar({
                 dataSource: [ { name: "Tim2", id: 7 }, { name: "Johny2", id: 8 }, { name: "Dicky2", id: 9 }],
                     dataTextField: "name",
                     selectable: true,
@@ -88,8 +88,8 @@
 
         it("All items have id and role set", function() {
             var allSet = true;
-            listA.items().each(function () {
-                if(!$(this).attr("id") || $(this).attr("role") !== "option") {
+            listA.items().each(function() {
+                if (!$(this).attr("id") || $(this).attr("role") !== "option") {
                     allSet = false;
                 }
             });
@@ -123,7 +123,7 @@
             assert.isOk(listA._getList().attr("aria-activedescendant") === listA.items().first().attr("id"));
         });
 
-        it("toolbar's tools have aria-label", function () {
+        it("toolbar's tools have aria-label", function() {
             var toolsButtons = listA.toolbar.element.find("a.k-button");
             var ariaLabelAttr = "aria-label";
 
@@ -136,7 +136,7 @@
             assert.equal(toolsButtons.filter('[data-command="transferAllFrom"]').attr(ariaLabelAttr), "Transfer All From");
         });
 
-        it("items have id and uid set", function () {
+        it("items have id and uid set", function() {
             assert.isOk(listA.items().first().data("uid").length);
             assert.isOk(listA.items().first().attr("id").length);
 

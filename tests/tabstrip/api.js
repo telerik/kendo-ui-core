@@ -670,7 +670,7 @@
             var destroy = kendo.destroy;
 
             try {
-                kendo.destroy = function() { assert.isOk(true); }
+                kendo.destroy = function() { assert.isOk(true); };
 
                 tabStrip.remove("li");
             } finally {

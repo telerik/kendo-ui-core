@@ -1,9 +1,9 @@
-(function(){
+(function() {
 
     var AutoComplete = kendo.ui.AutoComplete;
     var input;
 
-    describe("autocomplete WAI-ARIA with AXE", function () {
+    describe("autocomplete WAI-ARIA with AXE", function() {
         beforeEach(function() {
             kendo.effects.disable();
             input = $("<input id='ac'>").appendTo(Mocha.fixture);
@@ -77,7 +77,7 @@
         });
     });
 
-    describe("autocomplete WAI-ARIA roles and attributes", function () {
+    describe("autocomplete WAI-ARIA roles and attributes", function() {
         beforeEach(function() {
             kendo.effects.disable();
             input = $("<input>").appendTo(Mocha.fixture);

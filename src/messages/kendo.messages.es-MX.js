@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -197,8 +197,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "operator": "Operador",
   "value": "Valor",
   "cancel": "Cancelar",
-  "logic": "Lógica de filtros", 
-  "additionalOperator": "Operador adicional", 
+  "logic": "Lógica de filtros",
+  "additionalOperator": "Operador adicional",
   "additionalValue": "Valor adicional"
 });
 }

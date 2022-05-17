@@ -12,7 +12,7 @@
                 return this.trigger({ type: "keydown", keyCode: key } );
             };
         });
-        afterEach(function () {
+        afterEach(function() {
             kendo.destroy(Mocha.fixture);
         });
 
@@ -52,13 +52,13 @@
         });
     });
 
-    describe("ARIA support", function () {
+    describe("ARIA support", function() {
         beforeEach(function() {
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             };
         });
-        afterEach(function () {
+        afterEach(function() {
             kendo.destroy(Mocha.fixture);
         });
 
@@ -68,7 +68,7 @@
         });
 
         it("menuitem role is added to the items of bound menu", function() {
-            setup({ dataSource: [ {text: "foo" } ] });
+            setup({ dataSource: [ { text: "foo" } ] });
             assert.isOk(menu.find("[role=menuitem]").length);
         });
 
@@ -81,7 +81,7 @@
         });
 
         it("has-popup attribute is added if node has childs", function() {
-            setup({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
+            setup({ dataSource: [ { text: "foo", items: [{ text: "bar" }] } ] });
 
             assert.equal(menu.find("[aria-haspopup=true] span:first").text(), "foo");
         });
@@ -91,9 +91,9 @@
                 .appendTo(Mocha.fixture)
                 .kendoMenu();
 
-            menu.data("kendoMenu").append({text: 'item'}, $("#firstItem"));
+            menu.data("kendoMenu").append({ text: 'item' }, $("#firstItem"));
             assert.isOk($("#firstItem").is("[aria-haspopup]"));
-        })
+        });
 
         it("has-popup attribute is not removed when using remove method and there is still group", function() {
             menu = $("<ul><li id='firstItem'>item<ul><li>item 1</li><li id='item2'>item 2</li></ul></li></ul>")
@@ -102,7 +102,7 @@
 
             menu.data("kendoMenu").remove($("#item2"));
             assert.isOk($("#firstItem").is("[aria-haspopup]"));
-        })
+        });
 
         it("has-popup attribute is removed when using remove method and there no group", function() {
             menu = $("<ul><li id='firstItem'>item<ul><li id='item1'>item 1</li></ul></li></ul>")
@@ -111,7 +111,7 @@
 
             menu.data("kendoMenu").remove($("#item1"));
             assert.isOk($("#firstItem").not("[aria-haspopup]"));
-        })
+        });
 
         it("has-popup attribute is only for the item with no groups when using remove method", function() {
             menu = $("<ul>" +
@@ -132,7 +132,7 @@
 
             assert.isOk($("#item1").not("[aria-haspopup]"));
             assert.isOk($("#firstItem").is("[aria-haspopup]"));
-        })
+        });
 
         it("aria-expanded attribute is properly set", function(done) {
             menu = $("<ul>" +
@@ -158,10 +158,10 @@
                 assert.equal($("#item1").attr("aria-expanded"), "false");
                 done();
             }, 150);
-        })
+        });
 
         it("menu role is added to the group container", function() {
-            setup({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
+            setup({ dataSource: [ { text: "foo", items: [{ text: "bar" }] } ] });
 
             menu.getKendoMenu().dataSource.view()[0].load();
 
@@ -219,7 +219,7 @@
         it("aria-activedescendant is added to the wrapper when item is focused", function() {
             menu = $("<ul id=\"foo\"/>")
                 .appendTo(Mocha.fixture)
-                .kendoMenu({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
+                .kendoMenu({ dataSource: [ { text: "foo", items: [{ text: "bar" }] } ] });
 
             menu[0].focus();
 

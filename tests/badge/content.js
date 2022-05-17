@@ -34,14 +34,14 @@
 
         // #region badge.options.text
         test('badge.options.text sets the content of the badge', function() {
-            badge = new Badge(span, {text: 100});
+            badge = new Badge(span, { text: 100 });
 
             assert.equal(badge.text(), 100);
         });
 
         test('badge.options.text overrides the initial HTML of the badge element', function() {
             span.html('<strong>text</strong>');
-            badge = new Badge(span, {text: 100});
+            badge = new Badge(span, { text: 100 });
 
             assert.equal(badge.text(), 100);
         });

@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterCell) {

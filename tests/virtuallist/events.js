@@ -26,7 +26,7 @@
         return items;
     }
 
-    describe("VirtualList API: ", function () {
+    describe("VirtualList API: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
@@ -155,7 +155,7 @@
             value: [0]
         }));
 
-        virtualList.dataSource.read().done(function () {
+        virtualList.dataSource.read().done(function() {
             virtualList.one("change", function(e) {
                 assert.isOk(false);
             });

@@ -454,11 +454,12 @@
         });
 
         it("last button is disabled on the last page", function() {
-            var pager = setup({}, { previousNext: true });
+            var pager = setup({}, { navigatable: true, previousNext: true });
 
             dataSource.read();
             dataSource.page(5);
             assert.isOk(pager.find(".k-pager-last").hasClass("k-state-disabled"));
+            assert.equal(pager.find(".k-pager-last").attr("aria-disabled"), "true");
         });
 
         it("last button is enabled on any page but last", function() {
@@ -645,7 +646,7 @@
         });
 
         it("selecting all pages from the select changes the skip in the data source", function() {
-            var pager = setup({}, { pageSizes: ["all", 1, 2]});
+            var pager = setup({}, { pageSizes: ["all", 1, 2] });
             dataSource.read();
 
             var select = pager.find(".k-pager-sizes select");
@@ -838,11 +839,11 @@
                   groupPaging: true
             });
 
-            dataSource.fetch(function(){
+            dataSource.fetch(function() {
                 var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
                     dataSource: dataSource
                 }).data('kendoPager');
-                dataSource._groupsState[dataSource.view()[0].uid] = true
+                dataSource._groupsState[dataSource.view()[0].uid] = true;
                 pager.refresh();
 
                 assert.equal(pager.element.find(".k-pager-info").text(), "1 - 3 of 4 items");

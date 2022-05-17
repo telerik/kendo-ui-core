@@ -80,7 +80,6 @@
         });
 
 
-
         it("value('2') set selectedIndex", function() {
             var combobox = new ComboBox(input, {
                 dataTextField: "text",
@@ -110,7 +109,7 @@
 
         it("change is not triggered on blur after value()", function() {
             var combobox = new ComboBox(input, {
-                change: function () {
+                change: function() {
                     assert.isOk(false);
                 }
             });
@@ -178,7 +177,7 @@
             var option = select.children(":last");
 
             assert.equal(option[0].value, "custom");
-            assert.equal(option.attr("selected"), undefined)
+            assert.equal(option.attr("selected"), undefined);
             assert.equal(option[0].selected, false);
         });
 
@@ -495,7 +494,7 @@
 
             assert.equal(combobox.value(), "");
             assert.equal(combobox.text(), "");
-        })
+        });
 
         it("text method should set input value when autoBind: false", function() {
             var combobox = new ComboBox(input, {
@@ -528,7 +527,7 @@
             var oldOpen = combobox.popup.toggle,
                 called = false;
 
-            combobox.popup.toggle = function() { called = true };
+            combobox.popup.toggle = function() { called = true; };
 
             combobox.enable(false);
 

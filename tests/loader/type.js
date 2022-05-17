@@ -6,7 +6,7 @@
     var span;
     var loader;
 
-    describe('kendo.ui.Loader type', function () {
+    describe('kendo.ui.Loader type', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -34,7 +34,7 @@
             test(`loader.setOptions({type: '${key}'}) sets correct classNames`, function() {
                 loader = new Loader(span, { key: 'infinite-spinner' });
 
-                loader.setOptions({type: key});
+                loader.setOptions({ type: key });
 
                 assert.equal(loader._type, key);
                 assert.equal(loader.element.hasClass(`k-loader-${types[key]}`), true);

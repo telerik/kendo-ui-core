@@ -49,7 +49,7 @@ Refer to [this section of the MSDN documentation](https://docs.microsoft.com/en-
 ## Adding {{site.product}} to the Application
 
 {% if site.core %}
-Follow the [guidelines for adding {{site.product}} to an existing application]({% slug gettingstarted_default_project %}):
+Follow the [guidelines for adding {{site.product}} to an existing application]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}):
 {% else %}
 Follow the [guidelines for adding {{site.product}} to an existing application]({% slug manualsetup_aspnetmvc %}):
 {% endif %}

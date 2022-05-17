@@ -156,7 +156,7 @@
         });
     });
 
-    describe("kendo.ui.ListView WAI-ARIA with AXE", function () {
+    describe("kendo.ui.ListView WAI-ARIA with AXE", function() {
         beforeEach(function() {
             kendo.effects.disable();
         });

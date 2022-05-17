@@ -161,7 +161,7 @@
         });
 
         it("resizing window horizontally does not update vertical positioning", function() {
-            var initialHeight= dialog.wrapper.outerHeight();
+            var initialHeight = dialog.wrapper.outerHeight();
 
             resize("w", 100, 0);
 

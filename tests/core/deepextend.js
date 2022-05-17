@@ -24,7 +24,7 @@
                 margin: 5,
                 colors: ["green", "blue"],
                 border: undefined
-            }
+            };
 
             deepExtend(dst, src);
         });

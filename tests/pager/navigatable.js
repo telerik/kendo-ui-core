@@ -7,10 +7,10 @@
 
     function setup(dataOptions, options) {
         dataOptions = $.extend({
-            data: [ {data:1},{data:2},{data:3},{data:4},{data:5},{data:6},{data:7},{data:8},{data:9},{data:10},{data:11},{data:12},
-                {data:1},{data:2},{data:3},{data:4},{data:5},{data:6},{data:7},{data:8},{data:9},{data:10},{data:11},{data:12},
-                {data:1},{data:2},{data:3},{data:4},{data:5},{data:6},{data:7},{data:8},{data:9},{data:10},{data:11},{data:12},
-                {data:1},{data:2},{data:3},{data:4},{data:5},{data:6},{data:7},{data:8},{data:9},{data:10},{data:11},{data:12}],
+            data: [ { data: 1 },{ data: 2 },{ data: 3 },{ data: 4 },{ data: 5 },{ data: 6 },{ data: 7 },{ data: 8 },{ data: 9 },{ data: 10 },{ data: 11 },{ data: 12 },
+                { data: 1 },{ data: 2 },{ data: 3 },{ data: 4 },{ data: 5 },{ data: 6 },{ data: 7 },{ data: 8 },{ data: 9 },{ data: 10 },{ data: 11 },{ data: 12 },
+                { data: 1 },{ data: 2 },{ data: 3 },{ data: 4 },{ data: 5 },{ data: 6 },{ data: 7 },{ data: 8 },{ data: 9 },{ data: 10 },{ data: 11 },{ data: 12 },
+                { data: 1 },{ data: 2 },{ data: 3 },{ data: 4 },{ data: 5 },{ data: 6 },{ data: 7 },{ data: 8 },{ data: 9 },{ data: 10 },{ data: 11 },{ data: 12 }],
             pageSize: 3,
             page: 1,
         }, dataOptions);
@@ -95,7 +95,7 @@
             var focusEl = element.find(".k-link:eq(4)");
             pager._restoreTabIndexes();
             focusEl.focus();
-            var enter = { keyCode: keys.ENTER, shiftKey: true, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl  };
+            var enter = { keyCode: keys.ENTER, shiftKey: true, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(enter);
 
             assert.equal(element.find(".k-link:eq(4)")[0], document.activeElement);

@@ -1,4 +1,4 @@
-(function(){
+(function() {
 
 var AutoComplete = kendo.ui.AutoComplete;
 var CLICK = kendo.support.touch ? "touchend" : "click";
@@ -6,13 +6,13 @@ var FOCUSED = ".k-focus";
 var keys = kendo.keys;
 var input;
 
-describe("kendo.ui.AutoComplete navigation", function () {
+describe("kendo.ui.AutoComplete navigation", function() {
     beforeEach(function() {
         input = $("<input>").appendTo(Mocha.fixture);
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
-        }
+        };
 
     });
     afterEach(function() {
@@ -22,7 +22,7 @@ describe("kendo.ui.AutoComplete navigation", function () {
 
 var getData = function(length) {
     var result = [];
-    for(var idx=0; idx < length; idx++) {
+    for (var idx = 0; idx < length; idx++) {
         result.push("item" + idx);
     }
     return result;

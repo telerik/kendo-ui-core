@@ -1,11 +1,11 @@
-(function(){
+(function() {
 
 var AutoComplete = kendo.ui.AutoComplete,
     input;
 
 $.fn.press = function(key) {
     return this.trigger({ type: "keydown", keyCode: key } );
-}
+};
 
 $.fn.selectedText = function() {
     var that = this[0];
@@ -15,7 +15,7 @@ $.fn.selectedText = function() {
     } else {
         return that.value.substring(that.selectionStart, that.selectionEnd);
     }
-}
+};
 
 $.fn.type = function(value) {
     return this.val(value).each(function() {
@@ -25,9 +25,9 @@ $.fn.type = function(value) {
             textRange.select();
         }
         });
-}
+};
 
-describe("kendo.ui.AutoComplete separator", function () {
+describe("kendo.ui.AutoComplete separator", function() {
     beforeEach(function() {
         input = $("<input>").appendTo(Mocha.fixture);
     });

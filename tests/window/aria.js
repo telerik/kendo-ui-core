@@ -4,7 +4,7 @@
         return element.kendoWindow(options).data("kendoWindow");
     }
 
-    describe("Window WAI-ARIA with AXE", function () {
+    describe("Window WAI-ARIA with AXE", function() {
         afterEach(function() {
             Mocha.fixture
                 .closest("body")

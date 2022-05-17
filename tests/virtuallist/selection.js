@@ -73,7 +73,7 @@
                 itemHeight: ITEM_HEIGHT,
                 template: "#=text#",
                 dataValueField: "value"
-            }
+            };
         });
 
         afterEach(function() {
@@ -259,9 +259,9 @@
                 elements.push(virtualList.items().eq(7));
 
                 selectAll(virtualList, elements, function() {
-                    assert.isOk(virtualList.items().eq(1).hasClass(SELECTED))
-                    assert.isOk(virtualList.items().eq(2).hasClass(SELECTED))
-                    assert.isOk(virtualList.items().eq(7).hasClass(SELECTED))
+                    assert.isOk(virtualList.items().eq(1).hasClass(SELECTED));
+                    assert.isOk(virtualList.items().eq(2).hasClass(SELECTED));
+                    assert.isOk(virtualList.items().eq(7).hasClass(SELECTED));
                     done();
                 });
             });
@@ -277,12 +277,12 @@
             var selectElementDone2 = function() {
                 assert.isOk(element.hasClass(SELECTED));
                 done();
-            }
+            };
 
             var selectElementDone1 = function() {
                 assert.isOk(element.hasClass(SELECTED));
                 virtualList.select(element).done(selectElementDone2);
-            }
+            };
 
             var asyncDataSourceThen = function() {
                 element = virtualList.items().first();

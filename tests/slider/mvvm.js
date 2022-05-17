@@ -90,7 +90,7 @@
 
             dom.kendoSlider();
 
-            observable.set("value", 10)
+            observable.set("value", 10);
             assert.equal(dom.data("kendoSlider").value(), 10);
         });
 
@@ -390,7 +390,7 @@
 
             dom.kendoRangeSlider();
 
-            observable.set("value", [1, 3])
+            observable.set("value", [1, 3]);
             assert.deepEqual(dom.data("kendoRangeSlider").value(), [1, 3]);
         });
 

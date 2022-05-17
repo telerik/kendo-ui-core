@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core", "./kendo.selectable" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "calendar",
@@ -150,7 +150,7 @@ var __meta__ = { // jshint ignore:line
                 element.on(CLICK, WEEKCOLUMNSELECTOR, function(e) {
                         var first = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).first(),
                             last = that.selectable._lastActive = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).last();
-                        that.selectable.selectRange(first, last, { event: e});
+                        that.selectable.selectRange(first, last, { event: e });
                         that._current = that._value = toDateObject(last.find("a"));
                         that._setCurrent(that._current);
                 });
@@ -199,9 +199,9 @@ var __meta__ = { // jshint ignore:line
             disableDates: null,
             url: "",
             culture: "",
-            footer : "",
-            format : "",
-            month : {},
+            footer: "",
+            format: "",
+            month: {},
             weekNumber: false,
             selectable: "single",
             selectDates: [],
@@ -420,7 +420,7 @@ var __meta__ = { // jshint ignore:line
                     url: options.url,
                     dates: options.dates,
                     format: options.format,
-                    otherMonth : true,
+                    otherMonth: true,
                     culture: culture,
                     disableDates: options.disableDates,
                     isWeekColumnVisible: options.weekNumber,
@@ -475,11 +475,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             datesUnique = dates
-                .map(function (date) { return date.getTime(); })
-                .filter(function (date, position, array) {
+                .map(function(date) { return date.getTime(); })
+                .filter(function(date, position, array) {
                     return array.indexOf(date) === position;
                 })
-                .map(function (time) { return new Date(time); });
+                .map(function(time) { return new Date(time); });
 
             validSelectedDates = $.grep(datesUnique, function(value) {
                 if (value) {
@@ -618,7 +618,7 @@ var __meta__ = { // jshint ignore:line
                     that._toggleSelection($(eventArgs.event.currentTarget));
                 }
                 else {
-                    that._cellsBySelector(CELLSELECTORVALID).each(function(index, element){
+                    that._cellsBySelector(CELLSELECTORVALID).each(function(index, element) {
                         var value = toDateObject($(element).find("a"));
                         that._deselect(value);
                     });
@@ -662,14 +662,14 @@ var __meta__ = { // jshint ignore:line
         //shift selection
         _rangeSelection: function(toDateCell, startDate) {
             var that = this,
-                fromDate  = startDate || toDateObject(that.selectable.value().first().find("a")),
+                fromDate = startDate || toDateObject(that.selectable.value().first().find("a")),
                 toDate = toDateObject(toDateCell.find("a")),
                 daysDifference;
 
             if (that.selectable._lastActive || that._value) {
-                fromDate = that.selectable._lastActive? toDateObject(that.selectable._lastActive.find("a")): new Date(+that._value);
+                fromDate = that.selectable._lastActive ? toDateObject(that.selectable._lastActive.find("a")) : new Date(+that._value);
             } else {
-                that.selectable._lastActive = startDate? that._cellByDate(that._view.toDateString(startDate), CELLSELECTORVALID): that.selectable.value().first();
+                that.selectable._lastActive = startDate ? that._cellByDate(that._view.toDateString(startDate), CELLSELECTORVALID) : that.selectable.value().first();
             }
 
             that._selectDates = [];
@@ -719,7 +719,7 @@ var __meta__ = { // jshint ignore:line
             if (that._view.name == "month") {
                 return !isDisabled(currentValue);
             } else {
-                index = that.wrapper.find("."+FOCUSED).index();
+                index = that.wrapper.find("." + FOCUSED).index();
                 cell = that.wrapper.find(".k-content td").eq(index + cellIndex);
                 return cell.is(CELLSELECTORVALID) || !isDisabled(currentValue);
             }
@@ -874,7 +874,7 @@ var __meta__ = { // jshint ignore:line
             if (!that._dateInView(currentValue)) {
                 that._selectDates = [];
 
-                fromDate = that.selectable._lastActive? toDateObject(that.selectable._lastActive.find("a")): currentValue;
+                fromDate = that.selectable._lastActive ? toDateObject(that.selectable._lastActive.find("a")) : currentValue;
                 daysDifference = daysBetweenTwoDates(fromDate, new Date(+currentValue));
 
                 addDaysToArray(that._selectDates, daysDifference, fromDate, that.options.disableDates);
@@ -885,7 +885,7 @@ var __meta__ = { // jshint ignore:line
                 that.trigger(CHANGE);
                 return;
             }
-            that.selectable.options.filter = that.wrapper.find("table").length > 1 && +currentValue > +that._current? "table.k-month:eq(1) " + CELLSELECTORVALID: "table.k-month:eq(0) " + CELLSELECTORVALID;
+            that.selectable.options.filter = that.wrapper.find("table").length > 1 && +currentValue > +that._current ? "table.k-month:eq(1) " + CELLSELECTORVALID : "table.k-month:eq(0) " + CELLSELECTORVALID;
             that._setCurrent(currentValue);
             that._current = currentValue;
 
@@ -904,10 +904,10 @@ var __meta__ = { // jshint ignore:line
 
             if ($(that._cell[0]).hasClass(SELECTED)) {
                 that.selectable._unselect($(that._cell[0]));
-                that.selectable.trigger(CHANGE, { event: event});
+                that.selectable.trigger(CHANGE, { event: event });
             }
             else {
-                that.selectable.value($(that._cell[0]), { event: event});
+                that.selectable.value($(that._cell[0]), { event: event });
             }
         },
 
@@ -1046,7 +1046,7 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _selectCell: function (date) {
+        _selectCell: function(date) {
             var that = this,
                 cell = that._selectedCell,
                 value = that._view.toDateString(date);
@@ -1056,14 +1056,14 @@ var __meta__ = { // jshint ignore:line
                     cell.removeClass(SELECTED);
                 }
 
-                cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")");
+                cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR : "td:not(." + OTHERMONTH + ")");
 
                 that._selectedCell = cell;
                 cell.addClass(SELECTED)
                     .attr(ARIA_SELECTED, true);
         },
 
-        _setCurrent: function (date) {
+        _setCurrent: function(date) {
             var that = this,
                 id = kendo.guid(),
                 cell = that._cell,
@@ -1075,7 +1075,7 @@ var __meta__ = { // jshint ignore:line
                     cell[0].removeAttribute(ID);
                 }
 
-                cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")");
+                cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR : "td:not(." + OTHERMONTH + ")");
 
                 that._cell = cell;
 
@@ -1088,7 +1088,7 @@ var __meta__ = { // jshint ignore:line
                 }
         },
 
-        _bindTable: function (table) {
+        _bindTable: function(table) {
             table
             .on(FOCUS_WITH_NS, this._addClassProxy)
             .on(BLUR, this._removeClassProxy);
@@ -1169,21 +1169,21 @@ var __meta__ = { // jshint ignore:line
             linksSelector = that.options.linksSelector;
 
             if (!element.find(HEADERSELECTOR)[0]) {
-                element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, {actionAttr: kendo.attr("action"), size: kendo.getValidCssClass("k-button-", "size", that.options.size)})));
+                element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, { actionAttr: kendo.attr("action"), size: kendo.getValidCssClass("k-button-", "size", that.options.size) })));
             }
 
             element.find(linksSelector)
                 .on(CLICK + " touchend" + ns, function() { return false; } );
 
-            that._title = element.find('[' + kendo.attr("action") + '="nav-up"]').on(CLICK + " touchend" + ns, function () {
+            that._title = element.find('[' + kendo.attr("action") + '="nav-up"]').on(CLICK + " touchend" + ns, function() {
                 that._active = that.options.focusOnNav !== false;
                 that.navigateUp();
             });
-            that[PREVARROW] = element.find('[' + kendo.attr("action") + '="prev"]').on(CLICK + " touchend" + ns, function () {
+            that[PREVARROW] = element.find('[' + kendo.attr("action") + '="prev"]').on(CLICK + " touchend" + ns, function() {
                 that._active = that.options.focusOnNav !== false;
                 that.navigateToPast();
             });
-            that[NEXTARROW] = element.find('[' + kendo.attr("action") + '="next"]').on(CLICK + " touchend" + ns, function () {
+            that[NEXTARROW] = element.find('[' + kendo.attr("action") + '="next"]').on(CLICK + " touchend" + ns, function() {
                 that._active = that.options.focusOnNav !== false;
                 that.navigateToFuture();
             });
@@ -1320,7 +1320,7 @@ var __meta__ = { // jshint ignore:line
                 content = month.content,
                 weekNumber = month.weekNumber,
                 empty = month.empty,
-                footerTemplate = '#= kendo.toString(data,"D","' + options.culture +'") #';
+                footerTemplate = '#= kendo.toString(data,"D","' + options.culture + '") #';
 
             that.month = {
                 content: template('<td class="#=data.cssClass#" role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr(VALUE) + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
@@ -1335,7 +1335,7 @@ var __meta__ = { // jshint ignore:line
             that.footer = footer !== false ? template(footerTemplate, { useWithBlock: false }) : null;
         },
 
-        _updateAria: function (ariaTemplate, date) {
+        _updateAria: function(ariaTemplate, date) {
             var that = this;
             var cell = that._cell;
             var valueType = that.view().valueType();
@@ -1359,7 +1359,7 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(Calendar);
 
     var calendar = {
-        firstDayOfMonth: function (date) {
+        firstDayOfMonth: function(date) {
             return createDate(
                 date.getFullYear(),
                 date.getMonth(),
@@ -1367,7 +1367,7 @@ var __meta__ = { // jshint ignore:line
             );
         },
 
-        firstVisibleDay: function (date, calendarInfo) {
+        firstVisibleDay: function(date, calendarInfo) {
             calendarInfo = calendarInfo || kendo.culture().calendar;
 
             var firstDay = calendarInfo.firstDay,
@@ -1381,7 +1381,7 @@ var __meta__ = { // jshint ignore:line
             return firstVisibleDay;
         },
 
-        setTime: function (date, time) {
+        setTime: function(date, time) {
             var tzOffsetBefore = date.getTimezoneOffset(),
             resultDATE = new DATE(date.getTime() + time),
             tzOffsetDiff = resultDATE.getTimezoneOffset() - tzOffsetBefore;
@@ -1446,9 +1446,9 @@ var __meta__ = { // jshint ignore:line
                     weekNumber: options.weekNumber,
                     min: createDate(min.getFullYear(), min.getMonth(), min.getDate()),
                     max: createDate(max.getFullYear(), max.getMonth(), max.getDate()),
-                    otherMonth : otherMonth,
+                    otherMonth: otherMonth,
                     content: options.content,
-                    lastDayOfMonth : lastDayOfMonth,
+                    lastDayOfMonth: lastDayOfMonth,
                     empty: options.empty,
                     setter: that.setDate,
                     disableDates: options.disableDates,
@@ -1542,7 +1542,7 @@ var __meta__ = { // jshint ignore:line
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
             },
-            valueType: function () {
+            valueType: function() {
                 return "date";
             }
         },
@@ -1591,7 +1591,7 @@ var __meta__ = { // jshint ignore:line
             last: function(date) {
                 return createDate(date.getFullYear(), 11, date.getDate());
             },
-            compare: function(date1, date2){
+            compare: function(date1, date2) {
                 return compare(date1, date2);
             },
             setDate: function(date, value) {
@@ -1625,7 +1625,7 @@ var __meta__ = { // jshint ignore:line
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/1";
             },
-            valueType: function () {
+            valueType: function() {
                 return "month";
             }
         },
@@ -1652,8 +1652,8 @@ var __meta__ = { // jshint ignore:line
                     start: createDate(year - year % 10 - 1, 0, 1),
                     min: createDate(options.min.getFullYear(), 0, 1),
                     max: createDate(options.max.getFullYear(), 0, 1),
-                    otherMonth : options.otherMonth,
-                    html : html,
+                    otherMonth: options.otherMonth,
+                    html: html,
                     setter: this.setDate,
                     build: function(date, idx) {
                         var cssClass = [ "k-calendar-td" ];
@@ -1688,7 +1688,7 @@ var __meta__ = { // jshint ignore:line
             toDateString: function(date) {
                 return date.getFullYear() + "/0/1";
             },
-            valueType: function () {
+            valueType: function() {
                 return "year";
             }
         },
@@ -1726,8 +1726,8 @@ var __meta__ = { // jshint ignore:line
                     start: createDate(year - year % 100 - 10, 0, 1),
                     min: createDate(minYear, 0, 1),
                     max: createDate(maxYear, 0, 1),
-                    otherMonth : options.otherMonth,
-                    html : html,
+                    otherMonth: options.otherMonth,
+                    html: html,
                     setter: this.setDate,
                     build: function(date, idx) {
                         var cssClass = [ "k-calendar-td" ];
@@ -1773,7 +1773,7 @@ var __meta__ = { // jshint ignore:line
                 var year = date.getFullYear();
                 return (year - year % 10) + "/0/1";
             },
-            valueType: function () {
+            valueType: function() {
                 return "decade";
             }
         }]
@@ -1827,7 +1827,7 @@ var __meta__ = { // jshint ignore:line
             if (idx > 0 && idx % cellsPerRow === 0) {
                 html += '</tr><tr role="row" class="k-calendar-tr">';
                 if (isWeekColumnVisible) {
-                    html += otherMonth || (+start <= +lastDayOfMonth) ? weekNumber(weekNumberBuild(start)) : weekNumber({ weekNumber : "&nbsp;"});
+                    html += otherMonth || (+start <= +lastDayOfMonth) ? weekNumber(weekNumberBuild(start)) : weekNumber({ weekNumber: "&nbsp;" });
                 }
             }
 
@@ -1846,7 +1846,7 @@ var __meta__ = { // jshint ignore:line
 
     function compare(date1, date2, modifier) {
         var year1 = date1.getFullYear(),
-            start  = date2.getFullYear(),
+            start = date2.getFullYear(),
             end = start,
             result = 0;
 
@@ -1869,7 +1869,7 @@ var __meta__ = { // jshint ignore:line
         return new DATE(today.getFullYear(), today.getMonth(), today.getDate());
     }
 
-    function restrictValue (value, min, max) {
+    function restrictValue(value, min, max) {
         var today = getToday();
 
         if (value) {
@@ -1927,7 +1927,7 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
-    function prevent (e) {
+    function prevent(e) {
         e.preventDefault();
     }
 
@@ -2019,7 +2019,7 @@ var __meta__ = { // jshint ignore:line
         var body, callback,
             disabledDates = [],
             days = ["su", "mo", "tu", "we", "th", "fr", "sa"],
-            searchExpression = "if (found) {"+
+            searchExpression = "if (found) {" +
                     " return true " +
                 "} else {" +
                     "return false" +
@@ -2027,7 +2027,7 @@ var __meta__ = { // jshint ignore:line
 
         if (dates[0] instanceof DATE) {
             disabledDates = convertDatesArray(dates);
-            body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.setHours(0, 0, 0, 0),["+ disabledDates +"]) > -1;" + searchExpression;
+            body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.setHours(0, 0, 0, 0),[" + disabledDates + "]) > -1;" + searchExpression;
         } else {
             for (var i = 0; i < dates.length; i++) {
                 var day = dates[i].slice(0,2).toLowerCase();
@@ -2036,7 +2036,7 @@ var __meta__ = { // jshint ignore:line
                     disabledDates.push(index);
                 }
             }
-            body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.getDay(),["+ disabledDates +"]) > -1;" + searchExpression;
+            body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.getDay(),[" + disabledDates + "]) > -1;" + searchExpression;
         }
 
         callback = new Function("date", body); //jshint ignore:line
@@ -2078,4 +2078,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

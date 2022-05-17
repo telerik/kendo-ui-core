@@ -348,7 +348,7 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.hide("#qux")
+            toolbar.hide("#qux");
 
             assert.isOk($("#qux_overflow").hasClass("k-overflow-hidden"), "#qux_overflow is hidden");
         });
@@ -364,8 +364,8 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.hide("#foo")
-            toolbar.hide("#bar")
+            toolbar.hide("#foo");
+            toolbar.hide("#bar");
 
             assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden");
         });

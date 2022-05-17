@@ -2,7 +2,7 @@
     var MultiSelect = kendo.ui.MultiSelect,
         select;
 
-    describe("kendo.ui.MultiSelect messages", function () {
+    describe("kendo.ui.MultiSelect messages", function() {
         beforeEach(function() {
             select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
         });

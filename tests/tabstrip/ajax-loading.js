@@ -93,14 +93,14 @@
             $.mockjax({
                 url: "ajax-view-one.html",
                 response: function() {
-                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                    this.responseText = "<p>This content was loaded via ajax ().</p>";
                 }
             });
 
             $.mockjax({
                 url: "ajax-view-two.html",
                 response: function() {
-                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                    this.responseText = "<p>This content was loaded via ajax ().</p>";
                 }
             });
 

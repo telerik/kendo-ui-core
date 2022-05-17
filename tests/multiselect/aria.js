@@ -3,7 +3,7 @@
         keys = kendo.keys,
         input;
 
-    describe("kendo.ui.MultiSelect WAI-ARIA with AXE", function () {
+    describe("kendo.ui.MultiSelect WAI-ARIA with AXE", function() {
         beforeEach(function() {
             kendo.ns = "kendo-";
             input = $("<select multiple id='ms'/>").appendTo(Mocha.fixture);
@@ -101,7 +101,7 @@
         });
     });
 
-    describe("kendo.ui.MultiSelect ARIA", function () {
+    describe("kendo.ui.MultiSelect ARIA", function() {
         beforeEach(function() {
 
             kendo.ns = "kendo-";
@@ -201,17 +201,17 @@
         assert.equal(multiselect.ul.attr("aria-live"), "polite");
     });
 
-    it("MultiSelect calls progress handler when loader is shown",  function() {
+    it("MultiSelect calls progress handler when loader is shown", function() {
         var multiselect = new MultiSelect(input, {
             filter: "startswith"
         });
 
-        multiselect._showBusy  = function() { assert.isOk(true); };
+        multiselect._showBusy = function() { assert.isOk(true); };
         multiselect.setDataSource(["item1", "item2"]);
         multiselect.dataSource.trigger("progress");
     });
 
-    it("MultiSelect adds aria-busy=true when loader is shown",  function() {
+    it("MultiSelect adds aria-busy=true when loader is shown", function() {
         var multiselect = new MultiSelect(input, {
             dataSource: ["item1", "item2"],
             filter: "startswith"

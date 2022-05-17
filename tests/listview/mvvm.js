@@ -20,7 +20,7 @@
 
             window.dataBound = function() {
                 assert.isOk(true);
-            }
+            };
         });
         afterEach(function() {
             window.dataBound = null;
@@ -291,7 +291,7 @@
                         }
                     }
                 })
-            }
+            };
 
             kendo.bind(dom, viewmodel);
 
@@ -313,7 +313,7 @@
                         }
                     }
                 })
-            }
+            };
 
             kendo.bind(dom, viewmodel);
 
@@ -348,7 +348,7 @@
                         }
                     }
                 })
-            }
+            };
 
             kendo.bind(dom, viewmodel);
 

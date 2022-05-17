@@ -6,8 +6,8 @@ var menu,
 
 var keys = kendo.keys;
 
-describe("menu keyboard navigation", function () {
-    beforeEach(function () {
+describe("menu keyboard navigation", function() {
+    beforeEach(function() {
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
         };
@@ -57,7 +57,7 @@ describe("menu keyboard navigation", function () {
             '    </li>' +
             '</ul>');
 
-        menu = new kendo.ui.Menu("#menu", { animation: false})
+        menu = new kendo.ui.Menu("#menu", { animation: false });
         menu._oldHoverItem = null;
         menu.wrapper.find(FOCUSEDCLASS).removeClass(FOCUSEDSTATE);
 
@@ -138,7 +138,7 @@ it('Mouse events reset the keyboard navigation active item', function() {
 
 it('Hitting Enter key navigates an item hyperlink', function() {
     var fired = false;
-    menu.wrapper.find("#fooLink").click(function(e){
+    menu.wrapper.find("#fooLink").click(function(e) {
         e.preventDefault();
         fired = true;
     });

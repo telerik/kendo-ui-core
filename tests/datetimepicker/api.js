@@ -131,7 +131,7 @@
             });
             datetimepicker.value(null);
             assert.isOk(datetimepicker.element.val());
-        })
+        });
 
         it("value method should not clear DateInput format if initial value was provided", function() {
             var datetimepicker = new DateTimePicker(input, {
@@ -141,7 +141,7 @@
             datetimepicker.value(null);
             assert.equal(datetimepicker.element.val(), "month/day/year hours:minutes AM/PM");
             assert.isOk(datetimepicker.element.val());
-        })
+        });
 
         it("value method sets null if date is out of range", function() {
             var datetimepicker = new DateTimePicker(input, {
@@ -932,7 +932,7 @@
                 value: new Date(2015,9,3),
                 disableDates: [new Date(2015,9,12), new Date(2015,9,22)]
             });
-            debugger
+            debugger;
             datetimepicker.timeView.refresh();
             datetimepicker.timeView.ul.find("li:eq(4)").trigger("click");
 

@@ -5,7 +5,7 @@
     var span;
     var loader;
 
-    describe('kendo.ui.Loader accessibility', function () {
+    describe('kendo.ui.Loader accessibility', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });

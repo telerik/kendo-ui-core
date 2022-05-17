@@ -217,7 +217,7 @@
 
             dataSource.read().done(function() {
                 virtualList.one("listBound", function() {
-                    virtualList.select(11).done(function () {
+                    virtualList.select(11).done(function() {
                         virtualList.one("listBound", function() {
                             assert.equal(0, virtualList.items().find(".k-selected").length);
                             assert.deepEqual([17], virtualList.select());

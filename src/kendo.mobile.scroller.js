@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.fx", "./kendo.draganddrop" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "mobile.scroller",
@@ -120,12 +120,12 @@ var __meta__ = { // jshint ignore:line
             if (!that.dimension.enabled) { return; }
 
             if (that.paneAxis.outOfBounds()) {
-                if(that.transition._started){
+                if (that.transition._started) {
                     that.transition.cancel();
                     that.velocity = Math.min(e.touch[that.axis].velocity * that.velocityMultiplier, MAX_VELOCITY);
 
                     Animation.fn.start.call(that);
-                }else{
+                } else {
                     that._snapBack();
                 }
             } else {
@@ -231,7 +231,7 @@ var __meta__ = { // jshint ignore:line
                 horizontal = options.axis === "x",
                 element = $('<div role="scrollbar" aria-controls="' + options.controlsId + '" class="km-touch-scrollbar km-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
 
-            if(horizontal) {
+            if (horizontal) {
                 element.attr("aria-orientation", "horizontal");
             }
 
@@ -285,19 +285,19 @@ var __meta__ = { // jshint ignore:line
         },
 
         show: function() {
-            this.element.css({opacity: SCROLLBAR_OPACITY, visibility: "visible"});
+            this.element.css({ opacity: SCROLLBAR_OPACITY, visibility: "visible" });
         },
 
         hide: function() {
             if (!this.alwaysVisible) {
-                this.element.css({opacity: 0});
+                this.element.css({ opacity: 0 });
             }
         },
 
         _ariaValue: function(current, total) {
             var element = this.element;
 
-            if(current > total) {
+            if (current > total) {
                 current = total;
             }
 
@@ -359,7 +359,7 @@ var __meta__ = { // jshint ignore:line
 
                         var velocityX = abs(e.x.velocity),
                             velocityY = abs(e.y.velocity),
-                            horizontalSwipe  = velocityX * 2 >= velocityY,
+                            horizontalSwipe = velocityX * 2 >= velocityY,
                             originatedFromFixedContainer = $.contains(that.fixedContainer[0], e.event.target),
                             verticalSwipe = velocityY * 2 >= velocityX;
 
@@ -403,7 +403,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             if (that.options.mousewheelScrolling) {
-                element.on("DOMMouseScroll mousewheel",  this._wheelScroll.bind(this));
+                element.on("DOMMouseScroll mousewheel", this._wheelScroll.bind(this));
             }
 
             extend(that, {
@@ -523,7 +523,7 @@ var __meta__ = { // jshint ignore:line
             if (this._native) {
                 this.scrollElement.scrollTop(0);
             } else {
-                this.movable.moveTo({x: 0, y: 0});
+                this.movable.moveTo({ x: 0, y: 0 });
                 this._scale(1);
             }
         },
@@ -560,7 +560,7 @@ var __meta__ = { // jshint ignore:line
                 this.scrollElement.scrollTop(abs(y));
             } else {
                 this.dimensions.refresh();
-                this.movable.moveTo({x: x, y: y});
+                this.movable.moveTo({ x: x, y: y });
             }
         },
 
@@ -568,7 +568,7 @@ var __meta__ = { // jshint ignore:line
             var from,
                 to;
 
-            if(this._native) {
+            if (this._native) {
                 this.scrollTo(x, y);
             } else {
                 from = { x: this.movable.x, y: this.movable.y };
@@ -620,7 +620,7 @@ var __meta__ = { // jshint ignore:line
         _dragEnd: function() {
             var that = this;
 
-            if(!that.pulled) {
+            if (!that.pulled) {
                 return;
             }
 
@@ -656,7 +656,7 @@ var __meta__ = { // jshint ignore:line
                 paneAxis = that.pane[axis],
                 scrollBar;
 
-            if(!elementId) {
+            if (!elementId) {
                 elementId = kendo.guid();
                 that.element.attr("id", elementId);
             }
@@ -705,4 +705,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -7,7 +7,7 @@
 
             window.textBoxChange = function() {
                 assert.isOk(true);
-            }
+            };
         });
         afterEach(function() {
 
@@ -100,7 +100,7 @@
 
             dom.kendoNumericTextBox();
 
-            observable.set("value", 42)
+            observable.set("value", 42);
             assert.equal(dom.data("kendoNumericTextBox").value(), 42);
         });
 

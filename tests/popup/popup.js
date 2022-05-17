@@ -578,7 +578,7 @@
             var calledCount = 0,
                 MyPopup = Popup.extend({
                     _fit: function() {
-                        calledCount++
+                        calledCount++;
                     }
                 });
 

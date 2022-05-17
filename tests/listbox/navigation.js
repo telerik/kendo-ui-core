@@ -10,7 +10,7 @@
         TRANSFER_ALL_FROM = "transferAllFrom",
         MOVE_UP = "moveUp",
         MOVE_DOWN = "moveDown";
-    var TABINDEX = "tabindex"
+    var TABINDEX = "tabindex";
     var wrapper;
     var listbox;
 
@@ -110,7 +110,7 @@
 
             assert.isOk(listA.select().length === 4);
         });
-        ;
+
 
         it("Item is correctly deselected using ctrl + space", function() {
             listA.select(listA.items().first());
@@ -137,7 +137,7 @@
         it("MOVE_DOWN is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === MOVE_DOWN);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, ctrlKey: true, preventDefault: $.noop });
@@ -146,7 +146,7 @@
         it("MOVE_UP is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === MOVE_UP);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.UP, shiftKey: true, ctrlKey: true, preventDefault: $.noop });
@@ -155,7 +155,7 @@
         it("TRANSFER_ALL_TO is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === TRANSFER_ALL_TO);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.RIGHT, shiftKey: true, ctrlKey: true, preventDefault: $.noop });
@@ -164,7 +164,7 @@
         it("TRANSFER_TO is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === TRANSFER_TO);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.RIGHT, ctrlKey: true, preventDefault: $.noop });
@@ -173,7 +173,7 @@
         it("TRANSFER_ALL_TO is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === TRANSFER_ALL_FROM);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.LEFT, shiftKey: true, ctrlKey: true, preventDefault: $.noop });
@@ -182,7 +182,7 @@
         it("TRANSFER_ALL_TO is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === TRANSFER_FROM);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.LEFT, ctrlKey: true, preventDefault: $.noop });

@@ -2,7 +2,7 @@
     var DropDownList = kendo.ui.DropDownList,
         input;
 
-    describe("kendo.ui.DropDownList messages", function () {
+    describe("kendo.ui.DropDownList messages", function() {
         beforeEach(function() {
             input = $("<input />").appendTo(Mocha.fixture);
         });

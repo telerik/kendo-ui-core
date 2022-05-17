@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.popup" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "mobile.shim",
@@ -27,7 +27,7 @@ var __meta__ = { // jshint ignore:line
                 osname = app ? app.os.name : (os ? os.name : "ios"),
                 ioswp = osname === "ios" || osname === "wp" || (app ? app.os.skin : false),
                 bb = osname === "blackberry",
-                align = options.align || (ioswp ?  "bottom center" : bb ? "center right" : "center center"),
+                align = options.align || (ioswp ? "bottom center" : bb ? "center right" : "center center"),
                 position = options.position || (ioswp ? "bottom center" : bb ? "center right" : "center center"),
                 effect = options.effect || (ioswp ? "slideIn:up" : bb ? "slideIn:left" : "fade:in"),
                 shim = $(SHIM).handler(that).hide();
@@ -129,4 +129,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

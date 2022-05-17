@@ -51,7 +51,7 @@
         }
     });
 
-    describe("VirtualList without valueMapper: ", function () {
+    describe("VirtualList without valueMapper: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
@@ -84,7 +84,7 @@
                     var result = [];
 
                     if (o.value.length) {
-                        o.value.forEach(function(value){
+                        o.value.forEach(function(value) {
                             result.push({
                                 value: value,
                                 text: "Item " + value

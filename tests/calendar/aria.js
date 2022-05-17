@@ -3,7 +3,7 @@ var Calendar = kendo.ui.Calendar;
 var instance;
 var div;
 
-describe("kendo.ui.Calendar ARIA", function () {
+describe("kendo.ui.Calendar ARIA", function() {
     beforeEach(function() {
 
 

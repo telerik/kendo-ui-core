@@ -4,7 +4,7 @@ var ComboBox = kendo.ui.ComboBox,
     input;
 
 
-    describe("ComboBox WAI-ARIA with AXE", function () {
+    describe("ComboBox WAI-ARIA with AXE", function() {
         beforeEach(function() {
             input = $("<input id='cb'/>").appendTo(Mocha.fixture);
             $("<label for='cb'>Label</label>").appendTo(Mocha.fixture);
@@ -84,7 +84,7 @@ var ComboBox = kendo.ui.ComboBox,
         });
     });
 
-describe("kendo.ui.ComboBox ARIA", function () {
+describe("kendo.ui.ComboBox ARIA", function() {
     beforeEach(function() {
 
         input = $("<input />").appendTo(Mocha.fixture);
@@ -236,7 +236,7 @@ it("ComboBox adds aria-busy=true when loader is shown", function(done) {
     });
 
     var e = {
-        isDefaultPrevented: function(){
+        isDefaultPrevented: function() {
             return false;
         }
     };
@@ -256,7 +256,7 @@ it("ComboBox does not adds aria-busy=true when loader is prevented", function(do
     });
 
     var e = {
-        isDefaultPrevented: function(){
+        isDefaultPrevented: function() {
             return true;
         }
     };

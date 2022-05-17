@@ -1,34 +1,37 @@
 ---
-title: First Steps
-page_title: Getting Started on Visual Studio
-description: "Create a sample project on Visual Studio with Progress Telerik UI for ASP.NET MVC."
+title: Using a Project Template
+page_title: Using a Project Template
+description: "Create a sample project with Progress Telerik UI for ASP.NET MVC components by starting with a Telerik template on Visual Studio."
 slug: gettingstarted_aspnetmvc
 previous_url: /getting-started/asp-net-mvc-5
 position: 1
 permalink: /getting-started/first-steps
 ---
 
-# First Steps
+# Starting with a Project Template
 
-Welcome to the First Steps with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC in Visual Studio tutorial!
+Welcome to the Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC in Visual Studio tutorial!
 
-The tutorial guides you through implementing the Telerik UI for ASP.NET MVC Grid and Datepicker in a new Telerik UI for ASP.NET application. To create the application, you will use Visual Studio for Windows and the [Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}) that come with the Telerik UI for ASP.NET installation.
+The fastest way to start with Telerik UI is with a project template, but you can also manually [add the Telerik controls to an existing application]({% slug manualsetup_aspnetmvc%}). 
 
-The Telerik Extensions streamline the Telerik UI for ASP.NET MVC setup by automatically adding the necessary references and configuration. The Extensions can also [convert an existing ASP.NET MVC application]({% slug projectwizardcoversion_visualstudio_aspnetmvc %}) to a Telerik UI for ASP.NET MVC application.
+This tutorial guides you through implementing the Telerik UI for ASP.NET MVC Grid and Datepicker in a new application. To create the application, you will use the project template provided by the [Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}) that come with the Telerik UI for ASP.NET MVC installation.
 
-If you want to manually set up Telerik UI for ASP.NET MVC in an existing application, there are alternative approaches that do not involve the Telerik Visual Studio Extensions:
-* [Setup with Telerik NuGet]({% slug setupwithnuget_aspnetmvc %}). 
-* [Manual setup]({% slug manualsetup_aspnetmvc%}).
+The Telerik extensions streamline the Telerik UI for ASP.NET MVC setup by automatically adding the necessary references and configuration. These extensions also provide a wizard that can [configure an existing ASP.NET MVC application]({% slug projectwizardcoversion_visualstudio_aspnetmvc %}) for the Telerik controls.
+
+Other popular approaches for starting with Telerik UI for ASP.NET MVC include:
+
+* [Setup with Telerik NuGet]({% slug setupwithnuget_aspnetmvc %})&mdash;this method allows you to download the Telerik controls by using the NuGet package manager in Visual Studio.
+* [Manual setup with local files]({% slug manualsetup_aspnetmvc%})&mdash;with this method, you add the `Kendo.Mvc.dll` assembly to your project by using local files. This assembly enables you to use the Telerik UI components. 
 
 >tip How about a free Telerik UI onboarding course? Check out the [Video Onboarding]({%slug virtualclass_uiformvc%}) article and learn how to take advantage of the <a href="https://learn.telerik.com/learn" target="_blank">Telerik Virtual Classroom</a>.
 
 ## Prerequisites
 
-* Telerik UI for ASP.NET MVC requires <a href="https://dotnet.microsoft.com/download/dotnet-framework" target="_blank">.NET Framework</a>.
+* Telerik UI for ASP.NET MVC requires the <a href="https://dotnet.microsoft.com/download/dotnet-framework" target="_blank">.NET Framework</a>.
 
-* [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later
+* [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later.
 
-  * For Visual Studio 2017 or later, you must have the **ASP.NET & web development** workload installed. See Microsoft's [Install Visual Studio workloads](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2019#step-4---choose-workloads) documentation for guidance.
+   For Visual Studio 2017 or later, you must install the **ASP.NET & web development** workload. See Microsoft's <a href="/docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2019#step-4---choose-workloads" target="_blank">Install Visual Studio workloads</a> documentation for guidance.
    
 * [Telerik account](https://www.telerik.com/account).
 
@@ -38,11 +41,11 @@ Follow these steps to download and install Telerik UI for ASP.NET MVC:
 
 1. Log in to your [Telerik account](https://www.telerik.com/login/v2/telerik).
 
-   >tip If you don't have a Telerik account yet, you can create one for free.
+   >tip If you don't have a Telerik account yet, you can [create one for free]().
 
 1. Download the installation file:
 
-    * To get the free trial version, follow [this link](https://www.telerik.com/try/ui-for-asp.net-mvc) to download UI for ASP.NET MVC and activate your trial.
+    * To get the free trial version, follow [this link](https://www.telerik.com/try/ui-for-asp.net-mvc) to download UI for ASP.NET MVC. The installer will activate your trial when you complete the installation.
 
     * If you have already purchased a license:
 
@@ -58,7 +61,7 @@ The default installation folder is `C:\Program Files (x86)\Progress\Telerik UI f
 
 ## Creating a Telerik ASP.NET MVC Application
 
-After the Visual Studio Extensions are installed, you can create a Telerik ASP.NET MVC application by using the **Create New Project** wizard in Visual Studio.
+After the Visual Studio Extensions are installed, create a Telerik ASP.NET MVC application by using the **Create New Project** wizard in Visual Studio.
 
 1. In the Visual Studio toolbar, click **File** > **New** > **Project**.     
 
@@ -102,13 +105,13 @@ Press `CTRL+F5` to build and run the application. You have a Grid and a DatePick
 ## Next Steps
 
 * [Explore the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC HTML Helpers]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Grid Data Binding Overview]({% slug htmlhelpers_grid_aspnetcore_binding_overview %})
+* [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
 
 ## See Also
 
 * [Exploring the Helper Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 * [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
-* [Upgrade Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetcore %})
+* [Upgrade Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetmvc %})
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
 * [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)

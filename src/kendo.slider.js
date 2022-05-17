@@ -135,7 +135,7 @@ var __meta__ = { // jshint ignore:line
                 options = that.options;
 
             // [Backwards compatibilty]: maxSelection is reduced with 2 to compensate new styling and preserve automatic calculation to not show ticks.
-            var sizeBetweenTicks = (that._maxSelection - 2)/ ((options.max - options.min) / options.smallStep);
+            var sizeBetweenTicks = (that._maxSelection - 2) / ((options.max - options.min) / options.smallStep);
 
             var pixelWidths = that._calculateItemsWidth(math.floor(removeFraction(that._distance()) / removeFraction(options.smallStep)));
 
@@ -794,7 +794,7 @@ var __meta__ = { // jshint ignore:line
                 var newVal = that._nextValueByIndex(that._valueIndex + (sign * 1));
                 that._setValueInRange(newVal);
                 that._drag._updateTooltip(newVal);
-            }).bind(that);
+            });
 
             if (options.showButtons) {
                 var mouseDownHandler = (function(e, sign) {
@@ -825,7 +825,7 @@ var __meta__ = { // jshint ignore:line
                     .on(MOUSE_DOWN, (function(e) {
                         var sign = $(e.target).closest(".k-button").is(".k-button-increase") ? 1 : -1;
                         mouseDownHandler(e, sign);
-                    }).bind(that))
+                    }))
                     .on("click", kendo.preventDefault);
             }
 

@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.data" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "data.signalr",
@@ -23,7 +23,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     var transport = kendo.data.RemoteTransport.extend({
-        init: function (options) {
+        init: function(options) {
             var signalr = options && options.signalr ? options.signalr : {};
 
             var promise = signalr.promise;
@@ -128,4 +128,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

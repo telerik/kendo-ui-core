@@ -319,7 +319,7 @@
         it("change is not triggered on blur after value()", function() {
             popuplateSelect();
             var multiselect = new MultiSelect(select, {
-                change: function () {
+                change: function() {
                     assert.isOk(false);
                 }
             });
@@ -623,7 +623,7 @@
 
             multiselect.value("item2");
 
-            assert.equal(multiselect.tagList.children(".k-chip").length, 1)
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
         });
 
         it("setOptions method updates footer template", function() {

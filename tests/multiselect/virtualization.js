@@ -6,7 +6,7 @@
 
     function popuplateSelect() {
         var options = [];
-        for (var i=0; i < 5; i++) {
+        for (var i = 0; i < 5; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
@@ -53,7 +53,7 @@
         });
     }
 
-    describe("kendo.ui.MultiSelect Initialization", function () {
+    describe("kendo.ui.MultiSelect Initialization", function() {
         beforeEach(function() {
             kendo.ns = "";
             select = $("<select multiple />").appendTo(Mocha.fixture);
@@ -121,7 +121,7 @@
             setTimeout(function() {
                 var options = multiselect.element.children(":selected");
 
-                options = options.sort(function(a, b) { return parseInt(a.value) - parseInt(b.value) });
+                options = options.sort(function(a, b) { return parseInt(a.value) - parseInt(b.value); });
 
                 assert.equal(options.length, 2);
 
@@ -159,7 +159,7 @@
             setTimeout(function() {
                 assert.equal(multiselect.tagList.children(".k-chip").length, 1, "Selected tag is rendered");
                 done();
-            }, 300)
+            }, 300);
         });
 
         multiselect.open();
@@ -188,7 +188,7 @@
                 assert.equal(multiselect.value()[0], [299]);
                 assert.equal(multiselect.element.children().last().attr("value"), "299", "Custom option is rendered");
                 done();
-            }, 300)
+            }, 300);
         });
 
         multiselect.open();
@@ -429,7 +429,7 @@
 
             //force datasource to use specific page
             stub(multiselect.dataSource, {
-                page: function() { return 6 }
+                page: function() { return 6; }
             });
 
             //search again
@@ -507,7 +507,6 @@
         assert.equal($(".k-selected").length, 1);
         jasmine.clock().uninstall();
     });
-
 
 
     it("deselecting item persists scroll position", function(done) {

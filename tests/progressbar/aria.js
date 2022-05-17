@@ -2,7 +2,7 @@
     var ProgressBar = kendo.ui.ProgressBar,
         container;
 
-    describe('kendo.ui.ProgressBar accessibility', function () {
+    describe('kendo.ui.ProgressBar accessibility', function() {
         beforeEach(function() {
             container = document.createElement("div");
             $(container).appendTo(Mocha.fixture);
@@ -10,8 +10,8 @@
         afterEach(function() {
             var pb = $(container).data("kendoProgressBar");
 
-            if(pb && pb.destroy) {
-                pb.destroy()
+            if (pb && pb.destroy) {
+                pb.destroy();
             }
 
             kendo.destroy(Mocha.fixture);
@@ -125,7 +125,7 @@
         });
     });
 
-    describe('kendo.ui.ProgressBar announce element', function () {
+    describe('kendo.ui.ProgressBar announce element', function() {
         beforeEach(function() {
             container = document.createElement("div");
             $(container).appendTo(Mocha.fixture);
@@ -133,8 +133,8 @@
         afterEach(function() {
             var pb = $(container).data("kendoProgressBar");
 
-            if(pb && pb.destroy) {
-                pb.destroy()
+            if (pb && pb.destroy) {
+                pb.destroy();
             }
 
             kendo.destroy(Mocha.fixture);

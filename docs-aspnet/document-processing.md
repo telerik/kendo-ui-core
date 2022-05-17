@@ -1,8 +1,8 @@
 ---
 title: Document Processing Libraries
 page_title: Document Processing Libraries
-description: "Get started with Telerik UI for ASP.NET Core and learn how to work with the PdfProcessing, SpreadStreamProcessing, WordsProcessing, and ZipLibrary libraries as part of the Telerik Document Processing."
-previous_url: /getting-started/installation/document-processing
+description: "Get started with Telerik UI for {{ site.framework }} and learn how to work with the PdfProcessing, SpreadStreamProcessing, WordsProcessing, and ZipLibrary libraries as part of the Telerik Document Processing."
+previous_url: /getting-started/installation/document-processing, getting-started/installation/doc-processing
 slug: document_processing_core
 position: 11
 ---

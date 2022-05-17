@@ -40,7 +40,7 @@
         });
     }
 
-    describe("kendo.ui.ComboBox Virtualization", function () {
+    describe("kendo.ui.ComboBox Virtualization", function() {
         beforeEach(function() {
             kendo.ns = "";
             select = $("<select />").appendTo(Mocha.fixture);
@@ -316,7 +316,7 @@
             animation: false,
             dataTextField: "text",
             dataValueField: "value",
-            dataSource : new kendo.data.DataSource({
+            dataSource: new kendo.data.DataSource({
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
@@ -342,7 +342,7 @@
         combobox.one("dataBound", function() {
             combobox.one("dataBound", function() {
                 var item49 = combobox.listView.content.find("li")
-                                     .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
+                                     .filter(function(_, li) { return $(li).data("offsetIndex") == 49; });
 
                 var dataItem = combobox.dataItem(item49);
 
@@ -451,7 +451,7 @@
         var dataSource = new kendo.data.DataSource({
             transport: {
                 read: function(o) {
-                    o.success([{text: "asd", value: 1}]);
+                    o.success([{ text: "asd", value: 1 }]);
                 }
             }
         });
@@ -470,7 +470,7 @@
                     itemHeight: 20
                 }
             });
-        } catch(err) {
+        } catch (err) {
             noErrors = false;
         }
         assert.isOk(noErrors);
@@ -481,7 +481,7 @@
         var dataSource = new kendo.data.DataSource({
             transport: {
                 read: function(o) {
-                    o.success([{text: "asd", value: 1}]);
+                    o.success([{ text: "asd", value: 1 }]);
                 }
             }
         });
@@ -496,7 +496,7 @@
             dataValueField: "value",
             dataSource: dataSource,
             virtual: {
-                valueMapper: function(o) { o.success({text: "foo", value: 2}); },
+                valueMapper: function(o) { o.success({ text: "foo", value: 2 }); },
                 itemHeight: 20,
                 mapValueTo: "dataItem"
             }
@@ -539,7 +539,7 @@
                     total: "total"
                 }
             }),
-            select: function (e) {
+            select: function(e) {
                 assert.equal(e.dataItem.value, "5");
                 done();
             },

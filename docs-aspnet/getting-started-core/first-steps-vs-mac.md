@@ -1,13 +1,13 @@
 ---
-title: First Steps on VS for Mac
+title: First Steps on Mac
 page_title: Getting Started on Visual Studio for Mac
 description: "Create a sample project on Visual Studio for Mac with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 slug: gettingstarted_firststeps_vsmac
-position: 3
+position: 2
 permalink: /getting-started/first-steps-vs-mac
 ---
 
-# First Steps on VS for Mac
+# First Steps with VS for Mac
 
 <iframe width="700" height="400" src="https://www.youtube.com/embed/901yBM2WYb4?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -76,13 +76,13 @@ To get up and running with the project:
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
 
-  7.1 Since the Microsoft template project uses Bootstrap, you can use the Kendo UI SASS Bootstrap v4 theme to match it.
+  7.1 Since the Microsoft template project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
 
 	7.2 The Microsoft template comes with a jQuery script reference in the body. Find it and move it to the head.
 
 	7.3 After `jQuery`, copy and paste the scripts from this snippet. Make sure that the versions match the installed `Kendo.Mvc.dll`.
 
-		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" />
+		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" />
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>   			
 
@@ -111,12 +111,7 @@ If you prefer to include the client-side resources from a local source instead o
 
     ![The created sample page](../getting-started-core/images/mac-sample-page.png)
 
-## JSON Serialization
-
-The default casing for JSON strings in ASP.NET Core is Camel-case. The Telerik UI components that are data-bound depend on Pascal-case formatted response from the server. To find out how to configure the application to return the data in Pascal-case, refer to the following article:
-
-* [JSON Serialization]({% slug jsonserialization_core %})
-
+@[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
 
 ## Next Steps
 
@@ -129,7 +124,5 @@ The default casing for JSON strings in ASP.NET Core is Camel-case. The Telerik U
 
 ## See Also
 
-* [Installing UI for ASP.NET Core with Bower]({% slug bowerpackage_core %})
 * [Installing UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
-* [Installing UI for ASP.NET Core with NPM]({% slug npmpackages_core %})
 * [Installing UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})

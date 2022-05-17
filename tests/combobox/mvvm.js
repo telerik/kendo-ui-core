@@ -2,7 +2,7 @@
 
 var dom;
 
-describe("combobox mvvm", function () {
+describe("combobox mvvm", function() {
   beforeEach(function() {
       Mocha.fixture.append(
         '<script id="template" type="text/x-kendo-template">' +
@@ -18,7 +18,7 @@ describe("combobox mvvm", function () {
 
       window.dataBound = function() {
           assert.isOk(true);
-      }
+      };
   });
   afterEach(function() {
       delete window.dataBound;
@@ -66,7 +66,7 @@ it("initalizes value from view model", function() {
 it("initalizes complex value from view model", function() {
     dom = $('<select data-value-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     kendo.bind(dom, observable);
@@ -77,7 +77,7 @@ it("initalizes complex value from view model", function() {
 it("changing a value updates the view model", function() {
     dom = $('<select data-value-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     kendo.bind(dom, observable);
@@ -90,7 +90,7 @@ it("changing a value updates the view model", function() {
 it("uses data value field if data-value-primitive is set to true", function() {
     dom = $('<select data-value-field="text" data-value-primitive="true" data-role="combobox" data-bind="value:value,source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     kendo.bind(dom, observable);
@@ -103,7 +103,7 @@ it("uses data value field if data-value-primitive is set to true", function() {
 it("changing value to a custom one updates the view model", function() {
     dom = $('<select data-text-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
 
     observable.value = observable.items[1];
 
@@ -117,7 +117,7 @@ it("changing value to a custom one updates the view model", function() {
 it("custom view model value", function() {
     dom = $('<select data-text-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = "moo";
 
     kendo.bind(dom, observable);
@@ -126,7 +126,7 @@ it("custom view model value", function() {
 it("binding combobox initialized before binding", function() {
     dom = $('<select data-value-field="text" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     dom.kendoComboBox();
@@ -139,7 +139,7 @@ it("binding combobox initialized before binding", function() {
 it("binding combobox initialized after binding", function() {
     dom = $('<select data-value-field="text" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     kendo.bind(dom, observable);
@@ -153,7 +153,7 @@ it("value binding honors autoBind:false option when valuePrimitive is true", fun
     dom = $('<input data-role="combobox" data-value-field="text" data-text-field="text" data-auto-bind="false" data-value-primitive="true" data-bind="value:value, source:items" />');
 
     var observable = kendo.observable({
-        items: new kendo.data.DataSource([{text:"foo"}, {text:"bar"}]),
+        items: new kendo.data.DataSource([{ text: "foo" }, { text: "bar" }]),
         value: "bar"
     });
 
@@ -169,7 +169,7 @@ it("value binding displays options.text when autoBind:false and valuePrimitive i
     dom = $('<input data-role="combobox" data-value-field="text" data-text-field="text" data-auto-bind="false" data-text="selected text" data-value-primitive="true" data-bind="value:value, source:items" />');
 
     var observable = kendo.observable({
-        items: new kendo.data.DataSource([{text:"foo"}, {text:"bar"}]),
+        items: new kendo.data.DataSource([{ text: "foo" }, { text: "bar" }]),
         value: "bar"
     });
 
@@ -184,7 +184,7 @@ it("value binding displays options.text when autoBind:false and valuePrimitive i
 it("value binding honors autoBind:false option when valuePrimitive is false", function() {
     dom = $('<input data-role="combobox" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />');
 
-    var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+    var items = new kendo.data.ObservableArray([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
     var observable = kendo.observable({
         items: new kendo.data.DataSource({ data: items })
     });
@@ -201,7 +201,7 @@ it("value binding honors autoBind:false option when valuePrimitive is false", fu
 it("value binding with autoBind:false and valuePrimitive:false sets placeholder", function() {
     dom = $('<input data-role="combobox" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />');
 
-    var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+    var items = new kendo.data.ObservableArray([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
     var observable = kendo.observable({
         items: new kendo.data.DataSource({ data: items })
     });
@@ -223,7 +223,7 @@ it("value binding with autoBind:false and valuePrimitive:false sets placeholder"
 it("widget sets value if source is bound even when autoBind: false is set", function() {
     dom = $('<input data-role="combobox" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />').appendTo(Mocha.fixture);
 
-    var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+    var items = new kendo.data.ObservableArray([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
     var observable = kendo.observable({
         items: items
     });
@@ -239,7 +239,7 @@ it("widget sets value if source is bound even when autoBind: false is set", func
 it("widget does not raise change event when value binding is used with autoBind:false", function() {
     dom = $('<input data-role="combobox" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value" />').appendTo(Mocha.fixture);
 
-    var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+    var items = new kendo.data.ObservableArray([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
     var observable = kendo.observable({
         items: new kendo.data.DataSource({ data: items })
     });
@@ -259,7 +259,7 @@ it("widget does not raise change event when value binding is used with autoBind:
 it("initialized widget with autoBind:false does not raise change on initial binding after value binding is applied", function() {
     dom = $('<input data-value-primitive="false" data-bind="value:value"/>').appendTo(Mocha.fixture);
 
-    var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+    var items = new kendo.data.ObservableArray([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
     var observable = kendo.observable({
         value: items[1]
     });
@@ -267,7 +267,7 @@ it("initialized widget with autoBind:false does not raise change on initial bind
     dom.kendoComboBox({
         autoBind: false,
         animation: false,
-        optionLabel: { text:"Select a category...", value: -1 },
+        optionLabel: { text: "Select a category...", value: -1 },
         dataTextField: "text",
         dataValueField: "value",
         dataSource: new kendo.data.DataSource({ data: items })
@@ -289,7 +289,7 @@ it("initialized widget with autoBind:false does not raise change on initial bind
 it("widget does not loose selected value on first bound when autoBind: false is used", function(done) {
     dom = $('<input data-role="combobox" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />');
 
-    var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+    var items = new kendo.data.ObservableArray([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
     var observable = kendo.observable({
         items: new kendo.data.DataSource({ data: items })
     });
@@ -313,7 +313,7 @@ it("widget does not loose selected value on first bound when autoBind: false is 
 it("binding template", function() {
     dom = $('<select data-template="template" data-role="combobox" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
 
     kendo.bind(dom, observable);
 
@@ -323,7 +323,7 @@ it("binding template", function() {
 it("binding template containing binding attributes", function() {
     dom = $('<select data-role="combobox" data-template="template-with-attributes" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
 
     kendo.bind(dom, observable);
 
@@ -333,7 +333,7 @@ it("binding template containing binding attributes", function() {
 it("updating an item from the data source updates the corresponding combobox item", function() {
     dom = $('<select data-role="combobox" data-template="template-with-attributes" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
 
     kendo.bind(dom, observable);
 
@@ -345,7 +345,7 @@ it("updating an item from the data source updates the corresponding combobox ite
 it("destroying binding targets when the datasource changes", function() {
     dom = $('<select data-role="combobox" data-template="template-with-attributes" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{ text:"foo"} ] });
+    var observable = kendo.observable({ items: [{ text: "foo" } ] });
 
     kendo.bind(dom, observable);
     dom.data("kendoComboBox").refresh();
@@ -356,7 +356,7 @@ it("destroying binding targets when the datasource changes", function() {
 it("binding header template", function() {
     dom = $('<select data-header-template="headerTemplate" data-role="combobox" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
 
     kendo.bind(dom, observable);
 
@@ -366,7 +366,7 @@ it("binding header template", function() {
 it("removing items from the model updates the UI", function() {
     dom = $('<select data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" },{ text: "baz" }] });
+    var observable = kendo.observable({ items: [{ text: "foo" },{ text: "bar" },{ text: "baz" }] });
 
     kendo.bind(dom, observable);
 
@@ -380,7 +380,7 @@ it("removing items from the model updates the UI", function() {
 it("binding are removed if element is rebind", function() {
     dom = $('<select data-role="combobox" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
+    var observable = kendo.observable({ items: [{ text: "foo" },{ text: "bar" } ] });
 
     kendo.bind(dom, observable);
 
@@ -394,7 +394,7 @@ it("binding are removed if element is rebind", function() {
 it("expressions are destroyed", function() {
     dom = $('<select data-role="combobox" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
+    var observable = kendo.observable({ items: [{ text: "foo" },{ text: "bar" } ] });
 
     kendo.bind(dom, observable);
 
@@ -408,7 +408,7 @@ it("expressions are destroyed", function() {
 it("destroys detaches the events to widget", function() {
     dom = $('<select data-role="combobox" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
 
     kendo.bind(dom, observable);
     kendo.unbind(dom);
@@ -424,7 +424,7 @@ it("dataBound event is raised if attached as option", function() {
     dom = $('<select data-role="combobox" data-bound="dataBound" data-bind="source:items" />');
 
     var observable = kendo.observable({
-        items: [{text:"foo"}, {text:"bar"}]
+        items: [{ text: "foo" }, { text: "bar" }]
     });
 
     kendo.bind(dom, observable);
@@ -434,7 +434,7 @@ it("dataBound event is raised if attached as option to a already initialized com
     dom = $('<select data-bound="dataBound" data-bind="source:items" />').kendoComboBox();
 
     var observable = kendo.observable({
-        items: [{text:"foo"}, {text:"bar"}]
+        items: [{ text: "foo" }, { text: "bar" }]
     });
 
     kendo.bind(dom, observable);
@@ -604,7 +604,7 @@ it("changing visible to true shows the widget", function() {
 it("assign to DataSource as ViewModel field", function() {
     dom = $('<select data-text-field="text" data-bind="source:dataSource" data-role="combobox" />');
     var dataSource = new kendo.data.DataSource({
-        data: [{text:"foo"}, {text:"bar"}]
+        data: [{ text: "foo" }, { text: "bar" }]
     });
 
     var observable = kendo.observable({
@@ -623,7 +623,7 @@ it("assign to DataSource as ViewModel field", function() {
 it("Enter custom value after re bind", function() {
     dom = $('<select data-text-field="text" data-value-field="text" data-bind="source:dataSource" data-role="combobox" />');
     var dataSource = new kendo.data.DataSource({
-        data: [{text:"foo"}, {text:"bar"}]
+        data: [{ text: "foo" }, { text: "bar" }]
     });
 
     var observable = kendo.observable({
@@ -635,7 +635,7 @@ it("Enter custom value after re bind", function() {
 
     combobox.value("custom");
 
-    dataSource.add({ text: "custom"});
+    dataSource.add({ text: "custom" });
 
     combobox.value("custom2");
 
@@ -647,7 +647,7 @@ it("widget with autoBind:false does not select first item when model value is nu
     dom = $('<input data-index="0" data-auto-bind="false" data-text-field="text" data-value-field="text" data-bind="value:bar,source:items" data-role="combobox" />');
 
     var observable = kendo.observable({
-        items: new kendo.data.DataSource({ data: [{text:"foo"}, {text:"bar"}] }),
+        items: new kendo.data.DataSource({ data: [{ text: "foo" }, { text: "bar" }] }),
         bar: null
     });
 
@@ -707,11 +707,11 @@ it("triggers change after same value is being set multiple times trough the View
     var vm = kendo.observable({
         ds: createAsyncDataSource(),
         Invoice: { value: null },
-        setFoo: function(){
+        setFoo: function() {
             this.set('Invoice', { value: 2 });
         },
-        setBar: function(){
-            this.set('Invoice', { value : 2 });
+        setBar: function() {
+            this.set('Invoice', { value: 2 });
         }
     });
 

@@ -2,7 +2,7 @@
     var ComboBox = kendo.ui.ComboBox,
         input;
 
-    describe("kendo.ui.ComboBox messages", function () {
+    describe("kendo.ui.ComboBox messages", function() {
         beforeEach(function() {
             input = $("<input />").appendTo(Mocha.fixture);
         });

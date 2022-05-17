@@ -102,7 +102,7 @@
                         data: function() {
                             return {
                                 foo: "bar"
-                            }
+                            };
                         }
                     },
                     parameterMap: function() {
@@ -133,7 +133,7 @@
                             called++;
                             return {
                                 foo: "bar"
-                            }
+                            };
                         }
                     },
                     parameterMap: function() {
@@ -726,7 +726,7 @@
                         data: function() {
                             return {
                                 foo: "bar"
-                            }
+                            };
                         }
                     },
                     parameterMap: function() {

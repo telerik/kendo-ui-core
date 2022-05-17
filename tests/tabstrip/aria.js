@@ -388,7 +388,7 @@
         });
 
         it("uses id of the LI element for the aria-activedescendant", function() {
-            div = $("<div><ul id='test'><li id='custom' class='k-state-active'>Test</li><li>Test2</li></ul></div>")
+            div = $("<div><ul id='test'><li id='custom' class='k-state-active'>Test</li><li>Test2</li></ul></div>");
             var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
 
             tabstrip.select("li:last");
@@ -398,7 +398,7 @@
         });
 
         it("disabled attribute renders aria-disabled", function() {
-            div = $("<div><ul id='test'><li class='k-state-active'>Test</li><li disabled>Test2</li></ul></div>")
+            div = $("<div><ul id='test'><li class='k-state-active'>Test</li><li disabled>Test2</li></ul></div>");
             var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
 
             assert.isOk(div.find("li:last").is("[aria-disabled='true']"));

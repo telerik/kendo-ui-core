@@ -1,9 +1,9 @@
-(function(){
+(function() {
 
 var AutoComplete = kendo.ui.AutoComplete;
 var input;
 
-describe("kendo.ui.AutoComplete initialization", function () {
+describe("kendo.ui.AutoComplete initialization", function() {
     beforeEach(function() {
         input = $("<input>").appendTo(Mocha.fixture);
     });
@@ -53,7 +53,7 @@ it("do not open on dataSource.query", function() {
 });
 
 it("rendering honers dataTextField", function() {
-    var data = [{text: 1}, {text: 2}], autocomplete = new AutoComplete(input, {
+    var data = [{ text: 1 }, { text: 2 }], autocomplete = new AutoComplete(input, {
         dataSource: data,
         dataTextField: "text"
     });
@@ -259,7 +259,7 @@ it("resetting DataSource rebinds the widget", function() {
     });
 
     var dataSource = new kendo.data.DataSource({
-        data:[{text: 1, value: 1}, {text:2, value:2}]
+        data: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
     });
 
     autocomplete.setDataSource(dataSource);
@@ -270,7 +270,7 @@ it("resetting DataSource rebinds the widget", function() {
 it("dataItem() returns dataItem depending on passed index", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
-        dataSource:[{text: 1, value: 1}, {text:2, value:2}]
+        dataSource: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
     });
 
     autocomplete.dataSource.read();
@@ -281,7 +281,7 @@ it("dataItem() returns dataItem depending on passed index", function() {
 it("dataItem() returns dataItem depending on passed dom elements", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
-        dataSource:[{text: 1, value: 1}, {text:2, value:2}]
+        dataSource: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
     });
 
     autocomplete.dataSource.read();
@@ -292,7 +292,7 @@ it("dataItem() returns dataItem depending on passed dom elements", function() {
 it("dataItem() returns null if no argument", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
-        dataSource:[{text: 1, value: 1}, {text:2, value:2}]
+        dataSource: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
     });
 
     assert.equal(autocomplete.dataItem(), null);

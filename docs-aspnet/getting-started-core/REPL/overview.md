@@ -25,47 +25,11 @@ Telerik REPL saves you time - it requires no setup and has no prerequisites. You
 * Choose a theme that will be applied to the Telerik UI for ASP.NET Core components used in your example. 
 * Share the created example as a link on a social media (Twitter, Facebook).
 
-## Using Telerik REPL
+## Next Steps
 
-Using Telerik REPL is simple and creating an example requires just a few steps.
-
-1. Run an existing UI for ASP.NET Core demo in Telerik REPL, or start from scratch and add your code in the left pane. 
-1. If you are using UI for ASP.NET Core components, select the desired theme from the theme selection dropdown.
-1. Click the **Run** button to run the example. The result will be displayed in the right pane. 
-1. Click the **Save** button to generate a link to the example you created. You can copy the generated url and share it. 
-
-Telerik REPL uses the predefined models and controllers available in the Telerik UI for ASP.NET Core demos. If you need to test a local binding scenario with your own data, you can use the approach demonstrated in the example below.
-
-      @{
-         var attendees = new List<SelectListItem>
-         {
-               new SelectListItem(){ Value = "1", Text = "Steven White" },
-               new SelectListItem(){ Value = "2", Text = "Nancy King" },
-               new SelectListItem(){ Value = "3", Text = "Nancy Davolio" },
-               new SelectListItem(){ Value = "4", Text = "Michael Leverling" },
-               new SelectListItem(){ Value = "5", Text = "Andrew Callahan" },
-               new SelectListItem(){ Value = "6", Text = "Michael Suyama" },
-         };
-      }
-
-      @(Html.Kendo().ListBox()
-         .Name("optional")
-         .Toolbar(toolbar =>
-         {
-               toolbar.Position(ListBoxToolbarPosition.Right);
-               toolbar.Tools(tools => tools
-                  .MoveUp()
-                  .MoveDown()
-                  .TransferTo()
-                  .TransferFrom()
-                  .TransferAllTo()
-                  .TransferAllFrom()
-                  .Remove()
-               );
-         })
-         .ConnectWith("selected")
-         .BindTo(attendees)
-      )
+* [Getting started with the Telerik REPL]({% slug getting_started_repl_aspnetcore %})
+* [Using Telerik REPL with UI for ASP.NET Core]({% slug using_repl_with_demos_aspnetcore %})
+* [Using Predefined Models]({% slug using_predefined_models_repl_aspnetcore %})
 
 ## See Also
 

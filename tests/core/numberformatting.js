@@ -1,12 +1,12 @@
-(function(){
+(function() {
 
 var toString = kendo.toString;
 
-describe("number formatting", function () {
+describe("number formatting", function() {
     beforeEach(function() {
 
     });
-    afterEach(function(){
+    afterEach(function() {
         kendo.culture("en-US");
         var nf = kendo.cultures.current.numberFormat;
         nf.currency.symbol = "$";
@@ -151,7 +151,7 @@ it("toString adds group separator to a leading zeros number", function() {
 
 it("toString adds [3,2] group separators when custom format is used", function() {
     kendo.cultures["custom"] = {
-        calendars: { standard: {}},
+        calendars: { standard: {} },
         numberFormat: {
             decimals: 2,
             pattern: ["-n"],
@@ -343,7 +343,7 @@ it("group separators applied every n digits", function() {
 
 it("group separators if more then one are applied to the number", function() {
     kendo.cultures["custom"] = {
-        calendars: { standard: {}},
+        calendars: { standard: {} },
         numberFormat: {
             decimals: 2,
             pattern: ["-n"],
@@ -358,7 +358,7 @@ it("group separators if more then one are applied to the number", function() {
 
 it("group separators with '0' length are applied correctly", function() {
     kendo.cultures["custom"] = {
-        calendars: { standard: {}},
+        calendars: { standard: {} },
         numberFormat: {
             decimals: 2,
             pattern: ["-n"],
@@ -373,7 +373,7 @@ it("group separators with '0' length are applied correctly", function() {
 
 it("group separators with '0' length are applied correctly when integer is a multiple of group", function() {
     kendo.cultures["custom"] = {
-        calendars: { standard: {}},
+        calendars: { standard: {} },
         numberFormat: {
             decimals: 2,
             pattern: ["-n"],
@@ -388,7 +388,7 @@ it("group separators with '0' length are applied correctly when integer is a mul
 
 it("'0' group separator does not group integer", function() {
     kendo.cultures["custom"] = {
-        calendars: { standard: {}},
+        calendars: { standard: {} },
         numberFormat: {
             decimals: 2,
             pattern: ["-n"],
@@ -448,7 +448,7 @@ it("globalized exponential number", function() {
 
 it("format number using specific culture", function() {
     kendo.cultures["custom"] = {
-        calendars: { standard: {}},
+        calendars: { standard: {} },
         numberFormat: {
             decimals: 4,
             pattern: ["-n"],

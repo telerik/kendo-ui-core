@@ -21,7 +21,7 @@
         it("create a label with inner HTML equal to configuration function", function() {
             var maskedtextbox = new MaskedTextBox(input, {
                 label: function() {
-                    return "<b>function</b>"
+                    return "<b>function</b>";
                 }
             });
 
@@ -42,7 +42,7 @@
             var maskedtextbox = new MaskedTextBox(input, {
                 label: {
                     content: function() {
-                        return "<b>content function</b>"
+                        return "<b>content function</b>";
                     }
                 }
             });

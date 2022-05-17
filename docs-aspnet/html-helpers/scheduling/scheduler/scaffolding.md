@@ -32,7 +32,7 @@ To scaffold the Scheduler HtmlHelper for ASP.NET MVC:
 
     ![Choosing the Model class](images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
 
-1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this case, select **SampleEntities**. Note that the DataBase used is taken from the [offline examples]({% slug overview_downloadinstallation_mvc %}#sample-application).
+1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this case, select **SampleEntities**. Note that the DataBase used is taken from the [offline examples]({% slug msi_install_mvc %}#sample-application).
 
     ![Choosing the Data Context class](images/scaffolding/ui_for_aspnetmvc_scheduler_2.png)
 

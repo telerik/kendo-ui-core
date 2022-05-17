@@ -576,7 +576,7 @@
                 autoClose: false
             });
 
-            var evt = new KeyboardEvent('keydown', {'keyCode':8, 'which':8});
+            var evt = new KeyboardEvent('keydown', { 'keyCode': 8, 'which': 8 });
 
             multiselect.open();
             multiselect.input[0].dispatchEvent(evt);

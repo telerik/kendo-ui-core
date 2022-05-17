@@ -18,7 +18,7 @@
                 }
 
                 return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options));
-            }
+            };
         });
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
@@ -99,7 +99,7 @@
         it("Non-visual keys are allowed", function() {
             var textbox = new NumericTextBox(input, { value: 1 });
 
-            input.val("1a")
+            input.val("1a");
             input.pressKey("a", "keydown");
             input.trigger("input");
             assert.equal(input.val(), "1");
@@ -393,7 +393,7 @@
             input.trigger("paste", {
                 target: input[0]
             });
-            input.trigger("input")
+            input.trigger("input");
 
             setTimeout(function() {
                 assert.equal(textbox.calls("_update"), 1);

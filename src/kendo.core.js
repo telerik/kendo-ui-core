@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define(['jquery'], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "core",
@@ -131,7 +131,7 @@ var packageMetadata = {
         var base = function() {},
             member,
             that = this,
-            subclass = proto && proto.init ? proto.init : function () {
+            subclass = proto && proto.init ? proto.init : function() {
                 that.apply(this, arguments);
             },
             fn;
@@ -377,7 +377,7 @@ var packageMetadata = {
                 fn = new Function(argumentName, functionBody);
                 fn._slotCount = Math.floor(parts.length / 2);
                 return fn;
-            } catch(e) {
+            } catch (e) {
                 throw new Error(kendo.format("Invalid template:'{0}' Generated code:'{1}'", template, functionBody));
             }
         }
@@ -406,7 +406,7 @@ function pad(number, digits, end) {
             "\n": "\\n",
             "\f": "\\f",
             "\r": "\\r",
-            "\"" : '\\"',
+            "\"": '\\"',
             "\\": "\\\\"
         },
         rep,
@@ -415,26 +415,26 @@ function pad(number, digits, end) {
 
     if (typeof Date.prototype.toJSON !== FUNCTION) {
 
-        Date.prototype.toJSON = function () {
+        Date.prototype.toJSON = function() {
             var that = this;
 
             return isFinite(that.valueOf()) ?
                 pad(that.getUTCFullYear(), 4) + "-" +
-                pad(that.getUTCMonth() + 1)   + "-" +
-                pad(that.getUTCDate())        + "T" +
-                pad(that.getUTCHours())       + ":" +
-                pad(that.getUTCMinutes())     + ":" +
-                pad(that.getUTCSeconds())     + "Z" : null;
+                pad(that.getUTCMonth() + 1) + "-" +
+                pad(that.getUTCDate()) + "T" +
+                pad(that.getUTCHours()) + ":" +
+                pad(that.getUTCMinutes()) + ":" +
+                pad(that.getUTCSeconds()) + "Z" : null;
         };
 
-        String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function () {
+        String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function() {
             return this.valueOf();
         };
     }
 
     function quote(string) {
         escapable.lastIndex = 0;
-        return escapable.test(string) ? "\"" + string.replace(escapable, function (a) {
+        return escapable.test(string) ? "\"" + string.replace(escapable, function(a) {
             var c = meta[a];
             return typeof c === STRING ? c :
                 "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4);
@@ -514,7 +514,7 @@ function pad(number, digits, end) {
     }
 
     if (typeof JSON.stringify !== FUNCTION) {
-        JSON.stringify = function (value, replacer, space) {
+        JSON.stringify = function(value, replacer, space) {
             var i;
             gap = "";
             indent = "";
@@ -533,7 +533,7 @@ function pad(number, digits, end) {
                 throw new Error("JSON.stringify");
             }
 
-            return str("", {"": value});
+            return str("", { "": value });
         };
     }
 })();
@@ -541,7 +541,7 @@ function pad(number, digits, end) {
 // Date and Number formatting
 (function() {
     var dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|zzz|zz|z|"[^"]*"|'[^']*'/g,
-        standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
+        standardFormatRegExp = /^(n|c|p|e)(\d*)$/i,
         literalRegExp = /(\\.)|(['][^']*[']?)|(["][^"]*["]?)/g,
         commaRegExp = /\,/g,
         EMPTY = "",
@@ -670,7 +670,7 @@ function pad(number, digits, end) {
 
         format = calendar.patterns[format] || format;
 
-        return format.replace(dateFormatRegExp, function (match) {
+        return format.replace(dateFormatRegExp, function(match) {
             var minutes;
             var result;
             var sign;
@@ -873,7 +873,7 @@ function pad(number, digits, end) {
         //separate format by sections.
 
         if (format.indexOf("'") > -1 || format.indexOf("\"") > -1 || format.indexOf("\\") > -1) {
-            format = format.replace(literalRegExp, function (match) {
+            format = format.replace(literalRegExp, function(match) {
                 var quoteChar = match.charAt(0).replace("\\", ""),
                     literal = match.slice(1).replace(quoteChar, "");
 
@@ -1161,7 +1161,7 @@ function pad(number, digits, end) {
         });
     };
 
-    kendo._extractFormat = function (format) {
+    kendo._extractFormat = function(format) {
         if (format.slice(0,3) === "{0:") {
             format = format.slice(3, format.length - 1);
         }
@@ -1172,14 +1172,14 @@ function pad(number, digits, end) {
     kendo._activeElement = function() {
         try {
             return document.activeElement;
-        } catch(e) {
+        } catch (e) {
             return document.documentElement.activeElement;
         }
     };
 
     kendo._round = round;
-    kendo._outerWidth = function (element, includeMargin) { return $(element).outerWidth(includeMargin || false) || 0; };
-    kendo._outerHeight = function (element, includeMargin) { return $(element).outerHeight(includeMargin || false) || 0; };
+    kendo._outerWidth = function(element, includeMargin) { return $(element).outerWidth(includeMargin || false) || 0; };
+    kendo._outerHeight = function(element, includeMargin) { return $(element).outerHeight(includeMargin || false) || 0; };
     kendo.toString = toString;
 })();
 
@@ -1270,7 +1270,7 @@ function pad(number, digits, end) {
             return null;
         }
 
-        var lookAhead = function (match) {
+        var lookAhead = function(match) {
                 var i = 0;
                 while (format[idx] === match) {
                     i++;
@@ -1292,7 +1292,7 @@ function pad(number, digits, end) {
                 }
                 return null;
             },
-            getIndexByName = function (names, lower) {
+            getIndexByName = function(names, lower) {
                 var i = 0,
                     length = names.length,
                     name, nameLength,
@@ -1636,7 +1636,7 @@ function pad(number, digits, end) {
             formats = getDefaultFormats(culture);
         }
 
-        formats = isArray(formats) ? formats: [formats];
+        formats = isArray(formats) ? formats : [formats];
         length = formats.length;
 
         for (; idx < length; idx++) {
@@ -1792,7 +1792,7 @@ function pad(number, digits, end) {
             wrapResize(element, autosize);
         }
 
-        if(windowOuterWidth < outerWidth(parent)){
+        if (windowOuterWidth < outerWidth(parent)) {
             parent.addClass("k-animation-container-sm");
 
             wrapResize(element, autosize);
@@ -1896,13 +1896,13 @@ function pad(number, digits, end) {
     }
 
     function toHyphens(str) {
-        return str.replace(/([a-z][A-Z])/g, function (g) {
+        return str.replace(/([a-z][A-Z])/g, function(g) {
             return g.charAt(0) + '-' + g.charAt(1).toLowerCase();
         });
     }
 
     function toCamelCase(str) {
-        return str.replace(/\-(\w)/g, function (strMatch, g1) {
+        return str.replace(/\-(\w)/g, function(strMatch, g1) {
             return g1.toUpperCase();
         });
     }
@@ -1950,7 +1950,7 @@ function pad(number, digits, end) {
         var browserVersion = support.browser.version;
         var el, isRtl;
 
-        if(element instanceof $ && value !== undefined) {
+        if (element instanceof $ && value !== undefined) {
             element.each(function(i, e) {
                 scrollLeft(e, value);
             });
@@ -1985,10 +1985,10 @@ function pad(number, digits, end) {
         }
     }
 
-    (function () {
+    (function() {
         support._scrollbar = undefined;
 
-        support.scrollbar = function (refresh) {
+        support.scrollbar = function(refresh) {
             if (!isNaN(support._scrollbar) && !refresh) {
                 return support._scrollbar;
             } else {
@@ -2032,7 +2032,7 @@ function pad(number, digits, end) {
         support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in docStyle || "msPerspective" in docStyle;
         support.cssFlexbox = ("flexWrap" in docStyle) || ("WebkitFlexWrap" in docStyle) || ("msFlexWrap" in docStyle);
 
-        each([ "Moz", "webkit", "O", "ms" ], function () {
+        each([ "Moz", "webkit", "O", "ms" ], function() {
             var prefix = this.toString(),
                 hasTransitions = typeof table.style[prefix + "Transition"] === STRING;
 
@@ -2064,13 +2064,13 @@ function pad(number, digits, end) {
         try {
             support.screenWidth = window.outerWidth || window.screen ? window.screen.availWidth : window.innerWidth;
             support.screenHeight = window.outerHeight || window.screen ? window.screen.availHeight : window.innerHeight;
-        } catch(e) {
+        } catch (e) {
             //window.outerWidth throws error when in IE showModalDialog.
             support.screenWidth = window.screen.availWidth;
             support.screenHeight = window.screen.availHeight;
         }
 
-        support.detectOS = function (ua) {
+        support.detectOS = function(ua) {
             var os = false, minorVersion, match = [],
                 notAndroidPhone = !/mobile safari/i.test(ua),
                 agentRxs = {
@@ -2206,7 +2206,7 @@ function pad(number, digits, end) {
                         if (browser.chrome) {
                             chromiumEdgeMatch = ua.match(/(edg)[ \/]([\w.]+)/i);
 
-                            if(chromiumEdgeMatch) {
+                            if (chromiumEdgeMatch) {
                                 browser.chromiumEdge = true;
                             }
                         }
@@ -2233,13 +2233,13 @@ function pad(number, digits, end) {
             var commands = {
                 copy: document.queryCommandSupported ? document.queryCommandSupported("copy") : false,
                 cut: document.queryCommandSupported ? document.queryCommandSupported("cut") : false,
-                paste : document.queryCommandSupported ? document.queryCommandSupported("paste") : false
+                paste: document.queryCommandSupported ? document.queryCommandSupported("paste") : false
             };
 
             if (support.browser.chrome) {
                 //not using queryCommandSupported due to chromium issues 476508 and 542948
                 commands.paste = false;
-                if(support.browser.version >= 43) {
+                if (support.browser.version >= 43) {
                     commands.copy = true;
                     commands.cut = true;
                 }
@@ -2262,7 +2262,7 @@ function pad(number, digits, end) {
 
                 return support.touch ? (docEl.clientWidth / window.innerWidth) :
                        browser.msie && browser.version >= 10 ? (((top || window).document.documentElement.offsetWidth + ie11WidthCorrection) / (top || window).innerWidth) : 1;
-            } catch(e) {
+            } catch (e) {
                 return 1;
             }
         };
@@ -2509,7 +2509,7 @@ function pad(number, digits, end) {
                 reverse = false;
             }
 
-            if (typeof duration === BOOLEAN){
+            if (typeof duration === BOOLEAN) {
                 reverse = duration;
                 duration = 400;
             }
@@ -2571,14 +2571,14 @@ function pad(number, digits, end) {
                 return animate(this, options, duration, reverse, complete);
             },
 
-            kendoAddClass: function(classes, options){
+            kendoAddClass: function(classes, options) {
                 return kendo.toggleClass(this, classes, options, true);
             },
 
-            kendoRemoveClass: function(classes, options){
+            kendoRemoveClass: function(classes, options) {
                 return kendo.toggleClass(this, classes, options, false);
             },
-            kendoToggleClass: function(classes, options, toggle){
+            kendoToggleClass: function(classes, options, toggle) {
                 return kendo.toggleClass(this, classes, options, toggle);
             }
         });
@@ -2598,7 +2598,7 @@ function pad(number, digits, end) {
 
         try {
             template = window.decodeURIComponent(value);
-        } catch(error) {
+        } catch (error) {
             // If the string contains Unicode characters
             // the decodeURIComponent() will throw an error.
             // Therefore: convert to UTF-8 character
@@ -2610,7 +2610,7 @@ function pad(number, digits, end) {
         return template;
     }
 
-    var eventTarget = function (e) {
+    var eventTarget = function(e) {
         return e.target;
     };
 
@@ -2985,7 +2985,7 @@ function pad(number, digits, end) {
         _destroy: function() {
             this.destroy();
         },
-        angular: function(){},
+        angular: function() {},
 
         _muteAngularRebind: function(callback) {
             this._muteRebind = true;
@@ -3068,15 +3068,15 @@ function pad(number, digits, end) {
                 el = element || this.wrapper || this.element,
                 i, prop, widgetName;
 
-            if(!kendo.cssProperties.propertyDictionary[protoOptions.name]) {
+            if (!kendo.cssProperties.propertyDictionary[protoOptions.name]) {
                 return;
             }
 
-            for(i = 0; i < cssPropertiesNames.length; i++) {
+            for (i = 0; i < cssPropertiesNames.length; i++) {
                 prop = cssPropertiesNames[i];
                 widgetName = this.options._altname || protoOptions.name;
 
-                if(protoOptions.hasOwnProperty(prop) && newOptions.hasOwnProperty(prop)) {
+                if (protoOptions.hasOwnProperty(prop) && newOptions.hasOwnProperty(prop)) {
                     if (prop === "themeColor") {
                         el.removeClass(kendo.cssProperties.getValidClass({
                             widget: widgetName,
@@ -3104,7 +3104,7 @@ function pad(number, digits, end) {
             }
         },
 
-        _generateLabelId: function(label, inputId){
+        _generateLabelId: function(label, inputId) {
             var labelId = inputId + LABELIDPART;
 
             label.attr("id", labelId);
@@ -3121,10 +3121,10 @@ function pad(number, digits, end) {
 
         _angularItems: function(cmd) {
             var that = this;
-            that.angular(cmd, function(){
+            that.angular(cmd, function() {
                 return {
                     elements: that.items(),
-                    data: $.map(that.dataItems(), function(dataItem){
+                    data: $.map(that.dataItems(), function(dataItem) {
                         return { dataItem: dataItem };
                     })
                 };
@@ -3189,10 +3189,10 @@ function pad(number, digits, end) {
             if (value !== undefined) {
 
                 if (templateRegExp.test(option) && role != "drawer") {
-                    if(typeof value === "string") {
-                        if($("#" + value).length){
+                    if (typeof value === "string") {
+                        if ($("#" + value).length) {
                             value = kendo.template($("#" + value).html());
-                        }else if (source){
+                        } else if (source) {
                             value = kendo.template(source[value]);
                         }
                     } else {
@@ -3255,7 +3255,7 @@ function pad(number, digits, end) {
             widgetKeyRegExp = new RegExp("^" + widgetKey + "$", "i");
         }
 
-        for(var key in data) {
+        for (var key in data) {
             if (key.match(widgetKeyRegExp)) {
                 // we have detected a widget of the same kind - save its reference, we will set its options
                 if (key === widgetKey) {
@@ -3320,13 +3320,13 @@ function pad(number, digits, end) {
     kendo.init = function(element) {
         var roles = kendo.rolesFromNamespaces(slice.call(arguments, 1));
 
-        $(element).find("[data-" + kendo.ns + "role]").addBack().each(function(){
+        $(element).find("[data-" + kendo.ns + "role]").addBack().each(function() {
             kendo.initWidget(this, {}, roles);
         });
     };
 
     kendo.destroy = function(element) {
-        $(element).find("[data-" + kendo.ns + "role]").addBack().each(function(){
+        $(element).find("[data-" + kendo.ns + "role]").addBack().each(function() {
             var data = $(this).data();
 
             for (var key in data) {
@@ -3358,7 +3358,7 @@ function pad(number, digits, end) {
         widgetsArray.sort(containmentComparer);
 
         // resize widgets
-        $.each(widgetsArray, function () {
+        $.each(widgetsArray, function() {
             var widget = kendo.widgetInstance($(this));
             if (widget) {
                 widget.resize(force);
@@ -3432,7 +3432,7 @@ function pad(number, digits, end) {
                 if (typeof options === STRING) {
                     args = slice.call(arguments, 1);
 
-                    this.each(function(){
+                    this.each(function() {
                         var widget = $.data(this, name),
                             method,
                             result;
@@ -3475,7 +3475,7 @@ function pad(number, digits, end) {
         loading: "Loading..."
     };
 
-    var ContainerNullObject = { bind: function () { return this; }, nullObject: true, options: {} };
+    var ContainerNullObject = { bind: function() { return this; }, nullObject: true, options: {} };
 
     var MobileWidget = Widget.extend({
         init: function(element, options) {
@@ -3550,7 +3550,7 @@ function pad(number, digits, end) {
 
     kendo.touchScroller = function(elements, options) {
         // return the first touch scroller
-        if (!options){ options = {}; }
+        if (!options) { options = {}; }
 
         options.useNative = true;
 
@@ -3605,7 +3605,7 @@ function pad(number, digits, end) {
                 }
             }
             else {
-                widgets = [ kendo.ui.roles[role], kendo.dataviz.ui.roles[role],  kendo.mobile.ui.roles[role] ];
+                widgets = [ kendo.ui.roles[role], kendo.dataviz.ui.roles[role], kendo.mobile.ui.roles[role] ];
             }
 
             if (role.indexOf(".") >= 0) {
@@ -3657,7 +3657,7 @@ function pad(number, digits, end) {
 
         return (/input|select|textarea|button|object/.test(nodeName) ?
                 !element.disabled :
-                "a" === nodeName ?
+                nodeName === "a" ?
                 element.href || isTabIndexNotNaN :
                 isTabIndexNotNaN
                ) &&
@@ -3807,7 +3807,7 @@ function pad(number, digits, end) {
     kendo.keyDownHandler = function(e, widget) {
         var events = widget._events.kendoKeydown;
 
-        if(!events){
+        if (!events) {
             return true;
         }
 
@@ -3868,11 +3868,11 @@ function pad(number, digits, end) {
             var context = that,
                 args = slice.call(arguments);
 
-            if (typeof args[args.length -1] === UNDEFINED) {
+            if (typeof args[args.length - 1] === UNDEFINED) {
                 args.pop();
             }
 
-            var callback =  args[args.length - 1],
+            var callback = args[args.length - 1],
                 events = kendo.applyEventMap(args[0], ns);
 
             // setup mouse trap
@@ -3893,12 +3893,12 @@ function pad(number, digits, end) {
                     });
             }
 
-            if(arguments[0].indexOf("keydown") !== -1 && args[1] && args[1].options){
+            if (arguments[0].indexOf("keydown") !== -1 && args[1] && args[1].options) {
                 args[0] = events;
                 var widget = args[1];
                 var keyDownCallBack = args[args.length - 1];
-                args[args.length - 1]= function(e){
-                    if(kendo.keyDownHandler(e, widget)){
+                args[args.length - 1] = function(e) {
+                    if (kendo.keyDownHandler(e, widget)) {
                        return keyDownCallBack.apply(this, [e]);
                     }
                 };
@@ -3936,8 +3936,8 @@ function pad(number, digits, end) {
     kendo.jQuery = kendoJQuery;
     kendo.eventMap = eventMap;
 
-    kendo.timezone = (function(){
-        var months =  { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+    kendo.timezone = (function() {
+        var months = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
         var days = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
 
         function ruleToDate(year, rule) {
@@ -4079,7 +4079,7 @@ function pad(number, digits, end) {
             var zone = info.zone;
             var rule = info.rule;
 
-            return kendo.parseFloat(rule? zone[0] - rule[6] : zone[0]);
+            return kendo.parseFloat(rule ? zone[0] - rule[6] : zone[0]);
         }
 
         function abbr(utcTime, timezone) {
@@ -4149,7 +4149,7 @@ function pad(number, digits, end) {
         };
     })();
 
-    kendo.date = (function(){
+    kendo.date = (function() {
         var MS_PER_MINUTE = 60000,
             MS_PER_DAY = 86400000;
 
@@ -4227,7 +4227,7 @@ function pad(number, digits, end) {
         }
 
         function weekInYear(date, weekStartDay) {
-            if(weekStartDay === undefined) {
+            if (weekStartDay === undefined) {
                 weekStartDay = kendo.culture().calendar.firstDay;
             }
 
@@ -4420,12 +4420,12 @@ function pad(number, digits, end) {
         }
     };
 
-    var animationFrame  = window.requestAnimationFrame       ||
+    var animationFrame = window.requestAnimationFrame ||
                           window.webkitRequestAnimationFrame ||
-                          window.mozRequestAnimationFrame    ||
-                          window.oRequestAnimationFrame      ||
-                          window.msRequestAnimationFrame     ||
-                          function(callback){ setTimeout(callback, 1000 / 60); };
+                          window.mozRequestAnimationFrame ||
+                          window.oRequestAnimationFrame ||
+                          window.msRequestAnimationFrame ||
+                          function(callback) { setTimeout(callback, 1000 / 60); };
 
     kendo.animationFrame = function(callback) {
         animationFrame.call(window, callback);
@@ -4459,7 +4459,7 @@ function pad(number, digits, end) {
             idx = 0;
 
         for (; idx < length; idx += 2) {
-            if(paramParts[idx] !== "") {
+            if (paramParts[idx] !== "") {
                 params[decodeURIComponent(paramParts[idx])] = decodeURIComponent(paramParts[idx + 1]);
             }
         }
@@ -4531,7 +4531,7 @@ function pad(number, digits, end) {
     };
 
 
-    kendo.caret = function (element, start, end) {
+    kendo.caret = function(element, start, end) {
         var rangeElement;
         var isPosition = start !== undefined;
 
@@ -4552,7 +4552,7 @@ function pad(number, digits, end) {
                 if (isPosition) {
                     element.focus();
                     var mobile = support.mobileOS;
-                    if(mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
+                    if (mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
                         setTimeout(function() { element.setSelectionRange(start, end); }, 0);
                     }
                     else {
@@ -4585,7 +4585,7 @@ function pad(number, digits, end) {
                     start = [selectionStart, selectionEnd];
                 }
             }
-        } catch(e) {
+        } catch (e) {
             /* element is not focused or it is not in the DOM */
             start = [];
         }
@@ -4679,12 +4679,12 @@ function pad(number, digits, end) {
         });
     };
 
-    kendo.focusNextElement = function () {
+    kendo.focusNextElement = function() {
         if (document.activeElement) {
             var focussable = $(":kendoFocusable");
             var index = focussable.index(document.activeElement);
 
-            if(index > -1) {
+            if (index > -1) {
                var nextElement = focussable[index + 1] || focussable[0];
                nextElement.focus();
             }
@@ -4692,7 +4692,7 @@ function pad(number, digits, end) {
     };
 
     kendo.trim = function(value) {
-        if(!!value) {
+        if (!!value) {
             return value.toString().trim();
         } else {
             return "";
@@ -4717,7 +4717,7 @@ function pad(number, digits, end) {
         return target;
     };
 
-    kendo.addAttribute =  function(element, attribute, value) {
+    kendo.addAttribute = function(element, attribute, value) {
         var current = element.attr(attribute) || "";
 
         if (current.indexOf(value) < 0) {
@@ -4806,7 +4806,7 @@ function pad(number, digits, end) {
     };
 
     kendo.selectorFromClasses = function(classes) {
-        return "."+classes.split(" ").join(".");
+        return "." + classes.split(" ").join(".");
     };
 
     // Standardized Properties and CSS classes
@@ -4844,7 +4844,7 @@ function pad(number, digits, end) {
                 prop = args[i].prop;
                 newValues = args[i].values;
 
-                if(!dict[widget][prop]) {
+                if (!dict[widget][prop]) {
                     dict[widget][prop] = {};
                 }
 
@@ -4890,7 +4890,7 @@ function pad(number, digits, end) {
                 widgetProperties = cssProperties.propertyDictionary[widget],
                 widgetValues, validValue, prefix;
 
-            if(!widgetProperties) {
+            if (!widgetProperties) {
                 return "";
             }
 
@@ -4945,7 +4945,7 @@ function pad(number, digits, end) {
     }());
 
     //To do: delete below after implementing new styles and classes for BottomNavigation
-    kendo.registerCssClass = function (propName, value, shorthand) {
+    kendo.registerCssClass = function(propName, value, shorthand) {
         if (!kendo.propertyToCssClassMap[propName]) {
             kendo.propertyToCssClassMap[propName] = {};
         }
@@ -4953,7 +4953,7 @@ function pad(number, digits, end) {
         kendo.propertyToCssClassMap[propName][value] = shorthand || value;
     };
 
-    kendo.registerCssClasses = function (propName, arr) {
+    kendo.registerCssClasses = function(propName, arr) {
         for (var i = 0; i < arr.length; i++) {
             if (isArray(arr[i])) {
                 kendo.registerCssClass(propName, arr[i][0], arr[i][1]);
@@ -4963,7 +4963,7 @@ function pad(number, digits, end) {
         }
     };
 
-    kendo.getValidCssClass = function (prefix, propName, value) {
+    kendo.getValidCssClass = function(prefix, propName, value) {
         var validValue = kendo.propertyToCssClassMap[propName][value];
 
         if (validValue) {
@@ -4996,9 +4996,9 @@ function pad(number, digits, end) {
             resolveContexts = Array(length),
             value;
 
-        function updateFunc (index, contexts, values) {
+        function updateFunc(index, contexts, values) {
             return function() {
-                if(values != resolveValues) {
+                if (values != resolveValues) {
                     failed++;
                 }
 
@@ -5096,7 +5096,7 @@ function pad(number, digits, end) {
                 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 
             fileSaver.dispatchEvent(e);
-            setTimeout(function(){
+            setTimeout(function() {
                 URL.revokeObjectURL(dataURI);
             });
         }
@@ -5208,7 +5208,7 @@ function pad(number, digits, end) {
         };
     }());
 
-    var KendoLicensing={validatePackage:function(){},setScriptKey:function(){}};
+    var KendoLicensing = { validatePackage: function() {},setScriptKey: function() {} };
 
     window.KendoLicensing = {
         setScriptKey: KendoLicensing.setScriptKey
@@ -5222,4 +5222,4 @@ function pad(number, digits, end) {
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core", "./kendo.floatinglabel" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "maskedtextbox",
@@ -267,7 +267,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (that._maskLength) {
-                if(that.options.$angular) {//detach "input" event in angular scenario to keep the ng-model consistent and updated only when the change event of the textbox is raised.
+                if (that.options.$angular) {//detach "input" event in angular scenario to keep the ng-model consistent and updated only when the change event of the textbox is raised.
                     that.element.off(INPUT);
                 }
                 that.element
@@ -407,7 +407,7 @@ var __meta__ = { // jshint ignore:line
             that.__pasting = (type === "paste");
 
             setTimeout(function() {
-                if(type === "mouseup" && that.__pasting) {
+                if (type === "mouseup" && that.__pasting) {
                     return;
                 }
                 if (input.value && input.value !== value) {
@@ -621,7 +621,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _wrapper: function () {
+        _wrapper: function() {
             var that = this;
             var element = that.element;
             var DOMElement = element[0];
@@ -632,7 +632,7 @@ var __meta__ = { // jshint ignore:line
             that.wrapper = wrapper.addClass(DOMElement.className).removeClass('input-validation-error');
         },
 
-        _blinkInvalidState: function () {
+        _blinkInvalidState: function() {
             var that = this;
 
             that._addInvalidState();
@@ -647,7 +647,7 @@ var __meta__ = { // jshint ignore:line
             that._validationIcon.removeClass("k-hidden");
         },
 
-        _removeInvalidState: function () {
+        _removeInvalidState: function() {
             var that = this;
 
             that.wrapper.removeClass(STATEINVALID);
@@ -723,4 +723,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

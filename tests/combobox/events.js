@@ -5,14 +5,14 @@ var ComboBox = kendo.ui.ComboBox,
     combobox,
     input;
 
-describe("kendo.ui.ComboBox events", function () {
+describe("kendo.ui.ComboBox events", function() {
     beforeEach(function() {
 
         input = $("<input />").appendTo(Mocha.fixture);
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
-        }
+        };
     });
     afterEach(function() {
 
@@ -22,20 +22,20 @@ describe("kendo.ui.ComboBox events", function () {
 
 it("_blur calls _change", function(done) {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}]
+        dataSource: [{ text: "foo" }, { text: "bar" }]
     });
 
     combobox._change = function() {
         assert.isOk(true);
         done();
-    }
+    };
 
     combobox._blur();
 });
 
 it("_blur calls popup close", function(done) {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}]
+        dataSource: [{ text: "foo" }, { text: "bar" }]
     });
 
     combobox.dataSource.read();
@@ -51,7 +51,7 @@ it("_blur calls popup close", function(done) {
 
 it("_change raises the change event if value has changed", function(done) {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         change: function() {
             assert.isOk(true);
             done();
@@ -66,7 +66,7 @@ it("_change raises the change event if value has changed", function(done) {
 
 it("_change raises the input change event", function(done) {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}]
+        dataSource: [{ text: "foo" }, { text: "bar" }]
     });
 
     input.bind("change", function() {
@@ -82,7 +82,7 @@ it("_change raises the input change event", function(done) {
 
 it("_change is not raised initially", function() {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         autoBind: false,
         change: function() {
             assert.isOk(false);
@@ -95,7 +95,7 @@ it("_change is not raised initially", function() {
 
 it("select does not raise the change event", function() {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         change: function() {
             assert.isOk(false);
         }
@@ -109,7 +109,7 @@ it("clicking an item raises the change event", function(done) {
     combobox = new ComboBox(input, {
         dataValueField: "text",
         dataTextField: "text",
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         change: function() {
             assert.isOk(true);
             done();
@@ -124,7 +124,7 @@ it("clicking an item raises the change event", function(done) {
 
 it("change should be raised on enter", function(done) {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         change: function() {
             assert.isOk(true);
             done();
@@ -139,7 +139,7 @@ it("change should be raised on enter", function(done) {
 
 it("change should not be raised on enter if input is empty", function() {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         change: function() {
             assert.isOk(false);
         }
@@ -151,7 +151,7 @@ it("change should not be raised on enter if input is empty", function() {
 
 it("change should be raised on tab", function(done) {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         change: function() {
             assert.isOk(true);
             done();
@@ -238,7 +238,7 @@ it("clicking an item raises the change event of HTML select", function(done) {
 
 it("raise change on custom value", function() {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         change: function() {
             assert.equal(combobox.value(), "foo");
         }
@@ -255,7 +255,7 @@ it("raise change on custom value", function() {
 
 it("raise change on custom text with empty value", function() {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         change: function() {
             assert.equal(combobox.value(), "");
             assert.equal(combobox.text(), "foo");
@@ -275,7 +275,7 @@ it("raise change on custom text with empty value", function() {
 it("raise change on custom value if element is select", function() {
     var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>");
     combobox = new ComboBox(select, {
-        dataSource: [{text: "foo"}, {text: "bar"}]
+        dataSource: [{ text: "foo" }, { text: "bar" }]
     });
 
     select.bind("change", function() {
@@ -294,7 +294,7 @@ it("raise change on custom value if element is select", function() {
 it("raise change on custom text with empty value (select)", function() {
     var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>");
     combobox = new ComboBox(select, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         syncValueAndText: false
     });
 
@@ -397,7 +397,7 @@ it("change on ENTER with custom text and empty value", function(done) {
 it("open event when click _arrow", function(done) {
     combobox = input.kendoComboBox({
         animation: false,
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         open: function() {
             assert.isOk(true);
             assert.isOk(this === combobox, "'this' is not the correct scope");
@@ -410,7 +410,7 @@ it("open event when click _arrow", function(done) {
 
 it("open event should be cancellable", function() {
     input.kendoComboBox({
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         open: function(e) {
             e.preventDefault();
         }
@@ -426,7 +426,7 @@ it("open event should be cancellable", function() {
 it("open event should not raise twice on initial binding", function() {
     var index = 0;
     input.kendoComboBox({
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         open: function(e) {
             index++;
         },
@@ -442,7 +442,7 @@ it("open event should not raise twice on initial binding", function() {
 
 it("open event when ALT + down _arrow", function(done) {
     input.kendoComboBox({
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         open: function() {
             assert.isOk(true);
             done();
@@ -456,7 +456,7 @@ it("open event when ALT + down _arrow", function(done) {
 
 it("close event when click _arrow", function(done) {
     input.kendoComboBox({
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         close: function() {
             assert.isOk(true);
             assert.isOk(this === combobox, "'this' is not the correct scope");
@@ -471,7 +471,7 @@ it("close event when click _arrow", function(done) {
 
 it("close event should be cancellable", function() {
     input.kendoComboBox({
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         close: function(e) {
             e.preventDefault();
         }
@@ -498,7 +498,7 @@ it("close should not raise if no data", function() {
 
 it("close event when ALT + up _arrow", function(done) {
     input.kendoComboBox({
-        dataSource: [{text: "foo"}, {text: "bar"}],
+        dataSource: [{ text: "foo" }, { text: "bar" }],
         close: function() {
             assert.isOk(true);
             done();
@@ -603,7 +603,7 @@ it("preventing select event during navigation reverts selection", function() {
     var combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],
         select: function(e) {
-            e.preventDefault()
+            e.preventDefault();
         }
     }).data("kendoComboBox");
 
@@ -725,7 +725,7 @@ it("ComboBox does not trigger cascade when selected index is changed due to filt
     var timesCascadeCalled = 0;
 
     combobox.bind("cascade", function() {
-        timesCascadeCalled++
+        timesCascadeCalled++;
         assert.equal(combobox.value(), "2");
         assert.equal(combobox.text(), "bar");
     });
@@ -734,7 +734,6 @@ it("ComboBox does not trigger cascade when selected index is changed due to filt
     combobox.search("bar");
     combobox.ul.children(":first").click();
     combobox.dataSource.filter({});
-
 
 
     assert.equal(timesCascadeCalled, 1);
@@ -1068,7 +1067,7 @@ it("not raise change event on selecting current item after filtering", function(
 
 it("element click calls _focusHandler", function(done) {
     combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}]
+        dataSource: [{ text: "foo" }, { text: "bar" }]
     });
 
     combobox.input.on("focus", function() {
@@ -1080,7 +1079,7 @@ it("element click calls _focusHandler", function(done) {
 });
 it("change is not raised with highlightFirst set to false and item already selected", function() {
     combobox = new ComboBox(input, {
-        dataSource: [{id: 1, text: "foo"}, {id: 2, text: "bar"}],
+        dataSource: [{ id: 1, text: "foo" }, { id: 2, text: "bar" }],
         value: 1,
         dataValueField: "id",
         dataTextField: "text",

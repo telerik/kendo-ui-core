@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -259,16 +259,16 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
 /* FileBrowser and ImageBrowser messages */
 
 var browserMessages = {
-  "uploadFile" : "Hochladen",
-  "orderBy" : "Sortieren nach",
-  "orderByName" : "Name",
-  "orderBySize" : "Größe",
-  "directoryNotFound" : "Das Verzeichnis wurde nicht gefunden.",
-  "emptyFolder" : "Leeres Verzeichnis",
-  "deleteFile" : 'Sind Sie sicher, dass Sie "{0}" wirklich löschen wollen?',
-  "invalidFileType" : "Die ausgewählte Datei \"{0}\" ist ungültig. Unterstützte Dateitypen sind {1}.",
-  "overwriteFile" : "Eine Datei namens \"{0}\" existiert bereits im aktuellen Ordner. Überschreiben?",
-  "dropFilesHere" : "Dateien hier verschieben",
+  "uploadFile": "Hochladen",
+  "orderBy": "Sortieren nach",
+  "orderByName": "Name",
+  "orderBySize": "Größe",
+  "directoryNotFound": "Das Verzeichnis wurde nicht gefunden.",
+  "emptyFolder": "Leeres Verzeichnis",
+  "deleteFile": 'Sind Sie sicher, dass Sie "{0}" wirklich löschen wollen?',
+  "invalidFileType": "Die ausgewählte Datei \"{0}\" ist ungültig. Unterstützte Dateitypen sind {1}.",
+  "overwriteFile": "Eine Datei namens \"{0}\" existiert bereits im aktuellen Ordner. Überschreiben?",
+  "dropFilesHere": "Dateien hier verschieben",
   "search": "Suchen"
 };
 

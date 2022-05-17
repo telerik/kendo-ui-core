@@ -44,7 +44,7 @@
 
         it("change is not triggered on blur after value()", function() {
             dropdownlist = createDropDownList({
-                change: function () {
+                change: function() {
                     assert.isOk(false);
                 }
             });
@@ -350,7 +350,7 @@
 
             var oldOpen = dropdownlist.popup.toggle, called = false;
 
-            dropdownlist.popup.toggle = function() { called = true };
+            dropdownlist.popup.toggle = function() { called = true; };
 
             dropdownlist.enable(false);
 

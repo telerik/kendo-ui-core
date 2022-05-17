@@ -39,7 +39,7 @@
         return dom.kendoListView(options).data("kendoListView");
     }
 
-    describe("listview endless scrolling", function () {
+    describe("listview endless scrolling", function() {
 
         beforeEach(function() {
             dom = $("<div />").appendTo(Mocha.fixture);

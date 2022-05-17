@@ -166,7 +166,7 @@ function axeRun(container, done, exclude) {
         "color-contrast": { enabled: false }
     };
 
-    if(exclude && exclude.length) {
+    if (exclude && exclude.length) {
         exclude.forEach(function(ex) {
             excludedRules[ex] = { enabled: false };
         });
@@ -177,17 +177,17 @@ function axeRun(container, done, exclude) {
     }, function(err, result) {
         var violations;
 
-        if(!!err) {
+        if (!!err) {
             done(err);
         }
 
         try {
             assert.equal(result.violations.length, 0);
             done();
-        } catch(assertionErr) {
+        } catch (assertionErr) {
             violations = axeViolations(result.violations, result.passes.length);
 
-            if(violations.length) {
+            if (violations.length) {
                 assertionErr.stack = violations;
                 done(assertionErr);
             } else {
@@ -269,7 +269,7 @@ function getDomContentsLength() {
         window.requestAnimationFrame = callback => {
             setTimeout(callback, 0);
         };
-    })
+    });
 
     afterEach(function() {
         Mocha.fixture.empty().remove();
@@ -278,8 +278,8 @@ function getDomContentsLength() {
 
         var length = getDomContentsLength();
 
-        if (!this.currentTest) console.dir(this.currentTest);
-        if (!this.currentTest.parent) console.dir(this.currentTest.parent);
+        if (!this.currentTest) {console.dir(this.currentTest);}
+        if (!this.currentTest.parent) {console.dir(this.currentTest.parent);}
         if (length > domContentsLength) {
             console.warn(this.currentTest.parent.title, this.currentTest.title, 'test did not clean DOM contents properly');
         }
@@ -315,7 +315,7 @@ var ngTestModule = $.noop, ngTest = $.noop, ngScope;
 
     ngScope = function() {
         return angular.element(Mocha.fixture.children()[0]).scope();
-    }
+    };
 
     var app = angular.module('kendo.tests', ['kendo.directives']);
 
@@ -331,7 +331,7 @@ var ngTestModule = $.noop, ngTest = $.noop, ngScope;
                 }
             }, 100);
         });
-    }
+    };
 
     ngTest2 = function(name, theTest) {
         it(name, function() {
@@ -343,9 +343,9 @@ var ngTestModule = $.noop, ngTest = $.noop, ngScope;
                 scopeSetup($scope);
             });
 
-            theTest(root, function(setup) { scopeSetup = setup }, function() { angular.bootstrap(root, ['kendo.tests']); });
+            theTest(root, function(setup) { scopeSetup = setup; }, function() { angular.bootstrap(root, ['kendo.tests']); });
             kendo.destroy(root);
             root.remove();
         });
-    }
+    };
 })();

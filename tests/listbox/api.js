@@ -29,7 +29,7 @@
         var listbox = createListBoxFromHtml(html, $.extend({
             dataSource: {
                 transport: {
-                    read: function (e) {
+                    read: function(e) {
                         e.success(dataItems);
                     },
                     destroy: $.noop,

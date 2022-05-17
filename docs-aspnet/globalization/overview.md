@@ -34,7 +34,7 @@ The following {{ site.product }} helpers depend on the [current culture](https:/
 
 To use a culture that is different from the default `en-US` one in {{ site.product }}:
 
-1. Copy the required culture JavaScript file from the `\js\culture\` folder of your [{{ site.product }} installation]{% if site.core %}({% slug downloadinstall_aspnetcore %}){% else %}({% slug overview_downloadinstallation_mvc %}){% endif %} to the {% if site.core %}`wwwroot/lib/kendo-ui/js/cultures/`{% else %}`~/Scripts/cultures/`{% endif %} folder of your application. Alternatively, provide the culture files by using the [Kendo CDN service]{% if site.core %}({% slug cdnservices_core %}){% else %}({% slug cdnservices_aspnetmvc %}){% endif %}.
+1. Copy the required culture JavaScript file from the `\js\culture\` folder of your [{{ site.product }} installation]{% if site.core %}({% slug downloadinstall_aspnetcore %}){% else %}({% slug msi_install_mvc %}){% endif %} to the {% if site.core %}`wwwroot/lib/kendo-ui/js/cultures/`{% else %}`~/Scripts/cultures/`{% endif %} folder of your application. Alternatively, provide the culture files by using the [Kendo CDN service]{% if site.core %}({% slug cdnservices_core %}){% else %}({% slug cdnservices_aspnetmvc %}){% endif %}.
 
 1. Include the corresponding culture JavaScript file after the other JavaScript product files. This example uses the Spanish `es-ES` culture.
 

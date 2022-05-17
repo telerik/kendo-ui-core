@@ -51,7 +51,7 @@
         });
         afterEach(function() {
             kendo.destroy(dom);
-        })
+        });
 
         it("widgets are initialized", function() {
             dom = $('<div><span id="foo" data-role="testwidget"></span></div>');

@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "fx",
@@ -137,13 +137,13 @@ var __meta__ = { // jshint ignore:line
                 return this;
             };
 
-            $.fx.step[value] = function (fx) {
+            $.fx.step[value] = function(fx) {
                 $(fx.elem)[value](fx.now);
             };
         });
 
         var curProxy = $.fx.prototype.cur;
-        $.fx.prototype.cur = function () {
+        $.fx.prototype.cur = function() {
             if (transform2d.indexOf(this.prop) != -1) {
                 return parseFloat($(this.elem)[this.prop]());
             }
@@ -598,7 +598,7 @@ var __meta__ = { // jshint ignore:line
 
                         each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
                             var params,
-                                currentValue = properties ? properties[value]+ " " : null; // We need to match
+                                currentValue = properties ? properties[value] + " " : null; // We need to match
 
                             if (currentValue) {
                                 var single = properties;
@@ -1137,10 +1137,10 @@ var __meta__ = { // jshint ignore:line
     };
 
     var ROTATIONS = {
-        top:    { start: "rotatex(0deg)", end: "rotatex(180deg)" },
+        top: { start: "rotatex(0deg)", end: "rotatex(180deg)" },
         bottom: { start: "rotatex(-180deg)", end: "rotatex(0deg)" },
-        left:   { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
-        right:  { start: "rotatey(180deg)", end: "rotatey(0deg)" }
+        left: { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
+        right: { start: "rotatey(180deg)", end: "rotatey(0deg)" }
     };
 
     function clipInHalf(container, direction) {
@@ -1415,7 +1415,7 @@ var __meta__ = { // jshint ignore:line
 
             this.container = container;
             this.deferred = deferred;
-            this.isAbsolute = originalPosition  == "absolute";
+            this.isAbsolute = originalPosition == "absolute";
 
             if (!this.isAbsolute) {
                 both.css(POSITION, "absolute");
@@ -1544,13 +1544,13 @@ var __meta__ = { // jshint ignore:line
     });
 
     extend(Transition, {
-        easeOutExpo: function (t, b, c, d) {
-            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+        easeOutExpo: function(t, b, c, d) {
+            return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
         },
 
-        easeOutBack: function (t, b, c, d, s) {
+        easeOutBack: function(t, b, c, d, s) {
             s = 1.70158;
-            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+            return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
         }
     });
 
@@ -1587,4 +1587,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

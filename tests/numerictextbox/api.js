@@ -114,7 +114,7 @@
             var textbox = new NumericTextBox(input, {
                 min: 10,
                 value: 20
-            })
+            });
 
             textbox.value(null);
 
@@ -422,7 +422,7 @@
             var textbox = new NumericTextBox(input);
 
             var origin = window.setTimeout;
-            window.setTimeout = function(func) { func() };
+            window.setTimeout = function(func) { func(); };
 
             textbox._text.focus();
 
@@ -447,7 +447,7 @@
             var textbox = new NumericTextBox(input);
 
             var origin = window.setTimeout;
-            window.setTimeout = function(func) { func() };
+            window.setTimeout = function(func) { func(); };
 
             textbox._text.focus();
 
@@ -592,7 +592,7 @@
         it("calling value caches the text for the input", function() {
             var textbox = new NumericTextBox(input);
 
-            textbox.value(15)
+            textbox.value(15);
 
             assert.equal(textbox._oldText, "15");
         });

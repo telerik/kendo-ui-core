@@ -6,7 +6,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge shape', function () {
+    describe('kendo.ui.Badge shape', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -16,7 +16,7 @@
             kendo.destroy(Mocha.fixture);
         });
 
-        var shapes = [ 'rounded', 'pill', 'circle', 'dot', 'custom' ]
+        var shapes = [ 'rounded', 'pill', 'circle', 'dot', 'custom' ];
 
         // #region badge.options.shape
         shapes.forEach(function(shape) {
@@ -70,7 +70,7 @@
             test(`badge.setOptions({shape: '${shape}'}) sets correct classNames`, function() {
                 badge = new Badge(span, { shape: 'shape' });
 
-                badge.setOptions({shape: shape});
+                badge.setOptions({ shape: shape });
 
                 assert.equal(badge._shape, shape);
                 assert.equal(badge.shape(), shape);
@@ -81,7 +81,7 @@
         test(`badge.setOptions({shape: ''}) does not sets classNames`, function() {
             badge = new Badge(span, { shape: 'shape' });
 
-            badge.setOptions({shape: ''});
+            badge.setOptions({ shape: '' });
 
             assert.equal(badge._shape, '');
             assert.equal(badge.shape(), '');

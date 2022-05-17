@@ -152,7 +152,7 @@
         });
 
         it("template throws error on invalid template", function() {
-            assert.throws(function() { template.compile('<a href="#">link</a>') }, /Invalid template/, "Template does not raise proper error");
+            assert.throws(function() { template.compile('<a href="#">link</a>'); }, /Invalid template/, "Template does not raise proper error");
         });
 
         it("slot count is 0 for template without expressions", function() {

@@ -4,7 +4,7 @@
         return element.kendoDialog(options).data("kendoDialog");
     }
 
-    describe("Dialog WAI-ARIA with AXE", function () {
+    describe("Dialog WAI-ARIA with AXE", function() {
         afterEach(function() {
             Mocha.fixture.closest("body").find(".dialog").each(function(idx, element) {
                 removeMocksIn(kendo.ui.Dialog.fn);

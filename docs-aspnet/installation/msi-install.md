@@ -1,15 +1,25 @@
 ---
-title: Installing with the Windows Installer
-page_title: Installing with the Windows Installer
+title: Installing with the MSI Installer
+page_title: Installing with the MSI Installer for Windows
 description: "Get started with Telerik UI for ASP.NET Core and install it with Windows MSI Installer Package."
 previous_url: /getting-started/installation/msi-install
 slug: msi_install_aspnetmvc6_aspnetmvc
 position: 2
 ---
 
-# Installation Overview
+# Installing with the MSI Installer for Windows
 
 This article describes how to download and install Telerik UI for ASP.NET Core on a Windows machine.
+
+* It allows you to install the [Telerik UI extensions for Visual Studio]({% slug overview_visualstudio_aspnetcore %})&mdash;the extensions provide project templates and automate the project configuration.
+
+* It can automatically add the Telerik NuGet server to the package manager in Visual Studio.
+
+* It allows you to install the Telerik UI for ASP.NET Core [Sample Application](#sample-application)&mdash;you can use this demo app to see how to tackle some common scenarios by using the Telerik UI components.
+
+* You get local copies of all Telerik UI files that you will need for the project configuration, for example, the binaries with the Telerik components, CSS files, Kendo UI scripts, and packages required for document processing, export, and spreadsheet manipulation.
+
+An alternative approach is to use [NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) and to install only the packages that you need for your project.
 
 ## Prerequisites
 
@@ -18,30 +28,22 @@ This article describes how to download and install Telerik UI for ASP.NET Core o
 * The Telerik UI for ASP.NET Core **Sample Application** distributed with the same package requires:
 
   * [.NET Core](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/install)
-  * [Visual Studio](https://www.visualstudio.com/downloads/) with completely installed `.NET Core cross-platform development` workload. See the Supported [Visual Studio Versions]({% slug visualstudiosupport_core %}).
 
-## Download
+  * [Visual Studio](https://www.visualstudio.com/downloads/) with completely installed `.NET Core cross-platform development` workload.
 
-To download Telerik UI for ASP.NET Core:
+
+
+## Download and Install
+
+To download the Telerik UI for ASP.NET Core MSI installer:
 
 1. Log into your [Telerik account](https://www.telerik.com/login/).
 1. Click **Downloads** in the top navigation bar.
 1. Click **Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core**.
 1. In the **Installation**  section, select the `msi` installer file.
+1. Run the Telerik UI for ASP.NET Core installer. The automatic setup will guide you through the rest of the installation. The default installation directory is `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <version>`.
 
->**Tip**
->
-> If you don't want to install UI for ASP.NET Core on your machine, you can include Telerik UI controls in your project via NuGet. See [Installing with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) for more information.
-
-## Installation
-
-Run the Telerik UI for ASP.NET Core installer. The automatic setup will guide you through the rest of the installation. The default installation directory is `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <version>`.
-
-During the installation, the Telerik UI for ASP.NET Core installer provides an option to automatically set up the Telerik NuGet package source. Select the **Set up Telerik NuGet package source** checkbox, and the installer will configure the Telerik online NuGet feed for you:
-
-![Automatic NuGet Feed](../getting-started-core/images/automated-nuget-feed-setup.png)
-
-If you prefer to configure the NuGet package source manually, follow the steps in the [Installing with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) article.
+To configure the NuGet package source, follow the steps in the [Installing with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) article.
 
 ## Distribution Contents
 
@@ -89,10 +91,8 @@ The sample application project for Visual Studio contains the following items:
 ## See Also
 
 * [jQuery Version Support]({% slug jquerysupport_core %})
-* [Web Browser Support]({% slug webbrowsersupport_core %})
-* [Operating System Support]({% slug ossupport_core %})
+* [Operating System and Browser Support]({% slug ossupport_core %})
 * [PDF and Excel Export Support]({% slug exportsupport_core %})
-* [Installing Telerik UI for ASP.NET Core with NPM]({% slug npmpackages_core %})
 * [Installing Telerik UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
 * [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})
 * [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})

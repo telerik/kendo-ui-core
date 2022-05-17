@@ -122,7 +122,7 @@
             var dataSource = new DataSource({
                 offlineStorage: {
                     setItem: function(data) {
-                        assert.strictEqual(state, data)
+                        assert.strictEqual(state, data);
                     }
                 }
             });
@@ -561,7 +561,7 @@
                 assert.equal(e.type, "update");
             });
             dataSource.online(true);
-        })
+        });
 
         it("offlineData returns null if offlineStorage isn't enabled", function() {
             var dataSource = new kendo.data.DataSource({});
@@ -622,7 +622,7 @@
                 offlineStorage: "key",
                 transport: {
                     read: function(options) {
-                        options.success({ Data: [{ Foo: "bar", id: 1 }] })
+                        options.success({ Data: [{ Foo: "bar", id: 1 }] });
                     },
                     updates: function(options) {
                         options.success();
@@ -683,7 +683,7 @@
                     read: function(options) {
                         options.success([
                             { id: 1 }
-                        ])
+                        ]);
                     },
                     destroy: function(options) {
                         options.success();

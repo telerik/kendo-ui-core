@@ -1,6 +1,6 @@
-(function(f, define){
-    define([ "./kendo.calendar", "./kendo.popup",  "./kendo.dateinput", "./kendo.html.button"], f);
-})(function(){
+(function(f, define) {
+    define([ "./kendo.calendar", "./kendo.popup", "./kendo.dateinput", "./kendo.html.button"], f);
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "datepicker",
@@ -86,7 +86,7 @@ var __meta__ = { // jshint ignore:line
         that.options = options = options || {};
         id = options.id;
 
-        if(!options.omitPopup){
+        if (!options.omitPopup) {
             div.appendTo(body);
             that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
         } else {
@@ -170,7 +170,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         destroy: function() {
-            if(this.popup){
+            if (this.popup) {
                 this.popup.destroy();
             }
         },
@@ -369,7 +369,7 @@ var __meta__ = { // jshint ignore:line
 
             try {
                 element[0].setAttribute("type", "text");
-            } catch(e) {
+            } catch (e) {
                 element[0].type = "text";
             }
 
@@ -475,7 +475,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
-                if(element && element.length) {
+                if (element && element.length) {
                     element[0].removeAttribute(DISABLED);
                     element[0].removeAttribute(READONLY);
                 }
@@ -858,4 +858,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.mobile.pane" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "mobile.splitview",
@@ -106,14 +106,14 @@ var __meta__ = { // jshint ignore:line
             that.content.addClass("km-split-content");
         },
 
-        _style: function () {
+        _style: function() {
             var style = this.options.style,
                 element = this.element,
                 styles;
 
             if (style) {
                 styles = style.split(" ");
-                $.each(styles, function () {
+                $.each(styles, function() {
                     element.addClass("km-split-" + this);
                 });
             }
@@ -132,12 +132,12 @@ var __meta__ = { // jshint ignore:line
                         this.navigate("");
                     }
                 });
-                that.trigger("init", {view: that});
+                that.trigger("init", { view: that });
             } else {
                 this._invokeNgController();
             }
 
-            that.trigger("show", {view: that});
+            that.trigger("show", { view: that });
         }
     });
 
@@ -146,4 +146,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -181,7 +181,7 @@
                                 break;
                         }
 
-                    }
+                    };
 
                     options.template = template;
                     kendo.ui.Widget.fn.init.call(this, element, options);

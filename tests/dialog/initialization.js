@@ -133,7 +133,7 @@
                 }]
             });
             var wrapper = dialog.wrapper;
-console.log(wrapper.find(".k-dialog-buttongroup > .k-button:first")[0])
+console.log(wrapper.find(".k-dialog-buttongroup > .k-button:first")[0]);
             assert.equal(wrapper.find(".k-dialog-buttongroup > .k-button").length, 2);
             assert.isOk(wrapper.find(".k-dialog-buttongroup > .k-button:first").is(".k-button-solid-primary"));
         });

@@ -40,7 +40,7 @@ How can I update the Model and, respectively, the row cells which correspond to 
 
 To update the value of the Grid cells in an inline edit row mode when another field in the same row changes and while having the new value reflected still in edit mode:
 
-1. Subscribe to the `change` event of the Grid.
+1. Subscribe to the [`change`](/api/javascript/data/datasource/events/change) event of the data source.
 1. When the event is triggered, check if its `action` corresponds to `itemchange` and its `field` to the one you choose.
 1. If both conditions are met, get the `DataItem` of the row that is edited and update it by using the `set` method, which will propagate the changes in the GUI.
 

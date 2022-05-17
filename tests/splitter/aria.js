@@ -1,7 +1,7 @@
 (function() {
     var create = SplitterHelpers.create;
 
-    describe("Splitter WAI-ARIA with AXE", function () {
+    describe("Splitter WAI-ARIA with AXE", function() {
         beforeEach(SplitterHelpers.basicModule.setup);
         afterEach(SplitterHelpers.basicModule.teardown);
 

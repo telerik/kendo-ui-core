@@ -27,6 +27,7 @@ The following image displays the structure of the Chart.
 ![Chart Structure](chart-structure.png)
 
 * [Demo page for the Charts](https://demos.telerik.com/kendo-ui/)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
 
 ## Basic Configuration
 

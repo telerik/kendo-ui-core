@@ -295,7 +295,7 @@
                 }
             }));
 
-            virtualList.value(123)
+            virtualList.value(123);
 
             var items = virtualList.selectedDataItems();
 
@@ -460,7 +460,7 @@
                 }
             }));
 
-            virtualList.value(123)
+            virtualList.value(123);
 
             var value = virtualList.value();
 
@@ -481,7 +481,7 @@
                 }
             }));
 
-            virtualList.value(123)
+            virtualList.value(123);
             asyncDataSource.read();
         });
 
@@ -641,7 +641,7 @@
                     assert.isOk(true, "done callback");
                     assert.equal(virtualList.value().length, 0);
                     done();
-                })
+                });
             });
         });
 
@@ -657,7 +657,7 @@
                     assert.isOk(true, "done callback");
                     assert.equal(virtualList.value().length, 0);
                     done();
-                })
+                });
             });
         });
 
@@ -810,7 +810,7 @@
                 }
 
                 return items;
-            }
+            };
 
             var emptyStringDataSource = new kendo.data.DataSource({
                 transport: {
@@ -858,7 +858,7 @@
                 }
 
                 return items;
-            }
+            };
 
             var emptyStringDataSource = new kendo.data.DataSource({
                 transport: {
@@ -911,7 +911,7 @@
                 }
 
                 return items;
-            }
+            };
 
             emptyStringDataSource = new kendo.data.DataSource({
                 transport: {
@@ -1100,7 +1100,7 @@
 
             virtualList.value([123, 223]);
 
-            asyncDataSource.read()
+            asyncDataSource.read();
         });
 
         it("removeAt method returns deleted data item", function(done) {
@@ -1122,7 +1122,7 @@
 
             virtualList.value([123, 223]);
 
-            asyncDataSource.read()
+            asyncDataSource.read();
         });
 
         it("setValue method updates values of the widget silently", function(done) {

@@ -172,7 +172,7 @@
 
             splitter.object.collapse = function(pane) {
                 called = pane;
-            }
+            };
 
             splitter.dom.find(".k-splitbar").trigger("dblclick");
 
@@ -189,7 +189,7 @@
 
             splitter.object.expand(".k-pane:first");
 
-            assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"))
+            assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
         });
 
         it("expanding a non-resizable pane does not modify more splitbars than necessary", function() {
@@ -325,7 +325,7 @@
             });
 
             splitter.dom.find(".k-i-arrow-60-left")
-                .trigger("mousedown")
+                .trigger("mousedown");
 
             splitter.dom.find(".k-overlay:first")
                 .trigger("mouseup")

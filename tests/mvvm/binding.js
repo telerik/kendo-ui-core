@@ -674,7 +674,7 @@
             dom = $('<select data-value-field="name" data-bind="source:items, value:selectedItem"/>');
 
             var viewModel = kendo.observable({
-                items: function() { return [{ name: "foo" }, { name: "bar" }] },
+                items: function() { return [{ name: "foo" }, { name: "bar" }]; },
                 selectedItem: {}
             });
 
@@ -694,7 +694,7 @@
             dom = $('<select data-bind="source:items, value:selectedItem"/>');
 
             var viewModel = kendo.observable({
-                items: function() { return ["foo", "bar"] },
+                items: function() { return ["foo", "bar"]; },
                 selectedItem: {}
             });
 
@@ -1143,7 +1143,7 @@
             };
 
             kendo.bind(dom, viewModel);
-            assert.equal(dom.text().trim(), "foo")
+            assert.equal(dom.text().trim(), "foo");
         });
 
         it("binding to function", function() {
@@ -1157,7 +1157,7 @@
             };
 
             kendo.bind(dom, viewModel);
-            assert.equal(dom.text().trim(), "bar")
+            assert.equal(dom.text().trim(), "bar");
         });
 
         it("binding target is assign to the element", function() {
@@ -1179,7 +1179,7 @@
             };
 
             kendo.bind(dom, viewModel);
-            assert.equal(dom.text().trim(), "foo")
+            assert.equal(dom.text().trim(), "foo");
         });
 
         it("binding target expando is removed after kendo.unbind", function() {

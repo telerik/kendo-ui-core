@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core", "./kendo.userevents" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "selectable",
@@ -10,7 +10,7 @@ var __meta__ = { // jshint ignore:line
     advanced: true
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         abs = Math.abs,
@@ -66,7 +66,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             if (multiple) {
-                if(dragToSelect) {
+                if (dragToSelect) {
                     that.userEvents
                         .bind("start", that._start.bind(that))
                         .bind("move", that._move.bind(that))
@@ -256,8 +256,8 @@ var __meta__ = { // jshint ignore:line
                 related = toSelect.add(this.relatedTarget(toSelect));
 
                 if (collision(toSelect, position)) {
-                    if(toSelect.hasClass(selectedClass)) {
-                        if(ctrlKey && target !== toSelect[0]) {
+                    if (toSelect.hasClass(selectedClass)) {
+                        if (ctrlKey && target !== toSelect[0]) {
                             related.removeClass(selectedClass).addClass(UNSELECTING);
                         }
                     } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING) && !this._collidesWithActiveElement(related, position)) {
@@ -267,14 +267,14 @@ var __meta__ = { // jshint ignore:line
                 } else {
                     if (toSelect.hasClass(ACTIVE)) {
                         related.removeClass(ACTIVE);
-                    } else if(ctrlKey && toSelect.hasClass(UNSELECTING)) {
+                    } else if (ctrlKey && toSelect.hasClass(UNSELECTING)) {
                         related.removeClass(UNSELECTING).addClass(selectedClass);
                     }
                 }
             }
         },
 
-        _collidesWithActiveElement: function (element, marqueeRect) {
+        _collidesWithActiveElement: function(element, marqueeRect) {
             if (!this.options.ignoreOverlapped) {
                 return false;
             }
@@ -308,7 +308,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 selectElement = that._selectElement.bind(that);
 
-            if(val) {
+            if (val) {
                 val.each(function() {
                     selectElement(this);
                 });
@@ -320,12 +320,12 @@ var __meta__ = { // jshint ignore:line
             return that.element.find(that.options.filter + "." + (that.options.selectedClass || SELECTED));
         },
 
-        selectedRanges: function () {
+        selectedRanges: function() {
             var that = this;
             var rangeSelectedAttr = kendo.attr("range-selected");
             var map = {};
 
-            that.element.find("[" + rangeSelectedAttr + "]").each(function (_, elem) {
+            that.element.find("[" + rangeSelectedAttr + "]").each(function(_, elem) {
                 var rangeId = $(elem).attr(rangeSelectedAttr);
                 var mapLocation = map[rangeId];
 
@@ -339,11 +339,11 @@ var __meta__ = { // jshint ignore:line
             return map;
         },
 
-        selectedSingleItems: function () {
+        selectedSingleItems: function() {
             var that = this;
             var rangeSelectedAttr = kendo.attr("range-selected");
 
-            return that.element.find(that.options.filter + "." + (that.options.selectedClass || SELECTED) + ":not([" + rangeSelectedAttr + "])").toArray().map(function (elem) {
+            return that.element.find(that.options.filter + "." + (that.options.selectedClass || SELECTED) + ":not([" + rangeSelectedAttr + "])").toArray().map(function(elem) {
                 return $(elem);
             });
         },
@@ -352,7 +352,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 selected;
 
-            if(that._lastActive !== null) {
+            if (that._lastActive !== null) {
                 return that._lastActive;
             }
 
@@ -365,10 +365,10 @@ var __meta__ = { // jshint ignore:line
         _selectElement: function(element, preventNotify) {
             var toSelect = $(element),
                 selectedClass = this.options.selectedClass || SELECTED,
-                isPrevented =  !preventNotify && this._notify("select", { element: element });
+                isPrevented = !preventNotify && this._notify("select", { element: element });
 
             toSelect.removeClass(ACTIVE);
-            if(!isPrevented) {
+            if (!isPrevented) {
                  toSelect.addClass(selectedClass);
 
                 if (this.options.aria) {
@@ -383,7 +383,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _unselect: function(element) {
-            if (this.trigger(UNSELECT, { element: element})) {
+            if (this.trigger(UNSELECT, { element: element })) {
                 return;
             }
 
@@ -495,7 +495,7 @@ var __meta__ = { // jshint ignore:line
         elementPosition.right = elementPosition.left + kendo._outerWidth(element);
         elementPosition.bottom = elementPosition.top + kendo._outerHeight(element);
 
-        return !(elementPosition.left > right||
+        return !(elementPosition.left > right ||
             elementPosition.right < position.left ||
             elementPosition.top > bottom ||
             elementPosition.bottom < position.top);
@@ -514,4 +514,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

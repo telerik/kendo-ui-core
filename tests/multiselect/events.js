@@ -5,14 +5,14 @@
     function populateSelect(length) {
         var options = [];
         length = length || 5;
-        for (var i=0; i < length; i++) {
+        for (var i = 0; i < length; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
         select.html(options);
     }
 
-    describe("kendo.ui.MultiSelect Events", function () {
+    describe("kendo.ui.MultiSelect Events", function() {
         beforeEach(function() {
             kendo.ns = "kendo-";
             select = $("<select multiple/>").appendTo(Mocha.fixture);

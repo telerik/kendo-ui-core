@@ -20,7 +20,7 @@
                     items: [],
                     hasSubgroups: false,
                     value: key + " - " + (key + 30)
-                }
+                };
 
                 groups.push(groupsDict[key]);
             }
@@ -31,7 +31,7 @@
         return groups;
     }
 
-    describe("Grouped VirtualList: ", function () {
+    describe("Grouped VirtualList: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 

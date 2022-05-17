@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     var data = [];
     var DataSource = kendo.data.DataSource;
@@ -23,55 +23,55 @@
     var sampleLocalData = [{
             "Id": 1,
             "Name": "John Smith",
-            "Position" : "Forward",
+            "Position": "Forward",
             "Level": 5
         }, {
             "Id": 2,
             "Name": "Mbape",
-            "Position" : "Forward",
+            "Position": "Forward",
             "Level": 7
         },{
             "Id": 3,
             "Name": "Messi",
-            "Position" : "Forward",
+            "Position": "Forward",
             "Level": 10
         },{
             "Id": 4,
             "Name": "Xavi",
-            "Position" : "Midfielder",
+            "Position": "Midfielder",
             "Level": 10
         },{
             "Id": 5,
             "Name": "Iniesta",
-            "Position" : "Midfielder",
+            "Position": "Midfielder",
             "Level": 9
         },{
             "Id": 6,
             "Name": "Rio",
-            "Position" : "Defender",
+            "Position": "Defender",
             "Level": 5
         },{
             "Id": 7,
             "Name": "Maldini",
-            "Position" : "Defender",
+            "Position": "Defender",
             "Level": 10
         },
         {
             "Id": 8,
             "Name": "Bonuci",
-            "Position" : "Defender",
+            "Position": "Defender",
             "Level": 9.5
         },
         {
             "Id": 9,
             "Name": "Neuer",
-            "Position" : "Goalkeeper",
+            "Position": "Goalkeeper",
             "Level": 10
         },
         {
             "Id": 10,
             "Name": "Courtois",
-            "Position" : "Goalkeeper",
+            "Position": "Goalkeeper",
             "Level": 9
         }
     ];
@@ -115,15 +115,15 @@
         "Errors": null
     };
 
-    describe("data source group paging", function () {
-        beforeEach(function () {
+    describe("data source group paging", function() {
+        beforeEach(function() {
             jasmine.clock().install();
             timeout = window.setTimeout;
-            window.setTimeout = function (callback) {
+            window.setTimeout = function(callback) {
                 callback();
             };
         });
-        afterEach(function () {
+        afterEach(function() {
             window.setTimeout = timeout;
             jasmine.clock().uninstall();
         });
@@ -150,7 +150,7 @@
                     serverGrouping: options.serverGrouping,
                     groupPaging: options.groupPaging,
                     transport: {
-                        read: function (readOptions) {
+                        read: function(readOptions) {
                             var take = options.serverPaging ? readOptions.data.take : total;
                             var skip = options.serverPaging ? readOptions.data.skip : 0;
                             var data = generateData(skip, Math.min(skip + take, total));
@@ -160,7 +160,7 @@
                         }
                     },
                     schema: {
-                        total: function () {
+                        total: function() {
                             return total;
                         },
                         model: {
@@ -185,7 +185,7 @@
             return dataSource;
         }
 
-        it("the count of the returned groups equals the page size", function () {
+        it("the count of the returned groups equals the page size", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -200,7 +200,7 @@
             assert.equal(dataSource.view().length, 16);
         });
 
-        it("when group paging is enabled, groups should have uids", function () {
+        it("when group paging is enabled, groups should have uids", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -215,7 +215,7 @@
             assert.isOk(typeof dataSource.view()[0].uid !== 'undefined');
         });
 
-        it("groupAllData is called to group the data when groupPaging is enabled and serverPaging is disabled", function () {
+        it("groupAllData is called to group the data when groupPaging is enabled and serverPaging is disabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -233,7 +233,7 @@
             assert.equal(groupAllDataStub.calls("groupAllData"), 1);
         });
 
-        it("_isGroupPaged method returns true when dataSource is grouped and groupPaging is enabled", function () {
+        it("_isGroupPaged method returns true when dataSource is grouped and groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -248,7 +248,7 @@
             assert.isOk(dataSource._isGroupPaged());
         });
 
-        it("_isGroupPaged method returns false when dataSource is not grouped and groupPaging is enabled", function () {
+        it("_isGroupPaged method returns false when dataSource is not grouped and groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -260,7 +260,7 @@
             assert.isNotOk(dataSource._isGroupPaged());
         });
 
-        it("_isServerGroupPaged method returns true when dataSource is server grouped and groupPaging is enabled", function () {
+        it("_isServerGroupPaged method returns true when dataSource is server grouped and groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: true,
@@ -276,7 +276,7 @@
             assert.isOk(dataSource._isServerGroupPaged());
         });
 
-        it("_isServerGroupPaged method returns false when dataSource is not grouped and groupPaging is enabled", function () {
+        it("_isServerGroupPaged method returns false when dataSource is not grouped and groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: true,
@@ -289,7 +289,7 @@
             assert.isNotOk(dataSource._isServerGroupPaged());
         });
 
-        it("_addRange does not call _flatData when groupPaging is enabled", function () {
+        it("_addRange does not call _flatData when groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -307,7 +307,7 @@
             assert.equal(flatDataStub.calls("_flatData"), 0);
         });
 
-        it("ranges have outerStart and outerEnd fields when groupPaging is enabled", function () {
+        it("ranges have outerStart and outerEnd fields when groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -323,7 +323,7 @@
             assert.isOk(typeof dataSource._ranges[0].outerEnd != "undefined");
         });
 
-        it("_addRange calls _updateOuterRangesLength when groupPaging is enabled", function () {
+        it("_addRange calls _updateOuterRangesLength when groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -341,7 +341,7 @@
             assert.equal(updateOuterRangesLengthStub.calls("_updateOuterRangesLength"), 1);
         });
 
-        it("_params includes a groupPaging parameter if groupPaging is enabled", function () {
+        it("_params includes a groupPaging parameter if groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -356,7 +356,7 @@
             assert.isOk(typeof params.groupPaging != "undefined");
         });
 
-        it("_params does not include a groupPaging parameter if groupPaging is not enabled", function () {
+        it("_params does not include a groupPaging parameter if groupPaging is not enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -370,7 +370,7 @@
             assert.isNotOk(typeof params.groupPaging != "undefined");
         });
 
-        it("_process calls _setView method", function () {
+        it("_process calls _setView method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -388,7 +388,7 @@
             assert.equal(setViewStub.calls("_setView"), 1);
         });
 
-        it("_setView calls _isGroupPaged method", function () {
+        it("_setView calls _isGroupPaged method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -406,7 +406,7 @@
             assert.equal(groupPagedStub.calls("_isGroupPaged"), 1);
         });
 
-        it("_setView calls _isServerGroup method", function () {
+        it("_setView calls _isServerGroup method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -427,7 +427,7 @@
             assert.equal(serverGroupedStub.calls("_isServerGrouped"), 1);
         });
 
-        it("_setView calls view method once", function () {
+        it("_setView calls view method once", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -448,7 +448,7 @@
             assert.equal(viewStub.calls("view"), 1);
         });
 
-        it("_setView calls _updateOuterRangesLength method once when action is either page, expandGroup or collapseGroup", function () {
+        it("_setView calls _updateOuterRangesLength method once when action is either page, expandGroup or collapseGroup", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -472,7 +472,7 @@
             assert.equal(updateOuterRangesLengthStub.calls("_updateOuterRangesLength"), 1);
         });
 
-        it("_setView calls _addRange method once when action is neither page, expandGroup or collapseGroup", function () {
+        it("_setView calls _addRange method once when action is neither page, expandGroup or collapseGroup", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -494,7 +494,7 @@
             assert.equal(setViewStub.calls("_addRange"), 1);
         });
 
-        it("query calls _setView method", function () {
+        it("query calls _setView method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -511,7 +511,7 @@
             assert.equal(setViewStub.calls("_setView"), 1);
         });
 
-        it("_findRange calls _findGroupedRange method when groupPaging is enabled", function () {
+        it("_findRange calls _findGroupedRange method when groupPaging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -529,7 +529,7 @@
             assert.equal(dataSourceStub.calls("_findGroupedRange"), 1);
         });
 
-        it("_findRange does not call _findGroupedRange method when groupPaging is not enabled", function () {
+        it("_findRange does not call _findGroupedRange method when groupPaging is not enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -546,7 +546,7 @@
             assert.equal(dataSourceStub.calls("_findGroupedRange"), 0);
         });
 
-        it("page calls range when group paging is enabled", function () {
+        it("page calls range when group paging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -564,7 +564,7 @@
             assert.equal(dataSourceStub.calls("range"), 1);
         });
 
-        it("page does not call range when group paging is not enabled", function () {
+        it("page does not call range when group paging is not enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -581,7 +581,7 @@
             assert.equal(dataSourceStub.calls("range"), 0);
         });
 
-        it("totalPages calls groupsTotal when group paging is enabled", function () {
+        it("totalPages calls groupsTotal when group paging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -599,7 +599,7 @@
             assert.equal(dataSourceStub.calls("groupsTotal"), 1);
         });
 
-        it("totalPages does not call groupsTotal when group paging is not enabled", function () {
+        it("totalPages does not call groupsTotal when group paging is not enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -616,7 +616,7 @@
             assert.equal(dataSourceStub.calls("groupsTotal"), 0);
         });
 
-        it("_findGroupedRange returns if taken items exceeds or equals take", function () {
+        it("_findGroupedRange returns if taken items exceeds or equals take", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -634,7 +634,7 @@
             assert.isOk(result.length === 0);
         });
 
-        it("_findGroupedRange should populate the result parameter with items which count equals the take value", function () {
+        it("_findGroupedRange should populate the result parameter with items which count equals the take value", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -655,7 +655,7 @@
             assert.isOk(result.length === 10);
         });
 
-        it("_findGroupedRange should skip items when necessary", function () {
+        it("_findGroupedRange should skip items when necessary", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -676,7 +676,7 @@
             assert.isOk(result[0].value === 'Ship Address 18');
         });
 
-        it("_findGroupedRange should shift the items when there is an expanded group", function () {
+        it("_findGroupedRange should shift the items when there is an expanded group", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -698,7 +698,7 @@
             assert.equal(result.length, 6);
         });
 
-        it("_findGroupedRange calls _isServerGroupPaged when there is an expanded group", function () {
+        it("_findGroupedRange calls _isServerGroupPaged when there is an expanded group", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -723,7 +723,7 @@
             assert.isTrue(dataSourceStub.calls('_isServerGroupPaged') > 0);
         });
 
-        it("_findGroupedRange should set the excludeHeader field of groups which have their first item skipped", function () {
+        it("_findGroupedRange should set the excludeHeader field of groups which have their first item skipped", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -747,7 +747,7 @@
             assert.equal(result[0].excludeHeader, true);
         });
 
-        it("_findGroupedRange should recursively execute itself in case a group with subgroups is expanded", function () {
+        it("_findGroupedRange should recursively execute itself in case a group with subgroups is expanded", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -760,7 +760,7 @@
             });
             var result = [];
             var dataSourceStub = stub(dataSource, {
-                _isServerGroupPaged: function () {
+                _isServerGroupPaged: function() {
                     return true;
                 },
                 _findGroupedRange: dataSource._findGroupedRange
@@ -779,7 +779,7 @@
             assert.equal(dataSourceStub.calls("_findGroupedRange"), 2);
         });
 
-        it("_findGroupedRange inserts the group items which belong to the current view in the currentItems property of the group", function () {
+        it("_findGroupedRange inserts the group items which belong to the current view in the currentItems property of the group", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -801,7 +801,7 @@
             assert.equal(result[0].currentItems.length, 5);
         });
 
-        it("_findGroupedRange should call getGroupItems when dataSource is server grouped and group items are not available", function () {
+        it("_findGroupedRange should call getGroupItems when dataSource is server grouped and group items are not available", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -812,7 +812,7 @@
             });
             var result = [];
             var dataSourceStub = stub(dataSource, {
-                _isServerGroupPaged: function () {
+                _isServerGroupPaged: function() {
                     return true;
                 },
                 _findGroupedRange: dataSource._findGroupedRange,
@@ -832,7 +832,7 @@
             assert.equal(dataSourceStub.calls("getGroupItems"), 1);
         });
 
-        it("_findGroupedRange should set the _fetchingGroupItems flag to true when requesting group items", function () {
+        it("_findGroupedRange should set the _fetchingGroupItems flag to true when requesting group items", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -843,7 +843,7 @@
             });
             var result = [];
             stub(dataSource, {
-                _isServerGroupPaged: function () {
+                _isServerGroupPaged: function() {
                     return true;
                 },
                 _findGroupedRange: dataSource._findGroupedRange,
@@ -863,7 +863,7 @@
             assert.isTrue(dataSource._fetchingGroupItems);
         });
 
-        it("getGroupItems should call _composeItemsFilter method", function () {
+        it("getGroupItems should call _composeItemsFilter method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -891,7 +891,7 @@
             assert.equal(dataSourceStub.calls("_composeItemsFilter"), 1);
         });
 
-        it("getGroupItems should call findSubgroups method", function () {
+        it("getGroupItems should call findSubgroups method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -919,7 +919,7 @@
             assert.equal(dataSourceStub.calls("findSubgroups"), 1);
         });
 
-        it("getGroupItems should call _queueRequest method", function () {
+        it("getGroupItems should call _queueRequest method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -950,7 +950,7 @@
         });
 
 
-        it("getGroupItems should call _groupItemsSuccessHandler method", function () {
+        it("getGroupItems should call _groupItemsSuccessHandler method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -980,7 +980,7 @@
             assert.equal(dataSourceStub.calls("_groupItemsSuccessHandler"), 1);
         });
 
-        it("getGroupItems should call _dequeueRequest method when requestStart is prevented", function () {
+        it("getGroupItems should call _dequeueRequest method when requestStart is prevented", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1003,7 +1003,7 @@
                 _dequeueRequest: dataSource._dequeueRequest
             });
 
-            dataSource.bind('requestStart', function (e) {
+            dataSource.bind('requestStart', function(e) {
                 e.preventDefault();
             });
 
@@ -1014,7 +1014,7 @@
             assert.equal(dataSourceStub.calls("_dequeueRequest"), 1);
         });
 
-        it("getGroupItems should trigger requestStart event", function () {
+        it("getGroupItems should trigger requestStart event", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1036,7 +1036,7 @@
 
             var group = dataSource._ranges[0].data[0];
             group.items = [];
-            dataSource.bind('requestStart', function () {
+            dataSource.bind('requestStart', function() {
                 triggered = true;
             });
 
@@ -1044,7 +1044,7 @@
             assert.isOk(triggered);
         });
 
-        it("getGroupItems calculates correct page with single level of grouping", function () {
+        it("getGroupItems calculates correct page with single level of grouping", function() {
             var dataSource = remoteDataSource(null, {
                 total: 1000,
                 pageSize: 25,
@@ -1056,7 +1056,7 @@
             });
             var result = [];
             var dataSourceStub = stub(dataSource, {
-                _isServerGroupPaged: function () {
+                _isServerGroupPaged: function() {
                     return true;
                 }
             });
@@ -1065,12 +1065,12 @@
             var group = dataSource._ranges[0].data[0];
             dataSource._groupsState[dataSource._ranges[0].data[0].uid] = true;
             for (var index = 25; index < 50; index++) {
-                group.items[index].notFetched = true;;
+                group.items[index].notFetched = true;
             }
 
-            dataSource._queueRequest = function (data) {
+            dataSource._queueRequest = function(data) {
                 assert.equal(data.page, 2);
-            }
+            };
             dataSource._findGroupedRange(dataSource._ranges[0].data, result, {
                 skip: 20,
                 skipped: 0,
@@ -1080,7 +1080,7 @@
             });
         });
 
-        it("getGroupItems should trigger requestEnd event", function () {
+        it("getGroupItems should trigger requestEnd event", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1102,7 +1102,7 @@
 
             var group = dataSource._ranges[0].data[0];
             group.items = [];
-            dataSource.bind('requestEnd', function () {
+            dataSource.bind('requestEnd', function() {
                 triggered = true;
             });
 
@@ -1110,7 +1110,7 @@
             assert.isOk(triggered);
         });
 
-        it("_groupItemsSuccessHandler should call _timeStamp method", function () {
+        it("_groupItemsSuccessHandler should call _timeStamp method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1133,7 +1133,7 @@
             assert.equal(dataSourceStub.calls("_timeStamp"), 1);
         });
 
-        it("_groupItemsSuccessHandler should return a function", function () {
+        it("_groupItemsSuccessHandler should return a function", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1149,7 +1149,7 @@
             assert.equal(typeof dataSource._groupItemsSuccessHandler(group, 0, 10), 'function');
         });
 
-        it("_groupItemsSuccessHandler returned function should call _dequeueRequest method", function () {
+        it("_groupItemsSuccessHandler returned function should call _dequeueRequest method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1173,7 +1173,7 @@
             assert.equal(dataSourceStub.calls("_dequeueRequest"), 1);
         });
 
-        it("_groupItemsSuccessHandler returned function should call the parse method of the reader", function () {
+        it("_groupItemsSuccessHandler returned function should call the parse method of the reader", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1197,7 +1197,7 @@
             assert.equal(readerStub.calls("parse"), 1);
         });
 
-        it("_groupItemsSuccessHandler returned function should call the groups method of the reader when the response is grouped", function () {
+        it("_groupItemsSuccessHandler returned function should call the groups method of the reader when the response is grouped", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1221,7 +1221,7 @@
             assert.equal(readerStub.calls("groups"), 1);
         });
 
-        it("_groupItemsSuccessHandler returned function should call the data method of the reader when the response is not grouped", function () {
+        it("_groupItemsSuccessHandler returned function should call the data method of the reader when the response is not grouped", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1244,7 +1244,7 @@
             assert.equal(readerStub.calls("data"), 1);
         });
 
-        it("_groupItemsSuccessHandler returned function should call the _updateRangePristineData method", function () {
+        it("_groupItemsSuccessHandler returned function should call the _updateRangePristineData method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1267,7 +1267,7 @@
             assert.equal(dataSourceStub.calls("_updateRangePristineData"), 1);
         });
 
-        it("_groupItemsSuccessHandler returned function should update the _fetchingGroupItems field", function () {
+        it("_groupItemsSuccessHandler returned function should update the _fetchingGroupItems field", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1290,7 +1290,7 @@
             assert.isFalse(dataSource._fetchingGroupItems);
         });
 
-        it("_groupItemsSuccessHandler returned function should call the _updateOuterRangesLength method", function () {
+        it("_groupItemsSuccessHandler returned function should call the _updateOuterRangesLength method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1314,7 +1314,7 @@
             assert.equal(dataSourceStub.calls("_updateOuterRangesLength"), 1);
         });
 
-        it("_groupItemsSuccessHandler returned function should call the range method", function () {
+        it("_groupItemsSuccessHandler returned function should call the range method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1338,7 +1338,7 @@
             assert.equal(dataSourceStub.calls("range"), 1);
         });
 
-        it("_groupItemsSuccessHandler returned function should trigger the change event", function () {
+        it("_groupItemsSuccessHandler returned function should trigger the change event", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1354,14 +1354,14 @@
             var group = dataSource._ranges[0].data[0];
             var handler = dataSource._groupItemsSuccessHandler(group, 0, 10);
 
-            dataSource.bind('change', function(){
+            dataSource.bind('change', function() {
                 triggered = true;
             });
             handler(sampleRemoteResponse);
             assert.isTrue(triggered);
         });
 
-        it("findSubgroups should return the subgroups of a group", function () {
+        it("findSubgroups should return the subgroups of a group", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1373,11 +1373,11 @@
                 groupPaging: true
             });
 
-            var subgroups = dataSource.findSubgroups({field: 'ShipAddress'});
+            var subgroups = dataSource.findSubgroups({ field: 'ShipAddress' });
             assert.equal(subgroups[0].field, 'ContactName');
         });
 
-        it("_composeItemsFilter should return a filter object", function () {
+        it("_composeItemsFilter should return a filter object", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1389,16 +1389,16 @@
                 groupPaging: true
             });
 
-            var result = dataSource._composeItemsFilter({field: 'ShipAddress'});
+            var result = dataSource._composeItemsFilter({ field: 'ShipAddress' });
             assert.isTrue(typeof result.logic !== 'undefined');
             assert.isTrue(typeof result.filters !== 'undefined');
         });
 
-        it("_composeItemsFilter should return a filter with 'and' logic", function () {
+        it("_composeItemsFilter should return a filter with 'and' logic", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
-                filter: { filters: [{ value:"ContactName", operator:"eq", field:"test"}], logic: "or" },
+                filter: { filters: [{ value: "ContactName", operator: "eq", field: "test" }], logic: "or" },
                 group: [{
                     field: 'ShipAddress'
                 }, {
@@ -1407,11 +1407,11 @@
                 groupPaging: true
             });
 
-            var result = dataSource._composeItemsFilter({field: 'ShipAddress', value:'test'});
+            var result = dataSource._composeItemsFilter({ field: 'ShipAddress', value: 'test' });
             assert.equal(result.logic, "and");
         });
 
-        it("_composeItemsFilter should create a filter object which contains the values of the parent groups", function () {
+        it("_composeItemsFilter should create a filter object which contains the values of the parent groups", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1423,11 +1423,11 @@
                 groupPaging: true
             });
 
-            var result = dataSource._composeItemsFilter({field: 'ShipAddress', value:'test'}, [{field: 'ContactName', value: 'test'}]);
+            var result = dataSource._composeItemsFilter({ field: 'ShipAddress', value: 'test' }, [{ field: 'ContactName', value: 'test' }]);
             assert.isTrue(result.filters.length === 2);
         });
 
-        it("_updateRangePristineData should call the _containsSubGroup method", function () {
+        it("_updateRangePristineData should call the _containsSubGroup method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1460,7 +1460,7 @@
             assert.equal(dataSourceStub.calls("_containsSubGroup"), 1);
         });
 
-        it("_updateRangePristineData should call the _cloneGroup method", function () {
+        it("_updateRangePristineData should call the _cloneGroup method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1480,7 +1480,7 @@
 
             var group = dataSource._ranges[0].data[0];
             var subgroup = group.items[0];
- 
+
             var newItem = $.extend(true, {},subgroup.items[0]);
 
             newItem.OrderID = 99999;
@@ -1493,7 +1493,7 @@
             assert.isTrue(dataSourceStub.calls("_cloneGroup") > 0);
         });
 
-        it("_updateRangePristineData should corectly update the pristine model", function () {
+        it("_updateRangePristineData should corectly update the pristine model", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1509,7 +1509,7 @@
 
             var group = dataSource._ranges[0].data[0];
             var subgroup = group.items[0];
- 
+
             var newItem = $.extend(true, {},subgroup.items[0]);
 
             newItem.OrderID = 99999;
@@ -1522,7 +1522,7 @@
             assert.isTrue(dataSource._ranges[0].pristineData[0].items[0].items[1].ShipAddress === newItem.ShipAddress);
         });
 
-        it("page should call _isGroupPaged method", function () {
+        it("page should call _isGroupPaged method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1537,7 +1537,7 @@
             var dataSourceStub = stub(dataSource, {
                 _isGroupPaged: $.noop,
                 _query: $.noop,
-                totalPages: function(){
+                totalPages: function() {
                     return 2;
                 }
             });
@@ -1546,7 +1546,7 @@
             assert.equal(dataSourceStub.calls("_isGroupPaged"), 1);
         });
 
-        it("page should call range method when group paging is enabled", function () {
+        it("page should call range method when group paging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1560,7 +1560,7 @@
 
             var dataSourceStub = stub(dataSource, {
                 range: $.noop,
-                totalPages: function(){
+                totalPages: function() {
                     return 2;
                 }
             });
@@ -1569,7 +1569,7 @@
             assert.equal(dataSourceStub.calls("range"), 1);
         });
 
-        it("groupsTotal should call _isServerGrouped method ", function () {
+        it("groupsTotal should call _isServerGrouped method ", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1589,7 +1589,7 @@
             assert.equal(dataSourceStub.calls("_isServerGrouped"), 1);
         });
 
-        it("groupsTotal should call total method when server group paging is enabled and _serverGroupsTotal is not defined", function () {
+        it("groupsTotal should call total method when server group paging is enabled and _serverGroupsTotal is not defined", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1602,7 +1602,7 @@
             dataSource.read();
 
             var dataSourceStub = stub(dataSource, {
-                _isServerGrouped: function(){
+                _isServerGrouped: function() {
                     return true;
                 },
                 total: $.noop
@@ -1612,7 +1612,7 @@
             assert.equal(dataSourceStub.calls("total"), 1);
         });
 
-        it("groupsTotal should return _serverGroupsTotal when it has a value and server group paging is enabled", function () {
+        it("groupsTotal should return _serverGroupsTotal when it has a value and server group paging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1626,14 +1626,14 @@
             dataSource._serverGroupsTotal = 10;
 
             stub(dataSource, {
-                _isServerGrouped: function(){
+                _isServerGrouped: function() {
                     return true;
                 }
             });
             assert.equal(dataSource.groupsTotal(), 10);
         });
 
-        it("groupsTotal should call _calculateGroupsTotal method when client group paging is enabled", function () {
+        it("groupsTotal should call _calculateGroupsTotal method when client group paging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1653,7 +1653,7 @@
             assert.equal(dataSourceStub.calls("_calculateGroupsTotal"), 1);
         });
 
-        it("_calculateGroupsTotal should call groupCount method", function () {
+        it("_calculateGroupsTotal should call groupCount method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1673,7 +1673,7 @@
             assert.equal(dataSourceStub.calls("groupCount"), dataSource._ranges[0].data.length);
         });
 
-        it("totalPages should call _isGroupPaged method", function () {
+        it("totalPages should call _isGroupPaged method", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1693,7 +1693,7 @@
             assert.equal(dataSourceStub.calls("_isGroupPaged"), 1);
         });
 
-        it("totalPages should call groupsTotal method when group paging is enabled", function () {
+        it("totalPages should call groupsTotal method when group paging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1706,7 +1706,7 @@
             dataSource.read();
 
             var dataSourceStub = stub(dataSource, {
-                _isGroupPaged: function(){
+                _isGroupPaged: function() {
                     return true;
                 },
                 groupsTotal: $.noop
@@ -1716,7 +1716,7 @@
             assert.equal(dataSourceStub.calls("_isGroupPaged"), 1);
         });
 
-        it("_findRange should call _isGroupPaged method ", function () {
+        it("_findRange should call _isGroupPaged method ", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1736,7 +1736,7 @@
             assert.equal(dataSourceStub.calls("_isGroupPaged"), 1);
         });
 
-        it("_findRange should call _findGroupedRange method when group paging is enabled", function () {
+        it("_findRange should call _findGroupedRange method when group paging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1756,7 +1756,7 @@
             assert.equal(dataSourceStub.calls("_findGroupedRange"), 1);
         });
 
-        it("_findRange should call _calculateGroupsTotal method when group paging is enabled", function () {
+        it("_findRange should call _calculateGroupsTotal method when group paging is enabled", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1777,7 +1777,7 @@
         });
 
 
-        it("_updateOuterRangesLength should ignore whether group hedear is shown or not", function () {
+        it("_updateOuterRangesLength should ignore whether group hedear is shown or not", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1798,7 +1798,7 @@
         });
 
 
-        it("range should work correctly when ranges are missing", function () {
+        it("range should work correctly when ranges are missing", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: true,
@@ -1810,15 +1810,15 @@
 
             dataSource._addRange(dataSource._observe(sampleGroupedRemoteResponse.Data), 0);
             dataSource._addRange(dataSource._observe(sampleGroupedRemoteResponse.Data), 10);
-            dataSource.groupsTotal = function(){
+            dataSource.groupsTotal = function() {
                 return 13;
             };
-            dataSource.range(10, 2, function(){
+            dataSource.range(10, 2, function() {
                 assert.equal(dataSource.view().length, 2);
             }, "page");
         });
 
-        it("range should work correctly when requested range is the only available and it is not the first one", function () {
+        it("range should work correctly when requested range is the only available and it is not the first one", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: true,
@@ -1829,15 +1829,15 @@
             });
 
             dataSource._addRange(dataSource._observe(sampleGroupedRemoteResponse.Data), 10);
-            dataSource.groupsTotal = function(){
+            dataSource.groupsTotal = function() {
                 return 13;
             };
-            dataSource.range(10, 2, function(){
+            dataSource.range(10, 2, function() {
                 assert.equal(dataSource.view().length, 2);
             }, "page");
         });
 
-        it("range should work correctly when requested data is from two ranges", function () {
+        it("range should work correctly when requested data is from two ranges", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: true,
@@ -1849,10 +1849,10 @@
 
             dataSource._addRange(dataSource._observe(sampleGroupedRemoteResponse.Data), 0);
             dataSource._addRange(dataSource._observe(sampleGroupedRemoteResponse.Data), 3);
-            dataSource.groupsTotal = function(){
+            dataSource.groupsTotal = function() {
                 return 6;
             };
-            dataSource.range(2, 3, function(){
+            dataSource.range(2, 3, function() {
                 assert.equal(dataSource.view().length, 3);
             }, "page");
         });
@@ -1873,7 +1873,7 @@
             assert.equal(dataSource.page(), 1);
         });
 
-        it("_findGroupedRange should call _fetchGroupItems when proccessing a group with enabled server operations", function () {
+        it("_findGroupedRange should call _fetchGroupItems when proccessing a group with enabled server operations", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1887,10 +1887,10 @@
             dataSource._groupsState[dataSource._ranges[0].data[0].uid] = true;
 
             var dataSourceStub = stub(dataSource, {
-                _isServerGroupPaged: function () {
+                _isServerGroupPaged: function() {
                     return true;
                 },
-                _fetchGroupItems: function(){return true},
+                _fetchGroupItems: function() {return true;},
                 getGroupItems: $.noop
             });
 
@@ -1904,7 +1904,7 @@
             assert.equal(dataSourceStub.calls("_fetchGroupItems"), 1);
         });
 
-        it("_fetchGroupItems should call getGroupItems when group items are not fetched", function () {
+        it("_fetchGroupItems should call getGroupItems when group items are not fetched", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1918,7 +1918,7 @@
             group.items = null;
 
             var dataSourceStub = stub(dataSource, {
-                _isServerGroupPaged: function () {
+                _isServerGroupPaged: function() {
                     return true;
                 },
                 getGroupItems: $.noop
@@ -1933,7 +1933,7 @@
             assert.equal(dataSourceStub.calls("getGroupItems"), 1);
         });
 
-        it("_fetchGroupItems should call getGroupItems when a group item is not yet fetched", function () {
+        it("_fetchGroupItems should call getGroupItems when a group item is not yet fetched", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1947,7 +1947,7 @@
             group.items[0].notFetched = true;
 
             var dataSourceStub = stub(dataSource, {
-                _isServerGroupPaged: function () {
+                _isServerGroupPaged: function() {
                     return true;
                 },
                 getGroupItems: $.noop
@@ -1962,7 +1962,7 @@
             assert.equal(dataSourceStub.calls("getGroupItems"), 1);
         });
 
-        it("_fetchGroupItems should call _expandedSubGroupItemsCount", function () {
+        it("_fetchGroupItems should call _expandedSubGroupItemsCount", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -1976,11 +1976,11 @@
             group.items[0].notFetched = true;
 
             var dataSourceStub = stub(dataSource, {
-                _isServerGroupPaged: function () {
+                _isServerGroupPaged: function() {
                     return true;
                 },
                 getGroupItems: $.noop,
-                _expandedSubGroupItemsCount: function () {
+                _expandedSubGroupItemsCount: function() {
                     return 0;
                 }
             });
@@ -1994,7 +1994,7 @@
             assert.equal(dataSourceStub.calls("_expandedSubGroupItemsCount"), 1);
         });
 
-        it("_expandedSubGroupItemsCount returns the correct count of expanded subgroups", function () {
+        it("_expandedSubGroupItemsCount returns the correct count of expanded subgroups", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -2004,24 +2004,24 @@
                 groupPaging: true
             });
             var data = new kendo.data.ObservableArray([
-                { 
-                    field: "foo", 
-                    value: "boo", 
+                {
+                    field: "foo",
+                    value: "boo",
                     hasSubgroups: true,
                     subgroupCount: 1,
                     items: [
-                        { 
-                            field: "boo", 
-                            value: "foo", 
+                        {
+                            field: "boo",
+                            value: "foo",
                             hasSubgroups: true,
-                            subgroupCount:1,
+                            subgroupCount: 1,
                             items: [
-                                { 
-                                    field: "moo", 
-                                    value: "voo", 
+                                {
+                                    field: "moo",
+                                    value: "voo",
                                     hasSubgroups: false,
                                     items: [
-                                        {name: 'foo'}
+                                        { name: 'foo' }
                                     ]
                                 }
                             ]
@@ -2039,7 +2039,7 @@
             assert.equal(result, 2);
         });
 
-        it("_expandedSubGroupItemsCount returns the correct count of expanded subgroups when there are expanded subgroups which are not part of the current sub range", function () {
+        it("_expandedSubGroupItemsCount returns the correct count of expanded subgroups when there are expanded subgroups which are not part of the current sub range", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
@@ -2049,56 +2049,56 @@
                 groupPaging: true
             });
             var data = new kendo.data.ObservableArray([
-                { 
-                    field: "foo", 
-                    value: "boo", 
+                {
+                    field: "foo",
+                    value: "boo",
                     hasSubgroups: true,
                     subgroupCount: 1,
                     items: [
-                        { 
-                            field: "boo", 
-                            value: "foo", 
+                        {
+                            field: "boo",
+                            value: "foo",
                             hasSubgroups: true,
-                            subgroupCount:1,
+                            subgroupCount: 1,
                             items: [
-                                { 
-                                    field: "moo", 
-                                    value: "voo", 
+                                {
+                                    field: "moo",
+                                    value: "voo",
                                     hasSubgroups: false,
                                     items: [
-                                        {name: 'foo'}
+                                        { name: 'foo' }
                                     ]
                                 }
                             ]
                         },
-                        { 
-                            field: "boo", 
-                            value: "foo", 
+                        {
+                            field: "boo",
+                            value: "foo",
                             hasSubgroups: true,
-                            subgroupCount:1,
+                            subgroupCount: 1,
                             items: [
-                                { 
-                                    field: "moo", 
-                                    value: "voo", 
+                                {
+                                    field: "moo",
+                                    value: "voo",
                                     hasSubgroups: false,
                                     items: [
-                                        {name: 'foo'}
+                                        { name: 'foo' }
                                     ]
                                 }
                             ]
                         },
-                        { 
-                            field: "boo", 
-                            value: "foo", 
+                        {
+                            field: "boo",
+                            value: "foo",
                             hasSubgroups: true,
-                            subgroupCount:1,
+                            subgroupCount: 1,
                             items: [
-                                { 
-                                    field: "moo", 
-                                    value: "voo", 
+                                {
+                                    field: "moo",
+                                    value: "voo",
                                     hasSubgroups: false,
                                     items: [
-                                        {name: 'foo'}
+                                        { name: 'foo' }
                                     ]
                                 }
                             ]
@@ -2120,7 +2120,7 @@
             assert.equal(result, 4);
         });
 
-        it("ungrouping items removes groups from view and ranges", function () {
+        it("ungrouping items removes groups from view and ranges", function() {
             var dataSource = new kendo.data.DataSource({
                 pageSize: 5,
                 groupPaging: true,

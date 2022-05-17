@@ -2,7 +2,7 @@
     var DropDownList = kendo.ui.DropDownList,
         input;
 
-        describe("kendo.ui.DropDownList WAI-ARIA with AXE", function () {
+        describe("kendo.ui.DropDownList WAI-ARIA with AXE", function() {
             beforeEach(function() {
                 kendo.ns = "kendo-";
                 input = $("<input id='ddl' />").appendTo(Mocha.fixture);

@@ -3125,6 +3125,29 @@ The supported values are:
 * `"asc"` (ascending order)
 * `"desc"` (descending order)
 
+#### Example - sort column menu columns list in descending order
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { field: "city" }
+      ],
+      columnMenu: {
+        columns: {
+          sort: "desc"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30, city: "London" },
+        { name: "John Doe", age: 33, city: "Madrid" }
+      ]
+    });
+</script>
+
 ### columnMenu.columns.groups `Array` *(default: null)*
 
 The user defined groups of the columns visibility list.
@@ -8657,9 +8680,9 @@ Can also be set to the following string values:
 - "columns" - enables virtualization of columns.
 - "rows, columns" - enables virtualization of both rows and columns.
 
-> For columns virtualization to work, define [widths for the columns](/api/javascript/ui/grid/configuration/columns.width)
+> For columns virtualization to work, define [widths for the columns](/api/javascript/ui/grid/configuration/columns.width).
 
-> Check [Virtualization of local data](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data), [Virtualization of remote data](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) and [Colums Virtualization](https://demos.telerik.com/kendo-ui/grid/column-virtualization) for live demos.
+Check [Virtualization of local data](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data), [Virtualization of remote data](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) and [Colums Virtualization](https://demos.telerik.com/kendo-ui/grid/column-virtualization) for live demos.
 
 ### scrollable.endless `Boolean` *(default: false)*
 

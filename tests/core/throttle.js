@@ -1,8 +1,8 @@
-(function(){
+(function() {
 
     var throttle = kendo.throttle;
 
-    describe("throttle", function () {
+    describe("throttle", function() {
 
     it("throttle returns function if delay is falsy", function() {
         assert.equal(throttle($.noop, 0), $.noop);

@@ -5,7 +5,7 @@
             $.mockjaxSettings.responseTime = 0;
         });
         afterEach(function() {
-            $.mockjax.clear()
+            $.mockjax.clear();
         });
 
         var data = [];
@@ -772,7 +772,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -910,7 +910,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -941,7 +941,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -1327,12 +1327,12 @@
                 serverPaging: true,
                 serverGrouping: true
             });
-            
+
             dataSource.read();
             dataSource.add({ bar: "test" });
             var model = dataSource.get("");
             dataSource.cancelChanges(model);
-            
+
             assert.equal(dataSource.total(), 10);
         });
 
@@ -2025,7 +2025,7 @@
                 serverPaging: true,
                 schema: {
                     total: function() {
-                        return "2"
+                        return "2";
                     }
                 }
             });

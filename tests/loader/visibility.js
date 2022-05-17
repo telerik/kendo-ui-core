@@ -5,7 +5,7 @@
     var span;
     var loader;
 
-    describe('kendo.ui.Loader visibility', function () {
+    describe('kendo.ui.Loader visibility', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -17,7 +17,7 @@
 
         // #region loader.options.visible
         test('loader.options.visible false hides the loader initially', function() {
-            loader = new Loader(span, {visible: false});
+            loader = new Loader(span, { visible: false });
 
             assert.equal(loader.element.is(':hidden'), true);
             assert.equal(loader.element.hasClass('k-hidden'), true);

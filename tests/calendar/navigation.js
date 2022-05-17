@@ -971,7 +971,7 @@
         it("range selection with shiftKey and space key", function() {
             var moveEvent = { keyCode: keys.DOWN, ctrlKey: false, preventDefault: $.noop },
                 clickEvent = { keyCode: keys.SPACEBAR, shiftKey: true, preventDefault: $.noop };
-            calendar.value(new Date(2015, 10, 10))
+            calendar.value(new Date(2015, 10, 10));
 
             calendar._move(moveEvent);
             calendar._move(clickEvent);
@@ -983,7 +983,7 @@
             var moveEvent = { keyCode: keys.DOWN, preventDefault: $.noop },
                 clickEvent = { keyCode: keys.SPACEBAR, ctrlKey: true, preventDefault: $.noop };
 
-            calendar.value(new Date(2015, 10, 10))
+            calendar.value(new Date(2015, 10, 10));
             calendar._move(moveEvent);
             calendar._move(clickEvent);
             assert.equal(calendar.selectDates().length, 2);

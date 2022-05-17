@@ -1,4 +1,4 @@
-(function () {
+(function() {
     var container,
         asyncDataSource,
         ITEM_HEIGHT = 20,
@@ -16,7 +16,7 @@
         return items;
     }
 
-    describe("VirtualList AngularJS integration", function () {
+    describe("VirtualList AngularJS integration", function() {
         beforeEach(function() {
             container = "<div id='container' kendo-virtual-list k-options='virtualOptions'></div>";
 

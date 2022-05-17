@@ -10,7 +10,7 @@
         return new Validator(element, $.extend({}, options));
     }
 
-    describe("kendo.ui.validation", function () {
+    describe("kendo.ui.validation", function() {
         beforeEach(function() {
             kendo.ns = "kendo-";
 
@@ -1073,7 +1073,7 @@
                             element = arguments[0];
                             return "Field is required";
                         }
-                }});
+                } });
 
             validator.validate();
 
@@ -1088,7 +1088,7 @@
                     rules: {
                         custom: function() {
                             element = arguments[0];
-                            return false
+                            return false;
                         }
                     },
                     messages: { custom: "Custom message" }
@@ -1264,7 +1264,7 @@
             var input = $('<input type="text" data-kendo-type="date" value="foo"/>'),
                 validator = setup(input);
 
-            assert.isOk(!validator.validate())
+            assert.isOk(!validator.validate());
         });
 
         it("validate returns true if input type=text and data-kendo-type=date value is valid date", function() {
@@ -1277,7 +1277,7 @@
         it("validate input elements with array index names on multiple validation calls", function() {
             container.append("<input type='text' name='test[]' />");
             var called = false,
-                validator = setup(container, { rules: { custom: function(input) { called = true } } });
+                validator = setup(container, { rules: { custom: function(input) { called = true; } } });
 
             validator.validate();
             validator.validate();
@@ -1308,14 +1308,14 @@
 
             container.append("<input type='text' name='test[]' />");
 
-            var validator = setup(container, { rules: { foo: function() { assert.isOk(true) } } });
+            var validator = setup(container, { rules: { foo: function() { assert.isOk(true); } } });
             validator.validate();
         });
 
         it("register external messages", function() {
             var called = false;
             kendo.ui.validator.rules = { foo: function() { return false; } };
-            kendo.ui.validator.messages = { foo: function() { called =true; return "test"; } };
+            kendo.ui.validator.messages = { foo: function() { called = true; return "test"; } };
             container.append("<input type='text' name='test[]' />");
 
             var validator = setup(container, {});
@@ -1328,7 +1328,7 @@
 
         it("external overrides default messages", function() {
             kendo.ui.validator.rules = { required: function() { return false; } };
-            kendo.ui.validator.messages = { required: function() { assert.isOk(true) } };
+            kendo.ui.validator.messages = { required: function() { assert.isOk(true); } };
 
             container.append("<input type='text' name='test[]' />");
 
@@ -1344,7 +1344,7 @@
 
             container.append("<input type='text' name='test[]' />");
 
-            var validator = setup(container, { messages: { foo: function() { called =true; return "test2"; } } });
+            var validator = setup(container, { messages: { foo: function() { called = true; return "test2"; } } });
             validator.validate();
             var messages = validator.errors();
             assert.isOk(called);
@@ -1358,7 +1358,7 @@
 
             container.append("<input type='text' title='validation title' name='test[]' />");
 
-            var validator = setup(container, { messages: { foo: function() { called =true; return "test2"; } } });
+            var validator = setup(container, { messages: { foo: function() { called = true; return "test2"; } } });
             validator.validate();
             var messages = validator.errors();
             assert.isOk(called);
@@ -1409,7 +1409,7 @@
 
             container.append("<input type='text' name='test' />");
 
-            var validator = setup(container, { rules: { foo: function() { return false } } });
+            var validator = setup(container, { rules: { foo: function() { return false; } } });
             validator.validate();
         });
 
@@ -1420,7 +1420,7 @@
                     assert.deepEqual(element[0], container[0]);
                     }
                 }
-            }
+            };
             container.append("<input type='text' name='test' />");
 
             var validator = setup(container);
@@ -1434,7 +1434,7 @@
                         return;
                     }
                 }
-            }
+            };
             container.append("<input type='text' name='test' />");
 
             var validator = setup(container);
@@ -1447,7 +1447,7 @@
                         return { rules: { foo: function() {} }, messages: { foo: "foo" } };
                     }
                 }
-            }
+            };
             container.append("<input type='text' name='test' />");
 
             var validator = setup(container);
@@ -1467,7 +1467,7 @@
                     assert.deepEqual(element[0], container[0]);
                     }
                 }
-            }
+            };
             container.append("<input type='text' name='test' />");
 
             var validator = setup(container);
@@ -1477,15 +1477,15 @@
             kendo.ui.validator.ruleResolvers = {
                 foo: {
                     resolve: function(element) {
-                        return { rules: { foo: $.noop }};
+                        return { rules: { foo: $.noop } };
                     }
                 },
                 bar: {
                     resolve: function(element) {
-                        return { rules: { bar: $.noop }};
+                        return { rules: { bar: $.noop } };
                     }
                 }
-            }
+            };
             container.append("<input type='text' name='test' />");
 
             var validator = setup(container);

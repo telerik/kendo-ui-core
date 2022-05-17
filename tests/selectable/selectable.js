@@ -18,7 +18,7 @@
                     ctrlKey: ctrlKey,
                     metaKey: metaKey
                 });
-            }
+            };
 
             $.fn.move = function(x, y, ctrlKey, metaKey) {
                 return triggerEvent(this, "mousemove", {
@@ -27,16 +27,16 @@
                     ctrlKey: ctrlKey,
                     metaKey: metaKey
                 });
-            }
+            };
 
             $.fn.release = function(info) {
                 info = $.extend({}, info);
                 return triggerEvent(this, "mouseup", info);
-            }
+            };
 
             $.fn.tap = function(info) {
                 return triggerEvent(this, "click", info);
-            }
+            };
         });
         afterEach(function() {
             ul.kendoSelectable("destroy");
@@ -49,7 +49,7 @@
             element.trigger($.Event(type, info));
 
             return element;
-        };
+        }
 
         it("selectable class is applied on the element when initialized", function() {
             var selectable = new Selectable(ul);
@@ -751,7 +751,7 @@
         });
 
         it("_invalidateSelectables calls _collidesWithActiveElement", function() {
-            var selectable =  new Selectable(ul, { multiple: true });
+            var selectable = new Selectable(ul, { multiple: true });
 
             var selectableStub = stub(selectable, {
                 _collidesWithActiveElement: $.noop
@@ -765,7 +765,7 @@
                 left: 0,
                 top: 0,
                 width: 1000
-            })
+            });
 
             assert.isOk(selectableStub.calls('_collidesWithActiveElement') > 0);
         });

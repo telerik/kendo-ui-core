@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist", "./kendo.html.button" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "combobox",
@@ -161,7 +161,7 @@ var __meta__ = { // jshint ignore:line
             rounded: "medium"
         },
 
-        events:[
+        events: [
             "open",
             "close",
             CHANGE,
@@ -241,7 +241,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _focusHandler: function(e) {
-            if(e.target === this.element[0]) {
+            if (e.target === this.element[0]) {
                 this.input.trigger("focus");
             }
         },
@@ -369,7 +369,7 @@ var __meta__ = { // jshint ignore:line
                 // Setting the below flag will prevent this from happening
                 that.popup._hovered = true;
                 that._openPopup();
-                if(that.options.virtual) {
+                if (that.options.virtual) {
                     that._focusItem();
                 } else if (reinitialized && that.options.highlightFirst) {
                     that.listView.focus(0);
@@ -463,7 +463,7 @@ var __meta__ = { // jshint ignore:line
 
             if (that._value(dataItem) !== that.value()) {
                 that._custom(that._value(dataItem));
-            } else if (that._value(dataItem) !== that.element[0].value){
+            } else if (that._value(dataItem) !== that.element[0].value) {
                 that._accessor(that._value(dataItem));
             }
 
@@ -630,20 +630,20 @@ var __meta__ = { // jshint ignore:line
             this._triggerCascade();
         },
 
-        _setDomInputValue: function(text){
+        _setDomInputValue: function(text) {
             var that = this;
             var currentCaret = caret(this.input);
             var caretStart;
 
-            if(currentCaret && currentCaret.length){
+            if (currentCaret && currentCaret.length) {
                 caretStart = currentCaret[0];
             }
 
             this._prev = this.input[0].value = text;
 
-            if(caretStart && this.selectedIndex === -1){
+            if (caretStart && this.selectedIndex === -1) {
                 var mobile = support.mobileOS;
-                if(mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
+                if (mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
                     setTimeout(function() { that.input[0].setSelectionRange(caretStart, caretStart); }, 0);
                 }
                 else {
@@ -712,7 +712,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        text: function (text) {
+        text: function(text) {
             text = text === null ? "" : text;
 
             var that = this;
@@ -746,7 +746,7 @@ var __meta__ = { // jshint ignore:line
                 loweredText = loweredText.toLowerCase();
             }
 
-            if(that.dataItem() && that._text(that.dataItem()) === text){
+            if (that.dataItem() && that._text(that.dataItem()) === text) {
                 return;
             }
 
@@ -815,7 +815,7 @@ var __meta__ = { // jshint ignore:line
                         that._placeholder(true);
                     }
 
-                    if(that._userTriggered) {
+                    if (that._userTriggered) {
                          that._old = that._accessor();
                     } else {
                          that._old = that._valueBeforeCascade = that._accessor();
@@ -832,7 +832,7 @@ var __meta__ = { // jshint ignore:line
                 });
         },
 
-        _hideBusy: function () {
+        _hideBusy: function() {
             var that = this;
             clearTimeout(that._busy);
             that._arrowIcon.removeClass(LOADING);
@@ -848,10 +848,10 @@ var __meta__ = { // jshint ignore:line
             var shouldTrigger = true;
             e.preventDefault();
 
-            if(dataItem){
-                shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
+            if (dataItem) {
+                shouldTrigger = that._value(dataItem) !== List.unifyType(that.value(), typeof that._value(dataItem));
 
-                if(!shouldTrigger){
+                if (!shouldTrigger) {
                    that.input.val(that._text(dataItem));
                 }
             }
@@ -868,7 +868,7 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _syncValueAndText: function () {
+        _syncValueAndText: function() {
             return this.options.syncValueAndText;
         },
 
@@ -881,7 +881,7 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var dataSource = that.dataSource;
             var ignoreCase = options.ignoreCase;
-            var predicate = function (dataItem) {
+            var predicate = function(dataItem) {
                 var text = that._text(dataItem);
                 if (text !== undefined) {
                     text = text + "";
@@ -902,7 +902,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!that.ul[0].firstChild) {
-                dataSource.one(CHANGE, function () {
+                dataSource.one(CHANGE, function() {
                     if (dataSource.view()[0]) {
                         that.search(word);
                     }
@@ -954,7 +954,7 @@ var __meta__ = { // jshint ignore:line
                     rounded: null,
                 });
 
-                wrapper.append('<input ' + name + 'class="k-input-inner" type="text" autocomplete="' + AUTOCOMPLETEVALUE +'"/>')
+                wrapper.append('<input ' + name + 'class="k-input-inner" type="text" autocomplete="' + AUTOCOMPLETEVALUE + '"/>')
                     .append(arrowBtn)
                     .append(that.element);
 
@@ -1044,8 +1044,8 @@ var __meta__ = { // jshint ignore:line
 
                     dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(current));
 
-                    if(dataItem){
-                        shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
+                    if (dataItem) {
+                        shouldTrigger = that._value(dataItem) !== List.unifyType(that.value(), typeof that._value(dataItem));
                     }
 
                     if (shouldTrigger && that.trigger("select", { dataItem: dataItem, item: current })) {
@@ -1059,8 +1059,8 @@ var __meta__ = { // jshint ignore:line
                         that._valueBeforeCascade = that._old = that.value();
                     });
                 } else {
-                    if(that._syncValueAndText() || that._isSelect){
-                        if(!that.dataItem() || that.dataItem()[textField] !== that.input.val()) {
+                    if (that._syncValueAndText() || that._isSelect) {
+                        if (!that.dataItem() || that.dataItem()[textField] !== that.input.val()) {
                             that._accessor(that.input.val());
                         }
                     }
@@ -1217,4 +1217,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

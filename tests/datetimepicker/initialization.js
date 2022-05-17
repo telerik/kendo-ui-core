@@ -404,8 +404,8 @@
 
         it("DateTimePicker parseFormats contains default ISO formats if no parseFromats are configured", function() {
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
-            var dateFormat = $.inArray('yyyy-MM-dd', datetimepicker.options.parseFormats) > -1
-            var timeFormat = $.inArray('yyyy-MM-ddTHH:mm:ss', datetimepicker.options.parseFormats) > -1
+            var dateFormat = $.inArray('yyyy-MM-dd', datetimepicker.options.parseFormats) > -1;
+            var timeFormat = $.inArray('yyyy-MM-ddTHH:mm:ss', datetimepicker.options.parseFormats) > -1;
 
             assert.isOk(dateFormat);
             assert.isOk(timeFormat);
@@ -416,7 +416,7 @@
             var datetimepicker = input.kendoDateTimePicker({
                 min: new Date(2000, 0, 1, 22, 0, 0),
                 max: new Date(2000, 0, 2, 22, 0, 0)
-            }).data("kendoDateTimePicker")
+            }).data("kendoDateTimePicker");
 
             datetimepicker.setOptions({
                 max: new Date(2000, 0, 1, 23, 0, 0)
@@ -453,7 +453,7 @@
             assert.equal(datetimepicker.element.val(), kendo.toString(value, datetimepicker.options.format));
         });
 
-        it("datetimepicker instantiates its own popup when component type is modern", function () {
+        it("datetimepicker instantiates its own popup when component type is modern", function() {
             var datetimepicker = input.kendoDateTimePicker({
                 componentType: "modern"
             }).data("kendoDateTimePicker");
@@ -461,7 +461,7 @@
             assert.isTrue(datetimepicker.popup instanceof kendo.ui.Popup);
         });
 
-        it("datetimepicker Popup should contain a div with k-date-tab and k-datetime-wrap classes", function () {
+        it("datetimepicker Popup should contain a div with k-date-tab and k-datetime-wrap classes", function() {
             var datetimepicker = input.kendoDateTimePicker({
                 componentType: "modern"
             }).data("kendoDateTimePicker");
@@ -469,7 +469,7 @@
             assert.equal(datetimepicker.popup.element.find('.k-date-tab.k-datetime-wrap').length, 1);
         });
 
-        it("when time group is selected, date picker should display the time view", function () {
+        it("when time group is selected, date picker should display the time view", function() {
             var datetimepicker = input.kendoDateTimePicker({
                 componentType: "modern"
             }).data("kendoDateTimePicker");
@@ -480,7 +480,7 @@
             assert.equal(datetimepicker.popup.element.find('.k-date-tab').length, 0);
         });
 
-        it("when time group is selected, date picker should display the time view", function () {
+        it("when time group is selected, date picker should display the time view", function() {
             var datetimepicker = input.kendoDateTimePicker({
                 value: new Date(2020, 3, 5, 0, 0, 0),
                 min: new Date(2020, 3, 4, 0, 30, 0),

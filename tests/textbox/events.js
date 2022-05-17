@@ -42,7 +42,7 @@
                 }
             });
 
-            input.val("newVal").trigger("keydown", {which: keys.ENTER});
+            input.val("newVal").trigger("keydown", { which: keys.ENTER });
         });
     });
 }());

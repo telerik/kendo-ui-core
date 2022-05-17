@@ -1,6 +1,6 @@
 (function() {
 
-    describe("View", function () {
+    describe("View", function() {
         beforeEach(function() {
             var contentElement = $('<script id="content" type="text/x-kendo-template">Foo</script>');
             $(Mocha.fixture).append(contentElement);
@@ -71,19 +71,19 @@
         });
 
         it("skips template expressions unless flag is enabled", function() {
-            var view = new kendo.View("#: foo #", {model: { foo: "foo" }});
+            var view = new kendo.View("#: foo #", { model: { foo: "foo" } });
 
             assert.equal(view.render().html(), "#: foo #");
         });
 
         it("evaluates template expressions against the passed view model", function() {
-            var view = new kendo.View("#: foo #", {model: { foo: "foo" }, evalTemplate: true });
+            var view = new kendo.View("#: foo #", { model: { foo: "foo" }, evalTemplate: true });
 
             assert.equal(view.render().html(), "foo");
         });
 
         it("evaluates template expressions against the passed view model in elements", function() {
-            var view = new kendo.View("<span>#: foo #</span>", {model: { foo: "foo" }, evalTemplate: true });
+            var view = new kendo.View("<span>#: foo #</span>", { model: { foo: "foo" }, evalTemplate: true });
 
             assert.equal(view.render().html(), "<span>foo</span>");
         });
@@ -95,7 +95,7 @@
         });
 
         it("evaluates template with an element in the dom", function() {
-            Mocha.fixture.append("<div id=foo>#: foo #</div>")
+            Mocha.fixture.append("<div id=foo>#: foo #</div>");
             var view = new kendo.View("#foo", { model: { foo: "foo" }, evalTemplate: true });
             view.render();
             assert.equal(Mocha.fixture.find("#foo").html(), "foo");
@@ -107,20 +107,20 @@
         });
 
         it("fails to evaluate template without with block when useWithBlock is false and the template refers to the properties of data directly", function() {
-            var view = new kendo.View("<div>#: foo.bar #</div>",  { model: { foo: { bar: "bar" } }, evalTemplate: true, useWithBlock: false });
+            var view = new kendo.View("<div>#: foo.bar #</div>", { model: { foo: { bar: "bar" } }, evalTemplate: true, useWithBlock: false });
             assert.throws(() => view.render());
         });
 
         it("evaluates template with an element in the dom without with block when useWithBlock is false", function() {
-            Mocha.fixture.append("<div id=fooSuccess>#: data.foo.bar #</div>")
+            Mocha.fixture.append("<div id=fooSuccess>#: data.foo.bar #</div>");
             var view = new kendo.View("#fooSuccess", { model: { foo: { bar: "bar" } }, evalTemplate: true, useWithBlock: false });
             view.render();
             assert.equal(Mocha.fixture.find("#fooSuccess").html(), "bar");
         });
 
         it("fails to evaluate template with an element in the dom without with block when useWithBlock is false and the template refers to the properties of data directly", function() {
-            Mocha.fixture.append("<div id=fooFailure>#: foo.bar #</div>")
-            var view = new kendo.View("#fooFailure",  { model: { foo: { bar: "bar" } }, evalTemplate: true, useWithBlock: false });
+            Mocha.fixture.append("<div id=fooFailure>#: foo.bar #</div>");
+            var view = new kendo.View("#fooFailure", { model: { foo: { bar: "bar" } }, evalTemplate: true, useWithBlock: false });
             assert.throws(() => view.render());
         });
 
@@ -177,7 +177,7 @@
         });
     });
 
-    describe("View", function () {
+    describe("View", function() {
         var view;
 
         afterEach(function() {
@@ -193,7 +193,7 @@
         });
     });
 
-    describe("Layout", function () {
+    describe("Layout", function() {
         it("renders view in a given region", function() {
             var layout = new kendo.Layout("<div><span id='container'></span></div>" ),
                 view = new kendo.View('<span id="baz">Baz</span>');

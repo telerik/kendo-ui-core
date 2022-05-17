@@ -506,7 +506,7 @@
             stub(dataSource.transport, "destroy");
             dataSource.read();
 
-            dataSource.sync = function () {
+            dataSource.sync = function() {
                 assert.equal(dataSource._destroyed.length, 1);
             };
 

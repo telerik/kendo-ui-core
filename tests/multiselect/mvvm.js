@@ -5,7 +5,7 @@
         beforeEach(function() {
             window.multiSelectDataBound = function() {
                 assert.isOk(true);
-            }
+            };
 
             Mocha.fixture.html('<script id="template" type="text/x-kendo-template"> \
                <strong>#:text#</strong> \

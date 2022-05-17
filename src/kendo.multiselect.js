@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist", "./kendo.html.chip", "./kendo.html.chiplist", "./kendo.html.button" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "multiselect",
@@ -210,7 +210,6 @@ var __meta__ = { // jshint ignore:line
             this.listView.setOptions(listOptions);
 
 
-
             this._accessors();
             this._aria();
             this._tagTemplate();
@@ -354,7 +353,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!removeButton) {
-                if(closeButton && that.popup.visible()) {
+                if (closeButton && that.popup.visible()) {
                     that.toggle(false);
                 } else {
                     if (that.input[0] !== activeElement() && notInput) {
@@ -389,7 +388,7 @@ var __meta__ = { // jshint ignore:line
                 that.listView.skipUpdate(true);
             }
 
-            if(that.listView.bound() && that.listView.isFiltered()) {
+            if (that.listView.bound() && that.listView.isFiltered()) {
                 that.persistTagList = true;
                 that._clearFilter();
             }
@@ -437,7 +436,7 @@ var __meta__ = { // jshint ignore:line
 
                 listView.removeAt(position);
 
-                if(listView._removedAddedIndexes) {
+                if (listView._removedAddedIndexes) {
                     listView._removedAddedIndexes.splice(position, 1);
                 }
 
@@ -445,7 +444,7 @@ var __meta__ = { // jshint ignore:line
                 if (listViewChild) {
                     listViewChildren[customIndex].classList.remove("k-selected");
                 }
-                if (that.options.tagMode !== "single"){
+                if (that.options.tagMode !== "single") {
                     tag.remove();
                 } else {
                     that._updateTagListHTML();
@@ -467,9 +466,9 @@ var __meta__ = { // jshint ignore:line
         _clearValue: function() {
             var that = this;
 
-            if (that.options.tagMode === "single"){
+            if (that.options.tagMode === "single") {
                 that._clearSingleTagValue();
-            } else{
+            } else {
                 that.tagList.children(CHIP).each(function(index, tag) {
                     that._removeTag($(tag), false);
                 });
@@ -512,7 +511,7 @@ var __meta__ = { // jshint ignore:line
             var active = activeElement();
             var isActive = input[0] === active;
 
-            if(!isActive) {
+            if (!isActive) {
                 this.input.trigger("focus");
             }
         },
@@ -576,7 +575,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _filterSource: function(filter, force) {
-            if(!force) {
+            if (!force) {
                 force = this._retrieveData;
             }
             this._retrieveData = false;
@@ -596,7 +595,7 @@ var __meta__ = { // jshint ignore:line
                 listViewFilter = that.listView.dataSource.filter(),
                 listViewFilterValue;
 
-            if(listViewFilter && listViewFilter.filters.length > 0) {
+            if (listViewFilter && listViewFilter.filters.length > 0) {
                 listViewFilterValue = (listViewFilter.filters[0].value || "").toString().toLowerCase();
             }
 
@@ -616,7 +615,7 @@ var __meta__ = { // jshint ignore:line
             } else if (that._allowOpening()) {
 
                 //selects values in autoBind false and non virtual scenario on initial load
-                if (that._initialOpen && !that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])){
+                if (that._initialOpen && !that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])) {
                     that.value(that.value() || that._initialValues);
                 }
 
@@ -775,7 +774,7 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 dataSource = options.dataSource || {};
 
-            dataSource = isArray(dataSource) ? {data: dataSource} : dataSource;
+            dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
             dataSource.select = element;
             dataSource.fields = [{ field: options.dataTextField },
@@ -884,7 +883,7 @@ var __meta__ = { // jshint ignore:line
             var dir = 0;
             var activeItemIdx;
 
-            if(key !== keys.ENTER) {
+            if (key !== keys.ENTER) {
                 this._multipleSelection = false;
             }
 
@@ -957,7 +956,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (listView.items().length) {
-                    that._selectRange(0, listView.items().length -1);
+                    that._selectRange(0, listView.items().length - 1);
                 }
             } else if (key === keys.ENTER && visible) {
                 if (!listView.focus()) {
@@ -985,7 +984,7 @@ var __meta__ = { // jshint ignore:line
                 if (!$(listView.focus()).hasClass(SELECTEDCLASS)) {
                     that._activeItem = listView.focus();
                 }
-                that._select(listView.focus()).done(function () {
+                that._select(listView.focus()).done(function() {
                     that._change();
                 });
                 e.preventDefault();
@@ -1067,7 +1066,7 @@ var __meta__ = { // jshint ignore:line
             } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
                 e.preventDefault();
 
-                var direction = key === keys.PAGEDOWN ? 1: -1;
+                var direction = key === keys.PAGEDOWN ? 1 : -1;
                 listView.scrollWith(direction * listView.screenHeight());
             } else {
                 clearTimeout(that._typingTimeout);
@@ -1075,7 +1074,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _hideBusy: function () {
+        _hideBusy: function() {
             var that = this;
             clearTimeout(that._busy);
             that.input.attr("aria-busy", false);
@@ -1092,7 +1091,7 @@ var __meta__ = { // jshint ignore:line
             this._hideClear();
         },
 
-        _showBusy: function () {
+        _showBusy: function() {
             var that = this;
 
             that._request = true;
@@ -1283,13 +1282,13 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        updatePersistTagList: function(added, removed){
-            if(this.persistTagList.added &&
+        updatePersistTagList: function(added, removed) {
+            if (this.persistTagList.added &&
                 this.persistTagList.added.length === removed.length &&
                 this.persistTagList.removed &&
-                this.persistTagList.removed.length === added.length){
+                this.persistTagList.removed.length === added.length) {
                     this.persistTagList = false;
-             }else{
+             } else {
                  this.listView._removedAddedIndexes = this._old.slice();
                  this.persistTagList = {
                      added: added,
@@ -1298,7 +1297,7 @@ var __meta__ = { // jshint ignore:line
              }
         },
 
-        _selectValue: function (added, removed) {
+        _selectValue: function(added, removed) {
             var that = this;
             var total = that.dataSource.total();
             var tagList = that.tagList;
@@ -1307,7 +1306,7 @@ var __meta__ = { // jshint ignore:line
             var addedItem;
             var idx;
 
-            if(this.persistTagList){
+            if (this.persistTagList) {
                 this.updatePersistTagList(added, removed);
 
                 return;
@@ -1352,7 +1351,7 @@ var __meta__ = { // jshint ignore:line
             that._placeholder();
         },
 
-        _updateTagListHTML: function(){
+        _updateTagListHTML: function() {
             var that = this;
             var values = that.value();
             var total = that.dataSource.total();
@@ -1408,7 +1407,7 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _selectRange: function (startIndex, endIndex) {
+        _selectRange: function(startIndex, endIndex) {
             var that = this;
             var listView = this.listView;
             var maxSelectedItems = this.options.maxSelectedItems;
@@ -1419,11 +1418,11 @@ var __meta__ = { // jshint ignore:line
             var selectIndices = function(indices) {
                 listView.select(indices).done(function() {
                     indices.forEach(function(index) {
-                        var dataItem  = listView.dataItemByIndex(index);
+                        var dataItem = listView.dataItemByIndex(index);
                         var candidate = listView.element.children()[index];
                         var isSelected = $(candidate).hasClass("k-selected");
 
-                        that.trigger(isSelected ? SELECT : DESELECT, {dataItem: dataItem, item: $(candidate)});
+                        that.trigger(isSelected ? SELECT : DESELECT, { dataItem: dataItem, item: $(candidate) });
                     });
                     that._change();
                 });
@@ -1485,7 +1484,7 @@ var __meta__ = { // jshint ignore:line
                 "aria-autocomplete": autocomplete
             });
 
-            if(accessKey) {
+            if (accessKey) {
                 that._focused.attr("accesskey", accessKey);
             }
         },
@@ -1568,7 +1567,7 @@ var __meta__ = { // jshint ignore:line
                     icon: "arrow-s"
                 })));
 
-            if(this._arrow) {
+            if (this._arrow) {
                 this._arrow.remove();
                 this._arrow = null;
             }
@@ -1677,4 +1676,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

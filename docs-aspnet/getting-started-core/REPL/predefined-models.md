@@ -1,21 +1,37 @@
 ---
-title: Using Predefined Models
-page_title: Using Predefined Models
-description: Familiarize yourself with the predefined models available in the Telerik REPL tool.
+title: Predefined Models for REPL
+page_title: Predefined Models for REPL
+description: "Familiarize yourself with the predefined models available in the Telerik REPL tool."  
 slug: using_predefined_models_repl_aspnetcore
 permalink: /getting-started/repl/predefined-models
-position: 2
+position: 4
 ---
 
-## Using Predefined Models
+# Predefined Models for REPL
 
-Telerik REPL uses the predefined models available in the Telerik UI for ASP.NET Core demos. You can find them in your Telerik UI for ASP.NET Core installation folder, which should be at a location similar to the following:
+Telerik REPL uses the predefined models available in the Telerik UI for ASP.NET Core demos. 
 
-*C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core Rn YYYY\wrappers\aspnetcore\Examples\AspNet.Core\VSYYYY\Kendo.Mvc.Examples\Models*
+If you have [installed Telerik UI by using the MSI]({% slug msi_install_aspnetmvc6_aspnetmvc %}), you will find them in your Telerik UI for ASP.NET Core installation folder, for example, *C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core Rn YYYY\wrappers\aspnetcore\Examples\AspNet.Core\VSYYYY\Kendo.Mvc.Examples\Models*.
 
-Here is an extensive list containing the available models:
+The following table represent all available models.
 
-**Activity.cs**
+|       |       |       |       |
+|------|------|------|------|
+|[Activity.cs](#activitycs)|[AntennaGainItem.cs](#antennagainitemcs)|[AprilSales.cs](#aprilsalescs)|[AspNetMvcDescription.cs](#aspnetmvcdescriptioncs)|
+[BarChartsLocalDataViewModel.cs](#barchartslocaldataviewmodelcs)|[BaseUnit.cs](#baseunitcs)|[BlogComments.cs](#blogcommentscs)|[BubbleChartsGroupedDataViewModel.cs](#bubblechartsgroupeddataviewmodelcs)|
+|[BudgetReportItem.cs](#budgetreportitemcs)|[BulletChartItem.cs](#bulletchartitemcs)|[BulletChartLocalDataViewModel.cs](#bulletchartlocaldataviewmodelcs)|[CaptchaModel.cs](#captchamodelcs)|
+|[CardViewModel.cs](#cardviewmodelcs)|[CashFlowData.cs](#cashflowdatacs)|[Category.cs](#categorycs)|[CategoryItem.cs](#categoryitemcs)|
+|[CategoryViewModel.cs](#categoryviewmodelcs)|[ChartCategoryPoint.cs](#chartcategorypointcs)|[ChartDataRepository.BoxPlot.cs](#chartdatarepositoryboxplotcs)|[ChartDataRepository.cs](#chartdatarepositorycs)|
+|[ChartDataRepository.Radar.cs](#chartdatarepositoryradarcs)|[ChartDataRepository.Stock.cs](#chartdatarepositorystockcs)|[ChartOverviewDataRepository.cs](#chartoverviewdatarepositorycs)|[ChartScatterPoint.cs](#chartscatterpointcs)|
+|[CheckBoxGroupViewModel.cs](#checkboxgroupviewmodelcs)|[Client.cs](#clientcs)|[Column.cs](#columncs)|[ColumnsViewModel.cs](#columnsviewmodelcs)|
+|[CompensationStats.cs](#compensationstatscs)|[Config.cs](#configcs)|[CorporateData.cs](#corporatedatacs)|[Country.cs](#countrycs)|
+|[CountryViewModel.cs](#countryviewmodelcs)|[Customer.cs](#customercs)|[CustomerDemographic.cs](#customerdemographiccs)|[CustomerViewModel.cs](#customerviewmodelcs)|
+|[CustomValidationProductViewModel.cs](#customvalidationproductviewmodelcs)|[DataFilter.cs](#datafiltercs)|[DatePoint.cs](#datepointcs)|[DependencyViewModel.cs](#dependencyviewmodelcs)|
+|[DestinationViewModel.cs](#destinationviewmodelcs)|[DetailProduct.cs](#detailproductcs)|[DetailProductService.cs](#detailproductservicecs)|[DetailProductViewModel.cs](#detailproductviewmodelcs)|
+|[DiagramConnectionService.cs](#diagramconnectionservicecs)|[DiagramDataRepository.cs](#diagramdatarepositorycs)|[DiagramNode.cs](#diagramnodecs)|[DiagramShapeService.cs](#diagramshapeservicecs)|
+|
+
+### Activity.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models.Scheduler
@@ -56,7 +72,8 @@ namespace Kendo.Mvc.Examples.Models.Scheduler
     }
 }
 ```
-**AntennaGainItem.cs**
+
+### AntennaGainItem.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models.Chart
@@ -74,7 +91,8 @@ namespace Kendo.Mvc.Examples.Models.Chart
     }
 }
 ```
-**AprilSales.cs**
+
+### AprilSales.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models
@@ -98,7 +116,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**AspNetMvcDescription.cs**
+
+### AspNetMvcDescription.cs
 
 ```C#
 using System;
@@ -208,7 +227,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**BarChartsLocalDataViewModel.cs**
+
+### BarChartsLocalDataViewModel.cs
 
 ```C#
 using System;
@@ -231,7 +251,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**BaseUnit.cs**
+
+### BaseUnit.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models
@@ -247,7 +268,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**BlogComments.cs**
+
+### BlogComments.cs
 
 ```C#
 using System;
@@ -277,7 +299,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**BubbleChartsGroupedDataViewModel.cs**
+
+### BubbleChartsGroupedDataViewModel.cs
 
 ```C#
 using System;
@@ -302,7 +325,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**BudgetReportItem.cs**
+
+### BudgetReportItem.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models
@@ -322,7 +346,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**BulletChartItem.cs**
+
+### BulletChartItem.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models
@@ -335,7 +360,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**BulletChartLocalDataViewModel.cs**
+
+### BulletChartLocalDataViewModel.cs
 
 ```C#
 using System;
@@ -358,7 +384,7 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**CaptchaModel.cs**
+### CaptchaModel.cs
 
 ```C#
 using System;
@@ -385,7 +411,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**CardViewModel.cs**
+
+### CardViewModel.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models.TaskBoard
@@ -408,7 +435,7 @@ namespace Kendo.Mvc.Examples.Models.TaskBoard
 }
 
 ```
-**CashFlowData.cs**
+### CashFlowData.cs
 
 ```C#
 using System;
@@ -426,7 +453,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**Category.cs**
+
+### Category.cs
 
 ```C#
 //------------------------------------------------------------------------------
@@ -462,7 +490,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**CategoryItem.cs**
+
+### CategoryItem.cs
 
 ```C#
 using System;
@@ -479,7 +508,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**CategoryViewModel.cs**
+
+### CategoryViewModel.cs
 
 ```C#
 using System;
@@ -496,7 +526,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**ChartCategoryPoint.cs**
+
+### ChartCategoryPoint.cs
 
 ```C#
 using System;
@@ -513,7 +544,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**ChartDataRepository.BoxPlot.cs**
+
+### ChartDataRepository.BoxPlot.cs
 
 ```C#
 using System.Collections.Generic;
@@ -574,7 +606,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**ChartDataRepository.cs**
+
+### ChartDataRepository.cs
 
 ```C#
 using System.Collections.Generic;
@@ -1482,7 +1515,7 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**ChartDataRepository.Polar.cs**
+### (.*)
 
 ```C#
 using System.Collections.Generic;
@@ -1556,7 +1589,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**ChartDataRepository.Radar.cs**
+
+### ChartDataRepository.Radar.cs
 
 ```C#
 using System.Collections.Generic;
@@ -1713,7 +1747,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**ChartDataRepository.Stock.cs**
+
+### ChartDataRepository.Stock.cs
 
 ```C#
 using System.Collections.Generic;
@@ -2056,7 +2091,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**ChartOverviewDataRepository.cs**
+
+### ChartOverviewDataRepository.cs
 
 ```C#
 using System;
@@ -2117,7 +2153,8 @@ namespace Kendo.Mvc.Examples.Models.Chart
     }
 }
 ```
-**ChartScatterPoint.cs**
+
+### ChartScatterPoint.cs
 
 ```C#
 using System;
@@ -2134,7 +2171,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**CheckBoxGroupViewModel.cs**
+
+### CheckBoxGroupViewModel.cs
 
 ```C#
 using Kendo.Mvc.UI;
@@ -2155,7 +2193,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**Client.cs**
+
+### Client.cs
 
 ```C#
 using System;
@@ -2179,7 +2218,8 @@ namespace Kendo.Mvc.Examples.Models.SpreadStreamProcessing
     }
 }
 ```
-**Column.cs**
+
+### Column.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models.TaskBoard
@@ -2195,7 +2235,8 @@ namespace Kendo.Mvc.Examples.Models.TaskBoard
 }
 
 ```
-**ColumnsViewModel.cs**
+
+### ColumnsViewModel.cs
 
 ```C#
 using System;
@@ -2213,7 +2254,8 @@ namespace Kendo.Mvc.Examples.Models.WordsProcessing
     }
 }
 ```
-**CompensationStats.cs**
+
+### CompensationStats.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models
@@ -2314,7 +2356,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**Config.cs**
+
+### Config.cs
 
 ```C#
 using System;
@@ -2336,7 +2379,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**CorporateData.cs**
+
+### CorporateData.cs
 
 ```C#
 using System;
@@ -2367,7 +2411,8 @@ namespace Kendo.Mvc.Examples.Models.Chart
 }
 
 ```
-**Country.cs**
+
+### Country.cs
 
 ```C#
 //------------------------------------------------------------------------------
@@ -2400,7 +2445,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**CountryViewModel.cs**
+
+### CountryViewModel.cs
 
 ```C#
 using System;
@@ -2418,7 +2464,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**Customer.cs**
+
+### Customer.cs
 
 ```C#
 //------------------------------------------------------------------------------
@@ -2462,7 +2509,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**CustomerDemographic.cs**
+
+### CustomerDemographic.cs
 
 ```C#
 //------------------------------------------------------------------------------
@@ -2494,7 +2542,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**CustomerViewModel.cs**
+
+### CustomerViewModel.cs
 
 ```C#
 using System;
@@ -2521,7 +2570,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**CustomValidationProductViewModel.cs**
+
+### CustomValidationProductViewModel.cs
 
 ```C#
 using System;
@@ -2568,7 +2618,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**DataFilter.cs**
+
+### DataFilter.cs
 
 ```C#
 using System.Collections.Generic;
@@ -2607,7 +2658,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**DatePoint.cs**
+
+### DatePoint.cs
 
 ```C#
 using System;
@@ -2628,7 +2680,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**DependencyViewModel.cs**
+
+### DependencyViewModel.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models.Gantt
@@ -2660,7 +2713,8 @@ namespace Kendo.Mvc.Examples.Models.Gantt
     }
 }
 ```
-**DestinationViewModel.cs**
+
+### DestinationViewModel.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models
@@ -2678,7 +2732,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**DetailProduct.cs**
+
+### DetailProduct.cs
 
 ```C#
 //------------------------------------------------------------------------------
@@ -2716,7 +2771,8 @@ namespace Kendo.Mvc.Examples.Models
 }
 
 ```
-**DetailProductService.cs**
+
+### DetailProductService.cs
 
 ```C#
 using System;
@@ -2976,7 +3032,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**DetailProductViewModel.cs**
+
+### DetailProductViewModel.cs
 
 ```C#
 using System;
@@ -3071,7 +3128,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**DiagramConnectionService.cs**
+
+### DiagramConnectionService.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models
@@ -3198,7 +3256,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**DiagramDataRepository.cs**
+
+### DiagramDataRepository.cs
 
 ```C#
 using System.Collections.Generic;
@@ -3267,7 +3326,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**DiagramNode.cs**
+
+### DiagramNode.cs
 
 ```C#
 using System;
@@ -3292,7 +3352,8 @@ namespace Kendo.Mvc.Examples.Models
     }
 }
 ```
-**DiagramShapeService.cs**
+
+### DiagramShapeService.cs
 
 ```C#
 namespace Kendo.Mvc.Examples.Models

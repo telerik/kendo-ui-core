@@ -5,7 +5,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge theme color', function () {
+    describe('kendo.ui.Badge theme color', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -66,7 +66,7 @@
         test('badge.setOptions() does not set class if themeColor is empty string', function() {
             badge = new Badge(span, { themeColor: 'warning' });
 
-            badge.setOptions({ themeColor: ''});
+            badge.setOptions({ themeColor: '' });
 
             assert.equal(badge.themeColor(), '');
             assert.equal(badge.element.hasClass('k-badge-'), false);

@@ -4,9 +4,9 @@
  * `kendo-drawing` repository, you should make your changes there and
  * run `src-modules/sync.sh` in this repository.
  */
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core" ], f);
-})(function(){
+})(function() {
 
     var __meta__ = { // jshint ignore:line
         id: "color",
@@ -78,18 +78,18 @@ var namedColors = {
 
 var browser = support.browser;
 
-var matchNamedColor = function (color) {
+var matchNamedColor = function(color) {
     var colorNames = Object.keys(namedColors);
     colorNames.push("transparent");
 
     var regexp = new RegExp("^(" + colorNames.join("|") + ")(\\W|$)", "i");
-    matchNamedColor = function (color) { return regexp.exec(color); };
+    matchNamedColor = function(color) { return regexp.exec(color); };
 
     return regexp.exec(color);
 };
 
 var BaseColor = Class.extend({
-    init: function() {  },
+    init: function() { },
 
     toHSV: function() { return this; },
 
@@ -580,4 +580,4 @@ kendo.deepExtend(kendo, {
     Color: Color
 });
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

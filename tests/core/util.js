@@ -38,13 +38,13 @@
         var toCamelCase = kendo.toCamelCase;
 
         it("replaces dashes with next letter in upper case", function() {
-            assert.equal(toCamelCase("foo-bar-baz"), "fooBarBaz")
+            assert.equal(toCamelCase("foo-bar-baz"), "fooBarBaz");
         });
 
         var toHyphens = kendo.toHyphens;
 
         it("replaces ...-a... with ...A...", function() {
-            assert.equal(toHyphens("fooBarBaz"), "foo-bar-baz")
+            assert.equal(toHyphens("fooBarBaz"), "foo-bar-baz");
         });
 
         it("widgetInstance supports array of namespaces as an argument", function() {

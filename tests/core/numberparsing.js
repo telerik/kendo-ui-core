@@ -1,4 +1,4 @@
-(function(){
+(function() {
 
 var parseF = kendo.parseFloat;
 var customCulture = {
@@ -28,7 +28,7 @@ var customCulture = {
     }
 };
 
-describe("number parsing", function () {
+describe("number parsing", function() {
     beforeEach(function() {
         kendo.cultures["custom"] = customCulture;
     });

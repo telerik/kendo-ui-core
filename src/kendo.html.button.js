@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([
         "./kendo.html.base"
     ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "html.button",
@@ -13,7 +13,7 @@ var __meta__ = { // jshint ignore:line
     features: []
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         HTMLBase = kendo.html.HTMLBase,
 
@@ -21,7 +21,7 @@ var __meta__ = { // jshint ignore:line
         KBUTTONICON = "k-button-icon",
         KBUTTONTEXT = "k-button-text";
 
-    var renderButton = function (element, options) {
+    var renderButton = function(element, options) {
         if (arguments[0] === undefined || $.isPlainObject(arguments[0])) {
             options = element;
             element = $("<button></button>");
@@ -31,7 +31,7 @@ var __meta__ = { // jshint ignore:line
     };
 
     var HTMLButton = HTMLBase.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
             HTMLBase.fn.init.call(that, element, options);
             that.wrapper = that.element.addClass(KBUTTON);
@@ -72,7 +72,7 @@ var __meta__ = { // jshint ignore:line
 
                 element.contents().filter(function() {
                     return (!$(this).hasClass("k-sprite") && !$(this).hasClass("k-icon") && !$(this).hasClass("k-image"));
-                }).each(function(idx, el){
+                }).each(function(idx, el) {
                     if (el.nodeType == 1 || el.nodeType == 3 && kendo.trim(el.nodeValue).length > 0) {
                         isEmpty = false;
                     }
@@ -110,7 +110,7 @@ var __meta__ = { // jshint ignore:line
 
             element.contents().filter(function() {
                 return (!$(this).hasClass(KBUTTONICON) && !$(this).hasClass("k-sprite") && !$(this).hasClass("k-icon") && !$(this).hasClass("k-image"));
-            }).each(function(idx, el){
+            }).each(function(idx, el) {
                 if (el.nodeType == 1 || el.nodeType == 3 && kendo.trim(el.nodeValue).length > 0) {
                     if (el.nodeType === 3) {
                         var parent = el.parentNode;
@@ -147,4 +147,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

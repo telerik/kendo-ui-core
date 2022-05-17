@@ -2,7 +2,7 @@
     var AutoComplete = kendo.ui.AutoComplete,
         input;
 
-    describe("kendo.ui.AutoComplete messages", function () {
+    describe("kendo.ui.AutoComplete messages", function() {
         beforeEach(function() {
             input = $("<input />").appendTo(Mocha.fixture);
         });

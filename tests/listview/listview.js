@@ -136,7 +136,7 @@
         });
 
         it("contentElement is rendered correctly", function() {
-            var dom = setup({ contentElement:"ul", template: "<li>1</li>", altTemplate: "<li>2</li>"});
+            var dom = setup({ contentElement: "ul", template: "<li>1</li>", altTemplate: "<li>2</li>" });
 
             assert.equal(dom.find(".k-listview-content")[0].nodeName.toLocaleLowerCase(), "ul");
         });
@@ -509,7 +509,7 @@
             createListView(element, { selectable: "multiple" });
 
             element.find(".k-listview-content").children().css("height", 100);
-            wrapper.scrollTop(wrapper[0].scrollHeight);;
+            wrapper.scrollTop(wrapper[0].scrollHeight);
             var initialScrollTop = wrapper.scrollTop();
 
             element.find(".k-listview-content").children().last().mousedown();
@@ -518,14 +518,14 @@
         });
 
         it("_setContentHeight sets the height of the content when listview is scrollable", function() {
-            var lv = createListView(element, {scrollable:{endless: true}, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
+            var lv = createListView(element, { scrollable: { endless: true }, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
 
             assert.equal(lv.content.height(), lv.wrapper.innerHeight());
         });
 
         it("init calls _setContentHeight", function() {
             var lv = createListView(element, {
-                scrollable:{
+                scrollable: {
                     endless: true
                 },
                 height: 400,
@@ -542,7 +542,7 @@
         });
 
         it("refresh calls _setContentHeight", function() {
-            var lv = createListView(element, {scrollable:{endless: true}, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
+            var lv = createListView(element, { scrollable: { endless: true }, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
 
             var lvStub = stub(lv, {
                 _setContentHeight: $.noop

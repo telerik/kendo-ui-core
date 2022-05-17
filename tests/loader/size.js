@@ -6,7 +6,7 @@
     var span;
     var loader;
 
-    describe('kendo.ui.Loader size', function () {
+    describe('kendo.ui.Loader size', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -37,7 +37,7 @@
                 loader = new Loader(span, { size: 'size' });
                 var sizeAbbr = loader.options.sizes[size] === undefined ? size : loader.options.sizes[size];
 
-                loader.setOptions({size: size});
+                loader.setOptions({ size: size });
 
                 assert.equal(loader._size, size);
                 assert.equal(loader.element.hasClass(`k-loader-${sizeAbbr}`), true);

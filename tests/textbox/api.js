@@ -11,7 +11,7 @@
         });
 
         it("enable(false) should disable input element", function() {
-            var textbox = new TextBox(input)
+            var textbox = new TextBox(input);
 
             textbox.enable(false);
 
@@ -19,7 +19,7 @@
         });
 
         it("enable(true) should remove disable attributes", function() {
-            var textbox = new TextBox(input)
+            var textbox = new TextBox(input);
 
             textbox.enable(false);
             textbox.enable(true);
@@ -40,7 +40,7 @@
         });
 
         it("readonly(true) makes input element readonly", function() {
-            var textbox = new TextBox(input)
+            var textbox = new TextBox(input);
 
             textbox.readonly(true);
 
@@ -49,7 +49,7 @@
         });
 
         it("readonly(false) should remove readonly attributes", function() {
-            var textbox = new TextBox(input)
+            var textbox = new TextBox(input);
 
             textbox.readonly(true);
             textbox.readonly(false);

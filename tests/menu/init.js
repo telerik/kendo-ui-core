@@ -1,13 +1,13 @@
 (function() {
 
 function getRootItem(index) {
-   return $('#menu').find('> .k-item > .k-link').eq(index)
+   return $('#menu').find('> .k-item > .k-link').eq(index);
 }
 
 var menu;
 
-describe("menu init", function () {
-    beforeEach(function () {
+describe("menu init", function() {
+    beforeEach(function() {
         Mocha.fixture.append(
             '<ul id="menu">' +
             '   <li>' +
@@ -88,7 +88,7 @@ it('menu renders aria-haspopup on items with submenu', function() {
     '   <li>' +
     '       Item 2' +
     '       <ul>' +
-    '           <li>Sub Item 1'+
+    '           <li>Sub Item 1' +
     '               <ul>' +
     '                   <li>Sub Item 1</li>' +
     '               </ul>' +
@@ -113,7 +113,7 @@ it('menu renders aria-haspopup on items with submenu', function() {
 
     var m = new kendo.ui.Menu(dom);
 
-    assert.equal(m.element.find("[aria-haspopup]").length, 4)
+    assert.equal(m.element.find("[aria-haspopup]").length, 4);
     m.destroy();
 });
 
@@ -128,7 +128,7 @@ it('menu does not wrap content of items with omit-wrap', function() {
     '   <li>' +
     '       Item 2' +
     '       <ul>' +
-    '           <li>Sub Item 1'+
+    '           <li>Sub Item 1' +
     '               <ul>' +
     '                   <li>Sub Item 1</li>' +
     '               </ul>' +
@@ -153,8 +153,8 @@ it('menu does not wrap content of items with omit-wrap', function() {
 
     var m = new kendo.ui.Menu(dom);
 
-    assert.isNotOk(m.element.find("["+kendo.attr("omit-wrap")+"]").hasClass('k-menu-item'));
-    assert.isNotOk(m.element.find("["+kendo.attr("omit-wrap")+"] > span").length);
+    assert.isNotOk(m.element.find("[" + kendo.attr("omit-wrap") + "]").hasClass('k-menu-item'));
+    assert.isNotOk(m.element.find("[" + kendo.attr("omit-wrap") + "] > span").length);
 
     m.destroy();
 });

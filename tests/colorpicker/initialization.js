@@ -90,7 +90,7 @@
                 .appendTo(Mocha.fixture)
                 .find("input").kendoColorPicker({
                     open: function() {
-                        assert.isOk(true)
+                        assert.isOk(true);
                     }
                 }).end()
                 .find("label").click();
@@ -114,7 +114,7 @@
                 .appendTo(Mocha.fixture)
                 .find("input").prop("disabled", true).kendoColorPicker({
                     open: function() {
-                        assert.isOk(true)
+                        assert.isOk(true);
                     }
                 }).end()
                 .find("label").click();

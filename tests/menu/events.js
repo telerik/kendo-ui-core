@@ -11,8 +11,8 @@ function getRootItem(index) {
 var menu, isRaised,
     CLICK = "click";
 
-describe("menu events", function () {
-    beforeEach(function () {
+describe("menu events", function() {
+    beforeEach(function() {
         Mocha.fixture.append(
 '            <ul id="menu" style="position: absolute; visibility: hidden;">' +
 '                <li>ASP.NET MVC' +
@@ -91,7 +91,7 @@ describe("menu events", function () {
     });
 
 it("close event can be canceled", function(done) {
-    menu.bind("close", function (e) { e.preventDefault(); });
+    menu.bind("close", function(e) { e.preventDefault(); });
 
     menu.bind("activate", function() {
         menu.close(menu.element.children("li:eq(2)"));
@@ -113,7 +113,7 @@ it("activate event is fired after open", function(done) {
 
     menu.open(menu.element.children("li:eq(1)"));
 
-    setTimeout(function () {
+    setTimeout(function() {
         assert.equal(activated, true);
         done();
     }, 10);
@@ -145,10 +145,10 @@ it('clicking disabled item should not raise onSelect event on parent item', func
 });
 
 it("open event can be canceled", function(done) {
-    menu.bind("open", function (e) { e.preventDefault(); });
+    menu.bind("open", function(e) { e.preventDefault(); });
     menu.open(menu.element.children("li:first"));
 
-    setTimeout(function () {
+    setTimeout(function() {
         assert.equal(menu.element.find(">li:first ul").is(":visible"), false);
         done();
     }, 10);
@@ -158,7 +158,7 @@ it("open event can be canceled", function(done) {
 it("item select is triggered when items are loaded via dataSource", function() {
     var menuDiv = $("<div id='dataBoundMenu'></div>").appendTo(Mocha.fixture);
     var selectCount = 0;
-    var raiseCount = function () {
+    var raiseCount = function() {
         selectCount++;
     };
     $("#dataBoundMenu").kendoMenu({
@@ -183,7 +183,6 @@ it("item select is triggered when items are loaded via dataSource", function() {
     });
 
 
-
     var dataBoundMenu = $("#dataBoundMenu").data("kendoMenu");
 
     dataBoundMenu.dataSource.view()[0].load();
@@ -204,7 +203,7 @@ it("item select is triggered when items are loaded via append", function() {
     menu.append([
         {
             text: "New Item",
-            select: function(e){
+            select: function(e) {
                 selectCount++;
             }
         }
@@ -220,7 +219,7 @@ it("item select is triggered when items are loaded via insertAfter", function() 
     menu.insertAfter(
         [{
             text: "New Item",
-            select: function(e){
+            select: function(e) {
                 selectCount++;
             }
         }],
@@ -237,7 +236,7 @@ it("item select is triggered when items are loaded via insertBefore", function()
     menu.insertBefore(
         [{
             text: "New Item",
-            select: function(e){
+            select: function(e) {
                 selectCount++;
             }
         }],
@@ -255,7 +254,7 @@ it("item select is triggered when item content is clicked", function() {
         [{
             text: "<b>New Item</b>",
             encoded: false,
-            select: function(){
+            select: function() {
                 selectCount++;
             }
         }],
@@ -270,7 +269,7 @@ it("item select is triggered when item content is clicked", function() {
 it("dataBound event", function() {
     var menuDiv = $("<div id='dataBoundMenu'></div>").appendTo(Mocha.fixture);
     var selectCount = 0;
-    var raiseCount = function () {
+    var raiseCount = function() {
         selectCount++;
     };
     $("#dataBoundMenu").kendoMenu({
@@ -291,7 +290,6 @@ it("dataBound event", function() {
         ],
         dataBound: raiseCount
     });
-
 
 
     var dataBoundMenu = $("#dataBoundMenu").data("kendoMenu");

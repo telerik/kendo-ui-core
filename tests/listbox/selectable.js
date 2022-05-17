@@ -4,7 +4,7 @@
     var container;
     var listbox;
 
-    describe("Selectable API", function () {
+    describe("Selectable API", function() {
         beforeEach(function() {
             container = $("<select />").appendTo(Mocha.fixture);
         });
@@ -127,7 +127,7 @@
     });
 });
 
-    describe("Selectable API", function () {
+    describe("Selectable API", function() {
         beforeEach(function() {
             container = $("<select />").appendTo(Mocha.fixture);
             listbox = new ListBox(container, {

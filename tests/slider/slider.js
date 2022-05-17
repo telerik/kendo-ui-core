@@ -342,7 +342,6 @@
                 });
 
 
-
             slider.resize();
             slider.bind("change", function() {
                 change = true;

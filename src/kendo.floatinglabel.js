@@ -1,8 +1,8 @@
-(function (f, define) {
+(function(f, define) {
     define(["./kendo.core"], f);
-})(function () {
+})(function() {
 
-var __meta__ = {// jshint ignore:line
+var __meta__ = { // jshint ignore:line
     id: "floatinglabel",
     name: "FloatingLabel",
     category: "framework",
@@ -10,7 +10,7 @@ var __meta__ = {// jshint ignore:line
     hidden: true
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         ui = kendo.ui,
@@ -23,7 +23,7 @@ var __meta__ = {// jshint ignore:line
         STATEREADONLY = "k-readonly";
 
     var FloatingLabel = Widget.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
@@ -60,7 +60,7 @@ var __meta__ = {// jshint ignore:line
             });
         },
 
-        refresh: function () {
+        refresh: function() {
             var that = this;
             var element = that.element;
 
@@ -112,4 +112,4 @@ var __meta__ = {// jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function (a1, a2, a3) { (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

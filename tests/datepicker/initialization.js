@@ -5,7 +5,7 @@ var dateview;
 var anchor;
 var div;
 
-describe("kendo.ui.DateView initialization", function () {
+describe("kendo.ui.DateView initialization", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
 
@@ -67,7 +67,7 @@ it("DateView persist focused value when calendar navigate", function() {
 var input;
 var DatePicker = kendo.ui.DatePicker;
 
-describe("kendo.ui.DatePicker initialization", function () {
+describe("kendo.ui.DatePicker initialization", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
 
@@ -132,7 +132,7 @@ it("create dateview", function() {
 });
 
 it("dateView should have correct options", function() {
-    var datepicker = input.kendoDatePicker({open: function() {}, close: $.noop, showWeekNumber: true}).data("kendoDatePicker"),
+    var datepicker = input.kendoDatePicker({ open: function() {}, close: $.noop, showWeekNumber: true }).data("kendoDatePicker"),
         dateView = datepicker.dateView,
         options = dateView.options,
         dpOptions = datepicker.options;
@@ -177,7 +177,7 @@ it("DatePicker wire icon click", function() {
 });
 
 it("DatePicker initializes dateInput with initial value", function() {
-    var datepicker = input.kendoDatePicker({ dateInput: true, value: new Date(2000, 10, 10)}).data("kendoDatePicker");
+    var datepicker = input.kendoDatePicker({ dateInput: true, value: new Date(2000, 10, 10) }).data("kendoDatePicker");
 
     assert.equal(datepicker.element.val(), "11/10/2000");
 });
@@ -336,7 +336,7 @@ if (!kendo.support.touch) {
 }
 
 it("DatePicker sets dates property of the calendar", function() {
-    var dates =  [new Date(2000, 10, 10)],
+    var dates = [new Date(2000, 10, 10)],
         datepicker = input.kendoDatePicker({
             dates: dates
         }).data("kendoDatePicker");
@@ -349,7 +349,7 @@ it("DatePicker sets dates property of the calendar", function() {
 it("DatePicker honors readonly attribute", function() {
     var datepicker = input.attr("readonly", true).kendoDatePicker().data("kendoDatePicker");
 
-    stub(datepicker.dateView, {toggle: datepicker.dateView.toggle});
+    stub(datepicker.dateView, { toggle: datepicker.dateView.toggle });
 
     datepicker.wrapper.find(".k-select").click();
 
@@ -396,8 +396,8 @@ it("DatePicker sets max from max attribute", function() {
 
 it("DatePicker parseFormats contains default ISO format if no parseFromats are configured", function() {
     var datepicker = input.kendoDatePicker().data("kendoDatePicker");
-    var ISOFormat = $.inArray('yyyy-MM-dd', datepicker.options.parseFormats) > -1
-    assert.isOk(ISOFormat)
+    var ISOFormat = $.inArray('yyyy-MM-dd', datepicker.options.parseFormats) > -1;
+    assert.isOk(ISOFormat);
 });
 
 it("DatePicker max and min values are reset to initial when form is reset", function() {
@@ -405,7 +405,7 @@ it("DatePicker max and min values are reset to initial when form is reset", func
     var datepicker = input.kendoDatePicker({
         min: new Date(2000, 0, 1),
         max: new Date(2000, 0, 2)
-    }).data("kendoDatePicker")
+    }).data("kendoDatePicker");
 
     datepicker.setOptions({
         max: new Date(2000, 0, 4)

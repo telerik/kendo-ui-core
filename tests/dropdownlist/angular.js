@@ -1,5 +1,5 @@
-(function () {
-    describe("DropDownList AngularJS integration", function () {
+(function() {
+    describe("DropDownList AngularJS integration", function() {
         afterEach(function() {
              kendo.destroy(Mocha.fixture);
         });
@@ -187,7 +187,7 @@
                         e.sender.trigger("change");
                     });
                 }
-            }
+            };
         });
 
         Mocha.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-options="options" k-ng-model=selectedColor></select></div>');
@@ -247,7 +247,7 @@
             $scope.colors = new kendo.data.DataSource({ data: colors }),
             $scope.data = {
                 color: null
-            }
+            };
 
             $scope.clear = function() {
                 $scope.$apply(function() {

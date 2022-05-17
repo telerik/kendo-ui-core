@@ -32,11 +32,16 @@ tutorials/*,
 troubleshoot/troubleshooting.md,
 troubleshoot/troubleshooting-validation.md,
 troubleshoot/troubleshooting-scaffolding.md,
+installation-mvc/*,
+vs-integration-mvc/*,
 asp-net-mvc-3.md,
 asp-net-mvc-4.md,
+html-helpers/helper-basics/fundamentals-mvc.md,
+html-helpers/helper-basics/vb.md,
 html-helpers/hybrid/*,
 html-helpers/charts/scaffolding.md,
 html-helpers/data-management/grid/scaffolding.md,
+html-helpers/datasource/custom-datasource.md,
 html-helpers/navigation/treeview/scaffolding.md,
 html-helpers/scheduling/scheduler/scaffolding.md,
 html-helpers/data-management/spreadsheet/spreadsheet-processing.md,
@@ -94,24 +99,51 @@ navigation:
      "getting-started/installation":
         title: "Download and Installation"
         position: 5
-     "installation/vs-integration":
+     "vs-integration":
         title: "Visual Studio Integration"
-        position: 10
-     "installation/vs-code-integration":
-        title: "Visual Studio Code Integration"
-        position: 11
-     "installation/scripts":
-        title: "Creating Custom Bundles"
-        position: 12
+        position: 5
+     "vs-integration-mvc":
+        title: "Visual Studio Integration"
+        position: 5
+     "vs-integration/vs-code-integration":
+        title: "VS Code Integration"
+        position: 20
+     "installation/adding-client-side-resources/scripts":
+        title: "Creating Custom Script Bundles"
+        position: 5
      "installation":
         title: "Installation"
         position: 4
-     "compatibility":
-        title: "Compatibility"
-        position: 3
-     "getting-started/helper-basics":
+     "installation-mvc":
+        title: "Installation"
+        position: 4
+     "installation/system-requirements":
+        title: "System Requirements"
+        position: 1
+     "installation-mvc/system-requirements":
+        title: "System Requirements"
+        position: 1         
+     "installation/adding-client-side-resources":
+         title: "Providing Client-Side Resources"
+         position: 6
+     "installation-mvc/adding-client-side-resources":
+         title: "Providing Client-Side Resources"
+         position: 6
+     "installation-mvc/adding-client-side-resources/scripts":
+        title: "Creating Custom Script Bundles"
+        position: 5
+     "html-helpers/helper-basics":
         title: "Working with Helpers"
-        position: 6
+        position: 2
+     "html-helpers/helper-basics-mvc":
+        title: "Working with Helpers"
+        position: 2
+     "installation/upgrading":
+        title: "Upgrading"
+        position: 20
+     "installation-mvc/upgrading":
+        title: "Upgrading"
+        position: 20
      "getting-started/repl":
         title: "Telerik REPL"
         position: 9
@@ -209,7 +241,7 @@ navigation:
         position: 60
      "html-helpers":
         title: "Components"
-        position: 5
+        position: 6
      "html-helpers/datasource":
         title: "Data Source"
      "html-helpers/data-management":

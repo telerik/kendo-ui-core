@@ -5,7 +5,7 @@
     var span;
     var loader;
 
-    describe('kendo.ui.Loader initialization', function () {
+    describe('kendo.ui.Loader initialization', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });

@@ -1,5 +1,5 @@
 /* JS for All Kendo UI Components Simplified Chinese (zh-CN) Language Pack | Written by IKKI | 2018-02-03 */
-(function ($, undefined) {
+(function($, undefined) {
 
     /* FlatColorPicker messages */
     if (kendo.ui.FlatColorPicker) {
@@ -208,7 +208,7 @@
                 "search": "搜索"
             });
     }
-    
+
     /* Filter messages */
     if (kendo.ui.Filter) {
         kendo.ui.Filter.prototype.options.messages =
@@ -758,7 +758,7 @@
                 }
             });
     }
-    
+
     /* TimezoneEditor options */
     if (kendo.ui.TimezoneEditor) {
         kendo.ui.TimezoneEditor.prototype.options =
@@ -842,7 +842,7 @@
                 }
             });
     }
-    
+
     if (kendo.ui.DayView) {
         kendo.ui.DayView.prototype.options.messages =
             $.extend(true, kendo.ui.DayView.prototype.options.messages, {
@@ -1190,10 +1190,10 @@
                         "doesnotmatch": "文本不等于"
                     },
                     "date": {
-                        "eq":  "日期等于",
+                        "eq": "日期等于",
                         "neq": "日期不等于",
-                        "lt":  "日期早于",
-                        "gt":  "日期晚于"
+                        "lt": "日期早于",
+                        "gt": "日期晚于"
                     },
                     "number": {
                         "eq": "数字等于",
@@ -1332,7 +1332,7 @@
                 }
             });
     }
-    
+
     if (kendo.spreadsheet && kendo.spreadsheet.messages.workbook) {
         kendo.spreadsheet.messages.workbook =
             $.extend(true, kendo.spreadsheet.messages.workbook, {
@@ -1365,7 +1365,7 @@
                 "dragHandleTitle": "拖动"
             });
     }
-    
+
     /* RangeSlider options */
     if (kendo.ui.RangeSlider) {
         kendo.ui.RangeSlider.prototype.options =
@@ -1484,7 +1484,7 @@
                 "loading": "载入中..."
             });
     }
-    
+
     /* VirtualList options */
     if (kendo.ui.VirtualList) {
         kendo.ui.VirtualList.prototype.options =
@@ -1508,7 +1508,7 @@
                 "weekColumnHeader": "周"
             });
     }
-    
+
     /* MultiViewCalendar messages */
     if (kendo.ui.MultiViewCalendar) {
         kendo.ui.MultiViewCalendar.prototype.options.messages =
@@ -1585,7 +1585,7 @@
                 "placeholder": "请输入..."
             });
     }
-    
+
     if (kendo.chat.ChatView) {
         kendo.chat.ChatView.prototype.options.messages =
             $.extend(true, kendo.chat.ChatView.prototype.options.messages, {
@@ -1603,7 +1603,7 @@
                 "unchecked": "关"
             });
     }
-    
+
     /* List messages */
     if (kendo.ui.List) {
         kendo.ui.List.prototype.options.messages =
@@ -1783,7 +1783,7 @@
                 "refreshTemplate": "刷新中..."
             });
     }
-    
+
     /* Mobile Loader options */
     if (kendo.mobile.ui.Loader) {
         kendo.mobile.ui.Loader.prototype.options =

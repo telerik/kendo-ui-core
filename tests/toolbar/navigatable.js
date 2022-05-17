@@ -53,13 +53,13 @@
                     }
                 ],
                 click: function() {
-                    flag++
+                    flag++;
                 }
             });
 
             container[0].focus();
             container.press(keys.ENTER, null, null, container.find(".k-split-button"));
-            assert.equal(flag, 1)
+            assert.equal(flag, 1);
         });
 
         it("focuses first tool if it is a button", function() {
@@ -339,16 +339,16 @@
                     }
                 ],
                 close: function(e) {
-                    assert.isOk(true, "close event triggered.")
+                    assert.isOk(true, "close event triggered.");
                 },
                 open: function(e) {
-                    assert.isOk(true, "open event triggered.")
+                    assert.isOk(true, "open event triggered.");
                 }
             });
 
             var splitButton = $("#foo_wrapper");
             var popupElement = $("#splitButton_optionlist");
-            var option = $("#option1")
+            var option = $("#option1");
 
             splitButton[0].focus();
             // open popup
@@ -372,7 +372,7 @@
                     }
                 ],
                 open: function(e) {
-                    assert.isOk(true, "open event triggered.")
+                    assert.isOk(true, "open event triggered.");
                 }
             });
 
@@ -406,7 +406,7 @@
             toolbar._getPrevFocusable = getPrevFocusable;
 
             toolbar.overflowAnchor[0].focus();
-            toolbar.overflowAnchor.press(keys.TAB, true)
+            toolbar.overflowAnchor.press(keys.TAB, true);
 
             assert.isOk(getPrevFocusable.calls);
         });

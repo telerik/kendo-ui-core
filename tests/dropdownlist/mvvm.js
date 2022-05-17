@@ -7,7 +7,7 @@
 
             window.ddlDataBound = function() {
                 assert.isOk(true);
-            }
+            };
 
             Mocha.fixture.html('<script id="template" type="text/x-kendo-template">\
                 <strong>#:text#</strong>\
@@ -136,8 +136,8 @@
             observable.value = observable.items[1];
 
 
-            dom = $('<select data-value-field="text" data-bind="value:value" />').
-                kendoDropDownList({
+            dom = $('<select data-value-field="text" data-bind="value:value" />')
+                .kendoDropDownList({
                     dataSource: observable.items
                 });
 

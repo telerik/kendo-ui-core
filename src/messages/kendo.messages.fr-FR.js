@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
   /* Filter cell operator messages */
 
   if (kendo.ui.FilterCell) {
@@ -47,8 +47,8 @@
       });
   }
 
-/* FileManager messages */ 
-  
+/* FileManager messages */
+
 if (kendo.ui.FileManager) {
   kendo.ui.FileManager.prototype.options.messages = $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
       toolbar: {

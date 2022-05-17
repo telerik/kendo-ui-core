@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* ColorGradient messages */
 
 if (kendo.ui.ColorGradient) {
@@ -981,10 +981,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Text ends with"
     },
     "date": {
-      "eq":  "Date is",
+      "eq": "Date is",
       "neq": "Date is not",
-      "lt":  "Date is before",
-      "gt":  "Date is after"
+      "lt": "Date is before",
+      "gt": "Date is after"
     },
     "number": {
       "eq": "Is equal to",
@@ -1144,7 +1144,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Select files...",
   "cancel": "Cancel",
@@ -1324,7 +1324,7 @@ if (kendo.ui.PDFViewer) {
             open: "Open",
             exportAs: "Export",
             download: "Download",
-            pager:  {
+            pager: {
                 first: "Go to the first page",
                 previous: "Go to the previous page",
                 next: "Go to the next page",

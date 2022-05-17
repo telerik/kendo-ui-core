@@ -1,4 +1,4 @@
-(function(f, define){
+(function(f, define) {
     define([
         "./kendo.core",
         "./kendo.router",
@@ -76,7 +76,7 @@
         "./kendo.mobile.tabstrip",
         "./kendo.angular"
     ], f);
-})(function(){
+})(function() {
     "bundle all";
     return window.kendo;
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

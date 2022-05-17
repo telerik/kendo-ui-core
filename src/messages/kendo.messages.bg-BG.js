@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* Validator */
 if (kendo.ui.Validator) {
 kendo.ui.Validator.prototype.options.messages =
@@ -29,7 +29,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Избери файлове...",
   "cancel": "Отказ",
@@ -581,7 +581,7 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "settings": "Настройки на колоната",
   "lock": "Заключи колоната",
   "unlock": "Отключи колоната",
-  "stick" : "Залепи колоната",
+  "stick": "Залепи колоната",
   "unstick": "Отлепи колоната",
   "setColumnPosition": "Задай позиция на колоната",
   "apply": "Приложи",
@@ -1279,7 +1279,7 @@ if (kendo.ui.PDFViewer) {
             open: "Отвори",
             exportAs: "Експортирай",
             download: "Свали",
-            pager:  {
+            pager: {
                 first: "Отиди на първата страница",
                 previous: "Отиди на предишната страница",
                 next: "Отиди на следващата страница",

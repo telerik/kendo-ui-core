@@ -1,13 +1,13 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core", "./kendo.userevents", "./kendo.popup", "./kendo.html.button" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "toolbar",
     name: "ToolBar",
     category: "web",
     description: "The ToolBar widget displays one or more command buttons divided into groups.",
-    depends: [ "core", "html.button"  ]
+    depends: [ "core", "html.button" ]
 };
 
 (function($, undefined) {
@@ -166,7 +166,7 @@ var __meta__ = { // jshint ignore:line
                 this.element.addClass(STATE_HIDDEN);
                 this.element.addClass(HIDDEN);
 
-                if (this.overflow && this.overflowHidden){
+                if (this.overflow && this.overflowHidden) {
                     this.overflowHidden();
                 }
                 this.options.hidden = true;
@@ -291,7 +291,7 @@ var __meta__ = { // jshint ignore:line
                     element.addClass("k-align-" + options.align);
                 }
 
-                if (!!options.text && (options.showText == "toolbar" ||  options.showText == BOTH)) {
+                if (!!options.text && (options.showText == "toolbar" || options.showText == BOTH)) {
                     if (options.mobile) {
                         element.html('<span class="km-text">' + options.text + "</span>");
                     } else {
@@ -301,9 +301,9 @@ var __meta__ = { // jshint ignore:line
                     element.attr("aria-label", options.text);
                 }
 
-                if(options.icon || options.spriteCssClass || options.imageUrl) {
-                    if(options.showIcon !== "toolbar" && options.showIcon !== BOTH) {
-                        options.icon  = null;
+                if (options.icon || options.spriteCssClass || options.imageUrl) {
+                    if (options.showIcon !== "toolbar" && options.showIcon !== BOTH) {
+                        options.icon = null;
                         options.spriteCssClass = null;
                         options.imageUrl = null;
                     }
@@ -350,7 +350,7 @@ var __meta__ = { // jshint ignore:line
                 var element = this.element;
                 options = this.options;
 
-                if (!!options.text && (options.showText == OVERFLOW ||  options.showText == BOTH)) {
+                if (!!options.text && (options.showText == OVERFLOW || options.showText == BOTH)) {
                     if (options.mobile) {
                         element.html('<span class="km-text">' + options.text + "</span>");
                     } else {
@@ -360,9 +360,9 @@ var __meta__ = { // jshint ignore:line
                     element.attr("aria-label", options.text);
                 }
 
-                if(options.icon || options.spriteCssClass || options.imageUrl) {
-                    if(options.showIcon !== OVERFLOW && options.showIcon !== BOTH) {
-                        options.icon  = null;
+                if (options.icon || options.spriteCssClass || options.imageUrl) {
+                    if (options.showIcon !== OVERFLOW && options.showIcon !== BOTH) {
+                        options.icon = null;
                         options.spriteCssClass = null;
                         options.imageUrl = null;
                     }
@@ -386,7 +386,7 @@ var __meta__ = { // jshint ignore:line
                     this.hide();
                 }
 
-                if (options.togglable){
+                if (options.togglable) {
                     this.toggle(options.selected);
                 }
 
@@ -676,10 +676,10 @@ var __meta__ = { // jshint ignore:line
                     isRtl: this.toolbar._isRtl,
                     copyAnchorStyles: false,
                     animation: options.animation,
-                    open: function(e){
+                    open: function(e) {
                         var isDefaultPrevented = that.toolbar.trigger(OPEN, { target: element });
 
-                        if(isDefaultPrevented){
+                        if (isDefaultPrevented) {
                             e.preventDefault();
                             return;
                         }
@@ -691,7 +691,7 @@ var __meta__ = { // jshint ignore:line
                     },
                     close: function(e) {
                         var isDefaultPrevented = that.toolbar.trigger(CLOSE, { target: element });
-                        if(isDefaultPrevented){
+                        if (isDefaultPrevented) {
                             e.preventDefault();
                         }
                         element.trigger(FOCUS);
@@ -701,7 +701,7 @@ var __meta__ = { // jshint ignore:line
                 this.popup.element.on(CLICK + ns, "a.k-button", preventClick);
             },
 
-            adjustPopupWidth: function (popup) {
+            adjustPopupWidth: function(popup) {
                 var anchor = popup.options.anchor,
                     computedWidth = outerWidth(anchor),
                     width;
@@ -727,7 +727,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             toggle: function() {
-                if(this.options.enable || this.popup.visible()){
+                if (this.options.enable || this.popup.visible()) {
                     this.popup.toggle();
                 }
             },
@@ -961,12 +961,12 @@ var __meta__ = { // jshint ignore:line
             }
         }
 
-        function findFocusableSibling (element, dir) {
+        function findFocusableSibling(element, dir) {
             var getSibling = dir === NEXT ? $.fn.next : $.fn.prev;
             var getter = dir === NEXT ? $.fn.first : $.fn.last;
             var candidate = getSibling.call(element);
 
-            if(!candidate.length && element.is(DOT + OVERFLOW_ANCHOR)){
+            if (!candidate.length && element.is(DOT + OVERFLOW_ANCHOR)) {
                 return element;
             }
 
@@ -1038,7 +1038,7 @@ var __meta__ = { // jshint ignore:line
                     STATE_DISABLED = "km-state-disabled";
                 }
 
-                if(options.resizable) {
+                if (options.resizable) {
                     that._renderOverflow();
                     element.addClass(RESIZABLE_TOOLBAR);
 
@@ -1056,12 +1056,12 @@ var __meta__ = { // jshint ignore:line
                     that.popup = { element: $([]) };
                 }
 
-                if(options.items && options.items.length) {
+                if (options.items && options.items.length) {
                     for (var i = 0; i < options.items.length; i++) {
                         that.add(options.items[i]);
                     }
 
-                    if(options.resizable) {
+                    if (options.resizable) {
                         that._shrink(that.element.innerWidth());
                     }
                 }
@@ -1186,7 +1186,7 @@ var __meta__ = { // jshint ignore:line
                         }
 
                         overflowTool.element.appendTo(that.popup.container);
-                        that.angular("compile", function(){
+                        that.angular("compile", function() {
                             return { elements: overflowTool.element.get() };
                         });
                     }
@@ -1203,7 +1203,7 @@ var __meta__ = { // jshint ignore:line
                     if (tool) {
                         tool.element.appendTo(that.element);
 
-                        that.angular("compile", function(){
+                        that.angular("compile", function() {
                             return { elements: tool.element.get() };
                         });
                     }
@@ -1289,10 +1289,10 @@ var __meta__ = { // jshint ignore:line
 
                         item.overflow.hide();
 
-                        if(buttonGroupInstance) {
+                        if (buttonGroupInstance) {
                             buttonGroupInstance.refresh();
                         }
-                    } else if(!item.overflow.options.hidden) {
+                    } else if (!item.overflow.options.hidden) {
                         item.overflow.hide();
                     }
                 }
@@ -1312,7 +1312,7 @@ var __meta__ = { // jshint ignore:line
                         if (buttonGroupInstance) {
                             buttonGroupInstance.refresh();
                         }
-                    } else if(item.toolbar.options.hidden) {
+                    } else if (item.toolbar.options.hidden) {
                         item.toolbar.show();
                     }
                 }
@@ -1326,7 +1326,7 @@ var __meta__ = { // jshint ignore:line
                         if (buttonGroupInstance) {
                             buttonGroupInstance.refresh();
                         }
-                    } else if(item.overflow.options.hidden) {
+                    } else if (item.overflow.options.hidden) {
                         item.overflow.show();
                     }
                 }
@@ -1386,7 +1386,7 @@ var __meta__ = { // jshint ignore:line
                     animation: that.animation,
                     appendTo: that.isMobile ? $(that.isMobile).children(".km-pane") : null,
                     copyAnchorStyles: false,
-                    open: function (e) {
+                    open: function(e) {
                         var wrapper = kendo.wrap(that.popup.element)
                             .addClass(OVERFLOW_WRAPPER);
 
@@ -1403,7 +1403,7 @@ var __meta__ = { // jshint ignore:line
                     activate: function() {
                         this.element.find(":kendoFocusable").first().trigger(FOCUS);
                     },
-                    close: function (e) {
+                    close: function(e) {
                         if (that.trigger(OVERFLOW_CLOSE)) {
                             e.preventDefault();
                         }
@@ -1555,7 +1555,7 @@ var __meta__ = { // jshint ignore:line
                             element = findFocusableSibling(element, NEXT);
                         }
 
-                        if(element.length) {
+                        if (element.length) {
                             element[0].focus();
                         }
                     })
@@ -1574,7 +1574,7 @@ var __meta__ = { // jshint ignore:line
                         firstHasFocus = false,
                         isOnlyOverflowAnchor = false;
 
-                    if(!items.not(DOT + OVERFLOW_ANCHOR).length){
+                    if (!items.not(DOT + OVERFLOW_ANCHOR).length) {
                         isOnlyOverflowAnchor = true;
                     }
 
@@ -1643,7 +1643,7 @@ var __meta__ = { // jshint ignore:line
 
                 if ((keyCode === keys.SPACEBAR || keyCode === keys.ENTER) && !target.is("input, checkbox")) {
 
-                    if(keyCode === keys.SPACEBAR){
+                    if (keyCode === keys.SPACEBAR) {
                         e.preventDefault(); //prevent spacebar to scroll the page down
                     }
 
@@ -1687,7 +1687,7 @@ var __meta__ = { // jshint ignore:line
                 }
             },
 
-            _getNextElement: function (item, direction) {
+            _getNextElement: function(item, direction) {
                 var items = this.element.children(":not(.k-separator, .k-spacer):visible");
                 var itemIndex = items.index(item) === -1 ? items.index(item.parentElement) : items.index(item);
                 var startIndex = this.overflowAnchor ? 1 : 0;
@@ -1746,7 +1746,7 @@ var __meta__ = { // jshint ignore:line
 
                 var elementToFocus, prevElement,
                     prevElements = element.prevAll();
-                prevElements.each(function(){
+                prevElements.each(function() {
                     prevElement = $(this);
                     if (prevElement.is(":kendoFocusable")) {
                         elementToFocus = prevElement;
@@ -1832,7 +1832,7 @@ var __meta__ = { // jshint ignore:line
                 if (containerWidth > this._childrenWidth()) {
                     hiddenCommands = this.element.children(":hidden:not('." + STATE_HIDDEN + "')");
 
-                    for (var i = 0; i < hiddenCommands.length ; i++) {
+                    for (var i = 0; i < hiddenCommands.length; i++) {
                         commandElement = hiddenCommands.eq(i);
                         if (containerWidth < this._childrenWidth() || !this._showItem(commandElement, containerWidth)) {
                             break;
@@ -1894,4 +1894,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

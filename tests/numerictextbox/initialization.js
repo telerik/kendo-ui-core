@@ -290,14 +290,14 @@
             var numeric = input.kendoNumericTextBox({
                 min: 0,
                 max: 4
-            }).data("kendoNumericTextBox")
+            }).data("kendoNumericTextBox");
 
             numeric.max(2);
             $("form")[0].reset();
             setTimeout(function() {
-                assert.equal(numeric.options.max, 4)
+                assert.equal(numeric.options.max, 4);
                 done();
-            }, 200)
+            }, 200);
         });
 
         it("widget restricts value without rounding it", function() {

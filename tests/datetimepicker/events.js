@@ -165,7 +165,7 @@
             var count = 0;
             var datetimepicker = new DateTimePicker(input, {
                 componentType: "modern",
-                open: function () {
+                open: function() {
                     count++;
                 }
             });

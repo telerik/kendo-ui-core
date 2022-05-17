@@ -4,7 +4,8 @@ page_title: Installing with NPM
 description: "Get started with Telerik UI for ASP.NET Core and install NPM packages of the helpers."
 previous_url: /getting-started/installation/npm
 slug: npmpackages_core
-position: 4
+position: 9
+published: false
 ---
 
 # Installing with NPM
@@ -120,15 +121,13 @@ This section provides solutions for common issues you might encounter while inst
 
 * [Create your own custom bundles]({% slug custombundles_core %})
 * [Check out the jQuery version support]({% slug jquerysupport_core %})
-* [Check out the web browser support]({% slug webbrowsersupport_core %})
-* [Check out the operation system support]({% slug ossupport_core %})
+* [Check out the operation system and browser support]({% slug ossupport_core %})
 * [Check out the PDF and Excel export support]({% slug exportsupport_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
 
 ## See Also
 
 * [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
-* [Installing Telerik UI for ASP.NET Core with Bower]({% slug bowerpackage_core %})
 * [Installing Telerik UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
 * [Installing Telerik UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
 * [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})

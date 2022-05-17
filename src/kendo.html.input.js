@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([
         "./kendo.html.base"
     ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "html.input",
@@ -13,11 +13,11 @@ var __meta__ = { // jshint ignore:line
     features: []
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         HTMLBase = kendo.html.HTMLBase;
 
-    var renderCheckBox = function (element, options) {
+    var renderCheckBox = function(element, options) {
         if (arguments[0] === undefined || $.isPlainObject(arguments[0])) {
             options = element;
             element = $("<input />");
@@ -26,7 +26,7 @@ var __meta__ = { // jshint ignore:line
         return (new HTMLCheckBox(element, options)).html();
     };
 
-    var renderRadioButton = function (element, options) {
+    var renderRadioButton = function(element, options) {
         if (arguments[0] === undefined || $.isPlainObject(arguments[0])) {
             options = element;
             element = $("<input />");
@@ -36,7 +36,7 @@ var __meta__ = { // jshint ignore:line
     };
 
     var HTMLInput = HTMLBase.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
             HTMLBase.fn.init.call(that, element, options);
             that._wrapper();
@@ -47,7 +47,7 @@ var __meta__ = { // jshint ignore:line
             labelPosition: "after",
             encoded: true
         },
-        _wrapper: function () {
+        _wrapper: function() {
             var that = this,
                 element = that.element[0],
                 options = that.options,
@@ -57,14 +57,14 @@ var __meta__ = { // jshint ignore:line
                 .addClass(options.inputClass)
                 .prop("type", options.type);
 
-            if(!elementId && !!options.label) {
+            if (!elementId && !!options.label) {
                 element.id = elementId = kendo.guid();
             }
 
-            if(!!options.label) {
+            if (!!options.label) {
                 that.labelEl = $("<label for='" + elementId + "' class='" + options.labelClass + "'>");
 
-                if(options.encoded) {
+                if (options.encoded) {
                     that.labelEl.text(options.label);
                 } else {
                     that.labelEl.html(options.label);
@@ -73,16 +73,16 @@ var __meta__ = { // jshint ignore:line
                 that.element[options.labelPosition](that.labelEl);
             }
         },
-        html: function () {
+        html: function() {
             var that = this,
                 after = that.options.labelPosition === "after",
                 wrapperHtml = HTMLBase.fn.html.call(that);
 
-            if(!that.labelEl) {
+            if (!that.labelEl) {
                 return wrapperHtml;
             }
 
-            if(after) {
+            if (after) {
                 return wrapperHtml + that.labelEl[0].outerHTML;
             }
 
@@ -91,7 +91,7 @@ var __meta__ = { // jshint ignore:line
     });
 
     var HTMLCheckBox = HTMLInput.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
             HTMLInput.fn.init.call(that, element, options);
             that._addClasses();
@@ -108,7 +108,7 @@ var __meta__ = { // jshint ignore:line
     });
 
     var HTMLRadioButton = HTMLInput.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
             HTMLInput.fn.init.call(that, element, options);
             that._addClasses();
@@ -144,4 +144,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

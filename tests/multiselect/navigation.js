@@ -2,19 +2,19 @@
     var MultiSelect = kendo.ui.MultiSelect,
         keys = kendo.keys,
         select,
-        CONTAINER_HEIGHT = 200;;
+        CONTAINER_HEIGHT = 200;
 
     function populateSelect(length) {
         var options = [];
         length = length || 5;
-        for (var i=0; i < length; i++) {
+        for (var i = 0; i < length; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
         select.html(options);
     }
 
-    describe("kendo.ui.MultiSelect navigation", function () {
+    describe("kendo.ui.MultiSelect navigation", function() {
         beforeEach(function() {
             $.fn.press = function(character) {
                 var keyCode = character.charCodeAt(0);
@@ -22,7 +22,7 @@
                     type: "keydown",
                     keyCode: keyCode
                 });
-            }
+            };
 
             kendo.ns = "kendo-";
 
@@ -166,7 +166,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").length, 0);
     });
 
-    it("MultiSelect respects maxSelectedItems on CTRL+A", function () {
+    it("MultiSelect respects maxSelectedItems on CTRL+A", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 2
         });
@@ -202,7 +202,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option1"), 0);
     });
 
-    it("MultiSelect selects item on SHIFT+DOWN", function () {
+    it("MultiSelect selects item on SHIFT+DOWN", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -222,7 +222,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option1"), 0);
     });
 
-    it("MultiSelect selects multiple items on SHIFT+DOWN", function () {
+    it("MultiSelect selects multiple items on SHIFT+DOWN", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -249,7 +249,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").eq(1).text().indexOf("Option2"), 0);
     });
 
-    it("MultiSelect respects maxSelectedItems on SHIFT+DOWN", function () {
+    it("MultiSelect respects maxSelectedItems on SHIFT+DOWN", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 1
         });
@@ -277,7 +277,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option1"), 0);
     });
 
-    it("MultiSelect selects item on SHIFT+UP", function () {
+    it("MultiSelect selects item on SHIFT+UP", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -301,7 +301,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option2"), 0);
     });
 
-    it("MultiSelect selects multiple items on SHIFT+UP", function () {
+    it("MultiSelect selects multiple items on SHIFT+UP", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -332,7 +332,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").eq(1).text().indexOf("Option1"), 0);
     });
 
-    it("MultiSelect respects maxSelectedItems on SHIFT+UP", function () {
+    it("MultiSelect respects maxSelectedItems on SHIFT+UP", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 1
         });
@@ -364,7 +364,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option2"), 0);
     });
 
-    it("MultiSelect selects multiple items on CTRL+SHIFT+END", function () {
+    it("MultiSelect selects multiple items on CTRL+SHIFT+END", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -384,7 +384,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").length, 4);
     });
 
-    it("MultiSelect respects maxSelectedItems on CTRL+SHIFT+END", function () {
+    it("MultiSelect respects maxSelectedItems on CTRL+SHIFT+END", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 2
         });
@@ -408,7 +408,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").eq(1).text(), "Option2");
     });
 
-    it("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function () {
+    it("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -436,7 +436,7 @@
         assert.equal(multiselect.tagList.children(".k-chip").length, 4);
     });
 
-    it("MultiSelect respects maxSelectedItems on CTRL+SHIFT+HOME", function () {
+    it("MultiSelect respects maxSelectedItems on CTRL+SHIFT+HOME", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 2
         });
@@ -519,7 +519,7 @@
     });
 });
 
-describe("kendo.ui.MultiSelect navigation in virtual scenario", function () {
+describe("kendo.ui.MultiSelect navigation in virtual scenario", function() {
     function generateData(parameters) {
         var items = [];
         for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
@@ -594,7 +594,7 @@ describe("kendo.ui.MultiSelect navigation in virtual scenario", function () {
         });
     });
 
-    it("MultiSelect selects multiple items on SHIFT+DOWN", function (done) {
+    it("MultiSelect selects multiple items on SHIFT+DOWN", function(done) {
         var multiselect = new MultiSelect(select, {
             height: CONTAINER_HEIGHT,
             animation: false,
@@ -632,7 +632,7 @@ describe("kendo.ui.MultiSelect navigation in virtual scenario", function () {
         });
     });
 
-    it("MultiSelect selects multiple items on SHIFT+UP", function (done) {
+    it("MultiSelect selects multiple items on SHIFT+UP", function(done) {
         var multiselect = new MultiSelect(select, {
             height: CONTAINER_HEIGHT,
             animation: false,
@@ -674,7 +674,7 @@ describe("kendo.ui.MultiSelect navigation in virtual scenario", function () {
         });
     });
 
-    it("MultiSelect selects multiple items on CTRL+SHIFT+END", function (done) {
+    it("MultiSelect selects multiple items on CTRL+SHIFT+END", function(done) {
         var multiselect = new MultiSelect(select, {
             height: CONTAINER_HEIGHT,
             animation: false,
@@ -707,7 +707,7 @@ describe("kendo.ui.MultiSelect navigation in virtual scenario", function () {
         });
     });
 
-    it("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function (done) {
+    it("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function(done) {
         var multiselect = new MultiSelect(select, {
             height: CONTAINER_HEIGHT,
             animation: false,
@@ -749,7 +749,7 @@ describe("kendo.ui.MultiSelect navigation in virtual scenario", function () {
     });
 });
 
-    describe("kendo.ui.MultiSelect tag navigation", function () {
+    describe("kendo.ui.MultiSelect tag navigation", function() {
         beforeEach(function() {
             select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
             populateSelect();

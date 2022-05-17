@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -814,6 +814,6 @@ if (kendo.ui.DateInput) {
       "second": "saniye",
       "dayperiod": "AM/PM"
     });
-}  
-  
+}
+
 })(window.kendo.jQuery);

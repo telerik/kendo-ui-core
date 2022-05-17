@@ -392,7 +392,7 @@
             var rangeSlider = newRangeSlider({ smallStep: 1, largeStep: 1 });
             rangeSlider.wrapper.find(".k-tick-large").each(function() {
                 assert.isOk($(this).hasClass("k-tick-large"));
-            })
+            });
         });
 
         it("rangeSlider should not modify input value with bg-BG culture", function() {

@@ -1,21 +1,27 @@
 ---
-title: Manual setup
-page_title: Manual setup in Visual Studio
-description: "Manually set up Telerik UI for ASP.NET MVC in a sample project created with Visual Studio."
+title: Adding Telerik UI through Local Files
+page_title: Adding Telerik UI through Local Files
+description: "Learn how to manually set up Telerik UI for ASP.NET MVC by using local files in a sample project created with Visual Studio."
 slug: manualsetup_aspnetmvc
-position: 1
+position: 3
 permalink: /getting-started/manual-setup
 ---
 
-# Manual Setup in Visual Studio
+# Adding Telerik UI through Local Files
 
-This article describes how to manually configure an ASP.NET MVC application to use the Telerik UI controls. You will learn how to add the required client-side resources, namespaces, and the Kendo.Mvc.dll assembly that contains the UI for ASP.NET MVC helpers.
+This article describes how to manually configure an ASP.NET MVC application to use the Telerik UI controls. You will learn how to add the `Kendo.Mvc.dll` assembly that contains the UI for ASP.NET MVC helpers by using locally available files. You will also add the required namespaces and client-side resources like CSS files and Kendo UI scripts.
 
-An alternative approach that automatically adds the namespaces and the Kendo.Mvc.dll assembly to the project, is the [Setup with Telerik NuGet]({% slug setupwithnuget_aspnetmvc %}). 
+The method described here is applicable both to new and already existing projects. An alternative approach that automatically adds the namespaces and the `Kendo.Mvc.dll` assembly to the project is the [Setup with Telerik NuGet]({% slug setupwithnuget_aspnetmvc %}). 
 
-## Meeting the Requirements
+## Prerequisites
 
-Telerik UI for ASP.NET MVC requires <a href="https://dotnet.microsoft.com/download/dotnet-framework" target="_blank">.NET Framework</a>.
+* Telerik UI for ASP.NET MVC requires the <a href="https://dotnet.microsoft.com/download/dotnet-framework" target="_blank">.NET Framework</a>.
+
+* [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later.
+
+   For Visual Studio 2017 or later, you must install the **ASP.NET & web development** workload. See Microsoft's <a href="/docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2019#step-4---choose-workloads" target="_blank">Install Visual Studio workloads</a> documentation for guidance.
+   
+* [Telerik account](https://www.telerik.com/account).
 
 ## Creating the Application
 
@@ -28,81 +34,13 @@ To create the application:
 1. Set a name and location for the project and click **Create**.
 1. Select the **MVC** template and click **Create**.
 
-## Including the Client-Side Resources
-
->note 
-> * The CDN links and/or package versions have to point to the same UI for ASP.NET MVC version that your project references.
-> * The Kendo UI scripts have to be placed after `jQuery`.
-
-Before you can use a Telerik UI component, you must include the theme, the jQuery script, and the Kendo UI scripts:
-
-1. Go to `~\Views\Shared\_Layout.cshtml` and add the Kendo UI theme of your choice to the `<head>` of the document. Since Microsoft's project template uses Bootstrap, you can use the Kendo UI SASS Bootstrap v4 theme to match it:
-
-		<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>@ViewBag.Title - My ASP.NET Application</title>
-		@Styles.Render("~/Content/css")
-		@Scripts.Render("~/bundles/modernizr")
-
-		@* Add the Kendo Bootstrap v4 theme: *@
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
-		</head>
-
-1. The Microsoft ASP.NET Web Application template comes with a `jQuery` script reference at the end of _Layout.cshtml file. Find the `@Scripts.Render("~/bundles/jquery")` script line in the `<body>` of the document and remove it.  
-
-1. Add the `jQuery` script hosted on the Telerik CDN to the `<head>`:
-
-		<head>
-		...
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
-		
-		@* Add the jQuery script from the Telerik CDN: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
-		</head>
-
-1. Add the Kendo UI scripts. The Kendo UI script files required by UI for ASP.NET MVC must be loaded in the `<head>` tag *after* the `jQuery` script:
-
-		<head>
-		...
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
-
-		@* Add the Kendo UI scripts: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-		</head>
-
-1. Finally, add the `bootstrap.min.js` script available in Microsoft's ASP.NET Web Application template, and the `<head>` will look like this:
-
-		<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>@ViewBag.Title - My Telerik MVC Application</title>
-		@Styles.Render("~/Content/css")
-		@Scripts.Render("~/bundles/modernizr")
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-		
-		@* Add the bootstrap.min.js script: *@
-		<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-		</head>
-
-
->note
-> * Always put the Kendo UI script files (`kendo.all.min.js` and `kendo.aspnetmvc.min.js`) after the `jquery.min.js` script.
-> * `jQuery` must be loaded only once. It must be placed only in the `<head>` tag of the `_Layout.cshtml` file. Make sure there are no duplicate jQuery references elsewhere in the _Layout.
-> * The Kendo UI scripts, the Kendo UI CSS files and the `Kendo.Mvc.dll` referenced in the project must use the same version.
+@[template](/_contentTemplates/mvc/add-client-side-resources.md#including-client-side-resources)
 
 ## Downloading and Referencing the `Kendo.Mvc.dll` Assembly
 
 The `Kendo.Mvc.dll` assembly contains the UI for ASP.NET MVC Html helpers. Follow the steps below to download it and reference it in the project:
 
-1. Log in your [Telerik account](https://www.telerik.com/login/v2/telerik).
+1. Log in to your [Telerik account](https://www.telerik.com/login/v2/telerik).
 
 1. Download the installation file:
 
@@ -118,7 +56,7 @@ The `Kendo.Mvc.dll` assembly contains the UI for ASP.NET MVC Html helpers. Follo
 
 1. Open the downloaded bundle and extract the `Kendo.Mvc.dll` from the `\wrappers\aspnetmvc\Binaries\Mvc5\` folder to the `bin` folder of your project. 
 
-1. Right click `References` in the Visual Studio Solution Explorer, browse to the `bin` folder, select the `Kendo.Mvc.dll`, and add it as reference to the project.
+1. Right-click `References` in the Visual Studio Solution Explorer, browse to the `bin` folder, select the `Kendo.Mvc.dll`, and add it as reference to the project.
 
 ## Adding the Kendo.Mvc.UI Namespace
 
@@ -142,7 +80,7 @@ Perform the steps below to add a Grid to the project:
             public bool Discontinued { get; set; }
         }
 
-1. Open the `~/Views/Home/Index.cshtml` view  and add the Grid HtmlHelper.
+1. Open the `~/Views/Home/Index.cshtml` view and add the Grid HtmlHelper.
 
     ```Razor
         <div class="text-center">
@@ -163,14 +101,14 @@ Perform the steps below to add a Grid to the project:
 			)
 		</div>
     ```
-1. Open the `HomeController.cs` and import the `Kendo.Mvc.UI` and the `Kendo.Mvc.Extensions` namespaces so that you can use `Kendo.Mvc.UI.DataSourceRequest` and the `ToDataSourceResult` extension method in the next step:
+1. Open the `HomeController.cs` and import the `Kendo.Mvc.UI` and the `Kendo.Mvc.Extensions` namespaces so that you can use `Kendo.Mvc.UI.DataSourceRequest` and the `ToDataSourceResult` extension method in the next step.
 
     	using Kendo.Mvc.Extensions;
     	using Kendo.Mvc.UI;
 
-Additionally, import the namespace for the model that you created in step 1.
+1. Additionally, import the namespace for the model that you created in step 1.
 
-1. In the `HomeController.cs`, add a new action method which will return the data as JSON. The Grid makes an Ajax request to this action, to get its data:
+1. In the `HomeController.cs`, add a new action method which will return the data as JSON. The Grid makes an Ajax request to this action, to get its data.
 
         public ActionResult Select([DataSourceRequest]DataSourceRequest request)
         {

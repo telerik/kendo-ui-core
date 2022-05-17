@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.mobile.popover", "./kendo.mobile.shim" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "mobile.actionsheet",
@@ -53,7 +53,7 @@ var __meta__ = { // jshint ignore:line
 
             element
                 .addClass("km-actionsheet")
-                .append(cancelTemplate({cancel: that.options.cancel}))
+                .append(cancelTemplate({ cancel: that.options.cancel }))
                 .wrap(WRAP)
                 .on("up", BUTTONS, "_click")
                 .on("click", BUTTONS, kendo.preventDefault);
@@ -64,7 +64,7 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = element.parent().addClass(type ? " km-actionsheet-" + type : "");
 
-            that.shim = new ShimClass(that.wrapper, $.extend({modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root"}, that.options.popup) );
+            that.shim = new ShimClass(that.wrapper, $.extend({ modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root" }, that.options.popup) );
 
             that._closeProxy = that._close.bind(that);
             that._shimHideProxy = that._shimHide.bind(that);
@@ -166,4 +166,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

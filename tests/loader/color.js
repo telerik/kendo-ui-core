@@ -5,7 +5,7 @@
     var span;
     var loader;
 
-    describe('kendo.ui.Loader color', function () {
+    describe('kendo.ui.Loader color', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -91,7 +91,7 @@
         test('loader.setOptions() does not set class if color is empty string', function() {
             loader = new Loader(span, { themeColor: 'warning' });
 
-            loader.setOptions({ themeColor: ''});
+            loader.setOptions({ themeColor: '' });
 
             assert.equal(loader.themeColor(), '');
             assert.equal(loader.element.hasClass('k-loader-'), false);

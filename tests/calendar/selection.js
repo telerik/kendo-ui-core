@@ -4,7 +4,7 @@ var Calendar = kendo.ui.Calendar,
     instance,
     div;
 
-describe("kendo.ui.Calendar selection", function () {
+describe("kendo.ui.Calendar selection", function() {
     beforeEach(function() {
 
         div = $("<div />").appendTo(Mocha.fixture);
@@ -46,7 +46,7 @@ describe("kendo.ui.Calendar selection", function () {
         element.trigger($.Event(type, info));
 
         return element;
-    };
+    }
 
     it("disabled dates are not selected with drag to select", function() {
         instance = new Calendar(div, {

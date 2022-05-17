@@ -6,7 +6,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge size', function () {
+    describe('kendo.ui.Badge size', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -44,7 +44,7 @@
                 badge = new Badge(span, { size: 'size' });
                 var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
 
-                badge.setOptions({size: size});
+                badge.setOptions({ size: size });
 
                 assert.equal(badge._size, size);
                 assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), true);
@@ -54,7 +54,7 @@
         test(`badge.setOptions({size: ''}) does not set classNames`, function() {
             badge = new Badge(span, { size: 'size' });
 
-            badge.setOptions({size: ''});
+            badge.setOptions({ size: '' });
 
             assert.equal(badge._size, '');
             assert.equal(badge.element.hasClass(`k-badge-size`), false);

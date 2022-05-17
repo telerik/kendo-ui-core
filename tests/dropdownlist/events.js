@@ -8,7 +8,7 @@
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key });
-            }
+            };
             input = $("<input />").appendTo(Mocha.fixture);
             select = $("<select></select>").appendTo(Mocha.fixture);
         });
@@ -32,7 +32,7 @@
 
             dropdownlist._change = function() {
                 changeWasCalled = true;
-            }
+            };
 
             dropdownlist._blur();
 
@@ -133,7 +133,7 @@
             dropdownlist.setDataSource(["foo", "bar"]);
             dropdownlist.setOptions({
                 change: function() {
-                    counter++
+                    counter++;
                 }
             });
 

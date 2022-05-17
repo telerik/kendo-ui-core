@@ -2,7 +2,7 @@
 var Calendar = kendo.ui.Calendar;
 var div;
 
-describe("kendo.ui.Calendar API", function () {
+describe("kendo.ui.Calendar API", function() {
     beforeEach(function() {
 
         div = $("<div />").appendTo(Mocha.fixture);
@@ -153,7 +153,7 @@ it("navigateToPast should navigate to previous year when year view", function() 
 });
 
 it("navigateToPast should navigate to previous decade when decade view", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 2;
@@ -168,7 +168,7 @@ it("navigateToPast should navigate to previous decade when decade view", functio
 });
 
 it("navigateToPast should navigate to previous century when century view", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 3;
@@ -184,7 +184,7 @@ it("navigateToPast should navigate to previous century when century view", funct
 });
 
 it("navigateToFuture should navigate to next month when month view", function() {
-    var cal = new Calendar(div, {value: new Date(2000, 10, 10), animation: false}),
+    var cal = new Calendar(div, { value: new Date(2000, 10, 10), animation: false }),
         modified = new Date(cal._current),
         names = kendo.culture().calendar.months.names;
 
@@ -198,7 +198,7 @@ it("navigateToFuture should navigate to next month when month view", function() 
 });
 
 it("navigateToFuture should navigate to next year when year view", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 1;
@@ -211,7 +211,7 @@ it("navigateToFuture should navigate to next year when year view", function() {
 });
 
 it("navigateToFuture should navigate to next decade when decade view", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 2;
@@ -246,7 +246,7 @@ it("navigateToFuture should navigate to next century when century view", functio
 });
 
 it("navigateUp should navigate upper view (year)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 0;
@@ -257,7 +257,7 @@ it("navigateUp should navigate upper view (year)", function() {
 });
 
 it("navigateUp should navigate upper view (decade)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 1;
@@ -268,7 +268,7 @@ it("navigateUp should navigate upper view (decade)", function() {
 });
 
 it("navigateUp should navigate upper view (century)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 2;
@@ -280,7 +280,7 @@ it("navigateUp should navigate upper view (century)", function() {
 });
 
 it("navigateDown should navigate lower view (decade)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 3;
@@ -291,7 +291,7 @@ it("navigateDown should navigate lower view (decade)", function() {
 });
 
 it("navigateDown should navigate lower view (year)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 2;
@@ -302,7 +302,7 @@ it("navigateDown should navigate lower view (year)", function() {
 });
 
 it("navigateDown should navigate lower view (month)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 1;
@@ -313,7 +313,7 @@ it("navigateDown should navigate lower view (month)", function() {
 });
 
 it("navigateDown should navigate lower view (month)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 1;
@@ -324,7 +324,7 @@ it("navigateDown should navigate lower view (month)", function() {
 });
 
 it("navigateDown with date navigate to cell's date", function() {
-    var cal = stub(new Calendar(div, {animation: false}), "navigate"),
+    var cal = stub(new Calendar(div, { animation: false }), "navigate"),
         value = new Date(2000, 10, 10);
 
     cal._index = 1;
@@ -336,7 +336,7 @@ it("navigateDown with date navigate to cell's date", function() {
 });
 
 it("navigateDown should call value method if _index === options.depth", function() {
-    var cal = stub(new Calendar(div, {animation: false}), "value"),
+    var cal = stub(new Calendar(div, { animation: false }), "value"),
         value = new Date(2000, 10, 10);
 
     cal.navigateDown(value);
@@ -346,7 +346,7 @@ it("navigateDown should call value method if _index === options.depth", function
 });
 
 it("navigate should put in range passed date", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         value = new Date(1800, 10, 10);
 
     cal.navigate(value);
@@ -355,7 +355,7 @@ it("navigate should put in range passed date", function() {
 });
 
 it("value should select set selectedValue property", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         value = new Date(2000, 10, 10);
 
     cal.value(value);
@@ -367,14 +367,14 @@ it("value should return selectedValue", function() {
     var value = new Date(2000, 10, 10);
     var cal = new Calendar(div, {
         value: value
-    })
+    });
 
     assert.deepEqual(cal.value(), value);
 });
 
 it("value method should call navigate method with correct date", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
     stub(cal, "navigate");
 
@@ -386,7 +386,7 @@ it("value method should call navigate method with correct date", function() {
 
 it("value method should update selection of the view", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
         value.setDate(17);
 
@@ -397,7 +397,7 @@ it("value method should update selection of the view", function() {
 
 it("value should clear _value if null", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {min: value});
+        cal = new Calendar(div, { min: value });
 
     cal.value(null);
 
@@ -407,7 +407,7 @@ it("value should clear _value if null", function() {
 
 it("value should not accept value lower than min", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {min: value});
+        cal = new Calendar(div, { min: value });
 
     cal.value(new Date(1900, 10,10));
 
@@ -416,7 +416,7 @@ it("value should not accept value lower than min", function() {
 
 it("value should not accept value bigger than max", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {max: value});
+        cal = new Calendar(div, { max: value });
 
     cal.value(new Date(2900, 10,10));
 
@@ -425,7 +425,7 @@ it("value should not accept value bigger than max", function() {
 
 it("value should not accept invalid date", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {max: value});
+        cal = new Calendar(div, { max: value });
 
     cal.value("dsadasDA");
 
@@ -446,7 +446,7 @@ it("focus date depending on given value", function() {
 it("focus date in current view without navigating", function() {
     var value = new Date(2000,10,10),
         viewedValue = new Date(2000, 10, 15),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
     cal.navigate(null, 1);
 
@@ -465,7 +465,7 @@ it("focus should not call navigate if need to focus next cell in current decade 
     cal._current = viewedValue;
     cal._view = kendo.calendar.views[2];
 
-    stub(cal, {navigate: cal.navigate});
+    stub(cal, { navigate: cal.navigate });
 
     cal.focus();
     cal._focus(value);
@@ -475,7 +475,7 @@ it("focus should not call navigate if need to focus next cell in current decade 
 
 it("navigate should not re-render view if it was not changed", function() {
     var value = new Date(2000, 10, 10),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
     stub(kendo.calendar.views[0], {
         content: kendo.calendar.views[0].content
@@ -488,7 +488,7 @@ it("navigate should not re-render view if it was not changed", function() {
 
 it("min() returns current min value", function() {
      var value = new Date(2000, 10, 10),
-     cal = new Calendar(div, {min: value});
+     cal = new Calendar(div, { min: value });
 
      var result = cal.min();
 
@@ -544,7 +544,7 @@ it("max method persists selected value when max is in current month", function()
 
 it("Should navigate if min is bigger then _current", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(5); //should re-render in order to hide dates before 5th
 
@@ -557,7 +557,7 @@ it("Should navigate if min is bigger then _current", function() {
 
 it("Navigates widget when set min value bigger than selected date", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(15); //should re-render in order to hide dates before 5th
 
@@ -570,7 +570,7 @@ it("Navigates widget when set min value bigger than selected date", function() {
 
 it("Should clear _value if less then min", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(13);
 
@@ -584,7 +584,7 @@ it("Should clear _value if less then min", function() {
 
 it("max() returns current max value", function() {
      var value = new Date(2000, 10, 10),
-     cal = new Calendar(div, {max: value});
+     cal = new Calendar(div, { max: value });
 
      var result = cal.max();
 
@@ -604,7 +604,7 @@ it("max() should set max value value of the calendar", function() {
 
 it("Should navigate if max is less then _current", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(15); //should re-render in order to hide dates after 15th
 
@@ -617,7 +617,7 @@ it("Should navigate if max is less then _current", function() {
 
 it("Should clear _value if bigger then max", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(5);
 
@@ -810,7 +810,7 @@ it("setOptions updates options.dates", function() {
 
 it("setOptions should destroy selectable", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
     stub(cal, "_destroySelectable");
 
@@ -846,9 +846,9 @@ it("disabled date does get k-state-focused class when calleback is used", functi
         value: new Date(2015,9,3),
 		disableDates: function(date) {
             if (date && date.getDate() == 4) {
-                return true
+                return true;
             } else {
-                return false
+                return false;
             }
         }
         });

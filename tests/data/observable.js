@@ -28,7 +28,7 @@
         });
 
         it("wraps all non-enumerable keys in a class", function() {
-            var object = function () {
+            var object = function() {
                 this._key = "2";
             };
 

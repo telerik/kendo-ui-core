@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -727,10 +727,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Texto termina com"
     },
     "date": {
-      "eq":  "Data é",
+      "eq": "Data é",
       "neq": "Data não é",
-      "lt":  "Data é anterior",
-      "gt":  "Data é posterior"
+      "lt": "Data é anterior",
+      "gt": "Data é posterior"
     },
     "number": {
       "eq": "É igual a",
@@ -890,7 +890,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Selecionar ficheiros...",
   "cancel": "Cancelar",

@@ -4,7 +4,7 @@ var calendar = kendo.calendar,
     template,
     div;
 
-describe("kendo.ui.Calendar rendering", function () {
+describe("kendo.ui.Calendar rendering", function() {
     beforeEach(function() {
         var cal = new kendo.ui.Calendar($("<div/>"));
         template = cal.month;
@@ -875,18 +875,18 @@ it("if no options.month then build template without WITH block", function() {
 });
 
 it("set options.month build template with WITH block", function() {
-    var cal = new kendo.ui.Calendar(div, {month: {content: "#=value#" }});
+    var cal = new kendo.ui.Calendar(div, { month: { content: "#=value#" } });
 
     assert.isOk(cal.month.content.toString().indexOf("with") != -1);
 });
 
 it("set options.month should be used as template", function() {
-    var cal = new kendo.ui.Calendar(div, {month: {content: "#=value#" }}),
+    var cal = new kendo.ui.Calendar(div, { month: { content: "#=value#" } }),
         oldView = kendo.calendar.views[0].content, options;
 
     kendo.calendar.views[0].content = function(o) {
        options = o;
-    }
+    };
     cal.navigate();
 
     assert.equal(options.content, cal.month.content);

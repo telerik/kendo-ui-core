@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.resizable" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "splitter",
@@ -10,7 +10,7 @@ var __meta__ = { // jshint ignore:line
     depends: [ "resizable" ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         keys = kendo.keys,
@@ -91,7 +91,7 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = that.element;
 
-            if(that.options.orientation){
+            if (that.options.orientation) {
                 isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
             }
 
@@ -138,7 +138,7 @@ var __meta__ = { // jshint ignore:line
                 .children(".k-splitbar-draggable-" + orientation)
                     .on("keydown" + NS, that._keydown.bind(that))
                     .on("mousedown" + NS, function(e) { e.currentTarget.focus(); })
-                    .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
+                    .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED); })
                     .on("blur" + NS, function(e) { $(e.currentTarget).removeClass(FOCUSED);
                         if (that.resizing) {
                             that.resizing.end();
@@ -276,14 +276,14 @@ var __meta__ = { // jshint ignore:line
                         data: data || {},
                         type: "GET",
                         dataType: "html",
-                        success: function (data) {
-                            that.angular("cleanup", function(){ return { elements: pane.get() }; });
+                        success: function(data) {
+                            that.angular("cleanup", function() { return { elements: pane.get() }; });
                             pane.html(data);
-                            that.angular("compile", function(){ return { elements: pane.get() }; });
+                            that.angular("compile", function() { return { elements: pane.get() }; });
 
                             that.trigger(CONTENTLOAD, { pane: pane[0] });
                         },
-                        error: function (xhr, status) {
+                        error: function(xhr, status) {
                             that.trigger(ERROR, {
                                 pane: pane[0],
                                 status: status,
@@ -331,7 +331,7 @@ var __meta__ = { // jshint ignore:line
                 that._triggerAction(EXPAND, target.next());
             }
         },
-        _arrowClick: function (arrowType) {
+        _arrowClick: function(arrowType) {
             var that = this;
 
             return function(e) {
@@ -362,7 +362,7 @@ var __meta__ = { // jshint ignore:line
                 nextCollapsed = nextPane.collapsed,
                 previousPaneId = previousPaneEl.attr("id");
 
-            if(!previousPaneId) {
+            if (!previousPaneId) {
                 previousPaneId = kendo.guid();
                 previousPaneEl.attr("id", previousPaneId);
             }
@@ -390,13 +390,13 @@ var __meta__ = { // jshint ignore:line
                         catIconIf("k-expand-next k-i-arrow-60-left", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
                     );
 
-            if(previousPane.labelId) {
+            if (previousPane.labelId) {
                 splitbar.attr(ARIA_LABELLEDBY, previousPane.labelId);
-            } else if(previousPane.label) {
+            } else if (previousPane.label) {
                 splitbar.attr(ARIA_LABEL, previousPane.label);
             }
 
-            if(orientation == HORIZONTAL) {
+            if (orientation == HORIZONTAL) {
                 splitbar.attr(ARIA_ORIENTATION, VERTICAL);
             }
 
@@ -433,7 +433,7 @@ var __meta__ = { // jshint ignore:line
         _resetAriaValueNow: function(splitBars, panesSizes) {
             var i, splitbar, valueNow, joinDimension;
 
-            for(i = 0; i < splitBars.length; i++) {
+            for (i = 0; i < splitBars.length; i++) {
                 joinDimension = (panesSizes[i] + panesSizes[i + 1]) || 1;
                 valueNow = Math.round(panesSizes[i] / joinDimension * 100);
                 splitbar = splitBars[i];
@@ -511,7 +511,7 @@ var __meta__ = { // jshint ignore:line
                     .css(sizingProperty, totalSize - (freeSizePanesCount - 1) * freeSizePaneWidth);
 
             panesSizes.forEach(function(size, i) {
-                if(size === false) {
+                if (size === false) {
                     panesSizes[i] = freeSizePaneWidth;
                 }
             });
@@ -534,7 +534,7 @@ var __meta__ = { // jshint ignore:line
 
             element.children()
                 .css(alternateSizingProperty, element[alternateSizingProperty]())
-                .each(function (i, child) {
+                .each(function(i, child) {
                     if (child.tagName.toLowerCase() != "script") {
                         child.style[positioningProperty] = Math.floor(sum) + "px";
                         sum += child[sizingDomProperty];
@@ -636,7 +636,7 @@ var __meta__ = { // jshint ignore:line
 
             if (pane.length) {
                 kendo.destroy(pane);
-                pane.each(function(idx, element){
+                pane.each(function(idx, element) {
                     that.options.panes.splice(that.wrapper.children(".k-pane").index(element), 1);
                     $(element).remove();
                 });
@@ -693,7 +693,7 @@ var __meta__ = { // jshint ignore:line
             start: that._start.bind(that),
             max: that._max.bind(that),
             min: that._min.bind(that),
-            invalidClass:"k-restricted-size-" + orientation,
+            invalidClass: "k-restricted-size-" + orientation,
             resizeend: that._stop.bind(that)
         });
     }
@@ -746,7 +746,7 @@ var __meta__ = { // jshint ignore:line
                 prevBoundary = parseInt(previousPane[0].style[that.positioningProperty], 10),
                 nextBoundary = parseInt(nextPane[0].style[that.positioningProperty], 10) + nextPane[0][that.sizingDomProperty] - splitbar[0][that.sizingDomProperty],
                 totalSize = parseInt(that._element.css(that.sizingProperty), 10),
-                toPx = function (value) {
+                toPx = function(value) {
                     var val = parseInt(value, 10);
                     return (isPixelSize(value) ? val : (totalSize * val) / 100) || 0;
                 },
@@ -806,4 +806,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -21,7 +21,7 @@
         return items;
     }
 
-    describe("VirtualList Aria: ", function () {
+    describe("VirtualList Aria: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 

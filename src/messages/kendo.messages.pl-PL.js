@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -199,8 +199,8 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
         "pdf": "Eksportuj to PDF"
     }
 });
-}  
-  
+}
+
 /* Pager messages */
 
 if (kendo.ui.Pager) {
@@ -284,7 +284,7 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "clear": "Wyczyść filtr",
   "checkAll": "Zaznacz wszystko",
   "clearAll": "Odznacz wszystko",
-  "selectedItemsFormat":"Wybrano {0} elementy"
+  "selectedItemsFormat": "Wybrano {0} elementy"
 });
 }
 
@@ -403,9 +403,9 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "print": "Drukuj"
 });
 }
- 
+
 /* FormattingTool messages */
-  
+
 if (kendo.ui.editor) {
 kendo.ui.editor.FormattingTool.prototype.options.items = [
     {
@@ -446,17 +446,17 @@ kendo.ui.editor.FormattingTool.prototype.options.items = [
 /* FileBrowser and ImageBrowser messages */
 
 var browserMessages = {
-  "uploadFile" : "Wyślij",
-  "orderBy" : "Sortuj wg",
-  "orderByName" : "Nazwy",
-  "orderBySize" : "Rozmiaru",
-  "directoryNotFound" : "Folder o podanej nazwie nie został odnaleziony.",
-  "emptyFolder" : "Pusty folder",
-  "invalidFileType" : "Wybrany plik \"{0}\" jest nieprawidłowy. Obsługiwane pliki {1}.",
-  "deleteFile" : 'Czy napewno chcesz usunąć plik "{0}"?',
-  "overwriteFile" : 'Plik o nazwie "{0}" już istnieje w bieżącym folderze. Czy zastąpić?',
-  "dropFilesHere" : "umieść pliki tutaj, aby je wysłać",
-  "search" : "Szukaj"
+  "uploadFile": "Wyślij",
+  "orderBy": "Sortuj wg",
+  "orderByName": "Nazwy",
+  "orderBySize": "Rozmiaru",
+  "directoryNotFound": "Folder o podanej nazwie nie został odnaleziony.",
+  "emptyFolder": "Pusty folder",
+  "invalidFileType": "Wybrany plik \"{0}\" jest nieprawidłowy. Obsługiwane pliki {1}.",
+  "deleteFile": 'Czy napewno chcesz usunąć plik "{0}"?',
+  "overwriteFile": 'Plik o nazwie "{0}" już istnieje w bieżącym folderze. Czy zastąpić?',
+  "dropFilesHere": "umieść pliki tutaj, aby je wysłać",
+  "search": "Szukaj"
 };
 
 if (kendo.ui.FileBrowser) {
@@ -469,8 +469,8 @@ kendo.ui.ImageBrowser.prototype.options.messages =
 $.extend(true, kendo.ui.ImageBrowser.prototype.options.messages, browserMessages);
 }
 
-/* FileManager messages */ 
-  
+/* FileManager messages */
+
 if (kendo.ui.FileManager) {
     kendo.ui.FileManager.prototype.options.messages = $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
         toolbar: {
@@ -542,7 +542,7 @@ if (kendo.ui.FileManager) {
         }
     });
 }
-  
+
 /* Upload messages */
 
 if (kendo.ui.Upload) {
@@ -695,7 +695,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
     "freezeColumns": "Zablokuj kolumny",
     "unfreeze": "Odblokuj okienka"
     }
-  }, 
+  },
   "confirmationDialog": {
     "text": "Czy na pewno chcesz usunąć ten arkusz?",
     "title": "Usuń arkusz"
@@ -823,10 +823,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Tekst kończy się na"
     },
     "date": {
-      "eq":  "Data jest równa",
+      "eq": "Data jest równa",
       "neq": "Data nie jest równa",
-      "lt":  "Data jest przed",
-      "gt":  "Data jest po"
+      "lt": "Data jest przed",
+      "gt": "Data jest po"
     },
     "number": {
       "eq": "Jest równa",
@@ -1042,5 +1042,5 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages, {
 	dateCompare: 'Data początkowa nie może być późniejsza niż końcowa.'
 });
 }
- 
+
 })(window.kendo.jQuery);

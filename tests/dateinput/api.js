@@ -106,7 +106,7 @@
             assert.isOk(dateinput.element.attr("readonly"));
         });
 
-        it("DateInput should update time according to the specified interval", function () {
+        it("DateInput should update time according to the specified interval", function() {
             var e = $.Event('keypress');
             e.which = kendo.keys.UP;
             dateinput = input.kendoDateInput({
@@ -116,7 +116,7 @@
             }).data("kendoDateInput");
 
             input.select();
-            dateinput._keydown({ keyCode: 38, preventDefault: function () { } });
+            dateinput._keydown({ keyCode: 38, preventDefault: function() { } });
 
             assert.equal(input.val(), '15');
         });

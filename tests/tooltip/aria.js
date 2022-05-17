@@ -6,7 +6,7 @@
         beforeEach(function() {
             $.fn.press = function(key, ctrl, shift, alt) {
                 return this.trigger({ type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt });
-            }
+            };
 
             container = $("<div style='margin:50px'/>").appendTo(Mocha.fixture);
         });
@@ -46,7 +46,7 @@
 
             $.fn.press = function(key, ctrl, shift, alt) {
                 return this.trigger({ type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt });
-            }
+            };
 
             container = $("<div style='margin:50px'/>").appendTo(Mocha.fixture);
         });
@@ -64,7 +64,7 @@
             element.trigger($.Event(type, info));
 
             return element;
-        };
+        }
 
         it("tooltip role is assign to the popup container", function() {
             var tooltip = new Tooltip(container, {});

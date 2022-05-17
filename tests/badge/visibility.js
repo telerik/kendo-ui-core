@@ -5,7 +5,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge visibility', function () {
+    describe('kendo.ui.Badge visibility', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -17,7 +17,7 @@
 
         // #region badge.options.visible
         test('badge.options.visible false hides the badge initially', function() {
-            badge = new Badge(span, {visible: false});
+            badge = new Badge(span, { visible: false });
 
             assert.equal(badge.element.is(':hidden'), true);
             assert.equal(badge.element.hasClass('k-hidden'), true);

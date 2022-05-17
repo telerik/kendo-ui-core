@@ -1,7 +1,7 @@
 /* jshint multistr: true */
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.fx", "./kendo.userevents" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "mobile.switch",
@@ -92,7 +92,7 @@ var __meta__ = { // jshint ignore:line
 
             that.width = that.wrapper.width();
 
-            that.constrain  = that.width - handleWidth;
+            that.constrain = that.width - handleWidth;
             that.snapPoint = that.constrain / 2;
 
             if (typeof that.origin != "number") {
@@ -151,13 +151,13 @@ var __meta__ = { // jshint ignore:line
             var element = this.element,
                 wrapper = this.wrapper;
 
-            if(typeof enable == "undefined") {
+            if (typeof enable == "undefined") {
                 enable = true;
             }
 
             this.options.enable = enable;
 
-            if(enable) {
+            if (enable) {
                 element.prop(DISABLED, false);
             } else {
                 element.attr(DISABLED, DISABLED);
@@ -188,7 +188,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _start: function() {
-            if(!this.options.enable) {
+            if (!this.options.enable) {
                 this.userEvents.cancel();
             } else {
                 this.userEvents.capture();
@@ -203,7 +203,7 @@ var __meta__ = { // jshint ignore:line
             that._toggle(that.position > that.snapPoint);
         },
 
-        _toggle: function (checked) {
+        _toggle: function(checked) {
             var that = this,
                 handle = that.handle,
                 element = that.element[0],
@@ -230,7 +230,7 @@ var __meta__ = { // jshint ignore:line
                     duration: duration,
                     offset: distance + "px,0",
                     reset: true,
-                    complete: function () {
+                    complete: function() {
                         if (value !== checked) {
                             element.checked = checked;
                             that.trigger(CHANGE, { checked: checked });
@@ -245,7 +245,7 @@ var __meta__ = { // jshint ignore:line
             that.userEvents = new kendo.UserEvents(that.wrapper, {
                 fastTap: true,
                 tap: function() {
-                    if(that.options.enable) {
+                    if (that.options.enable) {
                         that._toggle(!that.element[0].checked);
                     }
                 },
@@ -261,4 +261,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core", "./kendo.userevents" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "draganddrop",
@@ -10,7 +10,7 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core", "userevents" ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
         document = window.document,
@@ -244,8 +244,8 @@ var __meta__ = { // jshint ignore:line
 
             Observable.fn.init.call(that);
 
-            that.x = new PaneDimension(extend({horizontal: true}, options));
-            that.y = new PaneDimension(extend({horizontal: false}, options));
+            that.x = new PaneDimension(extend({ horizontal: true }, options));
+            that.y = new PaneDimension(extend({ horizontal: false }, options));
             that.container = options.container;
             that.forcedMinScale = options.minScale;
             that.maxScale = options.maxScale || 100;
@@ -314,7 +314,7 @@ var __meta__ = { // jshint ignore:line
                 resistance,
                 movable;
 
-            extend(that, {elastic: true}, options);
+            extend(that, { elastic: true }, options);
 
             resistance = that.elastic ? 0.5 : 0;
             movable = that.movable;
@@ -411,11 +411,11 @@ var __meta__ = { // jshint ignore:line
 
     if (support.hasHW3D) {
         translate = function(x, y, scale) {
-            return "translate3d(" + x + "px," + y +"px,0) scale(" + scale + ")";
+            return "translate3d(" + x + "px," + y + "px,0) scale(" + scale + ")";
         };
     } else {
         translate = function(x, y, scale) {
-            return "translate(" + x + "px," + y +"px) scale(" + scale + ")";
+            return "translate(" + x + "px," + y + "px) scale(" + scale + ")";
         };
     }
 
@@ -620,7 +620,7 @@ var __meta__ = { // jshint ignore:line
     });
 
     var Draggable = Widget.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
@@ -728,7 +728,7 @@ var __meta__ = { // jshint ignore:line
         _start: function(e) {
             var that = this,
                 options = that.options,
-                container = options.container ? $(options.container): null,
+                container = options.container ? $(options.container) : null,
                 hint = options.hint;
 
             if (this._shouldIgnoreTarget(e.touch.initialTouch) || (options.holdToDrag && !that._activated)) {
@@ -757,7 +757,7 @@ var __meta__ = { // jshint ignore:line
                 })
                 .appendTo(document.body);
 
-                that.angular("compile", function(){
+                that.angular("compile", function() {
                     that.hint.removeAttr("ng-repeat");
                     var scopeTarget = $(e.target);
 
@@ -825,7 +825,7 @@ var __meta__ = { // jshint ignore:line
                     if (velocity.y === 0 && velocity.x === 0) {
                         clearInterval(this._scrollInterval);
                         this._scrollInterval = null;
-                    } else if(!this._scrollInterval) {
+                    } else if (!this._scrollInterval) {
                         this._scrollInterval = setInterval(this._autoScroll.bind(this), 50);
                     }
                 }
@@ -1067,7 +1067,7 @@ var __meta__ = { // jshint ignore:line
         } else {
             offset = element.offset();
             offset.bottom = offset.top + element.height();
-            offset.right =  offset.left + element.width();
+            offset.right = offset.left + element.width();
             return offset;
         }
     }
@@ -1127,4 +1127,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

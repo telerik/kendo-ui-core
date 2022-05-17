@@ -5,7 +5,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge position', function () {
+    describe('kendo.ui.Badge position', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });

@@ -8,7 +8,7 @@
 
             $.fn.press = function(key, ctrl, shift, alt) {
                 return this.trigger({ type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt });
-            }
+            };
 
             container = $("<div style='margin:50px'/>").appendTo(Mocha.fixture);
         });
@@ -172,7 +172,7 @@
                 requestStart: function(e) {
                     e.options.data = {
                         bar: "foo"
-                    }
+                    };
                 }
             });
 
@@ -196,7 +196,7 @@
                     }
                 },
                 requestStart: function(e) {
-                    e.options.data.bar = "foo"
+                    e.options.data.bar = "foo";
                 }
             });
 

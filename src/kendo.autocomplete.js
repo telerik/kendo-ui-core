@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "autocomplete",
@@ -21,7 +21,7 @@ var __meta__ = { // jshint ignore:line
     } ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
         caret = kendo.caret,
@@ -66,11 +66,11 @@ var __meta__ = { // jshint ignore:line
     }
 
     var AutoComplete = List.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this, wrapper, disabled;
 
             that.ns = ns;
-            options = Array.isArray(options) ? { dataSource: options} : options;
+            options = Array.isArray(options) ? { dataSource: options } : options;
 
             List.fn.init.call(that, element, options);
 
@@ -100,13 +100,13 @@ var __meta__ = { // jshint ignore:line
                 .on("keypress" + ns, that._keypress.bind(that))
                 .on("input" + ns, that._search.bind(that))
                 .on("paste" + ns, that._search.bind(that))
-                .on("focus" + ns, function () {
+                .on("focus" + ns, function() {
                     that._prev = that._accessor();
                     that._oldText = that._prev;
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
                 })
-                .on("focusout" + ns, function () {
+                .on("focusout" + ns, function() {
                     that._change();
                     that._placeholder();
                     that.close();
@@ -258,7 +258,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        close: function () {
+        close: function() {
             var that = this;
             var current = that.listView.focus();
 
@@ -284,11 +284,11 @@ var __meta__ = { // jshint ignore:line
             this.listView.refresh();
         },
 
-        select: function (li) {
+        select: function(li) {
             this._select(li);
         },
 
-        search: function (word) {
+        search: function(word) {
             var that = this,
             options = that.options,
             ignoreCase = options.ignoreCase,
@@ -325,7 +325,7 @@ var __meta__ = { // jshint ignore:line
             that._toggleCloseVisibility();
         },
 
-        suggest: function (word) {
+        suggest: function(word) {
             var that = this,
                 key = that._last,
                 value = that._accessor(),
@@ -387,7 +387,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        value: function (value) {
+        value: function(value) {
             if (value !== undefined) {
                 this.listView.value(value);
 
@@ -534,7 +534,7 @@ var __meta__ = { // jshint ignore:line
             this._inputValue(text);
             this._accessor(value);
 
-            this._old = this.oldText =  this._accessor();
+            this._old = this.oldText = this._accessor();
 
             this.listView.setValue(value);
             this._placeholder();
@@ -564,7 +564,7 @@ var __meta__ = { // jshint ignore:line
             that._toggleCloseVisibility();
         },
 
-        _accessor: function (value) {
+        _accessor: function(value) {
             var that = this,
                 element = that.element[0];
 
@@ -586,7 +586,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _keydown: function (e) {
+        _keydown: function(e) {
             var that = this;
             var key = e.keyCode;
             var listView = that.listView;
@@ -604,7 +604,7 @@ var __meta__ = { // jshint ignore:line
                         operator: that.options.filter,
                         field: that.options.dataTextField,
                         ignoreCase: that.ignoreCase
-                    }).done(function () {
+                    }).done(function() {
                         if (that._allowOpening()) {
                             that._resetFocusItem();
                             that.popup.open();
@@ -662,7 +662,7 @@ var __meta__ = { // jshint ignore:line
             this._typing = true;
         },
 
-        _move: function (action) {
+        _move: function(action) {
             this.listView[action]();
 
             if (this.options.suggest) {
@@ -670,7 +670,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _hideBusy: function () {
+        _hideBusy: function() {
             var that = this;
             clearTimeout(that._busy);
             that._loading.addClass(HIDDENCLASS);
@@ -679,14 +679,14 @@ var __meta__ = { // jshint ignore:line
             that._showClear();
         },
 
-        _showBusy: function () {
+        _showBusy: function() {
             var that = this;
 
             if (that._busy) {
                 return;
             }
 
-            that._busy = setTimeout(function () {
+            that._busy = setTimeout(function() {
                 that.element.attr("aria-busy", true);
                 that._loading.removeClass(HIDDENCLASS);
                 that._hideClear();
@@ -751,11 +751,11 @@ var __meta__ = { // jshint ignore:line
             return this.element.val();
         },
 
-        _search: function () {
+        _search: function() {
             var that = this;
             clearTimeout(that._typingTimeout);
 
-            that._typingTimeout = setTimeout(function () {
+            that._typingTimeout = setTimeout(function() {
                 if (that._prev !== that._accessor()) {
                     that._prev = that._accessor();
                     that.search();
@@ -797,7 +797,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _wrapper: function () {
+        _wrapper: function() {
             var that = this,
                 element = that.element,
                 DOMelement = element[0],
@@ -842,4 +842,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

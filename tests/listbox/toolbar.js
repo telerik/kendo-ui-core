@@ -731,7 +731,7 @@
 
             clickTransferAllToButton(listbox1);
 
-            assert.equal(listbox1.items().length, 1)
+            assert.equal(listbox1.items().length, 1);
             equalListItems(listbox1.items()[0], item2);
         });
     });
@@ -904,7 +904,7 @@
 
             clickTransferAllFromButton(listbox1);
 
-            assert.equal(listbox2.items().length, 1)
+            assert.equal(listbox2.items().length, 1);
             equalListItems(listbox2.items()[0], item2);
         });
     });

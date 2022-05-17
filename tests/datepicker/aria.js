@@ -3,7 +3,7 @@
 var DatePicker = kendo.ui.DatePicker,
     input, instance;
 
-describe("kendo.ui.DatePicker ARIA", function () {
+describe("kendo.ui.DatePicker ARIA", function() {
     beforeEach(function() {
 
         input = $("<input id='test' />").appendTo(Mocha.fixture);
@@ -149,7 +149,7 @@ it("DatePicker removes aria-label from previous cell", function() {
 
 });
 
-describe("kendo.ui.DatePicker ARIA defaults", function () {
+describe("kendo.ui.DatePicker ARIA defaults", function() {
     beforeEach(function() {
 
         input = $("<input id='test' />").appendTo(Mocha.fixture);
@@ -168,21 +168,21 @@ it("DatePicker add correct aria-label for date", function() {
     instance.element.trigger("focus");
     var cell = instance.dateView.calendar.element.find("td.k-state-focused");
 
-    assert.equal(cell.attr("aria-label"), "Current focused date is "+kendo.toString(date, "D"));
+    assert.equal(cell.attr("aria-label"), "Current focused date is " + kendo.toString(date, "D"));
 });
 
 it("DatePicker add correct aria-label for year", function() {
     var date = kendo.date.today();
-    instance = new DatePicker(input, { start: "year"});
+    instance = new DatePicker(input, { start: "year" });
     instance.open();
     instance.element.trigger("focus");
     var cell = instance.dateView.calendar.element.find("td.k-state-focused");
-    assert.equal(cell.attr("aria-label"), "Current focused month is "+kendo.toString(date, "MMMM"));
+    assert.equal(cell.attr("aria-label"), "Current focused month is " + kendo.toString(date, "MMMM"));
 });
 
 it("DatePicker add evaluates ariatemplate in correct context", function() {
     var date = kendo.date.today();
-    instance = new DatePicker(input, { ARIATemplate: "Current focused date is #= this.dateView.calendar.view().name === 'month' ? 'test': kendo.toString(data.current, 'MMM yyyy') #"});
+    instance = new DatePicker(input, { ARIATemplate: "Current focused date is #= this.dateView.calendar.view().name === 'month' ? 'test': kendo.toString(data.current, 'MMM yyyy') #" });
     instance.open();
     instance.element.trigger("focus");
     var cell = instance.dateView.calendar.element.find("td.k-state-focused");
@@ -191,15 +191,15 @@ it("DatePicker add evaluates ariatemplate in correct context", function() {
 
 it("DatePicker add correct aria-label for decade", function() {
     var date = kendo.date.today();
-    instance = new DatePicker(input, { start: "decade"});
+    instance = new DatePicker(input, { start: "decade" });
     instance.open();
     instance.element.trigger("focus");
     var cell = instance.dateView.calendar.element.find("td.k-state-focused");
-    assert.equal(cell.attr("aria-label"),  "Current focused year is "+kendo.toString(date, "yyyy"));
+    assert.equal(cell.attr("aria-label"), "Current focused year is " + kendo.toString(date, "yyyy"));
 });
 
 it("DatePicker add correct aria-label for century", function() {
-    instance = new DatePicker(input, { start: "century", value: new Date(2021, 0, 1)});
+    instance = new DatePicker(input, { start: "century", value: new Date(2021, 0, 1) });
     instance.open();
     instance.element.trigger("focus");
     var cell = instance.dateView.calendar.element.find("td.k-state-focused");

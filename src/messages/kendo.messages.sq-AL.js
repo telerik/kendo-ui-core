@@ -7,23 +7,9 @@
  * If you do not own a commercial license, this file shall be governed by the trial license terms.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 */
 
-(function ($, undefined) {
+(function($, undefined) {
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -837,10 +823,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Teksti përfundon me"
     },
     "date": {
-      "eq":  "Data është",
+      "eq": "Data është",
       "neq": "Data nuk është",
-      "lt":  "Data është para",
-      "gt":  "Data është pas"
+      "lt": "Data është para",
+      "gt": "Data është pas"
     },
     "number": {
       "eq": "Është e barabartë me",
@@ -1027,7 +1013,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Zgjedh fajlet...",
   "cancel": "Anulo",

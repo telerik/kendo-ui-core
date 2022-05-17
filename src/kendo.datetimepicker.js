@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.datepicker", "./kendo.timepicker", "./kendo.html.button"], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "datetimepicker",
@@ -54,30 +54,30 @@ var __meta__ = { // jshint ignore:line
         timeViewParams = { view: "time" },
         extend = $.extend,
         SINGLE_POPUP_TEMPLATE = '<div class="k-date-tab k-datetime-wrap">' +
-                                    '<div class="k-datetime-buttongroup">'+
-                                        '<div class="k-button-group k-button-group-stretched">'+
+                                    '<div class="k-datetime-buttongroup">' +
+                                        '<div class="k-button-group k-button-group-stretched">' +
                                             '<button class="k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-base k-selected k-group-start">' +
                                                 '<span class="k-button-text">#=messages.date#</span>' +
-                                            '</button>'+
+                                            '</button>' +
                                             '<button class="k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-base k-group-end">' +
                                                 '<span class="k-button-text">#=messages.time#</span>' +
-                                            '</button>'+
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="k-datetime-selector">'+
-                                        '<div class="k-datetime-calendar-wrap">'+
-                                        '</div>'+
-                                        '<div class="k-datetime-time-wrap">'+
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="k-datetime-footer k-action-buttons">'+
+                                            '</button>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="k-datetime-selector">' +
+                                        '<div class="k-datetime-calendar-wrap">' +
+                                        '</div>' +
+                                        '<div class="k-datetime-time-wrap">' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="k-datetime-footer k-action-buttons">' +
                                         '<button class="k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel" aria-label="Cancel">' +
                                             '<span class="k-button-text">#=messages.cancel#</span>' +
-                                        '</button>'+
+                                        '</button>' +
                                         '<button class="k-time-accept k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-primary" title="Set" aria-label="Set">' +
                                             '<span class="k-button-text">#=messages.set#</span>' +
-                                        '</button>'+
-                                    '</div>'+
+                                        '</button>' +
+                                    '</div>' +
                                 '</div>',
         STATE_SELECTED = "k-selected";
 
@@ -106,7 +106,7 @@ var __meta__ = { // jshint ignore:line
 
             that._wrapper();
 
-            if(options.singlePopup){
+            if (options.singlePopup) {
                 that._popup();
             }
 
@@ -119,7 +119,7 @@ var __meta__ = { // jshint ignore:line
 
             try {
                 element[0].setAttribute("type", "text");
-            } catch(e) {
+            } catch (e) {
                 element[0].type = "text";
             }
 
@@ -168,7 +168,7 @@ var __meta__ = { // jshint ignore:line
             start: MONTH,
             depth: MONTH,
             animation: {},
-            month : {},
+            month: {},
             ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
             dateButtonText: "Open the date view",
             timeButtonText: "Open the time view",
@@ -279,7 +279,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
-                if(element && element.length) {
+                if (element && element.length) {
                     element[0].removeAttribute(DISABLED);
                     element[0].removeAttribute(READONLY, false);
                     element[0].removeAttribute(ARIA_DISABLED, false);
@@ -717,7 +717,7 @@ var __meta__ = { // jshint ignore:line
                 change: function() {
                     var value = that._applyDateValue();
 
-                    if(options.singlePopup){
+                    if (options.singlePopup) {
                         if (!that.timeView._currentlySelected) {
                             that.timeView._currentlySelected = new Date();
                         }
@@ -739,13 +739,13 @@ var __meta__ = { // jshint ignore:line
                         div.attr(ARIA_HIDDEN, true);
 
                         if (!that.options.singlePopup && !timeView.popup.visible()) {
-                            if(element && element.length) {
+                            if (element && element.length) {
                                 element[0].removeAttribute(ARIA_OWNS);
                             }
                         }
                     }
                 },
-                open:  function(e) {
+                open: function(e) {
                     if (that.trigger(OPEN, dateViewParams)) {
                         e.preventDefault();
                     } else {
@@ -802,14 +802,14 @@ var __meta__ = { // jshint ignore:line
                         element.attr(ARIA_EXPANDED, false);
 
                         if (!dateView.popup.visible()) {
-                            if(element && element.length) {
+                            if (element && element.length) {
                                 element[0].removeAttribute(ARIA_OWNS);
                             }
                         }
                     }
                 },
-                open:  function(e) {
-                    if (that.options.componentType !=="modern") {
+                open: function(e) {
+                    if (that.options.componentType !== "modern") {
                         timeView._adjustListWidth();
                     } else {
                         that.timeView._updateTitle();
@@ -832,7 +832,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 },
                 active: function(current) {
-                    if(element && element.length) {
+                    if (element && element.length) {
                         element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
                     }
                     if (current) {
@@ -850,7 +850,7 @@ var __meta__ = { // jshint ignore:line
             ul = timeView.ul;
         },
 
-        _applyDateValue: function () {
+        _applyDateValue: function() {
             var that = this;
             var options = that.options;
             var dateView = that.dateView;
@@ -882,7 +882,7 @@ var __meta__ = { // jshint ignore:line
             return value;
         },
 
-        _applyTimeValue: function(value){
+        _applyTimeValue: function(value) {
             var timeView = this.timeView;
             var options = this.options;
 
@@ -1023,7 +1023,7 @@ var __meta__ = { // jshint ignore:line
                 that.element.attr(ARIA_ACTIVEDESCENDANT, calendar._updateAria(that._ariaTemplate, date));
             }
         },
-        _popup: function(){
+        _popup: function() {
             var that = this;
             var options = that.options;
             var div = $("<div></div>").attr(ARIA_HIDDEN, "true")
@@ -1037,15 +1037,15 @@ var __meta__ = { // jshint ignore:line
                 name: "Popup",
                 isRtl: kendo.support.isRtl(that.wrapper),
                 anchor: that.wrapper,
-                activate: function () {
+                activate: function() {
                     if (that.options.timeView && that.options.timeView.list === "scroll") {
                         that.timeView.addTranslate();
                         that.timeView.applyValue(that._value);
                         that.timeView._updateRanges();
                     }
                 },
-                open: function(e){
-                    if (that.trigger(OPEN, {view: this.element.find('.k-date-tab').length ? 'date' : 'time', sender: that})) {
+                open: function(e) {
+                    if (that.trigger(OPEN, { view: this.element.find('.k-date-tab').length ? 'date' : 'time', sender: that })) {
                         e.preventDefault();
                     }
                     that.timeView._updateTitle();
@@ -1059,7 +1059,7 @@ var __meta__ = { // jshint ignore:line
 
         _groupChangeClick: function(e) {
             preventDefault(e);
-            var button =  $(e.currentTarget);
+            var button = $(e.currentTarget);
             var index = button.index();
 
             if (index) {
@@ -1088,7 +1088,7 @@ var __meta__ = { // jshint ignore:line
             this._timeIcon.toggle();
         },
 
-        _cancelClickHandler: function (e) {
+        _cancelClickHandler: function(e) {
             preventDefault(e);
             if (this._value) {
                 this.value(this._value);
@@ -1156,4 +1156,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

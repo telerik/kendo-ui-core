@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -390,17 +390,17 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
 /* FileBrowser and ImageBrowser messages */
 
 var browserMessages = {
-  "uploadFile" : "Charger",
-  "orderBy" : "Trier par",
-  "orderByName" : "Nom",
-  "orderBySize" : "Taille",
-  "directoryNotFound" : "Aucun répértoire de ce nom.",
-  "emptyFolder" : "Répertoire vide",
-  "deleteFile" : 'Etes-vous sûr de vouloir supprimer "{0}"?',
-  "invalidFileType" : "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
-  "overwriteFile" : "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
-  "dropFilesHere" : "glissez les fichiers ici pour les charger",
-  "search" : "Recherche"
+  "uploadFile": "Charger",
+  "orderBy": "Trier par",
+  "orderByName": "Nom",
+  "orderBySize": "Taille",
+  "directoryNotFound": "Aucun répértoire de ce nom.",
+  "emptyFolder": "Répertoire vide",
+  "deleteFile": 'Etes-vous sûr de vouloir supprimer "{0}"?',
+  "invalidFileType": "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
+  "overwriteFile": "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
+  "dropFilesHere": "glissez les fichiers ici pour les charger",
+  "search": "Recherche"
 };
 
 if (kendo.ui.FileBrowser) {

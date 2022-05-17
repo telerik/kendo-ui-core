@@ -1,5 +1,5 @@
 (function() {
-    describe("events", function () {
+    describe("events", function() {
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
         });
@@ -39,7 +39,7 @@
         });
     });
 
-    describe("FlatColorPicker - events", function () {
+    describe("FlatColorPicker - events", function() {
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
         });

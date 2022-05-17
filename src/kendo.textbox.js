@@ -1,8 +1,8 @@
-(function (f, define) {
+(function(f, define) {
     define(["./kendo.core", "./kendo.floatinglabel"], f);
-})(function () {
+})(function() {
 
-var __meta__ = {// jshint ignore:line
+var __meta__ = { // jshint ignore:line
     id: "textbox",
     name: "TextBox",
     category: "web",
@@ -10,7 +10,7 @@ var __meta__ = {// jshint ignore:line
     depends: ["core", "floatinglabel"]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         ui = kendo.ui,
@@ -27,7 +27,7 @@ var __meta__ = {// jshint ignore:line
         ARIA_DISABLED = "aria-disabled";
 
     var TextBox = Widget.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
@@ -224,10 +224,10 @@ var __meta__ = {// jshint ignore:line
 
             that._value = newValue;
 
-            that.trigger(CHANGE, {value: newValue, originalEvent: e});
+            that.trigger(CHANGE, { value: newValue, originalEvent: e });
         },
 
-        _wrapper: function () {
+        _wrapper: function() {
             var that = this;
             var element = that.element;
             var DOMElement = element[0];
@@ -252,4 +252,4 @@ var __meta__ = {// jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function (a1, a2, a3) { (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

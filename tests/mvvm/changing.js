@@ -1028,7 +1028,7 @@
             viewModel.set("bar", "20px");
 
             assert.equal(dom.css("left"), "2px");
-            assert.equal(dom.css("top"), "20px")
+            assert.equal(dom.css("top"), "20px");
         });
 
         it("tracking changes of complex fields", function() {

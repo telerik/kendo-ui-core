@@ -25,7 +25,7 @@
         });
 
         it("dialog actions have kendoNS", function() {
-            var dialog = createDialog({ actions: [{}, {}] })
+            var dialog = createDialog({ actions: [{}, {}] });
             var actionBtns = dialog.wrapper.find(".k-dialog-buttongroup > .k-button");
             actionBtns.each(function() {
                 assert.isOk($(this).data("kendoNS"));
@@ -203,7 +203,7 @@
         function keyboardCloseButton_closesDialog(keyCode) {
             var dialog = createDialog({
                 closable: true,
-                close: function (ev) {
+                close: function(ev) {
                     assert.isOk(ev.userTriggered);
                 }
             });

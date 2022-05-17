@@ -1,9 +1,9 @@
-(function(){
+(function() {
 
 var AutoComplete = kendo.ui.AutoComplete,
     input;
 
-describe("kendo.ui.AutoComplete placeholder", function () {
+describe("kendo.ui.AutoComplete placeholder", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
         input = $("<input>").appendTo(Mocha.fixture);

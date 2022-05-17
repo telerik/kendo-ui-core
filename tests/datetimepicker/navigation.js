@@ -498,7 +498,7 @@
             $(".k-weekend").eq(1).trigger("click");
 
             assert.equal(input.val(), "1/16/2016 12:00 AM");
-        })
+        });
 
 
         it("TimeView uses input value on open", function() {

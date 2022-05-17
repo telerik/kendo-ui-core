@@ -7,7 +7,7 @@
 
             window.textBoxChange = function() {
                 assert.isOk(true);
-            }
+            };
         });
         afterEach(function() {
 
@@ -90,7 +90,7 @@
 
             dom.kendoTextArea();
 
-            observable.set("value", "test")
+            observable.set("value", "test");
             assert.equal(dom.data("kendoTextArea").value(), "test");
         });
 

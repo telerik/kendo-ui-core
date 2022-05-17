@@ -11,7 +11,7 @@
         });
 
         it("enable(false) should disable textarea element", function() {
-            var widget = new TextArea(textarea)
+            var widget = new TextArea(textarea);
 
             widget.enable(false);
 
@@ -19,7 +19,7 @@
         });
 
         it("enable(true) should remove disable attributes", function() {
-            var widget = new TextArea(textarea)
+            var widget = new TextArea(textarea);
 
             widget.enable(false);
             widget.enable(true);
@@ -40,7 +40,7 @@
         });
 
         it("readonly(true) makes textarea element readonly", function() {
-            var widget = new TextArea(textarea)
+            var widget = new TextArea(textarea);
 
             widget.readonly(true);
 
@@ -49,7 +49,7 @@
         });
 
         it("readonly(false) should remove readonly attributes", function() {
-            var widget = new TextArea(textarea)
+            var widget = new TextArea(textarea);
 
             widget.readonly(true);
             widget.readonly(false);

@@ -2,7 +2,7 @@
     var MultiSelect = kendo.ui.MultiSelect,
         select;
 
-    describe("kendo.ui.MultiSelect Single Tag mode", function () {
+    describe("kendo.ui.MultiSelect Single Tag mode", function() {
         beforeEach(function() {
 
             kendo.ns = "kendo-";

@@ -7,14 +7,14 @@
 
         length = length || 5;
 
-        for (var i=0; i < length; i++) {
+        for (var i = 0; i < length; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
         select.html(options);
     }
 
-    describe("kendo.ui.MultiSelect filtering", function () {
+    describe("kendo.ui.MultiSelect filtering", function() {
         beforeEach(function() {
             $.fn.press = function(character) {
                 var keyCode = character.charCodeAt(0);
@@ -22,7 +22,7 @@
                     type: "keydown",
                     keyCode: keyCode
                 });
-            }
+            };
 
             kendo.ns = "kendo-";
             select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
@@ -145,7 +145,7 @@
             animation: false,
             dataTextField: "text",
             dataValueField: "value",
-            dataSource: [{text: "Foo", value: 1 }, {text:"Bar", value:2 }, {text:"Baz", value:3}]
+            dataSource: [{ text: "Foo", value: 1 }, { text: "Bar", value: 2 }, { text: "Baz", value: 3 }]
         });
 
         multiselect.search("Foo");
@@ -662,7 +662,7 @@
         multiselect.open();
     });
     it("resize popup on search when autoWidth is enabled", function(done) {
-        var data = [{text: "Foooooooooooooooooooooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+        var data = [{ text: "Foooooooooooooooooooooooooooooooo", value: 1, type: "a" }, { text: "Bar", value: 2, type: "b" }, { text: "Baz", value: 3, type: "a" }];
         $(select).width(100);
         var multiselect = new MultiSelect(select, {
             autoWidth: true,
@@ -676,7 +676,7 @@
         multiselect.one("open", function() {
             assert.isOk(multiselect.wrapper.width() < multiselect.popup.element.width());
             multiselect.popup.close();
-            multiselect.dataSource.filter({field: "text", value: "a", operator: "contains"});
+            multiselect.dataSource.filter({ field: "text", value: "a", operator: "contains" });
             multiselect.one("open", function() {
                 assert.isOk(multiselect.wrapper.width() >= multiselect.popup.element.width());
                 done();
@@ -690,12 +690,12 @@
     it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
         var multiselect = new MultiSelect(select, {
             autoWidth: true,
-            animation:{
+            animation: {
                 open: {
-                    duration:0
+                    duration: 0
                 },
                 close: {
-                    duration:0
+                    duration: 0
                 },
             },
             dataSource: {
@@ -713,12 +713,12 @@
     it("enabled autoWidth disables X scrolling", function() {
         var multiselect = new MultiSelect(select, {
             autoWidth: true,
-            animation:{
+            animation: {
                 open: {
-                    duration:0
+                    duration: 0
                 },
                 close: {
-                    duration:0
+                    duration: 0
                 },
             },
             dataSource: {

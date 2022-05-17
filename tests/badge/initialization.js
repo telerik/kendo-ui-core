@@ -5,7 +5,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge initialization', function () {
+    describe('kendo.ui.Badge initialization', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -21,7 +21,7 @@
             assert.equal(badge.element.hasClass('k-badge'), true);
         });
 
-        test('default text is empty string', function () {
+        test('default text is empty string', function() {
             badge = new Badge(span);
 
             assert.equal(badge._text, '');

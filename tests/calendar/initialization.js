@@ -1,9 +1,9 @@
-(function(){
+(function() {
 
 var Calendar = kendo.ui.Calendar;
 var div;
 
-describe("kendo.ui.Calendar initialization", function () {
+describe("kendo.ui.Calendar initialization", function() {
     beforeEach(function() {
 
         div = $("<div />").appendTo(Mocha.fixture);
@@ -14,20 +14,20 @@ describe("kendo.ui.Calendar initialization", function () {
     });
 
 it("if format is {0: format} should strip it", function() {
-    var cal = new Calendar(div, {format: "{0:MM/dd/yyyy}"});
+    var cal = new Calendar(div, { format: "{0:MM/dd/yyyy}" });
 
     assert.equal(cal.options.format, "MM/dd/yyyy");
 });
 
 it("if start is not correct should set MONTH view", function() {
-    var cal = new Calendar(div, {start: "not real view"});
+    var cal = new Calendar(div, { start: "not real view" });
     var view = cal.view();
 
     assert.equal(view.name, "month");
 });
 
 it("if depth is bigger then start set it to MONTH view", function() {
-    var cal = new Calendar(div, {depth: "year"});
+    var cal = new Calendar(div, { depth: "year" });
 
     assert.equal(cal.options.depth, "month");
 });
@@ -60,7 +60,7 @@ it("render table after header", function() {
 
 it("render month view when init", function() {
     var date = new Date(2011, 10, 10);
-    var cal = new Calendar(div, {value: date});
+    var cal = new Calendar(div, { value: date });
 
     assert.equal(div.find(".k-nav-fast").html(), "November 2011");
     assert.equal(div.find(".k-content").find("a").length, 42);
@@ -312,11 +312,11 @@ it("Widget value is correctly after initialized with disabled value", function()
         value: new Date(2015,9,3),
 		disableDates: ["mo", "sa"]
     });
-    cal.value(new Date(2015,9,4))
+    cal.value(new Date(2015,9,4));
     assert.isOk(cal.element.find('tr').eq(2).children().first().hasClass("k-state-selected"));
 });
 
-it("Year 0 should initialize year 1900", function () {
+it("Year 0 should initialize year 1900", function() {
     var cal = new Calendar(div, {
         value: new Date(0, 1, 1)
     });
@@ -324,7 +324,7 @@ it("Year 0 should initialize year 1900", function () {
     assert.equal(1900, cal.value().getFullYear());
 });
 
-it("Full year 0 should initialize year 1900", function () {
+it("Full year 0 should initialize year 1900", function() {
     var year = 1;
     var date = new Date(2016, 1, 1);
     date.setFullYear(year);
@@ -334,7 +334,7 @@ it("Full year 0 should initialize year 1900", function () {
     assert.equal(year, cal.value().getFullYear());
 });
 
-it("Year 99 should initialize year 1999", function () {
+it("Year 99 should initialize year 1999", function() {
     var cal = new Calendar(div, {
         value: new Date(99, 1, 1)
     });
@@ -342,7 +342,7 @@ it("Year 99 should initialize year 1999", function () {
     assert.equal(1999, cal.value().getFullYear());
 });
 
-it("Full year 99 should initialize year 1900", function () {
+it("Full year 99 should initialize year 1900", function() {
     var year = 99;
     var date = new Date(2016, 1, 1);
     date.setFullYear(year);
@@ -352,7 +352,7 @@ it("Full year 99 should initialize year 1900", function () {
     assert.equal(year, cal.value().getFullYear());
 });
 
-it("Century view support dates less then 200 year", function () {
+it("Century view support dates less then 200 year", function() {
     var minDate = new Date(Date.UTC(1000, 0, 1));
     minDate.setUTCFullYear(100); // set year to 100
 
@@ -373,7 +373,7 @@ it("Century view support dates less then 200 year", function () {
 });
 
 
-it("Century view supports min value equal to 0001-01-01", function () {
+it("Century view supports min value equal to 0001-01-01", function() {
     var minDate = new Date(Date.UTC(1000, 0, 1));
     minDate.setUTCFullYear(1); // set year to 0001
 

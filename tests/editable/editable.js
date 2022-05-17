@@ -617,7 +617,7 @@
 
         it("id attribute can be added from configuration", function() {
             var editable = div.kendoEditable({
-                fields: { field: "foo",  id: "foo" },
+                fields: { field: "foo", id: "foo" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -648,7 +648,7 @@
 
         it("ComboBox editor is displayed when type option is set as ComboBox", function() {
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "ComboBox" },
+                fields: { field: "foo", id: "foo", editor: "ComboBox" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -657,7 +657,7 @@
 
         it("AutoComplete editor is displayed when type option is set as AutoComplete", function() {
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "AutoComplete" },
+                fields: { field: "foo", id: "foo", editor: "AutoComplete" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -668,7 +668,7 @@
             defaultModel.set("foo", new Date());
 
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "DateInput" },
+                fields: { field: "foo", id: "foo", editor: "DateInput" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -679,7 +679,7 @@
             defaultModel.set("foo", "#fff");
 
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "ColorPicker" },
+                fields: { field: "foo", id: "foo", editor: "ColorPicker" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -690,7 +690,7 @@
             defaultModel.set("foo", new Date());
 
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "DatePicker" },
+                fields: { field: "foo", id: "foo", editor: "DatePicker" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -701,7 +701,7 @@
             defaultModel.set("foo", new Date());
 
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "DateTimePicker" },
+                fields: { field: "foo", id: "foo", editor: "DateTimePicker" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -714,7 +714,7 @@
             defaultModel.set("foo", new Date());
 
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "TimePicker" },
+                fields: { field: "foo", id: "foo", editor: "TimePicker" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -725,7 +725,7 @@
 
         it("MaskedTextBox editor is displayed when type option is set as MaskedTextBox", function() {
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "MaskedTextBox" },
+                fields: { field: "foo", id: "foo", editor: "MaskedTextBox" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -736,14 +736,14 @@
             defaultModel.set("foo", []);
 
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "MultiSelect", editorOptions: {
+                fields: { field: "foo", id: "foo", editor: "MultiSelect", editorOptions: {
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: [
                         { text: "Item1", value: "1" },
                         { text: "Item2", value: "2" }
                     ]
-                }},
+                } },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -754,7 +754,7 @@
             defaultModel.set("foo", 1);
 
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "NumericTextBox" },
+                fields: { field: "foo", id: "foo", editor: "NumericTextBox" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -765,7 +765,7 @@
             defaultModel.set("foo", 1);
 
             var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "Slider" },
+                fields: { field: "foo", id: "foo", editor: "Slider" },
                 model: defaultModel
             }).getKendoEditable();
 
@@ -783,13 +783,13 @@
 
         it("custom attributes can be added to editors", function() {
             var editable = div.kendoEditable({
-                fields: { field: "foo",  attributes: { labelId: "test" }},
-                model:  new (kendo.data.Model.define({
+                fields: { field: "foo", attributes: { labelId: "test" } },
+                model: new (kendo.data.Model.define({
                     fields: {
                         foo: {
                             field: "foo",
                             attributes: { labelId: "test" }
-                        }}
+                        } }
                     }
                 ))()
             }).getKendoEditable();
@@ -807,7 +807,7 @@
 
         it("validateOnblur can be passed as an option", function() {
             var editable = div.kendoEditable({
-                fields: { field: "foo",  id: "foo" },
+                fields: { field: "foo", id: "foo" },
                 model: defaultModel,
                 validateOnBlur: false
             }).getKendoEditable();
@@ -817,7 +817,7 @@
 
         it("validationSummary can be passed as an option", function() {
             var editable = div.kendoEditable({
-                fields: { field: "foo",  id: "foo" },
+                fields: { field: "foo", id: "foo" },
                 model: defaultModel,
                 validationSummary: true
             }).getKendoEditable();
