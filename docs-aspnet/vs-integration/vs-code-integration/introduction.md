@@ -2,6 +2,7 @@
 title: Overview
 page_title: Visual Studio Code Integration Overview
 description: Learn how to enhance your experience in developing web applications with Progress Telerik UI for ASP.NET Core.
+previous_url: /installation/vs-code-integration/introduction
 slug: overview-vs-code-integration
 position: 1
 ---
