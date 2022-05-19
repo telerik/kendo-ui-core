@@ -4,7 +4,7 @@ page_title: VS Extension Options
 description: "Learn how to use the settings Visual Studio (VS) provides that allow you to configure the Telerik UI for ASP.NET MVC VS Extensions to best suit your needs."
 slug: vsextensionsoptions_visualstudio_aspnetmvc
 position: 9
-previous_url: getting-started/vs-integration/vsextensions-options
+previous_url: /getting-started/vs-integration/vsextensions-options
 ---
 
 # Visual Studio Extension Options

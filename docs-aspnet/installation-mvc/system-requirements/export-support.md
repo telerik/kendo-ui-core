@@ -2,7 +2,7 @@
 title: Export Support
 page_title: Export Support
 description: "Get started with Telerik UI for ASP.NET MVC and learn about the versions of the Pako and JSZip libraries supported by the library and used for PDF and Excel export."
-previous_url: getting-started/prerequisites/export-support
+previous_url: /getting-started/prerequisites/export-support
 slug: exportsupport_aspnetmvc
 position: 4
 ---

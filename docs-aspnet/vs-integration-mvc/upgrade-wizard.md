@@ -4,7 +4,7 @@ page_title: Upgrading Projects
 description: "Learn how to upgrade a Telerik UI for ASP.NET MVC application."
 slug: projectwizardupgrade_visualstudio_aspnetmvc
 position: 7
-previous_url: getting-started/vs-integration/upgrade-wizard
+previous_url: /getting-started/vs-integration/upgrade-wizard
 ---
 
 # Upgrading Projects

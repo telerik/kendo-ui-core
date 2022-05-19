@@ -2,7 +2,7 @@
 title: Overview
 page_title: Providing Client-Side Resources
 description: "Get started with Telerik UI for ASP.NET MVC and learn about different ways of copying the client-side resources into Telerik UI for ASP.NET MVC project."
-previous_url: getting-started/installation/getting-started-copy-client-resources
+previous_url: /getting-started/installation/getting-started-copy-client-resources
 slug: copyclientresources_aspnetmvc
 position: 1
 ---

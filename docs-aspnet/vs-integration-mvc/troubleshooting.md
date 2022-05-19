@@ -4,7 +4,7 @@ page_title: Troubleshooting
 description: "Troubleshooting Telerik UI for ASP.NET MVC Visual Studio Extensions."
 slug: troubleshooting_visualstudio_aspnetmvc
 position: 11
-previous_url: getting-started/vs-integration/troubleshooting
+previous_url: /getting-started/vs-integration/troubleshooting
 ---
 
 # Troubleshooting

@@ -8,7 +8,7 @@ slug: script_filesfor_pdf
 
 # Individual Scripts for PDF
 
-The following table lists the individual script files for the Kendo UI PDF export framework and wigets.&nbsp;&nbsp;
+The following table lists the individual script files for the Kendo UI PDF export framework and widgets.&nbsp;&nbsp;
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
@@ -18,8 +18,23 @@ The following table lists the individual script files for the Kendo UI PDF expor
 | | kendo.draganddrop.js | |
 | | kendo.popup.js | |
 | | kendo.window.js | |
+| | kendo.floatinglabel.js | |
+| | kendo.textbox.js | |
 | | kendo.dialog.js | |
+| | kendo.html.base.js | |
+| | kendo.html.button.js | |
 | | kendo.toolbar.js | |
+| | kendo.fx.js | |
+| | kendo.mobile.scroller.js | |
+| | kendo.upload.js | |
+| | kendo.data.js | |
+| | kendo.list.js | |
+| | kendo.combobox.js | |
+| | kendo.color.js | |
+| | kendo.drawing.js | |
+| | kendo.binder.js | |
+| | kendo.dropdownlist.js | |
+| | kendo.numerictextbox.js | |
 | | kendo.pdfviewer.js | |
 
 ## See Also

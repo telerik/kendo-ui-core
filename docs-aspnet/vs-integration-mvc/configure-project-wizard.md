@@ -4,7 +4,7 @@ page_title: Configuring Existing Projects
 description: "Learn how to configure a Telerik UI for ASP.NET MVC application with Visual Studio."
 slug: projectwizardconfig_visualstudio_aspnetmvc
 position: 6
-previous_url: getting-started/vs-integration/configure-project-wizard
+previous_url: /getting-started/vs-integration/configure-project-wizard
 ---
 
 # Configuring Existing Projects

@@ -2,7 +2,7 @@
 title: Scaffolding
 page_title: Scaffolding
 description: "Get started with Telerik UI for ASP.NET Core and learn how to use the Kendo UI Scaffolder extensions."
-previous_url: /getting-started/scaffolding, /getting-started/installation/scaffolding, installation/scaffolding
+previous_url: /getting-started/scaffolding, /getting-started/installation/scaffolding, /installation/scaffolding
 slug: scaffolding_aspnetcore
 position: 5
 ---

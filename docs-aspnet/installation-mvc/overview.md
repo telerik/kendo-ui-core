@@ -2,7 +2,7 @@
 title: Installation Options
 page_title: Download and Installation
 description: "Discover the various installation approaches that allow you to use Telerik UI for ASP.NET MVC in you next MVC project."
-previous_url: getting-started/installation/overview
+previous_url: /getting-started/installation/overview
 slug: overview_downloadinstallation_mvc
 position: 2
 ---

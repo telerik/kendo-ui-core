@@ -2,7 +2,7 @@
 title: OS and Web Browser Support
 page_title: OS Web Browser Support
 description: "Get started with Telerik UI for ASP.NET MVC and learn which are the operating systems and browsers supported by the framework components."
-previous_url: getting-started/prerequisites/browser-support, getting-started/prerequisites/os-support
+previous_url: /getting-started/prerequisites/browser-support, /getting-started/prerequisites/os-support
 slug: webbrowsersupport_aspnetmvc
 position: 1
 ---

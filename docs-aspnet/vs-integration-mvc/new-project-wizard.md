@@ -4,7 +4,7 @@ page_title: Creating New Projects
 description: "Learn how to create a new Telerik UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2
-previous_url: getting-started/vs-integration/new-project-wizard
+previous_url: /getting-started/vs-integration/new-project-wizard
 ---
 
 # Creating New Projects

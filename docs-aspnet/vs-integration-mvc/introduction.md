@@ -4,7 +4,7 @@ page_title: VS Integration Overview
 description: "Learn how to enhance experience of developing web applications with Telerik UI for ASP.NET MVC."
 slug: overview_visualstudio_aspnetmvc
 position: 1
-previous_url: getting-started/vs-integration/introduction
+previous_url: /getting-started/vs-integration/introduction
 ---
 
 # Visual Studio Integration Overview

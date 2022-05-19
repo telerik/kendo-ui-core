@@ -2,7 +2,7 @@
 title: Installing with the Automated Installer
 page_title: Installing with the Automated Installer
 description: "Get started with Telerik UI for ASP.NET MVC and learn how to download the library and initialize its HTML helpers by using the MSI installer."
-previous_url: getting-started/installation/overview
+previous_url: /getting-started/installation/msi-install
 slug: msi_install_mvc
 position: 3
 ---

@@ -4,7 +4,7 @@ page_title: Creating Kendo UI Projects
 description: "Learn how to create a new Progress&reg; Kendo UI&reg; for jQuery application."
 slug: newprojectwizard_visualstudio_kendoui
 position: 6
-previous_url: getting-started/vs-integration/create-kendo-professional-project
+previous_url: /getting-started/vs-integration/create-kendo-professional-project
 ---
 
 # Creating Kendo UI Projects

@@ -2,7 +2,7 @@
 title: Using CDN
 page_title: Using CDN
 description: "Learn how to add the Kendo client-side resources to you Telerik UI ASP.NET MVC project by using the Telerik CDN services."
-previous_url: getting-started/installation/cdn-service
+previous_url: /getting-started/installation/cdn-service
 slug: cdnservices_aspnetmvc
 position: 3
 ---
