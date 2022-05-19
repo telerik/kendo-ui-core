@@ -25790,3 +25790,7 @@ interface JQuery {
     data(key: "kendoWizard"): kendo.ui.Wizard | undefined;
 
 }
+
+declare namespace KendoLicensing {
+    function setScriptKey(key: string): void;
+}
