@@ -1903,18 +1903,21 @@ A string, DOM element or jQuery object which represents the ListView item. A str
 #### Example - get the data item to which the first ListView item is bound
 
     <div id ="listView"></div>
+    <div id="result"></div>
+    
     <script>
       var dataSource = new kendo.data.DataSource({
-        data: [ { name: "Jane Doe" }, { name: "John Doe" }]
+        data: [ { name: "Jane Doe", age: 25 }, { name: "John Doe", age: 56 }]
       });
       var listview = $("#listView").kendoListView({
         dataSource: dataSource,
         template: "<div>#:name#</div>"
-      }).data("kendoListView")
-
-      var row = $('#listView > div').first();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(listview.dataItem(row));
+      }).data("kendoListView");
+    
+      var row = $('#listView .k-listview-item').first();
+    
+      var dataItem = listview.dataItem(row);
+      $("#result").html("Result: " + dataItem.name + " - " + dataItem.age);
     </script>
 
 ### dataItems

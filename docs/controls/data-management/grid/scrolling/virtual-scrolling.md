@@ -14,6 +14,14 @@ For runnable examples, refer to:
 * [Demo on virtualization of local data by the Grid](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data)
 * [Demo on virtualization of remote data by the Grid](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data)
 
+**Table of contents:**
+
+ - [Getting Started](#getting-started)
+ - [Requirements](#requirements)
+ - [Setting the Scrollbar](#setting-the-scrollbar)
+ - [Using on Mobile](#using-on-mobile)
+ - [Known Limitations](#known-limitations)
+
 ## Getting Started
 
 When virtual scrolling is enabled, the Grid loads data from its remote data source while the user scrolls vertically.
@@ -50,6 +58,17 @@ When the user scrolls a Grid in its virtual-scrolling mode, the Grid renders the
 * The total number of data items.
 
 If the total number of items is large and the scrolling is fast, the table of the Grid can be re-rendered frequently. If, additionally, the page size is huge, the user might observe issues with the smoothness of the scrolling. In such cases, reduce the page size and increase the Grid height to improve the scrolling performance.
+
+## Requirements
+
+There are several requirements that are needed for the Virtual Scrolling to function correctly:
+
+ * The Grid must have a defined [`height`](/api/javascript/ui/grid/configuration/height).
+ * The Grid must be visible when it is initialized.
+ * The DataSource must have a defined [`pageSize`](/api/javascript/data/datasource/configuration/pagesize).
+ * The DataSource must have a defined [`total`](/api/javascript/data/datasource/configuration/schema#schematotal) when [Remote Binding]((https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data)) is used.
+
+Additional information about the limitations of virtual scrolling can be found in the [Known Limitations](#known-limitations) section of the article.
 
 ## Setting the Scrollbar
 

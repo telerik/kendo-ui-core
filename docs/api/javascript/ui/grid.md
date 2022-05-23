@@ -2752,6 +2752,8 @@ If set to `true` the user can get the grid in unsorted state by clicking the sor
 
 A JavaScript function which is used to compare the values. It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
+> The compare function works only when [`serverSorting`](/api/javascript/data/datasource/configuration/serversorting) is set to **false**.
+
 The basic function implementation is as follows (pseudo-code):
 ```pseudo
     function compare(a, b, descending) {
@@ -8680,7 +8682,7 @@ Can also be set to the following string values:
 - "columns" - enables virtualization of columns.
 - "rows, columns" - enables virtualization of both rows and columns.
 
-> For columns virtualization to work, define [widths for the columns](/api/javascript/ui/grid/configuration/columns.width).
+> For columns virtualization to work, define [widths for the columns](/api/javascript/ui/grid/configuration/columns.width). For additional information about the configuration of this functionality, visit the [Virtual Scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}) documentation article.
 
 Check [Virtualization of local data](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data), [Virtualization of remote data](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) and [Colums Virtualization](https://demos.telerik.com/kendo-ui/grid/column-virtualization) for live demos.
 

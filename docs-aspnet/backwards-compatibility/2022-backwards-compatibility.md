@@ -10,6 +10,17 @@ position: 1
 
 This article lists the breaking or important changes in the 2022 releases of {{ site.product }}.
 
+{% if site.core %}
+## {{ site.product }} R2 2022 SP1
+
+**DatePicker TagHelper**
+As of the 2022 R2 SP1 release the DatePicker `month-template` and `month-template-id` attributes are depricated. Exposed is a `month-template` child tag to support full customization as the [month](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/month) configuration option.
+
+**DateTimePicker TagHelper**
+As of the 2022 R2 SP1 release the DatePicker `month-template` and `month-template-id` attributes are depricated. Exposed is a `month-template` child tag to support full customization as the [month](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/configuration/month) configuration option.
+
+{% endif %}
+
 ## {{ site.product }} R1 2022 SP2
 
 **Button**

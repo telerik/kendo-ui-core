@@ -264,15 +264,23 @@ Specifies whether the widget will unmask the input value on form post (available
 
 #### Example - unmask value on form post
 
-    <form>
-        <input id="maskedtextbox" />
-        <button>Post</button>
+    <form id='form'>
+      <input id="maskedtextbox" name='maskedtb'/>
+      <button type='submit'>Post</button>
     </form>
+
+    <div><h4>Result</h4><p id='result'></p></div>
     <script>
-    $("#maskedtextbox").kendoMaskedTextBox({
+      $("#maskedtextbox").kendoMaskedTextBox({
         mask: "000000",
         unmaskOnPost: true
-    });
+      });
+
+      $("#form").on("submit", function(e) {
+        e.preventDefault();
+        let formData = $("#form").serialize();
+        $("#result").html(formData);
+      });
     </script>
 
 ### value `String`*(default: "")*
