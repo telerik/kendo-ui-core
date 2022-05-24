@@ -532,6 +532,11 @@ var __meta__ = { // jshint ignore:line
 
             Widget.fn.destroy.call(that);
 
+            if (that.dateView.calendar && that._navigateCalendarHandler) {
+                that.dateView.calendar.unbind(NAVIGATE, that._navigateCalendarHandler);
+                that._navigateCalendarHandler = null;
+            }
+
             that.dateView.destroy();
 
             that.element.off(ns);
@@ -683,15 +688,22 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        _setCalendarAttribute: function() {
+            var that = this;
+            setTimeout(function() {
+                that.element.attr(ARIA_ACTIVEDESCENDANT, that.dateView.calendar._table.attr(ARIA_ACTIVEDESCENDANT));
+            });
+        },
+
         _navigateCalendar: function() {
             var that = this;
 
+            if (!that._navigateCalendarHandler) {
+                that._navigateCalendarHandler = that._setCalendarAttribute.bind(that);
+            }
+
             if (!!that.dateView.calendar) {
-                that.dateView.calendar.unbind(NAVIGATE).bind(NAVIGATE,function() {
-                    setTimeout(function() {
-                        that.element.attr(ARIA_ACTIVEDESCENDANT, that.dateView.calendar._table.attr(ARIA_ACTIVEDESCENDANT));
-                    });
-                });
+                that.dateView.calendar.unbind(NAVIGATE, that._navigateCalendarHandler).bind(NAVIGATE, that._navigateCalendarHandler);
             }
         },
 

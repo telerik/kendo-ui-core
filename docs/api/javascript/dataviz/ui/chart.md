@@ -13725,6 +13725,8 @@ The data item field which contains the series mean value.
 
 #### Example - set the chart series mean field
 
+    <div id="chart"></div>
+    <script>
     $("#chart").kendoChart({
       dataSource: {
         data: [{
@@ -13748,6 +13750,7 @@ The data item field which contains the series mean value.
          outliersField: "outliers"
       }]
     });
+    </script>
 
 ### series.outliersField `String` *(default: "outliers")*
 
@@ -13755,6 +13758,8 @@ The data item field which contains the series outliers value.
 
 #### Example - set the chart series outliers field
 
+    <div id="chart"></div>
+    <script>
     $("#chart").kendoChart({
       dataSource: {
         data: [{
@@ -13778,6 +13783,7 @@ The data item field which contains the series outliers value.
          outliersField: "outliers"
       }]
     });
+    </script>
 
 ### series.gap `Number` *(default: 1.5)*
 

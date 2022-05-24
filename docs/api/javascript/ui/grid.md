@@ -13732,6 +13732,7 @@ This allows you to change paper size, orientation and apply transformations on e
                { name: "Alice Doe"}],
         pageSize: 2
       },
+      pageable: true,
       pdf: {
           allPages: true
       },
