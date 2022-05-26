@@ -194,6 +194,6 @@ How can I export to Excel filtered Grid data when columns and data fields inform
 
 ## See Also
 
-* [Create Grids with Dynamic Columns and Data Types]({% howto_createdynamiccolumnsdatatypes_grid %})
+* [Create Grids with Dynamic Columns and Data Types]({% slug howto_createdynamiccolumnsdatatypes_grid %})
 * [Dynamic Aggregates in a Dynamic Grid]({% slug grid-dynamic-aggregates %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

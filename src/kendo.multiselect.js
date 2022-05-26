@@ -346,7 +346,7 @@ var __meta__ = { // jshint ignore:line
             var notInput = e.target.nodeName.toLowerCase() !== "input";
             var target = $(e.target);
             var closeButton = target.closest(".k-multiselect-toggle-button, .k-chip").children(".k-i-arrow-s")[0];
-            var removeButton = target.closest(".k-i-x-circle")[0];
+            var removeButton = target.closest(".k-i-x, .k-i-x-circle")[0];
 
             if (notInput && !(removeButton && kendo.support.mobileOS) && e.cancelable) {
                 e.preventDefault();

@@ -931,7 +931,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (!visible) {
-                    popups.hide();
+                    list.parent().hide();
                 }
             }
 
