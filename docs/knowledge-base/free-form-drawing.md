@@ -1,11 +1,41 @@
 ---
-title: Implement Free-Form Drawing
-page_title: Implement Free-Form Drawing | Kendo UI Drawing API
+title: Implement Free-Form Drawing with the Drawing Library
+page_title: Implement Free-Form Drawing with the Drawing API Library
 description: "Learn how to implement a free-form drawing surface while working with the Kendo UI Drawing API."
 slug: howto_freeformdrawing_drawingapi
+previous_url: /framework/drawing/how-to/free-form-drawing
+tags: telerik, kendo, jquery, drawing, api, library, enable, implement, free, drawing
+component: drawing
+type: how-to
+res_type: kb
 ---
 
-# Implement Free-Form Drawing
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Drawing Library</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I enable free drawing when working with the Kendo UI Drawing API library?
+
+## Solution
 
 The following example demonstrates how to implement a free-form drawing surface while working with the Kendo UI Drawing API.
 
@@ -54,7 +84,3 @@ The following example demonstrates how to implement a free-form drawing surface 
 
 * [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
 * [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
-* [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
-* [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
-* [How to Apply Transformations During Export]({% slug howto_applytransformationsduringexport_drawingapi %})
-* [How to Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})

@@ -1,15 +1,45 @@
 ---
-title: Embed Font Awesome in Exported PDF
-page_title: Embed Font Awesome in Exported PDF | Kendo UI Drawing API
+title: Embed Font Awesome Icons in PDF Files Exported with the Drawing API
+page_title: Embed Font Awesome Icons in PDF Files Exported with the Drawing API Library
 description: "Learn how to embed custom fonts while working with the Kendo UI Drawing API and exporting content in PDF."
 slug: howto_embedfontawesome_inexportedpdf_drawingapi
+previous_url: /framework/drawing/how-to/font-awesome
+tags: telerik, kendo, jquery, drawing, library, api, embed, fontawesome, icons, in, exported, pdf
+component: drawing
+type: how-to
+res_type: kb
 ---
 
-# Embed Font Awesome in Exported PDF
+## Environment
 
-Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.github.io/Font-Awesome/), must be [available for embedding]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom) during PDF Export. Otherwise, the generated document will use a standard set of fonts as defined by the PDF Standard. These fonts normally cover only the [ASCII](https://en.wikipedia.org/wiki/ASCII) range.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Drawing Library</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-The following example demonstrates how to embed custom fonts while working with the Kendo UI Drawing API and exporting content in PDF.
+## Description
+
+How can I embed custom fonts while working with the Kendo UI Drawing API library and exporting content in PDF?
+
+## Solution
+
+Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.github.io/Font-Awesome/), must be [available for embedding]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom) during the PDF export. Otherwise, the generated document will use a standard set of fonts as defined by the PDF Standard. These fonts normally cover only the [ASCII](https://en.wikipedia.org/wiki/ASCII) range.
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
@@ -72,7 +102,3 @@ The following example demonstrates how to embed custom fonts while working with 
 
 * [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
 * [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
-* [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
-* [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
-* [How to Apply Transformations During Export]({% slug howto_applytransformationsduringexport_drawingapi %})
-* [How to Implement Free-Form Drawing]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})

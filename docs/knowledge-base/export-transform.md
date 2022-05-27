@@ -1,20 +1,50 @@
 ---
-title: Apply Transformations During Export
-page_title: Apply Transformations During Export | Kendo UI Drawing API
+title: Apply Drawing API Transformations during Export
+page_title: Apply Drawing API Library Transformations during Export 
 description: "Learn how to transform the content during export while applying the Kendo UI Drawing API."
 slug: howto_applytransformationsduringexport_drawingapi
+previous_url: /framework/drawing/how-to/export-transform
+tags: telerik, kendo, jquery, drawing, api, library, apply, transformations, during, export
+component: drawing
+type: how-to
+res_type: kb
 ---
 
-# Apply Transformations During Export
+## Environment
 
-The following example demonstrates how to apply geometric transformations during export while applying the Kendo UI Drawing API.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Drawing Library</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-The aim of the example is to produce a PNG image of a section of the page at 4x the original resolution. This is done by applying an uniform 2x scale on the X and Y dimensions. The operation is carried out while the content is still represented in a vector form. No loss of quality occurs.
+## Description
 
-For more information, refer to the [Transformation API article](/api/javascript/geometry/transformation/methods/scale).
+How can I apply geometric transformations during export while applying the Kendo UI Drawing API?
+
+## Solution
+
+The following example demonstrates how to produce a PNG image of a page section at 4x the original resolution and applies an uniform 2x scale on the X and Y dimensions. The operation is carried out while the content is still represented in a vector form and no loss of quality occurs.
+
+For more information, refer to the article on [transformation API](/api/javascript/geometry/transformation/methods/scale).
 
 ```dojo
-    <button class='export-img k-button'>Export as Image</button>
+    <button type="button" class="export-img k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
+      <span class="k-button-text">Export as Image</span>
+    </button>
     <div class="content">
       <div id="chart"></div>
       Copyright: ACME Inc.
@@ -83,7 +113,3 @@ For more information, refer to the [Transformation API article](/api/javascript/
 
 * [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
 * [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
-* [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
-* [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
-* [How to Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
-* [How to Implement Free-Form Drawing]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})

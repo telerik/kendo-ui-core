@@ -13,7 +13,7 @@ As of the Kendo UI 2014 Q2 release, the Kendo UI widgets support [AngularJS](htt
 To activate the AngularJS directives, install the AngularJS library. Just like jQuery, the minified format of the AngularJS library is located is in the `js` directory of the downloaded Kendo UI bundle.
 
 > * Unlike their dependency on jQuery, the Kendo UI distributions can function correctly without AngularJS.
-> * To use AngularJS versions 1.5.x together with Kendo UI version R1 2017 or earlier is only recommended if you use the Kendo UI `k-ng-model` directive because [the `ng-model` directive does not reflect the model value]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value).
+> * To use AngularJS versions 1.5.x together with Kendo UI version R1 2017 or earlier is only recommended if you use the Kendo UI `k-ng-model` directive because the `ng-model` directive does not reflect the model value.
 
 The following table provides a list of the AngularJS versions that are compatible with the major Kendo UI releases and their corresponding service packs.
 
@@ -26,10 +26,10 @@ The following table provides a list of the AngularJS versions that are compatibl
 | [Kendo UI 2017.3.913 (R3 2017)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2017) |1.4\*, 1.5\*, 1.6\* |- |
 | [Kendo UI 2017.2.504 (R2 2017)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017) |1.4\*, 1.5\*, 1.6\* |- |
 | [Kendo UI 2017.1.118 (R1 2017)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2017) |1.4\*, 1.5\*, 1.6\* |- |
-| [Kendo UI 2016.3.914 (R3 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016) |1.4\*, 1.5\*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5\*. |
-| [Kendo UI 2016.2.504 (R2 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016) |1.4\*, 1.5\*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5\*. |
-| [Kendo UI 2016.1.112 (Q1 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016) |1.4\*, 1.5\*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5\*. |
-| [Kendo UI 2015.3.930 (Q3 2015)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q3-2015) |1.4\*, 1.5\*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5\*. |
+| [Kendo UI 2016.3.914 (R3 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016) |1.4\*, 1.5\*|Kendo UI provides limited `ngModel` support for AngularJS 1.5\*. |
+| [Kendo UI 2016.2.504 (R2 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016) |1.4\*, 1.5\*|Kendo UI provides limited `ngModel` support for AngularJS 1.5\*. |
+| [Kendo UI 2016.1.112 (Q1 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016) |1.4\*, 1.5\*|Kendo UI provides limited `ngModel` support for AngularJS 1.5\*. |
+| [Kendo UI 2015.3.930 (Q3 2015)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q3-2015) |1.4\*, 1.5\*|Kendo UI provides limited `ngModel` support for AngularJS 1.5\*. |
 | [Kendo UI 2015.2.624 (Q2 2015)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2015) |1.3.16|- |
 | [Kendo UI 2015.1.318 (Q1 2015)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2015) |1.3.0 |- |
 | [Kendo UI 2014.3.1119 (Q3 2014)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q3-2014)|1.3.0 |- |

@@ -103,5 +103,5 @@ As of the Kendo UI 2015 Q2 release, if the `k-options` of the widget is bound to
 * [Widget Events]({% slug angularjs_widget_events %})
 * [Model and Value Bindings]({% slug angularjs_value_model_binding %})
 * [Delayed Initialization]({% slug angularjs_delayed_initialization %})
-* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+
 * [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)
