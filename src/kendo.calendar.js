@@ -76,11 +76,11 @@ var __meta__ = { // jshint ignore:line
         HEADERSELECTOR = '.k-header, .k-calendar-header',
         CLASSIC_HEADER_TEMPLATE = '<div class="k-header k-hstack">' +
             '<a href="\\#" #=actionAttr#="prev" role="button" class="k-nav-prev k-button #=size# k-rounded-md k-button-flat k-button-flat-base k-icon-button" ' + ARIA_LABEL + '="Previous"><span class="k-button-icon k-icon k-i-arrow-60-left"></span></a>' +
-            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-nav-fast k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>' +
+            '<a href="\\#" #=actionAttr#="nav-up" role="button" id="nav-up" class="k-nav-fast k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>' +
             '<a href="\\#" #=actionAttr#="next" role="button" class="k-nav-next k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
         '</div>',
         MODERN_HEADER_TEMPLATE = '<div class="k-calendar-header k-hstack">' +
-            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-calendar-title k-title k-button #=size# k-rounded-md k-button-flat k-button-flat-base "></a>' +
+            '<a href="\\#" #=actionAttr#="nav-up" id="nav-up" role="button" class="k-calendar-title k-title k-button #=size# k-rounded-md k-button-flat k-button-flat-base "></a>' +
             '<span class="k-spacer"></span>' +
             '<span class="k-calendar-nav k-hstack">' +
                 '<a #=actionAttr#="prev" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-prev-view">' +
@@ -222,7 +222,13 @@ var __meta__ = { // jshint ignore:line
             },
             messages: {
                 weekColumnHeader: "",
-                today: "Today"
+                today: "Today",
+                navigateTo: "Navigate to ",
+                parentViews: {
+                    month: "year view",
+                    year: "decade view",
+                    decade: "century view"
+                }
             },
             componentType: "classic"
         },
@@ -258,6 +264,10 @@ var __meta__ = { // jshint ignore:line
 
             options.disableDates = getDisabledExpr(options.disableDates);
             that._destroySelectable();
+
+            if (options.messages) {
+                options.messages = $.extend({}, true, that.options.messages, options.messages);
+            }
 
             Widget.fn.setOptions.call(that, options);
 
@@ -413,6 +423,12 @@ var __meta__ = { // jshint ignore:line
             if (!from || that._changeView) {
                 title.html(currentView.title(value, min, max, culture));
 
+                if (that.options.messages.parentViews && that._view.name !== CENTURY) {
+                    title.attr("title", that.options.messages.navigateTo + that.options.messages.parentViews[that._view.name]);
+                } else {
+                    title.removeAttr("title");
+                }
+
                 that._table = to = $(currentView.content(extend({
                     min: min,
                     max: max,
@@ -427,6 +443,8 @@ var __meta__ = { // jshint ignore:line
                     messages: options.messages,
                     contentClasses: that.options.contentClasses
                 }, that[currentView.name])));
+
+                that._aria();
 
                 addClassToViewContainer(to, currentView.name);
                 var replace = from && from.data("start") === to.data("start");
@@ -514,6 +532,16 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _aria: function() {
+            var table = this._table;
+
+            table.attr("aria-labelledby", this._title.attr("id"));
+
+            if (this._view.name === "month" && this.options.selectable === "multiple") {
+                table.attr("aria-multiselectable", "true");
+            }
+        },
+
         _validateValue: function(value) {
             var that = this,
                 options = that.options,
@@ -574,9 +602,6 @@ var __meta__ = { // jshint ignore:line
             var selectable = that.options.selectable,
             selectableOptions = Selectable.parseOptions(selectable);
 
-            if (selectableOptions.multiple) {
-                that.element.attr("aria-multiselectable", "true");
-            }
             that.selectable = new Selectable(that.wrapper, {
                 aria: true,
                 //excludes the anchor element
@@ -1169,7 +1194,10 @@ var __meta__ = { // jshint ignore:line
             linksSelector = that.options.linksSelector;
 
             if (!element.find(HEADERSELECTOR)[0]) {
-                element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, { actionAttr: kendo.attr("action"), size: kendo.getValidCssClass("k-button-", "size", that.options.size) })));
+                element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, {
+                    actionAttr: kendo.attr("action"),
+                    size: kendo.getValidCssClass("k-button-", "size", that.options.size)
+                })));
             }
 
             element.find(linksSelector)
@@ -1328,6 +1356,10 @@ var __meta__ = { // jshint ignore:line
                 weekNumber: template('<td class="k-alt">' + (weekNumber || "#= data.weekNumber #") + "</td>", { useWithBlock: !!weekNumber })
             };
 
+            that.year = {
+                content: template('<td class="#=data.cssClass#" role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#" aria-label="#=data.label#">#=data.value#</a></td>', { useWithBlock: false })
+            };
+
             if (footer && footer !== true) {
                 footerTemplate = footer;
             }
@@ -1431,7 +1463,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 for (; idx < 7; idx++) {
-                    html += '<th scope="col" class="k-calendar-th" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
+                    html += '<th scope="col" class="k-calendar-th" aria-label="' + names[idx] + '">' + shortNames[idx] + '</th>';
                 }
 
                 adjustDST(today, 0);
@@ -1552,11 +1584,13 @@ var __meta__ = { // jshint ignore:line
                 return date.getFullYear();
             },
             content: function(options) {
-                var namesAbbr = getCalendarInfo(options.culture).months.namesAbbr,
-                toDateString = this.toDateString,
-                min = options.min,
-                max = options.max,
-                html = "";
+                var calendarMonths = getCalendarInfo(options.culture).months,
+                    namesAbbr = calendarMonths.namesAbbr,
+                    namesFull = calendarMonths.names,
+                    toDateString = this.toDateString,
+                    min = options.min,
+                    max = options.max,
+                    html = "";
 
                 if (options.showHeader) {
                     html += '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0">';
@@ -1573,11 +1607,13 @@ var __meta__ = { // jshint ignore:line
                     start: createDate(options.date.getFullYear(), 0, 1),
                     html: html,
                     setter: this.setDate,
+                    content: options.content,
                     build: function(date) {
                         var cssClass = [ "k-calendar-td" ];
 
                         return {
                             value: namesAbbr[date.getMonth()],
+                            label: namesFull[date.getMonth()],
                             ns: kendo.ns,
                             dateString: toDateString(date),
                             cssClass: cssClass.join(" ")

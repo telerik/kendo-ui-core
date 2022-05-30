@@ -301,7 +301,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _triggerAction: function(type, pane) {
-            if (!this.trigger(type, { pane: pane[0] })) {
+            var paneConfig = pane.data(PANE);
+            var shouldExecute = (paneConfig.collapsed && type == EXPAND) || (!paneConfig.collapsed && type == COLLAPSE);
+
+            if (!paneConfig.collapsible) {
+                return;
+            }
+
+            if (shouldExecute && !this.trigger(type, { pane: pane[0] })) {
                 this[type](pane[0]);
             }
         },

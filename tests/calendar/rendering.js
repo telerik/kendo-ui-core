@@ -185,7 +185,7 @@ it("month view renders days", function() {
 
     assert.equal(div.find("thead").find("th").length, 7);
     assert.equal(div.find("thead").find("th").eq(0).html(), days.namesShort[0]);
-    assert.equal(div.find("thead").find("th").eq(0).attr("title"), days.names[0]);
+    assert.equal(div.find("thead").find("th").eq(0).attr("aria-label"), days.names[0]);
 
     assert.equal(div.find("tbody").find("tr").length, 6);
     assert.equal(div.find("tbody").find("td").length, 42);
@@ -304,7 +304,7 @@ it("month view's content method honors culture", function() {
         }));
 
     assert.equal(div.find("thead").find("th").eq(0).html(), days.namesShort[1]);
-    assert.equal(div.find("thead").find("th").eq(0).attr("title"), days.names[1]);
+    assert.equal(div.find("thead").find("th").eq(0).attr("aria-label"), days.names[1]);
 });
 
 it("month view renderer honors firstDayOfWeek property", function() {
@@ -323,7 +323,7 @@ it("month view renderer honors firstDayOfWeek property", function() {
     }));
 
     assert.equal(div.find("thead").find("th").eq(0).html(), kendo.culture().calendar.days.namesShort[1]);
-    assert.equal(div.find("thead").find("th").eq(0).attr("title"), kendo.culture().calendar.days.names[1]);
+    assert.equal(div.find("thead").find("th").eq(0).attr("aria-label"), kendo.culture().calendar.days.names[1]);
 
     kendo.culture().calendar.firstDay = 0;
 });

@@ -1241,7 +1241,13 @@ if (kendo.ui.DateTimePicker) {
 if (kendo.ui.Calendar) {
   kendo.ui.Calendar.prototype.options.messages =
   $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
-    "today": "Днес"
+    "today": "Днес",
+    "navigateTo": "Отиди на ",
+    "parentViews": {
+        "year": "годишен изглед",
+        "decade": "десет годишен изглед",
+        "century": "изглед за век"
+    }
   });
 }
 

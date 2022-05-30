@@ -27,13 +27,21 @@ it("Calendar adds role to the title button", function() {
     assert.equal(instance._title.attr("role"), "button");
 });
 
-it("Calendar adds live aria attributes", function() {
-    assert.equal(instance._title.attr("aria-live"), "assertive");
-    assert.equal(instance._title.attr("aria-atomic"), "true");
-});
-
 it("Calendar adds grid role to MONTH view", function() {
     assert.equal(div.find("table").attr("role"), "grid");
+});
+
+it("Calendar grid has aria-labelledby pointing to its title", function() {
+    assert.isOk(instance._title.attr("id"));
+    assert.equal(div.find("table").attr("aria-labelledby"), instance._title.attr("id"));
+});
+
+it("Calendar grid has aria-multiselectable when options.selectable = multiple", function() {
+    instance.setOptions({
+        selectable: "multiple"
+    });
+
+    assert.equal(div.find("table").attr("aria-multiselectable"), "true");
 });
 
 it("Calendar adds row role to MONTH view's rows", function() {
@@ -44,6 +52,16 @@ it("Calendar adds row role to MONTH view's rows", function() {
 it("Calendar adds gridcell role to MONTH view's cells", function() {
     var cells = div.find("table td");
     assert.equal(cells.filter("[role=gridcell]").length, cells.length);
+});
+
+it("Calendar adds aria-label to MONTH view's header cells", function() {
+    var cells = div.find("table th[aria-label]");
+    var names = kendo.culture().calendar.days.names;
+
+    assert.equal(cells.length, 7);
+    cells.each(function(i, cell) {
+        assert.equal(cell.getAttribute("aria-label"), names[i]);
+    });
 });
 
 it("Calendar adds grid role to YEAR view", function() {
@@ -57,10 +75,22 @@ it("Calendar adds row role to YEAR view's rows", function() {
     assert.equal(rows.filter("[role=row]").length, rows.length);
 });
 
-it("Calendar adds gridcell role to YEAR view's cells", function() {
+it("Calendar adds gridcell to YEAR view's cells", function() {
     instance.navigateUp();
     var cells = div.find("table td");
     assert.equal(cells.filter("[role=gridcell]").length, cells.length);
+});
+
+it("Calendar adds aria-label role to YEAR view's cells links", function() {
+    instance.navigateUp();
+    var cells = div.find("table td a[aria-label]");
+    var names = kendo.culture().calendar.months.names;
+
+    assert.equal(cells.length, 12);
+
+    cells.each(function(i, cell) {
+        assert.equal(cell.getAttribute("aria-label"), names[i]);
+    });
 });
 
 it("Calendar adds aria-disabled to the prev arrow", function() {

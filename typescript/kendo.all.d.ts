@@ -2702,11 +2702,18 @@ declare namespace kendo.ui {
         value(value: Date): void;
         value(value: string): void;
         view(): any;
+    }
 
+    interface CalendarMessagesParentViews {
+        month?: string | undefined;
+        year?: string | undefined;
+        decade?: string | undefined;
     }
 
     interface CalendarMessages {
         weekColumnHeader?: string | undefined;
+        navigateTo?: string | undefined;
+        parentViews?: CalendarMessagesParentViews;
     }
 
     interface CalendarMonth {

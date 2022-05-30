@@ -1328,7 +1328,13 @@ $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
 if (kendo.ui.Calendar) {
 kendo.ui.Calendar.prototype.options.messages =
 $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
-  "weekColumnHeader": ""
+    "weekColumnHeader": "",
+    "navigateTo": "Navigate to ",
+    "parentViews": {
+        "month": "year view",
+        "year": "decade view",
+        "decade": "century view"
+    }
 });
 }
 

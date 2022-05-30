@@ -63,6 +63,8 @@ it("render month view when init", function() {
     var cal = new Calendar(div, { value: date });
 
     assert.equal(div.find(".k-nav-fast").html(), "November 2011");
+    assert.isOk(!!div.find(".k-nav-fast").attr("title"));
+    assert.equal(div.find(".k-nav-fast").attr("title"), cal.options.messages.navigateTo + cal.options.messages.parentViews.month);
     assert.equal(div.find(".k-content").find("a").length, 42);
 });
 
@@ -73,7 +75,8 @@ it("render year view when init", function() {
     var january = kendo.culture().calendar.months.namesAbbr[0];
 
     assert.equal(div.find(".k-nav-fast").html(), "2011");
-
+    assert.isOk(!!div.find(".k-nav-fast").attr("title"));
+    assert.equal(div.find(".k-nav-fast").attr("title"), cal.options.messages.navigateTo + cal.options.messages.parentViews.year);
     assert.equal(anchors.length, 12);
     assert.equal(anchors.eq(0).html(), january);
 });
@@ -84,6 +87,8 @@ it("render decade view when init", function() {
     anchors = cal.element.find(".k-content").find("a");
 
     assert.equal(div.find(".k-nav-fast").html(), "2010-2019");
+    assert.isOk(!!div.find(".k-nav-fast").attr("title"));
+    assert.equal(div.find(".k-nav-fast").attr("title"), cal.options.messages.navigateTo + cal.options.messages.parentViews.decade);
     assert.equal(anchors.length, 12);
     assert.equal(anchors.eq(0).html(), "2009");
 });
@@ -94,6 +99,7 @@ it("render century view when init", function() {
     anchors = cal.element.find(".k-content").find("a");
 
     assert.equal(div.find(".k-nav-fast").html(), "2000-2099");
+    assert.isOk(!div.find(".k-nav-fast").attr("title"));
     assert.equal(anchors.length, 12);
     assert.equal(anchors.eq(0).html(), "1990 - 1999");
 });

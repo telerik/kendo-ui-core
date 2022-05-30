@@ -219,6 +219,80 @@ Allows customization of the week column header text. Set the value to make the w
      })
     </script>
 
+### messages.navigateTo `String` *(default: "Navigate to ")*
+
+Allows customization of the "Navigate to " text that would be used for `title` attribute of the Calendar title in the header. The label is also a button allowing navigation to parent view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "navigateTo": "Go to "
+        }
+     })
+    </script>
+
+### messages.parentViews `Object`
+
+Allows customization of names of the views used in the `title` attribute of the Calendar title in the header. The label is also a button allowing navigation to parent view.
+
+### messages.parentViews.month `String` *(default: "year view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Month view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                month: "parent year"
+            }
+        }
+     })
+    </script>
+
+### messages.parentViews.year `String` *(default: "decade view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Year view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                year: "parent decade"
+            }
+        }
+     })
+    </script>
+
+### messages.parentViews.decade `String` *(default: "century view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Decade view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                decade: "parent century"
+            }
+        }
+     })
+    </script>
+
 ### min `Date`*(default: Date(1900, 0, 1))*
 
  Specifies the minimum date, which the calendar can show.

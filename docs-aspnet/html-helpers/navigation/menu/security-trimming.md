@@ -13,13 +13,13 @@ The Telerik UI Menu has a built-in security trimming functionality which is enab
 
 If the URL to which the Menu item points is not authorized, the item is hidden.
 {% if site.mvc %}
-Security trimming depends on the [ASP.NET MVC Authorization](http://www.asp.net/mvc/tutorials/mvc-music-store/mvc-music-store-part-7). Every `action` method which is decorated with [`AuthorizeAttribute`](http://msdn.microsoft.com/en-us/library/system.web.mvc.authorizeattribute.aspx) checks whether the user is authorized and allows or forbids the request. For more information, refer to the article on [ASP.NET MVC Authorization](http://weblogs.asp.net/jgalloway/archive/2011/04/28/looking-at-how-asp-net-mvc-authorize-interacts-with-asp-net-forms-authorization.aspx).
+Security trimming depends on the [ASP.NET MVC Authorization](http://www.asp.net/mvc/tutorials/mvc-music-store/mvc-music-store-part-7). Authorization in MVC is controlled through the [`AuthorizeAttribute`](http://msdn.microsoft.com/en-us/library/system.web.mvc.authorizeattribute.aspx) attribute and its various parameters. At its simplest applying the AuthorizeAttribute attribute to a controller or action limits access to the controller or action to any authenticated user. For more information, refer to the article on [ASP.NET MVC Authorization](https://docs.microsoft.com/en-us/aspnet/web-api/overview/older-versions/using-web-api-1-with-entity-framework-5/using-web-api-with-entity-framework-part-4#add-authorization).
 
 The Menu hides an item if the [`OnAuthorization`](http://msdn.microsoft.com/en-us/library/system.web.mvc.authorizeattribute.onauthorization.aspx) method returns
 [`HttpUnauthorizedResult`](http://msdn.microsoft.com/en-us/library/system.web.mvc.httpunauthorizedresult.aspx).
 
 
-For more information on using a custom `AuthorizeAttribute`, refer to [this article](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/kendo-menu-with-custom-authorization-attribute).
+[This GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/menu/security-trimming) is representing the usage of the `AuthorizeAttribute`.
 {% endif %}
 
 {% if site.core %}
