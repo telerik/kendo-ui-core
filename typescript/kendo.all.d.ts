@@ -5108,6 +5108,9 @@ declare namespace kendo.ui {
     interface FilterMessages {
         and?: string | undefined;
         apply?: string | undefined;
+        filterExpressionLabel?: string | undefined;
+        filterLogicLabel?: string | undefined;
+        mainFilterLogicLabel?: string | undefined;
         or?: string | undefined;
     }
 

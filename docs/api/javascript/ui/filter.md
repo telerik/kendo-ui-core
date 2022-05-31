@@ -25,7 +25,7 @@ If set to `true` the filter will display a button which when clicked will apply 
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data,
         schema: {
@@ -37,12 +37,12 @@ If set to `true` the filter will display a button which when clicked will apply 
           }
         }
       });
-      
+
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         applyButton: true
       });
-      
+
       $("#grid").kendoGrid({
         columns: [
           { field: "name" },
@@ -71,7 +71,7 @@ An object which represents a [filter](/api/javascript/ui/filter/configuration/ex
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data,
         schema: {
@@ -83,7 +83,7 @@ An object which represents a [filter](/api/javascript/ui/filter/configuration/ex
           }
         }
       });
-      
+
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         expression: {
@@ -93,7 +93,7 @@ An object which represents a [filter](/api/javascript/ui/filter/configuration/ex
             ]
         }
       });
-      
+
       $("#grid").kendoGrid({
         columns: [
           { field: "name" },
@@ -118,7 +118,7 @@ If set to `true` the filter will visualize the filter expression that will be ap
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data,
         schema: {
@@ -130,7 +130,7 @@ If set to `true` the filter will visualize the filter expression that will be ap
           }
         }
       });
-      
+
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         expressionPreview: true,
@@ -144,7 +144,7 @@ If set to `true` the filter will visualize the filter expression that will be ap
             ]
         }
       });
-      
+
     </script>
 
 ### fields `Array`
@@ -160,11 +160,11 @@ The configuration of the filter fields. An array of JavaScript objects that hold
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
-      
+
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         expressionPreview: true,
@@ -197,11 +197,11 @@ A value which will be initially set as a filter value when an expression item fo
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
-      
+
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         expressionPreview: true,
@@ -225,7 +225,7 @@ The [template](/api/javascript/kendo/methods/template) which the widget will use
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
@@ -234,9 +234,9 @@ The [template](/api/javascript/kendo/methods/template) which the widget will use
       	dataSource: dataSource,
         expressionPreview: true,
         fields: [
-          { 
-            name: "age", 
-            type:"number", 
+          {
+            name: "age",
+            type:"number",
             editorTemplate: function (container, options) {
                 $('<input data-bind="value: value" name="' + options.field + '"/>')
                     .appendTo(container).kendoNumericTextBox();
@@ -260,7 +260,7 @@ The format of the value displayed in the preview.
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
@@ -269,8 +269,8 @@ The format of the value displayed in the preview.
       	dataSource: dataSource,
         expressionPreview: true,
         fields: [
-          { 
-            name: "age", 
+          {
+            name: "age",
             type:"number",
             previewFormat:'n2'
           },
@@ -281,7 +281,7 @@ The format of the value displayed in the preview.
 
 ### fields.label `String`
 
-Defines a value which will be visualized instead of the data feild name. 
+Defines a value which will be visualized instead of the data feild name.
 
 > **Note:** By default if a value is not provided the data field name will be used.
 
@@ -294,7 +294,7 @@ Defines a value which will be visualized instead of the data feild name.
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
@@ -320,7 +320,7 @@ Defines a value which will be visualized instead of the data feild name.
 
 ### fields.name `String`
 
-A value matching a field name from the datasource model. 
+A value matching a field name from the datasource model.
 
 #### Example - set the fields name
 
@@ -331,11 +331,11 @@ A value matching a field name from the datasource model.
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
-      
+
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         expressionPreview: true,
@@ -399,7 +399,7 @@ The text of the filter operators displayed for the current field.
 
 ### fields.type `String`
 
-Defines the value type of the field. 
+Defines the value type of the field.
 
 > **Note:** By default if a value is not provided the type will be **string**.
 
@@ -419,7 +419,7 @@ The available dataType options are:
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
@@ -445,7 +445,7 @@ The available dataType options are:
 
 ### mainLogic `String`
 
-Defines the value of the logical operator at the root level of the filter expression. 
+Defines the value of the logical operator at the root level of the filter expression.
 
 #### Example - set the main logic
 
@@ -456,7 +456,7 @@ Defines the value of the logical operator at the root level of the filter expres
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
@@ -485,7 +485,7 @@ The text messages displayed in the filter. Use it to customize or localize the f
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
@@ -529,6 +529,18 @@ The title of the close button.
 ### messages.fields `String` *(default: "Fields")*
 
 The title of the fields drop down.
+
+### messages.filterExpressionLabel `String` *(default: "filter expression")*
+
+The text that will be used as an `aria-label` of the filter expression groups.
+
+### messages.filterLogicLabel `String` *(default: "filter logic")*
+
+The text that will be used as an `aria-label` of the filter logic toolbars.
+
+### messages.mainFilterLogicLabel `String` *(default: "main filter logic")*
+
+The text that will be used as an `aria-label` of the main filter logic toolbar.
 
 ### messages.operators `String` *(default: "Operators")*
 
@@ -1035,7 +1047,7 @@ Applies the generated filter to the dataSource.
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data,
         schema: {
@@ -1047,7 +1059,7 @@ Applies the generated filter to the dataSource.
           }
         }
       });
-      
+
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         expression: {
@@ -1057,7 +1069,7 @@ Applies the generated filter to the dataSource.
             ]
         }
       });
-      
+
       $("#grid").kendoGrid({
         columns: [
           { field: "name" },
@@ -1094,7 +1106,7 @@ The widget instance which fired the event.
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data,
         schema: {
@@ -1106,7 +1118,7 @@ The widget instance which fired the event.
           }
         }
       });
-      
+
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         change: function (e) {

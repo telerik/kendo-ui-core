@@ -786,7 +786,7 @@ var __meta__ = { // jshint ignore:line
                 return this.dataSource.getByUid(uid);
             }
             else {
-                return $(element).html();
+                return $(element).find(".k-list-item-text").html();
             }
         },
 

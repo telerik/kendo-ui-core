@@ -43,6 +43,14 @@
         return listbox;
     }
 
+    function createListBoxWithStrings(options, html) {
+        var listbox = createListBoxFromHtml(html, $.extend({
+            dataSource: ["Argentina", "Australia", "Brazil", "Canada", "Chile", "China", "Egypt", "England", "France", "Germany", "India", "Indonesia", "Kenya", "Mexico", "New Zealand", "South Africa", "USA"],
+        }, options || {}));
+
+        return listbox;
+    }
+
     function createListBox(options, html) {
         var listbox = createListBoxFromHtml(html, $.extend({
             dataSource: {
@@ -404,5 +412,22 @@
 
             assert.equal(listbox.items().eq(0).hasClass(DISABLED_STATE_CLASS), true);
         });
+    });
+
+    describe("ListBox api", function() {
+        beforeEach(function() {
+            listbox = createListBoxWithStrings();
+        });
+        afterEach(function() {
+            destroyListBox(listbox);
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("dataItem method works correctly when bound to string arrays", function() {
+            var dataItem = listbox.dataItem(listbox.items().eq(0));
+
+            assert.equal(dataItem, "Argentina");
+        });
+
     });
 }());
