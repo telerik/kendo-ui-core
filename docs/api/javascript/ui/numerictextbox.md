@@ -84,7 +84,7 @@ Specifies the factor by which the value is multiplied. The obtained result is us
 
 Sets a value controlling how the color is applied. Can also be set to the following string values:
 
-- null
+- "none"
 - "solid"
 - "flat"
 - "outline"
@@ -272,7 +272,7 @@ The hint displayed by the widget when it is empty. Not set by default.
 
 Sets a value controlling the border radius. Can also be set to the following string values:
 
-- null
+- "none"
 - "small"
 - "medium"
 - "large"
@@ -307,7 +307,7 @@ Sets a value controlling size of the component. Can also be set to the following
 - "small"
 - "medium"
 - "large"
-- null
+- "none"
 
 #### Example - sets a size
 

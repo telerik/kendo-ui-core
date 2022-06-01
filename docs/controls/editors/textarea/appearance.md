@@ -35,6 +35,7 @@ The following values are available for the [`size`](/api/javascript/ui/textarea/
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The following example demonstrates how to configure the `size` of the component through the widget configuration:
 
@@ -64,6 +65,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/textar
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—largest border radius
+- `none`—unset
 
 The following example demonstrates how to configure the `rounded` of the component through the widget configuration:
 
@@ -92,6 +94,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/texta
 - `solid`
 - `flat`
 - `outline`
+- `none`
 
 The following example demonstrates how to configure the `fillMode` of the component through the widget configuration:
 
@@ -122,6 +125,7 @@ The following values are available for the [`overflow`](/api/javascript/ui/texta
 - `visible`
 - `scroll`
 - `clip`
+- `none`
 
 The following example demonstrates how to configure the `overflow` of the component through the widget configuration:
 

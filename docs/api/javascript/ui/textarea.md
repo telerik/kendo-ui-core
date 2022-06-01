@@ -49,7 +49,7 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 - "solid"
 - "flat"
 - "outline"
-- null
+- "none"
 
 #### Example
 
@@ -160,7 +160,7 @@ Sets a value controlling how the overflow of the textarea is applied. Can also b
 - "visible"
 - "scroll"
 - "clip"
-- null
+- "none"
 
 #### Example
 

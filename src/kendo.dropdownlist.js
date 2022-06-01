@@ -1269,8 +1269,8 @@ var __meta__ = { // jshint ignore:line
                     icon: "arrow-s",
                     size: options.size,
                     fillMode: options.fillMode,
-                    shape: null,
-                    rounded: null
+                    shape: "none",
+                    rounded: "none"
                 });
 
                 wrapper.append('<span id="' + id + '" unselectable="on" class="k-input-inner">' +

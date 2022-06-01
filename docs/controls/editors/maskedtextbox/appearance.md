@@ -33,6 +33,7 @@ The following values are available for the [`size`](/api/javascript/ui/maskedtex
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The following example demonstrates how to configure the `size` of the component through the widget configuration:
 
@@ -63,6 +64,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/masked
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—largest border radius
+- `none`—unset
 
 The following example demonstrates how to configure the `rounded` of the component through the widget configuration:
 
@@ -92,6 +94,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/maske
 - `solid`
 - `flat`
 - `outline`
+- `none`
 
 The following example demonstrates how to configure the `size` of the component through the widget configuration:
 

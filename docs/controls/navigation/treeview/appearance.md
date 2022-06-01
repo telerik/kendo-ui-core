@@ -26,6 +26,7 @@ The following values are available for the [`size`](/api/javascript/ui/treeview/
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The default size value is `medium` and it is applied to the `div` wrapping element through the `k-treeview-md` class.
 

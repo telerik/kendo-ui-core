@@ -950,8 +950,8 @@ var __meta__ = { // jshint ignore:line
                     icon: "arrow-s",
                     size: options.size,
                     fillMode: options.fillMode,
-                    shape: null,
-                    rounded: null,
+                    shape: "none",
+                    rounded: "none",
                 });
 
                 wrapper.append('<input ' + name + 'class="k-input-inner" type="text" autocomplete="' + AUTOCOMPLETEVALUE + '"/>')

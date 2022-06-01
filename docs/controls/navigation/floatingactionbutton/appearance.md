@@ -37,6 +37,7 @@ The following values are available for the [`size`](/api/javascript/ui/floatinga
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The following example demonstrates how to configure the `size` of the component through the widget configuration:
 
@@ -123,6 +124,7 @@ The following values are available for the [`themeColor`](/api/javascript/ui/flo
 - `dark`
 - `light` 
 - `inverse`
+- `none`
 
 The default `themeColor` value is `primary`. A FloatingActionButton with default `fillMode` and `themeColor` will have `k-fab-solid-primary` class applied.
 
@@ -150,6 +152,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/floati
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—largest border radius
+- `none`—unset
 
 The example below demonstrates how to configure the `rounded` of the component through the widget configuration:
 

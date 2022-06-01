@@ -183,7 +183,7 @@ Specifies the end field name for model binding.
 
 Sets a value controlling how the color is applied. Can also be set to the following string values:
 
-- null
+- "none"
 - "solid"
 - "flat"
 - "outline"
@@ -463,7 +463,7 @@ This sets the end date of the range selection.
 
 Sets a value controlling the border radius of the inputs. Can also be set to the following string values:
 
-- null
+- "none"
 - "small"
 - "medium"
 - "large"
@@ -485,7 +485,7 @@ Sets a value controlling size of the component. Can also be set to the following
 - "small"
 - "medium"
 - "large"
-- null
+- "none"
 
 #### Example - sets a size
 

@@ -94,7 +94,7 @@ Specifies whether the FloatingActionButton is enabled (true) or disabled (false)
 
 ### fillMode `String` *(default: 'solid')*
 
-Controls how the color is applied to the button. Valid values are: `"solid"`, and `null`.
+Controls how the color is applied to the button. Valid values are: `"solid"`, and `"none"`.
 
 ### icon `String` *(default: "")*
 
@@ -352,7 +352,7 @@ Specifies CSS position of the FloatingActionButton in the document. Valid option
 
 ### rounded `String` *(default: 'full')*
 
-Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `null`.
+Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`.
 
 #### Example
 
@@ -394,7 +394,7 @@ Specifies the shape of the FloatingActionButton.
 
 ### size  `String` *(default: 'medium')*
 
-Specifies the size of the FloatingActionButton. Valid options are `"small"`, `"medium"`, `"large"` and `null`.
+Specifies the size of the FloatingActionButton. Valid options are `"small"`, `"medium"`, `"large"` and `"none"`.
 
 #### Example
 
@@ -433,7 +433,7 @@ Specifies the text of the FloatingActionButton. Default is empty string.
 
 ### themeColor `String` *(default: 'secondary')*
 
-Specifies the theme color of the FloatingActionButton. Valid options are `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"` and `null`.
+Specifies the theme color of the FloatingActionButton. Valid options are `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"` and `"none"`.
 
 #### Example
 

@@ -1637,8 +1637,8 @@ var __meta__ = { // jshint ignore:line
                     icon: "clock",
                     size: options.size,
                     fillMode: options.fillMode,
-                    shape: null,
-                    rounded: null
+                    shape: "none",
+                    rounded: "none"
                 })).insertAfter(element);
             }
 

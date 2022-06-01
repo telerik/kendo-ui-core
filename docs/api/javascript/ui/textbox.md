@@ -32,7 +32,7 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 - "solid"
 - "flat"
 - "outline"
-- null
+- "none"
 
 #### Example - sets the fillMode
 
@@ -153,7 +153,7 @@ Sets a value controlling the border radius. Can also be set to the following str
 - "medium"
 - "large"
 - "full"
-- null
+- "none"
 
 #### Example
 
@@ -184,7 +184,7 @@ Sets a value controlling size of the component. Can also be set to the following
 - "small"
 - "medium"
 - "large"
-- null
+- "none"
 
 #### Example - sets a size
 

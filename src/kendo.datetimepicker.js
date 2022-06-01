@@ -912,15 +912,15 @@ var __meta__ = { // jshint ignore:line
                     icon: "calendar",
                     size: options.size,
                     fillMode: options.fillMode,
-                    shape: null,
-                    rounded: null
+                    shape: "none",
+                    rounded: "none"
                 })).insertAfter(element);
                 that._timeIcon = $(html.renderButton('<button unselectable="on" tabindex="-1" class="k-input-button" aria-label="' + options.timeButtonText + '"></button>', {
                     icon: "clock",
                     size: options.size,
                     fillMode: options.fillMode,
-                    shape: null,
-                    rounded: null
+                    shape: "none",
+                    rounded: "none"
                 })).insertAfter(element);
             }
 

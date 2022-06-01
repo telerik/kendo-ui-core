@@ -638,7 +638,7 @@ Sets a value controlling size of the component. Can also be set to the following
 - "small"
 - "medium"
 - "large"
-- null
+- "none"
 
 #### Example
 

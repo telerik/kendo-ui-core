@@ -14,7 +14,7 @@
             var widget = new TextArea(textarea),
                 wrapper = widget.wrapper;
 
-            assert.equal(wrapper[0].className, "k-input k-textarea k-input-solid k-input-md k-rounded-md");
+            assert.equal(wrapper[0].className, "k-input k-textarea k-input-solid k-input-md k-rounded-md k-resize-none");
         });
 
         it("Should set placeholder", function() {
@@ -185,6 +185,14 @@
             });
 
             assert.isOk(widget.wrapper.hasClass("k-resize-both"));
+        });
+
+        it("styling options - resize none", function() {
+            var widget = new TextArea(textarea, {
+                resize: "none"
+            });
+
+            assert.isOk(widget.wrapper.hasClass("k-resize-none"));
         });
 
         it("styling options - overflow", function() {

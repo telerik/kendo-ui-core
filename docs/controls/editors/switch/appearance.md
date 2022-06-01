@@ -32,6 +32,7 @@ The following values are available for the [`size`](/api/javascript/ui/switch/co
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The default size value is `medium` and it is applied to the wrapping `span` element through the `k-switch-md` class.
 
@@ -63,6 +64,7 @@ The following values are available for the [`trackRounded`](/api/javascript/ui/s
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—ellipse-like  border radius
+- `none`—unset
 
 The default value is `full` and it is applied to the wrapping `span` element that contains the On/Off labels through the `k-rounded-full` class.
 
@@ -94,6 +96,7 @@ The following values are available for the [`thumbRounded`](/api/javascript/ui/s
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—ellipse-like  border radius
+- `none`—unset
 
 The default value is `full` and it is applied to the `span` element for the thumb through the `k-rounded-full` class.
 

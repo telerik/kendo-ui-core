@@ -33,6 +33,7 @@ The following values are available for the [`size`](/api/javascript/ui/multisele
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The default size value is `medium` and it is applied to the `span` wrapping element through the `k-input-md` class.
 
@@ -69,6 +70,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/multis
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—ellipse-like border radius
+- `none`—unset
 
 The default value is `full` and it is applied to the `span.k-multiselect` wrapping element that contains the whole HTML through the `k-rounded-full` class. That class is also applied to the `span.k-chip` element which contains the HTML for the tags.
 
@@ -103,6 +105,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/multi
 - `solid`
 - `flat`
 - `outline`
+- `none`
 
 The default value is `solid` and it is applied to the `span.k-multiselect` wrapping element through the `k-input-solid` class and to the `span.k-chip` elements through the `.k-chip-outline .k-chip-outline-base` classes.
 

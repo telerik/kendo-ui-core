@@ -32,6 +32,7 @@ The following values are available for the [`size`](/api/javascript/ui/dropdownt
 - `sm`—small size
 - `md`—medium size (default)
 - `lg`—large size
+- `none`—unset
 
 The example below shows a basic configuration and how to set `size` to "large":
 
@@ -78,6 +79,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/dropdo
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—ellipse-like border radius
+- `none`—unset
 
 The default value is `full` and it is applied to the wrapping `span.k-dropdowntree` element that contains the whole HTML through the `k-rounded-full` class.
 
@@ -125,6 +127,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/dropd
 - `solid`
 - `flat`
 - `outline`
+- `none`
 
 The default value is `solid` and it is applied to the `span.k-dropdowntree` element through the `k-picker-solid` class.
 

@@ -122,13 +122,26 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 ## Adding a Reference to Kendo.Mvc.UI
 
-1. Open the `Startup.cs` file and register the Kendo UI services in the `ConfigureServices` method.
+1. Register the Kendo UI service in the services container. 
 
-		public void ConfigureServices(IServiceCollection services)
-		{
-			// Add the Kendo UI services to the services container.
-			services.AddKendo();
-		}
+ * For applications using .NET 5 or earlier, open the `Startup.cs` file and register the Kendo UI services in the `ConfigureServices` method.
+
+	```
+	public void ConfigureServices(IServiceCollection services)
+	{
+		// Add the Kendo UI services to the services container.
+		services.AddKendo();
+	}
+	```
+
+ * For applications using .NET 6 and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model), open the `Program.cs` file and register the Kendo UI service.
+
+	```
+	var builder = WebApplication.CreateBuilder(args);
+
+	// Add Kendo UI services to the services container"
+	builder.Services.AddKendo();
+	```
 
 1. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`. If you intend to use the Telerik UI ASP.NET Core Tag Helpers, add them with `@addTagHelper *, Kendo.Mvc`.
 

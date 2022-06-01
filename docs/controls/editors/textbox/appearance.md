@@ -18,7 +18,7 @@ For a live example, visit the [Appearance Demo of the TextBox](https://demos.tel
 
 ## Options
 
-The Kendo UI Button supports the following styling options:
+The Kendo UI TextBox supports the following styling options:
 
 - [`size`](#size)—configures the overall size of the component.
 - [`fillMode`](#fillmode)—configures how the color is applied to the component.
@@ -33,6 +33,7 @@ The following values are available for the [`size`](/api/javascript/ui/textbox/c
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The default size value is `medium` and it is applied to the wrapping span element through the `k-input-md` class.
 
@@ -49,6 +50,7 @@ The following values are available for the [`rouned`](/api/javascript/ui/textbox
 - medium(md)
 - large(lg)
 - full(full)
+- none
 
 The structure of the class is `k-rounded-{size}`.
 
@@ -68,6 +70,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/textb
 - solid
 - flat
 - outline
+- none
 
 The default fillMode value is `solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 

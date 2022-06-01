@@ -18,7 +18,7 @@ For a live example, visit the [Appearance Demo of the DateInput](https://demos.t
 
 ## Options
 
-The Kendo UI Button supports the following styling options:
+The Kendo UI DateInput supports the following styling options:
 
 - [`size`](#size)—configures the overall size of the component.
 - [`fillMode`](#fillmode)—configures how the color is applied to the component.
@@ -33,6 +33,7 @@ The following values are available for the [`size`](/api/javascript/ui/dateinput
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The default size value is `medium` and it is applied to the wrapping span element through the `k-input-md` class.
 
@@ -51,6 +52,7 @@ The following values are available for the [`rouned`](/api/javascript/ui/dateinp
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—ellipse-like border radius
+- `none`—unset
 
 The structure of the class is `k-rounded-{size}`.
 
@@ -70,6 +72,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/datei
 - `solid`
 - `flat`
 - `outline`
+- `none`
 
 The default fillMode value is `solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 

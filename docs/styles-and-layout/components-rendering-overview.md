@@ -67,6 +67,7 @@ The following values are available for the `themeColor` option:
 - `dark`
 - `light`
 - `inverse`
+- `none`
 
 The following example shows a Kendo UI Button with `solid` fill mode and `base` theme color:
 
@@ -89,6 +90,7 @@ The `size` values follow the already established concept of class names:
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The default size of the components is `medium`.
 
@@ -128,6 +130,7 @@ The `rounded` values follow the already established concept of class names:
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—largest border radius
+- `none`—unset
 
 The default border radius of the components is `medium`.
 
@@ -229,7 +232,7 @@ The following table showcases the old and updated versions of the Kendo state cl
 | Component              | Appearance Documentation                                                                                 |
 |:-----------------------|:---------------------------------------------------------------------------------------------------------|
 | `AutoComplete`         | [AutoComplete Appearance Documentation]({% slug sizedimensions_kendoui_autocomplete %})                  |
-| `Button`               | [Button Appearance Documentation]({% slug button_styling %})                                             |
+| `Button`               | [Button Appearance Documentation]({% slug button_styling_widget %})                                             |
 | `ColorPicker`          | [ColorPicker Appearance Documentation]({% slug appearance_kendoui_colorpicker_widget %})                 |
 | `ComboBox`             | [ComboBox Appearance Documentation]({% slug appearance_kendoui_combobox %})                              |
 | `DateInput`            | [DateInput Appearance Documentation]({% slug appearance_kendoui_dateinput_widget %})                     |

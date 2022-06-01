@@ -105,6 +105,10 @@ var __meta__ = { // jshint ignore:line
 
             Widget.fn._applyCssClasses.call(that);
 
+            if (!resize && options.resize === "none") {
+                resize = "k-resize-none";
+            }
+
             action = action || "addClass";
 
             if (options.overflow === "auto") {

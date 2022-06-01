@@ -285,7 +285,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 Sets a value controlling how the color is applied. Can also be set to the following string values:
 
-- null
+- "none"
 - "solid"
 - "flat"
 - "outline"
@@ -629,7 +629,7 @@ If set to `true` a week of the year will be shown on the left side of the calend
 
 Sets a value controlling the border radius. Can also be set to the following string values:
 
-- null
+- "none"
 - "small"
 - "medium"
 - "large"
@@ -651,7 +651,7 @@ Sets a value controlling size of the component. Can also be set to the following
 - "small"
 - "medium"
 - "large"
-- null
+- "none"
 
 #### Example - sets the rounded value
 

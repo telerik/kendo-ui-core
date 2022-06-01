@@ -124,7 +124,7 @@ Indicates whether the **Button** should be enabled or disabled. By default, it i
 
 ### fillMode `String` *(default: 'solid')*
 
-Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `null`. Default value is `"solid"`.
+Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `"none"`. Default value is `"solid"`.
 
 #### Example
 
@@ -204,7 +204,7 @@ The `img` element can be added automatically by the widget, or an existing eleme
 
 ### rounded `String` *(default: 'medium')*
 
-Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `null`. Default value is `"medium"`.
+Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`. Default value is `"medium"`.
 
 #### Example
 
@@ -217,7 +217,7 @@ Controls what border radius is applied to a button. Valid values are: `"small"`,
 
 ### size `String` *(default: 'medium')*
 
-Controls the overall physical size of a button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `null`. Default value is `"medium"`.
+Controls the overall physical size of a button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
 
 #### Example
 
@@ -257,7 +257,7 @@ The `span` element can be added automatically by the widget, or an existing elem
 
 ### themeColor `String` *(default: 'base')*
 
-Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `null`. Default value is `"base"`.
+Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
 
 #### Example
 

@@ -110,7 +110,7 @@ Sets a value controlling the size of the component. Can also be set to the follo
 - "small"
 - "medium"
 - "large"
-- null
+- "none"
 
 #### Example
 
@@ -129,7 +129,7 @@ Sets a value controlling the track's border radius. Can also be set to the follo
 - "medium"
 - "large"
 - "full"
-- null
+- "none"
 
 #### Example
 
@@ -148,7 +148,7 @@ Sets a value controlling the thumb's border radius. Can also be set to the follo
 - "medium"
 - "large"
 - "full"
-- null
+- "none"
 
 #### Example
 

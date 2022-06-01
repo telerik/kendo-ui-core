@@ -15,6 +15,39 @@ Data-bound Telerik UI components like the Grid depend on Pascal case-formatted r
 
 This document describes the recommended approaches to maintain the Pascal case in different ASP.NET Core versions.
 
+## Configure JSON Serialization in ASP.NET Core 6 and the Minimal Hosting Model
+
+For applications using .NET 6 and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model) open the `Program.cs` file. To set the serialization options for the application use any of the approaches demonstrated below.
+
+* Use the default serialization that is delivered with ASP.NET Core (recommended approach).
+	```
+	var builder = WebApplication.CreateBuilder(args);
+
+	// Add services to the container.
+	builder.Services.AddControllersWithViews()
+                // Maintain property names during serialization. See:
+                // https://github.com/aspnet/Announcements/issues/194
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null);
+	
+	// Add Kendo UI services to the services container
+	builder.Services.AddKendo();
+	```
+
+* Use the `Newtonsoft` library.
+
+	```
+	var builder = WebApplication.CreateBuilder(args);
+
+	// Add services to the container.
+	builder.Services.AddControllersWithViews()
+					// Maintain property names during serialization. See:
+					// https://github.com/aspnet/Announcements/issues/194
+					.AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
+	
+	// Add Kendo UI services to the services container
+	builder.Services.AddKendo();
+	```
 ## Configure JSON Serialization in ASP.NET Core 3 and Later
 
 There are three ways to configure the JSON serialization in ASP.NET Core 3 or later versions:

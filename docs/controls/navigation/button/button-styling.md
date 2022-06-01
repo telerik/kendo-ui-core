@@ -1,6 +1,6 @@
 ---
-title: Styling
-page_title: jQuery Button Documentation | Button Styling
+title: Appearance
+page_title: jQuery Button Documentation | Button Appearance
 description: "Learn how to apply different styling options to the Button widget."
 slug: button_styling_widget
 position: 2
@@ -14,7 +14,7 @@ In this article, you will find information about the new rendering of the Kendo 
 
 For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
 
-For a live example, visit the [Styling Demo of the Button](https://demos.telerik.com/kendo-ui/button/styling).
+For a live example, visit the [Appearance Demo of the Button](https://demos.telerik.com/kendo-ui/button/appearance).
 
 ## Options
 
@@ -34,6 +34,7 @@ The following values are available for the [`size`](/api/javascript/ui/button/co
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
+- `none`—unset
 
 The default size value is `medium` and it is applied to the button element through the `k-button-md` class.
 
@@ -52,6 +53,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/butto
 - `outline`
 - `flat`
 - `link`
+- `none`
 
 The default fillMode value is `solid` and it is applied to the button element through the `k-button-solid` class.
 
@@ -77,6 +79,7 @@ The following values are available for the [`themeColor`](/api/javascript/ui/but
 - `dark`
 - `light`
 - `inverse`
+- `none`
 
 The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` will have `k-button-solid-base` class applied.
 
@@ -105,6 +108,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/button
 - `lg`—large size
 - `circle`
 - `pill`
+- `none`—unset
 
 The default rounded value is `medium` and it is applied to the button element through the `k-rounded-md` class.
 
@@ -206,6 +210,6 @@ $(".k-button") // Returns a reference to the button element in the old and the n
 
 ## See Also
 
-* [Styling Overview Article]({% slug components_rendering_overview %})
-* [Styling Demo of the Button](https://demos.telerik.com/kendo-ui/button/styling)
+* [Appearance Overview Article]({% slug components_rendering_overview %})
+* [Appearance Demo of the Button](https://demos.telerik.com/kendo-ui/button/appearance)
 * [JavaScript API Reference of the Button](/api/javascript/ui/button)

@@ -586,7 +586,7 @@ When filtering is enabled, allows aria-label to be defined for the filter input 
 
 Sets a value controlling how the color is applied. Can also be set to the following string values:
 
-- null
+- "none"
 - "solid"
 - "flat"
 - "outline"
@@ -1127,7 +1127,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 Sets a value controlling the border radius. Can also be set to the following string values:
 
-- null
+- "none"
 - "small"
 - "medium"
 - "large"
@@ -1150,7 +1150,7 @@ Sets a value controlling size of the component. Can also be set to the following
 - "small"
 - "medium"
 - "large"
-- null
+- "none"
 
 #### Example - sets the fillMode
 
