@@ -167,7 +167,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="~/css/site.css" />
 
-		@* Add the Kendo Bootstrap v4 theme: *@
+		@* Add the Kendo Bootstrap theme: *@
 		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" rel="stylesheet" type="text/css" />
 		...
 		</head>
