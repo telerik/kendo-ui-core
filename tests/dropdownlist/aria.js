@@ -117,22 +117,16 @@
             assert.equal(dropdownlist.wrapper.attr("role"), "combobox");
         });
 
-        it("DropDownList renders aria-haspopup", function() {
-            var dropdownlist = new DropDownList(input);
-
-            assert.equal(dropdownlist.wrapper.attr("aria-haspopup"), "listbox");
-        });
-
         it("DropDownList renders aria-expanded", function() {
             var dropdownlist = new DropDownList(input);
 
             assert.equal(dropdownlist.wrapper.attr("aria-expanded"), "false");
         });
 
-        it("DropDownList renders aria-owns", function() {
+        it("DropDownList renders aria-controls", function() {
             var dropdownlist = new DropDownList(input.attr("id", "test"));
 
-            assert.equal(dropdownlist.wrapper.attr("aria-owns"), dropdownlist.ul.attr("id"));
+            assert.equal(dropdownlist.wrapper.attr("aria-controls"), dropdownlist.ul.attr("id"));
         });
 
         it("DropDownList renders aria-describedby", function() {
@@ -168,12 +162,12 @@
             assert.equal(dropdownlist.filterInput.attr("aria-haspopup"), "listbox");
         });
 
-        it("DropDownList renders aria-owns to wrapper element", function() {
+        it("DropDownList renders aria-controls to wrapper element", function() {
             var dropdownlist = new DropDownList(input.attr("id", "test"), {
                 filter: "startswith"
             });
 
-            assert.equal(dropdownlist.wrapper.attr("aria-owns"), dropdownlist.ul.attr("id"));
+            assert.equal(dropdownlist.wrapper.attr("aria-controls"), dropdownlist.ul.attr("id"));
         });
 
         it("DropDownList adds custom title to filter input", function() {

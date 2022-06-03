@@ -100,6 +100,10 @@ var __meta__ = { // jshint ignore:line
                     that._togglePrompt();
                 });
 
+            if (that.options.mask && that.options.mask.length > 0) {
+                that.element.attr("aria-placeholder", that.options.mask);
+            }
+
             var disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
 
             if (disabled) {

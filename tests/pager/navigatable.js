@@ -51,7 +51,7 @@
             element.focus();
             var left = { keyCode: keys.LEFT, preventDefault: $.noop, stopPropagation: $.noop, target: element };
             pager._keyDown(left);
-            assert.equal(element.find("input").attr("aria-label"), "3");
+            assert.equal(element.find("input").attr("aria-label"), pager.options.messages.page + " 3");
             assert.equal(element.find(":kendoFocusable:not([tabindex='-1'])").length, 0);
         });
 

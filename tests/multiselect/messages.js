@@ -56,7 +56,7 @@
                 }
             });
 
-            var label = multiSelect._arrow.attr("title");
+            var label = multiSelect._arrow.attr("aria-label");
             assert.equal(label, "custom");
         });
     });

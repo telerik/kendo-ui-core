@@ -44,7 +44,6 @@ var __meta__ = { // jshint ignore:line
         ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
-        ARIA_OWNS = "aria-owns",
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
         DATE = Date,
@@ -127,6 +126,8 @@ var __meta__ = { // jshint ignore:line
                    .attr({
                        "role": "combobox",
                        "aria-expanded": false,
+                       "aria-haspopup": "grid",
+                       "aria-controls": that.dateView._dateViewID + " " + that.timeView._timeViewID,
                        "autocomplete": "off"
                    });
 
@@ -737,12 +738,6 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         element.attr(ARIA_EXPANDED, false);
                         div.attr(ARIA_HIDDEN, true);
-
-                        if (!that.options.singlePopup && !timeView.popup.visible()) {
-                            if (element && element.length) {
-                                element[0].removeAttribute(ARIA_OWNS);
-                            }
-                        }
                     }
                 },
                 open: function(e) {
@@ -757,8 +752,7 @@ var __meta__ = { // jshint ignore:line
                         }
 
                         div.attr(ARIA_HIDDEN, false);
-                        element.attr(ARIA_EXPANDED, true)
-                               .attr(ARIA_OWNS, dateView._dateViewID);
+                        element.attr(ARIA_EXPANDED, true);
 
                         that._updateARIA(date);
                     }
@@ -800,12 +794,6 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         ul.attr(ARIA_HIDDEN, true);
                         element.attr(ARIA_EXPANDED, false);
-
-                        if (!dateView.popup.visible()) {
-                            if (element && element.length) {
-                                element[0].removeAttribute(ARIA_OWNS);
-                            }
-                        }
                     }
                 },
                 open: function(e) {
@@ -825,8 +813,7 @@ var __meta__ = { // jshint ignore:line
                         }
 
                         ul.attr(ARIA_HIDDEN, false);
-                        element.attr(ARIA_EXPANDED, true)
-                               .attr(ARIA_OWNS, timeView._timeViewID);
+                        element.attr(ARIA_EXPANDED, true);
 
                         timeView.options.active(timeView.current());
                     }
@@ -923,9 +910,6 @@ var __meta__ = { // jshint ignore:line
                     rounded: "none"
                 })).insertAfter(element);
             }
-
-            that._dateIcon.attr("aria-controls", that.dateView._dateViewID);
-            that._timeIcon.attr("aria-controls", that.timeView._timeViewID);
 
             if (options.singlePopup) {
                 that._timeIcon.hide();

@@ -94,14 +94,6 @@
             assert.equal(autocomplete.element.attr("role"), "combobox");
         });
 
-        it("AutoComplete adds aria-owns", function() {
-            var autocomplete = new AutoComplete(input.attr("id", "test"), {
-                placeholder: "Select..."
-            });
-
-            assert.equal(autocomplete.element.attr("aria-owns"), autocomplete.ul.attr("id"));
-        });
-
         it("Autocomplete has aria-controls", function() {
             var autocomplete = new AutoComplete(input.attr("id", "test"), {
                 placeholder: "Select..."

@@ -379,7 +379,7 @@ var __meta__ = { // jshint ignore:line
                     role: "combobox",
                     "aria-expanded": false,
                     "aria-haspopup": "grid",
-                    "aria-owns": that.dateView._dateViewID,
+                    "aria-controls": that.dateView._dateViewID,
                     "autocomplete": "off"
                 });
             that._reset();
@@ -683,8 +683,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._dateIcon = icon.attr({
-                "role": "button",
-                "aria-controls": that.dateView._dateViewID
+                "role": "button"
             });
         },
 

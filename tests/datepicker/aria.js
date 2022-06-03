@@ -21,8 +21,8 @@ it("DatePicker adds role to the input element", function() {
     assert.equal(input.attr("role"), "combobox");
 });
 
-it("DatePicker adds aria-owns", function() {
-    assert.equal(input.attr("aria-owns"), "test_dateview");
+it("DatePicker adds aria-controls", function() {
+    assert.equal(input.attr("aria-controls"), "test_dateview");
 });
 
 it("DatePicker sets id to the popup element", function() {
@@ -80,10 +80,6 @@ it("DatePicker sets aria-readonly to false after state is changed", function() {
 
 it("DatePicker adds role to the toggle button", function() {
     assert.equal(instance._dateIcon.attr("role"), "button");
-});
-
-it("DatePicker adds aria-controls to the toggle button", function() {
-    assert.equal(instance._dateIcon.attr("aria-controls"), "test_dateview");
 });
 
 it("DatePicker sets id to the calendar", function() {

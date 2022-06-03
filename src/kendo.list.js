@@ -782,7 +782,6 @@ var __meta__ = { // jshint ignore:line
             id = id ? id + " " + that.ul[0].id : that.ul[0].id;
 
             element.attr({
-                "aria-owns": id,
                 "aria-controls": id
             });
 

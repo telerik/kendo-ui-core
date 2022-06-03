@@ -1340,7 +1340,7 @@ var __meta__ = { // jshint ignore:line
                    .attr({
                         "role": "combobox",
                         "aria-expanded": false,
-                        "aria-owns": timeView._timeViewID,
+                        "aria-controls": timeView._timeViewID,
                         "autocomplete": "off"
                    });
 
@@ -1643,8 +1643,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._arrow = arrow.attr({
-                "role": "button",
-                "aria-controls": that.timeView._timeViewID
+                "role": "button"
             });
         },
 

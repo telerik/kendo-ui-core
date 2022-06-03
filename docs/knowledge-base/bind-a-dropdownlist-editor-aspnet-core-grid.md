@@ -19,7 +19,7 @@ component: grid
  </tr>
  <tr>
   <td>Kendo Version</td>
-  <td>217.2.621</td>
+  <td>2017.2.621</td>
  </tr>
 </table>
 

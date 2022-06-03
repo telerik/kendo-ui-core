@@ -8124,7 +8124,9 @@ declare namespace kendo.ui {
         display?: string | undefined;
         empty?: string | undefined;
         allPages?: string | undefined;
+        numbersSelectLabel?: string | undefined;
         pageButtonLabel?: string | undefined;
+        pageSizeDropDownLabel?: string | undefined;
         page?: string | undefined;
         of?: string | undefined;
         itemsPerPage?: string | undefined;

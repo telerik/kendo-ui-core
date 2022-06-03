@@ -101,18 +101,6 @@ it("ComboBox adds role to the input", function() {
     assert.equal(combobox.input[0].getAttribute("role"), "combobox");
 });
 
-it("ComboBox adds aria-owns", function() {
-    var combobox = new ComboBox(input.attr("id", "test"));
-
-    assert.equal(combobox.input.attr("aria-owns"), combobox.ul.attr("id"));
-});
-
-it("ComboBox adds aria-owns without input id", function() {
-    var combobox = new ComboBox(input);
-
-    assert.equal(combobox.input.attr("aria-owns"), combobox.ul.attr("id"));
-});
-
 it("ComboBox adds aria-controls without input id", function() {
     var combobox = new ComboBox(input);
 

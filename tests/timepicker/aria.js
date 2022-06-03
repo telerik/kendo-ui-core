@@ -20,8 +20,8 @@
             assert.equal(input.attr("aria-expanded"), "false");
         });
 
-        it("TimePicker adds aria-owns", function() {
-            assert.equal(input.attr("aria-owns"), instance.timeView.ul.attr("id"));
+        it("TimePicker adds aria-controls", function() {
+            assert.equal(input.attr("aria-controls"), instance.timeView.ul.attr("id"));
         });
 
         it("TimePicker sets aria-expanded=true", function() {
@@ -37,10 +37,6 @@
 
         it("TimePicker adds role to the toggle button", function() {
             assert.equal(instance._arrow.attr("role"), "button");
-        });
-
-        it("TimePicker adds aria-controls to the toggle button", function() {
-            assert.equal(instance._arrow.attr("aria-controls"), instance.timeView.ul.attr("id"));
         });
 
         it("TimePicker sets id to the ul element", function() {

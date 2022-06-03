@@ -24,6 +24,11 @@
             assert.equal(input.attr("aria-expanded"), "false");
         });
 
+        it("DateTimePicker sets aria-haspopup=grid", function() {
+            instance.open();
+            assert.equal(input.attr("aria-haspopup"), "grid");
+        });
+
         it("DateTimePicker sets aria-expanded=true", function() {
             instance.open();
             assert.equal(input.attr("aria-expanded"), "true");
@@ -33,11 +38,6 @@
             instance.open();
             instance.close();
             assert.equal(input.attr("aria-expanded"), "false");
-        });
-
-        it("DateTimePicker adds aria-controls to the toggle button", function() {
-            assert.equal(instance._dateIcon.attr("aria-controls"), instance.dateView.popup.element.attr("id"));
-            assert.equal(instance._timeIcon.attr("aria-controls"), instance.timeView.ul.attr("id"));
         });
 
         it("DateTimePicker sets id to the ul element", function() {
@@ -54,27 +54,10 @@
             assert.equal(instance.timeView.current().attr("aria-selected"), "true");
         });
 
-        it("DateTimePicker sets aria-owns to the DateView id", function() {
-            instance.open("date");
-            assert.equal(instance.element.attr("aria-owns"), instance.dateView._dateViewID);
-        });
-
-        it("DateTimePicker removes aria-owns to the DateView id", function() {
-            instance.open("date");
-            instance.close("date");
-            assert.equal(instance.element.attr("aria-owns"), undefined);
-        });
-
-        it("DateTimePicker sets aria-owns to the DateView id", function() {
+        it("DateTimePicker sets aria-controls to the DateView and TimeView ids", function() {
             instance.open("date");
             instance.open("time");
-            assert.equal(instance.element.attr("aria-owns"), instance.timeView._timeViewID);
-        });
-
-        it("DateTimePicker removes aria-owns to the DateView id", function() {
-            instance.open("time");
-            instance.close("time");
-            assert.equal(instance.element.attr("aria-owns"), undefined);
+            assert.equal(instance.element.attr("aria-controls"), instance.dateView._dateViewID + " " + instance.timeView._timeViewID);
         });
 
         it("DateTimePicker sets aria-activedescendant", function() {

@@ -571,6 +571,42 @@ The text displayed for the item that represents the allPages option when allPage
       }
     </style>
 
+### messages.numbersSelectLabel `String`*(default: "Page select")*
+
+The label applied to the Pager select element (when visible).
+
+#### Example - reduce view width to see the Pager select
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" },
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" },
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 1
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          messages: {
+            numbersSelectLabel: "Select page number"
+          }
+        });
+
+        dataSource.read();
+    </script>
+
 ### messages.page `String`*(default: "Page")*,
 The label displayed before the pager input.
 
@@ -640,6 +676,37 @@ The title of the numeric link page buttons of the **Pager**. The parameters avai
        margin-top: 100px;
       }
     </style>
+
+### messages.pageSizeDropDownLabel `String`*(default: "Page sizes drop down")*
+
+The label applied to the page size DropDOwnList.
+
+#### Example
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          input: true,
+          numeric: false,
+          messages: {
+            pageSizeDropDownLabel: "page size"
+          },
+          pageSizes: [1, 2, 5]
+        });
+
+        dataSource.read();
+    </script>
 
 ### messages.of `String`*(default: "of {0}")*,
 The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.

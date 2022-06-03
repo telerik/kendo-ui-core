@@ -997,10 +997,6 @@ var __meta__ = { // jshint ignore:line
                     "tabIndex": -1
                 });
             that._arrowIcon = that._arrow.find(".k-icon");
-
-            if (element.id) {
-                that._arrow.attr("aria-controls", that.ul[0].id);
-            }
         },
 
         _clearButton: function() {

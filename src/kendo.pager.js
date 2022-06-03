@@ -30,7 +30,7 @@ var __meta__ = { // jshint ignore:line
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = kendo.template('<a href="\\#" title="#=text#" aria-label="#=text#" #if (id !== "") {# aria-describedby="#=id#" #}# class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
+        iconTemplate = kendo.template('<a href="\\#" role="button" title="#=text#" aria-label="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
     function button(options) {
         return options.template( {
@@ -97,7 +97,6 @@ var __meta__ = { // jshint ignore:line
             that._createDataSource(options);
             that.linkTemplate = kendo.template(that.options.linkTemplate);
             that.selectTemplate = kendo.template(that.options.selectTemplate);
-            that.currentPageTemplate = kendo.template(that.options.currentPageTemplate);
             that.numericSelectItemTemplate = kendo.template(that.options.numericSelectItemTemplate);
 
             page = that.page();
@@ -142,7 +141,7 @@ var __meta__ = { // jshint ignore:line
                     that._numericSelect = that._numericWrap.find(".k-dropdown");
 
                     if (that._numericSelect.length === 0) {
-                       that._numericSelect = $("<select class='k-dropdown k-picker k-dropdown-list' />").appendTo(that._numericWrap);
+                       that._numericSelect = $("<select aria-label='" + that.options.messages.numbersSelectLabel + "' class='k-dropdown k-picker k-dropdown-list' />").appendTo(that._numericWrap);
                     }
                 }
 
@@ -214,7 +213,7 @@ var __meta__ = { // jshint ignore:line
 
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
-                    that.element.append('<a href="#" class="k-pager-refresh k-link" title="' + options.messages.refresh +
+                    that.element.append('<a role="button" href="#" class="k-pager-refresh k-link" title="' + options.messages.refresh +
                         '" aria-label="' + options.messages.refresh + '"><span class="k-icon k-i-reload"></span></a>');
                 }
 
@@ -271,10 +270,8 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "Pager",
             ARIATemplate: "Page navigation, page #=page# of #=totalPages#",
-            selectTemplate: '<li><span role="button" tabindex="#=tabindex#" #if (navigatable) {# aria-label="#=title#" #}# class="k-link k-state-selected">#=text#</span></li>',
-            currentPageTemplate: '<li class="k-current-page"><span class="k-link k-pager-nav">#=text#</span></li>',
-            linkTemplate: '<li><a tabindex="#=tabindex#" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
-            numericItemTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
+            selectTemplate: '<li><span role="button" aria-current="page" tabindex="#=tabindex#" aria-label="#=title#" class="k-link k-state-selected">#=text#</span></li>',
+            linkTemplate: '<li><a role="button" tabindex="#=tabindex#" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
             numericSelectItemTemplate: '<option value="#= idx #" #if (selected) {# selected="selected" #}#>#= text #</option>',
             buttonCount: 10,
             autoBind: true,
@@ -295,6 +292,7 @@ var __meta__ = { // jshint ignore:line
                 itemsPerPage: "items per page",
                 pageButtonLabel: "Page {0}",
                 pageSizeDropDownLabel: "Page sizes drop down",
+                numbersSelectLabel: "Page select",
                 first: "Go to the first page",
                 previous: "Go to the previous page",
                 next: "Go to the next page",
@@ -314,6 +312,14 @@ var __meta__ = { // jshint ignore:line
             if (that.options.autoBind) {
                 dataSource.fetch();
             }
+        },
+
+        _aria: function() {
+            this.element.attr({
+                "role": "application",
+                "aria-roledescription": "pager",
+                "aria-keyshortcuts": "Enter ArrowRight ArrowLeft"
+            });
         },
 
         _resize: function(size) {
@@ -428,7 +434,7 @@ var __meta__ = { // jshint ignore:line
                 that.element
                     .find(".k-pager-input")
                     .html(that.options.messages.page +
-                        '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" aria-label="' + page + '"></span>' +
+                        '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" aria-label="' + that.options.messages.page + " " + page + '"></span>' +
                         kendo.format(options.messages.of, totalPages))
                     .find("input")
                     .val(page)
@@ -459,7 +465,6 @@ var __meta__ = { // jshint ignore:line
                 that.element
                     .find(".k-pager-sizes select")
                     .val(pageSize)
-                    .attr("aria-label", pageSize)
                     .filter("[" + kendo.attr("role") + "=dropdownlist]")
                     .kendoDropDownList("value", pageSize)
                     .kendoDropDownList("text", text); // handles custom values
@@ -565,7 +570,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that.element.attr("role", "application");
+            that._aria();
             that.element.attr("id", that._id);
             that._template();
             that._updateAria();

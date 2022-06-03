@@ -1310,7 +1310,6 @@ var __meta__ = { // jshint ignore:line
                     accesskey: element.attr("accesskey"),
                     unselectable: "on",
                     role: "combobox",
-                    "aria-haspopup": "listbox",
                     "aria-expanded": false
                 });
 

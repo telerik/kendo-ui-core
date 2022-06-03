@@ -4083,6 +4083,20 @@ var __meta__ = { // jshint ignore:line
                 result = that._queryProcess(data, options);
             }
 
+            if (that._filter && e && e.action === "add") {
+                var model = e.items[0],
+                    resultData = result.data;
+
+                var modelIsInView = resultData.find(function(item) {
+                    return item.uid === model.uid;
+                });
+
+                if (!modelIsInView) {
+                    result.data.splice(model.index, 0, model);
+                    result.total++;
+                }
+            }
+
             if (that.options.serverAggregates !== true) {
                 // for performance reasons, calculate aggregates for part of the data only after query process
                 // this is necessary in the TreeList when paging

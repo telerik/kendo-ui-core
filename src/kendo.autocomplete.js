@@ -123,10 +123,6 @@ var __meta__ = { // jshint ignore:line
 
             that._old = that._accessor();
 
-            if (element[0].id) {
-                element.attr("aria-owns", that.ul[0].id);
-            }
-
             that._aria();
 
             that._placeholder();
