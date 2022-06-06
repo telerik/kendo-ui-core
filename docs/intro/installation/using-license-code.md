@@ -14,6 +14,8 @@ Kendo UI for jQuery is a professionally developed UI library distributed under a
 
 Our community is essential to us, and we want to be sure that licensing does not get in your way. Let us know if you experience any issues.
 
+>The license key will be distributed along with the scripts and this cannot not be avoided. However, Progress recommends that you do not publicly announce it.
+
 You can send us feedback through the Contact Us form or by opening a support ticket.
 
 The license key installation process involves two steps:

@@ -35,7 +35,9 @@ The following example demonstrates how to configure the PDFViewer to use PDF.js 
 
 ## Browser Support
 
-PDF.js processing is only supported in Internet Explorer 11.    
+PDF.js processing is not supported in Internet Explorer 9. 
+
+To work properly in Internet Explorer 11, PDF.js requires additional configuration.   
 
 <script>
     // Specify the workerSrc property for Internet Explorer support.
