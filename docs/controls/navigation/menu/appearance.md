@@ -74,7 +74,7 @@ New Rendering:
 
 ## See Also
 
-* [Rendering Overview Article]({% slug components_rendering_overview %})
+* [Styling Overview Article]({% slug components_rendering_overview %})
 * [Basic Usage of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/index)
 * [Using the API of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/api)
 * [JavaScript API Reference of the Menu](/api/javascript/ui/menu)

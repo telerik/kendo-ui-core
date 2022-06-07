@@ -1,21 +1,21 @@
 ---
-title: Telerik and Kendo UI Design Kits for Figma
-page_title: Kendo UI Design Kits for Figma | Kendo UI Styles and Appearance
+title: Kendo UI Design Kits for Figma
+page_title: Kendo UI Design Kits for Figma | Design Kits
 description: "Discover the UI Design Kits for Figma and learn how to use them to create stylish jQuery applications."
-previous_url: /styles-and-layout/design-files
+previous_url: /styles-and-layout/design-files, /styles-and-layout/figma-ui-kits
 slug: ui_kits_figma_kendouistyling
-position: 8
+position: 9
 ---
 
-# Telerik and Kendo UI Design Kits for Figma
+# Kendo UI Design Kits for Figma
 
-Design files for Figma&mdash;building blocks for designers that match the Kendo UI jQuery components.
+The design files for Figma are the building blocks for designers that match the Kendo UI jQuery components.
 
 <a href="https://www.figma.com/@progress" style="display: contents;" title="Download Kendo UI Kits">
-<img src="images/styling-ui-kits-for-figma.png" alt="Download Kendo UI Kits" style="max-width: 590px; display: block; margin-left: auto; margin-right: auto;"/>
+<img src="../images/styling-ui-kits-for-figma.png" alt="Download Kendo UI Kits" style="max-width: 590px; display: block; margin-left: auto; margin-right: auto;"/>
 </a>
 
-To enable efficient collaboration between designers and developers, we created three Telerik and Kendo UI Kits for Figma: Material, Bootstrap, and Kendo Default. Each UI kit corresponds to one of the themes that ship with the Kendo UI jQuery components.
+To enable efficient collaboration between designers and developers, Progress provides three Kendo UI Kits for Figma: Material, Bootstrap, and Kendo Default. Each UI kit corresponds to one of the themes that ship with the Kendo UI jQuery components.
 
 <a href="https://www.figma.com/@progress" class="track--download-kendoui" style="text-decoration:none; display: inline-flex;" title="Download Kendo UI Kits">
 <button importance="ghost" style="display: flex;
@@ -36,7 +36,7 @@ To enable efficient collaboration between designers and developers, we created t
                                 border: 2px solid rgba(148, 216, 255, 0.533);
                                 color: rgb(101, 101, 101);">
 <span style="width: 21px; margin-right: 16px">
-<img src="images/figma-vector-logo-2.png" alt="Download Kendo UI Kits"/>
+<img src="../images/figma-vector-logo-2.png" alt="Download Kendo UI Kits"/>
 </span>
 Download Kendo UI Kits
 </button>
@@ -44,7 +44,7 @@ Download Kendo UI Kits
 
 These polished UI kits include pre-made, reusable design components that follow the [atomic design principles](https://atomicdesign.bradfrost.com/chapter-2/).
 
-The design files represent the Kendo UI jQuery components in every possible state, their detailed anatomy, colors, metrics, and icons. All these elements enable the seamless handover of the design to the developers.
+The design files represent the Kendo UI jQuery components in every possible state, their detailed anatomy, colors, metrics, and icons. All these elements enable the seamless hand-over of the design to the developers.
 
 You are free to decide if or how much to customize the UI kits:
 
@@ -62,7 +62,7 @@ When you use the UI kits, you enjoy the following advantages:
 
 ## Downloading the UI Kits
 
-To download the Telerik and Kendo UI Kits for Figma, navigate to the desired kit and follow the instructions on [duplicating a file from the Figma Community](https://help.figma.com/hc/en-us/articles/360038510873-Use-files-from-the-Community#Duplicate).
+To download the Kendo UI Kits for Figma, navigate to the desired kit and follow the instructions on [duplicating a file from the Figma Community](https://help.figma.com/hc/en-us/articles/360038510873-Use-files-from-the-Community#Duplicate).
 
 - [Kendo UI Kit for Material](https://www.figma.com/community/file/971704350762479492)
 - [Kendo UI Kit for Bootstrap](https://www.figma.com/community/file/971704996235717509)
@@ -70,29 +70,29 @@ To download the Telerik and Kendo UI Kits for Figma, navigate to the desired kit
 
 ## Exploring the UI Kits' Structure
 
-The Telerik and Kendo UI kits for Figma utilize [nested instances and base components](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/) to provide better manageability of the components. To make them more intuitive to use, we added support for [variants](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) to some of the components, like the chip.
+The Kendo UI kits for Figma utilize [nested instances and base components](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/) to provide better manageability of the components. To make them more intuitive to use, we added support for [variants](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) to some of the components, like the chip.
 
-Each Telerik and Kendo UI Kit for Figma contains the following pages, most of which provide multiple frames that group similar design assets:
+Each Kendo UI Kit for Figma contains the following pages, most of which provide multiple frames that group similar design assets:
 
 * **_Cover**&mdash;The cover page of the UI kit.
 * **_Getting Started**&mdash;Briefly explains what you need to know to start using the UI kits.
 * **_Table of Contents**&mdash;An index with hyperlinks that you can use to quickly navigate within the UI kits.
 * **UI Components**&mdash;Contains all components and their variants.
-* **Data Visualization**&mdash;Contains visual equivalents of all charts supported by the Telerik and Kendo UI web component libraries.
+* **Data Visualization**&mdash;Contains visual equivalents of all charts supported by the Kendo UI web component libraries.
 * **Icons**&mdash;Contains all icons in the form of convenient components.
 * **_Styles**&mdash;An informational page with all styles that are applied to the components, such as typography, colors, and effects.
 * **_Change Log**&mdash;A list with the changes in the UI kit.
 
 
-<img src="images/figma-ui-kit-pages-v1.9.png" alt="Kendo UI Kit Page with Multiple Frames" style="width: 230px; height: 400px; display: block; margin-left: auto; margin-right: auto;"/>
+<img src="../images/figma-ui-kit-pages-v1.9.png" alt="Kendo UI Kit Page with Multiple Frames" style="width: 230px; height: 400px; display: block; margin-left: auto; margin-right: auto;"/>
 
 Most pages contain multiple frames that group similar design assets.
 
-<img src="images/figma-ui-kit-frames-v1.9.png" alt="Kendo UI Kit Page with Multiple Frames" style="width: 590px; height: 462px; display: block; margin-left: auto; margin-right: auto;"/>
+<img src="../images/figma-ui-kit-frames-v1.9.png" alt="Kendo UI Kit Page with Multiple Frames" style="width: 590px; height: 462px; display: block; margin-left: auto; margin-right: auto;"/>
 
 ## Customizing the UI Kits
 
-The Telerik and Kendo UI Kits for Figma are flexible and fully customizable to your vision and needs. Also, the UI kits enable the scalability of the changes that you apply to the design.
+The Kendo UI Kits for Figma are flexible and fully customizable to your vision and needs. Also, the UI kits enable the scalability of the changes that you apply to the design.
 
 To achieve the highest impact and to propagate your changes to multiple components and variants, customize the components on the **_Base** frames of the **UI Components** page.
 
@@ -115,12 +115,8 @@ Depending on your requirements, you can take advantage of three distinct levels 
 ## See Also
 
 * [Getting Started with Kendo UI for jQuery]({% slug welcometo_kendoui %})
-* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %})
+* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_themebuilder_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
-* [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
-* [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
-* [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Browse the Components](https://demos.telerik.com/kendo-ui/) 
 * [Figma for Developers (blog)](https://www.telerik.com/blogs/figma-developers)
 * [Design Systems for Developers (blog)](https://www.telerik.com/blogs/design-systems-developers)

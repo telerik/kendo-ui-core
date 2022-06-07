@@ -1,9 +1,9 @@
 ---
 title: Cards
-page_title: Cards | Kendo UI Styles and Appearance
+page_title: Cards | Styles and Appearance
 description: "Learn how to use the Kendo UI card class to render a flexible content container."
+previous_url: /styles-and-layout/checkbox-cards
 slug: cards_kendouistyling
-position: 9
 ---
 
 # Cards
@@ -12,7 +12,7 @@ The Kendo UI Card is a set of classes that define flexible content containers.
 
 A card can consist of a header, a body, and actions and can also accommodate images, lists, groups, separators, and more.
 
-## Getting Started
+## Building a Card
 
 To build a card, utilize the `.k-card` class which enables you to use a wide variety of content.
 
@@ -22,7 +22,7 @@ To build a card, utilize the `.k-card` class which enables you to use a wide var
 </div>
 ```
 
-## Building Blocks
+## Card Elements
 
 The Card can accommodate the following elements:
 
@@ -551,9 +551,5 @@ Cards provide predefined state classes that you can use to change the Card appea
 
 ## See Also
 
-* [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
-* [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
+* [Sass-Themes documentation]({% slug sassbasedthemes_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
-* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
-* [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
-* [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})

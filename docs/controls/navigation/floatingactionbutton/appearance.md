@@ -12,7 +12,7 @@ position: 3
 
 In this article, you will find information about the new rendering of the Kendo UI FloatingActionButton.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/appearance).
 
@@ -198,9 +198,9 @@ The default rounded value is `full` and it is applied to the button element thro
 ## Visual Backwards Compatibility
 
 
-In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
+To achieve the same look and feel as the old rendering, you must update the element references.
 
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+> When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
 
 ## Best Practices

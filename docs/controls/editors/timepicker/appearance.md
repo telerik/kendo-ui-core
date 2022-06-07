@@ -12,7 +12,7 @@ position: 2
 
 In this article, you will find information about the new rendering of the Kendo UI TimePicker.
 
-For additional information regarding the decision behind these changes, visit the [Appearance Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the TimePicker](https://demos.telerik.com/kendo-ui/timepicker/appearance).
 

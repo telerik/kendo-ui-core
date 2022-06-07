@@ -12,7 +12,7 @@ position: 2
 
 In this article, you will find information about the new rendering of the Kendo UI NumericTextBox.
 
-For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/appearance).
 
@@ -136,6 +136,6 @@ $(".k-input-inner") // Returns a reference to the NumericTextBox element in the 
 
 ## See Also
 
-* [Rendering Overview Article]({% slug components_rendering_overview %})
+* [Styling Overview Article]({% slug components_rendering_overview %})
 * [Appearance Demo of the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/appearance)
 * [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)

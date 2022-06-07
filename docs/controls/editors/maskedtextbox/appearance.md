@@ -12,7 +12,7 @@ position: 3
 
 In this article, you will find information about the new rendering of the Kendo UI MaskedTextBox.
 
-For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/styling).
 
@@ -164,9 +164,9 @@ The full rendering of the component has the following HTML structure:
 
 ## Visual Backwards Compatibility
 
-In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
+To achieve the same look and feel as the old rendering, you must update the element references.
 
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+> When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
 Previously, a reference to the MaskedTextBox element was obtainable through the `k-textbox` class.
 
@@ -174,7 +174,7 @@ Previously, a reference to the MaskedTextBox element was obtainable through the 
 $(".k-textbox") // Returns a reference to the input element in the old rendering.
 ```
 
-With the new rendering, the MaskedTextBox element must be targeted by using the `k-input-inner` class.
+With the new rendering, you must target the MaskedTextBox element by using the `k-input-inner` class.
 
 ```javascript
 $(".k-input-inner") // Returns a reference to the input element in the new rendering.
@@ -182,6 +182,6 @@ $(".k-input-inner") // Returns a reference to the input element in the new rende
 
 ## See Also
 
-* [Rendering Overview Article]({% slug components_rendering_overview %})
+* [Styling Overview Article]({% slug components_rendering_overview %})
 * [Appearance Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/appearance)
 * [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)

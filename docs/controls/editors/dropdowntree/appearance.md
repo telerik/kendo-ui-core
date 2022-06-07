@@ -11,7 +11,7 @@ position: 7
 > As of Kendo UI R1 2022, the jQuery DropDownTree widget has new rendering and styling options.
 
 In this article, you will find information about the rendering of the Kendo UI DropDownTree.
-For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the DropDownTree](https://demos.telerik.com/kendo-ui/dropdowntree/appearance).
 
@@ -250,11 +250,12 @@ New Multiple Selection rendering:
 ```
 
 With the previous versions, when the filtering was enabled, the search icon in the DropDownTree popup was rendered on the right side. With the new rendering, the search icon is rendered on the left side.
+
 ## Visual Backwards Compatibility
 
-In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
+To achieve the same look and feel as the old rendering, you must update the element references.
 
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+> When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
 The DropDownTree provides options for setting the widths of its [list](#setting-the-list-width) and [popup](#setting-the-popup-width).
 

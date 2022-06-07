@@ -1,18 +1,19 @@
 ---
 title: Appearance
-page_title: jQuery Button Documentation | Button Appearance
+page_title: jQuery Button Documentation | Appearance
 description: "Learn how to apply different styling options to the Button widget."
+previous_url: /styles-and-layout/styling-components/button-styling
 slug: button_styling_widget
 position: 2
 ---
 
-# Button Styling
+# Appearance
 
 > As of Kendo UI R1 2022, the Button widget uses brand new rendering.
 
 In this article, you will find information about the new rendering of the Kendo UI Button.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the Button](https://demos.telerik.com/kendo-ui/button/appearance).
 
@@ -198,11 +199,11 @@ With the old rendering, the `k-button-icon` class was used for the Buttons with 
 
 ## Visual Backwards Compatibility
 
-In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
+To achieve the same look and feel as the old rendering, you must update the element references.
 
-> The new styling and rendering supports only the [default options](#options) when a LESS theme is used.
+> When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
-A reference to the button element still can be obtained through the `k-button` class.
+A reference to the button element can still be obtained through the `k-button` class.
 
 ```javascript
 $(".k-button") // Returns a reference to the button element in the old and the new rendering.

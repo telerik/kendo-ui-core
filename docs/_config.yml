@@ -364,9 +364,12 @@ navigation:
     "styles-and-layout":
         title: "Styles & Appearance"
         position: 6
-    "styles-and-layout/styling-components":
-        title: "Styling Components"
+    "styles-and-layout/sass-themes":
+        title: "Sass Themes"
         position: 1
+    "styles-and-layout/less-themes":
+        title: "Less Themes"
+        position: 2
     "third-party":
         title: "Third-Party Libraries"
         position: 7

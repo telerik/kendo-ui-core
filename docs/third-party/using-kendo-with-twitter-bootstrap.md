@@ -30,8 +30,6 @@ Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the defau
 
 Using the responsive features of Bootstrap does not differ from other responsive sites.
 
-For detailed information on how to use Kendo UI in responsive web pages, refer to [this article on responsive web design]({% slug responsivewebdesign_integration_kendoui %}).
-
 ## Using Custom Bootstrap Themes
 
 If you have customized the Bootstrap color scheme and need Kendo UI to match it, follow the steps of any of the two options below:

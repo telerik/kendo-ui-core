@@ -12,7 +12,7 @@ position: 5
 
 In this article, you will find information about the rendering of the Kendo UI ColorPicker.
 
-For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/appearance).
 
@@ -272,9 +272,9 @@ The following example demonstrates the new rendering:
 
 ## Visual Backwards Compatibility
 
-In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
+To achieve the same look and feel as the old rendering, you must update the element references. 
 
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+> When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
 Previously, a reference to the button element was obtainable through the `k-select` class.
 
@@ -282,7 +282,7 @@ Previously, a reference to the button element was obtainable through the `k-sele
 $(".k-select") // Returns a reference to the ColorPicker dropdown button element in the old rendering.
 ```
 
-With the new rendering, a reference to the button element can be obtained also through the `k-button` and `k-input-button` classes.
+With the new rendering, you can also obtain a reference to the button element through the `k-button` and `k-input-button` classes.
 
 ```javascript
 $(".k-button") // Returns a reference to the ColorPicker dropdown button element in the new rendering.
@@ -297,13 +297,13 @@ $(".k-selected-color") // In the old rendering returns a reference to the ColorP
 $(".k-tool-icon") // In the old rendering returns a reference to the ColorPicker color preview element when a toolIcon is configured.
 ```
 
-With the new rendering, a reference to the `span` element containing the color preview can be obtained through the `k-input-inner` class.
+With the new rendering, you can obtain a reference to the `span` element containing the color preview through the `k-input-inner` class.
 
 ```javascript
 $(".k-input-inner") // Returns a reference to the ColorPicker color preview element in the new rendering.
 ```
 
-With the new rendering, a reference to the `span` element containing the selected color can be obtained through the `k-color-preview-mask` class.
+With the new rendering, you can obtain a reference to the `span` element containing the selected color through the `k-color-preview-mask` class.
 
 ```javascript
 $(".k-color-preview-mask") // Returns a reference to span element containing the selected color in the new rendering.```
@@ -312,6 +312,6 @@ $(".k-color-preview-mask") // Returns a reference to span element containing the
 
 ## See Also
 
-* [Rendering Overview Article]({% slug components_rendering_overview %})
+* [Styling Overview Article]({% slug components_rendering_overview %})
 * [Appearance Demo of the ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/appearance)
 * [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)

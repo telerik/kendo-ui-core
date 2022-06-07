@@ -12,7 +12,7 @@ position: 7
 
 In this article, you will find information about the rendering of the Kendo UI AutoComplete.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/appearance).
 
@@ -123,7 +123,7 @@ The changes are applied to the `span.k-autocomplete` wrapping element:
 
 Below you will find the differences between the old and the new rendering. 
 
-Wrapper Rendering:
+The following example shows the wrapper rendering.
 
 ```html
 <!-- OLD WRAPPER-->
@@ -137,7 +137,7 @@ Wrapper Rendering:
 </span>
 ```
 
-Popup rendering without virtualization:
+The following example shows the popup rendering without virtualization.
 
 ```html
 <!-- OLD POPUP WITHOUT VIRTUALIZATION-->
@@ -192,7 +192,7 @@ Popup rendering without virtualization:
 </div>
 ```
 
-Popup rendering with virtualization:
+The following example shows the popup rendering with virtualization.
 
 
 ```html
@@ -266,9 +266,9 @@ Popup rendering with virtualization:
 
 ## Visual Backwards Compatibility
 
-In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
+To achieve the same look and feel as the old rendering, you must update the element references. 
 
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+> When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
 Previously, a reference to the AutoComplete input element was obtainable through the `k-input` class.
 
@@ -276,13 +276,11 @@ Previously, a reference to the AutoComplete input element was obtainable through
 $(".k-input") // Returns a reference to the input element in the old rendering.
 ```
 
-With the new rendering, the AutoComplete input element must be targeted by using the `k-input-inner` class.
+With the new rendering, you must target the AutoComplete input element by using the `k-input-inner` class.
 
 ```javascript
 $(".k-input-inner") // Returns a reference to the input element in the new rendering.
 ```
-
-
 
 
 The AutoComplete also provides options for setting the widths of its [list](#setting-the-list-width) and [popup](#setting-the-popup-width), [accessing its `list` elements](#accessing-the-list-elements), and [removing its input value](#removing-the-input-value).

@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery TextBox Documentation | TextBox Appearance
 description: "Learn how to apply different styling options to the TextBox widget."
+previous_url: /styles-and-layout/styling-components/textbox-styling
 slug: appearance_kendoui_textbox_widget
 position: 2
 ---
@@ -12,7 +13,7 @@ position: 2
 
 In this article, you will find information about the new rendering of the Kendo UI TextBox.
 
-For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the TextBox](https://demos.telerik.com/kendo-ui/textbox/appearance).
 
@@ -139,6 +140,6 @@ $(".k-input-inner") // Returns a reference to the textbox element in the new ren
 
 ## See Also
 
-* [Rendering Overview Article]({% slug components_rendering_overview %})
+* [Styling Overview Article]({% slug components_rendering_overview %})
 * [Appearance Demo of the TextBox](https://demos.telerik.com/kendo-ui/textbox/аppearance)
 * [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)

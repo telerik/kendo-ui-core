@@ -12,7 +12,7 @@ position: 2
 
 In this article, you will find information about the new rendering of the Kendo UI Slider.
 
-For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 
 ## Old vs New Rendering
@@ -87,7 +87,7 @@ The following example demonstrates the full version of the old rendering:
 
 The new rendering of the component consists of a single wrapping `span` element that contains the child `input` and `button` elements.
 
-With the new rendering additional classes are applied to the **Increase** and **Decrease** buttons inside the Slider. For additional information regarding the new button rendering, visit the [Button Styling]({% slug button_styling %}) article.
+With the new rendering additional classes are applied to the **Increase** and **Decrease** buttons inside the Slider. For additional information regarding the new button rendering, visit the [Button Styling]({% slug button_styling_widget %}) article.
 
 The new rendering of the Slider component consists of the following elements:
 
@@ -183,5 +183,5 @@ $('.k-button-decrease') // Returns a reference to the decrease button.
 
 ## See Also
 
-* [Rendering Overview Article]({% slug components_rendering_overview %})
+* [Styling Overview Article]({% slug components_rendering_overview %})
 * [JavaScript API Reference of the Slider](/api/javascript/ui/slider)

@@ -43,6 +43,7 @@ The security trimming functionality can be enabled through the `SecurityTrimming
     <kendo-menu name="menu" security-trimming="true">
     </kendo-menu>
 ```
+[This GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Menu/SecurityTrimming.cshtml) represents the usage of the `AuthorizeAttribute`.
 {% endif %}
 
 ## See Also
