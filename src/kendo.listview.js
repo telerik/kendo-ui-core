@@ -224,7 +224,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         _progress: function(toggle) {
-            var element = this.content;
+            var element = this.wrapper;
+            if (toggle && this.content.height()) {
+                element = this.content;
+            }
             progress(element, toggle, { opacity: true });
         },
 

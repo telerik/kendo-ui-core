@@ -23,26 +23,6 @@ The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/ja
         })
         .DataSource("dataSource")
         )
-
-    <script>
-
-        $(function () {
-            // Get a reference to the kendo.ui.TreeList instance.
-            var treelist = $("#treelist").data("kendoTreeList");
-
-            // Use the expand method to expand the first row.
-            treelist.expand($("#treelist tbody>tr:eq(0)"));T
-        })
-
-        var dataSource = new kendo.data.TreeListDataSource({
-            data: [
-                { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-                { id: 2, parentId: 1, Name: "Alex Sells", Position: "EVP Sales" },
-                { id: 3, parentId: 1, Name: "Bob Price", Position: "EVP Marketing" }
-            ]
-
-        })
-    </script>
 ```
 {% if site.core %}
 ```TagHelper
@@ -52,9 +32,10 @@ The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/ja
             <treelist-column field="Position"></treelist-column>
         </columns>
     </kendo-treelist>
-
+```
+{% endif %}
+```JavaScript
     <script>
-
         $(function () {
             // Get a reference to the kendo.ui.TreeList instance.
             var treelist = $("#treelist").data("kendoTreeList");
@@ -73,7 +54,6 @@ The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/ja
         })
     </script>
 ```
-{% endif %}
 
 ## Events
 
@@ -89,30 +69,15 @@ The following example demonstrates how to subscribe to a TreeList event during t
 
 ```HtmlHelper
     @(Html.Kendo().TreeList<dynamic>()
-                .Name("treelist")
-                .Columns(x =>
-                {
-                    x.Add().Field("Name");
-                    x.Add().Field("Position");
-                })
-                .DataSource("dataSource")
-                .Events(x=> x.DataBound("dataBound"))
-    )
-
-    <script>
-        function dataBound(e) {
-            console.log("dataBound");
-        }
-
-        var dataSource = new kendo.data.TreeListDataSource({
-            data: [
-                { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-                { id: 2, parentId: 1, Name: "Alex Sells", Position: "EVP Sales" },
-                { id: 3, parentId: 1, Name: "Bob Price", Position: "EVP Marketing" }
-            ]
-
+        .Name("treelist")
+        .Columns(x =>
+        {
+            x.Add().Field("Name");
+            x.Add().Field("Position");
         })
-    </script>
+        .DataSource("dataSource")
+        .Events(x=> x.DataBound("dataBound"))
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -122,9 +87,10 @@ The following example demonstrates how to subscribe to a TreeList event during t
             <treelist-column field="Position"></treelist-column>
         </columns>
     </kendo-treelist>
-
+```
+{% endif %}
+```JavaScript
     <script>
-
         function dataBound(e) {
             console.log("dataBound");
         }
@@ -135,44 +101,22 @@ The following example demonstrates how to subscribe to a TreeList event during t
                 { id: 2, parentId: 1, Name: "Alex Sells", Position: "EVP Sales" },
                 { id: 3, parentId: 1, Name: "Bob Price", Position: "EVP Marketing" }
             ]
-
-        })
+        });
     </script>
 ```
-{% endif %}
 
 The following example demonstrates how to subscribe to a TreeList event by using the `bind` method.
 
 ```HtmlHelper
     @(Html.Kendo().TreeList<dynamic>()
-                .Name("treelist")
-                .Columns(x =>
-                {
-                    x.Add().Field("Name");
-                    x.Add().Field("Position");
-                })
-                .DataSource("dataSource")
+        .Name("treelist")
+        .Columns(x =>
+        {
+            x.Add().Field("Name");
+            x.Add().Field("Position");
+        })
+        .DataSource("dataSource")
     )
-
-    <script>
-
-        $(function () {
-            $("#treelist").data("kendoTreeList").bind('dataBound', dataBound);
-        })
-
-        function dataBound(e) {
-            console.log("dataBound");
-        }
-
-        var dataSource = new kendo.data.TreeListDataSource({
-            data: [
-                { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-                { id: 2, parentId: 1, Name: "Alex Sells", Position: "EVP Sales" },
-                { id: 3, parentId: 1, Name: "Bob Price", Position: "EVP Marketing" }
-            ]
-
-        })
-    </script>
 ```
 {% if site.core %}
 ```TagHelper
@@ -182,12 +126,13 @@ The following example demonstrates how to subscribe to a TreeList event by using
             <treelist-column field="Position"></treelist-column>
         </columns>
     </kendo-treelist>
-
+```
+{% endif %}
+```JavaScript
     <script>
-
         $(function () {
             $("#treelist").data("kendoTreeList").bind('dataBound', dataBound);
-        })
+        });
 
         function dataBound(e) {
             console.log("dataBound");
@@ -199,11 +144,9 @@ The following example demonstrates how to subscribe to a TreeList event by using
                 { id: 2, parentId: 1, Name: "Alex Sells", Position: "EVP Sales" },
                 { id: 3, parentId: 1, Name: "Bob Price", Position: "EVP Marketing" }
             ]
-
         })
     </script>
 ```
-{% endif %}
 
 ## See Also
 

@@ -19,7 +19,7 @@ To enable the Excel export option of the TreeList:
 1. Include the corresponding toolbar command and set the export settings.
     * [Toolbar configuration](/api/Kendo.Mvc.UI.Fluent/TreeListToolbarFactory#excel)
     * [Excel export configuration](/api/Kendo.Mvc.UI.Fluent/TreeListBuilder#excelsystemactionkendomvcuifluenttreelistexcelsettingsbuildert)
-1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% if site.core %}{% slug exportsupport_core %}{% else %}{% slug exportsupport_aspnetmvc %}{% endif %}#jszip-library).
+1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% slug exportsupport_core %}#jszip-library).
 
     ```HtmlHelper
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -35,6 +35,23 @@ To enable the Excel export option of the TreeList:
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-treelist name="treelist">
+            <toolbar>
+                <treelist-toolbar-button name="excel"/>
+            </toolbar>
+            <excel file-name="Kendo UI TreeList Export.xlsx" proxy-url="@Url.Action("Excel_Export_Save","TreeList")"/>
+            <treelist-datasource>
+                <transport>
+                    <read url="@Url.Action("All","EmployeeDirectory")"/>
+                </transport>
+                ...
+            </treelist-datasource>
+            <!-- Other configuration. -->
+        </kendo-treelist>
+    ```
+    {% endif %}
 
 To initiate the Excel export, press the **Toolbar** button or use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist) and call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/saveasexcel) method.
 
@@ -61,6 +78,23 @@ By default, the Telerik UI TreeList for {{ site.framework }} exports only the cu
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        <toolbar>
+            <treelist-toolbar-button name="excel"/>
+        </toolbar>
+        <excel all-pages="true"/>
+        <treelist-datasource>
+            <transport>
+                <read url="@Url.Action("All","EmployeeDirectory")"/>
+            </transport>
+            ...
+        </treelist-datasource>
+        <!-- Other configuration. -->
+    </kendo-treelist>
+```
+{% endif %}
 
 ## See Also
 

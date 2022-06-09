@@ -2,9 +2,9 @@
 title: VS Extension Options
 page_title: VS Extension Options
 description: "Learn how to use the settings Visual Studio (VS) provides that allow you to configure the {{ site.product }} VS Extensions to best suit your needs."
-previous_url: /installation/vs-integration/vsextensions-options
+previous_url: /installation/vs-integration/vsextensions-options, /getting-started/vs-integration/vsextensions-options, /vs-integration-mvc/vsextensions-options
 slug: vsextensionsoptions_visualstudio_aspnetcore
-position: 7
+position: 25
 ---
 
 # Visual Studio Extension Options
@@ -13,7 +13,11 @@ The Visual Studio (VS) **Extensions Options** dialog provides settings, allowing
 
 It can be accessed by clicking on **Extensions** > **Telerik** > **VSExtensions Options**.
 
+{% if site.core %}
 ![The Options menu](../vs-integration/images/vsx-options.png)
+{% else %}
+![The Options menu](../vs-integration/images/images-mvc/options_menu.png)
+{% endif %}
 
 The **Extensions Options** dialog contains two sets of options that affect the {{ site.product }} VS Extensions.
 
@@ -21,7 +25,11 @@ The **Extensions Options** dialog contains two sets of options that affect the {
 
 The settings under the General category affect all of the installed {{ site.product }} VS Extensions.
 
+{% if site.core %}
 ![The Options dialog](../vs-integration/images/options.png)
+{% else %}
+![The Options dialog](../vs-integration/images/images-mvc/options.png)
+{% endif %}
 
 ### Project Setup
 
@@ -39,6 +47,22 @@ Set the project upgrade notifications for detected local distributions by using 
 - **Select a folder for downloads**&mdash;Configures the path where the extensions look for and store distributions.
 
 > Changing the folder path does not move existing folder contents from your previous path. Move your previous folder contents manually if you still want to use them.
+
+{% if site.mvc %}
+## Telerik UI for ASP.NET MVC Settings
+
+The Telerik UI for ASP.NET MVC VS Extensions settings can be found in the standard options dialog in Visual Studio under the Telerik node.
+
+![The Options dialog](../vs-integration/images/images-mvc/options_kendo.png)
+
+### Latest Version Retrieval
+
+- **Include internal builds in Latest Version update and retrieval**&mdash;When enabled, the Latest Version Acquirer tool retrieves internal builds as well as official releases when checking for a new version.
+
+### Notifications
+
+- **Show me message when a newer version is available on www.telerik.com**&mdash;When enabled, you receive notifications if a new version of Telerik UI for ASP.NET MVC is available on the Telerik website.
+{% endif %}
 
 ## See Also
 

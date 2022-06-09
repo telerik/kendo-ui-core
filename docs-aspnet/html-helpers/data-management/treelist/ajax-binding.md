@@ -98,6 +98,40 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-treelist name="treelist">
+            <columns>
+                <treelist-column field="FirstName" title="First Name" width="250px"></treelist-column>
+                <treelist-column field="LastName" title="Last Name"></treelist-column>
+                <treelist-column field="Position"></treelist-column>
+                <treelist-column field="Extension" title="Ext" format="{0:#}"></treelist-column>
+            </columns>
+            <filterable enabled="true"/>
+            <sortable enabled="true"/>
+            <treelist-datasource>
+                <transport>
+                    <read url="@Url.Action("Index","EmployeeDirectory")"/>
+                </transport>
+                <aggregates>
+                    <aggregate field="BirthDate" aggregate="count" />
+                </aggregates>
+                <schema data="Data" total="Total" errors="Errors">
+                    <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                        <fields>
+                            <field name="EmployeeId" type="number"></field>
+                            <field name="ReportsTo" nullable="true"></field>
+                            <field name="FirstName" type="string"></field>
+                            <field name="LastName" type="string"></field>
+                            <field name="Position" type="string"></field>
+                            <field name="Extension" type="number"></field>
+                        </fields>
+                    </treelist-model>
+                </schema>
+            </treelist-datasource>
+        </kendo-treelist>
+    ```
+    {% endif %}
 
 1. Build and run the application.
 

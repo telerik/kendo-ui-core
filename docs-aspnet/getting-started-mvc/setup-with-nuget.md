@@ -57,7 +57,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you are a tria
 
 1. Run the installer.
 
-1. Select the option **Set up Telerik NuGet package source** to automatically add the [Telerik NuGet feed]({% slug aspnetmvc_nuget %}).
+1. Select the option **Set up Telerik NuGet package source** to automatically add the [Telerik NuGet feed]({% slug nuget_install_aspnetmvc6_aspnetmvc %}).
 
 	![NuGet checkbox in Progress Trial Installer](../getting-started-mvc/images/check-nuget.png)
 
@@ -170,7 +170,7 @@ Press `CTRL+F5` to build and run the application. As a result, the following sam
 
 * [Explore the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Grid Overview]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
+* [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetcore %})
 
 ## See Also
 

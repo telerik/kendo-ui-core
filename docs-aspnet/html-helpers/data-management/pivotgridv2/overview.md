@@ -9,7 +9,7 @@ position: 1
     {% assign VSExt = "overview_visualstudio_aspnetcore" %}
     {% assign GettingStarted = "gettingstarted_aspnetmvc6_aspnetmvc" %}
 {% else %}
-    {% assign VSExt = "overview_visualstudio_aspnetmvc" %}
+    {% assign VSExt = "overview_visualstudio_aspnetcore" %}
     {% assign GettingStarted = "gettingstarted_aspnetmvc" %}
 {% endif %}
 

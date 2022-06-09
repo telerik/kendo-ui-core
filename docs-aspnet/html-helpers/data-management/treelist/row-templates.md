@@ -21,6 +21,13 @@ The following example demonstrates how to implement row and alter row templates 
     .RowTemplateId("rowTemplate")
     .AltRowTemplateId("altRowTemplate")
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" row-template-id="rowTemplate" alt-row-template-id="altRowTemplate">
+        ...
+    </kendo-treelist>
+```
+{% endif %}
 
 The following scripts will generate the content for the templates:
 

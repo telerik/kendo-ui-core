@@ -51,10 +51,10 @@ To get a quick overview of  {{ site.product_short }}, you can also see the follo
 
 {% else %}
 * [First Steps with {{ site.product_short }}]({% slug gettingstarted_aspnetmvc %})&mdash;Create your first project with {{ site.product }} controls by using a project template.
-* [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug aspnetmvc_nuget %})&mdash;Learn how to add the Telerik NuGet server to Visual Studio and to install the {{ site.product }} controls in your project.
-* [Scaffolding the Telerik UI for ASP.NET MVC project]({% slug scaffolding_aspnetmvc %})&mdash;Learn how to use standard scaffolding to generate MVC-helper declarations together with the related Controller action methods.
+* [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})&mdash;Learn how to add the Telerik NuGet server to Visual Studio and to install the {{ site.product }} controls in your project.
+* [Scaffolding the Telerik UI for ASP.NET MVC project]({% slug scaffolding_aspnetcore %})&mdash;Learn how to use standard scaffolding to generate MVC-helper declarations together with the related Controller action methods.
 * [Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})&mdash;Learn the basics about the {{ site.product }} HtmlHelpers.
-* [Integrating the Telerik UI for ASP.NET MVC project with Visual Studio]({% slug overview_visualstudio_aspnetmvc %})&mdash;Take advantage of the Visual Studio extensions that help you with the project creation and configuration.
+* [Integrating the Telerik UI for ASP.NET MVC project with Visual Studio]({% slug overview_visualstudio_aspnetcore %})&mdash;Take advantage of the Visual Studio extensions that help you with the project creation and configuration.
 * [Video Onboarding]({% slug virtualclass_uiformvc %})&mdash;A free course developed to help you get started with the Telerik UI for ASP.NET MVC components and features
 {% endif %}
 
@@ -96,8 +96,8 @@ For any issues you might encounter while working with {{ site.product_short }}, 
 * [Integrating UI for ASP.NET Core in Visual Studio]({% slug overview_visualstudio_aspnetcore %})
 * [Upgrading UI for ASP.NET Core in Visual Studio]({% slug upgrade_aspnetcore %})
 {% else %}
-* [Downloading and installing Telerik UI for ASP.NET MVC]({% slug overview_downloadinstallation_mvc %})
+* [Downloading and installing Telerik UI for ASP.NET MVC]({% slug downloadinstall_aspnetcore %})
 * [Exploring the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Integrating Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
-* [Upgrading Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetmvc %})
+* [Integrating Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetcore %})
+* [Upgrading Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetcore %})
 {% endif %}

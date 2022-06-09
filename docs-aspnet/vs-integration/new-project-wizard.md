@@ -2,28 +2,24 @@
 title: Creating New Projects
 page_title: Creating New Projects
 description: "Learn how to create a new {{ site.product }} application."
-previous_url: /getting-started/vs-integration/new-project-wizard, /installation/vs-integration/new-project-wizard
+previous_url: /getting-started/vs-integration/new-project-wizard, /installation/vs-integration/new-project-wizard, /vs-integration-mvc/new-project-wizard
 slug: newprojectwizards_visualstudio_aspnetcore
-position: 2
+position: 5
 ---
 
 # Creating New Projects
 
-This article demonstrates how to create a new {{ site.product_long }} application by using the templates that come with the Telerik Extensions for Visual Studio. The newly created project will have the required setup that enables you to immediately start using the Telerik&reg; UI for ASP.NET Core components.
+This article demonstrates how to create a new {{ site.product }} application by using the templates that come with the Telerik Extensions for Visual Studio. The newly created project will have the required setup that enables you to immediately start using the {{ site.product }} components.
 
-To use the project templates, you start the **Create New Project Wizard** provided by the Telerik UI for ASP.NET Core Visual Studio Extensions. With the project templates, you can quickly deploy popular components like Grid and Menu or even entire applications. You don't need to manually [add the client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})&mdash;the **Create New Project Wizard** handles this task for you.
+To use the project templates, you start the **Create New Project Wizard** provided by the {{ site.product }} Visual Studio Extensions. With the project templates, you can quickly deploy popular components like Grid and Menu or even entire applications. You don't need to manually [add the client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})&mdash;the **Create New Project Wizard** handles this task for you.
 
 ## Getting the Wizard
 
-To use the **Create New Project Wizard**, install the {{ site.product_long }} Extension. You can get it from:
-
-* The Visual Studio Marketplace
-    * [Download link for Visual Studio 2017 and 2019](https://marketplace.visualstudio.com/items?itemName=TelerikInc.TelerikASPNETCoreVSExtensions)
-    * [Download link for Visual Studio 2022](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions)
-* The {{ site.product }} [automated installer]({% slug msi_install_aspnetmvc6_aspnetmvc %})
-* Your [Telerik.com account](https://www.telerik.com/account/product-download?product=UIASPCORE)
+To use the **Create New Project Wizard**, [install the {{ site.product }} Extension]({% slug overview_visualstudio_aspnetcore %}#installing-the-extensions).
 
 ## Using the Wizard
+
+>The exact steps to start the wizard may vary between the different Visual Studio versions. The following instructions describe the steps for Visual Studio 2019.
 
 To create a new {{ site.product }} application, use the **Create New Project Wizard**. The wizard detects all installed versions of {{ site.product }} and lists them in the **Version** dropdown&mdash;this enables you to apply the desired version to your project.
 
@@ -31,17 +27,19 @@ To start the wizard, use either of the following approaches:
 
 * Using the Visual Studio 2019 **Extensions** menu:
 
-    1. Go to **Extentions** > **Telerik** >  **Telerik UI for ASP.NET Core**
-    1. Go to the Telerik menu.
+    1. Go to **Extensions** > **Telerik** >  **{{ site.product }}**.
     1. Click **Create New Telerik Project**.
 
+{% if site.core %}
     ![Visual Studio Extensions menu](../vs-integration/images/create-project-core.png)
+{% endif %}
 
 * Using the **Project** menu:
 
     1. Click **File** > **New** > **Project**.
-    1. Type **Telerik** in the **Search for templates** textbox. Click on the **Telerik ASP.NET Core MVC Telerik Application**.
+    1. Type **Telerik** in the **Search for templates** textbox. Click on the {% if site.core %}**Telerik ASP.NET Core MVC Telerik Application**{% else %}**Telerik ASP.NET MVC Application**{% endif %}.
 
+{% if site.core %}
     ![New project Template](../vs-integration/images/new-project-template-core.png)
 
 ## Configuring the Project
@@ -164,18 +162,40 @@ The **Select Theme** option allows you to preview all of the available LESS and 
 
 ![Project Wizard Select Theme](../vs-integration/images/select-theme-core.png)
 
+{% endif %}
+
 ## Creating the Application
 
-After configuring the settings of the project, click **Finish** to start creating the new ASP.NET Core application.
+After configuring the settings of the project, click **Finish** to start creating the new {{ site.product }} application.
 
 As a result, the wizard:
 
 * Creates a new {{ site.framework }} application.
 * Adds CDN references for the Kendo UI styles and scripts to the `Layout` file of the project.
 * Copies all Kendo UI editor templates.
+{% if site.core %}
 * Adds a package reference to the `Telerik.UI.for.AspNet.Core` NuGet package.
+{% else %}
+* (Optional) Copies the `Kendo.Mvc` assembly to your solution folder&mdash;it is possible to change this setting in the [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetcore %}).
+* Adds a reference to the `Kendo.Mvc` assembly.
+{% endif %}
 
 The wizard creates a `Templates` folder in the root of the application. By default, the `Templates` folder is not visible and is not included in the project. To display it, select the **Show All Files** button in the **Solution Explorer** of Visual Studio.  
+
+{% if site.mvc %}
+## Custom Modernizr
+
+The Telerik UI ASP.NET MVC application includes a custom stripped-down Modernizr in a file called `kendo.modernizr.custom.js`. It provides HTML5 element support for old browsers, specifically Internet Explorer.
+
+If you need the Modernizr in your application, remove the existing Modernizr and register another version which includes more components and features. In such cases, if HTML5 element support is required, include the `html5shiv` component to make sure that the newly registered Modernizr [provides such support](http://modernizr.com/docs/#html5inie).
+
+## Swatches
+
+When you select a theme, you can select between three main themes: Default, Bootstrap, and Material. In addition to the styles of the main theme, you can select a specific swatch. A swatch is a set of variables which customize the appearance of the selected main visual theme.
+
+* [Using the Build Process of the Themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes#using-the-build-process-of-the-themes)
+* [How Do I Know Which SASS Theme Corresponds to My Current LESS Theme?](https://docs.telerik.com/aspnet-mvc/styles-and-layout/less-themes-migration#how-do-i-know-which-sass-theme-corresponds-to-my-current-less-theme)
+{% endif %}
 
 ## See Also
 

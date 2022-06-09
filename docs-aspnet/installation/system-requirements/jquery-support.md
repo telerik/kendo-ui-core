@@ -1,28 +1,29 @@
 ---
 title: jQuery Support
 page_title: jQuery Support
-description: "Get started with Telerik UI for ASP.NET Core and learn which jQuery versions are supported by the component library."
-previous_url: /getting-started/prerequisites/jquery-support, /compatibility/jquery-support
+description: "Get started with {{ site.product }} and learn which jQuery versions are supported by the component library."
+previous_url: /getting-started/prerequisites/jquery-support, /compatibility/jquery-support, /installation-mvc/system-requirements/jquery-support
 slug: jquerysupport_core
 position: 2
 ---
 
 # jQuery Support
 
-Telerik UI for ASP.NET Core is a set of server-side wrappers that wrap Kendo UI for jQuery widgets.
+{{ site.product }} is a set of server-side wrappers that wrap Kendo UI for jQuery widgets.
 
 The Kendo UI library is based on [jQuery](http://jquery.com/) and all Kendo UI bundles include the corresponding minified jQuery library in their `js` directories.
 
-> In order for the Kendo UI scripts to work as expected, include a reference to the jQuery library in the document before the scripts.
+> In order for the Kendo UI scripts to work as expected, always include a reference to the jQuery library in the document before the scripts.
 
 ## Supported Versions
 
-The current official version of Telerik UI for ASP.NET Core requires jQuery version 1.12.4. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing Telerik UI for ASP.NET Core versions. In such cases, use the previous jQuery version until the release of the next official Telerik UI for ASP.NET Core version that resolves the issue. 
+The current official {{ site.product }} version requires jQuery version 1.12.4. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing {{ site.product }}. In such cases, use the previous jQuery version until the release of the next official {{ site.product }} version that resolves the issue is released. 
 
-Generally, the Telerik UI for ASP.NET Core service packs and their related major release ship with the same jQuery version. The jQuery version changes only with new major releases.
+Generally, the {{ site.product }} service packs and their related major releases ship with the same jQuery version. The jQuery version changes only with new major releases.
 
-The following table provides a list of the jQuery versions that are compatible with the major Telerik UI for ASP.NET Core releases and their corresponding service packs.
+The following table provides a list of the jQuery versions that are compatible with the major {{ site.product }} releases and their corresponding service packs.
 
+{% if site.core %}
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
 | [UI for ASP.NET Core 2022.2.510 (R2 2022)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r2-2022-(version-2022-2-510))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
@@ -45,12 +46,35 @@ The following table provides a list of the jQuery versions that are compatible w
 | [UI for ASP.NET Core 2016.3.1118 (R3 2016 SP2)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r3-2016-sp2)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [UI for ASP.NET Core 2016.3.914 (R3 2016)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r3-2016)	|1.12.3| Also compatible with 1.10.x and 2.2.x|
 
+{% else %}
+| Major Releases												                                         | jQuery Version    | Comments  |
+| :---															                                             | :---			         | :---	     |
+| [UI for ASP.NET MVC 2022.2.510 (R2 2022)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2022-(version-2022-2-510))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
+| [UI for ASP.NET MVC 2022.1.119 (R1 2022)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r1-2022-(version-2022-1-119))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
+| [UI for ASP.NET MVC 2021.3.914 (R3 2021)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2021)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
+| [UI for ASP.NET MVC 2021.2.511 (R2 2021)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2021)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
+| [UI for ASP.NET MVC 2021.1.119 (R1 2021)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r1-2021)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.5.1|
+| [UI for ASP.NET MVC 2020.3.915 (R3 2020)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2020)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.5.1|
+| [UI for ASP.NET MVC 2020.2.513 (R2 2020)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2020)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.5.1|
+| [UI for ASP.NET MVC 2020.1.114 (R1 2020)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r1-2020)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
+| [UI for ASP.NET MVC 2019.3.917 (R3 2019)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2019)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
+| [UI for ASP.NET MVC 2019.2.514 (R2 2019)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2019)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
+| [UI for ASP.NET MVC 2019.1.115 (R1 2019)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/progress-telerik-ui-for-asp-net-mvc-2019-1-115-changelog--kendouimvc-2019-1-115-7eeb9109-6558-40a3-9b9b-d6310f985cda)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
+| [UI for ASP.NET MVC 2018.3.911 (R3 2018)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2018)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
+| [UI for ASP.NET MVC 2018.2.516 (R2 2018)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2018-kendouimvc-2018-2-516-a32e87f1-0759-4d41-b2a1-09f2494adcab)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
+| [UI for ASP.NET MVC 2018.1.117 (R1 2018)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r1-2018)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.1.1|
+| [UI for ASP.NET MVC 2017.3.913 (R3 2017)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
+| [UI for ASP.NET MVC 2017.2.504 (R2 2017)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
+| [UI for ASP.NET MVC 2017.1.118 (R1 2017)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r1-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
+| [UI for ASP.NET MVC 2016.3.1118 (R3 2016 SP2)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2016-sp2)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
+| [UI for ASP.NET MVC 2016.3.914 (R3 2016)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2016)	|1.12.3| Also compatible with 1.10.x and 2.2.x|
+{% endif %}
 ## Working with Earlier Versions
 
 Occasionally, a legacy web application might require an earlier jQuery version that is incompatible with Kendo UI. To solve this issue, use a recent jQuery version together with the [jQuery Migrate plugin](https://github.com/jquery/jquery-migrate/). It restores the jQuery features that have been depreciated and provides for the required backward compatibility.
 
 ## See Also
 
-* [PDF and Excel Export Support by Telerik UI for ASP.NET Core]({% slug exportsupport_core %})
-* [Operation System and Browser Support by Telerik UI for ASP.NET Core]({% slug ossupport_core %})
-* [Earlier Versions Support by Telerik UI for ASP.NET Core]({% slug oldversionssupportpolicy_core %})
+* [PDF and Excel Export Support by {{ site.product }}]({% slug exportsupport_core %})
+* [OS and Browser Support by {{ site.product }}]({% slug ossupport_core %})
+* [Earlier Versions Support by {{ site.product }}]({% slug oldversionssupportpolicy_core %})

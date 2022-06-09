@@ -23,6 +23,13 @@ The following example demonstrates how to enable the key navigation in the TreeL
         .Navigatable()
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" navigatable="true">
+        <!-- Other configuration. -->
+    </kendo-treelist>
+```
+{% endif %}
 
 The keyboard navigation of the TreeList works by listening to the `keydown` events on the wrapper element of the helper. Its behavior is based on the assumption that whatever the user does is in accordance with the currently focused TreeList cell and not with the focused element of the browser. If the data cells of the TreeList contain hyperlinks that have to be activated through the keyboard:
 

@@ -24,10 +24,11 @@ To enable the search panel functionality, include the `Search` option to the too
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-treelist name="treelist" height="550">
+    <kendo-treelist name="treelist">
         <toolbar>
             <toolbar-button name="search"></toolbar-button>
         </toolbar>
+        ...
     </kendo-treelist>
 ```
 {% endif %}
@@ -41,10 +42,10 @@ You can also customize which fields to search through the data when a value is e
 ```
 {% if site.core %}
 ```TagHelper
-    ...
-    <kendo-treelist name="treelist " height="550">
-        <search fields="@(new string[] { "ContactName", "Country"})">
-        </search>
+    <kendo-treelist name="treelist">
+        <search fields="@(new string[] { "ContactName" })"/>
+        ...
+    </kendo-treelist>
 ```
 {% endif %}
 

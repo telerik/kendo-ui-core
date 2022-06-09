@@ -20,6 +20,14 @@ To enable filtering in TreeList, use the `Filterable` property.
         .Filterable() // Enable the Menu filter mode.
         ...
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        <filterable enabled="true"/> <!-- Enable the Menu filter mode.-->
+        ...
+    </kendo-treelist>
+```
+{% endif %}
 
 ## Filter Modes
 
@@ -28,6 +36,15 @@ TreeList supports the _Filter row_ filter mode. To set the row filter mode, use 
 ```HtmlHelper
     .Filterable(ftb => ftb.Mode("row"))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        <filterable enabled="true" mode="row"/>
+        ...
+    </kendo-treelist>
+```
+{% endif %}
+
 In this filter mode, the Kendo UI TreeList will analyze the underlying columns' data, and then it will render the following filters in the column headers:
 
 * Kendo UI TextBoxes for string values 

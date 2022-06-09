@@ -298,6 +298,6 @@ The validation error classes are applied to the inputs that are validated so tha
 {% else %}
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting on Validation]({% slug troubleshooting_validation_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Download and Installation]({% slug overview_downloadinstallation_mvc %})
+* [Telerik UI for ASP.NET MVC Download and Installation]({% slug downloadinstall_aspnetcore %})
 {% endif %}
 

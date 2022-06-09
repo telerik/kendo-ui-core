@@ -31,6 +31,27 @@ That common header in turn can be a child of another upper `MultiColumn` header 
         })
     );
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        <columns>
+            <treelist-column title="Personal Info">
+                <columns>
+                    <treelist-column field="LastName" width="120px"></treelist-column>
+                    <treelist-column title="Location">
+                        <columns>
+                            <treelist-column field="City" width="140px"></treelist-column>
+                            <treelist-column field="Country" width="140px"></treelist-column>
+                        </columns>
+                    </treelist-column>
+                    <treelist-column field="Phone"></treelist-column>
+                </columns>
+            </treelist-column>
+        </columns>
+        <!-- Other configuration. -->
+    </kendo-treelist>
+```
+{% endif %}
 
 The previous example will present the following output.
 

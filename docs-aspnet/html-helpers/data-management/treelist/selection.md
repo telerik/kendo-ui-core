@@ -24,6 +24,13 @@ To enable the selection functionality of the TreeList, set the `Selectable` opti
 ```HtmlHelper
     .Selectable(true)
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" selectable="true">
+        ...
+    </kendo-treelist>
+```
+{% endif %}
 
 ## Single Row Checkbox Selection
 
@@ -32,11 +39,35 @@ To enable checkbox selection, add a column to the `columns` collection of the Tr
 ```HtmlHelper
     columns.Add().Selectable(true);
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        <columns>
+            <treelist-column selectable="true" width="65px"></treelist-column>
+            ...
+        </columns>
+        ...
+    </kendo-treelist>
+```
+{% endif %}
+
 In order to select or deselect all of the child items of the currently selected row, enable the `includeChildren` option:
 
 ```HtmlHelper
     columns.Add().Selectable(true).IncludeChildren();
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        <columns>
+            <treelist-column selectable="true" width="65px" include-children="true"></treelist-column>
+            ...
+        </columns>
+        ...
+    </kendo-treelist>
+```
+{% endif %}
+
 
 > The TreeList does not support the simultaneous usage of the built-in checkbox-column selection and the selection which is enabled through the `Selectable` option.
 

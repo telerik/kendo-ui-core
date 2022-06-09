@@ -82,6 +82,74 @@ The following example demonstrates how to enable all Scheduler views.
 		)
 	)
 ```
+{% if site.core %}
+```TagHelper
+        @{
+			var resources = new[] {
+				new { Text = "Alex", Value = 1, Color = "#f8a398" },
+				new { Text = "Bob", Value = 2, Color = "#51a0ed" },
+				new { Text = "Charlie", Value = 3, Color = "#56ca85" }
+			};
+
+            string defaultTitle = "No Title";
+        }
+        <kendo-scheduler name="scheduler" 
+            date="new DateTime(2021, 6, 13)" 
+            start-time="new DateTime(2021, 6, 13, 7, 00, 00)"
+            timezone="Etc/UTC"
+            height="600">
+			<views>
+                <view type="day"></view>
+                <view type="workWeek" selected="true"></view>
+                <view type="week"></view>
+                <view type="month"></view>
+				<view type="year"></view>
+				<view type="agenda"></view>
+				<view type="timeline"></view>
+				<view type="timelineWeek"></view>
+				<view type="timelineWorkWeek"></view>
+				<view type="timelineMonth"></view>
+            </views>
+			<resources>
+                <resource field="OwnerID" title="Owner" datatextfield="Text" datavaluefield="Value" datacolorfield="Color" bind-to="@resources"></resource>
+            </resources>
+            <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Basic_Usage_Read", "Scheduler")" />
+                    <create url="@Url.Action("Basic_Usage_Create", "Scheduler")" />
+                    <destroy url="@Url.Action("Basic_Usage_Destroy", "Scheduler")" />
+                    <update url="@Url.Action("Basic_Usage_Update", "Scheduler")" />
+                </transport>
+				<filters>
+					<datasource-filter logic="or">
+						<filters>
+							<datasource-filter field="OwnerID" operator="eq" value="1"></datasource-filter>
+							<datasource-filter field="OwnerID" operator="eq" value="2"></datasource-filter>
+						</filters>
+					</datasource-filter>
+        		</filters>
+                <schema data="Data" total="Total" errors="Errors">
+                    <scheduler-model id="TaskID">
+                        <fields>
+                            <field name="TaskID" type="number"></field>
+                            <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                            <field name="start" from="Start" type="date"></field>
+                            <field name="end" from="End" type="date"></field>
+                            <field name="description" from="Description" type="string"></field>
+                            <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                            <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                            <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                            <field name="startTimezone" from="StartTimezone" type="string"></field>
+                            <field name="endTimezone" from="EndTimezone" type="string"></field>
+							<field name="OwnerID" type="number" default-value="1"></field>
+                            <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                        </fields>
+                    </scheduler-model>
+                </schema>
+            </scheduler-datasource>
+        </kendo-scheduler>
+```
+{% endif %}
 
 ## Custom Views
 

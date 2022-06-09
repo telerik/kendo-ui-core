@@ -19,7 +19,7 @@ To enable the Excel export option of the Grid:
 
 1. Include the [toolbar configuration](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#excel).
 1. Set the [export options](/api/Kendo.Mvc.UI.Fluent/GridExcel{% if site.core %}Settings{% endif %}Builder).
-1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% if site.core %}{% slug exportsupport_core %}{% else %}{% slug exportsupport_aspnetmvc %}{% endif %}#jszip-library).
+1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% slug exportsupport_core %}#jszip-library).
     
     ```HtmlHelper
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>

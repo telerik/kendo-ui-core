@@ -22,13 +22,23 @@ When initializing the Scheduler that will work with server filtering there are t
 ```Razor
 .Read(read => read.Action("Read", "Scheduler").Data("getAdditionalData"))
 ```
+{% if site.core %}
+```TagHelper
+    <scheduler-datasource type="@DataSourceTagHelperType.Ajax" server-operation="true">
+        <transport>
+            <read url="@Url.Action("Read", "Scheduler")" data="getAdditionalData"/>
+        </transport>
+        ...
+    </scheduler-datasource>
+```
+{% endif %}
 
 Here is a sample definition:
 
 ```HtmlHelper
 @(Html.Kendo().Scheduler<SqlServerDataBase.Models.TaskViewModel>()
 	.Name("scheduler")
-    .StartTime(6, 30, 0)
+    .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
 	.Height(600)
     .WorkWeekStart(1)
     .WorkWeekEnd(7)
@@ -47,7 +57,6 @@ Here is a sample definition:
 		{
 			m.Id(f => f.TaskID);
 			m.Field(f => f.Title).DefaultValue("No title");
-			m.Field(f => f.Title).DefaultValue("No title");
 			m.RecurrenceId(f => f.RecurrenceID);
 		})
         .ServerOperation(true)
@@ -58,6 +67,53 @@ Here is a sample definition:
 	)
 )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        string defaultTitle = "No Title";
+    }
+    <kendo-scheduler name="scheduler" 
+        start-time="new DateTime(2013, 6, 13, 7, 00, 00)"
+        timezone="Etc/UTC"
+        height="600"
+        work-week-start="1"
+        work-week-end="7">
+        <views>
+            <view type="day"></view>
+            <view type="workWeek" selected="true"></view>
+            <view type="week"></view>
+            <view type="month"></view>
+            <view type="agenda"></view>
+            <view type="timeline"></view>
+        </views>
+        <scheduler-datasource type="@DataSourceTagHelperType.Ajax" server-operation="true">
+            <transport>
+                <read url="@Url.Action("Read", "Scheduler")" data="getAdditionalData"/>
+                <create url="@Url.Action("Create", "Scheduler")" />
+                <destroy url="@Url.Action("Destroy", "Scheduler")" />
+                <update url="@Url.Action("Update", "Scheduler")" />
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <scheduler-model id="TaskID">
+                    <fields>
+                        <field name="TaskID" type="number"></field>
+                        <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                        <field name="start" from="Start" type="date"></field>
+                        <field name="end" from="End" type="date"></field>
+                        <field name="description" from="Description" type="string"></field>
+                        <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                        <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                        <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                        <field name="startTimezone" from="StartTimezone" type="string"></field>
+                        <field name="endTimezone" from="EndTimezone" type="string"></field>
+                        <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                    </fields>
+                </scheduler-model>
+            </schema>
+        </scheduler-datasource>
+    </kendo-scheduler>
+```
+{% endif %}
 
 ## Get the Start and End Dates of the Current Scheduler View
 

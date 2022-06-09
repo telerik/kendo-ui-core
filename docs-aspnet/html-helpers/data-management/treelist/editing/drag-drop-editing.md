@@ -17,9 +17,8 @@ To persist the new hierarchy, configure the TreeList data source for CRUD operat
 ```tab-HtmlHelper
     @(Html.Kendo().TreeList<EmployeeViewModel>()
     	.Name("treelist")
-    	.Toolbar(t=>t.Save()) /* to batch save the new hierarchy */
+		.Editable(editable => editable.Move(move => move.Reorderable(true))
 		.DataSource(dataSource => dataSource
-        	.Batch(true) /* enable batch operations */
         	.Read(read => read.Action("Employees_Read", "TreeList"))
         	.Update(update => update.Action("Employees_Update", "TreeList"))
         	.Model(m =>
@@ -32,6 +31,30 @@ To persist the new hierarchy, configure the TreeList data source for CRUD operat
 		/* other TreeList settings */
 	)
 ```
+{% if site.core %}
+```TagHelper
+	<kendo-treelist name="treelist">
+		<editable enabled="true">
+        	<move reorderable="true"/>
+    	</editable>
+		...
+		<treelist-datasource>
+			<transport>
+				<read url="@Url.Action("Employees_Read","TreeList")"/>
+				<update url="@Url.Action("Employees_Update","TreeList")"/>
+			</transport>
+			<schema data="Data" total="Total" errors="Errors">
+				<treelist-model id="OrderID" parent-id="ParentOrderID" expanded="true">
+					<fields>
+						<field name="OrderID" type="number"></field>
+						<field name="ParentOrderID" nullable="true" type="number"></field>
+					</fields>
+				</treelist-model>
+			</schema>
+		</treelist-datasource>
+	</kendo-treelist>
+```
+{% endif %}
 ```tab-Controller
 	// The TreeList sends the updated items with prefix "models".
   // Remember to bind it in the controller so that the collection can be intercepted.

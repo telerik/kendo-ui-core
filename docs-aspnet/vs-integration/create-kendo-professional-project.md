@@ -3,15 +3,15 @@ title: Creating Kendo UI Projects
 page_title: Creating Kendo UI Projects
 description: "Learn how to create a new Progress&reg; Kendo UI&reg; for jQuery application."
 slug: newprojectwizard_visualstudio_kendoui
-position: 6
-previous_url: /getting-started/vs-integration/create-kendo-professional-project
+position: 16
+previous_url: /getting-started/vs-integration/create-kendo-professional-project, /vs-integration-mvc/create-kendo-professional-project
 ---
 
 # Creating Kendo UI Projects
 
 This article demonstrates how to create a new ASP.NET MVC 5 application, configured to use Progress&reg; Kendo UI&reg; for jQuery widgets. 
 
-If you want to create an ASP.NET MVC application with Telerik UI for ASP.NET MVC Html helpers, refer to [Creating New Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %}).
+If you want to create an ASP.NET MVC application with Telerik UI for ASP.NET MVC Html helpers, refer to [Creating New Projects]({% slug newprojectwizards_visualstudio_aspnetcore %}).
 
 ## The Basics
 
@@ -32,7 +32,7 @@ To create a new Kendo UI for jQuery application, start the **Create New Project 
 
 The wizard detects all the installed versions of Kendo UI and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
-![A new Kendo UI Project Wizard](../vs-integration-mvc/images/create_kendo.png)
+![A new Kendo UI Project Wizard](../vs-integration/images/images-mvc/create_kendo.png)
 
 ## Project Settings
 
@@ -54,5 +54,5 @@ As a result, the wizard:
 
 ## See Also
 
-* [Integrating Visual Studio in Your .Net Project]({% slug overview_visualstudio_aspnetmvc %})
-* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Integrating Visual Studio in Your .Net Project]({% slug overview_visualstudio_aspnetcore %})
+* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetcore %})

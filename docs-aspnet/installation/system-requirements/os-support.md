@@ -1,17 +1,19 @@
 ---
 title: OS, Visual Studio, and Browser Support
 page_title: Operating System, Visual Studio and Browser Support
-description: "Get started with Telerik UI for ASP.NET Core and learn which are the operating systems, Visual Studio versions, and Browsers that are supported by the framework components."
-previous_url: /getting-started/prerequisites/os-support, /compatibility/os-support, /getting-started/prerequisites/visual-studio-support, /compatibility/visual-studio-support, /getting-started/prerequisites/browser-support, /compatibility/browser-support
+description: "Get started with {{ site.product }} and learn which are the operating systems, Visual Studio versions, and Browsers that are supported by the framework components."
+previous_url: /getting-started/prerequisites/os-support, /compatibility/os-support, /getting-started/prerequisites/visual-studio-support, /compatibility/visual-studio-support, /getting-started/prerequisites/browser-support, /compatibility/browser-support, /installation-mvc/system-requirements/browser-support.md
 slug: ossupport_core
 position: 1
 ---
 
 # Operating System, Visual Studio, and Browser Support
 
-The [Telerik UI for ASP.NET Core helpers and framework components](https://demos.telerik.com/aspnet-core/) are designed to support all major operating systems and the most popular Visual Studio versions. The components also support all major web browsers and deliver cross-browser compatibility, standards compliance, and touch-device support.
+The {{ site.product }} components are designed to support all major operating systems and the most popular Visual Studio versions. The components also support all major web browsers and deliver cross-browser compatibility, standards compliance, and touch-device support.
 
+{% if site.core %}
 {{ site.product_short }} targets the stable releases of the {{ site.framework }} framework. The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The {{ site.product_short }} suite also supports the full desktop CLR.
+{% endif %}
 
 ## Operating System Support
 
@@ -31,6 +33,7 @@ The [Telerik UI for ASP.NET Core helpers and framework components](https://demos
 
 ## Visual Studio Support
 
+{% if site.core %}
 The table below describes the minimum required version of Visual Studio based on the target `.NET Core SDK` version.
 
 | .NET CORE SDK     | VISUAL STUDIO                 | 
@@ -48,13 +51,25 @@ To create .NET Core applications, you need to install the `.NET Core SDK`. Follo
 
 For a full list of the `.NET Core` requirements, see [.NET Core dependencies and requirements](https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?tabs=netcore31&pivots=os-windows).
 
-## Web Browser Support
+{% else %}
+{{ site.product }} supports Visual Studio 2012 and later. The supported development environments also include:
 
-Telerik UI for ASP.NET Core helpers and framework components deliver support for all popular browsers. However, depending on the specifics of your project, the components you use, and the versions of the helpers, their browser support may vary. For example, advanced component features usually require more recent browser versions.
+* [.NET Framework v3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
+* [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later.
+* [IIS](https://www.iis.net/) 5 and later.
+* [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx)  and [VB.NET](http://www.tutorialspoint.com/vb.net/).
+* [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later.
+{% endif %}
+
+## Web Browsers Support
+
+The {{ site.product }} helpers and framework components deliver support for all popular browsers. However, depending on the specifics of your project, the components you use, and the versions of the helpers, their browser support may vary. For example, advanced component features usually require more recent browser versions.
+
+>To allow the browsers to run the scripts required by the Telerik components, enable JavaScript on all of them.
 
 ### Regular Support
 
-Most [Telerik UI for ASP.NET Core helpers]({% slug overview_aspnetmvc6_aspnetmvc %}#list-of-helpers) have no specific limitations for the browser versions they support.
+Most [{{ site.product }} helpers]({% slug overview_aspnetmvc6_aspnetmvc %}#list-of-helpers) have no specific limitations for the browser versions they support.
 
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
@@ -67,7 +82,7 @@ Most [Telerik UI for ASP.NET Core helpers]({% slug overview_aspnetmvc6_aspnetmvc
 
 ### Support for Data Visualizing Helpers
 
-The [Telerik UI for ASP.NET Core helpers which render data visualization]({% slug overview_aspnetmvc6_aspnetmvc %}#list-of-helpers), such as the Charts, Gauges, Barcodes, Diagrams, and Maps, may require more recent browser versions according to the following table.
+The [{{ site.product }} helpers which render data visualization]({% slug overview_aspnetmvc6_aspnetmvc %}#list-of-helpers), such as the Charts, Gauges, Barcodes, Diagrams, and Maps, may require more recent browser versions according to the following table.
 
 * Fully supported browsers
 
@@ -109,7 +124,7 @@ To boost the performance of your project:
 
 ### Limitations
 
-* As of the Telerik UI for ASP.NET Core 2017 R1 release, Internet Explorer 8 is no longer supported.
+* As of the {{ site.product }} 2017 R1 release, Internet Explorer 8 is no longer supported.
 * Browsers in beta stage are not supported.
 * Zoomed-in pages are not supported.
 * Zoomed-out pages are not supported. Different browsers handle sub-pixel calculations differently and zooming out the page may lead to unexpected behavior&mdash;for example, missing borders.
@@ -125,11 +140,14 @@ To boost the performance of your project:
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     ```
 
-* Telerik UI for ASP.NET Core uses a progressive enhancement for its CSS styling. As a result, old and obsolete browsers may ignore CSS 3 styles such as rounded corners and linear gradients.
+* {{ site.product }} uses a progressive enhancement for its CSS styling. As a result, old and obsolete browsers may ignore CSS 3 styles such as rounded corners and linear gradients.
+
 ## See Also
 
+{% if site.core %}
 * [Visual Studio 2015 Support]({% slug vs2015support_core %})
-* [jQuery Version Support by Telerik UI for ASP.NET Core]({% slug jquerysupport_core %})
-* [OS and Web Browser Support by Telerik UI for ASP.NET Core]({% slug ossupport_core %})
-* [PDF and Excel Export Support by Telerik UI for ASP.NET Core]({% slug exportsupport_core %})
-* [Earlier Versions Support Policy by Telerik UI for ASP.NET Core]({% slug oldversionssupportpolicy_core %})
+{% endif %}
+* [jQuery Version Support by {{ site.product }}]({% slug jquerysupport_core %})
+* [OS and Web Browser Support by {{ site.product }}]({% slug ossupport_core %})
+* [PDF and Excel Export Support by {{ site.product }}]({% slug exportsupport_core %})
+* [Earlier Versions Support Policy by {{ site.product }}]({% slug oldversionssupportpolicy_core %})

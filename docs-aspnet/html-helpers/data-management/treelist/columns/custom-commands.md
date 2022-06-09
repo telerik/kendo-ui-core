@@ -23,6 +23,21 @@ To include a command column which will render a button for triggering the comman
             });
         })
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-treelist name="treelist">
+            <columns>
+                <treelist-column>
+                    <commands>
+                        <treelist-column-command name="details" text="View Details" click="showDetails"></treelist-column-command>
+                    </commands>
+                </treelist-column>
+            </columns>
+            <!-- Other configuration. -->
+        </kendo-treelist>
+    ```
+    {% endif %}
+    
 1. Wire the `click` event of the button to a JavaScript function which will receive the corresponding TreeList data item as an argument.  In the function definition, handle the command.
 
         <script type="text/javascript">

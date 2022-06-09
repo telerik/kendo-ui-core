@@ -24,7 +24,7 @@ The following sections provide step-by-step instructions and examples on getting
     * Set the [Selection Mode]({% slug htmlhelpers_grid_aspnetcore_selection %}#select-modes) to [Multiple](/api/Kendo.Mvc.UI.Fluent/GridSelectionSettingsBuilder#modekendomvcuigridselectionmode).
     * Set the [Selection Type]({% slug htmlhelpers_grid_aspnetcore_selection %}#select-modes) to [Cell](/api/Kendo.Mvc.UI.Fluent/GridSelectionSettingsBuilder#typekendomvcuigridselectiontype).
 
-1. To take full advantage of the Excel export feature, download the [JSZip library](https://stuk.github.io/jszip/) and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% if site.core %}{% slug exportsupport_core %}{% else %}{% slug exportsupport_aspnetmvc %}{% endif %}#jszip-library).
+1. To take full advantage of the Excel export feature, download the [JSZip library](https://stuk.github.io/jszip/) and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% slug exportsupport_core %}#jszip-library).
 
     ```HtmlHelper
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>

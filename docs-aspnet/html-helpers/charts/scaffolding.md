@@ -11,7 +11,7 @@ position: 4
 
 The Chart HtmlHelper for ASP.NET MVC enables you to use the Kendo UI Scaffolder Visual Studio extension.
 
-> The Kendo UI Scaffolder will not include the required `UI for ASP.NET MVC` files to the project. To automatically include these files, use the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetmvc %}). To manually include these files, refer to [this article]({% slug gettingstarted_aspnetmvc %}).
+> The Kendo UI Scaffolder will not include the required `UI for ASP.NET MVC` files to the project. To automatically include these files, use the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}). To manually include these files, refer to [this article]({% slug gettingstarted_aspnetmvc %}).
 
 To scaffold the Chart HtmlHelper for ASP.NET MVC:
 

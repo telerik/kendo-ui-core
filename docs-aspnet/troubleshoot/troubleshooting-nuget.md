@@ -52,5 +52,5 @@ Alternatively, use Windows Credentials Manager to remove the saved credentials:
     * `nuget.telerik.com`
     * `VSCredentials_nuget.telerik.com`
 ![My Image](../knowledge-base/images/windows-credential-manager.png)
-1. Add the Telerik NuGet Feed again, and then enter the correct credentials. For more details, see the {% if site.core %} [Installing with Nuget]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) {% else %} [Installing with Nuget]({% slug aspnetmvc_nuget %}) {% endif %} article.
+1. Add the Telerik NuGet Feed again, and then enter the correct credentials. For more details, see the [Installing with Nuget]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) article.
 1. If desired, verify the NuGet credentials by inspecting the `NuGet.config` file located in `%AppData%\NuGet\NuGet.config`

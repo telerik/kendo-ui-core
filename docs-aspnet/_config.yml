@@ -32,8 +32,9 @@ tutorials/*,
 troubleshoot/troubleshooting.md,
 troubleshoot/troubleshooting-validation.md,
 troubleshoot/troubleshooting-scaffolding.md,
-installation-mvc/*,
-vs-integration-mvc/*,
+vs-integration/create-kendo-professional-project.md,
+vs-integration/upgrade-api-analyzer.md,
+vs-integration/upgrade-wizard.md,
 asp-net-mvc-3.md,
 asp-net-mvc-4.md,
 html-helpers/helper-basics/fundamentals-mvc.md,
@@ -107,7 +108,7 @@ navigation:
         position: 5
      "vs-integration/vs-code-integration":
         title: "VS Code Integration"
-        position: 20
+        position: 50
      "installation/adding-client-side-resources/scripts":
         title: "Creating Custom Script Bundles"
         position: 5

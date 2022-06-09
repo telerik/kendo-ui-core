@@ -29,6 +29,24 @@ All CRUD operations of the TreeList component require a model with `Id` and `Par
 		m.Id(f => f.EmployeeId);
 		m.ParentId(f => f.ReportsTo).Nullable(true);
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        ...
+        <treelist-datasource>
+			...
+            <schema>
+                <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="true"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
+    </kendo-treelist>
+```
+{% endif %}
 ```tab-Model
     public int? ReportsTo { get; set; }
 	public int EmployeeId { get; set; }
@@ -43,6 +61,24 @@ The following example demonstrates how to use the non-nullable model&mdash;items
 		m.Id(f => f.EmployeeId);
 		m.ParentId(f => f.ReportsTo).Nullable(false);
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        ...
+        <treelist-datasource>
+			...
+            <schema>
+                <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="false"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
+    </kendo-treelist>
+```
+{% endif %}
 ```tab-Model
     public string ReportsTo { get; set; }
 	public string EmployeeId { get; set; }
@@ -59,6 +95,21 @@ Once the schema is configured, you need to configure the action methods in the D
       .Update(update => update.Action("Update", "EmployeeDirectory"))
       .Destroy(delete => delete.Action("Destroy", "EmployeeDirectory"))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        ...
+        <treelist-datasource>
+			<transport>
+				<create url="@Url.Action("Create","EmployeeDirectory")"/>
+				<read url="@Url.Action("All","EmployeeDirectory")"/>
+				<update url="@Url.Action("Update","EmployeeDirectory")"/>
+				<destroy url="@Url.Action("Destroy","EmployeeDirectory")"/>
+			</transport>
+        </treelist-datasource>
+    </kendo-treelist>
+```
+{% endif %}
 
 ## Edit Modes
 

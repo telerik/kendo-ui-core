@@ -15,6 +15,14 @@ To enable the user to reorder the columns of the TreeList by dragging, set the `
 ```HtmlHelper
     .Reorderable(reorderable => reorderable.Columns(true))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" reorderable="true">
+        <!-- Other configuration. -->
+    </kendo-treelist>
+```
+{% endif %}
+
 ## See Also
 
 * [Column Reordering by the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/column-reordering)

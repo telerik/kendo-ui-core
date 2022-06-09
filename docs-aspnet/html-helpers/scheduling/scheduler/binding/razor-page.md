@@ -66,6 +66,74 @@ In order to set up the Scheduler component bindings, you need to configure the `
         };
     </script>
 ```
+```tab-TagHelper(csthml)  
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    @{
+        string defaultTitle = "No Title";
+    }
+
+    <kendo-scheduler name="scheduler"
+        height="600"
+        timezone="Etc/UTC">
+        <views>
+            <view type="day"></view>
+            <view type="week" selected="true"></view>
+        </views>
+        <scheduler-datasource type="@DataSourceTagHelperType.Ajax" on-error="error_handler">
+            <transport>
+                <read url="/SchedulerCrudOperations?handler=Meetings_Read" data="forgeryToken"/>
+                <create url="/SchedulerCrudOperations?handler=Meetings_Create" data="forgeryToken"/>
+                <destroy url="/SchedulerCrudOperations?handler=Meetings_Destroy" data="forgeryToken"/>
+                <update url="/SchedulerCrudOperations?handler=Meetings_Update" data="forgeryToken"/>
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <scheduler-model id="MeetingID">
+                    <fields>
+                        <field name="MeetingID" type="number"></field>
+                        <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                        <field name="start" from="Start" type="date"></field>
+                        <field name="end" from="End" type="date"></field>
+                        <field name="description" from="Description" type="string"></field>
+                        <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                        <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                        <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                        <field name="startTimezone" from="StartTimezone" type="string"></field>
+                        <field name="endTimezone" from="EndTimezone" type="string"></field>
+                        <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                    </fields>
+                </scheduler-model>
+            </schema>
+        </scheduler-datasource>
+    </kendo-scheduler>
+
+    <script>
+        function forgeryToken() {
+            return kendo.antiForgeryTokens();
+        };
+
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+
+                var scheduler = $("#scheduler").data("kendoScheduler");
+                scheduler.one("dataBinding", function (e) {
+                    //prevent saving if server error is thrown
+                    e.preventDefault();
+                })
+            }
+        };
+    </script>
+```
 ```tab-PageModel(cshtml.cs)
     public virtual JsonResult OnPostMeetings_Read([DataSourceRequest] DataSourceRequest request)
     {

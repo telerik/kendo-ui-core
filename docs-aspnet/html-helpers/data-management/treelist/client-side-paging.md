@@ -50,30 +50,36 @@ To enable the paging functionality of the TreeList, configure the `Pageable` set
 {% if site.core %}
 ```TagHelper
     <kendo-treelist name="treelist" height="540">
-        <treelist-datasource>
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All" datatype="jsonp" />
-            </transport>
-            <schema type="json">
-                <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
-                    <fields>
-                        <field name="ReportsTo" nullable="true"></field>
-                        <field name="EmployeeId" type="number"></field>
-                        <field name="Extension" type="number"></field>
-                    </fields>
-                </treelist-model>
-            </schema>
-        </treelist-datasource>
-
         <columns>
-            <treelist-column field="FirstName" title="First Name" width="280px" template-id="photo-template"></treelist-column>
-            <treelist-column field="LastName" title="Last Name" width="160px"></treelist-column>
+            <treelist-column field="FirstName" width="220px" template-id="photo-template"></treelist-column>
+            <treelist-column field="LastName" width="160px"></treelist-column>
             <treelist-column field="Position"></treelist-column>
             <treelist-column field="Phone" width="200px"></treelist-column>
             <treelist-column field="Extension" width="140px"></treelist-column>
             <treelist-column field="Address"></treelist-column>
         </columns>
-        <pageable page-size="15" page-sizes="new int[] { 5,15,20}"></pageable>
+        <filterable enabled="true"/>
+        <sortable enabled="true"/>
+        <pageable enabled="true" page-size="15" page-sizes-enabled="true"/>
+        <treelist-datasource server-operation="false">
+            <transport>
+                <read url="@Url.Action("All","EmployeeDirectory")"/>
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="true"></field>
+                        <field name="FirstName" type="string"></field>
+                        <field name="LastName" type="string"></field>
+                        <field name="Position" type="string"></field>
+                        <field name="Phone" type="string"></field>
+                        <field name="Extension" type="number"></field>
+                        <field name="Address" type="string"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
     </kendo-treelist>
 
 ```
@@ -109,19 +115,21 @@ The root TreeList items have their `parentId` field set to the default value for
 {% if site.core %}
 ```TagHelper
     <kendo-treelist name="treelist" height="540">
-        <treelist-datasource>
-            ...
-            <schema type="json">
+        ...
+        <treelist-datasource server-operation="false">
+            <transport>
+                <read url="@Url.Action("All","EmployeeDirectory")"/>
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
                 <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
                     <fields>
-                        <field name="EmployeeId" type="number"  default-value="0"></field>
+                        <field name="EmployeeId" type="number" default-value="0"></field>
                         <field name="ReportsTo" nullable="true"></field>>
                     </fields>
                 </treelist-model>
             </schema>
         </treelist-datasource>
-
-        ...
+        <pageable enabled="true" page-size="15" page-sizes-enabled="true"/>
     </kendo-treelist>
 ```
 {% endif %}

@@ -47,7 +47,42 @@ The following example demonstrates how to automatically maintain an up-to-date s
         )
         .Height(540)
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" height="540" resizable="true" reorderable="true">
+        <columns>
+            <treelist-column field="FirstName" title="First Name" width="250px"></treelist-column>
+            <treelist-column field="LastName" title="Last Name"></treelist-column>
+            <treelist-column field="Position"></treelist-column>
+            <treelist-column field="Extension" title="Ext" format="{0:#}">
+                <filterable enabled="false"/>
+            </treelist-column>
+        </columns>
+        <filterable enabled="true"/>
+        <sortable enabled="true"/>
+        <column-menu enabled="true"/>
+        <treelist-datasource server-operation="false">
+            <transport>
+                <read url="@Url.Action("All","EmployeeDirectory")"/>
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="true"></field>
+                        <field name="FirstName" type="string"></field>
+                        <field name="LastName" type="string"></field>
+                        <field name="Position" type="string"></field>
+                        <field name="Extension" type="number"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
+    </kendo-treelist>
+```
+{% endif %}
+```JavaScript
     <script>
         $(document).ready(function () {
             var treeList = $("#treelist").data("kendoTreeList");
@@ -64,6 +99,7 @@ The following example demonstrates how to automatically maintain an up-to-date s
         });
     </script>
 ```
+
 
 ## See Also
 

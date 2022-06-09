@@ -55,6 +55,58 @@ A single instance resource is a resource of which only one instance can be assig
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+        @{
+            var roomsData = new[]
+            {
+                new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
+                new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
+            };
+
+            string defaultTitle = "No Title";
+        }
+        <kendo-scheduler name="scheduler" 
+            date="new DateTime(2021, 6, 13)" 
+            start-time="new DateTime(2021, 6, 13, 7, 00, 00)"
+            timezone="Etc/UTC"
+            height="600">
+			<views>
+                <view type="day"></view>
+                <view type="week" selected="true"></view>
+            </views>
+			<resources>
+                <resource field="RoomID" title="Room" datatextfield="Text" datavaluefield="Value" datacolorfield="Color" bind-to="@roomsData"></resource>
+            </resources>
+            <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Meetings_Read", "Scheduler")" />
+                    <create url="@Url.Action("Meetings_Create", "Scheduler")" />
+                    <destroy url="@Url.Action("Meetings_Destroy", "Scheduler")" />
+                    <update url="@Url.Action("Meetings_Update", "Scheduler")" />
+                </transport>
+                <schema data="Data" total="Total" errors="Errors">
+                    <scheduler-model id="MeetingID">
+                        <fields>
+                            <field name="MeetingID" type="number"></field>
+                            <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                            <field name="start" from="Start" type="date"></field>
+                            <field name="end" from="End" type="date"></field>
+                            <field name="description" from="Description" type="string"></field>
+                            <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                            <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                            <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                            <field name="startTimezone" from="StartTimezone" type="string"></field>
+                            <field name="endTimezone" from="EndTimezone" type="string"></field>
+							<field name="RoomID" type="number" default-value="1"></field>
+                            <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                        </fields>
+                    </scheduler-model>
+                </schema>
+            </scheduler-datasource>
+        </kendo-scheduler>
+```
+{% endif %}
 
 ## Multiple Instance Resources
 
@@ -103,6 +155,61 @@ A multiple instance resource is a resource of which more than one instance can b
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+        @{
+            var attendeesData = new[]
+            {
+                new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                new { Text = "Bob", Value = 2, Color = "#51a0ed" },
+                new { Text = "Charlie", Value = 3, Color = "#56ca85" }
+            };
+
+            string defaultTitle = "No Title";
+        }
+        <kendo-scheduler name="scheduler" 
+            date="new DateTime(2021, 6, 13)" 
+            start-time="new DateTime(2021, 6, 13, 7, 00, 00)"
+            timezone="Etc/UTC"
+            height="600">
+			<views>
+                <view type="day"></view>
+                <view type="week" selected="true"></view>
+                <view type="month"></view>
+                <view type="agenda"></view>
+                <view type="timeline"></view>
+            </views>
+			<resources>
+                <resource field="Attendees" title="Attendees" multiple="true" datatextfield="Text" datavaluefield="Value" datacolorfield="Color" bind-to="@attendeesData"></resource>
+            </resources>
+            <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Meetings_Read", "Scheduler")" />
+                    <create url="@Url.Action("Meetings_Create", "Scheduler")" />
+                    <destroy url="@Url.Action("Meetings_Destroy", "Scheduler")" />
+                    <update url="@Url.Action("Meetings_Update", "Scheduler")" />
+                </transport>
+                <schema data="Data" total="Total" errors="Errors">
+                    <scheduler-model id="MeetingID">
+                        <fields>
+                            <field name="MeetingID" type="number"></field>
+                            <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                            <field name="start" from="Start" type="date"></field>
+                            <field name="end" from="End" type="date"></field>
+                            <field name="description" from="Description" type="string"></field>
+                            <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                            <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                            <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                            <field name="startTimezone" from="StartTimezone" type="string"></field>
+                            <field name="endTimezone" from="EndTimezone" type="string"></field>
+                            <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                        </fields>
+                    </scheduler-model>
+                </schema>
+            </scheduler-datasource>
+        </kendo-scheduler>
+```
+{% endif %}
 
 ## Multiple Resource Types
 
@@ -162,6 +269,68 @@ The Scheduler supports multiple resource types. For example, you can combine sin
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+        @{
+            var roomsData = new[]
+            {
+                new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
+                new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
+            };
+
+            var attendeesData = new[]
+            {
+                new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                new { Text = "Bob", Value = 2, Color = "#51a0ed" },
+                new { Text = "Charlie", Value = 3, Color = "#56ca85" }
+            };
+
+            string defaultTitle = "No Title";
+        }
+        <kendo-scheduler name="scheduler" 
+            date="new DateTime(2021, 6, 13)" 
+            start-time="new DateTime(2021, 6, 13, 7, 00, 00)"
+            timezone="Etc/UTC"
+            height="600">
+			<views>
+                <view type="day"></view>
+                <view type="week" selected="true"></view>
+                <view type="month"></view>
+                <view type="agenda"></view>
+                <view type="timeline"></view>
+            </views>
+			<resources>
+                <resource field="RoomID" title="Room" datatextfield="Text" datavaluefield="Value" datacolorfield="Color" bind-to="@roomsData"></resource>
+                <resource field="Attendees" title="Attendees" multiple="true" datatextfield="Text" datavaluefield="Value" datacolorfield="Color" bind-to="@attendeesData"></resource>
+            </resources>
+            <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Meetings_Read", "Scheduler")" />
+                    <create url="@Url.Action("Meetings_Create", "Scheduler")" />
+                    <destroy url="@Url.Action("Meetings_Destroy", "Scheduler")" />
+                    <update url="@Url.Action("Meetings_Update", "Scheduler")" />
+                </transport>
+                <schema data="Data" total="Total" errors="Errors">
+                    <scheduler-model id="MeetingID">
+                        <fields>
+                            <field name="MeetingID" type="number"></field>
+                            <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                            <field name="start" from="Start" type="date"></field>
+                            <field name="end" from="End" type="date"></field>
+                            <field name="description" from="Description" type="string"></field>
+                            <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                            <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                            <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                            <field name="startTimezone" from="StartTimezone" type="string"></field>
+                            <field name="endTimezone" from="EndTimezone" type="string"></field>
+                            <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                        </fields>
+                    </scheduler-model>
+                </schema>
+            </scheduler-datasource>
+        </kendo-scheduler>
+```
+{% endif %}
 
 ## Hierarchical Resource Grouping
 
@@ -226,6 +395,89 @@ Only the last one of the resources could be configured to allow multiple instanc
 		)
 	)
 ```
+{% if site.core %}
+```TagHelper
+        @{
+            var roomsData = new[]
+            {
+                new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
+                new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
+            };
+
+            var attendeesData = new List<SchedulerResourceModel>() {
+                new SchedulerResourceModel(){ Text = "Alex", Color="red", Value = 1},
+                new SchedulerResourceModel(){ Text = "Bob", Color="green",  Value = 2, Parent = 1 } ,
+                new SchedulerResourceModel(){ Text = "Charlie",Color="yellow",  Value = 3, Parent = 2 }
+            };
+
+            string defaultTitle = "No Title";
+        }
+        <kendo-scheduler name="scheduler" 
+            date="new DateTime(2020,6 ,13)" 
+            timezone="Etc/UTC"
+            height="600"
+            major-tick="720">
+			<views>
+                <view type="day"></view>
+                <view type="week"></view>
+                <view type="month" selected="true"></view>
+                <view type="agenda"></view>
+                <view type="timeline"></view>
+            </views>
+            <group orientation="vertical">
+                <resources>
+                    <group-resource name="Rooms" />
+                    <group-resource name="Attendees" />
+                </resources>
+            </group>
+			<resources>
+                <resource field="RoomID" 
+                    title="Room" 
+                    name="Rooms" 
+                    datatextfield="Text" 
+                    datavaluefield="Value" 
+                    datacolorfield="Color" 
+                    bind-to="@roomsData">
+                </resource>
+                <resource field="Attendees" 
+                    title="Attendees" 
+                    name="Attendees" 
+                    multiple="true" 
+                    datatextfield="Text" 
+                    datavaluefield="Value" 
+                    datacolorfield="Color" 
+                    dataparentvaluefield="Parent"
+                    bind-to="@attendeesData">
+                </resource>
+            </resources>
+            <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Grouping_Hierarchical_Read", "Scheduler")" />
+                    <create url="@Url.Action("Grouping_Hierarchical_Create", "Scheduler")" />
+                    <destroy url="@Url.Action("Grouping_Hierarchical_Destroy", "Scheduler")" />
+                    <update url="@Url.Action("Grouping_Hierarchical_Update", "Scheduler")" />
+                </transport>
+                <schema data="Data" total="Total" errors="Errors">
+                    <scheduler-model id="MeetingID">
+                        <fields>
+                            <field name="MeetingID" type="number"></field>
+                            <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                            <field name="start" from="Start" type="date"></field>
+                            <field name="end" from="End" type="date"></field>
+                            <field name="description" from="Description" type="string"></field>
+                            <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                            <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                            <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                            <field name="startTimezone" from="StartTimezone" type="string"></field>
+                            <field name="endTimezone" from="EndTimezone" type="string"></field>
+                            <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                        </fields>
+                    </scheduler-model>
+                </schema>
+            </scheduler-datasource>
+        </kendo-scheduler>
+```
+{% endif %}
 
 ## See Also
 

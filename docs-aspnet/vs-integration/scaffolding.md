@@ -1,27 +1,55 @@
 ---
 title: Scaffolding
 page_title: Scaffolding
-description: "Get started with Telerik UI for ASP.NET Core and learn how to use the Kendo UI Scaffolder extensions."
-previous_url: /getting-started/scaffolding, /getting-started/installation/scaffolding, /installation/scaffolding
+description: "Get started with {{ site.product }} and learn how to use the Kendo UI Scaffolder extensions."
+previous_url: /getting-started/scaffolding, /getting-started/installation/scaffolding, /installation/scaffolding, /scaffolding, /vs-integration-mvc/scaffolding
 slug: scaffolding_aspnetcore
-position: 5
+position: 15
 ---
 
 # Scaffolding
 
-As of the R1 2019 release, Telerik UI for ASP.NET Core provides **Scaffold templates**.
+{% if site.core %}
+As of the R1 2019 release, Telerik UI for ASP.NET Core provides Scaffolding templates.
+{% else %}
+As of the Q1 2015 release, Telerik UI for ASP.NET MVC provides Scaffolding templates.
+{% endif %}
 
-ASP.NET Scaffolding is a code generation framework for ASP.NET Web applications. Telerik UI for ASP.NET Core makes use of this framework and offers Scaffold templates that aim to accelerate and ease the process of building an application for both Razor Pages and MVC.
+ASP.NET Scaffolding is a code generation framework for ASP.NET applications. {{ site.product }} makes use of this framework and offers Scaffolding templates that aim to accelerate and ease the process of building an application for both Razor Pages and MVC. These templates allow you to generate helper declarations together with the related Controller action methods. 
 
+{% if site.mvc %}
+Some of the components that provide Scaffolding templates are the Grid, Scheduler, Chart, and TreeView:
+
+* [Scaffolding of the Grid HtmlHelper]({% slug scaffoldinggrid_aspnetmvc %})
+* [Scaffolding of the Chart HtmlHelper]({% slug scaffoldingchart_aspnetmvc %})
+* [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
+* [Scaffolding of the TreeView HtmlHelper]({% slug scaffoldingtreeview_aspnetmvc %})
+{% endif %}
 
 ## Prerequisites
 
-Install and set up Telerik UI for ASP.NET Core in your project by either of the following ways:
-* [Use Visual Studio](https://docs.telerik.com/aspnet-core/getting-started/getting-started)
-* [Use the CLI](https://docs.telerik.com/aspnet-core/getting-started/getting-started-cli)
+Install {{ site.product }} and set up your project by using either of the following approaches:
+
+{% if site.core %}
+* [Starting a project from a Template in Visual Studio]({% slug gettingstarted_project_template %})
+* [Adding Telerik UI through NuGet in Visual Studio]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+{% else %}
+* [Starting a project from a Template in Visual Studio]({% slug gettingstarted_aspnetmvc %})
+* [Adding Telerik UI through local files in Visual Studio]({% slug manualsetup_aspnetmvc %})
+
+To use the scaffolding template, your development environment must meet the following requirements:
+
+* Visual Studio 2013 with Update 2 or later
+* ASP.NET MVC 4 or ASP.NET MVC 5
+* C#
+* Entity Framework Data Model
+
+> The Scaffolder templates do not work in Visual Studio 2019 version 16.9.0+. A breaking change has been introduced in these Visual Studio 2019 versions, which affects the third party scaffolders. The issue has been reported to Microsoft, see [Developer Community topic](https://developercommunity.visualstudio.com/t/visual-studio-2019-version-1691-resulted-in-custom/1371519).
+{% endif %}
 
 ## Installation
 
+{% if site.core %}
 To install the UI for ASP.NET Core Scaffolding templates and extensions in your project:
 
 1. Clone or download the [https://github.com/telerik/scaffold-templates-core](https://github.com/telerik/scaffold-templates-core) repository.
@@ -176,13 +204,39 @@ For general information about Scaffolding, refer to the following resources by M
 
 > The Scaffolding generates templates based on C# classes. They are different from the editor templates that are used for editing by widgets such as the Grid, for example. The editor templates are located in your installation folder at `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <your version>\wrappers\aspnetcore\EditorTemplates`.
 
+{% else %}
+The Telerik UI for ASP.NET MVC installer automatically install the required Visual Studio extension.
+
+You can also manually install it by navigating to the `wrappers\aspnetmvc\Scaffolding` folder of the distribution package and open the included `vsix` file. It will automatically detect compatible Visual Studio versions.
+
+## Setting Up the Project
+
+To initially set up Scaffolder Visual Studio extension:
+
+1. From the **New Scaffolded Item...** menu which contains different items depending on the currently installed Scaffolders, access the Scaffolder extension.
+
+    ![The new scaffolded item](../images/scaffolding/new_scaffolded_item.png)
+
+1. From the next menu, select **Kendo UI Scaffolder**. As a result, the Scaffolding configuration panel opens.
+
+    ![The Kendo UI Scaffolder](../images/scaffolding/kendo_ui_scaffolder.png)
+
+1. Select the Grid, Chart, or Scheduler control. The Controller and the corresponding view will be generated in the currently selected location.
+
+    ![Selecting widgets in the Kendo UI Scaffolder](../images/scaffolding/widget_select.png)
+{% endif %}
+
 ## See Also
 
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Official .Net Documentation on Scaffolding](https://github.com/aspnet/Scaffolding)
 * [Default ASP.NET Scaffolding Templates](https://github.com/aspnet/Scaffolding/tree/main/src/Scaffolding/VS.Web.CG.Mvc/Templates)
+{% if site.core %}
 * [Telerik UI for ASP.NET Core Scaffolding Templates](https://github.com/telerik/scaffold-templates-core)
 * [How to add a model to an ASP.NET Core MVC app (Microsoft Tutorial)](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-2.1)
 * [How to add a model to a Razor Pages app in ASP.NET Core (Microsoft Tutorial)](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model?view=aspnetcore-2.1)
+{% else %}
+* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Using Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug gettingstarted_aspnetmvc %})
+* [Using Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
+* [Using Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
+{% endif %}

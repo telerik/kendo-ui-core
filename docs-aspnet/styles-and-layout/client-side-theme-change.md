@@ -80,7 +80,7 @@ Within the action method the selected theme value is appended to a cookie.
 ```
 {% endif %}
 
-Setting the theme in the _Layout.cshtml file follows the requirements discussed in the [Including Client-Side Resources]{% if site.core %}({% slug copyclientresources_aspnetmvc6_aspnetmvc %}){% else %}({% slug copyclientresources_aspnetmvc %}){% endif %} article. The selected theme value is retrieved from the cookie and CDN urls for the selected theme are generated. An alternative approach, if stylesheets are stored within the application, would be to generate the url to the stylesheet for the selected theme.
+Setting the theme in the _Layout.cshtml file follows the requirements discussed in the [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) article. The selected theme value is retrieved from the cookie and CDN urls for the selected theme are generated. An alternative approach, if stylesheets are stored within the application, would be to generate the url to the stylesheet for the selected theme.
 
 ```razor
     @{
@@ -120,6 +120,6 @@ Setting the theme in the _Layout.cshtml file follows the requirements discussed 
 
 ## See Also
 
-* [Including Client-Side Resources]{% if site.core %}({% slug copyclientresources_aspnetmvc6_aspnetmvc %}){% else %}({% slug copyclientresources_aspnetmvc %}){% endif %}
+* [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 * [Sass ThemeBuilder]({% slug sass_theme_builder %})
 * [Cards]({% slug cards_aspnetmvc6_aspnetmvc %})

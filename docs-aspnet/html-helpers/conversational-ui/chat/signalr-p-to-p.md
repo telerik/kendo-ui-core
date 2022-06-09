@@ -30,7 +30,7 @@ Depending on your preferred editor, use any of the following approaches:
 
 {% else %}
 
-* [Create a new Telerik UI for ASP.NET MVC application from the Standard template]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Create a new Telerik UI for ASP.NET MVC application from the Standard template]({% slug newprojectwizards_visualstudio_aspnetcore %})
 * [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC package]({% slug gettingstarted_aspnetmvc %})
 
 {% endif %}

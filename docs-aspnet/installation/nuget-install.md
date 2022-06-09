@@ -1,19 +1,23 @@
 ---
 title: Installing with NuGet
 page_title: Installing with NuGet
-description: "Learn how to install Telerik UI for ASP.NET Core by using the NuGet packages available from the Telerik NuGet source."
-previous_url: /getting-started/nuget-install, /getting-started/installation/nuget-install
+description: "Learn how to install {{ site.product }} by using the NuGet packages available from the Telerik NuGet source."
+previous_url: /getting-started/nuget-install, /getting-started/installation/nuget-install, /nuget-install, /installation-mvc/nuget-install
 slug: nuget_install_aspnetmvc6_aspnetmvc
 position: 3
 ---
 
 # Installing with NuGet
 
-This article describes how to configure your system to use the Telerik NuGet source and to install Telerik UI for ASP.NET Core in your project. 
+This article describes how to configure your system for the Telerik NuGet source and then use it to install {{ site.product }} in your project. 
 
-[NuGet](https://www.nuget.org) is a popular .NET package manager. Telerik maintains a NuGet feed with official UI for ASP.NET Core releases and service packs. These packages are available only for registered users with an active trial or commercial license. In the Telerik NuGet feed, you will see only the packages that are licensed to your account.
+[NuGet](https://www.nuget.org) is a popular .NET package manager. Telerik maintains a NuGet feed with official {{ site.product }} releases and service packs. These packages are available only for registered users with an active trial or commercial license. In the Telerik NuGet feed, you will see only the packages that are licensed to your account.
 
+{% if site.core %}
 >tipLooking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}) to add Telerik UI to the project.
+{% else %}
+>tipLooking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug setupwithnuget_aspnetmvc%}) to add Telerik UI to the project.
+{% endif %}
 
 ## Setting Up the Telerik NuGet Feed
 
@@ -21,7 +25,7 @@ The Telerik NuGet feed allows you instant access to various Telerik and Kendo pa
 
 * [Use the NuGet Package Manager in Visual Studio](#setup-with-the-nuget-package-manager).
 
-* [Use the Telerik UI for ASP.NET Core trial installer](#setup-with-the-trial-installer).
+* [Use the {{ site.product }} trial installer](#setup-with-the-trial-installer).
 
 * [Use the Progress Control Panel application](#setup-with-the-progress-control-panel-application).
 
@@ -47,11 +51,15 @@ To configure the Telerik NuGet feed in Visual Studio:
 
 1. In the **Source** field, enter `https://nuget.telerik.com/v3/index.json` and click **OK**.
 
+{% if site.core %}
     ![Kendo UI resources](../getting-started-core/images/add-nuget-source.png)
+{% else %}
+    ![Kendo UI resources](../getting-started-mvc/images/add-nuget-source.png)
+{% endif %}
 
 You have successfully added the Telerik NuGet feed as a Package source. 
 
-The next steps describe how to authenticate your local NuGet instance and how to display the available packages:
+The next steps describe how to authenticate your local NuGet instance and display the available packages:
 
 1. Create a new project or open an existing project.
 
@@ -59,7 +67,9 @@ The next steps describe how to authenticate your local NuGet instance and how to
 
 1. Select **Manage NuGet Packages for Solution...**
 
-	![Locating and opening the NuGet package manager menu](../getting-started-core/images/manage-nuget.png)
+{% if site.core %}
+	 ![Locating and opening the NuGet package manager menu](../getting-started-core/images/manage-nuget.png)
+{% endif %}
 
 1. Select the Telerik NuGet **Package source** from the drop-down list.
 
@@ -71,11 +81,20 @@ The next steps describe how to authenticate your local NuGet instance and how to
 
 ### Setup with the Trial Installer
 
+{% if site.core %}
 The UI for ASP.NET Core <a href="https://www.telerik.com/try/aspnet-core-ui" target="_blank">free trial installer package</a> comes with an option that will automatically configure the Telerik NuGet feed for you. Refer to the [NuGet feed setup section]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#adding-the-telerik-nuget-feed-for-trial-license-users) in the First Steps article for step-by-step instructions.
+{% else %}
+The UI for ASP.NET MVC free trial installer package comes with an option that will automatically configure the Telerik NuGet feed for you. Refer to the [Getting Started article]({% slug setupwithnuget_aspnetmvc %}#adding-the-telerik-nuget-feed-for-trial-license-users) for more details.
+{% endif %}
 
 ### Setup with the Progress Control Panel Application
 
-If you have already purchased a commercial Telerik UI license, you can use the <a href="https://www.telerik.com/try/control-panel" target="_blank">Progress Control Panel application</a> to configure the Telerik NuGet. The Control Panel has an option that you can select, and it will configure the Visual Studio Package Manager to use the Telerik NuGet feed. Refer to the [NuGet feed setup section]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}#adding-the-telerik-nuget-feed-for-users-with-commercial-license) in the First Steps article for step-by-step instructions.
+If you have already purchased a commercial Telerik UI license, you can use the <a href="https://www.telerik.com/try/control-panel" target="_blank">Progress Control Panel application</a> to configure the Telerik NuGet. The Control Panel has an option that you can select, and it will configure the Visual Studio Package Manager to use the Telerik NuGet feed.
+{% if site.core %}
+Refer to the [NuGet feed setup section]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}#adding-the-telerik-nuget-feed-for-users-with-commercial-license) in the First Steps article for step-by-step instructions.
+{% else %}
+Refer to the [Getting Started article]({% slug setupwithnuget_aspnetmvc %}#adding-the-telerik-nuget-feed-for-users-with-commercial-license) for step-by-step instructions.
+{% endif %}
 
 ### Setup with NuGet CLI
 
@@ -109,9 +128,9 @@ If you have already stored a token instead of storing the credentials as clear t
 
 ### Setup with nuget.config
 
-An alternative way to add the Telerik NuGet feed is to directly edit the `nuget.config` file. You can read more about it in the [Nuget Config File - Package Sources](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesources) article.
+An alternative way to add the Telerik NuGet feed is to directly edit the `nuget.config` file. For more details about this config file, see [Microsoft's dedicated article](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesources).
 
-Make sure you are familiar with how such configurations work. The [Common NuGet Configurations](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior#creating-a-new-config-file) article is a reference document you can use.
+To learn more about how this configuration works, see the [Common NuGet Configurations](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior#creating-a-new-config-file) article.
 
 To use a `nuget.config` file for the Telerik feed, you need to:
 
@@ -139,14 +158,11 @@ To use a `nuget.config` file for the Telerik feed, you need to:
 
 Refer to the [Telerik NuGet feed instructional video](https://youtu.be/c3m_BLMXNDk?t=129) for more details.
 
-
-
-
 ## Installing the NuGet Packages
 
 After setting up the Telerik NuGet package source, install the packages either through the [Package Manager Dialog](https://docs.nuget.org/consume/package-manager-dialog) or the [Package Manager Console](http://docs.nuget.org/Consume/Package-Manager-Console).
 
-The NuGet packages allow you to use the Telerik UI TagHelpers and HtmlHelpers in your application. For the UI components to render correctly, you must also provide the required [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
+The NuGet packages allow you to use the Telerik UI {% if site.core %}TagHelpers and HtmlHelpers{% else %} HtmlHelpers {% endif %} in your application. For the UI components to render correctly, you must also provide the required [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
 >tip To check the status of the Progress Live Services, like Telerik NuGet, Kendo UI CDN, Kendo UI Dojo playground and others, visit the [Progress<sup>®</sup> Telerik<sup>®</sup> Live Services Status Page](http://status.telerik.com/).
 
@@ -171,7 +187,7 @@ If you experience any issues while configuring or using the Telerik NuGet server
 
 ## Further Reading
 
-You may find useful the following Microsoft articles on securing your NuGet feed setup and supply chain as general best practices:
+To learn more about securing your NuGet feed setup and supply chain, check the following Microsoft articles with general best practices:
 
 * [Lock down your dependencies using configurable trust policies - Blog Post](https://devblogs.microsoft.com/nuget/lock-down-your-dependencies-using-configurable-trust-policies/)
 
@@ -181,6 +197,11 @@ You may find useful the following Microsoft articles on securing your NuGet feed
 
 ## See Also
 
-* [Introduction to Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
-* [Installing Telerik UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
+* [Adding Kendo UI Client-Side Resources by Using the CDN Services]({% slug cdnservices_core %})
+* [Set Up Private NuGet Feed for Azure](https://docs.telerik.com/aspnet-core/knowledge-base/setup-private-nuget-feed-azure)
+{% if site.core %}
+* [Scaffolding the Telerik UI for ASP.NET Core Project]({% slug scaffolding_aspnetcore %})
+{% else %}
+* [Scaffolding the Telerik UI for ASP.NET MVC Project]({% slug scaffolding_aspnetcore %})
+{% endif %}

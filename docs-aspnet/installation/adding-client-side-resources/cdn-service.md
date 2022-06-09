@@ -1,8 +1,8 @@
 ---
 title: Using CDN
 page_title: Using CDN
-description: "Get started with Telerik UI for ASP.NET Core and install the helpers by using the Telerik UI CDN services."
-previous_url: /getting-started/installation/cdn-service, /installation/cdn-service
+description: "Get started with {{ site.product }} and install the helpers by using the Telerik UI CDN services."
+previous_url: /getting-started/installation/cdn-service, /installation/cdn-service, /installation-mvc/adding-client-side-resources/cdn-service
 slug: cdnservices_core
 position: 4
 ---
@@ -38,6 +38,7 @@ If you prefer the HTTP protocol, replace `https` with `http` in the URLs above.
 
 > Replace the Kendo UI version from the following code snippets with the version of the product you are using&mdash;for example, `{{ site.mvcCoreVersion }}`.
 
+{% if site.core %}
 1. Open the layout of the application. By default, it is `~\Views\Shared\_Layout.cshtml`.
 
 1. To add the Bootstrap theme files, insert a `link` tag within the `head` tag of the layout and include the style file or files.
@@ -53,6 +54,26 @@ If you prefer the HTTP protocol, replace `https` with `http` in the URLs above.
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
     ```
 
+{% else %}
+1. Open the layout of the application. By default, it is `~/Views/Shared/_Layout.cshtml` or `Site.master`, if using ASPX.
+
+1. To add the Bootstrap theme files, include the `kendo.common-bootstrap.min.css` and `kendo.bootstrap.min.css` files. Add a `link` tag within the `head` tag of the layout. For more information on the CSS files which are used by the predefined Less themes, refer to the documentation on the [Less-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling).
+
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.common-bootstrap.min.css" />
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap.min.css" />
+
+1. To add the JavaScript files, insert a `script` tag and include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after the jQuery script.
+
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+
+1. If using the Telerik MVC Scheduler helper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
+
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.timezones.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+{% endif %}
+
 ## Troubleshooting
 
 The following articles provide solutions to common issues related to the Telerik and Kendo CDN services:
@@ -62,14 +83,17 @@ The following articles provide solutions to common issues related to the Telerik
 
 ## Next Steps
 
-* [Create your own custom bundles]({% slug custombundles_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
 * [Check out the PDF and Excel export support]({% slug exportsupport_core %})
 
 ## See Also
 
 * [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
-* [Installing Telerik UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
+* [Installing {{ site.product }} with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
+{% if site.core %}
 * [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})
 * [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+{% else %}
+* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc %})
+{% endif %}

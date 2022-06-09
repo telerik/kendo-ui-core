@@ -39,7 +39,7 @@ The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI f
 ## See Also
 
 * [Introduction to Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Download and Installation]({% slug overview_downloadinstallation_mvc %})
+* [Telerik UI for ASP.NET MVC Download and Installation]({% slug downloadinstall_aspnetcore %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 
 {% else %}

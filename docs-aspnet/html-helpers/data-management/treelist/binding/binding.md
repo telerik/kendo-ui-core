@@ -94,30 +94,34 @@ The following example demonstrates how to enable the remote binding for the Tree
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-treelist name="treelist" height="540">
-        <treelist-datasource name="dataSource" >
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All" datatype="jsonp" />
-            </transport>
-            <schema type="json">
-                <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
-                    <fields>
-                        <field name="ReportsTo" nullable="true"></field>
-                        <field name="EmployeeId" type="number"></field>
-                        <field name="Extension" type="number"></field>
-                    </fields>
-                </treelist-model>
-            </schema>
-        </treelist-datasource>
-
+    <kendo-treelist name="treelist">
         <columns>
-            <treelist-column field="FirstName" title="First Name" width="280px"></treelist-column>
+            <treelist-column field="FirstName" title="First Name" width="200px"></treelist-column>
             <treelist-column field="LastName" title="Last Name" width="160px"></treelist-column>
             <treelist-column field="Position"></treelist-column>
             <treelist-column field="Phone" width="200px"></treelist-column>
             <treelist-column field="Extension" width="140px"></treelist-column>
             <treelist-column field="Address"></treelist-column>
         </columns>
+        <treelist-datasource>
+            <transport>
+                <read url="@Url.Action("Index","EmployeeDirectory")"/>
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="true"></field>
+                        <field name="FirstName" type="string"></field>
+                        <field name="LastName" type="string"></field>
+                        <field name="Position" type="string"></field>
+                        <field name="Phone" type="string"></field>
+                        <field name="Extension" type="number"></field>
+                        <field name="Address" type="string"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
     </kendo-treelist>
 ```
 {% endif %}

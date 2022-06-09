@@ -51,6 +51,15 @@
             assert.equal(dom.find(".k-listview-content").length, 0);
         });
 
+        it("when listview is empty loader is placed inside the wrapper", function() {
+            var dom = setup({
+                dataSource: []
+            });
+
+            dom.data("kendoListView")._progress(true);
+            assert.equal(dom.find(".k-loading-mask").parent()[0], dom[0]);
+        });
+
         it("kendoListView attaches listView to element", function() {
             var dom = setup();
 

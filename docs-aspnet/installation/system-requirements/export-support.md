@@ -1,15 +1,15 @@
 ---
 title: Export Support
 page_title: Export Support
-description: "Get started with Telerik UI for ASP.NET Core and learn about the versions of the Pako and JSZip libraries supported by the library and used for PDF and Excel export."
-previous_url: /getting-started/prerequisites/export-support, /compatibility/export-support
+description: "Get started with {{ site.product }} and learn about the versions of the Pako and JSZip libraries supported by the library and used for PDF and Excel export."
+previous_url: /getting-started/prerequisites/export-support, /compatibility/export-support, /installation-mvc/system-requirements/export-support
 slug: exportsupport_core
 position: 5
 ---
 
 # Export Support
 
-Telerik UI for ASP.NET Core integrates the Pako and JSZip libraries to support the content export of its components to PDF and Excel.
+{{ site.product }} integrates the Pako and JSZip libraries to support the content export of its components to PDF and Excel.
 
 ## Pako Library
 

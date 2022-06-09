@@ -85,6 +85,62 @@ See the implementation details in the example below. For the complete project wi
         }
     </style>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" height="540">
+        <toolbar>
+            <treelist-toolbar-button name="create" />
+        </toolbar>
+        <columns>
+            <treelist-column field="FirstName" width="220px" title="First Name"></treelist-column>
+            <treelist-column field="LastName" title="Last Name" width="200px"></treelist-column>
+            <treelist-column field="Position"></treelist-column>
+            <treelist-column field="HireDate" format="{0:MMMM d, yyyy}"></treelist-column>
+            <treelist-column width="350px">
+                <commands>
+                    <treelist-column-command name="createChild" text="Add child" />
+                    <treelist-column-command name="edit" />
+                    <treelist-column-command name="destroy" />
+                </commands>
+            </treelist-column>
+        </columns>
+        <editable enabled="true"/>
+        <treelist-datasource>
+            <transport>
+                <read url="/TreeList/TreeListCrudOperations?handler=Read" data="forgeryToken"/>
+                <update url="/TreeList/TreeListCrudOperations?handler=Update" data="forgeryToken"/>
+                <create url="/TreeList/TreeListCrudOperations?handler=Create" data="forgeryToken"/>
+                <destroy url="/TreeList/TreeListCrudOperations?handler=Destroy" data="forgeryToken"/>
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="true"></field>
+                        <field name="FirstName" type="string"></field>
+                        <field name="LastName" type="string"></field>
+                        <field name="Position" type="string"></field>
+                        <field name="HireDate" type="date"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
+    </kendo-treelist>
+
+    <script>
+        function forgeryToken() {
+            return kendo.antiForgeryTokens();
+        }
+    </script>
+
+    <style>
+        .k-treelist .k-command-cell .k-button {
+            min-width: 0px;
+            padding: 10px 10px 10px 10px;
+        }
+    </style>
+```
+{% endif %}
 
 ```tab-PageModel(cshtml.cs)
 using System;

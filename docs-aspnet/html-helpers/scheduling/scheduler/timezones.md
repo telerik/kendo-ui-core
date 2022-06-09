@@ -47,6 +47,51 @@ The following example demonstrates how to set `"Etc/UTC"` timezone to the Schedu
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        string defaultTitle = "No Title";
+    }
+
+    <kendo-scheduler name="scheduler"
+        date="new DateTime(2013, 6, 13)"
+        start-time="new DateTime(2013, 6, 13, 7, 0, 0, 0)"
+        height="600"
+        timezone="Etc/UTC">
+        <views>
+            <view type="day"></view>
+            <view type="week" selected="true"></view>
+        </views>
+        <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Meetings_Read", "Scheduler")" />
+                <create url="@Url.Action("Meetings_Create", "Scheduler")" />
+                <destroy url="@Url.Action("Meetings_Destroy", "Scheduler")" />
+                <update url="@Url.Action("Meetings_Update", "Scheduler")" />
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <scheduler-model id="MeetingID">
+                    <fields>
+                        <field name="MeetingID" type="number"></field>
+                        <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                        <field name="start" from="Start" type="date"></field>
+                        <field name="end" from="End" type="date"></field>
+                        <field name="description" from="Description" type="string"></field>
+                        <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                        <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                        <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                        <field name="startTimezone" from="StartTimezone" type="string"></field>
+                        <field name="endTimezone" from="EndTimezone" type="string"></field>
+                        <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                    </fields>
+                </scheduler-model>
+            </schema>
+        </scheduler-datasource>
+    </kendo-scheduler>
+```
+{% endif %}
 
 ## Reading Events from Data Source
 

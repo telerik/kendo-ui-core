@@ -119,6 +119,50 @@ To set the incell edit mode of the TreeList:
             })
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" on-data-bound="onDataBound">
+        <toolbar>
+            <treelist-toolbar-button name="create" />
+            <treelist-toolbar-button name="save" />
+            <treelist-toolbar-button name="cancel" />
+        </toolbar>
+        <columns>
+            <treelist-column field="FirstName" title="First Name" width="200px"></treelist-column>
+            <treelist-column field="LastName" title="Last Name" width="100px"></treelist-column>
+            <treelist-column width="240px">
+                <commands>
+                    <treelist-column-command name="createChild" text="Add child" />
+                    <treelist-column-command name="destroy" />
+                </commands>
+            </treelist-column>
+        </columns>
+        <editable enabled="true" mode="TreeListEditMode.InCell">
+            <move enabled="false"/>
+        </editable>
+        <treelist-datasource batch="true">
+            <transport>
+                <read url="@Url.Action("All_InCell","TreeList")"/>
+                <create url="@Url.Action("Create_InCell","TreeList")" type="post"/>
+                <update url="@Url.Action("Update_InCell","TreeList")" type="post"/>
+                <destroy url="@Url.Action("Destroy_InCell","TreeList")" type="post"/>
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="true"></field>
+                        <field name="FirstName" type="string"></field>
+                        <field name="LastName" type="string"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
+    </kendo-treelist>
+```
+{% endif %}
+```JavaScript
     <script>
         // The following code removes the 'Add child' button from the new records,
         // because they will receive an ID after saving the changes, which means that
@@ -138,6 +182,8 @@ To set the incell edit mode of the TreeList:
         }
     </script>
 ```
+
+
 ## See Also
 
 * [Incell Editing by the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/editing-incell)

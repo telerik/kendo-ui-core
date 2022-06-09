@@ -1,8 +1,8 @@
 ---
 title: Creating Your Own Custom Bundles
 page_title: Creating Your Own Custom Bundles
-description: "Get started with Telerik UI for ASP.NET Core, customize its components according to your project and add only the helpers that you need."
-previous_url: /getting-started/scripts/what-you-need, /installation/scripts/what-you-need
+description: "Get started with {{ site.product }}, customize its components according to your project, and add only the helpers that you need."
+previous_url: /getting-started/scripts/what-you-need, /installation/scripts/what-you-need, installation-mvc/adding-client-side-resources/scripts/what-you-need
 slug: custombundles_core
 position: 1
 ---
@@ -103,8 +103,5 @@ The server-side wrappers for the Kendo UI widgets are self-initialized which mea
 ## See Also
 
 * [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
-* [Installing Telerik UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
-* [Installing Telerik UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Installing {{ site.product }} by Using the CDN Services]({% slug cdnservices_core %})
+* [Installing {{ site.product }} with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})

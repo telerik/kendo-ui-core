@@ -207,7 +207,7 @@ The following example demonstrates how to set the default value of the `Employee
 
 ## Setting Up Custom DataType CRUD Operations
 
-The following example demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data. For the full demo, refer to the [Download and Installation article of Telerik UI for ASP.NET MVC]({% slug overview_downloadinstallation_mvc %}#sample-application).
+The following example demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data. For the full demo, refer to the [Download and Installation article of Telerik UI for ASP.NET MVC]({% slug downloadinstall_aspnetcore %}#sample-application).
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
         .Name("Grid")    
@@ -264,7 +264,7 @@ The following example demonstrates how to bind the Grid to the Kendo UI online d
 
 ## Binding the Grid to oData
 
-The following example demonstrates how to bind the Grid to the oData service. For the full demo, refer to the [Download and Installation article of Telerik UI for ASP.NET MVC]({% slug overview_downloadinstallation_mvc %}#sample-application).
+The following example demonstrates how to bind the Grid to the oData service. For the full demo, refer to the [Download and Installation article of Telerik UI for ASP.NET MVC]({% slug downloadinstall_aspnetcore %}#sample-application).
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("grid")
@@ -331,5 +331,5 @@ The following example demonstrates how to use the CustomDataSource builder to bi
 ## See Also
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Download and Installation]({% slug overview_downloadinstallation_mvc %})
-* [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug aspnetmvc_nuget %})
+* [Telerik UI for ASP.NET MVC Download and Installation]({% slug downloadinstall_aspnetcore %})
+* [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})

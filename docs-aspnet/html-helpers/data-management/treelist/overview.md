@@ -29,7 +29,7 @@ The following example demonstrates how to define the TreeList.
 > The TreeList distinguishes the root items based on the `ParentId` field. If the `ParentId` is set as `.Nullable(true)`, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is not nullable (`.Nullable(false)`), root items will be items which have a default value for their data type.
 
 {% if site.mvc %}
-1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug newprojectwizards_visualstudio_aspnetmvc %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug newprojectwizards_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
     ![A new entity data model](images/treelist-new-entity-data-model.png)
@@ -71,25 +71,28 @@ The following example demonstrates how to define the TreeList.
 ```TagHelper
     <kendo-treelist name="treelist">
         <columns>
-            <treelist-column field="FirstName" title="First Name"></treelist-column>
-            <treelist-column field="LastName" title="Last Name" ></treelist-column>
+            <treelist-column field="FirstName" width="250px" title="First Name"></treelist-column>
+            <treelist-column field="LastName" title="Last Name"></treelist-column>
             <treelist-column field="Position"></treelist-column>
-            <treelist-column field="Extension"></treelist-column>
+            <treelist-column field="Extension" title="Ext" format="{0:#}"></treelist-column>
         </columns>
         <treelist-datasource>
-        <transport>
-            <read url="https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All" datatype="jsonp" />
-        </transport>
-        <schema type="json">
-            <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
-                <fields>
-                    <field name="ReportsTo" nullable="true"></field>
-                    <field name="EmployeeId" type="number"></field>
-                    <field name="Extension" type="number"></field>
-                </fields>
-            </treelist-model>
-        </schema>
-    </treelist-datasource>
+            <transport>
+                <read url="@Url.Action("Index","EmployeeDirectory")"/>
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="true"></field>
+                        <field name="FirstName" type="string"></field>
+                        <field name="LastName" type="string"></field>
+                        <field name="Position" type="string"></field>
+                        <field name="Extension" type="number"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
     </kendo-treelist>
 ```
 {% endif %}
@@ -177,6 +180,15 @@ You can subscribe to all TreeList [events](https://docs.telerik.com/kendo-ui/api
             events.DataBound("onDataBound");
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" on-data-bound="onDataBound" on-data-binding="onDataBinding">
+        <!-- Other configurations. -->
+    </kendo-treelist>
+```
+{% endif %}
+```JavaScript
     <script>
         function onDataBinding(e) {
             // Handle the dataBinding event.
