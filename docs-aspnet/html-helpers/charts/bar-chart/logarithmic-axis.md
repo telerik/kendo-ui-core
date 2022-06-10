@@ -32,7 +32,31 @@ The following implementation demonstrates the code needed for setting the Date A
     ) 
 </div>
 ```
+{% if site.core %}
+```TagHelper
+    @model IEnumerable<int>
+    @addTagHelper *, Kendo.Mvc
 
+    <div class="demo-section wide">
+        <kendo-chart name="chart">
+            <series>
+                <series-item type="ChartSeriesType.Column"
+                            data="@Model.ToArray()">
+                </series-item>
+            </series>
+            <value-axis>
+                <value-axis-item type="log">
+                    <minor-grid-lines visible="true" />
+                </value-axis-item>
+            </value-axis>
+            <chart-title text="Fibonacci sequence">
+            </chart-title>
+            <tooltip visible="true">
+            </tooltip>
+        </kendo-chart>
+    </div> 
+```
+{% endif %}
 ```Controller
  public partial class Bar_ChartsController : Controller
     {

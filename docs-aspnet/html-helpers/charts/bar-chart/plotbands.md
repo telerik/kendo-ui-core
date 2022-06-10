@@ -56,6 +56,61 @@ The following implementation demonstrates the code needed for setting Plotbands 
         )
     ) 
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *,Kendo.Mvc
+        <kendo-chart name="chart">
+            <category-axis>
+                <category-axis-item>
+                    <major-grid-lines visible="false" />
+                </category-axis-item>
+            </category-axis>
+            <series>
+                <series-item type="ChartSeriesType.Column" category-field="Year" field="Nuclear" name="Nuclear">
+                </series-item>
+                <series-item type="ChartSeriesType.Column" category-field="Year" field="Hydro" name="Hydro">
+                </series-item>
+                <series-item type="ChartSeriesType.Column" category-field="Year" field="Wind" name="Wind">
+                </series-item>
+            </series>
+            <value-axis>
+                <value-axis-item major-unit="10000"
+                                max="70000"
+                                type="numeric">
+                    <labels format="{0:N0}">
+                    </labels>
+                    <line visible="false" />
+                    <plot-bands>
+                        <chart-value-axis-plot-band from="10000"
+                                                    to="30000"
+                                                    color="#c00"
+                                                    opacity="0.3">
+                        </chart-value-axis-plot-band>
+                        <chart-value-axis-plot-band from="30000"
+                                                    to="30500"
+                                                    color="#c00"
+                                                    opacity="0.6">
+                        </chart-value-axis-plot-band>
+                    </plot-bands>
+                </value-axis-item>
+            </value-axis>
+            <datasource>
+                <transport parameter-map="">
+                    <read type="post" url="@Url.Action("_SpainElectricityProduction", "Bar_Charts")" />
+                </transport>
+                <sorts>
+                    <sort field="Year" direction="asc" />
+                </sorts>
+            </datasource>
+            <chart-legend position="ChartLegendPosition.Right">
+            </chart-legend>
+            <chart-title text="Spain electricity production (GWh)">
+            </chart-title>
+            <tooltip format="{0:N0}" visible="true">
+            </tooltip>
+        </kendo-chart>
+```
+{% endif %}
 
 Overview of Plotbands implementation for Bar Chart:
 

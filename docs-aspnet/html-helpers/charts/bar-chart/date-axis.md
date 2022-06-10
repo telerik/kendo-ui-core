@@ -126,6 +126,117 @@ The following implementation demonstrates the code needed for setting the Date A
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @model IEnumerable<Kendo.Mvc.Examples.Models.DatePoint>
+    @{
+        var data = Model.ToArray();
+    }
+    <div class="configurator">
+        <div class="header">Configurator</div>
+        <div class="box-col">
+            <h4>Base date unit</h4>
+            <ul class="options">
+                <li>
+                    <input id="baseUnitAuto" name="baseUnit"
+                            type="radio" value="" autocomplete="off" />
+                    <label for="baseUnitAuto">Automatic (default)</label>
+                </li>
+                <li>
+                    <input id="baseUnitYears" name="baseUnit"
+                            type="radio" value="years" autocomplete="off" />
+                    <label for="baseUnitYears">Years</label>
+                </li>
+                <li>
+                    <input id="baseUnitMonths" name="baseUnit"
+                            type="radio" value="months" autocomplete="off" />
+                    <label for="baseUnitMonths">Months</label>
+                </li>
+                <li>
+                    <input id="baseUnitWeeks" name="baseUnit"
+                            type="radio" value="weeks" checked="checked" autocomplete="off" />
+                    <label for="baseUnitWeeks">Weeks</label>
+                </li>
+                <li>
+                    <input id="baseUnitDays" name="baseUnit"
+                            type="radio" value="days" autocomplete="off" />
+                    <label for="baseUnitDays">Days</label>
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>Aggregate function</h4>
+            <ul class="options">
+                <li>
+                    <input id="aggregateMax" name="aggregate"
+                            type="radio" value="max" autocomplete="off" />
+                    <label for="aggregateMax">Max (default)</label>
+                </li>
+                <li>
+                    <input id="aggregateMin" name="aggregate"
+                            type="radio" value="min" autocomplete="off" />
+                    <label for="aggregateMin">Min</label>
+                </li>
+                <li>
+                    <input id="aggregateSum" name="aggregate"
+                            type="radio" value="sum" autocomplete="off" />
+                    <label for="aggregateSum">Sum</label>
+                </li>
+                <li>
+                    <input id="aggregateAvg" name="aggregate"
+                            type="radio" value="avg" checked="checked" autocomplete="off" />
+                    <label for="aggregateAvg">Avg</label>
+                </li>
+                <li>
+                    <input id="aggregateCount" name="aggregate"
+                            type="radio" value="count" autocomplete="off" />
+                    <label for="aggregateCount">Count</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="demo-section wide">
+        <kendo-chart name="chart">
+            <category-axis>
+                <category-axis-item base-unit="ChartAxisBaseUnit.Weeks" type="ChartCategoryAxisType.Date">
+                    <major-grid-lines visible="false"/>
+                </category-axis-item>
+            </category-axis>
+            <series>
+                <series-item type="ChartSeriesType.Column" category-field="Date" field="Value" aggregate="ChartSeriesAggregate.Avg" data="data">
+                </series-item>
+            </series>
+            <value-axis>
+                <value-axis-item name="" type="numeric">
+                    <line visible="false"/>
+                </value-axis-item>
+            </value-axis>
+        </kendo-chart>
+    </div>
+
+
+    <script>
+        $(document).on("kendoReady", function () {
+            $(".configurator").bind("change", refresh);
+        });
+        function refresh() {
+            var chart = $("#chart").data("kendoChart"),
+                series = chart.options.series,
+                categoryAxis = chart.options.categoryAxis,
+                baseUnitInputs = $("input:radio[name=baseUnit]"),
+                aggregateInputs = $("input:radio[name=aggregate]");
+            for (var i = 0, length = series.length; i < length; i++) {
+                series[i].aggregate = aggregateInputs.filter(":checked").val();
+            }
+            categoryAxis.baseUnit = baseUnitInputs.filter(":checked").val();
+            chart.refresh();
+        }
+    </script>
+
+```
+{% endif %}
 
 * [Demo page of the Date Axis for Bar Chart](https://demos.telerik.com/{{ site.platform }}/bar-charts/date-axis)
 

@@ -49,10 +49,35 @@ The [Telerik UI Column Chart for {{ site.framework }}](https://demos.telerik.com
             series.Column(new double[] { 200, 450, 300, 125 }).Name("Example Series");
         })
         .CategoryAxis(axis => axis
-            .Categories(2000, 2001, 2002, 2003)
+                .Categories(new string[] { "2000", "2001", "2002", "2003" })
+
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{ 
+        var categories = new string[] { "2000", "2001", "2002", "2003" };
+    }
+    <kendo-chart name="chart">
+        <category-axis>
+            <category-axis-item categories="categories">
+            </category-axis-item>
+        </category-axis>
+        <series>
+            <series-item type="ChartSeriesType.Column" 
+                        name="Example Series"
+                        data="new double[] { 200, 450, 300, 125 }">
+            </series-item>
+        </series>
+        <chart-legend position="ChartLegendPosition.Bottom">
+        </chart-legend>
+        <chart-title text="Kendo Chart Example">
+        </chart-title>
+    </kendo-chart>
+```
+{% endif %}
 
 ![A sample Column Chart with categories](images/chart-column-categories.png)
 
@@ -72,10 +97,34 @@ Setting the `Series` object to `"Bar"` renders horizontal bars.
            series.Bar(new double[] { 200, 450, 300, 125 }).Name("Example Series");
        })
        .CategoryAxis(axis => axis
-           .Categories(2000, 2001, 2002, 2003)
+                .Categories(new string[] { "2000", "2001", "2002", "2003" })
        )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{ 
+        var categories = new string[] { "2000", "2001", "2002", "2003" };
+    }
+    <kendo-chart name="chart">
+        <category-axis>
+            <category-axis-item categories="categories">
+            </category-axis-item>
+        </category-axis>
+        <series>
+            <series-item type="ChartSeriesType.Bar" 
+                        name="Example Series"
+                        data="new double[] { 200, 450, 300, 125 }">
+            </series-item>
+        </series>
+        <chart-legend position="ChartLegendPosition.Bottom">
+        </chart-legend>
+        <chart-title text="Kendo Chart Example">
+        </chart-title>
+    </kendo-chart>
+```
+{% endif %}
 
 ![A sample Bar Chart](images/chart-bar.png)
 

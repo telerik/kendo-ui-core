@@ -86,11 +86,11 @@ Programmatically apply the filters on the [`filter`](/api/javascript/ui/grid/eve
                     currentFilter.splice(i, 1);
                   }
                 }
-                currentFilter.push({field:"Category.CategoryID", operatot:"eq", value:value});
+                currentFilter.push({field:"Category.CategoryID", operator:"eq", value:value});
                 e.preventDefault();
                 e.sender.dataSource.filter(currentFilter);
                 $("th[data-field='Category']").find('a').addClass("k-state-active");
-                $(".k-filter-menu-container").find("input[title='Value']").val(value);
+                $("[data-filter-field='Category']").data("kendoDropDownList").value(value);
               }
               else if (e.sender.dataSource.filter()){
                 var filters = e.sender.dataSource.filter().filters;
@@ -99,7 +99,7 @@ Programmatically apply the filters on the [`filter`](/api/javascript/ui/grid/eve
                     if (filters[i].field == "Category.CategoryID") {
                       setTimeout(function() {
                         $("th[data-field='Category']").find('a').addClass("k-state-active")
-                        $(".k-filter-menu-container").find("input[title='Value']").val(value)
+                        $("[data-filter-field='Category']").data("kendoDropDownList").value(value);
                       })
                     }
                   }
@@ -146,6 +146,7 @@ Programmatically apply the filters on the [`filter`](/api/javascript/ui/grid/eve
             },
             optionLabel: "--Select Value--"
           });
+          element.attr("data-filter-field", "Category");
         }
       </script>
     </div>

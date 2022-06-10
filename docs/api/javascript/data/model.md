@@ -220,7 +220,9 @@ Specifies the validation options which will be used by the [Kendo UI Validator](
             /* name of the field */ name: {
                 type: "string", // the field is a string
                 validation: { // validation rules
-                    required: true // the field is required
+                    required: {
+                        message: "Custom required message" // the message that is displayed when an empty value is about to be saved
+                    }
                 },
                 defaultValue: "<empty>" // default field value
             },

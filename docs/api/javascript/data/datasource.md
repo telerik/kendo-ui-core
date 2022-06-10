@@ -3761,6 +3761,31 @@ The `uid` of the model to look for.
 
 `kendo.data.ObservableObject`&mdash;The model instance. Returns `undefined` if a model with the specified `uid` is not found.
 
+#### Example - find model by uid
+
+    <button id="get">Get By UID</button>
+    <div id="grid"></div>
+    <div id="result"></div>
+
+    <script>
+      var dataSource = new kendo.data.DataSource({
+        data: [{ID: 1, Name: "Name 1"}, {ID: 2, Name: "Name 2"}]
+      });
+      $("#grid").kendoGrid({
+        dataSource: dataSource
+      });
+      
+      $("#get").on("click", function() {
+        let secondRow = $("#grid tr:last"),
+            uid = secondRow.data("uid");
+        
+        // Get the dataItem by using the uid property.
+        let dataItem = dataSource.getByUid(uid);
+        
+        $("#result").html(`<h4>Result</h4><p>Name - ${dataItem.Name}</p><p>ID - ${dataItem.ID}</p>`);
+      });
+    </script>
+
 ### group
 
 Gets or sets the grouping configuration.

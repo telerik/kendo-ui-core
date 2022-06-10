@@ -4646,10 +4646,11 @@ var __meta__ = { // jshint ignore:line
                 for (var i = 0; i < length; i++) {
                     currentSubGroup = group.items[i];
                     indexes.push(i);
-                    if (currentSubGroup.uid === subgroup.uid) {
+                    if (currentSubGroup.uid === subgroup.uid ||
+                            (currentSubGroup.hasSubgroups &&
+                            currentSubGroup.items.length &&
+                            that._containsSubGroup(currentSubGroup, subgroup, indexes))) {
                         return true;
-                    } else if (currentSubGroup.hasSubgroups && currentSubGroup.items.length) {
-                        return that._containsSubGroup(currentSubGroup, subgroup, indexes);
                     }
                     indexes.pop();
                 }

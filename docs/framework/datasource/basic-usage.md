@@ -207,6 +207,7 @@ The following example features local data but the data returned by a `transport`
             'groups': [{
                 'field': 'length',
                 'value': '5',
+                'itemCount': '1', // Specify the number of items in the group.
                 'items': [{
                     'w': 'kendo'
                 }],
@@ -215,12 +216,31 @@ The following example features local data but the data returned by a `transport`
             },{
                 'field': 'length',
                 'value': '4',
+                'itemCount': '3',
                 'items': [
                     { 'w': 'done' },
                     { 'w': 'keno' },
                     { 'w': 'node' }
                 ],
                 'hasSubgroups': false,
+                'aggregates': {}
+            }, {
+                'field': 'length',
+                'value': '4',
+                'subgroupCount': '1', // Specify the number of subgroups when hasSubgroups is true.
+                'items': [
+                    {
+                        'field': 'anotherField',
+                        'value': 'test',
+                        'itemCount': '1',
+                        'items': [{
+                            's': 'my-item'
+                        }],
+                        'hasSubgroups': false,
+                        'aggregates': {}
+                    }
+                ],
+                'hasSubgroups': true,
                 'aggregates': {}
             }]
         };

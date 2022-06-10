@@ -49,13 +49,48 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis`. Multiple value ax
             series.Area(new double[] { 67.96, 68.93, 75, 74, 78 }).Name("United States");
         })
         .CategoryAxis(axis => axis
-            .Categories(2005, 2006, 2007, 2008, 2009)
+             .Categories(new string[] { "2005", "2006", "2007", "2008", "2009" })
         )
         .ValueAxis(axis => axis
             .Labels(labels => labels.Format("{0}%"))
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{ 
+        var categories = new string[] { "2005", "2006", "2007", "2008", "2009" };
+    }
+    <kendo-chart name="chart">
+        <category-axis>
+            <category-axis-item categories="categories">
+            </category-axis-item>
+        </category-axis>
+        <series>
+            <series-item type="ChartSeriesType.Area"
+                        name="World"
+                        data="new double[] { 15.7, 16.7, 20, 23.5, 26.6 }">
+            </series-item>
+            <series-item type="ChartSeriesType.Area"
+                        name="United States"
+                        data="new double[] { 67.96, 68.93, 75, 74, 78 }">
+            </series-item>
+        </series>
+        <value-axis>
+            <value-axis-item>
+                <labels format="{0}%">
+                </labels>
+            </value-axis-item>
+        </value-axis>
+        <chart-legend position="ChartLegendPosition.Bottom">
+        </chart-legend>
+        <chart-title text="Internet Users">
+        </chart-title>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The configuration from the previous example results in the following Area Chart.
 

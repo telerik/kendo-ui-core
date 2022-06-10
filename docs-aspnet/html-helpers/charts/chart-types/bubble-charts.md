@@ -53,6 +53,22 @@ The following example demonstrates how to create a Bubble Chart and visualizes s
       })
   )
 ```
+{% if site.core %}
+```TagHelper
+  @addTagHelper *, Kendo.Mvc
+  <kendo-chart name="chart">
+    <series>
+      <series-item type="ChartSeriesType.Bubble" 
+            name="Sales"
+            data="new dynamic[] {
+                                        new { x =  10, y = 12000, size = 0.1}, 
+                                        new {x = 24, y =  62000, size =  0.25}
+                                        }">
+      </series-item>
+    </series>
+  </kendo-chart>
+```
+{% endif %}
 
  ![A sample Bubble Chart](images/chart-bubble.png)
 

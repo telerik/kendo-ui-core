@@ -168,6 +168,8 @@ How can I create a filter widget with a multiple filter criterion in the Grid?
                 }
                 
                 grid.dataSource.filter(filterQuery);
+
+                e.container.find(".k-input").val(null);
                 
                 e.container.parent().data("kendoPopup").close();
               });

@@ -75,6 +75,71 @@ The following implementation demonstrates the code needed for setting the Multi 
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{
+        var categories = new string[] { "Mon", "Tue", "Wed", "Thu", "Fri" };
+    }
+    <div class="demo-section wide">
+        <kendo-chart name="chart">
+            <series>
+                <series-item type="ChartSeriesType.Column"
+                            color="#cc6e38"
+                            name="on battery"
+                            data="new int[] { 20, 40, 45, 30, 50 }">
+                    <stack enabled="true" />
+                </series-item>
+                <series-item type="ChartSeriesType.Column"
+                            color="#ef955f"
+                            name="on gas"
+                            data="new int[] { 20, 30, 35, 35, 40 }">
+                    <stack enabled="true" />
+                </series-item>
+                <series-item type="ChartSeriesType.Line"
+                            axis="mpg"
+                            color="#ec5e0a"
+                            name="mpg"
+                            data="new double[] { 30, 38, 40, 32, 42 }">
+                </series-item>
+                <series-item type="ChartSeriesType.Line"
+                            axis="l100km"
+                            color="#4e4141"
+                            name="l/100 km"
+                            data="new double[] { 7.8, 6.2, 5.9, 7.4, 5.6 }">
+                </series-item>
+            </series>
+            <value-axis>
+                <value-axis-item max="100" min="0" name="" type="numeric">
+                    <chart-value-axis-item-title text="miles">
+                    </chart-value-axis-item-title>
+                </value-axis-item>
+                <value-axis-item major-unit="32" max="161" min="0" name="km" type="numeric">
+                    <chart-value-axis-item-title text="km">
+                    </chart-value-axis-item-title>
+                </value-axis-item>
+                <value-axis-item color="#ec5e0a" name="mpg" type="numeric">
+                    <chart-value-axis-item-title text="miles per gallon">
+                    </chart-value-axis-item-title>
+                </value-axis-item>
+                <value-axis-item color="#4e4141" name="l100km" type="numeric">
+                    <chart-value-axis-item-title text="liters per 100km">
+                    </chart-value-axis-item-title>
+                </value-axis-item>
+            </value-axis>
+            <category-axis>
+                <category-axis-item categories="categories"
+                                    axis-crossing-value="new object[] { 0, 0, 10, 10 }">
+                </category-axis-item>
+            </category-axis>
+            <chart-legend position="ChartLegendPosition.Top">
+            </chart-legend>
+            <chart-title text="Hybrid car mileage report">
+            </chart-title>
+        </kendo-chart>
+    </div> 
+```
+{% endif %}
 
 Overview of the Multi Axis implementation for Bar Chart:
 

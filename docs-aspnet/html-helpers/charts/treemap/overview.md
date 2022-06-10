@@ -45,16 +45,19 @@ The following example demonstrates how to define a TreeMap by using the TreeMap 
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-treemap datasource-id="dataSource" name="treeMap" text-field="name" value-field="value"></kendo-treemap>
-
-    <script>
-        var dataSource = new kendo.data.HierarchicalDataSource({
-            data: [{
-                name: "foo",
-                value: 1
-            }]
-        });
-    </script>
+    <kendo-treemap value-field="Value" 
+                text-field="Name" 
+                name="treeMap">
+        <hierarchical-datasource>
+            <transport>
+                <read url="@Url.Action("Population_Read", "TreeMap")"/>
+            </transport>
+            <schema>
+                <hierarchical-model children="Items">
+                </hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+    </kendo-treemap>
 ```
 {% endif %}
 ```Controler
@@ -139,19 +142,33 @@ The following example demonstrates how to subscribe to events by a handler name.
                 .DataBound("onDataBound")
             )
     )
+```
+{% if site.core %}
+```TagHelper
+
+@addTagHelper *, Kendo.Mvc
+    <kendo-treemap name="treemap" 
+                on-item-created="onItemCreated" 
+                on-data-bound="onDataBound">
+    </kendo-treemap>
+
+```
+{% endif %}
+```script.js
 
     <script>
-    function onItemCreated(e) {
-        // Tthe HTML element.
-        var element = e.element;
-        // The dataItem to which the element is bound.
-        var dataItem = e.sender.dataItem(e.element);
-    }
+        function onItemCreated(e) {
+            // Tthe HTML element.
+            var element = e.element;
+            // The dataItem to which the element is bound.
+            var dataItem = e.sender.dataItem(e.element);
+        }
 
-    function onDataBound(e) {
-        // Handle the dataBound event.
-    }
+        function onDataBound(e) {
+            // Handle the dataBound event.
+        }
     </script>
+    
 ```
 
 {% if site.core %}

@@ -24,6 +24,18 @@ To bind the Telerik UI TreeMap to a data set within a RazorPage:
           .Model(m => m.Children("Items"))
       )
     ```
+    {% if site.core %}
+    ```TagHelper
+    <hierarchical-datasource>
+            <transport>
+                <read url="/TreeMap/TreeMapBinding?handler=ReadOptional" />
+            </transport>
+            <schema>
+                <hierarchical-model children="items"></hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+    ```
+    {% endif %}
 
 2. Within the `.cs` file, introduce an ActionMethod to return the data set:
 

@@ -45,6 +45,53 @@ The following implementation demonstrates the code needed for setting the 100% S
         )
     ) 
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{
+        var categories = new string[] { "1952", "1956", "1960", "1964", "1968", "1972", "1976", "1984", "1988", "1992", "1996", "2000", "2004", "2008", "2012" };
+    }
+    <kendo-chart name="chart">
+        <category-axis>
+            <category-axis-item categories="categories">
+                <major-grid-lines visible="false" />
+            </category-axis-item>
+        </category-axis>
+        <series>
+            <series-item type="ChartSeriesType.Bar"
+                         color="#f3ac32"
+                         name="Gold Medals"
+                         data="new double[] { 40, 32, 34, 36, 45, 33, 34, 83, 36, 37, 44, 37, 35, 36, 46 }">
+                <stack type="ChartStackType.Stack100" />
+            </series-item>
+            <series-item type="ChartSeriesType.Bar"
+                         color="#b8b8b8"
+                         name="Silver Medals"
+                         data="new double[] { 19, 25, 21, 26, 28, 31, 35, 60, 31, 34, 32, 24, 40, 38, 29 }">
+                <stack type="ChartStackType.Stack100" />
+            </series-item>
+            <series-item type="ChartSeriesType.Bar"
+                         color="#bb6e36"
+                         name="Bronze Medals"
+                         data="new double[] { 17, 17, 16, 28, 34, 30, 25, 30, 27, 37, 25, 33, 26, 36, 29 }">
+                <stack type="ChartStackType.Stack100" />
+            </series-item>
+        </series>
+        <value-axis>
+            <value-axis-item name="" type="numeric">
+                <line visible="false" />
+                <major-grid-lines visible="true" />
+            </value-axis-item>
+        </value-axis>
+        <chart-legend position="ChartLegendPosition.Bottom">
+        </chart-legend>
+        <chart-title text="Olympic Medals won by USA">
+        </chart-title>
+        <tooltip template="#= series.name #: #= value #" visible="true">
+        </tooltip>
+    </kendo-chart>
+```
+{% endif %}
 
 Overview of the 100% Stacked Bars:
 
