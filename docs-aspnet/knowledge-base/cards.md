@@ -3,7 +3,9 @@ title: Cards
 page_title: Cards 
 description: "Learn how to use the Telerik UI card class to render a flexible content container in {{ site.product }} applications."
 slug: cards_aspnetmvc6_aspnetmvc
-position: 5
+previous_url: /styles-and-layout/cards
+tags: cards, card, container, layout, flexible
+res_type: kb
 ---
 
 # Cards
@@ -12,9 +14,7 @@ The Telerik UI Cards for {{ site.framework }} is a set of classes that define fl
 
 A card can consist of a header, a body, and actions and can also accommodate images, lists, groups, separators, and more.
 
-## Getting Started
-
-To build a card, utilize the `.k-card` class which enables you to use a wide variety of content.
+To build a card, utilize the `.k-card` class, which enables you to use a wide variety of content.
 
 ```html
 <div class="k-card">

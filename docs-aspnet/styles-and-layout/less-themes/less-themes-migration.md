@@ -2,8 +2,9 @@
 title: Less to Sass Theme Migration
 page_title: LESS to SASS Theme Migration
 description: "Learn how to migrate from a LESS to a SASS theme."
+previous_url: /styles-and-layout/less-themes-migration
 slug: less_themes_migration
-position: 1
+position: 3
 ---
 
 # LESS to SASS Theme Migration
@@ -85,5 +86,5 @@ The LESS-based themes support only the default values of the new [Components Sty
 
 ## See More
 
-* [Plans for Telerik and Kendo UI LESS Themes](https://www.telerik.com/blogs/future-plans-telerik-kendo-ui-less-themes)
+* [Telerik and Kendo UI LESS Themes future plans blog post](https://www.telerik.com/blogs/future-plans-telerik-kendo-ui-less-themes)
 * [Styling Overview Article]({% slug components_rendering_overview %})

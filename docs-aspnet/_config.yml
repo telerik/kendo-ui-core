@@ -405,9 +405,15 @@ navigation:
      "styles-and-layout":
         title: "Styles and Appearance"
         position: 7
-     "styles-and-layout/styling-components":
-        title: "Styling Components"
+     "styles-and-layout/design-assets":
+        title: "Design Assets"
+        position: 2
+     "styles-and-layout/sass-themes":
+        title: "SASS Themes"
         position: 3
+     "styles-and-layout/less-themes":
+        title: "LESS Themes"
+        position: 4
      "globalization":
         title: "Globalization"
         position: 8

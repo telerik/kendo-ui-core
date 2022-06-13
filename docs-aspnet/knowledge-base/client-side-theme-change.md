@@ -3,7 +3,9 @@ title: Change Theme On The Client
 page_title: Change Theme On The Client
 description: "How to Change The {{ site.product }} Application Theme On The Client"
 slug: howto_changethemeontheclient
-position: 6
+previous_url: /styles-and-layout/client-side-theme-change
+tags: change, theme, client, dropdown
+res_type: kb
 ---
 
 # Change Theme On The Client 
