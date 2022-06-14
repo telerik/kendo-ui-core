@@ -71,6 +71,25 @@ The crosshair configuration options.
 
 > The crosshair is displayed when the [axisDefaults.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-axisDefaults.crosshair.visible) option is set to `true`.
 
+#### Example - set the default crosshair configuration options
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      axisDefaults: {
+        crosshair: {
+          color: "green",
+          width: 2,
+          zIndex:1,
+          visible: true
+        }
+      },
+      series: [
+        { type: "column", data: [[1, 2], [3, 4], [4, 5]] }
+      ]
+    });
+</script>
+
 ### axisDefaults.crosshair.color `String`
 
 The color of the crosshair. Accepts a valid CSS color string, including hex and rgb.
@@ -13725,8 +13744,6 @@ The data item field which contains the series mean value.
 
 #### Example - set the chart series mean field
 
-    <div id="chart"></div>
-    <script>
     $("#chart").kendoChart({
       dataSource: {
         data: [{
@@ -13750,7 +13767,6 @@ The data item field which contains the series mean value.
          outliersField: "outliers"
       }]
     });
-    </script>
 
 ### series.outliersField `String` *(default: "outliers")*
 
@@ -13758,8 +13774,6 @@ The data item field which contains the series outliers value.
 
 #### Example - set the chart series outliers field
 
-    <div id="chart"></div>
-    <script>
     $("#chart").kendoChart({
       dataSource: {
         data: [{
@@ -13783,7 +13797,6 @@ The data item field which contains the series outliers value.
          outliersField: "outliers"
       }]
     });
-    </script>
 
 ### series.gap `Number` *(default: 1.5)*
 

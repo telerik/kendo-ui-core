@@ -13,7 +13,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -74,9 +74,9 @@
                 ]
             });
 
-            $(".k-split-button .k-split-button-arrow").trigger('click');
+            $(".k-split-button .k-button").eq(1).trigger('click');
 
-            var splitWrapper = $(".k-split-wrapper");
+            var splitWrapper = $("[data-role=\"buttonmenu\"]");
 
             axeRun(splitWrapper, done);
         });
@@ -118,7 +118,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -162,7 +162,7 @@
 
             var mainbutton = container.find("#foo");
 
-            assert.equal(mainbutton.attr("aria-disabled"), "true");
+            assert.equal(mainbutton.attr("aria-disabled"), 'true');
         });
 
         it("toggleButton receives aria-pressed attribute", function() {

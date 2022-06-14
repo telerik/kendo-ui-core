@@ -33,33 +33,8 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
-        });
-
-        it("select and enter on split button", function() {
-            var flag = 0;
-            var toolbar = container.kendoToolBar({
-                items: [
-                    {
-                        type: "splitButton",
-                        id: "mainButton",
-                        text: "Split Button",
-                        menuButtons: [
-                            { text: "Action 1", id: "action1" },
-                            { text: "Action 2", id: "action2" },
-                            { text: "Action 3", id: "action3" }
-                        ]
-                    }
-                ],
-                click: function() {
-                    flag++;
-                }
-            });
-
-            container[0].focus();
-            container.press(keys.ENTER, null, null, container.find(".k-split-button"));
-            assert.equal(flag, 1);
         });
 
         it("focuses first tool if it is a button", function() {
@@ -110,7 +85,28 @@
 
             toolbar.element[0].focus();
 
-            assert.equal(document.activeElement.id, "foo_wrapper", "focuses split button wrapper");
+            assert.equal(document.activeElement.id, "foo", "focuses split button wrapper");
+        });
+
+        it("focuses first tool if it is a dropdownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton",
+                        text: "Main",
+                        id: "foo",
+                        menuButtons: [
+                            { text: "Item 1", id: "id1" },
+                            { text: "Item 2", id: "id2" },
+                            { text: "Item 3", id: "id3" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            toolbar.element[0].focus();
+
+            assert.equal(document.activeElement.id, "foo", "focuses split button wrapper");
         });
 
         it("focuses first focusable item in template if item is a template", function() {
@@ -346,7 +342,7 @@
                 }
             });
 
-            var splitButton = $("#foo_wrapper");
+            var splitButton = $("#foo");
             var popupElement = $("#splitButton_optionlist");
             var option = $("#option1");
 
@@ -376,10 +372,64 @@
                 }
             });
 
-            var splitButton = $("#foo_wrapper");
+            var splitButton = $("#foo");
 
             splitButton[0].focus();
             splitButton.press(keys.DOWN, false, true);
+        });
+
+        it("dropDownButton navigation triggers close and open events", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ],
+                close: function(e) {
+                    assert.isOk(true, "close event triggered.");
+                },
+                open: function(e) {
+                    assert.isOk(true, "open event triggered.");
+                }
+            });
+
+            var dropDownButton = $("#foo");
+            var popupElement = $("#dropDownButton_optionlist");
+            var option = $("#option1");
+
+            dropDownButton[0].focus();
+            // open popup
+            dropDownButton.press(keys.DOWN, false, true);
+            // close popup
+            option.bubblePress(keys.UP, false, true, popupElement);
+            // open popup
+            dropDownButton.press(keys.DOWN, false, true);
+            // close popup
+            option.bubblePress(keys.TAB, false, false, popupElement);
+        });
+
+        it("dropDownButton popup is not opened when disabled", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", enable: false, menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ],
+                open: function(e) {
+                    assert.isOk(true, "open event triggered.");
+                }
+            });
+
+            var dropDownButton = $("#foo");
+
+            dropDownButton[0].focus();
+            dropDownButton.press(keys.DOWN, false, true);
         });
 
         it("focus with only overflowAnchor should focus it", function() {

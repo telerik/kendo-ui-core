@@ -5519,6 +5519,34 @@ The source widget instance.
 
 Fired when a marker has been clicked or tapped.
 
+#### Example - Change marker color when it is is clicked or tapped
+    <div id="map"></div>
+    <script>
+      function createMap() {
+        $("#map").kendoMap({
+          center: [30.268107, -97.744821],
+          zoom: 3,
+          layers: [{
+            type: "tile",
+            urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            subdomains: ["a", "b", "c"],
+            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+          }],
+          markers: [{
+            location: [30.268107, -97.744821],
+            shape: "pinTarget",
+            tooltip: {
+              content: "Austin, TX"
+            }
+          }],
+          markerClick: function(e) {
+            $(e.marker.element.context).css("color", "green");
+          }
+        });
+      }
+      $(document).ready(createMap);
+    </script>
+
 #### Event Data
 
 ##### e.marker `kendo.dataviz.map.Marker`

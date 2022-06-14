@@ -2431,7 +2431,7 @@ The series base color. The supported values are:
 * function(point) - user-defined function that will be evaluated for each point. Returning `undefined` will assume the default series color.
 
 #### Example
-
+    
     $("#sparkline").kendoSparkline({
          series: [{
              type: "column",
@@ -2439,10 +2439,14 @@ The series base color. The supported values are:
              color: "#ff0000"
          }]
     });
+    </script>
 
 #### Example
 
-    $("#sparkline").kendoSparkline({
+    <span id="sparkline"></span>
+    <script>
+    $("#sparkline").kendoSpar<span id="sparkline"></span>
+    <script>kline({
          series: [{
              type: "column",
              data: [200, 450, 300, 125],
@@ -2456,6 +2460,7 @@ The series base color. The supported values are:
              }
          }]
     });
+    </script>
 
 ### series.colorField `String`
 

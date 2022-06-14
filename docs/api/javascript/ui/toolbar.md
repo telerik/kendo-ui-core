@@ -631,7 +631,7 @@ If set, the ToolBar will render an image with the specified URL in the button.
 
 ### items.menuButtons `Array`
 
-Specifies the menu buttons of a SplitButton.
+Specifies the menu buttons of a SplitButton or a DropDownButton.
 
 #### Example
 
@@ -642,6 +642,24 @@ Specifies the menu buttons of a SplitButton.
             items: [ {
                 type: "splitButton",
                 text: "splitButton",
+                menuButtons: [
+                    { id: "foo", text: "Foo" },
+                    { id: "bar", text: "Bar" },
+                    { id: "baz", text: "Baz" }
+                ]
+            } ]
+        });
+    </script>
+
+#### Example - DropDownButton
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [ {
+                type: "dropDownButton",
+                text: "dropDownButton",
                 menuButtons: [
                     { id: "foo", text: "Foo" },
                     { id: "bar", text: "Bar" },
@@ -1092,7 +1110,7 @@ Specifies the toggle event handler of the button. Applicable only for commands o
 
 ### items.type `String`
 
-Specifies the command type. Supported types are "button", "splitButton", "buttonGroup", "separator", "spacer".
+Specifies the command type. Supported types are "button", "splitButton", "dropDownButton", "buttonGroup", "separator", "spacer".
 
 > Specifying the type is **mandatory**. Only commands that have a `template` do not need a `type`.
 
@@ -1109,6 +1127,14 @@ Specifies the command type. Supported types are "button", "splitButton", "button
                     menuButtons: [
                         { id: "foo", text: "Foo" },
                         { id: "bar", text: "Bar" }
+                    ]
+                },
+                {
+                    type: "dropDownButton",
+                    text: "dropDownButton",
+                    menuButtons: [
+                        { id: "foobar", text: "FooBar" },
+                        { id: "barbaz", text: "BarBaz" }
                     ]
                 },
                 {

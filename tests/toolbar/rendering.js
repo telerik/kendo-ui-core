@@ -13,7 +13,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -105,10 +105,30 @@
 
 
             var mainbutton = container.find("#foo");
-            var splitbutton = mainbutton.parent(".k-split-button.k-button-group");
+            var arrowButton = mainbutton.next();
 
             assert.isOk(mainbutton.hasClass("k-disabled"));
-            assert.isOk(splitbutton.hasClass("k-disabled"));
+            assert.isOk(arrowButton.hasClass("k-disabled"));
+        });
+
+        it("dropDownButton with enable: false receives k-disabled class", function() {
+            container.kendoToolBar({
+                items: [{
+                    type: "dropDownButton",
+                    id: "foo",
+                    text: "foo",
+                    enable: false,
+                    menuButtons: [
+                        { id: "btn", text: "text" }
+                    ]
+                }
+                ]
+            });
+
+
+            var mainbutton = container.find("#foo");
+
+            assert.isOk(mainbutton.hasClass("k-disabled"));
         });
 
         it("by default button does not have k-primary class", function() {
@@ -932,8 +952,8 @@
                 ]
             });
 
-            assert.isOk(container.children("div.k-split-button.k-button-group").length, "SplitButton element is rendered");
-            assert.equal($(document.body).find(".k-split-container.k-list-container").children().length, 4, "SplitButton dropdown contains correct amount of items");
+            assert.isOk(container.children("div.k-split-button").length, "SplitButton element is rendered");
+            assert.equal($("#splitButton").data("kendoSplitButton").items().length, 4, "SplitButton dropdown contains correct amount of items");
         });
 
         it("initializes kendoPopup", function() {
@@ -950,7 +970,9 @@
                 ]
             });
 
-            assert.isOk($(document.body).find(".k-split-container.k-list-container").data("kendoPopup") instanceof kendo.ui.Popup);
+
+            var splitButton = $(document.body).find("#splitButton").data("kendoSplitButton");
+            assert.isOk(splitButton.menu._popup instanceof kendo.ui.Popup);
         });
 
         it("splitButton holds reference to its popup", function() {
@@ -967,8 +989,8 @@
                 ]
             });
 
-            var splitButton = container.find(".k-split-button.k-button-group");
-            assert.isOk(splitButton.data("kendoPopup") instanceof kendo.ui.Popup);
+            var splitButton = container.find("#splitButton").data("kendoSplitButton");
+            assert.isOk(splitButton.menu._popup instanceof kendo.ui.Popup);
         });
 
         it("splitButton applies ID and text options", function() {
@@ -989,23 +1011,6 @@
             assert.equal(splitButton.text(), "foo", "Text is applied");
         });
 
-        it("SplitButton sets id to the wrapper element", function() {
-            container.kendoToolBar({
-                items: [
-                    {
-                        type: "splitButton", id: "splitButton", text: "foo", menuButtons: [
-                            { id: "option1", text: "Option 1" },
-                            { id: "option2", text: "Option 2" }
-                        ]
-                    }
-                ]
-            });
-
-            var wrapper = container.find("#splitButton").parent();
-
-            assert.equal(wrapper.attr("id"), "splitButton_wrapper");
-        });
-
         it("SplitButton sets id to the popup element", function() {
             container.kendoToolBar({
                 items: [
@@ -1018,16 +1023,16 @@
                 ]
             });
 
-            var popup = container.find("#splitButton_wrapper").data("kendoPopup");
+            var splitButton = container.find("#splitButton").data("kendoSplitButton");
 
-            assert.equal(popup.element.attr("id"), "splitButton_optionlist");
+            assert.equal(splitButton.menu.list.attr("id"), "splitButton_buttonmenu");
         });
 
         it("SplitButton and its popup receive auto generated ID if ID is not explicitly set", function() {
             container.kendoToolBar({
                 items: [
                     {
-                        type: "splitButton", text: "foo", menuButtons: [
+                        type: "splitButton", id: "splitButton", text: "foo", menuButtons: [
                             { id: "option1", text: "Option 1" },
                             { id: "option2", text: "Option 2" }
                         ]
@@ -1035,11 +1040,11 @@
                 ]
             });
 
-            var splitButton = container.find(".k-split-button.k-button-group");
-            var popup = splitButton.data("kendoPopup").element;
+            var splitButton = container.find("#splitButton").data("kendoSplitButton");
+            var list = splitButton.menu.list;
 
-            assert.isOk(splitButton.attr("id"), "SplitButton has ID");
-            assert.isOk(popup.attr("id"), "Popup has ID");
+            assert.isOk(splitButton.element.attr("id"), "SplitButton has ID");
+            assert.isOk(list.attr("id"), "Popup has ID");
         });
 
         it("SplitButton element receives data-overflow attribute with default value", function() {
@@ -1116,7 +1121,7 @@
             container.kendoToolBar({
                 items: [
                     {
-                        type: "splitButton", text: "foo", menuButtons: [
+                        type: "splitButton", id: "splitButton", text: "foo", menuButtons: [
                             { id: "btn1", text: "Btn1" },
                             { id: "btn2", text: "Btn2" },
                             { id: "btn3", text: "Btn3" }
@@ -1125,14 +1130,12 @@
                 ]
             }).data("kendoToolBar");
 
-            var splitButton = container.find(".k-split-button.k-button-group");
-            var arrowButton = splitButton.find(".k-split-button-arrow");
+            var splitButton = container.find("#splitButton").data("kendoSplitButton");
+            var arrowButton = splitButton.arrowButton;
 
             click(arrowButton);
 
-            // Use Math.floor due to chrome 79
-            // assert.equal(splitButton.outerWidth(), splitButton.data("kendoPopup").element.outerWidth());
-            assert.equal(Math.floor(splitButton.outerWidth()), Math.floor(splitButton.data("kendoPopup").element.outerWidth()));
+            roughlyEqual(splitButton.wrapper.outerWidth(), splitButton.menu._popup.element.outerWidth(), 2);
         });
 
         it("options.attribute are attached to the main button", function() {
@@ -1152,7 +1155,7 @@
         });
 
         it("options.attribute are attached to the menu buttons", function() {
-            var splitButton = container.kendoToolBar({
+            container.kendoToolBar({
                 items: [
                     {
                         type: "splitButton", id: "foo", text: "foo", menuButtons: [
@@ -1170,7 +1173,7 @@
         });
 
         it("default classes are preserved on menu buttons", function() {
-            var splitButton = container.kendoToolBar({
+            container.kendoToolBar({
                 items: [
                     {
                         type: "splitButton", id: "foo", text: "foo", menuButtons: [
@@ -1182,12 +1185,12 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.isOk($("#btn1").hasClass("k-link"));
-            assert.isOk($("#btn2").hasClass("k-link"));
-            assert.isOk($("#btn3").hasClass("k-link"));
-            assert.isOk($("#btn1").hasClass("k-menu-link"));
-            assert.isOk($("#btn2").hasClass("k-menu-link"));
-            assert.isOk($("#btn3").hasClass("k-menu-link"));
+            assert.isOk($("#btn1 > span").hasClass("k-link"));
+            assert.isOk($("#btn2 > span").hasClass("k-link"));
+            assert.isOk($("#btn3 > span").hasClass("k-link"));
+            assert.isOk($("#btn1 > span").hasClass("k-menu-link"));
+            assert.isOk($("#btn2 > span").hasClass("k-menu-link"));
+            assert.isOk($("#btn3 > span").hasClass("k-menu-link"));
         });
 
         it("splitButton is initially hidden if hidden option is set to true", function() {
@@ -1209,6 +1212,283 @@
 
             var overflowButton = toolbar.popup.element.find("#foo_overflow");
             assert.isOk(overflowButton.hasClass("k-hidden"));
+        });
+
+        /* DROPDOWN BUTTON */
+
+        it("renders dropDownButton from JSON", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "DropDown Button", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" },
+                            { id: "option4", text: "Option 4" }
+                        ]
+                    }
+                ]
+            });
+
+            assert.isOk(container.children(".k-menu-button").length, "DropDownButton element is rendered");
+            assert.equal($("#dropDownButton").data("kendoDropDownButton").items().length, 4, "DropDownButton dropdown contains correct amount of items");
+        });
+
+        it("initializes kendoPopup", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "DropDown Button", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" },
+                            { id: "option4", text: "Option 4" }
+                        ]
+                    }
+                ]
+            });
+
+
+            var dropDownButton = $(document.body).find("#dropDownButton").data("kendoDropDownButton");
+            assert.isOk(dropDownButton.menu._popup instanceof kendo.ui.Popup);
+        });
+
+        it("dropDownButton holds reference to its popup", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "DropDown Button", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" },
+                            { id: "option4", text: "Option 4" }
+                        ]
+                    }
+                ]
+            });
+
+            var dropDownButton = container.find("#dropDownButton").data("kendoDropDownButton");
+            assert.isOk(dropDownButton.menu._popup instanceof kendo.ui.Popup);
+        });
+
+        it("dropDownButton applies ID and text options", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "foo", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" }
+                        ]
+                    }
+                ]
+            });
+
+            var dropDownButton = container.find(".k-button#dropDownButton");
+
+            assert.isOk(dropDownButton.length, "ID is applied to the main button");
+            assert.equal(dropDownButton.text(), "foo", "Text is applied");
+        });
+
+        it("DropDownButton sets id to the popup element", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "foo", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" }
+                        ]
+                    }
+                ]
+            });
+
+            var dropDownButton = container.find("#dropDownButton").data("kendoDropDownButton");
+
+            assert.equal(dropDownButton.menu.list.attr("id"), "dropDownButton_buttonmenu");
+        });
+
+        it("DropDownButton and its popup receive auto generated ID if ID is not explicitly set", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "foo", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" }
+                        ]
+                    }
+                ]
+            });
+
+            var dropDownButton = container.find("#dropDownButton").data("kendoDropDownButton");
+            var list = dropDownButton.menu.list;
+
+            assert.isOk(dropDownButton.element.attr("id"), "DropDownButton has ID");
+            assert.isOk(list.attr("id"), "Popup has ID");
+        });
+
+        it("DropDownButton element receives data-overflow attribute with default value", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", text: "foo", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" }
+                        ]
+                    }
+                ]
+            });
+
+            var dropDownButton = container.find(".k-menu-button");
+            assert.equal(dropDownButton.attr("data-overflow"), "auto");
+        });
+
+        it("DropDownButton element receives data-overflow attribute with set value", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", overflow: "never", text: "foo", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" }
+                        ]
+                    }
+                ]
+            });
+
+            var dropDownButton = container.find(".k-menu-button");
+            assert.equal(dropDownButton.attr("data-overflow"), "never");
+        });
+
+        it("Overflow DropDownButton renders li tag with buttons", function() {
+            var dropDownButton = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", text: "foo", menuButtons: [
+                            { id: "btn1", text: "Btn1" },
+                            { id: "btn2", text: "Btn2" },
+                            { id: "btn3", text: "Btn3" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            component = dropDownButton.popup.element.find(".k-menu-button");
+
+            assert.equal(component.prop("tagName"), "LI");
+            assert.equal(component.find(".k-overflow-button").length, 3); // only the items - main item is not rendering in overflow
+        });
+
+        it("Overflow DropDownButton items are wrapped in a li tag which has data-uid attribute", function() {
+            var dropDownButton = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", text: "foo", menuButtons: [
+                            { id: "btn1", text: "Btn1" },
+                            { id: "btn2", text: "Btn2" },
+                            { id: "btn3", text: "Btn3" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            component = dropDownButton.popup.element.find(".k-menu-button");
+
+            assert.equal(component.prop("tagName"), "LI");
+            assert.isOk(component.data("uid"));
+        });
+
+        it("DropDownButton popup is as wide as the button wrapper", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "Very long text for the button", menuButtons: [
+                            { id: "btn1", text: "Btn1" },
+                            { id: "btn2", text: "Btn2" },
+                            { id: "btn3", text: "Btn3" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var dropDownButton = container.find("#dropDownButton").data("kendoDropDownButton");
+            var button = dropDownButton.element;
+
+            click(button);
+
+            roughlyEqual(dropDownButton.element.outerWidth(), dropDownButton.menu._popup.element.outerWidth(), 2);
+        });
+
+        it("options.attribute are attached to the main button", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", attributes: { "class": "foo" }, menuButtons: [
+                            { id: "btn1", text: "Btn1" },
+                            { id: "btn2", text: "Btn2" },
+                            { id: "btn3", text: "Btn3" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            assert.isOk($("#foo").hasClass("foo"));
+        });
+
+        it("options.attribute are attached to the menu buttons", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                            { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                            { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            assert.isOk($("#btn1").hasClass("foo"));
+            assert.isOk($("#btn2").hasClass("bar"));
+            assert.isOk($("#btn3").hasClass("baz"));
+        });
+
+        it("default classes are preserved on menu buttons", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                            { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                            { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            assert.isOk($("#btn1 > span").hasClass("k-link"));
+            assert.isOk($("#btn2 > span").hasClass("k-link"));
+            assert.isOk($("#btn3 > span").hasClass("k-link"));
+            assert.isOk($("#btn1 > span").hasClass("k-menu-link"));
+            assert.isOk($("#btn2 > span").hasClass("k-menu-link"));
+            assert.isOk($("#btn3 > span").hasClass("k-menu-link"));
+        });
+
+        it("dropDownButton is initially hidden if hidden option is set to true", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", hidden: true, menuButtons: [
+                            { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                            { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                            { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var button = toolbar.element.find(".k-menu-button");
+            assert.isOk(button.hasClass("k-hidden"));
+
+            var overflowButton = toolbar.popup.element.find("#foo_overflow");
+            assert.isOk(overflowButton.parent().hasClass("k-overflow-hidden"));
         });
 
         /* SEPARATOR */
@@ -1487,7 +1767,7 @@
                 ]
             });
 
-            var splitContainer = $(".k-split-container");
+            var splitContainer = $("[data-role=buttonmenu] > ul");
 
             assert.isOk(splitContainer.hasClass("k-group"));
             assert.isOk(splitContainer.hasClass("k-menu-group"));
@@ -1500,17 +1780,18 @@
                 items: [
                     {
                         type: "splitButton",
+                        id: "splitButton",
                         menuButtons: [
-                            { text: "foo", id: "foo", togglable: true, group: "foo", selected: true },
-                            { text: "bar", id: "bar", togglable: true, group: "foo" },
-                            { text: "baz", id: "baz", togglable: true, group: "foo" }
+                            { text: "foo", id: "foo", group: "foo" },
+                            { text: "bar", id: "bar", group: "foo" },
+                            { text: "baz", id: "baz", group: "foo" }
                         ]
                     }
                 ]
             });
 
-            var splitContainer = $(".k-split-container");
-            var items = splitContainer.children();
+            var splitButton = $("#splitButton").data("kendoSplitButton");
+            var items = splitButton.items();
 
             assert.equal(items.length, 3);
 

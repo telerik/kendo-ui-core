@@ -4085,6 +4085,86 @@ declare namespace kendo.ui {
     interface DrawerHideEvent extends DrawerEvent {
     }
 
+    class DropDownButton extends kendo.ui.Widget {
+
+        static fn: DropDownButton;
+
+        options: DropDownButtonOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): DropDownButton;
+
+        constructor(element: Element, options?: DropDownButtonOptions);
+
+
+        enable(state: boolean, items: string): void;
+        enable(state: boolean, items: JQuery): void;
+        hide(items: string): void;
+        hide(items: JQuery): void;
+        show(items: string): void;
+        show(items: JQuery): void;
+        items(): JQuery;
+        toggle(): void;
+        open(): void;
+        close(): void;
+
+    }
+
+    interface DropDownButtonItem {
+        attributes?: any | undefined;
+        click?: Function | undefined;
+        data?: Function | undefined;
+        enabled?: boolean | undefined;
+        hidden?: boolean | undefined;
+        icon?: string | undefined;
+        id?: string | undefined;
+        imageUrl?: string | undefined;
+        spriteCssClass?: string | undefined;
+        text?: string | undefined;
+    }
+
+    interface DropDownButtonPopup {
+        appendTo?: string | undefined;
+    }
+
+    interface DropDownButtonMessages {
+        labelSuffix?: string | undefined;
+    }
+
+    interface DropDownButtonOptions {
+        name?: string | undefined;
+        enabled?: boolean | undefined;
+        fillMode?: string | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        imageUrl?: string | undefined;
+        items?: DropDownButtonItem[] | undefined;
+        itemTemplate?: string|Function | undefined;
+        popup?: DropDownButtonPopup | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        spriteCssClass?: string | undefined;
+        themeColor?: string | undefined;
+        messages?: DropDownButtonMessages | undefined;
+        click?(e: DropDownButtonClickEvent): void;
+        open?(e: DropDownButtonEvent): void;
+        close?(e: DropDownButtonEvent): void;
+    }
+    interface DropDownButtonEvent {
+        sender: DropDownButton;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface DropDownButtonClickEvent extends DropDownButtonEvent {
+        originalEvent?: any | undefined;
+        target?: JQuery | undefined;
+        id?: string | undefined;
+    }
+
     class DropDownList extends kendo.ui.Widget {
 
         static fn: DropDownList;
@@ -9994,6 +10074,86 @@ declare namespace kendo.ui {
         item?: JQuery | undefined;
     }
 
+    class SplitButton extends kendo.ui.Widget {
+
+        static fn: SplitButton;
+
+        options: SplitButtonOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): SplitButton;
+
+        constructor(element: Element, options?: SplitButtonOptions);
+
+
+        enable(state: boolean, items: string): void;
+        enable(state: boolean, items: JQuery): void;
+        hide(items: string): void;
+        hide(items: JQuery): void;
+        show(items: string): void;
+        show(items: JQuery): void;
+        items(): JQuery;
+        toggle(): void;
+        open(): void;
+        close(): void;
+
+    }
+
+    interface SplitButtonItem {
+        attributes?: any | undefined;
+        click?: Function | undefined;
+        data?: Function | undefined;
+        enabled?: boolean | undefined;
+        hidden?: boolean | undefined;
+        icon?: string | undefined;
+        id?: string | undefined;
+        imageUrl?: string | undefined;
+        spriteCssClass?: string | undefined;
+        text?: string | undefined;
+    }
+
+    interface SplitButtonPopup {
+        appendTo?: string | undefined;
+    }
+
+    interface SplitButtonMessages {
+        labelSuffix?: string | undefined;
+    }
+
+    interface SplitButtonOptions {
+        name?: string | undefined;
+        arrowIcon?: string | undefined;
+        enabled?: boolean | undefined;
+        fillMode?: string | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        imageUrl?: string | undefined;
+        items?: SplitButtonItem[] | undefined;
+        itemTemplate?: string|Function | undefined;
+        popup?: SplitButtonPopup | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        spriteCssClass?: string | undefined;
+        themeColor?: string | undefined;
+        messages?: SplitButtonMessages | undefined;
+        click?(e: SplitButtonClickEvent): void;
+        open?(e: SplitButtonEvent): void;
+        close?(e: SplitButtonEvent): void;
+    }
+    interface SplitButtonEvent {
+        sender: SplitButton;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface SplitButtonClickEvent extends SplitButtonEvent {
+        originalEvent?: any | undefined;
+        target?: JQuery | undefined;
+        id?: string | undefined;
+    }
 
     class Splitter extends kendo.ui.Widget {
 
@@ -25421,6 +25581,10 @@ interface JQuery {
     kendoDraggable(options: kendo.ui.DraggableOptions): JQuery;
     data(key: "kendoDraggable"): kendo.ui.Draggable | undefined;
 
+    kendoDropDownButton(): JQuery;
+    kendoDropDownButton(options: kendo.ui.DropDownButtonOptions): JQuery;
+    data(key: "kendoDropDownButton"): kendo.ui.DropDownButton;
+
     kendoDropDownList(): JQuery;
     kendoDropDownList(options: kendo.ui.DropDownListOptions): JQuery;
     data(key: "kendoDropDownList"): kendo.ui.DropDownList | undefined;
@@ -25716,6 +25880,10 @@ interface JQuery {
     kendoSparkline(): JQuery;
     kendoSparkline(options: kendo.dataviz.ui.SparklineOptions): JQuery;
     data(key: "kendoSparkline"): kendo.dataviz.ui.Sparkline | undefined;
+
+    kendoSplitButton(): JQuery;
+    kendoSplitButton(options: kendo.ui.SplitButtonOptions): JQuery;
+    data(key: "kendoSplitButton"): kendo.ui.SplitButton;
 
     kendoSplitter(): JQuery;
     kendoSplitter(options: kendo.ui.SplitterOptions): JQuery;

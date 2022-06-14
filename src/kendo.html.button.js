@@ -113,12 +113,10 @@ var __meta__ = { // jshint ignore:line
             }).each(function(idx, el) {
                 if (el.nodeType == 1 || el.nodeType == 3 && kendo.trim(el.nodeValue).length > 0) {
                     if (el.nodeType === 3) {
-                        var parent = el.parentNode;
                         var newSpan = document.createElement('span');
 
-                        newSpan.appendChild(document.createTextNode(el.nodeValue));
-                        parent.replaceChild(newSpan, el);
-
+                        el.parentNode.insertBefore(newSpan, el);
+                        newSpan.appendChild(el);
                         el = newSpan;
                     }
 

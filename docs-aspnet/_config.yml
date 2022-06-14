@@ -106,9 +106,9 @@ navigation:
      "vs-integration-mvc":
         title: "Visual Studio Integration"
         position: 5
-     "vs-integration/vs-code-integration":
+     "vs-code-integration":
         title: "VS Code Integration"
-        position: 50
+        position: 6
      "installation/adding-client-side-resources/scripts":
         title: "Creating Custom Script Bundles"
         position: 5
@@ -242,7 +242,7 @@ navigation:
         position: 60
      "html-helpers":
         title: "Components"
-        position: 6
+        position: 7
      "html-helpers/datasource":
         title: "Data Source"
      "html-helpers/data-management":
@@ -404,7 +404,7 @@ navigation:
         title: "PDFViewer"
      "styles-and-layout":
         title: "Styles and Appearance"
-        position: 7
+        position: 8
      "styles-and-layout/design-assets":
         title: "Design Assets"
         position: 2
@@ -416,19 +416,19 @@ navigation:
         position: 4
      "globalization":
         title: "Globalization"
-        position: 8
+        position: 9
      "accessibility":
         title: "Accessibility"
-        position: 9
+        position: 10
      "deployment":
         title: "Deployment"
-        position: 10
+        position: 11
      "integration-with-other-telerik-products":
         title: "Integration with other Telerik Products"
-        position: 11
+        position: 12
      "cloud-integration":
         title: "Cloud Integration"
-        position: 12
+        position: 13
      "cloud-integration/amazon-web-services":
         title: "Amazon Web Services"
         position: 2
@@ -437,7 +437,7 @@ navigation:
         position: 3
      "backwards-compatibility":
         title: "Breaking Changes"
-        position: 13
+        position: 14
      "*appearance":
         title: "Appearance"
      "*/binding":

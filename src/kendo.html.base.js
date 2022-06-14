@@ -33,7 +33,8 @@ var __meta__ = { // jshint ignore:line
         _addClasses: function() {
             var that = this,
                 options = that.options,
-                stylingOptions = options.stylingOptions;
+                stylingOptions = options.stylingOptions,
+                previouslyAddedClasses = that.wrapper.data("added-classes");
 
             stylingOptions = stylingOptions.map(function(option) {
                 var validFill;
@@ -58,6 +59,11 @@ var __meta__ = { // jshint ignore:line
                 });
             });
 
+            if (previouslyAddedClasses) {
+                that.wrapper.removeClass(previouslyAddedClasses.join(" "));
+            }
+
+            that.wrapper.data("added-classes", stylingOptions);
             that.wrapper.addClass(stylingOptions.join(" "));
         },
         html: function() {

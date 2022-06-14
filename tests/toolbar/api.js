@@ -17,7 +17,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -110,6 +110,65 @@
 
             assert.equal(toolbar.element.find(".k-split-button").length, 0, "SplitButton is removed from the toolbar");
             assert.equal(toolbar.popup.element.find(".k-split-button").length, 0, "SplitButton is removed from the overflow container");
+        });
+
+        it("remove method removes dropDownButton by the ID of its main button", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "DropDown Button", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" },
+                            { id: "option4", text: "Option 4" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            toolbar.remove($("#dropDownButton"));
+
+            assert.equal(toolbar.element.find(".k-menu-button").length, 0, "DropDownButton is removed from the toolbar");
+            assert.equal(toolbar.popup.element.find(".k-menu-button").length, 0, "DropDownButton is removed from the overflow container");
+        });
+
+        it("remove method removes dropDownButton with 'overflow: always'", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "DropDown Button", overflow: "always", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" },
+                            { id: "option4", text: "Option 4" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            toolbar.remove($("#dropDownButton_overflow"));
+
+            assert.equal(toolbar.popup.element.find(".k-menu-button").length, 0, "DropDownButton is removed from the overflow container");
+        });
+
+        it("remove method removes dropDownButton with 'overflow: auto'", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "DropDown Button", overflow: "auto", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" },
+                            { id: "option4", text: "Option 4" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            toolbar.remove($("#dropDownButton"));
+
+            assert.equal(toolbar.element.find(".k-menu-button").length, 0, "DropDownButton is removed from the toolbar");
+            assert.equal(toolbar.popup.element.find(".k-menu-button").length, 0, "DropDownButton is removed from the overflow container");
         });
 
         it("remove method removes separator", function() {
@@ -243,7 +302,7 @@
 
             toolbar.enable("#splitButton", false);
 
-            var popup = $("#splitButton").parent().data("kendoPopup");
+            var popup = $("#splitButton").data("kendoSplitButton").menu._popup;
 
             click($(".k-split-button-arrow"));
 
@@ -256,6 +315,48 @@
                 items: [
                     {
                         type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            toolbar.enable("#option2", false);
+
+            assert.isOk($("#option2").hasClass("k-disabled"));
+            assert.isOk($("#option2_overflow").hasClass("k-disabled"));
+        });
+
+        it("enable method disables DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "DropDown Button", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            toolbar.enable("#dropDownButton", false);
+
+            var popup = $("#dropDownButton").data("kendoDropDownButton").menu._popup;
+
+            click($(".k-menu-button"));
+
+            assert.isOk(!popup.visible(), "popup does not open");
+            assert.isOk($("#dropDownButton").hasClass("k-disabled"));
+        });
+
+        it("enable method disables menuButton from DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "DropDown Button", menuButtons: [
                             { id: "option1", text: "Option 1" },
                             { id: "option2", text: "Option 2" },
                             { id: "option3", text: "Option 3" }
@@ -356,7 +457,6 @@
             toolbar.hide("#foo");
 
             assert.isOk($("#foo").hasClass("k-hidden"));
-            assert.isOk($("#foo").hasClass("k-hidden"));
             assert.isOk($("#foo").is(":hidden"));
 
             assert.isOk($("#foo_overflow").closest("li").hasClass("k-overflow-hidden"));
@@ -419,6 +519,43 @@
             assert.isOk($("li.k-split-button").is(":hidden"));
         });
 
+        it("Hide method hides a button from DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [{
+                    type: "dropDownButton",
+                    text: "main",
+                    menuButtons: [
+                        { text: "foo", id: "foo" },
+                        { text: "bar", id: "bar" }
+                    ]
+                }]
+            }).data("kendoToolBar");
+
+            toolbar.hide("#foo");
+            assert.isOk($("#foo").is(":hidden"));
+
+            assert.isOk($("#foo_overflow").is(":hidden"));
+        });
+
+        it("Hide method hides a DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [{
+                    type: "dropDownButton",
+                    text: "main",
+                    menuButtons: [
+                        { text: "foo", id: "foo" },
+                        { text: "bar", id: "bar" }
+                    ]
+                }]
+            }).data("kendoToolBar");
+
+            toolbar.hide(".k-menu-button");
+            assert.isOk($(".k-menu-button").is(":hidden"));
+
+            assert.isOk($("li.k-menu-button").hasClass("k-overflow-hidden"));
+            assert.isOk($("li.k-menu-button").is(":hidden"));
+        });
+
         it("After hiding a button the button group updates k-group-start button", function() {
             var toolbar = container.kendoToolBar({
                 items: [
@@ -471,9 +608,28 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.hide($("#splitButton_wrapper"));
+            toolbar.hide($("#splitButton"));
 
-            assert.isOk($("#splitButton_wrapper").hasClass("k-hidden"));
+            assert.isOk($("#splitButton").parent().hasClass("k-hidden"));
+        });
+
+        it("Hide method hides a DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "dropDownButton", text: "Split Button", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" },
+                            { id: "option4", text: "Option 4" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            toolbar.hide($("#dropDownButton"));
+
+            assert.isOk($("#dropDownButton").hasClass("k-hidden"));
         });
 
         it("Show method shows hidden button", function() {
@@ -524,9 +680,9 @@
                 }]
             }).data("kendoToolBar");
 
-            toolbar.show("#splitButton_wrapper");
+            toolbar.show("#splitButton");
             //toolbar element is `div`, overflow element is `li`
-            assert.isOk($("#splitButton_wrapper").is(":visible"));
+            assert.isOk($("#splitButton").parent().is(":visible"));
         });
 
         it("Show method shows hidden button in SplitButton", function() {
@@ -534,6 +690,41 @@
                 items: [{
                     type: "splitButton",
                     id: "splitButton",
+                    text: "split button",
+                    menuButtons: [
+                        { text: "foo", id: "foo" },
+                        { text: "bar", id: "bar", hidden: true }
+                    ]
+                }]
+            }).data("kendoToolBar");
+
+            toolbar.show($("#bar"));
+            assert.isOk(!$("#bar").hasClass(".k-hidden"));
+        });
+
+        it("Show method shows DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [{
+                    type: "dropDownButton",
+                    id: "dropDownButton",
+                    hidden: true,
+                    text: "split button",
+                    menuButtons: [
+                        { text: "foo", id: "foo" },
+                        { text: "bar", id: "bar" }
+                    ]
+                }]
+            }).data("kendoToolBar");
+
+            toolbar.show("#dropDownButton");
+            assert.isOk($("#dropDownButton").is(":visible"));
+        });
+
+        it("Show method shows hidden button in DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [{
+                    type: "dropDownButton",
+                    id: "dropDownButton",
                     text: "split button",
                     menuButtons: [
                         { text: "foo", id: "foo" },
@@ -600,7 +791,28 @@
             assert.isOk(!($("#splitButton_wrapper").hasClass("k-state-hidden")));
         });
 
-        it("toggle method toggles splitButton's togglabale option", function() {
+        it("Show method shows hidden DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", hidden: true, id: "dropDownButton", text: "DropDown Button", menuButtons: [
+                            { id: "option1", text: "Option 1" },
+                            { id: "option2", text: "Option 2" },
+                            { id: "option3", text: "Option 3" },
+                            { id: "option4", text: "Option 4" }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            toolbar.show($("#dropDownButton_wrapper"));
+
+            assert.isOk(!($("#dropDownButton_wrapper").hasClass("k-hidden")));
+            assert.isOk(!($("#dropDownButton_wrapper").hasClass("k-state-hidden")));
+        });
+
+        // togglebale option does not make sense for splitbutton
+        it.skip("toggle method toggles splitButton's togglabale option", function() {
             var toolbar = container.kendoToolBar({
                 items: [
                     {

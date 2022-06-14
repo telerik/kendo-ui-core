@@ -25,6 +25,8 @@
         "./kendo.popup",
         "./kendo.notification",
         "./kendo.tooltip",
+        "./kendo.splitbutton",
+        "./kendo.dropdownbutton",
         "./kendo.toolbar",
         "./kendo.list",
         "./kendo.calendar",

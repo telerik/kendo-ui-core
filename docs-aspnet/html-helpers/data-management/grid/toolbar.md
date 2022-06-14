@@ -84,11 +84,24 @@ The following example demonstrates how to add a custom command to the Toolbar:
 
 ## Toolbar Template
 
-The {{site.product}} Grid also supports using a template for the Toolbar. You can define a template by using the [`ClientTemplate()`](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#clienttemplatesystemstring) or the [`ClientTemplateId()`](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#clienttemplateidsystemstring) configuration options.
+The {{site.product}} Grid also supports using a template for the Toolbar. You can define a template by using the [`ClientTemplate()`](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#clienttemplatesystemstring) or the [`ClientTemplateId()`](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#clienttemplateidsystemstring) configuration options.{% if site.core %} For TagHelper Grid configuration use the `client-template` or `client-template-id` properties.
+{% endif %} 
+
+```HtmlHelper
+    .ToolBar(toolbar => {
+        toolbar.ClientTemplateId("GridToolbarTemplate");
+    })
+```
+{% if site.core %}
+```TagHelper
+    <toolbar client-template-id="GridToolbarTemplate">
+    </toolbar>
+```
+{% endif %} 
 
 When you use a Toolbar Template, and you also want to use a built-in command, then add the markup for the desired command. The following example demonstrates how to add the `Pdf` and `Search` commands to the Toolbar Template demonstrated in the [{{site.product}} Grid Toolbar Template Demo](https://demos.telerik.com/{{site.platform}}/grid/toolbar-template).
 
-```
+```HtmlHelper
     <script id="GridToolbarTemplate" type="text/x-kendo-template">
         <div class="refreshBtnContainer">
             <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
@@ -120,6 +133,31 @@ When you use a Toolbar Template, and you also want to use a built-in command, th
         </span>
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <script id="GridToolbarTemplate" type="text/html">
+        <div class="refreshBtnContainer">
+            <a href="\\#" class="k-pager-refresh k-link k-button k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
+        </div>
+        <div class="toolbar">
+            <label class="category-label" for="category">Show products by category:</label>
+            <kendo-dropdownlist name="categories" style="width:150px"
+                                datatextfield="CategoryName"
+                                datavaluefield="CategoryId"
+                                option-label="All"
+                                auto-bind="false"
+                                on-change="categoriesChange"
+                                is-in-client-template="true">
+                <datasource type="DataSourceTagHelperType.Custom">
+                    <transport>
+                        <read url="@Url.Action("ToolbarTemplate_Categories", "Grid")" />
+                    </transport>
+                </datasource>
+            </kendo-dropdownlist>
+        </div>
+    </script>
+```
+{% endif %} 
 
 ## See Also
 * [Batch Editing of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing)

@@ -10,7 +10,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -288,6 +288,7 @@
             assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is hidden before the resize");
 
             container.width(100);
+
             toolbar.resize();
 
             assert.equal(toolbar.overflowAnchor.css("visibility"), "visible", "Overflow anchor is visible after the resize");
@@ -320,7 +321,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
