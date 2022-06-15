@@ -458,25 +458,6 @@ Returns the menu items as DOM elements wrapped in jQuery collection.
 
 `jQuery`
 
-### toggle
-
-Toggles the visibility of the button menu.
-
-#### Example
-
-    <button id="dropdownbutton" type="button">Button</button>
-    <script>
-        $("#dropdownbutton").kendoDropDownButton({
-            items:[
-                { id: "item1", text: "Item 1" },
-                { id: "item2", text: "Item 2" }
-            ]
-        });
-        var button = $("#dropdownbutton").data("kendoDropDownButton");
-        
-        button.toggle();
-    </script>
-
 ### open
 
 Opens the button menu.

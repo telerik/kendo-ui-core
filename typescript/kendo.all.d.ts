@@ -4107,7 +4107,6 @@ declare namespace kendo.ui {
         show(items: string): void;
         show(items: JQuery): void;
         items(): JQuery;
-        toggle(): void;
         open(): void;
         close(): void;
 
@@ -10096,7 +10095,6 @@ declare namespace kendo.ui {
         show(items: string): void;
         show(items: JQuery): void;
         items(): JQuery;
-        toggle(): void;
         open(): void;
         close(): void;
 

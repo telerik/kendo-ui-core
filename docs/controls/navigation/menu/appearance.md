@@ -72,6 +72,49 @@ New Rendering:
 ```
 <!--*-->
 
+The following example showcases how to customize the styles of the **Menu** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <ul id="menu">
+      <li>Item 1
+        <ul>
+          <li>Sub Item 1</li>
+          <li>Sub Item 2</li>
+          <li>Sub Item 3</li>
+        </ul>
+      </li>
+      <li>Item 2
+        <ul>
+          <li>Sub Item 1</li>
+          <li>Sub Item 2</li>
+          <li>Sub Item 3</li>
+        </ul>
+      </li>
+    </ul>
+    <script>
+      $("#menu").kendoMenu();
+    </script>
+    <style>
+      /* applies light-blue background to the Menu items in the new rendering. */
+      #menu .k-menu-link-text{ 
+        background-color: lightblue !important;
+      }
+
+      /* .k-menu-expand-arrow and .k-icon elements are different elements in the new rendering, thus the green and the red border will be applied when a version after 2022 R1 is selected. 
+      .k-menu-expand-arrow and .k-icon is the same element in the old rendering. Thus, only the green border will be applied when a version prior to 2022 R1 is selected */
+
+      #menu .k-menu-expand-arrow{
+        border: 2px solid red !important;
+      }
+
+      #menu .k-icon{
+        border: 2px solid green !important;
+      }
+    </style>
+```
+
+
 ## See Also
 
 * [Styling Overview Article]({% slug components_rendering_overview %})

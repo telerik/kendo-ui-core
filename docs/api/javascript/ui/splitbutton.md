@@ -213,7 +213,7 @@ Specifies the image of the item.
 
 ### items.spriteCssClass `String`
 
-Specifies custom css class added to the srite icon element of the item.
+Specifies the custom CSS class that is added to the sprite icon element of the item.
 
 ### items.text `String`
 
@@ -476,25 +476,6 @@ Returns the menu items as DOM elements wrapped in jQuery collection.
 #### Returns
 
 `jQuery`
-
-### toggle
-
-Toggles the visibility of the button menu.
-
-#### Example
-
-    <button id="splitbutton" type="button">Button</button>
-    <script>
-        $("#splitbutton").kendoSplitButton({
-            items:[
-                { id: "item1", text: "Item 1" },
-                { id: "item2", text: "Item 2" }
-            ]
-        });
-        var button = $("#splitbutton").data("kendoSplitButton");
-        
-        button.toggle();
-    </script>
 
 ### open
 

@@ -309,6 +309,51 @@ With the new rendering, you can obtain a reference to the `span` element contain
 $(".k-color-preview-mask") // Returns a reference to span element containing the selected color in the new rendering.```
 ```
 
+The following example showcases how to customize the styles of the **ColorPicker** in both the new, and the old rendering:
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <input id="colorpicker" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        value: 'white'
+      })
+    </script>
+
+    <style>
+      /*  NEW RENDERING */
+      /*  The style below will works with versions R1 2022 and later */ 
+      .k-colorpicker .k-input-inner, .k-input .k-input-inner{ 
+        background-color: #50C878; /* Applies green background to the color input element in the popup */
+      }    
+
+
+      .k-colorpicker .k-input-button{ 
+        background-color: lime !important; /* Applies lime background ColorPicker dropdown button element */
+      }
+
+      .k-colorpicker .k-color-preview-mask{ /* Applies green border to the color preview element */
+        border: 2px solid green !important;
+      }
+
+
+      /*  OLD RENDERING */      
+      /*  The style below will works with versions prior to R1 2022 */ 
+      
+      .k-colorpicker .k-select{ 
+        background-color: lightblue; /* Applies light blue background to the ColorPicker dropdown button element */
+      }
+
+      .k-colorpicker .k-selected-color{ /* applies blue border to the ColorPicker preview element in the old rendering */
+        border: 2px solid #1589FF !important;
+      }      
+ 
+      .k-colorpicker-popup .k-textbox>.k-input{ /* Applies blue border to ColorPicker input element in the popup in the old rendering*/
+        border: 2px solid blue !important;
+      }
+
+    </style>
+```
+
 
 ## See Also
 

@@ -1,5 +1,5 @@
 ---
-title: MultiSelect Appearance
+title: Appearance
 page_title: jQuery MultiSelect Documentation | MultiSelect Appearance
 description: "Learn how to apply different styling options to the MultiSelect widget."
 slug: appearance_kendoui_multiselect_widget
@@ -202,6 +202,150 @@ New Rendering:
 To achieve the same look and feel as the old rendering, you must the update the element references.
 
 > When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
+
+The following example showcases how to customize the styles of the **MultiSelect** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <select id="multiselect" multiple="multiple"></select>
+      <script>
+        var dataSource = new kendo.data.DataSource({
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/products",
+              dataType: "jsonp"
+            }
+          }
+        });
+        $("#multiselect").kendoMultiSelect({
+          dataSource: dataSource,
+          dataTextField: "ProductName",
+          dataValueField: "ProductID",         
+          value: [5]
+        });
+      </script>
+      <style>
+        /*  NEW RENDERING */
+        /*  The style below will works with versions R1 2022 and later*/ 
+        
+        .k-multiselect .k-chip{ /* customize the styles of the selected items in the input */
+          background: lightgreen
+        }
+
+        #multiselect-list .k-list-item{ /* customize the styles of the items in the popup */
+          background-color: #FFDFDD !important;
+        }    
+
+        #multiselect-list .k-selected{ /* customize the styles of the selected items in the popup */
+          background-color: #FBBBB9 !important;
+          border: 2px solid #E56E94 !important;
+        }   
+
+        /*  OLD RENDERING */
+        /*  The style below will works with versions prior to R1 2022 */ 
+
+        #multiselect-list .k-item{ /* customize the styles of the items in the popup */
+          background-color: #FFE5B4 !important;
+        }
+
+        #multiselect-list .k-state-selected{ /* customize the styles of the selected items in the popup */
+          background-color: #FED8B1 !important;
+          border: 2px solid orange !important;
+          color: brown !important;
+        }
+        
+        #multiselect-list .k-state-selected:hover{ /* customize the styles of the selected items in the popup */
+          background-color: orange !important;
+          color: white !important;
+        }
+
+        #multiselect_taglist li{ /* customize the styles of the selected items in the input */
+          background-color: orange !important;
+        }
+      </style>
+```
+
+With the new rendering different classes should be used in order to customize the [MultiSelect templates](/controls/editors/multiselect/templates). 
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <select id="customers" style="width: 400px;"></select>
+    <script>
+      $(document).ready(function() {
+        $("#customers").kendoMultiSelect({          
+          dataTextField: "ContactName",
+          dataValueField: "CustomerID",
+          groupTemplate: "Group template: #: data #",
+          fixedGroupTemplate: "Fixed header: #: data #",
+          footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found',
+          noDataTemplate: 'No Data!',
+          filter: 'contains',
+          height: 400,
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+          }
+        });
+      });
+    </script>
+    <style>
+
+      /*  NEW RENDERING */
+      /*  The styles below will work with versions R1 2022 or later*/ 
+
+      /*customize groupTemplate */
+      #customers-list .k-list-item-group-label{
+        background: blue !important;
+        color: yellow !important;
+        font-size: 18px;
+      }
+
+      /*customize fixedGroupTemplate */
+      #customers-list .k-list-group-sticky-header{
+        background: turquoise !important;
+      }
+
+      /*customize footerTemplate */
+      #customers-list .k-list-footer{
+        background: darkCyan !important;
+        color: white;
+      }
+
+      /*customize nodataTemplate */
+      #customers-list .k-no-data{
+        color: green !important;
+        font-weight: bold;
+      }
+
+      /*  OLD RENDERING */
+      /*  The styles below will work with versions prior to R1 2022 */ 
+
+      /*customize groupTemplate */
+      #customers-list .k-item>.k-group{
+        background: red !important;
+        color: white !important;
+      }
+
+      /*customize fixedGroupTemplate */
+      #customers-list .k-group-header{
+        background: salmon !important;
+      }
+
+      /*customize footerTemplate */
+      #customers-list .k-footer{
+        background: tomato !important;
+        color: white;
+      }
+
+      /*customize nodataTemplate */
+      #customers-list .k-nodata{        
+        color: red;
+      }
+    </style>
+```
 
 ## See Also
 

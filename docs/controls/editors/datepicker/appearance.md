@@ -247,6 +247,37 @@ $(".k-button") // Returns a reference to the calendar button element in the new 
 $(".k-input-button") // Returns a reference to the calendar button element in the new rendering.
 ```
 
+The following example showcases how to change the background colors of the input and button elements of the **DatePicker** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <div id="parent">
+      <input id="datepicker" />
+    </div>
+
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      #parent .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      #parent .k-select {
+        background-color: red !important; /* Applies red color to the button element BEFORE R1 2022 */
+      }
+
+      /* Doesn't work BEFORE R1 2022 */
+      #parent .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+      #parent .k-input-button {
+        background-color: yellow !important; /* Applies yellow color to the button element AFTER R1 2022 */
+      }
+    </style>
+
+    <script>
+      $("#datepicker").kendoDatePicker();
+    </script>
+```
+
 ## See Also
 
 * [Styling Overview Article]({% slug components_rendering_overview %})

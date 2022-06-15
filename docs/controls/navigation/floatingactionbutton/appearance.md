@@ -202,6 +202,65 @@ To achieve the same look and feel as the old rendering, you must update the elem
 
 > When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
+The following example showcases how to customize the styles of the **FloatingActionButton** depending on the selected [themeColor](#themeColor) in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <button id="fab-primary"></button>
+    <button id="fab-secondary"></button>
+    <button id="fab-tertiary"></button>
+
+    <script>
+      $('#fab-primary').kendoFloatingActionButton({
+        themeColor: 'primary',
+        icon: 'home',
+        align: 'top start'
+      });
+      $('#fab-secondary').kendoFloatingActionButton({
+        themeColor: 'secondary',
+        icon: 'home',
+        align: 'top center'
+      });
+      $('#fab-tertiary').kendoFloatingActionButton({
+        themeColor: 'tertiary',
+        icon: 'home',
+        align: 'top end'
+      });
+    </script>
+
+    <style>
+      /*  NEW RENDERING */
+      /*  The style below will works with versions R1 2022 and later */      
+
+      #fab-primary.k-fab-solid-primary{ /* applies border to primary FAB in the new rendering */
+        border: 2px solid yellow !important;
+      }
+
+      #fab-secondary.k-fab-solid-secondary{ /* applies border to secondary FAB in the new rendering */
+        border: 2px solid fuchsia !important;
+      }
+
+      #fab-tertiary.k-fab-solid-tertiary{ /* applies border to tertiary FAB in the new rendering */
+        border: 2px solid lime !important;
+      }
+
+
+      /*  OLD RENDERING */
+      /*  The style below will works with versions prior to R1 2022 */
+
+      #fab-primary.k-fab-primary{ /* applies border to primary FAB in the old rendering */
+        border: 2px solid red !important;
+      }
+
+      #fab-secondary.k-fab-secondary{ /* applies border to secondary FAB in the old rendering */
+        border: 2px solid blue !important;
+      }
+
+      #fab-tertiary.k-fab-tertiary{ /* applies border to tertiary FAB in the old rendering */
+        border: 2px solid green !important;
+      }
+    </style>
+```
 
 ## Best Practices
 

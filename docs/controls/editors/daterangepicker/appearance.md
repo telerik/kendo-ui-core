@@ -142,7 +142,40 @@ $("#daterangepicker").kendoDateRangePicker({
 </script>
 ```
 
+## Visual Backwards Compatibility
+
 > The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+
+The following example showcases how to change the background colors of the input elements of the **DateRangePicker** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <div id="parent">
+      <div id="daterangepicker"></div>
+    </div>
+
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      #parent .k-textbox-container:nth-of-type(1) .k-textbox {
+        background-color: #0071bc !important; /* Applies blue color to the first input BEFORE R1 2022 */
+      }
+      #parent .k-textbox-container:nth-of-type(3) .k-textbox {
+        background-color: red !important; /* Applies red color to the second input BEFORE R1 2022 */
+      }
+
+      /* Doesn't work BEFORE R1 2022 */
+      #parent .k-floating-label-container:nth-of-type(1) .k-input-inner {
+        background-color: #2e8540 !important; /* Applies green color to the first input AFTER R1 2022 */
+      }
+      #parent .k-floating-label-container:nth-of-type(3) .k-input-inner {
+        background-color: yellow !important; /* Applies yellow color to the second input AFTER R1 2022 */
+      }
+    </style>
+
+    <script>
+      $("#daterangepicker").kendoDateRangePicker();
+    </script>
+```
 
 ## See Also
 

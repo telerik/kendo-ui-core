@@ -201,9 +201,13 @@ navigation:
         title: "ButtonGroup"
     "controls/navigation/drawer":
         title: "Drawer"
+    "controls/navigation/dropdownbutton":
+        title: "DropDownButton"
     "controls/navigation/menu/contextmenu":
         title: "ContextMenu"
         position: 6
+    "controls/navigation/splitbutton":
+        title: "SplitButton"
     "controls/navigation/stepper":
         title: "Stepper"
     "controls/navigation/wizard":
@@ -2226,10 +2230,12 @@ intro_columns:
       "Breadcrumb": "overview_kendoui_breadcrumb_widget"
       "Button": "overview_kendoui_button_widget"
       "ButtonGroup": "overview_kendoui_buttongroup_widget"
+      "DropDownButton": "overview_kendoui_dropdownbutton_widget"
       "Drawer": "overview_kendoui_drawer_widget"
       "FloatingActionButton": "overview_kendoui_floatingactionbutton_widget"
       "Menu": "overview_kendoui_menu_widget"
       "PanelBar": "overview_kendoui_panelbar_widget"
+      "SplitButton": "overview_kendoui_splitbutton_widget"
       "Stepper": "overview_stepper_widget"
       "TabStrip": "overview_kendoui_tabstrip_widget"
       "Timeline": "overview_kendoui_timeline_widget"

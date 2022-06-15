@@ -120,16 +120,47 @@ $("#timepicker").kendoTimePicker({
 
 > The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
 
-Previously, you had to obtain a reference to the timepicker element through the `k-textbox` class.
+Previously, you had to obtain a reference to the timepicker element through the `k-input` class.
 
 ```javascript
-$(".k-timepicker") // Returns a reference to the TimePicker element in the old rendering.
+$(".k-input") // Returns a reference to the TimePicker element in the old rendering.
 ```
 
 With the new rendering, you must target the timepicker element by using the `k-input-inner` class.
 
 ```javascript
 $(".k-input-inner") // Returns a reference to the TimePicker element in the new rendering.
+```
+
+The following example showcases how to change the background colors of the input and button elements of the **TimePicker** in both the new, and the old rendering:
+
+```dojo
+   <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <div id="parent">
+      <input id="timepicker" />
+    </div>
+
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      #parent .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      #parent .k-select {
+        background-color: red; /* Applies red color to the date button element BEFORE R1 2022 */
+      }
+
+      /* Doesn't work BEFORE R1 2022 */
+      #parent .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+      #parent .k-input-button {
+        background-color: yellow; /* Applies yellow color to the date button element AFTER R1 2022 */
+      }
+    </style>
+
+    <script>
+      $("#timepicker").kendoTimePicker();
+    </script>
 ```
 
 ## See Also

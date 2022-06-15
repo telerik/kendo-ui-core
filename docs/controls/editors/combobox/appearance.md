@@ -347,6 +347,147 @@ With the new rendering, you must target the ComboBox input element by using the 
 $(".k-input-inner") // Returns a reference to the input element in the new rendering.
 ```
 
+The following example showcases how to customize the styles of the **ComboBox** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <select id="products" style="width: 100%"></select>
+    <script>
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service/products",
+            dataType: "jsonp"
+          }
+        }
+      });
+      $("#products").kendoComboBox({
+        dataSource: dataSource,
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",         
+        value: [5]
+      });
+
+    </script>
+    <style>
+      /*  NEW RENDERING */
+      /*  The style below will works with versions R1 2022 and later*/ 
+
+      .k-combobox .k-input-inner{ /* customize the style input */
+        background: lightgreen;
+      }
+
+      .k-list-item{ /* customize the styles of the items in the popup */
+        background-color: #FFDFDD;
+      }    
+
+      #products_list .k-selected{ /* applies orange background and border to the selected item in the popup */
+        background-color: #FBBBB9;
+        border: 2px solid #E56E94;
+      }   
+
+      /*  OLD RENDERING */
+      /*  The style below will works with versions prior to R1 2022 */ 
+
+
+      #products-list .k-item{ /* customize the styles of the items in the popup */
+        background-color: #FFE5B4 !important;
+      }
+
+      #products-list .k-state-selected{ /* customize the styles of the selected items in the popup */
+        background-color: #FED8B1 !important;
+        border: 2px solid orange !important;
+        color: brown !important;
+      }
+
+      #products-list .k-state-selected:hover{ /* customize the styles of the selected items in the popup */
+        background-color: orange !important;
+        color: white !important;
+      }
+    </style>
+```
+
+With the new rendering different classes should be used in order to customize the [ComboBox templates](/controls/editors/combobox/templates).
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <select id="customers" style="width: 100%;"></select>
+    <script>
+      $(document).ready(function() {
+        $("#customers").kendoComboBox({          
+          dataTextField: "ContactName",
+          dataValueField: "CustomerID",
+          groupTemplate: "Group template: #: data #",
+          fixedGroupTemplate: "Fixed header: #: data #",
+          footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found',
+          noDataTemplate: 'No Data!',
+          height: 400,
+          filter: 'contains',
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+          }
+        });
+      });
+    </script>
+    <style>
+
+      /*  NEW RENDERING */
+      /*  The styles below will work with versions R1 2022 or later*/ 
+
+      /*customize groupTemplate */
+      #customers-list .k-list-item-group-label{
+        background: blue !important;
+        color: yellow !important;
+        font-size: 18px;
+      }
+
+      /*customize fixedGroupTemplate */
+      #customers-list .k-list-group-sticky-header{
+        background: turquoise !important;
+      }
+
+      /*customize footerTemplate */
+      #customers-list .k-list-footer{
+        background: darkCyan !important;
+        color: white;
+      }
+
+      /*customize nodataTemplate */
+      #customers-list .k-no-data{
+        color: green !important;
+        font-weight: bold;
+      }
+
+      /*  OLD RENDERING */
+      /*  The styles below will work with versions prior to R1 2022 */ 
+
+      /*customize groupTemplate */
+      #customers-list .k-item>.k-group{
+        background: red !important;
+        color: white !important;
+      }
+
+      /*customize fixedGroupTemplate */
+      #customers-list .k-group-header{
+        background: salmon !important;
+      }
+
+      /*customize footerTemplate */
+      #customers-list .k-footer{
+        background: tomato !important;
+        color: white;
+      }
+
+      /*customize nodataTemplate */
+      #customers-list .k-nodata{        
+        color: red;
+      }
+    </style>
+```
 
 ## Setting the List Width
 

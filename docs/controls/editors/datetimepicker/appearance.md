@@ -276,6 +276,58 @@ $(".k-button:eq(0)") // Returns a reference to the date button element in the ne
 $(".k-button:eq(1)") // Returns a reference to the time button element in the new rendering.
 ```
 
+The following example showcases how to change the background colors of the input and button elements of the **DateTimePicker** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <div id="parent">
+      <input id="datetimepicker" />
+    </div>
+
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      #parent .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      #parent .k-link-date {
+        background-color: red; /* Applies red color to the date button element BEFORE R1 2022 */
+      }
+      #parent .k-link-time {
+        background-color: cyan; /* Applies cyan color to the time button element BEFORE R1 2022 */
+      }
+
+      /* Doesn't work BEFORE R1 2022 */
+      #parent .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+      #parent .k-input-button:nth-of-type(1) {
+        background-color: yellow; /* Applies yellow color to the date button element AFTER R1 2022 */
+      }
+      #parent .k-input-button:nth-of-type(2) {
+        background-color: orange; /* Applies yellow color to the time button element AFTER R1 2022 */
+      }
+    </style>
+
+    <script>
+      $("#datetimepicker").kendoDateTimePicker();
+    </script>
+```
+
+### Change the Order of the Time and Calendar Buttons
+
+With the new rendering, the time button appears before the calendar button. To reverse this change, use the [jQuery.insertAfter](https://api.jquery.com/insertafter/) method: 
+
+```dojo
+    <input id="datetimepicker" />           
+    <script>
+      $(document).ready(function () {
+        $("#datetimepicker").kendoDateTimePicker();
+        
+        $(".k-datetimepicker .k-button:first").insertAfter($(".k-datetimepicker .k-button:last"));
+      });
+    </script>
+```
+
 ## See Also
 
 * [Styling Overview Article]({% slug components_rendering_overview %})

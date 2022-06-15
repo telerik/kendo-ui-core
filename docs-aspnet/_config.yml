@@ -405,15 +405,12 @@ navigation:
      "styles-and-layout":
         title: "Styles and Appearance"
         position: 8
-     "styles-and-layout/design-assets":
-        title: "Design Assets"
-        position: 2
      "styles-and-layout/sass-themes":
         title: "SASS Themes"
-        position: 3
+        position: 2
      "styles-and-layout/less-themes":
         title: "LESS Themes"
-        position: 4
+        position: 3
      "globalization":
         title: "Globalization"
         position: 9
@@ -435,6 +432,9 @@ navigation:
      "cloud-integration/azure":
         title: "Azure"
         position: 3
+     "cloud-integration/google-cloud":
+        title: "Google Cloud"
+        position: 4
      "backwards-compatibility":
         title: "Breaking Changes"
         position: 14

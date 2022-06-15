@@ -180,6 +180,38 @@ $('.k-button-increase') // Returns a reference to the increase button.
 $('.k-button-decrease') // Returns a reference to the decrease button.
 ```
 
+The following example showcases how to customize the styles of the **Slider** in both the new, and the old rendering:
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <input id="slider" />
+    <script>
+      $("#slider").kendoSlider();
+    </script>
+    <style>
+      .k-slider .k-button:nth-of-type(1){ /* applies red border to the Decrease button with the new rendering; applies red border to the Increase button with the new rendering;  */
+        border: 2px solid red;
+      }
+
+      .k-slider .k-button:nth-of-type(2){ /* applies red border to the Decrease button with the new rendering; applies red border to the Increase button with the new rendering;  */
+        border: 2px solid green;
+      }
+
+      /*  NEW RENDERING */
+      /*  The style below will works with version R1 2022 or later */
+
+      .k-slider .k-slider-track-wrap{ /* applies pink background to the Slider items in the new rendering */
+        background-color: pink;
+      }
+
+
+      /*  OLD RENDERING */
+      /*  The style below will works with versions prior to R1 2022 */
+
+      .k-slider  .k-slider-wrap{ /* applies yellow background to the slider items and the increasing and decreasing buttons in the old version */
+        background-color: yellow;
+      }
+    </style>
+```
 
 ## See Also
 

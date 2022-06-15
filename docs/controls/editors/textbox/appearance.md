@@ -126,16 +126,41 @@ $("#textbox").kendoTextBox({
 
 > The new styling and rendering supports only the [default options](#options) when a LESS theme is used.
 
-Previously, a reference to the textbox element was obtainable through the `k-textbox` class.
+Previously, a reference to the textbox element was obtainable through the `k-input` class.
 
 ```javascript
-$(".k-textbox") // Returns a reference to the textbox element in the old rendering.
+$(".k-input") // Returns a reference to the textbox element in the old rendering.
 ```
 
 With the new rendering, the textbox element must be targeted using the `k-input-inner` class.
 
 ```javascript
 $(".k-input-inner") // Returns a reference to the textbox element in the new rendering.
+```
+
+The following example showcases how to apply a background color to the **TextBox** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <div id="parent">
+      <input id="textbox" />
+    </div>
+
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      #parent .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+
+      /* Doesn't work BEFORE R1 2022 */
+      #parent .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+    </style>
+
+    <script>
+      $("#textbox").kendoTextBox();
+    </script>
 ```
 
 ## See Also

@@ -131,6 +131,31 @@ With the new rendering, you must target the dateinput element by using the `k-in
 $(".k-input-inner") // Returns a reference to the DateInput element in the new rendering.
 ```
 
+The following example showcases how to apply a background color to the **DateInput** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <div id="parent">
+      <input id="dateinput" />
+    </div>
+
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      #parent .k-textbox {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+
+      /* Doesn't work BEFORE R1 2022 */
+      #parent .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+    </style>
+
+    <script>
+      $("#dateinput").kendoDateInput();
+    </script>
+```
+
 ## See Also
 
 * [Styling Overview Article]({% slug components_rendering_overview %})

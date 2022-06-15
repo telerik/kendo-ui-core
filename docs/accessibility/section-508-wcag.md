@@ -50,6 +50,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Diagram	   |Yes |AAA |
 |Dialog	       |Yes |AA  |
 |Drawer	       |Yes |AAA |
+|DropDownButton|Yes |AAA |
 |DropDownList  |Yes |AA  |
 |DropDownTree* |Yes |AA  |
 |Editor        |Yes |AA  |
@@ -86,6 +87,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Scheduler	   |Yes |AAA |
 |Slider	       |Yes |AAA |
 |Sortable	   |Yes |AAA |
+|SplitButton   |Yes |AAA |
 |Splitter      |Yes |AAA |
 |Spreadsheet   |Yes |AA  |
 |Stepper	   |Yes |AA |

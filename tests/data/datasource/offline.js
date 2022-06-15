@@ -83,6 +83,29 @@
             assert.equal(dataSource._destroyed.length, 1);
         });
 
+        it("scheduling the same item for delete twice works correctly", function() {
+            var dataSource = new DataSource({
+                offlineStorage: "key",
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {}
+                    }
+                },
+                data: [
+                    { id: 1, foo: "foo" }
+                ]
+            });
+
+            dataSource.read();
+            dataSource.online(false);
+            var model = dataSource.at(0);
+            dataSource.remove(model);
+            dataSource.remove(model);
+
+            assert.equal(dataSource._destroyed.length, 1);
+        });
+
         it("replaced data is stored offline", function() {
             var dataSource = new DataSource({
                 offlineStorage: "key"

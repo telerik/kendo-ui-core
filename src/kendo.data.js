@@ -3131,7 +3131,7 @@ var __meta__ = { // jshint ignore:line
                 hasGroups = that._isServerGrouped();
 
             if (hasGroups && model.uid && (!model.isNew || !model.isNew())) {
-                that._destroyed.push(model);
+                that._pushInDestroyed(model);
             }
 
             this._eachItem(that._data, function(items) {
@@ -3662,7 +3662,7 @@ var __meta__ = { // jshint ignore:line
                     var state = item.__state__;
                     if (state == "destroy") {
                         if (!itemIds[item[idField]]) {
-                            this._destroyed.push(this._createNewModel(item));
+                            this._pushInDestroyed(this._createNewModel(item));
                         }
                     } else {
                         items.push(item);
@@ -3990,13 +3990,22 @@ var __meta__ = { // jshint ignore:line
             that._total = total;
         },
 
+        _pushInDestroyed: function(model) {
+            var isPushed = this._destroyed.find(function(item) {
+                return item.uid === model.uid;
+            });
+            if (!isPushed) {
+                this._destroyed.push(model);
+            }
+        },
+
         _change: function(e) {
             var that = this, idx, length, action = e ? e.action : "";
 
             if (action === "remove") {
                 for (idx = 0, length = e.items.length; idx < length; idx++) {
                     if (!e.items[idx].isNew || !e.items[idx].isNew()) {
-                        that._destroyed.push(e.items[idx]);
+                        that._pushInDestroyed(e.items[idx]);
                     }
                 }
             }

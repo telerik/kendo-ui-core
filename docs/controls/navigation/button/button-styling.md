@@ -195,7 +195,39 @@ With the old rendering, the `k-button-icon` class was used for the Buttons with 
     <span class="k-button-icon k-icon k-i-folder"></span>
 </button>
 ```
+The following example showcases how to customize the styles of the **Button** with configured icon in both the new, and the old rendering:
 
+```dojo
+      <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->      
+      <button id="iconTextButton">Filter</button>
+      <button id="kendoIconTextButton">Clear Filter</button>
+      <button id="iconButton"></button>
+      <script>
+        $(document).ready(function () {
+          $("#iconTextButton").kendoButton({
+            icon: "filter"
+          });
+          $("#kendoIconTextButton").kendoButton({
+            icon: "filter-clear"
+          });
+          $("#iconButton").kendoButton({
+            icon: "refresh"
+          });
+        });
+      </script>
+      <style>  
+        .k-button .k-button-icon{ /* applies pink background to the icon elements with version 2022 R1 and later; */
+          background-color: pink
+        }
+        
+        .k-button.k-button-icon{ /* applies pink background to the entire icon button in version prior to 2022 R1;  */
+          background-color: pink
+        }
+        .k-button.k-icon-button{ /* applies orange border to the entire icon button in 2022 R1 and later; */
+          border: 3px solid orange;
+        }        
+      </style>
+```
 
 ## Visual Backwards Compatibility
 
@@ -207,6 +239,15 @@ A reference to the button element can still be obtained through the `k-button` c
 
 ```javascript
 $(".k-button") // Returns a reference to the button element in the old and the new rendering.
+```
+
+- Change the style of the text in a Button
+The color of the text in a Button can be changed using the 'k-button' class with versions prior R1 2022, as well as versions after the rendering has been changed.
+
+```
+.k-button{
+        color: green
+}
 ```
 
 ## See Also

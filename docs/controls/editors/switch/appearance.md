@@ -166,6 +166,43 @@ The full rendering of the component has the following HTML structure:
 </span>
 ```
 
+The following example showcases how to customize the styles of the **Switch** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <input type="checkbox" id="switch" checked="checked" />
+
+    <script>
+      var switchInstance = $("#switch").kendoSwitch();
+    </script>
+     <style>
+      /*  NEW RENDERING */
+      /*  The style below will works with versions R1 2022 and later */ 
+      .k-switch .k-switch-thumb{
+        border-color: blue !important;
+        background-color: pink !important;
+        border-width: 3px !important;
+      }    
+
+      .k-switch .k-switch-track{
+        border: 2px solid orange !important;
+      }    
+
+        /*  OLD RENDERING */
+        /*  The style below will works with versions prior to R1 2022 */ 
+      .k-switch .k-switch-handle{
+        border-color: green !important;
+        background-color: purple !important;
+      }
+
+      .k-switch .k-switch-container{
+        border: 2px solid green !important;
+      }
+    </style>
+```
+
+
+
 ## Visual Backwards Compatibility
 
 To achieve the same look and feel as the old rendering, you must update the element references.

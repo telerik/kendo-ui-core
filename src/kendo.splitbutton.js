@@ -314,10 +314,6 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        toggle: function() {
-            this.menu._popup.toggle();
-        },
-
         open: function() {
             this.menu._popup.open();
         },

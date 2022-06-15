@@ -193,6 +193,86 @@ To achieve the same look and feel as the old rendering, you must update the elem
 
 > When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
+The following example showcases how to customize the styles of the **ТTreeView** in both the new, and the old rendering:
+
+```dojo
+    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
+    <div id="treeview"></div>
+    <script>
+        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        homogeneous = new kendo.data.HierarchicalDataSource({
+          transport: {
+            read: {
+              url: serviceRoot + "/Employees",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeId",
+              hasChildren: "HasEmployees"
+            }
+          }
+        });
+
+        $("#treeview").kendoTreeView({
+          dataSource: homogeneous,
+          dataTextField: "FullName"
+        });
+    </script>
+    <style>
+      /*  NEW RENDERING */
+      /*  The style below will works with versions R1 2022 and later*/ 
+
+
+      .k-treeview .k-treeview-item{ /* customize the style of the items in the popup */
+        background: pink;
+      }
+
+      .k-treeview .k-treeview-leaf{ /* customize the styles of the items in the popup */
+        background-color: #FFDFDD;
+        border: 1px solid purple;
+      }  
+
+      .k-treeview .k-treeview-leaf-text{
+        color: purple;
+      }
+
+      .k-treeview .k-selected{ /* customize the styles of the selected items in the popup */
+        background-color: purple !important;
+      }  
+
+      .k-treeview .k-selected .k-treeview-leaf-text{ /* customize the text of the selected item in the popup */
+        color: white;
+      }
+
+
+      /*  OLD RENDERING */
+      /*  The style below will works with versions prior to R1 2022 */ 
+
+      /* .k-item{ background: red; }  k-item will style the items in the DropDownTree with the old as well as with the new rendering */       
+
+      .k-treeview .k-textbox{
+        background-color: #FED8B1;
+      }
+
+      .k-treeview .k-item .k-in{ /* customize the style of the items in the popup */
+        color: orange;
+        background-color: lightyellow;
+      }
+
+      .k-treeview .k-state-selected{ /* customize the styles of the selected items in the popup */
+        background-color: #FED8B1 !important;
+        border: 2px solid orange !important;
+        color: brown !important;
+      }
+
+      .k-treeview .k-state-selected:hover{ /* customize the styles of the selected items in the popup */
+        background-color: orange !important;
+        color: white !important;
+      }  
+    </style>
+```
 
 ## See Also
 
