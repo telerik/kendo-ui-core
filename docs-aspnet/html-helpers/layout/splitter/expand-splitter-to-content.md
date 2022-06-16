@@ -15,60 +15,106 @@ You can expand the height of the Splitter based on the content inside a pane.
 3. Call the `resize` method to finalize the process.
 
 ```HtmlHelper
-@(Html.Kendo().Splitter()
-                .Name("vertical")
-                .Orientation(SplitterOrientation.Horizontal)
-                .Panes(verticalPane =>
-                {
-                    verticalPane.Add().Collapsible(true).Content("<div id='grid'></div>");
-                    verticalPane.Add().Collapsible(true);
-                })
-)
+    @(Html.Kendo().Splitter()
+        .Name("vertical")
+        .Orientation(SplitterOrientation.Horizontal)
+        .Panes(verticalPane =>
+        {
+            verticalPane.Add().Collapsible(true).Content("<div id='grid'></div>");
+            verticalPane.Add().Collapsible(true);
+        })
+    )
 
-@(Html.Kendo().Grid<CoreDocumentationSplitter.Models.Products>()
-                .Name("grid")
-                .Columns(columns =>
-                {
-                    columns.Bound(p => p.ProductName);
-                })
-                .DataSource(dataSource => dataSource
-                    .Custom()
-                    .Batch(true)
-                    .Schema(schema => schema.Model(m => m.Id(p => p.ProductID)))
-                    .Transport(transport =>
-                    {
-                        transport.Read(read =>
-                           read.Url("https://demos.telerik.com/kendo-ui/service/products")
-                               .DataType("jsonp")
-                        );
-                    })
-                )
-                .Events(e => { e.DataBound("onDataBound"); })
-)
+    @(Html.Kendo().Grid<CoreDocumentationSplitter.Models.Products>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.ProductName);
+        })
+        .DataSource(dataSource => dataSource
+            .Custom()
+            .Batch(true)
+            .Schema(schema => schema.Model(m => m.Id(p => p.ProductID)))
+            .Transport(transport =>
+            {
+                transport.Read(read =>
+                   read.Url("https://demos.telerik.com/kendo-ui/service/products")
+                       .DataType("jsonp")
+                );
+            })
+        )
+        .Events(e => { e.DataBound("onDataBound"); })
+    )
 
+    <script>
+        function onDataBound(e) {
+            var gridHeight = e.sender.wrapper.outerHeight() + e.sender.wrapper.outerHeight() - e.sender.wrapper.height();
+            $(document).find("body").height(gridHeight);
+            var splitter = $("#vertical").data("kendoSplitter");
+            splitter.resize(true);
+        }
+    </script>
 
-<script>
-    function onDataBound(e) {
-        var gridHeight = e.sender.wrapper.outerHeight() + e.sender.wrapper.outerHeight() - e.sender.wrapper.height();
-        $(document).find("body").height(gridHeight);
-        var splitter = $("#vertical").data("kendoSplitter");
-        splitter.resize(true);
-    }
-</script>
-
-<style>
-    html,
-    body,
-    main,
-    #vertical,
-    .container
-    {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-</style>
+    <style>
+        html,
+        body,
+        main,
+        #vertical,
+        .container
+        {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-splitter name="vertical" orientation="SplitterOrientation.Horizontal">
+            <pane collapsible="true">
+                <div id='grid'></div>
+            </pane>
+            <pane collapsible="true"></pane>
+    </kendo-splitter>
+
+    <kendo-grid name="grid" on-data-bound="onDataBound">
+        <columns>
+            <column field="ProductName"/>
+        </columns>
+        <datasource type="DataSourceTagHelperType.Custom" batch="true">
+            <schema>
+                <model id="ProductID"></model>
+            </schema>
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/products" datatype="jsonp" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+
+    <script>
+        function onDataBound(e) {
+            var gridHeight = e.sender.wrapper.outerHeight() + e.sender.wrapper.outerHeight() - e.sender.wrapper.height();
+            $(document).find("body").height(gridHeight);
+            var splitter = $("#vertical").data("kendoSplitter");
+            splitter.resize(true);
+        }
+    </script>
+
+    <style>
+        html,
+        body,
+        main,
+        #vertical,
+        .container
+        {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+```
+{% endif %}
 ```Controller
     public class SplitterController : Controller
     {

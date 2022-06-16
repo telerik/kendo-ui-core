@@ -19,6 +19,14 @@ To render the week number column, set the [`WeekNumber`](/api/Kendo.Mvc.UI.Fluen
         .HtmlAttributes(new { style = "width: 100%" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-daterangepicker name="daterangepicker"
+                           style = "width: 100%"
+                           week-number="true">
+    </kendo-daterangepicker>
+```    
+{% endif %}
 
 ## See Also
 

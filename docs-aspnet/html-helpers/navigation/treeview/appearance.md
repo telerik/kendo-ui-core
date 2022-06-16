@@ -230,9 +230,53 @@ New Rendering with Checkboxes:
 
 ## Visual Backwards Compatibility
 
-In order to achieve the same look and feel as the old rendering, use the classes available in the new rendering. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Appearance Overview]({% slug components_rendering_overview %}) article for additional information.
+In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
 
-> If you use a LESS theme, the new rendering will support only the [default options](#options).
+> The new styling and rendering support only the [default options](#options) when you use a LESS theme.
+
+If you are upgrading from a version prior to R1 2022 and you are using custom CSS to override default TreeView styles, you will need to update the classes used in the selectors of your custom CSS rules. The following example shows how to achieve the same customization in the TreeView, depending on whether you are using an old product version or a new one. 
+
+The first set of CSS rules relies on the classes available in the old rendering.
+
+```
+<style>
+/*  Old rendering (versions prior to R1 2022)*/      
+
+/* Apply red color to the text of the TreeView nodes */
+.k-treeview .k-item .k-in {
+  color: red;
+}
+
+/* Apply lightblue background-color and white text color to the selected TreeView node */
+.k-treeview .k-item .k-state-selected {
+  background-color: lightblue;
+  color: white;
+} 
+</style>
+```
+
+The second set of CSS rules relies on the classes available in the new rendering.
+
+```
+<style>
+/*  New Rendering (versions after R1 2022) */     
+
+/* Apply red color to the text of the TreeView nodes */
+.k-treeview .k-treeview-leaf-text {
+  color: red;
+}
+
+/* Apply lightblue background-color to the selected TreeView node */
+.k-treeview .k-treeview-leaf.k-selected {
+  background-color: lightblue;
+}  
+
+/* Apply white text color to the selected TreeView node */
+.k-treeview .k-treeview-leaf.k-selected .k-treeview-leaf-text {
+   color: white;
+}
+</style>
+```
 
 ## See Also
 

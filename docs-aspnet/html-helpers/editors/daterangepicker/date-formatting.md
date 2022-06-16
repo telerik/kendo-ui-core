@@ -18,6 +18,12 @@ The following example demonstrates how to define the date format.
         .Format("{0:dd/MM/yyyy}")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-daterangepicker name="daterangepicker" format="{0:dd/MM/yyyy}">
+    </kendo-daterangepicker>
+```
+{% endif %}
 
 ## See Also
 

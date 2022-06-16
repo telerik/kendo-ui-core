@@ -19,31 +19,53 @@ You can set the HTML for each Splitter pane via the [`Content()`](/api/Kendo.Mvc
 The following example demonstrates how to configure the HTML Content for the Splitter:
 
 ```HtmlHelper
-@(Html.Kendo().Splitter()
-      .Name("splitter")
-      .Orientation(SplitterOrientation.Vertical)
-      .Panes(verticalPanes =>
-      {
-          verticalPanes.Add()
-              .Size("100px")
-              .HtmlAttributes(new { id = "top-pane" })
-              .Content(@<div class="pane-content">
-                            <h3>Top pane</h3>
-                        </div>);
-          verticalPanes.Add()
-              .Size("100px")
-              .HtmlAttributes(new { id = "middle-pane" })
-              .Content(@<div class="pane-content">
-                            <h3>Outer splitter / middle pane</h3>
-                        </div>);
-          verticalPanes.Add()
-              .Size("100px")
-              .HtmlAttributes(new { id = "bottom-pane" })
-              .Content(@<div class="pane-content">
-                        </div>);
-      })
-)
+    @(Html.Kendo().Splitter()
+        .Name("splitter")
+        .Orientation(SplitterOrientation.Vertical)
+        .Panes(verticalPanes =>
+        {
+            verticalPanes.Add()
+                .Size("100px")
+                .HtmlAttributes(new { id = "top-pane" })
+                .Content(@<div class="pane-content">
+                              <h3>Top pane</h3>
+                          </div>);
+            verticalPanes.Add()
+                .Size("100px")
+                .HtmlAttributes(new { id = "middle-pane" })
+                .Content(@<div class="pane-content">
+                              <h3>Middle pane</h3>
+                          </div>);
+            verticalPanes.Add()
+                .Size("100px")
+                .HtmlAttributes(new { id = "bottom-pane" })
+                .Content(@<div class="pane-content">
+                              <h3>Bottom pane</h3>
+                          </div>);
+        })
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-splitter name="splitter" orientation="SplitterOrientation.Vertical">
+            <pane size="100px" id="top-pane">
+                <div class="pane-content">
+                    <h3>Top pane</h3>
+                </div>
+            </pane>
+            <pane size="100px" id="middle-pane">
+                <div class="pane-content">
+                    <h3>Middle pane</h3>
+                </div>
+            </pane>
+            <pane size="100px" id="bottom-pane">
+                <div class="pane-content">
+                    <h3>Bottom pane</h3>
+                </div>
+            </pane>
+    </kendo-splitter>
+```
+{% endif %}
 
 ## Asynchronously loading content
 
@@ -53,13 +75,21 @@ The following example demonstrates how to load the Splitter content asynchronous
 
 ```HtmlHelper
 @(Html.Kendo().Splitter()
-      .Name("splitter")
-      .Panes(panes =>
-      {
-          panes.Add().LoadContentFrom(Url.Action("PaneContent", "Splitter"));
-          panes.Add().LoadContentFrom("https://www.telerik.com/");
-      }))
+    .Name("splitter")
+    .Panes(panes =>
+    {
+        panes.Add().LoadContentFrom(Url.Action("PaneContent", "Splitter"));
+        panes.Add().LoadContentFrom("https://www.telerik.com/");
+    }))
 ```
+{% if site.core%}
+```TagHelper
+    <kendo-splitter name="splitter">
+            <pane content-url="@Url.Action("PaneContent", "Splitter")"></pane>
+            <pane content-url="https://www.telerik.com/"></pane>
+    </kendo-splitter>
+```
+{% endif %}
 ```Controller
 public IActionResult PaneContent()
 {

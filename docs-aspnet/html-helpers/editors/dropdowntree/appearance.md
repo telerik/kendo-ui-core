@@ -286,6 +286,63 @@ In order to achieve the same look and feel as the old rendering, make sure to us
 
 > If you use a LESS theme, the new rendering will support only the [default options](#options).
 
+The following example showcases how to change the background colors of the input elements of the **DropDownTree** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work BEFORE R1 2022 */ 
+      .k-input-inner{ /* customize the style input */
+        background: lightyellow;
+      }
+      .k-treeview-item{ /* customize the style of the items in the popup */
+        background: pink;
+      }
+      .k-treeview-leaf{ /* customize the styles of the items in the popup */
+        background-color: #FFDFDD;
+        border: 1px solid purple;
+      }  
+      .k-treeview-leaf-text{
+        color: purple;
+      }
+      .k-selected{ /* customize the styles of the selected items in the popup */
+        background-color: purple !important;
+      }  
+      .k-selected .k-treeview-leaf-text{ /* customize the text of the selected item in the popup */
+        color: white;
+      }
+      /*customize nodataTemplate */
+      .k-no-data{
+        color: fuchsia !important;
+        font-weight: bold;
+      }
+
+      /* Doesn't work AFTER R1 2022 */ 
+      /* .k-item{ background: red; }  k-item will style the items in the DropDownTree with the old as well as with the new rendering */
+      .k-input{
+        background-color: salmon !important;
+      }
+      .k-textbox{
+        background-color: #FED8B1;
+      }
+      .k-item .k-in{ /* customize the style of the items in the popup */
+        color: orange;
+        background-color: lightyellow;
+      }
+      .k-state-selected{ /* customize the styles of the selected items in the popup */
+        background-color: #FED8B1 !important;
+        border: 2px solid orange !important;
+        color: brown !important;
+      }
+      .k-state-selected:hover{ /* customize the styles of the selected items in the popup */
+        background-color: orange !important;
+        color: white !important;
+      }       
+      /*customize nodataTemplate */
+      .k-nodata{        
+        color: red;
+      }
+    </style>
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

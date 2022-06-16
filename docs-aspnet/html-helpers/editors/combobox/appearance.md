@@ -446,6 +446,34 @@ In order to achieve the same look and feel as the old rendering, the element ref
 
 > The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
 
+The following example showcases how to change the background colors of the input and button elements of the **ComboBox** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work BEFORE R1 2022 */
+        .k-input-inner{ /* change the input field style */
+            background-color:red;
+        }
+        .k-input-button{ /* changes the button style */
+            background-color:orange;
+        }
+        .k-list-item{ /* change the style of the items */
+            background-color:red;
+        }
+
+      /* Doesn't work AFTER R1 2022 */
+        .k-input{ /* change the input field style */
+            background-color:red;
+        }
+        .k-select{ /* changes the button style */
+            background-color:orange;
+        }
+        .k-item{ /* change the style of the items */
+            background-color:red;
+        }
+    </style>
+```
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

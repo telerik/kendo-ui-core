@@ -172,6 +172,32 @@ The full rendering of the component has the following HTML structure:
 
 To achieve the same look and feel as the old rendering, the references of the element must be updated. Visit the [CSS Classes Migration](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview#css-classes-migration) and [JQuery Selectors Migration](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview#jquery-selectors-migration) sections of the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article for additional information.
 
+The following example showcases how to customize the styles of the **Switch** in both the new, and the old rendering:
+
+```
+     <style>
+      /*  NEW RENDERING */
+      /*  The style below will works with versions R1 2022 and later */ 
+      .k-switch .k-switch-thumb{
+        border-color: blue !important;
+        background-color: pink !important;
+        border-width: 3px !important;
+      }    
+      .k-switch .k-switch-track{
+        border: 2px solid orange !important;
+      }    
+        /*  OLD RENDERING */
+        /*  The style below will works with versions prior to R1 2022 */ 
+      .k-switch .k-switch-handle{
+        border-color: green !important;
+        background-color: purple !important;
+      }
+      .k-switch .k-switch-container{
+        border: 2px solid green !important;
+      }
+    </style>
+```
+
 > The new styling and rendering supports only the [default options](#options) when a LESS theme is used.
 
 ## See Also

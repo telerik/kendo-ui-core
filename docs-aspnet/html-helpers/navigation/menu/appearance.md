@@ -70,6 +70,27 @@ New Rendering:
      ... 
 </ul>
 ```
+
+## Visual Backwards Compatibility
+
+The following example showcases how to customize the styles of the **Menu** in both the new, and the old rendering:
+
+```
+    <style>
+      /* applies light-blue background to the Menu items in the new rendering. */
+      #menu .k-menu-link-text{ 
+        background-color: lightblue !important;
+      }
+      /* .k-menu-expand-arrow and .k-icon elements are different elements in the new rendering, thus the green and the red border will be applied when a version after 2022 R1 is selected. 
+      .k-menu-expand-arrow and .k-icon is the same element in the old rendering. Thus, only the green border will be applied when a version prior to 2022 R1 is selected */
+      #menu .k-menu-expand-arrow{
+        border: 2px solid red !important;
+      }
+      #menu .k-icon{
+        border: 2px solid green !important;
+      }
+    </style>
+```
 <!--*-->
 
 ## See Also

@@ -24,7 +24,7 @@ If you are using Bootstrap 4, we recommend using the Bootstrap-v4 swatch of the 
 
 **Figure 1: A preview of the Sass Theme Builder**
 
-![Theme Builder Overview](images/theme-builder-overview-{{ site.framework_short }}.png)
+![Theme Builder Overview](../images/theme-builder-overview-{{ site.framework_short }}.png)
 
 {% if site.core %}
 ## Using Newly Created Themes
@@ -37,7 +37,7 @@ To create a new theme:
 
     **Figure 2: Selecting a base theme and components**
 
-    ![Theme Builder Create](images/theme-builder-create-core.gif)
+    ![Theme Builder Create](../images/theme-builder-create-core.gif)
 
 Complex {{ site.product }} components, such as the Grid, rely on other components to deliver their full set of features. If you select the Grid, then all of its components dependencies styles (Button, AutoComplete, DropDownList, DatePicker, etc.) will also be included in the final bundle. The Theme Builder automatically updates the styling on all required components so that you do not need to customize each of them separately.
 {% else %}
@@ -48,11 +48,11 @@ To create a new theme:
 1. On the initial Sass Theme Builder pane, select the **Start Theming** option.
 1. Choose one of the existing skins to use as a base. The currently available built-in skins are **Default**, **Bootsrap**, and **Material**.
 
-    ![Selecting a base theme in the Theme Builder](images/theme-builder-create-and-download-1.png)
+    ![Selecting a base theme in the Theme Builder](../images/theme-builder-create-and-download-1.png)
 
 1. Scroll down and select the components you want to customize.
 
-    ![Selecting the widgets for customization in the Theme Builder](images/theme-builder-create-and-download-2.png)
+    ![Selecting the widgets for customization in the Theme Builder](../images/theme-builder-create-and-download-2.png)
 
 1. (Optional) After the initial selection, add or remove elements for customization.
 
@@ -78,7 +78,7 @@ To customize an existing theme, use the following Sass Theme Builder features:
 
 **Figure 3: Available options for customization**
 
-![Theme Builder Create and Download 3](images/theme-builder-create-and-download-3.png)
+![Theme Builder Create and Download 3](../images/theme-builder-create-and-download-3.png)
 
 To upload an existing theme you have previously created:
 
@@ -575,7 +575,7 @@ The following example demonstrates the JSON file for the **Material** base theme
 
 **Figure 4: Importing themes for customization**
 
-![Themebuilder import existing theme](images/theme-builder-import-existing-theme-{{ site.framework_short }}.png)
+![Themebuilder import existing theme](../images/theme-builder-import-existing-theme-{{ site.framework_short }}.png)
 
 {% if site.core %}
 When you complete the modifications and the theme is ready to be used:

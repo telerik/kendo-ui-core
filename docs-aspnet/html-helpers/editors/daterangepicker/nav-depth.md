@@ -34,6 +34,14 @@ The following example demonstrates how to create a DateRangePicker that sets the
         .Depth(CalendarView.Month)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-daterangepicker name="daterangepicker"
+                           start="CalendarView.Year"
+                           depth="CalendarView.Month">
+    </kendo-daterangepicker>
+```
+{% endif %}
 
 ## See Also
 

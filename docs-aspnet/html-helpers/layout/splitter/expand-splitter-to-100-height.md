@@ -19,23 +19,23 @@ You also have to remove the border of the Splitter. Elements that are 100% high 
 In the following example, the outer Splitter has no siblings and has a 100% height style applied. Its parent is the `<body>` element and it receives a `height:100%` style which, in turn, requires the `<html>` element to obtain the same style.
 
 ```HtmlHelper
-@(Html.Kendo().Splitter()
-                .Name("splitter")
-                .Orientation(SplitterOrientation.Vertical)
-                .Panes(verticalPane => {
-                    verticalPane.Add().Collapsible(true).Size("60px").Content("Outer splitter : top pane (resizable and collapsible)");
-                    verticalPane.Add().Collapsible(false)
-                                      .Content(Html.Kendo().Splitter()
-                                                        .Name("horizontal")
-                                                        .Orientation(SplitterOrientation.Horizontal)
-                                                        .Panes(horizontalPanes => {
-                                                            horizontalPanes.Add().Collapsible(true).Size("100px").Content("Inner splitter :: left pane");
-                                                            horizontalPanes.Add().Collapsible(false).Content("Inner splitter :: center pane"); ;
-                                                            horizontalPanes.Add().Collapsible(false).Resizable(true).Size("15%").Content("Inner splitter :: right pane");
-                                                        }).ToHtmlString()
-                                                       );
-                    verticalPane.Add().Collapsible(false).Resizable(false).Size("15%").Content("Outer splitter : bottom pane (non-resizable, non-collapsible)");
-                })
+    @(Html.Kendo().Splitter()
+        .Name("vertical")
+        .Orientation(SplitterOrientation.Vertical)
+        .Panes(verticalPane => {
+            verticalPane.Add().Collapsible(true).Size("60px").Content("Outer splitter : top pane (resizable and collapsible)");
+            verticalPane.Add().Collapsible(false)
+                              .Content(Html.Kendo().Splitter()
+                                         .Name("horizontal")
+                                         .Orientation(SplitterOrientation.Horizontal)
+                                         .Panes(horizontalPanes => {
+                                             horizontalPanes.Add().Collapsible(true).Size("100px").Content("Inner splitter :: left pane");
+                                             horizontalPanes.Add().Collapsible(false).Content("Inner splitter :: center pane");
+                                             horizontalPanes.Add().Collapsible(false).Resizable(true).Size("15%").Content    ("Inner splitter :: right pane");
+                                         }).ToHtmlString()
+                              );
+            verticalPane.Add().Collapsible(false).Resizable(false).Size("15%").Content("Outer splitter : bottom pane (non-resizable,    non-collapsible)");
+        })
     )
 
 <style>
@@ -57,6 +57,50 @@ In the following example, the outer Splitter has no siblings and has a 100% heig
     }
 </style>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-splitter name="vertical" orientation="SplitterOrientation.Vertical">
+            <pane size="60px" collapsible="true">
+                Outer splitter : top pane (resizable and collapsible)
+            </pane>
+            <pane>
+                <kendo-splitter name="horizontal" orientation="SplitterOrientation.Horizontal">
+                    <pane size="100px" collapsible="true">
+                        Inner splitter ::  left pane
+                    </pane>
+                    <pane collapsible="false">
+                        Inner splitter :: center pane
+                    </pane>
+                    <pane size="15%" collapsible="false" resizable="true">
+                        Inner splitter :: right pane
+                    </pane>
+                </kendo-splitter>
+            </pane>
+            <pane size="15%" collapsible="false" resizable="false">
+                Outer splitter : bottom pane (non-resizable,    non-collapsible)
+            </pane>
+    </kendo-splitter>
+
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    #vertical,
+    #horizontal {
+        height: 100%;
+    }
+
+    #vertical {
+        border-width: 0;
+    }
+</style>    
+```
+{% endif %}
 ```Controller
     public class SplitterController : Controller
     {

@@ -20,6 +20,14 @@ To enable the desired culture, add a reference to the script file before the Dat
             .Culture("de-DE")
         )
 ```
+{% if site.core %}
+```TagHelper
+    <script src="https://kendo.cdn.telerik.com/2019.2.619/js/cultures/kendo.culture.de-DE.min.js"></script>
+
+    <kendo-daterangepicker name="daterangepicker" culture="de-DE">
+    </kendo-daterangepicker>
+```
+{% endif %}
 
 ## See Also
 

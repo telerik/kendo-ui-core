@@ -55,6 +55,25 @@ The following example demonstrates how to define a single series of type `"pie"`
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-chart name="chart" series-colors='new string[] { "#03a9f4", "#ff9800", "#fad84a", "#4caf50" }'>
+        <chart-title text="Break-up of Spain Electricity Production for 2008"></chart-title>
+        <chart-legend position="ChartLegendPosition.Bottom"></chart-legend>
+        <series-defaults type="ChartSeriesType.Pie"></series-defaults>
+        <series>
+            <series-item data='new dynamic[] {
+                        new {category="Hydro",value=22,color="#9de219"},
+                        new {category="Solar",value=2,color="#90cc38"},
+                        new {category="Nuclear",value=49,color="#068c35"},
+                        new {category="Wind",value=27,color="#006634"}}'>
+                <overlay gradient="ChartSeriesGradient.RoundedBevel" />
+            </series-item>
+        </series>
+        <tooltip visible="true" template="${ category } - ${ value }%"></tooltip>
+    </kendo-chart>
+```
+{% endif %}
 ![A sample Pie Chart](images/pie-chart.png)
 
 ## Configuring the Effects Overlay
@@ -68,6 +87,15 @@ Each segment has a transparent effect overlay that adds depth to the two-dimensi
        .Overlay(o => o.Gradient(ChartSeriesGradient.None));
     })
 ```
+{% if site.core %}
+```TagHelper
+      <series>
+        <series-item data='new dynamic[] {}'>
+            <overlay gradient="ChartSeriesGradient.None" />
+        </series-item>
+    </series>
+```
+{% endif %}
 
 The Pie Chart supports the following `ChartSeriesGradient` options:
 

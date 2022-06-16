@@ -37,6 +37,25 @@ The following example demonstrates how to add a note for each series point.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-chart name="chart">
+        <series-defaults type="ChartSeriesType.Line" />
+        <series>
+            <series-item data='new object[] {
+                    new {value = 1, noteText = "min"},
+                    new {value = 2},
+                    new {value = 3,noteText = "max"}
+            }'>
+                <notes position="ChartNotePosition.Bottom">
+                    <chart-series-notes-label position="ChartNoteLabelPosition.Outside">
+                    </chart-series-notes-label>
+                </notes>
+            </series-item>
+        </series>
+    </kendo-chart>
+```
+{% endif %}
 
 ## Using Templates
 
@@ -76,6 +95,26 @@ The template provides access to all information that is associated with the poin
             )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-chart name="chart">
+        <series-defaults type="ChartSeriesType.Line" />
+        <series>
+            <series-item data='new object[] {
+                    new {value = 1, noteText = "min"},
+                    new { value = 2},
+                    new {value = 3,noteText = "max"}
+            }'>
+                <notes position="ChartNotePosition.Bottom">
+                    <chart-series-notes-label position="ChartNoteLabelPosition.Outside"
+                                              template="#= dataItem.noteText # of the series">
+                    </chart-series-notes-label>
+                </notes>
+            </series-item>
+        </series>
+    </kendo-chart>
+```
+{% endif %}
 
 ## See Also
 

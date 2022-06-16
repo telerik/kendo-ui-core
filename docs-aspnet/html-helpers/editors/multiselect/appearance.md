@@ -279,6 +279,41 @@ In order to achieve the same look and feel as the old rendering, make sure to us
 
 > If you use a LESS theme, the new rendering will support only the [default options](#options).
 
+The following example showcases how to change the background colors of the input elements of the **MultiSelect** in both the new, and the old rendering:
+
+```
+      <style>
+        /* Doesn't work BEFORE R1 2022 */
+        .k-chip{ /* customize the styles of the selected items in the input */
+          background: lightgreen
+        }
+        .k-list-item{ /* customize the styles of the items in the popup */
+          background-color: #FFDFDD !important;
+        }    
+        .k-selected{ /* customize the styles of the selected items in the popup */
+          background-color: #FBBBB9 !important;
+          border: 2px solid #E56E94 !important;
+        }   
+
+        /* Doesn't work AFTER R1 2022 */ 
+        .k-item{ /* customize the styles of the items in the popup */
+          background-color: #FFE5B4 !important;
+        }
+        .k-state-selected{ /* customize the styles of the selected items in the popup */
+          background-color: #FED8B1 !important;
+          border: 2px solid orange !important;
+          color: brown !important;
+        }
+        .k-state-selected:hover{ /* customize the styles of the selected items in the popup */
+          background-color: orange !important;
+          color: white !important;
+        }
+        #multiselect_taglist li{ /* customize the styles of the selected items in the input */
+          background-color: orange !important;
+        }
+      </style>
+```
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

@@ -170,6 +170,28 @@ With the new rendering, you must target the TimePicker element by using the `k-i
 $(".k-input-inner") // Returns a reference to the TimePicker element in the new rendering.
 ```
 
+The following example showcases how to change the background colors of the input and button elements of the **TimePicker** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work BEFORE R1 2022 */
+      .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+      .k-input-button {
+        background-color: yellow; /* Applies yellow color to the date button element AFTER R1 2022 */
+      }
+
+      /* Doesn't work AFTER R1 2022 */
+      .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      .k-select {
+        background-color: red; /* Applies red color to the date button element BEFORE R1 2022 */
+      }
+    </style>
+```
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

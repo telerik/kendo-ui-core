@@ -36,10 +36,11 @@ The following example demonstrates the basic configuration for the DateRangePick
 ```
 {% if site.core %}
 ```TagHelper
-
-        <kendo-daterangepicker name="daterangepicker" min="new DateTime(1900, 1, 1)" max="new DateTime(2099, 12, 31)" format="dd/MM/yyyy">
-                <range start="DateTime.Now" end="DateTime.Now.AddDays(10)"/>
-        </kendo-daterangepicker>
+     <kendo-daterangepicker name="daterangepicker" 
+                            min="new DateTime(1900, 1, 1)"
+                            max="new DateTime(2099, 12, 31)">
+             <range start="DateTime.Now" end="DateTime.Now.AddDays(10)"/>
+     </kendo-daterangepicker>
 ```
 {% endif %}
 
@@ -70,6 +71,7 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("daterangepicker_change")
       )
     )
+
     <script>
     function daterangepicker_open() {
         // Handle the open event.
@@ -84,6 +86,30 @@ The following example demonstrates how to subscribe to events by a handler name.
     }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-daterangepicker name="daterangepicker"
+                           on-open="daterangepicker_open"
+                           on-close="daterangepicker_close"
+                           on-change="daterangepicker_change">
+    </kendo-daterangepicker>
+
+    <script>
+    function daterangepicker_open() {
+        // Handle the open event.
+    }
+
+    function daterangepicker_close() {
+        // Handle the close event.
+    }
+
+    function daterangepicker_change() {
+        // Handle the change event.
+    }
+    </script>
+```
+{% endif %}
+
 {% if site.core %}
 ### Handling by Template Delegate
 
@@ -105,6 +131,18 @@ The following example demonstrates how to subscribe to events by a template dele
             </text>)
       )
     )
+```
+```TagHelper
+    <kendo-daterangepicker name="daterangepicker"
+                           on-open="
+                           function(){
+                                // Handle the open event inline.
+                           }"
+                           on-change="
+                           function() {
+                               // Handle the change event inline.
+                           }">
+    </kendo-daterangepicker>
 ```
 {% endif %}
 

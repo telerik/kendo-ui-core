@@ -231,6 +231,19 @@ A reference to the button element still can be obtained through the `k-button` c
 $(".k-button") // Returns a reference to the button element in the old and the new rendering.
 ```
 
+The following example showcases how to customize the styles of the **Button** with configured icon in both the new, and the old rendering:
+
+```
+      <style>  
+        .k-button .k-button-icon{ /* applies pink background to the icon elements with version 2022 R1 and later; applies pink background to the entire icon button in version prior to 2022 R1; */
+          background-color: pink
+        }
+        .k-button.k-icon-button{ /* applies ornage border to the entire icon button in 2022 R1 and later; */
+          border: 3px solid orange;
+        }        
+      </style>
+```
+
 ## See Also
 
 * [Appearance of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/appearance)

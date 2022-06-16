@@ -202,7 +202,59 @@ The following example demonstrates how to configure the appearance of the compon
 
 In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
 
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+> The new styling and rendering support only the [default options](#options) when you use a LESS theme.
+
+If you use custom CSS, to override default ColorPicker styles, you will need to update the classes used in the selectors of your custom CSS rules. The following example shows how to achieve the same customization in the ColorPicker, depending on whether you are using an old product version or a new one. 
+
+The first set of CSS rules relies on the classes available in the old rendering.
+
+```
+<style>
+/*  Old rendering (versions prior to R1 2022)*/      
+
+/* Apply lightblue background color to the ColorPicker's dropdown button */
+.k-colorpicker .k-select{ 
+  background-color: lightblue;
+}
+
+/* Apply green background color to the ColorPicker's Apply button */
+.k-flatcolorpicker .apply {
+  background-color: green;
+  border-color: green;
+}
+
+/* Apply red background color and border to the ColorPicker's Cancel button */
+.k-flatcolorpicker .cancel {
+  background-color: red;
+  border-color: red;
+}
+</style>
+```
+
+The second set of CSS rules relies on the classes available in the new rendering.
+
+```
+<style>
+/*  New Rendering (versions after R1 2022) */
+
+/* Apply lightblue background color to the ColorPicker's dropdown button */
+.k-colorpicker .k-input-button { 
+  background-color: lightblue;
+}
+
+/* Apply green background color to the ColorPicker's Apply button */
+.k-flatcolorpicker .k-coloreditor-apply {
+  background-color: green;
+  border-color: green;
+}
+
+/* Apply red background color and border to the ColorPicker's Cancel button */
+.k-flatcolorpicker .k-coloreditor-cancel {
+  background-color: red;
+  border-color: red;
+}
+</style>
+```
 
 ## See Also
 

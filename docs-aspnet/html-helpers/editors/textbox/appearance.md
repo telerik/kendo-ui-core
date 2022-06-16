@@ -151,16 +151,31 @@ The full rendering of the component has the following HTML structure:
 
 > The new styling and rendering supports only the [default options](#options) when a LESS theme is used.
 
-Previously, a reference to the `textbox` element was obtainable through the `k-textbox` class.
+Previously, a reference to the `textbox` element was obtainable through the `k-input` class.
 
 ```javascript
-$(".k-textbox") // Returns a reference to the textbox element in the old rendering.
+$(".k-input") // Returns a reference to the textbox element in the old rendering.
 ```
 
 With the new rendering, the `textbox` element must be targeted using the `k-input-inner` class.
 
 ```javascript
 $(".k-input-inner") // Returns a reference to the textbox element in the new rendering.
+```
+
+The following example showcases how to apply a background color to the **TextBox** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      /* Doesn't work BEFORE R1 2022 */
+      .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+    </style>
 ```
 
 ## See Also

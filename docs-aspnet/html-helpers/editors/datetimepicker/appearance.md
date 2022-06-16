@@ -309,6 +309,34 @@ $(".k-button:eq(0)") // Returns a reference to the date button element in the ne
 $(".k-button:eq(1)") // Returns a reference to the time button element in the new rendering.
 ```
 
+The following example showcases how to change the background colors of the input and button elements of the **DateTimePicker** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work BEFORE R1 2022 */
+      .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+      .k-input-button:nth-of-type(1) {
+        background-color: yellow; /* Applies yellow color to the date button element AFTER R1 2022 */
+      }
+      .k-input-button:nth-of-type(2) {
+        background-color: orange; /* Applies yellow color to the time button element AFTER R1 2022 */
+      }
+
+      /* Doesn't work AFTER R1 2022 */
+      .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      .k-link-date {
+        background-color: red; /* Applies red color to the date button element BEFORE R1 2022 */
+      }
+      .k-link-time {
+        background-color: cyan; /* Applies cyan color to the time button element BEFORE R1 2022 */
+      }
+    </style>
+```
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

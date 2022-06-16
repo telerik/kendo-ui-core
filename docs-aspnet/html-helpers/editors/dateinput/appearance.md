@@ -120,6 +120,21 @@ With the new rendering, you must target the DateInput element by using the `k-in
 $(".k-input-inner") // Returns a reference to the DateInput element in the new rendering.
 ```
 
+The following example showcases how to apply a background color to the **DateInput** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      .k-textbox {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      /* Doesn't work BEFORE R1 2022 */
+      .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+    </style>
+```
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

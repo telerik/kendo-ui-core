@@ -270,6 +270,27 @@ $(".k-button") // Returns a reference to the calendar button element in the new 
 $(".k-input-button") // Returns a reference to the calendar button element in the new rendering.
 ```
 
+The following example showcases how to change the background colors of the input and button elements of the **DatePicker** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      .k-select {
+        background-color: red !important; /* Applies red color to the button element BEFORE R1 2022 */
+      }
+      /* Doesn't work BEFORE R1 2022 */
+      .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+      .k-input-button {
+        background-color: yellow !important; /* Applies yellow color to the button element AFTER R1 2022 */
+      }
+    </style>
+```
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

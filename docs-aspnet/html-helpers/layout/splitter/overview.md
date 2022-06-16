@@ -78,53 +78,36 @@ The following example demonstrates how to define the Splitter.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-splitter name="vertical" orientation="SplitterOrientation.Vertical">
-        <pane scrollable="false" collapsible="false">
-            <div id="top-pane">
-                <kendo-splitter name="horizontal" style="height: 100%; width:100%;" orientation="SplitterOrientation.Horizontal">
-                    <pane size="220px" collapsible="true">
-                        <div id="left-pane">
-                            <div class="pane-content">
-                                <h3>Inner splitter / left pane</h3>
-                                <p>Resizable and collapsible.</p>
-                            </div>
+    <kendo-splitter name="splitter" orientation="SplitterOrientation.Vertical">
+            <pane>
+                <kendo-splitter name="horizontal">
+                    <pane size="220px" id="left-pane">
+                        <div class="pane-content">
+                            <h3>Inner splitter / left pane</h3>
                         </div>
                     </pane>
-                    <pane>
-                        <div id="center-pane">
-                            <div class="pane-content">
-                                <h3>Inner splitter / center pane</h3>
-                                <p>Resizable only.</p>
-                            </div>
+                    <pane id="center-pane">
+                        <div class="pane-content">
+                            <h3>Inner splitter / center pane</h3>
                         </div>
                     </pane>
-                    <pane size="220px" collapsible="true">
-                        <div id="right-pane">
-                            <div class="pane-content">
-                                <h3>Inner splitter / right pane</h3>
-                                <p>Resizable and collapsible.</p>
-                            </div>
+                    <pane size="220px" collapsible="true" id="right-pane">
+                        <div class="pane-content">
+                            <h3>Inner splitter / right pane</h3>
                         </div>
                     </pane>
                 </kendo-splitter>
-            </div>
-        </pane>
-        <pane size="100px" collapsible="false">
-            <div id="middle-pane">
+            </pane>
+            <pane size="100px" collapsible="false">
                 <div class="pane-content">
                     <h3>Outer splitter / middle pane</h3>
-                    <p>Resizable only.</p>
                 </div>
-            </div>
-        </pane>
-        <pane size="100px" collapsible="false" resizable="false">
-            <div id="bottom-pane">
+            </pane>
+            <pane size="100px">
                 <div class="pane-content">
                     <h3>Outer splitter / bottom pane</h3>
-                    <p>Non-resizable and non-collapsible.</p>
                 </div>
-            </div>
-        </pane>
+            </pane>
     </kendo-splitter>
 ```
 {% endif %}
@@ -191,17 +174,32 @@ The following example demonstrates the basic configuration of the Splitter.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-splitter name="splitter1" orientation="SplitterOrientation.Vertical">
-        <pane collapsed="false" collapsed-size="240px" collapsible="true"
-                                content-url="optionalUrl" max-size="240px" min-size="240px"
-                                resizable="true" scrollable="true" size="240px">
-            <div id="top-pane">
+    <kendo-splitter name="splitter" style="height: 400px;"
+                    orientation="SplitterOrientation.Vertical"
+                    on-collapse="collapse"
+                    on-resize="resize"
+                    on-expand="expand"
+                    on-content-load="contentLoad">
+            <pane size="100px" collapsible="true" scrollable="false" id="top_pane">
+                <p>Top pane</p>
+            </pane>
+            <pane id="middle_pane">
                 <div class="pane-content">
-                    Top Pane Content
+                    <h3>Middle pane</h3>
                 </div>
-            </div>
-        </pane>
+            </pane>
+            <pane size="20%" collapsible="true" scrollable="true" id="bottom_pane">
+                <p>Bottom pane</p>
+            </pane>
     </kendo-splitter>
+    
+    <script type="text/javascript">
+        $(function () {
+            // The Name() of the Splitter is used to get its client-side instance.
+            var splitter = $("#splitter").data("kendoSplitter");
+            console.log(splitter);
+        });
+    </script>
 ```
 {% endif %}
 

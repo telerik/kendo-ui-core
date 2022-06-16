@@ -393,6 +393,28 @@ With the new rendering, the AutoComplete input element must be targeted by using
 
 $(".k-input-inner") // Returns a reference to the input element in the new rendering.
 
+The following example showcases how to change the background colors of the input and button elements of the **AutoComplete** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work BEFORE R1 2022 */
+        .k-input-inner{ /* change the input field style */
+            background-color:red;
+        }
+        .k-list-item{ /* change the style of the items */
+            background-color:red;
+        }
+
+      /* Doesn't work AFTER R1 2022 */
+        .k-input{ /* change the input field style */
+            background-color:red;
+        }
+        .k-item{ /* change the style of the items */
+            background-color:red;
+        }
+    </style>
+```
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

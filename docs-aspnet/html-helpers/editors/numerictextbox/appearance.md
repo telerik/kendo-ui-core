@@ -145,16 +145,31 @@ The `span` element controls the overall appearance of the widget and has the fol
 
 > The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
 
-Previously, you had to obtain a reference to the numerictextbox element through the `k-numerictextbox` class
+Previously, you had to obtain a reference to the numerictextbox element through the `k-input` class
 
 ```javascript
-$(".k-numerictextbox") // Returns a reference to the NumericTextBox element in the old rendering.
+$(".k-input") // Returns a reference to the NumericTextBox element in the old rendering.
 ```
 
 With the new rendering, you must target the numerictextbox element by using the `k-input-inner` class.
 
 ```javascript
 $(".k-input-inner") // Returns a reference to the NumericTextBox element in the new rendering.
+```
+
+The following example showcases how to apply a background color to the **NumericTextBox** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work AFTER R1 2022 */
+      .k-input {
+        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
+      }
+      /* Doesn't work BEFORE R1 2022 */
+      .k-input-inner {
+        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
+      }
+    </style>
 ```
 
 ## See Also

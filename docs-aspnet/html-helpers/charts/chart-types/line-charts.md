@@ -56,6 +56,32 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple
          )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-chart name="chart">
+        <chart-title text="Internet Users"></chart-title>
+        <chart-legend position="ChartLegendPosition.Bottom"></chart-legend>
+        <series-defaults type="ChartSeriesType.Line" />
+        <series>
+            <series-item data='new double[] { 15.7, 16.7, 20, 23.5, 26.6 }' name="World">
+            </series-item>
+            <series-item data='new double[] { 67.96, 68.93, 75, 74, 78}' name="United States">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item categories='new string[] { "2005", "2006", "2007", "2008", "2009" }'>
+                <major-grid-lines visible="false" />
+            </category-axis-item>
+        </category-axis>
+        <value-axis>
+            <value-axis-item type="numeric">
+                <labels format="{0}%">
+                </labels>
+            </value-axis-item>
+        </value-axis>
+    </kendo-chart>
+```
+{% endif %}
 
 The configuration from the previous example results in the following Line Chart.
 
@@ -76,6 +102,14 @@ The supported line styles are:
        seriesDefaults.Line().Style(ChartLineStyle.Smooth)
    )
 ```
+{% if site.core %}
+```TagHelper
+    <series-defaults type="ChartSeriesType.Line"></series-defaults>
+    <series>
+        <series-item style="ChartSeriesStyle.Smooth"></series-item>
+    </series>
+```
+{% endif %}
 
 You can also set the line style for each Line series individually.
 
@@ -86,6 +120,22 @@ You can also set the line style for each Line series individually.
        series.Line(new double[] { 67.96, 68.93, 75, 54, 78 }).Name("United States").Style(ChartLineStyle.Smooth);
    })
 ```
+{% if site.core %}
+```TagHelper
+    <series>
+        <series-item type="ChartSeriesType.Line"
+                     data='new double[] { 15.7, 16.7, 20, 23.5, 26.6 }'
+                     name="World" 
+                     style="ChartSeriesStyle.Smooth">
+        </series-item>
+        <series-item type="ChartSeriesType.Line"
+                     data='new double[] { 67.96, 68.93, 75, 74, 78}' 
+                     name="United States"
+                     style="ChartSeriesStyle.Smooth">
+        </series-item>
+    </series>
+```
+{% endif %}
 
 ![A step-line Line Chart](images/chart-step-line.png)
 
@@ -104,6 +154,21 @@ By default, the Chart draws its Line series as solid lines. You can configure th
          series.Line(new double[] { 67.96, 68.93, 75, 74, 78 }).Name("United States");
      })
 ```
+{% if site.core %}
+```TagHelper
+    <series>
+        <series-item type="ChartSeriesType.Line"
+                     data='new double[] { 15.7, 16.7, 20, 23.5, 26.6 }'
+                     name="World" 
+                     dash-type="DashType.Dot">
+        </series-item>
+        <series-item type="ChartSeriesType.Line"
+                     data='new double[] { 67.96, 68.93, 75, 74, 78}' 
+                     name="United States">
+        </series-item>
+    </series>
+```
+{% endif %}
 
 ![A dotted Line Series](images/chart-dotted-line.png)
 
@@ -119,6 +184,20 @@ The series markers are the visuals that represent the point value in the Line se
           .Background("yellow")
       );
 ```
+{% if site.core %}
+```TagHelper
+    <series>
+        <series-item type="ChartSeriesType.Line"
+                     data='new double[] { 15.7, 16.7, 20, 23.5, 26.6 }' 
+                     name="World">
+            <markers type="ChartMarkerShape.Square" 
+                     background="yellow" 
+                     rotation="45">
+            </markers>
+        </series-item>
+    </series>
+```
+{% endif %}
 
 ![A Line Chart with custom markers](images/chart-line-markers.png)
 

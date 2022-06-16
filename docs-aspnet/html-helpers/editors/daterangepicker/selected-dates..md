@@ -15,13 +15,20 @@ For a complete example on how to select ranges by using the DateRangePicker, ref
 The following example demonstrates how to render a DateRangePicker with an initially selected range and defined min and max dates.
 
 ```HtmlHelper
-@(Html.Kendo().DateRangePicker()
-    .Name("daterangepicker") // The name of the DateRangePicker is mandatory. It specifies the "id" attribute of the widget.
-    .Min(new DateTime(2019, 9, 4)) // Sets the min date of the DateRangePicker.
-    .Max(new DateTime(2099, 12, 31)) // Sets the min date of the DateRangePicker.
-    .Range(r => r.Start(DateTime.Now).End(DateTime.Now.AddDays(10))) // Sets the range of the DateRangePicker.
-)
+    @(Html.Kendo().DateRangePicker()
+        .Name("daterangepicker") // The name of the DateRangePicker is mandatory. It specifies the "id" attribute of the widget.
+        .Min(new DateTime(2019, 9, 4)) // Sets the min date of the DateRangePicker.
+        .Max(new DateTime(2099, 12, 31)) // Sets the min date of the DateRangePicker.
+        .Range(r => r.Start(DateTime.Now).End(DateTime.Now.AddDays(10))) // Sets the range of the DateRangePicker.
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-daterangepicker name="daterangepicker" min="new DateTime(2019, 9, 4)" max="new DateTime(2099, 12, 31)">
+        <range start="DateTime.Now" end="DateTime.Now.AddDays(10)" />
+    </kendo-daterangepicker>
+```    
+{% endif %}
 
 You can access the selected start and end range using the .range() method as demonstrated here:
 

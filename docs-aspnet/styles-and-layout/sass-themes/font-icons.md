@@ -8,7 +8,7 @@ position: 6
 
 # Web Font Icons
 
-With the R1 2017 release, Telerik UI delivers integrated font icons intended for the web and data visualization widgets of the suite.
+With the R1 2017 release, Telerik UI delivers integrated font icons intended for the web and data visualization components of the suite.
 
 > To make sure all the icons are displayed correctly, use one of the SASS themes. For more information on how to install an SASS theme, visit the [installation] ({% slug sassbasedthemes_installation%}) article.
 

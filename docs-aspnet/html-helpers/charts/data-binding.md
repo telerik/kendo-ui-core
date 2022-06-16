@@ -46,6 +46,35 @@ You can specify the data points of the Charts as part of the series definitions.
         )
 	)
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-chart name="chart">
+        <series-defaults type="ChartSeriesType.Line"></series-defaults>
+        <series>
+            <series-item name="India" style="ChartSeriesStyle.Smooth" data="new double[] { 3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855 }">
+            </series-item>
+            <series-item name="World" style="ChartSeriesStyle.Smooth" data="new double[] { 1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727 }">
+            </series-item>
+            <series-item name="Russian Federation" style="ChartSeriesStyle.Smooth" data="new double[] { 4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3 }">
+            </series-item>
+            <series-item name="Haiti" style="ChartSeriesStyle.Smooth" data="new double[] { -0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590 }">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item categories='new string[] { "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "20010", "2011", }'>
+                <major-grid-lines visible="false"/>
+            </category-axis-item>
+        </category-axis>
+        <value-axis>
+            <value-axis-item type="numeric" axis-crossing-value="new object[] { -10 }">
+                <labels format="{0}%"></labels>
+                <line visible="false" />
+            </value-axis-item>
+        </value-axis>
+        <tooltip visible="true" format="{0}%"></tooltip>
+    </kendo-chart>
+```
+{% endif %}
 
 ### Binding Scatter Series to Inline Data
 
@@ -123,6 +152,32 @@ A more flexible alternative is to provide the series with an array of objects. T
       )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-chart name="chart">
+        <chart-legend visible="false"></chart-legend>
+        <series-defaults type="ChartSeriesType.Donut"></series-defaults>
+        <chart-area background="transparent"></chart-area>
+        <series>
+            <series-item start-angle="150" name="2012" data='new dynamic[] {
+                new {category = "Asia",value = 53.8,color = "#9de219"},
+                new {category = "Europe",value = 16.1,color = "#90cc38"},
+                new {category = "Latin America",value = 11.3,color = "#068c35"},
+                new {category = "Africa",value = 9.6,color = "#006634"},
+                new {category = "Middle East",value = 5.2,color = "#004d38"},
+                new {category = "North America",value = 3.6,color = "#033939"}
+            }'>
+                <labels visible="true" 
+                        position="ChartSeriesLabelsPosition.OutsideEnd" 
+                        template="#= category #: \n #= value#%" 
+                        background="transparent">
+                </labels>
+            </series-item>
+        </series>
+        <tooltip visible="true" template="#= category # (#= series.name #): #= value #%"></tooltip>
+    </kendo-chart>
+```
+{% endif %}
 
 ## Local Data
 
@@ -188,6 +243,33 @@ You can bind the Chart to a data set in the view model or to items that are stor
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @model IEnumerable<LocalBindingExample.Models.InternetUsers>
+
+    <kendo-chart name="chart">
+        <chart-title text="Internet Users in United States"></chart-title>
+        <chart-legend visible="false"></chart-legend>
+        <series-defaults type="ChartSeriesType.Line" />
+        <series>
+            <series-item name="United States" field="Value" category-field="Year" data="@Model.ToArray()">
+                <labels format="{0}%" visible="true"></labels>
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item>
+                <major-grid-lines visible="false" />
+            </category-axis-item>
+        </category-axis>
+        <value-axis>
+            <value-axis-item type="numeric">
+                <labels format="{0}%"></labels>
+                <line visible="false" />
+            </value-axis-item>
+        </value-axis>
+    </kendo-chart>
+```    
+{% endif %}
 
 ## Remote Data
 
@@ -274,6 +356,39 @@ To bind to remote data by using the DataSource component:
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+       <kendo-chart name="chart">
+            <chart-title text="Spain electricity production (GWh)"></chart-title>
+            <chart-legend visible="true" position="ChartLegendPosition.Top"></chart-legend>
+            <datasource>
+                <transport>
+                    <read type="post" url="@Url.Action("_SpainElectricityProduction","Line_Charts")" />
+                </transport>
+            </datasource>
+            <series-defaults type="ChartSeriesType.Line"></series-defaults>
+            <series>
+                <series-item name="Nuclear" field="Nuclear" category-field="Year"></series-item>
+                <series-item name="Hydro" field="Hydro" category-field="Year"></series-item>
+                <series-item name="Wind" field="Wind" category-field="Year"></series-item>
+            </series>
+            <category-axis>
+                <category-axis-item>
+                    <labels>
+                        <chart-category-axis-labels-rotation angle="-90" />
+                    </labels>
+                    <crosshair visible="true"></crosshair>
+                </category-axis-item>
+            </category-axis>
+            <value-axis>
+                <value-axis-item major-unit="10000">
+                    <labels format="{0:N0}"></labels>
+                </value-axis-item>
+            </value-axis>
+            <tooltip visible="true" shared="true" format="{0:N0}"></tooltip>
+        </kendo-chart>
+    ```
+    {% endif %}
 
 1. (Optional) Configure a Custom DataSource.
 

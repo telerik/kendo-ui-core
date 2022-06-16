@@ -396,6 +396,40 @@ In order to achieve the same look and feel as the old rendering, use the classes
 
 > If you use a LESS theme, the new rendering will support only the [default options](#options).
 
+The following example showcases how to change the background colors of the input and button elements of the **MultiColumnComboBox** in both the new, and the old rendering:
+
+```
+    <style>
+      /* Doesn't work BEFORE R1 2022 */
+        .k-input-inner{ /* change the input field style */
+            background-color:red;
+        }
+        .k-input-button{ /* changes the button style */
+            background-color:orange;
+        }
+        .k-table-thead{ /* changes the style of the column headers */
+            background-color:green;
+        }
+        .k-table-td{ /* changes the style of the cells */
+            background-color:purple;
+        }
+
+      /* Doesn't work AFTER R1 2022 */
+        .k-input{ /* change the input field style */
+            background-color:red;
+        }
+        .k-select{ /* changes the button style */
+            background-color:orange;
+        }
+        .k-header{ /* changes the style of the column headers */
+            background-color:green !important;
+        }
+        .k-cell{ /* changes the style of the cells */
+            background-color:purple;
+        }
+    </style>
+```
+
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})

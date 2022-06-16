@@ -429,7 +429,7 @@ Popup rendering with virtualization:
 
 In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
 
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+> The new styling and rendering support only the [default options](#options) when you use a LESS theme.
 
 Previously, a reference to the DropDownList input element was obtainable through the `k-input` class.
 
@@ -466,6 +466,54 @@ With the new rendering, the DropDownList item elements must be targeted by using
 
 ```javascript
 $('.k-list-item') // Returns a reference to the items rendered in the DropDownList popup.
+```
+
+If you are upgrading from a version prior to R1 2022 and you are using custom CSS to override default DropDownList styles, you will need to update the classes used in the selectors of your custom CSS rules. The following example shows how to achieve the same customization in the DropDownList, depending on whether you are using an old product version or a new one. 
+
+The first set of CSS rules relies on the classes available in the old rendering.
+
+```
+<style>
+/*  Old rendering (versions prior to R1 2022)*/ 
+
+/* Apply lightblue background-color to the items */
+.k-popup .k-item {
+  background-color: lightblue;
+}
+
+/* Apply lightgreen background-color to the selected item */
+.k-popup .k-item.k-state-selected {
+  background-color: lightgreen;
+}
+
+/* Apply yellow background-color to the footer */
+.k-popup .k-footer{
+  background-color: yellow;
+}
+</style>
+```
+
+The second set of CSS rules relies on the classes available in the new rendering.
+
+```
+<style>
+/*  New Rendering (versions after R1 2022) */   
+      
+/* Apply lightblue background-color to the items */
+.k-list-item{ 
+  background-color: lightblue;
+}    
+
+/* Apply lightgreen background-color to the selected item */
+.k-popup .k-list-item.k-selected {
+  background-color: lightgreen;
+}
+      
+/* Apply yellow background-color to the footer */
+.k-popup .k-list-footer{
+  background-color: yellow;
+}
+</style>
 ```
 
 ## See Also
