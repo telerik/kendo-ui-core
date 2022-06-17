@@ -50,6 +50,8 @@ var __meta__ = { // jshint ignore:line
             options.enabled = options.enabled !== false && !$(element).prop(DISABLED);
             Widget.fn.init.call(that, element, options);
 
+            that.wrapper = that.element;
+
             that._mainButton();
             that._renderMenu();
 
