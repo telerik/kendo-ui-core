@@ -934,7 +934,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (options.showText !== "toolbar") {
-                    element.append("<span>" + this.options.text + "<span>");
+                    element.append("<span>" + this.options.text + "</span>");
                 }
 
                 element.data({
@@ -1663,10 +1663,10 @@ var __meta__ = { // jshint ignore:line
                         that._toggleOverflow();
                         that.overflowAnchor.trigger(FOCUS);
                     } else if (e.keyCode === keys.DOWN) {
-                        element = !isComplexTool || (isComplexTool && target.is(":last-child")) ? li : target;
+                        element = !isComplexTool || (isComplexTool && target.is(":last-child")) || (isComplexTool && !target.next().is(":kendoFocusable")) ? li : target;
                         findFocusableSibling(element, NEXT).trigger(FOCUS);
                     } else if (e.keyCode === keys.UP) {
-                        element = !isComplexTool || (isComplexTool && target.is(":first-child")) ? li : target;
+                        element = !isComplexTool || (isComplexTool && target.is(":first-child")) || (isComplexTool && !target.prev().is(":kendoFocusable")) ? li : target;
                         findFocusableSibling(element, PREV).trigger(FOCUS);
                     } else if ((e.keyCode === keys.SPACEBAR || e.keyCode === keys.ENTER) && !$(e.target).is(DOT + STATE_DISABLED)) {
                         that.userEvents.trigger(TAP, { target: $(e.target) });

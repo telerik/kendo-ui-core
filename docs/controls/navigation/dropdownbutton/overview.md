@@ -8,7 +8,7 @@ position: 1
 
 # DropDownButton Overview
 
-The Kendo UI for jQuery DropDownButton widget combines a button with a dropdown element. It allows users to click on the primary button and open the drop-down popup to choose from a list of additional actions.
+The Kendo UI for jQuery DropDownButton widget combines a button with a drop-down element. It allows users to click the primary button and open the drop-down popup to choose from a list of additional actions.
 
 * [Demo page for the DropDownButton](https://demos.telerik.com/kendo-ui/dropdownbutton/index) 
 

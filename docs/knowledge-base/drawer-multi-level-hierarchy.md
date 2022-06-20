@@ -204,7 +204,7 @@ The following example demonstrates the full implementation of the approach.
         }
 
         // If the element is a parent, add a line separator too.
-        let separator = isParent ? "<li data-role='drawer-separator'></li>" : "";
+        let separator = isParent ? `<li data-role='drawer-separator' ${level > 0 ? "class='hidden'" : ""}></li>` : "";
 
         // Create the final result.
         let result = liStart + element + liEnd + separator;
@@ -255,6 +255,9 @@ The following example demonstrates the full implementation of the approach.
             if(expandIcon.length) {
               children.each(function(i, x) {
                 $(x).removeClass("hidden");
+                if($(x).prev().is(".k-drawer-separator")) {
+                  $(x).prev().removeClass("hidden");
+                }
               });
               expandIcon.removeClass("k-i-arrow-chevron-right").addClass("k-i-arrow-chevron-down");
             }
@@ -308,6 +311,11 @@ The following example demonstrates the full implementation of the approach.
             }
 
             $(x).addClass("hidden");
+
+            if($(x).prev().is(".k-drawer-separator") && $(x).prev().prev().data("parent")) {
+              $(x).prev().addClass("hidden");
+            }
+
             collapseIcon.addClass("k-i-arrow-chevron-right").removeClass("k-i-arrow-chevron-down");
           });
         }

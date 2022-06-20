@@ -194,7 +194,7 @@ A value indicating how wide will the pointer be
     <div id="progressbar"></div>
     <script>
      $("#progressbar").kendoCircularProgressBar({
-        pointerWidth: 15.
+        pointerWidth: 15,
         indeterminate: true
      });
     </script>

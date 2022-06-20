@@ -141,19 +141,16 @@ The duration of the open animation in milliseconds.
 #### Example - specify German culture internationalization
 
     <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
-
-        For more information check this help topic:
-        https://docs.telerik.com/kendo-ui/framework/globalization/overview
+        Include the culture file.
+        List of available cultures - https://github.com/telerik/kendo-ui-core/tree/master/src/cultures
     -->
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
     <input id="datepicker" />
     <script>
     $("#datepicker").kendoDatePicker({
-        culture: "de-DE"
+        culture: "de-DE",
+        value: new Date()
     });
     </script>
 

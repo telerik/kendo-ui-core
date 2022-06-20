@@ -12,7 +12,7 @@ The DropDownButton provides options for visually enhancing its textual content b
 
 You can add an icon with the `img` element or with a background image (usually a sprite). With regard to web standards, using background images is better because the icon represents a decoration, not structural content.
 
-The DropDownButton provides the `icon`, `spriteCssClass` and `imageUrl` properties for configuring icons. With a specific SplitButton instance, you have to use only one of them&mdash;if you define multiple properties, the SplitButton will work with only one of them in the order previously stated.
+The DropDownButton provides the `icon`, `spriteCssClass`, and `imageUrl` properties for configuring icons. With a specific DropDownButton instance, you have to use only one of them&mdash;if you define multiple properties, the DropDownButton will work with only one of them in the order previously stated.
 
 For a complete example on rendering an Icon DropDownButton, refer to the [Icons demo of the DropDownButton](https://demos.telerik.com/kendo-ui/dropdownbutton/icons).
 
@@ -23,7 +23,10 @@ To visually enhance the DropDownButton, use any of the following approaches:
 
 ## Background Icons
 
-Background icons are applied over the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The DropDownButton can automatically render the `span` element, or use an existing `span` element if it has a `k-sprite` CSS class or a `k-icon` class if the `icon` property is used. The difference between the `icon` or `spriteCssClass` properties is that `icon` is intended to be used for built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [demo on using icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
+Background icons are applied through the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The DropDownButton can either:
+* Automatically render the `span` element.
+* Use an existing `span` element&mdash;Possible only if the element has a `k-sprite` CSS class or a `k-icon` CSS class (if you use the `icon` property).
+The difference between the `icon` and `spriteCssClass` properties is that `icon` is intended for use with the built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [demo on using icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 The following example demonstrates how to use icons in the DropDownButton widget:
 
@@ -51,11 +54,11 @@ The `icon` configuration in the previous example will produce the following HTML
 The following example demonstrates how to apply the `spriteCssClass`:
 
 	```
-    <button type="button" id="splitButton">Plus</button>
+    <button type="button" id="dropDownButton">Plus</button>
 
 	<script>
 	$(function(){
-		$("#splitButton").kendoSplitButton({
+		$("#dropDownButton").kendoDropDownButton({
 			spriteCssClass: "myPlusIcon"
 		});
 	});

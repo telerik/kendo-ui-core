@@ -34,7 +34,7 @@ The following values are available for the [`size`](/api/javascript/ui/dropdownb
 - `lg`—Large size.
 - `none`—Unset.
 
-The default size value is `medium` and it is applied to the button element through the `k-button-md` class.
+The default `size` value is `medium` and it is applied to the button element through the `k-button-md` class.
 
 ```html
 <button id="button" data-role="dropdownbutton" class="k-menu-button k-button k-button-md">
@@ -64,7 +64,7 @@ The default `fillMode` value is `solid` and it is applied to the button element 
 
 ### ThemeColor
 
-As applying `themeColor` is closely related to the `fillMode`, the structure of the class name for the `themeColor` is a composite `k-button-{fillMode}-{themeColor}` setting.
+As applying `themeColor` is closely related to the `fillMode` option, the structure of the class name for `themeColor` is a composite `k-button-{fillMode}-{themeColor}` setting.
 
 The following values are available for the [`themeColor`](/api/javascript/ui/dropdownbutton/configuration/themecolor) option:
 
@@ -81,7 +81,7 @@ The following values are available for the [`themeColor`](/api/javascript/ui/dro
 - `inverse`
 - `none`
 
-The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` will have the `k-button-solid-base` class applied.
+The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` options will have the `k-button-solid-base` class applied.
 
 ```html
 <!-- DropDownButton with default fillMode and themeColor -->
@@ -113,7 +113,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/dropdo
 - `pill`
 - `none`—Unset.
 
-The default rounded value is `medium` and it is applied to the button element through the `k-rounded-md` class.
+The default `rounded` value is `medium` and it is applied to the button element through the `k-rounded-md` class.
 
 ```html
 <button id="button" data-role="dropdownbutton" class="k-menu-button k-button k-rounded-md ">

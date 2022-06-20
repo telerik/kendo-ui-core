@@ -33,7 +33,7 @@ How can I append a Kendo UI ContextMenu to each cell or part of the cells in a K
 
 ## Solution
 
-1. Initialize the ContextMenu over the Grid rows.
+1. Initialize the ContextMenu over the Grid rows. By default, the ContextMenu opens on right click on the mouse. This could be adjusted with the [`showOn`](api/javascript/ui/contextmenu/configuration/showon) property.
 1. On the `select` event of the ContextMenu, retrieve the row information by using the `dataItem` method of the Grid.
 
 The following example demonstrates how to achieve the desired scenario.

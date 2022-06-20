@@ -39,6 +39,8 @@ How can I change the `pageSize` property of the Grid when the `height` changes s
 1. Calculate the number of rows that will fit in the available space by subscribing to the `resize` event of the `window` element.
 1. Change the `pageSize` by using the `pageSize` method of the dataSource.
 
+This solution adjusts the pageSize of the Grid dataSource only when the window is being resized. Initially the Grid will display as many records as it is specified in the pageSize declaration.
+
 ```dojo
 <style>
   html,
