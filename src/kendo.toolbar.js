@@ -7,7 +7,7 @@ var __meta__ = { // jshint ignore:line
     name: "ToolBar",
     category: "web",
     description: "The ToolBar widget displays one or more command buttons divided into groups.",
-    depends: [ "core", "html.button", "./kendo.splitbutton", "./kendo.dropdownbutton" ]
+    depends: [ "core", "html.button", "splitbutton", "dropdownbutton" ]
 };
 
 (function($, undefined) {
