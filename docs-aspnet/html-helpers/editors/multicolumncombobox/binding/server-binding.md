@@ -53,6 +53,26 @@ You can bind the MultiColumnComboBox locally on the server by passing the approp
             .BindTo((System.Collections.IEnumerable)ViewData["products"])
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        @model MvcApplication1.Models.ProductViewModel
+
+        @{
+           var data = (System.Collections.IEnumerable)ViewData["products"];
+        }
+        <kendo-multicolumncombobox for="@Model.ProductID" 
+            bind-to="(dynamic)data"
+            datatextfield="ProductName"
+            datavaluefield="ProductID">
+            <multicolumncombobox-columns>
+                <column field="ProductName" title="Name" width="200px">
+                </column>
+                <column field="ProductID" title="ID" width="200px">
+                </column>
+            </multicolumncombobox-columns>
+        </kendo-multicolumncombobox>
+    ```
+    {% endif %}
 
 ## See Also
 

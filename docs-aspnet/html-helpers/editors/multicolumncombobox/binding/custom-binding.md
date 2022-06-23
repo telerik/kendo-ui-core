@@ -59,6 +59,29 @@ You can use a custom DataSource and bind the MultiColumnComboBox to a `ToDataSou
             })
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+
+        <kendo-multicolumncombobox name="productMultiColumnComboBox"
+            datatextfield="ProductName"
+            datavaluefield="ProductID">
+            <multicolumncombobox-columns>
+                <column field="ProductName" title="Name" width="200px">
+                </column>
+                <column field="ProductID" title="ID" width="200px">
+                </column>
+            </multicolumncombobox-columns>
+            <datasource type="DataSourceTagHelperType.Custom" custom-type="aspnetmvc-ajax" server-filtering="true">
+                <schema data="Data" total="Total" errors="Errors">
+                </schema>
+                <transport>
+                    <read url="@Url.Action("GetProducts", "Home")" />
+                </transport>
+            </datasource>
+        </kendo-multicolumncombobox>
+
+    ```
+    {% endif %}
 
 ## Sending Parameters to the Server
 
@@ -89,6 +112,37 @@ The following example demonstrates how to configure the MultiColumnComboBox to s
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+
+    <kendo-multicolumncombobox name="productMultiColumnComboBox" 
+        filter="FilterType.Contains"
+        datatextfield="ProductName"
+        datavaluefield="ProductID"
+        index="0">
+        <multicolumncombobox-columns>
+            <column field="ProductName" title="Name">
+            </column>
+            <column field="ProductID" title="ID">
+            </column>
+        </multicolumncombobox-columns>
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetProducts", "Home")" data="onAdditionalData"  />
+            </transport>
+        </datasource>
+    </kendo-multicolumncombobox>
+
+    <script>
+        function onAdditionalData() {
+            return {
+                text: $("#productMultiColumnComboBox").data("kendoMultiColumnComboBox").text()
+            };
+        }
+    </script>
+
+```
+{% endif %}
 
 The following example demonstrates how the `GetProducts` method is used.
 

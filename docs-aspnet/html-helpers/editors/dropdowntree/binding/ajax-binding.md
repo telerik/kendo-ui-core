@@ -23,6 +23,20 @@ The DropDownTree provides support for remote data binding by using a `DataSource
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree datatextfield="Name" datavaluefield="id" name="dropdowntree" >
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Remote_DropDownTreeData", "Home")" />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 ```Controller
 public static IList<HierarchicalViewModel> GetHierarchicalData()
 {

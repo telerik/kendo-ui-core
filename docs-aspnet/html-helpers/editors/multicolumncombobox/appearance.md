@@ -34,6 +34,7 @@ The default size value is `Medium`.
 
 The example below shows a basic configuration and how to set `size` to "large":
 
+```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
         .Name("movies")
         .DataTextField("Text")
@@ -57,6 +58,36 @@ The example below shows a basic configuration and how to set `size` to "large":
             }
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var movies_data = new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "Item1", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Item2", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Item3", Value ="3"
+            }
+        };
+    }
+
+    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies" 
+    size="ComponentSize.Large"
+    bind-to="movies_data">
+        <multicolumncombobox-columns>
+            <column field="Text" title="Text" width="400px">
+            </column>
+            <column field="Value" title="Value" width="100px">
+            </column>
+        </multicolumncombobox-columns>
+    </kendo-multicolumncombobox>
+```
+{% endif %}
 
 Below is the HTML of the MultiColumnComboBox that is affected from the `Size` configuration. The `ComponentSize.Large` value is reflected through the `k-input-lg` class applied to the `span.k-dropdowngrid` wrapping element:
 
@@ -80,6 +111,7 @@ The default value is `Full`.
 
 The following example demonstrates how to set `Rounded` in the declaration of the MultiColumnComboBox:
 
+```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
         .Name("movies")
         .DataTextField("Text")
@@ -103,6 +135,36 @@ The following example demonstrates how to set `Rounded` in the declaration of th
             }
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var movies_data = new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "Item1", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Item2", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Item3", Value ="3"
+            }
+        };
+    }
+
+    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies" 
+    rounded="Rounded.Medium"
+    bind-to="movies_data">
+        <multicolumncombobox-columns>
+            <column field="Text" title="Text" width="400px">
+            </column>
+            <column field="Value" title="Value" width="100px">
+            </column>
+        </multicolumncombobox-columns>
+    </kendo-multicolumncombobox>
+```
+{% endif %}
 
 The `Rounded.Medium` value is reflected through the `k-rounded-md` class applied to the `span.k-dropdowngrid` wrapping element:
 
@@ -126,6 +188,7 @@ The default value is `Solid` and it is applied to the `span.k-dropdowngrid` wrap
 
 The following example demonstrates how to set `FillMode` in the declaration of the MultiColumnComboBox:
 
+```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
         .Name("movies")
         .DataTextField("Text")
@@ -149,6 +212,36 @@ The following example demonstrates how to set `FillMode` in the declaration of t
             }
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var movies_data = new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "Item1", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Item2", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Item3", Value ="3"
+            }
+        };
+    }
+
+    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies" 
+    fill-mode="FillMode.Outline"
+    bind-to="movies_data">
+        <multicolumncombobox-columns>
+            <column field="Text" title="Text" width="400px">
+            </column>
+            <column field="Value" title="Value" width="100px">
+            </column>
+        </multicolumncombobox-columns>
+    </kendo-multicolumncombobox>
+```
+{% endif %}
 
 The `FillMode.Outline` value is reflected through the `k-input-outline` class applied to the `span.k-dropdowngrid` wrapping element:
 

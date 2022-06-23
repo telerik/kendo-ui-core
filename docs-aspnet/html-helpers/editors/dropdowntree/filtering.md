@@ -32,6 +32,20 @@ The following example demonstrates how to set the filter of the DropDownTree.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree datatextfield="Name" datavaluefield="id" filter="FilterType.Contains" name="dropdowntree"  style="width: 100%">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Remote_DropDownTreeData", "Home")" />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 
 ## See Also
 

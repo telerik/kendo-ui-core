@@ -137,8 +137,11 @@ When you use a Toolbar Template, and you also want to use a built-in command, th
 ```TagHelper
     <script id="GridToolbarTemplate" type="text/html">
         <div class="refreshBtnContainer">
-            <a href="\\#" class="k-pager-refresh k-link k-button k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
+            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
         </div>
+        
+        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
+        
         <div class="toolbar">
             <label class="category-label" for="category">Show products by category:</label>
             <kendo-dropdownlist name="categories" style="width:150px"
@@ -155,6 +158,11 @@ When you use a Toolbar Template, and you also want to use a built-in command, th
                 </datasource>
             </kendo-dropdownlist>
         </div>
+        
+        <span class="k-textbox k-grid-search k-display-flex">
+            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+            <span class="k-input-icon"><span class="k-icon k-i-search"></span></span>
+        </span>
     </script>
 ```
 {% endif %} 

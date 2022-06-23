@@ -32,6 +32,10 @@ The password must contain only ASCII characters.
 
 As an alternative, you can [reset your Telerik NuGet Feed credentials from the Windows Credentials Manager](#solution-2-windows-credentials-manager)
 
+## Issue: Unable to load the service index for source https://nuget.telerik.com/v3/index.json
+
+Make sure that the Telerik NuGet Feed is live at [https://status.telerik.com/](https://status.telerik.com/).
+
 ## Issue: Resetting Telerik Nuget Credentials
 
 On Windows, if you enter and save wrong credentials for the Telerik NuGet or if you change your Telerik credentials, you won't have access to the desired NuGet packages. Before you can enter the correct user name and password, you must clear the saved credentials.

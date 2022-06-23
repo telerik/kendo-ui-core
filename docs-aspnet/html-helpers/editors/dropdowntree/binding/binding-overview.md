@@ -40,7 +40,32 @@ The following example demonstrates how to configure a DropDownTree with three le
         })
     )
 ```
-
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree name="dropdowntree">
+        <items>
+            <dropdowntree-item expanded="true" text="My Documents">
+                <items>
+                    <dropdowntree-item expanded="true" text="Kendo UI Project">
+                        <items>
+                            <dropdowntree-item  text="about.html">
+                            </dropdowntree-item>
+                            <dropdowntree-item text="index.html">
+                            </dropdowntree-item>
+                            <dropdowntree-item text="logo.png">
+                            </dropdowntree-item>
+                        </items>
+                    </dropdowntree-item>
+                    <dropdowntree-item text="New Web Site">
+                    </dropdowntree-item>
+                    <dropdowntree-item text="Reports">
+                    </dropdowntree-item>
+                </items>
+            </dropdowntree-item>
+        </items>
+    </kendo-dropdowntree>
+```
+{% endif %}
 ## DropDownTree Binding
 
 The DropDownTree supports the following data-binding approaches:

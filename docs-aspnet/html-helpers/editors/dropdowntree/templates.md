@@ -27,6 +27,20 @@ The following example demonstrates how to customize the DropDownTree by declarin
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree template="<span><h3>#: data.text #</h3></span>" name="dropdowntree">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url=@Url.Action("Read_TemplateData","DropDownTree") />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 
 The following example demonstrates how to customize the DropDownTree by referencing a script tag by its `id`.
 
@@ -46,6 +60,27 @@ The following example demonstrates how to customize the DropDownTree by referenc
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="dropdowntree-template" type="text/kendo-ui-template">
+        #: item.text #
+    </script>
+
+    <!-- DropDownTree initialization -->
+    <kendo-dropdowntree template-id="dropdowntree-template" name="dropdowntree">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url=@Url.Action("Read_TemplateData","DropDownTree") />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
+
 
 ## Item Template
 
@@ -69,6 +104,26 @@ The following example demonstrates how to define an item template and how to eva
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="dropdowntree-template" type="text/kendo-ui-template">
+        #: item.text #
+    </script>
+
+    <!-- DropDownTree initialization -->
+    <kendo-dropdowntree template-id="dropdowntree-template" name="dropdowntree">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url=@Url.Action("Read_TemplateData","DropDownTree") />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 
 ## Value Template
 
@@ -92,6 +147,26 @@ The value template manages the way the selected items in the input area of the D
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <script id="dropdowntree-value-template" type="text/kendo-ui-template">
+        <span class="k-sprite #: spriteCssClass #"></span>
+        <span> #: data.text # </span>
+    </script>
+
+    <!-- DropDownTree initialization -->
+    <kendo-dropdowntree dataspritecssclassfield="spriteCssClass" value-template-id="dropdowntree-value-template" name="dropdowntree">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url=@Url.Action("Read_TemplateData","DropDownTree")/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 
 ## Header Template
 
@@ -113,6 +188,26 @@ The header template manages the way the pop-up header of a DropDownTree is rende
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="dropdowntree-header-template" type="text/kendo-ui-template">
+        <strong>Header</strong>
+    </script>
+
+    <!-- DropDownTree initialization -->
+    <kendo-dropdowntree header-template-id="dropdowntree-header-template" name="dropdowntree">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url=@Url.Action("Read_TemplateData","DropDownTree")/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 
 ## Footer Template
 
@@ -134,6 +229,26 @@ The footer template manages the way the pop-up footer of a DropDownTree is rende
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="dropdowntree-footer-template" type="text/x-kendo-template">
+        Total <strong>#: instance.dataSource.total() #</strong> items found
+    </script>
+
+    <!-- DropDownTree initialization -->
+    <kendo-dropdowntree footer-template-id="dropdowntree-footer-template" name="dropdowntree">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url=@Url.Action("Read_TemplateData","DropDownTree")/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 
 ## No-Data Templates
 
@@ -156,6 +271,27 @@ The DropDownTree displays `noDataTemplate` in the popup when the data source is 
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="dropdowntree-nodata-template" type="text/x-kendo-template">
+        <strong>No Data!</strong>
+    </script>
+
+    <!-- DropDownTree initialization -->
+    <kendo-dropdowntree no-data-template="dropdowntree-nodata-template" name="dropdowntree">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url=@Url.Action("Read_TemplateData","DropDownTree")/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
+
 ## See Also
 
 * [Templates in the DropDownTree HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/templates)

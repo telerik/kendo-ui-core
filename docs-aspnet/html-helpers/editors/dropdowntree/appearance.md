@@ -32,6 +32,8 @@ The following values are available for the `Size` option:
 
 The following example demonstrates how to set `Size` in the declaration of the DropDownTree:
 
+```HtmlHelper
+
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree-single")
         .HtmlAttributes(new { style = "width: 100%" })
@@ -61,6 +63,45 @@ The following example demonstrates how to set `Size` in the declaration of the D
                 });
         })
     )
+```
+{% if site.core %}
+```TagHelper
+
+    <kendo-dropdowntree datavaluefield="id" size="ComponentSize.Large" height="auto" placeholder="Select Product" name="dropdowntree-single" style="width: 100%">
+        <items>
+            <dropdowntree-item expanded="true" text="Furniture" id="1">
+                <items>
+                    <dropdowntree-item expanded="false" text="Tables & Chairs" id="2">
+                    </dropdowntree-item>
+                    <dropdowntree-item expanded="false" text="Sofas" id="3">
+                    </dropdowntree-item>
+                    <dropdowntree-item expanded="false" text="Occasional Furniture" id="4">
+                    </dropdowntree-item>
+                    <dropdowntree-item expanded="false" text="Childerns Furniture" id="5">
+                    </dropdowntree-item>
+                    <dropdowntree-item expanded="false" text="Beds" id="6">
+                    </dropdowntree-item>
+                </items>
+            </dropdowntree-item>
+            <dropdowntree-item expanded="false" text="Decor" id="7">
+                <items>
+                    <dropdowntree-item expanded="false" text="Bed Linen" id="8">
+                    </dropdowntree-item>
+                    <dropdowntree-item expanded="false" text="Throws" id="9">
+                    </dropdowntree-item>
+                    <dropdowntree-item expanded="false" text="Curtains & Blinds" id="10">
+                    </dropdowntree-item>
+                    <dropdowntree-item expanded="false" text="Rugs" id="11">
+                    </dropdowntree-item>
+                    <dropdowntree-item expanded="false" text="Carpets" id="12">
+                    </dropdowntree-item>
+                </items>
+            </dropdowntree-item>
+        </items>
+    </kendo-dropdowntree>
+
+```
+{% endif %}
 
 The default size value is `Medium` and it is applied to the `span` wrapping element through the `k-input-md` class.
 
@@ -93,6 +134,8 @@ The default value is `Full`. It applies the `k-rounded-full` class to the `span.
 
 The following example demonstrates how to set `Rounded` in the declaration of the DropDownTree:
 
+```HtmlHelper
+
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree-single")
         .HtmlAttributes(new { style = "width: 100%" })
@@ -122,6 +165,45 @@ The following example demonstrates how to set `Rounded` in the declaration of th
                 });
         })
     )
+```
+{% if site.core %}
+```TagHelper
+
+     <kendo-dropdowntree datavaluefield="id" height="auto" rounded="Rounded.Medium" placeholder="Select Product" name="dropdowntree-single" style="width: 100%">
+                <items>
+                    <dropdowntree-item expanded="true" text="Furniture" id="1">
+                        <items>
+                            <dropdowntree-item  text="Tables & Chairs" id="2">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Sofas" id="3">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Occasional Furniture" id="4">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Childerns Furniture" id="5">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Beds" id="6">
+                            </dropdowntree-item>
+                        </items>
+                    </dropdowntree-item>
+                    <dropdowntree-item  text="Decor" id="7">
+                        <items>
+                            <dropdowntree-item  text="Bed Linen" id="8">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Throws" id="9">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Curtains & Blinds" id="10">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Rugs" id="11">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Carpets" id="12">
+                            </dropdowntree-item>
+                        </items>
+                    </dropdowntree-item>
+                </items>
+            </kendo-dropdowntree>
+
+```
+{% endif %}
 
 When single selection is used, the changes are applied to the `span.k-dropdowntree` wrapping element:
 
@@ -150,6 +232,8 @@ The following values are available for the `FillMode` option:
 The default value is `Solid` and it is applied to the `span.k-dropdowntree` wrapping element through the `k-picker-solid` class.
 
 The following example demonstrates how to set `FillMode` in the declaration of the DropDownTree:
+
+```HtmlHelper
 
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree-single")
@@ -180,6 +264,46 @@ The following example demonstrates how to set `FillMode` in the declaration of t
                 });
         })
     )
+```
+{% if site.core %}
+```TagHelper
+
+     <kendo-dropdowntree datavaluefield="id" height="auto" fill-mode="FillMode.Outline" placeholder="Select Product" name="dropdowntree-single" style="width: 100%">
+                <items>
+                    <dropdowntree-item expanded="true" text="Furniture" id="1">
+                        <items>
+                            <dropdowntree-item  text="Tables & Chairs" id="2">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Sofas" id="3">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Occasional Furniture" id="4">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Childerns Furniture" id="5">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Beds" id="6">
+                            </dropdowntree-item>
+                        </items>
+                    </dropdowntree-item>
+                    <dropdowntree-item  text="Decor" id="7">
+                        <items>
+                            <dropdowntree-item  text="Bed Linen" id="8">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Throws" id="9">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Curtains & Blinds" id="10">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Rugs" id="11">
+                            </dropdowntree-item>
+                            <dropdowntree-item  text="Carpets" id="12">
+                            </dropdowntree-item>
+                        </items>
+                    </dropdowntree-item>
+                </items>
+            </kendo-dropdowntree>
+            
+```
+{% endif %}
+
 
 
 The `FillMode.Outline` value is reflected through the respective classes applied to the `span.k-dropdowntree` wrapping element:

@@ -51,6 +51,43 @@ In order to set up the MultiColumnComboBox component bindings, you need to confi
 		}
 	</script>
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+	@Html.AntiForgeryToken()
+
+	<h1>MultiColumnComboBox Index</h1>
+
+    <kendo-multicolumncombobox name="products" datatextfield="ShipName" datavaluefield="ShipCity" filter="FilterType.Contains">
+        <multicolumncombobox-columns>
+            <column field="ShipName" title="Ship Name" width="200px">
+            </column>
+            <column field="ShipCity" title="Ship City" width="200px">
+            </column>
+            <column field="Freight" title="Freight" width="200px">
+            </column>
+        </multicolumncombobox-columns>
+        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+                <transport>
+                    <read url="@Url.Page("/MultiColumnComboBox/MultiColumnComboBoxIndex?handler=Read")" data="dataFunction" />
+                </transport>
+        </datasource>
+    </kendo-multicolumncombobox>
+
+    <script>
+		function dataFunction(e) {
+			var filterValue = '';
+			if (e.filter.filters[0]) {
+				filterValue = e.filter.filters[0].value;
+			}
+			return {
+				__RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
+				filterValue: filterValue
+			};
+		}
+	</script>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 
     public JsonResult OnGetRead(string filterValue)

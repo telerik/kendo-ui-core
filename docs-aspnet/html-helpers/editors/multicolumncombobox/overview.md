@@ -28,7 +28,7 @@ The following example demonstrates how to define the MultiColumnComboBox.
 {% if site.core %}
 ```HtmlHelper
 
-    @(Html.Kendo().ComboBox()
+    @(Html.Kendo().MultiColumnComboBox()
           .Name("products")
           .Placeholder("Select product")
           .DataTextField("ProductName")
@@ -44,7 +44,7 @@ The following example demonstrates how to define the MultiColumnComboBox.
 ```
 ```TagHelper
 
-    <kendo-multicolumnmulticolumncombobox name="products" filter="FilterType.Contains"
+    <kendo-multicolumncombobox name="products" filter="FilterType.Contains"
                         placeholder="Select product"
                         datatextfield="ProductName"
                         datavaluefield="ProductID"
@@ -55,7 +55,7 @@ The following example demonstrates how to define the MultiColumnComboBox.
                 <read url="@Url.Action("GetProducts", "Home")" />
             </transport>
         </datasource>
-    </kendo-multicolumnmulticolumncombobox>
+    </kendo-multicolumncombobox>
 ```
 {% else %}
 ```HtmlHelper
@@ -141,6 +141,23 @@ The following example demonstrates the basic configuration of the MultiColumnCom
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+     <kendo-multicolumncombobox auto-bind="false" height="400" datatextfield="ProductName" datavaluefield="ProductID" min-length="3" placeholder="Select product" filter="FilterType.Contains" name="products" style="width:100%;">
+        <multicolumncombobox-columns>
+            <column field="ProductName" title="Name" width="200px">
+            </column>
+            <column field="ProductID" title="ID" width="200px">
+            </column>
+        </multicolumncombobox-columns>
+        <datasource server-filtering="true">
+            <transport>
+                <read url="@Url.Action("Products_Read", "MultiColumnComboBox")" />
+            </transport>
+        </datasource>
+    </kendo-multicolumncombobox>
+```
+{% endif %}
 
 ## Functionality and Features
 

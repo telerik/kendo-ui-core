@@ -69,14 +69,21 @@ You can bind the DropDownTree locally on the server by passing the appropriate c
 
 1. Add the DropDownTree to the view and bind it to the data that is saved in the `ViewData`.
 
-    ```HtmlHelper
-        @using Kendo.Mvc.UI.Fluent
+```HtmlHelper
+    @using Kendo.Mvc.UI.Fluent
 
-        @(Html.Kendo().DropDownTree()
-            .Name("dropdowntree")
-            .BindTo((IEnumerable<DropDownTreeItemModel>)ViewBag.dropdowntreeData)
-        )
-    ```
+    @(Html.Kendo().DropDownTree()
+        .Name("dropdowntree")
+        .BindTo((IEnumerable<DropDownTreeItemModel>)ViewBag.dropdowntreeData)
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree name="dropdowntree" bind-to="(IEnumerable<DropDownTreeItemModel>)ViewBag.dropdowntreeData">
+    </kendo-dropdowntree>
+```
+{% endif %}
+
 
 ## See Also
 

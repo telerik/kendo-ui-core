@@ -40,6 +40,30 @@ In order to set up the ComboBox component bindings, you need to configure the `R
 		}
 	</script>
 ```
+{% if site.core %}
+```TagHelper
+	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+	@Html.AntiForgeryToken()
+
+    <kendo-dropdowntree datatextfield="Name" datavaluefield="id" name="dropdowntree" auto-width="true" style="width: 100%" auto-close="false">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Page("DropDownTreeIndex", "DropDownTreeRead")" data="forgeryToken" />
+            </transport>
+        </hierarchical-datasource>
+		<checkboxes check-children="true" enabled="true" />
+    </kendo-dropdowntree>
+
+	<script>
+		function forgeryToken() {
+			return kendo.antiForgeryTokens();
+		}
+	</script>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)       
 
         public JsonResult OnGetDropDownTreeRead(int? id)

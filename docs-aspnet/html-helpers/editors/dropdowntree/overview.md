@@ -40,7 +40,15 @@ The following example demonstrates how to define the DropDownTree.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdowntree name="dropdowntree1">
+    <kendo-dropdowntree datatextfield="Name" datavaluefield="id" name="dropdowntree"  style="width: 100%">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Remote_DropDownTreeData", "Home")" />
+            </transport>
+        </hierarchical-datasource>
     </kendo-dropdowntree>
 ```
 {% endif %}
@@ -125,16 +133,37 @@ The following example demonstrates the basic configuration of the DropDownTree.
     )
 ```
 ```TagHelper
-    <kendo-dropdowntree name="dropdowntree1" datatextfield="FullName">
-        <hierarchical-datasource>
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Employees" datatype="jsonp" />
-            </transport>
-            <schema type="json">
-                <hierarchical-model id="EmployeeId" has-children="HasEmployees">
-                </hierarchical-model>
-            </schema>
-        </hierarchical-datasource>
+    <kendo-dropdowntree name="dropdowntree">
+        <items>
+            <dropdowntree-item expanded="true" text="My Web Site" sprite-css-class="folder">
+                <items>
+                    <dropdowntree-item expanded="true" text="images" sprite-css-class="folder">
+                        <items>
+                            <dropdowntree-item text="logo.png" sprite-css-class="image">
+                            </dropdowntree-item>
+                        </items>
+                    </dropdowntree-item>
+                </items>
+            </dropdowntree-item>
+            <dropdowntree-item expanded="true" text="resources" sprite-css-class="folder">
+                <items>
+                    <dropdowntree-item expanded="true" text="pdf" sprite-css-class="folder">
+                        <items>
+                            <dropdowntree-item text="prices.pdf" sprite-css-class="pdf">
+                            </dropdowntree-item>
+                            <dropdowntree-item text="zip" sprite-css-class="folder">
+                                <items>
+                                    <dropdowntree-item  text="about.html" sprite-css-class="html">
+                                    </dropdowntree-item>
+                                    <dropdowntree-item text="index.html" sprite-css-class="html">
+                                    </dropdowntree-item>
+                                </items>
+                            </dropdowntree-item>
+                        </items>
+                    </dropdowntree-item>
+                </items>
+            </dropdowntree-item>
+        </items>
     </kendo-dropdowntree>
 ```
 {% else %}
@@ -188,8 +217,23 @@ For an example on basic DropDownTree events, refer to the [demo on using the eve
         )
     )
 
+```
+{% if site.core %}
+```TagHelper
+        <kendo-dropdowntree datatextfield="Name" datavaluefield="id" name="dropdowntree" on-data-bound="onDataBound" on-open="onOpen" on-close="onClose" on-change="onChange" on-filtering="onFiltering" on-select="onSelect" style="width: 100%">
+            <hierarchical-datasource>
+                <schema>
+                    <hierarchical-model id="id"></hierarchical-model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Employees", "Home")" />
+                </transport>
+            </hierarchical-datasource>
+        </kendo-dropdowntree>
+```
+{% endif %}
+```JavaScript
     <script type="text/javascript">
-
         function onDataBound(e) {
             console.log('DropDownTree instance:', e.sender);
         }

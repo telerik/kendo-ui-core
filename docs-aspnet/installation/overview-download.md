@@ -26,7 +26,7 @@ The {{ site.product }} components are server-side wrappers for the [Kendo UI for
 {% if site.core %}
 Telerik UI for ASP.NET Core requires .NET Core. To install .NET core, follow the instructions on <a href="https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites" target="_blank">Microsoft's .NET Core documentation site</a>.
 {% else %}
-Telerik UI for ASP.NET MVC requires the .NET Framework. To download the current version of the .NET Framework, [visit Microsoft's website].(https://dotnet.microsoft.com/download/dotnet-framework)
+Telerik UI for ASP.NET MVC requires the .NET Framework. To download the current version of the .NET Framework, [visit Microsoft's website](https://dotnet.microsoft.com/download/dotnet-framework).
 {% endif %}
 
 ## Getting the Binaries
@@ -51,7 +51,7 @@ To download the {{ site.product }} binaries with the components, you can use eit
 {% else %}
 * Download and install the automated installer&mdash;you can find it in the downloads section of your [Telerik account](https://www.telerik.com/account). 
     
-    The [automated MSI installer package]({% slug downloadinstall_aspnetcore %}) comes with a standard setup wizard. The setup wizard installs the Telerik UI for ASP.NET MVC binaries and the required client-side resources in a folder on your machine.
+    The [automated MSI installer package]({% slug msi_install_aspnetmvc6_aspnetmvc %}) comes with a standard setup wizard. The setup wizard installs the Telerik UI for ASP.NET MVC binaries and the required client-side resources in a folder on your machine.
     
     The MSI allows you to choose whether to install the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}) and the offline version of the [Telerik UI for ASP.NET MVC Demos](https://demos.telerik.com/aspnet-mvc). Optionally, the installer can configure the Telerik NuGet feed for you.
 {% endif %}
