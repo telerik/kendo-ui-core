@@ -7006,6 +7006,7 @@ declare namespace kendo.ui {
         scrollable?: boolean|string | undefined;
         navigatable?: boolean | undefined;
         selectable?: boolean|string | undefined;
+        pageable?: boolean | ListViewPageable | undefined;
         template?: Function | undefined;
         altTemplate?: Function | undefined;
         cancel?(e: ListViewCancelEvent): void;
@@ -7016,6 +7017,35 @@ declare namespace kendo.ui {
         remove?(e: ListViewRemoveEvent): void;
         save?(e: ListViewSaveEvent): void;
     }
+
+    interface ListViewPageableMessages {
+        display?: string | undefined;
+        empty?: string | undefined;
+        page?: string | undefined;
+        of?: string | undefined;
+        itemsPerPage?: string | undefined;
+        first?: string | undefined;
+        last?: string | undefined;
+        next?: string | undefined;
+        previous?: string | undefined;
+        refresh?: string | undefined;
+        morePages?: string | undefined;
+    }
+
+    interface ListViewPageable {
+        pageSize?: number | undefined;
+        previousNext?: boolean | undefined;
+        numeric?: boolean | undefined;
+        buttonCount?: number | undefined;
+        input?: boolean | undefined;
+        pageSizes?: boolean|any | undefined;
+        refresh?: boolean | undefined;
+        responsive?: boolean | undefined;
+        info?: boolean | undefined;
+        messages?: ListViewPageableMessages | undefined;
+        position?: string | undefined;
+    }
+
     interface ListViewEvent {
         sender: ListView;
         preventDefault: Function;

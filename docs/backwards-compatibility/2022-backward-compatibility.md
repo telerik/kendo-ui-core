@@ -10,6 +10,67 @@ position: 0
 
 This article lists the breaking or important changes in the 2022 releases of Kendo UI.
 
+## Kendo UI 2022 R2 SP1
+
+**Toolbar**
+
+As of 2022 R2 SP1, the Toolbar's SplitButton is replaced with the [standalone SplitButton widget](../api/javascript/ui/splitbutton.md).
+
+### Old vs New Rendering of the SplitButton in the Toolbar
+
+Old 
+
+```html
+    <div class="k-split-button k-button-group k-rounded-md" tabindex="0" id="f1beae85-2137-47b1-8ed0-a7cb1465a5ea_wrapper" data-overflow="auto" data-uid="f1beae85-2137-47b1-8ed0-a7cb1465a5ea" aria-disabled="false">
+        <a role="button" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" type="splitButton" data-uid="f1beae85-2137-47b1-8ed0-a7cb1465a5ea" data-overflow="auto" aria-disabled="false">
+            <span class="k-button-text">Paste</span>
+        </a>
+        <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button k-split-button-arrow">
+            <span class="k-icon k-i-arrow-s"></span>
+            </a>
+    </div>
+    <ul class="k-list-container k-split-container k-group k-menu-group k-reset k-menu-group-md k-popup k-state-border-up" id="f1beae85-2137-47b1-8ed0-a7cb1465a5ea_optionlist" data-uid="a57c3928-7cc4-44b4-9695-91f65fd99664" data-role="popup" aria-hidden="false" style="position: absolute; font-family: Arial, Helvetica, sans-serif; min-width: 77px; display: block; transform: translateY(0px);">
+        <li class="k-menu-item k-item">
+            <span tabindex="0" class="k-link k-menu-link" data-uid="d25b1945-3901-44a4-b824-14c612ef17f5" data-overflow="auto" aria-disabled="false">
+                <span class="k-icon k-i-paste-plain-text"></span>
+                <span class="k-menu-link-text">Keep Text Only</span></span>
+        </li>
+        <li class="k-menu-item k-item">
+            <span tabindex="0" class="k-link k-menu-link" data-uid="bb574191-a650-4f2a-9f7d-7a82b5aea10a" data-overflow="auto" aria-disabled="false">
+                <span class="k-icon k-i-paste-as-html"></span>
+                <span class="k-menu-link-text">Paste as HTML</span>
+            </span>
+        </li>
+    </ul>
+```
+
+New 
+
+```html
+    <div id="default_wrapper" class="k-split-button k-button-group k-rounded-md">
+        <button id="default" data-role="splitbutton" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="default_buttonmenu" aria-label="Paste splitbutton">
+        <span class="k-icon k-i-paste k-button-icon"></span>
+        <span class="k-button-text">Paste</span></button><button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button" type="button"><span class="k-icon k-i-arrow-s k-button-icon"></span>
+        </button>
+    </div>
+    <div data-role="buttonmenu" class="k-menu-popup k-popup k-group k-reset k-split-wrapper k-state-border-up" aria-hidden="false" style="display: block; position: absolute; min-width: 99px; transform: translateY(0px);">
+    <ul role="menu" class="k-group k-menu-group k-reset k-menu-group-md" id="default_buttonmenu">
+      <li id="keep-text" role="menuitem" class="k-item k-menu-item" tabindex="0">
+          <span class="k-link k-menu-link">
+              <span class="k-icon k-i-paste-plain-text"></span>
+              <span class="k-menu-link-text">Keep Text Only</span>
+            </span>
+        </li>
+      <li id="paste-html" role="menuitem" class="k-item k-menu-item" tabindex="0">
+          <span class="k-link k-menu-link">
+              <span class="k-icon k-i-paste-as-html"></span>
+              <span class="k-menu-link-text">Paste as HTML</span>
+            </span>
+        </li>
+   </ul>
+</div>
+```
+
 ## Kendo UI R1 2022 SP2
 
 **Button**

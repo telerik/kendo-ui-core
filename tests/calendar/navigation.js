@@ -142,6 +142,24 @@
             assert.equal(div.find("td.k-state-focused").text(), focusedDate.getDate() + "");
         });
 
+        it("navigating to a today moves selected attributes", function() {
+            var event = { keyCode: 84, preventDefault: $.noop },
+                date = new Date(2021, 11, 1),
+                today = new Date(),
+                selectedCell;
+
+            calendar.value(date);
+
+            calendar._move(event);
+
+            assert.deepEqual(calendar.current().getTime(), new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime());
+            assert.equal(div.find("td.k-state-focused").text(), today.getDate() + "");
+
+            selectedCell = div.find("td.k-state-selected");
+            assert.equal(selectedCell.text(), today.getDate() + "");
+            assert.equal(selectedCell.attr("aria-selected"), "true");
+        });
+
         //YEAR VIEW
         it("navigate should focus next month in year view", function() {
             var event = { keyCode: keys.RIGHT, preventDefault: $.noop },

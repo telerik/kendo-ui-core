@@ -75,19 +75,19 @@ var __meta__ = { // jshint ignore:line
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
         CLASSIC_HEADER_TEMPLATE = '<div class="k-header k-hstack">' +
-            '<a href="\\#" #=actionAttr#="prev" role="button" class="k-nav-prev k-button #=size# k-rounded-md k-button-flat k-button-flat-base k-icon-button" ' + ARIA_LABEL + '="Previous"><span class="k-button-icon k-icon k-i-arrow-60-left"></span></a>' +
-            '<a href="\\#" #=actionAttr#="nav-up" role="button" id="nav-up" class="k-nav-fast k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>' +
-            '<a href="\\#" #=actionAttr#="next" role="button" class="k-nav-next k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
+            '<a tabindex="-1" href="\\#" #=actionAttr#="prev" role="button" class="k-nav-prev k-button #=size# k-rounded-md k-button-flat k-button-flat-base k-icon-button" ' + ARIA_LABEL + '="Previous"><span class="k-button-icon k-icon k-i-arrow-60-left"></span></a>' +
+            '<a tabindex="-1" href="\\#" #=actionAttr#="nav-up" role="button" id="nav-up" class="k-nav-fast k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>' +
+            '<a tabindex="-1" href="\\#" #=actionAttr#="next" role="button" class="k-nav-next k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
         '</div>',
         MODERN_HEADER_TEMPLATE = '<div class="k-calendar-header k-hstack">' +
             '<a href="\\#" #=actionAttr#="nav-up" id="nav-up" role="button" class="k-calendar-title k-title k-button #=size# k-rounded-md k-button-flat k-button-flat-base "></a>' +
             '<span class="k-spacer"></span>' +
             '<span class="k-calendar-nav k-hstack">' +
-                '<a #=actionAttr#="prev" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-prev-view">' +
+                '<a tabindex="-1" #=actionAttr#="prev" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-prev-view">' +
                     '<span class="k-button-icon k-icon k-i-arrow-60-left"></span>' +
                 '</a>' +
-                '<a #=actionAttr#="today" class="k-nav-today">#=messages.today#</a>' +
-                '<a #=actionAttr#="next" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-next-view">' +
+                '<a tabindex="-1" #=actionAttr#="today" class="k-nav-today">#=messages.today#</a>' +
+                '<a tabindex="-1" #=actionAttr#="next" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-next-view">' +
                     '<span class="k-button-icon k-icon k-i-arrow-60-right"></span>' +
                 '</a>' +
             '</span>' +
@@ -779,16 +779,17 @@ var __meta__ = { // jshint ignore:line
             } else if (key == keys.DOWN) {
                 value = index === 0 ? 7 : 4;
                 prevent = true;
-            }
-            else if (key == keys.SPACEBAR) {
+            } else if (key == keys.SPACEBAR) {
                 value = 0;
                 prevent = true;
-            }
-            else if (key == keys.HOME || key == keys.END) {
+            } else if (key == keys.HOME || key == keys.END) {
                 method = key == keys.HOME ? "first" : "last";
                 temp = view[method](currentValue);
                 currentValue = new DATE(temp.getFullYear(), temp.getMonth(), temp.getDate(), currentValue.getHours(), currentValue.getMinutes(), currentValue.getSeconds(), currentValue.getMilliseconds());
                 currentValue.setFullYear(temp.getFullYear());
+                prevent = true;
+            } else if (key === 84) {
+                that._todayClick(e);
                 prevent = true;
             }
 
@@ -1177,7 +1178,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!footer[0]) {
-                footer = $('<div class="k-footer"><a href="#" class="k-link k-nav-today"></a></div>').appendTo(element);
+                footer = $('<div class="k-footer"><a tabindex="-1" href="#" class="k-link k-nav-today"></a></div>').appendTo(element);
             }
 
             that._today = footer.show()
