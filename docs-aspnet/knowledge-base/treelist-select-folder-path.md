@@ -106,14 +106,14 @@ To achieve the desired scenario:
 
         function onChange(e) {
             var treeList = e.sender;
-            var selectedRow = $("#treelist .k-grid-content table tbody").find("tr.k-state-selected");
+            var selectedRow = $("#treelist .k-grid-content table tbody").find("tr.k-selected");
             var rootLevel = $("#treelist .k-grid-content table tbody").find("tr:first").find(".k-icon").length;
             var level = $(selectedRow).find(".k-icon").length;
             var selectedRowDataItem = treeList.dataItem($(selectedRow));
             var prevParentRows = $(selectedRow).prevAll(".parentRow");
 
             if(rootLevel < level){ //selecting the root folder
-                $("#treelist .k-grid-content table tbody").find("tr:first").addClass("k-state-selected").attr("aria-selected", true);
+                $("#treelist .k-grid-content table tbody").find("tr:first").addClass("k-selected").attr("aria-selected", true);
             }
 
             if(prevParentRows.length > 0) {
@@ -126,7 +126,7 @@ To achieve the desired scenario:
                 var result = findParentItems($(selectedRow).prevAll(".parentRow"), selectedRowDataItem, selectedParentRows, level);
 
                 for(var i = 0; i < result.length; i++) {
-                    $(result[i]).addClass("k-state-selected").attr("aria-selected", true); //select the parent folder
+                    $(result[i]).addClass("k-selected").attr("aria-selected", true); //select the parent folder
                 }
             }
         }

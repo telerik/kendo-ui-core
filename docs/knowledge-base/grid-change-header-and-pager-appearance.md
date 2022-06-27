@@ -51,7 +51,7 @@ https://themebuilder.telerik.com/kendo-ui
         background-color: gray;
         color: white;
       }
-      .k-pager-wrap .k-link.k-state-selected
+      .k-pager-wrap .k-link.k-selected
       {
         background-color: lime;
       }

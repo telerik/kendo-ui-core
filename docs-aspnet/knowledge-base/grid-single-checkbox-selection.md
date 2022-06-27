@@ -62,7 +62,7 @@ $(document).ready(function () {
             var grid = $("#grid").data("kendoGrid");
             var row = $(e.target).closest("tr");
 
-            if (row.hasClass("k-state-selected")) {
+            if (row.hasClass("k-selected")) {
                 setTimeout(function (e) {
                     var grid = $("#grid").data("kendoGrid");
                     grid.clearSelection();

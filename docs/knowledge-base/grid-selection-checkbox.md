@@ -148,10 +148,10 @@ For earlier versions, refer to the following example. It demonstrates how to sel
         checkedIds[dataItem.id] = checked;
         if (checked) {
             //-select the row
-            row.addClass("k-state-selected");
+            row.addClass("k-selected");
             } else {
             //-remove selection
-            row.removeClass("k-state-selected");
+            row.removeClass("k-selected");
         }
     }
 
@@ -161,7 +161,7 @@ For earlier versions, refer to the following example. It demonstrates how to sel
         for(var i = 0; i < view.length;i++){
             if(checkedIds[view[i].id]){
                 this.tbody.find("tr[data-uid='" + view[i].uid + "']")
-                .addClass("k-state-selected")
+                .addClass("k-selected")
                 .find(".checkbox")
                 .attr("checked","checked");
             }

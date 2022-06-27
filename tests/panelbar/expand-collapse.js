@@ -15,7 +15,7 @@
                 '            </li>' +
                 '            <li class="k-item"><span class="k-link">Deleted Items</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-disabled"><span class="k-link">Inbox</span>' +
+                '            <li class="k-item k-disabled"><span class="k-link">Inbox</span>' +
                 '            </li>' +
                 '            <li class="k-item"><span class="k-link">My Mail</span>' +
                 '            </li>' +
@@ -27,7 +27,7 @@
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
+                '    <li class="k-item k-disabled"><span class="k-link k-header">Contacts<span' +
                 '            class="k-icon k-i-arrow-chevron-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item"><span class="k-link">My Contacts</span>' +
@@ -53,7 +53,7 @@
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
+                '    <li class="k-item k-active"><span class="k-link k-header k-selected">Notes<span' +
                 '            class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
                 '        <ul class="k-group" style="display: block;">' +
                 '            <li class="k-item"><span class="k-link">My Notes</span>' +
@@ -112,7 +112,7 @@
         it("clicking collapsed item not expand if it is disabled", function() {
             var item = getRootItem(1);
 
-            item.toggleClass("k-state-disabled", true);
+            item.toggleClass("k-disabled", true);
 
             item.find("> .k-link").trigger("click");
 

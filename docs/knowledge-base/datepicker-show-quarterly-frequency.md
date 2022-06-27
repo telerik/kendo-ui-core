@@ -120,7 +120,7 @@ How can I show a quarterly frequency (March, June, September, and December) in t
 
 	function disableDates(calendar) {
 		calendar.element.find("td").not(":eq(2)").not(":eq(4)").not(":eq(6)").not(":eq(8)")
-			.addClass("k-state-disabled")
+			.addClass("k-disabled")
 			.click(function(e) {
 				e.stopImmediatePropagation();
 			});

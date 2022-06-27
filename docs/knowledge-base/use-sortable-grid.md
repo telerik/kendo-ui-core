@@ -234,7 +234,7 @@ The main milestones of the approach are the following:
          hint: hintElement,
          cursor: "move",
          placeholder: function(element) {
-           return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+           return element.clone().addClass("k-hover").css("opacity", 0.65);
          },
          container: "#grid tbody",
          filter: ">tbody >tr",

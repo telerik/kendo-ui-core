@@ -134,7 +134,7 @@ In order to set up the Data Source Binding of the Telerik UI Spreadsheet compone
         }
 
         function onChange(e) {
-            $("#cancel, #save").toggleClass("k-state-disabled", !this.hasChanges());
+            $("#cancel, #save").toggleClass("k-disabled", !this.hasChanges());
         }
 
         function getDataSource() {
@@ -151,13 +151,13 @@ In order to set up the Data Source Binding of the Telerik UI Spreadsheet compone
 
         $(document).ready( function () {
             $("#save").click(function () {
-                if (!$(this).hasClass("k-state-disabled")) {
+                if (!$(this).hasClass("k-disabled")) {
                     getDataSource().sync();
                 }
             });
 
             $("#cancel").click(function () {
-                if (!$(this).hasClass("k-state-disabled")) {
+                if (!$(this).hasClass("k-disabled")) {
                     getDataSource().cancelChanges();
                 }
             });

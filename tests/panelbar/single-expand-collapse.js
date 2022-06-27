@@ -72,7 +72,7 @@
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
+                '    <li class="k-item k-disabled"><span class="k-link k-header">Contacts<span' +
                 '            class="k-icon k-i-arrow-chevron-down k-panelbar-expand"></span></span>' +
                 '        <ul>' +
                 '            <li class="k-item"><span class="k-link">Phone List</span>' +
@@ -94,7 +94,7 @@
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
+                '    <li class="k-item k-active"><span class="k-link k-header k-selected">Notes<span' +
                 '            class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
                 '        <ul class="k-group" style="display: block;">' +
                 '            <li class="k-item"><span class="k-link">My Notes</span>' +

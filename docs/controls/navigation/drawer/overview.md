@@ -58,7 +58,7 @@ The following example demonstrates how to initialize a Drawer with MVVM.
       <div data-role="drawer"
            data-width="150"
            data-mode="push"
-           data-template="<ul><li data-role='drawer-item'><span>First Item</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span>Second Item</span></li><li data-role='drawer-item' class='k-state-selected'><span>Third Item</span></li></ul>">
+           data-template="<ul><li data-role='drawer-item'><span>First Item</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span>Second Item</span></li><li data-role='drawer-item' class='k-selected'><span>Third Item</span></li></ul>">
         <h1 class="my-content">Swipe or drag me to the right <span class="k-icon k-i-arrow-chevron-right"></span></h1>
       </div>
     </div>

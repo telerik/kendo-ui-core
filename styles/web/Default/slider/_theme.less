@@ -37,12 +37,14 @@
         }
 
         &:focus,
-        &.k-state-focused {
+        &.k-state-focused,
+        &.k-focus {
             .box-shadow( @kendo-slider-thumb-focus-shadow );
         }
     }
 
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
         .k-draghandle {
             .box-shadow( @kendo-slider-thumb-focus-shadow );
         }

@@ -81,8 +81,8 @@ $(document).ready(function () {
       </script>
     
       <script type="text/x-kendo-template" id="template">
-        <li class="k-item k-state-default" onmouseover="$(this).addClass('k-state-hover')"
-            onmouseout="$(this).removeClass('k-state-hover')">
+        <li class="k-item k-state-default" onmouseover="$(this).addClass('k-hover')"
+            onmouseout="$(this).removeClass('k-hover')">
             <span>
                 <img src="#:poster#" />
                 <h5>#:title#</h5>

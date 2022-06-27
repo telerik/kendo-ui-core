@@ -91,7 +91,7 @@ it("disabled dates are reflected to calendar", function() {
         value: new Date(2015,9,19)
     };
     dateview.setOptions(options);
-    var isDisabled = dateview.calendar.element.find("td").eq(1).hasClass("k-state-disabled");
+    var isDisabled = dateview.calendar.element.find("td").eq(1).hasClass("k-disabled");
     assert.equal(isDisabled, true);
 });
 });

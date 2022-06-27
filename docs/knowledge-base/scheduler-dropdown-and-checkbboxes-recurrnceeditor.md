@@ -412,7 +412,7 @@ In order to have the DropDownList and the checkboxes instead of the current Butt
         var rule = that._value;
 
         if(that._endLabelField){
-            that._endLabelField.toggleClass("k-state-disabled", frequency === "never");
+            that._endLabelField.toggleClass("k-disabled", frequency === "never");
         }
 
         kendo.destroy(container);

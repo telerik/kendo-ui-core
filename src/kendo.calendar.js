@@ -42,16 +42,16 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         NAVIGATE = "navigate",
         VALUE = "value",
-        HOVER = "k-state-hover",
-        DISABLED = "k-state-disabled",
-        FOCUSED = "k-state-focused",
+        HOVER = "k-hover",
+        DISABLED = "k-disabled",
+        FOCUSED = "k-focus",
         OTHERMONTH = "k-other-month",
         OUTOFRANGE = "k-out-of-range",
         TODAY = "k-nav-today",
         CELLSELECTOR = "td:has(.k-link)",
         CELLSELECTORVALID = "td:has(.k-link):not(." + DISABLED + "):not(." + OUTOFRANGE + ")",
         WEEKCOLUMNSELECTOR = "td:not(:has(.k-link))",
-        SELECTED = "k-state-selected",
+        SELECTED = "k-selected",
         BLUR = "blur" + ns,
         FOCUS = "focus",
         FOCUS_WITH_NS = FOCUS + ns,
@@ -629,8 +629,8 @@ var __meta__ = { // jshint ignore:line
                 selectableOptions = Selectable.parseOptions(that.options.selectable);
 
             if (!selectableOptions.multiple) {
-                if ($(eventArgs.event.currentTarget).is("td") && !$(eventArgs.event.currentTarget).hasClass("k-state-selected")) {
-                    $(eventArgs.event.currentTarget).addClass("k-state-selected");
+                if ($(eventArgs.event.currentTarget).is("td") && !$(eventArgs.event.currentTarget).hasClass("k-selected")) {
+                    $(eventArgs.event.currentTarget).addClass("k-selected");
                 }
                 else {
                     that._click($(eventArgs.event.currentTarget).find("a"));
@@ -676,7 +676,7 @@ var __meta__ = { // jshint ignore:line
         _toggleSelection: function(currentCell) {
             var that = this,
                 date = toDateObject(currentCell.find("a"));
-                if (currentCell.hasClass("k-state-selected")) {
+                if (currentCell.hasClass("k-selected")) {
                     that._selectDates.push(date);
                 }
                 else {
@@ -1957,7 +1957,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function mousetoggle(e) {
-        var disabled = $(this).hasClass("k-state-disabled");
+        var disabled = $(this).hasClass("k-disabled");
 
         if (!disabled) {
             $(this).toggleClass(HOVER, MOUSEENTER.indexOf(e.type) > -1 || e.type == FOCUS);

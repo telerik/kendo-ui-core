@@ -69,7 +69,7 @@ The following example demonstrates how to implement the suggested approach.
 
     <div id="tabstrip">
         <ul>
-            <li class="k-state-active">
+            <li class="k-active">
                 One
             </li>
             <li>

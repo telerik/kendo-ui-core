@@ -10885,7 +10885,7 @@ Switches the table row which is in edit mode and saves any changes made by the u
 
 Gets or sets the table rows (or cells) which are selected.
 
-If the Grid is using frozen (locked) columns and multiple cell selection with string selector, the `select` method will select and return **two** table cell elements. This is because the frozen columns feature works with the separate tables for the frozen and non-frozen columns. Each cell element corresponds to the jQuery selector applied for each table. One of the table cells will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`. The two `div`s are siblings in the Grid DOM structure. To select just one table cell please use jQuery selector to find the exact one cell from the specific table element and set `k-state-selected` class instead of using the `select` method.
+If the Grid is using frozen (locked) columns and multiple cell selection with string selector, the `select` method will select and return **two** table cell elements. This is because the frozen columns feature works with the separate tables for the frozen and non-frozen columns. Each cell element corresponds to the jQuery selector applied for each table. One of the table cells will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`. The two `div`s are siblings in the Grid DOM structure. To select just one table cell please use jQuery selector to find the exact one cell from the specific table element and set `k-selected` class instead of using the `select` method.
 
 #### Parameters
 

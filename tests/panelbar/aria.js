@@ -97,7 +97,7 @@
 
             ul.focus();
 
-            assert.isOk(ul.find(".k-item:first > .k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.find(".k-item:first > .k-link").hasClass("k-focus"));
             assert.equal(ul.find(".k-item:first").attr("id"), "test_pb_active");
         });
 
@@ -117,7 +117,7 @@
                 preventDefault: $.noop
             });
 
-            assert.isOk(ul.find(".k-item:last > .k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.find(".k-item:last > .k-link").hasClass("k-focus"));
             assert.equal(ul.find(".k-item:first").attr("aria-selected"), undefined);
             assert.equal(ul.find(".k-item:last").attr("aria-selected"), "true");
         });
@@ -262,9 +262,9 @@
         });
 
         it("PanelBar adds aria-selected on init", function() {
-            var panel = $("<ul id='test2'><li><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link k-state-selected'>Test2</span></li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
+            var panel = $("<ul id='test2'><li><span class='k-link k-selected'>Test</span></li><li><span class='k-link k-selected'>Test2</span></li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
 
-            var links = panel.find(".k-state-selected");
+            var links = panel.find(".k-selected");
 
             assert.equal(links.length, 1);
             assert.equal(links.parent().attr("aria-selected"), "true");
@@ -272,18 +272,18 @@
         });
 
         it("PanelBar preserves the id of the LI elements", function() {
-            var panelbar = $("<ul id='test2'><li id='custom'><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").appendTo(Mocha.fixture).kendoPanelBar().data("kendoPanelBar");
+            var panelbar = $("<ul id='test2'><li id='custom'><span class='k-link k-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").appendTo(Mocha.fixture).kendoPanelBar().data("kendoPanelBar");
 
             panelbar.select("li:last");
             panelbar.select("li:first");
 
-            var li = panelbar.element.find(".k-state-selected").closest(".k-item");
+            var li = panelbar.element.find(".k-selected").closest(".k-item");
 
             assert.equal(li.attr("id"), "custom");
         });
 
         it("PanelBar uses id of the LI element", function() {
-            var panelbar = $("<ul id='test2'><li id='custom'><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").appendTo(Mocha.fixture).kendoPanelBar().data("kendoPanelBar");
+            var panelbar = $("<ul id='test2'><li id='custom'><span class='k-link k-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").appendTo(Mocha.fixture).kendoPanelBar().data("kendoPanelBar");
 
             panelbar.select("li:last");
             panelbar.select("li:first");

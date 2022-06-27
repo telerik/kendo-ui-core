@@ -159,11 +159,11 @@ You can also select multiple rows by using the checkboxes and applying custom st
             var checked = ev.target.checked;
             $('.row-checkbox').each(function (idx, item) {
                 if (checked) {
-                    if (!($(item).closest('tr').is('.k-state-selected'))) {
+                    if (!($(item).closest('tr').is('.k-selected'))) {
                         $(item).click();
                     }
                 } else {
-                    if ($(item).closest('tr').is('.k-state-selected')) {
+                    if ($(item).closest('tr').is('.k-selected')) {
                         $(item).click();
                     }
                 }
@@ -195,12 +195,12 @@ You can also select multiple rows by using the checkboxes and applying custom st
 
         if (checked) {
             //-select the row
-            row.addClass("k-state-selected");
+            row.addClass("k-selected");
 
             var checkHeader = true;
 
             $.each(grid.items(), function (index, item) {
-                if (!($(item).hasClass("k-state-selected"))) {
+                if (!($(item).hasClass("k-selected"))) {
                     checkHeader = false;
                 }
             });
@@ -208,7 +208,7 @@ You can also select multiple rows by using the checkboxes and applying custom st
             $("#header-chb")[0].checked = checkHeader;
         } else {
             //-remove selection
-            row.removeClass("k-state-selected");
+            row.removeClass("k-selected");
             $("#header-chb")[0].checked = false;
         }
     }
@@ -219,7 +219,7 @@ You can also select multiple rows by using the checkboxes and applying custom st
         for (var i = 0; i < view.length; i++) {
             if (checkedIds[view[i].id]) {
                 this.tbody.find("tr[data-uid='" + view[i].uid + "']")
-                    .addClass("k-state-selected")
+                    .addClass("k-selected")
                     .find(".k-checkbox")
                     .attr("checked", "checked");
             }

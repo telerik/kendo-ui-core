@@ -1588,7 +1588,8 @@
 .k-menu:not(.k-context-menu) .k-link {
     .fill( @text: @menu-text );
 }
-.k-menu-link.k-link.k-state-active {
+.k-menu-link.k-link.k-state-active,
+.k-menu-link.k-link.k-active {
     color: white;
     background-color: #ff4350;
 }
@@ -1631,6 +1632,7 @@
 .k-grid-content-locked,
 .k-grid td,
 .k-grid td.k-state-selected,
+.k-grid td.k-selected,
 .k-grid-footer-wrap,
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
@@ -1706,15 +1708,18 @@
     color: @error;
 }
 
-.k-state-selected {
+.k-state-selected,
+.k-selected {
     background-color: fadeout(@info, 75%);
 }
 
-.k-state-focused {
+.k-state-focused,
+.k-focus {
     box-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
 }
 
 .k-state-hover,
+.k-hover,
 .k-splitbar-horizontal-hover,
 .k-splitbar-vertical-hover,
 .k-filebrowser-dropzone {
@@ -1753,18 +1758,21 @@
 
 .k-primary .k-icon,
 .k-state-active .k-icon,
+.k-active .k-icon,
 .k-button:active .k-icon,
 .k-drag-clue .k-icon,
 .k-group-indicator .k-icon,
 .k-grid-content .k-button:active .k-icon,
 .k-splitbar.k-state-focused .k-icon,
+.k-splitbar.k-focus .k-icon,
 .k-gantt-toolbar .k-icon {
     opacity: 1;
 }
 
 .k-state-disabled .k-icon,
 .k-state-disabled .k-button .k-icon,
-.k-button.k-state-disabled .k-icon {
+.k-button.k-state-disabled .k-icon,
+.k-button.k-disabled .k-icon {
     opacity: .7;
 }
 
@@ -1804,7 +1812,8 @@
     border-color: @widget-background-color;
 }
 
-.k-splitbar.k-state-focused {
+.k-splitbar.k-state-focused,
+.k-splitbar.k-focus {
     background-color: @selected-background;
     border-color: @selected-background;
 }
@@ -1841,32 +1850,39 @@
     }
 
     .k-item.k-state-hover,
-    .k-item.k-state-selected {
+    .k-item.k-hover,
+    .k-item.k-state-selected,
+    .k-item.k-selected {
         border-top-color: @normal-text-color;
         .composite-background(@tabs-hover-gradient);
         background-color: @tabs-hover-bg;
     }
 }
 
-.k-tabstrip-left > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-state-active {
+.k-tabstrip-left > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-state-active,
+.k-tabstrip-left > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-active {
     border-right-color: @selected-background;
 }
 
-.k-tabstrip-right > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-state-active {
+.k-tabstrip-right > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-state-active,
+.k-tabstrip-right > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-active {
     border-left-color: @selected-background;
 }
 
-.k-tabstrip-top > .k-tabstrip-items-wrapper > .k-tabstrip-items .k-item.k-state-active {
+.k-tabstrip-top > .k-tabstrip-items-wrapper > .k-tabstrip-items .k-item.k-state-active,
+.k-tabstrip-top > .k-tabstrip-items-wrapper > .k-tabstrip-items .k-item.k-active {
     .composite-background(@tabs-hover-gradient);
     border-bottom-color: @selected-background;
 }
 
-.k-tabstrip-bottom > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-state-active {
+.k-tabstrip-bottom > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-state-active,
+.k-tabstrip-bottom > .k-tabstrip-items-wrapper > .k-tabstrip-items > .k-item.k-active {
     border-top-color: @selected-background;
 }
 
 .k-tabstrip .k-content:focus,
-.k-tabstrip .k-content.k-state-focused {
+.k-tabstrip .k-content.k-state-focused,
+.k-tabstrip .k-content.k-focus {
     outline-color: @tabstrip-content-border-focused;
 }
 
@@ -1877,30 +1893,35 @@
 }
 
 .k-progressbar {
-    .k-state-selected {
+    .k-state-selected,
+    .k-selected {
         background-color: @selected-background;
     }
 }
 
 .k-progressbar-horizontal {
-    .k-state-selected {
+    .k-state-selected,
+    .k-selected {
         border-top-color: @selected-background;
         border-bottom-color: @selected-background;
         border-left-color: darken(@normal-background, 12%);
         border-right-color: darken(@normal-background, 12%);
     }
 
-    .k-state-selected.k-first {
+    .k-state-selected.k-first,
+    .k-selected.k-first {
         border-left-color: @selected-background;
     }
 
-    .k-state-selected.k-last {
+    .k-state-selected.k-last,
+    .k-selected.k-last {
         border-right-color: @selected-background;
     }
 }
 
 .k-progressbar-vertical {
-    .k-state-selected {
+    .k-state-selected,
+    .k-selected {
         border-left-color: @selected-background;
         border-right-color: @selected-background;
         border-top-color: darken(@normal-background, 12%);
@@ -1912,11 +1933,13 @@
         border-bottom-color: @selected-background;
     }
 
-    .k-state-selected.k-first {
+    .k-state-selected.k-first,
+    .k-selected.k-first {
         border-top-color: @selected-background;
     }
 
-    .k-state-selected.k-last {
+    .k-state-selected.k-last,
+    .k-selected.k-last {
         border-bottom-color: @selected-background;
     }
 }
@@ -1949,7 +1972,9 @@
 }
 
 .k-grid-header th.k-state-focused,
-.k-grid td.k-state-focused {
+.k-grid-header th.k-focus,
+.k-grid td.k-state-focused,
+.k-grid td.k-focus {
     box-shadow: inset 0 0 0 1px darken(@widget-border-color, 27%);
 }
 
@@ -2034,28 +2059,45 @@
 }
 
 .k-grid td.k-state-selected,
-.k-grid tr.k-state-selected > td {
+.k-grid td.k-selected,
+.k-grid tr.k-state-selected > td,
+.k-grid tr.k-selected > td {
     border-color: fadeout(@widget-border-color, 20%);
 }
 
 .k-grid tr.k-state-selected,
+.k-grid tr.k-selected,
 .k-grid td.k-state-selected,
-.k-grid td.k-state-selected.k-state-focused {
+.k-grid td.k-selected,
+.k-grid td.k-state-selected.k-state-focused,
+.k-grid td.k-state-selected.k-focus,
+.k-grid td.k-selected.k-state-focused,
+.k-grid td.k-selected.k-focus {
     background-color: lighten(@info, 22%);
 }
 
 .k-grid td.k-state-selected:hover,
+.k-grid td.k-selected:hover,
 .k-grid tr.k-state-selected:hover td,
-.k-grid td.k-grid-content-sticky.k-state-selected:hover {
+.k-grid tr.k-selected:hover td,
+.k-grid td.k-grid-content-sticky.k-state-selected:hover,
+.k-grid td.k-grid-content-sticky.k-selected:hover {
     background-color: @grid-selected-hover-bg;
 }
 
 .k-grid tr:hover .k-state-focused.k-state-selected,
-.k-grid tr.k-state-selected:hover td.k-state-focused {
+.k-grid tr:hover .k-focus.k-state-selected,
+.k-grid tr:hover .k-state-focused.k-selected,
+.k-grid tr:hover .k-focus.k-selected,
+.k-grid tr.k-state-selected:hover td.k-state-focused,
+.k-grid tr.k-state-selected:hover td.k-focus,
+.k-grid tr.k-selected:hover td.k-state-focused,
+.k-grid tr.k-selected:hover td.k-focus {
     box-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
 }
 
-.k-grid .k-state-selected:hover .k-group-cell {
+.k-grid .k-state-selected:hover .k-group-cell,
+.k-grid .k-selected:hover .k-group-cell {
     background-color: @secondary-widget-background-color;
 }
 
@@ -2095,7 +2137,8 @@
     .k-link:hover {
         color: @hover-text-color;
     }
-    .k-link.k-state-disabled {
+    .k-link.k-state-disabled,
+    .k-link.k-disabled {
         color: inherit;
     }
     .k-link:focus {
@@ -2109,7 +2152,9 @@
         border-top-color: @widget-border-color;
     }
     .k-pager-numbers .k-state-selected,
-    .k-pager-numbers .k-state-selected:hover {
+    .k-pager-numbers .k-selected,
+    .k-pager-numbers .k-state-selected:hover,
+    .k-pager-numbers .k-selected:hover {
         border-top-color: @selected-background;
         color: @selected-background;
         background: none;
@@ -2155,7 +2200,8 @@
     border-color: @widget-border-color;
 }
 
-.k-scheduler-table td.k-state-selected {
+.k-scheduler-table td.k-state-selected,
+.k-scheduler-table td.k-selected {
     background-color: lighten(@info, 22%);
 }
 
@@ -2170,7 +2216,8 @@
     border-color: darken(@info, 21%);
 }
 
-.k-event.k-state-selected {
+.k-event.k-state-selected,
+.k-event.k-selected {
     .box-shadow(0 0 0 2px @normal-text-color);
 }
 
@@ -2206,9 +2253,13 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 }
 
 .k-gantt .k-treelist .k-state-selected,
+.k-gantt .k-treelist .k-selected,
 .k-gantt .k-treelist .k-state-selected td,
+.k-gantt .k-treelist .k-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
-.k-gantt .k-treelist .k-alt.k-state-selected > td {
+.k-gantt .k-treelist .k-alt.k-selected,
+.k-gantt .k-treelist .k-alt.k-state-selected > td,
+.k-gantt .k-treelist .k-alt.k-selected > td {
     background-color: lighten(@info, 22%);
 }
 
@@ -2242,12 +2293,15 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     background: @normal-text-color;
 }
 
-.k-state-selected.k-task-summary {
+.k-state-selected.k-task-summary,
+.k-selected.k-task-summary {
     background: lighten(@info, 4%);
 }
 
 .k-state-selected.k-task-milestone,
-.k-state-selected .k-task-summary-complete {
+.k-selected.k-task-milestone,
+.k-state-selected .k-task-summary-complete,
+.k-selected .k-task-summary-complete {
     background-color: lighten(@info, 22%);
     border-color: lighten(@info, 22%);
 }
@@ -2258,7 +2312,8 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     border-color: lighten(@info, 4%);
 }
 
-.k-state-selected.k-task-single {
+.k-state-selected.k-task-single,
+.k-selected.k-task-single {
     border-color: @accent;
 }
 
@@ -2267,7 +2322,8 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     color: @normal-text-color;
 }
 
-.k-state-selected.k-gantt-line {
+.k-state-selected.k-gantt-line,
+.k-selected.k-gantt-line {
     background-color: @accent;
     color: @accent;
 }
@@ -2354,7 +2410,8 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 
 
 // Rating
-.k-rating.k-state-focused {
+.k-rating.k-state-focused,
+.k-rating.k-focus {
     .box-shadow(none);
 }
 
@@ -2466,8 +2523,11 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 .k-spreadsheet-tabstrip {
 
     .k-item.k-state-hover,
+    .k-item.k-hover,
     .k-item.k-state-active,
-    .k-item.k-state-focused {
+    .k-item.k-active,
+    .k-item.k-state-focused,
+    .k-item.k-focus {
         background-color: transparent;
 
         .k-link {
@@ -2475,7 +2535,8 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         }
     }
 
-    .k-state-active .k-link {
+    .k-state-active .k-link,
+    .k-active .k-link {
         color: @active-header-text;
     }
 }
@@ -2520,7 +2581,8 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         background: @widget-background-color;
     }
 
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
         .k-title {
             color: @time-list-title-focus;
             opacity: 1;
@@ -2613,7 +2675,8 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         color:inherit;
     }
 
-    td.k-state-focused {
+    td.k-state-focused,
+    td.k-focus {
         box-shadow: none;
     }
 }
@@ -2635,25 +2698,32 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         background-color: @grid-alt-bg;
     }
 
-    &.k-state-selected .k-grid-content-sticky {
+    &.k-state-selected .k-grid-content-sticky,
+    &.k-selected .k-grid-content-sticky {
         .composite-background(@grid-selected-gradient);
         background-color: @grid-selected-bg;
         background-position: 50% 50%;
     }
 
     &:hover .k-grid-content-sticky,
-    &.k-state-hover .k-grid-content-sticky {
+    &.k-state-hover .k-grid-content-sticky,
+    &.k-hover .k-grid-content-sticky {
         .composite-background(@grid-hover-gradient);
         background-color: @grid-hover-bg;
     }
 
     &.k-state-selected:hover .k-grid-content-sticky,
-    &.k-state-selected.k-state-hover .k-grid-content-sticky {
+    &.k-selected:hover .k-grid-content-sticky,
+    &.k-state-selected.k-state-hover .k-grid-content-sticky,
+    &.k-state-selected.k-hover .k-grid-content-sticky,
+    &.k-selected.k-state-hover .k-grid-content-sticky,
+    &.k-selected.k-hover .k-grid-content-sticky {
         background-color: @grid-selected-hover-bg;
         .composite-background(none);
     }
 
-    td.k-grid-content-sticky.k-state-selected {
+    td.k-grid-content-sticky.k-state-selected,
+    td.k-grid-content-sticky.k-selected {
         background-color: lighten(@info, 22%);
     }
 }
@@ -2664,7 +2734,8 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     }
 
     &:hover .k-grid-content-sticky,
-    &.k-state-hover .k-grid-content-sticky {
+    &.k-state-hover .k-grid-content-sticky,
+    &.k-hover .k-grid-content-sticky {
         .composite-background(@grid-hover-gradient);
         background-color: @grid-hover-bg;
     }

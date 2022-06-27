@@ -34,7 +34,7 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
 
     <script>
         function hintHandler(element) {
-            return $("<div id='hint' class='k-widget k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-state-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
+            return $("<div id='hint' class='k-widget k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
         }
 
         function onStart(e) {

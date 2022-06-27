@@ -387,14 +387,14 @@
             slider.wrapper.find(".k-button-increase").trigger("mousedown");
             slider.wrapper.find(".k-button-decrease").trigger("mousedown");
 
-            assert.isOk(slider.wrapper.find(".k-button-increase").hasClass("k-state-active"));
-            assert.isOk(slider.wrapper.find(".k-button-decrease").hasClass("k-state-active"));
+            assert.isOk(slider.wrapper.find(".k-button-increase").hasClass("k-active"));
+            assert.isOk(slider.wrapper.find(".k-button-decrease").hasClass("k-active"));
 
             slider.wrapper.find(".k-button-increase").trigger("mouseup");
             slider.wrapper.find(".k-button-decrease").trigger("mouseup");
 
-            assert.isOk(!slider.wrapper.find(".k-button-increase").hasClass("k-state-active"));
-            assert.isOk(!slider.wrapper.find(".k-button-decrease").hasClass("k-state-active"));
+            assert.isOk(!slider.wrapper.find(".k-button-increase").hasClass("k-active"));
+            assert.isOk(!slider.wrapper.find(".k-button-decrease").hasClass("k-active"));
         });
 
         it("slider should restore its original value on form reset", function(done) {

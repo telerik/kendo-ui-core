@@ -89,7 +89,7 @@ Programmatically apply the filters on the [`filter`](/api/javascript/ui/grid/eve
                 currentFilter.push({field:"Category.CategoryID", operator:"eq", value:value});
                 e.preventDefault();
                 e.sender.dataSource.filter(currentFilter);
-                $("th[data-field='Category']").find('a').addClass("k-state-active");
+                $("th[data-field='Category']").find('a').addClass("k-active");
                 $("[data-filter-field='Category']").data("kendoDropDownList").value(value);
               }
               else if (e.sender.dataSource.filter()){
@@ -98,7 +98,7 @@ Programmatically apply the filters on the [`filter`](/api/javascript/ui/grid/eve
                   for (let i = 0; i < filters.length; i++) {
                     if (filters[i].field == "Category.CategoryID") {
                       setTimeout(function() {
-                        $("th[data-field='Category']").find('a').addClass("k-state-active")
+                        $("th[data-field='Category']").find('a').addClass("k-active");
                         $("[data-filter-field='Category']").data("kendoDropDownList").value(value);
                       })
                     }

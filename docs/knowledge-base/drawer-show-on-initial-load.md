@@ -44,7 +44,7 @@ The following example demonstrates how to achieve the desired scenario.
 <li data-role='drawer-item'><span class='k-item-text'>First Item</span></li> \
 <li data-role='drawer-separator'></li> \
 <li data-role='drawer-item'><span class='k-item-text'>Second Item</span></li> \
-<li data-role='drawer-item' class='k-state-selected'><span class='k-item-text'>Third Item</span></li> \
+<li data-role='drawer-item' class='k-selected'><span class='k-item-text'>Third Item</span></li> \
 <li data-role='drawer-separator'></li> \
 <li data-role='drawer-item'><span class='k-item-text'>Last Item</span></li> \
         </ul><button id='hide' class='k-button'>Hide</button>",

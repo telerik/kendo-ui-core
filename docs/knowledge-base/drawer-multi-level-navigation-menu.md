@@ -211,7 +211,7 @@ To achieve the desired scenario:
                             }, 300);
 
                             // Add the selected class to the parent element that was closed.
-                            window.lastParent.addClass("k-state-selected");
+                            window.lastParent.addClass("k-selected");
                             // If any of the submenu items are clicked...
                         } else {
                             // Hide all other div elements.

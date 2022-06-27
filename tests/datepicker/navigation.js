@@ -87,7 +87,7 @@ it("navigate should not move selection if value is bigger than max", function() 
     dateview.move(event);
 
     assert.equal(+dateview._current, +date);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), date.getDate() + "");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), date.getDate() + "");
 });
 
 it("navigate should not move selection if value is less than min", function() {
@@ -100,7 +100,7 @@ it("navigate should not move selection if value is less than min", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +date);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), date.getDate() + "");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), date.getDate() + "");
 
 });
 
@@ -120,7 +120,7 @@ it("navigate should focus next day in month view", function() {
     dateview.open();
     dateview.move(event);
 
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), focusedDate.getDate() + "");
 
 });
 
@@ -135,7 +135,7 @@ it("navigate should focus previous day in month view", function() {
     dateview.open();
     dateview.move(event);
 
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), focusedDate.getDate() + "");
 });
 
 it("navigate should focus day on previous row in month view", function() {
@@ -149,7 +149,7 @@ it("navigate should focus day on previous row in month view", function() {
     dateview.open();
     dateview.move(event);
 
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), focusedDate.getDate() + "");
 });
 
 it("navigate should focus day on next row in month view", function() {
@@ -163,7 +163,7 @@ it("navigate should focus day on next row in month view", function() {
     dateview.open();
     dateview.move(event);
 
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), focusedDate.getDate() + "");
 });
 
 it("do not change input value if not a valid date is typed and dateInput option is enabled ", function() {
@@ -191,7 +191,7 @@ it("navigate should focus next month in year view", function() {
 
     dateview.move(event);
 
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "Dec");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "Dec");
 });
 
 it("navigate should focus previous month in year view", function() {
@@ -208,7 +208,7 @@ it("navigate should focus previous month in year view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "Oct");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "Oct");
 });
 
 it("navigate should focus month on previous row in year view", function() {
@@ -225,7 +225,7 @@ it("navigate should focus month on previous row in year view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "Jul");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "Jul");
 });
 
 it("navigate should focus month on next row in year view", function() {
@@ -242,7 +242,7 @@ it("navigate should focus month on next row in year view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "Mar");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "Mar");
 });
 
 //DECADE VIEW
@@ -260,7 +260,7 @@ it("navigate should focus next year in decade view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "2001");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "2001");
 
 });
 
@@ -278,8 +278,8 @@ it("navigate should focus previous year in decade view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "1999");
-    assert.isOk(!dateview.calendar._table.find(".k-state-focused").hasClass("k-other-month"));
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "1999");
+    assert.isOk(!dateview.calendar._table.find(".k-focus").hasClass("k-other-month"));
 });
 
 it("navigate should focus year on previous row in decade view", function() {
@@ -302,7 +302,7 @@ it("navigate should focus year on previous row in decade view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "1996");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "1996");
 });
 
 it("navigate should focus year on next row in decade view", function() {
@@ -319,7 +319,7 @@ it("navigate should focus year on next row in decade view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "2004");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "2004");
 });
 
 //CENTURY VIEW
@@ -337,7 +337,7 @@ it("navigate should focus next decade in century view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "2010 - 2019");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "2010 - 2019");
 });
 
 it("navigate should focus previous decade in century view", function() {
@@ -354,7 +354,7 @@ it("navigate should focus previous decade in century view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "1990 - 1999");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "1990 - 1999");
 });
 
 it("navigate should focus decade on previous row in century view", function() {
@@ -371,7 +371,7 @@ it("navigate should focus decade on previous row in century view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "1960 - 1969");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "1960 - 1969");
 });
 
 it("navigate should focus decade on next row in century view", function() {
@@ -388,7 +388,7 @@ it("navigate should focus decade on next row in century view", function() {
     dateview.move(event);
 
     assert.equal(+dateview._current, +focusedDate);
-    assert.equal(dateview.calendar._table.find(".k-state-focused").text(), "2040 - 2049");
+    assert.equal(dateview.calendar._table.find(".k-focus").text(), "2040 - 2049");
 });
 
 //Navigate through views
@@ -479,7 +479,7 @@ it("Home should focus first day of current month", function() {
     dateview.open();
     dateview.move(event);
 
-    var value = dateview.calendar.element.find(".k-state-focused").children(":first").attr("data-kendo-value");
+    var value = dateview.calendar.element.find(".k-focus").children(":first").attr("data-kendo-value");
 
     assert.equal(value, "2000/10/1");
 });
@@ -492,7 +492,7 @@ it("End should focus last day of current month", function() {
     dateview.open();
     dateview.move(event);
 
-    var value = dateview.calendar.element.find(".k-state-focused").children(":first").attr("data-kendo-value");
+    var value = dateview.calendar.element.find(".k-focus").children(":first").attr("data-kendo-value");
 
     assert.equal(value, "2000/10/30");
 });
@@ -564,7 +564,7 @@ it("Enter should focus viewedDate", function() {
     dateview.move(event);
 
     assert.isOk(dateview.popup.visible());
-    assert.equal(dateview.calendar._table.find(".k-state-focused").length, 1);
+    assert.equal(dateview.calendar._table.find(".k-focus").length, 1);
 });
 
 it("Enter should select date", function() {
@@ -686,7 +686,7 @@ it("click on selected date should close the dateView", function() {
 
     dateview.calendar
       .element
-      .find(".k-state-selected")
+      .find(".k-selected")
       .click();
 });
 
@@ -701,7 +701,7 @@ it("click on selected date should populate input if empty", function() {
 
     datepicker.dateView.calendar
       .element
-      .find(".k-state-selected")
+      .find(".k-selected")
       .click();
 
     assert.isOk(input.val());
@@ -845,7 +845,7 @@ it("navigate should focus min month in year view", function() {
     input.trigger(downEvent);
     input.trigger(upEvent);
 
-    assert.equal(datepicker.dateView.calendar._table.find(".k-state-focused").text(), kendo.toString(date, "MMM"));
+    assert.equal(datepicker.dateView.calendar._table.find(".k-focus").text(), kendo.toString(date, "MMM"));
 });
 
 it("deleting the value in the input sets the current day to the dateview", function() {

@@ -1,10 +1,10 @@
 (function() {
     var Selectable = kendo.ui.Selectable,
         ul,
-        SELECTED = "k-state-selected",
-        ACTIVE = "k-state-selecting",
+        SELECTED = "k-selected",
+        ACTIVE = "k-selecting",
         SELECTABLE = "k-selectable",
-        UNSELECTING = "k-state-unselecting";
+        UNSELECTING = "k-unselecting";
 
     describe("kendo.ui.Selectable", function() {
         beforeEach(function() {

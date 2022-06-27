@@ -66,7 +66,7 @@ The following example demonstrates how to move the group label on top of the gro
         padding-top: 2em;
       }
 
-      .k-list > .k-state-hover.k-first {
+      .k-list > .k-hover.k-first {
         padding-top: calc(2em - 1px);
       }
 
@@ -75,7 +75,7 @@ The following example demonstrates how to move the group label on top of the gro
         left: 0;
       }
 
-      .k-list > .k-state-hover.k-first > .k-group {
+      .k-list > .k-hover.k-first > .k-group {
         top: -1px;
         left: -1px;
       }

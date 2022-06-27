@@ -395,7 +395,7 @@
             assert.equal(splitter.dom.find(".k-pane:first").width(), 20);
         });
 
-        it("collapsible pane adds k-state-collapsed class when collapsed", function() {
+        it("collapsible pane adds k-collapsed class when collapsed", function() {
             splitter = create({
                 panes: [
                     { collapsible: true },
@@ -405,7 +405,7 @@
 
             splitter.dom.find(".k-i-arrow-60-left").click();
 
-            assert.isOk(splitter.dom.find(".k-pane:first").hasClass("k-state-collapsed"));
+            assert.isOk(splitter.dom.find(".k-pane:first").hasClass("k-collapsed"));
         });
 
     });

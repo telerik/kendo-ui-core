@@ -396,7 +396,7 @@
 
             pb.value(2);
 
-            assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-selected").length, 2);
         });
 
         it("Correct chunks are updated when progressbar is orientation:horizontal and reverse: true", function() {
@@ -412,7 +412,7 @@
 
             pb.value(2);
 
-            assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-selected").length, 2);
         });
 
         it("Correct chunks are updated when progressbar is orientation:vertical and reverse: false", function() {
@@ -428,7 +428,7 @@
 
             pb.value(2);
 
-            assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-selected").length, 2);
         });
 
         it("Correct chunks are updated when progressbar is orientation:vertical and reverse: true", function() {
@@ -444,7 +444,7 @@
 
             pb.value(2);
 
-            assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-selected").length, 2);
         });
 
         it("No chunks are selected when progressbar is orientation:vertical and reverse: false and value is set to 0", function() {
@@ -460,7 +460,7 @@
 
             pb.value(0);
 
-            assert.equal(pb.wrapper.find("li").filter(".k-state-selected").length, 0);
+            assert.equal(pb.wrapper.find("li").filter(".k-selected").length, 0);
         });
 
         it("Correct chunks are updated when progressbar is orientation:horizontal and reverse: false and value was decreased", function() {
@@ -477,7 +477,7 @@
             pb.value(4);
             pb.value(2);
 
-            assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-selected").length, 2);
         });
 
         it("Correct chunks are updated when progressbar is orientation:horizontal and reverse: true and value was decreased", function() {
@@ -494,7 +494,7 @@
             pb.value(4);
             pb.value(2);
 
-            assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-selected").length, 2);
         });
 
         it("Correct chunks are updated when progressbar is orientation:vertical and reverse: false and value was decreased", function() {
@@ -511,7 +511,7 @@
             pb.value(4);
             pb.value(2);
 
-            assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-selected").length, 2);
         });
 
         it("Correct chunks are updated when progressbar is orientation:vertical and reverse: true and value was decreased", function() {
@@ -528,7 +528,7 @@
             pb.value(4);
             pb.value(2);
 
-            assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-selected").length, 2);
         });
 
         it("isStarted is set to true when the value is changed for the first time", function(done) {
@@ -580,7 +580,7 @@
             pb.value(150);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected").length, 5);
+                assert.equal(pb.wrapper.find(".k-selected").length, 5);
 
                 done();
             }, 30);
@@ -598,7 +598,7 @@
             pb.value(2);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected").length, 4);
+                assert.equal(pb.wrapper.find(".k-selected").length, 4);
 
                 done();
             }, 30);
@@ -616,7 +616,7 @@
             pb.value(9999);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected").length, 19);
+                assert.equal(pb.wrapper.find(".k-selected").length, 19);
 
                 done();
             }, 30);
@@ -641,7 +641,7 @@
             pb.value(-50);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:hidden").length, 1);
                 done();
             }, 30);
         });
@@ -659,7 +659,7 @@
             pb.value(-50);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:hidden").length, 1);
                 done();
             }, 30);
         });
@@ -677,7 +677,7 @@
             pb.value(-50);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:hidden").length, 1);
                 done();
             }, 30);
         });
@@ -695,7 +695,7 @@
             pb.value(-50);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:hidden").length, 1);
                 done();
             }, 30);
         });
@@ -713,7 +713,7 @@
             pb.value(-20);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:visible").length, 1);
                 done();
             }, 30);
         });
@@ -731,7 +731,7 @@
             pb.value(-20);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:visible").length, 1);
                 done();
             }, 30);
         });
@@ -749,7 +749,7 @@
             pb.value(-20);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:visible").length, 1);
                 done();
             }, 30);
         });
@@ -767,7 +767,7 @@
             pb.value(-20);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:visible").length, 1);
                 done();
             }, 30);
         });
@@ -787,7 +787,7 @@
             pb.value(50);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:visible").length, 1);
                 done();
             }, 30);
         });
@@ -807,7 +807,7 @@
             pb.value(50);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:visible").length, 1);
                 done();
             }, 30);
         });
@@ -827,7 +827,7 @@
             pb.value(50);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:visible").length, 1);
                 done();
             }, 30);
         });
@@ -847,7 +847,7 @@
             pb.value(50);
 
             setTimeout(function() {
-                assert.equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                assert.equal(pb.wrapper.find(".k-selected:visible").length, 1);
                 done();
             }, 30);
         });
@@ -862,9 +862,9 @@
                 showStatus: false
             });
 
-            var prevWidth = pb.wrapper.find(".k-state-selected")[0].style.width;
+            var prevWidth = pb.wrapper.find(".k-selected")[0].style.width;
             pb.wrapper.width(700);
-            var currentWidth = pb.wrapper.find(".k-state-selected")[0].style.width;
+            var currentWidth = pb.wrapper.find(".k-selected")[0].style.width;
 
             setTimeout(function() {
                 assert.equal(prevWidth, currentWidth);
@@ -882,9 +882,9 @@
                 showStatus: true
             });
 
-            var prevWidth = pb.wrapper.find(".k-state-selected")[0].style.width;
+            var prevWidth = pb.wrapper.find(".k-selected")[0].style.width;
             pb.wrapper.width(700);
-            var currentWidth = pb.wrapper.find(".k-state-selected")[0].style.width;
+            var currentWidth = pb.wrapper.find(".k-selected")[0].style.width;
 
             setTimeout(function() {
                 assert.equal(prevWidth, currentWidth);
@@ -917,9 +917,9 @@
                 showStatus: true
             });
 
-            var prevWidth = pb.wrapper.find(".k-state-selected .k-progress-status-wrap")[0].style.width;
+            var prevWidth = pb.wrapper.find(".k-selected .k-progress-status-wrap")[0].style.width;
             pb.wrapper.width(700);
-            var currentWidth = pb.wrapper.find(".k-state-selected .k-progress-status-wrap")[0].style.width;
+            var currentWidth = pb.wrapper.find(".k-selected .k-progress-status-wrap")[0].style.width;
 
             setTimeout(function() {
                 assert.equal(prevWidth, currentWidth);
@@ -937,9 +937,9 @@
                 showStatus: true
             });
 
-            var prevWidth = pb.wrapper.find(".k-state-selected .k-progress-status-wrap")[0].style.width;
+            var prevWidth = pb.wrapper.find(".k-selected .k-progress-status-wrap")[0].style.width;
             pb.wrapper.width(700);
-            var currentWidth = pb.wrapper.find(".k-state-selected .k-progress-status-wrap")[0].style.width;
+            var currentWidth = pb.wrapper.find(".k-selected .k-progress-status-wrap")[0].style.width;
 
             setTimeout(function() {
                 assert.equal(prevWidth, currentWidth);

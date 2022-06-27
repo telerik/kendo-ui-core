@@ -40,9 +40,9 @@ var __meta__ = { // jshint ignore:line
         DRAG_HANDLE = ".k-draghandle",
         TRACK_SELECTOR = ".k-slider-track",
         TICK_SELECTOR = ".k-tick",
-        STATE_SELECTED = "k-state-selected",
-        STATE_FOCUSED = "k-state-focused",
-        STATE_DISABLED = "k-state-disabled",
+        STATE_SELECTED = "k-selected",
+        STATE_FOCUSED = "k-focus",
+        STATE_DISABLED = "k-disabled",
         DISABLED = "disabled",
         UNDEFINED = "undefined",
         TABINDEX = "tabindex",
@@ -816,10 +816,10 @@ var __meta__ = { // jshint ignore:line
                         that._focusWithMouse(e.target);
                     }).bind(that))
                     .on(MOUSE_OVER, function(e) {
-                        $(e.currentTarget).addClass("k-state-hover");
+                        $(e.currentTarget).addClass("k-hover");
                     })
                     .on("mouseout" + NS, (function(e) {
-                        $(e.currentTarget).removeClass("k-state-hover");
+                        $(e.currentTarget).removeClass("k-hover");
                         this._clearTimer();
                     }).bind(that))
                     .on(MOUSE_DOWN, (function(e) {
@@ -850,12 +850,12 @@ var __meta__ = { // jshint ignore:line
                 .off(MOUSE_DOWN)
                 .on(MOUSE_DOWN, function(e) {
                     e.preventDefault();
-                    $(this).addClass("k-state-active");
+                    $(this).addClass("k-active");
                 })
                 .off(MOUSE_UP)
                 .on(MOUSE_UP, function(e) {
                     e.preventDefault();
-                    $(this).removeClass("k-state-active");
+                    $(this).removeClass("k-active");
                 })
                 .off("mouseleave" + NS)
                 .on("mouseleave" + NS, kendo.preventDefault)

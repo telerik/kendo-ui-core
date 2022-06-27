@@ -10,7 +10,9 @@ each( @theme-colors, {
         );
 
         .k-bottom-nav-item.k-state-selected,
+        .k-bottom-nav-item.k-selected,
         .k-bottom-nav-item.k-state-active,
+        .k-bottom-nav-item.k-active,
         .k-bottom-nav-item:active {
             .fill(
                 @text: contrast( @color ),
@@ -22,14 +24,17 @@ each( @theme-colors, {
         }
 
         .k-bottom-nav-item.k-state-focus,
+        .k-bottom-nav-item.k-focus,
         .k-bottom-nav-item.k-state-focused,
+        .k-bottom-nav-item.k-focus,
         .k-bottom-nav-item:focus {
             .fill( @bg: rgba( mix( @color, contrast( @color ), 35%), .2));
         }
     }
 });
 
-.k-bottom-nav-solid .k-bottom-nav-item.k-state-disabled {
+.k-bottom-nav-solid .k-bottom-nav-item.k-state-disabled,
+.k-bottom-nav-solid .k-bottom-nav-item.k-disabled {
     color: inherit;
 }
 
@@ -46,7 +51,9 @@ each( @theme-colors, {
         @color: @value;
 
         &.k-bottom-nav-@{name} .k-bottom-nav-item.k-state-selected,
+        &.k-bottom-nav-@{name} .k-bottom-nav-item.k-selected,
         &.k-bottom-nav-@{name} .k-bottom-nav-item.k-state-active,
+        &.k-bottom-nav-@{name} .k-bottom-nav-item.k-active,
         &.k-bottom-nav-@{name} .k-bottom-nav-item:active {
             .box-shadow(none);
             background-color: inherit;
@@ -63,11 +70,20 @@ each( @theme-colors, {
     });
 
     .k-bottom-nav-item.k-state-focus,
+    .k-bottom-nav-item.k-focus,
     .k-bottom-nav-item.k-state-focused,
+    .k-bottom-nav-item.k-focus,
     .k-bottom-nav-item:focus,
     .k-bottom-nav-item.k-state-focus.k-state-selected,
+    .k-bottom-nav-item.k-focus.k-state-selected,
+    .k-bottom-nav-item.k-state-focus.k-selected,
+    .k-bottom-nav-item.k-focus.k-selected,
     .k-bottom-nav-item.k-state-focused.k-state-selected,
-    .k-bottom-nav-item.k-state-selected:focus  {
+    .k-bottom-nav-item.k-focus.k-state-selected,
+    .k-bottom-nav-item.k-state-focused.k-selected,
+    .k-bottom-nav-item.k-focus.k-selected,
+    .k-bottom-nav-item.k-state-selected:focus,
+    .k-bottom-nav-item.k-selected:focus  {
         .fill( @bg: rgba(@bottom-nav-flat-text, .05) );
     }
 }

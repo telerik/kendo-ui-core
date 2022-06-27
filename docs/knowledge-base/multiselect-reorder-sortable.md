@@ -122,7 +122,7 @@ You can find the full example below:
               var element = $(this);     
               var input = element.children("input");
 
-              input.prop("checked", element.hasClass("k-state-selected"));
+              input.prop("checked", element.hasClass("k-selected"));
             });
           };
           // create MultiSelect from select HTML element

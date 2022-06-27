@@ -51,7 +51,6 @@
 
     // Disabled state
     &[disabled],
-    .k-disabled &,
     &.k-disabled {
         cursor: default;
         outline: 0;
@@ -135,14 +134,22 @@ input[type="reset"].k-button-expand {
 
 // Link button
 .k-button-link {
-    border-color: transparent;
-    color: inherit;
-    text-decoration: none;
-    background: none;
+
+    &,
+    &.k-hover {
+        border-color: transparent;
+        color: inherit;
+        text-decoration: none;
+        background: none;
+    }
 
     &:hover,
     &.k-hover {
         text-decoration: underline;
+    }
+
+    &.k-active {
+        border-color: transparent;
     }
 }
 

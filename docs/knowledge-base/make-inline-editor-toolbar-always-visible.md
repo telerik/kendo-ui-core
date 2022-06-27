@@ -60,7 +60,7 @@ The following example demonstrates how to override this behavior and force the t
         // Show the toolbar.
         editor.toolbar.show();
         // Detach the handler which hides the toolbar.
-        $(editor.body).addClass("k-state-active").off("focusout.kendoEditor");
+        $(editor.body).addClass("k-active").off("focusout.kendoEditor");
     });
 
     </script>

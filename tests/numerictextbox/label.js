@@ -90,7 +90,7 @@
             assert.isNotOk(numerictextbox.floatingLabel.element.hasClass("k-state-empty"));
         });
 
-        it("floating label adds k-state-focus when the user focuses the input", function() {
+        it("floating label adds k-focus when the user focuses the input", function() {
             var numerictextbox = new NumericTextBox(input, {
                 label: {
                     content: "test",

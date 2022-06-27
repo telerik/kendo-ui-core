@@ -48,7 +48,7 @@ The following example demonstrates how to show the dates that are out of the min
           min: new Date(2014, 10, 10),
           max: new Date(2014, 11, 10),
           month: {
-            empty: '<span class="k-state-disabled">#= data.value #</span>'
+            empty: '<span class="k-disabled">#= data.value #</span>'
           }
         });
       });

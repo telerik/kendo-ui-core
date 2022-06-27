@@ -442,8 +442,8 @@
             }).data("kendoToolBar");
 
             toolbar.toggle("#foo", false);
-            assert.isOk(!$("#foo").hasClass("k-state-active"));
-            assert.isOk(!$("#foo_overflow > .k-button").hasClass("k-state-active"));
+            assert.isOk(!$("#foo").hasClass("k-active"));
+            assert.isOk(!$("#foo_overflow > .k-button").hasClass("k-active"));
         });
 
         it("Hide method hides a button", function() {

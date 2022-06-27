@@ -66,7 +66,7 @@ The following example shows how to add buttons inside the tabs to do this. The m
 
 <div id="tabstrip">
   <ul>
-    <li class="k-state-active">Item 1</li>
+    <li class="k-active">Item 1</li>
     <li><span>Item 2 <button data-type="remove" class="k-button k-button-icon"><span class="k-icon k-i-close"></span></button></span></li>
   </ul>
   <div>

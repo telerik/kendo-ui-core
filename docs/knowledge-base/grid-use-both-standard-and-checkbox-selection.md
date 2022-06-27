@@ -83,7 +83,7 @@ How can I use both standard and checkbox selection in the Grid?
             var row = $(rowElement);
             var grid = $("#grid").getKendoGrid();
 
-            if (row.hasClass("k-state-selected")) {
+            if (row.hasClass("k-selected")) {
 
               var selected = grid.select();
 

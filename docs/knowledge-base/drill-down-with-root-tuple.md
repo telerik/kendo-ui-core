@@ -140,13 +140,13 @@ In this way, the widget drills down on `expand` always starting from the expande
         this.element.append("<h4>Rows:</h4>");
         this.rowsList = $(LIST_HTML).appendTo(this.element).children("ul");
 
-        this.columnsList.on("click", "li:not(.k-state-selected)", (function(e) {
+        this.columnsList.on("click", "li:not(.k-selected)", (function(e) {
           var idx = $(e.currentTarget).data("idx");
 
           this.pop("columns", idx);
         }).bind(this));
 
-        this.rowsList.on("click", "li:not(.k-state-selected)", (function(e) {
+        this.rowsList.on("click", "li:not(.k-selected)", (function(e) {
           var idx = $(e.currentTarget).data("idx");
 
           this.pop("rows", idx);
@@ -157,7 +157,7 @@ In this way, the widget drills down on `expand` always starting from the expande
       },
 
       _toggleHover: function(e) {
-        $(e.currentTarget).toggleClass("k-state-hover", e.type === "mouseenter");
+        $(e.currentTarget).toggleClass("k-hover", e.type === "mouseenter");
       },
 
       _buildHtml: function(list) {
@@ -165,7 +165,7 @@ In this way, the widget drills down on `expand` always starting from the expande
         var length = list.length;
 
         for (var idx = 0; idx < length; idx++) {
-          var className = "k-item k-header" + (idx === (length - 1) ? " k-state-selected" : "");
+          var className = "k-item k-header" + (idx === (length - 1) ? " k-selected" : "");
 
           html += this.itemTemplate({
             idx: idx,

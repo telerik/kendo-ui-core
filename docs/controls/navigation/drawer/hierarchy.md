@@ -19,7 +19,7 @@ To utilize the hierarchy functionality of the Kendo UI Drawer:
     ```javascript
     $("#drawer").kendoDrawer({
     template: "<ul> \
-                <li data-role='drawer-item' class='k-state-selected'><span class='k-icon k-i-information'></span><span class='k-item-text' data-id='GettingStarted'>Getting Started</span><span class='k-spacer'></span><span class='k-icon k-i-arrow-chevron-right'></span></li> \
+                <li data-role='drawer-item' class='k-selected'><span class='k-icon k-i-information'></span><span class='k-item-text' data-id='GettingStarted'>Getting Started</span><span class='k-spacer'></span><span class='k-icon k-i-arrow-chevron-right'></span></li> \
                 <li data-role='drawer-separator'></li> \
                 <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-question'></span><span class='k-item-text' data-id='Kendo'>About Kendo UI</span></li> \
                 <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-palette'></span><span class='k-item-text' data-id='ThemeSupport'>Supported Themes</span></li> \

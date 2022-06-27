@@ -77,12 +77,12 @@ Hover is a UI state which provides better visualization across long table rows a
 * Override the `hover` styling by using the CSS code from the following example. The `#f1f1f1` value corresponds to the background color of the `.k-alt` table rows. To find the correct value for the Kendo UI theme that you are applying, use the DOM inspector of the browser. Alternatively, set a background color value of your preference.
 
     ```
-    .k-grid tr:not(.k-state-selected):hover {
+    .k-grid tr:not(.k-selected):hover {
         background: none;
         color: inherit;
     }
 
-    .k-grid tr.k-alt:not(.k-state-selected):hover {
+    .k-grid tr.k-alt:not(.k-selected):hover {
         background: #f1f1f1;
     }
     ```

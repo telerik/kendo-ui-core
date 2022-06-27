@@ -34,7 +34,7 @@ To check for validation errors and prevent the selection, use the `select` event
 ```dojo
 <div id="tabstrip">
     <ul>
-        <li class="k-state-active">Tab 1</li>
+        <li class="k-active">Tab 1</li>
         <li>Tab 2</li>
     </ul>
     <div>

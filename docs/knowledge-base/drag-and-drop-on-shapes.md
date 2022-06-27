@@ -115,7 +115,7 @@ The following example demonstrates how to enable the dropping only of new shapes
       <div id="left-pane">
         <div class="pane-content">
           <ul id="shapesPanelBar">
-            <li class="k-state-active">
+            <li class="k-active">
               Basic Shapes
               <ul>
                 <li>
@@ -133,7 +133,7 @@ The following example demonstrates how to enable the dropping only of new shapes
                 </li>
               </ul>
             </li>
-            <li class="k-state-active">
+            <li class="k-active">
               Polygons
               <ul>
                 <li>
@@ -151,7 +151,7 @@ The following example demonstrates how to enable the dropping only of new shapes
                 </li>
               </ul>
             </li>
-            <li class="k-state-active">
+            <li class="k-active">
               Arrows
               <ul>
                 <li>
@@ -178,8 +178,8 @@ The following example demonstrates how to enable the dropping only of new shapes
       {
         height: 100%;
       }
-      #shapesPanelBar .k-panel .k-state-hover,
-      #shapesPanelBar .k-panel .k-state-selected
+      #shapesPanelBar .k-panel .k-hover,
+      #shapesPanelBar .k-panel .k-selected
       {
         color: inherit;
         background: #fff;

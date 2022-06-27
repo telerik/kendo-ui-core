@@ -63,7 +63,7 @@ To prevent the selection, cancel the [`select`](https://docs.telerik.com/kendo-u
 </script>
 
 <script id="template" type="text/x-kendo-template">
-	<span class="#: unselectableItem ? 'k-state-disabled': ''#">
+	<span class="#: unselectableItem ? 'k-disabled': ''#">
   	 #: text #
 	</span>
 </script>

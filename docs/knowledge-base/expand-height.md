@@ -66,7 +66,7 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
 
     <div id="tabstrip">
       <ul>
-        <li class="k-state-active">Item 1</li>
+        <li class="k-active">Item 1</li>
         <li>Item 2</li>
       </ul>
       <div>

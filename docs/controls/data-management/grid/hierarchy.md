@@ -3,7 +3,7 @@ title: Hierarchy
 page_title: jQuery Grid Documentation | Hierarchy
 description: "Get started with the jQuery Grid by Kendo UI and display its parent and child records by applying hierarchy to its structure."
 slug: hierarchy_kendoui_grid_widget
-position: 10
+position: 12
 ---
 
 # Hierarchy

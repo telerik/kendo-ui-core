@@ -36,7 +36,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past", funct
         min: date
     });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future", function() {
@@ -46,7 +46,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future", fun
         max: date
     });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (year)", function() {
@@ -57,7 +57,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (year)"
             firstView: 1
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (year)", function() {
@@ -68,7 +68,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (year
             firstView: 1
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (decade)", function() {
@@ -79,7 +79,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (decade
             firstView: 2
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (decade)", function() {
@@ -90,7 +90,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (deca
             firstView: 2
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (century)", function() {
@@ -101,7 +101,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (centur
             firstView: 3
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (century)", function() {
@@ -112,7 +112,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (cent
             firstView: 3
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate should select date equal to _value", function() {
@@ -123,7 +123,7 @@ it("navigate should select date equal to _value", function() {
 
     cal.navigateToPast();
 
-    assert.equal(div.find("td.k-state-selected").length, 0);
+    assert.equal(div.find("td.k-selected").length, 0);
 });
 
 it("navigateToPast should navigate to previous month when month view", function() {
@@ -276,7 +276,7 @@ it("navigateUp should navigate upper view (century)", function() {
     cal.navigateUp();
 
     assert.equal(cal._index, 3);
-    assert.isOk(cal._title.hasClass("k-state-disabled"));
+    assert.isOk(cal._title.hasClass("k-disabled"));
 });
 
 it("navigateDown should navigate lower view (decade)", function() {
@@ -392,7 +392,7 @@ it("value method should update selection of the view", function() {
 
         cal.value(value);
 
-    assert.isOk(cal.element.find(".k-content td").eq(19).hasClass("k-state-selected"));
+    assert.isOk(cal.element.find(".k-content td").eq(19).hasClass("k-selected"));
 });
 
 it("value should clear _value if null", function() {
@@ -402,7 +402,7 @@ it("value should clear _value if null", function() {
     cal.value(null);
 
     assert.equal(cal.value(), null);
-    assert.equal(cal.element.find(".k-content td:has(k-state-selected)").length, 0);
+    assert.equal(cal.element.find(".k-content td:has(k-selected)").length, 0);
 });
 
 it("value should not accept value lower than min", function() {
@@ -439,8 +439,8 @@ it("focus date depending on given value", function() {
     cal.focus();
     cal._focus(value);
 
-    assert.equal(cal._table.find(".k-state-focused").length, 1);
-    assert.equal(cal._table.find(".k-state-focused").text(), "10");
+    assert.equal(cal._table.find(".k-focus").length, 1);
+    assert.equal(cal._table.find(".k-focus").text(), "10");
 });
 
 it("focus date in current view without navigating", function() {
@@ -453,8 +453,8 @@ it("focus date in current view without navigating", function() {
     cal.focus();
     cal._focus(value);
 
-    assert.equal(cal._table.find(".k-state-focused").length, 1);
-    assert.equal(cal._table.find(".k-state-focused").text(), "Nov");
+    assert.equal(cal._table.find(".k-focus").length, 1);
+    assert.equal(cal._table.find(".k-focus").text(), "Nov");
 });
 
 it("focus should not call navigate if need to focus next cell in current decade view", function() {
@@ -539,7 +539,7 @@ it("max method persists selected value when max is in current month", function()
 
      cal.max(new Date(2000, 10, 11));
 
-     assert.equal(div.find("td.k-state-selected").length, 1);
+     assert.equal(div.find("td.k-selected").length, 1);
 });
 
 it("Should navigate if min is bigger then _current", function() {
@@ -650,7 +650,7 @@ it("today link should be disabled when min() with bigger then today", function()
     cal._today.click();
 
     assert.isOk(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
-    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 0);
 });
 
@@ -665,7 +665,7 @@ it("today link should be disabled when max() with less then today", function() {
     cal._today.click();
 
     assert.isOk(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
-    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 0);
 });
 
@@ -676,7 +676,7 @@ it("today link should be enabled on _footer(true)", function() {
     cal._footer(cal.footer);
 
     assert.isOk(cal._today[0]);
-    assert.isOk(!cal._today.hasClass("k-state-disabled"));
+    assert.isOk(!cal._today.hasClass("k-disabled"));
 });
 
 it("value method honors options.culture", function() {
@@ -706,7 +706,7 @@ it("min method enables prev link", function() {
 
     calendar.min(new Date(2000, 9, 10));
 
-    assert.isOk(!calendar._prevArrow.hasClass("k-state-disabled"));
+    assert.isOk(!calendar._prevArrow.hasClass("k-disabled"));
 });
 
 it("min method navigates if selected date is null and current date is equal to min", function() {
@@ -727,7 +727,7 @@ it("max method enables prev link", function() {
 
     calendar.max(new Date(2000, 11, 10));
 
-    assert.isOk(!calendar._nextArrow.hasClass("k-state-disabled"));
+    assert.isOk(!calendar._nextArrow.hasClass("k-disabled"));
 });
 
 it("current method returns currently focused date", function() {
@@ -819,14 +819,14 @@ it("setOptions should destroy selectable", function() {
     assert.equal(cal.calls("_destroySelectable"), 1);
 });
 
-it("disabled date does get k-state-focused class", function() {
+it("disabled date does get k-focus class", function() {
     var calendar = new Calendar(div, {
         value: new Date(2015,9,3),
 		disableDates: ["MON", "sa"]
     });
     var cell = calendar.element.find("td").eq(6);
     cell.trigger("click");
-    var focused = cell.hasClass("k-state-focused");
+    var focused = cell.hasClass("k-focus");
     assert.equal(focused, false);
 });
 
@@ -836,12 +836,12 @@ it("dates are disabled when array of dates is used", function() {
         disableDates: [new Date(2015,9,12)]
     });
     var cell = calendar.element.find("td").eq(15);
-    var disabled = cell.hasClass("k-state-disabled");
+    var disabled = cell.hasClass("k-disabled");
     assert.equal(disabled, true);
 });
 
 
-it("disabled date does get k-state-focused class when calleback is used", function() {
+it("disabled date does get k-focus class when calleback is used", function() {
     var calendar = new Calendar(div, {
         value: new Date(2015,9,3),
 		disableDates: function(date) {
@@ -852,7 +852,7 @@ it("disabled date does get k-state-focused class when calleback is used", functi
             }
         }
         });
-   assert.equal($("tr").eq(2).find("td").hasClass("k-state-disabled"), true);
+   assert.equal($("tr").eq(2).find("td").hasClass("k-disabled"), true);
 });
 
 it("clicking today button does not set the widgets value", function() {
@@ -871,7 +871,7 @@ it("today link is disabled if the respecitve date is disabled", function() {
         disableDates: ["mo", "tu", "we", "th", "fr", "sa", "su"]
     });
     calendar.max(max);
-    assert.equal($(".k-footer>a").hasClass("k-state-disabled"), true);
+    assert.equal($(".k-footer>a").hasClass("k-disabled"), true);
 });
 
 it("_current is not set if date is disabled", function() {

@@ -138,7 +138,7 @@
             }).data("kendoListView");
 
             listview.current(listview.content.children().eq(0));
-            var li = listview.content.find(".k-state-focused");
+            var li = listview.content.find(".k-focus");
 
             assert.equal(li.attr("id"), "custom[1]");
         });

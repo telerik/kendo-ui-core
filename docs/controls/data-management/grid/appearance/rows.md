@@ -56,12 +56,12 @@ However, if your project requires you to avoid the `hover` state, use either of 
 
 
     ```
-    .k-grid tr:not(.k-state-selected):hover {
+    .k-grid tr:not(.k-selected):hover {
         background: none;
         color: inherit;
     }
 
-    .k-grid tr.k-alt:not(.k-state-selected):hover {
+    .k-grid tr.k-alt:not(.k-selected):hover {
         background: #f1f1f1; /* the color varies depending on the theme */
     }
     ```

@@ -83,7 +83,7 @@ The following example demonstrates how to achieve the desired scenario.
                         var element = $(this);     
                     var input = element.children("input");
 
-                    input.prop("checked", element.hasClass("k-state-selected"));
+                    input.prop("checked", element.hasClass("k-selected"));
                   });
                 };
                 // create MultiSelect from select HTML element

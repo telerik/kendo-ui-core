@@ -99,7 +99,7 @@ How can I allow the users to select or deselect ListView items only with the mou
 
                 var selectedItems = listView.select();
 
-                if (clickedItem.hasClass("k-state-selected")) {
+                if (clickedItem.hasClass("k-selected")) {
                     // if item is already selected - remove it from collection
                     selectedItems.splice($.inArray(clickedItem[0], selectedItems), 1);
                 } else {

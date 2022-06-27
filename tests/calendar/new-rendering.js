@@ -118,7 +118,7 @@
                 }
             });
 
-            assert.isTrue(cal._today.is('.k-state-disabled'));
+            assert.isTrue(cal._today.is('.k-disabled'));
         });
     });
 }());

@@ -85,7 +85,7 @@ The following example demonstrates how to enable the dragging of the Switch drag
           constrain = kendo._outerWidth(switchButton.wrapper, true) - kendo._outerWidth(handle, true);
           position = 0;
 
-          handle.addClass("k-state-active");
+          handle.addClass("k-active");
       }
     };
 
@@ -94,7 +94,7 @@ The following example demonstrates how to enable the dragging of the Switch drag
 
       sliding = false;
 
-      handle.removeClass("k-state-active");
+      handle.removeClass("k-active");
       switchButton.check(checked);
       switchButton.trigger("change", { checked: checked });
       sliding = true;

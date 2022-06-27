@@ -68,6 +68,7 @@ each( @theme-colors, {
                     @primary-hover-background-color,
                     @primary-hover-border-color
                 );
+                .linear-gradient( @primary-gradient );
             }
 
             &:focus,
@@ -93,6 +94,10 @@ each( @theme-colors, {
                     border-color: @primary-hover-border-color;
                     background-color: @primary-hover-background-color;
                 }
+            }
+
+            &.k-disabled {
+                border-color: @primary-border-color;
             }
         }
     }
@@ -147,10 +152,12 @@ each( @theme-colors, {
             @normal-text-color,
             @normal-text-color
         );
+        background-image: none;
     }
 
     &:focus,
     &.k-focus {
+        border-color: currentColor;
         box-shadow: 0px 0px 4px 0px rgba( @normal-text-color, .75 );
     }
 
@@ -182,12 +189,14 @@ each( @theme-colors, {
             .fill(
                 contrast( @color ),
                 @color,
-                @color
+                @color,
             );
+            background-image: none;
         }
 
         &:focus,
         &.k-focus {
+            border-color: currentColor;
             box-shadow: 0px 0px 4px 0px rgba( @color, .75 );
         }
 
@@ -257,7 +266,11 @@ each( @theme-colors, {
     @color: @value;
 
     .k-button-flat-@{name} {
-        .fill( @text: @color );
+        &,
+        &.k-hover,
+        &.k-active {
+            .fill( @text: @color );
+        }
     }
 });
 

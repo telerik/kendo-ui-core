@@ -90,7 +90,7 @@
             assert.isNotOk(maskedtextbox.floatingLabel.element.hasClass("k-state-empty"));
         });
 
-        it("floating label adds k-state-focus when the user focuses the input", function() {
+        it("floating label adds k-focus when the user focuses the input", function() {
             var maskedtextbox = new MaskedTextBox(input, {
                 label: {
                     content: "test",
@@ -103,7 +103,7 @@
             assert.isOk(maskedtextbox.floatingLabel.element.hasClass("k-focus"));
         });
 
-        it("floating label removes k-state-focused on blur", function() {
+        it("floating label removes k-focus on blur", function() {
             var maskedtextbox = new MaskedTextBox(input, {
                 label: {
                     content: "test",

@@ -46,7 +46,7 @@ To persist the scroll position, use the [`select`](/api/javascript/ui/tabstrip/e
 ```dojo
     <div id="tabstrip" style="width:600px">
       <ul>
-        <li class="k-state-active">
+        <li class="k-active">
           One
         </li>
         <li>

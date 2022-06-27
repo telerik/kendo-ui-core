@@ -28,15 +28,15 @@ I have a hierarchical Kendo Grid with checkboxes for selection. On selection of 
 
 1. Add an event handler to the [`change`](/api/javascript/ui/grid/events/change) event of the child grid.
 1. Use the [`select()`](/api/javascript/ui/grid/methods/select) method to check if there are any selected rows
-1. Get a reference to the master row and add or remove the `k-state-selected` class if there are any selected rows in the child grid.
+1. Get a reference to the master row and add or remove the `k-selected` class if there are any selected rows in the child grid.
 
 ```
     change: function(e){
         var masterRow = this.element.closest("tr").prev();
         if(this.select().length){
-            masterRow.addClass("k-state-selected");
+            masterRow.addClass("k-selected");
         } else {
-            masterRow.removeClass("k-state-selected");
+            masterRow.removeClass("k-selected");
         }
     },
 ```
@@ -104,9 +104,9 @@ I have a hierarchical Kendo Grid with checkboxes for selection. On selection of 
                       	change: function(e){
                           var masterRow = this.element.closest("tr").prev();
                           if(this.select().length){
-                            masterRow.addClass("k-state-selected");
+                            masterRow.addClass("k-selected");
                           } else {
-                            masterRow.removeClass("k-state-selected");
+                            masterRow.removeClass("k-selected");
                           }
                         },
                         columns: [

@@ -32,7 +32,7 @@ The following example demonstrates how to initialize the Menu by using HTML mark
             </ul>
         </li>
         <li><a href="https://www.google.com">Navigation Item</a></li>
-        <li class="k-state-active">Active Item</li>
+        <li class="k-active">Active Item</li>
         <li>Template Item
             <div class="k-group k-content">
                 Test button - <a class="k-button">Button</a>

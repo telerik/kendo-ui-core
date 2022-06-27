@@ -723,7 +723,7 @@
             });
 
             popup.open();
-            assert.isOk(anchor.children().hasClass("k-state-active"));
+            assert.isOk(anchor.children().hasClass("k-active"));
         });
 
         it("gets biggest zindex if sibling container does not have zIndex", function() {

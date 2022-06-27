@@ -67,7 +67,7 @@ var __meta__ = { // jshint ignore:line
               .attr(kendo.attr("page"), page)
               .attr("tabindex", disabled ? -1 : 0)
               .attr("aria-disabled", disabled)
-              .toggleClass("k-state-disabled", disabled);
+              .toggleClass("k-disabled", disabled);
     }
 
     function first(element, page) {
@@ -270,7 +270,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "Pager",
             ARIATemplate: "Page navigation, page #=page# of #=totalPages#",
-            selectTemplate: '<li><span role="button" aria-current="page" tabindex="#=tabindex#" aria-label="#=title#" class="k-link k-state-selected">#=text#</span></li>',
+            selectTemplate: '<li><span role="button" aria-current="page" tabindex="#=tabindex#" aria-label="#=title#" class="k-link k-selected">#=text#</span></li>',
             linkTemplate: '<li><a role="button" tabindex="#=tabindex#" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
             numericSelectItemTemplate: '<option value="#= idx #" #if (selected) {# selected="selected" #}#>#= text #</option>',
             buttonCount: 10,
@@ -440,7 +440,7 @@ var __meta__ = { // jshint ignore:line
                     .val(page)
                     .attr(DISABLED, total < 1)
                     .attr("aria-disabled", total < 1)
-                    .toggleClass("k-state-disabled", total < 1);
+                    .toggleClass("k-disabled", total < 1);
             }
 
             if (options.previousNext) {
@@ -490,7 +490,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (that._focusSelected) {
-                that.element.find(".k-state-selected").trigger("focus");
+                that.element.find(".k-selected").trigger("focus");
                 that._focusSelected = null;
             }
 
@@ -507,7 +507,7 @@ var __meta__ = { // jshint ignore:line
 
         _restoreTabIndexes: function() {
             this.element
-                .find("[tabindex='-1']:not(.k-state-disabled)")
+                .find("[tabindex='-1']:not(.k-disabled)")
                 .attr("tabindex", 0);
         },
 
@@ -578,14 +578,14 @@ var __meta__ = { // jshint ignore:line
             that._tabindex(that.element);
 
             that.element.on("keydown" + NS, that, that._keyDown.bind(that));
-            that.element.on("focusout" + NS, function() { that.element.removeClass("k-state-focused"); });
+            that.element.on("focusout" + NS, function() { that.element.removeClass("k-focus"); });
             that.element.on("focusin" + NS, function(e) {
-                that.element.addClass("k-state-focused");
+                that.element.addClass("k-focus");
 
                 if (e.target === that.element[0]) {
                     that.element.find(FOCUSABLE).attr("tabindex", -1);
                 } else {
-                    that.element.removeClass("k-state-focused");
+                    that.element.removeClass("k-focus");
                 }
             });
         },
@@ -678,7 +678,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (!target.is(".k-state-disabled")) {
+            if (!target.is(".k-disabled")) {
                 this.page(parseInt(target.attr(kendo.attr("page")), 10));
             }
         },

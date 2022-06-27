@@ -60,8 +60,8 @@ describe("kendo.ui.Calendar selection", function() {
 
         firstSelectee.tap().press().move(position.left, position.top).release();
 
-        assert.isOk(instance.element.find("td.k-state-selected").length);
-        assert.isOk(!instance.element.find("td.k-state-selected.k-state-disabled").length);
+        assert.isOk(instance.element.find("td.k-selected").length);
+        assert.isOk(!instance.element.find("td.k-selected.k-disabled").length);
     });
 
     });

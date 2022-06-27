@@ -147,11 +147,11 @@ Manually select all records within the `click` event of the checkbox for selecti
           var checked = ev.target.checked;
           $('.k-checkbox:not("#header-chb")').each(function(idx, item){
             if(checked){
-              if(!($(item).closest('tr').is('.k-state-selected'))){
+              if(!($(item).closest('tr').is('.k-selected'))){
                 $(item).click();
               }
             } else {
-              if($(item).closest('tr').is('.k-state-selected')){
+              if($(item).closest('tr').is('.k-selected')){
                 $(item).click();
               }
             }
@@ -183,10 +183,10 @@ Manually select all records within the `click` event of the checkbox for selecti
 
           checkedIds[dataItem.id] = checked;
           if (checked) {
-            $("[data-uid='"+dataItem.uid+"']").addClass("k-state-selected");
+            $("[data-uid='"+dataItem.uid+"']").addClass("k-selected");
           } else {
             //-remove selection
-            $("[data-uid='"+dataItem.uid+"']").removeClass("k-state-selected");
+            $("[data-uid='"+dataItem.uid+"']").removeClass("k-selected");
           }
         }
       }
@@ -197,14 +197,14 @@ Manually select all records within the `click` event of the checkbox for selecti
         for(var i = 0; i < view.length;i++){
           if(checkedIds[view[i].id]){
             $("tr[data-uid='" + view[i].uid + "']")
-              .addClass("k-state-selected")
+              .addClass("k-selected")
               .find(".k-checkbox")
               .attr("checked","checked");
           }
         }
 
         // If all rows on the current page are selected, check the master checkbox.
-        if($("tr.k-state-selected").length === view.length * 2) {
+        if($("tr.k-selected").length === view.length * 2) {
           $('#header-chb')[0].checked = true;
         } else {
           // If not all rows are selected, the master checkbox should not be checked.

@@ -61,7 +61,7 @@ The following example demonstrates how to style the `hint` element so that the r
         var noHint = $.noop;
 
         function placeholder(element) {
-            return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+            return element.clone().addClass("k-hover").css("opacity", 0.65);
         }
 
         function onChange(e) {

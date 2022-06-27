@@ -3,7 +3,7 @@ title: Sorting
 page_title: jQuery Grid Documentation | Sorting
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: sorting_kendoui_grid_widget
-position: 7
+position: 9
 ---
 
 # Sorting

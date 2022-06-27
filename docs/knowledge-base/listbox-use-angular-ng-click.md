@@ -161,9 +161,9 @@ Here are the important steps:
       /* Material Theme padding adjustment*/
 
       .k-material #example .k-item,
-      .k-material #example .k-item.k-state-hover,
+      .k-material #example .k-item.k-hover,
       .k-materialblack #example .k-item,
-      .k-materialblack #examplel .k-item.k-state-hover {
+      .k-materialblack #examplel .k-item.k-hover {
         padding-left: 5px;
         border-left: 0;
       }

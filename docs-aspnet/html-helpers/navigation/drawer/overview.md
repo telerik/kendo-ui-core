@@ -33,7 +33,7 @@ The following example demonstrates how to define the Drawer.
                 <li data-role='drawer-item'>First Item</li>
                 <li data-role='drawer-separator'></li>
                 <li data-role='drawer-item'>Second Item</li>
-                <li data-role='drawer-item' class='k-state-selected'>Third Item</li>
+                <li data-role='drawer-item' class='k-selected'>Third Item</li>
             </ul>")
         .Mode("push")
         .Position("left")
@@ -52,7 +52,7 @@ The following example demonstrates how to define the Drawer.
             <li data-role='drawer-item'>First Item</li>
             <li data-role='drawer-separator'></li>
             <li data-role='drawer-item'>Second Item</li>
-            <li data-role='drawer-item' class='k-state-selected'>Third Item</li>
+            <li data-role='drawer-item' class='k-selected'>Third Item</li>
         </ul>
 ```
 {% endif %}

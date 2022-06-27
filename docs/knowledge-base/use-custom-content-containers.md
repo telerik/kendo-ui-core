@@ -65,7 +65,7 @@ The following example demonstrates how to achieve the desired scenario.
     </style>
     <p>PanelBar 1 using custom content containers</p>
     <ul id="panelbar1">
-      <li class="k-state-active">
+      <li class="k-active">
         <span>Item 1</span>
         <div>
           <div class="scrollable">Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br />Content 1<br /></div>
@@ -82,7 +82,7 @@ The following example demonstrates how to achieve the desired scenario.
     <p>PanelBar 2 using standard items</p>
 
     <ul id="panelbar2">
-      <li class="k-state-active">
+      <li class="k-active">
         <span>Item 1</span>
         <ul>
           <li>Item 1.1</li>

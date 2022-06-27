@@ -60,7 +60,7 @@ The following example demonstrates how to achieve the desired scenario through M
                 var viewName = widget.view().name;
                 var disable = viewName == "month" && viewName !== "year";
                 widget.wrapper.find(".k-nav-fast")
-                .toggleClass("k-state-disabled", disable)
+                .toggleClass("k-disabled", disable)
                 .attr("aria-disabled", disable);
               })
               .trigger("navigate");

@@ -49,7 +49,7 @@
             div.focus();
 
             var first = div.find(".k-item:first");
-            assert.isOk(first.hasClass("k-state-focused"));
+            assert.isOk(first.hasClass("k-focus"));
         });
 
         it("clears focused item on blur", function() {
@@ -60,7 +60,7 @@
             div.blur();
 
             var first = div.find(".k-item:first");
-            assert.isOk(!first.hasClass("k-state-focused"));
+            assert.isOk(!first.hasClass("k-focus"));
         });
 
         it("selects next item on key DOWN", function() {
@@ -74,8 +74,8 @@
             });
 
             var item = div.find(".k-item").eq(1);
-            assert.isOk(!item.hasClass("k-state-focused"));
-            assert.isOk(item.hasClass("k-state-active"));
+            assert.isOk(!item.hasClass("k-focus"));
+            assert.isOk(item.hasClass("k-active"));
         });
 
         it("focuses next item if disabled", function() {
@@ -94,8 +94,8 @@
 
             var item = div.find(".k-item").eq(1);
             var lastItem = div.find(".k-item:last");
-            assert.isOk($(item).hasClass("k-state-focused"));
-            assert.isOk(!lastItem.hasClass("k-state-active"));
+            assert.isOk($(item).hasClass("k-focus"));
+            assert.isOk(!lastItem.hasClass("k-active"));
         });
 
         it("selects first if last is selected", function() {
@@ -112,7 +112,7 @@
                 keyCode: keys.RIGHT
             });
 
-            assert.isOk(div.find(".k-item:first").hasClass("k-state-active"));
+            assert.isOk(div.find(".k-item:first").hasClass("k-active"));
         });
 
         it("add activedescendant id on disabled item when navigating on it", function() {
@@ -129,7 +129,7 @@
             });
 
             assert.equal(div.attr("aria-activedescendant"), tabstrip.tabGroup.children("#test-tab-2").attr("id"));
-            assert.isOk(tabstrip.tabGroup.children("#test-tab-2").hasClass("k-state-disabled"));
+            assert.isOk(tabstrip.tabGroup.children("#test-tab-2").hasClass("k-disabled"));
         });
 
         it("adjust activedescendant id when navigation from disabled item to active item", function() {
@@ -167,7 +167,7 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(div.find(".k-item:first").hasClass("k-state-active"));
+            assert.isOk(div.find(".k-item:first").hasClass("k-active"));
             assert.equal(div.attr("aria-activedescendant"), div.find(".k-item:first").attr("id"));
         });
 
@@ -183,7 +183,7 @@
                 keyCode: keys.LEFT
             });
 
-            assert.isOk(div.find(".k-item:last").hasClass("k-state-active"));
+            assert.isOk(div.find(".k-item:last").hasClass("k-active"));
 
         });
 
@@ -200,7 +200,7 @@
                 keyCode: keys.DOWN
             });
 
-            assert.equal(div.find(".k-state-active").index(), 0);
+            assert.equal(div.find(".k-active").index(), 0);
         });
 
         it("in rtl and horizontal layout selects next on RIGHT", function() {
@@ -216,7 +216,7 @@
                 keyCode: keys.RIGHT
             });
 
-            assert.equal(div.find(".k-state-active").index(), 2);
+            assert.equal(div.find(".k-active").index(), 2);
         });
 
         it("in rtl and horizontal layout selects prev on LEFT", function() {
@@ -232,7 +232,7 @@
                 keyCode: keys.LEFT
             });
 
-            assert.equal(div.find(".k-state-active").index(), 1);
+            assert.equal(div.find(".k-active").index(), 1);
         });
 
         it("in rtl and horizontal layout does not change selection on UP", function() {
@@ -248,7 +248,7 @@
                 keyCode: keys.UP
             });
 
-            assert.equal(div.find(".k-state-active").index(), 0);
+            assert.equal(div.find(".k-active").index(), 0);
         });
 
         it("in rtl and vertical layout selects prev on UP", function() {
@@ -264,7 +264,7 @@
                 keyCode: keys.UP
             });
 
-            assert.equal(div.find(".k-state-active").index(), 2);
+            assert.equal(div.find(".k-active").index(), 2);
         });
 
         it("in rtl and vertical layout does not change selection on LEFT", function() {
@@ -280,7 +280,7 @@
                 keyCode: keys.LEFT
             });
 
-            assert.equal(div.find(".k-state-active").index(), 0);
+            assert.equal(div.find(".k-active").index(), 0);
         });
 
         it("in rtl and vertical layout selects next on DOWN", function() {
@@ -296,7 +296,7 @@
                 keyCode: keys.DOWN
             });
 
-            assert.equal(div.find(".k-state-active").index(), 1);
+            assert.equal(div.find(".k-active").index(), 1);
         });
 
         it("in rtl and vertical layout does not change selection on RIGHT", function() {
@@ -312,7 +312,7 @@
                 keyCode: keys.RIGHT
             });
 
-            assert.equal(div.find(".k-state-active").index(), 0);
+            assert.equal(div.find(".k-active").index(), 0);
         });
 
         it("focuses prev item if disabled", function() {
@@ -332,8 +332,8 @@
 
             var firstItem = div.find(".k-item:first");
             var item = div.find(".k-item").eq(1);
-            assert.isOk(item.hasClass("k-state-focused"));
-            assert.isOk(!firstItem.hasClass("k-state-active"));
+            assert.isOk(item.hasClass("k-focus"));
+            assert.isOk(!firstItem.hasClass("k-active"));
         });
 
         it("selects focused item on ENTER", function() {
@@ -385,7 +385,7 @@
         });
 
         it("prevents default action event", function() {
-            div = $('<div class="k-widget k-tabstrip k-header" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-item k-state-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-item"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-state-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(Mocha.fixture);
+            div = $('<div class="k-widget k-tabstrip k-header" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-item k-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-item"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(Mocha.fixture);
             var tabstrip = new kendo.ui.TabStrip(div);
             div.focus();
             tabstrip.tabGroup.children().eq(1).attr("data-animating", true);

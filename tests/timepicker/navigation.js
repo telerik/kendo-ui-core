@@ -231,7 +231,7 @@
 
             input.focus().val("invalid").blur();
 
-            assert.isOk(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
+            assert.isOk(!timepicker.timeView.ul.find("li.k-selected")[0]);
             assert.equal(timepicker._value, null);
             assert.equal(input.val(), "invalid");
         });

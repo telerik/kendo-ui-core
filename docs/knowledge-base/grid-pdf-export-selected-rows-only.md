@@ -119,7 +119,7 @@ How can I export only the selected rows of a Kendo UI Grid to PDF?
 
                     for (var i = 0; i < rows.length; i++) {
                         var row = rows[i];
-                        if (!$(row).hasClass("k-state-selected")) {
+                        if (!$(row).hasClass("k-selected")) {
                             $(row).addClass("hiddenRow")
                         };
                     };

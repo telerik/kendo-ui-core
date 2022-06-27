@@ -114,7 +114,7 @@ The following example demonstrates how `SelectAll` that is located in the header
                 var dataItem = e.sender.dataItem(this);
                 kendo.bind(this, dataItem);
                 if(dataItem.Discontinued){
-                  $(this).addClass("k-state-selected");
+                  $(this).addClass("k-selected");
                 }
               })
 
@@ -211,7 +211,7 @@ The following example demonstrates how `SelectAll` that is located in the header
                 var dataItem = e.sender.dataItem(this);
                 kendo.bind(this, dataItem);
                 if(dataItem.Discontinued){
-                  $(this).addClass("k-state-selected");
+                  $(this).addClass("k-selected");
                 }
               })
 

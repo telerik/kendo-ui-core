@@ -39,7 +39,7 @@ To achieve the desired behaviour, we will need both some JavaScript and CSS beca
           width: 100%;          
         }
         
-        .k-floating-label-container:not(.k-state-focused) {
+        .k-floating-label-container:not(.k-focus) {
           color: red; font-style: italic;
         }       
     </style>
@@ -86,7 +86,7 @@ To achieve the desired behaviour, we will need both some JavaScript and CSS beca
           width: 100%;          
         }
         
-        .k-floating-label-container:not(.k-state-focused) {
+        .k-floating-label-container:not(.k-focus) {
           color: red; font-style: italic;
         }
        

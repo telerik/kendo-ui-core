@@ -102,7 +102,7 @@
         it("Setting the dateinput as readonly does not add disabled styles", function() {
             dateinput = input.kendoDateInput().data("kendoDateInput");
             dateinput.readonly(true);
-            assert.isOk(!dateinput.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!dateinput.wrapper.hasClass("k-disabled"));
             assert.isOk(dateinput.element.attr("readonly"));
         });
 

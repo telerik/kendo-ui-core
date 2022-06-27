@@ -145,16 +145,22 @@
 
 
     // Reset states
-    .k-state-selected {
+    .k-state-selected,
+    .k-selected {
         color: inherit;
         background: transparent;
         border-color: transparent;
     }
     .k-state-focused,
-    .k-state-focused.k-state-selected {
+    .k-focus,
+    .k-state-focused.k-state-selected,
+    .k-focus.k-state-selected,
+    .k-state-focused.k-selected,
+    .k-focus.k-selected {
         box-shadow: none;
     }
-    td.k-state-disabled {
+    td.k-state-disabled,
+    td.k-disabled {
         opacity: .5;
 
         .k-link {

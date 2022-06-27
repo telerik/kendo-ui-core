@@ -1681,6 +1681,7 @@
 .k-footer-template td,
 .k-state-default,
 .k-state-disabled,
+.k-disabled,
 .k-grid-header,
 .k-grid-header-wrap,
 .k-grid-header-locked,
@@ -1688,6 +1689,7 @@
 .k-grid-content-locked,
 .k-grid td,
 .k-grid td.k-state-selected,
+.k-grid td.k-selected,
 .k-grid-footer-wrap,
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
@@ -1835,15 +1837,21 @@ td.k-group-cell,
 // icons
 .k-icon:hover,
 .k-state-hover .k-icon,
+.k-hover .k-icon,
 .k-state-selected .k-icon,
+.k-selected .k-icon,
 .k-state-focused .k-icon,
+.k-focus .k-icon,
 .k-column-menu .k-state-hover .k-sprite,
-.k-column-menu .k-state-active .k-sprite {
+.k-column-menu .k-hover .k-sprite,
+.k-column-menu .k-state-active .k-sprite,
+.k-column-menu .k-active .k-sprite {
     opacity:1;
 }
 
 .k-icon,
 .k-state-disabled .k-icon,
+.k-disabled .k-icon,
 .k-column-menu .k-sprite {
     opacity: @default-icon-opacity;
 }
@@ -1955,7 +1963,8 @@ td.k-group-cell,
     color: @event-inverse-text-color;
 }
 
-.k-event.k-state-selected
+.k-event.k-state-selected,
+.k-event.k-selected
 {
     background-position: 0 0;
     .box-shadow(0 0 0 2px @normal-text-color);
@@ -1999,9 +2008,12 @@ td.k-group-cell,
 
 // states
 .k-state-active,
+.k-active,
 .k-state-active:hover,
+.k-active:hover,
 .k-active-filter,
-.k-header-column-menu.k-state-active {
+.k-header-column-menu.k-state-active,
+.k-header-column-menu.k-active {
     background-color: @active-background-color;
     border-color: @active-border-color;
     color: @accent;
@@ -2014,7 +2026,9 @@ td.k-group-cell,
 }
 
 .k-state-focused,
-.k-grouping-row .k-state-focused
+.k-focus,
+.k-grouping-row .k-state-focused,
+.k-grouping-row .k-focus
 {
     border-color: @focused-border-color;
 }
@@ -2024,12 +2038,17 @@ td.k-group-cell,
 }
 
 .k-state-selected,
+.k-selected,
 .k-state-selected:link,
+.k-selected:link,
 .k-state-selected:visited,
+.k-selected:visited,
 .k-panel > .k-state-selected,
+.k-panel > .k-selected,
 .k-ghost-splitbar-vertical,
 .k-ghost-splitbar-horizontal,
 .k-scheduler .k-today.k-state-selected,
+.k-scheduler .k-today.k-selected,
 .k-marquee-color
 {
     color: @selected-text-color;
@@ -2043,28 +2062,46 @@ td.k-group-cell,
 }
 
 .k-state-focused,
+.k-focus,
 .k-listview>.k-state-focused,
+.k-listview>.k-focus,
 .k-grid-header th.k-state-focused,
-td.k-state-focused
+.k-grid-header th.k-focus,
+td.k-state-focused,
+td.k-focus
 {
     .box-shadow(@focused-item-shadow);
 }
 
 .k-state-focused.k-state-selected,
+.k-focus.k-state-selected,
+.k-state-focused.k-selected,
+.k-focus.k-selected,
 .k-listview>.k-state-focused.k-state-selected,
-td.k-state-focused.k-state-selected
+.k-listview>.k-focus.k-state-selected,
+.k-listview>.k-state-focused.k-selected,
+.k-listview>.k-focus.k-selected,
+td.k-state-focused.k-state-selected,
+td.k-focus.k-state-selected,
+td.k-state-focused.k-selected,
+td.k-focus.k-selected
 {
     .box-shadow(@focused-active-item-shadow);
 }
 
 .k-state-selected>.k-link,
+.k-selected>.k-link,
 .k-panelbar > li > .k-state-selected,
+.k-panelbar > li > .k-selected,
 .k-panelbar .k-item .k-link.k-state-selected,
-.k-panelbar>li.k-state-default>.k-link.k-state-selected {
+.k-panelbar .k-item .k-link.k-selected,
+.k-panelbar>li.k-state-default>.k-link.k-state-selected,
+.k-panelbar>li.k-state-default>.k-link.k-selected {
     color: @selected-text-color;
 }
 
 .k-state-hover,
+.k-hover,
 .k-splitbar-horizontal-hover,
 .k-splitbar-vertical-hover,
 .k-filebrowser-dropzone
@@ -2075,7 +2112,9 @@ td.k-state-focused.k-state-selected
 }
 
 .k-state-hover,
+.k-hover,
 .k-other-month.k-state-hover .k-link,
+.k-other-month.k-hover .k-link,
 div.k-filebrowser-dropzone em {
     .composite-background(@hover-gradient);
 }
@@ -2098,11 +2137,13 @@ div.k-filebrowser-dropzone em {
         background-color: @hover-background-color;
         border-color: @hover-border-color;
     }
-    .k-link.k-state-disabled {
+    .k-link.k-state-disabled,
+    .k-link.k-disabled {
         color: @normal-text-color;
         border-color: @widget-border-color;
     }
-    .k-link.k-state-selected {
+    .k-link.k-state-selected,
+    .k-link.k-selected {
         color: @selected-text-color;
         background-color: @selected-background-color;
         border-color: @selected-border-color;
@@ -2121,19 +2162,26 @@ div.k-filebrowser-dropzone em {
 }
 
 .k-state-active,
+.k-active,
 .k-state-active:hover,
+.k-active:hover,
 .k-state-active>.k-link,
-.k-panelbar>.k-item>.k-state-focused
+.k-active>.k-link,
+.k-panelbar>.k-item>.k-state-focused,
+.k-panelbar>.k-item>.k-focus
 {
     .composite-background(@active-gradient);
 }
 
-.k-state-selected {
+.k-state-selected,
+.k-selected {
     .composite-background(@selected-gradient);
 }
 
 .k-state-hover>.k-link,
+.k-hover>.k-link,
 .k-other-month.k-state-hover .k-link,
+.k-other-month.k-hover .k-link,
 div.k-filebrowser-dropzone em
 {
     color: @hover-text-color;
@@ -2146,11 +2194,13 @@ div.k-filebrowser-dropzone em
     color: @error-text-color;
 }
 
-.k-state-disabled {
+.k-state-disabled,
+.k-disabled {
     opacity: .6;
 }
 
-.k-loading-mask.k-state-selected {
+.k-loading-mask.k-state-selected,
+.k-loading-mask.k-selected {
     border-width: 0;
     background-image: none;
     background-color: transparent;
@@ -2180,19 +2230,28 @@ div.k-filebrowser-dropzone em
 }
 
 .k-progressbar-indeterminate .k-progress-status-wrap,
-.k-progressbar-indeterminate .k-state-selected
+.k-progressbar-indeterminate .k-state-selected,
+.k-progressbar-indeterminate .k-selected
 {
     display: none;
 }
 
 .k-progressbar-horizontal > .k-state-selected,
+.k-progressbar-horizontal > .k-selected,
 .k-rtl .k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected,
+.k-rtl .k-progressbar-horizontal.k-progressbar-reverse > .k-selected,
 .k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected,
+.k-progressbar-horizontal.k-progressbar-reverse > .k-selected,
 .k-rtl .k-progressbar-horizontal > .k-state-selected,
+.k-rtl .k-progressbar-horizontal > .k-selected,
 .k-progressbar-vertical > .k-state-selected,
+.k-progressbar-vertical > .k-selected,
 .k-progressbar-vertical.k-progressbar-reverse > .k-state-selected,
+.k-progressbar-vertical.k-progressbar-reverse > .k-selected,
 .k-progressbar > .k-state-selected.k-complete,
+.k-progressbar > .k-selected.k-complete,
 .k-rtl .k-progressbar > .k-state-selected.k-complete,
+.k-rtl .k-progressbar > .k-selected.k-complete,
 .k-progressbar-horizontal .k-first,
 .k-rtl .k-progressbar-horizontal .k-last,
 .k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-last,
@@ -2292,12 +2351,14 @@ div.k-filebrowser-dropzone em
 // TreeMap
 
 .k-leaf,
-.k-leaf.k-state-hover {
+.k-leaf.k-state-hover,
+.k-leaf.k-hover {
     color: #fff;
 }
 
 .k-leaf.k-inverse,
-.k-leaf.k-inverse.k-state-hover {
+.k-leaf.k-inverse.k-state-hover,
+.k-leaf.k-inverse.k-hover {
     color: #000;
 }
 
@@ -2311,17 +2372,20 @@ div.k-filebrowser-dropzone em
     .box-shadow(none);
 }
 
-.k-state-hover
+.k-state-hover,
+.k-hover
 {
     .box-shadow(@hover-shadow);
 }
 
-.k-state-selected
+.k-state-selected,
+.k-selected
 {
     .box-shadow(@selected-shadow);
 }
 
-.k-state-active
+.k-state-active,
+.k-active
 {
     .box-shadow(@active-shadow);
 }
@@ -2334,7 +2398,8 @@ div.k-filebrowser-dropzone em
     .box-shadow(0 2px 2px 0 @shadow-color);
 }
 
-.k-treemap-tile.k-state-hover
+.k-treemap-tile.k-state-hover,
+.k-treemap-tile.k-hover
 {
     .box-shadow(inset 0 0 0 3px @widget-border-color);
 }
@@ -2378,15 +2443,21 @@ div.k-filebrowser-dropzone em
 }
 
 .k-gantt .k-treelist .k-state-selected,
+.k-gantt .k-treelist .k-selected,
 .k-gantt .k-treelist .k-state-selected td,
+.k-gantt .k-treelist .k-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
-.k-gantt .k-treelist .k-alt.k-state-selected > td
+.k-gantt .k-treelist .k-alt.k-selected,
+.k-gantt .k-treelist .k-alt.k-state-selected > td,
+.k-gantt .k-treelist .k-alt.k-selected > td
 {
     background-color: @selected-background-color;
 }
 
 .k-gantt .k-treelist .k-state-selected:hover,
-.k-gantt .k-treelist .k-state-selected:hover td
+.k-gantt .k-treelist .k-selected:hover,
+.k-gantt .k-treelist .k-state-selected:hover td,
+.k-gantt .k-treelist .k-selected:hover td
 {
     background-color: @hover-background;
 }
@@ -2415,14 +2486,17 @@ div.k-filebrowser-dropzone em
     background: @widget-text-color;
 }
 
-.k-state-selected.k-task-summary
+.k-state-selected.k-task-summary,
+.k-selected.k-task-summary
 {
     border-color: @task-summary-selected-color;
     background: @task-summary-selected-color;
 }
 
 .k-state-selected.k-task-milestone,
-.k-state-selected .k-task-summary-complete
+.k-selected.k-task-milestone,
+.k-state-selected .k-task-summary-complete,
+.k-selected .k-task-summary-complete
 {
     border-color: @selected-background-color;
     background: @selected-background-color;
@@ -2435,7 +2509,8 @@ div.k-filebrowser-dropzone em
     color: @event-text-color;
 }
 
-.k-state-selected.k-task-single
+.k-state-selected.k-task-single,
+.k-selected.k-task-single
 {
     border-color: @selected-border-color;
 }
@@ -2446,7 +2521,8 @@ div.k-filebrowser-dropzone em
     color: @widget-text-color;
 }
 
-.k-state-selected.k-gantt-line
+.k-state-selected.k-gantt-line,
+.k-selected.k-gantt-line
 {
     background-color: @selected-background-color;
     color: @selected-background-color;
@@ -2517,14 +2593,21 @@ div.k-filebrowser-dropzone em
 }
 
 .k-tabstrip-items .k-state-hover .k-link,
+.k-tabstrip-items .k-hover .k-link,
 .k-panelbar > li > .k-link.k-state-hover,
+.k-panelbar > li > .k-link.k-hover,
 .k-panelbar > li.k-state-hover > .k-link,
-.k-panelbar>li.k-state-default>.k-link.k-state-hover
+.k-panelbar > li.k-hover > .k-link,
+.k-panelbar>li.k-state-default>.k-link.k-state-hover,
+.k-panelbar>li.k-state-default>.k-link.k-hover
 {
     color: @hover-text-color;
 }
 
-.k-panelbar .k-state-focused.k-state-hover
+.k-panelbar .k-state-focused.k-state-hover,
+.k-panelbar .k-state-focused.k-hover,
+.k-panelbar .k-focus.k-state-hover,
+.k-panelbar .k-focus.k-hover
 {
     background: @hover-background-color;
     .box-shadow(none);
@@ -2535,13 +2618,16 @@ div.k-filebrowser-dropzone em
     border-color: @tabstrip-items-border;
 }
 
-.k-tabstrip-items .k-state-hover
+.k-tabstrip-items .k-state-hover,
+.k-tabstrip-items .k-hover
 {
     border-color: @hover-border-color;
 }
 
 .k-tabstrip-items .k-state-active,
-.k-panelbar .k-tabstrip-items .k-state-active
+.k-tabstrip-items .k-active,
+.k-panelbar .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-items .k-active
 {
     background-color: @active-background-color;
     .composite-background(@active-gradient);
@@ -2549,18 +2635,22 @@ div.k-filebrowser-dropzone em
 }
 
 .k-tabstrip-top > .k-tabstrip-items .k-state-active,
-.k-panelbar .k-tabstrip-top > .k-tabstrip-items .k-state-active {
+.k-tabstrip-top > .k-tabstrip-items .k-active,
+.k-panelbar .k-tabstrip-top > .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-top > .k-tabstrip-items .k-active {
     border-bottom-color: @active-background-color;
 }
 
-.k-tabstrip .k-content.k-state-active
+.k-tabstrip .k-content.k-state-active,
+.k-tabstrip .k-content.k-active
 {
     background-color: @tabstrip-active-background;
     color: @widget-text-color;
 }
 
 .k-tabstrip .k-content:focus,
-.k-tabstrip .k-content.k-state-focused {
+.k-tabstrip .k-content.k-state-focused,
+.k-tabstrip .k-content.k-focus {
     outline-color: @tabstrip-content-border-focused;
 }
 
@@ -2582,7 +2672,8 @@ div.k-filebrowser-dropzone em
     border-color: @normal-text-color;
 }
 
-.k-grid-filter.k-state-active
+.k-grid-filter.k-state-active,
+.k-grid-filter.k-active
 {
     background-color: @active-filter-background-color;
 }
@@ -2603,7 +2694,9 @@ div.k-filebrowser-dropzone em
 
 .k-grid tr:hover,
 .k-grid td.k-state-selected:hover,
-.k-grid td.k-grid-content-sticky.k-state-selected:hover {
+.k-grid td.k-selected:hover,
+.k-grid td.k-grid-content-sticky.k-state-selected:hover,
+.k-grid td.k-grid-content-sticky.k-selected:hover {
     color: @hover-text-color;
     background-color: @hover-background;
 }
@@ -2614,15 +2707,29 @@ div.k-filebrowser-dropzone em
     background: none;
 }
 
-.k-grid td.k-state-focused {
+.k-grid td.k-state-focused,
+.k-grid td.k-focus {
     box-shadow: inset 0 0 0 1px contrast(@base, darken(@hover-background, 6%), lighten(@hover-background, 86%), 0.5);
 }
 
 .k-grid tr:hover .k-state-focused,
+.k-grid tr:hover .k-focus,
 .k-grid tr .k-state-focused.k-state-selected,
+.k-grid tr .k-focus.k-state-selected,
+.k-grid tr .k-state-focused.k-selected,
+.k-grid tr .k-focus.k-selected,
 .k-grid tr.k-state-selected td.k-state-focused,
+.k-grid tr.k-state-selected td.k-focus,
+.k-grid tr.k-selected td.k-state-focused,
+.k-grid tr.k-selected td.k-focus,
 .k-grid tr:hover .k-state-focused.k-state-selected,
-.k-grid tr.k-state-selected:hover td.k-state-focused {
+.k-grid tr:hover .k-focus.k-state-selected,
+.k-grid tr:hover .k-state-focused.k-selected,
+.k-grid tr:hover .k-focus.k-selected,
+.k-grid tr.k-state-selected:hover td.k-state-focused,
+.k-grid tr.k-state-selected:hover td.k-focus,
+.k-grid tr.k-selected:hover td.k-state-focused,
+.k-grid tr.k-selected:hover td.k-focus {
     box-shadow: inset 0 0 0 1px contrast(@base, darken(@hover-background, 25%), lighten(@hover-background, 86%), 0.5);
 }
 
@@ -2643,7 +2750,8 @@ div.k-filebrowser-dropzone em
     border-radius: @border-radius;
 }
 
-.k-scheduler-table .k-state-hover .k-icon
+.k-scheduler-table .k-state-hover .k-icon,
+.k-scheduler-table .k-hover .k-icon
 {
     background-color: transparent;
 }
@@ -2760,7 +2868,8 @@ div.k-filebrowser-dropzone em
         background: @group-background-color;
     }
 
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
         .k-title {
             color: @time-list-title-focus;
             opacity: 1;
@@ -2831,25 +2940,32 @@ div.k-filebrowser-dropzone em
         background-color: @grid-alt-bg;
     }
 
-    &.k-state-selected .k-grid-content-sticky {
+    &.k-state-selected .k-grid-content-sticky,
+    &.k-selected .k-grid-content-sticky {
         .composite-background(@grid-selected-gradient);
         background-color: @grid-selected-bg;
         background-position: 50% 50%;
     }
 
     &:hover .k-grid-content-sticky,
-    &.k-state-hover .k-grid-content-sticky {
+    &.k-state-hover .k-grid-content-sticky,
+    &.k-hover .k-grid-content-sticky {
         .composite-background(@grid-hover-gradient);
         background-color: @grid-hover-bg;
     }
 
     &.k-state-selected:hover .k-grid-content-sticky,
-    &.k-state-selected.k-state-hover .k-grid-content-sticky {
+    &.k-selected:hover .k-grid-content-sticky,
+    &.k-state-selected.k-state-hover .k-grid-content-sticky,
+    &.k-state-selected.k-hover .k-grid-content-sticky,
+    &.k-selected.k-state-hover .k-grid-content-sticky,
+    &.k-selected.k-hover .k-grid-content-sticky {
         background-color: @grid-selected-hover-bg;
         .composite-background(none);
     }
 
-    td.k-grid-content-sticky.k-state-selected {
+    td.k-grid-content-sticky.k-state-selected,
+    td.k-grid-content-sticky.k-selected {
         background-color: @selected-background-color;
     }
 }

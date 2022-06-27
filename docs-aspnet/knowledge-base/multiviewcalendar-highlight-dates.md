@@ -84,7 +84,7 @@ You can use the following approach:
 		padding-top: 8px;
 	}
 
-	.k-calendar-range .k-month td.k-state-selected .custom-day {
+	.k-calendar-range .k-month td.k-selected .custom-day {
 		background-color: transparent;
 	}
 </style>

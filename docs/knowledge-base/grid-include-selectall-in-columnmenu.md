@@ -123,7 +123,7 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
           $(el).parents(".custom-class").siblings("ul").find("li").each(function (e) {
             if (!$(this).hasClass("custom-class") && $(this).find("input")[0].checked !== checked) {
               $(this).find("input").click();
-              $(this).removeClass("k-state-hover");
+              $(this).removeClass("k-hover");
             }
           });
         }

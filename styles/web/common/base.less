@@ -17,7 +17,8 @@
 .k-grouping-header,
 .k-pager-wrap,
 .k-tabstrip-items .k-item,
-.k-link.k-state-hover {
+.k-link.k-state-hover,
+.k-link.k-hover {
     background-repeat: repeat;
     background-position: 0 center;
 }
@@ -151,20 +152,26 @@ input[type="reset"].k-button-expand
 // states
 .k-disabled,
 .k-state-disabled,
+.k-disabled,
 .k-state-disabled .k-link,
+.k-disabled .k-link,
 .k-disabled .k-icon,
 .k-state-disabled .k-icon,
-.k-state-disabled .k-upload-button input {
+.k-disabled .k-icon,
+.k-state-disabled .k-upload-button input,
+.k-disabled .k-upload-button input {
     cursor: default !important;
     pointer-events: none;
     outline: 0;
 }
 
 .k-disabled,
-.k-state-disabled
+.k-state-disabled,
+.k-disabled
 {
-    opacity:.7;
+    opacity:.6;
 
+    & .k-disabled,
     & > .k-button {
         opacity: 1;
     }
@@ -173,8 +180,10 @@ input[type="reset"].k-button-expand
 @media print {
     .k-disabled,
     .k-state-disabled,
+    .k-disabled,
     .k-disabled .k-input,
-    .k-state-disabled .k-input
+    .k-state-disabled .k-input,
+    .k-disabled .k-input
     {
         opacity:1 !important;
     }

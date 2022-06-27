@@ -14,7 +14,8 @@
     }
 
     &:focus,
-    &.k-state-focus {
+    &.k-state-focus,
+    &.k-focus {
         .box-shadow( @orgchart-card-focus-shadow );
     }
 }
@@ -29,7 +30,8 @@
 }
 .k-orgchart-node-group-container:focus,
 .k-orgchart-node-group-container.k-state-focus,
-.k-orgchart-node-group-container.k-state-focused {
+.k-orgchart-node-group-container.k-state-focused,
+.k-orgchart-node-group-container.k-focus {
     .box-shadow( @orgchart-node-group-focus-shadow );
     .fill ( @border: @orgchart-node-group-focus-border );
 }

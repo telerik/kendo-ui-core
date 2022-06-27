@@ -22,7 +22,9 @@
         }
 
         .k-grid-filter.k-state-active,
-        .k-header-column-menu.k-state-active {
+        .k-grid-filter.k-active,
+        .k-header-column-menu.k-state-active,
+        .k-header-column-menu.k-active {
             color: @background;
             background-color: @adaptive-content-text;
         }
@@ -94,11 +96,13 @@
 
     .k-column-menu {
 
-        .k-listgroup-item.k-state-selected {
+        .k-listgroup-item.k-state-selected,
+        .k-listgroup-item.k-selected {
             color: @adaptive-grid-sort-text;
             background: none;
         }
-        .k-listgroup-item.k-state-selected .k-link {
+        .k-listgroup-item.k-state-selected .k-link,
+        .k-listgroup-item.k-selected .k-link {
             color: inherit;
         }
     }

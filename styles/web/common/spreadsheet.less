@@ -186,7 +186,8 @@
         .force-font();
 
         // disabled cells in the Spreadsheet should allow navigation if link is used
-        .k-state-disabled {
+        .k-state-disabled,
+        .k-disabled {
             pointer-events: auto;
         }
     }
@@ -896,7 +897,8 @@ div.k-spreadsheet-window {
         background-position: 50% 50%;
 
         &:hover div,
-        &.k-state-hovered div {
+        &.k-state-hovered div,
+        &.k-hover div {
             opacity: 1;
             top: 50%;
         }

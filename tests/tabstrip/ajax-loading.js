@@ -16,8 +16,8 @@
     var tabstrip;
     var template = '<div id="tabstrip">' +
         '    <ul>' +
-        '        <li class="k-state-active">ASP.NET MVC</li>' +
-        '        <li class="k-state-disabled">Silverlight</li>' +
+        '        <li class="k-active">ASP.NET MVC</li>' +
+        '        <li class="k-disabled">Silverlight</li>' +
         '        <li>ASP.NET AJAX</li>' +
         '        <li>OpenAccess ORM</li>' +
         '        <li>Reporting</li>' +
@@ -116,7 +116,7 @@
             var item = getRootItem(2);
 
             item.find('> .k-link').trigger('click');
-            assert.isOk(item.hasClass('k-state-active'));
+            assert.isOk(item.hasClass('k-active'));
         });
 
         it('ajax content url should be attached to item', function() {
@@ -131,7 +131,7 @@
             item.find('> .k-link').trigger('click');
 
             setTimeout(function() {
-                assert.equal(item.parent().find('.k-state-active').length, 1);
+                assert.equal(item.parent().find('.k-active').length, 1);
                 done();
             });
         });

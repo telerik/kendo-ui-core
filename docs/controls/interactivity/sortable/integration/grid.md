@@ -60,7 +60,7 @@ The following example demonstrates how to style the `hint` element, so it looks 
           return hint; // Return the hint element.
         },
         placeholder: function(element) { // Customize the placeholder.
-          return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+          return element.clone().addClass("k-hover").css("opacity", 0.65);
         },
         change: function(e) {
           // Handle the change event.

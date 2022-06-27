@@ -53,7 +53,7 @@ The example below demonstrates how to disable content scrolling for a specific T
 ```dojo
     <div id="tabstrip1">
       <ul>
-        <li class="k-state-active">
+        <li class="k-active">
           First tab
         </li>
         <li>
@@ -81,7 +81,7 @@ The example below demonstrates how to disable content scrolling for a specific T
 
     <div id="tabstrip2">
       <ul>
-        <li class="k-state-active">
+        <li class="k-active">
           First tab
         </li>
         <li>

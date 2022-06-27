@@ -78,7 +78,7 @@ The following example demonstrates how to persist row selection during data oper
             var items = listview.items();
             items.each(function (idx, row) {
               var idValue = listview.dataSource.getByUid(row.dataset.uid).get(idField);
-              if (row.className.indexOf("k-state-selected") >= 0) {
+              if (row.className.indexOf("k-selected") >= 0) {
                 selectedOrders[idValue] = true;
               } else if (selectedOrders[idValue]) {
                 delete selectedOrders[idValue];

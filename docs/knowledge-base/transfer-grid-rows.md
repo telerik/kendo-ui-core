@@ -99,7 +99,7 @@ The following example demonstrates how to achieve the desired scenario. Reorderi
     hint: $.noop,
     cursor: "move",
     placeholder: function(element) {
-      return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+      return element.clone().addClass("k-hover").css("opacity", 0.65);
     },
     change: function(e) { // The change event handler implementation may differ according to the scenario.
       var grid = this.element.closest(".k-grid").data("kendoGrid");

@@ -126,7 +126,7 @@
             dialog.open();
             dialog.close();
 
-            assert.isOk(!dialogWrapper.hasClass("k-state-focused"));
+            assert.isOk(!dialogWrapper.hasClass("k-focus"));
             assert.isOk(document.activeElement !== dialogWrapper);
         });
     });

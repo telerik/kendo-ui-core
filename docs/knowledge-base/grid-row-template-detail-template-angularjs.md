@@ -76,7 +76,7 @@ I can't seem to get the `k-row-template` and `k-detail-template` to work togethe
           <div k-detail-template>
             <kendo-tabstrip>
               <ul>
-                <li class="k-state-active">Orders</li>
+                <li class="k-active">Orders</li>
                 <li>Contact information</li>
               </ul>
               <div>

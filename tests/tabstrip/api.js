@@ -34,7 +34,7 @@
             Mocha.fixture.append(
                 ' <div class="k-widget k-tabstrip k-header" id="tabstrip" style="visibility: hidden;">' +
                 '    <ul class="k-reset k-tabstrip-items">' +
-                '        <li class="k-item k-state-active"><a class="k-link" href="#tabstrip-1">ASP.NET MVC</a></li>' +
+                '        <li class="k-item k-active"><a class="k-link" href="#tabstrip-1">ASP.NET MVC</a></li>' +
                 '        <li class="k-item"><a class="k-link" href="#tabstrip-2">Silverlight</a></li>' +
                 '        <li class="k-item"><a class="k-link" href="#tabstrip-3">ASP.NET AJAX</a></li>' +
                 '        <li class="k-item"><a class="k-link" href="#tabstrip-4">OpenAccess ORM</a></li>' +
@@ -42,7 +42,7 @@
                 '        <li class="k-item"><a class="k-link" href="#tabstrip-6">Sitefinity ASP.NET CMS</a></li>' +
                 '        <li class="k-item"><a class="k-link" href="http://www.google.com">Sitefinity ASP.NET CMS</a></li>' +
                 '    </ul>' +
-                '    <div class="k-content k-state-active" id="tabstrip-1" style="display: block;">' +
+                '    <div class="k-content k-active" id="tabstrip-1" style="display: block;">' +
                 '        <ul>' +
                 '            <li>Pure ASP.NET MVC components</li>' +
                 '            <li>Completely Open Source</li>' +
@@ -106,14 +106,14 @@
                 '<div id="parent-tabstrip" class="k-widget k-tabstrip k-header" style="visibility: hidden; position: absolute;">' +
                 '    <ul class="k-reset k-tabstrip-items">' +
                 '        <li class="k-item">Tab 1</li>' +
-                '        <li class="k-item k-state-active">Tab 2</li>' +
+                '        <li class="k-item k-active">Tab 2</li>' +
                 '    </ul>' +
                 '    <div id="parent-tabstrip-1" class="k-content">foo</div>' +
                 '    <div id="parent-tabstrip-2" class="k-content" style="display: block;">' +
                 '        <div id="child-tabstrip" class="k-widget k-tabstrip k-header">' +
                 '            <ul class="k-reset k-tabstrip-items">' +
                 '                <li class="k-item">foo</li>' +
-                '                <li class="k-item k-state-active">bar</li>' +
+                '                <li class="k-item k-active">bar</li>' +
                 '            </ul>' +
                 '            <div id="child-tabstrip-1">foo</div>' +
                 '            <div id="child-tabstrip-2" style="display: block;">bar</div>' +
@@ -164,7 +164,7 @@
 
             tabstrip.select(item);
 
-            assert.isOk(item.hasClass('k-state-active'));
+            assert.isOk(item.hasClass('k-active'));
         });
 
         it('clicking item with url should navigate', function() {
@@ -220,7 +220,7 @@
 
             item.find('.k-link').trigger('click');
 
-            assert.isOk(item.hasClass('k-state-active'));
+            assert.isOk(item.hasClass('k-active'));
         });
 
         it('select method should be able to select by number', function() {
@@ -228,7 +228,7 @@
 
             tabstrip.select(3);
 
-            assert.isOk(getRootItem(3).hasClass('k-state-active'));
+            assert.isOk(getRootItem(3).hasClass('k-active'));
         });
 
         it('disable method should disable item', function() {
@@ -238,7 +238,7 @@
 
             tabstrip.disable(item);
 
-            assert.isOk(item.hasClass('k-state-disabled'));
+            assert.isOk(item.hasClass('k-disabled'));
             assert.isOk(item.is('[aria-disabled="true"]'));
         });
 
@@ -249,7 +249,7 @@
 
             tabstrip.enable(item);
 
-            assert.isOk(!item.hasClass('k-state-disabled'));
+            assert.isOk(!item.hasClass('k-disabled'));
             assert.isOk(item.is('[aria-disabled="false"]'));
         });
 
@@ -260,7 +260,7 @@
             tabstrip.select(item);
 
             var content = $(tabstrip.contentElement(5));
-            assert.isOk(item.hasClass('k-state-active'));
+            assert.isOk(item.hasClass('k-active'));
         });
 
         it('contentElement should return content of seventh tab', function() {
@@ -294,7 +294,7 @@
 
         it('getSelectedTab should return negative if no selected tabs', function() {
             var tabstrip = getTabStrip();
-            tabstrip.element.find('.k-state-active').removeClass('k-state-active');
+            tabstrip.element.find('.k-active').removeClass('k-active');
 
             assert.equal(tabstrip.select().length, 0);
         });
@@ -492,8 +492,8 @@
 
                 //required as the animations currently can't be turned off'
                 tabStrip.tabGroup.children("[data-animating]").removeAttr("data-animating");
-                tabStrip.contentAnimators.filter(".k-state-active").each(function() {
-                    $(this).removeClass("k-state-active");
+                tabStrip.contentAnimators.filter(".k-active").each(function() {
+                    $(this).removeClass("k-active");
                 });
 
                 tabStrip.activateTab(tabStrip.tabGroup.children("li:first-child"));
@@ -525,8 +525,8 @@
 
                 //required as the animations currently can't be turned off'
                 tabStrip.tabGroup.children("[data-animating]").removeAttr("data-animating");
-                tabStrip.contentAnimators.filter(".k-state-active").each(function() {
-                    $(this).removeClass("k-state-active");
+                tabStrip.contentAnimators.filter(".k-active").each(function() {
+                    $(this).removeClass("k-active");
                 });
 
                 tabStrip.activateTab(tabStrip.tabGroup.children("li:last-child"));
@@ -721,7 +721,7 @@
             Mocha.fixture.append(
                 '<div id="scrollable-tabstrip" style="width:200px;">' +
                 '    <ul>' +
-                '        <li class="k-state-active">some item text 1</li>' +
+                '        <li class="k-active">some item text 1</li>' +
                 '        <li>some item text 2</li>' +
                 '        <li>some item text 3</li>' +
                 '        <li>some item text 4</li>' +
@@ -787,7 +787,7 @@
                 ]
             });
 
-            assert.isOk(tabStrip.element.find("li").first().hasClass("k-state-active"));
+            assert.isOk(tabStrip.element.find("li").first().hasClass("k-active"));
         });
 
         it("value() method correctly selects active tab", function() {
@@ -800,7 +800,7 @@
                 ]
             });
             tabStrip.value("Tab2");
-            assert.isOk(tabStrip.element.find("li").eq(1).hasClass("k-state-active"));
+            assert.isOk(tabStrip.element.find("li").eq(1).hasClass("k-active"));
         });
 
         it("value() method does not select tab when value is null", function() {
@@ -813,7 +813,7 @@
                 ]
             });
             tabStrip.value(null);
-            assert.isOk(!tabStrip.element.find("li").eq(1).hasClass("k-state-active"));
+            assert.isOk(!tabStrip.element.find("li").eq(1).hasClass("k-active"));
         });
 
         it("value() method does not select tab when value is undefined", function() {
@@ -827,7 +827,7 @@
             });
             var value;
             tabStrip.value(value);
-            assert.isOk(!tabStrip.element.find("li").eq(1).hasClass("k-state-active"));
+            assert.isOk(!tabStrip.element.find("li").eq(1).hasClass("k-active"));
         });
 
     });

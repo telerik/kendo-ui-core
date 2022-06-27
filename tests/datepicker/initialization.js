@@ -59,7 +59,7 @@ it("DateView persist focused value when calendar navigate", function() {
     dateview._calendar();
     dateview.calendar.navigate(date, "month");
 
-    assert.equal(dateview.calendar._table.find(".k-state-focused").children().attr("data-kendo-value"), "2000/10/10");
+    assert.equal(dateview.calendar._table.find(".k-focus").children().attr("data-kendo-value"), "2000/10/10");
     assert.equal(+dateview._current, +dateview.calendar._current);
 });
 });
@@ -318,7 +318,7 @@ it("DatePicker updates calendar's focused date", function() {
     input.focus().val(kendo.toString(date, "MM/dd/yyyy"));
     datepicker.open();
 
-    var link = datepicker.dateView.calendar.element.find(".k-state-focused > .k-link");
+    var link = datepicker.dateView.calendar.element.find(".k-focus > .k-link");
 
     assert.equal(+datepicker.dateView.calendar.value(), +datepicker.value());
     assert.equal(link.html(), date.getDate());

@@ -327,7 +327,7 @@
             input.focus().val(kendo.toString(date, "MM/dd/yyyy hh:mm tt"));
             datetimepicker.open();
 
-            var link = datetimepicker.dateView.calendar.element.find(".k-state-focused > .k-link");
+            var link = datetimepicker.dateView.calendar.element.find(".k-focus > .k-link");
 
             assert.equal(+datetimepicker.dateView.calendar.value(), +datetimepicker.value());
             assert.equal(link.html(), date.getDate());

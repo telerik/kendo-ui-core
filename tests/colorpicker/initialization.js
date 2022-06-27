@@ -35,7 +35,7 @@
             assert.isOk($.isEmptyObject(cp._hsvEvents._events));
         });
 
-        it("receives k-state-disabled class when disabled", function() {
+        it("receives k-disabled class when disabled", function() {
             var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
             var cp = dom.data("kendoFlatColorPicker");
 
@@ -44,7 +44,7 @@
             assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
-        it("removes k-state-disabled class when enabled", function() {
+        it("removes k-disabled class when enabled", function() {
             var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
             var cp = dom.data("kendoFlatColorPicker");
 
@@ -146,7 +146,7 @@
             cp.toggle();
         });
 
-        it("receives k-state-disabled class when disabled", function() {
+        it("receives k-disabled class when disabled", function() {
             expect(0);
 
             var dom = $("<input disabled='disabled' />").appendTo(Mocha.fixture).kendoColorPicker();
@@ -157,7 +157,7 @@
             assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
-        it("removes k-state-disabled class when enabled", function() {
+        it("removes k-disabled class when enabled", function() {
             expect(0);
 
             var dom = $("<input disabled='disabled' />").appendTo(Mocha.fixture).kendoColorPicker();
@@ -185,7 +185,7 @@
             assert.equal(cp.wrapper.attr("tabIndex"), 5);
         });
 
-        it("receives k-state-disabled class when disabled", function() {
+        it("receives k-disabled class when disabled", function() {
             var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorPalette();
             var cp = dom.data("kendoColorPalette");
 
@@ -194,7 +194,7 @@
             assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
-        it("removes k-state-disabled class when enabled", function() {
+        it("removes k-disabled class when enabled", function() {
             var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorPalette();
             var cp = dom.data("kendoColorPalette");
 
@@ -247,7 +247,7 @@
             assert.isOk($.isEmptyObject(cp._hsvEvents._events));
         });
 
-        it("receives k-state-disabled class when disabled", function() {
+        it("receives k-disabled class when disabled", function() {
             var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorGradient();
             var cp = dom.data("kendoColorGradient");
 
@@ -256,7 +256,7 @@
             assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
-        it("removes k-state-disabled class when enabled", function() {
+        it("removes k-disabled class when enabled", function() {
             var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorGradient();
             var cp = dom.data("kendoColorGradient");
 

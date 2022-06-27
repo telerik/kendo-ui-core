@@ -176,7 +176,7 @@ Old Single Selection Rendering:
     tabindex="0" aria-disabled="false" aria-haspopup="tree" aria-expanded="true"
     aria-owns="d5464a25-e452-4eee-bd7a-8aebcb918a00" role="listbox"
     aria-activedescendant="a18f7c00-9e73-4db1-ac81-b41bf193b1dc">
-    <span unselectable="on" class="k-dropdown-wrap k-state-default k-state-active k-state-border-down">
+    <span unselectable="on" class="k-dropdown-wrap k-state-default k-active k-state-border-down">
         <span unselectable="on" class="k-input k-readonly" role="option" aria-selected="true"
             id="a18f7c00-9e73-4db1-ac81-b41bf193b1dc">Select ...</span>
         <span unselectable="on" class="k-clear-value k-hidden" title="clear" role="button" tabindex="-1">

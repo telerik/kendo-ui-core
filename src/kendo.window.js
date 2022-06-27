@@ -43,7 +43,7 @@
             KCONTENTFRAME = "k-content-frame",
             LOADING = "k-i-loading",
             KHOVERSTATE = "k-hover",
-            KFOCUSEDSTATE = "k-state-focused",
+            KFOCUSEDSTATE = "k-focus",
             MAXIMIZEDSTATE = "k-window-maximized",
             INLINE_FLEX = "k-display-inline-flex",
             // constants

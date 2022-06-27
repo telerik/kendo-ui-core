@@ -192,7 +192,7 @@ Old Popup Rendering without virtualization:
   <div class="k-group-header" style="display:none"></div>
   <div class="k-list-scroller" unselectable="on" style="height: auto;">
     <ul unselectable="on" class="k-reset k-grid-list" tabindex="-1" aria-hidden="true" id="multicolumncombobox_listbox" aria-live="off" data-role="staticlist" role="listbox">
-      <li tabindex="-1" role="option" unselectable="on" class="k-item k-state-focused" aria-selected="false" data-offset-index="0" id="a2ccd9ae-e206-49af-b205-86619abac6c3">
+      <li tabindex="-1" role="option" unselectable="on" class="k-item k-focus" aria-selected="false" data-offset-index="0" id="a2ccd9ae-e206-49af-b205-86619abac6c3">
         <span class="k-cell"></span>
         <span class="k-cell"></span>
       </li>

@@ -49,64 +49,31 @@ navigation:
         position: 2
     "controls/data-management/grid/binding":
         title: "Data Binding"
-        position: 2
+        position: 4
     "controls/data-management/grid/editing":
         title: "Editing"
-        position: 3
+        position: 5
     "controls/data-management/grid/grouping":
         title: "Grouping"
-        position: 5
+        position: 7
     "controls/data-management/grid/columns":
         title: "Columns"
-        position: 11
+        position: 13
     "controls/data-management/grid/scrolling":
         title: "Scroll Modes"
-        position: 12
+        position: 14
     "controls/data-management/grid/export":
         title: "Export"
-        position: 13
+        position: 15
     "controls/data-management/grid/Templates":
         title: "Templates"
-        position: 14
+        position: 16
     "controls/data-management/grid/appearance":
         title: "Appearance"
-        position: 15
+        position: 17
     "controls/data-management/grid/performance":
         title: "Performance Tips"
-        position: 16
-    "controls/data-management/grid/how-to":
-        title: "How To"
-        position: 70
-    "controls/data-management/grid/how-to/AngularJS":
-        title: "AngularJS"
-    "controls/data-management/grid/how-to/Layout":
-        title: "Rendering and Dimensions"
-    "controls/data-management/grid/how-to/binding":
-        title: "Data Binding"
-    "controls/data-management/grid/how-to/Editing":
-        title: "Editing"
-    "controls/data-management/grid/how-to/pdf-export":
-        title: "PDF Export"
-    "controls/data-management/grid/how-to/excel":
-        title: "Excel Export"
-    "controls/data-management/grid/how-to/filtering":
-        title: "Filtering"
-    "controls/data-management/grid/how-to/hidden":
-        title: "Hidden Containers"
-    "controls/data-management/grid/how-to/integration":
-        title: "Integration"
-    "controls/data-management/grid/how-to/Paging":
-        title: "Paging"
-    "controls/data-management/grid/how-to/Selection":
-        title: "Selection"
-    "controls/data-management/grid/how-to/sorting":
-        title: "Sorting"
-    "controls/data-management/grid/how-to/state":
-        title: "State Persistence"
-    "controls/data-management/grid/how-to/Templates":
-        title: "Templates"
-    "controls/data-management/grid/how-to/various":
-        title: "Various"
+        position: 18
     "controls/data-management/pivotgrid/binding":
         title: "Data Binding"
         position: 2

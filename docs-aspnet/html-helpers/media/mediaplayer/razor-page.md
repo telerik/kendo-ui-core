@@ -32,8 +32,8 @@ See the implementation details in the example below. For the full project with R
 
 // Create a temmplate for the ListView(Playlist).
 <script type="text/x-kendo-template" id="template">
-    <li class="k-item k-state-default" onmouseover="$(this).addClass('k-state-hover')"
-        onmouseout="$(this).removeClass('k-state-hover')">
+    <li class="k-item k-state-default" onmouseover="$(this).addClass('k-hover')"
+        onmouseout="$(this).removeClass('k-hover')">
         <span>
             <img src="#:Poster#" />
             <h5>#:Title#</h5>

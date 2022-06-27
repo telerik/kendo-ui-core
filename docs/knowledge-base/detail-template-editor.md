@@ -41,7 +41,7 @@ The following example demonstrates how to create a custom editor in a Grid detai
     <script type="text/x-kendo-template" id="template">
     <div class="tabstrip">
         <ul>
-            <li class="k-state-active">Contact Information</li>
+            <li class="k-active">Contact Information</li>
             <li>Orders</li>
       </ul>
 

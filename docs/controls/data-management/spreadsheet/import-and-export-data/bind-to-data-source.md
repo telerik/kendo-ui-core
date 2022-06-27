@@ -31,7 +31,7 @@ The following example demonstrates how to configure the Spreadsheet to use a Dat
           },
           batch: true,
           change: function() {
-            $("#cancel, #save").toggleClass("k-state-disabled", !this.hasChanges());
+            $("#cancel, #save").toggleClass("k-disabled", !this.hasChanges());
           },
           schema: {
             model: {
@@ -126,13 +126,13 @@ The following example demonstrates how to configure the Spreadsheet to use a Dat
         }
 
         $("#save").click(function() {
-          if (!$(this).hasClass("k-state-disabled")) {
+          if (!$(this).hasClass("k-disabled")) {
             dataSource.sync();
           }
         });
 
         $("#cancel").click(function() {
-          if (!$(this).hasClass("k-state-disabled")) {
+          if (!$(this).hasClass("k-disabled")) {
             dataSource.cancelChanges();
           }
         });

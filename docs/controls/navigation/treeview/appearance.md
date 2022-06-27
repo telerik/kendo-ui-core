@@ -68,11 +68,11 @@ Old Rendering:
                     aria-selected="false" aria-disabled="true" aria-expanded="true" data-expanded="true"
                     aria-busy="false">
                     <div class="k-bot"><span class="k-icon k-i-collapse"></span><span
-                            class="k-in k-state-disabled">bar</span></div>
+                            class="k-in k-disabled">bar</span></div>
                     <ul class="k-group" role="group" style="display: block;">
                         <li role="treeitem" class="k-item k-last" data-uid="dc2ec9eb-56d2-4178-9201-81180e31c929"
                             aria-selected="true" aria-expanded="false" data-expanded="false">
-                            <div class="k-bot"><span class="k-in k-state-selected">baz</span></div>
+                            <div class="k-bot"><span class="k-in k-selected">baz</span></div>
                         </li>
                     </ul>
                 </li>
@@ -130,7 +130,7 @@ Old Rendering with Checkboxes:
                <div class="k-bot"><span class="k-icon k-i-collapse"></span><span class="k-checkbox-wrapper" role="presentation"><input aria-hidden="true" type="checkbox" tabindex="-1" id="_f0a5ce33-57f1-45ba-ae1d-2e652d0a4705" class="k-checkbox"><span class="k-checkbox-label checkbox-span"></span></span><span class="k-in">bar</span></div>
                <ul class="k-group" role="group" style="display: block; overflow: visible; height: auto;">
                   <li role="treeitem" class="k-item k-last" data-uid="b0f0e249-5c64-47eb-8a6f-d0bd383c46ed" aria-checked="false" aria-selected="false" aria-expanded="false" data-expanded="false" id="treeview-left_tv_active">
-                     <div class="k-bot"><span class="k-checkbox-wrapper" role="presentation"><input aria-hidden="true" type="checkbox" tabindex="-1" id="_b0f0e249-5c64-47eb-8a6f-d0bd383c46ed" class="k-checkbox"><span class="k-checkbox-label checkbox-span"></span></span><span class="k-in k-state-selected" aria-selected="true">baz</span></div>
+                     <div class="k-bot"><span class="k-checkbox-wrapper" role="presentation"><input aria-hidden="true" type="checkbox" tabindex="-1" id="_b0f0e249-5c64-47eb-8a6f-d0bd383c46ed" class="k-checkbox"><span class="k-checkbox-label checkbox-span"></span></span><span class="k-in k-selected" aria-selected="true">baz</span></div>
                   </li>
                </ul>
             </li>

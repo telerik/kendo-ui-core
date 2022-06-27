@@ -62,7 +62,7 @@
             var activeElement = $(document.activeElement);
             assert.isOk(activeElement.hasClass("k-link"));
             assert.equal(activeElement.text(), "1");
-            assert.isOk(!element.hasClass("k-state-focused"));
+            assert.isOk(!element.hasClass("k-focus"));
         });
 
         it("escape focuses pager", function() {
@@ -72,7 +72,7 @@
             var esc = { keyCode: keys.ESC, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(esc);
             assert.equal(element[0], document.activeElement);
-            assert.isOk(element.hasClass("k-state-focused"));
+            assert.isOk(element.hasClass("k-focus"));
         });
 
         it("tab moves focus to next focusable", function() {

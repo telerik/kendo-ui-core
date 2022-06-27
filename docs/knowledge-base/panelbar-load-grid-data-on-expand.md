@@ -37,7 +37,7 @@ The following example is jQuery-based.
 
 ```dojo
 <ul id="panelbar">
-  <li class="k-state-active">
+  <li class="k-active">
     First item
   </li>
   <li>

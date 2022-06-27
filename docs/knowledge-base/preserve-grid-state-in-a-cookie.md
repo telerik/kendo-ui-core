@@ -110,7 +110,7 @@ The following example demonstrates how to preserve the Grid state&mdash;filterin
               $.each(JSON.parse($.cookie('empRows')),function(){
                 var item = dataSource.get(this);
                 var row = grid.tbody.find('[data-uid='+item.uid+']');
-                row.addClass('k-state-selected');
+                row.addClass('k-selected');
               })
             }
           },

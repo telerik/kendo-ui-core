@@ -131,7 +131,7 @@
                 ]
             });
 
-            assert.isOk(bottomNav.items().eq(0).is(".k-state-disabled"));
+            assert.isOk(bottomNav.items().eq(0).is(".k-disabled"));
         });
 
         it("item can be selected", function() {
@@ -141,7 +141,7 @@
                 ]
             });
 
-            assert.isOk(bottomNav.items().eq(0).is(".k-state-selected"));
+            assert.isOk(bottomNav.items().eq(0).is(".k-selected"));
         });
 
         it("item can be rendered from template", function() {

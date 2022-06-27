@@ -166,7 +166,7 @@ The following example demonstrates how to achieve the desired scenario.
         font-weight: bold;
         text-decoration: none;
       }
-      .k-state-hover .movie-template a,
+      .k-hover .movie-template a,
       .movie-template a:hover {
         color: #000000;
       }

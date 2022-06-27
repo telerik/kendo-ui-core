@@ -147,12 +147,12 @@ $(function() {
         hint: function (row) {
 
             // Remove the old selection.
-            row.parent().find(".k-state-selected").each(function () {
-                $(this).removeClass("k-state-selected")
+            row.parent().find(".k-selected").each(function () {
+                $(this).removeClass("k-selected")
             })
 
             // Add the selected class to the current row.
-            row.addClass("k-state-selected");
+            row.addClass("k-selected");
 
             var dataItem = grid.dataItem(row);
             var tooltipHtml = "<div class='k-event' id='dragTooltip'><div class='k-event-template'>" +

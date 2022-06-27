@@ -4,6 +4,7 @@
 
     &:focus,
     &.k-state-focus,
+    &.k-focus,
     &.k-focus {
         .box-shadow( @colorpalette-tile-focus-shadow );
     }
@@ -15,7 +16,9 @@
     }
 
     &.k-state-selected,
-    &.k-state-selected:hover {
+    &.k-selected,
+    &.k-state-selected:hover,
+    &.k-selected:hover {
         .box-shadow( @colorpalette-tile-selected-shadow );
     }
 
@@ -65,11 +68,15 @@
         .box-shadow( @colorgradient-draghandle-hover-shadow );
     }
 
-    &.k-state-selected:hover {
+    &.k-state-selected:hover,
+    &.k-selected:hover {
         .fill( @bg: transparent, @border: white, @text: inherit );
     }
 
-    &.k-state-focused.k-state-selected {
+    &.k-state-focused.k-state-selected,
+    &.k-focus.k-state-selected,
+    &.k-state-focused.k-selected,
+    &.k-focus.k-selected {
         .fill( @bg: transparent, @border: white, @text: inherit );
         .box-shadow( @colorgradient-draghandle-hover-shadow );
     }
@@ -108,6 +115,7 @@
 
     &:hover,
     &.k-state-hover,
+    &.k-hover,
     &.k-hover {
         .fill( @border: @color-preview-hover-border );
     }

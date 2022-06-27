@@ -68,7 +68,7 @@ The Kendo UI Grid's options can be modified through the [`setOptions`](https://d
         // Change the text of the button depending on the grid state.
         editable ? toggleButton.text("Toggle Readonly") : toggleButton.text("Toggle Editable");
         // If the grid is not editable disable the column commands.
-        commands && !editable ? commands.addClass("k-state-disabled") : commands.removeClass("k-state-disabled");
+        commands && !editable ? commands.addClass("k-disabled") : commands.removeClass("k-disabled");
     }
 </script>
 ```

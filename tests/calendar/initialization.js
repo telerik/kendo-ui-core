@@ -149,7 +149,7 @@ it("calendar should show hover state when hover TD", function() {
 
     td.mouseenter();
 
-    assert.isOk(td.hasClass("k-state-hover"));
+    assert.isOk(td.hasClass("k-hover"));
 });
 
 it("calendar should remove hover state from TD", function() {
@@ -160,7 +160,7 @@ it("calendar should remove hover state from TD", function() {
     td.mouseenter();
     td.mouseleave();
 
-    assert.isOk(!td.hasClass("k-state-hover"));
+    assert.isOk(!td.hasClass("k-hover"));
 });
 
 it("today link should have k-nav-today", function() {
@@ -173,7 +173,7 @@ it("today link should have k-nav-today", function() {
     link.click();
 
     assert.isOk(link.hasClass("k-nav-today"));
-    assert.isOk(!link.hasClass("k-state-disabled"));
+    assert.isOk(!link.hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 1);
 });
 
@@ -189,7 +189,7 @@ it("today link should not have k-nav-today", function() {
     link.click();
 
     assert.isOk(!link.hasClass("k-nav-today"));
-    assert.isOk(link.hasClass("k-state-disabled"));
+    assert.isOk(link.hasClass("k-disabled"));
     assert.equal(cal.calls("_todayClick"), 0);
 });
 
@@ -257,7 +257,7 @@ it("footer honours culture option", function() {
 it("Calendar removes focused style on initial rendering", function() {
     var cal = new Calendar(div);
 
-    assert.isOk(!cal._cell.hasClass("k-state-focused"));
+    assert.isOk(!cal._cell.hasClass("k-focus"));
 });
 
 it("Calendar adds  focused on focus", function() {
@@ -265,7 +265,7 @@ it("Calendar adds  focused on focus", function() {
 
     cal._table.focus();
 
-    assert.isOk(cal._cell.hasClass("k-state-focused"));
+    assert.isOk(cal._cell.hasClass("k-focus"));
 });
 
 it("Calendar removes  focused on blur", function() {
@@ -274,7 +274,7 @@ it("Calendar removes  focused on blur", function() {
     cal._table.focus();
     cal._table.blur();
 
-    assert.isOk(!cal._cell.hasClass("k-state-focused"));
+    assert.isOk(!cal._cell.hasClass("k-focus"));
 });
 
 it("Widget does not fall into infinitive loop", function() {
@@ -294,7 +294,7 @@ it("Widget sets disabled class correctly when callback is set", function() {
             }
         }
         });
-    assert.isOk(cal.element.find("tbody>tr>td").first().hasClass("k-state-disabled"));
+    assert.isOk(cal.element.find("tbody>tr>td").first().hasClass("k-disabled"));
 });
 
 it("Widget sets disabled class correctly when array is set", function() {
@@ -302,7 +302,7 @@ it("Widget sets disabled class correctly when array is set", function() {
         value: new Date(2015,9,12),
 		disableDates: ["mo", "su"]
     });
-    assert.isOk($('tr').eq(2).children().first().hasClass("k-state-disabled"));
+    assert.isOk($('tr').eq(2).children().first().hasClass("k-disabled"));
 });
 
 it("Widget value is not set if value is disbaled date", function() {
@@ -310,7 +310,7 @@ it("Widget value is not set if value is disbaled date", function() {
         value: new Date(2015,9,3),
 		disableDates: ["mo", "sa"]
     });
-    assert.isOk(cal.element.find("tr").eq(1).children().last().hasClass("k-state-disabled"));
+    assert.isOk(cal.element.find("tr").eq(1).children().last().hasClass("k-disabled"));
 });
 
 it("Widget value is correctly after initialized with disabled value", function() {
@@ -319,7 +319,7 @@ it("Widget value is correctly after initialized with disabled value", function()
 		disableDates: ["mo", "sa"]
     });
     cal.value(new Date(2015,9,4));
-    assert.isOk(cal.element.find('tr').eq(2).children().first().hasClass("k-state-selected"));
+    assert.isOk(cal.element.find('tr').eq(2).children().first().hasClass("k-selected"));
 });
 
 it("Year 0 should initialize year 1900", function() {
@@ -374,7 +374,7 @@ it("Century view support dates less then 200 year", function() {
     prevButton.click();
 
     // first decade should be 100 - 1009
-    var firstDecade = cal.element.find(".k-content td:has(.k-link:not(.k-state-disabled)):not(.k-out-of-range) .k-link");
+    var firstDecade = cal.element.find(".k-content td:has(.k-link:not(.k-disabled)):not(.k-out-of-range) .k-link");
     assert.equal(firstDecade.html(), "100 - 109");
 });
 

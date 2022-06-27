@@ -30,7 +30,7 @@ How can I select rows in the Grid by choosing values in the MultiSelect, and vic
 
 To share a selection between a MultiSelect and a Grid:
 
-1. In the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/change) event handler of the MultiSelect, based on the [`dataItems`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/methods/dataitems), add the `k-state-selected` class and set the `checked` property of the checkbox for every row in the Grid.
+1. In the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/change) event handler of the MultiSelect, based on the [`dataItems`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/methods/dataitems), add the `k-selected` class and set the `checked` property of the checkbox for every row in the Grid.
 1. In the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event handler of the Grid, based on the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) items, change the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/methods/value) of the MultiSelect.
 
     ```dojo
@@ -53,7 +53,7 @@ To share a selection between a MultiSelect and a Grid:
                 var gridItems = grid.dataSource.data();
                 var dataItems = e.sender.dataItems();
                 var ids = [];
-                var selectedRows = grid.element.find(".k-state-selected");
+                var selectedRows = grid.element.find(".k-selected");
 
                 dataItems.forEach(function(e) {
                     var id = e.ProductID;
@@ -63,7 +63,7 @@ To share a selection between a MultiSelect and a Grid:
                 selectedRows.each(function(e) {
                     var row = $(this);
 
-                    row.removeClass("k-state-selected");
+                    row.removeClass("k-selected");
                     row.find("[data-role='checkbox']")[0].checked = false;
                 });
 
@@ -76,7 +76,7 @@ To share a selection between a MultiSelect and a Grid:
                         var uid = dataItem.uid;
                         var row = grid.element.find("[data-uid=" + uid + "]");
 
-                        $(row).addClass("k-state-selected");
+                        $(row).addClass("k-selected");
                         $(row).find("[data-role='checkbox']")[0].checked = true;
                     }
                 }

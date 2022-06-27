@@ -142,8 +142,8 @@
 
             bottomNav.select(bottomNav.items().eq(1));
 
-            assert.isFalse(bottomNav.items().eq(0).is(".k-state-selected"));
-            assert.isOk(bottomNav.items().eq(1).is(".k-state-selected"));
+            assert.isFalse(bottomNav.items().eq(0).is(".k-selected"));
+            assert.isOk(bottomNav.items().eq(1).is(".k-selected"));
         });
 
         it("select method can toggle selection", function() {
@@ -156,8 +156,8 @@
 
             bottomNav.select(bottomNav.items().eq(0), false);
 
-            assert.isFalse(bottomNav.items().eq(0).is(".k-state-selected"));
-            assert.isFalse(bottomNav.items().eq(1).is(".k-state-selected"));
+            assert.isFalse(bottomNav.items().eq(0).is(".k-selected"));
+            assert.isFalse(bottomNav.items().eq(1).is(".k-selected"));
         });
 
         it("select method works with DOM element", function() {
@@ -170,8 +170,8 @@
 
             bottomNav.select(bottomNav.items().eq(0)[0], false);
 
-            assert.isFalse(bottomNav.items().eq(0).is(".k-state-selected"));
-            assert.isFalse(bottomNav.items().eq(1).is(".k-state-selected"));
+            assert.isFalse(bottomNav.items().eq(0).is(".k-selected"));
+            assert.isFalse(bottomNav.items().eq(1).is(".k-selected"));
         });
 
         it("enable method can enable item", function() {
@@ -182,11 +182,11 @@
                 ]
             });
 
-            assert.isOk(bottomNav.items().eq(0).is(".k-state-disabled"));
+            assert.isOk(bottomNav.items().eq(0).is(".k-disabled"));
 
             bottomNav.enable(bottomNav.items().eq(0));
 
-            assert.isFalse(bottomNav.items().eq(0).is(".k-state-disabled"));
+            assert.isFalse(bottomNav.items().eq(0).is(".k-disabled"));
         });
 
         it("enable method can enable item", function() {
@@ -199,7 +199,7 @@
 
             bottomNav.enable(bottomNav.items().eq(0), false);
 
-            assert.isOk(bottomNav.items().eq(0).is(".k-state-disabled"));
+            assert.isOk(bottomNav.items().eq(0).is(".k-disabled"));
         });
 
         it("enable method works with DOM element", function() {
@@ -212,7 +212,7 @@
 
             bottomNav.enable(bottomNav.items().eq(0)[0], false);
 
-            assert.isOk(bottomNav.items().eq(0).is(".k-state-disabled"));
+            assert.isOk(bottomNav.items().eq(0).is(".k-disabled"));
         });
 
         it("item method returns item by index", function() {

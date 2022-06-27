@@ -21,7 +21,7 @@
         Mocha.fixture.append(
             '<div id="tabstrip" style="width:200px;">' +
             '    <ul>' +
-            '        <li class="k-state-active">some item text 1</li>' +
+            '        <li class="k-active">some item text 1</li>' +
             '        <li>some item text 2</li>' +
             '        <li>some item text 3</li>' +
             '        <li>some item text 4</li>' +
@@ -48,7 +48,7 @@
         Mocha.fixture.append(
             '<div id="tabstrip-nonscrollable" style="width:400px;">' +
             '    <ul>' +
-            '        <li class="k-state-active">1</li>' +
+            '        <li class="k-active">1</li>' +
             '        <li>2</li>' +
             '    </ul>' +
             '    <div>content 1</div>' +

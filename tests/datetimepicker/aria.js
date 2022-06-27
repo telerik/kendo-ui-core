@@ -76,7 +76,7 @@
                 keyCode: 40
             });
 
-            var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+            var cell = instance.dateView.calendar.element.find("td.k-focus");
 
             assert.equal(instance.element.attr("aria-activedescendant"), cell.attr("id"));
         });
@@ -85,7 +85,7 @@
             instance.open();
 
             var date = kendo.date.today();
-            var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+            var cell = instance.dateView.calendar.element.find("td.k-focus");
 
             assert.equal(cell.attr("aria-label"), kendo.toString(date, "G"));
         });
@@ -124,7 +124,7 @@ describe("kendo.ui.DateTimePicker ARIA defaults", function() {
 
         var date = kendo.date.today();
         instance.element.trigger("focus");
-        var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+        var cell = instance.dateView.calendar.element.find("td.k-focus");
 
         assert.equal(cell.attr("aria-label"), "Current focused date is " + kendo.toString(date, "D"));
     });
@@ -133,7 +133,7 @@ describe("kendo.ui.DateTimePicker ARIA defaults", function() {
         instance = new DateTimePicker(input, { ARIATemplate: "Current focused date is #= this.dateView.calendar.view().name === 'month' ? 'test': kendo.toString(data.current, 'MMM yyyy') #" });
         instance.open();
         instance.element.trigger("focus");
-        var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+        var cell = instance.dateView.calendar.element.find("td.k-focus");
         assert.equal(cell.attr("aria-label"), "Current focused date is test");
     });
 
@@ -142,7 +142,7 @@ describe("kendo.ui.DateTimePicker ARIA defaults", function() {
         instance = new DateTimePicker(input, { start: "year" });
         instance.open();
         instance.element.trigger("focus");
-        var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+        var cell = instance.dateView.calendar.element.find("td.k-focus");
         assert.equal(cell.attr("aria-label"), "Current focused month is " + kendo.toString(date, "MMMM"));
     });
 
@@ -151,7 +151,7 @@ describe("kendo.ui.DateTimePicker ARIA defaults", function() {
         instance = new DateTimePicker(input, { start: "decade" });
         instance.open();
         instance.element.trigger("focus");
-        var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+        var cell = instance.dateView.calendar.element.find("td.k-focus");
         assert.equal(cell.attr("aria-label"), "Current focused year is " + kendo.toString(date, "yyyy"));
     });
 
@@ -159,7 +159,7 @@ describe("kendo.ui.DateTimePicker ARIA defaults", function() {
         instance = new DateTimePicker(input, { start: "century", value: new Date(2021, 0, 1) });
         instance.open();
         instance.element.trigger("focus");
-        var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+        var cell = instance.dateView.calendar.element.find("td.k-focus");
 
         assert.equal(cell.attr("aria-label"), "Current focused decade is 2020 - 2029");
     });

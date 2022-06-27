@@ -37,7 +37,7 @@
             ul.focus();
 
             var first = ul.children(":first");
-            assert.isOk(first.children(":first").hasClass("k-state-focused"));
+            assert.isOk(first.children(":first").hasClass("k-focus"));
         });
 
         it("PanelBar clears focused item on blur", function() {
@@ -47,7 +47,7 @@
             ul.blur();
 
             var first = ul.children(":first");
-            assert.isOk(!first.children(":first").hasClass("k-state-focused"));
+            assert.isOk(!first.children(":first").hasClass("k-focus"));
         });
 
         it("PanelBar selects next item on key DOWN", function() {
@@ -59,8 +59,8 @@
                 keyCode: keys.DOWN
             });
 
-            assert.isOk(ul.children(":last").children(".k-link").hasClass("k-state-focused"));
-            assert.isOk(!ul.children(":first").children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":last").children(".k-link").hasClass("k-focus"));
+            assert.isOk(!ul.children(":first").children(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar focuses next item if disabled", function() {
@@ -75,7 +75,7 @@
                 keyCode: keys.DOWN
             });
 
-            assert.isOk(ul.children().eq(1).children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children().eq(1).children(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects first item of group", function() {
@@ -89,7 +89,7 @@
                 keyCode: keys.DOWN
             });
 
-            assert.isOk(ul.children(":first").find("li:first > span.k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":first").find("li:first > span.k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects next item if current is last in a group", function() {
@@ -105,7 +105,7 @@
                 keyCode: keys.DOWN
             });
 
-            assert.isOk(ul.children(":last").children("span.k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":last").children("span.k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects first if last is selected", function() {
@@ -121,7 +121,7 @@
                 keyCode: keys.DOWN
             });
 
-            assert.isOk(ul.children(":first").children("span.k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":first").children("span.k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects first on HOME key", function() {
@@ -137,7 +137,7 @@
                 keyCode: keys.HOME
             });
 
-            assert.isOk(ul.children(":first").children("span.k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":first").children("span.k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects last on END key", function() {
@@ -152,7 +152,7 @@
                 keyCode: keys.END
             });
 
-            assert.isOk(ul.children(":last").children("span.k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":last").children("span.k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects prev item on key UP", function() {
@@ -169,8 +169,8 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
-            assert.isOk(!ul.children(":last").children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":first").children(".k-link").hasClass("k-focus"));
+            assert.isOk(!ul.children(":last").children(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects prev parent item", function() {
@@ -186,7 +186,7 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(ul.children(":first").children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":first").children(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects last if no prev", function() {
@@ -207,7 +207,7 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(ul.children(":last").children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":last").children(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects prev nested and visible item", function() {
@@ -229,7 +229,7 @@
                 .children(".k-group").children(":last")
                 .children(".k-group").children(":last")
                 .children("span.k-link")
-                .hasClass("k-state-focused"));
+                .hasClass("k-focus"));
         });
 
         it("PanelBar focuses prev item if disabled", function() {
@@ -245,7 +245,7 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(ul.children().eq(1).children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children().eq(1).children(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar moves focus to last element in the last expanded group", function() {
@@ -261,7 +261,7 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(ul.children(":last").children(".k-group").children(":last").children(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":last").children(".k-group").children(":last").children(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar expands current focused item on Enter", function() {
@@ -291,7 +291,7 @@
                 keyCode: keys.ENTER
             });
 
-            assert.isOk(ul.children(":first").children(".k-link").hasClass("k-state-selected"));
+            assert.isOk(ul.children(":first").children(".k-link").hasClass("k-selected"));
         });
 
         it("PanelBar collapses expanded group", function() {
@@ -334,7 +334,7 @@
                 keyCode: keys.DOWN
             });
 
-            assert.isOk(ul.children(":last").find(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":last").find(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar selects prev visible item", function() {
@@ -352,7 +352,7 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(ul.children(":first").find(".k-link").hasClass("k-state-focused"));
+            assert.isOk(ul.children(":first").find(".k-link").hasClass("k-focus"));
         });
 
     });

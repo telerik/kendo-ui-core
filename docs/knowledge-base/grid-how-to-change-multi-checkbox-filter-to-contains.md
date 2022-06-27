@@ -86,12 +86,12 @@ I would like to keep the filter state active and show the applied initial filter
 
 ## Suggested solution
 
-It is easiest to add the `k-state-active` class initially and let the grid with the custom filter handler manage the rest of the state changes.A timeout is needed to accomplish this initial load:
+It is easiest to add the `k-active` class initially and let the grid with the custom filter handler manage the rest of the state changes.A timeout is needed to accomplish this initial load:
 
 ```
   grid.one("dataBound", function(e){
     setTimeout(function(){
-        grid.thead.find("[data-field='FirstName']").find(".k-grid-filter").addClass ("k-state-active");
+        grid.thead.find("[data-field='FirstName']").find(".k-grid-filter").addClass ("k-active");
     });            
   });
 ```
@@ -293,7 +293,7 @@ It is easiest to add the `k-state-active` class initially and let the grid with 
           
           grid.one("dataBound", function(e){
             setTimeout(function(){
-            	grid.thead.find("[data-field='FirstName']").find(".k-grid-filter").addClass("k-state-active");
+            	grid.thead.find("[data-field='FirstName']").find(".k-grid-filter").addClass("k-active");
             });          	
           });
         });

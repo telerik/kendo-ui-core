@@ -332,7 +332,7 @@
         });
 
         it("aria-selected is added to the active tab when created from html", function() {
-            div = $('<div id="test"><ul><li class="k-state-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
+            div = $('<div id="test"><ul><li class="k-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
                 .kendoTabStrip();
 
             assert.equal(div.find("li[aria-selected=true]").text(), "foo");
@@ -368,27 +368,27 @@
         });
 
         it("aria-expanded is added to the active content when created from html", function() {
-            div = $('<div id="test"><ul><li class="k-state-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
+            div = $('<div id="test"><ul><li class="k-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
                 .kendoTabStrip();
 
             assert.equal(div.find("div[aria-expanded=true]").text(), "foo content");
         });
 
         it("preserves the id of the LI elements", function() {
-            div = $("<div><ul id='test'><li id='custom' class='k-state-active'>Test</li><li>Test2</li></ul></div>");
+            div = $("<div><ul id='test'><li id='custom' class='k-active'>Test</li><li>Test2</li></ul></div>");
 
             var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
 
             tabstrip.select("li:last");
             tabstrip.select("li:first");
 
-            var li = tabstrip.element.find(".k-state-active");
+            var li = tabstrip.element.find(".k-active");
 
             assert.equal(li.attr("id"), "custom");
         });
 
         it("uses id of the LI element for the aria-activedescendant", function() {
-            div = $("<div><ul id='test'><li id='custom' class='k-state-active'>Test</li><li>Test2</li></ul></div>");
+            div = $("<div><ul id='test'><li id='custom' class='k-active'>Test</li><li>Test2</li></ul></div>");
             var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
 
             tabstrip.select("li:last");
@@ -398,7 +398,7 @@
         });
 
         it("disabled attribute renders aria-disabled", function() {
-            div = $("<div><ul id='test'><li class='k-state-active'>Test</li><li disabled>Test2</li></ul></div>");
+            div = $("<div><ul id='test'><li class='k-active'>Test</li><li disabled>Test2</li></ul></div>");
             var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
 
             assert.isOk(div.find("li:last").is("[aria-disabled='true']"));

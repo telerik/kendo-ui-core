@@ -143,7 +143,7 @@
         assert.isOk(listA.items().find(".k-ghost").length === 0);
     });
 
-     it("Drag and drop hint should not have .k-state-focused class when dragged element is focused", function() {
+     it("Drag and drop hint should not have .k-focus class when dragged element is focused", function() {
         var mockedElement = $('<li class="k-list-item k-focus k-selected"/>');
         var hint = listA._draggable.options.hint(mockedElement);
 

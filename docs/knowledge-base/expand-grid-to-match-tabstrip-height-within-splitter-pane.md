@@ -69,7 +69,7 @@ The following example demonstrates how to expand a Grid that is located in a Tab
         <div id="right-pane">
         <div id="tabstrip">
            <ul>
-             <li class="k-state-active">Item 1</li>
+             <li class="k-active">Item 1</li>
              <li>Item 2</li>
            </ul>
          <div style="padding:0;overflow:hidden">

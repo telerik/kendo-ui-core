@@ -45,7 +45,7 @@ To get the `dataItem` for the last selected row:
             var row = $(e.target).closest("tr");
             var dataItem = grid.dataItem(row);
 
-			if(row.hasClass("k-state-selected")){
+			if(row.hasClass("k-selected")){
 				console.log("Deselecting");
 			}else{
 				console.log("Selecting");

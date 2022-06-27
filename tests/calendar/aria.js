@@ -110,7 +110,7 @@ it("Calendar adds aria-disabled to the up nav", function() {
 
 it("Calendar adds aria-selected to the selected cell", function() {
     instance.value(new Date());
-    assert.equal(instance._table.find("td.k-state-selected").attr("aria-selected"), "true");
+    assert.equal(instance._table.find("td.k-selected").attr("aria-selected"), "true");
 });
 
 it("Calendar adds only one aria-selected=true", function() {

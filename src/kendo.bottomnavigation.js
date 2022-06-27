@@ -41,11 +41,11 @@ var __meta__ = { // jshint ignore:line
             vertical: "k-bottom-nav-item-flow-vertical",
             horizontal: "k-bottom-nav-item-flow-horizontal"
         },
-        selected: "k-state-selected",
-        disabled: "k-state-disabled",
+        selected: "k-selected",
+        disabled: "k-disabled",
         border: "k-bottom-nav-border",
         shadow: "k-bottom-nav-shadow",
-        focus: "k-state-focused"
+        focus: "k-focus"
     };
 
     var templates = {

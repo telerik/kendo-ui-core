@@ -25,6 +25,7 @@
     );
 }
 .k-taskboard-column.k-state-focus,
+.k-taskboard-column.k-focus,
 .k-taskboard-column:focus  {
     .fill(
         @taskboard-column-focus-text,
@@ -74,28 +75,33 @@
         .fill( @text: @taskboard-card-title-text );
 
         &:focus,
-        &.k-state-focus {
+        &.k-state-focus,
+        &.k-focus {
             .fill( @text: @taskboard-card-title-focus-text );
         }
 
         &:hover,
-        &.k-state-hover {
+        &.k-state-hover,
+        &.k-hover {
             .fill( @text: @taskboard-card-title-hover-text );
         }
     }
 
     &:focus,
-    &.k-state-focus {
+    &.k-state-focus,
+    &.k-focus {
         .box-shadow( none );
         .fill( @border: @taskboard-card-focus-border );
     }
 
     &:hover,
-    &.k-state-hover {
+    &.k-state-hover,
+    &.k-hover {
         .fill( @border: @taskboard-card-hover-border );
     }
 
-    &.k-state-selected {
+    &.k-state-selected,
+    &.k-selected {
         .fill(
             @taskboard-card-selected-text,
             @taskboard-card-selected-bg,

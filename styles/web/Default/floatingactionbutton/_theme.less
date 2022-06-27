@@ -21,6 +21,7 @@ each( @theme-colors, {
     @color: @value;
 
     .k-state-hover.k-fab-solid-@{name},
+    .k-hover.k-fab-solid-@{name},
     .k-fab.k-fab-@{name}:hover {
         border-color: darken( @color, 5% );
         background-color: darken( @color, 5% );
@@ -29,6 +30,7 @@ each( @theme-colors, {
 
 // Focus state
 .k-fab.k-state-focus,
+.k-fab.k-focus,
 .k-fab:focus {
     .box-shadow(@fab-focus-shadow);
 }
@@ -39,7 +41,8 @@ each( @theme-colors, {
     @color: @value;
 
     .k-state-active.k-fab-solid-@{name},
-    .k-state-selected.k-fab-solid-@{name},
+    .k-selected.k-fab-solid-@{name},
+    .k-active.k-fab-solid-@{name},
     .k-fab-solid-@{name}:active {
         border-color: darken( @color, 10%);
         background-color: darken( @color, 10%);
@@ -49,6 +52,7 @@ each( @theme-colors, {
 
 // Disabled state
 .k-fab.k-state-disabled,
+.k-fab.k-disabled,
 .k-fab:disabled {
     .box-shadow(@fab-disabled-shadow);
     opacity: 1;
@@ -59,6 +63,7 @@ each( @theme-colors, {
     @color: @value;
 
     .k-state-disabled.k-fab-solid-@{name},
+    .k-disabled.k-fab-solid-@{name},
     .k-fab-solid-@{name}:disabled {
         background-color: tint( @color, 50% );
     }
@@ -83,7 +88,8 @@ each( @theme-colors, {
 }
 
 // Hover state
-.k-fab-item.k-state-hover {
+.k-fab-item.k-state-hover,
+.k-fab-item.k-hover {
     background-image: none;
     color: inherit;
     background-color: inherit;
@@ -92,6 +98,7 @@ each( @theme-colors, {
 }
 
 .k-fab-item.k-state-hover .k-fab-item-icon,
+.k-fab-item.k-hover .k-fab-item-icon,
 .k-fab-item:hover .k-fab-item-icon {
     border-color: darken( @fab-item-icon-border, 5% );
     background-color: darken( @fab-item-icon-bg, 5% );
@@ -101,12 +108,15 @@ each( @theme-colors, {
 .k-fab-item:focus .k-fab-item-text,
 .k-fab-item:focus .k-fab-item-icon,
 .k-fab-item.k-state-focus .k-fab-item-text,
-.k-fab-item.k-state-focus .k-fab-item-icon {
+.k-fab-item.k-focus .k-fab-item-text,
+.k-fab-item.k-state-focus .k-fab-item-icon,
+.k-fab-item.k-focus .k-fab-item-icon {
     .box-shadow(@fab-item-focus-shadow);
 }
 
 // Active state
 .k-fab-item.k-state-active .k-fab-item-icon,
+.k-fab-item.k-active .k-fab-item-icon,
 .k-fab-item:active .k-fab-item-icon {
     border-color: darken( @fab-item-icon-border, 10%);
     background-color: darken( @fab-item-icon-bg, 10%);
@@ -115,6 +125,7 @@ each( @theme-colors, {
 
  // Disabled state
  .k-fab-item.k-state-disabled,
+ .k-fab-item.k-disabled,
  .k-fab-item:disabled {
     opacity: 1;
 

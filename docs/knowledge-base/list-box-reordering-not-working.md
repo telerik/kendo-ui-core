@@ -42,7 +42,7 @@ How can I get the displayed order in sync with the data source? 
 
 The Kendo UI ListBox does not provide a built-in solution for achieving this behavior. However, you can still work around the issue.
 
-Apply custom logic on the [`reorder`](/api/javascript/ui/listbox/events/reorder) event of the widget by manually removing the item from one position and then inserting it in the new one. Get the index of the item with the data source [`indexOf()`](/api/javascript/data/datasource/methods/indexof) method and insert it with its [`insert()`](/api/javascript/data/datasource/methods/insert) method. Adding the `k-state-selected` class to the reordered listbox items preserves the selection:
+Apply custom logic on the [`reorder`](/api/javascript/ui/listbox/events/reorder) event of the widget by manually removing the item from one position and then inserting it in the new one. Get the index of the item with the data source [`indexOf()`](/api/javascript/data/datasource/methods/indexof) method and insert it with its [`insert()`](/api/javascript/data/datasource/methods/insert) method. Adding the `k-selected` class to the reordered listbox items preserves the selection:
 
 ```
 <script>
@@ -54,7 +54,7 @@ Apply custom logic on the [`reorder`](/api/javascript/ui/listbox/events/reorder)
         var index = dataSource.indexOf(dataItem) + e.offset;
         dataSource.remove(dataItem);
         dataSource.insert(index, dataItem);
-        e.sender.wrapper.find("[data-uid='" + dataItem.uid + "']").addClass("k-state-selected");
+        e.sender.wrapper.find("[data-uid='" + dataItem.uid + "']").addClass("k-selected");
     }
 </script>
 ```
@@ -91,7 +91,7 @@ Apply custom logic on the [`reorder`](/api/javascript/ui/listbox/events/reorder)
 			      var index = dataSource.indexOf(dataItem) + e.offset;
 			      dataSource.remove(dataItem);
 			      dataSource.insert(index, dataItem);
-			      e.sender.wrapper.find("[data-uid='" + dataItem.uid + "']").addClass("k-state-selected");
+			      e.sender.wrapper.find("[data-uid='" + dataItem.uid + "']").addClass("k-selected");
 			      console.log("First item ID is now: " + dataSource.data()[0].id);
 			    }
 			  });

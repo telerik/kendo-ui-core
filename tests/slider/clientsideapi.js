@@ -277,7 +277,7 @@
 
             slider.disable();
 
-            assert.isOk(slider.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(slider.wrapper.hasClass("k-disabled"));
         });
 
         it("enable method should remove state disabled from the slider", function() {
@@ -285,7 +285,7 @@
 
             slider.enable();
 
-            assert.isOk(!slider.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!slider.wrapper.hasClass("k-disabled"));
         });
 
         it("refresh method should not select minimum when slider increase his value from -1 to 0", function() {
@@ -521,7 +521,7 @@
 
             rangeSlider.disable();
 
-            assert.isOk(rangeSlider.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(rangeSlider.wrapper.hasClass("k-disabled"));
         });
 
         it("enable method should remove state disabled from the range slider", function() {
@@ -529,7 +529,7 @@
 
             rangeSlider.enable();
 
-            assert.isOk(!rangeSlider.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!rangeSlider.wrapper.hasClass("k-disabled"));
 
             assert.equal(rangeSlider.wrapper.find(".k-draghandle").eq(0).attr("tabindex"), 0);
             assert.equal(rangeSlider.wrapper.find(".k-draghandle").eq(1).attr("tabindex"), 0);

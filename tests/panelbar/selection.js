@@ -14,7 +14,7 @@
                 '            </li>' +
                 '            <li class="k-item"><span class="k-link">Deleted Items</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-disabled"><span class="k-link">Inbox</span>' +
+                '            <li class="k-item k-disabled"><span class="k-link">Inbox</span>' +
                 '            </li>' +
                 '            <li class="k-item"><span class="k-link">My Mail</span>' +
                 '            </li>' +
@@ -26,7 +26,7 @@
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
+                '    <li class="k-item k-disabled"><span class="k-link k-header">Contacts<span' +
                 '            class="k-icon k-i-arrow-chevron-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item"><span class="k-link">My Contacts</span>' +
@@ -52,7 +52,7 @@
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
+                '    <li class="k-item k-active"><span class="k-link k-header k-selected">Notes<span' +
                 '            class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
                 '        <ul class="k-group" style="display: block;">' +
                 '            <li class="k-item"><span class="k-link">My Notes</span>' +
@@ -115,7 +115,7 @@
 
             firstLink.trigger({ type: 'click' });
 
-            assert.isOk(firstLink.hasClass('k-state-selected'));
+            assert.isOk(firstLink.hasClass('k-selected'));
         });
 
         it('selecting root items deselects their siblings', function() {
@@ -125,7 +125,7 @@
             firstLink.trigger({ type: 'click' });
             secondLink.trigger({ type: 'click' });
 
-            assert.equal(ul.find('.k-state-selected').length, 1);
+            assert.equal(ul.find('.k-selected').length, 1);
         });
     });
 }());

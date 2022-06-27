@@ -118,7 +118,7 @@
             var item = getRootItem(2);
 
             panelbar.bind("contentLoad", function() {
-                assert.isOk(item.parent().hasClass("k-state-active"));
+                assert.isOk(item.parent().hasClass("k-active"));
                 panelbar.unbind("contentLoad");
                 done();
             });
@@ -135,7 +135,7 @@
                     '    <li><a>Pure ASP.NET MVC components</a>' +
                     '       <div></div>' +
                     '   </li>' +
-                    '   <li class="k-state-active"><a>Completely Open Source</a>' +
+                    '   <li class="k-active"><a>Completely Open Source</a>' +
                     '       <div></div>' +
                     '   </li>' +
                     '</ul>'

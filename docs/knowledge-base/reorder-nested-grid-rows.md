@@ -107,7 +107,7 @@ The following example demonstrates how to achieve the desired scenario.
             },
 
             placeholder: function(element) { // Customize the placeholder.
-              return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+              return element.clone().addClass("k-hover").css("opacity", 0.65);
             },
             end: function(e) {
               detail = e.draggableEvent.currentTarget.next();
@@ -164,7 +164,7 @@ The following example demonstrates how to achieve the desired scenario.
             },
 
             placeholder: function(element) { //customize the placeholder
-              return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+              return element.clone().addClass("k-hover").css("opacity", 0.65);
             }
           });
 

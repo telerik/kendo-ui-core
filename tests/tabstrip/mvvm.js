@@ -174,7 +174,7 @@
 
             kendo.bind(dom, viewModel);
 
-            assert.isOk(dom.find("li:last").is(".k-state-active"), "Tab is active");
+            assert.isOk(dom.find("li:last").is(".k-active"), "Tab is active");
         });
 
         it("setting the value of the tabstrip when bound to complex object", function() {
@@ -187,7 +187,7 @@
             viewModel.tab = viewModel.tabs[1];
             kendo.bind(dom, viewModel);
 
-            assert.isOk(dom.find("li:last").is(".k-state-active"), "Tab is active");
+            assert.isOk(dom.find("li:last").is(".k-active"), "Tab is active");
         });
 
         it("selecting a tab changes the bound value in the view model", function() {
@@ -297,7 +297,7 @@
 
             var tabstrip = dom.data("kendoTabStrip");
 
-            assert.isOk(tabstrip.element.find("li").first().hasClass("k-state-active"));
+            assert.isOk(tabstrip.element.find("li").first().hasClass("k-active"));
         });
     });
 }());

@@ -31,7 +31,8 @@
     }
 
     &:focus,
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
         .box-shadow( @switch-on-focused-shadow );
 
         .k-switch-track {
@@ -54,7 +55,8 @@
     }
 
     &:hover,
-    &.k-state-hover {
+    &.k-state-hover,
+    &.k-hover {
         .k-switch-track {
             .fill(
                 @switch-on-hovered-text,
@@ -102,7 +104,8 @@
     }
 
     &:focus,
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
         .box-shadow( @switch-off-focused-shadow );
 
         .k-switch-track {
@@ -125,7 +128,8 @@
     }
 
     &:hover,
-    &.k-state-hover {
+    &.k-state-hover,
+    &.k-hover {
         .k-switch-track {
             .fill(
                 @switch-off-hovered-text,
@@ -155,7 +159,8 @@
     box-shadow: none;
 
     &:focus,
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
 
         .k-switch-track {
             outline: none;
@@ -164,18 +169,21 @@
     }
 
     &:hover,
-    &.k-state-hover {
+    &.k-state-hover,
+    &.k-hover {
 
         .k-switch-track {
             .box-shadow( @switch-container-hovered-shadow );
         }
     }
 
-    &.k-state-disabled {
+    &.k-state-disabled,
+    &.k-disabled {
         cursor: default;
 
         &:focus,
-        &.k-state-focused {
+        &.k-state-focused,
+        &.k-focus {
             .box-shadow( @switch-container-shadow );
         }
     }
