@@ -337,7 +337,7 @@ Sets a value controlling how the color is applied. Can also be set to the follow
     });
     </script>
 
-### max `Date`*(default: Date(2099, 11, 31))*
+### max `Date`*(default: Date(2099, 12, 31))*
 
  Specifies the maximum date, which the calendar can show.
 
