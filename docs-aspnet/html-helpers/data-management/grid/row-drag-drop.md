@@ -62,46 +62,46 @@ To enable the Drag and Drop feature:
 To drag and drop multiple Grid rows, set the selection mode to `Multiple` through the `Selectable()` configurator. In this case, only the selected rows will be draggable. If the user drags selected rows, the current row selection will be cleared on row drop.
 Additionally, the row drag clue will be `N items selected` where `N` is the number of the selected rows.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
-            .Name("Grid")
-            .Reorderable(reorder => reorder.Rows(true))
-            .Selectable(select => select.Mode(GridSelectionMode.Multiple))
-            .Columns(columns =>
-            {
-                columns.Template("").Draggable(true);
-                columns.Bound(p => p.ShipName).Title("Order");
-            })
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .PageSize(10)
-                .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
-                .Read(read => read.Action("Orders_Read", "Grid"))
-            )
-            ...
+```HtmlHelper
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("Grid")
+        .Reorderable(reorder => reorder.Rows(true))
+        .Selectable(select => select.Mode(GridSelectionMode.Multiple))
+        .Columns(columns =>
+        {
+            columns.Template("").Draggable(true);
+            columns.Bound(p => p.ShipName).Title("Order");
+        })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(10)
+            .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
+            .Read(read => read.Action("Orders_Read", "Grid"))
         )
-    ```
-    {% if site.core %}
-    ```TagHelper
-        <kendo-grid name="grid" height="550" selectable="multiple, row">
-            <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-                <transport>
-                    <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
-                </transport>
-                <schema>
-                    <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
-                    </model>
-                </schema>
-            </datasource>
-            <reorderable rows="true"/>
-            <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
-            <columns>
-                <column template="" draggable="true" />
-                <column field="ShipName" title="Ship Name"/>
-            </columns>
-        </kendo-grid>
-    ````
-    {% endif %}
+        ...
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="550" selectable="multiple, row">
+        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+            </transport>
+            <schema>
+                <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
+                </model>
+            </schema>
+        </datasource>
+        <reorderable rows="true"/>
+        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
+        <columns>
+            <column template="" draggable="true" />
+            <column field="ShipName" title="Ship Name"/>
+        </columns>
+    </kendo-grid>
+````
+{% endif %}
 
 ## Drag and Drop Rows between Grids
 
@@ -115,46 +115,46 @@ You can reorder the rows through the keyboard when the `Navigatable()` method is
 
 The example below demonstrates how to drag and drop the Grid rows by using the keys `Ctrl + Up/Down`.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
-            .Name("Grid")
-            .Reorderable(reorder => reorder.Rows(true))
-            .Navigatable()
-            .Columns(columns =>
-            {
-                columns.Template("").Draggable(true);
-                columns.Bound(p => p.ShipName).Title("Order");
-            })
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .PageSize(10)
-                .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
-                .Read(read => read.Action("Orders_Read", "Grid"))
-            )
-            ...
+```HtmlHelper
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("Grid")
+        .Reorderable(reorder => reorder.Rows(true))
+        .Navigatable()
+        .Columns(columns =>
+        {
+            columns.Template("").Draggable(true);
+            columns.Bound(p => p.ShipName).Title("Order");
+        })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(10)
+            .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
+            .Read(read => read.Action("Orders_Read", "Grid"))
         )
-    ```
-    {% if site.core %}
-    ```TagHelper
-        <kendo-grid name="grid" height="550" navigatable="true">
-            <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-                <transport>
-                    <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
-                </transport>
-                <schema>
-                    <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
-                    </model>
-                </schema>
-            </datasource>
-            <reorderable rows="true"/>
-            <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
-            <columns>
-                <column template="" draggable="true" />
-                <column field="ShipName" title="Ship Name"/>
-            </columns>
-        </kendo-grid>
-    ````
-    {% endif %}
+        ...
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="550" navigatable="true">
+        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+            </transport>
+            <schema>
+                <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
+                </model>
+            </schema>
+        </datasource>
+        <reorderable rows="true"/>
+        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
+        <columns>
+            <column template="" draggable="true" />
+            <column field="ShipName" title="Ship Name"/>
+        </columns>
+    </kendo-grid>
+````
+{% endif %}
 
 ## Known Limitations
 

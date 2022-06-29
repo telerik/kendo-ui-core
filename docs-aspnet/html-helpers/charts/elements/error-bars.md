@@ -73,6 +73,40 @@ To bind the low and high values of the error bars when using categorical series,
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743,
+                low = 4.5,
+                high = 5
+            },
+            new {
+                value = 7.295,
+                low = 7,
+                high = 8
+            },
+            new {
+                value = 6.376,
+                low = 5,
+                high = 6.5
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data" error-low-field="low" error-high-field="high">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Binding to Scatter Series
 
@@ -107,6 +141,43 @@ The following example demonstrates how to bind the error bars for the `x` value 
             )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var scatter_data = new object[] {
+            new {
+                x= 6.4,
+                y= 13.4,
+                low= 5,
+                high= 7
+            },
+            new {
+                x= 1.7,
+                y= 11,
+                low= 1,
+                high= 3
+            }, 
+            new {
+                x= 5.4,
+                y= 8,
+                low= 3,
+                high= 6
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Scatter" data="scatter_data" x-error-low-field="low" x-error-high-field="high">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The following example demonstrates how to bind the error bars for the `y` value of the series.
 
@@ -137,6 +208,43 @@ The following example demonstrates how to bind the error bars for the `y` value 
             )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var scatter_data = new object[] {
+            new {
+                x= 6.4,
+                y= 13.4,
+                low= 12,
+                high= 17
+            },
+            new {
+                x= 1.7,
+                y= 11,
+                low= 11,
+                high= 14
+            }, 
+            new {
+                x= 5.4,
+                y= 8,
+                low= 5,
+                high= 8
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Scatter" data="scatter_data" y-error-low-field="low" y-error-high-field="high">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Setting the Error Bar Values
 
@@ -167,6 +275,35 @@ The following example demonstrates how to set a numeric value for the categorica
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value="1"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The following example demonstrates how to set a numeric value for the scatter series.
 
@@ -192,6 +329,38 @@ The following example demonstrates how to set a numeric value for the scatter se
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var scatter_data = new object[] {
+            new {
+                x= 6.4,
+                y= 13.4
+            },
+            new {
+                x= 1.7,
+                y= 11
+            }, 
+            new {
+                x= 5.4,
+                y= 8
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Scatter" data="scatter_data">
+                <error-bars y-value="1"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ### Setting Percentage Values
 
@@ -212,9 +381,39 @@ You can also set the difference of the point value as percentage by setting a st
                     value = 6.376
                 }
             })
+        )
         .ErrorBars(err => err.Value("percentage(20)"))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value="percentage(20)"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ### Setting Statistical Values
 
@@ -237,9 +436,39 @@ The following example demonstrates how to use the standard error type.
                     value = 6.376
                 }
             })
+        )
         .ErrorBars(err => err.Value("stderr"))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value="stderr"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The following example demonstrates how to use the standard deviation type.
 
@@ -258,9 +487,39 @@ The following example demonstrates how to use the standard deviation type.
                     value = 6.376
                 }
             })
+        )
         .ErrorBars(err => err.Value("stddev(0.5)"))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value="stddev(0.5)"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ### Calculating Low and High Values
 
@@ -291,9 +550,39 @@ The following example demonstrates how to use different percentages for the low 
                     value = 6.376
                 }
             })
+        )
         .ErrorBars(err => err.ValueHandler("calculateError"))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value-handler="calculateError"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 ```JavaScript
     function calculateError(data) {
         var value = data.value;

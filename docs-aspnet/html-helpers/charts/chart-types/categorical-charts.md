@@ -36,13 +36,36 @@ To set the category names, use the `CategoryAxis` object.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var total_visits = new double[] { 56000, 63000, 74000, 91000, 117000, 138000 };
+        var categories = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Bar" name="Total Visits" data="total_visits">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item categories="categories">
+            </category-axis-item>
+        </category-axis>
+    </kendo-chart>
+
+```
+{% endif %}
 
 You can also bind the category name to a field of the data item.
 
 ```HtmlHelper
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")
-        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Bar_Charts")))
+        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Column_Charts")))
         .Series(series => {
             series.Column(model => model.Wind).Name("Wind");
         })
@@ -51,6 +74,30 @@ You can also bind the category name to a field of the data item.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-chart name="chart">
+        <datasource>
+            <transport>
+                <read type="post" url="@Url.Action("_SpainElectricityProduction", "Column_Charts")" />
+            </transport>
+        </datasource>
+        <series>
+            <series-item type="ChartSeriesType.Column" name="Wind" field="Wind">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item field="Year">
+            </category-axis-item>
+        </category-axis>
+    </kendo-chart>
+
+```
+{% endif %}
+
 
 ## Positioning the Label
 
@@ -69,6 +116,21 @@ To change the label position, set the [`Position`]({{ Position }}) option of the
         .Labels(l => l.Position(ChartAxisLabelsPosition.Start))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @{
+        var categories = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
+    }
+
+    <category-axis>
+        <category-axis-item categories="categories">
+            <labels position="ChartAxisLabelsPosition.Start"/>
+        </category-axis-item>
+    </category-axis>
+
+```
+{% endif %}
 
 ## Setting the Value Axis
 
@@ -93,6 +155,34 @@ The following example demonstrates how to configure a numeric axis with a minimu
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var visits = new double[] { 15.7, 16.7, 20, 23.5, 26.6 };
+        var categories = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Bar" name="Visits" data="visits">
+            </series-item>
+        </series>
+        <value-axis>
+            <value-axis-item min="0" max="100">
+            </value-axis-item>
+        </value-axis>
+        <category-axis>
+            <category-axis-item categories="categories">
+                <labels position="ChartAxisLabelsPosition.Start"/>
+            </category-axis-item>
+        </category-axis>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Setting Multiple Value Axes
 
@@ -127,6 +217,40 @@ The following example demonstrates how to define the `miles` and `km` axes. To a
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var battery_data = new double[] { 20, 40, 45, 30, 50 };
+        var gas_data = new double[] { 20, 30, 35, 35, 40 };
+        var categories = new string[] { "Mon", "Tue", "Wed", "Thu", "Fri" };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" name="on battery" data="battery_data">
+            </series-item>
+            <series-item type="ChartSeriesType.Column" name="on gas" data="gas_data">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item categories="categories">
+            </category-axis-item>
+        </category-axis>
+        <value-axis>
+            <value-axis-item type="numeric" min="0" max="100">
+                <chart-value-axis-item-title text="miles" />
+            </value-axis-item>
+            <value-axis-item type="numeric" min="0" max="161" major-unit="32">
+                <chart-value-axis-item-title text="km" />
+            </value-axis-item>
+        </value-axis>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Arranging the Value Axes
 
@@ -138,6 +262,21 @@ You can also control the arrangement of the value axes by specifying the values 
         .AxisCrossingValue(0, 3)
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @{
+        var categories = new string[] { "Mon", "Tue", "Wed" };
+    }
+
+    <category-axis>
+        <category-axis-item categories="categories" axis-crossing-value="new object[]{0,3}">
+        </category-axis-item>
+    </category-axis>
+
+```
+{% endif %}
+
 
 ## See Also
 

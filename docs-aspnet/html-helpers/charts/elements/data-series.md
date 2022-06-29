@@ -25,6 +25,27 @@ The following example demonstrates how to define two Bar series that are bound t
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var total_visits = new double[] { 56000, 63000, 74000, 91000, 117000, 138000 };
+        var unique_visitors = new double[] { 52000, 34000, 23000, 48000, 67000, 83000 };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Bar" name="Total Visits" data="total_visits">
+            </series-item>
+            <series-item type="ChartSeriesType.Bar" name="Unique visitors" data="unique_visitors">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Applying Default Options
 
@@ -43,6 +64,31 @@ To specify the options that will be applied to all series, use `seriesDefaults`.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var total_visits = new double[] { 56000, 63000, 74000, 91000, 117000, 138000 };
+        var unique_visitors = new double[] { 52000, 34000, 23000, 48000, 67000, 83000 };
+    }
+
+    <kendo-chart name="chart">
+        <series-defaults type="ChartSeriesType.Bar">
+            <border color="purple"/>
+        </series-defaults>
+        <series>
+            <series-item type="ChartSeriesType.Bar" name="Total Visits" data="total_visits">
+            </series-item>
+            <series-item type="ChartSeriesType.Bar" name="Unique visitors" data="unique_visitors">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
+
 
 ## Combining Data Series
 
@@ -58,6 +104,27 @@ You can display series of different types in a single chart.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new int[] { 20, 40, 45, 30, 50 };
+        var line_data = new double[] { 30, 38, 40, 32, 42 };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+            </series-item>
+            <series-item type="ChartSeriesType.Line" data="line_data">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Known Limitations
 

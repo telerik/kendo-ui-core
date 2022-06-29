@@ -53,6 +53,46 @@ The following example sets the default background color for the panes:
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var total_visits = new double[] { 56000, 63000, 74000, 91000, 117000, 138000 };
+        var unique_visitors = new double[] { 52000, 34000, 23000, 48000, 67000, 83000 };
+        var categories = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
+    }
+
+    <kendo-chart name="chart">
+        <panes>
+            <pane background="#00ff00"/>
+        </panes>
+        <chart-title text="Site Visitors Stats \n /thousands/"></chart-title>
+        <chart-legend visible="false"></chart-legend>
+        <chart-area background="transparent"></chart-area>
+        <series>
+            <series-item type="ChartSeriesType.Bar" name="Total Visits" data="total_visits">
+            </series-item>
+            <series-item type="ChartSeriesType.Bar" name="Unique visitors" data="unique_visitors">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item categories="categories">
+                <major-grid-lines visible="false"/>
+            </category-axis-item>
+        </category-axis>
+        <value-axis>
+            <value-axis-item type="numeric" max="140000">
+                <line visible="false"/>
+                <major-grid-lines visible="true"/>
+            </value-axis-item>
+        </value-axis>
+        <tooltip visible="true" template="#= series.name #: #= value #"></tooltip>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Disable Clipping
 
@@ -93,6 +133,47 @@ To disable clipping, set the `Panes.Clip` setting to `false`:
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var total_visits = new double[] { 56000, 63000, 74000, 91000, 117000, 138000 };
+        var unique_visitors = new double[] { 52000, 34000, 23000, 48000, 67000, 83000 };
+        var categories = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
+    }
+
+    <kendo-chart name="chart">
+        <panes>
+            <pane clip="false"/>
+        </panes>
+        <chart-title text="Site Visitors Stats \n /thousands/"></chart-title>
+        <chart-legend visible="false"></chart-legend>
+        <chart-area background="transparent"></chart-area>
+        <series>
+            <series-item type="ChartSeriesType.Bar" name="Total Visits" data="total_visits">
+            </series-item>
+            <series-item type="ChartSeriesType.Bar" name="Unique visitors" data="unique_visitors">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item categories="categories">
+                <major-grid-lines visible="false"/>
+            </category-axis-item>
+        </category-axis>
+        <value-axis>
+            <value-axis-item type="numeric" max="140000">
+                <line visible="false"/>
+                <major-grid-lines visible="true"/>
+            </value-axis-item>
+        </value-axis>
+        <tooltip visible="true" template="#= series.name #: #= value #"></tooltip>
+    </kendo-chart>
+
+```
+{% endif %}
+
 
 ## See Also
 

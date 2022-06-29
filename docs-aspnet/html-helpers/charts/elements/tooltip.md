@@ -34,6 +34,24 @@ By default, the tooltip of the Chart is not visible. You can enable it by settin
         .Tooltip(t => t.Visible(true))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @{
+        var categories = new string[] { "2005", "2006", "2007", "2008", "2009" };
+    }
+
+    <kendo-chart name="chart">
+        <category-axis>
+            <category-axis-item categories="categories">
+            </category-axis-item>
+        </category-axis>
+        <tooltip visible="true"></tooltip>
+        <!-- Other options.-->
+    </kendo-chart>
+
+```
+{% endif %}
 
 The tooltip can also be configured per series.
 
@@ -43,6 +61,21 @@ The tooltip can also be configured per series.
         .Tooltip(t=>t.Visible(true))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @{
+        var series_data = new double[] { 67.96, 68.93, 75, 74, 78 };
+    }
+
+    <series>
+        <series-item type="ChartSeriesType.Bar" data="series_data">
+            <tooltip visible="true"/>
+        </series-item>
+    </series>
+
+```
+{% endif %}
 
 ## Using Format Values
 
@@ -56,6 +89,13 @@ To format the point value, use the `Format` property. In the following example, 
         .Format("Value: {0:N0}")
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    <tooltip visible="true" format="Value: {0:N0}"></tooltip>
+
+```
+{% endif %}
 
 ## Using Templates
 
@@ -74,6 +114,13 @@ The template provides access to all information associated with the point:
         .Template("Value: #= value # ; Category: #= category #")
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    <tooltip visible="true" template="Value: #= value # ; Category: #= category #"></tooltip>
+
+```
+{% endif %}
 
 You can also use an external template by specifying [`TemplateId`]({{ TemplateId }}).
 
@@ -83,8 +130,15 @@ You can also use an external template by specifying [`TemplateId`]({{ TemplateId
         .TemplateId("tooltipTemplate")
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    <tooltip visible="true" template-id="tooltipTemplate"></tooltip>
 
 ```
+{% endif %}
+
+```Template
     <script id="tooltipTemplate" type="text/x-kendo-template">
         Value: #= value # ; Category: #= category #
     </script>

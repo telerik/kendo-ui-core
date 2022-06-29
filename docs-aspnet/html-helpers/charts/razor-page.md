@@ -23,6 +23,17 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             .Read(r => r.Url("/Chart/ChartRemoteBinding?handler=Read").Data("forgeryToken"))
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+
+        <datasource>
+            <transport>
+                <read type="post" url="/Chart/ChartRemoteBinding?handler=Read" data="forgeryToken"/>
+            </transport>
+        </datasource>
+
+    ```
+    {% endif %}
 
 2. Add an AntiForgeryToken at the top of the RazorPage
 

@@ -47,6 +47,44 @@ The Charts come with [a set of predefined themes](https://docs.telerik.com/kendo
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var total_visits = new double[] { 56000, 63000, 74000, 91000, 117000, 138000 };
+        var unique_visitors = new double[] { 52000, 34000, 23000, 48000, 67000, 83000 };
+        var categories = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
+    }
+
+    <kendo-chart name="chart" theme="blueOpal">
+        <chart-title text="Site Visitors Stats /thousands/"></chart-title>
+        <chart-legend position="ChartLegendPosition.Bottom"></chart-legend>
+        <series-defaults type="ChartSeriesType.Column">
+            <stack enabled="true" />
+        </series-defaults>
+        <series>
+            <series-item type="ChartSeriesType.Column" name="Total Visits" data="total_visits">
+            </series-item>
+            <series-item type="ChartSeriesType.Column" name="Unique visitors" data="unique_visitors">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item categories="categories">
+                <major-grid-lines visible="false"/>
+            </category-axis-item>
+        </category-axis>
+        <value-axis>
+            <value-axis-item type="numeric">
+                <line visible="false"/>
+            </value-axis-item>
+        </value-axis>
+        <tooltip visible="true" format="{0}"></tooltip>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Sass Themes
 
@@ -82,6 +120,44 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var total_visits = new double[] { 56000, 63000, 74000, 91000, 117000, 138000 };
+        var unique_visitors = new double[] { 52000, 34000, 23000, 48000, 67000, 83000 };
+        var categories = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
+    }
+
+    <kendo-chart name="chart" theme="inherit">
+        <chart-title text="Site Visitors Stats /thousands/"></chart-title>
+        <chart-legend position="ChartLegendPosition.Bottom"></chart-legend>
+        <series-defaults type="ChartSeriesType.Column">
+            <stack enabled="true" />
+        </series-defaults>
+        <series>
+            <series-item type="ChartSeriesType.Column" name="Total Visits" data="total_visits">
+            </series-item>
+            <series-item type="ChartSeriesType.Column" name="Unique visitors" data="unique_visitors">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item categories="categories">
+                <major-grid-lines visible="false"/>
+            </category-axis-item>
+        </category-axis>
+        <value-axis>
+            <value-axis-item type="numeric">
+                <line visible="false"/>
+            </value-axis-item>
+        </value-axis>
+        <tooltip visible="true" format="{0}"></tooltip>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Animated Transitions
 
@@ -94,6 +170,18 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
         // Other options.
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-chart name="chart" transitions="false">
+        <!-- Other options.-->
+    </kendo-chart>
+
+```
+{% endif %}
+
 
 ## See Also
 

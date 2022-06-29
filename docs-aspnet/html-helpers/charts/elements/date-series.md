@@ -88,6 +88,48 @@ If the series contain two or more values for a specific period (base unit), they
         .CategoryAxis(categoryAxis => categoryAxis.Type(ChartCategoryAxisType.Date) )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new List<StockDataPoint>() { 
+            new StockDataPoint {
+                Date = new DateTime(2011,12,30),
+                Volume = 20
+            },
+            new StockDataPoint {
+                Date = new DateTime(2011,12,31),
+                Volume = 40
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,1),
+                Volume = 45
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,2),
+                Volume = 30
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,3),
+                Volume = 50
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data" field="Volume" category-field="Date">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item type="ChartCategoryAxisType.Date"></category-axis-item>
+        </category-axis>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The following image demonstrates a chart with a set date category axis.  
 
@@ -125,6 +167,48 @@ The following example demonstrates date series that are grouped by the year.
         .CategoryAxis(categoryAxis => categoryAxis.Type(ChartCategoryAxisType.Date).BaseUnit(ChartAxisBaseUnit.Years) )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new List<StockDataPoint>() { 
+            new StockDataPoint {
+                Date = new DateTime(2011,12,30),
+                Volume = 20
+            },
+            new StockDataPoint {
+                Date = new DateTime(2011,12,31),
+                Volume = 40
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,1),
+                Volume = 45
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,2),
+                Volume = 30
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,3),
+                Volume = 50
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data" field="Volume" category-field="Date">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item type="ChartCategoryAxisType.Date" base-unit="ChartAxisBaseUnit.Years"></category-axis-item>
+        </category-axis>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The following image displays a chart with a grouped date category axis. Note how the maximum value for each year is now displayed.
 
@@ -177,6 +261,48 @@ The following example demonstrates how to handle date grouping with the `sum` ag
         .CategoryAxis(categoryAxis => categoryAxis.BaseUnit(ChartAxisBaseUnit.Years).Type(ChartCategoryAxisType.Date) )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new List<StockDataPoint>() { 
+            new StockDataPoint {
+                Date = new DateTime(2011,12,30),
+                Volume = 20
+            },
+            new StockDataPoint {
+                Date = new DateTime(2011,12,31),
+                Volume = 40
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,1),
+                Volume = 45
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,2),
+                Volume = 30
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,1,3),
+                Volume = 50
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data" field="Volume" category-field="Date" aggregate="ChartSeriesAggregate.Sum">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item type="ChartCategoryAxisType.Date" base-unit="ChartAxisBaseUnit.Years"></category-axis-item>
+        </category-axis>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ### Setting Base Units
 
@@ -191,19 +317,47 @@ To set the base units in the categorical charts, use any of the following approa
 
 To determine a default base, use the smallest duration between categories.
 
-```HtmlHelper
+```HtmlHelper_BaseUnit_Years
     .CategoryAxis(categoryAxis => categoryAxis
         .Categories(new DateTime[] {new DateTime(2005, 1, 1), new DateTime(2006, 1, 1) })
         // baseUnit is set to "years".
     )
 ```
+{% if site.core %}
+```TagHelper_BaseUnit_Years
 
-```HtmlHelper
+    @{
+        var categories_data = new DateTime[] { new DateTime(2005, 1, 1), new DateTime(2006, 1, 2) };
+    }
+
+    // baseUnit is set to "years".
+    <category-axis>
+        <category-axis-item categories="categories_data"></category-axis-item>
+    </category-axis>
+
+```
+{% endif %}
+
+```HtmlHelper_BaseUnit_Days
     .CategoryAxis(categoryAxis => categoryAxis
         .Categories(new DateTime[] {new DateTime(2005, 1, 1), new DateTime(2005, 1, 2) })
         // baseUnit is set to "days".
     )
 ```
+{% if site.core %}
+```TagHelper_BaseUnit_Days
+
+    @{
+        var categories_data = new DateTime[] { new DateTime(2005, 1, 1), new DateTime(2005, 1, 2) };
+    }
+
+    // baseUnit is set to "days".
+    <category-axis>
+        <category-axis-item categories="categories_data"></category-axis-item>
+    </category-axis>
+
+```
+{% endif %}
 
 #### Manual Configuration
 
@@ -228,7 +382,7 @@ Setting the [`BaseUnit`]({{ BaseUnit }}) to `ChartAxisBaseUnit.Fit` constrains t
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
-            .Column(new List<StockDataPoint>() {
+            .Line(new List<StockDataPoint>() {
                 new StockDataPoint {
                     Date = new DateTime(2012,1,2),
                     Volume = 30
@@ -238,9 +392,7 @@ Setting the [`BaseUnit`]({{ BaseUnit }}) to `ChartAxisBaseUnit.Fit` constrains t
                     Volume = 50
                 } })
             .Field("Volume")
-            .CategoryField("Date").Type("line")
-
-
+            .CategoryField("Date")
         )
         .CategoryAxis(categoryAxis=> categoryAxis
             .BaseUnit(ChartAxisBaseUnit.Fit)
@@ -252,6 +404,38 @@ Setting the [`BaseUnit`]({{ BaseUnit }}) to `ChartAxisBaseUnit.Fit` constrains t
             ))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var line_data = new List<StockDataPoint>() { 
+            new StockDataPoint {
+                    Date = new DateTime(2012,1,2),
+                    Volume = 30
+            },
+            new StockDataPoint {
+                Date = new DateTime(2012,2,1),
+                Volume = 50
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Line" data="line_data" field="Volume" category-field="Date">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item base-unit="ChartAxisBaseUnit.Fit" max-date-groups="5">
+                <auto-base-unit-steps days="new int[] { 1 }" weeks="new int[] { }" months="new int[] { 1 }"/>
+            </category-axis-item>
+        </category-axis>
+    </kendo-chart>
+
+```
+{% endif %}
 
 #### Labels Format
 
@@ -264,6 +448,19 @@ The date category axis provides options for specifying one format per base unit.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    <category-axis>
+        <category-axis-item>
+            <labels>
+                <chart-category-axis-labels-date-formats days="M/d"/>
+            </labels>
+        </category-axis-item>
+    </category-axis>
+
+```
+{% endif %}
 
 ## Date Series in Scatter Charts
 
@@ -297,21 +494,41 @@ To set the base units in the scatter charts, use any of the following approaches
 
 The default base unit is determined by the axis (or series) range.
 
-```HtmlHelper
+```HtmlHelper_BaseUnit_Years
     .XAxis(xAxis => xAxis
         .Min(new DateTime(2005,1,1))
         .Max(new DateTime(2006,1,1))
         // baseUnit is set to "years"
     )
 ```
+{% if site.core %}
+```TagHelper_BaseUnit_Years
 
-```HtmlHelper
+    <x-axis>
+        <x-axis-item min="new DateTime(2005,1,1)" max="new DateTime(2006,1,1)">
+        </x-axis-item>
+    </x-axis>
+
+```
+{% endif %}
+
+```HtmlHelper_BaseUnit_Days
     .XAxis(xAxis => xAxis
         .Min(new DateTime(2005,1,1))
         .Max(new DateTime(2005,1,2))
         // baseUnit is set to "days"
     )
 ```
+{% if site.core %}
+```TagHelper_BaseUnit_Days
+
+    <x-axis>
+        <x-axis-item min="new DateTime(2005,1,1)" max="new DateTime(2005,1,2)">
+        </x-axis-item>
+    </x-axis>
+
+```
+{% endif %}
 
 #### Manual Configuration
 
@@ -337,6 +554,20 @@ The date axis provides options for specifying one format per base unit. If speci
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    <x-axis>
+        <x-axis-item>
+            <labels>
+                <chart-x-axis-labels-date-formats days="M/d"/>
+            </labels>
+        </x-axis-item>
+    </x-axis>
+
+```
+{% endif %}
+
 
 ## See Also
 
