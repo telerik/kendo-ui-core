@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Telerik REPL
 page_title: Getting Started with Telerik REPL
-description: Explore the features of the Telerik REPL server playground tool.
+description: "Explore the features of the Telerik REPL server playground tool and learn how to use them when experimenting with the Telerik UI components."
 slug: getting_started_repl_aspnetcore
 permalink: /getting-started/repl/repl-getting-started
 position: 2
@@ -9,10 +9,10 @@ position: 2
 
 # Telerik REPL for ASP.NET Core Features
 
-Using the Telerik REPL for ASP.NET Core you can write razor code that contains HTML, C#, JS and CSS in a default .cshtml file. The Telerik REPL for ASP.NET Core supports Razor engine features including:
+By using the Telerik REPL for ASP.NET Core, you can write razor code that contains HTML, C#, JS, and CSS in a default `.cshtml` file. The Telerik REPL for ASP.NET Core supports Razor engine features including:
 
 * [Adding static assets](#adding-static-assets)
-* [Customizing the theme](#customizing-the-theme)
+* [Customizing the visual theme](#customizing-the-theme)
 * [Rendering HTML](#rendering-html)
 * [Using Razor code blocks](#using-razor-code-blocks)
 * [Using Razor local methods](#using-razor-local-methods)
@@ -20,19 +20,21 @@ Using the Telerik REPL for ASP.NET Core you can write razor code that contains H
 
 ## Adding Static Assets
 
-With the Telerik REPL for ASP.NET Core you can define your own script and style tags that reference static assets and add them to the .cshtml file that you are editing. Click on the Static Asset Manager icon and provide the url to the js or CSS file you wish to add:
+In the Telerik REPL for ASP.NET Core, you can define your own script and style tags that reference static assets and add them to the `.cshtml` file that you are editing. 
+
+To add js or CSS files as static assets, click the Static Asset Manager icon and provide the url to files that you want to add.
 
    ![Static Asset Manager](../../getting-started-core/repl/images/repl-static-asset-manager.png)
 
 ## Customizing the Theme
 
-If you are using {{site.product}} components, you can select the desired theme from the theme selection dropdown:
+To change the theme for the {{site.product}} components, select a new theme from the theme selection dropdown.
 
    ![Theme Manager](../../getting-started-core/repl/images/repl-theme-manager.png)
 
 ## Rendering HTML
 
-Using the Telerik REPL for ASP.NET Core you can render plain HTML:
+By using the Telerik REPL for ASP.NET Core, you can render plain HTML:
 
 ```
     <table>
@@ -56,7 +58,7 @@ Using the Telerik REPL for ASP.NET Core you can render plain HTML:
 
 ## Using Razor Code Blocks
 
-Razor code blocks start with `@` and are enclosed by `{}`.Using the Telerik REPL for ASP.NET Core you can render plain HTML:
+Razor code blocks start with `@` and are enclosed by `{}`:
 
 ```
     @using System;
@@ -86,9 +88,9 @@ In code blocks, you can declare local functions with markup to serve as templati
     }
 ```
 
-## Using Razor `@funcitons` Directive
+## Using Razor the @functions Directive
 
-The `@functions` directive enables you to add C# members (fields, properties, and methods) to the generated class. The following example demonstrates how you can generate an HTML table from a collection using the Telerik REPL for ASP.NET Core:
+The `@functions` directive enables you to add C# members (fields, properties, and methods) to the generated class. The following example demonstrates how to generate an HTML table from a collection by using the Telerik REPL for ASP.NET Core:
 
 ```
     @using System.Linq.Expressions

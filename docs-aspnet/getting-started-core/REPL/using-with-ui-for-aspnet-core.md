@@ -1,27 +1,30 @@
 ---
-title: Using Telerik REPL with UI for ASP.NET Core
-page_title: Using Telerik REPL with UI for ASP.NET Core
+title: Editing the ASP.NET Core Demos in REPL
+page_title: Editing the ASP.NET Core Demos in REPL
 description: Explore the features of the Telerik REPL server playground tool and the integration with the UI for ASP.NET Core demos.
 slug: using_repl_with_demos_aspnetcore
 permalink: /getting-started/repl/integration-with-demos
 position: 3
 ---
 
-# Using Telerik REPL with UI for ASP.NET Core
+# Editing the ASP.NET Core Demos in Telerik REPL
 
-The Telerik REPL for ASP.NET Core is integrated with the {{site.product}} Demos and allows you to open and edit them. The models used in the demos are included and you can use them to bind the components to data.
+Telerik REPL for ASP.NET Core is integrated with the {{site.product}} demos and allows you to open and edit them. The models used in the demos are available, and you can use them to bind the UI components to data.
 
-## Running an Existing Telerik UI for ASP.NET Core Demo in the Telerik REPL
+## Opening a Demo in Telerik REPL
 
-To run a demo in the Telerik REPL navigate to the **[{{site.product}} Demos website](https://demos.telerik.com/aspnet-core/)** > **Select the desired demo** > **Click on the Edit in Telerik REPL button**
+To open an existing {{site.product}} demo in the Telerik REPL:
+
+1. Navigate to the [{{site.product}} Demos website](https://demos.telerik.com/aspnet-core/).
+1. Select the desired demo, and then click **Edit in Telerik REPL**.
 
    ![Run Demo](../../getting-started-core/repl/images/repl-run-demo.png)
 
 ## Using Predefined Models
 
-Using Telerik REPL is simple and creating an example requires just a few steps.
+As Telerik REPL provides the [predefined models]({% slug using_predefined_models_repl_aspnetcore %}) and controllers available in the [Telerik UI for ASP.NET Core demos](https://demos.telerik.com/aspnet-core/), you can create an example in just a few steps.
 
-The Telerik REPL provides [predefined models]({% slug using_predefined_models_repl_aspnetcore %}) and controllers available in the Telerik UI for ASP.NET Core demos. If you need to test a local binding scenario with your own data, you can use the available models to generate data using the approach demonstrated in the examples below:
+If you need to test a local binding scenario with your own data, you can use the available models to generate data by using the approach demonstrated in the examples below:
 
 ```Grid
     @using Kendo.Mvc.Examples.Models

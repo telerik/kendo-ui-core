@@ -18,6 +18,8 @@ To initialize the Form, use the `<form>` tag.
 
 The following example demonstrates how to initialize the Form from an existing `<form>` element. The `items` option is set, and it allows configuring Kendo UI widgets as form field editors.
 
+Note, that `nodeName` should not be used as an id of the fields in the formData. 
+
 ```dojo
     <form id="form"></form>
 

@@ -139,7 +139,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 	```
 	var builder = WebApplication.CreateBuilder(args);
 
-	// Add Kendo UI services to the services container"
+	// Add Kendo UI services to the services container.
 	builder.Services.AddKendo();
 	```
 
