@@ -119,8 +119,9 @@ The example relies on the following key steps:
             dataSource: {
                 type: "aspnetmvc-ajax",
                 transport: {
-                    read: baseUrl,
-                    type: "POST",
+                    read: { 
+                        url: baseUrl 
+                    }
                 },
                 schema: {
                     data: "Data",
@@ -139,7 +140,7 @@ The example relies on the following key steps:
 </script>
 ```
 
-Refer to [this REPL](https://netcorerepl.telerik.com/GQEzEeFP47rMl4CT38) for a runnable example.
+Refer to [this REPL](https://netcorerepl.telerik.com/QGOKQDvS30QKTkiV55) for a runnable example.
 
 ## See Also
  * [Excel Export Overview](https://docs.telerik.com/kendo-ui/framework/excel/introduction)
