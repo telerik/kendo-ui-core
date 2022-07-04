@@ -14,11 +14,15 @@ Templates offer a way to create HTML chunks that can be automatically merged wit
 
 ## Template Syntax
 
-The Kendo UI Templates use a simple templating syntax called hash templates. With this syntax, the `#` (hash) sign is used to mark areas in a template that should be replaced by data when the template is executed. The `#` character is also used to signify the beginning and end of custom JavaScript code inside the template.
+The Kendo UI Templates use a syntax called hash templates. This syntax utilizes the `#` (hash) sign to mark the areas that must be parsed. 
+
+The `#` (hash) sign allows you to:
+* Mark areas that will be replaced by data during the template execution.
+* Signify the beginning and end of custom JavaScript code within the template.
 
 > Kendo UI does not provide helper syntax for loops. While other templating libraries include shorthand like `{ each }`, Kendo UI opts to use normal JavaScript instead of custom syntax sugar. The reason for this is that it is much faster and it is also easy for anyone familiar with JavaScript to use. If you know JavaScript, then you know Kendo UI templates.
 
-To use the hash syntax, use any of the following approaches:
+To use the hash syntax, apply any of the following approaches:
 * Render values as HTML: `#= #`.
 * Use HTML encoding to display values: `#: #`.
 * Execute arbitrary JavaScript code: `# if (true) { # ... non-script content here ... # } #`.

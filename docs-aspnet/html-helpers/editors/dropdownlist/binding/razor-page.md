@@ -26,7 +26,7 @@ In order to set up the DropDownList component bindings, you need to configure th
             .DataSource(ds => ds
                 .Custom()
                 .Transport(transport => transport
-                    .Read(r ==> r
+                    .Read(r => r
                         .Url("/DropDownList/DropDownListCrudOps?handler=Read").Data("dataFunction")
                     ))
                     .ServerFiltering(true)
