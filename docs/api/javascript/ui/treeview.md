@@ -2019,7 +2019,7 @@ This event triggers only when `loadOnDemand` is set to `false` - it indicates th
 
 ##### e.nodes `Array`
 
-All the nodes that have children and are loaded. If empty array is passed then no nodes have children to be loaded.
+Applicable for remote binding scenario only. All the nodes that have children and are loaded. If empty array is passed then no nodes have children to be loaded. For a local binding scenario the argument will always be an empty array.
 
 #### Example
 

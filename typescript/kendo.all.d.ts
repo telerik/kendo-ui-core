@@ -7568,6 +7568,14 @@ declare namespace kendo.ui {
         valueMapper?: Function | undefined;
     }
 
+    interface MultiSelectMessages {
+        clear?: string | undefined;
+        deleteTag?: string | undefined;
+        downArrow?: string | undefined;
+        noData?: string | undefined;
+        singleTag?: string | undefined;
+    }
+
     interface MultiSelectOptions {
         name?: string | undefined;
         animation?: boolean | MultiSelectAnimation | undefined;
@@ -7592,6 +7600,7 @@ declare namespace kendo.ui {
         ignoreCase?: boolean | undefined;
         minLength?: number | undefined;
         maxSelectedItems?: number | undefined;
+        messages?: MultiSelectMessages | undefined;
         noDataTemplate?: string|Function|boolean | undefined;
         placeholder?: string | undefined;
         popup?: MultiSelectPopup | undefined;
