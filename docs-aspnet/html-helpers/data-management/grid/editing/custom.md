@@ -129,7 +129,7 @@ To create an editable grid a foreign key:
     ```
     {% endif %}
 
-1. Add a cshtml file within the `/Views/Shared/EditorTemplates` folder of your project and name it `GridForeignKey`. If such folder is not existent, add it manually.
+1. Add a cshtml file within the `/Views/Shared/EditorTemplates` folder of your project and name it `GridForeignKey`. If this folder does not exist, add it manually.
 
 1. Set the content of the file to be a DropDownList:
 
