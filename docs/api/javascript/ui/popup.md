@@ -161,7 +161,7 @@ Which element the popup will be appended to. The element needs to be relatively 
 
 Configures how the popup should behave when it cannot be properly displayed and fully visible, if its `origin` and `position` settings are obeyed.
 
-Valid values are: `"fit"`, `"flip"`, `"flip fit"` and `"fit flip"`. "Fit" allows the popup to be shifted (moved) until it is fully visible. "Flip" allows the popup to switch its position, according to its anchor. If two words are used, the first one applies to the horizontal dimension and the second one - to the vertical dimension. If one word is used, the setting is applied to both dimensions.
+Valid values are: `"fit"`, `"flip"`, `"flip fit"` and `"fit flip"`. "Fit" allows the popup to be shifted (moved) until it is fully visible. "Flip" allows the popup to switch its position, according to its anchor. If two words are used, the first one applies to the vertical dimension and the second one - to the horizontal dimension. If one word is used, the setting is applied to both dimensions.
 
     <div style="height:500px;">&nbsp;</div>
     <p style="text-align:right;"><input id="datepicker" /></p>

@@ -294,6 +294,138 @@ The cube name in the current data source.
     });
     </script>
 
+### schema `Object`
+
+The schema configuration of the PivotDataSourceV2.
+
+### schema.cube `Object`
+
+The cube declaration. If configured, this option will enable the client cube processing that is useful for binding to flat data.
+
+> Only applicable if client cube processing is used.
+
+#### schema.cube.dimensions `Object`
+
+A set of key/value pairs which specifies the field-dimension mapping that is available for processing dimensions. The key specifies the name of the field to which the dimension will be mapped.
+
+> The key has to match the column name that is used in the columns definition.
+
+##### Example - define the cube dimensions
+
+    <script>
+      var dataSource = new kendo.data.PivotDataSourceV2({
+        columns: ["ProductName" ],
+        rows: ["Category"],
+        data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+        schema: {
+          cube: {
+            dimensions: {
+              ProductName: { caption: "All Products" },
+              Category: { caption: "All Cateogries" }
+            }
+          }
+        }
+      });
+
+      dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(dataSource.data(), dataSource.axes());
+      });
+    </script>
+
+##### schema.cube.dimensions.dimensionName `String`
+
+The name of the field which maps to the dimension.
+
+##### schema.cube.dimensions.dimensionName.caption `String`
+
+A user-friendly name of the dimension.
+
+#### schema.cube.measures `Object`
+
+A set of key/value pairs which specifies the available measures. The key specifies the name of measure.
+
+> The key has to match the measure name that is used in the measures definition of the PivotDataSourceV2.
+
+#### Example - define the cube measures which calculate the sum of the products price
+
+    <script>
+      var dataSource = new kendo.data.PivotDataSourceV2({
+        columns: ["ProductName" ],
+        rows: ["Category"],
+        measures: ["Sum"],
+        data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+        schema: {
+          cube: {
+            dimensions: {
+              ProductName: { caption: "All Products" },
+              Category: { caption: "All Cateogries" }
+            },
+            measures: {
+              "Sum": {
+                  field: "UnitPrice",
+                  format: "{0:c}",
+                  aggregate: "sum"
+              }
+            }
+          }
+        }
+      });
+
+      dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(dataSource.data(), dataSource.axes());
+      });
+    </script>
+
+##### schema.cube.measures.measureName.field `String`
+
+The field name whose value is used for calculations.
+
+##### schema.cube.measures.measureName.format `String`
+
+The format which will be applied to the calculated measure value.
+
+##### schema.cube.measures.measureName.aggregate `String`
+
+The function that is used to aggregate the measure value.
+
+The built-in aggregates are:
+* `average`
+* `max`
+* `min`
+* `sum`
+
+###### Example - specify a built-in "average" aggregate function
+
+    <script>
+      var dataSource = new kendo.data.PivotDataSourceV2({
+        columns: ["ProductName" ],
+        rows: ["Category"],
+        measures: ["Sum"],
+        data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+        schema: {
+          cube: {
+            dimensions: {
+              ProductName: { caption: "All Products" },
+              Category: { caption: "All Cateogries" }
+            },
+            measures: {
+              "Average": {
+                field: "UnitPrice",
+                aggregate: "average"
+            }
+          }
+        }
+      });
+
+      dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(dataSource.data(), dataSource.axes());
+      });
+    </script>
+
+
 ## Methods
 
 See the [DataSource methods](/api/framework/datasource#methods) for all inherited methods.
