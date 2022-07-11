@@ -238,6 +238,164 @@ Specifies the end value in the popup list.
     });
     </script>
 
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+#### Example
+
+    <input id="timepicker" />
+
+    <script>
+      $("#timepicker").kendoTimePicker({
+        value: new Date(),
+        format: "hh:mm",
+        componentType:"modern",
+        messages: {
+          now: "My Now",
+          hour: "My Hour",
+          minute:"My Minute",
+          second:"My Second",
+          millisecond: "My Millisecond",
+          cancel: "My Cancel",
+          set:"My Set",
+        }
+      });
+    </script>
+
+### messages.now `String` *(default: "")*
+
+Allows customization of the **Now** text in the TimePicker.
+
+#### Example
+
+    <input id="timepicker" />
+
+    <script>
+      $("#timepicker").kendoTimePicker({
+        value: new Date(),
+        format: "hh:mm",
+        componentType:"modern",
+        messages: {
+          now: "My Now"
+        }
+      });
+    </script>
+
+### messages.now `String` *(default: "")*
+
+Allows customization of the **Hour** text in the TimePicker.
+
+#### Example
+
+    <input id="timepicker" />
+
+    <script>
+      $("#timepicker").kendoTimePicker({
+        value: new Date(),
+        format: "hh:mm",
+        componentType:"modern",
+        messages: {
+          hour: "My Hour"
+        }
+      });
+    </script>
+
+### messages.minute `String` *(default: "")*
+
+Allows customization of the **Minute** text in the TimePicker.
+
+#### Example
+
+    <input id="timepicker" />
+
+    <script>
+      $("#timepicker").kendoTimePicker({
+        value: new Date(),
+        format: "hh:mm",
+        componentType:"modern",
+        messages: {
+          minute: "My Minute"
+        }
+      });
+    </script>
+
+### messages.second `String` *(default: "")*
+
+Allows customization of the **Second** text in the TimePicker.
+
+#### Example
+
+    <input id="timepicker" />
+
+    <script>
+      $("#timepicker").kendoTimePicker({
+        value: new Date(),
+        format: "hh:mm",
+        componentType:"modern",
+        messages: {
+          second: "My Second"
+        }
+      });
+    </script>
+
+### messages.millisecond `String` *(default: "")*
+
+Allows customization of the **Millisecond** text in the TimePicker.
+
+#### Example
+
+    <input id="timepicker" />
+
+    <script>
+      $("#timepicker").kendoTimePicker({
+        value: new Date(),
+        format: "hh:mm",
+        componentType:"modern",
+        messages: {
+          millisecond: "My Millisecond"
+        }
+      });
+    </script>
+
+### messages.cancel `String` *(default: "")*
+
+Allows customization of the **Cancel** button text in the TimePicker.
+
+#### Example
+
+    <input id="timepicker" />
+
+    <script>
+      $("#timepicker").kendoTimePicker({
+        value: new Date(),
+        format: "hh:mm",
+        componentType:"modern",
+        messages: {
+          cancel: "My Cancel"
+        }
+      });
+    </script>
+
+### messages.set `String` *(default: "")*
+
+Allows customization of the **Set** button text in the TimePicker.
+
+#### Example
+
+    <input id="timepicker" />
+
+    <script>
+      $("#timepicker").kendoTimePicker({
+        value: new Date(),
+        format: "hh:mm",
+        componentType:"modern",
+        messages: {
+          set: "My Set"
+        }
+      });
+    </script>
+
 ### min `Date`*(default: "00:00")*
 
 Specifies the start value in the popup list.

@@ -6675,6 +6675,30 @@ A DOM element or a jQuery object which represents the table rows or cells.
       });
     </script>
 
+#### Example - getting the selected table row when checkbox selection is enabled
+
+<button id="btn">Get selected row/rows</button>
+<div id="treeList"></div>
+<script>
+  $("#treeList").kendoTreeList({
+    columns: [
+      { selectable: true, width: "65px" },
+      { field: "id" },
+      { field: "name" },
+      { field: "age" }
+    ],
+    dataSource: [
+      { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+      { id: 2, parentId: 1, name: "John Doe", age: 24 },
+      { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+    ]
+  });
+  $("#btn").click(function(){
+    var treeList = $("#treeList").data("kendoTreeList");
+    console.log(treeList.select())
+  });
+</script>
+
 ### setDataSource
 
 Sets the data source of the widget.

@@ -10897,6 +10897,8 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
 `jQuery` the selected table rows or cells.
 
+> The `select` method will not trigger the [`change event`](/api/javascript/ui/grid/events/change). In older versions of Kendo UI, the select method would trigger the [`change event`](/api/javascript/ui/grid/events/change), however this behavior was not intended. Refer to the second example for a workaround.
+
 > In case of using frozen (locked) columns and row selection, the `select` method will return **two** table row elements for each selected item. Each pair of table row elements that correspond to the same data item, will have the same `data-uid` attribute value. One of the table rows will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`.
 
 > In order to clear the currently selected row, use the [clearSelection() method](/api/javascript/ui/grid/methods/clearselection).
@@ -10918,6 +10920,27 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
       });
       var grid = $("#grid").data("kendoGrid");
       grid.select("tr:eq(0), tr:eq(1)");
+    </script>
+
+#### Example - trigger the change event when a row is selected programmatically.
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        selectable: "multiple, row",
+        change: function(e) {kendo.alert("Change triggered")}
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.select("tr:eq(0), tr:eq(1)");
+      grid.trigger("change");
     </script>
 
 #### Example - get the selected table rows
@@ -11256,7 +11279,7 @@ The index of the column or the [field](/api/javascript/ui/grid/configuration/col
 
 > In order to use this method, the grid must be initialized with at least one locked column, and there should be locked columns left after the target column is unlocked.
 
-#### Example - lock a column
+#### Example - unlock a column
 
     <div id="grid"></div>
     <script>
@@ -11274,6 +11297,34 @@ The index of the column or the [field](/api/javascript/ui/grid/configuration/col
     });
     var grid = $("#grid").data("kendoGrid");
     grid.unlockColumn("name");
+    </script>
+
+To unlock a column when it is the only one locked use the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method of the Grid.
+
+#### Example - unlock the last locked column
+
+<div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name", width: 400, locked: true },
+          { field: "age", width: 200 },
+          { field: "hometown", width: 400 },
+          { field: "siblings", width: 200 }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30, hometown: "Sofia, Bulgaria", siblings: 3 },
+          { name: "John Doe", age: 33, hometown: "Boston, MA, USA", siblings: 1 }
+        ]
+      });
+      
+      var grid = $("#grid").data("kendoGrid");
+      var columns = grid.getOptions().columns;
+      columns[0].locked = false;
+
+      grid.setOptions({
+        columns: columns
+      })
     </script>
 
 ### unstickColumn
