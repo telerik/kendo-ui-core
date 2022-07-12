@@ -42,7 +42,13 @@ The following example demonstrates how to define the ProgressBar.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-progressbar name="fastAndFurious" type="ProgressBarType.Percent" />
+<kendo-progressbar name="fastAndFurious" type="ProgressBarType.Percent" animation-duration="600" />
+
+    <script type="text-javascript">
+        $(document).ready(function () {
+            $("#progressbar").data("kendoProgressBar").value(50);
+        });   
+    </script>
 ```
 {% endif %}
 
@@ -73,8 +79,7 @@ The following example demonstrates the basic configuration of the ProgressBar.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-progressbar name="fastAndFurious"
-        type="ProgressBarType.Percent" animation-duration="600" />
+    <kendo-progressbar name="progressBar" show-status="true" orientation="ProgressBarOrientation.Vertical" type="ProgressBarType.Chunk" animation-duration="600" on-change="onChange" on-complete="onComplete"/>
 ```
 {% endif %}
 
@@ -104,6 +109,20 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-progressbar name="progressBar" on-change="onChange" on-complete="onComplete"/>
+        <script>
+        function onChange(e) {
+            // Handle the change event.
+        }
+
+        function onComplete(e) {
+            // Handle the complete event.
+        }
+    </script>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 
@@ -138,6 +157,19 @@ The following example demonstrates how to get a reference to an existing Telerik
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-progressbar name="progressBar" />
+
+    <script type="text/javascript">
+        $(function () {
+            // The Name() of the ProgressBar is used to get its client-side instance.
+            var progressbar = $("#progressbar").data("kendoProgressBar");
+            console.log(progressbar);
+        });
+    </script>
+```
+{% endif %}
 
 ## See Also
 

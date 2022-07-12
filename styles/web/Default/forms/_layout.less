@@ -155,9 +155,15 @@
     padding: 0;
 }
 
-.k-window > div.k-popup-edit-form
+.k-window > .k-popup-edit-form
 {
-    padding: 1em 0;
+    .k-edit-buttons {
+        display: flex;
+
+        .k-button {
+            margin-left: 0.6em;
+        }
+    }
 }
 
 .k-grid-edit-row .k-edit-form td

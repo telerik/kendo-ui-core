@@ -32,6 +32,7 @@ The following values are available for the `Size` option:
 
 The following example demonstrates how to set `Size` in the declaration of the ColorPicker:
 
+```HtmlHelper
         @(Html.Kendo().ColorPicker()
             .Name("picker")
             .Size(ComponentSize.Medium)
@@ -39,6 +40,18 @@ The following example demonstrates how to set `Size` in the declaration of the C
             .Format(ColorPickerFormat.Rgb)
             .Formats(new string[] { "rgb", "hex" })
         )
+```
+{% if site.core %}
+```TagHelper
+@{
+    string[] formats = new string[] { "rgb", "hex" };
+}
+
+        <kendo-colorpicker name="picker" value="#ff0000" size="ComponentSize.Medium"
+         format="ColorPickerFormat.Rgb"         formats="formats">
+        </kendo-colorpicker>
+```
+{% endif %}
 
 The default `Size` value is `Medium` and it is applied to the wrapping span element through the `k-input-md` class.
 
@@ -60,6 +73,7 @@ The following values are available for the `Rounded` option:
 
 The following example demonstrates how to set `Rounded` in the declaration of the ColorPicker:
 
+```HtmlHelper
         @(Html.Kendo().ColorPicker()
             .Name("picker")
             .Rounded(Rounded.Medium)
@@ -67,6 +81,18 @@ The following example demonstrates how to set `Rounded` in the declaration of th
             .Format(ColorPickerFormat.Rgb)
             .Formats(new string[] { "rgb", "hex" })
         )
+```
+{% if site.core %}
+```TagHelper
+@{
+    string[] formats = new string[] { "rgb", "hex" };
+}
+
+        <kendo-colorpicker name="picker" value="#ff0000" rounded="Rounded.Medium"
+         format="ColorPickerFormat.Rgb"         formats="formats">
+        </kendo-colorpicker>
+```
+{% endif %}
 
 The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
 
@@ -87,6 +113,7 @@ The following values are available for the `FillMode` option:
 
 The following example demonstrates how to set `FillMode` in the declaration of the ColorPicker:
 
+  ```HtmlHelper
         @(Html.Kendo().ColorPicker()
             .Name("picker")
             .FillMode(FillMode.Solid)
@@ -94,6 +121,18 @@ The following example demonstrates how to set `FillMode` in the declaration of t
             .Format(ColorPickerFormat.Rgb)
             .Formats(new string[] { "rgb", "hex" })
         )
+```
+{% if site.core %}
+```TagHelper
+@{
+    string[] formats = new string[] { "rgb", "hex" };
+}
+
+        <kendo-colorpicker name="picker" value="#ff0000" fillmode="FillMode.Solid"
+         format="ColorPickerFormat.Rgb"         formats="formats">
+        </kendo-colorpicker>
+```
+{% endif %}      
 
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 

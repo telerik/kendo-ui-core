@@ -30,6 +30,26 @@ The example below demonstrates thow to configure the {{ site.product }} ColorPic
         )
     </div>
 ```
+{% if site.core %}
+```TagHelper
+@{
+    string[] formats = new string[] { "rgb", "hex" };
+}
+
+     <div>
+        <h3><label>HEX ColorPicker</label></h3>
+        <kendo-colorpicker name="HexPicker" 
+         format="ColorPickerFormat.Hex"         formats="formats">
+        </kendo-colorpicker>
+    </div>
+    <div>
+        <h3><label>RGB ColorPicker</label></h3>
+       <kendo-colorpicker name="RgbPicker" 
+         format="ColorPickerFormat.Rgb"         formats="formats">
+        </kendo-colorpicker>
+    </div>
+```
+{% endif %}
 
 ## See Also
 

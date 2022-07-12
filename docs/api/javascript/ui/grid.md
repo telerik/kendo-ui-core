@@ -889,13 +889,15 @@ The JavaScript function executed when the cell/row is about to be opened for edi
       });
     </script>
 
-### columns.editor `Function`
+### columns.editor `String|Function`
 
 Provides a way to specify a custom editing UI for the column. Use the `container` parameter to create the editing UI.
 
 > The editing UI should contain an element whose `name` HTML attribute is set as the column [field](columns.field).
 
 > Validation settings defined in the `model.fields` configuration will **not** be applied automatically. In order the validation to work, **the developer is responsible for attaching the corresponding validation attributes to the editor input** the `data-bind` attribute is whitespace sensitive. In case the custom editor is a widget, the developer should [customize the validation warning tooltip position](/framework/validator/overview#customizing-the-tooltip-position) in order to avoid visual issues.
+
+When used as `String`, defines the editor widget type. For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditor)
 
 #### Parameters
 
@@ -987,6 +989,59 @@ Array of values specified via the [values](columns.values) option.
     </script>
 
 > Check [Editing custom editor](https://demos.telerik.com/kendo-ui/grid/editing-custom) for a live demo.
+
+#### Example - create a custom column editor using String literal
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [ {
+        field: "num",
+        editor: "NumericTextBox"
+      } ],
+      editable: true,
+      scrollable: false,
+      dataSource: {
+        data: [ { num: 1 }, { num: 2 } ],
+        schema: {
+          model: {
+            fields: {
+              num: { type: "number", validation: { required: true } }
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### columns.editorOptions `Object`
+
+Defines the widget configuration when one is initialized as editor for the column (or the widget defined in `items.editor`). For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditoroptions).
+
+#### Example - create a custom column editor using String literal
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [ {
+        field: "num",
+        editor: "NumericTextBox",
+        editorOptions: { step: 2 }
+      } ],
+      editable: true,
+      scrollable: false,
+      dataSource: {
+        data: [ { num: 1 }, { num: 2 } ],
+        schema: {
+          model: {
+            fields: {
+              num: { type: "number", validation: { required: true } }
+            }
+          }
+        }
+      }
+    });
+    </script>
 
 ### columns.encoded `Boolean` *(default: true)*
 

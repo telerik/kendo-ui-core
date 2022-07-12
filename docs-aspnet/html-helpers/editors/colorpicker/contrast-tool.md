@@ -61,6 +61,50 @@ The example below demonstrates how to enable the contrast tool in the ColorPicke
         }
     </style>
 ```
+{% if site.core %}
+```TagHelper
+@{
+    string[] views = new string[] { "gradient" };
+}
+
+    <div class="demo-section">
+        <div class="column">
+            <h3 class="title"><label for="picker">Foreground Color</label></h3>
+            <kendo-colorpicker name="foreground-picker" value="#d13838ff" >
+                 <contrast-tool background-color="#ffffff"/>
+            </kendo-flatcolorpicker>
+        </div>
+        <div class="column">
+            <h3 class="title"><label for="picker">Background Color</label></h3>
+            @(Html.Kendo().ColorPicker()
+                .Events(ev=>ev.Change("onChange"))
+            )
+            <kendo-colorpicker name="background-picker" input="false" views="views" value="#ffffff" on-change="onChange" opacity="true">
+            </kendo-colorpicker>
+        </div>
+    </div>
+
+     <script>
+        function onChange(e) {
+            var foregroundPicker = $("#foreground-picker").data("kendoColorPicker")
+            foregroundPicker.setBackgroundColor(e.value)
+        }
+    </script>
+    
+    <style>
+        .demo-section {
+            display: inline-flex;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .column {
+            margin:auto;
+            text-align: center;
+        }
+    </style>
+```
+{% endif %}
 
 ## See Also
 

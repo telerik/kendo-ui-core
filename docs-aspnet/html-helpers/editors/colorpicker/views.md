@@ -25,6 +25,19 @@ As of R3 SP1 of 2021 for the {{ site.product }} ColorPicker has a new design. On
         .Views(new string[]{ "gradient", "palette" })
     )
 ```
+{% if site.core %}
+```TagHelper
+@{
+    string[] views = new string[] { "gradient", "palette" };
+}
+
+<kendo-colorpicker name="PatetteColorPicker"   preview="false" view="palette" views="views">
+</kendo-colorpicker>
+
+<kendo-colorpicker name="GradientColorPicker"   preview="false" view="gradient" views="views">
+</kendo-colorpicker>
+```
+{% endif %}
 
 ## See Also
 
