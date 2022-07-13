@@ -2,7 +2,7 @@
     define([ "./kendo.mobile.view", "./kendo.userevents" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.drawer",
     name: "Drawer",
     category: "mobile",

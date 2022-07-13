@@ -47,6 +47,9 @@ The following example demonstrates how to handle such a scenario by:
 
 ```dojo
 <style>
+.editorToolbarWindow{
+      display: flex;
+}
 
 .zIndexEnforce
 {
@@ -54,7 +57,6 @@ The following example demonstrates how to handle such a scenario by:
     /* The z-index value itself can be arbitrary. */
     z-index: 12345 !important;
 }
-
 </style>
 
 <div id="window">

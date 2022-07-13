@@ -2,7 +2,7 @@
     define(["./kendo.html.button", "./kendo.button.menu"], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "dropdownbutton",
     name: "DropDownButton",
     category: "web",

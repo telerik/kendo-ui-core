@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "validator",
     name: "Validator",
     category: "web",
@@ -10,7 +10,7 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core" ]
 };
 
-/* jshint eqnull: true */
+
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,

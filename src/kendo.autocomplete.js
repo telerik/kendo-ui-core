@@ -2,7 +2,7 @@
     define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "autocomplete",
     name: "AutoComplete",
     category: "web",

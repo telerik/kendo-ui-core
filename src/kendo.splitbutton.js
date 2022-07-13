@@ -2,7 +2,7 @@
     define(["./kendo.html.button", "./kendo.button.menu"], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "splitbutton",
     name: "SplitButton",
     category: "web",
@@ -115,7 +115,7 @@ var __meta__ = { // jshint ignore:line
 
         _getAppearanceClasses: function() {
             var that = this,
-                widgetName = that.__proto__.options.name, // jshint ignore:line
+                widgetName = that.__proto__.options.name,
                 roundedClass = kendo.cssProperties.getValidClass({
                     widget: widgetName,
                     propName: "rounded",

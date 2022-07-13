@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "data.xml",
     name: "XML",
     category: "framework",
@@ -10,7 +10,7 @@ var __meta__ = { // jshint ignore:line
     hidden: true
 };
 
-/*jshint  eqnull: true, boss: true */
+
 (function($, undefined) {
     var kendo = window.kendo,
         isArray = Array.isArray,

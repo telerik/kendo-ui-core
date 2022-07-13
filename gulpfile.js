@@ -1,17 +1,14 @@
-/* jshint browser:false, node:true, esnext: true */
-
 var fs = require('fs');
 var gulp = require('gulp');
 var shell = require('gulp-shell');
 var path = require('path');
-var debug = require('gulp-debug'); // jshint ignore:line
+var debug = require('gulp-debug');
 var logger = require('gulp-logger');
 var PluginError = require('plugin-error');
 var clone = require('gulp-clone');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var gulpIf = require('gulp-if');
-var jshint = require("gulp-jshint");
 var replace = require("gulp-replace");
 var rename = require("gulp-rename");
 var requirejsOptimize = require('gulp-requirejs-optimize');
@@ -277,15 +274,6 @@ gulp.task("custom", function() {
     return merge(src.pipe(flatmap(toDist)), minSrc.pipe(flatmap(toDist)));
 });
 
-gulp.task("jshint", function() {
-    var packageJSON = require('./package');
-
-    return gulp.src(argv.files || packageJSON.jshintFiles)
-        .pipe(jshint(packageJSON.jshintConfig))
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(jshint.reporter('fail'));
-});
-
 gulp.task('build', gulp.parallel(['scripts', 'styles']));
 
 gulp.task('tests', gulp.series(['karma-mocha']));
@@ -301,13 +289,17 @@ gulp.task('cjs', function() {
             return path.join(relativeDir, fileName);
         }))
         .pipe(webpackStream({
+            mode: 'production',
             output: {
                 libraryTarget: 'commonjs2'
             },
 
             plugins: [new webpack.ProvidePlugin({ 'jQuery': "jquery" })],
 
-            externals: ['jquery', /^\.\//, /^\.\.\//]
+            externals: ['jquery', /^\.\//, /^\.\.\//],
+            optimization: {
+                minimize: false
+            }
         }))
         .pipe(gulp.dest('dist/cjs'));
 });

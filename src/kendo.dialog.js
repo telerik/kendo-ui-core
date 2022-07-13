@@ -2,7 +2,7 @@
     define(["./kendo.core", "./kendo.popup", "./kendo.textbox"], f);
 })(function() {
 
-    var __meta__ = { // jshint ignore:line
+    var __meta__ = {
         id: "dialog",
         name: "Dialog",
         category: "web", // suite

@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.userevents", "./kendo.popup", "./kendo.html.button", "./kendo.splitbutton", "./kendo.dropdownbutton" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "toolbar",
     name: "ToolBar",
     category: "web",

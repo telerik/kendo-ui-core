@@ -9,7 +9,7 @@
 })(function() {
 /* eslint-disable space-before-blocks, space-before-function-paren, no-multi-spaces */
 
-    var __meta__ = { // jshint ignore:line
+    var __meta__ = {
         id: "color",
         name: "Color utils",
         category: "framework",
@@ -17,8 +17,6 @@
         description: "Color utilities used across components",
         depends: [ "core" ]
     };
-
-/*jshint eqnull:true  */
 
 window.kendo = window.kendo || {};
 

@@ -1,9 +1,9 @@
-/* jshint multistr: true */
+
 (function(f, define) {
     define([ "./kendo.fx", "./kendo.userevents" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.switch",
     name: "Switch",
     category: "mobile",

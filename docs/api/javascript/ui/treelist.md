@@ -490,12 +490,14 @@ The JavaScript function that is executed when the cell or row is about to be ope
         });
     </script>
 
-### columns.editor `Function`
+### columns.editor `String|Function`
 
 Provides a way to specify a custom editing UI for the column. To create the editing UI, use the `container` parameter.
 
 > * The editing UI has to contain an element with a set `name` HTML attribute. The attribute value has to match the [`field`](/api/javascript/ui/treelist#configuration-columns.field) name.
 > * The validation settings that are defined in the `model.fields` configuration will not be applied automatically. In order for the validation to work, you (the developer) are responsible for attaching the corresponding validation attributes to the editor input. If the custom editor is a widget, to avoid visual issues, you can [customize the tooltip position of the validation warning](/framework/validator/overview#customizing-the-tooltip-position).
+
+When used as `String`, defines the editor widget type. For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditor)
 
 #### Parameters
 
@@ -600,6 +602,81 @@ The model instance to which the current table row is bound.
         dataSource: [
           { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
           { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+#### Example - creating a custom column editor using String literal for AutoComplete
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          {
+            field: "lastName",
+            editor: "AutoComplete",
+            editorOptions: {
+              dataTextField: "lastName",
+              dataSource: [
+                { lastName: "Jackson" },
+                { lastName: "Strong" },
+                { lastName: "Simon"}
+              ]
+            }
+          },
+          {
+            field: "number",
+            format: "{0:0}"
+          },
+          { field: "position"},
+          { command: [ "edit" ] }
+        ],
+        editable: "popup",
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", number: 10342.16, position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", number: 18031.11, position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.editorOptions `Object`
+
+Defines the widget configuration when one is initialized as editor for the column (or the widget defined in `items.editor`). For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditoroptions).
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          {
+            field: "lastName",
+            editor: "AutoComplete",
+            editorOptions: {
+              dataTextField: "lastName",
+              dataSource: [
+                { lastName: "Jackson" },
+                { lastName: "Strong" },
+                { lastName: "Simon"}
+              ]
+            }
+          },
+          {
+            field: "number",
+            format: "{0:0}",
+            editor: "NumericTextBox",
+            editorOptions: {
+              decimals: 2,
+              step: 0.1
+            }
+          },
+          { field: "position"},
+          { command: [ "edit" ] }
+        ],
+        editable: "popup",
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", number: 10342.16, position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", number: 18031.11, position: "VP, Engineering" }
         ]
       });
     </script>

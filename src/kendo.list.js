@@ -2,7 +2,7 @@
     define([ "./kendo.data", "./kendo.popup" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "list",
     name: "List",
     category: "framework",
@@ -10,7 +10,7 @@ var __meta__ = { // jshint ignore:line
     hidden: true
 };
 
-/*jshint evil: true*/
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

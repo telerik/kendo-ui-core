@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.selectable" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "calendar",
     name: "Calendar",
     category: "web",
@@ -2076,7 +2076,7 @@ var __meta__ = { // jshint ignore:line
             body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.getDay(),[" + disabledDates + "]) > -1;" + searchExpression;
         }
 
-        callback = new Function("date", body); //jshint ignore:line
+        callback = new Function("date", body);
 
         return callback;
     }

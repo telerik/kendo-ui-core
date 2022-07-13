@@ -2,7 +2,7 @@
     define(["./kendo.core", "./kendo.floatinglabel"], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "textarea",
     name: "TextArea",
     category: "web",

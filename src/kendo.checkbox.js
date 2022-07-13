@@ -2,7 +2,7 @@
     define([ "./kendo.toggleinputbase", "./kendo.html.input" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "checkbox",
     name: "CheckBox",
     category: "web",

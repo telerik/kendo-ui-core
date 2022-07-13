@@ -8,7 +8,8 @@ position: 6
 
 # AngularJS Support
 
-As of the Kendo UI 2014 Q2 release, the Kendo UI widgets support [AngularJS](https://angularjs.org/) integration.
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. 
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
 
 To activate the AngularJS directives, install the AngularJS library. Just like jQuery, the minified format of the AngularJS library is located is in the `js` directory of the downloaded Kendo UI bundle.
 

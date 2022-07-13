@@ -1,9 +1,9 @@
-/* jshint eqnull: true */
+
 (function(f, define) {
     define([ "./kendo.draganddrop", "./kendo.data", "./kendo.selectable" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "listbox",
     name: "ListBox",
     category: "web",

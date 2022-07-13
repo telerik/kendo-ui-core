@@ -2,7 +2,7 @@
     define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist", "./kendo.html.button" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "combobox",
     name: "ComboBox",
     category: "web",

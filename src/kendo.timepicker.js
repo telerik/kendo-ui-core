@@ -2,7 +2,7 @@
     define([ "./kendo.popup", "./kendo.dateinput", "./kendo.html.button"], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "timepicker",
     name: "TimePicker",
     category: "web",

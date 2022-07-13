@@ -9,7 +9,7 @@
 (function($, undefined){
     // WARNING: removing the following jshint declaration and turning
     // == into === to make JSHint happy will break functionality.
-    /*jshint eqnull:true  */
+
     var kendo = window.kendo,
         ui = kendo.ui,
         html = kendo.html,

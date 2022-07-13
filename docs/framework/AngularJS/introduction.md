@@ -9,6 +9,9 @@ position: 1
 
 # AngularJS Directives Overview
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. 
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
+
 This article describes the basics of integrating Kendo UI for jQuery and AngularJS 1.x. 
 
 If you are developing with newer versions of Angular (2.0+), [Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui) provides 100+ native Angular components.

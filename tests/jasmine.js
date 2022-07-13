@@ -465,7 +465,7 @@ if (typeof window == void 0 && typeof exports == 'object') {
   exports.Spec = jasmineRequire.Spec;
 }
 
-/*jshint bitwise: false*/
+
 
 getJasmineRequireObj().Order = function() {
   function Order(options) {
@@ -1337,9 +1337,9 @@ getJasmineRequireObj().DelayedFunctionScheduler = function() {
     self.scheduleFunction = function(funcToCall, millis, params, recurring, timeoutKey, runAtMillis) {
       var f;
       if (typeof(funcToCall) === 'string') {
-        /* jshint evil: true */
+
         f = function() { return eval(funcToCall); };
-        /* jshint evil: false */
+
       } else {
         f = funcToCall;
       }

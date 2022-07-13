@@ -2,7 +2,7 @@
     define([ "./kendo.draganddrop", "./kendo.popup"], f);
 })(function() {
 
-    var __meta__ = { // jshint ignore:line
+    var __meta__ = {
         id: "window",
         name: "Window",
         category: "web",

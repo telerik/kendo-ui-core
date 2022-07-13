@@ -2,7 +2,7 @@
     define([ "./kendo.mobile.view", "./kendo.mobile.loader" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.pane",
     name: "Pane",
     category: "mobile",

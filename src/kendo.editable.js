@@ -2,7 +2,7 @@
     define([ "./kendo.checkbox", "./kendo.dropdownlist", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.validator", "./kendo.binder" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "editable",
     name: "Editable",
     category: "framework",
@@ -10,7 +10,7 @@ var __meta__ = { // jshint ignore:line
     hidden: true
 };
 
-/* jshint eqnull: true */
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,

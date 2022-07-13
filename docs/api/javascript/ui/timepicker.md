@@ -282,7 +282,7 @@ Allows customization of the **Now** text in the TimePicker.
       });
     </script>
 
-### messages.now `String` *(default: "")*
+### messages.hour `String` *(default: "")*
 
 Allows customization of the **Hour** text in the TimePicker.
 

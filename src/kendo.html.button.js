@@ -4,7 +4,7 @@
     ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "html.button",
     name: "Html.Button",
     category: "web",

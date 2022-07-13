@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.popup" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "notification",
     name: "Notification",
     category: "web",

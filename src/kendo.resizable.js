@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.draganddrop" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "resizable",
     name: "Resizable",
     category: "framework",

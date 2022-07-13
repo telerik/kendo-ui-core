@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.userevents", "./kendo.floatinglabel", "./kendo.html.button" ], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "numerictextbox",
     name: "NumericTextBox",
     category: "web",

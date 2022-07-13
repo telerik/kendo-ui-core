@@ -678,7 +678,7 @@
 
 			copyUrlParameters(mockHandler, origSettings);
 
-			/* jshint loopfunc:true */
+
 			(function(mockHandler, requestSettings, origSettings, origHandler) {
 
 				mockRequest = _ajax.call($, $.extend(true, {}, origSettings, {
@@ -686,7 +686,7 @@
 					xhr: function() { return xhr( mockHandler, requestSettings, origSettings, origHandler ); }
 				}));
 			})(mockHandler, requestSettings, origSettings, mockHandlers[k]);
-			/* jshint loopfunc:false */
+
 
 			return mockRequest;
 		}

@@ -2,7 +2,7 @@
     define([ "./kendo.datepicker", "./kendo.timepicker", "./kendo.html.button"], f);
 })(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "datetimepicker",
     name: "DateTimePicker",
     category: "web",
