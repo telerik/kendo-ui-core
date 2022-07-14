@@ -8,7 +8,7 @@ position: 1
 
 # Data Binding
 
-The Kendo UI PivotGridV2 supports data binding to an HTTP accessible Online Analytical Processing (OLAP) cube.
+The Kendo UI PivotGridV2 supports data binding to an HTTP-accessible Online Analytical Processing (OLAP) cube and to local arrays of data.
 
 ## OLAP Services
 
@@ -20,6 +20,12 @@ For more information on binding the PivotGridV2 to data over an OLAP cube, refer
 * [OLAP Cube Fundamentals]({% slug olap_fundamentals_pivotgridv2 %})
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgridv2 %})
 * [PivotConfigurator Overview]({% slug overview_kendoui_pivotconfiguratorv2 %})
+
+## Local Data
+
+The local data binding allows the PivotGridV2 to read data from a JavaScript array.
+
+For more information on binding the PivotGridV2 to local data, refer to the [Local Binding]({$ slug localbinding_kendoui_pivotgridv2 %}) article.
 
 ## See Also
 

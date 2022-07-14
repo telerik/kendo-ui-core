@@ -55,6 +55,7 @@ The following image demonstrates the output from the previous example.
 * [Comparison with the PivotGrid]({% slug comparison_kendoui_pivotgridv2 %})
 * [Templates]({% slug templates_kendoui_pivotgridv2 %})
 * [PDF export]({% slug pdfexport_kendoui_pivotgridv2 %})
+* [Filtering]({% slug filtering_kendoui_pivotgridv2 %})
 
 ## Referencing Existing Instances
 
