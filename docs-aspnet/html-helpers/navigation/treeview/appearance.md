@@ -22,6 +22,7 @@ The following values are available for the `Size` option:
 - `Small`—small size (applies the `k-treeview-sm` class to the wrapping div element)
 - `Medium`—medium size (applies the `k-treeview-md` class to the wrapping div element)
 - `Large`—large size (applies the `k-treeview-lg` class to the wrapping div element)
+- `Null`—unset.
 
 The default size value is `Medium`.
 

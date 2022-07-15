@@ -226,17 +226,17 @@ Specifies the url of the item - it will render `a` element and will navigate the
 
 Specifies a custom template for the menu items.
 
-### Example
+#### Example
 
     <button id="splitButton">Click me!</button>
     <script>
-        $("#splitButton1").kendoSplitButton({
+        $("#splitButton").kendoSplitButton({
             items: [
                 { text: "Item 1" },
                 { text: "Item 2" },
                 { text: "Item 3" }
             ],
-            itemTemplate: "<span class=\"k-link k-menu-link\"><strong>#:text#</strong></span>",
+            itemTemplate: "<span class=\"k-link k-menu-link\"><strong>#:text#</strong></span>"
         });
     </script>
 

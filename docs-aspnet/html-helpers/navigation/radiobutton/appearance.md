@@ -40,6 +40,7 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
+- `Null`
 
 The default size value is `Medium` and it is added as a class `k-radio-md` to the input element.
 

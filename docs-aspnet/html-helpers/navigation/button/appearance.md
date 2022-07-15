@@ -32,6 +32,7 @@ To control the size of the Button, configure the `Size` option with any of the f
 - `Small`
 - `Medium` - the default size
 - `Large`
+- `Null`
 
 ```HtmlHelper
 @(Html.Kendo().Button()
@@ -77,6 +78,7 @@ The following options are available for the `FillMode` configuration:
 - `Outline`
 - `Flat`
 - `Link`
+- `Null`
 
 ### ThemeColor
 
@@ -140,6 +142,7 @@ The following values are available for the `Rounded` option:
 - `Medium`
 - `Large`
 - `Full`
+- `Null`
 
 
 ## Old vs New Rendering

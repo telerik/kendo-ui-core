@@ -51,6 +51,7 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
+- `Null`
 
 
 ### Rounded
@@ -83,6 +84,7 @@ The `Rounded()` method supports the following values:
 - `Medium`
 - `Large`
 - `Full`
+- `Null`
 
 
 ### FillMode
@@ -116,6 +118,7 @@ The following values are available for the `FillMode` option:
 - `Solid`
 - `Flat`
 - `Outline`
+- `Null`
 
 
 ### Overflow
@@ -181,7 +184,7 @@ The following values are available for the `Resize` option:
 - `Both`
 - `Horizontal`
 - `Vertical`
-- `None`
+- `Null`
 
 
 ## Old vs New Rendering

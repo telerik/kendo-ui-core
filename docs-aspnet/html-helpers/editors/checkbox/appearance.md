@@ -46,6 +46,7 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
+- `Null`
 
 The default size value is `Medium` and it is added as a class `k-checkbox-md` to the input element.
 
@@ -88,6 +89,7 @@ The following values are available for the `Rounded` option:
 - `Small`
 - `Medium`
 - `Large`
+- `Null`
 
 The default value is `Medium` and it is added as a class `k-roundend-md` to the input element.
 

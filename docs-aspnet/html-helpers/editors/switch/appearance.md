@@ -55,6 +55,7 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
+- `Null`
 
 ### TrackRounded
 
@@ -87,6 +88,7 @@ The option adds a class `k-rounded-full` to the `span.k-switch-track` element th
 - `Medium`
 - `Large`
 - `Full`
+- `Null`
 
 
 ### ThumbRounded
@@ -118,6 +120,7 @@ The option adds a class `k-rounded-full` to the `span.k-switch-thumb` element fo
 - `Medium`
 - `Large`
 - `Full`—the default value
+- `Null`
 
 
 ## Old vs New Rendering

@@ -49,6 +49,7 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
+- `Null`
 
 The default size value is `Medium` and it is applied to the wrapping span element through the `k-input-md` class.
 
@@ -81,6 +82,7 @@ The following values are available for the `Rounded` option:
 - `Medium`
 - `Large`
 - `Full`
+- `Null`
 
 The default value is `Medium` and it is added as a class `k-rounded-md` to the wrapping span element.
 
@@ -112,6 +114,7 @@ The following values are available for the `FillMode` option:
 - `Solid`
 - `Flat`
 - `Outline`
+- `Null`
 
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 
