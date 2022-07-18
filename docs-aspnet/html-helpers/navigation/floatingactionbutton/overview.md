@@ -142,9 +142,9 @@ The following example demonstrates how to subscribe to the FloatingActionButton 
 
 ## See Also
 
-* [Overview of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/index)
+* [Overview of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton)
 {% if site.core %}
-* [Basic Usage of the FloatingActionButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/floatingactionbutton/tag-helper)
+* [Basic Usage of the FloatingActionButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/floatingactionbutton/taghelper)
 {% endif %}
 * [Using the API of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/api)
 * [Server-Side API](/api/floatingactionbutton)
