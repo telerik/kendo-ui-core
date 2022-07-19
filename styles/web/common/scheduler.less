@@ -805,17 +805,28 @@ div.k-scheduler-marquee:after
     }
 }
 
-.k-edit-field > ul.k-reset .k-numerictextbox,
-.k-edit-field span.k-recur-interval
+.k-form-field-wrap .k-button-group {
+    margin: @form-field-margin;
+}
+
+.k-form-field > ul.k-reset .k-numerictextbox,
+.k-form-field .k-recur-interval,
+.k-form-field .k-recur-monthday
 {
     width: 5em;
 }
 
-.k-edit-field > ul.k-reset .k-dropdownlist,
-.k-edit-field > ul.k-reset .k-datepicker,
+.k-form-field > ul.k-reset .k-dropdownlist,
+.k-form-field > ul.k-reset .k-datepicker,
 div[name="recurrenceRule"] > .k-dropdownlist
 {
     width: 9em;
+}
+
+.k-form-field .k-radio-item {
+    display: flex;
+    gap: 4px;
+    align-items: center;
 }
 
 .k-scheduler-edit-form .k-edit-buttons .k-scheduler-delete,

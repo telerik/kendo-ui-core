@@ -215,26 +215,6 @@ Sets a value controlling how the resize is applied. Can also be set to the follo
     });
     </script>
 
-### resizable `String` *(default: "none")*
-
-Defines if (and how) the widget is resizable by the user.
-
-Can also be set to the following string values:
-
-- "none" - default value. The user cannot resize the widget.
-- "both" - the user can resize both the height and width of the widget.
-- "horizontal" - the user can resize the width of the widget.
-- "vertical" - the user can resize the height of the widget.
-
-#### Example - make both height and width resizable
-
-    <textarea id="description"></textarea>
-    <script>
-        $("#description").kendoTextArea({
-                resizable: "both"
-        })
-    </script>
-
 ### rows `Number` *(default: 1)*
 
 The number of visible text lines for the control.

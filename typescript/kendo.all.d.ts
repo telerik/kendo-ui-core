@@ -11335,7 +11335,6 @@ declare namespace kendo.ui {
         maxLength?: number | undefined;
         placeholder?: string | undefined;
         readonly?: boolean | undefined;
-        resizable?: string | undefined;
         rows?: number | undefined;
         value?: string | undefined;
         fillMode?: string | undefined;
