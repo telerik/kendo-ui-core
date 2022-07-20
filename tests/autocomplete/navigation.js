@@ -28,6 +28,39 @@ var getData = function(length) {
     return result;
 };
 
+it("pressing alt + down should open popup", function(done) {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"]
+    });
+
+    input.focus().val("f");
+    autocomplete.search();
+    autocomplete.close();
+
+    autocomplete.popup.bind("open", function() {
+        assert.isOk(true);
+        done();
+    });
+
+    input.trigger({ type: "keydown", altKey: true, keyCode: kendo.keys.DOWN });
+});
+
+it("pressing alt + up should close popup", function(done) {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"]
+    });
+
+    input.focus().val("f");
+    autocomplete.search();
+
+    autocomplete.popup.bind("close", function() {
+        assert.isOk(true);
+        done();
+    });
+
+    input.trigger({ type: "keydown", altKey: true, keyCode: kendo.keys.UP });
+});
+
 it("pressing down focuses the first item in the popup", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"]

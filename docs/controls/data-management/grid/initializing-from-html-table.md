@@ -1,14 +1,14 @@
 ---
 title: Initializing from an HTML Table
-page_title: jQuery Grid Documentation | Initializing the Grid from an HTML Table
+page_title: jQuery Grid Documentation | Initializing from an HTML Table
 description: "Get started with the jQuery Grid by Kendo UI and learn about the alternative way to initialize the widget from an HTML table."
 slug: html_table_kendoui_grid_widget
 position: 2
 ---
 
-# Initializing the Grid from an HTML Table 
+# Initializing the Grid from an HTML Table
 
-In addition to the more common way to create the Grid from an empty `div` element, you can alternatively initialize it from an HTML table. 
+Apart from [creating the Grid from an empty `div` element]({% slug getting_started_kendoui_grid_widget %}), you can initialize it from an HTML table. 
 
 When you initialize the Grid from an HTML table, you can infer some of its settings from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table. 
 

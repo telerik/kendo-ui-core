@@ -12,7 +12,55 @@ This guide demonstrates how to get up and running with the Kendo UI for jQuery G
 
 After the completion of this guide, you will be able to achieve the following end result:
 
-![Grid with Basic Configuration](grid-basic.png)
+```dojo
+    <div id="my-grid"></div>
+
+    <script>
+      let myDataArray = [
+        {ID: 1, Name: "Tom", Date: "10/15/2022"},
+        {ID: 2, Name: "John", Date: "11/25/2022"},
+        {ID: 3, Name: "Annie", Date: "05/09/2022"},
+        {ID: 4, Name: "Rachel", Date: "08/06/2022"},
+        {ID: 5, Name: "Klemens", Date: "10/07/2022"},
+        {ID: 6, Name: "Micah", Date: "05/19/2022"},
+        {ID: 7, Name: "Junie", Date: "04/04/2022"},
+        {ID: 8, Name: "Krishnah", Date: "07/19/2022"},
+        {ID: 9, Name: "Enrichetta", Date: "01/11/2022"},
+        {ID: 10, Name: "Marten", Date: "02/13/2022"},
+        {ID: 11, Name: "Rosmunda", Date: "08/15/2022"},
+      ];
+
+      // Target the div element by using jQuery and then call the kendoGrid() method.
+      $("#my-grid").kendoGrid({
+        width: "700px",
+        height: "400px",
+        columns: [
+          // The field matches the ID property in the data array.
+          { field: "ID", title: "Personal Id", width: "70px" },
+          { field: "Name", title: "First Name", width: "150px" },
+          { field: "Date", title: "Hire Date", width: "200px", format: "{0:dd-MM-yyyy}" }
+        ],
+        toolbar: ["create", "save"],
+        // Enable the filtering functionality.
+        filterable: true,
+        // Enable the editing functionality (incell by default).
+        editable: true,
+        dataSource: {
+          data: myDataArray,
+          schema: {
+            model: {
+              id: "ID", // The ID field is a unique identifier that allows the dataSource to distinguish different elements.
+              fields: {
+                ID: { type: "number", editable: false }, // The ID field in this case is a number. Additionally, do not allow users to edit this field.
+                Name: { type: "string" },
+                Date: { type: "date" }
+              }
+            }
+          }
+        }
+      });
+    </script>
+```
 
 ## 1. Create an Empty div Element
 
@@ -188,72 +236,18 @@ Among other functionalities, the Grid supports editing and filtering. The [editi
 </script>
 ```
 
-## Reference Existing Grid Instances
+## Next Steps 
 
-To refer to an existing Grid instance:
-
-1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
-1. Once a reference is established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
-
-        var grid = $("#grid").data("kendoGrid");
-
-## Demo
-
-The following example showcases the full implementation of the previous steps.
-
-```dojo
-    <div id="my-grid"></div>
-
-    <script>
-      let myDataArray = [
-        {ID: 1, Name: "Tom", Date: "10/15/2022"},
-        {ID: 2, Name: "John", Date: "11/25/2022"},
-        {ID: 3, Name: "Annie", Date: "05/09/2022"},
-        {ID: 4, Name: "Rachel", Date: "08/06/2022"},
-        {ID: 5, Name: "Klemens", Date: "10/07/2022"},
-        {ID: 6, Name: "Micah", Date: "05/19/2022"},
-        {ID: 7, Name: "Junie", Date: "04/04/2022"},
-        {ID: 8, Name: "Krishnah", Date: "07/19/2022"},
-        {ID: 9, Name: "Enrichetta", Date: "01/11/2022"},
-        {ID: 10, Name: "Marten", Date: "02/13/2022"},
-        {ID: 11, Name: "Rosmunda", Date: "08/15/2022"},
-      ];
-
-      // Target the div element by using jQuery and then call the kendoGrid() method.
-      $("#my-grid").kendoGrid({
-        width: "700px",
-        height: "400px",
-        columns: [
-          // The field matches the ID property in the data array.
-          { field: "ID", title: "Personal Id", width: "70px" },
-          { field: "Name", title: "First Name", width: "150px" },
-          { field: "Date", title: "Hire Date", width: "200px", format: "{0:dd-MM-yyyy}" }
-        ],
-        toolbar: ["create", "save"],
-        // Enable the filtering functionality.
-        filterable: true,
-        // Enable the editing functionality (incell by default).
-        editable: true,
-        dataSource: {
-          data: myDataArray,
-          schema: {
-            model: {
-              id: "ID", // The ID field is a unique identifier that allows the dataSource to distinguish different elements.
-              fields: {
-                ID: { type: "number", editable: false }, // The ID field in this case is a number. Additionally, do not allow users to edit this field.
-                Name: { type: "string" },
-                Date: { type: "date" }
-              }
-            }
-          }
-        }
-      });
-    </script>
-```
-
+* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Demo Page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
 
 ## See Also 
 
-* [Demo Page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)
+
+<script>
+  window.onload = function() {
+    document.getElementsByClassName("btn-run")[0].click();
+  }
+</script>

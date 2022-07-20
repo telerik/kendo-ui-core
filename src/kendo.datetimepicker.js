@@ -674,12 +674,18 @@ var __meta__ = {
                 timeView = that.timeView,
                 value = that.element.val(),
                 isDateViewVisible = that.options.singlePopup ? that.popup.visible() : dateView.popup.visible();
+
             var stopPropagation = that._dateInput && e.stopImmediatePropagation;
+
             if (e.altKey && e.keyCode === kendo.keys.DOWN) {
                 that.toggle(isDateViewVisible ? "time" : "date");
             } else if (isDateViewVisible) {
                 dateView.move(e);
                 that._updateARIA(dateView._current);
+
+                if (e.keyCode === kendo.keys.ENTER) {
+                    that.toggle("time");
+                }
             } else if (!that.options.singlePopup && timeView.popup.visible()) {
                 timeView.move(e);
             } else if (e.keyCode === kendo.keys.ENTER && value !== that._oldText) {

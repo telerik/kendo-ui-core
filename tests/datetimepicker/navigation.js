@@ -139,6 +139,20 @@
             assert.isOk(datetimepicker.timeView.popup.visible());
         });
 
+        it("DateTimePicker opens TimeView when press ENTER while DateView is open", function() {
+            var datetimepicker = new DateTimePicker(input);
+
+            datetimepicker.open("date");
+
+            input.focus().trigger({
+                type: "keydown",
+                keyCode: kendo.keys.ENTER
+            });
+
+            assert.isOk(!datetimepicker.dateView.popup.visible());
+            assert.isOk(datetimepicker.timeView.popup.visible());
+        });
+
         it("DateTimePicker closes DateView when press ALT + UP", function() {
             var datetimepicker = new DateTimePicker(input);
 
