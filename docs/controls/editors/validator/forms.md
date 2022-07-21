@@ -3,7 +3,7 @@ title: HTML5 Form Constraints
 page_title: jQuery Validator Documentation | HTML5 Form Constraints
 description: "Get started with the jQuery Validator by Kendo UI and use the HTML5 form validation attributes."
 slug: forms_kendoui_validator
-position: 2
+position: 3
 ---
 
 # HTML5 Form Constraints

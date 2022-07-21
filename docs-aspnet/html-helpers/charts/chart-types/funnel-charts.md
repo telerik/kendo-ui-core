@@ -59,6 +59,37 @@ The following example demonstrates how to base the widths of the bases for each 
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+    <kendo-chart name="chart-oct">
+        <series>
+            <series-item type="ChartSeriesType.Funnel"
+                        dynamic-slope="true"
+                        dynamic-height="false"
+                        data="new dynamic[]{
+                                    new {
+                                        value= 40
+                                    },
+                                    new {
+                                        value= 80
+                                    },
+                                    new {
+                                        value= 40,
+                                    },
+                                    new {
+                                        value= 10,
+                                    }
+                                }">
+                <labels visible="true">
+                </labels>
+            </series-item>
+        </series>
+    </kendo-chart>
+    
+```
+{% endif %}
 
 ![Basing the segment widths on the ratio in the Funnel Chart](images/funnel-dynamicslope.png)
 

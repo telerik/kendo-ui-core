@@ -3,7 +3,7 @@ title: Appearance
 page_title: jQuery DatePicker Documentation | DatePicker Appearance
 description: "Learn how to apply different styling options to the DatePicker widget."
 slug: appearance_kendoui_datepicker_widget
-position: 3
+position: 4
 ---
 
 # DatePicker Appearance

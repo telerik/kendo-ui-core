@@ -3,7 +3,7 @@ title: Validation Rules
 page_title: jQuery Validator Documentation | Validation Rules
 description: "Get started with the jQuery Validator by Kendo UI and use the default validation rules or implement your custom rules and error messages."
 slug: rules_kendoui_validator
-position: 3
+position: 4
 ---
 
 # Validation Rules

@@ -43,14 +43,18 @@ The following example demonstrates how to center and open a Kendo UI for jQuery 
     </kendo-button>
 ```
 {% endif %}
+```JavaScript
 
-The following example demonstrates how to center and open the Window upon button click.
+    <script>
+        function onClick(e) {
+            var win = $("#window").data("kendoWindow");
+            win.center().open();
+        }
+    </script>
 
-    function onClick(e) {
-        var win = $("#window").data("kendoWindow");
-        win.center().open();
-    }
+```
 
 ## See Also
 
 * [Server-Side API](/api/window)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/window)

@@ -32,7 +32,6 @@ After the completion of this guide, you will be able to achieve the following en
 
       // Target the div element by using jQuery and then call the kendoGrid() method.
       $("#my-grid").kendoGrid({
-        width: "700px",
         height: "400px",
         columns: [
           // The field matches the ID property in the data array.

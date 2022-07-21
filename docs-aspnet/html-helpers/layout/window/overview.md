@@ -112,6 +112,12 @@ The following example demonstrates the basic configuration of the Window.
 * [Loading content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
 * [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})
 * [Integration with forms]({% slug htmlhelpers_window_forms_aspnetcore %})
+{% if site.core %}
+* [Razor Page configuration]({% slug htmlhelpers_window_razorpage_aspnetcore %})
+{% endif %}
+* [Custom actions]({% slug htmlhelpers_window_customactions_aspnetcore %})
+* [Animations]({% slug htmlhelpers_window_animations_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_window %})
 
 ## Events
 
@@ -129,19 +135,14 @@ The following example demonstrates how to subscribe to events by handler name.
             .Close("window_close")
         )
     )
-    <script>
-        function window_open() {
-            // Handle the open event.
-        }
-
-        function window_close() {
-            // Handle the close event.
-        }
-    </script>
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-window name="window" on-open="window_open" on-close="window_close"></kendo-window>
+    <kendo-window name="window" on-open="window_open" on-close="window_close">
+    </kendo-window>
+```
+{% endif %}
+```JavaScript
     <script>
         function window_open() {
             // Handle the open event.
@@ -151,8 +152,8 @@ The following example demonstrates how to subscribe to events by handler name.
             // Handle the close event.
         }
     </script>
+
 ```
-{% endif %}
 
 ### Handling by Template Delegate
 

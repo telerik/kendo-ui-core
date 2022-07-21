@@ -3,7 +3,7 @@ title: Templates
 page_title: jQuery DatePicker Documentation | Templates
 description: "Get started with the jQuery DatePicker by Kendo UI and learn how to customize its templates."
 slug: templates_datepicker
-position: 9
+position: 12
 ---
 
 # Templates

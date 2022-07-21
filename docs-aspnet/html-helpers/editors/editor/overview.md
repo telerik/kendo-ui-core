@@ -97,6 +97,42 @@ You can adjust and set up the tools in the tools collection through the `tools` 
 	</kendo-editor>
 ```
 
+The example below illustrates how to bind the Editor to a Model property that is passed to the View.
+
+```HtmlHelper
+    @model ProductViewModel
+
+    @(Html.Kendo().EditorFor(m => m.ProductName)
+        .Tools(tools => tools
+            .Clear()
+            .Bold()
+            .Italic()
+            .Underline()
+            .FontName()
+        )
+    )
+```
+```TagHelper
+    @model ProductViewModel
+    <kendo-editor for="@Model.ProductName">
+        <tools>
+            <tool name="bold" />
+            <tool name="italic" />
+            <tool name="underline" />
+            <tool name="fontName" />
+        </tools>
+    </kendo-editor>
+```
+```Controller
+
+    public IActionResult Index()
+    {
+        ProductViewModel product = new ProductViewModel() { ProductName = "Name 1" };
+        return View(product);
+    }
+
+```
+
 {% else %}
 The following example demonstrates the basic configuration of the Editor.
 

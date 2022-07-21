@@ -3,7 +3,7 @@ title: Input Value Validation
 page_title: jQuery DatePicker Documentation | Input Value Validation
 description: "Get started with the jQuery DatePicker by Kendo UI and learn how to implement validation rules for its input value."
 slug: validation_datepicker
-position: 5
+position: 7
 ---
 
 # Input Value Validation

@@ -23,33 +23,9 @@ To control the selection in the Grid, use the `Selectable` property.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550" on-change="onChange" selectable="true">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
-            </transport>
-        </datasource>
-        <groupable enabled="true" />
-        <sortable enabled="true" />
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-        </pageable>
-
-        <filterable enabled="true" />
-        <columns>
-            <column field="ContactName" title="Contact Name" width="240" />
-            <column field="ContactTitle" title="Contact Title" />
-            <column field="CompanyName" title="Company Name" />
-            <column field="Country" title="Country" width="150" />
-        </columns>
+    <kendo-grid name="rowSelection" selectable="multiple">
+        <!--Other configuration-->
     </kendo-grid>
-
-    <script>
-        function onChange(e) {
-            var selectedRow = this.select();
-            var dataItem = this.dataItem(selectedRow);
-            console.log(dataItem)
-        }
-    </script>
 ```
 {% endif %}
 
@@ -71,33 +47,9 @@ You can set the select mode to `Multiple` or `Single`. Additionally, the Grid pr
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550" on-change="onChange" selectable="multiple, cell">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
-            </transport>
-        </datasource>
-        <groupable enabled="true" />
-        <sortable enabled="true" />
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-        </pageable>
-
-        <filterable enabled="true" />
-        <columns>
-            <column field="ContactName" title="Contact Name" width="240" />
-            <column field="ContactTitle" title="Contact Title" />
-            <column field="CompanyName" title="Company Name" />
-            <column field="Country" title="Country" width="150" />
-        </columns>
+    <kendo-grid name="cellSelection" selectable="multiple,cell">
+        <!--Other configuration-->
     </kendo-grid>
-
-    <script>
-        function onChange(e) {
-            var selectedRow = this.select();
-            var dataItem = this.dataItem(selectedRow);
-            console.log(dataItem)
-        }
-    </script>
 ```
 {% endif %}
 
@@ -117,7 +69,8 @@ The Grid allows conditional drag to select when multiple selection is configured
 {% if site.core %}
 ```TagHelper
        <kendo-grid name="cellSelection">
-             <selectable dragToSelect="false" mode="multiple, row"/>
+             <selectable dragToSelect="false" mode="multiple,row"/>
+             <!--Other configuration-->
        </kendo-grid>      
 ```
 {% endif %}
@@ -136,43 +89,15 @@ The Grid also provides a built-in functionality for persisting the selection thr
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550" on-change="onChange" persist-selection="true">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
-            </transport>
-                <schema>
-                <model id="CustomerID">
-                    <fields>
-                        <field name="ContactName" type="string"></field>
-                        <field name="ContactTitle" type="string"></field>
-                        <field name="CompanyName" type="string"></field>
-                        <field name="Country" type="string"></field>
-                    </fields>
-                </model>
+    <kendo-grid name="grid" persist-selection="true" selectable="true">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+            <schema>
+                <model id="OrderID"></model>
             </schema>
+            <!--Other DataSource configuration-->
         </datasource>
-        <groupable enabled="true" />
-        <sortable enabled="true" />
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-        </pageable>
-
-        <filterable enabled="true" />
-        <columns>
-            <column field="ContactName" title="Contact Name" width="240" />
-            <column field="ContactTitle" title="Contact Title" />
-            <column field="CompanyName" title="Company Name" />
-            <column field="Country" title="Country" width="150" />
-        </columns>
+        <!--Other configuration-->
     </kendo-grid>
-
-    <script>
-        function onChange(e) {
-            var selectedRow = this.select();
-            var dataItem = this.dataItem(selectedRow);
-            console.log(dataItem)
-        }
-    </script>
 ```
 {% endif %}
 
@@ -185,22 +110,29 @@ To get data from the selected rows, use the `Change` event of the Grid
     ```HtmlHelper
         .Events(ev => ev.Change("onChange"))
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid" on-change="onChange">
+            <!--Other configuration-->
+        </kendo-grid>
+    ```
+    {% endif %}
+
 
 1. Declare the event handler and access the selected data items.
 
-            <script>
-            function onChange(e) {
-                var selectedRows = this.select();
-                var selectedDataItems = [];
-                for (var i = 0; i < selectedRows.length; i++) {
-                    var dataItem = this.dataItem(selectedRows[i]);
-                    selectedDataItems.push(dataItem);
-                }
-
-                // selectedDataItems contains all selected data items
-                console.log(selectedDataItems);
+    <script>
+        function onChange(e) {
+            var selectedRows = this.select(); //Get the selected Grid rows.
+            var selectedDataItems = [];
+            for (var i = 0; i < selectedRows.length; i++) { //Loop through the selected row elements.
+                var dataItem = this.dataItem(selectedRows[i]); //Get the dataItem of each row.
+                selectedDataItems.push(dataItem); //Store the dataItem of each selected row in the array.
             }
-            </script>
+
+            console.log(selectedDataItems); // "selectedDataItems" contains all selected data items.
+        }
+    </script>
 
 ## See Also
 

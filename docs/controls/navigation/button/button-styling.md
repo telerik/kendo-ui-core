@@ -4,7 +4,7 @@ page_title: jQuery Button Documentation | Appearance
 description: "Learn how to apply different styling options to the Button widget."
 previous_url: /styles-and-layout/styling-components/button-styling
 slug: button_styling_widget
-position: 2
+position: 3
 ---
 
 # Appearance
