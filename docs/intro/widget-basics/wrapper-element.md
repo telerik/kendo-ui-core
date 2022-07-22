@@ -1,6 +1,6 @@
 ---
 title: Widget DOM Element References
-page_title: Widget DOM Element References | Working with Widgets | Kendo UI for jQuery
+page_title: Widget DOM Element References | Working with Widgets 
 description: "Get started with Kendo UI for jQuery and obtain a reference to the wrapper and element DOM elements provided by each the widgets."
 previous_url: /framework/widgets/wrapper-element
 slug: widgetwrapperandelement_references_gettingstarted

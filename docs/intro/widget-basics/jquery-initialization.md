@@ -1,7 +1,7 @@
 ---
 title: Initializing as jQuery Plugins
-page_title: Initializing as jQuery Plugins | Working with Widgets | Kendo UI for jQuery
-previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization
+page_title: Initializing as jQuery Plugins | Working with Widgets 
+previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization, /intro/widget-basics/angularjs-initialization
 description: "Get started with Kendo UI for jQuery and use the jQuery plugin syntax to add the widgets and framework components to your mobile website or web application."
 slug: initialize_widgets_using_jquery_plugins_installation
 position: 2

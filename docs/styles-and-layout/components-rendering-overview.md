@@ -106,7 +106,8 @@ The following table showcases the old and updated versions of the Kendo state cl
 | Component              | Appearance Documentation                                                                                 |
 |:-----------------------|:---------------------------------------------------------------------------------------------------------|
 | `AutoComplete`         | [AutoComplete Appearance Documentation]({% slug sizedimensions_kendoui_autocomplete %})                  |
-| `Button`               | [Button Appearance Documentation]({% slug button_styling_widget %})                                             |
+| `Avatar`               | [Avatar Appearance Documentation]({% slug appearance_kendoui_avatar_widget %})                  |
+| `Button`               | [Button Appearance Documentation]({% slug button_styling_widget %})                                      |
 | `ColorPicker`          | [ColorPicker Appearance Documentation]({% slug appearance_kendoui_colorpicker_widget %})                 |
 | `ComboBox`             | [ComboBox Appearance Documentation]({% slug appearance_kendoui_combobox %})                              |
 | `DateInput`            | [DateInput Appearance Documentation]({% slug appearance_kendoui_dateinput_widget %})                     |

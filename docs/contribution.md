@@ -1,6 +1,6 @@
 ---
 title: Contribution
-page_title: Contribution | Kendo UI for jQuery by Progress
+page_title: Contribution  by Progress
 description: "Share with us your suggestions and feedback on the Kendo UI jQuery documentation to make it even better."
 previous_url: /contribution-to-documents, /updates/2016-doc-updates, /updates/2017-doc-updates, /updates/contribution-to-documents, /backwards-compatibility/contribution-to-documents
 slug: helpimprove_ourdocumentation_kendoui

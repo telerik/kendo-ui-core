@@ -1,6 +1,6 @@
 ---
 title: Cannot Install Kendo UI from Bower
-page_title: Having Problem with Bower Installation | Kendo UI for jQuery
+page_title: Having Problem with Bower Installation 
 description: Kendo UI fails to authenticate and install.
 type: troubleshooting
 slug: bower-credentials-authentication-failed-kendo-ui-professional

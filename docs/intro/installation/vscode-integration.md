@@ -1,6 +1,6 @@
 ---
 title: Visual Studio Code Integration
-page_title: Visual Studio Code Integration | Download and Installation | Kendo UI for jQuery
+page_title: Visual Studio Code Integration | Download and Installation 
 description: "Learn how to easily create web applications with Kendo UI for jQuery in Visual Studio Code."
 slug: kendoui_vscode_integration
 position: 70
@@ -12,30 +12,31 @@ The **Kendo UI Productivity Tools for Visual Studio Code** is an extension for <
 
 As its primary advantage, the VS Code extension facilitates the creation of projects through a wizard directly in Visual Studio Code.
 
-## Get the Extension
+## 1. Get the Extension
 
-You can get the extension:
+You can get the extension in either of the following ways:
 
-* from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=KendoUI.kendotemplatewizard)
+* Go to the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=KendoUI.kendotemplatewizard).
+* In VS Code, open the **Extensions** tab, search for **Kendo UI Productivity Tools**, and click **Install**.
 
-* by opening the **Extensions** tab in Visual Studio Code, then searching for **Kendo UI Productivity Tools** and clicking **Install**
-
-## Create a Project
+## 2. Create the Kendo UI Project
 
 To create a Kendo UI for jQuery project:
 
-1. Press `Ctrl`+`Shift`+`P` in Windows/Linux or `Cmd`+`Shift`+`P` on Mac to open the VSCode extension launcher.
-
+1. Press `Ctrl`+`Shift`+`P` (for Windows or Linux), or `Cmd`+`Shift`+`P` (on Mac) to open the VSCode extension launcher.
 1. Type/Select `Kendo UI Template Wizard: Launch` and press `Enter` to launch the extension.
 
     ![launch Kendo UI Template extension](../../images/launch-extension.png)
 
 1. Enter a project name and select the location.
+
     ![choose project location](../../images/create-project-jq.png)
 
 1. Choose the desired template.
 
-   Kendo UI Template Wizard for Visual Studio Code comes with several built-in templates for some of the most popular components like Grid, Chart, and Form. These templates allow you to add pages with these widgets with a single click. Additionally, you can create a **Blank** project and the extensions will generate a page with all of the necessary stylesheets and a single heading element.
+   The Kendo UI Template Wizard for Visual Studio Code comes with several built-in templates for some of the most popular components like Grid, Chart, and Form. These templates allow you to add pages by using the widgets with a single click. 
+   
+   Additionally, you can create a **Blank** project and the extensions will generate a page with all of the necessary stylesheets and a single heading element.
    
    ![choose pages in Kendo UI for jQuery project](../../images/vscode-wizard-select-pages.png)
 
@@ -49,10 +50,10 @@ To create a Kendo UI for jQuery project:
 
 1. Run the project:
 
-   1. Install the npm dependencies by typing *npm install* in the terminal.
-   1. Run the application by typing *npm start* in the terminal.
+   1. Install the NPM dependencies by typing `npm install` in the terminal.
+   1. Run the application by typing `npm start` in the terminal.
 
-## Project Structure
+## 3. Check the Project Structure
 
 * The HTML files are located in the `pages` folder of the project. 
 * The script files are located in the `src` folder of the project.
@@ -60,7 +61,7 @@ To create a Kendo UI for jQuery project:
 
 >The scripts are automatically injected into the HTML pages only if the script name matches the page name. For example, if the page is called `MyPage.html`, then the script file in the `src` folder must be called `MyPage.js`.
 
-## Kendo UI for jQuery Snippets in Visual Studio Code
+## 4. Generate the Snippets
 
 The Kendo UI Productivity Tools for Visual Studio Code extension can generate code snippets with sample configuration for the Kendo UI widgets. To add a code snippet for a Kendo UI widget:
 
@@ -70,5 +71,6 @@ The Kendo UI Productivity Tools for Visual Studio Code extension can generate co
 
 ## See Also
 
-* [Download and Installation Overview]({% slug overviewdownload_kendoui %})
+* [First Steps with Kendo UI for jQuery]({% slug getting_started_installation_kendoui %})
+* [Downloading the Bundles]({% slug hosting_kendoui %})
 * [Using Script License Code]({% slug using-license-code %})

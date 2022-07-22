@@ -50,7 +50,7 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
-- `Null`
+- `None`
 
 
 ### Rounded
@@ -83,7 +83,7 @@ The option is applied to the wrapping span element through the `k-rounded-md` cl
 - `Medium`
 - `Large`
 - `Full`
-- `Null`
+- `None`
 
 
 ### FillMode
@@ -115,7 +115,7 @@ The following values are available for the `FillMode` option:
 - `Solid`
 - `Flat`
 - `Outline`
-- `Null`
+- `None`
 
 
 ## Old vs New Rendering

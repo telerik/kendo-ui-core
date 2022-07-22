@@ -2,7 +2,7 @@
 title: Incorrect Drop-Down Position with jQuery 2
 description: When the page is scrolled, the position of the drop-down is incorrect and is detached from the element.
 type: troubleshooting
-page_title: Incorrect Drop-Down Position with Scrolled Pages | Kendo UI for jQuery
+page_title: Incorrect Drop-Down Position with Scrolled Pages 
 slug: dropdown-position-incorrect-with-scroll
 ticketid: 1398729, 1387564
 res_type: kb

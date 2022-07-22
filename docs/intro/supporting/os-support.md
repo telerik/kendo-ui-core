@@ -1,6 +1,6 @@
 ---
 title: Operating System Support
-page_title: Operating System Support | Support and Distribution | Kendo UI for jQuery
+page_title: Operating System Support | Support and Distribution 
 description: "Get started with Kendo UI for jQuery and learn which are the operating systems that are supported by the framework components."
 slug: ossupport_kendo
 position: 2

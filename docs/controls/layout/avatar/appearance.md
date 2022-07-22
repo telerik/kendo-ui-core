@@ -26,7 +26,7 @@ The available [`rounded`](/api/javascript/ui/avatar/configuration/rounded) value
 - "small"—Renders an avatar with small border radius.
 - "medium"—Renders an avatar with meduim border radius.
 - "large"—Renders an avatar with large border radius.
-- null—Renders an avatar with no border radius (square avatar).
+- "none"—Renders an avatar with no border radius (square avatar).
 
 The following example demonstrates the `type` and `rounded` options of the Avatar:
 
@@ -50,19 +50,19 @@ The Аvatar allows you to specify predefined theme colors.
 
 The available [themeColor](/api/javascript/ui/avatar/configuration/themeColor) values are:
 
-- primary (Default)—Applies coloring based on the primary theme color.
-- base-Applies base theme color.
-- secondary—Applies coloring based on the secondary theme color.
-- tertiary—Applies coloring based on the tertiary theme color.
-- inherit—Applies the inherited coloring value.
-- info—Applies coloring based on the info theme color.
-- success—Applies coloring based on the success theme color.
-- warning—Applies coloring based on the warning theme color.
-- error—Applies coloring based on the error theme color.
-- dark—Applies coloring based on the dark theme color.
-- light—Applies coloring based on the light theme color.
-- inverse—Applies coloring based on the inverted theme color.
-- null-will apply no theme color class.
+- "primary" (Default)—Applies coloring based on the primary theme color.
+- "base"-Applies base theme color.
+- "secondary"—Applies coloring based on the secondary theme color.
+- "tertiary"—Applies coloring based on the tertiary theme color.
+- "inherit"—Applies the inherited coloring value.
+- "info"—Applies coloring based on the info theme color.
+- "success"—Applies coloring based on the success theme color.
+- "warning"—Applies coloring based on the warning theme color.
+- "error"—Applies coloring based on the error theme color.
+- "dark"—Applies coloring based on the dark theme color.
+- "light"—Applies coloring based on the light theme color.
+- "inverse"—Applies coloring based on the inverted theme color.
+- "none"-will apply no theme color class.
 
 ```dojo
     <div id="avatar"></div>
@@ -85,7 +85,7 @@ The available [`size`](/api/javascript/ui/avatar/configuration/size) values are:
 - "small"
 - "medium" (Default)
 - "large"
-- null
+- "none"
 
 To specify a custom avatar size, use the [style](/api/javascript/ui/avatar/configuration/style) property.
 
@@ -110,7 +110,7 @@ The available [fillMode](/api/javascript/ui/avatar/configuration/fillMode) value
 
 - "solid" (Default)
 - "outline"
-- null
+- "none"
 
 An additional border around the content of an outline avatar can be rendered by setting the [`border`](/api/javascript/ui/avatar/configuration/border) property to true.
 

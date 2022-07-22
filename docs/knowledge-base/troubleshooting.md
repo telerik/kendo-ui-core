@@ -1,6 +1,6 @@
 ---
 title: Grid Troubleshooting on Editing
-page_title: Grid Troubleshooting on Editing | Kendo UI for jQuery
+page_title: Grid Troubleshooting on Editing 
 description: "Troubleshoot any issues that might occur while editing the data of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/editing/troubleshooting
 slug: edittroubleshoot_kendoui_grid_widget

@@ -38,7 +38,7 @@ The `Rounded` property can be configured via the `Rounded` enumeration. The avai
 - `Small` — Renders an avatar with small border radius.
 - `Medium` — Renders an avatar with meduim border radius.
 - `Large` — Renders an avatar with large border radius.
-- `Null` — Renders an avatar with no border radius (square avatar).
+- `None` — Renders an avatar with no border radius (square avatar).
 
 The following example demonstrates the `Rounded` option of the Avatar:
 
@@ -86,7 +86,7 @@ The Avatar allows you to set predefined or custom sizes. The `Size` property can
 - `Small`
 - `Medium` (Default)
 - `Large`
-- `Null`
+- `None`
 
 ```
     @(Html.Kendo().Avatar()
@@ -103,7 +103,7 @@ The Avatar enables you to set styling options and create solid or outline avatar
 
 - `Solid` (Default)
 - `Outline`
-- `Null`
+- `None`
 
 ```
     @(Html.Kendo().Avatar()

@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Charts
-page_title: Individual Scripts for Charts | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Charts | Scripts 
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Charts"
 slug: script_filesfor_charts_widgets
 ---

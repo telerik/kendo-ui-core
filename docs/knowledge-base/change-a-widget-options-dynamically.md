@@ -1,6 +1,6 @@
 ---
 title: Change Options of Widgets Dynamically
-page_title: Change the Options of a Widget Programmatically | Kendo UI for jQuery
+page_title: Change the Options of a Widget Programmatically 
 description: An example on how to change the options of the Kendo UI Grid dynamically.
 type: how-to
 slug: change-a-widget-options-dynamically

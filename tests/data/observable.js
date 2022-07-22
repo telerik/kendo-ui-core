@@ -61,5 +61,41 @@
             // There are 3 injected properties from the ObservableObject
             assert.isOk(wrappedKeys.length === 3);
         });
+
+        it("observable preserves toString methods when declared", function() {
+            function Hero(name) {
+                this.name = name;
+            }
+
+            Hero.prototype = {
+                toString: function() {
+                    return this.name;
+                }
+            };
+
+            var observable = kendo.observable(new Hero("Hero"));
+            var wrappedKeys = Object.keys(observable);
+
+            assert.equal(wrappedKeys.length, 5);
+            assert.isOk(observable.hasOwnProperty("toString"));
+        });
+
+        it("observable preserves toString methods when declared in a Class", function() {
+            class Hero {
+                constructor(name) {
+                    this.name = name;
+                }
+
+                toString() {
+                   return "city" + this.name;
+                }
+            }
+
+            var observable = kendo.observable(new Hero("Hero"));
+            var wrappedKeys = Object.keys(observable);
+
+            assert.equal(wrappedKeys.length, 6); // includes the contructor prop as part of the prototype
+            assert.isOk(observable.hasOwnProperty("toString"));
+        });
     });
 }());

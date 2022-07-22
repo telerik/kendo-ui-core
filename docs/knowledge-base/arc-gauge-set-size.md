@@ -2,7 +2,7 @@
 title: Set the ArcGauge Size
 description: An example on how to set or change the size of a Kendo UI ArcGauge for jQuery.
 type: how-to
-page_title: Resize the ArcGauge | Kendo UI for jQuery
+page_title: Resize the ArcGauge 
 slug: arc-gauge-set-size
 tags: archgauge, set, size
 ticketid: 1418725

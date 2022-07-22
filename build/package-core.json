@@ -9,5 +9,6 @@
     "dependencies": {
         "jquery": "1.10.0 - 3.6.0"
     },
-    "main": "js/kendo.ui.core.js"
+    "main": "js/kendo.ui.core.js",
+    "typings": "index.d.ts"
 }

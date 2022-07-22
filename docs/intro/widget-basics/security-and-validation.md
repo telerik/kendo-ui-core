@@ -1,6 +1,6 @@
 ---
 title: Security and Validation
-page_title: Security and Validation | Working with Widgets | Kendo UI for jQuery
+page_title: Security and Validation | Working with Widgets 
 description: "Get started with Kendo UI for jQuery and learn the fundamentals for XSS and CSRF attacks."
 slug: kendoui_security_gettingstarted
 position: 60

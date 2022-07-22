@@ -336,7 +336,11 @@ gulp.task('pack-npm', function() {
         .pipe(rename('README.md'))
         .pipe(gulp.dest('dist/npm'));
 
-    return merge(js, jsmin, styles, pkg, license, readme);
+    var typings = gulp.src('typescript/kendo.all.d.ts')
+        .pipe(rename('index.d.ts'))
+        .pipe(gulp.dest('dist/npm'));
+
+    return merge(js, jsmin, styles, pkg, license, readme, typings);
 });
 
 gulp.task('npm-core', gulp.series(['cjs', 'styles', 'pack-npm']));

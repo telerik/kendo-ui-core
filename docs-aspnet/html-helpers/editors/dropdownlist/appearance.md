@@ -29,7 +29,7 @@ The following values are available for the `Size` option:
 - `Small`—small size (applies the `k-picker-sm` class to the wrapping span element)
 - `Medium`—medium size (applies the `k-picker-md` class to the wrapping span element)
 - `Large`—large size (applies the `k-picker-lg` class to the wrapping span element)
-- `Null`—unset.
+- `None`—unset.
 
 The following example demonstrates how to set `Size` in the declaration of the DropDownList:
 
@@ -93,7 +93,7 @@ The following values are available for the `Rounded` option:
 - `Medium`—medium border radius (applies the `k-rounded-md` class to the wrapping span element)
 - `Large`—large border radius (applies the `k-rounded-lg` class to the wrapping span element)
 - `Full`—largest border radius (applies the `k-rounded-full` class to the wrapping span element)
-- `Null`—unset.
+- `None`—unset.
 
 The following example demonstrates how to set `Rounded` in the declaration of the DropDownList:
 ```HtmlHelper
@@ -153,7 +153,7 @@ The following values are available for the `FillMode` option:
 - `Solid`—applies the `k-picker-solid` class to the wrapping span element
 - `Flat`—applies the `k-picker-flat` class to the wrapping span element
 - `Outline`—applies the `k-picker-outline` class to the wrapping span element
-- `Null`—unset.
+- `None`—unset.
 
 The following example demonstrates how to set `FillMode` in the declaration of the DropDownList:
 ```HtmlHelper

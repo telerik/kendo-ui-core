@@ -1,6 +1,6 @@
 ---
 title: Creating Your Own Custom Bundles
-page_title: Creating Your Own Custom Bundles | Download and Installation | Kendo UI for jQuery
+page_title: Creating Your Own Custom Bundles | Download and Installation 
 description: "Get started with Kendo UI for jQuery, customize its components according to your project and add only those the HTML5 UI controls that you need."
 previous_url: /install/custom
 slug: include_only_what_you_need_kendoui_scripts

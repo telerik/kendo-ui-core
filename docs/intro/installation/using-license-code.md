@@ -1,29 +1,25 @@
 ---
 title: Using Script License Code
-page_title: Using Script License Code | Download and Installation | Kendo UI for jQuery
+page_title: Using Script License Code | Download and Installation 
 description: "Get started with Kendo UI for jQuery and learn how to download the library and initialize its widgets."
 slug: using-license-code
 position: 5
 ---
 
-# Setting Up Your Kendo UI for jQuery License Key
+# Setting Up the License Key
 
-Kendo UI for jQuery is a professionally developed UI library distributed under a commercial license. Starting from version R2 2022, using any of the Kendo UI for jQuery components from the NPM distribution channel requires a script license registration. Depending on the license type that you own, you can register an active trial license or commercial license key.
+Kendo UI for jQuery is a UI library distributed under a commercial license. 
 
-> The script license registration is required only for the commercial NPM package (*@progress/kendo-ui*). Currently, all other Kendo UI for jQuery commercial distributions or script sources require only an active license&mdash;no script registration is required when using NuGet, CDN, Bower, and downloaded local Kendo UI bundles. 
+As of the R2 2022 release, using any of the Kendo UI for jQuery components from the NPM distribution channel requires a script license registration. Depending on the license type that you own, you can register an active trial license or a commercial license key.
 
-Our community is essential to us, and we want to be sure that licensing does not get in your way. Let us know if you experience any issues.
+If you are experiencing any issues related to the license key, inform the team through the [available support channels]({% slug welcometo_kendoui %}#support-options).
 
->The license key will be distributed along with the scripts and this cannot not be avoided. However, Progress recommends that you do not publicly announce it.
+>* The script license registration is required only for the commercial NPM package (`@progress/kendo-ui`). The other Kendo UI for jQuery commercial distributions or script sources require only an active license, that is, you don't need script registration when using NuGet, CDN, Bower, and locally downloaded Kendo UI bundles. 
+>* The license key will be distributed along with the scripts and this cannot not be avoided. However, Progress recommends that you do not publicly announce it.
 
-You can send us feedback through the Contact Us form or by opening a support ticket.
+## 1. Get a License Key
 
-The license key installation process involves two steps:
-
-1. [Getting a license key](#getting-a-license-key) from this page.
-1. [Registering the license key](#registering-the-license-key) in your application.
-
-## Getting a License Key
+To acquire a license key, generate it: 
 
 <link rel="stylesheet" href="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/0.0.1/styles/license-key/styles.css" />
 <script src="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/0.0.1/scripts/license-key/index.js"></script>
@@ -36,13 +32,18 @@ The license key installation process involves two steps:
     download-code-url="https://docs.telerik.com/kendo-ui/my-license/download">
 </license-download-link>
 
-## Registering the License key
+## 2. Register the License Key
 
-To register your license key, set it up either by [using the NPM package](#using-npm-package) or a [script reference](#using-script-reference). Then, utilize the `KendoLicensing.setScriptKey()` method.
+To register your license key, set it up by using either of the following approaches: 
 
-### Using NPM package
+* [Use the NPM package](#use-the-npm-package)
+* [Use a script reference](#use-a-script-reference)
 
-Use the generated code from the [Get a license key](#getting-a-license-key) section, and place it in the main script file the where Kendo UI for jQuery scripts are imported.
+Then, utilize the `KendoLicensing.setScriptKey()` method.
+
+### Use the NPM Package
+
+Use the [previously generated code](#1-get-a-license-key) and place it in the main script file the where Kendo UI for jQuery scripts are imported.
 
 ```js
 require("@progress/kendo-ui");
@@ -54,9 +55,9 @@ KendoLicensing.setScriptKey(
 $("#grid").kendoGrid();
 ```
 
-### Using Script Reference
+### Use a Script Reference
 
-Use the generated code from the [Get a license key](#getting-a-license-key) section and place it right after the script tag.
+Use the [previously generated code](#1-get-a-license-key) and place it right after the script tag.
 
 ```html
 <script src="***/kendo.all.min.js"></script>
@@ -70,11 +71,11 @@ Use the generated code from the [Get a license key](#getting-a-license-key) sect
 
 ## Next Steps
 
-* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_scripts %})
-* [Create your own custom widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Initialize widgets as jQuery plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize widgets with MVVM]({% slug mvvm_initialization_kendoui %})
-* [Explore the widget script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
+* [Create Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Initialize Widgets as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets with MVVM]({% slug mvvm_initialization_kendoui %})
+* [Widget Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 
 ## See Also
 

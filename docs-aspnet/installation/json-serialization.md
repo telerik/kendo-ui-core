@@ -48,9 +48,9 @@ For applications using .NET 6 and the [minimal hosting model](https://docs.micro
 	// Add Kendo UI services to the services container
 	builder.Services.AddKendo();
 	```
-## Configure JSON Serialization in ASP.NET Core 3 and Later
+## Configure JSON Serialization in ASP.NET Core 3 through ASP.NET Core 5
 
-There are three ways to configure the JSON serialization in ASP.NET Core 3 or later versions:
+There are three ways to configure the JSON serialization in ASP.NET Core 3 to 5:
 
 * The recommended approach is to use the default serialization that is delivered with ASP.NET Core. To configure it, locate the `ConfigureServices` method and update it by adding the code below.
 
