@@ -197,5 +197,20 @@
             assert.equal(button.next().attr("disabled"), "disabled");
             assert.isOk(button.next().hasClass("k-disabled"));
         });
+
+        it("SplitButton renders type button", function() {
+            var splitButton = new SplitButton(button, { items: defaultItems });
+
+            assert.equal(button.attr("type"), "button");
+            assert.equal(splitButton.arrowButton.attr("type"), "button");
+        });
+
+        it("SplitButton renders type button as defined from DOM", function() {
+            button.attr("type", "submit");
+            var splitButton = new SplitButton(button, { items: defaultItems });
+
+            assert.equal(button.attr("type"), "submit");
+            assert.equal(splitButton.arrowButton.attr("type"), "button");
+        });
     });
 }());

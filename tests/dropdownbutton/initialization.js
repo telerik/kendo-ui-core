@@ -153,5 +153,18 @@
             assert.equal(button.attr("disabled"), "disabled");
             assert.isOk(button.hasClass("k-disabled"));
         });
+
+        it("DropDownButton renders type button", function() {
+            var dropDownButton = new DropDownButton(button, { items: defaultItems });
+
+            assert.equal(button.attr("type"), "button");
+        });
+
+        it("DropDownButton renders type button as defined from DOM", function() {
+            button.attr("type", "submit");
+            var dropDownButton = new DropDownButton(button, { items: defaultItems });
+
+            assert.equal(button.attr("type"), "submit");
+        });
     });
 }());

@@ -89,7 +89,9 @@ var __meta__ = {
 
         _mainButton: function() {
             var that = this,
-                options = extend({}, that.options);
+                options = extend({}, that.options, {
+                    type: that.element.attr("type") || "button"
+                });
 
             delete options.click;
 

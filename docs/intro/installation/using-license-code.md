@@ -46,6 +46,18 @@ Then, utilize the `KendoLicensing.setScriptKey()` method.
 Use the [previously generated code](#1-get-a-license-key) and place it in the main script file the where Kendo UI for jQuery scripts are imported.
 
 ```js
+import "@progress/kendo-ui";
+
+KendoLicensing.setScriptKey(
+    'Your license code'
+);
+
+$("#grid").kendoGrid();
+```
+
+or
+
+```js
 require("@progress/kendo-ui");
 
 KendoLicensing.setScriptKey(
@@ -55,7 +67,33 @@ KendoLicensing.setScriptKey(
 $("#grid").kendoGrid();
 ```
 
-### Use a Script Reference
+The examples above illustrates a single include of `kendo.all.js` in your main javascript file that could be located in one of the [common places](#common-places-to-setup-the-license-code).
+
+In most cases you would need several imports of the Kendo libraries and you would need to setup the license code only on one place (most likely your main js file in your application). In that case, import the `kendo.core.js` and register your license code as usual: 
+
+```js
+import '@progress/kendo-ui/js/kendo.core';
+
+KendoLicensing.setScriptKey(
+    'Your license code'
+);
+
+// Rest of the code
+```
+
+or 
+
+```js
+require("@progress/kendo-ui/js/kendo.core");
+
+KendoLicensing.setScriptKey(
+    'Your license code'
+);
+
+// Rest of the code
+```
+
+### Using Script Reference
 
 Use the [previously generated code](#1-get-a-license-key) and place it right after the script tag.
 
@@ -68,6 +106,30 @@ Use the [previously generated code](#1-get-a-license-key) and place it right aft
     );
 </script>
 ```
+
+### Common Places to Setup the License Code
+
+Most common files to place the license code in your application are: 
+
+**For JS Applications:**
+- `./index.(html|js|ts)`
+- `./main.(html|js|ts)`
+- `./app.(html|js|ts)`
+- `./(dist|src)/index.(html|js|ts)`
+- `./(dist|src)/main.(html|js|ts)`
+- `./(dist|src)/app.(html|js|ts)`
+
+**For ASP.NET MVC Applications:**
+- `./Views/Shared/_Layout.cshtml`
+- `./Scripts/index.(js|ts)`
+- `./Scripts/site.(js|ts)`
+
+**For ASP.NET Core Applications:**
+- `./Views/Shared/_Layout.cshtml`
+- `./Pages/Shared/_Layout.cshtml`
+- `./Pages/_Layout.cshtml`
+- `./wwwroot/js/index.js`
+- `./wwwroot/js/site.js`
 
 ## Next Steps
 

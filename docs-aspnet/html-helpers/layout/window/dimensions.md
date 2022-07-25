@@ -43,6 +43,24 @@ Apart from the automatic size calculation, you can explicitly set the `Width()` 
 
 The Window also allows configuration for its `min` and `max` dimensions (height and width).
 
+{% if site.mvc %}
+```HtmlHelper
+    @(Html.Kendo().Window()
+        .Name("window")
+        .Title("Alvar Aalto")
+        .Resizable(r => r.MinWidth(150).MaxWidth(450).MinHeight(200).MaxHeight(300))
+        .Content(@<text>
+            <p>
+                Alvar Aalto is one of the greatest names in modern architecture and design.
+                Glassblowers at the iittala factory still meticulously handcraft the legendary vases
+                that are variations on one theme, fluid organic shapes that let the end user decide the use.
+            </p>
+        </text>)
+    )
+```
+{% endif %}
+
+{% if site.core %}
 ```HtmlHelper
     @(Html.Kendo().Window()
         .Name("window")
@@ -60,7 +78,6 @@ The Window also allows configuration for its `min` and `max` dimensions (height 
         </text>)
     )
 ```
-{% if site.core %}
 ```TagHelper
     <kendo-window name="window" title="Alvar Aalto" min-width="150" max-width="450" min-height="200" max-height="300">
         <content>
