@@ -117,6 +117,45 @@ You can specify the data points of the Charts as part of the series definitions.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var data2008 = new double[][] { new[] { 16.4, 5.4 }, new[] { 21.7, 2 }, new[] { 25.4, 3 }, new[] { 19.0, 2.0 }, new[] { 10.9, 1 }};
+        var data2009 = new double[][] { new[] { 6.4, 13.4 }, new[] { 1.7, 11 }, new[] { 5.4, 8 }, new[] { 9.0, 17.0 }, new[] { 1.9, 4  } };
+        var data2010 = new double[][] { new[] { 21.7, 3 }, new[] { 13.6, 3.5 }, new[] { 13.6, 3 }, new[] { 29.9, 3 }, new[] { 21.7, 20 } };
+    }
+    
+    <kendo-chart name="chart">
+        <chart-title text="Rainfall - Wind Speed">
+        </chart-title>
+        <chart-legend position="ChartLegendPosition.Bottom">
+        </chart-legend>
+        <series-defaults>
+            <labels visible="false"></labels>
+        </series-defaults>
+        <series>
+            <series-item type="ChartSeriesType.Scatter" name="January 2008" data="data2008">
+            </series-item>
+            <series-item type="ChartSeriesType.Scatter" name="January 2009" data="data2009">
+            </series-item>
+            <series-item type="ChartSeriesType.Scatter" name="January 2010" data="data2010">
+            </series-item>
+        </series>
+        <x-axis>
+            <x-axis-item max="35" type="numeric">
+                <chart-x-axis-item-title text="Wind Speed [km/h]">
+                </chart-x-axis-item-title>
+            </x-axis-item>
+        </x-axis>
+        <y-axis>
+            <y-axis-item min="-5" max="25" axis-crossing-value="new object[] { -5 }" type="numeric">
+                <chart-y-axis-item-title text="Rainfall [mm]">
+                </chart-y-axis-item-title>
+            </y-axis-item>
+        </y-axis>
+    </kendo-chart>
+```
+{% endif %}
 
 ### Binding to Arrays of Objects
 

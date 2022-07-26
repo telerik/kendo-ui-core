@@ -651,6 +651,8 @@ navigation:
         title: "Templates"
      "*switch":
         title: "Switch"
+     "*splitbutton":
+        title: "SplitButton"
      "*/globalization":
         title: "Globalization"
         position: 50
@@ -1093,6 +1095,11 @@ defaults:
     values:
         title_prefix: "ASP.NET Core FloatingActionButton Component"
 -
+    scope:
+        path: "html-helpers/navigation/splitbutton"
+    values:
+        title_prefix: "ASP.NET Core SplitButton Component"
+-        
     scope:
         path: "html-helpers/navigation/stepper"
     values:

@@ -558,6 +558,11 @@ defaults:
         title_prefix: "ASP.NET MVC FloatingActionButton Component"
 -
     scope:
+        path: "html-helpers/navigation/splitbutton"
+    values:
+        title_prefix: "ASP.NET MVC SplitButton Component"
+-            
+    scope:
         path: "html-helpers/navigation/stepper"
     values:
         title_prefix: "ASP.NET MVC Stepper Component"
