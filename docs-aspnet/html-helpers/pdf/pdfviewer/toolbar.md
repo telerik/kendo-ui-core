@@ -40,7 +40,6 @@ The following example demonstrates basic configuration options for the PDFViewer
                 items.Add().Name("spacer");
                 items.Add().Name("zoom");
                 items.Add().Name("toggleSelection");
-                items.Add().Name("spacer");
                 items.Add().Name("search");
                 items.Add().Name("open");
                 items.Add().Name("download");
@@ -49,6 +48,33 @@ The following example demonstrates basic configuration options for the PDFViewer
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+    <kendo-pdfviewer name="pdfviewer">
+        <toolbar enabled="true">
+            <pdfviewer-toolbar-items>
+                <pdfviewer-toolbar-item name="pager">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="spacer">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="zoom">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="toggleSelection">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="search">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="open">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="download">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="print">
+                </pdfviewer-toolbar-item>
+            </pdfviewer-toolbar-items>
+        </toolbar>
+    </kendo-pdfviewer>
+```
+{% endif %}
 
 You can also use the `add` and `remove` client-side API methods to programmatically manage the rendered tools in the PDFViewer.
 
@@ -56,6 +82,14 @@ You can also use the `add` and `remove` client-side API methods to programmatica
     @(Html.Kendo().PDFViewer()
         .Name("pdfviewer")     
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pdfviewer name="pdfviewer">
+    </kendo-pdfviewer>
+```
+{% endif %}
+```script.js
     <script>    
       var pdfviewer = $("#pdfViewer").getKendoPDFViewer();
       var printToolElement = $(".k-toolbar").find('a[title="Print"]');

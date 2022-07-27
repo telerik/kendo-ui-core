@@ -34,7 +34,18 @@ See the ButtonGroup configuration in the example below, and for the full project
     })
     .Events(ev => ev.Select("onSelect"))
 )
-
+```
+```tab-TagHelper(cshtml)
+        <kendo-buttongroup name="player"
+                            on-select="onSelect">
+                <buttongroup-items>
+                    <item text="Month"></item>
+                    <item text="Quarter"></item>
+                    <item text="Year"></item>
+                </buttongroup-items>
+        </kendo-buttongroup>
+```
+```script
 <script>
 	function onSelect(e) {
 		console.log("selected index:" + e.indices);

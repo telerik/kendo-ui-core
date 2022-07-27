@@ -51,16 +51,9 @@ The following example demonstrates how to initialize the PDFViewer by using [PDF
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
     </script>
 
-    <kendo-pdfviewer name="pdfviewer">
+    <kendo-pdfviewer name="pdfviewer"
+                     height="1200">
         <pdfjs-processing file="@(Url.Content("~/shared/web/pdfViewer/sample.pdf"))" />
-        <toolbar enabled="true">
-            <pdfviewer-toolbar-items>
-                <pdfviewer-toolbar-item command="PageChangeCommand" type="pager" name="pager"></pdfviewer-toolbar-item>
-                <pdfviewer-toolbar-item type="spacer" name="spacer"></pdfviewer-toolbar-item>
-                <pdfviewer-toolbar-item command="OpenCommand" type="button" name="open" icon="folder-open"></pdfviewer-toolbar-item>
-                <pdfviewer-toolbar-item command="DownloadCommand" type="button" name="download" icon="download"></pdfviewer-toolbar-item>
-            </pdfviewer-toolbar-items>
-        </toolbar>
     </kendo-pdfviewer>
 ```
 {% endif %}
@@ -88,6 +81,33 @@ The following example demonstrates how to initialize the PDFViewer by using the 
         .Height(1200)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pdfviewer height="1200"
+                     name="pdfviewer">
+        <dpl-processing load-on-demand="true">
+            <read url="/PdfViewer/GetInitialPdf" />
+            <upload url="/PdfViewer/GetPdf" save-field="file" />
+        </dpl-processing>
+        <toolbar enabled="true">
+            <pdfviewer-toolbar-items>
+                <pdfviewer-toolbar-item command="PageChangeCommand"
+                                        type="pager"
+                                        name="pager">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="spacer"
+                                        type="spacer">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item command="OpenCommand"
+                                        type="button"
+                                        name="open"
+                                        icon="folder-open">
+                </pdfviewer-toolbar-item>
+            </pdfviewer-toolbar-items>
+        </toolbar>
+    </kendo-pdfviewer>
+```
+{% endif %}
 
 ## Functionality and Features
 

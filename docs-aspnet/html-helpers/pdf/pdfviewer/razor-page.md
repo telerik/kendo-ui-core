@@ -36,6 +36,14 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
             .Height(1200)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pdfviewer height="1200" 
+                    name="pdfviewer">
+        <pdfjs-processing file="@Url.Content("~/sample.pdf")"/>
+    </kendo-pdfviewer>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 	public class PDFViewerIndexModel : PageModel
     {
@@ -66,6 +74,15 @@ The following example demonstrates how to initialize the PDFViewer by using the 
             })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pdfviewer name="pdfviewer">
+        <dpl-processing>
+            <read url="/PDFViewer/PDFViewerDPL?handler=Read"/>
+        </dpl-processing>
+    </kendo-pdfviewer>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 	public class PDFViewerDPLModel : PageModel
     {

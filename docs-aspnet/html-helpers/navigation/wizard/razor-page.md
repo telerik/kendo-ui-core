@@ -18,7 +18,7 @@ As POST request will be sent to the server antiforgery token needs to be added. 
 
 See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper()
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -88,7 +88,80 @@ See the implementation details in the example below, and for the full project wi
             s.Add().Content("<h3>Click on the \"Done\" button to complete your registration.</h3>");
         })
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-wizard name="wizard"
+                on-done="onDone">
+        <wizard-steps>
+            <wizard-step title="Account Details">
+                <wizard-step-form form-data="@Model.UserViewModel">
+                    <validatable validate-on-blur="true"
+                                validation-summary="false" />
+                    <form-items>
+                        <form-item field="AccountDetails.Username">
+                            <item-label text="Username:" />
+                            <textbox-editor required="required">
+                            </textbox-editor>
+                        </form-item>
+                        <form-item field="AccountDetails.Email">
+                            <item-label text="Email:" />
+                            <textbox-editor required="required">
+                            </textbox-editor>
+                        </form-item>
+                        <form-item field="AccountDetails.Password"
+                                hint="Hint: enter alphanumeric characters only.">
+                            <item-label text="Password:" />
+                            <textbox-editor required="required" type="password">
+                            </textbox-editor>
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+                <wizard-step-buttons>
+                    <wizard-step-button name="next"
+                                        text="Next">
+                    </wizard-step-button>
+                </wizard-step-buttons>
+            </wizard-step>
+            <wizard-step title="Personal details">
+                <wizard-step-form form-data="Model.UserViewModel">
+                    <validatable validate-on-blur="true"
+                                validation-summary="false" />
+                    <form-items>
+                        <form-item field="PersonalDetails.FullName">
+                            <item-label text="Full Name:" />
+                            <textbox-editor required="required">
+                            </textbox-editor>
+                        </form-item>
+                        <form-item field="PersonalDetails.About">
+                            <item-label text="About:" optional="true" />
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+                <wizard-step-buttons>
+                    <wizard-step-button text="Previous"
+                                        name="previous">
+                    </wizard-step-button>
+                    <wizard-step-button text="Next"
+                                        name="next">
+                    </wizard-step-button>
+                </wizard-step-buttons>
+            </wizard-step>
+            <wizard-step>
+                <wizard-step-content>
+                    <h3>Click on the "Done" button to complete the process.</h3>
+                </wizard-step-content>
+                <wizard-step-buttons>
+                    <wizard-step-button name="done"
+                                        text="Done">
+                    </wizard-step-button>
+                </wizard-step-buttons>
+            </wizard-step>
+        </wizard-steps>
+    </kendo-wizard>
+```
+{% endif %}
+```script
     <script>
         function onDone(e) {        
             $("#wizard").append($("<input type='hidden' name='__RequestVerificationToken' value='@token' data-stop='true' />"))
@@ -128,7 +201,7 @@ When the Wizard is submitted with ajax, the default done event of the component 
 
 See the implementation details in the example below, where the JSON errors are appended to the validation summary and it is toggled it in the ajax success and error callbacks. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -194,7 +267,71 @@ See the implementation details in the example below, where the JSON errors are a
             s.Add().Content("<h3>Click on the \"Done\" button to complete the process.</h3>");
         })
     )
+```
+```TagHelper
+@addTagHelper *,Kendo.Mvc
 
+    <kendo-wizard name="wizard-ajax"
+                on-done="onDone">
+        <wizard-steps>
+            <wizard-step title="Main information">
+                <wizard-step-form form-data="@Model.User">
+                    <validatable validate-on-blur="true"
+                                validation-summary="false"/>
+                    <form-items>
+                        <form-item field="UserId">
+                            <item-label text="User ID:"/>
+                            <numerictextbox-editor restrict-decimals="true"
+                                                min="0"
+                                                format="n0"
+                                                decimals="0">
+                            </numerictextbox-editor>
+                        </form-item>
+                        <form-item field="Name">
+                            <item-label text="Name:"/>
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+                <wizard-step-buttons>
+                    <wizard-step-button name="next"
+                                        text="Next">
+                    </wizard-step-button>
+                </wizard-step-buttons>
+            </wizard-step>
+            <wizard-step title="User details">
+                <wizard-step-form form-data="Model.User">
+                    <validatable validate-on-blur="true"
+                                validation-summary="false"/>
+                    <form-items>
+                        <form-item field="BirthDate">
+                            <item-label text="Birth Date:"/>
+                            <datepicker-editor format="{0:dd-MM-yyyy}"/>
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+                <wizard-step-buttons>
+                    <wizard-step-button text="Previous"
+                                        name="previous">
+                    </wizard-step-button>
+                    <wizard-step-button text="Next"
+                                        name="next">
+                    </wizard-step-button>
+                </wizard-step-buttons>
+            </wizard-step>
+            <wizard-step>
+                <wizard-step-content>
+                    <h3>Click on the "Done" button to complete the process.</h3>
+                </wizard-step-content>
+                <wizard-step-buttons>
+                    <wizard-step-button name="done"
+                                        text="Done">
+                    </wizard-step-button>
+                </wizard-step-buttons>
+            </wizard-step>
+        </wizard-steps>
+    </kendo-wizard>
+```
+```script.js
     <script>
         function onDone(e) {
             e.originalEvent.preventDefault();            

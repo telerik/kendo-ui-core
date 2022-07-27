@@ -35,6 +35,28 @@ To utilize the hierarchy functionality of the Telerik UI Drawer:
             ")
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-drawer name="drawer"
+                on-item-click="onItemClick"
+                template-id="template">
+        </kendo-drawer>
+        <script id="template" type="text/html">
+            <ul>
+                <li data-role='drawer-item' class='k-selected'><span class='k-icon k-i-information'></span><span class='k-item-text' data-id='GettingStarted'>Getting Started</span><span class='k-spacer'></span><span class='k-icon k-i-arrow-chevron-right'></span></li>
+                <li data-role='drawer-separator'></li>
+                <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-question'></span><span class='k-item-text' data-id='Kendo'>About Kendo UI</span></li>
+                <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-palette'></span><span class='k-item-text' data-id='ThemeSupport'>Supported Themes</span></li>
+                <li data-role='drawer-separator'></li>
+                <li data-role='drawer-item'><span class='k-icon k-i-zoom'></span><span class='k-item-text' data-id='Overview'>Overview</span><span class='k-spacer'></span><span class='k-icon k-i-arrow-chevron-right'></li>
+                <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-js'></span><span class='k-item-text' data-id='About'>About Kendo</span></li>
+                <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-style-builder'></span><span class='k-item-text' data-id='All'>All Kendo Components</span></li>
+                <li data-role='drawer-separator'></li>
+                <li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='k-item-text' data-id='Popular'>Most popular components</span></li>
+            </ul>
+        </script>
+    ```
+    {% endif %}
 
 1. Add the `ItemClick` event handler to the drawer's configuration.
 
@@ -44,6 +66,13 @@ To utilize the hierarchy functionality of the Telerik UI Drawer:
             .Events(x => x.ItemClick("onItemClick"))
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-drawer name="drawer"
+              on-item-click="onItemClick">
+        </kendo-drawer>
+    ```
+    {% endif %}
 
 1. Define the `onItemClick` handling function.
 

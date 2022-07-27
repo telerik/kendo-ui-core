@@ -38,11 +38,11 @@ The following example demonstrates how to initialize the ButtonGroup.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-buttongroup name="player">
+<kendo-buttongroup name="select-period">
         <buttongroup-items>
-            <item icon="play" text="Play" selected="true"></item>
-            <item icon="pause" text="Pause" enabled="false"></item>
-            <item icon="stop" text="Stop"></item>
+            <item text="Month"></item>
+            <item text="Quarter"></item>
+            <item text="Year"></item>
         </buttongroup-items>
     </kendo-buttongroup>
 ```

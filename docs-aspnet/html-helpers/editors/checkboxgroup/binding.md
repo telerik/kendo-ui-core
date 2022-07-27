@@ -27,13 +27,16 @@ The example below demonstrates how to use the Items() method to configure the ch
     )
 ```
 {% if site.core %}
-```tagHelper
-   <kendo-checkboxgroup name="checkboxgroup">
+```TagHelper
+    @{ 
+        var data = new string[] { "1" };
+    }
+    <kendo-checkboxgroup name="checkboxgroup"
+                        value="data">
         <kendo-checkboxgroup-items>
-            <kendo-checkboxgroup-item value="one" label="First">
-            </kendo-checkboxgroup-item>
-            <kendo-checkboxgroup-item value="two" label="Second">
-            </kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="1" label="English"></kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="2" label="Spanish"></kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="3" label="Russian"></kendo-checkboxgroup-item>
         </kendo-checkboxgroup-items>
     </kendo-checkboxgroup>
 ```
@@ -109,7 +112,7 @@ You can configure the items in the CheckBoxGroup widget by using the BindTo meth
         @model MvcApplication1.Models.CheckBoxGroupViewModel
 
         <kendo-checkboxgroup name="checkboxgroup"
-                      input-name="checkboxItem"
+                      value="Model.CheckBoxGroupValue"
                       bind-to="Model.Items">
         </kendo-checkboxgroup>
     ```

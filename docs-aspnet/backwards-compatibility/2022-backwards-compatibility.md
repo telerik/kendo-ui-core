@@ -10,6 +10,12 @@ position: 1
 
 This article lists the breaking or important changes in the 2022 releases of {{ site.product }}.
 
+## {{ site.product }} R2 2022 SP2
+
+The Size, FillMode and Rounded properties now provide the None option instead of Null.
+
+`.Size(ComponentSize.None)`
+
 {% if site.core %}
 ## {{ site.product }} R2 2022 SP1
 

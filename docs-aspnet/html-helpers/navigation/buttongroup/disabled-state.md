@@ -26,6 +26,18 @@ The following example demonstrates how to enable and disable the ButtonGroup ove
                     t.Add().Text("Year");
             }))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-buttongroup name="player"
+                    enable="false">
+        <buttongroup-items>
+            <item text="Month"></item>
+            <item text="Quarter"></item>
+            <item text="Year"></item>
+        </buttongroup-items>
+    </kendo-buttongroup>
+```
+{% endif %}
 
 ## See Also
 

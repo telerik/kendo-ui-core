@@ -65,6 +65,41 @@ The {{ site.product }} Wizard integrates the {{ site.product }} Form and support
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *,Kendo.Mvc
+    <kendo-wizard name="wizard">
+        <wizard-steps>
+            <wizard-step title="User Details">
+                <wizard-step-form form-data="@Model">
+                    <form-items>
+                        <form-item field="UserName">
+                        </form-item>
+                        <form-item field="Email">
+                        </form-item>
+                        <form-item field="Password">
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+            </wizard-step>
+            <wizard-step title="Personal Details">
+                <wizard-step-form form-data="Model">
+                    <validatable validate-on-blur="true"
+                                validation-summary="false"/>
+                    <form-items>
+                        <form-item field="FirstName">
+                        </form-item>
+                        <form-item field="LastName">
+                        </form-item>
+                        <form-item field="DateOfBirth">
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+            </wizard-step>
+        </wizard-steps>
+    </kendo-wizard>
+```
+{% endif %}
 
 ### Loading Local HTML Content
 

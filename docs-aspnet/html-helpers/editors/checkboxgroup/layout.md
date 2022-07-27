@@ -22,11 +22,21 @@ The following example shows how to set the CheckBoxGroup layout:
 ```
 {% if site.core %}
 ```TagHelper
+    @{
+        var data = new InputGroupItemModel[]
+        {
+            new InputGroupItemModel(){ Value = "English"},
+            new InputGroupItemModel(){ Value = "German"},
+            new InputGroupItemModel(){ Value = "Italian"},
+            new InputGroupItemModel(){ Value = "Russian"},
+            new InputGroupItemModel(){ Value = "Spanish"},
+        };
+        var value = new string[] { "Spanish" };
+    }
     <kendo-checkboxgroup name="checkboxgroup"
-        layout="CheckBoxGroupLayout.Horizontal">
-		<kendo-checkboxgroup-item value="Green" css-class="green" label="Green"></kendo-checkboxgroup-item>
-        <kendo-checkboxgroup-item value="Red" css-class="red" label="Red"></kendo-checkboxgroup-item>
-        <kendo-checkboxgroup-item value="Blue" css-class="blue" label="Blue"></kendo-checkboxgroup-item>
+                        bind-to="data"
+                        layout= "@CheckBoxGroupLayout.Vertical"
+                        value="value">
     </kendo-checkboxgroup>
 ```
 {% endif %}

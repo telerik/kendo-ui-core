@@ -69,6 +69,17 @@ The following example demonstrates how to define the Wizard.
 
 You can subscribe to all Wizard events.
 
+```HtmlHelper
+    @(Html.Kendo().Wizard()
+            .Name("wizard")
+            .Events(ev=>ev.Activate("onActivate").Select("onSelect"))
+            .Steps(s=> {
+                s.Add().Content("Initial Step");
+                s.Add().Content("Second Step");
+                s.Add().Content("Final Step");
+            })
+        )
+```
 ```TagHelper
     <kendo-wizard name="wizard" on-activate="onActivate" on-select="onSelect">
         <wizard-steps>
@@ -89,7 +100,9 @@ You can subscribe to all Wizard events.
             </wizard-step>
         </wizard-steps>
     </kendo-wizard>
-
+```
+{% endif %}
+```script
     <script>
         function onActivate(e) {
             console.log("Activated: " + e.step.options.label);
@@ -100,7 +113,6 @@ You can subscribe to all Wizard events.
         }
     </script>
 ```
-{% endif %}
 
 ## Functionality and Features
 

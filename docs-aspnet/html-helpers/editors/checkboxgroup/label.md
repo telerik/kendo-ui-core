@@ -27,12 +27,13 @@ To customize the text of the label, use the [`label`](/api/javascript/ui/checkbo
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-checkboxgroup name="checkboxgroup"
-                      input-name="checkboxItem">
+    <kendo-checkboxgroup name="checkboxgroup">
         <kendo-checkboxgroup-items>
-            <kendo-checkboxgroup-item value="one" label="First">
+            <kendo-checkboxgroup-item value="1" label="First">
             </kendo-checkboxgroup-item>
-            <kendo-checkboxgroup-item value="two" label="Second">
+            <kendo-checkboxgroup-item value="2" label="Second">
+            </kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="3" label="Third">
             </kendo-checkboxgroup-item>
         </kendo-checkboxgroup-items>
     </kendo-checkboxgroup>
@@ -58,8 +59,15 @@ The labels of all checkboxes in the CheckBoxGroup could be rendered before or af
 {% if site.core %}
 ```TagHelper
     <kendo-checkboxgroup name="checkboxgroup"
-        input-name="checkboxItem"
-        label-position="CheckBoxGroupLabelPosition.Before">
+                        label-position="CheckBoxGroupLabelPosition.After">
+        <kendo-checkboxgroup-items>
+            <kendo-checkboxgroup-item value="1" label="First">
+            </kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="2" label="Second">
+            </kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="3" label="Third">
+            </kendo-checkboxgroup-item>
+        </kendo-checkboxgroup-items>
     </kendo-checkboxgroup>
 ```
 {% endif %}

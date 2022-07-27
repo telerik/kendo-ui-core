@@ -47,7 +47,12 @@ To configure the single selection mode, set the [`Selection`](https://docs.teler
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-rating name="rating" min="1" max="6" value="3" selection="single"></kendo-rating>
+    <kendo-rating name="rating" 
+                  min="1"
+                  max="6"
+                  value="3"
+                  selection="single">
+    </kendo-rating>
 ```
 {% endif %}
 

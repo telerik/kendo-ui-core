@@ -26,6 +26,14 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
 	)
 	
 ```
+```TagHelper
+    <kendo-rating name="ratingHalf"
+                min="@Model.Min"
+                max="@Model.Max"
+                value="@Model.Value"
+                precision="@Model.Precision">
+    </kendo-rating>
+```
 ```tab-PageModel(cshtml.cs)      
 	
 	public string Precision { get; set; }

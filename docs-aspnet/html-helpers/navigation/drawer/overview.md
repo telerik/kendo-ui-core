@@ -43,8 +43,15 @@ The following example demonstrates how to define the Drawer.
 ```
 {% if site.core %}
 ```TagHelper
-     <kendo-drawer name="drawer" template-id="template" mode="overlay" position="left">
-     </kendo-drawer>
+    <kendo-drawer name="drawer"
+                template-id="template"
+                mode="push"
+                position="left"
+                swipe-to-open="true">
+        <content>
+            <div style='height: 200px;'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error accusantium odit, optio nulla maiores quo neque fugit debitis dignissimos incidunt maxime?</div>
+        </content>
+    </kendo-drawer>
 ```
 ```Template
     <script id="template" type="text/x-kendo-template">

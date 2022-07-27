@@ -25,6 +25,12 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
         .Value(Model.CheckBoxGroupModel.CheckBoxGroupValue)
     )
 ```
+```TagHelper
+    <kendo-checkboxgroup name="checkboxgroup"
+                        value="@Model.CheckBoxGroupModel.CheckBoxGroupValue"
+                        bind-to="@Model.CheckBoxGroupModel.Items">
+    </kendo-checkboxgroup>
+```
 ```tab-PageModel(cshtml.cs)      
 	public List<IInputGroupItem> itemsList { get; set; }
     [BindProperty]

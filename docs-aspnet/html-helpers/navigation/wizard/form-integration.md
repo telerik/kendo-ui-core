@@ -53,6 +53,51 @@ When the {{ site.product }} Wizard is initialized as a `<form>` element the Done
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *,Kendo.Mvc
+    <kendo-wizard name="wizard">
+        <wizard-steps>
+            <wizard-step>
+                <wizard-step-content>
+                    "Initial Step"
+                </wizard-step-content>
+            </wizard-step>
+            <wizard-step title="User Details">
+                <wizard-step-form form-data="@Model">
+                    <form-items>
+                        <form-item field="UserName">
+                        </form-item>
+                        <form-item field="Email">
+                        </form-item>
+                        <form-item field="Password">
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+            </wizard-step>
+            <wizard-step title="Personal Details">
+                <wizard-step-form form-data="Model">
+                    <validatable validate-on-blur="true"
+                                validation-summary="false" />
+                    <form-items>
+                        <form-item field="FirstName">
+                        </form-item>
+                        <form-item field="LastName">
+                        </form-item>
+                        <form-item field="DateOfBirth">
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+            </wizard-step>
+            <wizard-step>
+                <wizard-step-content>
+                    "Final Step"
+                </wizard-step-content>
+            </wizard-step>
+        </wizard-steps>
+    </kendo-wizard>
+```
+{% endif %}
 
 ## Initialization as a `<div>` Element
 
@@ -96,7 +141,58 @@ When the {{ site.product }} Wizard is initialized as a `<div>` element any forms
             s.Add().Content("Final Step");
         })
     )
+```
+{% if site.core%}
+```TagHelper
+    @addTagHelper *,Kendo.Mvc
 
+    <kendo-wizard name="wizard">
+        <wizard-steps>
+            <wizard-step>
+                <wizard-step-content>
+                    "Initial Step"
+                </wizard-step-content>
+            </wizard-step>
+            <wizard-step title="User Details">
+                <wizard-step-form form-data="@Model"
+                                buttons-template="<input type='submit' />"
+                                on-submit="onSubmit">
+                    <form-items>
+                        <form-item field="UserName">
+                        </form-item>
+                        <form-item field="Email">
+                        </form-item>
+                        <form-item field="Password">
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+            </wizard-step>
+            <wizard-step title="Personal Details">
+                <wizard-step-form form-data="@Model"
+                                buttons-template="<input type='submit' />"
+                                on-submit="onSubmit">
+                    <validatable validate-on-blur="true"
+                                validation-summary="false" />
+                    <form-items>
+                        <form-item field="FirstName">
+                        </form-item>
+                        <form-item field="LastName">
+                        </form-item>
+                        <form-item field="DateOfBirth">
+                        </form-item>
+                    </form-items>
+                </wizard-step-form>
+            </wizard-step>
+            <wizard-step>
+                <wizard-step-content>
+                    "Final Step"
+                </wizard-step-content>
+            </wizard-step>
+        </wizard-steps>
+    </kendo-wizard>
+```
+{% endif %}
+```script
     <script>
         function onSubmit(event){
             event.preventDefault();
