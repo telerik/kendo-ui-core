@@ -480,7 +480,7 @@ navigation:
         title: "AutoComplete"
      "*barcode":
         title: "BarCode"
-     "*button":
+     "*/button":
         title: "Button"
      "*buttongroup":
         title: "ButtonGroup"
@@ -653,6 +653,8 @@ navigation:
         title: "Switch"
      "*splitbutton":
         title: "SplitButton"
+     "*/dropdownbutton":
+        title: "DropDownButton"
      "*/globalization":
         title: "Globalization"
         position: 50

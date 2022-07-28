@@ -1,22 +1,22 @@
 ---
 title: Appearance
 page_title: Appearance
-description: "Learn how to customize the appearance of the Telerik UI SplitButton HtmlHelper for {{ site.framework }}."
-slug: htmlhelpers_splitbutton_aspnetcore_appearance
+description: "Learn how to customize the appearance of the Telerik UI DropDownButton HtmlHelper for {{ site.framework }}."
+slug: htmlhelpers_dropdownbutton_aspnetcore_appearance
 position: 3
 ---
 
 # Appearance
 
-In this article, you will find information about the rendering and styling options of the {{ site.product }} SplitButton.
+In this article, you will find information about the rendering and styling options of the {{ site.product }} DropDownButton.
 
 For general information regarding the rendering, visit the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article.
 
-For a complete example, refer to the [Appearance Demo of the SplitButton](https://demos.telerik.com/{{ site.platform }}/splitbutton/appearance).
+For a complete example, refer to the [Appearance Demo of the DropDownButton](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/appearance).
 
 ## Options
 
-The SplitButton provides the following methods for styling:
+The DropDownButton provides the following methods for styling:
 
 - [`Size()`](#size)—configures the overall size of the component.
 - [`ThemeColor()`](#themecolor)—configures what color will be applied to the component.
@@ -25,7 +25,7 @@ The SplitButton provides the following methods for styling:
 
 ### Size
 
-To control the size of the SplitButton, configure the `Size()` method with any of the following values:
+To control the size of the DropDownButton, configure the `Size()` method with any of the following values:
 
 - `Small`
 - `Medium`
@@ -35,8 +35,8 @@ To control the size of the SplitButton, configure the `Size()` method with any o
 The default `Size` value is `Medium`.
 
 ```HtmlHelper
-    @(Html.Kendo().SplitButton()
-        .Name("splitButton")
+    @(Html.Kendo().DropDownButton()
+        .Name("DropDownButton")
         .Icon("paste")
         .Size(ComponentSize.Medium)
         .Items(items =>
@@ -49,19 +49,19 @@ The default `Size` value is `Medium`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-splitbutton name="splitButton" text="Paste" icon="paste" size="ComponentSize.Medium">
-        <splitbutton-items>
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="paste" size="ComponentSize.Medium">
+        <dropdownbutton-items>
             <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
             <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
             <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
-        </splitbutton-items>
-    </kendo-splitbutton>
+        </dropdownbutton-items>
+    </kendo-dropdownbutton>
 ```
 {% endif %}
 
 ### FillMode
 
-To manipulate the fill mode of the SplitButton, configure the `FillMode()` method with any of the following values:
+To manipulate the fill mode of the DropDownButton, configure the `FillMode()` method with any of the following values:
 
 - `Solid`
 - `Outline`
@@ -71,8 +71,8 @@ To manipulate the fill mode of the SplitButton, configure the `FillMode()` metho
 The default `FillMode` value is `Solid`.
 
 ```HtmlHelper
-    @(Html.Kendo().SplitButton()
-        .Name("splitButton")
+    @(Html.Kendo().DropDownButton()
+        .Name("DropDownButton")
         .Icon("paste")
         .FillMode(FillMode.Solid)
         .Items(items =>
@@ -85,19 +85,19 @@ The default `FillMode` value is `Solid`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-splitbutton name="splitButton" text="Paste" icon="paste" fill-mode="FillMode.Solid">
-        <splitbutton-items>
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="paste" fill-mode="FillMode.Solid">
+        <dropdownbutton-items>
             <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
             <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
             <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
-        </splitbutton-items>
-    </kendo-splitbutton>
+        </dropdownbutton-items>
+    </kendo-dropdownbutton>
 ```
 {% endif %}
 
 ### ThemeColor
 
-To specify the theme color of the SplitButton, configure the `ThemeColor()` method with any of the following values:
+To specify the theme color of the DropDownButton, configure the `ThemeColor()` method with any of the following values:
 
 - `Base`
 - `Primary`
@@ -114,8 +114,8 @@ To specify the theme color of the SplitButton, configure the `ThemeColor()` meth
 The default `ThemeColor` value is `Base`.
 
 ```HtmlHelper
-    @(Html.Kendo().SplitButton()
-        .Name("splitButton")
+    @(Html.Kendo().DropDownButton()
+        .Name("DropDownButton")
         .Icon("paste")
         .ThemeColor(ThemeColor.Base)
         .Items(items =>
@@ -128,19 +128,19 @@ The default `ThemeColor` value is `Base`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-splitbutton name="splitButton" text="Paste" icon="paste" theme-color="ThemeColor.Base">
-        <splitbutton-items>
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="paste" theme-color="ThemeColor.Base">
+        <dropdownbutton-items>
             <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
             <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
             <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
-        </splitbutton-items>
-    </kendo-splitbutton>
+        </dropdownbutton-items>
+    </kendo-dropdownbutton>
 ```
 {% endif %}
 
 ### Rounded
 
-To set the border radius of the SplitButton, configure the `Rounded()` method with any of the following values:
+To set the border radius of the DropDownButton, configure the `Rounded()` method with any of the following values:
 
 - `Small`
 - `Medium`
@@ -151,8 +151,8 @@ To set the border radius of the SplitButton, configure the `Rounded()` method wi
 The default `Rounded` value is `Medium`.
 
 ```HtmlHelper
-    @(Html.Kendo().SplitButton()
-        .Name("splitButton")
+    @(Html.Kendo().DropDownButton()
+        .Name("DropDownButton")
         .Icon("paste")
         .Rounded(Rounded.Medium)
         .Items(items =>
@@ -165,18 +165,18 @@ The default `Rounded` value is `Medium`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-splitbutton name="splitButton" text="Paste" icon="paste" rounded="Rounded.Medium">
-        <splitbutton-items>
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="paste" rounded="Rounded.Medium">
+        <dropdownbutton-items>
             <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
             <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
             <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
-        </splitbutton-items>
-    </kendo-splitbutton>
+        </dropdownbutton-items>
+    </kendo-dropdownbutton>
 ```
 {% endif %}
 
 ## See Also
 
-* [Appearance of the SplitButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/appearance)
+* [Appearance of the DropDownButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/appearance)
 * [Button Server-Side API](/api/button)
-* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitbutton)
+* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton)

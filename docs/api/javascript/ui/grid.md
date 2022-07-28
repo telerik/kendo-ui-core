@@ -414,7 +414,7 @@ The function context (available via the `this` keyword) will be set to the grid 
                 var tr = $(e.target).closest("tr"); // get the current table row (tr)
                 // get the data bound to the current table row
                 var data = this.dataItem(tr);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+	              /* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Details for: " + data.name);
             }
           }]
@@ -1104,7 +1104,7 @@ If set to `false` the column will be excluded from the exported Excel file.
         { field: "UnitsInStock", title: "Units In Stock", exportable: { excel: false} } //excluded from the export
       ]
     });
-</script>
+    </script>
 
 ### columns.exportable.pdf `Boolean` *(default: true)*
 
@@ -3203,7 +3203,7 @@ The supported values are:
         { name: "John Doe", age: 33, city: "Madrid" }
       ]
     });
-</script>
+    </script>
 
 ### columnMenu.columns.groups `Array` *(default: null)*
 

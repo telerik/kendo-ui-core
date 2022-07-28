@@ -1,50 +1,50 @@
 ---
 title: Icons
 page_title: Icons
-description: "Get started with the Telerik UI {{ site.platform }} SplitButton and add background, image, or font icons to enhance the visualization of the widget."
-slug: htmlhelpers_splitbutton_aspnetcore_icons
+description: "Get started with the Telerik UI {{ site.platform }} DropDownButton and add background, image, or font icons to enhance the visualization of the widget."
+slug: htmlhelpers_dropdownbutton_aspnetcore_icons
 position: 4
 ---
 
 # Icons
 
-The SplitButton provides options for visually enhancing its textual content by adding icons. You can specify them through the following configuration methods:
+The DropDownButton provides the `Icon`, `SpriteCssClass`, and `ImageUrl` properties for configuring icons. With a specific DropDownButton instance, you have to use only one of them&mdash;if you define multiple properties, the DropDownButton will work with only one of them in the order previously stated.
 
-* `Icon()`&mdash;This method displays the appropriate [Kendo UI for jQuery font icon.](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/font-icons)
+* `Icon()`&mdash;This method displays the appropriate [Kendo UI font icon.](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/font-icons)
 
     ```HtmlHelper
-        @(Html.Kendo().SplitButton()
-            .Name("splitButton")
+        @(Html.Kendo().DropDownButton()
+            .Name("DropDownButton")
             .Text("Plus")
             .Icon("plus")
         )
     ```
     {% if site.core %}
     ```TagHelper
-    <kendo-splitbutton name="splitButton" text="Plus" icon="plus">
-    </kendo-splitbutton>
+        <kendo-dropdownbutton name="DropDownButton" text="Plus" icon="plus">
+        </kendo-dropdownbutton>
     ```
     {% endif %}
 * `SpriteCssClass()`&mdash;This method displays the icon as a background of a span element instead.
 
     ```HtmlHelper
-        @(Html.Kendo().SplitButton()
-            .Name("splitButton")
+        @(Html.Kendo().DropDownButton()
+            .Name("DropDownButton")
             .Text("Plus")
             .SpriteCssClass("myPlusIcon")
         )
     ```
     {% if site.core %}
     ```TagHelper.cshtml
-        <kendo-splitbutton name="splitButton" text="Plus" sprite-css-class="myPlusIcon">
-        </kendo-splitbutton>
+        <kendo-dropdownbutton name="DropDownButton" text="Plus" sprite-css-class="myPlusIcon">
+        </kendo-dropdownbutton>
     ```
     {% endif %}
 * `ImageUrl()`&mdash;This method applies image icons.
 
     ```HtmlHelper
-        @(Html.Kendo().SplitButton()
-                .Name("splitButton")
+        @(Html.Kendo().DropDownButton()
+                .Name("DropDownButton")
                 .Text("Plus")
                 .ImageUrl("url/to/myPlusIcon.png")
         )
@@ -52,8 +52,8 @@ The SplitButton provides options for visually enhancing its textual content by a
     ```
     {% if site.core %}
     ```TagHelper
-        <kendo-splitbutton name="splitButton" text="Plus" image-url="url/to/myPlusIcon.png">
-        </kendo-splitbutton>
+        <kendo-dropdownbutton name="DropDownButton" text="Plus" image-url="url/to/myPlusIcon.png">
+        </kendo-dropdownbutton>
     ```
     {% endif %}
 
@@ -73,8 +73,8 @@ You can integrate FontAwesome or other font icons by setting the required third-
         }
     </style>
 
-    @(Html.Kendo().SplitButton()
-        .Name("splitButton")
+    @(Html.Kendo().DropDownButton()
+        .Name("DropDownButton")
         .Text("Archive")
         .SpriteCssClass("fa fa-archive")
         .Items(items =>
@@ -97,16 +97,16 @@ You can integrate FontAwesome or other font icons by setting the required third-
         }
     </style>
 
-    <kendo-splitbutton name="splitButton" text="Archive" sprite-css-class="fa fa-archive">
-        <splitbutton-items>
+    <kendo-dropdownbutton name="DropDownButton" text="Archive" sprite-css-class="fa fa-archive">
+        <dropdownbutton-items>
             <item text="Item 1"></item>
             <item text="Item 2"></item>
-        </splitbutton-items>
-    </kendo-splitbutton>
+        </dropdownbutton-items>
+    </kendo-dropdownbutton>
 ```
 {% endif %}
 
 ## See Also
 
-* [Icons in the SplitButton (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/icons)
-* [Server-Side API](/api/splitbutton)
+* [Icons in the DropDownButton (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/icons)
+* [Server-Side API](/api/dropdownbutton)

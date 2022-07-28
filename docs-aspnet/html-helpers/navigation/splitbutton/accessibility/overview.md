@@ -28,5 +28,5 @@ The SplitButton supports the standards for providing accessible web content whic
 
 ## See Also
 
-* [Keyboard Navigation by the SplitButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/keyboard-navigation)
+* [Keyboard Navigation by the SplitButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug compliance_accessibility %})
