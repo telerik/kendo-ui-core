@@ -12,7 +12,7 @@ The TabStrip provides advanced options for configuring its tabs.
 
 ## Tabs Positioning
 
-The TabStrip API provides the `.TabPosition()`[/api/Kendo.Mvc.UI.Fluent/TabStripBuilder#tabpositionkendomvcuitabstriptabposition] configuration option that allows you to set the position of the tabs. You can position the tabs to the top, left, right or bottom of the TabStrip via the [`TabStripTabPosition`](/api/Kendo.Mvc.UI/TabStripTabPosition)
+The TabStrip API provides the [`TabPosition`](/api/Kendo.Mvc.UI.Fluent/TabStripBuilder#tabpositionkendomvcuitabstriptabposition) configuration option that allows you to set the position of the tabs. You can position the tabs to the top, left, right or bottom of the TabStrip via the [`TabStripTabPosition`](/api/Kendo.Mvc.UI/TabStripTabPosition)
 
 The following example demonstrates how to position the TabStrip tabs to the right:
 
