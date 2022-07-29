@@ -10,14 +10,14 @@ position: 13
 
 The Telerik UI Editor for {{ site.framework }} comes with a built-in option to export its content to PDF. To enable the PDF export, add the `Pdf` tool to the widget' toolbox:
 
-````HtmlHelper
+```HtmlHelper
     @(Html.Kendo().Editor()
             .Name("editor")
             .Tools(tools => tools
                 .Pdf()
             )
     )
-````
+```
 {% if site.core %}
 ```TagHelper
     <kendo-editor name="editor">
@@ -31,7 +31,7 @@ The Telerik UI Editor for {{ site.framework }} comes with a built-in option to e
 
 Customizations such as file name, font size, export of all pages can be added to the [`Pdf`](/api/Kendo.Mvc.UI.Fluent/EditorPdfSettingsBuilder) option of the widget:
 
-````HtmlHelper
+```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("editor")
         .Pdf(pdf => pdf
@@ -44,7 +44,7 @@ Customizations such as file name, font size, export of all pages can be added to
             .Pdf()
         )
     )
-````
+```
 {% if site.core %}
 ```TagHelper
     <kendo-editor name="editor">

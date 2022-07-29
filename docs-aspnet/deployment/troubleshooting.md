@@ -3,7 +3,7 @@ title: Deployment Troubleshooting
 page_title: Deployment Troubleshooting
 description: Troubleshooting deployment issues involving the UI for ASP.NET Core suite.
 slug: deployment_troubleshooting
-position: 2
+position: 20
 ---
 
 # Deployment Troubleshooting

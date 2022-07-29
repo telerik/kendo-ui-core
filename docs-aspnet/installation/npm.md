@@ -1,7 +1,7 @@
 ---
 title: Installing with NPM
 page_title: Installing with NPM
-description: "Get started with Telerik UI for ASP.NET Core and install NPM packages of the helpers."
+description: "Get started with {{ site.product }} and install NPM packages of the helpers."
 previous_url: /getting-started/installation/npm
 slug: npmpackages_core
 position: 9
