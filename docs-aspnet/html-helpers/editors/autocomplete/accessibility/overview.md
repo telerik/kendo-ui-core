@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: {{ site.product }} AutoComplete Documentation | AutoComplete Accessibility
+page_title: "{{ site.product }} AutoComplete Documentation | AutoComplete Accessibility"
 description: "Get started with the {{ site.product }} AutoComplete and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_aspnetcore_autocomplete
 position: 1
@@ -30,7 +30,7 @@ The Kendo UI for jQuery AutoComplete component is [WCAG 2.1 AAA](https://www.w3.
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
 | .k-input-inner | `role=combobox` | Announces the presence of a autocomplete as inner element of the autocomplete used for filtering. |
-|  | `label for=` or `aria-label` or `aria-labelledby` | The input needs an accessible name to be assigned to it. |
+|  | `label for` or `aria-label` or `aria-labelledby` | The input needs an accessible name to be assigned to it. |
 |  | `aria-haspopup=listbox` | Indicates the component has a listbox Popup. |
 |  | `aria-expanded=true/false` | Announces the state of the visibility of the popup. |
 |  | `aria-controls=.k-animation-container id` | Points to the popup element. Signifies that the `combobox` element controls the `listbox`. |
