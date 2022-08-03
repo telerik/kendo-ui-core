@@ -36,7 +36,10 @@ The following example demonstrates how to define the Calendar by using the Calen
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-calendar name="calendar" >
+    <kendo-calendar name="calendar"
+                    min="new DateTime(2010, 1, 1, 10, 0, 0)"
+                    max="new DateTime(2020, 1, 1, 20, 0, 0)"
+                    value="DateTime.Now">
     </kendo-calendar>
 ```
 {% endif %}
@@ -80,6 +83,26 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+   <kendo-calendar name="calendar"
+                   on-change="calendar_change"
+                   on-navigate="calendar_navigate">
+   </kendo-calendar>
+   <script>
+        function calendar_navigate(e) {
+            // Handle the navigate event.
+            var calendar = e.sender;
+        }
+
+        function calendar_change(e) {
+            // Alerts the selected date with kendo.alert().
+            var calendar = e.sender;
+            kendo.alert(calendar.value());
+        }
+    </script>
+```    
+{% endif %}
 
 ### Handling by Template Delegate
 
@@ -104,6 +127,22 @@ The following example demonstrates how to subscribe to events by a template dele
       )
     )
 ```
+{% if site.core %}
+```TagHelper.cshtml
+    <kendo-calendar name="calendar"
+                    on-change='function(e)
+                    {
+                        // Handle the change event inline.
+                        console.log(e.sender.value());
+                    }'
+                    on-navigate='function(e)
+                    {
+                        // Handle the navigate event inline.
+                        console.log(e.sender);
+                    }'>
+    </kendo-calendar>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 

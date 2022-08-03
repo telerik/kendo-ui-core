@@ -23,8 +23,8 @@ As a result, the Calendar does not navigate to a date that is earlier than the s
 ```TagHelper
     <kendo-calendar name="calendar"
                     value="DateTime.Now"
-                    min="new DateTime(1950,1,2)"
-                    max="new DateTime(2049,12,31)">
+                    min="new DateTime(1950, 1, 2)"
+                    max="new DateTime(2049, 12, 31)">
     </kendo-calendar>
 ```
 {% endif %}

@@ -28,17 +28,20 @@ It also provides customizing its content through templates, setting different ty
 The following example demonstrates how to define the Badge.
 
 ```HtmlHelper
-    <a class="k-button">
-    @(Html.Kendo().Badge()
-        .Name("badge")
-        .Value("42")
-        .Appearance("rectangle"))
+    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">
+        @(Html.Kendo().Badge()
+            .Name("badge")
+            .Text("42")
+            .Shape(BadgeShape.Rectangle)
+        )
     </a>
 ```
 {% if site.core %}
 ```TagHelper
-    <a class="k-button">
-        <kendo-badge name="badge" value="42" appearance="rectangle">
+    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">
+        <kendo-badge name="badge" 
+                     text="42" 
+                     shape="BadgeShape.Rectangle">
         </kendo-badge>
     </a>
 ```
@@ -49,18 +52,22 @@ The following example demonstrates how to define the Badge.
 The badge also provides the choice to be inline or overlay and set its type. To make the badge overlay add the `k-badge-overlay` class to the parent parent element.
 
 ```HtmlHelper
-    <a class="k-button k-badge-overlay">
-    @(Html.Kendo().Badge()
-        .Name("badge")
-        .Value("42")
-        .Type("warning")
-        .Appearance("rectangle"))
+    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-badge-overlay">
+        @(Html.Kendo().Badge()
+            .Name("badge")
+            .Text("42")
+            .ThemeColor(BadgeColor.Warning)
+            .Shape(BadgeShape.Rectangle)
+        )
     </a>
 ```
 {% if site.core %}
 ```TagHelper
-    <a class="k-button k-badge-overlay">
-        <kendo-badge name="badge" value="42" type="warning" appearance="rectangle">
+    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-badge-overlay">
+        <kendo-badge name="badge" 
+                     text="42" 
+                     theme-color="BadgeColor.Warning" 
+                     shape="BadgeShape.Rectangle">
         </kendo-badge>
     </a>
 ```
@@ -71,18 +78,22 @@ The badge also provides the choice to be inline or overlay and set its type. To 
 With the badge you can customize the content using templates.
 
 ```HtmlHelper
-    <a class="k-button k-badge-overlay">
-    @(Html.Kendo().Badge()
-        .Name("badge")
-        .Value("42")
-        .Template("#= +value > 10 ? '9+' : value #")
-        .Appearance("rectangle"))
+    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-badge-overlay">
+        @(Html.Kendo().Badge()
+            .Name("badge")
+            .Text("42")
+            .Template("#= this._text > 10 ? '9+' : this._text #")
+            .Shape(BadgeShape.Rectangle)
+        )
     </a>
 ```
 {% if site.core %}
 ```TagHelper
-    <a class="k-button k-badge-overlay">
-        <kendo-badge name="badge" value="42" type="warning" appearance="rectangle" template="#= +value > 10 ? '9+' : value #">
+    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-badge-overlay">
+        <kendo-badge name="badge" 
+                     text="42" 
+                     shape="BadgeShape.Rectangle" 
+                     template="#= this._text > 10 ? '9+' : this._text #">
         </kendo-badge>
     </a>
 ```
@@ -124,6 +135,41 @@ You can integrate the Badge into other UI components. The following example demo
         #}#
     </script>
 ```
+{% if site.core %}
+```TagHelper.cshtml
+
+    @addTagHelper *, Kendo.Mvc
+
+    @(Html.Kendo().Grid<OrderViewModel>()
+        .Name("grid")
+        .Columns(columns => {
+            columns.Bound("OrderID").HtmlAttributes(new { @class = "templateCell" }).ClientTemplateId("orderTemplate");
+        })
+        .Events(ev => ev.DataBound("initBadges"))
+        .DataSource(dataSource => dataSource
+          .Ajax()
+          .Read(read => read.Action("Orders_Read", "Grid"))
+       )
+    )
+
+    <script type="text/html" id="orderTemplate">
+        #if(OrderID <= 10){#
+            <kendo-badge name="flag#=OrderID#"
+                         theme-color="BadgeColor.Success"
+                         text="New"
+                         is-in-client-template="true">
+            </kendo-badge>                         
+        #}#
+        #if(OrderID > 10){#
+            <kendo-badge name="flag#=OrderID#"
+                         theme-color="BadgeColor.Error"
+                         text="Old"
+                         is-in-client-template="true">
+            </kendo-badge>
+        #}#
+    </script>
+```
+{% endif %}
 ```JavaScript
     function initBadges(e) {
         $(".templateCell").each(function(){
@@ -140,9 +186,9 @@ You can access an existing Button instance by using the [`jQuery.data()`](https:
     <a class="k-button k-badge-overlay">
     @(Html.Kendo().Badge()
         .Name("badge")
-        .Value("42")
-        .Template("#= +value > 10 ? '9+' : value #")
-        .Appearance("rectangle"))
+        .Text("42")
+        .Template("#= this._text > 10 ? '9+' : this._text #")
+        .Shape(BadgeShape.Rectangle)
     </a>
 
     <script>
@@ -152,7 +198,10 @@ You can access an existing Button instance by using the [`jQuery.data()`](https:
 {% if site.core %}
 ```TagHelper
     <a class="k-button k-badge-overlay">
-        <kendo-badge name="badge" value="42" type="warning" appearance="rectangle">
+        <kendo-badge name="badge" 
+                     text="42"
+                     template="#= this._text > 10 ? '9+' : this._text #"
+                     shape="BadgeShape.Rectangle">
         </kendo-badge>
     </a>
 

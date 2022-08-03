@@ -50,7 +50,26 @@ The following example demonstrates how to define the Map.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-map name="map" center="new double[] { 30.268107, -97.744821 }" zoom="3"></kendo-map>
+    @{
+        var centerCoordinates = new double[] { 35.268107, -95.744821 };
+        var locationCoordinates = new double[] { 30.268107, -97.744821 };
+        var subdomains = new string[] { "a", "b", "c" };
+    }
+
+    <kendo-map name="map" center="centerCoordinates" zoom="2">
+        <layers>
+            <layer type="MapLayerType.Tile"
+                   url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
+                   subdomains="subdomains"
+                   attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>">
+            </layer>
+        </layers>
+        <markers>
+            <map-marker location="locationCoordinates" shape="MapMarkersShape.PinTarget">
+                <tooltip content="Austin, TX"></tooltip>
+            </map-marker>
+        </markers>
+    </kendo-map>
 ```
 {% endif %}
 ```Controller
@@ -91,7 +110,11 @@ The following example demonstrates the basic configuration for the Map component
     )
 ```
 ```TagHelper
-    <kendo-map name="map" center="new double[] { 30.268107, -97.744821 }"              zoom="3">
+    @{
+        var coordinates = new double[] { 30.268107, -97.744821 };
+    }
+
+    <kendo-map name="map" center="coordinates" zoom="3">
         <layer-defaults>
             <map-marker>
                 <tooltip>
@@ -102,7 +125,7 @@ The following example demonstrates the basic configuration for the Map component
             </map-marker>
         </layer-defaults>
         <markers>
-            <map-marker location="new double[] { 30.268107, -97.744821 }"  shape="MapMarkersShape.PinTarget">
+            <map-marker location="coordinates"  shape="MapMarkersShape.PinTarget">
                 <tooltip content="Austin, TX"></tooltip>
             </map-marker>
         </markers>
@@ -169,6 +192,29 @@ For a complete example on basic Map events, refer to the [demo on using the even
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var subdomains = new string[] { "a", "b", "c" };
+    }
+
+    <kendo-map name="map" on-reset="mapReset">
+        <layers>
+            <layer type="MapLayerType.Tile"
+                   url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
+                   subdomains="subdomains"
+                   attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>">
+            </layer>
+        </layers>
+    </kendo-map>
+    
+    <script>
+        function mapReset(e) {
+            // Handle the reset event.
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

@@ -15,13 +15,13 @@ You can configure the default state of the Telerik UI ExpansionPanel for {{ site
 You can disable the Kendo UI ExpansionPanel component and make the user unable to expand or collapse the panel. To configure this state, set the [`Disabled`](/api/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#disabledsystemboolean) property to `true`.
 
 ```HtmlHelper
-@(Html.Kendo().ExpansionPanel()
+    @(Html.Kendo().ExpansionPanel()
             .Name("brazil")
             .Title("Brazil")
             .SubTitle("South America")
             .Disabled(true)
-            .Content("...")
-            )
+            .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -38,13 +38,13 @@ You can disable the Kendo UI ExpansionPanel component and make the user unable t
 The Kendo UI ExpansionPanel component can be expanded by default. To configure this state, set the [`Expanded`](/api/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#expandedsystemboolean) property to `true`.
 
 ```HtmlHelper
-@(Html.Kendo().ExpansionPanel()
-            .Name("brazil")
-            .Title("Brazil")
-            .SubTitle("South America")
-            .Expanded(true)
-            .Content("...")
-            )
+    @(Html.Kendo().ExpansionPanel()
+                .Name("brazil")
+                .Title("Brazil")
+                .SubTitle("South America")
+                .Expanded(true)
+                .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -61,13 +61,13 @@ The Kendo UI ExpansionPanel component can be expanded by default. To configure t
 By default, the user can expand or collapse the ExpansionPanel. To prevent this, set the [`Toggleable`](/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#toggleablesystemboolean) property to `false`.
 
 ```HtmlHelper
-@(Html.Kendo().ExpansionPanel()
+    @(Html.Kendo().ExpansionPanel()
             .Name("brazil")
             .Title("Brazil")
             .SubTitle("South America")
             .Toggleable(false)
-            .Content("...")
-            )
+            .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -84,13 +84,13 @@ By default, the user can expand or collapse the ExpansionPanel. To prevent this,
 You can disable the ExpansionPanel visual animations that appear when the user expands or collapses the panel. To disable the animations, set the [`Animation`](/api/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#animationsystemboolean) property to `false`.
 
 ```HtmlHelper
-@(Html.Kendo().ExpansionPanel()
+    @(Html.Kendo().ExpansionPanel()
             .Name("brazil")
             .Title("Brazil")
             .SubTitle("South America")
-            Animation(false)
-            .Content("...")
-            )
+            .Animation(false)
+            .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
+    )
 ```
 {% if site.core %}
 ```TagHelper

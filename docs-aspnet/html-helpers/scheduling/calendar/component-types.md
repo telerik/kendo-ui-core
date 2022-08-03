@@ -18,6 +18,12 @@ By default, the Calendar is initialized with the `classic` render mode. In order
         .ComponentType("modern")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-calendar name="calendar" component-type="modern">
+    </kendo-calendar>
+```
+{% endif %}
 
 As a result, the appearance of the widget is alternated. 
 

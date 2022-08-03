@@ -32,13 +32,13 @@ The following example demonstrates how to define the ExpansionPanel.
             .SubTitle("South America")
             .Expanded(true)
             .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium). As brazilwood produces a deep red dye, it was highly valued by the European textile industry and was the earliest commercially exploited product from Brazil.")
-            )
+     )
 ```
 {% if site.core %}
 ```TagHelper
 	<kendo-expansionpanel name="brazil" title="Brazil" sub-title="South America" expanded="true">
         <content>
-            The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).
+            The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium). As brazilwood produces a deep red dye, it was highly valued by the European textile industry and was the earliest commercially exploited product from Brazil.
         </content>
     </kendo-expansionpanel>
 ```
@@ -54,8 +54,8 @@ The following example demonstrates how to get an instance of the ExpansionPanel.
             .Title("Brazil")
             .SubTitle("South America")
             .Expanded(true)
-            .Content("...")
-            )
+            .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium). As brazilwood produces a deep red dye, it was highly valued by the European textile industry and was the earliest commercially exploited product from Brazil.")
+    )
 
     <script type="text/javascript">
         $(function () {
@@ -69,7 +69,7 @@ The following example demonstrates how to get an instance of the ExpansionPanel.
 ```TagHelper
     <kendo-expansionpanel name="brazil" title="Brazil" sub-title="South America" expanded="true">
         <content>
-            The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).
+            The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium). As brazilwood produces a deep red dye, it was highly valued by the European textile industry and was the earliest commercially exploited product from Brazil.
         </content>
     </kendo-expansionpanel>
 
@@ -88,12 +88,40 @@ The following example demonstrates how to get an instance of the ExpansionPanel.
 * [Default State]({% slug state_htmlhelpers_expansionpanel_aspnetcore %})
 * [Keyboard Navigation]({% slug keynav_htmlhelpers_expansionpanel_aspnetcore %})
 
-{% if site.core %}
+
 
 ## Event Handling
 
 The below example demonstrates how the the `Expand`, `Collapse` and `Complete` events of the ExpansionPanel can be intercepted to output messages in the console when these events are raised. They can also be hooked for customizations or to execute custom logic, if necessary.
 
+```HtmlHelper
+    @(Html.Kendo().ExpansionPanel()
+            .Name("brazil")
+            .Title("Brazil")
+            .SubTitle("South America")
+            .Expanded(true)
+            .Events(e => {
+                e.Collapse("onCollapse");
+                e.Complete("onComplete");
+                e.Expand("onExpand")
+            })
+            .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium). As brazilwood produces a deep red dye, it was highly valued by the European textile industry and was the earliest commercially exploited product from Brazil.")
+     )
+     
+     <script>
+        function onExpand() {
+            console.log("Expand");
+        };
+        function onCollapse() {
+             console.log("Collapse");
+        };
+        function onComplete() {
+            console.log("Complete");
+        };
+    </script>
+```
+
+{% if site.core %}
 ```TagHelper
 	<kendo-expansionpanel name="brazil" title="Brazil" sub-title="South America" expanded="true" on-expand="onExpand" on-collapse="onCollapse" on-complete="onComplete">
         <content>
