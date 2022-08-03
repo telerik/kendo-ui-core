@@ -34,7 +34,7 @@ To perform the multiple date selection, the user can also use the keyboard:
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-calendar selectable="multiple" name="calendar">
+    <kendo-calendar name="calendar" selectable="multiple">
     </kendo-calendar>
 ```
 {% endif %}

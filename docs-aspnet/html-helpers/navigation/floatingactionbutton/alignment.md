@@ -21,12 +21,12 @@ The `Align` configuration option specifies the position of the FloatingActionBut
     @(Html.Kendo().FloatingActionButton()
             .Name("fab")
             .Align(FloatingActionButtonAlign.TopCenter)
-        )   
+    )   
 ```
 {% if site.core %}
 ```TagHelper
     <kendo-floatingactionbutton name="fab"
-                                align="FloatingActionButtonAlign.BottomEnd">
+                                align="FloatingActionButtonAlign.TopCenter">
     </kendo-floatingactionbutton>
 ```
 {% endif %}
@@ -45,9 +45,9 @@ The `AlignOffset` configuration option specifies the horizontal and vertical off
 {% if site.core %}
 ```TagHelper
     <kendo-floatingactionbutton name="fab"
-                                align="FloatingActionButtonAlign.BottomEnd"
-                                align-offset-horizontal="100"
-                                align-offset-vertical="100">
+                                align="FloatingActionButtonAlign.BottomStart"
+                                align-offset-horizontal="50"
+                                align-offset-vertical="50">
     </kendo-floatingactionbutton>
 ```
 {% endif %}
@@ -67,9 +67,9 @@ The `PositionMode` configuration option specifies the CSS position of the Floati
 {% if site.core %}
 ```TagHelper
     <kendo-floatingactionbutton name="fab"
-                                align="FloatingActionButtonAlign.BottomEnd"
-                                align-offset-horizontal="100"
-                                align-offset-vertical="100"
+                                align="FloatingActionButtonAlign.BottomStart"
+                                align-offset-horizontal="50"
+                                align-offset-vertical="50"
                                 position-mode="FloatingActionButtonPositionMode.Fixed"> //positions the button relative to the viewport
     </kendo-floatingactionbutton>
 ```

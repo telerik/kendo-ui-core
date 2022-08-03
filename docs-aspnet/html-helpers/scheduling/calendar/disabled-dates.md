@@ -25,7 +25,11 @@ When you set an array, list the days that will be disabled by using the first le
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-calendar disable-dates="new DateTime[] { DateTime.Now.AddDays(2), DateTime.Now.AddDays(2) }" value="DateTime.Now" name="calendar">
+    @{
+        var disabledDates = new DateTime[] { DateTime.Now.AddDays(2), DateTime.Now.AddDays(2) };
+    }
+
+    <kendo-calendar name="calendar" disable-dates="disabledDates" value="DateTime.Now">
     </kendo-calendar>
 ```
 {% endif %}
@@ -55,7 +59,7 @@ When you add a function, determine its return value as `true` for the date that 
 {% if site.core %}
 ```TagHelper
     <div class="demo-section k-content" style="text-align: center;">
-        <kendo-calendar disable-dates-handler="disabledDatesHandler" value="DateTime.Now" name="calendar">
+        <kendo-calendar name="calendar" disable-dates-handler="disabledDatesHandler" value="DateTime.Now">
         </kendo-calendar>
     </div>
 

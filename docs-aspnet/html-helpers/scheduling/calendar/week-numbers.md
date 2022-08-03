@@ -21,7 +21,7 @@ The `weekNumber` option enables the Calendar to display the week number on an an
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-calendar week-number="true" name="calendar">
+    <kendo-calendar name="calendar" week-number="true">
     </kendo-calendar>
 ```
 {% endif %}
@@ -46,7 +46,7 @@ You can use these properties in the template to make additional calculations.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-calendar week-number="true" name="calendar">
+    <kendo-calendar name="calendar" week-number="true">
         <month week-number="<i>#= data.weekNumber #</i>" />
     </kendo-calendar>
 ```

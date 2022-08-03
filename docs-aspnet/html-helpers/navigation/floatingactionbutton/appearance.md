@@ -24,7 +24,6 @@ The Material Design guidelines dictate that:
         .Icon("plus")
         .Text("Add To Cart")
     )
-    </script>
 ```
 {% if site.core %}
 ```TagHelper
@@ -53,8 +52,12 @@ The `Icon` configuration option specifies the name of an icon. The selected icon
     <kendo-floatingactionbutton name="fab"
                                 icon="plus">
         <floatingactionbutton-items>
-            <floatingactionbutton-item label="Add Rating" icon="star"></floatingactionbutton-item>
-            <floatingactionbutton-item label="Add Comment" icon="edit"></floatingactionbutton-item>
+            <floatingactionbutton-item label="Add Rating" 
+                                       icon="star">
+            </floatingactionbutton-item>
+            <floatingactionbutton-item label="Add Comment" 
+                                       icon="edit">
+            </floatingactionbutton-item>
         </floatingactionbutton-items>
     </kendo-floatingactionbutton>
 ```
