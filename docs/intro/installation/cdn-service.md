@@ -129,7 +129,8 @@ The following example demonstrates how to initialize a DropDownList with some ba
 
 ## See Also
 
-* [Troubleshooting When Using Kendo UI CDN services]({ slug troubleshoot_cdn_installing})
+* [Troubleshooting When Using Kendo UI CDN services]({% slug troubleshoot_cdn_installing %})
+* [Troubleshooting When Trying to Refer Kendo UI Internal Builds from CDN]({% slug cannot_refer_internal_builds_cdn %})
 * [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
 * [Installing Kendo UI with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})

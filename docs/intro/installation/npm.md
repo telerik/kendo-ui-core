@@ -74,7 +74,7 @@ The internal builds are released in the **dev** channel.
 
 ## See Also
 
-* [Troubleshooting When Installing with NPM]({ slug troubleshoot_npm_installing})
+* [Troubleshooting When Installing with NPM]({% slug troubleshoot_npm_installing %})
 * [Hosting Kendo UI for jQuery in Your Project]({% slug hosting_kendoui %})
 * [Installing Kendo UI for jQuery with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})

@@ -133,7 +133,9 @@ The following example demonstrates how to initialize a DropDownList with some ba
 
 ## See Also
 
-* [Troubleshooting When Installing with Bower]({ slug troubleshoot_bower_installing})
+* [Troubleshooting When Installing with Bower]({% slug troubleshoot_bower_installing %})
+* [Troubleshooting Restore Fails for ASP.NET Core MVC RC in VS 2015 When Installing with Bower]({% slug restore_fails_core_mvc_vs2015 %})
+* [Troubleshooting How to Store Your Username and Password]({% slug troubleshoot_bower_storing_credentials %}).
 * [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
 * [Installing Kendo UI by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})

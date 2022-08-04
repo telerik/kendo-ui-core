@@ -38,11 +38,11 @@ The Kendo UI for jQuery AutoComplete component is [WCAG 2.1 AAA](https://www.w3.
 |  | `aria-autocomplete=list` | Attribute is rendered and value is set to list when **filtering** feature is enabled. |
 |  | `aria-autocomplete=both` | Attribute is rendered and value is set to both when both **filtering** and **suggest** features are enabled. |
 |  | `aria-autocomplete=inline` | Attribute is rendered and value is set to only **suggest** feature is enabled. |
-|  | `disabled` or `aria-disabled` | Attribute is rendered only when the autocomplete is disabled. |
 |  | `readonly` or `aria-readonly` | Attribute is rendered only when the autocomplete is readonly. |
 |  | `aria-invalid=true` | Attribute is rendered only when the autocomplete is in form and announces the valid state of the component. |
 |  | `aria-busy=true` | Attribute is rendered only when the autocomplete is loading data. |
 |  | `tabindex=0` | The element must be focusable. |
+| .k-disabled .k-input-inner | `disabled=disabled` or `aria-disabled=true` | Attribute is rendered only when the autocomplete is disabled. |
 
 ### ListBox Popup
 
