@@ -13,7 +13,7 @@ This article provides solutions for common issues you may encounter while workin
 
 ## The selected item is lost when it is bound to the shared DataSource
 
-> This issue can also be observed in [Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}) and [Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.
+> This issue can also be observed in [Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.
 
 The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. Such behavior is expected.
 
@@ -46,7 +46,23 @@ The following example demonstrates the solution to the above issue.
 
 ## Repetitive requests are performed while filtering in ASP.NET
 
-For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
+**Cause** Repetitive requests that are performed by the Kendo UI ComboBox widget are caused by the response from the ASP.NET Web API Order controller.
+
+**Solution** The total configuration has to respond to the total number of records that are found after filtering, that is, dataResult.Count. Otherwise, the widget continues to request the remainder of the total.
+
+The following example demonstrates how to change the service accordingly.
+
+```html
+   public object Get(int? take = null, int? skip = null, string q = null)
+    {
+        List<OrderModel> dataResult = string.IsNullOrEmpty(q) ? Orders.Skip(skip ?? 0).Take(take ?? int.MaxValue).ToList() : Orders.Where(m => m.Name.Contains(q)).ToList();
+        return new
+        {
+            total = dataResult.Count,
+            data = dataResult
+        };
+    }
+```
 
 ## See Also
 

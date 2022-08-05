@@ -64,4 +64,3 @@ To initialize the DropDownList by binding the widget to remote data arrays and t
 * [Binding the DropDownList to Remote Data (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/remotedatasource)
 * [Binding the DropDownList over MVVM (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/mvvm)
 * [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
-* [Troubleshooting]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
