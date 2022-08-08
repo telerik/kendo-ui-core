@@ -1,7 +1,7 @@
 ---
 title: Using Script License Code
 page_title: Using Script License Code | Download and Installation 
-description: "Get started with Kendo UI for jQuery and learn how to download the library and initialize its widgets."
+description: "Get started with Kendo UI for jQuery and learn how to acquire the library from the NPM distribution channel and register the script license registration."
 slug: using-license-code
 position: 5
 ---
@@ -10,12 +10,12 @@ position: 5
 
 Kendo UI for jQuery is a UI library distributed under a commercial license. 
 
-As of the R2 2022 release, using any of the Kendo UI for jQuery components from the NPM distribution channel requires a script license registration. Depending on the license type that you own, you can register an active trial license or a commercial license key.
+As of the R2 2022 release, using any of the Kendo UI for jQuery components from the NPM distribution channel requires a script license registration. Depending on the license type you own, you can register an active trial license or a commercial license key.
 
 If you are experiencing any issues related to the license key, inform the team through the [available support channels]({% slug welcometo_kendoui %}#support-options).
 
->* The script license registration is required only for the commercial NPM package (`@progress/kendo-ui`). The other Kendo UI for jQuery commercial distributions or script sources require only an active license, that is, you don't need script registration when using NuGet, CDN, Bower, and locally downloaded Kendo UI bundles. 
->* The license key will be distributed along with the scripts and this cannot not be avoided. However, Progress recommends that you do not publicly announce it.
+>* The script license registration is required only for the commercial NPM package (`@progress/kendo-ui`). The other Kendo UI for jQuery commercial distributions or script sources require only an active license. This means that you don't need script registration when using NuGet, CDN, Bower, and for locally downloaded Kendo UI bundles. 
+>* The license key will be distributed along with the scripts which cannot not be avoided. However, Progress recommends that you do not publicly announce it.
 
 ## 1. Get a License Key
 
@@ -43,7 +43,9 @@ Then, utilize the `KendoLicensing.setScriptKey()` method.
 
 ### Use the NPM Package
 
-Use the [previously generated code](#1-get-a-license-key) and place it in the main script file the where Kendo UI for jQuery scripts are imported.
+Use the [previously generated code](#1-get-a-license-key) and place it in the main script file the where Kendo UI for jQuery scripts are imported. 
+
+The following examples illustrate a single include of `kendo.all.js` in your main `.js` file which can be located in one of the [common places](#common-locations).
 
 ```js
 import "@progress/kendo-ui";
@@ -54,9 +56,6 @@ KendoLicensing.setScriptKey(
 
 $("#grid").kendoGrid();
 ```
-
-or
-
 ```js
 require("@progress/kendo-ui");
 
@@ -67,9 +66,7 @@ KendoLicensing.setScriptKey(
 $("#grid").kendoGrid();
 ```
 
-The examples above illustrates a single include of `kendo.all.js` in your main javascript file that could be located in one of the [common places](#common-places-to-setup-the-license-code).
-
-In most cases you would need several imports of the Kendo libraries and you would need to setup the license code only on one place (most likely your main js file in your application). In that case, import the `kendo.core.js` and register your license code as usual: 
+Often, you will need two or more imports of the Kendo UI libraries and you will need to set up the license code only in one location, which most likely will be the main `.js` file of your application. In that case, import the `kendo.core.js` and register your license code as usual: 
 
 ```js
 import '@progress/kendo-ui/js/kendo.core';
@@ -78,11 +75,8 @@ KendoLicensing.setScriptKey(
     'Your license code'
 );
 
-// Rest of the code
+// The rest of the code.
 ```
-
-or 
-
 ```js
 require("@progress/kendo-ui/js/kendo.core");
 
@@ -90,10 +84,10 @@ KendoLicensing.setScriptKey(
     'Your license code'
 );
 
-// Rest of the code
+// The rest of the code.
 ```
 
-### Using Script Reference
+### Use a Script Reference
 
 Use the [previously generated code](#1-get-a-license-key) and place it right after the script tag.
 
@@ -107,29 +101,15 @@ Use the [previously generated code](#1-get-a-license-key) and place it right aft
 </script>
 ```
 
-### Common Places to Setup the License Code
+### Common Locations 
 
-Most common files to place the license code in your application are: 
+The most common files to place the license code in your application are listed below.  
 
-**For JS Applications:**
-- `./index.(html|js|ts)`
-- `./main.(html|js|ts)`
-- `./app.(html|js|ts)`
-- `./(dist|src)/index.(html|js|ts)`
-- `./(dist|src)/main.(html|js|ts)`
-- `./(dist|src)/app.(html|js|ts)`
-
-**For ASP.NET MVC Applications:**
-- `./Views/Shared/_Layout.cshtml`
-- `./Scripts/index.(js|ts)`
-- `./Scripts/site.(js|ts)`
-
-**For ASP.NET Core Applications:**
-- `./Views/Shared/_Layout.cshtml`
-- `./Pages/Shared/_Layout.cshtml`
-- `./Pages/_Layout.cshtml`
-- `./wwwroot/js/index.js`
-- `./wwwroot/js/site.js`
+|Type of Application|Common Locations
+|:---|:---
+|JS applications|<ul><li><code>./index.(html|js|ts)</code></li> <li><code>./main.(html|js|ts)</code></li> <li><code>./app.(html|js|ts)</code></li> <li><code>./(dist|src)/index.(html|js|ts)</code></li> <li><code>./(dist|src)/main.(html|js|ts)</code></li> <li><code>./(dist|src)/app.(html|js|ts)</code></li></ul>
+|ASP.NET MVC applications|<ul><li><code>./Views/Shared/_Layout.cshtml</code></li> <li><code>./Scripts/index.(js|ts)</code></li> <li><code>./Scripts/site.(js|ts)</code></li></ul>
+|ASP.NET Core applications|<ul><li><code>./Views/Shared/_Layout.cshtml</code></li> <li><code>./Pages/Shared/_Layout.cshtml</code></li> <li><code>./Pages/_Layout.cshtml</code></li> <li><code>./wwwroot/js/index.js</code></li> <li><code>./wwwroot/js/site.js</code></li></ul>
 
 ## Next Steps
 

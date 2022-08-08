@@ -350,9 +350,6 @@ navigation:
     "kendo-in-the-cloud":
         title: "Cloud Integration"
         position: 8
-    "telerik-product-integration":
-        title: "Integration with other Telerik Products"
-        position: 8
     "globalization":
         title: "Globalization"
         position: 9

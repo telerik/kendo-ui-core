@@ -79,6 +79,18 @@ Sets the background color for the contrast tool in the ColorGradient.
     });
     </script>
 
+### clearButton `Boolean` *(default: false)*
+Specifies whether the widget should display the 'Clear color' button.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+      clearButton: true
+    });
+    </script>
+
 ### format `String` *(default: "hex")*
 
 Sets the default input format in the gradient input editor.

@@ -57,6 +57,18 @@ Sets the background color for the contrast tool in the ColorGradient.
     });
     </script>
 
+### clearButton `Boolean` *(default: false)*
+Specifies whether the widget should display the 'Clear color' button.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        clearButton: true
+      });
+    </script>
+
 ### closeOnSelect `Boolean` *(default: false)*
 
 Specifies whether selection of a color in the palette view closes the popup. Applied only when buttons are set to false and the currently selected view is palette.
