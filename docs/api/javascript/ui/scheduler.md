@@ -447,7 +447,10 @@ If set to `true` the user can delete events from the view by clicking the "destr
 
 ### editable.editRecurringMode `String`
 
-Recurring events edit mode. The available modes are: "dialog" (default), "series" and "occurrence".
+Recurring events edit mode. The available modes are: 
+- "dialog" (default) - displays a dialog that allows the user to choose whether the current occurrence or the entire series will be edited; 
+- "series" - displays an editor for updating the entire series;
+- "occurrence" - only the current occurrence will be edited.
 
 #### Example - disable event deleting
     <div id="scheduler"></div>

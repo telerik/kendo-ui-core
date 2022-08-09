@@ -778,8 +778,14 @@ Destroys the widget.
                 }).data("kendoPDFViewer");
 
                 $("#destroyBtn").click(function () {
-                debugger;
-                    $("#pdfViewer").data("kendoPDFViewer").destroy();
+                  console.log('--- Before Destroy ---')
+                  console.log($("#pdfViewer").data("kendoPDFViewer"))
+                  $("#pdfViewer").data("kendoPDFViewer").destroy();
+                  console.log('--- After Destroy ---')
+                  console.log($("#pdfViewer").data("kendoPDFViewer"))
+
+                  // The destroy() method will destroy the PDFViewer widget. To remove the rendered component remove or empty the element from      which the widget has been initialized
+                  //$("#pdfViewer").remove()
                 });
             });
         </script>
