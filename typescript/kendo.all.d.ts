@@ -12935,6 +12935,7 @@ declare namespace kendo.ui {
         open?(e: WindowEvent): void;
         refresh?(e: WindowEvent): void;
         resize?(e: WindowEvent): void;
+        restore?(e: WindowEvent): void;
     }
     interface WindowEvent {
         sender: Window;
