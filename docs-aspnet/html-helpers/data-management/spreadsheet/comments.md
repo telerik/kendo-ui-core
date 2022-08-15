@@ -36,7 +36,28 @@ The following example demonstrates how a cell in the Spreadsheet can be initiall
         })
     )
 ```
-
+{% if site.core %}
+```TagHelper
+    <kendo-spreadsheet name="spreadsheet">
+        <sheets>
+            <sheet name="Sheet1">
+                <columns>
+                    <sheet-column width="115">
+                    </sheet-column>
+                </columns>
+                <rows>
+                    <sheet-row height="25">
+                        <cells>
+                            <cell value="This cell has a comment." comment="Comment set on the cell with the Spreadsheet initialization." text-align="SpreadsheetTextAlign.Center">
+                            </cell>
+                        </cells>
+                    </sheet-row>
+                </rows>
+            </sheet>
+        </sheets>
+    </kendo-spreadsheet>
+```
+{% endif %}
 ## See Also
 
 * [Server-Side API](/api/spreadsheet)

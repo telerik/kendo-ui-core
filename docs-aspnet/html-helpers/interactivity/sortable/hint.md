@@ -22,6 +22,16 @@ To disable that behavior, set the hint to an empty function by using [`jQuery.no
         var noHint = $.noop;
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-sortable name="sortable" hint="noHint">
+    </kendo-sortable>
+
+    <script>
+        var noHint = $.noop;
+    </script>
+```
+{% endif %}
 
 ## See Also
 

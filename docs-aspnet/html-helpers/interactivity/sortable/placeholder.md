@@ -32,8 +32,32 @@ The following example demonstrates how to build the placeholder from the dragged
             });
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+     <ul id="sortable">
+        <li>ItemA1</li>
+        <li>ItemA2</li>
+        <li>ItemA3</li>
+    </ul>
+
+    <kendo-sortable name="sortable" placeholder="placeholderCustom" >
+    </kendo-sortable>
+
+    <script>
+        function placeholderCustom(element) {
+            return element.clone().css({
+                "opacity": 0.3,
+                "border": "1px dashed #000000"
+            });
+        }
+    </script>
+```
+{% endif %}
 
 The following example demonstrates how to build a static placeholder.
+
+```HtmlHelper
 
     <ul id="sortable">
         <li>ItemA1</li>
@@ -46,6 +70,24 @@ The following example demonstrates how to build a static placeholder.
         .Placeholder("<li>Drop Here!</li>")
     )
 ```
+{% if site.core %}
+```TagHelper
+     <ul id="sortable">
+        <li>ItemA1</li>
+        <li>ItemA2</li>
+        <li>ItemA3</li>
+    </ul>
+
+    <kendo-sortable name="sortable" placeholder="placeholderHtml" >
+    </kendo-sortable>
+
+    <script>
+        function placeholderHtml(element) {
+            return "<li>Drop Here!</li>"
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

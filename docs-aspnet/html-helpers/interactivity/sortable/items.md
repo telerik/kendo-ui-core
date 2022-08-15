@@ -20,6 +20,12 @@ To make items non-sortable, disable them by providing a selector that matches th
     	.Disable(".disable")
 	)
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-sortable name="sortable-basic" disabled=".disable">
+    </kendo-sortable>
+```
+{% endif %}
 
 ## Filtering Items
 
@@ -31,6 +37,12 @@ To prevent items both from being dragged and being sort targets, specify a filte
     	.Filter(".sortable")
 	)
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-sortable name="sortable-basic" filter=".sortable">
+    </kendo-sortable>
+```
+{% endif %}
 
 ## Dragging Items within Containers
 
@@ -51,7 +63,7 @@ To enable the dragging of items between two lists, create a Sortable for each li
 
     @(Html.Kendo().Sortable()
         .For("#sortable-listB")
-        .ConnectWith("#sortable-listB")
+        .ConnectWith("#sortable-listA")
         .PlaceholderHandler("placeholder")
     )
 
@@ -61,6 +73,21 @@ To enable the dragging of items between two lists, create a Sortable for each li
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-sortable name="sortable-listA" connect-with="#sortable-listB" placeholder="placeholder" >
+    </kendo-sortable>
+
+    <kendo-sortable name="sortable-listB" connect-with="#sortable-listA" placeholder="placeholder" >
+    </kendo-sortable>
+
+    <script>
+        function placeholder(element) {
+            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

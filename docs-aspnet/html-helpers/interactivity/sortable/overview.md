@@ -56,8 +56,23 @@ The following example demonstrates a basic declaration of a Sortable widget. The
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-sortable name="sortable-basic" hint="hint"  placeholder="placeholder">
-</kendo-sortable>
+    <ul id="sortable-basic">
+          <li class="sortable">Papercut <span>3:04</span></li>
+          <li class="sortable">One Step Closer <span>2:35</span></li>
+          <li class="sortable">With You <span>3:23</span></li>
+    </ul>
+    <kendo-sortable name="sortable-basic" hint="hint"  placeholder="placeholder">
+    </kendo-sortable>
+    <script>
+          // Define the hint handler.
+          function hint(element) {
+              return element.clone().addClass("hint");
+          }
+          // Define the placeholder handler.
+          function placeholder(element) {
+              return element.clone().addClass("placeholder").text("drop here");
+          }
+    </script>
 ```
 {% endif %}
 
@@ -107,6 +122,32 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+     <ul id="sortable">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <kendo-sortable name="sortable" on-start="onStart" on-change="onChange">
+    </kendo-sortable>
+    <script>
+        function onStart(e) {
+            var id = e.sender.element.attr("id");
+            kendoConsole.log(id + " start: " + e.item.text());
+        }
+
+        function onChange(e) {
+            var id = e.sender.element.attr("id"),
+                text = e.item.text(),
+                newIndex = e.newIndex,
+                oldIndex = e.oldIndex;
+
+            kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
+        }
+    </script>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 

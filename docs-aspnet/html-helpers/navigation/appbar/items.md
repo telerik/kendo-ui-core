@@ -26,7 +26,6 @@ The following example shows how to utilize both of them:
         .ThemeColor(AppBarThemeColor.Inherit)
         .Items(items=> {
             items.Add().Template("<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
-            items.Add().Type(AppBarItemType.Spacer).Width("16px");
             items.Add().TemplateId("search-template").Type(AppBarItemType.ContentItem);
         })
     )

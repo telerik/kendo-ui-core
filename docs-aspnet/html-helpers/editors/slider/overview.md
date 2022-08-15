@@ -43,21 +43,22 @@ The following example demonstrates how to how to define the Slider.
 ```
 {% if site.core %}
 ```TagHelper
+
     <kendo-slider name="slider"
-        increase-button-title="Right"
-        decrease-button-title="Left"
-        min="0" max="30"
+        min="0" max="100"
         small-step="1"
-        large-step="10"
-        value="18" class="temperature" title="slider">
+        value="20">
     </kendo-slider>
 
-    <kendo-rangeslider name="rangeslider" class="humidity"
+    <kendo-rangeslider name="rangeslider"
+        increase-button-title="Right"
+        decrease-button-title="Left"
         min="0" max="10"
         small-step="1"
         large-step="10">
     </kendo-rangeslider>
 ```
+{% endif %}
 
 ## Basic Configuration
 
@@ -75,6 +76,7 @@ The Slider configuration options are passed as attributes.
         .Value(18)
         .HtmlAttributes(new { @class = "temperature" }))
 ```
+{% if site.core %}
 ```TagHelper
     <kendo-slider name="slider"
         increase-button-title="Right"
@@ -114,6 +116,24 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-slider name="slider"
+        on-change="change"
+        on-slide="slide"
+    </kendo-slider>
+    <script>
+        function change(e) {
+            // Handle the change event.
+        }
+
+        function slide(e) {
+            // Handle the slide event.
+        }
+    </script>
+```
+{% endif %}
+
 
 ### Handling by Template Delegate
 

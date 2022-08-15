@@ -83,6 +83,58 @@ The following example demonstrates how to style the `hint` element so that the r
         }
     </style>
 ```
+{% if site.core %}
+```TagHelper
+    @(Html.Kendo().Grid(Model)
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.ProductName).Title("Product Name");
+            columns.Bound(p => p.UnitPrice).Title("Unit Price").Width(130);
+            columns.Bound(p => p.UnitsInStock).Title("Units In Stock").Width(130);
+            columns.Bound(p => p.Discontinued).Width(130);
+        })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(16)
+            .ServerOperation(false)
+        )
+    )
+
+    <kendo-sortable name="Grid" filter="table > tbody > tr" cursor="move" 
+        hint="noHint" 
+        placeholder="placeholder" 
+        container="#Grid tbody"
+        on-change="onChange" >
+    </kendo-sortable>
+
+    <script>
+        var noHint = $.noop;
+
+        function placeholder(element) {
+            return element.clone().addClass("k-hover").css("opacity", 0.65);
+        }
+
+        function onChange(e) {
+            var grid = $("#Grid").data("kendoGrid"),
+                skip = grid.dataSource.skip(),
+                oldIndex = e.oldIndex + skip,
+                newIndex = e.newIndex + skip,
+                data = grid.dataSource.data(),
+                dataItem = grid.dataSource.getByUid(e.item.data("uid"));
+
+            grid.dataSource.remove(dataItem);
+            grid.dataSource.insert(newIndex, dataItem);
+        }
+    </script>
+
+    <style>
+        .k-grid tbody tr {
+            cursor: move;
+        }
+    </style>
+```
+{% endif %}
 
 ## Reordering in Editable Grids
 

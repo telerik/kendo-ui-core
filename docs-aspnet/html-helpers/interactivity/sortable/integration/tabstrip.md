@@ -31,7 +31,17 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
         .HintHandler("hintHandler")
         .Events(ev=>ev.Start("onStart").Change("onChange"))
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-sortable name="tabstrip" filter="li.k-item" hint="hintHandler"
+        container="ul.k-tabstrip-items"
+        on-start="onStart"
+        on-change="onChange">
+    </kendo-sortable>
+```
+{% endif %}
+```JavaScript
     <script>
         function hintHandler(element) {
             return $("<div id='hint' class='k-widget k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
@@ -53,7 +63,6 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
         }
     </script>
 ```
-
 To avoid visual glitches, activate the current tab at the `start` event handler of the Sortable.
 
 ```

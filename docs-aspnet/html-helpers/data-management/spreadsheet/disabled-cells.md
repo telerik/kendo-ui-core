@@ -33,6 +33,30 @@ You can set the state of a cell during the initialization of the Spreadsheet for
             })
     )
 ```
+{% if site.core %}
+```TagHelper
+	<kendo-spreadsheet name="spreadsheet">
+		<sheets>
+	 		<sheet name="Sheet1">
+	 	 		<columns>
+	 	 	 		<sheet-column>
+	 	 	 		</sheet-column>
+	 	 		</columns>
+	 	 		<rows>
+	 	 	 		<sheet-row>
+	 	 	 	 		<cells>
+	 	 	 	 	 		<cell value="Enabled Cell">
+	 	 	 	 	 		</cell>
+							<cell value="Disabled Cell" enable="false">
+	 	 	 	 	 		</cell>
+	 	 	 	 		</cells>
+	 	 	 		</sheet-row>
+	 	 		</rows>
+	 		</sheet>
+		</sheets>
+	</kendo-spreadsheet>
+```
+{% endif %}
 
 ## Set Cell State after Initialization
 

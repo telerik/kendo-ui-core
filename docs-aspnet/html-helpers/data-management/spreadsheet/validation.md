@@ -49,6 +49,36 @@ To configure date validation for a cell, set the Validation.DataType() configura
             })
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var from = "DATEVALUE(\"1/1/1900\")";
+        var to = "DATEVALUE(\"1/1/2100\")";
+    }
+    <kendo-spreadsheet name="spreadsheet">
+        <sheets>
+            <sheet>
+                <rows>
+                    <sheet-row>
+                        <cells>
+                            <cell>
+                                <validation datatype="list" 
+                                    show-button="true"
+                                    comparer-type="date"
+                                    from="@from" to="@to"
+                                    allow-nulls="true"
+                                    message-template="Selected Date validation error"
+                                    title-template="Selected Date should be between year 1900 and 2100."
+                                    type="reject"/>
+                            </cell> 
+                        </cells>
+                    </sheet-row>
+                </rows>
+            </sheet>
+        </sheets>
+    </kendo-spreadsheet>
+```
+{% endif %}
 
 ## List Validation
 
@@ -79,6 +109,29 @@ To configure list validation for a cell, set the Validation.DataType() configura
             })
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var from = "\"Option 1,Option 2,Option 3\"";
+    }
+    <kendo-spreadsheet name="spreadsheet">
+        <sheets>
+            <sheet>
+                <rows>
+                    <sheet-row>
+                        <cells>
+                            <cell>
+                                <validation datatype="list" show-button="true" comparer-type="list" from="@from" allow-nulls="true"
+                                type="reject"/>
+                            </cell> 
+                        </cells>
+                    </sheet-row>
+                </rows>
+            </sheet>
+        </sheets>
+    </kendo-spreadsheet>
+```
+{% endif %}
 
 ## Text Validation
 
@@ -109,6 +162,29 @@ To configure text validation for a cell, set the Validation.DataType() configura
             })
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var from = "\"Yes\"";
+    }
+    <kendo-spreadsheet name="spreadsheet">
+        <sheets>
+            <sheet>
+                <rows>
+                    <sheet-row>
+                        <cells>
+                            <cell>
+                                <validation datatype="text" show-button="true" comparer-type="equalTo" from="@from" allow-nulls="false"
+                                    message-template="The full name should be longer than 3 letters and shorter than 200." type="reject"/>
+                            </cell> 
+                        </cells>
+                    </sheet-row>
+                </rows>
+            </sheet>
+        </sheets>
+    </kendo-spreadsheet>
+```
+{% endif %}
 
 > When setting the text to compare to, always add the text in quotes and escape the internal quotes, for example, `.From("\"YES\"")`.
 
@@ -141,6 +217,26 @@ To configure number validation for a cell, set the Validation.DataType() configu
             })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-spreadsheet name="spreadsheet">
+        <sheets>
+            <sheet>
+                <rows>
+                    <sheet-row>
+                        <cells>
+                            <cell>
+                                <validation datatype="number" show-button="true" comparer-type="between" from="1" to="10" allow-nulls="false"
+                                    message-template="The full name should be longer than 3 letters and shorter than 200." type="reject"/>
+                            </cell> 
+                        </cells>
+                    </sheet-row>
+                </rows>
+            </sheet>
+        </sheets>
+    </kendo-spreadsheet>
+```
+{% endif %}
 
 ## Custom Validation
 
@@ -169,6 +265,36 @@ To configure validation for a cell based on a formula, set the Validation.DataTy
             })
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var from = "AND(LEN(A3)>3, LEN(A3)<200)";
+    }
+    <kendo-spreadsheet name="spreadsheet">
+        <sheets>
+            <sheet>
+                <rows>
+                    <sheet-row>
+                        <cells>
+                            <cell>
+                                <validation datatype="list" 
+                                    show-button="true"
+                                    comparer-type="custom"
+                                    from="@from"
+                                    allow-nulls="true"
+                                    message-template="Full Name validation error"
+                                    title-template="The full name should be longer than 3 letters and shorter than 200."
+                                    type="reject"/>
+                            </cell> 
+                        </cells>
+                    </sheet-row>
+                </rows>
+            </sheet>
+        </sheets>
+    </kendo-spreadsheet>
+```
+{% endif %}
+
 
 ## See also
 * [Validation of the Spreadsheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/validation)

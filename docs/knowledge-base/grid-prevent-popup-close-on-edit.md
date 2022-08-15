@@ -93,7 +93,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "popup",
             edit: function (e) {
-                var editWindow = this.editable.element.data("kendoWindow");
+                var editWindow = e.container.data("kendoWindow");
                // editWindow.unbind("close");
                 editWindow.bind("close", onWindowEditClose);
             },

@@ -16,11 +16,7 @@ The built-in items in the ContextMenu are `rename` and `delete`. You can define 
 
 ```HtmlHelper
     @(Html.Kendo().FileManager()
-        .Name("filemanager")              
-            .Name("filemanager")              
-        .Name("filemanager")              
-            .Name("filemanager")              
-        .Name("filemanager")              
+        .Name("filemanager")                         
         .ContextMenu(context => context.Items(items =>
         {
             items.Add("rename");
@@ -56,7 +52,7 @@ To add a custom command to the context menu of the FileManager, follow the instu
 
 1. Add the item, set text and specify a command name:
 
-    ```
+    ```HtmlHelper
         .ContextMenu(context =>
         {
             context.Items(items =>
@@ -67,6 +63,20 @@ To add a custom command to the context menu of the FileManager, follow the instu
             });
         })
     ```
+    {% if site.core %}
+    ```TagHelper
+        <context-menu enabled="true">
+ 		    <items>
+ 	 		    <item name="rename">
+ 	 		    </item>
+                <item name="delete">
+ 	 		    </item>
+                <item name="custom" text="Custom button" command="MyCustomCommand">
+                </item>
+ 		    </items>
+	    </context-menu>
+    ```
+    {% endif %}
 
 1. Create the command for the FileManager:
 

@@ -72,12 +72,72 @@ See the Slider configuration in the example below, and for the full project with
 	}
 </style>
 ```
+{% if site.core %}
+```tab-TagHelper
+    @page
+    @model Telerik.Examples.RazorPages.Pages.Slider.SliderIndexModel
+    @{
+        ViewData["Title"] = "SliderIndex";
+    }
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    <h1>SliderIndex</h1>
+
+    <h4>Horizontal orientation:</h4>
+    <div class="slider-container">
+        <kendo-slider name="Slider"
+            increase-button-title="Right"
+            decrease-button-title="Left"
+            min="-10" max="10"
+            small-step="2"
+            large-step="5"
+            value="0" class="balSlider" title="slider">
+        </kendo-slider>
+        </div>
+    <h4>Vertical orientation:</h4>
+    <div class="slider-container">
+        <kendo-slider name="eqSlider1"
+            orientation="SliderOrientation.Vertical"
+            increase-button-title="Right"
+            decrease-button-title="Left"
+            min="-20" max="20"
+            small-step="1"
+            large-step="20"
+            show-buttons="false"
+            value="10" class="eqSlider" title="slider">
+        </kendo-slider>
+    </div>
+
+    <style>
+        .slider-container {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        div.balSlider {
+            width: 100%;
+        }
+        div.balSlider .k-slider-selection {
+            display: none;
+        }
+        div.eqSlider {
+            display: inline-block;
+            margin: 1em;
+            height: 122px;
+            vertical-align: top;
+        }
+    </style>
+```
+{% endif %}
+
 ```tab-PageModel(cshtml.cs)
     public void OnGet()
     {
 
     }
 ```
+
 
 ## See Also
 

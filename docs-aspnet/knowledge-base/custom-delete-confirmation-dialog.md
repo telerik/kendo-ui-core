@@ -38,7 +38,7 @@ To achieve this behavior use the Window Component, a Kendo UI template and the `
     4. Attach another click event to the confirmation button, then use the Grid's DataSource [remove method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/remove) to delete the item
 
 
-Refer to [this REPL sample](https://netcorerepl.telerik.com/QPPmcuPw00sUxjxw46) to review the behavior of the snippet below. 
+Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) to review the behavior of the snippet below. 
 
 ```
     @(Html.Kendo().Window()
@@ -121,6 +121,7 @@ Refer to [this REPL sample](https://netcorerepl.telerik.com/QPPmcuPw00sUxjxw46) 
             window.content(windowTemplate(data)); //send the row data object to the template and render it
             window.center().open();
             $("#yesButton").click(function(){
+                var grid = $("#Grid").data("kendoGrid");
                 grid.dataSource.remove(data)  //prepare a "destroy" request
                 grid.dataSource.sync()  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
                 window.close();

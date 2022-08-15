@@ -37,12 +37,7 @@ The following example demonstrates how to define the AppBar by using the AppBar 
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
  
-    <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Inherit">
-        <items>
-            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
-            <appbar-item type="AppBarItemType.Spacer" width="16px"></appbar-item>
-            <appbar-item type="AppBarItemType.ContentItem" template-id="search-template"></appbar-item>
-        </items>   
+    <kendo-appbar name="appbar"> 
     </kendo-appbar>
 ```
 {% endif %}
@@ -57,6 +52,32 @@ The following example demonstrates how to define the AppBar by using the AppBar 
 
 You can subscribe to the AppBar widget's events.
 
+```HtmlHelper
+    @(Html.Kendo().AppBar()
+        .Name("appbar")
+        .ThemeColor(AppBarThemeColor.Inherit)
+        .Items(items=> {
+            items.Add().Template("<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
+            items.Add().Type(AppBarItemType.Spacer).Width("16px");
+            items.Add().TemplateId("search-template").Type(AppBarItemType.ContentItem);
+        })
+        .Events(e=>e.Resize("onResize"))
+    )
+    <script id="search-template" type="text/x-kendo-tmpl">
+        <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+            <input autocomplete="off" placeholder="Search products" title="Search products" class="k-input-inner">
+            <span class="k-input-suffix">
+                <span class="k-input-icon k-icon k-i-search"></span>
+            </span>
+        </span>
+    </script>
+    
+    <script>
+        function onResize(e){
+            //handle the AppBar widget's resize event
+        };
+    </script>
+```
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
   
@@ -67,6 +88,14 @@ You can subscribe to the AppBar widget's events.
             <appbar-item type="AppBarItemType.ContentItem" template-id="search-template"></appbar-item>
         </items>   
     </kendo-appbar>
+    <script id="search-template" type="text/x-kendo-tmpl">
+        <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+            <input autocomplete="off" placeholder="Search products" title="Search products" class="k-input-inner">
+            <span class="k-input-suffix">
+                <span class="k-input-icon k-icon k-i-search"></span>
+            </span>
+        </span>
+    </script>
 
     <script>
         function onResize(e){

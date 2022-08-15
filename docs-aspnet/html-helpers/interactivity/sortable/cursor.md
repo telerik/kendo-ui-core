@@ -28,6 +28,18 @@ The following example demonstrates how to change the cursor type to `"move"`.
         .Cursor("move")
     )
 ```
+{% if site.core %}
+```TagHelper
+     <ul id="sortable">
+        <li>ItemA1</li>
+        <li>ItemA2</li>
+        <li>ItemA3</li>
+    </ul>
+
+    <kendo-sortable name="sortable" cursor="move" >
+    </kendo-sortable>
+```
+{% endif %}
 
 The `cursor` option changes the style of the cursor only for the time the item is dragged. To change the cursor type on `hover`, use CSS.
 
@@ -49,6 +61,24 @@ The `cursor` option changes the style of the cursor only for the time the item i
         }
     </style>
 ```
+{% if site.core %}
+```TagHelper
+     <ul id="sortable">
+        <li>ItemA1</li>
+        <li>ItemA2</li>
+        <li>ItemA3</li>
+    </ul>
+
+    <kendo-sortable name="sortable" cursor="url('https://demos.telerik.com/kendo-ui//content/web/sortable/grabbing.cur'), default" >
+    </kendo-sortable>
+
+    <style>
+        #sortable li {
+            cursor: url('https://demos.telerik.com/kendo-ui//content/web/sortable/grabbing.cur'), default;
+        }
+    </style>
+```
+{% endif %}
 
 ## See Also
 

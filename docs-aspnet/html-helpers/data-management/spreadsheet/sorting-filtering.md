@@ -28,6 +28,18 @@ You can set the Sorting configuration via the [`Sort()`](/api/Kendo.Mvc.UI.Fluen
                 //additional sheet configuration options
         })
 ```
+{% if site.core %}
+```TagHelper
+    <sheet name="Sheet1">
+        <sort ref="A3:G49">
+			<sort-columns >
+				<sort-column index="3" ascending="false">
+                </sort-column>
+            </sort-columns>
+        </sort>
+    </sheet>
+```
+{% endif %}
 
 ## Filtering
 
@@ -58,6 +70,21 @@ The supported filters are:
         //additional sheet configuration options
     })
 ```
+{% if site.core %}
+```TagHelper
+    <sheet name="Sheet1">
+		<filter>					
+			<filter-columns>
+				<filter-column index="0" filter="custom">
+					<criterias>
+						<criteria operator="SpreadsheetFilterOperator.GreaterThan" value="10227"></criteria>
+					</criterias>
+				</filter-column>
+			</filter-columns>
+		</filter>
+	</sheet>
+```
+{% endif %}
 
 ## See Also
 * [Sorting and Filtering of the Spreadsheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/sorting-filtering)

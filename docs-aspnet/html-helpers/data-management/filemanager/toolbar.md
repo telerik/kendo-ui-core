@@ -32,6 +32,16 @@ To Enable/Disable a Toolbar command button or update the its text you can use th
             items.Add("").Text("Add New Folder").Enable(false).Command("CreateFolderCommand").Type("button");
         }))
 ```
+{% if site.core %}
+```TagHelper
+    <toolbar enabled="true">
+ 		<items>
+            <item name="newFolder" text="Add New Folder" enable="false" type="button" command="CreateFolderCommand">
+            </item>
+ 		</items>
+	</toolbar>
+```
+{% endif %}
 
 ## Adding Custom Commands to the Toolbar
 
@@ -68,6 +78,16 @@ Then add the custom command to the FileManager Toolbar:
             items.Add("").Type("button").Name("GetInfo").Text("Get Info").Command("MyCustomCommand");
         }))
 ```
+{% if site.core %}
+```TagHelper
+    <toolbar enabled="true">
+ 		<items>
+            <item name="getInfo" text="Get Info" type="button" command="MyCustomCommand">
+            </item>
+ 		</items>
+	</toolbar>
+```
+{% endif %}
 
 You can also add the custom command to the ContextMenu of the FileManager
 ```HtmlHelper
@@ -78,6 +98,20 @@ You can also add the custom command to the ContextMenu of the FileManager
             items.Add("custom").Name("GetInfo").Text("Get Info").Command("MyCustomCommand").SpriteCssClass("k-icon k-i-info");
         }))
 ```
+{% if site.core %}
+```TagHelper
+    <context-menu enabled="true">
+ 	    <items>
+ 		    <item name="rename">
+ 		    </item>
+            <item name="delete">
+ 		    </item>
+            <item name="custom" text="Get Info" command="MyCustomCommand" sprite-css-class="k-icon k-i-info">
+            </item>
+ 	    </items>
+	</context-menu>
+```
+{% endif %}
 
 ## See Also
 
