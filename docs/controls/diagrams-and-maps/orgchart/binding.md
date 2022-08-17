@@ -18,35 +18,37 @@ The following example demonstrates how to bind an OrgChart to a local data array
     <div id="orgchart"></div>
 
     <script>
-        var data = [
-            { Id: 1, FullName: "Gevin Bell", Position: "CEO"},
-            { Id: 2, FullName: "Clevey Thrustfield", Position: "COO", ReportsTo: 1},
-            { Id: 3, FullName: "Carol Baker", Position: "CFO", , ReportsTo: 1 },
-            { Id: 4, FullName: "Kendra Howell", Position: "CMO", , ReportsTo: 1},
-            { Id: 5, FullName: "Sean Rusell", Position: "Financial Manager", ReportsTo: 3},
-            { Id: 6, FullName: "Steven North", Position: "Senior Manager", , ReportsTo: 3 },
-            { Id: 7, FullName: "Michelle Hudson", Position: "Operations Manager", ReportsTo: 2},
-            { Id: 8, FullName: "Andrew Berry", Position: "Accountant", ReportsTo: 5 }            
-        ];
+      var data = [
+        { Id: 1, Name: "Gevin Bell", Title: "CEO", ParentId: null, Expanded: true},
+        { Id: 2, Name: "Clevey Thrustfield", Title: "COO", ParentId: 1, Expanded: true },
+        { Id: 3, Name: "Carol Baker", Title: "CFO", ParentId: 1 },
+        { Id: 4, Name: "Kendra Howell", Title: "CMO", ParentId: 2},
+        { Id: 5, Name: "Sean Rusell", Title: "Financial Manager", ParentId: 3},
+        { Id: 6, Name: "Steven North", Title: "Senior Manager", ParentId: 3 },
+        { Id: 7, Name: "Michelle Hudson", Title: "Operations Manager", ParentId: 2},
+        { Id: 8, Name: "Andrew Berry", Title: "Accountant", ParentId: 5 }            
+      ];
 
-        $("#orgchart").kendoOrgChart({            
-            dataSource: {
-                data: data,
-                schema: {
-                    model: {
-                        id: "Id",
-                        parentId: "ParentId",
-                        expanded: true,
-                        fields: {
-                            Id: { type: "number", editable: false, nullable: false },
-                            ParentId: { field: "ReportsTo", nullable: true },
-                            title: { field: "Position", nullable: true },
-                            name: { field: "FullName" }
-                        }
-                    }
-                }
+      var orgChartDataSource = new kendo.data.OrgChartDataSource({
+        data: data,
+        schema: {
+          model: {            
+            Id: "id",
+            parentId: "parentId",
+            fields: {
+              id: { field: "Id", type: "number", nullable: false },
+              parentId: { field: "ParentId", nullable: true},
+              title: { field: "Title",  nullable: true },
+              name: { field: "Name" },
+              expanded: { field: "Expanded" }
             }
-        });
+          }
+        }
+      });
+
+      $("#orgchart").kendoOrgChart({            
+        dataSource: orgChartDataSource
+      });
     </script>
 ```
 

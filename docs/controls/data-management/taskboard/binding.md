@@ -18,52 +18,73 @@ The following example demonstrates how to bind a TaskBoard to a local data array
     <div id="taskBoard"></div>
 
     <script>
-        var cardsData = [
-            { id: 1, title: "Campaigns", order: 1, description: "Create a new landing page for campaign", status: "todo", color: "orange" },
-            { id: 2, title: "Newsletters", order: 2, description: "Send newsletter", status: "todo", color: "blue" },
-            { id: 3, title: "Ads Analytics", order: 3, description: "Review ads performance", status: "todo", color: "green" },
-            { id: 4, title: "SEO Analytics", order: 4, description: "Review SEO results", status: "inProgress", color: "blue" },
-            { id: 5, title: "Customer Research", order: 5, description: "Interview focus groups", status: "inProgress", color: "orange" },
-            { id: 6, title: "Testimonials & Case Studies", order: 6, description: "Publish new case study", status: "done", color: "green" },
-            { id: 7, title: "Content", order: 7, description: "Plan content for podcasts", status: "done", color: "green" },
-            { id: 8, title: "Customer Journey", order: 8, description: "Update virtual classrooms' experience", status: "done", color: "blue" },
-        ];
+      var cardsData = [
+        { id: 1, title: "Campaigns", order: 1, description: "Create a new landing page for campaign", status: "todo", color: "orange" },
+        { id: 2, title: "Newsletters", order: 2, description: "Send newsletter", status: "todo", color: "blue" },
+        { id: 3, title: "Ads Analytics", order: 3, description: "Review ads performance", status: "todo", color: "green" },
+        { id: 4, title: "SEO Analytics", order: 4, description: "Review SEO results", status: "inProgress", color: "blue" },
+        { id: 5, title: "Customer Research", order: 5, description: "Interview focus groups", status: "inProgress", color: "orange" },
+        { id: 6, title: "Testimonials & Case Studies", order: 6, description: "Publish new case study", status: "done", color: "green" },
+        { id: 7, title: "Content", order: 7, description: "Plan content for podcasts", status: "done", color: "green" },
+        { id: 8, title: "Customer Journey", order: 8, description: "Update virtual classrooms' experience", status: "done", color: "blue" },
+      ];
 
-        $("#taskBoard").kendoTaskBoard({
-            columns: [
-                { text: "To-Do", status: "todo" },
-                { text: "In Progress", status: "inProgress" },
-                { text: "Done", status: "done" }
-            ],
-            dataSource: {
-                data: cardsData,
-                schema: {
-                    model: {
-                        id: "id",
-                        fields: {
-                            id: { type: "number" },
-                            order: { type: "number", defaultValue: 0 },
-                            title: { field: "title", defaultValue: "No title" },
-                            description: { field: "description", validation: { required: true } },
-                        }
-                    }
-                }
+      $("#taskBoard").kendoTaskBoard({
+        columns: [
+          { text: "To-Do", status: "todo" },
+          { text: "In Progress", status: "inProgress" },
+          { text: "Done", status: "done" }
+        ],
+        dataSource: {
+          transport: {
+            read: function(options){
+              options.success(cardsData);
             },
-            dataStatusField: "status",
-            dataOrderField: "order",
-            dataCategoryField: "color",
-            height: 750,
-            resources: [
-                {
-                    field: "color",
-                    dataSource: [
-                        { value: "orange", color: "#ffa500" },
-                        { value: "green", color: "#008000" },
-                        { value: "blue", color: "#0000ff" }
-                    ]
-                }
+            update: function(options){
+              options.success(options.data);
+            },
+            create: function(options){
+              options.success($.extend({}, options.data, {
+                id: getUniqueId()
+              }));
+            },
+            destroy: function(options){
+              options.success();
+            },
+          },
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                order: { type: "number", defaultValue: 0 },
+                title: { field: "title", defaultValue: "No title" },
+                description: { field: "description", validation: { required: true } },
+              }
+            }
+          }
+        },
+        dataStatusField: "status",
+        dataOrderField: "order",
+        dataCategoryField: "color",
+        height: 750,
+        resources: [
+          {
+            field: "color",
+            dataSource: [
+              { value: "orange", color: "#ffa500" },
+              { value: "green", color: "#008000" },
+              { value: "blue", color: "#0000ff" }
             ]
-        });
+          }
+        ]
+      });
+
+      function getUniqueId() {
+        var taskboard = $("#taskBoard").data("kendoTaskBoard");
+        // return next unique id
+        return taskboard.dataSource.total() + 1;
+      }
     </script>
 ```
 
