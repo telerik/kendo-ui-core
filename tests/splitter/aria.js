@@ -33,7 +33,7 @@
             assert.equal(splitbars.eq(0).attr("role"), "separator");
         });
 
-        it("adds aria-orientation to vertical splitbar", function() {
+        it("adds aria-orientation to horizontal splitbar", function() {
             var splitter = create({
                 orientation: "horizontal"
             });
