@@ -1265,7 +1265,7 @@ var __meta__ = {
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                arrowBtn = html.renderButton('<button type="button" tabindex="-1" unselectable="on" class="k-input-button" aria-label="select"></button>', {
+                arrowBtn = html.renderButton('<span role="button" class="k-input-button" aria-label="select"></span>', {
                     icon: "arrow-s",
                     size: options.size,
                     fillMode: options.fillMode,

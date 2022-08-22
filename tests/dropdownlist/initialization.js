@@ -103,19 +103,19 @@
             var spanArrow = input.data("kendoDropDownList").span.parent().next(),
                 arrow = spanArrow.children().eq(0);
 
-            assert.isOk(spanArrow.is("button"));
+            assert.isOk(spanArrow.is("span"));
             assert.isOk(spanArrow.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
             assert.isOk(arrow.hasClass("k-icon k-i-arrow-s"));
             assert.equal(arrow.html(), "");
         });
 
-        it("arrow button has tabindex=-1", function() {
+        it("arrow button dows not have tabindex", function() {
             input.kendoDropDownList();
 
             var arrow = input.data("kendoDropDownList")._arrow;
 
-            assert.equal(arrow.attr("tabindex"), "-1");
+            assert.equal(arrow.attr("tabindex"), undefined);
         });
 
         it("data source is when pass DataSource", function() {
