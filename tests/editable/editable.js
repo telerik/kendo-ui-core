@@ -686,6 +686,39 @@
             assert.isOk(typeof editable.element.find("#foo").data("kendoColorPicker"));
         });
 
+        it("ColorPalette editor is displayed when type option is set as ColorPalette", function() {
+            defaultModel.set("foo", "#fff");
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo", editor: "ColorPalette" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(typeof editable.element.find("#foo").data("kendoColorPalette"));
+        });
+
+        it("ColorGradient editor is displayed when type option is set as ColorGradient", function() {
+            defaultModel.set("foo", "#fff");
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo", editor: "ColorGradient" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(typeof editable.element.find("#foo").data("kendoColorGradient"));
+        });
+
+        it("FlatColorPicker editor is displayed when type option is set as FlatColorPicker", function() {
+            defaultModel.set("foo", "#fff");
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo", editor: "FlatColorPicker" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(typeof editable.element.find("#foo").data("kendoFlatColorPicker"));
+        });
+
         it("DatePicker editor is displayed when type option is set as DatePicker", function() {
             defaultModel.set("foo", new Date());
 

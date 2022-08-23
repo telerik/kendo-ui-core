@@ -95,21 +95,7 @@ var __meta__ = {
 
             if (element.is("input")) {
                 element.appendTo(content);
-
-                // if there exists a <label> associated with this
-                // input field, we must catch clicks on it to prevent
-                // the built-in color picker from showing up.
-                // https://github.com/telerik/kendo-ui-core/issues/292
-
-                var label = element.closest("label");
-                var id = element.attr("id");
-                if (id) {
-                    label = label.add('label[for="' + id + '"]');
-                }
-                label.on("click", function(ev) {
-                    that.open();
-                    ev.preventDefault();
-                });
+                that._preventDefaultLabelClick();
             }
 
             that._tabIndex = element.attr("tabIndex") || 0;
@@ -207,7 +193,7 @@ var __meta__ = {
             view: "gradient",
             views: ["gradient", "palette"],
             backgroundColor: null,
-            ARIATemplate: 'Current selected color is #=data || ""#',
+            ARIATemplate: 'Current selected color is #=data || "none"#',
             size: "medium",
             rounded: "medium",
             fillMode: "solid"
@@ -252,12 +238,43 @@ var __meta__ = {
         value: ColorSelector.fn.value,
         _select: ColorSelector.fn._select,
         _triggerSelect: ColorSelector.fn._triggerSelect,
-        _isInputTypeColor: function() {
-            var el = this.element[0];
-            return (/^input$/i).test(el.tagName) && (/^color$/i).test(el.type);
+        _isInputTypeColor: ColorSelector.fn._isInputTypeColor,
+
+        _preventDefaultLabelClick: function() {
+            // if there exists a <label> associated with this
+            // input field, we must catch clicks on it to prevent
+            // the built-in color picker from showing up.
+            // https://github.com/telerik/kendo-ui-core/issues/292
+            var that = this,
+                element = that.element,
+                label = element.closest("label"),
+                id = element.attr("id");
+
+            if (id) {
+                label = label.add('label[for="' + id + '"]');
+            }
+            label.on("click", function(ev) {
+                that.open();
+                ev.preventDefault();
+            });
         },
 
         _updateUI: function(value, dontChangeSelector) {
+            this._updateInput(value);
+            this._triggerSelect(value);
+
+            this.wrapper.find(".k-color-preview-mask").css(
+                BACKGROUNDCOLOR,
+                value ? value.toDisplay() : ""
+            );
+
+            this._noColorIcon().toggleClass("k-no-color", !value);
+
+            if (this._selector && !dontChangeSelector) {
+                this._selector.value(value);
+            }
+        },
+        _updateInput: function(value) {
             var formattedValue = "";
 
             if (value) {
@@ -277,18 +294,6 @@ var __meta__ = {
             }
 
             this.wrapper.attr("aria-label", this._ariaTemplate(formattedValue));
-
-            this._triggerSelect(value);
-            this.wrapper.find(".k-color-preview-mask").css(
-                BACKGROUNDCOLOR,
-                value ? value.toDisplay() : ""
-            );
-
-            this._noColorIcon().toggleClass("k-no-color", !formattedValue);
-
-            if (this._selector && !dontChangeSelector) {
-                this._selector.value(value);
-            }
         },
         _keydown: function(ev) {
             var key = ev.keyCode;
@@ -318,6 +323,8 @@ var __meta__ = {
                 delete options.select;
                 delete options.change;
                 delete options.cancel;
+
+                options._otOfPicker = false;
 
                 var id = kendo.guid();
 

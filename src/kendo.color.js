@@ -113,6 +113,10 @@ var BaseColor = Class.extend({
     },
 
     equals: function(c) {
+        if (!c) {
+            return false;
+        }
+
         return c === this || c !== null && this.toCssRgba() === parseColor(c).toCssRgba();
     },
 

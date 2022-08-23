@@ -44,6 +44,9 @@
         SELECTED = "k-selected",
         PREVIEW_MASK = ".k-color-preview-mask",
 
+        ARIA_PRESSED = "aria-pressed",
+        ARIA_DISABLED = "aria-disabled"
+
         VIEWS = {
             "gradient": ui.ColorGradient,
             "palette": ui.ColorPalette
@@ -67,14 +70,7 @@
             options = that.options = kendo.deepExtend({}, that.options, options);
             element = that.element;
 
-            that.wrapper = element.addClass("k-flatcolorpicker k-coloreditor")
-                .append(that._template());
-
-            that._selectedColor = $(".k-coloreditor-preview-color", element);
-            that._previousColor = $(".k-coloreditor-current-color", element);
-            that._viewsContainer = $(".k-coloreditor-views", element);
-
-            element.find(".k-button[data-view=" + that.options.view + "]").addClass(SELECTED);
+            that._wrapper();
 
             var value = that.color();
 
@@ -91,36 +87,8 @@
                 that._previousColor.addClass(NO_COLOR);
             }
 
-            element
-                .on(KEYDOWN_NS, bind(that._keydown, that))
-                .on(CLICK_NS, ".k-coloreditor-reset", function () {
-                    that._clearColor = true;
-                    that._updateUI(null);
-                    that._view.value(null);
-                })
-                .on(CLICK_NS, ".k-coloreditor-apply", function(){
-                    if(that._clearColor) {
-                        that._select(null);
-                    } else {
-                        that._select(that._view.color());
-                    }
-                })
-                .on(CLICK_NS, ".k-coloreditor-cancel", function(){
-                    delete that._clearColor;
-                    that._updateUI(that.color());
-                    that._cancel();
-                })
-                .on(CLICK_NS, ".k-button[data-view]", function(ev){
-                    var viewButton =  $(ev.target).closest("[data-view]");
-
-                    if(viewButton.is("." + SELECTED)) {
-                        return;
-                    }
-
-                    element.find(".k-button[data-view]").removeClass(SELECTED);
-                    viewButton.addClass(SELECTED);
-                    that._changeView(viewButton.data("view"));
-                });
+            that._attachEvents();
+            that._navigation();
         },
         destroy: function() {
             var that = this;
@@ -153,7 +121,8 @@
             columns: 10,
             tileSize: 24,
             messages   : MESSAGES,
-            size: "medium" // Fake styling option to accomplish colorpicker's size for textbox and button
+            size: "medium", // Fake styling option to accomplish colorpicker's size for textbox and button
+            _otOfPicker: true
         },
         setBackgroundColor: function (color) {
             var that = this;
@@ -161,6 +130,40 @@
             if(that._view && that._view.setBackgroundColor) {
                 that._view.setBackgroundColor(color);
             }
+        },
+        _attachEvents: function() {
+            var that = this;
+
+            that.wrapper
+                .on(KEYDOWN_NS, bind(that._keydown, that))
+                .on(CLICK_NS, ".k-coloreditor-reset", function () {
+                    that._clearColor = true;
+                    that._updateUI(null);
+                    that._view.value(null);
+                })
+                .on(CLICK_NS, ".k-coloreditor-apply", function(){
+                    if(that._clearColor) {
+                        that._select(null);
+                    } else {
+                        that._select(that._view.color());
+                    }
+                })
+                .on(CLICK_NS, ".k-coloreditor-cancel", function(){
+                    delete that._clearColor;
+                    that._updateUI(that.color());
+                    that._cancel();
+                })
+                .on(CLICK_NS, ".k-button[data-view]", function(ev){
+                    var viewButton =  $(ev.target).closest("[data-view]");
+
+                    if(viewButton.is("." + SELECTED)) {
+                        return;
+                    }
+
+                    that.wrapper.find(".k-button[data-view]").removeClass(SELECTED).attr(ARIA_PRESSED, false);
+                    viewButton.addClass(SELECTED).attr(ARIA_PRESSED, true);
+                    that._changeView(viewButton.data("view"));
+                });
         },
         _select: function(value) {
             var that = this;
@@ -211,6 +214,8 @@
                 selectedColor = selectedColor.equals(hsvColor) ? hsvColor : selectedColor;
             }
 
+            options._otOfPicker = false;
+
             if (selector) {
                 that._view = new VIEWS[mode]($("<div></div>").appendTo(that._viewsContainer), options);
                 that._view.value(selectedColor);
@@ -231,6 +236,14 @@
 
             if (that._view) {
                 that._view._onEnable(enable);
+            }
+
+            if (that.options._standalone) {
+                if (enable) {
+                    that.wrapper.removeAttr(ARIA_DISABLED);
+                } else {
+                    that.wrapper.attr(ARIA_DISABLED, true);
+                }
             }
         },
         focus: function() {
@@ -273,7 +286,6 @@
             wrapper.style.setProperty("--kendo-color-preview-height", previewHeight + "px");
         },
         _keydown: function(e) {
-
             if (e.keyCode == KEYS.ESC) {
                 this._cancel();
             }
@@ -291,9 +303,9 @@
                     '<div class="k-coloreditor-header k-hstack">' +
                         '# if (views && views.length > 1) { #' +
                         '<div class="k-coloreditor-header-actions k-hstack">' +
-                            '<div class="k-button-group k-button-group-flat">' +
-                                html.renderButton('<button  data-view="gradient" title="#:messages.gradient#"></button>', extend({ icon: "color-canvas" }, buttonOptions)) +
-                                html.renderButton('<button  data-view="palette" title="#:messages.palette#"></button>', extend({ icon: "palette" }, buttonOptions)) +
+                            '<div role="group" class="k-button-group k-button-group-flat">' +
+                                html.renderButton('<button aria-pressed="false" data-view="gradient" title="#:messages.gradient#"></button>', extend({ icon: "color-canvas" }, buttonOptions)) +
+                                html.renderButton('<button aria-pressed="false" data-view="palette" title="#:messages.palette#"></button>', extend({ icon: "palette" }, buttonOptions)) +
                             '</div>' +
                         '</div>' +
                         '# } #' +
@@ -322,7 +334,32 @@
                     '</div>' +
                     '# } #'
                 )(options);
+        },
+        _wrapper: function() {
+            var options = this.options,
+                wrapper;
+
+            if (this.element.is("input")) {
+                wrapper = this.element.addClass("k-hidden").wrap("<div>").parent();
+            } else {
+                wrapper = this.element;
             }
+
+            wrapper.addClass("k-flatcolorpicker k-coloreditor")
+                .attr({
+                    "role": "textbox",
+                    "aria-keyshortcuts": "Enter"
+                })
+                .append(this._template());
+
+            this._selectedColor = $(".k-coloreditor-preview-color", wrapper);
+            this._previousColor = $(".k-coloreditor-current-color", wrapper);
+            this._viewsContainer = $(".k-coloreditor-views", wrapper);
+
+            wrapper.find(".k-button[data-view=" + options.view + "]").addClass(SELECTED).attr(ARIA_PRESSED, true);
+
+            this.wrapper = wrapper;
+        }
     });
 
     ui.plugin(FlatColorPicker);

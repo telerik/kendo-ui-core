@@ -31,3 +31,11 @@ The following table lists the Telerik UI for {{ site.framework }} themes and the
 | Telerik UI 2020.3.915 (R3 2020) | @progress/kendo-theme-bootstrap@4.21.0<br>@progress/kendo-theme-default@4.22.1<br>@progress/kendo-theme-material@3.19.1 |
 | Telerik UI 2020.2.617 (R2 2020 SP1) | @progress/kendo-theme-bootstrap@4.17.0<br>@progress/kendo-theme-default@4.19.0<br>@progress/kendo-theme-material@3.16.0 |
 | Telerik UI 2020.2.513 (R2 2020) | @progress/kendo-theme-bootstrap@4.16.1<br>@progress/kendo-theme-default@4.18.1<br>@progress/kendo-theme-material@3.15.1 |
+
+## Compatibility with Bootstrap Framework
+
+Starting with R3 of 2021 or v4.40.0, the Kendo UI Bootstrap theme is based on Bootstrap v5.
+
+There are many changes and tweaks between Bootstrap v4 and Bootstrap v5. To revert, somewhat, to previous look and feel, we provide color [swatches]({% slug swatches_aspnetmvc6_aspnetmvc %}) for Bootstrap v4 and even Bootstrap v3. They are available in the [kendo-themes GitHub repository](https://github.com/telerik/kendo-themes/tree/master/packages/bootstrap/lib/swatches). Follow the steps provided in the [swatches]({% slug swatches_aspnetmvc6_aspnetmvc %}) article to compile and include these color swatches to your application.
+
+> Bootstrap uses semantic versioning, which means that Kendo UI Bootstrap theme is no longer compatible with Bootstrap 4 and will throw errors when compiled against Bootstrap 4. More information about the migration process and changes could be found in [kendo-themes GitHub repository](https://github.com/telerik/kendo-themes/issues/2154).

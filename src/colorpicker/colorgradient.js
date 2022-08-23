@@ -1,7 +1,13 @@
 (function(f, define){
-    define([ "../kendo.core", "./contrastToolUtils" ], f);
+    define([ "../kendo.core", "../kendo.popup", "./contrastToolUtils" ], f);
 })(function(){
-
+    var __meta__ = {
+        id: "colorgradient",
+        name: "ColorGradient",
+        category: "web", // suite
+        description: "ColorGradient allows selection of a color from an HSV canvas.",
+        depends: ["core", "popup", "textbox"] // dependencies
+    };
 (function($, undefined) {
     // WARNING: removing the following jshint declaration and turning
     // == into === to make JSHint happy will break functionality.
@@ -61,7 +67,6 @@
 
             Observable.fn.init.call(that);
         },
-
         _template: kendo.template(
             '# if (options.formats && options.formats.length > 1) { #' +
             '<div class="k-vstack">' +
@@ -103,7 +108,6 @@
         destroy: function(){
             var that = this;
 
-
             that._viewModel.unbind("change", that._changeHandler);
             kendo.unbind(that.element);
             kendo.destroy(that.element);
@@ -111,23 +115,33 @@
             delete that._viewModel;
             delete that._changeHandler;
         },
-        _render: function() {
+        change: function (ev) {
             var that = this;
 
-            that.element
-                .append(that._template({ ns: kendo.ns, guid: kendo.guid(), options: that.options }))
-                .parent();
+            if (ev.field.indexOf("rgb") >= 0) {
+                that._color = that._tryParseColor(that._viewModel.rgb.toCssRgba());
+                that._viewModel.set("hex", that._color.toCss({ alpha: that.options.opacity }));
+            } else if (ev.field === "hex") {
+                that._color = that._tryParseColor(ev.sender[ev.field]);
+                that._viewModel.set("rgb", that._color);
+            }
 
-            kendo.bind(that.element, that._viewModel);
-            that.element.attr("data-" + kendo.ns + "stop", "stop");
+            if (!that._preventChangeEvent) {
+                that.trigger("change", {value: that._color});
+            }
         },
-        value: function (color) {
-            var that = this;
+        keydown: function (ev) {
+            var that = this,
+                textbox = $(ev.target).data("kendoTextBox");
 
-            that._color = (color && color.toBytes()) || parseColor(BLACK);
-            that._preventChangeEvent = true;
-            that._viewModel.set("rgb", that._color);
-            delete that._preventChangeEvent;
+            if (ev.keyCode === KEYS.ENTER && $(ev.target).is("input")) {
+                if(textbox && textbox._change) {
+                    textbox._change();
+                }
+
+                that.trigger("change", {value: that._color});
+                that.trigger("select", {value: that._color});
+            }
         },
         reset: function () {
             var that = this;
@@ -148,20 +162,23 @@
             that._viewModel.set("format", model.formats[index]);
             delete that._preventChangeEvent;
         },
-        change: function (ev) {
+        value: function (color) {
             var that = this;
 
-            if (ev.field.indexOf("rgb") >= 0) {
-                that._color = that._tryParseColor(that._viewModel.rgb.toCssRgba());
-                that._viewModel.set("hex", that._color.toCss({ alpha: that.options.opacity }));
-            } else if (ev.field === "hex") {
-                that._color = that._tryParseColor(ev.sender[ev.field]);
-                that._viewModel.set("rgb", that._color);
-            }
+            that._color = (color && color.toBytes()) || parseColor(BLACK);
+            that._preventChangeEvent = true;
+            that._viewModel.set("rgb", that._color);
+            delete that._preventChangeEvent;
+        },
+        _render: function() {
+            var that = this;
 
-            if (!that._preventChangeEvent) {
-                that.trigger("change", {value: that._color});
-            }
+            that.element
+                .append(that._template({ ns: kendo.ns, guid: kendo.guid(), options: that.options }))
+                .parent();
+
+            kendo.bind(that.element, that._viewModel);
+            that.element.attr("data-" + kendo.ns + "stop", "stop");
         },
         _tryParseColor: function (color) {
             var that = this;
@@ -173,19 +190,6 @@
             }
 
             return color;
-        },
-        keydown: function (ev) {
-            var that = this,
-                textbox = $(ev.target).data("kendoTextBox");
-
-            if (ev.keyCode === KEYS.ENTER && $(ev.target).is("input")) {
-                if(textbox && textbox._change) {
-                    textbox._change();
-                }
-
-                that.trigger("change", {value: that._color});
-                that.trigger("select", {value: that._color});
-            }
         }
     });
 
@@ -205,40 +209,20 @@
             options.messages = options.messages ? $.extend(that.options.messages, options.messages) : that.options.messages;
             element = that.element;
 
-            that.wrapper = element.addClass("k-colorgradient")
-                .append(that._template(options));
-
-            that._hueElements = $(".k-hsv-rectangle, .k-alpha-slider .k-slider-track", element);
-            that._colorgradientInputs = $(".k-colorgradient-inputs", element);
-            that._contrastTool = $(".k-colorgradient-color-contrast", element);
-
+            that._wrapper();
             that._sliders();
-
             that._hsvArea();
 
             value = that._value;
 
-            if(that._colorgradientInputs.length) {
-                that._colorInput = new ColorInput(that._colorgradientInputs, extend({}, options, {
-                    tabindex: this._tabIndex
-                }));
-
-                that._colorInput.bind("change", function(ev){
-                    that._updateUI(ev.value, true);
-                });
-
-                that._colorInput.bind("select", function(ev){
-                    var color = parseColor(ev.value);
-                    that._select(color);
-                    that.trigger("forceSelect", { value: that.value() });
-                });
-            }
-
+            that._gradientInputs();
             that._updateUI(value);
+            that._navigation();
         },
         options: {
             name : "ColorGradient",
             opacity : false,
+            hsvDragARIATemplate: 'Color well with two-dimensional slider for selecting saturation and value. Selected color is #=data || "none"#',
             input : true,
             format: "hex",
             formats: ["rgb", "hex"],
@@ -250,15 +234,16 @@
                 pass: "Pass",
                 hex: "HEX",
                 toggleFormat: "Toggle format",
-                red: "Red",
-                green: "Green",
-                blue: "Blue",
-                alpha: "Alpha"
-            }
+                red: "Red channel",
+                green: "Green channel",
+                blue: "Blue channel",
+                alpha: "Alpha channel"
+            },
+            _otOfPicker: true
         },
         _template: kendo.template(
             '<div class="k-colorgradient-canvas k-hstack">' +
-                '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-hsv-draghandle k-draghandle"></div></div>' +
+                '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div role="slider" aria-orientation="undefined" class="k-hsv-draghandle k-draghandle"></div></div>' +
 
                 '<div class="k-hsv-controls k-hstack">' +
                     '<input class="k-hue-slider k-colorgradient-slider" />' +
@@ -278,73 +263,96 @@
                 '</div>' +
             '# } #'
         ),
-        _onEnable: function(enable) {
-            this._hueSlider.enable(enable);
+        focus: function() {
+            this._hsvHandle.focus();
+        },
+        setBackgroundColor: function(color) {
+            var that = this;
 
-            if (this._opacitySlider) {
-                this._opacitySlider.enable(enable);
-            }
+            if (that.options.contrastTool) {
+                that.options.contrastTool = $.isPlainObject(that.options.contrastTool) ? extend({}, that.options.contrastTool, {
+                    backgroundColor: color
+                }) : {
+                    backgroundColor: color
+                };
 
-            this.wrapper.find("input").attr("disabled", !enable);
-
-            var handle = this._hsvRect.find(".k-draghandle");
-
-            if (enable) {
-                handle.attr("tabIndex", this._tabIndex);
-            } else {
-                handle.removeAttr("tabIndex");
+                that._updateColorContrast(that.color() || parseColor(WHITE));
             }
         },
-        _sliders: function() {
+        _getHSV: function(h, s, v, a) {
             var that = this,
-                element = that.element,
-                hueSlider = element.find(".k-hue-slider"),
-                opacitySlider = element.find(".k-alpha-slider");
+                rect = that._hsvRect,
+                width = rect.width(),
+                height = rect.height(),
+                handlePosition = this._hsvHandle.position();
 
-            function hueChange(e) {
-                that._updateUI(that._getHSV(e.value, null, null, null));
+            if(!width || !height) {
+                return that.color() ? that.color().toHSV() : parseColor(BLACK);
             }
 
-            hueSlider.attr("aria-label", "hue saturation");
-            that._hueSlider = hueSlider.kendoSlider({
-                min: 0,
-                max: 360,
-                tickPlacement: "none",
-                showButtons: false,
-                orientation: "vertical",
-                slide: hueChange,
-                change: hueChange
-            }).data("kendoSlider");
-
-            function opacityChange(e) {
-                that._updateUI(that._getHSV(null, null, null, e.value / 100));
+            if (h == null) {
+                h = that._hueSlider.value();
             }
+            if (s == null) {
+                s = handlePosition.left / width;
+            }
+            if (v == null) {
+                v = 1 - handlePosition.top / height;
+            }
+            if (a == null) {
+                a = that._opacitySlider ? that._opacitySlider.value() / 100 : 1;
+            }
+            return Color.fromHSV(h, s, v, a);
+        },
+        _gradientInputs: function() {
+            var that = this,
+                options = that.options;
 
-            opacitySlider.attr("aria-label", "opacity");
-            that._opacitySlider = opacitySlider.kendoSlider({
-                min: 0,
-                max: 100,
-                tickPlacement: "none",
-                showButtons: false,
-                orientation: "vertical",
-                slide: opacityChange,
-                change: opacityChange
-            }).data("kendoSlider");
+            if(that._colorgradientInputs.length) {
+                that._colorInput = new ColorInput(that._colorgradientInputs, extend({}, options, {
+                    tabindex: 0
+                }));
+
+                that._colorInput.bind("change", function(ev){
+                    that._updateUI(ev.value, true);
+                });
+
+                that._colorInput.bind("select", function(ev){
+                    var color = parseColor(ev.value);
+                    that._select(color);
+                    that.trigger("forceSelect", { value: that.value() });
+                });
+            }
         },
         _hsvArea: function() {
             var that = this,
-                element = that.element,
-                hsvRect = element.find(".k-hsv-rectangle"),
-                hsvHandle = hsvRect.find(".k-draghandle").attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._keydown, that));
+                wrapper = that.wrapper,
+                hsvRect = wrapper.find(".k-hsv-rectangle"),
+                hsvHandle = hsvRect.find(".k-draghandle").attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._hsvKeydown, that)),
+                value = this.value();
+
+            if (value && value.indexOf("rgba") > -1) {
+                value = value.replace("rgba", "RGBA");
+            };
+
+            if (!this._hsvDragAriaTemplate) {
+                this._hsvDragAriaTemplate = kendo.template(this.options.hsvDragARIATemplate);
+            }
+
+            hsvHandle.attr("aria-label", this._hsvDragAriaTemplate(value || ''));
 
             function update(x, y) {
                 var offset = this.offset,
                     dx = x - offset.left, dy = y - offset.top,
-                    rw = this.width, rh = this.height;
+                    rw = this.width, rh = this.height,
+                    resultX, resultY;
 
                 dx = dx < 0 ? 0 : dx > rw ? rw : dx;
                 dy = dy < 0 ? 0 : dy > rh ? rh : dy;
-                that._svChange(dx / rw, 1 - dy / rh);
+                resultX = dx / rw;
+                resultY = 1 - dy / rh;
+
+                that._svChange(resultX, resultY);
             }
 
             that._hsvEvents = new kendo.UserEvents(hsvRect, {
@@ -372,36 +380,73 @@
             that._hsvRect = hsvRect;
             that._hsvHandle = hsvHandle;
         },
-        setBackgroundColor: function (color) {
+        _hsvKeydown: function(ev) {
             var that = this;
-
-            if (that.options.contrastTool) {
-                that.options.contrastTool = $.isPlainObject(that.options.contrastTool) ? extend({}, that.options.contrastTool, {
-                    backgroundColor: color
-                }) : {
-                    backgroundColor: color
-                };
-
-                that._updateColorContrast(that.color() || parseColor(WHITE));
+            function move(prop, d) {
+                var c = that._getHSV();
+                c[prop] += d * (ev.shiftKey ? 0.01 : 0.05);
+                if (c[prop] < 0) { c[prop] = 0; }
+                if (c[prop] > 1) { c[prop] = 1; }
+                that._updateUI(c);
+                preventDefault(ev);
+            }
+            function hue(d) {
+                var c = that._getHSV();
+                c.h += d * (ev.shiftKey ? 1 : 5);
+                if (c.h < 0) { c.h = 0; }
+                if (c.h > 359) { c.h = 359; }
+                that._updateUI(c);
+                preventDefault(ev);
+            }
+            switch (ev.keyCode) {
+            case KEYS.LEFT:
+                if (ev.ctrlKey) {
+                    hue(-1);
+                } else {
+                    move("s", -1);
+                }
+                break;
+            case KEYS.RIGHT:
+                if (ev.ctrlKey) {
+                    hue(1);
+                } else {
+                    move("s", 1);
+                }
+                break;
+            case KEYS.UP:
+                move(ev.ctrlKey && that._opacitySlider ? "a" : "v", 1);
+                break;
+            case KEYS.DOWN:
+                move(ev.ctrlKey && that._opacitySlider ? "a" : "v", -1);
+                break;
+            case KEYS.ENTER:
+                that._select(that._getHSV());
+                break;
+            case KEYS.F2:
+                that._colorInput.element.find("input").trigger("focus").select();
+                break;
+            case KEYS.ESC:
+                that._cancel();
+                break;
             }
         },
-        _updateUI: function(color, dontChangeInput) {
-            var that = this;
+        _onEnable: function(enable) {
+            var wrapper = this.wrapper;
 
-            if (!color) {
-                that._reset();
-                return;
+            this._hueSlider.enable(enable);
+
+            if (this._opacitySlider) {
+                this._opacitySlider.enable(enable);
             }
 
-            if (!dontChangeInput && that._colorInput) {
-                that._colorInput.value(color);
-            }
+            wrapper.find("input").attr("disabled", !enable);
 
-            that._triggerSelect(color);
-            that._updateHsv(color);
-
-            if(that._contrastTool.length) {
-                that._updateColorContrast(color);
+            if (this.options._standalone) {
+                if (enable) {
+                    wrapper.removeAttr("aria-disabled");
+                } else {
+                    wrapper.attr("aria-disabled", true);
+                }
             }
         },
         _reset: function () {
@@ -414,33 +459,6 @@
             that._resetHsv();
             that._resetColorContrast();
         },
-        _resetHsv: function () {
-            var that = this,
-                color = parseColor(BLACK);
-
-            that._updateHsv(color);
-        },
-        _updateHsv: function (color) {
-            var that = this,
-                rect = that._hsvRect;
-
-            color = color.toHSV();
-
-            that._hsvHandle.css({
-                // saturation is 0 on the left side, full (1) on the right
-                left: color.s * rect.width() + "px",
-                // value is 0 on the bottom, full on the top.
-                top: (1 - color.v) * rect.height() + "px"
-            });
-
-            that._hueElements.css(BACKGROUNDCOLOR, Color.fromHSV(color.h, 1, 1, 1).toCss());
-            that._hueSlider.value(color.h);
-
-            if (that._opacitySlider) {
-                that._opacitySlider.wrapper.find(".k-slider-track").css("background", "linear-gradient(to top, transparent, " + Color.fromHSV(color.h, 1, 1, 1).toCss());
-                that._opacitySlider.value(100 * color.a);
-            }
-        },
         _resetColorContrast: function () {
             var that = this,
                 contrastOptions = that.options.contrastTool;
@@ -448,6 +466,52 @@
             if(that._contrastTool.length) {
                 that._updateColorContrast(contrastOptions.backgroundColor ? parseColor(contrastOptions.backgroundColor) : parseColor(WHITE));
             }
+        },
+        _resetHsv: function () {
+            var that = this,
+                color = parseColor(BLACK);
+
+            that._updateHsv(color);
+        },
+        _sliders: function() {
+            var that = this,
+                wrapper = that.wrapper,
+                hueSlider = wrapper.find(".k-hue-slider"),
+                opacitySlider = wrapper.find(".k-alpha-slider");
+
+            function hueChange(e) {
+                that._updateUI(that._getHSV(e.value, null, null, null));
+            }
+
+            hueSlider.attr("aria-label", "hue");
+            that._hueSlider = hueSlider.kendoSlider({
+                min: 0,
+                max: 360,
+                tickPlacement: "none",
+                showButtons: false,
+                orientation: "vertical",
+                slide: hueChange,
+                change: hueChange
+            }).data("kendoSlider");
+
+            function opacityChange(e) {
+                that._updateUI(that._getHSV(null, null, null, e.value / 100));
+            }
+
+            opacitySlider.attr("aria-label", "opacity");
+            that._opacitySlider = opacitySlider.kendoSlider({
+                min: 0,
+                max: 100,
+                tickPlacement: "none",
+                showButtons: false,
+                orientation: "vertical",
+                slide: opacityChange,
+                change: opacityChange
+            }).data("kendoSlider");
+        },
+        _svChange: function(s, v) {
+            var color = this._getHSV(null, s, v, null);
+            this._updateUI(color);
         },
         _updateColorContrast: function (color) {
             var that = this,
@@ -514,87 +578,83 @@
             hsvRect.find("." + svgClassName).remove();
             hsvRect.append(newSvg);
         },
-        _keydown: function(ev) {
-            var that = this;
-            function move(prop, d) {
-                var c = that._getHSV();
-                c[prop] += d * (ev.shiftKey ? 0.01 : 0.05);
-                if (c[prop] < 0) { c[prop] = 0; }
-                if (c[prop] > 1) { c[prop] = 1; }
-                that._updateUI(c);
-                preventDefault(ev);
-            }
-            function hue(d) {
-                var c = that._getHSV();
-                c.h += d * (ev.shiftKey ? 1 : 5);
-                if (c.h < 0) { c.h = 0; }
-                if (c.h > 359) { c.h = 359; }
-                that._updateUI(c);
-                preventDefault(ev);
-            }
-            switch (ev.keyCode) {
-            case KEYS.LEFT:
-                if (ev.ctrlKey) {
-                    hue(-1);
-                } else {
-                    move("s", -1);
-                }
-                break;
-            case KEYS.RIGHT:
-                if (ev.ctrlKey) {
-                    hue(1);
-                } else {
-                    move("s", 1);
-                }
-                break;
-            case KEYS.UP:
-                move(ev.ctrlKey && that._opacitySlider ? "a" : "v", 1);
-                break;
-            case KEYS.DOWN:
-                move(ev.ctrlKey && that._opacitySlider ? "a" : "v", -1);
-                break;
-            case KEYS.ENTER:
-                that._select(that._getHSV());
-                break;
-            case KEYS.F2:
-                that._colorInput.element.find("input").trigger("focus").select();
-                break;
-            case KEYS.ESC:
-                that._cancel();
-                break;
-            }
-        },
-        focus: function() {
-            this._hsvHandle.focus();
-        },
-        _getHSV: function(h, s, v, a) {
+        _updateHsv: function (color) {
             var that = this,
-                rect = that._hsvRect,
-                width = rect.width(),
-                height = rect.height(),
-                handlePosition = this._hsvHandle.position();
+                rect = that._hsvRect;
 
-            if(!width || !height) {
-                return that.color() ? that.color().toHSV() : parseColor(BLACK);
+            color = color.toHSV();
+
+            that._hsvHandle.css({
+                // saturation is 0 on the left side, full (1) on the right
+                left: color.s * rect.width() + "px",
+                // value is 0 on the bottom, full on the top.
+                top: (1 - color.v) * rect.height() + "px"
+            });
+
+            that._hueElements.css(BACKGROUNDCOLOR, Color.fromHSV(color.h, 1, 1, 1).toCss());
+            that._hueSlider.value(color.h);
+
+            if (that._opacitySlider) {
+                that._opacitySlider.wrapper.find(".k-slider-track").css("background", "linear-gradient(to top, transparent, " + Color.fromHSV(color.h, 1, 1, 1).toCss());
+                that._opacitySlider.value(100 * color.a);
             }
 
-            if (h == null) {
-                h = that._hueSlider.value();
-            }
-            if (s == null) {
-                s = handlePosition.left / width;
-            }
-            if (v == null) {
-                v = 1 - handlePosition.top / height;
-            }
-            if (a == null) {
-                a = that._opacitySlider ? that._opacitySlider.value() / 100 : 1;
-            }
-            return Color.fromHSV(h, s, v, a);
+            that._updateHsvAria(color.s, color.v);
         },
-        _svChange: function(s, v) {
-            var color = this._getHSV(null, s, v, null);
-            this._updateUI(color);
+        _updateHsvAria: function(x,y) {
+            var value = this.value();
+
+            if (value && value.indexOf("rgba") > -1) {
+                value = value.replace("rgba", "RGBA");
+            }
+
+            this._hsvHandle.attr({
+                "aria-label": this._hsvDragAriaTemplate(value || ''),
+                "aria-valuenow": Math.round(x * 100),
+                "aria-valuetext": "saturation: " + Math.round(x * 100) + "%, value: " + Math.round(y * 100) + "%"
+            });
+        },
+        _updateUI: function(color, dontChangeInput) {
+            var that = this;
+
+            if (!color) {
+                that._reset();
+                return;
+            }
+
+            if (!dontChangeInput && that._colorInput) {
+                that._colorInput.value(color);
+            }
+
+            that._triggerSelect(color);
+            that._updateHsv(color);
+
+            if(that._contrastTool.length) {
+                that._updateColorContrast(color);
+            }
+        },
+        _wrapper: function() {
+            var options = this.options,
+                wrapper;
+
+            if (this.element.is("input")) {
+                wrapper = this.element.addClass("k-hidden").wrap("<div>").parent();
+            } else {
+                wrapper = this.element;
+            }
+
+            wrapper.addClass("k-colorgradient")
+                .attr({
+                    "role": "textbox",
+                    "aria-keyshortcuts": "Enter"
+                })
+                .append(this._template(options));
+
+            this._hueElements = $(".k-hsv-rectangle, .k-alpha-slider .k-slider-track", wrapper);
+            this._colorgradientInputs = $(".k-colorgradient-inputs", wrapper);
+            this._contrastTool = $(".k-colorgradient-color-contrast", wrapper);
+
+            this.wrapper = wrapper;
         },
         destroy: function (){
             this._hsvEvents.destroy();

@@ -95,6 +95,8 @@ var __meta__ = {
                 34: step(-options.largeStep) // page down
             };
 
+            that._ariaLabel(that.wrapper.find(DRAG_HANDLE));
+
             kendo.notify(that);
         },
 

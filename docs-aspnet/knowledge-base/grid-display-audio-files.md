@@ -47,4 +47,4 @@ How can I display audio files within the {{ site.product }} Grid?
     })
 ```
 
-For a complete implementation of the suggested approach, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/QmOskMFw42QoLBkC37) example.
+For a complete implementation of the suggested approach, refer to the following [GitHub Project](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/AudioColumn.cshtml).
