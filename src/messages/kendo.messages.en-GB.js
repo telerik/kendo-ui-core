@@ -518,7 +518,10 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   },
   "noRecords": "No records available.",
   "groupHeader": "Press ctrl + space to group",
-  "ungroupHeader": "Press ctrl + space to ungroup"
+  "ungroupHeader": "Press ctrl + space to ungroup",
+  "toolbarLabel": "grid toolbar",
+  "groupingHeaderLabel": "grid grouping header",
+  "filterCellTitle": "filter cell"
 });
 }
 

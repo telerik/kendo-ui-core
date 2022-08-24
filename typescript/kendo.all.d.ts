@@ -6348,6 +6348,9 @@ declare namespace kendo.ui {
         commands?: GridMessagesCommands | undefined;
         noRecords?: string | undefined;
         expandCollapseColumnHeader?: string | undefined;
+        toolbarLabel?: string | undefined;
+        groupingHeaderLabel?: string | undefined;
+        filterCellTitle?: string | undefined;
     }
 
     interface GridNoRecords {

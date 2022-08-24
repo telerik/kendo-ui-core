@@ -728,7 +728,10 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   },
   "noRecords": "Няма налични записи.",
   "groupHeader": "Натиснете ctrl + space за да групирате",
-  "ungroupHeader": "Натиснете ctrl + space за да разгрупирате"
+  "ungroupHeader": "Натиснете ctrl + space за да разгрупирате",
+  "toolbarLabel": "тулбар на таблицата",
+  "groupingHeaderLabel": "ред за групиране на таблицата",
+  "filterCellTitle": "клетка за филтриране"
 });
 }
 

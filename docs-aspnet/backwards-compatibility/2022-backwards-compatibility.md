@@ -10,6 +10,12 @@ position: 1
 
 This article lists the breaking or important changes in the 2022 releases of {{ site.product }}.
 
+## {{ site.product }} R3 2022
+
+**Badge**
+
+`Shape` property is replaced with `Rounded` and `Fill` property is now called `FillMode`.
+
 ## {{ site.product }} R2 2022 SP2
 
 The Size, FillMode and Rounded properties now provide the None option instead of Null.

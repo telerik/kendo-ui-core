@@ -484,7 +484,10 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmation": "Are you sure you want to delete this record?",
     "confirmDelete": "Delete"
   },
-  "noRecords": "No records available."
+  "noRecords": "No records available.",
+  "toolbarLabel": "grid toolbar",
+  "groupingHeaderLabel": "grid grouping header",
+  "filterCellTitle": "filter cell"
 });
 }
 

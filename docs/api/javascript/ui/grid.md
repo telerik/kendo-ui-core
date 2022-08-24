@@ -855,9 +855,9 @@ If set to `true` a draghandle will be rendered and the user could reorder the ro
         { draggable: true },
         { field: "name" }
       ],
-      dataSource: [ 
-        { id:1, name: "Jane Doe" }, 
-        { id:2, name: "John Doe" } 
+      dataSource: [
+        { id:1, name: "Jane Doe" },
+        { id:2, name: "John Doe" }
       ]
     });
     </script>
@@ -2044,7 +2044,7 @@ The fields which can be used in the template are:
 
 ### columns.format `String`
 
-The format that is applied to the value before it is displayed. 
+The format that is applied to the value before it is displayed.
 
 Takes the form "{0:format}" where "format" can be a:
 
@@ -2429,7 +2429,7 @@ The fields which can be used in the template are:
       }
     });
     </script>
-    
+
 #### Example - set the group header template as a function
 
     <div id="grid"></div>
@@ -2453,7 +2453,7 @@ The fields which can be used in the template are:
           group: {
             field: "age", aggregates: [
               { field: "age", aggregate: "count" },
-              { field: "age", aggregate: "max" }, 
+              { field: "age", aggregate: "max" },
               { field: "year", aggregate: "max" }
             ]
           }
@@ -7198,6 +7198,18 @@ Allows the customization of the text in the column header for the expand or coll
       }
     });
     </script>
+
+### messages.filterCellTitle `String` *(default: "filter cell")*
+
+The text that will be used for the `title` attribute of all filter cells belonging to a filter row in the Grid.
+
+### messages.groupingHeaderLabel `String` *(default: "grid grouping header")*
+
+The text that will be used for the `aria-lable` attribute of the grouping header of the Grid.
+
+### messages.toolbarLabel `String` *(default: "grid toolbar")*
+
+The text that will be used for the `aria-lable` attribute of the ToolBar of the Grid.
 
 ### mobile `Boolean|String` *(default: false)*
 
