@@ -24,88 +24,88 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 
 |Component |508|WCAG 2.1|
 |:---          |:---|:---  
-|ActionSheet   |Yes |AAA |
-|AppBar	       |Yes |AAA |
+|ActionSheet   |Yes |AA |
+|AppBar	       |Yes |AA |
 |AutoComplete  |Yes |AA  |
-|Avatar        |Yes |AAA  |
-|BarCode	   |Yes |AAA |
-|BottomNavigation |Yes |AAA |
+|Avatar        |Yes |AA  |
+|BarCode	   |Yes |AA |
+|BottomNavigation |Yes |AA |
 |Breadcrumb	   |Yes |AA  |
 |Button 	   |Yes |AA  |
 |ButtonGroup   |Yes |AA  |
-|Calendar	   |Yes |AAA |
-|Captcha       |Yes |AAA |
-|Charts        |Yes |AAA |
-|Chat          |Yes |AAA |
-|CheckBox      |Yes |AAA |
-|CheckBoxGroup |Yes |AAA |
-|ContextMenu   |Yes |AAA |
+|Calendar	   |Yes |AA |
+|Captcha       |Yes |AA |
+|Charts        |Yes |AA |
+|Chat          |Yes |AA |
+|CheckBox      |Yes |AA |
+|CheckBoxGroup |Yes |AA |
+|ContextMenu   |Yes |AA |
 |ComboBox      |Yes |AA  |
 |ColorGradient |Yes |AA  |
 |ColorPalette  |Yes |AA  |
 |ColorPicker   |Yes |AA  |
-|DateInput	   |Yes |AAA |
-|DatePicker	   |Yes |AAA |
-|DateTimePicker|Yes |AAA |
-|Diagram	   |Yes |AAA |
+|DateInput	   |Yes |AA |
+|DatePicker	   |Yes |AA |
+|DateTimePicker|Yes |AA |
+|Diagram	   |Yes |AA |
 |Dialog	       |Yes |AA  |
-|Drawer	       |Yes |AAA |
-|DropDownButton|Yes |AAA |
+|Drawer	       |Yes |AA |
+|DropDownButton|Yes |AA |
 |DropDownList  |Yes |AA  |
 |DropDownTree* |Yes |AA  |
 |Editor        |Yes |AA  |
-|ExpansionPanel|Yes |AAA |
-|FileManager   |Yes |AAA |
-|Filter   |Yes |AAA |
+|ExpansionPanel|Yes |AA |
+|FileManager   |Yes |AA |
+|Filter   |Yes |AA |
 |FlatColorPicker |Yes |AA |
-|FloatingActionButton |Yes |AAA |
-|Form          |Yes |AAA |
+|FloatingActionButton |Yes |AA |
+|Form          |Yes |AA |
 |Gantt         |Yes |AA  |
-|Grid          |Yes |AAA |
+|Grid          |Yes |AA |
 |ImageEditor   |Yes |AA  |
-|Loader        |Yes |AАA |
-|LinearGauge   |Yes |AAA |
-|ListBox       |Yes |AAA |
-|ListView	   |Yes |AAA |
-|Map	       |Yes |AAA |
-|MaskedTextbox |Yes |AAA |
-|Menu          |Yes |AAA |
+|Loader        |Yes |AА |
+|LinearGauge   |Yes |AA |
+|ListBox       |Yes |AA |
+|ListView	   |Yes |AA |
+|Map	       |Yes |AA |
+|MaskedTextbox |Yes |AA |
+|Menu          |Yes |AA |
 |MultiColumnComboBox |Yes |AA |
-|MultiSelect   |Yes |AAA |
+|MultiSelect   |Yes |AA |
 |Notification  |Yes |AA  |
-|NumericTextbox|Yes |AAA |
-|OrgChart	   |Yes |AAA |
-|Pager         |Yes |AAA |
-|PanelBar	   |Yes |AAA |
-|PopOver	   |Yes |AAA |
-|QRCode	   	   |Yes |AAA |
-|RadialGauge   |Yes |AAA |
-|RadioButton   |Yes |AAА  |
-|RadioGroup    |Yes |AAA |
+|NumericTextbox|Yes |AA |
+|OrgChart	   |Yes |AA |
+|Pager         |Yes |AA |
+|PanelBar	   |Yes |AA |
+|PopOver	   |Yes |AA |
+|QRCode	   	   |Yes |AA |
+|RadialGauge   |Yes |AA |
+|RadioButton   |Yes |AA  |
+|RadioGroup    |Yes |AA |
 |Responsive Panel |Yes |AA |
-|ScrollView	   |Yes |AAA |
-|Scheduler	   |Yes |AAA |
-|Slider	       |Yes |AAA |
-|Sortable	   |Yes |AAA |
-|SplitButton   |Yes |AAA |
-|Splitter      |Yes |AAA |
+|ScrollView	   |Yes |AA |
+|Scheduler	   |Yes |AA |
+|Slider	       |Yes |AA |
+|Sortable	   |Yes |AA |
+|SplitButton   |Yes |AA |
+|Splitter      |Yes |AA |
 |Spreadsheet   |Yes |AA  |
 |Stepper	   |Yes |AA |
 |Switch        |Yes |AA  |
-|TabStrip	   |Yes |AAA |
-|TaskBoard	   |Yes |AAA |
-|TextArea	   |Yes |AAA |
-|TextBox	   |Yes |AAA |
+|TabStrip	   |Yes |AA |
+|TaskBoard	   |Yes |AA |
+|TextArea	   |Yes |AA |
+|TextBox	   |Yes |AA |
 |TileLayout	   |Yes |AA  |
-|TimeLine	   |Yes |A   |
-|TimePicker	   |Yes |AAA |
+|TimeLine	   |Yes |AA  |
+|TimePicker	   |Yes |AA |
 |ToolBar	   |Yes |AA  |
 |Tooltip	   |Yes |AA  |
-|TreeList	   |Yes |AAA |
+|TreeList	   |Yes |AA |
 |TreeView	   |Yes |AA  |
 |Upload 	   |Yes |AA  |
-|Window 	   |Yes |AAA |
-|Wizard		   |Yes |AAA |
+|Window 	   |Yes |AA |
+|Wizard		   |Yes |AA |
 
 > The DropDownTree widget will be identified as not compliant to the WAI-ARIA spec when tested with static HTML analyzer if there is no selection in the widget and the `placeholder` configuration is not used. That is because the DropDownTree wrapper element, which has `role="listbox"` will not contain any `option` elements. That should be considered a known limitation in the widget. Detailed information on the scenario could be found in [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/6558#issuecomment-938449528).
 
