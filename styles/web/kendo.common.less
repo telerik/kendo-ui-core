@@ -638,42 +638,41 @@
 // Badge
 @use-calc-badge-size: boolean(true);
 
-@badge-padding-x: 4px;
-@badge-padding-y: 4px;
-@badge-border-width: 1px;
-@badge-border-radius: 2px;
-@badge-font-size: 10px;
-@badge-line-height: 1;
+@kendo-badge-border-width: 1px;
+@kendo-badge-border-radius: 4px;
 
-@badge-padding-x-sm: ( @badge-padding-x / 2 );
-@badge-padding-y-sm: ( @badge-padding-y / 2 );
-@badge-border-width-sm: @badge-border-width;
-@badge-border-radius-sm: 1px;
-@badge-font-size-sm: 10px;
-@badge-line-height-sm: 1;
+@kendo-badge-padding-x: 4px;
+@kendo-badge-padding-x-sm: 2px;
+@kendo-badge-padding-x-md: 4px;
+@kendo-badge-padding-x-lg: 6px;
 
-@badge-padding-x-lg: ( @badge-padding-x * 1.5 );
-@badge-padding-y-lg: ( @badge-padding-y * 1.5 );
-@badge-border-width-lg: @badge-border-width;
-@badge-border-radius-lg: 4px;
-@badge-font-size-lg: 12px;
-@badge-line-height-lg: 1;
+/// Vertical padding of the badge.
+/// @group badge
+@kendo-badge-padding-y: 4px;
+@kendo-badge-padding-y-sm: 2px;
+@kendo-badge-padding-y-md: 4px;
+@kendo-badge-padding-y-lg: 6px;
 
-@badge-fixed-size: 20px;
-@badge-calc-size: calc( (@badge-line-height * 1em) + (@badge-padding-y * 2) + (@badge-border-width * 2) );
-@badge-size: if( @use-calc-badge-size, @badge-calc-size, @badge-fixed-size );
-@badge-dot-size: 10px;
+/// Font sizes of the badge.
+/// @group badge
+@kendo-badge-font-size: 12px;
+@kendo-badge-font-size-sm: 12px;
+@kendo-badge-font-size-md: 12px;
+@kendo-badge-font-size-lg: 12px;
 
-@badge-fixed-size-sm: 16px;
-@badge-calc-size-sm: calc( (@badge-line-height-sm * 1em) + (@badge-padding-y-sm * 2) + (@badge-border-width-sm * 2) );
-@badge-size-sm: if( @use-calc-badge-size, @badge-calc-size-sm, @badge-fixed-size-sm );
-@badge-dot-size-sm: 6px;
+/// Line heights used along with $font-size.
+/// @group badge
+@kendo-badge-line-height: 1;
+@kendo-badge-line-height-sm: @kendo-badge-line-height;
+@kendo-badge-line-height-md: @kendo-badge-line-height;
+@kendo-badge-line-height-lg: @kendo-badge-line-height;
 
-@badge-fixed-size-lg: 26px;
-@badge-calc-size-lg: calc( (@badge-line-height-lg * 1em) + (@badge-padding-y-lg * 2) + (@badge-border-width-lg * 2) );
-@badge-size-lg: if( @use-calc-badge-size, @badge-calc-size-lg, @badge-fixed-size-lg );
-@badge-dot-size-lg: 12px;
-
+/// Badge min width used for circle badge.
+/// @group badge
+@kendo-badge-min-width: calc( (@kendo-badge-line-height * 1em) + (@kendo-badge-padding-y * 2) + (@kendo-badge-border-width * 2));
+@kendo-badge-min-width-sm: calc( (@kendo-badge-line-height-sm * 1em) + (@kendo-badge-padding-y-sm * 2) + (@kendo-badge-border-width * 2) );
+@kendo-badge-min-width-md: calc( (@kendo-badge-line-height-md * 1em) + (@kendo-badge-padding-y-md * 2) + (@kendo-badge-border-width * 2) );
+@kendo-badge-min-width-lg: calc( (@kendo-badge-line-height-lg * 1em) + (@kendo-badge-padding-y-lg * 2) + (@kendo-badge-border-width * 2) );
 
 // Checkbox
 @icon-size: 16px;

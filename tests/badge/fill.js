@@ -5,7 +5,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge fill', function() {
+    describe('kendo.ui.Badge fillMode', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -15,38 +15,38 @@
             kendo.destroy(Mocha.fixture);
         });
 
-        // #region badge.options.fill
-        test('badge.options.fill sets correct classNames', function() {
-            badge = new Badge(span, { fill: 'outline' });
+        // #region badge.options.fillMode
+        test('badge.options.fillMode sets correct classNames', function() {
+            badge = new Badge(span, { fillMode: 'outline' });
 
-            assert.equal(badge._fill, 'outline');
+            assert.equal(badge._fillMode, 'outline');
             assert.equal(badge.element.hasClass('k-badge-outline'), true);
         });
-        test('badge.options.fill does not set classNames if fill is \'\'', function() {
-            badge = new Badge(span, { fill: '' });
+        test('badge.options.fillMode does not set classNames if fillMode is \'\'', function() {
+            badge = new Badge(span, { fillMode: '' });
 
-            assert.equal(badge._fill, '');
+            assert.equal(badge._fillMode, '');
             assert.equal(badge.element.hasClass('k-badge-'), false);
         });
         // #endregion
 
 
         // #region setOptions
-        test('badge.setOptions(fill) sets correct classNames', function() {
-            badge = new Badge(span, { fill: 'flat' });
+        test('badge.setOptions(fillMode) sets correct classNames', function() {
+            badge = new Badge(span, { fillMode: 'flat' });
 
-            badge.setOptions({ fill: 'outline' });
+            badge.setOptions({ fillMode: 'outline' });
 
-            assert.equal(badge._fill, 'outline');
+            assert.equal(badge._fillMode, 'outline');
             assert.equal(badge.element.hasClass('k-badge-flat'), false);
             assert.equal(badge.element.hasClass('k-badge-outline'), true);
         });
-        test('badge.setOptions(fill) does not set classNames if fill is \'\'', function() {
-            badge = new Badge(span, { fill: 'flat' });
+        test('badge.setOptions(fillMode) does not set classNames if fillMode is \'\'', function() {
+            badge = new Badge(span, { fillMode: 'flat' });
 
-            badge.setOptions({ fill: '' });
+            badge.setOptions({ fillMode: '' });
 
-            assert.equal(badge._fill, '');
+            assert.equal(badge._fillMode, '');
             assert.equal(badge.element.hasClass('k-badge-flat'), false);
             assert.equal(badge.element.hasClass('k-badge-'), false);
         });

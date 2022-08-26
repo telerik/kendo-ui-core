@@ -121,15 +121,22 @@ The following example shows the Form with `grid` layout set.
 
 ## Responsive Form
 
-You can use [Media Queries](https://docs.telerik.com/kendo-ui/styles-and-layout/using-kendo-in-responsive-web-pages#media-queries) to enhance the Form appearance on different form factors:
+You can use [Media Queries](https://docs.telerik.com/kendo-ui/styles-and-layout/using-kendo-in-responsive-web-pages#media-queries) to enhance the Form appearance on different form factors. [The following example](https://netcorerepl.telerik.com/cmaibrbF27FhokP833) demonstrates how you can use Media Queries to override the default CSS rules in order to change the Form Layout from two columns to a single column on devices with screen width of 600px or less:
 
 {% if site.core %}
 ```HtmlHelper
     <style>
       @media screen and (max-width: 600px) { //Resize the screen to less than 600px and check out the styling in action.
-        .k-form-fieldset {
+        .k-form-field{
+          grid-column-start: 1;
+          grid-column-end: span 1;
+        }
+        fieldset{
             grid-column-start: 1;
             grid-column-end: span 1;
+        }
+        div.k-form-layout.k-d-grid.k-grid-cols-2 {
+            grid-template-columns:repeat(1, minmax(0px, 1fr));         
         }
       }
     </style>
@@ -180,9 +187,16 @@ You can use [Media Queries](https://docs.telerik.com/kendo-ui/styles-and-layout/
 
     <style>
       @media screen and (max-width: 600px) { //Resize the screen to less than 600px and check out the styling in action.
-        .k-form-fieldset {
+        .k-form-field{
+          grid-column-start: 1;
+          grid-column-end: span 1;
+        }
+        fieldset{
             grid-column-start: 1;
             grid-column-end: span 1;
+        }
+        div.k-form-layout.k-d-grid.k-grid-cols-2 {
+            grid-template-columns:repeat(1, minmax(0px, 1fr));         
         }
       }
     </style>
@@ -221,9 +235,16 @@ You can use [Media Queries](https://docs.telerik.com/kendo-ui/styles-and-layout/
 ```HtmlHelper
     <style>
       @media screen and (max-width: 600px) { //Resize the screen to less than 600px and check out the styling in action.
-        .k-form-fieldset {
+        .k-form-field{
+          grid-column-start: 1;
+          grid-column-end: span 1;
+        }
+        fieldset{
             grid-column-start: 1;
             grid-column-end: span 1;
+        }
+        div.k-form-layout.k-d-grid.k-grid-cols-2 {
+            grid-template-columns:repeat(1, minmax(0px, 1fr));         
         }
       }
     </style>

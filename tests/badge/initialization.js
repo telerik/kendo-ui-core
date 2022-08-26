@@ -28,12 +28,12 @@
             assert.equal(badge.text(), '');
         });
 
-        test('default shape is \'rounded\'', function() {
+        test('default rounded is \'medium\'', function() {
             badge = new Badge(span);
 
-            assert.equal(badge._shape, 'rounded');
-            assert.equal(badge.shape(), 'rounded');
-            assert.equal(badge.element.hasClass('k-badge-rounded'), true);
+            assert.equal(badge._rounded, 'medium');
+            assert.equal(badge.rounded(), 'medium');
+            assert.equal(badge.element.hasClass('k-rounded-md'), true);
         });
 
         test('default size is \'medium\'', function() {
@@ -47,13 +47,13 @@
             badge = new Badge(span);
 
             assert.equal(badge._themeColor, 'secondary');
-            assert.equal(badge.element.hasClass('k-badge-secondary'), true);
+            assert.equal(badge.element.hasClass('k-badge-solid-secondary'), true);
         });
 
-        test('default fill is \'solid\'', function() {
+        test('default fillMode is \'solid\'', function() {
             badge = new Badge(span);
 
-            assert.equal(badge._fill, 'solid');
+            assert.equal(badge._fillMode, 'solid');
             assert.equal(badge.element.hasClass('k-badge-solid'), true);
         });
 

@@ -53,12 +53,12 @@ Specifies wether or not to render additional "cutout" border around the badge.
         <span id="badge-bordered"></span>
     </div>
     <script>
-        $('#badge-normal').kendoBadge({ cutoutBorder: false, shape: 'circle' });
-        $('#badge-bordered').kendoBadge({ cutoutBorder: true, shape: 'circle' });
+        $('#badge-normal').kendoBadge({ cutoutBorder: false, rounded: 'full' });
+        $('#badge-bordered').kendoBadge({ cutoutBorder: true, rounded: 'full' });
     </script>
 
 
-### fill `String` *(default: 'solid')*
+### fillMode `String` *(default: 'solid')*
 
 Specifies how themeColor is applied to a badge. Valid options are `solid` (default) and `outline`.
 
@@ -67,8 +67,8 @@ Specifies how themeColor is applied to a badge. Valid options are `solid` (defau
     <span id="badge-solid">Solid</span>
     <span id="badge-outline">Outline</span>
     <script>
-        $('#badge-solid').kendoBadge({ fill: 'solid' });
-        $('#badge-outline').kendoBadge({ fill: 'outline' });
+        $('#badge-solid').kendoBadge({ fillMode: 'solid' });
+        $('#badge-outline').kendoBadge({ fillMode: 'outline' });
     </script>
 
 
@@ -130,27 +130,22 @@ Note: position configuration, other than `inline`, requires the badge to be alig
     </script>
 
 
-### shape  `String` *(default: 'rounded')*
+### rounded  `String` *(default: 'medium')*
 
-Specifies the shape of the badge
-
-* `rectangle`: applies no border radius on the badge.
-* `rounded`: applies default border radius on the badge. Note: rounded shape is theme specific and in some themes there might be no rounding of edges.
-* `pill`: applies border radius equal to half the height of the badge. Note: pill shape is not theme specific and is always applied when set.
-* `circle`: forces circular shape on the badge. Note: circle shape is not theme specific and is always applied when set.
-* `dot`: forces dot shape on the badge. Note: dot shape is not theme specific and is always applied when set.
+Specifies the size of the badge. Valid options are `small`, `medium`, `large` and `full`.
 
 #### Example
 
-    <button>Button <span id="badge"></span></button>
+    <span id="badge-small">Small badge</span>
+    <span id="badge-medium">Medium badge</span>
+    <span id="badge-large">Large badge</span>
+    <span id="badge-full">Full badge</span>
     <script>
-        $('#badge').kendoBadge({
-            text: 'badge',
-            themeColor: 'primary',
-            shape: 'rounded'
-        });
+        $('#badge-small').kendoBadge({ rounded: 'small', themeColor: 'primary' });
+        $('#badge-medium').kendoBadge({ rounded: 'medium', themeColor: 'primary' });
+        $('#badge-large').kendoBadge({ rounded: 'large', themeColor: 'primary' });
+        $('#badge-full').kendoBadge({ rounded: 'full', themeColor: 'primary' });
     </script>
-
 
 ### size  `String` *(default: 'medium')*
 
@@ -326,6 +321,31 @@ Set badge icon after initialization.
         }, 1000);
     </script>
 
+### rounded
+
+Sets / gets the badge rounding. See [`badge.options.rounded`](/api/javascript/ui/badge/configuration/rounded) for valid options.
+
+#### Parameters
+
+##### rounded `String`
+
+The new rounding of the badge.
+
+#### Example
+
+Set badge rounding after initialization.
+
+    <span id="badge">Badge</span>
+    <script>
+        var badge =  $('#badge').kendoBadge({
+            rounded: 'medium',
+        }).data('kendoBadge');
+
+        window.setTimeout(function() {
+            badge.rounded('full');
+        }, 1000);
+    </script>
+
 
 ### setOptions
 
@@ -342,40 +362,14 @@ The new options.
     <button>Button <span id="badge"></span></button>
     <script>
         var badge =  $('#badge').kendoBadge({
-            text: 7
+            text: 7,
             themeColor:'primary'
         }).data('kendoBadge');
 
         badge.setOptions({
-            text: 1234
+            text: 1234,
             themeColor: 'error'
         });
-    </script>
-
-
-### shape
-
-Sets / gets the badge shape. See [`badge.options.shape`](/api/javascript/ui/badge/configuration/shape) for valid options.
-
-#### Parameters
-
-##### shape `String`
-
-The new shape of the badge.
-
-#### Example
-
-Set badge shape after initialization.
-
-    <span id="badge">Badge</span>
-    <script>
-        var badge =  $('#badge').kendoBadge({
-            shape: 'rounded',
-        }).data('kendoBadge');
-
-        window.setTimeout(function() {
-            badge.shape('pill')
-        }, 1000);
     </script>
 
 

@@ -2384,8 +2384,8 @@ declare namespace kendo.ui {
 
         hide(): void;
         icon(icon: string): void;
+        rounded(rounded: string): void;
         setOptions(options: any): void;
-        shape(shape: string): void;
         show(): void;
         text(text: string): void;
         text(text: number): void;
@@ -2397,11 +2397,11 @@ declare namespace kendo.ui {
         name?: string | undefined;
         align?: string | undefined;
         cutoutBorder?: boolean | undefined;
-        fill?: string | undefined;
+        fillMode?: string | undefined;
         icon?: string | undefined;
         max?: number | undefined;
         position?: string | undefined;
-        shape?: string | undefined;
+        rounded?: string | undefined;
         size?: string | undefined;
         template?: string|Function | undefined;
         text?: string|number | undefined;

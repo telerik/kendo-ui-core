@@ -32,7 +32,7 @@ The following example demonstrates how to define the Badge.
         @(Html.Kendo().Badge()
             .Name("badge")
             .Text("42")
-            .Shape(BadgeShape.Rectangle)
+            .Rounded(Rounded.Small)
         )
     </a>
 ```
@@ -41,7 +41,7 @@ The following example demonstrates how to define the Badge.
     <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">
         <kendo-badge name="badge" 
                      text="42" 
-                     shape="BadgeShape.Rectangle">
+                     rounded="Rounded.Small">
         </kendo-badge>
     </a>
 ```
@@ -57,7 +57,7 @@ The badge also provides the choice to be inline or overlay and set its type. To 
             .Name("badge")
             .Text("42")
             .ThemeColor(BadgeColor.Warning)
-            .Shape(BadgeShape.Rectangle)
+            .Rounded(Rounded.Large)
         )
     </a>
 ```
@@ -67,7 +67,7 @@ The badge also provides the choice to be inline or overlay and set its type. To 
         <kendo-badge name="badge" 
                      text="42" 
                      theme-color="BadgeColor.Warning" 
-                     shape="BadgeShape.Rectangle">
+                     rounded="Rounded.Large">
         </kendo-badge>
     </a>
 ```
@@ -83,7 +83,7 @@ With the badge you can customize the content using templates.
             .Name("badge")
             .Text("42")
             .Template("#= this._text > 10 ? '9+' : this._text #")
-            .Shape(BadgeShape.Rectangle)
+            .Rounded(Rounded.Full)
         )
     </a>
 ```
@@ -92,7 +92,7 @@ With the badge you can customize the content using templates.
     <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-badge-overlay">
         <kendo-badge name="badge" 
                      text="42" 
-                     shape="BadgeShape.Rectangle" 
+                     rounded="Rounded.Full"
                      template="#= this._text > 10 ? '9+' : this._text #">
         </kendo-badge>
     </a>
@@ -188,7 +188,7 @@ You can access an existing Button instance by using the [`jQuery.data()`](https:
         .Name("badge")
         .Text("42")
         .Template("#= this._text > 10 ? '9+' : this._text #")
-        .Shape(BadgeShape.Rectangle)
+        .Rounded(Rounded.Large)
     </a>
 
     <script>
@@ -201,7 +201,7 @@ You can access an existing Button instance by using the [`jQuery.data()`](https:
         <kendo-badge name="badge" 
                      text="42"
                      template="#= this._text > 10 ? '9+' : this._text #"
-                     shape="BadgeShape.Rectangle">
+                     rounded="Rounded.Large">
         </kendo-badge>
     </a>
 

@@ -20,7 +20,7 @@
             badge = new Badge(span, { themeColor: 'primary' });
 
             assert.equal(badge.themeColor(), 'primary');
-            assert.equal(badge.element.hasClass('k-badge-primary'), true);
+            assert.equal(badge.element.hasClass('k-badge-solid-primary'), true);
         });
 
         test('badge.options.themeColor does not set class if themeColor is empty string', function() {
@@ -39,7 +39,7 @@
             badge.themeColor('warning');
 
             assert.equal(badge.themeColor(), 'warning');
-            assert.equal(badge.element.hasClass('k-badge-warning'), true);
+            assert.equal(badge.element.hasClass('k-badge-solid-warning'), true);
         });
 
         test('badge.themeColor() does not set class if themeColor is empty string', function() {
@@ -60,7 +60,7 @@
             badge.setOptions({ themeColor: 'warning' });
 
             assert.equal(badge.themeColor(), 'warning');
-            assert.equal(badge.element.hasClass('k-badge-warning'), true);
+            assert.equal(badge.element.hasClass('k-badge-solid-warning'), true);
         });
 
         test('badge.setOptions() does not set class if themeColor is empty string', function() {
