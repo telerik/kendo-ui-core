@@ -2,11 +2,9 @@ var fs = require('fs');
 var gulp = require('gulp');
 var shell = require('gulp-shell');
 var path = require('path');
-var debug = require('gulp-debug');
 var logger = require('gulp-logger');
 var PluginError = require('plugin-error');
 var clone = require('gulp-clone');
-var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var gulpIf = require('gulp-if');
 var replace = require("gulp-replace");
@@ -14,8 +12,6 @@ var rename = require("gulp-rename");
 var requirejsOptimize = require('gulp-requirejs-optimize');
 var glob = require("glob");
 var flatmap = require('gulp-flatmap');
-
-var ignore = require('gulp-ignore');
 
 var merge = require('merge2');
 var argv = require('yargs').argv;
@@ -36,7 +32,7 @@ requireDir('./build/gulp/tasks');
 
 var makeSourceMaps = !argv['skip-source-maps'];
 var skipMinify = argv['skip-min'];
-var skipCultures = argv['skip-cultures']
+var skipCultures = argv['skip-cultures'];
 
 var postcss = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
@@ -135,7 +131,7 @@ const toDist = (stream) => stream.pipe(gulp.dest('dist/js'));
 
 function gatherWithRequireJS(stream, file) {
     let currentModule = path.relative(process.cwd(), file.path).replace("\\", "/");
-    let modules = glob.sync("src/kendo.*.js", { ignore: currentModule }).map(mdname => mdname.replace(/^src\/(.*)\.js$/, "$1"));
+    let modules = glob.sync("src/kendo.*.js", { ignore: currentModule }).map(mdName => mdName.replace(/^src\/(.*)\.js$/, "$1"));
     let dict = Object.assign({}, ...modules.map(mod => Object.assign({ [mod]: 'empty:' })));
     let paths = { jquery: "empty:" };
     let isBundle = fs.readFileSync(file.path).indexOf('"bundle all";') > -1;
@@ -149,7 +145,7 @@ function gatherWithRequireJS(stream, file) {
         optimize: "none",
         paths: paths,
         logLevel: 2,
-        onBuildWrite: function (moduleName, path, contents) {
+        onBuildWrite: function(moduleName, path, contents) {
             return contents.replace(/(\.+\/)+(kendo[\.\w]+)/gm, '$2');
         }
     }));
