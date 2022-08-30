@@ -11,6 +11,8 @@ position: 40
 
 The Kendo UI for jQuery CDN resides on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/). The service maintains the official Kendo UI for jQuery releases and service packs, and provides no access to internal builds. 
 
+> Note that sinse R3 2022 the CDN distribution needs to be activated using a license file. For more info check [Using Script License File]({% slug using-license-code %}).
+
 ## 1. Add the Required JavaScript and CSS Files
 
 The Kendo UI CDN provides the following services: 
@@ -57,7 +59,11 @@ The example below loads Kendo UI for jQuery scripts and styles with the HTTPS pr
 </html>
 ```
 
-## 2. Add the HTML Element for Widget Initialization
+## 2. Setup the License File
+
+Generate a license file from the [Using Script License File article]({% slug using-license-code %}) and follow the instructions.
+
+## 3. Add the HTML Element for Widget Initialization
 
 Depending on the widget you require, you can initialize the Kendo UI controls from different elements. In this step, you will add a new `input` element from which a Kendo UI DropDownList will be created. 
 
@@ -80,7 +86,7 @@ Depending on the widget you require, you can initialize the Kendo UI controls fr
 </html>
 ```
 
-## 3. Initialize and Configure the Widget
+## 4. Initialize and Configure the Widget
 
 The following example demonstrates how to initialize a DropDownList with some basic configuration.
 

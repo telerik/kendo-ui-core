@@ -149,6 +149,8 @@ You are also able to include the JavaScript and CSS files from CDN. Do not forge
        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
        <script src="https://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
 
+> Note that sinse R3 2022 the CDN distribution needs to be activated using a license file. For more info check [Using Script License File]({% slug using-license-code %}).
+
 ## Trial Version and Commercial License
 
 This Progress Telerik UI for JSP library is a commercial UI library. You are welcome to explore its full functionality and get technical support from the team when you register for a free 30-day trial. To use it commercially, you need to [purchase a license](https://www.telerik.com/purchase/kendo-ui). Feel free to review the Progress Telerik UI for JSP [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui) to get acquainted with the full terms of use.

@@ -2012,7 +2012,7 @@ which is asynchronous (returns a `Promise`).
 
 ### fromJSON
 
-Loads the workbook data from an object with the format that si defined in the [configuration](#configuration).
+Loads the workbook data from an object with the format that is defined in the [configuration](#configuration).
 
 > All existing sheets and their data will be lost.
 
@@ -2047,7 +2047,7 @@ The object from where data will be loaded. This has to be the deserialized objec
 
 ### defineName
 
-Defines a custom name that will be  available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
+Defines a custom name that will be available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
 
 > If the name of the sheet consists of multiple words, separated by space, the sheet name should be wrapped in quotes `'Sheet Name With Space'!$A$1`.
 

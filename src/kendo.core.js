@@ -15,7 +15,7 @@ var packageMetadata = {
     productCodes: ['KENDOUICOMPLETE', 'KENDOUI', 'KENDOUI', 'KENDOUICOMPLETE'],
     publishDate: 0,
     version: '',
-    licensingDocsUrl: 'https://www.telerik.com/kendo-ui/my-license/'
+    licensingDocsUrl: 'https://docs.telerik.com/kendo-ui/intro/installation/using-license-code'
 };
 
 

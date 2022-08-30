@@ -441,7 +441,7 @@ The index of the Step that should be removed.
 
 ### resize
 
-Recalculates the dimensions of the underlying PrgressBar indicating the Stepper progress. Should be used when changing width/height of the widget element, its parent, or when removing a "display: none;" style from one of those elements. Should always be called if the **Stepper** is initialized in a hidden container right after the container was made visible.
+Recalculates the dimensions of the underlying ProgressBar indicating the Stepper progress. Should be used when changing width/height of the widget element, its parent, or when removing a "display: none;" style from one of those elements. Should always be called if the **Stepper** is initialized in a hidden container right after the container was made visible.
 
 #### Example
 

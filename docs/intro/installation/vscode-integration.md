@@ -66,7 +66,7 @@ To create a Kendo UI for jQuery project:
 The Kendo UI Productivity Tools for Visual Studio Code extension can generate code snippets with sample configuration for the Kendo UI widgets. To add a code snippet for a Kendo UI widget:
 
 1. Open a `js` file or add a `<script>` tag.
-1. Type `jq-short`. Alternatively, type `jq-component`&mdash;where you replace "component" with the name of the desired component, for example, `jq-dropdownlist`.
+1. Type `kj-short`. Alternatively, type `kj-component`&mdash;where you replace "component" with the name of the desired component, for example, `kj-dropdownlist`.
 
 
 ## See Also
