@@ -97,11 +97,11 @@ The following example demonstrates how to specify which fields to include in the
 
 The code snippets from above can be seen in action in the following demo:
 
-* [Grid Search Panel Demo](https://demos.telerik.com/aspnet-core/grid/search-panel)
+* [Search Panel of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/search-panel)
 
 ## Known Limitations
 
-* When filtering is enabled in the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
+* When filtering is enabled, the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
 
 ## See Also
 

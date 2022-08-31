@@ -29,6 +29,14 @@ The scale of the Telerik UI ArcGauge for {{ site.framework }} renders the values
         .Scale(x => x.Min(0).Max(100))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-arcgauge name="gauge" value="65">
+        <scale min="0" max="100">
+        </scale>
+    </kendo-arcgauge>
+```
+{% endif %}
 
 ## MinorUnit and MajorUnit
 
@@ -43,18 +51,34 @@ The scale of the Telerik UI ArcGauge for {{ site.framework }} renders the values
         .Scale(x => x.MajorUnit(20).MinorUnit(5))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-arcgauge name="gauge" value="65">
+        <scale major-unit="20" minor-unit="5">
+        </scale>
+    </kendo-arcgauge>
+```
+{% endif %}
 
 ## Reverse
 
 Reverses the scale direction - values are increased counterclockwise.
 
-````CSHTML
+````HtmlHelper
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
         .Value(65)
         .Scale(x => x.Reverse(true))
     )
 ````
+{% if site.core %}
+```TagHelper
+    <kendo-arcgauge name="gauge" value="65">
+        <scale reverse="true">
+        </scale>
+    </kendo-arcgauge>
+```
+{% endif %}
 
 ## See Also
 

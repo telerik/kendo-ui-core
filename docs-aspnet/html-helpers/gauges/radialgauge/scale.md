@@ -31,6 +31,14 @@ The scale of the Telerik UI RadialGauge for {{ site.framework }} renders the val
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radialgauge name="gauge">
+        <scale min="10" max="180">
+        </scale>
+    </kendo-radialgauge>
+```
+{% endif %}
 
 ## MinorUnit and MajorUnit
 
@@ -47,6 +55,14 @@ The scale of the Telerik UI RadialGauge for {{ site.framework }} renders the val
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radialgauge name="gauge">
+        <scale minor-unit="5" major-unit="20">
+        </scale>
+    </kendo-radialgauge>
+```
+{% endif %}
 
 ## Reverse
 
@@ -60,6 +76,14 @@ If you set the `Reverse` (`bool`) option to `true`, the values of the scale will
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radialgauge name="gauge">
+        <scale reverse="true">
+        </scale>
+    </kendo-radialgauge>
+```
+{% endif %}
 
 ## See Also
 

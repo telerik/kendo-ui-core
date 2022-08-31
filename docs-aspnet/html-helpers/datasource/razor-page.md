@@ -42,6 +42,33 @@ The example below demonstrates how to configure the Telerik UI DataSource compon
         }
     </script>
 ```
+```tab-TagHelper(csthml)
+    @page
+    @model Telerik.Examples.RazorPages.Pages.DataSource.DataSourceIndexModel
+    @addTagHelper *, Kendo.Mvc
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" page-size="10">
+        <transport>
+            <read url="@Url.Page("DataSourceIndex","Read")" data="dataFunction"/>
+            <create url="@Url.Page("DataSourceIndex","Create")" data="dataFunction"/>
+            <update url="@Url.Page("DataSourceIndex","Update")" data="dataFunction"/>
+            <destroy url="@Url.Page("DataSourceIndex","Destroy")" data="dataFunction"/>
+        </transport>
+        <schema>
+            <model id="OrderID"></model>
+        </schema>
+    </kendo-datasource>
+
+    <script>
+        function dataFunction() {
+            return {
+                __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken
+            };
+        }
+    </script> 
+```
 ```tab-PageModel(cshtml.cs)      
 	public static List<OrderViewModel> orders;
     private static int count;

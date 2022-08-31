@@ -22,6 +22,19 @@ The following example demonstrates how to use the `Headers` option to set a requ
         myDataSource.read(); // The header will be set in the request that is sent to the HomeController ReadOrders action.
     </script>  
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("ReadOrders", "Home")" headers='new Dictionary<string,string> { ["header1"] = "test" }'/>
+        </transport>
+    </kendo-datasource>
+
+    <script>
+        myDataSource.read(); // The header will be set in the request that is sent to the HomeController ReadOrders action.
+    </script>
+```
+{% endif %}
 ```HomeController
 
     public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)

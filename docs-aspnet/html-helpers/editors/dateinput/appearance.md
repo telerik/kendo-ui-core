@@ -33,10 +33,18 @@ The following values are available for the `Size` option:
 
 The default size value is `Medium`.
 
-```html
-<span class="k-dateinput k-input k-input-md">
-</span>
-``` 
+```HtmlHelper
+    @(Html.Kendo().DateInput()
+        .Name("dateinput")
+        .Size(ComponentSize.Medium)
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-dateinput name="dateinput" size="ComponentSize.Medium">
+    </kendo-dateinput>
+```
+{% endif %}
 
 ### Rounded
 
@@ -52,10 +60,18 @@ The following values are available for the `Rounded` option:
 
 The default rounded value is `Medium`.
 
-```html
-<span class="k-dateinput k-input k-rounded-md">
-</span>
+```HtmlHelper
+    @(Html.Kendo().DateInput()
+        .Name("dateinput")
+        .Rounded(Rounded.Medium)
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dateinput name="dateinput" rounded="Rounded.Medium">
+    </kendo-dateinput>
+```
+{% endif %}
 
 ### FillMode
 
@@ -70,10 +86,18 @@ The following values are available for the `FillMode` option:
 
 The default fillMode value is `Solid`.
 
-```html
-<span class="k-dateinput k-input k-input-solid">
-</span>
+```HtmlHelper
+    @(Html.Kendo().DateInput()
+        .Name("dateinput")
+        .FillMode(FillMode.Solid)
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dateinput name="dateinput" fill-mode="FillMode.Solid">
+    </kendo-dateinput>
+```
+{% endif %}
 
 ## Old vs New Rendering
 
@@ -98,12 +122,23 @@ The new rendering of the component consists of an `input` element nested in a wr
 
 The following example demonstrates how to configure the appearance of the component through the styling options:
 
+```HtmlHelper
     @(Html.Kendo().DateInput()
-        .Name("dateinput")
-        .Size(ComponentSize.Large)
-        .Rounded(Rounded.Small)
-        .FillMode(FillMode.Outline)
+      .Name("dateinput")
+      .Size(ComponentSize.Large)
+      .Rounded(Rounded.Small)
+      .FillMode(FillMode.Outline)
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-dateinput name="dateinput" 
+      size="ComponentSize.Large"
+      rounded="Rounded.Small"
+      fill-mode="FillMode.Outline">
+    </kendo-dateinput>
+```
+{% endif %}
 
 ## Visual Backwards Compatibility
 

@@ -76,25 +76,17 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple
             </category-axis-item>
         </category-axis>
         <series>
-            <series-item type="ChartSeriesType.Bullet"
-                        data="new double[][] { new double[] { 750, 762.5 }}">
+            <series-item type="ChartSeriesType.Bullet" data="new double[][] { new double[] { 750, 762.5 }}">
             </series-item>
         </series>
         <value-axis>
-            <value-axis-item max="795" min="715" name="" type="numeric">
-
+            <value-axis-item max="795" min="715" type="numeric">
                 <major-grid-lines visible="false"/>
                 <minor-ticks visible="true"/>
                 <plot-bands>
-                    <chart-value-axis-plot-band from="715"
-                                                to="752"
-                                                color="#ccc"
-                                                opacity="0.3">
+                    <chart-value-axis-plot-band from="715" to="752" color="#ccc" opacity="0.6">
                     </chart-value-axis-plot-band>
-                    <chart-value-axis-plot-band from="752"
-                                                to="772"
-                                                color="#ccc"
-                                                opacity="0.3">
+                    <chart-value-axis-plot-band from="752" to="772" color="#ccc" opacity="0.3">
                     </chart-value-axis-plot-band>
                 </plot-bands>
             </value-axis-item>
@@ -139,13 +131,13 @@ The following example demonstrates how to use all three options to customize the
 {% if site.core %}
 ```TagHelper
 	<series>
-	 	<series-item type="ChartSeriesType.Bullet"
-					 data="new double[][] { new double[] { 750, 762.5 }}"
-					 color="darkblue">
-			 <target color="green">
-				 <border color="turquoise" width="2" />
-				 <line width="6"/>
-			 </target>
+	 	<series-item type="ChartSeriesType.Bullet" 
+            data="new double[][] { new double[] { 750, 762.5 }}"
+			color="darkblue">
+			    <target color="green">
+				    <border color="turquoise" width="2" />
+				    <line width="6"/>
+			    </target>
 	 	</series-item>
 	</series>
 ```

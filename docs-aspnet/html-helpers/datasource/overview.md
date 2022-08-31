@@ -32,12 +32,13 @@ To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource HtmlHe
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 ```
-
+{% if site.core %}
 To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource TagHelper, in addition to the Kendo namespaces above, also add the following directive to the view:
 
 ```
     @addTagHelper *, Kendo.Mvc
 ```
+{% endif %}
 
 ## Initialize the DataSource
 
@@ -55,7 +56,15 @@ The following example demonstrates how to define the DataSource. You can use `Na
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-datasource name="datasource"></kendo-datasource >
+    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("ReadOrders", "Home")" />
+        </transport>
+    </kendo-datasource>
+
+    <script>
+        myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action.
+    </script>
 ```
 {% endif %}
 ```HomeController
@@ -75,7 +84,7 @@ You can declare the DataSource component configuration options by using the avai
 > * To [group](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) the data by an object, set [the group by data item field](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group#groupfield) to a property of that object.
 > * To [filter](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter) the data based on an object, set [the data item field, to which the filter operator is applied,](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter#filterfield) to a property of that object.
 
-The configuration accepts the definition for all CRUD operations and facilitates the sending of additional data such as the `AntiForgeryTokens`.
+The configuration accepts the definition for all CRUD operations and facilitates the data sorting, filtering, and grouping.
 
 {% if site.core %}
 ```HtmlHelper
@@ -86,35 +95,39 @@ The configuration accepts the definition for all CRUD operations and facilitates
           .ServerOperation(false)
           .PageSize(5)
           .Sort(sort => sort.Add("FieldName").Ascending())
+          .Filter(filter => filter.Add(field => field.FieldName).StartsWith("A"))
+          .Group(group => group.Add(field => field.FieldName))
         )
     )
 ```
 ```TagHelper
-    <kendo-datasource name="dataSource" type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="5">
+    @{
+        var filterValue = "A";
+    }
+
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="5">
         <transport>
-            <read url="/DataSource/Products_Read" />
+            <read url="@Url.Action("Products_Read", "DataSource")" />
         </transport>
         <sorts>
-            <sort field="fieldName" direction="asc" />
+            <sort field="FieldName" direction="asc" />
         </sorts>
+        <filters>
+            <datasource-filter field="FieldName" operator="startswith" value="@filterValue"></datasource-filter>
+        </filters>
+        <groups>
+            <group field="FieldName" />
+        </groups>
     </kendo-datasource>
 ```
 {% else %}
 ```HtmlHelper
-    @(Html.AntiForgeryToken())
-
-    <script>
-        // Send the forgery tokens as additional data.
-        function forgeryTokens() {
-            return kendo.antiForgeryTokens();
-        }    
-    </script>
     @(Html.Kendo().DataSource<OrderViewModel>()
         .Name("myDataSource")
         .Ajax(dataSource =>
         {
           dataSource
-            .Read(read => read.Action("ReadOrders", "Home").Data("forgeryTokens"))
+            .Read(read => read.Action("ReadOrders", "Home"))
             .Sort(sort => sort.Add(field => field.ShipCountry).Ascending())
             .Filter(filter=>filter.Add(field=>field.ShipCountry).StartsWith("A"))
             .Group(group=>group.Add(field=>field.OrderID))
@@ -154,6 +167,7 @@ The following example demonstrates how to specify the JavaScript function which 
         .Name("grid")
         .DataSource(dataSource => dataSource
             .Ajax()
+            .PageSize(20)
             .Read(read => read
                 .Action("Products_Read", "Home") // Set the action method which will return the data in JSON format.
                 .Data("productsReadData") // Specify the JavaScript function which will return the data.
@@ -177,21 +191,46 @@ The following example demonstrates how to specify the JavaScript function which 
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+            <transport>
+                <read url="@Url.Action("Products_Read","Home")" data="productsReadData"/> <!--Specify the JavaScript function which will return the data.-->
+            </transport>
+        </datasource>
+        <columns>
+            <column field="ProductID"></column>
+            <column field="ProductName"></column>
+            <column field="UnitsInStock"></column>
+        </columns>
+        <pageable enabled="true"/>
+        <sortable enabled="true" />
+    </kendo-grid>
+
+    <script>
+        function productsReadData() {
+            return {
+                firstName: "John",
+                lastName: "Doe"
+            };
+        }
+    </script>
+```
+{% endif %}
 
 ## Enable Client Data Processing
 
-By default, the Telerik UI Grid for ASP.NET MVC makes an Ajax request to the `action` method every time the user sorts, filters, groups or changes the page. To change this behavior, disable `ServerOperation`.
+By default, the Telerik UI Grid for {{ site.framework }} makes an Ajax request to the `Action` method every time the user sorts, filters, groups or changes the page. To change this behavior, disable `ServerOperation` option.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
         .Name("grid")
         .DataSource(dataSource => dataSource
             .Ajax()
+            .PageSize(20)
             .ServerOperation(false) // Paging, sorting, filtering, and grouping will be done client-side.
-            .Read(read => read
-                .Action("Products_Read", "Home") // Set the action method which will return the data in JSON format.
-                .Data("productsReadData")
-            )
+            .Read(read => read.Action("Products_Read", "Home"))
         )
         .Columns(columns =>
         {
@@ -203,6 +242,26 @@ By default, the Telerik UI Grid for ASP.NET MVC makes an Ajax request to the `ac
         .Sortable()
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <datasource type="DataSourceTagHelperType.Ajax" 
+            page-size="20" 
+            server-operation="false"> <!--Paging, sorting, filtering, and grouping will be done client-side.-->
+            <transport>
+                <read url="@Url.Action("Products_Read","Home")"/>
+            </transport>
+        </datasource>
+        <columns>
+            <column field="ProductID"></column>
+            <column field="ProductName"></column>
+            <column field="UnitsInStock"></column>
+        </columns>
+        <pageable enabled="true"/>
+        <sortable enabled="true" />
+    </kendo-grid>
+```
+{% endif %}
 
 ## Prevent Ajax Response Caching
 

@@ -10,20 +10,46 @@ slug: htmlhelper_datasourcemodel
 The `Model` method configures the model of the data source. The data field names must be valid JavaScript [identifiers](https://developer.mozilla.org/en-US/docs/Glossary/Identifier) and contain neither spaces, nor special characters. The first character has to be a letter.
 
 ```HtmlHelper
-    .Ajax()
-    .Read(read => read.Action("Products_Read", "Home"))
-    .Model(model =>
-    {
-        // The unique identifier (primary key) of the model is the ProductID property.
-        model.Id(product => product.ProductID);
+     @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("myDataSource")
+        .Ajax(dataSource =>
+        {
+          dataSource
+            .Read(read => read.Action("Products_Read", "Home"))
+            .Model(model =>
+            {
+                // The unique identifier (primary key) of the model is the ProductID property.
+                model.Id(product => product.ProductID);
 
-        //Declare a model field and optionally specify its default value (used when a new model instance is created).
-        model.Field(product => product.ProductName).DefaultValue("N/A");
+                //Declare a model field and optionally specify its default value (used when a new model instance is created).
+                model.Field(product => product.ProductName).DefaultValue("N/A");
 
-        //Declare a model field and make it readonly.
-        model.Field(product => product.UnitPrice).Editable(false);
-    })
+                //Declare a model field and make it readonly.
+                model.Field(product => product.UnitPrice).Editable(false);
+            })
+        })
+    )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var ProductName_default = "N/A";
+    }
+    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("Products_Read","Home")" />
+        </transport>
+        <schema>
+            <model id="ProductID">
+                <fields>
+                    <field name="ProductName" type="string" default-value="@ProductName_default"></field>
+                    <field name="UnitPrice" type="number" editable="false"></field>
+                </fields>
+            </model>
+        </schema>
+    </kendo-datasource> 
+```
+{% endif %}
 
 ### Id
 

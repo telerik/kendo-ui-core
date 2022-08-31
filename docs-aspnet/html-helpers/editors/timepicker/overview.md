@@ -34,7 +34,7 @@ The following example demonstrates how to how to define the TimePicker.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-timepicker name="timepicker" value=DateTime.Now></kendo-timepicker>
+    <kendo-timepicker name="timepicker" value="DateTime.Now"></kendo-timepicker>
 ```
 
 ## Basic Configuration
@@ -87,10 +87,10 @@ The following example demonstrates how to subscribe to events by a handler name.
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-timepicker name="timepicker"
-                  on-open="timepicker_open"
-                  on-close="timepicker_close"
-                  on-change="timepicker_change"/>
+    <kendo-timepicker name="timepicker"
+        on-open="timepicker_open"
+        on-close="timepicker_close"
+        on-change="timepicker_change"/>
 ```
 {% endif %}
 ```script
@@ -130,6 +130,19 @@ The following example demonstrates how to subscribe to events by a template dele
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-timepicker name="timepicker"
+        on-open='function(e)
+        {
+            // Handle the open event inline.
+        }'
+        on-change='function(e)
+        {
+            // Handle the change event inline.
+        }'/>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 

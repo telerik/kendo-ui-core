@@ -24,7 +24,7 @@ The following example demonstrates how you can subscribe to the `open` event of 
         {
             items.Add().Text("Edit Item").IconClass("k-icon k-i-edit");
             items.Add().Text("Add to Favorites").IconClass("k-icon k-i-heart");
-            items.Add().Text("Upload New").IconClass("k-icon k-i-upload").Click("onClick");
+            items.Add().Text("Upload New").IconClass("k-icon k-i-upload");
             items.Add().Text("Cancel").IconClass("k-icon k-i-cancel").Group("bottom");
         })
         .Events(e => e.open("onOpen"))
@@ -37,6 +37,25 @@ The following example demonstrates how you can subscribe to the `open` event of 
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-actionsheet name="actionsheet" title="Select item" on-open="onOpen">
+        <items>
+            <item text="Edit Item" icon-class="k-icon k-i-edit"/>
+            <item text="Add to Favorites" icon-class="k-icon k-i-heart" />
+            <item text="Upload New" icon-class="k-icon k-i-upload" />
+            <item text="Cancel" icon-class="k-icon k-i-cancel" group="bottom" />
+        </items>
+    </kendo-actionsheet>
+
+    <script>
+        function onOpen() {
+            console.log("Open")
+            //your custom logic here
+        }
+    </script>
+````
+{% endif %}
 
 ## Close
 
@@ -65,6 +84,25 @@ The following example demonstrates how you can subscribe to the `close` event of
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-actionsheet name="actionsheet" title="Select item" on-close="onClose">
+        <items>
+            <item text="Edit Item" icon-class="k-icon k-i-edit"/>
+            <item text="Add to Favorites" icon-class="k-icon k-i-heart" />
+            <item text="Upload New" icon-class="k-icon k-i-upload" />
+            <item text="Cancel" icon-class="k-icon k-i-cancel" group="bottom" />
+        </items>
+    </kendo-actionsheet>
+
+    <script>
+        function onClose() {
+            console.log("Close")
+            //your custom logic here
+        }
+    </script>
+````
+{% endif %}
 
 ## See Also
 

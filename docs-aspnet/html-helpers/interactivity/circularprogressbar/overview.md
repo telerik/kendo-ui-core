@@ -39,7 +39,7 @@ The following example demonstrates how to define the Circular ProgressBar, get a
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-circularprogressbar name="progressbar" value=0>
+    <kendo-circularprogressbar name="progressbar" value=0></kendo-circularprogressbar>
 
     <script type="text-javascript">
         $(document).ready(function () {
@@ -121,48 +121,48 @@ The Circular ProgressBar has two modes: `infinite` and `finite`.
 * The `finite` mode is the default mode of the Circular ProgressBar. In this mode the component clearly indicates when the task will be completed. To update the value of the Circular ProgressBar, use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar/methods/value) API method. The following example showcases how to update the value every 50 milliseconds:
 
     ```HtmlHelper
-    @(Html.Kendo().CircularProgressBar()
-        .Name("progressbar")
-        .Value(0)
-    )
+        @(Html.Kendo().CircularProgressBar()
+            .Name("progressbar")
+            .Value(0)
+        )
 
-    <script>
-        $(document).ready(function() {
-            // Update the value every 50 milliseconds until it reaches 100%.
-            let interval = setInterval(function () {
-                let pb = $("#progressbar").data("kendoCircularProgressBar");
-                let value = pb.value();
+        <script>
+            $(document).ready(function() {
+                // Update the value every 50 milliseconds until it reaches 100%.
+                let interval = setInterval(function () {
+                    let pb = $("#progressbar").data("kendoCircularProgressBar");
+                    let value = pb.value();
 
-                if (value >= 100) {
-                    clearInterval(interval);
-                    return;
-                }
+                    if (value >= 100) {
+                        clearInterval(interval);
+                        return;
+                    }
 
-                pb.value(value + 1);
-            }, 50);
-        })
-    </script>
+                    pb.value(value + 1);
+                }, 50);
+            })
+        </script>
     ```
     {% if site.core %}
     ```TagHelper
-    <kendo-circularprogressbar name="progressbar" value=0>
+        <kendo-circularprogressbar name="progressbar" value=0></kendo-circularprogressbar>
 
-    <script>
-        $(document).ready(function() {
-            // Update the value every 50 milliseconds until it reaches 100%.
-            let interval = setInterval(function () {
-                let pb = $("#progressbar").data("kendoCircularProgressBar");
-                let value = pb.value();
+        <script>
+            $(document).ready(function() {
+                // Update the value every 50 milliseconds until it reaches 100%.
+                let interval = setInterval(function () {
+                    let pb = $("#progressbar").data("kendoCircularProgressBar");
+                    let value = pb.value();
 
-                if (value >= 100) {
-                    clearInterval(interval);
-                    return;
-                }
+                    if (value >= 100) {
+                        clearInterval(interval);
+                        return;
+                    }
 
-                pb.value(value + 1);
-            }, 50);
-        })
-    </script>
+                    pb.value(value + 1);
+                }, 50);
+            })
+        </script>
     ```
     {% endif %}
 
@@ -256,7 +256,7 @@ The following example demonstrates how to get a reference to an existing Telerik
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-circularprogressbar name="progressbar" value=0">
+    <kendo-circularprogressbar name="progressbar" value=0>
     </kendo-circularprogressbar>
 
     <script type="text/javascript">

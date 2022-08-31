@@ -30,6 +30,15 @@ The `Pointers` of the Telerik UI RadialGauge for {{ site.framework }} are the va
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radialgauge name="gauge">
+        <radialgauge-pointers>
+            <pointer value="10" color="#c20000" length="0.5"></pointer>
+        </radialgauge-pointers>
+    </kendo-radialgauge>
+```
+{% endif %}
 
 ## Pointer Cap
 
@@ -46,6 +55,17 @@ The `Pointers` of the Telerik UI RadialGauge for {{ site.framework }} are the va
             })
         )   
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radialgauge name="gauge">
+        <radialgauge-pointers>
+            <pointer value="10" color="#c20000" length="0.5">
+                <cap size="0.15" color="red"/>
+            </pointer>
+        </radialgauge-pointers>
+    </kendo-radialgauge>
+```
+{% endif %}
 
 ## Multiple Pointers
 
@@ -68,6 +88,24 @@ The RadialGauge supports the usage of multiple pointers simultaneously. They can
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radialgauge name="gauge">
+        <radialgauge-pointers>
+            <pointer value="10" color="#c20000" length="0.5">
+                <cap size="0.15"/>
+            </pointer>
+            <pointer value="70" color="#ff7a00" length="0.75">
+                <cap size="0.1"/>
+            </pointer>
+            <pointer value="140" color="#ffc700">
+            </pointer>
+        </radialgauge-pointers>
+        <scale minor-unit="5" start-angle="-30" end-angle="210" max="180">
+        </scale>
+    </kendo-radialgauge>
+```
+{% endif %}
 
 ## See Also
 

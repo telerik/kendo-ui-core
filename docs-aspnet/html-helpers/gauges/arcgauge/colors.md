@@ -25,6 +25,20 @@ The scale of the ArcGauge can be configured to show different colors for the dif
         })
     )
 ````
+{% if site.core %}
+```TagHelper
+    <kendo-arcgauge name="gauge" value="65" center-template="<span style='color: #: color #;'>#: value #%</span>">
+        <scale min="0" max="100">
+        </scale>
+        <colors>
+            <color from="0" to="25" color="#0058e9" />
+            <color from="25" to="50" color="#37b400" />
+            <color from="50" to="75" color="#ffc000" />
+            <color from="75" to="100" color="#f31700" />
+        </colors>
+    </kendo-arcgauge>
+```
+{% endif %}
 
 ## See Also
 

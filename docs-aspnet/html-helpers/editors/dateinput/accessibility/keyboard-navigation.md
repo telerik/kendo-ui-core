@@ -18,6 +18,12 @@ To focus the widget, use the key combination of [Access key](https://en.wikipedi
         .HtmlAttributes(new { accesskey = "w" }) //Access key + "w" will focus the DateInput
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dateinput name="dateinput" accesskey="w">
+    </kendo-dateinput>
+```
+{% endif %}
 
 For a complete example, refer to the [demo on keyboard navigation of the DateInput](https://demos.telerik.com/{{ site.platform }}/dateinput/keyboard-navigation).
 

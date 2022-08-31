@@ -49,6 +49,34 @@ The linear gauge allows you to retrieve the PDF representation of the content vi
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <button class='export-pdf k-button'>Export as PDF</button>
+    
+    <kendo-lineargauge name="linearGauge">
+        <scale min="0" max="200">
+        </scale>
+        <lineargauge-pointers>
+            <pointer value="10"></pointer>
+        </lineargauge-pointers>
+    </kendo-lineargauge>
+
+    <script>
+        $(document).ready( function () {
+            $(".export-pdf").click(function () {
+                var gauge = $("#linearGauge").getKendoLinearGauge();
+                gauge.exportPDF({ paperSize: "auto", margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } }).done(function (data) {
+                    kendo.saveAs({
+                        dataURI: data,
+                        fileName: "chart.pdf",
+                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                    });
+                });
+            });
+        });
+    </script>
+```
+{% endif %}
 
 ## Export as Image
 
@@ -83,6 +111,34 @@ The linear gauge allows you to retrieve the Image representation of the content 
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <button class='export-img k-button'>Export as Image</button>
+    
+    <kendo-lineargauge name="linearGauge">
+        <scale min="0" max="200">
+        </scale>
+        <lineargauge-pointers>
+            <pointer value="10"></pointer>
+        </lineargauge-pointers>
+    </kendo-lineargauge>
+
+    <script>
+        $(document).ready( function () {
+            $(".export-img").click(function () {
+                var gauge = $("#linearGauge").getKendoLinearGauge();
+                gauge.exportImage().done(function (data) {
+                    kendo.saveAs({
+                        dataURI: data,
+                        fileName: "chart.png",
+                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                    });
+                });
+            });
+        });
+    </script>
+```
+{% endif %}
 
 ## Export as SVG
 
@@ -117,6 +173,34 @@ The linear gauge allows you to retrieve the Scalable Vector Graphics (SVG) repre
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <button class='export-svg k-button'>Export as SVG</button>
+    
+    <kendo-lineargauge name="linearGauge">
+        <scale min="0" max="200">
+        </scale>
+        <lineargauge-pointers>
+            <pointer value="10"></pointer>
+        </lineargauge-pointers>
+    </kendo-lineargauge>
+
+    <script>
+        $(document).ready( function () {
+            $(".export-svg").click(function () {
+                var gauge = $("#linearGauge").getKendoLinearGauge();
+                gauge.exportSVG().done(function (data) {
+                    kendo.saveAs({
+                        dataURI: data,
+                        fileName: "chart.svg",
+                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                    });
+                });
+            });
+        });
+    </script>
+```
+{% endif %}
 
 ## See Also
 

@@ -58,11 +58,42 @@ Additionally, you can use the `server-operation` or `.ServerOperation` property 
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-datasource name="dataSource" type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="5">
+    @{
+        var ShipCountry_default = "USA";
+        var filterValue = "A";
+    }
+    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.Ajax" server-operation="true" page-size="2">
         <transport>
-            <read url="/Home/ReadOrders" />
+            <read url="@Url.Action("ReadOrders","Home")" />
+            <create url="@Url.Action("CreateOrders","Home")" />
+            <update url="@Url.Action("UpdateOrders","Home")" />
+            <destroy url="@Url.Action("DestroyOrders","Home")" />
         </transport>
+        <sorts>
+            <sort field="ShipCountry" direction="asc"/>
+        </sorts>
+        <filters>
+            <datasource-filter field="ShipCountry" operator="startswith" value="@filterValue"></datasource-filter>
+        </filters>
+        <groups>
+            <group field="OrderID" />
+        </groups>
+        <aggregates>
+            <aggregate field="ShipCountry" aggregate="count" />
+        </aggregates>
+        <schema>
+            <model id="OrderID">
+                <fields>
+                    <field name="OrderID" type="number" editable="false"></field>
+                    <field name="ShipCountry" type="string" default-value="@ShipCountry_default"></field>
+                </fields>
+            </model>
+        </schema>
     </kendo-datasource>
+
+    <script>
+        myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action
+    </script>  
 ```
 {% endif %}
 ```HomeController
@@ -75,6 +106,33 @@ Additionally, you can use the `server-operation` or `.ServerOperation` property 
 
         // response object : { AggregateResults: [], Data: [{},{}], Errors: null, Total: 7 }
         return Json(result);
+    }
+
+    public IActionResult CreateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
+    {
+        if (order != null && ModelState.IsValid)
+        {
+            orderService.Create(order);
+        }
+        return Json(new[] { order }.ToDataSourceResult(request, ModelState));
+    }
+
+    public ActionResult UpdateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
+    {
+        if (order != null && ModelState.IsValid)
+        {
+            orderService.Update(order);
+        }
+        return Json(new[] { order }.ToDataSourceResult(request, ModelState));
+    }
+
+    public ActionResult DestroyOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
+    {
+        if (order != null)
+        {
+            orderService.Destroy(order);
+        }
+        return Json(new[] { order }.ToDataSourceResult(request, ModelState));
     }
 ```
 
@@ -95,7 +153,7 @@ The WebAPI DataSource type of data binding is designed for WebAPI projects and w
             .PageSize(2)
             .ServerOperation(true)
             .Model(model =>
-                {
+            {
                 model.Id(field => field.OrderID);
                 model.Field(field => field.OrderID).Editable(false);
             });
@@ -110,18 +168,25 @@ The WebAPI DataSource type of data binding is designed for WebAPI projects and w
 ```TagHelper
     <!-- When you use the WebAPI DataSource type of data binding in an editable Grid, define the field types in the `schema` to use the correct editors for the field. -->
 
-    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.WebApi" server-operation="true">
+    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.WebApi" server-operation="true" page-size="2">
         <transport>
-            <read url="/api/Product" />
+            <read url="/api/product" action="get"/>
+            <update url="/api/product/{0}" action="put" />
+            <create url="/api/product" action="post"/>
+            <destroy url="/api/product/{0}" action="delete"/>
         </transport>
         <schema>
-            <model id="ProductID">
+            <model id="OrderID">
                 <fields>
-                    <field name="ProductID" type="number"></field>
+                    <field name="OrderID" type="number" editable="false"></field>
                 </fields>
             </model>
         </schema>
     </kendo-datasource>
+
+    <script>
+        myDataSource.read(); // A GET request will be sent to the ProductController Get action
+    </script>  
 ```
 {% endif %}
 ```ProductController
@@ -153,6 +218,7 @@ The following example demonstrates how to consume an OData service.
         {
             dataSource
             .Type("odata")
+            .PageSize(20)
             .ServerPaging(true)
             .ServerFiltering(true)
             .ServerSorting(true)
@@ -164,27 +230,28 @@ The following example demonstrates how to consume an OData service.
               });
         })
     )
+    
     <script>
        myDataSource.fetch();
     </script>
 ```
 {% if site.core %}
 ```TagHelper
-	<kendo-datasource name="dataSource1" custom-type="odata">
+	<kendo-datasource name="myDataSource" 
+        type="DataSourceTagHelperType.Custom" 
+        custom-type="odata"
+        page-size="20"
+        server-paging="true"
+        server-sorting="true"
+        server-filtering="true">
 	    <transport>
 	        <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
 	    </transport>
 	</kendo-datasource>
 
-	<kendo-grid name="grid" datasource-id="dataSource1">
-	    <pageable enabled="true">
-	    </pageable>
-	    <columns>
-	        <column field="ShipName"></column>
-	        <column field="ShipCity"></column>
-	    </columns>
-	    <scrollable enabled="true" />
-	</kendo-grid>
+    <script>
+       myDataSource.fetch();
+    </script>
 ```
 {% endif %}
 

@@ -66,16 +66,16 @@ The following example demonstrates the available configuration options supported
 ```TagHelper
     <!-- Initializing the Chat and attaching the event handlers -->
     <kendo-chat name="chat"
-                on-post="onPost"
-                on-action-click="onActionClick"
-                on-send-message="onSendMessage"
-                on-typing-start="onTypingStart"
-                on-typing-end="onTypingEnd">
-        <!-- The Chat User configuration -->
-        <user name="ChatBot Name"
-              icon-url="https://demos.telerik.com/kendo-ui/content/chat/avatar.png" />
-        <!-- Configuring the Placeholder message -->
-        <messages placeholder="Type your message" />
+        on-post="onPost"
+        on-action-click="onActionClick"
+        on-send-message="onSendMessage"
+        on-typing-start="onTypingStart"
+        on-typing-end="onTypingEnd">
+            <!-- The Chat User configuration -->
+            <user name="ChatBot Name"
+                icon-url="https://demos.telerik.com/kendo-ui/content/chat/avatar.png" />
+            <!-- Configuring the Placeholder message -->
+            <messages placeholder="Type your message" />
     </kendo-chat>
 ```
 {% endif %}

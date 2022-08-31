@@ -45,7 +45,7 @@ The ArcGauge represents a value on a circular arc.
     ```
     {% if site.core %}
     ```TagHelper
-        <kendo-arcgauge name="gauge" center-template="#:value#%" value="65">
+        <kendo-arcgauge name="arcGauge" center-template="#:value#%" value="65">
             <scale min="0" max="100">
             </scale>
         </kendo-arcgauge>

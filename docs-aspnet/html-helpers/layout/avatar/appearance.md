@@ -20,13 +20,21 @@ The `Type` can be configured via the `AvatarType` enumeration. The available `Av
 
 The following example demonstrates the `Type` option of the Avatar:
 
+```HtmlHelper
+    @(Html.Kendo().Avatar()
+        .Name("avatar")
+        .Type(AvatarType.Text)
+        .Text("IMG")
+    )
 ```
-        @(Html.Kendo().Avatar()
-            .Name("avatar")
-            .Type(AvatarType.Text)
-            .Text("IMG")
-      )
+{% if site.core %}
+```TagHelper
+    <kendo-avatar name="avatar"
+        type="AvatarType.Text"
+        text="IMG">
+    </kendo-avatar>
 ```
+{% endif %}
 
 All of the types can be rendered in a different shape by setting the `Rounded` property.
 
@@ -42,13 +50,21 @@ The `Rounded` property can be configured via the `Rounded` enumeration. The avai
 
 The following example demonstrates the `Rounded` option of the Avatar:
 
+```HtmlHelper
+    @(Html.Kendo().Avatar()
+        .Name("avatar")
+        .Text("IMG")
+        .Rounded(Rounded.Large)
+    )
 ```
-        @(Html.Kendo().Avatar()
-            .Name("avatar")
-            .Text("IMG")
-            .Rounded(AvatarRounded.Large)
-      )
+{% if site.core %}
+```TagHelper
+    <kendo-avatar name="avatar"
+        text="IMG"
+        rounded="Rounded.Large">
+    </kendo-avatar>
 ```
+{% endif %}
 
 ## Theme Color
 
@@ -69,15 +85,23 @@ The available `ThemeColor` values are:
 - `Light` — Applies coloring based on the light theme color.
 - `Inverse` — Applies coloring based on the inverted theme color.
 
-```
+```HtmlHelper
    @(Html.Kendo().Avatar()
         .Name("avatar")
         .Type(AvatarType.Icon)
         .Icon("user")
-        .FillMode(AvatarFillMode.Solid)
         .ThemeColor(ThemeColor.Primary)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-avatar name="avatar"
+        type="AvatarType.Icon"
+        icon="user"
+        theme-color="ThemeColor.Primary">
+    </kendo-avatar>
+```
+{% endif %}
 
 ## Size
 
@@ -88,7 +112,7 @@ The Avatar allows you to set predefined or custom sizes. The `Size` property can
 - `Large`
 - `None`
 
-```
+```HtmlHelper
     @(Html.Kendo().Avatar()
         .Name("avatar")
         .Type(AvatarType.Text)
@@ -96,16 +120,25 @@ The Avatar allows you to set predefined or custom sizes. The `Size` property can
         .Size(ComponentSize.Large)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-avatar name="avatar"
+        type="AvatarType.Text"
+        text="JS"
+        size="ComponentSize.Large">
+    </kendo-avatar>
+```
+{% endif %}
 
 ## FillMode
 
-The Avatar enables you to set styling options and create solid or outline avatars by setting the `FillMode`. The available `FillMode` values are:
+The Avatar enables you to set styling options and create solid or outline avatars by setting the `AvatarFillMode`. The available `AvatarFillMode` values are:
 
 - `Solid` (Default)
 - `Outline`
 - `None`
 
-```
+```HtmlHelper
     @(Html.Kendo().Avatar()
         .Name("avatar")
         .Type(AvatarType.Text)
@@ -113,12 +146,21 @@ The Avatar enables you to set styling options and create solid or outline avatar
         .FillMode(AvatarFillMode.Outline)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-avatar name="avatar"
+        type="AvatarType.Text"
+        text="JS"
+        fill-mode="AvatarFillMode.Outline">
+    </kendo-avatar>
+```
+{% endif %}
 
 ## Border
 
 The Avatar allows you to specify whether or not to render an additional border around its content by using the `Border` property. By default, the border is set to `false`.
 
-```
+```HtmlHelper
     @(Html.Kendo().Avatar()
         .Name("avatar")
         .Type(AvatarType.Text)
@@ -126,6 +168,14 @@ The Avatar allows you to specify whether or not to render an additional border a
         .Border(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-avatar name="avatar" border="true"
+        type="AvatarType.Text"
+        text="MJ">
+    </kendo-avatar>
+```
+{% endif %}
 
 ## See Also
 

@@ -28,6 +28,22 @@ The following example demonstrates how to format the date in the German culture:
         .Value(DateTime.Today)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <script datasrc="@Url.Content("~/lib/kendo/js/cultures/kendo.culture.de-DE.min.js")"></script>
+
+    <script type="text/javascript">
+      kendo.culture("de-DE");
+    </script>
+
+    @{
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("de-DE");
+    }
+
+    <kendo-dateinput name="dateinput" value="DateTime.Today">
+    </kendo-dateinput>
+```
+{% endif %}
 
 To control the date format, use the `Format()` method. The specified format also will be used to parse the input.
 
@@ -38,6 +54,12 @@ To control the date format, use the `Format()` method. The specified format also
         .Format("dd-MM-yyyy")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dateinput name="dateinput" value="DateTime.Today" format="dd-MM-yyyy">
+    </kendo-dateinput>
+```
+{% endif %}
 
 ## See Also
 * [Localization in {{ site.product }}]({% slug overview_localization_core %})

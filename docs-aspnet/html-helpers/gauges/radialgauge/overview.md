@@ -40,11 +40,11 @@ The following example demonstrates how to initialize the RadialGauge.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-radialgauge name="gauge">
+    <kendo-radialgauge name="radialGauge">
         <radialgauge-pointers>
-            <pointer value="65"></pointer>
+            <pointer value="10"></pointer>
         </radialgauge-pointers>
-        <scale minor-unit="5" start-angle="-30" end-angle="210" max="180">
+        <scale min="0" max="200">
         </scale>
     </kendo-radialgauge>
 ```

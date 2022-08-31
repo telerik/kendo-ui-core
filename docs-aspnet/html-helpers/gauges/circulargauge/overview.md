@@ -45,6 +45,14 @@ It is essentially very similar to the ArcGauge with the difference that the Circ
             .CenterTemplate("#:value#%")
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-circulargauge name="circulargauge" value="65" center-template="#:value#%">
+            <scale min="0" max="100">
+            </scale>
+        </kendo-circulargauge>
+    ```
+    {% endif %}
 
 ## Referencing Existing Instances
 
@@ -71,6 +79,16 @@ The CircularGauge supports different color ranges depending on the currently act
         colors.Add().From(75).To(100).Color("#f31700");
     })
 ```
+{% if site.core %}
+```TagHelper
+    <colors>
+        <color from="0" to="25" color="#0058e9"/>
+        <color from="25" to="50" color="#37b400"/>
+        <color from="50" to="75" color="#ffc000"/>
+        <color from="75" to="100" color="#f31700"/>
+    </colors>
+```
+{% endif %}
 
 You can find a live sample demonstrating that here:
 
@@ -83,6 +101,13 @@ There are various Scale Settings available so you can present the gauge exactly 
 ```HtmlHelper
     .Scale(x =>x.Labels(l=>l.Visible(true)))
 ```
+{% if site.core %}
+```TagHelper
+    <scale>
+        <labels visible="true"/>
+    </scale>
+```
+{% endif %}
 
 You can change the start and end angle, the appearance of the label and ticks, min and max options of the scale, and others. For the full list of options, refer to the [API reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge).
 

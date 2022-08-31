@@ -12,16 +12,36 @@ To make aggregates available on the client, configure them in the [`DataSourceAg
 * The `Aggregates` method sets the aggregates.
 
 ```HtmlHelper
-    .Ajax() 
-    .Read(read => read.Action("Products_Read", "Home"))
-    .Aggregates(aggregates =>
-    {
-        aggregates.Add(product => product.UnitsInStock).Min().Max().Count();
-        aggregates.Add(product => product.UnitsOnOrder).Average();
-        aggregates.Add(product => product.ProductName).Count();
-        aggregates.Add(product => product.UnitPrice).Sum();
-    })
+    @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("dataSource1")
+        .Ajax(dataSource => dataSource
+            .PageSize(10)
+            .Read(read => read.Action("Products_Read", "Home"))
+            .Aggregates(aggregates =>
+            {
+                aggregates.Add(product => product.UnitsInStock).Min().Max().Count();
+                aggregates.Add(product => product.UnitsOnOrder).Average();
+                aggregates.Add(product => product.ProductName).Count();
+                aggregates.Add(product => product.UnitPrice).Sum();
+            })
+        )
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" page-size="10">
+        <transport>
+            <read url="@Url.Action("Products_Read", "Home")" />
+        </transport>
+        <aggregates>
+            <aggregate field="UnitsInStock" aggregate="min,max,count" />
+            <aggregate field="UnitsOnOrder" aggregate="average"/>
+            <aggregate field="ProductName" aggregate="count"/>
+            <aggregate field="UnitPrice" aggregate="sum"/>
+        </aggregates>
+    </kendo-datasource>
+```
+{% endif %}
 
 ## See Also
 

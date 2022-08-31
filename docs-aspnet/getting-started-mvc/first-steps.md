@@ -81,9 +81,13 @@ The newly created application already has a reference to the required `Kendo.Mvc
 
 You can now start adding components.
 
+* [Find more information about Creating new Telerik Projects in this article.](https://docs.telerik.com/aspnet-mvc/vs-integration/new-project-wizard)
+
 ## Adding Components to the Application
 
 As a result of selecting the **GRID AND MENU** template, a Grid component has been added to the `Index.cshtml` view, and a Menu to the `_Layout.cshtml`. The Grid is configured and bound remotely to sample data returned by the `GridController`.
+
+[This article is giving additional information about the Initialization of the Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/getting-started/manual-setup#initializing-the-grid-htmlhelper)
 
 Add a DatePicker to the `Index.cshtml` view:
 

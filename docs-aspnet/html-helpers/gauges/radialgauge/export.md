@@ -46,6 +46,34 @@ The radial gauge allows you to retrieve the PDF representation of the content vi
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <button class='export-pdf k-button'>Export as PDF</button>
+
+    <kendo-radialgauge name="gauge">
+        <radialgauge-pointers>
+            <pointer value="10" color="#c20000" length="0.5">
+                <cap size="0.15" color="red"/>
+            </pointer>
+        </radialgauge-pointers>
+    </kendo-radialgauge>
+
+    <script>
+        $(document).ready( function () {
+            $(".export-pdf").click(function () {
+                var gauge = $("#gauge").getKendoRadialGauge();
+                gauge.exportPDF({ paperSize: "auto", margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } }).done(function (data) {
+                    kendo.saveAs({
+                        dataURI: data,
+                        fileName: "chart.pdf",
+                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                    });
+                });
+            });
+        });
+    </script>
+```
+{% endif %}
 
 ## Export as Image
 
@@ -77,6 +105,34 @@ The radial gauge allows you to retrieve the Image representation of the content 
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <button class='export-img k-button'>Export as Image</button>
+
+    <kendo-radialgauge name="gauge">
+        <radialgauge-pointers>
+            <pointer value="10" color="#c20000" length="0.5">
+                <cap size="0.15" color="red"/>
+            </pointer>
+        </radialgauge-pointers>
+    </kendo-radialgauge>
+
+    <script>
+        $(document).ready( function () {
+            $(".export-img").click(function () {
+                var gauge = $("#gauge").getKendoRadialGauge();
+                gauge.exportImage().done(function (data) {
+                    kendo.saveAs({
+                        dataURI: data,
+                        fileName: "chart.png",
+                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                    });
+                });
+            });
+        });
+    </script>
+```
+{% endif %}
 
 ## Export as SVG
 
@@ -108,6 +164,34 @@ The radial gauge allows you to retrieve the Scalable Vector Graphics (SVG) repre
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <button class='export-svg k-button'>Export as SVG</button>
+
+    <kendo-radialgauge name="gauge">
+        <radialgauge-pointers>
+            <pointer value="10" color="#c20000" length="0.5">
+                <cap size="0.15" color="red"/>
+            </pointer>
+        </radialgauge-pointers>
+    </kendo-radialgauge>
+
+    <script>
+        $(document).ready( function () {
+            $(".export-svg").click(function () {
+                var gauge = $("#gauge").getKendoRadialGauge();
+                gauge.exportSVG().done(function (data) {
+                    kendo.saveAs({
+                        dataURI: data,
+                        fileName: "chart.svg",
+                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                    });
+                });
+            });
+        });
+    </script>
+```
+{% endif %}
 
 ## See Also
 

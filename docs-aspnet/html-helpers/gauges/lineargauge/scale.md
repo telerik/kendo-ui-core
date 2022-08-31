@@ -35,6 +35,14 @@ The scale of the Telerik UI LinearGauge for {{ site.framework }} renders the val
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <scale min="10" max="180">
+        </scale>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## MinorUnit and MajorUnit
 
@@ -51,6 +59,14 @@ The scale of the Telerik UI LinearGauge for {{ site.framework }} renders the val
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <scale major-unit="20" minor-unit="5">
+        </scale>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## Mirror
 
@@ -64,6 +80,14 @@ By design, the labels and unit devisions of the `Scale` are rendered to the left
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <scale mirror="true">
+        </scale>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## Reverse
 
@@ -77,6 +101,14 @@ If you set the `Reverse` (`bool`) option to `true`, the values of the scale will
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <scale reverse="true">
+        </scale>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## Vertical
 
@@ -90,6 +122,14 @@ By design, the default orientation of the widget is vertical. Setting the `Verti
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <scale vertical="false">
+        </scale>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## See Also
 

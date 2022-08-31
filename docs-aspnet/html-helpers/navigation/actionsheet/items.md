@@ -32,16 +32,28 @@ The following example demonstrates the possible options for the `Items` configur
             items.Add().Text("Cancel").IconClass("k-icon k-i-cancel").Group("bottom").Click("onClick");
         })
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-actionsheet name="actionsheet" title="Select item">
+        <items>
+            <item text="Edit Item" icon-class="k-icon k-i-edit" description="Select to enter edit mode." click="onClick" />
+            <item text="Add to Favorites" icon-class="k-icon k-i-heart" click="onClick" />
+            <item text="Upload New" icon-class="k-icon k-i-upload" click="onClick" />
+            <item text="Cancel" icon-class="k-icon k-i-cancel" group="bottom" click="onClick" />
+        </items>
+    </kendo-actionsheet>
+````
+{% endif %}
+```Script
     <script>
-        $(function() {
-            function onClick(e) {
-                e.preventDefault();
-                var actionsheet = $("#actionsheet").data("kendoActionSheet");
-                actionsheet.close();
-            }
-        });
+        function onClick(e) {
+            e.preventDefault();
+            var actionsheet = $("#actionsheet").data("kendoActionSheet");
+            actionsheet.close();
+        }
     </script>
+
 ```
 
 ## See Also

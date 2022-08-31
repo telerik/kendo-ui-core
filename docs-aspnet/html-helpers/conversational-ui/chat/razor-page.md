@@ -38,6 +38,18 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
     )
 	
 ```
+```tab-TagHelper
+    <kendo-chat name="chat">
+        <toolbar toggleable="@Model.Toggable" scrollable="@Model.Scrollable">
+            <buttons>
+                <button name="Bold" icon-class="k-icon k-i-bold" />
+                <button name="Italic" icon-class="k-icon k-i-italic" />
+                <button name="Underline" icon-class="k-icon k-i-underline" />
+            </buttons>
+        </toolbar>
+        <messages placeholder="@Model.Placeholder" send-button="@Model.SendButton"/>
+    </kendo-chat>
+```
 ```tab-PageModel(cshtml.cs)      
 	
 	public bool Toggable { get; set; }

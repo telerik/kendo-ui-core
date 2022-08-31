@@ -35,7 +35,7 @@ The following example demonstrates how to define the DateTimePicker.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-datetimepicker name="timepicker1"></kendo-datetimepicker>
+    <kendo-datetimepicker name="dateTimePicker"></kendo-datetimepicker>
 ```
 {% endif %}
 
@@ -46,33 +46,33 @@ The DateTimePicker configuration options are passed as attributes.
 
 ```HtmlHelper
     @(Html.Kendo().DateTimePicker()
-            .Name("end")
-            .Value(DateTime.Today)
-            .Min(DateTime.Today)
-            .Events(e => e.Change("endChange"))
+        .Name("end")
+        .Value(DateTime.Today)
+        .Min(DateTime.Today)
     )
 ```
 ```TagHelper
     <kendo-datetimepicker name="end" value="DateTime.Today"
-        min="DateTime.Today" on-change="endChange">
+        min="DateTime.Today">
     </kendo-datetimepicker>
 ```
 
 The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property or by a property of the model.
 
 ```HtmlHelper
-@(Html.Kendo().DateTimePicker()
-    .Name("datetimepicker")
-    .ParseFormats(new string[] { "MMMM yyyy", "MMMM" })
-)
+    @(Html.Kendo().DateTimePicker()
+        .Name("datetimepicker")
+        .ParseFormats(new string[] { "MMMM yyyy", "MMMM" })
+    )
 ```
 
 ```TagHelper
-@{
-    ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
-}
+    @{
+        ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
+    }
 
-<kendo-datetimepicker name="datetimepicker" parse-formats="ViewBag.ParseDates"></kendo-datetimepicker>
+    <kendo-datetimepicker name="datetimepicker" parse-formats="ViewBag.ParseDates">
+    </kendo-datetimepicker>
 ```
 {% endif %}
 
@@ -108,13 +108,13 @@ The following example demonstrates how to subscribe to events by a handler name.
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-datetimepicker name="datetimepicker"
-                      on-open="datetimepicker_open"
-                      on-close="datetimepicker_close"
-                      on-change="datetimepicker_open"/>
+    <kendo-datetimepicker name="datetimepicker"
+        on-open="datetimepicker_open"
+        on-close="datetimepicker_close"
+        on-change="datetimepicker_open"/>
 ```
 {% endif %}
-```script.js
+```JavaScript
     function datetimepicker_open() {
         // Handle the open event.
     }
@@ -150,6 +150,19 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datetimepicker name="datetimepicker"
+        on-open='function(e)
+        {
+            // Handle the open event inline.
+        }'
+        on-change='function(e)
+        {
+            / Handle the change event inline.
+        }'/>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 

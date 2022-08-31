@@ -12,16 +12,33 @@ To request sorted data on initial load, configure the sort options in the `DataS
 * The `Sort` method sets the initial sorts.
 
 ```HtmlHelper
-    .Ajax()
-    .Read(read => read.Action("Products_Read", "Home"))
-    .Sort(sort =>
-    {
-        //Sort by the UnitsInStock in descending order.
-        sort.Add(product => product.UnitsInStock).Descending();
-        // Then sort by the ProductName in ascending order.
-        sort.Add(product => product.ProductName);
-    })
+    @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("myDataSource")
+        .Ajax(datasource => datasource
+            .Read(read => read.Action("Products_Read", "Home"))
+            .Sort(sort =>
+            {
+                //Sort by the UnitsInStock in descending order.
+                sort.Add(product => product.UnitsInStock).Descending();
+                // Then sort by the ProductName in ascending order.
+                sort.Add(product => product.ProductName);
+            })
+        )
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("Products_Read", "Home")"/>
+        </transport>
+        <sorts>
+            <sort field="UnitsInStock" direction="desc" />
+            <sort field="ProductName" />
+        </sorts>
+    </kendo-datasource>
+```
+{% endif %}
 
 ## See Also
 

@@ -10,7 +10,7 @@ position: 2
 
 You can use any valid technique for loading Tooltip content.
 
-However, the Splitter provides built-in support for asynchronously loading content from URLs. These URLs return HTML fragments that can be loaded in the content area of the Tooltip. If the content that is passed to the Tooltip includes scripts, they will be executed.
+However, the Tooltip provides built-in support for asynchronously loading content from URLs. These URLs return HTML fragments that can be loaded in the content area of the Tooltip. If the content that is passed to the Tooltip includes scripts, they will be executed.
 
 The following example demonstrates how to asynchronously load content to the Tooltip.
 

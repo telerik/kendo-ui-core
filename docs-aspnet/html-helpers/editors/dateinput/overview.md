@@ -34,8 +34,8 @@ The following example demonstrates the basic configuration for the DateInput.
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-dateinput name="dateinput1" format="MMMM yyyy" value="DateTime.Now">
-</kendo-dateinput>
+    <kendo-dateinput name="dateinput" value="DateTime.Today">
+    </kendo-dateinput>
 ```
 {% endif %}
 
@@ -60,14 +60,14 @@ The following example demonstrates how to subscribe to events by a handler name.
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-dateinput name="dateinput" style='width: 100%;' on-change="onChangeHandler">
-</kendo-dateinput>
+    <kendo-dateinput name="dateinput" on-change="dateInput_change">
+    </kendo-dateinput>
 
-<script>
-    function onChangeHandler(e) {
-        // Add your logic here.
-    }
-</script>
+    <script>
+        function dateInput_change() {
+            // Handle the change event.
+        }
+    </script>
 ```
 {% endif %}
 
@@ -87,6 +87,16 @@ The following example demonstrates how to subscribe to events by a template dele
       )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dateinput name="dateinput" 
+        on-change='function(e)
+        {
+            console.log(this.value());
+        }'>
+    </kendo-dateinput>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 

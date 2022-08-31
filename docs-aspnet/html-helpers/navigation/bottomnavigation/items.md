@@ -26,18 +26,18 @@ The following example demonstrates how to set the attributes of the BottomNaviga
     )
 ```
 {% if site.core %}
-```tagHelper
+```TagHelper
     @addTagHelper *, Kendo.Mvc
     @{
-        var home = new { view= "home"};
+        var home = new { view= "home" };
         var calendar = new { view = "calendar" };
         var profile = new { view = "profile" };
     }  
     <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute">
             <bottomnavigation-items>
-                <bottomnavigation-item context-data="@home" url="#home" text="Home" enabled="false" icon="home" selected="true" css-class="custom-css-class"></bottomnavigation-item>
-                <bottomnavigation-item context-data="@calendar" url="#calendar" template="<span class='k-bottom-nav-item-icon k-icon k-i-calendar-date'></span>" text="Calendar" icon="calendar" css-class="custom-css-class"></bottomnavigation-item>
-                <bottomnavigation-item context-data="@profile" url="#profile" selected="true" text="Profile" icon="user" css-class="custom-css-class"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@home" url="#home" enabled="false" icon="home" css-class="custom-css-class"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@calendar" url="#calendar" template="<span class='k-bottom-nav-item-icon k-icon k-i-calendar-date'></span>" icon="calendar-date" css-class="custom-css-class"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@profile" url="#profile" icon="user" css-class="custom-css-class" selected="true" ></bottomnavigation-item>
             </bottomnavigation-items>
     </kendo-bottomnavigation>
 ```

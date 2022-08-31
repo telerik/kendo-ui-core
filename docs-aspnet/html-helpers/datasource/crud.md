@@ -14,9 +14,22 @@ slug: htmlhelper_datasourcecrud
 The `Read` method sets the action method which is responsible for reading data items and for returning them as JSON.
 
 ```HtmlHelper
-    .Ajax()
-    .Read(read => read.Action(/* action */"Products_Read", /* controller */"Home"))
+    @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("dataSource1")
+        .Ajax(dataSource => dataSource
+            .Read(read => read.Action(/* action */"Products_Read", /* controller */"Home"))
+        )
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action/* action */"Products_Read", /* controller */"Home")" />
+        </transport>
+    </kendo-datasource>
+```
+{% endif %}
 ```Controller
 
     public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
@@ -34,11 +47,28 @@ The `Read` method sets the action method which is responsible for reading data i
 The `Create` method sets the action method which is responsible for saving new data items.
 
 ```HtmlHelper
-    .Ajax()
-    .Model(model => model.Id(product => product.ProductID))
-    .Create(create => create.Action(/* action */"Products_Create", /* controller *"Home"))
-    .Read(read => read.Action("Products_Read", "Home"))
+    @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("dataSource1")
+        .Ajax(dataSource => dataSource
+            .Model(model => model.Id(product => product.ProductID))
+            .Create(create => create.Action(/* action */"Products_Create", /* controller *"Home"))
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax">
+        <schema>
+            <model id="ProductID"></model>
+        </schema>
+        <transport>
+            <create url="@Url.Action/* action */"Products_Create", /* controller */"Home")" />
+            <read url="@Url.Action("Products_Read", "Home")" />
+        </transport>
+    </kendo-datasource>
+```
+{% endif %}
 ```Controller
 
     public ActionResult Products_Create([DataSourceRequest]DataSourceRequest request, Product newProduct)
@@ -56,11 +86,28 @@ The `Create` method sets the action method which is responsible for saving new d
 The `Update` method sets the action method which is responsible for saving updated data items.
 
 ```HtmlHelper
-    .Ajax()
-    .Model(model => model.Id(product => product.ProductID))
-    .Update(update => update.Action(/* action */"Products_Update", /* controller */"Home"))
-    .Read(read => read.Action("Products_Read", "Home"))
+    @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("dataSource1")
+        .Ajax(dataSource => dataSource
+            .Model(model => model.Id(product => product.ProductID))
+            .Update(update => update.Action(/* action */"Products_Update", /* controller */"Home"))
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax">
+        <schema>
+            <model id="ProductID"></model>
+        </schema>
+        <transport>
+            <update url="@Url.Action/* action */"Products_Update", /* controller */"Home")" />
+            <read url="@Url.Action("Products_Read", "Home")" />
+        </transport>
+    </kendo-datasource>
+```
+{% endif %}
 ```Controller
 
     public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, Product updatedProduct)
@@ -78,11 +125,28 @@ The `Update` method sets the action method which is responsible for saving updat
 The `Destroy` method sets the action method which is responsible for destroying data items.
 
 ```HtmlHelper
-    .Ajax()
-    .Model(model => model.Id(product => product.ProductID))
-    .Destroy(destroy => destroy.Action(/* action */"Products_Destroy", /* controller*/ "Home"))
-    .Read(read => read.Action("Products_Read", "Home"))
+    @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("dataSource1")
+        .Ajax(dataSource => dataSource
+            .Model(model => model.Id(product => product.ProductID))
+            .Destroy(destroy => destroy.Action(/* action */"Products_Destroy", /* controller*/ "Home"))
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax">
+        <schema>
+            <model id="ProductID"></model>
+        </schema>
+        <transport>
+            <destroy url="@Url.Action/* action */"Products_Destroy", /* controller */"Home")" />
+            <read url="@Url.Action("Products_Read", "Home")" />
+        </transport>
+    </kendo-datasource>
+```
+{% endif %}
 ```Controller
 
     public ActionResult Products_Destroy([DataSourceRequest]DataSourceRequest request, Product product)
@@ -100,12 +164,29 @@ The `Destroy` method sets the action method which is responsible for destroying 
 The `Batch` method configures the batch `create`, `update` and `destroy` operations. This means that all changes are kept on the client until a data source [`sync()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/sync) occurs either programmatically or via a `Save Changes` button click in the grid for example. By default, the batch operations are disabled.
 
 ```HtmlHelper
-    .Ajax()
-    .Batch(true)
-    .Model(model => model.Id(product => product.ProductID))
-    .Update(update => update.Action(/* action */"Products_Update", /* controller */ "Home"))
-    .Read(read => read.Action("Products_Read", "Home"))
+    @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("dataSource1")
+        .Ajax(dataSource => dataSource
+            .Batch(true)
+            .Model(model => model.Id(product => product.ProductID))
+            .Update(update => update.Action("Products_Update", "Home"))
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" batch="true">
+        <schema>
+            <model id="ProductID"></model>
+        </schema>
+        <transport>
+            <update url="@Url.Action"Products_Update", "Home")" />
+            <read url="@Url.Action("Products_Read", "Home")" />
+        </transport>
+    </kendo-datasource>
+```
+{% endif %}
 ```Controller
 
     public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<Product> updatedProducts)

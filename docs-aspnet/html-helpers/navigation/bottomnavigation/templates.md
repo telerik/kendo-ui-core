@@ -40,17 +40,35 @@ The `Template` and `TemplateId` configurations manage the rendering of the Botto
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
     @{
-        var home = new { view= "home"};
+        var inbox = new { view= "inbox" };
         var calendar = new { view = "calendar" };
         var profile = new { view = "profile" };
     }  
-    <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute" template-id="bottomnav-template">
+
+    <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute" style="bottom:0;" template-id="bottomnav-template">
             <bottomnavigation-items>
-                <bottomnavigation-item context-data="@home" text="Home" icon="home" selected="true"></bottomnavigation-item>
-                <bottomnavigation-item context-data="@calendar" text="Calendar" icon="calendar"></bottomnavigation-item>
-                <bottomnavigation-item context-data="@profile" text="Profile" icon="user"></bottomnavigation-item>
+                <bottomnavigation-item 
+                    context-data="@inbox" 
+                    text="Inbox" 
+                    icon="email" 
+                    selected="true" 
+                    html-attributes='new Dictionary<string,object> { ["id"] = "Inbox" }'>
+                </bottomnavigation-item>
+                <bottomnavigation-item 
+                    context-data="@calendar" 
+                    text="Calendar" 
+                    icon="calendar-date" 
+                    html-attributes='new Dictionary<string,object> { ["id"] = "Calendar" }'>
+                </bottomnavigation-item>
+                <bottomnavigation-item 
+                    context-data="@profile" 
+                    text="Profile" 
+                    icon="user" 
+                    html-attributes='new Dictionary<string,object> { ["id"] = "Profile" }'>
+                </bottomnavigation-item>
             </bottomnavigation-items>
     </kendo-bottomnavigation>
+
     <script id="bottomnav-template" type="text/x-kendo-template">
         <span class="k-icon k-i-#= icon #"> </span>
         <span> #= text # </span>

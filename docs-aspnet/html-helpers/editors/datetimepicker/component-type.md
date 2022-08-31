@@ -20,9 +20,7 @@ By default, the DateTimePicker is initialized with the `classic` render mode. In
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-datetimepicker name="datetimepicker" 
-                      value="DateTime.Now"
-                      component-type="modern"/>
+    <kendo-datetimepicker name="datetimepicker" component-type="modern"/>
 ```
 {% endif %}
 

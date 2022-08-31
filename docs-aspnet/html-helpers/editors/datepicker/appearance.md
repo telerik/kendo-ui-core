@@ -82,7 +82,7 @@ The following example demonstrates how to set `Rounded` in the declaration of th
 ```TagHelper
 <kendo-datepicker name="datepicker"
                   rounded="Rounded.Medium"
-                  value="new DateTime(2011, 10, 10)"
+                  value="new DateTime(2011, 10, 10)"/>
 ```
 {% endif %}
 
@@ -118,7 +118,7 @@ The following example demonstrates how to set `FillMode` in the declaration of t
 ```TagHelper
 <kendo-datepicker name="datepicker"
                   fill-mode="FillMode.Solid"
-                  value="new DateTime(2011, 10, 10)"
+                  value="new DateTime(2011, 10, 10)"/>
 ```
 {% endif %}
 

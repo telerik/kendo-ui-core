@@ -12,16 +12,41 @@ To request filtered data on initial load, configure the filters with the [`Filte
 * The `Filter` method sets the initial filters.
 
 ```HtmlHelper
-    .Ajax()
-    .Read(read => read.Action("Products_Read", "Home"))
-    .Filter(filters =>
-    {
-        //Show products whose ProductName property contains a "C".
-        filters.Add(product => product.ProductName).Contains("C");
-        //Show products whose UnitsInStock is greater than 10.
-        filters.Add(product => product.UnitsInStock).IsGreaterThan(10);
-    })
+    @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("myDataSource")
+        .Ajax(datasource => datasource
+            .Read(read => read.Action("Products_Read", "Home"))
+            .Filter(filters =>
+            {
+                //Show products whose ProductName property contains a "C".
+                filters.Add(product => product.ProductName).Contains("C");
+                //Show products whose UnitsInStock is greater than 10.
+                filters.Add(product => product.UnitsInStock).IsGreaterThan(10);
+            })
+        )
+    )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var filterValue = "C";
+    }
+
+    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("Products_Read", "Home")"/>
+        </transport>
+        <filters>
+            <datasource-filter logic="and">
+                <filters>
+                    <datasource-filter field="ProductName" operator="contains" value="@filterValue"></datasource-filter>
+                    <datasource-filter field="UnitsInStock" operator="gt" value="10"></datasource-filter>
+                </filters>
+            </datasource-filter>
+        </filters>
+    </kendo-datasource>
+```
+{% endif %}
 
 ## See Also
 

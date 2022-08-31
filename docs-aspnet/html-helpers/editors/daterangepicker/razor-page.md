@@ -54,6 +54,7 @@ See the implementation details in the example below. For the full project with R
         text-align: center;
     }
 </style>
+```
 {% endif %}
 
 ```tab-PageModel(cshtml.cs)

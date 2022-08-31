@@ -9,13 +9,13 @@ position: 2
 
 # Custom DataSource
 
-Telerik UI for ASP.NET MVC enables you to use the CustomDataSource builder that is available helpers which support data binding.
+Telerik UI for ASP.NET MVC enables you to use the CustomDataSource builder that is available to helpers which support data binding.
 
-The CustomDataSource builder provides full control over the [DataSource client-side API options](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource). The CustomDataSource builder facilitate the usage of the Telerik UI helpers&mdash;for example, the helpers generate validation attributes, editors, and so on, while they utilize the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
+The CustomDataSource builder class allows full control over the [DataSource client-side API options](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource), through Razor syntax. The CustomDataSource builder facilitates the usage of the Telerik UI helpers&mdash;for example, the helpers generate validation attributes, editors, and so on, while they utilize the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
 
-## Getting Started
+## DataSource and Custom DataSource
 
-The CustomDataSource builder removes all predefined settings that are introduced by the regular DataSource builders.
+The regular DataSource builders have many settings that are configured by default. The CustomDataSource builder removes these predefined settings, so when you declare a DataSource as custom, configure these additional settings.
 
 The following example demonstrates how to convert a regular [Grid](https://demos.telerik.com/kendo-ui/grid/index) AjaxDataSourceBuilder to a CustomDataSource builder.
 
@@ -207,7 +207,7 @@ The following example demonstrates how to set the default value of the `Employee
 
 ## Setting Up Custom DataType CRUD Operations
 
-The following example demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data. For the full demo, refer to the [Download and Installation article of Telerik UI for ASP.NET MVC]({% slug downloadinstall_aspnetcore %}#sample-application).
+The following example demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data. For the full demo, refer to the [Custom DataSource of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource).
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
         .Name("Grid")    
@@ -264,7 +264,7 @@ The following example demonstrates how to bind the Grid to the Kendo UI online d
 
 ## Binding the Grid to oData
 
-The following example demonstrates how to bind the Grid to the oData service. For the full demo, refer to the [Download and Installation article of Telerik UI for ASP.NET MVC]({% slug downloadinstall_aspnetcore %}#sample-application).
+The following example demonstrates how to bind the Grid to the oData service. For the full demo, refer to the [OData Binding of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata).
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("grid")

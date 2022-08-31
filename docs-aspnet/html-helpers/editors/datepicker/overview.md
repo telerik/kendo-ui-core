@@ -36,10 +36,11 @@ The following example demonstrates the basic configuration for the DatePicker.
 ```
 {% if site.core %}
 ```TagHelper
-
-        <kendo-datepicker name="monthpicker" start="CalendarView.Year" depth="CalendarView.Year"
-            format="MMMM yyyy" value="DateTime.Now">
-        </kendo-datepicker>
+    <kendo-datepicker name="datepicker"
+        min="new DateTime(1900, 1, 1)" 
+        max="new DateTime(2099, 12, 31)"
+        value="DateTime.Today">
+    </kendo-datepicker>
 ```
 {% endif %}
 
@@ -73,10 +74,10 @@ The following example demonstrates how to subscribe to events by a handler name.
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-datepicker name="datepicker"
-                  on-open="datepicker_open"
-                  on-close="datepicker_close"
-                  on-change="datepicker_change"/>
+    <kendo-datepicker name="datepicker"
+        on-open="datepicker_open"
+        on-close="datepicker_close"
+        on-change="datepicker_change"/>
 ```
 {% endif %}
 ```script.js
@@ -113,6 +114,20 @@ The following example demonstrates how to subscribe to events by a template dele
             </text>)
       )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-datepicker name="datepicker"
+        on-open='function(e)
+        {
+            // Handle the open event inline.
+        }'
+        on-change='function(e)
+        {
+            // Handle the change event inline.
+        }'/>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 

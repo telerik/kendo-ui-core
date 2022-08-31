@@ -37,6 +37,15 @@ The `Shape` parameter controls the shape of the pointer and takes a member of th
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <lineargauge-pointers>
+            <pointer value="65" shape="GaugeLinearPointerShape.Arrow"></pointer>
+        </lineargauge-pointers>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## Color
 
@@ -62,6 +71,17 @@ The `Color` (`string`) parameter controls the color of the pointers. It accepts 
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <lineargauge-pointers>
+            <pointer value="10" color="red" shape="GaugeLinearPointerShape.Arrow"></pointer>
+            <pointer value="20" color="#008000" shape="GaugeLinearPointerShape.Arrow"></pointer>
+            <pointer value="30" color="rgb(255,255,0)" shape="GaugeLinearPointerShape.Arrow"></pointer>
+        </lineargauge-pointers>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## Opacity
 
@@ -80,6 +100,15 @@ The `Opacity` (`double`) parameter controls the opacity of the pointers. The val
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <lineargauge-pointers>
+            <pointer value="10" color="red" shape="GaugeLinearPointerShape.Arrow" opacity="0.5"></pointer>
+        </lineargauge-pointers>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## Size
 
@@ -97,6 +126,15 @@ The `Size` (`double`) parameter controls the size of the pointers.
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <lineargauge-pointers>
+            <pointer value="10" size="15" shape="GaugeLinearPointerShape.Arrow"></pointer>
+        </lineargauge-pointers>
+    </kendo-lineargauge>
+```
+{% endif %}
 
 ## Margin
 
@@ -114,6 +152,16 @@ The `Margin` (`double`) parameter controls the margin between the [Scale]({%slug
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-lineargauge name="gauge">
+        <lineargauge-pointers>
+            <pointer value="10" margin="5" shape="GaugeLinearPointerShape.Arrow"></pointer>
+        </lineargauge-pointers>
+    </kendo-lineargauge>
+```
+{% endif %}
+
 ## See Also
 
 * [Overview of the LinearGauge]({%slug overview_lineargaugehelper_aspnetcore%})

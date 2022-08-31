@@ -32,7 +32,7 @@ The following example demonstrates how to define the BottomNavigation.
 ```
 {% if site.core %}
 ```TagHelper
-       <kendo-bottomnavigation name="bottomNavigation">
+       <kendo-bottomnavigation name="bottomnavigation">
        </kendo-bottomnavigation>
 ```
 {% endif %}
@@ -43,38 +43,45 @@ The following example demonstrates the basic configuration for the BottomNavigat
 
 ```HtmlHelper
     @(Html.Kendo().BottomNavigation()
-            .Name("bottomNavigation")
-            .PositionMode(BottomNavigationPositionMode.Absolute)
-            .HtmlAttributes( new { style="bottom:0;"})
-            .Items(i=> {
-                i.Add().Text("Inbox").Data(new { view = "inbox" }).Icon("email").Selected(true);
-                i.Add().Text("Calendar").Data(new { view = "calendar" }).Icon("calendar-date");
-                i.Add().Text("Profile").Data(new { view = "profile" }).Icon("user");
-            })
+        .Name("bottomNavigation")
+        .PositionMode(BottomNavigationPositionMode.Absolute)
+        .HtmlAttributes( new { style="bottom:0;"})
+        .Items(i=> {
+            i.Add().Text("Inbox").Data(new { view = "inbox" }).Icon("email").Selected(true);
+            i.Add().Text("Calendar").Data(new { view = "calendar" }).Icon("calendar-date");
+            i.Add().Text("Profile").Data(new { view = "profile" }).Icon("user");
+        })
     )
 
     <script>
-    $(function() {
-        // The Name() of the BottomNavigation is used to get its client-side instance.
-        var bottomNavigation = $("#bottomNavigation").data("kendoBottomNavigation");
-    });
+        $(function() {
+            // The Name() of the BottomNavigation is used to get its client-side instance.
+            var bottomNavigation = $("#bottomNavigation").data("kendoBottomNavigation");
+        });
     </script>
 ```
 {% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
     @{
-        var home = new { view= "home"};
+        var inbox = new { view= "inbox" };
         var calendar = new { view = "calendar" };
         var profile = new { view = "profile" };
     }  
-    <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute">
+    <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute" style="bottom:0;">
             <bottomnavigation-items>
-                <bottomnavigation-item context-data="@home" text="Home" icon="home" selected="true"></bottomnavigation-item>
-                <bottomnavigation-item context-data="@calendar" text="Calendar" icon="calendar"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@inbox" text="Inbox" icon="email" selected="true"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@calendar" text="Calendar" icon="calendar-date"></bottomnavigation-item>
                 <bottomnavigation-item context-data="@profile" text="Profile" icon="user"></bottomnavigation-item>
             </bottomnavigation-items>
     </kendo-bottomnavigation>
+
+    <script>
+        $(function() {
+            // The Name() of the BottomNavigation is used to get its client-side instance.
+            var bottomNavigation = $("#bottomNavigation").data("kendoBottomNavigation");
+        });
+    </script>
 ```
 {% endif %}
 

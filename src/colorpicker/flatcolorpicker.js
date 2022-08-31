@@ -45,7 +45,7 @@
         PREVIEW_MASK = ".k-color-preview-mask",
 
         ARIA_PRESSED = "aria-pressed",
-        ARIA_DISABLED = "aria-disabled"
+        ARIA_DISABLED = "aria-disabled",
 
         VIEWS = {
             "gradient": ui.ColorGradient,
