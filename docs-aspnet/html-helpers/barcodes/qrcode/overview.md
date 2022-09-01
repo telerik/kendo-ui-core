@@ -68,7 +68,10 @@ To configure the QRCode, pass the configuration options as attributes, for examp
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-qrcode name="qrUrl" value="https://docs.telerik.com/aspnet-core/introduction" error-correction="QRErrorCorrectionLevel.M size=" 150">
+    <kendo-qrcode name="qrUrl" 
+                  value="https://docs.telerik.com/aspnet-core/introduction" 
+                  error-correction="QRErrorCorrectionLevel.M 
+                  size=" 150">
         <border color="#AA11AA" width="2" />
     </kendo-qrcode>
 ```

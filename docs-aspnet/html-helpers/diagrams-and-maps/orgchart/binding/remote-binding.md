@@ -54,6 +54,33 @@ The following example demonstrates how to bind the OrgChart to remote data.
                 )
         )
    ```
+   {% if site.core %}
+   ```TagHelper
+        <kendo-orgchart name="orgchart">
+            <orgchart-datasource type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Read","Home")" />
+                </transport>
+                <schema>
+                    <orgchart-model id="ID" 
+                                    parent-id="ParentID" 
+                                    expanded="true"
+                                    name="Name" 
+                                    title="Title" 
+                                    avatar="Avatar">
+                        <fields>
+                            <field name="ParentID" nullable="true"></field>
+                            <field name="ID" type="number"></field>
+                            <field name="Name" type="string"></field>
+                            <field name="Title" type="string"></field>
+                            <field name="Avatar" type="string"></field>
+                        </fields>
+                    </orgchart-model>
+                </schema>
+            </orgchart-datasource>
+        </kendo-orgchart>
+   ```
+   {% endif %}
     
 
 ## See Also

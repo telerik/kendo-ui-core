@@ -25,6 +25,21 @@ The following example demonstrates how to define a node template and how to eval
                 "<div><i> Position: #: Title # </i></div>" +
                 "</div>")
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-orgchart name="orgchart" template-id="template">
+     // Ommited for brevity.
+    </kendo-orgchart>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class='custom'>
+             <div><img src=' #: Avatar #'/></div>
+             <span>Name: <strong> #: Name # </strong></span>
+             <div><i> Position: #: Title # </i></div>
+        </div>
+    </script>
+```
+{% endif %}
 
 ## Group Header Template
 
@@ -35,6 +50,17 @@ The following example demonstrates how to define a group header. The group field
 ```HtmlHelper
     .GroupHeaderTemplate("<i> #: field #</i>:<strong>#: value # </strong>")
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-orgchart name="orgchart" group-header-template-id="groupHeaderTemplate">
+     // Ommited for brevity.
+    </kendo-orgchart>
+
+    <script type="text/x-kendo-template" id="groupHeaderTemplate">
+        <i> #: field #</i>:<strong>#: value # </strong>
+    </script>
+```
+{% endif %}
 
 ## See Also
 

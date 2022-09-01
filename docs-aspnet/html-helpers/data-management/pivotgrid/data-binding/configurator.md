@@ -31,6 +31,21 @@ The following example demonstrates how to create the PivotConfigurator.
     // Other configuration.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotconfigurator name="configurator" 
+                             datasource-id="pivotSource" 
+                             filterable="true"  
+                             height="570">
+    </kendo-pivotconfigurator>
+
+    <kendo-pivotgrid name="pivotgrid" 
+                     filterable="true" 
+                     datasource-id="pivotSource"
+                     height="570">
+    </kendo-pivotgrid>
+```
+{% endif %}
 
 ## Basic Configuration
 
@@ -74,6 +89,39 @@ The following example demonstrates how to configure the PivotConfigurator.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotdatasource type=@(PivotDataSourceType.Xmla) name="pivotSource">
+        <columns>
+            <pivot-datasource-column name="[Date].[Calendar]" expand="true"></pivot-datasource-column>
+            <pivot-datasource-column name="[Product].[Category]"></pivot-datasource-column>
+        </columns>
+        <rows>
+            <row name="[Geography].[City]"></row>
+        </rows>
+        <schema type="xmla"/>
+        <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
+        <transport>
+            <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
+            <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
+        </transport>
+    </kendo-pivotdatasource>
+
+    <kendo-pivotconfigurator name="configurator" 
+                             filterable="true" 
+                             height="570" 
+                             datasource-id="pivotSource">
+    </kendo-pivotconfigurator>
+
+    <kendo-pivotgrid name="pivotgrid"
+                     filterable="true" 
+                     column-width="200" 
+                     height="570"
+                     datasource-id="pivotSource">
+        <sortable enabled="true" />
+    </kendo-pivotgrid>
+```
+{% endif %}
 
 The following image demonstrates the output from the previous example.
 

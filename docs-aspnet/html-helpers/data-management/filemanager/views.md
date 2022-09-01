@@ -1,20 +1,20 @@
 ---
 title: Views
-page_title: Views
-description: "Get familiar with Grid and Thumbs Views in Telerik UI FileManager for {{ site.framework }}."
+page_title: Views 
+description: "Get familiar with Grid and Thumbs Views in the Telerik UI FileManager for {{ site.framework }}."
 slug: htmlhelpers_filemanager_aspnetcore_views
 position: 4
 ---
 
-# Views Overview
+# Views 
 
-The {{ site.product }} FileManager provides two inbuilt views for content visualization: `Grid` and `List` Views.  
+The {{ site.product }} FileManager provides the Grid and List built-in views for content visualization.  
 
-You can switch between views from the Toolbar button group.
+To switch between the views, use the **Toolbar** button group.
 
 ## Grid View
 
-This view is achieved with the {{ site.product }} Grid and in renders the files in a tabular manner (see Image1 below). That said, you can control the configuration of this view trough the `views.grid` object of the FileManager (see example below). 
+The Grid view is based on the {{ site.product }} Grid component and renders the FileManager files in a tabular form. To control the Grid view configuration, use the `views.grid` object of the FileManager. 
 
 ```HtmlHelper
     @(Html.Kendo().FileManager()
@@ -24,13 +24,31 @@ This view is achieved with the {{ site.product }} Grid and in renders the files 
     )
 ```
 
-**Image1: GridView type in FileManager:**
+**A FileManager displaying its Grid view type**
 
 <img src="gridview.png">
 
-## List View (Thumbnails)
+### Setting the Grid View as Initial View
 
-The List view is implemented with the help of the {{ site.product }} ListView component. The content in this view is rendered as a list of thumbnails, representing the files. You can control the configuration of this view trough the `views.list` object of the FileManager. 
+By default, the initial view of the FileManager is the List View. To set the initial view to the Grid View, use the `InitialView()` configuration property.
+
+```HtmlHelper
+      @(Html.Kendo().FileManager()
+        .Name("filemanager")
+        .InitialView("grid")
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-filemanager name="filemanager" initial-view="grid">
+    </kendo-filemanager>
+```
+{% endif %}
+
+
+## List View 
+
+The List or Thumbnails View is based on the {{ site.product }} ListView component and renders the FileManager content as a list of thumbnails with each thumbnail representing a file. To control the configuration of the List View, use the `views.list` object of the FileManager. 
 
 ```HtmlHelper
     @(Html.Kendo().FileManager()
@@ -57,7 +75,7 @@ The List view is implemented with the help of the {{ site.product }} ListView co
 ```
 {% endif %}
 
-**Image2: ListView type in FileManager:** 
+**A FileManager displaying its List view type** 
 
 <img src="listview.png">
 

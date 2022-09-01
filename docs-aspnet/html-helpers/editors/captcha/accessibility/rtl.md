@@ -10,14 +10,23 @@ position: 3
 
 The Telerik UI Captcha fully supports right-to-left (RTL) language locales. To turn on the RTL support, set `dir=rtl` to the HTML or body element or, at least, to its parent element. You can also use the `direction:rtl` CSS property.
 
-```
+```HtmlHelper
 <div dir="rtl">
     @(Html.Kendo().Captcha()
         .Name("Captcha")
-        // other options omitted for brevity
+        // Other options omitted for brevity.
     )
 </div>
 ```
+{% if site.core %}
+```TagHelper
+<div dir="rtl">
+    <kendo-captcha name="Captcha">
+        // Other options omitted for brevity.
+    </kendo-captcha>
+</div>
+```
+{% endif %}
 
 ## See Also
 

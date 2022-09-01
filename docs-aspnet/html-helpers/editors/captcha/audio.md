@@ -25,9 +25,18 @@ The Telerik UI Catpcha server-side provider creates an audio file based on the c
         .Name("Captcha")
         .Handler(handler => handler.Action("Reset", "Captcha"))
         .AudioHandlerFunction("audioHandler")
-        // other options omitted for brevity.
+        // Other options omitted for brevity.
     )
     ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-captcha name="captcha">
+        <handler url="@Url.Action("Reset", "Captcha")" />
+        <audio-handler function-handler="audioHandler" />
+        // Other options omitted for brevity.
+    </kendo-captcha>
+    ```
+    {% endif %}
 
 1. Send a request to the remote endpoint and include the Captcha's ID as an additional parameter.
 

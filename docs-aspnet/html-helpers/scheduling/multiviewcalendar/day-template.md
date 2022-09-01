@@ -21,8 +21,8 @@ The following example demonstrates how to create a MultiViewCalendar by using a 
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-multiviewcalendar name="multiviewcalendar">
-        <month  content="<div class='custom'><#=data.value#></div>"/>
+    <kendo-multiviewcalendar name="MultiViewCalendar">
+        <month content="<div class='custom'><#=data.value#></div>"/>
     </kendo-multiviewcalendar>
 ```
 {% endif %}

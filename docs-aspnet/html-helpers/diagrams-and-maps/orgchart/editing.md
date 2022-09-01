@@ -41,6 +41,36 @@ The following example demonstrates how to configure the OrgChart to use editing.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-orgchart name="orgchart">
+        <orgchart-datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Read","OrgChart")" />
+                <create url="@Url.Action("Create","OrgChart")" />
+                <destroy url="@Url.Action("Destroy","OrgChart")" />
+                <update url="@Url.Action("Update","OrgChart")" />
+            </transport>
+            <schema>
+                <orgchart-model id="ID" 
+                                parent-id="ParentID" 
+                                name="Name" 
+                                title="Title"
+                                avatar="Avatar" 
+                                expanded="true">
+                    <fields>
+                        <field name="ParentID" nullable="true"></field>
+                        <field name="ID" type="number"></field>
+                        <field name="Name" type="string"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Avatar" type="string"></field>
+                    </fields>
+                </orgchart-model>
+            </schema>
+        </orgchart-datasource>
+    </kendo-orgchart>
+```
+{% endif %}
 ```Controller
     public JsonResult Read([DataSourceRequest] DataSourceRequest request)
     {

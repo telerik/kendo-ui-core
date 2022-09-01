@@ -30,7 +30,9 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-multiviewcalendar name="multiviewcalendar" start="CalendarView.Year" depth="CalendarView.Year">
+    <kendo-multiviewcalendar name="MultiViewCalendar" 
+                             start="CalendarView.Year" 
+                             depth="CalendarView.Year">
     </kendo-multiviewcalendar>
 ```
 {% endif %}

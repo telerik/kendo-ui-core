@@ -42,6 +42,33 @@ The following example demonstrates how to instantiate an ImageEditor with predef
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-imageeditor name="imageEditor">
+        <toolbar>
+            <items>
+                <item name="open"/>
+                <item name="save"/>
+                <item name="resize"/>
+                <item name="crop"/>
+                <item name="undo"/>
+                <item name="redo"/>
+                <item name="zoomIn"/>
+                <item name="zoomOut"/>
+                <item name="zoomDropdown"/>
+                <item name="separator"/>
+                <item type="button" name="myButton" text="Custom Button" click="onButtonClick"/>
+            </items>
+        </toolbar>
+    </kendo-imageeditor>
+
+    <script>
+        function onButtonClick() {
+            kendo.alert("button clicked!")
+        }
+    </script>
+```
+{% endif %}
 
 ## Adding Custom Commands to the Toolbar
 
@@ -91,6 +118,15 @@ Then add the custom command to the ImageEditor Toolbar:
             i.Add().Command("MakeThumbnailImageEditorCommand").Type("button").Text("Make Thumbnail");
         }))
 ```
+{% if site.core %}
+```TagHelper
+    <toolbar>
+        <items>
+            <item command="MakeThumbnailImageEditorCommand" type="button" text="Make Thumbnail"/>
+        </items>
+    </toolbar>
+```
+{% endif %}
 
 ## Loading Images in the ImageEditor
 

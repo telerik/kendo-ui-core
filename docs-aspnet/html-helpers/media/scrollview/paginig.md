@@ -43,6 +43,36 @@ If the pager is set to `false`, the ScrollView will not display a pager.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-scrollview name="scrollView" content-height="100%" 
+                                        enable-pager="false"
+                                        template-id="scrollview-template" 
+                                        style="height:600px; width:890px; max-width: 100%;">
+        <datasource custom-type="odata" page-size="3" server-paging="true">
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+            </transport>
+        </datasource>
+    </kendo-scrollview>
+
+    <script id="scrollview-template" type="text/x-kendo-template">
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px;  background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+            # } #
+        </div>
+    </script>
+    <script>
+        function setBackground(id) {
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

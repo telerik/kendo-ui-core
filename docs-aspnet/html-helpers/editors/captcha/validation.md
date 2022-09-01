@@ -172,6 +172,20 @@ To generate CAPTCHAs and validate the user's input, the Telerik UI Captcha depen
         .ValidateOnBlur(true)
     )
     ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-captcha name="Captcha" 
+                   captcha-image="@ViewData["Captcha"]"
+                   captcha-id="@ViewData["CaptchaID"]"
+                   datacaptchafield="Captcha"
+                   datacaptchaidfield="CaptchaID"
+                   validate-on-blur="true">
+        <handler url="@Url.Action("Reset", "Captcha")" />
+        <audio-handler function-handler="audioHandler" />
+        <validation-handler url="@Url.Action("Validate", "Captcha")" />
+    </kendo-captcha>
+    ```
+    {% endif %}
     ```JavaScript
     <script>
         function audioHandler(args) {
@@ -265,6 +279,8 @@ The Telerik UI Captcha for {{ site.framework }} prevents automated programs from
 1. Create a form and add the Telerik UI Captcha.
 
     ```HtmlHelper
+    @model UserViewModel
+
     <form id="form" method="POST">
         @(Html.Kendo().TextBoxFor(m => m.UserName))
         @(Html.Kendo().TextBoxFor(m => m.FirstName))
@@ -286,6 +302,31 @@ The Telerik UI Captcha for {{ site.framework }} prevents automated programs from
         )
     </form>
     ```
+    {% if site.core %}
+    ```TagHelper
+    @model UserViewModel
+
+    <form id="form" method="POST">
+        <kendo-textbox for="@Model.UserName"></kendo-textbox>
+        <kendo-textbox for="@Model.FirstName"></kendo-textbox>
+        <kendo-textbox for="@Model.LastName"></kendo-textbox>
+
+        <kendo-captcha name="Captcha"
+                       captcha-image="@ViewData["Captcha"]"
+                       captcha-id="@ViewData["CaptchaID"]"
+                       datacaptchafield="Captcha"
+                       datacaptchaidfield="CaptchaID">
+            <handler url="@Url.Action("Reset", "Captcha")" />
+            <audio-handler function-handler="audioHandler" />
+            <validation-handler url="@Url.Action("Validate", "Captcha")" />
+        </kendo-captcha>
+
+        <kendo-button name="Submit" type="submit">
+            Submit
+        </kendo-button>
+    </form>
+    ```
+    {% endif %}
 
 1. Instantiate a Telerik UI Validator from the form inside the [document.ready() event](https://learn.jquery.com/using-jquery-core/document-ready/). 
 

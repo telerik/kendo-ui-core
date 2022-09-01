@@ -35,7 +35,7 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-multiviewcalendar name="multiviewcalendar" selectable="multiple">        
+    <kendo-multiviewcalendar name="MultiViewCalendar" selectable="multiple">        
     </kendo-multiviewcalendar>
 ```
 {% endif %}

@@ -45,9 +45,9 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
   {% if site.core %}
   ```TagHelper
             <kendo-multiviewcalendar name="multiviewcalendar"
-                                  min="new DateTime(2010, 1, 1, 10, 0, 0)"
-                                  max="new DateTime(2010, 1, 1, 20, 0, 0)"
-                                  value="DateTime.Now">
+                                     min="new DateTime(2010, 1, 1, 10, 0, 0)"
+                                     max="new DateTime(2010, 1, 1, 20, 0, 0)"
+                                     value="DateTime.Now">
             </kendo-multiviewcalendar>
   ```
   {% endif %}
@@ -90,7 +90,9 @@ The following example demonstrates how to subscribe to events by a handler name.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-multiviewcalendar name="multiviewcalendar" on-change="calendar_change" on-navigate="calendar_navigate">
+    <kendo-multiviewcalendar name="multiviewcalendar" 
+                             on-change="calendar_change" 
+                             on-navigate="calendar_navigate">
     </kendo-multiviewcalendar>
     <script>
         function calendar_navigate() {
@@ -125,6 +127,18 @@ The following example demonstrates how to subscribe to events by a template dele
     )
   )
 ```
+{% if site.core %}
+```TagHelper
+  <kendo-multiviewcalendar name="multiViewCalendar"
+                           on-change='function() {
+                                  //Handle the change event inline.
+                           }'
+                           on-navigate='function() {
+                                  //Handle the navigate event inline.
+                           }'>
+  </kendo-multiviewcalendar>
+```
+{% endif %}
 
 ## See Also
 

@@ -91,9 +91,19 @@ To configure the PivotGrid for Ajax binding to an **Adventure Works** cube that 
             <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
         </transport>
     </kendo-pivotdatasource>
-    <kendo-pivotconfigurator name="configurator" datasource-id="pivotSource">
+
+    <kendo-pivotconfigurator name="configurator" 
+                             filterable="true" 
+                             height="570" 
+                             datasource-id="pivotSource">
     </kendo-pivotconfigurator>
-    <kendo-pivotgrid name="pivotgrid" datasource-id="pivotSource">
+
+    <kendo-pivotgrid name="pivotgrid"
+                     filterable="true" 
+                     column-width="200" 
+                     height="570"
+                     datasource-id="pivotSource">
+        <sortable enabled="true" />
     </kendo-pivotgrid>
 ```
 {% else %}

@@ -43,14 +43,19 @@ In some scenarios it might be necessary to display more than two months. This is
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-numerictextbox  name="numberOfViews" restrict-decimals="true" decimals="0" min="2" max="10" format="n0"/>
+    <kendo-numerictextbox  name="numberOfViews" 
+                           restrict-decimals="true" 
+                           decimals="0" 
+                           min="2" 
+                           max="10" 
+                           format="n0">
+    </kendo-numerictextbox>                        
 
     <kendo-button name="numberOfViewsBtn" on-click="click">
         Apply Changes
     </kendo-button>
 
-    <kendo-multiviewcalendar name="multiviewcalendar">
-    </kendo-multiviewcalendar>
+    <kendo-multiviewcalendar name="multiViewCalendar"></kendo-multiviewcalendar>
 
     <script>
         function click() {

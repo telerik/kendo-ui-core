@@ -40,6 +40,13 @@ To apply customizations during the export to Excel:
             .Height(570)
         )
     ```
+    ```TagHelper
+        <kendo-pivotgrid name="configurator"
+                     filterable="true"
+                     on-excel-export="excelExport"
+                     height="570">
+        </kendo-pivotgrid>
+    ```
 
 1. In the handler, manipulate the generated workbook. The example alternates the [background color of the rows cells](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background).
 

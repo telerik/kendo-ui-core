@@ -35,23 +35,9 @@ The following example demonstrates how to define the ImageEditor.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-imageeditor name="imageEditor" width="500" height="500" on-image-loaded="onImageLoaded">
+    <kendo-imageeditor name="imageEditor" width="500" height="500">
         <save-as file-name="image.png" />
-        <toolbar>
-            <items>
-                <item name="open"></item>
-                <item name="save"></item>
-                <item name="crop"></item>
-                <item name="resize"></item>
-            </items>
-        </toolbar>
     </kendo-imageeditor>
-
-    <script>
-    function onImageLoaded(e){
-        console.log("Image loaded")
-    }
-    </script>
 ```
 {% endif %}
 
@@ -77,6 +63,20 @@ The following example demonstrates how to handle ImageEditor events on the clien
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-imageeditor name="imageEditor" 
+                       width="500" 
+                       height="500" 
+                       on-image-loaded="onImageLoaded">
+    </kendo-imageeditor>
+    <script>
+        function onImageLoaded(e) {
+            console.log("Image loaded");
+        }
+    </script>
+```    
+{% endif %}
 
 ## See Also
 

@@ -22,7 +22,7 @@ The following example demonstrates how to group the OrgChart nodes by the `Group
             .Model(m =>
             {
                 m.Id(f => f.ID);
-                m.ParentId(f => f.ParentId);
+                m.ParentId(f => f.ParentID);
                 m.Name(f => f.Name);
                 m.Title(f => f.Title);
                 m.Avatar(f => f.Avatar);
@@ -31,6 +31,33 @@ The following example demonstrates how to group the OrgChart nodes by the `Group
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-orgchart name="orgchart" group-field="Group">
+        <orgchart-datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Read","Home")" />
+            </transport>
+            <schema>
+                <orgchart-model id="ID" 
+                                parent-id="ParentID" 
+                                name="Name" 
+                                title="Title"
+                                avatar="Avatar" 
+                                expanded="true">
+                    <fields>
+                        <field name="ID" type="number"></field>
+                        <field name="ParentID" nullable="true"></field>
+                        <field name="Name" type="string"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Avatar" type="string"></field>
+                    </fields>
+                </orgchart-model>
+            </schema>
+        </orgchart-datasource>
+    </kendo-orgchart>
+```
+{% endif %}
 ```Controller
     public JsonResult Read([DataSourceRequest] DataSourceRequest request)
     {

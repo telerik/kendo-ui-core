@@ -19,7 +19,7 @@ The Telerik UI MultiViewCalendar allows the user to select multiple dates by usi
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-multiviewcalendar name="multiviewcalendar" selectable="range">        
+    <kendo-multiviewcalendar name="MultiViewCalendar" selectable="range">        
     </kendo-multiviewcalendar>
 ```
 {% endif %}

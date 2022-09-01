@@ -29,7 +29,7 @@ The following example demonstrates the basic configuration of the OrgChart compo
     @(Html.Kendo().OrgChart<Kendo.Mvc.Examples.Models.OrgChartEmployeeViewModel>()
         .Name("orgchart")
         .DataSource(dataSource => dataSource
-            .Read(read => read.Action("RemoteDataBindingData", "OrgChart"))
+            .Read(read => read.Action("Read", "OrgChart"))
             .Model(m => {
                 m.Id(f => f.ID);
                 m.ParentId(f => f.ParentID);
@@ -43,18 +43,22 @@ The following example demonstrates the basic configuration of the OrgChart compo
 ```
 ```TagHelper
     <kendo-orgchart name="orgchart">
-        <orgchart-datasource>
+        <orgchart-datasource type="DataSourceTagHelperType.Ajax">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/EmployeesOrgChart" />
+                <read url="@Url.Action("Read","OrgChart")" />
             </transport>
             <schema>
-                <orgchart-model id="Id" parent-id="ParentId" expanded="true"
-                                name="FullName" title="Position" avatar="Avatar">
+                <orgchart-model id="ID" 
+                                parent-id="ParentID" 
+                                expanded="true"
+                                name="Name" 
+                                title="Title" 
+                                avatar="Avatar">
                     <fields>
-                        <field name="ParentId" nullable="true"></field>
-                        <field name="Id" type="number"></field>
-                        <field name="FullName" type="string"></field>
-                        <field name="Position" type="string"></field>
+                        <field name="ParentID" nullable="true"></field>
+                        <field name="ID" type="number"></field>
+                        <field name="Name" type="string"></field>
+                        <field name="Title" type="string"></field>
                         <field name="Avatar" type="string"></field>
                     </fields>
                 </orgchart-model>
@@ -128,6 +132,24 @@ The following example demonstrates how to subscribe to events by a handler name.
     }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-orgchart name="orgchart"
+                    on-select="onSelect"
+                    on-change="onChange">
+    </kendo-orgchart>
+    
+    <script>
+    function onSelect(e) {
+        // Handle the "select" event.
+    }
+
+    function onChange(e) {
+        // Handle the "change" event.
+    }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

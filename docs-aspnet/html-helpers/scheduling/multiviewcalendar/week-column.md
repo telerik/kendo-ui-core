@@ -19,7 +19,7 @@ In the MultiViewCalendar, you can render a column which displays the number of t
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-multiviewcalendar name="multiviewcalendar" week-number="true">
+    <kendo-multiviewcalendar name="MultiViewCalendar" week-number="true">
     </kendo-multiviewcalendar>
 ```
 {% endif %}

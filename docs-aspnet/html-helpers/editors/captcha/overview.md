@@ -35,20 +35,11 @@ The following example demonstrates the basic configuration of the Captcha compon
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-form name="form" form-data="@Model">
-    <form-items>
-        <form-item field="UserName"></form-item>
-        <form-item field="FirstName"></form-item>
-        <form-item field="LastName"></form-item>
-        <form-item field="Captcha">
-            <captcha-editor datacaptchaidfield="CaptchaID" datacaptchafield="Captcha" captcha-image="@ViewData["Captcha"]" captcha-id="@ViewData["CaptchaID"]">
-                <handler url="@Url.Action("Reset")" />
-                <validation-handler url="@Url.Action("Validate")" />
-                <audio-handler function-handler="audioHandler" />
-            </captcha-editor>
-        </form-item>
-    </form-items>
-</kendo-form>
+    <kendo-captcha name="Captcha">
+        <handler url="@Url.Action("Reset", "Captcha")" />
+        <audio-handler function-handler="audioHandler" />
+        <validation-handler url="@Url.Action("Validate", "Captcha")" />
+    </kendo-captcha>
 ```
 {% endif %}
 ```JavaScript

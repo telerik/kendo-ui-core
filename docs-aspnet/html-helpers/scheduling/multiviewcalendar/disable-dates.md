@@ -25,7 +25,8 @@ When you set an array, list the days that need to be disabled by using the first
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-multiviewcalendar name="multiviewcalendar" disable-dates="new DateTime[] { DateTime.Now }">
+    <kendo-multiviewcalendar name="MultiViewCalendar" 
+                             disable-dates="new DateTime[] { DateTime.Now }">
     </kendo-multiviewcalendar>
 ```
 {% endif %}

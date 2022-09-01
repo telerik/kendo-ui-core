@@ -12,7 +12,7 @@ This article describes how to configure the Telerik UI ImageEditor for {{ site.f
 
 The example below demonstrates how to configure the ImageEditor to forward the content to a proxyURL in a RazorPage scenario even if the browser supports saving files locally. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml) 
+```tab-HtmlHelper(cshtml) 
        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
@@ -28,6 +28,19 @@ The example below demonstrates how to configure the ImageEditor to forward the c
         .ImageUrl(@Url.Content("~/images/2.jpg"))
     )
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+    
+    <kendo-imageeditor name="imageEditor" height="900" image-url="@Url.Content("~/image/2.jpg")">
+        <save-as file-name="image.png" 
+                 force-proxy="true"
+                 proxy-url="@Url.Action("ImageEditorIndex","Save")"/>
+    </kendo-imageeditor>
+```
+{% endif%}
 ```tab-PageModel(cshtml.cs)      
 
     public IActionResult OnPostSave(string contentType, string base64, string fileName)

@@ -70,6 +70,67 @@ The ScrollView supports the following keyboard shortcuts:
         .HtmlAttributes(new { style = "height:515px; width:1022px; max-width: 100%" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-scrollview name="scrollView" content-height="100%"
+                                        enable-pager="true" 
+                                        navigatable="true"
+                                        style="height:515px; width:1022px; max-width:100%;">
+            <items>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo1'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo2'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo3'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo4'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo5'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo6'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo7'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo8'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo9'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo10'></div>
+                    </content>
+                </scrollview-item>
+            </items>
+    </kendo-scrollview>
+```
+{% endif %}
 
 ## See Also
 

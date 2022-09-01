@@ -52,16 +52,22 @@ You can initialize the ScrollView either [from HTML](#from-html) or [from a data
 ```
 {% if site.core %}
 ```TagHelper
-   <kendo-scrollview name="scrollView" content-height="100%" template-id="scrollview-template" style="height:600px; width:890px; max-width: 100%;">
+   <kendo-scrollview name="scrollView" content-height="100%" style="height:600px; width:890px; max-width: 100%;">
         <items>
             <scrollview-item>
-                <content><h1>One</h1></content>
+                <content>
+                    <h1>One</h1>
+                </content>
             </scrollview-item>
             <scrollview-item>
-                <content><h1>Two</h1></content>
+                <content>
+                    <h1>Two</h1>
+                </content>
             </scrollview-item>
             <scrollview-item>
-                <content><h1>Three</h1></content>
+                <content>
+                    <h1>Three</h1>
+                </content>
             </scrollview-item>
         </items>
     </kendo-scrollview>
@@ -109,21 +115,25 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-scrollview name="scrollView" content-height="100%" template-id="scrollview-template" style="height:600px; width:890px; max-width: 100%;">
-        <datasource custom-type="odata" page-size="3" server-paging="true">
+    <kendo-scrollview name="scrollView" content-height="100%" 
+                                        template-id="employee-template" 
+                                        style="height:600px; width:890px; max-width: 100%;">
+        <datasource custom-type="odata" page-size="1" server-paging="true">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees" />
             </transport>
         </datasource>
     </kendo-scrollview>
-    <script id="scrollview-template" type="text/x-kendo-template">
-        <div class="img-wrapper">
-            # for (var i = 0; i < data.length; i++) { #
-            <div>
-                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
-                <p>#= data[i].ProductName #</p>
+    <script id="employee-template" type="text/x-kendo-template">
+        <div class="template">
+            <h1>
+                <span>#:TitleOfCourtesy# #: FirstName# #: LastName# </span>
+            </h1>
+            <h3>Title: #: Title #</h3>
+            <div class="notes"><em>#:Notes#</em></div>
+            <div class="country">
+                #: Country #
             </div>
-            # } #
         </div>
     </script>
 ```
@@ -153,6 +163,25 @@ The following example demonstrates how to fetch data from a Controller action.
         <p style="border: 2px solid blue; color: red;">#= data.SomeField #</p>
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-scrollview name="scrollView"
+                      enable-pager="false"
+                      content-height="100%"
+                      template-id="scrollview-template">
+        <datasource custom-type="aspnetmvc-ajax" server-paging="true" page-size="1">
+            <transport>
+                <read url="@Url.Action("GetScrollViewData","Home")"/>
+            </transport>
+            <schema data="Data" total="Total"></schema>
+        </datasource>
+    </kendo-scrollview>
+
+    <script id="scrollview-template" type="text/x-kendo-template">
+        <p style="border: 2px solid blue; color: red;">#= data.SomeField #</p>
+    </script>
+```
+{% endif %}
 ```Controller
     public class HomeController : Controller
     {
