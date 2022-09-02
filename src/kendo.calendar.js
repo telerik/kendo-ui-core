@@ -992,7 +992,8 @@ var __meta__ = {
                 active = that._active,
                 horizontal = that.options.animation.horizontal,
                 effects = horizontal.effects,
-                viewWidth = outerWidth(from);
+                viewWidth = outerWidth(from),
+                margin = (outerWidth(from, true) - viewWidth);
 
             if (effects && effects.indexOf(SLIDE) != -1) {
                 from.add(to).css({ width: viewWidth });
@@ -1004,9 +1005,9 @@ var __meta__ = {
                 from.parent()
                 .css({
                     position: "relative",
-                    width: viewWidth * 2,
-                    "float": LEFT,
-                    "margin-left": future ? 0 : -viewWidth
+                    width: (viewWidth * 2) + (2 * margin),
+                    display: "flex",
+                    "margin-left": future ? 0 : (-viewWidth - margin)
                 });
 
                 to[future ? "insertAfter" : "insertBefore"](from);
