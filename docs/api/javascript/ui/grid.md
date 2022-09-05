@@ -229,6 +229,28 @@ HTML attributes of the table cell (`<td>`) rendered for the column.
 
 The table cells would look like this: `<td class="table-cell" style="text-align: right; font-size: 14px">...</td>`.
 
+### columns.columnMenu `Boolean` *(default: true)*
+
+If set to `false` the column menu will not be rendered for the specific column.
+
+#### Example - hide the column menu
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", columnMenu: false },
+        { field: "name" },
+        { field: "age" }
+      ],
+      columnMenu: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
 ### columns.columns `Array`
 
 The columns which should be rendered as child columns under this group column header.
@@ -2622,6 +2644,24 @@ If set to `true` the column will not be displayed in the grid. By default all co
         { hidden: true, field: "id" },
         { field: "name" }
       ],
+      dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
+    });
+    </script>
+
+### columns.hideOnGroup `Boolean` *(default: false)*
+
+If set to `true` the column will be hidden when the grid is groupd via user iteraction. The column will be displayed again if iteraction to ungroup by it is performed.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id" },
+        { field: "name" }
+      ],
+      groupable: true
       dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
     });
     </script>

@@ -115,24 +115,7 @@
             assert.isOk(div.find(".k-item:first").hasClass("k-active"));
         });
 
-        it("add activedescendant id on disabled item when navigating on it", function() {
-            div.kendoTabStrip({ animation: false });
-            addItems(3);
-            var tabstrip = div.data("kendoTabStrip");
-            tabstrip.disable(tabstrip.items()[1]);
-            div.focus();
-            tabstrip._current(div.find(".k-item:first"));
-
-            div.trigger({
-                type: "keydown",
-                keyCode: keys.RIGHT
-            });
-
-            assert.equal(div.attr("aria-activedescendant"), tabstrip.tabGroup.children("#test-tab-2").attr("id"));
-            assert.isOk(tabstrip.tabGroup.children("#test-tab-2").hasClass("k-disabled"));
-        });
-
-        it("adjust activedescendant id when navigation from disabled item to active item", function() {
+        it("adjust aria-hidden when navigation from disabled item to active item", function() {
             div.kendoTabStrip({ animation: false });
             addItems(3);
             var tabstrip = div.data("kendoTabStrip");
@@ -150,7 +133,7 @@
                 keyCode: keys.LEFT
             });
 
-            assert.equal(div.find(".k-item:first").attr("id"), div.attr("aria-activedescendant"));
+            assert.equal(div.find(".k-item:first").attr("aria-hidden"), undefined);
         });
 
         it("selects prev item on key UP", function() {
@@ -168,7 +151,6 @@
             });
 
             assert.isOk(div.find(".k-item:first").hasClass("k-active"));
-            assert.equal(div.attr("aria-activedescendant"), div.find(".k-item:first").attr("id"));
         });
 
         it("selects last if current is first", function() {

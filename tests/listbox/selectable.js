@@ -103,7 +103,7 @@
         assert.equal(listbox.select().length, 0);
     });
 
-    it("select triggers change event", function() {
+    it("select does not trigger change event", function() {
         var changeStub = stub({}, "change");
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3],
@@ -112,7 +112,7 @@
 
         listbox.select(listbox.items()[0]);
 
-        assert.equal(changeStub.calls("change"), 1);
+        assert.equal(changeStub.calls("change"), 0);
     });
 
     it("clearSelection removes selection", function() {

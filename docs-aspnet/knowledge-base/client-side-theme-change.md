@@ -8,11 +8,28 @@ tags: change, theme, client, dropdown
 res_type: kb
 ---
 
-# Change Theme On The Client 
+## Environment
+
+<table>
+	<tbody>
+        <tr>
+			<td>Product</td>
+			<td>Progress® Telerik® UI for {{ site.product_short }}</td>
+		</tr>
+	</tbody>
+</table>
+
+## Description
+
+How can I allow the user to change the theme in my {{ site.product }} application?
+
+## Solution
 
 The Step by Step guide below demonstrates how to allow the user to change the theme of the application. The approach demonstrated uses cookies to store the theme selected by the user. For a runnable example, refer to the GitHub repo on how to [change the theme on the client]{% if site.core %}(https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/StylesAndLayout/ClientThemeChange.cshtml){% else %}(https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/styles-and-layout/ChangingThemesOnTheClient){% endif %}.
 
-Тhe _Layout.cshtml file provides a Kendo DropDownList for theme selection.
+### Adding a DropDownList for theme selection
+
+Add a {{ site.product_short }} DropDownList to the _Layout.cshtml file for theme selection.
 ```razor
     @(Html.Kendo().DropDownList()
         .Name("themeSelector")
@@ -32,7 +49,9 @@ The Step by Step guide below demonstrates how to allow the user to change the th
     )
 ```
 
-Upon selection of a theme, the selected theme value is passed to the controller action method.
+### Sending information on the selected theme to the server
+
+Upon selection of a theme, pass the selected theme name to an action method responsible for setting the theme.
 
 ```javascript
     function themeSelection(e) {
@@ -46,7 +65,7 @@ Upon selection of a theme, the selected theme value is passed to the controller 
     });
 ```
 
-Within the action method the selected theme value is appended to a cookie.
+Append the name of the selected theme to a cookie.
 {% if site.core %}
 ```Controller
     [HttpPost]
@@ -82,7 +101,9 @@ Within the action method the selected theme value is appended to a cookie.
 ```
 {% endif %}
 
-Setting the theme in the _Layout.cshtml file follows the requirements discussed in the [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) article. The selected theme value is retrieved from the cookie and CDN urls for the selected theme are generated. An alternative approach, if stylesheets are stored within the application, would be to generate the url to the stylesheet for the selected theme.
+### Loading the selected theme
+
+Set the theme in the _Layout.cshtml file, by following the requirements discussed in the [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) article. In the current example, the selected theme name is retrieved from the cookie and the CDN url for theme is generated. An alternative approach, if stylesheets are stored within the application, would be to generate the url to the stylesheet for the selected theme.
 
 ```razor
     @{

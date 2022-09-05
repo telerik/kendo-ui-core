@@ -391,12 +391,12 @@ var __meta__ = {
                     }
                     if (that._target && current.hasClass("k-selected")) {
                         that._target.removeClass(SELECTED_STATE_CLASS);
-                        that.trigger(CHANGE);
                     } else if (that.options.selectable == "single") {
                        that.select(current);
                     } else {
                        that.select(current.add(that._target));
                     }
+                    that.trigger(CHANGE);
                 } else if (e.shiftKey && e.ctrlKey) {
                     that._executeCommand(key === keys.DOWN ? MOVE_DOWN : MOVE_UP);
                     that._scrollIntoView(that._target);
@@ -407,6 +407,7 @@ var __meta__ = {
                         that.clearSelection();
                     }
                     that.select(current);
+                    that.trigger(CHANGE);
                 }
 
                 that._target = current;
@@ -422,13 +423,14 @@ var __meta__ = {
                 if (e.ctrlKey && that._target) {
                    if (that._target.hasClass(SELECTED_STATE_CLASS)) {
                        that._target.removeClass(SELECTED_STATE_CLASS);
-                       that.trigger(CHANGE);
                    } else {
                        that.select(that._target);
                    }
+                    that.trigger(CHANGE);
                 } else {
                    that.clearSelection();
                    that.select(that._target);
+                   that.trigger(CHANGE);
                 }
                 shouldPreventDefault = true;
             } else if (e.ctrlKey && key == keys.RIGHT) {
@@ -1355,7 +1357,8 @@ var __meta__ = {
             var sourceListBox = this.getSourceListBox();
 
             if (sourceListBox && item) {
-                $(sourceListBox.select($(item)));
+                sourceListBox.select($(item));
+                sourceListBox.selectable.trigger(CHANGE);
                 sourceListBox._scrollIntoView(item);
             }
         },

@@ -8,12 +8,17 @@ position: 2
 
 # Keyboard Navigation
 
-The keyboard navigation of the FlatColorPicker is always enabled.
+The {{site.product}} FlatColorPicker is a single-tab-stop component. The component implements inner navigation that you can activate by pressing the Enter key. When inner navigation is activated, the focus is trapped within the component. To return to the page navigation, press Esc. The keyboard navigation of the FlatColorPicker is always available.
 
-The Kendo UI FlatColorPicker supports the following keyboard shortcuts:
+The {{site.product_short}} FlatColorPicker supports the following keyboard shortcuts:
 
 | SHORTCUT						| DESCRIPTION				                                                        |
 |:---                 |:---                                                                                |
+| **When FlatColorPicker wrapper is focused** | - |                  |
+| `Tab` | Navigates to the next focusable element after the FlatColorPicker. |
+| `Shift`+`Tab` | Navigates to the previous focusable element before the FlatColorPicker. |
+| `Enter` | Activates the inner FlatColorPicker navigation. |
+| **When FlatColorPicker inner navigation is activated** | - |                                           |
 | `Space/Enter`             | When the Toggle format button is focused, changes the format between RGB and HEX. When a View button is focused, switches to Palette or Gradient view.|
 | `Tab`               | navigates to the next FlatColorPicker element.|
 | `Shift`+`Tab`    | navigates to the previous FlatColorPicker element.|

@@ -127,23 +127,41 @@ var __meta__ = {
             }
 
             selected = target.hasClass(selectedClass);
-            if (!multiple || !ctrlKey) {
-                that.clear();
-            }
 
             target = target.add(that.relatedTarget(target));
 
-            if (shiftKey) {
-                that.selectRange(that._firstSelectee(), target, e);
-            } else {
+            if (!multiple) {
                 if (selected && ctrlKey) {
                     that._unselect(target);
                     that._notify(CHANGE, e);
-                } else {
+                } else if (!selected) {
+                    that.clear();
                     that.value(target, e);
+                    that._notify(CHANGE, e);
                 }
+            } else {
+                if (shiftKey) {
+                    if (!that._lastRange || !compareElements(that._lastRange, target)) {
+                        that.selectRange(that._firstSelectee(), target, e);
+                        that._notify(CHANGE, e);
+                    }
+                    that._lastRange = target;
+                } else {
+                    that._lastRange = null;
+                    if (selected && ctrlKey) {
+                        that._unselect(target);
+                        that._notify(CHANGE, e);
+                    } else if (ctrlKey) {
+                        that.value(target, e);
+                        that._notify(CHANGE, e);
+                    } else if (!selected || that.value().length > 1) {
+                        that.clear();
+                        that.value(target, e);
+                        that._notify(CHANGE, e);
+                    }
 
-                that._lastActive = that._downTarget = target;
+                    that._lastActive = that._downTarget = target;
+                }
             }
         },
 
@@ -235,7 +253,11 @@ var __meta__ = {
                 }
             }
 
-            that.value(target, e);
+            if (!that._lastRange || !compareElements(that._lastRange, target)) {
+                that.value(target, e);
+                that._notify(CHANGE, e);
+            }
+            that._lastRange = target;
             that._lastActive = that._downTarget;
             that._items = null;
         },
@@ -304,7 +326,7 @@ var __meta__ = {
             return collision;
         },
 
-        value: function(val, e) {
+        value: function(val) {
             var that = this,
                 selectElement = that._selectElement.bind(that);
 
@@ -313,7 +335,6 @@ var __meta__ = {
                     selectElement(this);
                 });
 
-                that._notify(CHANGE, e);
                 return;
             }
 
@@ -425,7 +446,7 @@ var __meta__ = {
             this._unselect(items);
         },
 
-        selectRange: function(start, end, e) {
+        selectRange: function(start, end) {
             var that = this,
                 idx,
                 tmp,
@@ -455,10 +476,8 @@ var __meta__ = {
             }
 
             for (idx = start; idx <= end; idx ++ ) {
-                that._selectElement(items[idx]);
+                that._selectElement(items[idx], true);
             }
-
-            that._notify(CHANGE, e);
         },
 
         destroy: function() {
@@ -482,6 +501,21 @@ var __meta__ = {
             cell: asLowerString && asLowerString.indexOf("cell") > -1
         };
     };
+
+    function compareElements(element, toCompare) {
+
+        if (element.length !== toCompare.length) {
+            return false;
+        }
+
+        for (var i = 0; i < element.length; i++) {
+            if (element[i] !== toCompare[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     function collision(element, position) {
         if (!element.is(":visible")) {

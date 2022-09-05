@@ -12,6 +12,8 @@ The column menu allows users to quickly access column-related operations like so
 
 To enable the column menu, use the `ColumnMenu(true)` method. As a result, the column headers of the Grid render a column menu, which allows the user to sort, filter, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/{{site.platform}}/grid/column-menu).
 
+The Grid also provides the option to set this property on individual Column level. You can disable the menu for a specific column by setting it to `.ColumnMenu(false)`.
+
 ## Sort
 
 The column menu allows you to control the visibility of each Grid column. For this purpose, the column menu renders a child column menu with a checkbox for each Grid column.

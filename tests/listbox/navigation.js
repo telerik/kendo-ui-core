@@ -47,6 +47,7 @@
 
         it("enabled tool should be focusable", function() {
             listA.select(listA.items().first());
+            listA._onSelect();
 
             var tool = getToolElement(listA, MOVE_DOWN);
 

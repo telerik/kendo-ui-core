@@ -150,7 +150,8 @@ var __meta__ = {
                 element.on(CLICK, WEEKCOLUMNSELECTOR, function(e) {
                         var first = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).first(),
                             last = that.selectable._lastActive = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).last();
-                        that.selectable.selectRange(first, last, { event: e });
+                        that.selectable.selectRange(first, last);
+                        that.selectable.trigger(CHANGE, { event: e });
                         that._current = that._value = toDateObject(last.find("a"));
                         that._setCurrent(that._current);
                 });
@@ -930,11 +931,11 @@ var __meta__ = {
 
             if ($(that._cell[0]).hasClass(SELECTED)) {
                 that.selectable._unselect($(that._cell[0]));
-                that.selectable.trigger(CHANGE, { event: event });
             }
             else {
-                that.selectable.value($(that._cell[0]), { event: event });
+                that.selectable.value($(that._cell[0]));
             }
+            that.selectable.trigger(CHANGE, { event: event });
         },
 
         _nextNavigatable: function(currentValue, value) {

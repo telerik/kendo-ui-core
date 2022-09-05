@@ -571,6 +571,7 @@ var __meta__ = {
                             }
 
                             that.selectable.value(current);
+                            that.trigger(CHANGE);
                         }
                     });
                 }
@@ -820,7 +821,6 @@ var __meta__ = {
         clearSelection: function() {
             var that = this;
             that.selectable.clear();
-            that.trigger(CHANGE);
         },
 
         select: function(items) {

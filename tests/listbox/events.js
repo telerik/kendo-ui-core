@@ -25,6 +25,7 @@
             var items = listbox.items();
             var dataItem = listbox.dataItem(item);
             listbox.select(item);
+            listbox._onSelect();
 
             clickRemoveButton(listbox);
 
@@ -41,6 +42,7 @@
             });
             var removeSpy = spy(listbox, REMOVE);
             listbox.select(listbox.items());
+            listbox._onSelect();
 
             clickRemoveButton(listbox);
 
@@ -58,6 +60,7 @@
             var item = listbox.items().eq(0);
             var itemsLength = listbox.items().length;
             listbox.select(item);
+            listbox._onSelect();
 
             clickRemoveButton(listbox);
 
@@ -69,6 +72,7 @@
             var called = false;
             listbox = createListBoxWithToolbar();
             listbox.select(listbox.items().eq(0));
+            listbox._onSelect();
             listbox.bind(CHANGE, function() {
                 called = true;
             });
@@ -82,6 +86,7 @@
             var called = false;
             listbox = createListBoxWithToolbar();
             listbox.select(listbox.items());
+            listbox._onSelect();
             listbox.bind(CHANGE, function() {
                 called = true;
             });
@@ -107,6 +112,7 @@
             var item = listbox.items().eq(0);
             var dataItem = getDataItem(listbox, item);
             listbox.select(item);
+            listbox._onSelect();
 
             clickMoveDownButton(listbox);
 
@@ -125,6 +131,7 @@
             var item2 = listbox.items().eq(1);
             var item3 = listbox.items().eq(2);
             listbox.select(item2.add(item3));
+            listbox._onSelect();
 
             clickMoveDownButton(listbox);
 
@@ -142,6 +149,7 @@
             var item = listbox.items().eq(0);
             var itemsLength = listbox.items().length;
             listbox.select(item);
+            listbox._onSelect();
 
             clickMoveDownButton(listbox);
 
@@ -165,6 +173,7 @@
             var item = listbox.items().eq(1);
             var dataItem = getDataItem(listbox, item);
             listbox.select(item);
+            listbox._onSelect();
 
             clickMoveUpButton(listbox);
 
@@ -183,6 +192,7 @@
             var item2 = listbox.items().eq(1);
             var item3 = listbox.items().eq(2);
             listbox.select(item2.add(item3));
+            listbox._onSelect();
 
             clickMoveUpButton(listbox);
 
@@ -200,6 +210,7 @@
             var item = listbox.items().eq(1);
             var itemsLength = listbox.items().length;
             listbox.select(item);
+            listbox._onSelect();
 
             clickMoveUpButton(listbox);
 
@@ -239,6 +250,7 @@
             var item = listbox1.items().eq(0);
             var dataItem = listbox1.dataItem(item);
             listbox1.select(item);
+            listbox1._onSelect();
 
             clickTransferToButton(listbox1);
 
@@ -253,7 +265,7 @@
             var item = listbox1.items().eq(0);
             var dataItem = listbox1.dataItem(item);
             listbox1.select(item);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             equalDataArrays(args.dataItems, [dataItem]);
@@ -268,7 +280,7 @@
             var item2 = listbox1.items().eq(1);
             var item3 = listbox1.items().eq(2);
             listbox1.select(item2.add(item3));
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(calls, 1);
@@ -282,7 +294,7 @@
             var item2 = listbox1.items().eq(1);
             var item3 = listbox1.items().eq(2);
             listbox1.select(item2.add(item3));
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(calls, 1);
@@ -297,7 +309,7 @@
             var item = listbox1.items().eq(0);
             var itemsLength = listbox1.items().length;
             listbox1.select(item);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(args.isDefaultPrevented(), true);
@@ -314,7 +326,7 @@
             var item = listbox1.items().eq(0);
             var itemsLength = listbox1.items().length;
             listbox1.select(item);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(args.isDefaultPrevented(), true);
@@ -328,7 +340,7 @@
             });
             var item = listbox1.items().eq(0);
             listbox1.select(item);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(listbox1.select().length, 1);
@@ -338,6 +350,7 @@
         it("transferTo action should trigger a change event of source listbox", function() {
             var called = false;
             listbox1.select(listbox1.items().eq(0));
+            listbox1._onSelect();
             listbox1.bind(CHANGE, function(e) {
                 called = true;
             });
@@ -388,7 +401,7 @@
             var item = listbox2.items().eq(0);
             var dataItem = listbox2.dataItem(item);
             listbox2.select(item);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             equalDataArrays(args.dataItems, [dataItem]);
@@ -402,7 +415,7 @@
             var item = listbox2.items().eq(0);
             var dataItem = listbox2.dataItem(item);
             listbox2.select(item);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             equalDataArrays(args.dataItems, [dataItem]);
@@ -417,7 +430,7 @@
             var item2 = listbox2.items().eq(1);
             var item3 = listbox2.items().eq(2);
             listbox2.select(item2.add(item3));
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(calls, 1);
@@ -431,7 +444,7 @@
             var item2 = listbox2.items().eq(1);
             var item3 = listbox2.items().eq(2);
             listbox2.select(item2.add(item3));
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(calls, 1);
@@ -446,7 +459,7 @@
             var item = listbox2.items().eq(0);
             var itemsLength = listbox2.items().length;
             listbox2.select(item);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(args.isDefaultPrevented(), true);
@@ -463,7 +476,7 @@
             var item = listbox2.items().eq(0);
             var itemsLength = listbox2.items().length;
             listbox2.select(item);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(args.isDefaultPrevented(), true);
@@ -477,7 +490,7 @@
             });
             var item = listbox2.items().eq(0);
             listbox2.select(item);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(listbox2.select().length, 1);
@@ -487,6 +500,7 @@
         it("transferFrom action should trigger a change event of source listbox", function() {
             var called = false;
             listbox2.select(listbox2.items().eq(0));
+            listbox2._onSelect();
             listbox2.bind(CHANGE, function(e) {
                 called = true;
             });

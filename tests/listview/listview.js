@@ -353,7 +353,7 @@
             assert.isOk(!item.hasClass("k-selected"));
         });
 
-        it("clearSelection triggers change event", function() {
+        it("clearSelection does not trigger change event", function() {
             var triggered = false,
                 listView = setup({
                     selectable: true,
@@ -366,7 +366,7 @@
 
             listView.clearSelection();
 
-            assert.isOk(triggered);
+            assert.isNotOk(triggered);
         });
 
         it("resetting dataSource detaches the previouse events", function() {

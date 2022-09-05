@@ -158,7 +158,7 @@
         it("tablist role is added to the wrapper", function() {
             var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
 
-            assert.equal(tabstrip.element.attr("role"), "tablist");
+            assert.equal(tabstrip.tabGroup.attr("role"), "tablist");
         });
 
         it("tab role is set to items", function() {
@@ -184,7 +184,7 @@
                 tabPosition: "left"
             }).data("kendoTabStrip");
 
-            assert.equal(tabstrip.element.attr("aria-orientation"), "vertical");
+            assert.equal(tabstrip.tabGroup.attr("aria-orientation"), "vertical");
         });
 
         it("tabpanel role is set to the content items", function() {
@@ -338,42 +338,6 @@
             assert.equal(div.find("li[aria-selected=true]").text(), "foo");
         });
 
-        it("aria-expanded false is added to the content ", function() {
-            div.kendoTabStrip({
-                dataTextField: "text",
-                dataContentField: "content",
-                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
-            });
-
-            assert.equal(div.find("div[aria-expanded=false]").length, 2);
-        });
-
-        it("aria-expanded is added to the active tab", function() {
-            div.kendoTabStrip({
-                dataTextField: "text",
-                dataContentField: "content",
-                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
-            });
-
-            div.data("kendoTabStrip").select(0);
-
-            assert.equal(div.find("div[aria-expanded=true]").text(), "foo content");
-        });
-
-        it("aria-expanded false is added to the non active content when created from html", function() {
-            div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                .kendoTabStrip();
-
-            assert.equal(div.find("div[aria-expanded=false]").length, 2);
-        });
-
-        it("aria-expanded is added to the active content when created from html", function() {
-            div = $('<div id="test"><ul><li class="k-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                .kendoTabStrip();
-
-            assert.equal(div.find("div[aria-expanded=true]").text(), "foo content");
-        });
-
         it("preserves the id of the LI elements", function() {
             div = $("<div><ul id='test'><li id='custom' class='k-active'>Test</li><li>Test2</li></ul></div>");
 
@@ -385,16 +349,6 @@
             var li = tabstrip.element.find(".k-active");
 
             assert.equal(li.attr("id"), "custom");
-        });
-
-        it("uses id of the LI element for the aria-activedescendant", function() {
-            div = $("<div><ul id='test'><li id='custom' class='k-active'>Test</li><li>Test2</li></ul></div>");
-            var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
-
-            tabstrip.select("li:last");
-            tabstrip.select("li:first");
-
-            assert.equal(tabstrip.element.attr("aria-activedescendant"), "custom");
         });
 
         it("disabled attribute renders aria-disabled", function() {

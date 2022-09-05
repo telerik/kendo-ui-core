@@ -6211,6 +6211,7 @@ declare namespace kendo.ui {
         headerAttributes?: any;
         headerTemplate?: string|Function | undefined;
         hidden?: boolean | undefined;
+        hideOnGroup?: boolean | undefined;
         locked?: boolean | undefined;
         lockable?: boolean | undefined;
         media?: string | undefined;
@@ -6225,6 +6226,7 @@ declare namespace kendo.ui {
         width?: string|number | undefined;
         values?: any;
         menu?: boolean | undefined;
+        columnMenu?: boolean | undefined;
     }
 
     interface GridEditable {

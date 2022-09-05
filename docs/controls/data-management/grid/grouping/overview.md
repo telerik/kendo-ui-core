@@ -69,6 +69,12 @@ When you use grouping with paging, paging occurs before grouping. As a result:
 
 To enable the Grid to execute grouping before paging, group the whole data source. In this case, however, the performance of the Grid will be reduced.
 
+## Hiding Grouped Column
+
+As of R3 2022, the Kendo UI Grid enables the developer to hide grouped columns from the Grid. This feature prevents the duplication of data in both the Grid and the group header.
+
+To allow automatic hiding of a grouped column, set the [`columns.hideOnGroup`](/api/javascript/ui/grid/configuration/columns.hideongroup property to **true**.
+
 ## KB Articles on Grouping
 
 * [Enable Grouping for Columns Bound to Complex Object]({% slug enable-operations-for-object-column %})

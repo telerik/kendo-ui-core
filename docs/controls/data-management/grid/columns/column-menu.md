@@ -43,7 +43,7 @@ The `columnMenu` configuration setting accepts a `columns.groups` array that ena
     }
 ```
 
-# Column Menu Types
+## Column Menu Types
 
 As of R1 2021 version of the Kendo UI suite, the Grid widget introduces the `modern` render mode that aims to deliver a fresh look and feel. It aims to enhance the existing rendering and deliver a fresh and modern look and feel. 
 
@@ -56,6 +56,12 @@ By default, the column menu of the Grid is initialized in the `classic` render m
         }
     });
 ```
+
+## Disabling Column Menu for Specific Columns
+
+As of R3 2022, the Kendo UI Grid enables the developer to disable the columnMenu for specific columns.
+
+To take advantage of this feature, use the [`columns.columnMenu`](/api/javascript/ui/grid/configuration/columns.columnMenu) property.
 
 ## KB Articles on Column Menu
 

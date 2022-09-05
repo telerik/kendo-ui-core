@@ -24,6 +24,7 @@ Bound columns support many settings and amongst the most used are the following 
 * Media
 * MinScreenWidth
 * MinResizableWidth
+* HideOnGroup - specifies whether the column/field that is used to group the data in the Grid should be hidden from the displayed columns. By default, it is set to `false`. If set to `true` the column will be hidden when the Grid is groupd via user interaction. The column will be displayed again if interaction to ungroup by it is performed.
 
 ## For Functionality
 
