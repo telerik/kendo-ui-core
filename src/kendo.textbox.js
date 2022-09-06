@@ -130,12 +130,19 @@ var __meta__ = {
         setOptions: function(options) {
             this.destroy();
 
-            this.element.unwrap();
-            if (this._floatingLabelContainer) {
+            if (this._inputLabel) {
                 this._inputLabel.remove();
                 this._inputLabel = null;
+            }
+
+            if (this._floatingLabelContainer) {
+                this.floatingLabel.destroy();
+                this.floatingLabel = null;
+                this.element.unwrap();
                 this.element.unwrap();
                 this._floatingLabelContainer = null;
+            } else {
+                this.element.unwrap();
             }
 
             kendo.deepExtend(this.options, options);

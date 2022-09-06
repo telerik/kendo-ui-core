@@ -27,6 +27,14 @@
             assert.equal(input.attr("disabled"), undefined);
         });
 
+        it("setOptions does not duplicate labels", function() {
+            var textbox = new TextBox(input, { label: "Set name" });
+
+            textbox.setOptions({});
+
+            assert.equal($(".k-input-label").length, 1);
+        });
+
         it("enable(false) removes readonly attribute and no-click class", function() {
             var textbox = input.kendoTextBox().data("kendoTextBox");
 
