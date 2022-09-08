@@ -11,7 +11,7 @@ position: 10
 
 Enhance existing {{ site.framework }} applications with Telerik UI Components such as [Grid, Chart, DropDownList, and others.]{% if site.core %}(https://demos.telerik.com/aspnet-core){% else %}(https://demos.telerik.com/aspnet-mvc){% endif %} with just a few mouse clicks.
 
-The **Convert Project Wizard** turns an existing {% if site.core %}ASP.NET Core{% else %}ASP.NET MVC 4 or 5{% endif %} app into a Telerik UI for ASP.NET MVC app&mdash;an application that is ready to use the Telerik UI components. The wizard handles the setup of NuGet packages and client-side resources for you. Once complete, you can directly reference a specific release version of the {{ site.product }} components in your app. This allows you to start using the Telerik UI components without additional manual configuration.
+The **Convert Project Wizard** turns an existing {% if site.core %}ASP.NET Core{% else %}ASP.NET MVC 5{% endif %} app into a Telerik UI for ASP.NET MVC app&mdash;an application that is ready to use the Telerik UI components. The wizard handles the setup of NuGet packages and client-side resources for you. Once complete, you can directly reference a specific release version of the {{ site.product }} components in your app. This allows you to start using the Telerik UI components without additional manual configuration.
 
 {% if site.core %}
 > The Convert Project Wizard does not support converting Razor Pages projects and projects with .Net version 5.

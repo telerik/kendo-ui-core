@@ -1176,6 +1176,26 @@ Specifies the url to navigate to.
         });
     </script>
 
+### navigateOnTab `Boolean` *(default: false)*
+
+If set to `true` this configuration option would enable Tab-based navigation among ToolBar items.
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            navigateOnTab: true,
+            items: [
+                { type: "button", text: "Button 1" },
+                { type: "button", text: "Button 2" },
+                { type: "button", text: "Button 3" },
+                { type: "button", text: "Button 4" }
+            ]
+        });
+    </script>
+
 ## Methods
 
 ### add

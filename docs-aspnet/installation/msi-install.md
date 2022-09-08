@@ -86,11 +86,8 @@ You will find the following in the {{ site.product }} installation directory:
 * `wrappers\aspnetcore\EditorTemplates\razor`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
 {% else %}
 * `Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables the generation of the Kendo UI MVC wrapper widget declarations inside Visual Studio projects.
-* `wrappers\aspnetmvc\Binaries\MVC3`&mdash;The assemblies for the ASP.NET MVC 3 applications.
-* `wrappers\aspnetmvc\Binaries\MVC4`&mdash;The assemblies for the ASP.NET MVC 4 applications.
 * `wrappers\aspnetmvc\Binaries\MVC5`&mdash;The assemblies for the ASP.NET MVC 5 applications.
 * `wrappers\aspnetmvc\EditorTemplates`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
-* `wrappers\aspnetmvc\Examples\MVC4`&mdash;The ASP.NET MVC 4 sample application.
 * `wrappers\aspnetmvc\Examples\MVC5`&mdash;The ASP.NET MVC 5 sample application.
 {% endif %}
 
@@ -119,19 +116,12 @@ The sample application project for Visual Studio contains the following items:
 * `wwwroot`&mdash;The web application root with the `App_Data` folder, which contains the LocalDB sample database and other client resources such as libraries, scripts, styles, and others.
 
 {% else %}
-Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC application, which is available in the following versions:
-
-* The ASP.NET MVC 4 application.
-* The ASP.NET MVC 5 application.
+Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC 5 application.
 
 To run the sample application:
 
 1. Navigate to the installation directory of Telerik UI for ASP.NET MVC.
-1. Open the sample Visual Studio Solution:
-
-    * To run the ASP.NET MVC 4 version, open `wrappers\aspnetmvc\Examples\MVC4\Kendo.Mvc.Examples.sln`.
-    * To run the ASP.NET MVC 5 version, open `wrappers\aspnetmvc\Examples\MVC5\Kendo.Mvc.Examples.sln`.
-
+1. Open the `wrappers\aspnetmvc\Examples\MVC5\Kendo.Mvc.Examples.sln` solution file in Visual Studio:
 1. Install Microsoft .NET Framework version 4.6.2 or later.
 1. Press `CTRL+F5` to build and run the application.
 1. A browser loads the start page of the sample application.

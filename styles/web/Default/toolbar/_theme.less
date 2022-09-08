@@ -6,4 +6,13 @@
         @toolbar-gradient
     );
     .box-shadow( @toolbar-shadow );
+
+    .k-toolbar-item {
+        &:focus,
+        &.k-focus {
+            .box-shadow(@button-focused-shadow);
+            text-decoration: none;
+            outline: 0;
+        }
+    }
 }

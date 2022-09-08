@@ -56,8 +56,8 @@ Install {{ site.product }} and set up your project by using either of the follow
 
 To use the scaffolding template, your development environment must meet the following requirements:
 
-* Visual Studio 2013 with Update 2 or later
-* ASP.NET MVC 4 or ASP.NET MVC 5
+* Visual Studio 2015 or later
+* ASP.NET MVC 5
 * C#
 * Entity Framework Data Model
 
@@ -97,6 +97,4 @@ To initially set up Scaffolder Visual Studio extension:
 {% else %}
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Using Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug gettingstarted_aspnetmvc %})
-* [Using Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
-* [Using Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
 {% endif %}

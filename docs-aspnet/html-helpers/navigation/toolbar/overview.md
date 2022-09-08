@@ -172,6 +172,10 @@ The following example demonstrates the basic configuration of the ToolBar.
 
 ## Functionality and Features
 
+The ToolBar component provides the .NavigateOnTab() property which can be used to control [its Keyboard Navigation](https://demos.telerik.com/{{ site.platform }}/toolbar/keyboard-navigation).
+
+For more advanced configuration options you can check:
+
 * [Spacer]({% slug spacer_toolbar_aspnetcore %})
 * [Manual closing]({% slug htmlhelpers_toolbar_popup_manual_close_aspnetcore %})
 * [Using FontAwesome icons]({% slug htmlhelpers_use_fontawesome_icons_aspnetcore %})

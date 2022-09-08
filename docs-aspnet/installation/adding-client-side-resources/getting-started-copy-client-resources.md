@@ -47,12 +47,13 @@ Clients with a commercial license can use the [Custom Download Builder tool](htt
 {% endif %}
 ## Next Steps
 
+* [Setting Up the License File]({% slug using_license_code %})
 * [Using Local Files to Add Client-Side Resources]({% slug using_local_client_side_resources %})
 * [Using CDN to Add Client-Side Resources]({% slug cdnservices_core %})
 {% if site.core %}
-* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug custombundles_core %})
 * [Using LibMan to Add Client-Side Resources]({% slug using_libman %})
 {% endif %}
+* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug custombundles_core %})
 
 ## See Also
 

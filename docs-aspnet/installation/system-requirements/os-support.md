@@ -52,13 +52,16 @@ To create .NET Core applications, you need to install the `.NET Core SDK`. Follo
 For a full list of the `.NET Core` requirements, see [.NET Core dependencies and requirements](https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?tabs=netcore31&pivots=os-windows).
 
 {% else %}
-{{ site.product }} supports Visual Studio 2012 and later. The supported development environments also include:
+{{ site.product }} supports Visual Studio 2013 and later. The supported development environments also include:
 
-* [.NET Framework v3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
-* [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later.
+* [.NET Framework v4.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
+* [ASP.NET MVC 5](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started).
 * [IIS](https://www.iis.net/) 5 and later.
-* [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx)  and [VB.NET](http://www.tutorialspoint.com/vb.net/).
-* [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later.
+* [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx) and [VB.NET](http://www.tutorialspoint.com/vb.net/).
+* [SharePoint 2013](https://docs.microsoft.com/en-us/sharepoint/) and later.
+
+>As of the R3 2022 release, MVC 3 and MVC 4 are no longer supported by {{ site.product }}.
+
 {% endif %}
 
 ## Web Browsers Support

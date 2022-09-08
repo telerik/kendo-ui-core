@@ -105,7 +105,7 @@
             container.width(150);
             toolbar.resize();
 
-            var button = toolbar.element.find(".k-button").last();
+            var button = toolbar.element.find(".k-button").not(".k-overflow-anchor").last();
 
             assert.isOk(button.is(":hidden"));
 

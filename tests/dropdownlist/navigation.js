@@ -205,7 +205,9 @@
             var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
             dropdownlist.select(1);
-            dropdownlist.wrapper.focus().press(keys.HOME);
+            dropdownlist.wrapper.focus();
+            dropdownlist.open();
+            dropdownlist.wrapper.press(keys.HOME);
 
             assert.isOk(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
             assert.equal(dropdownlist.text(), data[0]);
@@ -219,7 +221,9 @@
             dropdownlist.dataSource.read();
 
             dropdownlist.select(0);
-            dropdownlist.wrapper.focus().press(keys.END);
+            dropdownlist.wrapper.focus();
+            dropdownlist.open();
+            dropdownlist.wrapper.press(keys.END);
 
             assert.isOk(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
             assert.equal(dropdownlist.text(), data[1]);
@@ -669,7 +673,9 @@
                 index: 1
             });
 
-            dropdownlist.wrapper.focus().press(keys.HOME);
+            dropdownlist.wrapper.focus();
+            dropdownlist.open();
+            dropdownlist.wrapper.press(keys.HOME);
 
             var current = dropdownlist.current();
 
@@ -684,7 +690,9 @@
                 optionLabel: "Any"
             });
 
-            dropdownlist.wrapper.focus().press(keys.END);
+            dropdownlist.wrapper.focus();
+            dropdownlist.open();
+            dropdownlist.wrapper.press(keys.END);
 
             var optionLabel = dropdownlist.optionLabel;
             var current = dropdownlist.current();
