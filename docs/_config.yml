@@ -631,6 +631,8 @@ navigation:
         title: "RadioGroup"
     "*rating":
         title: "Rating"
+    "*signature":
+        title: "Signature"
     "*panelbar":
         title: "PanelBar"
     "*pdfviewer":
@@ -1863,6 +1865,12 @@ defaults:
 
 -
     scope:
+        path: "controls/editors/signature"
+    values:
+        component: "signature"
+
+-
+    scope:
         path: "controls/diagrams-and-maps/orgchart"
     values:
         component: "orgchart"
@@ -2160,6 +2168,7 @@ intro_columns:
       "RadioGroup": "overview_kendoui_radiogroup_widget"
       "RangeSlider": "overview_kendoui_rangeslider_widget"
       "Rating": "overview_kendoui_rating_widget"
+      "Signature": "overview_kendoui_signature_widget"
       "Slider": "overview_kendoui_slider_widget"
       "Switch": "overview_kendoui_switch_widget"
       "TextArea": "overview_kendoui_textarea_widget"

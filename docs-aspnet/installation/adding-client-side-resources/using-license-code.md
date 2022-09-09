@@ -57,12 +57,17 @@ To acquire a license file, generate it:
 
 ## Step 2: Add the License File
 
-To register the Kendo UI product, add the `kendo-ui-license.js` file in the root of the application or the main scripts folder. The following table shows the most common location where you can include it according to the application type.
+To register the Kendo UI product, add the `kendo-ui-license.js` file in the root of the application or the main scripts folder. The following table shows the most common location where you can include it in your application.
 
+{% if site.core %}
+|Type of Application|Common Locations
+|:---|:---
+|ASP.NET Core applications|<ul><li><code>./wwwroot</code></li><li><code>./wwwroot/scripts</code></li><li><code>./wwwroot/js</code></li></ul>
+{% else %}
 |Type of Application|Common Locations
 |:---|:---
 |ASP.NET MVC applications|<ul><li><code>./</code></li><li><code>./Scripts</code></li></ul>
-|ASP.NET Core applications|<ul><li><code>./wwwroot</code></li><li><code>./wwwroot/scripts</code></li><li><code>./wwwroot/js</code></li></ul>
+{% endif %}
 
 ## Step 3: Add a Reference to the License File
 

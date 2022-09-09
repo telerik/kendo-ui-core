@@ -299,6 +299,7 @@ Toolbar option accepts a Boolean value which indicates if the toolbar will be di
 The following list indicates the default tools:
 
 * `pager`
+* `zoomInOut`
 * `zoom`
 * `toggleSelection`
 * `search`
@@ -342,7 +343,7 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
         $("#pdf-viewer").kendoPDFViewer({
             toolbar: {
                 items: [
-                  { type: "zoom", zoomInOut: true, combobox: { zoomLevels: [50, 100, 200]}, command: "ZoomCommand"}
+                  { type: "zoom", combobox: { zoomLevels: [50, 100, 200]}, command: "ZoomCommand"}
                 ]
             }
         });

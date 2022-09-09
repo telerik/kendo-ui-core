@@ -13,7 +13,9 @@ Visual Studio Code snippets are templates that make it easier to enter repetitiv
 
 ## {{site.product}} Snippets
 
-The {{site.product}} Visual Studio Code Productivity Tools provide snippets for the components listed in the table below in both flavors&mdash;HTML Helpers and Tag Helpers. Type `tc`&mdash;short for Telerik UI for ASP.NET Core&mdash;or the name of component you wish to add.
+The [{{site.product}} Visual Studio Code Productivity Tools](https://marketplace.visualstudio.com/items?itemName=TelerikInc.aspnetcoretemplatewizard) provide snippets for the components listed in the table below in both flavors&mdash;HTML Helpers and Tag Helpers. Type `tc`&mdash;short for Telerik UI for ASP.NET Core&mdash;or the name of component you wish to add.
+
+You can access the code snippets pack by installing the [Telerik UI for ASP.NET Core Visual Studio Code productivity extension](https://marketplace.visualstudio.com/items?itemName=TelerikInc.aspnetcoretemplatewizard).  
 
 | Component | Html Helper snippet | TagHelper snippet |
 |--- | --- | --- |
