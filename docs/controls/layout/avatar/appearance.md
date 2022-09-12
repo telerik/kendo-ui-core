@@ -24,7 +24,7 @@ The available [`rounded`](/api/javascript/ui/avatar/configuration/rounded) value
 
 - "full" (default)—Renders a circle shape avatar.
 - "small"—Renders an avatar with small border radius.
-- "medium"—Renders an avatar with meduim border radius.
+- "medium"—Renders an avatar with medium border radius.
 - "large"—Renders an avatar with large border radius.
 - "none"—Renders an avatar with no border radius (square avatar).
 

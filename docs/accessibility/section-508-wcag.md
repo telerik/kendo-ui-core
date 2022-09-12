@@ -18,94 +18,94 @@ Applications built with components that adhere to these guidelines will not only
 
 The following table lists the Section 508 and WCAG 2.1 compliance levels of support for the Kendo UI widgets. 
 
-> The described level of compliance in the table below is achievable with the **HighContrast Less Theme.**
+> The described level of compliance in the table below is achievable with the **Ocean Blue Sass Swatch.**
 
 **Table 1: 508 and WCAG 2.1 compliance with Kendo UI widgets**
 
-|Component |508|WCAG 2.1|
+|Component |508|WCAG 2.1| Accessibility Example |
 |:---          |:---|:---  
-|ActionSheet   |Yes |AA |
-|AppBar	       |Yes |AA |
-|AutoComplete  |Yes |AA  |
-|Avatar        |Yes |AA  |
-|BarCode	   |Yes |AA |
-|BottomNavigation |Yes |AA |
-|Breadcrumb	   |Yes |AA  |
-|Button 	   |Yes |AA  |
-|ButtonGroup   |Yes |AA  |
-|Calendar	   |Yes |AA |
-|Captcha       |Yes |AA |
-|Charts        |Yes |AA |
-|Chat          |Yes |AA |
-|CheckBox      |Yes |AA |
-|CheckBoxGroup |Yes |AA |
-|ContextMenu   |Yes |AA |
-|ComboBox      |Yes |AA  |
-|ColorGradient |Yes |AA  |
-|ColorPalette  |Yes |AA  |
-|ColorPicker   |Yes |AA  |
-|DateInput	   |Yes |AA |
-|DatePicker	   |Yes |AA |
-|DateTimePicker|Yes |AA |
-|Diagram	   |Yes |AA |
-|Dialog	       |Yes |AA  |
-|Drawer	       |Yes |AA |
-|DropDownButton|Yes |AA |
-|DropDownList  |Yes |AA  |
-|DropDownTree* |Yes |AA  |
-|Editor        |Yes |AA  |
-|ExpansionPanel|Yes |AA |
-|FileManager   |Yes |AA |
-|Filter   |Yes |AA |
-|FlatColorPicker |Yes |AA |
-|FloatingActionButton |Yes |AA |
-|Form          |Yes |AA |
-|Gantt         |Yes |AA  |
-|Grid          |Yes |AA |
-|ImageEditor   |Yes |AA  |
-|Loader        |Yes |AА |
-|LinearGauge   |Yes |AA |
-|ListBox       |Yes |AA |
-|ListView	   |Yes |AA |
-|Map	       |Yes |AA |
-|MaskedTextbox |Yes |AA |
-|Menu          |Yes |AA |
-|MultiColumnComboBox |Yes |AA |
-|MultiSelect   |Yes |AA |
-|Notification  |Yes |AA  |
-|NumericTextbox|Yes |AA |
-|OrgChart	   |Yes |AA |
-|Pager         |Yes |AA |
-|PanelBar	   |Yes |AA |
-|PopOver	   |Yes |AA |
-|QRCode	   	   |Yes |AA |
-|RadialGauge   |Yes |AA |
-|RadioButton   |Yes |AA  |
-|RadioGroup    |Yes |AA |
-|Responsive Panel |Yes |AA |
-|ScrollView	   |Yes |AA |
-|Scheduler	   |Yes |AA |
-|Slider	       |Yes |AA |
-|Sortable	   |Yes |AA |
-|SplitButton   |Yes |AA |
-|Splitter      |Yes |AA |
-|Spreadsheet   |Yes |AA  |
-|Stepper	   |Yes |AA |
-|Switch        |Yes |AA  |
-|TabStrip	   |Yes |AA |
-|TaskBoard	   |Yes |AA |
-|TextArea	   |Yes |AA |
-|TextBox	   |Yes |AA |
-|TileLayout	   |Yes |AA  |
-|TimeLine	   |Yes |AA  |
-|TimePicker	   |Yes |AA |
-|ToolBar	   |Yes |AA  |
-|Tooltip	   |Yes |AA  |
-|TreeList	   |Yes |AA |
-|TreeView	   |Yes |AA  |
-|Upload 	   |Yes |AA  |
-|Window 	   |Yes |AA |
-|Wizard		   |Yes |AA |
+|ActionSheet   |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|AppBar	       |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/appbar)|
+|AutoComplete  |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/autocomplete)|
+|Avatar        |Yes |AA  | [Demo](https://demos.telerik.com/kendo-ui/accessibility/avatar)|
+|BarCode	   |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/barcode)|
+|BottomNavigation |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|Breadcrumb	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/breadcrumb)|
+|Button 	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/button)|
+|ButtonGroup   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/buttongroup)|
+|Calendar	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/calendar)|
+|Captcha       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/captcha)|
+|Charts        |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/chart)|
+|Chat          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/chat)|
+|CheckBox      |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/checkbox)|
+|CheckBoxGroup |Yes |AA |[Demo](hhttps://demos.telerik.com/kendo-ui/accessibility/checkboxgroup)|
+|ContextMenu   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/contextmenu)|
+|ComboBox      |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/combobox)|
+|ColorGradient |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorgradient)|
+|ColorPalette  |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpalette)|
+|ColorPicker   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpicker)|
+|DateInput	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|DatePicker	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|DateTimePicker|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|Diagram	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|Dialog	       |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|Drawer	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|DropDownButton|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dateinput)|
+|DropDownList  |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dropdownlist)|
+|DropDownTree* |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dropdowntree)|
+|Editor        |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/editor)|
+|ExpansionPanel|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/expansionpanel)|
+|FileManager   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/filemanager)|
+|Filter   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/filter)|
+|FlatColorPicker |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/flatcolorpicker)|
+|FloatingActionButton |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/floatingactionbutton)|
+|Form          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/form)|
+|Gantt         |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/gantt)|
+|Grid          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/grid)|
+|ImageEditor   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/imageeditor)|
+|Loader        |Yes |AА |[Demo](https://demos.telerik.com/kendo-ui/accessibility/loader)|
+|LinearGauge   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/lineargauge)|
+|ListBox       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/listbox)|
+|ListView	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/listview)|
+|Map	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/map)|
+|MaskedTextbox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/maskedtextbox)|
+|Menu          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/menu)|
+|MultiColumnComboBox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicolumncombobox)|
+|MultiSelect   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multiselect)|
+|Notification  |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/notification)|
+|NumericTextbox|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/numericTextbox)|
+|OrgChart	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/orgchart)|
+|Pager         |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/pager)|
+|PanelBar	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/panelbar)|
+|PopOver	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/popover)|
+|QRCode	   	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/qrcode)|
+|RadialGauge   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radialgauge)|
+|RadioButton   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radiobutton)|
+|RadioGroup    |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radiogroup)|
+|Responsive Panel |Yes |AA |n/a|
+|ScrollView	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scrollview)|
+|Scheduler	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scheduler)|
+|Slider	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/slider)|
+|Sortable	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/sortable)|
+|SplitButton   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/splitbutton)|
+|Splitter      |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/splitter)|
+|Spreadsheet   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/spreadsheet)|
+|Stepper	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/stepper)|
+|Switch        |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/switch)|
+|TabStrip	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/tabstrip)|
+|TaskBoard	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/taskboard)|
+|TextArea	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textarea)|
+|TextBox	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textbox)|
+|TileLayout	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/tilelayout)|
+|TimeLine	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/Ttmeline)|
+|TimePicker	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timepicker)|
+|ToolBar	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/toolbar)|
+|Tooltip	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/tooltip)|
+|TreeList	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/treeList)|
+|TreeView	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/treeView)|
+|Upload 	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/upload)|
+|Window 	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/window)|
+|Wizard		   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/wizard)|
 
 > The DropDownTree widget will be identified as not compliant to the WAI-ARIA spec when tested with static HTML analyzer if there is no selection in the widget and the `placeholder` configuration is not used. That is because the DropDownTree wrapper element, which has `role="listbox"` will not contain any `option` elements. That should be considered a known limitation in the widget. Detailed information on the scenario could be found in [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/6558#issuecomment-938449528).
 
@@ -160,6 +160,7 @@ The following example demonstrates how to specify a text for the week column hea
 
 ## See Also
 
+* [Kendo UI Accessibility Demos](https://demos.telerik.com/kendo-ui/accessibility)
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})

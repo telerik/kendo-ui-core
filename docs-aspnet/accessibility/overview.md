@@ -12,6 +12,8 @@ Websites and applications are accessible when they provide full control over the
 
 For the full list of components which support accessibility and keyboard navigation, refer to the article on [accessibility support by {{ site.product }}]({% slug compliance_accessibility %}).
 
+Refer to our [accessibility demos](https://demos.telerik.com/{{ site.platform }}/accessibility), where accessibility level and compliance of the {{ site.product }} components can be tested.
+
 ## Standards and Requirements
 
 Accessible websites and applications normally provide support for:
