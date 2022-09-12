@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2022.2.802
+// Type definitions for Kendo UI Professional v2022.3.913
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -9913,6 +9913,59 @@ declare namespace kendo.ui {
         page?: number | undefined;
     }
 
+    class Signature extends kendo.ui.Widget {
+
+        static fn: Signature;
+
+        options: SignatureOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Signature;
+
+        constructor(element: Element, options?: SignatureOptions);
+
+
+        close(): void;
+        destroy(): void;
+        enable(enable: boolean): void;
+        open(): void;
+        readonly(readonly: boolean): void;
+        reset(): void;
+        value(): string;
+        value(value: string): void;
+
+    }
+
+    interface SignatureOptions {
+        name?: string | undefined;
+        backgroundColor?: string | undefined;
+        color?: string | undefined;
+        enable?: boolean | undefined;
+        fillMode?: string | undefined;
+        height?: number | undefined;
+        hideLine?: boolean | undefined;
+        maximizable?: boolean | undefined;
+        popupScale?: number | undefined;
+        readonly?: boolean | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        smooth?: boolean | undefined;
+        strokeWidth?: number | undefined;
+        value?: string | undefined;
+        width?: number | undefined;
+        change?(e: SignatureEvent): void;
+        close?(e: SignatureEvent): void;
+        open?(e: SignatureEvent): void;
+    }
+    interface SignatureEvent {
+        sender: Signature;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
     class SkeletonContainer extends kendo.ui.Widget {
 
         static fn: SkeletonContainer;
@@ -11681,6 +11734,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         resizable?: boolean | undefined;
         items?: ToolBarItem[] | undefined;
+        navigateOnTab?: boolean | undefined;
         click?(e: ToolBarClickEvent): void;
         close?(e: ToolBarCloseEvent): void;
         open?(e: ToolBarOpenEvent): void;
@@ -25906,6 +25960,10 @@ interface JQuery {
     kendoScrollView(): JQuery;
     kendoScrollView(options: kendo.ui.ScrollViewOptions): JQuery;
     data(key: "kendoScrollView"): kendo.ui.ScrollView | undefined;
+
+    kendoSignature(): JQuery;
+    kendoSignature(options: kendo.ui.SignatureOptions): JQuery;
+    data(key: "kendoSignature"): kendo.ui.Signature | undefined;
 
     kendoSkeletonContainer(): JQuery;
     kendoSkeletonContainer(options: kendo.ui.SkeletonContainerOptions): JQuery;

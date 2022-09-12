@@ -12,6 +12,21 @@ This article lists the breaking or important changes in the 2022 releases of {{ 
 
 ## {{ site.product }} R3 2022
 
+**Selectable**
+
+As of the 2022 R3 release, the `Selectable` events mechanism is altered for a variety of the components. The `Change` event will now be fired only when Selection/Deselection is performed. Invoking the client-side API methods would not fire the event as well. 
+
+Below you can find a list of the impacted components:
+
+* `Grid`
+* `Calendar`
+* `MultiViewCalendar`
+* `ListBox`
+* `ListView`
+* `TreeList`
+* `FileManager`
+* `Gantt`
+
 **Badge**
 
 `Shape` property is replaced with `Rounded` and `Fill` property is now called `FillMode`.

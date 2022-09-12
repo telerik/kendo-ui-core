@@ -3,7 +3,7 @@ title: Using LibMan
 page_title: Using LibMan
 description: "Learn how to add the Kendo client-side web assets in a Telerik UI for ASP.NET Core project by using LibMan and WebPack."
 slug: using_libman
-position: 3
+position: 4
 ---
 
 # Adding Client-Side Resources through LibMan
@@ -33,6 +33,10 @@ To provide the client-side web assets by using LibMan:
     ```
 
     > This step uses unpkg to load the Kendo UI library distributed on NPM. The scripts in the NPM package are not usable in the browser. This requires you to use a bundler such as [WebPack](https://webpack.js.org/).
+
+1. Generate a license file by following the instructions in the [Using Script License File article]({% slug using_license_code %}).
+
+    > As of the R2 2022 release, the `@progress/kendo-ui` NPM package requires a [script license activation]({% slug using_license_code %}).
 
 1. Add the following files, containing the configurations provided below:
     * `webpack.config.js` and `package.json` files to the **wwwroot** folder of the application.
@@ -105,11 +109,12 @@ To provide the client-side web assets by using LibMan:
 
     The result of the bundling will be a `bundle.js` file output in the **wwwroot/dist/** folder.
 
-1. In the `_Layout.cshtml`, file add a reference to the desired theme and the bundled scripts:
+1. In the `_Layout.cshtml`, file add a reference to the desired theme, the bundled scripts, and the license file `kendo-ui-license.js`:
 
     ```_Layout.cshtml
         <link rel="stylesheet" href="~/lib/kendo-ui/2021.3.914/css/web/kendo.default-v2.css" />
         <script src="~/dist/bundle.js"></script>
+        <script src="./kendo-ui-license.js"></script>
     ```
 
 ## See Also

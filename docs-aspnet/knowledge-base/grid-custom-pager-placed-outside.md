@@ -1,3 +1,4 @@
+---
 title: Implement a custom Pager for a Telerik UI Grid
 description: An example on how to add a Pager with different custom functionalities and styles.
 type: how-to

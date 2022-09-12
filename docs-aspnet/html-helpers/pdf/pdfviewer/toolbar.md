@@ -19,6 +19,7 @@ The toolbar collection includes the following built-in tools:
 
 * `pager`
 * `zoom`
+* `zoomInOut`
 * `toggleSelection`
 * `search` 
 * `open` 
@@ -27,7 +28,7 @@ The toolbar collection includes the following built-in tools:
 
 > Running an Adblock extension in Chrome might treat the new browser tab for the print dialog as a potential ad and block it.
 
-The `zoom`, `toggleSelection`, `search` and `print` tools are available only with PDFjs processing.
+The `zoom`, `zoomInOut`, `toggleSelection`, `search` and `print` tools are available only with PDFjs processing.
 
 The following example demonstrates basic configuration options for the PDFViewer toolbar tools. You can also add `spacer` elements, in order to group a preferable set of tools. 
 
@@ -39,6 +40,7 @@ The following example demonstrates basic configuration options for the PDFViewer
                 items.Add().Name("pager");
                 items.Add().Name("spacer");
                 items.Add().Name("zoom");
+                items.Add().Name("zoomInOut");
                 items.Add().Name("toggleSelection");
                 items.Add().Name("search");
                 items.Add().Name("open");
@@ -59,6 +61,8 @@ The following example demonstrates basic configuration options for the PDFViewer
                 <pdfviewer-toolbar-item name="spacer">
                 </pdfviewer-toolbar-item>
                 <pdfviewer-toolbar-item name="zoom">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="zoomInOut">
                 </pdfviewer-toolbar-item>
                 <pdfviewer-toolbar-item name="toggleSelection">
                 </pdfviewer-toolbar-item>

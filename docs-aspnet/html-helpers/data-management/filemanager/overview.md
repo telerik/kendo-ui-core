@@ -28,6 +28,8 @@ The Telerik UI FileManager HtmlHelper for {{ site.framework }} is a server-side 
 
 The following example demonstrates the initialization of the FileManager with remote binding. The file structure is served as JSON though the FileManager DataSource object.
 
+> As of the 2022 R3 release, the `Selectable` mechanism is altered. The `Change` event will now be fired only when Selection/Deselection is performed.
+
 ```HtmlHelper
    @(Html.Kendo().FileManager()
     .Name("filemanager")

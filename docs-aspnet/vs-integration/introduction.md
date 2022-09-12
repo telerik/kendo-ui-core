@@ -84,7 +84,7 @@ When the download is complete, navigate to the download folder and click on the 
     ![Visual Studio 2017 Extensions menu](../vs-integration/images/create-project-core-vs2017.png)
 {% else %}
     ![Visual Studio with no selected projects](../vs-integration/images/images-mvc/create_menu.png)
-    ![The selected project in VS is a standard ASP.NET MVC 4 or 5 web application](../vs-integration/images/images-mvc/convert_menu.png)
+    ![The selected project in VS is a standard ASP.NET MVC 5 web application](../vs-integration/images/images-mvc/convert_menu.png)
 {% endif %}
 
 - To access the template projects, go to **File** > **New** > **Project** and click on **Installed** > **Telerik** or search for `Telerik` in the search textbox on the right.
@@ -101,7 +101,7 @@ The following additional project templates are also available:
 * [C# Telerik ASP.NET Core MVC application](https://docs.telerik.com/aspnet-core/introduction)
 * [Kendo UI ASP.NET MVC 5 application]({% slug newprojectwizard_visualstudio_kendoui %})
 
-The ASP.NET MVC 4 project wizard also contains the Telerik UI for ASP.NET MVC web application.
+The ASP.NET project wizard also contains the Telerik UI for ASP.NET MVC web application.
 
 ![The MVC wizard](../vs-integration/images/images-mvc/mvc_wizard.png)
 {% endif %}
