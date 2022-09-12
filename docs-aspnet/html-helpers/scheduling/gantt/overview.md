@@ -22,6 +22,8 @@ The Gantt displays a set of tasks and dependencies which are used to visualize p
 * [Demo page for the Gantt TagHelper](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
 {% endif %}
 
+> As of the 2022 R3 release, the `Selectable` mechanism is altered. The [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GanttEventBuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
+
 ## Initializing the Gantt
 
 The following example demonstrates how to define the Gantt.

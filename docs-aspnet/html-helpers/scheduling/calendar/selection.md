@@ -16,6 +16,8 @@ For a runnable example, refer to [the demo on multiple selection in the Calendar
 
 By default, the Calendar enables the user to select a single date by using the mouse or the keyboard.
 
+> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/CalendarEventBuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
+
 ## Multiple Date Selection
 
 As of the 2017 R3 release, the Calendar allows you to implement the multiple date selection by using the `selectable` configuration property.

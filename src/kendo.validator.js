@@ -465,7 +465,7 @@ var __meta__ = {
                         widgetInstance = kendo.widgetInstance(input.closest(".k-checkbox-list"));
                     }
 
-                    if (widgetInstance && widgetInstance.wrapper && widgetInstance.element !== widgetInstance.wrapper) {
+                    if (widgetInstance && widgetInstance.wrapper && (widgetInstance.element !== widgetInstance.wrapper || widgetInstance.options.name == "Signature")) {
                         messageLabel.insertAfter(widgetInstance.wrapper);
                     } else if (parentElement && parentElement.nodeName === "LABEL") {
                         // Input inside label

@@ -10,6 +10,8 @@ position: 8
 
 By default, the selection functionality of the Telerik UI Grid for {{ site.framework }} is disabled.
 
+> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
+
 ## Getting Started
 
 To control the selection in the Grid, use the `Selectable` property.

@@ -1186,10 +1186,11 @@
 @kendo-signature-maximized-width: 750px;
 @kendo-signature-maximized-height: 252px;
 
-@kendo-signature-padding: @spacing[1];
+@kendo-signature-padding-x: @spacing[1];
+@kendo-signature-padding-y: @kendo-signature-padding-x;
 @kendo-signature-line-width: 1px;
 @kendo-signature-line-style: dashed;
-@kendo-signature-line-size: ~"calc( 100% - 2 * @{input-padding-x} )";
+@kendo-signature-line-size: ~"calc( 100% - 2 * @{kendo-signature-padding-x} )";
 @kendo-signature-line-bottom-offset: 33%;
 
 

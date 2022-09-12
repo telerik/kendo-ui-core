@@ -11,6 +11,8 @@ position: 5
 
 By default, the ListBox is set into a single-selection mode.
 
+> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/ListBoxEventBuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
+
 ## Enabling Multiple Selection
 
 To enable the multiple-selection mode of the ListBox, add `ListBoxSelectable.Multiple` to its settings. When selected, multiple selected items move together, that is, the selected items are transferred to another Telerik UI ListBox together or reordered as a set among other items.
