@@ -8,6 +8,8 @@ position: 1
 
 # Accessibility Overview
 
+Refer to our [accessibility demos](https://demos.telerik.com/kendo-ui/accessibility), where accessibility level and compliance of the Kendo UI components can be tested.
+
 In terms of web components, accessibility means that the websites and applications provide full control over their features by enabling users with disabilities to access them through assistive technologies such as screen readers.
 
 Assistive technologies work well for the most basic and text-driven websites and applications. However, the Web is dynamically changing and is now well beyond the realm of text-based experiences. As a result, assistive technologies struggle to keep up.

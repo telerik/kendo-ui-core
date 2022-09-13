@@ -780,27 +780,24 @@ Sets the DataSource of an existing ScrollView and rebinds it.
 
 #### Example
 
-
-	<div id="scrollview" style="height: 150px;"></div>
-	<script id="tmp" type="text/x-kendo-template">
+    <div id="scrollview" style="height: 150px;"></div>
+    <script id="tmp" type="text/x-kendo-template">
 		<div>#: foo #</div>
-	</script>
-	<script>
-    var ds = new kendo.data.DataSource({
+    </script>
+    <script>
+      var ds = new kendo.data.DataSource({
         data: [{ foo: 1 }, { foo: 2 }]
-    });
+      });
 
-    var scrollView = $("#scrollview").kendoScrollView({
+      var scrollView = $("#scrollview").kendoScrollView({
         dataSource: ds,
         template: $("#tmp").html()
-    }).data().kendoScrollView;
+      }).data().kendoScrollView;
 
-    scrollView.setDataSource(new kendo.data.DataSource({
+      scrollView.setDataSource(new kendo.data.DataSource({
         data: [{ foo: 3 }, { foo: 4 }]
-    }));
-
-
-</script>
+      }));
+    </script>
 
 ## Events
 
