@@ -17,17 +17,45 @@ The example below shows how you can add an image for the events.
 
 
 ```HtmlHelper
-@(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
-           .Name("Timeline")
-           .DataDateField("EventDate")
-           .DataDescriptionField("Description")
-           .DataSubTitleField("Subtitle")
-           .DataTitleField("Title")
-           .DataImagesField("Images")
-           .Orientation("vertical")
-           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
-)
+    @(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
+               .Name("Timeline")
+               .DataDateField("EventDate")
+               .DataDescriptionField("Description")
+               .DataSubTitleField("Subtitle")
+               .DataTitleField("Title")
+               .DataImagesField("Images")
+               .Orientation("vertical")
+               .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-timeline name="Timeline" 
+                    orientation="vertical"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle" 
+                    datadescriptionfield="Description" 
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData","Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
+```
+{% endif %}
 ```Controller
 public partial class Timeline : BaseController
 {

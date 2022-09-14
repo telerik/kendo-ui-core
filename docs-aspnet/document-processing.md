@@ -13,7 +13,7 @@ Telerik Document Processing provides the RadPdfProcessing, RadSpreadProcessing, 
 
 * The [RadPdfProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview) library enables you to create, import, and export PDF documents.
 * The [RadSpreadProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview) enables you to effortlessly convert documents from one to another file format among XLSX, XLS, CSV and TXT.
-* The [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) library enables you to export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
+* The [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) library enables you to read or export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
 * The [RadWordsProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview) library enables you to create, import, and export `DOCX`, `DOC` & `DOT` (import only), `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
 * The [RadZipLibrary](https://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview) library enables you to compress and decompress `ZIP` files.
 
@@ -30,6 +30,7 @@ The Telerik Document Processing libraries for .NET Core support the following fi
 * `TXT`
 * `XLSX`
 * `XLS`
+* `XLSM`
 * `ZIP`
 
 ## Available NuGet Packages
@@ -40,7 +41,7 @@ Telerik Document Processing supports [.NET Standard 2.0](https://github.com/dotn
 * `Telerik.Documents.Flow.nupkg`&mdash;The package is part of the Word (text) processing library. Required for processing `HTML`, `DOCX`, `RTF`, and `TXT` documents.
 * `Telerik.Documents.Flow.FormatProviders.Doc.nupkg`&mdash;The package allows for importing flow documents from `DOC` or `DOT` files.
 * `Telerik.Documents.Flow.FormatProviders.Pdf.nupkg`&mdash;The package allows for exporting flow documents, such as `DOCX` and `RTF`, to PDF.
-* `Telerik.Documents.SpreadsheetStreaming.nupkg`&mdash;The main package for generating huge spreadsheet files while using minimum resources.
+* `Telerik.Documents.SpreadsheetStreaming.nupkg`&mdash;The main package for reading and generating huge spreadsheet files while using minimum resources.
 * `Telerik.Documents.Fixed.nupkg`&mdash;The package is required when processing PDF documents.
 * `Telerik.Documents.CMapUtils.nupkg`&mdash;This package provides you with access to predefined CMap tables. It is optional an you will need it only if you have to work with documents that contain [CMap tables](https://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/concepts/cmaps).
 * `Telerik.Documents.ImageUtils.nupkg`&mdash;To export images different than Jpeg and Jpeg2000 or ImageQuality different than High you will need to add a reference to this package. Depends on [Magick.NET](https://github.com/dlemstra/Magick.NET).
@@ -58,9 +59,11 @@ Telerik Document Processing is available as part of the following suites:
 
 * DevCraft
 * Telerik UI for Blazor
+* Telerik UI for .NET MAUI
 * Telerik UI for ASP.NET AJAX
 * Telerik UI for ASP.NET MVC
 * Telerik UI for ASP.NET Core
+* Telerik UI for WinUI
 * Telerik UI for WPF
 * Telerik UI for WinForms
 * Telerik UI for Silverlight

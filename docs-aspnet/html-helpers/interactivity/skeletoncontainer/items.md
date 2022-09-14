@@ -39,6 +39,49 @@ The following example shows how to create a SkeletonContainer using a grid featu
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-skeletoncontainer name="skeleton" 
+                             height="340" 
+                             width="350" 
+                             animation="SkeletonContainerAnimation.Pulse">
+        <grid rows="20" columns="20">
+            <items>
+                <item col-start="2"
+                      col-span="4"
+                      row-start="2"
+                      row-span="4"
+                      shape="SkeletonContainerItemShape.Circle">
+                </item>
+                <item col-start="7"
+                      col-span="13"
+                      row-start="2"
+                      row-span="2"
+                      shape="SkeletonContainerItemShape.Text">
+                </item>
+                <item col-start="7"
+                      col-span="9"
+                      row-start="4"
+                      row-span="2"
+                      shape="SkeletonContainerItemShape.Text">
+                </item>
+                <item col-start="1"
+                      col-span="20"
+                      row-start="7"
+                      row-span="11"
+                      shape="SkeletonContainerItemShape.Rectangle">
+                </item>
+                <item col-start="2"
+                      col-span="18"
+                      row-start="19"
+                      row-span="1"
+                      shape="SkeletonContainerItemShape.Text">
+                </item>
+            </items>
+        </grid>
+    </kendo-skeletoncontainer>
+```
+{% endif %}
 ```CSS
     <style>
         #skeleton {

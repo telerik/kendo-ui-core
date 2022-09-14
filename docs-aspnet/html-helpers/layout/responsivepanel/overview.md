@@ -36,35 +36,8 @@ The following example demonstrates how to define the Responsive Panel.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-responsivepanel name="slidebar" breakpoint="1000" orientation="left">
-        <div id="profile" class="widget">
-            <h3>Profile</h3>
-            <div>
-                <div class="profile-photo"></div>
-                <h4>Lynda Schleifer</h4>
-                <p>Sales Associate</p>
-            </div>
-        </div>
-        <div id="teammates" class="widget">
-            <h3>Teammates</h3>
-            <div>
-                <div class="team-mate">
-                    <img src="@Url.Content("~/content/web/panelbar/andrew.jpg")" alt="Andrew Fuller">
-                    <h4>Andrew Fuller</h4>
-                    <p>Team Lead</p>
-                </div>
-                <div class="team-mate">
-                    <img src="@Url.Content("~/content/web/panelbar/nancy.jpg")" alt="Nancy Leverling">
-                    <h4>Nancy Leverling</h4>
-                    <p>Sales Associate</p>
-                </div>
-                <div class="team-mate">
-                    <img src="@Url.Content("~/content/web/panelbar/robert.jpg")" alt="Robert King">
-                    <h4>Robert King</h4>
-                    <p>Business System Analyst</p>
-                </div>
-            </div>
-        </div>
+    <kendo-responsivepanel name="sidebar" breakpoint="1000">
+        <p>This content will collapse if the width is less than 1000px</p>
     </kendo-responsivepanel>
 ```
 {% endif %}
@@ -92,6 +65,11 @@ The following example demonstrates the basic configuration of the Responsive Pan
 ```
 {% if site.core %}
 ```TagHelper
+        <div class="dash-head">
+            <!-- toggle button for responsive panel, hidden on large screens -->
+            <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
+        </div>
+        <!-- responsive panel, collapsed on small screens -->
         <kendo-responsivepanel name="slidebar" breakpoint="1000" orientation="left">
             <div id="profile" class="widget">
                 <h3>Profile</h3>

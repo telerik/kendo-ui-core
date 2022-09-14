@@ -32,13 +32,16 @@ The following example demonstrates how to initialize the SkeletonContainer from 
 ```HtmlHelper
     @(Html.Kendo().SkeletonContainer()
         .Name("skeleton")
+        .Animation(SkeletonContainerAnimation.Pulse)
+        .TemplateId("tmpl")
     )
 ```
 {% if site.core %}
 ```TagHelper
 
-        <kendo-skeletoncontainer name="skeleton" animation="SkeletonContainerAnimation.Pulse"
-                             template-id="tmpl">
+        <kendo-skeletoncontainer name="skeleton" 
+                                 animation="SkeletonContainerAnimation.Pulse"
+                                 template-id="tmpl">
         </kendo-skeletoncontainer>
 ```
 ```JavaScript

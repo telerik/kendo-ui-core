@@ -23,6 +23,15 @@ To bind the Telerik UI Timeline to a data set  within a RazorPage:
             .Read(r=>r.Url("/Timeline/TimelineBinding?handler=Events"))
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <datasource>
+            <transport>
+                <read url="/Timeline/TimelineBinding?handler=Events" />
+            </transport>
+        </datasource>
+    ```
+    {% endif %}
 
 1. Within the `.cs` file, introduce ActionMethod to return the data set:
 
