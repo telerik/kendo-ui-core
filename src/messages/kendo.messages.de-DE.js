@@ -702,6 +702,22 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
       });
   }
 
+  /* DateInput */
+
+  if (kendo.ui.DateInput) {
+    kendo.ui.DateInput.prototype.options.messages =
+      $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+        "year": "Jahr",
+        "month": "Monat",
+        "day": "Tag",
+        "weekday": "Wochentag",
+        "hour": "Stunde",
+        "minute": "Minute",
+        "second": "Sekunde",
+        "dayperiod": "AM/PM"
+       });
+    }
+
   /* FlatColorPicker messages */
 
   if (kendo.ui.FlatColorPicker) {

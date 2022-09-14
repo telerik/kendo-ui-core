@@ -16,41 +16,92 @@ You can find a live example in the [Templates demo of the Timeline](https://demo
 The following example shows how you can customize the template of the timeline - to show more than one image and how you can use custom fields from your model that would not be recognized by the default template. The classes and HTML structure in this example mimic the default card template (except the custom field).
 
 ```HtmlHelper
-@(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
-           .Name("Timeline")
-           .EventTemplateId("eventTemplate")
-           .Orientation("horizontal")
-           .Dateformat("MMMM yyyy")
-           .DataDateField("EventDate")
-           .DataDescriptionField("Description")
-           .DataSubTitleField("Subtitle")
-           .DataTitleField("Title")
-           .DataImagesField("Images")
-           .DataActionsField("Actions")
-           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
-)
+    @(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
+               .Name("Timeline")
+               .EventTemplateId("eventTemplate")
+               .Orientation("horizontal")
+               .Dateformat("MMMM yyyy")
+               .DataDateField("EventDate")
+               .DataDescriptionField("Description")
+               .DataSubTitleField("Subtitle")
+               .DataTitleField("Title")
+               .DataImagesField("Images")
+               .DataActionsField("Actions")
+               .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
+    )
 
-<script id="eventTemplate" type="text/x-kendo-template">
-    <div class="k-card-header">
-        <h5 class="k-card-title">#= data.Title #</h5>
-        <h6 class="k-card-subtitle"><strong>#= kendo.toString(data.EventDate, "MMM d, yyyy")#</strong></h6>
-    </div>
-    <div class="k-card-body">
-        <div class="k-card-description">
-            <p>#= data.Description #</p>
-            <div class="imageContainer">
-                # for (var i = 0; i < data.Images.length; i++) { #
-                    <img src="#= data.Images[i].src #" class="k-card-image">
-                # } #
+    <script id="eventTemplate" type="text/x-kendo-template">
+        <div class="k-card-header">
+            <h5 class="k-card-title">#= data.Title #</h5>
+            <h6 class="k-card-subtitle"><strong>#= kendo.toString(data.EventDate, "MMM d, yyyy")#</strong></h6>
+        </div>
+        <div class="k-card-body">
+            <div class="k-card-description">
+                <p>#= data.Description #</p>
+                <div class="imageContainer">
+                    # for (var i = 0; i < data.Images.length; i++) { #
+                        <img src="#= data.Images[i].src #" class="k-card-image">
+                    # } #
+                </div>
             </div>
         </div>
-    </div>
-    <p>I was with #=data.Friends#</p>
-    <div class="k-card-actions">
-        <a class="k-button k-flat k-primary" href="#= data.Actions[0].url #" target="_blank">#= data.Actions[0].text #</a>
-    </div>
-</script>
+        <p>I was with #=data.Friends#</p>
+        <div class="k-card-actions">
+            <a class="k-button k-flat k-primary" href="#= data.Actions[0].url #" target="_blank">#= data.Actions[0].text #</a>
+        </div>
+    </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-timeline name="Timeline" 
+                    orientation="horizontal" 
+                    date-format="MMMM yyyy"
+                    datadatefield="EventDate" 
+                    datatitlefield="Title" 
+                    datasubtitlefield="Subtitle" 
+                    datadescriptionfield="Description" 
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images"
+                    event-template-id="eventTemplate">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData", "Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
+    
+    <script id="eventTemplate" type="text/x-kendo-template">
+        <div class="k-card-header">
+            <h5 class="k-card-title">#= data.Title #</h5>
+            <h6 class="k-card-subtitle"><strong>#= kendo.toString(data.EventDate, "MMM d, yyyy")#</strong></h6>
+        </div>
+        <div class="k-card-body">
+            <div class="k-card-description">
+                <p>#= data.Description #</p>
+                <div class="imageContainer">
+                    # for (var i = 0; i < data.Images.length; i++) { #
+                        <img src="#= data.Images[i].src #" class="k-card-image">
+                    # } #
+                </div>
+            </div>
+        </div>
+        <p>I was with #=data.Friends#</p>
+        <div class="k-card-actions">
+            <a class="k-button k-flat k-primary" href="#= data.Actions[0].url #" target="_blank">#= data.Actions[0].text #</a>
+        </div>
+    </script>
+```
+{% endif %}
 ```Controller
 public partial class Timeline : BaseController
 {

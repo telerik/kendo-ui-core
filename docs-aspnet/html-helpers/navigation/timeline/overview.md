@@ -31,36 +31,48 @@ You can scroll through the events and collapse/expand them. The events order can
 The following example demonstrates how to define the Timeline. Note the tabs for the controller and model code that show how to feed data to the widget.
 
 ```HtmlHelper
-@(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-           .Name("Timeline")
-           .DataDateField("EventDate")
-           .DataDescriptionField("Description")
-           .DataSubTitleField("Subtitle")
-           .DataTitleField("Title")
-           .DataImagesField("Images")
-           .DataActionsField("Actions")
-           .Orientation("vertical") // defines the layout of the widget
-           .AlternatingMode() // renders the events on both sides of the axis in vertical mode
-           .CollapsibleEvents() // starts all events collapsed in vertical mode
-           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
-)
+    @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
+               .Name("Timeline")
+               .DataDateField("EventDate")
+               .DataDescriptionField("Description")
+               .DataSubTitleField("Subtitle")
+               .DataTitleField("Title")
+               .DataImagesField("Images")
+               .DataActionsField("Actions")
+               .Orientation("vertical") // defines the layout of the widget
+               .AlternatingMode() // renders the events on both sides of the axis in vertical mode
+               .CollapsibleEvents() // starts all events collapsed in vertical mode
+               .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
+    )
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-timeline name="timeline" orientation="horizontal" datadatefield="EventDate" datatitlefield="Title" datasubtitlefield="Subtitle" datadescriptionfield="Description" dataactionsfield="Actions" dataimagesfield="Images">
-    <datasource>
-        <transport>
-            <read url="/Timeline/GetTimelineData" />
-        </transport>
-        <schema>
-            <model>
-                <fields>
-                    <field name="EventDate" type="date"></field>
-                </fields>
-            </model>
-        </schema>
-    </datasource>
-</kendo-timeline>
+    <kendo-timeline name="Timeline" 
+                    orientation="vertical"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle" 
+                    datadescriptionfield="Description" 
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images"
+                    alternating-mode="true"
+                    collapsible-events="true">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData","Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
 ```
 {% endif %}
 ```Controller
@@ -160,42 +172,91 @@ You can provide an event handler through its [JavaScript function name](#handlin
 The following example demonstrates how to subscribe to events by using a handler name.
 
 ```HtmlHelper
-@(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-    .Name("Timeline")
-    .Events(ev =>
-     {
-        ev.Change("onChange");
-        ev.Navigate("onNavigate");
-        ev.DataBound("onDataBound");
-        ev.ActionClick("onActionClick");
-     })
-    .DataDateField("EventDate")
-    .DataDescriptionField("Description")
-    .DataSubTitleField("Subtitle")
-    .DataTitleField("Title")
-    .DataImagesField("Images")
-    .DataActionsField("Actions")
-    .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
-)
+    @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
+        .Name("Timeline")
+        .Events(ev =>
+         {
+            ev.Change("onChange");
+            ev.Navigate("onNavigate");
+            ev.DataBound("onDataBound");
+            ev.ActionClick("onActionClick");
+         })
+        .DataDateField("EventDate")
+        .DataDescriptionField("Description")
+        .DataSubTitleField("Subtitle")
+        .DataTitleField("Title")
+        .DataImagesField("Images")
+        .DataActionsField("Actions")
+        .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
+    )
 
-<script>
-    function onChange(e) {
-                console.log("OnChange: " + e.dataItem.Title);
-            }
+    <script>
+        function onChange(e) {
+                    console.log("OnChange: " + e.dataItem.Title);
+                }
 
-            function onNavigate(e) {
-                console.log("OnNavigate: " + e.action);
-            }
+                function onNavigate(e) {
+                    console.log("OnNavigate: " + e.action);
+                }
 
-            function onActionClick(e) {
-                console.log("OnActionClick: " + e.element.text());
-            }
+                function onActionClick(e) {
+                    console.log("OnActionClick: " + e.element.text());
+                }
 
-            function onDataBound(e) {
-                console.log("OnDataBound: " + e.sender.dataSource.view().length);
-            }
-</script>
+                function onDataBound(e) {
+                    console.log("OnDataBound: " + e.sender.dataSource.view().length);
+                }
+    </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-timeline name="Timeline" 
+                    datadatefield="EventDate" 
+                    datatitlefield="Title" 
+                    datasubtitlefield="Subtitle" 
+                    datadescriptionfield="Description" 
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images"
+                    on-change="onChange"
+                    on-navigate="onNavigate"
+                    on-data-bound="onDataBound"
+                    on-action-click="onActionClick">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData", "Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
+
+    <script>
+        function onChange(e) {
+                    console.log("OnChange: " + e.dataItem.Title);
+                }
+    
+                function onNavigate(e) {
+                    console.log("OnNavigate: " + e.action);
+                }
+    
+                function onActionClick(e) {
+                    console.log("OnActionClick: " + e.element.text());
+                }
+    
+                function onDataBound(e) {
+                    console.log("OnDataBound: " + e.sender.dataSource.view().length);
+                }
+    </script>
+```
+{% endif %}
 
 ### Handling Events by Template Delegate
 
@@ -225,33 +286,103 @@ The following example demonstrates how to subscribe to events by using a templat
     .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
 )
 ```
-
+{% if site.core %}
+```TagHelper
+    <kendo-timeline name="Timeline" 
+                    datadatefield="EventDate" 
+                    datatitlefield="Title" 
+                    datasubtitlefield="Subtitle" 
+                    datadescriptionfield="Description" 
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images"
+                    on-change="function(e){
+                        // Handle the Change event inline.
+                    }"
+                    on-navigate="function(e) {
+                        // Handle the Navigate event inline.
+                    }">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData", "Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 
 To access an existing Timeline instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element. Once you have the reference, you can use the [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods).
 
 ```HtmlHelper
-@(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-    .Name("Timeline")
-    .DataDateField("EventDate")
-    .DataDescriptionField("Description")
-    .DataSubTitleField("Subtitle")
-    .DataTitleField("Title")
-    .DataImagesField("Images")
-    .DataActionsField("Actions")
-    .Orientation("horizontal")
-    .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
-)
-<button onclick="buttonClick();">Go to next event</button>
-<script>
-    function buttonClick() {
-        var timeline = $("#Timeline").data("kendoTimeline");
-        timeline.next();
-    }
-</script>
-```
+    @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
+        .Name("Timeline")
+        .DataDateField("EventDate")
+        .DataDescriptionField("Description")
+        .DataSubTitleField("Subtitle")
+        .DataTitleField("Title")
+        .DataImagesField("Images")
+        .DataActionsField("Actions")
+        .Orientation("horizontal")
+        .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
+    )
 
+    <button onclick="buttonClick();">Go to next event</button>
+
+    <script>
+        function buttonClick() {
+            var timeline = $("#Timeline").data("kendoTimeline");
+            timeline.next();
+        }
+    </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-timeline name="Timeline" 
+                    orientation="horizontal"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle" 
+                    datadescriptionfield="Description" 
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData","Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
+
+    <button onclick="buttonClick();">Go to next event</button>
+
+    <script>
+        function buttonClick() {
+            var timeline = $("#Timeline").data("kendoTimeline");
+            timeline.next();
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

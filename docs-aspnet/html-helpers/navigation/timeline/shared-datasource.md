@@ -45,6 +45,45 @@ The following example demonstrates how to bind two {{ site.product }} widgets to
         .Value("Barcelona & Tenerife")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="sharedDataSource">
+        <transport>
+            <read url="@Url.Action("GetEvents","Timeline")" />
+        </transport>
+        <schema>
+            <model>
+                <fields>
+                    <field name="EventDate" type="date"></field>
+                    <field name="Title" type="string"></field>
+                    <field name="Subtitle" type="string"></field>
+                    <field name="Description" type="string"></field>
+                </fields>
+            </model>
+        </schema>
+    </kendo-datasource>
+
+    <kendo-timeline name="Timeline"
+                    datasource-id="sharedDataSource"
+                    orientation="TimelineOrientation.Vertical"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle"
+                    datadescriptionfield="Description"
+                    dataactionsfield="Actions"
+                    alternating-mode="true"
+                    collapsible-events="true">
+    </kendo-timeline>
+    
+    <kendo-dropdownlist name="titles"
+                        datatextfield="Title"
+                        datavaluefield="Title"
+                        datasource-id="sharedDataSource"
+                        option-label="Select an item..."
+                        value="Barcelona & Tenerife">
+    </kendo-dropdownlist>
+```
+{% endif %}
 
 ## See Also
 
