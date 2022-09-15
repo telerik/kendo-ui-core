@@ -14,7 +14,7 @@ Represents the Kendo UI Grid widget. Inherits from [Widget](/api/javascript/ui/w
 
 ### allowCopy `Boolean|Object` *(default: false)*
 
-If set to `true` and selection of the Grid is enabled the user could copy the selection into the clipboard and paste it into Excel or other similar programs that understand TSV/CSV formats. By default allowCopy is disabled and the default format is TSV.
+If set to `true` and selection of the Grid is enabled, the user could copy the selection into the clipboard and paste it into Excel or other similar programs that understand TSV/CSV formats. By default allowCopy is disabled and the default format is TSV.
 Can be set to a JavaScript object which represents the allowCopy configuration.
 
 #### Example - enable allowCopy
@@ -11464,7 +11464,7 @@ The index of the column or the [field](/api/javascript/ui/grid/configuration/col
 
 ### beforeEdit
 
-Fired when the user try to edit or create a data item, before the editor is created. Can be used for preventing the editing depending on custom logic.
+Fired when the user tries to edit or create a data item, before the editor is created. Can be used to preventing editing according to any custom logic.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
