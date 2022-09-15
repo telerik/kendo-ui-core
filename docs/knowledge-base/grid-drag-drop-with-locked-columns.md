@@ -69,7 +69,7 @@ The Kendo UI Grid with [locked columns]({% slug locked_columns_kendoui_grid_widg
     </style>
     <script>
       $(document).ready(() => {
-        $.when(LoadGrid()).then(EnableDragAndDropForGrid());
+        $.when(LoadGrid()).then(enableKendoGridLockedDND());
       });
 
       let ds = [{
@@ -170,38 +170,94 @@ The Kendo UI Grid with [locked columns]({% slug locked_columns_kendoui_grid_widg
         });
       }
 
-      function EnableDragAndDropForGrid() {
-        let grid = $('#grid').data('kendoGrid');
-        console.log(grid)
-        grid.lockedTable.kendoSortable({
-          filter: ">tbody >tr",
-          hint: function(element) {
-            var unlockedPortion = grid.table.find("tr[data-uid=" + element.data("uid") + "]").children();
+      function enableKendoGridLockedDND(gridElement, onChangeFunction) {
+    if (!gridElement) {
+        gridElement = ".k-grid";
+    }
+    let grid = $(gridElement).data("kendoGrid");
+    if (!grid.lockedTable) {
+        return false;
+    }
+    let gridWidth = $(gridElement).width();
+    let lockedWidth = $(gridElement).find(".k-grid-header-locked").width() || 0;
+    let unlockedWidth = $(gridElement).find(".k-grid-header-wrap table").width() || 0;
+    let tableWidth = lockedWidth + unlockedWidth + 2;
+    let placeholderPosition = null;
+    grid.lockedTable.kendoSortable({
+        axis: "y",
+        filter: ">tbody >tr",
+        hint: function(element) {
+            let unlockedPortion = grid.table.find("tr[data-uid=" + element.data("uid") + "]").children();
+            let hint = $(`<div style="overflow: hidden; width: ${gridWidth}px;"><table style="background: whitesmoke; width: ${tableWidth}px;" class="k-grid k-widget"></table></div>`);
+            let colgroups = $(gridElement).find(".k-grid-header colgroup");
+            let colgroupWidths = [];
+            $.each(colgroups, function (index, group) {
+                $.each($(group).children(), function (index2, child) {
+                    colgroupWidths.push($(child).css("width"));
+                });
+            });
+            hint.find("table").append(element.clone().append(unlockedPortion.clone()));
+            $.each(hint.find("td"), function (index, col) {
+                $(col).css("width", colgroupWidths[index]);
+            });
+            hint.css("opacity", 0.7);
+            return hint;
+        },
+        cursor: "move",
+        placeholder: function (element) {
+            var unlockedRow = grid.table.find("tr[data-uid=" + element.data("uid") + "]");
+            $(unlockedRow).before($(unlockedRow).clone().attr("data-uid", "").addClass("k-hover unlocked-placeholder"));
+            $(unlockedRow).hide();
+            let placeholder = element.clone();
+            $(placeholder).attr("data-uid", "");
+            return placeholder;
+        },
+        move: function (e) {
+            //Set positions
+            let lastPosition = placeholderPosition;
+            placeholderPosition = this.indexOf(this.placeholder);
+            let itemPosition = this.indexOf(e.item);
+            let targetPosition = this.indexOf(e.target);
 
-            let table = $('<table style="width: 600px;" class="k-grid k-widget"></table>'),
-                hint;
+            //Get Elements
+            let unlockedDraggingRow = $(gridElement).find(".k-grid-content tr.unlocked-placeholder");
+            let targetElement = $(gridElement).find(".k-grid-content tr[data-uid=" + e.target.data("uid") + "]");
 
-            table.append(element.clone().append(unlockedPortion));
-            table.css("opacity", 0.7);
+            //Find direction of move
+            let movingUp = false; 
+            if (lastPosition === null) {
+                if (itemPosition > targetPosition) {
+                    movingUp = true;
+                }
+            } else {
+                if (lastPosition > placeholderPosition) {
+                    movingUp = true;
+                }
+            }
 
-            return table;
-          },
-          cursor: "move",
-          placeholder: function(element) {
-            return $('<tr colspan="4" class="placeholder"></tr>');
-          },
-          change: function(e) {
-            let skip = grid.dataSource.skip(),
-                oldIndex = e.oldIndex + skip,
-                newIndex = e.newIndex + skip,
-                data = grid.dataSource.data(),
-                dataItem = grid.dataSource.getByUid(e.item.data("uid"));
-
+            //Move the unlocked row
+            if (movingUp) {
+                targetElement.before(unlockedDraggingRow);
+            } else {
+                targetElement.after(unlockedDraggingRow);
+            }
+        },
+        change: function (e) {
+            let skip = grid.dataSource.skip() || 0;
+            let newIndex = e.newIndex + skip;
+            let dataItem = grid.dataSource.getByUid(e.item.data("uid"));
             grid.dataSource.remove(dataItem);
             grid.dataSource.insert(newIndex, dataItem);
+            if (onChangeFunction) {
+                onChangeFunction();
+            }
+            console.log(grid.dataSource.data());
+        },
+        start: function () {
+            placeholderPosition = null;
+        }
+    });
 
-          }
-        });
-      }
+}
     </script>
 ```
