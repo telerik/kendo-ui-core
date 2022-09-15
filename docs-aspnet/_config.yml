@@ -609,6 +609,8 @@ navigation:
         title: "Scheduler"
      "*scrollview":
         title: "ScrollView"
+     "*signature":
+        title: "Signature"
      "*slider":
         title: "Slider"
      "*sortable":

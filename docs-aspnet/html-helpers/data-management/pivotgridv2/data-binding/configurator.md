@@ -16,6 +16,7 @@ The PivotConfiguratorV2 can be used for configuring the column and row dimension
 
 The following example demonstrates how to create the PivotConfigurator.
 
+```HtmlHelper
     @(Html.Kendo().PivotConfiguratorV2()
         .Name("configurator")
         .Filterable(true)
@@ -28,11 +29,23 @@ The following example demonstrates how to create the PivotConfigurator.
     .Configurator("#configurator")
     // Other configuration.
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotconfiguratorv2 name="configurator" filterable="true" height="570">
+    </kendo-pivotconfiguratorv2>
+
+    <kendo-pivotgridv2 name="pivotgridv2" height="570" configurator="#configurator">
+        <!--Other configuration. -->
+    </kendo-pivotgridv2>
+````
+{% endif %}
 
 ## Basic Configuration
 
 The following example demonstrates how to configure the PivotConfigurator.
 
+```HtmlHelper
     @(Html.Kendo().PivotConfiguratorV2()
         .Name("configurator")
         .Filterable(true)
@@ -64,9 +77,31 @@ The following example demonstrates how to configure the PivotConfigurator.
                     .Type(HttpVerbs.Post)
                 )
             )
-            .Events(e => e.Error("onError"))
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotconfiguratorv2 name="configurator" filterable="true" height="570">
+    </kendo-pivotconfiguratorv2>
+
+    <kendo-pivotgridv2 name="pivotgrid" column-width="200" height="570" configurator="#configurator">
+        <pivot-datasource type="PivotDataSourceType.Xmla">
+            <columns>
+                <pivot-datasource-column name="[Date].[Calendar]" expand="true"></pivot-datasource-column>
+                <pivot-datasource-column name="[Product].[Category]"></pivot-datasource-column>
+            </columns>
+            <rows>
+                <row name="[Geography].[City]"></row>
+            </rows>
+            <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} )></measures>
+            <transport read-url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST">
+                <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
+            </transport>
+        </pivot-datasource>
+    </kendo-pivotgridv2>
+````
+{% endif %}
 
 The following image demonstrates the output from the previous example.
 

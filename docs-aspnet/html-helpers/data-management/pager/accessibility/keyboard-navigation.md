@@ -24,6 +24,12 @@ The following example demonstrates how to enable the keyboard navigation in the 
         .Navigatable(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pager name="pager" navigatable="true">
+    </kendo-pager>
+```
+{% endif %}
 
 The table below lists the available key combinations supported by the Pager.
 

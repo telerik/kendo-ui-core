@@ -25,6 +25,13 @@ The example below shows how to change the tooltip of the refresh button and the 
     })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pager name="Pager" on-change="onChange">
+	    <messages refresh="Refresh data" display="Showing {0}-{1} from {2} data items" />
+    </kendo-pager>
+```
+{% endif %}
 
 ## See Also
 

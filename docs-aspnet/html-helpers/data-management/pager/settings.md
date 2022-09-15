@@ -33,6 +33,18 @@ The following example shows how to enable the `Input()` pager type
         .Numeric(false)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" page-size="20">
+        <transport>
+            <read url="@Url.Action("People_Read","Pager")" />
+        </transport>
+    </kendo-datasource>
+
+    <kendo-pager name="pager" datasource-id="dataSource1" input="true" numeric="false">
+    </kendo-pager>
+```
+{% endif %}
 
 ## Settings
 

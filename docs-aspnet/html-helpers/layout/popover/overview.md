@@ -58,7 +58,7 @@ The following example demonstrates how to define the PopOver.
 ```TagHelper
 	<span id="info" class="k-button wider">Hover me!</span>
 
-	<kendo-popover for="info" show-on="hover" position="top" body="Main content"></kendo-popover>
+	<kendo-popover for="#info" show-on="hover" position="top" body="Main content"></kendo-popover>
 ```
 {% endif %}
 
@@ -92,7 +92,7 @@ The following example demonstrates the basic configuration of the PopOver.
 ```TagHelper
 	<span id="info" class="k-button wider">Click here</span>
 
-	<kendo-popover for="info" show-on="click" position="top" width="120" height="200" header="More Information:" body="Information content">
+	<kendo-popover for="#info" show-on="click" position="top" width="120" height="120" header="More Information:" body="Information content">
 		<actions>
 			<action text="Okay"></action>
 		</actions>
@@ -135,6 +135,24 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+	<span id="container" class="k-button wider">Click here</span>
+
+	<kendo-popover for="#container" show-on="click" header="More" on-show="onShow" on-hide="onHide">
+	</kendo-popover>
+
+    <script>
+        function onShow(e) {
+            // Handle the show event.
+        }
+
+        function onHide(e) {
+            // Handle the hide event.
+        }
+    </script>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 

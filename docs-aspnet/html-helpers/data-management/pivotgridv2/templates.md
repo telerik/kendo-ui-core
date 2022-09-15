@@ -29,6 +29,7 @@ In the data cell template, you can access the following fields:
 * `measure`&mdash;The value of the data cell measure.
 * `dataItem`&mdash;The data item itself.
 
+```HtmlHelper
     @(Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
@@ -36,7 +37,15 @@ In the data cell template, you can access the following fields:
         .DataCellTemplateId("dataCellTemplate")
         // Other configuration.
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotgridv2 name="pivotgrid" column-width="200" height="570" cell-template-id="dataCellTemplate">
+        <!--Other configuration. -->
+    </kendo-pivotgridv2>
+````
+{% endif %}
+```Template
     <script id="dataCellTemplate" type="text/x-kendo-tmpl">
         # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
         # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
@@ -48,6 +57,7 @@ In the data cell template, you can access the following fields:
             #: value #
         # } #
     </script>
+```
 
 ## Column Header Template
 
@@ -57,6 +67,7 @@ In the column header template, you can access the following fields:
 * `member`&mdash;The member of the corresponding column header cell.
 * `tuple`&mdash;The tuple of the corresponding column header cell.
 
+```HtmlHelper
     @(Html.Kendo().PivotGridV2()
         .Name("pivotgridv2")
         .ColumnWidth(200)
@@ -64,7 +75,15 @@ In the column header template, you can access the following fields:
         .ColumnHeaderTemplateId("headerTemplate")
         // other configuration settings
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotgridv2 name="pivotgrid" column-width="200" height="570" column-header-template-id="headerTemplate">
+        <!--Other configuration. -->
+    </kendo-pivotgridv2>
+````
+{% endif %}
+```Template
     <script id="headerTemplate" type="text/x-kendo-tmpl">
         # if (!member.children.length) { #
             <em>#: member.caption #</em>
@@ -72,6 +91,7 @@ In the column header template, you can access the following fields:
             #: member.caption #
         # } #
     </script>
+```
 
 ## Row Header Template
 
@@ -81,14 +101,23 @@ In the row header template, you can access the following fields:
 * `member`&mdash;The member of the corresponding column header cell.
 * `tuple`&mdash;The tuple of the corresponding column header cell.
 
+```HtmlHelper
     @(Html.Kendo().PivotGridV2()
         .Name("pivotgridv2")
         .ColumnWidth(200)
         .Height(570)
-        .ColumnHeaderTemplateId("headerTemplate")
+        .RowHeaderTemplateId("headerTemplate")
         // other configuration settings
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotgridv2 name="pivotgrid" column-width="200" height="570" row-header-template-id="headerTemplate">
+        <!--Other configuration. -->
+    </kendo-pivotgridv2>
+````
+{% endif %}
+```Template
     <script id="headerTemplate" type="text/x-kendo-tmpl">
         # if (!member.children.length) { #
             <em>#: member.caption #</em>
@@ -96,6 +125,8 @@ In the row header template, you can access the following fields:
             #: member.caption #
         # } #
     </script>
+```
+
 
 ## See Also
 

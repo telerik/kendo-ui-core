@@ -67,24 +67,23 @@ To configure the PivotGridV2 for Ajax binding to an **Adventure Works** cube tha
     ```
     {% if site.core %}
     ```TagHelper
-        <kendo-pivotdatasourcev2 type=@(PivotDataSourceType.Xmla) name="pivotSource">
-            <columns>
-                <pivot-datasourcev2-column name="[Date].[Calendar]" expand="true"></pivot-datasourcev2-column>
-                <pivot-datasourcev2-column name="[Product].[Category]"></pivot-datasourcev2-column>
-            </columns>
-            <rows>
-                <row name="[Geography].[City]"></row>
-            </rows>
-            <schema type="xmla"/>
-            <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
-            <transport>
-                <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
-                <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
-            </transport>
-        </kendo-pivotdatasourcev2>
-        <kendo-pivotconfiguratorv2 name="configurator" datasource-id="pivotSource">
+        <kendo-pivotconfiguratorv2 name="configurator" sortable="true" filterable="true" height="570">
         </kendo-pivotconfiguratorv2>
-        <kendo-pivotgridv2 name="pivotgridv2" datasource-id="pivotSource">
+
+        <kendo-pivotgridv2 name="pivotgrid" column-width="200" height="570" configurator="#configurator">
+            <pivot-datasource type="PivotDataSourceType.Xmla">
+                <columns>
+                    <pivot-datasource-column name="[Date].[Calendar]" expand="true"></pivot-datasource-column>
+                    <pivot-datasource-column name="[Product].[Category]"></pivot-datasource-column>
+                </columns>
+                <rows>
+                    <row name="[Geography].[City]"></row>
+                </rows>
+                <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} )></measures>
+                <transport read-url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST">
+                    <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
+                </transport>
+            </pivot-datasource>
         </kendo-pivotgridv2>
     ````
     {% endif %}

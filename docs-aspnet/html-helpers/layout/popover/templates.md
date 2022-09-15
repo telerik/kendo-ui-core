@@ -25,6 +25,16 @@ To specify the layout of the header that will be displayed, use the `Header` met
         .Body("PopOver main content")
     )
 ```
+{% if site.core %}
+```TagHelper
+	 <span id="info" class="k-button wider">Hover me!</span>
+
+	<kendo-popover for="#info" show-on="hover" position="right" 
+        header="<div class='custom-header' style='text-align: center'>PopOver header</div>"
+        body="PopOver main content">
+	</kendo-popover>
+```
+{% endif %}
 
 ## Body Template
 
@@ -56,6 +66,34 @@ You can configure the body section through the `Body` method.
         .Height(200)
     )
 ```
+{% if site.core %}
+```TagHelper
+	<ul id="products">
+        <li>
+            <a href="#" data-id="11" title="A cheese made in the artisan tradition by rural dairy farmers in the north of Spain">
+                Queso de Cabrales
+            </a>
+        </li>
+        <li>
+            <a href="#" data-id="12" title="A cheese made in the La Mancha region of Spain from the milk of sheep of the Manchega breed">
+                Queso<br />Manchego
+            </a> 
+        </li>
+    </ul>
+
+    @{
+        var bodyTemplate = "<div class=\"template-wrapper\"> + " +
+            "<img src=" + @Url.Content("~/content/web/foods/200/") + "#=target.data().id#.jpg" + " alt=\"#=$(data.target).attr('title')#\" />" +
+            "<p>#=$(data.target).attr('title')#</p></div>";
+    }
+
+	<kendo-popover for="#products" filter="a" show-on="hover" position="bottom" 
+        body="@bodyTemplate"
+        width="400"
+        height="200">
+	</kendo-popover>
+```
+{% endif %}
 
 ## See Also
 
