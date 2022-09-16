@@ -4,11 +4,12 @@
  * `kendo-drawing` repository, you should make your changes there and
  * run `src-modules/sync.sh` in this repository.
  */
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core" ], f);
-})(function(){
+})(function() {
+/* eslint-disable space-before-blocks, space-before-function-paren, no-multi-spaces */
 
-    var __meta__ = { // jshint ignore:line
+    var __meta__ = {
         id: "color",
         name: "Color utils",
         category: "framework",
@@ -16,8 +17,6 @@
         description: "Color utilities used across components",
         depends: [ "core" ]
     };
-
-/*jshint eqnull:true  */
 
 window.kendo = window.kendo || {};
 
@@ -95,11 +94,11 @@ var BaseColor = Class.extend({
 
     toRGB: function() { return this; },
 
-    toHex: function() { return this.toBytes().toHex(); },
+    toHex: function(options) { return this.toBytes().toHex(options); },
 
     toBytes: function() { return this; },
 
-    toCss: function() { return "#" + this.toHex(); },
+    toCss: function(options) { return "#" + this.toHex(options); },
 
     toCssRgba: function() {
         var rgb = this.toBytes();
@@ -114,7 +113,7 @@ var BaseColor = Class.extend({
     },
 
     equals: function(c) {
-        return c === this || c !== null && this.toCssRgba() === parseColor(c).toCssRgba();
+        return c === this || ((c !== null && c !== undefined) && this.toCssRgba() === parseColor(c).toCssRgba());
     },
 
     diff: function(other) {
@@ -234,8 +233,14 @@ var Bytes = RGB.extend({
         return this.toRGB().toHSL();
     },
 
-    toHex: function() {
-        return hex(this.r, 2) + hex(this.g, 2) + hex(this.b, 2);
+    toHex: function(options) {
+        var value = hex(this.r, 2) + hex(this.g, 2) + hex(this.b, 2);
+
+        if (options && options.alpha) {
+            value += hex(Math.round(this.a * 255), 2);
+        }
+
+        return value;
     },
 
     toBytes: function() {
@@ -368,6 +373,10 @@ function hue2rgb(p, q, s) {
     return p;
 }
 
+function alphaFromHex(a) {
+    return parseFloat(parseFloat(parseInt(a, 16) / 255 ).toFixed(3));
+}
+
 function parseColor(value, safe) {
     var m, ret;
 
@@ -397,6 +406,16 @@ function parseColor(value, safe) {
         ret = new Bytes(parseInt(m[1] + m[1], 16),
                         parseInt(m[2] + m[2], 16),
                         parseInt(m[3] + m[3], 16), 1);
+    } else if ((m = /^#?([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])\b/i.exec(color))) { // Parse 4 digit hex color
+        ret = new Bytes(parseInt(m[1] + m[1], 16),
+                        parseInt(m[2] + m[2], 16),
+                        parseInt(m[3] + m[3], 16),
+                        alphaFromHex(m[4] + m[4]));
+    } else if ((m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})\b/i.exec(color))) { // Parse 8 digit hex color
+        ret = new Bytes(parseInt(m[1], 16),
+                        parseInt(m[2], 16),
+                        parseInt(m[3], 16),
+                        alphaFromHex(m[4]));
     } else if ((m = /^rgb\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)/.exec(color))) {
         ret = new Bytes(parseInt(m[1], 10),
                         parseInt(m[2], 10),
@@ -423,6 +442,8 @@ function parseColor(value, safe) {
 
     return ret;
 }
+
+var DARK_TRESHOLD = 180;
 
 var Color = Class.extend({
     init: function(value) {
@@ -502,6 +523,10 @@ var Color = Class.extend({
 
     percBrightness: function() {
         return Math.sqrt(0.241 * this.r * this.r + 0.691 * this.g * this.g + 0.068 * this.b * this.b);
+    },
+
+    isDark: function() {
+        return this.percBrightness() < DARK_TRESHOLD;
     }
 });
 
@@ -550,6 +575,7 @@ Color.namedColors = namedColors;
 
 kendo.deepExtend(kendo, {
     parseColor: parseColor,
+    namedColors: namedColors,
     Color: Color
 });
 

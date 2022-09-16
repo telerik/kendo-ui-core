@@ -21,14 +21,21 @@ The MultiViewCalendar supports the following predefined views:
 
 The following example demonstrates how to create a MultiViewCalendar that allows users to select a month.
 
-```Razor
-
-        @(Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .Start(CalendarView.Year)
-            .Depth(CalendarView.Year)
-        )
+```HtmlHelper
+    @(Html.Kendo().MultiViewCalendar()
+        .Name("MultiViewCalendar")
+        .Start(CalendarView.Year)
+        .Depth(CalendarView.Year)
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiviewcalendar name="MultiViewCalendar" 
+                             start="CalendarView.Year" 
+                             depth="CalendarView.Year">
+    </kendo-multiviewcalendar>
+```
+{% endif %}
 
 ## See Also
 

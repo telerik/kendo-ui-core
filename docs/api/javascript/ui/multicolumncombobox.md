@@ -660,6 +660,34 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="multicolumncombobox" />
+    <script>
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataSource: [
+          { Name: "Parent1", Id: 1 },
+          { Name: "Parent2", Id: 2 }
+        ],
+        dataTextField: "Name",
+        dataValueField: "Id",
+        columns: [
+          { field: "Name" },
+          { field: "Id" }
+        ],
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/multicolumncombobox#configuration-dataTextField) option).
@@ -1115,6 +1143,63 @@ The available "x" positions are:
       }
     </style>
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="multicolumncombobox" />
+    <script>
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataSource: [
+          { Name: "Parent1", Id: 1 },
+          { Name: "Parent2", Id: 2 }
+        ],
+        dataTextField: "Name",
+        dataValueField: "Id",
+        columns: [
+          { field: "Name" },
+          { field: "Id" }
+        ],
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <input id="multicolumncombobox" />
+    <script>
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataSource: [
+          { Name: "Parent1", Id: 1 },
+          { Name: "Parent2", Id: 2 }
+        ],
+        dataTextField: "Name",
+        dataValueField: "Id",
+        columns: [
+          { field: "Name" },
+          { field: "Id" }
+        ],
+        size: "large"
+      });
+    </script>
+
 ### suggest `Boolean`*(default: false)*
 
 If set to `true` the widget will automatically use the first suggestion as its value.
@@ -1124,7 +1209,19 @@ If set to `true` the widget will automatically use the first suggestion as its v
     <input id="multicolumncombobox" />
     <script>
     $("#multicolumncombobox").kendoMultiColumnComboBox({
-      suggest: true
+        suggest: true,
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
     });
     </script>
 

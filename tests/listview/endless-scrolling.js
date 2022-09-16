@@ -39,7 +39,7 @@
         return dom.kendoListView(options).data("kendoListView");
     }
 
-    describe("listview endless scrolling", function () {
+    describe("listview endless scrolling", function() {
 
         beforeEach(function() {
             dom = $("<div />").appendTo(Mocha.fixture);
@@ -58,7 +58,7 @@
         });
 
         it("Endless scroll is disabled by default", function() {
-            assert.equal(ListView.prototype.options.scrollable, undefined);
+            assert.equal(ListView.prototype.options.scrollable, false);
         });
 
         it("More items are requested when scrolled to the bottom", function() {

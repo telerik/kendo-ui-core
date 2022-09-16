@@ -100,9 +100,13 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'G')#")*
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
- Specifies a template used to populate value of the aria-label attribute.
+ Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar. The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -111,6 +115,22 @@ The duration of the open animation in milliseconds.
     $("#datetimepicker").kendoDateTimePicker({
         ARIATemplate: "Date: #=kendo.toString(data.current, 'G')#"
     });
+    </script>
+
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            componentType: "modern"
+        });
     </script>
 
 ### culture `String`*(default: "en-US")*
@@ -261,6 +281,24 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 > This functionality was added with the Q1 release of 2016.
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### footer `String`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
@@ -325,6 +363,38 @@ For more information on date and time formats please refer to [Date Formatting](
     $("#datetimepicker").kendoDateTimePicker({
         max: new Date(2013, 0, 1, 22, 0, 0)
     });
+    </script>
+
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
+### messages.weekColumnHeader `String` *(default: "")*
+
+Allows customization of the week column header text in the Calendar. Set the value to make the widget compliant with web accessibility standards.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
     </script>
 
 ### min `Date`*(default: Date(1900, 0, 1))*
@@ -555,6 +625,43 @@ If set to `true` a week of the year will be shown on the left side of the calend
     });
     </script>
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets the rounded value
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        size: "large"
+    });
+    </script>
+
 ### start `String`*(default: "month")*
 
  Specifies the start view of the calendar.
@@ -603,7 +710,7 @@ If set to `true` a week of the year will be shown on the left side of the calend
 ## Fields
 
 ### options `Object`
-An object, which holds the options of the widget.
+An object, which holds the [`configuration options`](/api/javascript/ui/datetimepicker#configuration) of the widget.
 
 #### Example - get options of the widget
 
@@ -614,7 +721,7 @@ An object, which holds the options of the widget.
     var datetimepicker = $("#datetimepicker").data("datetimepicker");
 
     var options = datetimepicker.options;
-    <script>
+    </script>
 
 ## Methods
 
@@ -764,6 +871,7 @@ The maximum time value to set for a DateTimePicker, expressed as a Date object o
 
     var max = datetimepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -802,6 +910,7 @@ The minimum time value to set for a DateTimePicker, expressed as a Date object o
 
     var min = datetimepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -857,6 +966,10 @@ Available views are "time" and "date".
 
 ### setOptions
 
+Sets the options of the DateTimePicker. Use this method if you want to enable/disable a particular feature/option.
+
+When setOptions is called, the DateTimePicker widget will be destroyed and recreated.
+
 #### Parameters
 
 Changes the initial DateTimePicker configuration.
@@ -865,7 +978,7 @@ Changes the initial DateTimePicker configuration.
 
 The new configuration options.
 
-#### Example
+#### Example - update the minimum date that the calendar can show 
 
     <input id="datetimepicker" />
     <script>
@@ -958,6 +1071,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
 
     var value = datetimepicker.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -993,6 +1107,7 @@ The widget instance which fired the event.
     $("#datetimepicker").kendoDateTimePicker({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the datetimepicker
         }
     });
@@ -1008,6 +1123,7 @@ The widget instance which fired the event.
 
     datetimepicker.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the datetimepicker
     });
     </script>

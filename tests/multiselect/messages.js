@@ -2,7 +2,7 @@
     var MultiSelect = kendo.ui.MultiSelect,
         select;
 
-    describe("kendo.ui.MultiSelect messages", function () {
+    describe("kendo.ui.MultiSelect messages", function() {
         beforeEach(function() {
             select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
         });
@@ -19,7 +19,7 @@
                     noData: "custom"
                 }
             });
-            var noDataTemplateText = multiSelect.list.find(".k-nodata").text();
+            var noDataTemplateText = multiSelect.list.find(".k-no-data").text();
             assert.equal(noDataTemplateText, "custom");
         });
 
@@ -37,8 +37,27 @@
                 }
             });
 
-            var clearTitle = multiSelect.wrapper.find('.k-icon.k-clear-value.k-i-close').attr("title");
+            var clearTitle = multiSelect.wrapper.find('.k-clear-value').attr("title");
             assert.equal(clearTitle, "custom");
+        });
+
+        it("down arrow title is properly set", function() {
+            var multiSelect = new MultiSelect(select, {
+                value: 1,
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [{
+                    text: "Test",
+                    value: 1
+                }],
+                downArrow: true,
+                messages: {
+                    downArrow: "custom"
+                }
+            });
+
+            var label = multiSelect._arrow.attr("aria-label");
+            assert.equal(label, "custom");
         });
     });
 }());

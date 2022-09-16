@@ -106,5 +106,51 @@
 
             assert.equal(numeric._text.attr("aria-valuenow"), undefined);
         });
+
+        it("NumericTextBox uses dot for aria-valuenow decimals regardless of culture", function() {
+            kendo.culture("bg-BG");
+
+            var numeric = new NumericTextBox(input, {
+                value: 8000.5
+            });
+
+            assert.equal(numeric._text.attr("aria-valuenow"), "8000.5");
+
+            kendo.culture("en-US");
+        });
+
+        it("NumericTextBox removes aria-valuenow when value is cleared", function() {
+            var numeric = new NumericTextBox(input, {
+                value: 8000.5
+            });
+
+            numeric.element.val(null);
+            numeric.element.trigger("blur");
+
+            assert.equal(numeric._text.attr("aria-valuenow"), undefined);
+        });
+    });
+
+    describe("kendo.ui.NumericTextBox aria with AXE", function() {
+        beforeEach(function() {
+            $("<label>Price Discount:<input id='percentage' value='35' title='percentage' /></label>").appendTo(Mocha.fixture);
+            input = $(Mocha.fixture).find("input");
+        });
+
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("NumericTextBox is accessible", function(done) {
+            var numeric = new NumericTextBox(input);
+
+            axeRunFixture(done);
+        });
+
+        it("NumericTextBox is accessible when label is defined", function(done) {
+            var numeric = new NumericTextBox(input, { label: "Price" });
+
+            axeRunFixture(done);
+        });
     });
 }());

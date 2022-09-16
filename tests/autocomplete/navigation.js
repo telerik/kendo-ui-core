@@ -1,18 +1,18 @@
-(function(){
+(function() {
 
 var AutoComplete = kendo.ui.AutoComplete;
 var CLICK = kendo.support.touch ? "touchend" : "click";
-var FOCUSED = ".k-state-focused";
+var FOCUSED = ".k-focus";
 var keys = kendo.keys;
 var input;
 
-describe("kendo.ui.AutoComplete navigation", function () {
+describe("kendo.ui.AutoComplete navigation", function() {
     beforeEach(function() {
         input = $("<input>").appendTo(Mocha.fixture);
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
-        }
+        };
 
     });
     afterEach(function() {
@@ -22,11 +22,44 @@ describe("kendo.ui.AutoComplete navigation", function () {
 
 var getData = function(length) {
     var result = [];
-    for(var idx=0; idx < length; idx++) {
+    for (var idx = 0; idx < length; idx++) {
         result.push("item" + idx);
     }
     return result;
 };
+
+it("pressing alt + down should open popup", function(done) {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"]
+    });
+
+    input.focus().val("f");
+    autocomplete.search();
+    autocomplete.close();
+
+    autocomplete.popup.bind("open", function() {
+        assert.isOk(true);
+        done();
+    });
+
+    input.trigger({ type: "keydown", altKey: true, keyCode: kendo.keys.DOWN });
+});
+
+it("pressing alt + up should close popup", function(done) {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"]
+    });
+
+    input.focus().val("f");
+    autocomplete.search();
+
+    autocomplete.popup.bind("close", function() {
+        assert.isOk(true);
+        done();
+    });
+
+    input.trigger({ type: "keydown", altKey: true, keyCode: kendo.keys.UP });
+});
 
 it("pressing down focuses the first item in the popup", function() {
     var autocomplete = new AutoComplete(input, {
@@ -110,7 +143,7 @@ it("clicking an item applies selected style", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         change: function() {
-            assert.isOk(autocomplete.ul.children().eq(0).is(".k-state-selected"));
+            assert.isOk(autocomplete.ul.children().eq(0).is(".k-selected"));
         }
     });
 
@@ -197,7 +230,7 @@ it("select applies selected style", function() {
     input.val("b");
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first());
-    assert.isOk(autocomplete.ul.children().first().is(".k-state-selected"));
+    assert.isOk(autocomplete.ul.children().first().is(".k-selected"));
 });
 
 it("select sets input value", function() {
@@ -220,7 +253,7 @@ it("select should accepts DOM element", function() {
     input.focus().val("b");
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first()[0]);
-    assert.isOk(autocomplete.ul.children().first().is(".k-state-selected"));
+    assert.isOk(autocomplete.ul.children().first().is(".k-selected"));
 });
 
 it("moving up when there the current item is first", function() {

@@ -54,7 +54,7 @@
         it("dirtyFields are updated during change event", function() {
             var model = new Model();
             model.bind("change", function() {
-                assert.isOk(model.dirtyFields["foo"]);;
+                assert.isOk(model.dirtyFields["foo"]);
             });
             model.set("foo", "foo");
         });
@@ -75,7 +75,7 @@
                 assert.isOk(model.dirtyFields["foo"]);
             });
 
-            model.set("foo", "foo");;
+            model.set("foo", "foo");
         });
 
         it("model is dirty after set event", function() {

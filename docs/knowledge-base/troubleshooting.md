@@ -1,6 +1,6 @@
 ---
 title: Grid Troubleshooting on Editing
-page_title: Grid Troubleshooting on Editing | Kendo UI for jQuery
+page_title: Grid Troubleshooting on Editing 
 description: "Troubleshoot any issues that might occur while editing the data of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/editing/troubleshooting
 slug: edittroubleshoot_kendoui_grid_widget
@@ -32,17 +32,6 @@ For a runnable example on implementing foreign-key columns in the Grid, refer to
 When a Kendo UI MultiSelect is used as a custom editor in the Grid and the value of the MultiSelect is changed, the `save` event of the Grid is not triggered. The reason is that the value of the MultiSelect is a reference type (`array`) which prevents the normal usage of the `model.set()` function for setting the value of the corresponding model property.
 
 To work around this issue, define a custom data-binding mechanism. After applying this fix, the `save` event of the Grid is properly triggered each time a new selection is added to the value of the MultiSelect. For a runnable example, refer to the article on [using the MultiSelect as a custom editor in the Grid]({% slug howto_usemultiselectascustomeditor_grid %}).
-
-## Editing Boolean columns renders styles improperly  
-
-When editing is applied to a Boolean column, the Grid renders a standard, CheckBox element input type by default. The custom CheckBox editor enables you to unify the look of the Grid editors by applying additional styles to the CheckBox that are based on the used CSS theme.
-
-The following example demonstrates how to use Kendo UI-styled CheckBox editor for Boolean columns. For a runnable example, refer to [this demo on editing](https://demos.telerik.com/kendo-ui/grid/editing).
-
-    function customBoolEditor(container, options) {
-        $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container);
-    }
 
 ## See Also
 

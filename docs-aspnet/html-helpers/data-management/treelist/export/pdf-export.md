@@ -8,7 +8,7 @@ position: 3
 
 # PDF Export
 
-The {{ site.product_short }} TreeList HtmlHelper provides a built-in PDF export functionality.
+The {{ site.product_short }} TreeList component provides a built-in PDF export functionality.
 
 For a runnable example, refer to the [demo on exporting the TreeList to PDF](https://demos.telerik.com/{{ site.platform }}/treelist/pdf-export).
 
@@ -25,16 +25,47 @@ To initiate the PDF export, press the **Toolbar** button or use the [TreeList cl
 
 The following example demonstrates how to enable the PDF export functionality of the TreeList.
 
-        <!-- Load Pako Deflate library to enable PDF compression -->
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+```HtmlHelper
 
-        @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
-            .Name("treelist")
-            .Toolbar(tools => tools.Pdf())
-            .DataSource(dataSource => dataSource
-                .Read(read => read.Action("All", "EmployeeDirectory"))
-            )
+    <!-- Load Pako Deflate library to enable PDF compression -->
+    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+
+    @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+        .Name("treelist")
+        .Toolbar(tools => tools.Pdf())
+        .Pdf(pdf => pdf
+            .FileName("Kendo UI TreeList Export.pdf")
+            .ProxyURL(Url.Action("Pdf_Export_Save"))
         )
+        .DataSource(dataSource => dataSource
+            .Read(read => read.Action("All", "EmployeeDirectory"))
+        )
+    )
+
+```
+{% if site.core %}
+```TagHelper
+
+    <!-- Load Pako Deflate library to enable PDF compression -->
+    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+
+    <kendo-treelist name="treelist">
+        <toolbar>
+            <treelist-toolbar-button name="pdf"/>
+        </toolbar>
+        <pdf file-name="Kendo UI TreeList Export.pdf" proxy-url="@Url.Action("Pdf_Export_Save","TreeList")"/>
+        <treelist-datasource>
+            <transport>
+                <read url="@Url.Action("All","EmployeeDirectory")"/>
+            </transport>
+            ...
+        </treelist-datasource>
+        <!-- Other configuration. -->
+    </kendo-treelist>
+
+```
+{% endif %}
+
 
 ## Embedding Unicode Characters
 
@@ -42,38 +73,86 @@ The default fonts in PDF files do not provide Unicode support. To support intern
 
 The following example demonstrates how to handle custom fonts.
 
-        <style>
-            /*
-                Use the DejaVu Sans font for display and embedding in the PDF file.
-                The standard PDF fonts have no support for Unicode characters.
-            */
-            .k-treelist {
-                font-family: "DejaVu Sans", "Arial", sans-serif;
-            }
-        </style>
+```HtmlHelper
+    <style>
+        /*
+            Use the DejaVu Sans font for display and embedding in the PDF file.
+            The standard PDF fonts have no support for Unicode characters.
+        */
+        .k-treelist {
+            font-family: "DejaVu Sans", "Arial", sans-serif;
+        }
+    </style>
 
-        <script>
-            // Import the DejaVu Sans font for embedding.
-            // NOTE: Only required if the Kendo UI stylesheets are loaded
-            // from a different origin, for example, kendo.cdn.telerik.com.
-            kendo.pdf.defineFont({
-                "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans.ttf",
-                "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-                "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-                "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
-            });
-        </script>
+    <script>
+        // Import the DejaVu Sans font for embedding.
+        // NOTE: Only required if the Kendo UI stylesheets are loaded
+        // from a different origin, for example, kendo.cdn.telerik.com.
+        kendo.pdf.defineFont({
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        });
+    </script>
 
-        <!-- Load Pako ZLIB library to enable PDF compression -->
-        <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <!-- Load Pako ZLIB library to enable PDF compression -->
+    <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
 
-        @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
-            .Name("treelist")
-            .Toolbar(tools => tools.Pdf())
-            .DataSource(dataSource => dataSource
-                .Read(read => read.Action("All", "EmployeeDirectory"))
-            )
+    @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+        .Name("treelist")
+        .Toolbar(tools => tools.Pdf())
+        .Pdf(pdf => pdf
+            .FileName("Kendo UI TreeList Export.pdf")
         )
+        .DataSource(dataSource => dataSource
+            .Read(read => read.Action("All", "EmployeeDirectory"))
+        )
+    )
+```
+{% if site.core %}
+```TagHelper
+    <style>
+        /*
+            Use the DejaVu Sans font for display and embedding in the PDF file.
+            The standard PDF fonts have no support for Unicode characters.
+        */
+        .k-treelist {
+            font-family: "DejaVu Sans", "Arial", sans-serif;
+        }
+    </style>
+
+    <script>
+        // Import the DejaVu Sans font for embedding.
+        // NOTE: Only required if the Kendo UI stylesheets are loaded
+        // from a different origin, for example, kendo.cdn.telerik.com.
+        kendo.pdf.defineFont({
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        });
+    </script>
+
+    <!-- Load Pako ZLIB library to enable PDF compression -->
+    <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+
+    <kendo-treelist name="treelist">
+        <toolbar>
+            <treelist-toolbar-button name="pdf"/>
+        </toolbar>
+        <pdf file-name="Kendo UI TreeList Export.pdf"/>
+        <treelist-datasource>
+            <transport>
+                <read url="@Url.Action("All","EmployeeDirectory")"/>
+            </transport>
+            ...
+        </treelist-datasource>
+        <!-- Other configuration. -->
+    </kendo-treelist>
+
+```
+{% endif %}
 
 ## See Also
 

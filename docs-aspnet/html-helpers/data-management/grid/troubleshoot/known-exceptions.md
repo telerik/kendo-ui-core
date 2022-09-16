@@ -8,13 +8,13 @@ position: 3
 
 # Known Exceptions
 
-This article provides solutions for some known exceptions you might encounter while working with the Telerik UI for ASP.NET MVC Grid HtmlHelper.
+This article provides solutions for some known exceptions you might encounter while working with the Telerik UI Grid component for {{ site.framework }}.
 
 ## Circular Reference Detected While Serializing an Object of Type
 
 The reason for this exception is that the [`JavaScriptSerializer`](https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx) class used by the [`Json`](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.json.aspx) method cannot serialize object graphs which contain circular references (refer to each other).
 
-**Solution** Use View Model objects and avoid serializing the properties which create the circular reference. For further information on this issue, refer to the [article on avoiding circular reference exceptions]({% slug freqaskedquestions_gridhelper_aspnetmvc %}#how-to-avoid-circular-reference-exceptions).
+**Solution** Use View Model objects and avoid serializing the properties which create the circular reference. For further information on this issue, refer to the [article on avoiding circular reference exceptions](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/faq#how-to-avoid-circular-reference-exceptions).
 
 ## JSON JavaScriptSerializer Serialization or Deserialization Error
 
@@ -23,7 +23,7 @@ This exception is thrown when the length of the JSON response exceeds the defaul
 **Solution** To fix this issue, use any of the following suggestions:
 
 * Enable paging by calling the `Pageable` method.
-* Serialize only the required properties of your model by [using a View Model]({% slug freqaskedquestions_gridhelper_aspnetmvc %}#how-to-convert-my-models-to-view-model-objects).
+* Serialize only the required properties of your model by [using a View Model](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/faq#how-to-convert-my-models-to-view-model-objects).
 * Manually serialize the `DataSourceResult`.
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
@@ -43,24 +43,46 @@ An exception that a request has been blocked because sensitive information could
 
 Yet another reason is that you explicitly specified that the Grid should make HTTP `GET` requests via the `Type` setting but did not allow HTTP `GET` requests.
 
-**Solution** Allow `GET` requests.
+**Solution** Allow `GET` requests
 
-    // View
+```HtmlHelper
+
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
         .Read(read => read.Action("Read", "Home").Type(HttpVerbs.Get)) // tell the DataSource to make GET requests
     // Omitted for brevity.
-    // Controller
+```
+{% if site.core %}
+```TagHelper
+
+    // Omitted for brevity.
+    <datasource page="0" type="DataSourceTagHelperType.Ajax" page-size="20" server-operation="false">
+        <schema data="Data" total="Total" errors="Errors">
+            <model id="ProductID"></model>
+        </schema>
+        <transport>
+            <read url="@Url.Action("Read","Home")" type="Get" />
+        </transport>
+    </datasource>
+    // Omitted for brevity.
+    
+```
+{% endif %}
+```Controller
     public ActionResult Read([DataSourceRequest] DataSourceRequest request)
     {
         var data = GetData();
 
         return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
     }
+```
 
 ## Limited Usage of Templates
 
-An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable Grid is bound to a `DataTable` or `DataSet`. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
+{% if site.core %}
+    Тhe Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates (like Group Header Templates) which makes the usage of `.ServerOperations(true)` in this case incompatible.
+{% else %}
+    An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable Grid is bound to a `DataTable` or `DataSet`. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
 
 **Solution** Use a popup edit form with a custom editor template.
 
@@ -70,6 +92,7 @@ For more information on how to resolve this issue, refer to the following resour
 * [Editor templates in the Telerik UI for ASP.NET MVC Grid HtmlHelper]({% slug editortemplates_grid_aspnetcore %})&mdash;use a separate editor template for each data field.
 * [The TemplateName setting in the Telerik UI for ASP.NET MVC Grid HtmlHelper](/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String))&mdash;use it
 to set a single edit form template for the whole edit form.
+{% endif %}
 
 ## Invalid Template Error When Nesting Client Templates
 

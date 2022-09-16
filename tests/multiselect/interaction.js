@@ -68,7 +68,7 @@
 
             var multiselect = new MultiSelect(select);
 
-            multiselect.tagList.find(".k-i-close").click();
+            multiselect.tagList.find(".k-i-x").click();
 
             assert.isOk(!multiselect.popup.visible());
         });
@@ -79,7 +79,7 @@
 
             var multiselect = new MultiSelect(select);
 
-            multiselect.tagList.find(".k-i-close").mousedown();
+            multiselect.tagList.find(".k-i-x").mousedown();
 
             assert.notEqual(multiselect.input[0], document.activeElement);
         });
@@ -116,7 +116,7 @@
             multiselect.ul.children().eq(0).click();
 
             var tag = multiselect.tagList.children().first();
-            tag.find(".k-i-close").click();
+            tag.find(".k-i-x-circle").click();
 
             assert.isOk(!tag.parent()[0]);
         });
@@ -130,7 +130,7 @@
             var item = multiselect.ul.children().eq(1).click();
             multiselect.ul.children().eq(0).click();
 
-            multiselect.tagList.children().first().find(".k-i-close").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle").click();
             multiselect.popup.open();
 
             assert.notEqual(item[0].style.display, "none");
@@ -165,7 +165,7 @@
             multiselect.input.mousedown();
             multiselect.ul.children().eq(1).click();
 
-            multiselect.tagList.children().first().find(".k-i-close").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle").click();
 
             assert.isOk(!select[0].children[1].selected);
         });
@@ -192,7 +192,7 @@
             multiselect.ul.children().eq(0).click();
 
             //unselect item
-            multiselect.tagList.children().first().find(".k-i-close").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle").click();
 
             //TODO: use method instead of _dataItems
             assert.equal(multiselect.dataItems().length, 1);
@@ -252,7 +252,7 @@
             multiselect.ul.children().eq(0).click();
             multiselect.open();
 
-            multiselect.tagList.children().first().find(".k-i-close").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle").click();
 
             assert.isOk(!multiselect.popup.visible());
         });
@@ -309,7 +309,7 @@
             multiselect.dataSource.filter({ value: "3", operator: "contains", field: "text" });
 
             multiselect.ul.children().eq(0).click();
-            multiselect.tagList.children().first().find(".k-i-close").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle").click();
 
             assert.isOk(select[0].children[0].selected); //item3
             assert.isOk(!select[0].children[1].selected); //item4
@@ -338,7 +338,7 @@
             multiselect.ul.children().eq(0).click();
             multiselect.dataSource.filter({});
 
-            var li = multiselect.ul.find(".k-state-selected");
+            var li = multiselect.ul.find(".k-selected");
 
             assert.equal(li.length, 1);
             assert.equal(li.text(), "item2");
@@ -365,7 +365,7 @@
             multiselect.dataSource.filter({ value: "3", operator: "contains", field: "text" });
 
             multiselect.ul.children().eq(0).click();
-            multiselect.tagList.children().first().find(".k-i-close").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle").click();
 
             var value = multiselect.value();
 
@@ -444,7 +444,7 @@
 
             multiselect.wrapper.mousedown();
 
-            assert.isOk(multiselect.wrapper.hasClass("k-state-focused"));
+            assert.isOk(multiselect.wrapper.hasClass("k-focus"));
         });
 
         it("focus input when _clear is clicked", function() {
@@ -487,13 +487,37 @@
             assert.equal(multiselect.wrapper.find(multiselect._clear).length, 0);
         });
 
+        it("open dropdown when arrow is clicked", function() {
+            var multiselect = new MultiSelect(select, {
+                dataSource: ["foo", "bar", "baz", "item1", "item2"],
+                downArrow: true,
+                Animation: false
+            });
+
+            multiselect._arrow.mousedown();
+            assert.isOk(multiselect.popup.visible());
+        });
+
+        it("close dropdown when arrow is clicked and dropdown is open", function() {
+            var multiselect = new MultiSelect(select, {
+                dataSource: ["foo", "bar", "baz", "item1", "item2"],
+                downArrow: true,
+                animation: false
+            });
+
+            multiselect._arrow.mousedown();
+            assert.isOk(multiselect.popup.visible());
+            multiselect._arrow.mousedown();
+            assert.isOk(!multiselect.popup.visible());
+        });
+
         it("MultiSelect removes focused class on blur", function() {
             var multiselect = new MultiSelect(select);
 
             multiselect.input.focus();
             multiselect.input.focusout();
 
-            assert.isOk(!multiselect.wrapper.hasClass("k-state-focused"));
+            assert.isOk(!multiselect.wrapper.hasClass("k-focus"));
         });
 
         it("MultiSelect removes selected item from tag list (filtered)", function() {
@@ -503,9 +527,9 @@
             });
 
             multiselect.search("Option2");
-            multiselect.ul.find(".k-state-selected").click();
+            multiselect.ul.find(".k-selected").click();
 
-            var tags = multiselect.tagList.children();
+            var tags = multiselect.tagList.children(".k-chip");
 
             assert.equal(tags.length, 1);
             assert.equal(tags.children(":first").text(), "Option1");
@@ -518,10 +542,10 @@
             });
 
             multiselect.search("Option2");
-            multiselect.ul.find(".k-state-selected").click();
+            multiselect.ul.find(".k-selected").click();
             multiselect.open();
 
-            var tags = multiselect.tagList.children();
+            var tags = multiselect.tagList.children(".k-chip");
 
             assert.equal(tags.length, 1);
             assert.equal(tags.children(":first").text(), "Option1");
@@ -534,9 +558,9 @@
                 value: ["foo"]
             });
 
-            multiselect.tagList.children(":first").find(".k-i-close").click();
+            multiselect.tagList.children(":first").find(".k-i-x-circle").click();
 
-            var selectedItems = multiselect.ul.children(".k-state-selected");
+            var selectedItems = multiselect.ul.children(".k-selected");
 
             assert.equal(selectedItems.length, 0);
         });
@@ -552,12 +576,12 @@
                 autoClose: false
             });
 
-            var evt = new KeyboardEvent('keydown', {'keyCode':8, 'which':8});
+            var evt = new KeyboardEvent('keydown', { 'keyCode': 8, 'which': 8 });
 
             multiselect.open();
             multiselect.input[0].dispatchEvent(evt);
 
-            var selectedItems = multiselect.ul.children(".k-state-selected");
+            var selectedItems = multiselect.ul.children(".k-selected");
 
             assert.equal(selectedItems.length, 0);
         });
@@ -571,9 +595,9 @@
 
             multiselect.search("item");
             multiselect.ul.children(":last").click();
-            multiselect.tagList.children(":first").find(".k-i-close").click();
+            multiselect.tagList.children(":first").find(".k-i-x-circle").click();
 
-            var tags = multiselect.tagList.children();
+            var tags = multiselect.tagList.children(".k-chip");
 
             assert.equal(tags.length, 2);
             assert.equal(tags.children(":first").text(), "bar");

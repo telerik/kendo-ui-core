@@ -7,7 +7,7 @@
 
             $.fn.press = function(key, ctrl, shift, alt) {
                 return this.trigger({ type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt });
-            }
+            };
 
             container = $("<div style='margin:50px'/>").appendTo(Mocha.fixture);
         });
@@ -21,7 +21,7 @@
             element.trigger($.Event(type, info));
 
             return element;
-        };
+        }
 
         it("callout class is set for the position", function() {
             var tooltip = new Tooltip(container, {
@@ -666,7 +666,7 @@
 
             tooltip.show(container.find("#second"));
 
-            tempSpan.text(secondText)
+            tempSpan.text(secondText);
             actual = Math.round(tooltip.popup.element.width());
             expected = Math.round(tempSpan.width());
 

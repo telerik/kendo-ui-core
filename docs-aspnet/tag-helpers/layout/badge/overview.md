@@ -18,10 +18,22 @@ It also provides customizing its content through templates, setting different ty
 
 The following example demonstrates how to define the Badge by using the Badge TagHelper.
 
-```
+```tagHelper
+
     <a class="k-button">
-        <kendo-badge name="badge" value="42" appearance="rectangle">
+        <kendo-badge name="badge" text="42" shape="@BadgeShape.Rectangle">
         </kendo-badge>
+    </a>
+
+```
+```cshtml
+
+    <a class="k-button">
+        @(Html.Kendo().Badge()
+            .Name("badge")
+            .Text("42")
+            .Shape(BadgeShape.Rectangle)
+        )
     </a>
 
 ```
@@ -30,24 +42,68 @@ The following example demonstrates how to define the Badge by using the Badge Ta
 
 The badge also provides the choice to be inline or overlay and set its type. To make the badge overlay add the `k-badge-overlay` class to the parent parent element.
 
-```
+```tagHelper
+
     <a class="k-button k-badge-overlay">
-        <kendo-badge name="badge" value="42" type="warning" appearance="rectangle">
+        <kendo-badge name="badge" text="42" theme-color="@BadgeColor.Warning" shape="@BadgeShape.Rounded">
         </kendo-badge>
     </a>
+
+```
+```cshtml
+
+    <a class="k-button k-badge-overlay">
+        @(Html.Kendo().Badge()
+            .Name("badge")
+            .Text("42")
+            .ThemeColor(BadgeColor.Warning)
+            .Shape(BadgeShape.Rounded)
+            )
+    </a>
+
 ```
 
 ## Using templates
 
 With the badge you can customize the content using templates.
 
-```
+```tagHelper
     <a class="k-button k-badge-overlay">
-        <kendo-badge name="badge" value="42" type="warning" appearance="rectangle" template="#= +value > 10 ? '9+' : value #">
+        <kendo-badge name="badge" text="101" theme-color="@BadgeColor.Success" shape="@BadgeShape.Pill" template-id="badge-template">
         </kendo-badge>
     </a>
-```
 
+    <script type="text/x-kendo-template" id="badge-template">
+        # var badgeText = this.options.text;#
+        #if(badgeText > 100){#
+            100+
+        #}else{#
+            #=badgeText#
+        #}#
+    </script>
+```
+```cshtml
+
+    <a class="k-button k-badge-overlay">
+        @(Html.Kendo().Badge()
+            .Name("badge")
+            .Text("101")
+            .ThemeColor(BadgeColor.Success)
+            .Shape(BadgeShape.Pill)
+            .TemplateId("badge-template")
+        )
+    </a>
+
+    <script type="text/x-kendo-template" id="badge-template">
+        # var badgeText = this.options.text;#
+        #if(badgeText > 100){#
+            100+
+        #}else{#
+            #=badgeText#
+        #}#
+    </script>
+
+```
 
 ## Referencing Existing Instances
 
@@ -55,7 +111,7 @@ You can access an existing Button instance by using the [`jQuery.data()`](https:
 
 ```
     <a class="k-button k-badge-overlay">
-        <kendo-badge name="badge" value="42" type="warning" appearance="rectangle">
+        <kendo-badge name="badge" text="1" theme-color="@BadgeColor.Primary" shape="@BadgeShape.Circle">
         </kendo-badge>
     </a>
 

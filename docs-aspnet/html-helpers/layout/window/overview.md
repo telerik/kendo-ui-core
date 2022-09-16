@@ -1,33 +1,47 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Window HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Window component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/window, /helpers/layout/window/overview
 slug: htmlhelpers_window_aspnetcore
 position: 1
 ---
 
-# Window HtmlHelper Overview
+# Window Overview
 
+{% if site.core %}
+The Telerik UI Window TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Window widget.
+{% else %}
 The Telerik UI Window HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Window widget.
+{% endif %}
 
 The Window displays content in a modal or non-modal HTML window. By default, the user can move, resize, and close a Window. Its content can also be defined either as static HTML or dynamically loaded with AJAX.
 
-* [Demo page for the Window](https://demos.telerik.com/{{ site.platform }}/window/index)
+* [Demo page for the Window HtmlHelper](https://demos.telerik.com/{{ site.platform }}/window/index)
+{% if site.core %}
+* [Demo page for the Window TagHelper](https://demos.telerik.com/aspnet-core/window/tag-helper)
+{% endif %}
 
 ## Initializing the Window
 
-The following example demonstrates how to define the Window by using the Window HtmlHelper.
+The following example demonstrates how to define the Window.
 
-```Razor
- @(Html.Kendo().Window()
-    .Name("window")
-    .Title("Window title")
-    .Content(@<text>
-            Static content of the Window.
-    </text>)
-)
+```HtmlHelper
+    @(Html.Kendo().Window()
+        .Name("window")
+        .Title("Window title")
+        .Content(@<text>
+                Static content of the Window.
+        </text>)
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window" title="Window title">
+        <content>Static content of the Window.</content>
+    </kendo-window>
+```
+{% endif %}
 ```Controller
     public class WindowController  : Controller
     {
@@ -42,8 +56,9 @@ The following example demonstrates how to define the Window by using the Window 
 
 The Window provides default configuration options that can be set during initialization such as height and width, user actions, draggable behavior, initial position, and so on.
 
-The following example demonstrates the basic configuration of the Window HtmlHelper.
+The following example demonstrates the basic configuration of the Window.
 
+```HtmlHelper
     @(Html.Kendo().Window()
         .Name("window")
         .Width(500)
@@ -62,6 +77,32 @@ The following example demonstrates the basic configuration of the Window HtmlHel
             var dialog = $("#window").data("kendoWindow");
         });
     </script>
+```
+{% if site.core %}
+```TagHelper
+    @{
+        string[] actions = new string[] { "Refresh", "Minimize", "Maximize", "Close" };
+    }
+
+    <kendo-window name="window" 
+                  title="Window title" 
+                  width="500"
+                  height="300"
+                  visible="true"
+                  actions="actions"
+                  content-url="@Url.Action("AjaxContent","Window")"
+                  draggable="false"
+                  resizable="false">
+    </kendo-window>
+
+     <script type="text/javascript">
+        $(function() {
+            // The Name() of the Window is used to get its client-side instance.
+            var dialog = $("#window").data("kendoWindow");
+        });
+    </script>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -71,6 +112,12 @@ The following example demonstrates the basic configuration of the Window HtmlHel
 * [Loading content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
 * [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})
 * [Integration with forms]({% slug htmlhelpers_window_forms_aspnetcore %})
+{% if site.core %}
+* [Razor Page configuration]({% slug htmlhelpers_window_razorpage_aspnetcore %})
+{% endif %}
+* [Custom actions]({% slug htmlhelpers_window_customactions_aspnetcore %})
+* [Animations]({% slug htmlhelpers_window_animations_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_window %})
 
 ## Events
 
@@ -80,6 +127,7 @@ You can subscribe to all Window [events](/api/Kendo.Mvc.UI.Fluent/WindowEventBui
 
 The following example demonstrates how to subscribe to events by handler name.
 
+```HtmlHelper
     @(Html.Kendo().Window()
         .Name("window")
         .Events(e => e
@@ -87,6 +135,14 @@ The following example demonstrates how to subscribe to events by handler name.
             .Close("window_close")
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window" on-open="window_open" on-close="window_close">
+    </kendo-window>
+```
+{% endif %}
+```JavaScript
     <script>
         function window_open() {
             // Handle the open event.
@@ -97,11 +153,13 @@ The following example demonstrates how to subscribe to events by handler name.
         }
     </script>
 
+```
 
 ### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by using a template delegate.
 
+```HtmlHelper
     @(Html.Kendo().Window()
         .Name("window")
         .Events(e => e
@@ -117,9 +175,25 @@ The following example demonstrates how to subscribe to events by using a templat
             </text>)
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window"
+     on-open="function() {
+        //Handle the open event inline.
+    }"
+     on-close="function() {
+       //Handle the open event inline.
+    }">
+    </kendo-window>
+```
+{% endif %}
 
 ## See Also
 
 * [Basic Usage of the Window HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/index)
+{% if site.core %}
+* [Basic Usage of the Window TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/tag-helper)
+{% endif %}
 * [Using the API of the Window HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/api)
 * [Server-Side API](/api/window)

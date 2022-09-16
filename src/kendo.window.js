@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.draganddrop", "./kendo.popup"], f);
-})(function(){
+})(function() {
 
-    var __meta__ = { // jshint ignore:line
+    var __meta__ = {
         id: "window",
         name: "Window",
         category: "web",
@@ -25,7 +25,6 @@
             activeElement = kendo._activeElement,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
-            proxy = $.proxy,
             extend = $.extend,
             each = $.each,
             template = kendo.template,
@@ -43,9 +42,10 @@
             KOVERLAY = ".k-overlay",
             KCONTENTFRAME = "k-content-frame",
             LOADING = "k-i-loading",
-            KHOVERSTATE = "k-state-hover",
-            KFOCUSEDSTATE = "k-state-focused",
+            KHOVERSTATE = "k-hover",
+            KFOCUSEDSTATE = "k-focus",
             MAXIMIZEDSTATE = "k-window-maximized",
+            INLINE_FLEX = "k-display-inline-flex",
             // constants
             VISIBLE = ":visible",
             HIDDEN = "hidden",
@@ -63,6 +63,8 @@
             RESIZEEND = "resizeEnd",
             DRAGSTART = "dragstart",
             DRAGEND = "dragend",
+            RESTORE = "restore",
+            KENDOKEYDOWN = "kendoKeydown",
             ERROR = "error",
             OVERFLOW = "overflow",
             DATADOCOVERFLOWRULE = "original-overflow-rule",
@@ -180,7 +182,13 @@
                         display = element.css("display");
 
                         element.css({ visibility: HIDDEN, display: "" });
-                        offset = element.offset();
+
+                        if (document.body.contains(element[0])) {
+                            offset = element.offset();
+                        } else {
+                            offset = { top: 0, left: 0 };
+                        }
+
                         element.css({ visibility: visibility, display: display });
                     }
 
@@ -200,6 +208,7 @@
 
                 if (!element.is(".k-window-content") || !wrapper[0]) {
                     element.addClass("k-window-content");
+                    element.attr("tabindex", 0);
                     that._createWindow(element, options);
                     wrapper = that.wrapper = element.closest(KWINDOW);
 
@@ -216,34 +225,31 @@
                 }
 
                 if (options.visible) {
-                    that.toFront();
+                    that.toFront(null, !options.modal);
                 }
 
                 windowContent = wrapper.children(KWINDOWCONTENT);
-                that._tabindex(windowContent);
 
                 if (options.visible && options.modal) {
                     that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
                 }
 
                 wrapper
-                    .on("mouseenter" + NS, TITLEBAR_BUTTONS, proxy(that._buttonEnter, that))
-                    .on("mouseleave" + NS, TITLEBAR_BUTTONS, proxy(that._buttonLeave, that))
-                    .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that))
-                    .on("keydown" + NS, proxy(that._keydown, that))
-                    .on("focus" + NS, proxy(that._focus, that))
-                    .on("blur" + NS, proxy(that._blur, that));
+                    .on("mouseenter" + NS, TITLEBAR_BUTTONS, that._buttonEnter.bind(that))
+                    .on("mouseleave" + NS, TITLEBAR_BUTTONS, that._buttonLeave.bind(that))
+                    .on("click" + NS, "> " + TITLEBAR_BUTTONS, that._windowActionHandler.bind(that))
+                    .on("keydown" + NS, that, that._keydown.bind(that))
+                    .on("focus" + NS, that._focus.bind(that))
+                    .on("blur" + NS, that._blur.bind(that));
 
                 windowContent
-                    .on("keydown" + NS, proxy(that._keydown, that))
-                    .on("focus" + NS, proxy(that._focus, that))
-                    .on("blur" + NS, proxy(that._blur, that));
+                    .on("keydown" + NS, that, that._keydownContent.bind(that));
 
                 windowFrame = windowContent.find("." + KCONTENTFRAME)[0];
 
-                if(windowFrame && !globalWindow.data(WINDOWEVENTSHANDLED)){
+                if (windowFrame && !globalWindow.data(WINDOWEVENTSHANDLED)) {
 
-                    globalWindow.on("blur" + NS, function(){
+                    globalWindow.on("blur" + NS, function() {
                         var element = $(document.activeElement).parent(KWINDOWCONTENT);
                         if (element.length) {
                             var windowInstance = kendo.widgetInstance(element);
@@ -251,8 +257,8 @@
                         }
                     });
 
-                    globalWindow.on("focus" + NS, function(){
-                        $(KWINDOWCONTENT).not(KDIALOGCONTENT).each(function(i, element){
+                    globalWindow.on("focus" + NS, function() {
+                        $(KWINDOWCONTENT).not(KDIALOGCONTENT).each(function(i, element) {
                             kendo.widgetInstance($(element))._blur();
                         });
                     });
@@ -271,23 +277,20 @@
                 id = element.attr("id");
                 if (id) {
                     id = id + "_wnd_title";
-                    wrapper.children(KWINDOWTITLEBAR)
-                        .children(KWINDOWTITLE)
-                        .attr("id", id);
-
-                    windowContent
-                        .attr({
+                    wrapper.attr({
                             "role": "dialog",
                             "aria-labelledby": id
-                        });
+                        }).children(KWINDOWTITLEBAR)
+                        .children(KWINDOWTITLE)
+                        .attr("id", id);
                 }
 
                 wrapper.add(wrapper.children(".k-resize-handle," + KWINDOWTITLEBAR))
-                    .on("mousedown" + NS, proxy(that.toFront, that));
+                    .on(kendo.support.mousedown + NS, that.toFront.bind(that));
 
                 that.touchScroller = kendo.touchScroller(element);
 
-                that._resizeHandler = proxy(that._onDocumentResize, that);
+                that._resizeHandler = that._onDocumentResize.bind(that);
 
                 that._marker = kendo.guid().substring(0, 8);
 
@@ -300,11 +303,11 @@
 
                 kendo.notify(that);
 
-                if(this.options.modal) {
+                if (this.options.modal) {
                     this._tabKeyTrap = new TabKeyTrap(wrapper);
                     this._tabKeyTrap.trap();
-                    this._tabKeyTrap.shouldTrap = function () {
-                        return windowContent.data("isFront");
+                    this._tabKeyTrap.shouldTrap = function() {
+                        return wrapper.data("isFront");
                     };
                 }
             },
@@ -357,21 +360,21 @@
                 }
 
                 if (width) {
-                    wrapper.width(constrain(width, options.minWidth, options.maxWidth));
+                    wrapper.outerWidth(constrain(width, options.minWidth, options.maxWidth));
                 }
                 else {
-                    wrapper.width("");
+                    wrapper.outerWidth("");
                 }
 
                 if (height) {
-                    wrapper.height(constrain(height, options.minHeight, options.maxHeight));
+                    wrapper.outerHeight(constrain(height, options.minHeight, options.maxHeight));
                 }
                 else {
-                    wrapper.height("");
+                    wrapper.outerHeight("");
                 }
 
                 if (!options.visible) {
-                    wrapper.hide();
+                    wrapper.removeClass(INLINE_FLEX).hide();
                 }
 
                 if (sizeClass && SIZE[sizeClass]) {
@@ -381,13 +384,33 @@
 
             _position: function() {
                 var wrapper = this.wrapper,
-                    position = this.options.position;
+                    position = this.options.position,
+                    containmentTop, containmentLeft;
 
                 this._updateBoundaries();
 
                 if (this.containment) {
-                    position.top = Math.min(this.minTop + (position.top || 0), this.maxTop);
-                    position.left = Math.min(this.minLeft + (position.left || 0), this.maxLeft);
+                    position.top = position.top || 0;
+                    position.left = position.left || 0;
+
+                    containmentTop = position.top.toString().indexOf("%") > 0 ?
+                        parseInt(this.containment.height * (parseFloat(position.top) / 100), 10) :
+                        position.top;
+
+                    containmentLeft = position.left.toString().indexOf("%") > 0 ?
+                        parseInt(this.containment.width * (parseFloat(position.left) / 100), 10) :
+                        position.left;
+
+                    position.top = constrain(containmentTop, this.minTop, this.maxTop);
+                    position.left = constrain(containmentLeft, this.minLeft, this.maxLeft);
+                }
+
+                if (position.top && position.top.toString().indexOf("px") > 0) {
+                    position.top = Number(position.top.replace("px", ""));
+                }
+
+                if (position.left && position.left.toString().indexOf("px") > 0) {
+                    position.left = Number(position.left.replace("px", ""));
                 }
 
                 if (position.top === 0) {
@@ -463,11 +486,11 @@
                 }
 
                 if (resizable) {
-                    wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(function(e) {
+                    wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, (function(e) {
                         if (!$(e.target).closest(".k-window-action").length) {
                             this.toggleMaximization();
                         }
-                    }, this));
+                    }).bind(this));
 
                     each("n e s w se sw ne nw".split(" "), function(index, handler) {
                         wrapper.append(templates.resizeHandle(handler));
@@ -510,10 +533,14 @@
             setOptions: function(options) {
                 var that = this;
                 var sizeClass = that.options.size;
+                var doc = this.containment && !that._isPinned ? this.containment : $(document);
                 // make a deep extend over options.position telerik/kendo-ui-core#844
                 var cachedOptions = JSON.parse(JSON.stringify(options));
                 extend(options.position, that.options.position);
                 extend(options.position, cachedOptions.position);
+
+                that._containerScrollTop = doc.scrollTop();
+                that._containerScrollLeft = doc.scrollLeft();
 
                 Widget.fn.setOptions.call(that, options);
                 var scrollable = that.options.scrollable !== false;
@@ -540,7 +567,7 @@
                 that.element.css(OVERFLOW, scrollable ? "" : "hidden");
             },
 
-            events:[
+            events: [
                 OPEN,
                 ACTIVATE,
                 DEACTIVATE,
@@ -548,11 +575,13 @@
                 MINIMIZE,
                 MAXIMIZE,
                 REFRESH,
+                RESTORE,
                 RESIZESTART,
                 RESIZE,
                 RESIZEEND,
                 DRAGSTART,
                 DRAGEND,
+                KENDOKEYDOWN,
                 ERROR
             ],
 
@@ -596,6 +625,17 @@
                 return $.inArray("close", $.map(this.options.actions, function(x) { return x.toLowerCase(); })) > -1;
             },
 
+            _keydownContent: function(e) {
+                var that = this,
+                    keys = kendo.keys,
+                    keyCode = e.keyCode;
+
+                if (keyCode == keys.ESC && that._closable()) {
+                    e.stopPropagation();
+                    that._close(false);
+                }
+            },
+
             _keydown: function(e) {
                 var that = this,
                     options = that.options,
@@ -624,7 +664,7 @@
 
                 // Pin/Unpin
                 if (e.altKey && keyCode == 80) {// Alt + P
-                    if(that.options.pinned){
+                    if (that.options.pinned) {
                         that.unpin();
                     } else {
                         that.pin();
@@ -632,21 +672,21 @@
                 }
 
                 // Maximize/Restore/Miminimize
-                if(e.altKey && keyCode == keys.UP){
+                if (e.altKey && keyCode == keys.UP) {
                     if (isMinimized) {
                         that.restore();
-                        that.element.focus();
+                        that.wrapper.trigger("focus");
                     } else if (!isMaximized) {
                         that.maximize();
-                        that.element.focus();
+                        that.wrapper.trigger("focus");
                     }
-                } else if (e.altKey && keyCode == keys.DOWN){
+                } else if (e.altKey && keyCode == keys.DOWN) {
                     if (!isMinimized && !isMaximized) {
                         that.minimize();
-                        that.wrapper.focus();
+                        that.wrapper.trigger("focus");
                     } else if (isMaximized) {
                         that.restore();
-                        that.element.focus();
+                        that.wrapper.trigger("focus");
                     }
                 }
 
@@ -676,27 +716,27 @@
                 if (options.resizable && e.ctrlKey && !isMaximized && !isMinimized) {
                     if (keyCode == keys.UP) {
                         handled = true;
-                        newHeight = wrapper.height() - distance;
+                        newHeight = wrapper.outerHeight() - distance;
                     } else if (keyCode == keys.DOWN) {
                         handled = true;
                         if (that.containment && !that._isPinned) {
-                            newHeight = Math.min(wrapper.height() + distance,
+                            newHeight = Math.min(wrapper.outerHeight() + distance,
                                 that.containment.height - offset.top - toInt(wrapper, "padding-top") -
                                 toInt(wrapper, "borderBottomWidth") - toInt(wrapper, "borderTopWidth"));
                         } else {
-                            newHeight = wrapper.height() + distance;
+                            newHeight = wrapper.outerHeight() + distance;
                         }
                     } if (keyCode == keys.LEFT) {
                         handled = true;
-                        newWidth = wrapper.width() - distance;
+                        newWidth = wrapper.outerWidth() - distance;
                     } else if (keyCode == keys.RIGHT) {
                         handled = true;
                         if (that.containment && !that._isPinned) {
-                            newWidth = Math.min(wrapper.width() + distance,
+                            newWidth = Math.min(wrapper.outerWidth() + distance,
                                                 that.containment.width - offset.left -
                                                 toInt(wrapper, "borderLeftWidth") - toInt(wrapper, "borderRightWidth"));
                         } else {
-                            newWidth = wrapper.width() + distance;
+                            newWidth = wrapper.outerWidth() + distance;
                         }
                     }
 
@@ -705,11 +745,11 @@
                         h = constrain(newHeight, options.minHeight, options.maxHeight);
 
                         if (!isNaN(w)) {
-                            wrapper.width(w);
+                            wrapper.outerWidth(w);
                             that.options.width = w + "px";
                         }
                         if (!isNaN(h)) {
-                            wrapper.height(h);
+                            wrapper.outerHeight(h);
                             that.options.height = h + "px";
                         }
 
@@ -722,9 +762,11 @@
                 }
             },
 
-            _overlay: function (visible) {
+            _overlay: function(visible) {
                 var overlay = this.containment ? this.containment.children(KOVERLAY) : this.appendTo.children(KOVERLAY),
-                    wrapper = this.wrapper;
+                    wrapper = this.wrapper,
+                    display = visible ? "block" : "none",
+                    zIndex = parseInt(wrapper.css(ZINDEX), 10) - 1;
 
                 if (!overlay.length) {
                     overlay = $("<div class='k-overlay' />");
@@ -732,8 +774,10 @@
 
                 overlay
                     .insertBefore(wrapper[0])
-                    .toggle(visible)
-                    .css(ZINDEX, parseInt(wrapper.css(ZINDEX), 10) - 1);
+                    .css({
+                        zIndex: zIndex,
+                        display: display
+                    });
 
                 if (this.options.modal.preventScroll && !this.containment) {
                     this._stopDocumentScrolling();
@@ -755,7 +799,7 @@
                 }[iconClass];
             },
 
-            _windowActionHandler: function (e) {
+            _windowActionHandler: function(e) {
                 if (this._closing) {
                     return;
                 }
@@ -770,21 +814,31 @@
             },
 
             _modals: function() {
-                var that = this;
+                var that = this,
+                    windowElements = $(KWINDOW + VISIBLE),
+                    windowInstance,
+                    modals = [];
 
-                var zStack = $(KWINDOW).filter(function() {
-                    var dom = $(this);
-                    var object = that._object(dom);
-                    var options = object && object.options;
+                for (var i = 0; i < windowElements.length; i += 1) {
+                    windowInstance = that._object($(windowElements[i]));
 
-                    return options && options.modal && options.visible && options.appendTo === that.options.appendTo && dom.is(VISIBLE);
-                }).sort(function(a, b){
-                    return +$(a).css("zIndex") - +$(b).css("zIndex");
+                    if (windowInstance &&
+                        windowInstance.options &&
+                        windowInstance.options.modal &&
+                        windowInstance.options.visible &&
+                        windowInstance.options.appendTo === that.options.appendTo &&
+                        (!windowInstance.containment || (that.containment && windowInstance.containment[0] === that.containment[0]))) {
+                            modals.push(windowInstance.wrapper[0]);
+                    }
+                }
+
+                modals.sort(function(a, b) {
+                    return a.style.zIndex - b.style.zIndex;
                 });
 
                 that = null;
 
-                return zStack;
+                return $(modals);
             },
 
             _object: function(element) {
@@ -798,7 +852,7 @@
                 return undefined;
             },
 
-            center: function () {
+            center: function() {
                 var that = this,
                     position = that.options.position,
                     wrapper = that.wrapper,
@@ -811,7 +865,7 @@
                     return that;
                 }
 
-                if(that.options.pinned && !that._isPinned) {
+                if (that.options.pinned && !that._isPinned) {
                     that.pin();
                 }
 
@@ -825,8 +879,8 @@
                     newLeft = this.minLeft + (this.maxLeft - this.minLeft) / 2;
                 } else {
                     that._scrollIsAppended = true;
-                    newLeft = scrollLeft + Math.max(0, (documentWindow.width() - wrapper.width()) / 2);
-                    newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.height() - toInt(wrapper, "paddingTop")) / 2);
+                    newLeft = scrollLeft + Math.max(0, (documentWindow.width() - wrapper.outerWidth()) / 2);
+                    newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.outerHeight() - toInt(wrapper, "paddingTop")) / 2);
                 }
 
                 wrapper.css({
@@ -840,22 +894,20 @@
                 return that;
             },
 
-            title: function (title) {
+            title: function(title) {
                 var that = this,
                     value,
                     encoded = true,
                     wrapper = that.wrapper,
                     titleBar = wrapper.children(KWINDOWTITLEBAR),
-                    titleElement = titleBar.children(KWINDOWTITLE),
-                    titleBarHeight,
-                    display, visibility;
+                    titleElement = titleBar.children(KWINDOWTITLE);
 
                 if (!arguments.length) {
                     return titleElement.html();
                 }
 
                 if ($.isPlainObject(title)) {
-                    value = typeof title.text !== "undefined" ? title.text :  "";
+                    value = typeof title.text !== "undefined" ? title.text : "";
                     encoded = title.encoded !== false;
                 } else {
                     value = title;
@@ -875,22 +927,6 @@
                     } else {
                         titleElement.html(encoded ? kendo.htmlEncode(value) : value);
                     }
-
-                    visibility = wrapper.css("visibility");
-                    display = wrapper.css("display");
-
-                    if (visibility === HIDDEN) {
-                        wrapper.css({ display: "" });
-                        titleBarHeight = parseInt(outerHeight(titleBar), 10);
-                        wrapper.css({ display: display });
-                    } else {
-                        wrapper.css({ visibility: HIDDEN, display: "" });
-                        titleBarHeight = parseInt(outerHeight(titleBar), 10);
-                        wrapper.css({ visibility: visibility, display: display });
-                    }
-
-                    wrapper.css("padding-top", titleBarHeight);
-                    titleBar.css("margin-top", -titleBarHeight);
                 }
 
                 that.options.title = value;
@@ -898,7 +934,7 @@
                 return that;
             },
 
-            content: function (html, data) {
+            content: function(html, data) {
                 var content = this.wrapper.children(KWINDOWCONTENT),
                     scrollContainer = content.children(".km-scroll-container");
 
@@ -908,7 +944,7 @@
                     return content.html();
                 }
 
-                this.angular("cleanup", function(){
+                this.angular("cleanup", function() {
                     return { elements: content.children() };
                 });
 
@@ -916,7 +952,7 @@
 
                 content.empty().html(html);
 
-                this.angular("compile", function(){
+                this.angular("compile", function() {
                     var a = [];
                     for (var i = content.length; --i >= 0;) {
                         a.push({ dataItem: data });
@@ -930,7 +966,7 @@
                 return this;
             },
 
-            open: function () {
+            open: function() {
                 var that = this,
                     wrapper = that.wrapper,
                     options = that.options,
@@ -950,7 +986,7 @@
                     that.toFront();
 
                     if (options.autoFocus) {
-                        that.element.focus();
+                        that.wrapper.trigger("focus");
                     }
 
                     options.visible = true;
@@ -973,8 +1009,8 @@
                         overlay.show();
 
                         $(window).on("focus" + MODAL_NS, function() {
-                            if (contentElement.data("isFront") && !$(document.activeElement).closest(contentElement).length) {
-                               that.element.focus();
+                            if (wrapper.data("isFront") && !$(document.activeElement).closest(wrapper).length) {
+                               that.wrapper.trigger("focus");
                             }
                         });
                     }
@@ -982,12 +1018,12 @@
                     if (!wrapper.is(VISIBLE)) {
                         contentElement.css(OVERFLOW, HIDDEN);
 
-                        that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-flat");
+                        that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-button-flat");
 
-                        wrapper.show().kendoStop().kendoAnimate({
+                        wrapper.addClass(INLINE_FLEX).kendoStop().kendoAnimate({
                             effects: showOptions.effects,
                             duration: showOptions.duration,
-                            complete: proxy(this._activate, this)
+                            complete: this._activate.bind(this)
                         });
                     }
                 }
@@ -998,7 +1034,7 @@
                     that._stopDocumentScrolling();
                 }
 
-                if(this.options.pinned && !this._isPinned){
+                if (this.options.pinned && !this._isPinned) {
                     this.pin();
                 }
 
@@ -1009,7 +1045,7 @@
                 var scrollable = this.options.scrollable !== false;
 
                 if (this.options.autoFocus) {
-                    this.element.focus();
+                    this.wrapper.trigger("focus");
                 }
 
                 this.element.css(OVERFLOW, scrollable ? "" : "hidden");
@@ -1022,12 +1058,11 @@
                 var modals = this._modals();
                 var options = this.options;
                 var hideOverlay = options.modal && !modals.length;
-                var overlay = options.modal ? this._overlay(true) : $(undefined);
-                var hideOptions  = this._animationOptions("close");
+                var hideOptions = this._animationOptions("close");
 
                 if (hideOverlay) {
                     if (!suppressAnimation && hideOptions.duration && kendo.effects.Fade) {
-                        var overlayFx = kendo.fx(overlay).fadeOut();
+                        var overlayFx = kendo.fx(options.modal ? this._overlay(true) : $(undefined)).fadeOut();
                         overlayFx.duration(hideOptions.duration || 0);
                         overlayFx.startValue(0.5);
                         overlayFx.play();
@@ -1051,7 +1086,7 @@
                     wrapper = that.wrapper,
                     options = that.options,
                     showOptions = this._animationOptions("open"),
-                    hideOptions  = this._animationOptions("close"),
+                    hideOptions = this._animationOptions("close"),
                     containmentContext = this.containment && !that._isPinned,
                     doc = containmentContext ? this.containment : $(document),
                     defaultPrevented;
@@ -1078,13 +1113,13 @@
                     this._removeOverlay();
 
                     // Prevent close animation from stopping
-                    that.wrapper.find(TITLEBAR_BUTTONS).removeClass("k-bare");
+                    that.wrapper.find(TITLEBAR_BUTTONS).removeClass("k-button-flat");
 
                     wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects || showOptions.effects,
                         reverse: hideOptions.reverse === true,
                         duration: hideOptions.duration,
-                        complete: proxy(this._deactivate, this)
+                        complete: this._deactivate.bind(this)
                     });
                     $(window).off(MODAL_NS);
                 }
@@ -1098,12 +1133,22 @@
                         doc.scrollLeft(that._containerScrollLeft);
                     }
                 }
+
+                if (that.options.iframe) {
+                    that.wrapper.trigger("blur");
+                }
             },
 
-            _deactivate: function () {
+            _deactivate: function() {
                 var that = this;
-                that.wrapper.hide().css("opacity", "");
+
+                that.wrapper
+                    .removeClass(INLINE_FLEX)
+                    .hide()
+                    .css("opacity", "");
+
                 that.trigger(DEACTIVATE);
+
                 if (that.options.modal) {
                     var lastModal = that._object(that._modals().last());
                     if (lastModal) {
@@ -1112,18 +1157,18 @@
                 }
             },
 
-            close: function () {
+            close: function() {
                 this._close(true);
                 return this;
             },
 
             _actionable: function(element) {
-                return $(element).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon,:input,a");
+                return $(element).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon, :input, a, .k-input, .k-icon, [role='gridcell'], .k-input-value-text");
             },
 
             _shouldFocus: function(target) {
                 var active = activeElement(),
-                    element = this.element;
+                    element = this.wrapper;
 
                 return this.options.autoFocus &&
                     !$(active).is(element) &&
@@ -1131,11 +1176,12 @@
                     (!element.find(active).length || !element.find(target).length);
             },
 
-            toFront: function (e) {
+            toFront: function(e, avoidFocus) {
                 var that = this,
                     wrapper = that.wrapper,
                     currentWindow = wrapper[0],
                     containmentContext = that.containment && !that._isPinned,
+                    openAnimation = this._animationOptions("open"),
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex,
                     target = (e && e.target) || null;
@@ -1149,10 +1195,13 @@
                         zIndex = Math.max(+zIndexNew, zIndex);
                     }
 
-                    contentElement.data("isFront", element == currentWindow);
+                    wrapper.data("isFront", element == currentWindow);
                     // Add overlay to windows with iframes and lower z-index to prevent
                     // trapping of events when resizing / dragging
-                    if (element != currentWindow && contentElement.find("> ." + KCONTENTFRAME).length > 0) {
+
+                    if (element != currentWindow &&
+                        contentElement.find("." + KCONTENTFRAME).length &&
+                        !contentElement.find(KOVERLAY).length) {
                         contentElement.append(templates.overlay);
                     }
                 });
@@ -1163,14 +1212,10 @@
                 that.element.find("> .k-overlay").remove();
 
                 if (that._shouldFocus(target)) {
-                    if (that.isMinimized()) {
-                        that.wrapper.focus();
-                    } else if ($(target).is(KOVERLAY)) {
-                        setTimeout(function(){
-                            that.element.focus();
-                        });
-                    } else {
-                        that.element.focus();
+                    if (!avoidFocus) {
+                        setTimeout(function() {
+                            that.wrapper.focus();
+                        }, openAnimation ? openAnimation.duration : 0);
                     }
 
                     var scrollTop = containmentContext ? that.containment.scrollTop() : $(window).scrollTop(),
@@ -1190,7 +1235,7 @@
                 return that;
             },
 
-            toggleMaximization: function () {
+            toggleMaximization: function() {
                 if (this._closing) {
                     return this;
                 }
@@ -1198,7 +1243,7 @@
                 return this[this.options.isMaximized ? "restore" : "maximize"]();
             },
 
-            restore: function () {
+            restore: function() {
                 var that = this;
                 var options = that.options;
                 var minHeight = options.minHeight;
@@ -1244,9 +1289,9 @@
                     .find(PIN_UNPIN).parent().show();
 
                 if (options.isMaximized) {
-                    that.wrapper.find(".k-i-window-maximize").parent().focus();
+                    that.wrapper.find(".k-i-window-maximize").parent().trigger("focus");
                 } else if (options.isMinimized) {
-                    that.wrapper.find(".k-i-window-minimize").parent().focus();
+                    that.wrapper.find(".k-i-window-minimize").parent().trigger("focus");
                 }
 
                 that.options.width = restoreOptions.width;
@@ -1265,10 +1310,11 @@
 
                 options.isMaximized = options.isMinimized = false;
 
-                that.wrapper.removeAttr("tabindex");
                 that.wrapper.removeAttr("aria-labelled-by");
 
                 that.resize();
+
+                that.trigger(RESTORE);
 
                 return that;
             },
@@ -1299,7 +1345,7 @@
 
                 that.trigger(actionId);
 
-                wrapper.find(".k-i-window-restore").parent().focus();
+                wrapper.find(".k-i-window-restore").parent().trigger("focus");
 
                 return that;
             },
@@ -1338,7 +1384,7 @@
                 return this;
             },
 
-            _stopDocumentScrolling: function(){
+            _stopDocumentScrolling: function() {
                 var that = this;
                 var containment = that.containment;
 
@@ -1361,7 +1407,7 @@
                 $html.css(OVERFLOW, HIDDEN);
             },
 
-            _enableDocumentScrolling: function(){
+            _enableDocumentScrolling: function() {
                 var that = this;
                 var containment = that.containment;
 
@@ -1378,26 +1424,26 @@
                 that._restoreOverflowRule($("html"));
             },
 
-            _storeOverflowRule: function($element){
-                if(this._isOverflowStored($element)){
+            _storeOverflowRule: function($element) {
+                if (this._isOverflowStored($element)) {
                     return;
                 }
 
                 var overflowRule = $element.get(0).style.overflow;
 
-                if(typeof overflowRule === "string"){
+                if (typeof overflowRule === "string") {
                     $element.data(DATADOCOVERFLOWRULE, overflowRule);
                 }
             },
 
-            _isOverflowStored: function ($element){
+            _isOverflowStored: function($element) {
                 return typeof $element.data(DATADOCOVERFLOWRULE) === "string";
             },
 
-            _restoreOverflowRule: function($element){
+            _restoreOverflowRule: function($element) {
                 var overflowRule = $element.data(DATADOCOVERFLOWRULE);
 
-                if(overflowRule !== null && overflowRule !== undefined){
+                if (overflowRule !== null && overflowRule !== undefined) {
                     $element.css(OVERFLOW, overflowRule);
                     $element.removeData(DATADOCOVERFLOWRULE);
                 } else {
@@ -1423,7 +1469,6 @@
                     that.options.isMinimized = true;
                 });
 
-                this.wrapper.attr("tabindex", 0);
                 this.wrapper.attr("aria-labelled-by", this.element.attr("aria-labelled-by"));
 
                 this._updateBoundaries();
@@ -1449,12 +1494,13 @@
                     position.left = left;
 
                     if (that._scrollIsAppended && (!this.containment || this.containment.css("position") !== "fixed")) {
+
                         position.top -= win.scrollTop();
                         position.left -= win.scrollLeft();
                         that._scrollIsAppended = false;
                     }
 
-                    wrapper.css(extend(position, {position: "fixed"}));
+                    wrapper.css(extend(position, { position: "fixed" }));
                     wrapper.children(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
 
                     that._isPinned = true;
@@ -1517,12 +1563,12 @@
                     position.top = constrain(top, that.minTop, that.maxTop);
                     position.left = constrain(left, that.minLeft, that.maxLeft);
 
-                    wrapper.css(extend(position, {position: ""}));
+                    wrapper.css(extend(position, { position: "" }));
                     wrapper.children(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
                 }
             },
 
-            _onDocumentResize: function () {
+            _onDocumentResize: function() {
                 var that = this,
                     wrapper = that.wrapper,
                     wnd = $(window),
@@ -1556,7 +1602,7 @@
                 that.resize();
             },
 
-            refresh: function (options) {
+            refresh: function(options) {
                 var that = this,
                     initOptions = that.options,
                     element = $(that.element),
@@ -1568,7 +1614,7 @@
                     options = { url: options };
                 }
 
-                options = extend({}, initOptions.content, options);
+                options = extend(initOptions.content, options);
 
                 showIframe = defined(initOptions.iframe) ? initOptions.iframe : options.iframe;
 
@@ -1594,8 +1640,8 @@
                         }
 
                         element.find("." + KCONTENTFRAME)
-                            .unbind("load" + NS)
-                            .on("load" + NS, proxy(this._triggerRefresh, this));
+                            .off("load" + NS)
+                            .on("load" + NS, this._triggerRefresh.bind(this));
                     }
                 } else {
                     if (options.template) {
@@ -1620,12 +1666,12 @@
                 this.wrapper.find(REFRESHICON).removeClass(LOADING);
             },
 
-            _ajaxError: function (xhr, status) {
+            _ajaxError: function(xhr, status) {
                 this.trigger(ERROR, { status: status, xhr: xhr });
             },
 
-            _ajaxSuccess: function (contentTemplate) {
-                return function (data) {
+            _ajaxSuccess: function(contentTemplate) {
+                return function(data) {
                     var html = data;
                     if (contentTemplate) {
                         html = template(contentTemplate)(data || {});
@@ -1642,16 +1688,16 @@
                 this.wrapper.find(REFRESHICON).addClass(LOADING);
             },
 
-            _ajaxRequest: function (options) {
-                this._loadingIconTimeout = setTimeout(proxy(this._showLoading, this), 100);
+            _ajaxRequest: function(options) {
+                this._loadingIconTimeout = setTimeout(this._showLoading.bind(this), 100);
 
                 $.ajax(extend({
                     type: "GET",
                     dataType: "html",
                     cache: false,
-                    error: proxy(this._ajaxError, this),
-                    complete: proxy(this._ajaxComplete, this),
-                    success: proxy(this._ajaxSuccess(options.template), this)
+                    error: this._ajaxError.bind(this),
+                    complete: this._ajaxComplete.bind(this),
+                    success: this._ajaxSuccess(options.template).bind(this)
                 }, options));
             },
 
@@ -1679,12 +1725,14 @@
                 this.unbind(undefined);
 
                 kendo.destroy(this.wrapper);
-
-                this._removeOverlay(true);
             },
 
             destroy: function() {
                 this._destroy();
+
+                if (this.options.modal) {
+                    this._removeOverlay(true);
+                }
 
                 this.wrapper.empty().remove();
 
@@ -1715,6 +1763,7 @@
                 // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
                 wrapper
                     .toggleClass("k-rtl", isRtl)
+                    .attr("tabindex", 0)
                     .append(contentHtml)
                     .find("iframe:not(.k-content-frame)").each(function(index) {
                     // Restore the src attribute of the iframes when they are part of the live DOM tree
@@ -1747,14 +1796,14 @@
         templates = {
             wrapper: template("<div class='k-widget k-window'></div>"),
             action: template(
-                "<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action' aria-label='#= name #'>" +
-                "<span class='k-icon k-i-#= name.toLowerCase() #'></span>" +
+                "<a role='button' href='\\#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action' aria-label='#= name #'>" +
+                    "<span class='k-button-icon k-icon k-i-#= name.toLowerCase() #'></span>" +
                 "</a>"
             ),
             titlebar: template(
-                "<div class='k-window-titlebar'>" +
-                "<span class='k-window-title'>#= title #</span>" +
-                "<div class='k-window-actions'></div>" +
+                "<div class='k-window-titlebar k-hstack'>" +
+                    "<span class='k-window-title'>#= title #</span>" +
+                    "<div class='k-window-actions k-hstack'></div>" +
                 "</div>"
             ),
             overlay: "<div class='k-overlay'></div>",
@@ -1764,7 +1813,7 @@
                 "This page requires frames in order to show content" +
                 "</iframe>"
             ),
-            resizeHandle: template("<div class='k-resize-handle k-resize-#= data #'></div>")
+            resizeHandle: template("<div aria-hidden='true' class='k-resize-handle k-resize-#= data #'></div>")
         };
 
 
@@ -1775,23 +1824,23 @@
             that._draggable = new Draggable(wnd.wrapper, {
                 filter: ">" + KWINDOWRESIZEHANDLES,
                 group: wnd.wrapper.id + "-resizing",
-                dragstart: proxy(that.dragstart, that),
-                drag: proxy(that.drag, that),
-                dragend: proxy(that.dragend, that)
+                dragstart: that.dragstart.bind(that),
+                drag: that.drag.bind(that),
+                dragend: that.dragend.bind(that)
             });
 
-            that._draggable.userEvents.bind("press", proxy(that.addOverlay, that));
-            that._draggable.userEvents.bind("release", proxy(that.removeOverlay, that));
+            that._draggable.userEvents.bind("press", that.addOverlay.bind(that));
+            that._draggable.userEvents.bind("release", that.removeOverlay.bind(that));
         }
 
         WindowResizing.prototype = {
-            addOverlay: function () {
+            addOverlay: function() {
                 this.owner.wrapper.append(templates.overlay);
             },
-            removeOverlay: function () {
+            removeOverlay: function() {
                 this.owner.wrapper.find(KOVERLAY).remove();
             },
-            dragstart: function (e) {
+            dragstart: function(e) {
                 var that = this;
                 var wnd = that.owner;
                 var wrapper = wnd.wrapper;
@@ -1807,13 +1856,13 @@
                 that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
 
                 that.initialSize = {
-                    width: wrapper.width(),
-                    height: wrapper.height()
+                    width: wrapper.outerWidth(),
+                    height: wrapper.outerHeight()
                 };
 
                 wnd._updateBoundaries();
 
-                that.containerOffset = wnd.containment ? wnd.containment.position : kendo.getOffset(wnd.appendTo, "position");
+                that.containerOffset = wnd.containment ? wnd.containment.position : kendo.getOffset(wnd.appendTo);
 
                 var offsetParent = wrapper.offsetParent();
 
@@ -1841,7 +1890,7 @@
 
                 $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
             },
-            drag: function (e) {
+            drag: function(e) {
                 if (this._preventDragging) {
                     return;
                 }
@@ -1857,7 +1906,7 @@
                     containmentContext = wnd.containment && !wnd._isPinned,
                     rtl = kendo.support.isRtl(wnd.containment),
                     leftRtlOffset = containmentContext && rtl && wnd.containment.innerWidth() > wnd.containment.width ? kendo.support.scrollbar() : 0,
-                    scrollOffset = containmentContext ? { top: wnd.containment.scrollTop(), left: wnd.containment.scrollLeft()} : { top: 0, left: 0},
+                    scrollOffset = containmentContext ? { top: wnd.containment.scrollTop(), left: wnd.containment.scrollLeft() } : { top: 0, left: 0 },
                     newWidth, newHeight,
                     windowBottom, windowRight,
                     x = Math.max(e.x.location, 0),
@@ -1871,7 +1920,7 @@
                             newWidth = x - initialPosition.left - containerOffset.left;
                         }
 
-                        wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
+                        wrapper.outerWidth(constrain(newWidth, options.minWidth, options.maxWidth));
                     } else if (direction.indexOf("w") >= 0) {
                         windowRight = initialPosition.left + initialSize.width + containerOffset.left;
                         newWidth = constrain(windowRight - x, options.minWidth, options.maxWidth);
@@ -1899,7 +1948,7 @@
                             newHeight = wnd.maxTop - initialPosition.top + initialSize.height - scrollOffset.top;
                         }
 
-                        wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
+                        wrapper.outerHeight(constrain(newHeight, options.minHeight, options.maxHeight));
                     } else if (direction.indexOf("n") >= 0) {
                         windowBottom = initialPosition.top + initialSize.height + containerOffset.top;
                         newHeight = constrain(windowBottom - newWindowTop, options.minHeight, options.maxHeight);
@@ -1925,10 +1974,11 @@
 
                     wnd.resize();
             },
-            dragend: function (e) {
+            dragend: function(e) {
                 if (this._preventDragging) {
                     return;
                 }
+
                 var that = this,
                     wnd = that.owner,
                     wrapper = wnd.wrapper;
@@ -1967,17 +2017,17 @@
             that._draggable = new Draggable(wnd.wrapper, {
                 filter: dragHandle,
                 group: wnd.wrapper.id + "-moving",
-                dragstart: proxy(that.dragstart, that),
-                drag: proxy(that.drag, that),
-                dragend: proxy(that.dragend, that),
-                dragcancel: proxy(that.dragcancel, that)
+                dragstart: that.dragstart.bind(that),
+                drag: that.drag.bind(that),
+                dragend: that.dragend.bind(that),
+                dragcancel: that.dragcancel.bind(that)
             });
 
             that._draggable.userEvents.stopPropagation = false;
         }
 
         WindowDragging.prototype = {
-            dragstart: function (e) {
+            dragstart: function(e) {
                 var wnd = this.owner,
                     draggable = wnd.options.draggable,
                     element = wnd.element,
@@ -2006,21 +2056,21 @@
                     if (actions.length > 0) {
                         wnd.minLeft = outerWidth(actions) + parseInt(actions.css("right"), 10) - outerWidth(element);
                     } else {
-                        wnd.minLeft =  20 - outerWidth(element); // at least 20px remain visible
+                        wnd.minLeft = 20 - outerWidth(element); // at least 20px remain visible
                     }
 
                     wnd.minLeft -= containerOffset.left;
                     wnd.minTop = -containerOffset.top;
                 }
 
-                wnd.wrapper
-                    .append(templates.overlay)
-                    .children(KWINDOWRESIZEHANDLES).hide();
+                $(templates.overlay).appendTo(wnd.wrapper).css({ opacity: 0 });
+
+                wnd.wrapper.children(KWINDOWRESIZEHANDLES).hide();
 
                 $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
             },
 
-            drag: function (e) {
+            drag: function(e) {
                 var wnd = this.owner;
                 var position = wnd.options.position;
                 var axis = wnd.options.draggable.axis;
@@ -2073,7 +2123,7 @@
                 $(BODY).css(CURSOR, "");
             },
 
-            dragcancel: function (e) {
+            dragcancel: function(e) {
                 if (this._preventDragging) {
                     return;
                 }
@@ -2082,7 +2132,7 @@
                 e.currentTarget.closest(KWINDOW).css(this.owner.initialWindowPosition);
             },
 
-            dragend: function () {
+            dragend: function() {
                 var wnd = this.owner;
 
                 if (this._preventDragging || wnd.isMaximized()) {
@@ -2114,4 +2164,4 @@
 
     return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.data" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "data.signalr",
     name: "SignalR",
     category: "framework",
@@ -19,11 +19,11 @@ var __meta__ = { // jshint ignore:line
     }
 
     function isNativePromise(promise) {
-        return promise && isFunction(promise.then) && isFunction(promise.catch); // jshint ignore:line
+        return promise && isFunction(promise.then) && isFunction(promise.catch);
     }
 
     var transport = kendo.data.RemoteTransport.extend({
-        init: function (options) {
+        init: function(options) {
             var signalr = options && options.signalr ? options.signalr : {};
 
             var promise = signalr.promise;
@@ -96,7 +96,7 @@ var __meta__ = { // jshint ignore:line
                 promise.then(function() {
                     hub.invoke.apply(hub, args)
                               .then(options.success)
-                              .catch(options.error); // jshint ignore:line
+                              .catch(options.error);
                 });
             }
         },
@@ -128,4 +128,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

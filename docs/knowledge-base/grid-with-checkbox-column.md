@@ -99,7 +99,7 @@ For more information on how to apply batch editing with a bound Boolean column, 
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 110 },
           { field: "UnitsInStock", title: "Units In Stock", width: 110 },
-          { template: '#=dirtyField(data,"Discontinued")#<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx k-checkbox" />', width: 110 },
+          { template: '#=dirtyField(data,"Discontinued")#<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx k-checkbox k-checkbox-md k-rounded-md" />', title: "Discontinued", width: 110, attributes: {class: "k-text-center"} },
           { command: "destroy", title: "&nbsp;", width: 100 }],
         editable: true
       });

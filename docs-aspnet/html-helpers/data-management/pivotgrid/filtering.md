@@ -1,7 +1,7 @@
 ---
 title: Filtering
 page_title: Filtering
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and learn how to filter a Telerik UI PivotGrid HtmlHelper for {{ site.framework }}."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to filter a Telerik UI PivotGrid component for {{ site.framework }}."
 slug: htmlhelpers_pivotgrid_aspnetcore_filtering
 position: 3
 ---
@@ -20,4 +20,7 @@ The filter descriptor is similar to [the filter option of the `kendo.data.DataSo
 ## See Also
 
 * [Basic Usage of the PivotGrid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/index)
+{% if site.core %}
+* [Basic Usage of the PivotGrid TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/tag-helper)
+{% endif %}
 * [Server-Side API](/api/pivotgrid)

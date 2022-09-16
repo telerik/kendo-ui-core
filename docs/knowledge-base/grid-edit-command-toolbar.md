@@ -18,7 +18,7 @@ component: grid
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
-  <td>Created with version 2017.3.1026</td>
+  <td>Created with version 2020.3.1021</td>
  </tr>
 </table>
 
@@ -43,13 +43,14 @@ How can I limit the number of columns in the Grid and move the **Edit** and **Up
 
 <script type="text/x-kendo-template" id="template">
     <div class="editBtnContainer">
-        <a href="\\#" class="k-button k-button-icontext k-grid-custom" title="Edit">Edit</a>
+         <button type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-custom">Edit</button>          
+
     </div>
     <div class="updateCancelContainer">
-        <a role="button" class="k-button k-button-icontext k-grid-update" href="\\#">
-        <span class="k-icon k-i-check"></span>Update</a>
-        <a role="button" class="k-button k-button-icontext k-grid-cancel" href="\\#">
-        <span class="k-icon k-i-cancel"></span>Cancel</a>
+    		<a role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-update" href="\\#"> 
+        <span class="k-icon k-i-check k-button-icon"></span>Update</a>
+        <a role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-cancel" href="\\#">
+        <span class="k-icon k-i-cancel k-button-icon"></span>Cancel</a>
     </div>
 </script>
 
@@ -106,7 +107,7 @@ How can I limit the number of columns in the Grid and move the **Edit** and **Up
                 "ProductName",
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
                 { field: "UnitsInStock", title: "Units In Stock", width: "120px" },
-                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { field: "Discontinued", width: "120px" },
             ],
             editable: "inline"
         });
@@ -137,11 +138,5 @@ How can I limit the number of columns in the Grid and move the **Edit** and **Up
         });
 
     });
-
-    function customBoolEditor(container, options) {
-        var guid = kendo.guid();
-        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-    }
 </script>
 ````

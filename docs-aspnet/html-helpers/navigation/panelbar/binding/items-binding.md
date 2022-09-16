@@ -1,7 +1,7 @@
 ---
 title: Items Binding
 page_title: Items Binding
-description: "Manually define the properties of each item in the Telerik UI PanelBar HtmlHelper for {{ site.framework }} by using the items builder."
+description: "Manually define the properties of each item in the Telerik UI PanelBar component for {{ site.framework }} by using the items builder."
 slug: itemsbinding_panelbarhelper_aspnetmvc
 position: 2
 ---
@@ -20,7 +20,7 @@ The PanelBar enables you to manually define the properties of each item.
 
 1. Add a PanelBar.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().PanelBar()
             .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the PanelBar.
             .Items(items =>
@@ -30,6 +30,18 @@ The PanelBar enables you to manually define the properties of each item.
             })
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+     <kendo-panelbar name="panelbar">
+        <items>
+            <panelbar-item text="Item 1"></panelbar-item>
+            <panelbar-item text="Item 2"></panelbar-item>
+        </items>
+    </kendo-panelbar>
+    ```
+    {% endif %}
+
+    > When the `Items` configuration is used, the component generates internally the required [HTML markup used for its initialization](https://docs.telerik.com/kendo-ui/controls/navigation/panelbar/overview#from-html). In this scenario the [DataBound](/api/Kendo.Mvc.UI.Fluent/PanelBarEventBuilder#databoundsystemstring) event is not fired.
 
 ## See Also
 

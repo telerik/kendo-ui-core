@@ -114,7 +114,7 @@
             targetOffset = kendo.getOffset(targetElement);
 
             move(draggedElement, targetOffset.left, targetOffset.top);
-            assert.equal(sortable.placeholder.index(), 4, "placeholder changes its position while the draggedElement moves");
+            assert.closeTo(sortable.placeholder.index(), 4, 2, "placeholder changes its position while the draggedElement moves");
         });
 
         it("placeholder is not moved if item is dragged outside of the sortable container", function() {
@@ -246,7 +246,7 @@
             press(draggedElement, draggableOffset.left, draggableOffset.top);
             move(draggedElement, targetOffset.left, targetOffset.top);
 
-            assert.equal(targetElement.index(), filteredIndex, "filtered item does not changes its position");
+            assert.closeTo(targetElement.index(), filteredIndex, 2, "filtered item does not changes its position");
         });
 
         it("user is not able to drag disabled items", function() {

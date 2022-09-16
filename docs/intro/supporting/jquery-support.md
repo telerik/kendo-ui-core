@@ -1,6 +1,6 @@
 ---
 title: jQuery Support
-page_title: jQuery Support | Support and Distribution | Kendo UI for jQuery
+page_title: jQuery Support | Support and Distribution 
 description: "Get started with Kendo UI for jQuery and learn about the jQuery version support which is delivered by the Kendo UI for jQuery library."
 previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites, /technical-requirements
 slug: jquerysupport_kendoui
@@ -21,6 +21,14 @@ The following table provides a list of the jQuery versions that are compatible w
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [Kendo UI 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-(version-2022-3-913))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
+| [Kendo UI 2022.2.510 (R2 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2022-(version-2022-2-510))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
+| [Kendo UI 2022.1.119 (R1 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2022-(version-2022-1-119))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
+| [Kendo UI 2021.3.914 (R3 2021)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2021)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
+| [Kendo UI 2021.2.511 (R2 2021)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2021)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
+| [Kendo UI 2021.1.119 (R1 2021)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2021)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.5.1|
+| [Kendo UI 2020.3.915 (R3 2020)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2020)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.5.1|
+| [Kendo UI 2020.2.513 (R2 2020)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2020)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.5.1|
 | [Kendo UI 2020.1.114 (R1 2020)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2020)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
 | [Kendo UI 2019.3.917 (R3 2019)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2019)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
 | [Kendo UI 2019.2.514 (R2 2019)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2019)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|

@@ -1,18 +1,18 @@
 ---
-title: Server filtering
-page_title: Server filtering
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure the component to work with server-side filtering."
+title: Server Filtering
+page_title: Server f=Filtering
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure the component to work with server-side filtering."
 slug: htmlhelpers_scheduler_server_filtering_aspnetcore
-position: 6
+position: 7
 ---
 
-# Server filtering
+# Server Filtering
 
 This article explains how to implement server-side filtering for the Scheduler component.
 
 The server-side filtering allows the user to load only the events that are part of the currently loaded View without the need to fetch all the available data from the datasource. The server-side filtering approach is very useful for situations where there are a lot of events/meetings in the database allowing us to fetch the needed data only - leading to better performance and faster loading.
 
-The code snippets below are extracted from a demo project of Scheduler with Server Filtering in {{ site.framework }} that can be downloaded from  [this repository]({% if site.core %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Kendo.Examples.Mvc/Kendo.Examples.Mvc/Views/Scheduler/SchedulerServerFiltering.cshtml{% else %}https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-server-filtering{% endif %}). The current article discussed the more difficult steps of the server filtering implementation. For more details, please refer to the above-linked repository.
+The code snippets below are extracted from a demo project of Scheduler with Server Filtering in {{ site.framework }} that can be downloaded from  [this repository]({% if site.core %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Scheduler/SchedulerServerFiltering.cshtml{% else %}https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-server-filtering{% endif %}). The current article discussed the more difficult steps of the server filtering implementation. For more details, please refer to the above-linked repository.
 
 ## Initializing the Scheduler
 
@@ -22,13 +22,23 @@ When initializing the Scheduler that will work with server filtering there are t
 ```Razor
 .Read(read => read.Action("Read", "Scheduler").Data("getAdditionalData"))
 ```
+{% if site.core %}
+```TagHelper
+    <scheduler-datasource type="@DataSourceTagHelperType.Ajax" server-operation="true">
+        <transport>
+            <read url="@Url.Action("Read", "Scheduler")" data="getAdditionalData"/>
+        </transport>
+        ...
+    </scheduler-datasource>
+```
+{% endif %}
 
 Here is a sample definition:
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Scheduler<SqlServerDataBase.Models.TaskViewModel>()
 	.Name("scheduler")
-    .StartTime(6, 30, 0)
+    .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
 	.Height(600)
     .WorkWeekStart(1)
     .WorkWeekEnd(7)
@@ -47,7 +57,6 @@ Here is a sample definition:
 		{
 			m.Id(f => f.TaskID);
 			m.Field(f => f.Title).DefaultValue("No title");
-			m.Field(f => f.Title).DefaultValue("No title");
 			m.RecurrenceId(f => f.RecurrenceID);
 		})
         .ServerOperation(true)
@@ -58,8 +67,55 @@ Here is a sample definition:
 	)
 )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        string defaultTitle = "No Title";
+    }
+    <kendo-scheduler name="scheduler" 
+        start-time="new DateTime(2013, 6, 13, 7, 00, 00)"
+        timezone="Etc/UTC"
+        height="600"
+        work-week-start="1"
+        work-week-end="7">
+        <views>
+            <view type="day"></view>
+            <view type="workWeek" selected="true"></view>
+            <view type="week"></view>
+            <view type="month"></view>
+            <view type="agenda"></view>
+            <view type="timeline"></view>
+        </views>
+        <scheduler-datasource type="@DataSourceTagHelperType.Ajax" server-operation="true">
+            <transport>
+                <read url="@Url.Action("Read", "Scheduler")" data="getAdditionalData"/>
+                <create url="@Url.Action("Create", "Scheduler")" />
+                <destroy url="@Url.Action("Destroy", "Scheduler")" />
+                <update url="@Url.Action("Update", "Scheduler")" />
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <scheduler-model id="TaskID">
+                    <fields>
+                        <field name="TaskID" type="number"></field>
+                        <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                        <field name="start" from="Start" type="date"></field>
+                        <field name="end" from="End" type="date"></field>
+                        <field name="description" from="Description" type="string"></field>
+                        <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                        <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                        <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                        <field name="startTimezone" from="StartTimezone" type="string"></field>
+                        <field name="endTimezone" from="EndTimezone" type="string"></field>
+                        <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                    </fields>
+                </scheduler-model>
+            </schema>
+        </scheduler-datasource>
+    </kendo-scheduler>
+```
+{% endif %}
 
-## Get the Start and End dates of the current Scheduler view
+## Get the Start and End Dates of the Current Scheduler View
 
 To be sure that the server will return only the events visible in the current Scheduler View, we have to pass to it the timespan that is currently visible. The timespan data is sent to the server using the Data parameter mentioned in the above section.
 
@@ -93,7 +149,7 @@ function getAdditionalData() {
 }
 ```
 
-## Configuration of the Read method on the server:
+## Configuration of the Read Method on the Server:
 
 Once the result of the getAdditionalData function is passed to the server it receives it in the ``range`` variable in the below Read method definition:
 

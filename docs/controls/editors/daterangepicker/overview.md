@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery DateRangePicker Documentation | DateRangePicker Overview | Kendo UI
+page_title: jQuery DateRangePicker Documentation | DateRangePicker Overview
 description: "Get started with the jQuery DateRangePicker by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_daterangepicker_widget
 position: 1

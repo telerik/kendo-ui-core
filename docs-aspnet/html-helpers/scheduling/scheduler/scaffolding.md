@@ -11,7 +11,7 @@ position: 5
 
 The Scheduler HtmlHelper for ASP.NET MVC enables you to use the Kendo UI Scaffolder Visual Studio extension.
 
-> The Kendo UI Scaffolder will not include the required UI for ASP.NET MVC files to the project. To automatically achieve this, use the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}). To manually achieve this, refer to [this article]({% slug gettingstarted_aspnetmvc %}).
+> The Kendo UI Scaffolder will not include the required UI for ASP.NET MVC files to the project. To automatically achieve this, use the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}). To manually achieve this, refer to [this article]({% slug gettingstarted_aspnetmvc %}).
 
 To scaffold the Scheduler HtmlHelper for ASP.NET MVC:
 
@@ -32,7 +32,7 @@ To scaffold the Scheduler HtmlHelper for ASP.NET MVC:
 
     ![Choosing the Model class](images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
 
-1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this case, select **SampleEntities**. Note that the DataBase used is taken from the [offline examples]({% slug overview_downloadinstallation_mvc %}#sample-application).
+1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this case, select **SampleEntities**. Note that the DataBase used is taken from the [offline examples]({% slug msi_install_aspnetmvc6_aspnetmvc %}#sample-application).
 
     ![Choosing the Data Context class](images/scaffolding/ui_for_aspnetmvc_scheduler_2.png)
 

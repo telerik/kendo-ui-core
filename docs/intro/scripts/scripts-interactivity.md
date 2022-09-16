@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Interactivity and UX
-page_title: Individual Scripts for Interactivity and UX | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Interactivity and UX | Scripts 
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Interactivity and UX"
 slug: script_filesfor_interactivityandux_widgets
 ---
@@ -19,9 +19,15 @@ The following table lists the individual script files for the Kendo UI widgets u
 | [Effects](https://demos.telerik.com/kendo-ui/fx/expand) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
+| [Loader](https://demos.telerik.com/kendo-ui/loader/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.loader.js | |
 | [ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.progressbar.js | |
+| [SkeletonContainer](https://demos.telerik.com/kendo-ui/skeletoncontainer/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.skeletoncontainer.js | |
 | [Sortable](https://demos.telerik.com/kendo-ui/sortable/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |

@@ -1,13 +1,12 @@
 .k-badge {
-    padding: @badge-padding-y @badge-padding-y;
-    border-width: @badge-border-width;
+    padding: 0;
+    border-width: @kendo-badge-border-width;
     border-style: solid;
     border-color: transparent;
     box-sizing: border-box;
     color: inherit;
     background-color: transparent;
-    font-size: @badge-font-size;
-    line-height: @badge-line-height;
+    font: inherit;
     text-align: center;
     white-space: nowrap;
     display: inline-flex;
@@ -20,13 +19,6 @@
 .k-badge > * {
     color: inherit;
 }
-
-
-// Empty badge
-.k-badge:empty {
-    padding: @badge-padding-y;
-}
-
 
 // Links
 a.k-badge,
@@ -52,62 +44,36 @@ a.k-badge:hover,
 
 // Badge sizes
 .k-badge-sm {
-    padding: @badge-padding-y-sm @badge-padding-x-sm;
-    border-width: @badge-border-width-sm;
-    font-size: @badge-font-size-sm;
-    line-height: @badge-line-height-sm;
+    padding: @kendo-badge-padding-y-sm @kendo-badge-padding-x-sm;
+    font-size: @kendo-badge-font-size-sm;
+    line-height: @kendo-badge-line-height-sm;
+    min-width: @kendo-badge-min-width-sm;
 
-    &:empty { padding: @badge-padding-y-sm; }
+    &:empty {
+        padding: @kendo-badge-padding-y-sm;
+        min-width: auto;
+    }
+}
+.k-badge-md {
+    padding: @kendo-badge-padding-y-md @kendo-badge-padding-x-md;
+    font-size: @kendo-badge-font-size-md;
+    line-height: @kendo-badge-line-height-md;
+    min-width: @kendo-badge-min-width-md;
+
+    &:empty {
+        padding: @kendo-badge-padding-y-md;
+        min-width: auto;
+    }
 }
 .k-badge-lg {
-    padding: @badge-padding-y-lg @badge-padding-x-lg;
-    border-width: @badge-border-width-lg;
-    font-size: @badge-font-size-lg;
-    line-height: @badge-line-height-lg;
+    padding: @kendo-badge-padding-y-lg @kendo-badge-padding-x-lg;
+    font-size: @kendo-badge-font-size-lg;
+    line-height: @kendo-badge-line-height-lg;
+    min-width: @kendo-badge-min-width-lg;
 
-    &:empty { padding: @badge-padding-y-lg; }
-}
-
-
-// Badge shapes
-.k-badge-rounded {
-    .border-radius( @badge-border-radius );
-
-    &-sm { .border-radius( @badge-border-radius-sm ); }
-    &-lg { .border-radius( @badge-border-radius-lg ); }
-}
-.k-badge-pill {
-    border-radius: 5rem;
-}
-.k-badge-circle {
-    padding: 0 !important; // sass-lint:disable-line no-important
-    width: @badge-size;
-    height: @badge-size;
-    border-radius: 100%;
-
-    &-sm {
-        width: @badge-size-sm;
-        height: @badge-size-sm;
-    }
-    &-lg {
-        width: @badge-size-lg;
-        height: @badge-size-lg;
-    }
-}
-.k-badge-dot {
-    padding: 0 !important;  // sass-lint:disable-line no-important
-    width: @badge-dot-size;
-    height: @badge-dot-size;
-    border-radius: 100%;
-    font-size: 0;
-
-    &-sm {
-        width: @badge-dot-size-sm;
-        height: @badge-dot-size-sm;
-    }
-    &-lg {
-        width: @badge-dot-size-lg;
-        height: @badge-dot-size-lg;
+    &:empty {
+        padding: @kendo-badge-padding-y-lg;
+        min-width: auto;
     }
 }
 
@@ -117,6 +83,7 @@ a.k-badge:hover,
     position: relative;
     overflow: visible;
 }
+
 @badge-positions: {
     inside: null;
     edge: 50;
@@ -125,83 +92,55 @@ a.k-badge:hover,
 each( @badge-positions, {
     @placement: @key;
     @translate: @value;
-    @infix: if( @placement = "edge", "", "-@{placement}");
 
-    .k-badge@{infix} {
-        &-top-start {
-            position: absolute;
-            z-index: 9999;
-            top: 0;
-            left: 0;
+    .k-badge-@{placement} {
+        position: absolute;
+        z-index: 9999;
+
+        &.k-top-start {
             & when not (@translate = null) {
-                transform: translate( -1% * @translate, -1% * @translate );
+                transform: translate( (-1% * @translate), (-1% * @translate) );
             }
         }
-        &-top-end {
-            position: absolute;
-            z-index: 9999;
-            top: 0;
-            right: 0;
+        &.k-top-end {
             & when not (@translate = null) {
-                transform: translate( 1% * @translate, -1% * @translate );
+                transform: translate( (1% * @translate), (-1% * @translate) );
             }
         }
-        &-bottom-start {
-            position: absolute;
-            z-index: 9999;
-            bottom: 0;
-            left: 0;
+        &.k-bottom-start {
             & when not (@translate = null) {
-                transform: translate( -1% * @translate, 1% * @translate );
+                transform: translate( (-1% * @translate), (1% * @translate) );
             }
         }
-        &-bottom-end {
-            position: absolute;
-            z-index: 9999;
-            bottom: 0;
-            right: 0;
+        &.k-bottom-end {
             & when not (@translate = null) {
-                transform: translate( 1% * @translate, 1% * @translate );
+                transform: translate( (1% * @translate), (1% * @translate) );
             }
         }
     }
 
-    .k-rtl .k-badge@{infix},
-    [dir="rtl"] .k-badge@{infix} {
-        &-top-start {
-            left: auto;
-            right: 0;
+    .k-rtl .k-badge-@{placement},
+    [dir="rtl"].k-badge-@{placement},
+    [dir="rtl"] .k-badge-@{placement} {
+        &.k-top-start {
             & when not (@translate = null) {
-                transform: translate( 1% * @translate, -1% * @translate );
+                transform: translate( (1% * @translate), (-1% * @translate) );
             }
         }
-        &-top-end {
-            right: auto;
-            left: 0;
+        &.k-top-end {
             & when not (@translate = null) {
-                transform: translate( -1% * @translate, -1% * @translate );
+                transform: translate( (-1% * @translate), (-1% * @translate) );
             }
         }
-        &-bottom-start {
-            left: auto;
-            right: 0;
+        &.k-bottom-start {
             & when not (@translate = null) {
-                transform: translate( 1% * @translate, 1% * @translate );
+                transform: translate( (1% * @translate), (1% * @translate) );
             }
         }
-        &-bottom-end {
-            right: auto;
-            left: 0;
+        &.k-bottom-end {
             & when not (@translate = null) {
-                transform: translate( -1% * @translate, 1% * @translate );
+                transform: translate( (-1% * @translate), (1% * @translate) );
             }
         }
     }
 });
-
-
-// Badge position
-.k-badge-container {
-    position: relative;
-    overflow: visible;
-}

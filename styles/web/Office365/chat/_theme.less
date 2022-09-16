@@ -27,7 +27,8 @@
     .k-bubble:hover {
         .box-shadow( 0 1px 2px rgba( 0, 0, 0, .16) );
     }
-    .k-state-selected .k-bubble {
+    .k-state-selected .k-bubble,
+    .k-selected .k-bubble {
         .box-shadow( 0 3px 10px rgba( 0, 0, 0, .16) );
     }
 
@@ -57,21 +58,12 @@
         color: @input-text;
         background-color: @input-bg;
     }
-    .k-message-box .k-button:hover {
-        color: @base;
-    }
-
 
     // Toolbar
     .k-toolbar-box {
         border-color: inherit;
         color: @toolbar-text;
         background-color: @toolbar-bg;
-
-        .k-button:hover {
-            color: @base;
-            background: none;
-        }
 
         .k-scroll-button {
             background-color: @chat-bg;

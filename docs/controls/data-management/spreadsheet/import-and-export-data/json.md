@@ -1,6 +1,6 @@
 ---
 title: Storing Data as JSON
-page_title: jQuery Spreadsheet Documentation | Storing Data as JSON | Kendo UI
+page_title: jQuery Spreadsheet Documentation | Storing Data as JSON
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn about the data persistence options in the Kendo UI Spreadsheet widget."
 slug: loadand_saveas_json_spreadsheet_widget
 position: 1
@@ -13,8 +13,6 @@ The Spreadsheet allows you to store and load data in a native JSON format.
 ## Getting Started
 
 The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format]({% slug serverside_processing_spreadsheet_widget %}).
-
-> Once the Spreadsheet goes out of its Beta version, an official JSON schema will be published.
 
 The information that is persisted includes:
 

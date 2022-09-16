@@ -7,7 +7,7 @@
 
             window.ddlDataBound = function() {
                 assert.isOk(true);
-            }
+            };
 
             Mocha.fixture.html('<script id="template" type="text/x-kendo-template">\
                 <strong>#:text#</strong>\
@@ -136,8 +136,8 @@
             observable.value = observable.items[1];
 
 
-            dom = $('<select data-value-field="text" data-bind="value:value" />').
-                kendoDropDownList({
+            dom = $('<select data-value-field="text" data-bind="value:value" />')
+                .kendoDropDownList({
                     dataSource: observable.items
                 });
 
@@ -381,7 +381,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).html().toLowerCase().trim(), "<strong>foo</strong>");
+            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).find(".k-list-item-text").html().toLowerCase().trim(), "<strong>foo</strong>");
         });
 
         it("binding template containing binding attributes", function() {
@@ -391,7 +391,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).html().toLowerCase().trim(), '<strong data-bind="text:text">foo</strong>');
+            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).find(".k-list-item-text").html().toLowerCase().trim(), '<strong data-bind="text:text">foo</strong>');
         });
 
         it("updating an item from the data source updates the corresponding dropdownlist item", function() {

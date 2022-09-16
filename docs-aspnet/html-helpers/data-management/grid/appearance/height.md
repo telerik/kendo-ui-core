@@ -1,7 +1,7 @@
 ---
 title: Height
 page_title: Height
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to apply different heights to the Grid."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to apply different heights to the Grid."
 slug: height_aspnetcore_grid
 position: 1
 ---
@@ -32,6 +32,7 @@ When the height of the Grid is set, it calculates the appropriate height of its 
 
 In specific scenarios you can set a height style to the scrollable data area either by using JavaScript or external CSS which is a `div.k-grid-content` element. In such cases avoid setting a height to the Grid.
 
+```HtmlHelper
     <div style="width:500px;">
         @(Html.Kendo().Grid<OrderViewModel>()
             .Scrollable()
@@ -39,6 +40,18 @@ In specific scenarios you can set a height style to the scrollable data area eit
             /* other configurations */
         )
     </div>
+```
+{% if site.core %}
+```TagHelper
+<div style="width:500px">
+    <kendo-grid name="grid"
+                height="200">
+        <scrollable enabled="true" />
+
+    </kendo-grid>
+</div>
+```
+{% endif %}
 
 ![A Grid with a fixed height and scrolling functionality enabled](../grid-scrollable.png)
 

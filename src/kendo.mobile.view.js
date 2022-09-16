@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller", "./kendo.view" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.view",
     name: "View",
     category: "mobile",
@@ -100,11 +100,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         enable: function(enable) {
-            if(typeof enable == "undefined") {
+            if (typeof enable == "undefined") {
                 enable = true;
             }
 
-            if(enable) {
+            if (enable) {
                 this.overlay.hide();
             } else {
                 this.overlay.show();
@@ -158,7 +158,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!this.inited) {
                 this.inited = true;
-                this.trigger(INIT, {view: this});
+                this.trigger(INIT, { view: this });
             } else { // skip the initial controller update
                 this._invokeNgController();
             }
@@ -168,30 +168,30 @@ var __meta__ = { // jshint ignore:line
             }
 
             this._padIfNativeScrolling();
-            this.trigger(SHOW, {view: this});
+            this.trigger(SHOW, { view: this });
             kendo.resize(element);
         },
 
         showEnd: function() {
-            this.trigger(AFTER_SHOW, {view: this});
+            this.trigger(AFTER_SHOW, { view: this });
             this._padIfNativeScrolling();
         },
 
         hideEnd: function() {
             var that = this;
             that.element.hide();
-            that.trigger(HIDE, {view: that});
+            that.trigger(HIDE, { view: that });
 
             if (that.layout) {
-                that.layout.trigger(HIDE, { view : that, layout: that.layout });
+                that.layout.trigger(HIDE, { view: that, layout: that.layout });
             }
         },
 
-        beforeTransition: function(type){
+        beforeTransition: function(type) {
             this.trigger(TRANSITION_START, { type: type });
         },
 
-        afterTransition: function(type){
+        afterTransition: function(type) {
             this.trigger(TRANSITION_END, { type: type });
         },
 
@@ -320,7 +320,7 @@ var __meta__ = { // jshint ignore:line
                 scope = this.options.$angular[0];
 
                 if (controller) {
-                    var callback = $.proxy(this, '_callController', controller, scope);
+                    var callback = this._callController.bind(this, controller, scope);
 
                     if (/^\$(digest|apply)$/.test(scope.$$phase)) {
                         callback();
@@ -358,7 +358,7 @@ var __meta__ = { // jshint ignore:line
                 kendo.mobile.init(this.element.children());
             }
             this.element.detach();
-            this.trigger(INIT, {layout: this});
+            this.trigger(INIT, { layout: this });
         },
 
         _locate: function(selectors) {
@@ -413,7 +413,7 @@ var __meta__ = { // jshint ignore:line
                 view.element.append(that.footer);
             }
 
-            that.trigger(SHOW, {layout: that, view: view});
+            that.trigger(SHOW, { layout: that, view: view });
             that.currentView = view;
         }
     });
@@ -470,7 +470,7 @@ var __meta__ = { // jshint ignore:line
                 that.trigger(AFTER);
             });
 
-            this.getLayoutProxy = $.proxy(this, "_getLayout");
+            this.getLayoutProxy = this._getLayout.bind(this);
             that._setupLayouts(container);
 
             collection = container.children(that._locate("modalview drawer"));
@@ -655,7 +655,7 @@ var __meta__ = { // jshint ignore:line
             this.trigger(LOAD_START);
 
             this._xhr = $.get(kendo.absoluteURL(url, this.remoteViewURLPrefix), "html")
-                .always($.proxy(this, "_xhrComplete", callback, url));
+                .always(this._xhrComplete.bind(this, callback, url));
         },
 
         _xhrComplete: function(callback, url, response) {
@@ -714,4 +714,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

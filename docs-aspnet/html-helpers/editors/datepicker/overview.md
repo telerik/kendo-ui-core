@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI DatePicker HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI DatePicker component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/datepicker, /helpers/editors/datepicker/overview
 slug: htmlhelpers_datepicker_aspnetcore
 position: 1
 ---
 
-# DatePicker HtmlHelper Overview
+# DatePicker Overview
 
+{% if site.core %}
+The Telerik UI DatePicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DatePicker widget.
+{% else %}
 The Telerik UI DatePicker HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI DatePicker widget.
+{% endif %}
 
 The DatePicker enables the user to select a date from a calendar or through a direct input. It provides options for using custom templates for its **Month** view, setting minimum and maximum dates, a start view, and a depth for navigation.
 
-* [Demo page for the DatePicker](https://demos.telerik.com/{{ site.platform }}/datepicker/index)
+* [Demo page for the DatePicker HtmlHelper](https://demos.telerik.com/{{ site.platform }}/datepicker/index)
+{% if site.core %}
+* [Demo page for the DatePicker TagHelper](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
+{% endif %}
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration for the DatePicker HtmlHelper.
+The following example demonstrates the basic configuration for the DatePicker.
 
-```
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("datepicker") // The name of the DatePicker is mandatory. It specifies the "id" attribute of the widget.
         .Min(new DateTime(1900, 1, 1)) // Sets the min date of the DatePicker.
@@ -27,6 +34,15 @@ The following example demonstrates the basic configuration for the DatePicker Ht
         .Value(DateTime.Today) // Sets the value of the DatePicker.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datepicker name="datepicker"
+        min="new DateTime(1900, 1, 1)" 
+        max="new DateTime(2099, 12, 31)"
+        value="DateTime.Today">
+    </kendo-datepicker>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -46,7 +62,7 @@ You can subscribe to all DatePicker [events](/api/datepicker). For a complete ex
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
     @(Html.Kendo().DatePicker()
       .Name("datepicker")
       .Events(e => e
@@ -55,7 +71,16 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("datepicker_change")
       )
     )
-    <script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-datepicker name="datepicker"
+        on-open="datepicker_open"
+        on-close="datepicker_close"
+        on-change="datepicker_change"/>
+```
+{% endif %}
+```script.js
     function datepicker_open() {
         // Handle the open event.
     }
@@ -67,8 +92,42 @@ The following example demonstrates how to subscribe to events by a handler name.
     function datepicker_change() {
         // Handle the change event.
     }
-    </script>
 ```
+
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+```HtmlHelper
+    @(Html.Kendo().DatePicker()
+      .Name("datepicker")
+      .Events(e => e
+          .Open(@<text>
+            function() {
+                // Handle the open event inline.
+            }
+          </text>)
+          .Change(@<text>
+            function() {
+                // Handle the change event inline.
+            }
+            </text>)
+      )
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-datepicker name="datepicker"
+        on-open='function(e)
+        {
+            // Handle the open event inline.
+        }'
+        on-change='function(e)
+        {
+            // Handle the change event inline.
+        }'/>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 
@@ -79,11 +138,17 @@ To reference an existing Telerik UI DatePicker instance, use the [`jQuery.data()
         $(function() {
         // The Name() of the DatePicker is used to get its client-side instance.
             var datepicker = $("#datepicker").data("kendoDatePicker");
+
+            //Use the "value" API method to get the DatePicker's value.
+            console.log(datepicker.value());
         });
         </script>
 
 ## See Also
 
 * [Basic Usage of the DatePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/index)
+{% if site.core %}
+* [Basic Usage of the DatePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
+{% endif %}
 * [Using the API of the DatePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/api)
 * [Server-Side API](/api/datepicker)

@@ -27,7 +27,8 @@
     .k-bubble:hover {
         // .box-shadow( 0 1px 2px rgba( 0, 0, 0, .16) );
     }
-    .k-state-selected .k-bubble {
+    .k-state-selected .k-bubble,
+    .k-selected .k-bubble {
         // .box-shadow( 0 3px 10px rgba( 0, 0, 0, .16) );
     }
 
@@ -40,7 +41,8 @@
     .k-alt .k-bubble:hover {
         // .box-shadow( 0 1px 2px rgba( ~"@{chat-alt-bubble-bg}", .2 ) );
     }
-    .k-alt .k-state-selected .k-bubble {
+    .k-alt .k-state-selected .k-bubble,
+    .k-alt .k-selected .k-bubble {
         // .box-shadow( 0 3px 10px rgba( ~"@{chat-alt-bubble-bg}", .4 ) );
     }
 
@@ -64,21 +66,12 @@
         color: @input-text;
         background-color: @input-bg;
     }
-    .k-message-box .k-button:hover {
-        color: @accent;
-    }
-
 
     // Toolbar
     .k-toolbar-box {
         border-color: inherit;
         color: @toolbar-text;
         background-color: @toolbar-bg;
-
-        .k-button:hover {
-            color: @accent;
-            background: none;
-        }
 
         .k-scroll-button {
             background-color: @chat-bg;

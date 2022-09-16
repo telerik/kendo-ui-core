@@ -9,9 +9,12 @@ position: 1
 
 # AngularJS Directives Overview
 
-This article demonstrates the basics of the integration between Kendo UI and AngularJS.
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. 
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
 
-For more information, refer to the page on [developing with AngularJS](https://www.telerik.com/kendo-ui/angularjs-and-kendo-ui-framework-integration "Developing with AngularJS?").
+This article describes the basics of integrating Kendo UI for jQuery and AngularJS 1.x. 
+
+If you are developing with newer versions of Angular (2.0+), [Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui) provides 100+ native Angular components.
 
 ## Getting Started
 
@@ -103,5 +106,5 @@ As of the Kendo UI 2015 Q2 release, if the `k-options` of the widget is bound to
 * [Widget Events]({% slug angularjs_widget_events %})
 * [Model and Value Bindings]({% slug angularjs_value_model_binding %})
 * [Delayed Initialization]({% slug angularjs_delayed_initialization %})
-* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+
 * [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)

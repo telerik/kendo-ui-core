@@ -66,7 +66,7 @@
 
             var header = list.content.prev();
 
-            assert.isOk(header.hasClass("k-group-header"));
+            assert.isOk(header.hasClass("k-list-group-sticky-header"));
         });
 
         it("StaticList creates a dataSource", function() {
@@ -88,7 +88,7 @@
             var li = list.element.children().eq(0);
             li.mouseenter();
 
-            assert.isOk(li.hasClass("k-state-hover"));
+            assert.isOk(li.hasClass("k-hover"));
         });
 
         it("leave li should remove hover state", function() {
@@ -103,7 +103,7 @@
             li.mouseenter();
             li.mouseleave();
 
-            assert.isOk(!li.hasClass("k-state-hover"));
+            assert.isOk(!li.hasClass("k-hover"));
         });
 
         it("re-set value when add new item to the source", function() {

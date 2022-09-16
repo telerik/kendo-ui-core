@@ -91,7 +91,7 @@
                 template: "new #:data#"
             });
 
-            assert.equal(element.children(":first").html(), "new item");
+            assert.equal(element.children(":first").find(".k-list-item-text").html(), "new item");
         });
 
         it("setOptions does not update bound state", function() {
@@ -238,9 +238,9 @@
 
             list.focus(children.eq(1));
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("focus method focuses by index", function() {
@@ -255,9 +255,9 @@
 
             list.focus(1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("focus method clears focus if index is -1", function() {
@@ -273,9 +273,9 @@
             list.focus(1);
             list.focus(-1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("focusIndex returns the index of the focused item", function() {
@@ -321,9 +321,9 @@
             list.select(children.eq(1));
 
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method does not unselect already selected item (single selection)", function() {
@@ -375,9 +375,9 @@
             list.select(1);
 
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("selects a single item if selectable is single", function() {
@@ -393,9 +393,9 @@
 
             list.select([1, 2]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused k-state-selected");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus k-selected");
         });
 
         it("select items by indices", function() {
@@ -411,9 +411,9 @@
 
             list.select([1, 2]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused k-state-selected");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus k-selected");
         });
 
         it("select method handles unexisting indices", function() {
@@ -447,9 +447,9 @@
 
             list.select([0, 2]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus");
         });
 
         it("select method deselects previous item", function() {
@@ -465,9 +465,9 @@
             list.select(1);
             list.select(0);
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method deselects selected items is index is -1", function() {
@@ -483,9 +483,9 @@
             list.select(1);
             list.select(-1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method selects multiple items", function() {
@@ -502,9 +502,9 @@
             list.select(1);
             list.select(0);
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method deselects item in 'multiple' mode", function() {
@@ -521,9 +521,9 @@
             list.select(1);
             list.select(1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method unselects items if empty array is passed", function() {
@@ -540,9 +540,9 @@
             list.select(1);
             list.select([]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method works with grouped data source", function() {
@@ -566,9 +566,9 @@
 
             list.select(1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item k-first");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-first");
         });
 
         it("select method sets selected data items", function() {
@@ -870,7 +870,7 @@
                 assert.equal(removed[0].position, 0);
                 assert.equal(removed[0].dataItem.name, "item2");
 
-                assert.equal(list.element.find(".k-state-selected").length, 0);
+                assert.equal(list.element.find(".k-selected").length, 0);
             });
 
             list.select(0);
@@ -1162,9 +1162,9 @@
             list.select(1);
             list.value([]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("value method returns promise", function() {
@@ -1204,7 +1204,7 @@
             list.value("item1");
             list.value("item2");
 
-            assert.equal(list.element.children(".k-state-selected").length, 1);
+            assert.equal(list.element.children(".k-selected").length, 1);
         });
 
         it("value method selects item with unescaped characters", function() {
@@ -1217,7 +1217,7 @@
 
             list.value("item1\"");
 
-            assert.equal(list.element.children(".k-state-selected").length, 1);
+            assert.equal(list.element.children(".k-selected").length, 1);
         });
 
         it("next method focuses first item if no items are focused", function() {
@@ -1231,9 +1231,9 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("next method focuses next item", function() {
@@ -1248,9 +1248,9 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("prev method focuses last item if no items are focused", function() {
@@ -1264,9 +1264,9 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus");
         });
 
         it("prev method focuses prev item", function() {
@@ -1281,9 +1281,9 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("first method focuses first item", function() {
@@ -1297,9 +1297,9 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("last method focuses last item", function() {
@@ -1313,9 +1313,9 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus");
         });
 
         it("scrollToIndex passes the correct item to scroll method", function() {
@@ -1354,7 +1354,7 @@
 
             list.dataSource.read();
 
-            var content = list.content.height(200);
+            var content = list.content.outerHeight(200);
 
             assert.equal(list.screenHeight(), 200);
         });
@@ -1489,7 +1489,7 @@
 
             var items = list.items();
             assert.equal(items.length, 3);
-            assert.isOk(items.eq(0).hasClass("k-item"));
+            assert.isOk(items.eq(0).hasClass("k-list-item"));
         });
 
         it("isFiltered method returns true if source is filtered", function() {

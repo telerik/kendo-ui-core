@@ -98,6 +98,86 @@ Allow the user to draw on the screen (Canvas) and export the drawing as an SVG f
 </script>
 ```
 
+To use this approach mobile devices (touch screens) you need to use the touch events instead of the mouse ones. Please refer to the following example.
+
+```dojo
+<div id="surface-container">
+      <div id="surface" style="width: 500px; height: 500px;border: 1px solid black;"></div>
+    </div>
+
+    <button class='export-svg k-button'>Export as SVG</button>
+    <button class='k-button clear'>Clear drawing</button>
+
+    <script>
+      var geom = kendo.geometry;
+      var Point = geom.Point;
+      var draw = kendo.drawing;
+      var Path = draw.Path;
+      var path;
+
+      $('#surface-container').on('touchmove', function(e) {
+        e.preventDefault();
+        console.log("move")
+        if (!path) {
+          return;
+        }
+
+        var offset = $(this).offset();
+        var pageX = e.originalEvent.touches[0].pageX;
+        var pageY = e.originalEvent.touches[0].pageY;
+        var newPoint = new Point(pageX - offset.left, pageY - offset.top);
+
+        path.lineTo(newPoint);
+      }).on("touchstart", function(e) {
+        console.log(e)
+        path = new Path({
+          stroke: {
+            color: '#E4141B',
+            width: 2,
+            lineCap: "round",
+            lineJoin: "round"
+          }
+        });
+        
+        var offset = $(this).offset();
+        var pageX = e.originalEvent.touches[0].pageX;
+        var pageY = e.originalEvent.touches[0].pageY;
+        var newPoint = new Point(pageX - offset.left, pageY - offset.top);
+
+        for (var i = 0; i < 1; i++) {
+          path.lineTo(newPoint.clone().translate(i * 1, 0));
+        }
+        
+        surface.draw(path);
+      }).on("touchend", function(e) {
+        path = undefined;
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+
+      $(".export-svg").click(function() {
+        // Convert the DOM element to a drawing using kendo.drawing.drawDOM
+        kendo.drawing.drawDOM($("#surface"))
+          .then(function(group) {
+          // Render the result as a SVG document
+          return kendo.drawing.exportSVG(group);
+        })
+          .done(function(data) {
+          // Save the SVG document
+          kendo.saveAs({
+            dataURI: data,
+            fileName: "signature.svg",
+            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+          });
+        });
+      });
+
+      $(".clear").click(function() {
+        surface.clear();
+      });
+    </script>
+```
+
 ## See Also
 
 * [API Reference of the Kendo UI Drawing Library](https://docs.telerik.com/kendo-ui/api/javascript/drawing)

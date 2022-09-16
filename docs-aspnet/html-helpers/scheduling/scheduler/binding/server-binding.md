@@ -1,7 +1,7 @@
 ---
 title: Server Binding
 page_title: Server Binding
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to bind it to a model."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to bind it to a model."
 slug: htmlhelpers_scheduler_serverbinding_aspnetcore
 position: 2
 ---
@@ -12,6 +12,7 @@ You can bind the Scheduler to a model.
 
 1. Create a new model which inherits the `ISchedulerEvent` interface.
 
+    ```Model    
         public class Projection : ISchedulerEvent
         {
             public string Title { get; set; }
@@ -24,6 +25,21 @@ You can bind the Scheduler to a model.
             public string RecurrenceRule { get; set; }
             public string RecurrenceException { get; set; }
         }
+    ```
+    ```Interface
+        public interface ISchedulerEvent
+        {
+            string Title { get; set; }
+            string Description { get; set; }
+            bool IsAllDay { get; set; }
+            DateTime Start { get; set; }
+            DateTime End { get; set; }
+            string StartTimezone { get; set; }
+            string EndTimezone { get; set; }
+            string RecurrenceRule { get; set; }
+            string RecurrenceException { get; set; }
+        }
+    ```
 
 1. Create a new action method which passes the `List` of projections to the view.
 
@@ -51,7 +67,7 @@ You can bind the Scheduler to a model.
 
 1. Add a Scheduler.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
             .Name("scheduler")
             .Date(new DateTime(2013, 6, 13))

@@ -1,15 +1,19 @@
 ---
 title: Overview
 page_title: Overview
-description: "Get started with the server-side wrapper for the Telerik UI Diagram HtmlHelper for {{ site.framework }}."
+description: "Get started with the server-side wrapper for the Telerik UI Diagram component for {{ site.framework }}."
 previous_url: /helpers/diagrams-and-maps/diagram/overview
 slug: htmlhelpers_diagram_aspnetcore
 position: 1
 ---
 
-# Diagram HtmlHelper Overview
+# Diagram Overview
 
+{% if site.core %}
+The Telerik UI Diagram TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Diagram widget.
+{% else %}
 The Telerik UI Diagram HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Diagram widget.
+{% endif %}
 
 The Diagram represents information in a schematic way and according to particular visualization techniques.
 
@@ -26,7 +30,7 @@ The Diagram represents information in a schematic way and according to particula
 
 1. In the view, configure the Diagram to use the action method that was created in the previous step.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().Diagram()
             .Name("diagram")
             .DataSource(dataSource => dataSource

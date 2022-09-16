@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.data" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "virtuallist",
     name: "VirtualList",
     category: "framework",
@@ -15,21 +15,20 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         Widget = ui.Widget,
         DataBoundWidget = ui.DataBoundWidget,
-        proxy = $.proxy,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
-        WRAPPER = "k-virtual-wrap",
-        VIRTUALLIST = "k-virtual-list",
-        CONTENT = "k-virtual-content",
-        LIST = "k-list",
-        HEADER = "k-group-header",
-        VIRTUALITEM = "k-virtual-item",
-        ITEM = "k-item",
+        LIST_CONTENT = "k-list-content k-virtual-content",
+        TABLE_CONTENT = "k-table-body k-table-scroller",
+        HEADER = "k-list-group-sticky-header",
+        LIST_ITEM = "k-list-item",
+        TABLE_ITEM = "k-table-row",
         HEIGHTCONTAINER = "k-height-container",
-        GROUPITEM = "k-group",
+        GROUPITEM = "k-list-item-group-label",
+        LIST_UL = "k-list-ul",
+        TABLE_LIST = "k-table-list",
 
-        SELECTED = "k-state-selected",
-        FOCUSED = "k-state-focused",
-        HOVER = "k-state-hover",
+        SELECTED = "k-selected",
+        FOCUSED = "k-focus",
+        HOVER = "k-hover",
         CHANGE = "change",
         CLICK = "click",
         LISTBOUND = "listBound",
@@ -37,6 +36,8 @@ var __meta__ = { // jshint ignore:line
 
         ACTIVATE = "activate",
         DEACTIVATE = "deactivate",
+
+        GROUP_ROW_SEL = ".k-table-group-row",
 
         VIRTUAL_LIST_NS = ".VirtualList";
 
@@ -66,16 +67,25 @@ var __meta__ = { // jshint ignore:line
         return element;
     }
 
-    function getDefaultItemHeight() {
-        var mockList = $('<div class="k-popup"><ul class="k-list"><li class="k-item"><li></ul></div>'),
-            lineHeight;
+    function getDefaultItemHeight(listSize) {
+        var mockList = $('<div class="k-list ' + listSize + ' k-virtual-list">' +
+                '<div class="k-list-content k-virtual-content">' +
+                    '<ul class="k-list-ul">' +
+                        '<li class="k-list-item">' +
+                            '<span class="k-list-item-text">test</span>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>' +
+            '</div>');
+        var lineHeight;
+
         mockList.css({
             position: "absolute",
             left: "-200000px",
             visibility: "hidden"
         });
         mockList.appendTo(document.body);
-        lineHeight = parseFloat(kendo.getComputedStyles(mockList.find(".k-item")[0], ["line-height"])["line-height"]);
+        lineHeight = parseFloat(kendo.getComputedStyles(mockList.find(".k-list-item")[0], ["height"]).height);
         mockList.remove();
 
         return lineHeight;
@@ -115,12 +125,8 @@ var __meta__ = { // jshint ignore:line
     }
 
     function position(element, y) {
-        if (kendo.support.browser.msie && kendo.support.browser.version < 10) {
-            element.style.top = y + "px";
-        } else {
-            element.style.webkitTransform = 'translateY(' + y + "px)";
-            element.style.transform = 'translateY(' + y + "px)";
-        }
+        element.style.webkitTransform = 'translateY(' + y + "px)";
+        element.style.transform = 'translateY(' + y + "px)";
     }
 
     function map2(callback, templates) {
@@ -149,7 +155,9 @@ var __meta__ = { // jshint ignore:line
     }
 
     function render(element, data, templates) {
-        var itemTemplate = templates.template;
+        var itemTemplate = templates.template,
+            hasColumns = this.options.columns && this.options.columns.length,
+            altRow = data.index % 2 === 1 ? "k-table-alt-row" : "";
 
         element = $(element);
 
@@ -157,22 +165,28 @@ var __meta__ = { // jshint ignore:line
             itemTemplate = templates.placeholderTemplate;
         }
 
-         if (data.index === 0 && this.header && data.group) {
-             this.header.html(templates.fixedGroupTemplate(data.group));
-         }
+        if (data.index === 0 && this.header && data.group) {
+            this.header.html(templates.fixedGroupTemplate(data.group));
+        }
 
         this.angular("cleanup", function() {
-            return { elements: [ element ]};
+            return { elements: [ element ] };
         });
 
         element
             .attr("data-uid", data.item ? data.item.uid : "")
             .attr("data-offset-index", data.index);
 
-         if (this.options.columns && this.options.columns.length && data.item) {
+        if (hasColumns && data.item) {
+            if (altRow.length > 0) {
+                element.addClass(altRow);
+            } else {
+                element.removeClass("k-table-alt-row");
+            }
             element.html(renderColumns(this.options, data.item, templates));
         } else {
-            element.html(itemTemplate(data.item || {}));
+            element.find("." + GROUPITEM).remove();
+            element.find(".k-list-item-text").html(itemTemplate(data.item || {}));
         }
 
         element.toggleClass(FOCUSED, data.current);
@@ -182,9 +196,16 @@ var __meta__ = { // jshint ignore:line
         element.toggleClass("k-loading-item", !data.item);
 
         if (data.index !== 0 && data.newGroup) {
-            $("<div class=" + GROUPITEM + "></div>")
-                .appendTo(element)
-                .html(templates.groupTemplate(data.group));
+            if (hasColumns) {
+                $('<span class="k-table-td k-table-group-td"><span>' + templates.groupTemplate(data.group) + '</span></span>')
+                    .appendTo(element);
+            } else {
+                $("<div class=" + GROUPITEM + "></div>")
+                    .appendTo(element)
+                    .html(templates.groupTemplate(data.group));
+            }
+        } else if (data.group && hasColumns) {
+            element.append($('<span class="k-table-td k-table-spacer-td"></span>'));
         }
 
         if (data.top !== undefined) {
@@ -192,7 +213,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         this.angular("compile", function() {
-            return { elements: [ element ], data: [ { dataItem: data.item, group: data.group, newGroup: data.newGroup } ]};
+            return { elements: [ element ], data: [ { dataItem: data.item, group: data.group, newGroup: data.newGroup } ] };
         });
     }
 
@@ -204,14 +225,14 @@ var __meta__ = { // jshint ignore:line
             var currentWidthInt = parseInt(currentWidth, 10);
             var widthStyle = '';
 
-            if(currentWidth){
+            if (currentWidth) {
                 widthStyle += "style='width:";
                 widthStyle += currentWidthInt;
                 widthStyle += percentageUnitsRegex.test(currentWidth) ? "%" : "px";
                 widthStyle += ";'";
             }
-            item += "<span class='k-cell' " + widthStyle + ">";
-            item += templates["column"+ i](dataItem);
+            item += "<span class='k-table-td' " + widthStyle + ">";
+            item += templates["column" + i](dataItem);
             item += "</span>";
         }
 
@@ -259,7 +280,8 @@ var __meta__ = { // jshint ignore:line
 
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                contentClasses = options.columns && options.columns.length ? TABLE_CONTENT : LIST_CONTENT;
 
             that.bound(false);
             that._fetching = false;
@@ -267,18 +289,34 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.init.call(that, element, options);
 
             if (!that.options.itemHeight) {
-                that.options.itemHeight = getDefaultItemHeight();
+                that.options.itemHeight = getDefaultItemHeight(options.listSize);
             }
 
             options = that.options;
 
-            that.element.addClass(LIST + " " + VIRTUALLIST).attr("role", "listbox");
-            that.content = that.element.wrap("<div unselectable='on' class='" + CONTENT + "'></div>").parent();
-            that.wrapper = that.content.wrap("<div class='" + WRAPPER + "'></div>").parent();
-            that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
+            that.element.attr("role", "listbox");
 
-            if (options.columns && options.columns.length) {
-                that.element.removeClass(LIST);
+            that.content = that.wrapper = that.element.wrap("<div unselectable='on' class='" + contentClasses + "'></div>").parent();
+
+            if (that.options.columns && that.options.columns.length) {
+                var thead = that.element.closest(".k-data-table").find('.k-table-thead');
+                var row = $('<tr class="k-table-group-row">' +
+                    '<th class="k-table-th" colspan="' + that.options.columns.length + '"></th>' +
+                '</tr>');
+
+                thead.append(row);
+
+                that.header = row.find(".k-table-th");
+                that.element.addClass(TABLE_LIST + " k-virtual-table");
+            } else {
+                that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
+                that.element.addClass(LIST_UL);
+            }
+
+            if (options.ariaLabel) {
+                this.element.attr("aria-label", options.ariaLabel);
+            } else if (options.ariaLabelledBy) {
+                this.element.attr("aria-labelledby", options.ariaLabelledBy);
             }
 
             that.element.on("mouseenter" + VIRTUAL_LIST_NS, "li:not(.k-loading-item)", function() { $(this).addClass(HOVER); })
@@ -321,7 +359,9 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
             mapValueTo: "index",
-            valueMapper: null
+            valueMapper: null,
+            ariaLabel: null,
+            ariaLabelledBy: null
         },
 
         events: [
@@ -334,10 +374,12 @@ var __meta__ = { // jshint ignore:line
         ],
 
         setOptions: function(options) {
+            var itemClass = this.options.columns && this.options.columns.length ? TABLE_ITEM : LIST_ITEM;
+
             Widget.fn.setOptions.call(this, options);
 
             if (this._selectProxy && this.options.selectable === false) {
-                this.element.off(CLICK, "." + VIRTUALITEM, this._selectProxy);
+                this.element.off(CLICK, "." + itemClass, this._selectProxy);
             } else if (!this._selectProxy && this.options.selectable) {
                 this._selectable();
             }
@@ -361,7 +403,7 @@ var __meta__ = { // jshint ignore:line
             var dataSource = source || {};
             var value;
 
-            dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
+            dataSource = Array.isArray(dataSource) ? { data: dataSource } : dataSource;
             dataSource = kendo.data.DataSource.create(dataSource);
 
             if (that.dataSource) {
@@ -378,7 +420,7 @@ var __meta__ = { // jshint ignore:line
                     that.value(value);
                 });
             } else {
-                that._refreshHandler = $.proxy(that.refresh, that);
+                that._refreshHandler = that.refresh.bind(that);
             }
 
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
@@ -396,7 +438,7 @@ var __meta__ = { // jshint ignore:line
             return this.dataSource.currentRangeStart();
         },
 
-        _triggerListBound: function () {
+        _triggerListBound: function() {
             var that = this;
             var skip = that.skip();
 
@@ -414,10 +456,10 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _highlightSelectedItems: function () {
+        _highlightSelectedItems: function() {
             for (var i = 0; i < this._selectedDataItems.length; i++) {
                 var item = this._getElementByDataItem(this._selectedDataItems[i]);
-                if(item.length){
+                if (item.length) {
                     item.addClass(SELECTED);
                 }
             }
@@ -445,7 +487,7 @@ var __meta__ = { // jshint ignore:line
                     that._selectingValue = true;
 
                     that.bound(true);
-                    that.value(that._values, true).done(function () {
+                    that.value(that._values, true).done(function() {
                         that._selectingValue = false;
                         that._triggerListBound();
                     });
@@ -479,13 +521,24 @@ var __meta__ = { // jshint ignore:line
         },
 
         removeAt: function(position) {
-            this._selectedIndexes.splice(position, 1);
-            this._values.splice(position, 1);
+            var value = this._values.splice(position, 1)[0];
 
             return {
                 position: position,
-                dataItem: this._selectedDataItems.splice(position, 1)[0]
+                dataItem: this._removeSelectedDataItem(value)
             };
+        },
+
+        _removeSelectedDataItem: function(value) {
+            var that = this,
+                valueGetter = that._valueGetter;
+
+            for (var idx in that._selectedDataItems) {
+                if (valueGetter(that._selectedDataItems[idx]) === value) {
+                    that._selectedIndexes.splice(idx, 1);
+                    return that._selectedDataItems.splice(idx, 1)[0];
+                }
+            }
         },
 
         setValue: function(value) {
@@ -524,7 +577,7 @@ var __meta__ = { // jshint ignore:line
             return that._valueDeferred;
         },
 
-        _checkValuesOrder: function (value) {
+        _checkValuesOrder: function(value) {
             if (this._removedAddedIndexes &&
                 this._removedAddedIndexes.length === value.length) {
                     var newValue = this._removedAddedIndexes.slice();
@@ -741,7 +794,7 @@ var __meta__ = { // jshint ignore:line
             if (that.options.type === "group") {
                 kendo.ui.progress($(that.wrapper), true);
                 that.mute(function() {
-                    that.dataSource.range(skip, take, function () {
+                    that.dataSource.range(skip, take, function() {
                         kendo.ui.progress($(that.wrapper), false);
                     });
                     view = that.dataSource.view();
@@ -1011,7 +1064,7 @@ var __meta__ = { // jshint ignore:line
 
         mute: function(callback) {
             this._mute = true;
-            proxy(callback(), this);
+            callback();
             this._mute = false;
         },
 
@@ -1068,7 +1121,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!hasData) {
                 height = 0;
-            } else if (height/itemHeight > total) {
+            } else if (height / itemHeight > total) {
                 height = total * itemHeight;
             }
 
@@ -1120,9 +1173,9 @@ var __meta__ = { // jshint ignore:line
             if (options.columns) {
                 for (var i = 0; i < options.columns.length; i++) {
                     var currentColumn = options.columns[i];
-                    var templateText = currentColumn.field ? currentColumn.field.toString(): "text";
+                    var templateText = currentColumn.field ? currentColumn.field.toString() : "text";
 
-                    templates["column"+ i] = currentColumn.template || "#: " + templateText + "#";
+                    templates["column" + i] = currentColumn.template || "#: " + templateText + "#";
                 }
             }
 
@@ -1137,16 +1190,22 @@ var __meta__ = { // jshint ignore:line
 
         _generateItems: function(element, count) {
             var items = [],
-                item,
-                itemHeight = this.options.itemHeight + "px";
+                item, text,
+                itemHeight = this.options.itemHeight + "px",
+                itemClass = this.options.columns && this.options.columns.length ? TABLE_ITEM : LIST_ITEM;
 
-            while(count-- > 0) {
+            while (count-- > 0) {
+                text = document.createElement("span");
+                text.className = "k-list-item-text";
+
                 item = document.createElement("li");
                 item.tabIndex = -1;
-                item.className = VIRTUALITEM + " " + ITEM;
+                item.className = itemClass;
                 item.setAttribute("role", "option");
                 item.style.height = itemHeight;
                 item.style.minHeight = itemHeight;
+                item.appendChild(text);
+
                 element.appendChild(item);
 
                 items.push(item);
@@ -1191,9 +1250,17 @@ var __meta__ = { // jshint ignore:line
             that.options.type = (dataSource.group() || []).length ? "group" : "flat";
 
             if (that.options.type === "flat") {
-                that.header.hide();
+                if (that.header.closest(GROUP_ROW_SEL).length) {
+                    that.header.closest(GROUP_ROW_SEL).hide();
+                } else {
+                    that.header.hide();
+                }
             } else {
-                that.header.show();
+                if (that.header.closest(GROUP_ROW_SEL).length) {
+                    that.header.closest(GROUP_ROW_SEL).show();
+                } else {
+                    that.header.show();
+                }
             }
 
             that.getter = that._getter(function() {
@@ -1207,7 +1274,7 @@ var __meta__ = { // jshint ignore:line
 
             that._renderItems = that._whenChanged(
                 scrollCallback(content, that._onScroll),
-                syncList(that._reorderList(that._items, $.proxy(render, that)))
+                syncList(that._reorderList(that._items, render.bind(that)))
             );
 
             that._renderItems();
@@ -1391,7 +1458,7 @@ var __meta__ = { // jshint ignore:line
 
             for (var i = index, length = index + itemCount; i < length; i++) {
                 item = this._itemMapper(this.getter(i, index), i, value);
-                if(items[items.length - 1]){
+                if (items[items.length - 1]) {
                     items[items.length - 1].isLastGroupedItem = item.newGroup;
                 }
                 items.push(item);
@@ -1417,7 +1484,7 @@ var __meta__ = { // jshint ignore:line
 
             var theValidator = listValidator(options, screenHeight);
 
-            return $.proxy(function(value, force) {
+            return (function(value, force) {
                 var result = this.result,
                     lastScrollTop = this._lastScrollTop;
 
@@ -1429,7 +1496,7 @@ var __meta__ = { // jshint ignore:line
                 this.result = result;
 
                 return result;
-            }, this);
+            }).bind(this);
         },
 
         _whenChanged: function(getter, callback) {
@@ -1449,7 +1516,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var length = list.length;
             var currentOffset = -Infinity;
-            reorder = $.proxy(map2(reorder, this.templates), this);
+            reorder = map2(reorder, this.templates).bind(this);
 
             return function(list2, offset, force) {
                 var diff = offset - currentOffset;
@@ -1493,9 +1560,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _selectable: function() {
+            var itemClass = this.options.columns && this.options.columns.length ? TABLE_ITEM : LIST_ITEM;
+
             if (this.options.selectable) {
-                this._selectProxy = $.proxy(this, "_clickHandler");
-                this.element.on(CLICK + VIRTUAL_LIST_NS, "." + VIRTUALITEM, this._selectProxy);
+                this._selectProxy = this._clickHandler.bind(this);
+                this.element.on(CLICK + VIRTUAL_LIST_NS, "." + itemClass, this._selectProxy);
             }
         },
 
@@ -1611,7 +1680,7 @@ var __meta__ = { // jshint ignore:line
         _deselectSingleItem: function(item, position, selectedIndex, removedindexesCounter) {
             var dataItem;
 
-            if (!item.hasClass("k-state-selected")) {
+            if (!item.hasClass(SELECTED)) {
                 return;
             }
 
@@ -1640,7 +1709,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (indices[0] === -1) {
-                $(children).removeClass("k-state-selected");
+                $(children).removeClass(SELECTED);
                 removed = $.map(this._selectedDataItems.slice(0), function(dataItem, idx) {
                    return {
                       dataItem: dataItem,
@@ -1669,7 +1738,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (position > -1) {
                     removed.push(this.removeAt(position));
-                    $(children[index]).removeClass("k-state-selected");
+                    $(children[index]).removeClass(SELECTED);
                 }
             }
 
@@ -1738,7 +1807,7 @@ var __meta__ = { // jshint ignore:line
             this._valueGetter = kendo.getter(this.options.dataValueField);
         },
 
-        _calculateGroupPadding: function (height) {
+        _calculateGroupPadding: function(height) {
             var firstItem = this.items().first(),
                 groupHeader = this.header,
                 padding = 0;
@@ -1754,11 +1823,11 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _calculateColumnsHeaderPadding: function () {
-            if(this.options.columns && this.options.columns.length){
+        _calculateColumnsHeaderPadding: function() {
+            if (this.options.columns && this.options.columns.length) {
                 var isRtl = kendo.support.isRtl(this.wrapper);
                 var scrollbar = kendo.support.scrollbar();
-                var columnsHeader = this.content.parent().parent().find(".k-grid-header");
+                var columnsHeader = this.content.parent().parent().find(".k-table-header");
                 var total = this.dataSource.total();
 
                 columnsHeader.css((isRtl ? "padding-left" : "padding-right"), total ? scrollbar : 0);
@@ -1774,4 +1843,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

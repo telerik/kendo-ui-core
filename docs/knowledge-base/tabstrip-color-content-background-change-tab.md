@@ -37,7 +37,7 @@ You can use the suggested approach in the [`show` event](https://docs.telerik.co
       <div class="demo-section k-content">
         <div id="tabstrip">
           <ul>
-            <li class="k-state-active">
+            <li class="k-active">
               First Tab
             </li>
             <li>
@@ -61,13 +61,13 @@ You can use the suggested approach in the [`show` event](https://docs.telerik.co
 
         function onShow(e){
           //will change when tab is clicked
-          var tabBackGroundColor = $(".k-tabstrip-items .k-state-active").css("background-color");
-          $(".k-tabstrip .k-content.k-state-active").css("background-color", tabBackGroundColor);
+          var tabBackGroundColor = $(".k-tabstrip-items .k-active").css("background-color");
+          $(".k-tabstrip .k-content.k-active").css("background-color", tabBackGroundColor);
         }
 
         //for the initial load
-        var tabBackGroundColor = $(".k-tabstrip-items .k-state-active").css("background-color");
-        $(".k-tabstrip .k-content.k-state-active").css("background-color", tabBackGroundColor);
+        var tabBackGroundColor = $(".k-tabstrip-items .k-active").css("background-color");
+        $(".k-tabstrip .k-content.k-active").css("background-color", tabBackGroundColor);
       });
     </script>
 ```

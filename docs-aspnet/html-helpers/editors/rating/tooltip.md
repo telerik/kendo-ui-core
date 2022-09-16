@@ -15,7 +15,7 @@ Each Rating item displays a tooltip that is enabled by default and contains text
 
 The following example demonstrates how to use the default tooltip of the Rating.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -23,12 +23,17 @@ The following example demonstrates how to use the default tooltip of the Rating.
         .Value(3)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating" min="1" max="6" value="3"></kendo-rating>
+```
+{% endif %}
 
 ## Disabling the Tooltips
 
-Setting the [`Tooltip`](https://docs.telerik.com/{{ site.platform }}/api//Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) property to `false` prevents the items to display tooltips when hovered.
+Setting the [`Tooltip`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) property to `false` prevents the items to display tooltips when hovered.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -37,6 +42,11 @@ Setting the [`Tooltip`](https://docs.telerik.com/{{ site.platform }}/api//Kendo.
         .Tooltip(false)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating" min="1" max="6" value="3" tooltip="false"></kendo-rating>
+```
+{% endif %}
 
 ## See Also
 

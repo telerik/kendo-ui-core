@@ -1,7 +1,7 @@
 ---
 title: Custom Binding
 page_title: Custom Binding
-description: "Learn how to implement custom binding with Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement custom binding with Telerik UI AutoComplete component for {{ site.framework }}."
 previous_url: /helpers/editors/autocomplete/binding/custom-binding
 slug: custombinding_autocomplete_aspnetmvc
 position: 4
@@ -32,33 +32,49 @@ You can use a custom DataSource and bind the AutoComplete to a `ToDataSourceResu
 
 1. Add an Ajax-bound AutoComplete.
 
-    ```Razor
-        @(Html.Kendo().AutoComplete()
-            .Name("productAutoComplete")
-            .DataTextField("ProductName") // Specify which property of the Product to be used by the autocomplete as a text.
-            .DataSource(source =>
-            {
-                source.Custom()
-                      .ServerFiltering(true)
-                      .Type("aspnetmvc-ajax") // Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
-                      .Transport(transport =>
-                      {
-                          transport.Read("GetProducts", "Home");
-                      })
-                      .Schema(schema =>
-                      {
-                          schema.Data("Data") // Define the [data](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
-                                .Total("Total"); // Define the [total](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
-                      });
-            })
-        )
-    ```
+```HtmlHelper
+    @(Html.Kendo().AutoComplete()
+        .Name("productAutoComplete")
+        .DataTextField("ProductName") // Specify which property of the Product to be used by the autocomplete as a text.
+        .DataSource(source =>
+        {
+            source.Custom()
+                    .ServerFiltering(true)
+                    .Type("aspnetmvc-ajax") // Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                    .Transport(transport =>
+                    {
+                        transport.Read("GetProducts", "Home");
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data") // Define the [data](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                            .Total("Total"); // Define the [total](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                    });
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="productAutoComplete"
+                    datatextfield="ProductName">
+    <datasource type="DataSourceTagHelperType.Custom"
+                server-filtering="true"
+                custom-type="aspnetmvc-ajax">
+        <transport>
+            <read url="@Url.Action("GetProducts", "Home")"/>
+        </transport>
+        <schema data="Data" total="Total">
+        </schema>
+    </datasource>
+</kendo-autocomplete>
+```
+{% endif %}
 
 ## Sending Parameters to the Server
 
 The following example demonstrates how to configure the AutoComplete to send parameters to the server.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
         .Name("productAutoComplete")
         .DataTextField("ProductName") // Specify which property of the Product will be used by the AutoComplete.
@@ -71,7 +87,21 @@ The following example demonstrates how to configure the AutoComplete to send par
             });
         })
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="productAutoComplete"
+                    datatextfield="ProductName">
+    <datasource>
+        <transport>
+            <read url=@Url.Action("GetProducts", "Home") data="onAdditionalData" />
+        </transport>
+    </datasource>
 
+</kendo-autocomplete>
+```
+{% endif %}
+```script
     <script>
         function onAdditionalData() {
             return {

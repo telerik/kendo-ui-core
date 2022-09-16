@@ -8,6 +8,8 @@ component: validation
 
 # kendo.ui.Validator
 
+Represents the Kendo UI Validator widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### errorTemplate `String`
@@ -132,7 +134,7 @@ Defines the element in which the validation summary will be rendered. By default
         <input name="username" required /> <br />
         <button>Validate</button>
     </form>
-    <div id="summary">
+    <div id="summary"></div>
 
     <script>
         $("#myform").kendoValidator({
@@ -183,7 +185,7 @@ Determines if validation will be triggered when element loses focus. Default val
 
     <form id="myform">
         <input name="username"/> <br />
-        <button>Validate</button>
+        <button onclick="event.preventDefault()">Validate</button>
     </form>
 
     <script>
@@ -443,6 +445,10 @@ The validator instance which fired the event.
 
 True if validation is passed, otherwise false.
 
+##### errors `Array`
+
+The validation errors.
+
 #### Example - subscribe to the "validate" event during initialization
 
       <form>
@@ -454,6 +460,7 @@ True if validation is passed, otherwise false.
         // attach a validator to the container
         $("form").kendoValidator({
             validate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("valid" + e.valid);
             }
         });
@@ -471,6 +478,7 @@ True if validation is passed, otherwise false.
         var validatable = $("form").kendoValidator().data("kendoValidator");
 
         validatable.bind("validate", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("valid" + e.valid);
         });
       </script>
@@ -503,10 +511,6 @@ The name of the validated input.
 
 The error message text.
 
-##### e.preventDefault `Function`
-
-If invoked prevents adding the `.k-invalid` class to the input and does not render the error message.
-
 #### Example - subscribe to the "validateInput" event during initialization
 
       <form>
@@ -518,6 +522,7 @@ If invoked prevents adding the `.k-invalid` class to the input and does not rend
         // attach a validator to the container
         $("form").kendoValidator({
             validateInput: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
             }
         });
@@ -535,31 +540,7 @@ If invoked prevents adding the `.k-invalid` class to the input and does not rend
         var validatable = $("form").kendoValidator().data("kendoValidator");
 
         validatable.bind("validateInput", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
-        });
-      </script>
-
-#### Example - prevent the "validateInput" event and render error message before the input
-
-      <form>
-        <input name="username" required /> <br />
-        <button id="save">Save</button>
-      </form>
-
-      <script>
-        // attach a validator to the container and get a reference
-        var validatable = $("form").kendoValidator().data("kendoValidator");
-
-        validatable.bind("validateInput", function(e) {
-          e.preventDefault();
-
-          var input = e.input;
-          var target = kendo.widgetInstance(input) ? kendo.widgetInstance(input).wrapper : input;
-          var error = $("<span />")
-            .addClass("k-invalid-msg")
-            .attr("data-for", e.field)
-            .html(e.error);
-
-          error.insertBefore(target).show();
         });
       </script>

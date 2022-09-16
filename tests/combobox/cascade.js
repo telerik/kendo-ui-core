@@ -1475,7 +1475,7 @@
                 dataValueField: "id",
                 dataTextField: "text2",
                 index: 0,
-                change: function(){
+                change: function() {
                     comboChangeCounter++;
                 },
                 dataSource: {
@@ -1498,7 +1498,7 @@
                 dataValueField: "text",
                 dataTextField: "text",
                 index: 0,
-                change: function(){
+                change: function() {
                     combo2ChangeCounter ++;
                 },
                 dataSource: {
@@ -1526,7 +1526,7 @@
                 dataValueField: "text",
                 dataTextField: "text",
                 index: 0,
-                change: function(){
+                change: function() {
                     combo3ChangeCounter++;
                 },
                 dataSource: {
@@ -1549,9 +1549,9 @@
             });
 
 
-            setTimeout(function () {
+            setTimeout(function() {
                 combo.open();
-                setTimeout(function () {
+                setTimeout(function() {
                     comboChangeCounter = 0;
                     combo2ChangeCounter = 0;
                     combo3ChangeCounter = 0;

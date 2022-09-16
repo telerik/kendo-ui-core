@@ -450,6 +450,25 @@ Sets the hint of the drop-zone.
         });
     </script>
 
+### localization.headerStatusPaused `String`
+
+Sets the paused status message of the header.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                headerStatusPaused: "customHeaderStatusPaused"
+            }
+        });
+    </script>
+
 ### localization.headerStatusUploaded `String`
 
 Sets the status message of the header for the uploaded files.
@@ -484,6 +503,44 @@ Sets the status message of the header for the files that are in the process of u
             },
             localization: {
                 headerStatusUploading: "customHeaderStatusUploading"
+            }
+        });
+    </script>
+
+### localization.uploadSuccess `String`
+
+Sets the text of the validation message when a file is succesfully uploaded.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                uploadSuccess: "customUploadSuccess"
+            }
+        });
+    </script>
+
+### localization.uploadFail `String`
+
+Sets the text of the validation message when a file fails to upload.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                uploadFail: "customUploadFail"
             }
         });
     </script>
@@ -1066,6 +1123,7 @@ Retrieves the files that are currently selected.
               files = upload.getFiles();
 
           alert("You have selected " + files.length  + " files");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(files);
         })
       });
@@ -1181,6 +1239,8 @@ Removes all files by sending a standard `remove` request to the handler.
 Removes all files for which the callback function returns `true` by sending a standard `remove` request to the handler.
 
 > The invoking of the `removeFile` method does not trigger the `remove` event.
+
+> In a chunk upload scenario the method will not work for files that are not fully uploaded and saved. To remove a file that has been canceled call the `remove` handler manually.
 
 #### Example
 
@@ -1331,6 +1391,8 @@ Manually triggers the upload process.
 Fires when the upload was cancelled while in progress.
 
 > The `cancel` event fires only when the Upload is in [async mode](/web/upload/modes#asynchronous-mode).
+
+> To remove the data of a file that has been canceled, manually call the `remove` handler. For more information refer to the limitation of the [`removeFile` method](/api/javascript/ui/upload/methods/removefile)
 
 #### Example
 
@@ -1526,6 +1588,7 @@ Fires when the data about the progress of the upload is available.
             // An array with information about the uploaded files
             var files = e.files;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.percentComplete);
         }
     </script>
@@ -1636,8 +1699,11 @@ Fires when a file is selected.
 
         function onSelect(e) {
             $.each(e.files, function (index, value) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Name: " + value.name);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Size: " + value.size + " bytes");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Extension: " + value.extension);
             });
         };

@@ -702,55 +702,55 @@
         beforeEach(moduleSetup);
         afterEach(moduleTeardown);
 
-        it("enable method renders k-state-disabled class when false is passed", function() {
+        it("enable method renders k-disabled class when false is passed", function() {
             pb = new ProgressBar(container);
 
             pb.enable(false);
 
-            assert.isOk(pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(pb.wrapper.hasClass("k-disabled"));
         });
 
-        it("enable method removes k-state-disabled class when no parameter is passed", function() {
+        it("enable method removes k-disabled class when no parameter is passed", function() {
             pb = new ProgressBar(container);
 
             pb.enable(false);
             pb.enable();
 
-            assert.isOk(!pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!pb.wrapper.hasClass("k-disabled"));
         });
 
-        it("enable method removes k-state-disabled class when true is passed", function() {
+        it("enable method removes k-disabled class when true is passed", function() {
             pb = new ProgressBar(container);
 
             pb.enable(false);
             pb.enable(true);
 
-            assert.isOk(!pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!pb.wrapper.hasClass("k-disabled"));
         });
 
-        it("enable method does not add k-state-disabled class if not needed", function() {
+        it("enable method does not add k-disabled class if not needed", function() {
             pb = new ProgressBar(container);
 
             pb.enable();
             pb.enable(true);
 
-            assert.isOk(!pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!pb.wrapper.hasClass("k-disabled"));
         });
 
-        it("enable method does not removes k-state-disabled class if not needed", function() {
+        it("enable method does not removes k-disabled class if not needed", function() {
             pb = new ProgressBar(container);
 
             pb.enable(false);
             pb.enable(false);
 
-            assert.isOk(pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(pb.wrapper.hasClass("k-disabled"));
         });
 
         it("enable does not disable progressbar", function() {
             pb = new ProgressBar(container);
             pb.enable();
 
-            assert.isOk(!pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!pb.wrapper.hasClass("k-disabled"));
         });
 
         it("initially disabled state is applied", function() {
@@ -758,7 +758,7 @@
                 enable: false
             });
 
-            assert.isOk(pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(pb.wrapper.hasClass("k-disabled"));
         });
 
         it("ProgressBar does change value when disabled", function() {
@@ -829,7 +829,7 @@
             pb.value(false);
             pb.enable(false);
 
-            assert.isOk(pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(pb.wrapper.hasClass("k-disabled"));
         });
     });
 
@@ -970,7 +970,7 @@
             pb.setOptions({ value: 150 });
 
             assert.equal(pb.value(), 150);
-            assert.equal(pb.wrapper.find(".k-state-selected").length, 2);
+            assert.equal(pb.wrapper.find(".k-selected").length, 2);
         });
     });
 }());

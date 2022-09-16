@@ -37,7 +37,11 @@ One (`1`) indicates the day after the current one (default value). Minus one (`-
 			targetDate2 = new Date(2016,10,5,15,25,11);
 		kendo.date.setDayOfWeek(targetDate1, 1, 1);
 		kendo.date.setDayOfWeek(targetDate2, 1, -1);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(targetDate1); // Mon Nov 07 2016 15:25:11 GMT+0200 (FLE Standard Time)
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 		console.log(targetDate2); // Mon Oct 31 2016 15:25:11 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -69,7 +73,11 @@ One (`1`) indicates the day after the current one (default value). Minus one (`-
 #### Example
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 		console.log(kendo.date.dayOfWeek(targetDate, 1, 1)); // Mon Nov 07 2016 15:25:11 GMT+0200 (FLE Standard Time)
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 		console.log(kendo.date.dayOfWeek(targetDate, 1, -1)); // Mon Oct 31 2016 15:25:11 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -96,8 +104,12 @@ The day number (from 0 (Sunday) to 6 (Saturday)) representing what day of week i
 #### Example
     <script>
         //no weekStart is passed so Monday will be considered as starting point for week
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.date.weekInYear(new Date(2017, 0, 9))); // 2
         //Sunday is passed as week start
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.date.weekInYear(new Date(2017, 0, 9), new Date(2017, 0, 8))); // 3
     </script>
 
@@ -119,8 +131,12 @@ The date to remove the time part.
 
     <script>
         var myDate = new Date(2016,10,5,14,25,11);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(myDate); // Sat Nov 05 2016 14:25:11 GMT+0200 (FLE Standard Time)
         var newDate = kendo.date.getDate(myDate);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(newDate); // Sat Nov 05 2016 00:00:00 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -155,6 +171,8 @@ The upper limit date of the range.
         var upperLimitDate = new Date(2016,11,5,14,25,11);
 
         var isInDateRange = kendo.date.isInDateRange(targetDate,lowerLimitDate,upperLimitDate);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(isInDateRange); //true
     </script>
 
@@ -188,6 +206,8 @@ The upper limit date of the range.
         var upperLimitDate = new Date(2016,11,5,17,25,11);
 
         var isInTimeRange = kendo.date.isInTimeRange(targetDate,lowerLimitDate,upperLimitDate);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(isInTimeRange); //true
     </script>
 
@@ -211,8 +231,12 @@ The date to be checked.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
         var today = new Date();
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(today); //Fri Nov 04 2016 16:58:30 GMT+0200 (FLE Standard Time)
         var isToday = kendo.date.isToday(targetDate);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(isToday); //false
     </script>
 
@@ -236,6 +260,8 @@ The base date for returning the next day.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
         var nextDay = kendo.date.nextDay(targetDate);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(nextDay); //Sun Nov 06 2016 15:25:11 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -258,6 +284,8 @@ The base date for returning the previous day.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
         var previousDay = kendo.date.previousDay(targetDate);
+	
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(previousDay); //Fri Nov 04 2016 15:25:11 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -281,6 +309,7 @@ The date to return the UTC time of.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
         var utcTime = kendo.date.toUtcTime(targetDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(utcTime); //1478359511000
     </script>
 
@@ -305,9 +334,11 @@ A Boolean value that indicates whether the DST will be ignored. The default valu
 #### Example
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(targetDate); // Sat Nov 05 2016 15:25:11 GMT+0200 (FLE Standard Time)
         var ignoreDST = false;
         kendo.date.setTime(targetDate, 999888777, ignoreDST);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(targetDate); // Thu Nov 17 2016 05:09:59 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -335,6 +366,7 @@ The date object that will be used for obtaining the time part.
         var targetDate = new Date(2016,10,5,15,25,11);
         var sourceDateWithTime = new Date(2016,10,15,17,27,17);
         var dateWithNewTime = kendo.date.setHours(targetDate, sourceDateWithTime);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dateWithNewTime); // Sat Nov 05 2016 17:27:17 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -362,6 +394,7 @@ The number of days to be added to the target date.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
         var newDate = kendo.date.addDays(targetDate, 4);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(newDate); // Wed Nov 09 2016 15:25:11 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -377,6 +410,7 @@ Returns the current day without the time part.
 
     <script>
         var currDay = kendo.date.today();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(currDay); //Mon Nov 07 2016 00:00:00 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -399,6 +433,7 @@ The date object to get the invariant time of.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
 		var invariantTime = kendo.date.toInvariantTime(targetDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(invariantTime); //Fri Feb 01 1980 15:25:11 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -421,6 +456,7 @@ The date object to get the first day of the month of.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
 		var firstDayOfMonth = kendo.date.firstDayOfMonth(targetDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(firstDayOfMonth); //Tue Nov 01 2016 00:00:00 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -443,6 +479,7 @@ The date object to get the last day of the month of.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
 		var lastDayOfMonth = kendo.date.lastDayOfMonth(targetDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(lastDayOfMonth); //Wed Nov 30 2016 00:00:00 GMT+0200 (FLE Standard Time)
     </script>
 
@@ -465,6 +502,7 @@ The date object to get the milliseconds of.
     <script>
         var targetDate = new Date(2016,10,5,15,25,11);
 		var milliseconds = kendo.date.getMilliseconds(targetDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(milliseconds); //55511000
     </script>
 
@@ -477,6 +515,7 @@ Returns the milliseconds per day of a date object.
 #### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.date.MS_PER_DAY); //86400000
     </script>
 
@@ -487,6 +526,7 @@ Returns the milliseconds per hour of a date object.
 #### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.date.MS_PER_HOUR); //3600000
     </script>
 
@@ -497,5 +537,6 @@ Returns the milliseconds per minute of a date object.
 #### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.date.MS_PER_MINUTE); //60000
     </script>

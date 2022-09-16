@@ -225,7 +225,7 @@
 
             splitbar.focus();
 
-            assert.isOk(splitbar.hasClass("k-state-focused"));
+            assert.isOk(splitbar.hasClass("k-focus"));
         });
 
         it("Splitter removes focused class on focus", function() {
@@ -235,7 +235,7 @@
 
             splitbar.focus().blur();
 
-            assert.isOk(!splitbar.hasClass("k-state-focused"));
+            assert.isOk(!splitbar.hasClass("k-focus"));
         });
     });
 }());

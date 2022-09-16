@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/multiselect, /helpers/editors/multiselect/overview
 slug: htmlhelpers_multiselect_aspnetcore
 position: 1
 ---
 
-# MultiSelect HtmlHelper Overview
+# MultiSelect Overview
 
+{% if site.core %}
+The Telerik UI MultiSelect TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI MultiSelect widget.
+{% else %}
 The Telerik UI MultiSelect HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI MultiSelect widget.
+{% endif %}
 
 The MultiSelect displays a list of options and allows multiple selections from this list. The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
 
-* [Demo page for the MultiSelect](https://demos.telerik.com/{{ site.platform }}/multiselect/index)
+* [Demo page for the MultiSelect HtmlHelper](https://demos.telerik.com/{{ site.platform }}/multiselect/index)
+{% if site.core %}
+* [Demo page for the MultiSelect TagHelper](https://demos.telerik.com/aspnet-core/multiselect/tag-helper)
+{% endif %}
 
 ## Initializing the MultiSelect
 
-The following example demonstrates how to define the MultiSelect by using the MultiSelect HtmlHelper.
+The following example demonstrates how to define the MultiSelect.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DataTextField("ProductName")
@@ -35,6 +42,20 @@ The following example demonstrates how to define the MultiSelect by using the Mu
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+     <kendo-multiselect name="multiselect"
+                        datatextfield="ProductName"
+                        datavaluefield="ProductID"
+                        value='new[] {2, 7}'>
+           <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+               <transport>
+                    <read url="@Url.Action("Products_Read", "Home")" />
+               </transport>
+           </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 ```Controller
     public class MultiSelectController : Controller
     {
@@ -70,44 +91,76 @@ The following example demonstrates how to define the MultiSelect by using the Mu
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the MultiSelect HtmlHelper. To get a reference to an existing Telerik UI MultiSelect instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiSelect client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect#methods) to control its behavior.
+The following example demonstrates the basic configuration of the MultiSelect. To get a reference to an existing Telerik UI MultiSelect instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiSelect client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect#methods) to control its behavior.
 
-```
-@(Html.Kendo().MultiSelect()
-    .Name("multiselect")
-    .DataTextField("ProductName")
-    .DataValueField("ProductID")
-    .Placeholder("Select product...")
-    .ItemTemplate("<span class=\"product-id-id\">#= ProductID #</span> #= ProductName #")
-    .Value(new[] { 2, 7 })
-    .Height(520)
-    .TagMode(MultiSelectTagMode.Single)
-    .DataSource(source =>
-    {
-        source.Read(read =>
+```HtmlHelper
+    @(Html.Kendo().MultiSelect()
+        .Name("multiselect")
+        .DataTextField("ProductName")
+        .DataValueField("ProductID")
+        .Placeholder("Select product...")
+        .ItemTemplate("<span class=\"product-id-id\">#= ProductID #</span> #= ProductName #")
+        .Value(new[] { 2, 7 })
+        .Height(520)
+        .TagMode(MultiSelectTagMode.Single)
+        .DataSource(source =>
         {
-            read.Action("Products_Read", "Home");
+            source.Read(read =>
+            {
+                read.Action("Products_Read", "Home");
+            })
+            .ServerFiltering(true);
         })
-        .ServerFiltering(true);
-    })
-    .Events(events => events
-        .Change("onChange")
-        .Select("onSelect")
-        .Deselect("onDeselect")
-        .Open("onOpen")
-        .Close("onClose")
-        .DataBound("onDataBound")
-        .Filtering("onFiltering")
+        .Events(events => events
+            .Change("onChange")
+            .Select("onSelect")
+            .Deselect("onDeselect")
+            .Open("onOpen")
+            .Close("onClose")
+            .DataBound("onDataBound")
+            .Filtering("onFiltering")
+        )
     )
-)
 
-<script type="text/javascript">
-    $(function () {
-        // The Name() of the MultiSelect is used to get its client-side instance.
-        var multiselect = $("#multiselect").data("kendoMultiSelect");
-    });
-</script>
+    <script type="text/javascript">
+        $(function () {
+            // The Name() of the MultiSelect is used to get its client-side instance.
+            var multiselect = $("#multiselect").data("kendoMultiSelect");
+        });
+    </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="multiselect"
+                       datatextfield="ProductName"
+                       datavaluefield="ProductID"
+                       placeholder="Select product..."
+                       item-template="<span class=product-id-id> #= ProductID #</span> #= ProductName #"
+                       value='new[] {2, 7}'
+                       height="520"
+                       tag-mode="@MultiSelectTagMode.Single"
+                       on-change="onChange"
+                       on-select="onSelect"
+                       on-deselect="OnDeselect"
+                       on-open="onOpen"
+                       on-close="onClose"
+                       on-data-bound="onDataBound"
+                       on-filtering="onFiltering">
+        <datasource type="DataSourceTagHelperType.Custom">
+            <transport>
+                <read url="@Url.Action("Products_Read", "Home")" />
+            </transport>
+        </datasource>
+    </kendo-multiselect>
+
+    <script type="text/javascript">
+        $(function () {
+            // The Name() of the MultiSelect is used to get its client-side instance.
+            var multiselect = $("#multiselect").data("kendoMultiSelect");
+        });
+    </script>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -125,6 +178,7 @@ You can subscribe to all MultiSelect [events](/api/multiselect). For a complete 
 
 The following example demonstrates how to subscribe to events by a handler name.
 
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .BindTo(new string[] { "Item1", "Item2", "Item3" })
@@ -142,12 +196,35 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the change event.
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var multiSelect_data = new string[] { "Item1", "Item2", "Item3" };
+    }
 
+    <kendo-multiselect name="multiselect"
+                       on-select="multiselect_select"
+                       on-change="multiselect_change"
+                       bind-to="multiSelect_data">
+    </kendo-multiselect>
+    <script>
+        function multiselect_select() {
+            // Handle the select event.
+        }
+
+        function multiselect_change() {
+            // Handle the change event.
+        }
+    </script>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .BindTo(new string[] { "Item1", "Item2", "Item3" })
@@ -164,9 +241,70 @@ The following example demonstrates how to subscribe to events by a template dele
             </text>)
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var multiSelect_data = new string[] { "Item1", "Item2", "Item3" };
+    }
+
+    <kendo-multiselect name="multiselect"
+                       on-select="function() {
+                           // Handle the select event inline.
+                       }"
+                       on-change="function() {
+                          // Handle the change event inline.
+                       }"
+                       bind-to="multiSelect_data">
+    </kendo-multiselect>
+```
+{% endif %}
+
+### MultiSelect Down Arrow
+
+To enable the down arrow for toggling the popup container as in the Telerik UI DropDownList, set the DownArrow() option:
+
+```HtmlHelper
+     @(Html.Kendo().MultiSelect()
+        .Name("movies")
+        .DownArrow()
+        .BindTo(new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "12 Angry Men", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Il buono, il brutto, il cattivo.", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Inception", Value ="3"
+            }
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var multiSelect_data = new List<SelectListItem>()
+        {
+            new SelectListItem() {Text = "12 Angry Men", Value ="1"},
+            new SelectListItem() {Text = "Il buono, il brutto, il cattivo", Value ="2"},
+            new SelectListItem() {Text = "Inception", Value ="3"}
+        };
+    }
+
+    <kendo-multiselect name="movies"
+                       down-arrow="true"
+                       bind-to="multiSelect_data">
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## See Also
 
 * [Basic Usage by the MultiSelect HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/index)
+{% if site.core %}
+* [Basic Usage of the MultiSelect TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/tag-helper)
+{% endif %}
 * [Using the API of the MultiSelect HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/api)
 * [Server-Side API](/api/multiselect)

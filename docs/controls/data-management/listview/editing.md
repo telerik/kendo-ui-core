@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: jQuery ListView Documentation | Editing | Kendo UI
+page_title: jQuery ListView Documentation | Editing
 description: "Get started with the jQuery ListView by Kendo UI and learn how to implement its editing functionality."
 slug: editing_kendoui_listview
 position: 3
@@ -9,6 +9,8 @@ position: 3
 # Editing
 
 By default, the editing feature of the ListView is disabled.
+
+For a runnable example on a ListView with editing enabled refer to the [Editing official demo page](https://demos.telerik.com/kendo-ui/listview/editing).
 
 ## Getting Started
 

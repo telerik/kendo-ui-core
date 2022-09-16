@@ -5,7 +5,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge cutout border', function () {
+    describe('kendo.ui.Badge cutout border', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });

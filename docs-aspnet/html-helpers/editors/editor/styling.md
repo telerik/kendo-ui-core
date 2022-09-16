@@ -1,14 +1,14 @@
 ---
 title: Styling of Content
 page_title: Styling of Content
-description: "Learn how to apply styles to the Telerik UI Editor HtmlHelper for {{ site.framework }}."
+description: "Learn how to apply styles to the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_styling_aspnetcore
 position: 9
 ---
 
 # Styling of Content
 
-The Editor HtmlHelper provides default and custom options for styling its content.
+The Editor component provides default and custom options for styling its content.
 
 For a runnable example, refer to the [demo on styles in the Editor](https://demos.telerik.com/{{ site.platform }}/editor/styles).
 
@@ -102,24 +102,44 @@ code {
 
 To avoid the default content styles from the previous example, remove or override them after the Editor is initialized by executing the following code.
 
-```
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .Value(@<text>
-        <p>
-            The Editor allows your users to edit HTML in a familiar, user-friendly way.
-        </p>
-    </text>)
-)
+```HtmlHelper
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .Value(@<text>
+            <p>
+                The Editor allows your users to edit HTML in a familiar, user-friendly way.
+            </p>
+        </text>)
+    )
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        var editor = $("#editor").data("kendoEditor");
-        var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
-        styleTag.parentNode.removeChild(styleTag);
-    });
-</script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var editor = $("#editor").data("kendoEditor");
+            var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
+            styleTag.parentNode.removeChild(styleTag);
+        });
+    </script>
 ```
+```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor" value="@{
+        <text>
+            <p>
+                The Editor allows your users to edit HTML in a familiar, user-friendly way.
+            </p>
+        </text>
+    }">
+    </kendo-editor>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var editor = $("#editor").data("kendoEditor");
+            var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
+            styleTag.parentNode.removeChild(styleTag);
+        });
+    </script>
+```
+{% endif %}
 
 ## Custom Styles
 

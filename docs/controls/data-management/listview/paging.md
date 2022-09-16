@@ -1,6 +1,6 @@
 ---
 title: Paging
-page_title: jQuery ListView Documentation | Paging | Kendo UI
+page_title: jQuery ListView Documentation | Paging
 description: "Get started with the jQuery ListView by Kendo UI and learn how to implement a separate pager and split its content into pages."
 slug: paging_kendoui_listview
 position: 5
@@ -8,11 +8,61 @@ position: 5
 
 # Paging
 
-By default, the paging functionality of the ListView is disabled.  
+By default, the paging functionality of the ListView is disabled. 
 
-## Getting Started
+To enable it, use either of the following approaches: 
 
-To enable paging, instantiate a separate pager control and bind it to the same DataSource.
+* (Available as of the R3 2021 release) Use the built-in paging functionality by setting the [`pageable`](/api/javascript/ui/listview/configuration/pageable) property.
+* Use the [Kendo UI Pager](/controls/data-management/pager/overview) widget.
+
+## Using the Built-in Paging Functionality
+
+Enabling the built-in paging renders the Pager as part of the ListView widget.
+
+To enable paging, set [`pageable`](/api/javascript/ui/listview/configuration/pageable) to `true`. For more information about the `pageable` properties, refer to the [API documentation](/api/javascript/ui/listview/configuration/pageable#related-properties).
+
+The following example demonstrates how to implement the suggested approach. 
+
+```dojo
+<div id="listView"></div>
+
+<script type="text/x-kendo-tmpl" id="template">
+  <div class="product-view k-widget">
+      <dl>
+          <dt>Product Name</dt>
+          <dd>#:ProductName#</dd>
+      </dl>
+  </div>
+</script>
+
+<script>
+  $(document).ready(function () {
+    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        dataSource = new kendo.data.DataSource({
+          transport: {
+            read:  {
+              url: crudServiceBaseUrl + "/Products",
+              dataType: "jsonp"
+            }
+          },
+          pageSize: 10
+        });
+
+    var listView = $("#listView").kendoListView({
+      dataSource: dataSource,
+      template: kendo.template($("#template").html()),
+      navigatable: true,
+      pageable: true
+    }).data("kendoListView");
+  });
+</script>
+```
+
+## Integrating the Pager Widget
+
+Using the Pager renders the widget as a separate element from the ListView.
+
+To enable paging, instantiate a separate Pager control and bind it to the same DataSource.
 
     <div id="listview"></div>
     <div id="pager"></div>
@@ -41,9 +91,9 @@ To enable paging, instantiate a separate pager control and bind it to the same D
 
 ## Advanced Configuration
 
-When the number of items that are bound to a ListView is larger than expected, the `pager` will control the items that are displayed.
+When you use the Pager widget and when the number of items, which are bound to a ListView, is larger than expected, the displayed items will be controlled by the `pager` setting.
 
-1. Create a target element for its rendering. It is typically placed near the ListView.
+1. Create a target element for rendering the `pager`. It is typically placed near the ListView.
 
         <div id="listView"></div>
         <div class="k-page-wrap">

@@ -1,71 +1,31 @@
 ---
 title: Overview
-page_title: jQuery Tooltip Documentation | Tooltip Overview | Kendo UI
-description: "Get started with the jQuery Tooltip by Kendo UI and learn how to create, initialize, and enable the widget."
+page_title: jQuery Tooltip Documentation | Tooltip Overview
+description: "Try now the Kendo UI for jQuery Tooltip component coming with default configuration options for relatively positioning it to the target, events for displaying the widget, auto-hiding behavior, and more."
 slug: overview_kendoui_tooltip_widget
-position: 1
+position: 0
 ---
 
 # Tooltip Overview
 
-The Tooltip displays a popup hint for a specific HTML element.
+The Tooltip displays a popup hint for a specific HTML element. 
 
-Its content can be defined either as static text or loaded dynamically with AJAX. The Tooltip provides default configuration options such as relatively positioning it to the target, events for displaying the widget, auto-hiding behavior, setting its height and width.
+You can define its content either as static text or load it dynamically with AJAX. The Tooltip provides default configuration options such as relatively positioning it to the target, events for displaying the widget, auto-hiding behavior, setting its height and width.
 
-* [Demo page for the Tooltip](https://demos.telerik.com/kendo-ui/tooltip/index)
+// add an image here
 
-## Initializing the Tooltip
-
-The Tooltip can be initialized for a single element or for a container where the Tooltip targets are represented by the child elements.
-
-The following example demonstrates how to create a Tooltip for a single target and initialize it.
-
-    <div id="target">
-        Some Content
-    </div>
-
-    $(document).ready(function() {
-        $("#target").kendoTooltip({ content: "Tooltip content" });
-    });
-
-The following example demonstrates how to create a Tooltip for multiple targets within a container, initialize it using a jQuery selector, and specify the filter to match the target elements. By default, the Tooltip content is extracted from the `title` attribute of the target element.
-
-    <div id="container">
-        Some <a href="#" title="Some text">Content</a><br />
-        Some <a href="#" title="Some other text">More</a> Content <br />
-    </div>  
-
-    $(document).ready(function() {
-        $("#container").kendoTooltip({ filter: "a[title]" });
-    });
-
-## Basic Configuration
-
-The following example demonstrates how to initialize a Tooltip and configure its main properties.
-
-    $("#container").kendoTooltip({
-        position: "right",
-        height: "300px",
-        showOn: "click",
-        autoHide: true,
-        content: function() {
-            return "custom text";
-        },
-        width: "500px"
-    });
+![Tooltip Overview](tooltip.png)
 
 ## Functionality and Features
 
-* [Content operations]({% slug content_kendoui_tooltip %})
-* [Rendering over disabled elements]({% slug disabledelements_kendoui_tooltip %})
+* [Content operations]({% slug content_kendoui_tooltip %})&mdash;The Tooltip provides built-in support for asynchronously loading its content from URLs.
+* [Rendering over disabled elements]({% slug disabledelements_kendoui_tooltip %})&mdash;You can also render the Tooltip over disabled elements by initializing the widget over the parent of the disabled element. 
 
-## Referencing Existing Instances
+## Next Steps 
 
-To refer to an existing Tooltip instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Tooltip API](/api/javascript/ui/tooltip) to control its behavior.
-
-The following example demonstrates how to access an existing Tooltip instance.
-
-    var tooltip = $("#target").data("kendoTooltip");
+* [Getting Started with the Kendo UI Tooltip for jQuery]({% slug getting_started_kendoui_tooltip_widget %})
+* [Basic Usage of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/index)
+* [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)
 
 ## See Also
 

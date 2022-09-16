@@ -1,19 +1,26 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI MultiViewCalendar HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI MultiViewCalendar component for {{ site.framework }}."
 previous_url: /helpers/scheduling/multiviewcalendar/overview
 slug: overview_multiviewcalendar_htmlhelper_aspnetcore
 position: 1
 ---
 
-# MultiViewCalendar HtmlHelper Overview
+# MultiViewCalendar Overview
 
+{% if site.core %}
+The Telerik UI MultiViewCalendar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI MultiViewCalendar widget.
+{% else %}
 The Telerik UI MultiViewCalendar HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI MultiViewCalendar widget.
+{% endif %}
 
 The MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
 
-* [Demo page for the MultiViewCalendar](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/index)
+* [Demo page for the MultiViewCalendar HtmlHelper](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/index)
+{% if site.core %}
+* [Demo page for the MultiViewCalendar TagHelper](https://demos.telerik.com/aspnet-core/multiviewcalendar)
+{% endif %}
 
 ## Initializing the MultiViewCalendar
 
@@ -27,14 +34,23 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 
 1. Add a MultiViewCalendar.
 
-        ```Razor
-                @(Html.Kendo().MultiViewCalendar()
-                    .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
-                    .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
-                    .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
-                    .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
-                )
-        ```
+  ```HtmlHelper
+          @(Html.Kendo().MultiViewCalendar()
+              .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
+              .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
+              .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
+              .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
+          )
+  ```
+  {% if site.core %}
+  ```TagHelper
+            <kendo-multiviewcalendar name="multiviewcalendar"
+                                     min="new DateTime(2010, 1, 1, 10, 0, 0)"
+                                     max="new DateTime(2010, 1, 1, 20, 0, 0)"
+                                     value="DateTime.Now">
+            </kendo-multiviewcalendar>
+  ```
+  {% endif %}
 
 ## Functionality and Features
 
@@ -54,7 +70,7 @@ You can subscribe to all MultiViewCalendar events.
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```Razor
+```HtmlHelper
         @(Html.Kendo().MultiViewCalendar()
           .Name("MultiViewCalendar")
           .Events(e => e
@@ -72,31 +88,63 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
         </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiviewcalendar name="multiviewcalendar" 
+                             on-change="calendar_change" 
+                             on-navigate="calendar_navigate">
+    </kendo-multiviewcalendar>
+    <script>
+        function calendar_navigate() {
+            // Handle the navigate event.
+        }
+
+        function calendar_change() {
+            // Handle the change event.
+        }
+    </script>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```Razor
-        @(Html.Kendo().MultiViewCalendar()
-          .Name("MultiViewCalendar")
-          .Events(e => e
-              .Change(@<text>
-                function() {
-                    // Handle the change event inline.
-                }
-              </text>)
-              .Navigate(@<text>
-                function() {
-                    // Handle the navigate event inline.
-                }
-                </text>)
-          )
-        )
+```HtmlHelper
+  @(Html.Kendo().MultiViewCalendar()
+    .Name("MultiViewCalendar")
+    .Events(e => e
+        .Change(@<text>
+          function() {
+              // Handle the change event inline.
+          }
+        </text>)
+        .Navigate(@<text>
+          function() {
+              // Handle the navigate event inline.
+          }
+          </text>)
+    )
+  )
 ```
+{% if site.core %}
+```TagHelper
+  <kendo-multiviewcalendar name="multiViewCalendar"
+                           on-change='function() {
+                                  //Handle the change event inline.
+                           }'
+                           on-navigate='function() {
+                                  //Handle the navigate event inline.
+                           }'>
+  </kendo-multiviewcalendar>
+```
+{% endif %}
 
 ## See Also
 
 * [Basic Usage of the MultiViewCalendar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar)
+{% if site.core %}
+* [Basic Usage of the MultiViewCalendar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar)
+{% endif %}
 * [Using the API of the MultiViewCalendar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/api)
 * [Server-Side API](/api/multiviewcalendar)

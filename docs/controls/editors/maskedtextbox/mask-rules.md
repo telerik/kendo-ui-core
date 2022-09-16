@@ -1,7 +1,8 @@
 ---
 title: Validation
-page_title: jQuery MaskedTextBox Documentation | Validation | Kendo UI
+page_title: jQuery MaskedTextBox Documentation | Validation
 description: "Get started with the jQuery MaskedTextBox by Kendo UI and use its predefined and custom masks."
+previous_url: /controls/editors/datepicker/how-to/date-masking-using-maskedtextbox
 slug: masks_kendoui_maskedtextbox_widget
 position: 2
 ---
@@ -11,6 +12,9 @@ position: 2
 The MaskedTextBox provides a set of predefined mask rules and enables you to modify them.
 
 The default MaskedTextBox mask is an empty string which allows for any type of user input. To restrict user input, define a mask value.
+
+For a live example, visit the [Validation Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/validation).
+
 
 ## Predefined Masks
 
@@ -42,6 +46,7 @@ The MaskedTextBox enables you to define custom mask rules during initialization.
 
 > To escape any of the predefined rules, use the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
 
+```dojo
    <input id="maskedtextbox">
 
     <script>
@@ -57,6 +62,7 @@ The MaskedTextBox enables you to define custom mask rules during initialization.
         });
       });
     </script>
+```
 
 ## See Also
 

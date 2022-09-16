@@ -16,7 +16,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
 
             if ($("#toolbar2").data("kendoToolBar")) {
@@ -156,9 +156,9 @@
 
             var button = container.find("#foo");
 
-            assert.isOk(!button.hasClass("k-state-active"));
+            assert.isOk(!button.hasClass("k-selected"));
             click(button);
-            assert.isOk(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
+            assert.isOk(button.hasClass("k-selected"), "Button receives k-selected class after click");
         });
 
         it("click on a toggleButton's icon changes the button state", function() {
@@ -169,10 +169,10 @@
             });
 
             var button = container.find("#foo");
-            assert.isOk(!button.hasClass("k-state-active"));
+            assert.isOk(!button.hasClass("k-selected"));
 
             click(container.find("span.k-i-foo"));
-            assert.isOk(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
+            assert.isOk(button.hasClass("k-selected"), "Button receives k-selected class after click");
         });
 
         it("click on selected toggleButton deselects it", function() {
@@ -185,10 +185,10 @@
             var button = container.find("#foo");
 
             click(button);
-            assert.isOk(button.hasClass("k-state-active"));
+            assert.isOk(button.hasClass("k-selected"));
 
             click(button);
-            assert.isOk(!button.hasClass("k-state-active"));
+            assert.isOk(!button.hasClass("k-selected"));
         });
 
         it("click on disabled toggleButton does not change its state", function() {
@@ -201,7 +201,7 @@
             var button = container.find("#foo");
 
             click(button);
-            assert.isOk(!button.hasClass("k-state-active"), "Button state is not changed");
+            assert.isOk(!button.hasClass("k-selected"), "Button state is not changed");
         });
 
         it("click on disabled toggleButton does not trigger the toggle event", function() {
@@ -275,6 +275,53 @@
             click(button);
         });
 
+        // toggleable is not documented and does not make sense for splitButton
+        it.skip("click on toggleButton in a SplitButton triggers toggle event", function(done) {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                            { id: "option1", text: "Option 1", togglable: true },
+                            { id: "option2", text: "Option 2", togglable: true },
+                            { id: "option3", text: "Option 3", togglable: true }
+                        ]
+                    }
+                ],
+                toggle: function() {
+                    assert.isOk(true, "Toggle event is clicked");
+                    done();
+                }
+            });
+
+            var button = container.find("#splitButton");
+            click(button);
+            click($("#option3"));
+        });
+
+        // toggleable does not make sense for splitButton
+        it.skip("click on toggleButton in a SplitButton triggers toggle event (button level)", function(done) {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                            { id: "option1", text: "Option 1", togglable: true },
+                            { id: "option2", text: "Option 2", togglable: true },
+                            { id: "option3", text: "Option 3", togglable: true,
+                                toggle: function() {
+                                    assert.isOk(true, "Toggle event is clicked");
+                                    done();
+                                }
+                            }
+                        ]
+                    }
+                ]
+            });
+
+            var button = container.find("#splitButton");
+            click(button);
+            click($("#option3"));
+        });
+
         it("selecting toggle button that belongs to a group will deselect other buttons from the same group", function() {
             container.kendoToolBar({
                 items: [
@@ -287,16 +334,16 @@
 
             click(buttons.eq(0));
 
-            assert.isOk(buttons.eq(0).hasClass("k-state-active"), "First button is selected");
-            assert.isOk(!buttons.eq(1).hasClass("k-state-active"), "Second button is deselected");
+            assert.isOk(buttons.eq(0).hasClass("k-selected"), "First button is selected");
+            assert.isOk(!buttons.eq(1).hasClass("k-selected"), "Second button is deselected");
 
             click(buttons.eq(1));
 
-            assert.isOk(!buttons.eq(0).hasClass("k-state-active"), "First button is deselected");
-            assert.isOk(buttons.eq(1).hasClass("k-state-active"), "Second button is selected");
+            assert.isOk(!buttons.eq(0).hasClass("k-selected"), "First button is deselected");
+            assert.isOk(buttons.eq(1).hasClass("k-selected"), "Second button is selected");
         });
 
-        it("click on splitButton triggers click event", function() {
+        it("click on splitButton triggers click event", function(done) {
             container.kendoToolBar({
                 items: [
                     {
@@ -308,10 +355,100 @@
                 ],
                 click: function(e) {
                     assert.isOk(true, "Click event is fired");
+                    done();
                 }
             });
 
             var button = container.find("#foo");
+
+            click(button);
+        });
+
+        it("click on splitButton item triggers click event", function(done) {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton",
+                        id: "foo",
+                        text: "foo",
+                        menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ],
+                        click: function() {
+                            assert.isOk(true, "Click event is fired");
+                            done();
+                        }
+                    }
+                ]
+            });
+
+            var slitButton = container.find("#foo").data("kendoSplitButton");
+            var popup = slitButton.menu._popup;
+            var button = popup.element.find("#option1");
+
+            click(button);
+        });
+
+        it("click on splitButton triggers click event when in overflow", function(done) {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "foo", text: "foo", overflow: "always", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ],
+                        click: function(e) {
+                            assert.isOk(true, "Click event is fired");
+                            done();
+                        }
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var button = toolbar.popup.element.find("#foo_overflow");
+
+            click(button);
+        });
+
+        it("click on splitButton item triggers click event when in overflow", function(done) {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "foo", text: "foo", overflow: "always", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ],
+                        click: function(e) {
+                            assert.isOk(true, "Click event is fired");
+                            done();
+                        }
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var button = toolbar.popup.element.find("#option1_overflow");
+
+            click(button);
+        });
+
+        it("click on dropDownButton item triggers click event when in overflow", function(done) {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", overflow: "always", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ],
+                        click: function(e) {
+                            assert.isOk(true, "Click event is fired");
+                            done();
+                        }
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var button = toolbar.popup.element.find("#option1_overflow");
 
             click(button);
         });
@@ -328,8 +465,9 @@
                 ]
             });
 
-            var button = container.find("#foo_wrapper a.k-split-button-arrow");
-            var popup = container.find("#foo_wrapper").data("kendoPopup");
+            var slitButton = container.find("#foo").data("kendoSplitButton");
+            var button = slitButton.arrowButton;
+            var popup = slitButton.menu._popup;
 
             click(button);
 
@@ -348,8 +486,9 @@
                 ]
             });
 
-            var button = container.find("#foo_wrapper a.k-split-button-arrow");
-            var popup = container.find("#foo_wrapper").data("kendoPopup");
+            var slitButton = container.find("#foo").data("kendoSplitButton");
+            var button = slitButton.arrowButton;
+            var popup = slitButton.menu._popup;
 
             click(button);
             assert.isOk(popup.visible());
@@ -370,8 +509,9 @@
                 ]
             });
 
+            var slitButton = container.find("#foo").data("kendoSplitButton");
             var button = container.find("#foo");
-            var popup = container.find("#foo_wrapper").data("kendoPopup");
+            var popup = slitButton.menu._popup;
 
             click(button);
             assert.isOk(!popup.visible());
@@ -432,8 +572,9 @@
                 }
             });
 
-            var button = container.find("#foo_wrapper a.k-split-button-arrow");
-            var popup = container.find(".k-split-button").data("kendoPopup");
+            var slitButton = container.find("#foo").data("kendoSplitButton");
+            var button = slitButton.arrowButton;
+            var popup = slitButton.menu._popup;
 
             click(button);
 
@@ -476,8 +617,162 @@
                 }
             });
 
-            var button = container.find("#foo_wrapper a.k-split-button-arrow");
-            var popup = container.find(".k-split-button").data("kendoPopup");
+            var slitButton = container.find("#foo").data("kendoSplitButton");
+            var button = slitButton.arrowButton;
+            var popup = slitButton.menu._popup;
+
+            click(button); //open
+            click(button); //close
+
+            assert.isOk(popup.visible());
+        });
+
+        it("click on button opens the popup", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ]
+            });
+
+            var dropDownButton = container.find("#foo").data("kendoDropDownButton");
+            var popup = dropDownButton.menu._popup;
+
+            click(dropDownButton.element);
+
+            assert.isOk(popup.visible());
+        });
+
+        it("second click at the button closes the popup", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ]
+            });
+
+            var dropDownButton = container.find("#foo").data("kendoDropDownButton");
+            var button = dropDownButton.element;
+            var popup = dropDownButton.menu._popup;
+
+            click(button);
+            assert.isOk(popup.visible());
+
+            click(button);
+            assert.isOk(!popup.visible());
+        });
+
+        it("click on the button does NOT fire the click event", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ],
+                click: function() {
+                    assert.isOk(false, "Click event should not trigger!");
+                }
+            });
+
+            var button = container.find("#foo");
+
+            click(button);
+        });
+
+        it("opening the dropDownButton popup triggers open event", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ],
+                open: function() {
+                    assert.isOk(true, "Open event is triggered");
+                }
+            });
+
+            var button = container.find("#foo");
+
+            click(button);
+        });
+
+        it("open event can be prevented", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ],
+                open: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            var dropDownButton = container.find("#foo").data("kendoDropDownButton");
+            var button = dropDownButton.element;
+            var popup = dropDownButton.menu._popup;
+
+            click(button);
+
+            assert.isOk(!popup.visible());
+        });
+
+        it("closing the dropDownButton popup triggers close event", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ],
+                close: function() {
+                    assert.isOk(true, "Close event is triggered");
+                }
+            });
+
+            var button = container.find("#foo");
+
+            click(button); //open
+            click(button); //close
+        });
+
+        it("close event can be prevented", function() {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ]
+                    }
+                ],
+                close: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            var dropDownButton = container.find("#foo").data("kendoDropDownButton");
+            var button = dropDownButton.element;
+            var popup = dropDownButton.menu._popup;
 
             click(button); //open
             click(button); //close
@@ -511,9 +806,9 @@
 
             var button = toolbar.popup.element.find("#foo_overflow > .k-button");
 
-            assert.isOk(!button.hasClass("k-state-active"));
+            assert.isOk(!button.hasClass("k-selected"));
             click(button);
-            assert.isOk(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
+            assert.isOk(button.hasClass("k-selected"), "Button receives k-selected class after click");
         });
 
         it("click event is not fired for disabled buttons (overflow)", function() {
@@ -694,8 +989,8 @@
 
             click($("#left_overflow"));
 
-            assert.isOk($("#left").hasClass("k-state-active"));
-            assert.isOk($("#left_overflow").hasClass("k-state-active"));
+            assert.isOk($("#left").hasClass("k-selected"));
+            assert.isOk($("#left_overflow").hasClass("k-selected"));
         });
 
     });

@@ -120,15 +120,20 @@ The usage of the `dataBound` handler and the iteration of the table rows is suit
             var columns = e.sender.columns;
             var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
 
-            // iterate the table rows and apply custom row and cell styling
+            // Iterate the data items and apply row styles where necessary
             var rows = e.sender.tbody.children();
             for (var j = 0; j < rows.length; j++) {
+              // Get the current row.
               var row = $(rows[j]);
+              // Get the dataItem of the current row.
               var dataItem = e.sender.dataItem(row);
 
+              // Get the value of the UnitsInStock cell from the current row.
               var units = dataItem.get("UnitsInStock");
+              // Get the value of the Discontinued cell from the current row.
               var discontinued = dataItem.get("Discontinued");
 
+              // If the row is "discontinued", add the class to it.
               if (discontinued) {
                 row.addClass("discontinued");
               }
@@ -197,9 +202,12 @@ The usage of the `dataBound` handler and the iteration of the data items is suit
             // iterate the data items and apply row styles where necessary
             var dataItems = e.sender.dataSource.view();
             for (var j = 0; j < dataItems.length; j++) {
+              // Get the value of the discontinued cell from the current dataItem.
               var discontinued = dataItems[j].get("Discontinued");
 
+              // Find the table row that corresponds to the dataItem by using the uid property.
               var row = e.sender.tbody.find("[data-uid='" + dataItems[j].uid + "']");
+              // Add the class if the row is discontinued.
               if (discontinued) {
                 row.addClass("discontinued");
               }
@@ -249,13 +257,14 @@ The usage of a row template is suitable only if you do not intend to use hierarc
         { ID: 3, ProductName: "Baz", UnitsInStock: 3, Discontinued: true }
       ];
 
-
+      // Create the row template string that will render the content of the specific rows.
       var rowTemplateString = '<tr class="#: Discontinued ? "discontinued" : "" #" data-uid="#: uid #">' +
           '<td>#: ProductName #</td>' +
           '<td class="#: getUnitsInStockClass(UnitsInStock) #">#: UnitsInStock #</td>' +
           '<td>#: Discontinued #</td>' +
           '</tr>';
 
+      // Create the alt row template string. This alt row is the same as the regular row, it simply has one additional class.
       var altRowTemplateString = rowTemplateString.replace('tr class="', 'tr class="k-alt ');
 
       function getUnitsInStockClass(units) {
@@ -290,8 +299,8 @@ The usage of a row template is suitable only if you do not intend to use hierarc
             { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
             { field: "Discontinued", width: "120px" }
           ],
-          rowTemplate: rowTemplateString,
-          altRowTemplate: altRowTemplateString
+          rowTemplate: rowTemplateString, // Provide the row template string
+          altRowTemplate: altRowTemplateString // Provide the alt row template string.
         });
       });
     </script>
@@ -299,4 +308,5 @@ The usage of a row template is suitable only if you do not intend to use hierarc
 
 ## See Also
 
+* [Dynamic User defined row styles]({% slug grid-user-defined-row-styles %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

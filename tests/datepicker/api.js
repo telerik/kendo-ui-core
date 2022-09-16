@@ -4,7 +4,7 @@ var DateView = kendo.DateView,
     dateview,
     input;
 
-describe("kendo.ui.DateView API", function () {
+describe("kendo.ui.DateView API", function() {
     beforeEach(function() {
 
         input = $("<input />").appendTo(Mocha.fixture);
@@ -89,9 +89,9 @@ it("disabled dates are reflected to calendar", function() {
     var options = {
         disableDates: ["mo"],
         value: new Date(2015,9,19)
-    }
+    };
     dateview.setOptions(options);
-    var isDisabled = dateview.calendar.element.find("td").eq(1).hasClass("k-state-disabled")
+    var isDisabled = dateview.calendar.element.find("td").eq(1).hasClass("k-disabled");
     assert.equal(isDisabled, true);
 });
 });
@@ -100,7 +100,7 @@ var input;
 var datepicker;
 var DatePicker = kendo.ui.DatePicker;
 
-describe("kendo.ui.DateView API", function () {
+describe("kendo.ui.DateView API", function() {
     beforeEach(function() {
 
         input = $("<input />").appendTo(Mocha.fixture);
@@ -115,7 +115,7 @@ it("open method opens the dateView", function() {
     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
     stub(datepicker.dateView, "_calendar");
-    stub(datepicker.dateView.popup, {open: datepicker.dateView.popup.open});
+    stub(datepicker.dateView.popup, { open: datepicker.dateView.popup.open });
 
     datepicker.open();
 
@@ -211,6 +211,16 @@ it("empty input if set value ot null", function() {
     assert.equal(datepicker._value, null);
 });
 
+it("mask is shown if set value ot null", function() {
+    datepicker = input.kendoDatePicker({ dateInput: true }).data("kendoDatePicker");
+
+    datepicker.value(null);
+
+    assert.isOk(input.val());
+    assert.equal(input.val(), "month/day/year");
+    assert.equal(datepicker._value, null);
+});
+
 it("value method should call dateview.value()", function() {
     datepicker = input.kendoDatePicker().data("kendoDatePicker");
     stub(datepicker.dateView, "value");
@@ -268,7 +278,7 @@ it("_change should not call value() if value was not changed", function() {
 
 it("min() should return min value", function() {
     var value = new Date("10/22/2000");
-    datepicker = input.kendoDatePicker({min: value}).data("kendoDatePicker");
+    datepicker = input.kendoDatePicker({ min: value }).data("kendoDatePicker");
 
     var result = datepicker.min();
 
@@ -312,7 +322,7 @@ it("min() should call dateView.min()", function() {
 
 it("max() should return max value", function() {
     var value = new Date("10/22/2000");
-    datepicker = input.kendoDatePicker({max: value}).data("kendoDatePicker");
+    datepicker = input.kendoDatePicker({ max: value }).data("kendoDatePicker");
 
     var result = datepicker.max();
 
@@ -353,7 +363,7 @@ it("enable(false) should unbind icon click", function() {
 
     datepicker.enable(false);
 
-    stub(datepicker.dateView, {toggle: datepicker.dateView.toggle});
+    stub(datepicker.dateView, { toggle: datepicker.dateView.toggle });
 
     datepicker.wrapper.find(".k-select").click();
 
@@ -382,7 +392,7 @@ it("readonly() unbinds icon click", function() {
 
     datepicker.readonly();
 
-    stub(datepicker.dateView, {toggle: datepicker.dateView.toggle});
+    stub(datepicker.dateView, { toggle: datepicker.dateView.toggle });
 
     datepicker.wrapper.find(".k-select").click();
 
@@ -406,8 +416,7 @@ it("readonly() removes disabled attribute and disabled class", function() {
 
     assert.equal(datepicker.element.attr("readonly"), "readonly");
     assert.equal(datepicker.element.attr("disabled"), undefined);
-    assert.isOk(datepicker._inputWrapper.hasClass("k-state-default"));
-    assert.isOk(!datepicker._inputWrapper.hasClass("k-state-disabled"));
+    assert.isOk(!datepicker.wrapper.hasClass("k-disabled"));
 });
 
 it("enable(false) removes readonly attribute and default class", function() {
@@ -418,8 +427,7 @@ it("enable(false) removes readonly attribute and default class", function() {
 
     assert.equal(datepicker.element.attr("readonly"), undefined);
     assert.equal(datepicker.element.attr("disabled"), "disabled");
-    assert.isOk(!datepicker._inputWrapper.hasClass("k-state-default"));
-    assert.isOk(datepicker._inputWrapper.hasClass("k-state-disabled"));
+    assert.isOk(datepicker.wrapper.hasClass("k-disabled"));
 });
 
 it("enable() enables widget after readonly()", function() {
@@ -430,8 +438,7 @@ it("enable() enables widget after readonly()", function() {
 
     assert.equal(datepicker.element.attr("readonly"), undefined);
     assert.equal(datepicker.element.attr("disabled"), undefined);
-    assert.isOk(datepicker._inputWrapper.hasClass("k-state-default"));
-    assert.isOk(!datepicker._inputWrapper.hasClass("k-state-disabled"));
+    assert.isOk(!datepicker.wrapper.hasClass("k-disabled"));
 });
 
 it("value method honors options.culture", function() {
@@ -524,7 +531,7 @@ it("setOptions method updates dateInput", function() {
 });
 
 it("setOptions method disables dateInput and clears the input if widget does not have a value", function() {
-    datepicker = input.kendoDatePicker({dateInput: true}).data("kendoDatePicker");
+    datepicker = input.kendoDatePicker({ dateInput: true }).data("kendoDatePicker");
     datepicker.open();
 
     datepicker.setOptions({
@@ -558,10 +565,21 @@ it("setOptions updates options.dates", function() {
     assert.equal(datepicker.options.dates.length, 2);
 });
 
+it("setOptions updates the button size correctly", function() {
+    var datepicker = new DatePicker(input);
+
+    datepicker.setOptions({
+        size: "small"
+    });
+
+    assert.isOk(datepicker._dateIcon.hasClass("k-button-sm"));
+    assert.isNotOk(datepicker._dateIcon.hasClass("k-button-md"));
+});
+
 it("disabled date is not set as widgets value", function() {
     var datepicker = new DatePicker(input, {
         value: new Date(2015,9,19),
-        disableDates : ["mo"]
+        disableDates: ["mo"]
     });
 
     assert.equal(datepicker.element.val(), "");
@@ -570,7 +588,7 @@ it("disabled date is not set as widgets value", function() {
 it("widget value is set correctly when disabled dates are added", function() {
     var datepicker = new DatePicker(input, {
         value: new Date(2015,9,20),
-        disableDates : ["mo"]
+        disableDates: ["mo"]
     });
 
     assert.equal(datepicker.element.val(), "10/20/2015");
@@ -579,7 +597,7 @@ it("widget value is set correctly when disabled dates are added", function() {
 it("manually setting disabled date, does not set the widget value", function() {
     var datepicker = new DatePicker(input, {
         value: new Date(2015,9,20),
-        disableDates : ["mo"]
+        disableDates: ["mo"]
     });
     datepicker.element.val("10/19/2015");
     datepicker.element.blur();
@@ -590,7 +608,7 @@ it("manually setting disabled date, does not set the widget value", function() {
 
 it("setting disabled date for first time does not clear input", function() {
     var datepicker = new DatePicker(input, {
-        disableDates : ["sa", "su"]
+        disableDates: ["sa", "su"]
     });
     datepicker.element.val("06/18/2016");
     datepicker.element.blur();
@@ -601,12 +619,12 @@ it("setting disabled date for first time does not clear input", function() {
 
 it("clicking on disabled date does not close the popup", function() {
     var datepicker = new DatePicker(input, {
-        disableDates : ["tu"]
+        disableDates: ["tu"]
     });
     datepicker.dateView._calendar();
     datepicker.open();
     $("[data-value='2015/9/13']").parent().trigger("click");
-    assert.equal(datepicker.element.val().length, 0)
+    assert.equal(datepicker.element.val().length, 0);
     assert.equal($(".k-animation-container").css("display"), "block");
 });
 
@@ -618,6 +636,14 @@ it("readonly calls dateinput _editable method", function() {
 
     datepicker.readonly();
     assert.equal(atStub.calls("_editable"), 1);
+});
+
+it("value method should not clear DateInput format", function() {
+    var datepicker = new DatePicker(input, {
+        dateInput: true
+    });
+    datepicker.value("");
+    assert.isOk(datepicker.element.val());
 });
 
 it("enable calls dateinput _editable method", function() {

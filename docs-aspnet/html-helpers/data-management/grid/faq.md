@@ -1,7 +1,7 @@
 ---
 title: Frequently Asked Questions
 page_title: Frequently Asked Questions
-description: "Find the most frequently asked questions related to the Kendo UI Grid HtmlHelper and their answers."
+description: "Find the answers of the most frequently asked questions related to the Telerik UI Grid component and their answers."
 previous_url: /kendo-ui/aspnet-mvc/helpers/grid/faq, /helpers/data-management/grid/faq
 slug: freqaskedquestions_gridhelper_aspnetmvc
 position: 20
@@ -9,13 +9,23 @@ position: 20
 
 # Frequently Asked Questions
 
-This article lists some of the most frequently asked questions when working with the Telerik UI Grid HtmlHelper for {{ site.framework }}.
+This article lists some of the most frequently asked questions when working with the Telerik UI Grid component for {{ site.framework }}.
 
 ## How can I display HTML in Grid columns?
 
 By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entities that are included in its data. To prevent this, call the [`Encoded`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystemstring) method and pass `false` as its argument.
 
+```HtmlHelper
     columns.Bound(o => o.Description).Encoded(false);
+```
+{% if site.core %}
+```TagHelper
+    <columns>
+ 	    <column field="Description" encoded="false">
+ 	    </column>
+    </columns>
+```
+{% endif %}
 
 ## How can I customize the way properties are displayed in Grid-bound columns?
 
@@ -25,7 +35,7 @@ By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entiti
 
   > The `Template` method needs a [templated Razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx) when used in Razor views. The bound item is available through the `@item` parameter.
 
-      ```Razor
+    ```HtmlHelper
           @(Html.Kendo().Grid<Models.Product>(Model)
               .Name("Grid")
               .Columns(columns =>
@@ -35,7 +45,22 @@ By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entiti
                   </text>);
               })
           )
-      ```
+    ```
+
+Here is another sample with DetailTemplates (common setting for the Grid, not specific to given Column):
+
+    ```HtmlHelper
+        .DetailTemplate(@<text>
+            <div>ProductID: @item.ProductID</div>
+            <div>ProductName: @item.ProductName</div>
+            <div>UnitsInStock: @item.UnitsInStock</div>
+            <div>UnitPrice: @item.UnitPrice</div>
+            <div>UnitsOnOrder: @item.UnitsOnOrder</div>
+            <div>Discontinued: @item.Discontinued</div>
+        </text>)
+    ```
+
+It is important to note that you can use only-server templates when the Grid is `server-bound`. They are not available in Ajax or WebService binding mode. For these cases, you will need to use Client Templates.
 
 * If the Grid is `Ajax-bound`, use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 {% else %}
@@ -44,10 +69,20 @@ Use the `ClientTemplate` method. The value should be a string, which represents 
 
 {% endif %}
 
-        .Columns(columns =>
-        {
-            columns.Bound(p => p.Title).ClientTemplate("<strong>#: Title #</strong>");
-        })
+```HtmlHelper
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.Title).ClientTemplate("<strong>#: Title #</strong>");
+    })
+```
+{% if site.core %}
+```TagHelper
+    <columns>
+ 	    <column field="Title" template="<strong>#: Title #</strong>">
+ 	    </column>
+    </columns>
+```
+{% endif %}
 
 ## How can I apply conditional logic to client column templates?
 
@@ -55,6 +90,7 @@ A Kendo UI Template may contain arbitrary JavaScript code. The `#` symbol is use
 
 The following example demonstrates the conditions in the `ClientTemplate`.
 
+```HtmlHelper
     columns.Bound(p => p.ProductName).ClientTemplate(
         "# if (HasIcon == true) { #" +
             "<img src='" + Url.Content("~/Content/icons/") + "#= ProductID #.png' alt='#= ProductName # icon' />" +
@@ -62,12 +98,23 @@ The following example demonstrates the conditions in the `ClientTemplate`.
             "#: ProductName #" +
         "# } #"
     );
+```
+{% if site.core %}
+```TagHelper
+    <columns>
+ 	     <column field="ProductName" 
+                 template="# if (HasIcon == true) { # <img src=@Url.Content("~/Content/icons/")#= ProductID #.png alt='#= ProductName # icon'/># } else { ##: ProductName ## } #">
+ 	     </column>
+    </columns>
+```
+{% endif %}
 
 {% if site.mvc %}
 ## How can I apply conditional logic to column templates for server-bound Grids?
 
 The following example demonstrates the syntax when you use a column template in a server-bound Grid.
 
+```HtmlHelper
     columns.Bound(p => p.ProductName).Template( @<text>
         @if(@item.ProductName != null){
              @item.ProductName
@@ -76,6 +123,8 @@ The following example demonstrates the syntax when you use a column template in 
         }
         </text>
     );
+```
+
 {% endif %}
 ## How can I display checkboxes in Ajax-bound Grids?
 
@@ -83,6 +132,7 @@ The `checked` attribute specifies whether a checkbox is displayed as checked or 
 
 The following example demonstrates how to display a checkbox in a bound `ColumnClientTemplate`.
 
+```HtmlHelper
     columns.Bound(p => p.Enabled).ClientTemplate(
         "<input type='checkbox' value='#= ProductID #' " +
             "# if (Enabled) { #" +
@@ -90,13 +140,23 @@ The following example demonstrates how to display a checkbox in a bound `ColumnC
             "# } #" +
         "/>"
     );
+```
+{% if site.core %}
+```TagHelper
+    <columns>
+       <column field="Enabled"
+               template="<input type='checkbox' value='#= ProductID #' # if (Enabled) { # checked='checked'# } #/>">
+ 	   </column>
+    </columns>
+```
+{% endif %}
 
 ## How can I use action links?
 
 {% if site.mvc %}
 * For server-bound Grids, use the `Template` method. The following example demonstrates an action link in a Grid column.
 
-    ```Razor
+    ```HtmlHelper
         columns.Bound(p => p.ProductID).Template(@<text>
             @Html.ActionLink("Show Product Details", "ProductDetails", new { id = @item.ProductID } )>
         </text>);
@@ -105,12 +165,23 @@ The following example demonstrates how to display a checkbox in a bound `ColumnC
 
 * For Ajax-bound Grids, use the `ClientTemplate` method. The following example demonstrates an action link in an Ajax-bound Grid column.
 
+    ```HtmlHelper
         columns.Bound(p => p.ProductID).ClientTemplate(
             "<a href='" +
                 Url.Action("ProductDetails", "Product") +
                 "/#= ProductID #'" +
             ">Show Product Details</a>"
         );
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <columns>
+            <column field="ProductID"
+                template="<a href='@Url.Action("ProductDetails", "Product")/#= ProductID #'>Show Product Details</a>">
+            </column>
+        </columns>
+    ```
+    {% endif %}
 
 ## How can I use JavaScript functions in client column templates?
 
@@ -118,6 +189,7 @@ The Kendo UI Template has an implicit parameter called `data`. Use it as the arg
 
 The following example demonstrates how to use a JavaScript function in the `ClientTemplate`.
 
+```HtmlHelper
     // Omitted for brevity.
     columns.Bound(p => p.ProductID).ClientTemplate("#= productDetails(data) #");
     // Omitted for brevity.
@@ -134,6 +206,30 @@ The following example demonstrates how to use a JavaScript function in the `Clie
         return html;
     }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    // Omitted for brevity.
+    <columns>
+ 	    <column field="ProductID" template="#= productDetails(data) #">
+ 	    </column>
+    </columns>
+    // Omitted for brevity.
+
+    <script>
+    function productDetails(product) {
+        var action = '@Url.Action("ProductDetails", "Product")';
+
+        var html = kendo.format("<a href='{0}/{1}'>Show Product Details</a>",
+            action,
+            product.ProductID
+        );
+
+        return html;
+    }
+    </script>
+```
+{% endif %}
 
 ## How can I use Kendo UI widgets inside Grid client column templates?
 
@@ -141,7 +237,8 @@ The `script` tags are not automatically evaluated inside a Grid client column te
 
 The following example demonstrates how to add a Kendo UI Menu inside a Grid column template. Note that the Menu requires the Grid cells to allow overflowing, which is disabled by default.
 {% if site.mvc %}
-```C#
+
+```HtmlHelper
     @(Html.Kendo().Grid<ModelType>()
         .Name("GridID")
         .Columns(columns => {
@@ -178,7 +275,7 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
 ```
 {% endif %}
 {% if site.core %}
-```C#
+```HtmlHelper
     @(Html.Kendo().Grid<ModelType>()
         .Name("GridID")
         .Columns(columns => {
@@ -199,6 +296,27 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
         })
         .Events(ev => ev.DataBound("initMenus"))
     )
+```
+```TagHelper
+    <kendo-grid name="GridID" on-data-bound="initMenus">
+        <columns>
+            <column field="ProductID"
+                    html-attributes='new Dictionary<string,object> { ["class"] = "templateCell" }'
+                    template="@(Html.Kendo().Menu()
+                            .Name("menu_#=ProductID#")
+                            .Items(its =>
+                            {
+                                its.Add().Text("foo").Items(nested =>
+                                {
+                                    nested.Add().Text("bar");
+                                    nested.Add().Text("baz");
+                                });
+
+                            })
+                            .ToClientTemplate().Value)">
+            </column>
+        </columns>
+    </kendo-grid>
 ```
 ```JavaScript
     function initMenus(e) {
@@ -221,7 +339,18 @@ Use the [`Format`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystems
 
 The following example demonstrates how to specify the format of a bound column.
 
+```HtmlHelper
     columns.Bound(o => o.OrderDate).Format("{0:d}"); // Will use the short date pattern
+```
+{% if site.core %}
+```TagHelper
+    <columns>
+        <column field="OrderDate" format="{0:d}">
+        </column>
+    </columns>
+```
+{% endif %}
+
 
 ## How can I add Kendo UI icons to custom command buttons?
 
@@ -229,6 +358,7 @@ A list of the available Kendo UI icons and their CSS classes is available in the
 
 The following example demonstrates how to add Kendo UI icons to custom command buttons.
 
+```HtmlHelper
     @(Html.Kendo().Grid()
         .Name("grid")
         .Columns(columns =>
@@ -236,6 +366,20 @@ The following example demonstrates how to add Kendo UI icons to custom command b
             columns.Command(command => { command.Custom("myCommand").Text("My Text").IconClass("k-icon k-i-custom"); });
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <columns>
+            <column>
+                <commands>
+                    <column-command name="myCommand" text="My Text" icon-class="k-icon k-i-custom" />
+                </commands>
+            </column>
+        </columns>
+    </kendo-grid>
+```
+{% endif %}
 
 ## How can I send values to my action method when binding the Grid?
 
@@ -244,17 +388,20 @@ If the Grid is server-bound, use the `overload` method which accepts route value
 
 The following example demonstrates how to send data in a server-bound Grid.
 
+```HtmlHelper
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Server()
         .Read(read => read.Action("Read", "Home", new { userID = (int)ViewData["UserID"] }))
     )
     // Omitted for brevity.
+```
 
 {% endif %}
 If the Grid is Ajax-bound, use the `Data` method to specify the name of the JavaScript function, which will return the additional data.
 
 The following example demonstrates how to send additional data in an Ajax-bound Grid.
 
+```HtmlHelper
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
         .Read(read => read
@@ -271,6 +418,26 @@ The following example demonstrates how to send additional data in an Ajax-bound 
             };
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    // Omitted for brevity.
+    <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Read","Home")" data="additionalData"/>
+            </transport>
+    </datasource>
+    // Omitted for brevity.
+    <script>
+        function additionalData() {
+            return {
+                userID: 42,
+                search: $("#search").val()
+            };
+        }
+    </script>
+```
+{% endif %}
 
 > The property names of the object that are passed as additional data must not match the property names in the `ViewModel`. Otherwise, the MVC binder will not recognize which property corresponds to the `ViewModel` and which to the additional `data` object.
 
@@ -345,6 +512,7 @@ Use the [`error`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasour
 
 The following example demonstrates how to handle errors in the Ajax binding mode.
 
+```HtmlHelper
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
     .Events(events => events.Error("onError"))
@@ -354,10 +522,41 @@ The following example demonstrates how to handle errors in the Ajax binding mode
         alert("A server error has occurred!");
     }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    // Omitted for brevity.
+    <datasource type="DataSourceTagHelperType.Ajax" on-error="onError">
+    </datasource>
+    // Omitted for brevity.
+    <script>
+    function onError(e, status) {
+        alert("A server error has occurred!");
+    }
+    </script>  
+```
+{% endif %}
+
 
 ## How can I see what the server response is?
 
 The Kendo UI Grid makes `HTTP` requests. Use the developer tools of your browser to inspect the communication between the browser and the web server. In case of a server-side exception, the `HTTP` status code is `500` and the server response contains the detailed exception stack-trace.
+
+## How can I implement paging, sorting, filtering, and grouping?
+
+If your model supports the `IQueryable` interface or is `DataTable`, the Grid does paging, sorting, filtering, grouping{% if site.mvc %}, and aggregates&mdash;`DataTable` binding supports only the `count` aggregate&mdash;automatically.
+
+For server-binding scenarios, no additional steps are required. Just pass the `IQueryable` to the `Grid` constructor. For additional information on the Grid server binding, refer to [this article]({% slug serverbinding_grid_aspnetmvc %}){% endif %}.
+
+For Ajax-binding scenarios, the `ToDataSourceResult` extension method must be used to perform the data processing. For additional information on the Grid Ajax binding, refer to [this article]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}).
+
+If your model does not implement `IQueryable`, implement custom binding. This means that you are responsible for the paging, sorting, filtering, and grouping of the data. For more information on the Grid custom binding, refer to [this article]({% slug custombinding_grid_aspnetmvc %}).
+
+> All data operations are performed at database server level if the underlying `IQueryable` provider supports translation of expression trees to SQL. Kendo UI Grid for {{ site.framework }} has been tested with the following frameworks:
+> - Entity Framework
+> - Linq to SQL
+> - Telerik OpenAccess
+> - NHibernate
 
 ## How can I configure Grids to perform paging, sorting, filtering, and grouping in memory?
 
@@ -365,10 +564,20 @@ By default, paging, sorting, filtering and grouping initiate the making of Ajax 
 
 The following example demonstrates how to perform paging, sorting, filtering, and grouping in memory.
 
+```HtmlHelper
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
     .ServerOperation(false)
     // Omitted for brevity.
+```
+{% if site.core %}
+```TagHelper
+    // Omitted for brevity.
+    <datasource type="DataSourceTagHelperType.Ajax" server-operation="false">
+    </datasource>
+    // Omitted for brevity.
+```
+{% endif %}
 
 ## How can I prevent Ajax response caching?
 
@@ -406,6 +615,7 @@ The `ToDataSourceResult` extension method has an overload which accepts the `Mod
 
 The following example demonstrates how to display model state errors.
 
+```HtmlHelper
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
     .Events(events => events.Error("onError"))
@@ -425,7 +635,30 @@ The following example demonstrates how to display model state errors.
         }
     }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    // Omitted for brevity.
+    <datasource type="DataSourceTagHelperType.Ajax" on-error="onError">
+    </datasource>
+    // Omitted for brevity.
+    <script>
+    function onError(e, status) {
+        if (e.errors) {
+            var message = "The following errors have occurred:\n";
 
+            $.each(e.errors, function(key, value) {
+                if (value.errors) {
+                    message += value.errors.join("\n");
+                }
+            });
+
+            alert(message);
+        }
+    }
+    </script> 
+```
+{% endif %}
 ## How can I create custom pop-up editors?
 
 The Kendo UI Grid for {{ site.framework }} uses the `Html.EditorForModel` to create the editing form. This method relies on {{ site.framework }} editor templates. To create a custom editor template, create a partial view under the `~/Views/Shared/EditorTemplates` folder and specify it through the `UIHint` attribute.
@@ -444,6 +677,7 @@ The Kendo UI Grid uses the default `.NET` property values when creating a new ob
 
 The following example demonstrates how to specify default property values.
 
+```HtmlHelper
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
     .Model(model =>
@@ -452,6 +686,23 @@ The following example demonstrates how to specify default property values.
         model.Field(p => p.Price).DefaultValue(9.99);
     })
     // Omitted for brevity.
+```
+{% if site.core %}
+```TagHelper
+    // Omitted for brevity.
+    <datasource type="DataSourceTagHelperType.Ajax">
+       <schema>
+          <model>
+              <fields>
+                  <field name="Name" type="string" default-value="N/A"></field>
+                  <field name="Price" type="number" default-value=9.99></field>
+              </fields>
+          </model>
+       </schema>
+    </datasource>
+    // Omitted for brevity.
+```
+{% endif %}
 
 ## How can I create helper methods rendering predefined widgets I can further configure?
 
@@ -472,13 +723,14 @@ The following example demonstrates how to create a custom helper that wraps the 
                     }
     }
 ```
-```Razor
+```HtmlHelper
+
     @using TheNamespaceOfTheExtensionsClass
 
     @(Html.MyGrid.Name("foo")) // The Grid is already configured to be Scrollable
 ```
 
-> If you want to avoid adding the `using` statement in each view this Html helper is used, add a namespace reference to the `Web.config` file inside the `Views` folder of your project.
+> If you want to avoid adding the `using` statement in each view that uses this  component, add a namespace reference to the `Web.config` file inside the `Views` folder of your project.
 
 ## How can I mark certain properties as read-only?
 
@@ -494,6 +746,7 @@ The following example demonstrates the Read-only property through the `ReadOnly`
 
 The following example demonstrates the Read-only property through the `Editable` method.
 
+```HtmlHelper
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
         .Model(model =>
@@ -501,6 +754,22 @@ The following example demonstrates the Read-only property through the `Editable`
             model.Field(o => o.OrderID).Editable(false);
         })
     // Omitted for brevity.
+```
+{% if site.core %}
+```TagHelper
+    // Omitted for brevity.
+    <datasource type="DataSourceTagHelperType.Ajax">
+       <schema>
+          <model>
+              <fields>
+                  <field name="OrderID" type="number" editable="false"></field>
+              </fields>
+          </model>
+       </schema>
+    </datasource>
+    // Omitted for brevity.
+```
+{% endif %}
 
 > The `ReadOnly` and `Editable` settings work only in in-line and in-cell editing modes. Use a custom popup editor if you want to exclude certain properties from the editor form.
 
@@ -513,12 +782,18 @@ To validate a date by using the Kendo UI DateTimePicker:
 1. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `KendoDateEditor.ascx` or `KendoDateEditor.cshtml` (if you are using the Razor view engine).
 1. Add a Kendo UI DropDownList to that partial view.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().DateTimePicker()
             .Value(DateTime.Now)
             .DateInput()
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+       <kendo-datetimepicker value="DateTime.Now" date-input="true">
+       </kendo-datetimepicker> 
+    ```
+    {% endif %}
 
 1. Decorate the `Date` property in the model by using the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute.
 
@@ -537,12 +812,18 @@ To validate a number by using the Kendo UI NumericTextBox:
 1. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `KendoNumberEditor.ascx` or `KendoNumberEditor.cshtml` (if you are using the Razor view engine).
 1. Add a Kendo UI DropDownList to that partial view.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().NumericTextBox()
             .Round(false)
             .Spinners(false)
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+       <kendo-numerictextbox round="true" spinners="false">
+       </kendo-numerictextbox>
+    ```
+    {% endif %}
 
 1. Decorate the `number` property in the model by using the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute.
 
@@ -559,5 +840,8 @@ To validate a number by using the Kendo UI NumericTextBox:
 ## See Also
 
 * [Basic Usage of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid)
+{% if site.core %}
+* [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
+{% endif %}
 * [Using the API of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/api)
 * [Server-Side API](/api/grid)

@@ -35,6 +35,6 @@ Remove the loading mask, which causes the issue, by hiding the `mask` DOM elemen
 
 ```
  .k-loading-mask{
-  display: `none`;
+  display: none;
  }
 ```

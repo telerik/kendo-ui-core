@@ -1,7 +1,7 @@
 ---
 title: User Guide
 page_title: Spreadsheet
-description: "A user guide for the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
+description: "A user guide for the Telerik UI Spreadsheet component for {{ site.framework }}."
 slug: htmlhelpers_spreadsheet_user_guide_aspnetcore
 position: 1
 ---

@@ -28,7 +28,7 @@ How can I set up the private NuGet feed in Azure to publish an ASP.NET Core appl
 * A Service Connection
 * Azure Artifacts
 
-Both require that a privat NuGet feed is set up along with a *nuget.config* file.
+Both require that a private NuGet feed is set up along with a *nuget.config* file.
 
 ### Package Sources
 
@@ -51,7 +51,7 @@ The NuGet config file allows you to set package sources as well as where to get 
         <?xml version="1.0" encoding="utf-8"?>
         <configuration>
             <packageSources>
-                <add key="Telerik" value="https://nuget.telerik.com/nuget/" />
+                <add key="Telerik" value="https://nuget.telerik.com/v3/index.json" />
                 <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
             </packageSources>
             <packageSourceCredentials>
@@ -62,7 +62,9 @@ The NuGet config file allows you to set package sources as well as where to get 
             </packageSourceCredentials>
         </configuration>
 
-However this could be a security issue in a CI/CD environment where another user might be able to read the values of environment variables. The [Azure DevOps Service Connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) resolves this as it lets you enter credentials in a secure manner without unnecessarily exposing account details. That Service Connection can now be used by multiple pipelines to authenticate private NuGet feeds (and other services that need authentication).
+However, this could be a security issue in a CI/CD environment where another user might be able to read the values of environment variables. The [Azure DevOps Service Connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) resolves this as it lets you enter credentials in a secure manner without unnecessarily exposing account details. That Service Connection can now be used by multiple pipelines to authenticate private NuGet feeds (and other services that need authentication).
+
+> You cannot use `Password` instead of `ClearTextPassword`. This is because Password is an encrypted value, set on a specific Windows machine, and is only supported on Windows. See the [NuGet packageSourceCredentials documentation](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesourcecredentials) for more information.
 
 ### Setting up the Service Connection
 

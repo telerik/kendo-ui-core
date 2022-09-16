@@ -1,7 +1,7 @@
 ---
 title: Toolbar and Tools
 page_title: Toolbar and Tools
-description: "Get started with the Telerik UI PDFViewer HtmlHelper for {{ site.framework }} and learn how to use and define the tools in its toolbar."
+description: "Get started with the Telerik UI PDFViewer component for {{ site.framework }} and learn how to use and define the tools in its toolbar."
 previous_url: /helpers/pdf/pdfviewer/toolbar
 slug: htmlhelpers_pdfviewer_toolbar_aspnetcore
 position: 4
@@ -19,6 +19,7 @@ The toolbar collection includes the following built-in tools:
 
 * `pager`
 * `zoom`
+* `zoomInOut`
 * `toggleSelection`
 * `search` 
 * `open` 
@@ -27,9 +28,11 @@ The toolbar collection includes the following built-in tools:
 
 > Running an Adblock extension in Chrome might treat the new browser tab for the print dialog as a potential ad and block it.
 
+The `zoom`, `zoomInOut`, `toggleSelection`, `search` and `print` tools are available only with PDFjs processing.
+
 The following example demonstrates basic configuration options for the PDFViewer toolbar tools. You can also add `spacer` elements, in order to group a preferable set of tools. 
 
-```  
+```HtmlHelper
       @(Html.Kendo().PDFViewer().Name("pdfviewer")
         .Toolbar(toolbar =>
             toolbar.Items(items =>
@@ -37,8 +40,8 @@ The following example demonstrates basic configuration options for the PDFViewer
                 items.Add().Name("pager");
                 items.Add().Name("spacer");
                 items.Add().Name("zoom");
+                items.Add().Name("zoomInOut");
                 items.Add().Name("toggleSelection");
-                items.Add().Name("spacer");
                 items.Add().Name("search");
                 items.Add().Name("open");
                 items.Add().Name("download");
@@ -47,17 +50,56 @@ The following example demonstrates basic configuration options for the PDFViewer
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+    <kendo-pdfviewer name="pdfviewer">
+        <toolbar enabled="true">
+            <pdfviewer-toolbar-items>
+                <pdfviewer-toolbar-item name="pager">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="spacer">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="zoom">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="zoomInOut">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="toggleSelection">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="search">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="open">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="download">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="print">
+                </pdfviewer-toolbar-item>
+            </pdfviewer-toolbar-items>
+        </toolbar>
+    </kendo-pdfviewer>
+```
+{% endif %}
 
 You can also use the `add` and `remove` client-side API methods to programmatically manage the rendered tools in the PDFViewer.
 
+```HtmlHelper
     @(Html.Kendo().PDFViewer()
         .Name("pdfviewer")     
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pdfviewer name="pdfviewer">
+    </kendo-pdfviewer>
+```
+{% endif %}
+```script.js
     <script>    
       var pdfviewer = $("#pdfViewer").getKendoPDFViewer();
       var printToolElement = $(".k-toolbar").find('a[title="Print"]');
       pdfviewer.toolbar.remove(printToolElement);
     </script>
+```
 
 ## See Also
 

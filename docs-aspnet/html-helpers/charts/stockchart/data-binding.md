@@ -1,15 +1,15 @@
 ---
 title: Data Binding
 page_title: Data Binding
-description: "Learn how to bind the Telerik UI StockChart HtmlHelper for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) to data."
+description: "Learn how to bind the Telerik UI StockChart component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) to data."
 previous_url: /helpers/charts/stockchart/data-binding
 slug: databinding_stockchart_aspnetcore
 position: 2
 ---
 {% if site.core %}
-    {% assign DateField = "/api//Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
+    {% assign DateField = "/api/Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
 {% else %}
-    {% assign DateField = "/api//Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
+    {% assign DateField = "/api/Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
 {% endif %}
 
 # Data Binding
@@ -27,7 +27,7 @@ In the single data-source binding mode, the StockChart is set up with a single d
 
 The following example demonstrates a StockChart in a single data-source binding mode.
 
-```
+```HtmlHelper
     @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
         .Title("The Boeing Company \n (NYSE:BA)")
@@ -66,7 +66,7 @@ Each subsequent pan, zoom, and selection operation will update the filters on th
 
 The following example demonstrates a StockChart in the master and navigator data-source binding mode.
 
-```
+```HtmlHelper
     @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
         .Title("The ACME Company")

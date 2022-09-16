@@ -1,0 +1,97 @@
+// List
+.k-list {
+    .fill(
+        @kendo-list-text,
+        @kendo-list-bg,
+        @kendo-list-border
+    );
+}
+
+
+// List header
+// .k-list-header,
+.k-list-group-sticky-header {
+    .fill(
+        @kendo-list-text,
+        @kendo-list-bg,
+        @kendo-list-border
+    );
+    // .fill(
+    //     @kendo-list-header-text,
+    //     @kendo-list-header-bg,
+    //     @kendo-list-header-border,
+    // );
+    // .box-shadow( @kendo-list-header-shadow );
+}
+
+
+// List item
+.k-list-item {
+    .fill(
+        @kendo-list-item-text,
+        @kendo-list-item-bg
+    );
+
+    // Hover
+    &:hover,
+    &.k-hover {
+        .fill(
+            @kendo-list-item-hover-text,
+            @kendo-list-item-hover-bg
+        );
+    }
+
+    // Focus
+    &:focus,
+    &.k-focus {
+        .fill(
+            @kendo-list-item-focus-text,
+            @kendo-list-item-focus-bg
+        );
+        .box-shadow( @kendo-list-item-focus-shadow );
+    }
+
+    // Selected
+    &.k-selected {
+        .fill(
+            @kendo-list-item-selected-text,
+            @kendo-list-item-selected-bg
+        );
+    }
+    &.k-selected:hover,
+    &.k-selected.k-hover {
+        color: @kendo-list-item-selected-text;
+        background-color: shade( @kendo-list-item-selected-bg, 8% );
+    }
+}
+
+
+// List group item
+.k-list-group-item {
+    .fill(
+        @kendo-list-text,
+        @kendo-list-bg,
+        @kendo-list-border
+    );
+    // .fill(
+    //     @kendo-list-group-item-text,
+    //     @kendo-list-group-item-bg,
+    //     @kendo-list-group-item-border,
+    // );
+    // .box-shadow( @kendo-list-group-item-shadow );
+}
+
+
+// List item group label
+.k-list-item-group-label {
+    .fill(
+        @kendo-list-bg,
+        @kendo-list-text
+    );
+}
+
+
+// No data
+.k-no-data {
+    // color: @kendo-list-no-data-text;
+}

@@ -10,11 +10,17 @@ position: 1
 
 This article demonstrates how to download and install Progress Telerik UI for JSP and run a sample application.
 
+To read more about the benefits of using Progress Telerik UI for JSP, please visit the [product overview page](http://www.telerik.com/jsp-ui).
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-introduction.html %}
+{% endif %}
+
 ## Getting Started
 
 ### Download and Install
 
-The distribution files contain the following:
+Start by [downloading the controls](https://www.telerik.com/download-trial-file/v2/ui-for-jsp). The distribution files contain the following:
 
 * `\js`&mdash;These are the Kendo UI minified JavaScript files.
 * `\styles`&mdash;The Kendo UI minified CSS files and background images used by the themes.
@@ -58,7 +64,7 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Step 6** Right-click **spring-demos** in the Eclipse Project Explorer. Pick **Properties**.
 
-**Step 7** In the properties window pick **Project Facets**.
+**Step 7** In the properties window pick **Project Facets** or other Eclipse package that contains Tools for developers working with Java and Web applications.
 
 **Step 8** From the "Project Facets" menu select "Dynamic Web Module".
 
@@ -142,6 +148,27 @@ You are also able to include the JavaScript and CSS files from CDN. Do not forge
 
        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
        <script src="https://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
+
+> Note that sinse R3 2022 the CDN distribution needs to be activated using a license file. For more info check [Using Script License File]({% slug using-license-code %}).
+
+## Trial Version and Commercial License
+
+This Progress Telerik UI for JSP library is a commercial UI library. You are welcome to explore its full functionality and get technical support from the team when you register for a free 30-day trial. To use it commercially, you need to [purchase a license](https://www.telerik.com/purchase/kendo-ui). Feel free to review the Progress Telerik UI for JSP [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui) to get acquainted with the full terms of use.
+
+## Support Options
+
+For any issues you might encounter while working with Progress Telerik UI for JSP, use any of the available support channels:
+
+* Kendo UI Professional license holders and active trialists can take advantage of our outstanding customer support delivered by the developers building the library. To submit a support ticket, use the [Progress Telerik UI for JSP dedicated support](https://www.telerik.com/account/support-tickets/) system.
+* [Progress Telerik UI for JSP forums](https://www.telerik.com/forums/jsp) are part of the free support you can get from the community and from the Progress Telerik UI for JSP team on all kinds of general issues.
+* [Progress Telerik UI for JSP feedback portal](https://feedback.telerik.com/jsp-ui) and [Progress Telerik UI for JSP roadmap](https://www.telerik.com/support/whats-new/jsp-ui/roadmap) provide information on the features in discussion and also the planned ones for release.
+* Progress Telerik UI for JSP uses GitHub Issues as its bug tracker and you can submit any related reports there.
+* You may still need a tailor-made solution for your project. In such cases, go straight to [Progress Services](https://www.progress.com/services).
+
+## Learning Resources
+
+* [Progress Telerik UI for JSP forum](https://www.telerik.com/forums/jsp)
+* [Progress Telerik UI for JSP feedback portal](https://feedback.telerik.com/jsp-ui)
 
 ## Next Steps
 

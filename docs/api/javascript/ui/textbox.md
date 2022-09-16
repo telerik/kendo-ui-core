@@ -25,6 +25,24 @@ If set to `false`, the widget will be disabled and will not allow user input. Th
         });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "solid"
+- "flat"
+- "outline"
+- "none"
+
+#### Example - sets the fillMode
+
+    <input id="textbox" />
+    <script>
+    $("#textbox").kendoTextBox({
+        fillMode: "flat"
+    });
+    </script>
+
 ### label `String|Function|Object` *(default: null)*
 
 Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
@@ -85,6 +103,10 @@ The function context (available via the `this` keyword) will be set to the widge
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
+> **Important:** The [value](/api/javascript/ui/textbox/methods/value) method **does not trigger** the `focusout` event of the input.
+This could affect the floating label functionality.
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#textbox").data("kendoTextBox").floatingLabel.refresh();`
+
 #### Example - create a floating label
 
     <input id="textbox" />
@@ -123,6 +145,25 @@ If set to `true`, the widget will be readonly and will not allow user input. The
         });
     </script>
 
+### rounded `String` *(default: 'medium')*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- "none"
+
+#### Example
+
+    <input id="textbox" />
+    <script>
+    $("#textbox").kendoTextBox({
+        rounded: "large"
+    });
+    </script>
+
 ### value `String`*(default: "")*
 
 The value of the widget.
@@ -134,6 +175,25 @@ The value of the widget.
         $("#textbox").kendoTextBox({
             value: "John Doe"
         });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <input id="textbox" />
+    <script>
+    $("#textbox").kendoTextBox({
+        size: "large",
+        rounded: "large"
+    });
     </script>
 
 ## Methods
@@ -232,9 +292,13 @@ If set to `true`, the widget will not allow user input. If set to `false`, the w
 
 Gets or sets the value of the widget.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/textbox/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value) or the [floating label functionality](/api/javascript/ui/textbox/configuration/label#floating). The model bound to the widget will not be updated.
+> **Important:** This method **does not trigger** the [change](/api/javascript/ui/textbox/events/change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+
+> **Important:** This method **does not trigger** the `focusout` event of the input.
+This could affect the [floating label functionality](/api/javascript/ui/textbox/configuration/label.floating).
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#textbox").data("kendoTextBox").floatingLabel.refresh();`
 
 #### Parameters
 
@@ -265,9 +329,11 @@ The value to set.
         });
         var textbox = $("#textbox").data("kendoTextBox");
         var value = textbox.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); // Displays "Oranges"
         textbox.value("Apples");
         value = textbox.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); // Displays "Apples"
     </script>
 
@@ -294,6 +360,7 @@ The widget instance which fired the event.
         $("#textbox").kendoTextBox({
             change: function(e) {
                 var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(value);
                 // Use the value of the widget
             }
@@ -306,6 +373,7 @@ The widget instance which fired the event.
     <script>
         function textbox_change(e) {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value);
             // Use the value of the widget
         };
@@ -313,3 +381,6 @@ The widget instance which fired the event.
         var textbox = $("#textbox").data("kendoTextBox");
         textbox.bind("change", textbox_change);
     </script>
+
+
+The change event fires only once the value of widget is changed and the widget itself is blurred out. You can add a custom events/methods by extending the existing functionality of the TextBox. How to add a `keyup` event to the TextBox is demonstrated in [this article](/knowledge-base/textbox-add-keyup-event).

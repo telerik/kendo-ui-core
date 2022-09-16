@@ -200,7 +200,7 @@
                 sortable = element.data("kendoSortable");
 
             press(item, kendo.getOffset(item).left, kendo.getOffset(item).top);
-            move(item, 10, 10)
+            move(item, 10, 10);
 
             assert.equal(sortable.indexOf(sortable.placeholder), 0, "index of the placeholder is returned correctly");
 

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery DateInput Documentation | DateInput Overview | Kendo UI
+page_title: jQuery DateInput Documentation | DateInput Overview
 description: "Get started with the jQuery DateInput by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_dateinput_widget
 position: 1

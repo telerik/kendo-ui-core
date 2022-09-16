@@ -1,6 +1,6 @@
 ---
 title: Aligning and Positioning
-page_title: jQuery Popup Documentation | Aligning and Positioning | Kendo UI
+page_title: jQuery Popup Documentation | Aligning and Positioning
 description: "Get started with the jQuery Popup by Kendo UI and align and position the widget."
 slug: alignposition_kendoui_popup
 position: 2
@@ -60,13 +60,13 @@ To align the Popup to a specific element, use the `anchor` option. As a result, 
 
 ## Appending to Elements
 
-To specify the element to which the Popup will be appended, use the `appendTo` configuration option. By default, the Popup uses the `document.body` option.
+To specify the element to which the Popup will be appended, use the [appendTo](/api/javascript/ui/popup/configuration/appendto) configuration option. By default, the Popup uses the `document.body` option.
 
 > Unless specified otherwise, the Popup attaches itself to the nearest parent container with a `"k-group"` class. This enables the seamless integration with other Kendo UI widgets such as the Menu. If this behavior causes unexpected results (for example, misalignment or loss of visibility), explicitly specify the `appendTo` option.
 
 ## Positioning
 
-The positioning of the Popup is controlled by specific pivot points. Both the anchor and the Popup are treated as rectangular elements and each has nine pivot points. Every Popup point can be aligned to an anchor point. The position of the Popup can be fine-tuned by specifying both the `position` and the `origin` options.
+The positioning of the Popup is controlled by specific pivot points. Both the anchor and the Popup are treated as rectangular elements and each has nine pivot points. Every Popup point can be aligned to an anchor point. The position of the Popup can be fine-tuned by specifying both the [position](/api/javascript/ui/popup/configuration/position) and the [origin](/api/javascript/ui/popup/configuration/origin) options.
 
 ![Right-aligned Kendo UI Popup](../../../images/right-align.png)
 

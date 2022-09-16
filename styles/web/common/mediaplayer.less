@@ -55,14 +55,6 @@
         margin-left: 5px;
     }
 
-    .k-toolbar-spacer {
-        margin-top: 0;
-        margin-bottom: 0;
-        border-width: 0;
-        flex: 1;
-        opacity: 0;
-    }
-
     .k-align-right {
         & > * + * { margin-left: 5px; }
     }
@@ -71,25 +63,6 @@
         width: auto;
         padding: 0;
         background: none transparent;
-
-        .k-dropdown-wrap {
-            border: 0 none;
-            box-shadow: none;
-            padding: 0;
-            background: none transparent;
-            color: inherit;
-        }
-
-        .k-input {
-            display: none;
-        }
-
-        .k-select {
-            position: relative;
-            width: auto;
-            min-height: 0;
-            line-height: inherit;
-        }
     }
 }
 .k-mediaplayer-volume-wrap,
@@ -121,15 +94,6 @@
         border-radius: 0;
     }
 
-    .k-draghandle {
-        opacity: 0;
-        transition: 0.2s opacity;
-    }
-
-    .k-draghandle.k-state-selected,
-    &:hover .k-draghandle {
-        opacity: 1;
-    }
 }
 
 
@@ -153,7 +117,7 @@
             vertical-align: middle;
         }
     }
-    .k-mediaplayer-toolbar .k-bare.k-button {
+    .k-mediaplayer-toolbar .k-button-flat {
         height: auto;
     }
     .k-mediaplayer-toolbar .k-toolbar-spacer {

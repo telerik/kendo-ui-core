@@ -83,6 +83,29 @@
             assert.equal(dataSource._destroyed.length, 1);
         });
 
+        it("scheduling the same item for delete twice works correctly", function() {
+            var dataSource = new DataSource({
+                offlineStorage: "key",
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {}
+                    }
+                },
+                data: [
+                    { id: 1, foo: "foo" }
+                ]
+            });
+
+            dataSource.read();
+            dataSource.online(false);
+            var model = dataSource.at(0);
+            dataSource.remove(model);
+            dataSource.remove(model);
+
+            assert.equal(dataSource._destroyed.length, 1);
+        });
+
         it("replaced data is stored offline", function() {
             var dataSource = new DataSource({
                 offlineStorage: "key"
@@ -122,7 +145,7 @@
             var dataSource = new DataSource({
                 offlineStorage: {
                     setItem: function(data) {
-                        assert.strictEqual(state, data)
+                        assert.strictEqual(state, data);
                     }
                 }
             });
@@ -561,7 +584,7 @@
                 assert.equal(e.type, "update");
             });
             dataSource.online(true);
-        })
+        });
 
         it("offlineData returns null if offlineStorage isn't enabled", function() {
             var dataSource = new kendo.data.DataSource({});
@@ -622,7 +645,7 @@
                 offlineStorage: "key",
                 transport: {
                     read: function(options) {
-                        options.success({ Data: [{ Foo: "bar", id: 1 }] })
+                        options.success({ Data: [{ Foo: "bar", id: 1 }] });
                     },
                     updates: function(options) {
                         options.success();
@@ -683,7 +706,7 @@
                     read: function(options) {
                         options.success([
                             { id: 1 }
-                        ])
+                        ]);
                     },
                     destroy: function(options) {
                         options.success();

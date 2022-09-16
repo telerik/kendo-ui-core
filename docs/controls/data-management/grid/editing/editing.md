@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Editing Overview | Kendo UI
+page_title: jQuery Grid Documentation | Editing Overview
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI allowing you to manipulate the way the data is presented."
 slug: editing_kendoui_grid_widget
 position: 1
@@ -104,9 +104,9 @@ Data Type | Column Template or Format | Editor | Parser
         }
     });
 
-### Setting the editable Option
+### Setting the Editable Option
 
-By default, the Grid is not [`editable`](/api/javascript/ui/grid/configuration/editable). To enable the editing functionality, add the desired type of editing. The Kendo UI jQuery Grid supports the in-cell, inline, and popup [edit modes](/api/javascript/ui/grid/configuration/editable.mode). In orde for the edit functionality to be fully functional, add a [`toolbar`](/api/javascript/ui/grid/configuration/toolbar) with a **Create** button and a [command column](/api/javascript/ui/grid/configuration/columns.command) for the update and destroy operations.
+By default, the Grid is not [`editable`](/api/javascript/ui/grid/configuration/editable). To enable the editing functionality, add the desired type of editing. The Kendo UI jQuery Grid supports the in-cell, inline, and popup [edit modes](/api/javascript/ui/grid/configuration/editable.mode). In order for the edit functionality to be fully functional, add a [`toolbar`](/api/javascript/ui/grid/configuration/toolbar) with a **Create** button and a [command column](/api/javascript/ui/grid/configuration/columns.command) for the update and destroy operations.
 
 The following example demonstrates how to configure a basic Grid in the incell edit mode for CRUD operations.
 

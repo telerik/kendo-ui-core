@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Navigation
-page_title: Individual Scripts for Navigation | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Navigation | Scripts 
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Navigation"
 slug: script_filesfor_navigation_widgets
 ---
@@ -12,6 +12,13 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
+| [ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.popup.js | |
+| | kendo.actionsheet.js | |
+| [AppBar](https://demos.telerik.com/kendo-ui/appbar/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.appbar.js | |
 | [Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.breadcrumb.js | |
@@ -27,6 +34,11 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.drawer.js | |
+| [FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.popup.js | |
+| | kendo.fx.js | |
+| | kendo.floatingactionbutton.js | |
 | [Menu](https://demos.telerik.com/kendo-ui/menu/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |

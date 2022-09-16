@@ -1,7 +1,7 @@
 ---
 title: Timezones
 page_title: Timezones
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure its timezone."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure its timezone."
 slug: htmlhelpers_scheduler_timezones_aspnetcore
 position: 5
 ---
@@ -21,7 +21,7 @@ To set a timezone to the Scheduler, set the `timezone` option. `timezone` indica
 
 The following example demonstrates how to set `"Etc/UTC"` timezone to the Scheduler.
 
-```
+```HtmlHelper
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
         .Name("scheduler")
         .Date(new DateTime(2013, 6, 13))
@@ -39,7 +39,6 @@ The following example demonstrates how to set `"Etc/UTC"` timezone to the Schedu
                     m.Id(f => f.MeetingID);
                     m.Field(f => f.Title).DefaultValue("No title");
                     m.RecurrenceId(f => f.RecurrenceID);
-                    m.Field(f => f.Title).DefaultValue("No title");
                 })
             .Read("Meetings_Read", "Scheduler")
             .Create("Meetings_Create", "Scheduler")
@@ -48,6 +47,51 @@ The following example demonstrates how to set `"Etc/UTC"` timezone to the Schedu
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        string defaultTitle = "No Title";
+    }
+
+    <kendo-scheduler name="scheduler"
+        date="new DateTime(2013, 6, 13)"
+        start-time="new DateTime(2013, 6, 13, 7, 0, 0, 0)"
+        height="600"
+        timezone="Etc/UTC">
+        <views>
+            <view type="day"></view>
+            <view type="week" selected="true"></view>
+        </views>
+        <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Meetings_Read", "Scheduler")" />
+                <create url="@Url.Action("Meetings_Create", "Scheduler")" />
+                <destroy url="@Url.Action("Meetings_Destroy", "Scheduler")" />
+                <update url="@Url.Action("Meetings_Update", "Scheduler")" />
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <scheduler-model id="MeetingID">
+                    <fields>
+                        <field name="MeetingID" type="number"></field>
+                        <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                        <field name="start" from="Start" type="date"></field>
+                        <field name="end" from="End" type="date"></field>
+                        <field name="description" from="Description" type="string"></field>
+                        <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                        <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                        <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                        <field name="startTimezone" from="StartTimezone" type="string"></field>
+                        <field name="endTimezone" from="EndTimezone" type="string"></field>
+                        <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                    </fields>
+                </scheduler-model>
+            </schema>
+        </scheduler-datasource>
+    </kendo-scheduler>
+```
+{% endif %}
 
 ## Reading Events from Data Source
 
@@ -62,6 +106,12 @@ The `SchedulerEvent` instances are serialized by using [`JSON.stringify`](https:
 ## Setting the No Timezone Option
 
 If you do not define a timezone option, your system timezone settings will apply by default.
+
+## Live Sample
+
+You can find a full working sample with Timezone defined and different cultures set dynamically here:
+
+[Localization and Globalization](https://demos.telerik.com/aspnet-mvc/scheduler/globalization)
 
 ## See Also
 

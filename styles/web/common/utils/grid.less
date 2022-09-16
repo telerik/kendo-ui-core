@@ -1,0 +1,38 @@
+// Grid layout
+.k-d-grid                   { display: grid; }
+.k-grid-cols-none           { grid-template-columns: none; }
+.k-grid-rows-none           { grid-template-rows: none; }
+
+
+// Grid flow
+.k-grid-flow-col            { grid-auto-flow: column; }
+.k-grid-flow-col-dense      { grid-auto-flow: column dense; }
+.k-grid-flow-row            { grid-auto-flow: row; }
+.k-grid-flow-row-dense      { grid-auto-flow: row dense; }
+
+
+// Columns
+.k-colspan-all              { grid-column: 1 / -1; }
+.k-colspan-auto             { grid-column: auto; }
+
+
+// Rows
+.k-rowspan-all              { grid-row: 1 / -1; }
+.k-rowspan-auto             { grid-row: auto; }
+
+
+// Grid utilities
+@grid-cols: 12;
+@grid-rows: 10;
+each( range(1, @grid-cols), {
+    .k-grid-cols-@{value}   { grid-template-columns: repeat(@value, minmax(0, 1fr)); }
+    .k-colspan-@{value}     { grid-column: span @value; }
+    .k-col-start-@{value}   { grid-column-start: @value; }
+    .k-col-end-@{value}     { grid-column-end: @value; }
+});
+each( range(1, @grid-rows), {
+    .k-grid-rows-@{value}   { grid-template-rows: repeat(@value, minmax(0, 1fr)); }
+    .k-rowspan-@{value}     { grid-row: span @value; }
+    .k-row-start-@{value}   { grid-row-start: @value; }
+    .k-row-end-@{value}     { grid-row-end: @value; }
+});

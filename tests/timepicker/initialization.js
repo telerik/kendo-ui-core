@@ -1,3 +1,4 @@
+/* global timepicker */
 (function() {
     var TimeView = kendo.TimeView,
         TimePicker = kendo.ui.TimePicker,
@@ -27,6 +28,7 @@
             var tv = new TimeView({
                 anchor: input,
                 format: "hh:mm tt",
+                size: "medium",
                 min: MIDNIGHT,
                 max: MIDNIGHT
             });
@@ -36,8 +38,8 @@
             assert.isOk(tv.popup.element.hasClass("k-list-container"));
             assert.isOk(tv.popup.element.hasClass("k-list-scroller"));
             assert.equal(tv.popup.element.attr("unselectable"), "on");
-            assert.isOk(tv.popup.element.children(":first").is("ul"));
-            assert.isOk(tv.popup.element.children(":first").hasClass("k-list k-reset"));
+            assert.isOk(tv.popup.element.children(":first").is("div"));
+            assert.isOk(tv.popup.element.children(":first").hasClass("k-list k-list-md"));
             assert.equal(tv.popup.options.anchor, input);
             tv.destroy();
         });
@@ -51,7 +53,7 @@
             }),
                 date = new Date(2000, 10, 10, 10, 10, 0);
 
-            assert.equal(tv.template(kendo.toString(date, "hh:mm tt")), '<li tabindex="-1" role="option" class="k-item" unselectable="on">' + kendo.toString(date, "hh:mm tt") + '</li>');
+            assert.equal(tv.template(kendo.toString(date, "hh:mm tt")), '<li tabindex="-1" role="option" class="k-list-item" unselectable="on"><span class="k-list-item-text">' + kendo.toString(date, "hh:mm tt") + '</span></li>');
             tv.destroy();
         });
 
@@ -66,7 +68,7 @@
 
             tv.refresh();
 
-            assert.equal(tv.ul.find("li:last").html(), "11:59 PM");
+            assert.equal(tv.ul.find("li:last span").html(), "11:59 PM");
             tv.destroy();
         });
 
@@ -74,25 +76,25 @@
         it("_wrapper() wraps input element", function() {
             input.css("width", "200");
 
-            var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+            input.kendoTimePicker().data("kendoTimePicker");
 
-            assert.isOk(input.parent().hasClass("k-picker-wrap k-state-default"));
-            assert.isOk(timepicker.wrapper.hasClass("k-widget k-timepicker"));
+            assert.isOk(input.parent().hasClass("k-timepicker"));
         });
 
         it("init() should add k-input to the element", function() {
             var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
-            assert.isOk(timepicker.element.hasClass("k-input"));
+            assert.isOk(timepicker.element.hasClass("k-input-inner"));
         });
 
         it("_icon put create picker button", function() {
             var timepicker = input.kendoTimePicker().data("kendoTimePicker"),
-                icon = timepicker.wrapper.find(".k-select");
+                icon = timepicker.wrapper.find(".k-input-button");
 
             assert.isOk(icon);
-            assert.isOk(icon.is("span"));
-            assert.isOk(icon.hasClass("k-select"));
+            assert.isOk(icon.is("button"));
+            assert.equal(icon.attr("tabindex"), "-1");
+            assert.isOk(icon.hasClass("k-button-md"));
             assert.isOk(icon.children().is("span"));
             assert.isOk(icon.children().hasClass("k-icon k-i-clock"));
             assert.equal(icon.children().html(), "");
@@ -216,7 +218,7 @@
             assert.equal(timepicker.timeView.ul.children(":first").text(), "6:00 PM");
         });
 
-        it("TimePicker normilize options depending on the options.culture", function() {
+        it("TimePicker normalize options depending on the options.culture", function() {
             var timepicker = input.kendoTimePicker({
                 culture: "bg-BG"
             }).data("kendoTimePicker");
@@ -233,7 +235,7 @@
 
             timepicker.open();
 
-            assert.equal(timepicker.timeView.ul.children(":first").html(), kendo.toString(value, "t", "bg-BG"));
+            assert.equal(timepicker.timeView.ul.find("li span").first().html(), kendo.toString(value, "t", "bg-BG"));
             assert.equal(timepicker.element.val(), kendo.toString(value, "t", "bg-BG"));
         });
 
@@ -245,8 +247,8 @@
 
         if (!kendo.support.touch) {
             it("TimePicker changes the type of the input", function() {
-                input = $("<input type='date'/>").appendTo(Mocha.fixture),
-                    timepicker = input.kendoTimePicker().data("kendoTimePicker");
+                input = $("<input type='date'/>").appendTo(Mocha.fixture);
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
                 assert.equal(timepicker.element[0].type, "text");
             });
@@ -255,7 +257,7 @@
         it("TimePicker does not set width if list has style.width", function() {
             var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
-            timepicker.timeView.list.width(400);
+            timepicker.timeView.list.outerWidth(400);
 
             timepicker.open();
 
@@ -317,7 +319,7 @@
 
             timepicker.open();
 
-            assert.equal(timepicker.timeView.list.height(), 100)
+            assert.equal(timepicker.timeView.list.height(), 100);
         });
 
         it("TimePicker resize height after setOptions", function() {
@@ -335,7 +337,7 @@
 
             timepicker.open();
 
-            assert.equal(timepicker.timeView.list.height(), 200)
+            assert.equal(timepicker.timeView.list.height(), 200);
         });
 
         it("TimePicker is disabled when placed in disabled fieldset", function() {
@@ -349,7 +351,7 @@
             var timepicker = input.kendoTimePicker({
                 min: new Date(2000, 0, 1, 22, 0, 0),
                 max: new Date(2000, 0, 2, 22, 0, 0)
-            }).data("kendoTimePicker")
+            }).data("kendoTimePicker");
 
             timepicker.setOptions({
                 max: new Date(2000, 0, 1, 23, 0, 0)
@@ -361,11 +363,14 @@
 
         it("timepicker scrolls to selected value", function() {
             var timepicker = input.kendoTimePicker({
-                value: "10:00 AM"
-            }).data("kendoTimePicker")
+                value: "10:00 AM",
+                animation: false
+            }).data("kendoTimePicker");
+
             timepicker.open();
-            var isScrolled = !timepicker.timeView.list[0].scrollTop == 0;
-            assert.equal(isScrolled, true)
+
+            var isScrolled = !timepicker.timeView.ul[0].scrollTop == 0;
+            assert.equal(isScrolled, true);
         });
 
         it("timepicker renders formatted value even when out of range", function() {
@@ -394,6 +399,16 @@
             assert.equal(timepicker._dateInput.max(), max);
         });
 
+        it("Size class is applied correctly with DateInput", function() {
+            var timepicker = input.kendoTimePicker({
+                dateInput: true,
+                size: "small",
+            }).data("kendoTimePicker");
+
+            assert.isOk(timepicker.wrapper.hasClass("k-input-sm"));
+            assert.isNotOk(timepicker.wrapper.hasClass("k-input-md"));
+        });
+
         it("TimeView renders only one option if min is set and no more hours reflect the criteria", function() {
             var tv = new TimeView({
                 min: new Date(2018, 3, 11, 23, 50, 0),
@@ -405,7 +420,22 @@
 
             tv.refresh();
             assert.equal(tv.ul.children().length, 1);
-            assert.equal(tv.ul.find("li:last").html(), "11:50 PM");
+            assert.equal(tv.ul.find("li:last span").html(), "11:50 PM");
+            tv.destroy();
+        });
+
+        it("TimeView renders only one item if max is set to 00:00:00 on", function() {
+            var tv = new TimeView({
+                min: new Date(2010, 1, 1, 0, 0, 0),
+                max: new Date(2020, 3, 3, 0, 0, 0),
+                value: new Date(2020, 3, 3, 0, 0, 0),
+                format: "hh:mm tt",
+                maxSet: true
+            });
+
+            tv.refresh();
+            assert.equal(tv.ul.children().length, 1);
+            assert.equal(tv.ul.find("li:last span").html(), "12:00 AM");
             tv.destroy();
         });
     });

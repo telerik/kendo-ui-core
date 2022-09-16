@@ -1,6 +1,6 @@
 ---
 title: Custom Functions
-page_title: jQuery Spreadsheet Documentation | Custom Functions | Kendo UI
+page_title: jQuery Spreadsheet Documentation | Custom Functions
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to make your own JavaScript functions in the widget."
 slug: custom_functions_spreadsheet_widget
 position: 6
@@ -30,7 +30,39 @@ The following example demonstrates how to define a function that calculates the 
         [ "y2", "number" ]
     ]);
 
-If you include the above JavaScript code, you can then use `DISTANCE` in formulas. For example, to find the distance between coordinate points `(2,2)` and `(5,6)`, type in a cell `=DISTANCE(2, 2, 5, 6)`. Optionally, you can use the function in combined expressions such as `=DISTANCE(0, 0, 1, 1) + DISTANCE(2, 2, 5, 6)`.
+If you include the above JavaScript code, you can then use `DISTANCE` in formulas. For example, to find the distance between coordinate points `(2,2)` and `(5,6)`, type in a cell `=DISTANCE(2, 2, 5, 6)`. Optionally, you can use the function in combined expressions such as `=DISTANCE(0, 0, 1, 1) + DISTANCE(2, 2, 5, 6)`. Below you will find a runnable example:
+
+```dojo
+    <div id="spreadsheet" style="width: 100%;"></div>
+    <script>
+        kendo.spreadsheet.defineFunction("distance", function(x1, y1, x2, y2){
+          var dx = Math.abs(x1 - x2);
+          var dy = Math.abs(y1 - y2);
+          var dist = Math.sqrt(dx*dx + dy*dy);
+          return dist;
+        }).args([
+          [ "x1", "number" ],
+          [ "y1", "number" ],
+          [ "x2", "number" ],
+          [ "y2", "number" ]
+        ]);
+
+
+        $("#spreadsheet").kendoSpreadsheet({
+          sheets: [{
+            rows: [{
+              cells: [{
+                index: 0,
+                value: 40
+              }, {
+                index: 1,
+                formula: '=DISTANCE(2, 2, 5, 6)'
+              }]
+            }]
+          }]
+        });
+    </script>
+```
 
 In the above example, `defineFunction` returns an object that has an `args` method. You can use it to specify the expected types of arguments. If the function is called with mismatching argument types, the runtime of the Spreadsheet automatically returns an error and your implementation is not called. This spares the time for manually writing code that does argument type checking and provides a nice declarative syntax instead.
 

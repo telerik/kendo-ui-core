@@ -57,11 +57,17 @@ The following example demonstrates how to use FontAwesome icons with the built-i
               { field: "FirstName", title: "First Name", width: "140px" },
               { field: "LastName", title: "Last Name", width: "140px" },
               { field: "Title" },
-              { command: {
+              { command: 
+              [{
                 text: " View Details",
                 click: showDetails,
                 iconClass: "fa fa-map-marker"
               },
+              {
+                name: "edit",
+                text: "Edit Text",
+                iconClass: "fa fa-edit"
+              }],
                title: " ",
                width: "140px"
               }]
@@ -100,9 +106,7 @@ The following example demonstrates how to use FontAwesome icons with the built-i
       <style>
       .k-header-column-menu .k-icon,
       .k-column-menu .k-icon,
-      .k-column-menu .k-sprite,
-      .k-grid-pager .k-icon,
-      .k-grid .k-pager-numbers .k-current-page .k-pager-nav:after {
+      .k-column-menu .k-sprite {
         background-image: none;
         font-size: 1em;
         font-family: FontAwesome;
@@ -111,8 +115,7 @@ The following example demonstrates how to use FontAwesome icons with the built-i
       .k-header-column-menu .k-icon:before,
       .k-header-column-menu .k-sprite:before,
       .k-column-menu .k-icon:before,
-      .k-column-menu .k-sprite:before,
-      .k-grid-pager .k-icon:before {
+      .k-column-menu .k-sprite:before {
         display: inline-block;
         padding-top: 0.5em;
         color: #2e2e2e;
@@ -120,7 +123,7 @@ The following example demonstrates how to use FontAwesome icons with the built-i
         height: 20px;
       }
 
-      .k-column-menu .k-i-arrow-60-right:before {
+      .k-column-menu .k-i-arrow-e:before {
         content: "\f061";
       }
        .k-header-column-menu .k-i-more-vertical:before{
@@ -145,26 +148,6 @@ The following example demonstrates how to use FontAwesome icons with the built-i
 
       .k-column-menu .k-i-sort-desc-sm:before {
         content: "\f0de";
-      }
-
-      .k-grid-pager .k-i-arrow-e:before {
-        content: "\f061";
-      }
-
-      .k-grid-pager .k-i-seek-e:before {
-        content: "\f0da";
-      }
-
-      .k-grid-pager .k-i-seek-w:before {
-        content: "\f0d9";
-      }
-
-      .k-grid-pager .k-i-arrow-w:before {
-        content: "\f060";
-      }
-
-      .k-grid-pager .k-pager-numbers .k-current-page .k-pager-nav:after {
-        content: "\f047";
       }
     </style>
 ```

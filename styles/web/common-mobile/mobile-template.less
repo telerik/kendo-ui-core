@@ -101,7 +101,8 @@
     border-color: @mobile-border-color;
 }
 
-.km-state-active[style*=background]
+.km-state-active[style*=background],
+.km-active[style*=background]
 {
     .box-shadow(inset 0 0 0 1000px lighten(@mobile-overlay-background, 50%));
 }
@@ -116,7 +117,8 @@
 }
 
 .km-detail:active,
-.km-state-active .km-detail
+.km-state-active .km-detail,
+.km-active .km-detail
 {
     .box-shadow(inset 0 0 0 1000px @mobile-button-background);
 }
@@ -240,13 +242,7 @@
 .km-list input[type=datetime-local],
 .km-list input[type=text]:not(.k-input),
 .km-list select:not([multiple]),
-.km-list .k-dropdown-wrap,
 .km-list textarea
-{
-    color: @widget-text-color;
-}
-
-.km-list .k-dropdown-wrap .k-input
 {
     color: @widget-text-color;
 }
@@ -257,21 +253,37 @@
 }
 
 .km-list .km-state-active input[type=password],
+.km-list .km-active input[type=password],
 .km-list .km-state-active input[type=search],
+.km-list .km-active input[type=search],
 .km-list .km-state-active input[type=number],
+.km-list .km-active input[type=number],
 .km-list .km-state-active input[type=tel],
+.km-list .km-active input[type=tel],
 .km-list .km-state-active input[type=url],
+.km-list .km-active input[type=url],
 .km-list .km-state-active input[type=email],
+.km-list .km-active input[type=email],
 .km-list .km-state-active input[type=month],
+.km-list .km-active input[type=month],
 .km-list .km-state-active input[type=color],
+.km-list .km-active input[type=color],
 .km-list .km-state-active input[type=week],
+.km-list .km-active input[type=week],
 .km-list .km-state-active input[type=date],
+.km-list .km-active input[type=date],
 .km-list .km-state-active input[type=time],
+.km-list .km-active input[type=time],
 .km-list .km-state-active input[type=datetime],
+.km-list .km-active input[type=datetime],
 .km-list .km-state-active input[type=datetime-local],
+.km-list .km-active input[type=datetime-local],
 .km-list .km-state-active input[type=text]:not(.k-input),
+.km-list .km-active input[type=text]:not(.k-input),
 .km-list .km-state-active select:not([multiple]),
-.km-list .km-state-active textarea
+.km-list .km-active select:not([multiple]),
+.km-list .km-state-active textarea,
+.km-list .km-active textarea
 {
     color: #fff;
 }
@@ -378,22 +390,30 @@
 .km-rowinsert,
 .km-rowdelete,
 html .km-state-active,
+html .km-active,
 .km-switch-label-on,
 .km-switch-label-off,
 .km-tabstrip .km-button,
 .km-popup .k-item,
 .km-actionsheet > li > a,
 .km-tabstrip .km-state-active,
+.km-tabstrip .km-active,
 .km-scroller-pull .km-icon,
 .km-popover-root .km-widget,
 .km-popup .k-state-hover,
+.km-popup .k-hover,
 .km-popup .k-state-focused,
+.km-popup .k-focus,
 .km-popup .k-state-selected,
+.km-popup .k-selected,
 .km-actionsheet > li > a:active,
 .km-actionsheet > li > a:hover,
 li.km-state-active .km-listview-link,
+li.km-active .km-listview-link,
 li.km-state-active .km-listview-label,
-.km-state-active .km-listview-link:after
+li.km-active .km-listview-label,
+.km-state-active .km-listview-link:after,
+.km-active .km-listview-link:after
 {
     color: @selected-text-color;
 }
@@ -405,7 +425,8 @@ li.km-state-active .km-listview-label,
     background-color: @selected-text-color;
 }
 
-.km-switch-handle.km-state-active
+.km-switch-handle.km-state-active,
+.km-switch-handle.km-active
 {
     background-color: lighten(@widget-background-color, 10%);
 }
@@ -418,19 +439,26 @@ li.km-state-active .km-listview-label,
 
 .km-rowinsert,
 .km-state-active,
+.km-active,
 .km-scroller-pull,
 .km-loader:before,
 .km-touch-scrollbar,
 .km-pages .km-current-page,
 .km-tabstrip .km-state-active,
+.km-tabstrip .km-active,
 .km-scroller-refresh.km-load-more,
 .km-popup .k-state-hover,
+.km-popup .k-hover,
 .km-popup .k-state-focused,
+.km-popup .k-focus,
 .km-popup .k-state-selected,
+.km-popup .k-selected,
 .km-actionsheet > li > a:active,
 .km-actionsheet > li > a:hover,
 li.km-state-active .km-listview-link,
+li.km-active .km-listview-link,
 li.km-state-active .km-listview-label,
+li.km-active .km-listview-label,
 .km-listview-label input[type=radio]:checked,
 .km-listview-label input[type=checkbox]:checked
 {

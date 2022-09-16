@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery ListView Documentation | Templates | Kendo UI
+page_title: jQuery ListView Documentation | Templates
 description: "Get started with the jQuery ListView by Kendo UI and learn how to use templates for its content."
 slug: templates_kendoui_listview
 position: 7
@@ -8,7 +8,7 @@ position: 7
 
 # Templates
 
-The ListView anbles you to use templates for rendering its items.
+The ListView enables you to use templates for rendering its items.
 
 The referred template displays the result that is set by the service.
 
@@ -25,6 +25,8 @@ The referred template displays the result that is set by the service.
         dataSource: dataSource,
         template: kendo.template($("#template").html())
     });
+
+> The outermost HTML element in the template must be enclosed in another container such as a `div` or `span` element.
 
 The following example demonstrates the full implementation of the suggested approach.
 

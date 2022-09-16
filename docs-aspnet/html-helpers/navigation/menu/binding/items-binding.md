@@ -1,7 +1,7 @@
 ---
 title: Items Binding
 page_title: Items Binding
-description: "Manually define the properties of each item in the Telerik UI Menu HtmlHelper for {{ site.framework }} by using the items builder."
+description: "Manually define the properties of each item in the Telerik UI Menu component for {{ site.framework }} by using the items builder."
 slug: itemsbinding_menu_aspnetmvc
 position: 2
 ---
@@ -20,7 +20,7 @@ The Menu enables you to manually define the properties of each item.
 
 1. Add a simple Menu.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().Menu()
             .Name("menu") // The name of the Menu is mandatory. It specifies the "id" attribute of the Menu.
             .Items(items =>
@@ -29,6 +29,14 @@ The Menu enables you to manually define the properties of each item.
                 items.Add().Text("Item 2"); // Add an item with the text "Item2".
             }
         )
+    ```
+    ```TagHelper
+        <kendo-menu name="menu">
+        <items>
+            <menu-item text="Home" asp-action="Index" asp-controller="Home"></menu-item>
+            <menu-item text="Second Page" asp-action="SecondIndex" asp-controller="Home"></menu-item>
+        </items>
+        </kendo-menu>
     ```
 
 ## See Also

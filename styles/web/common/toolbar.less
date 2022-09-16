@@ -59,6 +59,14 @@
         align-self: stretch;
     }
 
+     // Input
+    .k-input,
+    .k-picker {
+        width: 10em;
+    }
+    .k-colorpicker {
+        width: min-content;
+    }
 
     // Overflow anchor
     .k-overflow-anchor {
@@ -81,7 +89,7 @@
     .k-separator,
     .k-toolbar-separator {
         width: 0;
-        height: (20 / 14 * 1em);
+        height: @line-height-em;
         border-width: 0 0 0 1px;
         border-style: solid;
     }
@@ -90,12 +98,11 @@
     // Spacer
     .k-spacer,
     .k-toolbar-spacer {
-        height: (20 / 14 * 1em);
+        height: @line-height-em;
         flex: 1 1 auto;
     }
 
 }
-
 
 // Overflow container
 .k-overflow-container {

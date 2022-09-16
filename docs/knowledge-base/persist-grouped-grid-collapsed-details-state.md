@@ -37,10 +37,11 @@ How can I persist the collapsed state of grouped records in the Kendo UI Grid fo
 
 ## Solution
 
-The following example demonstrates how to persist the collapsed state of grouped records in a Grid.
+The following example demonstrates how to persist the collapsed state of grouped records in a Grid. The approach utilizes the [collapseGroup](/api/javascript/ui/grid/methods/collapsegroup) method of the Grid.
 
 ```dojo
-  <div id="grid"></div>
+      <button class="k-button" onclick="refreshGrid()">Refresh Grid</button>
+    <div id="grid"></div>
     <script>
       var groups = [],
           crudServiceBaseUrl = "",
@@ -122,12 +123,17 @@ The following example demonstrates how to persist the collapsed state of grouped
             var row = $(this),
                 groupKey = rowGroupKey(row, grid);
             if (collapsed[groupKey]) {
-              grid.collapseRow(row);
+              grid.collapseGroup(row);
             }
           });
         }
-      }  
-    </script>  
+      }
+      
+      function refreshGrid() {
+        var grid = $("#grid").data("kendoGrid");
+        grid.dataSource.read();
+      }
+    </script>   
 ```
 
 ## See Also

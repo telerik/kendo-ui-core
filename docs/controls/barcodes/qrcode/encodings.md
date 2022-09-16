@@ -1,6 +1,6 @@
 ---
 title: Encoding
-page_title: jQuery QRCode Documentation | Encoding | Kendo UI
+page_title: jQuery QRCode Documentation | Encoding
 description: "Get started with the jQuery QRCode by Kendo UI and use its supported encoding conventions."
 slug: encoding_qrcode_widget
 position: 2
@@ -8,7 +8,7 @@ position: 2
 
 # Encoding
 
-The different types of QRCde values support different conventions accordingly.
+The different types of QRCode values support different conventions accordingly.
 
 In many cases, the value of the QRCode is processed by the device in a special way. For example, geolocations are displayed in the Global Positioning System (GPS) or Map application on the device, URLs are opened by the browser, and so on.
 

@@ -71,7 +71,7 @@ For the full implementation of this approach, refer to [this runnable example](h
         margin-left: 4.8em;
     }
 
-    .k-pager-numbers .k-state-selected,
+    .k-pager-numbers .k-selected,
     .k-pager-numbers .k-link {
         display: block;
         margin-right: 0;
@@ -146,7 +146,7 @@ For the full implementation of this approach, refer to [this runnable example](h
         margin-left: 4.8em;
     }
 
-    .k-pager-numbers .k-state-selected,
+    .k-pager-numbers .k-selected,
     .k-pager-numbers .k-link {
         display: block;
         margin-right: 0;

@@ -60,19 +60,14 @@ The following example demonstrates the complete implementation of the suggested 
 
 ```dojo
     <style>
-      body .k-button-icon, body .k-split-button-arrow {
+      .nameFilter > .k-grid-filter {
         padding: 0;
-      }
-
-      .k-button.k-button-icon .k-icon, .k-grid-filter .k-icon, .k-header .k-icon {
-        padding: 0 0.4em;
-      }
-
-      a.k-grid-filter:focus, input[type="checkbox"]{
-        outline:0;
+        left: 0;
+        bottom: 0;
       }
     </style>
-        <div id="grid"></div>
+  
+    <div id="grid"></div>
     <script>
       var grid = $("#grid").kendoGrid({
         columns: [
@@ -108,7 +103,7 @@ The following example demonstrates the complete implementation of the suggested 
           var ageFilter = e.sender.thead.find("th[data-field='age']>a").hide();
           if(multifilter){
             $("span[data-field='name']").first().replaceWith(multifilter);
-            multifilter.wrap("<span class='k-button k-button-icon k-dropdown-wrap'></span>");
+            multifilter.wrap("<span class='nameFilter k-button k-button-icon k-dropdown-wrap'></span>");
           }
         }
       }).data("kendoGrid");

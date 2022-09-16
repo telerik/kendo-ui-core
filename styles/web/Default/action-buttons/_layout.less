@@ -1,0 +1,67 @@
+@actions-margin-top: 1em;
+@actions-padding-x: 8px;
+@actions-padding-y: 6px;
+@actions-button-spacing: 8px;
+@actions-border-width: 1px;
+
+.k-actions {
+    margin: @actions-margin-top 0 0;
+    padding: @actions-padding-y @actions-padding-x;
+    border-width: @actions-border-width 0 0 0;
+    border-style: solid;
+    border-color: inherit;
+    flex-shrink: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: @actions-button-spacing;
+    overflow: hidden;
+    // TODO: remove
+    clear: both;
+}
+
+
+// Actions in popup
+.k-popup .k-actions {
+    padding: @actions-padding-y 0 0;
+}
+
+.k-colorpicker-popup .k-actions {
+    padding: @actions-padding-y @actions-padding-x;
+}
+
+
+// Aliases
+.k-action-buttons,
+.k-columnmenu-actions {
+    &:extend(.k-actions);
+}
+
+
+// Legacy spacing
+.k-ie {
+    .k-actions .k-button ~ .k-button {
+        margin-left: @actions-button-spacing;
+        flex-shrink: 0;
+
+        .k-rtl &,
+        [dir="rtl"] & {
+            margin-left: 0;
+            margin-right: @actions-button-spacing;
+        }
+    }
+}
+
+// Legacy align
+.k-actions-start {
+    justify-content: flex-start;
+}
+.k-actions-center {
+    justify-content: center;
+}
+.k-actions-end {
+    justify-content: flex-end;
+}
+.k-actions-stretched > * {
+    flex: 1 0 0%;
+}

@@ -267,7 +267,7 @@ jQuery.extend( {
 	},
 
 	isWindow: function( obj ) {
-		/* jshint eqeqeq: false */
+
 		return obj != null && obj == obj.window;
 	},
 
@@ -548,11 +548,11 @@ jQuery.extend( {
 // Defining this global in .jshintrc would create a danger of using the global
 // unguarded in another place, it seems safer to just disable JSHint for these
 // three lines.
-/* jshint ignore: start */
+
 if ( typeof Symbol === "function" ) {
 	jQuery.fn[ Symbol.iterator ] = deletedIds[ Symbol.iterator ];
 }
-/* jshint ignore: end */
+
 
 // Populate the class2type map
 jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
@@ -2765,7 +2765,7 @@ var risSimple = /^.[^:#\[\.,]*$/;
 function winnow( elements, qualifier, not ) {
 	if ( jQuery.isFunction( qualifier ) ) {
 		return jQuery.grep( elements, function( elem, i ) {
-			/* jshint -W018 */
+
 			return !!qualifier.call( elem, i, elem ) !== not;
 		} );
 
@@ -3998,9 +3998,9 @@ function internalRemoveData( elem, name, pvt ) {
 		jQuery.cleanData( [ elem ], true );
 
 	// Use delete when supported for expandos or `cache` is not a window per isWindow (#10080)
-	/* jshint eqeqeq: false */
+
 	} else if ( support.deleteExpando || cache != cache.window ) {
-		/* jshint eqeqeq: true */
+
 		delete cache[ id ];
 
 	// When all else fails, undefined
@@ -5258,9 +5258,9 @@ jQuery.event = {
 		if ( delegateCount && cur.nodeType &&
 			( event.type !== "click" || isNaN( event.button ) || event.button < 1 ) ) {
 
-			/* jshint eqeqeq: false */
+
 			for ( ; cur != this; cur = cur.parentNode || this ) {
-				/* jshint eqeqeq: true */
+
 
 				// Don't check non-elements (#13208)
 				// Don't process clicks on disabled elements (#6911, #8165, #11382, #11764)
@@ -7538,7 +7538,7 @@ function createTween( value, prop, animation ) {
 }
 
 function defaultPrefilter( elem, props, opts ) {
-	/* jshint validthis: true */
+
 	var prop, value, toggle, tween, hooks, oldfire, display, checkDisplay,
 		anim = this,
 		orig = {},

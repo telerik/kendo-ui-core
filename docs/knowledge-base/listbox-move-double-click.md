@@ -58,11 +58,11 @@ How can I transfer items between ListBoxes by double-clicking the Kendo UI ListB
 
     var listBoxB = $("#listBoxB").kendoListBox().data("kendoListBox");
 
-    listBoxA.wrapper.find(".k-list").on("dblclick", ".k-item", function(e) {
+    listBoxA.wrapper.find(".k-list").on("dblclick", ".k-list-item", function(e) {
         listBoxA._executeCommand("transferTo");
     });
 
-    listBoxB.wrapper.find(".k-list").on("dblclick", ".k-item", function(e) {
+    listBoxB.wrapper.find(".k-list").on("dblclick", ".k-list-item", function(e) {
         listBoxA._executeCommand("transferFrom");
     });
 </script>

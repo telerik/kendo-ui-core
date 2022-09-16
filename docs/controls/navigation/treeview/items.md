@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: jQuery TreeView Documentation | Items | Kendo UI
+page_title: jQuery TreeView Documentation | Items
 description: "Get started with the jQuery TreeView by Kendo UI and handle its item properties."
 slug: items_kendoui_treeview
 position: 4
@@ -38,6 +38,9 @@ To add arbitrary fields when binding the TreeView, use the `dataSource` configur
         // Specifies whether the item is initially expanded.
         // Applicable when the item has child nodes.
         expanded: true,
+
+        // Specifies whether the item is initially enabled.
+        enabled: true,
 
         // Specifies whether the item checkbox is initially checked.
         // Applicable for items with checkboxes using the default checkbox template.

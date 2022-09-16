@@ -66,6 +66,7 @@
             assert.equal(panelbar.find(".k-item").length, 2);
         });
 
+
         it("Adding items to the datasource adds them to the proper level", function() {
             createPanelBar([
                 { id: 1, text: "foo" },
@@ -746,6 +747,22 @@
             read.resolve([{ id: 1, expanded: true, hasChildren: true }]);
             jasmine.clock().tick();
             jasmine.clock().uninstall();
+        });
+
+        it("Adds k-level-n class based on item's level in hierarchy", function() {
+            createPanelBar({
+                loadOnDemand: false,
+                dataSource: [
+                    {
+                        id: 1, text: "foo", items: [
+                            { id: 2, text: "bar" }
+                        ]
+                    }
+                ]
+            });
+
+            assert.isOk(panelbarObject.element.find(".k-item").eq(0).is(".k-level-0"));
+            assert.isOk(panelbarObject.element.find(".k-item").eq(1).is(".k-level-1"));
         });
 
     });

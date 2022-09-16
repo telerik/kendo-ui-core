@@ -12,7 +12,7 @@ The `items` configuration allows you to set specific attributes to the Breadcrum
 
 The following example demonstrates how the attributes of the Breadcrumb items can be set through the *items* configuration.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Breadcrumb()
         .Name("breadcrumb")
         .Items(items =>
@@ -46,6 +46,18 @@ The following example demonstrates how the attributes of the Breadcrumb items ca
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-breadcrumb name="breadcrumb">
+        <kendo-breadcrumb-items>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.RootItem" text="All Components" href="https://demos.telerik.com/kendo-ui/" show-text="true" icon="home" show-icon="true"></kendo-breadcrumb-items>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.Item" text="Breadcrumb" href="/breadcrumb"></kendo-breadcrumb-item>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.Item" text="Tag Helper" href="/tag-helper"></kendo-breadcrumb-item>
+        </kendo-breadcrumb-items>
+    </kendo-breadcrumb>
+```
+{% endif %}
+
 
 ## See Also
 

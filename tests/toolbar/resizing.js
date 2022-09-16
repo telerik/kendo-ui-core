@@ -10,7 +10,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -105,7 +105,7 @@
             container.width(150);
             toolbar.resize();
 
-            var button = toolbar.element.find(".k-button").last();
+            var button = toolbar.element.find(".k-button").not(".k-overflow-anchor").last();
 
             assert.isOk(button.is(":hidden"));
 
@@ -288,6 +288,7 @@
             assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is hidden before the resize");
 
             container.width(100);
+
             toolbar.resize();
 
             assert.equal(toolbar.overflowAnchor.css("visibility"), "visible", "Overflow anchor is visible after the resize");
@@ -320,7 +321,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -348,7 +349,7 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.hide("#qux")
+            toolbar.hide("#qux");
 
             assert.isOk($("#qux_overflow").hasClass("k-overflow-hidden"), "#qux_overflow is hidden");
         });
@@ -364,8 +365,8 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.hide("#foo")
-            toolbar.hide("#bar")
+            toolbar.hide("#foo");
+            toolbar.hide("#bar");
 
             assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden");
         });

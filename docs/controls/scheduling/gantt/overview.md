@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Gantt Documentation | Gantt Overview | Kendo UI
+page_title: jQuery Gantt Documentation | Gantt Overview
 description: "Get started with the jQuery Gantt by Kendo UI and learn how to initialize the widget and use its events."
 slug: overview_kendoui_gantt_widget
 position: 1
@@ -21,7 +21,7 @@ The `kendo.data.GanttTask` object provides the following fields:
 * `end Date`&mdash;The date at which the task ends.
 * Expanded `Boolean`&mdash;Indicates if the task will be expanded.
 * `id Number`&mdash;The unique identifier of the Gantt task. Tasks, whose `id` is not set, are considered as `"new"`.
-* `orderId Number`&mdash;The index of the task.
+* `orderId Number`&mdash;The index of the task. The orderId values should be unique and consecutive. 
 * `parentId Number`The unique identifier of the parent task. Tasks, whose `parentId` is not set or null, are considered as `"root-level"`.
 * `percentComplete Number`&mdash;The percentage of the task completion.
 * `start Date`&mdash;The date at which the task starts.
@@ -115,8 +115,10 @@ If your remote service stores and returns the Gantt dependencies in a different 
 
 ## Functionality and Features
 
+* [Layout]({% slug layout_kendoui_gantt %})
 * [Data binding]({% slug databinding_kendoui_gantt %})
 * [Columns]({% slug columns_kendoui_gantt %})
+* [Planned vs Actual]({% slug planned_vs_actual_kendoui_gantt %})
 * [Views]({% slug views_kendoui_gantt %})
 
 ## Referencing Existing Instances

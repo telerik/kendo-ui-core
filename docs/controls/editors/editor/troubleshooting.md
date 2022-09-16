@@ -37,7 +37,7 @@ The Editor uses BOM characters to correctly handle some ranges. If there is an i
 **Solution** To handle this behavior, refer to the following scenarios:
 
 1. If you observe the problem in the [online demos](https://demos.telerik.com/kendo-ui/editor), your browser might have enforced an encoding that is different from the UTF-8 one. This scenario is not supported.
-1. If the online demos behave properly, change the Kendo UI script references so they are loaded from the CDN (https://kendo.cdn.telerik.com/2014.2.716/js/kendo.all.min.js). If your page is now working correctly, your local script files are served with the wrong encoding, or are corrupted. Copy over the scripts (the files, not their content) from the official distribution, and see if the issue persists.
+1. If the online demos behave properly, change the Kendo UI script references so they are loaded from the CDN (https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js). If your page is now working correctly, your local script files are served with the wrong encoding, or are corrupted. Copy over the scripts (the files, not their content) from the official distribution, and see if the issue persists.
 1. If the problem is still visible on your page, and the scripts are loaded through the CDN, the page might be served with the wrong formatting. Verify that the page as well as its layout pages are saved and served in UTF-8.
 
 ## The popup Editor is read-only in Firefox
@@ -52,15 +52,11 @@ Iframes cannot be scrollable in iOS and always expand to display all their conte
 
 **Solution** Use the inline Editor mode that excludes an `iframe`. When in inline mode, you need to manually post the value of the Editor (see below).
 
-## Images and tables are not resizable
+## Images and tables are now resizable
 
-Image and table resizing inside `contenteditable` elements depends on the browser. As a result, images may not resize if a classic-mode Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back. The reason for the issue is the functionalities of the browser.
+As of R2 2021 release, image resizing has been implemented in the Editor while table resizing was included back in R3 2016. To resize an image, you can use the resize handlers. Similarly, you can use resize handlers to resize a table. Additionally, to resize a table row or a column, you can drag the cell borders with the mouse.  
 
-**Solution** Call the [`refresh`](/api/javascript/ui/editor/methods/refresh) method of the Editor after the widget becomes visible. Refreshing the widget recreates the `iframe`.
-
-Another possible approach is to use the inline mode of the Editor, that is, to create the Editor from a `div` element.
-
-> * As of the R3 2016 release, resizing of table rows and columns has been implemented in the Editor. To resize a row or a column of the Editor, the user can drag the cell borders with the mouse.
+> * The **undo** function is not supported while resizing an image or a table and should be considered a limitation. 
 > * To resize an image or a table in versions prior to the R3 2016 release and in browsers that do not normally support it, such as Google Chrome 46, implement a [custom Editor tool](https://demos.telerik.com/kendo-ui/editor/custom-tools).
 
 ## Back and forward browser buttons display raw HTML

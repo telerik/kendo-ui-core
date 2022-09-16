@@ -4,7 +4,7 @@ page_title: Validation
 description: "Use the predefined and custom masks in the Telerik UI MaskedTextBox for {{ site.framework }}."
 previous_url: /helpers/editors/maskedtextbox/mask-rules
 slug: validation_maskedtextbox_aspnetcore
-position: 2
+position: 3
 ---
 
 # Validation
@@ -19,12 +19,17 @@ The MaskedTextBox has [a list of predefined mask rules](https://docs.telerik.com
 
 The following example demonstrates how to set a `zip code` mask.
 
-```
+```HtmlHelper
     @(Html.Kendo().MaskedTextBox()
           .Name("maskedtextbox")
           .Mask("00000-9999") // Set the zip code.
     )
 ```
+{% if site.core %}
+```TagHelper
+  <kendo-maskedtextbox name="maskedtextbox" mask="00000-9999"></kendo-maskedtextbox>
+```
+{% endif %}
 
 ## Custom Masks
 
@@ -34,7 +39,7 @@ The MaskedTextBox enables you to define custom mask rules if none of the predefi
 
 The following example demonstrates how to define a custom rule for the `-` (minus) and `+` (plus) symbols.
 
-```
+```HtmlHelper
   @(Html.Kendo().MaskedTextBox()
         .Name("maskedtextbox")
         .Rules(rules => {
@@ -43,6 +48,18 @@ The following example demonstrates how to define a custom rule for the `-` (minu
         .Mask("~0000") // Set a mask with a custom rule.
    )
 ```
+{% if site.core %}
+```TagHelper
+  @{
+    var rules = new Dictionary<string, string>()
+    {
+        {"~", "/[+-]/"}
+    };
+  }
+
+  <kendo-maskedtextbox name="maskedtextbox" rules="@rules" mask="~0000" ></kendo-maskedtextbox>
+```
+{% endif %}
 
 ## See Also
 

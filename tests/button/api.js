@@ -1,5 +1,5 @@
 (function() {
-    describe("api", function () {
+    describe("api", function() {
         afterEach(function() {
             if (button) {
                 if (button.data("kendoButton")) {
@@ -10,75 +10,75 @@
             }
         });
 
-    it("enable() removes a disabled state class", function() {
-        var buttonObject = getButton().kendoButton({
-            enable: false
-        }).data("kendoButton");
+        it("enable() removes a disabled state class", function() {
+            var buttonObject = getButton().kendoButton({
+                enable: false
+            }).data("kendoButton");
 
-        buttonObject.enable();
+            buttonObject.enable();
 
-        assert.isOk(!button.hasClass("k-state-disabled"));
-    });
+            assert.isOk(!button.hasClass("k-disabled"));
+        });
 
-    it("enable(true) removes a disabled state class", function() {
-        var buttonObject = getButton().kendoButton({
-            enable: false
-        }).data("kendoButton");
+        it("enable(true) removes a disabled state class", function() {
+            var buttonObject = getButton().kendoButton({
+                enable: false
+            }).data("kendoButton");
 
-        buttonObject.enable(true);
+            buttonObject.enable(true);
 
-        assert.isOk(!button.hasClass("k-state-disabled"));
-    });
+            assert.isOk(!button.hasClass("k-disabled"));
+        });
 
-    it("enable() sets widget options.enable to true", function() {
-        var buttonObject = getButton().kendoButton({
-            enable: false
-        }).data("kendoButton");
+        it("enable() sets widget options.enable to true", function() {
+            var buttonObject = getButton().kendoButton({
+                enable: false
+            }).data("kendoButton");
 
-        buttonObject.enable();
+            buttonObject.enable();
 
-        assert.equal(buttonObject.options.enable, true);
-    });
+            assert.equal(buttonObject.options.enable, true);
+        });
 
-    it("enable(true) sets widget options.enable to true", function() {
-        var buttonObject = getButton().kendoButton({
-            enable: false
-        }).data("kendoButton");
+        it("enable(true) sets widget options.enable to true", function() {
+            var buttonObject = getButton().kendoButton({
+                enable: false
+            }).data("kendoButton");
 
-        buttonObject.enable(true);
+            buttonObject.enable(true);
 
-        assert.equal(buttonObject.options.enable, true);
-    });
+            assert.equal(buttonObject.options.enable, true);
+        });
 
-    it("enable(false) sets a disabled state class", function() {
-        var buttonObject = getButton().kendoButton({
-            enable: true
-        }).data("kendoButton");
+        it("enable(false) sets a disabled state class", function() {
+            var buttonObject = getButton().kendoButton({
+                enable: true
+            }).data("kendoButton");
 
-        buttonObject.enable(false);
+            buttonObject.enable(false);
 
-        assert.isOk(button.hasClass("k-state-disabled"));
-    });
+            assert.isOk(button.hasClass("k-disabled"));
+        });
 
-    it("enable(false) sets widget options.enable to false", function() {
-        var buttonObject = getButton().kendoButton({
-            enable: true
-        }).data("kendoButton");
+        it("enable(false) sets widget options.enable to false", function() {
+            var buttonObject = getButton().kendoButton({
+                enable: true
+            }).data("kendoButton");
 
-        buttonObject.enable(false);
+            buttonObject.enable(false);
 
-        assert.equal(buttonObject.options.enable, false);
-    });
+            assert.equal(buttonObject.options.enable, false);
+        });
 
-    it("enable(false) blurs the � span button", function () {
-        var buttonObject = getSpanButton().kendoButton({
-            enable: true
-        }).data("kendoButton");
+        it("enable(false) blurs the � span button", function() {
+            var buttonObject = getSpanButton().kendoButton({
+                enable: true
+            }).data("kendoButton");
 
-        buttonObject.element[0].focus();
-        buttonObject.enable(false);
+            buttonObject.element[0].focus();
+            buttonObject.enable(false);
 
-        assert.notEqual(document.activeElement, buttonObject.element[0]);
-    });
+            assert.notEqual(document.activeElement, buttonObject.element[0]);
+        });
     });
 }());

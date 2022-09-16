@@ -44,7 +44,7 @@ Add a `dragFilter` option to the TreeView by overriding the implementation of th
         var dragging = this.dragging;
         if (enabled && !dragging) {
           var widget = this;
-          var dragFilter = 'div:not(.k-state-disabled) .k-in';
+          var dragFilter = 'div:not(.k-disabled) .k-in';
 
           if (this.options.dragFilter && typeof this.options.dragFilter == 'string')
           {

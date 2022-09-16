@@ -6,7 +6,7 @@
         ITEM_HEIGHT = 40,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function generateData(parameters) {
         var items = [];
@@ -21,7 +21,7 @@
         return items;
     }
 
-    describe("VirtualList Aria: ", function () {
+    describe("VirtualList Aria: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 

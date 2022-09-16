@@ -7,8 +7,8 @@
     var menu;
     var assertOk = function() { assert.isOk(true); };
 
-    describe("menu api", function () {
-        beforeEach(function () {
+    describe("menu api", function() {
+        beforeEach(function() {
             Mocha.fixture.append(
                     '<div id="target" style="width: 100px; height: 100px;">' +
                     '    <div class="filter" style="width: 20px; height: 20px;">1</div>' +
@@ -42,32 +42,34 @@
                     '</ul>'
             );
             menu = new kendo.ui.ContextMenu("#menu", { animation: false, target: "#target" });
+
+            Mocha.fixture.attr("role", "main");
         });
-        afterEach(function () {
+        afterEach(function() {
             kendo.destroy(menu.element);
         });
 
-    it('.k-context-menu is placed on root element', function () {
+    it('.k-context-menu is placed on root element', function() {
         assert.isOk(menu.element.is(".k-context-menu"));
     });
 
-    it('Popup widget is initialized on the root element', function () {
-        assert.isOk(menu.popup == menu.element.data("kendoPopup"))
+    it('Popup widget is initialized on the root element', function() {
+        assert.isOk(menu.popup == menu.element.data("kendoPopup"));
     });
 
-    it('right click on target opens menu', function () {
+    it('right click on target opens menu', function() {
         $("#target").trigger("contextmenu");
 
         assert.isOk(menu.popup.visible());
     });
 
-    it('right click on body doesn\'t open menu', function () {
+    it('right click on body doesn\'t open menu', function() {
         $("body").trigger("contextmenu");
 
         assert.isOk(!menu.popup.visible());
     });
 
-    it('right click on filter opens menu', function () {
+    it('right click on filter opens menu', function() {
         menu.setOptions({
             filter: ".filter"
         });
@@ -77,7 +79,7 @@
         assert.isOk(menu.popup.visible());
     });
 
-    it('right click on target with filter doesn\'t open menu', function () {
+    it('right click on target with filter doesn\'t open menu', function() {
         menu.setOptions({
             filter: ".filter"
         });
@@ -87,7 +89,7 @@
         assert.isOk(!menu.popup.visible());
     });
 
-    it('right click on jquery filter selector opens menu', function () {
+    it('right click on jquery filter selector opens menu', function() {
         menu.setOptions({
             filter: ".filter:not('.exclude')"
         });
@@ -96,7 +98,7 @@
         assert.isOk(menu.popup.visible());
     });
 
-    it('right click on excluded element from filter selector does not open menu', function () {
+    it('right click on excluded element from filter selector does not open menu', function() {
         menu.setOptions({
             filter: ".filter:not('.exclude')"
         });
@@ -105,7 +107,7 @@
         assert.isOk(!menu.popup.visible());
     });
 
-    it('right click on complex jquery filter selector opens menu', function () {
+    it('right click on complex jquery filter selector opens menu', function() {
         menu.setOptions({
             filter: ".filter:not(div:has(.exclude))"
         });
@@ -114,7 +116,7 @@
         assert.isOk(menu.popup.visible());
     });
 
-    it('right click on excluded element from complex filter selector does not open menu', function () {
+    it('right click on excluded element from complex filter selector does not open menu', function() {
         menu.setOptions({
             filter: ".filter:not(div:has(.exclude))"
         });
@@ -123,7 +125,7 @@
         assert.isOk(!menu.popup.visible());
     });
 
-    it('click on target opens menu when showOn is click', function () {
+    it('click on target opens menu when showOn is click', function() {
         menu.setOptions({
             showOn: "click"
         });
@@ -133,7 +135,7 @@
         assert.isOk(menu.popup.visible());
     });
 
-    it('menu is aligned to the target if alignToAnchor is true', function () {
+    it('menu is aligned to the target if alignToAnchor is true', function() {
         menu.setOptions({
             alignToAnchor: true
         });
@@ -149,7 +151,7 @@
         assert.isOk(popupOffset.top == targetOffset.top + $("#target").height());
     });
 
-    it('menu is aligned to the filter item if alignToAnchor is true', function () {
+    it('menu is aligned to the filter item if alignToAnchor is true', function() {
         menu.setOptions({
             filter: ".filter",
             alignToAnchor: true
@@ -168,27 +170,27 @@
 
     /* API */
 
-    it('calling open raises open event', function () {
-        menu.bind("open", function () {
+    it('calling open raises open event', function() {
+        menu.bind("open", function() {
             assert.isOk(true);
         });
 
         menu.open();
     });
 
-    it('Overflow context menu - calling open raises open event', function () {
+    it('Overflow context menu - calling open raises open event', function() {
         menu.options.scrollable = true;
-        menu._initOverflow({scrollable: true, orientation:"vertical"});
+        menu._initOverflow({ scrollable: true, orientation: "vertical" });
 
-        menu.bind("open", function () {
+        menu.bind("open", function() {
             assert.isOk(true);
         });
 
         menu.open();
     });
 
-    it('calling close raises close event if popup is visible', function () {
-        menu.bind("close", function () {
+    it('calling close raises close event if popup is visible', function() {
+        menu.bind("close", function() {
             assert.isOk(true);
         });
 
@@ -196,11 +198,11 @@
         menu.close();
     });
 
-    it('Overflow context menu - calling close raises close event if popup is visible', function () {
+    it('Overflow context menu - calling close raises close event if popup is visible', function() {
         menu.options.scrollable = true;
-        menu._initOverflow({scrollable: true, orientation:"vertical"});
+        menu._initOverflow({ scrollable: true, orientation: "vertical" });
 
-        menu.bind("close", function () {
+        menu.bind("close", function() {
             assert.isOk(true);
         });
 
@@ -208,15 +210,15 @@
         menu.close();
     });
 
-    it('calling open shows the popup', function () {
+    it('calling open shows the popup', function() {
         menu.open();
 
         assert.isOk(menu.popup.visible());
     });
 
-    it('Overflow context menu - calling open shows the popup', function () {
+    it('Overflow context menu - calling open shows the popup', function() {
         menu.options.scrollable = true;
-        menu._initOverflow({scrollable: true, orientation:"vertical"});
+        menu._initOverflow({ scrollable: true, orientation: "vertical" });
 
         menu.open();
 
@@ -224,7 +226,7 @@
         assert.isOk(menu.popup.element.height() > 0);
     });
 
-    it('calling open with position shows the popup at that position', function () {
+    it('calling open with position shows the popup at that position', function() {
         menu.open(100, 100);
 
         var offset = menu.popup.element.offset();
@@ -232,8 +234,8 @@
         assert.isOk(offset.top == 100);
     });
 
-    it('preventing open should not open the popup', function () {
-        menu.bind("open", function (e) {
+    it('preventing open should not open the popup', function() {
+        menu.bind("open", function(e) {
             e.preventDefault();
         });
 
@@ -242,8 +244,8 @@
         assert.isOk(!menu.popup.visible());
     });
 
-    it('preventing close should not close the popup', function () {
-        menu.bind("close", function (e) {
+    it('preventing close should not close the popup', function() {
+        menu.bind("close", function(e) {
             e.preventDefault();
         });
 
@@ -253,13 +255,13 @@
         assert.isOk(menu.popup.visible());
     });
 
-    it('events should pass the current target regardless of alignToAnchor', function () {
+    it('events should pass the current target regardless of alignToAnchor', function() {
         menu.setOptions({
             filter: ".filter",
             showOn: "click"
         });
 
-        menu.bind("select", function (e) {
+        menu.bind("select", function(e) {
             assert.isOk(e.target = $(".filter")[0]);
         });
 
@@ -278,7 +280,7 @@
     });
 
 
-    it("open event's target argument should point to the DOM element that was clicked, no align", function(){
+    it("open event's target argument should point to the DOM element that was clicked, no align", function() {
         var target;
         menu.setOptions({
             alignToAnchor: false,
@@ -286,7 +288,7 @@
             target: ".filter"
         });
 
-        menu.bind("open", function (e) {
+        menu.bind("open", function(e) {
             assert.equal($(e.target).text(), $(target).text());
         });
 
@@ -296,7 +298,7 @@
         target = $(".filter:last");
         target.click();
     });
-    it("open event's target argument should point to the DOM element that was clicked", function(){
+    it("open event's target argument should point to the DOM element that was clicked", function() {
         var target;
         menu.setOptions({
             alignToAnchor: true,
@@ -304,7 +306,7 @@
             target: ".filter"
         });
 
-        menu.bind("open", function (e) {
+        menu.bind("open", function(e) {
             assert.equal($(e.target).text(), $(target).text());
         });
 
@@ -315,10 +317,10 @@
         target.click();
     });
 
-    it("the element containing the context menu should be the element it was appended to", function(){
+    it("the element containing the context menu should be the element it was appended to", function() {
         var menuContainer = $('<div id="menu-container">&nbsp;</div>').appendTo(Mocha.fixture);
         var secondContextMenu = $('<div id="context-menu">&nbsp;</div>').appendTo(Mocha.fixture);
-        var contextMenu = new kendo.ui.ContextMenu("#context-menu", { target: "#menu-container", appendTo: "#menu-container"});
+        var contextMenu = new kendo.ui.ContextMenu("#context-menu", { target: "#menu-container", appendTo: "#menu-container" });
 
         assert.isOk($('#context-menu').parent().is("#menu-container"));
         contextMenu.destroy();
@@ -331,14 +333,14 @@
         mockFunc(kendo.ui.ContextMenu.fn, "_initOverflow", assertOk);
         mockFunc(kendo.ui.ContextMenu.fn, "_attachMenuEventsHandlers", assertOk);
 
-        menu.setOptions({scrollable: true, orientation:"vertical"});
+        menu.setOptions({ scrollable: true, orientation: "vertical" });
 
         removeMocksIn(kendo.ui.ContextMenu.fn);
     });
 
     it('overflow context menu - remove oveflow', function() {
-        menu.setOptions({scrollable: true, orientation:"vertical"});
-        menu.setOptions({scrollable: false, orientation:"vertical"});
+        menu.setOptions({ scrollable: true, orientation: "vertical" });
+        menu.setOptions({ scrollable: false, orientation: "vertical" });
 
         menu.open();
 
@@ -346,7 +348,7 @@
     });
 
     it('overflow context menu - destroy oveflow', function() {
-        menu.setOptions({scrollable: true, orientation:"vertical"});
+        menu.setOptions({ scrollable: true, orientation: "vertical" });
         mockFunc(kendo.ui.ContextMenu.fn, "_detachMenuEventsHandlers", assertOk);
 
         menu.destroy();
@@ -354,6 +356,49 @@
         assert.isOk(!menu._overflowWrapper());
 
         removeMocksIn(kendo.ui.ContextMenu.fn);
+    });
+
+    it("first menu item is focused upon opening", function(done) {
+        var target;
+
+        menu.setOptions({
+            showOn: "click",
+            target: ".filter"
+        });
+
+        menu.bind("activate", function() {
+            setTimeout(function() {
+                assert.equal(menu.element.find(".k-focus").length, 1);
+                done();
+            });
+        });
+
+        target = $(".filter:first");
+        target.trigger("click");
+    });
+
+    it('ContextMenu is accessible', function(done) {
+        $("#target").trigger("contextmenu");
+
+        axeRun(menu.wrapper, done);
+    });
+
+    it("opened ContextMenu is accessible", function(done) {
+        var target;
+
+        menu.setOptions({
+            showOn: "click",
+            target: ".filter"
+        });
+
+        menu.bind("activate", function() {
+            setTimeout(function() {
+                axeRun(menu.wrapper.closest(".k-animation-container").parent(), done);
+            });
+        });
+
+        target = $(".filter:first");
+        target.trigger("click");
     });
 
     });

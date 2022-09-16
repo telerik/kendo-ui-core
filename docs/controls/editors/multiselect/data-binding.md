@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery MultiSelect Documentation | Data Binding | Kendo UI
+page_title: jQuery MultiSelect Documentation | Data Binding
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to bind the MultiSelect to local data arrays and to remote data sources."
 slug: databinding_multiselect
 position: 2

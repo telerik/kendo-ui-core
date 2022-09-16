@@ -7,6 +7,8 @@ component: breadcrumb
 
 # kendo.ui.Breadcrumb
 
+Represents the Kendo UI Breadcrumb widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### bindToLocation `Boolean` *(default: false)*
@@ -296,6 +298,7 @@ If invoked prevents the click action.
         $("#breadcrumb").kendoBreadcrumb({
             value: 'Telerik UI/Navigation/Breadcrumb',
 			click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 				console.log(e.sender);
 			}
         });
@@ -312,6 +315,7 @@ If invoked prevents the click action.
         }).getKendoBreadcrumb();
 
 		breadcrumb.bind('click', function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 			console.log(e.sender);
 		});
 	</script>
@@ -338,6 +342,7 @@ The new value(path) of the Breadcrumb.
         $("#breadcrumb").kendoBreadcrumb({
             value: 'Telerik UI/Navigation/Breadcrumb',
 			change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 				console.log(e.value);
 			}
         });

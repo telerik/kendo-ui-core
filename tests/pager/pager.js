@@ -41,7 +41,7 @@
 
             dataSource.read();
 
-            var links = ul.find("a").add(ul.find(".k-state-selected"));
+            var links = ul.find("a").add(ul.find(".k-selected"));
             assert.equal(links.length, 5);
             assert.equal(links[0].innerHTML, "1");
             assert.equal(links[1].innerHTML, "2");
@@ -52,7 +52,7 @@
 
         it("one button is rendered on init", function() {
             var ul = setup();
-            var links = ul.find("a").add(ul.find(".k-state-selected"));
+            var links = ul.find("a").add(ul.find(".k-selected"));
 
             assert.equal(links.length, 1);
             assert.equal(links[0].innerHTML, "0");
@@ -70,7 +70,7 @@
                 dataSource: dataSource,
                 previousNext: false
             });
-            var links = ul.find("a").add(ul.find(".k-state-selected"));
+            var links = ul.find("a").add(ul.find(".k-selected"));
 
             assert.equal(links.length, 3);
             assert.equal(links[0].innerHTML, "1");
@@ -84,7 +84,7 @@
             dataSource.read();
 
             var links = ul.find("a");
-            assert.equal(ul.find(".k-state-selected").data("page"), undefined);
+            assert.equal(ul.find(".k-selected").data("page"), undefined);
             assert.equal(links.eq(0).attr("data-kendo-page"), "2");
             assert.equal(links.eq(1).attr("data-kendo-page"), "3");
             assert.equal(links.eq(2).attr("data-kendo-page"), "4");
@@ -97,7 +97,7 @@
             dataSource.read();
             dataSource.read();
 
-            var links = ul.find("a").add(ul.find(".k-state-selected"));
+            var links = ul.find("a").add(ul.find(".k-selected"));
             assert.equal(links.length, 5);
             assert.equal(links[0].innerHTML, "1");
             assert.equal(links[1].innerHTML, "2");
@@ -118,7 +118,7 @@
             var ul = setup();
 
             dataSource.read();
-            assert.isOk(ul.find("span").hasClass("k-state-selected"));
+            assert.isOk(ul.find("span").hasClass("k-selected"));
         });
 
         it("changing page raises change event passing the new index", function() {
@@ -173,7 +173,7 @@
             var ul = setup({}, { buttonCount: 3 });
 
             dataSource.read();
-            assert.equal(ul.find("a").add(ul.find(".k-state-selected")).length, 4);
+            assert.equal(ul.find("a").add(ul.find(".k-selected")).length, 4);
             assert.equal(ul.find("a:last").attr("data-kendo-page"), "4");
         });
 
@@ -181,7 +181,7 @@
             var ul = setup({ page: 4 }, { buttonCount: 3 });
 
             dataSource.read();
-            assert.equal(ul.find("a").add(ul.find(".k-state-selected")).length, 3);
+            assert.equal(ul.find("a").add(ul.find(".k-selected")).length, 3);
             assert.equal(ul.find("a:first").attr("data-kendo-page"), "3");
         });
 
@@ -232,7 +232,7 @@
                 ul = $("<ul/>").appendTo(Mocha.fixture).kendoPager({ dataSource: data });
 
             data.read();
-            assert.equal(ul.find(".k-state-selected").length, 1);
+            assert.equal(ul.find(".k-selected").length, 1);
         });
 
         it("pager displays info", function() {
@@ -394,7 +394,7 @@
         it("first button is disabled on the first page", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.isOk(pager.find(".k-pager-first").hasClass("k-state-disabled"));
+            assert.isOk(pager.find(".k-pager-first").hasClass("k-disabled"));
         });
 
         it("first button is enabled on any page but first", function() {
@@ -402,13 +402,13 @@
             dataSource.read();
             dataSource.page(2);
 
-            assert.isOk(!pager.find(".k-pager-first").hasClass("k-state-disabled"));
+            assert.isOk(!pager.find(".k-pager-first").hasClass("k-disabled"));
         });
 
         it("prev button is disabled on the first page", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.isOk(pager.find(".k-i-arrow-60-left").parent().hasClass("k-state-disabled"));
+            assert.isOk(pager.find(".k-i-arrow-60-left").parent().hasClass("k-disabled"));
         });
 
         it("prev button is enabled on any page but first", function() {
@@ -417,7 +417,7 @@
             dataSource.read();
             dataSource.page(2);
 
-            assert.isOk(!pager.find(".k-i-arrow-60-left").parent().hasClass("k-state-disabled"));
+            assert.isOk(!pager.find(".k-i-arrow-60-left").parent().hasClass("k-disabled"));
         });
 
         it("prev button page data attribute is set to page minus one", function() {
@@ -434,14 +434,14 @@
 
             dataSource.read();
             dataSource.page(5);
-            assert.isOk(pager.find(".k-i-arrow-60-right").parent().hasClass("k-state-disabled"));
+            assert.isOk(pager.find(".k-i-arrow-60-right").parent().hasClass("k-disabled"));
         });
 
         it("next button is enabled on any page but last", function() {
             var pager = setup({}, { previousNext: true });
 
             dataSource.read();
-            assert.isOk(!pager.find(".k-i-arrow-60-right").parent().hasClass("k-state-disabled"));
+            assert.isOk(!pager.find(".k-i-arrow-60-right").parent().hasClass("k-disabled"));
         });
 
         it("next button page data attribute is set to page plus one", function() {
@@ -454,18 +454,19 @@
         });
 
         it("last button is disabled on the last page", function() {
-            var pager = setup({}, { previousNext: true });
+            var pager = setup({}, { navigatable: true, previousNext: true });
 
             dataSource.read();
             dataSource.page(5);
-            assert.isOk(pager.find(".k-pager-last").hasClass("k-state-disabled"));
+            assert.isOk(pager.find(".k-pager-last").hasClass("k-disabled"));
+            assert.equal(pager.find(".k-pager-last").attr("aria-disabled"), "true");
         });
 
         it("last button is enabled on any page but last", function() {
             var pager = setup({}, { previousNext: true });
 
             dataSource.read();
-            assert.isOk(!pager.find(".k-pager-last").hasClass("k-state-disabled"));
+            assert.isOk(!pager.find(".k-pager-last").hasClass("k-disabled"));
         });
 
         it("prev button page data attribute is set to total pages", function() {
@@ -490,7 +491,7 @@
                 autoBind: false
             });
 
-            assert.isOk(!pager.find(".k-pager-first").hasClass("k-state-disabled"));
+            assert.isOk(!pager.find(".k-pager-first").hasClass("k-disabled"));
         });
 
         it("previous is enabled if the data source is read before pager init", function() {
@@ -507,7 +508,7 @@
                 autoBind: false
             });
 
-            assert.isOk(!pager.find(".k-i-arrow-60-left").parent().hasClass("k-state-disabled"));
+            assert.isOk(!pager.find(".k-i-arrow-60-left").parent().hasClass("k-disabled"));
         });
 
         it("next is enabled if the data source is read before pager init", function() {
@@ -524,7 +525,7 @@
                 autoBind: false
             });
 
-            assert.isOk(!pager.find(".k-i-arrow-60-right").parent().hasClass("k-state-disabled"));
+            assert.isOk(!pager.find(".k-i-arrow-60-right").parent().hasClass("k-disabled"));
         });
 
         it("last is enabled if the data source is read before pager init", function() {
@@ -541,7 +542,7 @@
                 autoBind: false
             });
 
-            assert.isOk(!pager.find(".k-pager-last").hasClass("k-state-disabled"));
+            assert.isOk(!pager.find(".k-pager-last").hasClass("k-disabled"));
         });
 
         it("creates a dropdown for the page sizes", function() {
@@ -645,7 +646,7 @@
         });
 
         it("selecting all pages from the select changes the skip in the data source", function() {
-            var pager = setup({}, { pageSizes: ["all", 1, 2]});
+            var pager = setup({}, { pageSizes: ["all", 1, 2] });
             dataSource.read();
 
             var select = pager.find(".k-pager-sizes select");
@@ -735,19 +736,10 @@
             assert.isOk(!pager.hasClass("k-pager-sm"));
         });
 
-        it("add k-pager-lg class", function() {
-            var pager = setup();
-
-            pager.css("width", "1000px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(pager.hasClass("k-pager-lg"));
-        });
-
         it("add k-pager-md class", function() {
             var pager = setup();
 
-            pager.css("width", "600px");
+            pager.css("width", "500px");
             pager.data("kendoPager").resize();
 
             assert.isOk(pager.hasClass("k-pager-md"));
@@ -760,6 +752,23 @@
             pager.data("kendoPager").resize();
 
             assert.isOk(pager.hasClass("k-pager-sm"));
+        });
+
+        it("no k-pager-sm class on breakpoint width", function() {
+            var dataOptions = {
+                data: [1, 2, 3, 4, 5],
+                page: 1,
+                pageSize: 1
+            };
+            var dataSource = new DataSource(dataOptions);
+            var options = {
+                dataSource: dataSource,
+                previousNext: false
+            };
+            var element = $("<div style='width: 480px;' />").appendTo(Mocha.fixture).kendoPager(options);
+            var pager = element.data("kendoPager");
+
+            assert.isOk(!pager.element.hasClass("k-pager-sm"));
         });
 
         it("no k-pager-lg class when responsive is false", function() {
@@ -814,7 +823,33 @@
                 autoBind: false
             });
 
-            assert.equal(pager.find(".k-pager-numbers .k-state-selected").length, 1);
+            assert.equal(pager.find(".k-pager-numbers .k-selected").length, 1);
+        });
+
+        it("info message is correct with dataSource with groupPaging enabled", function() {
+            var dataSource = new DataSource({
+                pageSize: 10,
+                data: [
+                    { name: "Tea", category: "Beverages" },
+                    { name: "Coffee", category: "Beverages" },
+                    { name: "Ham", category: "Food" }
+                  ],
+                  // group by the "category" field
+                  group: { field: "category" },
+                  groupPaging: true
+            });
+
+            dataSource.fetch(function() {
+                var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                    dataSource: dataSource
+                }).data('kendoPager');
+                dataSource._groupsState[dataSource.view()[0].uid] = true;
+                pager.refresh();
+
+                assert.equal(pager.element.find(".k-pager-info").text(), "1 - 3 of 4 items");
+
+            });
+
         });
     });
 }());

@@ -12,6 +12,25 @@ Represents the Kendo UI DateInput widget. Inherits from [Widget](/api/javascript
 
 ## Configuration
 
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        fillMode: "flat"
+    });
+    </script>
+
 ### format `String`*(default: "M/d/yyyy")*
 
  Specifies the format, which is used to format the value of the DateInput displayed in the input. The format also will be used to parse the input.
@@ -117,6 +136,43 @@ The placeholder for the seconds part.
 ### messages.dayperiod `String` *(default: "AM/PM")*
 
 The placeholder for the AM/PM part.
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        size: "large"
+    });
+    </script>
 
 ## Fields
 
@@ -243,6 +299,7 @@ The max date to set.
 
     var max = dateinput.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -281,6 +338,7 @@ The min date to set.
 
     var min = dateinput.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -359,6 +417,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var dateinput = $("#dateinput").data("kendoDateInput");
 
     var value = dateinput.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -394,6 +453,7 @@ The widget instance which fired the event.
     $("#dateinput").kendoDateInput({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the dateinput
         }
     });
@@ -409,6 +469,7 @@ The widget instance which fired the event.
 
     dateinput.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the dateinput
     });
     </script>

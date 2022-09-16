@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Chart Documentation | Chart Overview | Kendo UI
+page_title: jQuery Chart Documentation | Chart Overview
 description: "Get started with the jQuery Chart by Kendo UI and learn how to create, initialize, and enable the widget."
 previous_url: /howto/add-charts-and-graphs-to-an-application, /controls/charts/chart/overview
 slug: overview_kendoui_charts_widget
@@ -27,6 +27,7 @@ The following image displays the structure of the Chart.
 ![Chart Structure](chart-structure.png)
 
 * [Demo page for the Charts](https://demos.telerik.com/kendo-ui/)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
 
 ## Basic Configuration
 

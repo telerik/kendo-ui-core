@@ -28,6 +28,8 @@ How can I exclude certain columns from the exported PDF file in a Kendo UI Grid?
 
 ## Solution
 
+> As of Kendo UI R1 2021, there is an [exportable](/api/javascript/ui/grid/configuration/columns.exportable) property which allows the developer to exclude columns from being exported.
+
 Use either of the following approaches:
 
 *  [Use the `k-pdf-export` class and CSS](#using-the-k-pdf-export-class-and-css)
@@ -82,7 +84,7 @@ The following example demonstrates how to hide the last column during PDF Export
   <body>
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script type="x/kendo-template" id="page-template">
@@ -277,3 +279,9 @@ The following example demonstrates how to hide the last column during PDF Export
       </style>
     </div>
 ```
+
+## See Also
+
+* [Change Column Widths during PDF Export]({% slug grid-pdf-export-change-column-widths %})
+* [Show hidden columns during PDF Export]({% slug grid-pdf-show-hidden-columns %})
+* [Exclude Toolbar and Pager from Grid PDF Export]({% slug grid-export-pdf-without-toolbar-pager %})

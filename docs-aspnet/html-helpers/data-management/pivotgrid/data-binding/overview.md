@@ -1,7 +1,7 @@
 ---
 title: Data Binding
 page_title: Data Binding
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and learn about the OLAP cube configuration for performing Ajax data binding with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }}."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn about the OLAP cube configuration for performing Ajax data binding with the Telerik UI PivotGrid component for {{ site.framework }}."
 slug: databinding_pivotgridhelper_aspnetcore
 position: 1
 ---

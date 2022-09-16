@@ -1,7 +1,7 @@
 ---
 title: State Persistence
 page_title: State Persistence
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and persist the state of the widget."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and persist the state of the widget."
 slug: persiststate_grid_aspnetcore
 position: 10
 ---

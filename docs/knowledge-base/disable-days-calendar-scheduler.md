@@ -50,7 +50,7 @@ How to disable particular days&mdash;for example, Sundays&mdash; in the popup ca
             }
         ]
     });
-    var schedDateLink = $('ul.k-scheduler-navigation').find('.k-nav-current');
+    var schedDateLink = $('.k-scheduler-toolbar').find('.k-nav-current');
     schedDateLink.on('click', function() {
         setTimeout(function() {
             var schedCalendar = $('.k-scheduler-calendar.k-widget.k-calendar').data('kendoCalendar');

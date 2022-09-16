@@ -1,7 +1,7 @@
 ---
 title: Excel Export
 page_title: Excel Export
-description: "Learn how to export to an Excel file in the browser using the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
+description: "Learn how to export to an Excel file in the browser using the Telerik UI Spreadsheet component for {{ site.framework }}."
 slug: htmlhelpers_spreadsheet_export_to_excel_aspnetcore
 position: 2
 ---
@@ -26,7 +26,7 @@ The following image demonstrates the export of the Spreadsheet data to Excel.
 
 The Spreadsheet client-side API includes the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/saveasexcel) method for initiating the export with JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/excel#excel.fileName).
 
-```
+```HtmlHelper
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")
         .Excel(ex => ex.FileName("Order.xlsx"))

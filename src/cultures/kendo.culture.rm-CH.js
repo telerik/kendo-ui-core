@@ -51,13 +51,13 @@
                     t: "HH:mm",
                     T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
                 "/": "-",
                 ":": ":",
                 firstDay: 1
             }
         }
-    }
+    };
 })(this);

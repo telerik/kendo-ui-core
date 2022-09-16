@@ -41,15 +41,15 @@ The following example demonstrates how to create a custom editor in a Grid detai
     <script type="text/x-kendo-template" id="template">
     <div class="tabstrip">
         <ul>
-            <li class="k-state-active">Contact Information</li>
+            <li class="k-active">Contact Information</li>
             <li>Orders</li>
       </ul>
 
         <div>
             <div class='employee-details'>
-                First Name: <input type="text" data-bind="value:FirstName"/><br />
-                Last Name: <input type="text" data-bind="value:LastName"/><br />
-                Country: <input type="text" data-bind="value:Country"/><br />   
+                <span class="field-name">First Name: </span> <input type="text" class="k-input k-textbox k-input-solid k-input-md k-rounded-md" data-bind="value:FirstName"/><br />
+                <span class="field-name"> Last Name: </span> <input type="text" class="k-input k-textbox k-input-solid k-input-md k-rounded-md" data-bind="value:LastName"/><br />
+                <span class="field-name"> Country: </span> <input type="text" class="k-input k-textbox k-input-solid k-input-md k-rounded-md" data-bind="value:Country"/><br />   
 
       </div>
       </div>
@@ -149,6 +149,15 @@ The following example demonstrates how to create a custom editor in a Grid detai
         });
       }
     </script>
+    <style> 
+      .employee-details .k-input{
+        width:50%;        
+      }
+      .field-name{
+        width: 100px;
+        display: inline-block;
+      }
+    </style>
 
 ```
 

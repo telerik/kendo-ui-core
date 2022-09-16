@@ -1,7 +1,7 @@
 (function() {
     var DropDownList = kendo.ui.DropDownList,
         data = [{ text: "Foo", value: 1 }, { text: "Bar", value: 2 }],
-        SELECTED = "k-state-selected",
+        SELECTED = "k-selected",
         keys = kendo.keys,
         dropdownlist,
         input;
@@ -44,7 +44,7 @@
 
         it("change is not triggered on blur after value()", function() {
             dropdownlist = createDropDownList({
-                change: function () {
+                change: function() {
                     assert.isOk(false);
                 }
             });
@@ -71,7 +71,7 @@
             dropdownlist.select(1);
             dropdownlist.value("");
 
-            var selectedItems = dropdownlist.ul.children(".k-state-selected");
+            var selectedItems = dropdownlist.ul.children(".k-selected");
 
             assert.equal(selectedItems.length, 0);
         });
@@ -341,7 +341,7 @@
 
             dropdownlist.enable(false);
 
-            assert.isOk(dropdownlist._inputWrapper.hasClass('k-state-disabled'));
+            assert.isOk(dropdownlist.wrapper.hasClass('k-disabled'));
             assert.isOk(dropdownlist.element.attr("disabled"));
         });
 
@@ -350,7 +350,7 @@
 
             var oldOpen = dropdownlist.popup.toggle, called = false;
 
-            dropdownlist.popup.toggle = function() { called = true };
+            dropdownlist.popup.toggle = function() { called = true; };
 
             dropdownlist.enable(false);
 
@@ -391,14 +391,14 @@
             dropdownlist.wrapper.click();
         });
 
-        it("enable(true) removes k-state-disabled class", function() {
+        it("enable(true) removes k-disabled class", function() {
             dropdownlist = new DropDownList(input);
-            dropdownlist.wrapper.addClass('k-state-disabled');
+            dropdownlist.wrapper.addClass('k-disabled');
             dropdownlist.element.attr("disabled", true);
 
             dropdownlist.enable();
 
-            assert.isOk(!dropdownlist._inputWrapper.hasClass('k-state-disabled'));
+            assert.isOk(!dropdownlist.wrapper.hasClass('k-disabled'));
             assert.isOk(!dropdownlist.element.attr("disabled"));
         });
 
@@ -439,8 +439,7 @@
 
             assert.equal(dropdownlist.element.attr("readonly"), "readonly");
             assert.equal(dropdownlist.element.attr("disabled"), undefined);
-            assert.isOk(dropdownlist._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!dropdownlist._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!dropdownlist.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(false) removes readonly attribute and default class", function() {
@@ -451,8 +450,7 @@
 
             assert.equal(dropdownlist.element.attr("readonly"), undefined);
             assert.equal(dropdownlist.element.attr("disabled"), "disabled");
-            assert.isOk(!dropdownlist._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(dropdownlist._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(dropdownlist.wrapper.hasClass("k-disabled"));
         });
 
         it("enable() enables widget after readonly()", function() {
@@ -463,8 +461,7 @@
 
             assert.equal(dropdownlist.element.attr("readonly"), undefined);
             assert.equal(dropdownlist.element.attr("disabled"), undefined);
-            assert.isOk(dropdownlist._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!dropdownlist._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!dropdownlist.wrapper.hasClass("k-disabled"));
         });
 
         it("value method should return value of the INPUT", function() {
@@ -683,7 +680,7 @@
             dropdownlist.value("");
 
             assert.equal(dropdownlist.selectedIndex, 0);
-            assert.isOk(dropdownlist.ul.children(":first").hasClass("k-state-selected"));
+            assert.isOk(dropdownlist.ul.children(":first").hasClass("k-selected"));
         });
 
         it("value method selects item with null value", function() {
@@ -697,7 +694,7 @@
             dropdownlist.value(null);
 
             assert.equal(dropdownlist.selectedIndex, 0);
-            assert.isOk(dropdownlist.ul.children(":first").hasClass("k-state-selected"));
+            assert.isOk(dropdownlist.ul.children(":first").hasClass("k-selected"));
         });
 
         it("value method selects item when item field is string and value is number", function() {
@@ -710,7 +707,7 @@
             dropdownlist.value(2);
 
             assert.equal(dropdownlist.selectedIndex, 1);
-            assert.isOk(dropdownlist.ul.children(":last").hasClass("k-state-selected"));
+            assert.isOk(dropdownlist.ul.children(":last").hasClass("k-selected"));
         });
 
         it("value method supports boolean values", function() {
@@ -723,7 +720,7 @@
             dropdownlist.value(false);
 
             assert.equal(dropdownlist.selectedIndex, 1);
-            assert.isOk(dropdownlist.ul.children(":last").hasClass("k-state-selected"));
+            assert.isOk(dropdownlist.ul.children(":last").hasClass("k-selected"));
         });
 
         it("value() returns value of the OPTION element", function() {
@@ -1050,6 +1047,24 @@
             assert.isOk(!dropdownlist.list.find(".k-textbox")[0]);
         });
 
+        it("setOptions does not duplicate filter container", function() {
+            dropdownlist = new DropDownList(input, {
+                dataSource: ["item1", "item2"],
+                filter: "startswith",
+                animation: false
+            });
+
+            dropdownlist.open();
+
+            dropdownlist.setOptions({
+                filter: "contains"
+            });
+
+            dropdownlist.open();
+
+            assert.equal(dropdownlist.list.parent().find(".k-list-filter").length, 1);
+        });
+
         it("setOptions does not render more than one input", function() {
             dropdownlist = new DropDownList(input, {
                 dataSource: ["item1", "item2"],
@@ -1060,7 +1075,7 @@
 
             var list = dropdownlist.list;
 
-            assert.equal(list.find(".k-textbox").length, 1);
+            assert.equal(list.parent().find(".k-searchbox").length, 1);
         });
 
         it("setOptions hides option optionLabel", function() {
@@ -1128,7 +1143,7 @@
             var current = dropdownlist.current();
 
             assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.isOk(current.hasClass("k-state-selected"));
+            assert.isOk(current.hasClass("k-selected"));
             assert.equal(dropdownlist.text(), "Select...");
         });
 
@@ -1202,7 +1217,7 @@
 
             dropdownlist.open();
 
-            assert.isOk(dropdownlist.ul.children().first().hasClass("k-state-focused"));
+            assert.isOk(dropdownlist.ul.children().first().hasClass("k-focus"));
         });
 
         it("Open popup when option label is defined", function() {

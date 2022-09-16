@@ -8,7 +8,7 @@
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key });
-            }
+            };
             input = $("<input />").appendTo(Mocha.fixture);
             select = $("<select></select>").appendTo(Mocha.fixture);
         });
@@ -32,7 +32,7 @@
 
             dropdownlist._change = function() {
                 changeWasCalled = true;
-            }
+            };
 
             dropdownlist._blur();
 
@@ -133,7 +133,7 @@
             dropdownlist.setDataSource(["foo", "bar"]);
             dropdownlist.setOptions({
                 change: function() {
-                    counter++
+                    counter++;
                 }
             });
 
@@ -154,6 +154,31 @@
 
             dropdownlist.selectedIndex = 1;
             dropdownlist.wrapper.focus().focusout();
+        });
+
+        it("change event is triggered after dataSource sort", function() {
+            var counter = 0;
+            var dropdownlist = new DropDownList(select, {
+                dataSource: ["Apples", "Oranges", "Bananas"],
+                change: function() {
+                    counter++;
+                }
+            });
+
+            dropdownlist.value("Oranges");
+            dropdownlist._old = "";
+            dropdownlist._change();
+
+            dropdownlist.value("Bananas");
+            dropdownlist._old = "Oranges";
+            dropdownlist._change();
+
+            dropdownlist.dataSource.sort({ dir: "asc" });
+
+            dropdownlist.open();
+            dropdownlist.ul.find("li:last").click();
+
+            assert.equal(counter, 3);
         });
 
         it("support setting a value in change event handler", function() {
@@ -429,7 +454,7 @@
             var dropdownlist = input.kendoDropDownList({
                 dataSource: ["foo", "bar"],
                 select: function(e) {
-                    e.preventDefault()
+                    e.preventDefault();
                 }
             }).data("kendoDropDownList");
 
@@ -438,9 +463,9 @@
 
             var current = dropdownlist.current();
 
-            assert.isOk(current.hasClass("k-state-focused"));
-            assert.isOk(current.hasClass("k-state-selected"));
-            assert.equal(current.html(), "foo");
+            assert.isOk(current.hasClass("k-focus"));
+            assert.isOk(current.hasClass("k-selected"));
+            assert.equal(current.text(), "foo");
         });
 
         it("shouldn't trigger select when value has not changed (TAB)", function() {

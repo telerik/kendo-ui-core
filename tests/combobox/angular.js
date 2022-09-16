@@ -1,10 +1,10 @@
-(function () {
-    describe("ComboBox AngularJS integration", function () {
+(function() {
+    describe("ComboBox AngularJS integration", function() {
         afterEach(function() {
              kendo.destroy(Mocha.fixture);
         });
 
-    ngTest("combobox recognizes selected primitive items with k-ng-model", 
+    ngTest("combobox recognizes selected primitive items with k-ng-model",
         function() {
             angular.module("kendo.tests").controller("mine", function($scope) {
                 $scope.colors = [ "red", "green", "blue" ];

@@ -7,21 +7,28 @@ slug: htmlhelpers_sortable_aspnetcore
 position: 1
 ---
 
-# Sortable HtmlHelper Overview
+# Sortable Overview
 
+{% if site.core %}
+The Telerik UI Sortable TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Sortable widget.
+{% else %}
 The Telerik UI Sortable HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Sortable widget.
+{% endif %}
 
 The Sortable provides a sortable drag-and-drop functionality to elements within a list.
 
-* [Demo page for the Sortable](https://demos.telerik.com/{{ site.platform }}/sortable/index)
+* [Demo page for the Sortable HtmlHelper](https://demos.telerik.com/{{ site.platform }}/sortable/index)
+{% if site.core %}
+* [Demo page for the Sortable TagHelper](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
+{% endif %}
 
 ## Initializing the Sortable
 
-Unlike most of the HtmlHelpers, the Sortable does not render HTML markup. You have to initialize the Sortable HtmlHelper for an already existing DOM element.
+Unlike most of the Telerik UI components, the Sortable does not render HTML markup. You have to initialize the Sortable for an already existing DOM element.
 
-The following example demonstrates a basic declaration of a Sortable widget using the Sortable HtmlHelper. The widget is initialized for the `sortable-basic` element making its list items sortable.
+The following example demonstrates a basic declaration of a Sortable widget. The widget is initialized for the `sortable-basic` element making its list items sortable.
 
-```
+```HtmlHelper
       <ul id="sortable-basic">
           <li class="sortable">Papercut <span>3:04</span></li>
           <li class="sortable">One Step Closer <span>2:35</span></li>
@@ -47,6 +54,27 @@ The following example demonstrates a basic declaration of a Sortable widget usin
           }
       </script>
 ```
+{% if site.core %}
+```TagHelper
+    <ul id="sortable-basic">
+          <li class="sortable">Papercut <span>3:04</span></li>
+          <li class="sortable">One Step Closer <span>2:35</span></li>
+          <li class="sortable">With You <span>3:23</span></li>
+    </ul>
+    <kendo-sortable name="sortable-basic" hint="hint"  placeholder="placeholder">
+    </kendo-sortable>
+    <script>
+          // Define the hint handler.
+          function hint(element) {
+              return element.clone().addClass("hint");
+          }
+          // Define the placeholder handler.
+          function placeholder(element) {
+              return element.clone().addClass("placeholder").text("drop here");
+          }
+    </script>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -65,7 +93,7 @@ You can subscribe to all Sortable [events](/api/sortable). For a complete exampl
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
     <ul id="sortable">
         <li>Item 1</li>
         <li>Item 2</li>
@@ -94,12 +122,38 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+     <ul id="sortable">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <kendo-sortable name="sortable" on-start="onStart" on-change="onChange">
+    </kendo-sortable>
+    <script>
+        function onStart(e) {
+            var id = e.sender.element.attr("id");
+            kendoConsole.log(id + " start: " + e.item.text());
+        }
+
+        function onChange(e) {
+            var id = e.sender.element.attr("id"),
+                text = e.item.text(),
+                newIndex = e.newIndex,
+                oldIndex = e.oldIndex;
+
+            kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
+        }
+    </script>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```
+```HtmlHelper
     <ul id="sortable">
         <li>Item 1</li>
         <li>Item 2</li>
@@ -139,4 +193,7 @@ To reference an existing Telerik UI Sortable instance, use the [`jQuery.data()`]
 ## See Also
 
 * [Basic Usage of the Sortable HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sortable/index)
+{% if site.core %}
+* [Basic Usage of the Sortable TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
+{% endif %}
 * [Server-Side API](/api/sortable)

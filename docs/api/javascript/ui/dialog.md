@@ -95,6 +95,31 @@ A boolean property indicating whether the action button will be decorated as pri
         });
     </script>
 
+### actions.cssClass `String`
+
+Adds a custom class to the action button.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [{
+              text: "OK",
+              primary: true,
+              cssClass: "myClass"
+          }]
+        });
+    </script>
+	
+	  <style>
+		  .myClass{
+			  background-color: green !important;
+		  }
+	  </style>
+
 ### animation `Boolean|Object`
 
 A collection of {Animation} objects, used to change default animations. A value of `false` will disable all animations in the widget.
@@ -541,12 +566,18 @@ Possible values are:
     $("#dialog").kendoDialog({
       title: "Kendo Dialog Component",
       content: "This is your Kendo Dialog.",
-      size: "wide"
+      size: "medium"
     });
     </script>
 
 ## Methods
 
+### center
+
+Centers the Dialog within the viewport.
+#### Returns
+
+`kendo.ui.Dialog` - Returns the Dialog object to support chaining. 
 ### close
 
 Closes a Dialog.
@@ -591,6 +622,7 @@ The content of the Dialog. Can be an HTML string or jQuery object.
       title: "Kendo Dialog Component",
     });
     var dialog = $("#dialog").data("kendoDialog");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dialog.content()); // logs "foo"
     </script>
 
@@ -615,10 +647,12 @@ Destroys the dialog and its modal overlay, if necessary. Removes the widget HTML
     <script>
     $("#dialog").kendoDialog({
       title: "Kendo Dialog Component",
-      content: "This is your Kendo Dialog.",
+      content: "The Dialog will be destroyed in a few seconds...",
     });
-    var dialog = $("#dialog").data("kendoDialog");
-    dialog.destroy();
+    setTimeout(function(){
+        var dialog = $("#dialog").data("kendoDialog");
+        dialog.destroy();
+    }, 1500)
     </script>
 
 ### open

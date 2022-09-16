@@ -8,9 +8,29 @@ component: scrollview
 
 # kendo.ui.ScrollView
 
-Represents the Kendo UI ScrollView widget. Inherits from [kendo.ui.Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ScrollView widget. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
+
+### ARIATemplate `String`*(default: "Item #=data.index# of #=data.total#")*
+
+Specifies a template is used to populate an aria-live element that anounces which is the current item.
+
+#### Example
+
+    <div id="scrollView" style="height: 500px;">
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+    </div>
+
+    <script>
+    $("#scrollView").kendoScrollView({
+        navigatable: true,
+        ARIATemplate: "Item #=data.index#",
+		    contentHeight: "100%"
+    });
+    </script>
 
 ### autoBind `Boolean`*(default: true)*
 
@@ -102,37 +122,68 @@ An instance of a DataSource to which the ScrollView will be bound.
 
 #### Example - binding the ScrollView to a remote DataSource
 
-    <div id="scrollView" style="height: 500px; width:600px;"></div>
-
+    <div id="scrollView" style="height: 500px; width:100%;"></div>
     <script id="scrollview-template" type="text/x-kendo-template">
-      <div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"></div>
-      <p>#= ProductName #</p>
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+         # } #
+        </div>
     </script>
-
     <script>
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            },
+            serverPaging: true,
+            pageSize: 3
+        });
 
-    var dataSource = new kendo.data.DataSource({
-      type: "odata",
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        $("#scrollView").kendoScrollView({
+            dataSource: dataSource,
+            template: $("#scrollview-template").html(),
+            contentHeight: "100%",
+            enablePager: true
+        });
+
+        function setBackground(id) {
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
         }
-      },
-      serverPaging: true,
-      pageSize: 30
-    });
-
-    $("#scrollView").kendoScrollView({
-        dataSource: dataSource,
-        template: $("#scrollview-template").html(),
-        contentHeight: 120,
-        enablePager: true
-    });
-
-    function setBackground(id) {
-      return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
-    }
     </script>
+    <style>
+        div.k-scrollview ul.k-scrollview-wrap > li {
+            text-align: center;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper {
+            padding: 2em;
+            display: table-cell;
+            vertical-align: middle;
+            white-space: initial;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div {
+            width: 30%;
+            min-width: 150px;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 1em;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div > div {
+            margin: auto;
+            margin-bottom: 0.5em;
+        }
+    </style>
 
 ### duration `Number`*(default: 400)*
 
@@ -149,7 +200,7 @@ The duration (in milliseconds) for the ScrollView to snap to the current page af
     <script>
     $("#scrollView").kendoScrollView({
         duration: "800",
-		contentHeight: "100%"
+		    contentHeight: "100%"
     });
     </script>
 
@@ -193,7 +244,7 @@ The template for rendering the pages without content. By default, the ScrollView
         dataSource: dataSource,
         template: "scrollview-template",
         emptyTemplate: "scrollview-empty",
-		contentHeight: "100%"
+		    contentHeight: "100%"
     });
     </script>
 
@@ -201,7 +252,241 @@ The template for rendering the pages without content. By default, the ScrollView
 
 If set to `true`, the ScrollView will display a pager. By default, the pager is enabled.
 
+> **Note:** The property has a lower priority than the [`pageable`](/api/javascript/ui/scrollview/configuration/pageable) property.
+
 #### Example - turning off the pager in a ScrollView in the data-bound mode
+
+    <div id="scrollView" style="height: 500px; width:100%;"></div>
+    <script id="scrollview-template" type="text/x-kendo-template">
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+         # } #
+        </div>
+    </script>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            },
+            serverPaging: true,
+            pageSize: 3
+        });
+
+        $("#scrollView").kendoScrollView({
+            dataSource: dataSource,
+            template: $("#scrollview-template").html(),
+            contentHeight: "100%",
+            enablePager: false
+        });
+
+        function setBackground(id) {
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
+        }
+    </script>
+    <style>
+        div.k-scrollview ul.k-scrollview-wrap > li {
+            text-align: center;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper {
+            padding: 2em;
+            display: table-cell;
+            vertical-align: middle;
+            white-space: initial;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div {
+            width: 30%;
+            min-width: 150px;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 1em;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div > div {
+            margin: auto;
+            margin-bottom: 0.5em;
+        }
+    </style>
+
+### messages `Object`
+
+Defines the messages that are set as aria-lables for the previous and next buttons.
+
+#### Example
+
+    <div id="scrollView" style="height: 500px;">
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+    </div>
+
+    <script>
+    $("#scrollView").kendoScrollView({
+        navigatable: true,
+        messages: {
+          previousButtonLabel: "prev",
+          nextButtonLabel: "next"
+        },
+		    contentHeight: "100%"
+    });
+    </script>
+
+### messages.nextButtonLabel `String`*(default: "Next")*
+
+Defines the aria-label for the next button.
+
+#### Example - setting the nextButtonLabel
+
+    <div id="scrollView" style="height: 500px;">
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+    </div>
+
+    <script>
+    $("#scrollView").kendoScrollView({
+        navigatable: true,
+        messages: {
+          nextButtonLabel: "Next button"
+        },
+		    contentHeight: "100%"
+    });
+    </script>
+
+### messages.pagerLabel `String`*(default: "ScrollView pager")*
+
+Defines the aria-label for the pager.
+
+> **Note:** Will render the label only if paging and keyboard navigation are enabled.
+
+#### Example - setting the pagerLabel
+
+    <div id="scrollView" style="height: 500px; width:100%;"></div>
+    <script id="scrollview-template" type="text/x-kendo-template">
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+         # } #
+        </div>
+    </script>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            },
+            serverPaging: true,
+            pageSize: 3
+        });
+
+        $("#scrollView").kendoScrollView({
+            dataSource: dataSource,
+            messages: {
+              pagerLabel: "Control pager"
+            },
+            navigatable: true,
+            template: $("#scrollview-template").html(),
+            contentHeight: "100%",
+            enablePager: false
+        });
+
+        function setBackground(id) {
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
+        }
+    </script>
+    <style>
+        div.k-scrollview ul.k-scrollview-wrap > li {
+            text-align: center;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper {
+            padding: 2em;
+            display: table-cell;
+            vertical-align: middle;
+            white-space: initial;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div {
+            width: 30%;
+            min-width: 150px;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 1em;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div > div {
+            margin: auto;
+            margin-bottom: 0.5em;
+        }
+    </style>
+
+### messages.previousButtonLabel `String`*(default: "Previous")*
+
+Defines the aria-label for the previous button.
+
+#### Example - setting the previousButtonLabel
+
+    <div id="scrollView" style="height: 500px;">
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+    </div>
+
+    <script>
+    $("#scrollView").kendoScrollView({
+        navigatable: true,
+        messages: {
+          previousButtonLabel: "Prev button"
+        }
+		    contentHeight: "100%"
+    });
+    </script>
+
+### navigatable `Boolean`*(default: false)*
+
+If set to true enables the built-in keyboard navigation
+
+#### Example - increasing the duration of the snap transition
+
+    <div id="scrollView" style="height: 500px;">
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+      <div data-role="page">This page will stretch to fit the entire view height</div>
+    </div>
+
+    <script>
+    $("#scrollView").kendoScrollView({
+        navigatable: true,
+		    contentHeight: "100%"
+    });
+    </script>
+
+### pageable `Boolean|Object` *(default: false)*
+
+If set to `true` the grid will display a pager. By default paging is disabled.
+
+Can be set to a JavaScript object which represents the pager configuration.
+
+#### Example
 
     <div id="scrollview"></div>
 
@@ -214,7 +499,45 @@ If set to `true`, the ScrollView will display a pager. By default, the pager is 
     $("#scrollView").kendoScrollView({
         dataSource: dataSource,
         template: "scrollview-template",
-        enablePager: false,
+        pageable: true,
+        contentHeight: "120px"
+    });
+
+    var dataSource = new kendo.data.DataSource({
+      type: "odata",
+      transport: {
+        read: {
+          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        }
+      },
+      serverPaging: true
+    });
+
+    function setBackground(id) {
+      return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+    }
+    </script>
+
+### pageable.ARIATemplate `String`*(default: "Item #=data.index#")*
+
+Specifies a template is used to populate the aria-label for each pager element.
+
+#### Example
+
+    <div id="scrollview"></div>
+
+    <script id="scrollview-template" type="text/x-kendo-template">
+      <div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"></div>
+      <p>#= ProductName #</p>
+    </script>
+
+    <script>
+    $("#scrollView").kendoScrollView({
+        dataSource: dataSource,
+        template: "scrollview-template",
+        pageable: {
+          ARIATemplate: "Image #=data.index#"
+        },
         contentHeight: "120px"
     });
 
@@ -457,27 +780,24 @@ Sets the DataSource of an existing ScrollView and rebinds it.
 
 #### Example
 
-
-	<div id="scrollview" style="height: 150px;"></div>
-	<script id="tmp" type="text/x-kendo-template">
+    <div id="scrollview" style="height: 150px;"></div>
+    <script id="tmp" type="text/x-kendo-template">
 		<div>#: foo #</div>
-	</script>
-	<script>
-    var ds = new kendo.data.DataSource({
+    </script>
+    <script>
+      var ds = new kendo.data.DataSource({
         data: [{ foo: 1 }, { foo: 2 }]
-    });
+      });
 
-    var scrollView = $("#scrollview").kendoScrollView({
+      var scrollView = $("#scrollview").kendoScrollView({
         dataSource: ds,
         template: $("#tmp").html()
-    }).data().kendoScrollView;
+      }).data().kendoScrollView;
 
-    scrollView.setDataSource(new kendo.data.DataSource({
+      scrollView.setDataSource(new kendo.data.DataSource({
         data: [{ foo: 3 }, { foo: 4 }]
-    }));
-
-
-</script>
+      }));
+    </script>
 
 ## Events
 
@@ -545,6 +865,7 @@ If invoked, prevents the change action.
     }
 
     function change(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("page ", e.page, "data: ", e.data);
       //handle event
     }
@@ -585,6 +906,7 @@ If invoked, prevents the `change` event. The ScrollView stays on the current pag
     });
 
     function refresh(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Total: ", e.pageCount, " Current: ", e.page);
       //handle event
     }

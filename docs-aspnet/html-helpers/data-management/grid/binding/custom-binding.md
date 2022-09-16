@@ -1,10 +1,10 @@
 ---
 title: Custom Binding
 page_title: Custom Binding
-description: "Learn how to implement custom binding with Telerik UI Grid HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement custom binding with Telerik UI Grid component for {{ site.framework }}."
 previous_url: /helpers/grid/custom-binding, /helpers/data-management/grid/custom-binding, /helpers/data-management/grid/binding/custom-binding
 slug: custombinding_grid_aspnetmvc
-position: 5
+position: 7
 ---
 
 # Custom Binding
@@ -121,6 +121,7 @@ The Grid provides options for setting {% if site.mvc %}[custom server-binding](#
 
 1. Set `EnableCustomBinding(true)` through the Grid widget declaration.
 
+```HtmlHelper
         @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
 
         @(Html.Kendo().Grid(Model)
@@ -134,6 +135,8 @@ The Grid provides options for setting {% if site.mvc %}[custom server-binding](#
             .Sortable()
             .Scrollable()
         )
+```
+
 
 1. If paging is enabled, assign the total number of records through the `DataSource`.
 
@@ -258,6 +261,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 1. Configure the Grid for custom Ajax binding.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<KendoGridCustomAjaxBinding.Models.Order>()
             .Name("Grid")
             .EnableCustomBinding(true)
@@ -273,6 +277,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
                 .Read("Orders_Read", "Home")
             )
         )
+    ```
 
 {% if site.mvc %}
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-ajax-binding).

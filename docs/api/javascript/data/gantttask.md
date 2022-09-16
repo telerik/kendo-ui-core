@@ -112,6 +112,40 @@ The completion percentage of the task. A value between 0 and 1 representing how 
     });
     </script>
 
+### plannedEnd `Date`
+
+The date at which the Gantt task ends as per the planned schedule. The `plannedEnd` date is mandatory when rendering the [Planned vs Actual](/api/javascript/ui/gantt/configuration/showplannedtasks) view in the Gantt.
+
+#### Example - set the plannedEnd date of a task
+
+    <script>
+    var task = new kendo.data.GanttTask({
+        id: 1,
+        title: "Task1",
+        plannedStart: new Date("2014/6/17 9:00"),
+        plannedEnd: new Date("2014/6/17 10:00"),
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+    });
+    </script>
+
+### plannedStart `Date`
+
+The date at which the Gantt task starts as per the planned schedule. The `plannedStart` date is mandatory when rendering the [Planned vs Actual](/api/javascript/ui/gantt/configuration/showplannedtasks) view in the Gantt.
+
+#### Example - set the plannedStart date of a task
+
+    <script>
+    var task = new kendo.data.GanttTask({
+        id: 1,
+        title: "Task1",
+        plannedStart: new Date("2014/6/17 9:00"),
+        plannedEnd: new Date("2014/6/17 10:00"),
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+    });
+    </script>
+
 ### start `Date`
 
 The date at which the Gantt task starts. The `start` date is mandatory.
@@ -173,6 +207,7 @@ The date at which the Gantt task ends.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.end); // outputs the end date
     </script>
 
@@ -190,6 +225,7 @@ If set to `true`, the task is expanded and the tasks of its child are visible.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.expanded); // outputs "false"
     </script>
 
@@ -206,6 +242,7 @@ The unique identifier of the task.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.id); // outputs "1"
     </script>
 
@@ -223,6 +260,7 @@ The position of the task relative to its sibling tasks.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.orderId); // outputs "0"
     </script>
 
@@ -247,6 +285,7 @@ The `id` of the parent task.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.parentId); // outputs "1"
     </script>
 
@@ -264,6 +303,7 @@ The completion percentage of the task.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.percentComplete); // outputs "0.55"
     </script>
 
@@ -280,6 +320,7 @@ The date at which the Gantt task starts.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.start); // outputs the start date
     </script>
 
@@ -297,6 +338,7 @@ If set to `true`, the task has child tasks.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.summary); // outputs "true"
     </script>
 
@@ -313,6 +355,7 @@ The title of the task which is displayed by the Gantt widget.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.title); // outputs "Task1"
     </script>
 
@@ -410,6 +453,7 @@ Returns the Gantt task length in milliseconds.
         end: new Date("2014/6/17 11:00")
     });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.duration());
     </script>
 
@@ -431,6 +475,7 @@ Checks whether the event has zero duration.
         end: new Date("2014/6/17 9:00")
     });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.isMilestone()); //logs 'true'
     </script>
 

@@ -3,7 +3,7 @@
 var Calendar = kendo.ui.Calendar;
 var dom;
 
-describe("kendo.ui.Calendar MVVM", function () {
+describe("kendo.ui.Calendar MVVM", function() {
     beforeEach(function() {
 
 
@@ -119,7 +119,7 @@ it("updating model value updates the UI", function() {
     dom.kendoCalendar();
 
     var value = new Date(2011, 1, 2);
-    observable.set("value", value)
+    observable.set("value", value);
     assert.equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
 });
 
@@ -155,7 +155,7 @@ it("change event is raised if attached as option", function() {
     dom = $('<div data-role="calendar" data-change="change" />');
 
     var observable = kendo.observable({
-        items: [{text:"foo"}, {text:"bar"}]
+        items: [{ text: "foo" }, { text: "bar" }]
     });
 
     kendo.bind(dom, observable);
@@ -166,7 +166,7 @@ it("change event is raised if attached as option to a already initialized calend
     dom = $('<div data-change="change" />').kendoCalendar();
 
     var observable = kendo.observable({
-        items: [{text:"foo"}, {text:"bar"}]
+        items: [{ text: "foo" }, { text: "bar" }]
     });
 
     kendo.bind(dom, observable);

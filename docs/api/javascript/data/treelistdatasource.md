@@ -90,6 +90,7 @@ The model that must be loaded.
         // log child nodes of first root
         var root = dataSource.at(0);
         var children = dataSource.childNodes(root);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(children);
       });
     </script>
@@ -129,6 +130,7 @@ The model whose children must be returned.
 
       var firstNode = dataSource.view()[0];
       var childNodes = dataSource.childNodes(firstNode);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(childNodes); // returns an array of the child nodes of the first node
     </script>
 
@@ -160,6 +162,7 @@ Return all root nodes.
       dataSource.read();
 
       var rootNodes = dataSource.rootNodes();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(rootNodes); // returns an array of the root nodes
     </script>
 
@@ -198,6 +201,7 @@ The model whose parent must be returned.
 
       var childNode = dataSource.view()[1];
       var parentNode = dataSource.parentNode(childNode);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(parentNode); // returns the parent node of the passed node
     </script>
 
@@ -237,6 +241,7 @@ The model whose level must be calculated.
         },
         change: function(e){
           var item = dataSource.get(9);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Employee with name " + item.FirstName + "is at level: " + dataSource.level(item));
         }
       });

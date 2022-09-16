@@ -7,23 +7,66 @@ slug: htmlhelpers_numerictextbox_aspnetcore
 position: 1
 ---
 
-# NumericTextBox HtmlHelper Overview
+# NumericTextBox Overview
 
+{% if site.core %}
+The Telerik UI NumericTextBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DatNumericTextBoxaSource widget.
+{% else %}
 The Telerik UI NumericTextBox HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI NumericTextBox widget.
+{% endif %}
 
 The NumericTextBox allows the user to select numeric values through direct input or using spinner buttons.
 
-* [Demo page for the NumericTextBox](https://demos.telerik.com/{{ site.platform }}/numerictextbox/index)
+* [Demo page for the NumericTextBox HtmlHelper](https://demos.telerik.com/{{ site.platform }}/numerictextbox/index)
+{% if site.core %}
+* [Demo page for the NumericTextBox TagHelper](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
+{% endif %}
 
 ## Initializing the NumericTextBox
 
 The following example demonstrates the basic configuration for the NumericTextBox.
 
-```
+```HtmlHelper
     @(Html.Kendo().NumericTextBox()
           .Name("numerictextbox") // The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
+          .Min(-100) // Set the min value of the NumericTextBox.
+          .Max(100) // Set the min value of the NumericTextBox.
+          .Value(10) // Set the value of the NumericTextBox.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-numerictextbox name="numerictextbox"
+                      min="-100"
+                      max="100"
+                      value="10">
+    </kendo-numerictextbox>
+```
+{% endif %}
+
+{% if site.core %}
+## Basic Configuration
+
+The NumericTextBox configuration options are passed as attributes.
+
+```HtmlHelper
+
+        @(Html.Kendo().NumericTextBox<decimal>()
+            .Name("currency")
+            .Format("c")
+            .Min(0)
+            .Enable(true)
+            .Max(100)
+            .Value(30)
+        )
+```
+```TagHelper
+
+        <kendo-numerictextbox name="currency" format="c" min="0"
+            enable="true" max="100" value="30">
+        </kendo-numerictextbox>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -38,7 +81,7 @@ You can subscribe to all NumericTextBox events. For a complete example on basic 
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
     @(Html.Kendo().NumericTextBox()
           .Name("numerictextbox")
           .Events(e => e
@@ -46,7 +89,17 @@ The following example demonstrates how to subscribe to events by a handler name.
                 .Spin("numerictextbox_spin")
           )
     )
-    <script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-numerictextbox name="numerictextbox"
+                      on-change="numerictextbox_change"
+                      on-spin="numerictextbox_spin">
+    </kendo-numerictextbox>
+```
+{% endif %}
+```script
+<script>
     function numerictextbox_spin() {
         // Handle the spin event.
     }
@@ -54,7 +107,29 @@ The following example demonstrates how to subscribe to events by a handler name.
     function numerictextbox_change() {
         // Handle the change event.
     }
-    </script>
+</script>
+```
+
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+```HtmlHelper
+    @(Html.Kendo().NumericTextBox()
+        .Name("numerictextbox")
+        .Events(e => e
+            .Change(@<text>
+                function() {
+                    // Handle the change event inline.
+                }
+            </text>)
+            .Spin(@<text>
+                function() {
+                    // Handle the spin event inline.
+                }
+            </text>)
+        )
+    )
 ```
 
 ## Referencing Existing Instances
@@ -65,11 +140,18 @@ Once a reference is established, use the [NumericTextBox client-side API](https:
 
 The following example demonstrates how to get a reference to an existing instance.
 
-```
+```HtmlHelper
     @(Html.Kendo().NumericTextBox()
           .Name("numerictextbox") // The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the helper.
     )
-
+```
+{% if site.core %}
+```TagHelper
+<kendo-numerictextbox name="numerictextbox">
+</kendo-numerictextbox>
+```
+{% endif %}
+```script
     <script>
         var numericTextBox = $('#numerictextbox').data('kendoNumericTextBox'); // numericTextBox is a reference to the instance of the helper.
     </script>
@@ -78,6 +160,9 @@ The following example demonstrates how to get a reference to an existing instanc
 ## See Also
 
 * [Basic Usage by the NumericTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/index)
+{% if site.core %}
+* [Basic Usage of the NumericTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
+{% endif %}
 * [Using the API of the NumericTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/api)
 * [Known Limitations of the NumericTextBox HtmlHelper for {{ site.framework }}]({% slug limitations_numerictextbox_aspnetcore %})
 * [Server-Side API](/api/numerictextbox)

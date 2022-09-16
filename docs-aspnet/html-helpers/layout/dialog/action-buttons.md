@@ -1,7 +1,7 @@
 ---
 title: Action Buttons
 page_title: Action Buttons
-description: "Learn about the Action Buttons of the Telerik UI Dialog HtmlHelper for {{ site.framework }}."
+description: "Learn about the Action Buttons of the Telerik UI Dialog component for {{ site.framework }}."
 slug: action_buttons_dialoghelper_aspnetcore
 position: 3
 ---
@@ -14,6 +14,7 @@ Each button has a text and an action handler attached to it. Generally, each but
 
 The following example demonstrates how to set three action buttons in a Dialog with a `stretched` layout. The last button has an `Action()` event handler attached and is set as `Primary(true)`.
 
+```HtmlHelper
     @(Html.Kendo().Dialog()
         .Name("dialog")
         .Title("Software Update")
@@ -36,6 +37,33 @@ The following example demonstrates how to set three action buttons in a Dialog w
             return true;
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+  <kendo-dialog name="dialog" title="Software Update" width="400" modal="false">
+        <actions>
+            <action text="Skip this version">
+            </action>
+            <action text="Remind me later">
+            </action>
+            <action text="Install update" primary="true" action="onInstall">
+            </action>
+        </actions>
+        <content>
+            <p>A new version of <strong>Kendo UI</strong> is available. Would you like to download and install it now?</p>
+        </content>
+    </kendo-dialog>
+
+    <script type="text/javascript">
+        function onInstall(e) {
+            alert("Install update action was clicked");
+            // Returning false will prevent the closing of the dialog.
+            return true;
+        }
+    </script>
+
+```
+{% endif %}
 
 ## See Also
 

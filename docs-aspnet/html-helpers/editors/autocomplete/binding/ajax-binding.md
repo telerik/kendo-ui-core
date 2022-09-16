@@ -1,7 +1,7 @@
 ---
 title:  Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax Binding with Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Ajax Binding with Telerik UI AutoComplete component for {{ site.framework }}."
 previous_url: /helpers/editors/autocomplete/binding/ajax-binding
 slug: htmlhelpers_autocomplete_ajaxbinding_aspnetcore
 position: 2
@@ -35,22 +35,37 @@ The AutoComplete provides support for remote data binding by using a `DataSource
 
 1. Add the AutoComplete to the view and configure its DataSource to use remote data.
 
-            @model MvcApplication1.Models.ProductViewModel
+```HtmlHelper
+    @model MvcApplication1.Models.ProductViewModel
 
-            @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
-                .Filter("contains")
-                .DataTextField("ProductName")
-                .Placeholder("Select product...")
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetProductsAjax", "Home");
-                    })
-                    .ServerFiltering(false);
-                })
-            )
-
+    @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
+        .Filter("contains")
+        .DataTextField("ProductName")
+        .Placeholder("Select product...")
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("GetProductsAjax", "Home");
+            })
+            .ServerFiltering(false);
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-autocomplete for="products" style="width:100%"
+            dataTextField="ProductName"
+            placeholder="Select product..."
+            filter="FilterType.Contains">
+            <datasource type="DataSourceTagHelperType.Custom" server-filtering="false">
+                <transport>
+                    <read url="@Url.Action("GetProductsAjax", "Home")" />
+                </transport>
+            </datasource>
+    </kendo-autocomplete>
+```
+{% endif %}
 ## See Also
 
 * [Local Data Binding]({% slug htmlhelpers_autocomplete_serverbinding_aspnetcore %})

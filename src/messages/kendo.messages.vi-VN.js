@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -855,10 +855,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Văn bản kết thúc với"
     },
     "date": {
-      "eq":  "Là ngày",
+      "eq": "Là ngày",
       "neq": "Ngày khác",
-      "lt":  "Này trước đó",
-      "gt":  "Ngày sau đó"
+      "lt": "Này trước đó",
+      "gt": "Ngày sau đó"
     },
     "number": {
       "eq": "Bằng với",
@@ -1047,7 +1047,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Lựa chọn tập tin...",
   "cancel": "Hủy",

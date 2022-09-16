@@ -59,11 +59,11 @@ The following example demonstrates how to select multiple rows by using the chec
         },
         change: function(e) {
           $('tr').find('[type=checkbox]').prop('checked', false);
-          $('tr.k-state-selected').find('[type=checkbox]').prop('checked', true);
+          $('tr.k-selected').find('[type=checkbox]').prop('checked', true);
         },
         columns: [{
             title: "select",
-            template: '<input class="checkbox" type="checkbox" />'
+            template: '<input class="k-checkbox k-checkbox-md k-rounded-md" type="checkbox" />'
           },
           { field: "id" },
           { field: "foo" },
@@ -72,7 +72,7 @@ The following example demonstrates how to select multiple rows by using the chec
         dataBound: function (e) {
           $(".checkbox").bind("click", function (e) {
             e.stopPropagation();
-            $(e.target).closest("tr").toggleClass("k-state-selected");
+            $(e.target).closest("tr").toggleClass("k-selected");
           });
 
           var rows = e.sender.element.find("tr");
@@ -86,8 +86,8 @@ The following example demonstrates how to select multiple rows by using the chec
         e.stopPropagation();
         var tr = $(e.target).closest("tr");
 
-        tr.find('[type=checkbox]').prop('checked', !tr.hasClass("k-state-selected"));
-        tr.toggleClass("k-state-selected");
+        tr.find('[type=checkbox]').prop('checked', !tr.hasClass("k-selected"));
+        tr.toggleClass("k-selected");
       }
     </script>
 ```

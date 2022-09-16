@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: Hybrid ScrollView Documentation | Appearance | Kendo UI
+page_title: Hybrid ScrollView Documentation | Appearance
 description: "Get started with the Hybrid ScrollView by Kendo UI and set its pager overlay in the Nova theme."
 slug: appearance_hybridscrollview
 position: 5

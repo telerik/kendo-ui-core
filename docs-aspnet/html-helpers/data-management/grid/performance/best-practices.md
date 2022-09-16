@@ -1,7 +1,7 @@
 ---
 title: Best Practices
 page_title: Best Practices
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn which the best practices for boosting its performance are."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn which the best practices for boosting its performance are."
 slug: bestpractice_aspnetcore_grid
 position: 1
 ---

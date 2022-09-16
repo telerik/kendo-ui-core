@@ -1,21 +1,22 @@
 ---
 title:  Overview
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI DropDownTree HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI DropDownTree component for {{ site.framework }}."
 slug: htmlhelpers_dropdowntree_databinding_aspnetcore
 position: 1
 ---
 
 # Data Binding
 
-The DropDownTree HTML helper provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
+The DropDownTree component provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
 
 ## Declaring DropDownTree Items
 
-The DropDownTree allows you to declare all of its items within the HTML helper declaration.
+The DropDownTree allows you to declare all of its items within the helper declaration.
 
 The following example demonstrates how to configure a DropDownTree with three levels of hierarchy.
 
+```HtmlHelper
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree")
         .Items(dropdowntree =>
@@ -38,7 +39,33 @@ The following example demonstrates how to configure a DropDownTree with three le
                 });
         })
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree name="dropdowntree">
+        <items>
+            <dropdowntree-item expanded="true" text="My Documents">
+                <items>
+                    <dropdowntree-item expanded="true" text="Kendo UI Project">
+                        <items>
+                            <dropdowntree-item  text="about.html">
+                            </dropdowntree-item>
+                            <dropdowntree-item text="index.html">
+                            </dropdowntree-item>
+                            <dropdowntree-item text="logo.png">
+                            </dropdowntree-item>
+                        </items>
+                    </dropdowntree-item>
+                    <dropdowntree-item text="New Web Site">
+                    </dropdowntree-item>
+                    <dropdowntree-item text="Reports">
+                    </dropdowntree-item>
+                </items>
+            </dropdowntree-item>
+        </items>
+    </kendo-dropdowntree>
+```
+{% endif %}
 ## DropDownTree Binding
 
 The DropDownTree supports the following data-binding approaches:

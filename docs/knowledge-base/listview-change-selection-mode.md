@@ -138,7 +138,7 @@ How can I allow the user to change the selection mode in the ListView based on a
         cursor: pointer;
     }
 
-    .k-listview>.k-state-selected {
+    .k-listview>.k-selected {
         background-color: #78c8a0;
     }
 </style>

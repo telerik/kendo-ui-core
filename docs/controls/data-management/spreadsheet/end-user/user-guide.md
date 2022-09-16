@@ -1,6 +1,6 @@
 ---
 title: User Guide
-page_title: jQuery Spreadsheet Documentation | User Guide | Kendo UI
+page_title: jQuery Spreadsheet Documentation | User Guide
 description: "Get started with the jQuery Spreadsheet by Kendo UI and check out its user guide."
 slug: user_guide_spreadsheet_widget
 position: 1

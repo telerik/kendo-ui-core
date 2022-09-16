@@ -31,7 +31,7 @@ How can I change the names of the columns inside the column menu in the Grid?
 
 1. In the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event handler, get the list of the column names.
 1. For each element, [`find`](https://api.jquery.com/find/) the inner `span`.
-1. Assign the new text value to the [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue) of the [`lastChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/lastChild) element of the `span`.
+1. Assign the new text value to the `textContent` of the [`lastChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/lastChild) element of the `span`.
 
 ```dojo
 <div id="grid"></div>
@@ -50,9 +50,9 @@ How can I change the names of the columns inside the column menu in the Grid?
 
             mylist.children().each(function(e) {
                 var span = $(this).find("span");
-                var text = span[0].lastChild.nodeValue;
+                var text = span[0].lastChild.textContent;
 
-                span[0].lastChild.nodeValue = changeLabelText(text);
+                span[0].lastChild.textContent = changeLabelText(text);
             });
         },
         dataSource: [{

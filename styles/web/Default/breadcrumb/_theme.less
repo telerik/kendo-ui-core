@@ -1,7 +1,8 @@
 .k-breadcrumb {
 
     &:focus,
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
         .box-shadow(@breadcrumb-focused-shadow);
     }
 
@@ -15,7 +16,8 @@
 
         // Hovered state
         &:hover,
-        &.k-state-hover {
+        &.k-state-hover,
+        &.k-hover {
             .fill(
                 @breadcrumb-link-hovered-text,
                 @breadcrumb-link-hovered-bg,
@@ -25,7 +27,8 @@
 
         // Focused state
         &:focus,
-        &.k-state-focused {
+        &.k-state-focused,
+        &.k-focus {
             .fill(
                 @breadcrumb-link-focused-text,
                 @breadcrumb-link-focused-bg,
@@ -44,7 +47,8 @@
 
         // Hovered state
         &:hover,
-        &.k-state-hover {
+        &.k-state-hover,
+        &.k-hover {
             .fill(
                 @breadcrumb-root-link-hovered-text,
                 @breadcrumb-root-link-hovered-bg,
@@ -54,7 +58,8 @@
 
         // Focused state
         &:focus,
-        &.k-state-focused {
+        &.k-state-focused,
+        &.k-focus {
             .fill(
                 @breadcrumb-root-link-focused-text,
                 @breadcrumb-root-link-focused-bg,

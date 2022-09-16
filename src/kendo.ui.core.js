@@ -1,9 +1,10 @@
-(function(f, define){
+(function(f, define) {
     define([
         "./kendo.core",
         "./kendo.router",
         "./kendo.touch",
         "./kendo.view",
+        "./kendo.floatinglabel",
         "./kendo.fx",
         "./kendo.data.odata",
         "./kendo.data.xml",
@@ -19,10 +20,13 @@
         "./kendo.selectable",
         "./kendo.badge",
         "./kendo.button",
+        "./kendo.bottomnavigation",
         "./kendo.pager",
         "./kendo.popup",
         "./kendo.notification",
         "./kendo.tooltip",
+        "./kendo.splitbutton",
+        "./kendo.dropdownbutton",
         "./kendo.toolbar",
         "./kendo.list",
         "./kendo.calendar",
@@ -35,7 +39,9 @@
         "./kendo.colorpicker",
         "./kendo.listview",
         "./kendo.listbox",
+        "./kendo.loader",
         "./kendo.textbox",
+        "./kendo.textarea",
         "./kendo.numerictextbox",
         "./kendo.maskedtextbox",
         "./kendo.menu",
@@ -72,7 +78,7 @@
         "./kendo.mobile.tabstrip",
         "./kendo.angular"
     ], f);
-})(function(){
+})(function() {
     "bundle all";
     return window.kendo;
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

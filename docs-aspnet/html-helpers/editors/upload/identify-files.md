@@ -1,7 +1,7 @@
 ---
 title: File Identification
 page_title: File Identification
-description: "Learn how to identify the file, that is being uploaded with the Telerik UI Upload HtmlHelper for {{ site.framework }}."
+description: "Learn how to identify the file, that is being uploaded with the Telerik UI Upload component for {{ site.framework }}."
 slug: htmlhelpers_upload_identify_files_aspnetcore
 position: 5
 ---
@@ -21,33 +21,56 @@ The generated `uid` is added as a property of the `e.files` collection to all of
 * `select`
 * `upload`
 
-```
-@(Html.Kendo().Upload()
-    .Name("files")
-    .Async(a => a
-        .Save("Save", "Upload")
-        .Remove("Remove", "Upload")
-        .AutoUpload(true)
+```HtmlHelper
+    @(Html.Kendo().Upload()
+        .Name("files")
+        .Async(a => a
+            .Save("Save", "Upload")
+            .Remove("Remove", "Upload")
+            .AutoUpload(true)
+        )
+        .Events(events => events
+            .Select("onSelect")
+        )
     )
-    .Events(events => events
-        .Select("onSelect")
-    )
-)
 
-<script type="text/javascript">
-    function onSelect(e) {
-        console.log("Selected files uids :: [ " + getFileInfo(e) + " ]");
-    }
+    <script type="text/javascript">
+        function onSelect(e) {
+            console.log("Selected files uids :: [ " + getFileInfo(e) + " ]");
+        }
 
-    function getFileInfo(e) {
-        return $.map(e.files, function(file) {
-            var info = file.uid;
+        function getFileInfo(e) {
+            return $.map(e.files, function(file) {
+                var info = file.uid;
 
-            return info;
-        }).join(", ");
-    }
-</script>
+                return info;
+            }).join(", ");
+        }
+    </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-upload name="files" on-select="onSelect">
+	    <async save-url="@Url.Action("Save","Upload")" 
+	    	   remove-url="@Url.Action("Remove","Upload")"
+	    	   auto-upload="true"/>
+    </kendo-upload>
+
+    <script type="text/javascript">
+        function onSelect(e) {
+            console.log("Selected files uids :: [ " + getFileInfo(e) + " ]");
+        }
+
+        function getFileInfo(e) {
+            return $.map(e.files, function(file) {
+                var info = file.uid;
+
+                return info;
+            }).join(", ");
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

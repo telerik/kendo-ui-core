@@ -1,6 +1,6 @@
 ---
 title: Best Practices
-page_title: jQuery Grid Documentation | Best Practices | Kendo UI
+page_title: jQuery Grid Documentation | Best Practices
 description: "Get started with the jQuery Grid by Kendo UI and learn which the best practices for boosting its performance are."
 slug: bestpractice_kendoui_grid_widget
 position: 1

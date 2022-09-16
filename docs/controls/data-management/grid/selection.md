@@ -1,9 +1,9 @@
 ---
 title: Selection
-page_title: jQuery Grid Documentation | Selection | Kendo UI
+page_title: jQuery Grid Documentation | Selection
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: selection_kendoui_grid_widget
-position: 8
+position: 10
 ---
 
 # Selection
@@ -86,6 +86,16 @@ To enable the selection of multiple Grid cells, set `selectable` to `multiple ce
         selectable: "multiple cell",
         // Other configuration.
     });
+
+## Ignored Elements
+
+By default, the Grid excludes some elements from the target list so that a click on any of these elements will not result in a row selection.
+
+The following code snippet contains all of the ignored selectors:
+
+```javascript
+input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up,label.k-checkbox-label.k-no-text,.k-icon.k-i-collapse,.k-icon.k-i-expand,span.k-numeric-wrap,.k-focusable
+```
 
 ## KB Articles on Selection
 

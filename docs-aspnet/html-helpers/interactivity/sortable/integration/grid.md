@@ -1,19 +1,19 @@
 ---
 title: Grid
 page_title: Grid Integration
-description: "Learn how to reorder Grid items when using the Telerik UI Sortable HtmlHelper for {{ site.framework }}."
+description: "Learn how to reorder Grid items when using the Telerik UI Sortable component for {{ site.framework }}."
 slug: sortable_aspnetcore_integration_grid
 position: 1
 ---
 
 # Grid Integration
 
-You can use the [Telerik UI Sortable HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/sortable/index) to reorder the items in a Grid by dragging and dropping.
+You can use the [Telerik UI Sortable component for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/sortable/index) to reorder the items in a Grid by dragging and dropping.
 
 ## Prerequisites
 
-* [Overview of the Telerik UI Sortable HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_sortable_aspnetcore %})
-* [Overview of the Telerik UI Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_overview %})
+* [Overview of the Telerik UI Sortable component for {{ site.framework }}]({% slug htmlhelpers_sortable_aspnetcore %})
+* [Overview of the Telerik UI Grid component for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_overview %})
 * [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods)
 
 ## Reordering of Sortable Items
@@ -30,6 +30,7 @@ The `hint` element of the Sortable is appended to the `<body>` element. As a res
 
 The following example demonstrates how to style the `hint` element so that the reordering takes place immediately.
 
+```HtmlHelper
     @(Html.Kendo().Grid(Model)
         .Name("Grid")
         .Columns(columns =>
@@ -60,7 +61,7 @@ The following example demonstrates how to style the `hint` element so that the r
         var noHint = $.noop;
 
         function placeholder(element) {
-            return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+            return element.clone().addClass("k-hover").css("opacity", 0.65);
         }
 
         function onChange(e) {
@@ -81,6 +82,59 @@ The following example demonstrates how to style the `hint` element so that the r
             cursor: move;
         }
     </style>
+```
+{% if site.core %}
+```TagHelper
+    @(Html.Kendo().Grid(Model)
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.ProductName).Title("Product Name");
+            columns.Bound(p => p.UnitPrice).Title("Unit Price").Width(130);
+            columns.Bound(p => p.UnitsInStock).Title("Units In Stock").Width(130);
+            columns.Bound(p => p.Discontinued).Width(130);
+        })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(16)
+            .ServerOperation(false)
+        )
+    )
+
+    <kendo-sortable name="Grid" filter="table > tbody > tr" cursor="move" 
+        hint="noHint" 
+        placeholder="placeholder" 
+        container="#Grid tbody"
+        on-change="onChange" >
+    </kendo-sortable>
+
+    <script>
+        var noHint = $.noop;
+
+        function placeholder(element) {
+            return element.clone().addClass("k-hover").css("opacity", 0.65);
+        }
+
+        function onChange(e) {
+            var grid = $("#Grid").data("kendoGrid"),
+                skip = grid.dataSource.skip(),
+                oldIndex = e.oldIndex + skip,
+                newIndex = e.newIndex + skip,
+                data = grid.dataSource.data(),
+                dataItem = grid.dataSource.getByUid(e.item.data("uid"));
+
+            grid.dataSource.remove(dataItem);
+            grid.dataSource.insert(newIndex, dataItem);
+        }
+    </script>
+
+    <style>
+        .k-grid tbody tr {
+            cursor: move;
+        }
+    </style>
+```
+{% endif %}
 
 ## Reordering in Editable Grids
 
@@ -104,7 +158,7 @@ The draggable functionality of the Sortable prevents the `mousedown` event. As a
 
 If you use the batch (incell) edit mode, the code from the previous example that is applied to the inline and popup edit modes will not work. To work around this issue, use [custom editors](https://demos.telerik.com/{{ site.platform }}/grid/editing-custom) and configure them to [update when the `input` event fires](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#controlling-when-the-view-model-is-updated)&mdash;by default, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the `input` event does not work for earlier Internet Explorer versions.
 
-> The `data-value-update` approach works with regular inputs. However, you must manually configure the Telerik UI HtmlHelpers for {{ site.framework }} as they do not support the `data-value-update` attribute.
+> The `data-value-update` approach works with regular inputs. However, you must manually configure the Telerik UI components for {{ site.framework }} as they do not support the `data-value-update` attribute.
 
 ## Reordering of DataSource Items
 

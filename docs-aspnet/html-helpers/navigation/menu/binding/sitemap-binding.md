@@ -1,7 +1,7 @@
 ---
 title: Sitemap Binding
 page_title: Sitemap Binding
-description: "Set a sitemap to create the items of the Telerik UI Menu HtmlHelper for {{ site.framework }}."
+description: "Set a sitemap to create the items of the Telerik UI Menu component for {{ site.framework }}."
 slug: sitemapbinding_menu_aspnetmvc
 position: 3
 ---
@@ -42,7 +42,7 @@ The Menu enables you to create its items by setting a sitemap.
 
 1. Add a Menu.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().Menu()
             .Name("menu") // The name of the Menu is mandatory. It specifies the "id" attribute of the Menu.
             .BindTo("sample") // Bind to the sitemap with the name "sample".

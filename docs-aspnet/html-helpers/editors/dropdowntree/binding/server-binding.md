@@ -1,16 +1,16 @@
 ---
 title:  Server Binding
 page_title: Server Binding
-description: "Learn how to implement server binding in the Telerik UI DropDownTree HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement server binding in the Telerik UI DropDownTree component for {{ site.framework }}."
 slug: htmlhelpers_dropdowntree_serverbinding_aspnetcore
-position: 3
+position: 4
 ---
 
 # Server Binding
 
 Local data is the data that is available on the client when the DropDownTree is initialized.
 
-You can bind the DropDownTree locally on the server by passing the appropriate collection to the HTML helper `BindTo()` method.
+You can bind the DropDownTree locally on the server by passing the appropriate collection to the component's `BindTo()` method.
 
 1. Pass the data to the view through `ViewData`.
 
@@ -69,12 +69,21 @@ You can bind the DropDownTree locally on the server by passing the appropriate c
 
 1. Add the DropDownTree to the view and bind it to the data that is saved in the `ViewData`.
 
-        @using Kendo.Mvc.UI.Fluent
+```HtmlHelper
+    @using Kendo.Mvc.UI.Fluent
 
-        @(Html.Kendo().DropDownTree()
-            .Name("dropdowntree")
-            .BindTo((IEnumerable<DropDownTreeItemModel>)ViewBag.dropdowntreeData)
-        )
+    @(Html.Kendo().DropDownTree()
+        .Name("dropdowntree")
+        .BindTo((IEnumerable<DropDownTreeItemModel>)ViewBag.dropdowntreeData)
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree name="dropdowntree" bind-to="(IEnumerable<DropDownTreeItemModel>)ViewBag.dropdowntreeData">
+    </kendo-dropdowntree>
+```
+{% endif %}
+
 
 ## See Also
 

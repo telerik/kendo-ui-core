@@ -6,23 +6,13 @@
         @toolbar-gradient
     );
     .box-shadow( @toolbar-shadow );
-}
 
-
-// Overflow container
-.k-overflow-container {
-
-    // Button group
-    .k-button-group {
-        .k-button {
-            .border-radius();
-        }
-    }
-
-    // Split button
-    .k-split-button {
-        .k-button {
-            .border-radius();
+    .k-toolbar-item {
+        &:focus,
+        &.k-focus {
+            .box-shadow(@button-focused-shadow);
+            text-decoration: none;
+            outline: 0;
         }
     }
 }

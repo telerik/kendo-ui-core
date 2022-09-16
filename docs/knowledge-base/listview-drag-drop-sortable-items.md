@@ -44,7 +44,7 @@ To fulfil the scenario, use the following suggested approach:
 1. Handle the [`Sortable.change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable/events/change) event.
 1. Reset the DataSource of the source ListView under some conditions.
 
-The following example demonstrates the full implementation of the suggested approach.
+The following example demonstrates how to implement two ListBox widgets where the user can copy items instead of moving them by dragging from the left ListBox to the right one.
 
 ```dojo
 <div style="padding:30px;">
@@ -99,6 +99,7 @@ The following example demonstrates the full implementation of the suggested appr
   });
 
   $('#itemlist').kendoSortable({
+    filter: ".k-listview-content > div",
     connectWith: "#newlist",
     change: function(e) {
       var sender = e.draggableEvent.sender;
@@ -113,6 +114,7 @@ The following example demonstrates the full implementation of the suggested appr
   });
 
   $('#newlist').kendoSortable({
+    filter: ".k-listview-content > div",
     connectWith: "#itemlist",
     change: function(e) {
       var sender = e.draggableEvent.sender;

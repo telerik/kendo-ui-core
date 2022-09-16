@@ -1,16 +1,33 @@
 ---
 title: Resizing
 page_title: Resizing of Columns
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and learn how to enable column resizing to modify the width of columns."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to enable column resizing to modify the width of columns."
 slug: htmlhelpers_treelist_aspnetcore_column_resizing
 position: 4
 ---
 
 # Resizing of Columns
 
-The resizing behavior of the TreeList columns depends on whether scrolling is enabled or disabled.
+You can make the TreeList columns resizable by enabling the Resizable() property.
+
+```HtmlHelper
+    @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+        .Name("treelist")
+        .Resizable(true)
+        /* Other configuration. */
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" resizable="true">
+        <!-- Other configuration. -->
+    </kendo-treelist>
+```
+{% endif %}
 
 For a runnable example, refer to the [demo on resizing columns in the TreeList](https://demos.telerik.com/{{ site.platform }}/treelist/column-resizing).
+
+The resizing behavior of the TreeList columns depends on whether scrolling is enabled or disabled.
 
 When scrolling is disabled and a TreeList column is resized, other columns change their widths too, so that the sum of all column widths remains constant. If both the columns and the TreeList `<div>` already have their minimum possible widths applied, then the resizing of the columns stops working. In such scenarios, use either of the following approaches:
 * Apply a larger width to the TreeList, or

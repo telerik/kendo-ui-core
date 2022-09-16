@@ -11,6 +11,39 @@ Represents the Kendo UI Pager widget. Inherits from [Widget](/api/javascript/ui/
 
 ## Configuration
 
+### ARIATemplate `String`*(default: "Page navigation, page #=page# of #=totalPages#")*
+Specifies a template used to populate the value of the aria-label attribute of the pager element.The parameters available for the template are:
+
+* `page` - The current page.
+* `totalPages` - The total number of pages.
+
+#### Example - setting the aria-label of the pager element
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { productName: "Tea", category: "Beverages" },
+                { productName: "Coffee", category: "Beverages" },
+                { productName: "Ham", category: "Food" },
+                { productName: "Bread", category: "Food" }
+            ],
+            pageSize: 25
+          });
+
+        dataSource.read();
+
+        $("#pager").kendoPager({
+          ARIATemplate: "Current page is #=page#"
+          dataSource: dataSource
+        });
+    </script>
+    <style>
+      #pager{
+       margin-top: 100px;
+      }
+    </style>
+
 ### autoBind `Boolean`*(default: true)*
 Indicates whether the pager refresh method will be called within its initialization.
 
@@ -240,7 +273,8 @@ Defines if an input element which allows the user to navigate to given page will
 
         $("#pager").kendoPager({
           dataSource: dataSource,
-          input: true
+          input: true,
+          numeric: false
         });
 
         dataSource.read();
@@ -537,6 +571,42 @@ The text displayed for the item that represents the allPages option when allPage
       }
     </style>
 
+### messages.numbersSelectLabel `String`*(default: "Page select")*
+
+The label applied to the Pager select element (when visible).
+
+#### Example - reduce view width to see the Pager select
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" },
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" },
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 1
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          messages: {
+            numbersSelectLabel: "Select page number"
+          }
+        });
+
+        dataSource.read();
+    </script>
+
 ### messages.page `String`*(default: "Page")*,
 The label displayed before the pager input.
 
@@ -570,6 +640,73 @@ The label displayed before the pager input.
        margin-top: 100px;
       }
     </style>
+
+### messages.pageButtonLabel `String`*(default: "Page {0}")*,
+The title of the numeric link page buttons of the **Pager**. The parameters available for the template are:
+
+* `page` - The page that will becomes selected when clicking the button.
+
+#### Example - set the label before the pager input
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          input: true,
+          numeric: false,
+          messages: {
+            pageButtonLabel: "This is page {0}"
+          }
+        });
+
+        dataSource.read();
+    </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
+
+### messages.pageSizeDropDownLabel `String`*(default: "Page sizes drop down")*
+
+The label applied to the page size DropDOwnList.
+
+#### Example
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          input: true,
+          numeric: false,
+          messages: {
+            pageSizeDropDownLabel: "page size"
+          },
+          pageSizes: [1, 2, 5]
+        });
+
+        dataSource.read();
+    </script>
 
 ### messages.of `String`*(default: "of {0}")*,
 The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
@@ -653,7 +790,8 @@ The tooltip of the button which navigates to the first page.
             { productName: "Ham", category: "Food" },
             { productName: "Bread", category: "Food" }
           ],
-          pageSize: 2
+          pageSize: 2,
+          page: 2
         });
 
         $("#pager").kendoPager({
@@ -685,7 +823,8 @@ The tooltip of the button which navigates to the previous page.
             { productName: "Ham", category: "Food" },
             { productName: "Bread", category: "Food" }
           ],
-          pageSize: 2
+          pageSize: 2,
+          page: 2
         });
 
         $("#pager").kendoPager({
@@ -788,13 +927,48 @@ The tooltip of the refresh button.
           dataSource: dataSource,
           messages: {
             refresh: "Refresh data"
-          }
+          },
+          refresh: true
         });
 
         dataSource.read();
     </script>
     <style>
       #pager {
+       margin-top: 100px;
+      }
+    </style>
+
+### navigatable `Boolean`*(default: false)*
+If set to `true` the user could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
+
+#### Example - enable keyboard navigation
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { productName: "Tea", category: "Beverages" },
+                { productName: "Coffee", category: "Beverages" },
+                { productName: "Ham", category: "Food" },
+                { productName: "Bread", category: "Food" },
+                { productName: "Potatoes", category: "Food" },
+                { productName: "Rice", category: "Food" },
+                { productName: "Tomatoes", category: "Food" },
+                { productName: "Carrots", category: "Food" }
+            ],
+            pageSize: 2
+          });
+
+        dataSource.read();
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          navigatable: true
+        });
+    </script>
+    <style>
+      #pager{
        margin-top: 100px;
       }
     </style>
@@ -825,6 +999,7 @@ Returns the number of pages.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.totalPages()); // displays "2"
     </script>
     <style>
@@ -861,6 +1036,7 @@ Returns the page size - maximum number of items allowed on one page.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.pageSize()); // displays "2"
     </script>
     <style>
@@ -897,6 +1073,7 @@ Gets or sets the current page.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.page()); // displays "1"
     </script>
     <style>
@@ -1039,6 +1216,7 @@ The widget instance which fired the event.
         $("#pager").kendoPager({
           dataSource: dataSource,
           change: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("pager change event");
           }
         });
@@ -1054,6 +1232,7 @@ The widget instance which fired the event.
 
     <script>
         function pager_change() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("pager change event");
         }
 

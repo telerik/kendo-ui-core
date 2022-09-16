@@ -1,9 +1,9 @@
 ---
 title: Resources
 page_title: Resources
-description: "Use resources in the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
+description: "Use resources in the Telerik UI Gantt component for {{ site.framework }}."
 slug: htmlhelpers_gantt_resources_aspnetcore
-position: 4
+position: 5
 ---
 
 # Resources
@@ -12,7 +12,7 @@ The Gantt allows you to assign resources to tasks. A resource is optional metada
 
 The resources are set through the `Resources` configuration method.
 
-## Assignements
+## Assignments
 
 An assignment is a one-to-one mapping between a Gantt task and a Gantt resource containing the number of units for which a resource is assigned to a task.
 
@@ -20,7 +20,7 @@ The assignments are set through the `Assignments` configuration method.
 
 The following example demonstrates how to set resources in the Gantt and how to map them to tasks by setting assignments.
 
-```
+```HtmlHelper
     @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
         .Name("gantt")
         .Columns(columns =>

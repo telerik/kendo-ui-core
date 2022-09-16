@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core", "./kendo.draganddrop" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "resizable",
     name: "Resizable",
     category: "framework",
@@ -14,7 +14,6 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
-        proxy = $.proxy,
         isFunction = kendo.isFunction,
         extend = $.extend,
         HORIZONTAL = "horizontal",
@@ -37,10 +36,10 @@ var __meta__ = { // jshint ignore:line
             that.draggable = new ui.Draggable(options.draggableElement || element, {
                 distance: 1,
                 filter: options.handle,
-                drag: proxy(that._resize, that),
-                dragcancel: proxy(that._cancel, that),
-                dragstart: proxy(that._start, that),
-                dragend: proxy(that._stop, that)
+                drag: that._resize.bind(that),
+                dragcancel: that._cancel.bind(that),
+                dragstart: that._start.bind(that),
+                dragend: that._stop.bind(that)
             });
 
             that.userEvents = that.draggable.userEvents;
@@ -110,9 +109,9 @@ var __meta__ = { // jshint ignore:line
                 position;
 
             position = minPosition !== undefined ? Math.max(minPosition, currentPosition) : currentPosition;
-            that.position = position =  maxPosition !== undefined ? Math.min(maxPosition, position) : position;
+            that.position = position = maxPosition !== undefined ? Math.min(maxPosition, position) : position;
 
-            if(that.hint) {
+            if (that.hint) {
                 that.hint.toggleClass(that.options.invalidClass || "", position == maxPosition || position == minPosition)
                          .css(that._position, position);
             }
@@ -124,7 +123,7 @@ var __meta__ = { // jshint ignore:line
         _stop: function(e) {
             var that = this;
 
-            if(that.hint) {
+            if (that.hint) {
                 that.hint.remove();
             }
 
@@ -193,4 +192,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

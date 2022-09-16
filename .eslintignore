@@ -1,0 +1,11 @@
+**/node_modules
+!src/**/*.js
+
+# dependencies to ignore
+src/angular.js
+src/angular.min.js
+src/jquery.js
+src/jquery.min.js
+
+# folders to ignore
+src/colorpicker

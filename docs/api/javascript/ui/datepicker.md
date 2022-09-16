@@ -101,9 +101,13 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'D')#")*
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
- Specifies a template used to populate the value of the aria-label attribute of the currently focused cell of the calendar.
+ Specifies a template used to populate the value of the aria-label attribute of the currently focused cell of the calendar. The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -114,6 +118,22 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <input id="datepicker" />
+    <script>
+        $("#datepicker").kendoDatePicker({
+            componentType: "modern"
+        });
+    </script>
+
 ### culture `String`*(default: "en-US")*
 
  Specifies the culture info used by the widget.
@@ -121,19 +141,16 @@ The duration of the open animation in milliseconds.
 #### Example - specify German culture internationalization
 
     <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
-
-        For more information check this help topic:
-        https://docs.telerik.com/kendo-ui/framework/globalization/overview
+        Include the culture file.
+        List of available cultures - https://github.com/telerik/kendo-ui-core/tree/master/src/cultures
     -->
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
     <input id="datepicker" />
     <script>
     $("#datepicker").kendoDatePicker({
-        culture: "de-DE"
+        culture: "de-DE",
+        value: new Date()
     });
     </script>
 
@@ -287,6 +304,24 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### format `String`*(default: "M/d/yyyy")*
 
  Specifies the format, which is used to format the value of the DatePicker displayed in the input. The format also will be used to parse the input.
@@ -313,6 +348,38 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     $("#datepicker").kendoDatePicker({
         max: new Date() // sets max date to today's date
     });
+    </script>
+
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+#### Example
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
+### messages.weekColumnHeader `String` *(default: "")*
+
+Allows customization of the week column header text in the Calendar. Set the value to make the widget compliant with web accessibility standards.
+
+#### Example
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
     </script>
 
 ### min `Date`*(default: Date(1900, 0, 1))*
@@ -549,6 +616,40 @@ If set to `true` a week of the year will be shown on the left side of the calend
     });
     </script>
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    $("#datepicker").kendoDatePicker({
+        size: "large"
+    });
+
 ### start `String`*(default: "month")*
 
 Specifies the start view.
@@ -584,18 +685,20 @@ The following settings are available for the **start** value:
 ## Fields
 
 ### options `Object`
-An object, which holds the options of the widget.
+An object, which holds the options of the widget. The options object holds all available [DatPicker configuration fields](/api/javascript/ui/datepicker#configuration).
 
 #### Example - get options of the widget
 
     <input id="datepicker" />
     <script>
-    $("#datepicker").kendoDatePicker();
-
-    var datepicker = $("#datepicker").data("kendoDatePicker");
-
-    var options = datepicker.options;
-    <script>
+        //initialize the DatePicker
+        $("#datepicker").kendoDatePicker();
+        //get instance of the DatePicker
+        var datepicker = $("#datepicker").data("kendoDatePicker");
+        //Get the DatePicker options object
+        var options = datepicker.options;
+        console.log("options", options)
+    </script>
 
 ## Methods
 
@@ -724,6 +827,7 @@ The max date to set.
 
     var max = datepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -762,6 +866,7 @@ The min date to set.
 
     var min = datepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -796,7 +901,7 @@ Opens the calendar.
 
 ### setOptions
 
-Changes the initial DatePicker configuration.
+Changes the initial DatePicker configuration by updating the options object. The options object holds all available [DatPicker configuration fields](/api/javascript/ui/datepicker#configuration).
 
 #### Parameters
 
@@ -858,6 +963,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var datepicker = $("#datepicker").data("kendoDatePicker");
 
     var value = datepicker.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -893,6 +999,7 @@ The widget instance which fired the event.
     $("#datepicker").kendoDatePicker({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the datepicker
         }
     });
@@ -908,6 +1015,7 @@ The widget instance which fired the event.
 
     datepicker.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the datepicker
     });
     </script>

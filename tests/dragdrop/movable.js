@@ -23,7 +23,7 @@
         });
 
         afterEach(function() {
-            fixture.empty()
+            fixture.empty();
         });
 
         it("sets x", function() {

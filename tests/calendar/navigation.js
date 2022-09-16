@@ -63,7 +63,25 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), date);
-            assert.equal(div.find("td.k-state-focused").text(), date.getDate() + "");
+            assert.equal(div.find("td.k-focus").text(), date.getDate() + "");
+        });
+
+        it("navigating to a new date does not remove selected attributes", function() {
+            var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
+                date = new Date(2021, 11, 1),
+                date2 = new Date(2021, 11, 2),
+                selectedCell;
+
+            calendar.value(date);
+
+            calendar._move(event);
+
+            assert.deepEqual(calendar.current(), date2);
+            assert.equal(div.find("td.k-focus").text(), date2.getDate() + "");
+
+            selectedCell = div.find("td.k-selected");
+            assert.equal(selectedCell.text(), date.getDate() + "");
+            assert.equal(selectedCell.attr("aria-selected"), "true");
         });
 
         it("navigate should not _move selection if value is less than min", function() {
@@ -76,7 +94,7 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), date);
-            assert.equal(div.find("td.k-state-focused").text(), date.getDate() + "");
+            assert.equal(div.find("td.k-focus").text(), date.getDate() + "");
 
         });
 
@@ -88,7 +106,7 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), focusedDate.getDate() + "");
+            assert.equal(div.find("td.k-focus").text(), focusedDate.getDate() + "");
         });
 
         it("navigate should focus previous day in month view", function() {
@@ -99,7 +117,7 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), focusedDate.getDate() + "");
+            assert.equal(div.find("td.k-focus").text(), focusedDate.getDate() + "");
         });
 
         it("navigate should focus day on previous row in month view", function() {
@@ -110,7 +128,7 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), focusedDate.getDate() + "");
+            assert.equal(div.find("td.k-focus").text(), focusedDate.getDate() + "");
         });
 
         it("navigate should focus day on next row in month view", function() {
@@ -121,7 +139,25 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), focusedDate.getDate() + "");
+            assert.equal(div.find("td.k-focus").text(), focusedDate.getDate() + "");
+        });
+
+        it("navigating to a today moves selected attributes", function() {
+            var event = { keyCode: 84, preventDefault: $.noop },
+                date = new Date(2021, 11, 1),
+                today = new Date(),
+                selectedCell;
+
+            calendar.value(date);
+
+            calendar._move(event);
+
+            assert.deepEqual(calendar.current().getTime(), new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime());
+            assert.equal(div.find("td.k-focus").text(), today.getDate() + "");
+
+            selectedCell = div.find("td.k-selected");
+            assert.equal(selectedCell.text(), today.getDate() + "");
+            assert.equal(selectedCell.attr("aria-selected"), "true");
         });
 
         //YEAR VIEW
@@ -135,7 +171,7 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), monthsAbbr[focusedDate.getMonth()]);
+            assert.equal(div.find("td.k-focus").text(), monthsAbbr[focusedDate.getMonth()]);
         });
 
         it("navigate should focus previous month in year view", function() {
@@ -149,7 +185,7 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), focusedDate);
-            assert.equal(div.find("td.k-state-focused").text(), monthsAbbr[focusedDate.getMonth()]);
+            assert.equal(div.find("td.k-focus").text(), monthsAbbr[focusedDate.getMonth()]);
         });
 
         it("navigate should focus month on previous row in year view", function() {
@@ -163,7 +199,7 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), focusedDate);
-            assert.equal(div.find("td.k-state-focused").text(), monthsAbbr[focusedDate.getMonth()]);
+            assert.equal(div.find("td.k-focus").text(), monthsAbbr[focusedDate.getMonth()]);
         });
 
         it("navigate should focus month on next row in year view", function() {
@@ -177,7 +213,7 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), focusedDate);
-            assert.equal(div.find("td.k-state-focused").text(), monthsAbbr[focusedDate.getMonth()]);
+            assert.equal(div.find("td.k-focus").text(), monthsAbbr[focusedDate.getMonth()]);
         });
 
         //DECADE VIEW
@@ -192,7 +228,7 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), focusedDate);
-            assert.equal(div.find("td.k-state-focused").text(), focusedDate.getFullYear());
+            assert.equal(div.find("td.k-focus").text(), focusedDate.getFullYear());
 
         });
 
@@ -207,8 +243,8 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), focusedDate);
-            assert.equal(div.find("td.k-state-focused").text(), focusedDate.getFullYear());
-            assert.isOk(!div.find("td.k-state-focused").hasClass("k-other-month"));
+            assert.equal(div.find("td.k-focus").text(), focusedDate.getFullYear());
+            assert.isOk(!div.find("td.k-focus").hasClass("k-other-month"));
         });
 
         it("navigate should focus year on previous row in decade view", function() {
@@ -222,7 +258,7 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), focusedDate);
-            assert.equal(div.find("td.k-state-focused").text(), focusedDate.getFullYear());
+            assert.equal(div.find("td.k-focus").text(), focusedDate.getFullYear());
         });
 
         it("navigate should focus year on next row in decade view", function() {
@@ -236,7 +272,7 @@
             calendar._move(event);
 
             assert.deepEqual(calendar.current(), focusedDate);
-            assert.equal(div.find("td.k-state-focused").text(), focusedDate.getFullYear());
+            assert.equal(div.find("td.k-focus").text(), focusedDate.getFullYear());
         });
 
         //CENTURY VIEW
@@ -254,7 +290,7 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), result);
+            assert.equal(div.find("td.k-focus").text(), result);
         });
 
         it("navigate should focus previous decade in century view", function() {
@@ -271,7 +307,7 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), result);
+            assert.equal(div.find("td.k-focus").text(), result);
         });
 
         it("navigate should focus decade on previous row in century view", function() {
@@ -288,7 +324,7 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), result);
+            assert.equal(div.find("td.k-focus").text(), result);
         });
 
         it("navigate should focus decade on next row in century view", function() {
@@ -305,7 +341,7 @@
 
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").text(), result);
+            assert.equal(div.find("td.k-focus").text(), result);
         });
 
         //Navigate through views
@@ -368,7 +404,7 @@
 
             calendar._move(event);
 
-            var value = calendar.element.find(".k-state-focused").children(":first").attr("data-value");
+            var value = calendar.element.find(".k-focus").children(":first").attr("data-value");
 
             assert.equal(value, kendo.calendar.views[0].toDateString(calendar.current()));
         });
@@ -378,7 +414,7 @@
 
             calendar._move(event);
 
-            var value = calendar.element.find(".k-state-focused").children(":first").attr("data-value");
+            var value = calendar.element.find(".k-focus").children(":first").attr("data-value");
 
             assert.equal(value, kendo.calendar.views[0].toDateString(calendar.current()));
         });
@@ -410,7 +446,7 @@
             calendar._focus(calendar.current());
             calendar._move(event);
 
-            assert.equal(div.find("td.k-state-focused").length, 1);
+            assert.equal(div.find("td.k-focus").length, 1);
         });
 
         it("Enter should select date", function() {
@@ -442,7 +478,7 @@
             calendar.focus();
             calendar.value(new Date(2000, 10, 10, 14, 30));
 
-            var link = calendar._table.find(".k-state-selected").next().find(".k-link");
+            var link = calendar._table.find(".k-selected").next().find(".k-link");
 
             calendar._click(link);
 
@@ -604,28 +640,28 @@
         it("skips disabled date to the left", function() {
             calendar._move({ keyCode: keys.LEFT, preventDefault: $.noop });
 
-            assert.equal($(".k-state-focused > a").text(), 19);
+            assert.equal($(".k-focus > a").text(), 19);
         });
 
         it("skips disabled date to the right", function() {
             calendar.value(new Date(2015, 9, 19));
             calendar._move({ keyCode: keys.RIGHT, preventDefault: $.noop });
 
-            assert.equal($(".k-state-focused > a").text(), 22);
+            assert.equal($(".k-focus > a").text(), 22);
         });
 
         it("skips disabled date when navigated between weeks UP", function() {
             calendar.value(new Date(2015, 9, 28));
             calendar._move({ keyCode: keys.UP, preventDefault: $.noop });
 
-            assert.equal($(".k-state-focused > a").text(), 7);
+            assert.equal($(".k-focus > a").text(), 7);
         });
 
         it("skips disabled date when navigated between weeks DOWN", function() {
             calendar.value(new Date(2015, 9, 7));
             calendar._move({ keyCode: keys.DOWN, preventDefault: $.noop });
 
-            assert.equal($(".k-state-focused > a").text(), 28);
+            assert.equal($(".k-focus > a").text(), 28);
         });
 
         it("do not navigate to disabled date in the min range", function() {
@@ -633,7 +669,7 @@
             calendar.min(new Date(2015, 9, 13));
             calendar._move({ keyCode: keys.LEFT, preventDefault: $.noop });
 
-            assert.equal($(".k-state-focused > a").text(), 15);
+            assert.equal($(".k-focus > a").text(), 15);
         });
 
 
@@ -641,7 +677,7 @@
             var max = new Date(2015, 9, 23);
             calendar.max(max);
             calendar._move({ keyCode: keys.RIGHT, preventDefault: $.noop });
-            var focusedValue = new Date($(".k-state-focused > a").data("value")).getDate();
+            var focusedValue = new Date($(".k-focus > a").data("value")).getDate();
             assert.equal(focusedValue, 22);
         });
 
@@ -655,7 +691,7 @@
 
         it("two consecutive selections can be made", function() {
             calendar.value(new Date(2015, 11, 16));
-            var currentCell = $(".k-state-selected");
+            var currentCell = $(".k-selected");
             currentCell.next().trigger("click");
             assert.equal(calendar.value().getDate(), 17);
         });
@@ -684,7 +720,7 @@
 
         it("two consecutive selections can be made", function() {
             calendar.value(new Date(2015, 11, 16));
-            var currentCell = $(".k-state-selected");
+            var currentCell = $(".k-selected");
             currentCell.next().trigger("click");
             assert.equal(calendar.value().getDate(), 17);
         });
@@ -692,46 +728,46 @@
         it("two consecutive selections can be made with ctrl key", function() {
             var event = $.Event("click", { ctrlKey: true });
             calendar.value(new Date(2015, 11, 16));
-            var currentCell = $(".k-state-selected");
+            var currentCell = $(".k-selected");
             currentCell.next().trigger(event);
             assert.equal(calendar.selectDates().length, 2);
-            assert.equal(calendar.element.find(".k-state-selected").length, 2);
+            assert.equal(calendar.element.find(".k-selected").length, 2);
         });
 
         it("two consecutive selections can be made with meta key", function() {
             var event = $.Event("click", { metaKey: true });
             calendar.value(new Date(2015, 11, 16));
-            var currentCell = $(".k-state-selected");
+            var currentCell = $(".k-selected");
             currentCell.next().trigger(event);
             assert.equal(calendar.selectDates().length, 2);
-            assert.equal(calendar.element.find(".k-state-selected").length, 2);
+            assert.equal(calendar.element.find(".k-selected").length, 2);
         });
 
         it("deselecting a selected date with ctrl key", function() {
             calendar.value(new Date(2015, 11, 16));
             var event = $.Event("click", { ctrlKey: true }),
-                currentCell = $(".k-state-selected"),
+                currentCell = $(".k-selected"),
                 nextCell = currentCell.next();
             nextCell.trigger(event);
             nextCell.trigger(event);
             assert.equal(calendar.selectDates().length, 1);
-            assert.equal(calendar.element.find(".k-state-selected").length, 1);
+            assert.equal(calendar.element.find(".k-selected").length, 1);
         });
 
         it("deselecting a selected date with meta key", function() {
             calendar.value(new Date(2015, 11, 16));
             var event = $.Event("click", { metaKey: true }),
-                currentCell = $(".k-state-selected"),
+                currentCell = $(".k-selected"),
                 nextCell = currentCell.next();
             nextCell.trigger(event);
             nextCell.trigger(event);
             assert.equal(calendar.selectDates().length, 1);
-            assert.equal(calendar.element.find(".k-state-selected").length, 1);
+            assert.equal(calendar.element.find(".k-selected").length, 1);
         });
 
         it("range selection on same view", function() {
             calendar.value(new Date(2015, 11, 16));
-            var currentCell = $(".k-state-selected"),
+            var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
                 specificDateCell = calendar.element.find("td").has("a[data-value='2015/11/25']");
 
@@ -739,12 +775,12 @@
 
             specificDateCell.trigger(event);
             assert.equal(calendar.selectDates().length, 10);
-            assert.equal(calendar.element.find(".k-state-selected").length, 10);
+            assert.equal(calendar.element.find(".k-selected").length, 10);
         });
 
         it("range selection between different views", function() {
             calendar.value(new Date(2015, 10, 16));
-            var currentCell = $(".k-state-selected"),
+            var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
                 nextPeriodButton = $(".k-nav-next");
 
@@ -756,12 +792,12 @@
 
             specificDateCell.trigger(event);
             assert.equal(calendar.selectDates().length, 25);
-            assert.equal(calendar.element.find(".k-state-selected").length, 12);
+            assert.equal(calendar.element.find(".k-selected").length, 12);
         });
 
         it("range selection from future month to past month", function() {
             calendar.value(new Date(2015, 10, 10));
-            var currentCell = $(".k-state-selected"),
+            var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
                 prevButton = $(".k-nav-prev");
 
@@ -771,12 +807,12 @@
 
             specificDateCell.trigger(event);
             assert.equal(calendar.selectDates().length, 22);
-            assert.equal(calendar.element.find(".k-state-selected").length, 19);
+            assert.equal(calendar.element.find(".k-selected").length, 19);
         });
 
         it("range selection from future month to past month with more than one shiftKey selections", function() {
             calendar.value(new Date(2015, 10, 10));
-            var currentCell = $(".k-state-selected"),
+            var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
                 prevButton = $(".k-nav-prev"),
                 secondEvent = $.Event("click", { shiftKey: true });
@@ -790,12 +826,12 @@
             var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/9/10']");
             anotherSpecificDateCell.trigger(secondEvent);
             assert.equal(calendar.selectDates().length, 32);
-            assert.equal(calendar.element.find(".k-state-selected").length, 29);
+            assert.equal(calendar.element.find(".k-selected").length, 29);
         });
 
         it("range selection from future month to past month with more than one shiftKey selections on previous date", function() {
             calendar.value(new Date(2015, 10, 10));
-            var currentCell = $(".k-state-selected"),
+            var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
                 prevButton = $(".k-nav-prev"),
                 secondEvent = $.Event("click", { shiftKey: true });
@@ -808,12 +844,12 @@
             var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/9/25']");
             anotherSpecificDateCell.trigger(secondEvent);
             assert.equal(calendar.selectDates().length, 17);
-            assert.equal(calendar.element.find(".k-state-selected").length, 14);
+            assert.equal(calendar.element.find(".k-selected").length, 14);
         });
 
         it("range selection with multiple shiftKey selections", function() {
             calendar.value(new Date(2015, 10, 10));
-            var currentCell = $(".k-state-selected"),
+            var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
                 specificDateCell = calendar.element.find("td").has("a[data-value='2015/10/20']"),
                 secondEvent = $.Event("click", { shiftKey: true });
@@ -825,12 +861,12 @@
             anotherSpecificDateCell.trigger(secondEvent);
 
             assert.equal(calendar.selectDates().length, 16);
-            assert.equal(calendar.element.find(".k-state-selected").length, 16);
+            assert.equal(calendar.element.find(".k-selected").length, 16);
         });
 
         it("range selection with multiple shiftKey selections", function() {
             calendar.value(new Date(2015, 10, 10));
-            var currentCell = $(".k-state-selected"),
+            var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
                 specificDateCell = calendar.element.find("td").has("a[data-value='2015/10/20']"),
                 secondEvent = $.Event("click", { shiftKey: true });
@@ -842,7 +878,7 @@
             anotherSpecificDateCell.trigger(secondEvent);
 
             assert.equal(calendar.selectDates().length, 16);
-            assert.equal(calendar.element.find(".k-state-selected").length, 16);
+            assert.equal(calendar.element.find(".k-selected").length, 16);
         });
     });
 
@@ -895,7 +931,7 @@
 
             calendar._current = date;
             calendar._move(event);
-            var focusedDate = toDateObject(div.find("tbody").find("td.k-state-focused").find("a"));
+            var focusedDate = toDateObject(div.find("tbody").find("td.k-focus").find("a"));
             assert.equal(focusedDate.getDate() + 1, date.getDate());
         });
 
@@ -953,7 +989,7 @@
         it("range selection with shiftKey and space key", function() {
             var moveEvent = { keyCode: keys.DOWN, ctrlKey: false, preventDefault: $.noop },
                 clickEvent = { keyCode: keys.SPACEBAR, shiftKey: true, preventDefault: $.noop };
-            calendar.value(new Date(2015, 10, 10))
+            calendar.value(new Date(2015, 10, 10));
 
             calendar._move(moveEvent);
             calendar._move(clickEvent);
@@ -965,7 +1001,7 @@
             var moveEvent = { keyCode: keys.DOWN, preventDefault: $.noop },
                 clickEvent = { keyCode: keys.SPACEBAR, ctrlKey: true, preventDefault: $.noop };
 
-            calendar.value(new Date(2015, 10, 10))
+            calendar.value(new Date(2015, 10, 10));
             calendar._move(moveEvent);
             calendar._move(clickEvent);
             assert.equal(calendar.selectDates().length, 2);
@@ -1009,7 +1045,7 @@
 
             var upEvent = { keyCode: kendo.keys.UP, shiftKey: true, preventDefault: $.noop };
 
-            calendar.element.find(".k-state-selected").trigger("click");
+            calendar.element.find(".k-selected").trigger("click");
             calendar._move(upEvent);
             assert.equal(+calendar.current(), +(new Date(2017, 4, 27)));
             assert.equal(calendar.selectDates().length, 6);

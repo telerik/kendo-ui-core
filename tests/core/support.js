@@ -1,8 +1,8 @@
-(function(){
+(function() {
 
 var input;
 
-describe("input support", function () {
+describe("input support", function() {
     beforeEach(function() {
         input = document.createElement("input");
     });
@@ -60,12 +60,12 @@ it("kendo.support checks for datetime-local type", function() {
     assert.equal(kendo.support.input.datetimelocal, input.type === "datetime-local");
 });
 
-it("kendo.support.scrollbar() returns a number", function () {
+it("kendo.support.scrollbar() returns a number", function() {
     var scrollbar = kendo.support.scrollbar();
     assert.isOk(!isNaN(scrollbar));
 });
 
-it("kendo.support.scrollbar(true) refreshes the cached value", function () {
+it("kendo.support.scrollbar(true) refreshes the cached value", function() {
     kendo.support._scrollbar = -1;
 
     var scrollbar = kendo.support.scrollbar(true);

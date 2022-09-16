@@ -1,0 +1,95 @@
+// Bottom Navigation
+.k-bottom-nav {
+    padding: @bottom-nav-padding-y @bottom-nav-padding-x;
+    width: 100%;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    box-sizing: border-box;
+    font-size: @bottom-nav-font-size;
+    line-height: @bottom-nav-line-height;
+    font-family: @bottom-nav-font-family;
+    letter-spacing: @bottom-nav-letter-spacing;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    gap: @bottom-nav-gap;
+    overflow: hidden;
+    outline: none;
+    background-clip: padding-box;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
+}
+
+.k-bottom-nav-border {
+    border-width: @bottom-nav-border-width;
+}
+
+.k-bottom-nav-shadow {
+    box-shadow: @bottom-nav-shadow;
+}
+
+// Items
+.k-bottom-nav-item {
+    padding: @bottom-nav-item-padding-y @bottom-nav-item-padding-x;
+    min-width: @bottom-nav-item-min-width;
+    min-height: @bottom-nav-item-min-height;
+    border-width: 0;
+    border-radius: @bottom-nav-item-border-radius;
+    box-sizing: border-box;
+    font: inherit;
+    display: inline-flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    gap: @bottom-nav-item-gap;
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+    background-color: inherit;
+    border-color: inherit;
+    outline: none;
+
+    &.k-state-disabled,
+    &.k-disabled {
+        background-color: initial;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.k-bottom-nav-item-icon {
+    font-size: @bottom-nav-item-icon-size;
+}
+
+.k-bottom-nav-item-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+// Horizontal Item Layout
+.k-bottom-nav-item-flow-horizontal .k-bottom-nav-item {
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+// Vertical Item Layout
+.k-bottom-nav-item-flow-vertical .k-bottom-nav-item {
+    flex-direction: column;
+}
+
+// Positioning
+.k-bottom-nav.k-pos-fixed,
+.k-bottom-nav.k-pos-absolute {
+    bottom: 0;
+    z-index: 1;
+}

@@ -1,6 +1,6 @@
 ---
 title: Grid
-page_title: jQuery Sortable Documentation | Grid Integration | Kendo UI
+page_title: jQuery Sortable Documentation | Grid Integration
 description: "Get started with the jQuery Sortable by Kendo UI and integrate the widget with the Kendo UI Grid."
 previous_url: /controls/interactivity/sortable/integration
 slug: integrationwith_grid_sortable
@@ -24,7 +24,7 @@ The Sortable reorders the HTML DOM elements. It does not automatically update th
 
 To reorder the table rows of the Grid, initialize the Sortable on the [`table` element](/api/javascript/ui/grid#fields-table) of the Grid. Normally, the `filter` property of the Sortable selects all `tr` elements that are direct children of the table `tbody` element, for example, `filter: ">tbody >tr"`.
 
-> In AngularJS applications, initialize the Sortable as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. For more information, refer to [this example]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+> In AngularJS applications, initialize the Sortable as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. 
 
 ## Setting the Hint in the Grid
 
@@ -60,7 +60,7 @@ The following example demonstrates how to style the `hint` element, so it looks 
           return hint; // Return the hint element.
         },
         placeholder: function(element) { // Customize the placeholder.
-          return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+          return element.clone().addClass("k-hover").css("opacity", 0.65);
         },
         change: function(e) {
           // Handle the change event.
@@ -94,7 +94,7 @@ If you use the batch (incell) edit mode, the code from the previous example that
 
 > The `data-value-update` approach works with regular inputs. However, you must manually configure the Kendo UI widgets as they do not support the `data-value-update` attribute.
 
-For runnable examples, refer to the articles on [using the Sortable with Grids in incell edit mode]({% slug howto_usesortablewithgrid_inincellediting_sortable %}) and [using the Sortable with Grids in batch edit mode within an AngularJS application]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+For a runnable example, refer to the article on [using the Sortable with Grids in incell edit mode]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
 
 ## Reordering of DataSource Items
 

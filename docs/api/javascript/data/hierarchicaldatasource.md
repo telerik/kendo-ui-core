@@ -40,9 +40,13 @@ The filters which are applied over the data items. It applies the filter to all 
         dataSource.fetch();
         var view = dataSource.view();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.length);// displays 2
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].children.view().length); // displays 1
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].children.view()[0].name); // displays "John Doe"
     </script>
 
@@ -70,9 +74,13 @@ The filters which are applied over the data items. It applies the filter to all 
         dataSource.fetch();
         var view = dataSource.view();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.length);// displays 2
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].children.view().length); // displays 1
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].children.view()[0].name); // displays "John Snow"
     </script>
 
@@ -105,9 +113,13 @@ The filters which are applied over the data items. It applies the filter to all 
         dataSource.fetch();
         var view = dataSource.view();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.length);// displays 2
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].children.view().length); // displays 1
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].children.view()[0].username); // displays "John Snow"
     </script>
 
@@ -155,6 +167,7 @@ The data item (model) configuration. See the [`DataSource.schema.model` configur
 
     var category = datasource.data()[0];
     category.load();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(category.averageRating()); // logs 8.75
     </script>
 
@@ -179,7 +192,9 @@ Specifies whether the model might have children and might be loaded. Applicable 
 
     datasource.read();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(datasource.data()[0].hasChildren); // logs false
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(datasource.data()[1].hasChildren); // logs true
     </script>
 
@@ -202,7 +217,9 @@ Specifies whether the model might have children and might be loaded. Applicable 
 
     datasource.read();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(datasource.data()[0].hasChildren); // logs true
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(datasource.data()[1].hasChildren); // logs false
     </script>
 
@@ -223,6 +240,7 @@ Specifies whether the model might have children and might be loaded. Applicable 
 
     datasource.read();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(datasource.data()[0].hasChildren); // logs true
     </script>
 
@@ -267,6 +285,7 @@ For static HierarchicalDataSource (local data), this field may be a `String` and
 
     var scifi = datasource.data()[0];
     scifi.load();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(scifi.children.data().length); // logs 3
     </script>
 
@@ -312,6 +331,7 @@ For static HierarchicalDataSource (local data), this field may be a `String` and
     scifi.load();
     var sw5 = scifi.children.data()[1];
     sw5.load();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sw5.children.data().length); // logs 4
     </script>
 
@@ -357,9 +377,13 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
             dataSource.filter({ field: "name", operator: "startswith", value: "John" });
             var view = dataSource.view();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view.length);// displays 2
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view[0].name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view[0].children.view().length); // displays 1
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view[0].children.view()[0].name); // displays "John Doe"
     </script>
 
@@ -385,6 +409,7 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
         dataSource.fetch();
         var filter = dataSource.filter();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(filter.filters[0]); //displays '{field: "name", operator: "startswith", value: "John"}'
     </script>
 
@@ -414,6 +439,7 @@ If the event was triggered by a child datasource, this field holds a reference t
         ] }
       ],
       change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.node);
       }
     });

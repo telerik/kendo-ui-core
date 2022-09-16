@@ -107,8 +107,6 @@ The recommended way to update the object is to use the `set` method of the [`Obs
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
-* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
-* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
-* [How to Load View in Window]({% slug window_service_angularjs_directives %})
-* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
-* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+
+
+

@@ -9,14 +9,15 @@ position: 1
 
 # Data Binding
 
-The PanelBar HTML helper provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
+The PanelBar provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
 
 ## Declaring PanelBar Items
 
-The PanelBar allows you to declare all its items within the HTML helper declaration.
+The PanelBar allows you to declare all its items within the helper declaration.
 
 The following example demonstrates how to configure a PanelBar with three levels of hierarchy.
 
+```HtmlHelper
     @(Html.Kendo().PanelBar()
         .Name("panelbar")
         .Items(panelbar =>
@@ -35,6 +36,27 @@ The following example demonstrates how to configure a PanelBar with three levels
                 });
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-panelbar name="panelbar">
+        <items>
+            <panelbar-item text="My Web Site">
+                <items>
+                    <panelbar-item text="images">
+                        <items>
+                            <panelbar-item text="logo.png"></panelbar-item>
+                            <panelbar-item text="body-back.png"></panelbar-item>
+                        </items>
+                    </panelbar-item>
+                    <panelbar-item text="about.html"></panelbar-item>
+                    <panelbar-item text="contacts.html"></panelbar-item>
+                </items>
+            </panelbar-item>
+        </items>
+    </kendo-panelbar>
+```
+{% endif %}
 
 ## PanelBar Binding
 

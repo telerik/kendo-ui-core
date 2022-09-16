@@ -1,8 +1,8 @@
-(function (f, define) {
+(function(f, define) {
     define(["./kendo.core"], f);
-})(function () {
+})(function() {
 
-var __meta__ = {// jshint ignore:line
+var __meta__ = {
     id: "badge",
     name: "Badge",
     category: "web", // suite
@@ -10,7 +10,7 @@ var __meta__ = {// jshint ignore:line
     depends: ["core"] // dependencies
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo;
     var Widget = kendo.ui.Widget;
     var ui = kendo.ui;
@@ -24,8 +24,6 @@ var __meta__ = {// jshint ignore:line
             var that = this;
 
             Widget.fn.init.call(that, element, options);
-
-            that._deprecated();
 
             that._content();
 
@@ -42,46 +40,31 @@ var __meta__ = {// jshint ignore:line
 
         options: {
             name: 'Badge',
-            badgeStyle: 'solid',
-            color: 'secondary',
             cutoutBorder: false,
             data: {},
+            fillMode: 'solid',
             icon: '',
             max: Infinity,
-            placement: 'edge',
             position: 'inline',
+            align: '',
+            rounded: 'medium',
+            roundings: {
+                'small': 'sm',
+                'medium': 'md',
+                'large': 'lg',
+                'full': 'full'
+            },
             sizes: {
                 'small': 'sm',
-                'medium': '',
+                'medium': 'md',
                 'large': 'lg'
             },
             size: 'medium',
-            shape: 'rounded',
             template: null,
             text: '',
+            themeColor: 'secondary',
             visible: true,
             _classNames: []
-        },
-
-        _deprecated: function() {
-            var that = this;
-            var options = that.options;
-
-            if (options.text === '' && options.value !== '' && options.value !== undefined) {
-                options.text = options.value;
-            }
-
-            if (options.color === 'secondary' && typeof options.type === 'string' && options.type !== '') {
-                options.color = options.type;
-            }
-
-            if (options.shape === 'rounded' && typeof options.appearance === 'string' && options.appearance !== '') {
-                options.shape = options.appearance;
-            }
-
-            if (options.badgeStyle === 'solid' && typeof options.look === 'string' && options.look !== '') {
-                options.badgeStyle = options.look;
-            }
         },
 
         _content: function() {
@@ -122,13 +105,15 @@ var __meta__ = {// jshint ignore:line
 
         _appearance: function() {
             var that = this;
-            that._color = that.options.color;
+            that._themeColor = that.options.themeColor;
             that._shape = that.options.shape;
             that._sizes = that.options.sizes;
             that._size = that.options.size;
-            that._badgeStyle = that.options.badgeStyle;
+            that._fillMode = that.options.fillMode;
+            that._rounded = that.options.rounded;
+            that._roundings = that.options.roundings;
             that._cutoutBorder = that.options.cutoutBorder;
-            that._placement = that.options.placement;
+            that._align = that.options.align;
             that._position = that.options.position;
             that._visible = that.options.visible;
 
@@ -139,19 +124,18 @@ var __meta__ = {// jshint ignore:line
             var that = this;
             var classNames = ['k-badge'];
             var keepClassNames = that.options._classNames;
-            var color = that._color;
+            var themeColor = that._themeColor;
             var shape = that._shape;
             var sizes = that._sizes;
             var size = that._size;
             var sizeAbbr = sizes[size] === undefined ? size : sizes[size];
-            var sizeSuffix = '';
-            var badgeStyle = that._badgeStyle;
-            var badgeStyleInfix = '';
-            var cutoutBorder = this._cutoutBorder;
-            var placement = that._placement;
-            var placementInfix = '';
-            var position = this._position.toLowerCase();
-            var positions;
+            var fillMode = that._fillMode;
+            var rounded = that._rounded;
+            var roundings = that._roundings;
+            var roundedAbbr = roundings[rounded] === undefined ? rounded : roundings[rounded];
+            var cutoutBorder = that._cutoutBorder;
+            var align = that._align;
+            var position = that._position;
             var visible = that._visible;
 
             // Remove all class names
@@ -161,30 +145,29 @@ var __meta__ = {// jshint ignore:line
                 }
             });
 
-            // Badge style infix
-            if (typeof badgeStyle === 'string' && badgeStyle !== '' && badgeStyle !== 'solid') {
-                classNames.push('k-badge-' + badgeStyle);
-                badgeStyleInfix = badgeStyle + '-';
+            // Fill
+            if (typeof fillMode === 'string' && fillMode !== '') {
+                classNames.push('k-badge-' + fillMode);
             }
 
             // Color
-            if (typeof color === 'string' && color !== '' && color !== 'inherit') {
-                classNames.push('k-badge-' + badgeStyleInfix + color);
+            if (typeof themeColor === 'string' && themeColor !== '') {
+                classNames.push('k-badge-' + fillMode + '-' + themeColor);
             }
 
             // Size
-            if (typeof size === 'string' && size !== '' && size !== 'medium' && sizeAbbr !== '') {
+            if (typeof size === 'string' && size !== '') {
                 classNames.push('k-badge-' + sizeAbbr);
-                sizeSuffix = '-' + sizeAbbr;
+            }
+
+            // Rounded
+            if (typeof rounded === 'string' && rounded !== '') {
+                classNames.push('k-rounded-' + roundedAbbr);
             }
 
             // Shape
-            if (typeof shape === 'string' && shape !== '' && shape !== 'rectangle') {
+            if (typeof shape === 'string' && shape !== '') {
                 classNames.push('k-badge-' + shape);
-
-                if (sizeSuffix !== '') {
-                    classNames.push('k-badge-' + shape + sizeSuffix);
-                }
             }
 
             // Cutout border
@@ -192,16 +175,14 @@ var __meta__ = {// jshint ignore:line
                 classNames.push('k-badge-border-cutout');
             }
 
-            // Placement infix
-            if (typeof placement === 'string' && placement !== '' && placement !== 'edge') {
-                placementInfix = placement + '-';
+            // Position
+            if (typeof position === 'string' && position !== '') {
+                classNames.push('k-badge-' + position);
             }
 
-            // Position
-            if (typeof position === 'string' && position.split(' ').length == 2) {
-                positions = position.split(' ');
-
-                classNames.push('k-badge-' + placementInfix + positions[0] + '-' + positions[1]);
+            // Align
+            if (typeof position === 'string' && position !== '' && position !== 'inline' && typeof align === 'string' && align.split(' ').length == 2) {
+                classNames.push('k-' + align.replace(' ', '-'));
             }
 
             // Visibility
@@ -223,8 +204,6 @@ var __meta__ = {// jshint ignore:line
             });
 
             Widget.fn.setOptions.call(that, options);
-
-            that._deprecated();
 
             that._content();
 
@@ -300,27 +279,27 @@ var __meta__ = {// jshint ignore:line
             that.element.html(iconTemplateFunction({ icon: icon }));
         },
 
-        color: function(color) {
+        themeColor: function(color) {
             var that = this;
 
             // handle badge.color()
             if (arguments.length === 0 || color === undefined) {
-                return that._color;
+                return that._themeColor;
             }
 
-            that._color = color;
+            that._themeColor = color;
             that._updateClassNames();
         },
 
-        shape: function(shape) {
+        rounded: function(rounded) {
             var that = this;
 
             // handle badge.shape()
-            if (arguments.length === 0 || shape === undefined) {
-                return that._shape;
+            if (arguments.length === 0 || rounded === undefined) {
+                return that._rounded;
             }
 
-            that._shape = shape;
+            that._rounded = rounded;
             that._updateClassNames();
         },
 
@@ -339,15 +318,12 @@ var __meta__ = {// jshint ignore:line
         }
     });
 
-    // Alis deprecated
-    Badge.fn.value = Badge.fn.text;
-
     ui.plugin(Badge);
 
 })(window.kendo.jQuery);
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function (a1, a2, a3) {
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) {
     (a3 || a2)();
 });

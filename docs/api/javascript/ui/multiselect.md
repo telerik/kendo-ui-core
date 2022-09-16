@@ -273,7 +273,7 @@ The field of the data item that provides the value of the widget.
 
 ### delay `Number`*(default: 200)*
 
- Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
+Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
 
 #### Example - set the delay
 
@@ -284,6 +284,22 @@ The field of the data item that provides the value of the widget.
     <script>
     $("#multiselect").kendoMultiSelect({
         delay: 1000 // wait 1 second before filtering
+    });
+    </script>
+
+### downArrow `Boolean`*(default: false)*
+
+Configures MultiSelect to render a down arrow that opens and closes its popup.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        downArrow: true
     });
     </script>
 
@@ -331,6 +347,28 @@ If set to `true` the widget will not show all items when the text of the search 
             { ProductName: "Chang", ProductID: 2 },
             { ProductName: "Uncle Bob's Organic Dried Pears", ProductID: 7 }
         ]
+    });
+    </script>
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      filter: "contains",
+      fillMode: "flat"
     });
     </script>
 
@@ -526,6 +564,27 @@ The text message shown when hovering delete icon in a selected tag.
             dataValueField: "id",
             messages: {
                 deleteTag: "delete!"
+            }
+        });
+    </script>
+
+### messages.downArrow `String` *(default: "select")*
+
+Specifies the text that will be used for the MultiSelect `downArrow` title attribute.
+
+#### Example
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                downArrow: "custom!"
             }
         });
     </script>
@@ -943,6 +1002,22 @@ The mode used to render the selected tags. The available modes are:
 > Every tagMode has a specific `tagTemplate` value. If you would like to control the content of the rendered tags,
 set a custom a [tagTemplate](/api/javascript/ui/multiselect#configuration-tagTemplate) value.
 
+#### Example - set the tagMode
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" },
+                { id: 3, name: "Bananas" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",            
+            tagMode: "single"
+        });
+    </script>
+
 ### value `Array`*(default: [])*
 
  Define the value of the widget
@@ -1276,6 +1351,49 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
             return data;
         }
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      size: "large"
+    });
     </script>
 
 ## Fields

@@ -567,6 +567,40 @@ The supported filter values are `startswith`, `endswith` and `contains`.
     });
     </script>
 
+### filterLabel `String`
+
+When filtering is enabled, allows aria-label to be defined for the filter input element.
+
+#### Example - set the filter
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      filter: "contains",
+      filterLabel: "custom title"
+    });
+    </script>
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      fillMode: "flat"
+    });
+    </script>
+
 ### footerTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
@@ -1089,6 +1123,45 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
         kendo.bind($("#dropdowntree"), viewModel);
     </script>
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      size: "large"
+    });
+    </script>
+
 ## Fields
 
 ### dataSource `kendo.data.HierarchicalDataSource`
@@ -1438,6 +1511,7 @@ The value to set. A *String* value, when [checkboxes](/api/javascript/ui/dropdow
         dropdowntree.value([1, 2]); //select items which have value respectively 1 and 2
 
         // get the value of the dropdowntree
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dropdowntree.value());
     </script>
 
@@ -1689,7 +1763,9 @@ The selected node
     $("#dropdowntree").kendoDropDownTree({
       dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }],
       select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Select", e.node);
+        console.log("Node text --> " + $(e.node).text())
       }
     });
     </script>
@@ -1699,6 +1775,7 @@ The selected node
     <input id="dropdowntree"/>
     <script>
     function dropdowntree_select(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("select", e.node);
     }
     $("#dropdowntree").kendoDropDownTree({

@@ -1,0 +1,23 @@
+@utils-overflow: auto, hidden, visible, scroll, clip;
+
+.overflow-shorthand( @overflow-x ) {
+
+    each( @utils-overflow, {
+        @overflow-y: @value;
+
+        .k-overflow-@{overflow-x}-@{overflow-y} { overflow: @overflow-x @overflow-y !important; }
+    });
+
+}
+
+each( @utils-overflow, {
+    .k-overflow-@{value} { overflow: @value; }
+    .k-overflow-x-@{value} { overflow-x: @value; }
+    .k-overflow-y-@{value} { overflow-y: @value; }
+
+    .\!k-overflow-@{value} { overflow: @value !important; }
+    .\!k-overflow-x-@{value} { overflow-x: @value !important; }
+    .\!k-overflow-y-@{value} { overflow-y: @value !important; }
+
+    .overflow-shorthand(@value);
+});

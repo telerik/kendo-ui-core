@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -92,6 +92,7 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "repeat": "Ripeti",
   "daily": {
     "interval": "giorno(i)",
     "repeatEvery": "Ripeti ogni: "
@@ -115,7 +116,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "Giorno",
     "interval": "mese(i)",
     "repeatEvery": "Ripeti ogni: ",
-    "repeatOn": "Repeti quando:: "
+    "repeatOn": "Repeti quando: ",
+    "date": "Data"
   },
   "offsetPositions": {
     "first": "primo",
@@ -133,7 +135,10 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "of": "di",
     "repeatEvery": "Ripeti ogni:",
     "repeatOn": "Ripeti quando:",
-    "interval": "anno(i)"
+    "interval": "anno(i)",
+    "month": "mese",
+    "day": "giorno",
+    "date": "Data"
   },
   "weekdays": {
     "day": "giorno",
@@ -141,6 +146,38 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "giorno finesettimana"
   }
 });
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+    $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "endTitle": "Fine ripetizione",
+      "repeatTitle": "Modello di ripetizione",
+      "headerTitle": "Ripeti appuntamento",
+      "end": {
+        "patterns": {
+            "never": "Mai",
+            "after": "Dopo...",
+            "on": "Il..."
+        }
+      },
+      "monthly": {
+        "repeatBy": "Ripeti per: ",
+        "dayOfMonth": "Data del mese",
+        "dayOfWeek": "Giorno della settimana",
+        "every": "Ogni"
+      },
+      "yearly": {
+        "repeatBy": "Ripeti per: ",
+        "dayOfMonth": "Data del mese",
+        "dayOfWeek": "Giorno della settimana",
+        "every": "Ogni",
+        "month": "Mese",
+        "day": "Giorno"
+      }
+    });
 }
 
 /* FilterCell messages */
@@ -338,7 +375,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogUpdate": "Aggiorna",
   "insertFile": "Inserisci file",
   "insertFile1": "Inserisci file",
-  "print": "Stampa"
+  "print": "Stampa",
+  "borderNone": "Nessuno"
 });
 }
 
@@ -389,11 +427,14 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "day": "Giorno",
     "month": "Mese",
     "week": "Settimana",
-    "workWeek": "Work Week"
+    "workWeek": "Settimana lavorativa"
   },
   "deleteWindowTitle": "Rimuovi evento",
   "showFullDay": "Mostra il giorno completo",
-  "showWorkDay": "Mostra solo le ore lavorative"
+  "showWorkDay": "Mostra solo le ore lavorative",
+  "search": "Cerca...",
+  "refresh": "Aggorna",
+  "selectView": "Seleziona vista"
 });
 }
 
@@ -492,7 +533,8 @@ if (kendo.ui.MultiSelect) {
         "singleTag": "opzione/i selezionata/e",
         "clear": "cancelli",
         "deleteTag": "rimuovi",
-        "noData": "Nessun dato trovato."
+        "noData": "Nessun dato trovato.",
+        "downArrow": "seleziona"
     });
 }
 
@@ -501,9 +543,48 @@ if (kendo.ui.MultiSelect) {
 if (kendo.ui.Chat) {
     kendo.ui.Chat.prototype.options.messages =
     $.extend(true, kendo.ui.Chat.prototype.options.messages,{
+        "messageListLabel": "Lista di messaggi",
         "placeholder": "Scrivi...",
         "toggleButton": "Apri/chiudi barra degli strumenti",
         "sendButton": "Invia messaggio"
+    });
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+    kendo.ui.Wizard.prototype.options.messages =
+    $.extend(true, kendo.ui.Wizard.prototype.options.messages,{
+        "reset": "Risetta",
+        "previous": "Precedente",
+        "next": "Prossimo",
+        "done": "Finito",
+        "step": "Passo",
+        "of": "di"
+    });
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+    kendo.ui.OrgChart.prototype.options.messages =
+    $.extend(true, kendo.ui.OrgChart.prototype.options.messages,{
+        label: "Org Chart",
+        edit: "Modifica",
+        create: "Crea",
+        destroy: "Rimuovi",
+        destroyContent: "Sei sicuro che vuoi rimovere questo articulo e i suoi figli?",
+        destroyTitle: "Rimuovi articolo",
+        cancel: "Anulla",
+        save: "Salva",
+        menuLabel: "Menu di modificazioni",
+        uploadAvatar: "Carica un nuovo avatar",
+        parent: "Genitore",
+        name: "Nome",
+        title: "Titolo",
+        none: "--Nessun--",
+        expand: "espanda",
+        collapse: "crolla"
     });
 }
 

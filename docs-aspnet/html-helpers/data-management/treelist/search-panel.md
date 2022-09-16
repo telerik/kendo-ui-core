@@ -16,21 +16,43 @@ Under the hood, the search panel uses filtering to show only the relevant record
 
 To enable the search panel functionality, include the `Search` option to the toolbar configuration.
 
-> When the server operations are enabled, you can search only by using string fields. Using the `Contains` filter operation is available only for string types.
-
+```HtmlHelper
     @(Html.Kendo().TreeList<CustomerViewModel>()
         .Name("treeList")
         .ToolBar(t => t.Search()) // Enable the Search panel.
         ...
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        <toolbar>
+            <toolbar-button name="search"></toolbar-button>
+        </toolbar>
+        ...
+    </kendo-treelist>
+```
+{% endif %}
+
 
 You can also customize which fields to search through the data when a value is entered in the search input.
 
+```HtmlHelper
     ...
     .Search(s=> { s.Field(c => c.ContactName); })
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        <search fields="@(new string[] { "ContactName" })"/>
+        ...
+    </kendo-treelist>
+```
+{% endif %}
 
 ## Known Limitations
 
-When filtering is enabled in the filter textboxes for all TreeList columns will be populated with the value entered in the search textbox.
+* When filtering is enabled in the filter textboxes for all TreeList columns will be populated with the value entered in the search textbox.
+* When the server operations are enabled, you can search only by using string fields. Using the `Contains` filter operation is available only for string types.
 
 ## See Also
 

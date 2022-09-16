@@ -16,6 +16,56 @@ res_type: api
 
 The value of the ID of the `Model`. This field is available only if the `id` is defined in the Model configuration. See the following example.
 
+#### Example - configure the Model id 
+
+    <script>
+        var Product = kendo.data.Model.define( {
+          id: "ProductID", // the identifier is the "ProductID" field (declared below)
+          fields: {
+            /* name of the field - ProductID */ 
+            ProductID: { editable: false, nullable: true },
+            /* name of the field - ProductName*/ 
+            ProductName: { type: "string", defaultValue: "<empty>"}
+          }
+        });
+        var product = new Product({
+          ProductID:3,
+          ProductName: "Milk"
+        });
+  
+        /* The result can be observed in the DevTools(F12) console of the browser. */  
+        console.log(product.ProductID); // // outputs "3" which is the ProductID value
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(product.idField); // outputs "ProductID" which is the name of the 'id' field
+    </script>
+
+
+#### Example - define the model.id in dataSource schema
+
+    <script>
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          dataSource = new kendo.data.DataSource({
+            transport: {
+              read:  {
+                url: crudServiceBaseUrl + "/Products",
+                dataType: "jsonp"
+              }
+            },
+            pageSize: 20,
+            schema: {
+              model: {
+                id: "ProductID", // the identifier of the model
+                fields: {
+                  ProductID: { editable: false, nullable: true },
+                  ProductName: { validation: { required: true } },
+                  UnitPrice: { type: "number" },
+                  Discontinued: { type: "boolean" },
+                }
+              }
+            }
+          });
+    </script>
+
 ### idField `String`
 
 The name of the `Model` ID field. This field is available only if the `id` is defined in the Model configuration.
@@ -39,7 +89,9 @@ The name of the `Model` ID field. This field is available only if the `id` is de
         age: 42
     });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(person.id); // outputs 1
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(person.idField); // outputs "personId"
     </script>
 
@@ -60,8 +112,10 @@ Indicates whether the model is modified.
         name: "John Doe"
     });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(model.dirty); // outputs "false"
     model.set("name", "Jane Doe");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(model.dirty); // outputs "true"
     </script>
 
@@ -95,7 +149,9 @@ Defines a new `Model` type by using the provided options. The returned value inh
         age: 42
     });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(person.get("name")); // outputs "John Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(person.get("age")); // outputs 42
     </script>
 
@@ -164,7 +220,9 @@ Specifies the validation options which will be used by the [Kendo UI Validator](
             /* name of the field */ name: {
                 type: "string", // the field is a string
                 validation: { // validation rules
-                    required: true // the field is required
+                    required: {
+                        message: "Custom required message" // the message that is displayed when an empty value is about to be saved
+                    }
                 },
                 defaultValue: "<empty>" // default field value
             },
@@ -185,6 +243,7 @@ Specifies the validation options which will be used by the [Kendo UI Validator](
         }
     });
     var product = new Product();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(product.get("price")); // outputs "99.99" which is the default value
     </script>
 
@@ -216,7 +275,9 @@ The field that will be checked.
         }
     });
     var product = new Product();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(product.editable("id")); // outputs "false"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(product.editable("name")); // outputs "true"
     </script>
 
@@ -243,8 +304,10 @@ Checks if the `Model` is new or not. The `id` field is used to determine if a mo
         }
     });
     var productOne = new Product();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(productOne.isNew()); // outputs "true"
     var productTwo = new Product({ productId: 1 });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(productTwo.isNew()); // outputs "false" because productId is set to 1
     </script>
 

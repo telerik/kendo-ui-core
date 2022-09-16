@@ -1,9 +1,9 @@
 ---
 title: Selected Dates and Formats
-page_title: jQuery DateInput Documentation | Selected Dates and Formats | Kendo UI
+page_title: jQuery DateInput Documentation | Selected Dates and Formats
 description: "Get started with the jQuery DateInput by Kendo UI and set its selected date and format."
 slug: selecteddates_kendoui_dateinput
-position: 2
+position: 3
 ---
 
 # Selected Dates and Formats

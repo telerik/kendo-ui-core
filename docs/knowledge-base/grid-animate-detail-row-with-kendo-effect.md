@@ -44,7 +44,7 @@ Use the `detailInit` event and custom CSS rules.
 <script type="text/x-kendo-template" id="template">
   <div class="tabstrip">
     <ul>
-      <li class="k-state-active">
+      <li class="k-active">
         Orders
       </li>
       <li>

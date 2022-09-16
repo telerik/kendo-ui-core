@@ -50,7 +50,7 @@ This will facilitate easier pull request management for the continuous work that
 
 ### 3. Include tests describing the bug or feature
 
-Kendo UI uses [QUnit](https://qunitjs.com/) for a test framework and [karma](http://karma-runner.github.io/) as the test runner. You may browse the `tests` directory to get a better idea of the structure and conventions used.
+Kendo UI uses [Mocha](https://www.npmjs.com/package/mocha) for a test framework and [karma](http://karma-runner.github.io/) as the test runner. You may browse the `tests` directory to get a better idea of the structure and conventions used.
 
 To run the tests, execute the following command:
 

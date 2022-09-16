@@ -67,7 +67,7 @@
                 done();
             });
 
-            press(element, 10, 20)
+            press(element, 10, 20);
 
             setTimeout(function() {
                 move(element, 1, 30);
@@ -81,7 +81,6 @@
                 release(element, 10, 20);
             }, 1);
         });
-
 
 
         it("passes delta on mousemove", function() {
@@ -486,7 +485,7 @@
             var countDoubleTap = 0;
 
             userEvents.bind("tap", function(e) {
-                countTap++
+                countTap++;
             });
 
             userEvents.bind("doubleTap", function(e) {
@@ -504,7 +503,7 @@
                     assert.equal(countTap, 2);
                     assert.equal(countDoubleTap, 0);
                     done();
-                }, 300)
+                }, 300);
 
             }, 450);
         });

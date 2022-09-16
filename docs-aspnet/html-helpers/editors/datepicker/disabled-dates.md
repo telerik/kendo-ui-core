@@ -20,7 +20,7 @@ For a complete example, refer to the [demo on disabling dates in the DatePicker]
 
 To disable dates by setting the days of the week, list the names of days that will be disabled.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("weekend-date-picker")
         .DisableDates(DayOfWeek.Saturday, DayOfWeek.Sunday)
@@ -31,7 +31,7 @@ To disable dates by setting the days of the week, list the names of days that wi
 
 To disable dates through using a function, set the return value for the date that will be disabled to `true`.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("national-date-picker")
         .DisableDates("disableDates")

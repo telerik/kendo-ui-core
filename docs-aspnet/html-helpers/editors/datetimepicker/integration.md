@@ -17,12 +17,18 @@ The DatePicker provides integration options with the [Telerik UI DateInput for {
 
 To use the DateInput as the input element in a DateTimePicker, enable the [`DateInput`]({{ DateInput }}) property of the DateTimePicker.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateTimePicker()
         .Name("dateTimePicker")
         .DateInput(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker"
+                       date-input="true"/>
+```
+{% endif %}
 
 ## See Also
 

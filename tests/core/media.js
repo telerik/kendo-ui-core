@@ -1,5 +1,5 @@
 (function() {
-    describe("matchesMedia", function () {
+    describe("matchesMedia", function() {
 
     it("bootstrap media is converted to browser media", function() {
         assert.equal(kendo._bootstrapToMedia("xs"), "(max-width: 576px)");

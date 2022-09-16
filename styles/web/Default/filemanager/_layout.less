@@ -16,6 +16,10 @@
     border-color: inherit;
     flex-shrink: 0;
 }
+.k-filemanager-search-tool {
+    display: inline-flex;
+    flex-flow: row nowrap;
+}
 
 
 // Content Wrapper
@@ -44,7 +48,6 @@
     > .k-treeview {
         padding: @filemanager-navigation-padding-y @filemanager-navigation-padding-x;
         height: 100%;
-        box-sizing: border-box;
     }
 }
 .k-filemanager-treeview {
@@ -77,9 +80,8 @@
 // Filemanager view
 .k-filemanager-view {
     display: flex;
-    flex: 1 1 0%;
-    flex-flow: column nowrap;
-    overflow: hidden;
+    flex: 1 1 auto;
+    flex-flow: row nowrap;
 
     > .k-filemanager-listview,
     > .k-filemanager-grid {
@@ -92,11 +94,7 @@
 .k-filemanager-listview {
     height: 100%;
     flex: 1 1 0%;
-
-    // Listview content
-    .k-listview-content {
-        overflow: auto;
-    }
+    overflow: auto;
 
     // Listview item
     .k-listview-item {
@@ -212,6 +210,12 @@
     .k-single-file-selected { font-weight: bold; }
     .k-multiple-files-selected { font-weight: bold; }
 
+    // File size
+    .k-file-size {
+        font-size: inherit;
+        line-height: normal;
+    }
+
     // File Meta
     .k-file-meta {
         margin: @filemanager-preview-spacing 0 0;
@@ -240,10 +244,27 @@
 
 
 // Resizing Handle
+.k-filemanager-resizable {
+
+    .k-filemanager-navigation,
+    .k-filemanager-preview {
+        border-width: 0;
+    }
+}
 .k-filemanager .k-splitbar {
+    // border-width: 0;
     flex-shrink: 0;
     display: inline-flex;
     position: relative;
+}
+.k-filemanager .k-splitbar-horizontal {
+    width: 6px;
+    flex-direction: column;
+    align-items: center;
+
+    .k-resize-handle {
+        width: 2px;
+    }
 }
 
 

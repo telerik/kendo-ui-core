@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "responsive-panel",
     name: "Responsive Panel",
     category: "web",
@@ -10,12 +10,11 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core" ]
 };
 
-(function ($, undefined) {
-    var proxy = $.proxy;
+(function($, undefined) {
     var NS = ".kendoResponsivePanel";
     var OPEN = "open";
     var CLOSE = "close";
-    var ACTIVATE_EVENTS = "click" + NS +" touchstart" + NS + " touchend" + NS;
+    var ACTIVATE_EVENTS = "click" + NS + " touchstart" + NS + " touchend" + NS;
     var Widget = kendo.ui.Widget;
     var ResponsivePanel = Widget.extend({
         init: function(element, options) {
@@ -23,17 +22,22 @@ var __meta__ = { // jshint ignore:line
 
             this._guid = "_" + kendo.guid();
 
-            this._toggleHandler = proxy(this._toggleButtonClick, this);
-            this._closeHandler = proxy(this._close, this);
+            this._toggleHandler = this._toggleButtonClick.bind(this);
+            this._closeHandler = this._close.bind(this);
 
             $(document.documentElement).on(ACTIVATE_EVENTS, this.options.toggleButton, this._toggleHandler);
 
             this._registerBreakpoint();
 
+            if (this.options.content) {
+                kendo.destroy(this.element.children());
+                this.element.html(this.options.content);
+            }
+
             this.element
                 .addClass("k-rpanel k-rpanel-" + this.options.orientation + " " + this._guid);
 
-            this._resizeHandler = proxy(this.resize, this, true);
+            this._resizeHandler = this.resize.bind(this, true);
             $(window).on("resize" + NS, this._resizeHandler);
         },
         _mediaQuery:
@@ -84,7 +88,7 @@ var __meta__ = { // jshint ignore:line
 
             head.appendChild(style);
 
-            if (style.styleSheet){
+            if (style.styleSheet) {
                 style.styleSheet.cssText = cssText;
             } else {
                 style.appendChild(document.createTextNode(cssText));
@@ -92,6 +96,7 @@ var __meta__ = { // jshint ignore:line
         },
         options: {
             name: "ResponsivePanel",
+            content: "",
             orientation: "left",
             toggleButton: ".k-rpanel-toggle",
             breakpoint: 640,
@@ -109,7 +114,7 @@ var __meta__ = { // jshint ignore:line
         _toggleButtonClick: function(e) {
             e.preventDefault();
 
-            if(e.type == "touchend") {
+            if (e.type == "touchend") {
                 return;
             }
 
@@ -156,4 +161,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

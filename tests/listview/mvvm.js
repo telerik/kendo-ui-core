@@ -20,7 +20,7 @@
 
             window.dataBound = function() {
                 assert.isOk(true);
-            }
+            };
         });
         afterEach(function() {
             window.dataBound = null;
@@ -291,7 +291,7 @@
                         }
                     }
                 })
-            }
+            };
 
             kendo.bind(dom, viewmodel);
 
@@ -313,7 +313,7 @@
                         }
                     }
                 })
-            }
+            };
 
             kendo.bind(dom, viewmodel);
 
@@ -321,6 +321,40 @@
             dom.data("kendoListView").cancel();
 
             assert.equal(dom.find(".k-listview-content").children().eq(0).text(), "foo");
+        });
+
+        it("it is possible to configure scrollable setting with mvvm", function() {
+            var dom = $('<div data-role="listview" data-template="template" data-bind="source:items" data-scrollable="endless"/>').appendTo(Mocha.fixture);
+
+            var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
+
+            kendo.bind(dom, observable);
+
+            var listView = dom.data("kendoListView");
+
+            assert.equal(listView.options.scrollable, "endless");
+        });
+
+        it("_endlessPageSize is set when endless scrolling is enabled", function() {
+            var dom = $('<div data-role="listview" data-template="template" data-bind="source:dataSource" data-scrollable="endless"/>').appendTo(Mocha.fixture);
+
+            var viewmodel = {
+                dataSource: new kendo.data.DataSource({
+                    pageSize: 9,
+                    data: [{ id: 1, text: "foo" }, { id: 2, text: "bar" }],
+                    schema: {
+                        model: {
+                            id: "id"
+                        }
+                    }
+                })
+            };
+
+            kendo.bind(dom, viewmodel);
+
+            var listView = dom.data("kendoListView");
+
+            assert.equal(listView._endlessPageSize, 9);
         });
     });
 }());

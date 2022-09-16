@@ -31,6 +31,8 @@ How can I export my Kendo UI Grid with multiple template columns with arbitrary 
 
 > The following example produces text-only content in the exported Excel file. The Grid is able to export only data values to Excel.
 
+> The following example does not work with grouped data and for such the custom excelExport logic needs to be adjusted.
+
 ```dojo
     <div id="grid"></div>
     <script>

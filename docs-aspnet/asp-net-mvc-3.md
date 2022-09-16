@@ -13,7 +13,7 @@ This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 3
 
 It uses Visual Studio 2010 but the examples are applicable to all Visual Studio versions that support ASP.NET MVC 3. The examples create a new ASP.NET MVC 3 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 3 applications are the same.
 
-> The [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure which this document describes.
+> The [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}) automate the whole procedure which this document describes.
 
 ## Create New ASP.NET MVC 3 Applications
 
@@ -199,7 +199,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 ## Next Steps
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Use the Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Use the Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
 ## See Also
@@ -207,5 +207,5 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetcore %})

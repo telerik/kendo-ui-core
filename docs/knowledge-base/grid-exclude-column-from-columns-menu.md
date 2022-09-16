@@ -1,5 +1,5 @@
 ---
-title: Exclude Hidden Columns from Column Menu List in Grid
+title: Exclude Specific Columns from Column Menu List in Grid
 description: An example on how to remove an item from the list of columns in the column menu of the Kendo UI Grid for jQuery.
 type: how-to
 page_title: Exclude Specific Columns from Column List | Kendo UI Grid for jQuery
@@ -28,23 +28,37 @@ A Grid allows the user to hide or show columns through its column menu but how c
 
 ## Solution
 
-Use the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event of the Grid and remove the desired element or elements by using jQuery.
+1. Use the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event of the Grid and add a `hidden` CSS class to the desired element or elements by using jQuery.
+2. Set `display: none` to the element by targeting it with the added class `hidden`.
+
+```
+  <style>
+    .hidden {
+      display: none !important;
+    }
+  </style>
+```
 
 ```
 columnMenuInit(e){
-  e.container.find('li[role="menuitemcheckbox"]:nth-child(2)').remove();
+  e.container.find('li[role="menuitemcheckbox"]:nth-child(2)').addClass("hidden");
 }
 ```
 
 The following example demonstrates the full implementation of the suggested approach.
 
 ```dojo
+<style>
+  .hidden {
+    display: none !important;
+  }
+</style>
 <div id="grid"></div>
 <script>
   $(document).ready(function() {
     $("#grid").kendoGrid({
       columnMenuInit(e){
-        e.container.find('li[role="menuitemcheckbox"]:nth-child(2)').remove();
+        e.container.find('li[role="menuitemcheckbox"]:nth-child(2)').addClass("hidden");
       },
       dataSource: {
         type: "odata",

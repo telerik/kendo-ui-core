@@ -15,10 +15,17 @@ The widget can also be checked or unchecked at any time by using jQuery.
 
 The following example demonstrates how to use the `.Checked()` configuration option.
 
+```HtmlHelper
     @(Html.Kendo().RadioButton()
         .Name("MyRadioButton")
         .Label("I agree")
         .Checked(true))
+```
+ {% if site.core %}
+```TagHelper
+    <kendo-radiobutton name="MyRadioButton" label="I agree" checked="true"></kendo-radiobutton>
+```
+{% endif %}
 
 ## See Also
 

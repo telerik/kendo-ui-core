@@ -14,7 +14,7 @@ You can set the label and the icon of an indicator element and define whether th
 
 The following example demonstrates how the set the configuration for the Steps of the Stepper through the `steps` configuration.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().stepper()
         .Name("stepper")
         .Steps(s =>
@@ -25,6 +25,17 @@ The following example demonstrates how the set the configuration for the Steps o
             s.Add().Label("Last Step").Icon("save").Enabled(false);
         })
     )
+```
+```TagHelper
+    <kendo-stepper name="stepper">
+        <steps>
+            <step label="First" icon="home"></step>
+            <step label="Second" selected="true"></step>
+            <step label="Third"></step>
+            <step label="Fourth" enabled="false"></step>
+            <step label="Fifth"></step>
+        </steps>
+    </kendo-stepper>
 ```
 
 ## See Also

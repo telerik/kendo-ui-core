@@ -13,7 +13,7 @@ The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.or
 > * As of 2016, the RequireJS project is mostly superseded by solutions such as [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
 > * You may check the help articles on their integration too&mdash;[Webpack support]({% slug webpacksupport_integration_kendoui %}) and [SystemJS support]({% slug systemjs_integration_kendoui %}).
 > * Due to a bug, the examples below do not work with the official Kendo UI Q1 2016 release. They should work as expected with the versions 2016.1.118 and later.
-> * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder) using RequireJS.
+> * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_scripts %}#employ-download-builder) using RequireJS.
 
 ## Loading from Local Directories
 
@@ -62,8 +62,8 @@ The following example demonstrates how to use a bundle script with RequireJS.
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -73,8 +73,8 @@ The following example demonstrates how to use a bundle script with RequireJS.
       require.config({
         paths: {
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "jszip": "https://kendo.cdn.telerik.com/2018.1.221/js/jszip.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min",
+          "jszip": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min",
+          "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min",
         }
       });
 
@@ -100,9 +100,9 @@ The following example demonstrates how to load AngularJS and initialize it with 
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -115,7 +115,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
         paths: {
           "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/2016.1.406/js/kendo.all.min"
+          "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min"
         },
         shim: {
           "angular": { deps: ["jquery"] },
@@ -145,14 +145,14 @@ The following example demonstrates how to load AngularJS and initialize it with 
 
 ## Using Custom Kendo Scripts in AngularJS
 
-The following example demonstrates how to use a [custom Kendo script created with `gulp`]({% slug include_only_what_you_need_kendoui_installation %}#use-gulp) with RequireJS and AngularJS. The script for the below example has been created with the following command: `gulp custom dropdownlist,angular`.
+The following example demonstrates how to use a [custom Kendo script created with `gulp`]({% slug include_only_what_you_need_kendoui_scripts %}#use-gulp) with RequireJS and AngularJS. The script for the below example has been created with the following command: `npx gulp custom -c dropdownlist,angular`.
 
 ```pseudo
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.514/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.514/styles/kendo.default.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>

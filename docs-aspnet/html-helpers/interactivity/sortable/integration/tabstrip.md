@@ -1,19 +1,19 @@
 ---
 title: TabStrip
 page_title: TabStrip Integration
-description: "Learn how to reorder TabStrip items when using the Telerik UI Sortable HtmlHelper for {{ site.framework }}."
+description: "Learn how to reorder TabStrip items when using the Telerik UI Sortable component for {{ site.framework }}."
 slug: htmlhelpers_sortable_aspnetcore_integration_tabstrip
 position: 3
 ---
 
 # TabStrip Integration
 
-You can use the [Telerik UI Sortable HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/sortable/index) to reorder the items in the tabs of a TabStrip.
+You can use the [Telerik UI Sortable component for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/sortable/index) to reorder the items in the tabs of a TabStrip.
 
 ## Prerequisites
 
-* [Overview of the Telerik UI Sortable HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_sortable_aspnetcore %})
-* [Overview of the Telerik UI TabStrip HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_tabstrip_aspnetcore %})
+* [Overview of the Telerik UI Sortable component for {{ site.framework }}]({% slug htmlhelpers_sortable_aspnetcore %})
+* [Overview of the Telerik UI TabStrip component for {{ site.framework }}]({% slug htmlhelpers_tabstrip_aspnetcore %})
 
 ## Reordering of Sortable Items
 
@@ -23,7 +23,7 @@ The Sortable reorders the HTML DOM elements. It does not automatically update th
 
 To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip-items` element of the TabStrip. Normally, the `filter` property selects all `li.k-item` elements. If required, you can restrict the hint movement within the `ul.k-tabstrip-items` element.
 
-```
+```HtmlHelper
     @(Html.Kendo().Sortable()
         .For("#tabstrip")
         .Filter("li.k-item")
@@ -31,10 +31,20 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
         .HintHandler("hintHandler")
         .Events(ev=>ev.Start("onStart").Change("onChange"))
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-sortable name="tabstrip" filter="li.k-item" hint="hintHandler"
+        container="ul.k-tabstrip-items"
+        on-start="onStart"
+        on-change="onChange">
+    </kendo-sortable>
+```
+{% endif %}
+```JavaScript
     <script>
         function hintHandler(element) {
-            return $("<div id='hint' class='k-widget k-header k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-state-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
+            return $("<div id='hint' class='k-widget k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
         }
 
         function onStart(e) {
@@ -53,7 +63,6 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
         }
     </script>
 ```
-
 To avoid visual glitches, activate the current tab at the `start` event handler of the Sortable.
 
 ```

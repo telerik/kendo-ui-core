@@ -13,6 +13,8 @@
         color: inherit;
         text-decoration: none;
         outline: 0;
+        font: inherit;
+        background-color: inherit;
     }
 
     .k-widget,
@@ -67,7 +69,8 @@
     &:hover {
         z-index: 2;
     }
-    &.k-state-disabled {
+    &.k-state-disabled,
+    &.k-disabled {
         color: inherit;
     }
 }
@@ -113,7 +116,8 @@
 
 
     // Selected state
-    .k-state-selected {
+    .k-state-selected,
+    .k-selected {
         cursor: inherit;
         z-index: 2;
     }
@@ -151,6 +155,7 @@
     .base-pager-section();
 
     .k-dropdown,
+    .k-dropdownlist,
     > select {
         margin-right: 1ex;
         width: @pager-page-size-dropdown-width;
@@ -159,6 +164,7 @@
     .k-rtl &,
     [dir="rtl"] & {
         .k-dropdown,
+        .k-dropdownlist,
         > select {
             margin-left: 1ex;
             margin-right: 0;
@@ -194,8 +200,6 @@
 
 
 // Responsive
-.k-pager-lg,
-.k-pager-md,
 .k-pager-sm {
     overflow: visible;
 
@@ -218,6 +222,7 @@
         select.k-dropdown {
             width: 100%;
             display: flex;
+            box-sizing: border-box;
         }
     }
 
@@ -237,8 +242,6 @@
 .k-pager-md .k-pager-info,
 .k-pager-sm .k-pager-info,
 .k-pager-sm .k-pager-sizes,
-.k-pager-lg .k-pager-numbers,
-.k-pager-md .k-pager-numbers,
 .k-pager-sm .k-pager-numbers {
     display: none;
 }

@@ -31,6 +31,8 @@ The `localDataSource` variable in the example is a DataSource that is initialize
 
 When the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. The default configuration of the widgets is set to automatically bind to an associated DataSource. However, this may be overridden, i.e. `autoBind`.
 
+> A field in the DataSource cannot be named "data". The latter should be considered a limitation.
+
 ## Creating Remote Data Sources
 
 The process of creating a DataSource for remote data differs in several ways from creating a DataSource for a local data:
@@ -205,6 +207,7 @@ The following example features local data but the data returned by a `transport`
             'groups': [{
                 'field': 'length',
                 'value': '5',
+                'itemCount': '1', // Specify the number of items in the group.
                 'items': [{
                     'w': 'kendo'
                 }],
@@ -213,12 +216,31 @@ The following example features local data but the data returned by a `transport`
             },{
                 'field': 'length',
                 'value': '4',
+                'itemCount': '3',
                 'items': [
                     { 'w': 'done' },
                     { 'w': 'keno' },
                     { 'w': 'node' }
                 ],
                 'hasSubgroups': false,
+                'aggregates': {}
+            }, {
+                'field': 'length',
+                'value': '4',
+                'subgroupCount': '1', // Specify the number of subgroups when hasSubgroups is true.
+                'items': [
+                    {
+                        'field': 'anotherField',
+                        'value': 'test',
+                        'itemCount': '1',
+                        'items': [{
+                            's': 'my-item'
+                        }],
+                        'hasSubgroups': false,
+                        'aggregates': {}
+                    }
+                ],
+                'hasSubgroups': true,
                 'aggregates': {}
             }]
         };

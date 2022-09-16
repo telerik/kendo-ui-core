@@ -5,7 +5,7 @@
         beforeEach(function() {
             window.multiSelectDataBound = function() {
                 assert.isOk(true);
-            }
+            };
 
             Mocha.fixture.html('<script id="template" type="text/x-kendo-template"> \
                <strong>#:text#</strong> \
@@ -353,7 +353,7 @@
             kendo.bind(dom, observable);
 
             var widget = dom.data("kendoMultiSelect");
-            var tags = widget.tagList.children();
+            var tags = widget.tagList.children(".k-chip");
 
             assert.equal(widget.dataSource.view().length, 1);
 
@@ -374,7 +374,7 @@
             kendo.bind(dom, observable);
 
             var widget = dom.data("kendoMultiSelect");
-            var tags = widget.tagList.children();
+            var tags = widget.tagList.children(".k-chip");
 
             assert.equal(widget.dataSource.view().length, 2);
 
@@ -436,7 +436,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal(dom.data("kendoMultiSelect").ul.children().eq(0).html().trim(), "<strong>foo</strong>");
+            assert.equal(dom.data("kendoMultiSelect").ul.children().eq(0).find(".k-list-item-text").html().trim(), "<strong>foo</strong>");
         });
 
         it("binding template containing binding attributes", function() {
@@ -446,7 +446,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal(dom.data("kendoMultiSelect").ul.children().eq(0).html().trim(), '<strong data-bind="text:text">foo</strong>');
+            assert.equal(dom.data("kendoMultiSelect").ul.children().eq(0).find(".k-list-item-text").html().trim(), '<strong data-bind="text:text">foo</strong>');
         });
 
         it("updating an item from the data source updates the corresponding multiselect item", function() {

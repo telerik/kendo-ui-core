@@ -138,9 +138,11 @@ The text to be shown in the Confirm popup.
     <script>
         kendo.confirm("Confirm text")
             .done(function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("User accepted");
             })
             .fail(function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("User rejected");
             });
     </script>
@@ -154,16 +156,19 @@ If no culture is found the default one is used.
 > The culture must be set before any Kendo UI widgets that rely on it, are initialized.
 
 #### Example -  include a culture-specific JavaScript file and set the culture
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.en-GB.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.en-GB.min.js"></script>
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("{0:c}", 99)); // outputs "$99.00" using the default en-US culture
       kendo.culture("en-GB"); // change the culture
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("{0:c}", 99)); // outputs "£99.00"
     </script>
 
 #### Get the current culture
     <script>
     var culture = kendo.culture();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(culture.name); // outputs "en-US"
     </script>
 
@@ -182,8 +187,10 @@ Finds all Kendo widgets that are children of the specified element and calls the
     <input id="autocomplete">
     <script>
     $("#autocomplete").kendoAutoComplete();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($("#autocomplete").data("kendoAutoComplete") != null); // outputs "true"
       kendo.destroy(document.body);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($("#autocomplete").data("kendoAutoComplete") != null); // outputs "false"
     </script>
 
@@ -205,7 +212,9 @@ The format string.
 
 #### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.format("{0} - {1}", 12, 24));  // outputs "12 - 24"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.format("{0:c} - {1:c}", 12, 24)); // outputs "$12.00 - $24.00"
     </script>
 
@@ -220,6 +229,7 @@ Generates a random GUID (globally unique identifier).
 #### Example
     <script>
     var value = kendo.guid();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -234,6 +244,7 @@ Encodes HTML characters to entities.
 #### Example
     <script>
     var value = kendo.htmlEncode("<span>Hello</span>");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -288,12 +299,69 @@ Optional namespace too look in when instantiating Kendo UI widgets. The valid na
 
      <script>
      function foo(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
          console.log(e.sender); // a mobile button
      }
      var data = [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria", "Croatia", "Cyprus"  ];
 
      kendo.init($("#view"), kendo.mobile.ui, kendo.ui);
      </script>
+
+
+### observableFileManagerData
+
+Creates an ObservableArray instance that is bound to a FileManagerDataSource. Required to bind a FileManagerDataSource-enabled widget (such as the Kendo UI FileManager) to a view-model.
+
+#### Example
+
+    <div id="example">      
+        <div name="files"               
+            data-role="filemanager"              
+            data-bind="source: localData"></div>
+    </div>
+    <script>
+        var myData = [{
+            name: "Folder",
+            isDirectory: true,
+            hasDirectories: false,
+            path: "Folder",
+            extension: "",
+            size: 0,
+            createdUtc: new Date(),
+            items: [
+                {
+                    name: "Image.jpg",
+                    isDirectory: false,
+                    hasDirectories: false,
+                    path: "Folder/Image.jpg",
+                    extension: ".jpg",
+                    size: 20,
+                    createdUtc: new Date(),
+                },
+                {
+                    name: "Image2.jpg",
+                    isDirectory: false,
+                    hasDirectories: false,
+                    path: "Folder/Image2.jpg",
+                    extension: ".jpg", 
+                    size: 20,
+                    createdUtc: new Date(),
+                }
+            ]}
+        ];
+        
+        var viewModel = kendo.observable({        
+            localData: kendo.observableFileManagerData(myData),
+        });
+
+        kendo.bind($("#example"), viewModel);
+    </script>
+
+#### Parameters
+
+##### array `Array`
+
+The array that will be converted to an ObservableArray.
 
 
 ### observableHierarchy
@@ -330,8 +398,11 @@ Parses as a formatted string as a `Date`. Also see [Date Parsing](/framework/glo
 
 #### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseDate("2013/3/4 10:00 AM")); // outputs "Mon Mar 04 2013 10:00:00"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseDate("3/4/2013", "MM/dd/yyyy")); // outputs "Mon Mar 04 2013 00:00:00"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseDate("invalid")); // outputs "null"
     </script>
 
@@ -361,12 +432,17 @@ Parses a formatted string as a `Date`. The method returns `null` if the string d
 
 #### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseExactDate("2013/3/4 10:00 AM")); // outputs "Mon Mar 04 2013 10:00:00"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseExactDate("3/4/2013", "MM/dd/yyyy")); // outputs "Mon Mar 04 2013 00:00:00"
       // When the format is not matched, null is returned
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseExactDate("3/4/2013", "MM/dd/yy")); // outputs "null"
       // Unlike kendo.parseDate, which tries to parse the string even though it's a different format:
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseDate("3/4/2013", "MM/dd/yy")); // Wed Mar 04 2020 00:00:00 GMT+0200"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseExactDate("invalid")); // outputs "null"
     </script>
 
@@ -396,11 +472,14 @@ Parses a string as a floating point number.
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseFloat("12.22")); // outputs "12.22"
       kendo.culture("de-DE");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseFloat("1.212,22 €")); // outputs "1212.22"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseFloat("invalid")); // outputs "null"
     </script>
 
@@ -424,11 +503,14 @@ Parses as a string as an integer.
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseInt("12.22")); // outputs "12"
       kendo.culture("de-DE");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseInt("1.212,22 €")); // outputs 1212
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseInt("invalid")); // outputs "null"
     </script>
 
@@ -510,9 +592,11 @@ The default value that will be shown in the popup's input.
     <script>
         kendo.prompt("Prompt text", "Default input text")
             .done(function(data){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("User accepted with text: " + data);
             })
             .fail(function(data){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("User rejected with text: " + data);
             });
     </script>
@@ -683,6 +767,7 @@ The value to convert to a JSON string.
 
     <script>
     var json = kendo.stringify({ foo: "bar" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(json); // displays {"foo":"bar"}
     </script>
 
@@ -767,6 +852,7 @@ the performance of the template.
 ###### Example
     var template = kendo.template("<strong>#: data.name #</strong>", { useWithBlock: false }); // Note that "data." is used to qualify the field
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(template({ name: "John Doe" })); // outputs "<strong>John Doe</strong>"
 
 ### throttle
@@ -777,6 +863,7 @@ Limits the number of calls to a function to one for a specified amount of time.
 
     <script>
       var throttled = kendo.throttle(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("hey! " + new Date());
       }, 100);
 
@@ -826,24 +913,34 @@ The container element to enable scrolling for.
 Formats a `Number` or `Date` using the specified format and the current culture.
 
 #### Example
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       // Format a number using standard number formats and default culture (en-US)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(10.12, "n"));  // "10.12"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(10.12, "n0")); // "10"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(10.12, "n5")); // "10.12000"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(10.12, "c"));  // "$10.12"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(0.12, "p"));   // "12.00 %"
 
       // Format a number using custom number formats
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(19.12, "00##")); // "0019"
 
       // Format a number using standard number format and a specific culture de-DE (default culture is en-US)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(10.12, "c", "de-DE")); // "10,12" €
 
       // Format a date
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(new Date(2010, 9, 5), "yyyy/MM/dd" ));         // "2010/10/05"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(new Date(2010, 9, 5), "dddd MMMM d, yyyy" ));  // "Tuesday October 5, 2010"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(new Date(2010, 10, 10, 22, 12), "hh:mm tt" )); // "10:12 PM"
     </script>
 
@@ -905,9 +1002,11 @@ Decodes string from UTF-8 or a Unicode character set. Substitutes the native [`u
 #### Example
     <script>
         var result = kendo.unescape("This is a test: %97 %3f %D5 %e5 %U0107 %U123F %u39f5 %uDEe5");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(result);
 
         var second = kendo.unescape("This is a test: %D1%88%D0%B5%D0%BB%D0%BB%D1%8B");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(second);
     </script>
 
@@ -1099,6 +1198,7 @@ Convenience replacement for the now deprecated jQuery.browser. It returns an obj
 The identifiers are identical to jQuery ones, e.g. "webkit", "opera", "msie", "edge" and "mozilla". In addition WebKit browsers will return their name e.g. "safari" and "chrome".
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.stringify(kendo.support.browser));
         // Chrome will return this object: { "webkit": true, "chrome": true, "version": 37 }
         // IE11 will return this one: { "msie": true, "version": 11 }
@@ -1129,10 +1229,12 @@ Formats the value as a number with decimal and thousand separators.
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "n")); // outputs "1,234.57"
     kendo.culture("de-DE");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "n3")); //outputs "1.234,567"
     </script>
 
@@ -1142,10 +1244,12 @@ Formats the value by adding the currency symbol.
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "c")); // outputs "$1,234.57"
     kendo.culture("de-DE");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "c3")); // outputs "1.234,567 €"
     <script>
 
@@ -1156,7 +1260,9 @@ Formats the value as percentage (the value is multiplied by 100).
 #### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(0.222, "p")); // outputs "22.20 %"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(0.22, "p3")); // outputs "22.000 %"
     </script>
 
@@ -1166,6 +1272,7 @@ Returns the value in exponential format.
 
 #### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(0.122, "e")); // outputs "1.22e-1"
     </script>
 
@@ -1181,6 +1288,7 @@ Zero placeholder. Replaces the zero with the corresponding digit if one is prese
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.5678, "00000")); // outputs "01235"
     </script>
 
@@ -1191,6 +1299,7 @@ Digit placeholder. Replaces the pound sign with the corresponding digit if one i
 ##### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.5678, "#####")); // outputs "1235"
     </script>
 
@@ -1201,6 +1310,7 @@ Decimal placeholder. Determines the position of the decimal separator in the res
 ##### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(0.45678, "0.00")); // outputs "0.46"
     </script>
 
@@ -1210,6 +1320,7 @@ Group separator. Inserts a group separator between each group of digits.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(12345678, "##,#")); // outputs "12,345,678"
     </script>
 
@@ -1219,6 +1330,7 @@ Percentage. Multiplies a number by 100 and inserts a the percentage symbol (acco
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(0.14, "#%")); // outputs "14%"
     </script>
 
@@ -1228,6 +1340,7 @@ Exponential notation.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(0.45678, "e0")); // outputs "5e-1"
     </script>
 
@@ -1238,7 +1351,9 @@ Section separator. Defines sections of separate format strings for positive, neg
 ##### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(3.14, "0.0;0.00")); // outputs "3.1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.toString(-3.14, "0.0;-0.00")); // outputs "-3.14"
     </script>
 
@@ -1257,6 +1372,7 @@ Short date pattern.
 ##### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2000, 10, 6), "d")); // outputs "11/6/2000"
     </script>
 
@@ -1266,6 +1382,7 @@ Long date pattern.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2000, 10, 6), "D")); // outputs "Monday, November 06, 2000"
     </script>
 
@@ -1276,6 +1393,7 @@ Full date time pattern.
 ##### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2000, 10, 6), "F")); // outputs "Monday, November 06, 2000 12:00:00 AM"
     </script>
 
@@ -1285,6 +1403,7 @@ General date/time pattern (short time).
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2000, 10, 6), "g")); // outputs "11/6/2000 12:00 AM"
     </script>
 
@@ -1294,6 +1413,7 @@ General date/time pattern (long time).
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2000, 10, 6), "G")); // outputs "11/6/2000 12:00:00 AM"
     </script>
 
@@ -1303,6 +1423,7 @@ Day of month pattern.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2000, 10, 6), "m")); // outputs "November 06"
     </script>
 
@@ -1312,6 +1433,7 @@ Universal sortable date/time pattern
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2000, 10, 6), "u")); // outputs "2000-11-06 00:00:00Z"
     </script>
 
@@ -1321,6 +1443,7 @@ Month year pattern.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2000, 10, 6), "y")); // outputs "November, 2000"
     </script>
 
@@ -1335,6 +1458,7 @@ The day of the month, from 1 to 31.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6), "yyyy/M/d")); // outputs "2013/6/6"
     </script>
 
@@ -1344,6 +1468,7 @@ The zero-padded day of the month - from 01 to 31.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6), "yyyy/M/dd")); // outputs "2013/6/06"
     </script>
 
@@ -1353,6 +1478,7 @@ The abbreviated name of the day of the week.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6), "ddd,yyyy/M")); // outputs "Thu, 2013/6"
     </script>
 
@@ -1362,6 +1488,7 @@ The full name of the day of the week.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6), "ddd,yyyy/M")); // outputs "Thursday, 2013/6"
     </script>
 
@@ -1371,6 +1498,7 @@ The tenths of a second.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 5, 5, 5, 500), "f")); // outputs "5"
     </script>
 
@@ -1380,6 +1508,7 @@ The hundreds of a second.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 5, 5, 5, 500), "ff")); // outputs "50"
     </script>
 
@@ -1389,6 +1518,7 @@ The milliseconds.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 5, 5, 5, 500), "fff")); // outputs "500"
     </script>
 
@@ -1397,6 +1527,7 @@ The month, from 1 to 12.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6), "yyyy/M/d")); // outputs "2013/6/6"
     </script>
 
@@ -1406,6 +1537,7 @@ The zero-padded month, from 01 to 12.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6), "yyyy/MM/d")); // outputs "2013/06/6"
     </script>
 
@@ -1414,6 +1546,7 @@ The abbreviated name of the month.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6), "yyyy/MMM/d")); // outputs "2013/Jun/6"
     </script>
 
@@ -1423,6 +1556,7 @@ The full name of the month.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6), "yyyy/MMM/d")); // outputs "2013/June/6"
     </script>
 
@@ -1431,6 +1565,7 @@ The hour, using 12-hour clock from 1 to 12.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 6, 0), "h")); // outputs "6"
     </script>
 
@@ -1439,6 +1574,7 @@ The zero-padded hour, using 12-hour clock from 01 to 12.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 6, 0), "h")); // outputs "06"
     </script>
 
@@ -1448,6 +1584,7 @@ The hour, using 24-hour clock from 0 to 23.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 13, 0), "H")); // outputs "13"
     </script>
 
@@ -1457,6 +1594,7 @@ The zero-padded hour, using 24-hour clock from 00 to 23.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 6, 0), "HH")); // outputs "06"
     </script>
 
@@ -1466,6 +1604,7 @@ The minute, from 0 to 59.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 6, 30), "m")); // outputs "30"
     </script>
 
@@ -1475,6 +1614,7 @@ The zero-padded minute, from 00 to 59.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 6, 5), "mm")); // outputs "05"
     </script>
 
@@ -1484,6 +1624,7 @@ The second, from 0 to 59.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 6, 5, 5), "s")); // outputs "5"
     </script>
 
@@ -1493,6 +1634,7 @@ The zero-padded second, from 00 to 59.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 6, 5, 5), "ss")); // outputs "05"
     </script>
 
@@ -1502,5 +1644,6 @@ The AM/PM designator.
 
 ##### Example
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(new Date(2013, 5, 6, 13, 0), "HH tt")); // outputs "13 PM"
     </script>

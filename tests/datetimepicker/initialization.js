@@ -16,34 +16,32 @@
 
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 
-            assert.isOk(input.parent().hasClass("k-picker-wrap k-state-default"));
-            assert.isOk(datetimepicker.wrapper.hasClass("k-widget k-datetimepicker"));
+            assert.isOk(datetimepicker.wrapper.hasClass("k-datetimepicker k-input k-input-solid k-input-md k-rounded-md"));
         });
 
         it("DateTimePicker adds k-input class to the element", function() {
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 
-            assert.isOk(datetimepicker.element.hasClass("k-input"));
+            assert.isOk(datetimepicker.element.hasClass("k-input-inner"));
         });
 
         it("_icons method creates calendar and clock button", function() {
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
-                icons = datetimepicker.wrapper.find(".k-select");
+                icons = datetimepicker.wrapper.find("button.k-input-button");
 
-            assert.isOk(icons.is("span"));
-            assert.isOk(icons.hasClass("k-select"));
+            var date = icons.eq(0);
+            var time = icons.eq(1);
+            assert.isOk(date.hasClass("k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
+            assert.isOk(time.hasClass("k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
 
-            var date = icons.children().eq(0);
-            var time = icons.children().eq(1);
 
-            assert.isOk(date.hasClass("k-link k-link-date"));
-            assert.isOk(time.hasClass("k-link k-link-time"));
-
+            assert.equal(date.attr("tabindex"), "-1");
+            assert.equal(time.attr("tabindex"), "-1");
             assert.isOk(date.attr("aria-label"), datetimepicker.options.dateButtonText);
             assert.isOk(time.attr("aria-label"), datetimepicker.options.timeButtonText);
 
-            assert.isOk(date.children().hasClass("k-icon k-i-calendar"));
-            assert.isOk(time.children().hasClass("k-icon k-i-clock"));
+            assert.isOk(date.children().eq(0).hasClass("k-icon k-i-clock k-button-icon"));
+            assert.isOk(time.children().eq(0).hasClass("k-icon k-i-calendar k-button-icon"));
         });
 
         it("DateTimePicker renders last date when navigating", function() {
@@ -57,6 +55,16 @@
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 
             assert.isOk(datetimepicker.dateView);
+        });
+
+        it("dateview passes messages to calendar", function() {
+            var datetimepicker = input.kendoDateTimePicker({ weekNumber: true,
+                messages: {
+                    weekColumnHeader: "test"
+                }
+            }).data("kendoDateTimePicker");
+            datetimepicker.open();
+            assert.equal(datetimepicker.dateView.calendar.options.messages.weekColumnHeader, "test");
         });
 
         it("DateTimePicker sets correct options to DateView", function() {
@@ -111,7 +119,7 @@
         it("datetimepicker disables widget if input has disabled attribute", function() {
             var datetimepicker = new DateTimePicker(input.attr("disabled", "disabled"));
 
-            assert.isOk(datetimepicker.wrapper.children(":first").hasClass("k-state-disabled"));
+            assert.isOk(datetimepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("form reset support", function(done) {
@@ -202,6 +210,17 @@
             assert.equal(datetimepicker.options.timeFormat, "hh:mm");
         });
 
+        it("DateTimePicker correctly parses value in DateInput scenario", function() {
+            input.val("09/01/2021 22:10:10");
+            var datetimepicker = input.kendoDateTimePicker({
+                format: "MMMM yyyy",
+                dateInput: true,
+                parseFormats: ["MM/dd/yyyy HH:mm:ss"]
+            }).data("kendoDateTimePicker");
+
+            assert.equal(datetimepicker.value().getFullYear(), "2021");
+        });
+
         it("DateTimePicker adds format to the parseFormats array", function() {
             var datetimepicker = input.kendoDateTimePicker({
                 parseFormats: ["MM/dd/yy"]
@@ -279,7 +298,7 @@
             datetimepicker.open("time");
 
             assert.equal(datetimepicker.timeView.ul.children().length, 1);
-            assert.equal(datetimepicker.timeView.ul.children().eq(0).html(), "6:00 PM");
+            assert.equal(datetimepicker.timeView.ul.children().eq(0).find("span").html(), "6:00 PM");
         });
 
         it("DateTimePicker copies input's className to the wrapper", function() {
@@ -308,7 +327,7 @@
             input.focus().val(kendo.toString(date, "MM/dd/yyyy hh:mm tt"));
             datetimepicker.open();
 
-            var link = datetimepicker.dateView.calendar.element.find(".k-state-focused > .k-link");
+            var link = datetimepicker.dateView.calendar.element.find(".k-focus > .k-link");
 
             assert.equal(+datetimepicker.dateView.calendar.value(), +datetimepicker.value());
             assert.equal(link.html(), date.getDate());
@@ -356,7 +375,7 @@
 
             var li = datetimepicker.timeView.ul.find("li");
             assert.equal(li.length, 1);
-            assert.equal(li.html(), "10:00 AM");
+            assert.equal(li.find("span").html(), "10:00 AM");
         });
 
         it("DateTimePicker sets min from min attribute", function() {
@@ -385,8 +404,8 @@
 
         it("DateTimePicker parseFormats contains default ISO formats if no parseFromats are configured", function() {
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
-            var dateFormat = $.inArray('yyyy-MM-dd', datetimepicker.options.parseFormats) > -1
-            var timeFormat = $.inArray('yyyy-MM-ddTHH:mm:ss', datetimepicker.options.parseFormats) > -1
+            var dateFormat = $.inArray('yyyy-MM-dd', datetimepicker.options.parseFormats) > -1;
+            var timeFormat = $.inArray('yyyy-MM-ddTHH:mm:ss', datetimepicker.options.parseFormats) > -1;
 
             assert.isOk(dateFormat);
             assert.isOk(timeFormat);
@@ -397,7 +416,7 @@
             var datetimepicker = input.kendoDateTimePicker({
                 min: new Date(2000, 0, 1, 22, 0, 0),
                 max: new Date(2000, 0, 2, 22, 0, 0)
-            }).data("kendoDateTimePicker")
+            }).data("kendoDateTimePicker");
 
             datetimepicker.setOptions({
                 max: new Date(2000, 0, 1, 23, 0, 0)
@@ -434,5 +453,44 @@
             assert.equal(datetimepicker.element.val(), kendo.toString(value, datetimepicker.options.format));
         });
 
+        it("datetimepicker instantiates its own popup when component type is modern", function() {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            assert.isTrue(datetimepicker.popup instanceof kendo.ui.Popup);
+        });
+
+        it("datetimepicker Popup should contain a div with k-date-tab and k-datetime-wrap classes", function() {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            assert.equal(datetimepicker.popup.element.find('.k-date-tab.k-datetime-wrap').length, 1);
+        });
+
+        it("when time group is selected, date picker should display the time view", function() {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            datetimepicker.popup.element.find('button.k-group-end').click();
+
+            assert.equal(datetimepicker.popup.element.find('.k-time-tab').length, 1);
+            assert.equal(datetimepicker.popup.element.find('.k-date-tab').length, 0);
+        });
+
+        it("when time group is selected, date picker should display the time view", function() {
+            var datetimepicker = input.kendoDateTimePicker({
+                value: new Date(2020, 3, 5, 0, 0, 0),
+                min: new Date(2020, 3, 4, 0, 30, 0),
+                max: new Date(2020, 3, 5, 0, 0, 0)
+            }).data("kendoDateTimePicker");
+            var tv = datetimepicker.timeView;
+
+            tv.refresh();
+            assert.equal(tv.ul.children().length, 1);
+            assert.equal(tv.ul.find("li:last").find("span").html(), "12:00 AM");
+        });
     });
 }());

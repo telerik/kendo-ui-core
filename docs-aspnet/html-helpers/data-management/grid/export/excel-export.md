@@ -17,11 +17,11 @@ For a runnable example, refer to the [demo on Excel export by the Grid](https://
 
 To enable the Excel export option of the Grid:
 
-1. Include the corresponding toolbar command and set the export settings.
-    * [Toolbar configuration](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#excel)
-    * [Excel export configuration](/api/Kendo.Mvc.UI.Fluent/GridExcel{% if site.core %}Settings{% endif %}Builder)
-1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% if site.core %}{% slug exportsupport_core %}{% else %}{% slug exportsupport_aspnetmvc %}{% endif %}#jszip-library).
-
+1. Include the [toolbar configuration](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#excel).
+1. Set the [export options](/api/Kendo.Mvc.UI.Fluent/GridExcel{% if site.core %}Settings{% endif %}Builder).
+1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% slug exportsupport_core %}#jszip-library).
+    
+    ```HtmlHelper
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
@@ -36,10 +36,31 @@ To enable the Excel export option of the Grid:
                 .Read(read => read.Action("Products_Read", "Home"))
             )
         )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+
+        <kendo-grid name="grid">
+            <toolbar>
+                <toolbar-button name="excel"></toolbar-button>
+            </toolbar>
+            <excel file-name="Products.xlsx" />
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Products_Read","Home")" />
+                </transport>
+            </datasource>
+        </kendo-grid>
+    ```
+    {% endif %}
+        
 
 To initiate the Excel export, press the **Toolbar** button or use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) and call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveasexcel) method.
 
-> Browser versions, such as Internet Explorer 9 and earlier and Safari, require the implementation of a server proxy.
+> Browser versions, such as Internet Explorer 9 and earlier, and Safari, require the implementation of a server proxy.
 
         [HttpPost]
         public ActionResult Pdf_Export_Save(string contentType, string base64, string fileName)
@@ -51,13 +72,13 @@ To initiate the Excel export, press the **Toolbar** button or use the [Grid clie
 
 ## Outputting the Result
 
-Through its default configuration, the Telerik UI Grid for {{ site.framework }} exports the current page of the data with sorting, filtering, grouping, and aggregates applied. To export all pages, refer to [this section](#exporting-all-data).
+Through its default configuration, the Telerik UI Grid for {{ site.framework }} exports the current page of the data with sorting, filtering, grouping, and aggregates applied. To export all pages, refer to the section on [exporting all data](#exporting-all-data).
 
-The Grid uses the current column order, visibility, and dimensions to generate the Excel file. It does not export the current CSS theme in the Excel file. For more information on changing the visual appearance of the Excel document, refer to [this section](#customizing-excel-documents).
+The Grid uses the current column order, visibility, and dimensions to generate the Excel file. It does not export the current CSS theme in the Excel file. For more information on changing the visual appearance of the Excel document, refer to the section about [customizing the Excel documents](#customizing-excel-documents).
 
 > * The Grid exports only data-bound columns. Template and command columns are ignored.
-> * The `Format` option is not used during export. For more information on this, refer to [this section](#defining-the-column-format).
-> * The `ClientTemplate` option is not used during export. For more information on this, refer to [this section](#setting-the-column-templates).
+> * The `Format` option is not used during export. For more information, refer to the section about [defining the column format](#defining-the-column-format).
+> * The `ClientTemplate` option is not used during export. For more information, refer to the section on [setting the column templates](#setting-the-column-templates).
 
 ## Exporting All Data
 
@@ -65,6 +86,7 @@ By default, the Telerik UI Grid for {{ site.framework }} exports only the curren
 
 > When the `AllPages` option is set to `true`, the Grid makes a `read` request for all data. If the data items are too many, the browser may become unresponsive. For such scenarios, implement a server-side export.
 
+```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Excel())
@@ -76,6 +98,22 @@ By default, the Telerik UI Grid for {{ site.framework }} exports only the curren
             .Read(read => read.Action("Products_Read", "Home"))
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="excel"></toolbar-button>
+        </toolbar>
+        <excel all-pages="true" />
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read","Home")" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+```
+{% endif %}
 
 ## Customizing Excel Documents
 
@@ -83,14 +121,16 @@ The [`ExcelExport()`](/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsyste
 
 1. Attach an excel export handler.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<OrderViewModel>()    
             .Name("grid")
             .ToolBar(tools => tools.Excel())
             .Events(e => e.ExcelExport("excelExport"))
             /* Other configuration. */
         )
+    ```
 
-1. In the handler, manipulate the generated workbook. The example alternates the [background color of the rows cells](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background).
+1. In the handler, manipulate the generated workbook. The example alternates the [background color of the row cells](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background).
 
         <script>
             function excelExport(e) {
@@ -123,6 +163,7 @@ The Telerik UI Grid for {{ site.framework }} does not use the `ClientTemplate` d
 
 1. Attach an excel export handler.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<OrderViewModel>()    
             .Name("grid")
             .ToolBar(tools => tools.Excel())
@@ -133,14 +174,15 @@ The Telerik UI Grid for {{ site.framework }} does not use the `ClientTemplate` d
             })
             /* Other configuration. */
         )
+    ```
 
 1. In the handler, manipulate the generated workbook. The example applies the column template to the cell by assigning it to the [rows.cells.value](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.value).
 
         <script>
             function excelExport(e) {
                 var sheet = e.workbook.sheets[0];
-                var template = kendo.template(this.columns[1].template);
-                var data = this.dataSource.view();
+                var template = kendo.template(e.sender.columns[1].template);
+                var data = e.sender.dataSource.view();
                 for (var i = 0; i < data.length; i++) {
                     sheet.rows[i + 1].cells[1].value = template(data[i]);
                 }
@@ -155,6 +197,7 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
 
 1. Attach an excel export handler.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<OrderViewModel>()    
             .Name("grid")
             .ToolBar(tools => tools.Excel())
@@ -165,6 +208,7 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
             })
             /* Other configuration. */
         )
+    ```
 
 1. In the handler, manipulate the generated workbook. The example applies a format to the cell by assigning it to the [rows.cells.format](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format)
 
@@ -181,11 +225,41 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
             }
         </script>
 
+{% if site.mvc %}
+
+## Using the Detail Template
+
+The Kendo UI Grid does not export its `DetailTemplate` for the same reason it does not export the column templates. If the detail template contains another Grid, follow [this runnable how-to example]({% slug howto_detailgridexcelexport_aspnetmvcgrid %}).
+
+## Exporting Multiple Grids
+
+For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug howto_multiplegridexport_aspnetmvcgrid %}).
+{% endif %}
+
 ## Server-Side Processing
 
 To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
-> The {{ site.framework }} version is in development. For updates, check [this](https://feedback.telerik.com/document-processing/1356226-document-processing-provide-version-for-net-core) feature request.
+> The {{ site.framework }} version is in development. For updates, refer to [this feature request](https://feedback.telerik.com/document-processing/1356226-document-processing-provide-version-for-net-core).
+
+## Excluding Columns from Exporting
+
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [`Exportable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+
+```HtmlHelper
+columns.Bound(p => p.ProductName).Exportable(false);
+```
+
+You can also set `Exportable` in a detailed fashion to include different values for Excel and PDF exporting modes, providing separate options for each:
+
+```HtmlHelper
+columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
+```
+
+In some scenarios, you may want to include instead of exclude columns. You can have defined Grid columns which are not displayed in the View mode and show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically and you'll need to specifically use `.Exportable(x=> x.Pdf(false).Excel(true));`.
+
+It is also important to note the difference between the `.Hidden()` and `.Visible()` properties of a Grid column. `.Hidden()` will hide the column only visually by using CSS. `.Visible()` will prevent the column from rendering at all.
+
 
 ## Known Limitations
 

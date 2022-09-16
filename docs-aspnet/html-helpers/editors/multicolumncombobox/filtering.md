@@ -1,10 +1,10 @@
 ---
 title: Filtering
 page_title: Filtering
-description: "Set the filter options of the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Set the filter options of the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/filtering
 slug: filtering_multicolumncombobox_aspnetcore
-position: 5
+position: 6
 ---
 
 # Filtering
@@ -13,6 +13,7 @@ Apart from the standard filter options, the MultiColumnComboBox allows you to se
 
 The option accepts an array of strings.
 
+```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Filter("contains")
@@ -29,6 +30,30 @@ The option accepts an array of strings.
             .ServerFiltering(true)
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-multicolumncombobox  name="multicolumncombobox" 
+    filter="FilterType.Contains"
+    filter-fields='new string[] { "ContactName", "ContactTitle"}'>
+        <multicolumncombobox-columns>
+            <column field="ContactName" title="Contact Name" width="200px">
+            </column>
+            <column field="ContactTitle" title="Contact Title" width="200px">
+            </column>
+            <column field="CompanyName" title="Company Name" width="200px">
+            </column>
+            <column field="Country" title="Country" width="200px">
+            </column>
+        </multicolumncombobox-columns>
+        <datasource server-filtering="true">
+            <transport>
+                <read url="@Url.Action("Products_Read", "MultiColumnComboBox")" />
+            </transport>
+        </datasource>
+    </kendo-multicolumncombobox>
+```
+{% endif %}
 
 ## See Also
 

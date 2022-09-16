@@ -48,11 +48,13 @@ This approach helps you achieve the look and feel of window-level fixed headers.
     </style>
 ```
 
-To see the following demo in action, click **Open in Dojo**.
+The following examples demonstrates the full code implementation.
+
+> To observe the result, run the example in a separate Dojo window by clicking the `Open In Dojo` button.
 
 ```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.flat.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.flat.min.css"/>
     <h1>&darr; SCROLL &darr;</h1>
     <div id="products"></div>
 

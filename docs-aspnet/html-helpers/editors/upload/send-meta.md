@@ -1,7 +1,7 @@
 ---
 title: Metadata
 page_title: Metadata
-description: "Learn how to send and receive metadata when uploading files with the Telerik UI Upload HtmlHelper for {{ site.framework }}."
+description: "Learn how to send and receive metadata when uploading files with the Telerik UI Upload component for {{ site.framework }}."
 previous_url: /helpers/editors/upload/metadata
 slug: htmlhelpers_upload_send_meta_aspnetcore
 position: 6
@@ -19,8 +19,8 @@ To send metadata over to the `Save()` handler:
 
 1. Add an `input` field for the file description. Its value is going to be sent to the save handler.
 
-    ```
-    @(Html.Kendo().TextBox().Name("fileDescription"))
+    ```HtmlHelper
+        @(Html.Kendo().TextBox().Name("fileDescription"))
     ```
 
 2. Declare a handler for the `upload` event and attach a data object to the passed event.
@@ -35,16 +35,23 @@ To send metadata over to the `Save()` handler:
 
 3. Attach the `upload` event handler.    
 
-    ```
-    @(Html.Kendo().Upload()
-        .Name("files")
-        .Async(a => a
-            .Save("ChunkSave", "Upload")
-            .Remove("Remove", "Upload")
+    ```HtmlHelper
+        @(Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                .Save("ChunkSave", "Upload")
+                .Remove("Remove", "Upload")
+            )
+            .Events(e => e.Upload("onUpload"))
         )
-        .Events(e => e.Upload("onUpload"))
-    )
+    ```    
+    {% if site.core %}
+    ```TagHelper
+        <kendo-upload name="files" on-upload="onUpload">
+            <async save-url="@Url.Action("ChunkSave","Upload")" remove-url="@Url.Action("Remove","Upload")" />
+        </kendo-upload>
     ```
+    {% endif %}
 
 4. Process the file and the associated description. The description, and any other fields of the `e.data` object, will be serialized in the `POST` request.
 
@@ -72,16 +79,23 @@ To receive metadata from the `save` handler:
 
 3. Attach the event handler.
 
-    ```
-    @(Html.Kendo().Upload()
-        .Name("files")
-        .Async(a => a
-            .Save("ChunkSave", "Upload")
-            .Remove("Remove", "Upload")
+    ```HtmlHelper
+        @(Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                .Save("ChunkSave", "Upload")
+                .Remove("Remove", "Upload")
+            )
+            .Events(e => e.Success("onSuccess"))
         )
-        .Events(e => e.Success("onSuccess"))
-    )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-upload name="files" on-success="onSuccess">
+            <async save-url="@Url.Action("ChunkSave","Upload")" remove-url="@Url.Action("Remove","Upload")" />
+        </kendo-upload>
+    ```
+    {% endif %}
 
 ## See Also
 

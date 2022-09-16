@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.mobile.pane", "./kendo.router" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.application",
     name: "Application",
     category: "mobile",
@@ -22,7 +22,7 @@ var __meta__ = { // jshint ignore:line
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         FONT_SIZE_COEF = 0.93,
         VERTICAL = "km-vertical",
-        CHROME =  OS.browser === "chrome",
+        CHROME = OS.browser === "chrome",
         BROKEN_WEBVIEW_RESIZE = OS.ios && OS.flatVersion >= 700 && OS.flatVersion < 800 && (OS.appMode || CHROME),
         INITIALLY_HORIZONTAL = (Math.abs(window.orientation) / 90 == 1),
         HORIZONTAL = "km-horizontal",
@@ -36,14 +36,14 @@ var __meta__ = { // jshint ignore:line
             wp: { wp: true, browser: "default", device: "wp", flatVersion: "800", majorVersion: "8", minorVersion: "0.0", name: "wp", tablet: false }
         },
 
-        viewportTemplate = kendo.template('<meta content="initial-scale=#: data.scale #, maximum-scale=#: data.scale #, user-scalable=no#=data.height#" name="viewport" />', {usedWithBlock: false}),
+        viewportTemplate = kendo.template('<meta content="initial-scale=#: data.scale #, maximum-scale=#: data.scale #, user-scalable=no#=data.height#" name="viewport" />', { usedWithBlock: false }),
         systemMeta = kendo.template('<meta name="apple-mobile-web-app-capable" content="#= data.webAppCapable === false ? \'no\' : \'yes\' #" /> ' +
                      '<meta name="apple-mobile-web-app-status-bar-style" content="#=data.statusBarStyle#" /> ' +
-                     '<meta name="msapplication-tap-highlight" content="no" /> ', {usedWithBlock: false}),
-        clipTemplate = kendo.template('<style>.km-view { clip: rect(0 #= data.width #px #= data.height #px 0); }</style>', {usedWithBlock: false}),
+                     '<meta name="msapplication-tap-highlight" content="no" /> ', { usedWithBlock: false }),
+        clipTemplate = kendo.template('<style>.km-view { clip: rect(0 #= data.width #px #= data.height #px 0); }</style>', { usedWithBlock: false }),
         ENABLE_CLIP = OS.android && OS.browser != "chrome" || OS.blackberry,
 
-        iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
+        iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', { usedWithBlock: false }),
 
         HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.majorVersion < 7,
         SUPPORT_SWIPE_TO_GO_BACK = (OS.device == "iphone" || OS.device == "ipod") && OS.majorVersion >= 7,
@@ -55,8 +55,7 @@ var __meta__ = { // jshint ignore:line
         HEAD = $("head"),
 
         // mobile app events
-        INIT = "init",
-        proxy = $.proxy;
+        INIT = "init";
 
     function osCssClass(os, options) {
         var classes = [];
@@ -122,9 +121,9 @@ var __meta__ = { // jshint ignore:line
     function applyViewportHeight() {
         $("meta[name=viewport]").remove();
             HEAD.append(viewportTemplate({
-            height: ", width=device-width" +  // width=device-width was removed for iOS6, but this should stay for BB PhoneGap.
+            height: ", width=device-width" + // width=device-width was removed for iOS6, but this should stay for BB PhoneGap.
                         (isOrientationHorizontal() ?
-                            ", height=" + window.innerHeight + "px"  :
+                            ", height=" + window.innerHeight + "px" :
                             (support.mobileOS.flatVersion >= 600 && support.mobileOS.flatVersion < 700) ?
                                 ", height=" + window.innerWidth + "px" :
                                 ", height=device-height")
@@ -135,7 +134,7 @@ var __meta__ = { // jshint ignore:line
         init: function(element, options) {
             // global reference to current application
             mobile.application = this;
-            $($.proxy(this, 'bootstrap', element, options));
+            $(this.bootstrap.bind(this, element, options));
         },
 
         bootstrap: function(element, options) {
@@ -262,7 +261,12 @@ var __meta__ = { // jshint ignore:line
                 platform = that.options.platform,
                 skin = that.options.skin,
                 split = [],
-                os = OS || MOBILE_PLATFORMS[DEFAULT_OS];
+                os = OS || MOBILE_PLATFORMS[DEFAULT_OS],
+                refreshBackgroundFn = function() {
+                    if (that.os.variant && (that.os.skin && that.os.skin === that.os.name) || !that.os.skin) {
+                        that.element.removeClass("km-wp-dark km-wp-light km-wp-dark-force km-wp-light-force").addClass(wp8Background(that.os));
+                    }
+                };
 
             if (platform) {
                 os.setDefaultPlatform = true;
@@ -293,11 +297,7 @@ var __meta__ = { // jshint ignore:line
 
             if (os.name == "wp") {
                 if (!that.refreshBackgroundColorProxy) {
-                    that.refreshBackgroundColorProxy = $.proxy(function () {
-                        if (that.os.variant && (that.os.skin && that.os.skin === that.os.name) || !that.os.skin) {
-                            that.element.removeClass("km-wp-dark km-wp-light km-wp-dark-force km-wp-light-force").addClass(wp8Background(that.os));
-                        }
-                    }, that);
+                    that.refreshBackgroundColorProxy = refreshBackgroundFn.bind(that);
                 }
 
                 $(document).off("visibilitychange", that.refreshBackgroundColorProxy);
@@ -439,17 +439,17 @@ var __meta__ = { // jshint ignore:line
             this._clearExistingMeta();
 
             if (!BERRYPHONEGAP) {
-                HEAD.prepend(viewportTemplate({ height: "", scale : this.options.retina ? 1 / support.devicePixelRatio : "1.0" }));
+                HEAD.prepend(viewportTemplate({ height: "", scale: this.options.retina ? 1 / support.devicePixelRatio : "1.0" }));
             }
 
             HEAD.prepend(systemMeta(options));
 
             if (icon) {
                 if (typeof icon === "string") {
-                    icon = { "" : icon };
+                    icon = { "": icon };
                 }
 
-                for(size in icon) {
+                for (size in icon) {
                     HEAD.prepend(iconMeta({ icon: icon[size], size: size }));
                 }
             }
@@ -461,7 +461,7 @@ var __meta__ = { // jshint ignore:line
 
         _attachHideBarHandlers: function() {
             var that = this,
-                hideBar = proxy(that, "_hideBar");
+                hideBar = that._hideBar.bind(that);
 
             if (support.mobileOS.appMode || !that.options.hideAddressBar || !HIDEBAR || that.options.useNativeScrolling) {
                 return;
@@ -501,4 +501,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

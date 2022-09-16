@@ -378,7 +378,7 @@
             assert.equal(inputs.eq(1).val(), 0);
         });
 
-        it("rangeSlider resize should resize", function() {
+        it.skip("rangeSlider resize should resize", function() {
             var rangeSlider = newRangeSlider({ min: -2, max: 40 }, $("<div><input value='0' /><input value='0' /></div>"));
 
             var initialWidth = rangeSlider._trackDiv.width();
@@ -392,7 +392,7 @@
             var rangeSlider = newRangeSlider({ smallStep: 1, largeStep: 1 });
             rangeSlider.wrapper.find(".k-tick-large").each(function() {
                 assert.isOk($(this).hasClass("k-tick-large"));
-            })
+            });
         });
 
         it("rangeSlider should not modify input value with bg-BG culture", function() {

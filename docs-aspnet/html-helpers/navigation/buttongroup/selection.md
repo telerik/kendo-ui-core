@@ -1,7 +1,7 @@
 ---
 title: Selection
 page_title: Selection
-description: "Restrict the number of selectable Buttons within the Telerik UI ButtonGroup HtmlHelper for {{ site.framework }}."
+description: "Restrict the number of selectable Buttons within the Telerik UI ButtonGroup component for {{ site.framework }}."
 previous_url: /helpers/navigation/buttongroup/selection
 slug: selection_buttongroup_aspnetcore
 position: 5
@@ -15,7 +15,7 @@ The property can be configured for a `single` or `multiple` selection.
 
 The following example demonstrates how to use the `.Selection()` configuration.
 
-```
+```HtmlHelper
     @(Html.Kendo().ButtonGroup()
         .Name("select-period")
         .Selection("multiple")
@@ -26,6 +26,18 @@ The following example demonstrates how to use the `.Selection()` configuration.
                     t.Add().Text("Year");
             }))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-buttongroup name="select-period"
+                    selection="multiple">
+        <buttongroup-items>
+            <item text="Month"></item>
+            <item text="Quarter"></item>
+            <item text="Year"></item>
+        </buttongroup-items>
+    </kendo-buttongroup>
+```
+{% endif %}
 
 ## See Also
 

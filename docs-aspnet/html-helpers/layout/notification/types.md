@@ -1,7 +1,7 @@
 ---
 title: Types
 page_title: Types
-description: "Use the built-in types of the Telerik UI Notification HtmlHelper for ASP.NET MVC."
+description: "Use the built-in types of the Telerik UI Notification component for ASP.NET MVC."
 previous_url: /helpers/layout/notification/types
 slug: types_notificatiomhelper_aspnetmvc
 position: 2
@@ -17,10 +17,18 @@ You can use different templates and looks for each type. The built-in Notificati
 
 The following example demonstrates the built-in Notification types.
 
+```HtmlHelper
     @(Html.Kendo().Notification()
         .Name("notification")
     )
-
+```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification">
+</kendo-notification>
+```
+{% endif %}
+```script.js
     <script>
         $(function(){
             var notificationWidget = $("#notification").data("kendoNotification");
@@ -38,6 +46,7 @@ The following example demonstrates the built-in Notification types.
             notificationWidget.info("bar");
         });
     </script>
+```
 
 ## See Also
 

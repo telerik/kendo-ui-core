@@ -1,9 +1,9 @@
 ---
 title: Overview
-page_title: jQuery NumericTextBox Documentation | NumericTextBox Overview | Kendo UI
-description: "Get started with the jQuery NumericTextBox by Kendo UI and learn how to create and initialize the widget."
+page_title: jQuery NumericTextBox Documentation | NumericTextBox Overview
+description: "Try now the Kendo UI for jQuery NumericTextBox component providing a number of the features such as styling options, formatting settings, and labels."
 slug: overview_kendoui_numerictextbox_widget
-position: 1
+position: 0
 ---
 
 # NumericTextBox Overview
@@ -12,55 +12,20 @@ The NumericTextBox converts an `<input>` element into a numeric, percentage, or 
 
 By default, the widget renders **Spin** buttons which increase or decrease the value with a predefined step.
 
-* [Demo page for the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index) 
-
-## Basic Usage
-
-The NumericTextBox provides a set of [default API configuration options](/api/javascript/ui/numerictextbox) which can be set during its initialization such as minimum and maximum values, incremental steps, and so on.
-
-The following example demonstrates how to create a NumericTextBox and set some of its configuration options.
-
-     <input id="textbox">
-
-     <script>
-        $("#textbox").kendoNumericTextBox({
-            value: 10,
-            min: -10,
-            max: 100,
-            step: 0.75,
-            format: "n",
-            decimals: 3
-        });
-    </script>
-
-## Initializing the NumericTextBox
-
-Upon its initialization, the NumericTextBox wraps the `<input>` element with a `<span>` tag and renders its **Spin** buttons.
-
-> To get a reference to the NumericTextBox, always use `id` instead of a class selector. Behind the scenes, the NumericTextBox creates a secondary element that represents the visual look of the widget and copies all non-`id` attributes including the class. When you use the class for referencing the widget, this behavior causes unexpected results.
-
-The following example demonstrates how to initialize the NumericTextBox.
-
-    <input id="textBox" />
-
-    <script>
-        $(document).ready(function(){
-            $("#textBox").kendoNumericTextBox();
-        });
-    </script>
+![NumericTextBox Overview](numeric-overview.png)
 
 ## Functionality and Features
 
-* [Formats]({% slug formats_numerictextbox %})
-* [Input Restrictions]({% slug input_restrictions_numerictextbox %})
-* [Globalization]({% slug globalization_numerictextbox %})
-* [Accessibility]({% slug accessibility_numerictextbox %})
+* [Formats]({% slug formats_numerictextbox %})&mdash;You can use the specific `format` property of the NumericTextBox and define the conversion data type such as currency or percentage.
+* [Input Restrictions]({% slug input_restrictions_numerictextbox %})&mdash;The NumericTextBox enables you to impose restrictions on the input value, for example, to control the precision of the entered number.
+* [Globalization]({% slug globalization_numerictextbox %})&mdash;The NumericTextBox supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_numerictextbox %}) need to be supported. Additionally, the NumericTextBox supports [rendering in a right-to-left (RTL) direction]({% slug rtl_numerictextbox %}).
+* [Accessibility]({% slug accessibility_numerictextbox %})&mdash;The NumericTextBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_numerictextbox %}).
 
-For more information on the known limitations of the NumericTextBox, refer to [this article]({% slug limitations_numerictextbox %}).
+## Next Steps
 
-## Events
-
-For a complete example on the basic NumericTextBox events, refer to the [demo on using the events of the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/events).
+* [Getting Started with the Kendo UI NumericTextBox for jQuery]({% slug getting_started_kendoui_numerictextbox_widget %})
+* [Basic Usage of the Grid (NumericTextBox)](https://demos.telerik.com/kendo-ui/numerictextbox/index)
+* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
 
 ## See Also
 

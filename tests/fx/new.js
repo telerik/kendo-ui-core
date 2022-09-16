@@ -91,14 +91,14 @@
 
         it("fade in fades the element", function(done) {
             verifyEffect("fadeIn",
-                function(element) { assert.equal(element.css("opacity"), "0") },
+                function(element) { assert.equal(element.css("opacity"), "0"); },
                 function(element) { assert.equal(element.css("opacity"), "1"); done(); }
             );
         });
 
         it("fade in accepts custom start/end values", function(done) {
             verifyEffect("fadeIn",
-                function(element) { assert.closeTo(parseFloat(element.css("opacity")), 0.3, 0.1) },
+                function(element) { assert.closeTo(parseFloat(element.css("opacity")), 0.3, 0.1); },
                 function(element) { done(); assert.closeTo(parseFloat(element.css("opacity")), 0.8, 0.1); },
                 function(effect) { effect.startValue(0.3).endValue(0.8); }
             );

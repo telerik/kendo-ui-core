@@ -26,7 +26,7 @@ How can I export to Excel the complete (unfiltered) content of a filtered Grid i
 
 Use either of the following approaches:
 
-* The [built-in behavior of the Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/export/excel-export) is designed to export only the its current state&mdash;filtered, sorted, paged, and grouped. This means that to export all the data (without the query), you need to intercept the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event and modify the created workbook.
+* The [built-in behavior of the Grid](/controls/data-management/grid/export/excel-export) is designed to export only the its current state&mdash;filtered, sorted, paged, and grouped. This means that to export all the data (without the query), you need to intercept the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event and modify the created workbook.
 
     ```
     excelExport: function(e){
@@ -136,7 +136,7 @@ Use either of the following approaches:
         </div>
     ```
 
-* Alternatively, create another hidden Grid with the same data source and with its [`autoBind`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/autobind) set to `false`. Then, prevent the `excelExport` event of the filtered Grid and trigger the export of the "hidden" Grid instead of using the [`saveAsExcel()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveasexcel) method. The code looks similar to:
+* Alternatively, create another hidden Grid with the same data source and with its [`autoBind`](/api/javascript/ui/grid/configuration/autobind) set to `false`. Then, prevent the `excelExport` event of the filtered Grid and trigger the export of the "hidden" Grid instead of using the [`saveAsExcel()`](/api/javascript/ui/grid/methods/saveasexcel) method. The code looks similar to:
 
     ```
     excelExport: function(e){

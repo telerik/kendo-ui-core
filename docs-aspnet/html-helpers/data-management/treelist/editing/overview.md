@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Editing Overview
-description: "Learn how to configure the Telerik UI TreeList HtmlHelper for {{ site.framework }} and enable CRUD operations."
+description: "Learn how to configure the Telerik UI TreeList component for {{ site.framework }} and enable CRUD operations."
 previous_url: /helpers/data-management/treelist/editing
 slug: editing_aspnetcore_treelist_helper
 position: 1
@@ -9,7 +9,7 @@ position: 1
 
 # Editing Overview
 
-The [Telerik UI TreeList HtmlHelper](https://demos.telerik.com/{{ site.platform }}/treelist) provides a built-in editing functionality.
+The [Telerik UI TreeList](https://demos.telerik.com/{{ site.platform }}/treelist) provides a built-in editing functionality.
 
 To implement the editing functionality of the TreeList:
 
@@ -18,17 +18,35 @@ To implement the editing functionality of the TreeList:
 
 ## Setting the Model
 
-All CRUD operations of the TreeList HtmlHelper require a model with `Id` and `ParentId` fields. Those models has to be configured in the DataSource of the TreeList. Based on the `ParentId` field, the TreeList distinguishes the root items. If the `ParentId` field is nullable, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is not nullable, root items will be items which have a default value for their data type.
+All CRUD operations of the TreeList component require a model with `Id` and `ParentId` fields. Those models has to be configured in the DataSource of the TreeList. Based on the `ParentId` field, the TreeList distinguishes the root items. If the `ParentId` field is nullable, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is not nullable, root items will be items which have a default value for their data type.
 
  The following example demonstrates how to use the nullable model&mdash;items with ParentId `null` will be root items.
 
-```tab-Razor
+```tab-HtmlHelper
  	.DataSource(dataSource => dataSource
 	...
 	.Model(m => {
 		m.Id(f => f.EmployeeId);
 		m.ParentId(f => f.ReportsTo).Nullable(true);
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        ...
+        <treelist-datasource>
+			...
+            <schema>
+                <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="true"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
+    </kendo-treelist>
+```
+{% endif %}
 ```tab-Model
     public int? ReportsTo { get; set; }
 	public int EmployeeId { get; set; }
@@ -36,13 +54,31 @@ All CRUD operations of the TreeList HtmlHelper require a model with `Id` and `Pa
 
 The following example demonstrates how to use the non-nullable model&mdash;items with ParentId `string.empty` will be root items.
 
-```tab-Razor
+```tab-HtmlHelper
  	.DataSource(dataSource => dataSource
 	...
 	.Model(m => {
 		m.Id(f => f.EmployeeId);
 		m.ParentId(f => f.ReportsTo).Nullable(false);
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        ...
+        <treelist-datasource>
+			...
+            <schema>
+                <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                    <fields>
+                        <field name="EmployeeId" type="number"></field>
+                        <field name="ReportsTo" nullable="false"></field>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
+    </kendo-treelist>
+```
+{% endif %}
 ```tab-Model
     public string ReportsTo { get; set; }
 	public string EmployeeId { get; set; }
@@ -52,13 +88,28 @@ The following example demonstrates how to use the non-nullable model&mdash;items
 
 Once the schema is configured, you need to configure the action methods in the DataSource for `"Update"`, `"Destroy"`, and `"Create"`. An important part of the CRUD operations is the response from the service, which needs to return the manipulated records, so that the TreeList can apply the changes to the DataSource accordingly. The new records also have to contain the newly assigned within the service `Id` value.
 
-```
+```HtmlHelper
   .DataSource(dataSource => dataSource
       .Create(create => create.Action("Create", "EmployeeDirectory"))
       .Read(read => read.Action("All", "EmployeeDirectory"))
       .Update(update => update.Action("Update", "EmployeeDirectory"))
       .Destroy(delete => delete.Action("Destroy", "EmployeeDirectory"))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist">
+        ...
+        <treelist-datasource>
+			<transport>
+				<create url="@Url.Action("Create","EmployeeDirectory")"/>
+				<read url="@Url.Action("All","EmployeeDirectory")"/>
+				<update url="@Url.Action("Update","EmployeeDirectory")"/>
+				<destroy url="@Url.Action("Destroy","EmployeeDirectory")"/>
+			</transport>
+        </treelist-datasource>
+    </kendo-treelist>
+```
+{% endif %}
 
 ## Edit Modes
 

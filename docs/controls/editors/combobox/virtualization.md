@@ -1,6 +1,6 @@
 ---
 title: Virtualization
-page_title: jQuery ComboBox Documentation | Virtualization | Kendo UI
+page_title: jQuery ComboBox Documentation | Virtualization
 description: "Get started with the jQuery ComboBox by Kendo UI and configure its virtualization functionality."
 slug: virtualization_kendoui_combobox_widget
 position: 6
@@ -87,7 +87,7 @@ In order for the virtualization to properly work:
 
 ### Setting the Item and Container Heights
 
-The ComboBox applies a specific strategy of reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/combobox/configuration/height) and [`itemHeight`](/api/javascript/ui/combobox/configuration/itemheight) options. Once the number is calculated, the widget creates those elements and starts reusing them to display the current data source page.
+The ComboBox applies a specific strategy of reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/combobox/configuration/height) and [`itemHeight`](/api/javascript/ui/combobox/configuration/virtual#virtual.itemHeight) options. Once the number is calculated, the widget creates those elements and starts reusing them to display the current data source page.
 
 All items in the virtualized list need to have the same height. If you do not specify a height value, `itemHeight` will be automatically set as it is set in the current theme and font size.
 

@@ -76,6 +76,97 @@ The following example demonstrates how to use the API for internal Grid column r
     </script>
 ```
 
+Example: Apply a minimum width during column resize for a single column.
+
+```dojo
+<div id="grid"></div>
+    <script>
+      $(function(){
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: [{foo: "item", bar: "number", baz: "one"}]
+          },
+          columns: [
+            {field: "foo"},
+            {field: "bar"},
+            {field: "baz"}
+          ],
+          resizable: true 
+        });
+
+        var minTableWidth;
+        var minColumnWidth = 100;
+        var fooTh;
+        var idxOfRestrictedColumn;
+        var grid;
+
+        $("#grid").data("kendoGrid").resizable.bind("start", function(e) {
+          fooTh = $("th[data-field='foo']");
+          idxOfRestrictedColumn = fooTh.index();
+          grid = fooTh.closest(".k-grid").data("kendoGrid");
+        });
+
+        $("#grid").data("kendoGrid").resizable.bind("resize", function(e) {
+          var fooTh = $("th[data-field='foo']");
+          if (idxOfRestrictedColumn === 0) {
+            if (fooTh.width() >= minColumnWidth) {
+              minTableWidth = grid.tbody.closest("table").width();
+            }
+
+            if (fooTh.width() < minColumnWidth) {
+              // the next line is ONLY needed if Grid scrolling is enabled
+              grid.thead.closest("table").width(minTableWidth).children("colgroup").find("col").eq(idxOfRestrictedColumn).width(minColumnWidth);
+              grid.tbody.closest("table").width(minTableWidth).children("colgroup").find("col").eq(idxOfRestrictedColumn).width(minColumnWidth);
+            }
+          }
+
+        });
+      });
+    </script>
+```
+
+Example: Apply width on a certain column if window with less than specific number.
+
+This is done utilizing the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
+
+```dojo
+    <div id="grid"></div>
+    <script>
+      $(function(){
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: [{foo: "item", bar: "number", baz: "one"}]
+          },
+          columns: [
+            {field: "foo"},
+            {field: "bar"},
+            {field: "baz"}
+          ],
+          resizable: true 
+        });
+      });
+
+      $(window).on("resize", function () {
+        var minColumnWidth = 100;
+        var grid = $("#grid").data("kendoGrid");
+        var columns = grid.getOptions().columns;
+
+        if ($(window).width() <= 716) {
+          columns[0].width = minColumnWidth;
+          grid.setOptions({
+            columns: columns
+          });
+        }
+        else {
+          columns[0].width = "";
+          grid.setOptions({
+            columns: columns
+          })
+        };
+      });
+    </script>
+```
+
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

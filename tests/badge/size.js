@@ -6,7 +6,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge size', function () {
+    describe('kendo.ui.Badge size', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -16,14 +16,11 @@
             kendo.destroy(Mocha.fixture);
         });
 
-        var shapes = [ 'rounded', 'pill', 'circle', 'dot', 'custom' ]
-        var defaultShapes = [ 'rectangle', '' ];
-        var sizes = [ 'small', 'large', 'custom' ];
-        var defaultSizes = [ 'medium', '' ];
+        var sizes = [ 'medium', 'small', 'large', 'custom' ];
 
         // #region badge.options.size
         sizes.forEach(function(size) {
-            test(`badge({size: '${size}'}) sets correct classNames`, function() {
+            test(`badge.option.size '${size}' sets correct classNames`, function() {
                 badge = new Badge(span, { size: size });
                 var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
 
@@ -32,60 +29,11 @@
             });
         });
 
-        defaultSizes.forEach(function(size) {
-            test(`badge({size: '${size}'}) sets correct classNames`, function() {
-                badge = new Badge(span, { size: size });
-                var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
+        test(`badge.options.size '' does not set classNames`, function() {
+            badge = new Badge(span, { size: '' });
 
-                assert.equal(badge._size, size);
-                assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), false);
-            });
-        });
-        // #endregion
-
-
-        // #region badge.options.shape and size variations
-        shapes.forEach(function(shape) {
-            sizes.forEach(function(size) {
-                test(`badge({shape: '${shape}', size: '${size}'}) sets correct classNames`, function() {
-                    badge = new Badge(span, { shape: shape, size: size });
-                    var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
-
-                    assert.equal(badge.element.hasClass(`k-badge-${shape}-${sizeAbbr}`), true);
-                });
-            });
-
-            defaultSizes.forEach(function(size) {
-                test(`badge({shape: '${shape}', size: '${size}'}) sets correct classNames`, function() {
-                    badge = new Badge(span, { shape: shape, size: size });
-                    var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
-
-                    assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), false);
-                    assert.equal(badge.element.hasClass(`k-badge-${shape}-${sizeAbbr}`), false);
-                });
-            });
-        });
-
-        defaultShapes.forEach(function(shape) {
-            sizes.forEach(function(size) {
-                test(`badge({shape: '${shape}', size: '${size}'}) sets correct classNames`, function() {
-                    badge = new Badge(span, { shape: shape, size: size });
-                    var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
-
-                    assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), true);
-                    assert.equal(badge.element.hasClass(`k-badge-${shape}-${sizeAbbr}`), false);
-                });
-            });
-
-            defaultSizes.forEach(function(size) {
-                test(`badge({shape: '${shape}', size: '${size}'}) sets correct classNames`, function() {
-                    badge = new Badge(span, { shape: shape, size: size });
-                    var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
-
-                    assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), false);
-                    assert.equal(badge.element.hasClass(`k-badge-${shape}-${sizeAbbr}`), false);
-                });
-            });
+            assert.equal(badge._size, '');
+            assert.equal(badge.element.hasClass(`k-badge-`), false);
         });
         // #endregion
 
@@ -96,69 +44,21 @@
                 badge = new Badge(span, { size: 'size' });
                 var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
 
-                badge.setOptions({size: size});
+                badge.setOptions({ size: size });
 
                 assert.equal(badge._size, size);
                 assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), true);
             });
         });
 
-        defaultSizes.forEach(function(size) {
-            test(`badge.setOptions({size: '${size}'}) does not set classNames`, function() {
-                badge = new Badge(span, { size: size });
-                var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
+        test(`badge.setOptions({size: ''}) does not set classNames`, function() {
+            badge = new Badge(span, { size: 'size' });
 
-                badge.setOptions({size: size});
+            badge.setOptions({ size: '' });
 
-                assert.equal(badge._size, size);
-                assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), false);
-            });
-        });
-
-        shapes.forEach(function(shape) {
-            sizes.forEach(function(size) {
-                test(`badge.setOptions({shape: '${shape}', size: '${size}'}) sets correct classNames`, function() {
-                    badge = new Badge(span, { shape: 'shape', size: 'size' });
-                    var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
-
-                    badge.setOptions({shape: shape, size: size});
-
-                    assert.equal(badge.element.hasClass(`k-badge-${shape}-${sizeAbbr}`), true);
-                });
-            });
-
-            defaultSizes.forEach(function(size) {
-                test(`badge.setOptions({shape: '${shape}', size: '${size}'}) sets correct classNames`, function() {
-                    badge = new Badge(span, { shape: 'shape', size: 'size' });
-                    var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
-
-                    badge.setOptions({shape: shape, size: size});
-
-                    assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), false);
-                    assert.equal(badge.element.hasClass(`k-badge-${shape}-${sizeAbbr}`), false);
-                });
-            });
-        });
-
-        defaultShapes.forEach(function(shape) {
-            sizes.forEach(function(size) {
-                test(`badge.setOptions({shape: '${shape}', size: '${size}'}) sets correct classNames`, function() {
-                    badge = new Badge(span, { shape: shape, size: size });
-                    var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
-
-                    assert.equal(badge.element.hasClass(`k-badge-${shape}-${sizeAbbr}`), false);
-                });
-            });
-
-            defaultSizes.forEach(function(size) {
-                test(`badge.setOptions({shape: '${shape}', size: '${size}'}) sets correct classNames`, function() {
-                    badge = new Badge(span, { shape: shape, size: size });
-                    var sizeAbbr = badge.options.sizes[size] === undefined ? size : badge.options.sizes[size];
-
-                    assert.equal(badge.element.hasClass(`k-badge-${sizeAbbr}`), false);
-                    assert.equal(badge.element.hasClass(`k-badge-${shape}-${sizeAbbr}`), false);
-                });
-            });
+            assert.equal(badge._size, '');
+            assert.equal(badge.element.hasClass(`k-badge-size`), false);
+            assert.equal(badge.element.hasClass(`k-badge-`), false);
         });
         // #endregion
 

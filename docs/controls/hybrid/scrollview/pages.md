@@ -1,6 +1,6 @@
 ---
 title: Pages
-page_title: Hybrid ScrollView Documentation | Pages | Kendo UI
+page_title: Hybrid ScrollView Documentation | Pages
 description: "Get started with the Hybrid ScrollView by Kendo UI and use its page and page size options."
 slug: pages_hybridscrollview
 position: 3

@@ -1,17 +1,27 @@
 ---
 title: Overview
 page_title: StockChart Overview
-description: "Learn the basics when working with the Telerik UI StockChart HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI StockChart component for {{ site.framework }}."
 previous_url: /helpers/charts/stockchart/overview
 slug: overview_stockcharthelper_aspnetcore
 position: 1
 ---
 
-# StockChart HtmlHelper Overview
+# StockChart Overview
 
+{% if site.core %}
+The Telerik UI StockChart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI StockChart widget.
+{% else %}
 The Telerik UI StockChart HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI StockChart widget.
+{% endif %}
 
 The StockChart is a specialized control visualizing the price movement of any financial instrument over a certain period of time. StockCharts include extensive touch support and a navigator pane for easy browsing of extended time periods. Generally, StockCharts extend the Telerik UI Chart and share most of its features.
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-introduction.html %}
+{% endif %}
+
+To see the component in action, check the examples:
 
 * [Demo page for the StockChart](https://demos.telerik.com/{{ site.platform }}/financial/index)
 
@@ -31,7 +41,7 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
 
   The following example demonstrates how to add a new action method which returns data to populate the StockChart.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
             .Name("stockChart")
             .Title("The Boeing Company (NYSE:BA)")
@@ -91,7 +101,7 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
 
     The following example demonstrates how to create the main and the navigator data series.
 
-    ```
+    ```HtmlHelper
         @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
             .Name("stockChart")
             .Title("The Boeing Company (NYSE:BA)")
@@ -116,24 +126,30 @@ The StockChart provides options for [binding it to data]({% slug databinding_sto
 
 ## Events
 
-You can subscribe to all StockChart [events](/api/stockchart).
+You can subscribe to all StockChart [events](/api/Kendo.Mvc.UI.Fluent/ChartEventBuilder).
 
 ### Handling Events by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
-    @(Html.Kendo().StockChart(Model)
+```HtmlHelper
+    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
     	.Name("stockChart")
     	.Title("The Boeing Company (NYSE:BA)")
     	.DateField("Date")
     	.Series(series => {
     	    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    	})
+    	}){% if site.core %}
+        .Events((Action<Kendo.Mvc.UI.Fluent.StockChartEventBuilder>)(x => 
+            x.DataBound("stockChart_dataBound")
+            .SeriesClick("stockChart_seriesClick")
+            )
+        )
+        {% else %}
     	.Events(e => e
     	  .DataBound("stockChart_dataBound")
     	  .SeriesClick("stockChart_seriesClick")
-    	)
+    	){% endif %}
     )
 
     <script>
@@ -151,14 +167,27 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```
-    @(Html.Kendo().StockChart(Model)
+```HtmlHelper
+    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
     	.Name("stockChart")
     	.Title("The Boeing Company (NYSE:BA)")
     	.DateField("Date")
     	.Series(series => {
     	    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    	})
+    	}){% if site.core %}
+        .Events((Action<Kendo.Mvc.UI.Fluent.StockChartEventBuilder>)(e => e
+    	  .DataBound(@<text>
+    	       function(e) {
+    	           //Handle the dataBound event inline.
+    	       }
+    	  </text>)
+    	  .SeriesClick(@<text>
+    	       function(e) {
+    	           //Handle the seriesClick event inline.
+    	       }
+    	  </text>)
+    	 )
+        ){% else %}
     	.Events(e => e
     	  .DataBound(@<text>
     	       function(e) {
@@ -170,7 +199,7 @@ The following example demonstrates how to subscribe to events by a template dele
     	           //Handle the seriesClick event inline.
     	       }
     	  </text>)
-    	)
+    	){% endif %}
     )
 ```
 

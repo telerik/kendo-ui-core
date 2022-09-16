@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ResponsivePanel Documentation | ResponsivePanel Overview | Kendo UI
+page_title: jQuery ResponsivePanel Documentation | ResponsivePanel Overview
 description: "Get started with the jQuery ResponsivePanel by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_responsivepanel_widget
 position: 1

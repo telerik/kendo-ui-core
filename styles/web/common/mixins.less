@@ -27,7 +27,7 @@
 }
 
 .flex-align(@alignment) {
-    flex-align: @alignment;
+    align-self: @alignment;
 }
 
 .flex-align-items(@alignment) {
@@ -36,10 +36,6 @@
 
 .flex-align-content(@alignment) {
     align-content: @alignment;
-}
-
-.flex-pack(@pack) {
-    flex-pack: @pack;
 }
 
 .text-size-adjust(...) {
@@ -175,4 +171,18 @@
     .color(@text);
     .background-color(@bg);
     .linear-gradient(@gradient);
+}
+
+
+.hide-scrollbar(@dir: right, @max-scrollbar: 100px) {
+    // anything larger than the scrollbar width will do
+    @scrollbar-size: 17px;
+    @margin: calc(-@max-scrollbar - @scrollbar-size);
+
+    padding-right: @max-scrollbar;
+    padding-left: @max-scrollbar;
+    margin-left: -@max-scrollbar;
+    margin-right: -@max-scrollbar;
+
+    margin-@{dir}: @margin;
 }

@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Data Management Widgets
-page_title: Individual Scripts for Data Management Widgets | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Data Management Widgets | Scripts 
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Data Management Widgets"
 slug: script_filesfor_datamanagement_widgets
 ---

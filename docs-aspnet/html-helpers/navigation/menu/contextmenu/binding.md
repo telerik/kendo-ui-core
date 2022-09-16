@@ -1,7 +1,7 @@
 ---
 title: Binding
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI ContextMenu HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI ContextMenu component for {{ site.framework }}."
 slug: htmlhelpers_contextmenu_databinding_aspnetcore
 position: 2
 ---
@@ -22,7 +22,7 @@ The Telerik UI ContextMenu enables you to bind it to a hierarchical model.
 
 1. Add the ContextMenu.
 
-    ```Razor
+    ```HtmlHelper
     @model IEnumerable<ModelBindingDemo.Models.Category>
 
     <div id="target">Click to open</div>
@@ -47,6 +47,27 @@ The Telerik UI ContextMenu enables you to bind it to a hierarchical model.
             })
     )
     ```
+    {% if site.core %}
+    ```TagHelper
+        @{
+        var menuItems = Model.Select(category =>
+            {
+                return new MenuItemBase
+                {
+                    Text = category.CategoryName,
+                    Children = category.Products.Select(product =>
+                    {
+                        return new MenuItemBase { Text = product.ProductName };
+                    })
+                };
+            });
+        }
+
+        <kendo-contextmenu name="contextmenu" target="#target" show-on="click" 
+            bind-to="menuItems">
+        </kendo-contextmenu>
+    ```
+    {% endif %}
     ```Controller
     public class ContextMenuController : BaseController
     {

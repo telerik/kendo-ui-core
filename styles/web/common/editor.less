@@ -1,6 +1,5 @@
 // Editor
 .k-editor {
-    height: 250px;
     border-style: solid;
     border-width: 1px;
     font-size: 100%;
@@ -8,8 +7,7 @@
     position: relative;
 
     > .k-content,
-    iframe.k-content,
-    .k-editor-content {
+    iframe.k-content {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -22,6 +20,7 @@
 }
 table.k-editor {
     width: 100%;
+    height: 250px;
     table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0;
@@ -42,6 +41,7 @@ table.k-editor {
 // Editor inline
 .k-editor-inline {
     padding: .3em .5em;
+    background: none;
     word-wrap: break-word;
     overflow: auto;
     position: relative;
@@ -50,16 +50,30 @@ table.k-editor {
         border: 1px solid transparent;
     }
 }
+
+.k-window.k-editor-widget {
+    min-height: 0;
+}
 .editorToolbarWindow  {
+    padding: @toolbar-padding-y @toolbar-padding-x;
+    font-size: 14px;
     display: flex;
     align-content: flex-start;
+
+    .k-editor-toolbar {
+        padding: 0;
+        border-width: 0;
+        background: none;
+    }
 }
 .k-editortoolbar-dragHandle {
-    margin: 0 3px 0 0;
+    margin: 0 @toolbar-spacing 0 0;
     padding: 0;
-    float: left;
     position: relative;
     cursor: move;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
 
@@ -70,7 +84,8 @@ table.k-editor {
 
     // Group
     .k-tool-group {
-        .k-widget ~ .k-widget {
+        .k-widget ~ .k-widget,
+        .k-colorpicker ~ .k-colorpicker {
             margin-inline-start: @toolbar-spacing;
         }
     }
@@ -78,8 +93,8 @@ table.k-editor {
     // Tool
     .k-tool-group > .k-tool {
         padding: @button-padding-y;
-        width: @editor-icon-size;
-        height: @editor-icon-size;
+        width: @button-calc-size;
+        height: @button-calc-size;
     }
     .k-tool-text {
         display: none;
@@ -114,6 +129,13 @@ table.k-editor {
         height: 1px;
         font-size: 0;
         line-height: 0;
+    }
+
+    .k-editor-export {
+        .k-icon {
+            margin-right: .25em;
+            margin-top: -.25em;
+        }
     }
 }
 
@@ -188,11 +210,6 @@ table.k-editor {
     width: 5em;
 }
 
-.k-editor-dialog .k-button
-{
-    display: inline-block;
-}
-
 .k-button-wrapper .k-link:hover {
     text-decoration: underline;
 }
@@ -242,7 +259,7 @@ table.k-editor {
     opacity: 0;
 }
 
-.k-editor-inline .k-table-resize-handle-wrapper {
+.k-editor-inline .k-element-resize-handle-wrapper {
     position: absolute;
     width: 5px;
     height: 5px;
@@ -250,7 +267,7 @@ table.k-editor {
     border: 1px solid #000;
     z-index: 100;
 
-    .k-table-resize-handle {
+    .k-element-resize-handle {
         width: 100%;
         height: 100%;
 
@@ -327,7 +344,7 @@ table.k-editor {
     }
 }
 
-.k-table.k-table-resizing {
+.k-table.k-element-resizing {
     opacity: 0.6;
 }
 
@@ -375,7 +392,7 @@ table.k-editor {
     .k-editor-textarea {
         margin: 1em;
         padding: @input-padding-y @input-padding-y;
-        // width: 100%;
+        width: calc(100% - 2em); // exclude margin
         height: 100%;
         border-width: 1px;
         border-style: solid;
@@ -437,7 +454,8 @@ table.k-editor {
     box-shadow: none;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-tabstrip-wrapper .k-content {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-tabstrip-wrapper .k-content,
+.k-editor-dialog.k-editor-table-wizard-dialog  .k-tabstrip-content {
     overflow: hidden;
     min-height: 440px;
     height: 35em;
@@ -446,21 +464,25 @@ table.k-editor {
     border-width: 0;
 }
 
+ .k-editor-table-wizard-dialog .k-colorpicker {
+     vertical-align: middle;
+ }
+
 .k-editor-dialog .k-edit-field .k-numerictextbox {
-    width: 10.6em;
+    width: 10em;
     margin: 0 .35714285em 0 0;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdown {
-    width: 4em;
+.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdownlist {
+    width: 4.5em;
 }
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-textbox,
-.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-dropdown {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-dropdownlist {
     width: 15em;
 }
 
-.k-editor-table-wizard-dialog .k-numerictextbox + .k-dropdown {
+.k-editor-table-wizard-dialog .k-numerictextbox + .k-dropdownlist  {
     width: 5.35714285em;
 }
 
@@ -472,45 +494,12 @@ table.k-editor {
     height: auto;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdownlist.k-align {
     width: 4em;
-}
-
-.k-popup.k-list-container.k-align {
-    padding: 0;
-    text-align: center;
 }
 
 .k-align-group {
     vertical-align: text-top;
-}
-
-.k-popup.k-align .k-list .k-item {
-    display: inline-block;
-    width: 2.57142857em;
-    height: 2.57142857em;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-}
-
-.k-popup.k-align .k-list .k-icon {
-    vertical-align: bottom;
-    vertical-align: -webkit-baseline-middle;
-}
-
-.k-popup.k-align .k-list .k-item:last-child {
-    width: auto;
-    display: block;
-    border-width: 1px 0 0;
-    border-style: solid;
-}
-
-.k-popup.k-align .k-list .k-item:before {
-    width: 2.57142857em;
-    height: 2.57142857em;
-    line-height: 2.57142857em;
 }
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-buttons {

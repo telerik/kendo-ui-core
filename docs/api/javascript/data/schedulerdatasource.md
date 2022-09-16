@@ -69,6 +69,7 @@ The model configuration of the SchedulerDataSource. See [SchedulerEvent](/api/fr
     });
     dataSource.fetch(function() {
         var event = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.title); // outputs "Bowling tournament"
     });
     </script>
@@ -125,6 +126,7 @@ The complete list of the supported timezones is available in the [List of IANA t
     });
     dataSource.fetch(function() {
         var event = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.start); // outputs converted date based on defined timezone
     });
     </script>

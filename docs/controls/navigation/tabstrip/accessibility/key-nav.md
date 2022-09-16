@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: jQuery TabStrip Documentation | Keyboard Navigation | Kendo UI
+page_title: jQuery TabStrip Documentation | Keyboard Navigation
 description: "Get started with the jQuery TabStrip by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_tabstrip
 position: 2

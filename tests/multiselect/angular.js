@@ -1,5 +1,5 @@
-(function () {
-    describe("MultiSelect AngularJS integration", function () {
+(function() {
+    describe("MultiSelect AngularJS integration", function() {
         afterEach(function() {
              kendo.destroy(Mocha.fixture);
         });
@@ -263,17 +263,17 @@
     ngTest("virtualized multiselect updates model on change", function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.selectData = [
-                {ModelNo: "100 HP"},
-                {ModelNo: "105 HP"},
-                {ModelNo: "110 HP"},
-                {ModelNo: "115 HP"},
-                {ModelNo: "120 HP"},
-                {ModelNo: "125 HP"}
+                { ModelNo: "100 HP" },
+                { ModelNo: "105 HP" },
+                { ModelNo: "110 HP" },
+                { ModelNo: "115 HP" },
+                { ModelNo: "120 HP" },
+                { ModelNo: "125 HP" }
             ];
 
             $scope.dataSource = new kendo.data.DataSource({
                 transport: {
-                    read: function (options) {
+                    read: function(options) {
                         setTimeout(function() {
                             options.success($scope.selectData.slice());
                         });

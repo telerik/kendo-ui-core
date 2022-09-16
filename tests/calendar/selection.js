@@ -4,7 +4,7 @@ var Calendar = kendo.ui.Calendar,
     instance,
     div;
 
-describe("kendo.ui.Calendar selection", function () {
+describe("kendo.ui.Calendar selection", function() {
     beforeEach(function() {
 
         div = $("<div />").appendTo(Mocha.fixture);
@@ -46,7 +46,7 @@ describe("kendo.ui.Calendar selection", function () {
         element.trigger($.Event(type, info));
 
         return element;
-    };
+    }
 
     it("disabled dates are not selected with drag to select", function() {
         instance = new Calendar(div, {
@@ -60,8 +60,8 @@ describe("kendo.ui.Calendar selection", function () {
 
         firstSelectee.tap().press().move(position.left, position.top).release();
 
-        assert.isOk(instance.element.find("td.k-state-selected").length);
-        assert.isOk(!instance.element.find("td.k-state-selected.k-state-disabled").length);
+        assert.isOk(instance.element.find("td.k-selected").length);
+        assert.isOk(!instance.element.find("td.k-selected.k-disabled").length);
     });
 
     });

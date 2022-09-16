@@ -1,6 +1,6 @@
 ---
 title: Tools
-page_title: jQuery Editor Documentation | Tools | Kendo UI
+page_title: jQuery Editor Documentation | Tools
 description: "Get started with the jQuery Editor by Kendo UI and use and customize its tools."
 slug: tools_kendoui_editor_widget
 position: 4
@@ -34,6 +34,8 @@ The following example demonstrates how to implement a set of specific Editor too
 Apart from the available built-in tools, you can extend the Editor functionality through custom tools that are defined in the `tools` array.
 
 The following example demonstrates how to add a custom tool button. To enable styling where `toolName` is the specified name in the custom tool configuration, the custom buttons get a `k-toolName` CSS class. The `undo` and `redo` tool names are reserved.
+
+For a runnable example, refer to the [Custom tools Editor Demo](https://demos.telerik.com/kendo-ui/editor/custom-tools)
 
        $("#editor").kendoEditor({
            tools: [

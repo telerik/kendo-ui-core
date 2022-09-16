@@ -41,7 +41,8 @@
     }
 
     .k-timeline-arrow {
-        &.k-button:not(.k-flat):not(.k-bare):not(.k-outline):not(.k-overflow-button).k-state-disabled {
+        &.k-button:not(.k-button-flat):not(.k-bare):not(.k-button-outline):not(.k-overflow-button).k-state-disabled,
+        &.k-button:not(.k-button-flat):not(.k-bare):not(.k-button-outline):not(.k-overflow-button).k-disabled {
             opacity: 1; // The arrow button in disabled mode should have a solid background
             color: @timeline-track-arrow-disabled-text;
             background-color: @timeline-track-arrow-disabled-bg;
@@ -60,4 +61,9 @@
 
 .k-timeline-horizontal .k-timeline-flag::after {
     background-color: @timeline-flag-background;
+}
+
+.k-timeline-track-item.k-state-focus .k-timeline-circle,
+.k-timeline-track-item.k-focus .k-timeline-circle {
+    .box-shadow( @timeline-track-item-focus-shadow );
 }

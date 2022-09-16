@@ -396,7 +396,7 @@
 
         it("defaultValue support functions", function() {
             var MyModel = Model.define({
-                fields: [{ field: "foo", defaultValue: function() { return "bar" } }]
+                fields: [{ field: "foo", defaultValue: function() { return "bar"; } }]
             });
 
             var model = new MyModel();

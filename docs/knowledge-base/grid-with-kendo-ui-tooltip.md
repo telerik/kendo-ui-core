@@ -80,9 +80,15 @@ The following example demonstrates how to show Kendo UI Tooltip for Kendo UI Gri
         }).data("kendoGrid");
 
         $("#grid").kendoTooltip({
-          filter: "td:nth-child(2)", //this filter selects the second column's cells
+          filter: "td:nth-child(2), th:nth-child(2)", //this filter selects the second column's cells and the second column header
           position: "right",
+          width: 250,
           content: function(e){
+            // If the element is the header, return the text of the cell.
+            if(e.target.is("th")) {
+              return e.target.text();
+            }
+            
             var dataItem = $("#grid").data("kendoGrid").dataItem(e.target.closest("tr"));
             var content = dataItem.Text;
             return content;

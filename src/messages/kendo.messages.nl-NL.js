@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function($, undefined) {
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -375,6 +375,341 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "week": "Week",
     "workWeek": "Work Week",
     "timeline": "Tijdlijn"
+  }
+});
+}
+
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette,{
+  "allBorders": "Alle grenzen",
+  "insideBorders": "Binnen grenzen",
+  "insideHorizontalBorders": "Binnen horizontale randen",
+  "insideVerticalBorders": "Binnen verticale randen",
+  "outsideBorders": "buiten grenzen",
+  "leftBorder": "Linkerrand",
+  "topBorder": "Bovenrand",
+  "rightBorder": "rechterrand",
+  "bottomBorder": "Onderrand",
+  "noBorders": "Geen grens",
+  "reset": "Kleur resetten",
+  "customColor": "Aangepaste kleur...",
+  "apply": "Van toepassing zijn",
+  "cancel": "Annuleren"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs,{
+  "apply": "Van toepassing zijn",
+  "save": "Sparen",
+  "cancel": "Annuleren",
+  "remove": "Verwijderen",
+  "retry": "Opnieuw proberen",
+  "revert": "Terugdraaien",
+  "okText": "oke",
+  "formatCellsDialog": {
+    "title": "Formaat",
+    "categories": {
+      "number": "Nummer",
+      "currency": "Munteenheid",
+      "date": "Datum"
+    }
+  },
+  "fontFamilyDialog": {
+    "title": "Lettertype"
+  },
+  "fontSizeDialog": {
+    "title": "Lettertypegrootte"
+  },
+  "bordersDialog": {
+    "title": "grenzen"
+  },
+  "alignmentDialog": {
+    "title": "Uitlijning",
+    "buttons": {
+      "justtifyLeft": "Links uitlijnen",
+      "justifyCenter": "Centrum",
+      "justifyRight": "Rechts uitlijnen",
+      "justifyFull": "Verantwoorden",
+      "alignTop": "Boven uitlijnen",
+      "alignMiddle": "Midden uitlijnen",
+      "alignBottom": "Onderuit uitlijnen"
+    }
+  },
+  "mergeDialog": {
+    "title": "Cellen samenvoegen",
+    "buttons": {
+      "mergeCells": "Alles samenvoegen",
+      "mergeHorizontally": "Horizontaal samenvoegen",
+      "mergeVertically": "Verticaal samenvoegen",
+      "unmerge": "Samenvoegen opheffen"
+    }
+  },
+  "freezeDialog": {
+    "title": "Ruiten bevriezen",
+    "buttons": {
+      "freezePanes": "Ruiten bevriezen",
+      "freezeRows": "Rijen bevriezen",
+      "freezeColumns": "Kolommen bevriezen",
+      "unfreeze": "Ruiten deblokkeren"
+    }
+  },
+  "confirmationDialog": {
+    "text": "Weet u zeker dat u dit blad wilt verwijderen?",
+    "title": "Blad verwijderen"
+  },
+  "validationDialog": {
+    "title": "Gegevensvalidatie",
+    "hintMessage": "Voer een geldige {0}-waarde {1} in.",
+    "hintTitle": "Validatie {0}",
+    "criteria": {
+      "any": "Elke waarde",
+      "number": "Nummer",
+      "text": "Tekst",
+      "date": "Datum",
+      "custom": "Aangepaste formule",
+      "list": "Lijst"
+    },
+    "comparers": {
+      "greaterThan": "groter dan",
+      "lessThan": "minder dan",
+      "between": "tussen",
+      "notBetween": "niet tussen",
+      "equalTo": "gelijk aan",
+      "notEqualTo": "niet gelijk aan",
+      "greaterThanOrEqualTo": "groter dan of gelijk aan",
+      "lessThanOrEqualTo": "minder dan of gelijk aan"
+    },
+    "comparerMessages": {
+      "greaterThan": "groter dan {0}",
+      "lessThan": "minder dan {0}",
+      "between": "tussen {0} en {1}",
+      "notBetween": "niet tussen {0} en {1}",
+      "equalTo": "gelijk aan {0}",
+      "notEqualTo": "niet gelijk aan {0}",
+      "greaterThanOrEqualTo": "groter dan of gelijk aan {0}",
+      "lessThanOrEqualTo": "kleiner dan of gelijk aan {0}",
+      "custom": "die voldoet aan de formule: {0}"
+    },
+    "labels": {
+      "criteria": "criteria",
+      "comparer": "vergelijker",
+      "min": "min",
+      "max": "Max",
+      "value": "Waarde",
+      "start": "Begin",
+      "end": "Einde",
+      "onInvalidData": "Op ongeldige gegevens",
+      "rejectInput": "Invoer weigeren",
+      "showWarning": "Toon waarschuwing",
+      "showHint": "Toon hint",
+      "hintTitle": "Tip titel",
+      "hintMessage": "hint bericht",
+      "ignoreBlank": "Negeer leeg"
+    },
+    "placeholders": {
+      "typeTitle": "Typ titel",
+      "typeMessage": "Typ bericht"
+    }
+  },
+  "exportAsDialog": {
+    "title": "Exporteren...",
+    "labels": {
+      "fileName": "Bestandsnaam",
+      "saveAsType": "Opslaan als type",
+      "exportArea": "Exporteren",
+      "paperSize": "Papiergrootte",
+      "margins": "Marges",
+      "orientation": "Oriëntatie",
+      "print": "Afdrukken",
+      "guidelines": "Richtlijnen",
+      "center": "Centrum",
+      "horizontally": "horizontaal",
+      "vertically": "Verticaal"
+    }
+  },
+  "modifyMergedDialog": {
+    "errorMessage": "Kan een deel van een samengevoegde cel niet wijzigen."
+  },
+  "useKeyboardDialog": {
+    "title": "Kopiëren en plakken",
+    "errorMessage": "Deze acties kunnen niet via het menu worden aangeroepen. Gebruik in plaats daarvan de sneltoetsen:",
+    "labels": {
+      "forCopy": "voor kopiëren",
+      "forCut": "voor knippen",
+      "forPaste": "voor plakken"
+    }
+  },
+  "unsupportedSelectionDialog": {
+    "errorMessage": "Die actie kan niet worden uitgevoerd op meervoudige selectie."
+  },
+  "insertCommentDialog": {
+    "title": "Opmerking invoegen",
+    "labels": {
+      "comment": "Commentaar",
+      "removeComment": "Reactie verwijderen"
+    }
+  },
+  "insertImageDialog": {
+    "title": "Voeg afbeelding in",
+    "info": "Sleep een afbeelding hierheen, of klik om te selecteren",
+    "typeError": "Selecteer een JPEG-, PNG- of GIF-afbeelding"
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "Sorteerbereik A tot Z",
+  "sortDescending": "Sorteerbereik Z tot A",
+  "filterByValue": "Filteren op waarde",
+  "filterByCondition": "Filteren op voorwaarde",
+  "apply": "Van toepassing zijn",
+  "search": "Zoekopdracht",
+  "addToCurrent": "Toevoegen aan huidige selectie",
+  "clear": "Duidelijk",
+  "blanks": "(blanco)",
+  "operatorNone": "Geen",
+  "and": "EN",
+  "or": "OF",
+  "operators": {
+    "string": {
+      "contains": "Tekst bevat",
+      "doesnotcontain": "Tekst bevat geen",
+      "startswith": "Tekst begint met",
+      "endswith": "Tekst eindigt met"
+    },
+    "date": {
+      "eq": "Datum is",
+      "neq": "Datum is niet",
+      "lt": "Datum is voor",
+      "gt": "Datum is na"
+    },
+    "number": {
+      "eq": "Is gelijk aan",
+      "neq": "Is niet gelijk aan",
+      "gte": "Is groter dan of gelijk aan",
+      "gt": "Is groter dan",
+      "lte": "Is kleiner dan of gelijk aan",
+      "lt": "Is minder dan"
+    }
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
+kendo.spreadsheet.messages.colorPicker =
+$.extend(true, kendo.spreadsheet.messages.colorPicker,{
+  "reset": "Kleur resetten",
+  "customColor": "Aangepaste kleur...",
+  "apply": "Van toepassing zijn",
+  "cancel": "Annuleren"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar,{
+  "addColumnLeft": "Kolom links toevoegen",
+  "addColumnRight": "Kolom rechts toevoegen",
+  "addRowAbove": "Rij hierboven toevoegen",
+  "addRowBelow": "Rij hieronder toevoegen",
+  "alignment": "Uitlijning",
+  "alignmentButtons": {
+    "justtifyLeft": "Links uitlijnen",
+    "justifyCenter": "Centrum",
+    "justifyRight": "Rechts uitlijnen",
+    "justifyFull": "Verantwoorden",
+    "alignTop": "Boven uitlijnen",
+    "alignMiddle": "Midden uitlijnen",
+    "alignBottom": "Onderuit uitlijnen"
+  },
+  "backgroundColor": "Achtergrond",
+  "bold": "Stoutmoedig",
+  "borders": "grenzen",
+  "colorPicker": {
+    "reset": "Kleur resetten",
+    "customColor": "Aangepaste kleur..."
+  },
+  "copy": "Kopiëren",
+  "cut": "Snee",
+  "deleteColumn": "Kolom verwijderen",
+  "deleteRow": "Verwijder rij",
+  "excelImport": "Importeren uit Excel...",
+  "filter": "Filter",
+  "fontFamily": "Lettertype",
+  "fontSize": "Lettertypegrootte",
+  "format": "Aangepast formaat...",
+  "formatTypes": {
+    "automatic": "automatisch",
+    "number": "Nummer",
+    "percent": "procent",
+    "financial": "financieel",
+    "currency": "Munteenheid",
+    "date": "Datum",
+    "time": "Tijd",
+    "dateTime": "Datum Tijd",
+    "duration": "Looptijd",
+    "moreFormats": "Meer formaten..."
+  },
+  "formatDecreaseDecimal": "Decimaal verlagen",
+  "formatIncreaseDecimal": "Verhoog decimaal",
+  "freeze": "Ruiten bevriezen",
+  "freezeButtons": {
+    "freezePanes": "Ruiten bevriezen",
+    "freezeRows": "Rijen bevriezen",
+    "freezeColumns": "Kolommen bevriezen",
+    "unfreeze": "Ruiten deblokkeren"
+  },
+  "insertComment": "Opmerking invoegen",
+  "insertImage": "Voeg afbeelding in",
+  "italic": "Cursief",
+  "merge": "Cellen samenvoegen",
+  "mergeButtons": {
+    "mergeCells": "Alles samenvoegen",
+    "mergeHorizontally": "Horizontaal samenvoegen",
+    "mergeVertically": "Verticaal samenvoegen",
+    "unmerge": "Samenvoegen opheffen"
+  },
+  "open": "Open...",
+  "paste": "Plakken",
+  "quickAccess": {
+    "redo": "Opnieuw doen",
+    "undo": "ongedaan maken"
+  },
+  "saveAs": "Opslaan als...",
+  "sortAsc": "Oplopend sorteren",
+  "sortDesc": "Aflopend sorteren",
+  "sortButtons": {
+    "sortSheetAsc": "Sorteerblad A tot Z",
+    "sortSheetDesc": "Sorteerblad Z t/m A",
+    "sortRangeAsc": "Sorteerbereik A tot Z",
+    "sortRangeDesc": "Sorteerbereik Z tot A"
+  },
+  "textColor": "Tekst kleur",
+  "textWrap": "Tekstterugloop",
+  "underline": "Onderstrepen",
+  "validation": "Gegevensvalidatie..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view,{
+  "errors": {
+    "shiftingNonblankCells": "Kan geen cellen invoegen vanwege de mogelijkheid van gegevensverlies. Selecteer een andere invoeglocatie of verwijder de gegevens aan het einde van uw werkblad.",
+    "filterRangeContainingMerges": "Kan geen filter maken binnen een bereik dat samenvoegingen bevat",
+    "validationError": "De waarde die u hebt ingevoerd, is in strijd met de validatieregels die in de cel zijn ingesteld."
+  },
+  "tabs": {
+    "home": "Huis",
+    "insert": "Invoegen",
+    "data": "Gegevens"
   }
 });
 }

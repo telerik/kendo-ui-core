@@ -1,113 +1,145 @@
 ---
 title: Using CDN
-page_title: Using CDN | Download and Installation | Kendo UI for jQuery
+page_title: Using CDN | Download and Installation 
 description: "Get started with Kendo UI for jQuery and install the Kendo UI widgets by using the Kendo UI CDN services."
 previous_url: /install/cdn
 slug: kendoui_cdn_services_installation
-position: 4
+position: 40
 ---
 
 # Using CDN
 
-The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
+The Kendo UI for jQuery CDN resides on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/). The service maintains the official Kendo UI for jQuery releases and service packs, and provides no access to internal builds. 
 
-Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
+> Note that sinse R3 2022 the CDN distribution needs to be activated using a license file. For more info check [Using Script License File]({% slug using-license-code %}).
 
-## Using the HTTP Protocol
+## 1. Add the Required JavaScript and CSS Files
 
-> The http://cdn.kendostatic.com/ URL is still active but is no longer recommended for new projects.
+The Kendo UI CDN provides the following services: 
+
+* `kendo.cdn.telerik.com`
+* `cdn.kendostatic.com` (a cookieless CDN service)
+
+To access the services, use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol. 
+
+### Using the HTTP Protocol
 
 The minified versions of all JavaScript files are available at the following locations:
-* `https://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
-* `https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
+* `http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
+* `http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
 
 For example, the `{{ site.cdnVersion }}` version can be loaded from the following locations:  
-* `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
-* `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
+* `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
+* `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
 
-The minified Kendo UI scripts are available as of the Kendo UI Q1 2014 SP1 release.
+The minified Kendo UI for jQuery scripts are available as of the Kendo UI Q1 2014 SP1 release. To load them, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
 
-To load the scripts, use the `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
-
-## Using the HTTPS Protocol
-
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name `kendo.cdn.telerik.com` and replace the scheme (protocol) with `https`. For example:
-
-* `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`.
+### Using the HTTPS Protocol
 
 > The https://da7xgjtj801h2.cloudfront.net/ URL remains active but is no longer recommended for new projects.
 
-## Troubleshooting
+To access the Kendo UI for jQuery CDN service through the HTTPS protocol, use the same `kendo.cdn.telerik.com` host name and replace the scheme (protocol) with `https`. 
 
-This section provides solutions for common issues you might encounter while using the Kendo UI CDN services.
+The example below loads Kendo UI for jQuery scripts and styles with the HTTPS protocol CDN:
 
-### General disruption and connection issues occur
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Kendo UI using CDN</title>
 
-**Description** Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) provides a reliable level of uptime support, you might encounter disruption or connection issues. After you check the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and operates normally.
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css">
 
-**Cause** You might be experiencing Internet, network connectivity, or DNS problems. It is also possible that firewalls, antivirus, or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on the fly.
+  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+</head>
+<body>
+</body>
+</html>
+```
 
-**Solution** Contact your system administrator because remote investigation of connection problems is outside the scope of the Kendo UI Support Team.
+## 2. Setup the License File
 
-### It is not possible to refer Kendo UI internal builds from CDN
+Generate a license file from the [Using Script License File article]({% slug using-license-code %}) and follow the instructions.
 
-**Cause** The internal Kendo UI builds are not uploaded to CDN because they are intended only for clients with a commercial license. Only major Kendo UI releases and service packs are available on CDN.
+## 3. Add the HTML Element for Widget Initialization
 
-**Solution** For internal builds, use private CDN services. It is recommended that you implement a local fallback when you use any kind of CDN. For more information, refer to [Scott Hanselman's blog post **Fallback from CDN to Local Scripts**](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
+Depending on the widget you require, you can initialize the Kendo UI controls from different elements. In this step, you will add a new `input` element from which a Kendo UI DropDownList will be created. 
 
-    <!DOCTYPE html>
-    <html>
+
+```html
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>Welcome to Kendo UI</title>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css" />
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.blueopal.min.css" />
-
+        <meta charset="utf-8">
+        <title>Kendo UI using CDN</title>
+        
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css">
+        
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
-        <script>
-            if (typeof jQuery == "undefined") {
-                // Fallback to local jQuery.
-                document.write(decodeURIComponent('%3Cscript src="/path/to/local/jquery.min.js" %3E%3C/script%3E'));
-            }
-        </script>
-
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
-        <script>
-            if (typeof kendo == "undefined") {
-                // Checking for loaded CSS files is cumbersome,
-                // therefore assume that if the scripts have failed, so have the stylesheets.
-
-                // Fallback to local Kendo UI stylesheets.
-                document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.common.min.css" %3C/%3E'));
-                document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.blueopal.min.css" %3C/%3E'));
-
-                // Fallback to local Kendo UI scripts.
-                document.write(decodeURIComponent('%3Cscript src="/path/to/local/kendo.all.min.js" %3E%3C/script%3E'));
-                // Also add kendo.aspnetmvc.min.js or kendo.timezones.min.js if needed.
-            }
-        </script>
     </head>
     <body>
-        Hello world!
+      <input id="ddl" />	  
     </body>
-    </html>
+</html>
+```
+
+## 4. Initialize and Configure the Widget
+
+The following example demonstrates how to initialize a DropDownList with some basic configuration.
+
+```dojo
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Kendo UI using CDN</title>
+
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-ocean-blue.min.css">
+
+        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+    </head>
+    <body>
+      <input id="ddl" />
+      <script>
+	    $("#ddl").kendoDropDownList({
+          dataTextField: "text",
+          dataValueField: "value",
+          dataSource: [
+            { text: "Item1", value: "1" },
+            { text: "Item2", value: "2" }
+          ]
+        });
+	  </script>	  
+    </body>
+</html>
+```
+
 
 ## Next Steps
 
-* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_installation %})
-* [Learn about the widget DOM element structure]({% slug widgetwrapperandelement_references_gettingstarted %})
-* [Initialize widgets as jQuery plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize widgets with MVVM]({% slug mvvm_initialization_kendoui %})
-* [Check out the jQuery version support]({% slug jquerysupport_kendoui %})
-* [Check out the web browser support]({% slug wbe_browserand_operating_system_support %})
-* [Check out the operation system support]({% slug ossupport_kendo %})
-* [Check out the PDF and Excel export support]({% slug export_support_kendoui %})
-* [Explore the widget script dependencies]({% slug script_filesfor_barcodes_widgets %})
-* [Create your own custom widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
+* [The Widget DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Initialize Widgets as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets with MVVM]({% slug mvvm_initialization_kendoui %})
+* [jQuery Version Support]({% slug jquerysupport_kendoui %})
+* [Web Browser Support]({% slug wbe_browserand_operating_system_support %})
+* [Operation System Support]({% slug ossupport_kendo %})
+* [PDF and Excel Export Support]({% slug export_support_kendoui %})
+* [Widget Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also
 
+* [Troubleshooting When Using Kendo UI CDN services]({% slug troubleshoot_cdn_installing %})
+* [Troubleshooting When Trying to Refer Kendo UI Internal Builds from CDN]({% slug cannot_refer_internal_builds_cdn %})
 * [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
 * [Installing Kendo UI with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Using Script License Code]({% slug using-license-code %})

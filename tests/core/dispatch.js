@@ -27,7 +27,7 @@
         });
         afterEach(function() {
             kendo.destroy(dom);
-        })
+        });
 
         it("invokes a widget method via the jQuery plugin", function() {
             dom = $("<div/>").kendoTestWidget();

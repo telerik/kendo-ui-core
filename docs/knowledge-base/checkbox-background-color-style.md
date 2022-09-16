@@ -18,7 +18,7 @@ res_type: kb
  </tr>
  <tr>
   <td>Product Version</td>
-  <td>2018.2.516</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -32,13 +32,13 @@ Set a different [`color`](https://www.w3schools.com/cssref/pr_text_color.asp) an
 
 ```
 /*empty checkbox*/
-.k-checkbox-label:before{
-    background: black;
+.k-checkbox {
+    background: green;
 }
 
 /*checked checkbox*/
-.k-checkbox:checked + .k-checkbox-label:before {
-    background: black;
+.k-checkbox:checked {
+    background: red;
     color: white;
 }
 ```
@@ -48,12 +48,12 @@ The following example demonstrates how to render a list of CheckBoxes with a new
 ```dojo
     <style>
       /*Empty checkbox*/
-      .k-checkbox-label:before{
+      .k-checkbox {
         background: green;
       }
 
       /*Checked checkbox*/
-      .k-checkbox:checked + .k-checkbox-label:before {
+      .k-checkbox:checked {
         background: red;
         color: white;
       }
@@ -75,35 +75,61 @@ The following example demonstrates how to render a list of CheckBoxes with a new
       <h4>Choose Extra Equipment</h4>
       <ul class="fieldlist">
         <li>
-          <input type="checkbox" id="eq1" class="k-checkbox" checked="checked">
-          <label class="k-checkbox-label" for="eq1">Rear side airbags</label>
+          <input type="checkbox" id="eq1" checked="checked">
         </li>
         <li>
-          <input type="checkbox" id="eq2" class="k-checkbox" checked="checked" disabled="disabled">
-          <label class="k-checkbox-label" for="eq2">Leather trim</label>
+          <input type="checkbox" id="eq2" checked="checked">
         </li>
         <li>
-          <input type="checkbox" id="eq3" class="k-checkbox">
-          <label class="k-checkbox-label" for="eq3">Luggage compartment cover</label>
+          <input type="checkbox" id="eq3">
         </li>
         <li>
-          <input type="checkbox" id="eq4" class="k-checkbox">
-          <label class="k-checkbox-label" for="eq4">Heated front and rear seats</label>
+          <input type="checkbox" id="eq4">
         </li>
         <li>
-          <input type="checkbox" id="eq5" class="k-checkbox">
-          <label class="k-checkbox-label" for="eq5">Dual-zone air conditioning</label>
+          <input type="checkbox" id="eq5">
         </li>
         <li>
-          <input type="checkbox" id="eq6" class="k-checkbox">
-          <label class="k-checkbox-label" for="eq6">Rain sensor</label>
+          <input type="checkbox" id="eq6">
         </li>
         <li>
-          <input type="checkbox" id="eeeeq4" class="k-checkbox" disabled="disabled">
-          <label class="k-checkbox-label" for="eeeeq4">Towbar preparation</label>
+          <input type="checkbox" id="eq7">
         </li>
       </ul>
     </div>  
+    <script>
+      $('#eq1').kendoCheckBox({
+        checked: true,
+        label: "Rear side airbags"
+      });
+
+      $('#eq2').kendoCheckBox({
+        checked: true,
+        label: "Leather trim",
+        enabled: false
+      });
+
+      $('#eq3').kendoCheckBox({
+        label: "Luggage compartment cover"
+      });
+
+      $('#eq4').kendoCheckBox({
+        label: "Heated front and rear seats"
+      });
+
+      $('#eq5').kendoCheckBox({
+        label: "Dual-zone air conditioning"
+      });
+
+      $('#eq6').kendoCheckBox({
+        label: "Rain sensor"
+      });
+
+      $('#eq7').kendoCheckBox({
+        label: "Towbar preparation",
+        enabled: false
+      });
+    </script>
 ```
 
 ## See Also

@@ -98,7 +98,7 @@ You can also target specific columns by using the `:nth-child()` selector.
   <body>
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script type="x/kendo-template" id="page-template">
@@ -117,7 +117,7 @@ You can also target specific columns by using the `:nth-child()` selector.
         toolbar: ["pdf"],
         pdf: {
           fileName: "Kendo UI Grid Export.pdf",
-          paperSize: "A4",
+          paperSize: "A2",
           allPages: true,
           avoidLinks: true,
           margin: { top: "1.5cm", right: "0.5cm", bottom: "1cm", left: "0.5cm" },
@@ -152,3 +152,9 @@ You can also target specific columns by using the `:nth-child()` selector.
       });
     </script>
 ```
+
+## See Also
+
+* [Show hidden columns during PDF Export]({% slug grid-pdf-show-hidden-columns %})
+* [Exclude Certain Columns from the Exported PDF File]({% slug grid-exclude-columns-from-exported-pdf %})
+* [Exclude Toolbar and Pager from Grid PDF Export]({% slug grid-export-pdf-without-toolbar-pager %})

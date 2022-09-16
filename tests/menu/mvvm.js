@@ -2,7 +2,7 @@
 
 var dom;
 
-describe('menu MVVM', function () {
+describe('menu MVVM', function() {
     afterEach(function() {
         kendo.destroy(dom);
     });
@@ -38,7 +38,7 @@ it("binding menu initialized before binding", function() {
 it("binding containing binding attributes", function() {
     dom = $('<ul data-role="menu"><span data-bind="text:text"></span></ul>');
 
-    var observable = kendo.observable({ text:"foo" });
+    var observable = kendo.observable({ text: "foo" });
 
     kendo.bind(dom, observable);
 
@@ -48,7 +48,7 @@ it("binding containing binding attributes", function() {
 it("updating viewModel updates the content", function() {
     dom = $('<ul data-role="menu"><span data-bind="text:text"></span></ul>');
 
-    var observable = kendo.observable({ text:"foo" });
+    var observable = kendo.observable({ text: "foo" });
 
     kendo.bind(dom, observable);
 
@@ -60,7 +60,7 @@ it("updating viewModel updates the content", function() {
 it("event is raised if attached as option", function() {
     window.menuMVVMSelect = function() {
         assert.isOk(true);
-    }
+    };
     dom = $('<ul data-role="menu" data-select="menuMVVMSelect"></ul>');
 
     kendo.bind(dom);

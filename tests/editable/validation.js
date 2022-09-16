@@ -670,7 +670,7 @@
                 model.set("foo", true);
 
                 assert.equal(validateInput.calls("validateInput"), 1);
-                assert.equal(validateInput.args("validateInput", 0)[0].data("bind"), "value:foo,checked:foo");
+                assert.equal(validateInput.args("validateInput", 0)[0].data("bind"), "checked:foo");
             });
 
             it("changing non boolean model field validates radio inputs with checked binding", function() {
@@ -748,7 +748,7 @@
                 var input = validateInput.args("validateInput", 0)[0];
                 assert.equal(input.length, 1);
                 assert.equal(input.val(), "1");
-            })
+            });
 
         });
     }());

@@ -1,12 +1,12 @@
 ---
-title: Editing Functionality
-page_title: Editing Widgets | Working with Widgets | Kendo UI for jQuery
+title: Editing Widgets
+page_title: Editing Widgets | Working with Widgets 
 description: "Get started with Kendo UI for jQuery and learn how to configure editing for editable widgets like the Grid, Scheduler, and ListView."
 slug: kendoui_editing_gettingstarted
 position: 50
 ---
 
-# Editing Functionality
+# Editing Widgets
 
 Some Kendo UI widgets provide the editing feature that is implemented with a specific editor element or a form that is bound to the model by using the [Kendo UI MVVM]({% slug overview_mvvmpattern_kendoui %}) bindings.
 
@@ -33,7 +33,7 @@ The Kendo UI widgets that support editing provide the following common events:
 > * Only the Scheduler and the Gantt support the preventing of the [`edit`](/api/javascript/ui/scheduler/events/edit), [`save`](/api/javascript/ui/scheduler/events/save), and [`remove`](/api/javascript/ui/scheduler/events/remove) events.
 > * The widgets use only one editor form. It applies the same editor template for the `create` and `update` actions.
 
-To enable the editing functionality of the widget:
+To enable the editing feature of the widget:
 
 1. Configure the [CRUD](/framework/datasource/crud) (Create, Read, Update, Destroy) data operation actions of the DataSource.
 2. Define the model fields by using the [`schema.model`](/api/javascript/data/datasource/configuration/schema.model) option.

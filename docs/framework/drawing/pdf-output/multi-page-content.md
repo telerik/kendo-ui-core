@@ -31,22 +31,25 @@ You can override the following options:
 
 The `drawDOM` method supports automatic page breaking. To automatically implement the page breaks, set the [`paperSize`](/api/javascript/drawing/pdfoptions/fields/papersize) and [`margin`](/api/javascript/drawing/pdfoptions/fields/margin) options. You will still be able to apply the `forcePageBreak` configuration to manually specify the break points.
 
+```dojo
     <div id="grid"></div>
     <script>
-      var data = [];
-      for (var i = 1; i < 200; ++i) {
-        data.push({ title: "Item " + i, id: i });
-      }
+      $(document).ready(function() {
+        var data = [];
+        for (var i = 1; i < 200; ++i) {
+          data.push({ title: "Item " + i, id: i });
+        }
+        $("#grid").kendoGrid({ dataSource: data });
 
-      $("#grid").kendoGrid({ dataSource: data });
-
-      drawing.drawDOM("#grid", {
-        paperSize: "A4",
-        margin: "2cm"
-      }).then(function(group){
-        drawing.pdf.saveAs(group, "grid.pdf");
+        kendo.drawing.drawDOM("#grid", {
+          paperSize: "A4",
+          margin: "2cm"
+        }).then(function(group){
+          kendo.drawing.pdf.saveAs(group, "grid.pdf");
+        });
       });
     </script>
+```
 
 ## Manual Page Breaking
 

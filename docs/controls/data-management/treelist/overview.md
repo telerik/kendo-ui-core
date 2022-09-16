@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery TreeList Documentation | TreeList Overview | Kendo UI
+page_title: jQuery TreeList Documentation | TreeList Overview
 description: "Get started with the jQuery TreeList by Kendo UI and learn how to initialize and configure the widget."
 slug: overview_kendoui_treelist_widget
 position: 1
@@ -49,6 +49,8 @@ The following example demonstrates how to map the `parentId` field to the corres
 * [Paging]({% slug paging_kendoui_treelist %})
 * [Scrolling]({% slug scrolling_kendoui_treelist %})
 * [Multi-column headers]({% slug multicolumnheaders_kendoui_treelist %})
+* [Row Selection]({% slug selection_kendoui_treelist %})
+* [Accessibility]({% slug accessibility_kendoui_treelist %})
 
 ## Events, Fields, and Methods
 

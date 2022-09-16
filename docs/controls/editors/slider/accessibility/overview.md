@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Slider Documentation | Slider Accessibility | Kendo UI
+page_title: jQuery Slider Documentation | Slider Accessibility
 description: "Get started with the jQuery Slider by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_slider
 position: 1
@@ -24,7 +24,7 @@ The Slider is compliant with the Section 508 requirements. For more information,
 
 ## WCAG 2.1
 
-The Slider supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag20_accessibility_support %})
+The Slider supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
 ## See Also
 

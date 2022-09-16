@@ -1,9 +1,9 @@
 ---
 title: Sorting
-page_title: jQuery Grid Documentation | Sorting | Kendo UI
+page_title: jQuery Grid Documentation | Sorting
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: sorting_kendoui_grid_widget
-position: 7
+position: 9
 ---
 
 # Sorting
@@ -22,11 +22,14 @@ To enhance the performance of the Grid, apply the sorting operations on the serv
 
 ![Grid with Sorting Enabled](grid7_1.png)
 
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be sortable. To enable sorting on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
+
 ## Sort Modes
 
 The Grid supports the following sort modes:
 * [Single-column sort mode](#single-column-sorting)
 * [Multi-column sort mode](#multi-column-sorting)
+* [Mixed-column sort mode](#mixed-column-sorting)
 
 ### Single-Column Sorting
 
@@ -45,7 +48,20 @@ To enable multi-column sorting, set the `mode` option of `editable` to `multiple
         sortable: {
             mode: "multiple"
         },
-        // Other configuration.
+        // Place other configuration parameters here.
+    });
+
+### Mixed-Column Sorting
+
+Mixed Sorting allows users to [single-sort](#single-column-sorting) columns by clicking their title and [multi-sort](#multi-column-sorting) columns by holding the `CTRL` key and clicking the columns' title. A single-click (without holding the the `CTRL` key) on any column un-sorts the currently sorted columns and applies single-sorting to the clicked column.
+
+To enable multi-column sorting, set the `mode` option of `editable` property to `multiple`.
+
+    $("#grid").kendoGrid({
+        sortable: {
+            mode: "mixed"
+        },
+        // Place other configuration parameters here.
     });
 
 ## KB Articles on Sorting

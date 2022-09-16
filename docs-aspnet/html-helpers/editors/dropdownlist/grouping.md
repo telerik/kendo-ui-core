@@ -1,7 +1,7 @@
 ---
 title: Grouping
 page_title: Grouping
-description: "Learn how to group data in the Telerik UI DropDownList HtmlHelper for {{ site.framework }} works."
+description: "Learn how to group data in the Telerik UI DropDownList component for {{ site.framework }} works."
 previous_url: /helpers/editors/dropdownlist/grouping
 slug: htmlhelpers_dropdownlist_grouping_aspnetcore
 position: 3
@@ -17,7 +17,7 @@ To group the data, define a group `datasource` expression which uses a custom Da
 
 The following example demonstrates how to group the data in the DropDownList by country.
 
-    ```
+```HtmlHelper
     @(Html.Kendo().DropDownList()
         .Name("customers")
         .DataSource(source =>  source
@@ -32,7 +32,23 @@ The following example demonstrates how to group the data in the DropDownList by 
         .DataTextField("ContactName")
         .DataValueField("CustomerID")
     )
-    ```
+```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="customers"
+                    datatextfield="ContactName"
+                    datavaluefield="CustomerID">
+    <datasource>
+        <groups>
+            <group field="Country"></group>
+        </groups>
+        <transport>
+            <read url="@Url.Action("Grouping_GetCustomers", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
 
 ## See Also
 

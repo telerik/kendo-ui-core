@@ -587,7 +587,7 @@ Appends a tab to the collection of tabs in a **TabStrip**.
             dataTextField: "text",
             dataImageUrlField: "imageUrl",
             dataContentField: "content",
-            dataContentUrlField: "contentUrl"
+            dataContentUrlField: "contentUrl",
             dataSource: [
                             {
                                 text: "Tab 1",
@@ -654,6 +654,7 @@ Obtains the DOM element that encloses tab content by its tab index in the **TabS
 
     <script>
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(tabStrip.contentElement(0));
     </script>
 
@@ -687,6 +688,7 @@ The difference between `contentElement` and `contentHolder` is that `contentHold
 
     <script>
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(tabStrip.contentHolder(0));
     </script>
 
@@ -941,6 +943,7 @@ Gets the list of DOM elements that represent the tabs.
 
     <script>
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(tabStrip.items());
     </script>
 

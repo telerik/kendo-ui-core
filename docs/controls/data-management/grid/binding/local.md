@@ -1,6 +1,6 @@
 ---
 title: Local Data
-page_title: jQuery Grid Documentation | Local Data | Kendo UI
+page_title: jQuery Grid Documentation | Local Data
 description: "Get started with the jQuery Grid by Kendo UI and learn how to bind the Grid to local data."
 slug: local_data_grid
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery DropDownList Documentation | Data Binding | Kendo UI
+page_title: jQuery DropDownList Documentation | Data Binding
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to bind the DropDownList to local data arrays and to remote data sources."
 slug: databinding_dropdownlist_widget
 position: 2
@@ -64,4 +64,3 @@ To initialize the DropDownList by binding the widget to remote data arrays and t
 * [Binding the DropDownList to Remote Data (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/remotedatasource)
 * [Binding the DropDownList over MVVM (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/mvvm)
 * [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
-* [Troubleshooting]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})

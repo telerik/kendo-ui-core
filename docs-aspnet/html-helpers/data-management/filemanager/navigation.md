@@ -11,7 +11,8 @@ position: 5
 The navigation within the file structure in the {{ site.product }} FileManager is achieved with the help of an inbuilt [TreeView](#treeview) and [Breacrumb](#breadcrumb) components.
 
 ## TreeView
-On the left-hand side of the FileManager there is a nested [{{ site.product }} TreeView]({% slug htmlhelpers_treeview_aspnetcore %}) component, listing all folders loaded in the FileManager. The TreeView allows dragging and dropping files inside it, or between the Grid and ListView. It also provides you the possibility to rename files or folders, as well as execute commands with the inbuilt ContextMenu. 
+
+On the left-hand side of the FileManager, there is a nested [{{ site.product }} TreeView]({% slug htmlhelpers_treeview_aspnetcore %}) component, listing all folders loaded in the FileManager. The TreeView allows dragging and dropping files inside it, or between the Grid and ListView. It also provides you the possibility to rename files or folders, as well as execute commands with the inbuilt ContextMenu. 
 
 The nested [{{ site.product }} TreeView]({% slug htmlhelpers_treeview_aspnetcore %}) component is the standard component from the {{ site.product }} suite. This is why, all functionalities and features, such as Keyboard Support and Accessibility compliance, are inherited.
 

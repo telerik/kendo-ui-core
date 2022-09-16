@@ -107,7 +107,7 @@
             var textbox = new NumericTextBox(input);
 
             var origin = window.setTimeout;
-            window.setTimeout = function(func) { func() };
+            window.setTimeout = function(func) { func(); };
 
             textbox._text.focus();
 

@@ -5,7 +5,7 @@
             $.mockjaxSettings.responseTime = 0;
         });
         afterEach(function() {
-            $.mockjax.clear()
+            $.mockjax.clear();
         });
 
         var data = [];
@@ -772,7 +772,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -910,7 +910,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -941,7 +941,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -1282,6 +1282,58 @@
             var model = dataSource.get("");
             dataSource.cancelChanges(model);
             assert.equal(dataSource.view().length, 2);
+        });
+
+        it("cancelChanges of a newly inserted item removes the empty groups if serverpaging is enabled and nested grouping is applied", function() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ group: [{ items: [{ id: 1, bar: "foo" }, { id: 2, bar: "baz" }] }, { items: [{ id: 3, bar: "foo" }] }], total: 10 });
+                    }
+                },
+                schema: {
+                    groups: "group",
+                    model: {
+                        id: "id"
+                    }
+                },
+                group: [{ field: "id" }, { field: "bar" }],
+                serverPaging: true,
+                serverGrouping: true
+            });
+
+            dataSource.read();
+            dataSource.add({ bar: "test" });
+            var model = dataSource.get("");
+            dataSource.cancelChanges(model);
+            assert.equal(dataSource.view().length, 2);
+        });
+
+        it("cancelChanges of a newly inserted item updates the total if serverGrouping is enabled", function() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ group: [{ items: [{ id: 1, bar: "foo" }, { id: 2, bar: "baz" }] }, { items: [{ id: 3, bar: "foo" }] }], total: 10 });
+                    }
+                },
+                schema: {
+                    groups: "group",
+                    total: "total",
+                    model: {
+                        id: "id"
+                    }
+                },
+                group: [{ field: "id" }, { field: "bar" }],
+                serverPaging: true,
+                serverGrouping: true
+            });
+
+            dataSource.read();
+            dataSource.add({ bar: "test" });
+            var model = dataSource.get("");
+            dataSource.cancelChanges(model);
+
+            assert.equal(dataSource.total(), 10);
         });
 
         it("delete the last item in group removes the empty group if serverpaging is enabled and grouping is applied", function() {
@@ -1973,7 +2025,7 @@
                 serverPaging: true,
                 schema: {
                     total: function() {
-                        return "2"
+                        return "2";
                     }
                 }
             });

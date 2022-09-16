@@ -7,13 +7,20 @@ slug: funnelchart_aspnetcore_htmlhelper
 
 # Funnel Charts
 
-The Telerik UI Funnel HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Funnel Chart widget.
+{% if site.core %}
+The Telerik UI Funnel TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Funnel Chart widget.
+{% else %}
+The Telerik UI Funnel HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI QRCode widget.
+{% endif %}
 
 Funnel Charts display a single series of data in progressively decreasing or increasing proportions, organized in segments, where each segment represents the value for the particular item from the series. The values of the items can also influence the height and the shape of the corresponding segments.
 
 Funnel Charts are suitable for representing stages in a sales process and for showing the amount of the potential revenue from each stage. They are also useful when identifying potential problem areas in the sales processes of an organization. Funnel Charts are similar to the [Stacked Bar Charts](https://demos.telerik.com/{{ site.platform }}/bar-charts/stacked-bar) and are well suited for displaying several values.
 
-* [Demo page for the Funnel Chart](https://demos.telerik.com/{{ site.platform }}/funnel-charts/index)
+* [Demo page for the Funnel Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/funnel-charts/index)
+{% if site.core %}
+* [Demo page for the Funnel Chart TagHelper](https://demos.telerik.com/{{ site.platform }}/funnel-charts/tag-helper)
+{% endif %}
 
 ## Concepts
 
@@ -29,7 +36,7 @@ The basic conceptual options of a Telerik UI Funnel Chart are:
 
 The following example demonstrates how to base the widths of the bases for each segment on the `currentValue/nextValue` ratio.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart().Name("chart-oct")
         .Series(series =>
             series.Funnel(new dynamic[]{
@@ -52,10 +59,42 @@ The following example demonstrates how to base the widths of the bases for each 
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+    <kendo-chart name="chart-oct">
+        <series>
+            <series-item type="ChartSeriesType.Funnel"
+                        dynamic-slope="true"
+                        dynamic-height="false"
+                        data="new dynamic[]{
+                                    new {
+                                        value= 40
+                                    },
+                                    new {
+                                        value= 80
+                                    },
+                                    new {
+                                        value= 40,
+                                    },
+                                    new {
+                                        value= 10,
+                                    }
+                                }">
+                <labels visible="true">
+                </labels>
+            </series-item>
+        </series>
+    </kendo-chart>
+    
+```
+{% endif %}
 
 ![Basing the segment widths on the ratio in the Funnel Chart](images/funnel-dynamicslope.png)
 
 ## See Also
 
 * [Basic Usage of the Funnel Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/funnel-charts/index)
+* [Basic Usage of the Funnel Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/funnel-charts/tag-helper)
 * [Server-Side API](/api/chart)

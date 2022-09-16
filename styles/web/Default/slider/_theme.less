@@ -1,0 +1,59 @@
+// Slider
+.k-slider {
+    color: @component-text;
+
+    .k-slider-track {
+        .fill(
+            @bg: @kendo-slider-track-bg,
+            @border: @kendo-slider-track-border
+        );
+    }
+
+    .k-slider-selection {
+        .fill(
+            @bg: @kendo-slider-selection-bg
+        );
+    }
+
+    .k-draghandle {
+        .fill(
+            @bg: @kendo-slider-thumb-bg,
+            @border: @kendo-slider-thumb-border
+        );
+
+        &:hover {
+            .fill(
+                @bg: @kendo-slider-thumb-hover-bg,
+                @border: @kendo-slider-thumb-hover-border
+            );
+        }
+
+        &:active,
+        &.k-pressed {
+            .fill(
+                @bg: @kendo-slider-thumb-active-bg,
+                @border: @kendo-slider-thumb-active-border
+            );
+        }
+
+        &:focus,
+        &.k-state-focused,
+        &.k-focus {
+            .box-shadow( @kendo-slider-thumb-focus-shadow );
+        }
+    }
+
+    &.k-state-focused,
+    &.k-focus {
+        .k-draghandle {
+            .box-shadow( @kendo-slider-thumb-focus-shadow );
+        }
+    }
+}
+
+.k-slider-horizontal .k-tick {
+    background-image: url("data:image/gif;base64,R0lGODlhAQC0AIABALi4uAAAACH5BAEAAAEALAAAAAABALQAAAIWjIGJxqzazlux2ovlzND2rAHgSIZWAQA7");
+}
+.k-slider-vertical .k-tick {
+    background-image: url("data:image/gif;base64,R0lGODlhtAABAIABALi4uAAAACH5BAEAAAEALAAAAAC0AAEAAAIWjIGJxqzazlux2ovlzND2rAHgSIZWAQA7");
+}

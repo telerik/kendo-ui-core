@@ -1,131 +1,144 @@
 ---
 title: Installing with Bower
-page_title: Installing with Bower | Download and Installation | Kendo UI for jQuery
-description: "Get started with Kendo UI for jQuery and install the Kendo UI Professional or Kendo UI Core distributions by using the Bower package manager."
-previous_url: /install/bower
+page_title: Installing with Bower | Download and Installation 
+description: "Get started with Kendo UI for jQuery and install the commercial or the open-source Kendo UI distributions by using the Bower package manager."
+previous_url: /install/bower, /intro/installation/overview-download
 slug: kendoui_bower_packages_kendoui_installation
-position: 3
+position: 30
 ---
 
 # Installing with Bower
 
 [Bower](https://bower.io/) is a popular package manager for the web that handles frameworks, libraries, assets, and utilities.
 
-Kendo UI maintains the [Kendo UI Core](#kendo-ui-core-on-bower) and the [Kendo UI Professional](#kendo-ui-professional-on-bower) Bower packages. All Kendo UI official releases, service packs, and internal builds are uploaded to both of them.
+## 1. Install the Package
 
-> The Kendo UI Professional Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
+Kendo UI for jQuery maintains the [commercial Kendo UI for jQuery (Kendo UI Professional)](#commercial-distribution-on-bower) and the [open-source Kendo UI for jQuery (Kendo UI Core)](#open-source-distribution-on-bower) Bower packages. 
 
-## Kendo UI Core on Bower
+All official releases, service packs, and internal builds are uploaded to both distribution packages.
 
-The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the Bower registry. To install the Kendo UI Core Bower package, run the `bower install kendo-ui-core` command. To check the available versions of Kendo UI Core Bower package, run the `bower info kendo-ui-core --verbose` command.
+### Commercial Distribution on Bower
 
-## Kendo UI Professional on Bower
+> The commercial Kendo UI Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
 
-The Kendo UI Professional Bower package is available as a private GitHub repository. To access the package, active your subscription for Kendo UI or DevCraft. Bower prompts you to enter your username and password during the installation and update processes. To install the Kendo UI Professional Bower package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command. To check the available versions of Kendo UI Professional Bower package, run the `bower info kendo-ui --verbose` command.
+The commercial distribution package is available as a private GitHub repository. To access its content, active your subscription for Kendo UI for jQuery or DevCraft. Bower prompts you to enter your username and password during the installation and update processes. 
+
+During the installation of the Bower package, you may be requested to confirm your credentials more than once. For more information, refer to the Knowledge Base article on [how to store your username and password]({% slug troubleshoot_bower_storing_credentials %}).
+
+To install the commercial distribution package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command. 
+
+To check the available commercial distribution versions of the package, run the `bower info kendo-ui --verbose` command.
 
 You can also add the package to the `bower.json` file.
 
 ```json
 "dependencies": {
-"kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~{{ site.cdnVersion }}"
+    "kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~{{ site.cdnVersion }}"
 }
 ```
 
-> During the installation of the Bower package, you might be requested to confirm your credentials more than once. For further information on how to store your username and password, refer to the following [section on credentials](#storing-your-credentials).
 
-## Storing Your Credentials
+### Open-Source Distribution on Bower
 
-To avoid being asked multiple times to provide your credentials while installing the Kendo UI Bower packages, use either of the following approaches to preserve them for a future reference:
+The open-source Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the Bower registry. 
 
-* Cache your credentials by storing them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php).
-* Store your credentials by using the Git credential helpers. For detailed information on how to do this, refer to Stack Overflow and follow the discussion on [skipping the password typing](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github).
+To install the Kendo UI Core Bower package, run the `bower install kendo-ui-core` command. 
 
-### Storing on Windows
+To check the available open-source distribution versions of the package, run the `bower info kendo-ui-core --verbose` command.
 
-> * Caching your credentials is required if you use the Kendo UI Bower package in an ASP.NET vNext project.
-> * If your home directory contains spaces in its path (for example, `c:\Documents and Settings\jane`), Git might have problems resolving it. That is why you need to update your `%HOME%` environment variable to point to a directory and exclude any spaces in its name.
 
-1. Create a text file called `_netrc` in your home directory&mdash;for example, `c:\users\jane\_netrc`.
-1. Declare a `HOME` environment variable.
+## 2. Add the Required JavaScript and CSS Files
 
-      ```
-      C:\> SETX HOME %USERPROFILE%
-      ```
+Once the scripts and styles are available in your project directory, you can use the installed package directly.
 
-1. Add the credentials using the format.
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Kendo UI with Bower</title>
 
-      ```
-      machine bower.telerik.com
-          login my-telerik.identity@example.com
-          password mysecret
-      ```
+    <link rel="stylesheet" href="bower_components\kendo-ui\styles\kendo.default-main.min.css">
+    <script src="bower_components\kendo-ui\js\jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components\kendo-ui\js\kendo.all.min.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+</html>
+```
 
-### Storing on Unix-Like Systems
+## 3. Add the HTML Element for Widget Initialization
 
-1. In your home directory, create a file called `.netrc` (`~/.netrc`). Verify that you modify the file permissions to make it readable only to you.
+Depending on the widget you require, you can initialize the Kendo UI controls from different elements. In this step, you will add a new `input` element from which a Kendo UI DropDownList will be created. 
 
-      ```sh
-      touch ~/.netrc
-      chmod 0600 ~/.netrc
-      ```
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Kendo UI with Bower</title>
 
-1. Add your credentials to the `~/.netrc` file using the format demonstrated in the following example.
+      <link rel="stylesheet" href="bower_components\kendo-ui\styles\kendo.default-main.min.css">
+      <script src="bower_components\kendo-ui\js\jquery.min.js" type="text/javascript" charset="utf-8"></script>
+      <script src="bower_components\kendo-ui\js\kendo.all.min.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+      <input id="ddl" />	  
+    </body>
+</html>
+```
 
-      ```
-      machine bower.telerik.com
-          login my-telerik.identity@example.com
-          password mysecret
-      ```
+## 4. Initialize and Configure the Widget
 
-## Troubleshooting
+The following example demonstrates how to initialize a DropDownList with some basic configuration.
 
-This section provides solutions for common issues you might encounter while installing the Kendo UI Bower packages.
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Kendo UI with Bower</title>
 
-### An SSL issue occurs on Windows
+      <link rel="stylesheet" href="bower_components\kendo-ui\styles\kendo.default-main.min.css">      
+      <script src="bower_components\kendo-ui\js\jquery.min.js" type="text/javascript" charset="utf-8"></script>
+      <script src="bower_components\kendo-ui\js\kendo.all.min.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+      <input id="ddl" />
+      <script>
+	    $("#ddl").kendoDropDownList({
+          dataTextField: "text",
+          dataValueField: "value",
+          dataSource: [
+            { text: "Item1", value: "1" },
+            { text: "Item2", value: "2" }
+          ]
+        });
+	  </script>	  
+    </body>
+</html>
+```
 
-**Description** Bower on Windows has troubles installing the repository and shows the `fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate` error message.
-
-**Cause** The underlying Git installation is missing the certificate bundle.
-
-**Solution** Follow the steps in [this article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
-
-> * The 1.9.5 Git build does not work with the Bower package.
-> * To use the `@` symbol in the URL for accessing the Kendo UI Bower repository (because of network restrictions or admin rules, for example), encode it as `https://firstname.lasname%40domain.com@bower.telerik.com/bower-kendo-ui.git`.
-
-### Restore fails in ASP.NET Core MVC RC projects in Visual Studio 2015
-
-**Description** A Git client that is bundled in Visual Studio is unable to authenticate with the Kendo UI Bower repository and throws an error messages similar to `ECMDERR Failed to execute "git ls-remote --tags --heads https://bower.telerik.com/bower-kendo-ui.git", exit code of #-532462766`.
-
-**Solution** Use a Windows port of Git and your stored credentials instead of the built-in client:
-
-1. Store your [credentials](#store-on-windows).
-1. Install [Git for Windows](https://gitforwindows.org/).
-1. Right-click the **Bower** folder under **Dependencies**.
-1. Select **Configure external tools**.
-1. Uncheck `$(DevEnvDir)\Extensions\Microsoft\Web Tools\External\git` and/or `$(VSINSTALLDIR)\Web\External\git`.
-1. Add a new entry `C:\Program Files\Git\bin` or your installation location.
-
-**Figure 1: Adding a new entry**
-
-![Chart in IE](../../images/vs2015-external-tools.png)
 
 ## Next Steps
 
-* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_installation %})
-* [Learn about the widget DOM element structure]({% slug widgetwrapperandelement_references_gettingstarted %})
-* [Initialize widgets as jQuery plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize widgets with MVVM]({% slug mvvm_initialization_kendoui %})
-* [Check out the jQuery version support]({% slug jquerysupport_kendoui %})
-* [Check out the web browser support]({% slug wbe_browserand_operating_system_support %})
-* [Check out the operation system support]({% slug ossupport_kendo %})
-* [Check out the PDF and Excel export support]({% slug export_support_kendoui %})
-* [Explore the widget script dependencies]({% slug script_filesfor_barcodes_widgets %})
-* [Create your own custom widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
+* [The Widget DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Initialize Widgets as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets with MVVM]({% slug mvvm_initialization_kendoui %})
+* [jQuery Version Support]({% slug jquerysupport_kendoui %})
+* [Web Browser Support]({% slug wbe_browserand_operating_system_support %})
+* [Operation System Support]({% slug ossupport_kendo %})
+* [PDF and Excel Export Support]({% slug export_support_kendoui %})
+* [Widget Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also
 
+* [Troubleshooting When Installing with Bower]({% slug troubleshoot_bower_installing %})
+* [Troubleshooting Restore Fails for ASP.NET Core MVC RC in VS 2015 When Installing with Bower]({% slug restore_fails_core_mvc_vs2015 %})
+* [Troubleshooting How to Store Your Username and Password]({% slug troubleshoot_bower_storing_credentials %}).
 * [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
 * [Installing Kendo UI by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Using Script License Code]({% slug using-license-code %})

@@ -1,7 +1,7 @@
-(function(){
+(function() {
 var span;
 
-describe("wrap", function () {
+describe("wrap", function() {
     beforeEach(function() {
         span = $("<span style='display: block;'>foo</span>").appendTo(Mocha.fixture);
     });

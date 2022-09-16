@@ -1,7 +1,7 @@
 ---
 title: Virtualization
 page_title: Virtualization
-description: "Learn how to setup the Virtualization feature of the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn how to setup the Virtualization feature of the Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/editors/multiselect/virtualization
 slug: htmlhelpers_multiselect_virtualization_aspnetcore
 position: 5
@@ -66,10 +66,11 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 
 1. Add a MultiSelect to the view and configure it to use virtualization.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
-            .Filter("contains")
+            .Filter(FilterType.Contains)
             .DataValueField("OrderID")
             .DataTextField("OrderName")
             .DataSource(source =>
@@ -115,7 +116,53 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
                 return data;
             }
         </script>
+    ```
+    {% if site.core %}
+    ```TagHelper
+        @model MvcApplication1.Models.ProductViewModel
 
+        <kendo-multiselect for="SelectedOrders"
+                           filter="FilterType.Contains"
+                           datavaluefield="OrderID"
+                           datatextfield="OrderName">
+            <datasource type="DataSourceTagHelperType.Custom" 
+                        page-size="80" 
+                        server-filtering="true" 
+                        server-paging="true">
+                <transport>
+                     <read url="@Url.Action("OrdersVirtualization_Read", "Home")" />
+                </transport>
+                <schema data="Data" total="Total">
+	 	        </schema>
+            </datasource>
+            <virtual item-height="26" value-mapper="valueMapper" />
+        </kendo-multiselect>
+
+        <script>
+            function valueMapper(options) {
+                $.ajax({
+                    url: "@Url.Action("Orders_ValueMapper", "Home")",
+                    data: convertValues(options.value),
+                    success: function (data) {
+                        options.success(data);
+                    }
+                });
+            }
+
+            function convertValues(value) {
+                var data = {};
+
+                value = $.isArray(value) ? value : [value];
+
+                for (var idx = 0; idx < value.length; idx++) {
+                    data["values[" + idx + "]"] = value[idx];
+                }
+
+                return data;
+            }
+        </script>
+    ```
+    {% endif %}
 ## See Also
 
 * [Virtualization by the MultiSelect HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/virtualization)

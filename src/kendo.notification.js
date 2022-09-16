@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core", "./kendo.popup" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "notification",
     name: "Notification",
     category: "web",
@@ -19,7 +19,6 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
-        proxy = $.proxy,
         extend = $.extend,
         setTimeout = window.setTimeout,
         CLICK = "click",
@@ -38,11 +37,11 @@ var __meta__ = { // jshint ignore:line
         RIGHT = "right",
         UP = "up",
         NS = ".kendoNotification",
-        WRAPPER = '<div class="k-widget k-popup k-notification"></div>',
+        WRAPPER = '<div role="alert" aria-live="polite" class="k-widget k-popup k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
-                '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
+                '<span class="k-icon k-i-#:typeIcon#" title="#:typeIcon#"></span>' +
                 '<div class="k-notification-content">#=content#</div>' +
-                '<span class="k-icon k-i-close" title="Hide"></span>' +
+                '<span aria-hidden="true" class="#: closeButton ? "" : "k-hidden"# k-icon k-i-close" title="Hide"></span>' +
             '</div>',
         SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
@@ -89,6 +88,7 @@ var __meta__ = { // jshint ignore:line
             width: null,
             height: null,
             templates: [],
+            title: null,
             animation: {
                 open: {
                     effects: "fade:in",
@@ -174,7 +174,7 @@ var __meta__ = { // jshint ignore:line
                 closeIcon;
 
             function attachClick(target) {
-                target.on(CLICK + NS, function () {
+                target.on(CLICK + NS, function() {
                     that._hidePopup(popup);
                 });
             }
@@ -182,7 +182,7 @@ var __meta__ = { // jshint ignore:line
             if (options.hideOnClick) {
                 popup.bind("activate", function() {
                     if (attachDelay) {
-                        setTimeout(function(){
+                        setTimeout(function() {
                             attachClick(popup.element);
                         }, allowHideAfter);
                     } else {
@@ -192,7 +192,7 @@ var __meta__ = { // jshint ignore:line
             } else if (options.button) {
                 closeIcon = popup.element.find(KICLOSE);
                 if (attachDelay) {
-                    setTimeout(function(){
+                    setTimeout(function() {
                         attachClick(closeIcon);
                     }, allowHideAfter);
                 } else {
@@ -247,7 +247,7 @@ var __meta__ = { // jshint ignore:line
                 popup.open(x, y);
             }
 
-            popup.wrapper.addClass(that._guid).css(extend({margin:0,zIndex:10050}, that._popupPaddings));
+            popup.wrapper.addClass(that._guid).css(extend({ margin: 0,zIndex: 10050 }, that._popupPaddings));
 
             if (options.position.pinned) {
                 popup.wrapper.css("position", "fixed");
@@ -259,13 +259,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (autoHideAfter > 0) {
-                setTimeout(function () {
+                setTimeout(function() {
                     that._hidePopup(popup);
                 }, autoHideAfter);
             }
         },
 
-        _hidePopup: function (popup) {
+        _hidePopup: function(popup) {
             popup.wrapper.addClass(KHIDING);
             popup.close();
         },
@@ -286,12 +286,12 @@ var __meta__ = { // jshint ignore:line
                 attachDelay = !isNaN(allowHideAfter) && allowHideAfter > 0;
 
             function attachClick(target) {
-                target.on(CLICK + NS, proxy(that._hideStatic, that, wrapper));
+                target.on(CLICK + NS, that._hideStatic.bind(that, wrapper));
             }
 
             if (options.hideOnClick) {
                 if (attachDelay) {
-                    setTimeout(function(){
+                    setTimeout(function() {
                         attachClick(wrapper);
                     }, allowHideAfter);
                 } else {
@@ -299,7 +299,7 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if (options.button) {
                 if (attachDelay) {
-                    setTimeout(function(){
+                    setTimeout(function() {
                         attachClick(wrapper.find(KICLOSE));
                     }, allowHideAfter);
                 } else {
@@ -327,7 +327,7 @@ var __meta__ = { // jshint ignore:line
                 that._attachStaticEvents(options, $(element));
 
                 if (autoHideAfter > 0) {
-                    setTimeout(function(){
+                    setTimeout(function() {
                         that._hideStatic($(element));
                     }, autoHideAfter);
                 }
@@ -338,13 +338,13 @@ var __meta__ = { // jshint ignore:line
             wrapper.kendoAnimate(extend(this.options.animation.close || false, { complete: function() {
                 wrapper.off(NS).find(KICLOSE).off(NS);
                 wrapper.remove();
-            }}));
+            } }));
             this._triggerHide(wrapper);
         },
 
         _triggerHide: function(element) {
             this.trigger(HIDE, { element: element });
-            this.angular("cleanup", function(){
+            this.angular("cleanup", function() {
                 return { elements: element };
             });
         },
@@ -353,11 +353,14 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 options = that.options,
                 wrapper = $(WRAPPER),
+                contentId = kendo.guid(),
                 args, defaultArgs;
 
             if (!type) {
                 type = INFO;
             }
+
+            wrapper.attr("aria-label", type);
 
             if (content !== null && content !== undefined && content !== "") {
 
@@ -365,23 +368,29 @@ var __meta__ = { // jshint ignore:line
                     content = content();
                 }
 
-                defaultArgs = {typeIcon: type, content: ""};
+                defaultArgs = { typeIcon: type, content: "", closeButton: options.button };
 
                 if ($.isPlainObject(content)) {
                     args = extend(defaultArgs, content);
                 } else {
-                    args = extend(defaultArgs, {content: content});
+                    args = extend(defaultArgs, { content: content });
                 }
 
                 wrapper
                     .addClass(KNOTIFICATION + "-" + type)
                     .toggleClass(KNOTIFICATION + "-button", options.button)
                     .toggleClass(KNOTIFICATION + "-closable", options.button)
-                    .attr("data-role", "alert")
-                    .css({width: options.width, height: options.height})
+                    .attr({
+                        "data-role": "alert",
+                        title: options.title
+                    })
+                    .css({ width: options.width, height: options.height })
                     .append(that._getCompiled(type, safe)(args));
 
-                that.angular("compile", function(){
+                wrapper.find(".k-notification-content").attr("id", contentId);
+                wrapper.attr("aria-describedby", contentId);
+
+                that.angular("compile", function() {
                     return {
                         elements: wrapper,
                         data: [{ dataItem: args }]
@@ -394,7 +403,7 @@ var __meta__ = { // jshint ignore:line
                     that._showPopup(wrapper, options);
                 }
 
-                that.trigger(SHOW, {element: wrapper});
+                that.trigger(SHOW, { element: wrapper });
             }
 
             return that;
@@ -425,11 +434,11 @@ var __meta__ = { // jshint ignore:line
                 openedNotifications = that.getNotifications();
 
             if (that.options.appendTo) {
-                openedNotifications.each(function(idx, element){
+                openedNotifications.each(function(idx, element) {
                     that._hideStatic($(element));
                 });
             } else {
-                openedNotifications.each(function(idx, element){
+                openedNotifications.each(function(idx, element) {
                     var popup = $(element).data("kendoPopup");
                     if (popup) {
                         that._hidePopup(popup);
@@ -480,4 +489,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

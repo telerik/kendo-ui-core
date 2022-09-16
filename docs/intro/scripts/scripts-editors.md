@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Editors
-page_title: Individual Scripts for Editors | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Editors | Scripts 
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Editors"
 slug: script_filesfor_editors_widgets
 ---
@@ -23,6 +23,9 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.autocomplete.js | |
+| [CheckBoxGroup](https://demos.telerik.com/kendo-ui/checkboxgroup/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.inputgroupbase.js | |
 | [Color tools](https://demos.telerik.com/kendo-ui/colorpicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
@@ -107,6 +110,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.upload.js | Image Browser feature (optional) |
 | | kendo.filebrowser.js | Image Browser feature (optional) |
 | | kendo.imagebrowser.js | Image Browser feature (optional) |
+| | kendo.breadcrumb.js | Image Browser feature (optional) |
 | | kendo.resizable.js | Resize handle feature (optional) |
 | | kendo.tabstrip.js | Table wizard dialog feature (optional) |
 | | kendo.numerictextbox.js | Table wizard dialog feature (optional) |
@@ -150,6 +154,9 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.numerictextbox.js | |
+| [RadioGroup](https://demos.telerik.com/kendo-ui/radiogroup/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.inputgroupbase.js | |
 | [Rating](https://demos.telerik.com/kendo-ui/rating/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.rating.js | |

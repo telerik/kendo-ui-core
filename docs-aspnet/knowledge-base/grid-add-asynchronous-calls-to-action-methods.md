@@ -79,6 +79,11 @@ Kendo.Mvc.Extensions contains QueryableExtensions which include the [ToDatasourc
         }
 ```
 
+The ViewModel definition can be found here:
+
+[Grid Core - Inline Editing Demo](https://demos.telerik.com/aspnet-core/grid/editing-inline)
+
+
 ## See Also
 * [ToDataSourceResultAsync - QueryableExtensions](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.Extensions/QueryableExtensions#todatasourceresultasyncsystemdatadatatablekendomvcuidatasourcerequest)
 * [Inline Editing - Kendo UI Grid Live Demo](https://demos.telerik.com/aspnet-mvc/grid/editing-inline)

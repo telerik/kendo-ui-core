@@ -17,7 +17,7 @@ res_type: kb
   <td>Progress Kendo UI Grid</td>
  </tr> <tr>
   <td>Made with version</td>
-  <td>2017.3.1026</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -85,17 +85,11 @@ Set a custom editor for the numeric columns by using the [`column.editor`](https
             columns: [
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120,editor: editNumber },
-              { field: "Discontinued", width: 120, editor: customBoolEditor },
+              { field: "Discontinued", width: 120 },
               { command: "destroy", title: "&nbsp;", width: 150 }],
             editable: true
           });
         });
-
-        function customBoolEditor(container, options) {
-          var guid = kendo.guid();
-          $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-        }
 
         function editNumber(container, options) {
           $('<input data-bind="value:' + options.field + '"/>')

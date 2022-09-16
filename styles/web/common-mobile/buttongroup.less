@@ -23,12 +23,14 @@
 }
 
 .km-widget.km-buttongroup > *:last-child,
-.km-widget.km-buttongroup > *.km-state-active
+.km-widget.km-buttongroup > *.km-state-active,
+.km-widget.km-buttongroup > *.km-active
 {
     border-right-width: @mobile-border-width;
 }
 
-.km-widget.km-buttongroup > *.km-state-active + *
+.km-widget.km-buttongroup > *.km-state-active,
+.km-widget.km-buttongroup > *.km-active + *
 {
     border-left-width: 0;
 }

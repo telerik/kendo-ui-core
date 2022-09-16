@@ -30,7 +30,7 @@ How can I provide additional notification that the NumericTextBox value must be 
 ## Solution
 
 1. In the `document ready` event handler, [`append`](https://api.jquery.com/append/) the desired `span` by using the `k-numeric-wrap` class selector.
-1. Display the span when the NumericTextBox has the `k-state-invalid` class by using CSS.
+1. Display the span when the NumericTextBox has the `k-invalid` class by using CSS.
 
     ```dojo
     <style>
@@ -42,7 +42,7 @@ How can I provide additional notification that the NumericTextBox value must be 
             visibility: hidden;
         }
 
-        .k-state-invalid>span.myInvalid {
+        .k-invalid>span.myInvalid {
             visibility: visible;
         }
     </style>

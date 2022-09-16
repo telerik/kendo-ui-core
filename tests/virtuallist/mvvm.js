@@ -7,7 +7,7 @@
         VirtualList = kendo.ui.VirtualList,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -27,7 +27,7 @@
         return items;
     }
 
-    describe("VirtualList MVVM: ", function () {
+    describe("VirtualList MVVM: ", function() {
         beforeEach(function() {
             container = $("<div id='container' data-role='virtuallist' data-bind='source: asyncDataSource' data-template='tmp' data-value-field='value' data-item-height='20' data-height='200'></div>")
                 .appendTo(Mocha.fixture);
@@ -100,7 +100,7 @@
                 assert.equal(virtualList.items().eq(0).text(), "Item 11");
                 assert.equal(virtualList.items().last().text(), "Item 50");
                 done();
-            }, 300)
+            }, 300);
         }, 100);
     });
 

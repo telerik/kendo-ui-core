@@ -1,7 +1,7 @@
 ---
 title:  Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax Binding with Telerik UI DropDownTree HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Ajax Binding with Telerik UI DropDownTree component for {{ site.framework }}."
 previous_url: /helpers/editors/dropdowntree/ajax-binding
 slug: htmlhelpers_dropdowntree_ajaxbinding_aspnetcore
 position: 2
@@ -11,7 +11,7 @@ position: 2
 
 The DropDownTree provides support for remote data binding by using a `DataSource` configuration object.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().DropDownTree()
     .Name("dropdowntree")
     .DataTextField("Name")
@@ -23,6 +23,20 @@ The DropDownTree provides support for remote data binding by using a `DataSource
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree datatextfield="Name" datavaluefield="id" name="dropdowntree" >
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Remote_DropDownTreeData", "Home")" />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 ```Controller
 public static IList<HierarchicalViewModel> GetHierarchicalData()
 {

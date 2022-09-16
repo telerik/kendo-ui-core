@@ -151,10 +151,10 @@ To create an editor with radio buttons:
                 var item = "";
 
                 item += "<label>"
-                if (category === i) {
-                    item += "<input type='radio' name='" + dataItem.uid + "' onclick='setDataItem(this);' checked=checked />";
+                 if (category === i) {
+                    item += "<input type='radio' class='k-radio k-radio-md' name='" + dataItem.uid + "' onclick='setDataItem(this);' checked=checked />";
                 } else {
-                    item += "<input type='radio' name='" + dataItem.uid + "' onclick='setDataItem(this);'/>";
+                    item += "<input type='radio' class='k-radio k-radio-md' name='" + dataItem.uid + "' onclick='setDataItem(this);'/>";
                 }
                 item += categories[i].text;
                 item += "</label>"

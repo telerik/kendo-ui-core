@@ -1,7 +1,7 @@
 ---
 title: Hiding
 page_title: Hiding
-description: "Learn the basics when working with the Telerik UI Notification HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Notification component for {{ site.framework }}."
 previous_url: /helpers/layout/notification/hiding
 slug: hiding_notificatiomhelper_aspnetmvc
 position: 3
@@ -21,6 +21,7 @@ In addition, you can postpone the manual hiding of the Notification which preven
 
 The following example demonstrates how to manage the hiding of the Notification.
 
+```HtmlHelper
     @(Html.Kendo().Notification()
         .Name("notification")
         // Hide automatically after seven seconds.
@@ -32,6 +33,17 @@ The following example demonstrates how to manage the hiding of the Notification.
         // Prevent hiding by clicking on the Notification content.
         .HideOnClick(false)
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification"
+                    auto-hide-after="7000"
+                    allow-hide-after="1000"
+                    button="true"
+                    hide-on-click="false">
+</kendo-notification>
+```
+{% endif %}
 
 ## See Also
 

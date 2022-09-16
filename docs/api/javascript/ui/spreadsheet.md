@@ -259,6 +259,11 @@ The author of the PDF document.
         spreadsheet.saveAsPDF();
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
 The creator of the PDF document.
@@ -426,6 +431,14 @@ Indicates whether to center the content horizontally. For more information, refe
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -721,6 +734,15 @@ The default row height in pixels.
 
 The number of rows in the document.
 
+#### Example - configure the rows count
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            rows: 300
+        });
+    </script>
+
 ### sheets `Array`
 
 An array which defins the document sheets and their content.
@@ -728,6 +750,19 @@ An array which defins the document sheets and their content.
 ### sheets.activeCell `String`
 
 The active cell in the sheet, for example, `A1`.
+
+#### Example - configure the initially active cell
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            activeCell: "C3"
+          }
+        ]
+      });
+    </script>
 
 ### sheets.name `String`
 
@@ -988,9 +1023,30 @@ If set to `false`, disables the cell.
 
 The format of the cell text. For more information, refer to the article on [creating or deleting a custom number format on MS Office](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 
+#### Example - setting the format of a cell
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Order",               
+                rows: [{
+                    cells: [{
+                        value: 12.39, format: "$#,##0.00"
+                    }]
+                }],
+            }]
+        });
+    </script>
+
 ### sheets.rows.cells.formula `String`
 
 The cell formula without the leading equals sign, for example, `A1 * 10`.
+
+### sheets.rows.cells.html `Boolean`
+
+If set to `true`, renders the cell value as HTML. 
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
 ### sheets.rows.cells.index `Number`
 
@@ -1017,6 +1073,26 @@ If set to `true`, sets the cell font to underline.
 ### sheets.rows.cells.value `Number|String|Boolean|Date`
 
 The cell value.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            rows: [
+              {
+                cells: [{ value: "Name" },{ value: "age" }]
+              },
+              {
+                cells: [{ value: "Peter" },{ value: 34 }]
+              }
+            ]
+          }
+        ]
+      });
+    </script>
 
 ### sheets.rows.cells.validation `Object`
 
@@ -1427,6 +1503,7 @@ This flag only affects the presentation - the way formulas are entered by the en
     sheet.range('B1').input('=SUM(A1, A2, 3.14)');
 
     // prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 To make the API functions obey `useCultureDecimals`, wrap your code in a call to `sheet.withCultureDecimals`. Assuming a culture where the comma is used for decimals, compare the previous example with the following one.
@@ -1437,10 +1514,12 @@ To make the API functions obey `useCultureDecimals`, wrap your code in a call to
         sheet.range('B1').input('=SUM(A1; A2; 3,14)');
 
         // prints: SUM(A1; A2; 3,14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(sheet.range('B1').formula());
     });
 
     // back to canonical form; this prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 ## Methods
@@ -1624,7 +1703,7 @@ Returns an array with the sheets in the workbook.
 
 Clears the spreadsheet and populates it with data from the specified Excel (`.xlsx`) file.
 
-> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/installation/prerequisites#jszip-library) for the import from file functionality.
+> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/supporting/export-support#jszip-library) for the import from file functionality.
 
 #### Parameters
 
@@ -1933,7 +2012,7 @@ which is asynchronous (returns a `Promise`).
 
 ### fromJSON
 
-Loads the workbook data from an object with the format that si defined in the [configuration](#configuration).
+Loads the workbook data from an object with the format that is defined in the [configuration](#configuration).
 
 > All existing sheets and their data will be lost.
 
@@ -1968,7 +2047,9 @@ The object from where data will be loaded. This has to be the deserialized objec
 
 ### defineName
 
-Defines a custom name that will be  available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
+Defines a custom name that will be available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
+
+> If the name of the sheet consists of multiple words, separated by space, the sheet name should be wrapped in quotes `'Sheet Name With Space'!$A$1`.
 
 #### Parameters
 
@@ -2337,6 +2418,49 @@ The new value(s) that is(are) about to be applied to the range. Depending on the
 
 If invoked the changing will not be performed and no changes will be applied to the sheet.
 
+#### Example - subscribe to the "changing" event during initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{               
+          rows: [{           
+            cells: [
+              { value: "First"},
+              { value: "Second"},
+              { value: "Third"}
+            ]
+          }]
+        }],
+        changing: function(e){
+        		console.log("The netered value is: " + e.data)
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "changing" event after initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+      function spread_changing(e){
+        console.log("The netered value is: " + e.data)
+      }
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{               
+          rows: [{           
+            cells: [
+              { value: "First"},
+              { value: "Second"},
+              { value: "Third"}
+            ]
+          }]
+        }]        
+      });
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      spreadsheet.bind("changing", spread_changing);
+    </script>
+
 ### change
 
 Triggered when a value in the Spreadsheet has been changed. Introduced in the 2016.Q1.SP1 release.
@@ -2470,6 +2594,7 @@ The [progress handler](https://api.jquery.com/deferred.progress/) of the promise
             excelImport: function(e) {
                 e.promise
                 .progress(function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(kendo.format("{0:P} complete", e.progress));
                 })
                 .done(function() {

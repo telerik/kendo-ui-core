@@ -12,7 +12,7 @@ The Telerik UI ListBox for {{ site.framework }} enables you to bind it to local 
 
 When you use complex data objects, use the `DataTextField` and `DataValueField` properties to notify the ListBox about your preferred binding behavior.
 
-``` index.cshtml
+```HtmlHelper
     @(Html.Kendo().ListBox()
         .Name("optional")
         .Toolbar(toolbar =>
@@ -38,7 +38,27 @@ When you use complex data objects, use the `DataTextField` and `DataValueField` 
         .Selectable(ListBoxSelectable.Multiple)
     )
 ```
-``` IndexController.cs
+{% if site.core %}
+```TagHelper
+
+    @{
+        var tools = new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove" };
+        var selectedItems = new List<SelectListItem>();
+    }
+
+    <kendo-listbox name="optional"
+                    connect-with="selected"
+                    bind-to="@ViewBag.Attendees">
+            <toolbar position="ListBoxToolbarPosition.Right"
+                        tools="tools"/>
+    </kendo-listbox>
+    <kendo-listbox name="selected"
+                    bind-to="selectedItems"
+                    selectable="ListBoxSelectable.Multiple">
+    </kendo-listbox>
+```
+{% endif %}
+```IndexController.cs
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -51,15 +71,14 @@ When you use complex data objects, use the `DataTextField` and `DataValueField` 
         {
             public IActionResult Index()
             {
-                ViewBag.Attendees = new List<string>
+                ViewBag.Attendees = new List<SelectListItem>
                 {
-                    "Steven White",
-                    "Nancy King",
-                    "Nancy Davolio",
-                    "Robert Davolio",
-                    "Michael Leverling",
-                    "Andrew Callahan",
-                    "Michael Suyama"
+                    new SelectListItem(){ Value = "1", Text = "Steven White" },
+                    new SelectListItem(){ Value = "2", Text = "Nancy King" },
+                    new SelectListItem(){ Value = "3", Text = "Nancy Davolio" },
+                    new SelectListItem(){ Value = "4", Text = "Michael Leverling" },
+                    new SelectListItem(){ Value = "5", Text = "Andrew Callahan" },
+                    new SelectListItem(){ Value = "6", Text = "Michael Suyama" }
                 };
 
                 return View();

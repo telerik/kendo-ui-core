@@ -5,7 +5,7 @@
 
             window.timePickerChange = function() {
                 assert.isOk(true);
-            }
+            };
 
         });
         afterEach(function() {
@@ -179,7 +179,7 @@
             dom.kendoTimePicker();
 
             var value = new Date(2011, 1, 2);
-            observable.set("value", value)
+            observable.set("value", value);
             assert.equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
         });
 

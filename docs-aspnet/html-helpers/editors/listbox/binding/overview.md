@@ -13,7 +13,7 @@ By default, the Telerik UI ListBox for {{ site.framework }} automatically binds 
 
 Immediately after the ListBox loads, the [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) sends a query and the data is loaded to the helper. To disable this behavior, set the `AutoBind` option of the ListBox to `false`.
 
-```
+```HtmlHelper
     @(Html.Kendo().ListBox()
         .Name("optional")
         .DataTextField("ContactName")
@@ -36,6 +36,39 @@ Immediately after the ListBox loads, the [DataSource]({% slug htmlhelpers_dataso
         .BindTo(new List<CustomerViewModel>())
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{ 
+        var dropSources = new string[] { "selected" };
+        var customers = new List<CustomerViewModel>();
+        var tools = new string[] { "transferTo", "remove" };
+    }
+
+    <kendo-listbox name="optional"
+                datatextfield="ContactName"
+                datavaluefield="CustomerID"
+                template-id="customer-item-template"
+                drop-sources="dropSources"
+                connect-with="selected"
+                auto-bind="false"
+                bind-to="customers">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetCustomers", "ListBox")"/>
+            </transport>
+        </datasource>
+        <draggable enabled="true" placeholder="customPlaceholder" />
+        <toolbar position="ListBoxToolbarPosition.Right" 
+                tools="tools"/>
+    </kendo-listbox>
+```
+{% endif %}
+```Template
+    <script id="customer-item-template" type="text/x-kendo-template">
+        <span class="k-state-default" style="background-image: url('../content/web/Customers/#:data.CustomerID#.jpg')"></span>
+        <span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>
+    </script>
+```
 
 For more information about binding the ListBox to data, refer to the articles on:
 * [Local data binding]({% slug htmlhelpers_listbox_local_aspnetcore %})
@@ -44,4 +77,7 @@ For more information about binding the ListBox to data, refer to the articles on
 ## See Also
 
 * [Basic Usage of the ListBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/index)
+{% if site.core %}
+* [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
+{% endif %}
 * [Server-Side API](/api/listbox)

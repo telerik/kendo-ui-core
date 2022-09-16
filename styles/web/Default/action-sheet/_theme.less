@@ -1,0 +1,77 @@
+// Actionsheet
+.k-actionsheet {
+    .fill(
+        @actionsheet-text,
+        @actionsheet-bg,
+        @actionsheet-border
+    );
+    // .box-shadow( @actionsheet-shadow );
+    box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2), 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12);
+}
+
+
+// Actionsheet header
+.k-actionsheet-header {
+    .fill(
+        @actionsheet-header-text,
+        @actionsheet-header-bg,
+        @actionsheet-header-border,
+        @actionsheet-header-gradient
+    );
+    box-shadow: @actionsheet-header-shadow;
+}
+
+
+// Actionsheet items
+.k-actionsheet-items {}
+
+
+// Actionsheet item
+.k-actionsheet-item {}
+
+
+// Actionsheet action
+.k-actionsheet-action {
+
+
+    // Hover state
+    &:hover,
+    &.k-state-hover,
+    &.k-hover {
+        .fill(
+            @actionsheet-item-hover-text,
+            @actionsheet-item-hover-bg,
+            @actionsheet-item-hover-border,
+            @actionsheet-item-hover-gradient
+        );
+        .box-shadow( @actionsheet-item-hover-shadow );
+    }
+
+
+    // Focus state
+    &:focus,
+    &.k-state-focus,
+    &.k-focus {
+        .fill(
+            @actionsheet-item-focus-text,
+            @actionsheet-item-focus-bg,
+            @actionsheet-item-focus-border,
+            @actionsheet-item-focus-gradient
+        );
+        .box-shadow( @actionsheet-item-focus-shadow );
+    }
+
+
+    // Disabed state
+    &:disabled,
+    &.k-state-disabled,
+    &.k-disabled {
+        .fill(
+            @actionsheet-item-disabled-text,
+            @actionsheet-item-disabled-bg,
+            @actionsheet-item-disabled-border,
+            @actionsheet-item-disabled-gradient
+        );
+        .box-shadow( @actionsheet-item-disabled-shadow );
+    }
+}

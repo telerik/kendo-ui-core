@@ -1,7 +1,7 @@
-(function () {
+(function() {
     var Adapter = kendo.History.HistoryAdapter;
 
-    describe("History adapter", function () {
+    describe("History adapter", function() {
 
     function onHash(callback) {
         $(window).one("hashchange", callback);

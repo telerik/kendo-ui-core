@@ -1,6 +1,6 @@
 ---
 title: Tabs
-page_title: jQuery TabStrip Documentation | Tabs | Kendo UI
+page_title: jQuery TabStrip Documentation | Tabs
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to dynamically add and remove tabs, implement scrollable and sortable tabs, control the tab position, and select tabs on initial load."
 slug: tabs_tabstrip
 position: 3
@@ -61,14 +61,14 @@ You can also select a tab and display its associated content upon the initial lo
 
 To implement the tab selection on initial load, use either of the following approaches which produce the same result:
 
-* Add a `"k-state-active"` class to the DOM element of the tab.
+* Add a `"k-active"` class to the DOM element of the tab.
 * Use `select()` to target and select a tab either by selector or index.
 
 The following example demonstrates how to manually select a default tab by using HTML.
 
     <div id="tabstrip">
         <ul>
-            <li class="k-state-active">First Tab</li>
+            <li class="k-active">First Tab</li>
             <li>Second Tab</li>
         </ul>
         <div></div>
@@ -79,7 +79,7 @@ The following example demonstrates how to initialize a TabStrip and select the f
 
    <div id="tabstrip">
         <ul>
-            <li class="k-state-active">First Tab</li>
+            <li class="k-active">First Tab</li>
             <li>Second Tab</li>
         </ul>
         <div></div>
@@ -97,7 +97,7 @@ The following example demonstrates how to initialize a TabStrip and select the f
 
     <div id="tabstrip">
         <ul>
-            <li class="k-state-active">First Tab</li>
+            <li class="k-active">First Tab</li>
             <li>Second Tab</li>
         </ul>
         <div></div>

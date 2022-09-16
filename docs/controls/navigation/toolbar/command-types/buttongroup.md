@@ -1,6 +1,6 @@
 ---
 title: ButtonGroup
-page_title: jQuery ToolBar Documentation | ButtonGroup Command Type | Kendo UI
+page_title: jQuery ToolBar Documentation | ButtonGroup Command Type
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the ButtonGroup command type."
 previous_url: /controls/navigation/toolbar/buttongroup
 slug: buttongroup_toolbar_widget

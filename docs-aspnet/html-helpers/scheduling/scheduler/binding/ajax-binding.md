@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure it for Ajax binding."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure it for Ajax binding."
 previous_url: /helpers/scheduling/scheduler/ajax-editing
 slug: htmlhelpers_scheduler_ajaxbinding_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Ajax Binding
 
-You can configure the Scheduler HtmlHelper for Ajax binding.
+You can configure the Scheduler for Ajax binding.
 
 For a complete example, refer to the [demo on binding the Scheduler to remote data](https://demos.telerik.com/{{ site.platform }}/scheduler/resources).
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
         .Name("scheduler")
         .Date(new DateTime(2013, 6, 13))
@@ -33,7 +33,6 @@ For a complete example, refer to the [demo on binding the Scheduler to remote da
                 m.RecurrenceId(f => f.RecurrenceID);
                 m.Field(f => f.Title).DefaultValue("No title");
                 m.Field(f => f.OwnerID).DefaultValue(1);
-                m.Field(f => f.Title).DefaultValue("No title");
             })
             .Read("Read", "Scheduler")
             .Create("Create", "Scheduler")
@@ -42,6 +41,52 @@ For a complete example, refer to the [demo on binding the Scheduler to remote da
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        string defaultTitle = "No Title";
+    }
+
+    <kendo-scheduler name="scheduler"
+        date="new DateTime(2013, 6, 13)"
+        start-time="new DateTime(2013, 6, 13, 7, 0, 0, 0)"
+        height="600"
+        timezone="Etc/UTC">
+        <views>
+            <view type="day"></view>
+            <view type="week" selected="true"></view>
+            <view type="timeline"></view>
+        </views>
+        <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Read", "Scheduler")" />
+                <create url="@Url.Action("Create", "Scheduler")" />
+                <destroy url="@Url.Action("Destroy", "Scheduler")" />
+                <update url="@Url.Action("Update", "Scheduler")" />
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <scheduler-model id="TaskID">
+                    <fields>
+                        <field name="TaskID" type="number"></field>
+                        <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                        <field name="start" from="Start" type="date"></field>
+                        <field name="end" from="End" type="date"></field>
+                        <field name="description" from="Description" type="string"></field>
+                        <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                        <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                        <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                        <field name="startTimezone" from="StartTimezone" type="string"></field>
+                        <field name="endTimezone" from="EndTimezone" type="string"></field>
+                        <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                    </fields>
+                </scheduler-model>
+            </schema>
+        </scheduler-datasource>
+    </kendo-scheduler>
+```
+{% endif %}
 ```Controller
     public class SchedulerController : Controller
     {

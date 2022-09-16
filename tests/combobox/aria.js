@@ -3,7 +3,88 @@
 var ComboBox = kendo.ui.ComboBox,
     input;
 
-describe("kendo.ui.ComboBox ARIA", function () {
+
+    describe("ComboBox WAI-ARIA with AXE", function() {
+        beforeEach(function() {
+            input = $("<input id='cb'/>").appendTo(Mocha.fixture);
+            $("<label for='cb'>Label</label>").appendTo(Mocha.fixture);
+            Mocha.fixture.attr("role", "main");
+        });
+
+        afterEach(function() {
+            input.data("kendoComboBox").destroy();
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("ComboBox is accessible", function(done) {
+            var combo = new ComboBox(input);
+
+            axeRunFixture(done);
+        });
+
+        it("ComboBox with DataSource is accessible", function(done) {
+            var combo = new ComboBox(input, {
+                dataSource: ["Item"]
+            });
+
+            axeRunFixture(done);
+        });
+
+        // Fails because of the aria-expanded attribute on a role="textbox" element
+        it("ComboBox with search term is accessible", function(done) {
+            var combo = new ComboBox(input, {
+                dataSource: ["Item"]
+            });
+
+            combo.search("I");
+
+            axeRunFixture(done);
+        });
+
+        it("ComboBox with suggest='true' term is accessible", function(done) {
+            var combo = new ComboBox(input, {
+                dataSource: ["Item"],
+                suggest: true
+            });
+
+            combo.search("I");
+
+            axeRunFixture(done);
+        });
+
+        it("ComboBox with search term has accessible popup", function(done) {
+            var combo = new ComboBox(input, {
+                dataSource: ["Item"]
+            });
+
+            combo.search("I");
+
+            axeRun(combo.popup.element.closest(".k-animation-container").parent(), done);
+        });
+
+        it("ComboBox with value is accessible", function(done) {
+            var combo = new ComboBox(input, {
+                dataSource: ["Item"],
+                value: "Item"
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("ComboBox with templates has accessible popup", function(done) {
+            var combo = new ComboBox(input, {
+                dataSource: ["Item"],
+                footerTemplate: 'Total items found',
+                headerTemplate: 'Total items found'
+            });
+
+            combo.search("I");
+
+            axeRun(combo.popup.element.closest(".k-animation-container").parent(), done);
+        });
+    });
+
+describe("kendo.ui.ComboBox ARIA", function() {
     beforeEach(function() {
 
         input = $("<input />").appendTo(Mocha.fixture);
@@ -20,37 +101,20 @@ it("ComboBox adds role to the input", function() {
     assert.equal(combobox.input[0].getAttribute("role"), "combobox");
 });
 
-it("ComboBox adds aria-autocomplete='list'", function() {
+it("ComboBox adds aria-controls without input id", function() {
     var combobox = new ComboBox(input);
 
-    assert.equal(combobox.input.attr("aria-autocomplete"), "list");
-});
-
-it("ComboBox adds aria-autocomplete='both' if suggestion is enabled", function() {
-    var combobox = new ComboBox(input, {
-        suggest: true
-    });
-
-    assert.equal(combobox.input.attr("aria-autocomplete"), "both");
-});
-
-it("ComboBox adds aria-owns", function() {
-    var combobox = new ComboBox(input.attr("id", "test"));
-
-    assert.equal(combobox.input.attr("aria-owns"), combobox.ul.attr("id"));
-});
-
-it("ComboBox adds aria-owns without input id", function() {
-    var combobox = new ComboBox(input);
-
-    assert.equal(combobox.input.attr("aria-owns"), combobox.ul.attr("id"));
+    assert.equal(combobox.input.attr("aria-controls"), combobox.ul.attr("id"));
 });
 
 it("ComboBox adds aria-activedescentant", function() {
     var combobox = new ComboBox(input.attr("id", "test"), {
         dataSource: ["Item1", "Item2"],
-        value: "Item2"
+        value: "Item2",
+        animation: false
     });
+
+    combobox.open();
 
     assert.equal(combobox.selectedIndex, 1);
     assert.equal(combobox.ul.children().eq(0).attr("id"), undefined);
@@ -77,7 +141,8 @@ it("ComboBox adds aria-expanded='false'", function() {
 
 it("ComboBox adds aria-expanded='true'", function() {
     var combobox = new ComboBox(input, {
-        dataSource: ["item1", "item2"]
+        dataSource: ["item1", "item2"],
+        animation: false
     });
 
     combobox.open();
@@ -87,7 +152,8 @@ it("ComboBox adds aria-expanded='true'", function() {
 
 it("ComboBox sets aria-expanded to false on close", function() {
     var combobox = new ComboBox(input, {
-        dataSource: ["item1", "item2"]
+        dataSource: ["item1", "item2"],
+        animation: false
     });
 
     combobox.open();
@@ -119,7 +185,8 @@ it("ComboBox adds role to the popup element", function() {
 
 it("ComboBox adds aria-hidden to the popup element", function() {
     var combobox = new ComboBox(input, {
-        dataSource: ["item1", "item2"]
+        dataSource: ["item1", "item2"],
+        animation: false
     });
 
     assert.equal(combobox.ul.attr("aria-hidden"), "true");
@@ -157,7 +224,7 @@ it("ComboBox adds aria-busy=true when loader is shown", function(done) {
     });
 
     var e = {
-        isDefaultPrevented: function(){
+        isDefaultPrevented: function() {
             return false;
         }
     };
@@ -177,7 +244,7 @@ it("ComboBox does not adds aria-busy=true when loader is prevented", function(do
     });
 
     var e = {
-        isDefaultPrevented: function(){
+        isDefaultPrevented: function() {
             return true;
         }
     };
@@ -277,6 +344,42 @@ it("widget sets aria-labelledby attribute to label's generated id", function() {
     assert.equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
 
     label.remove();
+});
+
+it("ComboBox has its aria-autocomplete set to 'none' when no filtering and no suggest is enabled", function() {
+    var combobox = new ComboBox(input.attr("id", "test"), {
+        dataSource: ["item1", "item2"]
+    });
+
+    assert.equal(combobox.input.attr("aria-autocomplete"), "none");
+});
+
+it("ComboBox has its aria-autocomplete set to 'list' when filtering is enabled", function() {
+    var combobox = new ComboBox(input.attr("id", "test"), {
+        dataSource: ["item1", "item2"],
+        filter: "startswith"
+    });
+
+    assert.equal(combobox.input.attr("aria-autocomplete"), "list");
+});
+
+it("ComboBox has its aria-autocomplete set to 'both' when filtering and suggest is enabled", function() {
+    var combobox = new ComboBox(input.attr("id", "test"), {
+        suggest: true,
+        dataSource: ["item1", "item2"],
+        filter: "startswith"
+    });
+
+    assert.equal(combobox.input.attr("aria-autocomplete"), "both");
+});
+
+it("ComboBox has its aria-autocomplete set to 'inline' when suggest is enabled", function() {
+    var combobox = new ComboBox(input.attr("id", "test"), {
+        suggest: true,
+        dataSource: ["item1", "item2"]
+    });
+
+    assert.equal(combobox.input.attr("aria-autocomplete"), "inline");
 });
 
     });

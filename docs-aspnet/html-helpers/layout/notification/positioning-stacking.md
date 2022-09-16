@@ -1,7 +1,7 @@
 ---
 title: Positioning and Stacking
 page_title: Positioning and Stacking
-description: "Learn the basics when working with the Telerik UI Notification HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Notification component for {{ site.framework }}."
 previous_url: /helpers/layout/notification/positioning-stacking
 slug: positioning_notificatiomhelper_aspnetmvc
 position: 4
@@ -21,6 +21,7 @@ If the popup content varies and stacking is likely to occur, explicitly define d
 
 The following example demonstrates how to manage the position, stacking, and size of the Notification.
 
+```HtmlHelper
     @(Html.Kendo().Notification()
         .Name("notification")
         .Position(p =>
@@ -37,6 +38,17 @@ The following example demonstrates how to manage the position, stacking, and siz
         .Width(300)
         .Height(50)
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification"
+                    stacking="NotificationStackingSettings.Down"
+                    width="300"
+                    height="50">
+    <position pinned="false" top="30" right="30" />
+</kendo-notification>
+```
+{% endif %}
 
 You may need the popup notifications to appear too quickly or to implement so many Notifications on the screen that the available space gets very little. In such cases, the subsequent popups appear outside the visible viewport area and are inaccessible if they are pinned. In such cases, consider using a shorter hiding delay or implementing static notifications for better usability.
 
@@ -44,6 +56,7 @@ Notifications can also display static messages which do not overlay other elemen
 
 The following example demonstrates how to enable static notifications.
 
+```HtmlHelper
     @(Html.Kendo().Notification()
         .Name("notification")
         // Insert all notifications to the originating element of the Notification.
@@ -51,6 +64,15 @@ The following example demonstrates how to enable static notifications.
         // New notifications will appear over old ones.
         .Stacking(NotificationStackingSettings.Up)
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification"
+                    stacking="NotificationStackingSettings.Up"
+                    append-to="#notification">
+</kendo-notification>
+```
+{% endif %}
 
 ## See Also
 

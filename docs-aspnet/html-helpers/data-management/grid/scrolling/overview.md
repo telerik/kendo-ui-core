@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Scrolling Overview
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to configure the scrolling functionality of the Grid."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to configure the scrolling functionality of the Grid."
 slug: htmlhelpers_grid_aspnetcore_scrolling
 position: 1
 ---
@@ -10,6 +10,7 @@ position: 1
 
 By default, the scrolling functionality of the Grid is disabled. When scrolling is enabled, the widget applies a default height of 200px to its data area. This can be changed or removed by setting an optional height style in the Grid's `Scrollable()` method.
 
+```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Scrollable(s => s.Height(400)) // Set a 400px-height style.
@@ -21,6 +22,7 @@ By default, the scrolling functionality of the Grid is disabled. When scrolling 
         .Name("grid")
         .Scrollable(s => s.Height("auto")) // Remove the default height.
     )
+```
 
 The `Virtual` scrolling always displays a single page of data. Scrolling only changes the data which is currently displayed. The `Endless` scrolling mode appends new pages of data to the already rendered records. The `Endless` scrolling is suitable for limited number of records, because after some point the browser will start to freeze (due to the amount of DOM elements on the page). For huge amount of records it is recommended to use `Virtual` scrolling or standard paging.
 
@@ -85,6 +87,18 @@ When scrolling is enabled, the vertical scrollbar of the Grid is always visible 
        overflow-y: visible;
     }
 
+## Visualizing only the Horizontal ScrollBar
+
+In order to activate the Horizontal Scrollbar, set width to the columns of the Grid, so their sum to be bigger than the total width of the Grid. For hiding the Vertical ScrollBar use the following CSS(replace the `#GridID` with the Id of your Grid. The needed Id is the name of the Grid):
+
+    #GridID .k-grid-content {
+        overflow-y: hidden;
+    }
+
+    .k-grid-header {
+        padding: 0px !important;
+    }
+
 ## Restoring the Scroll Position
 
 In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. To prevent the restoration of the scroll position:
@@ -94,6 +108,7 @@ In some scenarios, the scroll position of the Grid might be reset when the widge
 
 The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the widget `wrapper`. If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 
+```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Scrollable()
@@ -124,6 +139,37 @@ The scrollable container is `div.k-grid-content` and it is possible to retrieve 
             container.scrollTop(scrollOffset.top); // Use only if virtual scrolling is disabled.
         }
     });
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" on-data-binding="onGridDataBinding" on-data-bound="onGridDataBound"  >
+        <scrollable enabled="true"/>
+    </kendo-grid>
+    <script>
+        $(function () {
+            // Initialize the variable which will hold the scroll positions.
+            var scrollOffset = {
+                left: 0,
+                top: 0
+            };
+
+            // Save the scroll position before the new data is rendered.
+            function onGridDataBinding (e) {
+                var container = e.sender.wrapper.children(".k-grid-content"); // Or ".k-virtual-scrollable-wrap".
+                scrollOffset.left = container.scrollLeft();
+                scrollOffset.top = container.scrollTop(); // Use only if virtual scrolling is disabled.
+            }
+
+            // Restore the scroll position after the new data is rendered.
+            function onGridDataBound (e) {
+                var container = e.sender.wrapper.children(".k-grid-content"); // Or ".k-virtual-scrollable-wrap".
+                container.scrollLeft(scrollOffset.left);
+                container.scrollTop(scrollOffset.top); // Use only if virtual scrolling is disabled.
+            }
+        });
+    </script>
+```
+{% endif %}
 
 ## Adjusting Scrollbar and Page Layout on Zoom
 

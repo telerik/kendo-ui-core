@@ -80,7 +80,7 @@ When selection is enabled in the Grid component, the built-in option for deselec
           var row = $(rowElement);
           var grid = $("#grid").getKendoGrid();
 
-          if (row.hasClass("k-state-selected")) {
+          if (row.hasClass("k-selected")) {
 
             var selected = grid.select();
 

@@ -27,7 +27,80 @@ res_type: kb
 
 How can I resize the Grid to match the visible column widths when hiding or showing columns while the sum of the column widths is less than the initial width of the Grid?
 
-## Solution
+## Solution 1
+
+You could enforce a min-width style to the table element using only CSS:
+
+```
+  <style>
+    #grid table {
+      min-width:100%;
+    }
+  </style>
+```
+
+```dojo
+   <style>
+    #grid table {
+      min-width:100%;
+    }
+  </style>
+	<div id="example">
+      <div id="grid"></div>
+
+      <script>
+        $(document).ready(function() {
+          var grid = $("#grid").kendoGrid({
+            dataSource: {
+              type: "odata",
+              transport: {
+                read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              },
+              schema: {
+                model: {
+                  fields: {
+                    OrderID: { type: "number" },
+                    ShipCountry: { type: "string" },
+                    ShipName: { type: "string" },
+                    ShipAddress: { type: "string" }
+                  }
+                }
+              },
+              pageSize: 30,
+              serverPaging: true,
+              serverFiltering: true,
+              serverSorting: true
+            },
+            height: 550,
+            sortable: true,
+            filterable: true,
+            columnMenu: true,
+            pageable: true,
+            columns: [ {
+              field: "OrderID",
+              title: "Order ID",
+              width: 120
+            }, {
+              field: "ShipCountry",
+              title: "Ship Country",
+              width: 320
+            }, {
+              field: "ShipName",
+              title: "Ship Name",
+              width: 320
+            },  {
+              field: "ShipAddress",
+              filterable: false,
+              width: 320
+            }
+                     ]
+          }).data('kendoGrid');
+        });
+      </script>
+    </div>
+```
+
+## Solution 2
 
 This approach prevents the appearance of white space in the widget when the sum of the widths of the visible columns is less than the initial width of the Grid.
 

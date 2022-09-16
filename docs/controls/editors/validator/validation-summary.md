@@ -1,22 +1,24 @@
 ---
 title: Validation Summary
-page_title: jQuery Validator Documentation | Validation Summary | Kendo UI
+page_title: jQuery Validator Documentation | Validation Summary
 description: "Get started with the jQuery Validator by Kendo UI and use the built-in validation summary functionality."
 slug: validationsummary_kendoui_validator
-position: 5
+position: 6
 ---
 
 # Validation Summary
 
-The Validator provides the ability to list validation errors in a separate container through the [`validationSummary`](/api/javascript/ui/validator/configuration/validationSummary) option. The listed errors link to the corresponding form elements and focus them upon clicking an error message from the validation summary list.
+The Validator enables you to list validation errors in a separate container through the [`validationSummary`](/api/javascript/ui/validator/configuration/validationsummary) option. 
 
-## Default
+The listed errors link to the corresponding form elements and focus them upon clicking an error message from the validation summary list.
 
-The default value of the `validationSummary` option is false and the validation summary element will not be rendered when the form is validated.
+## Default Configuration
 
-## Enable Summary
+The default value of the `validationSummary` option is `false` which means that the validation summary element will not be rendered when the form is validated.
 
-The option could be enabled by setting the `validationSummary` option to true. This will cause the Validator to render a container before the element on which the Validator is initialized:
+## Enabling the Summary
+
+To enable the summary of validation messages, set the `validationSummary` option to `true`. As a result, the Validator will render a container before the element on which the component is initialized.
 
     <div id="myform">
         <input type="text" name="firstName" required />
@@ -30,9 +32,9 @@ The option could be enabled by setting the `validationSummary` option to true. T
         });
     </script>
 
-## Specify Where To Render
+## Specifying the Summary Location 
 
-The validation summary can be rendered in a container of choice by utilizing the [`validationSummary.container`](/api/javascript/ui/validator/configuration/validationSummary.container) option. For example, the summary could be displayed below the validated content with the following configuration:
+You can render the summary of the validation messages in a container of your choice by utilizing the [`validationSummary.container`](/api/javascript/ui/validator/configuration/validationsummary.container) option. For example, you can display the validation summary under the validated content with the following configuration:
 
     <form id="myform">
         <input name="username" required /> <br />
@@ -48,9 +50,10 @@ The validation summary can be rendered in a container of choice by utilizing the
         });
     </script>
 
-## Customize Validation Messages
+## Customizing the Validation Messages
 
-The default template of the validation summary could be changed through the [`validationSummary.template`](/api/javascript/ui/validator/configuration/validationSummary.template) option.
+You can change the default template of the validation summary through the [`validationSummary.template`](/api/javascript/ui/validator/configuration/validationsummary.template) option. Note that the `data-field` attribute will link the error message to the corresponding form control and focus it on click.
+
 
     <form id="myform">
         <input name="username" required /> <br />
@@ -73,22 +76,19 @@ The default template of the validation summary could be changed through the [`va
         });
     </script>
 
-The `data-field` attribute is used to link the error message to the corresponding form control and focus it upon click.
 
-## Programmatically Show/Hide the Summary
+## Showing and Hiding the Summary Programmatically
 
-The visibility of the summary container could be controlled through the [`showValidationSummary()`](/api/javascript/ui/validator/methods/showValidationSummary) and [`hideValidationSummary()`](/api/javascript/ui/validator/methods/hideValidationSummary) methods.
+To control the visibility of the summary container, use the [`showValidationSummary()`](/api/javascript/ui/validator/methods/showvalidationsummary) and [`hideValidationSummary()`](/api/javascript/ui/validator/methods/hidevalidationsummary) methods. 
 
-Consider the following specifics when using these methods:
+However, note that `showValidationSummary()` will render error messages only if the form is already validated.
 
-* `showValidationSummary()` will render error messages only if the form is already validated.
+## Retrieving a Summary Element from the Validator Instance
 
-## Retrieve Summary Element from the Validator Instance
-
-The DOM element of the summary could be retrieved through the Validator instance:
+You can retrieve the DOM element of the summary through the Validator instance.
 
     <script>
-        // attach a validator to the container and get a reference
+        // Attach a Validator to the container and get a reference.
         var validator = $("#myform").kendoValidator({
           validationSummary: true
         }).data("kendoValidator");

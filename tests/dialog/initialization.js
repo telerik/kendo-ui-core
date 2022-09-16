@@ -133,9 +133,9 @@
                 }]
             });
             var wrapper = dialog.wrapper;
-
+console.log(wrapper.find(".k-dialog-buttongroup > .k-button:first")[0]);
             assert.equal(wrapper.find(".k-dialog-buttongroup > .k-button").length, 2);
-            assert.isOk(wrapper.find(".k-dialog-buttongroup > .k-button:first").is(".k-primary"));
+            assert.isOk(wrapper.find(".k-dialog-buttongroup > .k-button:first").is(".k-button-solid-primary"));
         });
 
         it("visible:true option is inferred from content element", function() {
@@ -201,7 +201,7 @@
         it("set zero content height by creating dialog with string insufficient height", function() {
             var dialog = createDialog({ height: "10px", buttonLayout: "normal" });
 
-            assert.equal(dialog.element.prop("style").getPropertyValue("height"), "0px");
+            assert.equal(dialog.element.height(), 0);
         });
 
         it("apply scroll class name to dialog content", function() {
@@ -274,7 +274,7 @@
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-stretched"));
+            assert.isOk(actionbar.hasClass("k-justify-content-stretch"));
             assert.equal(actionbar.find(".k-button").eq(0).width, actionbar.find(".k-button").eq(1).width);
         });
 
@@ -285,7 +285,7 @@
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-normal"));
+            assert.isOk(actionbar.hasClass("k-justify-content-end"));
             assert.equal(actionbar.find(".k-button").get(0).style.width, "");
         });
 
@@ -332,7 +332,7 @@
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-normal"));
+            assert.isOk(actionbar.hasClass("k-justify-content-end"));
             assert.equal(actionbar.find(".k-button").get(0).style.width, "");
         });
 

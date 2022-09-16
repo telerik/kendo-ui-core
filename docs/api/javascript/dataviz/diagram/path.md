@@ -234,9 +234,52 @@ Defines the stroke configuration.
 
 Defines the line color of the path.
 
+#### Example - setting the stroke color
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          visual: function() {
+            var group = new kendo.dataviz.diagram.Group();
+            group.append(new kendo.dataviz.diagram.Path({
+              data: "M 80 0 C 100 0 100 0 100 20 L 100 80 C 100 100 100 100 80 100 L 20 100 C 0 100 0 100 0 80 L 0 20 C 0 0 0 0 20 0Z",
+              fill: "red",
+              stroke: {
+                color: "blue" // Stroke color
+              }
+            }));
+            return group;
+          }
+        }]
+      });
+    </script>
+
 ### stroke.width `Number`
 
 Defines the stroke width of the path.
+
+#### Example - setting the stroke width
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          visual: function() {
+            var group = new kendo.dataviz.diagram.Group();
+            group.append(new kendo.dataviz.diagram.Path({
+              data: "M 80 0 C 100 0 100 0 100 20 L 100 80 C 100 100 100 100 80 100 L 20 100 C 0 100 0 100 0 80 L 0 20 C 0 0 0 0 20 0Z",
+              fill: "red",
+              stroke: {
+                color: "blue",
+                width: 5 // Stroke width
+              }
+            }));
+            return group;
+          }
+        }]
+      });
+    </script>
 
 ### width `Number`
 

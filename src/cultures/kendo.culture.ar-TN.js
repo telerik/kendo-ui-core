@@ -3,13 +3,13 @@
         name: "ar-TN",
         numberFormat: {
             pattern: ["-n"],
-            decimals: 3,
+            decimals: 2,
             ",": ",",
             ".": ".",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
-                decimals: 3,
+                decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
@@ -59,5 +59,5 @@
                 firstDay: 1
             }
         }
-    }
+    };
 })(this);

@@ -1,6 +1,6 @@
 ---
 title: Earlier Versions Support Policy
-page_title: Support Policy for Earlier Kendo UI Versions | Support and Distribution | Kendo UI for jQuery
+page_title: Support Policy for Earlier Kendo UI Versions | Support and Distribution 
 description: "Get started with Kendo UI for jQuery and learn about the support policy on earlier versions, how bug fixes and feature requests are implemented, and how you can get them."
 slug: old_versions_support_policy
 position: 50

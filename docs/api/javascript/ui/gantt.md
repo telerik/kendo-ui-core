@@ -261,6 +261,67 @@ Defines the width of the column resize handle in pixels. Apply a larger value fo
     });
     </script>
 
+### columnMenu `Boolean|Object` *(default: false)*
+
+If set to `true`, the Gantt displays the column menu when the user clicks the **Chevron** icon in the column headers. The column menu allows the user to show and hide columns, and, if filtering and sorting are enabled, filter and sort the data. By default, the column menu is disabled. Can be set to a JavaScript object which represents the column menu configuration.
+
+#### Example - enabling the column menu
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      columnMenu: true,
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "Task3",
+          start: new Date("2014/6/17 13:00"),
+          end: new Date("2014/6/17 15:00")
+        }
+
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        {
+          field: "title",
+          menu: false
+        },
+        {
+          field: "start",
+          title: "Start Time"
+        },
+        {
+          field: "end",
+          title: "End Time"
+        }
+      ]
+    });
+    </script>
+
 ### columns `Array`
 
 The configuration of the Gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
@@ -299,6 +360,247 @@ The configuration of the Gantt columns. An array of JavaScript objects or string
         }
       ],
       columns: ["title" , "start"]
+    });
+    </script>
+
+### columns.attributes `Object`
+
+The HTML attributes of the table cell (`<td>`) that is rendered for the column.
+
+> Quote all HTML attributes which are JavaScript keywords (for example, `class`).
+
+#### Example - specifyinging the column HTML attributes
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      columns: [{
+        field: "title",
+        attributes: {
+          "class": "highlight",
+          style: "text-align: right"
+        }
+      }, {
+        field: "start"
+      }]
+    });
+    </script>
+    <style>
+      .highlight {
+        color: red;
+      }
+    </style>
+    // The table cells look like `<td class="name-cell" style="text-align: right">...</td>`.
+
+### columns.columns `Array`
+
+The columns which will be rendered as child columns under this group column header.
+
+> Group columns cannot be data-bound and support a limited number of bound column settings such as title.
+
+#### Example - setting the column group column for displaying multicolumn headers
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      columns: [{
+        title: "Grouped column",
+        columns: [{
+          field: "title"
+        }, {
+          field: "start"
+        }]
+      }]
+    });
+    </script>
+
+### columns.editable `Boolean` *(default: false)*
+
+Specifies whether this column can be edited by the user.
+
+#### Example - set "title" column as editable
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        { field: "title", title: "Title", editable: true }
+      ]
+    });
+    </script>
+
+### columns.editor `Function`
+
+Provides a way to specify a custom editing UI for the column. To create the editing UI, use the `container` parameter.
+
+> * The editing UI has to contain an element with a set `name` HTML attribute. The attribute value has to match the [`field`](/api/javascript/ui/gantt#configuration-columns.field) name.
+> * The validation settings that are defined in the `model.fields` configuration will not be applied automatically. In order for the validation to work, you (the developer) are responsible for attaching the corresponding validation attributes to the editor input. If the custom editor is a widget, to avoid visual issues, you can [customize the tooltip position of the validation warning](/framework/validator/overview#customizing-the-tooltip-position).
+
+#### Parameters
+
+##### container `jQuery`
+
+The jQuery object that represents the container element.
+
+##### options `Object`
+
+##### options.field `String`
+
+The name of the field to which the column is bound.
+
+##### options.format `String`
+
+The format string of the column that is specified through the [`format`](/api/javascript/ui/gantt#configuration-columns.format) option.
+
+##### options.model `kendo.data.GanttTask`
+
+The model instance to which the current table row is bound.
+
+#### Example - creating a custom column editor using the Kendo UI AutoComplete
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      columns: [{
+        field: "title",
+        editor: function(container, options) {
+          // create an input element
+          var input = $("<input/>");
+          // set its name to the field to which the column is bound ('title' in this case)
+          input.attr("name", options.field);
+          // append it to the container
+          input.appendTo(container);
+          // initialize a Kendo UI AutoComplete
+          input.kendoAutoComplete({
+            dataTextField: "title",
+            dataSource: [
+              { title: "Jackson" },
+              { title: "Strong" },
+              { title: "Simon"}
+            ]
+          });
+        }
+      }, "start", "end"]
+    });
+    </script>
+
+### columns.expandable `Boolean` *(default: false)*
+
+If set to `true`, the column will show the icons that are used for expanding and collapsing child rows. By default, the "title" column of the Gantt is expandable.
+
+#### Example - making the second column expandable
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [{
+        field: "id",
+        expandable: true
+      }, "title" , "start", "end"]
     });
     </script>
 
@@ -341,15 +643,16 @@ The field to which the column is bound. The value of this field is displayed by 
     });
     </script>
 
-### columns.title `String`
+### columns.filterable `Boolean|Object` *(default: true)*
 
-The text that is displayed in the column header cell. If not set the [field](/api/javascript/ui/gantt#configuration-columns.field) is used.
+If set to `true` and if filtering is enabled for the entire Gantt, a filter menu will be displayed for this column. If set to `false`, the filter menu will not be displayed. By default, a filter menu is displayed for all columns when filtering is enabled through the [`filterable`](/api/javascript/ui/gantt#configuration-filterable) option. Can be set to a JavaScript object which represents the filter menu configuration.
 
-#### Example - set the title of a column
+#### Example - disable filtering
 
     <div id="gantt"></div>
     <script>
     $("#gantt").kendoGantt({
+      filterable: true,
       dataSource: [
         {
           id: 1,
@@ -375,7 +678,104 @@ The text that is displayed in the column header cell. If not set the [field](/ap
           type: 1
         }
       ],
-      columns: [ { field: "title", title: "Task Title" } ]
+      columns: [{
+        field: "title",
+        filterable: false
+      }, "start", "end"]
+    });
+    </script>
+
+### columns.filterable.ui `String|Function`
+
+The `role` [data attribute](/framework/data-attribute-initialization) of the widget that is used in the filter menu, or a JavaScript function which initializes that widget.
+
+#### Example - specifyinging the filter UI as a string
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      filterable: true,
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [{
+        field: "title"
+      }, {
+        field: "start",
+        filterable: {
+          ui: "datepicker" // use Kendo UI DatePicker
+        }
+      }, {
+        field: "end"
+      }]
+    });
+    </script>
+
+#### Example - initializing the filter UI
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      filterable: true,
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [{
+        field: "title"
+      }, {
+        field: "start",
+        filterable: {
+          ui: function(element) {
+            element.kendoDatePicker(); // initialize a Kendo UI DatePicker
+          }
+        }
+      }, {
+        field: "end"
+      }]
     });
     </script>
 
@@ -429,6 +829,555 @@ The format that is applied to the value before it is displayed. Takes the form "
         { field: "start", title: "Start Time", format: "{0:MM/dd hh:mm}" },
         { field: "end", title: "End Time", format: "{0:MM/dd hh:mm}" }
       ]
+    });
+    </script>
+
+### columns.headerAttributes `Object`
+
+The HTML attributes of the table header cell (`<th>`) that is rendered for the column.
+
+> Quote the HTML attributes which are JavaScript keywords (for example, `class`).
+
+#### Example - specifyinging column header HTML attributes
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "Task3",
+          start: new Date("2014/6/17 13:00"),
+          end: new Date("2014/6/17 15:00")
+        }
+
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        {
+          field: "start",
+          title: "Start Time",
+          headerAttributes: {
+            "class": "name-header",
+            style: "text-align: right"
+          }
+        },
+        { field: "end", title: "End Time" }
+      ]
+    });
+    </script>
+
+### columns.headerTemplate `String|Function`
+
+The [`template`](/api/javascript/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/javascript/ui/gantt/configuration/columns.title) column option is displayed in the column header cell.
+
+> If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result, the template must contain only inline elements.
+
+#### Example - defining the column header template as a string
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "Task3",
+          start: new Date("2014/6/17 13:00"),
+          end: new Date("2014/6/17 15:00")
+        }
+
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        {
+          field: "title",
+          headerTemplate: '<input type="checkbox" id="check-all" /><label for="check-all">check all</label>'
+        },
+        {
+          field: "start",
+          title: "Start Time"
+        },
+        {
+          field: "end",
+          title: "End Time"
+        }
+      ]
+    });
+    </script>
+
+### columns.hidden `Boolean` *(default: false)*
+
+If set to `true`, the Gantt will not display the column. By default, all columns are displayed.
+
+#### Example - hiding columns
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "Task3",
+          start: new Date("2014/6/17 13:00"),
+          end: new Date("2014/6/17 15:00")
+        }
+
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        {
+          field: "title",
+          hidden: true
+        },
+        {
+          field: "start",
+          title: "Start Time"
+        },
+        {
+          field: "end",
+          title: "End Time"
+        }
+      ]
+    });
+    </script>
+
+### columns.menu `Boolean`
+
+If set to `true`, the Gantt will display the column in the column menu. By default, the column menu includes all data-bound columns, that is, the ones with a set [`field`](/api/javascript/ui/gantt#configuration-columns.field) option.
+
+#### Example - hiding a column from the column menu
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      columnMenu: true,
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "Task3",
+          start: new Date("2014/6/17 13:00"),
+          end: new Date("2014/6/17 15:00")
+        }
+
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        {
+          field: "title",
+          menu: false
+        },
+        {
+          field: "start",
+          title: "Start Time"
+        },
+        {
+          field: "end",
+          title: "End Time"
+        }
+      ]
+    });
+    </script>
+
+### columns.minScreenWidth `Number`
+
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/gantt/configuration/columns.hidden) setting and the two cannot not be used at the same time.
+
+#### Example - hiding columns when the screen is smaller than a given width
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "Task3",
+          start: new Date("2014/6/17 13:00"),
+          end: new Date("2014/6/17 15:00")
+        }
+
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        {
+          field: "title"
+        },
+        {
+          field: "start",
+          title: "Start Time",
+          minScreenWidth: 750
+        },
+        {
+          field: "end",
+          title: "End Time",
+          minScreenWidth: 750
+        }
+      ]
+    });
+    </script>
+
+
+### columns.sortable `Boolean|Object` *(default: false)*
+
+If set to `true` the user could sort this column by clicking its header cells. By default sorting is disabled.
+
+#### Example - set "start" column as sortable
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "Task3",
+          start: new Date("2014/6/17 13:00"),
+          end: new Date("2014/6/17 15:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        { field: "title", title: "Title", sortable: true }
+      ]
+    });
+    </script>
+
+### columns.sortable.compare `Function`
+
+A JavaScript function for comparing the values.
+
+* If the first argument is less than the second one, returns `-1`.
+* If both arguments are the same, returns `0`.
+* If the first argument is greater than the second one, returns `+1`.
+
+#### Example - defining the custom compare function
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "TaskOne",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "TaskLongTitle",
+          start: new Date("2014/6/17 13:00"),
+          end: new Date("2014/6/17 15:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [
+        {
+          field: "title",
+          title: "Title",
+          sortable: {
+            compare: function(a, b) {
+              return a.title.length - b.title.length;
+            }
+          }
+        }
+      ]
+    });
+    </script>
+
+### columns.template `String|Function`
+
+The [`template`](/api/javascript/kendo/methods/template) which renders the column content. The Gantt renders table rows (`<tr>`) which represent the data source items.
+Each table row consists of table cells (`<td>`) which represent the GanttList columns. By default, the HTML-encoded value of the [`field`](/api/javascript/ui/gantt#configuration-columns.field) is displayed in the column.
+
+> To customize the way the column displays its value, use `template`.
+
+#### Example - setting the template as a string (wrapping the column value in HTML)
+
+    <div id="gantt"></div>
+    <script>
+      $("#gantt").kendoGantt({
+        dataSource: [
+          {
+            id: 1,
+            orderId: 0,
+            parentId: null,
+            title: "Task1",
+            start: new Date("2014/6/17 9:00"),
+            end: new Date("2014/6/17 11:00")
+          },
+          {
+            id: 2,
+            orderId: 1,
+            parentId: null,
+            title: "Task2",
+            start: new Date("2014/6/17 12:00"),
+            end: new Date("2014/6/17 14:00")
+          },
+          {
+            id: 3,
+            orderId: 2,
+            parentId: null,
+            title: "Task3",
+            start: new Date("2014/6/17 13:00"),
+            end: new Date("2014/6/17 15:00")
+          }
+        ],
+        columns: [
+          { field: "id" },
+          { field: "title", template: "<strong>#: title #</strong>" }
+        ]
+      });
+    </script>
+
+#### Example - setting an external template with conditional formatting and a button handler
+
+    <script type="text/x-kendo-template" id="template">
+        # if (data.summary) { #
+            <button class='k-button btn-summary'>Click summary</button>
+        # } #
+    </script>
+
+    <div id="gantt"></div>
+
+    <script>
+      $("#gantt").kendoGantt({
+        dataSource: [
+          {
+            id: 1,
+            orderId: 0,
+            parentId: null,
+            title: "Task1",
+            summary: true,
+            start: new Date("2014/6/17 9:00"),
+            end: new Date("2014/6/17 11:00")
+          },
+          {
+            id: 2,
+            orderId: 1,
+            parentId: null,
+            title: "Task2",
+            summary: false,
+            start: new Date("2014/6/17 12:00"),
+            end: new Date("2014/6/17 14:00")
+          },
+          {
+            id: 3,
+            orderId: 2,
+            parentId: 1,
+            title: "Task3",
+            summary: false,
+            start: new Date("2014/6/17 13:00"),
+            end: new Date("2014/6/17 15:00")
+          }
+        ],
+        columns: [
+          { field: "id" },
+          { field: "title" },
+          { field: "summary", template: $("#template").html() }
+        ]
+      })
+      .on("click", ".btn-summary", function(e) {
+        var gantt = $(e.delegateTarget).data("kendoGantt");
+        var dataItem = gantt.dataItem($(e.currentTarget).closest("tr"));
+        alert("Summary clicked: " + dataItem.title)
+      });
+    </script>
+
+### columns.title `String`
+
+The text that is displayed in the column header cell. If not set the [field](/api/javascript/ui/gantt#configuration-columns.field) is used.
+
+#### Example - set the title of a column
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [ { field: "title", title: "Task Title" } ]
     });
     </script>
 
@@ -512,94 +1461,6 @@ The width of the column. Numeric values are treated as pixels.
     });
     </script>
 
-### columns.editable `Boolean` *(default: false)*
-
-Specifies whether this column can be edited by the user.
-
-#### Example - set "title" column as editable
-
-    <div id="gantt"></div>
-    <script>
-    $("#gantt").kendoGantt({
-      dataSource: [
-        {
-          id: 1,
-          orderId: 0,
-          parentId: null,
-          title: "Task1",
-          start: new Date("2014/6/17 9:00"),
-          end: new Date("2014/6/17 11:00")
-        },
-        {
-          id: 2,
-          orderId: 1,
-          parentId: null,
-          title: "Task2",
-          start: new Date("2014/6/17 12:00"),
-          end: new Date("2014/6/17 14:00")
-        }
-      ],
-      dependencies: [
-        {
-          predecessorId: 1,
-          successorId: 2,
-          type: 1
-        }
-      ],
-      columns: [
-        { field: "title", title: "Title", editable: true }
-      ]
-    });
-    </script>
-
-### columns.sortable `Boolean` *(default: false)*
-
-If set to `true` the user could sort this column by clicking its header cells. By default sorting is disabled.
-
-#### Example - set "start" column as sortable
-
-    <div id="gantt"></div>
-    <script>
-    $("#gantt").kendoGantt({
-      dataSource: [
-        {
-          id: 1,
-          orderId: 0,
-          parentId: null,
-          title: "Task1",
-          start: new Date("2014/6/17 9:00"),
-          end: new Date("2014/6/17 11:00")
-        },
-        {
-          id: 2,
-          orderId: 1,
-          parentId: null,
-          title: "Task2",
-          start: new Date("2014/6/17 12:00"),
-          end: new Date("2014/6/17 14:00")
-        },
-        {
-          id: 3,
-          orderId: 2,
-          parentId: null,
-          title: "Task3",
-          start: new Date("2014/6/17 13:00"),
-          end: new Date("2014/6/17 15:00")
-        }
-      ],
-      dependencies: [
-        {
-          predecessorId: 1,
-          successorId: 2,
-          type: 1
-        }
-      ],
-      columns: [
-        { field: "title", title: "Title", sortable: true }
-      ]
-    });
-    </script>
-
 ### currentTimeMarker `Boolean|Object` *(default: true)*
 
 If set to `false` the "current time" marker of the Gantt would not be displayed.
@@ -673,7 +1534,7 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
             fields: {
               id: { from: "ID", type: "number" },
               orderId: { from: "OrderID", type: "number", validation: { required: true } },
-              parentId: { from: "ParentID", type: "number", validation: { required: true } },
+              parentId: { from: "ParentID", type: "number", nullable: true, validation: { required: true } },
               start: { from: "Start", type: "date" },
               end: { from: "End", type: "date" },
               title: { from: "Title", defaultValue: "", type: "string" },
@@ -740,7 +1601,7 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
           fields: {
             id: { from: "ID", type: "number" },
             orderId: { from: "OrderID", type: "number", validation: { required: true } },
-            parentId: { from: "ParentID", type: "number", validation: { required: true } },
+            parentId: { from: "ParentID", type: "number", nullable: true, validation: { required: true } },
             start: { from: "Start", type: "date" },
             end: { from: "End", type: "date" },
             title: { from: "Title", defaultValue: "", type: "string" },
@@ -815,7 +1676,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
             fields: {
               id: { from: "ID", type: "number" },
               orderId: { from: "OrderID", type: "number", validation: { required: true } },
-              parentId: { from: "ParentID", type: "number", validation: { required: true } },
+              parentId: { from: "ParentID", type: "number", defaultValue: null, nullable: true, validation: { required: true } },
               start: { from: "Start", type: "date" },
               end: { from: "End", type: "date" },
               title: { from: "Title", defaultValue: "", type: "string" },
@@ -900,7 +1761,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
           fields: {
             id: { from: "ID", type: "number" },
             orderId: { from: "OrderID", type: "number", validation: { required: true } },
-            parentId: { from: "ParentID", type: "number", validation: { required: true } },
+            parentId: { from: "ParentID", type: "number", defaultValue: null, nullable: true, validation: { required: true } },
             start: { from: "Start", type: "date" },
             end: { from: "End", type: "date" },
             title: { from: "Title", defaultValue: "", type: "string" },
@@ -1254,6 +2115,48 @@ If set to `false` the user won't be able to move tasks.
     });
     </script>
 
+### editable.plannedTasks `Boolean` *(default: false)*
+
+If set to `true` the default pop-up editor of the Gantt will render the `plannedStart` and `plannedEnd` editors for the edited task.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          plannedStart: new Date("2014/6/17 9:00"),
+          plannedEnd: new Date("2014/6/17 10:00"),
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          plannedStart: new Date("2014/6/17 12:00"),
+          plannedEnd: new Date("2014/6/17 16:00"),
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [{
+        predecessorId: 1,
+        successorId: 2,
+        type: 1
+      }],
+      editable: {
+      	plannedTasks: true
+      }
+    });
+    </script>
+
 ### editable.reorder `Boolean` *(default: true)*
 
 If set to `false` the user won't be able to reorder tasks in the task list.
@@ -1376,6 +2279,39 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
     });
     </script>
 
+#### Example - using MVVM in the popup editor template
+
+    <script id="editor" type="text/x-kendo-template">
+       <h3>Edit meeting</h3>
+       <p>
+           <label>Title: <input data-bind="value: title" /></label>
+       </p>
+       <p>
+           <label>Start: <input data-role="datetimepicker" data-bind="value: start" /></label>
+       </p>
+       <p>
+           <label>End: <input data-role="datetimepicker" data-bind="value: end" /></label>
+       </p>
+    </script>
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }
+      ],
+      editable: {
+      	template: $("#editor").html()
+      }
+    });
+    </script>
+
 ### editable.update `Boolean` *(default: true)*
 
 If set to `false` the user won't be able to update tasks.
@@ -1416,22 +2352,16 @@ If set to `false` the user won't be able to update tasks.
     });
     </script>
 
-#### Example - using MVVM in the popup editor template
-    <script id="editor" type="text/x-kendo-template">
-       <h3>Edit meeting</h3>
-       <p>
-           <label>Title: <input data-bind="value: title" /></label>
-       </p>
-       <p>
-           <label>Start: <input data-role="datetimepicker" data-bind="value: start" /></label>
-       </p>
-       <p>
-           <label>End: <input data-role="datetimepicker" data-bind="value: end" /></label>
-       </p>
-    </script>
+### filterable `Boolean|Object` *(default: false)*
+
+If set to `true`, the user can filter the data source by using the Gantt filter menu. By default, filtering is disabled. Can be set to a JavaScript object which represents the filter menu configuration.
+
+#### Example - enabling and configuring filtering
+
     <div id="gantt"></div>
     <script>
     $("#gantt").kendoGantt({
+      filterable: true,
       dataSource: [
         {
           id: 1,
@@ -1440,11 +2370,69 @@ If set to `false` the user won't be able to update tasks.
           title: "Task1",
           start: new Date("2014/6/17 9:00"),
           end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
         }
       ],
-      editable: {
-      	template: $("#editor").html()
-      }
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [{
+        field: "title",
+        filterable: false
+      }, "start", "end"]
+    });
+    </script>
+
+### reorderable `Boolean` *(default:false)*
+
+If set to `true`, the user can reorder the columns in the GanttList section of the widget by dragging their header cells. By default, reordering is disabled.
+
+#### Example - enabling column reordering
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      reorderable: true,
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      columns: [{
+        field: "title",
+        filterable: false
+      }, "start", "end"]
     });
     </script>
 
@@ -2084,6 +3072,66 @@ The text similar to "Complete" displayed in Gantt task editor.
     });
     </script>
 
+### messages.editor.plannedEnd `String` *(default: "Planned End")*
+
+The text similar to "Planned End" displayed in Gantt task editor.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      editable: {
+        plannedTasks: true
+      },
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         plannedStart: new Date("2014/6/17 8:00"),
+         plannedEnd: new Date("2014/6/17 12:00"),
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 11:00")
+      }],
+      messages: {
+        editor: {
+          plannedEnd:"Task Planned to End"
+        }
+      }
+    });
+    </script>
+
+### messages.editor.plannedStart `String` *(default: "Planned Start")*
+
+The text similar to "Planned Start" displayed in Gantt task editor.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      editable: {
+        plannedTasks: true
+      },
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         plannedStart: new Date("2014/6/17 8:00"),
+         plannedEnd: new Date("2014/6/17 12:00"),
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 11:00")
+      }],
+      messages: {
+        editor: {
+          plannedStart:"Task Planned to Start"
+        }
+      }
+    });
+    </script>
+
 ### messages.editor.resources `String` *(default: "Resources")*
 
 The text similar to "Resources" displayed in Gantt task editor.
@@ -2282,6 +3330,38 @@ The text similar to "Units" displayed in Gantt task editor.
     });
     </script>
 
+### messages.plannedTasks `Object`
+
+The configuration of the Gantt messages for Planned tasks.
+
+### messages.plannedTasks.switchText `String` *(default: "Planned Tasks")*
+
+The text that would be displayed on the switch allowing the user to turn on and off the PlannedTasks view in the Gantt Timeline.
+
+### messages.plannedTasks.offsetTooltipAdvanced `String` *(default: "Met deadline earlier")*
+
+The text rendered in the Tooltip that would be displayed for tasks which have finished in advance compared to their plannedEnd.
+
+### messages.plannedTasks.offsetTooltipDelay `String` *(default: "Delay")*
+
+The text rendered in the Tooltip that would be displayed for tasks which have finished with delay compared to their plannedEnd.
+
+### messages.plannedTasks.seconds `String` *(default: "seconds")*
+
+The text for "seconds" displayed in the Advanced/Delayed Tooltip (see above).
+
+### messages.plannedTasks.minutes `String` *(default: "minutes")*
+
+The text for "minutes" displayed in the Advanced/Delayed Tooltip (see above).
+
+### messages.plannedTasks.hours `String` *(default: "hours")*
+
+The text for "hours" displayed in the Advanced/Delayed Tooltip (see above).
+
+### messages.plannedTasks.days `String` *(default: "days")*
+
+The text for "days" displayed in the Advanced/Delayed Tooltip (see above).
+
 ### messages.save `String` *(default: "Save")*
 
 The text similar to "Save" displayed in Gantt.
@@ -2301,6 +3381,29 @@ The text similar to "Save" displayed in Gantt.
       }],
       messages: {
         save: "Update"
+      }
+    });
+    </script>
+
+### messages.selectView `String`
+
+The aria-label of the View select element.
+
+#### Example - set the "previous" message
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 11:00")
+      }],
+      messages: {
+        selectView: "Custom"
       }
     });
     </script>
@@ -2488,6 +3591,11 @@ The author of the PDF document.
     });
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
@@ -2572,6 +3680,14 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/gantt#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -2927,6 +4043,29 @@ If set to `false` the user won't be able to select tasks in the Gantt. By defaul
     });
     </script>
 
+### showPlannedTasks `Boolean` *(default: false)*
+
+If set to `true`, the Gantt Timeline will render both the planned and the actual execution of tasks. In order to display properly, the Planned vs. Actual view would need the `plannedStart` and `plannedEnd` date fields for tasks to be set.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [{
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        plannedStart: new Date("2014/6/17 9:00"),
+        plannedEnd: new Date("2014/6/17 16:00")
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 18:00")
+      }],
+      showPlannedTasks: false
+    });
+    </script>
+
 ### showWorkDays `Boolean` *(default: true)*
 
 If set to `false`, Gantt views will show all days of the week. By default the views display only business days.
@@ -3016,11 +4155,13 @@ and the string value will be passed as an argument to a [`kendo.template()`](/ap
 
 If a `Function` value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Gantt Toolbar contents.
 
-If an `Array` value is assigned, it will be treated as the list of commands displayed in the Gantt Toolbar. Commands can be custom or built-in ("append", "pdf").
+If an `Array` value is assigned, it will be treated as the list of commands displayed in the Gantt Toolbar. Commands can be custom or built-in ("append", "pdf", "plannedTasks").
 
 The "append" command adds a new task to the gantt.
 
 The "pdf" command exports the gantt in PDF format.
+
+The "plannedTasks" command will render the plannedTasks Switch on the Toolbar. That Switch allows the user to turn on and off the Planned vs. Actual view in the Timeline of the Gantt. When turned on, that view will render both the planned and the actual duration of all tasks. When enabled, `plannedStart` and `plannedEnd` date fields of tasks are required to properly render planned duration.
 
 #### Example - configure the Gantt Toolbar as a string template
     <div id="gantt"></div>
@@ -3091,6 +4232,7 @@ This class can be used to obtain reference to the button after Gantt initializat
       toolbar: [
         { name: "append" },
         { name: "pdf" },
+        { name: "plannedTasks" },
         { name: "custom" }
       ],
       dataSource: [
@@ -3121,6 +4263,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
     </script>
     <script>
     function toolbar_click() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Toolbar command is clicked!");
       return false;
     }
@@ -3145,6 +4288,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
     <div id="gantt"></div>
     <script>
     function toolbar_click() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Toolbar command is clicked!");
       return false;
     }
@@ -4095,7 +5239,7 @@ Clears the currently selected task or dependency.
 
 ### dataItem
 
-Returns the data item to which the specified table row from the TreeList is bound
+Returns the data item to which the specified table row from the GanttList is bound
 
 #### Parameters
 
@@ -4125,6 +5269,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
     });
     var gantt = $("#gantt").data("kendoGantt");
     var task = gantt.dataItem("tr:eq(0)");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.title); // displays "Task1"
     </script>
 
@@ -4205,7 +5350,7 @@ Opens the popup window to edit the GanttTask object which is received from the c
 
 A kendo.data.GanttTask object which represents the currently selected task.
 
-#### Example - Edit the items from the Task Treelist.
+#### Example - Edit the items from the Task GanttList.
 
     <div id="gantt"></div>
     <script>
@@ -4223,7 +5368,7 @@ A kendo.data.GanttTask object which represents the currently selected task.
             fields: {
               id: { from: "ID", type: "number" },
               orderId: { from: "OrderID", type: "number", validation: { required: true } },
-              parentId: { from: "ParentID", type: "number", validation: { required: true } },
+              parentId: { from: "ParentID", type: "number", nullable: true, validation: { required: true } },
               start: { from: "Start", type: "date" },
               end: { from: "End", type: "date" },
               title: { from: "Title", defaultValue: "", type: "string" },
@@ -4235,7 +5380,7 @@ A kendo.data.GanttTask object which represents the currently selected task.
         }
       }
     });
-    $(".k-gantt").delegate(".k-gantt-treelist .k-grid-content tr", "click", function(e) {           
+    $(".k-gantt").delegate(".k-gantt-treelist .k-grid-content tr", "click", function(e) {
       var gantt = $("#gantt").data("kendoGantt");
       var task = gantt.dataItem(this);
       gantt.editTask(task);
@@ -4632,6 +5777,7 @@ If invoked prevents the data bind action and `dataBound` event will not fire.
         }
       ],
       dataBinding: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBinding");
       }
     });
@@ -4642,6 +5788,7 @@ If invoked prevents the data bind action and `dataBound` event will not fire.
     <div id="gantt"></div>
     <script>
     function gantt_dataBinding(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dataBinding");
     }
     $("#gantt").kendoGantt({
@@ -4688,6 +5835,7 @@ The widget instance which fired the event.
         }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
       }
     });
@@ -4698,6 +5846,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dataBound");
     }
     $("#gantt").kendoGantt({
@@ -4754,6 +5903,7 @@ If invoked prevents the add action.
         }
       ],
       add: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Add", e.task.title);
       }
     });
@@ -4764,6 +5914,7 @@ If invoked prevents the add action.
     <div id="gantt"></div>
     <script>
     function gantt_add(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Add", e.task.title);
     }
     $("#gantt").kendoGantt({
@@ -4823,6 +5974,7 @@ The widget instance which fired the event.
       ],
       columns: [ { field: "title", title: "Title", editable: true } ],
       edit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Editing task: ", e.task.title);
       }
     });
@@ -4833,6 +5985,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_edit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Editing task: ", e.task.title)
     }
     $("#gantt").kendoGantt({
@@ -4909,9 +6062,12 @@ The widget instance which fired the event.
       ],
       remove: function(e) {
         if (e.task) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Removing task:", e.task.title);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(kendo.format("Removing {0} related dependencies", e.dependencies.length));
         } else {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Removing dependency with id:", e.dependencies[0].id);
         }
       }
@@ -4924,9 +6080,12 @@ The widget instance which fired the event.
     <script>
     function gantt_remove(e) {
       if (e.task) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Removing task:", e.task.title);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Removing {0} related dependencies", e.dependencies.length));
       } else {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Removing dependency with id:", e.dependencies[0].id);
       }
     }
@@ -5003,6 +6162,7 @@ The widget instance which fired the event.
       ],
       columns: [ { field: "title", title: "Title", editable: true } ],
       cancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Cancel editing task: ", e.task.title);
       }
     });
@@ -5013,6 +6173,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_cancel(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Cancel editing task: ", e.task.title)
     }
     $("#gantt").kendoGantt({
@@ -5072,6 +6233,7 @@ The widget instance which fired the event.
         }
       ],
       save: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Save task:", e.task.title);
       }
     });
@@ -5082,6 +6244,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_save(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Save task:", e.task.title);
     }
     $("#gantt").kendoGantt({
@@ -5141,6 +6304,7 @@ The widget instance which fired the event.
 
         if (selection) {
           task = this.dataItem(selection);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(kendo.format("{0} is selected", task.title));
         }
       }
@@ -5157,6 +6321,7 @@ The widget instance which fired the event.
 
         if (selection) {
           task = this.dataItem(selection);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(kendo.format("{0} is selected", task.title));
         }
     }
@@ -5182,6 +6347,86 @@ The widget instance which fired the event.
     });
     var gantt = $("#gantt").data("kendoGantt");
     gantt.bind("change", gantt_change);
+    </script>
+
+### columnHide
+
+Fires when the user hides a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [`column`](/api/javascript/ui/gantt#configuration-columns) configuration.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+      $("#gantt").kendoGantt({
+        columns: ["title", "start", "end"],
+        dataSource: [{
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }],
+        columnMenu: true,
+        columnHide: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.column.field); // displays the field of the hidden column
+        }
+      });
+    </script>
+
+### columnReorder
+
+Fires when the user changes the order of a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [`column`](/api/javascript/ui/gantt#configuration-columns) configuration.
+
+##### e.newIndex `Number`
+
+The new column index.
+
+##### e.oldIndex `Number`
+
+The previous column index.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+      $("#gantt").kendoGantt({
+        columns: ["title", "start", "end"],
+        dataSource: [{
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }],
+        reorderable: true,
+        columnReorder: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.column.field, e.newIndex, e.oldIndex);
+        }
+      });
     </script>
 
 ### columnResize
@@ -5224,6 +6469,7 @@ The widget instance which fired the event.
       }],
       resizable: true,
       columnResize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field, e.newWidth, e.oldWidth);
       }
     });
@@ -5234,6 +6480,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_columnResize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field, e.newWidth, e.oldWidth);
     }
     $("#gantt").kendoGantt({
@@ -5250,6 +6497,43 @@ The widget instance which fired the event.
     });
     var gantt = $("#gantt").data("kendoGantt");
     gantt.bind("columnResize", gantt_columnResize);
+    </script>
+
+### columnShow
+
+Fires when the user shows a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [`column`](/api/javascript/ui/ganttt#configuration-columns) configuration.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+
+      $("#gantt").kendoGantt({
+        columns: ["title", "start", "end"],
+        dataSource: [{
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }],
+        columnMenu: true,
+        columnShow: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.column.field); // displays the field of the shown column
+        }
+      });
     </script>
 
 ### navigate
@@ -5301,6 +6585,7 @@ The widget instance which fired the event.
         }
       ],
       navigate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Navigate to {0} view", e.view.charAt(0).toUpperCase() + e.view.slice(1)));
       }
     });
@@ -5311,6 +6596,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
       function gantt_navigate(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Navigate to {0} view", e.view.charAt(0).toUpperCase() + e.view.slice(1)));
       }
       $("#gantt").kendoGantt({
@@ -5373,6 +6659,7 @@ The widget instance which fired the event.
         }
       ],
       moveStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Move start ", e.task.title);
       }
     });
@@ -5383,6 +6670,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_moveStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Move start ", e.task.title);
     }
     $("#gantt").kendoGantt({
@@ -5445,7 +6733,9 @@ The widget instance which fired the event.
         }
       ],
       move: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's curren Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's curren End {0:g}", e.end));
       }
     });
@@ -5456,7 +6746,9 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_move(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's curren Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's curren End {0:g}", e.end));
     }
     $("#gantt").kendoGantt({
@@ -5519,7 +6811,9 @@ The widget instance which fired the event.
         }
       ],
       moveEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's new Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's new End {0:g}", e.end));
       }
     });
@@ -5530,7 +6824,9 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function moveEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's new Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's new End {0:g}", e.end));
     }
     $("#gantt").kendoGantt({
@@ -5647,6 +6943,7 @@ The widget instance which fired the event.
         }
       ],
       resizeStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Resize start ", e.task.title);
       }
     });
@@ -5657,6 +6954,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function resizeStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Resize start ", e.task.title);
     }
     $("#gantt").kendoGantt({
@@ -5717,7 +7015,9 @@ The widget instance which fired the event.
         }
       ],
       resize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's curren Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's curren End {0:g}", e.end));
       }
     });
@@ -5728,7 +7028,9 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_resize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's curren Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's current End {0:g}", e.end));
     }
     $("#gantt").kendoGantt({
@@ -5791,7 +7093,9 @@ The widget instance which fired the event.
         }
       ],
       resizeEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's new Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's new End {0:g}", e.end));
       }
     });
@@ -5802,7 +7106,9 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_resizeEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's new Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's new End {0:g}", e.end));
     }
     $("#gantt").kendoGantt({
@@ -5819,4 +7125,49 @@ The widget instance which fired the event.
     });
     var gantt = $("#gantt").data("kendoGantt");
     gantt.bind("resizeEnd", gantt_resizeEnd);
+    </script>
+
+### togglePlannedTasks
+
+The event will be raised upon Toolbar PlannedTasks Switch click. As a result, the planned tasks will be either hidden or shown in the Gantt Timeline view. The event is preventable.
+
+The event handler function context (available via the this keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.showPlannedTasks `Boolean`
+
+Indicates whether the planned tasks are about to be shown (true) or hidden (false).
+
+##### e.preventDefault `Function`
+
+If invoked prevents the action.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      toolbar: ["plannedTasks"],
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          plannedStart: new Date("2014/6/17 9:00"),
+          plannedEnd: new Date("2014/6/17 11:00"),
+          start: new Date("2014/6/17 10:00"),
+          end: new Date("2014/6/17 12:00")
+        }
+      ],
+      togglePlannedTasks: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.showPlannedTasks);
+      }
+    });
     </script>

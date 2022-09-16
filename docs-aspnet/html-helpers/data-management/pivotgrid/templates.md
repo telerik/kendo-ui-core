@@ -1,14 +1,14 @@
 ---
 title: Templates
 page_title: Templates
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and learn about the provided templating options."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn about the provided templating options."
 slug: htmlhelpers_pivotgrid_aspnetcore_templates
 position: 5
 ---
 
 # Templates
 
-The Telerik UI PivotGrid HtmlHelper for {{ site.framework }} provides templating options that can be used to customize the way its data is visualized in the table.
+The Telerik UI PivotGrid component for {{ site.framework }} provides templating options that can be used to customize the way its data is visualized in the table.
 
 Under the hood, the templates use the [Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 
@@ -27,6 +27,7 @@ In the data cell template, you can use the following fields:
 * `measure`&mdash;The value of the data cell measure.
 * `dataItem`&mdash;The data item itself.
 
+```HtmlHelper
     @(Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
@@ -46,6 +47,29 @@ In the data cell template, you can use the following fields:
             #: value #
         # } #
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotgrid name="pivotgrid"
+                     column-width="200" 
+                     height="570" 
+                     datacell-template-id="dataCellTemplate">
+        // Other configuration.
+    </kendo-pivotgrid>
+
+    <script id="dataCellTemplate" type="text/x-kendo-tmpl">
+        # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
+        # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
+        # var value = kendo.toString(kendo.parseFloat(dataItem.value) || "N/A", "c2"); #
+
+        # if (columnMember.children.length || rowMember.children.length) { #
+            <em  style="color: red">#: value # (total)</em>
+        # } else { #
+            #: value #
+        # } #
+    </script>
+```
+{% endif %}
 
 ## Column Header Template
 
@@ -55,12 +79,13 @@ In the column header template, you can use the following fields:
 * `member`&mdash;The member of the corresponding column header cell.
 * `tuple`&mdash;The tuple of the corresponding column header cell.
 
+```HtmlHelper
     @(Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
         .Height(570)
         .ColumnHeaderTemplateId("headerTemplate")
-        // other configuration settings
+        // Other configuration.
     )
 
     <script id="headerTemplate" type="text/x-kendo-tmpl">
@@ -70,6 +95,25 @@ In the column header template, you can use the following fields:
             #: member.caption #
         # } #
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotgrid name="pivotgrid" 
+                     column-width="200"
+                     height="570" 
+                     column-header-template-id="headerTemplate">
+        // Other configuration.
+    </kendo-pivotgrid>
+    
+    <script id="headerTemplate" type="text/x-kendo-tmpl">
+        # if (!member.children.length) { #
+            <em>#: member.caption #</em>
+        # } else { #
+            #: member.caption #
+        # } #
+    </script>
+```
+{% endif %}
 
 ## Row Header Template
 
@@ -79,12 +123,13 @@ In the row header template, you can use the following fields:
 * `member`&mdash;The member of the corresponding column header cell.
 * `tuple`&mdash;The tuple of the corresponding column header cell.
 
+```HtmlHelper
     @(Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
         .Height(570)
-        .ColumnHeaderTemplateId("headerTemplate")
-        // other configuration settings
+        .RowHeaderTemplateId("headerTemplate")
+        // Other configuration.
     )
 
     <script id="headerTemplate" type="text/x-kendo-tmpl">
@@ -94,6 +139,25 @@ In the row header template, you can use the following fields:
             #: member.caption #
         # } #
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pivotgrid name="pivotgrid" 
+                     column-width="200"
+                     height="570"
+                     row-header-template-id="headerTemplate">
+        // Other configuration.
+    </kendo-pivotgrid>
+    
+    <script id="headerTemplate" type="text/x-kendo-tmpl">
+        # if (!member.children.length) { #
+            <em>#: member.caption #</em>
+        # } else { #
+            #: member.caption #
+        # } #
+    </script>
+```
+{% endif %}
 
 ## See Also
 

@@ -4,12 +4,13 @@ page_title: Installing with Bower
 description: "Get started with Telerik UI for ASP.NET Core and install the helpers by using the Bower package manager."
 previous_url: /getting-started/installation/bower-install
 slug: bowerpackage_core
-position: 5
+position: 10
+published: false
 ---
 
 # Installing with Bower
 
-> ASP.NET Core v2.1 no longer supports Bower. For more information on the alternative approach for copying the Kendo UI scripts, refer to the following section on [copying client resources with NPM and Webpack]({% slug npmpackages_core %}).
+> ASP.NET Core v2.1 no longer supports Bower. For more information on the alternative approaches for copying the Kendo UI scripts, refer to [Providing Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) article.
 
 [Bower](https://bower.io/) is a popular package manager for the web that handles frameworks, libraries, assets, and utilities.
 
@@ -90,7 +91,7 @@ This section provides solutions for common issues you might encounter while inst
 
 **Cause** The underlying Git installation is missing the certificate bundle.
 
-**Solution** Follow the steps in [this article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
+**Solution** Follow the steps in [this article](https://docs.microsoft.com/en-us/archive/blogs/phkelley/adding-a-corporate-or-self-signed-certificate-authority-to-git-exes-store).
 
 > * The 1.9.5 Git build does not work with the Bower package.
 > * To use the `@` symbol in the URL for accessing the Kendo UI Bower repository (because of network restrictions or admin rules, for example), encode it as `https://firstname.lasname%40domain.com@bower.telerik.com/bower-kendo-ui.git`.
@@ -114,8 +115,7 @@ This section provides solutions for common issues you might encounter while inst
 
 * [Create your own custom bundles]({% slug custombundles_core %})
 * [Check out the jQuery version support]({% slug jquerysupport_core %})
-* [Check out the web browser support]({% slug webbrowsersupport_core %})
-* [Check out the operation system support]({% slug ossupport_core %})
+* [Check out the operation system and browser support]({% slug ossupport_core %})
 * [Check out the PDF and Excel export support]({% slug exportsupport_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
 
@@ -123,7 +123,6 @@ This section provides solutions for common issues you might encounter while inst
 
 * [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 * [Installing Telerik UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
-* [Installing Telerik UI for ASP.NET Core with NPM]({% slug npmpackages_core %})
 * [Installing Telerik UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
 * [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})

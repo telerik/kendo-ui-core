@@ -1,6 +1,6 @@
 ---
 title: Web Browser Support
-page_title: Web Browser Support | Support and Distribution | Kendo UI for jQuery
+page_title: Web Browser Support | Support and Distribution 
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support, /intro/browser-support
 description: "Get started with Kendo UI for jQuery and learn which are the browsers supported by the framework components."
 slug: wbe_browserand_operating_system_support
@@ -9,20 +9,23 @@ position: 1
 
 # Web Browser Support
 
-The [Kendo UI widgets and framework components](https://demos.telerik.com/kendo-ui/) are designed to support all major web browsers and deliver a cross-browser compatibility, standards compliance, or touch-device support.
+The [Kendo UI widgets and framework components](https://demos.telerik.com/kendo-ui/) are designed to support all major web browsers and deliver a cross-browser compatibility, standards compliance, and touch-device support.
 
-However, depending on the specifics of your project, the components you use, and the versions of the widgets, their browser support may vary.
+However, depending on the specifics of your project, the controls you use, and the versions of the widgets, their browser support may vary.
 
 ## Regular Support
 
 Most [Kendo UI widgets]({% slug welcometo_kendoui %}#list-of-widgets) have no specific limitations as of the browser versions they support.
 
+> Some features may not be available due to browser limitations.
+
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
 | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-| Internet Explorer | 9 or later                    |
+| Internet Explorer* | 9 or later                    |
 | Chrome            | Current and previous          |
-| Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
+| Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history)
+|                   | ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
@@ -68,13 +71,14 @@ The Kendo UI PDF generator is tested and supported in the following desktop brow
 * Internet Explorer 9 and later.
 * Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
 
-> Internet Explorer 9 and Safari do not support the PDF-related option for saving files. To achieve this, you need to [implement a server proxy]({% slug exporting_pdf_kendoui_grid_widget %}#server-proxy).
+> Internet Explorer 9 and Safari do not support the PDF-related option for saving files. To enable PDF export, you need to [implement a server proxy]({% slug exporting_pdf_kendoui_grid_widget %}#server-proxy).
 
 Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Even though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is not supported in mobile browsers and hybrid mobile applications.
 
-## Best Performance
+## Providing Best Performance
 
 To boost the performance of your project:
+
 * Always use an up-to-date browser version.
 * Check **Disable Script Debugging** from your browser configuration options.
 * Activate **Caching** in Internet Explorer.
@@ -95,7 +99,7 @@ To boost the performance of your project:
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
 * Windows Universal apps and [Cordova for Windows 10](https://cordova.apache.org/docs/en/5.1.1/guide/platforms/win8/win10-support.html) environments are not supported, due to the [sandbox restrictions of the environment](https://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx#Automatic_script_filtering). The recommended UI suite for this environment is [UI for Windows Universal](https://www.telerik.com/windows-universal-ui).
 * Unexpected behaviors that occur only in a hybrid application, but not in a standalone supported browser, are by default considered to be triggered by the hybrid environment and unrelated to Kendo UI.
-* It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) over a META tag or an HTTP header:
+* It is highly advisable to use [Internet Explorer Edge mode](https://docs.microsoft.com/en-us/archive/blogs/ie/ies-compatibility-features-for-site-developers) over a META tag or an HTTP header:
 
     ```
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

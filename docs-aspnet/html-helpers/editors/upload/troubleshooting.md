@@ -9,7 +9,7 @@ position: 40
 
 # Troubleshooting
 
-This page provides solutions for common problems you may encounter while working with the Telerik UI Upload HtmlHelper.
+This page provides solutions for common problems you may encounter while working with the Telerik UI Upload component.
 
 {% if site.mvc %}
 
@@ -50,11 +50,12 @@ By default, ASP.NET limits the size of the maximum upload to 4MB. Additionally, 
 1. Change the controller [Session State Behavior](http://msdn.microsoft.com/en-us/library/system.web.sessionstate.sessionstatebehavior.aspx) to `ReadOnly` or `Disabled`. For more information on this topic, refer to the [article on concurrent requests in {{ site.framework }}](http://weblogs.asp.net/imranbaloch/archive/2010/07/10/concurrent-requests-in-asp-net-mvc.aspx).
 1. Enable request batching to reduce the number of concurrent requests.
 
+    ```HtmlHelper
         .Async(async => async
             .Save("Save", "Home")
             .Batch(true)
         )
-
+    ```
 {% endif %}
 
 ## The upload never ends in Safari on iOS and OSX

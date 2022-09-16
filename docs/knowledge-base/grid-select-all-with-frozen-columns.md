@@ -108,11 +108,9 @@ Manually select all records within the `click` event of the checkbox for selecti
             //define template column with checkbox and attach click event handler
             {
               title: 'Select All',
-              headerTemplate: `<input type="checkbox" id="header-chb" class="k-checkbox">
-<label class="k-checkbox-label" for="header-chb"></label>`,
+              headerTemplate: '<input type="checkbox" id="header-chb" class="k-checkbox">',
               template: function(dataItem){
-                return `<input type="checkbox" id="${dataItem.ProductID}" class="k-checkbox">
-<label class="k-checkbox-label" for="${dataItem.ProductID}"></label>`
+                return '<input type="checkbox" id="${dataItem.ProductID}" class="k-checkbox">'
               },
               width: 80,
               locked: true
@@ -147,13 +145,13 @@ Manually select all records within the `click` event of the checkbox for selecti
         grid.element.on("click", ".k-checkbox" , selectRow);
         $('#header-chb').change(function(ev){
           var checked = ev.target.checked;
-          $('.k-checkbox').each(function(idx, item){
+          $('.k-checkbox:not("#header-chb")').each(function(idx, item){
             if(checked){
-              if(!($(item).closest('tr').is('.k-state-selected'))){
+              if(!($(item).closest('tr').is('.k-selected'))){
                 $(item).click();
               }
             } else {
-              if($(item).closest('tr').is('.k-state-selected')){
+              if($(item).closest('tr').is('.k-selected')){
                 $(item).click();
               }
             }
@@ -185,10 +183,10 @@ Manually select all records within the `click` event of the checkbox for selecti
 
           checkedIds[dataItem.id] = checked;
           if (checked) {
-            $("[data-uid='"+dataItem.uid+"']").addClass("k-state-selected");
+            $("[data-uid='"+dataItem.uid+"']").addClass("k-selected");
           } else {
             //-remove selection
-            $("[data-uid='"+dataItem.uid+"']").removeClass("k-state-selected");
+            $("[data-uid='"+dataItem.uid+"']").removeClass("k-selected");
           }
         }
       }
@@ -198,11 +196,19 @@ Manually select all records within the `click` event of the checkbox for selecti
         var view = this.dataSource.view();
         for(var i = 0; i < view.length;i++){
           if(checkedIds[view[i].id]){
-            this.tbody.find("tr[data-uid='" + view[i].uid + "']")
-              .addClass("k-state-selected")
-              .find(".checkbox")
+            $("tr[data-uid='" + view[i].uid + "']")
+              .addClass("k-selected")
+              .find(".k-checkbox")
               .attr("checked","checked");
           }
+        }
+
+        // If all rows on the current page are selected, check the master checkbox.
+        if($("tr.k-selected").length === view.length * 2) {
+          $('#header-chb')[0].checked = true;
+        } else {
+          // If not all rows are selected, the master checkbox should not be checked.
+          $('#header-chb')[0].checked = false;
         }
       }
     </script>

@@ -10,7 +10,7 @@ err_count=0
 
 # List of URLs to check: <from> <to>
 urls="
-/kendo-ui/api/wrappers/jsp /kendo-ui/api/jsp/arcGauge
+/kendo-ui/api/wrappers/jsp /kendo-ui/api/jsp/actionSheet
 /kendo-ui/api/web/grid /kendo-ui/api/javascript/ui/grid
 /kendo-ui/api/mobile/application /kendo-ui/api/javascript/mobile/application
 /kendo-ui/api/mobile/scrollview /kendo-ui/api/javascript/mobile/ui/scrollview
@@ -30,7 +30,7 @@ urls="
 /kendo-ui/api/dataviz/map/layer /kendo-ui/api/javascript/dataviz/map/layer
 /kendo-ui/api/javascript/dataviz/drawing/group /kendo-ui/api/javascript/drawing/group
 /kendo-ui/api/javascript/dataviz/geometry/point /kendo-ui/api/javascript/geometry/point
-/kendo-ui/web/styles-and-layout/appearance-styling /kendo-ui/styles-and-layout/appearance-styling
+/kendo-ui/web/styles-and-layout/appearance-styling /kendo-ui/styles-and-layout/less-themes/overview
 /kendo-ui/web/grid/overview /kendo-ui/controls/data-management/grid/overview
 /kendo-ui/web/treelist/overview /kendo-ui/controls/data-management/treelist/overview
 /kendo-ui/web/autocomplete/overview /kendo-ui/controls/editors/autocomplete/overview

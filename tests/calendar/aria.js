@@ -3,7 +3,7 @@ var Calendar = kendo.ui.Calendar;
 var instance;
 var div;
 
-describe("kendo.ui.Calendar ARIA", function () {
+describe("kendo.ui.Calendar ARIA", function() {
     beforeEach(function() {
 
 
@@ -27,13 +27,21 @@ it("Calendar adds role to the title button", function() {
     assert.equal(instance._title.attr("role"), "button");
 });
 
-it("Calendar adds live aria attributes", function() {
-    assert.equal(instance._title.attr("aria-live"), "assertive");
-    assert.equal(instance._title.attr("aria-atomic"), "true");
-});
-
 it("Calendar adds grid role to MONTH view", function() {
     assert.equal(div.find("table").attr("role"), "grid");
+});
+
+it("Calendar grid has aria-labelledby pointing to its title", function() {
+    assert.isOk(instance._title.attr("id"));
+    assert.equal(div.find("table").attr("aria-labelledby"), instance._title.attr("id"));
+});
+
+it("Calendar grid has aria-multiselectable when options.selectable = multiple", function() {
+    instance.setOptions({
+        selectable: "multiple"
+    });
+
+    assert.equal(div.find("table").attr("aria-multiselectable"), "true");
 });
 
 it("Calendar adds row role to MONTH view's rows", function() {
@@ -44,6 +52,16 @@ it("Calendar adds row role to MONTH view's rows", function() {
 it("Calendar adds gridcell role to MONTH view's cells", function() {
     var cells = div.find("table td");
     assert.equal(cells.filter("[role=gridcell]").length, cells.length);
+});
+
+it("Calendar adds aria-label to MONTH view's header cells", function() {
+    var cells = div.find("table th[aria-label]");
+    var names = kendo.culture().calendar.days.names;
+
+    assert.equal(cells.length, 7);
+    cells.each(function(i, cell) {
+        assert.equal(cell.getAttribute("aria-label"), names[i]);
+    });
 });
 
 it("Calendar adds grid role to YEAR view", function() {
@@ -57,10 +75,22 @@ it("Calendar adds row role to YEAR view's rows", function() {
     assert.equal(rows.filter("[role=row]").length, rows.length);
 });
 
-it("Calendar adds gridcell role to YEAR view's cells", function() {
+it("Calendar adds gridcell to YEAR view's cells", function() {
     instance.navigateUp();
     var cells = div.find("table td");
     assert.equal(cells.filter("[role=gridcell]").length, cells.length);
+});
+
+it("Calendar adds aria-label role to YEAR view's cells links", function() {
+    instance.navigateUp();
+    var cells = div.find("table td a[aria-label]");
+    var names = kendo.culture().calendar.months.names;
+
+    assert.equal(cells.length, 12);
+
+    cells.each(function(i, cell) {
+        assert.equal(cell.getAttribute("aria-label"), names[i]);
+    });
 });
 
 it("Calendar adds aria-disabled to the prev arrow", function() {
@@ -80,7 +110,7 @@ it("Calendar adds aria-disabled to the up nav", function() {
 
 it("Calendar adds aria-selected to the selected cell", function() {
     instance.value(new Date());
-    assert.equal(instance._table.find("td.k-state-selected").attr("aria-selected"), "true");
+    assert.equal(instance._table.find("td.k-selected").attr("aria-selected"), "true");
 });
 
 it("Calendar adds only one aria-selected=true", function() {
@@ -94,7 +124,7 @@ it("Calendar sets id to the selected cell", function() {
     instance.value(new Date(2000, 10, 10));
     instance.value(new Date(2000, 10, 20));
 
-    assert.equal(instance._table.find("td[aria-selected=true]").attr("id"), "test_cell_selected");
+    assert.isOk(instance._table.find("td[aria-selected=true]").last().attr("id"));
 });
 
 it("Calendar has only one cell with id", function() {
@@ -135,5 +165,51 @@ it("Calendar with enabled week has not empty th if not message is set", function
     assert.equal(firstTh.text().trim(), test);
 });
 
+it("only role='grid' element remains in the tabsequence", function() {
+    assert.equal(div.find(".k-nav-prev").attr("tabindex"), -1);
+    assert.equal(div.find(".k-nav-next").attr("tabindex"), -1);
+    assert.equal(div.find(".k-nav-today").attr("tabindex"), -1);
+    assert.equal(div.find(".k-nav-fast").attr("tabindex"), -1);
+});
+
     });
+
+describe("kendo.ui.Calendar aria with AXE", function() {
+    beforeEach(function() {
+        div = $("<div id='test' />").appendTo(Mocha.fixture);
+    });
+
+    afterEach(function() {
+        instance.destroy();
+
+
+        kendo.destroy(Mocha.fixture);
+    });
+
+    it("Calendar is accessible", function(done) {
+        instance = new Calendar(div);
+
+        axeRunFixture(done);
+    });
+
+    it("Calendar is accessible when focused", function(done) {
+        instance = new Calendar(div);
+
+        instance.focus();
+
+        axeRunFixture(done);
+    });
+
+    it("Calendar is accessible when selection is performed", function(done) {
+        instance = new Calendar(div);
+
+        instance.focus();
+        $(instance.element.find("tr:eq(2) td:has(.k-link)")[0]).trigger("click");
+
+        axeRunFixture(done);
+    });
+
+});
 }());
+
+

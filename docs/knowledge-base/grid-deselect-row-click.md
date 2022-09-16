@@ -81,8 +81,8 @@ The following example demonstrates how to deselect a row by clicking only, that 
         var $row = $(rowElement);
         var grid = $("#grid").getKendoGrid();
 
-        if ($row.hasClass("k-state-selected")) {
-        $row.removeClass("k-state-selected");
+        if ($row.hasClass("k-selected")) {
+        $row.removeClass("k-selected");
         e.stopPropagation();
         }
     });

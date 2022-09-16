@@ -14,7 +14,7 @@
             var textbox = new TextBox(input),
                 wrapper = textbox.wrapper;
 
-            assert.equal(wrapper[0].className, "k-widget k-textbox");
+            assert.equal(wrapper[0].className, "k-input k-textbox k-input-solid k-input-md k-rounded-md");
         });
 
         it("Should set placeholder", function() {
@@ -38,7 +38,7 @@
                 enable: false
             });
 
-            assert.isOk(textbox.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(textbox.wrapper.hasClass("k-disabled"));
         });
 
         it("Should set readonly state", function() {
@@ -91,6 +91,30 @@
             assert.isOk(textbox.wrapper.hasClass("test"));
         });
 
+        it("sets the width of the input to 100%", function() {
+            var textbox = new TextBox(input.css("width", "200px"));
+
+            assert.equal(textbox.wrapper[0].style.width, "200px");
+            assert.equal(textbox.element[0].style.width, "100%");
+        });
+
+        it("sets the k-focus class on focusin", function() {
+            var textbox = new TextBox(input);
+
+            textbox.element[0].focus();
+
+            assert.isOk(textbox.wrapper.hasClass("k-focus"));
+        });
+
+        it("removes the k-focus class on focusout", function() {
+            var textbox = new TextBox(input);
+
+            textbox.element[0].focus();
+            textbox.element.blur();
+
+            assert.isNotOk(textbox.wrapper.hasClass("k-focus"));
+        });
+
         it("form reset support", function(done) {
             input.attr("value", "test");
 
@@ -107,44 +131,39 @@
             }, 200);
         });
 
-        it("create a label with inner HTML equal to configuration text", function() {
+        it("styling options - fillMode", function() {
             var textbox = new TextBox(input, {
-                label: "<b>text</b>"
+                fillMode: "outline"
             });
 
-            assert.equal(textbox.wrapper.parent().find(".k-label")[0].innerHTML, "<b>text</b>");
+            assert.isOk(textbox.wrapper.hasClass("k-input-outline"));
         });
 
-        it("create a label with inner HTML equal to configuration function", function() {
+        it("styling options - size", function() {
             var textbox = new TextBox(input, {
-                label: function() {
-                    return "<b>function</b>"
-                }
+                size: "small"
             });
 
-            assert.equal(textbox.wrapper.parent().find(".k-label")[0].innerHTML, "<b>function</b>");
+            assert.isOk(textbox.wrapper.hasClass("k-input-sm"));
         });
 
-        it("create a label with inner HTML equal to configuration object text", function() {
+        it("styling options - rounded", function() {
             var textbox = new TextBox(input, {
-                label: {
-                    content: "<b>content text</b>"
-                }
+                rounded: "large"
             });
 
-            assert.equal(textbox.wrapper.parent().find(".k-label")[0].innerHTML, "<b>content text</b>");
+            assert.isOk(textbox.wrapper.hasClass("k-rounded-lg"));
         });
 
-        it("create a label with inner HTML equal to configuration object function", function() {
+        it("styling options - checks for valid options", function() {
             var textbox = new TextBox(input, {
-                label: {
-                    content: function() {
-                        return "<b>content function</b>"
-                    }
-                }
+                size: "large"
             });
 
-            assert.equal(textbox.wrapper.parent().find(".k-label")[0].innerHTML, "<b>content function</b>");
+            assert.isNotOk(textbox.wrapper.hasClass("k-rounded-lg")); // Does not add valid class for other option
+            assert.isNotOk(textbox.wrapper.hasClass("k-input-sm")); // Does not add invalid class with prefix
+            assert.isNotOk(textbox.wrapper.hasClass("k-input-md")); // Does not add default class for the option
+            assert.isOk(textbox.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
         });
     });
 }());

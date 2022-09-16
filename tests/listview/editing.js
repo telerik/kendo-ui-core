@@ -139,6 +139,17 @@
             listView.content.find(".k-cancel-button").click();
         });
 
+        it("clicking the cancel button sets the k-listview-item class", function() {
+            var listView = setup({
+                    editTemplate: '<li><button class="k-cancel-button"></li>',
+                });
+
+            listView.edit(listView.content.children().first());
+
+            listView.content.find(".k-cancel-button").click();
+            assert.isOk(listView.content.children().first().hasClass("k-listview-item"));
+        });
+
         it("preventing the cancel event leaves the item in edit mode", function() {
             var called = false,
                 listView = setup({
@@ -262,6 +273,23 @@
             listView.remove(item);
 
             assert.isOk(!item.is(":visible"));
+        });
+
+        it("removing the active item removes aria-activedescendant from element", function() {
+            var listView = setup({
+                selectable: "multiple"
+            }),
+
+            item = listView.content.children().first();
+
+            listView.current(item);
+
+            assert.isOk(!!item.attr("id"));
+            assert.equal(listView.element.attr("aria-activedescendant"), item.attr("id"));
+
+            listView.remove(item);
+
+            assert.equal(listView.element.attr("aria-activedescendant"), undefined);
         });
 
         it("remove calls dataSource remove", function() {
@@ -464,7 +492,7 @@
             listView.edit(listView.content.children().eq(1));
             listView.cancel();
 
-            assert.equal(listView.content.children().eq(1).attr("role"), "option");
+            assert.equal(listView.content.children().eq(1).attr("role"), "listitem");
         });
 
         it("save event is triggered", function() {

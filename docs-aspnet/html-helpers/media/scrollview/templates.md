@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Get started with the Telerik UI ScrollView HtmlHelper for {{ site.framework }} and learn how to use templates for configuring its items."
+description: "Get started with the Telerik UI ScrollView component for {{ site.framework }} and learn how to use templates for configuring its items."
 slug: htmlhelpers_scrollview_aspnetcore_templates
 position: 2
 ---
@@ -14,7 +14,7 @@ You can configure the items of the ScrollView by using [plain HTML and CSS](#htm
 
 The following example demonstrates how to use HTML templates to set the ScrollView items.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ScrollView()
                 .Name("scrollView")
                 .ContentHeight("100%")
@@ -34,6 +34,65 @@ The following example demonstrates how to use HTML templates to set the ScrollVi
                 .HtmlAttributes(new { style = "height:748px; width:1022px; max-width: 100%;" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-scrollview name="scrollView" content-height="100%"
+                                        style="height:748px; width:1022px; max-width: 100%;">
+            <items>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo1'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo2'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo3'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo4'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo5'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo6'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo7'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo8'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo9'></div>
+                    </content>
+                </scrollview-item>
+                <scrollview-item>
+                    <content>
+                        <div class='photo photo10'></div>
+                    </content>
+                </scrollview-item>
+            </items>
+    </kendo-scrollview>
+```
+{% endif %}
 ```CSS
     <style>
 
@@ -92,7 +151,7 @@ The following example demonstrates how to use HTML templates to set the ScrollVi
 
 The ScrollView allows for configuring a dynamic template which loops through all of its data items.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ScrollView()
                 .Name("scrollView")
                 .EnablePager(false)
@@ -107,6 +166,19 @@ The ScrollView allows for configuring a dynamic template which loops through all
                 .HtmlAttributes(new { style = "height:600px; width:890px; max-width: 100%;" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-scrollview name="scrollView" content-height="100%" 
+                                        template-id="scrollview-template" 
+                                        style="height:600px; width:890px; max-width: 100%;">
+        <datasource custom-type="odata" page-size="3" server-paging="true">
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+            </transport>
+        </datasource>
+    </kendo-scrollview>
+```
+{% endif %}
 ```JavaScript
     <script id="scrollview-template" type="text/x-kendo-template">
         <div class="img-wrapper">
@@ -129,12 +201,18 @@ The ScrollView allows for configuring a dynamic template which loops through all
 
 The following example demonstrates how to set a template when no ScrollView items will be displayed.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ScrollView()
             .Name("scrollview")
             .EmptyTemplateId("scrollview-empty")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-scrollview name="scrollView" empty-template-id="scrollview-empty">
+    </kendo-scrollview>
+```
+{% endif %}
 ```JavaScript
     <script id="scrollview-empty" type="text/x-kendo-template">
     <div style="width: 100%; height: 100%; background-color: red;">empty</div>

@@ -86,7 +86,7 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
 
     ![](images/chapter1/convert-to-telerik2.png)
 
-1. Since the boilerplate is designed with [Bootstrap](http://getbootstrap.com), choose **Bootstrap** from themes select box so the theme matches the current look of the boilerplate. You'll change the theme later when you're ready to customize the look of the application.
+1. Since the boilerplate is designed with [Bootstrap](https://getbootstrap.com), choose **Bootstrap** from themes select box so the theme matches the current look of the boilerplate. You'll change the theme later when you're ready to customize the look of the application.
 
     ![](images/chapter1/convert-to-telerik3.png)
 
@@ -1328,7 +1328,7 @@ Run the project and shrink the browser window horizontally to about 400 pixels w
 
 #### Overview
 
-When changing the screen size, you may have noticed the Report Range side bar disappear. If not, take a moment to adjust the browser width again to see the side bar's behavior. Currently, the sidebar is hidden using the [Bootstrap's `hidden-xs` class](http://getbootstrap.com/css/#responsive-utilities). Bring back the side bar using a Kendo UI ResponsivePanel and make a seamless user experience on any device size.
+When changing the screen size, you may have noticed the Report Range side bar disappear. If not, take a moment to adjust the browser width again to see the side bar's behavior. Currently, the sidebar is hidden using the [Bootstrap's `hidden-xs` class](https://getbootstrap.com/docs/3.4/css/). Bring back the side bar using a Kendo UI ResponsivePanel and make a seamless user experience on any device size.
 
 #### Exercise: Add a Responsive Panel Side Bar
 

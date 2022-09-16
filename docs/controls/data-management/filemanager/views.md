@@ -1,6 +1,6 @@
 ---
 title: Views
-page_title: jQuery FileManager Documentation | Grid and List Views in FileManager | Kendo UI
+page_title: jQuery FileManager Documentation | Grid and List Views in FileManager
 description: "Get familiar with Grid and List Views in FileManager."
 slug: views_kendoui_filemanager_widget
 position: 4
@@ -13,20 +13,41 @@ The FileManager provides two inbuilt views for content visualization: `Grid` and
 You can switch between views from the Toolbar button group
 
 ## Grid View
-This view is achieved with the Kendo Grid and in renders the files in a tabular manner (see Image1 below). That said, you can control the configuration of this view trough the `views.grid` object of the FileManager (see example below). 
+This view is achieved with the Kendo Grid and in renders the files in a tabular manner (see Image1 below). That said, you can control the configuration of this view through the `views.grid` object of the FileManager (see example below). 
 
-```js
-    $("#filemanager").kendoFileManager({
-        views: {
+```dojo
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+	    
+        $("#fileManager").kendoFileManager({
+          views: {
             grid: {
-                sortable: false //disable the sorting of the grid
+              sortable: false //disable the sorting of the grid
             }
-        },
-        dataSource: {
-            schema: kendo.data.schemas.filemanager,
-            data: data //local binding
-        }
-    });
+          },
+          dataSource: {
+            transport: {
+              read: {
+                type: "post",
+                url: baseUrl + "Read"
+              },
+              update: {
+                type: "post",
+                url: baseUrl + "Update"
+              },
+              create: {
+                type: "post",
+                url: baseUrl + "Create"
+              },
+              destroy: {
+                type: "post",
+                url: baseUrl + "Destroy"
+              }
+            }
+          }
+        });
+    </script>
 ```
 
 **GridView type in FileManager:**
@@ -37,18 +58,39 @@ This view is achieved with the Kendo Grid and in renders the files in a tabular 
 
 The List view is implemented with the help of the Kendo ListView component. The content in this view is rendered as a list of thumbnails, representing the files. You can control the configuration of this view trough the `views.list` object of the FileManager. 
 
-```js
-    $("#filemanager").kendoFileManager({
-        views: {
-            list: {
-               ... //disable the sorting of the grid
-            }
+```dojo
+     <div id="fileManager"></div>
+    <script>
+      var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+      $("#fileManager").kendoFileManager({
+        views: {          
+          list: {
+              selectable: "single" //allows only single selection int the ListView
+          }
         },
         dataSource: {
-            schema: kendo.data.schemas.filemanager,
-            data: data //local binding
+          transport: {
+            read: {
+              type: "post",
+              url: baseUrl + "Read"
+            },
+            update: {
+              type: "post",
+              url: baseUrl + "Update"
+            },
+            create: {
+              type: "post",
+              url: baseUrl + "Create"
+            },
+            destroy: {
+              type: "post",
+              url: baseUrl + "Destroy"
+            }
+          }
         }
-    });
+      });
+    </script>
 ```
 **ListView type in FileManager:** 
 

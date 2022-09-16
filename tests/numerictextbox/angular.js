@@ -75,11 +75,11 @@
             });
 
         ngTest("title attribute gets interpolated correctly", function() {
-            angular.module("kendo.tests").filter("translator", function () {
-                return function (value) { return value + " translated" }
+            angular.module("kendo.tests").filter("translator", function() {
+                return function(value) { return value + " translated"; };
             }).controller("main", function($scope) {
                 $scope.value = 10;
-                $scope.myTitle = "numeric test"
+                $scope.myTitle = "numeric test";
             });
 
             Mocha.fixture.html('<div ng-controller=main><input kendo-numeric-text-box="number" title="{{ myTitle | translator }}" ng-model="value" /></div>');

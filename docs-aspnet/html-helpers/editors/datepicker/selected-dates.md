@@ -3,7 +3,7 @@ title: Selected Dates
 page_title: Selected Dates
 description: "Get started with the {{ site.product }} DatePicker and learn how to set selected dates and date ranges in the DatePicker."
 slug: htmlhelpers_datepicker_aspnetcore_selecteddates
-position: 3
+position: 10
 ---
 
 # Selected Dates
@@ -16,7 +16,7 @@ For a complete example on how to select ranges using DatePicker, refer to the [d
 
 The following example demonstrates how to render a DatePicker with an initially selected date and defined min and max dates. The DatePicker sets the value only if the entered date is within the defined range and is valid.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("datepicker")
         .Value(new DateTime(2019, 5, 15))
@@ -24,6 +24,15 @@ The following example demonstrates how to render a DatePicker with an initially 
         .Min(new DateTime(2019, 6, 18))
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  week-number="true"
+                  value="new DateTime(2019, 5, 15)"
+                  min="new DateTime(2019, 5, 15)"
+                  max="new DateTime(2019,6,18)" />
+```
+{% endif %}
 
 ## See Also
 

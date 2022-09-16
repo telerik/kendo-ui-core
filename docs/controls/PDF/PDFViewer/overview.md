@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery PDFViewer Documentation | PDFViewer Overview | Kendo UI
+page_title: jQuery PDFViewer Documentation | PDFViewer Overview
 description: "Get started with the jQuery PDFViewer by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_pdfviewer_widget
 position: 1

@@ -1,7 +1,7 @@
 ---
 title: Initializing as jQuery Plugins
-page_title: Initializing as jQuery Plugins | Working with Widgets | Kendo UI for jQuery
-previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization
+page_title: Initializing as jQuery Plugins | Working with Widgets 
+previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization, /intro/widget-basics/angularjs-initialization
 description: "Get started with Kendo UI for jQuery and use the jQuery plugin syntax to add the widgets and framework components to your mobile website or web application."
 slug: initialize_widgets_using_jquery_plugins_installation
 position: 2
@@ -9,7 +9,7 @@ position: 2
 
 # Initializing as jQuery Plugins
 
-All Kendo UI widgets are registered as [jQuery plugins](http://learn.jquery.com/plugins/) which allows them to be instantiated on a jQuery object instance.
+All Kendo UI widgets are registered as [jQuery plugins](http://learn.jquery.com/plugins/) which allows them to be instantiated on a `jQuery` object instance.
 
 The jQuery plugin method is formed by the widget name in Pascal Case that is prefixed with `kendo` as in `kendoGrid` and `kendoListView`. To avoid collisions with their desktop counterparts, the methods for the hybrid UI widgets are prefixed with `Mobile` as in `kendoMobileTabStrip`, `kendoMobileButton`, and `kendoMobileListView`.
 
@@ -20,9 +20,9 @@ Some Kendo UI widgets have specific requirements about the element types on whic
 
 ## Getting Started
 
-The following example demonstrates how to use a regular approach to instantiate a Kendo UI AutoComplete. A similar to the demonstrated approach is used for all other widgets with the widget name spelled in Pascal Case. The widget initialization method follows the jQuery plugin paradigm and returns the jQuery object of the same DOM element used for the widget creation. It does not return the widget instance, and the instance has to be obtained through the [jQuery `data()` method]({% slug widget_methodsand_events_kendoui_installation %}#jquery-data-method).
+The following example demonstrates how to use a regular approach to instantiate a Kendo UI AutoComplete. A similar approach to the demonstrated one is used for all other widgets with the widget name spelled in Pascal Case. The `widget` initialization method follows the jQuery plugin paradigm and returns the `jQuery` object of the same DOM element which is used for the widget creation. It does not return the `widget` instance, and the instance has to be obtained through the [jQuery `data()` method]({% slug widget_methodsand_events_kendoui_installation %}#jquery-data-method).
 
-> If the jQuery object includes more than one DOM element, a separate widget is instantiated for each one.
+> If the `jQuery` object includes more than one DOM element, a separate widget is instantiated for each one.
 
 ```dojo
 
@@ -37,7 +37,7 @@ The following example demonstrates how to use a regular approach to instantiate 
 
 ### Multiple Widgets with Single Selectors
 
-The following example demonstrates how to instantiate multiple Buttons with a single jQuery selector. The jQuery convention for returning the selected DOM element from most methods applies to the widget initialization methods. This allows for chaining jQuery methods.
+The following example demonstrates how to instantiate multiple Buttons with a single `jQuery` selector. The jQuery convention for returning the selected DOM element from most methods applies to the widget initialization methods. This allows for chaining jQuery methods.
 
 ```
     <button>Foo</button> | <button>Bar</button>
@@ -50,7 +50,7 @@ The following example demonstrates how to instantiate multiple Buttons with a si
 
 ### Chaining jQuery Method Calls
 
-The following example demonstrates the chain jQuery method calls after the widget instantiation plugin method.
+The following example demonstrates the chain `jQuery` method calls after the widget instantiation plugin method.
 
 ```
     <button>Foo</button> | <button>Bar</button>
@@ -79,10 +79,10 @@ The following example demonstrates an incorrect duplicate initialization.
         $("#autocomplete").kendoAutoComplete(["Apples", "Oranges", "Grapes"]);
 
         // ...
-        // correct - instance reference is obtained:
+        // Correct: the instance reference is obtained:
         var autocomplete = $("#autocomplete").data("kendoAutoComplete");
 
-        // INCORRECT - instance reference is obtained while creating a duplicate instance:
+        // INCORRECT: The instance reference is obtained while creating a duplicate instance:
         var duplicate = $("#autocomplete").kendoAutoComplete().data("kendoAutoComplete");
     </script>
 ```
@@ -92,16 +92,16 @@ To check whether a widget instance already exists for a certain DOM element, use
 ```
     <input id="autocomplete" />
     <script>
-        // try to obtain the widget instance
+        // Try to obtain the widget instance.
         var autocomplete = $("#autocomplete").data("kendoAutoComplete");
 
-        // check the returned value
+        // Check the returned value.
         if (typeof autocomplete === "undefined") {
-            // widget instance does not exist
+            // The widget instance does not exist.
         }
-        // simpler alternative syntax for the above
+        // A simpler alternative syntax for the above:
         if (!autocomplete) {
-            // widget instance does not exist
+            // The widget instance does not exist.
         }
     </script>
 ```
@@ -110,7 +110,7 @@ To check whether a widget instance already exists for a certain DOM element, use
 
 To configure a Kendo UI widget, pass a configuration object (key/value pairs) as an argument to the jQuery plugin method. The supported configuration options and events for each widget are listed in the [API reference](/api/javascript/kendo) of the respective widget. The configuration object might also contain event handlers that will be bound to the corresponding widget events.
 
-The following example demonstrates how to set the [`height`](/api/javascript/ui/grid/configuration/height), [`columns`](/api/javascript/ui/grid/configuration/columns) and [`dataSource`](/api/javascript/ui/grid/configuration/datasource) configuration options of the Grid widget.
+The following example demonstrates how to set the [`height`](/api/javascript/ui/grid/configuration/height), [`columns`](/api/javascript/ui/grid/configuration/columns), and [`dataSource`](/api/javascript/ui/grid/configuration/datasource) configuration options of the Grid widget.
 
 ```
     <div id="grid"></div>

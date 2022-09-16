@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Grouping Overview | Kendo UI
+page_title: jQuery Grid Documentation | Grouping Overview
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: grouping_kendoui_grid_widget
 position: 1
@@ -30,6 +30,8 @@ To sort the grouped content, click the grouping tab. To toggle the sort order of
 **Figure 2: A Grid with its data grouped by last name**
 
 ![Grid Grouped by Last Name](../grid6_1.png)
+
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be groupable. To enable grouping on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
 
 ## Using with Row Templates
 
@@ -66,6 +68,16 @@ When you use grouping with paging, paging occurs before grouping. As a result:
 * If the groups are collapsed, you cannot display additional items and groups from other pages after the rendered items and groups. To work around this issue, increase the page size.
 
 To enable the Grid to execute grouping before paging, group the whole data source. In this case, however, the performance of the Grid will be reduced.
+
+## Hiding Grouped Columns
+
+As of R3 2022, the Kendo UI Grid enables the developer to hide grouped columns from the Grid. This feature prevents the duplication of data in both the Grid and the group header.
+
+To allow automatic hiding of a grouped column, set the [`columns.hideOnGroup`](/api/javascript/ui/grid/configuration/columns.hideongroup property to **true**.
+
+**Note:** This functionality of the Grid works when the user applies grouping. The `hideOnGroup` property will not have any effect if the grouping is applied directly to the dataSource configuration.
+
+For a runnable example, visit the [Hiding Grouped Columns](https://demos.telerik.com/kendo-ui/grid/hiding-grouped-columns) demo.
 
 ## KB Articles on Grouping
 

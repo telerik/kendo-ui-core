@@ -12,7 +12,7 @@
                 }
 
                 return this.trigger({ type: "keypress", keyCode: key });
-            }
+            };
             input = $("<input />").appendTo(Mocha.fixture);
             select = $("<select />").appendTo(Mocha.fixture);
         });
@@ -37,7 +37,7 @@
 
             dropdownlist.search("b");
 
-            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
+            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-selected"));
         });
 
         it("search select item if text number", function() {
@@ -49,7 +49,7 @@
 
             dropdownlist.search("1");
 
-            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
+            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-selected"));
         });
 
         it("search select item if text is 0", function() {
@@ -61,7 +61,7 @@
 
             dropdownlist.search("0");
 
-            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
+            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-selected"));
         });
 
         it("search should not raise error if word is null", function() {
@@ -651,7 +651,7 @@
             dropdownlist.wrapper.focus().press("b");
 
             assert.isOk(dropdownlist.ul.children().eq(2).text(), "Bar");
-            assert.isOk(dropdownlist.ul.children().eq(2).hasClass("k-state-selected"));
+            assert.isOk(dropdownlist.ul.children().eq(2).hasClass("k-selected"));
         });
 
         it("filter on paste", function(done) {
@@ -682,6 +682,9 @@
         it("resize popup on search when autoWidth is enabled", function(done) {
             kendo.effects.enable();
             var data = [{ text: "Foooooooooooooo", value: 1, type: "a" }, { text: "Bar", value: 2, type: "b" }, { text: "Baz", value: 3, type: "a" }];
+
+            input.css("width", 200);
+
             var dropdownlist = new DropDownList(input, {
                 autoWidth: true,
                 dataTextField: "ProductName",
@@ -746,12 +749,12 @@
         it("enabled autoWidth disables X scrolling", function() {
             var dropdownlist = new DropDownList(input, {
                 autoWidth: true,
-                animation:{
+                animation: {
                     open: {
-                        duration:0
+                        duration: 0
                     },
                     close: {
-                        duration:0
+                        duration: 0
                     },
                 },
                 dataSource: {
@@ -761,35 +764,7 @@
             });
 
             dropdownlist.open();
-            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto")
-        });
-
-        it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
-            var dropdownlist = new DropDownList(input, {
-                autoWidth: true,
-                animation:{
-                    open: {
-                        duration:0
-                    },
-                    close: {
-                        duration:0
-                    },
-                },
-                dataSource: {
-                    data: [
-                        "Short item",
-                        "An item with really, really, really, really, really, really, really, really, really, long text",
-                        "Short item",
-                        "Short item",
-                        "Short item",
-                        "Short item",
-                        "Short item"
-                    ]
-                }
-            });
-
-            dropdownlist.open();
-            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden scroll")
+            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto");
         });
 
         it("removes filtering expression if field matches the dataTextField", function() {

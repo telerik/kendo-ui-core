@@ -64,7 +64,7 @@ How can I select or deselect multiple dates only by clicking them and without us
 
                 var selectedDates = calendar.selectDates();
 
-                if (clickedItem.hasClass("k-state-selected")) {
+                if (clickedItem.hasClass("k-selected")) {
                     // if date is already selected - remove it from collection
                     selectedDates = $.grep(selectedDates, function (item, index) {
                         return clickedDate.getTime() !== item.getTime();

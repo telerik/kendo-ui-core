@@ -424,18 +424,12 @@ Sets the field of the data item that provides the image url of the menu items.
         $("#menu").kendoMenu({
             dataSource: {
             data: [{
-                    Name: "Item 1",
-                    UrlPath: "urlPath",
-                    Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
-                    description: "some description"
+                    Name: "Item 1",                
+                    imgUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/golf.png"
                 }]
             },
-            dataTextField:"Name",
-            dataUrlField:"UrlPath",
-            dataSpriteCssClassField:"Sprite",
-            dataImageUrlField:"imgUrl",
-            dataContentField:"description"
+            dataTextField:"Name",            
+            dataImageUrlField:"imgUrl"
         });
     </script>
 
@@ -1259,6 +1253,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
             dataTextField: "FullName",
             dataSource: dataSource,
             dataBound: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("dataBound");
             }
         })
@@ -1289,6 +1284,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
         }).data("kendoMenu");
 
         menu.bind("dataBound", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
         });
     </script>

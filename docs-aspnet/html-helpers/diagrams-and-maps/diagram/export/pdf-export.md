@@ -18,22 +18,22 @@ To enable PDF export in the Diagram:
 
 1. Introduce a button and handle its `click` event. Export the Diagram within the handler.
 
-    ```HTML
-        <button class='export-pdf k-button'>Save as PDF</button>
-    ```
-    ```JavaScrtipt
-        <script>
-            $(".export-pdf").click(function () {
-                $("#diagram").getKendoDiagram().saveAsPDF();
-            });
-        </script>
-    ```
+```HTML
+    <button class='export-pdf k-button'>Save as PDF</button>
+```
+```JavaScrtipt
+    <script>
+        $(".export-pdf").click(function () {
+            $("#diagram").getKendoDiagram().saveAsPDF();
+        });
+    </script>
+```
 
 1. Include the Pako Deflate library in the page to enable compression.
 
 To enable PDF export in the Diagram through code, call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram/methods/saveaspdf) method.
 
-```Razor
+```HtmlHelper
 
     <button class='export-pdf k-button'>Save as PDF</button>
 

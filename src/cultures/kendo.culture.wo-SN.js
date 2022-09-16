@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "CFA",
+                name: "West African CFA Franc",
                 abbr: "XOF",
                 pattern: ["-n $","n $"],
                 decimals: 2,
@@ -59,5 +59,5 @@
                 firstDay: 1
             }
         }
-    }
+    };
 })(this);

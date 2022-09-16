@@ -30,7 +30,7 @@ How can I create a popup menu for toggling the visibility of the Kendo UI Grid c
 
 The following example demonstrates how to apply the necessary approach.
 
-```       
+```dojo
         <div id="example">
             <div id="grid"></div>
 

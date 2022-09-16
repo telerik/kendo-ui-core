@@ -34,6 +34,9 @@ The following example demonstrates how to register the localization script in th
     <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.es-ES.min.js"></script>
 
+To change the current culture and language dynamically, refer to the [demo on globalization by the Grid](https://demos.telerik.com/{{ site.platform }}/grid/globalization).
+
+
 > Currently, translations are not available for every language and some of the localization files may be incomplete. For more information on the full list of available translations, refer to the [section on contributing](#contribution).
 
 ## Creating New Localization Files
@@ -86,7 +89,7 @@ The following table lists the localized messages for the cultures which are supp
 
 ## Customizing the Localized Messages
 
-Telerik UI for ASP.NET MVC uses [satellite assemblies](http://blogs.msdn.com/b/global_developer/archive/2011/07/22/introduction-to-satellite-assemblies.aspx) to support localization (user interface messages localized for a set of cultures). To change the provided localization messages, you have to build a custom `Kendo.Mvc.dll` version because `Kendo.Mvc.dll` is a strongly named assembly and its private key is not shipped as part of the distribution.
+Telerik UI for ASP.NET MVC uses [satellite assemblies](https://docs.microsoft.com/en-us/dotnet/framework/resources/creating-satellite-assemblies-for-desktop-apps) to support localization (user interface messages localized for a set of cultures). To change the provided localization messages, you have to build a custom `Kendo.Mvc.dll` version because `Kendo.Mvc.dll` is a strongly named assembly and its private key is not shipped as part of the distribution.
 
 To update the provided localization messages in Telerik UI for ASP.NET MVC:
 

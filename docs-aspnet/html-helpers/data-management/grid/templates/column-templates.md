@@ -1,7 +1,7 @@
 ---
 title: Column Templates
 page_title: Column Templates
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to customize the way the column displays its value."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to customize the way the column displays its value."
 slug: column_templates_aspnetcore_grid
 position: 2
 ---
@@ -19,13 +19,26 @@ Each table row consists of table cells (`td`) which represent the Grid columns. 
 
 The following example demonstrates how to set the template as a string and wrap the column value in HTML.
 
+```HtmlHelper
+
         .Columns(c =>
         {
             c.Bound(f => f.ShipCountry).ClientTemplate("<strong>#= ShipCountry # </strong>");
         })
 
+```
+    
+{% if site.core %}
+```TagHelper
+    <columns>
+        <column field="ShipCounty" template="<strong>#= ShipCountry # </strong>"/>
+    </columns>
+```
+{% endif %}
+
 The following example demonstrates how to set column templates as a Kendo UI template. First compile the template, then pass it to the column.
 
+```HtmlHelper
         <script type="kendo-template" id="my-template">
             <em>#= ShipCountry  # </em>
         </script>
@@ -36,8 +49,25 @@ The following example demonstrates how to set column templates as a Kendo UI tem
         {
             c.Bound(f => f.ShipCountry ).ClientTemplate("#=myTemplate(data)#");
         })
+```
+{% if site.core %}
+```TagHelper
+    <script type="kendo-template" id="my-template">
+        <em>#= ShipCountry  # </em>
+    </script>
+    <script>
+        var myTemplate = kendo.template($('#my-template').html());
+    </script>
+
+    <columns>
+        <column field="ShipCountry" template="#=myTemplate(data)#"/>
+    </columns>
+```
+{% endif %}
 
 The following example demonstrates how to set a column template as a function.
+
+```HtmlHelper
 
         .Columns(c =>
         {
@@ -56,6 +86,14 @@ The following example demonstrates how to set a column template as a function.
             }
         }
         </script>
+```
+{% if site.core %}
+```TagHelper
+    <columns>
+        <column field="Products" template="#=showProductsTemplate(data)#"/>
+    </columns>
+```
+{% endif %}
 
 ## See Also
 

@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "data.xml",
     name: "XML",
     category: "framework",
@@ -10,10 +10,10 @@ var __meta__ = { // jshint ignore:line
     hidden: true
 };
 
-/*jshint  eqnull: true, boss: true */
+
 (function($, undefined) {
     var kendo = window.kendo,
-        isArray = $.isArray,
+        isArray = Array.isArray,
         isPlainObject = $.isPlainObject,
         map = $.map,
         each = $.each,
@@ -38,7 +38,7 @@ var __meta__ = { // jshint ignore:line
                     if (model.fields) {
                         each(model.fields, function(field, value) {
                             if (isPlainObject(value) && value.field) {
-                                if (!$.isFunction(value.field)) {
+                                if (!kendo.isFunction(value.field)) {
                                     value = extend(value, { field: that.getter(value.field) });
                                 }
                             } else {
@@ -52,7 +52,7 @@ var __meta__ = { // jshint ignore:line
                     if (id) {
                         var idField = {};
 
-                        idField[that.xpathToMember(id, true)] = { field : that.getter(id) };
+                        idField[that.xpathToMember(id, true)] = { field: that.getter(id) };
                         model.fields = extend(idField, model.fields);
                         model.id = that.xpathToMember(id);
                     }
@@ -68,7 +68,7 @@ var __meta__ = { // jshint ignore:line
                     that.total = function(data) {
                         return parseInt(total(data), 10);
                     };
-                } else if (typeof total == "function"){
+                } else if (typeof total == "function") {
                     that.total = total;
                 }
             }
@@ -79,7 +79,7 @@ var __meta__ = { // jshint ignore:line
                     that.errors = function(data) {
                         return errors(data) || null;
                     };
-                } else if (typeof errors == "function"){
+                } else if (typeof errors == "function") {
                     that.errors = errors;
                 }
             }
@@ -238,12 +238,12 @@ var __meta__ = { // jshint ignore:line
 
             if (member.indexOf("@") >= 0) {
                 // replace @attribute with '["@attribute"]'
-                return member.replace(/\.?(@.*)/, raw? '$1':'["$1"]');
+                return member.replace(/\.?(@.*)/, raw ? '$1' : '["$1"]');
             }
 
             if (member.indexOf("text()") >= 0) {
                 // replace ".text()" with '["#text"]'
-                return member.replace(/(\.?text\(\))/, raw? '#text':'["#text"]');
+                return member.replace(/(\.?text\(\))/, raw ? '#text' : '["#text"]');
             }
 
             return member;
@@ -263,4 +263,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

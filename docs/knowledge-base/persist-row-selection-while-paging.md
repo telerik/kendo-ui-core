@@ -77,7 +77,7 @@ previous_url: /controls/data-management/grid/how-to/Selection/persist-row-select
             var items = grid.items();
             items.each(function (idx, row) {
                 var idValue = grid.dataItem(row).get(idField);
-                if (row.className.indexOf("k-state-selected") >= 0) {
+                if (row.className.indexOf("k-selected") >= 0) {
                     selectedOrders[idValue] = true;
                 } else if (selectedOrders[idValue]) {
                     delete selectedOrders[idValue];

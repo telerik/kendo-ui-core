@@ -1,6 +1,6 @@
 ---
 title: Excel Export
-page_title: jQuery Spreadsheet Documentation | Excel Export | Kendo UI
+page_title: jQuery Spreadsheet Documentation | Excel Export
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to export the content of the widget in an Excel file in the browser."
 slug: export_toexcel_spreadsheet_widget
 position: 2

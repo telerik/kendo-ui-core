@@ -1,0 +1,30 @@
+// Year view
+.k-scheduler-yearview {
+    .k-calendar {
+        .fill( @bg: @scheduler-yearview-calendar-bg );
+    }
+
+    .k-month-header {
+        .fill( @text: @scheduler-yearview-month-header-text );
+    }
+
+    .k-day-indicator {
+        .fill( @bg: @scheduler-yearview-indicator-bg );
+    }
+
+    .k-state-selected .k-day-indicator,
+    .k-selected .k-day-indicator {
+        .fill( @bg: @scheduler-yearview-indicator-selected-bg );
+    }
+}
+
+// Tooltip
+.k-tooltip.k-scheduler-tooltip {
+
+    .k-tooltip-title .k-day {
+        .fill( @text: @scheduler-tooltip-day-text );
+    }
+
+    .fill( @bg: @scheduler-tooltip-bg );
+
+}

@@ -189,15 +189,16 @@ How can I use a different editor based on the column value in a Grid?
 
       function textEditor(container, options) {
         $('<input type="text" name="' + options.field + '"/>')
-        .addClass('k-textbox')
         .appendTo(container)
-        .blur(function(e) {
-          if (e.originalEvent.target.value) {
-            options.model.set("result", 1);
-          } else {
-            options.model.set("result", null);
+        .kendoTextBox({
+          change: function (e) {
+            if (e.sender.value() == null) {
+              options.model.set("result", null);
+            } else {
+              options.model.set("result", e.sender.value());
+            }
           }
-        })
+        })  
       }
 
       function numericEditor(container, options) {

@@ -5,7 +5,7 @@
     var span;
     var badge;
 
-    describe('kendo.ui.Badge initialization', function () {
+    describe('kendo.ui.Badge initialization', function() {
         beforeEach(function() {
             span = $('<span />').appendTo(Mocha.fixture);
         });
@@ -21,34 +21,40 @@
             assert.equal(badge.element.hasClass('k-badge'), true);
         });
 
-        test('default text is empty string', function () {
+        test('default text is empty string', function() {
             badge = new Badge(span);
 
+            assert.equal(badge._text, '');
             assert.equal(badge.text(), '');
         });
 
-        test('default shape is \'rounded\'', function() {
+        test('default rounded is \'medium\'', function() {
             badge = new Badge(span);
 
-            assert.equal(badge.element.hasClass('k-badge-rounded'), true);
+            assert.equal(badge._rounded, 'medium');
+            assert.equal(badge.rounded(), 'medium');
+            assert.equal(badge.element.hasClass('k-rounded-md'), true);
         });
 
         test('default size is \'medium\'', function() {
             badge = new Badge(span);
 
             assert.equal(badge._size, 'medium');
+            assert.equal(badge.element.hasClass('k-badge-md'), true);
         });
 
-        test('default color is \'secondary\'', function() {
+        test('default theme color is \'secondary\'', function() {
             badge = new Badge(span);
 
-            assert.equal(badge.element.hasClass('k-badge-secondary'), true);
+            assert.equal(badge._themeColor, 'secondary');
+            assert.equal(badge.element.hasClass('k-badge-solid-secondary'), true);
         });
 
-        test('default badgeStyle is \'solid\'', function() {
+        test('default fillMode is \'solid\'', function() {
             badge = new Badge(span);
 
-            assert.equal(badge.element.hasClass('k-badge-solid'), false);
+            assert.equal(badge._fillMode, 'solid');
+            assert.equal(badge.element.hasClass('k-badge-solid'), true);
         });
 
         test('default visibility is visible', function() {
@@ -76,10 +82,10 @@
             assert.equal(badge._position, 'inline');
         });
 
-        test('default placement is edge', function() {
+        test('default align is empty string', function() {
             badge = new Badge(span);
 
-            assert.equal(badge._placement, 'edge');
+            assert.equal(badge._align, '');
         });
 
     });

@@ -4,14 +4,14 @@ page_title: Scaffolding
 description: "Learn the basics about scaffolding the Telerik UI TreeView HtmlHelper for ASP.NET MVC by using the Scaffolder extension for Visual Studio."
 previous_url: /helpers/navigation/treeview/scaffolding
 slug: scaffoldingtreeview_aspnetmvc
-position: 3
+position: 4
 ---
 
 # Scaffolding
 
 The TreeView HtmlHelper for ASP.NET MVC enables you to use the Kendo UI Scaffolder Visual Studio extension.
 
-> The Kendo UI Scaffolder will not include the required UI for ASP.NET MVC files to the project. To automatically achieve this, use the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}). To manually achieve this, refer to [this article]({% slug gettingstarted_aspnetmvc %}).
+> The Kendo UI Scaffolder will not include the required UI for ASP.NET MVC files to the project. To automatically achieve this, use the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}). To manually achieve this, refer to [this article]({% slug gettingstarted_aspnetmvc %}).
 
 To scaffold the TreeView HtmlHelper for ASP.NET MVC:
 

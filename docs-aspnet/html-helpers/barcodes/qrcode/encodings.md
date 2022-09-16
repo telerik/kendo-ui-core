@@ -1,7 +1,7 @@
 ---
 title: Encoding
 page_title: Encoding
-description: "Get started with the Telerik UI QRCode HtmlHelper for {{ site.framework }} and use its supported encoding conventions."
+description: "Get started with the Telerik UI QRCode component for {{ site.framework }} and use its supported encoding conventions."
 slug: encoding_qrcode_aspnetcore_helper
 position: 2
 ---
@@ -38,5 +38,5 @@ To encode a point on the earth, including altitude, use a geo URI. For example, 
 
 ## See Also
 
-* [Basic Usage of the QRCode HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/index)
+* [Basic Usage of the QRCode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/index)
 * [Server-Side API](/api/qrcode)

@@ -18,6 +18,8 @@ To enable the data editing capabilities:
 * Declare the field definitions through `DataSource schema`.
 * Configure the DataSource for performing CRUD data operations by defining its `transport->create/update/destroy` attributes.
 
+The example below demonstrates how to implement batch editing in the Grid. For a runnable example, refer to the [demo on setting the batch edit mode of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/editing).
+
 ```tagHelper
 <kendo-grid name="grid" height="550">
     <datasource  page-size="20" type="DataSourceTagHelperType.Custom" custom-type="odata" batch="true">
@@ -40,10 +42,10 @@ To enable the data editing capabilities:
     <editable mode="incell" />
     <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
     </pageable>
-    <toolbar>
-        <toolbar-button name="create" text="Add new record"></toolbar-button>
-        <toolbar-button name="save" text="Save Changes"></toolbar-button>
-        <toolbar-button name="cancel" text="Cancel Changes"></toolbar-button>
+    <toolbar> <!-- Enable the built-in grid's Toolbar commands "create", "save", and "cancel". -->
+        <toolbar-button name="create" text="Add new record"></toolbar-button> <!-- Adds an empty row to the grid to create a new record. -->
+        <toolbar-button name="save" text="Save Changes"></toolbar-button> <!-- Saves the new and the edited records. -->
+        <toolbar-button name="cancel" text="Cancel Changes"></toolbar-button> <!-- Reverts any data changes done by the end user. -->
     </toolbar>
     <columns>
         <column field="ProductName" title="Product Name" width="240" />
@@ -90,6 +92,73 @@ To enable the data editing capabilities:
         .Destroy("Editing_Destroy", "Grid")
     )
 )
+```
+```ProductViewModel.cs
+    public class ProductViewModel
+    {
+        public int ProductID
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        [DisplayName("Product name")]
+        public string ProductName
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Unit price")]
+        [DataType(DataType.Currency)]
+        [Range(0, int.MaxValue)]
+        public decimal UnitPrice
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Units in stock")]
+        [DataType("Integer")]
+        [Range(0, int.MaxValue)]
+        public int UnitsInStock
+        {
+            get;
+            set;
+        }
+
+        public bool Discontinued
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Last supply")]
+        [DataType(DataType.Date)]
+        public DateTime LastSupply
+        {
+            get;
+            set;
+        }
+
+        [DataType("Integer")]
+        public int UnitsOnOrder 
+        { 
+            get; 
+            set; 
+        }
+
+        public CategoryViewModel Category 
+        { 
+            get; 
+            set; 
+        }
+
+        public int? CategoryID { get; set; }
+
+        public string QuantityPerUnit { get; set; }
+    }
 ```
 
 ## Custom Editors

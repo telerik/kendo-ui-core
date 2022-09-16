@@ -277,9 +277,9 @@ The following example demonstrates how to use `$http` to bind the Grid.
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
-* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
-* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
-* [How to Load View in Window]({% slug window_service_angularjs_directives %})
-* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
-* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+
+
+
+
+
 * [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)

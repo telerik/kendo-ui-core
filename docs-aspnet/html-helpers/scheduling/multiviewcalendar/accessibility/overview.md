@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Accessibility
-description: "Get started with the Telerik UI MultiViewCalendar HtmlHelper for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the Telerik UI MultiViewCalendar component for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 previous_url: /helpers/scheduling/multiviewcalendar/accessibility/overview
 slug: htmlhelpers_accessibility_multiviewcalendar_aspnetcore
 position: 1

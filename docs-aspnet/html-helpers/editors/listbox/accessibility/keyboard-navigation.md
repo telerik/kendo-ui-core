@@ -8,13 +8,14 @@ position: 2
 
 # Keyboard Navigation
 
-By default, the keyboard navigation of the ListBox HtmlHelper is disabled.
+By default, the keyboard navigation of the ListBox is disabled.
 
 The ListBox supports its keyboard navigation functionality through the `Navigatable` option. When set to `true`, you can initially select an item and then move within the ListBox by using the `Arrow` keys. The navigation occurs at item level regardless of what the selectable mode is. To select the current item, press `Space`.
 
 The following example demonstrates how to enable the key navigation in the ListBox.
 
-```
+```HtmlHelper
+
     @(Html.Kendo().ListBox()
         .Name("listbox")
         .ConnectWith("listbox2")
@@ -35,7 +36,36 @@ The following example demonstrates how to enable the key navigation in the ListB
         .Selectable(ListBoxSelectable.Single)
         .Navigatable(true) // Enable the keyboard navigation
     )
+
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var products = new List<ProductViewModel>();
+    }
+     <kendo-listbox name="listbox"
+                    connect-with="listbox2"
+                    datavaluefield="ProductID"
+                    datatextfield="ProductName"
+                    selectable="ListBoxSelectable.Multiple"
+                    navigatable="true">
+            <datasource>
+                <transport>
+                    <read url="@Url.Action("GetProducts", "ListBox")"/>
+                </transport>
+            </datasource>
+     </kendo-listbox>
+
+     <kendo-listbox name="listbox2"
+                    bind-to="products"
+                    datavaluefield="ProductID"
+                    datatextfield="ProductName"
+                    selectable="ListBoxSelectable.Single"
+                    navigatable="true">
+     </kendo-listbox>
+
+```
+{% endif %}
 
 ## See Also
 

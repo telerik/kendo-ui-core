@@ -1,8 +1,8 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.core" ], f);
-})(function(){
+})(function() {
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "dateinput",
     name: "DateInput",
     category: "web",
@@ -10,7 +10,7 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core" ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var global = window;
     var kendo = global.kendo;
     var caret = kendo.caret;
@@ -18,16 +18,13 @@ var __meta__ = { // jshint ignore:line
     var Widget = ui.Widget;
     var keys = kendo.keys;
     var ns = ".kendoDateInput";
-    var proxy = $.proxy;
     var objectToString = {}.toString;
 
     var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertychange.kendoDateInput input" : "input") + ns;
 
-    var STATEDISABLED = "k-state-disabled";
-    var STATEDEFAULT = "k-state-default";
-    // var STATEFOCUSED = "k-state-focused";
-    // var STATEHOVER = "k-state-hover";
-    var STATEINVALID = "k-state-invalid";
+    var FOCUSED = "k-focus";
+    var STATEDISABLED = "k-disabled";
+    var STATEINVALID = "k-invalid";
 
     var DISABLED = "disabled";
     var READONLY = "readonly";
@@ -36,7 +33,7 @@ var __meta__ = { // jshint ignore:line
     var knownSymbols = "dMyHhmftsz";
 
     var DateInput = Widget.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
@@ -47,29 +44,32 @@ var __meta__ = { // jshint ignore:line
             options.min = kendo.parseDate(element.attr("min")) || kendo.parseDate(options.min);
             options.max = kendo.parseDate(element.attr("max")) || kendo.parseDate(options.max);
 
-            var insidePicker = ((element.parent().attr("class") || "").indexOf("k-picker-wrap") >= 0);
-            if (insidePicker) {
+            var wrapperClass = (element.parent().attr("class") || "");
+            var skipWrapping = wrapperClass.indexOf("picker") >= 0 && wrapperClass.indexOf("rangepicker") < 0;
+
+            if (skipWrapping) {
                 that.wrapper = element.parent();
             } else {
-                that.wrapper = element.wrap("<span class='k-widget k-dateinput'></span>").parent();
+                that.wrapper = element.wrap("<span class='k-dateinput k-input'></span>").parent();
                 that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
                 that.wrapper[0].style.cssText = element[0].style.cssText;
                 element.css({
-                    width: "100%",
                     height: element[0].style.height
                 });
             }
 
-            that._inputWrapper = $(that.wrapper[0]);
-
-            $("<span class='k-icon k-i-warning'></span>").insertAfter(element);
+            that._validationIcon = $("<span class='k-input-validation-icon k-icon k-i-warning k-hidden'></span>").insertAfter(element);
 
             that._form();
 
             that.element
-                .addClass(insidePicker ? " " : "k-textbox")
+                .addClass(skipWrapping ? " " : "k-input-inner")
                 .attr("autocomplete", "off")
-                .on("focusout" + ns, function () {
+                .on("focus" + ns, function() {
+                    that.wrapper.addClass(FOCUSED);
+                })
+                .on("focusout" + ns, function() {
+                    that.wrapper.removeClass(FOCUSED);
                     that._change();
                 });
 
@@ -88,6 +88,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.value(that.options.value || element.val());
+            that._applyCssClasses();
 
             kendo.notify(that);
         },
@@ -108,14 +109,17 @@ var __meta__ = { // jshint ignore:line
                 "minute": "minutes",
                 "second": "seconds",
                 "dayperiod": "AM/PM"
-            }
+            },
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium"
         },
 
         events: [
             CHANGE
         ],
 
-        min: function (value) {
+        min: function(value) {
             if (value !== undefined) {
                 this.options.min = value;
             } else {
@@ -123,7 +127,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        max: function (value) {
+        max: function(value) {
             if (value !== undefined) {
                 this.options.max = value;
             } else {
@@ -131,7 +135,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        setOptions: function (options) {
+        setOptions: function(options) {
             var that = this;
             Widget.fn.setOptions.call(that, options);
             this._unbindInput();
@@ -139,7 +143,7 @@ var __meta__ = { // jshint ignore:line
             this._updateElementValue();
         },
 
-        destroy: function () {
+        destroy: function() {
             var that = this;
             that.element.off(ns);
 
@@ -150,7 +154,7 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.destroy.call(that);
         },
 
-        value: function (value) {
+        value: function(value) {
             if (value === undefined) {
                 return this._dateTime.getDateObject();
             }
@@ -173,51 +177,56 @@ var __meta__ = { // jshint ignore:line
             this._oldValue = value;
         },
 
-        _updateElementValue: function () {
+        _updateElementValue: function() {
             var stringAndFromat = this._dateTime.toPair(this.options.format, this.options.culture, this.options.messages);
             this.element.val(stringAndFromat[0]);
             this._oldText = stringAndFromat[0];
             this._format = stringAndFromat[1];
         },
 
-        readonly: function (readonly) {
+        readonly: function(readonly) {
             this._editable({
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
         },
 
-        enable: function (enable) {
+        enable: function(enable) {
             this._editable({
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
         },
 
-        _bindInput: function () {
+        _bindInput: function() {
             var that = this;
             that.element
-                .on("focusout" + ns, function () {
+                .on("focus" + ns, function() {
+                    that.wrapper.addClass(FOCUSED);
+                })
+                .on("focusout" + ns, function() {
+                    that.wrapper.removeClass(FOCUSED);
                     that._change();
                 })
-                .on("paste" + ns, proxy(that._paste, that))
-                .on("keydown" + ns, proxy(that._keydown, that))
-                .on(INPUT_EVENT_NAME, proxy(that._input, that))
-                .on("mouseup" + ns, proxy(that._mouseUp, that))
-                .on("DOMMouseScroll" + ns + " mousewheel" + ns, proxy(that._scroll, that));
+                .on("paste" + ns, that._paste.bind(that))
+                .on("keydown" + ns, that._keydown.bind(that))
+                .on(INPUT_EVENT_NAME, that._input.bind(that))
+                .on("mouseup" + ns, that._mouseUp.bind(that))
+                .on("DOMMouseScroll" + ns + " mousewheel" + ns, that._scroll.bind(that));
         },
 
-        _unbindInput: function () {
+        _unbindInput: function() {
             this.element
                 .off("keydown" + ns)
                 .off("paste" + ns)
+                .off("focus" + ns)
                 .off("focusout" + ns)
                 .off(INPUT_EVENT_NAME)
                 .off("mouseup" + ns)
                 .off("DOMMouseScroll" + ns + " mousewheel" + ns);
         },
 
-        _editable: function (options) {
+        _editable: function(options) {
             var that = this;
             var element = that.element;
             var disable = options.disable;
@@ -227,9 +236,8 @@ var __meta__ = { // jshint ignore:line
             that._unbindInput();
 
             if (!readonly && !disable) {
-                wrapper.addClass(STATEDEFAULT)
-                    .removeClass(STATEDISABLED);
-                if(element && element.length) {
+                wrapper.removeClass(STATEDISABLED);
+                if (element && element.length) {
                     element[0].removeAttribute(DISABLED);
                     element[0].removeAttribute(READONLY);
                 }
@@ -237,10 +245,9 @@ var __meta__ = { // jshint ignore:line
                 that._bindInput();
             } else {
                 if (disable) {
-                    wrapper.addClass(STATEDISABLED)
-                    .removeClass(STATEDEFAULT);
+                    wrapper.addClass(STATEDISABLED);
                     element.attr(DISABLED, disable);
-                    if(element && element.length) {
+                    if (element && element.length) {
                         element[0].removeAttribute(READONLY);
                     }
                 }
@@ -250,7 +257,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _change: function () {
+        _change: function() {
             var that = this;
             var oldValue = that._oldValue;
             var value = that.value();
@@ -274,7 +281,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _input: function () {
+        _input: function() {
             var that = this;
             var element = that.element[0];
             var blinkInvalid = false;
@@ -304,35 +311,55 @@ var __meta__ = { // jshint ignore:line
                 //android fix
                 if (!navigationOnly) {
                     var difSym = diff[0][0];
-                    setTimeout(function () { that._selectSegment(difSym); });
+                    setTimeout(function() { that._selectSegment(difSym); });
                 }
             }
             if (navigationOnly) {
-                var newEvent = { keyCode: 39, preventDefault: function () { } };
+                var newEvent = { keyCode: 39, preventDefault: function() { } };
                 this._keydown(newEvent);
             }
             if (blinkInvalid) {
-                clearTimeout(that._blinkInvalidTimeout);
-                var stateInvalid = STATEINVALID;
-                that.wrapper.addClass(STATEINVALID);
-                that._blinkInvalidTimeout = setTimeout(function () { that.wrapper.removeClass(stateInvalid); }, 100);
+                that._blinkInvalidState();
             }
         },
 
-        _mouseUp: function () {
+        _blinkInvalidState: function() {
+            var that = this;
+
+            that._addInvalidState();
+            clearTimeout(that._invalidStateTimeout);
+            that._invalidStateTimeout = setTimeout(that._removeInvalidState.bind(that), 100);
+        },
+
+        _addInvalidState: function() {
+            var that = this;
+
+            that.wrapper.addClass(STATEINVALID);
+            that._validationIcon.removeClass("k-hidden");
+        },
+
+        _removeInvalidState: function() {
+            var that = this;
+
+            that.wrapper.removeClass(STATEINVALID);
+            that._validationIcon.addClass("k-hidden");
+            that._invalidStateTimeout = null;
+        },
+
+        _mouseUp: function() {
             var selection = caret(this.element[0]);
             if (selection[0] === selection[1]) {
                 this._selectNearestSegment();
             }
         },
 
-        _scroll: function (e) {
+        _scroll: function(e) {
             if (kendo._activeElement() !== this.element[0] || this.element.is("[readonly]")) {
                 return;
             }
             e = window.event || e;
 
-            var newEvent = { keyCode: 37, preventDefault: function () { } };
+            var newEvent = { keyCode: 37, preventDefault: function() { } };
 
             if (e.shiftKey) {
                 newEvent.keyCode = (e.wheelDelta || -e.detail) > 0 ? 37 : 39;
@@ -349,7 +376,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _form: function () {
+        _form: function() {
             var that = this;
             var element = that.element;
             var formId = element.attr("form");
@@ -361,8 +388,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (form[0]) {
-                that._resetHandler = function () {
-                    setTimeout(function () {
+                that._resetHandler = function() {
+                    setTimeout(function() {
                         that.value(initialValue);
                     });
                 };
@@ -371,11 +398,11 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _paste: function (e) {
+        _paste: function(e) {
             e.preventDefault();
         },
 
-        _keydown: function (e) {
+        _keydown: function(e) {
             var key = e.keyCode;
             var selection;
             if (key == 37 || key == 39) { //left/right
@@ -413,17 +440,17 @@ var __meta__ = { // jshint ignore:line
                 var keycode = e.keyCode ? e.keyCode : e.which;
                 if (keycode === 8 || keycode === 46) {
                     var that = this;
-                    setTimeout(function () {
+                    setTimeout(function() {
                         that._input();
                     }, 0);
                 }
             }
-            if (key === keys.ENTER){
+            if (key === keys.ENTER) {
                 this._change();
             }
         },
 
-        _selectNearestSegment: function () {
+        _selectNearestSegment: function() {
             var selection = caret(this.element[0]);
             var start = selection[0];
             for (var i = start, j = start - 1; i < this._format.length || j >= 0; i++ , j--) {
@@ -438,7 +465,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _selectSegment: function (symbol) {
+        _selectSegment: function(symbol) {
             var begin = -1, end = 0;
             for (var i = 0; i < this._format.length; i++) {
                 if (this._format[i] === symbol) {
@@ -456,9 +483,16 @@ var __meta__ = { // jshint ignore:line
 
     });
 
+    kendo.cssProperties.registerPrefix("DateInput", "k-input-");
+
+    kendo.cssProperties.registerValues("DateInput", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
+
     ui.plugin(DateInput);
 
-    var customDateTime = function (initDate, initFormat, initCulture, initMessages) {
+    var customDateTime = function(initDate, initFormat, initCulture, initMessages) {
 
         var value = null;
         var year = true, month = true, date = true, hours = true, minutes = true, seconds = true, milliseconds = true;
@@ -481,7 +515,7 @@ var __meta__ = { // jshint ignore:line
         }
         var dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|zzz|zz|z|"[^"]*"|'[^']*'/g;
         var months = null, calendar = null, days = null, returnsFormat = false;
-        var matcher = function (match) {
+        var matcher = function(match) {
             var mins, sign;
             var result;
 
@@ -577,15 +611,15 @@ var __meta__ = { // jshint ignore:line
             }
         }
 
-        this.setValue = function (val) {
+        this.setValue = function(val) {
             date = val;
         };
 
-        this.getValue = function () {
+        this.getValue = function() {
             return date;
         };
 
-        this.modifyPart = function (symbol, offset) {
+        this.modifyPart = function(symbol, offset) {
             var newValue = new Date((value && value.getTime) ? value.getTime() : value);
             switch (symbol) {
                 case "y": newValue.setFullYear(newValue.getFullYear() + offset); break;
@@ -613,18 +647,19 @@ var __meta__ = { // jshint ignore:line
             }
         };
 
-        this.parsePart = function (symbol, currentChar) {
+        this.parsePart = function(symbol, currentChar) {
             if (!currentChar) {
                 setExisting(symbol, false);
                 return true;
             }
             var newValue = new Date((value && value.getTime) ? value.getTime() : value);
+            var lastDateOfMonth = new Date(newValue.getFullYear(), newValue.getMonth() + 1, 0).getDate();
             var newHours;
             switch (symbol) {
                 case "d":
                     var newDate = (date ? newValue.getDate() * 10 : 0) + parseInt(currentChar, 10);
                     if (isNaN(newDate)) { return; }
-                    while (newDate > 31) {
+                    while (newDate > lastDateOfMonth) {
                         newDate = parseInt(newDate.toString().slice(1), 10);
                     }
                     if (newDate < 1) {
@@ -742,7 +777,7 @@ var __meta__ = { // jshint ignore:line
             return true;
         };
 
-        this.toPair = function (format, culture , messages) {
+        this.toPair = function(format, culture , messages) {
             if (!format) {
                 return ["", ""];
             }
@@ -758,7 +793,7 @@ var __meta__ = { // jshint ignore:line
             ];
         };
 
-        this.getDateObject = function () {
+        this.getDateObject = function() {
             return (year && month && date && hours && minutes && seconds && milliseconds) ?
                 new Date(value.getTime()) : null;
         };
@@ -774,7 +809,7 @@ var __meta__ = { // jshint ignore:line
         }
     };
 
-    function approximateStringMatching(oldText, oldFormat, newText, caret){
+    function approximateStringMatching(oldText, oldFormat, newText, caret) {
         var oldTextSeparator = oldText[caret + oldText.length - newText.length];
         oldText = oldText.substring(0, caret + oldText.length - newText.length);
         newText = newText.substring(0, caret);
@@ -822,4 +857,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

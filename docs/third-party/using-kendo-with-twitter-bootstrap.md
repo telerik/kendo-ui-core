@@ -30,8 +30,6 @@ Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the defau
 
 Using the responsive features of Bootstrap does not differ from other responsive sites.
 
-For detailed information on how to use Kendo UI in responsive web pages, refer to [this article on responsive web design]({% slug responsivewebdesign_integration_kendoui %}).
-
 ## Using Custom Bootstrap Themes
 
 If you have customized the Bootstrap color scheme and need Kendo UI to match it, follow the steps of any of the two options below:
@@ -80,18 +78,19 @@ You can add the following CSS rules _after_ the Bootstrap and Kendo UI styleshee
     .container,
     .container-fluid,
     .row,
-    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
-    .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
-    .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
-    .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
-    .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
-    .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
-    .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
-    .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
-    .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
-    .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
-    .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
-    .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
+    a.dropdown-item,
+    .col-1, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xl-1, .col-xxl-1,
+    .col-2, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xl-2, .col-xxl-2,
+    .col-3, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xl-3, .col-xxl-3,
+    .col-4, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xl-4, .col-xxl-4,
+    .col-5, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xl-5, .col-xxl-5,
+    .col-6, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xl-6, .col-xxl-6,
+    .col-7, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xl-7, .col-xxl-7,
+    .col-8, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xl-8, .col-xxl-8,
+    .col-9, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xl-9, .col-xxl-9,
+    .col-10, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xl-10, .col-xxl-10,
+    .col-11, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xl-11, .col-xxl-11,
+    .col-12, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 .col-xl-12, .col-xxl-12
     {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;

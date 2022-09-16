@@ -102,7 +102,7 @@
         });
 
         it("dragend event is raised when pressing escape", function() {
-            setup({ dragcancel: function() { assert.isOk(true) } });
+            setup({ dragcancel: function() { assert.isOk(true); } });
 
             trigger("mousedown", { pageX: 1, pageY: 1 });
             trigger("mousemove", { pageX: 10, pageY: 1 });

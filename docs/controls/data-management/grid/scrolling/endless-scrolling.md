@@ -1,6 +1,6 @@
 ---
 title: Endless Scrolling
-page_title: jQuery Grid Documentation | Endless Scrolling | Kendo UI
+page_title: jQuery Grid Documentation | Endless Scrolling
 description: "Get started with the jQuery Grid by Kendo UI supporting endless scrolling mode suitable for displaying large number of items."
 slug: endless_scrolling_kendoui_grid_widget
 position: 3
@@ -8,7 +8,7 @@ position: 3
 
 # Endless Scrolling
 
-Endless scrolling is suitable when you display large number of items and use editing, grouping, filtering, sorting, or hierarchy.
+Endless scrolling is an alternative to paging. The functionality is suitable when you display large number of items and use editing, grouping, filtering, sorting, or hierarchy.
 
 For runnable examples, refer to:
 * [Demo on endless scrolling of local data by the Grid](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local)
@@ -53,6 +53,34 @@ If the Grid is bound to remote data, enable `serverGrouping` to apply grouping t
 If the Grid displays hierarchical data and an item gets expanded, it will not be collapsed when the items are scrolled and a new page will be requested.
 
 > The filtering, sorting, and grouping operations reset the scroll position.
+
+## Using with DataSource operations
+
+When a filter, sort, or group is applied through the [`DataSource methods`](/api/javascript/data/datasource#methods) rather than the Grid UI, the scroll position isn't automatically reset.
+
+In such cases, the scroll position and [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) should be updated manually.
+
+        $("#grid").kendoGrid({
+            scrollable: {
+                endless: true
+            },
+            // Other configuration.
+        });
+
+        let grid = $("#grid").data("kendoGrid");
+
+        // Reset the scroll position and update the pageSize before invoking the operation.
+        grid.dataSource.options.endless = null;
+        grid._endlessPageSize = grid.dataSource.options.pageSize;
+        grid.dataSource.pageSize(grid.dataSource.options.pageSize);
+        
+        // Apply a filter, sort or group after that.
+        let filter = {field: "exampleField", operator: "eq", value: "example value"}
+        grid.dataSource.filter(filter);
+
+## Known Limitations
+
+* Either enable endless scrolling or paging. Do not apply both features at the same time.
 
 ## KB Articles on Scrolling
 

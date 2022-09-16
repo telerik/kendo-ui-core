@@ -203,7 +203,7 @@
                 autocomplete.one("dataBound", function() {
                     autocomplete.one("dataBound", function() {
                         var item40 = autocomplete.listView.content.find("li")
-                            .filter(function(_, li) { return $(li).data("offsetIndex") == 40 });
+                            .filter(function(_, li) { return $(li).data("offsetIndex") == 40; });
 
                         item40.click();
 

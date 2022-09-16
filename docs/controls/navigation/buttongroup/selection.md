@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: jQuery ButtonGroup Documentation | Selection | Kendo UI
+page_title: jQuery ButtonGroup Documentation | Selection
 description: "Get started with the jQuery ButtonGroup by Kendo UI and restrict the number of selectable Buttons within the ButtonGroup."
 slug: selection_kendoui_buttongroup
 position: 6
@@ -13,8 +13,8 @@ You can restrict the number of Buttons that can be selected by using the `select
 The property can be configured for a `single` or `multiple` selection.
 
     <div id="buttongroup">
-        <span class="k-state-active">Option 1</span>
-        <span class="k-state-active">Option 2</span>
+        <span class="k-active">Option 1</span>
+        <span class="k-active">Option 2</span>
         <span>Option 3</span>
     </div>
 

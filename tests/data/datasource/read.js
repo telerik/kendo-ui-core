@@ -881,7 +881,7 @@
                 }
             });
 
-            dataSource.read()
+            dataSource.read();
 
             assert.equal(dataSource._pageSize, 4);
         });

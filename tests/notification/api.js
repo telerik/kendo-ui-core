@@ -286,8 +286,6 @@
         it("new popup ignores old ones that are currently being hidden", function() {
             createNotification();
 
-
-
             notification.show("foo");
             var popup1 = $(".k-notification").last();
             var offset1 = popup1.offset();

@@ -1,0 +1,407 @@
+// Button
+.k-button {
+    margin: 0;
+    padding: @button-padding;
+    box-sizing: border-box;
+    border-width: @button-border-width;
+    border-style: solid;
+    background-repeat: repeat-x;
+    background-position: 0 center;
+    font: inherit;
+    line-height: @button-line-height;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    overflow: hidden;
+    align-items: center;
+    gap: @icon-spacing;
+    justify-content: center;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    position: relative;
+
+    &::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+        outline: 0;
+    }
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        outline: 0;
+    }
+
+    .k-text,
+    .k-button-text {
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .k-icon,
+    .k-image,
+    .k-sprite {
+        color: inherit;
+        align-self: center;
+        pointer-events: none;
+    }
+
+    // Disabled state
+    &[disabled],
+    &.k-disabled {
+        cursor: default;
+        outline: 0;
+        box-shadow: none;
+        opacity: @disabled-button-opacity;
+        pointer-events: none;
+    }
+
+}
+
+// Icon button
+.k-icon-button,
+.k-button.k-button-icon {
+    width: @button-calc-size;
+    height: @button-calc-size;
+    padding: @button-padding-y;
+    gap: 0;
+
+    .k-text,
+    .k-button-text {
+        display: none;
+    }
+}
+
+a.k-button-expand {
+    display: block;
+}
+
+button.k-button-expand,
+input[type="submit"].k-button-expand,
+input[type="button"].k-button-expand,
+input[type="reset"].k-button-expand {
+    width: 100%;
+}
+
+// Menu button
+.k-menu-button,
+.k-dropdown-button {
+    outline: 0;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    vertical-align: middle;
+}
+
+// Flat button and bare
+.k-button-flat,
+.k-button.k-button-clear {
+    border-color: transparent !important;
+    color: inherit;
+    background: none !important;
+    box-shadow: none !important;
+    transition: color .2s ease-in-out;
+
+    &::before {
+        display: block !important;
+    }
+
+    &::after {
+        box-shadow: inset 0 0 0 2px currentColor;
+        display: block !important;
+    }
+
+    &:focus::after,
+    &.k-focus::after {
+        opacity: .12;
+    }
+
+    &[disabled],
+    .k-disabled &,
+    &.k-disabled {
+        pointer-events: none;
+    }
+}
+
+// Outline button
+.k-button-outline {
+    border-color: currentColor;
+    color: inherit;
+    background: none;
+}
+
+// Link button
+.k-button-link {
+
+    &,
+    &.k-hover {
+        border-color: transparent;
+        color: inherit;
+        text-decoration: none;
+        background: none;
+    }
+
+    &:hover,
+    &.k-hover {
+        text-decoration: underline;
+    }
+
+    &.k-active {
+        border-color: transparent;
+    }
+}
+
+// Button Overlay
+@flat-button-hover-opacity: .08;
+@flat-button-active-opacity: .16;
+@flat-button-selected-opacity: .2;
+.k-button {
+
+    &::before {
+        .border-radius(inherit);
+        content: "";
+        background: currentColor;
+        opacity: 0;
+        display: none;
+        pointer-events: none;
+        position: absolute;
+        left: -@button-border-width;
+        right: -@button-border-width;
+        top: -@button-border-width;
+        bottom: -@button-border-width;
+        z-index: 0;
+        transition: opacity .2s ease-in-out;
+    }
+
+    // Focused state
+    &.k-no-focus:not(:hover),
+    &.k-no-focus:not(.k-hover) {
+        &::before {
+            opacity: 0;
+        }
+    }
+
+    // Pressed state
+    &:active,
+    &.k-active {
+        &::before {
+            // opacity( @flat-button-active-opacity );
+            opacity: @flat-button-active-opacity;
+        }
+    }
+
+    // Selected state
+    &.k-selected {
+        &::before {
+            // .opacity( @flat-button-selected-opacity );
+            opacity: @flat-button-selected-opacity;
+        }
+    }
+}
+
+// Focus ring
+.k-button {
+
+    &::after {
+        .border-radius(inherit);
+        content: "";
+        opacity: 0;
+        display: none;
+        pointer-events: none;
+        position: absolute;
+        // left: -@button-border-width;
+        // right: -@button-border-width;
+        // top: -@button-border-width;
+        // bottom: -@button-border-width;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 0;
+        transition: opacity .2s ease-in-out;
+    }
+}
+
+// Button group
+.k-button-group {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    list-style: none;
+    white-space: nowrap;
+    display: inline-flex;
+    flex-direction: row;
+    vertical-align: middle;
+    position: relative;
+    flex-wrap: nowrap;
+
+    &.k-button-group-flat .k-button.k-selected {
+        color: inherit;
+    }
+
+    .k-button {
+        position: relative;
+    }
+    .k-button + .k-button {
+        margin-left: -@button-border-width;
+    }
+
+    // stretched button group
+    &.k-button-group-stretched {
+        display: flex;
+
+        .k-button {
+            flex: 1 0 auto;
+        }
+    }
+
+    .k-button:active,
+    .k-button.k-active {
+        z-index: 2;
+    }
+    .k-button:hover,
+    .k-button.k-hover {
+        z-index: 3;
+    }
+    .k-button.k-disabled,
+    &.k-disabled .k-button {
+        z-index: auto;
+    }
+    .k-button:focus,
+    .k-button.k-focus {
+        z-index: 4;
+    }
+
+    .k-button:not(:first-child):not(:last-child):not(.k-overflow-button) {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+    }
+    > .k-button:first-child:not(:only-child):not(.k-overflow-button) {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+    }
+    > .k-button:last-child:not(:only-child):not(.k-overflow-button) {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+    }
+
+    > input[type="radio"],
+    > input[type="checkbox"],
+    label input[type="radio"],
+    label input[type="checkbox"] {
+        margin: 0;
+        padding: 0;
+        clip: rect(0, 0, 0, 0);
+        position: absolute;
+        pointer-events: none;
+    }
+
+}
+
+// Split button
+.k-split-button {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    outline: 0;
+    list-style: none;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    vertical-align: middle;
+
+    > .k-split-button-arrow,
+    > .k-button:last-child {
+        margin-left: -@button-border-width;
+        padding: @button-padding-y;
+        width: auto;
+        flex: none;
+    }
+}
+.k-split-container {
+
+    > li {
+        padding: 1px;
+    }
+
+    .k-button {
+        width: 100%;
+        border-color: transparent;
+        background-color: transparent;
+        background-image: none !important;
+        text-align: left;
+        white-space: nowrap;
+        justify-content: flex-start;
+    }
+}
+
+// Action buttons
+.k-action-buttons {
+    margin: 1em 0 0;
+    padding: 6px 8px;
+    text-align: right;
+    position: relative;
+    clear: both;
+
+    .k-button {
+        min-width: 75px;
+    }
+    .k-button + .k-button {
+        margin-left: 6px;
+    }
+    .k-button.k-left {
+        float: left;
+        margin: 0 0 0 1em;
+    }
+}
+
+// RTL
+.k-rtl {
+
+    .k-button-group {
+
+        .k-button {
+            margin-left: 0;
+        }
+        .k-button + .k-button {
+            margin-right: -@button-border-width
+        }
+    }
+    .k-split-button {
+        .k-split-button-arrow {
+            margin-left: 0;
+            margin-right: -@button-border-width;
+        }
+    }
+    .k-split-container {
+        .k-button {
+            text-align: right;
+        }
+    }
+}
+
+// No flexbox
+.k-no-flexbox {
+
+    .k-button {
+        display: inline-block;
+    }
+
+    .k-button-group {
+        display: inline-block;
+
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .k-button {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}

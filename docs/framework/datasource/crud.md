@@ -355,7 +355,7 @@ The following example is a modified version of the previous one which, due to th
 If an error in the server code occurs, the server response can notify the client-side DataSource instance.
 
 * For more information on handling errors in such scenarios, refer to the section about [error handling with remote transport]({% slug cruddataoperations_kendoui_datasourcecomponent %}#error-handling-with-remote-transport).
-* For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
+* For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_combobox_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
 
 ### Remote Update Operation
 

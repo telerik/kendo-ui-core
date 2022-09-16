@@ -34,11 +34,11 @@ The following example demonstrates how to implement this scenario.
             <base href="https://demos.telerik.com/kendo-ui/spreadsheet/custom-editors">
             <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
             <title></title>
-            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.default-v2.min.css" />
+            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-v2.min.css" />
 
-            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
         </head>
         <body>
             <div id="example">

@@ -250,6 +250,25 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="autocomplete" />
+
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String` *(default: "startswith")*
 
 The filtering method used to determine the suggestions for the current value. The default filter is "startswith" -
@@ -351,7 +370,7 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     });
     </script>
 
-### highlightFirst `Boolean` *(default: true)*
+### highlightFirst `Boolean` *(default: false)*
 
 If set to `true` the first suggestion will be automatically highlighted.
 
@@ -515,6 +534,57 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
         appendTo: $("#container")
       }
     });
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <div id="container">
+        <input id="autocomplete" />
+    </div>
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <div id="container">
+        <input id="autocomplete" />
+    </div>
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        size: "large"
+      });
     </script>
 
 ### separator `String|Array` *(default: "")*
@@ -919,6 +989,7 @@ An object, which holds the options of the widget.
     var element = autocomplete.element;
     var options = autocomplete.options;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(options);
     </script>
 
@@ -934,6 +1005,7 @@ A jQuery object of the drop-down list element.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     var list = autocomplete.list;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(list);
     </script>
 
@@ -949,6 +1021,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     var ul = autocomplete.ul;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(ul);
     </script>
 
@@ -996,6 +1069,7 @@ The zero-based index of of the data item.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     // Search for items starting with "A" - will open the suggestion popup and show "Apples"
     autocomplete.search("A");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(autocomplete.dataItem(0)); // Displays "Apples" in the browser console
     </script>
 
@@ -1242,6 +1316,7 @@ The value to set.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.value("Apples");
     var value = autocomplete.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value); // Displays "Apples"
     </script>
 
@@ -1268,6 +1343,7 @@ The widget instance which fired the event.
     $("#autocomplete").kendoAutoComplete({
       change: function(e) {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value);
         // Use the value of the widget
       }
@@ -1390,6 +1466,7 @@ The filter descriptor that will be used to filter the data source.
       filtering: function(e) {
           //get filter descriptor
           var filter = e.filter;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(filter);
 
           // handle the event
@@ -1404,6 +1481,7 @@ The filter descriptor that will be used to filter the data source.
     function autocomplete_filtering(e) {
       //get filter descriptor
       var filter = e.filter;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(filter);
 
       // handle the event
@@ -1499,6 +1577,7 @@ The widget instance which fired the event.
       select: function(e) {
         var item = e.item;
         var text = item.text();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(text);
         // Use the selected item or its text
       }

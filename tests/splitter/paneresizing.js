@@ -4,7 +4,7 @@
 
     function startResizing(splitter, options) {
         var resizingHandler = splitter.object.resizing;
-        options = $.extend({ x: { location: 0 }, y: { location: 0 }, currentTarget: splitter.dom.find(".k-splitbar") }, options)
+        options = $.extend({ x: { location: 0 }, y: { location: 0 }, currentTarget: splitter.dom.find(".k-splitbar") }, options);
         options.x.startLocation = options.x.location;
         options.y.startLocation = options.y.location;
 
@@ -191,7 +191,7 @@
         it("resizing.stop fires splitter resize", function() {
             var triggered = false;
 
-            splitter = create({ resize: function() { triggered = true } });
+            splitter = create({ resize: function() { triggered = true; } });
 
             var splitBar = splitter.dom.find(".k-splitbar"),
                 resizingHandler = splitter.object.resizing;
@@ -440,7 +440,7 @@
 
             splitter.dom.find(".k-i-arrow-60-left").trigger("click");
 
-            assert.equal(panes.eq(0).width(), 0)
+            assert.equal(panes.eq(0).width(), 0);
         });
     });
 

@@ -42,6 +42,7 @@ TESTS.beforeTestFiles.push('src/angular.js');
 TESTS.beforeTestFiles.push('tests/angular-route.js');
 TESTS.beforeTestFiles.push('tests/jasmine.js');
 TESTS.beforeTestFiles.push('tests/jasmine-boot.js');
+TESTS.beforeTestFiles.push('node_modules/axe-core/axe.js');
 
 var defaultOptions = {
     reportSlowerThan: 500,
@@ -55,12 +56,6 @@ var defaultOptions = {
     colors: true,
     autoWatch: true,
     browsers: browsers,
-    customLaunchers: {
-        ChromiumTravis: {
-            base: 'ChromeHeadless',
-            flags: ['--no-sandbox']
-        }
-    },
     client: {
         mocha: {
             timeout: 10000
@@ -76,10 +71,10 @@ var defaultOptions = {
 };
 
 var flavours = {
-    jenkins: {
+    ci: {
         reporters: ['dots', 'junit'],
         singleRun: true,
-        browsers: browsers,
+        browsers: [ 'ChromeHeadless' ],
 
         files: [].concat(
             TESTS.beforeTestFiles,
@@ -88,20 +83,6 @@ var flavours = {
             tests
         )
     },
-
-    travis: {
-        reporters: ['dots'],
-        singleRun: true,
-        browsers: [ 'ChromiumTravis' ],
-
-        files: [].concat(
-            TESTS.beforeTestFiles,
-            TESTS.ciFiles,
-            TESTS.afterTestFiles,
-            tests
-        )
-    },
-
     mocha: {
         files: [].concat(
             TESTS.beforeTestFiles,

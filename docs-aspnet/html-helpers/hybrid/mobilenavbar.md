@@ -16,7 +16,7 @@ The NavBar displays an application navigation bar. It provides options for showi
 
 ## Basic Configuration
 
-1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Open `HomeController.cs` and modify the `Index` action method.
 
         public ActionResult Index()
@@ -26,38 +26,6 @@ The NavBar displays an application navigation bar. It provides options for showi
 
 1. Add a hybrid Telerik UI NavBar to the `Index` view. Like most hybrid controls, the NavBar must be initialized within the hybrid View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("navbar-home")
-            .Title("Index")
-            .Header(() =>
-            {
-                %>
-                <% Html.Kendo().MobileNavBar()
-                        .Content(navbar =>
-                        {
-                            %>
-                            <%: Html.Kendo().MobileBackButton()
-                                    .Align(MobileButtonAlign.Left)
-                                    .Text("Back")
-                            %>
-                            <%: navbar.ViewTitle("") %>
-                            <%
-                        })
-                        .Render();
-                %>
-                <%
-            })
-            .Content(() =>
-            {
-                %>
-                View Content
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("navbar-home")
             .Title("Index")
@@ -73,20 +41,12 @@ The NavBar displays an application navigation bar. It provides options for showi
                 )
             .Content(@<text>View Content</text>)
         )
-    ```
 
 1. Initialize the mobile applic1.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 

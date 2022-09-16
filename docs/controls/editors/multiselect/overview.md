@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery MultiSelect Documentation | MultiSelect Overview | Kendo UI
+page_title: jQuery MultiSelect Documentation | MultiSelect Overview
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_multiselect_widget
 position: 1
@@ -41,6 +41,7 @@ The following example demonstrates how to initialize the MultiSelect from an exi
 
 ## Functionality and Features
 
+* [Appearance]({% slug appearance_kendoui_multiselect_widget %})
 * [Data binding]({% slug databinding_multiselect %})
 * [Grouping]({% slug grouping_kendoui_multiselect_widget %})
 * [Server filtering]({% slug server_filtering_kendoui_multiselect_widget %})

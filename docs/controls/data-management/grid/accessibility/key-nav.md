@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: jQuery Grid Documentation | Keyboard Navigation | Kendo UI
+page_title: jQuery Grid Documentation | Keyboard Navigation
 description: "Get started with the jQuery Grid by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_kendoui_grid_widget
 position: 2
@@ -30,6 +30,12 @@ The keyboard navigation of the Grid works by listening to the `keydown` events o
 To return the focus on the table cell, press `Esc`. In order for the hyperlinks to be inaccessible through tabbing, set the `tabindex="-1"` attribute to the custom hyperlinks.
 
 You can also avoid the procedure and bypass the keyboard navigation of the Grid, access the custom hyperlinks with tabbing, and activate them with `Enter`. To achieve this, prevent the `keydown` event bubbling of the custom hyperlinks. As a result, the `Enter` key-presses will be unnoticed by the Grid.
+
+## Pager Navigation
+
+The Kendo UI Grid's pager inherits all of the keyboard navigation functionalities from the [Kendo UI Pager]({% slug overview_kendoui_pager_widget %}).
+
+For a complete list of all supported key combinations, refer to the [Pager's Keyboard Navigation]({% slug keynav_pager_jquery %}) article.
 
 ## See Also
 

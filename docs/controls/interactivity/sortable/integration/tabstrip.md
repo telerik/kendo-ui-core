@@ -1,6 +1,6 @@
 ---
 title: TabStrip
-page_title: jQuery Sortable Documentation | TabStrip Integration | Kendo UI
+page_title: jQuery Sortable Documentation | TabStrip Integration
 description: "Get started with the jQuery Sortable by Kendo UI and integrate the widget with the Kendo UI TabStrip."
 previous_url: /controls/interactivity/sortable/integration-tabstrip
 slug: integrationwith_tabstrip_sortable_widget
@@ -29,7 +29,7 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
         axis: "x",
         container: "ul.k-tabstrip-items",
         hint: function(element) {
-            return $("<div id='hint' class='k-widget k-header k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-state-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
+            return $("<div id='hint' class='k-widget k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
         },
         start: function(e) {
             $("#tabstrip").data("kendoTabStrip").activateTab(e.item);

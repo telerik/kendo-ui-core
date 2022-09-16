@@ -7,25 +7,37 @@ slug: htmlhelpers_maskedtextbox_aspnetcore
 position: 1
 ---
 
-# MaskedTextBox HtmlHelper Overview
+# MaskedTextBox Overview
 
+{% if site.core %}
+The Telerik UI MaskedTextBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI MaskedTextBox widget.
+{% else %}
 The Telerik UI MaskedTextBox HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI MaskedTextBox widget.
+{% endif %}
 
 The MaskedTextBox enables a controlled text input that is based on a specific format. The helper enables you to define its value and mask value, and set custom mask rules, prompt characters, and culture names. Each mask can contain mask rules and mask literals. The mask literals are automatically entered for the user and cannot be removed. You can also use the MaskedTextBox predefined rules which specify the required or optional digit, letter, or character input.
 
-* [Demo page for the MaskedTextBox](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/index)
+* [Demo page for the MaskedTextBox HtmlHelper](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/index)
+{% if site.core %}
+* [Demo page for the MaskedTextBox TagHelper](https://demos.telerik.com/aspnet-core/maskedtextbox/tag-helper)
+{% endif %}
 
 ## Basic Configuration
 
 The following example demonstrates the basic configuration for the MaskedTextBox.
 
-```
+```HtmlHelper
 	@(Html.Kendo().MaskedTextBox()
 		.Name("maskedtextbox") // The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the MaskedTextBox.
 		.Mask("(000) 000-0000") // Set the mask value of the MaskedTextBox.
 		.Value("(123) 345-6789") // Set the value of the MaskedTextBox.
 	)
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-maskedtextbox name="phone_number" mask="(999) 000-0000" value="555 123 4567"></kendo-maskedtextbox>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -39,7 +51,7 @@ You can subscribe to all MaskedTextBox events. For a complete example on basic M
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
   @(Html.Kendo().MaskedTextBox()
         .Name("maskedtextbox")
         .Events(e => e
@@ -52,6 +64,43 @@ The following example demonstrates how to subscribe to events by a handler name.
   }
   </script>
 ```
+{% if site.core %}
+```TagHelper
+  <kendo-maskedtextbox name="maskedtextbox" on-change="maskedtextbox_change"></kendo-maskedtextbox>
+  <script>
+  function maskedtextbox_change() {
+      // Handle the change event.
+  }
+  </script>
+```
+{% endif %}
+
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+    
+```HtmlHelper
+    @(Html.Kendo().MaskedTextBox()
+        .Name("maskedtextbox")
+        .Events(e => e
+            .Change(@<text>
+                function() {
+                    // Handle the change event inline.
+                }
+            </text>)
+        )
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-maskedtextbox name="maskedtextbox"
+                         on-change="
+                         function() {
+                           // Handle the change event inline.
+                         }">
+    </kendo-maskedtextbox>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 
@@ -70,5 +119,8 @@ The following example demonstrates how to access an existing MaskedTextBox insta
 ## See Also
 
 * [Basic Usage of the MaskedTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/index)
+{% if site.core %}
+* [Basic Usage of the MaskedTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/maskedtextbox/tag-helper)
+{% endif %}
 * [Using the API of the MaskedTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/api)
 * [Server-Side API](/api/maskedtextbox)

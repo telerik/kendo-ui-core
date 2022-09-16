@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery Upload Documentation | Troubleshooting | Kendo UI
+page_title: jQuery Upload Documentation | Troubleshooting
 description: "Get started with the jQuery Upload by Kendo UI and learn how to handle some of the common issues that may occur when you work with the widget."
 previous_url: /controls/editors/upload/troubleshoot/troubleshooting
 slug: troubleshooting_upload_widget
@@ -15,7 +15,7 @@ This article provides solutions for common issues you may encounter while workin
 * [Asynchronous uploads randomly fail](#asynchronouos-uploads-randomly-fail)
 * [The upload progress indicator incorrectly renders the progress of the upload](#the-upload-progress-indicator-incorrectly-renders-the-progress-of-the-upload)
 * [The Upload demonstrates general performance issues](#the-upload-demonstrates-general-performance-issues)
-* [Cannot access the error message console](cannot-access-the-error-message-console)
+* [Cannot access the error message console](#cannot-access-the-error-message-console)
 
 ## The Select button is partially visible and has no text
 

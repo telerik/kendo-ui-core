@@ -1,4 +1,4 @@
-(function(){
+(function() {
 
 var AutoComplete = kendo.ui.AutoComplete,
     input;
@@ -60,7 +60,7 @@ $.fn.type = function(value) {
         });
 };
 
-describe("kendo.ui.AutoComplete suggestion", function () {
+describe("kendo.ui.AutoComplete suggestion", function() {
     beforeEach(function() {
         input = $("<input>").appendTo(Mocha.fixture);
     });
@@ -346,7 +346,7 @@ it("suggest with null does not throw exception", function() {
     try {
         autocomplete.suggest(null);
         assert.isOk(true);
-    } catch(e) {
+    } catch (e) {
         assert.isOk(false);
     }
     });
@@ -368,7 +368,7 @@ it("search should filter items using filter property", function(done) {
 });
 
 it("filtering honors dataTextField", function(done) {
-    var data = [{text: "foo"}, {text: "2"}], autocomplete = new AutoComplete(input, {
+    var data = [{ text: "foo" }, { text: "2" }], autocomplete = new AutoComplete(input, {
         dataSource: data,
         dataTextField: "text"
     });

@@ -32,7 +32,7 @@ How can I disable the months in the calendar for the year? My min and max dates 
 The Kendo UI Calendar does not have a year template. As a result, to disable the dates:
 
 1. Select the cells from the generated table.
-1. Add the `k-state-disabled` class to them to prevent the selection.
+1. Add the `k-disabled` class to them to prevent the selection.
 
 You can stop the click from propagating and triggering a change with the [`e.stopImmediatePropagation()`](https://api.jquery.com/event.stopimmediatepropagation/) method.
 
@@ -43,7 +43,7 @@ The Calendar exposes a [`navigate`](https://docs.telerik.com/kendo-ui/api/javasc
 <script>
    function disableDates(calendar){
      calendar.element.find("tr:last-child td")
-       .addClass("k-state-disabled")
+       .addClass("k-disabled")
        .click(function(e){
        e.stopImmediatePropagation();
      });
