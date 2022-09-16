@@ -66,7 +66,7 @@ How can I change the format of a date column during the Excel export in the Kend
                 for (var q = 0; q < dateCells.length; q++) {
                     var cellIndex = dateCells[q];
                     var value = row.cells[cellIndex].value;
-                    var newValue = new Date(value.getFullYear(), value.getMonth(), value.getDate());
+                    var newValue = new Date(value.getFullYear(), value.getMonth(), value.getDay());
 
                     row.cells[cellIndex].value = newValue;
                     row.cells[cellIndex].format = "yyyy-MM-dd";
