@@ -23,7 +23,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 **Table 1: 508 and WCAG 2.1 compliance with Kendo UI widgets**
 
 |Component |508|WCAG 2.1| Accessibility Example |
-|:---          |:---|:---  
+|:---          |:---|:---|:---
 |ActionSheet   |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
 |AppBar	       |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/appbar)|
 |AutoComplete  |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/autocomplete)|
