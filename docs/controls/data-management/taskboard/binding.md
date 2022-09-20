@@ -90,7 +90,7 @@ The following example demonstrates how to bind a TaskBoard to a local data array
 
 ## Binding to Remote Data
 
-You can also bind the TaskBoard to remote data. Remote data binding enables the retrieval of data from the server. For more information, refer to the article on [using the Kendo UI DataSource]({% slug basicusage_kendoui_datasourcecomponent %}).
+You can also bind the TaskBoard to remote data. Remote data binding enables the retrieval of data from the server. For more information, refer to the article on [using the Kendo UI DataSource]({% slug getting_started_kendoui_remote_data_binding %}).
 
 The following example demonstrates how to enable remote binding for the TaskBoard by setting the DataSource `transport` configuration.
 

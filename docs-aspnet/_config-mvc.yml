@@ -376,6 +376,11 @@ defaults:
         title_prefix: "ASP.NET MVC RadioGroup Component"
 -
     scope:
+        path: "html-helpers/editors/signature"
+    values:
+        title_prefix: "ASP.NET MVC Signature Component"
+-
+    scope:
         path: "html-helpers/editors/slider"
     values:
         title_prefix: "ASP.NET MVC Slider Component"

@@ -45,7 +45,7 @@ To make sure all scripts are loaded, make a simple API call to render the [Kendo
 
 You will now create a [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) with some dummy orders which will later be used to bind a Grid.
 
-A hard-coded array of data items is the simplest way to create a `datasource`. In real-life scenarios, you may want to fetch [remote data]({% slug basicusage_kendoui_datasourcecomponent %}) or configure [editing (CRUD operations)]({% slug cruddataoperations_kendoui_datasourcecomponent %}).
+A hard-coded array of data items is the simplest way to create a `datasource`. In real-life scenarios, you may want to fetch [remote data]({% slug getting_started_kendoui_remote_data_binding %}) or configure [editing (CRUD operations)]({% slug cruddataoperations_kendoui_datasourcecomponent %}).
 
 To ensure the correct implementation of the data operations, you need to configure the [data field types](/api/javascript/data/datasource/configuration/schema#schemamodel). In addition, you will apply a [page size](/api/javascript/data/datasource/configuration/pagesize) and a default [sorting](/api/javascript/data/datasource/configuration/sort) by `OrderDate`.
 

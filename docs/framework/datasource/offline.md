@@ -1,20 +1,18 @@
 ---
 title: Offline Support
 page_title: Offline Support | Kendo UI Data Source
-description: "Learn more about the offline support Kendo UI provides you with when working with the DataSource component."
+description: "Learn more about the offline support the Kendo UI for jQuery framework provides when working with the DataSource component and your JavaScript widgets."
 slug: offlinesupport_kendoui_datasourcecomponent
-position: 3
+position: 7
 ---
 
 # Offline Support
 
-Offline support enables data-bound Kendo UI widgets to function without an active server connection.
+As of the Kendo UI 2014 Q2 SP1 release, the Kendo UI for jQuery DataSource component provides offline support, which enables data-bound Kendo UI for jQuery widgets to function without an active server connection.
 
 Users can continue to work with the available data until the network connectivity resumes. When the connection becomes available, the DataSource synchronizes all changes with the remote service.
 
-> The offline storage support feature is available as of the Kendo UI 2014 Q2 SP1 release.
-
-**Figure 1: Offline storage mechanism**
+**Offline storage mechanism**
 
 ![Offline Storage](/framework/datasource/OfflineStorage.gif)
 
@@ -41,7 +39,7 @@ The following example demonstrates how to set the offline storage key.
         }
     });
 
-## Switching the Offline and Online Modes
+## Switching between Offline and Online Mode
 
 By default, the DataSource is online. All data item changes, such as create, update, and destroy, are included in the remote service that is configured through the [`transport`](/api/javascript/data/datasource/configuration/transport) option.
 
@@ -155,7 +153,7 @@ At the time of this writing, no cross-browser way for determining whether a web 
 
 To configure the DataSource to automatically detect offline mode, use either handle the [`online` and `offline`](https://developer.mozilla.org/en-US/docs/Online_and_offline_events) events or use AJAX polling.
 
-### Handling the online and offline Events
+### Handling Online and Offline Events
 
 The `online` and `offline` events behave differently across the browsers. Firefox and Internet Explorer fire those events when the user switches between offline and online mode. However, the `online` and `offline` events work as expected in mobile devices and PhoneGap applications.
 
@@ -237,7 +235,6 @@ The data saving fails and the browser throws an exception. To handle the error, 
 ## See Also
 
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
-* [Basic Usage]({% slug basicusage_kendoui_datasourcecomponent %})
 * [CORS Data Fetching from Another Domain]({% slug corsdatafetching_anotherdomain_datasourcecomponent %})
 * [CRUD Data Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %})
 * [DataSource JavaScript API Reference](/api/javascript/data/datasource)

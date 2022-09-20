@@ -54,7 +54,7 @@ The following example demonstrates how to bind an OrgChart to a local data array
 
 ## Binding to Remote Data
 
-You can also bind the OrgChart to remote data. Remote data binding enables the retrieval of data from the server. For more information, refer to the article on [using the Kendo UI DataSource]({% slug basicusage_kendoui_datasourcecomponent %}).
+You can also bind the OrgChart to remote data. Remote data binding enables the retrieval of data from the server. For more information, refer to the article on [using the Kendo UI DataSource]({% slug getting_started_kendoui_remote_data_binding %}).
 
 The Kendo UI OrgChart supports lazy loading. Whether all nodes will be loaded on the initial request or the nodes will be loaded on demand depends on the respective read endpoint. 
 If the endpoint returns the items per node, additional request will be sent to the server for loading the child nodes when the parent node gets expanded. 

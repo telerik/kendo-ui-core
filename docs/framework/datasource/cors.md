@@ -1,10 +1,10 @@
 ---
 title: CORS Data Fetching
 page_title: CORS Data Fetching | Kendo UI Data Source
-description: "Learn how to fetch data from another domain by using CORS with all modern browsers."
+description: "Learn how to fetch data from another domain by using CORS with all modern browsers when working with the Kendo UI for jQuery DataSource component and your JavaScript widgets."
 previous_url: /howto/use-cors-with-all-modern-browsers
 slug: corsdatafetching_anotherdomain_datasourcecomponent
-position: 4
+position: 6
 ---
 
 # CORS Data Fetching
@@ -163,10 +163,9 @@ Now, Opera (any other non-CORS browser) will use an alternate configuration of t
 
 Hopefully this post helps highlight the value of CORS and how it can be used with most modern browsers. As more app code moves to the client, the need for CORS will only grow. Start playing with it today and help push web standards to the next level.
 
-## See Also
+## See Also 
 
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
-* [Basic Usage]({% slug basicusage_kendoui_datasourcecomponent %})
 * [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})
 * [CRUD Data Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %})
 * [DataSource JavaScript API Reference](/api/javascript/data/datasource)
