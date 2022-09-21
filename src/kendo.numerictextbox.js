@@ -274,11 +274,32 @@ var __meta__ = {
 
             that.options.format = extractFormat(that.options.format);
             that._upArrowEventHandler.destroy();
+            that._upArrowEventHandler = null;
             that._downArrowEventHandler.destroy();
+            that._downArrowEventHandler = null;
             that._arrowsWrap.remove();
             that._arrows();
 
             that._applyCssClasses();
+
+            if (that._inputLabel) {
+                that._inputLabel.off(ns);
+                that._inputLabel.remove();
+
+                if (that.floatingLabel) {
+                    that.floatingLabel.destroy();
+                    if (that._floatingLabelContainer) {
+                        that.wrapper.unwrap();
+                    }
+                }
+            }
+
+            that._label();
+
+            that._editable({
+                readonly: that.options.readonly,
+                disable: !that.options.enable
+            });
 
             if (options.value !== undefined) {
                 that.value(options.value);

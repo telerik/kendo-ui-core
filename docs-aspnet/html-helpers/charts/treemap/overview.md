@@ -158,7 +158,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onItemCreated(e) {
-            // Tthe HTML element.
+            // The HTML element.
             var element = e.element;
             // The dataItem to which the element is bound.
             var dataItem = e.sender.dataItem(e.element);

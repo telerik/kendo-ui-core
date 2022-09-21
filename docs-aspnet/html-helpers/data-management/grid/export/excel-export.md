@@ -240,7 +240,6 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 
 To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
-> The {{ site.framework }} version is in development. For updates, refer to [this feature request](https://feedback.telerik.com/document-processing/1356226-document-processing-provide-version-for-net-core).
 
 ## Excluding Columns from Exporting
 
