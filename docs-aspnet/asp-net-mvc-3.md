@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 3 a
 
 **Figure 1. The new ASP.NET MVC 3 application**
 
-![New ASP.NET MVC 3 Application](images/mvc3-new-app.png)
+![{{ site.product_short }} New ASP.NET MVC 3 Application](images/mvc3-new-app.png)
 
 ## Add Telerik UI for ASP.NET MVC
 
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in the Solution Explorer](images/mvc3-solution.png)
+![{{ site.product_short }} Kendo directories in the Solution Explorer](images/mvc3-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -194,7 +194,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 3** Press `CTRL+F5` to build and run the application.
 
-![The final result](images/mvc3-final.png)
+![{{ site.product_short }} The final result](images/mvc3-final.png)
 
 ## Next Steps
 

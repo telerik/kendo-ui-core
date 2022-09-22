@@ -74,7 +74,7 @@ The following example demonstrates how to define a single series of type `"pie"`
     </kendo-chart>
 ```
 {% endif %}
-![A sample Pie Chart](images/pie-chart.png)
+![{{ site.product_short }} A sample Pie Chart](images/pie-chart.png)
 
 ## Configuring the Effects Overlay
 
@@ -101,15 +101,15 @@ The Pie Chart supports the following `ChartSeriesGradient` options:
 
 * (Default) `RoundedBevel`
 
-    ![A Pie Chart with roundedBevel overlay](images/pie-chart.png)
+    ![{{ site.product_short }} A Pie Chart with roundedBevel overlay](images/pie-chart.png)
 
 * `SharpBevel`
 
-    ![A Pie Chart with sharpBevel overlay](images/chart-pie-overlay-sharpbevel.png)
+    ![{{ site.product_short }} A Pie Chart with sharpBevel overlay](images/chart-pie-overlay-sharpbevel.png)
 
 * `None`
 
-    ![A Pie Chart with no overlay](images/chart-pie-overlay-none.png)
+    ![{{ site.product_short }} A Pie Chart with no overlay](images/chart-pie-overlay-none.png)
 
 ## See Also
 

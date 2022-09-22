@@ -51,7 +51,7 @@ With the new rendering of the components, some of CSS classes used in the old re
 
 The LESS themes have SASS swatches which are under the `Classic` theme.
 
-![Classic Swatches](images/theme-builder-classic-swatches.png)
+![{{ site.product_short }} Classic Swatches](images/theme-builder-classic-swatches.png)
 
 The following table contains the name of the LESS theme and its SASS counterpart:
 

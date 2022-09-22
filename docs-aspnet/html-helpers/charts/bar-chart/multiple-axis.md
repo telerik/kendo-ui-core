@@ -143,7 +143,7 @@ The following implementation demonstrates the code needed for setting the Multi 
 
 Overview of the Multi Axis implementation for Bar Chart:
 
-![Multi Axis](images/multiAxis.png)
+![{{ site.product_short }} Multi Axis](images/multiAxis.png)
 
 * [Demo page of the Multi Axis for Bar Chart](https://demos.telerik.com/{{ site.platform }}/bar-charts/multiple-axes)
 

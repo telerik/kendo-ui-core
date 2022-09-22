@@ -14,7 +14,7 @@ This page is contained in the `Views\Home\Index.cshtml` and `Scripts\App\home-in
 
 ## Display Items in the ListView
 
-![A snapshot of the Kendo UI Music Store main lists](images/kendo-music-store-web-main-lists-screenshot.png)
+![{{ site.product_short }} A snapshot of the Kendo UI Music Store main lists](images/kendo-music-store-web-main-lists-screenshot.png)
 
 To implement the lists of the **Featured Artist** and **Top Selling** albums, start with simple HTML markup to represent the two ListView widgets.
 

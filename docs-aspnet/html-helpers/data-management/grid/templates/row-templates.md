@@ -38,7 +38,7 @@ The following example demonstrates how to use a string row template which genera
 {% endif %}
 
 
-![A Grid with an applied row template](../row-template.png)
+![{{ site.product_short }} A Grid with an applied row template](../row-template.png)
 
 ## See Also
 

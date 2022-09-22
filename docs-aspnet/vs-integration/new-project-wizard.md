@@ -31,7 +31,7 @@ To start the wizard, use either of the following approaches:
     1. Click **Create New Telerik Project**.
 
 {% if site.core %}
-    ![Visual Studio Extensions menu](../vs-integration/images/create-project-core.png)
+    ![{{ site.product_short }} Visual Studio Extensions menu](../vs-integration/images/create-project-core.png)
 {% endif %}
 
 * Using the **Project** menu:
@@ -40,7 +40,7 @@ To start the wizard, use either of the following approaches:
     1. Type **Telerik** in the **Search for templates** textbox. Click on the {% if site.core %}**Telerik ASP.NET Core MVC Telerik Application**{% else %}**Telerik ASP.NET MVC Application**{% endif %}.
 
 {% if site.core %}
-    ![New project Template](../vs-integration/images/new-project-template-core.png)
+    ![{{ site.product_short }} New project Template](../vs-integration/images/new-project-template-core.png)
 
 ## Configuring the Project
 
@@ -61,32 +61,32 @@ The **Create New Project Wizard** allows you to select a target **Framework**.
 > 
 >If the target **Framework** dropdown is disabled check the troubleshooting [section]({% slug troubleshooting_visualstudio_aspnetcore%}#the-target-framework-dropdown-is-disabled).
 
-![The Create New Project Wizard](../vs-integration/images/target-dropdown.png)
+![{{ site.product_short }} The Create New Project Wizard](../vs-integration/images/target-dropdown.png)
 
 ### .NET Core version
 
 Click on the desired **{{ site.framework }}** version.
 
-![The ASP.NET version options](../vs-integration/images/core-version.png)
+![{{ site.product_short }} The ASP.NET version options](../vs-integration/images/core-version.png)
 
 ### Helper Selection
 
 You can choose if you want the template project to use [HtmlHelpers or TagHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}) in its Views.
 In this article, we use the **Tag** option.
 
-![The HTML/Tag helper options](../vs-integration/images/tag-html-dropdown.png)
+![{{ site.product_short }} The HTML/Tag helper options](../vs-integration/images/tag-html-dropdown.png)
 
 ### {{ site.product_short}} version
 
 The Project wizard allows you to select the desired version of {{ site.product_short }}. If there is a newer version available that is not downloaded on the machine, you can obtain it without exiting the wizard.
 
-![{{site.product_short}} version options](../vs-integration/images/telerik-version.png)
+![{{ site.product_short }} {{site.product_short}} version options](../vs-integration/images/telerik-version.png)
 
 ### Available Templates
 
 The following project templates are available:
 
-![{{site.product_short}} templates options](../vs-integration/images/new-project-wizard-core.png)
+![{{ site.product_short }} {{site.product_short}} templates options](../vs-integration/images/new-project-wizard-core.png)
 
 <table>
     <colgroup>
@@ -160,7 +160,7 @@ It features an editable grid in <code>Index.cshtml</code> that uses handlers to 
 
 The **Select Theme** option allows you to preview all of the available LESS and SASS themes and select the desired one. After the selection is made, the project will include only the files that are required by the selected theme in the `_Layout.cshtml`.
 
-![Project Wizard Select Theme](../vs-integration/images/select-theme-core.png)
+![{{ site.product_short }} Project Wizard Select Theme](../vs-integration/images/select-theme-core.png)
 
 {% endif %}
 

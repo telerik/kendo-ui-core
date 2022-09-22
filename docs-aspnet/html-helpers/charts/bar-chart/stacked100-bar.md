@@ -95,7 +95,7 @@ The following implementation demonstrates the code needed for setting the 100% S
 
 Overview of the 100% Stacked Bars:
 
-![Stacked Bars](images/stacked100Bars.png)
+![{{ site.product_short }} Stacked Bars](images/stacked100Bars.png)
 
 ## See Also
 * [Basic Usage of Bar Charts {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts)

@@ -24,7 +24,7 @@ You can scroll through the events and collapse/expand them. The events order can
 * [Demo page for the Timeline TagHelper](https://demos.telerik.com/aspnet-core/timeline/tag-helper)
 {% endif %}
 
-![](images/timeline-overview.png)
+![{{ site.product_short }} Timeline Overview](images/timeline-overview.png)
 
 ## Initializing the Timeline
 

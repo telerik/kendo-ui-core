@@ -105,7 +105,7 @@ The following example demonstrates how to configure the PivotConfigurator.
 
 The following image demonstrates the output from the previous example.
 
-![PivotConfiguratorV2](../images/pivotconfiguratorv2.png)
+![{{ site.product_short }} PivotConfiguratorV2](../images/pivotconfiguratorv2.png)
 
 ## Referencing Existing Instances
 

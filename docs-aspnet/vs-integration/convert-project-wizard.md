@@ -26,7 +26,7 @@ To start the wizard, use either the **Extensions** menu in VS or the context men
 - You can start the **Convert Project Wizard** from the Extensions menu at the top. In Visual Studio 2019, click **Extensions** > **Telerik** > **{{ site.product }}** > **Convert to Telerik Application**.
 
 {% if site.core %}
-![Convert Wizard in VS from Extensions](../vs-integration/images/select-wizard.png)
+![{{ site.product_short }} Convert Wizard in VS from Extensions](../vs-integration/images/select-wizard.png)
 {% endif %}
 
 - Alternatively, use the context menu in the **Solution Explorer**:
@@ -36,7 +36,7 @@ To start the wizard, use either the **Extensions** menu in VS or the context men
     1. Follow the wizard.
 
 {% if site.core %}
-![Convert Wizard in VS from context menu](../vs-integration/images/start-wizard-context.png)
+![{{ site.product_short }} Convert Wizard in VS from context menu](../vs-integration/images/start-wizard-context.png)
 {% endif %}
 
 The conversion wizard provides the following steps:  
@@ -49,9 +49,9 @@ The conversion wizard provides the following steps:
 The version selection allows you to choose which version of {{ site.product }} to use in your application.
 
 {% if site.core %}
-![Version selection](../vs-integration/images/convert-wizard-version.png)
+![{{ site.product_short }} Version selection](../vs-integration/images/convert-wizard-version.png)
 {% else %}
-![Version selection](../vs-integration/images/images-mvc/convert_distribution.png)
+![{{ site.product_short }} Version selection](../vs-integration/images/images-mvc/convert_distribution.png)
 {% endif %}
 
 ## Theme Selection
@@ -59,9 +59,9 @@ The version selection allows you to choose which version of {{ site.product }} t
 The theme selection allows you to choose from a large list of professionally styled built-in themes for your {{ site.product }} application.
 
 {% if site.core %}
-![Theme selection](../vs-integration/images/theme-selection.png)
+![{{ site.product_short }} Theme selection](../vs-integration/images/theme-selection.png)
 {% else %}
-![Theme selection](../vs-integration/images/images-mvc/convert_theme.png)
+![{{ site.product_short }} Theme selection](../vs-integration/images/images-mvc/convert_theme.png)
 {% endif %}
 
 ## Project Settings
@@ -74,9 +74,9 @@ The **Project Settings** page enables you to modify the project settings by conf
 - **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
 {% if site.core %}
-![Project settings](../vs-integration/images/project-settings.png)
+![{{ site.product_short }} Project settings](../vs-integration/images/project-settings.png)
 {% else %}
-![Project settings](../vs-integration/images/images-mvc/convert_settings.png)
+![{{ site.product_short }} Project settings](../vs-integration/images/images-mvc/convert_settings.png)
 {% endif %}
 
 The wizard automates several steps that are crucial for the project configuration. If you decide to perform these steps manually, follow the links below:

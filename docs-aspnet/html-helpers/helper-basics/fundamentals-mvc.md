@@ -19,11 +19,11 @@ As of the jQuery 3.0 release, the [document-ready handlers are called asynchrono
 
 The [`HtmlHelper`](http://www.asp.net/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs) extension method exposes all Telerik UI HTML helpers.
 
-![The Kendo UI HTML Helper extension method](../../images/kendo-extension.png)
+![{{ site.product_short }} The Kendo UI HTML Helper extension method](../../images/kendo-extension.png)
 
 The helper options are exposed through a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface).
 
-![Applying the fluent interface](../../images/fluent-interface.png)
+![{{ site.product_short }} Applying the fluent interface](../../images/fluent-interface.png)
 
 To set an option for a helper, call the corresponding method and pass the required option value.
 
@@ -37,7 +37,7 @@ You have to set the `Name` option of the helper. The value will be used as the `
 
 > The `Name` options of the helpers have to be always unique in the context of the whole web page. If a partial view is loaded multiple times, each instance of this partial view has to render all helpers with unique `Name` (id) options. If this requirement is not met, the page will render duplicate element IDs and only the helper instance which occurs first in the markup will be initialized and will work properly.
 
-![A sample server-side wrapper name](../../images/wrapper-name.png)
+![{{ site.product_short }} A sample server-side wrapper name](../../images/wrapper-name.png)
 
 Alternatively, you can use the `NumericTextBoxFor` helper method. All Telerik UI helpers which accept a value can be initialized with the `[WidgetName]For` method. For example, to initialize the DatePicker, use `DatePickerFor`. These methods automatically set the `Name` of the helper, so setting it explicitly is not needed. In this way, `@Html.Kendo().NumericTextBoxFor(model => model.Age)` is the same as `@Html.Kendo().NumericTextBox().Name("Age").Value(Model.Age)`.
 

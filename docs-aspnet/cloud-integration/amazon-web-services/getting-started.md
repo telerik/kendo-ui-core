@@ -22,7 +22,7 @@ To create an account, go to the [AWS website](https://aws.amazon.com/). The proc
 1. Sign in with your AWS account and search for `"iam"` (Identity and Access Management) in the [AWS Console](https://console.aws.amazon.com).
 1. In the IAM console, select **Users** and then **Add User**.
 
-	![Add new user](../images/aws-iam.png)
+	![{{ site.product_short }} Add new user](../images/aws-iam.png)
 
 1. Type a user name, for example, `telerik_user`, and then check the **Programmatic access** option.
 1. Click **Next: Permissions**.
@@ -30,7 +30,7 @@ To create an account, go to the [AWS website](https://aws.amazon.com/). The proc
 
 	* To access Amazon DynamoDB, type `dynamodb` in the search field and check the **AmazonDynamoDBFullAccess** option in the table. 
 
-    ![Configure permissions](../images/aws-permissions.png)
+    ![{{ site.product_short }} Configure permissions](../images/aws-permissions.png)
 
 1. Click **Next: Review** > **Create user**.
 1. From the summary view of the newly created user, copy the `Access key ID` and the `Secret access key`. You can also download the user details in a csv file. Keep both keys, because you will need them in the [next steps](#next-steps).

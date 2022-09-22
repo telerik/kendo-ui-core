@@ -79,7 +79,7 @@ The [Telerik UI Column Chart for {{ site.framework }}](https://demos.telerik.com
 ```
 {% endif %}
 
-![A sample Column Chart with categories](images/chart-column-categories.png)
+![{{ site.product_short }} A sample Column Chart with categories](images/chart-column-categories.png)
 
 ## Defining the Bar Chart
 
@@ -126,7 +126,7 @@ Setting the `Series` object to `"Bar"` renders horizontal bars.
 ```
 {% endif %}
 
-![A sample Bar Chart](images/chart-bar.png)
+![{{ site.product_short }} A sample Bar Chart](images/chart-bar.png)
 
 ## See Also
 

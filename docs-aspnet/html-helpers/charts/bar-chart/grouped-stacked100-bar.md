@@ -168,7 +168,7 @@ The following implementation demonstrates the code needed for setting the 100% S
 
 Overview of the 100% Stacked and Grouped Bars:
 
-![Stacked and Grouped Bars](images/groupedStacked100Bars.png)
+![{{ site.product_short }} Stacked and Grouped Bars](images/groupedStacked100Bars.png)
 
 ## See Also
 * [Basic Usage of Bar Charts {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts)

@@ -23,7 +23,7 @@ To asynchronously expand the selected nodes of the TreeView:
 1. Select **Generate from database** and click **Next**.
 1. Configure a connection to the Northwind database and click **Next**.
 
-    ![A new entity data model](../images/tree-entity-data-model.png)
+    ![{{ site.product_short }} A new entity data model](../images/tree-entity-data-model.png)
 
 1. Select all tables and click **Finish**.
 1. Open `Controllers/HomeController.cs` and add a new action method which will return JSON. Each time the user expands a parent node, the TreeView makes an Ajax request to this action method. The action method returns only the child nodes of the expanded parent node. The TreeView provides the unique identifier of the parent node or, when it makes the initial request, `null`.

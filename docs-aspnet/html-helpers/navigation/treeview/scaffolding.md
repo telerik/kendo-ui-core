@@ -17,7 +17,7 @@ To scaffold the TreeView HtmlHelper for ASP.NET MVC:
 
 1. Create a new Telerik Application for ASP.NET MVC or create a standard ASP.NET MVC application and add Telerik UI for ASP.NET MVC. If you already have a working Telerik MVC application, skip this step.
 
-    ![Creating a new Telerik MVC application](images/treeview-scaffolding1.png)
+    ![{{ site.product_short }} Creating a new Telerik MVC application](images/treeview-scaffolding1.png)
 
 1. Include an Entity Framework Data Model.
 
@@ -26,12 +26,12 @@ To scaffold the TreeView HtmlHelper for ASP.NET MVC:
 
 1. Right-click the location where the TreeView Controller will be generated. From the displayed menu, select **Add** > **New Scaffolded item...**. In this example, you will generate it in the **Controllers** folder.
 
-    ![Adding a new scaffolded item](images/treeview-scaffolding2.png)
+    ![{{ site.product_short }} Adding a new scaffolded item](images/treeview-scaffolding2.png)
 
 1. From the list of available scaffolders, select **Kendo UI Scaffolder**. Select **UI for MVC TreeView**.
 1. As a result, you are presented with the configuration options for the TreeView scaffolder.
 
-    ![Configuring the TreeView Scaffolder](images/treeview-scaffolding3.png)
+    ![{{ site.product_short }} Configuring the TreeView Scaffolder](images/treeview-scaffolding3.png)
 
     * **Controller Name**&mdash;The scaffolder will automatically generate the action in this new Controller to initiate the query to the database.
     * **View Name**&mdash;Defines the View, which will be created and added to a new corresponding folder. It will hold the markup definition of the TreeView.
@@ -42,7 +42,7 @@ To scaffold the TreeView HtmlHelper for ASP.NET MVC:
 
 1. Click the **TreeView options** item on the left. It will open the section for configuring the settings of the TreeView.
 
-    ![Selecting the TreeView options](images/treeview-scaffolding4.png)
+    ![{{ site.product_short }} Selecting the TreeView options](images/treeview-scaffolding4.png)
 
     * **Animation**&mdash;Checks to enable for expand or collapse action.
     * **DataTextField**&mdash;Defines the field, which will be used to display the text of the items.
@@ -50,7 +50,7 @@ To scaffold the TreeView HtmlHelper for ASP.NET MVC:
 
 1. You can also add events. When finished with the TreeView configuration, click **Add**. The TreeView Controller and the corresponding view are now generated and you are ready to run the site.
 
-    ![The final result](images/treeview-scaffolding5.png)
+    ![{{ site.product_short }} The final result](images/treeview-scaffolding5.png)
 
 ## See Also
 

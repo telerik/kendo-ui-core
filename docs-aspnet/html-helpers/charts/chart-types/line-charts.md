@@ -85,7 +85,7 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple
 
 The configuration from the previous example results in the following Line Chart.
 
-![A sample Line Chart](images/chart-line.png)
+![{{ site.product_short }} A sample Line Chart](images/chart-line.png)
 
 ## Configuring the Line Styles
 
@@ -137,11 +137,11 @@ You can also set the line style for each Line series individually.
 ```
 {% endif %}
 
-![A step-line Line Chart](images/chart-step-line.png)
+![{{ site.product_short }} A step-line Line Chart](images/chart-step-line.png)
 
 The following image displays a smooth-line Line Chart.
 
-![A smooth-line Line Chart](images/chart-smooth-line.png)
+![{{ site.product_short }} A smooth-line Line Chart](images/chart-smooth-line.png)
 
 ## Setting the Line Type
 
@@ -170,7 +170,7 @@ By default, the Chart draws its Line series as solid lines. You can configure th
 ```
 {% endif %}
 
-![A dotted Line Series](images/chart-dotted-line.png)
+![{{ site.product_short }} A dotted Line Series](images/chart-dotted-line.png)
 
 ## Customizing the Markers
 
@@ -199,7 +199,7 @@ The series markers are the visuals that represent the point value in the Line se
 ```
 {% endif %}
 
-![A Line Chart with custom markers](images/chart-line-markers.png)
+![{{ site.product_short }} A Line Chart with custom markers](images/chart-line-markers.png)
 
 You can also completely draw custom markers for the Line series through the `Visual` setting as shown in the [Custom Visuals](https://demos.telerik.com/{{ site.platform }}/line-charts/visuals) demo.
 

@@ -38,21 +38,21 @@ To get up and running with the project:
 
 1. Open the NuGet Package Manager.
 
-	![Locating and opening the NuGet package manager menu](../getting-started-core/images/mac-manage-nuget.png)
+	![{{ site.product_short }} Locating and opening the NuGet package manager menu](../getting-started-core/images/mac-manage-nuget.png)
 
 2. Add a new [package source](https://docs.microsoft.com/en-us/visualstudio/mac/nuget-walkthrough?toc=%2Fnuget%2Ftoc.json&view=vsmac-2019#adding-package-sources).
 
-	![Adding the new NuGet source dialog](../getting-started-core/images/mac-add-nuget-source.png)
+	![{{ site.product_short }} Adding the new NuGet source dialog](../getting-started-core/images/mac-add-nuget-source.png)
 
 3.  In the **Add Package Source** popup, add a **Telerik Source** with the `https://nuget.telerik.com/v3/index.json` **Location** URL, enter your credentials (telerik.com email and password), and click **OK**.
 
-	![Adding the credentials and authenticating for NuGet](../getting-started-core/images/mac-nuget-authenticate.png)
+	![{{ site.product_short }} Adding the credentials and authenticating for NuGet](../getting-started-core/images/mac-nuget-authenticate.png)
 
 4. From the drop-down list with sources, select the **Telerik Source**. Search for and select `Telerik.UI.for.AspNet.Core`. Click **Add Package** to install it. As a result, a line similar to `<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />` is added to your `.csproj` file.
 
 	> If the package for Telerik UI for ASP.NET Core is not visible in your NuGet feed, then either you do not have an active trial or commercial license for the product, or your current trial or commercial license has expired. Download it from the [Telerik UI for ASP.NET Core product page](https://www.telerik.com/aspnet-core-ui).
 
-	![Selecting and installing the NuGet package](../getting-started-core/images/mac-nuget-install.png)
+	![{{ site.product_short }} Selecting and installing the NuGet package](../getting-started-core/images/mac-nuget-install.png)
 
 5. Open the `Startup.cs` file and register the Kendo UI services in the `ConfigureServices` method.
 
@@ -109,7 +109,7 @@ If you prefer to include the client-side resources from a local source instead o
 
 	As a result, the following sample page is created.
 
-    ![The created sample page](../getting-started-core/images/mac-sample-page.png)
+    ![{{ site.product_short }} The created sample page](../getting-started-core/images/mac-sample-page.png)
 
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
 

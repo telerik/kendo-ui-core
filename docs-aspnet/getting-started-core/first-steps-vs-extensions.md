@@ -71,7 +71,7 @@ Once you install the Telerik UI Extensions, you can open Visual Studio and start
 
 1. Filter by project type and select **Telerik** from the drop-down.
 
-	![Locating the Telerik UI Template](../getting-started-core/images/locate-telerik-app.png)
+	![{{ site.product_short }} Locating the Telerik UI Template](../getting-started-core/images/locate-telerik-app.png)
 
 1. Select **Telerik ASP.NET Core MVC Application**, and then select **Next**.
 
@@ -79,7 +79,7 @@ Once you install the Telerik UI Extensions, you can open Visual Studio and start
 
    Using this name guarantees that the `namespace` from the code snippets in this tutorial will match your project.
 
-	![Launching Configuration for a Project](../getting-started-core/images/create-telerik-app.png)
+	![{{ site.product_short }} Launching Configuration for a Project](../getting-started-core/images/create-telerik-app.png)
 
 1. From the drop-down boxes, select the **.NET CORE** framework and **ASP.NET Core** version **5.0**.
 
@@ -92,7 +92,7 @@ Once you install the Telerik UI Extensions, you can open Visual Studio and start
 
    >tip In Razor files, Tag Helpers come with predefined strongly-typed attributes that enable server-side code to participate in the creation and rendering of HTML elements. The resulting markup is cleaner and easier to read than with traditional HTML Helpers, which are invoked as methods that are mixed with HTML inside your Razor views.
 
-	![Creating a project](../getting-started-core/images/telerik-app-wizard.png)
+	![{{ site.product_short }} Creating a project](../getting-started-core/images/telerik-app-wizard.png)
 
 1. From the **VERSION** drop-down, select the latest Telerik UI version.
 
@@ -137,7 +137,7 @@ Utilize the [Telerik UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}
 
 Run the project. The following page is visualized in the browser:
 
-![Sample page](../getting-started-core/images/sample-page.png)
+![{{ site.product_short }} Sample page](../getting-started-core/images/sample-page.png)
 
 ## Initializing a Grid and Binding Data
 

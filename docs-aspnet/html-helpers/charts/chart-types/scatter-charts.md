@@ -190,7 +190,7 @@ You can define more X and Y axes in addition to the primary axes. The additional
 
 Because no axis is specified, the first series is associated with the default Y axis. The `torque` series are plotted on the `torque` Y axis.
 
-![A Scatter Chart with multiple axes](../images/chart-scatter-line-multiple-axes.png)
+![{{ site.product_short }} A Scatter Chart with multiple axes](../images/chart-scatter-line-multiple-axes.png)
 
 ## Arranging the Axes
 
@@ -217,7 +217,7 @@ You can also control the arrangement of the X and Y axes by specifying the value
 
 The primary Y axis crosses the X axis at point 0 (leftmost). The second, `torque` Y axis crosses the X axis at the 2500 mark or at its right end, whichever comes first.
 
-![A Scatter Line Chart with customized axis crossing value](../images/chart-scatter-line-axis-crossing-value.png)
+![{{ site.product_short }} A Scatter Line Chart with customized axis crossing value](../images/chart-scatter-line-axis-crossing-value.png)
 
 ## See Also
 

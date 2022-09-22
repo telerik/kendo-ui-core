@@ -34,7 +34,7 @@ To create a Telerik-enabled ASP.NET Core project:
 
 1. Choose whether to start from a [Blank project](#blank-project) or use the [Admin Dashboard](#admin-dashboard) template as a base.
 
-    ![choose Telerik project name and location](images/project-name-and-location.png)
+    ![{{ site.product_short }} choose Telerik project name and location](images/project-name-and-location.png)
 
 ## Blank Project
 
@@ -42,7 +42,7 @@ The **Blank Project** has the package references and the client-side resources l
 
 Additionally, you can include multiple {{ site.product }} components into your project (for example, the <a href="https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/overview">Grid</a>, <a href="https://docs.telerik.com/aspnet-core/html-helpers/charts/overview">Chart</a>, and <a href="https://docs.telerik.com/aspnet-core/html-helpers/layout/form/overview">Form</a>).
 
-![{{site.product_short}} blank project pages](images/blank-project-pages.png)
+![{{ site.product_short }} {{site.product_short}} blank project pages](images/blank-project-pages.png)
 
 ## Admin Dashboard
 
@@ -62,19 +62,19 @@ The **Admin Dashboard** is a is a Razor Pages template configured with [TagHelpe
 
 Select the type of your Telerik license (trial or commercial, depending on what you have).
 
-![choose Telerik license](images/license-type.png)
+![{{ site.product_short }} choose Telerik license](images/license-type.png)
 
 ### Target Framework
 
 The wizard allows you to select the desired **{{ site.framework }}** version.
 
-![choose target framework](images/target-framewok.png)
+![{{ site.product_short }} choose target framework](images/target-framewok.png)
 
 ### Themes
 
 The **Built-in themes** option enables you to add styling to your application by selecting one of the <a href="https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes">Sass-Based themes</a> (Default, Bootstrap or Material) and pick from a variety of swatches that come with each theme. When you make your choice, the wizard will add to the `_Layout.cshtml` only these files that are required by the selected theme.
 
-![Theme options](images/themes.png)
+![{{ site.product_short }} Theme options](images/themes.png)
 
 ## Run the Project
 

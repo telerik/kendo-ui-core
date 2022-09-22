@@ -14,11 +14,11 @@ It is inevitable that at some point in a project you will need to implement a fe
 
 In the Music Store sample project, the shopping cart embedded in a menu item is an example of such a feature.
 
-![A screen mockup of the embedded shopping cart](images/kendo-cart-menu-mockup.png)
+![{{ site.product_short }} A screen mockup of the embedded shopping cart](images/kendo-cart-menu-mockup.png)
 
 Though at first the implementation of the embedded shopping cart seemed to be tough, the figure below demonstrates it implemented in the project.
 
-![The embedded shopping cart implemented in the Kendo UI Music Store web app project](images/kendo-cart-menu-screenshot.png)
+![{{ site.product_short }} The embedded shopping cart implemented in the Kendo UI Music Store web app project](images/kendo-cart-menu-screenshot.png)
 
 Instead of trying to use the standard Kendo UI Menu widget and getting the `Total` and `Checkout` as the last items, the project opts for building a custom Kendo UI widget. This Cart Menu widget is actually more of a composite widget because it is one widget composed of others&mdash;a Menu and a ListView.
 

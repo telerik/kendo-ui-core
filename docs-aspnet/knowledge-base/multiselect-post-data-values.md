@@ -26,7 +26,7 @@ How can I submit selected data, pass that selected data to the controller action
 
 The MultiSelect is a `<select multiple>` element in the DOM. Therefore, it will POST a list of fields with the values of the selected options. The controller has to expect such an input.
 
-![POST data example](images/multiselect-POST-data.png)
+![{{ site.product_short }} POST data example](images/multiselect-POST-data.png)
 
 To pass data to a controller in ASP.NET Core, use any of the following approaches:
 

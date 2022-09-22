@@ -114,7 +114,7 @@ The following implementation demonstrates the code needed for setting Plotbands 
 
 Overview of Plotbands implementation for Bar Chart:
 
-![Plotbands](images/plotbands.png)
+![{{ site.product_short }} Plotbands](images/plotbands.png)
 
 * [Demo page of the Plotbands for Bar Chart](https://demos.telerik.com/{{ site.platform }}/bar-charts/plotbands)
 

@@ -30,7 +30,7 @@ The basic conceptual options of a Telerik UI Funnel Chart are:
 * `dynamicSlope`&mdash;When disabled, the Chart takes the `neckRatio` option into account. When enabled, the Chart neglects the `neckRatio` option and each segment creates its form based on the ratio between the current value and the next value.
 * `neckRatio`&mdash;Specifies the ratio between the top and the bottom bases of the whole Funnel series. For example, if set to `ten`, the top base will be ten times smaller than the bottom base.
 
-![Using the neckRatio option in the Funnel Chart](images/funnel-neckratio.png)
+![{{ site.product_short }} Using the neckRatio option in the Funnel Chart](images/funnel-neckratio.png)
 
 ## Getting Started
 
@@ -91,7 +91,7 @@ The following example demonstrates how to base the widths of the bases for each 
 ```
 {% endif %}
 
-![Basing the segment widths on the ratio in the Funnel Chart](images/funnel-dynamicslope.png)
+![{{ site.product_short }} Basing the segment widths on the ratio in the Funnel Chart](images/funnel-dynamicslope.png)
 
 ## See Also
 

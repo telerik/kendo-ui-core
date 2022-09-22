@@ -34,11 +34,11 @@ Both require that a private NuGet feed is set up along with a *nuget.config* fil
 
 1. In Visual Studio add a private NuGet feed by going into the *Tools > Options > NuGet > Package Sources* and add a *Package Source*.
 
-    ![image](images/setting-up-private-feed.png)
+    ![{{ site.product_short }} image](images/setting-up-private-feed.png)
 
 1. Visual Studio will prompt you for your Telerik credentials the first time the feed is accessed. These credentials can be later accessed via the Windows Credentials tab in the Credential Manager app (e.g. to update password).
 
-    ![image](images/setting-up-private-feed-credentials.png)
+    ![{{ site.product_short }} image](images/setting-up-private-feed-credentials.png)
 
 ### Setting up the *nuget.config* file
 
@@ -70,19 +70,19 @@ However, this could be a security issue in a CI/CD environment where another use
 
 1. Go to the *Project Settings* in your DevOps project portal.
 
-    ![image](images/service-connection-project-settings.png)
+    ![{{ site.product_short }} image](images/service-connection-project-settings.png)
 
 1. On the *Project Settings* page, select the *Service Connections* menu item under *Pipelines* and then open the *New Service Connection* drop down.
 
-    ![image](images/service-connection-project-settings-add-new-service-connection.png)
+    ![{{ site.product_short }} image](images/service-connection-project-settings-add-new-service-connection.png)
 
 1. Select NuGet from the drop-down list.
 
-    ![image](images/service-connection-project-settings-add-new-service-connection-step2.png)
+    ![{{ site.product_short }} image](images/service-connection-project-settings-add-new-service-connection-step2.png)
 
 1. Enter the URL and authentication credentials in the dialog window. For the Telerik NuGet server select **Basic Authentication**.  Once that selection is made, you can enter the Telerik server URL and use your Telerik account credentials.
 
-    ![image](images/service-connection-project-settings-add-new-service-connection-step3.png)
+    ![{{ site.product_short }} image](images/service-connection-project-settings-add-new-service-connection-step3.png)
 
 1. Once the setup is completed your build pipelines can now fetch packages from the Telerik NuGet feed. 
 
@@ -90,7 +90,7 @@ However, this could be a security issue in a CI/CD environment where another use
 
 In your build pipeline, there's a *NuGet Restore* step. Select that step and look to the properties panel. Change the *Feeds to Use* selection to **Feeds in my NuGet.config**. A new drop-down will appear titled "*Credentials for feeds outside this organization/collection.*" Open it and select the newly available *Telerik NuGet Service Connection*.
 
-![image](images/service-connection-project-settings-add-new-service-connection-step4.png)
+![{{ site.product_short }} image](images/service-connection-project-settings-add-new-service-connection-step4.png)
 
 When you queue and run the pipeline, the Telerik NuGet packages will be restored.
 
@@ -100,17 +100,17 @@ If you do not want pipelines to have unfettered access to the Telerik account ho
 
 1. Go to the project's main menu, select *Artifacts* and then click the *New Feed* button at the top.
 
-    ![image](images/azure-artifacts.png)
+    ![{{ site.product_short }} image](images/azure-artifacts.png)
 
 1. Give the feed a name (e.g. TelerikPackages), select the "*Only use packages published to this feed*" option, then click the *Create* button. You will now have your own feed that you can push *nupkg* files to. To see how to push packages to this feed, click the "*Connect to feed*" option at the top. A dialog will appear with helpful information on how you can push packages to that specific feed.
 
-    ![image](images/azure-artifacts-package-source.png)
+    ![{{ site.product_short }} image](images/azure-artifacts-package-source.png)
 
 1. You can get the NuGet package file (nupkg) for any Telerik product you're using by going to the downloads page for that product. You can start at the [My Account - Downloads](https://www.telerik.com/account/my-downloads) page.
 
 1. Underneath the installer for the product, you will find the *Other Setup Files* section where the nupkg files will be. For example, here's what it looks like for the [Telerik UI for ASP.NET Core](https://docs.telerik.com/aspnet-core/introduction) packages.
 
-    ![image](images/download-nupkg-file.png)
+    ![{{ site.product_short }} image](images/download-nupkg-file.png)
 
 1. Go to the build pipeline and select that feed for a NuGet Restore step.
 
@@ -118,7 +118,7 @@ If you do not want pipelines to have unfettered access to the Telerik account ho
 
 Just like when using a Service Connection, go to the build pipeline and select the *NuGet Restore* step. Except this time for the *Feeds to Use* option choose **Feed(s) I select here** and choose the *TelerikPackages* feed in the *Use packages from this Azure Artifacts/TFS feed* drop-down list.
 
-![image](images/azure-using-an-artifact-feed.png)
+![{{ site.product_short }} image](images/azure-using-an-artifact-feed.png)
 
 > Important: If you have nuget.org packages to restore in addition to the Telerik packages, leave the "Use packages from NuGet.org" option selected.
 

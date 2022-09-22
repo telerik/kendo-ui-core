@@ -70,7 +70,7 @@ The following example demonstrates how to create a Bubble Chart and visualizes s
 ```
 {% endif %}
 
- ![A sample Bubble Chart](images/chart-bubble.png)
+ ![{{ site.product_short }} A sample Bubble Chart](images/chart-bubble.png)
 
 ## See Also
 

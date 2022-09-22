@@ -25,9 +25,9 @@ This article provides solutions for common issues you may encounter while workin
     1. Search for **Telerik {{ site.framework }} VSExtensions** and make sure they are **Enabled**.
 
 {% if site.core %}
-        ![Troubleshooting when the VS extension is disabled](../vs-integration/images/vsextensions-disabled.png)
+        ![{{ site.product_short }} Troubleshooting when the VS extension is disabled](../vs-integration/images/vsextensions-disabled.png)
 {% else %}
-        ![vsextensions-disabled](../vs-integration/images/images-mvc/vsextensions-disabled.png)
+        ![{{ site.product_short }} vsextensions-disabled](../vs-integration/images/images-mvc/vsextensions-disabled.png)
 {% endif %}
 
 * If the extension is not correctly installed:

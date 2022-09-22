@@ -14,7 +14,7 @@ You can use Telerik UI for {{ site.framework }} with various cloud services like
 
 Amazon Web Services is a cloud platform that provides a wide range of cloud services. You can create a [free account](https://aws.amazon.com/free/?sc_icampaign=acq_aws_takeover-abandoner&sc_ichannel=ha&sc_icontent=awssm-1524&sc_iplace=ed&trk=ha_awssm-1524&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) that is available for a year and allows you to explore the provided services. 
 
-![AWS Overview](images/aws-overview.png)
+![{{ site.product_short }} AWS Overview](images/aws-overview.png)
 
 For examples of using Telerik UI for {{ site.framework }} components with AWS cloud services, refer to the following articles:
 
@@ -28,7 +28,7 @@ For examples of using Telerik UI for {{ site.framework }} components with AWS cl
 
 Microsoft Azure (often referred to as Azure) is a cloud computing service operated by Microsoft. The platform provides software as a service (SaaS), platform as a service (PaaS), and infrastructure as a service (IaaS). It supports different languages, tools, and frameworks, including both Microsoft-specific and third-party software and systems.
 
-![Azure Overview](images/azure-overview.png)
+![{{ site.product_short }} Azure Overview](images/azure-overview.png)
 
 For examples of using Telerik UI for {{ site.framework }} components with Azure cloud services, refer to the following articles:
 

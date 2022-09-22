@@ -133,7 +133,7 @@ If the series contain two or more values for a specific period (base unit), they
 
 The following image demonstrates a chart with a set date category axis.  
 
-![A chart with a date category axis](../images/chart-category-date-axis.png)
+![{{ site.product_short }} A chart with a date category axis](../images/chart-category-date-axis.png)
 
 The following example demonstrates date series that are grouped by the year.
 
@@ -212,7 +212,7 @@ The following example demonstrates date series that are grouped by the year.
 
 The following image displays a chart with a grouped date category axis. Note how the maximum value for each year is now displayed.
 
-![Chart with grouped date category axis](../images/chart-category-date-axis-grouped.png)
+![{{ site.product_short }} Chart with grouped date category axis](../images/chart-category-date-axis-grouped.png)
 
 ### Setting Aggregates
 

@@ -16,9 +16,9 @@ The {{ site.product }} Visual Studio (VS) extensions enable you to keep your pro
 The Latest Version Acquirer tool automatically retrieves the latest {{ site.product }} distribution which is available on the Telerik website. Once a day, upon loading a project with {{ site.product }} controls, the extensions query the Telerik website for a new version of the components. When a new version is detected, you receive a notification.
 
 {% if site.core %}
-![Getting the latest version notification](../vs-integration/images/lva_notification.png)
+![{{ site.product_short }} Getting the latest version notification](../vs-integration/images/lva_notification.png)
 {% else %}
-![A displayed notification upon locating a new Telerik UI for ASP.NET MVC version](../vs-integration/images/images-mvc/notification.png)
+![{{ site.product_short }} A displayed notification upon locating a new Telerik UI for ASP.NET MVC version](../vs-integration/images/images-mvc/notification.png)
 {% endif %}
 
 > If you disable the notifications, you can use the **Options** dialog to activate them again.
@@ -26,9 +26,9 @@ The Latest Version Acquirer tool automatically retrieves the latest {{ site.prod
 Clicking **Update Now** starts the Latest Version Acquirer tool, which prompts for your Telerik credentials on its first page. If you do not have a [www.telerik.com](https://www.telerik.com) account, you can create one through the **Create an account for free** link.
 
 {% if site.core %}
-![Getting the latest version dialog](../vs-integration/images/lva1.png)
+![{{ site.product_short }} Getting the latest version dialog](../vs-integration/images/lva1.png)
 {% else %}
-![The Get the Latest Version dialog](../vs-integration/images/images-mvc/lva1.png)
+![{{ site.product_short }} The Get the Latest Version dialog](../vs-integration/images/images-mvc/lva1.png)
 {% endif %}
 
 > The Latest Version Acquirer is not available with the trial license. Attempting to download a distribution results in an error message.
@@ -40,25 +40,25 @@ Clicking **Update Now** starts the Latest Version Acquirer tool, which prompts f
 1. In the dialog that appears, confirm the download.
 
 {% if site.core %}
-    ![Confirming the download of the latest version dialog](../vs-integration/images/lva2.png)
+    ![{{ site.product_short }} Confirming the download of the latest version dialog](../vs-integration/images/lva2.png)
 {% else %}
-    ![The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva2.png)
+    ![{{ site.product_short }} The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva2.png)
 {% endif %}
 
     As a result, the latest version automatically starts to download.
 
 {% if site.core %}
-    ![The download of the latest version is in progress dialog](../vs-integration/images/lva3.png)
+    ![{{ site.product_short }} The download of the latest version is in progress dialog](../vs-integration/images/lva3.png)
 {% else %}
-    ![The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva3.png)
+    ![{{ site.product_short }} The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva3.png)
 {% endif %}
 
 1. Click **OK** when the download process of the latest version completes.
 
 {% if site.core %}
-    ![The download of the latest version is complete dialog](../vs-integration/images/lva4.png)
+    ![{{ site.product_short }} The download of the latest version is complete dialog](../vs-integration/images/lva4.png)
 {% else %}
-    ![The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva4.png)
+    ![{{ site.product_short }} The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva4.png)
 {% endif %}
 
 

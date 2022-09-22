@@ -104,7 +104,7 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple
 
 The configuration from the previous example results in the following Bullet Chart.
 
-![A sample Bullet Chart](images/chart-bullet.png)
+![{{ site.product_short }} A sample Bullet Chart](images/chart-bullet.png)
 
 ## Customizing the Target Value Lines
 
@@ -143,7 +143,7 @@ The following example demonstrates how to use all three options to customize the
 ```
 {% endif %}
 
-![A Bullet Chart with custom target line](images/chart-bullet-target.png)
+![{{ site.product_short }} A Bullet Chart with custom target line](images/chart-bullet-target.png)
 
 ## See Also
 

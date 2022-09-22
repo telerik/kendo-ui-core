@@ -51,7 +51,7 @@ That common header in turn can be a child of another upper `MultiColumn` header 
 
 The previous example results in the following output.
 
-![A Telerik UI Grid component for {{ site.framework }} with a column group](colgroup.png)
+![{{ site.product_short }} A Telerik UI Grid component for {{ site.framework }} with a column group](colgroup.png)
 
 A full Grid with Multi-column headers would look like below
 

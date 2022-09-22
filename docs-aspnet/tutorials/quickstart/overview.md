@@ -25,11 +25,11 @@ This guide will walk you through building Team Efficiency Dashboard, a single pa
 
 If you follow along until the end, here is what the finished app will look like.
 
-![](images/chapter0/dashboard.jpg)
+![{{ site.product_short }} Dashboard](images/chapter0/dashboard.jpg)
 
 And here is what the app will look like on mobile.
 
-![](images/chapter0/mobile-dashboard.jpg)
+![{{ site.product_short }} Mobile Dashboard](images/chapter0/mobile-dashboard.jpg)
 
 ### Telerik UI for ASP.NET MVC vs Kendo UI Widgets
 

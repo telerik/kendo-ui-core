@@ -109,7 +109,7 @@ This section provides solutions for common issues you might encounter while inst
 1. Uncheck `$(DevEnvDir)\Extensions\Microsoft\Web Tools\External\git` and/or `$(VSINSTALLDIR)\Web\External\git`.
 1. Add a new entry `C:\Program Files\Git\bin` or your installation location.
 
-![Adding a new Chart entry in Internet Explorer](../images/vs2015-external-tools.png)
+![{{ site.product_short }} Adding a new Chart entry in Internet Explorer](../images/vs2015-external-tools.png)
 
 ## Next Steps
 

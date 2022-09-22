@@ -37,7 +37,7 @@ The Chart contains the following [building block elements]({% slug htmlhelpers_c
 
 The following image displays the structure of the Chart.
 
-![Chart Structure](images/chart-structure.png)
+![{{ site.product_short }} Chart Structure](images/chart-structure.png)
 
 To see the component in action, check the examples:
 
@@ -244,7 +244,7 @@ You can also add a title to clearly indicate the role of the axis.
 ```
 {% endif %}
 
-![Chart with axis titles](images/chart-axis-titles.png)
+![{{ site.product_short }} Chart with axis titles](images/chart-axis-titles.png)
 
 #### Plot Bands
 
@@ -286,7 +286,7 @@ The Chart enables you to configure each axis to display bands with different col
 ```
 {% endif %}
 
-![Chart with axis plot bands](images/chart-plot-bands.png)
+![{{ site.product_short }} Chart with axis plot bands](images/chart-plot-bands.png)
 
 #### Global Settings
 

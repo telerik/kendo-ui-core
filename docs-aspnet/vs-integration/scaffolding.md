@@ -11,7 +11,7 @@ position: 15
 # Scaffolding
 
 Since the 2022 R2 SP2 release, Telerik UI for ASP.NET Core provides new way of generating Scaffolding templates as a convenient productivity feature. 
-![The Telerik UI Scaffolder for Core](../images/scaffolding/core_scaffolder_1.png)
+![{{ site.product_short }} The Telerik UI Scaffolder for Core](../images/scaffolding/core_scaffolder_1.png)
 
 The new Scaffolder items in Visual Studio allow quick code generation and mocking of data for some of the most used data-bound components, such as the ASP.NET Core Data Grid, TreeList, Scheduler, ListView, Gantt, Chart, Form and Editor.
 
@@ -27,7 +27,7 @@ The .NET for Core and VS already provide their own default Scaffolding items, bu
 
 The Telerik templates are opened in a separate custom Window which can be accessed by right-clicking the project in Solution Explorer and choosing the Telerik UI for ASP.NET submenu containing the Add New Scaffolded Item option.
 
-![Adding a new Scaffolded Item](../images/scaffolding/core_scaffolder_2.gif)
+![{{ site.product_short }} Adding a new Scaffolded Item](../images/scaffolding/core_scaffolder_2.gif)
 
 Then, you are presented with several popular components you can choose from. You can also set the name of the new View and Controller files, as well as, a selection of other properties for different tools like the Grid and TreeList.
 
@@ -75,15 +75,15 @@ To initially set up Scaffolder Visual Studio extension:
 
 1. From the **New Scaffolded Item...** menu which contains different items depending on the currently installed Scaffolders, access the Scaffolder extension.
 
-    ![The new scaffolded item](../images/scaffolding/new_scaffolded_item.png)
+    ![{{ site.product_short }} The new scaffolded item](../images/scaffolding/new_scaffolded_item.png)
 
 1. From the next menu, select **Kendo UI Scaffolder**. As a result, the Scaffolding configuration panel opens.
 
-    ![The Kendo UI Scaffolder](../images/scaffolding/kendo_ui_scaffolder.png)
+    ![{{ site.product_short }} The Kendo UI Scaffolder](../images/scaffolding/kendo_ui_scaffolder.png)
 
 1. Select the Grid, Chart, or Scheduler control. The Controller and the corresponding view will be generated in the currently selected location.
 
-    ![Selecting widgets in the Kendo UI Scaffolder](../images/scaffolding/widget_select.png)
+    ![{{ site.product_short }} Selecting widgets in the Kendo UI Scaffolder](../images/scaffolding/widget_select.png)
 
 {% endif %}
 ## See Also

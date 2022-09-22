@@ -11,7 +11,7 @@ position: 2
 
 After you have created the customer TreeView, you need to set up the Grid of orders by using the Kendo UI MVC extensions in the Kendo UI Sales Hub.
 
-![The Orders list in the Kendo UI Sales Hub](images/kendo-saleshub-orders-grid-screenshot.png)
+![{{ site.product_short }} The Orders list in the Kendo UI Sales Hub](images/kendo-saleshub-orders-grid-screenshot.png)
 
 ## Configuration
 

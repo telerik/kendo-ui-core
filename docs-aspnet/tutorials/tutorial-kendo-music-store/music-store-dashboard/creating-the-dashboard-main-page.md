@@ -8,7 +8,7 @@ position: 3
 
 # Create the Main Page
 
-![An overview of the Kendo UI Music Store Sales page](images/dashboard-overview.png)
+![{{ site.product_short }} An overview of the Kendo UI Music Store Sales page](images/dashboard-overview.png)
 
 The main page constitutes of the Dashboard landing page, and the navigation strip, an overview of recent sales for various periods of time, top singles and albums, and a series of gauges showing hourly data. For this view, the sample project uses a declarative approach similar to the Kendo UI Music Store itself, also using the `data-` attributes, and the [Kendo UI MVVM framework](https://demos.telerik.com/kendo-ui/web/mvvm/index.html).
 

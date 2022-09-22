@@ -14,7 +14,7 @@ position: 1
 
 The appearance of the Telerik UI for {{ site.framework }} components is achieved by rendering predefined classes in the various Html elements of the components. The themes use these classes, to apply styles to the respective elements. 
 
-![Kendo UI Web Themes](../images/web-themes.png)
+![{{ site.product_short }} Kendo UI Web Themes](../images/web-themes.png)
 
 ## Adding a Theme to Your Project
 

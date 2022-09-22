@@ -51,7 +51,7 @@ In this tutorial, you will:
 
 1. In the search box, enter **Model-View-Controller**, select the **ASP.NET Core Web App (Model-View-Controller)** C# template, and then select **Next**.
 
-    ![Download Progress Control Panel](../getting-started-core/images/create-project-vs2019.png)
+    ![{{ site.product_short }} Download Progress Control Panel](../getting-started-core/images/create-project-vs2019.png)
 
 1. Enter **MyTelerikProject** as a project name, and then select **Next**.
 
@@ -80,7 +80,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you are a tria
 
 1. Select the option **Set up Telerik NuGet package source** to automatically add the [Telerik NuGet feed]({% slug nuget_install_aspnetmvc6_aspnetmvc %}).
 
-    ![NuGet checkbox in Progress Trial Installer](../getting-started-core/images/check-nuget.png)
+    ![{{ site.product_short }} NuGet checkbox in Progress Trial Installer](../getting-started-core/images/check-nuget.png)
 
 >To activate your UI for ASP.NET Core trial license, you must complete the installation procedure. Otherwise, the `Telerik.UI.for.AspNet.Core` NuGet packages will not appear in the NuGet Package Manager.
 
@@ -90,17 +90,17 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 1. Download the Progress Control Panel from the **Overview** page of your [Telerik account](https://www.telerik.com/account/). 
 
-    ![Download Progress Control Panel](../getting-started-core/images/download-control-panel-2022.png)
+    ![{{ site.product_short }} Download Progress Control Panel](../getting-started-core/images/download-control-panel-2022.png)
 
 1. Run the Progress Control Panel exe.
 
 1. On the Login screen, check the **set up Telerik NuGet package source** option.
 
-    ![Set Up Nuget on Progress Control Panel Login](../getting-started-core/images/login-control-panel.png)
+    ![{{ site.product_short }} Set Up Nuget on Progress Control Panel Login](../getting-started-core/images/login-control-panel.png)
 
 1. If you miss to set up the NuGet feed on login, go to the Progress Control Panel options and scroll to **NUGET SETTINGS**. Enter your Telerik credentials and click the **Save and Close** button.
 
-    ![Set Up Nuget on Progress Control Panel options](../getting-started-core/images/nuget-control-panel-options.png)
+    ![{{ site.product_short }} Set Up Nuget on Progress Control Panel options](../getting-started-core/images/nuget-control-panel-options.png)
 
 >You need a commercial license that includes UI for ASP.NET Core. Otherwise, the `Telerik.UI.for.AspNet.Core` NuGet packages will not appear in the NuGet Package Manager. If you don't have the required license, follow the instructions in the [trial license section](#adding-the-telerik-nuget-feed-for-trial-license-users).
 
@@ -108,7 +108,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 1. Open the NuGet Package Manager.
 
-    ![Locating and opening the NuGet package manager menu](../getting-started-core/images/manage-nuget.png)
+    ![{{ site.product_short }} Locating and opening the NuGet package manager menu](../getting-started-core/images/manage-nuget.png)
 
 1. From the **Package source** drop-down, select the Telerik NuGet source.
 
@@ -118,7 +118,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 1. Select the project's checkbox and then select **Install**. As a result, a line similar to `<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />` is added to your `.csproj` file.
 
-    ![Selecting and installing the NuGet package](../getting-started-core/images/nuget-install.png)
+    ![{{ site.product_short }} Selecting and installing the NuGet package](../getting-started-core/images/nuget-install.png)
 
 ## Adding a Reference to Kendo.Mvc.UI
 
@@ -229,7 +229,7 @@ Now you are ready to run the web app.
 
 Congratulations! You created a page that uses the [Telerik UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}).
 
-![Sample page](../getting-started-core/images/sample-page.png)
+![{{ site.product_short }} Sample page](../getting-started-core/images/sample-page.png)
 
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
 

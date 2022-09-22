@@ -96,7 +96,7 @@ To update the provided localization messages in Telerik UI for ASP.NET MVC:
 1. Open the `\src\Kendo.Mvc\Kendo.Mvc.csproj` Visual Studio project. The `\src` directory is available only with the commercial version of Telerik UI for ASP.NET MVC.
 1. Locate the `Resources` directory in the solution explorer. It contains the resource files for the supported cultures.
 
-    ![Resources](../images/resources-mvc.png)
+    ![{{ site.product_short }} Resources](../images/resources-mvc.png)
 
 1. Open the resource file which corresponds to the target culture, for example, `Messages.es-ES.resx`.
 1. Edit the resource file and save it.
@@ -127,7 +127,7 @@ To add new localization files in Telerik UI for ASP.NET MVC:
 1. Open the `\src\Kendo.Mvc\Kendo.Mvc.csproj` Visual Studio project. The `\src` directory is available only with the commercial version of Telerik UI for ASP.NET MVC.
 1. Locate the `Resources` directory in the solution explorer. It contains the resource files for the supported cultures.
 
-    ![Resources](../images/resources-mvc.png)
+    ![{{ site.product_short }} Resources](../images/resources-mvc.png)
 
 1. Copy `Messages.resx` and paste it. Rename the copy to `Messages.culture-code.resx`, for example, `Messages.es-MX.resx`.
 1. Open the newly created resource file.

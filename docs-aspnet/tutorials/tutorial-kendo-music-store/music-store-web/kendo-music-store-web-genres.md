@@ -12,7 +12,7 @@ The **Genre** listing is going to display all albums according to a selected gen
 
 ## Display Items in the ListView
 
-![A snapshot of the Kendo UI Music Store genre lists](images/kendo-genre-screenshot.png)
+![{{ site.product_short }} A snapshot of the Kendo UI Music Store genre lists](images/kendo-genre-screenshot.png)
 
 ### Create the HTML
 

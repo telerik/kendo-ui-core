@@ -17,13 +17,13 @@ The Upgrade Project Wizard upgrades existing Telerik UI for ASP.NET MVC applicat
 
 To open the wizard, click **Telerik** > **Telerik UI for ASP.NET MVC** > **Upgrade Wizard**.
 
-![Launching the Upgrade Wizard and choosing projects](../vs-integration/images/images-mvc/upgrade_menu.png)
+![{{ site.product_short }} Launching the Upgrade Wizard and choosing projects](../vs-integration/images/images-mvc/upgrade_menu.png)
 
 ## Files for Upgrade
 
 The **Information Page** of the Upgrade Project Wizard describes the files and assemblies that are going to be upgraded.
 
-![Information page](../vs-integration/images/images-mvc/upgrade_warning.png)
+![{{ site.product_short }} Information page](../vs-integration/images/images-mvc/upgrade_warning.png)
 
 ## Projects for Upgrade
 
@@ -33,13 +33,13 @@ It is recommended to upgrade all projects to the selected version. The Compatibi
 
 > The listed projects target all MVC versions that are supported. When you complete the Wizard, all selected projects will be updated.
 
-![Choosing projects and distribution version](../vs-integration/images/images-mvc/upgrade_version.png)
+![{{ site.product_short }} Choosing projects and distribution version](../vs-integration/images/images-mvc/upgrade_version.png)
 
 ## Project Resources for Upgrade
 
 The **Upgrade Project Resources** page allows you to update the editor templates in `~/Views/Shared/EditorTemplates` by choosing **Update Editor Templates**.
 
-![Updating project resources](../vs-integration/images/images-mvc/upgrade_settings.png)
+![{{ site.product_short }} Updating project resources](../vs-integration/images/images-mvc/upgrade_settings.png)
 
 ## Backup Creation
 
@@ -49,7 +49,7 @@ The **Create Backup** page provides the following options:
 - **Don't create a backup**&mdash;Upgrades without creating a backup of your application.
 - **Show upgrade log when the Upgrade wizard finishes the upgrade**&mdash;Displays the upgrade log after the **Upgrade Wizard** finishes the upgrade.
 
-![Creating backup](../vs-integration/images/images-mvc/upgrade_backup.png)
+![{{ site.product_short }} Creating backup](../vs-integration/images/images-mvc/upgrade_backup.png)
 
 ## See Also
 

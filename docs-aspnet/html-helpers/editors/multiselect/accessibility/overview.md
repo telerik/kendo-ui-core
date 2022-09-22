@@ -24,7 +24,7 @@ The MultiSelect provides the following building blocks which, depending on its c
 * [Tag list](#tag-list)&mdash;Displays the selected values.
 * [Items popup](#items-popup)&mdash;Displays the list of items that can be selected.
 
-![Structure of the MultiSelect](../images/multiselect-structure.png)
+![{{ site.product_short }} Structure of the MultiSelect](../images/multiselect-structure.png)
 
 ### Search Input
 

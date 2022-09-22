@@ -55,7 +55,7 @@ That common header in turn can be a child of another upper `MultiColumn` header 
 
 The previous example will present the following output.
 
-![TreeList multi-column headers](../images/treelist-multicolumn-headers.png)
+![{{ site.product_short }} TreeList multi-column headers](../images/treelist-multicolumn-headers.png)
 
 ## See Also
 

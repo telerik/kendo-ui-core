@@ -125,7 +125,7 @@ If two or more categories fall within a base unit, its values are aggregated to 
 
 The code from the previous example results in the following Sparkline chart. Note that values are displayed as are.
 
-![Sparkline with a date category axis](images/sparkline-category-date-axis.png)
+![{{ site.product_short }} Sparkline with a date category axis](images/sparkline-category-date-axis.png)
 
 The following example demonstrates the Sparkline with its base unit changed to `"years"`.
 
@@ -144,7 +144,7 @@ The following example demonstrates the Sparkline with its base unit changed to `
 
 The following example demonstrates a Sparkline with a grouped date category axis. Note the way the Sparkline displays the maximum value for each year.
 
-![Sparkline with a grouped date category axis](images/sparkline-category-date-axis-grouped.png)
+![{{ site.product_short }} Sparkline with a grouped date category axis](images/sparkline-category-date-axis-grouped.png)
 
 You can also change the aggregate function for each series.
 

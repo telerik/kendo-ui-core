@@ -25,7 +25,7 @@ You can add or remove the fields by which the data will be filtered and select t
 * [Demo page for the Filter TagHelper](https://demos.telerik.com/aspnet-core/filter/tag-helper)
 {% endif %}
 
-![](images/filter-overview.png)
+![{{ site.product_short }} Filter Overview](images/filter-overview.png)
 
 ## Initializing the Filter
 

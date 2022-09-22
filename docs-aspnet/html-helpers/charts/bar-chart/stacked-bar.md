@@ -97,7 +97,7 @@ The following implementation demonstrates the code needed for setting the Stacke
 
 Overview of the Stacked Bars:
 
-![Stacked Bars](images/stackedBars.png)
+![{{ site.product_short }} Stacked Bars](images/stackedBars.png)
 
 ## See Also
 * [Basic Usage of Bar Charts {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts)

@@ -32,15 +32,15 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
 
  1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    ![A new entity data model](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} A new entity data model](../images/grid-entity-data-model.png)
 
 1.  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-    ![Choosing the connection](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} Choosing the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    ![Choosing the Products table](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table](../images/grid-database-objects.png)
 
 {% endif %}
 
@@ -147,7 +147,7 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
 
 1. Build and run the application.
 
-![The final result](../images/grid-bound-grid.png)
+![{{ site.product_short }} The final result](../images/grid-bound-grid.png)
 
 To download a Visual Studio Project, refer to [this GitHub repository]({% if site.mvc %} https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding{% else %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/AjaxBinding.cshtml{% endif %}).
 

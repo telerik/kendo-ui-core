@@ -32,7 +32,7 @@ Once you have created a new bucket, you need to configure it to accept Cross-ori
 
 The image below shows the minimum configuration needed for an application to upload files to the bucket.
 
-![Bucket CORS](../images/aws-s3-bucket-cors.png)
+![{{ site.product_short }} Bucket CORS](../images/aws-s3-bucket-cors.png)
 
 The configuration is in JSON format:
 
@@ -61,7 +61,7 @@ The `"http://localhost:62500"` address shown above is exemplary. Use the actual 
 
 	Allow the PutObject and PutObjectAcl actions in the Visual Editor:
 
-	![Configure restricted permissions](../images/aws-permissions-restricted.png)
+	![{{ site.product_short }} Configure restricted permissions](../images/aws-permissions-restricted.png)
 
     The permissions configuration of the restricted user can be reviewed as JSON and should look like this: 
 

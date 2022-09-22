@@ -26,7 +26,7 @@ By default, the DateTimePicker is initialized with the `classic` render mode. In
 
 As a result, the appearance of the widget is alternated. 
 
-![Comparison between the component types](../../../images/modern-classic-datetimepicker.png)
+![{{ site.product_short }} Comparison between the component types](../../../images/modern-classic-datetimepicker.png)
 
 > The rendered selectors in the time picker of the Telerik UI DateTimePicker for {{ site.framework }} depend on the currently applied format. If the format is omitted, the default format from the application's culture is used. 
 

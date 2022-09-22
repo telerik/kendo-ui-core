@@ -20,11 +20,11 @@ To load an image to a sheet, use any of the following approaches:
 
 You can upload and insert a custom image in the Spreadsheet with the `Insert Image` tool.
 
-![Spreadsheet Insert Image tool](images/spreadsheet-insert-image-tool.png)
+![{{ site.product_short }} Spreadsheet Insert Image tool](images/spreadsheet-insert-image-tool.png)
 
 Then, in the popup window, you can select or drag in a file from the file system.
 
-![Spreadsheet Insert Image pop-up](images/spreadsheet-insert-image-pop-up.png)
+![{{ site.product_short }} Spreadsheet Insert Image pop-up](images/spreadsheet-insert-image-pop-up.png)
 
 ## Configuring the Spreadsheet to Initially Display an Image
 

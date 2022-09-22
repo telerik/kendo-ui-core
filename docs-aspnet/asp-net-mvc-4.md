@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 4 a
 
 **Step 6** Press `CTRL+F5` to build and run the application.
 
-![The new ASP.NET MVC 4 application](images/mvc4-new-app.png)
+![{{ site.product_short }} The new ASP.NET MVC 4 application](images/mvc4-new-app.png)
 
 ## Add Progress Telerik UI for ASP.NET MVC
 
@@ -57,7 +57,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in the Solution Explorer](images/mvc4-solution.png)
+![{{ site.product_short }} Kendo directories in the Solution Explorer](images/mvc4-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -179,7 +179,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 3** Press `CTRL+F5` to build and run the application.
 
-![The final result](images/mvc4-final.png)
+![{{ site.product_short }} The final result](images/mvc4-final.png)
 
 ## Next Steps
 

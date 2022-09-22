@@ -27,7 +27,7 @@ By default, the TimePicker is initialized with the `classic` render mode. In ord
 
 As a result, the appearance of the widget is alternated. 
 
-![Comparison between the component types](../../../images/modern-classic-timepicker.png)
+![{{ site.product_short }} Comparison between the component types](../../../images/modern-classic-timepicker.png)
 
 > The rendered selectors in the Telerik UI TimePicker for {{ site.framework }} depend on the currently applied format. If the format is omitted, the default format from the application's culture is used. 
 

@@ -25,13 +25,13 @@ Telerik UI for ASP.NET MVC can easily be added to an existing ASP.NET MVC projec
 
 1. In the **New Project** dialog, choose the **ASP.NET Web Application** template by expanding the **Templates** tree to **Templates** > **Visual C#** > **Web**.
 
-    ![](images/chapter1/file-new-mvc-project.png)
+    ![{{ site.product_short }} New Project Templates](images/chapter1/file-new-mvc-project.png)
 
 1. Give the application a name, for example, **MyQuickStartApp**. Click **OK** to continue.
 
 1. In the **New ASP.NET Project** dialog, choose **MVC** from the template selection.
 
-    ![](images/chapter1/file-new-mvc-project2.png)
+    ![{{ site.product_short }} New Project MVC](images/chapter1/file-new-mvc-project2.png)
 
 1. Click **OK** to finish.
 
@@ -53,21 +53,21 @@ The boilerplate has an HTML page, a layout, the Northwind database, and some ser
 
 1. From the Solution Explorer, right-click **References**, then choose **Manage NuGet Packages**.
 
-    ![](images/chapter1/nuget-gui.png)
+    ![{{ site.product_short }} Manage NuGet Packages](images/chapter1/nuget-gui.png)
 
 1. Search for **KendoQsBoilerplate**.
 
-    ![](images/chapter1/nuget-gui2.png)
+    ![{{ site.product_short }} Boilerplate](images/chapter1/nuget-gui2.png)
 
 1. Click **Install** to continue.
 1. When the package installs, you may be prompted to accept a license agreement for the NorthwindDB. Click **I Accept** to continue.
 1. It is normal for the quick start boilerplate to overwrite existing files. When prompted with a file conflict, choose **Yes to All**.
 
-    ![](images/chapter1/file-conflict.png)
+    ![{{ site.product_short }} Conflict](images/chapter1/file-conflict.png)
 
 1. With the boilerplate installed, take a moment to run the application. If all went well, you should see something similar to what is shown below.
 
-    ![](images/chapter1/wire-frame.png)
+    ![{{ site.product_short }} Wire Frame](images/chapter1/wire-frame.png)
 
 ### Convert to Telerik Applications
 
@@ -80,15 +80,15 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
 1. Stop the application if it is already running.
 1. In the Solution Explorer, right-click the project name and select **Telerik UI for ASP.NET MVC** > **Convert to Telerik Application**. This will launch the **Project Configuration** wizard. From here you can choose settings for your Telerik project.
 
-    ![](images/chapter1/convert-to-telerik1.png)
+    ![{{ site.product_short }} Project Configuration](images/chapter1/convert-to-telerik1.png)
 
 1. For this tutorial your project will use CDN support. This means that all Kendo UI resources are served from Telerik content delivery network (CDN) versus relying on your server for the assets. Verify that the box **Use CDN support** is checked and click **Finish** to continue.
 
-    ![](images/chapter1/convert-to-telerik2.png)
+    ![{{ site.product_short }} CDN Support](images/chapter1/convert-to-telerik2.png)
 
 1. Since the boilerplate is designed with [Bootstrap](https://getbootstrap.com), choose **Bootstrap** from themes select box so the theme matches the current look of the boilerplate. You'll change the theme later when you're ready to customize the look of the application.
 
-    ![](images/chapter1/convert-to-telerik3.png)
+    ![{{ site.product_short }} Bootstrap](images/chapter1/convert-to-telerik3.png)
 
 1. Open `\Views\Shared\_Layout.cshtml`. Find and remove the `@Scripts.Render("~/bundles/modernizr")` script bundle. This script is included with the Kendo UI assets.
 1. Next, find the CSS `@Styles.Render("~/Content/css")` bundle and move it just above the closing head tag `</head>`. This will ensure that the custom styles are applied when you customize the application.
@@ -126,19 +126,19 @@ Telerik UI for ASP.NET MVC is a set of server-side wrappers. A server-wrapper do
 - Allows the developer to configure a Kendo UI widget via C# or VB.NET code&mdash;set its value, data source, etc.
 - Renders the HTML and JavaScript needed to initialize the Kendo UI widget. The widget options propagate to the client side via the widget initialization script.
 
-![Server-side wrapper outputs HTML and JavaScript](../../images/wrapper-output.png)
+![{{ site.product_short }} Server-side wrapper outputs HTML and JavaScript](../../images/wrapper-output.png)
 
 #### Configuration
 
 The Kendo UI HtmlHelper exposes all Kendo UI server wrappers.
 
-![Kendo HtmlHelper extension method](../../images/kendo-extension.png)
+![{{ site.product_short }} Kendo HtmlHelper extension method](../../images/kendo-extension.png)
 
 #### Widget Options
 
 The widget options are exposed via a fluent interface.
 
-![Fluent interface](../../images/fluent-interface.png)
+![{{ site.product_short }} Fluent interface](../../images/fluent-interface.png)
 
 Below is an example of how a NumericTextBox input is created.
 
@@ -191,7 +191,7 @@ The Kendo UI HTML helper's fluent interface lets you configure a widget's behavi
 
 After you run your app with this change, you will see a calendar icon in the **Stats from** field. Click or tap the icon to reveal the date picker.
 
-![Tap to show a date picker](images/chapter2/date-picker-flyout.png)
+![{{ site.product_short }} Tap to show a date picker](images/chapter2/date-picker-flyout.png)
 
 With the inputs upgraded, let's move on to the extremely robust Kendo UI Grid.
 
@@ -213,19 +213,19 @@ A copy of the Northwind database is included in the Kendo UI Quick Start Boilerp
 
 1. Using Visual Studio's **Server Explorer**, expand **DataConnections**, and right-click **NorthwindDB** > **Modify Connection**.
 
-    ![](images/chapter3/upgrade-db-1.png)
+    ![{{ site.product_short }} Modify Connection](images/chapter3/upgrade-db-1.png)
 
 1. Next, click **OK**.
 
-    ![](images/chapter3/upgrade-db-2.png)
+    ![{{ site.product_short }} Confirm](images/chapter3/upgrade-db-2.png)
 
 1. Finally, click **Yes** to complete the upgrade.
 
-    ![](images/chapter3/upgrade-db-3.png)
+    ![{{ site.product_short }} Complete Upgrade](images/chapter3/upgrade-db-3.png)
 
 1. Once the upgrade is complete, expand the Northwind Database Tables to verify connectivity.
 
-    ![](images/chapter3/upgrade-db-4.png)
+    ![{{ site.product_short }} Database Verify Connectivity](images/chapter3/upgrade-db-4.png)
 
 With the database upgraded, use the scaffolding wizard to create an interactive grid view.
 
@@ -239,15 +239,15 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
 
 1. Start the scaffolding wizard by right-clicking **Controllers** > **Add** > **New Scaffolded Item**. The Scaffolder should be automatically installed. In case it is not, navigate to `\wrappers\aspnetmvc\Scaffolding` and click on **KendoScaffolderExtension.vsix** to install the Scaffolder manually.
 
-    ![](images/chapter3/scaffold-1.png)
+    ![{{ site.product_short }} New Scaffolded Item](images/chapter3/scaffold-1.png)
 
 1. Choose **Kendo UI Scaffolder** and click **Add** to continue.
 
-    ![](images/chapter3/scaffold-2.png)
+    ![{{ site.product_short }} Kendo Scaffolder](images/chapter3/scaffold-2.png)
 
 1. Notice that the Scaffolder is capable of creating Grid, Chart, and Scheduler views for both C# and JavaScript. For this guide you'll be using the Telerik UI for MVC Grid scaffolding option. Choose **Telerik UI for MVC Grid** and click **Add** to continue.
 
-    ![](images/chapter3/scaffold-3.jpg)
+    ![{{ site.product_short }} Grid Scaffolding Option](images/chapter3/scaffold-3.jpg)
 
 1. From the **Telerik UI for MVC Grid** scaffolding dialog, the Grid's model options, Grid options and events are defined. The Model Options control the following settings:
 
@@ -263,7 +263,7 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
     - **Model Class**: **Invoice**
     - **Data Context Class**: **NorthwindDBContext**
 
-    ![](images/chapter3/scaffold-4.jpg)
+    ![{{ site.product_short }} Grid Model Options](images/chapter3/scaffold-4.jpg)
 
     The Grid options control which features are scaffolded and enabled on the Grid, including:
 
@@ -288,7 +288,7 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
     - `checked` Excel Export
     - `checked` PDF Export
 
-    ![](images/chapter3/scaffold-5.jpg)
+    ![{{ site.product_short }} Grid Options](images/chapter3/scaffold-5.jpg)
 
 1. Click **Add** to continue and create the scaffolded items.
 
@@ -303,7 +303,7 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
 
 1. Run the application and navigate to `/Invoice/index` to see the generated Grid control. You should see the following output.
 
-    ![](images/chapter3/invoices-grid.jpg)
+    ![{{ site.product_short }} Invoices Grid](images/chapter3/invoices-grid.jpg)
 
 Now that the Telerik UI for MVC Scaffolder has generated a starting point for working with the Grid, you can modify the scaffolded code to meet your needs. In the next chapter we'll do just that.
 
@@ -565,7 +565,7 @@ There are three ways to use the hash syntax:
 
 If everything was done correctly, the ListView should look like the one shown below.
 
-![The Employee ListView](images/chapter5/employee-list.jpg)
+![{{ site.product_short }} The Employee ListView](images/chapter5/employee-list.jpg)
 
 At this point you can select items from the list, but before the dashboard can become truly interactive you'll need to work with the client-side APIs.
 
@@ -654,7 +654,7 @@ Let's continue to work with the `EmployeesList` that was created in the previous
 
 1. Refresh the page to see that the first item in the list is selected by default.
 
-    ![Selecting the Eemployee list](images/chapter6/employee-list-selected.jpg)
+    ![{{ site.product_short }} Selecting the Eemployee list](images/chapter6/employee-list-selected.jpg)
 
 Selecting the first item using the `DataBound` event was a good start. Next we'll take it a step further by using the selected item to populate a Kendo UI template showing the selected employee on the dashboard.
 
@@ -715,7 +715,7 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
 
 1. Refresh the page and select an employee from the `EmployeeList`. Selecting an item should update the dashboard with the selected employee's data.
 
-    ![Selecting an item to template](images/chapter6/selected-item-to-template.png)
+    ![{{ site.product_short }} Selecting an item to template](images/chapter6/selected-item-to-template.png)
 
 1. Find and remove the `<!-- Employee Avatar -->` placeholder code, it is no longer needed because the element is created dynamically. Remove the code shown in the example below.
 
@@ -878,7 +878,7 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 
 1. Run the project to see the behavior. Now the `EmployeeList` and `EmployeeSales` grid are in sync. When an employee is selected, only that employee's data will show in the grid.
 
-    ![](images/chapter7/datasource-filter.png)
+    ![{{ site.product_short }} Initial Data](images/chapter7/datasource-filter.png)
 
 At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`. However, the data shown does not reflect the `StatsFrom`/`StatsTo` date range. With the filtering code in place, additional controls are wired up with relative ease. Let's wire up the `StatsFrom`/`StatsTo` DatePickers to `EmployeeSales`.
 
@@ -909,7 +909,7 @@ At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`.
 
 1. Save the changes and refresh the browser. `StatsFrom`/`StatsTo` and `EmployeeList` will update `EmployeeSales` with data based on the selected dates and employee.
 
-    ![](images/chapter7/datasource-filter2.png)
+    ![{{ site.product_short }} Filtered Data](images/chapter7/datasource-filter2.png)
 
 Your Team Efficiency Dashboard is now interactive. Users can filter data using dates and employees. Next, you'll enhance the application by adding some data visualizations.
 
@@ -1069,7 +1069,7 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
 
 1. Run the application to see the chart render on the dashboard. Change the filter criteria to see the chart update along with other UI elements.
 
-    ![Bullet Chart](images/chapter8/bullet-chart.jpg)
+    ![{{ site.product_short }} Bullet Chart](images/chapter8/bullet-chart.jpg)
 
 ### Line Chart
 
@@ -1231,7 +1231,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Run the application to see the chart render on the dashboard. Change the filter criteria to see the chart update along with other UI elements.
 
-    ![A Sparkline chart](images/chapter8/spark-line-chart.png)
+    ![{{ site.product_short }} A Sparkline chart](images/chapter8/spark-line-chart.png)
 
 ### Client-Side API
 
@@ -1283,7 +1283,7 @@ Charts, like other Kendo UI widgets are easy to interact with on the client side
             .Events(e => e.DataBound("onQuarterSalesDataBound"))
         )
 
-    ![The client API of the Chart](images/chapter8/chart-client-api.jpg)
+    ![{{ site.product_short }} The client API of the Chart](images/chapter8/chart-client-api.jpg)
 
 The Team Efficiency Dashboard is starting to look complete, but it hasn't been tested for devices like mobile phones or tablets yet. In the next chapter you'll use responsive web design techniques to support devices beyond the desktop.
 
@@ -1322,7 +1322,7 @@ Run the project and shrink the browser window horizontally to about 400 pixels w
 
 1. Refresh the page, then shrink and grow the browser to different widths to see how the grid reacts at various sizes.
 
-    ![A responsive Grid](images/chapter9/responsive-grid.jpg)
+    ![{{ site.product_short }} A responsive Grid](images/chapter9/responsive-grid.jpg)
 
 ### Responsive Panel
 
@@ -1435,7 +1435,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
 
 1. Refresh the application. Expand and contract the browser's width until the **Menu** button is shown. Toggle the responsive panel using the **Menu** and **Close** buttons.
 
-    ![A responsive Grid](images/chapter9/responsive-panel.jpg)
+    ![{{ site.product_short }} A responsive Grid](images/chapter9/responsive-panel.jpg)
 
 The application is almost complete, just apply a nice bright theme and it will be ready to ship.
 
@@ -1470,7 +1470,7 @@ Kendo UI widgets include a number of predefined themes. In this chapter you'll l
     	}
 
     <!--*-->
-    ![The DatePicker width](images/chapter10/datepicker-width.png)
+    ![{{ site.product_short }} The DatePicker width](images/chapter10/datepicker-width.png)
 
 1. Add a style to offset the employee list so its content lines up with the left edge of its container.
 
@@ -1478,7 +1478,7 @@ Kendo UI widgets include a number of predefined themes. In this chapter you'll l
         	margin: 0 -10px;
     	}
 
-    ![The :ListView container](images/chapter10/list-view-container.jpg)
+    ![{{ site.product_short }} The :ListView container](images/chapter10/list-view-container.jpg)
 
 1. Find `/* Small Devices, Tablets, and Up */`. Here you'll find a media query that will hold some styles that are only applied to scree sizes above `768px`.
 
@@ -1497,7 +1497,7 @@ Kendo UI widgets include a number of predefined themes. In this chapter you'll l
     	}
 
     <!--*-->
-    ![App Wrapper margin](images/chapter10/app-wrapper.jpg)
+    ![{{ site.product_short }} App Wrapper margin](images/chapter10/app-wrapper.jpg)
 
 1. Finally, set the Kendo UI Chart themes. Open `_MontlySalesByEmployee.cshtml` and set the `Theme` property to `nova` on the `EmployeeAverageSales` chart.
 
@@ -1523,7 +1523,7 @@ And... that's it! You've created an interactive dashboard application using Tele
 
 Congratulations!
 
-![Finished App - Nova theme](images/chapter10/finished-app-in-nova.png)
+![{{ site.product_short }} Finished App - Nova theme](images/chapter10/finished-app-in-nova.png)
 
 ## Next Steps
 

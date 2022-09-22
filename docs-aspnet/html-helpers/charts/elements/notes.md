@@ -9,7 +9,7 @@ slug: htmlhelpers_charts_notes_aspnetcore
 
 The Telerik UI Chart enables you to display the metadata of a point or a specific part of the axis.
 
-![Notes displayed in a chart](../images/chart-notes.png)
+![{{ site.product_short }} Notes displayed in a chart](../images/chart-notes.png)
 
 ## Getting Started
 

@@ -46,7 +46,7 @@ More detailed instruction on capturing are available in [Fiddler Jam extension -
 3. Configure the options from the `Advanced Options` button (located above the `Start Capture` button):
    * Ensure that the `Mask Post Data` switch is `disabled`, if reproducing the issue triggers a postback or a POST request.
    * Ensure that the `Capture video` is `enabled`. This will provide more details and context in the capture.
-        <br /> <br />![Fiddler Jam Settings](images/fiddler-jam-capture-settings.png)
+        <br /> <br />![{{ site.product_short }} Fiddler Jam Settings](images/fiddler-jam-capture-settings.png)
 4. Click the `Start Capture` button.
 5. Navigate to your page (for example, `https://mydomain.com/mypagewithissue`) in the same tab. In case you started the capture from your `https://mydomain.com/mypagewithissue` page instead of a blank page, follow the steps below to ensure a proper capture.
    1. Click the address bar.

@@ -38,7 +38,7 @@ The following implementation demonstrates the code needed for the Swiss Type:
 {% endif %}
 Overview of the Swiss Type:
 
-![Swiss Type](images/swissType.png)
+![{{ site.product_short }} Swiss Type](images/swissType.png)
 
 * [Demo showing Swiss QR Code format](https://demos.telerik.com/{{ site.platform }}/qrcode/swiss)
 
@@ -66,7 +66,7 @@ The following implementation demonstrates the code needed for the Image Type:
 {% endif %}
 Overview of the Image Type:
 
-![Image Type](images/imageType.png)
+![{{ site.product_short }} Image Type](images/imageType.png)
 
 * [Demo of QRCode with image](https://demos.telerik.com/{{ site.platform }}/qrcode/image)
 

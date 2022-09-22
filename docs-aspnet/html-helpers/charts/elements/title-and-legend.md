@@ -66,7 +66,7 @@ The Chart legend displays the name of the configured data series.
 
 * To customize the position of the legend, use the `offsetX` and `offsetY` options.
 
-    ![Custom legend position](../images/chart-legend-custom-position.png)
+    ![{{ site.product_short }} Custom legend position](../images/chart-legend-custom-position.png)
 
 ```HtmlHelper
     @(Html.Kendo().Chart()

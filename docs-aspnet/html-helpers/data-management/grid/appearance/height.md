@@ -53,7 +53,7 @@ In specific scenarios you can set a height style to the scrollable data area eit
 ```
 {% endif %}
 
-![A Grid with a fixed height and scrolling functionality enabled](../grid-scrollable.png)
+![{{ site.product_short }} A Grid with a fixed height and scrolling functionality enabled](../grid-scrollable.png)
 
 ## Setting a Minimum Height
 

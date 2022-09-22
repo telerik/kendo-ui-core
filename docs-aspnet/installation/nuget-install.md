@@ -52,9 +52,9 @@ To configure the Telerik NuGet feed in Visual Studio:
 1. In the **Source** field, enter `https://nuget.telerik.com/v3/index.json` and click **OK**.
 
 {% if site.core %}
-    ![Kendo UI resources](../getting-started-core/images/add-nuget-source.png)
+    ![{{ site.product_short }} Kendo UI resources](../getting-started-core/images/add-nuget-source.png)
 {% else %}
-    ![Kendo UI resources](../getting-started-mvc/images/add-nuget-source.png)
+    ![{{ site.product_short }} Kendo UI resources](../getting-started-mvc/images/add-nuget-source.png)
 {% endif %}
 
 You have successfully added the Telerik NuGet feed as a Package source. 
@@ -68,7 +68,7 @@ The next steps describe how to authenticate your local NuGet instance and displa
 1. Select **Manage NuGet Packages for Solution...**
 
 {% if site.core %}
-	 ![Locating and opening the NuGet package manager menu](../getting-started-core/images/manage-nuget.png)
+	 ![{{ site.product_short }} Locating and opening the NuGet package manager menu](../getting-started-core/images/manage-nuget.png)
 {% endif %}
 
 1. Select the Telerik NuGet **Package source** from the drop-down list.

@@ -128,7 +128,7 @@ Perform the steps below to add a Grid to the project:
 
 Press `CTRL+F5` to build and run the application. As a result, the following sample page is created.
 
-![Sample page](../getting-started-mvc/images/sample-page.png)
+![{{ site.product_short }} Sample page](../getting-started-mvc/images/sample-page.png)
 
 ## Next Steps
 

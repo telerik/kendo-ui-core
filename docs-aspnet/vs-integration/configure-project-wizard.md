@@ -16,9 +16,9 @@ To use the wizard, your project must be already [configured as a {{ site.product
 To open the **Project Configuration Wizard**, click **Extensions** > **Telerik** > **{{ site.product }}** > **Configure Project**.
 
 {% if site.core %}
-![Visual Studio 2019 Extensions menu](../vs-integration/images/configure-project-core.png)
+![{{ site.product_short }} Visual Studio 2019 Extensions menu](../vs-integration/images/configure-project-core.png)
 {% else %}
-![Visual Studio 2019 Extensions menu](../vs-integration/images/images-mvc/configure_menu.png)
+![{{ site.product_short }} Visual Studio 2019 Extensions menu](../vs-integration/images/images-mvc/configure_menu.png)
 {% endif %}
 
 The configuration wizard handles the following tasks:  
@@ -30,9 +30,9 @@ The configuration wizard handles the following tasks:
 The **Theme Selection** page enables you to change the [visual theme](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started) of your {{ site.product }} application.
 
 {% if site.core %}
-![Visual theme configuration page of the Project Configuration Wizard](../vs-integration/images/configure_theme.png)
+![{{ site.product_short }} Visual theme configuration page of the Project Configuration Wizard](../vs-integration/images/configure_theme.png)
 {% else %}
-![Visual theme configuration page of the Project Configuration Wizard](../vs-integration/images/images-mvc/configure_theme.png)
+![{{ site.product_short }} Visual theme configuration page of the Project Configuration Wizard](../vs-integration/images/images-mvc/configure_theme.png)
 {% endif %}
 
 After selecting the desired theme, click **Next** to navigate to the [Project settings](#project-settings) page.
@@ -46,9 +46,9 @@ The **Project Settings** page allows you to modify the project settings by confi
 - **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
 {% if site.core %}
-![Project settings configuration page of the Project Configuration Wizard](../vs-integration/images/configure_settings.png)
+![{{ site.product_short }} Project settings configuration page of the Project Configuration Wizard](../vs-integration/images/configure_settings.png)
 {% else %}
-![Project settings configuration page of the Project Configuration Wizard](../vs-integration/images/images-mvc/configure_settings.png)
+![{{ site.product_short }} Project settings configuration page of the Project Configuration Wizard](../vs-integration/images/images-mvc/configure_settings.png)
 {% endif %}
 
 ## See Also

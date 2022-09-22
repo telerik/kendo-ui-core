@@ -16,7 +16,7 @@ The Telerik UI Chart enables you to display details about the data point over wh
 
 The border of this tooltip matches the color of the series.
 
-![The Chart tooltip](../images/chart-tooltip.png)
+![{{ site.product_short }} The Chart tooltip](../images/chart-tooltip.png)
 
 ## Getting Started
 

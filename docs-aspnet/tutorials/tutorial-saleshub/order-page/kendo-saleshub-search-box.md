@@ -9,7 +9,7 @@ position: 3
 
 # Create the Search Box
 
-![kendo-saleshub-search-box-screenshot](../images/kendo-saleshub-search-box-screenshot.png)
+![{{ site.product_short }} kendo-saleshub-search-box-screenshot](../images/kendo-saleshub-search-box-screenshot.png)
 
 The Search Box in SalesHub allows users to search for Orders based on their Order Number. It is
 implemented using a [Kendo AutoComplete](https://demos.telerik.com/kendo-ui/web/autocomplete/index.html)
@@ -18,7 +18,7 @@ box. The search results displayed in the dropdown are limited to the first 20 re
 the user can press enter and it will open a [Kendo Window](https://demos.telerik.com/kendo-ui/web/window/index.html)
 that will display all of the search results.
 
-![kendo-saleshub-search-results-screenshot](../images/kendo-saleshub-search-results-screenshot.png)
+![{{ site.product_short }} kendo-saleshub-search-results-screenshot](../images/kendo-saleshub-search-results-screenshot.png)
 
 ## Set up the AutoComplete
 

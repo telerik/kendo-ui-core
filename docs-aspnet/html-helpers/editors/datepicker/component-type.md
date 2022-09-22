@@ -28,7 +28,7 @@ By default, the DatePicker is initialized with the `classic` render mode. In ord
 
 As a result, the appearance of the widget is alternated. 
 
-![Comparison between the component types](../../../images/modern-classic-datepicker.png)
+![{{ site.product_short }} Comparison between the component types](../../../images/modern-classic-datepicker.png)
 
 ## See Also
 

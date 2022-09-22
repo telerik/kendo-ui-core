@@ -14,9 +14,9 @@ The Visual Studio (VS) **Extensions Options** dialog provides settings, allowing
 It can be accessed by clicking on **Extensions** > **Telerik** > **VSExtensions Options**.
 
 {% if site.core %}
-![The Options menu](../vs-integration/images/vsx-options.png)
+![{{ site.product_short }} The Options menu](../vs-integration/images/vsx-options.png)
 {% else %}
-![The Options menu](../vs-integration/images/images-mvc/options_menu.png)
+![{{ site.product_short }} The Options menu](../vs-integration/images/images-mvc/options_menu.png)
 {% endif %}
 
 The **Extensions Options** dialog contains two sets of options that affect the {{ site.product }} VS Extensions.
@@ -26,9 +26,9 @@ The **Extensions Options** dialog contains two sets of options that affect the {
 The settings under the General category affect all of the installed {{ site.product }} VS Extensions.
 
 {% if site.core %}
-![The Options dialog](../vs-integration/images/options.png)
+![{{ site.product_short }} The Options dialog](../vs-integration/images/options.png)
 {% else %}
-![The Options dialog](../vs-integration/images/images-mvc/options.png)
+![{{ site.product_short }} The Options dialog](../vs-integration/images/images-mvc/options.png)
 {% endif %}
 
 ### Project Setup
@@ -53,7 +53,7 @@ Set the project upgrade notifications for detected local distributions by using 
 
 The Telerik UI for ASP.NET MVC VS Extensions settings can be found in the standard options dialog in Visual Studio under the Telerik node.
 
-![The Options dialog](../vs-integration/images/images-mvc/options_kendo.png)
+![{{ site.product_short }} The Options dialog](../vs-integration/images/images-mvc/options_kendo.png)
 
 ### Latest Version Retrieval
 

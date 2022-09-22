@@ -125,7 +125,7 @@ The following example demonstrates how to configure the PivotConfigurator.
 
 The following image demonstrates the output from the previous example.
 
-![Kendo UI PivotConfigurator](pivotconfigurator.png)
+![{{ site.product_short }} Kendo UI PivotConfigurator](pivotconfigurator.png)
 
 ## Referencing Existing Instances
 

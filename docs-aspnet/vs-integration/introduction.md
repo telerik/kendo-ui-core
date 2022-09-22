@@ -67,13 +67,13 @@ When the download is complete, navigate to the download folder and click on the 
 - To access the VS extensions from the VS Toolbar, go to **Extensions > Telerik > {{ site.product }}**. Choose one of the two options -  **Create New Project** or **Convert to Telerik Application**.
 
 {% if site.core %}
-    ![Visual Studio 2019 Extensions menu](../vs-integration/images/create-project-core.png)
+    ![{{ site.product_short }} Visual Studio 2019 Extensions menu](../vs-integration/images/create-project-core.png)
 {% endif %}
 
 - To access the template projects, go to **File** > **New** > **Project** and search for `Telerik`.
 
 {% if site.core %}
-    ![New project Template](../vs-integration/images/new-project-template-core.png)
+    ![{{ site.product_short }} New project Template](../vs-integration/images/new-project-template-core.png)
 {% endif %}
 
 ## Using the Telerik VS Extensions in VS 2017
@@ -81,18 +81,18 @@ When the download is complete, navigate to the download folder and click on the 
 - To access the VS extensions from the VS, go to **Telerik > {{ site.product }}**. Choose from one of the two options -  **Create New Project** or **Convert to Telerik Application**.
 
 {% if site.core %}
-    ![Visual Studio 2017 Extensions menu](../vs-integration/images/create-project-core-vs2017.png)
+    ![{{ site.product_short }} Visual Studio 2017 Extensions menu](../vs-integration/images/create-project-core-vs2017.png)
 {% else %}
-    ![Visual Studio with no selected projects](../vs-integration/images/images-mvc/create_menu.png)
-    ![The selected project in VS is a standard ASP.NET MVC 5 web application](../vs-integration/images/images-mvc/convert_menu.png)
+    ![{{ site.product_short }} Visual Studio with no selected projects](../vs-integration/images/images-mvc/create_menu.png)
+    ![{{ site.product_short }} The selected project in VS is a standard ASP.NET MVC 5 web application](../vs-integration/images/images-mvc/convert_menu.png)
 {% endif %}
 
 - To access the template projects, go to **File** > **New** > **Project** and click on **Installed** > **Telerik** or search for `Telerik` in the search textbox on the right.
 
 {% if site.core %}
-    ![New project Template](../vs-integration/images/new-project-template-core-vs2017.png)
+    ![{{ site.product_short }} New project Template](../vs-integration/images/new-project-template-core-vs2017.png)
 {% else %}
-    ![The added project templates](../vs-integration/images/images-mvc/project_template.png)
+    ![{{ site.product_short }} The added project templates](../vs-integration/images/images-mvc/project_template.png)
 
 These templates are available in the C# and VB language-specific nodes of the dialog as well. The **Add New Project** dialog contains the Telerik UI for ASP.NET MVC web application under both the `CSharp\Web` and `Visual Basic\Web` nodes.
 
@@ -103,7 +103,7 @@ The following additional project templates are also available:
 
 The ASP.NET project wizard also contains the Telerik UI for ASP.NET MVC web application.
 
-![The MVC wizard](../vs-integration/images/images-mvc/mvc_wizard.png)
+![{{ site.product_short }} The MVC wizard](../vs-integration/images/images-mvc/mvc_wizard.png)
 {% endif %}
 
 ## {{ site.product }} Settings
@@ -111,7 +111,7 @@ The ASP.NET project wizard also contains the Telerik UI for ASP.NET MVC web appl
 You can find the {{ site.product }} VS Extensions settings in the standard Visual Studio options dialog under the Telerik node.
 
 {% if site.core %}
-![The Options dialog](../vs-integration/images/asp_core_settings.png)
+![{{ site.product_short }} The Options dialog](../vs-integration/images/asp_core_settings.png)
 {% endif %}
 
 ## See Also

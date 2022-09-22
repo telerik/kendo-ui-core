@@ -26,7 +26,7 @@ The example below demonstrates how to use the `basic` palettes:
 ```
 The result from the configuration is : 
 
-![Basic Presets](./images/basic-presets.png)
+![{{ site.product_short }} Basic Presets](./images/basic-presets.png)
 
 ### WebSafe Palette
 
@@ -45,7 +45,7 @@ The example below demonstrates how to use the `websafe` palettes:
 
 The result from the configuration is : 
 
-![WebSafe Presets](./images/websafe-presets.png)
+![{{ site.product_short }} WebSafe Presets](./images/websafe-presets.png)
 
 ### Custom Palette
 
@@ -148,7 +148,7 @@ The following example demonstrates how to add custom palettes:
 
 The result from the configuration is : 
 
-![Custom Presets](./images/custom-presets.png)
+![{{ site.product_short }} Custom Presets](./images/custom-presets.png)
 
 
 ## See Also
