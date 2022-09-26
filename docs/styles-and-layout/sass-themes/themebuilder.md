@@ -1,59 +1,61 @@
 ---
 title: ThemeBuilder
 page_title: ThemeBuilder | Sass Themes
-description: "Learn how to use the ThemeBuilder with the Kendo UI Sass themes."
+description: "Discover ThemeBuilder for Kendo UI and use it to create beautiful visual themes that allow you to take full control over the appearance of the UI components."
 slug: sassbasedthemes_themebuilder_kendoui
 position: 4
 ---
 
-# ThemeBuilder
+# ThemeBuilder for Kendo UI
 
-The [Kendo UI Theme Builder](https://themebuilder.telerik.com/kendo-ui) is a web application which enables you to create new or customize existing themes.
+[Progress ThemeBuilder](https://themebuilder.telerik.com/kendo-ui) is a web application that enables you to create new or customize existing themes. ThemeBuilder allows you to render the same look and feel for all UI components from all Kendo UI suites and gives you full control over their visual elements.
 
-The Theme Builder renders the same look and feel as all other components in the Kendo UI suites and delivers full control over their visual elements.
+Complex Kendo UI components, such as the Grid, rely on other components to deliver their full set of features. ThemeBuilder automatically updates the styling of all required components so that you do not need to customize each of them separately.
 
-Complex Kendo UI components, such as the Grid, rely on other components to deliver their full set of features. The Theme Builder automatically updates the styling on all required components so that you do not need to customize each of them separately.
-
-![Theme Builder Overview](../images/theme-builder-overview.png)
+![ThemeBuilder Overview](../images/themebuilder-overview.png)
 
 ## Creating New Themes
 
 To create a new theme:
 
-1. Go to the [Theme Builder application](https://themebuilder.telerik.com/kendo-ui).
-1. Click on **Start Theming**.
-1. Choose one of the **Base Theme** options.
-1. Scroll down and select the widgets you wish to style. The selection can be change later on as well.
-1. Click on the **Create** button.
+1. Open [ThemeBuilder](https://themebuilder.telerik.com/kendo-ui).
+1. Select one of the four base themes.
+1. Select **Start Theming**.
+1. To reduce the number of the rendered components, open the **SELECT COMPONENTS** screen and check only the UI components that you need.
 
-![Theme Builder Create](../images/theme-builder-create.gif)
+![Create a new visual theme with ThemeBuilder](../images/themebuilder-create.gif)
 
 ### Customizing New Themes
 
-To customize a theme, use any of the following styling options that the Theme Builder delivers:
+To customize a theme, use any of the following ThemeBuilder features:
 
-* Color pickers.
-* Manual updates of the component elements.
-* Predefined color swatches.
+* Built-in [color swatches]({% slug sassbasedthemes_swatches_kendoui %})&mdash;The color swatches are color variations of the base themes. The swatches use the same variables as their base theme but with different color values. To open the color swatches menu, use the dropdown button with the fill drip icon ![The fill drip icon in ThemeBuilder](../images/fill-drip.png).
 
-![Apply and Preview Changes](../images/theme-builder-create-and-download-3.png)
+* Color pickers&mdash;All color variables provide color pickers that you can use to set the desired values.
+
+* Manual updates of the component elements&mdash;You can directly enter the desired values into the input field of the selected variable.
+
+![Customize UI components with ThemeBuilder](../images/themebuilder-customize-components.png)
 
 ## Using Existing Themes
 
 To customize a theme you previously created:
 
-1. Go to the [Theme Builder application](https://themebuilder.telerik.com/kendo-ui).
-1. Click on **Import Theme**.
-1. Upload the `theme-name.json` file, which is part of the ZIP that you have previously downloaded from the Theme Builder. It contains the current parameters of the customized theme. As a result, the selected components and styling elements are loaded.
-1. Start customizing your theme by using the Theme Builder features your project requires.
+1. Open [ThemeBuilder](https://themebuilder.telerik.com/kendo-ui).
 
-![Theme Builder Import](../images/theme-builder-import-existing-theme.png)
+1. Select the **Import Theme** button on the right.
+
+   <img src="../images/themebuilder-import-theme.png" alt="Import Theme button in ThemeBuilder" width="145"/>
+
+1. Upload the `.json` file that is part of the ZIP archive that you have previously downloaded from ThemeBuilder. It contains the current parameters of the customized theme. As a result, the selected components and styling elements are loaded.
+
+1. Start customizing your theme by using the ThemeBuilder features your project requires.
 
 ### JSON File Structure
 
 The JSON file holds the information about the modified variables of the customized theme. If you don't have a JSON file and your custom theme targets specific components, it is recommended that you create the JSON file from scratch:
 
-1. [Create a new theme](#creating-new-themes) through the Theme Builder.
+1. [Create a new theme](#creating-new-themes) through the ThemeBuilder.
 1. Paste the variables from your SCSS file.
 1. Download the theme. 
 
@@ -537,8 +539,8 @@ The following example demonstrates the JSON file for the **Material** base theme
 
 ## Using the Themes in Your Project
 
-When you complete the modifications and the theme is ready to be used:
+When you complete the modifications and the theme is ready:
 
-1. Download the theme as a compact archive by clicking the **Download** button.
-1. Add the newly created `Theme` folder to your application.
+1. To download the theme as a ZIP archive, select **Export**.
+1. Unpack the zipped folder and add it to your application.
 1. Include the `THEME_NAME.css` file in the `head` tag of your HTML document.

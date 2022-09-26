@@ -436,6 +436,24 @@ The array of the sheet rows.
 
 The cells of each row. Each cell represents a cell from the final Excel document.
 
+#### Example - specify the cells of each row
+
+<script>
+  var workbook = new kendo.ooxml.Workbook({
+    sheets: [{
+      rows: [
+        { cells: [ { value: "Document Title" }  ] },
+        { cells: [ { value: 22 }, { value: 33 }, { value: 44 }, {value: 55}  ] }
+      ]
+    }]
+  });
+
+  kendo.saveAs({
+    dataURI: workbook.toDataURL(),
+    fileName: "Test.xlsx"
+  });
+</script>
+
 ### sheets.rows.cells.background `String` *(default: null)*
 
 Sets the background color of the cell. Supports hex CSS-like values that start with `#`, for example, `#ff00ff`.

@@ -91,7 +91,7 @@ The following example showcases the full implementation of the previous steps.
     </div>
 </div>
 
-<script src="../content/shared/js/countries-revenue.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/countries-revenue.js"></script>
 <script>
     $(document).ready(function () {
         var pivotgrid = $("#pivotgrid").kendoPivotGridV2({

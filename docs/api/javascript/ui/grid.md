@@ -206,7 +206,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
 
 ### columns.attributes `Object`
 
-HTML attributes of the table cell (`<td>`) rendered for the column.
+[`HTML attributes`](https://www.w3schools.com/tags/ref_attributes.asp) of the table cell (`<td>`) rendered for the column.
 
 > HTML attributes which are JavaScript keywords (e.g. *class*) must be quoted.
 
@@ -4293,12 +4293,14 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
 > Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](/framework/data-attribute-initialization) for more info.
 > The validation that is set in `schema.model`(/api/javascript/data/datasource/configuration/schema.model) is not mapped automatically. As a result, when you use the `editable.template` option, you have to add the validation for every element manually.
 
+To change the size of the popup editor you can follow the approach outlined in [this article](/knowledge-base/grid-adjust-popup-size).
+
 #### Example - customize the popup editor
 
     <script id="popup-editor" type="text/x-kendo-template">
       <h3>Edit Person</h3>
       <p>
-        <label>Name:<input name="name" /></label>
+        <label>Name:<input id="nameInput" name="name" /></label>
       </p>
       <p>
         <label>Age: <input data-role="numerictextbox" name="age" /></label>
@@ -4329,7 +4331,11 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
       editable: {
         mode: "popup",
         template: kendo.template($("#popup-editor").html())
-      }
+      },
+      edit: function (e) {
+          //initialize Kendo UI TextBox for the name input
+          $("#nameInput").kendoTextBox();
+        }
     });
     </script>
 
@@ -6811,6 +6817,8 @@ The text displayed in the grouping drop area.
 ### height `Number|String`
 
 The height of the grid. Numeric values are treated as pixels.
+
+When string is used the format can be "number" + "px" or "number" alone. For example: "100px" or "100".
 
 #### Example - set the height as a number
 

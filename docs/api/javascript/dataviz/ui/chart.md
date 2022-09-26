@@ -39193,7 +39193,7 @@ The data point value.
       ]
     });
 
-    functino chart_seriesClick(e) {
+    function chart_seriesClick(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
