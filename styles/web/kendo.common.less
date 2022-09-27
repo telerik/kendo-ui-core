@@ -52,7 +52,7 @@
 @kendo-slider-line-height: @line-height;
 
 @kendo-slider-track-size: 8px;
-@kendo-slider-track-border-width: 0;
+@kendo-slider-track-border-width: 0px;
 @kendo-slider-track-border-radius: 4px;
 
 @kendo-slider-thumb-width: 16px;
@@ -133,12 +133,12 @@
 @form-label-margin: 0 0 4px;
 
 @form-fieldset-margin: 32px 0 0;
-@form-fieldset-padding-x: 0;
-@form-fieldset-padding-y: 0;
+@form-fieldset-padding-x: 0px;
+@form-fieldset-padding-y: 0px;
 
 @form-legend-margin: 0 0 16px;
-@form-legend-padding-x: 0;
-@form-legend-padding-y: 0;
+@form-legend-padding-x: 0px;
+@form-legend-padding-y: 0px;
 @form-legend-font-size: inherit;
 @form-legend-line-height: @form-line-height;
 
@@ -147,10 +147,10 @@
 @form-hint-margin: 0 0 4px;
 @form-hint-font-size: 12px;
 
-@form-buttons-margin: 16px 0 0;
-@form-buttons-padding-x: 0;
-@form-buttons-padding-y: 0;
-@form-buttons-border-width: 0;
+@form-buttons-margin: 16px 0 0px;
+@form-buttons-padding-x: 0px;
+@form-buttons-padding-y: 0px;
+@form-buttons-border-width: 0px;
 @form-buttons-spacing: 8px;
 
 @horizontal-form-label-margin-x: 10px;
@@ -177,7 +177,7 @@
 @toolbar-padding-x: 4px;
 @toolbar-padding-y: 4px;
 @toolbar-border-width: 1px;
-@toolbar-border-radius: 0;
+@toolbar-border-radius: 0px;
 
 @toolbar-spacing: @toolbar-padding-x;
 
@@ -268,8 +268,8 @@
 @grid-filterable-icon-spacing: ~"calc( @{icon-size} + .6em )";
 
 // Calendar
-@calendar-padding-x: 0;
-@calendar-padding-y: 0;
+@calendar-padding-x: 0px;
+@calendar-padding-y: 0px;
 @calendar-border-width: 1px;
 @calendar-border-radius: 4px;
 @calendar-font-size: 14px;
@@ -279,8 +279,8 @@
 @calendar-header-padding-y: 2px;
 @calendar-header-border-width: 1px;
 
-@calendar-content-padding-x: 0;
-@calendar-content-padding-y: 0;
+@calendar-content-padding-x: 0px;
+@calendar-content-padding-y: 0px;
 
 @calendar-cell-padding-x: .5em;
 @calendar-cell-padding-y: .5em;
@@ -351,9 +351,9 @@
 @scrollview-pagebutton-size: 10px;
 @scrollview-navigation-size: 4.5em;
 
-@scrollview-pager-offset: 0;
+@scrollview-pager-offset: 0px;
 @scrollview-pager-item-spacing: 20px;
-@scrollview-pager-item-border-width: 0;
+@scrollview-pager-item-border-width: 0px;
 @scrollview-pager-height: calc( @scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (2 * @scrollview-pager-item-spacing) );
 // Switch
 @switch-size: 5em;
@@ -465,7 +465,7 @@
 @card-avatar-size: 45px;
 @card-avatar-spacing: @card-header-padding-x;
 
-@card-deck-scroll-button-radius: 0;
+@card-deck-scroll-button-radius: 0px;
 @card-deck-scroll-button-offset: -1px;
 
 @card-callout-width: 20px;
@@ -473,7 +473,7 @@
 
 
 // TileLayout
-@tilelayout-border-width: 0;
+@tilelayout-border-width: 0px;
 
 @tilelayout-hint-border-width: 1px;
 @tilelayout-hint-border-radius: @card-border-radius;
@@ -604,11 +604,11 @@
 // Breadcrumb
 @breadcrumb-min-height: 2.11em;
 
-@breadcrumb-container-padding-x: 0;
-@breadcrumb-container-padding-y: 0;
+@breadcrumb-container-padding-x: 0px;
+@breadcrumb-container-padding-y: 0px;
 
-@breadcrumb-container-margin-x: 0;
-@breadcrumb-container-margin-y: 0;
+@breadcrumb-container-margin-x: 0px;
+@breadcrumb-container-margin-y: 0px;
 
 @breadcrumb-link-padding-x: @button-padding-x;
 @breadcrumb-link-padding-y: @button-padding-y;
@@ -624,7 +624,7 @@
 @breadcrumb-root-icon-font-size: @icon-size;
 @breadcrumb-delimiter-icon-font-size: 12px;
 @breadcrumb-delimiter-icon-padding-x: calc(@button-padding-x / 2);
-@breadcrumb-delimiter-icon-padding-y: 0;
+@breadcrumb-delimiter-icon-padding-y: 0px;
 
 
 // Listgroup
@@ -684,8 +684,8 @@
 @checkbox-border-width: 1px;
 @checkbox-line-height: (@checkbox-size + @checkbox-border-width);
 
-@checkbox-list-margin: 0;
-@checkbox-list-padding: 0;
+@checkbox-list-margin: 0px;
+@checkbox-list-padding: 0px;
 @checkbox-list-item-margin-top: 16px;
 @checkbox-list-horizontal-item-margin-x: 32px;
 
@@ -696,8 +696,8 @@
 @radio-border-width: 1px;
 @radio-line-height: calc(@radio-size + @radio-border-width);
 
-@radio-list-margin: 0;
-@radio-list-padding: 0;
+@radio-list-margin: 0px;
+@radio-list-padding: 0px;
 @radio-list-item-margin-top: 16px;
 @radio-list-horizontal-item-margin-x: 32px;
 
@@ -765,14 +765,14 @@
 
 
 // Stepper
-@stepper-margin-x: 0;
-@stepper-margin-y: 0;
-@stepper-padding-x: 0;
-@stepper-padding-y: 0;
+@stepper-margin-x: 0px;
+@stepper-margin-y: 0px;
+@stepper-padding-x: 0px;
+@stepper-padding-y: 0px;
 @stepper-label-margin-x: 12px;
 @stepper-label-padding-x: 12px;
 @stepper-label-padding-y: 5px;
-@stepper-border-width: 0;
+@stepper-border-width: 0px;
 
 @stepper-inline-content-padding-x: 20px;
 @stepper-inline-content-padding-y: 10px;
@@ -807,7 +807,7 @@
 @wizard-padding-x: calc( @wizard-spacer * 2 );
 @wizard-padding-y: @wizard-padding-x;
 
-@wizard-border-width: 0;
+@wizard-border-width: 0px;
 @wizard-font-size: inherit;
 @wizard-line-height: @line-height;
 
@@ -941,7 +941,7 @@
 
 @fab-padding-x: @fab-spacer;
 @fab-padding-y: @fab-padding-x;
-@fab-border-width: 0;
+@fab-border-width: 0px;
 @fab-border-radius: 4px;
 @fab-font-family: inherit;
 @fab-font-size: inherit;
@@ -957,7 +957,7 @@
 @fab-icon-height: @fab-icon-width;
 @fab-icon-spacing: 8px;
 
-@fab-items-padding-x: 0;
+@fab-items-padding-x: 0px;
 @fab-items-padding-y: @fab-spacer;
 
 @fab-item-spacer: 8px;
@@ -970,7 +970,7 @@
 
 @fab-item-icon-padding-x: @fab-item-spacer;
 @fab-item-icon-padding-y: @fab-item-icon-padding-x;
-@fab-item-icon-border-width: 0;
+@fab-item-icon-border-width: 0px;
 @fab-item-icon-border-radius: 50%;
 
 
@@ -986,7 +986,7 @@
 @bottom-nav-letter-spacing: .2px;
 
 @bottom-nav-item-padding-x: 8px;
-@bottom-nav-item-padding-y: 0;
+@bottom-nav-item-padding-y: 0px;
 @bottom-nav-item-min-width: 72px;
 @bottom-nav-item-min-height: calc( (@icon-size * 2.5) + (@bottom-nav-padding-y * 2) );
 @bottom-nav-item-gap: 0 8px;
@@ -1007,8 +1007,8 @@
 @actionsheet-max-width: 100%;
 @actionsheet-max-height: 50vh;
 
-@actionsheet-border-width: 0;
-@actionsheet-border-radius: 0;
+@actionsheet-border-width: 0px;
+@actionsheet-border-radius: 0px;
 
 @actionsheet-font-size: 14px;
 @actionsheet-font-family: @font-family;
@@ -1038,7 +1038,7 @@
 
 
 // Grid column menu
-@grid-column-menu-popup-padding-x: 0;
+@grid-column-menu-popup-padding-x: 0px;
 @grid-column-menu-popup-padding-y: @padding-y-sm;
 
 @grid-column-menu-item-padding-x: @padding-x;
@@ -1066,7 +1066,7 @@
 @taskboard-content-padding-x: @taskboard-content-padding-y;
 
 @taskboard-column-container-spacing-y: calc(@taskboard-spacer / 2);
-@taskboard-column-container-padding-y: 0;
+@taskboard-column-container-padding-y: 0px;
 @taskboard-column-container-padding-x: calc(@taskboard-spacer / 2);
 @taskboard-columns-container-gap: @taskboard-spacer;
 
@@ -1127,7 +1127,7 @@
 
 @scheduler-tooltip-padding-x: @padding-x;
 @scheduler-tooltip-padding-y: @scheduler-tooltip-padding-x;
-@scheduler-tooltip-border-width: 0;
+@scheduler-tooltip-border-width: 0px;
 
 @scheduler-tooltip-title-margin-y: @padding-y;
 @scheduler-tooltip-month-font-size: @font-size-sm;

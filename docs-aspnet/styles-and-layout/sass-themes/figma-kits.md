@@ -13,7 +13,7 @@ position: 8
 Design Files for Figma&mdash;building blocks for designers matching UI for {{site.framework}} components.
 
 <a href="https://www.figma.com/@progress" style="display: contents;" title="Download Telerik UI Kits">
-<img src="images/styling-ui-kits-for-figma.png" alt="Download Telerik UI Kits" style="margin: 30px 0; width: auto; height: auto; max-width: 100%;"/>
+<img src="../images/styling-ui-kits-for-figma.png" alt="Download Telerik UI Kits" style="margin: 30px 0; width: auto; height: auto; max-width: 100%;"/>
 </a>
 
 To achieve efficient collaboration between designers and developers, we have created three Telerik and Kendo UI Kits for Figma (one for each of the top three themes we ship with {{site.product}}): Material, Bootstrap and Default (our own styling). 
@@ -37,7 +37,7 @@ To achieve efficient collaboration between designers and developers, we have cre
                                 border: 2px solid rgba(148, 216, 255, 0.533);
                                 color: rgb(101, 101, 101);">
 <span style="width: 21px; margin-right: 16px">
-<img src="images/figma-vector-logo-2.png" alt="Download Telerik UI Kits"/>
+<img src="../images/figma-vector-logo-2.png" alt="Download Telerik UI Kits"/>
 </span>
 Download UI Kits
 </button>
@@ -78,11 +78,11 @@ Each Telerik and Kendo UI Kit for Figma contains the following pages, most of wh
 * **_Styles**&mdash;An informational page with all styles that are applied to the components, such as typography, colors, and effects.
 * **_Change Log**&mdash;A list with the changes in the UI kit.
 
-![{{ site.product_short }} Kendo UI Kit Pages](images/figma-ui-kit-pages-v1.9.png)
+![{{ site.product_short }} Kendo UI Kit Pages](../images/figma-ui-kit-pages-v1.9.png)
 
 Most pages contain multiple frames that group similar design assets.
 
-![{{ site.product_short }} Kendo UI Kit Page with Multiple Frames](images/figma-ui-kit-frames-v1.9.png)
+![{{ site.product_short }} Kendo UI Kit Page with Multiple Frames](../images/figma-ui-kit-frames-v1.9.png)
 
 ## Customizing the UI Kits 
 
@@ -119,7 +119,7 @@ You can apply three different levels of component customization, depending on yo
 The Design Files for Figma are building blocks for designers that match the Telerik UI for ASP.NET MVC components.
 
 <a href="https://www.figma.com/@progress" style="display: contents;" title="Download Telerik UI Kits">
-<img src="images/styling-ui-kits-for-figma.png" alt="Download Telerik UI Kits" style="margin: 30px 0; width: auto; height: auto; max-width: 100%;"/>
+<img src="../images/styling-ui-kits-for-figma.png" alt="Download Telerik UI Kits" style="margin: 30px 0; width: auto; height: auto; max-width: 100%;"/>
 </a>
 
 We’ve created three distinct Telerik and Kendo UI kits for Figma for each of the most popular themes shipped with UI for ASP.NET MVC library, thus aiming to facilitate efficient collaboration between designers and developers in their efforts for creating and implementing the perfect project design. 
@@ -143,7 +143,7 @@ We’ve created three distinct Telerik and Kendo UI kits for Figma for each of t
                                 border: 2px solid rgba(148, 216, 255, 0.533);
                                 color: rgb(101, 101, 101);">
 <span style="width: 21px; margin-right: 16px">
-<img src="images/figma-vector-logo-2.png" alt="Download Telerik UI Kits"/>
+<img src="../images/figma-vector-logo-2.png" alt="Download Telerik UI Kits"/>
 </span>
 Download UI Kits
 </button>
@@ -174,11 +174,11 @@ Each UI kit includes the following pages:
 * **_Styles**&mdash;An informational page with all styles that are applied to the components, such as typography, colors, and effects.
 * **_Change Log**&mdash;A list with the changes in the UI kit.
 
-![{{ site.product_short }} Kendo UI Kit Pages](images/figma-ui-kit-pages-v1.9.png)
+![{{ site.product_short }} Kendo UI Kit Pages](../images/figma-ui-kit-pages-v1.9.png)
 
 The UI kits group similar design assets into frames. 
 
-![{{ site.product_short }} Kendo UI Kit Page with Multiple Frames](images/figma-ui-kit-frames-v1.9.png)
+![{{ site.product_short }} Kendo UI Kit Page with Multiple Frames](../images/figma-ui-kit-frames-v1.9.png)
 
 ## Customizing the UI Kits 
 
