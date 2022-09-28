@@ -31,19 +31,19 @@ The following instructions demonstrate how to create a user identity and use tha
 
 	**Figure 1: Adding a new user**
 
-	![Add new user](images/add-user-initial.png)
+	![Kendo UI for jQuery Add new user](images/add-user-initial.png)
 
 1. On the permissions step, select **Attach existing policies directly**. In the search field, type `dynamodb` and check the **AmazonDynamoDBFullAccess** option in the table. Click **Next: Review** > **Create user**.
 
 	**Figure 2: Configuring the user permissions**
 
-	![Configure permissions](images/add-user-permissions.png)
+	![Kendo UI for jQuery Configure permissions](images/add-user-permissions.png)
 
 1. From the summary view of the newly created user, copy the `Access key ID` and the `Secret access key`.
 
 	**Figure 3: Getting the user credentials**
 
-	![Get credentials](images/add-user-credentials.png)
+	![Kendo UI for jQuery Get credentials](images/add-user-credentials.png)
 
 ## Configuring the Grid for Consuming and Manipulating Available DynamoDB Data
 

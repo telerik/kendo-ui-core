@@ -16,7 +16,7 @@ You can scroll through the events and collapse/expand them. The events order can
 
 The following image demonstrates a Timeline widget.
 
-![A Kendo UI Timeline widget](images/timeline-overview.png)
+![Kendo UI for jQuery A Kendo UI Timeline widget](images/timeline-overview.png)
 
 ## Initializing the Timeline
 

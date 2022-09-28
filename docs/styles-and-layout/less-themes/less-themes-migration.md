@@ -64,7 +64,7 @@ With the new rendering of the components, some CSS classes will be deleted. If y
 
 The Less themes have Sass swatch counterparts.
 
-![Classic Swatches](../images/theme-builder-classic-swatches.png)
+![Kendo UI for jQuery Classic Swatches](../images/theme-builder-classic-swatches.png)
 
 The following table contains the name of the Less theme and its Sass counterpart:
 

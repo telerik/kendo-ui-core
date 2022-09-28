@@ -7250,6 +7250,484 @@ Template variables:
 
  A value indicating if the tooltip should be displayed.
 
+### subtitle `Object|String`
+
+The chart subtitle configuration options or text.
+
+#### Example - set the chart title and subtitle as a string
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: "Title",
+      subtitle: "Subtitle"
+    });
+    </script>
+
+#### Example - configure the chart title and subtitle
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        align: "left"
+      },
+      subtitle: {
+        text: "Subtitle",
+        align: "left"
+      }
+    });
+    </script>
+
+### subtitle.align `String`
+
+The alignment of the subtitle.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+By default, the subtitle has the same alignment as the title.
+
+#### Example - configure the chart title and subtitle alignment
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        align: "left"
+      },
+      subtitle: {
+        text: "Subtitle",
+        align: "left"
+      }
+    });
+    </script>
+
+### subtitle.background `String` *(default: "white")*
+
+The background color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - configure the chart subtitle alignment
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        background: "green"
+      }
+    });
+    </script>
+
+### subtitle.border `Object`
+
+The border of the subtitle.
+
+#### Example - set the chart subtitle border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          color: "green",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the chart subtitle border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          color: "green",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.dashType `String` *(default: "solid")*
+
+The dash type of the chart subtitle border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the chart subtitle border dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          dashType: "dashDot",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+#### Example - set the chart subtitle border width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.color `String`
+
+The text color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the subtitle color as a hex string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Chart Title"
+      },
+      subtitle: {
+        text: "Chart Subtitle",
+        color: "#aa00bb"
+      }
+    });
+    </script>
+
+### subtitle.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+#### Example - set the chart title and subtitle font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        font: "20px sans-serif"
+      }
+    });
+    </script>
+
+### subtitle.margin `Number|Object` *(default: 5)*
+
+The margin of the subtitle. A numeric value will set all margins.
+
+#### Example - set the chart subtitle margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: 10
+      }
+    });
+    </script>
+
+### subtitle.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the subtitle.
+
+#### Example - set the chart subtitle bottom margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: {
+          bottom: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.margin.left `Number` *(default: 0)*
+
+The left margin of the subtitle.
+
+#### Example - set the chart subtitle left margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        margin: {
+          left: 10
+        }
+      },
+      subtitle: {
+        text: "Subtitle"
+      }
+    });
+    </script>
+
+### subtitle.margin.right `Number` *(default: 0)*
+
+The right margin of the subtitle.
+
+#### Example - set the chart series subtitle right margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        margin: {
+          right: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.margin.top `Number` *(default: 0)*
+
+The top margin of the subtitle.
+
+#### Example - set the chart subtitle top margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: {
+          top: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding `Number|Object` *(default: 5)*
+
+The padding of the subtitle. A numeric value will set all margins.
+
+#### Example - set the chart subtitle padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: 10
+      }
+    });
+    </script>
+
+### subtitle.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the subtitle.
+
+#### Example - set the chart subtitle bottom padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        padding: {
+          bottom: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.left `Number` *(default: 0)*
+
+The left padding of the subtitle.
+
+#### Example - set the chart subtitle left padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: {
+          left: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.right `Number` *(default: 0)*
+
+The right padding of the subtitle.
+
+#### Example - set the chart subtitle right padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        padding: {
+          right: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.top `Number` *(default: 0)*
+
+The top padding of the subtitle.
+
+#### Example - set the chart subtitle top padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: {
+          top: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.position `String` *(default: "top")*
+
+The position of the subtitle.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+By default, the subtitle is placed in the same position as the title.
+
+#### Example - set the chart subtitle position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        position: "bottom"
+      },
+      subtitle: {
+        text: "Subtitle",
+        position: "bottom"
+      }
+    });
+    </script>
+
+### subtitle.text `String`
+
+The text of the chart subtitle. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+#### Example - set the chart subtitle text
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        position: "bottom"
+      }
+    });
+    </script>
+
+### subtitle.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the subtitle. By default the subtitle will be displayed.
+
+#### Example - hide the subtitle
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        visible: false
+      },
+      subtitle: {
+        text: "Subtitle",
+        visible: false
+      }
+    });
+    </script>
+
 ### theme `String`
 
 The chart theme. This can be either a built-in theme or "sass".

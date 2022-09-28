@@ -923,7 +923,7 @@ var __meta__ = {
                 };
 
             if (referenceItem && !parent.length) {
-                parent = $(that.renderGroup({ group: groupData, options: that.options })).appendTo(referenceItem);
+                parent = $(that.renderGroup({ group: groupData, options: that.options })).css("display", "none").appendTo(referenceItem);
             }
 
             if (plain || isArray(item) || item instanceof kendo.data.ObservableArray) { // is JSON

@@ -20,7 +20,7 @@ This article provides solutions for issues you might encounter while working wit
 1. Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**.
 1. Enable **Binary and script behaviors** by ticking the **Enable** radio button.
 
-![Options and settings to apply to render the chart graphics](../../../styles-and-layout/chart-ie-script-behaviors.png)
+![Kendo UI for jQuery Options and settings to apply to render the chart graphics](../../../styles-and-layout/chart-ie-script-behaviors.png)
 
 ## The layout in the exported PDF files is different
 

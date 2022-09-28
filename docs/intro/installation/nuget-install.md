@@ -65,7 +65,7 @@ To register the Telerik NuGet Feed on your system by using the NuGet package man
 1. Go to **Tools** > **NuGet Package Manager** > **Package Manager Settings**, select **Package Manager Sources** and then click the **+** button.
 1. Select the feed **Name**, set the feed URL to https://nuget.telerik.com/v3/index.json, and click **OK**.
 
-    ![Kendo UI for jQuery resources](../../images/add-nuget-package-source.png)
+    ![Kendo UI for jQuery Resources](../../images/add-nuget-package-source.png)
 
 1. Select the **Browse** list of packages.
 1. Enter your Telerik credentials in the Windows Authentication dialog. As a result, all of the packages that are licensed to the user account are now available in Visual Studio Package Manager.
@@ -82,7 +82,7 @@ Regardless of the package installation approach you choose, after the installati
 * `/Scripts/kendo/<version>/`&mdash;Contains the minified JavaScript files.
 * `/Content/kendo/<version>/`&mdash;Contains the minified CSS files and theme images.
 
-![Kendo UI for jQuery resources](../../images/kendo-folder-structure.png)
+![Kendo UI for jQuery Folder Structure](../../images/kendo-folder-structure.png)
 
 ### Install with the Package Manager Dialog
 
@@ -90,11 +90,11 @@ To install the Kendo UI for jQuery packages by using the **Package Manager** dia
 
 1. Right-click **Solution** or a specific project in **Solution**, and navigate to **Manage NuGet Packages**.
 
-    ![Kendo UI for jQuery resources](../../images/manage-nuget-packages.png)
+    ![Kendo UI for jQuery Manage NuGet Packages](../../images/manage-nuget-packages.png)
 
 1. Set the package source to `telerik.com` and install the `KendoUIProfessional` NuGet package.
 
-    ![Kendo UI for jQuery resources](../../images/kendo-ui-package.png)
+    ![Kendo UI for jQuery NuGet Package](../../images/kendo-ui-package.png)
 
 ### Install with the Package Manager Console
 

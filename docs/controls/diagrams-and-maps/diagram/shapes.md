@@ -39,7 +39,7 @@ To connect the shapes, use the `connect()` method.
 
 The previous example results in the following output.
 
-![Two connected Diagram shapes](diagram-connection.png)
+![Kendo UI for jQuery Two connected Diagram shapes](diagram-connection.png)
 
 ## Changing the Initial Options of the Shape
 

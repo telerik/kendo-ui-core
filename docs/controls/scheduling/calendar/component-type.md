@@ -20,7 +20,7 @@ By default, the Calendar is initialized with the `classic` render mode. In order
 
 As a result, the appearance of the widget is changed. 
 
-![Comparison between the content types](classic-modern-calendar-rendering.png)
+![Kendo UI for jQuery Comparison between the content types](classic-modern-calendar-rendering.png)
 
 ## See Also
 

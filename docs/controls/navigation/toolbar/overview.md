@@ -17,7 +17,7 @@ The ToolBar consists of the ToolBar wrapper, overflow anchor, and command overfl
 
 The following image demonstrates a Kendo UI ToolBar.
 
-![ToolBar areas](toolbar-areas.png)
+![Kendo UI for jQuery ToolBar areas](toolbar-areas.png)
 
 ## Initializing the ToolBar
 

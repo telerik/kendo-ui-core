@@ -43,7 +43,7 @@ The following example demonstrates how to specify the previous approach as a tem
 
 **Figure 1: A Grid with an applied row template**
 
-![Grid with row template](../grid8_1.png)
+![Kendo UI for jQuery Grid with row template](../grid8_1.png)
 
 ## Using Row Templates with Detail Templates
 

@@ -76,9 +76,9 @@ To create a custom theme by modifying the themes source code:
 1. Build the themes with the `npm run sass` or `npm run dart` command to create the customized version of the themes in the `packages/THEME_NAME/dist/all.css` file.
 1. After the build completes, reference the compiled CSS in your application.
 
-## Using the ThemeBuilder
+## Using ThemeBuilder
 
-[**Progress Sass Theme Builder**](https://themebuilder.telerik.com/kendo-ui) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
+[**Progress ThemeBuilder**](https://themebuilder.telerik.com/{{ site.platform }}) is a web application that enables you to create new or customize existing themes.
 
 For additional information, visit the [ThemeBuilder documentation article]({% slug sass_theme_builder %}) in the Sass-Themes section.
 

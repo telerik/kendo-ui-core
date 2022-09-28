@@ -72,7 +72,7 @@ The following example demonstrates how to create a PanelBar and bind it to a rem
 
 As of the Kendo UI R1 2017 release, the PanelBar provides a built-in functionality of attempting a retry. If the initial data binding fails and regardless of the reason for the failure, you are now prompted with a `Request failed.` message. To initiate a new data binding, use the **Retry** button.
 
-![The Retry button of the PanelBar prompting you to re-initiate the data binding](retry-request-failed.png)
+![Kendo UI for jQuery The Retry button of the PanelBar prompting you to re-initiate the data binding](retry-request-failed.png)
 
 ## See Also
 

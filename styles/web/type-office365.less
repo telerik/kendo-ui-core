@@ -227,7 +227,7 @@
 @event-background-color: lighten(@base, 28%);
 @event-text-color: contrast( @event-background-color );
 @event-inverse-text-color: contrast( @event-text-color );
-@scheduler-nonwork-background-color: @background;
+@scheduler-nonwork-background-color: lighten(@selected-background-color, 5%);
 @resize-background-color: @background;
 @upload-progress-background-color: @info;
 @upload-progress-text-color: @normal-text-color;
@@ -2072,6 +2072,7 @@ td.k-group-cell,
 }
 
 .k-state-selected,
+.k-selected,
 .k-state-selected:link,
 .k-selected:link,
 .k-state-selected:visited,
@@ -2920,10 +2921,6 @@ div.k-splitbar.k-focus .k-icon,
         background-color: @widget-background-color;
         border-color: transparent;
     }
-}
-
-.k-scheduler .k-nonwork-hour {
-    background-color: lighten(@selected-background-color, 5%);
 }
 
 .k-scheduler-content .k-event {

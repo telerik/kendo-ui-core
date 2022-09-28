@@ -12,7 +12,7 @@ position: 4
 
 Complex Kendo UI components, such as the Grid, rely on other components to deliver their full set of features. ThemeBuilder automatically updates the styling of all required components so that you do not need to customize each of them separately.
 
-![ThemeBuilder Overview](../images/themebuilder-overview.png)
+![Kendo UI for jQuery ThemeBuilder Overview](../images/themebuilder-overview.png)
 
 ## Creating New Themes
 
@@ -23,7 +23,7 @@ To create a new theme:
 1. Select **Start Theming**.
 1. To reduce the number of the rendered components, open the **SELECT COMPONENTS** screen and check only the UI components that you need.
 
-![Create a new visual theme with ThemeBuilder](../images/themebuilder-create.gif)
+![Kendo UI for jQuery Create a new visual theme with ThemeBuilder](../images/themebuilder-create.gif)
 
 ### Customizing New Themes
 
@@ -35,7 +35,11 @@ To customize a theme, use any of the following ThemeBuilder features:
 
 * Manual updates of the component elements&mdash;You can directly enter the desired values into the input field of the selected variable.
 
+<<<<<<< HEAD
 ![Customize UI components with ThemeBuilder](../images/themebuilder-customize-components.png)
+=======
+![Kendo UI for jQuery Apply and Preview Changes](../images/theme-builder-create-and-download-3.png)
+>>>>>>> ef65d354a7 (docs: add product to image alt tags #15758)
 
 ## Using Existing Themes
 
@@ -49,7 +53,11 @@ To customize a theme you previously created:
 
 1. Upload the `.json` file that is part of the ZIP archive that you have previously downloaded from ThemeBuilder. It contains the current parameters of the customized theme. As a result, the selected components and styling elements are loaded.
 
+<<<<<<< HEAD
 1. Start customizing your theme by using the ThemeBuilder features your project requires.
+=======
+![Kendo UI for jQuery Theme Builder Import](../images/theme-builder-import-existing-theme.png)
+>>>>>>> ef65d354a7 (docs: add product to image alt tags #15758)
 
 ### JSON File Structure
 

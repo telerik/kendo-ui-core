@@ -122,7 +122,7 @@ So, to make the Feed Reader demo CORS work in IE 8/9, a small snippet is added t
     <!--[if lt IE 10]>
     <!--iecors provides a jQuery ajax custom transport for IE8/9 XDR-->
     <script src="scripts/jquery.iecors.js"></script>
-    <![endif]-->
+    <![Kendo UI for jQuery endif]-->
 
 #### Fixing Opera with More Code and JSONP
 

@@ -26,11 +26,11 @@ To create a Kendo UI for jQuery project:
 1. Press `Ctrl`+`Shift`+`P` (for Windows or Linux), or `Cmd`+`Shift`+`P` (on Mac) to open the VSCode extension launcher.
 1. Type/Select `Kendo UI Template Wizard: Launch` and press `Enter` to launch the extension.
 
-    ![launch Kendo UI Template extension](../../images/launch-extension.png)
+    ![Kendo UI for jQuery launch Kendo UI Template extension](../../images/launch-extension.png)
 
 1. Enter a project name and select the location.
 
-    ![choose project location](../../images/create-project-jq.png)
+    ![Kendo UI for jQuery choose project location](../../images/create-project-jq.png)
 
 1. Choose the desired template.
 
@@ -38,13 +38,13 @@ To create a Kendo UI for jQuery project:
    
    Additionally, you can create a **Blank** project and the extensions will generate a page with all of the necessary stylesheets and a single heading element.
    
-   ![choose pages in Kendo UI for jQuery project](../../images/vscode-wizard-select-pages.png)
+   ![Kendo UI for jQuery choose pages in Kendo UI for jQuery project](../../images/vscode-wizard-select-pages.png)
 
 1. Apply the desired styling by selecting a theme.
 
    To style your application, select one of the built-in [Sass-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes): Default, Bootstrap, or Material.
    
-   ![choose theme](../../images/vscode-wizard-select-theme.png)
+   ![Kendo UI for jQuery choose theme](../../images/vscode-wizard-select-theme.png)
 
 1. Click the **Create** button to finish the setup.
 

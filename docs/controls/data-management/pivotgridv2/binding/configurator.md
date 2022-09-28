@@ -75,7 +75,7 @@ The following example demonstrates how to configure the widgets.
 
 The following image demonstrates the output from the previous example.
 
-![Kendo UI PivotConfigurator](../../../../images/pivotconfiguratorv2.png)
+![Kendo UI for jQuery PivotConfigurator](../../../../images/pivotconfiguratorv2.png)
 
 ## Referencing Existing Instances
 

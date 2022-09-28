@@ -2744,13 +2744,13 @@ Defines where the circle/arc ends. The positive direction is **clockwise** and t
 ### layout.grid `Object`
 
 Each layout algorithm has a different set of parameters customizing the layout but they also all have a common collection of parameters which relate to the way 'pieces' of a diagram are organized.
-![Diagram component](../diagram/component_example.png)
+![Kendo UI for jQuery Diagram component](../diagram/component_example.png)
 
 A diagram can have in general disconnected pieces, known as components, which can be organized in a way independent of the way a component on its own is arranged. In the picture above, this is one diagram consisting of four components.
 
 When you apply a certain layout an analysis will first split the diagram in components, arrange each component individually and thereafter organize the components in a grid. The common parameters referred above deal with this grid layout, they define the width, margin and padding of the (invisible) grid used to organize the components.
 
-![Component parameters](../diagram/component_parameters.png)
+![Kendo UI for jQuery Component parameters](../diagram/component_parameters.png)
 
 ### layout.grid.componentSpacingX `Number` *(default: 50)*
 
@@ -2776,7 +2776,7 @@ Defines the width of the grid. The bigger this parameter the more components wil
 
 Either the distance between the siblings if the tree is up/down or between levels if the tree is left/right. In *tipOver tree layout* this setting is used only for the direct children of the root
 
-![Tree parameters](../diagram/tree_parameters.png)
+![Kendo UI for jQuery Tree parameters](../diagram/tree_parameters.png)
 
 ### layout.iterations `Number` *(default: 300)*
 
@@ -2786,7 +2786,7 @@ In situations where there is enough symmetry in the diagram the increased number
 
 *This setting is specific to the force-directed layout*
 
-![Increasing iterations](../diagram/force_directed_iterations.png)
+![Kendo UI for jQuery Increasing iterations](../diagram/force_directed_iterations.png)
 
 ### layout.layerSeparation `Number` *(default: 50)*
 
@@ -2818,27 +2818,27 @@ The subtype further defines the layout type by specifying in greater detail the 
 
 * "down" - *tree layout* and *layered layout* specific subtype. In the tree layout the root is arranged at the top and its children downwards. For the layered layout the links are directed downwards. This is the default subtype.
 
-![Tree down parameters](../diagram/tree_down_parameters.png)
+![Kendo UI for jQuery Tree down parameters](../diagram/tree_down_parameters.png)
 
 * "up" - *tree layout* and *layered layout* specific subtype. In the tree layout the root is arranged at the bottom and its children upwards. For the layered layout the links are directed upwards.
 * "left" - *tree layout* *layered layout* specific subtype. In the tree layout the root is arranged at the left and its children sideways to the right. For the layered layout the links are directed to the left.
 * "right" - *tree layout* *layered layout* specific subtype. In the tree layout the root is arranged at the right and its children sideways to the left. For the layered layout the links are directed downwards.
 
-![Tree right parameters](../diagram/tree_right_parameters.png)
+![Kendo UI for jQuery Tree right parameters](../diagram/tree_right_parameters.png)
 
 * "mindmapHorizontal" - *tree layout* specific subtype. The root sits at the center and its children are spread equally to the left and right.
 * "mindmapVertical" - *tree layout* specific subtype. The root sits at the center and its children are spread equally above and below.
 
-![Mindmap parameters](../diagram/mindmap_parameters.png)
+![Kendo UI for jQuery Mindmap parameters](../diagram/mindmap_parameters.png)
 
 * "radial" - *tree layout* specific subtype. The root sits at the center and its children are spread radially around.
 
-![Radial tree parameters](../diagram/radial_tree_parameters.png)
-![Radial layout angles.](../diagram/radial_angles.png)
+![Kendo UI for jQuery Radial tree parameters](../diagram/radial_tree_parameters.png)
+![Kendo UI for jQuery Radial layout angles.](../diagram/radial_angles.png)
 
 * "tipOver" - *tree layout* specific subtype. A special version of the tree-down layout where the grand-children (and iteratively) are arranged vertically while the direct children are arranged horizontally. This arrangement has the advantage that it doesn't spread as much as the classic tree-down layout. See below for a concrete example.
 
-![Tip-over parameters](../diagram/tip_over_parameters.png)
+![Kendo UI for jQuery Tip-over parameters](../diagram/tip_over_parameters.png)
 
 * "horizontal" - *layered layout* specific subtype. The preferred direction of the links is horizontal.
 * "vertical" - *layered layout* specific subtype. The preferred direction of the links is vertical.
@@ -2885,7 +2885,7 @@ The type of the layout algorithm to use. Predefined values are:
 * "tree" - Organizes a diagram in a hierarchical way and is typically used in organizational representations. This type includes the radial tree layout, mindmapping and the classic tree diagrams.
 * "force" - Force-directed layout algorithm (also known as the spring-embedder algorithm) is based on a physical simulation of forces acting on the nodes whereby the links define whether two nodes act upon each other. Each link effectively is like a spring embedded in the diagram. The simulation attempts to find a minimum energy state in such a way that the springs are in their base-state and thus do not pull or push any (linked) node. This force-directed layout is **non-deterministic**; each layout pass will result in an unpredictable (and hence not reproducible) layout. The optimal length is more and indication in the algorithm than a guarantee that all nodes will be at this distance. The result of the layout is really a combination of the incidence structure of the diagram, the initial topology (positions of the nodes) and the number of iterations.
 
-![Force-directed parameter](../diagram/force_directed_parameters.png)
+![Kendo UI for jQuery Force-directed parameter](../diagram/force_directed_parameters.png)
 
 * "layered" - Organizes the diagram with an emphasis on *flow* and minimizing the crossing between layers of shapes. This layout works well when few components are present and some sort of top-down flow is present. The concept of *flow* in this context being a more or less clear direction of the connections with a minimum of cycles (connections flowing back upstream). Layered graph layout is a type of graph layout in which the nodes of a (directed) graph are drawn in horizontal or vertical layers with the links directed in the complementary direction. It is also known as Sugiyama or hierarchical graph layout. When the graph is a tree the layout reduces to a standard tree layout and thus can be considered as an extension to the classic tree layout.
 
@@ -2903,7 +2903,7 @@ The construction of a layered graph drawing proceeds in a series of steps (assum
  + Each node is assigned a coordinate within its layer, consistent with the permutation calculated in the previous step.
  + The edges reversed in the first step of the algorithm are returned to their original orientations, the dummy vertices are removed from the graph and the vertices and edges are drawn.
 
-![Layered layout parameters.](../diagram/layered_parameters.png)
+![Kendo UI for jQuery Layered layout parameters.](../diagram/layered_parameters.png)
 
 ### layout.underneathHorizontalOffset `Number` *(default: 15)*
 
@@ -7451,7 +7451,7 @@ Clears the content of the diagram.
 Creates a connection which can be either attached on both ends to a shape, half attached or floating (not attached to any shape). When a connection is (half) attached to a shape it happens through the intermediate Connector object. Connectors are part of a Shape's definition and you can specify the binding of a connection to a shape directly via the shape or via one of its connectors. If you specify a Shape as a connection's endpoint the Auto-connector will be used. This means that the endpoint of the connection will switch to the most convenient (in the sense of shortest path) connector automatically. If you specify a shape's connector as an endpoint for a connection the endpoint will remain attached to that given Connector instance.
 Finally, if you wish to have a (half) floating connection endpoint you should specify a Point as parameter for the floating end.
 
-![Creating connections.](../diagram/connect.png)
+![Kendo UI for jQuery Creating connections.](../diagram/connect.png)
 
 #### Parameters
 

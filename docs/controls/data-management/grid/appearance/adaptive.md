@@ -117,7 +117,7 @@ The column resizing feature on touch screen devices is triggered when the user h
 
 **Figure 1: A Grid with resizable columns on a mobile device**
 
-![Grid Resizable Columns on Mobile](adaptive-resizing-icon.png)
+![Kendo UI for jQuery Grid Resizable Columns on Mobile](adaptive-resizing-icon.png)
 
 ## Destroying Adaptive Grids
 

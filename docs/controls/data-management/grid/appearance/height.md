@@ -25,7 +25,7 @@ In specific scenarios you can set a height style to the scrollable data area eit
 
 **Figure 1: A Grid with a fixed height and scrolling functionality enabled**
 
-![Kendo UI Grid for jQuery with Fixed Height and Scrolling](../grid3_1.png)
+![Kendo UI for jQuery Grid with Fixed Height and Scrolling](../grid3_1.png)
 
 ## Setting a Minimum Height
 

@@ -1218,6 +1218,42 @@ represented by a [jQuery selector](https://api.jquery.com/category/selectors/).
 
 `jQuery` the selected item if called without arguments. `kendo.ui.PanelBar` if called with arguments.
 
+### setDataSource
+
+Sets the dataSource of an existing PanelBar and rebinds it.
+
+#### Parameters
+
+##### dataSource `kendo.data.HierarchicalDataSource`
+
+The new dataSource that the widget will bind to
+
+#### Example
+
+    <ul id="panelbar"></ul>
+    <script>
+      var panelbar = $("#panelbar").kendoPanelBar({
+        dataTextField: "FullName"
+      }).data('kendoPanelBar');
+
+     var ds = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+      panelbar.setDataSource(ds)
+    </script>
+
 ## Events
 
 ### activate

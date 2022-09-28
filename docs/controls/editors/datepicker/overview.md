@@ -12,7 +12,7 @@ The DatePicker enables the user to select a date from a calendar or through a di
 
 It provides options for using custom templates for its **Month** view, setting minimum and maximum dates, a start view, and a depth for navigation.
 
-![DatePicker with Basic Configuration](datepicker-basic.png)
+![Kendo UI for jQuery DatePicker with Basic Configuration](datepicker-basic.png)
 
 ## Functionality and Features
 

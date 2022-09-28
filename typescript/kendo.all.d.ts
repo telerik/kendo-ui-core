@@ -8364,7 +8364,7 @@ declare namespace kendo.ui {
         select(element?: string): void;
         select(element?: Element): void;
         select(element?: JQuery): void;
-
+        setDataSource(dataSource: kendo.data.HierarchicalDataSource): void;
     }
 
     interface PanelBarAnimationCollapse {
@@ -15802,6 +15802,39 @@ declare namespace kendo.dataviz.ui {
         notes?: ChartSeriesDefaultsNotes | undefined;
     }
 
+    interface ChartSubtitleBorder {
+        color?: string | undefined;
+        dashType?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface ChartSubtitleMargin {
+        bottom?: number | undefined;
+        left?: number | undefined;
+        right?: number | undefined;
+        top?: number | undefined;
+    }
+
+    interface ChartSubtitlePadding {
+        bottom?: number | undefined;
+        left?: number | undefined;
+        right?: number | undefined;
+        top?: number | undefined;
+    }
+
+    interface ChartSubtitle {
+        align?: string | undefined;
+        background?: string | undefined;
+        border?: ChartSubtitleBorder | undefined;
+        color?: string | undefined;
+        font?: string | undefined;
+        margin?: ChartSubtitleMargin | undefined;
+        padding?: ChartSubtitlePadding | undefined;
+        position?: string | undefined;
+        text?: string | undefined;
+        visible?: boolean | undefined;
+    }
+
     interface ChartTitleBorder {
         color?: string | undefined;
         dashType?: string | undefined;
@@ -16792,6 +16825,7 @@ declare namespace kendo.dataviz.ui {
         seriesColors?: any;
         seriesDefaults?: ChartSeriesDefaults | undefined;
         theme?: string | undefined;
+        subtitle?: string | ChartSubtitle | undefined;
         title?: string | ChartTitle | undefined;
         tooltip?: ChartTooltip | undefined;
         transitions?: boolean | undefined;

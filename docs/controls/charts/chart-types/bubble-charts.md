@@ -48,7 +48,7 @@ The following example demonstrates how to create a Bubble Chart and visualizes s
         }]
     });
 
-![A sample Bubble Chart](chart-bubble.png)
+![Kendo UI for jQuery A sample Bubble Chart](chart-bubble.png)
 
 ## See Also
 

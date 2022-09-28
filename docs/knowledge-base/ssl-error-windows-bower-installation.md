@@ -57,7 +57,7 @@ To fix the issue, follow the steps in [this article](https://docs.microsoft.com/
 
 **Figure 1: Adding a new entry**
 
-![Adding New Entry](./images/vs2015-external-tools.png)
+![Kendo UI for jQuery Adding New Entry](./images/vs2015-external-tools.png)
 	  
 ## See Also
 

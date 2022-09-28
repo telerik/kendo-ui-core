@@ -15,7 +15,7 @@ position: 1
 
 The appearance of the Kendo UI widgets entirely depends on styles defined by the applied CSS classes. The controls use no inline styles except for some very specific cases where you must set these styles with JavaScript and depending on the browser or configuration.
 
-![Kendo UI Web Themes](web-themes.png)
+![Kendo UI for jQuery Web Themes](web-themes.png)
 
 ## Adding a Theme to Your Project
 
@@ -57,7 +57,7 @@ The following example demonstrates how to define a theme for a Kendo UI Chart.
         ...
     });
 
-![Kendo UI DataViz Themes](dataviz-themes.png)
+![Kendo UI for jQuery DataViz Themes](dataviz-themes.png)
 
 ## Common CSS Files
 

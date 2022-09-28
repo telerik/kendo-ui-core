@@ -401,6 +401,19 @@ it("Adding dynamic content element renders properly on root and inner levels", f
 
     assert.isOk(m.element.children("li:first").children("div.k-content.k-menu-group.k-group")[0]);
     assert.isOk(m.element.find("> li:last > ul > li:first").children("div.k-content.k-menu-group.k-group")[0]);
+    assert.isOk(!m.element.children("li:first").children("div.k-content.k-menu-group.k-group").is(":visible"));
+    assert.isOk(!m.element.find("> li:last > ul > li:first").children("div.k-content.k-menu-group.k-group").is(":visible"));
+
+    m.destroy();
+});
+
+it("The new group of a newly inserted node is not visible", function() {
+    var m = new kendo.ui.Menu("<ul id='menu'> <li >Item 1</li> <li class='target'> Item 2 </li> <li> Item 3 </li> </ul>");
+
+    m.append({text: 'appended'}, m.element.find(".target"));
+
+    assert.equal(m.element.find(".target .k-menu-group.k-group").css("display"), "none");
+
     m.destroy();
 });
 

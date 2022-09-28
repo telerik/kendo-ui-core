@@ -15,7 +15,7 @@ You can render a pager overlay in the Nova theme by adding the `km-scrollview-ov
         <div data-role="page">Bar</div>
     </div>
 
-![ScrollView pager overlay](pager-overlay.png)
+![Kendo UI for jQuery ScrollView pager overlay](pager-overlay.png)
 
 ## See Also
 

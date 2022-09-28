@@ -32,11 +32,11 @@ The `allowedExtensions` array object lists all file extensions that the Upload w
 
 The following image displays a validation message when the batch mode of the Upload is disabled.
 
-![Validation message on disabled batch mode](upload-validation-batch-disabled.png)
+![Kendo UI for jQuery Validation message on disabled batch mode](upload-validation-batch-disabled.png)
 
 The following image displays a validation message when the batch mode of the Upload is enabled.
 
-![Validation message on enabled batch mode](upload-validation-batch-enabled.png)
+![Kendo UI for jQuery Validation message on enabled batch mode](upload-validation-batch-enabled.png)
 
 ## Maximum File Size
 

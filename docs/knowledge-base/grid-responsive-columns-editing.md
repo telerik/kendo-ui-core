@@ -42,7 +42,7 @@ To implement the desired outcome, you will need to replace the read template wit
 
 To see the following demo in action, click **Open in Dojo**. You should resize the panel to as small as it can get, so that you can see the template column in action:
 
-![](images/resize-dojo-splitbar-to-see-template.png)
+![Kendo UI for jQuery Resize Dojo Splitbar](images/resize-dojo-splitbar-to-see-template.png)
 
 ```dojo
     <script type="text/x-kendo-tmpl" id="editTemplate">

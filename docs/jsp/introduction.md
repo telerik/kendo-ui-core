@@ -38,7 +38,7 @@ Start by [downloading the controls](https://www.telerik.com/download-trial-file/
 
 **Figure 1: Eclipse with Tomcat7 configured**
 
-![Eclipse with Tomcat7 configured](images/eclipse.png)
+![Kendo UI for jQuery Eclipse with Tomcat7 configured](images/eclipse.png)
 
 Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` folder.
 
@@ -54,13 +54,13 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Figure 2: Eclipse with Tomcat7 configured**
 
-![Import Maven projects](images/existing_maven_project.png)
+![Kendo UI for jQuery Import Maven projects](images/existing_maven_project.png)
 
 **Step 5** Browse to the location where you extracted Progress Telerik UI for JSP. Then pick "wrappers\jsp\spring-demos" for "Root Directory". Click "Finish".
 
 **Figure 3: Import of the Kendo UI JSP demos**
 
-![Import Kendo UI JSP demos](images/import_maven_project.png)
+![Kendo UI for jQuery Import Kendo UI JSP demos](images/import_maven_project.png)
 
 **Step 6** Right-click **spring-demos** in the Eclipse Project Explorer. Pick **Properties**.
 
@@ -70,13 +70,13 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Figure 4: Project facets**
 
-![Project facets](images/project_facets.png)
+![Kendo UI for jQuery Project facets](images/project_facets.png)
 
 **Step 9** Click the **Runtimes** tab. Pick a runtime&mdash;Tomcat7, for example.
 
 **Figure 5: Project facets&mdash;Tomcat 7**
 
-![Project facets - Tomcat 7](images/project_facets_tomcat.png)
+![Kendo UI for jQuery Project facets - Tomcat 7](images/project_facets_tomcat.png)
 
 **Step 10** Click **OK** to close the **Properties** window.
 

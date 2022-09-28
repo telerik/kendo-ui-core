@@ -43,5 +43,5 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 
 **Add a new entry**
 
-![Adding New Entry](./images/vs2015-external-tools.png)
+![Kendo UI for jQuery Adding New Entry](./images/vs2015-external-tools.png)
 	  

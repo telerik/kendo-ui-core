@@ -10,11 +10,11 @@ position: 6
 
 By default, the **Insert Image** tool opens a simple dialog that allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
 
-![Insert Image Dialog](editor-insert-image.png)
+![Kendo UI for jQuery Insert Image Dialog](editor-insert-image.png)
 
 The Editor also supports another way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.
 
-![Image Browser Dialog](editor-image-browser.png)
+![Kendo UI for jQuery Image Browser Dialog](editor-image-browser.png)
 
 To retrieve and upload the files and directories, the image browser needs a server-side implementation. To configure the image browser tool, use the [`imagebrowser`](/api/javascript/ui/editor/configuration/imagebrowser) configuration option.
 

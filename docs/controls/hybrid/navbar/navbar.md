@@ -128,7 +128,7 @@ The example below demonstrates how to use the `view-title` data attribute to aut
 
 **Figure 1: Different color schemes of the NavBar**
 
-![NavBar different color schemes](NavBar.png)
+![Kendo UI for jQuery NavBar different color schemes](NavBar.png)
 
 There are three predefined color schemes&mdash;light, dark (default), and accent. To apply color schemes different than the default one, set the `km-light` or the `km-accent` class.
 

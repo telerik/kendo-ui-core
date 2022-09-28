@@ -12,7 +12,7 @@ The DropDownList displays a list of values allowing for a single selection from 
 
 The user input is restricted within the predefined options. To apply a keyboard input, use the [Kendo UI ComboBox]({% slug overview_kendoui_combobox_widget %}).
 
-![DropDownList Overview](dropdownlist-overview.png)
+![Kendo UI for jQuery DropDownList Overview](dropdownlist-overview.png)
 
 ## Functionality and Features
 

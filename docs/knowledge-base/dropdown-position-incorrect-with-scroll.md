@@ -23,7 +23,7 @@ When the page is scrolled down, the drop-down position is incorrect&mdash;it doe
 
 **Table 1: A demonstration of the issue**
 
-![](images/dropdown-position-problem-jquery-2.png)
+![Kendo UI for jQuery Incorrect DropDown Position](images/dropdown-position-problem-jquery-2.png)
 
 ## Cause
 

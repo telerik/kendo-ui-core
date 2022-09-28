@@ -19,7 +19,7 @@ To build a scene, you can create drawing elements such as curves, images, and te
 
 **Figure 1: Drawing library components**
 
-![Drawing API Components](images/components.png)
+![Kendo UI for jQuery Drawing API Components](images/components.png)
 
 ## See Also
 

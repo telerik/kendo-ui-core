@@ -26,7 +26,7 @@ This guide uses the following conventions:
 
 The Kendo UI Spreadsheet is used for the implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the touch and feel of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes while utilizing simpler and easy-to-master user interface.
 
-<center>![Spreadsheet UI components](../images/spreadsheet-components.png)</center>
+<center>![Kendo UI for jQuery Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
 ## Actions
 

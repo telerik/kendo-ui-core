@@ -25,7 +25,7 @@ To enable the selection functionality of the Grid, set the [`selectable`](/api/j
 
 **Figure 1: A Grid with enabled row selection**
 
-![Grid with enabled row selection](grid4_1.png)
+![Kendo UI for jQuery Grid with enabled row selection](grid4_1.png)
 
 ## Select Modes
 

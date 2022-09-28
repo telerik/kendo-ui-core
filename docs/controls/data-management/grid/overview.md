@@ -13,7 +13,7 @@ The Grid is a powerful control for displaying data in a tabular format.
 
 It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
 
-![Grid Overview](grid-overview.png)
+![Kendo UI for jQuery Grid Overview](grid-overview.png)
 
 ## Functionality and Features
 

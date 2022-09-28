@@ -16,11 +16,11 @@ The output files are in the OOXML Spreadsheet format with an `.xlsx` extension. 
 
 The default toolbar configuration includes an **Export** button. Clicking it opens a dialog box for entering the file name and selecting the desired output format for the exported document.
 
-![Activating the Export to Excel dialog](activate-export.png)
+![Kendo UI for jQuery Activating the Export to Excel dialog](activate-export.png)
 
 The following image demonstrates the export of the Spreadsheet data to Excel.
 
-![Exporting to Excel](export-to-excel.png)
+![Kendo UI for jQuery Exporting to Excel](export-to-excel.png)
 
 ## API Export Reference
 

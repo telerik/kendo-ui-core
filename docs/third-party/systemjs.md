@@ -70,7 +70,7 @@ The following example demonstrates the configuration for SystemJS up to 0.20 ver
 
 The following example demonstrates the configuration for SystemJS 0.20.x.
 
-![Folder structure](../images/systemjs020-folder-structure.png)
+![Kendo UI for jQuery Folder structure](../images/systemjs020-folder-structure.png)
 
 ```tab-index.html
     <body>

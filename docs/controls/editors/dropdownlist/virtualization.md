@@ -172,7 +172,7 @@ On initial load, the widget checks whether the selected value is present in the 
 
 **Figure 1: The virtualization process when mapping to index values**
 
-![Virtualization process](../mapValueTo-index.png)
+![Kendo UI for jQuery Virtualization process](../mapValueTo-index.png)
 
 The `valueMapper` is expected to return a row index or a list of indices when a multiple selection is available. That being said, the service is expected to return either an index (number) or a list of indices. If the value does not exist, the `valueMapper` returns `null`, `[]`, or `-1`, and the widget deselects the currently selected items. For a runnable  example, refer to the result of [the test service](https://demos.telerik.com/kendo-ui/dropdownlist/virtualization) that is used in the online demos.
 
@@ -210,7 +210,7 @@ On initial load, the widget checks whether the selected value is present in the 
 
 **Figure 2: The virtualization process when mapping to data item values**
 
-![Virtualization process](../mapValueTo-dataItem.png)
+![Kendo UI for jQuery Virtualization process](../mapValueTo-dataItem.png)
 
 The `valueMapper` is expected to return a data item or a list of data items when a multiple selection is available. That being said, the service is expected to return either an data item (object) or a list of data items. If the values does not exist, the `valueMapper` returns `null` or `[]`, and the widget deselects the currently selected values.
 

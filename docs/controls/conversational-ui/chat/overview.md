@@ -14,7 +14,7 @@ Chats provide support for default cards and actions, and enable the configuratio
 
 * [Demo page for the Chat](https://demos.telerik.com/kendo-ui/chat/index)
 
-![Structure of the Chat](images/chat-structure-no-toolbar.png)
+![Kendo UI for jQuery Structure of the Chat](images/chat-structure-no-toolbar.png)
 
 ## Initializing the Chat
 

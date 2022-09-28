@@ -20,7 +20,7 @@ The following examples demonstrate how to construct a map of the Australian stat
 
 The following image demonstrates the expected map.
 
-![The expected outlook of a finished map](images/map-au.png)
+![Kendo UI for jQuery The expected outlook of a finished map](images/map-au.png)
 
 ## Locating an External Map Dataset
 
@@ -32,7 +32,7 @@ The current map project of the Australian states and mainland territories uses d
 
 To explore new map datasets, use a traditional [desktop geographic information system (GIS)](https://en.wikipedia.org/wiki/Geographic_information_system) application, for example, the open-source [QGIS](https://www.qgis.org/en/site/) project. [Import the Esri Shapefile](https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/index.html) for the data and by using the [Identify tool](https://docs.qgis.org/testing/en/docs/user_manual/introduction/general_tools.html#identify), inspect the available metadata. For the purpose of this project, you can narrow down your interest in features with the "AU" [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.
 
-![Identifying the results](images/map-qgis-identify.png)
+![Kendo UI for jQuery Identifying the results](images/map-qgis-identify.png)
 
 ## Processing the Data
 
@@ -65,7 +65,7 @@ The following example demonstrates how to set up a simple Map widget and add a s
     });
     </script>
 
-![Unstyled map](images/map-au-base.png)
+![Kendo UI for jQuery Unstyled map](images/map-au-base.png)
 
 ## Adding the Styles
 

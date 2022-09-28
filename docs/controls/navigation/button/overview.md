@@ -16,7 +16,7 @@ Following the web standards requirements not to place block elements (for exampl
 
 However, note that due to the special and individual behavior of clickable elements, placing hyperlinks or textboxes inside the Button may cause undesired side effects.
 
-![Button with Basic Configuration](button-basic.png)
+![Kendo UI for jQuery Button with Basic Configuration](button-basic.png)
 
 ## Functionality and Features
 

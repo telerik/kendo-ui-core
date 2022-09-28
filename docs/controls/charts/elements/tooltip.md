@@ -12,7 +12,7 @@ The Kendo UI Chart enables you to display details about the data point over whic
 
 The border of this tooltip matches the color of the series.
 
-![The Chart tooltip](../chart-tooltip.png)
+![Kendo UI for jQuery The Chart tooltip](../chart-tooltip.png)
 
 ## Getting Started
 

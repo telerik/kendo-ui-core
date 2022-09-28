@@ -1,96 +1,56 @@
 ---
-title: Sass Theme Builder
-page_title: Sass Theme Builder
-description: "Use the Sass Theme Builder to customize Kendo UI themes in {{ site.product }} applications."
+title: ThemeBuilder
+page_title: Progress ThemeBuilder
+description: "Discover ThemeBuilder for {{ site.product }} and use it to create beautiful visual themes that allow you to take full control over the appearance of the UI components."
 slug: sass_theme_builder
 previous_url: /styles-and-layout/overview
 position: 4
 ---
 
-# Using the Sass Theme Builder
+# Using ThemeBuilder
 
-[**Progress Sass Theme Builder**](https://themebuilder.telerik.com/{{ site.platform }}) for {{ site.product_short }} is an Angular web application that enables you to create new or customize existing themes.
+[**Progress ThemeBuilder**](https://themebuilder.telerik.com/{{ site.platform }}) for {{ site.product_short }} is a web application that enables you to create new or customize existing themes. With ThemeBuilder, you are in full control over the appearance each UI component.
 
-The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.
+ThemeBuilder allows you to render the same look and feel for all UI components from all Kendo UI suites and gives you full control over their visual elements. When you apply visual customizations to complex components like the Grid, ThemeBuilder automatically updates the styles of all underlying components (Button, AutoComplete, DropDownList, DatePicker, and more). After you achieve the desired look and feel, you can download and integrate the theme into your project.
 
-Bootstrap 5 compatibility was added to the SASS themes in the R3 2021 release. As of R3 2021, you can choose from different predefined swatches of the SASS themes:
+![Theme Builder Overview](../images/themebuilder-overview.png)
 
-* Default theme swatches: Main, Main Dark, Nordic, Purple, Turquoise.
-* Bootstrap theme swatches: Main, Main Dark, Nordic, Urban, Vintage.
-* Material theme swatches: Main, Arctic, Fuscia, Lime Dark, Main Dark.
-* Classic theme swatches: Main, Opal, Silver.
-
-If you are using Bootstrap 4, we recommend using the Bootstrap-v4 swatch of the Bootstrap theme.
-
-**Figure 1: A preview of the Sass Theme Builder**
-
-![Theme Builder Overview](../images/theme-builder-overview-{{ site.framework_short }}.png)
-
-{% if site.core %}
-## Using Newly Created Themes
-
-To create a new theme:
-
-1. On the initial Sass Theme Builder pane, select the **Start Theming** option.
-1. Choose one of the existing themes to serve as a starting point.
-1. Select the components which you intend to style. You can also change the selection at a later stage.
-
-    **Figure 2: Selecting a base theme and components**
-
-    ![{{ site.product_short }} Theme Builder Create](../images/theme-builder-create-core.gif)
-
-Complex {{ site.product }} components, such as the Grid, rely on other components to deliver their full set of features. If you select the Grid, then all of its components dependencies styles (Button, AutoComplete, DropDownList, DatePicker, etc.) will also be included in the final bundle. The Theme Builder automatically updates the styling on all required components so that you do not need to customize each of them separately.
-{% else %}
 ## Creating New Themes
 
 To create a new theme:
 
-1. On the initial Sass Theme Builder pane, select the **Start Theming** option.
-1. Choose one of the existing skins to use as a base. The currently available built-in skins are **Default**, **Bootsrap**, and **Material**.
+1. Open [ThemeBuilder](https://themebuilder.telerik.com/{{ site.platform }}).
+1. Select one of the four base themes that serve as a starting point.
+1. Select **Start Theming**.
+1. To reduce the number of the rendered components, open the **SELECT COMPONENTS** screen and check only the UI components that you need. You can change the selection at a later stage.
 
-    ![{{ site.product_short }} Selecting a base theme in the Theme Builder](../images/theme-builder-create-and-download-1.png)
+![Create a new visual theme with ThemeBuilder](../images/themebuilder-create.gif)
 
-1. Scroll down and select the components you want to customize.
+### Customizing Themes
 
-    ![{{ site.product_short }} Selecting the widgets for customization in the Theme Builder](../images/theme-builder-create-and-download-2.png)
+To customize a theme, use any of the following ThemeBuilder features:
 
-1. (Optional) After the initial selection, add or remove elements for customization.
+* Built-in [color swatches]({% slug swatches_aspnetmvc6_aspnetmvc %})&mdash;The color swatches are color variations of the base themes. The swatches use the same variables as their base theme but with different color values. To open the color swatches menu, use the dropdown button with the fill drip icon ![The fill drip icon in ThemeBuilder](../images/fill-drip.png).
 
-To deliver the full set of their functionalities, some {{ site.product }} components, such as the Grid, have composite structures and include child components. In such cases, the Theme Builder automatically applies the theme modification to the child components and you do not need to customize each of them separately. It will also include their styles in the final CSS bundle.
+* Color pickers&mdash;All color variables provide color pickers that you can use to set the desired values.
 
-{% endif %}
+* Manual updates of the component elements&mdash;You can directly enter the desired values into the input field of the selected variable.
 
-## Modifying Themes
+![Customize UI components with ThemeBuilder](../images/themebuilder-customize-components.png)
 
-The Sass Theme Builder supports the following options for customization:
+## Using Existing Themes
 
-* Color pickers which customize the appearance of the components.
-* The **Apply changes instantly** option which enables you to observe the changes on the fly.
-* Manual updates of each component element.
-* Utilization of predefined color swatches.
+To customize a theme you previously created:
 
-To customize an existing theme, use the following Sass Theme Builder features:
+1. Open [ThemeBuilder](https://themebuilder.telerik.com/{{ site.platform }}).
 
-1. Color swatches&mdash;Contains predefined color palettes that you can apply to all components in your application.
-1. Default&mdash;Provides the applicable color customization options.
-1. Selected Components&mdash;List of components to include in the preview and the final CSS bundle.
-1. Download&mdash;Downloads the archive that holds the generated style files after the customization completes. When you click the button, a dialog appears and prompts you to name your theme. The archive contains a `.css`, `.scss` and a `.json` file. The [JSON file](#json-file-structure) contains information on the modified variables of the customized theme.
+1. Select the **Import Theme** button on the right.
 
-**Figure 3: Available options for customization**
+   <img src="../images/themebuilder-import-theme.png" alt="Import Theme button in ThemeBuilder" width="145"/>
 
-![{{ site.product_short }} Theme Builder Create and Download 3](../images/theme-builder-create-and-download-3.png)
+1. Upload the `.json` file that is part of the ZIP archive that you have previously downloaded from ThemeBuilder. It contains the current parameters of the customized theme. As a result, the selected components and styling elements are loaded.
 
-To upload an existing theme you have previously created:
-
-1. On the initial Sass Theme Builder pane, select **Import Theme**.
-1. Upload the `MyThemeName.json` file which contains information on the modified variables of the customized theme. As a result, the selected components and styling elements load.
-1. Start customizing your theme.
-
-> The previous versions of the Sass Theme Builder required you to upload the `variables.scss` file which contains the modifications of the customized theme. To customize a theme generated with a previous version of the Sass Theme Builder:
-
-> 1. Download a theme from the new version of the Sass Theme Builder.
-> 1. Update the generated [JSON file](#json-file-structure) by entering the variable values from your existing `variables.scss` file.
-> 1. Upload the [JSON file](#json-file-structure) to the Sass Theme Builder and continue the customization.
+1. Start customizing your theme by using the ThemeBuilder features your project requires.
 
 ### JSON File Structure
 
@@ -573,26 +533,22 @@ The following example demonstrates the JSON file for the **Material** base theme
 }
 ```
 
-**Figure 4: Importing themes for customization**
+## Adding the Themes to Your Project
 
-![Themebuilder import existing theme](../images/theme-builder-import-existing-theme-{{ site.framework_short }}.png)
+When you complete the modifications and the theme is ready:
 
 {% if site.core %}
-When you complete the modifications and the theme is ready to be used:
 
-1. Download the theme as a compact archive by clicking the **Download** button.
-1. Copy the downloaded `THEME_NAME.css` file and paste it in the **wwwroot** folder of your application.
-1. Include the `THEME_NAME.css` file to the [client side resources](https://docs.telerik.com/aspnet-core/getting-started/installation/getting-started-copy-client-resources).
+1. To download the theme as a ZIP archive, select **Export**.
+1. Unpack the archive, copy the `THEME_NAME.css` file, and paste it in the `wwwroot` folder of your application.
+1. Include the `THEME_NAME.css` file in the [client-side resources](https://docs.telerik.com/aspnet-core/getting-started/installation/getting-started-copy-client-resources) of your application.
 
 > Reference only the `THEME_NAME.css` file because the exported CSS file contains all styles you need.
 
 {% else %}
-## Adding the Themes to Your Project
 
-When you complete the modifications and the theme is ready to be used:
-
-1. Download the theme as a compact archive by clicking the **Download** button.
-1. Copy the downloaded `THEME_NAME.css` file and paste it in the **Content** folder of your application.
+1. To download the theme as a ZIP archive, select **Export**.
+1. Unpack the archive, copy the downloaded `THEME_NAME.css` file, and paste it in the `Content` folder of your application.
 1. Bundle the styles to render them or directly reference the styles in `Layout.cshtml`. For more information on CSS bundling in Telerik UI for ASP.NET MVC applications, refer to the article on [CSS bundling fundamentals]({% slug fundamentals_aspnetmvc %}#css-bundling).
 
 > Reference or bundle only the `THEME_NAME.css` file because the exported CSS file contains all styles you need.

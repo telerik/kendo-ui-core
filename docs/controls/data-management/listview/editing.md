@@ -71,7 +71,7 @@ The ListView encapsulates operations for adding, removing, selecting, and editin
 
 The template you define for the inline editing of items may include other Kendo UI widgets. For more information, refer to [demo on defining a series of widgets for editing an item](https://demos.telerik.com/kendo-ui/web/listview/editing.html).
 
-![Item editing in the ListView](../../../images/listview-item-editing.png)
+![Kendo UI for jQuery Item editing in the ListView](../../../images/listview-item-editing.png)
 
 The new `add` record functionality of ListView items is triggered by a `click` event that is initiated by a user and is wired up through `.click()` in jQuery.
 

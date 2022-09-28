@@ -29,7 +29,7 @@ Flash of unstyled content (FUOC) is the effect where the user can see parts of t
 
 **Figure 1: A simulation of Flash of Unstyled Content (FUOC)**
 
-![FUOC effect](images/fuoc-effect.gif)
+![Kendo UI for jQuery FUOC effect](images/fuoc-effect.gif)
 
 A [code snippet that simulates the FUOC effect](#fuoc-simulation) is available at the end of the article.
 
@@ -60,7 +60,7 @@ For inputs, make the text transparent and unselectable, for example, so that use
 
 **Figure 2: A workaround for the FUOC issue**
 
-![FUOC workaround](images/fuoc-workaround.gif)
+![Kendo UI for jQuery FUOC workaround](images/fuoc-workaround.gif)
 
 For example, use the following settings:
 
