@@ -459,13 +459,28 @@
     overflow: hidden;
     cursor: default;
     min-height: 1.3em;
+    line-height: @line-height;
     white-space: nowrap;
+
+    .k-task-actions .k-link {
+        color: inherit;
+
+        .k-icon {
+            opacity: .5;
+        }
+
+        &:hover .k-icon {
+            opacity: 1;
+        }
+    }
 }
 
 .k-task-template
 {
     padding: .2em 1.4em .2em .6em;
     line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .k-task-actions,
