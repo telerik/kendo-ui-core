@@ -19,7 +19,7 @@ The new Scaffolder items in Visual Studio allow quick code generation and mockin
 
 The Telerik UI Scaffolder supports both Visual Studio 2019 and 2022. The nice thing is that this feature comes built-in with the 2022 R2 SP2+ versions and no additional files or installments are required. This is possible due to the upgraded and modernized implementation by our VSX Team.
 
-All you need to do is to istall a recent version of the Telerik UI for Core .msi istaller and the Telerik Extentions for Visual Studio will be installed automatically together with the Scaffolding items. Alternatively, you can install the Extentions individually from the [VS MarketPlace](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions).
+All you need to do is to install a recent version of the Telerik UI for Core .msi installer and the Telerik Extensions for Visual Studio will be installed automatically together with the Scaffolding items. Alternatively, you can install the Extensions individually from the [VS MarketPlace](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions).
 
 ## Scaffolding Templates
 

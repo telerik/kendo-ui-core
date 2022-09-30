@@ -59,10 +59,10 @@
             });
 
             assert.isOk(numerictextbox.wrapper.parent().hasClass("k-floating-label-container"));
-            assert.isOk(numerictextbox.wrapper.parent().hasClass("k-state-empty"));
+            assert.isOk(numerictextbox.wrapper.parent().hasClass("k-empty"));
         });
 
-        it("floating label removes k-state-empty class when the input has value", function() {
+        it("floating label removes k-empty class when the input has value", function() {
             var numerictextbox = new NumericTextBox(input, {
                 value: 23,
                 label: {
@@ -71,10 +71,10 @@
                 }
             });
 
-            assert.isNotOk(numerictextbox.floatingLabel.element.hasClass("k-state-empty"));
+            assert.isNotOk(numerictextbox.floatingLabel.element.hasClass("k-empty"));
         });
 
-        it("floating label removes k-state-empty on focusout when the input has value", function() {
+        it("floating label removes k-empty on focusout when the input has value", function() {
             var numerictextbox = new NumericTextBox(input, {
                 label: {
                     content: "test",
@@ -82,12 +82,12 @@
                 }
             });
 
-            assert.isOk(numerictextbox.floatingLabel.element.hasClass("k-state-empty"));
+            assert.isOk(numerictextbox.floatingLabel.element.hasClass("k-empty"));
 
             numerictextbox.value(23);
             numerictextbox.element.trigger("focusout");
 
-            assert.isNotOk(numerictextbox.floatingLabel.element.hasClass("k-state-empty"));
+            assert.isNotOk(numerictextbox.floatingLabel.element.hasClass("k-empty"));
         });
 
         it("floating label adds k-focus when the user focuses the input", function() {
@@ -165,7 +165,7 @@
             assert.equal(numerictextbox.calls("destroy"), 1);
         });
 
-        it("k-state-empty is not added if the value is zero", function() {
+        it("k-empty is not added if the value is zero", function() {
             var numerictextbox = new NumericTextBox(input, {
                 value: 0,
                 label: {
@@ -174,7 +174,7 @@
                 }
             });
 
-            assert.isNotOk(numerictextbox.wrapper.parent().hasClass("k-state-empty"));
+            assert.isNotOk(numerictextbox.wrapper.parent().hasClass("k-empty"));
         });
     });
 }());

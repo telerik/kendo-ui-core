@@ -314,7 +314,7 @@
             kendo.bind(dom);
 
             assert.isOk(dom.data("kendoTextArea").wrapper.parent().hasClass("k-floating-label-container"));
-            assert.isOk(dom.data("kendoTextArea").wrapper.parent().hasClass("k-state-empty"));
+            assert.isOk(dom.data("kendoTextArea").wrapper.parent().hasClass("k-empty"));
         });
     });
 }());

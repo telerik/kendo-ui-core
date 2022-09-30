@@ -1,6 +1,6 @@
 ---
 title: DataSource Operations
-page_title: DataSource Operations | Kendo UI Data Source
+page_title: DataSource Operations - Kendo UI for jQuery DataSource
 description: "Learn how to filter, sort, and group your data items when working with the Kendo UI for jQuery DataSource component and your JavaScript widgets."
 previous_url: /framework/datasource/basic-usage
 slug: datasourceoperations_kendoui_datasourcecomponent

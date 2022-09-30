@@ -318,7 +318,7 @@
             kendo.bind(dom);
 
             assert.isOk(dom.data("kendoMaskedTextBox").wrapper.parent().hasClass("k-floating-label-container"));
-            assert.isOk(dom.data("kendoMaskedTextBox").wrapper.parent().hasClass("k-state-empty"));
+            assert.isOk(dom.data("kendoMaskedTextBox").wrapper.parent().hasClass("k-empty"));
         });
     });
 }());

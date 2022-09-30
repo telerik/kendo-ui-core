@@ -1,6 +1,6 @@
 ---
 title: CORS Data Fetching
-page_title: CORS Data Fetching | Kendo UI Data Source
+page_title: CORS Data Fetching - Kendo UI for jQuery DataSource
 description: "Learn how to fetch data from another domain by using CORS with all modern browsers when working with the Kendo UI for jQuery DataSource component and your JavaScript widgets."
 previous_url: /howto/use-cors-with-all-modern-browsers
 slug: corsdatafetching_anotherdomain_datasourcecomponent

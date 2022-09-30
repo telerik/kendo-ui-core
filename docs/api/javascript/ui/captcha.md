@@ -598,7 +598,7 @@ Fired when a request triggered by the component fails - can be distinguished via
 
 ##### e.type `String`
 
-The type triggered the request: "reset|validation|audio".
+The type triggered the request: "reset|validation|audio|image".
 
 ##### e.jqXHR `Object`
 

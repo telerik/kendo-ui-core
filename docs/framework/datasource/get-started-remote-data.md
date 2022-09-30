@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Remote Services
-page_title: jQuery DataSource Documentation | Getting Started with the Remote Data Binding
+page_title: Getting Started with Remote Data Binding - Kendo UI for jQuery DataSource
 description: "Get started with the jQuery DataSource component by Kendo UI and learn how to bind and configure remote data in your JavaScript widgets."
 slug: getting_started_kendoui_remote_data_binding
 position: 3
@@ -162,6 +162,7 @@ The example below demonstrates how to enable the client-side filtering of the Da
     });
 ```
 
+This is it! Now you are ready to dive more deeply into the DataSource component and use it in more advanced and complex scenarios!
 
 ## Next Steps 
 

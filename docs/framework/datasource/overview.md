@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DataSource Overview | Kendo UI Data Source
+page_title: DataSource Overview - Kendo UI for jQuery DataSource
 description: "Learn more about the Kendo UI for jQuery DataSource component, covering all from binding your web app to local arrays of JavaScript objects and to remote web services, returning JSON, JSONP, oData, or XML, to performing CDUR data operations and CORS data fetching."
 previous_url: /howto/interact-with-an-existing-database
 slug: overview_kendoui_datasourcecomponent

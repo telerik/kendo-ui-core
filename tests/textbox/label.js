@@ -59,10 +59,10 @@
             });
 
             assert.isOk(textbox.wrapper.parent().hasClass("k-floating-label-container"));
-            assert.isOk(textbox.wrapper.parent().hasClass("k-state-empty"));
+            assert.isOk(textbox.wrapper.parent().hasClass("k-empty"));
         });
 
-        it("floating label removes k-state-empty class when the input has value", function() {
+        it("floating label removes k-empty class when the input has value", function() {
             var textbox = new TextBox(input, {
                 value: "val",
                 label: {
@@ -71,10 +71,10 @@
                 }
             });
 
-            assert.isNotOk(textbox.floatingLabel.element.hasClass("k-state-empty"));
+            assert.isNotOk(textbox.floatingLabel.element.hasClass("k-empty"));
         });
 
-        it("floating label removes k-state-empty on focusout when the input has value", function() {
+        it("floating label removes k-empty on focusout when the input has value", function() {
             var textbox = new TextBox(input, {
                 label: {
                     content: "test",
@@ -82,12 +82,12 @@
                 }
             });
 
-            assert.isOk(textbox.floatingLabel.element.hasClass("k-state-empty"));
+            assert.isOk(textbox.floatingLabel.element.hasClass("k-empty"));
 
             textbox.value("val");
             textbox.element.trigger("focusout");
 
-            assert.isNotOk(textbox.floatingLabel.element.hasClass("k-state-empty"));
+            assert.isNotOk(textbox.floatingLabel.element.hasClass("k-empty"));
         });
 
         it("floating label adds k-focus when the user focuses the input", function() {
