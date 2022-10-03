@@ -199,7 +199,7 @@ The WebAPI DataSource type of data binding is designed for WebAPI projects and w
         var result = orders.ToDataSourceResult(request);
 
         // response object : { AggregateResults: [], Data: [{},{}], Errors: null, Total: 7 }
-        return Json(result);
+        return result;
     }
 ```
 

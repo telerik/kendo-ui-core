@@ -2,7 +2,7 @@
 title: Fix the ColorPicker Value When Showing It Dynamically
 page_title: Fix the ColorPicker Value When Showing It Dynamically
 description: "Learn how to fix the selected value of the Kendo UI ColorPicker when showing it by using jQuery."
-slug: howto_fixselectedvalue_colorpicker
+slug: colorpicker_fix_selected_value_when_shown
 previous_url: /controls/editors/colorpicker/how-to/fix-selected-value-when-shown
 tags: telerik, kendo, jquery, colorpicker, fix, value, when, showing, dynamically
 component: colorpicker
@@ -16,18 +16,6 @@ res_type: kb
  <tr>
   <td>Product</td>
   <td>Progress Kendo UI ColorPicker for jQuery</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Visual Studio version</td>
-  <td>Visual Studio 2017</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
  </tr>
 </table>
 
