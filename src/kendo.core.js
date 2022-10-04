@@ -1936,6 +1936,10 @@ function pad(number, digits, end) {
     }
 
     function isScrollable(element) {
+        if (element.dataset[kendo.ns + "scrollable"] === "false") {
+            return false;
+        }
+
         if (element && element.className && typeof(element.className) === "string" && element.className.indexOf("k-auto-scrollable") > -1) {
             return true;
         }
