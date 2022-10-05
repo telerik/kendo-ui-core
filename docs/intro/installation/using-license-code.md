@@ -169,6 +169,11 @@ To activate Kendo UI for jQuery you can use any of the keys associated with your
 ### Are earlier versions of Kendo UI for jQuery affected? 
 No, if you use CDN and a version released prior to R3 2022 and NPM with version released prior to R2 2022 you don’t need to set up the licensing. 
 
+> NOTE: Ensure that you are **not including a License File** if you are using a version earlier than R3 2022. Including license file in such versions will reflect as "KendoLicensing is not defined" error. 
+
+
+
+
 
 ## Next Steps
 

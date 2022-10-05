@@ -28,13 +28,13 @@ navigation:
         title: "Download and Installation"
         position: 2
     "intro/widget-basics":
-        title: "Working with Widgets"
+        title: "Working with Components"
         position: 3
     "intro/scripts":
         title: "Widget Script Dependencies"
         position: 4
     "controls":
-        title: "Widgets"
+        title: "Components"
         position: 4
     "controls/data-management":
         title: "Data Management"
@@ -321,7 +321,7 @@ navigation:
         title: "AngularJS Directives"
         position: 8
     "framework/AngularJS/widget-basics":
-        title: "Working with Widgets"
+        title: "Working with Components"
         position: 2
     "framework/AngularJS/how-to":
         title: "How To"
@@ -428,7 +428,7 @@ navigation:
         title: "Troubleshooting"
         position: 201
     "*widgets":
-        title: "Widgets"
+        title: "Components"
     "*tags":
         title: "Tags"
     "*excel":
