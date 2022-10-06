@@ -624,9 +624,9 @@
         "cancel": "Abbrechen"
       });
   }
-  
+
   /* PDFViewer */
-  
+
   if (kendo.ui.PDFViewer) {
     kendo.ui.PDFViewer.prototype.options.messages =
         $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {

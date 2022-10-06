@@ -741,9 +741,9 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
         "clearColor": "Farbe löschen"
     });
   }
-  
+
   /* PDFViewer */
-  
+
   if (kendo.ui.PDFViewer) {
     kendo.ui.PDFViewer.prototype.options.messages =
         $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
@@ -807,5 +807,5 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
             }
         });
   }
-  
+
 })(window.kendo.jQuery);
