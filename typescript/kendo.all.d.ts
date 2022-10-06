@@ -1370,6 +1370,7 @@ declare namespace kendo.data {
     interface DataSourceSortItem {
         field?: string | undefined;
         dir?: string | undefined;
+        compare?: Function | undefined;
     }
 
     interface DataSourceTransportBatch extends JQueryAjaxSettings {

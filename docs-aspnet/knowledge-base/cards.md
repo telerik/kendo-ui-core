@@ -61,8 +61,8 @@ You can also use titles and subtitles outside the header.
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions">
-        <span class="k-button k-flat k-primary">Action 1</span>
-        <span class="k-button k-flat k-primary">Action 2</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
     </div>
 </div>
 ```
@@ -94,8 +94,8 @@ You can add a list of actions to a Card by using the `.k-card-actions` class.
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions">
-        <span class="k-button k-flat k-primary">Action 1</span>
-        <span class="k-button k-flat k-primary">Action 2</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
     </div>
 </div>
 ```
@@ -111,10 +111,10 @@ To achieve a consistent styling, each action can be wrapped in a `.k-card-action
     </div>
     <div class="k-card-actions">
         <span class="k-card-action">
-            <span class="k-button k-flat k-primary">Action 1</span>
+            <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
         </span>
         <span class="k-card-action">
-            <span class="k-button k-flat k-primary">Action 2</span>
+            <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
         </span>
     </div>
 </div>
@@ -131,10 +131,10 @@ The actions can be stretched to take the entire container by adding the `.k-card
     </div>
     <div class="k-card-actions k-card-actions-stretched">
         <span class="k-card-action">
-            <span class="k-button k-flat k-primary">Action 1</span>
+            <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
         </span>
         <span class="k-card-action">
-            <span class="k-button k-flat k-primary">Action 2</span>
+            <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
         </span>
     </div>
 </div>
@@ -150,8 +150,8 @@ The actions can also be forced to display vertically through the `.k-card-action
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions k-card-actions-vertical">
-        <span class="k-card-action"><span class="k-button k-flat k-primary">Action 1</span></span>
-        <span class="k-card-action"><span class="k-button k-flat k-primary">Action 2</span></span>
+        <span class="k-card-action"><span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span></span>
+        <span class="k-card-action"><span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span></span>
     </div>
 </div>
 ```
@@ -211,8 +211,8 @@ To render cards that are detached from one another in a column, use the `.k-card
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
         <div class="k-card" style="width: 300px;">
@@ -222,8 +222,8 @@ To render cards that are detached from one another in a column, use the `.k-card
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
         <div class="k-card" style="width: 300px;">
@@ -233,8 +233,8 @@ To render cards that are detached from one another in a column, use the `.k-card
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
     </div>
@@ -253,8 +253,8 @@ To render Cards that are attached to one another on a single row, use the `.k-ca
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
         <div class="k-card" style="width: 300px;">
@@ -264,8 +264,8 @@ To render Cards that are attached to one another on a single row, use the `.k-ca
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
         <div class="k-card" style="width: 300px;">
@@ -275,8 +275,8 @@ To render Cards that are attached to one another on a single row, use the `.k-ca
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
     </div>
@@ -295,8 +295,8 @@ To render Cards that are detached from one another on a single row, use the `.k-
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
         <div class="k-card" style="width: 300px;">
@@ -306,8 +306,8 @@ To render Cards that are detached from one another on a single row, use the `.k-
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
         <div class="k-card" style="width: 300px;">
@@ -317,8 +317,8 @@ To render Cards that are detached from one another on a single row, use the `.k-
                 <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
             </div>
             <div class="k-card-actions">
-                <span class="k-button k-flat k-primary">Action 1</span>
-                <span class="k-button k-flat k-primary">Action 2</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
             </div>
         </div>
     </div>
@@ -336,8 +336,8 @@ Cards provide predefined state classes that you can use to change the Card appea
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions">
-        <span class="k-button k-flat k-primary">Action 1</span>
-        <span class="k-button k-flat k-primary">Action 2</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
     </div>
 </div>
 
@@ -348,8 +348,8 @@ Cards provide predefined state classes that you can use to change the Card appea
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions">
-        <span class="k-button k-flat k-primary">Action 1</span>
-        <span class="k-button k-flat k-primary">Action 2</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
     </div>
 </div>
 
@@ -360,8 +360,8 @@ Cards provide predefined state classes that you can use to change the Card appea
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions">
-        <span class="k-button k-flat k-primary">Action 1</span>
-        <span class="k-button k-flat k-primary">Action 2</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
     </div>
 </div>
 
@@ -372,8 +372,8 @@ Cards provide predefined state classes that you can use to change the Card appea
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions">
-        <span class="k-button k-flat k-primary">Action 1</span>
-        <span class="k-button k-flat k-primary">Action 2</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
     </div>
 </div>
 
@@ -384,8 +384,8 @@ Cards provide predefined state classes that you can use to change the Card appea
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions">
-        <span class="k-button k-flat k-primary">Action 1</span>
-        <span class="k-button k-flat k-primary">Action 2</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 1</span>
+        <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</span>
     </div>
 </div>
 ```
