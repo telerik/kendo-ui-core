@@ -12,6 +12,24 @@ Represents the Kendo UI ListView widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### ariaLabel `String` *(default: null)*
+
+Sets an `aria-label` attribute on the ListView content element (the element with `role` `listbox` or `list`).
+
+#### Example - disable automatic binding
+
+    <div id ="listView"></div>
+    <script>
+      var dataSource = new kendo.data.DataSource({
+        data: [ { name: "Jane Doe" }, { name: "John Doe" }]
+      });
+      $("#listView").kendoListView({
+        dataSource: dataSource,
+        template: "<div>#:name#</div>",
+        ariaLabel: "ListView with names"
+      });
+    </script>
+
 ### autoBind `Boolean` *(default: true)*
 
 If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the

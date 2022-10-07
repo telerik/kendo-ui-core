@@ -120,6 +120,7 @@ var __meta__ = {
 
         options: {
             name: "ListView",
+            ariaLabel: null,
             autoBind: true,
             selectable: false,
             navigatable: false,
@@ -347,7 +348,7 @@ var __meta__ = {
                 template = that.template,
                 altTemplate = that.altTemplate,
                 options = that.options,
-                role = (options.selectable || options.navigatable) ? "option" : "listitem",
+                role = options.selectable ? "option" : "listitem",
                 active = activeElement(),
                 endlessAppend = that._endlessFetchInProgress,
                 index = endlessAppend ? that._skipRerenderItemsCount : 0,
@@ -456,27 +457,29 @@ var __meta__ = {
         },
 
         _ariaAttributes: function(length) {
-            var el = this.element,
+            var content = this.content,
                 options = this.options,
                 selectable = options.selectable;
 
-            if (length === 0) {
-                el.removeAttr(ARIA_ROLE);
-                el.removeAttr(ARIA_MULTISELECTABLE);
+            this._ariaLabelValue = this._ariaLabelValue || this.options.ariaLabel;
 
-                if (el.attr(ARIA_LABEL)) {
-                    this._ariaLabelValue = el.attr(ARIA_LABEL);
-                    el.removeAttr(ARIA_LABEL);
+            if (length === 0) {
+                content.removeAttr(ARIA_ROLE);
+                content.removeAttr(ARIA_MULTISELECTABLE);
+
+                if (content.attr(ARIA_LABEL)) {
+                    this._ariaLabelValue = content.attr(ARIA_LABEL);
+                    content.removeAttr(ARIA_LABEL);
                 }
             } else {
-                el.attr(ARIA_ROLE, (selectable || options.navigatable) ? "listbox" : "list");
+                content.attr(ARIA_ROLE, selectable ? "listbox" : "list");
 
                 if (selectable && kendo.ui.Selectable.parseOptions(selectable).multiple) {
-                    el.attr(ARIA_MULTISELECTABLE, true);
+                    content.attr(ARIA_MULTISELECTABLE, true);
                 }
 
                 if (this._ariaLabelValue) {
-                    el.attr(ARIA_LABEL, this._ariaLabelValue);
+                    content.attr(ARIA_LABEL, this._ariaLabelValue);
                 }
             }
         },
@@ -859,7 +862,7 @@ var __meta__ = {
             var that = this,
                 editable = that.editable,
                 options = that.options,
-                role = (options.selectable || options.navigatable) ? "option" : "listitem",
+                role = options.selectable ? "option" : "listitem",
                 data,
                 item,
                 index,

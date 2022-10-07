@@ -7005,6 +7005,7 @@ declare namespace kendo.ui {
 
     interface ListViewOptions {
         name?: string | undefined;
+        ariaLabel?: string | undefined;
         autoBind?: boolean | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
         editTemplate?: Function | undefined;
