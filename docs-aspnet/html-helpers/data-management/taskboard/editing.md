@@ -48,6 +48,46 @@ The following example demonstrates how to configure CRUD (Create, Read, Update, 
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+  <kendo-taskboard 
+		datacategoryfield="ID" 
+		datadescriptionfield="Description" 
+		datastatusfield="OwnerID" 
+		datatitlefield="Title"
+		name="taskBoard" >
+        <taskboard-columns>
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <schema data="Data" total="Total" errors="Errors">
+                    <model id="ID"></model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Editing_Columns_Read", "TaskBoard")" />
+                    <update url="@Url.Action("Editing_Columns_Update", "TaskBoard")" />
+                    <create url="@Url.Action("Editing_Columns_Create", "TaskBoard")"/>
+                    <destroy url="@Url.Action("Editing_Columns_Destroy", "TaskBoard")"/>
+                </transport>
+            </datasource>
+        </taskboard-columns>
+		<datasource type="DataSourceTagHelperType.Ajax">
+	 		<schema data="Data" total="Total" errors="Errors">
+				 <model id="TaskID"></model>
+	 		</schema>
+	 		<transport>
+	 	 		<read url="@Url.Action("Tasks_Read", "TaskBoard")" />
+	 	 	    <update url="@Url.Action("Tasks_Update", "TaskBoard")" />
+	 	 	    <create url="@Url.Action("Tasks_Create", "TaskBoard")"/>
+	 	 	    <destroy url="@Url.Action("Tasks_Destroy", "TaskBoard")"/>
+	 		</transport>
+		</datasource>
+		<column-settings datastatusfield="ID" datatextfield="Text">
+		</column-settings>
+		<editable enabled="false">
+		</editable>
+	</kendo-taskboard>
+
+```
+{% endif %}
 ```Controller
     public partial class TaskBoardController : Controller
     {
@@ -179,6 +219,24 @@ The following example demonstrates how to configure the data source of the colum
         .Destroy("Editing_Columns_Destroy", "TaskBoard")
     )
 ```
+{% if site.core %}
+```TagHelper
+        <taskboard-columns>
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <schema data="Data" total="Total" errors="Errors">
+                    <model id="ID"></model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Editing_Columns_Read", "TaskBoard")" />
+                    <update url="@Url.Action("Editing_Columns_Update", "TaskBoard")" />
+                    <create url="@Url.Action("Editing_Columns_Create", "TaskBoard")"/>
+                    <destroy url="@Url.Action("Editing_Columns_Destroy", "TaskBoard")"/>
+                </transport>
+            </datasource>
+        </taskboard-columns>
+
+```
+{% endif %}
 
 The following example demonstrates how to configure the data source of the cards.
 
@@ -192,6 +250,23 @@ The following example demonstrates how to configure the data source of the cards
         .Destroy(destroy => destroy.Action("Tasks_Destroy", "TaskBoard"))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+		<datasource type="DataSourceTagHelperType.Ajax">
+	 		<schema data="Data" total="Total" errors="Errors">
+				 <model id="TaskID"></model>
+	 		</schema>
+	 		<transport>
+	 	 		<read url="@Url.Action("Tasks_Read", "TaskBoard")" />
+	 	 	    <update url="@Url.Action("Tasks_Update", "TaskBoard")" />
+	 	 	    <create url="@Url.Action("Tasks_Create", "TaskBoard")"/>
+	 	 	    <destroy url="@Url.Action("Tasks_Destroy", "TaskBoard")"/>
+	 		</transport>
+		</datasource>
+
+```
+{% endif %}
 
 ### Setting the Editable Option
 

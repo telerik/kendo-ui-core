@@ -106,8 +106,6 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
 
 1. Create a `DataSource` by specifying its configuration values inline as demonstrated in the following example. The example specifies a `DataSource` configuration but does not actually create a `DataSource` instance. The `kendo.data.DataSource.create(that.options.dataSource)` takes this configuration object and returns a new `DataSource` instance with the specified configuration.
 
-    > To replicate the Kendo UI MultiSelect data-binding behavior, explicitly assign the `kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;` binding.
-
         $("#div").kendoRepeater({
             dataSource: {
                 transport: {
@@ -117,6 +115,46 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
                 }
             }
         });
+
+## DataBinding Behavior of Specific Widgets
+
+Certain widgets such as the MultiSelect, DropDownTree, Scheduler, Grid and Gantt require you to explicitly define a widget-specific binder.
+
+The following example showcases how to copy the MultiSelect binder to your own CustomMultiSelect widget:
+
+```javascript
+kendo.data.binders.widget.custommultiselect = kendo.data.binders.widget.multiselect;
+```
+
+The binder definition always follows the same syntax - **kendo.data.binders.widget.[customwidgetname]** = **kendo.data.binders.widget.[widgetname]**
+
+The code snippet must be added before the `Widget.extend` method is called:
+
+```javascript
+kendo.data.binders.widget.custommultiselect = kendo.data.binders.widget.multiselect;
+
+ui = kendo.ui,
+    Widget = ui.MultiSelect;
+
+var MyWidget = Widget.extend({
+	options: {
+        name: "CustomMultiSelect"
+    }
+});
+```
+
+## New Components Rendering
+
+R1 2022 introduced brand new rendering for some of our widgets. More information about this topic can be found in the [Components Rendering Overview]({% slug components_rendering_overview %}) article.
+
+In order to utilize the new styling options in your custom widgets, you must explicitly copy the css properties of the original widget. 
+
+To do so, add the following line of code before the `Widget.extend` method is called:
+
+```javascript
+// Where 'CustomMultiSelect' is the name of your own custom widget and 'MultiSelect' is the name of the original Kendo UI Widget that you're extending.
+kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssProperties.propertyDictionary["MultiSelect"];
+```
 
 ## Handling Events
 

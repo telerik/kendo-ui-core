@@ -25655,7 +25655,7 @@ interface JQuery {
 
     kendoCircularProgressBar(): JQuery;
     kendoCircularProgressBar(options: kendo.ui.CircularProgressBarOptions): JQuery;
-    data(key: "kendoCircularProgressBar"): kendo.ui.CircularProgressBarOptions | undefined;
+    data(key: "kendoCircularProgressBar"): kendo.ui.CircularProgressBar | undefined;
 
     kendoColorGradient(): JQuery;
     kendoColorGradient(options: kendo.ui.ColorGradientOptions): JQuery;

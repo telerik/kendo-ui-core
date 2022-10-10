@@ -17,16 +17,6 @@ The `Toolbar Items` configuration allows you to set the desired tools that will 
 The following example demonstrates how to add a custom tool to the toolbar.
 
 ```HtmlHelper
-    <script>
-        kendo.ui.taskboard.commands["CustomAddCardCommand"] = kendo.ui.taskboard.Command.extend({
-            exec: function () {
-                var taskboard = this.taskboard;
-                var options = this.options;
-                taskboard.addCard({ Status: "todo", Title: "Add Title", Description: "Add Description", Color: "green" });
-                taskboard.dataSource.sync();
-            }
-        });
-    </script>
 
     @(Html.Kendo().TaskBoard()
         .Name("taskBoard")
@@ -48,6 +38,46 @@ The following example demonstrates how to add a custom tool to the toolbar.
         .DataOrderField("Order")
         .BindTo((IEnumerable<Kendo.Mvc.Examples.Models.TaskBoard.CardViewModel>)ViewBag.Cards)
     )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var cards= (IEnumerable<CardViewModel>)ViewBag.Cards;
+    }
+    
+    <kendo-taskboard 
+	    dataorderfield="Order" 
+	    datadescriptionfield="Description" 
+	    datastatusfield="Status" 
+	    datatitlefield="Title" 
+        name="taskBoard"
+	    bind-to="cards">
+        <toolbar>
+            <items>
+                <item type="button" command="CustomAddCardCommand" name="addCard" text="Add New Card" icon="plus"></item>
+                <item type="spacer"></item>
+                <item type="TaskBoardSearch" command="SearchCommand" name="search" text="Search" icon="search"></item>
+            </items>
+        </toolbar>
+        <taskboard-columns>
+            <column text="To-do" status="todo"></column>
+            <column text="In progress" status="inProgress"></column>
+            <column text="Done" status="done"></column>
+        </taskboard-columns>
+    </kendo-taskboard>
+```
+{% endif %}
+```JavaScript
+    <script>
+        kendo.ui.taskboard.commands["CustomAddCardCommand"] = kendo.ui.taskboard.Command.extend({
+            exec: function () {
+                var taskboard = this.taskboard;
+                var options = this.options;
+                taskboard.addCard({ Status: "todo", Title: "Add Title", Description: "Add Description", Color: "green" });
+                taskboard.dataSource.sync();
+            }
+        });
+    </script>
 ```
 
 ## See Also

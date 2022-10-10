@@ -32,6 +32,30 @@ The following example demonstrates how to bind the TaskBoard data saved in the V
         .BindTo((IEnumerable<Kendo.Mvc.Examples.Models.TaskBoard.CardViewModel>)ViewBag.Cards)
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var cards=(IEnumerable<CardViewModel>)ViewBag.Cards;
+    }
+
+	<kendo-taskboard 
+		dataorderfield="Order" 
+		datacategoryfield="Color"
+		datadescriptionfield="Description" 
+		datastatusfield="Status"
+		datatitlefield="Title" height="750" name="taskBoard"
+        bind-to="cards">
+		<taskboard-columns>
+            <column text="To-do" status="todo"></column>
+            <column text="In progress" status="inProgress"></column>
+            <column text="Done" status="done"></column>
+        </taskboard-columns>
+		<column-settings datastatusfield="Status" datatextfield="Text">
+		</column-settings>
+	</kendo-taskboard>
+
+```
+{% endif %}
 ```Controller
     public partial class TaskBoardController : Controller
     {
@@ -91,6 +115,53 @@ The following example demonstrates how to enable remote binding in the TaskBoard
         )
         .Editable(false)
     )
+```
+{% if site.core %}
+```TagHelper
+   <kendo-taskboard 
+		datacategoryfield="ID" 
+		datadescriptionfield="Description" 
+		datastatusfield="OwnerID" 
+		datatitlefield="Title"
+		height="500"
+		template-id="card-template" 
+		name="taskBoard">
+       <taskboard-columns>
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Remote_Data_Binding_Columns_Read", "TaskBoard")"/>
+                </transport>
+            </datasource>
+        </taskboard-columns>
+		<datasource type="DataSourceTagHelperType.Ajax">
+	 		<schema data="Data" total="Total" errors="Errors">
+				 <model id="TaskID"></model>
+	 		</schema>
+	 		<transport>
+	 	 		<read url="@Url.Action("Remote_Data_Binding_Read", "TaskBoard")" />
+	 	 		<update url="@Url.Action("Remote_Data_Binding_Update", "TaskBoard")" />
+	 		</transport>
+		</datasource>
+		<column-settings datastatusfield="ID" datatextfield="Text">
+		</column-settings>
+		<editable enabled="false">
+		</editable>
+	</kendo-taskboard>
+
+```
+{% endif %}
+```JavaScript
+    <script id="card-template" type="text/x-kendo-template">
+        <div class="template-container">
+            <span class="template-header">
+                <span class="template-title">#: Description #</span>
+                <span class="template-menu">#=cardMenuButton#</span>
+            </span>
+            # if (Image != "") { #
+            <img src="@Url.Content("~/shared/web/taskboard/" + "#= Image #")" style="height:135px; width: 270px;">
+            # } #
+        </div>
+    </script>
 ```
 ```Controller
     public partial class TaskBoardController : Controller

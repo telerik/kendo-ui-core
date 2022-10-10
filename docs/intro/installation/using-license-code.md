@@ -126,54 +126,57 @@ require("./kendo-ui-license.js");
 
 This section lists the answers to the most frequently asked questions (FAQs) about working with the Kendo UI for jQuery license key.
 
-### Do I need to generate new license file, If I had renew my license. 
+### Do I need to generate a new license file if I had to renew my license?
+
 Yes, but only If you upgrade the version of our product in your application with the new version.  
 
 ### What happens if a developer leaves? 
-This doesn’t affect your licensing key. The license key is generated against a specific range of versions and it will be valid as long as the license code is valid for the product version used (i.e., license file should be changed only when you upgrade the Kendo UI for jQuery).
+
+This doesn’t affect your licensing key. The license key is generated against a specific range of versions and it will be valid as long as the license code is valid for the product version you are using (that is, you need to change the license file only when you upgrade Kendo UI for jQuery).
 
 ### Which versions of jQuery does this affect? 
 
-For CDN usage: Starting from R3 2022 
+* For CDN usage, version R3 2022 and later.
 
-For NPM: Starting from R2 2022 
+* For NPM usage, version R2 2022 and later.
 
-### Will projects stop working if we don't renew? 
-No, the licensing mechanism doesn’t control the components behavior. Also, the licensing mechanism performs a check if the user (who authenticated in the docs to generate the license file) has license for the version of our product, used in the application. Note that our licenses are perpetual (see EULA) 
+### Will projects stop working if I don't renew?
 
-### Will the product function without a license key? 
+No, the licensing mechanism doesn’t control the components behavior. Also, the licensing mechanism checks if the user account (used to generate the license file) has a license for the product version used in the application. Note that the Kendo UI licenses are perpetual (see the [EULA](https://www.telerik.com/purchase/license-agreement/kendo-ui))..
+
+### Will the product function without a license key?
+
 Yes, the product will continue to function normally without a license key. However, a warning message will appear in the browser console if a valid license key is not present. 
 
-### Does the license key expire? 
+### Does the license key expire?
+
 Yes, the license key expires at the end of your support subscription: 
 
-For trial users, this is at the end of your 30-day trial. 
+* With trial licenses, the license key expires at the end of your 30-day trial. 
 
-For licensed developers, this is when your subscription expires. 
+* With commercial licenses, the license key expires when your subscription expires. 
 
 You will need to obtain and install a new license key after starting a trial, renewing a license, or upgrading a license. 
 
-> NOTE: An expired license key is valid for all Product versions which are published before its expiration date. 
+> An expired license key is valid for all Product versions which are published before its expiration date. 
 
-### I renewed my license key, but the warning message still appears in the console. What should I do? 
+### I renewed my license key, but the warning message still appears in the console. What should I do?
+
 Make sure that the [script license is present in your project](#2-add-the-license-file) and you [have correct references to it](#3-add-a-reference-or-import-the-license-file).
 
-### Do I need an Internet connection to activate the license? 
-No, the license activation and validation are performed entirely offline. 
+### Do I need an Internet connection to activate the license?
 
-No network requests are made at any point of the project lifecycle. 
+No, the license activation and validation are performed entirely offline. No network requests are made at any point of the project lifecycle. 
 
-### My team has more than one licensed developer. Which key do we have to use? 
-To activate Kendo UI for jQuery you can use any of the keys associated with your subscriptions. 
+### My team has more than one licensed developer. Which key do we have to use?
 
-### Are earlier versions of Kendo UI for jQuery affected? 
-No, if you use CDN and a version released prior to R3 2022 and NPM with version released prior to R2 2022 you don’t need to set up the licensing. 
+To activate Kendo UI for jQuery, you can use any of the keys associated with your subscriptions.
 
-> NOTE: Ensure that you are **not including a License File** if you are using a version earlier than R3 2022. Including license file in such versions will reflect as "KendoLicensing is not defined" error. 
+### Are earlier versions of Kendo UI for jQuery affected?
 
+No, if you use CDN and Kendo UI for jQuery versions released prior to R3 2022 or NPM and version released prior to R2 2022, you don’t need to set up the licensing. 
 
-
-
+>caution Do not include a license file when using Kendo UI versions prior to R3 2022. Including a license file with those versions will cause a `KendoLicensing is not defined` error. 
 
 ## Next Steps
 

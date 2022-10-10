@@ -46,7 +46,36 @@ The following example demonstrates how to disable a specific card.
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var cards=(IEnumerable<CardViewModel>)ViewBag.Cards;
+    }
 
+    <kendo-taskboard 
+        dataorderfield="Order" 
+        datadescriptionfield="Description" 
+        datastatusfield="Status" 
+        datatitlefield="Title" 
+        height="980" name="taskBoard" 
+        bind-to="cards">
+        <taskboard-columns>
+            <column text="To-do" status="todo"></column>
+            <column text="In progress" status="inProgress"></column>
+            <column text="Done" status="done"></column>
+        </taskboard-columns>
+    </kendo-taskboard>
+
+   <script>
+        $(document).ready(function() {
+            var taskBoard = $("#taskBoard").data("kendoTaskBoard");
+
+            taskBoard.enable(taskBoard.items().eq(0), false);
+        });
+    </script>
+
+```
+{% endif %}
 You can also set readonly status to specific cards, or to all cards in a column.
 
 The following example demonstrates how to set all cards in a column to readonly.
@@ -75,6 +104,36 @@ The following example demonstrates how to set all cards in a column to readonly.
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var cards=(IEnumerable<CardViewModel>)ViewBag.Cards;
+    }
+
+    <kendo-taskboard 
+        dataorderfield="Order" 
+        datadescriptionfield="Description" 
+        datastatusfield="Status" 
+        datatitlefield="Title"
+        name="taskBoard" 
+        bind-to="cards">
+        <taskboard-columns>
+            <column text="To-do" status="todo"></column>
+            <column text="In progress" status="inProgress"></column>
+            <column text="Done" status="done"></column>
+        </taskboard-columns>
+    </kendo-taskboard>
+
+    <script>
+        $(document).ready(function() {
+            var taskBoard = $("#taskBoard").data("kendoTaskBoard");
+
+            taskBoard.readOnlyByColumn(taskBoard.columns().eq(0));
+        });
+    </script>
+
+```
+{% endif %}
 
 ## Card Menu
 

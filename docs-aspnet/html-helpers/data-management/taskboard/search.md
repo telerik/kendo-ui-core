@@ -39,6 +39,35 @@ The following example demonstrates how to show the default tools along with a cu
         .BindTo((IEnumerable<Kendo.Mvc.Examples.Models.TaskBoard.CardViewModel>)ViewBag.Cards)
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var cards= (IEnumerable<CardViewModel>)ViewBag.Cards;
+    }
+
+    <kendo-taskboard 
+	    dataorderfield="Order" 
+	    datadescriptionfield="Description" 
+	    datastatusfield="Status" 
+	    datatitlefield="Title" 
+        name="taskBoard" 
+	    bind-to="cards">
+        <toolbar>
+            <items>
+                <item type="button" command="AddColumnCommand" name="addColumn" text="Add Column" icon="plus"></item>
+                <item type="button" text="myCustomButton"></item>
+                <item type="spacer"></item>
+                <item type="TaskBoardSearch" command="SearchCommand" name="search" text="Search" icon="search"></item>
+            </items>
+        </toolbar>
+        <taskboard-columns>
+            <column text="To-do" status="todo"></column>
+            <column text="In progress" status="inProgress"></column>
+            <column text="Done" status="done"></column>
+        </taskboard-columns>
+    </kendo-taskboard>
+```
+{% endif %}
 
 ## See Also
 

@@ -27,6 +27,11 @@ The card template controls the rendering of the cards. It is set through the `Te
 ```HtmlHelper
     .TemplateId("card-template")
 ```
+{% if site.core %}
+```TagHelper
+    template-id="card-template" 
+```
+{% endif %}
 The following example shows a card template.
 
     <script id="card-template" type="text/x-kendo-template">
@@ -53,6 +58,12 @@ The column template is set through the `TemplateId`, or the `Template` sub-optio
         s.DataStatusField("ID");
     })
 ```
+{% if site.core %}
+```TagHelper
+    <column-settings datastatusfield="Status" datatextfield="Text" template-id="column-template">
+	</column-settings>
+```
+{% endif %}
 
 The following example shows a column template.
 
@@ -91,6 +102,11 @@ The preview pane template controls the rendering of the preview pane. It is set 
         p.TemplateId("previewPane-content-template");
     })
 ```
+{% if site.core %}
+```TagHelper
+    <preview-pane template-id="editable-header-template"></preview-pane>
+```
+{% endif %}
 
 The following example shows a preview pane template.
 
@@ -119,6 +135,11 @@ The preview pane header template controls the rendering of the header of the pre
         p.HeaderTemplateId("previewPane-header-template");
     })
 ```
+{% if site.core %}
+```TagHelper
+    <preview-pane header-template-id="previewPane-header-template"></preview-pane>
+```
+{% endif %}
 
 The following example shows a preview pane header template.
 

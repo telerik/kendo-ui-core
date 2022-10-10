@@ -88,7 +88,7 @@ The following example demonstrates how to use the serialization and deserializat
 
 The following list provides information on the libraries that allow processing HTML with a whitelist depending on your server-side platform:
 
-- `ASP.NET`&mdash;[Html Agility Pack](http://htmlagilitypack.codeplex.com/).
+- `ASP.NET`&mdash;[Html Agility Pack](https://html-agility-pack.net/).
 - `PHP`&mdash;[Html Purifier](http://htmlpurifier.org/).
 - `Java`&mdash;[jsoup](https://jsoup.org/).
 - `Node.js`&mdash;[sanitize-html](https://www.npmjs.com/package/sanitize-html).

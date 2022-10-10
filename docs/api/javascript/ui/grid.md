@@ -6865,21 +6865,35 @@ Defines what loader will be used while loading the data. Possible values are:
 - "loadingPanel" - a panel with a circular loading indicator.
 - "skeleton" - a skeleton enabled loader.
 
+> A **pageSize** must be defined for the **skeleton** loader type to work properly.
+
 #### Example - set the loaderType
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      loaderType: "skeleton"
-    });
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "ShipName" },
+          { field: "ShipCity" }
+        ],
+        dataSource: {
+          type: "odata",
+          transport: {
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          },
+          schema: {
+            model: {
+              fields: {
+                ShipName: { type: "string" },
+                ShipCity: { type: "string" }
+              }
+            }
+          },
+          pageSize: 20,
+          serverPaging: true
+        },
+        loaderType: "skeleton"
+      });
     </script>
 
 ### messages `Object`
