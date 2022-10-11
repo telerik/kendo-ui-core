@@ -1476,7 +1476,7 @@ var __meta__ = {
                     cells: 42,
                     perRow: 7,
                     html: html += '</tr></thead><tbody class="k-calendar-tbody"><tr role="row" class="k-calendar-tr">',
-                    start: start,
+                    start: createDate(start.getFullYear(), start.getMonth(), start.getDate()),
                     isWeekColumnVisible: isWeekColumnVisible,
                     weekNumber: options.weekNumber,
                     min: createDate(min.getFullYear(), min.getMonth(), min.getDate()),

@@ -289,6 +289,23 @@ it("month view renders week number column when enabled", function() {
     assert.equal(div.find("tbody").find("td").length, 48);
 });
 
+it("month view renderer does not duplicate week numbers", function() {
+    var today = new Date('2021-01-01T19:20:30Z');
+
+    div.html(calendar.views[0].content({
+        date: today,
+        empty: template.empty,
+        isWeekColumnVisible: true,
+        content: template.content,
+        min: new Date(2000, 10, 10),
+        max: new Date(2023, 10, 10),
+        disableDates: $.noop,
+        messages: { weekColumnHeader: "" }
+    }));
+
+    assert.equal(div.find("tr").eq(1).find("td").eq(0).text(), "53");
+});
+
 it("month view's content method honors culture", function() {
     var today = new Date(),
         days = kendo.getCulture("bg-BG").calendars.standard.days;
