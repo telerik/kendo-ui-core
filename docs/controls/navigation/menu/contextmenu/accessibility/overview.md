@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ContextMenu Documentation | ContextMenu Accessibility
+page_title: jQuery ContextMenu Documentation - ContextMenu Accessibility
 description: "Get started with the jQuery ContextMenu and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_contextmenu_widget
 position: 1

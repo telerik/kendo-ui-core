@@ -1,6 +1,6 @@
 ---
 title: Reordering
-page_title: jQuery Grid Documentation | Reordering of Columns
+page_title: jQuery Grid Documentation - Reordering of Columns
 description: "Get started with the jQuery Grid by Kendo UI and learn how to modify its column widths."
 slug: reordercols_kendoui_grid_widget
 position: 7

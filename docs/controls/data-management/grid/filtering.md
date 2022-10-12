@@ -1,6 +1,6 @@
 ---
 title: Filtering
-page_title: jQuery Grid Documentation | Filtering
+page_title: jQuery Grid Documentation - Filtering
 description: "Get started with the jQuery Grid by Kendo UI and learn how to filter its data."
 slug: filtering_kendoui_grid_widget
 position: 6

@@ -1,6 +1,6 @@
 ---
 title: Observable Objects
-page_title: Observable Objects | Kendo UI MVVM
+page_title: Observable Objects - Kendo UI MVVM
 description: "Learn how to initialize the ObservableObject in the Kendo UI MVVM framework, get a field value, set a field value to change tracking, and notify any subscribers when a change occurs."
 slug: overview_observabeobject_kendoui
 position: 2

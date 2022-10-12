@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-page_title: jQuery NumericTextBox Documentation | Getting Started with the NumericTextBox
+page_title: jQuery NumericTextBox Documentation - Getting Started with the NumericTextBox
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: getting_started_kendoui_numerictextbox_widget
 position: 1

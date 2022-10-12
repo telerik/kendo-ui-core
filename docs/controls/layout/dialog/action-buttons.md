@@ -1,6 +1,6 @@
 ---
 title: Action Buttons
-page_title: jQuery Dialog Documentation | Action Buttons
+page_title: jQuery Dialog Documentation - Action Buttons
 description: "Get started with the jQuery Dialog by Kendo UI and set the action buttons of the widget."
 slug: actionbuttons_kendoui_dialog
 position: 4

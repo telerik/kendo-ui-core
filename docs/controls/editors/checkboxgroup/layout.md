@@ -1,6 +1,6 @@
 ---
 title: Layout
-page_title: Kendo UI for jQuery CheckBoxGroup Documentation | Layout
+page_title: Kendo UI for jQuery CheckBoxGroup Documentation - Layout
 description: "Get started with the Kendo UI for jQuery CheckBoxGroup and learn about the layouts it supports."
 slug: layout_checkboxgroup_widget
 position: 4

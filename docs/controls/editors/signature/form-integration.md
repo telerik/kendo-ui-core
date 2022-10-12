@@ -1,6 +1,6 @@
 ---
 title: Form Integration
-page_title: jQuery Signature Documentation | Signature Form Integration
+page_title: jQuery Signature Documentation - Signature Form Integration
 description: "Learn how to integrate the Signature inside a Kendo UI for jQuery Form."
 slug: form_integration_kendoui_signature_widget
 position: 3

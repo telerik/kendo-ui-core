@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery TreeList Documentation | Data Binding
+page_title: jQuery TreeList Documentation - Data Binding
 description: "Get started with the jQuery TreeList by Kendo UI and bind the widget to local or remote data."
 slug: databinding_kendoui_treelist
 position: 2

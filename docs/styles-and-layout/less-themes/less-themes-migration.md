@@ -1,6 +1,6 @@
 ---
 title: Less to Sass Theme Migration
-page_title: Less to Sass Theme Migration | Less Themes
+page_title: Less to Sass Theme Migration - Less Themes
 description: "Learn how to migrate from a Less to a Sass theme."
 previous_url: /styles-and-layout/less-themes-migration
 slug: less_themes_migration

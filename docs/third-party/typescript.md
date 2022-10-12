@@ -1,6 +1,6 @@
 ---
 title: TypeScript
-page_title: TypeScript | Kendo UI Third-Party Tools
+page_title: TypeScript - Kendo UI Third-Party Tools
 description: "Learn how to enable strongly-typed access to the Kendo UI widgets and their configuration."
 previous_url: /howto/typescript/overview, /typescript
 slug: typescript_integration_kendoui

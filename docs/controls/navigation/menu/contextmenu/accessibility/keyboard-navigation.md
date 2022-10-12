@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: jQuery ContextMenu Documentation | Keyboard Navigation
+page_title: jQuery ContextMenu Documentation - Keyboard Navigation
 description: "Get started with the jQuery ContextMenu by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_contextmenu_jquery
 position: 2

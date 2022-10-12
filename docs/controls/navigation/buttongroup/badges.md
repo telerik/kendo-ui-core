@@ -1,6 +1,6 @@
 ---
 title: Badges
-page_title: jQuery ButtonGroup Documentation | Badges
+page_title: jQuery ButtonGroup Documentation - Badges
 description: "Get started with the jQuery ButtonGroup by Kendo UI and add badges to its Button instances."
 slug: badges_kendoui_buttongroup
 position: 5

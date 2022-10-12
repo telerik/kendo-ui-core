@@ -1,6 +1,6 @@
 ---
 title: Resources
-page_title: jQuery Scheduler Documentation | Resources
+page_title: jQuery Scheduler Documentation - Resources
 description: "Get started with the jQuery Scheduler by Kendo UI and learn how to use its resources."
 slug: resources_kendoui_scheduler_widget
 position: 4

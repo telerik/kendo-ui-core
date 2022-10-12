@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: jQuery ListView Documentation | Items
+page_title: jQuery ListView Documentation - Items
 description: "Get started with the jQuery ListView by Kendo UI and learn how to alternate its items."
 previous_url: /controls/data-management/listview/basic-usage
 slug: items_kendoui_listview

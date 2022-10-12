@@ -1,6 +1,6 @@
 ---
 title: Views
-page_title: jQuery Gantt Documentation | Views
+page_title: jQuery Gantt Documentation - Views
 description: "Get started with the jQuery Gantt by Kendo UI and learn how to initialize the widget and use its events."
 slug: views_kendoui_gantt
 position: 6

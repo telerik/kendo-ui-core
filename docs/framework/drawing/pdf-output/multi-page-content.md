@@ -1,6 +1,6 @@
 ---
 title: Multi-Page Content
-page_title: Multi-Page Content | Kendo UI Drawing Library
+page_title: Multi-Page Content - Kendo UI Drawing Library
 description: "Render multi-page content and apply manual or automatic page-breaking when you export files to PDF with the Kendo UI Drawing library."
 previous_url: /framework/drawing/drawing-dom#multi-page-content, /framework/drawing/drawing-dom#automatic-page-breaking, /framework/drawing/drawing-dom#splitting-page-content
 slug: multipagecontent_drawing

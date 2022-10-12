@@ -1,6 +1,6 @@
 ---
 title: Number Parsing
-page_title: Number Parsing | Kendo UI Globalization
+page_title: Number Parsing - Kendo UI Globalization
 description: "Learn how to parse a string as a whole number or floating point number in Kendo UI by using the specified culture."
 previous_url: /framework/globalization/numberparsing
 slug: numberparsing_kendoui_globalization

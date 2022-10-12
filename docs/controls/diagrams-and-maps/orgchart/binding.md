@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: Kendo UI for jQuery OrgChart Documentation | OrgChart Data Binding
+page_title: Kendo UI for jQuery OrgChart Documentation - OrgChart Data Binding
 description: "Get started with the Kendo UI for jQuery OrgChart and bind the widget to local or remote data."
 slug: databinding_kendoui_orgchart_widget
 position: 2

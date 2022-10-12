@@ -1,6 +1,6 @@
 ---
 title: Checked Switch
-page_title: jQuery Switch Documentation | Checked Switch
+page_title: jQuery Switch Documentation - Checked Switch
 description: "Get started with the jQuery Switch by Kendo UI and learn how to apply its checked and unchecked state."
 slug: checked_kendoui_switch_widget
 position: 3

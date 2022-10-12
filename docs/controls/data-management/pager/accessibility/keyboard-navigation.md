@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: jQuery Pager Documentation | Keyboard Navigation
+page_title: jQuery Pager Documentation - Keyboard Navigation
 description: "Get started with the jQuery Pager by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_pager_jquery
 position: 2

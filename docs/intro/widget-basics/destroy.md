@@ -1,6 +1,6 @@
 ---
 title: Destroying Widgets
-page_title: Destroying Widgets | Working with Widgets 
+page_title: Destroying Widgets - Working with Components 
 description: "Get started with Kendo UI for jQuery and learn how to destroy the widgets."
 previous_url: /framework/widgets/destroy
 slug: destroywidgets_kendoui_gettingstarted

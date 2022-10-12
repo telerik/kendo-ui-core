@@ -1,6 +1,6 @@
 ---
 title: Page Templates
-page_title: Page Templates | Kendo UI Drawing Library
+page_title: Page Templates - Kendo UI Drawing Library
 description: "Use page templates when you export content in PDF with the Kendo UI Drawing library."
 previous_url: /framework/drawing/drawing-dom#header-and-footer-templates
 slug: templates_drawing

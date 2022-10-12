@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery MultiSelect Documentation | MultiSelect Appearance
+page_title: jQuery MultiSelect Documentation - MultiSelect Appearance
 description: "Learn how to apply different styling options to the MultiSelect widget."
 slug: appearance_kendoui_multiselect_widget
 position: 9

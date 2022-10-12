@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery MultiSelect Documentation | MultiSelect Overview
+page_title: jQuery MultiSelect Documentation - MultiSelect Overview
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_multiselect_widget
 position: 1

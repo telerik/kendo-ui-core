@@ -1,6 +1,6 @@
 ---
 title: Display Modes
-page_title: jQuery Drawer Documentation | Display Modes
+page_title: jQuery Drawer Documentation - Display Modes
 description: "Get started with the jQuery Drawer by Kendo UI and use its display modes and handle its rendering."
 slug: displaymodes_kendoui_drawer
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Scale Options
-page_title: jQuery ArcGauge Documentation | Scale Options
+page_title: jQuery ArcGauge Documentation - Scale Options
 description: "Get started with the jQuery ArcGauge by Kendo UI and customize the options of its scale."
 slug: scale_kendoui_arcgauge
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Swatches
-page_title: Swatches | Sass Themes
+page_title: Swatches - Sass Themes
 description: "Learn about the swatches that come with the Kendo UI Sass themes."
 slug: sassbasedthemes_swatches_kendoui
 position: 5

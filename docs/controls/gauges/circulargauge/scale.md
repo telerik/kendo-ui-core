@@ -1,6 +1,6 @@
 ---
 title: Scale Options
-page_title: jQuery CircularGauge Documentation | Scale Options
+page_title: jQuery CircularGauge Documentation - Scale Options
 description: "Get started with the jQuery CircularGauge by Kendo UI and customize the options of its scale."
 slug: scale_kendoui_circulargauge
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery Scheduler Documentation | Data Binding
+page_title: jQuery Scheduler Documentation - Data Binding
 description: "Get started with the jQuery Scheduler by Kendo UI and bind the widget to local data arrays or remote data services."
 slug: databinding_kendoui_scheduler
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery RadioButton Documentation | RadioButton Overview
+page_title: jQuery RadioButton Documentation - RadioButton Overview
 description: "Get started with the jQuery RadioButton by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_radiobutton_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery Popover Documentation | Popover Templates
+page_title: jQuery Popover Documentation - Popover Templates
 description: "Learn how to use templates in the Kendo UI for jQuery Popover as its body and header contents."
 slug: templates_kendoui_popover_widget
 position: 2

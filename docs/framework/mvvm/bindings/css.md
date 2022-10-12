@@ -1,6 +1,6 @@
 ---
 title: CSS
-page_title: CSS Binding | Kendo UI MVVM
+page_title: CSS Binding - Kendo UI MVVM
 description: "Learn how to update the classes of the DOM element to a View-Model value with CSS binding in Kendo UI MVVM."
 slug: cssbinding_mvvm_kendoui
 ---

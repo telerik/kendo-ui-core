@@ -1,6 +1,6 @@
 ---
 title: Common Scenarios
-page_title: jQuery TreeView Documentation | Common Scenarios
+page_title: jQuery TreeView Documentation - Common Scenarios
 description: "Get started with the jQuery TreeView by Kendo UI and implement some common use-case scenarios."
 slug: commonscenarios_kendoui_treeview
 position: 20

@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery Drawer Documentation | Templates
+page_title: jQuery Drawer Documentation - Templates
 description: "Get started with the jQuery Drawer by Kendo UI and use the available templates."
 slug: templates_kendoui_drawer
 position: 4

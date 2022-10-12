@@ -1,6 +1,6 @@
 ---
 title: Custom Functions
-page_title: jQuery Spreadsheet Documentation | Custom Functions
+page_title: jQuery Spreadsheet Documentation - Custom Functions
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to make your own JavaScript functions in the widget."
 slug: custom_functions_spreadsheet_widget
 position: 6

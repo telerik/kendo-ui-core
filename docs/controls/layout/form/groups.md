@@ -1,6 +1,6 @@
 ---
 title: Groups
-page_title: Kendo UI for jQuery Form Documentation | Groups
+page_title: Kendo UI for jQuery Form Documentation - Groups
 description: "Get started with the Kendo UI for jQuery Form and learn how to set up groups."
 slug: groups_form_widget
 position: 5

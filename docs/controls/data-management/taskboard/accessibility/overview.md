@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Kendo UI for jQuery TaskBoard Documentation | TaskBoard Accessibility
+page_title: Kendo UI for jQuery TaskBoard Documentation - TaskBoard Accessibility
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_taskboard_widget
 position: 1

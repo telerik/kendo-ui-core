@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: jQuery Chat Documentation | Items
+page_title: jQuery Chat Documentation - Items
 description: "Get started with the jQuery Chat by Kendo UI and use the predefined Chat items and configure custom ones."
 slug: chat_items
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery CheckBoxGroup Documentation | CheckBoxGroup Overview
+page_title: jQuery CheckBoxGroup Documentation - CheckBoxGroup Overview
 description: "Get started with the jQuery CheckBoxGroup by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_checkboxgroup_widget
 position: 1

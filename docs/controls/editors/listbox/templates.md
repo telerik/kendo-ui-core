@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery ListBox Documentation | Templates
+page_title: jQuery ListBox Documentation - Templates
 description: "Get started with the jQuery ListBox by Kendo UI and implement templates for its items."
 slug: templates_kendoui_listbox_widget
 position: 5

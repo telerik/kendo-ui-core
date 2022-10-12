@@ -1,6 +1,6 @@
 ---
 title: Row Drag & Drop
-page_title: jQuery Grid Documentation | Row Drag & Drop
+page_title: jQuery Grid Documentation - Row Drag & Drop
 description: "Get started with the jQuery Grid by Kendo UI and learn all about the Row Drag & Drop feature."
 slug: draganddrop_kendoui_grid_widget
 position: 13

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery TextBox Documentation | TextBox Overview
+page_title: jQuery TextBox Documentation - TextBox Overview
 description: "Get started with the jQuery TextBox by Kendo UI and learn how to create and initialize the widget."
 slug: overview_kendoui_textbox_widget
 position: 1

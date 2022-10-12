@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Internationaization Overview | Kendo UI Globalization
+page_title: Internationaization Overview - Kendo UI Globalization
 description: "Learn how to adapt the Kendo UI for jQuery widgets to different cultures locales, and format and parse number or date objects."
 slug: overview_kendoui_intl
 position: 1

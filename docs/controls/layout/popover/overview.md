@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Popover Documentation | Popover Overview
+page_title: jQuery Popover Documentation - Popover Overview
 description: "Get started with the jQuery Popover by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_popover_widget
 position: 1

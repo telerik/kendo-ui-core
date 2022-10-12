@@ -1,6 +1,6 @@
 ---
 title: Categorical Charts
-page_title: jQuery Chart Documentation | Categorical Charts
+page_title: jQuery Chart Documentation - Categorical Charts
 description: "Learn the basics when working with the categorical charts in the Telerik UI for ASP.NET Core suite."
 slug: htmlhelpers_categoricalcharts_aspnetcore
 position: 2

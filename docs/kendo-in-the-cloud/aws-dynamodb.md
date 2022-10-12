@@ -1,6 +1,6 @@
 ---
 title: Amazon DynamoDB
-page_title: Amazon DynamoDB | Kendo UI in the Cloud
+page_title: Amazon DynamoDB - Kendo UI in the Cloud
 description: "Learn how to create and implement an Amazon DynamoDB table, and retrieve, write, and edit data in it with the Kendo UI Grid."
 slug: aws_dynamodb
 position: 3

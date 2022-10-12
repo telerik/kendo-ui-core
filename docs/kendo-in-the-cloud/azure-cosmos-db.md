@@ -1,6 +1,6 @@
 ---
 title: Azure Cosmos DB
-page_title: Azure Cosmos DB | Kendo UI in the Cloud
+page_title: Azure Cosmos DB - Kendo UI in the Cloud
 description: "Learn how to bind the Kendo UI Grid to Azure Cosmos DB and perform CRUD operations."
 slug: azure_cosmos_db
 position: 0

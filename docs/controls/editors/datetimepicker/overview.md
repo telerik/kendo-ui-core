@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery DateTimePicker Documentation | DateTimePicker Overview
+page_title: jQuery DateTimePicker Documentation - DateTimePicker Overview
 description: "Get started with the jQuery DateTimePicker by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_datetimepicker_widget
 position: 1

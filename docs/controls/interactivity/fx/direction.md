@@ -1,6 +1,6 @@
 ---
 title: Direction
-page_title: jQuery FX Documentation | Direction
+page_title: jQuery FX Documentation - Direction
 description: "Get started with the jQuery FX by Kendo UI and set the direction of the animation effects."
 slug: direction_kendoui_fxeffects
 position: 2

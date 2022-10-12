@@ -1,6 +1,6 @@
 ---
 title: Events
-page_title: jQuery Popover Documentation | Popover Events
+page_title: jQuery Popover Documentation - Popover Events
 description: "Learn how to use Popover events"
 slug: events_kendoui_popover_widget
 position: 3

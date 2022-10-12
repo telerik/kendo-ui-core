@@ -1,6 +1,6 @@
 ---
 title: Exporting Drawings to SVG
-page_title: Exporting Drawings to SVG | Kendo UI Drawing Library
+page_title: Exporting Drawings to SVG - Kendo UI Drawing Library
 description: "Export drawings to SVG by using the Kendo UI Drawing library."
 slug: exportingtosvg_drawing
 position: 6

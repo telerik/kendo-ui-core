@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Kendo UI for jQuery TaskBoard Documentation | TaskBoard Overview
+page_title: Kendo UI for jQuery TaskBoard Documentation - TaskBoard Overview
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn about its features and how to initialize the widget."
 slug: overview_kendoui_taskboard_widget
 position: 1

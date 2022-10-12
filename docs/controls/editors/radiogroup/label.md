@@ -1,6 +1,6 @@
 ---
 title: Label
-page_title: jQuery RadioGroup Documentation | Label
+page_title: jQuery RadioGroup Documentation - Label
 description: "Get started with the jQuery RadioGroup by Kendo UI and learn how to configure the label of the widget."
 slug: label_radiogroup_widget
 position: 3

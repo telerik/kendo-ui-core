@@ -1,6 +1,6 @@
 ---
 title: Use jsSignature
-page_title: Use jsSignature | Hybrid UI ListView
+page_title: Use jsSignature - Hybrid UI ListView
 description: "Learn how to use jsSignature in the Hybrid UI ListView."
 slug: howto_usejssignature_hybridlistview
 ---

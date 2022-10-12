@@ -1,6 +1,6 @@
 ---
 title: Printing
-page_title: jQuery Grid Documentation | Printing
+page_title: jQuery Grid Documentation - Printing
 description: "Get started with the jQuery Grid by Kendo UI allowing you to select only the Grid content on a page for printing."
 previous_url: /print-export
 slug: printing_kendoui_grid

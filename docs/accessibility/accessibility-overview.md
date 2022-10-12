@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Accessibility Support
+page_title: Overview - Kendo UI Accessibility Support
 description: "Learn about the general requirements web applications have to meet to be accessible and the Accessibility support Kendo UI controls provide."
 slug: overview_accessibility_support_kendoui
 position: 1

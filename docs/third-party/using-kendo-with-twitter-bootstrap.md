@@ -1,6 +1,6 @@
 ---
 title: Twitter Bootstrap
-page_title: Twitter Bootstrap | Kendo UI Third-Party Tools
+page_title: Twitter Bootstrap - Kendo UI Third-Party Tools
 description: "Learn more about the integration with the Twitter Bootstrap framework that Kendo UI provides to its users and enjoy the full set of resulting functionalities."
 previous_url: /using-kendo-with-twitter-bootstrap
 slug: twitterbootstrapintegration_integration_kendoui

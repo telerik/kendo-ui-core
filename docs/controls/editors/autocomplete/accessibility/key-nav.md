@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: jQuery AutoComplete Documentation | Keyboard Navigation
+page_title: jQuery AutoComplete Documentation - Keyboard Navigation
 description: "Get started with the jQuery AutoComplete by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_kendoui_autocomplete_widget
 position: 2

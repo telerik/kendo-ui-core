@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery ColorPicker Documentation | Appearance
+page_title: jQuery ColorPicker Documentation - Appearance
 description: "Learn how to apply different styling options to the ColorPicker widget."
 slug: appearance_kendoui_colorpicker_widget
 position: 5

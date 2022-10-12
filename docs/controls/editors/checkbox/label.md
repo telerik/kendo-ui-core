@@ -1,6 +1,6 @@
 ---
 title: Label
-page_title: jQuery CheckBox Documentation | Label
+page_title: jQuery CheckBox Documentation - Label
 description: "Get started with the jQuery CheckBox by Kendo UI and learn how to configure the label of the widget."
 slug: label_checkbox_widget
 position: 2

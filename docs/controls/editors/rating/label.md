@@ -1,6 +1,6 @@
 ---
 title: Label
-page_title: jQuery Rating Documentation | Label
+page_title: jQuery Rating Documentation - Label
 description: "Get started with the jQuery Rating by Kendo UI and learn how to configure the label of the widget."
 slug: label_rating_widget
 position: 4

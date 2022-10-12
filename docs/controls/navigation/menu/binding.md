@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery Menu Documentation | Data Binding
+page_title: jQuery Menu Documentation - Data Binding
 description: "Get started with the jQuery Menu by Kendo UI and bind the widget to local data arrays or to remote data services."
 slug: databinding_kendoui_menu
 position: 2

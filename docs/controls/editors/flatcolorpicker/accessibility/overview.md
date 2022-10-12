@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery FlatColorPicker Documentation | FlatColorPicker Accessibility
+page_title: jQuery FlatColorPicker Documentation - FlatColorPicker Accessibility
 description: "Get started with the jQuery FlatColorPicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_flatcolorpicker_widget
 position: 1

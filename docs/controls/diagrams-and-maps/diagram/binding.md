@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery Diagram Documentation | Data Binding
+page_title: jQuery Diagram Documentation - Data Binding
 description: "Get started with the jQuery Diagram by Kendo UI and learn how to bind the widget to data."
 slug: binding_kendoui_diagram
 position: 2

@@ -1,16 +1,16 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Layout
-page_title: Individual Scripts for Layout | Scripts 
+page_title: Individual Scripts for Layout - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Layout"
 slug: script_filesfor_layout_widgets
 ---
 
 # Individual Scripts for Layout
 
-The following table lists the individual script files for the Kendo UI widgets that manage the layout.&nbsp;&nbsp;
+The following table lists the individual script files for the Kendo UI components that manage the layout.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Badge](https://demos.telerik.com/kendo-ui/badge/index) | jquery.js | |
 | | kendo.core.js | |
@@ -18,15 +18,22 @@ The following table lists the individual script files for the Kendo UI widgets t
 | [Dialog](https://demos.telerik.com/kendo-ui/dialog/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
+| | kendo.floatinglabel.js | |
+| | kendo.textbox.js | |
 | | kendo.dialog.js | |
 | [ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.expansionpanel.js | |
 | [Form](https://demos.telerik.com/kendo-ui/form/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.toggleinputbase.js | |
+| | kendo.html.base.js | |
+| | kendo.html.input.js | |
+| | kendo.checkbox.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
 | | kendo.list.js | |
+| | kendo.html.button.js | |
 | | kendo.dropdownlist.js | |
 | | kendo.userevents.js | |
 | | kendo.selectable.js | |
@@ -39,6 +46,8 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.editable.js | |
 | | kendo.autocomplete.js | DropDowns feature (optional) |
 | | kendo.combobox.js | DropDowns feature (optional) |
+| | kendo.html.chip.js | DropDowns feature (optional) |
+| | kendo.html.chiplist.js | DropDowns feature (optional) |
 | | kendo.multiselect.js | DropDowns feature (optional) |
 | | kendo.treeview.js | DropDowns feature (optional) |
 | | kendo.dropdowntree.js | DropDowns feature (optional) |
@@ -54,11 +63,12 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.color.js | Inputs feature (optional) |
 | | kendo.badge.js | Inputs feature (optional) |
 | | kendo.button.js | Inputs feature (optional) |
+| | kendo.textbox.js | Inputs feature (optional) |
 | | kendo.colorpicker.js | Inputs feature (optional) |
 | | kendo.inputgroupbase.js | Inputs feature (optional) |
+| | kendo.radiobutton.js | Inputs feature (optional) |
 | | kendo.radiogroup.js | Inputs feature (optional) |
 | | kendo.checkboxgroup.js | Inputs feature (optional) |
-| | kendo.textbox.js | Inputs feature (optional) |
 | | kendo.textarea.js | Inputs feature (optional) |
 | | kendo.combobox.js | Editor feature (optional) |
 | | kendo.draganddrop.js | Editor feature (optional) |
@@ -67,6 +77,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.slider.js | Editor feature (optional) |
 | | kendo.badge.js | Editor feature (optional) |
 | | kendo.button.js | Editor feature (optional) |
+| | kendo.textbox.js | Editor feature (optional) |
 | | kendo.colorpicker.js | Editor feature (optional) |
 | | kendo.editor.js | Editor feature (optional) |
 | | kendo.form.js | |
@@ -113,7 +124,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 ## See Also
 
-+ [Scripts for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Scripts for Data Management Components]({% slug script_filesfor_datamanagement_widgets %})
 + [Scripts for Editors]({% slug script_filesfor_editors_widgets %})
 + [Scripts for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Scripts for Charts]({% slug script_filesfor_charts_widgets %})

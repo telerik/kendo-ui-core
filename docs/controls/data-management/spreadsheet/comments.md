@@ -1,6 +1,6 @@
 ---
 title: Comments
-page_title: jQuery Spreadsheet Documentation | Comments
+page_title: jQuery Spreadsheet Documentation - Comments
 description: "Get started with the jQuery Spreadsheet by Kendo UI and define the comments in its cells."
 slug: comments_spreadsheet_widget
 position: 3

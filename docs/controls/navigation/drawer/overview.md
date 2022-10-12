@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Drawer Documentation | Drawer Overview
+page_title: jQuery Drawer Documentation - Drawer Overview
 description: "Get started with the jQuery Drawer by Kendo UI, initialize single or multiple buttons, and reference existing Button instances."
 slug: overview_kendoui_drawer_widget
 position: 1

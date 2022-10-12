@@ -1,16 +1,16 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: PDF
-page_title: Individual Scripts for PDF | Scripts 
+page_title: Individual Scripts for PDF - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI PDF"
 slug: script_filesfor_pdf
 ---
 
 # Individual Scripts for PDF
 
-The following table lists the individual script files for the Kendo UI PDF export framework and widgets.&nbsp;&nbsp;
+The following table lists the individual script files for the Kendo UI PDF export framework and components.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer/index) | jquery.js | |
 | | kendo.core.js | |
@@ -23,6 +23,9 @@ The following table lists the individual script files for the Kendo UI PDF expor
 | | kendo.dialog.js | |
 | | kendo.html.base.js | |
 | | kendo.html.button.js | |
+| | kendo.button.menu.js | |
+| | kendo.splitbutton.js | |
+| | kendo.dropdownbutton.js | |
 | | kendo.toolbar.js | |
 | | kendo.fx.js | |
 | | kendo.mobile.scroller.js | |
@@ -39,7 +42,7 @@ The following table lists the individual script files for the Kendo UI PDF expor
 
 ## See Also
 
-+ [Scripts for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Scripts for Data Management Components]({% slug script_filesfor_datamanagement_widgets %})
 + [Scripts for Editors]({% slug script_filesfor_editors_widgets %})
 + [Scripts for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Scripts for Charts]({% slug script_filesfor_charts_widgets %})

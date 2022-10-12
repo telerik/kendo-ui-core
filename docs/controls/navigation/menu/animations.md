@@ -1,6 +1,6 @@
 ---
 title: Animations
-page_title: jQuery Menu Documentation | Animations
+page_title: jQuery Menu Documentation - Animations
 description: "Get started with the jQuery Menu by Kendo UI and configure the animations of the widget."
 slug: animations_kendoui_menu
 position: 3

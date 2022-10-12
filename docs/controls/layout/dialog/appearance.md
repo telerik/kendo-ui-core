@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery Dialog Documentation | Appearance
+page_title: jQuery Dialog Documentation - Appearance
 description: "Get started with the jQuery Dialog by Kendo UI and set its size and dimensions."
 slug: appearance_kendoui_dialog
 position: 6

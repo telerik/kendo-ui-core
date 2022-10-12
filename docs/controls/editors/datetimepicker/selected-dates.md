@@ -1,6 +1,6 @@
 ---
 title: Selected Date and Time
-page_title: jQuery DateTimePicker Documentation | Selected Date and Time
+page_title: jQuery DateTimePicker Documentation - Selected Date and Time
 description: "Get started with the jQuery DateTimePicker by Kendo UI and learn how to select dates and time slots in the widget."
 slug: selecteddatestimes_kendoui_datetimepicker
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI ActionSheet
+page_title: Overview - Hybrid UI ActionSheet
 description: "Initiate the Hybrid UI ActionSheet to display a set of choices in Kendo UI."
 slug: overview_hybridactionsheet
 position: 1

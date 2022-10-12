@@ -1,6 +1,6 @@
 ---
 title: View
-page_title: View | Kendo UI Single-Page Application
+page_title: View - Kendo UI Single-Page Application
 description: "Learn how to handle the view class in a Kendo UI Single-Page Application."
 slug: viewclass_kendoui_singlepageapplication
 position: 4

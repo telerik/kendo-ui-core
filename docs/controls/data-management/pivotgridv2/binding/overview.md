@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery PivotGridV2 Documentation | Data Binding
+page_title: jQuery PivotGridV2 Documentation - Data Binding
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn about the OLAP cube configuration for performing data binding."
 slug: databinding_kendoui_pivotgridv2
 position: 1

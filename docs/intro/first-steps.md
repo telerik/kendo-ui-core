@@ -1,6 +1,6 @@
 ---
 title: First Steps
-page_title: First Steps with Your Kendo UI for jQuery Project Guide | Getting Started 
+page_title: First Steps with Your Kendo UI for jQuery Project Guide - Getting Started 
 description: "A guide on getting started with Kendo UI for jQuery, showing how to add the necessary CSS and JavaScript files, and implement the Grid widget."
 previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, /bootstrapper, /intro/installation/getting-started
 slug: getting_started_installation_kendoui

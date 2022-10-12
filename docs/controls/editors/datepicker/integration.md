@@ -1,6 +1,6 @@
 ---
 title: DateInput Integration
-page_title: jQuery DatePicker Documentation | DateInput Integration
+page_title: jQuery DatePicker Documentation - DateInput Integration
 description: "Get started with the jQuery DatePicker by Kendo UI and learn how to integrate it with the Kendo UI for jQuery DateInput."
 slug: dateinputintegration_datepicker
 position: 11

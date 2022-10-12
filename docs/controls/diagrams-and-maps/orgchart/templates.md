@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery OrgChart Documentation | Templates
+page_title: jQuery OrgChart Documentation - Templates
 description: "Get started with the jQuery OrgChart by Kendo UI and implement its node and groupHeader templates."
 slug: templates_kendoui_orgchart_widget
 position: 4

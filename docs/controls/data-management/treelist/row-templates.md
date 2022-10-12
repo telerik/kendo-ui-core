@@ -1,6 +1,6 @@
 ---
 title: Row Templates
-page_title: jQuery TreeList Documentation | Row Templates
+page_title: jQuery TreeList Documentation - Row Templates
 description: "Get started with the jQuery TreeList by Kendo UI and learn how to place custom content into a treelist row with the help of row templates."
 slug: row_templates_kendoui_treelist_widget
 position: 3

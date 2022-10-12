@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-page_title: jQuery Grid Documentation | Getting Started with the Grid
+page_title: jQuery Grid Documentation - Getting Started with the Grid
 description: "Get started with the jQuery Grid by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: getting_started_kendoui_grid_widget
 position: 1

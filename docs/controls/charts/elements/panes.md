@@ -1,6 +1,6 @@
 ---
 title: Panes
-page_title: jQuery Chart Documentation | Panes
+page_title: jQuery Chart Documentation - Panes
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its panes."
 slug: panes_charts_widget
 ---

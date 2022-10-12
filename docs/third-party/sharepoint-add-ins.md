@@ -1,6 +1,6 @@
 ---
 title: SharePoint Add-Ins
-page_title: SharePoint Add-Ins | Kendo UI Third-Party Frameworks
+page_title: SharePoint Add-Ins - Kendo UI Third-Party Frameworks
 description: "Learn in theory and in practice how to build SharePoint add-ins with Kendo UI."
 slug: sharepoint_tutorials
 ---

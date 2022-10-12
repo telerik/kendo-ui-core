@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Kendo UI for jQuery Form Documentation | Form Accessibility
+page_title: Kendo UI for jQuery Form Documentation - Form Accessibility
 description: "Get started with the Kendo UI for jQuery Form and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_form_widget
 position: 1

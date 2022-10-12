@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery PivotGridV2 Documentation | Templates
+page_title: jQuery PivotGridV2 Documentation - Templates
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to use its templates."
 slug: templates_kendoui_pivotgridv2
 position: 3

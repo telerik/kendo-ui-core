@@ -1,6 +1,6 @@
 ---
 title: Sorting
-page_title: jQuery PivotGrid Documentation | Sorting
+page_title: jQuery PivotGrid Documentation - Sorting
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to sort the widget."
 slug: sorting_kendoui_pivotgrid
 position: 4

@@ -1,6 +1,6 @@
 ---
 title: Telerik Data Access
-page_title: Telerik Data Access | Kendo UI Third-Party Tools
+page_title: Telerik Data Access - Kendo UI Third-Party Tools
 description: "Learn how to leverage Telerik Data Access Framework on the backend and let Kendo UI take care of the user interface."
 previous_url: /using-kendo-with-open-access, /third-party/using-kendo-with-open-access.html
 slug: bindtotelerikdataaccesstool_integration_kendoui

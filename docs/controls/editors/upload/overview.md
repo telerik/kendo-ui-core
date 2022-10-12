@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Upload Documentation | Upload Overview
+page_title: jQuery Upload Documentation - Upload Overview
 description: "Try now the Kendo UI for jQuery Upload component covering everything from operation modes and templates to file processing and dragging and dropping."
 slug: overview_kendoui_upload_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Calendar Types
-page_title: jQuery DatePicker Documentation | Calendar Types
+page_title: jQuery DatePicker Documentation - Calendar Types
 description: "Get started with the jQuery DatePicker by Kendo UI and learn how to work around the default calendar type implementation and simulate other calendar types."
 slug: calendartypes_datepicker
 position: 8

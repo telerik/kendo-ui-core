@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Filter Documentation | Filter Globalization
+page_title: jQuery Filter Documentation - Filter Globalization
 description: "Get started with the jQuery Filter by Kendo UI and learn about the globalization options it supports."
 slug: globalization_kendoui_filter_widget
 position: 1

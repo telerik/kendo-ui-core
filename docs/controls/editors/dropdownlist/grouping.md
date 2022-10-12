@@ -1,6 +1,6 @@
 ---
 title: Grouping
-page_title: jQuery DropDownList Documentation | Grouping
+page_title: jQuery DropDownList Documentation - Grouping
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to configure its grouping functionality."
 slug: grouping_kendoui_ddl_widget
 position: 3

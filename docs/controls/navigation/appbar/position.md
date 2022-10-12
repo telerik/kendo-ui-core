@@ -1,6 +1,6 @@
 ---
 title: Positioning
-page_title: jQuery AppBar Documentation | Positioning
+page_title: jQuery AppBar Documentation - Positioning
 description: "Learn how to configure the position of the jQuery AppBar widget."
 slug: position_kendoui_appbar_widget
 position: 3

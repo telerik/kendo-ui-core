@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ColorPalette Documentation | ColorPalette Overview
+page_title: jQuery ColorPalette Documentation - ColorPalette Overview
 description: "Get started with the jQuery ColorPalette by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_colorpalette_widget
 position: 1

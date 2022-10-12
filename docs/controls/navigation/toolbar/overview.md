@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ToolBar Documentation | ToolBar Overview
+page_title: jQuery ToolBar Documentation - ToolBar Overview
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to initialize the widget and use its events."
 slug: overview_kendoui_toolbar_widget
 relatedDocs: api-web-toolbar

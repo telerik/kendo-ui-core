@@ -1,6 +1,6 @@
 ---
 title: Formats
-page_title: jQuery TimePicker Documentation | Formats
+page_title: jQuery TimePicker Documentation - Formats
 description: "Get started with the jQuery TimePicker by Kendo UI and learn how to define its time format."
 slug: formats_kendoui_timepicker
 position: 4

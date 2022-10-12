@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Wizard Documentation | Wizard Keyboard Accessibility
+page_title: jQuery Wizard Documentation - Wizard Keyboard Accessibility
 description: "Get started with the jQuery Wizard by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_wizard_widget
 position: 1

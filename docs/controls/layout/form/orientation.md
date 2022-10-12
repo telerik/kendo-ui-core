@@ -1,6 +1,6 @@
 ---
 title: Orientation
-page_title: Kendo UI for jQuery Form Documentation | Orientation
+page_title: Kendo UI for jQuery Form Documentation - Orientation
 description: "Get started with the Kendo UI for jQuery Form and learn about its orientation options."
 slug: orientation_form_widget
 position: 6

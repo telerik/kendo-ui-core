@@ -1,6 +1,6 @@
 ---
 title: Title and Subtitle
-page_title: jQuery Chart Documentation | Title and Subtitle
+page_title: jQuery Chart Documentation - Title and Subtitle
 description: "Get started with the jQuery Chart by Kendo UI and learn how to control its appearance, change its themes and manage its animated transitions."
 previous_url: /controls/charts/title-legend
 slug: title_features_charts

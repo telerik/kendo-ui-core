@@ -1,6 +1,6 @@
 ---
 title: Chat Bot Services
-page_title: jQuery Chat Documentation | Chat Bot Services
+page_title: jQuery Chat Documentation - Chat Bot Services
 description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat widget to an existing Bot framework / service of choice."
 previous_url: /controls/conversational-ui/chat/configure-chat-agent
 slug: connect_to_chatbot_service

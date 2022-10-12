@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Wizard Documentation | Wizard Overview
+page_title: jQuery Wizard Documentation - Wizard Overview
 description: "Get started with the jQuery Wizard by Kendo UI and learn how to initialize the widget."
 slug: overview_wizard_widget
 position: 1

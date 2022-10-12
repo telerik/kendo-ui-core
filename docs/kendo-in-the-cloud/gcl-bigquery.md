@@ -1,6 +1,6 @@
 ---
 title: Google Cloud Big Query
-page_title: Google Cloud Big Query | Kendo UI in the Cloud
+page_title: Google Cloud Big Query - Kendo UI in the Cloud
 description: "Learn how to bind the Kendo UI Grid to data that is served through Google Cloud Big Query."
 slug: gcl-bigquery
 position: 4

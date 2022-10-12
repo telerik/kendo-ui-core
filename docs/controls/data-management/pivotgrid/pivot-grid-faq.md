@@ -1,6 +1,6 @@
 ---
 title: FAQ
-page_title: jQuery PivotGrid Documentation | Frequently Asked Questions
+page_title: jQuery PivotGrid Documentation - Frequently Asked Questions
 description: "Get started with the jQuery PivotGrid by Kendo UI and find the most frequently asked questions related to the Kendo UI PivotGrid widget and their answers."
 slug: frequently_asked_questions_pivotgrid
 position: 80

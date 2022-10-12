@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery AutoComplete Documentation | Appearance
+page_title: jQuery AutoComplete Documentation - Appearance
 description: "Get started with the jQuery AutoComplete by Kendo UI and set its list and popup widths, access the list elements, and remove its input values."
 slug: sizedimensions_kendoui_autocomplete
 position: 7

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery BottomNavigation Documentation | BottomNavigation Accessibility
+page_title: jQuery BottomNavigation Documentation - BottomNavigation Accessibility
 description: "Get started with the jQuery BottomNavigation and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_bottomnavigation_widget
 position: 1

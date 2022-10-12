@@ -1,6 +1,6 @@
 ---
 title: Disabled Dates
-page_title: jQuery DatePicker Documentation | Disabled Dates
+page_title: jQuery DatePicker Documentation - Disabled Dates
 description: "Get started with the jQuery DatePicker by Kendo UI and learn how to disable specific dates in the widget."
 slug: disableddates_datepicker
 position: 3

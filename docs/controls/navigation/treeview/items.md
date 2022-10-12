@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: jQuery TreeView Documentation | Items
+page_title: jQuery TreeView Documentation - Items
 description: "Get started with the jQuery TreeView by Kendo UI and handle its item properties."
 slug: items_kendoui_treeview
 position: 4

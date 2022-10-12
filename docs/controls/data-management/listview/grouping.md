@@ -1,6 +1,6 @@
 ---
 title: Grouping
-page_title: jQuery ListView Documentation | Grouping
+page_title: jQuery ListView Documentation - Grouping
 description: "Get started with the jQuery ListView by Kendo UI and learn how to implement its grouping functionality."
 slug: grouping_kendoui_listview
 position: 5

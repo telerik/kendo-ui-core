@@ -1,6 +1,6 @@
 ---
 title: Part 1 - Hello jQuery
-page_title: Part 1 - Hello jQuery | Kendo UI Third-Party Frameworks
+page_title: Part 1 - Hello jQuery - Kendo UI Third-Party Frameworks
 description: "Learn how to build an HTML application in ASP.NET by installing jQuery and then use it with Web Forms and the Internet Explorer F12 Developer Tools."
 previous_url: /third-party/tutorials/webforms/asp-net-hello-jquery
 slug: part1_aspnetwebforms_tutorials

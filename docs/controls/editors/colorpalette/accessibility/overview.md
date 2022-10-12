@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ColorPalette Documentation | ColorPalette Accessibility
+page_title: jQuery ColorPalette Documentation - ColorPalette Accessibility
 description: "Get started with the jQuery ColorPalette and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_colorpalette_widget
 position: 1

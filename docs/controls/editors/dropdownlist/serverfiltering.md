@@ -1,6 +1,6 @@
 ---
 title: Server Filtering
-page_title: jQuery DropDownList Documentation | Server Filtering
+page_title: jQuery DropDownList Documentation - Server Filtering
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to filter its data on the server."
 slug: server_filtering_kendoui_ddl_widget
 position: 4

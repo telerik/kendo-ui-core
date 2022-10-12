@@ -1,6 +1,6 @@
 ---
 title: Integration
-page_title: jQuery Loader Documentation | Integration
+page_title: jQuery Loader Documentation - Integration
 description: "Integrating the Kendo UI for jQuery Loader component."
 slug: integration_kendoui_loader
 position: 3

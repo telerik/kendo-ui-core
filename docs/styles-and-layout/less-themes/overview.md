@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Less Themes
+page_title: Overview - Less Themes
 description: "Learn about the overall idea of the Kendo UI Less themes."
 previous_url: /web/appearance-styling, /web/appearance-rtl, /dataviz/appearance-styling, /themebuilder.html, /styles-and-layout/troubleshoot/troubleshooting, /styles-and-layout/troubleshooting, /styles-and-layout/appearance-styling
 slug: themesandappearnce_kendoui_desktopwidgets

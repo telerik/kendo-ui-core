@@ -1,6 +1,6 @@
 ---
 title: Installation
-page_title: Installation | Sass Themes
+page_title: Installation - Sass Themes
 description: "Learn how to set up and configure the Kendo UI Sass themes."
 slug: sassbasedthemes_installation_kendoui
 position: 2

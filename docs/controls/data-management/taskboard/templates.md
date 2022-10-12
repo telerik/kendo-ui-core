@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: Kendo UI for jQuery TaskBoard Documentation | Templates
+page_title: Kendo UI for jQuery TaskBoard Documentation - Templates
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn how to customize its templates."
 slug: templates_kendoui_taskboard_widget
 position: 8

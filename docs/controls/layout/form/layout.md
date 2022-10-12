@@ -1,6 +1,6 @@
 ---
 title: Layout
-page_title: Kendo UI for jQuery Form Documentation | Layout
+page_title: Kendo UI for jQuery Form Documentation - Layout
 description: "Get started with the Kendo UI for jQuery Form and learn about the layouts it supports."
 slug: layout_form_widget
 position: 4

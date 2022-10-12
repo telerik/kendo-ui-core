@@ -1,6 +1,6 @@
 ---
 title: Aligning and Positioning
-page_title: jQuery Popup Documentation | Aligning and Positioning
+page_title: jQuery Popup Documentation - Aligning and Positioning
 description: "Get started with the jQuery Popup by Kendo UI and align and position the widget."
 slug: alignposition_kendoui_popup
 position: 2

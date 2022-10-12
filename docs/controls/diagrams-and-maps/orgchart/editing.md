@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Kendo UI for jQuery OrgChart Documentation | Editing
+page_title: Kendo UI for jQuery OrgChart Documentation - Editing
 description: "Get started with the Kendo UI for jQuery OrgChart and learn how to implement its editing functionality."
 slug: editing_kendoui_orgchart_widget
 position: 3

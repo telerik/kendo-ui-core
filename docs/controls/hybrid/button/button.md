@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI Button
+page_title: Overview - Hybrid UI Button
 description: "Initialize the Hybrid UI Button, customize its appearance, and set a button icon in Kendo UI."
 slug: overview_hybridbutton
 position: 1

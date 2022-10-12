@@ -1,6 +1,6 @@
 ---
 title: Multi-Column Headers
-page_title: jQuery TreeList Documentation | Multi-Column Headers
+page_title: jQuery TreeList Documentation - Multi-Column Headers
 description: "Get started with the jQuery TreeList by Kendo UI and implement multi-column headers in the widget."
 slug: multicolumnheaders_kendoui_treelist
 position: 6

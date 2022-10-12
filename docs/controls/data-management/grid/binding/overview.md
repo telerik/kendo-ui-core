@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Data Binding Overview
+page_title: jQuery Grid Documentation - Data Binding Overview
 description: "Get started with the jQuery Grid by Kendo UI and learn how to disable the default data binding behavior and how to bind the Grid to local data arrays and to remote data sources."
 previous_url: /data-binding
 slug: data_binding_grid

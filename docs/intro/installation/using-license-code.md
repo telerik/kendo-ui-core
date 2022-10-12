@@ -1,6 +1,6 @@
 ---
 title: Using Script License File
-page_title: Using Script License File | Download and Installation 
+page_title: Using Script License File - Download and Installation 
 description: "Get started with Kendo UI for jQuery and learn how to acquire the library from the NPM distribution channel and register the script license file."
 slug: using-license-code
 position: 5

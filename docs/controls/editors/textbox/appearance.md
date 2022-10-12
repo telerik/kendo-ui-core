@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery TextBox Documentation | TextBox Appearance
+page_title: jQuery TextBox Documentation - TextBox Appearance
 description: "Learn how to apply different styling options to the TextBox widget."
 previous_url: /styles-and-layout/styling-components/textbox-styling
 slug: appearance_kendoui_textbox_widget

@@ -1,6 +1,6 @@
 ---
 title: OLAP Fundamentals
-page_title: jQuery PivotGridV2 Documentation | OLAP Fundamentals
+page_title: jQuery PivotGridV2 Documentation - OLAP Fundamentals
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and review all fundamental concepts related to the widget."
 slug: olap_fundamentals_pivotgridv2
 position: 2

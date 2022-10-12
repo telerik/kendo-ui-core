@@ -1,6 +1,6 @@
 ---
 title: Printing
-page_title: jQuery Dialog Documentation | Printing
+page_title: jQuery Dialog Documentation - Printing
 description: "Get started with the jQuery Dialog by Kendo UI and print only the visible part of the widget."
 slug: printing_kendoui_dialog
 position: 5

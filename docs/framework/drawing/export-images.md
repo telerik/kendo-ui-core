@@ -1,6 +1,6 @@
 ---
 title: Exporting Drawings to Images
-page_title: Exporting Drawings to Images | Kendo UI Drawing Library
+page_title: Exporting Drawings to Images - Kendo UI Drawing Library
 description: "Export drawings to images by using the Kendo UI Drawing library."
 slug: exportpng_kendoui_drawingapi
 position: 5

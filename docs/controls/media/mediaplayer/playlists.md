@@ -1,6 +1,6 @@
 ---
 title: Playlists
-page_title: jQuery MediaPlayer Documentation | Playlists
+page_title: jQuery MediaPlayer Documentation - Playlists
 description: "Get started with the jQuery MediaPlayer by Kendo UI and create your own playlist or prevent the user from seeking forward."
 slug: playlists_kendoui_mediaplayer
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Azure Functions
-page_title: Azure Functions | Kendo UI in the Cloud
+page_title: Azure Functions - Kendo UI in the Cloud
 description: "Learn how to implement Azure Functions to execute remote CRUD operations for the Kendo UI Grid."
 slug: azure_functions
 position: 1

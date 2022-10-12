@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery TimePicker Documentation | TimePicker Appearance
+page_title: jQuery TimePicker Documentation - TimePicker Appearance
 description: "Learn how to apply different styling options to the TimePicker widget."
 slug: appearance_kendoui_timepicker_widget
 position: 2

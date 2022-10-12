@@ -1,6 +1,6 @@
 ---
 title: Navigation
-page_title: jQuery Breadcrumb Documentation | Navigation
+page_title: jQuery Breadcrumb Documentation - Navigation
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn how to use the Navigation configuration of the widget."
 slug: navigation_breadcrumb_widget
 position: 5

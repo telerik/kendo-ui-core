@@ -1,6 +1,6 @@
 ---
 title: Filtering
-page_title: jQuery TreeList Documentation | Filtering
+page_title: jQuery TreeList Documentation - Filtering
 description: "Get started with the jQuery TreeList by Kendo UI and learn how to filter its data."
 slug: filtering_kendoui_treelist_widget
 position: 4

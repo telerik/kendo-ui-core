@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery DropDownButton Documentation | Appearance
+page_title: jQuery DropDownButton Documentation - Appearance
 description: "Learn how to apply different styling options to the DropDownButton widget."
 slug: appearance_kendoui_dropdownbutton_widget
 position: 3

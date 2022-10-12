@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI Switch
+page_title: Overview - Hybrid UI Switch
 description: "Display two exclusive choices with the hybrid mobile Kendo UI Switch widget, check and uncheck, and tailor on and off its labels."
 slug: overview_hybridswitch
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Date and Time Formatting
-page_title: jQuery DateTimePicker Documentation | Date and Time Formatting
+page_title: jQuery DateTimePicker Documentation - Date and Time Formatting
 description: "Get started with the jQuery DateTimePicker by Kendo UI and learn how to define its date and time format."
 slug: datetimeformats_kendoui_datetimepicker_widget
 position: 6

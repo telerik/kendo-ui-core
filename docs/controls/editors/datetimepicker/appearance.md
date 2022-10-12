@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery DateTimePicker Documentation | DateTimePicker Appearance
+page_title: jQuery DateTimePicker Documentation - DateTimePicker Appearance
 description: "Learn how to apply different styling options to the DateTimePicker widget."
 slug: appearance_kendoui_datetimepicker_widget
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Editing Widgets
-page_title: Editing Widgets | Working with Widgets 
+page_title: Editing Widgets - Working with Components 
 description: "Get started with Kendo UI for jQuery and learn how to configure editing for editable widgets like the Grid, Scheduler, and ListView."
 slug: kendoui_editing_gettingstarted
 position: 50

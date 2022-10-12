@@ -1,6 +1,6 @@
 ---
 title: Methods, Events, and References 
-page_title: Methods, Events, and References | Working with Widgets 
+page_title: Methods, Events, and References - Working with Components 
 description: "Get started with Kendo UI for jQuery, obtain a reference to initialized widget instances and call their methods and events."
 previous_url: /basics/events-and-methods, /intro/events-and-methods, /intro/installation/events-and-methods
 slug: widget_methodsand_events_kendoui_installation

@@ -1,6 +1,6 @@
 ---
 title: Common Scenarios
-page_title: jQuery Drag-and-Drop Documentation | Common Scenarios
+page_title: jQuery Drag-and-Drop Documentation - Common Scenarios
 description: "Get started with the jQuery Drag-and-Drop by Kendo UI and handle some of the common scenarios when using the drag-and-drop functionality."
 slug: scenarios_kendoui_draganddrop
 position: 2

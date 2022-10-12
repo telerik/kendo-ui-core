@@ -1,6 +1,6 @@
 ---
 title: List of Formulas and Functions
-page_title: jQuery Spreadsheet Documentation | List of Formulas and Functions
+page_title: jQuery Spreadsheet Documentation - List of Formulas and Functions
 description: "Get started with the jQuery Spreadsheet by Kendo UI and check out the list of its formulas and functions."
 slug: list_offormulas_andfunctions_spreadsheet_widget
 position: 2

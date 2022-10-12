@@ -1,6 +1,6 @@
 ---
 title: Basic Shapes
-page_title: Drawing of Basic Shapes | Kendo UI Drawing Library
+page_title: Drawing of Basic Shapes - Kendo UI Drawing Library
 description: "Learn how to draw basic forms by using the Kendo UI Drawing API."
 previous_url: /framework/drawing/basic-shapes
 slug: basicshapes_drawingapi

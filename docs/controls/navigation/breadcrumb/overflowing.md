@@ -1,6 +1,6 @@
 ---
 title: Overflowing
-page_title: jQuery Breadcrumb Documentation | Overflowing
+page_title: jQuery Breadcrumb Documentation - Overflowing
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn the overflowing functionality."
 slug: overflowing_breadcrumb_widget
 position: 6

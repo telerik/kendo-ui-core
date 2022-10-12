@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery DropDownTree Documentation | Templates
+page_title: jQuery DropDownTree Documentation - Templates
 description: "Get started with the jQuery DropDownTree by Kendo UI and use the node, value, header, footer, and no-data template in the widget."
 slug: templates_kendoui_dropdowntree
 position: 6

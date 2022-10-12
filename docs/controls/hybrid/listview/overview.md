@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI ListView
+page_title: Overview - Hybrid UI ListView
 description: "Initialize and take full advantage of the Hybrid UI ListView widget in the Kendo UI framework."
 slug: overview_hybridlistview
 position: 1

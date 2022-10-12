@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Chat Documentation | Chat Overview
+page_title: jQuery Chat Documentation - Chat Overview
 description: "Get started with the jQuery Chat by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_chat_widget
 position: 1

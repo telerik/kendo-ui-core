@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery ToolBar Documentation | Templates
+page_title: jQuery ToolBar Documentation - Templates
 description: "Get started with the jQuery ToolBar by Kendo UI and define custom items with templates."
 slug: templates_kendoui_toolbar
 position: 3

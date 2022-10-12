@@ -1,6 +1,6 @@
 ---
 title: Font Icons
-page_title: Font Icons | Sass Themes
+page_title: Font Icons - Sass Themes
 description: "Learn about the available Kendo UI Font Icons."
 previous_url: /web/icons-web, /styles-and-layout/icons-web
 slug: webfonticons_kendoui_desktopwidgets

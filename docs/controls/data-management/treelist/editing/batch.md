@@ -1,6 +1,6 @@
 ---
 title: Incell
-page_title: jQuery TreeList Documentation | Incell Editing
+page_title: jQuery TreeList Documentation - Incell Editing
 description: "Get started with the jQuery TreeList by Kendo UI and enable incell edit mode and batch updates."
 slug: batcheditmode_kendoui_treelist
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: RGB and HEX Formats
-page_title: jQuery ColorPicker Documentation | ColorPicker RGB and HEX Formats
+page_title: jQuery ColorPicker Documentation - ColorPicker RGB and HEX Formats
 description: "Check out the RGB and HEX input formats in the ColorPicker."
 slug: rgb_hex_kendoui_colorpicker_widget
 position: 3

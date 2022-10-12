@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery ArcGauge Documentation | Templates
+page_title: jQuery ArcGauge Documentation - Templates
 description: "Get started with the jQuery ArcGauge by Kendo UI and customize the content of its center by using the center template."
 slug: centertemplate_kendoui_arcgauge
 position: 4

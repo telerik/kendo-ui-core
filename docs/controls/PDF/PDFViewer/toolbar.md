@@ -1,6 +1,6 @@
 ---
 title: Toolbar and Tools
-page_title: jQuery PDFViewer Documentation | Toolbar and Tools
+page_title: jQuery PDFViewer Documentation - Toolbar and Tools
 description: "Get started with the jQuery PDFViewer by Kendo UI and use and define the tools in its toolbar."
 slug: toolbar_pdfviewer_widget
 position: 4

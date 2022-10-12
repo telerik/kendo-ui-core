@@ -1,6 +1,6 @@
 ---
 title: Media
-page_title: jQuery Grid Documentation | Column Media
+page_title: jQuery Grid Documentation - Column Media
 description: "Get started with the jQuery Grid by Kendo UI and learn how to set a visibility condition on the columns."
 slug: column_media_kendoui_grid_widget
 position: 11

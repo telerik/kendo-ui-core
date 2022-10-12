@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: jQuery Pager Documentation | Localization
+page_title: jQuery Pager Documentation - Localization
 description: "Get started with the jQuery Pager by Kendo UI and learn how to localize the text of its messages."
 slug: localization_kendoui_pager_widget
 ---

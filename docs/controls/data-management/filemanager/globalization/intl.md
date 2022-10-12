@@ -1,6 +1,6 @@
 ---
 title: Internationalization
-page_title: jQuery FileManager Documentation | FileManager Internationalization
+page_title: jQuery FileManager Documentation - FileManager Internationalization
 description: "Get started with the jQuery FileManager by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
 slug: intl_kendoui_filemanager_widget
 position: 2

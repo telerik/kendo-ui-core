@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery NumericTextBox Documentation | NumericTextBox Accessibility
+page_title: jQuery NumericTextBox Documentation - NumericTextBox Accessibility
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_numerictextbox
 position: 1

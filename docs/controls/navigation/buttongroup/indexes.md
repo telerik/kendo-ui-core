@@ -1,6 +1,6 @@
 ---
 title: Index
-page_title: jQuery ButtonGroup Documentation | Index
+page_title: jQuery ButtonGroup Documentation - Index
 description: "Get started with the jQuery ButtonGroup by Kendo UI and configure its initially selected index."
 slug: index_kendoui_buttongroup
 position: 4

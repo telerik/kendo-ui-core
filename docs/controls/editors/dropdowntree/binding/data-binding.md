@@ -1,6 +1,6 @@
 ---
 title: Local and Remote Data
-page_title: jQuery DropDownTree Documentation | Local and Remote Data Binding
+page_title: jQuery DropDownTree Documentation - Local and Remote Data Binding
 description: "Get started with the jQuery DropDownTree by Kendo UI and bind the widget to local or remote data."
 slug: databinding_kendoui_dropdowntree
 position: 1

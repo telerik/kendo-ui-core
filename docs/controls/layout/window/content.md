@@ -1,6 +1,6 @@
 ---
 title: Content Operations
-page_title: jQuery Window Documentation | Content Operations
+page_title: jQuery Window Documentation - Content Operations
 description: "Get started with the jQuery Window by Kendo UI and learn how to print its content, control its content when it is displayed in an iframe, and asynchronously load its content with AJAX."
 slug: content_window
 position: 6

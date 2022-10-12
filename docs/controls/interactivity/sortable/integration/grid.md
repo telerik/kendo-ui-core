@@ -1,6 +1,6 @@
 ---
 title: Grid
-page_title: jQuery Sortable Documentation | Grid Integration
+page_title: jQuery Sortable Documentation - Grid Integration
 description: "Get started with the jQuery Sortable by Kendo UI and integrate the widget with the Kendo UI Grid."
 previous_url: /controls/interactivity/sortable/integration
 slug: integrationwith_grid_sortable

@@ -1,6 +1,6 @@
 ---
 title: ListView
-page_title: jQuery Sortable Documentation | ListView Integration
+page_title: jQuery Sortable Documentation - ListView Integration
 description: "Get started with the jQuery Sortable by Kendo UI and integrate the widget with the Kendo UI ListView."
 slug: integrationwith_listview_sortable
 ---

@@ -1,6 +1,6 @@
 ---
 title: Resizing
-page_title: jQuery Grid Documentation | Resizing of Columns
+page_title: jQuery Grid Documentation - Resizing of Columns
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable column resizing in order to modify the width of columns."
 previous_url: /appearance/columns/resizing
 slug: column_resizing_kendoui_grid_widget

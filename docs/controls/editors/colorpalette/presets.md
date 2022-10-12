@@ -1,6 +1,6 @@
 ---
 title: Color Presets
-page_title: jQuery ColorPalette Documentation | ColorPalette Color Presets
+page_title: jQuery ColorPalette Documentation - ColorPalette Color Presets
 description: "Learn more about the sets of predefined palettes in the Kendo UI for jQuery ColorPalette and how to customize them."
 slug: presets_kendoui_colorpalette_widget
 position: 2

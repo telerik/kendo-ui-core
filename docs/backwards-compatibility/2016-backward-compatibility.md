@@ -1,6 +1,6 @@
 ---
 title: 2016 Releases
-page_title: 2016 Releases | Kendo UI Backwards Compatibility
+page_title: 2016 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2016."
 previous_url: /changes-and-backward-compatibility, /install/changes-and-backward-compatibility, /backwards-compatibility/2016/2016-backward-compatibility
 slug: breakingchanges2016_kendoui

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Validator Documentation | Validator Overview
+page_title: jQuery Validator Documentation - Validator Overview
 description: "Try now the Kendo UI for jQuery Validator component delivering a variety of built-in validation rules and providing convenient options for setting custom-rule handling."
 previous_url: /framework/validator/overview
 slug: overview_kendoui_validator_widget

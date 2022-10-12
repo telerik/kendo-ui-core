@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery DropDownList Documentation | Data Binding
+page_title: jQuery DropDownList Documentation - Data Binding
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to bind the DropDownList to local data arrays and to remote data sources."
 slug: databinding_dropdownlist_widget
 position: 2

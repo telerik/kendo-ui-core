@@ -1,6 +1,6 @@
 ---
 title: Formats
-page_title: jQuery ColorGradient Documentation | ColorGradient RGB and HEX Formats
+page_title: jQuery ColorGradient Documentation - ColorGradient RGB and HEX Formats
 description: "Learn more about the RGB and HEX input formats supported by the Kendo UI for jQuery ColorGradient."
 slug: rgb_hex_kendoui_colorgradient_widget
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Section 508 Support
-page_title: Section 508 Support | Kendo UI Accessibility Support
+page_title: Section 508 Support - Kendo UI Accessibility Support
 description: "Learn more about the Section 508 Accesibility support provided by Kendo UI controls."
 slug: section508_accessibility_support
 position: 2

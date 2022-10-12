@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery MultiViewCalendar Documentation | MultiViewCalendar Accessibility
+page_title: jQuery MultiViewCalendar Documentation - MultiViewCalendar Accessibility
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_muliviewcalendar
 position: 1

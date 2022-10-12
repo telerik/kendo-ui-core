@@ -1,6 +1,6 @@
 ---
 title: Local and Remote Data
-page_title: jQuery TreeView Documentation | Local and Remote Data 
+page_title: jQuery TreeView Documentation - Local and Remote Data 
 description: "Get started with the jQuery TreeView by Kendo UI and learn how to initialize the widget and use its events."
 slug: databinding_kendoui_treeview
 position: 1

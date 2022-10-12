@@ -1,6 +1,6 @@
 ---
 title: Filtering
-page_title: jQuery PivotGrid Documentation | Filtering
+page_title: jQuery PivotGrid Documentation - Filtering
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to create and configure the widget."
 slug: filtering_kendoui_pivotgrid
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Drag-and-Drop
-page_title: jQuery TreeList Documentation | Editing by Dragging and Dropping
+page_title: jQuery TreeList Documentation - Editing by Dragging and Dropping
 description: "Get started with the jQuery TreeList by Kendo UI and enable its drag-and-drop edit mode."
 slug: dragdropeditmode_kendoui_treelist
 position: 4

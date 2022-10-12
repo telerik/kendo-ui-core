@@ -1,6 +1,6 @@
 ---
 title: SystemJS
-page_title: SystemJS | Kendo UI Third-Party Tools
+page_title: SystemJS - Kendo UI Third-Party Tools
 description: "Include Kendo UI with SystemJS."
 slug: systemjs_integration_kendoui
 ---

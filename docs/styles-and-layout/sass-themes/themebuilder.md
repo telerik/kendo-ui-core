@@ -1,6 +1,6 @@
 ---
 title: ThemeBuilder
-page_title: ThemeBuilder | Sass Themes
+page_title: ThemeBuilder - Sass Themes
 description: "Discover ThemeBuilder for Kendo UI and use it to create beautiful visual themes that allow you to take full control over the appearance of the UI components."
 slug: sassbasedthemes_themebuilder_kendoui
 position: 4

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Window Documentation | Window Overview
+page_title: jQuery Window Documentation - Window Overview
 description: "Try now the Kendo UI for jQuery Window component delivering everything from animation effects and sets of options for defining its position, size, and custom actions to globalization and accessibility support."
 slug: overview_kendoui_window_widget
 position: 0

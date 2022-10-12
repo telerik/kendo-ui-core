@@ -1,6 +1,6 @@
 ---
 title: Visual Studio IntelliSense
-page_title: Visual Studio IntelliSense | Kendo UI Third-Party Tools
+page_title: Visual Studio IntelliSense - Kendo UI Third-Party Tools
 description: "Learn how to reference the Kendo UI Visual Studio IntelliSense by using an additional vsdoc or IntelliSense JavaScript file."
 previous_url: /vs-intellisense
 slug: visualstudiointellisense_integration_kendoui

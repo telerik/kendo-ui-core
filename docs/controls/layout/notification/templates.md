@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery Notification Documentation | Templates
+page_title: jQuery Notification Documentation - Templates
 description: "Get started with the jQuery Notification by Kendo UI and use the templates of the widget."
 slug: templates_kendoui_notification
 position: 5

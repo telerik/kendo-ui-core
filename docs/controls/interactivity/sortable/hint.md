@@ -1,6 +1,6 @@
 ---
 title: Hint
-page_title: jQuery Sortable Documentation | Hint
+page_title: jQuery Sortable Documentation - Hint
 description: "Get started with the jQuery Sortable by Kendo UI and manage the hint of the widget."
 slug: hint_kendoui_sortable
 position: 2

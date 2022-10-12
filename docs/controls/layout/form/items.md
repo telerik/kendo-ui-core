@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: Kendo UI for jQuery Form Documentation | Items
+page_title: Kendo UI for jQuery Form Documentation - Items
 description: "Get started with the Kendo UI for jQuery Form and learn how to configure items."
 slug: items_form_widget
 position: 2

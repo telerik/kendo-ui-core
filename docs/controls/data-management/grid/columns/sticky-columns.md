@@ -1,6 +1,6 @@
 ---
 title: Sticky Columns
-page_title: jQuery Grid Documentation | Sticky Columns
+page_title: jQuery Grid Documentation - Sticky Columns
 description: "Get started with the jQuery Grid by Kendo UI supporting sticky columns that are scrollable, yet, visible at all times while the user scrolls the Grid horizontally."
 slug: sticky_columns_kendoui_grid_widget
 position: 3

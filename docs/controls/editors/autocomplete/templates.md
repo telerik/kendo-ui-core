@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery AutoComplete Documentation | Templates
+page_title: jQuery AutoComplete Documentation - Templates
 description: "Get started with the jQuery AutoComplete by Kendo UI and use the item, header, footer, and no-data templates to organize its data."
 slug: templates_kendoui_autocomplete
 position: 5

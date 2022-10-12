@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ListBox Documentation | ListBox Globalization
+page_title: jQuery ListBox Documentation - ListBox Globalization
 description: "Get started with the jQuery ListBox by Kendo UI and learn about the globalization options it supports."
 slug: globalization_listbox
 position: 1

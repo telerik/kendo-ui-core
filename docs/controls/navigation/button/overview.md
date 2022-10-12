@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Button Documentation | Button Overview
+page_title: jQuery Button Documentation - Button Overview
 description: "Try now the Kendo UI for jQuery Button component delivering a styled clickable UI functionality with arbitrary content."
 slug: overview_kendoui_button_widget
 position: 1

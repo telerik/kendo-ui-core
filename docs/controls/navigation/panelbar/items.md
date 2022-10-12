@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: jQuery PanelBar Documentation | Items
+page_title: jQuery PanelBar Documentation - Items
 description: "Get started with the jQuery PanelBar by Kendo UI and configure its items."
 slug: items_kendoui_panelbar
 position: 5

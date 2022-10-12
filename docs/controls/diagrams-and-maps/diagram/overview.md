@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Diagram Documentation | Diagram Overview
+page_title: jQuery Diagram Documentation - Diagram Overview
 description: "Get started with the jQuery Diagram by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_diagram_widget
 position: 1

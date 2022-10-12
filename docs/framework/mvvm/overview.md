@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MVVM Pattern Overview | Kendo UI MVVM
+page_title: MVVM Pattern Overview - Kendo UI MVVM
 description: "Learn more about the Kendo UI Model View ViewModel, which is an implementation of the MVVM pattern, integrated with the Kendo UI framework."
 slug: overview_mvvmpattern_kendoui
 position: 1

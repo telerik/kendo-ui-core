@@ -1,6 +1,6 @@
 ---
 title: Dimensions and CSS Units
-page_title: Dimensions and CSS Units | Kendo UI Drawing Library
+page_title: Dimensions and CSS Units - Kendo UI Drawing Library
 description: "Render dimensions and CSS units when you export content in PDF with the Kendo UI Drawing library."
 previous_url: /framework/drawing/drawing-dom#dimensions-and-css-units
 slug: dimensionscssunits_drawing

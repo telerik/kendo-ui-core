@@ -1,6 +1,6 @@
 ---
 title: Cards
-page_title: Kendo UI for jQuery TaskBoard Documentation | Cards
+page_title: Kendo UI for jQuery TaskBoard Documentation - Cards
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn about its cards."
 slug: cards_kendoui_taskboard_widget
 position: 3

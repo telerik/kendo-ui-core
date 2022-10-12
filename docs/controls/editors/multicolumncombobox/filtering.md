@@ -1,6 +1,6 @@
 ---
 title: Filtering
-page_title: jQuery MultiColumnComboBox Documentation | Filtering
+page_title: jQuery MultiColumnComboBox Documentation - Filtering
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and apply its filter options."
 slug: filtering_kendoui_multicolumncombobox
 position: 4

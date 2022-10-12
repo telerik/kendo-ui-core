@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery Signature Documentation | Signature Appearance
+page_title: jQuery Signature Documentation - Signature Appearance
 description: "Learn how to modify the appearance of the Kendo UI for jQuery Signature widget."
 slug: appearance_kendoui_signature_widget
 position: 2

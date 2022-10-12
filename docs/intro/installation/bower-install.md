@@ -1,6 +1,6 @@
 ---
 title: Installing with Bower
-page_title: Installing with Bower | Download and Installation 
+page_title: Installing with Bower - Download and Installation 
 description: "Get started with Kendo UI for jQuery and install the commercial or the open-source Kendo UI distributions by using the Bower package manager."
 previous_url: /install/bower, /intro/installation/overview-download
 slug: kendoui_bower_packages_kendoui_installation

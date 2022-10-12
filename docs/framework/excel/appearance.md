@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: Appearance | Kendo UI Excel Export
+page_title: Appearance - Kendo UI Excel Export
 description: "Learn how to change the look and feel of the cells while exporting Kendo UI components to Excel."
 slug: appearance_excelexport_kendoui
 position: 2

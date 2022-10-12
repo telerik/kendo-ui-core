@@ -1,6 +1,6 @@
 ---
 title: Calendar Types
-page_title: jQuery DateTimePicker Documentation | Calendar Types
+page_title: jQuery DateTimePicker Documentation - Calendar Types
 description: "Get started with the jQuery DateTimePicker by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: calendartypes_kendoui_datetimepicker
 position: 7

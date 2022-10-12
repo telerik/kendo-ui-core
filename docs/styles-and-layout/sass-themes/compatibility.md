@@ -1,6 +1,6 @@
 ---
 title: Compatibility
-page_title: Compatibility | Sass Themes
+page_title: Compatibility - Sass Themes
 description: "Learn about the compatibility of the Kendo UI Sass Themes."
 previous_url: /styles-and-layout/sass-version-compatibility
 slug: sassbasedthemes_compatibility_kendoui

@@ -1,6 +1,6 @@
 ---
 title: Legend
-page_title: jQuery Chart Documentation | Legend
+page_title: jQuery Chart Documentation - Legend
 description: "Get started with the jQuery Chart by Kendo UI and learn how to control its appearance, change its themes and manage its animated transitions."
 slug: legend_features_charts
 ---

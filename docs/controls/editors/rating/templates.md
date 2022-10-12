@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery Rating Documentation | Templates
+page_title: jQuery Rating Documentation - Templates
 description: "Get started with the jQuery Rating by Kendo UI and learn how to configure the item templates."
 slug: templates_rating_widget
 position: 5

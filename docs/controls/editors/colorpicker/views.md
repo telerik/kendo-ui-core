@@ -1,6 +1,6 @@
 ---
 title: Views
-page_title: jQuery ColorPicker Documentation | ColorPicker Views
+page_title: jQuery ColorPicker Documentation - ColorPicker Views
 description: "Review the available views in the ColorPicker."
 slug: views_kendoui_colorpicker_widget
 position: 2

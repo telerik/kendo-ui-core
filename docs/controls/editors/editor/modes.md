@@ -1,6 +1,6 @@
 ---
 title: Modes of Operation
-page_title: jQuery Editor Documentation | Modes of Operation
+page_title: jQuery Editor Documentation - Modes of Operation
 description: "Get started with the jQuery Editor by Kendo UI and use its modes of operation."
 slug: modes_kendoui_editor_widget
 position: 3

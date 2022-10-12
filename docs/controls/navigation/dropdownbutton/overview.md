@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery DropDownButton Documentation | Overview
+page_title: jQuery DropDownButton Documentation - Overview
 description: "Get started with the jQuery DropDownButton by Kendo UI and learn how to initialize it and what its key features are."
 slug: overview_kendoui_dropdownbutton_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Custom Cell Editors
-page_title: jQuery Spreadsheet Documentation | Custom Cell Editors
+page_title: jQuery Spreadsheet Documentation - Custom Cell Editors
 description: "Get started with the jQuery Spreadsheet by Kendo UI and define custom editors for its cells."
 slug: custom_editors_spreadsheet_widget
 position: 5

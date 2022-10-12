@@ -1,6 +1,6 @@
 ---
 title: RTL Support
-page_title: jQuery DatePicker Documentation | DatePicker Right-to-Left Support
+page_title: jQuery DatePicker Documentation - DatePicker Right-to-Left Support
 description: "Get started with the jQuery DatePicker by Kendo UI and learn about the RTL supports it provides."
 slug: rtl_datepicker
 position: 3

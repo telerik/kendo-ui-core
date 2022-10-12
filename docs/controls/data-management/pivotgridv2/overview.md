@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery PivotGridV2 Documentation | PivotGridV2 Overview
+page_title: jQuery PivotGridV2 Documentation - PivotGridV2 Overview
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to create and configure the widget."
 slug: overview_kendoui_pivotgridv2_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Scrolling
-page_title: jQuery ListView Documentation | Scrolling
+page_title: jQuery ListView Documentation - Scrolling
 description: "Get started with the jQuery ListView by Kendo UI and learn how to enable its scrolling functionality."
 slug: scrolling_kendoui_listview_widget
 position: 6

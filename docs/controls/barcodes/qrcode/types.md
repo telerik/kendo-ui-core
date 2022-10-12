@@ -1,6 +1,6 @@
 ---
 title: QRCode Types
-page_title: jQuery QRCode Documentation | QRCode Types
+page_title: jQuery QRCode Documentation - QRCode Types
 description: "Try the different types of Telerik UI QRCode for the jQuery"
 slug: types_kendoui_qrcode_widget
 position: 3

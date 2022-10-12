@@ -1,6 +1,6 @@
 ---
 title: Contrast Tool
-page_title: ColorGradient Documentation | ColorGradient Contrast Tool
+page_title: ColorGradient Documentation - ColorGradient Contrast Tool
 description: "Learn more about the contrast tool provided by the Kendo UI for jQuery ColorGradient."
 slug: contrast_tool_kendoui_colorgradient_widget
 position: 3

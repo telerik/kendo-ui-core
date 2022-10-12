@@ -1,6 +1,6 @@
 ---
 title: Scaling the Drawings
-page_title: Scaling the Drawings | Kendo UI Drawing Library
+page_title: Scaling the Drawings - Kendo UI Drawing Library
 description: "Scale the content that is exported to PDF with the Kendo UI Drawing library."
 previous_url: /framework/drawing/drawing-dom#scaling-of-content
 slug: scalingofcontent_drawing

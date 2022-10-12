@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Sass Themes
+page_title: Overview - Sass Themes
 description: "Learn about the overall idea of the Kendo UI Sass themes."
 previous_url: /themebuilder_overview_kendouistyling, /styles-and-layout/sass-themes
 slug: sassbasedthemes_kendoui

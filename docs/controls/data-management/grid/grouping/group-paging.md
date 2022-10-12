@@ -1,6 +1,6 @@
 ---
 title: Group Paging
-page_title: jQuery Grid Documentation | GroupPaging Overview
+page_title: jQuery Grid Documentation - GroupPaging Overview
 description: "Learn how to enable the group paging in the jQuery Grid by Kendo UI and load groups on demand."
 slug: grouppaging_kendoui_grid_widget
 ---

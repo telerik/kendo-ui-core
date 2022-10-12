@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery Chart Documentation | Appearance
+page_title: jQuery Chart Documentation - Appearance
 description: "Get started with the jQuery Chart by Kendo UI and learn how to control its appearance, change the themes, and manage the animated transitions."
 previous_url: /controls/charts/chart/appearance
 slug: appearance_charts_widget

@@ -1,6 +1,6 @@
 ---
 title: Custom
-page_title: jQuery Grid Documentation | Custom Editing
+page_title: jQuery Grid Documentation - Custom Editing
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI allowing you to manipulate the way the data is presented."
 slug: customediting_grid
 position: 5

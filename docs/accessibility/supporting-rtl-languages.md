@@ -1,6 +1,6 @@
 ---
 title: Right-to-Left Languages
-page_title: Right-to-Left Languages | Kendo UI Accessibility Support
+page_title: Right-to-Left Languages - Kendo UI Accessibility Support
 related: a11y-accessibility-overview, widget-appearance-rtl
 description: "Learn more about the Accessibility features related to bidirectional languages, supported by Kendo UI controls."
 slug: right_toleft_languages_accessibility_support

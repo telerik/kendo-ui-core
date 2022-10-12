@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: PDF Export Overview | Kendo UI PDF Export
+page_title: PDF Export Overview - Kendo UI PDF Export
 description: "Learn about the Kendo UI PDF Export."
 slug: introduction_pdfexport_kendoui
 position: 1

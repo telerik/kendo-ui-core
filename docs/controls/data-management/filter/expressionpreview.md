@@ -1,6 +1,6 @@
 ---
 title: Expression preview
-page_title: jQuery Filter Documentation | Expression Preview
+page_title: jQuery Filter Documentation - Expression Preview
 description: "Get started with the jQuery Filter by Kendo UI and learn how to use the expression preview."
 slug: expression_preview_kendoui_filter_widget
 position: 4

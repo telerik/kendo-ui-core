@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI Pane
+page_title: Overview - Hybrid UI Pane
 description: "Initialize and use the Hybrid UI Pane widget to change mobile views within the main view application in the Kendo UI framework."
 slug: overview_hybridpane
 position: 1

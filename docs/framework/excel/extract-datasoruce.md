@@ -1,6 +1,6 @@
 ---
 title: Exporting Data Sources
-page_title: Exporting Data Sources | Kendo UI Excel Export
+page_title: Exporting Data Sources - Kendo UI Excel Export
 description: "Learn how to create Excel documents by using the Kendo UI DataSource component."
 slug: exportdatasource_excelexport_kendoui
 position: 7

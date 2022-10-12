@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery SplitButton Documentation | Appearance
+page_title: jQuery SplitButton Documentation - Appearance
 description: "Learn how to apply different styling options to the SplitButton widget."
 slug: appearance_kendoui_splitbutton_widget
 position: 3

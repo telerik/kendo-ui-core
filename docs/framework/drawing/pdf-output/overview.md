@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: PDF Output Overview | Kendo UI Drawing Library
+page_title: PDF Output Overview - Kendo UI Drawing Library
 description: "Learn how to export a drawing in a PDF file when using the Kendo UI Drawing API."
 previous_url: /framework/drawing/pdf-output
 slug: pdfderawingexport_drawingapi

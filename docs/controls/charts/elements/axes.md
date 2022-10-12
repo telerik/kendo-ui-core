@@ -1,6 +1,6 @@
 ---
 title: Axes
-page_title: jQuery Chart Documentation | Axes
+page_title: jQuery Chart Documentation - Axes
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its axes."
 slug: elements_kendoui_charts_widget
 ---

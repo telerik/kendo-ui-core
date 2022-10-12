@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ContextMenu Documentation | ContextMenu Overview
+page_title: jQuery ContextMenu Documentation - ContextMenu Overview
 description: "Get started with the jQuery ContextMenu by Kendo UI and learn how to create, initialize, and enable the widget."
 previous_url: /controls/navigation/menu/contextmenu
 slug: overview_kendoui_contextmenu_widget

@@ -1,6 +1,6 @@
 ---
 title: Columns
-page_title: jQuery MultiColumnComboBox Documentation | Columns
+page_title: jQuery MultiColumnComboBox Documentation - Columns
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and configure its column width and other options."
 slug: columns_kendoui_multicolumncombobox
 position: 3

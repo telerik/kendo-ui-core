@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery DatePicker Documentation | DatePicker Overview
+page_title: jQuery DatePicker Documentation - DatePicker Overview
 description: "Try now the Kendo UI for jQuery DatePicker component covering everything from disabling and selecting dates and managing its navigation depth to validating its input value and using its accessibility and globalization features."
 slug: overview_kendoui_datepicker_widget
 position: 1

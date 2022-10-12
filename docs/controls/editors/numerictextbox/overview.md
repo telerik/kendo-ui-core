@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery NumericTextBox Documentation | NumericTextBox Overview
+page_title: jQuery NumericTextBox Documentation - NumericTextBox Overview
 description: "Try now the Kendo UI for jQuery NumericTextBox component providing a number of the features such as styling options, formatting settings, and labels."
 slug: overview_kendoui_numerictextbox_widget
 position: 0

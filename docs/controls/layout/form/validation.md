@@ -1,6 +1,6 @@
 ---
 title: Validation
-page_title: Kendo UI for jQuery Form Documentation | Validation
+page_title: Kendo UI for jQuery Form Documentation - Validation
 description: "Get started with the Kendo UI for jQuery Form and learn about its validation configuration."
 slug: validation_form_widget
 position: 7

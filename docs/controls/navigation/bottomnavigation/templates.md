@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery BottomNavigation Documentation | BottomNavigation Templates
+page_title: jQuery BottomNavigation Documentation - BottomNavigation Templates
 description: "Learn about how to use Kendo UI templates with the jQuery BottomNavigation"
 slug: templates_bottomnavigation_widget
 position: 4

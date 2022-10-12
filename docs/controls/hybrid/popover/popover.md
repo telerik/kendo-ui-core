@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI PopOver
+page_title: Overview - Hybrid UI PopOver
 description: "Open and configure the Hybrid UI Pane widget to change mobile views within the main view application in the Kendo UI framework."
 slug: overview_hybridpopover
 position: 1

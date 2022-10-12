@@ -1,6 +1,6 @@
 ---
 title: Events
-page_title: jQuery ActionSheet Documentation | Events
+page_title: jQuery ActionSheet Documentation - Events
 description: "Get started with the jQuery ActionSheet by Kendo UI and learn how to handle the events of the widget."
 slug: events_actionsheet_widget
 position: 3

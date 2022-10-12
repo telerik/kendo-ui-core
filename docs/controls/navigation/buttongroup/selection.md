@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: jQuery ButtonGroup Documentation | Selection
+page_title: jQuery ButtonGroup Documentation - Selection
 description: "Get started with the jQuery ButtonGroup by Kendo UI and restrict the number of selectable Buttons within the ButtonGroup."
 slug: selection_kendoui_buttongroup
 position: 6

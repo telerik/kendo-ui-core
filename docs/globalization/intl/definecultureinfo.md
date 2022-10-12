@@ -1,6 +1,6 @@
 ---
 title: Culture Definition
-page_title: Culture Definition | Kendo UI Globalization
+page_title: Culture Definition - Kendo UI Globalization
 description: "Learn about the default culture information settings in Kendo UI and how to define culture information in culture files and then extend it."
 previous_url: /framework/globalization/definecultureinfo
 slug: culture_definition_kendoui_globalization

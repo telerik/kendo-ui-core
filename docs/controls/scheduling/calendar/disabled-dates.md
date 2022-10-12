@@ -1,6 +1,6 @@
 ---
 title: Disabled Dates
-page_title: jQuery Calendar Documentation | Disabled Dates
+page_title: jQuery Calendar Documentation - Disabled Dates
 description: "Get started with the jQuery Calendar by Kendo UI and disable specific dates in the widget."
 slug: disableddates_kendoui_calendar
 position: 3

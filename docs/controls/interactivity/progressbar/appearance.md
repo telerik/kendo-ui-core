@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery ProgressBar Documentation | Appearance
+page_title: jQuery ProgressBar Documentation - Appearance
 description: "Get started with the jQuery ProgressBar by Kendo UI and set its size and auto-resize the widget."
 slug: appearance_kendoui_progressbar
 position: 2

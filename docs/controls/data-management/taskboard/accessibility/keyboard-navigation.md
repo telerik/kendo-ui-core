@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: Kendo UI for jQuery TaskBoard Documentation | Keyboard Navigation
+page_title: Kendo UI for jQuery TaskBoard Documentation - Keyboard Navigation
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_kendoui_taskboard_widget
 position: 2

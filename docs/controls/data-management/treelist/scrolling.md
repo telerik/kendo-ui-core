@@ -1,6 +1,6 @@
 ---
 title: Scrolling
-page_title: jQuery TreeList Documentation | Scrolling
+page_title: jQuery TreeList Documentation - Scrolling
 description: "Get started with the jQuery TreeList by Kendo UI and configure its scrolling functionality."
 slug: scrolling_kendoui_treelist
 position: 5

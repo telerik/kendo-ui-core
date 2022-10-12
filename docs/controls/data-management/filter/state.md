@@ -1,6 +1,6 @@
 ---
 title: Persisting the State
-page_title: jQuery Filter Documentation | Persisting the State
+page_title: jQuery Filter Documentation - Persisting the State
 description: "Get started with the jQuery Filter by Kendo UI and learn how to save and restore its state, options, and filter expression."
 slug: store_settings_kendoui_filter_widget
 position: 3

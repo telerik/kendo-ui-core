@@ -1,6 +1,6 @@
 ---
 title: Day Template
-page_title: jQuery Calendar Documentation | Day Template
+page_title: jQuery Calendar Documentation - Day Template
 description: "Get started with the jQuery Calendar by Kendo UI and customize the rendered day for its Month view."
 slug: daytemplate_kendoui_calendar
 position: 5

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Drawer Documentation | Drawer Accessibility
+page_title: jQuery Drawer Documentation - Drawer Accessibility
 description: "Get started with the jQuery Drawer by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_drawer_jquery
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Cell Formatting
-page_title: jQuery Spreadsheet Documentation | Cell Formatting
+page_title: jQuery Spreadsheet Documentation - Cell Formatting
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to format cells in the widget."
 previous_url: /controls/data-management/spreadsheet/format
 slug: cell_formatting_spreadsheet_widget

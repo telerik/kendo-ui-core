@@ -1,6 +1,6 @@
 ---
 title: Color Ranges
-page_title: jQuery ArcGauge Documentation | Color Ranges
+page_title: jQuery ArcGauge Documentation - Color Ranges
 description: "Get started with the jQuery ArcGauge by Kendo UI and set different colors to the value ranges."
 slug: colorranges_kendoui_arcgauge
 position: 2

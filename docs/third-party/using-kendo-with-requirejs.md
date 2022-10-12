@@ -1,6 +1,6 @@
 ---
 title: RequireJS
-page_title: RequireJS | Kendo UI Third-Party Tools
+page_title: RequireJS - Kendo UI Third-Party Tools
 description: "Learn how to work with Kendo UI and RequireJS compatible loader."
 previous_url: /using-kendo-with-requirejs
 slug: requirejs_integration_kendoui

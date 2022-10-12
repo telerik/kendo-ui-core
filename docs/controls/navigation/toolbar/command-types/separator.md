@@ -1,6 +1,6 @@
 ---
 title: Separator
-page_title: jQuery ToolBar Documentation | Separator Command Type
+page_title: jQuery ToolBar Documentation - Separator Command Type
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the Separator command type."
 previous_url: /controls/navigation/toolbar/separator
 slug: separator_toolbar_widget

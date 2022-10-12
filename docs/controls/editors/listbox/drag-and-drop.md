@@ -1,6 +1,6 @@
 ---
 title: Dragging and Dropping
-page_title: jQuery ListBox Documentation | Dragging and Dropping
+page_title: jQuery ListBox Documentation - Dragging and Dropping
 description: "Get started with the jQuery ListBox by Kendo UI and enable the dragging and dropping of its items."
 slug: dragdrop_kendoui_listbox_widget
 position: 4

@@ -1,6 +1,6 @@
 ---
 title: Default State
-page_title: Kendo UI for jQuery ExpansionPanel Documentation | ExpansionPanel Default State
+page_title: Kendo UI for jQuery ExpansionPanel Documentation - ExpansionPanel Default State
 description: "Learn how to enable and use the default state functionality of the Kendo UI for jQuery ExpansionPanel."
 slug: state_kendoui_expansionpanel_widget
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: jQuery ListBox Documentation | Selection
+page_title: jQuery ListBox Documentation - Selection
 description: "Get started with the jQuery ListBox by Kendo UI and use its single or multiple selection modes."
 slug: selection_kendoui_listbox_widget
 position: 3

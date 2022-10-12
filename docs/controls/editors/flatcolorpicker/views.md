@@ -1,6 +1,6 @@
 ---
 title: Views
-page_title: jQuery FlatColorPicker Documentation | FlatColorPicker Views
+page_title: jQuery FlatColorPicker Documentation - FlatColorPicker Views
 description: "Review the available views in the FlatColorPicker."
 slug: views_kendoui_flatcolorpicker_widget
 position: 2

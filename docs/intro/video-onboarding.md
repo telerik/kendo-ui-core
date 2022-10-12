@@ -1,6 +1,6 @@
 ---
 title: Video Onboarding
-page_title: Video Onboarding
+page_title: Video Onboarding - Getting Started
 description: "Get started with Kendo UI for jQuery by following a step-by-step video tutorial that helps you develop a real-life project."
 slug: getting_started_video_onboarding
 previous_url: /virtual-calssroom

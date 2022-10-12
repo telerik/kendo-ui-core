@@ -1,6 +1,6 @@
 ---
 title: Aggregates
-page_title: jQuery Grid Documentation | Aggregates
+page_title: jQuery Grid Documentation - Aggregates
 description: "Get started with the jQuery Grid by Kendo UI and group its data by using aggregate functions."
 slug: aggregates_kendoui_grid_widget
 position: 2

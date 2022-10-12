@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Editor Documentation | Editor Overview
+page_title: jQuery Editor Documentation - Editor Overview
 description: "Get started with the jQuery Editor by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_editor_widget
 position: 1

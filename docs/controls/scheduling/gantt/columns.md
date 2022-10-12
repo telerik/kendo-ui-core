@@ -1,6 +1,6 @@
 ---
 title: Columns
-page_title: jQuery Gantt Documentation | Columns
+page_title: jQuery Gantt Documentation - Columns
 description: "Get started with the jQuery Gantt by Kendo UI and individually configure its columns."
 slug: columns_kendoui_gantt
 position: 4

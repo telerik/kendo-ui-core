@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Grid Overview
+page_title: jQuery Grid Documentation - Grid Overview
 description: "Try now the Kendo UI for jQuery Data Grid component covering everything from paging, sorting, filtering, editing, and grouping to exporting to PDF and Excel."
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget

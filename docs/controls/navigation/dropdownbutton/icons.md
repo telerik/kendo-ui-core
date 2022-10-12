@@ -1,6 +1,6 @@
 ---
 title: Icon DropDownButton
-page_title: jQuery DropDownButton Documentation | Icons
+page_title: jQuery DropDownButton Documentation - Icons
 description: "Get started with the jQuery DropDownButton by Kendo UI and add background, image, or font icons to enhance the visualization of the widget."
 slug: icons_kendoui_dropdownbutton_widget
 position: 4

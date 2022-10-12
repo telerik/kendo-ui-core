@@ -1,6 +1,6 @@
 ---
 title: Multiple Views
-page_title: jQuery MultiViewCalendar Documentation | Disabled Dates
+page_title: jQuery MultiViewCalendar Documentation - Disabled Dates
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and control and manage the number of the visible date ranges in horizontally rendered views."
 slug: multiple_views_multiviewcalendar
 position: 3

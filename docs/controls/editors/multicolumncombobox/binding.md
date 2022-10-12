@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery MultiColumnComboBox Documentation | Data Binding
+page_title: jQuery MultiColumnComboBox Documentation - Data Binding
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and bind the widget to local data arrays or remote data services."
 slug: databinding_kendoui_multicolumncombobox
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Paging
-page_title: jQuery TreeList Documentation | Paging
+page_title: jQuery TreeList Documentation - Paging
 description: "Get started with the jQuery TreeList by Kendo UI and enable the client-side paging feature."
 slug: paging_kendoui_treelist
 position: 4

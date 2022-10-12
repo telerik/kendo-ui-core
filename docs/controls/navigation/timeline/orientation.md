@@ -1,6 +1,6 @@
 ---
 title: Orientation
-page_title: jQuery Timeline Documentation | Orientation
+page_title: jQuery Timeline Documentation - Orientation
 description: "See how to control the orientation of the Timeline widget for jQuery by Kendo UI."
 slug: orientation_kendoui_timeline_widget
 position: 2

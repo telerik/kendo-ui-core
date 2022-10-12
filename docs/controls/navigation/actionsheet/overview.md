@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ActionSheet Documentation | ActionSheet Overview
+page_title: jQuery ActionSheet Documentation - ActionSheet Overview
 description: "Get started with the jQuery ActionSheet by Kendo UI and learn how to initialize the widget."
 slug: overview_kendoui_actionsheet_widget
 position: 1

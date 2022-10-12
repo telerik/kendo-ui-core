@@ -1,6 +1,6 @@
 ---
 title: Pull-to-Refresh Pattern
-page_title: Pull-to-Refresh Pattern | Hybrid UI ListView
+page_title: Pull-to-Refresh Pattern - Hybrid UI ListView
 description: "Learn how to use the pull-to-refresh pattern of the Hybrid UI ListView in the Kendo UI framework."
 previous_url: /howto/howto-use-the-mobile-listview-with-pull-to-refresh
 slug: pulltorefreshfeature_hybridlistview

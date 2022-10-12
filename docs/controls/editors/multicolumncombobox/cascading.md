@@ -1,6 +1,6 @@
 ---
 title: Cascading MultiColumnComboBoxes
-page_title: jQuery MultiColumnComboBox Documentation | Cascading MultiColumnComboBoxes
+page_title: jQuery MultiColumnComboBox Documentation - Cascading MultiColumnComboBoxes
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and implement cascading MultiColumnComboBoxes."
 slug: cascading_kendoui_multicolumncombobox_widget
 position: 8

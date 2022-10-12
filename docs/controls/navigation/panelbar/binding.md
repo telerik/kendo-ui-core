@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery PanelBar Documentation | Data Binding
+page_title: jQuery PanelBar Documentation - Data Binding
 description: "Get started with the jQuery PanelBar by Kendo UI and bind the widget to local data arrays or remote data services."
 slug: databinding_kendoui_panelbar
 position: 2

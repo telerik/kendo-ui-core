@@ -1,6 +1,6 @@
 ---
 title: Cursor
-page_title: jQuery Sortable Documentation | Cursor
+page_title: jQuery Sortable Documentation - Cursor
 description: "Get started with the jQuery Sortable by Kendo UI and manage the cursor of the widget."
 slug: cursor_kendoui_sortable
 position: 4

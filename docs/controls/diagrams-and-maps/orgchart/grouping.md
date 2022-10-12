@@ -1,6 +1,6 @@
 ---
 title: Grouping
-page_title: jQuery OrgChart Documentation | Grouping
+page_title: jQuery OrgChart Documentation - Grouping
 description: "Get started with the jQuery OrgChart by Kendo UI and learn how to configure its grouping functionality."
 slug: grouping_kendoui_orgchart_widget
 position: 5

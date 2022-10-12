@@ -1,6 +1,6 @@
 ---
 title: Endless Scrolling
-page_title: Endless Scrolling | Hybrid UI ListView
+page_title: Endless Scrolling - Hybrid UI ListView
 description: "Use the endless scrolling feature of the Hybrid UI ListView in the Kendo UI framework."
 previous_url: /howto/howto-use-the-mobile-listview-with-endless-scrolling
 slug: endlessscrolling_hybridlistview

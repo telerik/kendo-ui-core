@@ -1,6 +1,6 @@
 ---
 title: Precision
-page_title: jQuery Rating Documentation | Precision
+page_title: jQuery Rating Documentation - Precision
 description: "Get started with the jQuery Rating by Kendo UI and learn how to configure the precision with which items are selected."
 slug: precision_rating_widget
 position: 3

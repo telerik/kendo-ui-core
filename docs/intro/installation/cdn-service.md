@@ -1,6 +1,6 @@
 ---
 title: Using CDN
-page_title: Using CDN | Download and Installation 
+page_title: Using CDN - Download and Installation 
 description: "Get started with Kendo UI for jQuery and install the Kendo UI widgets by using the Kendo UI CDN services."
 previous_url: /install/cdn
 slug: kendoui_cdn_services_installation

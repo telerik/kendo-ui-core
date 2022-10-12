@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery Grid Documentation | Export Troubleshooting
+page_title: jQuery Grid Documentation - Export Troubleshooting
 description: "Get started with the jQuery Grid by Kendo UI and learn how to solve issues you might encounter while exporting the content of the Grid to Excel."
 slug: exporttroubleshoot_kendoui_grid_widget
 position: 80

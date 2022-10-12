@@ -1,6 +1,6 @@
 ---
 title: Web Browser Support
-page_title: Web Browser Support | Support and Distribution 
+page_title: Web Browser Support - Support and Distribution 
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support, /intro/browser-support
 description: "Get started with Kendo UI for jQuery and learn which are the browsers supported by the framework components."
 slug: wbe_browserand_operating_system_support

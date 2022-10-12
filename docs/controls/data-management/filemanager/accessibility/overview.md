@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery FileManager Documentation | FileManager Accessibility
+page_title: jQuery FileManager Documentation - FileManager Accessibility
 description: "Get started with the jQuery FileManager by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_filemanager_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Shapes
-page_title: jQuery Diagram Documentation | Shapes
+page_title: jQuery Diagram Documentation - Shapes
 description: "Get started with the jQuery Diagram by Kendo UI and use its shape configuration options."
 slug: shapes_kendoui_diagram
 position: 5

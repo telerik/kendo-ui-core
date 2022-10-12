@@ -1,6 +1,6 @@
 ---
 title: Pager Settings and Types
-page_title: jQuery Pager Documentation | Pager Settings
+page_title: jQuery Pager Documentation - Pager Settings
 description: "Get started with the jQuery Pager by Kendo UI and learn about the options it supports."
 slug: settings_kendoui_pager_widget
 ---

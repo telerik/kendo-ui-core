@@ -1,6 +1,6 @@
 ---
 title: Validation
-page_title: jQuery MaskedTextBox Documentation | Validation
+page_title: jQuery MaskedTextBox Documentation - Validation
 description: "Get started with the jQuery MaskedTextBox by Kendo UI and use its predefined and custom masks."
 previous_url: /controls/editors/datepicker/how-to/date-masking-using-maskedtextbox
 slug: masks_kendoui_maskedtextbox_widget

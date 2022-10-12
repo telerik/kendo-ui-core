@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: jQuery MultiViewCalendar Documentation | Selection
+page_title: jQuery MultiViewCalendar Documentation - Selection
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and implement multiple and range-date selections."
 slug: selection_multiviewcalendar
 position: 5

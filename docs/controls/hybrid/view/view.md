@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI View
+page_title: Overview - Hybrid UI View
 description: "Use the hybrid mobile Kendo UI View widget, mark header and footer elements, and view parameters of navigational widgets and DOM elements."
 slug: overview_hybridview
 position: 1

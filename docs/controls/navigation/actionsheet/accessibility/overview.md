@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ActionSheet Documentation | ActionSheet Accessibility
+page_title: jQuery ActionSheet Documentation - ActionSheet Accessibility
 description: "Get started with the jQuery ActionSheet and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_actionsheet_widget
 position: 1

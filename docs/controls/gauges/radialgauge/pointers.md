@@ -1,6 +1,6 @@
 ---
 title: Multiple Pointers
-page_title: jQuery RadialGauge Documentation | Multiple Pointers
+page_title: jQuery RadialGauge Documentation - Multiple Pointers
 description: "Get started with the jQuery RadialGauge by Kendo UI and highlight multiple values by rendering multiple pointers."
 slug: pointers_kendoui_radialgauge
 position: 3

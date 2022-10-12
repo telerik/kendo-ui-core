@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery TreeView Documentation | Appearance
+page_title: jQuery TreeView Documentation - Appearance
 description: "Learn how to apply different styling options to the TreeView widget."
 slug: appearance_kendoui_treeview_widget
 position: 5 

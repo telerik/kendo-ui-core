@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: jQuery MultiColumnComboBox Documentation | Templates
+page_title: jQuery MultiColumnComboBox Documentation - Templates
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and implement its column, header, footer, and no-data templates."
 slug: templates_kendoui_multicolumncombobox
 position: 7

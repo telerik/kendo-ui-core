@@ -1,6 +1,6 @@
 ---
 title: Toolbar
-page_title: jQuery Chat Documentation | Toolbar
+page_title: jQuery Chat Documentation - Toolbar
 description: "Get started with the jQuery Chat by Kendo UI and learn how to configure the Toolbar for the Chat UI."
 slug: toolbar_for_chat
 position: 3

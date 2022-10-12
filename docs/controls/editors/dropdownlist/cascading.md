@@ -1,6 +1,6 @@
 ---
 title: Cascading DropDownLists
-page_title: jQuery DropDownList Documentation | Cascading DropDownLists
+page_title: jQuery DropDownList Documentation - Cascading DropDownLists
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to implement a series of two or more DropDownLists and cascade them."
 slug: cascading_kendoui_ddl_widget
 position: 8

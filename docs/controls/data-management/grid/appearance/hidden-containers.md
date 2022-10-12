@@ -1,6 +1,6 @@
 ---
 title: Hidden Containers
-page_title: jQuery Grid Documentation | Hidden Container
+page_title: jQuery Grid Documentation - Hidden Container
 description: "Get started with the jQuery Grid by Kendo UI and learn how to handle the most common scenarios when initializing it in a hidden container."
 slug: hidden_containers_kendoui_grid_widget
 position: 4

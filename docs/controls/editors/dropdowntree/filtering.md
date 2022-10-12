@@ -1,6 +1,6 @@
 ---
 title: Filtering
-page_title: jQuery DropDownTree Documentation | Filtering
+page_title: jQuery DropDownTree Documentation - Filtering
 description: "Get started with the jQuery DropDownTree by Kendo UI and filter the displayed items of the widget by their text value."
 slug: filtering_kendoui_dropdowntree
 position: 4

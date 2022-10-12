@@ -1,6 +1,6 @@
 ---
 title: Creating Custom Widgets
-page_title: Creating Custom Widgets | Working with Widgets 
+page_title: Creating Custom Widgets - Working with Components 
 previous_url: /howto/create-custom-kendo-widget, /framework/widgets/create-custom-kendo-widget
 description: "Get started with Kendo UI for jQuery and create your own widgets by inheriting from the base Kendo UI widget class."
 slug: createcustomkendouiwidgets_gettingstarted

@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery Avatar Documentation | Avatar Appearance
+page_title: jQuery Avatar Documentation - Avatar Appearance
 description: "Get started with the jQuery Avatar by Kendo UI and learn how to customize the appearance of the widget."
 slug: appearance_kendoui_avatar_widget
 position: 2

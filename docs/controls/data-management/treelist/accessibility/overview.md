@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery TreeList Documentation | TreeList Accessibility
+page_title: jQuery TreeList Documentation - TreeList Accessibility
 description: "Get started with the jQuery TreeList by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_treelist
 position: 1

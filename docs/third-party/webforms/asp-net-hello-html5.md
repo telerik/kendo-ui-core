@@ -1,6 +1,6 @@
 ---
 title: Part 3 - Hello HTML5
-page_title: Part 3 - Hello HTML5 | Kendo UI Third-Party Frameworks
+page_title: Part 3 - Hello HTML5 - Kendo UI Third-Party Frameworks
 description: "Learn in theory and in practice how to implement HTML5 in Visual Studio and build an HTML application in ASP.NET."
 previous_url: /third-party/tutorials/webforms/asp-net-hello-html5
 slug: part3_aspnetwebforms_tutorials

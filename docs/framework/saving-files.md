@@ -1,6 +1,6 @@
 ---
 title: Saving Files
-page_title: Saving Files | Kendo UI Saving Files
+page_title: Saving Files - Kendo UI Saving Files
 description: "Learn how to save files on the client machine when working with Kendo UI."
 previous_url: /framework/save-files/introduction
 slug: overview_savingfiles_kendoui

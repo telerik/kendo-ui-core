@@ -1,6 +1,6 @@
 ---
 title: DPL Processing
-page_title: jQuery PDFViewer Documentation | DPL Processing
+page_title: jQuery PDFViewer Documentation - DPL Processing
 description: "Get started with the jQuery PDFViewer by Kendo UI and use the Telerik Document Processing library."
 slug: dpl_processing_pdfviewer_widget
 position: 3

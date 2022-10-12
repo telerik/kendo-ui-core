@@ -1,6 +1,6 @@
 ---
 title: Interaction Modes
-page_title: jQuery Drawer Documentation | Interaction Modes
+page_title: jQuery Drawer Documentation - Interaction Modes
 description: "Get started with the jQuery Drawer by Kendo UI and use its interaction modes and handle its position."
 slug: interaction_kendoui_drawer
 position: 3

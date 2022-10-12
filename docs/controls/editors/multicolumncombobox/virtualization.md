@@ -1,6 +1,6 @@
 ---
 title: Virtualization
-page_title: jQuery MultiColumnComboBox Documentation | Virtualization
+page_title: jQuery MultiColumnComboBox Documentation - Virtualization
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and configure its virtualization."
 slug: virtualization_kendoui_multicolumncombobox_widget
 position: 6

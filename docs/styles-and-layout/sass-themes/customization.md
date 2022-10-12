@@ -1,6 +1,6 @@
 ---
 title: Customization
-page_title: Customization | Sass Themes
+page_title: Customization - Sass Themes
 description: "Learn how to customize the Kendo UI Sass themes."
 slug: sassbasedthemes_customization_kendoui
 position: 3

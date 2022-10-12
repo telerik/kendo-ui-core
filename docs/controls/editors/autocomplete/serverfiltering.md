@@ -1,6 +1,6 @@
 ---
 title: Server Filtering
-page_title: jQuery AutoComplete Documentation | Server Filtering
+page_title: jQuery AutoComplete Documentation - Server Filtering
 description: "Get started with the jQuery AutoComplete by Kendo UI and configure its server-filtering functionality."
 slug: server_filtering_kendoui_autocomplete_widget
 position: 4

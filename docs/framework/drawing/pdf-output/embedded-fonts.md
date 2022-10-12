@@ -1,6 +1,6 @@
 ---
 title: Unicode and Embedded Fonts
-page_title: Unicode and Embedded Fonts | Kendo UI Drawing Library
+page_title: Unicode and Embedded Fonts - Kendo UI Drawing Library
 description: "Embed and render fonts when you export content to PDF by using the Kendo UI Drawing library."
 previous_url: /framework/drawing/pdf-output#custom-fonts
 slug: embeddedfonts_drawing

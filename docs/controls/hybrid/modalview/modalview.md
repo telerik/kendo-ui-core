@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI ModalView
+page_title: Overview - Hybrid UI ModalView
 description: "Initialize and use the Hybrid UI ModalView widget in the Kendo UI framework."
 slug: overview_hybridmodalview
 position: 1

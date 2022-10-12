@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery ContextMenu Documentation | Data Binding
+page_title: jQuery ContextMenu Documentation - Data Binding
 description: "Get started with the jQuery ContextMenu by Kendo UI and bind the widget to local data arrays or remote data services."
 slug: binding_kendoui_contextmenu
 position: 2

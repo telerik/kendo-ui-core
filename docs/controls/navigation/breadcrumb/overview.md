@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Breadcrumb Documentation | Breadcrumb Overview
+page_title: jQuery Breadcrumb Documentation - Breadcrumb Overview
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn how to initialize the widget."
 slug: overview_kendoui_breadcrumb_widget
 position: 1

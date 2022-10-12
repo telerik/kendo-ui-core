@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ColorGradient Documentation | ColorGradient Overview
+page_title: jQuery ColorGradient Documentation - ColorGradient Overview
 description: "Get started with the jQuery ColorGradient by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_colorgradient_widget
 position: 1

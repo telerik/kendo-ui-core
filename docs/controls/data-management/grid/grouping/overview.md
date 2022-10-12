@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Grouping Overview
+page_title: jQuery Grid Documentation - Grouping Overview
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: grouping_kendoui_grid_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Flat Data
-page_title: jQuery DropDownTree Documentation | Flat Data Binding
+page_title: jQuery DropDownTree Documentation - Flat Data Binding
 description: "Get started with the jQuery DropDownTree by Kendo UI and bind the widget to a flat data table that keeps references about the hierarchical structure."
 previous_Url: /controls/editors/dropdowntree/binding-to-flat-data
 slug: bindtoflattables_dropdowntree_widget

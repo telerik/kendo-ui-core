@@ -1,6 +1,6 @@
 ---
 title: Number Formatting
-page_title: Number Formatting | Kendo UI Globalization
+page_title: Number Formatting - Kendo UI Globalization
 description: "Learn how to use the number formatting methods to convert a number object to a human readable string using the Kendo UI culture specific settings."
 previous_url: /framework/globalization/numberformatting
 slug: numberformatting_kendoui_globalization

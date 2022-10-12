@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: jQuery Sortable Documentation | Items
+page_title: jQuery Sortable Documentation - Items
 description: "Get started with the jQuery Sortable by Kendo UI and manage the items of the widget."
 slug: items_kendoui_sortable
 position: 3

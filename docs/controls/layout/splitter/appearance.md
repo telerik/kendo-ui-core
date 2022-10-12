@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery Splitter Documentation | Appearance
+page_title: jQuery Splitter Documentation - Appearance
 description: "Get started with the jQuery Splitter by Kendo UI and control its appearance."
 slug: appearance_kendoui_splitter
 position: 4

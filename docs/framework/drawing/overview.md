@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Drawing Overview | Kendo UI Drawing Library
+page_title: Drawing Overview - Kendo UI Drawing Library
 description: "Learn about the Kendo UI Drawing API, the cross-browser vector graphics library of the framework."
 slug: overview_kendoui_drawingapi
 position: 1

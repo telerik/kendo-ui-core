@@ -1,6 +1,6 @@
 ---
 title: Elements
-page_title: jQuery RippleContainer Documentation | Elements
+page_title: jQuery RippleContainer Documentation - Elements
 description: "Get started with the jQuery RippleContainer by Kendo UI and apply the ripple effect to specific elements."
 slug: elements_kendoui_ripplecontainer
 position: 2

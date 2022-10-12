@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Charts Documentation | Sparkline Overview
+page_title: jQuery Charts Documentation - Sparkline Overview
 description: "Get started with the jQuery Sparkline by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_sparklinescharts
 position: 1

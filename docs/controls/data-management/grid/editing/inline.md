@@ -1,6 +1,6 @@
 ---
 title: Inline
-page_title: jQuery Grid Documentation | Inline Editing
+page_title: jQuery Grid Documentation - Inline Editing
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI and learn how to apply the inline edit mode."
 slug: inlineediting_grid
 position: 3

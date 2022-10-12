@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery TextArea Documentation | TextArea Appearance
+page_title: jQuery TextArea Documentation - TextArea Appearance
 description: "Learn how to apply different styling options to the TextArea widget."
 previous_url: /styles-and-layout/styling-components/textarea-styling
 slug: textarea_appearance

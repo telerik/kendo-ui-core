@@ -1,6 +1,6 @@
 ---
 title: Column Virtualization
-page_title: jQuery Grid Documentation | Column Virtualization
+page_title: jQuery Grid Documentation - Column Virtualization
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable its column virtualization."
 slug: columnvirtualization_kendoui_grid_widget
 ---

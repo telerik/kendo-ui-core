@@ -1,6 +1,6 @@
 ---
 title: Component Types
-page_title: jQuery DateTimePicker Documentation | DateTimePicker Component Types
+page_title: jQuery DateTimePicker Documentation - DateTimePicker Component Types
 description: "Get started with the jQuery DateTimePicker by Kendo UI and learn how to enable the modern component type."
 slug: componenttypes_datetimepicker
 position: 5

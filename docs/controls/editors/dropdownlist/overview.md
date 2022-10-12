@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery DropDownList Documentation | DropDownList Overview
+page_title: jQuery DropDownList Documentation - DropDownList Overview
 description: "Try now the Kendo UI for jQuery DropDownList component covering everything from data binding,  and grouping to virtualization and templates."
 slug: overview_kendoui_dropdownlist_widget
 position: 0

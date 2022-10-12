@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Excel Export Overview | Kendo UI Excel Export
+page_title: Excel Export Overview - Kendo UI Excel Export
 description: "Learn how to create Excel documents with Kendo UI."
 slug: introduction_excelexport_kendoui
 position: 1

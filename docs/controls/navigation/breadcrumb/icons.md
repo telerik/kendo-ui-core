@@ -1,6 +1,6 @@
 ---
 title: Icons
-page_title: jQuery Breadcrumb Documentation | Icons
+page_title: jQuery Breadcrumb Documentation - Icons
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn how to configure the icons of the items and the delimiters of the widget."
 slug: icons_breadcrumb_widget
 position: 3

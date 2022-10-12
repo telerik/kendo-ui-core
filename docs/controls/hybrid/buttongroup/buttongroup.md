@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI ButtonGroup
+page_title: Overview - Hybrid UI ButtonGroup
 description: "Visualize a linear set of grouped buttons in your app by using the hybrid mobile Kendo UI ButtonGroup widget and customize its appearance."
 slug: overview_hybridbuttongroup
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Responsive Pager
-page_title: jQuery Pager Documentation | Responsive Pager
+page_title: jQuery Pager Documentation - Responsive Pager
 description: "Get started with the jQuery Pager by Kendo UI and learn about its responsive feature."
 slug: responsive_kendoui_pager_widget
 ---

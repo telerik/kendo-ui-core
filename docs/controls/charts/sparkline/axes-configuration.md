@@ -1,6 +1,6 @@
 ---
 title: Axes Configuration
-page_title: jQuery Sparkline Charts Documentation | Axes Configuration
+page_title: jQuery Sparkline Charts Documentation - Axes Configuration
 description: "Get started with the jQuery Sparkline by Kendo UI and learn how to configure their axes."
 slug: axes_kendoui_sparklinescharts
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery SkeletonContainer Documentation | SkeletonContainer Overview
+page_title: jQuery SkeletonContainer Documentation - SkeletonContainer Overview
 description: "Get started with the jQuery SkeletonContainer by Kendo UI and learn how to initialize the widget."
 slug: overview_kendoui_skeletoncontainer_widget
 position: 1

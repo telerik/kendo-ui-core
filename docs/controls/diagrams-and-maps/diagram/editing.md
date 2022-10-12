@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: jQuery Diagram Documentation | Editing
+page_title: jQuery Diagram Documentation - Editing
 description: "Get started with the jQuery Diagram by Kendo UI and enable its editing functionality."
 slug: editing_kendoui_diagram_widget
 position: 3

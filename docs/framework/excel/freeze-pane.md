@@ -1,6 +1,6 @@
 ---
 title: Freezing Rows and Columns
-page_title: Freezing Rows and Columns | Kendo UI Excel Export
+page_title: Freezing Rows and Columns - Kendo UI Excel Export
 description: "Learn how to freeze rows and columns in the output Excel document while working with Kendo UI."
 slug: freezerowsandcolumns_excelexport_kendoui
 position: 3

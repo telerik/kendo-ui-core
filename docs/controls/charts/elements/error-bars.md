@@ -1,6 +1,6 @@
 ---
 title: Error Bars
-page_title: jQuery Chart Documentation | Error Bars
+page_title: jQuery Chart Documentation - Error Bars
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its error bars."
 previous_url: /controls/charts/error-bars
 slug: errorbars_charts_widget

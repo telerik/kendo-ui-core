@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Spreadsheet Documentation | Spreadsheet Globalization
+page_title: jQuery Spreadsheet Documentation - Spreadsheet Globalization
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn about the globalization options it supports."
 slug: globalization_kendoui_spreadsheet_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-page_title: jQuery DropDownList Documentation | Getting Started with the DropDownList
+page_title: jQuery DropDownList Documentation - Getting Started with the DropDownList
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: getting_started_kendoui_dropdownlist_widget
 position: 1

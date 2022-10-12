@@ -1,6 +1,6 @@
 ---
 title: Flat Data
-page_title: jQuery TreeView Documentation | Flat Data 
+page_title: jQuery TreeView Documentation - Flat Data 
 description: "Get started with the jQuery TreeView by Kendo UI and learn how to bind the widget to a flat data table that keeps references about the hierarchical structure."
 previous_url: /controls/navigation/treeview/binding-to-flat-data
 slug: bindtoflattables_treeview_widget

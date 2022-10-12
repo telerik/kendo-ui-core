@@ -1,6 +1,6 @@
 ---
 title: Dragging and Dropping
-page_title: jQuery TreeView Documentation | Dragging and Dropping
+page_title: jQuery TreeView Documentation - Dragging and Dropping
 description: "Get started with the jQuery TreeView by Kendo UI and implement the drag-and-drop functionality of the widget."
 slug: dragdrop_kendoui_treeview
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Layout
-page_title: Kendo UI for jQuery RadioGroup Documentation | Layout
+page_title: Kendo UI for jQuery RadioGroup Documentation - Layout
 description: "Get started with the Kendo UI for jQuery RadioGroup and learn about the layouts it supports."
 slug: layout_radiogroup_widget
 position: 4

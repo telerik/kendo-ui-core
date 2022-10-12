@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Badge Documentation | Badge Overview
+page_title: jQuery Badge Documentation - Badge Overview
 description: "Get started with the jQuery Badge by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_badge_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery Dialog Documentation | Troubleshooting
+page_title: jQuery Dialog Documentation - Troubleshooting
 description: "Get started with the jQuery Dialog by Kendo UI and learn how to deal with issues you may encounter while using the widget."
 slug: troubleshooting_kendoui_dialog
 position: 60

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Notification Documentation | Notification Globalization
+page_title: jQuery Notification Documentation - Notification Globalization
 description: "Get started with the jQuery Notification by Kendo UI and learn about the globalization options it supports."
 slug: globalization_kendoui_notification
 position: 1

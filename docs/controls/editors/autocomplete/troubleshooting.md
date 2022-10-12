@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery AutoComplete Documentation | Troubleshooting | Kendo UI AutoComplete
+page_title: jQuery AutoComplete Documentation - Troubleshooting | Kendo UI AutoComplete
 description: "Get started with the jQuery AutoComplete by Kendo UI and learn how to deal with issues you may encounter while using the widget."
 slug: troubleshooting_autocomplete_widget
 position: 9

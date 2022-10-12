@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: jQuery DropDownButton Documentation | Items
+page_title: jQuery DropDownButton Documentation - Items
 description: "Get started with the jQuery DropDownButton by Kendo UI and use the items options it provides."
 slug: items_kendoui_dropdownbutton_widget
 position: 2
