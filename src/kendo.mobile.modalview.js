@@ -1,6 +1,5 @@
-(function(f, define) {
-    define([ "./kendo.mobile.shim", "./kendo.mobile.view" ], f);
-})(function() {
+import "./kendo.mobile.shim.js";
+import "./kendo.mobile.view.js";
 
 var __meta__ = {
     id: "mobile.modalview",
@@ -126,6 +125,3 @@ var __meta__ = {
     ui.plugin(ModalView);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

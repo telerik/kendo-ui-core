@@ -1,6 +1,7 @@
-(function(f, define) {
-    define([ "./kendo.data", "./kendo.editable", "./kendo.selectable", "./kendo.pager" ], f);
-})(function() {
+import "./kendo.data.js";
+import "./kendo.editable.js";
+import "./kendo.selectable.js";
+import "./kendo.pager.js";
 
 var __meta__ = {
     id: "listview",
@@ -1048,6 +1049,3 @@ var __meta__ = {
     kendo.ui.plugin(ListView);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

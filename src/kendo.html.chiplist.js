@@ -1,8 +1,4 @@
-(function(f, define) {
-    define([
-        "./kendo.html.base"
-    ], f);
-})(function() {
+import "./kendo.html.base.js";
 
 var __meta__ = {
     id: "html.chiplist",
@@ -49,6 +45,3 @@ var __meta__ = {
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

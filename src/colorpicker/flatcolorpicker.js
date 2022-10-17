@@ -1,10 +1,6 @@
-(function(f, define){
-    define([
-        "./colorgradient",
-        "./colorpalette",
-        "../kendo.html.button"
-    ], f);
-})(function(){
+import "./colorgradient.js";
+import "./colorpalette.js";
+import "../kendo.html.button.js";
 
 (function($, undefined){
     // WARNING: removing the following jshint declaration and turning
@@ -365,6 +361,3 @@
     ui.plugin(FlatColorPicker);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

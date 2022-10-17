@@ -7,8 +7,10 @@
         "url": "https://github.com/telerik/kendo-ui-core.git"
     },
     "dependencies": {
-        "jquery": "1.10.0 - 3.6.0"
+        "jquery": "1.10.0 - 3.6"
     },
     "main": "js/kendo.ui.core.js",
+    "module": "esm/kendo.ui.core.js",
+    "browser": "umd/kendo.ui.core.min.js",
     "typings": "index.d.ts"
 }

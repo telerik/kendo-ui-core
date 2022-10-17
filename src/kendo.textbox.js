@@ -1,6 +1,5 @@
-(function(f, define) {
-    define(["./kendo.core", "./kendo.floatinglabel"], f);
-})(function() {
+import "./kendo.core.js";
+import "./kendo.floatinglabel.js";
 
 var __meta__ = {
     id: "textbox",
@@ -257,6 +256,3 @@ var __meta__ = {
     ui.plugin(TextBox);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

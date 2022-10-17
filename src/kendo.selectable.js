@@ -1,6 +1,5 @@
-(function(f, define) {
-    define([ "./kendo.core", "./kendo.userevents" ], f);
-})(function() {
+import "./kendo.core.js";
+import "./kendo.userevents.js";
 
 var __meta__ = {
     id: "selectable",
@@ -546,6 +545,3 @@ var __meta__ = {
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -1,6 +1,6 @@
-(function(f, define){
-    define([ "../kendo.core", "../kendo.popup", "./contrastToolUtils" ], f);
-})(function(){
+import "../kendo.core.js";
+import "../kendo.popup.js";
+import "./contrastToolUtils.js";
     var __meta__ = {
         id: "colorgradient",
         name: "ColorGradient",
@@ -680,6 +680,3 @@
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

@@ -1,6 +1,7 @@
-(function(f, define) {
-    define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller", "./kendo.view" ], f);
-})(function() {
+import "./kendo.core.js";
+import "./kendo.fx.js";
+import "./kendo.mobile.scroller.js";
+import "./kendo.view.js";
 
 var __meta__ = {
     id: "mobile.view",
@@ -712,6 +713,3 @@ var __meta__ = {
     ui.plugin(Layout);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

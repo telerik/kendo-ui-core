@@ -1,6 +1,6 @@
-(function(f, define) {
-    define([ "./kendo.datepicker", "./kendo.timepicker", "./kendo.html.button"], f);
-})(function() {
+import "./kendo.datepicker.js";
+import "./kendo.timepicker.js";
+import "./kendo.html.button.js";
 
 var __meta__ = {
     id: "datetimepicker",
@@ -1144,6 +1144,3 @@ var __meta__ = {
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

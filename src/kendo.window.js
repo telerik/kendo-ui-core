@@ -1,6 +1,5 @@
-(function(f, define) {
-    define([ "./kendo.draganddrop", "./kendo.popup"], f);
-})(function() {
+import "./kendo.draganddrop.js";
+import "./kendo.popup.js";
 
     var __meta__ = {
         id: "window",
@@ -2162,6 +2161,3 @@
 
     })(window.kendo.jQuery);
 
-    return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

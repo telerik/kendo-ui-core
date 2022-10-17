@@ -1,7 +1,5 @@
-var fs = require('fs');
 var gulp = require('gulp');
 var shell = require('gulp-shell');
-var path = require('path');
 var logger = require('gulp-logger');
 var PluginError = require('plugin-error');
 var clone = require('gulp-clone');
@@ -9,8 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var gulpIf = require('gulp-if');
 var replace = require("gulp-replace");
 var rename = require("gulp-rename");
-var requirejsOptimize = require('gulp-requirejs-optimize');
-var glob = require("glob");
+var filter = require('gulp-filter');
 var flatmap = require('gulp-flatmap');
 
 var merge = require('merge2');
@@ -18,21 +15,19 @@ var argv = require('yargs').argv;
 
 var license = require('./build/gulp/license');
 var cssUtils = require('./build/gulp/css');
-var umdWrapToCore = require('./build/gulp/wrap-umd');
-var uglify = require('./build/gulp/uglify');
 var requireDir = require('require-dir');
 
-var webpack = require('webpack');
-var webpackStream = require('webpack-stream');
-var named = require('vinyl-named');
+const exec = require('child_process').exec;
+const terser = require('gulp-terser');
+const rollupStream = require('@rollup/stream');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 
 var kendoVersion = require("./build/gulp/kendo-version");
 
 requireDir('./build/gulp/tasks');
 
 var makeSourceMaps = !argv['skip-source-maps'];
-var skipMinify = argv['skip-min'];
-var skipCultures = argv['skip-cultures'];
 
 var postcss = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
@@ -59,13 +54,13 @@ var postcssPlugins = [
 
 gulp.task("css-assets", function() {
     return gulp.src("styles/**/*.{less,woff,ttf,eot,png,gif,css,svg,txt}")
-        .pipe(gulpIf((file) => file.path.match(/.less$/), license()))
+        .pipe(gulpIf((file) => file.path.match(/.less$/), flatmap(license)))
         .pipe(gulp.dest("dist/styles"));
 });
 
 gulp.task("less", function() {
     var css = gulp.src(`styles/${argv.styles || '**/kendo*.less'}`, { base: "styles" })
-        .pipe(license())
+        .pipe(flatmap(license))
         .pipe(cssUtils.fromLess())
         .pipe(postcss(postcssPlugins));
 
@@ -86,107 +81,85 @@ gulp.task("less", function() {
 
 gulp.task("styles", gulp.series(["less", "css-assets"]));
 
-// cloning those somehow fails, I think that it is due to the RTL symbols in the culture
-function cultures() {
-    let src = gulp.src('src/cultures/kendo.culture.*.js', { base: 'src' })
-        .pipe(umdWrapToCore())
-        .pipe(license());
-    let minJs;
-
-    if (!skipMinify) {
-        minJs = src.pipe(clone())
-            .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
-            .pipe(flatmap(uglify))
-            .pipe(logger({ after: 'Cultures: Uglify complete', extname: '.min.js', showChange: true }))
-            .pipe(license())
-            .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
-
-        src = merge(src, minJs);
+let HELPERS = {
+    execute: (command) => {
+      const process = exec(command);
+      process.stdout.on('data', (data) => { console.log(data.toString()); });
+      process.stderr.on('data', (data) => { console.log(data.toString()); });
+      process.on('exit', (code) => {
+        console.log('Process exited with code ' + code.toString());
+      });
+      return process;
     }
+  };
 
-    return src;
+function compileScripts() {
+    return HELPERS.execute('node --max-old-space-size=8192 ./node_modules/rollup/dist/bin/rollup -c');
 }
 
-function messages() {
-    let src = gulp.src('src/messages/kendo.messages.*.js', { base: 'src' })
-        .pipe(umdWrapToCore())
-        .pipe(license());
-    let minJs;
-
-    if (!skipMinify) {
-        minJs = src.pipe(clone())
-            .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
-            .pipe(flatmap(uglify))
-            .pipe(logger({ after: 'Messages: Uglify complete', extname: '.min.js', showChange: true }))
-            .pipe(license())
-            .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
-
-        src = merge(src, minJs);
-    }
-
-    return src;
+function compileMjsScripts() {
+    return HELPERS.execute('npx rollup -c rollup.mjs.config.js');
 }
 
-const toDist = (stream) => stream.pipe(gulp.dest('dist/js'));
-
-function gatherWithRequireJS(stream, file) {
-    let currentModule = path.relative(process.cwd(), file.path).replace("\\", "/");
-    let modules = glob.sync("src/kendo.*.js", { ignore: currentModule }).map(mdName => mdName.replace(/^src\/(.*)\.js$/, "$1"));
-    let dict = Object.assign({}, ...modules.map(mod => Object.assign({ [mod]: 'empty:' })));
-    let paths = { jquery: "empty:" };
-    let isBundle = fs.readFileSync(file.path).indexOf('"bundle all";') > -1;
-
-    if (!isBundle) {
-        Object.assign(paths, dict);
-    }
-
-    return stream.pipe(requirejsOptimize({
-        baseUrl: "src",
-        optimize: "none",
-        paths: paths,
-        logLevel: 2,
-        onBuildWrite: function(moduleName, path, contents) {
-            return contents.replace(/(\.+\/)+(kendo[\.\w]+)/gm, '$2');
-        }
-    }));
+function renameModules(match) {
+    return match.replace(/['"]([\w\.\-\/]+)?['"]/g, function(_, module) {
+        return module == "jquery" ? '"jquery"' : `"${module}.min"`;
+    });
 }
 
-gulp.task("scripts", function() {
-    let src = gulp.src(`src/${argv.scripts || 'kendo.*.js'}`, { base: "src" })
-        .pipe(flatmap(gatherWithRequireJS))
-        .pipe(license());
-    let minJs;
-
-    if (!skipMinify) {
-        minJs = src.pipe(clone())
-            .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
-            .pipe(flatmap(uglify))
-            .pipe(license())
-            .pipe(logger({ after: 'Scripts: Uglify complete', extname: '.min.js', showChange: true }))
-            .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
-        src = merge(src, minJs);
+const terserOptions = {
+    mangle: {
+        reserved: [ "define", "KendoLicensing" ]
     }
+};
 
-    let thirdParty = gulp.src('src/{jquery,angular,pako,jszip}*.*');
+function uglifyScripts(stream) {
+    return stream
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
+        .pipe(replace(/define\((?:["'][\w\.\-\/]+["'])?.+?\]/g, renameModules))
+        .pipe(replace(/"kendo\.core"/g, '"kendo.core.min"'))
+        .pipe(logger({ extname: '.min.js', showChange: true }))
+        .pipe(terser(terserOptions))
+        .pipe(rename({ suffix: ".min" }))
+        .pipe(logger({ extname: '.js.map', showChange: true }))
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
+}
 
-    let combinedSrc = merge(
-        src.pipe(flatmap(toDist)),
-        thirdParty.pipe(flatmap(toDist))
-    );
+function distThirdParty() {
+    return gulp.src('src/{jquery,angular,pako,jszip}*.*')
+        .pipe(logger({ after: "ThirdParty: Scripts copied!", display: 'name', dest: './dist/js/', showChange: true }))
+        .pipe(gulp.dest('dist/js'));
+}
 
-    if (!skipCultures) {
-        combinedSrc = merge(combinedSrc,
-            cultures().pipe(flatmap(toDist)),
-            messages().pipe(flatmap(toDist))
-        );
-    }
+function minScripts() {
+    return gulp.src(['dist/js/kendo.*.js', 'dist/js/cultures/*.js', 'dist/js/messages/*.js'], { base: "dist/js" })
+        .pipe(filter(file => !/\.min\.js/.test(file.path)))
+        .pipe(flatmap(uglifyScripts))
+        .pipe(gulp.dest('dist/js'));
+}
 
-    return combinedSrc;
+function mjsMin() {
+    return gulp.src(['dist/mjs/kendo.*.js', 'dist/mjs/cultures/*.js', 'dist/mjs/messages/*.js'], { base: "dist/mjs" })
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
+        .pipe(logger({ after: 'Terser: Uglify complete!', showChange: true }))
+        .pipe(terser(terserOptions))
+        .pipe(logger({ after: 'Sourcemap: Write complete!', extname: '.js.map', showChange: true }))
+        .pipe(sourcemaps.write("./"))
+        .pipe(gulp.dest('dist/mjs'));
+}
+
+gulp.task('js-license', function() {
+    return gulp.src(['dist/js/**/kendo.*.js', 'dist/mjs/**/kendo.*.js'], { base: './dist' })
+        .pipe(flatmap(license))
+        .pipe(gulp.dest('dist/temp'));
 });
+
+gulp.task("scripts", gulp.series(gulp.parallel(compileMjsScripts,
+    gulp.series(compileScripts, gulp.parallel(distThirdParty, minScripts))
+), mjsMin, 'js-license'));
 
 gulp.task("custom", function() {
     var files = argv.c;
-    const customFilePath = 'src/kendo.custom.js';
 
     if (!files) {
         throw new PluginError({
@@ -196,78 +169,42 @@ gulp.task("custom", function() {
         });
     }
 
-    files = files.split(',').map(f => `"./kendo.${f}"`);
+    const imports = argv.c.split(',').map((bundles) => `import './src/kendo.${bundles}.js'`).join(';');
 
-    fs.writeFileSync(customFilePath, `(function(f, define){
-            define([${files.join(',')}], f);
-        })(function(){
-            "bundle all";
-            return window.kendo;
-        }, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });`);
-
-    var src = gulp.src(customFilePath)
-        .pipe(requirejsOptimize({
-            optimize: "none",
-            paths: { jquery: "empty:" },
-            logLevel: 2,
-            onModuleBundleComplete: function() {
-                fs.unlinkSync(customFilePath);
-            }
-        }))
-        .pipe(license());
-
-    var minSrc = src
-        .pipe(clone())
-        .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
-        .pipe(gulpIf(!skipMinify, flatmap(uglify)))
-        .pipe(logger({ after: 'Scripts: Uglify complete', extname: '.min.js', showChange: true }))
-        .pipe(gulpIf(makeSourceMaps, logger({ after: 'Scripts: source map complete!', extname: '.map', showChange: true })))
-        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
-
-    return merge(src.pipe(flatmap(toDist)), minSrc.pipe(flatmap(toDist)));
-});
-
-gulp.task("custom", function() {
-    var files = argv.c;
-    const customFilePath = 'src/kendo.custom.js';
-
-    if (!files) {
-        throw new PluginError({
-            task: "custom",
-            plugin: "custom",
-            message: "please provide a list of the components to be included in the build with -c, separated with ','"
-        });
-    }
-
-    files = files.split(',').map(f => `"./kendo.${f}"`);
-
-    fs.writeFileSync(customFilePath, `(function(f, define){
-            define([${files.join(',')}], f);
-        })(function(){
-            "bundle all";
-            return window.kendo;
-        }, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });`);
-
-    var src = gulp.src(customFilePath)
-        .pipe(requirejsOptimize({
-            optimize: "none",
-            paths: { jquery: "empty:" },
-            logLevel: 2,
-            onModuleBundleComplete: function() {
-                fs.unlinkSync(customFilePath);
-            }
-        }))
-        .pipe(license());
+    var src = rollupStream({
+            input: 'custom',
+            output: {
+                format: 'umd',
+                globals: { jquery: '$' },
+                strict: false
+            },
+            external: ['jquery'],
+            treeshake: false,
+            plugins: [
+                require('@rollup/plugin-buble')(),
+                require('@rollup/plugin-virtual')({
+                    custom: `
+                        import 'jquery';
+                        ${imports}
+                    `
+                })
+            ]
+        })
+        .pipe(source('kendo.custom.js'))
+        .pipe(logger({ before: 'Custom: Bundling!', after: 'Custom: Bundle complete!', showChange: true }))
+        .pipe(buffer())
+        .pipe(flatmap(license));
 
     var minSrc = src
         .pipe(clone())
         .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
-        .pipe(gulpIf(!skipMinify, flatmap(uglify)))
-        .pipe(logger({ after: 'Scripts: Uglify complete', extname: '.min.js', showChange: true }))
-        .pipe(gulpIf(makeSourceMaps, logger({ after: 'Scripts: source map complete!', extname: '.map', showChange: true })))
+        .pipe(logger({ after: 'Terser: Uglify complete!', extname: '.min.js', showChange: true }))
+        .pipe(terser(terserOptions))
+        .pipe(rename({ suffix: ".min" }))
+        .pipe(logger({ after: 'Sourcemap: Write complete!', extname: '.js.map', showChange: true }))
         .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
 
-    return merge(src.pipe(flatmap(toDist)), minSrc.pipe(flatmap(toDist)));
+    return merge(src.pipe(gulp.dest('dist/js')), minSrc.pipe(gulp.dest('dist/js')));
 });
 
 gulp.task('build', gulp.parallel(['scripts', 'styles']));
@@ -276,71 +213,58 @@ gulp.task('tests', gulp.series(['karma-mocha']));
 
 gulp.task('ci', gulp.series(['build', 'karma-ci']));
 
-gulp.task('cjs', function() {
-    return gulp.src('src/{kendo.*.js,*/*.js,*/**/*.js}')
-        .pipe(named(function(file) {
-            const thePath = file.path;
-            const relativeDir = path.relative(file.base, path.dirname(thePath));
-            const fileName = path.basename(thePath, path.extname(thePath));
-            return path.join(relativeDir, fileName);
-        }))
-        .pipe(webpackStream({
-            mode: 'production',
-            output: {
-                libraryTarget: 'commonjs2'
-            },
+function compileModulesScripts() {
+    return HELPERS.execute('npm run scripts:modules');
+}
 
-            plugins: [new webpack.ProvidePlugin({ 'jQuery': "jquery" })],
-
-            externals: ['jquery', /^\.\//, /^\.\.\//],
-            optimization: {
-                minimize: false
-            }
-        }))
-        .pipe(gulp.dest('dist/cjs'));
-});
 gulp.task('mdspell', shell.task(
     ['cd docs && mdspell "**/*.md" -n -a --report']
 ));
 
-gulp.task('pack-npm', function() {
-    var internalOption = "", i = process.argv.indexOf("--channel"), flavor = 'core';
+function packNpm() {
+    var internalOption = "";
+    var i = process.argv.indexOf("--channel");
 
     if (i > -1) {
         internalOption = process.argv[i + 1];
     }
-    var js = gulp.src('dist/cjs/**/*')
-        .pipe(gulp.dest('dist/npm/js'));
 
-    var jsmin = gulp.src('dist/cjs/**/*.js')
-        .pipe(flatmap(uglify))
-        .pipe(gulp.dest('dist/npm/js'));
+    const dest = 'dist/npm';
 
-    var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
+    const cjs = gulp.src('dist/cjs/**/*')
+        .pipe(gulp.dest(dest + '/js'));
 
-    var pkg = gulp.src('build/package-' + flavor + '.json')
+    const js = gulp.src(['dist/js/**/*.min.js', 'dist/js/**/*.min.js.map'])
+        .pipe(gulp.dest(dest + '/umd'));
+
+    const esm = gulp.src('dist/esm/**/*.js')
+        .pipe(gulp.dest(dest + '/esm'));
+
+    const styles = gulp.src('dist/styles/**/*')
+        .pipe(gulp.dest(dest + '/css'));
+
+    const pkg = gulp.src('build/package-core.json')
         .pipe(replace("$KENDO_VERSION", kendoVersion + internalOption))
         .pipe(rename('package.json'))
-        .pipe(gulp.dest('dist/npm'));
+        .pipe(gulp.dest(dest));
 
-    var license = gulp.src('resources/legal/npm/' + flavor + '.txt')
+    const license = gulp.src('resources/legal/npm/core.txt')
         .pipe(replace("$YEAR", new Date().getFullYear()))
         .pipe(rename('LICENSE'))
-        .pipe(gulp.dest('dist/npm'));
+        .pipe(gulp.dest(dest));
 
-    var readme = gulp.src('resources/npm/' + flavor + '-README.md')
+    const readme = gulp.src('resources/npm/core-README.md')
         .pipe(rename('README.md'))
-        .pipe(gulp.dest('dist/npm'));
+        .pipe(gulp.dest(dest));
 
-    var typings = gulp.src('typescript/kendo.all.d.ts')
+    const typings = gulp.src('typescript/kendo.all.d.ts')
         .pipe(rename('index.d.ts'))
-        .pipe(gulp.dest('dist/npm'));
+        .pipe(gulp.dest(dest));
 
-    return merge(js, jsmin, styles, pkg, license, readme, typings);
-});
+    return merge(cjs, js, esm, styles, pkg, license, readme, typings);
+}
 
-gulp.task('npm-core', gulp.series(['cjs', 'styles', 'pack-npm']));
-
+gulp.task('npm-core', gulp.series(gulp.parallel('scripts', compileModulesScripts, 'styles'), packNpm));
 
 const taskListing = require('gulp-task-listing');
 gulp.task('tasks', taskListing.withFilters(/:/));

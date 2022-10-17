@@ -1,6 +1,5 @@
-(function(f, define) {
-    define([ "./kendo.mobile.popover", "./kendo.mobile.shim" ], f);
-})(function() {
+import "./kendo.mobile.popover.js";
+import "./kendo.mobile.shim.js";
 
 var __meta__ = {
     id: "mobile.actionsheet",
@@ -164,6 +163,3 @@ var __meta__ = {
     ui.plugin(ActionSheet);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

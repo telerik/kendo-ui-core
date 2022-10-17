@@ -1,6 +1,7 @@
-(function(f, define) {
-    define([ "./kendo.core", "./kendo.userevents", "./kendo.floatinglabel", "./kendo.html.button" ], f);
-})(function() {
+import "./kendo.core.js";
+import "./kendo.userevents.js";
+import "./kendo.floatinglabel.js";
+import "./kendo.html.button.js";
 
 var __meta__ = {
     id: "numerictextbox",
@@ -980,6 +981,3 @@ var __meta__ = {
     ui.plugin(NumericTextBox);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

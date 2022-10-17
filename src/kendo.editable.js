@@ -1,6 +1,9 @@
-(function(f, define) {
-    define([ "./kendo.checkbox", "./kendo.dropdownlist", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.validator", "./kendo.binder" ], f);
-})(function() {
+import "./kendo.checkbox.js";
+import "./kendo.dropdownlist.js";
+import "./kendo.datepicker.js";
+import "./kendo.numerictextbox.js";
+import "./kendo.validator.js";
+import "./kendo.binder.js";
 
 var __meta__ = {
     id: "editable",
@@ -489,6 +492,3 @@ var __meta__ = {
    ui.plugin(Editable);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

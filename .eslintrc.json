@@ -2,6 +2,7 @@
     "root": true,
     "extends": "eslint:recommended",
     "parserOptions": {
+        "sourceType": "module",
         "ecmaVersion": 2018
     },
     "env": {
@@ -70,6 +71,7 @@
         "no-prototype-builtins": "off", //"error",
         "no-redeclare": "off", //"error",
         "no-return-assign": "off", //"error",
+        "no-restricted-imports": "off",
         "no-self-assign": "off", //"error",
         "no-sequences": "error",
         "no-shadow-restricted-names": "off", //"error",

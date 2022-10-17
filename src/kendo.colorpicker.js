@@ -1,20 +1,15 @@
-(function(f, define) {
-    define([
-        "./kendo.core",
-        "./kendo.color",
-        "./kendo.popup",
-        "./kendo.slider",
-        "./kendo.userevents",
-        "./kendo.button",
-        "./kendo.binder",
-        "./kendo.textbox",
-        "./kendo.numerictextbox",
-        "./kendo.html.button",
-
-        "./colorpicker/colorselector",
-        "./colorpicker/flatcolorpicker"
-    ], f);
-})(function() {
+import "./kendo.core.js";
+import "./kendo.color.js";
+import "./kendo.popup.js";
+import "./kendo.slider.js";
+import "./kendo.userevents.js";
+import "./kendo.button.js";
+import "./kendo.binder.js";
+import "./kendo.textbox.js";
+import "./kendo.numerictextbox.js";
+import "./kendo.html.button.js";
+import "./colorpicker/colorselector.js";
+import "./colorpicker/flatcolorpicker.js";
 
 var __meta__ = {
     id: "colorpicker",
@@ -437,6 +432,3 @@ var __meta__ = {
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

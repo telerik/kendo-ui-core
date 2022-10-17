@@ -1,6 +1,5 @@
-(function(f, define) {
-    define([ "./kendo.toggleinputbase", "./kendo.html.input" ], f);
-})(function() {
+import "./kendo.toggleinputbase.js";
+import "./kendo.html.input.js";
 
 var __meta__ = {
     id: "checkbox",
@@ -49,6 +48,3 @@ var __meta__ = {
     ui.plugin(CheckBox);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -1,6 +1,6 @@
-(function(f, define) {
-    define([ "./kendo.core", "./kendo.popup", "./kendo.fx" ], f);
-})(function() {
+import "./kendo.core.js";
+import "./kendo.popup.js";
+import "./kendo.fx.js";
 
 var __meta__ = {
     id: "tooltip",
@@ -593,6 +593,3 @@ var __meta__ = {
     kendo.ui.plugin(Tooltip);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

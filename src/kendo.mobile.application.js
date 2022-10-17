@@ -1,6 +1,5 @@
-(function(f, define) {
-    define([ "./kendo.mobile.pane", "./kendo.router" ], f);
-})(function() {
+import "./kendo.mobile.pane.js";
+import "./kendo.router.js";
 
 var __meta__ = {
     id: "mobile.application",
@@ -499,6 +498,3 @@ var __meta__ = {
     kendo.ui.plugin(Application, kendo.mobile, 'Mobile');
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

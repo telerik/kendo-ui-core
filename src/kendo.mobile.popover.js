@@ -1,6 +1,5 @@
-(function(f, define) {
-    define([ "./kendo.popup", "./kendo.mobile.pane" ], f);
-})(function() {
+import "./kendo.popup.js";
+import "./kendo.mobile.pane.js";
 
 var __meta__ = {
     id: "mobile.popover",
@@ -271,6 +270,3 @@ var __meta__ = {
     ui.plugin(PopOver);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

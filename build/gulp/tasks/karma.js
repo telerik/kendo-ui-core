@@ -7,7 +7,7 @@ var argv = require('yargs').argv;
 var meta = require("../../kendo-meta.js");
 
 // all files (including subfiles like editor/main.js etc.)
-var allKendoFiles = meta.loadAll().map((f) => path.join('src', f));
+const allKendoFiles = () => meta.loadAll().map((f) => path.join('dist', 'dev', 'js', f));
 
 // support different test sets for public|private repo
 var TESTS = require(glob.sync('../../test-paths-*.js', { cwd: __dirname })[0]);
@@ -78,7 +78,7 @@ var flavours = {
 
         files: [].concat(
             TESTS.beforeTestFiles,
-            allKendoFiles,
+            TESTS.ciFiles,
             TESTS.afterTestFiles,
             tests
         )
@@ -86,7 +86,12 @@ var flavours = {
     mocha: {
         files: [].concat(
             TESTS.beforeTestFiles,
-            allKendoFiles,
+            allKendoFiles(),
+            'dist/dev/js/cultures/kendo.culture.de-DE.js',
+            'dist/dev/js/cultures/kendo.culture.bg-BG.js',
+            'dist/dev/js/cultures/kendo.culture.en-ZA.js',
+            'dist/dev/js/cultures/kendo.culture.es-ES.js',
+            'dist/dev/js/kendo.timezones.js',
             TESTS.afterTestFiles,
             tests
         )

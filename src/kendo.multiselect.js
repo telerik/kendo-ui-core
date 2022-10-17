@@ -1,6 +1,9 @@
-(function(f, define) {
-    define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist", "./kendo.html.chip", "./kendo.html.chiplist", "./kendo.html.button" ], f);
-})(function() {
+import "./kendo.list.js";
+import "./kendo.mobile.scroller.js";
+import "./kendo.virtuallist.js";
+import "./kendo.html.chip.js";
+import "./kendo.html.chiplist.js";
+import "./kendo.html.button.js";
 
 var __meta__ = {
     id: "multiselect",
@@ -1661,6 +1664,3 @@ var __meta__ = {
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

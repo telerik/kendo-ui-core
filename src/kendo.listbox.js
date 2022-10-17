@@ -1,7 +1,7 @@
 
-(function(f, define) {
-    define([ "./kendo.draganddrop", "./kendo.data", "./kendo.selectable" ], f);
-})(function() {
+import "./kendo.draganddrop.js";
+import "./kendo.data.js";
+import "./kendo.selectable.js";
 
 var __meta__ = {
     id: "listbox",
@@ -1603,6 +1603,3 @@ var __meta__ = {
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

@@ -1,6 +1,4 @@
-(function(f, define) {
-    define([ "./kendo.mobile.pane" ], f);
-})(function() {
+import "./kendo.mobile.pane.js";
 
 var __meta__ = {
     id: "mobile.splitview",
@@ -144,6 +142,3 @@ var __meta__ = {
     ui.plugin(SplitView);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });
