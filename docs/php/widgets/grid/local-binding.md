@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | Grid PHP Class
+page_title: Local Binding - Grid PHP Class
 description: "Bind Kendo UI Grid PHP class to an array of data."
 slug: localbinding_grid_uiforphp
 position: 2

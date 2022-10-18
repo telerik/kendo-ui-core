@@ -1,6 +1,6 @@
 ---
 title: Reordering
-page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation | TileLayout reordering 
+page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation - TileLayout reordering 
 description: "Learn how to enable and use the reordering functionality of the Telerik UI TileLayout component for {{ site.framework }}."
 slug: htmlhelpers_aspnet_tilelayout_reordering
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Views
-page_title: The {{ site.product }} FlatColorPicker Documentation | FlatColorPicker Views
+page_title: The {{ site.product }} FlatColorPicker Documentation - FlatColorPicker Views
 description: "Review the available views in the FlatColorPicker."
 slug: htmlhelpers_views_flatcolorpickerhelper_aspnetcore
 position: 2

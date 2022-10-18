@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TextBox PHP Class
+page_title: Overview - TextBox PHP Class
 description: "How to configure and use the TextBox PHP class in Kendo UI."
 slug: overview_textbox_uiforphp
 ---

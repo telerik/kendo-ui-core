@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | ComboBox JSP Tag
+page_title: Ajax Binding - ComboBox JSP Tag
 description: "Get started with the Ajax binding of the ComboBox JSP tag in Kendo UI."
 slug: ajaxbinding_combobox_uiforjsp
 position: 2

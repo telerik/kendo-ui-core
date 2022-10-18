@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview
+page_title: Overview - Breadcrumb PHP Class
 description: "How to configure and use the Breadcrumb PHP class in Kendo UI."
 slug: overview_breadcrumb_uiforphp
 ---

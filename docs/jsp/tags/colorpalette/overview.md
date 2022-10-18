@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ColorPalette JSP Tag
+page_title: Overview - ColorPalette JSP Tag
 description: "Get started with the ColorPalette JSP tag in Kendo UI."
 slug: overview_colorpalette_uiforjsp
 position: 1

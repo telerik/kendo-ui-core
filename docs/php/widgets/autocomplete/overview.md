@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | AutoComplete PHP Class
+page_title: Overview - AutoComplete PHP Class
 description: "Get started with the AutoComplete PHP class in Kendo UI."
 slug: overview_autocomplete_uiforphp
 position: 1

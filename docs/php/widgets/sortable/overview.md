@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Sortable PHP Class
+page_title: Overview - Sortable PHP Class
 description: "Get started with the Sortable PHP class in Kendo UI."
 slug: overview_sortable_uiforphp
 position: 1

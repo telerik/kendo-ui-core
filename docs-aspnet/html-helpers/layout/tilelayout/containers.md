@@ -1,6 +1,6 @@
 ---
 title: Tile Containers
-page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation | TileLayout Containers
+page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation - TileLayout Containers
 description: "Learn how to define the content and headers of the The Telerik UI TileLayout component for {{ site.framework }} containers."
 slug: htmlhelpers_aspnet_tilelayout_containers
 position: 4

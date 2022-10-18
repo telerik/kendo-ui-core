@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | ComboBox PHP Class
+page_title: Local Binding - ComboBox PHP Class
 description: "Bind Kendo UI ComboBox PHP class to an array of data."
 slug: localbinding_combobox_uiforphp
 position: 2

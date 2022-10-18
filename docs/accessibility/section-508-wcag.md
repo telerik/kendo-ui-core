@@ -69,6 +69,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |ListView	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/listview)|
 |Map	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/map)|
 |MaskedTextbox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/maskedtextbox)|
+|MediaPlayer   |No  |n/a|n/a|
 |Menu          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/menu)|
 |MultiColumnComboBox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicolumncombobox)|
 |MultiSelect   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multiselect)|

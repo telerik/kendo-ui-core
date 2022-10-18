@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | FlatColorPicker PHP Class
+page_title: Overview - FlatColorPicker PHP Class
 description: "Get started with the FlatColorPicker PHP class in Kendo UI."
 slug: overview_flatcolorpicker_uiforphp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Grid PHP Class
+page_title: Editing - Grid PHP Class
 description: "Edit the Kendo UI Grid PHP class."
 slug: editing_grid_uiforphp
 position: 4

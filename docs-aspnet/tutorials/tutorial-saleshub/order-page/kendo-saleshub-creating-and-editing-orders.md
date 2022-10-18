@@ -1,6 +1,6 @@
 ---
 title: Create and Edit Orders
-page_title: Create and Edit Orders | Kendo UI Sales Hub Tutorial
+page_title: Create and Edit Orders - Kendo UI Sales Hub Tutorial
 description: "Learn how to create and edit customer orders in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /kendo-ui/tutorials/asp.net/saleshub/order-page/kendo-saleshub-creating-and-editing-orders
 slug: createeditorders_saleshubtutorial_aspnetmvc

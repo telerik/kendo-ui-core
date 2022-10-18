@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview
+page_title: Overview - BottomNavigation PHP Class
 description: "How to configure and use the BottomNavigation PHP class in Kendo UI."
 slug: overview_bottomnavigation_uiforphp
 ---

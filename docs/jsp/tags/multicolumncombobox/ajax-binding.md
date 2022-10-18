@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | MultiColumnComboBox JSP Tag
+page_title: Ajax Binding - MultiColumnComboBox JSP Tag
 description: "Get started with the Ajax binding of the MultiColumnComboBox JSP tag in Kendo UI."
 slug: ajaxbinding_multicolumncombobox_uiforjsp
 position: 2

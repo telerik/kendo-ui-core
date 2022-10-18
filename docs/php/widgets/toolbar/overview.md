@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ToolBar PHP Class
+page_title: Overview - ToolBar PHP Class
 description: "Get started with the ToolBar PHP class in Kendo UI."
 slug: overview_toolbar_uiforphp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Barcode JSP Tag
+page_title: Overview - Barcode JSP Tag
 description: "Get started with the Barcode JSP tag in Kendo UI."
 slug: overview_barcode_uiforjsp
 position: 1

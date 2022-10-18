@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | RadialGauge PHP Class
+page_title: Overview - RadialGauge PHP Class
 description: "Get started with the RadialGauge PHP class in Kendo UI."
 slug: overview_radialgauge_uiforphp
 position: 1

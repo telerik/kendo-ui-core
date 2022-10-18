@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Pager JSP Tag
+page_title: Overview - Pager JSP Tag
 description: "Get started with the Pager JSP tag in Kendo UI."
 slug: overview_pager_uiforjsp
 ---

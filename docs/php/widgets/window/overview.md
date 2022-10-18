@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Window PHP Class
+page_title: Overview - Window PHP Class
 description: "Get started with the Window PHP class in Kendo UI."
 slug: overview_window_uiforphp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TreeView PHP Class
+page_title: Overview - TreeView PHP Class
 description: "Get started with the TreeView PHP class in Kendo UI."
 slug: overview_treeview_uiforphp
 position: 1

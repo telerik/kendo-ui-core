@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | TreeView PHP Class
+page_title: Local Binding - TreeView PHP Class
 description: "Bind Kendo UI TreeView PHP class to an array of data."
 slug: localbinding_treeview_uiforphp
 position: 2

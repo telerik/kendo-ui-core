@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Dialog PHP Class
+page_title: Overview - Dialog PHP Class
 description: "Get started with the Dialog PHP class in Kendo UI."
 slug: overview_dialog_uiforphp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: "{{ site.framework }} Switch Documentation | Switch Appearance"
+page_title: "{{ site.framework }} Switch Documentation - Switch Appearance"
 description: "Learn how to customize the appearance of the Telerik UI Switch HtmlHelper for {{ site.framework }}."
 slug: switch_appearance
 position: 2

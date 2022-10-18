@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | DropDownList PHP Class
+page_title: Remote Binding - DropDownList PHP Class
 description: "Bind Kendo UI DropDownList PHP class to JSON."
 slug: remotebinding_dropdownlist_uiforphp
 position: 3

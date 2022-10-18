@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview
+page_title: Overview - Loader PHP Class
 description: "How to configure and use the Loader PHP class in Kendo UI."
 slug: overview_loader_uiforphp
 ---

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | CheckBoxGroup PHP Class
+page_title: Overview - CheckBoxGroup PHP Class
 description: "How to configure and use the CheckBoxGroup PHP tag in Kendo UI."
 slug: overview_checkboxgroup_uiforphp
 ---

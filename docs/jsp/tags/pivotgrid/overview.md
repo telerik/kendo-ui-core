@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | PivotGrid JSP Tag
+page_title: Overview - PivotGrid JSP Tag
 description: "Get started with the PivotGrid JSP tag in Kendo UI."
 slug: overview_pivotgrid_uiforjsp
 position: 1

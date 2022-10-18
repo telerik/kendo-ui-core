@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Team Efficiency Dashboard Tutorial
+page_title: Overview - Team Efficiency Dashboard Tutorial
 description: "Start building the Team Efficiency Dashboard application by using Progress Telerik UI for ASP.NET MVC."
 slug: overview_timeefficiencyapp_aspnetmvc6
 previous_url: /tutorials/tutorial-aspnetmvc-quick-start/chapter0

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TreeList JSP Tag
+page_title: Overview - TreeList JSP Tag
 description: "Get started with the TreeList JSP tag in Kendo UI."
 slug: overview_treelist_uiforjsp
 position: 1

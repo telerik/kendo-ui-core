@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TileLayout PHP Class
+page_title: Overview - TileLayout PHP Class
 description: "Get started with the TileLayout PHP class in Kendo UI."
 slug: overview_tilelayout_uiforphp
 ---

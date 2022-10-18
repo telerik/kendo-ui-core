@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | CircularGauge PHP Class
+page_title: Overview - CircularGauge PHP Class
 description: "Get started with the CircularGauge PHP class in Kendo UI."
 slug: overview_circulargauge_uiforphp
 position: 1

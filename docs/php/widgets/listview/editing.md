@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | ListView PHP Class
+page_title: Editing - ListView PHP Class
 description: "Edit the Kendo UI ListView PHP class."
 slug: editing_listview_uiforphp
 position: 4

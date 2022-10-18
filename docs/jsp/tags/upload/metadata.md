@@ -1,6 +1,6 @@
 ---
 title: Handling of Metadata
-page_title: Handling of Metadata | Upload JSP Tag
+page_title: Handling of Metadata - Upload JSP Tag
 description: "Use the synchronous and asynchronous operational modes of the Upload JSP tag in Kendo UI."
 slug: metadata_upload_uiforjsp
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview 
+page_title: Overview - BottomNavigation JSP Tag
 description: "Get started with the BottomNavigation JSP tag in Kendo UI."
 slug: overview_bottomnavigation_uiforjsp
 position: 1

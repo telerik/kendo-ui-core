@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | StockChart PHP Class
+page_title: Overview - StockChart PHP Class
 description: "Get started with the StockChart PHP class in Kendo UI."
 slug: overview_stockchart_uiforphp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | Chart PHP Class
+page_title: Local Binding - Chart PHP Class
 description: "Bind Kendo UI Chart PHP class to an array of data."
 slug: localbinding_chart_uiforphp
 position: 2

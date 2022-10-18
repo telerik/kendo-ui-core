@@ -1,6 +1,6 @@
 ---
 title: Server Editing
-page_title: Server Editing | Telerik UI Grid HtmlHelper for ASP.NET MVC
+page_title: Server Editing - Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Configure server editing of the Kendo UI Grid for ASP.NET MVC."
 previous_url: /helpers/grid/server-editing, /helpers/data-management/grid/server-editing
 slug: serverediting_grid_aspnetmvc

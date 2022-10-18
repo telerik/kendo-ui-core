@@ -1,6 +1,6 @@
 ---
 title: Formats
-page_title: The {{ site.product }} FlatColorPicker Documentation | FlatColorPicker RGB and HEX Formats
+page_title: The {{ site.product }} FlatColorPicker Documentation - FlatColorPicker RGB and HEX Formats
 description: Check out the RGB and HEX input formats in the FlatColorPicker.
 slug: rgb_hex_flatcolorpickerhelper_aspnetcore
 position: 3

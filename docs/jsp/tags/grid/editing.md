@@ -1,6 +1,6 @@
 ---
 title: Ajax Editing
-page_title: Ajax Editing | Grid JSP Tag
+page_title: Ajax Editing - Grid JSP Tag
 description: "Get started with the Ajax editing of the Grid JSP tag in Kendo UI."
 slug: ajaxediting_grid_uiforjsp
 position: 4

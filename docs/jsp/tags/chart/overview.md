@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Chart JSP Tag
+page_title: Overview - Chart JSP Tag
 description: "Get started with the Chart JSP tag in Kendo UI."
 slug: overview_chart_uiforjsp
 position: 1

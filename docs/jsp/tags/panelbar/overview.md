@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | PanelBar JSP Tag
+page_title: Overview - PanelBar JSP Tag
 description: "Get started with the PanelBar JSP tag in Kendo UI."
 slug: overview_panelbar_uiforjsp
 position: 1

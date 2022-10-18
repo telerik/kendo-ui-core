@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Scheduler JSP Tag
+page_title: Overview - Scheduler JSP Tag
 description: "Get started with the Scheduler JSP tag in Kendo UI."
 slug: overview_scheduler_uiforjsp
 position: 1

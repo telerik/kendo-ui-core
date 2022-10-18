@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: "{{ site.framework }} TextArea Documentation | TextArea Appearance"
+page_title: "{{ site.framework }} TextArea Documentation - TextArea Appearance"
 description: "Learn how to customize the appearance of the Telerik UI TextArea HtmlHelper for {{ site.framework }}."
 slug: textarea_appearance
 position: 2

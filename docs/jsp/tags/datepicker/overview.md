@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | DatePicker JSP Tag
+page_title: Overview - DatePicker JSP Tag
 description: "Get started with the DatePicker JSP tag in Kendo UI."
 slug: overview_datepicker_uiforjsp
 position: 1

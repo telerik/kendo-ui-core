@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | LinearGauge PHP Class
+page_title: Overview - LinearGauge PHP Class
 description: "Get started with the LinearGauge PHP class in Kendo UI."
 slug: overview_lineargauge_uiforphp
 position: 1

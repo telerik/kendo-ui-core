@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Telerik UI Signature for {{ site.framework }} Documentation | Signature Overview
+page_title: Telerik UI Signature for {{ site.framework }} Documentation - Signature Overview
 description: "Learn the basics when working with the Telerik UI Signature for {{ site.framework }}."
 slug: overview_telerikui_signature_component
 position: 1

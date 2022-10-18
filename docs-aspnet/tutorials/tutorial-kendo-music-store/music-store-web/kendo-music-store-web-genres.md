@@ -1,6 +1,6 @@
 ---
 title: Create the Genre Page
-page_title: Create the Genre Page | Music Store Web App Tutorial
+page_title: Create the Genre Page - Music Store Web App Tutorial
 description: "Learn how to create the Genre page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: createthegenrepage_muscistorewebapp_aspnetmvc
 position: 4

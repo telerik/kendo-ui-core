@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | DropDownList PHP Class
+page_title: Local Binding - DropDownList PHP Class
 description: "Bind Kendo UI DropDownList PHP class to an array of data."
 slug: localbinding_dropdownlist_uiforphp
 position: 2

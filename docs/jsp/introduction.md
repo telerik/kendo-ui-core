@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Progress Telerik UI for JSP
+page_title: Overview - Progress Telerik UI for JSP
 description: "Download and install Progress Telerik UI for JSP, and run a sample application."
 slug: overview_uiforjsp
 position: 1

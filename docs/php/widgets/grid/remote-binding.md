@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | Grid PHP Class
+page_title: Remote Binding - Grid PHP Class
 description: "Bind Kendo UI Grid PHP class to JSON."
 slug: remotebinding_grid_uiforphp
 position: 3

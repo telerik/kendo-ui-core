@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Button JSP Tag
+page_title: Overview - Button JSP Tag
 description: "Get started with the Button JSP tag in Kendo UI."
 slug: overview_button_uiforjsp
 position: 1

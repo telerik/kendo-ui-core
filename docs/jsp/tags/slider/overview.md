@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Slider JSP Tag
+page_title: Overview - Slider JSP Tag
 description: "Get started with the Slider JSP tag in Kendo UI."
 slug: overview_slider_uiforjsp
 position: 1

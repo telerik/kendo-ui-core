@@ -1,6 +1,6 @@
 ---
 title: Create the Single-Page App
-page_title: Create the Single-Page App | Music Store Dashboard Tutorial
+page_title: Create the Single-Page App - Music Store Dashboard Tutorial
 description: "Learn how to create the single-page application in the Kendo UI Music Store Dashboard sample project by using Telerik UI for ASP.NET MVC."
 slug: createthespa_muscistoredashboard_aspnetmvc
 position: 2

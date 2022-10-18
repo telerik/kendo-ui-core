@@ -2,7 +2,7 @@
 title: Grid Toggle Editable Mode On And Off
 description: An example demonstrating how to toggle the editable mode of the Kendo UI Grid for ASP.NET Core using a ToolBar button
 type: how-to
-page_title: Toggle Grid's editable mode | Kendo UI Grid for ASP.NET Core
+page_title: Toggle the Editable Mode of the Grid - Kendo UI Grid for ASP.NET Core
 slug: grid-toggle-editable-mode
 tags: aspnet, core, kendo, kendo-ui, grid, edit, toggle, editable
 res_type: kb

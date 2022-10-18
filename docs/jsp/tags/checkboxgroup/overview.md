@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | CheckBoxGroup JSP Tag
+page_title: Overview - CheckBoxGroup JSP Tag
 description: "How to configure and use the CheckBoxGroup JSP tag in Kendo UI."
 slug: overview_checkboxgroup_uiforjsp
 ---

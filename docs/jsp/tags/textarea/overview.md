@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TextArea JSP Tag
+page_title: Overview - TextArea JSP Tag
 description: "How to configure and use the TextArea JSP tag in Kendo UI."
 slug: overview_textarea_uiforjsp
 ---

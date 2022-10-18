@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | Sparkline PHP Class
+page_title: Remote Binding - Sparkline PHP Class
 description: "Bind Kendo UI Sparkline PHP class to JSON."
 slug: remotebinding_sparkline_uiforphp
 position: 3

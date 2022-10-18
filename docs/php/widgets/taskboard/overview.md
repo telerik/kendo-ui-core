@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TaskBoard PHP Class
+page_title: Overview - TaskBoard PHP Class
 description: "Get started with the TaskBoard PHP class in Kendo UI."
 slug: overview_taskboard_uiforphp
 position: 1

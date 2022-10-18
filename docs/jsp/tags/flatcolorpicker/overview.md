@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | FlatColorPicker JSP Tag
+page_title: Overview - FlatColorPicker JSP Tag
 description: "Get started with the FlatColorPicker JSP tag in Kendo UI."
 slug: overview_flatcolorpicker_uiforjsp
 position: 1

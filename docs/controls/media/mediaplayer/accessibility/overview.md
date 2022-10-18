@@ -8,23 +8,9 @@ position: 1
 
 # MediaPlayer Accessibility
 
-The MediaPlayer is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+The MediaPlayer does not comply with the Section 508 and WCAG 2.1 requirements. Its major deficit is the lack of captions. Such a feature is not currently planned for implementation.
 
-For more information, refer to:
-* [Keyboard navigation by the Kendo UI MediaPlayer]({% slug keynav_mediaplayer_jquery %})
-* [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
-
-## WAI-ARIA
-
-The component follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. For more information, refer to the article on [WAI-ARIA support in Kendo UI for jQuery]({% slug wai_aria_accessibility_support %}).
-
-## Section 508
-
-The MediaPlayer is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in Kendo UI for jQuery]({% slug section508_accessibility_support %}).
-
-## WCAG 2.1
-
-The MediaPlayer supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
+For more information on the keyboard navigation in the widget, please refer to the [Keyboard navigation demo of the Kendo UI MediaPlayer]({% slug keynav_mediaplayer_jquery %})
 
 ## See Also
 

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ButtonGroup JSP Tag
+page_title: Overview - ButtonGroup JSP Tag
 description: "Get started with the ButtonGroup JSP tag in Kendo UI."
 slug: overview_buttongroup_uiforjsp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Diagram JSP Tag
+page_title: Overview - Diagram JSP Tag
 description: "Get started with the Diagram JSP tag in Kendo UI."
 slug: overview_diagram_uiforjsp
 position: 1

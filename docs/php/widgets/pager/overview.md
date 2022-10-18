@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Pager PHP Class
+page_title: Overview - Pager PHP Class
 description: "Get started with the Pager PHP class in Kendo UI."
 slug: overview_pager_uiforphp
 ---

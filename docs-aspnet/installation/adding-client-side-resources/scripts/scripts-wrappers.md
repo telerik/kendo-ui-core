@@ -11,23 +11,27 @@ slug: script_filesfor_serverside_wrappers
 
 The following table lists the Kendo UI supplementary scripts for integration with server-side technologies.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [ASP.NET MVC](https://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
 | | kendo.list.js | |
+| | kendo.html.base.js | |
+| | kendo.html.button.js | |
 | | kendo.combobox.js | |
 | | kendo.multicolumncombobox.js | |
 | | kendo.dropdownlist.js | |
+| | kendo.html.chip.js | |
+| | kendo.html.chiplist.js | |
 | | kendo.multiselect.js | |
 | | kendo.validator.js | |
 | | kendo.aspnetmvc.js | |
 
 ## See Also
 
-+ [Scripts for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Scripts for Data Management Components]({% slug script_filesfor_datamanagement_widgets %})
 + [Scripts for Editors]({% slug script_filesfor_editors_widgets %})
 + [Scripts for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Scripts for Charts]({% slug script_filesfor_charts_widgets %})

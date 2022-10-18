@@ -1,6 +1,6 @@
 ---
 title: Installation
-page_title: Installation | Kendo UI Sass Themes for {{ site.product }} 
+page_title: Installation - Kendo UI Sass Themes for {{ site.product }} 
 description: "Learn how to set up and configure the Kendo UI Sass themes for {{ site.product }}."
 slug: sassbasedthemes_installation
 position: 2

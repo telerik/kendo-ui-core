@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | Sparkline PHP Class
+page_title: Local Binding - Sparkline PHP Class
 description: "Bind Kendo UI Sparkline PHP class to an array of data."
 slug: localbinding_sparkline_uiforphp
 position: 2

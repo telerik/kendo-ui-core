@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | Gantt PHP Class
+page_title: Remote Binding - Gantt PHP Class
 description: "Bind Kendo UI Gantt PHP class to JSON."
 slug: remotebinding_gantt_uiforphp
 position: 3

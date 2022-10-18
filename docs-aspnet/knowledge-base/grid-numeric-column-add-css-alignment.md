@@ -1,8 +1,8 @@
 ---
 title: Numeric column right alignment
-description: An example on how to add CSS styling for right alignment of numeric grid's field
+description: An example on how to add CSS styling for right alignment of numeric Grid's field.
 type: how-to
-page_title: Numeric column right alignment | Kendo UI Grid for ASP.NET Core
+page_title: Numeric column right alignment - Kendo UI Grid for ASP.NET Core
 slug: grid-numeric-column-add-css-alignment
 tags: grid, CSS, alignment, column, numeric
 res_type: kb

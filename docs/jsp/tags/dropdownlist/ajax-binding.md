@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | DropDownList JSP Tag
+page_title: Ajax Binding - DropDownList JSP Tag
 description: "Get started with the Ajax binding of the DropDownList JSP tag in Kendo UI."
 slug: ajaxbinding_dropdownlist_uiforjsp
 position: 2

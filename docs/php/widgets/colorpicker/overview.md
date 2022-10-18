@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ColorPicker PHP Class
+page_title: Overview - ColorPicker PHP Class
 description: "Get started with the ColorPicker PHP class in Kendo UI."
 slug: overview_colorpicker_uiforphp
 position: 1

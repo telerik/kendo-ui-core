@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | MultiColumnComboBox PHP Class
+page_title: Local Binding - MultiColumnComboBox PHP Class
 description: "Bind Kendo UI MultiColumnComboBox PHP class to an array of data."
 slug: localbinding_multicolumncombobox_uiforphp
 position: 2

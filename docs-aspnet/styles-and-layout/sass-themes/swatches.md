@@ -1,6 +1,6 @@
 ---
 title: Swatches
-page_title: Swatches | Telerik UI Sass Themes
+page_title: Swatches - Kendo UI Sass Themes for {{ site.product }}
 description: "Learn about the swatches that come with the Telerik UI Sass themes."
 slug: swatches_aspnetmvc6_aspnetmvc
 position: 5

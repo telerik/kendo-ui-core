@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview
+page_title: Overview - FloatingActionButton PHP Class
 description: "How to configure and use the FloatingActionButton PHP class in Kendo UI."
 slug: overview_floatingactionbutton_uiforphp
 ---

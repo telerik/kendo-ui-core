@@ -9,9 +9,9 @@ slug: script_filesfor_interactivityandux_widgets
 
 # Individual Scripts for Interactivity and UX
 
-The following table lists the individual script files for the Kendo UI widgets used for enhancing interactivity and user experience.&nbsp;&nbsp;
+The following table lists the individual script files for the Kendo UI components used for enhancing interactivity and user experience.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Drag & drop](https://demos.telerik.com/kendo-ui/dragdrop/index) | jquery.js | |
 | | kendo.core.js | |
@@ -20,9 +20,15 @@ The following table lists the individual script files for the Kendo UI widgets u
 | [Effects](https://demos.telerik.com/kendo-ui/fx/expand) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
+| [Loader](https://demos.telerik.com/kendo-ui/loader/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.loader.js | |
 | [ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.progressbar.js | |
+| [SkeletonContainer](https://demos.telerik.com/kendo-ui/skeletoncontainer/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.skeletoncontainer.js | |
 | [Sortable](https://demos.telerik.com/kendo-ui/sortable/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
@@ -31,7 +37,7 @@ The following table lists the individual script files for the Kendo UI widgets u
 
 ## See Also
 
-+ [Scripts for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Scripts for Data Management Components]({% slug script_filesfor_datamanagement_widgets %})
 + [Scripts for Editors]({% slug script_filesfor_editors_widgets %})
 + [Scripts for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Scripts for Charts]({% slug script_filesfor_charts_widgets %})

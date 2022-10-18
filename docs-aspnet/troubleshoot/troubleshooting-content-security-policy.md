@@ -1,6 +1,6 @@
 ---
 title: Content Security Policy
-page_title: Content Security Policy | Kendo UI Troubleshooting
+page_title: Content Security Policy Troubleshooting
 description: "Learn about the issues that may occur when using the strict Content Security Policy with UI for ASP.NET Core HTML helpers and Tag Helpers."
 slug: troubleshooting_content_security_policy_aspnetmvc
 ---

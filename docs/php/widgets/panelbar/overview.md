@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | PanelBar PHP Class
+page_title: Overview - PanelBar PHP Class
 description: "Get started with the PanelBar PHP class in Kendo UI."
 slug: overview_panelbar_uiforphp
 position: 1

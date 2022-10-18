@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Dialog JSP Tag
+page_title: Overview - Dialog JSP Tag
 description: "Get started with the Dialog JSP tag in Kendo UI."
 slug: overview_dialog_uiforjsp
 position: 1

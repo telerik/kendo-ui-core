@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | SkeletonContainer JSP Tag
+page_title: Overview - SkeletonContainer JSP Tag
 description: "Get started with the SkeletonContainer JSP tag in Kendo UI."
 slug: overview_skeletoncontainer_uiforjsp
 position: 1

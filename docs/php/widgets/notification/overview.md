@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Notification PHP Class
+page_title: Overview - Notification PHP Class
 description: "Get started with the Notification PHP class in Kendo UI."
 slug: overview_notification_uiforphp
 position: 1

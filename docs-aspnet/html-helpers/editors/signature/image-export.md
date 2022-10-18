@@ -1,6 +1,6 @@
 ---
 title: Image Export
-page_title: Telerik UI Signature for {{ site.framework }} Documentation | Signature Image Export
+page_title: Telerik UI Signature for {{ site.framework }} Documentation - Signature Image Export
 description: "Learn how to export the Telerik UI Signature for {{ site.framework }} component as a PNG file."
 slug: image_export_telerikui_signature_component
 position: 4

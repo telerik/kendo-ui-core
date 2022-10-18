@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ExpansionPanel PHP Class
+page_title: Overview - ExpansionPanel PHP Class
 description: "Get started with the ExpansionPanel PHP class in Kendo UI."
 slug: overview_expansionpanel_uiforphp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: "{{ site.framework }} Button Documentation | Button Appearance"
+page_title: "{{ site.framework }} Button Documentation - Button Appearance"
 description: "Learn how to customize the appearance of the Telerik UI Button HtmlHelper for {{ site.framework }}."
 slug: button_appearance
 position: 2

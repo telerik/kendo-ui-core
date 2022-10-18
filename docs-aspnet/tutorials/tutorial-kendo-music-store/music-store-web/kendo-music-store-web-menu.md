@@ -1,6 +1,6 @@
 ---
 title: Create the Main Menu
-page_title: Create the Main Menu | Music Store Web App Tutorial
+page_title: Create the Main Menu - Music Store Web App Tutorial
 description: "Learn how to create the main menu page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: createthemainmenu_muscistorewebapp_aspnetmvc
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Create the Home Page
-page_title: Create the Home Page | Music Store Web App Tutorial
+page_title: Create the Home Page - Music Store Web App Tutorial
 description: "Learn how to create the Home page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: createthehomepage_muscistorewebapp_aspnetmvc
 position: 3

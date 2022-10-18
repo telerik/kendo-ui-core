@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Switch PHP Class
+page_title: Overview - Switch PHP Class
 description: "Get started with the Switch PHP class in Kendo UI."
 slug: overview_switch_uiforphp
 position: 1

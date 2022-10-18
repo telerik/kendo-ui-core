@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | CircularGauge JSP Tag
+page_title: Overview - CircularGauge JSP Tag
 description: "Get started with the CircularGauge JSP tag in Kendo UI."
 slug: overview_circulargauge_uiforjsp
 position: 1

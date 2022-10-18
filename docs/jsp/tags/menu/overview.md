@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Menu JSP Tag
+page_title: Overview - Menu JSP Tag
 description: "Get started with the Menu JSP tag in Kendo UI."
 slug: overview_menu_uiforjsp
 position: 1

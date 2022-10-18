@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ExpansionPanel JSP Tag
+page_title: Overview - ExpansionPanel JSP Tag
 description: "Get started with the ExpansionPanel JSP tag in Kendo UI."
 slug: overview_expansionpanel_uiforjsp
 position: 1

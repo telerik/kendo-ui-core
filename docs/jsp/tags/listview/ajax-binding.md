@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | ListView JSP Tag
+page_title: Ajax Binding - ListView JSP Tag
 description: "Get started with the Ajax binding of the ListView JSP tag in Kendo UI."
 slug: ajaxbinding_listview_uiforjsp
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TextArea PHP Class
+page_title: Overview - TextArea PHP Class
 description: "How to configure and use the TextArea PHP class in Kendo UI."
 slug: overview_textarea_uiforphp
 ---

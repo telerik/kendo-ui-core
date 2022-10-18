@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Calendar JSP Tag
+page_title: Overview - Calendar JSP Tag
 description: "Get started with the Calendar JSP tag in Kendo UI."
 slug: overview_calendar_uiforjsp
 position: 1

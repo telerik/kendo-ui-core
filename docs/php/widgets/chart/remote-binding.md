@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | Chart PHP Class
+page_title: Remote Binding - Chart PHP Class
 description: "Bind Kendo UI Chart PHP class to JSON."
 slug: remotebinding_chart_uiforphp
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Barcode PHP Class
+page_title: Overview - Barcode PHP Class
 description: "Get started with the Barcode PHP class in Kendo UI."
 slug: overview_barcode_uiforphp
 position: 1

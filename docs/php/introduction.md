@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Progress Telerik UI for PHP
+page_title: Overview - Progress Telerik UI for PHP
 description: "Download and install Progress Telerik UI for PHP, and run a sample application."
 previous_url: /tutorials/PHP/build-apps-with-kendo-ui-and-php, /tutorials/PHP/build-apps-with-kendo-ui-and-php-2, /php/widgets/map/overview, /using-kendo-with/php/widgets/map/overview, /php/widgets/responsivepanel/overview, /using-kendo-with/php/widgets/responsivepanel/overview, /php/widgets/spreadsheet/overview, /using-kendo-with/php/widgets/spreadsheet/overview, /php/widgets/treemap/overview
 slug: overview_uiforphp

@@ -11,7 +11,7 @@ slug: script_filesfor_gauges_widgets
 
 The following table lists the individual script files for the Kendo UI Gauges.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Gauge](https://demos.telerik.com/kendo-ui/linear-gauge/index) | jquery.js | |
 | | kendo.core.js | |
@@ -24,7 +24,7 @@ The following table lists the individual script files for the Kendo UI Gauges.&n
 
 ## See Also
 
-+ [Scripts for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Scripts for Data Management Components]({% slug script_filesfor_datamanagement_widgets %})
 + [Scripts for Editors]({% slug script_filesfor_editors_widgets %})
 + [Scripts for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Scripts for Charts]({% slug script_filesfor_charts_widgets %})

@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: "{{ site.framework }} TextBox Documentation | TextBox Appearance"
+page_title: "{{ site.framework }} TextBox Documentation - TextBox Appearance"
 description: "Learn how to customize the appearance of the Telerik UI TextBox HtmlHelper for {{ site.framework }}."
 slug: textbox_appearance
 position: 2

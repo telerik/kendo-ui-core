@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TileLayout JSP Tag
+page_title: Overview - TileLayout JSP Tag
 description: "Get started with the TileLayout JSP tag in Kendo UI."
 slug: overview_tilelayout_uiforjsp
 ---

@@ -2775,6 +2775,12 @@ var __meta__ = {
             return this._storage.getItem() || [];
         },
 
+        _isGrouped: function() {
+            var group = this.group() || [];
+
+            return group.length;
+        },
+
         _isServerGrouped: function() {
             var group = this.group() || [];
 
@@ -4120,7 +4126,7 @@ var __meta__ = {
                 });
 
                 if (!modelIsInView) {
-                    result.data.splice(model.index, 0, model);
+                    result.data.splice(model.index, 0, that._isGrouped() ? that._wrapInEmptyGroup(model) : model);
                     result.total++;
                 }
             }

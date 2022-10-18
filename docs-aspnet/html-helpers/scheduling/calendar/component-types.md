@@ -1,6 +1,6 @@
 ---
 title: Component Types
-page_title: Telerik UI Calendar Documentation | Calendar Component Types | Telerik UI
+page_title: Telerik UI Calendar Documentation - Calendar Component Types
 description: "Get started with the Telerik UI Calendar and learn how to enable the modern component type."
 slug: htmlhelpers_componenttype_calendar_aspnetcore 
 position: 7

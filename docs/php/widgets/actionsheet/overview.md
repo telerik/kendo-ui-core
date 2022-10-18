@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview
+page_title: Overview - ActionSheet PHP Class
 description: "How to configure and use the ActionSheet PHP class in Kendo UI."
 slug: overview_actionsheet_uiforphp
 ---

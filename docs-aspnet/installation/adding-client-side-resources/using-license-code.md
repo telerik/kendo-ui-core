@@ -1,6 +1,6 @@
 ---
 title: Using Script License File
-page_title: Using Script License File | Download and Installation 
+page_title: Using Script License File - Download and Installation 
 description: "Get started with {{ site.product }} and learn how to register the script license file required for the client-side scripts from the CDN and NPM distribution."
 slug: using_license_code
 position: 2

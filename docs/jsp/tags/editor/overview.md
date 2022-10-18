@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Editor JSP Tag
+page_title: Overview - Editor JSP Tag
 description: "Get started with the Editor JSP tag in Kendo UI."
 slug: overview_editor_uiforjsp
 position: 1

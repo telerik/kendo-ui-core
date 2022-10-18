@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | RadioGroup PHP Class
+page_title: Overview - RadioGroup PHP Class
 description: "How to configure and use the RadioGroup PHP tag in Kendo UI."
 slug: overview_radiogroup_uiforphp
 ---

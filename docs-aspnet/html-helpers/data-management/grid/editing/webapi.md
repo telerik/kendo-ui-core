@@ -1,6 +1,6 @@
 ---
 title: WebAPI Editing
-page_title: WebAPI Editing | Telerik UI Grid component
+page_title: WebAPI Editing - Telerik UI Grid Component
 description: "Implement CRUD data operations with a WebAPI controller for the Kendo UI Grid for {{ site.framework }}."
 previous_url: /helpers/grid/webapi-editing, /helpers/data-management/grid/webapi-editing
 slug: webapi_editing_grid_aspnetmvc

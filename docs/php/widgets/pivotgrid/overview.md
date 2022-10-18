@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | PivotGrid PHP Class
+page_title: Overview - PivotGrid PHP Class
 description: "Get started with the PivotGrid PHP class in Kendo UI."
 slug: overview_pivotgrid_uiforphp
 position: 1

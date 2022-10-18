@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Tooltip PHP Class
+page_title: Overview - Tooltip PHP Class
 description: "Get started with the Tooltip PHP class in Kendo UI."
 slug: overview_tooltip_uiforphp
 position: 1

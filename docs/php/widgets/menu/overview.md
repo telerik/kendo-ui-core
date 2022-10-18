@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Menu PHP Class
+page_title: Overview - Menu PHP Class
 description: "Get started with the Menu PHP class in Kendo UI."
 slug: overview_menu_uiforphp
 position: 1

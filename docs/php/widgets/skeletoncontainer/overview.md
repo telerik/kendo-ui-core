@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | SkeletonContainer PHP Class
+page_title: Overview - SkeletonContainer PHP Class
 description: "Get started with the SkeletonContainer PHP class in Kendo UI."
 slug: overview_skeletoncontainer_uiforphp
 position: 1

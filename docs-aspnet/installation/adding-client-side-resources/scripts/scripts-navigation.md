@@ -9,12 +9,15 @@ slug: script_filesfor_navigation_widgets
 
 # Individual Scripts for Navigation
 
-The following table lists the individual script files for the Kendo UI widgets that manage navigation.&nbsp;&nbsp;
+The following table lists the individual script files for the Kendo UI components that manage navigation.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Button](https://demos.telerik.com/kendo-ui/button/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.badge.js | |
+| | kendo.html.base.js | |
+| | kendo.html.button.js | |
 | | kendo.button.js | |
 | [Drawer](https://demos.telerik.com/kendo-ui/drawer/index) | jquery.js | |
 | | kendo.core.js | |
@@ -38,10 +41,18 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.tabstrip.js | |
 | [ToolBar](https://demos.telerik.com/kendo-ui/toolbar/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.html.base.js | |
+| | kendo.html.button.js | |
+| | kendo.popup.js | |
+| | kendo.button.menu.js | |
+| | kendo.splitbutton.js | |
+| | kendo.dropdownbutton.js | |
 | | kendo.toolbar.js | |
 | [TreeView](https://demos.telerik.com/kendo-ui/treeview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
+| | kendo.html.base.js | |
+| | kendo.html.input.js | |
 | | kendo.userevents.js | Drag & Drop feature (optional) |
 | | kendo.draganddrop.js | Drag & Drop feature (optional) |
 | | kendo.treeview.draganddrop.js | Drag & Drop feature (optional) |
@@ -49,7 +60,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 ## See Also
 
-+ [Scripts for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Scripts for Data Management Components]({% slug script_filesfor_datamanagement_widgets %})
 + [Scripts for Editors]({% slug script_filesfor_editors_widgets %})
 + [Scripts for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Scripts for Charts]({% slug script_filesfor_charts_widgets %})

@@ -1,6 +1,6 @@
 ---
 title: Create the Checkout Page
-page_title: Create the Checkout Page | Music Store Web App Tutorial
+page_title: Create the Checkout Page - Music Store Web App Tutorial
 description: "Learn how to create the Checkout page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: createcheckoutpage_muscistorewebapp_aspnetmvc
 position: 9

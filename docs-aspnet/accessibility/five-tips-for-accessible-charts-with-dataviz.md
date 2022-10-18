@@ -1,6 +1,6 @@
 ---
 title: Charts
-page_title: Charts | Telerik UI for ASP.NET Core Accessibility Support
+page_title: Charts - Telerik UI for ASP.NET Core Accessibility Support
 description: "Learn more tips and tricks how to make {{ site.product }} Charts accessible."
 slug: charts_accessibility_support
 position: 8

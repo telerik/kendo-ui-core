@@ -1,6 +1,6 @@
 ---
 title: Modes of Operation
-page_title: Modes of Operation | Upload PHP Class
+page_title: Modes of Operation - Upload PHP Class
 description: "Use the synchronous and asynchronous operational modes of the Upload PHP class in Kendo UI."
 slug: modesofoperation_upload_uiforphp
 position: 2

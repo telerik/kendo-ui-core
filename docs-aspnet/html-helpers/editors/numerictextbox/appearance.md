@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: "{{ site.framework }} NumericTextBox Documentation | NumericTextBox Appearance"
+page_title: "{{ site.framework }} NumericTextBox Documentation - NumericTextBox Appearance"
 description: "Learn how to customize the appearance of the Telerik UI NumericTextBox HtmlHelper for {{ site.framework }}."
 slug: numerictextbox_appearance
 position: 2

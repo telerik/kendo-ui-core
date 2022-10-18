@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ListView PHP Class
+page_title: Overview - ListView PHP Class
 description: "Get started with the ListView PHP class in Kendo UI."
 slug: overview_listview_uiforphp
 position: 1

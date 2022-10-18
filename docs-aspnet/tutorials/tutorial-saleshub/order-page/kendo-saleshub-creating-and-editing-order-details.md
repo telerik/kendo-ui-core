@@ -1,6 +1,6 @@
 ---
 title: Handle Order Details
-page_title: Handle Order Details | Kendo UI Sales Hub Tutorial
+page_title: Handle Order Details - Kendo UI Sales Hub Tutorial
 description: "Learn how to create and edit the details of customer orders in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /kendo-ui/tutorials/asp.net/saleshub/order-page/kendo-saleshub-creating-and-editing-order-details
 slug: handleorderdetails_saleshubtutorial_aspnetmvc

@@ -11,7 +11,7 @@ slug: script_filesfor_barcodes_widgets
 
 The following table lists the individual script files for Kendo UI Barcodes.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Barcode](https://demos.telerik.com/kendo-ui/barcode/index) | jquery.js | |
 | | kendo.core.js | |
@@ -30,7 +30,7 @@ The following table lists the individual script files for Kendo UI Barcodes.&nbs
 
 ## See Also
 
-+ [Scripts for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Scripts for Data Management Components]({% slug script_filesfor_datamanagement_widgets %})
 + [Scripts for Editors]({% slug script_filesfor_editors_widgets %})
 + [Scripts for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Scripts for Charts]({% slug script_filesfor_charts_widgets %})

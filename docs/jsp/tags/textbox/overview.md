@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TextBox JSP Tag
+page_title: Overview - TextBox JSP Tag
 description: "How to configure and use the TextBox JSP tag in Kendo UI."
 slug: overview_textbox_uiforjsp
 ---

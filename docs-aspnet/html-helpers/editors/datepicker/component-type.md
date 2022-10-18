@@ -1,6 +1,6 @@
 ---
 title: Component Types
-page_title: Telerik UI DatePicker Documentation | DatePicker Component Types | Telerik UI
+page_title: Telerik UI DatePicker Documentation - DatePicker Component Types
 description: "Get started with the Telerik UI DatePicker and learn how to enable the modern component type."
 slug: htmlhelpers_datepicker_aspnetcore_componenttype
 position: 8

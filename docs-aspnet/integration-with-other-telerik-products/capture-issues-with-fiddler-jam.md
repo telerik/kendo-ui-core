@@ -1,6 +1,6 @@
 ---
 title: Capture Network Logs and Log Issues with Fiddler Jam
-description: Capture {{ site.framework }} network logs and log issues in the browser with Telerik Fiddler Jam extention tool
+description: Capture {{ site.framework }} network logs and log issues in the browser with Telerik Fiddler Jam extension tool.
 page_title: Network Logs and Log Issues with Fiddler Jam
 slug: fiddler_jam_capture_aspnetcore
 position: 1

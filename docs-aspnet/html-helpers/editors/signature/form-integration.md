@@ -1,6 +1,6 @@
 ---
 title: Form Integration
-page_title: Telerik UI Signature for {{ site.framework }} Documentation | Signature Form Integration
+page_title: Telerik UI Signature for {{ site.framework }} Documentation - Signature Form Integration
 description: "Learn how to integrate the Signature inside a Telerik UI Form for {{ site.framework }}."
 slug: form_integration_telerikui_signature_component
 position: 3

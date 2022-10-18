@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | TreeView PHP Class
+page_title: Remote Binding - TreeView PHP Class
 description: "Bind Kendo UI TreeView PHP class to JSON."
 slug: remotebinding_treeview_uiforphp
 position: 3

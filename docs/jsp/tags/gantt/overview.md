@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Gantt JSP Tag
+page_title: Overview - Gantt JSP Tag
 description: "Get started with the Gantt JSP tag in Kendo UI."
 slug: overview_gantt_uiforjsp
 position: 1

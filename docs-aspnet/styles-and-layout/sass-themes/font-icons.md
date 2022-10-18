@@ -1,6 +1,6 @@
 ---
 title: Font Icons
-page_title: Font Icons | Telerik UI Sass Themes
+page_title: Font Icons - Kendo UI Sass Themes for {{ site.product }}
 description: "Learn about the available Telerik UI Font Icons."
 slug: webfonticons_aspnetmvc6_aspnetmvc
 position: 6
