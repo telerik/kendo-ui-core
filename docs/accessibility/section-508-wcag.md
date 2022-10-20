@@ -39,7 +39,6 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Chat          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/chat)|
 |CheckBox      |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/checkbox)|
 |CheckBoxGroup |Yes |AA |[Demo](hhttps://demos.telerik.com/kendo-ui/accessibility/checkboxgroup)|
-|ContextMenu   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/contextmenu)|
 |ComboBox      |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/combobox)|
 |ColorGradient |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorgradient)|
 |ColorPalette  |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpalette)|
@@ -71,7 +70,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |MaskedTextbox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/maskedtextbox)|
 |MediaPlayer   |No  |n/a|n/a|
 |Menu          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/menu)|
-|MultiColumnComboBox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicolumncombobox)|
+|MultiColumnComboBox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicombobox)|
 |MultiSelect   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multiselect)|
 |Notification  |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/notification)|
 |NumericTextbox|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/numericTextbox)|
@@ -87,7 +86,6 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |ScrollView	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scrollview)|
 |Scheduler	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scheduler)|
 |Slider	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/slider)|
-|Sortable	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/sortable)|
 |SplitButton   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/splitbutton)|
 |Splitter      |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/splitter)|
 |Spreadsheet   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/spreadsheet)|
@@ -98,7 +96,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |TextArea	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textarea)|
 |TextBox	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textbox)|
 |TileLayout	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/tilelayout)|
-|TimeLine	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/Ttmeline)|
+|TimeLine	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timeline)|
 |TimePicker	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timepicker)|
 |ToolBar	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/toolbar)|
 |Tooltip	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/tooltip)|
