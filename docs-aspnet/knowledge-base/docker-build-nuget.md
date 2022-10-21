@@ -1,8 +1,8 @@
 ---
 title: Using Telerik NuGet Server in Docker
-description: How to restore {{ site.product }} NuGet packages in a docker container build.
+description: How to restore Telerik UI for ASP.NET Core NuGet packages in a Docker container build.
 type: how-to
-page_title: Build {{ site.product }} in Docker
+page_title: Build Applications in Docker with the Telerik NuGet Server 
 slug: docker-build-nuget
 tags: docker, dockerfile, nuget, nuget-config, packages, dotnet, restore
 res_type: kb
@@ -12,31 +12,32 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress {{ site.product }} Grid</td>
+  <td>Progress Telerik UI for ASP.NET Core Grid</td>
  </tr>
  <tr>
-  <td>Progress {{ site.product }} version</td>
+  <td>Progress Telerik UI for ASP.NET Core version</td>
   <td>Created with the 2022.3.913 version</td>
  </tr>
 </table>
 
 ## Description
 
-How do I build an application using {{ site.product }} NuGet packages in Docker?
+How do I build an application by using Telerik UI for ASP.NET Core NuGet packages in Docker?
 
 ## Solution
 
 In order for the `dotnet restore` command to properly restore the Telerik NuGet packages inside a Docker container, you need to include a `nuget.config` file.
 
 ### Configuration
+
 In the configuration, you need two things:
 
-1. A `nuget.config` file that has the Telerik NuGet server listed in the `packageSources` section.
-2. A `packageSourceCredentials` section to provide credentials for the Telerik account which has the product license(s)
+1. The `nuget.config` file that has the Telerik NuGet server listed in the `packageSources` section.
+2. A `packageSourceCredentials` section to provide credentials for the Telerik account which has the product licenses.
 
-Note: The `packageSourceCredentials` section uses environment variables to protect your sensitive information. There are many ways to pass secrets to Docker containers. A simple and easy option is to have environment variables already set on the host machine (your PC or CI-CD runner), then use the `ARG` command in the `Dockerfile` to copy the host's values into the container. See the Dockerfile samples below for examples.
+>note The `packageSourceCredentials` section uses environment variables to protect your sensitive information. There are many ways to pass secrets to Docker containers. A simple and easy option is to have environment variables already set on the host machine (your PC or CI-CD runner), then use the `ARG` command in the `Dockerfile` to copy the host's values into the container. For examples, refer to the Dockerfile samples below.
 
-Here is an example `nuget.config` file
+Here is an example `nuget.config` file. 
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -62,7 +63,7 @@ Here is an example `nuget.config` file
 
 ### File Location
 
-You'll want to place the `nuget.config` file inside the same directory that your `Dockerfile` is copying into the container. This is so `dotnet restore` and `dotnet build` commands can use it when restoring packages.
+You'll want to place the `nuget.config` file inside the same directory that your `Dockerfile` is copying into the container so that the `dotnet restore` and `dotnet build` commands can use it when restoring packages.
 
 #### Option 1: Project Directory
 
@@ -115,7 +116,7 @@ For multi-project solutions, you can place the `nuget.config` file in the same f
 /nuget.config
 ```
 
-Here is an example `Dockerfile` that has an extra `COPY` command in order to copy the `nuget.config` file from another location into the container.
+Here is an example `Dockerfile` that has an extra `COPY` command to copy the `nuget.config` file from another location into the container.
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
@@ -147,15 +148,16 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "FirstProject.dll"]
 ```
 
-## See Also
+## Resources 
 
-* Telerik Resources
+* Telerik Documentation: 
   * [Telerik UI for ASP.NET Core - Setting Up the nuget.config File](https://docs.telerik.com/aspnet-core/installation/nuget-install#setup-with-nugetconfig)
   * [Azure DevOps and Telerik NuGet](https://www.telerik.com/blogs/azure-devops-and-telerik-nuget-packages)
   * [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys)
-* Microsoft Documentation
+
+* Microsoft Documentation: 
   * [nuget.config reference](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file?Wt.mc_id=DX_MVP5000553)
-  * [Package source sections](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesources?Wt.mc_id=DX_MVP5000553)
+  * [Package source sections](https://learn.microsoft.com/en-us/nuget/reference/nuget-config-file?Wt.mc_id=DX_MVP5000553#package-source-sections)
   * [Consuming packages from authenticated feeds](https://docs.microsoft.com/en-us/nuget/consume-packages/consuming-packages-authenticated-feeds?Wt.mc_id=DX_MVP5000553)
-  * [packageSourceCredentials](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesourcecredentials?Wt.mc_id=DX_MVP5000553)
-  * [Package source mapping section](https://docs.microsoft.com/en-us/nuget/consume-packages/package-source-mapping?Wt.mc_id=DX_MVP5000553)
+  * [packageSourceCredentials](https://learn.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesourcecredentials)
+  * [Package source mapping section](https://learn.microsoft.com/en-us/nuget/reference/nuget-config-file#package-source-mapping-section)

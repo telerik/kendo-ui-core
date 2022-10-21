@@ -314,6 +314,10 @@ var __meta__ = {
                 insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo",
                 initializedNotifications;
 
+            if (!that._hideTimeouts) {
+                that._hideTimeouts = [];
+            }
+
             wrapper
                 .removeClass("k-popup")
                 .addClass(that._guid)
@@ -325,10 +329,12 @@ var __meta__ = {
             initializedNotifications.each(function(idx, element) {
                 that._attachStaticEvents(options, $(element));
 
-                if (autoHideAfter > 0) {
-                    setTimeout(function() {
+                if (autoHideAfter > 0 && !$(element).attr(kendo.attr("has-hidetimeout"))) {
+                    $(element).attr(kendo.attr("has-hidetimeout"), true);
+                    that._hideTimeouts.push(
+                        setTimeout(function() {
                         that._hideStatic($(element));
-                    }, autoHideAfter);
+                    }, autoHideAfter));
                 }
             });
         },
@@ -433,6 +439,10 @@ var __meta__ = {
                 openedNotifications = that.getNotifications();
 
             if (that.options.appendTo) {
+                if (that._hideTimeouts) {
+                    that._hideTimeouts.forEach(clearTimeout);
+                }
+                that._hideTimeouts = [];
                 openedNotifications.each(function(idx, element) {
                     that._hideStatic($(element));
                 });
