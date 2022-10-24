@@ -62,6 +62,7 @@ The following example demonstrates how to configure a subtitle:
         <!-- Other options.-->
     </kendo-chart>
 ```
+{% endif %}
 
 ## Customizing the Appearance
 

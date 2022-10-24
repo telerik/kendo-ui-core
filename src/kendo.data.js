@@ -963,7 +963,13 @@ var __meta__ = {
 
             proto.defaults[originalName !== name ? originalName : name] = value;
 
-            field.parse = field.parse || parsers[type];
+            if ($.isPlainObject(field)) {
+                field.parse = field.parse || parsers[type];
+            } else {
+                field = {
+                    parse: parsers[type]
+                };
+            }
         }
 
         if (functionFields.length > 0) {

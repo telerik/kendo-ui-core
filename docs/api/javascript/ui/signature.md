@@ -95,6 +95,19 @@ A value indicating whether the dotted line should be displayed in the background
         });
     </script>
 
+### label `String`
+
+Specifies the label that will be rendered on the `k-signature-canvas` element of the component with the `aria-label` attribute.
+
+#### Example
+
+    <div id="signature"></div>
+    <script>
+        $("#signature").kendoSignature({
+            label: "Signature canvas"
+        });
+    </script>
+
 ### maximizable `Boolean` *(default: true)*
 
 A value indicating whether the component can be maximized

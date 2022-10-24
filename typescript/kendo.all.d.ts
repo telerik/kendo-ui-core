@@ -9949,6 +9949,7 @@ declare namespace kendo.ui {
         fillMode?: string | undefined;
         height?: number | undefined;
         hideLine?: boolean | undefined;
+        label?: string | undefined;
         maximizable?: boolean | undefined;
         popupScale?: number | undefined;
         readonly?: boolean | undefined;

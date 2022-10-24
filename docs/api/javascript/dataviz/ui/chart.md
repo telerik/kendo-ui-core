@@ -14535,6 +14535,34 @@ The font style of the labels. Accepts a valid CSS font string, for example "20px
 
 The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
+Format placeholders:
+
+* Area, bar, column, line, pie, radarArea, radarColumn and radarLine
+    *   {0} - value
+* Bubble
+    *   {0} - x value
+    *   {1} - y value
+    *   {2} - size value
+    *   {3} - category name
+* Bullet
+    *   {0} - value
+    *   {1} - target value
+* Scatter, scatterLine
+    *   {0} - x value
+    *   {1} - y value
+* PolarArea, polarLine and polarScatter
+    *   {0} - x value (degrees)
+    *   {1} - y value
+* Candlestick and OHLC
+    *   {0} - open value
+    *   {1} - high value
+    *   {2} - low value
+    *   {3} - close value
+    *   {4} - category name
+* RangeArea, rangeBar, rangeColumn
+    *   {0} - from value
+    *   {1} - to value
+
 #### Example - set the chart series label format
 
     <div id="chart"></div>
@@ -17034,6 +17062,9 @@ Format placeholders:
     *   {1} - y value
     *   {2} - size value
     *   {3} - category name
+* Bullet
+    *   {0} - value
+    *   {1} - target value
 * Scatter, scatterLine
     *   {0} - x value
     *   {1} - y value
@@ -19909,6 +19940,9 @@ Format placeholders:
     *   {1} - y value
     *   {2} - size value
     *   {3} - category name
+* Bullet
+    *   {0} - value
+    *   {1} - target value
 * Scatter and scatterLine
     *   {0} - x value
     *   {1} - y value
@@ -22179,6 +22213,9 @@ Format placeholders:
     *   {1} - y value
     *   {2} - size value
     *   {3} - category name
+* Bullet
+    *   {0} - value
+    *   {1} - target value
 * Scatter and scatterLine
     *   {0} - x value
     *   {1} - y value
@@ -39834,12 +39871,12 @@ The data point value.
         { data: [1, 2] }
       ]
     });
-    
+
     function chart_seriesHover(e) {
     /* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
-    
+
     var chart = $("#chart").data("kendoChart");
     chart.bind("seriesHover", chart_seriesHover);
     </script>
