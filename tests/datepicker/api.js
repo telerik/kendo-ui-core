@@ -576,6 +576,50 @@ it("setOptions updates the button size correctly", function() {
     assert.isNotOk(datepicker._dateIcon.hasClass("k-button-md"));
 });
 
+it("setOptions persists the disabled state when initialized from a disabled element", function() {
+    input.attr("disabled", "disabled");
+    var datepicker = new DatePicker(input);
+
+    datepicker.setOptions({
+        weekNumber: true
+    });
+
+    assert.isOk(datepicker.wrapper.hasClass("k-disabled"));
+});
+
+it("setOptions persists the readonly state when initialized from a readonly element", function() {
+    input.attr("readonly", "readonly");
+    var datepicker = new DatePicker(input);
+
+    datepicker.setOptions({
+        weekNumber: true
+    });
+
+    assert.isOk(datepicker.element.is("[readonly]"));
+});
+
+it("setOptions does not persist disabled state after calling .enable(false)", function() {
+    var datepicker = new DatePicker(input);
+
+    datepicker.enable(false);
+    datepicker.setOptions({
+        weekNumber: true
+    });
+
+    assert.isOk(!(datepicker.element.is("[disabled]")));
+});
+
+it("setOptions does not persist readonly state after calling .readonly(true)", function() {
+    var datepicker = new DatePicker(input);
+
+    datepicker.readonly(true);
+    datepicker.setOptions({
+        weekNumber: true
+    });
+
+    assert.isOk(!(datepicker.element.is("[readonly]")));
+});
+
 it("disabled date is not set as widgets value", function() {
     var datepicker = new DatePicker(input, {
         value: new Date(2015,9,19),

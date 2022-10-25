@@ -316,6 +316,9 @@ var __meta__ = {
             options.min = parse(element.attr("min")) || parse(options.min);
             options.max = parse(element.attr("max")) || parse(options.max);
 
+            that.options.readonly = options.readonly !== undefined ? options.readonly : Boolean(that.element.attr("readonly"));
+            that.options.enable = options.enable !== undefined ? options.enable : !(Boolean(element.is("[disabled]") || $(element).parents("fieldset").is(':disabled')));
+
             normalize(options);
 
             that._initialOptions = extend({}, options);
@@ -386,7 +389,7 @@ var __meta__ = {
             that._reset();
             that._template();
 
-            disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
+            disabled = !that.options.enable;
             if (disabled) {
                 that.enable(false);
             } else {
@@ -452,7 +455,11 @@ var __meta__ = {
 
             that.dateView.setOptions(options);
             that._icon();
-            that._editable(options);
+            that._editable({
+                readonly: options.readonly === undefined ? that.options.readonly : options.readonly,
+                disable: !(options.enable === undefined ? that.options.enable : options.enable)
+            });
+
             that._createDateInput(options);
 
             if (!that._dateInput) {
