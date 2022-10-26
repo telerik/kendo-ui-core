@@ -1,13 +1,13 @@
 ---
-title: Integration with Telerik Fiddler Jam  
+title: Telerik Products Integration  
 page_title: Capture ASP.NET Web Forms Network Logs and Log Issues with Fiddler Jam 
 description: "Learn how to capture Kendo UI for jQuery network logs and log issues in the browser by using the Telerik Fiddler Jam extension tool."
 slug: common-capture-issues-with-fiddler-jam
 previous_url: /telerik-product-integration/capture-issues-with-fiddler-jam
-position: 8
+position: 9
 ---
 
-# Using Kendo UI with Telerik Fiddler Jam
+# Telerik Fiddler Jam
 
 [Fiddler Jam](https://www.telerik.com/fiddler-jam) is a Telerik tool designed to record network activity, and capture console logs and screenshots. 
 

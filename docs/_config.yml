@@ -7,7 +7,7 @@ capital_casing_redirects: true
 
 # Exclude files which should not be in the output
 exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, all-pages.md, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
-exclude_navigation: ["knowledge-base/*"]
+exclude_navigation: ["knowledge-base/*", contribution.md]
 navigation:
 ## List your directory names and order here, like this:
     "api":
@@ -31,7 +31,7 @@ navigation:
         title: "Working with Components"
         position: 3
     "intro/scripts":
-        title: "Widget Script Dependencies"
+        title: "Script Dependencies"
         position: 4
     "controls":
         title: "Components"
@@ -341,38 +341,35 @@ navigation:
     "styles-and-layout/less-themes":
         title: "Less Themes"
         position: 2
-    "third-party":
-        title: "Third-Party Libraries"
+    "kendo-in-the-cloud":
+        title: "Cloud Integration"
         position: 7
+    "third-party":
+        title: "Third-Party Integration"
+        position: 8
     "third-party/webforms":
         title: "ASP.NET Web Forms"
         position: 20
-    "kendo-in-the-cloud":
-        title: "Cloud Integration"
-        position: 8
     "globalization":
         title: "Globalization"
-        position: 9
+        position: 10
     "globalization/intl":
         title: "Internationalization"
         position: 2
     "accessibility":
         title: "Accessibility"
-        position: 10
+        position: 11
     "jsp":
         title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP"
-        position: 11
+        position: 20
     "php":
         title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP"
-        position: 12
+        position: 30
     "php/widgets":
         title: "Classes"
     "backwards-compatibility":
         title: "Breaking Changes"
-        position: 20
-    "troubleshoot":
-        title: "Troubleshooting"
-        position: 30
+        position: 40
     "*how-to":
         title: "How To"
         position: 200
@@ -2286,6 +2283,7 @@ footer:
     "Forums": https://www.telerik.com/forums/kendo-ui
     "Blogs": https://www.telerik.com/blogs/kendo-ui
     "Feedback Portal": https://feedback.telerik.com/kendo-jquery-ui
+    "Doc Contribution": https://docs.telerik.com/kendo-ui/contribution
 -
   title: "Frameworks"
   links:

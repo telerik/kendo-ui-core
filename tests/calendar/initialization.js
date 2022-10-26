@@ -305,7 +305,7 @@ it("Widget sets disabled class correctly when array is set", function() {
     assert.isOk($('tr').eq(2).children().first().hasClass("k-disabled"));
 });
 
-it("Widget value is not set if value is disbaled date", function() {
+it("Widget value is not set if value is disabled date", function() {
     var cal = new Calendar(div, {
         value: new Date(2015,9,3),
 		disableDates: ["mo", "sa"]
