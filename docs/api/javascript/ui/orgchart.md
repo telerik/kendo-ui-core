@@ -169,7 +169,7 @@ Allows the user to edit the title, name, and avatar of the item. If set to `fals
     <script>
         $("#orgchart").kendoOrgChart({
             editable: {
-                form: false
+                fields: false
             },
             dataSource: [
                 { id: 1, name: "Jane", title: "Boss", expanded: true },

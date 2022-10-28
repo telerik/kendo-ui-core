@@ -174,5 +174,18 @@
             assert.equal(count, 1);
         });
 
+        it("DateTimePicker with Modern rendering triggers close event with e.view in args", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                value: new Date(2000, 10, 10),
+                componentType: "modern",
+                close: function(e) {
+                    assert.isOk(true);
+                    assert.equal(e.view, "date");
+                }
+            });
+
+            datetimepicker.open();
+            datetimepicker.close();
+        });
     });
 }());

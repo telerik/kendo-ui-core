@@ -1037,8 +1037,20 @@ var __meta__ = {
                 open: function(e) {
                     if (that.trigger(OPEN, { view: this.element.find('.k-date-tab').length ? 'date' : 'time', sender: that })) {
                         e.preventDefault();
+                    } else {
+                        this.element.attr(ARIA_HIDDEN, false);
+                        that.element.attr(ARIA_EXPANDED, true);
                     }
+
                     that.timeView._updateTitle();
+                },
+                close: function(e) {
+                    if (that.trigger(CLOSE, { view: this.element.find('.k-date-tab').length ? 'date' : 'time', sender: that })) {
+                        e.preventDefault();
+                    } else {
+                        that.element.attr(ARIA_EXPANDED, false);
+                        this.element.attr(ARIA_HIDDEN, true);
+                    }
                 }
             }));
 
