@@ -34,7 +34,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    ![{{ site.product_short }} Choosing the Products table](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
 {% endif %}
 
 1. Open `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
@@ -173,7 +173,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
 {% if site.mvc %}
 1. Build and run the project.
-![{{ site.product_short }} The final result](../images/grid-detail-template.png)
+![{{ site.product_short }} The final result is a Grid with detail template](../images/grid-detail-template.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-detail-template).
 {% endif %}
@@ -388,7 +388,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
 {% if site.mvc %}
 1. Build and run the project.
 
-    ![{{ site.product_short }} The final result](../images/grid-hierarchy.png)
+    ![{{ site.product_short }} The final result is a hierarchical Grid](../images/grid-hierarchy.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository]((https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-hierarchy).
 {% endif %}

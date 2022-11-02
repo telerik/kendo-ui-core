@@ -40,7 +40,7 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    ![{{ site.product_short }} Choosing the Products table](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
 
 {% endif %}
 
@@ -147,7 +147,7 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
 
 1. Build and run the application.
 
-![{{ site.product_short }} The final result](../images/grid-bound-grid.png)
+![{{ site.product_short }} The final result is a Grid bound to data](../images/grid-bound-data.png)
 
 To download a Visual Studio Project, refer to [this GitHub repository]({% if site.mvc %} https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding{% else %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/AjaxBinding.cshtml{% endif %}).
 

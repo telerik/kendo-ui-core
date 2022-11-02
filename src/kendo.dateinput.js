@@ -1,11 +1,12 @@
 import "./kendo.core.js";
+import "./kendo.label.js";
 
 var __meta__ = {
     id: "dateinput",
     name: "DateInput",
     category: "web",
     description: "The DateInput widget allows to edit date by typing.",
-    depends: [ "core" ]
+    depends: [ "core", "label" ]
 };
 
 (function($, undefined) {
@@ -17,6 +18,7 @@ var __meta__ = {
     var keys = kendo.keys;
     var ns = ".kendoDateInput";
     var objectToString = {}.toString;
+    var isPlainObject = $.isPlainObject;
 
     var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertychange.kendoDateInput input" : "input") + ns;
 
@@ -84,9 +86,12 @@ var __meta__ = {
             } else {
                 that.readonly(element.is("[readonly]"));
             }
-
             that.value(that.options.value || element.val());
             that._applyCssClasses();
+
+            if (options.label) {
+                that._label();
+            }
 
             kendo.notify(that);
         },
@@ -110,7 +115,8 @@ var __meta__ = {
             },
             size: "medium",
             fillMode: "solid",
-            rounded: "medium"
+            rounded: "medium",
+            label: null
         },
 
         events: [
@@ -139,6 +145,16 @@ var __meta__ = {
             this._unbindInput();
             this._bindInput();
             this._updateElementValue();
+
+            if (options.label && that._inputLabel) {
+                that.label.setOptions(options.label);
+            } else if (options.label === false) {
+                that.label._unwrapFloating();
+                that._inputLabel.remove();
+                delete that._inputLabel;
+            } else if (options.label) {
+                that._label();
+            }
         },
 
         destroy: function() {
@@ -147,6 +163,10 @@ var __meta__ = {
 
             if (that._formElement) {
                 that._formElement.off("reset", that._resetHandler);
+            }
+
+            if (that.label) {
+                that.label.destroy();
             }
 
             Widget.fn.destroy.call(that);
@@ -173,13 +193,27 @@ var __meta__ = {
 
             this._updateElementValue();
             this._oldValue = value;
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.refresh();
+            }
         },
 
         _updateElementValue: function() {
-            var stringAndFromat = this._dateTime.toPair(this.options.format, this.options.culture, this.options.messages);
-            this.element.val(stringAndFromat[0]);
-            this._oldText = stringAndFromat[0];
-            this._format = stringAndFromat[1];
+            var stringAndFormat = this._dateTime.toPair(this.options.format, this.options.culture, this.options.messages);
+            this.element.val(stringAndFormat[0]);
+            this._oldText = stringAndFormat[0];
+            this._format = stringAndFormat[1];
+        },
+
+        _toggleDateMask: function(toShow) {
+            var that = this;
+
+            if (toShow) {
+                that._updateElementValue();
+            } else {
+                this.element.val("");
+            }
         },
 
         readonly: function(readonly) {
@@ -187,6 +221,10 @@ var __meta__ = {
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
@@ -194,6 +232,34 @@ var __meta__ = {
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
+        },
+
+        _label: function() {
+            var that = this;
+            var options = that.options;
+            var labelOptions = isPlainObject(options.label) ? options.label : {
+                content: options.label
+            };
+
+            that.label = new kendo.ui.Label(null, $.extend({}, labelOptions, {
+                widget: that,
+                floatCheck: () => {
+                    that._toggleDateMask(true);
+
+                    if (!that.value() && document.activeElement !== that.element[0]) {
+                        that._toggleDateMask(false);
+                        return true;
+                    }
+
+                    return false;
+                }
+            }));
+
+            that._inputLabel = that.label.element;
         },
 
         _bindInput: function() {

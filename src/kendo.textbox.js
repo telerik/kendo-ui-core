@@ -79,6 +79,10 @@ var __meta__ = {
 
             that._value = value;
             that.element.val(value);
+
+            if (that.floatingLabel) {
+                that.floatingLabel.refresh();
+            }
         },
 
         readonly: function(readonly) {

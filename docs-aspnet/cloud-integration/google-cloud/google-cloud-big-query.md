@@ -27,22 +27,22 @@ For more information on how to create new datasets and tables, refer to the arti
 
 1. Navigate to **BigQuery** from the Google Cloud Platform navigation menu.
 
-    ![{{ site.product_short }} bigquery](../images/google-cloud-bigquery.png)
+    ![{{ site.product_short }} Google cloud bigquery](../images/google-cloud-bigquery.png)
 
 1. Select your project and choose **Create dataset** from the dropdown, which opens on clicking the project's menu button.
 
-    ![{{ site.product_short }} dataset](../images/google-cloud-create-dataset.png)
+    ![{{ site.product_short }} Google cloud dataset](../images/google-cloud-create-dataset.png)
 
 Once the dataset is created, copy the datasetid. You will need it later, in the logic responsible for running the queries against this dataset. In this example the datasetid is `TestDataset`.
 
 1. Create a `products` table with the following Schema and Data.
 
     Schema in the TestDataset:
-    ![{{ site.product_short }} products table](../images/google-cloud-dataset-schema.png)
+    ![{{ site.product_short }} Google cloud dataset schema](../images/google-cloud-dataset-schema.png)
 
     Data of the Products Table in the TestDataset:
 
-    ![{{ site.product_short }} products table](../images/google-cloud-table-data.png)
+    ![{{ site.product_short }} Google cloud products table](../images/google-cloud-table-data.png)
 
 ## Authorization and Access
 

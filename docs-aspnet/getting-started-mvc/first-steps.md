@@ -67,13 +67,13 @@ After the Visual Studio Extensions are installed, create a Telerik ASP.NET MVC a
 
 1. Search for and select the **Telerik ASP.NET MVC C#** project template. Click **Next**.
 
-	![{{ site.product_short }} Telerik ASP.NET MVC application](../getting-started-mvc/images/create-new-project-mvc.png)
+	![{{ site.product_short }} Create a new Telerik application](../getting-started-mvc/images/create-new-project-mvc.png)
 
 1. Select the **GRID AND MENU** template.
 
    For more information on the additional predefined Telerik template options, refer to the [Creating New Projects]({% slug newprojectwizards_visualstudio_aspnetcore %}) article. 
 
-	![{{ site.product_short }} The new Project Wizard](../getting-started-mvc/images/create-new-project-templates-mvc.png)
+	![{{ site.product_short }} New Project Wizard templates](../getting-started-mvc/images/create-new-project-templates-mvc.png)
 
 1. Select the **Default-v2** visual theme for your Telerik ASP.NET MVC Application, and click **Finish** to complete the creation of the application.
 
@@ -104,7 +104,7 @@ Add a DatePicker to the `Index.cshtml` view:
 
 Press `CTRL+F5` to build and run the application. You have a Grid and a DatePicker on your page.
 
-![{{ site.product_short }} Sample page](../getting-started-mvc/images/grid-and-datepicker-mvc.png)
+![{{ site.product_short }} Sample page showing a Grid and a DatePicker](../getting-started-mvc/images/grid-and-datepicker-mvc.png)
 
 ## Next Steps
 

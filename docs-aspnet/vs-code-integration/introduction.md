@@ -42,7 +42,7 @@ The **Blank Project** has the package references and the client-side resources l
 
 Additionally, you can include multiple {{ site.product }} components into your project (for example, the <a href="https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/overview">Grid</a>, <a href="https://docs.telerik.com/aspnet-core/html-helpers/charts/overview">Chart</a>, and <a href="https://docs.telerik.com/aspnet-core/html-helpers/layout/form/overview">Form</a>).
 
-![{{ site.product_short }} {{site.product_short}} blank project pages](images/blank-project-pages.png)
+![{{ site.product_short }} blank project pages](images/blank-project-pages.png)
 
 ## Admin Dashboard
 

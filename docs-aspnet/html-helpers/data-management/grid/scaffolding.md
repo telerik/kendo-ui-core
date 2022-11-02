@@ -26,7 +26,7 @@ To scaffold the Grid HtmlHelper for ASP.NET MVC:
 
 1. On the next screen, you are presented with the **Model** and **Data Context** options. Enter the **Controller** and **View** names.
 
-	![{{ site.product_short }} Providing the Controller name](images/scaffolding/kendo_ui_grid1.png)
+	![{{ site.product_short }} Providing controller and view names in the model options for the Grid](images/scaffolding/model-options.png)
 
 	The **Model Class** DropDownList contains all model types from the active project. In this example, you list products in the Grid. Select the **Product** entity.
 
@@ -55,18 +55,18 @@ To scaffold the Grid HtmlHelper for ASP.NET MVC:
 
 1. Click the **Grid options** item on the left.
 
-	![{{ site.product_short }} Selecting the Grid options](images/scaffolding/kendo_ui_grid2.png)
+	![{{ site.product_short }} Selecting the Grid options](images/scaffolding/grid-options.png)
 
 	This screen contains the Grid functionalities that can be configured before scaffolding:
 
 	* `DataSource Type`&mdash;Ajax, Server, or WebApi.
 	* `Editable`&mdash;Enable the editing, configure the edit mode&mdash;`InLine`, `InCell`, or `PopUp`&mdash;and the operations that will be included&mdash;`Create`, `Update`, `Destroy`.
 
-	  ![{{ site.product_short }} Selecting the editable options](images/scaffolding/editable.png)
+	  ![{{ site.product_short }} Selecting the Grid editable options](images/scaffolding/editable.png)
 
 	* `Filterable`&mdash;Enable the filtering of the Grid and select the filter mode.
 
-	  ![{{ site.product_short }} Selecting the filterable options](images/scaffolding/filterable.png)
+	  ![{{ site.product_short }} Selecting the Grid filterable options](images/scaffolding/filterable.png)
 
 	* `Column Menu`&mdash;Enable the column menu.
 	* `Navigatable`&mdash;Enable the keyboard navigation.
@@ -75,18 +75,18 @@ To scaffold the Grid HtmlHelper for ASP.NET MVC:
 	* `Scrollable`&mdash;Enable the scrolling of the Grid table.
 	* `Selectable`&mdash;Enable the selection and specify the selection mode and type.
 
-	  ![{{ site.product_short }} Selecting the selectable options](images/scaffolding/selectable.png)
+	  ![{{ site.product_short }} Selecting the Grid selectable options](images/scaffolding/selectable.png)
 
 	* `Sortable`&mdash;Enable the sorting and specify the sorting mode.
 
-	  ![{{ site.product_short }} Selecting the sortable options](images/scaffolding/sortable.png)
+	  ![{{ site.product_short }} Selecting the Grid sortable options](images/scaffolding/sortable.png)
 
 	* `Excel Export`&mdash;Enable the Excel export functionality.
 	* `PDF Export`&mdash;Enable the PDF export functionality.
 
 1. Click the **Events** item on the left.
 
-	![{{ site.product_short }} The Events item in the Grid options](images/scaffolding/kendo_ui_grid3.png)
+	![{{ site.product_short }} The Events item in the Grid options](images/scaffolding/grid-events.png)
 
 	From this screen, you can select the Grid events to which you want to attach handlers.
 

@@ -8,7 +8,7 @@ position: 2
 
 # Operating System Support
 
-The [Kendo UI widgets and framework components](https://demos.telerik.com/kendo-ui/) are designed to support all major operating systems.
+The [Kendo UI components and framework utilities](https://demos.telerik.com/kendo-ui/) are designed to support all major operating systems.
 
 > * Kendo UI supports hybrid mouse and touch-screen devices, for example, Internet Explorer 10, Chrome, and Firefox on Windows 8.
 > * To allow the browsers to run scripts, enable JavaScript on all of them.

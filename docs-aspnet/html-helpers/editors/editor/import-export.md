@@ -12,7 +12,7 @@ As of the R1 2017 release, the Telerik UI Editor for ASP.NET MVC enables you to 
 
 Along with the server-side integration of the [Telerik Document Processing](https://docs.telerik.com/devtools/document-processing/introduction) suite, the new `ExportAs` and `Import` tools which utilize the import and export functionality are available.
 
-![{{ site.product_short }} Importing and exporting an animation](import-export-animation.gif)
+![{{ site.product_short }} Editor importing and exporting animation](import-export-animation.gif)
 
 ## Requirements
 

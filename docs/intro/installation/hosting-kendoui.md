@@ -25,6 +25,7 @@ When the download completes, each folder inside the downloaded archive contains 
 |`/apptemplates`		|Contains standalone starter templates. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all AJAX data requests.|
 |`/examples`				|Accommodates the quick-start demo files. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all AJAX data requests.|
 |`/js`							|Contains the minified JavaScript files needed by Kendo UI to operates.|
+|`/mjs`							|Contains the JavaScript modules that can be used instead of the bundled scripts from the `js` folder.|
 |`/license-agreements`| Contains the End User License Agreement (EULA) that has to be read before installing Kendo UI.|
 |`/src`							|Used to hold the source code files but they are now provided in a separate download package. Access the source code package from the [**Downloads** section](https://www.telerik.com/account/my-downloads) of your account. Note that the source code is not available to trial users.|
 |`/styles`					|Contains the definitions of all [SASS](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) and [LESS](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling)-based themes that Kendo UI provides. |
@@ -43,16 +44,17 @@ Based on the preferred technologies, you can also use other approaches to add Ke
 
 ## Next Steps
 
+* [Using Kendo UI for jQuery ECMAScript Modules]({% slug kendoui_ecmascript_overview %})
 * [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
-* [The Widget DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
-* [Initialize Widgets as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize Widgets with MVVM]({% slug mvvm_initialization_kendoui %})
+* [The Component DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Initialize Components as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Components with MVVM]({% slug mvvm_initialization_kendoui %})
 * [jQuery Version Support]({% slug jquerysupport_kendoui %})
 * [Web Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Operation System Support]({% slug ossupport_kendo %})
 * [PDF and Excel Export Support]({% slug export_support_kendoui %})
-* [Widget Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
-* [Create Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also
 

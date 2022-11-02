@@ -165,7 +165,7 @@ The following implementation demonstrates the code needed for setting Gap and Sp
 
 Overview of Gap and Spacing implementation for Bar Chart:
 
-![{{ site.product_short }} Gap and Spacing](images/gapAndSpacing.png)
+![{{ site.product_short }} Chart Gap and Spacing](images/gapAndSpacing.png)
 
 * [Demo page of the Gap and Spacing for Bar Chart](https://demos.telerik.com/{{ site.platform }}/bar-charts/gap-spacing)
 

@@ -34,7 +34,7 @@ Telerik Upgrade API Analyzer is a click-once application. To download the instal
 
 1. Run the Upgrade API Analyzer. As a result, the tool opens the following screen:
 
-![{{ site.product_short }} The initial screen of Telerik Upgrade API Analyzer](../vs-integration/images/images-mvc/upgrade-api-analyzer_0.png)
+![{{ site.product_short }} The initial screen of Telerik Upgrade API Analyzer](../vs-integration/images/images-mvc/upgrade-api-analyzer-initial-screen.png)
 
 1. On the screen, select the platform.
 1. Select the current version of the Telerik assemblies you are using.
@@ -43,23 +43,23 @@ Telerik Upgrade API Analyzer is a click-once application. To download the instal
 
 Alternatively, you can also run the Upgrade API Analyzer from the [Upgrade Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %}) by clicking the **Compatibility** button as demonstrated on **Figure 2**. As a result, the wizard provides the **Technology**, **Your Version**, and **Version to Upgrade** parameters. When you start the Upgrade API Analyzer directly through the **Compatibility** button without installing the tool first, the installation starts automatically. If the .NET Framework 4.5.2 is not present on your machine, the application prompts you to install it manually at the end of the installation.
 
-![{{ site.product_short }} The Compatibility button in the Upgrade API Analyzer](../vs-integration/images/images-mvc/upgrade-api-analyzer_5.png)
+![{{ site.product_short }} The Compatibility button in the Upgrade API Analyzer](../vs-integration/images/images-mvc/upgrade-api-analyzer-compatibility.png)
 
 ## Analyzing the Changes
 
 After the setup of the tool is ready, the Upgrade API Analyzer starts analyzing the code.
 
-![{{ site.product_short }} The tool starts analyzing as soon as you open a solution](../vs-integration/images/images-mvc/upgrade-api-analyzer_1.png)
+![{{ site.product_short }} The tool starts analyzing as soon as you open a solution](../vs-integration/images/images-mvc/upgrade-api-analyzer-analyzing-solution.png)
 
 The tool lists all the changes that are found between the two versions. To present the results from the comparison, the it uses the [RadGridView for WPF](https://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html), which provides options for data handling such as sorting, filtering, and resizing columns.
 
-![{{ site.product_short }} The Upgrade API Analyzer lists the found differences](../vs-integration/images/images-mvc/upgrade-api-analyzer_2.png)
+![{{ site.product_short }} The Upgrade API Analyzer lists the found differences](../vs-integration/images/images-mvc/upgrade-api-analyzer-differences-found.png)
 
 For each change, the grid presents the following information:
 
 * **Difference**&mdash;Teh possible values are **Obsolete**, **Deleted**, or **Modified**. By default, the modified changes are not displayed because they indicate an internal update in the method or class which generally does not affect its function and does not require you to act. However, the modified changes become available when you update the filter of the **Difference** column.
 
-		![{{ site.product_short }} Displaying all found changes including the modifications](../vs-integration-mvc/images/upgrade-api-analyzer_3.png)
+		![{{ site.product_short }} Displaying all found changes including the modifications](../vs-integration-mvc/images/upgrade-api-analyzer-displaying-changes.png)
 
 * **Kind**&mdash;The possible values are **Type**, **Property**, **Method**, and **Field**.
 * **Node**&mdash;The name of the **Type**, **Property**, **Method**, or **Field** value.
@@ -72,7 +72,7 @@ For each change, the grid presents the following information:
 
 Additionally, the Upgrade API Analyzer allows you to save the gathered information through the **Export** button that is located in the upper right corner. The data is arranged and exported to an HTML document. The exported information includes the currently visible (filtered) data in the grid.
 
-![{{ site.product_short }} The Upgrade API Analyzer allows an HTML export functionality](../vs-integration/images/images-mvc/upgrade-api-analyzer_4.png)
+![{{ site.product_short }} The Upgrade API Analyzer allows an HTML export functionality](../vs-integration/images/images-mvc/upgrade-api-analyzer-export.png)
 
 ## Feedback and Updates
 

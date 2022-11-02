@@ -40,7 +40,7 @@ The following example demonstrates how to define the TreeList.
 
 1. Choose the **Employees** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
-    ![{{ site.product_short }} Choosing the Employees table](images/treelist-database-objects.png)
+    ![{{ site.product_short }} Choosing the Employees table in the database objects](images/treelist-database-objects.png)
 
 1. Right-click the `~/Models` folder in the solution explorer and add a new `EmployeeViewModel` class.
 {% endif %}
@@ -147,7 +147,7 @@ The following example demonstrates how to define the TreeList.
 {% if site.mvc %}
 1. Build and run the application.
 
-    ![{{ site.product_short }} The final result](images/treelist-bound.png)
+    ![{{ site.product_short }} The final result is a TreeList bound to data](images/treelist-bound.png)
 {% endif %}
 
 ## Functionality and Features

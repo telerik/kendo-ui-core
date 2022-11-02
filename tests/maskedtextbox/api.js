@@ -118,6 +118,20 @@
             assert.equal(input.val(), "");
         });
 
+        it("value method refreshes the floating label", function() {
+            var maskedtextbox = new MaskedTextBox(input, {
+                mask: "(999) 000-0000",
+                label: {
+                    content: "Set phone number",
+                    floating: true
+                }
+            });
+
+            maskedtextbox.value(5551234567);
+
+            assert.isOk(!maskedtextbox.floatingLabel.element.hasClass("k-empty"));
+        });
+
         it("raw method returns unmasked widget value", function() {
             var maskedtextbox = new MaskedTextBox(input, {
                 mask: "(00-00)",

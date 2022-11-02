@@ -339,6 +339,84 @@ For more information on date and time formats please refer to [Date Formatting](
     });
     </script>
 
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the datetimepicker. If the datetimepicker has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            label: "Date"
+        })
+    </script>
+
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+                label: function() {
+                    return "Date";
+                }
+        })
+    </script>
+
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+                label: {
+                    content: "Date"
+                }
+        })
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+                label: {
+                    content: function() {
+                        return "Date";
+                    }
+                }
+        })
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/datetimepicker/methods/value) method **does not trigger** the `focusout` event of the datetimepicker.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#datetimepicker").data("kendoDateTimePicker").label.floatingLabel.refresh();`
+
+#### Example - create a floating label
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+                label: {
+                    content: "Date",
+                    floating: true
+                }
+        })
+    </script>
+
 ### interval `Number`*(default: 30)*
 
  Specifies the interval, between values in the popup list, in minutes.
@@ -1048,7 +1126,7 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 `Date` The time value of a DateTimePicker.
 
 > * This method **does not trigger** [change](/api/javascript/ui/datetimepicker/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="datetimepicker" />

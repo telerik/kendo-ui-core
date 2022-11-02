@@ -1032,5 +1032,64 @@
         assert.isNotOk(multiselect.wrapper.hasClass("k-input-md")); // Does not add default class for the option
         assert.isOk(multiselect.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
     });
+
+    it("renders not-floating label from string", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            label: "Label"
+        });
+
+        assert.equal(multiselect.label.element.text(), "Label");
+        assert.isNotOk(!!multiselect.label.floatingLabel);
+    });
+
+    it("renders label from object", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            label: {
+                content: "some label"
+            }
+        });
+
+        assert.equal(multiselect.label.element.text(), "some label");
+    });
+
+    it("renders floating label", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            label: {
+                content: "some label",
+                floating: true
+            }
+        });
+
+        assert.equal(multiselect.label.element.text(), "some label");
+        assert.isOk(!!multiselect.label.floatingLabel);
+    });
+
+    it("renders label with funciton", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            label: () => `some label`
+        });
+
+        assert.equal(multiselect.label.element.text(), "some label");
+    });
     });
 }());

@@ -123,3 +123,9 @@ The following table lists the first part of the updated components.
 | TextBox | [TextBox Appearance Documentation]({% slug appearance_kendoui_textbox_widget %})
 | TimePicker | [TimePicker Appearance Documentation]({% slug appearance_kendoui_timepicker_widget %})
 | TreeView | [TreeView Appearance Documentation]({% slug appearance_kendoui_treeview_widget %})`
+
+**Button**
+
+All button variables in SASS themes are changed and have prefix `$kendo-`. For example, `$button-*` is changed to  `$kendo-button-*`. The reason behind this change is to  to prevent overwriting custom variables.
+
+The state variables `$button-focused` and `$button-hovered` are changed to `$kendo-button-focus` and `$kendo-button-hover`. 

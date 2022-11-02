@@ -125,7 +125,7 @@ The following example demonstrates how to configure the PivotConfigurator.
 
 The following image demonstrates the output from the previous example.
 
-![{{ site.product_short }} Kendo UI PivotConfigurator](pivotconfigurator.png)
+![{{ site.product_short }} PivotGrid bound to data](pivotgrid-data-bound.png)
 
 ## Referencing Existing Instances
 

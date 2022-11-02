@@ -21,7 +21,7 @@ can be found in **Views/Order/_Order.cshtml**.
 
 ## Set Up the Basic Order Fields
 
-![{{ site.product_short }} kendo-saleshub-order-info-screenshot](images/kendo-saleshub-order-info-screenshot.png)
+![{{ site.product_short }} Kendo Saleshub Order Info](images/kendo-saleshub-order-info-screenshot.png)
 
 The first part of the form is where we declare the fields where the user can set the contract weight/amount,
 date, and the order number for the given order. For the sake of brevity, we'll only cover the fields which
@@ -65,7 +65,7 @@ as a parameter and will cause the extensions to generate the markup for the unde
 
 ## Set up the TabStrip
 
-![{{ site.product_short }} kendo-saleshub-order-tabstrip-screenshot](images/kendo-saleshub-order-tabstrip-screenshot.png)
+![{{ site.product_short }} Kendo Saleshub Order TabStrip](images/kendo-saleshub-order-tabstrip-screenshot.png)
 
 The next part of the Orders view is the [Kendo TabStrip](https://demos.telerik.com/kendo-ui/web/tabstrip/index.html), which contains
 the grids for Order details and notes.
@@ -295,7 +295,7 @@ DataSource.
 
 ## Set Up the PanelBar
 
-![{{ site.product_short }} kendo-saleshub-order-panelbar-screenshot](images/kendo-saleshub-order-panelbar-screenshot.png)
+![{{ site.product_short }} Kendo Saleshub Order PanelBar](images/kendo-saleshub-order-panelbar-screenshot.png)
 
 After the tabstrip containing the order details and order notes grid we have a [Kendo PanelBar](https://demos.telerik.com/kendo-ui/web/panelbar/index.html) which contains
 the fields for editing the payment terms of an Order, along with setting invoice comments.

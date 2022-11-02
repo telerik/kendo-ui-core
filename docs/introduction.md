@@ -165,4 +165,5 @@ For any issues you might encounter while working with Kendo UI for jQuery, use a
 * [Installing Kendo UI by using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
+* [Using Kendo UI for jQuery ECMAScript Modules]({% slug kendoui_ecmascript_overview %})
 * [Creating your own custom bundles]({% slug include_only_what_you_need_kendoui_scripts %})

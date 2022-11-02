@@ -428,5 +428,40 @@ it("DatePicker renders formatted value even when out of range", function() {
     assert.equal(datepicker.element.val(), kendo.toString(value, datepicker.options.format));
 });
 
+it("DatePicker renders not-floating label from string", function() {
+    var dateinput = input.kendoDatePicker({
+        label: "some label"
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+    assert.isNotOk(!!dateinput.label.floatingLabel);
+});
+
+it("DatePicker renders label from object", function() {
+    var dateinput = input.kendoDatePicker({
+        label: {
+            content: "some label"
+        }
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+});
+
+it("DatePicker renders floating label", function() {
+    var dateinput = input.kendoDatePicker({
+        label: {
+            content: "some label",
+            floating: true
+        }
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+    assert.isOk(!!dateinput.label.floatingLabel);
+});
+
+it("renders label with function", function() {
+    var dateinput = input.kendoDatePicker({
+        label: () => `some label`
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+});
+
     });
 }());

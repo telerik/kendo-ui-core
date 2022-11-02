@@ -44,6 +44,84 @@ Sets a value controlling how the color is applied. Can also be set to the follow
     });
     </script>
 
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the dateinput. If the dateinput has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+            label: "Description"
+        })
+    </script>
+
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+                label: function() {
+                    return "First name";
+                }
+        })
+    </script>
+
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+                label: {
+                    content: "Date"
+                }
+        })
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+                label: {
+                    content: function() {
+                        return "Date";
+                    }
+                }
+        })
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/dateinput/methods/value) method **does not trigger** the `focusout` event of the dateinput.
+This can affect the floating label functionality.
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#dateinput").data("kendoDateInput").label.floatingLabel.refresh();`
+
+#### Example - create a floating label
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+                label: {
+                    content: "Date",
+                    floating: true
+                }
+        })
+    </script>
+
 ### max `Date`*(default: Date(2099, 11, 31))*
 
  Specifies the maximum date which can be entered in the input.
@@ -394,7 +472,7 @@ The value to set.
 `Date` The value of the DateInput.
 
 > * This method **does not trigger** [change](/api/javascript/ui/dateinput/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="dateinput" />

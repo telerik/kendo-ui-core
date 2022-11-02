@@ -23,7 +23,7 @@ To open the wizard, click **Telerik** > **Telerik UI for ASP.NET MVC** > **Upgra
 
 The **Information Page** of the Upgrade Project Wizard describes the files and assemblies that are going to be upgraded.
 
-![{{ site.product_short }} Information page](../vs-integration/images/images-mvc/upgrade_warning.png)
+![{{ site.product_short }} Upgrade Wizard Information page](../vs-integration/images/images-mvc/upgrade_warning.png)
 
 ## Projects for Upgrade
 

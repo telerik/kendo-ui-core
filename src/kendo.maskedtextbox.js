@@ -223,6 +223,10 @@ var __meta__ = {
                     this._togglePrompt();
                 }
             }
+
+            if (this.floatingLabel) {
+                this.floatingLabel.refresh();
+            }
         },
 
         _togglePrompt: function(show) {

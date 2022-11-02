@@ -24,13 +24,13 @@ In the Telerik REPL for ASP.NET Core, you can define your own script and style t
 
 To add js or CSS files as static assets, click the Static Asset Manager icon and provide the url to files that you want to add.
 
-   ![{{ site.product_short }} Static Asset Manager](../../getting-started-core/REPL/images/repl-static-asset-manager.png)
+   ![{{ site.product_short }} REPL Static Asset Manager](../../getting-started-core/REPL/images/repl-static-asset-manager.png)
 
 ## Customizing the Theme
 
 To change the theme for the {{site.product}} components, select a new theme from the theme selection dropdown.
 
-   ![{{ site.product_short }} Theme Manager](../../getting-started-core/REPL/images/repl-theme-manager.png)
+   ![{{ site.product_short }} REPL Theme Manager](../../getting-started-core/REPL/images/repl-theme-manager.png)
 
 ## Rendering HTML
 

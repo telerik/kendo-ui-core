@@ -23,7 +23,7 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
 1. Select **Generate from database** and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 1. Select the **Products** table. Leave all other options as they are set by default. Click **Finish** to create the Entity Framework model.
 
-    ![{{ site.product_short }} Choosing the Products table](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
 
 1. Right click the `Controllers` folder in Visual Studio solution explorer. Select **Add** > **Controller**.
 1. Set **ProductsController** as **Controller name**. Select **API controller with read/write actions, using Entity Framework** as **Template**. Select **Product (KendoGridWebApiCRUD.Models)** as **Model class** and **NorthwindEntities (KendoGridWebApiCRUD.Models)** as **Data context class**. Click **Add** to create the WebAPI controller.
@@ -170,7 +170,7 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
 1. Build and run the application.
 
     {% if site.mvc %}
-    ![{{ site.product_short }} The final result](../images/grid-inline-grid.png)
+    ![{{ site.product_short }} The final result is a Grid with editing configured](../images/grid-inline-editing.png)
     {% endif %}
 
 ## See Also

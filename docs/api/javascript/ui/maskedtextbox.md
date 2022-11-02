@@ -82,7 +82,7 @@ Adds a label before the input. If the input has no `id` attribute, a generated `
         });
     </script>
 
-The function context (available via the `this` keyword) will be set to the widget instance.
+The function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Example - create a label from a function
 
@@ -110,7 +110,7 @@ Sets the inner HTML of the label.
         });
     </script>
 
-The function context (available via the `this` keyword) will be set to the widget instance.
+The function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Example - create a label from a function
 
@@ -130,8 +130,8 @@ The function context (available via the `this` keyword) will be set to the widge
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
 > **Important:** The [value](/api/javascript/ui/maskedtextbox/methods/value) method **does not trigger** the `focusout` event of the input.
-This could affect the floating label functionality.
-You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
 
 #### Example - create a floating label
 
@@ -415,8 +415,8 @@ Gets the unmasked value of the MaskedTextBox.
 Gets or sets the value of the MaskedTextBox.
 
 > **Important:** This method **does not trigger** the `focusout` event of the input.
-This could affect the [floating label functionality](/api/javascript/ui/maskedtextbox/configuration/label.floating).
-You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
+This can affect the [floating label functionality](/api/javascript/ui/maskedtextbox/configuration/label.floating).
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
 
 #### Parameters
 

@@ -1,7 +1,7 @@
 ---
 title: Using CDN
 page_title: Using CDN - Download and Installation 
-description: "Get started with Kendo UI for jQuery and install the Kendo UI widgets by using the Kendo UI CDN services."
+description: "Get started with Kendo UI for jQuery and install the Kendo UI components by using the Kendo UI CDN services."
 previous_url: /install/cdn
 slug: kendoui_cdn_services_installation
 position: 40
@@ -11,61 +11,57 @@ position: 40
 
 The Kendo UI for jQuery CDN resides on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/). The service maintains the official Kendo UI for jQuery releases and service packs, and provides no access to internal builds. 
 
-> Note that sinse R3 2022 the CDN distribution needs to be activated using a license file. For more info check [Using Script License File]({% slug using-license-code %}).
+> As of the R3 2022 release, you need to activate the CDN distribution by [using a license file]({% slug using-license-code %}).
 
 ## 1. Add the Required JavaScript and CSS Files
+
+> The https://da7xgjtj801h2.cloudfront.net/ URL remains active but is no longer recommended for new projects.
 
 The Kendo UI CDN provides the following services: 
 
 * `kendo.cdn.telerik.com`
-* `cdn.kendostatic.com` (a cookieless CDN service)
+* (Without cookies) `cdn.kendostatic.com`
 
-To access the services, use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol. 
+### Adding the Required CSS Files
 
-### Using the HTTP Protocol
+The minified versions of the `.css` files are available at `https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`. For example, you can load the `{{site.cdnVersion}}` version from the `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css` location.
 
-The minified versions of all JavaScript files are available at the following locations:
-* `http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
-* `http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
+### Adding the Required JavaScript Files
 
-For example, the `{{ site.cdnVersion }}` version can be loaded from the following locations:  
-* `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
-* `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
+To import the required JavaScript files for the Kendo UI for jQuery components, use either of the following approaches:
 
-The minified Kendo UI for jQuery scripts are available as of the Kendo UI Q1 2014 SP1 release. To load them, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
+ - [Using the JavaScript modules](#javascript-modules)—[A new approach introduced with the 2022.3.1109 version]({% slug kendoui_ecmascript_overview %}).
+ - [Using the bundled JavaScript](#bundled-javascript)—The traditional way of including the scripts.
 
-### Using the HTTPS Protocol
+#### JavaScript Modules
 
-> The https://da7xgjtj801h2.cloudfront.net/ URL remains active but is no longer recommended for new projects.
+The [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) are located in the `/mjs/` folder. To include a JavaScript module in your project, use the `script` tag with the `type=module` attribute.
 
-To access the Kendo UI for jQuery CDN service through the HTTPS protocol, use the same `kendo.cdn.telerik.com` host name and replace the scheme (protocol) with `https`. 
-
-The example below loads Kendo UI for jQuery scripts and styles with the HTTPS protocol CDN:
+The following example demonstrates how to include individual component modules. 
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Kendo UI using CDN</title>
-
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css">
-
-  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
-  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
-</head>
-<body>
-</body>
-</html>
+<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.grid.js" type="module"></script> <!-- Include the Grid module. The rest of the dependencies required by the Grid will be loaded automatically. -->
 ```
 
-## 2. Setup the License File
+The following example showcases how to include all available modules.
 
-Generate a license file from the [Using Script License File article]({% slug using-license-code %}) and follow the instructions.
+```html
+<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script> <!-- Include all Kendo UI modules. -->
+```
 
-## 3. Add the HTML Element for Widget Initialization
+#### Bundled JavaScript
 
-Depending on the widget you require, you can initialize the Kendo UI controls from different elements. In this step, you will add a new `input` element from which a Kendo UI DropDownList will be created. 
+The bundled version of the Kendo UI for jQuery library is available at `https://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`. For example, you can load the `{{site.cdnVersion}}` version from the `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js` location.
+
+The minified Kendo UI for jQuery scripts are available as of the Kendo UI Q1 2014 SP1 release. To load them, use the `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
+
+## 2. Set Up the License File
+
+[Generate a license file]({% slug using-license-code %}) and follow the instructions.
+
+## 3. Add the HTML Element for Component Initialization
+
+Depending on the component you require, you can initialize the Kendo UI controls from different elements. In this step, you will add a new `input` element from which a Kendo UI DropDownList will be created. 
 
 
 ```html
@@ -86,7 +82,7 @@ Depending on the widget you require, you can initialize the Kendo UI controls fr
 </html>
 ```
 
-## 4. Initialize and Configure the Widget
+## 4. Initialize and Configure the Component
 
 The following example demonstrates how to initialize a DropDownList with some basic configuration.
 
@@ -123,15 +119,15 @@ The following example demonstrates how to initialize a DropDownList with some ba
 ## Next Steps
 
 * [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
-* [The Widget DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
-* [Initialize Widgets as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize Widgets with MVVM]({% slug mvvm_initialization_kendoui %})
+* [The Component DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Initialize Components as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Components with MVVM]({% slug mvvm_initialization_kendoui %})
 * [jQuery Version Support]({% slug jquerysupport_kendoui %})
 * [Web Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Operation System Support]({% slug ossupport_kendo %})
 * [PDF and Excel Export Support]({% slug export_support_kendoui %})
-* [Widget Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
-* [Create Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also
 

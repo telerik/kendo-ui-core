@@ -170,7 +170,7 @@ var __meta__ = {
     }
 
     function scrollButtonHtml(buttonClass, iconClass) {
-        return "<span class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-button-icon k-icon " + iconClass + "'></span></span>";
+        return "<span aria-hidden='true' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-button-icon k-icon " + iconClass + "'></span></span>";
     }
 
     var TabStrip = Widget.extend({

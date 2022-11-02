@@ -20,7 +20,7 @@ The Telerik NuGet Feed provides the following Kendo UI for jQuery packages:
 
 * `KendoUIProfessional`&mdash;The commercial Kendo UI for jQuery version.
 * `KendoUIProfessional.Trial`&mdash;The trial Kendo UI for jQuery version.
-* `KendoUICore`&mdash;The open-source Kendo UI distribution which contains only the open-sourced widgets.
+* `KendoUICore`&mdash;The open-source Kendo UI distribution which contains only the open-sourced components.
 
 ## 2. Register the Feed on Your System
 
@@ -110,10 +110,10 @@ To install the Kendo UI for jQuery packages by using the **Package Manager** con
 ## Next Steps
 
 * [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
-* [Create Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Initialize Widgets as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize Widgets with MVVM]({% slug mvvm_initialization_kendoui %})
-* [Widget Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Initialize Components as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Components with MVVM]({% slug mvvm_initialization_kendoui %})
+* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 
 ## See Also
 

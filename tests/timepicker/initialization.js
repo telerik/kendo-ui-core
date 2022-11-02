@@ -438,5 +438,40 @@
             assert.equal(tv.ul.find("li:last span").html(), "12:00 AM");
             tv.destroy();
         });
+
+        it("TimePicker renders not-floating label from string", function() {
+            var timepicker = input.kendoTimePicker({
+                label: "some label"
+            }).data("kendoTimePicker");
+            assert.equal(timepicker.label.element.text(), "some label");
+            assert.isNotOk(!!timepicker.label.floatingLabel);
+        });
+
+        it("TimePicker renders label from object", function() {
+            var timepicker = input.kendoTimePicker({
+                label: {
+                    content: "some label"
+                }
+            }).data("kendoTimePicker");
+            assert.equal(timepicker.label.element.text(), "some label");
+        });
+
+        it("TimePicker renders floating label", function() {
+            var timepicker = input.kendoTimePicker({
+                label: {
+                    content: "some label",
+                    floating: true
+                }
+            }).data("kendoTimePicker");
+            assert.equal(timepicker.label.element.text(), "some label");
+            assert.isOk(!!timepicker.label.floatingLabel);
+        });
+
+        it("renders label with function", function() {
+            var timepicker = input.kendoTimePicker({
+                label: () => `some label`
+            }).data("kendoTimePicker");
+            assert.equal(timepicker.label.element.text(), "some label");
+        });
     });
 }());

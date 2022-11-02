@@ -298,7 +298,7 @@ var __meta__ = {
                 var item = $(this),
                     arrowCssClass = getArrowCssClass(item);
 
-                item.append("<span class='k-menu-expand-arrow'><span class='k-menu-expand-arrow-icon k-icon " + arrowCssClass + "'></span></span>");
+                item.append("<span aria-hidden='true' class='k-menu-expand-arrow'><span class='k-menu-expand-arrow-icon k-icon " + arrowCssClass + "'></span></span>");
             });
     }
 
@@ -2345,7 +2345,7 @@ var __meta__ = {
                         "<span class='k-button-icon k-icon k-i-arrow-60-#= direction #'></span>" +
                     "</span>"
                 ),
-                arrow: template("<span class='k-menu-expand-arrow'><span class='#= arrowClass(item, group) #'></span></span>"),
+                arrow: template("<span aria-hidden='true' class='k-menu-expand-arrow'><span class='#= arrowClass(item, group) #'></span></span>"),
                 sprite: template("# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(data); if(spriteCssClass) {#<span class='k-sprite #= spriteCssClass #'></span>#}#"),
                 empty: template("")
             };
@@ -2693,6 +2693,13 @@ var __meta__ = {
                 } else {
                     target.on(options.showOn + NS + that._marker, that._preventProxy || that._showProxy);
                 }
+
+                target.on("keydown", (e) => {
+                    if (e.keyCode === kendo.keys.F10 && e.shiftKey) {
+                        e.preventDefault();
+                        that.open(e.target);
+                    }
+                });
             }
         },
 

@@ -26,9 +26,9 @@ The Latest Version Acquirer tool automatically retrieves the latest {{ site.prod
 Clicking **Update Now** starts the Latest Version Acquirer tool, which prompts for your Telerik credentials on its first page. If you do not have a [www.telerik.com](https://www.telerik.com) account, you can create one through the **Create an account for free** link.
 
 {% if site.core %}
-![{{ site.product_short }} Getting the latest version dialog](../vs-integration/images/lva1.png)
+![{{ site.product_short }} Entering account credentials](../vs-integration/images/lva-login.png)
 {% else %}
-![{{ site.product_short }} The Get the Latest Version dialog](../vs-integration/images/images-mvc/lva1.png)
+![{{ site.product_short }} Entering account credentials](../vs-integration/images/images-mvc/lva-login.png)
 {% endif %}
 
 > The Latest Version Acquirer is not available with the trial license. Attempting to download a distribution results in an error message.
@@ -40,25 +40,25 @@ Clicking **Update Now** starts the Latest Version Acquirer tool, which prompts f
 1. In the dialog that appears, confirm the download.
 
 {% if site.core %}
-    ![{{ site.product_short }} Confirming the download of the latest version dialog](../vs-integration/images/lva2.png)
+    ![{{ site.product_short }} Confirming the download of the latest version dialog](../vs-integration/images/lva-download.png)
 {% else %}
-    ![{{ site.product_short }} The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva2.png)
+    ![{{ site.product_short }} Confirming the download of the latest version dialog](../vs-integration/images/images-mvc/lva-download.png)
 {% endif %}
 
     As a result, the latest version automatically starts to download.
 
 {% if site.core %}
-    ![{{ site.product_short }} The download of the latest version is in progress dialog](../vs-integration/images/lva3.png)
+    ![{{ site.product_short }} Latest version download progress](../vs-integration/images/lva-version-update-progress.png)
 {% else %}
-    ![{{ site.product_short }} The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva3.png)
+    ![{{ site.product_short }} Latest version download progress](../vs-integration/images/images-mvc/lva-version-update-progress.png)
 {% endif %}
 
 1. Click **OK** when the download process of the latest version completes.
 
 {% if site.core %}
-    ![{{ site.product_short }} The download of the latest version is complete dialog](../vs-integration/images/lva4.png)
+    ![{{ site.product_short }} Latest version download complete](../vs-integration/images/lva-download-success.png)
 {% else %}
-    ![{{ site.product_short }} The dialog indicating the download progress, getting the latest version](../vs-integration/images/images-mvc/lva4.png)
+    ![{{ site.product_short }} Latest version download complete](../vs-integration/images/images-mvc/lva-download-success.png)
 {% endif %}
 
 

@@ -27,7 +27,7 @@ This article provides solutions for common issues you may encounter while workin
 {% if site.core %}
         ![{{ site.product_short }} Troubleshooting when the VS extension is disabled](../vs-integration/images/vsextensions-disabled.png)
 {% else %}
-        ![{{ site.product_short }} vsextensions-disabled](../vs-integration/images/images-mvc/vsextensions-disabled.png)
+        ![{{ site.product_short }} Troubleshooting when the VS extension is disabled](../vs-integration/images/images-mvc/vsextensions-disabled.png)
 {% endif %}
 
 * If the extension is not correctly installed:

@@ -121,6 +121,21 @@
             assert.equal(textbox.value(), null);
         });
 
+        it("value method should refresh the floating label", function() {
+            var textbox = new NumericTextBox(input, {
+                value: 12.34,
+                format: "n0",
+                label: {
+                    content: "Set age",
+                    floating: true
+                }
+            }), value = "24";
+
+            textbox.value(value);
+
+            assert.isOk(!textbox.floatingLabel.element.hasClass("k-empty"));
+        });
+
         it("formatted value should be set to _text", function() {
             var textbox = new NumericTextBox(input), value = "12.347";
 

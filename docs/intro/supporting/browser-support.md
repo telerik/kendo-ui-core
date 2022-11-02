@@ -9,13 +9,15 @@ position: 1
 
 # Web Browser Support
 
-The [Kendo UI widgets and framework components](https://demos.telerik.com/kendo-ui/) are designed to support all major web browsers and deliver a cross-browser compatibility, standards compliance, and touch-device support.
+> As of the R1 2023 release, the IE browser will no longer be supported.
 
-However, depending on the specifics of your project, the controls you use, and the versions of the widgets, their browser support may vary.
+The [Kendo UI components and framework components](https://demos.telerik.com/kendo-ui/) are designed to support all major web browsers and deliver a cross-browser compatibility, standards compliance, and touch-device support.
+
+However, depending on the specifics of your project, the controls you use, and the versions of the components, their browser support may vary.
 
 ## Regular Support
 
-Most [Kendo UI widgets]({% slug welcometo_kendoui %}#list-of-widgets) have no specific limitations as of the browser versions they support.
+Most [Kendo UI components]({% slug welcometo_kendoui %}#list-of-components) have no specific limitations as of the browser versions they support.
 
 > Some features may not be available due to browser limitations.
 
@@ -31,7 +33,7 @@ Most [Kendo UI widgets]({% slug welcometo_kendoui %}#list-of-widgets) have no sp
 
 ## Support for Kendo UI Hybrid
 
-The [hybrid UI widgets and framework components]({% slug welcometo_kendoui %}#list-of-widgets) are intended for Cordova-based deployments and support the mobile device browsers and corresponding web view components listed in the following table.
+The [hybrid UI components and framework components]({% slug welcometo_kendoui %}#list-of-components) are intended for Cordova-based deployments and support the mobile device browsers and corresponding web view components listed in the following table.
 
 | BROWSER           | SUPPORTED VERSIONS               |
 | :---------------- | :------------------------------- |
@@ -40,9 +42,9 @@ The [hybrid UI widgets and framework components]({% slug welcometo_kendoui %}#li
 | Firefox           | Not supported                    |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-## Support for Data Visualizing Widgets
+## Support for Data Visualizing Components
 
-The [Kendo UI widgets which render data visualization]({% slug welcometo_kendoui %}#list-of-widgets), such as the Charts, Gauges, Barcodes, Diagrams, and Maps, may require more recent browser versions according to the following table.
+The [Kendo UI components which render data visualization]({% slug welcometo_kendoui %}#list-of-components), such as the Charts, Gauges, Barcodes, Diagrams, and Maps, may require more recent browser versions according to the following table.
 
 **Fully supported browsers**
 

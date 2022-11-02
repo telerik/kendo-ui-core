@@ -332,6 +332,105 @@ The widget instance.
     });
     </script>
 
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: "Fruits"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: function() {
+          return "Fruits";
+      }
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: { content: "Fruits" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: {
+        content: function() {
+            return "Fruits";
+        }
+      }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/autocomplete/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#autocomplete").data("kendoAutoComplete").label.floatingLabel.refresh();`
+
+#### Example - create a label from a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: { 
+        content: "Fruits",
+        floating: true
+      }
+    });
+    </script>
+
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
@@ -1202,7 +1301,7 @@ Selects the item provided as an argument and updates the value of the widget.
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
 > **Important:** This method **does not trigger** [change](/api/javascript/ui/autocomplete/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="autocomplete" />
@@ -1285,7 +1384,7 @@ The value to set.
 Gets or sets the value of the widget.
 
 > **Important:** This method **does not trigger** [change](/api/javascript/ui/autocomplete/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="autocomplete" />
@@ -1326,7 +1425,7 @@ The value to set.
 
 Fired when the value of the widget is changed by the user.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 > **Important:** The event is not fired when the value of the widget is changed from code.
 
@@ -1367,7 +1466,7 @@ The widget instance which fired the event.
 
 Fired when the suggestion popup of the widget is closed by the user.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Event Data
 
@@ -1405,7 +1504,7 @@ The widget instance which fired the event.
 
 Fired when the widget is bound to data from its data source.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Event Data
 
@@ -1443,7 +1542,7 @@ The widget instance which fired the event.
 
 Fired when the widget is about to filter the data source.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Event Data
 
@@ -1514,7 +1613,7 @@ The filter descriptor that will be used to filter the data source.
 
 Fired when the suggestion popup of the widget is opened by the user.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Event Data
 

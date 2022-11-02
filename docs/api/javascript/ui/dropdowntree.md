@@ -626,6 +626,111 @@ The widget instance.
         });
     </script>
 
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: "Fruits"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: function() {
+            return "Fruits";
+        }ß
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: { content: "Fruits" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: {
+            content: function() {
+                return "Fruits";
+            }
+        }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/dropdowntree/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#dropdowntree").data("kendoDropDownTree").label.floatingLabel.refresh();`
+
+#### Example - create a label from a function
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: {
+            content: "Fruits",
+            floating: true
+        }
+    });
+    </script>
+
+
 ### height `String|Number`*(default: 200)*
 
 Sets max-height of the embedded treeview in pixels. The default value is 200 pixels. If set to "Auto" the height of the popup will depend on the height of the treeview.

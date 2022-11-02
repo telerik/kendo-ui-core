@@ -1677,5 +1677,84 @@
             assert.equal(kendo.ui.List.unifyType(0, "boolean"), false);
             assert.equal(kendo.ui.List.unifyType(1, "boolean"), false);
         });
+
+        it("renders not-floating label from string", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: "Label"
+            });
+
+            assert.equal(dropdownlist.label.element.text(), "Label");
+            assert.isNotOk(!!dropdownlist.label.floatingLabel);
+        });
+
+        it("renders label from object", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: {
+                    content: "some label"
+                }
+            });
+
+            assert.equal(dropdownlist.label.element.text(), "some label");
+        });
+
+        it("renders floating label", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: {
+                    content: "some label",
+                    floating: true
+                }
+            });
+
+            assert.equal(dropdownlist.label.element.text(), "some label");
+            assert.isOk(!!dropdownlist.label.floatingLabel);
+        });
+
+        it("renders label with funciton", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: () => `some label`
+            });
+
+            assert.equal(dropdownlist.label.element.text(), "some label");
+        });
     });
 }());

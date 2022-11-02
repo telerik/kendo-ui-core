@@ -1,11 +1,12 @@
 import "./kendo.data.js";
 import "./kendo.popup.js";
+import "./kendo.label.js";
 
 var __meta__ = {
     id: "list",
     name: "List",
     category: "framework",
-    depends: [ "data", "popup" ],
+    depends: [ "data", "popup", "label" ],
     hidden: true
 };
 
@@ -181,6 +182,16 @@ var __meta__ = {
 
             this._renderFooter();
             this._renderNoData();
+
+            if (options.label && this._inputLabel) {
+                this.label.setOptions(options.label);
+            } else if (options.label === false) {
+                this.label._unwrapFloating();
+                this._inputLabel.remove();
+                delete this._inputLabel;
+            } else if (options.label) {
+                this._label();
+            }
         },
 
         focus: function() {
@@ -192,6 +203,10 @@ var __meta__ = {
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
@@ -199,6 +214,42 @@ var __meta__ = {
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
+        },
+
+        _label: function() {
+            var that = this;
+            var options = that.options;
+            var labelOptions = $.isPlainObject(options.label) ? options.label : {
+                content: options.label
+            };
+
+            that.label = new kendo.ui.Label(null, $.extend({}, labelOptions, {
+                widget: that,
+                floatCheck: that._floatCheck.bind(that)
+            }));
+
+            that._inputLabel = that.label.element;
+        },
+
+        _floatCheck: function() {
+            if (this.listView) {
+                var hasValue = this.value() || (this.text ? this.text() : false);
+                return !hasValue && !this.popup.visible();
+            }
+
+            return true;
+        },
+
+        _refreshFloatingLabel: function() {
+            var that = this;
+
+            if (that.label && that.label.floatingLabel) {
+                that.label.floatingLabel.refresh();
+            }
         },
 
         _header: function() {
@@ -703,6 +754,10 @@ var __meta__ = {
             if (that._form) {
                 that._form.off("reset", that._resetHandler);
             }
+
+            if (that.label) {
+                that.label.destroy();
+            }
         },
 
         dataItem: function(index) {
@@ -1092,7 +1147,13 @@ var __meta__ = {
                 close: list._closeHandler.bind(list),
                 animation: list.options.animation,
                 isRtl: support.isRtl(list.wrapper),
-                autosize: list.options.autoWidth
+                autosize: list.options.autoWidth,
+                activate: () => {
+                    this._refreshFloatingLabel();
+                },
+                deactivate: () => {
+                    this._refreshFloatingLabel();
+                }
             }));
 
             list.popup.element.prepend(list.header)
@@ -1233,6 +1294,8 @@ var __meta__ = {
                 return that._select(candidate).done(function() {
                     that._cascadeValue = that._old = that._accessor();
                     that._oldIndex = that.selectedIndex;
+
+                    that._refreshFloatingLabel();
                 });
             }
         },
@@ -1829,6 +1892,8 @@ var __meta__ = {
                 that._triggerChange();
                 that._userTriggered = false;
             }
+
+            that._refreshFloatingLabel();
         }
     });
 
@@ -1985,6 +2050,14 @@ var __meta__ = {
             this._getter();
             this._templates();
             this._render();
+
+            if (options.label) {
+                this.label.setOptions(options.label);
+            } else if (options.label === false) {
+                this.label._unwrapFloating();
+                this._inputLabel.remove();
+                delete this._inputLabel;
+            }
         },
 
         destroy: function() {

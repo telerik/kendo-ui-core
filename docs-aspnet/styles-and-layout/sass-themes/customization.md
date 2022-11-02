@@ -340,7 +340,7 @@ The following example demonstrates how to configure the Buttons.
 <th>Description</th>
 </tr>
 <tr>
-<td>$button-text</td>
+<td>$kendo-button-text</td>
 <td>
 
     $base-text
@@ -349,7 +349,7 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-bg</td>
+<td>$kendo-button-bg</td>
 <td>
 
     $base-bg
@@ -358,16 +358,16 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-border</td>
+<td>$kendo-button-border</td>
 <td>
 
-    $base-border
+    k-try-shade( $kendo-button-bg, 2 )
 </td>
 <td>The border color of the buttons.
 </td>
 </tr>
 <tr>
-<td>$button-gradient</td>
+<td>$kendo-button-gradient</td>
 <td>
 
     $base-gradient
@@ -376,82 +376,82 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-hovered-text</td>
+<td>$kendo-button-hover-text</td>
 <td>
 
-    $hovered-text
+    null
 </td>
 <td>The text color of hovered buttons.
 </td>
 </tr>
 <tr>
-<td>$button-hovered-bg</td>
+<td>$kendo-button-hover-bg</td>
 <td>
 
-    $hovered-bg
+    k-try-shade( $kendo-button-bg, 1 )
 </td>
 <td>The background of hovered buttons.
 </td>
 </tr>
 <tr>
-<td>$button-hovered-border</td>
+<td>$kendo-button-hover-border</td>
 <td>
 
-    $hovered-border
+    k-try-shade( $kendo-button-bg, 3 )
 </td>
 <td>The border color of hovered buttons.
 </td>
 </tr>
 <tr>
-<td>$button-hovered-gradient</td>
+<td>$kendo-button-hover-gradient</td>
 <td>
 
-    $hovered-gradient
+    null
 </td>
 <td>The background gradient of hovered buttons.
 </td>
 </tr>
 <tr>
-<td>$button-pressed-text</td>
+<td>$kendo-button-active-text</td>
 <td>
 
-    $selected-text
+    null
 </td>
-<td>The text color of pressed buttons.
+<td>The text color of active buttons.
 </td>
 </tr>
 <tr>
-<td>$button-pressed-bg</td>
+<td>$kendo-button-active-bg</td>
 <td>
 
-    $selected-bg
+    k-try-shade( $kendo-button-bg, 2 )
 </td>
-<td>The background color of pressed buttons.
+<td>The background color of active buttons.
 </td>
 </tr>
 <tr>
-<td>$button-pressed-border</td>
+<td>$kendo-button-active-border</td>
 <td>
 
-    $selected-border
+    k-try-shade( $kendo-button-bg, 4 )
 </td>
-<td>The border color of pressed buttons.
+<td>The border color of active buttons.
 </td>
 </tr>
 <tr>
-<td>$button-pressed-gradient</td>
+<td>$kendo-button-active-gradient</td>
 <td>
 
     none
 </td>
-<td>The background gradient of pressed buttons.
+<td>The background gradient of active buttons.
 </td>
 </tr>
 <tr>
-<td>$button-focused-shadow</td>
+<td>$kendo-button-focus-shadow</td>
 <td>
 
-    0 3px 4px 0 rgba(0, 0, 0, .06)
+    0 0 4px 0 rgba( $kendo-button-border, .75 )
 </td>
 <td>The shadow of focused buttons.
 </td>

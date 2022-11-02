@@ -2,13 +2,14 @@ import "./kendo.calendar.js";
 import "./kendo.popup.js";
 import "./kendo.dateinput.js";
 import "./kendo.html.button.js";
+import "./kendo.label.js";
 
 var __meta__ = {
     id: "datepicker",
     name: "DatePicker",
     category: "web",
     description: "The DatePicker widget allows the user to select a date from a calendar or by direct input.",
-    depends: [ "calendar", "popup", "html.button" ]
+    depends: [ "calendar", "popup", "html.button", "label" ]
 };
 
 (function($, undefined) {
@@ -59,7 +60,6 @@ var __meta__ = {
             format = options.format;
 
         calendar.normalize(options);
-
 
         parseFormats = Array.isArray(parseFormats) ? parseFormats : [parseFormats];
 
@@ -152,21 +152,22 @@ var __meta__ = {
         },
 
         setOptions: function(options) {
-            var old = this.options;
+            var that = this;
+            var old = that.options;
             var disableDates = options.disableDates;
 
             if (disableDates) {
                 options.disableDates = calendar.disabled(disableDates);
             }
 
-            this.options = extend(old, options, {
+            that.options = extend(old, options, {
                 change: old.change,
                 close: old.close,
                 open: old.open
             });
 
-            if (this.calendar) {
-                this._setOptions(this.options);
+            if (that.calendar) {
+                that._setOptions(that.options);
             }
         },
 
@@ -404,6 +405,10 @@ var __meta__ = {
             that._oldText = element.val();
             that._applyCssClasses();
 
+            if (options.label) {
+                that._label();
+            }
+
             kendo.notify(that);
         },
         events: [
@@ -434,7 +439,8 @@ var __meta__ = {
             componentType: "classic",
             size: "medium",
             fillMode: "solid",
-            rounded: "medium"
+            rounded: "medium",
+            label: null
         },
 
         setOptions: function(options) {
@@ -468,6 +474,16 @@ var __meta__ = {
 
             if (value) {
                 that._updateARIA(value);
+            }
+
+            if (options.label && that._inputLabel) {
+                that.label.setOptions(options.label);
+            } else if (options.label === false) {
+                that.label._unwrapFloating();
+                that._inputLabel.remove();
+                delete that._inputLabel;
+            } else if (options.label) {
+                that._label();
             }
         },
 
@@ -520,6 +536,10 @@ var __meta__ = {
                     disable: false
                 });
             }
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
@@ -533,10 +553,32 @@ var __meta__ = {
                     disable: !(enable = enable === undefined ? true : enable)
                 });
             }
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
+        },
+
+        _label: function() {
+            var that = this;
+            var options = that.options;
+            var labelOptions = $.isPlainObject(options.label) ? options.label : {
+                content: options.label
+            };
+
+            that.label = new kendo.ui.Label(null, $.extend({}, labelOptions, {
+                widget: that
+            }));
+
+            that._inputLabel = that.label.element;
         },
 
         destroy: function() {
             var that = this;
+
+            if (that.label) {
+                that.label.destroy();
+            }
 
             Widget.fn.destroy.call(that);
 
@@ -590,6 +632,10 @@ var __meta__ = {
             }
 
             that._oldText = that.element.val();
+
+            if (that.label && that.label.floatingLabel) {
+                that.label.floatingLabel.refresh();
+            }
         },
 
         _toggleHover: function(e) {

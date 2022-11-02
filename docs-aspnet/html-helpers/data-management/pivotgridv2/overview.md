@@ -92,7 +92,7 @@ To configure the PivotGridV2 for Ajax binding to an **Adventure Works** cube tha
 
 The following image demonstrates the output from the previous example.
 
-![{{ site.product_short }} PivotGridV2](images/pivotgridv2.png)
+![{{ site.product_short }} PivotGridV2 bound to data](images/pivotgridv2-data-bound.png)
 
 ## Functionality and Features
 

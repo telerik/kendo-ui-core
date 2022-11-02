@@ -30,7 +30,7 @@ To scaffold the Chart HtmlHelper for ASP.NET MVC:
 
 1. On the next screen which renders the **Model** and **Data Context** options, enter **Controller Name** and **View Name**.
 
-	![{{ site.product_short }} The Chart options](../../html-helpers/data-management/grid/images/scaffolding/kendo_ui_grid1.png)
+	![{{ site.product_short }} Chart Scaffolder model options](../../html-helpers/data-management/grid/images/scaffolding/model-options.png)
 
 1. The **Model Class** drop-down list contains all model types from the active project&mdash;this example will list products in the Chart. Select the **Product** entity.
 
@@ -60,7 +60,7 @@ To scaffold the Chart HtmlHelper for ASP.NET MVC:
 
 1. Click the **Chart options** item on the left. Each field marked with an asterisk `*` is mandatory. The rest of the fields are optional.
 
-	![{{ site.product_short }} The options when setting the Chart functionalities](images/scaffolding/kendo_ui_chart2.png)
+	![{{ site.product_short }} The options when setting the Chart functionalities](images/scaffolding/chart-options.png)
 
 	This screen contains the Chart functionalities that you can configure before scaffolding:
 	* **Data Binding Type**&mdash;Remote or Local.
@@ -72,7 +72,7 @@ To scaffold the Chart HtmlHelper for ASP.NET MVC:
 
 	* **Series Type**&mdash;Select the series type. Each series type shows different **Series Options** configuration.
 
-		![{{ site.product_short }} The series options](images/scaffolding/series_options_1.png)
+		![{{ site.product_short }} The series options](images/scaffolding/chart-series-options.png)
 
 	* **Add More Series**&mdash;Add one additional configuration panel for a series.
 

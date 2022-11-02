@@ -101,7 +101,7 @@
             assert.equal(ul.find(".k-item:first").attr("id"), "test_pb_active");
         });
 
-        it("PanelBar adds aria-selected on selection", function() {
+        it("PanelBar adds aria-selected=true on selection", function() {
             addItems(2);
 
             ul.focus();
@@ -118,7 +118,7 @@
             });
 
             assert.isOk(ul.find(".k-item:last > .k-link").hasClass("k-focus"));
-            assert.equal(ul.find(".k-item:first").attr("aria-selected"), undefined);
+            assert.equal(ul.find(".k-item:first").attr("aria-selected"), "false");
             assert.equal(ul.find(".k-item:last").attr("aria-selected"), "true");
         });
 

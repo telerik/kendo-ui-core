@@ -733,5 +733,85 @@ it("hide group header when no data loaded", function() {
     var groupHeader = autocomplete.list.find(".k-list-group-sticky-header");
     assert.equal(groupHeader.css("display"), "none");
 });
+
+it("renders not-floating label from string", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataValueField: "name",
+        dataTextField: "name",
+        dataSource: {
+            data: [
+                { name: "item1", value: "1" },
+                { name: "item2", value: "2" },
+                { name: "item3", value: "3" }
+            ],
+            group: "name"
+        },
+        label: "Label"
+    });
+
+    assert.equal(autocomplete.label.element.text(), "Label");
+    assert.isNotOk(!!autocomplete.label.floatingLabel);
+});
+
+it("renders label from object", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataValueField: "name",
+        dataTextField: "name",
+        dataSource: {
+            data: [
+                { name: "item1", value: "1" },
+                { name: "item2", value: "2" },
+                { name: "item3", value: "3" }
+            ],
+            group: "name"
+        },
+        label: {
+            content: "some label"
+        }
+    });
+
+    assert.equal(autocomplete.label.element.text(), "some label");
+});
+
+it("renders floating label", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataValueField: "name",
+        dataTextField: "name",
+        dataSource: {
+            data: [
+                { name: "item1", value: "1" },
+                { name: "item2", value: "2" },
+                { name: "item3", value: "3" }
+            ],
+            group: "name"
+        },
+        label: {
+            content: "some label",
+            floating: true
+        }
+    });
+
+    autocomplete.label.element.before("<div>TEST</div>");
+    assert.equal(autocomplete.label.element.text(), "some label");
+    assert.isOk(!!autocomplete.label.floatingLabel);
+});
+
+it("renders label with funciton", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataValueField: "name",
+        dataTextField: "name",
+        dataSource: {
+            data: [
+                { name: "item1", value: "1" },
+                { name: "item2", value: "2" },
+                { name: "item3", value: "3" }
+            ],
+            group: "name"
+        },
+        label: () => `some label`
+    });
+
+    assert.equal(autocomplete.label.element.text(), "some label");
+});
     });
 }());

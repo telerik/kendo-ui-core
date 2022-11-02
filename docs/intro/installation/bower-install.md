@@ -19,7 +19,7 @@ All official releases, service packs, and internal builds are uploaded to both d
 
 ### Commercial Distribution on Bower
 
-> The commercial Kendo UI Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
+> The commercial Kendo UI Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-components).
 
 The commercial distribution package is available as a private GitHub repository. To access its content, active your subscription for Kendo UI for jQuery or DevCraft. Bower prompts you to enter your username and password during the installation and update processes. 
 
@@ -65,9 +65,9 @@ Once the scripts and styles are available in your project directory, you can use
 </html>
 ```
 
-## 3. Add the HTML Element for Widget Initialization
+## 3. Add the HTML Element for Component Initialization
 
-Depending on the widget you require, you can initialize the Kendo UI controls from different elements. In this step, you will add a new `input` element from which a Kendo UI DropDownList will be created. 
+Depending on the component you require, you can initialize the Kendo UI controls from different elements. In this step, you will add a new `input` element from which a Kendo UI DropDownList will be created. 
 
 ```html
 <!DOCTYPE html>
@@ -86,7 +86,7 @@ Depending on the widget you require, you can initialize the Kendo UI controls fr
 </html>
 ```
 
-## 4. Initialize and Configure the Widget
+## 4. Initialize and Configure the Component
 
 The following example demonstrates how to initialize a DropDownList with some basic configuration.
 
@@ -121,15 +121,15 @@ The following example demonstrates how to initialize a DropDownList with some ba
 ## Next Steps
 
 * [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
-* [The Widget DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
-* [Initialize Widgets as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize Widgets with MVVM]({% slug mvvm_initialization_kendoui %})
+* [The Component DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Initialize Components as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Components with MVVM]({% slug mvvm_initialization_kendoui %})
 * [jQuery Version Support]({% slug jquerysupport_kendoui %})
 * [Web Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Operation System Support]({% slug ossupport_kendo %})
 * [PDF and Excel Export Support]({% slug export_support_kendoui %})
-* [Widget Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
-* [Create Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also
 

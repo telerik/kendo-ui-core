@@ -101,7 +101,7 @@ The Pie Chart supports the following `ChartSeriesGradient` options:
 
 * (Default) `RoundedBevel`
 
-    ![{{ site.product_short }} A Pie Chart with roundedBevel overlay](images/pie-chart.png)
+    ![{{ site.product_short }} A Pie Chart with roundedBevel overlay](images/pie-chart-roundedbevel.png)
 
 * `SharpBevel`
 

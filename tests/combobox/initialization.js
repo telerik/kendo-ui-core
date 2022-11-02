@@ -1272,5 +1272,84 @@
             assert.isOk(combobox._syncValueAndText());
         });
 
+        it("renders not-floating label from string", function() {
+            var combobox = new ComboBox(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: "Label"
+            });
+
+            assert.equal(combobox.label.element.text(), "Label");
+            assert.isNotOk(!!combobox.label.floatingLabel);
+        });
+
+        it("renders label from object", function() {
+            var combobox = new ComboBox(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: {
+                    content: "some label"
+                }
+            });
+
+            assert.equal(combobox.label.element.text(), "some label");
+        });
+
+        it("renders floating label", function() {
+            var combobox = new ComboBox(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: {
+                    content: "some label",
+                    floating: true
+                }
+            });
+
+            assert.equal(combobox.label.element.text(), "some label");
+            assert.isOk(!!combobox.label.floatingLabel);
+        });
+
+        it("renders label with funciton", function() {
+            var combobox = new ComboBox(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: () => `some label`
+            });
+
+            assert.equal(combobox.label.element.text(), "some label");
+        });
+
     });
 }());

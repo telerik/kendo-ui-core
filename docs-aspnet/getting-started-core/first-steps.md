@@ -51,7 +51,7 @@ In this tutorial, you will:
 
 1. In the search box, enter **Model-View-Controller**, select the **ASP.NET Core Web App (Model-View-Controller)** C# template, and then select **Next**.
 
-    ![{{ site.product_short }} Download Progress Control Panel](../getting-started-core/images/create-project-vs2019.png)
+    ![{{ site.product_short }} Create a new project](../getting-started-core/images/create-project-vs2019.png)
 
 1. Enter **MyTelerikProject** as a project name, and then select **Next**.
 

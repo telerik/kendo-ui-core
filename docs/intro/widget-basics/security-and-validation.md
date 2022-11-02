@@ -20,7 +20,7 @@ Escaping any unsafe HTML tags should be mainly executed on the server-side. The 
 
 ## Handling XSS with Kendo UI
 
-Several Kendo UI widgets allow the user to input HTML or can display non-encoded HTML, and can be a potential source of cross-site scripting attacks if not handled by the developer.
+Several Kendo UI components allow the user to input HTML or can display non-encoded HTML, and can be a potential source of cross-site scripting attacks if not handled by the developer.
 
 **Editor**
 
@@ -36,7 +36,7 @@ When the [`html` method](/api/javascript/spreadsheet/range/methods/html) is used
 
 **PanelBar**
 
-The PanelBar [`dataSource` configuration option](/api/javascript/ui/panelbar/configuration/datasource#datasource) allows the developer to pass a JavaScript object or array to the widget to be used for initializing a new kendo.data.HierarchicalDataSource instance using that value as data source configuration. In such scenarios the use of HTML for the item text is allowed. The developer should sanitize any values on the server to ensure only safe html is passed.
+The PanelBar [`dataSource` configuration option](/api/javascript/ui/panelbar/configuration/datasource#datasource) allows the developer to pass a JavaScript object or array to the component to be used for initializing a new kendo.data.HierarchicalDataSource instance using that value as data source configuration. In such scenarios the use of HTML for the item text is allowed. The developer should sanitize any values on the server to ensure only safe html is passed.
 
 **Menu**
 
@@ -89,5 +89,5 @@ The following examples demonstrate the steps for implementing the CSFR token val
 
 ## See Also
 
-* [Creating Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Creating Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 * [Getting Up and Running with Kendo UI (Guide)]({% slug getting_started_installation_kendoui %})

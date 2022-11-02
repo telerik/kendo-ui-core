@@ -52,7 +52,7 @@ To enable the adaptive rendering feature, set the [`Mobile`](https://docs.teleri
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user can resize the column by dragging.
 
-![{{ site.product_short }} A Grid with resizable columns on a mobile device](../adaptive-resizing-icon.png)
+![{{ site.product_short }} Resizing icon in a Grid with resizable columns on a mobile device](../adaptive-resizing-icon.png)
 
 ## Destroying Adaptive Grids
 

@@ -1,5 +1,5 @@
 ---
-title: Visual Studio Code Integration
+title: Integrating with VS Code
 page_title: Visual Studio Code Integration - Download and Installation 
 description: "Learn how to easily create web applications with Kendo UI for jQuery in Visual Studio Code."
 slug: kendoui_vscode_integration
@@ -34,7 +34,7 @@ To create a Kendo UI for jQuery project:
 
 1. Choose the desired template.
 
-   The Kendo UI Template Wizard for Visual Studio Code comes with several built-in templates for some of the most popular components like Grid, Chart, and Form. These templates allow you to add pages by using the widgets with a single click. 
+   The Kendo UI Template Wizard for Visual Studio Code comes with several built-in templates for some of the most popular components like Grid, Chart, and Form. These templates allow you to add pages by using the components with a single click. 
    
    Additionally, you can create a **Blank** project and the extensions will generate a page with all of the necessary stylesheets and a single heading element.
    
@@ -63,7 +63,7 @@ To create a Kendo UI for jQuery project:
 
 ## 4. Generate the Snippets
 
-The Kendo UI Productivity Tools for Visual Studio Code extension can generate code snippets with sample configuration for the Kendo UI widgets. To add a code snippet for a Kendo UI widget:
+The Kendo UI Productivity Tools for Visual Studio Code extension can generate code snippets with sample configuration for the Kendo UI components. To add a code snippet for a Kendo UI component:
 
 1. Open a `js` file or add a `<script>` tag.
 1. Type `kj-short`. Alternatively, type `kj-component`&mdash;where you replace "component" with the name of the desired component, for example, `kj-dropdownlist`.

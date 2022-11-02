@@ -112,7 +112,7 @@ The following example demonstrates how to use common variables.
 </colgroup>
 <tr>
 <th>Name</th>
-<th>Default value</th>
+<th>Sample value</th>
 <th>Description</th>
 </tr>
 <tr>
@@ -217,7 +217,7 @@ Used to provide contrast between the background and foreground colors.
 </td>
 </tr>
 <tr>
-<td>$hovered-text</td>
+<td>$hover-text</td>
 <td>
     <span class="color-preview" style="background-color: #656565"></span>
     #656565
@@ -226,7 +226,7 @@ Used to provide contrast between the background and foreground colors.
 </td>
 </tr>
 <tr>
-<td>$hovered-bg</td>
+<td>$hover-bg</td>
 <td>
     <span class="color-preview" style="background-color: #ededed"></span>
     #ededed
@@ -235,7 +235,7 @@ Used to provide contrast between the background and foreground colors.
 </td>
 </tr>
 <tr>
-<td>$hovered-border</td>
+<td>$hover-border</td>
 <td>
 
     rgba( black, .15 )
@@ -244,10 +244,10 @@ Used to provide contrast between the background and foreground colors.
 </td>
 </tr>
 <tr>
-<td>$hovered-gradient</td>
+<td>$hover-gradient</td>
 <td>
 
-    $hovered-bg, darken( $hovered-bg, 2% )
+    $hover-bg, darken( $hover-bg, 2% )
 </td>
 <td>The gradient background of hovered items.
 </td>
@@ -336,11 +336,11 @@ The following example demonstrates how to configure the Buttons.
 </colgroup>
 <tr>
 <th>Name</th>
-<th>Default value</th>
+<th>Sample value</th>
 <th>Description</th>
 </tr>
 <tr>
-<td>$button-text</td>
+<td>$kendo-button-text</td>
 <td>
 
     $base-text
@@ -349,7 +349,7 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-bg</td>
+<td>$kendo-button-bg</td>
 <td>
 
     $base-bg
@@ -358,7 +358,7 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-border</td>
+<td>$kendo-button-border</td>
 <td>
 
     $base-border
@@ -367,7 +367,7 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-gradient</td>
+<td>$kendo-button-gradient</td>
 <td>
 
     $base-gradient
@@ -376,43 +376,43 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-hovered-text</td>
+<td>$kendo-button-hover-text</td>
 <td>
 
-    $hovered-text
+    $hover-text
 </td>
 <td>The text color of hovered buttons.
 </td>
 </tr>
 <tr>
-<td>$button-hovered-bg</td>
+<td>$kendo-button-hover-bg</td>
 <td>
 
-    $hovered-bg
+    $hover-bg
 </td>
 <td>The background of hovered buttons.
 </td>
 </tr>
 <tr>
-<td>$button-hovered-border</td>
+<td>$kendo-button-hover-border</td>
 <td>
 
-    $hovered-border
+    $hover-border
 </td>
 <td>The border color of hovered buttons.
 </td>
 </tr>
 <tr>
-<td>$button-hovered-gradient</td>
+<td>$kendo-button-hover-gradient</td>
 <td>
 
-    $hovered-gradient
+    $hover-gradient
 </td>
 <td>The background gradient of hovered buttons.
 </td>
 </tr>
 <tr>
-<td>$button-pressed-text</td>
+<td>$kendo-button-pressed-text</td>
 <td>
 
     $selected-text
@@ -421,7 +421,7 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-pressed-bg</td>
+<td>$kendo-button-pressed-bg</td>
 <td>
 
     $selected-bg
@@ -430,7 +430,7 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-pressed-border</td>
+<td>$kendo-button-pressed-border</td>
 <td>
 
     $selected-border
@@ -439,7 +439,7 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-pressed-gradient</td>
+<td>$kendo-button-pressed-gradient</td>
 <td>
 
     none
@@ -448,7 +448,7 @@ The following example demonstrates how to configure the Buttons.
 </td>
 </tr>
 <tr>
-<td>$button-focused-shadow</td>
+<td>$kendo-button-focus-shadow</td>
 <td>
 
     0 3px 4px 0 rgba(0, 0, 0, .06)
@@ -468,7 +468,7 @@ The following example demonstrates how to configure the Charts.
 </colgroup>
 <tr>
 <th>Name</th>
-<th>Default value</th>
+<th>Sample value</th>
 <th>Description</th>
 </tr>
 <tr>
@@ -555,7 +555,7 @@ The following example demonstrates how to configure the Toolbar.
 </colgroup>
 <tr>
 <th>Name</th>
-<th>Default value</th>
+<th>Sample value</th>
 <th>Description</th>
 </tr>
 <tr>

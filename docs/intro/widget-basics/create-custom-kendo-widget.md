@@ -1,21 +1,21 @@
 ---
-title: Creating Custom Widgets
-page_title: Creating Custom Widgets - Working with Components 
+title: Creating Custom Components
+page_title: Creating Custom Components - Working with Components 
 previous_url: /howto/create-custom-kendo-widget, /framework/widgets/create-custom-kendo-widget
-description: "Get started with Kendo UI for jQuery and create your own widgets by inheriting from the base Kendo UI widget class."
+description: "Get started with Kendo UI for jQuery and create your own components by inheriting from the base Kendo UI widget class."
 slug: createcustomkendouiwidgets_gettingstarted
 position: 7
 ---
 
-# Creating Custom Widgets
+# Creating Custom Components
 
-Kendo UI provides options for you to create your own widgets by inheriting from the base `widget` class.
+Kendo UI provides options for you to create your own components by inheriting from the base `widget` class.
 
 ## Getting Started
 
-1. Extend the base Kendo UI widget class in the `kendo.ui` namespace.
+1. Extend the base Kendo UI `widget` class in the `kendo.ui` namespace.
 
-    The following example demonstrates how to create variables to hold values which also helps with the minification. The entire process is wrapped in a self-executing anonymous function so as to protect the global namespace. jQuery is passed in as a reference to make sure `$` is jQuery. The widget itself extends the base `widget` class so it is given the uppercase name of `MyWidget`&mdash;or whatever the name of your widget is for that matter. This is generally considered a best practice when naming classes in JavaScript as opposed to regular objects.
+    The following example demonstrates how to create variables to hold values which also helps with the minification. The entire process is wrapped in a self-executing anonymous function so as to protect the global namespace. jQuery is passed in as a reference to make sure `$` is jQuery. The component itself extends the base `widget` class so it is given the uppercase name of `MyWidget`&mdash;or whatever the name of your component is for that matter. This is generally considered a best practice when naming classes in JavaScript as opposed to regular objects.
 
         (function($) {
             // Shorten references to variables which is better for uglification. kendo = window.kendo,
@@ -28,30 +28,30 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
 
         })(jQuery);
 
-1. Provide an `init` method for your widget. This method is called by the framework when the widget is initialized. This `init` function takes two parameters. The first one is the element on which you are initializing the widget. The second one is a set of options that you are going to specify shortly. These will be configuration values.
+1. Provide an `init` method for your component. This method is called by the framework when the component is initialized. This `init` function takes two parameters. The first one is the element on which you are initializing the component. The second one is a set of options that you are going to specify shortly. These will be configuration values.
 
     	var MyWidget = Widget.extend({
 
     	    init: function(element, options) {
 
-    	        // The base call to initialize the widget.
+    	        // The base call to initialize the component.
     	        Widget.fn.init.call(this, element, options);
 
     	    }
     	});
 
-1. If you are extending a widget, the call to the base is what translates your widget from declarative initialization or the standard imperative initialization, and merges all the base options and custom options. Declare those options right under the `init` statement. Anything that you declare in the `options` object will be available for the user to pass as either a configuration value or as a `data` attribute.
+1. If you are extending a component, the call to the base is what translates your component from declarative initialization or the standard imperative initialization, and merges all the base options and custom options. Declare those options right under the `init` statement. Anything that you declare in the `options` object will be available for the user to pass as either a configuration value or as a `data` attribute.
 
     	var MyWidget = Widget.extend({
 
     	    init: function(element, options) {
 
-    	        // The base call to initialize the widget.
+    	        // The base call to initialize the component.
     	        Widget.fn.init.call(this, element, options);
     	    },
 
     	    options: {
-    	        // The name is what it will appear as the kendo namespace(i.e. kendo.ui.MyWidget).
+    	        // The name is what it will appear as the kendo namespace (that is, kendo.ui.MyWidget).
     	        // The jQuery plugin would be jQuery.fn.kendoMyWidget.
     	        name: "MyWidget",
     	        // Other options go here.
@@ -60,11 +60,11 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
 
     	});
 
-1. Add the widget to Kendo UI. The following example demonstrates the full boilerplate for creating your own Kendo UI widget and making it available like all other Kendo UI widgets are.
+1. Add the component to Kendo UI. The following example demonstrates the full boilerplate for creating your own Kendo UI component and making it available like all other Kendo UI components are.
 
     	(function($) {
 
-    	    // Shorten the references to variables. This is better for uglification
+    	    // Shorten the references to variables. This is better for uglification.
               var kendo = window.kendo,
     	        ui = kendo.ui,
     	        Widget = ui.Widget
@@ -73,13 +73,13 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
 
     	        init: function(element, options) {
 
-    	            // The base call to the widget initialization.
+    	            // The base call to the component initialization.
     	            Widget.fn.init.call(this, element, options);
 
     	        },
 
     	        options: {
-    	             // The name is what it will appear as the kendo namespace(i.e. kendo.ui.MyWidget).
+    	             // The name is what it will appear as the kendo namespace (that is, kendo.ui.MyWidget).
     	             // The jQuery plugin would be jQuery.fn.kendoMyWidget.
     	             name: "MyWidget",
     	            // Other options go here.
@@ -92,13 +92,13 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
 
     	})(jQuery);
 
-1. To make this widget DataSource- or MVVM-aware, implement some additional items. The following section discusses the process of creation a DataSource-aware widget. The MVVM part is tackled later on in this article. The widget that is demonstrated is a simple one that just repeats the data in the DataSource and also allows you to specify your own custom template. You can regard it as an extremely dumbed-down ListView which, for an easier handling, is named the Repeater.
+1. To make this component DataSource- or MVVM-aware, implement some additional items. The following section discusses the process of creation a DataSource-aware component. The MVVM part is tackled later on in this article. The component that is demonstrated is a simple one that just repeats the data in the DataSource and also allows you to specify your own custom template. You can regard it as an extremely dumbed-down ListView which, for an easier handling, is named the Repeater.
 
-    To make your widget aware of a Data Source, use the created convenience method on the `DataSource` base object. The code snippet offers flexibility in the way you initialize the `DataSource` for your widget. If you actually create a new `DataSource` either outside your widget initialization or inline, `that.DataSource` is returned.
+    To make your component aware of a Data Source, use the created convenience method on the `DataSource` base object. The code snippet offers flexibility in the way you initialize the `DataSource` for your component. If you actually create a new `DataSource` either outside your component initialization or inline, `that.DataSource` is returned.
 
         that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
 
-1. Create a new DataSource to bind the widget. This step is not a must because you can set the DataSource to an array as demonstrated in the following example. If you pass this array, the `kendo.data.DataSource.create` method will create a new `DataSource` based on the data in this array and returns it to `that.dataSource`.
+1. Create a new DataSource to bind the component. This step is not a must because you can set the DataSource to an array as demonstrated in the following example. If you pass this array, the `kendo.data.DataSource.create` method will create a new `DataSource` based on the data in this array and returns it to `that.dataSource`.
 
         $("#div").kendoRepeater({
             dataSource: ["Item 1", "Item 2", "Item 3"]
@@ -116,11 +116,11 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
             }
         });
 
-## DataBinding Behavior of Specific Widgets
+## DataBinding Behavior of Specific Components
 
-Certain widgets such as the MultiSelect, DropDownTree, Scheduler, Grid and Gantt require you to explicitly define a widget-specific binder.
+Certain components such as the MultiSelect, DropDownTree, Scheduler, Grid and Gantt require you to explicitly define a component-specific binder.
 
-The following example showcases how to copy the MultiSelect binder to your own CustomMultiSelect widget:
+The following example showcases how to copy the MultiSelect binder to your own CustomMultiSelect component:
 
 ```javascript
 kendo.data.binders.widget.custommultiselect = kendo.data.binders.widget.multiselect;
@@ -145,27 +145,27 @@ var MyWidget = Widget.extend({
 
 ## New Components Rendering
 
-R1 2022 introduced brand new rendering for some of our widgets. More information about this topic can be found in the [Components Rendering Overview]({% slug components_rendering_overview %}) article.
+R1 2022 introduced brand new rendering for some of our components. More information about this topic can be found in the [Components Rendering Overview]({% slug components_rendering_overview %}) article.
 
-In order to utilize the new styling options in your custom widgets, you must explicitly copy the css properties of the original widget. 
+In order to utilize the new styling options in your custom components, you must explicitly copy the CSS properties of the original component. 
 
 To do so, add the following line of code before the `Widget.extend` method is called:
 
 ```javascript
-// Where 'CustomMultiSelect' is the name of your own custom widget and 'MultiSelect' is the name of the original Kendo UI Widget that you're extending.
+// Where 'CustomMultiSelect' is the name of your own custom component and 'MultiSelect' is the name of the original Kendo UI component that you're extending.
 kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssProperties.propertyDictionary["MultiSelect"];
 ```
 
 ## Handling Events
 
-1. Bind to your DataSource a `change` event and handle it. This is where you mutate your DOM based on the data read from the `DataSource`. Typically, this is done in a `refresh` method. Make it public, so that you or someone else is able to call it on the widget at some point after initialization.
+1. Bind to your DataSource a `change` event and handle it. This is where you mutate your DOM based on the data read from the `DataSource`. Typically, this is done in a `refresh` method. Make it public, so that you or someone else is able to call it on the component at some point after initialization.
 
-        // Bind to the change event to refresh the widget.
+        // Bind to the change event to refresh the component.
         that.dataSource.bind("change", function() {
             that.refresh();
         });
 
-  The way the widget code now looks is demonstrated in the following example. Note that when you bind to the `change` event on the `DataSource`, you actually bind to the string value of `"change"`. As a best practice, assign these as constants at the top of the widget, and then refer to the constant. The entire `DataSource` configuration is also moved into its own method. This is because `that` signifies the widget since it is the calling object. You can reference all widget properties off of the `that` object after assigning `that` to `this`.
+  The way the component code now looks is demonstrated in the following example. Note that when you bind to the `change` event on the `DataSource`, you actually bind to the string value of `"change"`. As a best practice, assign these as constants at the top of the component, and then refer to the constant. The entire `DataSource` configuration is also moved into its own method. This is because `that` signifies the component since it is the calling object. You can reference all component properties off of the `that` object after assigning `that` to `this`.
 
         (function($) {
 
@@ -189,7 +189,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
                     // Returns the datasource OR creates one if using an array or a configuration.
                     that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
 
-    				// Bind to the change event to refresh the widget.
+    				// Bind to the change event to refresh the component.
                     that.dataSource.bind(CHANGE, function() {
                         that.refresh();
                     });
@@ -201,7 +201,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
         })(jQuery);
     <!--_-->
 
-1. Fetch from the DataSource if necessary by checking for the `autoBind` configuration value of `that.options`. Then, call `that.dataSource.fetch()`. Note that `fetch` is different from `read` because it only populates the DataSource if the DataSource is not yet read from. If a `read` is previously called on `DataSource` before the widget is initialized, you do not have to make the `DataSource` read again.
+1. Fetch from the DataSource if necessary by checking for the `autoBind` configuration value of `that.options`. Then, call `that.dataSource.fetch()`. Note that `fetch` is different from `read` because it only populates the DataSource if the DataSource is not yet read from. If a `read` is previously called on `DataSource` before the component is initialized, you do not have to make the `DataSource` read again.
 
         _dataSource: function() {
             var that = this;
@@ -209,7 +209,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
             // Returns the datasource OR creates one if using array or configuration.
             that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
 
-            // Bind to the change event to refresh the widget.
+            // Bind to the change event to refresh the component.
             that.dataSource.bind(CHANGE, function() {
                 that.refresh();
             });
@@ -221,16 +221,16 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
         }
     <!--_-->
 
-1. Add the `autoBind` configuration to the `options` object on the widget and give it a default value of `true`. All data-bound widgets in Kendo UI do `autoBind` by default.
+1. Add the `autoBind` configuration to the `options` object on the component and give it a default value of `true`. All data-bound widgets in Kendo UI do `autoBind` by default.
 
         options: {
             name: "Repeater",
             autoBind: true
         }
 
-## Rendering Widgets with Templates
+## Rendering Components with Templates
 
-1. The HTML that is output by widgets is rendered over the Kendo UI templates. They allow you to pre-compile HTML and inject data or expressions, which are evaluated, into the HTML and a DOM fragment is returned as an HTML string. Nearly all widgets in Kendo UI allow you to specify some kind of a template in addition to the default template that a widget uses. To do this, first add the template to the `options` object and set its value to an empty string. Contrary to other configuration settings, do not set its default value here.
+1. The HTML that is output by components is rendered over the Kendo UI templates. They allow you to pre-compile HTML and inject data or expressions, which are evaluated, into the HTML and a DOM fragment is returned as an HTML string. Nearly all components in Kendo UI allow you to specify some kind of a template in addition to the default template that a component uses. To do this, first add the template to the `options` object and set its value to an empty string. Contrary to other configuration settings, do not set its default value here.
 
         options: {
             name: "Repeater",
@@ -238,7 +238,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
             template: ""
         }
 
-1. Set the default value by adding a line directly under the call to the base widget initialization. This pre-compiles the template passed in by the user, or uses a default template. In the case of this Repeater, write out `strong` tags wrapped in paragraphs, and then reference the `data` object, which will be a string if you pass an array of strings. If you pass objects to the template, the default template renders `[object Object]`.
+1. Set the default value by adding a line directly under the call to the base component initialization. This pre-compiles the template passed in by the user, or uses a default template. In the case of this Repeater, write out `strong` tags wrapped in paragraphs, and then reference the `data` object, which will be a string if you pass an array of strings. If you pass objects to the template, the default template renders `[object Object]`.
 
        that.template = kendo.template(that.options.template || "<p><strong>#= data #</strong></p>")
 
@@ -246,7 +246,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
 
 1. Since you bound to the `change` method, you need to implement the `refresh` public function that will be called when `DataSource` changes or when it is called directly. Inside the `refresh` method is where you are going to mutate the DOM.
 
-  First, call `that.dataSource.view()`, which gives you the data from the `DataSource`. Next, use  `kendoRender` and pass in a template along with the DataSource data&mdash;a.k.a. `view`. This is how Kendo UI widgets mutate the DOM. The `render` method applies the data to the DataSource and returns the HTML string.
+  First, call `that.dataSource.view()`, which gives you the data from the `DataSource`. Next, use  `kendoRender` and pass in a template along with the DataSource data&mdash;a.k.a. `view`. This is how Kendo UI components mutate the DOM. The `render` method applies the data to the DataSource and returns the HTML string.
 
         refresh: function() {
             var that = this,
@@ -254,7 +254,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
                 html = kendo.render(that.template, view);
         }
 
-1. Set the HTML of `that.element`&mdash;the element on which you are initializing your widget. If you are handling initialization on an `input` and you want to translate or wrap that `input` within a container, add that logic here before setting its HTML. The `that.element` is a jQuery wrapped element, so you can simply call the `html` method directly off of it. The final `refresh` method looks like the one demonstrated in the following example.
+1. Set the HTML of `that.element`&mdash;the element on which you are initializing your component. If you are handling initialization on an `input` and you want to translate or wrap that `input` within a container, add that logic here before setting its HTML. The `that.element` is a jQuery wrapped element, so you can simply call the `html` method directly off of it. The final `refresh` method looks like the one demonstrated in the following example.
 
         refresh: function() {
             var that = this,
@@ -264,7 +264,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
             that.element.html(html);
         }
 
-1. Having added the final touches from the previous step, now you have a fully data-bound widget. The following example demonstrates the complete code for the Repeater widget.
+1. Having added the final touches from the previous step, now you have a fully data-bound component. The following example demonstrates the complete code for the Repeater component.
 
         (function() {
             var kendo = window.kendo,
@@ -299,7 +299,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
                     // Returns the datasource OR creates one if using array or configuration object.
                     that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
 
-                    // Bind to the change event to refresh the widget.
+                    // Bind to the change event to refresh the component.
                     that.dataSource.bind(CHANGE, function() {
                         that.refresh();
                     });
@@ -316,7 +316,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
 
     <!--_-->
 
-    The following example uses two widgets that are initialized. The first one takes a simple array as a `DataSource`. The second uses a remote endpoint, a template, and declarative initialization.
+    The following example uses two components that are initialized. The first one takes a simple array as a `DataSource`. The second uses a remote endpoint, a template, and declarative initialization.
 
     ```dojo
        <div id="repeater"></div>
@@ -363,7 +363,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
                 // Returns the datasource OR creates one if using array or configuration object.
                 that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
 
-                // Bind to the change event to refresh the widget.
+                // Bind to the change event to refresh the component.
                 that.dataSource.bind(CHANGE, function() {
                   that.refresh();
                 });
@@ -396,11 +396,11 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
 
 ## Using MVVM
 
-1. To make this widget MVVM-aware, you need to define some events. Specifically, expose the `dataBinding` event and the `dataBound` event.
+1. To make this component MVVM-aware, you need to define some events. Specifically, expose the `dataBinding` event and the `dataBound` event.
 
-  The `dataBinding` event is what you are going to call before you mutate the DOM with your widget. This enables MVVM to traverse the fragment that you are about to mutate, and unbind anything that is currently bound. The second event is the `dataBound` event, which allows MVVM to go back through the fragment, and re-bind what is necessary. These events are exposed through the `events` object on the widget. These events are strings, so define them as constants in the head of the widget as part of the pattern Kendo UI uses when developing Kendo UI widgets.
+  The `dataBinding` event is what you are going to call before you mutate the DOM with your component. This enables MVVM to traverse the fragment that you are about to mutate, and unbind anything that is currently bound. The second event is the `dataBound` event, which allows MVVM to go back through the fragment, and re-bind what is necessary. These events are exposed through the `events` object on the component. These events are strings, so define them as constants in the head of the component as part of the pattern Kendo UI uses when developing Kendo UI components.
 
-  By exposing these as events for MVVM to listen to, you have loose coupling between your widget and the MVVM core engine. This means that if you do not expose these events, MVVM will not be aware of the lifecycle of the widget. This is a very good architecture as it ensures that your widget will not break other MVVM bindings of which it is not aware.
+  By exposing these as events for MVVM to listen to, you have loose coupling between your component and the MVVM core engine. This means that if you do not expose these events, MVVM will not be aware of the lifecycle of the component. This is a very good architecture as it ensures that your component will not break other MVVM bindings of which it is not aware.
 
     	var DATABINDING = "dataBinding",
     	    DATABOUND = "dataBound",
@@ -415,11 +415,11 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
     	        ...
     	    },
 
-    	    // The events are used by other widgets or developers - API for other purposes.
+    	    // The events are used by other components or developers - API for other purposes.
     	    // These events support MVVM bound items in the template for loose coupling with MVVM.
     	    events: [
     	        // Call before mutating DOM.
-    	        // MVVM will traverse DOM, unbind any bound elements or widgets.
+    	        // MVVM will traverse DOM, unbind any bound elements or components.
     	        DATABINDING,
     	        // Call after mutating DOM.
     	        // Traverses DOM and binds ALL THE THINGS.
@@ -427,7 +427,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
     	    ]
     	});
 
-1. MVVM expects you to expose the DOM fragments from your widget, which represents each row or each repeated `data` element. You must return the outermost element for MVVM to work with. While it varies, this is typically just `this.element.children`. Since each rendered template item is a DOM fragment attached to the bound element, this is all you need. Expose it for MVVM by making it available off of the items object.
+1. MVVM expects you to expose the DOM fragments from your component, which represents each row or each repeated `data` element. You must return the outermost element for MVVM to work with. While it varies, this is typically just `this.element.children`. Since each rendered template item is a DOM fragment attached to the bound element, this is all you need. Expose it for MVVM by making it available off of the items object.
 
     	var DATABINDING = "dataBinding",
     	    DATABOUND = "dataBound",
@@ -442,11 +442,11 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
     	        ...
     	    },
 
-    	    // The events are used by other widgets or developers - API for other purposes.
+    	    // The events are used by other components or developers - API for other purposes.
     	    // These events support MVVM bound items in the template. for loose coupling with MVVM.
     	    events: [
     	        // Call before mutating DOM.
-    	        // MVVM will traverse DOM, unbind any bound elements or widgets.
+    	        // MVVM will traverse DOM, unbind any bound elements or components.
     	        DATABINDING,
     	        // Call after mutating DOM.
     	        // Traverses DOM and binds ALL THE THINGS.
@@ -478,9 +478,9 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
     * Reads from the `DataSource`, if `autoBind` is enabled, and the DataSource is not yet read from.
     * Binds the `change` event on the `DataSource` to an internal `refresh` method that you handle manually.
 
-    Since you have already bound the change event on the `DataSource` possibly once, make sure you unbind it if necessary. If this is not done, the widget retains a list of all bindings and executes the `refresh` function numerous times. Also, MVVM will be listening to the internal `_refreshHandler` function which is not yet defined. You need to point the internal `_refreshHandler` to your publicly exposed `refresh` method. First though, check and see if a connection exists between the public `refresh`, which is bound to the `change` event on the `DataSource`, and the internal `_refreshHandler`. If a connection exists, remove just the binding to the `change` event. If a connection does not exist between your internal `_refreshHandler` and the public `refresh` function, you need to create it. This is done by the `$.proxy` jQuery method, which calls the public `refresh` with the correct context, which is the widget itself. Finally, rebind to the `change` event of the `DataSource`.
+    Since you have already bound the change event on the `DataSource` possibly once, make sure you unbind it if necessary. If this is not done, the component retains a list of all bindings and executes the `refresh` function numerous times. Also, MVVM will be listening to the internal `_refreshHandler` function which is not yet defined. You need to point the internal `_refreshHandler` to your publicly exposed `refresh` method. First though, check and see if a connection exists between the public `refresh`, which is bound to the `change` event on the `DataSource`, and the internal `_refreshHandler`. If a connection exists, remove just the binding to the `change` event. If a connection does not exist between your internal `_refreshHandler` and the public `refresh` function, you need to create it. This is done by the `$.proxy` jQuery method, which calls the public `refresh` with the correct context, which is the component itself. Finally, rebind to the `change` event of the `DataSource`.
 
-    The following example implements the [`proxy`](https://api.jquery.com/jQuery.proxy/) jQuery function. `proxy` informs that when the `_refreshHandler` is called, it should execute the public `refresh` widget function; inside that `refresh` function, this will be a reference to the widget itself, and not something else, such as a window. Due to the fact that the value of the `this` keyword is always changing in JavaScript, this approach is a good way to ensure that the scope is correct when the `refresh` function executes.
+    The following example implements the [`proxy`](https://api.jquery.com/jQuery.proxy/) jQuery function. `proxy` informs that when the `_refreshHandler` is called, it should execute the public `refresh` component function; inside that `refresh` function, this will be a reference to the component itself, and not something else, such as a window. Due to the fact that the value of the `this` keyword is always changing in JavaScript, this approach is a good way to ensure that the scope is correct when the `refresh` function executes.
 
     	_dataSource: function() {
 
@@ -497,7 +497,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
 
     	    // Returns the datasource OR creates one if using array or configuration object.
     	    that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
-    	    // Bind to the change event to refresh the widget.
+    	    // Bind to the change event to refresh the component.
     	    that.dataSource.bind( CHANGE, that._refreshHandler );
 
     	    if (that.options.autoBind) {
@@ -518,14 +518,14 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
     	    // Trigger the dataBinding event.
     	    that.trigger(DATABINDING);
 
-    	    // Mutate the DOM (AKA build the widget UI).
+    	    // Mutate the DOM (that is, build the component UI).
     	    that.element.html(html);
 
     	    // Trigger the dataBound event.
     	    that.trigger(DATABOUND);
     	}
 
-  Now, you have a fully enabled MVVM in your widget. Define the widget as demonstrated in the following example.
+  Now, you have a fully enabled MVVM in your component. Define the component as demonstrated in the following example.
 
         <div data-role="repeater" data-bind="source: dataSource"></div>
         <script>
@@ -540,9 +540,9 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
             kendo.bind(document.body.children, viewModel);
         </script>
 
-  Notice that the widget is now bound to the `dataSource` variable inside of the `ViewModel` through `data-bind`. This means that if you add an item to the `DataSource` client-side, your widget will reflect the change immediately without you having to re-render anything.
+  Notice that the component is now bound to the `dataSource` variable inside of the `ViewModel` through `data-bind`. This means that if you add an item to the `DataSource` client-side, your component will reflect the change immediately without you having to re-render anything.
 
-  In the following complete example, note that when you add an item to the `DataSource`, it is immediately reflected in the Repeater widget.
+  In the following complete example, note that when you add an item to the `DataSource`, it is immediately reflected in the Repeater component.
 
       ```dojo
               <label for="newItem">Enter A New Item</label>
@@ -571,16 +571,16 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
 
       ```
 
-## Working with Value-Bound Widgets
+## Working with Value-Bound Components
 
-In order for a widget to support [`value` binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
+In order for a component to support [`value` binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
 
-* Add a `value` method to the widget, which sets the current widget value and returns the current value if no arguments are passed.
-* [Trigger](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/trigger) the widget `change` event when the widget value is changed.
+* Add a `value` method to the component, which sets the current `widget` value and returns the current value if no arguments are passed.
+* [Trigger](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/trigger) the component `change` event when the `widget` value is changed.
 
-The following examples demonstrate how to create a simple input widget that selects the value on focus.
+The following examples demonstrate how to create a simple input v that selects the value on focus.
 
-1. Create the widget and implement the functionality that you are looking for.
+1. Create the component and implement the functionality that you are looking for.
 
           (function ($) {
               var kendo = window.kendo;
@@ -706,7 +706,7 @@ The following example combines the snippets and exhibits the full code.
 
 ## Note on Technical Support
 
-Custom widgets that inherit from Kendo UI widgets are not subject to technical support service, unless the question or issue can be discussed in the context of the originating widget that is provided in the Kendo UI installer.
+Custom components that inherit from Kendo UI components are not subject to technical support service, unless the question or issue can be discussed in the context of the originating component that is provided in the Kendo UI installer.
 
 ## See Also
 

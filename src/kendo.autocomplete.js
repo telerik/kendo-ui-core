@@ -123,8 +123,6 @@ var __meta__ = {
 
             that._old = that._accessor();
 
-            that._aria();
-
             that._placeholder();
 
             that._initList();
@@ -142,6 +140,12 @@ var __meta__ = {
             kendo.notify(that);
             that._toggleCloseVisibility();
             that._applyCssClasses();
+
+            if (options.label) {
+                that._label();
+            }
+
+            that._aria();
         },
 
         options: {
@@ -169,7 +173,8 @@ var __meta__ = {
             popup: null,
             size: "medium",
             fillMode: "solid",
-            rounded: "medium"
+            rounded: "medium",
+            label: null
         },
 
         _dataSource: function() {
@@ -394,6 +399,7 @@ var __meta__ = {
                 return this._accessor();
             }
             this._toggleCloseVisibility();
+            this._refreshFloatingLabel();
         },
 
         _click: function(e) {

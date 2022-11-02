@@ -362,6 +362,10 @@ var __meta__ = {
 
             that._update(value);
             that._old = that._value;
+
+            if (that.floatingLabel) {
+                that.floatingLabel.refresh();
+            }
         },
 
         focus: function() {

@@ -32,7 +32,7 @@ To create a new Kendo UI for jQuery application, start the **Create New Project 
 
 The wizard detects all the installed versions of Kendo UI and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
-![{{ site.product_short }} A new Kendo UI Project Wizard](../vs-integration/images/images-mvc/create_kendo.png)
+![{{ site.product_short }} A new Kendo UI Project Wizard](../vs-integration/images/images-mvc/create-new-project-wizard.png)
 
 ## Project Settings
 

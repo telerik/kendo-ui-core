@@ -2290,6 +2290,7 @@ declare namespace kendo.ui {
         filter?: string | undefined;
         fixedGroupTemplate?: string|Function | undefined;
         footerTemplate?: string|Function | undefined;
+        label?: string | Function | BaseLabel | undefined;
         groupTemplate?: string|Function | undefined;
         height?: number | undefined;
         highlightFirst?: boolean | undefined;
@@ -3371,6 +3372,7 @@ declare namespace kendo.ui {
         filter?: string | undefined;
         fixedGroupTemplate?: string|Function | undefined;
         footerTemplate?: string|Function | undefined;
+        label?: string | Function | BaseLabel | undefined;
         groupTemplate?: string|Function | undefined;
         height?: number | undefined;
         highlightFirst?: boolean | undefined;
@@ -3590,6 +3592,10 @@ declare namespace kendo.ui {
         target?: Element | undefined;
     }
 
+    interface BaseLabel {
+        content?: string| Function | undefined;
+        floating?: boolean | undefined;
+    }
 
     class DateInput extends kendo.ui.Widget {
 
@@ -3637,6 +3643,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         fillMode?: string | undefined;
         format?: string | undefined;
+        label?: string | Function | BaseLabel | undefined;
         max?: Date | undefined;
         min?: Date | undefined;
         value?: Date | undefined;
@@ -3726,6 +3733,7 @@ declare namespace kendo.ui {
         footer?: boolean|string|Function | undefined;
         fillMode?: string | undefined;
         format?: string | undefined;
+        label?: string | Function | BaseLabel | undefined;
         max?: Date | undefined;
         messages?: DatePickerMessages | undefined;
         min?: Date | undefined;
@@ -3913,6 +3921,7 @@ declare namespace kendo.ui {
         fillMode?: string | undefined;
         footer?: boolean|string|Function | undefined;
         format?: string | undefined;
+        label?: string | Function | BaseLabel | undefined;
         interval?: number | undefined;
         max?: Date | undefined;
         messages?: DateTimePickerMessages | undefined;
@@ -4253,6 +4262,7 @@ declare namespace kendo.ui {
         fillMode?: string | undefined;
         filter?: string | undefined;
         fixedGroupTemplate?: string|Function | undefined;
+        label?: string | Function | BaseLabel | undefined;
         footerTemplate?: string|Function | undefined;
         groupTemplate?: string|Function | undefined;
         height?: number | undefined;
@@ -4404,6 +4414,7 @@ declare namespace kendo.ui {
         filter?: string | undefined;
         filterLabel?: string | undefined;
         fillMode?: string | undefined;
+        label?: string | Function | BaseLabel | undefined;
         footerTemplate?: string|Function | undefined;
         height?: string|number | undefined;
         ignoreCase?: boolean | undefined;
@@ -7450,6 +7461,7 @@ declare namespace kendo.ui {
         fillMode?: string | undefined;
         filter?: string | undefined;
         filterFields?: any;
+        label?: string | Function | BaseLabel | undefined;
         fixedGroupTemplate?: string|Function | undefined;
         footerTemplate?: string|Function | undefined;
         groupTemplate?: string|Function | undefined;
@@ -7600,6 +7612,7 @@ declare namespace kendo.ui {
         fillMode?: string | undefined;
         filter?: string | undefined;
         fixedGroupTemplate?: string|Function | undefined;
+        label?: string | Function | BaseLabel | undefined;
         footerTemplate?: string|Function | undefined;
         groupTemplate?: string|Function | undefined;
         height?: number | undefined;
@@ -11528,6 +11541,7 @@ declare namespace kendo.ui {
         rounded?: string | undefined;
         size?: string | undefined;
         value?: Date | undefined;
+        label?: string | Function | BaseLabel | undefined;
         change?(e: TimePickerChangeEvent): void;
         close?(e: TimePickerCloseEvent): void;
         open?(e: TimePickerOpenEvent): void;

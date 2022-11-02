@@ -31,7 +31,7 @@ I want to display the validation summary instead of tooltips in the grid popup e
 
 The Kendo UI Grid with popup editing uses the Kendo UI Validator which is designed to show the errors as tooltips:
 
-![{{ site.product_short }} image](images/edit-popup-validation.png)
+![{{ site.product_short }} Grid popup validation](images/edit-popup-validation.png)
 
 You can create a validation summary with a few lines of JavaScript.
 
@@ -86,7 +86,7 @@ You can create a validation summary with a few lines of JavaScript.
 
 This is the result:
 
-![{{ site.product_short }} image](images/edit-popup-validation-summary.png)
+![{{ site.product_short }} Grid popup validation summary](images/edit-popup-validation-summary.png)
 
 ## See Also
 

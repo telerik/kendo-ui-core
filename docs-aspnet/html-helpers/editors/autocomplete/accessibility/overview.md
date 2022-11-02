@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: "{{ site.product }} AutoComplete Documentation - AutoComplete Accessibility"
+page_title: "{{ site.product }} AutoComplete Documentation | AutoComplete Accessibility"
 description: "Get started with the {{ site.product }} AutoComplete and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_aspnetcore_autocomplete
 position: 1
@@ -34,7 +34,7 @@ The Kendo UI for jQuery AutoComplete component is [WCAG 2.1 AAA](https://www.w3.
 |  | `aria-haspopup=listbox` | Indicates the component has a listbox Popup. |
 |  | `aria-expanded=true/false` | Announces the state of the visibility of the popup. |
 |  | `aria-controls=.k-animation-container id` | Points to the popup element. Signifies that the `combobox` element controls the `listbox`. |
-|  | `aria-activedescendent=.k-list-item id` | Points to the focused item in the popup. The focused item is changed via keyboard navigation. If the popup is not visible, the attribute should not point to any element or should be removed. |
+|  | `aria-activedescendant=.k-list-item.k-focus id` | Points to the focused item in the popup. The focused item is changed via keyboard navigation. If the popup is not visible, the attribute should not point to any element or should be removed. |
 |  | `aria-autocomplete=list` | Attribute is rendered and value is set to list when **filtering** feature is enabled. |
 |  | `aria-autocomplete=both` | Attribute is rendered and value is set to both when both **filtering** and **suggest** features are enabled. |
 |  | `aria-autocomplete=inline` | Attribute is rendered and value is set to only **suggest** feature is enabled. |
@@ -47,7 +47,7 @@ The Kendo UI for jQuery AutoComplete component is [WCAG 2.1 AAA](https://www.w3.
 ### ListBox Popup
 
 
-The Popup element of the component should implement the specification for a **PopuList** component.
+The Popup element of the component should implement the specification for a **Popup List** component.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

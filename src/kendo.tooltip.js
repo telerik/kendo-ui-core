@@ -142,6 +142,10 @@ var __meta__ = {
             }
 
             that.element.on(that.options.showOn + NS, that.options.filter, that._showOn.bind(that));
+
+            if (that.options.showOn === "click") {
+                that.element.on("keydown" + NS, that.options.filter, that._keydown.bind(that));
+            }
         },
 
         options: {
@@ -196,6 +200,14 @@ var __meta__ = {
                 return this.popup.options.anchor;
             }
             return null;
+        },
+
+        _keydown: function(e) {
+            var currentTarget = $(e.currentTarget);
+
+            if (e.keyCode == kendo.keys.ENTER) {
+                this._show(currentTarget);
+            }
         },
 
         _showOn: function(e) {

@@ -392,7 +392,7 @@ var __meta__ = {
                 ),
 
                 item: template(
-                    "<li role='treeitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'" +
+                    "<li aria-selected='false' role='treeitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'" +
                          kendo.attr("uid") + "='#= item.uid #'>" +
                         "#= itemWrapper(data) #" +
                         "# if (item.items && item.items.length > 0) { #" +
@@ -1329,7 +1329,12 @@ var __meta__ = {
                 root = this.element[0],
                 wrapElement, link;
 
-            item = $(item).addClass("k-item").attr("role", "treeitem");
+            item = $(item)
+                .addClass("k-item")
+                .attr({
+                    role: "treeitem",
+                    "aria-selected": false
+                });
 
             if (kendo.support.browser.msie) { // IE10 doesn't apply list-style: none on invisible items otherwise.
                 item.css("list-style-position", "inside")
@@ -1368,7 +1373,7 @@ var __meta__ = {
             link = item.children(SELECTEDSELECTOR);
             if (link[0]) {
                 if (selected) {
-                    selected.removeAttr(ARIA_SELECTED)
+                    selected.attr(ARIA_SELECTED, false)
                             .children(SELECTEDSELECTOR)
                             .removeClass(SELECTEDCLASS);
                 }
@@ -1685,7 +1690,7 @@ var __meta__ = {
                 dataItem = that.dataItem(item);
 
             if (selected) {
-                selected.removeAttr(ARIA_SELECTED);
+                selected.attr(ARIA_SELECTED, false);
             }
 
             that._selected = item.attr(ARIA_SELECTED, true);

@@ -61,7 +61,7 @@ The **Create New Project Wizard** allows you to select a target **Framework**.
 > 
 >If the target **Framework** dropdown is disabled check the troubleshooting [section]({% slug troubleshooting_visualstudio_aspnetcore%}#the-target-framework-dropdown-is-disabled).
 
-![{{ site.product_short }} The Create New Project Wizard](../vs-integration/images/target-dropdown.png)
+![{{ site.product_short }} Selecting a target framework](../vs-integration/images/target-dropdown.png)
 
 ### .NET Core version
 
@@ -74,19 +74,19 @@ Click on the desired **{{ site.framework }}** version.
 You can choose if you want the template project to use [HtmlHelpers or TagHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}) in its Views.
 In this article, we use the **Tag** option.
 
-![{{ site.product_short }} The HTML/Tag helper options](../vs-integration/images/tag-html-dropdown.png)
+![{{ site.product_short }} HTML/Tag helper options](../vs-integration/images/tag-html-dropdown.png)
 
 ### {{ site.product_short}} version
 
 The Project wizard allows you to select the desired version of {{ site.product_short }}. If there is a newer version available that is not downloaded on the machine, you can obtain it without exiting the wizard.
 
-![{{ site.product_short }} {{site.product_short}} version options](../vs-integration/images/telerik-version.png)
+![{{ site.product_short }} Product version options](../vs-integration/images/telerik-version.png)
 
 ### Available Templates
 
 The following project templates are available:
 
-![{{ site.product_short }} {{site.product_short}} templates options](../vs-integration/images/new-project-wizard-core.png)
+![{{ site.product_short }} Project template options](../vs-integration/images/new-project-wizard-core.png)
 
 <table>
     <colgroup>

@@ -93,6 +93,10 @@ var __meta__ = {
 
             that._filterHeader();
 
+            if (options.label) {
+                this._label();
+            }
+
             that._aria();
 
             that._enable();
@@ -179,7 +183,8 @@ var __meta__ = {
             filterTitle: null,
             size: "medium",
             fillMode: "solid",
-            rounded: "medium"
+            rounded: "medium",
+            label: null
         },
 
         events: [
@@ -398,6 +403,7 @@ var __meta__ = {
                     return data === loweredText;
                 }).done(function() {
                     that._textAccessor(that.dataItem() || text);
+                    that._refreshFloatingLabel();
                 });
 
             } else {
@@ -449,6 +455,7 @@ var __meta__ = {
             listView.value(value).done(function() {
                 that._old = that._valueBeforeCascade = that._accessor();
                 that._oldIndex = that.selectedIndex;
+                that._refreshFloatingLabel();
             });
         },
 

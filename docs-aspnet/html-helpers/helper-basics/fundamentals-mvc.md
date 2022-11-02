@@ -19,7 +19,7 @@ As of the jQuery 3.0 release, the [document-ready handlers are called asynchrono
 
 The [`HtmlHelper`](http://www.asp.net/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs) extension method exposes all Telerik UI HTML helpers.
 
-![{{ site.product_short }} The Kendo UI HTML Helper extension method](../../images/kendo-extension.png)
+![{{ site.product_short }} HTML Helper extension method](../../images/kendo-extension.png)
 
 The helper options are exposed through a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface).
 

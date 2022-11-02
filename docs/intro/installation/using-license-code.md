@@ -1,6 +1,6 @@
 ---
-title: Using Script License File
-page_title: Using Script License File - Download and Installation 
+title: Using the Script License File
+page_title: Using the Script License File - Download and Installation 
 description: "Get started with Kendo UI for jQuery and learn how to acquire the library from the NPM distribution channel and register the script license file."
 slug: using-license-code
 position: 5
@@ -29,8 +29,7 @@ The license key installation process involves the following steps:
 
 > This section contains auto-generated content based on the license information for your account.
 
-To acquire a license file, generate it: 
-
+<!-- The following code is a web component - it should never be added as a code snippet. It is part of the web application to generate the license code for the clients. To check it out, log into your account and open the live doc page. -->
 <link rel="stylesheet" href="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.0.3/styles/license-key/styles.css" />
 <script src="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.0.3/scripts/license-key/index.js"></script>
 
@@ -44,7 +43,7 @@ To acquire a license file, generate it:
 
 ## 2. Add the License File
 
-In order to register the Kendo UI product you need to add the `kendo-ui-license.js` file in the root of the application or in the main scripts folder. The following table shows the most common location you can include it according to the type of application you are using.
+To register the Kendo UI product, you need to add the `kendo-ui-license.js` file in the root of the application or in the main scripts folder. The following table shows the most common location you can include it according to the type of application you are using.
 
 |Type of Application|Common Locations
 |:---|:---
@@ -61,9 +60,10 @@ You can reference the `kendo-ui-license.js` file by using either of the followin
 
 ### Use a Script Reference
 
-Add the `kendo-ui-license.js` as a script reference right after the `kendo.all.min.js` reference or the Kendo scripts you are using.
+Add the `kendo-ui-license.js` as a script reference right after the `kendo.all.min.js` reference or the Kendo UI scripts you are using.
 
-**Example: using CDN reference - kendo.all.min.js**
+The following example shows how to use the CDN reference (`kendo.all.min.js`).
+
 ```html
 <script src="https://kendo.cdn.telerik.com/***/kendo.all.min.js"></script>
 <script src="./kendo-ui-license.js"></script>
@@ -71,7 +71,8 @@ Add the `kendo-ui-license.js` as a script reference right after the `kendo.all.m
 <!-- Rest of the HTML -->
 ```
 
-**Example: using CDN reference - using predefined list of scripts**
+The following example shows how to use the CDN reference by utilizing the predefined list of scripts.
+
 ```html
 <script src="https://kendo.cdn.telerik.com/***/kendo.core.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/***/kendo.userevents.min.js"></script>
@@ -86,9 +87,10 @@ Add the `kendo-ui-license.js` as a script reference right after the `kendo.all.m
 
 ### Use JS or TS Modules
 
-Import the `kendo-ui-license.js` file right after the import of the Kendo modules.
+Import the `kendo-ui-license.js` file right after the import of the Kendo UI modules.
 
-**Example: using ESM modules**
+The following example shows how to use the ESM modules.
+
 ```js
 import "@progress/kendo-ui";
 import "./kendo-ui-license.js";
@@ -96,7 +98,8 @@ import "./kendo-ui-license.js";
 $("#grid").kendoGrid();
 ```
 
-**Example: using CJS modules**
+The following example shows how to use the CJS modules.
+
 ```js
 require("@progress/kendo-ui");
 require("./kendo-ui-license.js");
@@ -106,7 +109,8 @@ $("#grid").kendoGrid();
 
 Often, you will need two or more imports of the Kendo UI libraries and you will need to import the license file only in one location, which most likely will be the main script file of your application. In that case, import the `kendo.core.js` and register your license code as usual: 
 
-**Example: using ESM modules**
+The following example shows how to use the ESM modules to import the license file in a single location.
+
 ```js
 import '@progress/kendo-ui/js/kendo.core';
 import './kendo-ui-license.js';
@@ -114,7 +118,8 @@ import './kendo-ui-license.js';
 // The rest of the code.
 ```
 
-**Example: using CJS modules**
+The following example shows how to use the CJS modules to import the license files in a single location. 
+
 ```js
 require("@progress/kendo-ui/js/kendo.core");
 require("./kendo-ui-license.js");
@@ -152,9 +157,8 @@ Yes, the product will continue to function normally without a license key. Howev
 
 Yes, the license key expires at the end of your support subscription: 
 
-* With trial licenses, the license key expires at the end of your 30-day trial. 
-
-* With commercial licenses, the license key expires when your subscription expires. 
+* (For trial licenses) The license key expires at the end of your 30-day trial. 
+* (For commercial licenses) The license key expires when your subscription expires. 
 
 You will need to obtain and install a new license key after starting a trial, renewing a license, or upgrading a license. 
 
@@ -181,10 +185,10 @@ No, if you use CDN and Kendo UI for jQuery versions released prior to R3 2022 or
 ## Next Steps
 
 * [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
-* [Create Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Initialize Widgets as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize Widgets with MVVM]({% slug mvvm_initialization_kendoui %})
-* [Widget Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Initialize Components as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Components with MVVM]({% slug mvvm_initialization_kendoui %})
+* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 
 ## See Also
 

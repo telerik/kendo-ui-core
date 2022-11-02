@@ -53,7 +53,7 @@ Set the project upgrade notifications for detected local distributions by using 
 
 The Telerik UI for ASP.NET MVC VS Extensions settings can be found in the standard options dialog in Visual Studio under the Telerik node.
 
-![{{ site.product_short }} The Options dialog](../vs-integration/images/images-mvc/options_kendo.png)
+![{{ site.product_short }} The Visual Studio settings dialog](../vs-integration/images/images-mvc/visual-studio-settings.png)
 
 ### Latest Version Retrieval
 

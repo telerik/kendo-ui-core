@@ -26,7 +26,7 @@ For a runnable example, refer to the [demo on batch editing of the Grid](https:/
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    ![{{ site.product_short }} Choosing the Products table](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
 {% endif %}
 
 1. Add a new class to the `~/Models` folder. The following example uses the `ProductViewModel` name.

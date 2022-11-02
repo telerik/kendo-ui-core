@@ -13,7 +13,7 @@ position: 4
 
 ThemeBuilder allows you to render the same look and feel for all UI components from all Kendo UI suites and gives you full control over their visual elements. When you apply visual customizations to complex components like the Grid, ThemeBuilder automatically updates the styles of all underlying components (Button, AutoComplete, DropDownList, DatePicker, and more). After you achieve the desired look and feel, you can download and integrate the theme into your project.
 
-![Theme Builder Overview](../images/themebuilder-overview.png)
+![{{ site.product_short }} ThemeBuilder Overview](../images/themebuilder-overview.png)
 
 ## Creating New Themes
 
@@ -24,7 +24,7 @@ To create a new theme:
 1. Select **Start Theming**.
 1. To reduce the number of the rendered components, open the **SELECT COMPONENTS** screen and check only the UI components that you need. You can change the selection at a later stage.
 
-![Create a new visual theme with ThemeBuilder](../images/themebuilder-create.gif)
+![{{ site.product_short }} Create a new visual theme with ThemeBuilder](../images/themebuilder-create.gif)
 
 ### Customizing Themes
 
@@ -36,7 +36,7 @@ To customize a theme, use any of the following ThemeBuilder features:
 
 * Manual updates of the component elements&mdash;You can directly enter the desired values into the input field of the selected variable.
 
-![Customize UI components with ThemeBuilder](../images/themebuilder-customize-components.png)
+![{{ site.product_short }} Customize UI components with ThemeBuilder](../images/themebuilder-customize-components.png)
 
 ## Using Existing Themes
 

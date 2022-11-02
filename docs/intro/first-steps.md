@@ -1,7 +1,7 @@
 ---
 title: First Steps
 page_title: First Steps with Your Kendo UI for jQuery Project Guide - Getting Started 
-description: "A guide on getting started with Kendo UI for jQuery, showing how to add the necessary CSS and JavaScript files, and implement the Grid widget."
+description: "A guide on getting started with Kendo UI for jQuery, showing how to add the necessary CSS and JavaScript files, and implement the Grid component."
 previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, /bootstrapper, /intro/installation/getting-started
 slug: getting_started_installation_kendoui
 position: 0
@@ -29,15 +29,20 @@ You can quickly download the Kendo UI for jQuery controls after you log into [yo
 
 First, you will add the Kendo UI assets to your HTML document. In this sample case, you will use the [Kendo UI CDN service]({% slug kendoui_cdn_services_installation %}). In other scenarios, you may want to [host the files locally]({% slug hosting_kendoui %}).
 
-Always register jQuery before the Kendo UI script&mdash;otherwise, you will get [JavaScript errors]({% slug troubleshooting_common_issues_kendoui %}) when you try to initialize a Kendo UI widget or use the Kendo UI API.
+Always register jQuery before the Kendo UI script&mdash;otherwise, you will get [JavaScript errors]({% slug troubleshooting_common_issues_kendoui %}) when you try to initialize a Kendo UI component or use the Kendo UI API.
 
 To make sure all scripts are loaded, make a simple API call to render the [Kendo UI version](/api/javascript/kendo/fields/version).
 
 > The `$(function() { });` code block is a [jQuery `document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) handler. All JavaScript code from this guide has to go inside this closure.
 
-	```
+	```html
 		<link href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css" rel="stylesheet" />
 		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+		
+    <!-- Add the Kendo library by either using the JAVASCRIPT MODULES -->
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script>
+
+    <!-- OR by using the BUNDLED JAVASCRIPT -->
 		<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 	```
 
@@ -101,7 +106,7 @@ Now you are ready to [initialize a Kendo UI Grid]({% slug overview_kendoui_grid_
 
 	<div id="ordersGrid"></div>
 
-The following snippet contains the JavaScript code which will [create the widget instance]({% slug initialize_widgets_using_jquery_plugins_installation %}) and use the defined `datasource`. Place the code after the `gridDataSource` definition. For a runnable version of the page after the current step, refer to [this demo](https://dojo.telerik.com/URepufIY).
+The following snippet contains the JavaScript code which will [create the component instance]({% slug initialize_widgets_using_jquery_plugins_installation %}) and use the defined `datasource`. Place the code after the `gridDataSource` definition. For a runnable version of the page after the current step, refer to [this demo](https://dojo.telerik.com/URepufIY).
 
 	$("#ordersGrid").kendoGrid({
 	  dataSource: gridDataSource
@@ -246,7 +251,7 @@ This is it! Now you are ready to dive more deeply into Kendo UI for jQuery and i
 ## Next Steps
 
 * [Creating Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
-* [The Widget DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [The Component DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Number Formatting]({% slug numberformatting_kendoui_globalization %})
 * [Date Formatting]({% slug dateformatting_kendoui_globalization %})
@@ -260,5 +265,6 @@ This is it! Now you are ready to dive more deeply into Kendo UI for jQuery and i
 * [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI for jQuery with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
-* [Creating Your Own Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Using Kendo UI for jQuery ECMAScript Modules]({% slug kendoui_ecmascript_overview %})
+* [Creating Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 * [jQuery Version Support]({% slug jquerysupport_kendoui %})

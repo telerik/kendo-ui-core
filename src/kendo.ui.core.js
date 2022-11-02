@@ -3,6 +3,7 @@ import "./kendo.router.js";
 import "./kendo.touch.js";
 import "./kendo.view.js";
 import "./kendo.floatinglabel.js";
+import "./kendo.label.js";
 import "./kendo.fx.js";
 import "./kendo.data.odata.js";
 import "./kendo.data.xml.js";

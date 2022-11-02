@@ -27,11 +27,19 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
             options = $.extend(true, {}, options);
 
+            that.widget = that.options.widget;
+            that.widgetWrapper = that.widget.wrapper[0];
+
             that.refresh();
             that._editable({
                 readonly: that.options.widget.options.readonly !== undefined ? that.options.widget.options.readonly : false,
                 disable: that.options.widget.options.enable !== undefined ? !(that.options.widget.options.enable) : false
             });
+
+            if (that.widgetWrapper.style.width) {
+                that.element.css("width", that.widgetWrapper.style.width);
+                that.widgetWrapper.style.width = "100%";
+            }
 
             that.element.addClass(FLOATINGLABELCONTAINER);
 
@@ -41,7 +49,8 @@ var __meta__ = {
         options: {
             name: 'FloatingLabel',
             widget: null,
-            useReadOnlyClass: false
+            useReadOnlyClass: false,
+            floatCheck: ({ element }) => !element.val()
         },
 
         readonly: function(readonly) {
@@ -66,8 +75,7 @@ var __meta__ = {
                 .removeClass(EMPTY)
                 .removeClass(FOCUSED);
 
-
-            if (!that.options.widget.element.val()) {
+            if (that.options.floatCheck({ element: that.options.widget.element, floating: that.element })) {
                 element.addClass(EMPTY);
             }
 

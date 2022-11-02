@@ -237,5 +237,23 @@
             assert.isOk(menu.filter("[aria-activedescendant=bar]").length);
             assert.isOk(menu.find("li#bar").length);
         });
+
+        it("k-menu-expand-arrow has aria-hidden set to true", function() {
+            menu = $("<ul>" +
+                        "<li id='firstItem'>item" +
+                            "<ul>" +
+                                "<li id='item1'>item 1" +
+                                    "<ul>" +
+                                        "<li id='subitem1'>item 1</li>" +
+                                    "</ul>" +
+                                "</li>" +
+                            "</ul>" +
+                        "</li>" +
+                    "</ul>")
+                .appendTo(Mocha.fixture)
+                .kendoMenu();
+
+            assert.equal(menu.find(".k-menu-expand-arrow").attr("aria-hidden"), "true");
+        });
     });
 }());

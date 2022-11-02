@@ -115,7 +115,13 @@ var __meta__ = {
             }
 
             that._initialOpen = true;
+
+            if (options.label) {
+                this._label();
+            }
+
             that._aria();
+
             that._dataSource();
             that._ignoreCase();
             that._popup();
@@ -140,9 +146,10 @@ var __meta__ = {
                 that.enable(false);
             }
 
-            kendo.notify(that);
             that._toggleCloseVisibility();
             that._applyCssClasses();
+
+            kendo.notify(that);
         },
 
         options: {
@@ -181,7 +188,8 @@ var __meta__ = {
             popup: null,
             size: "medium",
             fillMode: "solid",
-            rounded: "medium"
+            rounded: "medium",
+            label: null
         },
 
         events: [
@@ -644,6 +652,15 @@ var __meta__ = {
 
         refresh: function() {
             this.listView.refresh();
+        },
+
+        _floatCheck: function() {
+            if (this.listView) {
+                var hasValue = (this.value() && this.value().length);
+                return !hasValue && !this.popup.visible();
+            }
+
+            return true;
         },
 
         _listBound: function() {
@@ -1354,6 +1371,8 @@ var __meta__ = {
                     that._setOption(getter(added[idx].dataItem), true);
                 }
             }
+
+            that._refreshFloatingLabel();
 
             that._angularTagItems("compile");
             that._placeholder();

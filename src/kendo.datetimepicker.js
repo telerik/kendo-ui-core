@@ -1,13 +1,14 @@
 import "./kendo.datepicker.js";
 import "./kendo.timepicker.js";
 import "./kendo.html.button.js";
+import "./kendo.label.js";
 
 var __meta__ = {
     id: "datetimepicker",
     name: "DateTimePicker",
     category: "web",
     description: "The DateTimePicker allows the end user to select a value from a calendar or a time drop-down list.",
-    depends: [ "datepicker", "timepicker" ]
+    depends: [ "datepicker", "timepicker", "label" ]
 };
 
 (function($, undefined) {
@@ -149,6 +150,10 @@ var __meta__ = {
             that._oldText = element.val();
             that._applyCssClasses();
 
+            if (options.label) {
+                that._label();
+            }
+
             kendo.notify(that);
         },
 
@@ -191,7 +196,8 @@ var __meta__ = {
             componentType: "classic",
             size: "medium",
             fillMode: "solid",
-            rounded: "medium"
+            rounded: "medium",
+            label: null
         },
 
         events: [
@@ -265,6 +271,16 @@ var __meta__ = {
             if (value) {
                 that._updateARIA(value);
             }
+
+            if (options.label && that._inputLabel) {
+                that.label.setOptions(options.label);
+            } else if (options.label === false) {
+                that.label._unwrapFloating();
+                that._inputLabel.remove();
+                delete that._inputLabel;
+            } else if (options.label) {
+                that._label();
+            }
         },
 
         _editable: function(options) {
@@ -329,6 +345,20 @@ var __meta__ = {
             }
         },
 
+        _label: function() {
+            var that = this;
+            var options = that.options;
+            var labelOptions = $.isPlainObject(options.label) ? options.label : {
+                content: options.label
+            };
+
+            that.label = new kendo.ui.Label(null, $.extend({}, labelOptions, {
+                widget: that
+            }));
+
+            that._inputLabel = that.label.element;
+        },
+
         _focusElement: function(eventType) {
             var element = this.element;
 
@@ -342,6 +372,10 @@ var __meta__ = {
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
@@ -349,6 +383,10 @@ var __meta__ = {
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+
+            if (this.label && this.label.floatingLabel) {
+                this.label.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
         },
 
         destroy: function() {
@@ -357,6 +395,10 @@ var __meta__ = {
             Widget.fn.destroy.call(that);
             that.dateView.destroy();
             that.timeView.destroy();
+
+            if (that.label) {
+                that.label.destroy();
+            }
 
             if (that.options.singlePopup) {
                 that.popup.element.off(ns);
@@ -480,6 +522,10 @@ var __meta__ = {
             }
 
             that._oldText = that.element.val();
+
+            if (that.label && that.label.floatingLabel) {
+                that.label.floatingLabel.refresh();
+            }
         },
 
         _change: function(value) {

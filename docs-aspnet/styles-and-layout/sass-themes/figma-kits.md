@@ -78,11 +78,11 @@ Each Telerik and Kendo UI Kit for Figma contains the following pages, most of wh
 * **_Styles**&mdash;An informational page with all styles that are applied to the components, such as typography, colors, and effects.
 * **_Change Log**&mdash;A list with the changes in the UI kit.
 
-![{{ site.product_short }} Kendo UI Kit Pages](../images/figma-ui-kit-pages-v1.9.png)
+![{{ site.product_short }} Figma UI Kit Pages](../images/figma-ui-kit-pages-v1.9.png)
 
 Most pages contain multiple frames that group similar design assets.
 
-![{{ site.product_short }} Kendo UI Kit Page with Multiple Frames](../images/figma-ui-kit-frames-v1.9.png)
+![{{ site.product_short }} Figma UI Kit Page with Multiple Frames](../images/figma-ui-kit-frames-v1.9.png)
 
 ## Customizing the UI Kits 
 
@@ -174,11 +174,11 @@ Each UI kit includes the following pages:
 * **_Styles**&mdash;An informational page with all styles that are applied to the components, such as typography, colors, and effects.
 * **_Change Log**&mdash;A list with the changes in the UI kit.
 
-![{{ site.product_short }} Kendo UI Kit Pages](../images/figma-ui-kit-pages-v1.9.png)
+![{{ site.product_short }} Figma UI Kit Pages](../images/figma-ui-kit-pages-v1.9.png)
 
 The UI kits group similar design assets into frames. 
 
-![{{ site.product_short }} Kendo UI Kit Page with Multiple Frames](../images/figma-ui-kit-frames-v1.9.png)
+![{{ site.product_short }} Figma UI Kit Page with Multiple Frames](../images/figma-ui-kit-frames-v1.9.png)
 
 ## Customizing the UI Kits 
 

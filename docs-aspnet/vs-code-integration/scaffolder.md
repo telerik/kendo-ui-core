@@ -28,11 +28,11 @@ Using the {{site.product}} Visual Studio Code Scaffolder you can quickly gener
 
 1. To use the Scaffolder right click on the `.csproj` file and select **New Telerik UI for ASP.NET Core Project Item**
 
-    ![{{ site.product_short }} scaffolder-context-menu](images/aspnetcore-scaffolder-context-menu.jpg)
+    ![{{ site.product_short }} Select New Project Item in the context menu](images/aspnetcore-scaffolder-context-menu.jpg)
 
 1. The **Telerik UI for ASP.NET Core Project Item Generator** will prompt you to select Project Item Type. It will allow you to configure multiple component-specific properties and provide the customizable options for the scaffolded page.
 
-    ![{{ site.product_short }} scaffolder](images/aspnetcore-scaffolder.jpg)
+    ![{{ site.product_short }} Scaffolder project item generator](images/aspnetcore-scaffolder.jpg)
 
 1. Confirming the options will generate a View containig the selected component, with the provided configuration options.
 

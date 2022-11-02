@@ -966,7 +966,7 @@ var __meta__ = {
             added = added || [];
 
             if (removed.length || added.length) {
-                this.trigger(CHANGE, {
+                 this.trigger(CHANGE, {
                     removed: removed,
                     added: added
                 });

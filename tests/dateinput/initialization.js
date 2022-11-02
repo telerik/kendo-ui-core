@@ -104,6 +104,41 @@
             assert.equal(dateinput.element.val(), "month/day/year");
         });
 
+        it("DateInput renders not-floating label from string", function() {
+            var dateinput = input.kendoDateInput({
+                label: "some label"
+            }).data("kendoDateInput");
+            assert.equal(dateinput.label.element.text(), "some label");
+            assert.isNotOk(!!dateinput.label.floatingLabel);
+        });
+
+        it("DateInput renders label from object", function() {
+            var dateinput = input.kendoDateInput({
+                label: {
+                    content: "some label"
+                }
+            }).data("kendoDateInput");
+            assert.equal(dateinput.label.element.text(), "some label");
+        });
+
+        it("DateInput renders floating label", function() {
+            var dateinput = input.kendoDateInput({
+                label: {
+                    content: "some label",
+                    floating: true
+                }
+            }).data("kendoDateInput");
+            assert.equal(dateinput.label.element.text(), "some label");
+            assert.isOk(!!dateinput.label.floatingLabel);
+        });
+
+        it("DateInput renders label with funciton", function() {
+            var dateinput = input.kendoDateInput({
+                label: () => `some label`
+            }).data("kendoDateInput");
+            assert.equal(dateinput.label.element.text(), "some label");
+        });
+
         it("form reset support", function(done) {
             var form = $("<form/>").appendTo(Mocha.fixture).append(input),
                 dateInput = input.kendoDateInput({ value: new Date(2018, 1, 1) }).data("kendoDateInput");

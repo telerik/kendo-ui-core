@@ -203,6 +203,90 @@ Sets a value controlling how the color is applied. Can also be set to the follow
     });
     </script>
 
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the timepicker. If the timepicker has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="timepicker" />
+    <script>
+        $("#timepicker").kendoTimePicker({
+            label: "Date"
+        })
+    </script>
+
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="timepicker" />
+    <script>
+        $("#timepicker").kendoTimePicker({
+                label: function() {
+                    return "Date";
+                }
+        })
+    </script>
+
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="timepicker" />
+    <script>
+        $("#timepicker").kendoTimePicker({
+                label: {
+                    content: "Date"
+                }
+        })
+    </script>
+
+The function context (available through the keyword `this`) will be set to the wid
+get instance.
+
+#### Example - create a label from a function
+
+    <input id="timepicker" />
+    <script>
+        $("#timepicker").kendoTimePicker({
+                label: {
+                    content: function() {
+                        return "Date";
+                    }
+                }
+        })
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the fl
+oating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/timepicker/methods/value) meth
+od **does not trigger** the `focusout` event of the timepicker.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating La
+bel: `$("#timepicker").data("kendoTimePicker").label.floatingLabel.refresh(
+);`
+
+#### Example - create a floating label
+
+    <input id="timepicker" />
+    <script>
+        $("#timepicker").kendoTimePicker({
+                label: {
+                    content: "Date",
+                    floating: true
+                }
+        })
+    </script>
+
+
 ### interval `Number`*(default: "30")*
 
 Specifies the interval, between values in the popup list, in minutes.

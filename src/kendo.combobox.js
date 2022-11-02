@@ -89,8 +89,6 @@ var __meta__ = {
 
             that._oldIndex = that.selectedIndex = -1;
 
-            that._aria();
-
             that._initialIndex = options.index;
 
             that.requireValueMapper(that.options);
@@ -125,6 +123,12 @@ var __meta__ = {
             kendo.notify(that);
             that._toggleCloseVisibility();
             that._applyCssClasses();
+
+            if (options.label) {
+                that._label();
+            }
+
+            that._aria();
         },
 
         options: {
@@ -159,7 +163,8 @@ var __meta__ = {
             popup: null,
             size: "medium",
             fillMode: "solid",
-            rounded: "medium"
+            rounded: "medium",
+            label: null
         },
 
         events: [
@@ -768,6 +773,7 @@ var __meta__ = {
 
                     that._cascadeTriggered = true;
                     that._triggerCascade();
+                    that._refreshFloatingLabel();
                 }
 
                 that._prev = input.value;
@@ -830,6 +836,8 @@ var __meta__ = {
                         that._state = STATE_ACCEPT;
                     }
                     that._toggleCloseVisibility();
+
+                    that._refreshFloatingLabel();
                 });
         },
 
