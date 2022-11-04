@@ -1,6 +1,6 @@
 ---
 title: Remove DropDownList Items
-page_title: Remove Items from the {{ site.product }} DropDownList
+page_title: Remove Items from the DropDownList
 description: "An example on how to remove items from the {{ site.product }} DropDownList."
 slug: dropdownlist-remove-items
 tags: telerik, dropdownlist, remove, items, datasource

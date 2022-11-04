@@ -2,7 +2,7 @@
 title: Create a DropDownList Command Column in the Grid
 description: "An example on how to add a DropDownList commands template within the {{ site.product }} Grid."
 type: how-to
-page_title: Implement Always Visible DropDownList Command Templates in the {{ site.product }} Grid 
+page_title: Implement Always Visible DropDownList Command Templates in the Grid 
 slug: grid-dropdownlist-command-template
 tags: grid, column, template, dropdownlist, command, custom
 ticketid: 1575207

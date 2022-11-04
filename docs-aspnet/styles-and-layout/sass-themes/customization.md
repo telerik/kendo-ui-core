@@ -1,6 +1,6 @@
 ---
 title: Customization
-page_title: Customization - Kendo UI Sass Themes for {{ site.product }}
+page_title: Customization
 description: "Learn how to customize the Telerik UI Sass themes."
 slug: sassbasedthemes_customization_telerikui
 position: 3

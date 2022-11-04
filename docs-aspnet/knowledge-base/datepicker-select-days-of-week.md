@@ -1,6 +1,6 @@
 ---
-title: Select Days of Week DatePicker
-page_title: Select Days of Week from the {{ site.product }} DatePicker
+title: Selecting Week Days in the DatePicker
+page_title: Selecting Week Days in the DatePicker
 description: "An example on how to select days of the week from the {{ site.product }} DatePicker."
 slug: datepicker-select-days-of-week
 tags: telerik, datepicker, select, days, week, depth, calendar

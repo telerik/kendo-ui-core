@@ -1,8 +1,8 @@
 ---
-title: How can I display audio files within the Grid
+title: Displaying Audio Files within the Grid
 description: "An example on how to display audio files within the {{ site.product }} Grid."
 type: how-to
-page_title: How can I display audio files within the {{ site.product }} Grid
+page_title: Displaying Audio Files within the Grid
 slug: grid-display-audio-files
 tags: mvc, core, grid, display, audio, files
 res_type: kb
