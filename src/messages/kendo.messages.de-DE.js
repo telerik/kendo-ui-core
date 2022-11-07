@@ -57,7 +57,7 @@
       });
   }
 
- if (kendo.ui.FilterCell) {
+  if (kendo.ui.FilterCell) {
     kendo.ui.FilterCell.prototype.options.operators =
       $.extend(true, kendo.ui.FilterCell.prototype.options.operators, {
         "date": {
@@ -315,7 +315,7 @@
         "overwriteFile": "Eine Datei mit dem Namen \"{0}\" existiert bereits im aktuellen Verzeichnis. Wollen Sie diese überschreiben?",
         "search": "Suchen",
         "strikethrough": "Durchgestrichen",
-        "styles": "Stil",
+        "style": "Stil",
         "subscript": "Tiefgestellt",
         "superscript": "Hochgestellt",
         "underline": "Unterstrichen",
@@ -454,6 +454,7 @@
           "pdf": "Exportieren als PDF",
           "save": "Änderungen speichern",
           "select": "Wähle",
+          "search": "Suchen...",
           "update": "Aktualisieren"
         },
         "editable": {
@@ -465,22 +466,22 @@
       });
   }
 
-/* ListBox messaages */
+  /* ListBox messaages */
 
-if (kendo.ui.ListBox) {
-kendo.ui.ListBox.prototype.options.messages =
-$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
-  "tools": {
-    "remove": "Löschen",
-    "moveUp": "Nach oben verschieben",
-    "moveDown": "Nach unten verschieben",
-    "transferTo": "Übertragen zu",
-    "transferFrom": "Übertragen von",
-    "transferAllTo": "Übertragen sie alle zu",
-    "transferAllFrom": "Übertragen sie alle von"
+  if (kendo.ui.ListBox) {
+    kendo.ui.ListBox.prototype.options.messages =
+      $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
+        "tools": {
+          "remove": "Löschen",
+          "moveUp": "Nach oben verschieben",
+          "moveDown": "Nach unten verschieben",
+          "transferTo": "Übertragen zu",
+          "transferFrom": "Übertragen von",
+          "transferAllTo": "Übertragen sie alle zu",
+          "transferAllFrom": "Übertragen sie alle von"
+        }
+      });
   }
-});
-}
 
   /* TreeList messages */
 
@@ -563,6 +564,31 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
       });
   }
 
+  /* PivotGrid messages */
+
+  if (kendo.ui.PivotGrid) {
+    kendo.ui.PivotGrid.prototype.options.messages =
+      $.extend(true, kendo.ui.PivotGrid.prototype.options.messages, {
+        "measureFields": "Hier Datenfelder fallen lassen",
+        "columnFields": "Hier Spaltenfelder fallen lassen",
+        "rowFields": "Hier Zeilenfelder fallen lassen"
+      });
+  }
+
+  /* PivotFieldMenu messages */
+
+  if (kendo.ui.PivotFieldMenu) {
+    kendo.ui.PivotFieldMenu.prototype.options.messages =
+      $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
+        "info": "Einträge anzeigen mit Werten, die",
+        "filterFields": "Filterkriterien",
+        "filter": "Filtern",
+        "include": "Felder einbeziehen...",
+        "title": "Felder aufnehmen",
+        "clear": "Löschen"
+      });
+  }
+
   /* Upload messages */
 
   if (kendo.ui.Upload) {
@@ -592,6 +618,7 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
         "allDay": "Ganzer Tag",
         "cancel": "Abbrechen",
         "date": "Datum",
+        "search": "Suchen...",
         "destroy": "Löschen",
         "pdf": "Exportieren als PDF",
         "editable": {
@@ -715,97 +742,97 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
         "minute": "Minute",
         "second": "Sekunde",
         "dayperiod": "AM/PM"
-       });
-    }
+      });
+  }
 
   /* FlatColorPicker messages */
 
   if (kendo.ui.FlatColorPicker) {
     kendo.ui.FlatColorPicker.prototype.options.messages =
-    $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+      $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
         "apply": "Anwenden",
         "cancel": "Abbrechen",
         "noColor": "keine Farbe",
         "clearColor": "Farbe löschen"
-    });
+      });
   }
 
   /* ColorPicker messages */
 
   if (kendo.ui.ColorPicker) {
     kendo.ui.ColorPicker.prototype.options.messages =
-    $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+      $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
         "apply": "Anwenden",
         "cancel": "Abbrechen",
         "noColor": "keine Farbe",
         "clearColor": "Farbe löschen"
-    });
+      });
   }
 
   /* PDFViewer */
 
   if (kendo.ui.PDFViewer) {
     kendo.ui.PDFViewer.prototype.options.messages =
-        $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
-            defaultFileName: "Mein Dokument",
-            toolbar: {
-                zoom: {
-                    zoomOut: "Herauszoomen",
-                    zoomIn: "Hineinzoomen",
-                    actualWidth: "Tatsächliche Breite",
-                    autoWidth: "Automatische Breite",
-                    fitToWidth: "An Breite anpassen",
-                    fitToPage: "An Seite anpassen"
-                },
-                open: "Öffnen",
-                exportAs: "Exportieren",
-                download: "Herunterladen",
-                pager: {
-                    first: "Zur ersten Seite",
-                    previous: "Zur vorherigen Seite",
-                    next: "Zur nächsten Seite",
-                    last: "Zur letzten Seite",
-                    of: " von {0} ",
-                    page: "Seite",
-                    pages: "Seiten"
-                },
-                print: "Drucken",
-                toggleSelection: "Markierungsmodus",
-                togglePan: "Schwenkmodus",
-                search: "Suchen"
-            },
-            errorMessages: {
-                notSupported: "Dateityp nicht unterstützt.",
-                parseError: "Fehler beim Verarbeiten der Datei.",
-                notFound: "Datei konnte nicht gefunden werden.",
-                popupBlocked: "Popups sind blockiert."
-            },
-            dialogs: {
-                exportAsDialog: {
-                    title: "Exportieren...",
-                    defaultFileName: "Dokument",
-                    pdf: "Portable Document Format (.pdf)",
-                    png: "Portable Network Graphics (.png)",
-                    svg: "Scalable Vector Graphics (.svg)",
-                    labels: {
-                        fileName: "Dateiname",
-                        saveAsType: "Speichern als",
-                        page: "Seite"
-                    }
-                },
-                okText: "OK",
-                save: "Speichern",
-                cancel: "Abbrechen",
-                search: {
-                    inputLabel: "Suchtext",
-                    matchCase: "Groß-/Kleinschreibung beachten",
-                    next: "Nächster Treffer",
-                    previous: "Vorheriger Treffer",
-                    close: "Schließen",
-                    of: "von"
-                }
+      $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+        defaultFileName: "Mein Dokument",
+        toolbar: {
+          zoom: {
+            zoomOut: "Herauszoomen",
+            zoomIn: "Hineinzoomen",
+            actualWidth: "Tatsächliche Breite",
+            autoWidth: "Automatische Breite",
+            fitToWidth: "An Breite anpassen",
+            fitToPage: "An Seite anpassen"
+          },
+          open: "Öffnen",
+          exportAs: "Exportieren",
+          download: "Herunterladen",
+          pager: {
+            first: "Zur ersten Seite",
+            previous: "Zur vorherigen Seite",
+            next: "Zur nächsten Seite",
+            last: "Zur letzten Seite",
+            of: " von {0} ",
+            page: "Seite",
+            pages: "Seiten"
+          },
+          print: "Drucken",
+          toggleSelection: "Markierungsmodus",
+          togglePan: "Schwenkmodus",
+          search: "Suchen"
+        },
+        errorMessages: {
+          notSupported: "Dateityp nicht unterstützt.",
+          parseError: "Fehler beim Verarbeiten der Datei.",
+          notFound: "Datei konnte nicht gefunden werden.",
+          popupBlocked: "Popups sind blockiert."
+        },
+        dialogs: {
+          exportAsDialog: {
+            title: "Exportieren...",
+            defaultFileName: "Dokument",
+            pdf: "Portable Document Format (.pdf)",
+            png: "Portable Network Graphics (.png)",
+            svg: "Scalable Vector Graphics (.svg)",
+            labels: {
+              fileName: "Dateiname",
+              saveAsType: "Speichern als",
+              page: "Seite"
             }
-        });
+          },
+          okText: "OK",
+          save: "Speichern",
+          cancel: "Abbrechen",
+          search: {
+            inputLabel: "Suchtext",
+            matchCase: "Groß-/Kleinschreibung beachten",
+            next: "Nächster Treffer",
+            previous: "Vorheriger Treffer",
+            close: "Schließen",
+            of: "von"
+          }
+        }
+      });
   }
 
 })(window.kendo.jQuery);

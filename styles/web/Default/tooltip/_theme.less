@@ -9,6 +9,10 @@
         @tooltip-border
     );
     .box-shadow( @tooltip-shadow );
+
+    .k-callout-s {
+        border-top-color: @tooltip-callout-s-border;
+    }
 }
 each( @theme-colors, {
     .k-tooltip-@{key} {

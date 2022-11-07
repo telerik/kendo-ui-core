@@ -83,6 +83,8 @@ kendo.ui.Editor.prototype.options.messages =
 $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "bold": "Bold",
   "italic": "Italic",
+  "search": "Search",
+  "dropFilesHere": "Drop files here.",
   "underline": "Underline",
   "strikethrough": "Strikethrough",
   "superscript": "Superscript",
@@ -266,7 +268,7 @@ if (kendo.ui.FileManager) {
             },
             deleteConfirm: {
                 title: "Confirm",
-                content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?</br>You cannot undo this action.</p>",
+                content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?<br/>You cannot undo this action.</p>",
                 okText: "Delete",
                 cancel: "Cancel",
                 close: "close"
@@ -1443,7 +1445,7 @@ if (kendo.ui.MultiSelect) {
         "clear": "clear",
         "deleteTag": "delete",
         "noData": "No data found.",
-        "downArrow": "select"
+        "downArrow": "Select"
     });
 }
 

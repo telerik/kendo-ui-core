@@ -11372,6 +11372,83 @@ declare namespace kendo.ui {
         container?: JQuery | undefined;
     }
 
+    class TimeDurationPicker extends kendo.ui.Widget {
+
+        static fn: TimeDurationPicker;
+
+        options: TimeDurationPickerOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): TimeDurationPicker;
+
+        constructor(element: Element, options?: TimeDurationPickerOptions);
+
+
+        destroy(): void;
+        enable(enable: boolean): void;
+        readonly(readonly: boolean): void;
+        value(): number;
+        value(value: number): void;
+
+    }
+
+    interface TimeDurationPickerColumn {
+        format?: string | undefined;
+        max?: number | undefined;
+        min?: number | undefined;
+        name?: string | undefined;
+        step?: number | undefined;
+    }
+
+    interface TimeDurationPickerMessages {
+        cancel?: string | undefined;
+        days?: string | undefined;
+        hours?: string | undefined;
+        milliseconds?: string | undefined;
+        minutes?: string | undefined;
+        seconds?: string | undefined;
+        set?: string | undefined;
+    }
+
+    interface TimeDurationPickerShortcut {
+        text?: string | undefined;
+        value?: number | undefined;
+    }
+
+    interface TimeDurationPickerOptions {
+        name?: string | undefined;
+        columns?: TimeDurationPickerColumn[] | undefined;
+        enable?: boolean | undefined;
+        fillMode?: string | undefined;
+        messages?: TimeDurationPickerMessages | undefined;
+        readonly?: boolean | undefined;
+        rounded?: string | undefined;
+        separator?: string | undefined;
+        shortcuts?: TimeDurationPickerShortcut[] | undefined;
+        value?: number | undefined;
+        size?: string | undefined;
+        change?(e: TimeDurationPickerChangeEvent): void;
+        close?(e: TimeDurationPickerCloseEvent): void;
+        open?(e: TimeDurationPickerOpenEvent): void;
+    }
+    interface TimeDurationPickerEvent {
+        sender: TimeDurationPicker;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface TimeDurationPickerChangeEvent extends TimeDurationPickerEvent {
+    }
+
+    interface TimeDurationPickerCloseEvent extends TimeDurationPickerEvent {
+    }
+
+    interface TimeDurationPickerOpenEvent extends TimeDurationPickerEvent {
+    }
+
     class TextArea extends kendo.ui.Widget {
 
         static fn: TextArea;
@@ -26071,6 +26148,10 @@ interface JQuery {
     kendoTileLayout(): JQuery;
     kendoTileLayout(options: kendo.ui.TileLayoutOptions): JQuery;
     data(key: "kendoTileLayout"): kendo.ui.TileLayout | undefined;
+
+    kendoTimeDurationPicker(): JQuery;
+    kendoTimeDurationPicker(options: kendo.ui.TimeDurationPickerOptions): JQuery;
+    data(key: "kendoTimeDurationPicker"): kendo.ui.TimeDurationPicker;
 
     kendoTimePicker(): JQuery;
     kendoTimePicker(options: kendo.ui.TimePickerOptions): JQuery;

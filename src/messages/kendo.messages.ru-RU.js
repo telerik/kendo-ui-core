@@ -199,6 +199,28 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Нет записей доступны.",
+    "loading": "Loading...",
+    "requestFailed": "Request failed.",
+    "retry": "Retry",
+    "commands": {
+        "edit": "Изменить",
+        "update": "Обновить",
+        "canceledit": "Отмена",
+        "create": "Добавить",
+        "createchild": "Добавить ребенка",
+        "destroy": "Удалить",
+        "excel": "Экспорт в Excel",
+        "pdf": "Экспорт в PDF"
+    }
+});
+}
+
 /* TreeListPager messages */
 
 if (kendo.ui.TreeListPager) {
@@ -295,7 +317,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "justifyRight": "Вправо",
   "outdent": "Уменьшить отступ",
   "strikethrough": "Зачеркнутый",
-  "styles": "Стиль",
+  "style": "Стиль",
   "subscript": "Под строкой",
   "superscript": "Над строкой",
   "underline": "Подчеркнутый",

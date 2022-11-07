@@ -64,6 +64,8 @@ For a full list of the `.NET Core` requirements, see [.NET Core dependencies and
 
 {% endif %}
 
+> Following [Microsoft's announcement about Internet Explorer (IE) being officially retired and out of support](https://learn.microsoft.com/en-us/lifecycle/announcements/internet-explorer-11-end-of-support), the {{ site.product }} and Kendo UI products will no longer support IE as of their R1 2023 release. The components will not be tested against and no fixes will be implemented for any IE version. If your project requires you to use the UI components in IE, it is recommended that you download a product version that is prior to {{ site.product }} R1 2023.
+
 ## Web Browsers Support
 
 The {{ site.product }} helpers and framework components deliver support for all popular browsers. However, depending on the specifics of your project, the components you use, and the versions of the helpers, their browser support may vary. For example, advanced component features usually require more recent browser versions.

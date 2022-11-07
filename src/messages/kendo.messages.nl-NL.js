@@ -142,6 +142,25 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 });
 }
 
+/* FileBrowser messages */
+
+if (kendo.ui.FileBrowser) {
+kendo.ui.FileBrowser.prototype.options.messages =
+$.extend(true, kendo.ui.FileBrowser.prototype.options.messages,{
+  "uploadFile": "Upload",
+  "orderBy": "Arrange by",
+  "orderByName": "Name",
+  "orderBySize": "Size",
+  "directoryNotFound": "A directory with this name was not found.",
+  "emptyFolder": "Empty Folder",
+  "deleteFile": 'Are you sure you want to delete "{0}"?',
+  "invalidFileType": "The selected file \"{0}\" is not valid. Supported file types are {1}.",
+  "overwriteFile": "A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?",
+  "dropFilesHere": "Sleep bestanden hier naar toe om te uploaden",
+  "search": "Zoek"
+});
+}
+
 /* Editor messages */
 
 if (kendo.ui.Editor) {
@@ -195,7 +214,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "overwriteFile": "Het bestand met naam \"{0}\" bestaat reeds in deze map. Wilt u het bestand overschrijven?",
   "search": "Zoek",
   "strikethrough": "Doorhalen",
-  "styles": "Stijlen",
+  "style": "Stijlen",
   "subscript": "Subscript",
   "superscript": "Superscript",
   "underline": "Onderstrepen",
@@ -303,6 +322,28 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "No records to display",
+    "loading": "Loading...",
+    "requestFailed": "Request failed.",
+    "retry": "Opnieuw",
+    "commands": {
+        "edit": "Bewerken",
+        "update": "Bijwerken",
+        "canceledit": "Cancel",
+        "create": "Item toevoegen",
+        "createchild": "Add child record",
+        "destroy": "Verwijderen",
+        "excel": "Export to Excel",
+        "pdf": "Export to PDF"
+    }
+});
+}
+
 /* TreeListPager messages */
 
 if (kendo.ui.TreeListPager) {
@@ -330,6 +371,7 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "Toon hele dag",
   "cancel": "Annuleren",
+  "search": "Zoek",
   "editable": {
     "confirmation": "Weet u zeker dat u deze afspraak wilt verwijderen?"
   },

@@ -59,7 +59,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "insertImage": "Vložiť obrázok",
   "insertFile": "Vložiť súbor",
   "insertHtml": "Vložiť HTML",
-  "viewHtml": "View HTML",
+  "viewHtml": "Náhľad HTML",
   "fontName": "Vyberte písmo",
   "fontNameInherit": "(predvolené písmo)",
   "fontSize": "Vyberte veľkosť písma",
@@ -466,7 +466,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "never": "Nikdy",
     "after": "Po ",
     "occurrence": " opakovaní(-iach)",
-    "on": "On "
+    "on": "V"
   },
   "offsetPositions": {
     "first": "prvý",
@@ -490,6 +490,7 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "celý deň",
   "date": "Dátum",
+  "search": "Hľadať...",
   "event": "Udalosť",
   "time": "Čas",
   "showFullDay": "Zobraziť celý deň",
@@ -528,7 +529,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "allDayEvent": "Celodenný",
     "description": "Popis",
     "repeat": "Opakovať",
-    "timezone": " ",
+    "timezone": "Časové pásmo",
     "startTimezone": "Časové pásmo začiatku",
     "endTimezone": "Časové pásmo konca",
     "separateTimezones": "Rôzne časové pásma pre začiatok a koniec",

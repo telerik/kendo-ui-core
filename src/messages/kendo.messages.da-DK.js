@@ -243,9 +243,26 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "isFalse": "er falskt",
   "isTrue": "er sandt",
   "cancel": "Annuller",
-  "operator": "Operator",
+  "operator": "Operatør",
   "value": "Value",
   "or": "Eller"
+});
+}
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "requestFailed": "Request failed.",
+    "retry": "Forsøg igen",
+    "commands": {
+        "edit": "Redigér",
+        "update": "Opdatér",
+        "canceledit": "Fortryd",
+        "cancel": "Fortryd",
+        "create": "Indsæt",
+        "createchild": "Add child record",
+        "destroy": "Slet"
+    }
 });
 }
 
@@ -282,7 +299,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "justifyRight": "Højrejustér tekst",
   "outdent": "Ryk ud",
   "strikethrough": "Gennemstreget",
-  "styles": "Stilarter",
+  "style": "Stilarter",
   "subscript": "Sænket skrift",
   "superscript": "Hævet skrift",
   "underline": "Understreget",

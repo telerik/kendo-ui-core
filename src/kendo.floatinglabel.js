@@ -79,7 +79,9 @@ var __meta__ = {
                 element.addClass(EMPTY);
             }
 
-            if (document.activeElement === that.options.widget.element[0]) {
+            if (document.activeElement === that.options.widget.element[0]
+                || (that.options.widget.input && document.activeElement === that.options.widget.input[0])) {
+
                 element.addClass(FOCUSED);
             }
         },

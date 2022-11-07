@@ -187,7 +187,7 @@ if (kendo.ui.Editor) {
       "overwriteFile": "Există deja un fișier cu numele \" {0} \" în directorul curent. Doriți să-l suprascrieți ?",
       "search": "Caută",
       "strikethrough": "Tăiat",
-      "styles": "Stiluri",
+      "style": "Stiluri",
       "subscript": "Indice",
       "superscript": "Exponent",
       "underline": "Subliniat",
@@ -308,6 +308,28 @@ if (kendo.ui.Pager) {
     });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+  "noRows": "No records to display",
+  "loading": "Loading...",
+  "requestFailed": "Request failed.",
+  "retry": "Incearcă din nou",
+  "commands": {
+      "edit": "Modifică",
+      "update": "Actualizează",
+      "canceledit": "Cancel",
+      "create": "Adaugă element nou",
+      "createchild": "Add child record",
+      "destroy": "Șterge",
+      "excel": "Export to Excel",
+      "pdf": "Export to PDF"
+  }
+});
+}
+
 /* TreeListPager messages */
 
 if (kendo.ui.TreeListPager) {
@@ -369,6 +391,7 @@ if (kendo.ui.Scheduler) {
       },
       "save": "Salvați",
       "time": "Timp",
+      "search": "Caută...",
       "today": "Astăzi",
       "views": {
         "agenda": "Agendă",

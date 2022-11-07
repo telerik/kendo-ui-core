@@ -3,7 +3,7 @@ title: Rendering and Dimensions
 page_title: jQuery DropDownList Documentation - Rendering and Dimensions
 description: "Get started with the jQuery DropDownList by Kendo UI and configure its layout and the rendering of its elements."
 slug: rendering_dropdownlist_widget
-position: 10
+position: 11
 ---
 
 # Rendering and Dimensions

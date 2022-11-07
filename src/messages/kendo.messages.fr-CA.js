@@ -95,7 +95,7 @@ if (kendo.ui.FileManager) {
           },
           deleteConfirm: {
               title: 'Confirmation de l\'effacement',
-              content: '<p style=\'text-align: center;\'>Voulez-vous vraiment supprimer les fichiers sélectionnés?</br>Il n\'est pas possible d\'annuler cette opération.</p>',
+              content: '<p style=\'text-align: center;\'>Voulez-vous vraiment supprimer les fichiers sélectionnés?<br/>Il n\'est pas possible d\'annuler cette opération.</p>',
               okText: 'Supprimer',
               cancel: 'Annuler',
               close: 'Fermer'

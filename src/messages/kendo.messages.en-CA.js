@@ -247,7 +247,7 @@ if (kendo.ui.FileManager) {
             },
             deleteConfirm: {
                 title: "Confirm",
-                content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?</br>You cannot undo this action.</p>",
+                content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?<br/>You cannot undo this action.</p>",
                 okText: "Delete",
                 cancel: "Cancel",
                 close: "close"

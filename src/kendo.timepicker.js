@@ -210,9 +210,9 @@ var __meta__ = {
                 container.scrollTop(container.scrollTop() + itemHeight);
                 e.preventDefault();
             } else if (key === keys.ENTER) {
-                that._setClickHandler();
+                that._setClickHandler(e);
             } else if (key === keys.ESC) {
-                that._cancelClickHandler();
+                that._cancelClickHandler(e);
             }
         },
 

@@ -89,14 +89,6 @@ span.k-dropdowntree {
         flex: 0 0 @datetime-width;
     }
 
-    .k-time-list-container {
-        justify-content: center;
-    }
-
-    .k-timeselector {
-        outline: none;
-    }
-
     .k-time-tab .k-datetime-selector {
         transform: translateX(-100%);
     }
@@ -143,9 +135,16 @@ span.k-dropdowntree {
     }
 }
 
+.k-time-list-container {
+    display: flex;
+    position: relative;
+    flex: 1 1 auto;
+    overflow: hidden;
+}
+
 // Fast selection
 .k-time-fast-selection {
-    .k-actions {
+    &.k-actions {
         margin-top: 0;
         border-width: 0;
     }
@@ -153,28 +152,23 @@ span.k-dropdowntree {
 
 // Content
 .k-time-list-wrapper {
-    display: inline-block;
-    overflow: hidden;
-    box-sizing: content-box;
-    overflow-x: hidden;
-    overflow-y: auto;
+    display: inline-flex;
     position: relative;
-    padding: @time-list-padding 0;
+    flex-flow: column wrap;
+    flex: 1;
     text-align: center;
-    width: @time-list-width;
+    min-width: @time-list-width;
     height: @time-list-height;
 
     .k-title {
         display: block;
         text-align: center;
         font-size: @time-font-size-xs;
-        position: absolute;
         text-transform: capitalize;
         font-weight: bold;
         min-width: 100%;
-        height: 1.5em;
-        line-height: 1.5em;
-        margin-top: calc(-1 * @time-list-padding);
+        height: @time-list-title-height;
+        line-height: @time-list-title-height;
         z-index: 12;
     }
 
@@ -195,7 +189,7 @@ span.k-dropdowntree {
         }
 
         &::before {
-            top: 0;
+            top: 7px;
         }
 
         &::after {
@@ -205,21 +199,19 @@ span.k-dropdowntree {
 }
 
 .k-time-container {
-    position: absolute;
+    position: relative;
     display: block;
+    flex: 1;
     overflow-x: hidden;
     overflow-y: scroll;
     line-height: @line-height;
-    left: 0;
-    right: 0;
-    top: @time-list-padding;
-    bottom: @time-list-padding;
 
     .hide-scrollbar(right);
 
     > ul {
         height: auto;
         width: @time-list-width;
+        margin: auto;
     }
 
     .k-rtl &,
@@ -230,20 +222,19 @@ span.k-dropdowntree {
     }
 }
 
-.k-time-list-container {
-    display: flex;
-    position: relative;
+.k-timeselector {
+    outline: none;
 }
 
 .k-time-list {
-    position: absolute;
+    position: relative;
     display: flex;
+    flex: 1;
+    padding-top: @spacing[2];
+    padding-bottom: @spacing[4];
     z-index: 10;
     outline: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: 0;
+    overflow: hidden;
 
     &::before,
     &::after {
@@ -267,7 +258,7 @@ span.k-dropdowntree {
 
 .k-time-highlight {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 7px);
     left: 0;
     right: 0;
     transform: translateY(-50%);
@@ -290,7 +281,10 @@ span.k-dropdowntree {
     display: inline-flex;
     align-self: center;
     justify-content: center;
-    height: 100%;
+    align-items: center;
+    height: calc( @button-line-height * 1em + @button-padding-y * 2 );
+    position: relative;
+    top: 7px;
     z-index: 11;
 }
 

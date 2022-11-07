@@ -405,7 +405,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "destroy": "Smazat",
     "edit": "Upravit",
     "excel": "Export do Excelu",
-    "pdf": "Export do PDF",
+    "pdf": "Exportovat do PDF",
     "save": "Uložit změny",
     "select": "Vybrat",
     "update": "Uložit"
@@ -749,7 +749,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "allDayEvent": "Celodenní",
     "description": "Popis",
     "repeat": "Opakování",
-    "timezone": " ",
+    "timezone": "Časové pásmo",
     "startTimezone": "Časové pásmo začátku",
     "endTimezone": "Časové pásmo konce",
     "separateTimezones": "Různá časové pásma pro začátek a konec",

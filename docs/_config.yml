@@ -675,6 +675,8 @@ navigation:
         title: "TimeLine"
     "*timepicker":
         title: "TimePicker"
+    "*timedurationpicker":
+        title: "TimeDurationPicker"
     "*tooltip":
         title: "Tooltip"
     "*toolbar":
@@ -1664,6 +1666,12 @@ defaults:
 
 -
     scope:
+        path: "controls/editors/timedurationpicker"
+    values:
+        component: "date-time-pickers"
+
+-
+    scope:
         path: "controls/editors/dateinput"
     values:
         component: "dateinput"
@@ -2171,6 +2179,7 @@ intro_columns:
       "TextArea": "overview_kendoui_textarea_widget"
       "TextBox": "overview_kendoui_textbox_widget"
       "TimePicker": "overview_kendoui_timepicker_widget"
+      "TimeDurationPicker": "overview_kendoui_timedurationpicker_widget"
       "Upload": "overview_kendoui_upload_widget"
       "Validator": "overview_kendoui_validator_widget"
 

@@ -244,7 +244,7 @@
                     },
                     deleteConfirm: {
                         title: "تأكيد الحذف",
-                        content: "<p style='text-align: center;'>هل أنت متأكد من حذف الملفات المحددة؟?</br>لا يمكنك التراجع عن هذا الإجراء.</p>",
+                        content: "<p style='text-align: center;'>هل أنت متأكد من حذف الملفات المحددة؟?<br/>لا يمكنك التراجع عن هذا الإجراء.</p>",
                         okText: "حذف",
                         cancel: "إلغاء",
                         close: "إغلاق"
