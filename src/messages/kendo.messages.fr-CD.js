@@ -1,5 +1,4 @@
 (function($, undefined) {
-/* Filter cell operator messages */
 
 /* FileManager messages */
 

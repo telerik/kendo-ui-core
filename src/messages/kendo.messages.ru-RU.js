@@ -1,5 +1,6 @@
 (function($, undefined) {
-/* Filter menu operator messages */
+
+/* Filter menu operator messages  */
 
 if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.operators =

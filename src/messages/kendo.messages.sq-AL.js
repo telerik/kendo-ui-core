@@ -10,6 +10,7 @@
 */
 
 (function($, undefined) {
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {

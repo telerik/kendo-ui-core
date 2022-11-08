@@ -13,6 +13,8 @@ To render correctly, the Telerik UI components need the corresponding client-sid
 
 >tip If you used the [automated MSI installer]({%slug msi_install_aspnetmvc6_aspnetmvc%}) to install {{ site.product }}, all required files are already available on your machine and you can skip the downloading instructions and jump to Step 4 below. By default, these js and CSS files are located in the Telerik UI installation folder under `C:\Program Files (x86)\Progress\{{ site.product }} <version>`.
 
+## Adding the Resources
+
 To add the client-side resources to your project:
 
 {% if site.core %}
@@ -29,7 +31,6 @@ To add the client-side resources to your project:
 
 1. Copy the `js` and `styles` folders from the archive to your project under `wwwroot\lib\kendo-ui`.
 
-   ![{{ site.product_short }} Kendo UI resources](/getting-started-core/images/kendo-ui-wwwroot.png)
 
 The culture and localization (the translation of component messages) scripts are included in the `js` folder. For more information on using localization, internationalization, and right-to-left (RTL) support with {{ site.product }} helpers, refer to the article on [globalization support by {{ site.product }}]({% slug overview_globalization_core %}).
 
@@ -210,11 +211,22 @@ The culture and localization (the translation of component messages) scripts are
         </head>
 {% endif %}
 
+## Additional Local Files
+
+Starting with {{ site.product }} version `2022.3.1109`, you can choose between three module systems that allow you to [import the client-side assets]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) into your project: ECMAScript, UMD, and CommonJS.
+
+The files for all of these module systems are available in the [downloaded zip or 7z archive](#adding-the-resources) or in the local installation directory of {{ site.product }}:
+
+* ECMAScript—The script files are located in the **mjs** folder. Available as of `2022.3.1109`.
+* UMD—The script files are located in the **umd** folder. Available as of `2022.3.1109`.
+* CommonJS—The script files are located in the **js** folder.
+
 ## See Also
 
 {% if site.core %}
 * [Using LibMan to Add Client-Side Resources]({% slug using_libman %})
 * [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug custombundles_core %})
 {% endif %}
+* [Using ECMAScript Resources]({% slug core_ecmascript_overview %})
 * [Using CDN to Add Client-Side Resources]({% slug cdnservices_core %})
 * [{{ site.product }} Download and Installation]({% slug downloadinstall_aspnetcore %})

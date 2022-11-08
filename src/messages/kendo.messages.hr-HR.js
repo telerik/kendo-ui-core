@@ -1,6 +1,5 @@
 (function($, undefined) {
 
-
 /* DropDownTree messages */
 
 if (kendo.ui.DropDownTree) {

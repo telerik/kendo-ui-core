@@ -2,6 +2,7 @@
 (function($, undefined) {
 
     /* FlatColorPicker messages */
+
     if (kendo.ui.FlatColorPicker) {
         kendo.ui.FlatColorPicker.prototype.options.messages =
             $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
