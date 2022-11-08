@@ -1,4 +1,5 @@
 (function($, undefined) {
+
 /* ColorGradient messages */
 
 if (kendo.ui.ColorGradient) {

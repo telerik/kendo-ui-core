@@ -9,7 +9,17 @@ position: 1
 
 # Creating Your Own Custom Bundles
 
-Depending on your project, you may need to skip some of the Kendo UI utilities and install only what your application requires.
+Depending on your project, you may need to skip some of the Kendo UI utilities and install only what your application requires.  
+
+To facilitate the customization of your project, Kendo UI for jQuery delivers a set of combined and individual scripts, and also provides further options for scripts customization.
+
+* The [combined scripts bundles](#combined-scripts) contain the scripts of specific types of widgets (for example, desktop, hybrid) available for the different Kendo UI distributions.
+
+* The [individual scripts bundles](#individual-scripts) contain the scripts of widgets grouped by their common functionality (for example, Charts, Editors) so that you can select which individual control to add to your project.  
+
+* Customizing your project by [creating your custom scripts](#custom-scripts) allows you to add the specific widgets and features required by your project.
+
+* [Using ECMAScript]({% slug core_ecmascript_overview %}) allows you to import individual modules in your application. The related dependencies will be automatically bundled alongside their respective modules. This will save you the trouble of having to manually select which scripts to include in your project.
 
 ## Combined Scripts
 

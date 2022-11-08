@@ -1,5 +1,5 @@
 (function($, undefined) {
-    /* FlatColorPicker messages */
+    /* FlatColorPicker messages  */
 
     if (kendo.ui.FlatColorPicker) {
         kendo.ui.FlatColorPicker.prototype.options.messages =
