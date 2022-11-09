@@ -1,6 +1,6 @@
 ---
 title: TimeDurationPicker
-description: Configuration, methods and events of the Kendo UI TimeDurationPicker
+page_title: Configuration, methods and events of the Kendo UI TimeDurationPicker
 description: Code examples and tips how to configure TimeDurationPicker widget, use available methods and events.
 res_type: api
 component: timedurationpicker
