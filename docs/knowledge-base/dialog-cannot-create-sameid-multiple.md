@@ -1,24 +1,32 @@
 ---
-title: Troubleshooting
-page_title: jQuery Dialog Documentation - Troubleshooting
-description: "Get started with the jQuery Dialog by Kendo UI and learn how to deal with issues you may encounter while using the widget."
-slug: troubleshooting_kendoui_dialog
-position: 60
+title: Cannot Create Multiple Same-ID Dialogs
+page_title: Cannot Create Multiple Dialogs with the Same ID
+description: "Learn how to handle the Kendo UI for jQuery Dialog if you are not able to create multiple components with the same ID."
+slug: dialog_cannot_create_sameid_multiple
+tags: telerik, progress, kendoui, jquery, dialog, cannot, create, multiple, same, id, components
+type: troubleshooting
+res_type: kb
+component: dialog
 ---
 
-# Troubleshooting
+## Environment
 
-This article provides solutions for issues you might encounter while working with the Kendo UI Dialog widget.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® for jQuery Dialog</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+</table>
 
-## The scrollbar overlaps on OS X
+## Description 
 
-A scrollbar of an element below the Dialog popup might be displayed incorrectly over the Dialog popup in the Safari and Chrome browsers which run on OS X.
+I'm not able to create multiple jQuery Dialogs with the same ID.
 
-**Solution** Apply the CSS style to the scrollbar container below the Dialog as demonstrated in the example below.
-
-    -webkit-transform: translate3d(0, 0, 0);
-
-## Cannot create multiple Dialogs with the same ID
+## Solution 
 
 To create a Kendo UI Dialog instance multiple times with the same ID, make sure that the existing instance with this ID is [destroyed](#configuration-Destroy) first. Widgets with the same ID [cannot exist and work properly]({% slug initialize_widgets_using_jquery_plugins_installation %}#duplicate-initialization) at one and the same time.
 

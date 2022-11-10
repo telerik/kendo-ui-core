@@ -1,32 +1,38 @@
 ---
-title: Troubleshooting
-page_title: jQuery Diagram Documentation - Troubleshooting
-description: "Get started with the jQuery Diagram by Kendo UI and handle common troubleshooting issues."
-previous_url: /controls/diagrams-and-maps/diagram/troubleshoot/common-issues
-slug: troubleshooting_diagram_widget
-position: 60
+title: Diagram Layout Is Different in the Exported PDF Files
+page_title: The Diagram Layout in the Exported PDF Files Is Different 
+description: "Learn how to handle the Kendo UI for jQuery Diagram component when its layout is different in the exported PDF files."
+slug: diagram_layout_different_pdf
+tags: telerik, progress, kendoui, diagram, pdf, layout, different
+type: troubleshooting
+res_type: kb
+component: diagram
 ---
 
-# Troubleshooting
+## Environment
 
-This article provides solutions for issues you might encounter while working with the Kendo UI Diagram.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® for jQuery Diagram</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+</table>
 
-## The Diagram graphics do not render in Internet Explorer
+## Description 
 
-> If a security message for enabling the Intranet settings appear and you follow its instructions, skip the following steps.
+The layout of the exported Kendo UI for jQuery Diagram to PDF is different from the source. 
 
-**Solution**
-
-1. Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**.
-1. Enable **Binary and script behaviors** by ticking the **Enable** radio button.
-
-![Kendo UI for jQuery Options and settings to apply to render the chart graphics](../../../styles-and-layout/chart-ie-script-behaviors.png)
-
-## The layout in the exported PDF files is different
+## Cause  
 
 Typically, such issues are caused by the different fonts that are used on screen and in the PDF. For display, the browser substitutes the selected font with whatever is provided by the system. During export, you take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF is displayed with a different font which leads to layout and encoding issues.
 
-**Solution** [Make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom), that is, the fonts have to be available as binary TTF files and registered for export. For a runnable example, refer to the [demo on PDF export in the Diagram](https://demos.telerik.com/kendo-ui/diagram/pdf-export).
+## Solution
+
+To handle this issue, [make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom), that is, the fonts have to be available as binary TTF files and registered for export. For a runnable example, refer to the [demo on PDF export in the Diagram](https://demos.telerik.com/kendo-ui/diagram/pdf-export).
 
 ```dojo
 <button class='export-pdf k-button'>Save as PDF</button>

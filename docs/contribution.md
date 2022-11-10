@@ -5,7 +5,6 @@ description: "Share with us your suggestions and feedback on the Kendo UI jQuery
 previous_url: /contribution-to-documents, /updates/2016-doc-updates, /updates/2017-doc-updates, /updates/contribution-to-documents, /backwards-compatibility/contribution-to-documents
 slug: helpimprove_ourdocumentation_kendoui
 position: 41
-published: False
 ---
 
 # Contribution
