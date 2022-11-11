@@ -63,14 +63,14 @@ The two examples below demonstrate how to include individual component modules a
 
     ```html
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.grid.js" type="module"></script> <!-- Include the Grid module. The rest of the dependencies required by the Grid will be loaded automatically. -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/aspnetmvc.min.js" type="module"></script> <!-- Include the global `aspnetmvc.min.js` file. -->
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.aspnetmvc.js" type="module"></script> <!-- Include the global `kendo.aspnetmvc.js` file. -->
     ```
 
 * Including all available modules.
 
     ```html
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script> <!-- Include all Kendo UI modules. -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/aspnetmvc.min.js" type="module"></script> <!-- Include the global `aspnetmvc.min.js` file. -->
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.aspnetmvc.js" type="module"></script> <!-- Include the global `kendo.aspnetmvc.js` file. -->
     ```
 
 ### Using Bundled JavaScript

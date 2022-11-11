@@ -15,14 +15,16 @@ After the completion of this guide, you will be able to achieve the following en
 ```dojo
     <input id="timedurationpicker" />
 
-    $("#timedurationpicker").kendoTimeDurationPicker({
-        columns: [
-            { name: "hours", format: "## hours", min: 8, max: 11 },
-            { name: "minutes", format: "## minutes", min: 15, max: 45, step: 5 },
-            { name: "seconds", format: "## seconds", min: 10, max: 50, step: 10 }
-        ],
-        separator: " || "
-    });
+    <script>
+        $("#timedurationpicker").kendoTimeDurationPicker({
+            columns: [
+                { name: "hours", format: "## hours", min: 8, max: 11 },
+                { name: "minutes", format: "## minutes", min: 15, max: 45, step: 5 },
+                { name: "seconds", format: "## seconds", min: 10, max: 50, step: 10 }
+            ],
+            separator: " || "
+        });
+    </script>
 ```
 
 ## 1. Create an input Element
