@@ -1,21 +1,21 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI NumericTextBox for {{ site.framework }}."
+description: "Discover the Telerik UI NumericTextBox component for {{ site.framework }} that allows the user to select numeric values through direct input or by using spinner buttons"
 previous_url: /helpers/html-helpers/numerictextbox, /helpers/editors/numerictextbox/overview
 slug: htmlhelpers_numerictextbox_aspnetcore
-position: 1
+position: 0
 ---
 
 # NumericTextBox Overview
 
 {% if site.core %}
-The Telerik UI NumericTextBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DatNumericTextBoxaSource widget.
+The Telerik UI NumericTextBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI NumericTextBox widget.
 {% else %}
 The Telerik UI NumericTextBox HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI NumericTextBox widget.
 {% endif %}
 
-The NumericTextBox allows the user to select numeric values through direct input or using spinner buttons.
+The NumericTextBox allows the user to select numeric values through direct input or by using spinner buttons.
 
 * [Demo page for the NumericTextBox HtmlHelper](https://demos.telerik.com/{{ site.platform }}/numerictextbox/index)
 {% if site.core %}
@@ -70,99 +70,24 @@ The NumericTextBox configuration options are passed as attributes.
 
 ## Functionality and Features
 
-* [Formats]({% slug formats_numerictextbox_aspnetcore %})
-* [Input Restrictions]({% slug input_restrictions_numerictextbox_aspnetcore %})
-* [Globalization]({% slug globalization_numerictextbox_aspnetcore %})
-* [Accessibility]({% slug accessibility_numerictextbox_aspnetcore %})
+| Feature | Description |
+|---------|-------------|
+| [Formats]({% slug formats_numerictextbox_aspnetcore %})|The format property of the NumericTextBox allows you to convert a number object to a human-readable string by using the culture-specific settings.|
+| [Labels]({% slug htmlhelpers_labels_numerictextbox %})|The `Label()` method enables you to associate the label HTML element with the NumericTextBox.|
+| [Globalization]({% slug globalization_numerictextbox_aspnetcore %})|The NumericTextBox comes with globalization support that allows you to use the component in apps all over the world.|
+| [Accessibility]({% slug accessibility_numerictextbox_aspnetcore %})|The NumericTextBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_numerictextbox_aspnetcore %}) for faster navigation.|
+| [Input Restrictions]({% slug input_restrictions_numerictextbox_aspnetcore %})|You can restrict the accepted value to a specific range and also control its precision.|
+| [Events]({% slug events_numerictextbox_aspnetcore %})|The NumericTextBox exposes the `Change()` and `Spin()` events that allow you to control its behavior.|
 
-## Events
+## Next Steps
 
-You can subscribe to all NumericTextBox events. For a complete example on basic NumericTextBox events, refer to the [demo on using the events of the NumericTextBox](https://demos.telerik.com/{{ site.platform }}/numerictextbox/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().NumericTextBox()
-          .Name("numerictextbox")
-          .Events(e => e
-                .Change("numerictextbox_change")
-                .Spin("numerictextbox_spin")
-          )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-numerictextbox name="numerictextbox"
-                      on-change="numerictextbox_change"
-                      on-spin="numerictextbox_spin">
-    </kendo-numerictextbox>
-```
-{% endif %}
-```script
-<script>
-    function numerictextbox_spin() {
-        // Handle the spin event.
-    }
-
-    function numerictextbox_change() {
-        // Handle the change event.
-    }
-</script>
-```
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().NumericTextBox()
-        .Name("numerictextbox")
-        .Events(e => e
-            .Change(@<text>
-                function() {
-                    // Handle the change event inline.
-                }
-            </text>)
-            .Spin(@<text>
-                function() {
-                    // Handle the spin event inline.
-                }
-            </text>)
-        )
-    )
-```
-
-## Referencing Existing Instances
-
-To get a reference to the NumericTextBox, always use the `id` attribute instead of a class selector. Behind the scenes, the NumericTextBox creates a secondary element that represents the visual look of the helper and copies all non-`id` attributes including the class. When you use the class for referencing the NumericTextBox, this behavior causes unexpected results.
-
-Once a reference is established, use the [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox#methods) to control its behavior.
-
-The following example demonstrates how to get a reference to an existing instance.
-
-```HtmlHelper
-    @(Html.Kendo().NumericTextBox()
-          .Name("numerictextbox") // The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the helper.
-    )
-```
-{% if site.core %}
-```TagHelper
-<kendo-numerictextbox name="numerictextbox">
-</kendo-numerictextbox>
-```
-{% endif %}
-```script
-    <script>
-        var numericTextBox = $('#numerictextbox').data('kendoNumericTextBox'); // numericTextBox is a reference to the instance of the helper.
-    </script>
-```
-
-## See Also
-
-* [Basic Usage by the NumericTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/index)
+* [Getting Started with the NumericTextBox]({% slug aspnetcore_numerictextbox_getting_started %})
+* [Basic Usage of the NumericTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/index)
 {% if site.core %}
 * [Basic Usage of the NumericTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
 {% endif %}
-* [Using the API of the NumericTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/api)
-* [Known Limitations of the NumericTextBox HtmlHelper for {{ site.framework }}]({% slug limitations_numerictextbox_aspnetcore %})
-* [Server-Side API](/api/numerictextbox)
+## See Also
+
+* [Using the API of the NumericTextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/api)
+* [Known Limitations of the NumericTextBox for {{ site.framework }}]({% slug limitations_numerictextbox_aspnetcore %})
+* [Knowledge Base Section](/knowledge-base)

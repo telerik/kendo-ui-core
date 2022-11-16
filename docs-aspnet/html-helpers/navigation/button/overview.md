@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Button component for {{ site.framework }}."
+description: "Discover the Telerik UI Button component for {{ site.framework }} that provides features like Badges, Icons, and numerous built-in configuration options."
 previous_url: /helpers/html-helpers/button, /helpers/navigation/button/overview
 slug: htmlhelpers_button_aspnetcore
-position: 1
+position: 0
 ---
 
 # Button Overview
@@ -35,14 +35,14 @@ The following example demonstrates how to define the Button.
 ```
 {% if site.core %}
 ```TagHelper
-	<kendo-button name="textButton">Click here!</kendo-button>
+    <kendo-button name="textButton" type="button">Text Button</kendo-button>
 ```
 {% endif %}
 
 ## Basic Configuration
 
-* The `Name()` configuration method is mandatory as its value will be used for the `id` and the `name` attributes of the Button element. Moreover, the `id` is used in order to properly initialize the Button widget. The `id` attribute value is also used to retrieve its client-side instance.
-* The `Content()` configuration specifies the text that would be rendered in the button. This option does not accept HTML, but only string values.
+* The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the Button element. Moreover, the `id` is used to properly initialize the Button widget. You can also use the value of the `id` attribute to retrieve the client-side instance of the Button.
+* The `Content()` configuration specifies the text that is rendered within the button. This option does not accept HTML, but only string values.
 * The `Enable()` option determines whether the widget will be initially enabled (by default) of disabled.
 * The `Tag()` method allows the developer to determine whether the widget will be initialized from a `<button>` element (by default), or from an `<a>` element.
 
@@ -82,44 +82,20 @@ The following example demonstrates the available configuration options for the B
 
 ## Functionality and Features
 
-* [Disabled Button]({% slug disabled_buttonhelper_aspnetmvc %})
-* [Icon Button]({% slug icons_button_aspnetcore %})
-* [Badge Button]({% slug badges_button_aspnetcore %})
+* [Disabled Button]({% slug disabled_buttonhelper_aspnetmvc %})&mdash;You can render the Button as disabled until certain conditions are met.
+* [Icon Button]({% slug icons_button_aspnetcore %})&mdash;The variety of icons allow you to enhance the appearance of the button. 
+* [Badge Button]({% slug badges_button_aspnetcore %})&mdash;You can add a Badge to the Button to conveniently show its status, a notification, or a short message.
+* [Events]({% slug events_button_aspnetcore %})&mdash;The Button allows you to handle its click event and implement custom functionality.
 
-## Events
+## Next Steps
 
-The Button HTML helper exposes only a `Click()` event that can be handled. For a complete example on basic Button events, refer to the [demo on using the events of the Button](https://demos.telerik.com/{{ site.platform }}/button/events).
-
-```HtmlHelper
-	@(Html.Kendo().Button()
-		.Name("button")
-		.Content("Sample Button")
-		.Events(e => e.Click("onClick"))
-	)
-```
-{% if site.core %}
-```TagHelper
-<kendo-button name="textButton"
-              on-click="onClick">
-    Sample Button
-</kendo-button>
-```
-{% endif %}
-```script
-	<script>
-		function onClick() {
-			alert('Button clicked!')
-			window.location.href = 'https://en.wikipedia.org/';
-		}
-	</script>
-```
-
-## See Also
-
+* [Getting Started with the Button]({% slug aspnetcore_button_getting_started %})
 * [Basic Usage of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/index)
 {% if site.core %}
 * [Basic Usage of the Button TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/tag-helper)
 {% endif %}
-* [Using the API of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/api)
-* [Button Server-Side API](/api/button)
-* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+
+## See Also
+
+* [Using the API of the Button for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/api)
+* [Knowledge Base Section](/knowledge-base)
