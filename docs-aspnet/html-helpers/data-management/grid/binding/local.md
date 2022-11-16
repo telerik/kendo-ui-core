@@ -77,6 +77,8 @@ To configure the Grid for {{ site.framework }} to do local binding:
             })
         )
     ```
+    ```TagHelper
+    ```
     
 1. Build and run the application.
 
