@@ -2,7 +2,7 @@
 title: Pass Additional Parameters to Custom DataSource
 description: An example on how to send additional parameters to a custom DataSource in the Kendo UI Grid.
 type: how-to
-page_title: Pass Parameters to Custom DataSource in the Grid | Kendo UI Grid for ASP.NET MVC 
+page_title: Pass Parameters to Custom DataSource in the Grid - Kendo UI Grid for ASP.NET MVC 
 slug: grid-additional-parameters-custom-datasource
 tags: grid, custom, datasource, additional, parameters
 res_type: kb

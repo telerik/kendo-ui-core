@@ -1,6 +1,6 @@
 ---
 title: Add Row Numbers
-page_title: Add Row Numbers | Kendo UI Grid for jQuery
+page_title: Add Row Numbers - Kendo UI Grid for jQuery
 description: "An example on how to implement row numbers in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Templates/add-row-numbers
 slug: howto_addrownumbers_grid

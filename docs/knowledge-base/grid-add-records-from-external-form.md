@@ -2,7 +2,7 @@
 title: Add Records from External Form
 description: How to Add Items from External Form
 type: how-to
-page_title: How to Add Items from External Form | Kendo UI Grid for jQuery
+page_title: How to Add Items from External Form - Kendo UI Grid for jQuery
 slug: grid-add-records-from-external-form
 position: 
 tags: 

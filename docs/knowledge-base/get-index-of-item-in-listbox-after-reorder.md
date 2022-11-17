@@ -2,7 +2,7 @@
 title: Get Data Index in the ListBox after Reordering
 description: An example on how to get the index of a ListBox item after reordering.
 type: how-to
-page_title: Get the Index of an Item after Reordering | Kendo UI ListBox for jQuery
+page_title: Get the Index of an Item after Reordering - Kendo UI ListBox for jQuery
 slug: get-index-of-item-in-listbox-after-reorder
 tags: listbox, datasource
 ticketid: 1112980

@@ -2,7 +2,7 @@
 title: Make a Dialog Draggable
 description: An example on how to make the Dialog draggable
 type: how-to
-page_title: How to Make the Dialog Draggable | Kendo UI Dialog for jQuery
+page_title: How to Make the Dialog Draggable - Kendo UI Dialog for jQuery
 slug: make-the-dialog-draggable
 tags: kendo, kendoui, dialog, draggable
 ticketid: 1360178

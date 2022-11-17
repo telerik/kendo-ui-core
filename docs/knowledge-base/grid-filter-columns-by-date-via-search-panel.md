@@ -2,7 +2,7 @@
 title: Filter Grid columns by date via Search Panel
 description: An example of how to filter columns by date via Search Panel in Kendo UI Grid for jQuery
 type: how-to
-page_title: Filter columns by date via Search Panel | Kendo UI Grid for jQuery
+page_title: Filter columns by date via Search Panel - Kendo UI Grid for jQuery
 slug: grid-filter-columns-by-date-via-search-panel
 tags: grid, search, panel, filter, date, format, columns
 ticketid: 1459985

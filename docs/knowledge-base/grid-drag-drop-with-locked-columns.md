@@ -2,7 +2,7 @@
 title: Drag and drop rows in a grid with locked columns
 description: An example on how to make the locked part of the grid sortable and use the frozen columns to drag drop and reorder rows in the Kendo UI Grid.
 type: how-to
-page_title: Reorder rows in a grid with frozen columns | Kendo UI Grid for jQuery
+page_title: Reorder rows in a grid with frozen columns - Kendo UI Grid for jQuery
 slug: grid-drag-drop-with-locked-columns
 tags: grid, drag, drop, locked, sortable, reorder, frozen
 ticketid: 1413617

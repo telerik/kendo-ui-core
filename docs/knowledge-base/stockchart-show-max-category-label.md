@@ -2,7 +2,7 @@
 title: Show Maximum Value of categoryAxis.labels All the Time in Kendo UI StockChart
 description: Learn how to display the maximum value of the catergoryAxis.label in the Kendo UI StockChart even when it is not in the selected range
 type: how-to
-page_title: Display the Maximum Value of X-Axis Label | Kendo UI StockChart
+page_title: Display the Maximum Value of X-Axis Label - Kendo UI StockChart
 slug: stockchart-show-max-category-label
 position: 
 tags: stockchart, label, max, maximum, values, axis, navigation, selection, range

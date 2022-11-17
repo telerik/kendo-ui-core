@@ -1,6 +1,6 @@
 ---
 title: Print the Barcode
-page_title: Print the Barcode | Kendo UI Barcode for jQuery
+page_title: Print the Barcode - Kendo UI Barcode for jQuery
 description: An example on how to print a Kendo UI Barcode.
 type: how-to
 slug: barcode-how-to-print-the-barcode

@@ -1,6 +1,6 @@
 ---
 title: Use Grid Filtering with Kendo UI RangeSliders
-page_title: RangeSlider in Filter Menu | Kendo UI Grid for jQuery
+page_title: RangeSlider in Filter Menu - Kendo UI Grid for jQuery
 description: "An example on how to create range filtering in the Kendo UI Grid for jQuery by using the Kendo UI RangeSlider."
 previous_url: /controls/data-management/grid/how-to/use-range-slider-in-filter-menu, /controls/data-management/grid/how-to/filtering/use-range-slider-in-filter-menu
 slug: howto_gridfiltering_rangefilteringwithslider_grid

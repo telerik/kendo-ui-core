@@ -2,7 +2,7 @@
 title: Add New Points to a Scatter Line Chart
 description: An example demonstrating how to dynamically draw points onto a Kendo UI Scatter Line Chart
 type: how-to
-page_title: Inserting Points into Scatter Line Chart | Kendo UI Chart for jQuery
+page_title: Inserting Points into Scatter Line Chart - Kendo UI Chart for jQuery
 slug: chart-new-point-draw-scatter-line
 tags: chart, new, point, draw, scatter, line
 ticketid: 1398949

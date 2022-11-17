@@ -1,6 +1,6 @@
 ---
 title: Align Zero With Multiple Axes in Chart
-page_title: Align Zero With Multiple Axes in Chart | Kendo UI Chart for jQuery
+page_title: Align Zero With Multiple Axes in Chart - Kendo UI Chart for jQuery
 description: An example on how to align the zero value for multiple value axes in a Kendo UI Chart.
 type: how-to
 slug: chart-align-zero-multiple-axes

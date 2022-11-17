@@ -2,7 +2,7 @@
 title: Use Custom Button Templates instead of Default Commands for Inline Edit and Delete Functionalities
 description: An example on how to use custom button templates instead of the default commands to edit and delete records in a Kendo UI Grid in inline edit mode.
 type: how-to
-page_title: Use Custom Button Templates instead of Default Commands for Inline Edit and Delete Functionalities | Kendo UI Grid for jQuery
+page_title: Use Custom Button Templates instead of Default Commands for Inline Edit and Delete Functionalities - Kendo UI Grid for jQuery
 slug: inline-edit-with-custom-button-template
 tags: inline, edit, delete, custom, button, template, commands, grid
 ticketid: 1133582

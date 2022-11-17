@@ -2,7 +2,7 @@
 title: Get all the Groups and SubGroups in Grid
 description: An example on how to loop and obtain all the groups in a grid grouped by multiple fields in the Kendo UI Grid.
 type: how-to
-page_title: Iterate over all Groups | Kendo UI Grid for jQuery
+page_title: Iterate over all Groups - Kendo UI Grid for jQuery
 slug: grid-loop-all-groups
 tags: grid, group, loop, iterate, obtain, get, all, multiple, nested, subgroups
 ticketid: 1160159

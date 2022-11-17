@@ -2,7 +2,7 @@
 title: Hybrid UI Widgets Do Not Load in MVVM Environment
 description: Adding Hybrid UI widgets by using the data-role attributes in MVVM is not working.
 type: troubleshooting
-page_title: Hybrid UI Widgets Do Not Load When Initialized Declaratively in MVVM | Kendo Hybrid UI
+page_title: Hybrid UI Widgets Do Not Load When Initialized Declaratively in MVVM - Kendo Hybrid UI
 slug: hybridui-widgets-do-not-load-in-mvvm-app
 tags: hybrid-ui, mvvm, switch, splitview, scrollview
 ticketid: 1157657

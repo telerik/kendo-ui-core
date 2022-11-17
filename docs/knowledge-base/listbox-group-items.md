@@ -2,7 +2,7 @@
 title: ListBox with Grouping 
 description: An example on how to make the items in the ListBox appear grouped.
 type: how-to
-page_title: Group Items | Kendo UI ListBox for jQuery
+page_title: Group Items - Kendo UI ListBox for jQuery
 slug: listbox-group-items
 tags: listbox, group, items
 ticketid: 1342501

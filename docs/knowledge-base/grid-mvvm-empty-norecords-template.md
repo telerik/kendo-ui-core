@@ -2,7 +2,7 @@
 title: Configure the NoRecords Data Attribute for Empty Grids
 description: An example on how to add a noRecords.template to an MVVM Kendo UI Grid.
 type: how-to
-page_title: Customize the NoRecords Template with MVVM | Kendo UI Grid for jQuery
+page_title: Customize the NoRecords Template with MVVM - Kendo UI Grid for jQuery
 slug: grid-mvvm-empty-norecords-template
 tags: grid, mvvm, empty, norecords, template
 ticketid: 1123131

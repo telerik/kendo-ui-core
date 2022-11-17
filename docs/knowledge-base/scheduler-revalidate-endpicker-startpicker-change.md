@@ -2,7 +2,7 @@
 title: Re-validate End DatePicker OnStart DatePicker Change
 description: An example on how to revalidate the end DatePicker when the date in the start DatePicker is changed in the Kendo UI Scheduler.
 type: how-to
-page_title: Re-validate End Picker On Start Picker Change | Kendo UI Scheduler for jQuery
+page_title: Re-validate End Picker On Start Picker Change - Kendo UI Scheduler for jQuery
 slug: scheduler-revalidate-endpicker-startpicker-change
 tags: kendo, kendoui, scheduler, validate, datetimepicker, start, end
 ticketid: 1419532

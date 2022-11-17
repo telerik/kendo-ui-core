@@ -2,7 +2,7 @@
 title: Grid Remove Filters
 description: An example on how to remove filters applied to the DataSource of Kendo UI Grid.
 type: how-to
-page_title: Remove Filters | Kendo UI Grid for jQuery
+page_title: Remove Filters - Kendo UI Grid for jQuery
 slug: grid-remove-filters
 tags: grid, filters, remove, dataSource, toolbar
 res_type: kb

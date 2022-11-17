@@ -2,7 +2,7 @@
 title: The Horizontal Scrollbar of the Grid Moves Slowly
 description: The horizontal scrollbar of the Kendo UI Grid moves very slowly.
 type: troubleshooting
-page_title: The Horizontal Scrollbar Moves Slowly | Kendo UI Grid for jQuery
+page_title: The Horizontal Scrollbar Moves Slowly - Kendo UI Grid for jQuery
 slug: grid-horizontal-scroll-slow
 position:
 tags: grid, scroll, horizontal, moving, slow, not, working, scrollbar

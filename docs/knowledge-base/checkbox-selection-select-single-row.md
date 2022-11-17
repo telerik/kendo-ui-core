@@ -2,7 +2,7 @@
 title: Select Only One Grid Row with the Checkbox Selectable Column
 description: An example on how to select only a single row by using the built-in checkbox column of the Kendo UI Grid and remove the master checkbox.
 type: how-to
-page_title: Limit the Selection to a Single Row | Kendo UI Grid for jQuery
+page_title: Limit the Selection to a Single Row - Kendo UI Grid for jQuery
 slug: checkbox-selection-select-single-row
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716

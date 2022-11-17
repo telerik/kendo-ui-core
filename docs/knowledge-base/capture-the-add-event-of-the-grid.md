@@ -1,6 +1,6 @@
 ---
 title: Capture the Event for Adding New Rows
-page_title: Capture the add Event | Kendo UI Grid for jQuery
+page_title: Capture the add Event - Kendo UI Grid for jQuery
 description: An example on how to capture the add event of the Kendo UI Grid.
 type: how-to
 slug: how-to-capture-the-add-event-of-the-grid

@@ -2,7 +2,7 @@
 title: Filter both Parent and Child Grids in Hierarchy
 description: An example on how to apply filters on both parent and child Grids in Hierarchy.
 type: how-to
-page_title: Update Adjacent Cells in Rows in Inline Edit Mode | Kendo UI Grid for jQuery
+page_title: Update Adjacent Cells in Rows in Inline Edit Mode - Kendo UI Grid for jQuery
 slug: grid-apply-filter-parent-child
 tags: grid, filter, parent, child, hierarchy, detail
 ticketid: 1573560

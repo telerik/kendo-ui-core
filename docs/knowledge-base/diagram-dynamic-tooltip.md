@@ -2,7 +2,7 @@
 title: Dynamic Tooltip in Diagram
 description: An example on how to conditionally show a tooltip over shapes.
 type: how-to
-page_title: Custom Shape Tooltip | Kendo UI Diagram for jQuery
+page_title: Custom Shape Tooltip - Kendo UI Diagram for jQuery
 slug: diagram-dynamic-tooltip
 tags: diagram, tooltip, shapes, custom, background, conditional, dynamic, show
 ticketid: 1433776

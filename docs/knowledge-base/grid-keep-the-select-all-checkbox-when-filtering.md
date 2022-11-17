@@ -2,7 +2,7 @@
 title: Always visible select all checkbox
 description: The Grid should always show the select all checkbox when filtering with the multi filter checkbox. 
 type: how-to
-page_title: Grid select all should always be visible when filtering | Kendo UI Grid
+page_title: Grid select all should always be visible when filtering - Kendo UI Grid
 slug: grid-keep-the-select-all-checkbox-when-filtering
 tags: grid, selctall, multi, filter, show, check, checkbox
 ticketid: 1498839

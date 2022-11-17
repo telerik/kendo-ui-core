@@ -2,7 +2,7 @@
 title: Grid Foreign Key DropDown Editor with Filter TextBox
 description: An example on how to customize the built-in dropdownlist editor of the foreign key column to include a filter in the Kendo UI Grid.
 type: how-to
-page_title: Grid Foreign Key DropDown Editor with Filter | Kendo UI Grid for jQuery
+page_title: Grid Foreign Key DropDown Editor with Filter - Kendo UI Grid for jQuery
 slug: grid-foreign-key-dropdown-with-filter
 tags: grid, fk, foreign, key, dropdown, filter, contains, search, custom, edit
 ticketid: 1148304

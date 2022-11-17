@@ -2,7 +2,7 @@
 title: Show empty Pie when no data available
 description: An example on how to show an empty pie chart when no data is available.
 type: how-to
-page_title: Render Blank Pie Chartwhen no data | Kendo UI Chart for jQuery
+page_title: Render Blank Pie Chartwhen no data - Kendo UI Chart for jQuery
 slug: chart-show-empty-pie-when-no-data
 tags: chart, pie, empty, blank, no data
 ticketid: 1167421

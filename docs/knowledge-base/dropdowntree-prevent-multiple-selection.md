@@ -2,7 +2,7 @@
 title: Prevent Multiple Selection in the DropDownTree
 description: An example on how to prevent multiple selection in the Kendo UI Editor.
 type: how-to
-page_title: Prevent Multiple Selection | Kendo UI Editor for jQuery
+page_title: Prevent Multiple Selection - Kendo UI Editor for jQuery
 slug: dropdowntree-prevent-multiple-selection
 tags: dropdowntree, prevent, multiple, selection
 res_type: kb

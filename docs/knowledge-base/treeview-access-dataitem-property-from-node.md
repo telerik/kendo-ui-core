@@ -2,7 +2,7 @@
 title: Access TreeView Node DataItem Property
 description: An example demonstrating how to access the ID of the DataItem that corresponds to a TreeView node
 type: how-to
-page_title: Access Property of DataItem from TreeView Node | Kendo UI TreeView for jQuery
+page_title: Access Property of DataItem from TreeView Node - Kendo UI TreeView for jQuery
 slug: treeview-access-dataitem-property-from-node
 tags: treeview, access, dataitem, data, item, property, node, id
 ticketid: 1158103

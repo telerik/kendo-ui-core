@@ -1,6 +1,6 @@
 ---
 title: Add z-index to series of a Chart
-page_title: Add z-index to series of a Chart | Kendo UI Chart for jQuery
+page_title: Add z-index to series of a Chart - Kendo UI Chart for jQuery
 description: An example on how to show a marker of a Chart over the other series.
 type: how-to
 slug: chart-z-index

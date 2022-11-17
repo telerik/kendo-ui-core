@@ -2,7 +2,7 @@
 title: Refocus the NumericTextBox after Switching to a Different Browser Tab
 description: "Refocus the Kendo UI NumericTextBox after the browser tab has been changed."
 type: how-to
-page_title: Refocus the NumericTextBox after Switching to a Different Browser Tab | Kendo UI NumericTextBox for jQuery
+page_title: Refocus the NumericTextBox after Switching to a Different Browser Tab - Kendo UI NumericTextBox for jQuery
 slug: numerictextbox-refocus-on-browser-tab-change
 tags: numerictextbox, refocus, activelement, focus, tab, browser, change, window, input, visibilitychange
 res_type: kb

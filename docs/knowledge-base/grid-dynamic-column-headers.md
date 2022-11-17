@@ -2,7 +2,7 @@
 title: Grid with a Dynamic Column Header
 description: An example on how to change multi header title of the Kendo UI Grid dynamically based on Date Picker value change
 type: how-to
-page_title: Dynamically Change the Grid Column Header | Kendo UI Grid for jQuery
+page_title: Dynamically Change the Grid Column Header - Kendo UI Grid for jQuery
 slug: grid-dynamic-column-headers
 tags: grid, dynamically, column, header, dynamic, title, change, update, multi
 res_type: kb

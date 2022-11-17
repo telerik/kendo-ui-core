@@ -1,6 +1,6 @@
 ---
 title: Bind the viewModel in the noData Template of the ComboBox
-page_title: Bind the viewModel in the noData Template | Kendo UI ComboBox for jQuery
+page_title: Bind the viewModel in the noData Template - Kendo UI ComboBox for jQuery
 description: An example on how to bind the viewModel in the noData template of the Kendo UI ComboBox.
 type: how-to
 slug: bind-model-nodatatemplate-combobox

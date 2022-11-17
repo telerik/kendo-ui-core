@@ -1,6 +1,6 @@
 ---
 title: Use ASMX Service with CRUD Operations
-page_title: ASMX Service with CRUD Operations | Kendo UI Grid for jQuery
+page_title: ASMX Service with CRUD Operations - Kendo UI Grid for jQuery
 description: "An example on how to use the ASMX service with CRUD operations in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-web-service---crud
 slug: howto_crud_web_service_grid

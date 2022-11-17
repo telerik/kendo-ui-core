@@ -2,7 +2,7 @@
 title: Grid Remove Filter By Field Name
 description: "An example on how to remove a specific filter applied to the DataSource of Kendo UI Grid."
 type: how-to
-page_title: Remove Filter By Field Name | Kendo UI Grid for jQuery
+page_title: Remove Filter By Field Name - Kendo UI Grid for jQuery
 slug: grid-remove-filter-by-field-name
 tags: grid, filters, remove, dataSource, toolbar, field, fieldname, filter
 res_type: kb

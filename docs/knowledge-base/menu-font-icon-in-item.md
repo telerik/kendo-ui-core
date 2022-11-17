@@ -2,7 +2,7 @@
 title: Add Font Icons to Menu Items
 description: An example on how to add font icons to a Kendo UI Menu item.
 type: how-to
-page_title: Add Font Icons to Menu Items | Kendo UI Menu
+page_title: Add Font Icons to Menu Items - Kendo UI Menu
 slug: menu-font-icon-in-item
 tags: font,icon,menu
 ticketid: 1413471

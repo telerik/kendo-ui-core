@@ -2,7 +2,7 @@
 title: Implement Calculated Columns with Batch Editing in Grids
 description: An example on how to implement a calculated column in a Kendo UI Grid for jQuery with enabled Batch (InCell) editing.
 type: how-to
-page_title: Implement Calculated Columns from Multiple Fields in a Grid with the Batch Edit Mode Enabled | Kendo UI Grid for jQuery
+page_title: Implement Calculated Columns from Multiple Fields in a Grid with the Batch Edit Mode Enabled - Kendo UI Grid for jQuery
 slug: grid-calculated-column-with-batch-editing
 tags: grid, batch, incell, calculated
 res_type: kb

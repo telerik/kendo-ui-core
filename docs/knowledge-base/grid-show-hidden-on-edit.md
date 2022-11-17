@@ -2,7 +2,7 @@
 title: Show Hidden Columns When Editing the Grid
 description: An example on how to show the hidden columns when editing a Kendo UI Grid.
 type: how-to
-page_title: Show Hidden Columns When Editing the Grid | Kendo UI Grid for jQuery
+page_title: Show Hidden Columns When Editing the Grid - Kendo UI Grid for jQuery
 slug: grid-show-hidden-on-edit
 tags: grid, edit, show, hidden, on, editor
 res_type: kb

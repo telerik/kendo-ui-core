@@ -2,7 +2,7 @@
 title: Sort ListBox Items on Add
 description: An example on how to sort the Kendo UI ListBox items when a new one is added.
 type: how-to
-page_title: Sort Items on Adding a New One | Kendo UI ListBox for jQuery
+page_title: Sort Items on Adding a New One - Kendo UI ListBox for jQuery
 slug: listbox-sort-items-on-add
 tags: listbox, sort, items, order, drag, add, new, drop
 ticketid: 1141126

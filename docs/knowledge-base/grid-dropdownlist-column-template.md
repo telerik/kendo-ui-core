@@ -2,7 +2,7 @@
 title: Make DropDownList Column Always Visible
 description: An example on how to add a DropDownList column template to the Kendo UI Grid.
 type: how-to
-page_title: Implement DropDownList Column Template | Kendo UI Grid for jQuery
+page_title: Implement DropDownList Column Template - Kendo UI Grid for jQuery
 slug: grid-dropdownlist-column-template
 tags: grid, column, template, dropdownlist
 ticketid: 1138249

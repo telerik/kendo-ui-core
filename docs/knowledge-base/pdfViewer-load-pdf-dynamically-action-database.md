@@ -2,7 +2,7 @@
 title: Load a PDF Document Dynamically
 description: An example on how to load a PDF document into a Kendo UI PDFViewer dynamically from a controller or a database.
 type: how-to
-page_title: Load PDF Dynamically from the Server or Database | Kendo UI PDFViewer for jQuery
+page_title: Load PDF Dynamically from the Server or Database - Kendo UI PDFViewer for jQuery
 slug: pdfViewer-load-pdf-dynamically-action-database
 tags: pdfviewer, load, pdf, server, dynamically
 ticketid: 1418499, 1418533

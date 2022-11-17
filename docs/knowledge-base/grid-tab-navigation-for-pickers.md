@@ -2,7 +2,7 @@
 title: Tab Navigation for Filter Menu Date Pickers
 description: How to Achieve Tab Navigation for Filter Menu Date Pickers
 type: how-to
-page_title: How to Achieve Tab Navigation for Filter Menu Date Pickers | Kendo UI Grid for jQuery
+page_title: How to Achieve Tab Navigation for Filter Menu Date Pickers - Kendo UI Grid for jQuery
 slug: grid-tab-navigation-for-pickers
 position: 
 tags: 

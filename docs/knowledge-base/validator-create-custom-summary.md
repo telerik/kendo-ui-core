@@ -2,7 +2,7 @@
 title: Create a Custom Validation Summary
 description: How to Create a Custom Validation Summary
 type: how-to
-page_title: How to Create a Custom Validation Summary | Kendo UI Validator for jQuery
+page_title: How to Create a Custom Validation Summary - Kendo UI Validator for jQuery
 slug: validator-create-custom-summary
 position: 
 tags: 

@@ -2,7 +2,7 @@
 title: How To Expand Parent Node If Child Is Checked
 description: An example on how to expand a parent node if at least one child node is checked.
 type: how-to
-page_title: Expand Parent Node If Child Node Is Checked | Kendo UI TreeView for jQuery
+page_title: Expand Parent Node If Child Node Is Checked - Kendo UI TreeView for jQuery
 slug: treeview-expand-parent-checked-child
 tags: menu, iframe
 ticketid: 1524346

@@ -1,6 +1,6 @@
 ---
 title: Edit Records Using External Forms
-page_title: Editing Records via External Forms | Kendo UI Grid for jQuery
+page_title: Editing Records via External Forms - Kendo UI Grid for jQuery
 description: "An example on how to edit records through an external form in the Kendo UI Grid widget for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-external-form-editing
 slug: howto_edit_records_using_external_forms_grid

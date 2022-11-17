@@ -1,6 +1,6 @@
 ---
 title: Filter Grid as You Type
-page_title: Filter as You Type | Kendo UI Grid for jQuery
+page_title: Filter as You Type - Kendo UI Grid for jQuery
 description: "An example on how to filter the jQuery Grid by Kendo UI on the fly, as the user types in the filter row textbox."
 previous_url: /controls/data-management/grid/how-to/grid-filter-as-you-type, /web/grid/how-to/grid-filter-as-you-type, /controls/data-management/grid/how-to/filtering/grid-filter-as-you-type
 slug: howto_filter_gridas_you_type_grid

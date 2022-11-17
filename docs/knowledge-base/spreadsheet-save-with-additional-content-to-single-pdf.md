@@ -2,7 +2,7 @@
 title: Mix and Save Spreadsheet and Other Type of Content in Single PDF
 description: An example on how to merge the Kendo UI Spreadsheet into the same PDF file on which other parts of the page are combined.
 type: how-to
-page_title: Save Spreadsheet and Other Content to the Same PDF | Kendo UI Spreadsheet and PDF for jQuery
+page_title: Save Spreadsheet and Other Content to the Same PDF - Kendo UI Spreadsheet and PDF for jQuery
 slug: spreadsheet-save-with-additional-content-to-single-pdf
 tags: spreadsheet,pdf,drawing,single-pdf
 ticketid: 1135953

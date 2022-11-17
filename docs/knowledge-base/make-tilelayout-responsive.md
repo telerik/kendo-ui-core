@@ -2,7 +2,7 @@
 title: Make TileLayout Columns Responsive
 description: "Learn How to Make TileLayout Columns Responsive"
 type: how-to
-page_title: How to Make TileLayout Columns Responsive | Kendo UI TileLayout for jQuery
+page_title: How to Make TileLayout Columns Responsive - Kendo UI TileLayout for jQuery
 slug: make-tilelayout-columns-responsive-tilelayout
 tags: kendo, jquery, tilelayout, responsive, columns
 ticketid: 1580279

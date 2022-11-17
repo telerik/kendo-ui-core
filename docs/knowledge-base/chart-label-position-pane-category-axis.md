@@ -2,7 +2,7 @@
 title: Place Labels under Panes in CategoryAxis
 description: An example on how to position the CategoryAxis labels of the Kendo UI Chart below each series in a pane.
 type: how-to
-page_title: Position CategoryAxis Labels under Multiple Panes | Kendo UI Chart
+page_title: Position CategoryAxis Labels under Multiple Panes - Kendo UI Chart
 slug: chart-label-position-pane-category-axis
 tags: chart, label, position, pane, category, axis
 ticketid: 1411207

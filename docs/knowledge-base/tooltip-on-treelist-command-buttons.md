@@ -2,7 +2,7 @@
 title: Configure Kendo Tooltip for TreeList command buttons
 description: An example on how to update the content of Kendo Tooltip when used on TreeList command buttons.
 type: how-to
-page_title: Use Kendo Tooltip for TreeList command buttons | Kendo UI Tooltip for jQuery
+page_title: Use Kendo Tooltip for TreeList command buttons - Kendo UI Tooltip for jQuery
 slug: tooltip-on-treelist-command-buttons
 tags: kendo ui, tooltip, treelist, content
 ticketid: 1534253

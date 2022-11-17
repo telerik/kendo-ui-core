@@ -2,7 +2,7 @@
 title: Change the Default Filter Operator
 description: An example on how to change the default filter operator in the Kendo UI Grid.
 type: how-to
-page_title: Change the Default Filter Operator | Kendo UI Grid for jQuery
+page_title: Change the Default Filter Operator - Kendo UI Grid for jQuery
 slug: grid-change-default-filter-operator
 tags: grid, filter, filtering, change, default, operator, menu
 ticketid: 1147525

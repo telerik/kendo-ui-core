@@ -2,7 +2,7 @@
 title: Change background color of event in the databound of the Scheduler
 description: An example on how to change the color of the entire event of the Kendo UI Scheduler.
 type: how-to
-page_title: Change event background | Kendo UI Scheduler for jQuery
+page_title: Change event background - Kendo UI Scheduler for jQuery
 slug: scheduler-change-event-background-databound
 tags: background, change, databound, scheduler
 ticketid: 1494386

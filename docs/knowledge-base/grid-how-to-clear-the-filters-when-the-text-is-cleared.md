@@ -2,7 +2,7 @@
 title: Clear Filters When Text Is Cleared in Grid
 description: An example on how to clear the filters when the text is cleared in a Kendo UI Grid.
 type: how-to
-page_title: Clear the Filters When the Text is Cleared | Kendo UI Grid for jQuery
+page_title: Clear the Filters When the Text is Cleared - Kendo UI Grid for jQuery
 slug: grid-how-to-clear-the-filters-when-the-text-is-cleared
 tags: grid, filter, clear
 ticketid: 1136856

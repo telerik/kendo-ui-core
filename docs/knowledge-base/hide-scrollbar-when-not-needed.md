@@ -1,6 +1,6 @@
 ---
 title: Hide the Vertical Scrollbar
-page_title:  Hide the Vertical Scrollbar | Kendo UI Grid for jQuery
+page_title:  Hide the Vertical Scrollbar - Kendo UI Grid for jQuery
 description: "An example on how to hide the vertical scrollbar when you do not need it in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/hide-scrollbar-when-not-needed
 slug: howto_hide_vertical_scrollbar_grid

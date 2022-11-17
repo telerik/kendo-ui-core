@@ -2,7 +2,7 @@
 title: DateTimePicker Localization in Modern Content Type
 description: How to Implement DateTimePicker Localization in Modern Mode
 type: how-to
-page_title: How to Implement DateTimePicker Localization in Modern Mode | Kendo UI DateTimePicker for jQuery
+page_title: How to Implement DateTimePicker Localization in Modern Mode - Kendo UI DateTimePicker for jQuery
 slug: datetimepicker-localization-modern-type
 position: 
 tags: 

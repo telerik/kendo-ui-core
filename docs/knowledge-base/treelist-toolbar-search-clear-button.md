@@ -2,7 +2,7 @@
 title: Add a Clear button to the TreeList Search Panel
 description: An example on how to add a clear button in the Kendo UI TreeList search panel.
 type: how-to
-page_title: Add a Clear Button in the Search TextBox | Kendo UI TreeList for jQuery
+page_title: Add a Clear Button in the Search TextBox - Kendo UI TreeList for jQuery
 slug: treelist-toolbar-search-clear-button
 tags: search, clear, button, treelist, panel
 ticketid: 1499021

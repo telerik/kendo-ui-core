@@ -2,7 +2,7 @@
 title: Conditionally Show ColumnMenu Options per Grid Column
 description: An example on how to conditionally show the filter and sort options in the columnMenu of the Kendo UI Grid.
 type: how-to
-page_title: Show columnMenu Options for Specific Columns | Kendo UI Grid for jQUery
+page_title: Show columnMenu Options for Specific Columns - Kendo UI Grid for jQUery
 slug: grid-conditional-columnMenu
 tags: grid, columnMenu, columns
 res_type: kb

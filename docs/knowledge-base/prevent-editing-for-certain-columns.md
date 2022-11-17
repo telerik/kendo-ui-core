@@ -1,6 +1,6 @@
 ---
 title: Prevent Editing for Boolean Based Records
-page_title: Prevent Editing for Boolean Records | Kendo UI Grid for jQuery
+page_title: Prevent Editing for Boolean Records - Kendo UI Grid for jQuery
 description: "An example on how to prevent editing for records based on Boolean values in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/prevent-editing-for-certain-columns
 slug: howto_prevent_editingfor_boolean_based_records_grid

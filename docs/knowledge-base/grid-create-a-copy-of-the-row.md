@@ -2,7 +2,7 @@
 title: Create Duplicate Grid Rows
 description: An example on how to create a copy of a Kendo UI Grid row.
 type: how-to
-page_title: Create Copies of Rows | Kendo UI Grid for jQuery
+page_title: Create Copies of Rows - Kendo UI Grid for jQuery
 slug: grid-create-a-copy-of-the-row
 tags: grid, copy, row
 ticketid: 1145126

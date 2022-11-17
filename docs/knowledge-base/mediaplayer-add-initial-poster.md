@@ -2,7 +2,7 @@
 title: Add Initial Poster on Media Player
 description: How to Add Initial Poster on Media Player
 type: how-to
-page_title: How to Add Initial Poster on Media Player | Kendo UI MediaPlayer for jQuery
+page_title: How to Add Initial Poster on Media Player - Kendo UI MediaPlayer for jQuery
 slug: mediaplayer-add-initial-poster
 position: 
 tags: 

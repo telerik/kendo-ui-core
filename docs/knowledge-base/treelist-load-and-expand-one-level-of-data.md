@@ -2,7 +2,7 @@
 title: Load and expand only the first level data in the TreeList
 description: An example on how to load the Kendo UI TreeList expanded initially up to a certain point (level in the hierarchy).
 type: how-to
-page_title: Partially expand the TreeList | Kendo UI TreeList for jQuery
+page_title: Partially expand the TreeList - Kendo UI TreeList for jQuery
 slug: treelist-load-and-expand-one-level-of-data
 ticketid: 1148152
 tags: treelist, expand, partial, read, request, node, root, level, initially, load, only

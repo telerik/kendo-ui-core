@@ -1,6 +1,6 @@
 ---
 title: Bind AutoComplete for AngularJS with WebAPI
-page_title: Implement WebAPI Binding in AngularJS | Kendo UI AutoComplete for jQuery
+page_title: Implement WebAPI Binding in AngularJS - Kendo UI AutoComplete for jQuery
 description: An example on how to bind the Kendo UI AutoComplete for AngularJS with WebAPI.
 type: how-to
 slug: autocomplete-angularjs-bind-webapi

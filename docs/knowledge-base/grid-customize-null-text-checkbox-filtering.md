@@ -2,7 +2,7 @@
 title: Customize Null Text for Checkbox Filter mode
 description: How to Customize Null Text for Checkbox Filter mode in Grid
 type: how-to
-page_title: Customize Null Text for Checkbox Filter mode in Grid | Kendo UI Grid for jQuery
+page_title: Customize Null Text for Checkbox Filter mode in Grid - Kendo UI Grid for jQuery
 slug: grid-customize-null-text-checkbox-filtering
 position:
 tags: grid, filter

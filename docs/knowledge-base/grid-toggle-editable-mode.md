@@ -2,7 +2,7 @@
 title: Toggle the grid's editable mode on and off
 description: An example demonstrating how to toggle the editable mode of the Kendo UI Grid using a ToolBar button
 type: how-to
-page_title: Toggle Grid's editable mode | Kendo UI Grid for jQuery
+page_title: Toggle Grid's editable mode - Kendo UI Grid for jQuery
 slug: grid-toggle-editable-mode
 tags: grid, toolbar, editable, toggle, edit
 res_type: kb

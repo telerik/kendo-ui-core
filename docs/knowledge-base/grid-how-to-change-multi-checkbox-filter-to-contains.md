@@ -2,7 +2,7 @@
 title: Set Multi-Checkbox Filtering to Use contains instead of equalTo
 description: An example on how to change the multi-checkbox filtering of the Kendo UI Grid to use contains instead of equalTo.
 type: how-to
-page_title: Set a Different dataSource for the Multi-Checkbox and contains Filter | Kendo UI Grid for jQuery
+page_title: Set a Different dataSource for the Multi-Checkbox and contains Filter - Kendo UI Grid for jQuery
 slug: grid-how-to-change-multi-checkbox-filter-to-contains
 tags: grid, filter, multi-checkbox, contains
 ticketid: 1132412

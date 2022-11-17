@@ -1,6 +1,6 @@
 ---
 title: Disable Months in the Kendo UI Calendar Year View
-page_title: Disable Months in Calendar Year View | Kendo UI Calendar for jQuery
+page_title: Disable Months in Calendar Year View - Kendo UI Calendar for jQuery
 description: An example how to disable months in the year view of the Kendo UI Calendar.
 type: how-to
 slug: calender-disable-months

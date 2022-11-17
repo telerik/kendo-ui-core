@@ -2,7 +2,7 @@
 title: Filter ListBox Items
 description: An example on how to filter items to match the search conditions in a Kendo UI ListBox.
 type: how-to
-page_title: Filter Items to Match the Search Conditions | Kendo UI ListBox for jQuery
+page_title: Filter Items to Match the Search Conditions - Kendo UI ListBox for jQuery
 slug: listbox-how-to-filter-items
 tags: listbox, filter, search, contains, items
 res_type: kb

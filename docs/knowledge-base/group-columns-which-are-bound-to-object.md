@@ -2,7 +2,7 @@
 title: Group Grid Columns Which Are Bound to Objects
 description: An example on how to group Kendo UI Grid columns when they are bound to objects.
 type: how-to
-page_title: Group Columns Which Are Bound to Objects | Kendo UI Grid for jQuery
+page_title: Group Columns Which Are Bound to Objects - Kendo UI Grid for jQuery
 slug: group-columns-which-are-bound-to-object
 tags: grid, group, custom
 ticketid: 1116551

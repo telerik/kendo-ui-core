@@ -2,7 +2,7 @@
 title: Setting Global Min and Max DatePicker Values
 description: An example demonstrating how to change the max and min values globally for all DatePickers
 type: how-to
-page_title: Modifying Min and Max Values Globally | Kendo UI DatePicker for jQuery
+page_title: Modifying Min and Max Values Globally - Kendo UI DatePicker for jQuery
 slug: datepicker-global-min-max-range
 tags: datepicker, global, min, max, range
 ticketid: 1341901

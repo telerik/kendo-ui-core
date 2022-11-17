@@ -2,7 +2,7 @@
 title: Merge Table Cells in the Editor
 description: An example on how to merge table cells in the Kendo UI Editor.
 type: how-to
-page_title: Merge Table Cells | Kendo UI Editor for jQuery
+page_title: Merge Table Cells - Kendo UI Editor for jQuery
 slug: editor-merge-table-cells
 tags: editor, table, merge, cells
 res_type: kb

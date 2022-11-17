@@ -2,7 +2,7 @@
 title: Keep Trailing Zeros in NumericTextBox
 description: An example on how to always display the entire decimal portion in the Kendo UI NumericTextBox.
 type: how-to
-page_title: Prevent Rounding of Decimals | Kendo UI NumercTextBox for jQuery
+page_title: Prevent Rounding of Decimals - Kendo UI NumercTextBox for jQuery
 slug: numerictextbox-keep-trailing-zeros
 tags: numeric, numerictextbox, preserve, keep, trailing, zeros, rounding, decimals, round
 ticketid: 1161653

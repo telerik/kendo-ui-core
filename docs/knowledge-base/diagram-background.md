@@ -2,7 +2,7 @@
 title: Add a Background to the Kendo UI Diagram
 description: "Add a background to the Diagram widget."
 type: how-to
-page_title: Add a Background to the Kendo UI Diagram | Kendo UI Diagram for jQuery
+page_title: Add a Background to the Kendo UI Diagram - Kendo UI Diagram for jQuery
 slug: diagram-background
 tags: diagram, color, image, background, gradient
 res_type: kb

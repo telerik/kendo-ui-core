@@ -2,7 +2,7 @@
 title: Prevent script execution in the input of the kendo.prompt predefined dialog using DOMPurify.
 description: An example on how to prevent script execution in the input of the kendo.prompt predefined dialog.
 type: how-to
-page_title:  Prevent script execution in the input of the kendo.prompt predefined dialog using DOMPurify | Kendo UI Dialog for jQuery
+page_title:  Prevent script execution in the input of the kendo.prompt predefined dialog using DOMPurify - Kendo UI Dialog for jQuery
 slug: dialog-prevent-js-execution
 tags: dialog, xss
 ticketid: 1510265

@@ -2,7 +2,7 @@
 title: Select Multiple Items in MultiSelect by Holding Shift Key
 description: An example on how to select multiple items by holding shift in MultiSelect.
 type: how-to
-page_title: Select Multiple Items in MultiSelect by Holding Shift Key | Kendo UI MultiSelect for jQuery
+page_title: Select Multiple Items in MultiSelect by Holding Shift Key - Kendo UI MultiSelect for jQuery
 slug: multiselect-shift-multiple-selection
 tags: multiselect, shift, multiple, selection
 res_type: kb

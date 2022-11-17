@@ -2,7 +2,7 @@
 title: Disable Popup Editor Animations
 description: An example on how to remove the animation of the popup editor in the Kendo UI Grid.
 type: how-to
-page_title: Remove Popup Window Animation | Kendo UI Grid for jQuery
+page_title: Remove Popup Window Animation - Kendo UI Grid for jQuery
 slug: grid-popup-editor-remove-animation
 tags: grid, popup, editor, animation
 ticketid: 1135955

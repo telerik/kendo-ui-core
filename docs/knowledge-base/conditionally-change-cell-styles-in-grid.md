@@ -2,7 +2,7 @@
 title: Conditionally Change Cell Styles in Grid HtmlHelpers
 description: An example on how to change the appearance of the Grid cells based on condition in ASP.NET Core projects.
 type: how-to
-page_title: Conditionally Change the Appearance of Grid Cells | Kendo UI Grid for ASP.NET Core
+page_title: Conditionally Change the Appearance of Grid Cells - Kendo UI Grid for ASP.NET Core
 slug: conditionally-change-cell-styles-in-grid
 tags: grid, style, template, condition, color, different, core, htmlhelper, mvc, widget
 res_type: kb

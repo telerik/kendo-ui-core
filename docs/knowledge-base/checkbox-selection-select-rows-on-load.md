@@ -2,7 +2,7 @@
 title: Select Grid Rows Programmatically Based on the DataItem
 description: An example on how to select rows in a Kendo UI Grid based on the values of the data items.
 type: how-to
-page_title: Automatically Check Checkboxes on Load | Kendo UI Grid for jQuery
+page_title: Automatically Check Checkboxes on Load - Kendo UI Grid for jQuery
 slug: checkbox-selection-select-rows-on-load
 tags: checkbox selection, grid, kendo ui
 ticketid: 1117204

@@ -1,6 +1,6 @@
 ---
 title: Reorder Rows in Grids Using Sortable
-page_title: Reorder Rows Using Sortable | Kendo UI Grid for jQuery
+page_title: Reorder Rows Using Sortable - Kendo UI Grid for jQuery
 description: "An example on how to use it with the Kendo UI Sortable widget either in editable or non-editable modes."
 previous_url: /controls/data-management/grid/how-to/use-grid-sortable-reorder, /controls/data-management/grid/how-to/Editing/use-grid-sortable-reorder
 slug: howto_usegridandsortable_grid

@@ -2,7 +2,7 @@
 title: Navigate to certain shape
 description: An example on how to programmatically navigate to certain shape of the Kendo UI Map.
 type: how-to
-page_title: Set Different Colors for Markers Based on Field Value | Kendo UI Map for jQuery
+page_title: Set Different Colors for Markers Based on Field Value - Kendo UI Map for jQuery
 slug: map-navigate-to-certain-shape
 tags: map, kendo, shape, ui, navigate, zoom, programmatically
 ticketid: 1140119

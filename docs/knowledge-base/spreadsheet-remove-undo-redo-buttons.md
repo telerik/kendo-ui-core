@@ -2,7 +2,7 @@
 title: Remove the Undo and Redo Buttons on the Spreadsheet Toolbar without Hiding the Whole Toolbar
 description: An example on how to remove the Undo and Redo buttons on the toolbar of the Kendo UI Spreadsheet without hiding the whole toolbar.
 type: how-to
-page_title: Hide the Undo and Redo Toolbar Buttons | Kendo UI Spreadsheet for jQuery
+page_title: Hide the Undo and Redo Toolbar Buttons - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-remove-undo-redo-buttons
 tags: spreadsheet, toolbar-buttons, undo, redo
 ticketid: 1135749

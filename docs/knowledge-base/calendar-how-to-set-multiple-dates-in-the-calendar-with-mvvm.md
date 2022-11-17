@@ -1,6 +1,6 @@
 ---
 title: Set Multiple Dates in the Calendar with MVVM
-page_title: Set Multiple Dates in with MVVM | Kendo UI Calendar for jQuery
+page_title: Set Multiple Dates in with MVVM - Kendo UI Calendar for jQuery
 description: An example on how to set multiple dates in the Kendo UI Calendar with MVVM.
 type: how-to
 slug: calendar-how-to-set-multiple-dates-in-the-calendar-with-mvvm

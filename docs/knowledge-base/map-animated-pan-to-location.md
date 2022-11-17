@@ -2,7 +2,7 @@
 title: Animate Panning to Location on the Map
 description: "An example demonstrating how to make a panning animation when particular coordinates are selected."
 type: how-to
-page_title: Animate Panning to Location on the Map | Kendo UI Map for jQuery
+page_title: Animate Panning to Location on the Map - Kendo UI Map for jQuery
 slug: map-animated-pan-to-location
 tags: map, pan, panning, animate, animation, automatic
 res_type: kb

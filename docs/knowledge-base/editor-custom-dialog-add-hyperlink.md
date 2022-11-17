@@ -2,7 +2,7 @@
 title: Create custom Window in Editor to Add a Hyperlink With Custom Classnames
 description: An example on how to create a custom dialog to add hyperlink with custom class in the Kendo UI Editor.
 type: how-to
-page_title: Create Custom Window to Add Hyperlink With ClassName | Kendo UI Editor for jQuery
+page_title: Create Custom Window to Add Hyperlink With ClassName - Kendo UI Editor for jQuery
 slug: editor-custom-dialog-add-hyperlink
 tags: kendo, window, kendo-ui, editor, custom, dialog, hyperlink, class
 ticketid: 1536777

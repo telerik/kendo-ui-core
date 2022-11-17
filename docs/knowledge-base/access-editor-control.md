@@ -1,6 +1,6 @@
 ---
 title: Access Editor Controls in edit Events
-page_title: Access Editor Controls in edit Events | Kendo UI Grid for jQuery
+page_title: Access Editor Controls in edit Events - Kendo UI Grid for jQuery
 description: "An example on how to access an editor control in the edit event handler of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/access-editor-control
 slug: howto_access_editor_controlsin_edit_events_grid

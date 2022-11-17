@@ -1,6 +1,6 @@
 ---
 title: Render Grid Editor in Column Template
-page_title: Editor in Column Template | Kendo UI Grid for jQuery
+page_title: Editor in Column Template - Kendo UI Grid for jQuery
 description: "An example on how to edit the Kendo UI Grid for jQuery by using a column template."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-editors-in-column-templates
 slug: howto_render_editor_column_template_grid

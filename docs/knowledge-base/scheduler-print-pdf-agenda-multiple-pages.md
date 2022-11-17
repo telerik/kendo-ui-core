@@ -2,7 +2,7 @@
 title: Print Agenda View On Multiple Pages
 description: An example on how to print the Kendo UI Scheduler on multiple pages when agenda view is selected.
 type: how-to
-page_title: Print To PDF Agenda View On Multiple Pages | Kendo UI Scheduler for jQuery
+page_title: Print To PDF Agenda View On Multiple Pages - Kendo UI Scheduler for jQuery
 slug: scheduler-print-pdf-agenda-multiple-pages
 tags: kendo, kendoui, scheduler, agenda, pdf, multiple
 ticketid: 1133425

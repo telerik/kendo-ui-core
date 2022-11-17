@@ -2,7 +2,7 @@
 title: Keep the PanelBar Header Style Constant
 description: Set the CSS property of the Header in the Kendo UI PanelBar for all the states
 type: how-to
-page_title: Persistent Header Style | Kendo UI PanelBar
+page_title: Persistent Header Style - Kendo UI PanelBar
 slug: panelbar-header-style-constant
 position: 
 tags: panelbar, header, style, state, hover, selected, focused, css, background

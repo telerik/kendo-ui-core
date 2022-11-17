@@ -2,7 +2,7 @@
 title: Generate Exception for Recurring Event Using External DatePicker
 description: An example of how to manually add exception date for recurring event in the Kendo Scheduler using the Kendo DatePicker.
 type: how-to
-page_title: Manually Add Exception to recurring Event | Kendo UI Scheduler for jQuery
+page_title: Manually Add Exception to recurring Event - Kendo UI Scheduler for jQuery
 slug: scheduler-manually-add-exceptio-to-recurring
 tags: kendo, kendoui, scheduler, recurring-events, exception, add-exception
 res_type: kb

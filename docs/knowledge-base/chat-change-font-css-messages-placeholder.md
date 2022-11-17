@@ -2,7 +2,7 @@
 title: Modify the Font CSS in the Chat
 description: Change the font of the messages and the placeholder in the Kendo UI Chat.
 type: how-to
-page_title: Customize the Font Style | Kendo UI Chat
+page_title: Customize the Font Style - Kendo UI Chat
 slug: chat-change-font-css-messages-placeholder
 position: 
 tags: change, modify, font, messages, placeholder, chat

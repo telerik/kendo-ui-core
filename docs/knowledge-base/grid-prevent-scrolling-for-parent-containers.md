@@ -2,7 +2,7 @@
 title: Parent Containers Continue to Scroll When the Last Grid Record Is Reached
 description: When the last Grid record is reached, the parent container continues to scroll.
 type: troubleshooting
-page_title: Cannot Prevent the Propagation of Scrolling | Kendo UI Grid for jQuery
+page_title: Cannot Prevent the Propagation of Scrolling - Kendo UI Grid for jQuery
 slug: grid-prevent-scrolling-for-parent-containers
 tags: grid, scroll, scrollbar, vertical
 res_type: kb

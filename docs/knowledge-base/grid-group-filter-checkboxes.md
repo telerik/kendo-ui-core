@@ -2,7 +2,7 @@
 title: Group Filter Checkboxes in Grid by Another Field
 description: An example on how to group the checkboxes in the filter menu by another field in the Kendo UI Grid.
 type: how-to
-page_title: Group the Checkboxes in the Filter Menu by Different Field | Kendo UI Grid for jQuery
+page_title: Group the Checkboxes in the Filter Menu by Different Field - Kendo UI Grid for jQuery
 slug: grid-group-filter-checkboxes
 tags: kendoui, kendo, grid, filtering, checkbox filter
 res_type: kb

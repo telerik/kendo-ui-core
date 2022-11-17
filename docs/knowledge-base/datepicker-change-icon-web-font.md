@@ -2,7 +2,7 @@
 title: Change the DatePicker Icon with Web Font Icon
 description: Replace the default icon of the Kendo UI DatePicker with a Web Font Icon.
 type: how-to
-page_title: Modify the Default Icon | Kendo UI DatePicker
+page_title: Modify the Default Icon - Kendo UI DatePicker
 slug: datepicker-change-icon-web-font
 position: 
 tags: change, icon, datepicker

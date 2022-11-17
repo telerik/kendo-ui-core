@@ -2,7 +2,7 @@
 title: Display the Event Title in the Delete Confirm Prompt
 description: An example on how to display the title of the task or event in the Delete confirmation dialog of the Kendo UI Scheduler.
 type: how-to
-page_title: Inject the Task Title for Display in the Delete Confirm Dialog | Kendo UI Scheduler for jQuery
+page_title: Inject the Task Title for Display in the Delete Confirm Dialog - Kendo UI Scheduler for jQuery
 slug: scheduler-inject-task-title-in-the-confirm-delete-prompt
 tags: kendo, scheduler, delete-task, delete-prompt
 res_type: kb

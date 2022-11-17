@@ -1,6 +1,6 @@
 ---
 title: Create Reorderable Grids with Restricted Rows Using Sortable
-page_title: Restrict Row Reordering via Sortable | Kendo UI Grid for jQuery
+page_title: Restrict Row Reordering via Sortable - Kendo UI Grid for jQuery
 description: "An example on how to restrict rows reordering in the Kendo UI Grid for jQuery with the Kendo UI Sortable widget."
 previous_url: /controls/data-management/grid/how-to/reorderable-grid-restricted-rows-sortable, /controls/data-management/grid/how-to/integration/reorderable-grid-restricted-rows-sortable
 slug: howto_restrictreordergridrowssortable_grid

@@ -2,7 +2,7 @@
 title: Clear DateRangePicker
 description: How to Clear DateRangePicker Selection
 type: how-to
-page_title: How to Clear DateRangePicker Selection | Kendo UI DateRangePicker for jQuery
+page_title: How to Clear DateRangePicker Selection - Kendo UI DateRangePicker for jQuery
 slug: clear-daterangepicker
 position: 
 tags: 

@@ -2,7 +2,7 @@
 title: Make DropDownList Selection Mandatory Only If Data Exists
 description: An example on how to make the Kendo UI DropDownList a required field only if the user has data options to select from.
 type: how-to
-page_title: Make DropDownList Selection Mandatory Only If Data Exists | Kendo UI DropDownList for jQuery
+page_title: Make DropDownList Selection Mandatory Only If Data Exists - Kendo UI DropDownList for jQuery
 slug: dropdownlist-required-only-when-data-exists
 tags: dropdown, required, field, validation, conditional, change
 ticketid: 1364233

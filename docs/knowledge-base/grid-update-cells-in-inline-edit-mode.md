@@ -2,7 +2,7 @@
 title: Update Adjacent Cells in Grid Rows while in Inline Edit Mode
 description: An example on how to update the value of adjacent cells while the Kendo UI Grid is in inline edit mode.
 type: how-to
-page_title: Update Adjacent Cells in Rows in Inline Edit Mode | Kendo UI Grid for jQuery
+page_title: Update Adjacent Cells in Rows in Inline Edit Mode - Kendo UI Grid for jQuery
 slug: grid-update-cells-in-inline-edit-mode
 tags: grid, inline, edit, mode, update, cells, next, contiguous
 ticketid: 1147034

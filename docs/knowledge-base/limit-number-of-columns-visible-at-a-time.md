@@ -1,6 +1,6 @@
 ---
 title: Limit Maximum Number of Columns Visible at a Time Using the Column Menu
-page_title: Limit the Number of Columns at a Time Using the Column Menu | Kendo UI Grid for jQuery
+page_title: Limit the Number of Columns at a Time Using the Column Menu - Kendo UI Grid for jQuery
 description: "An example on how to disable column items in the Column menu when a max number of columns is already shown"
 previous_url: /controls/data-management/grid/how-to/Layout/allow-a-single-expanded-row-only
 slug: howto_limit_max_number_columns_visible_grid

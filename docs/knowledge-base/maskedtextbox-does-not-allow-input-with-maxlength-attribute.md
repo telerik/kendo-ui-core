@@ -2,7 +2,7 @@
 title: MaskedTextBox Does Not Allow Input
 description: The MaskedTextBox widget does not allow any input when the maxlength attribute is set on the input.
 type: troubleshooting
-page_title: Input Is Prevented When maxlength Is the Same Length as the Mask | Kendo UI MaskedTextBox for jQuery
+page_title: Input Is Prevented When maxlength Is the Same Length as the Mask - Kendo UI MaskedTextBox for jQuery
 slug: maskedtextbox-does-not-allow-input-with-maxlength-attribute
 tags: maskedtextbox, input, prevents, kendo, maxlength, attribute, length, update, bug
 ticketid: 1116721

@@ -2,7 +2,7 @@
 title: Use CheckBox Template for Selecting Rows in Grid with Locked Columns
 description: An example on how to configure a template column to handle row selection with frozen columns in the Kendo UI Grid.
 type: how-to
-page_title: Use Template Column with CheckBoxes for Selecting Rows with Locked Columns | Kendo UI Grid for jQuery
+page_title: Use Template Column with CheckBoxes for Selecting Rows with Locked Columns - Kendo UI Grid for jQuery
 slug: grid-select-all-with-frozen-columns
 tags: kendoui, kendo, grid, locked columns, frozen columns, checkbox selection, checkboxes
 res_type: kb

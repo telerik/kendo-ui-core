@@ -1,6 +1,6 @@
 ---
 title: Persist Selection Upon Retrieving New Data with Remotely Bound TreeList 
-page_title: Persist Selected Rows | Kendo UI TreeList for jQuery
+page_title: Persist Selected Rows - Kendo UI TreeList for jQuery
 description: "An example on how to persist the selected rows of the remotely bound Kendo UI TreeList for jQuery upon retrieving new data."
 slug: howto_persist_selected_rows_remote_bound_treelist
 tags: persist, selected, rows, treelist, remote, bind

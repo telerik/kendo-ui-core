@@ -2,7 +2,7 @@
 title: Sort groups by their aggregates
 description: An example on how to implement custom group sort in the Kendo UI Grid using group aggregates.
 type: how-to
-page_title: Sort grid groups by group aggregate | Kendo UI Grid for jQuery
+page_title: Sort grid groups by group aggregate - Kendo UI Grid for jQuery
 slug: grid-sort-group-by-group-aggregate
 tags: grid, sort, group, aggregate, compare
 ticketid: 1431802

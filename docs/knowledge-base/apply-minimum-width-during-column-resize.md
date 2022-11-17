@@ -1,6 +1,6 @@
 ---
 title: Apply Minimum Width during Column Resize
-page_title:  Apply Minimum Width during Column Resize | Kendo UI Grid for jQuery
+page_title:  Apply Minimum Width during Column Resize - Kendo UI Grid for jQuery
 description: "An example on how to enforce a minimum column width during column resizing in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/apply-minimum-width-during-column-resize
 slug: howto_apply_min_width_during_column_resize_grid

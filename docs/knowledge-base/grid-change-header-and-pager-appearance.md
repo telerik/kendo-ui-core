@@ -2,7 +2,7 @@
 title: Change Header and Pager Appearance
 description: How to Change Header and Footer BackGround Color
 type: how-to
-page_title: How to Change Header and Footer BackGround Color | Kendo UI Grid for jQuery
+page_title: How to Change Header and Footer BackGround Color - Kendo UI Grid for jQuery
 slug: grid-change-header-and-pager-appearance
 position: 
 tags: 

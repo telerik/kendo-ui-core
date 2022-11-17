@@ -2,7 +2,7 @@
 title: Update the Selected Node in TreeView
 description: An example on how to update the text of the selected node in the Kendo UI TreeView.
 type: how-to
-page_title: Update the Text of the Selected Node in TreeView | Kendo UI TreeView for jQuery
+page_title: Update the Text of the Selected Node in TreeView - Kendo UI TreeView for jQuery
 slug: treeview-update-selected-node
 tags: treeview, troubleshooting
 ticketid: 1556946  

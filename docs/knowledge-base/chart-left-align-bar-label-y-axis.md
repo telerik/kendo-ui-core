@@ -2,7 +2,7 @@
 title: Left-Align Bar Chart Category Axis Labels
 description: An example on how to align the Category Axis labels of a Kendo UI Bar Chart.
 type: how-to
-page_title: Align Category Y-Axis Labels on Bar Chart | Kendo UI Chart
+page_title: Align Category Y-Axis Labels on Bar Chart - Kendo UI Chart
 slug: chart-left-align-bar-label-y-axis
 tags: chart, left, align, bar, label, y, axis
 ticketid: 1407464

@@ -2,7 +2,7 @@
 title: Add Rounded Corners with CSS
 description: Include rounded corners using CSS for the Kendo UI Window.
 type: how-to
-page_title: Style with Rounded Corners | Kendo UI Window
+page_title: Style with Rounded Corners - Kendo UI Window
 slug: window-add-rounded-corners-with-css
 position: 
 tags: window, add, style, corners, css, rounded

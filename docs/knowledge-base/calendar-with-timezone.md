@@ -1,6 +1,6 @@
 ---
 title: Kendo Calendar with Timezone
-page_title: Timezone Calendar  | Kendo UI Calendar for jQuery
+page_title: Timezone Calendar  - Kendo UI Calendar for jQuery
 description: An example on how to create a calendar that shows the current day in a selected timezone with the Kendo UI Calendar widget.
 type: how-to
 slug: calendar-with-timezone

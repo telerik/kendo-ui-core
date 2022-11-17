@@ -2,7 +2,7 @@
 title: Disable Dirty Indicators in Grid by Using CSS
 description: An example on how to disable dirty indicators in the Kendo UI Grid by using CSS.
 type: how-to
-page_title: Disable Dirty Indicators by Using CSS | Kendo UI Grid for jQuery
+page_title: Disable Dirty Indicators by Using CSS - Kendo UI Grid for jQuery
 slug: disable-dirty-indicator-using-css
 tags: dirty, indicator, grid, disable, css
 ticketid: 1136481

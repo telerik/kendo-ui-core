@@ -1,6 +1,6 @@
 ---
 title: Create Fixed Headers on Scroll
-page_title:  Create Fixed Headers on Scroll | Kendo UI Grid for jQuery
+page_title:  Create Fixed Headers on Scroll - Kendo UI Grid for jQuery
 description: "An example on how to create fixed headers on scroll in the Kendo UI Grid widget for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/fixed-headers-grid
 slug: howto_create_fixed_headers_grid

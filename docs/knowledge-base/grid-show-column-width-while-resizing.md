@@ -2,7 +2,7 @@
 title: Show Grid Column Width while Resizing
 description: Implement excel-like functionality in the Grid to display the width of the column while the user is resizing it.
 type: how-to
-page_title: Display Current Column Width on Resizing | Kendo UI Grid for jQuery
+page_title: Display Current Column Width on Resizing - Kendo UI Grid for jQuery
 slug: grid-show-column-width-while-resizing
 tags: grid, show, column, width, resize, resizable, tooltip, excel
 ticketid: 1333477

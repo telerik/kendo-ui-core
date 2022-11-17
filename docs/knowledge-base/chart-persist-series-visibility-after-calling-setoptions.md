@@ -1,6 +1,6 @@
 ---
 title: Persist Series Visibility After Changing the Chart Options
-page_title: Persist Series Visibility After Changing the Chart Options | Kendo UI Chart for jQuery
+page_title: Persist Series Visibility After Changing the Chart Options - Kendo UI Chart for jQuery
 description: "An example demonstrating how to persist the series visibility after the setOptions method is called."
 type: how-to
 slug: chart-persist-series-visibility-after-calling-setoptions

@@ -2,7 +2,7 @@
 title: PivotGrid Drill Down Window
 description: How to Implement Drill Down Navigation
 type: how-to
-page_title: How to Implement Drill Down Functionality | Kendo UI PivotGrid for jQuery
+page_title: How to Implement Drill Down Functionality - Kendo UI PivotGrid for jQuery
 slug: pivotgrid-drill-down-window
 position: 
 tags: 

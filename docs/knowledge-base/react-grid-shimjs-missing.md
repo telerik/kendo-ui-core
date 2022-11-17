@@ -2,7 +2,7 @@
 title: Grid Wrapper for React Cannot Load in Internet Explorer
 description: Kendo UI Grid wrapper for React does not load in Internet Explorer (IE) and an error occurs in the developer console.
 type: troubleshooting
-page_title: Grid Wrapper for React is Causing an Error in Internet Explorer | Kendo UI Wrappers for React
+page_title: Grid Wrapper for React is Causing an Error in Internet Explorer - Kendo UI Wrappers for React
 slug: react-grid-shimjs-missing
 res_type: kb
 component: grid

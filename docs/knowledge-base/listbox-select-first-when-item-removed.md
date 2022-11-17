@@ -2,7 +2,7 @@
 title: Select the First Item on Removal of Any Item in ListBox
 description: Focus on the first item after any item is removed from the ListBox
 type: how-to
-page_title: Set Default Selection | Kendo UI ListBox
+page_title: Set Default Selection - Kendo UI ListBox
 slug: listbox-select-first-when-item-removed
 position: 
 tags: listbox, remove, delete, first, focus, select, default, item, set

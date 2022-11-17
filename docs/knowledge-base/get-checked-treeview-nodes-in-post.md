@@ -2,7 +2,7 @@
 title: Get Checked Nodes in a POST Query
 description: The TreeView checkboxes need unique name attributes when they are used in a POST query.
 type: troubleshooting
-page_title: Get Checked Nodes in POST Queries | Kendo UI TreeView for jQuery
+page_title: Get Checked Nodes in POST Queries - Kendo UI TreeView for jQuery
 slug: get-checked-treeview-nodes-in-post
 tags: treeview, node, checked, checkbox, name, post, query, unique
 ticketid: 1363907, 1363212, 1364154

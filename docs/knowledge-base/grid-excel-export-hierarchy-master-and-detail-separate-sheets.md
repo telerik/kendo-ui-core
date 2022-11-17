@@ -2,7 +2,7 @@
 title: Export Master and Detail Grids to Excel in Separate Sheets
 description: An example on how to export hierarchical Kendo UI Grids in separate sheets in Excel.
 type: how-to
-page_title: Excel Export Master and Detail Grids in Separate Sheets | Kendo UI Grid for jQuery
+page_title: Excel Export Master and Detail Grids in Separate Sheets - Kendo UI Grid for jQuery
 slug: grid-excel-export-hierarchy-master-and-detail-separate-sheets
 tags: grid,kendo,excel,export,hierarchy,detail,separate,sheets
 ticketid: 1079757

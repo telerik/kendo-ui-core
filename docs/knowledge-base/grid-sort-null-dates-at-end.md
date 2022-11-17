@@ -2,7 +2,7 @@
 title: Sort Null Dates at the Bottom of the Grid
 description: "Show the null date values at the bottom of the Grid when the data is sorted."
 type: how-to
-page_title: Sort Null Dates at the Bottom of the Grid | Kendo UI Grid
+page_title: Sort Null Dates at the Bottom of the Grid - Kendo UI Grid
 slug: grid-sort-null-dates-bottom
 position: 
 tags: grid, sort, sorting, null, bottom, show, end, ascending, descending, order, values, element, last

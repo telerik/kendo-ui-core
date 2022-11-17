@@ -2,7 +2,7 @@
 title: Get Grid Column Title upon Cell Selection
 description: An example on how to get the title of a column when selecting a cell in the Kendo UI Grid.
 type: how-to
-page_title: Obtain Column Name of Grouped Grid When Cell Is Selected | Kendo UI Grid for jQuery
+page_title: Obtain Column Name of Grouped Grid When Cell Is Selected - Kendo UI Grid for jQuery
 slug: grid-column-title-click-group
 tags: grid, column, title, click, group
 ticketid: 1072636

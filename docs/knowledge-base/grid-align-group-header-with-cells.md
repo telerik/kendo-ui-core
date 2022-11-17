@@ -2,7 +2,7 @@
 title: Show Multiple Aggregates in Separate Cells in Grid Group Header
 description: An example on how to show multiple aggregates in the group header of a Kendo UI Grid and align them with the Grid columns.
 type: how-to
-page_title: Align Group Header Template with Columns | Kendo UI Grid for jQuery
+page_title: Align Group Header Template with Columns - Kendo UI Grid for jQuery
 slug: grid-align-group-header-cells
 tags: grid, grouping, aggregates, template
 ticketid: 1142332

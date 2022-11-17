@@ -2,7 +2,7 @@
 title: Add Overlay Text in ImageEditor On Top of an Image
 description: An example on how to add overlay text in ImageEditor on top of an image.
 type: how-to
-page_title: Create a Custom Command to Add Overlay Text in ImageEditor On Top of an Image | Kendo UI ImageEditor for jQuery
+page_title: Create a Custom Command to Add Overlay Text in ImageEditor On Top of an Image - Kendo UI ImageEditor for jQuery
 slug: imageeditor-add-overlay-text
 tags: kendo ui, imageeditor, custom, command, overlay, image
 res_type: kb

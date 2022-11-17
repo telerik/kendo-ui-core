@@ -2,7 +2,7 @@
 title: PDF Export with Different Options
 description: An example on how to export some pages landscape and others portrait by using the Kendo UI Drawing API.
 type: how-to
-page_title: Set different PDF options for each page | Kendo UI Drawing Library
+page_title: Set different PDF options for each page - Kendo UI Drawing Library
 slug: pdf-export-different-options-for-each-page
 tags: pdf, export, different, options, drawing, api, pages, landscape, portrait, some, other
 res_type: kb

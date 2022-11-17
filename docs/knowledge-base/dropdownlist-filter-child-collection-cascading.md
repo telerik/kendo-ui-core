@@ -2,7 +2,7 @@
 title: Cascade Based on Parent DataField
 description: An example on how to filter a child collection of Kendo UI DropDownLists based on a parent property that is not the dataValueField.
 type: how-to
-page_title: Filtering on Specific Parent Property | Kendo UI DropDownList
+page_title: Filtering on Specific Parent Property - Kendo UI DropDownList
 slug: dropdownlist-filter-child-collection-cascading
 tags: dropdownlist, filter, child, collection, cascading, datavaluefield, parent, datafield
 ticketid: 1412636

@@ -2,7 +2,7 @@
 title: Modify Default Behavior of Filter Operators
 description: How to Modify Default Behavior of Filter Operators
 type: how-to
-page_title: ow to Modify Default Behavior of Filter Operators | Kendo UI Grid for jQuery
+page_title: ow to Modify Default Behavior of Filter Operators - Kendo UI Grid for jQuery
 slug: grid-modify-default-behavior-of-filter-operators
 position: 
 tags: 

@@ -2,7 +2,7 @@
 title: Change Default Workbook Name in Spreadsheet Export Dialog
 description: An example on how to change the default name of the workbook in the export dialog of the Kendo UI Spreadsheet.
 type: how-to
-page_title: Change Default Workbook Name in Export Dialog | Kendo UI Spreadsheet for jQuery
+page_title: Change Default Workbook Name in Export Dialog - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-change-export-dialog-default-workbook-name
 tags: workbook, default, name, change, spreadsheet
 ticketid: 1140511

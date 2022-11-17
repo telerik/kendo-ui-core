@@ -1,6 +1,6 @@
 ---
 title: Initialize the Grid in Window
-page_title: Initialize in Window | Kendo UI Grid for jQuery
+page_title: Initialize in Window - Kendo UI Grid for jQuery
 description: "Learn how to initialize the jQuery Grid by Kendo UI inside a Window widget by resizing it according to the dimensions of its container."
 previous_url: /controls/data-management/grid/how-to/initiliaze-in-window, /controls/data-management/grid/how-to/hidden/initiliaze-in-window
 slug: howto_initializegridinwindow_grid

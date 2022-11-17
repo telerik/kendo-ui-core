@@ -2,7 +2,7 @@
 title: TreeList Aggregate Specifics
 description: TreeList Aggregate Specifics
 type: how-to
-page_title: TreeList Aggregate Specifics | Kendo UI TreeList for jQuery
+page_title: TreeList Aggregate Specifics - Kendo UI TreeList for jQuery
 slug: treelist-aggregate-specifics
 position: 
 tags: 

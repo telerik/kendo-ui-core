@@ -1,6 +1,6 @@
 ---
 title: Customize Data Source
-page_title: Customize Data Source | Kendo UI Grid for jQuery
+page_title: Customize Data Source - Kendo UI Grid for jQuery
 description: "An example on how to customize the data source options for PDF export of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/pdf-export/custom-data-source
 slug: howto_customize_data_source_pdf_grid

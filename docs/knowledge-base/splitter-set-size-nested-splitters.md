@@ -2,7 +2,7 @@
 title: Set Pane Size When There Are Nested Splitters
 description: An example on how to use the size method when there are multiple nested Splitters.
 type: how-to
-page_title: Use the Size Method to Set the Pane Size in Nested Splitters | Kendo UI Splitter for jQuery
+page_title: Use the Size Method to Set the Pane Size in Nested Splitters - Kendo UI Splitter for jQuery
 slug: splitter-set-size-nested-splitters
 tags: kendo ui, splitter, pane, size, nested
 ticketid: 1528267

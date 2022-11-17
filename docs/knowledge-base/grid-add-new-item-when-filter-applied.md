@@ -2,7 +2,7 @@
 title: Add New Item When Filter Is Applied
 description: An example on how to show the inserted item when the Grid data is filtered.
 type: how-to
-page_title: Show Inserted Items When Filter Is Applied | Kendo UI Grid for jQuery
+page_title: Show Inserted Items When Filter Is Applied - Kendo UI Grid for jQuery
 slug: grid-add-new-item-when-filter-applied
 tags: grid, insert, add, new, item, filter, visible, record
 ticketid: 1141908

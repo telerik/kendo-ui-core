@@ -2,7 +2,7 @@
 title: Styling the Kendo UI Calendar header using CSS
 description: Add/change the style of the header based on custom preference.
 type: how-to
-page_title: Custom styling of the header | Kendo UI Calendar
+page_title: Custom styling of the header - Kendo UI Calendar
 slug: calendar-header-custom-style-hover
 position: 
 tags: calender, header, style, css, custom, color, background, change, hover, styling, text, hovering, icon

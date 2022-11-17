@@ -2,7 +2,7 @@
 title: Bind the Grid to an IndexedDB storage
 description: An example demonstrating how to bind the Grid's data to an IndexedDB storage and perform CRUD operations.
 type: how-to
-page_title: Bind the Grid to an IndexedDb storage | Kendo UI Grid for jQuery
+page_title: Bind the Grid to an IndexedDb storage - Kendo UI Grid for jQuery
 slug: grid-bound-to-indexeddb-storage
 tags: grid, crud, editable, indexeddb, edit, client, storage
 res_type: kb

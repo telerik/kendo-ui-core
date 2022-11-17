@@ -2,7 +2,7 @@
 title: MVVM Listbox with Template Does Not Display Data When Item Is Moved
 description: The item template is not bound when an item is moved in the MVVM ListBox.
 type: troubleshooting
-page_title: Template Not Bound When an MVVM ListBox Item is Moved | Kendo UI ListBox for jQuery
+page_title: Template Not Bound When an MVVM ListBox Item is Moved - Kendo UI ListBox for jQuery
 slug: template-not-bound-when-a-mvvm-listbox-item-is-moved
 tags: listbox, mvvm, template
 ticketid: 1123792

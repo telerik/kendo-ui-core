@@ -1,6 +1,6 @@
 ---
 title: Create Custom Edit Buttons
-page_title: Create Custom Edit Buttons | Kendo UI Grid for jQuery
+page_title: Create Custom Edit Buttons - Kendo UI Grid for jQuery
 description: "An example on how to create a custom Edit button by using AngularJS in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/AngularJS/custom-edit-toolbar-button
 slug: howto_create_custom_edit_buttons_grid

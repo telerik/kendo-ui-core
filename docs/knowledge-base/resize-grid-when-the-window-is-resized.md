@@ -1,6 +1,6 @@
 ---
 title: Resize and Expand Grid to 100% Height
-page_title: Resize and Expand to 100% Height | Kendo UI Grid for jQuery
+page_title: Resize and Expand to 100% Height - Kendo UI Grid for jQuery
 description: "An example on how to resize and expand it to 100% height when the parent container or browser window are resized too."
 previous_url: /controls/data-management/grid/how-to/Layout/resize-grid-when-the-window-is-resized
 slug: howto_resize_whenthe_windowis_resized_grid

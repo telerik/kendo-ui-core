@@ -2,7 +2,7 @@
 title: Use DropDownList for RecurrenceEditor and Checkboxes for Week Days sSelection
 description: An example on how to force the Scheduler RecurrenceEditor to its older look and feel.
 type: how-to
-page_title: Use DropDownList for RecurrenceEditor and Checkboxes for Week Days Selection | Kendo UI Scheduler for jQuery
+page_title: Use DropDownList for RecurrenceEditor and Checkboxes for Week Days Selection - Kendo UI Scheduler for jQuery
 slug: scheduler-dropdown-and-checkbboxes-recurrnceeditor
 tags: recurrence, recurrenceeditor, scheduler, editor, dropdownlist, checkboxes
 res_type: kb

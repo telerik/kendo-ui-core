@@ -1,6 +1,6 @@
 ---
 title: Change DatePicker Value from Another DatePicker in the Grid
-page_title: Change DatePicker Value | Kendo UI Grid for jQuery
+page_title: Change DatePicker Value - Kendo UI Grid for jQuery
 description: "An example on how to change a DatePicker value from another DatePicker in the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Editing/change-datepicker-value-from-another-datepicker
 slug: howto_change_datepicker_value_from_another_datepicker_grid

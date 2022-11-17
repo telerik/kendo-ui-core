@@ -2,7 +2,7 @@
 title: Get the Data of the Last Selected Grid Row
 description: An example on how to get the dataItem for the last selected row in the Kendo UI Grid by using the jQuery click event.
 type: how-to
-page_title: Get the DataItem of the Last Selected Row Only | Kendo UI Grid for jQuery
+page_title: Get the DataItem of the Last Selected Row Only - Kendo UI Grid for jQuery
 slug: checkbox-selection-dataitem-last-selected-row
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716, 1117204

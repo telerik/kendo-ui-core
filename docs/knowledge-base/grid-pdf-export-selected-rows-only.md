@@ -2,7 +2,7 @@
 title: Export Only the Selected Grid Rows to PDF
 description: An example on how to export to PDF only the selected rows of a Kendo UI Grid.
 type: how-to
-page_title: Export the Selected Rows to PDF | Kendo UI Grid for jQuery
+page_title: Export the Selected Rows to PDF - Kendo UI Grid for jQuery
 slug: grid-pdf-export-selected-rows-only
 tags: pdf, export, grid, selected rows
 ticketid: 1135051

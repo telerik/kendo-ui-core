@@ -2,7 +2,7 @@
 title: Render Embedded Tables in DropDownLists
 description: An example on how to display a table in a Kendo UI DropDownList.
 type: how-to
-page_title: Display Embedded Tables | Kendo UI DropDownList for jQuery
+page_title: Display Embedded Tables - Kendo UI DropDownList for jQuery
 slug: dropdownlist-with-embedded-table
 tags: dropdownlist, table
 ticketid: 1137036

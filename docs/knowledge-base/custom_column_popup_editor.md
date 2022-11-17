@@ -3,7 +3,7 @@ title: Add Custom Column Popup Editor
 description: "An example on how to add a custom popup editor for a column in the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Editing/custom_column_popup_editor
 type: how-to
-page_title: Add Custom Column Popup Editor | Kendo UI Grid for jQuery
+page_title: Add Custom Column Popup Editor - Kendo UI Grid for jQuery
 slug: custom_column_popup_editor
 tags: kendo ui, mvc, grid, editing, custom editor
 teampulseid:

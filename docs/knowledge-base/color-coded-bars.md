@@ -1,6 +1,6 @@
 ---
 title: Implement Color-Coded Ranges in Chart Bars
-page_title: Implement Color-Coded Ranges in Chart Bars | Kendo UI Charts for jQuery
+page_title: Implement Color-Coded Ranges in Chart Bars - Kendo UI Charts for jQuery
 description: "Learn how to implement color-coded ranges in bars when working with the Kendo UI Charts."
 previous_url: /controls/charts/how-to/color-coded-bars, /controls/charts/how-to/appearance/color-coded-bars
 slug: howto_implementcolorcodedranges_inbars_charts

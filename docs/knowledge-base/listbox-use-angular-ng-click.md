@@ -2,7 +2,7 @@
 title: Use AngularJS ng-click in ListBox Template 
 description: An example on how to use use AngularJS directive in the jQuery template of the Kendo UI ListBox items.
 type: how-to
-page_title: Use ng-click in jQuery template | Kendo UI ListBox for jQuery
+page_title: Use ng-click in jQuery template - Kendo UI ListBox for jQuery
 slug: listbox-use-angular-ng-click
 tags: listbox, angularjs, ng-click, angular, template, directive, jQuery, compile
 ticketid: 1146854

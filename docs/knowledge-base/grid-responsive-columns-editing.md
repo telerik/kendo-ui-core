@@ -2,7 +2,7 @@
 title:  Responsive column editing template
 description: An example on how to use editing when responsive columns templates are used in the jQuery Kendo UI Grid.
 type: how-to
-page_title: Use editing with responsive columns template | Kendo UI Grid for jQuery
+page_title: Use editing with responsive columns template - Kendo UI Grid for jQuery
 slug: grid-responsive-columns-editing
 tags: grid, responsive, column, columns, editing, template
 res_type: kb

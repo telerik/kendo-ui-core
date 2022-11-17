@@ -2,7 +2,7 @@
 title: Export Grid PDF with Custom Template and External Variables
 description: Learn how to include external variables in the PDF template of the Grid
 type: how-to
-page_title: Include External Variables and Content in PDF Template | Kendo UI Grid
+page_title: Include External Variables and Content in PDF Template - Kendo UI Grid
 slug: grid-pdf-export-external-content
 position: 
 tags: grid, pdf, export, external, customize, header, footer, variable, content, template

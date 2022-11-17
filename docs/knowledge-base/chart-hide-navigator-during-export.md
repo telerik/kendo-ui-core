@@ -1,6 +1,6 @@
 ---
 title: Exclude Navigator from Stock Chart Export
-page_title: Exclude Navigator from Stock Chart Export | Kendo UI Grid for jQuery
+page_title: Exclude Navigator from Stock Chart Export - Kendo UI Grid for jQuery
 description: An example on how to export a Kendo UI Stock Chart without including its navigator in the resulting file.
 type: how-to
 slug: chart-hide-navigator-during-export

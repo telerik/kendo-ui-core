@@ -2,7 +2,7 @@
 title: Select a row from a Grid in another page
 description: An example on how to redirect from a grid row to another page and select a row from a grid on the other page.
 type: how-to
-page_title: Select a row from a Grid in another page | Kendo UI Grid for jQuery
+page_title: Select a row from a Grid in another page - Kendo UI Grid for jQuery
 slug: grid-redirect-and-select-a-row
 tags: grid, redirect, navigate, new, page, select, row
 res_type: how-to

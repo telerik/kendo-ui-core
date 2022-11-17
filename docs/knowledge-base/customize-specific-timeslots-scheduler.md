@@ -2,7 +2,7 @@
 title: Disable and Style Timeslots for Specific Days
 description: An example on how to customize specific days and style them
 type: how-to
-page_title: Customize and Style Specific Days | Kendo UI Scheduler for jQuery
+page_title: Customize and Style Specific Days - Kendo UI Scheduler for jQuery
 slug: customize-specific-timeslots-scheduler
 tags: kendoui, kendo, scheduler, customize, style, disable
 ticketid: 1119501

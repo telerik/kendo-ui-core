@@ -2,7 +2,7 @@
 title: Change the Pointer Cursor When Hovering a Shape or Connection in the Diagram
 description: An example on how to get rid of the hand cursor on hovering over a shape or a connection in a Kendo UI Diagram.
 type: how-to
-page_title: Change Cursor on Shape or Connection Hover | Kendo UI Diagram for jQuery
+page_title: Change Cursor on Shape or Connection Hover - Kendo UI Diagram for jQuery
 slug: diagram-change-shapes-connections-cursor
 tags: diagram, shape, connection
 ticketid: 1137455

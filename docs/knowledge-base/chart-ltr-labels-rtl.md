@@ -2,7 +2,7 @@
 title: Chart LTR, Labels RTL
 description: An example on how to display the Chart left-to-right and the labels right-to-left.
 type: how-to
-page_title: Display Chart LTR with RTL Labels | Kendo UI Chart for jQuery
+page_title: Display Chart LTR with RTL Labels - Kendo UI Chart for jQuery
 slug: chart-ltr-labels-rtl
 tags: chart, ltr, rtl, labels,alignment
 ticketid: 1493757

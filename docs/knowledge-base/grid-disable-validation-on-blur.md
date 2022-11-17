@@ -2,7 +2,7 @@
 title: Disable Validation on Blur  
 description: An example on how to disable the validation on blur  of the Kendo UI Grid.
 type: how-to
-page_title: Disable Validation on Blur | Kendo UI Grid for jQuery
+page_title: Disable Validation on Blur - Kendo UI Grid for jQuery
 slug: grid-disable-validation-on-blur
 tags: grid, disable, validation, on, blur, onblur, remove
 res_type: kb

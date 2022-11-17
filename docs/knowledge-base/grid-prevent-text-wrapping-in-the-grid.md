@@ -2,7 +2,7 @@
 title: Prevent Text Wrapping in the Grid
 description: An example on how to prevent text wrapping in the Kendo UI Grid.
 type: how-to
-page_title: Prevent Text Wrapping | Kendo UI Grid for ASP.NET MVC
+page_title: Prevent Text Wrapping - Kendo UI Grid for ASP.NET MVC
 slug: grid-prevent-text-wrapping-in-the-grid
 tags: grid, wrap, prevent
 ticketid: 1141418

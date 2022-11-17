@@ -2,7 +2,7 @@
 title: Drag and Drop Tiles to an Empty TileLayout
 description: "Learn How to Drag and Drop Tiles to an Empty TileLayout"
 type: how-to
-page_title: How to Drag and Drop Tiles to an Empty TileLayout | Kendo UI TileLayout for jQuery
+page_title: How to Drag and Drop Tiles to an Empty TileLayout - Kendo UI TileLayout for jQuery
 slug: drag-and-drop-tiles-empty-tilelayout
 tags: kendo, jquery, tilelayout, tile, drag, and, drop, empty
 ticketid: 1570416

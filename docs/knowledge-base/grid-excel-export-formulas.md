@@ -2,7 +2,7 @@
 title: Include a Column with Formulas When Exporting Grid to Excel
 description: An example on how to create an excel file that features formulas.
 type: how-to
-page_title: Exporting to Excel with Formulas | Kendo UI Grid for jQuery
+page_title: Exporting to Excel with Formulas - Kendo UI Grid for jQuery
 slug: grid-excel-export-formulas
 tags: excel, export, grid, formula, formulas, column, create, include, calculate, add, sum, total
 ticketid: 1433998

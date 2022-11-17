@@ -2,7 +2,7 @@
 title: Remove Scroll Buttons from Menus
 description: The scroll buttons of the Kendo UI Menu and Context Menu can be hidden using CSS.
 type: how-to
-page_title: Hide Scroll Buttons | Kendo UI Menu for jQuery
+page_title: Hide Scroll Buttons - Kendo UI Menu for jQuery
 slug: menu-contextmenu-remove-scroll-buttons
 position: 
 tags: menu, contextmenu, scroll, buttons, remove, hide, navigation

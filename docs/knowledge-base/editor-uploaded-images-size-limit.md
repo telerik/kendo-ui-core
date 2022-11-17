@@ -2,7 +2,7 @@
 title: Set Size Limit for Images Uploaded with Editor ImageBrowser
 description: An example on how to set a size limit for images uploaded with the ImageBrowser in Kendo UI Editor.
 type: how-to
-page_title: Set size limit for images uploaded with ImageBrowser | Kendo UI Editor for jQuery
+page_title: Set size limit for images uploaded with ImageBrowser - Kendo UI Editor for jQuery
 slug: editor-uploaded-images-size-limit
 tags: editor, set, size, limit, images, imagebrowser
 ticketid: 1135009

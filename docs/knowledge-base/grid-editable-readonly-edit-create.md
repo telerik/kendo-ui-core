@@ -2,7 +2,7 @@
 title: Allow Editing When Creating New Records for the New Records Only
 description: An example on how to conditionally configure the Kendo UI Grid to allow editing during the Create operation only.
 type: how-to
-page_title: Modify Specific Fields on Insert and Read-Only while Updating | Kendo UI Grid for jQuery
+page_title: Modify Specific Fields on Insert and Read-Only while Updating - Kendo UI Grid for jQuery
 slug: grid-editable-readonly-edit-create.md
 tags: grid, editable, readonly, edit, create
 ticketid: 1168477

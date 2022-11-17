@@ -2,7 +2,7 @@
 title: Use Grid Detail Template with Row Template
 description: An example on how to use the grid detail template together with a row template in a Kendo UI Grid for AngularJS.
 type: how-to
-page_title: Row Template Directive with Detail Template | Kendo UI Grid for AngularJS
+page_title: Row Template Directive with Detail Template - Kendo UI Grid for AngularJS
 slug: grid-row-template-detail-template-angularjs
 tags: grid, angular, js, angularjs, directive, template, row, detail, rowTemplate, detailTemplate
 ticketid: 1179134

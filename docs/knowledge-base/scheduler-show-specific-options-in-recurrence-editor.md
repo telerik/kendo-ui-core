@@ -2,7 +2,7 @@
 title: Show Specific Options In Recurrence Editor in Scheduler
 description: An example on how to show only some of the options in Repeat DropDownList in Recurrence Editor of Scheduler .
 type: how-to
-page_title: Show Specific Repeat Options in Recurrence Editor | Kendo UI Scheduler for jQuery
+page_title: Show Specific Repeat Options in Recurrence Editor - Kendo UI Scheduler for jQuery
 slug: scheduler-show-specific-options-in-recurrence-editor
 tags: kendo, kendoui, scheduler, recurrence, editor, show, hide, repeat
 res_type: kb

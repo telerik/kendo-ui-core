@@ -2,7 +2,7 @@
 title: Display Same Aggregate in Group Header Regardless of Column Used to Group By
 description: An example on how to always display the sum of a particular column in the group header of the Kendo UI Grid for jQuery.
 type: how-to
-page_title: Display Aggregate in Group Header Calculated by Using Different Column | Kendo UI Grid for jQuery
+page_title: Display Aggregate in Group Header Calculated by Using Different Column - Kendo UI Grid for jQuery
 slug: grid-display-different-aggregate-group-header
 tags: grid, aggregate, group, header, different, column, sum, average
 ticketid: 1168063

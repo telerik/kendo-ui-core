@@ -2,7 +2,7 @@
 title: Extend Editor Insert Hyperlink Dialog to Allow Adding Class Names to the Inserted Link
 description: An example on how to extend insert hyperlink dialog to allow adding class names to the inserted link in Kendo UI Editor.
 type: how-to
-page_title: Extend Editor Insert Hyperlink Dialog | Kendo UI Editor for jQuery
+page_title: Extend Editor Insert Hyperlink Dialog - Kendo UI Editor for jQuery
 slug: editor-extend-hyperlink-command-custom-class
 tags: kendo, kendo-ui, editor, extend, hyperlink, command
 ticketid: 1556683

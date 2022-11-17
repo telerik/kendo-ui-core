@@ -2,7 +2,7 @@
 title: Change Placeholder Text after Initialization
 description: An example on how to change the placeholder text of a Kendo UI ComboBox for jQuery.
 type: how-to
-page_title: Configure the Placeholder Attribute | Kendo UI ComboBox for jQuery
+page_title: Configure the Placeholder Attribute - Kendo UI ComboBox for jQuery
 slug: combobox-placeholder-change-programmatic-attribute
 tags: combobox, placeholder, change, programmatic, attribute, initialization
 ticketid: 1411783

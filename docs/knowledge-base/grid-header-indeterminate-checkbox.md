@@ -2,7 +2,7 @@
 title: Make the Header Checkbox Indeterminate
 description: "Display indeterminate status for the master checkbox when only some of the Grid checkboxes are selected."
 type: how-to
-page_title: Make the Header Checkbox Indeterminate | Kendo UI Grid
+page_title: Make the Header Checkbox Indeterminate - Kendo UI Grid
 slug: grid-header-indeterminate-checkbox
 position: 
 tags: grid, header, checkbox, select, indeterminate, prop, status

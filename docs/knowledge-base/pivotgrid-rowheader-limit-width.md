@@ -2,7 +2,7 @@
 title: PivotGrid resize the width of the row header area
 description: How to prevent the row header from expanding too much and taking up space in the Kendo UI PivotGrid
 type: how-to
-page_title: Compact width of the rowheaders | Kendo UI PivotGrid for jQuery
+page_title: Compact width of the rowheaders - Kendo UI PivotGrid for jQuery
 slug: pivotgrid-rowheader-limit-width
 tags: pivot, pivotgrid, width, compact, column, row, header, rowheader, limit, resize, reduce
 ticketid: 1474913, 1157675

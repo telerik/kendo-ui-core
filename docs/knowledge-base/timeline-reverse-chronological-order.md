@@ -2,7 +2,7 @@
 title: Display the Timeline Events in Reverse Chronological Order
 description: "An example demonstrating how to display the Timeline events in reverse chronological order."
 type: how-to
-page_title: Timeline Display of Events in Reverse Chronological Order | Kendo UI Timeline for jQuery
+page_title: Timeline Display of Events in Reverse Chronological Order - Kendo UI Timeline for jQuery
 slug: timeline-reverse-chronological-order
 tags: timeline, events, chronological, order, sort, reverse, descending
 res_type: kb

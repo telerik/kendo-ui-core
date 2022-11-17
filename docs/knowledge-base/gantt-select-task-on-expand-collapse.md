@@ -2,7 +2,7 @@
 title: Select Task On Click of Expand or Collapse Icon
 description: An example on how to implement a functionality to select the task when clicking on the expand or collapse icon.
 type: how-to
-page_title: Implement Task Selection on Click of Expand or Collapse icon | Kendo UI Gantt for jQuery
+page_title: Implement Task Selection on Click of Expand or Collapse icon - Kendo UI Gantt for jQuery
 slug: select-gantt-task-on-expand-collapse
 tags: kendo, kendoui, gantt, select, expand, collapse, task, icon, click
 ticketid: 1483656

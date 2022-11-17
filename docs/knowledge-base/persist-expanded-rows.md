@@ -1,6 +1,6 @@
 ---
 title: Persist Expanded Rows after Refresh
-page_title: Persist Expanded Rows | Kendo UI Grid for jQuery
+page_title: Persist Expanded Rows - Kendo UI Grid for jQuery
 description: "An example on how to persist the expanded rows of the Kendo UI Grid for jQuery after refresh."
 previous_url: /controls/data-management/grid/how-to/persist-expanded-rows, /controls/data-management/grid/how-to/state/persist-expanded-rows
 slug: howto_persist_expanded_rows_afetrrefresh_grid

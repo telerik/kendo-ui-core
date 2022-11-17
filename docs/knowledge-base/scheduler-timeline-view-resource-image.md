@@ -2,7 +2,7 @@
 title: Add Image to Resource on Timeline View
 description: An example on how to insert an image on the Timeline view resources in the Kendo UI Scheduler.
 type: how-to
-page_title: Add Image to Resource on Timeline View | Kendo UI Scheduler for jQuery
+page_title: Add Image to Resource on Timeline View - Kendo UI Scheduler for jQuery
 slug: scheduler-timeline-view-resource-image
 tags: scheduler, timeline, view, resource, add, image
 ticketid: 1155292

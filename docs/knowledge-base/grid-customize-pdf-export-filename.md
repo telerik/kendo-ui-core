@@ -2,7 +2,7 @@
 title: Customize the Pdf Export Filename of the Grid by Adding Current Date and Time
 description: "An example on how to customize the Pdf export filename of the Grid by adding the current date and time of generation."
 type: how-to
-page_title: Add the Current Date and Time to the Pdf Export Filename | Kendo UI Grid for jQuery
+page_title: Add the Current Date and Time to the Pdf Export Filename - Kendo UI Grid for jQuery
 slug: grid-customize-pdf-export-filename
 tags: grid, pdf, export, datetime, customize, customize
 ticketid: 1130491

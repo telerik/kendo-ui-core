@@ -1,6 +1,6 @@
 ---
 title: Show AutoComplete Suggestions for Current Grid Filter
-page_title: Show AutoComplete Suggestions for Current Grid Filter | Kendo UI Grid for jQuery
+page_title: Show AutoComplete Suggestions for Current Grid Filter - Kendo UI Grid for jQuery
 description: "An example on how to filter the Kendo UI Grid by using the Kendo UI AutoComplete and by showing results from the current Grid filter."
 previous_url: /controls/data-management/grid/how-to/autocomplete-suggestions-by-current-grid-filter.html, /controls/data-management/grid/how-to/filtering/autocomplete-suggestions-by-current-grid-filter
 slug: howto_autocomplete_suggestions_by_current_grid_filter

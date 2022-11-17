@@ -2,7 +2,7 @@
 title: Filter Boolean on Click
 description: An example on how to filter Kendo UI Grid boolean fields on click of the radio button in the FilterMenu.
 type: how-to
-page_title: Filter Bool Columns on Click | Kendo UI Grid for jQuery
+page_title: Filter Bool Columns on Click - Kendo UI Grid for jQuery
 slug: grid-filter-boolean-fields-on-click
 tags: grid, filter, bool, boolean, fields, on click, radio, radiobuttons
 res_type: kb

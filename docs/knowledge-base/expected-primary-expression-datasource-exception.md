@@ -2,7 +2,7 @@
 title: When Setting the Initial DataSource Filter an Expected Primary Expression Exception Occurs
 description: Setting the initial filter in the Kendo UI Grid throws an Expected primaryExpression exception.
 type: troubleshooting
-page_title: Expected Primary Expression Exception Occurs When Setting the Initial DataSource Filter | Kendo UI DataSource for ASP.NET MVC
+page_title: Expected Primary Expression Exception Occurs When Setting the Initial DataSource Filter - Kendo UI DataSource for ASP.NET MVC
 slug: expected-primary-expression-datasource-exception
 tags: expected, primary, expression, exception, datasource, filter, mvc
 ticketid: 1135350

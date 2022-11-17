@@ -2,7 +2,7 @@
 title: Open the Popup Editor on Double Click of a Grid Row
 description: An example on how to open the popup editor of a Kendo UI Grid by double-clicking a row.
 type: how-to
-page_title: Open the Popup Editor on Double Click of a Row | Kendo UI Grid for jQuery
+page_title: Open the Popup Editor on Double Click of a Row - Kendo UI Grid for jQuery
 slug: grid-open-edit-popup-on-double-click-of-row
 tags: grid, editor, popup, double, click, row, on, of, open,edit
 res_type: kb

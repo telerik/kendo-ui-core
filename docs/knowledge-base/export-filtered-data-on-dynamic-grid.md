@@ -1,6 +1,6 @@
 ---
 title: Export Filtered Data to Excel in Grid with Dynamic Columns and Data Types
-page_title: Export Filtered Data to Excel in Dynamic Grid | Kendo UI Grid for jQuery
+page_title: Export Filtered Data to Excel in Dynamic Grid - Kendo UI Grid for jQuery
 description: "An example on how to export to Excel filtered data only in a Kendo UI jQuery Grid with column and data fields information which is retrieved during runtime."
 slug: howto_export_filtered_data_dynamic_grid
 tags: grid, export, excel, dynamic, columns, data, types

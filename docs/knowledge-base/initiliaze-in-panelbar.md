@@ -1,6 +1,6 @@
 ---
 title: Initialize the Grid in PanelBar
-page_title: Initialize in PanelBar | Kendo UI Grid for jQuery
+page_title: Initialize in PanelBar - Kendo UI Grid for jQuery
 description: "An example on how to initialize the jQuery Grid by Kendo UI inside a PanelBar widget by resizing it according to the dimensions of its container."
 previous_url: /controls/data-management/grid/how-to/hidden/initiliaze-in-panelbar
 slug: howto_initializegridinpanelbar_grid

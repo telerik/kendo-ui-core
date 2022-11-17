@@ -2,7 +2,7 @@
 title: Reorderable Grid with Row Template ColumnMenu issue
 description: An example on how to implement a column menu in a reorderable grid with row template.
 type: how-to
-page_title: Implement Column Menu with Row Template | Kendo UI Grid for jQuery
+page_title: Implement Column Menu with Row Template - Kendo UI Grid for jQuery
 slug: grid-reorderable-with-column-menu-and-row-template
 tags: grid, rowTemplate, columnMenu, issue, does not work, row, template, column, menu, reorderable, reorder
 ticketid: 1160575

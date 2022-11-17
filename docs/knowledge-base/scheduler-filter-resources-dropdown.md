@@ -2,7 +2,7 @@
 title: Filter Resources by Using a Kendo UI ComboBox in Scheduler
 description: An example on how to filter the resource of the Kendo UI Scheduler widget by using the Kendo UI ComboBox.
 type: how-to
-page_title: Implement Resource Filtering by Using ComboBox | Kendo UI Scheduler for jQuery
+page_title: Implement Resource Filtering by Using ComboBox - Kendo UI Scheduler for jQuery
 slug: scheduler-filter-resources-dropdown
 tags: kendo, kendoui, combobox, scheduler, filter, resources
 ticketid: 1138727

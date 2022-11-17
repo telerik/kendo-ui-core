@@ -2,7 +2,7 @@
 title: Preview Export API in PDFViewer
 description: An example on how to preview the generated PDF from the Kendo UI Drawing API in the Kendo UI PDFViewer for jQuery.
 type: how-to
-page_title: Use PDFViewer with PDF Export API | Kendo UI PDFViewer for jQuery
+page_title: Use PDFViewer with PDF Export API - Kendo UI PDFViewer for jQuery
 slug: preview-pdf-export-api-in-viewer
 tags: pdf,viewer,export,preview,api,generate,download
 ticketid: 1412617

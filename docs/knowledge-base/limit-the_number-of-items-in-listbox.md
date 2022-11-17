@@ -2,7 +2,7 @@
 title: Limit the Number of Items in Connected Listboxes
 description: An example on how to limit the number of items in the Kendo UI ListBox.
 type: how-to
-page_title: Limit the Number of Items in the Second ListBox | Kendo UI ListBox for jQuery
+page_title: Limit the Number of Items in the Second ListBox - Kendo UI ListBox for jQuery
 slug: limit-the_number-of-items-in-listbox
 previous_url: /knowledge-base/how_to_limit_the_number_of_items_in_listBox
 tags: listbox, limit

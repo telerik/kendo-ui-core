@@ -2,7 +2,7 @@
 title: Increase Width to Potentially Show Full Column Values
 description: An example on how to increase the width of the filter menu in the Kendo UI Grid for ASP.NET MVC.
 type: how-to
-page_title: Increase the Width of the Filter Menu | Kendo UI Grid for jQuery
+page_title: Increase the Width of the Filter Menu - Kendo UI Grid for jQuery
 slug: increase-the-width-of-the-filter-menu
 previous_url: /knowledge-base/how-to-increase-the-width-of-the-filter-menu
 tags: grid, filter, width

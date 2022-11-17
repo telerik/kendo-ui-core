@@ -2,7 +2,7 @@
 title: Add Image in Diagram Shape Template
 description: How to Add Image in Diagram Shape Template
 type: how-to
-page_title: How to Add Image in Diagram Shape Template | Kendo UI Diagram for jQuery
+page_title: How to Add Image in Diagram Shape Template - Kendo UI Diagram for jQuery
 slug: add-image-in-diagram-shape-template
 position: 
 tags: 

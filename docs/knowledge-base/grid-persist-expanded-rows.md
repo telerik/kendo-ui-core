@@ -2,7 +2,7 @@
 title: Persist expanded rows in Kendo Grid
 description: An example on how to persist the Kendo UI Grid expanded rows.
 type: how-to
-page_title:  Persist expanded rows in Kendo Grid | Kendo UI Grid for jQuery
+page_title:  Persist expanded rows in Kendo Grid - Kendo UI Grid for jQuery
 slug: grid-persist-expanded-rows
 tags: grid, persist, detail, expand, expanded, refresh
 res_type: kb

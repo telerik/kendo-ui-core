@@ -2,7 +2,7 @@
 title: Remove 'None' option in DropdownList of Kendo UI Scheduler Popup Editor
 description: Learn how to hide 'None' as an option and as a default value in the DropdownList of the Popup Editor Form in the Kendo UI Scheduler.
 type: how-to
-page_title: Hide the built-in option from the Editor | Kendo UI Scheduler 
+page_title: Hide the built-in option from the Editor - Kendo UI Scheduler 
 slug: scheduler-assign-default-value-editor
 position: 
 tags: scheduler, assign, default, value, dropdownlist, popup, editor, form, none, remove, hide, nullable, defaultvalue, schema, model

@@ -2,7 +2,7 @@
 title: Apply Different Style for Multi-level Hierarchical Grid Headers
 description: An example how to style different levels of detail Kendo UI Grids with CSS.
 type: how-to
-page_title: Style Hierarchical Grid Headers | Kendo UI Grid for ASP.NET MVC
+page_title: Style Hierarchical Grid Headers - Kendo UI Grid for ASP.NET MVC
 slug: grid-style-hierarchical-grid-headers
 tags: grid, headers, style, css, hierarchy, detail, kendo
 ticketid: 1142385

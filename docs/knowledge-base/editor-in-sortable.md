@@ -2,7 +2,7 @@
 title: Missing Content when Drag Dropping Kendo Editor
 description: An example on how to refresh Kendo UI Editor after drag drop in Sortable.
 type: troubleshooting
-page_title: Refresh Editor after Drag Drop in Sortable | Kendo UI Editor for jQuery
+page_title: Refresh Editor after Drag Drop in Sortable - Kendo UI Editor for jQuery
 slug: editor-in-sortable
 tags: editor, sortable, content, refresh
 res_type: kb

@@ -2,7 +2,7 @@
 title: Apply the Same Data on Different Chart Instances
 description: An example on how to fetch data once and use it with different filters for different Kendo UI Charts for jQuery.
 type: how-to
-page_title: Fetch a Single Data Set with Different Filters for Different Charts | Kendo UI Chart for jQuery
+page_title: Fetch a Single Data Set with Different Filters for Different Charts - Kendo UI Chart for jQuery
 slug: chart-one-datasource-different-filters
 tags: fetch, same, data, apply, different, chart, instances
 ticketid: 1424758

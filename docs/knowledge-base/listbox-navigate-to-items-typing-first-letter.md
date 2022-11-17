@@ -2,7 +2,7 @@
 title: Navigate to Items Typing First Letter
 description: How to Navigate to Items Typing Capital Letter
 type: how-to
-page_title: How to Navigate to Items Using First Letter | Kendo UI ListBox for jQuery
+page_title: How to Navigate to Items Using First Letter - Kendo UI ListBox for jQuery
 slug: listbox-navigate-to-items-typing-first-letter
 position: 
 tags: 

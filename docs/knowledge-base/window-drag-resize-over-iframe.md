@@ -2,7 +2,7 @@
 title: Drag and Resize Window Over Iframe
 description: An example on how to enable Window to be dragged and resized over iframe elements.
 type: how-to
-page_title: Drag and Resize Window Over Iframe | Kendo UI Window for jQuery
+page_title: Drag and Resize Window Over Iframe - Kendo UI Window for jQuery
 slug: window-drag-resize-over-iframe
 tags: window, iframe, drag, resize
 ticketid:

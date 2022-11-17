@@ -1,6 +1,6 @@
 ---
 title: Update Toolbar Content Using MVVM Binding
-page_title: Update Toolbar via MVVM Binding | Kendo UI Grid for jQuery
+page_title: Update Toolbar via MVVM Binding - Kendo UI Grid for jQuery
 description: "An example on how to create a custom MVVM binding to update the Toolbar content dynamically in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/toolbar-mvvm-binding, /controls/data-management/grid/how-to/binding/toolbar-mvvm-binding
 slug: howto_update_toolbar_content_using_mvvmbinding_grid

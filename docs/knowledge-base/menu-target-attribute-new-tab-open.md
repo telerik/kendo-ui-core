@@ -2,7 +2,7 @@
 title: Open a New Tab on Menu Item Click
 description: An example on how to open a new tab when selecting a menu item in the Kendo UI Menu for jQuery.  
 type: how-to
-page_title: Navigate to a New Tab on Item Click | Kendo UI Menu for jQuery
+page_title: Navigate to a New Tab on Item Click - Kendo UI Menu for jQuery
 slug: menu-target-attribute-new-tab-open
 tags: menu, target, attribute, new, tab, open, navigate
 ticketid: 1408587

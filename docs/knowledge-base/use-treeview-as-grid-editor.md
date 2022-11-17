@@ -1,6 +1,6 @@
 ---
 title: Use TreeView as Custom Editor
-page_title: Use TreeView as Custom Editor | Kendo UI Grid for jQuery
+page_title: Use TreeView as Custom Editor - Kendo UI Grid for jQuery
 description: "An example on how to use TreeView as an editor in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/use-treeview-as-grid-editor, /controls/navigation/treeview/how-to/integration/use-treeview-as-editor-grid
 slug: howto_usethe_treeview_aseditor_grid

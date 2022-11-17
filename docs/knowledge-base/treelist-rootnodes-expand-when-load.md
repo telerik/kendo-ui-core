@@ -2,7 +2,7 @@
 title: Open Root Nodes of the TreeList
 description: Expand the root nodes of the Kendo UI TreeList when the page is loaded.
 type: how-to
-page_title: Expand the Parent Nodes | Kendo UI TreeList
+page_title: Expand the Parent Nodes - Kendo UI TreeList
 slug: treelist-rootnodes-expand-when-load
 position: 
 tags: treelist, expand, load, parent, node, rootnode, open

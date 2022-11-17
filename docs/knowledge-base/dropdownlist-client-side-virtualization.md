@@ -2,7 +2,7 @@
 title: Implement Client-Side Virtualization in DropDownlist
 description: An example on how to achieve a client-side virtualization in a Kendo UI DropDownlist.
 type: how-to
-page_title: Apply Client-Side Virtualization | Kendo UI DropDownList for jQuery
+page_title: Apply Client-Side Virtualization - Kendo UI DropDownList for jQuery
 slug: dropdownlist-client-side-virtualization
 tags: dropdownlist, virtualization
 ticketid: 1150272  

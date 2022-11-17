@@ -1,6 +1,6 @@
 ---
 title: Export Each Group in a Different Excel Sheet
-page_title: Export Each Group in a Different Excel Sheet | Kendo UI Grid for jQuery
+page_title: Export Each Group in a Different Excel Sheet - Kendo UI Grid for jQuery
 description: "An example demonstrating how to export each Grid group in a separate excel sheet."
 type: how-to
 slug: grid-excel-export-each-group-in-a-separate-sheet

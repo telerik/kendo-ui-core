@@ -2225,7 +2225,8 @@ function pad(number, digits, end) {
             mobileOS = support.mobileOS = {
                 ios: true,
                 tablet: "tablet",
-                device: "ipad"
+                device: "ipad",
+                majorVersion: 13
             };
         }
 
@@ -2387,7 +2388,7 @@ function pad(number, digits, end) {
             safari = support.browser.safari;
         support.msPointers = !chrome && window.MSPointerEvent;
         support.pointers = !chrome && !mobileChrome && !mozilla && !safari && window.PointerEvent;
-        support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
+        support.kineticScrollNeeded = mobileOS && (mobileOS.device !== "ipad" || mobileOS.majorVersion < 13) && (support.touch || support.msPointers || support.pointers);
     })();
 
 

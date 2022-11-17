@@ -2,7 +2,7 @@
 title: PivotGrid Customize Exported Excel File
 description: How to align content in cells, change background and add borders to the exported excel file in the Kendo UI PivotGrid
 type: how-to
-page_title: How to Add Borders and Change the Background Color of Cells | Kendo UI PivotGrid for jQuery
+page_title: How to Add Borders and Change the Background Color of Cells - Kendo UI PivotGrid for jQuery
 slug: pivotgrid-excel-export-customize
 tags: pivot, pivotgrid, excel, export, custom, cells, border, background, align
 ticketid: 1146696

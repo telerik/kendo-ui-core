@@ -2,7 +2,7 @@
 title: Upload and Play Video Files with Media Player
 description: "The following example demonstrates how to upload and play a video file directly with the Kendo UI for jQuery MediaPlayer."
 type: how-to
-page_title: Upload and Play Video Files with Media Player | Kendo UI MediaPlayer for jQuery
+page_title: Upload and Play Video Files with Media Player - Kendo UI MediaPlayer for jQuery
 slug: mediaplayer-upload-and-play-video-file
 tags: mediaplayer, media, video, upload, play, player
 ticketid: 1360372

@@ -2,7 +2,7 @@
 title: Exclude Certain Columns from the Exported PDF File
 description: An example on how to exclude certain columns from the exported PDF file when working with the Kendo UI Grid.
 type: how-to
-page_title: Exclude Certain Columns from the Exported PDF File | Kendo UI Grid for jQuery
+page_title: Exclude Certain Columns from the Exported PDF File - Kendo UI Grid for jQuery
 slug: grid-exclude-columns-from-exported-pdf
 tags: grid, export, pdf, exclude, remove, column, columns, exported, file,
 res_type: kb

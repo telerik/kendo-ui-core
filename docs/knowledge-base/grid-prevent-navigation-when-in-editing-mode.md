@@ -1,6 +1,6 @@
 ---
 title: Prevent Page Navigation in Edit Mode
-page_title: Prevent Navigation in Edit Mode | Kendo UI Grid for jQuery
+page_title: Prevent Navigation in Edit Mode - Kendo UI Grid for jQuery
 description: "An example on how to prevent page navigation while in edit mode of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-prevent-navigation-when-in-editing-mode
 slug: howto_prevent_page_navigation_inedit_mode_grid

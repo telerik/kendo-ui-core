@@ -2,7 +2,7 @@
 title: Load shape from context menu in the Diagram
 description: An example on how to dynamically add shapes to a Kendo UI Diagram using a context menu.
 type: how-to
-page_title: Create shapes dynamically with ContextMenu | Kendo UI Diagram for jQuery
+page_title: Create shapes dynamically with ContextMenu - Kendo UI Diagram for jQuery
 slug: diagram-add-shapes-from-context-menu
 tags: diagram, shape, connection, dynamically, add, contextMenu, flowchart, context, menu
 ticketid: 1363741

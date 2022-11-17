@@ -2,7 +2,7 @@
 title: Place Input to the Right of Label when Using Checkbox Styling
 description: An example on how to move the checkbox input to the right when you use the checkbox styling in the Kendo UI Grid.
 type: how-to
-page_title: Place Input to the Right of Label when Using Checkbox Styling | Kendo UI Grid for jQuery
+page_title: Place Input to the Right of Label when Using Checkbox Styling - Kendo UI Grid for jQuery
 slug: checkbox-styling-right-side
 tags: checkbox, styling, right, label, to the right, input
 ticketid: 1141307

@@ -2,7 +2,7 @@
 title: Reorder Grid Rows without Removing the "dragged" Row 
 description: Keep the dragged row visible in Grid until reordered
 type: how-to
-page_title: Keep Row Visible while reordering | Kendo UI Grid
+page_title: Keep Row Visible while reordering - Kendo UI Grid
 slug: grid-sortable-keep-row-visible-until-drop
 position: 
 tags: grid, sortable, dragging, row, visible, reorder

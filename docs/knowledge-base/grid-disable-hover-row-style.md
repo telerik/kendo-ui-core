@@ -2,7 +2,7 @@
 title: Disable Hover Row Style
 description: An example which shows how to prevent the row from changing colors upon hovering.
 type: how-to
-page_title: Prevent Hover Color Change for Rows | Kendo UI Grid
+page_title: Prevent Hover Color Change for Rows - Kendo UI Grid
 slug: grid-disable-hover-row-style
 position: 
 tags: grid, row, hover, disable, prevent, style

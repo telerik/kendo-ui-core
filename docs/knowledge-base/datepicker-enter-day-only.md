@@ -2,7 +2,7 @@
 title: Enter Date by Setting Only the Day
 description: An example on how to set a value by setting only the day in the Kendo UI DatePicker.
 type: how-to
-page_title: Set Date by Entering Only the Day | Kendo UI DatePicker for jQuery
+page_title: Set Date by Entering Only the Day - Kendo UI DatePicker for jQuery
 slug: datepicker-enter-day-only
 tags: kendo, datepicker, day, date, select, default, set
 res_type: kb

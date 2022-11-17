@@ -2,7 +2,7 @@
 title: Set Default Value for Date Picker
 description: How to Set Default Value for Date Picker
 type: how-to
-page_title: How to Set Default Value for Date Picker | Kendo UI DatePicker for jQuery
+page_title: How to Set Default Value for Date Picker - Kendo UI DatePicker for jQuery
 slug: datepicker-set-default-value
 position: 
 tags: 

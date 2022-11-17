@@ -2,7 +2,7 @@
 title: Set Filter Dialog with Two or More Fields in Grid
 description: An example on how to configure the filter dialog of the Kendo UI Grid to show more than two fields.
 type: how-to
-page_title: Set Filter Dialog with More Than Two Fields | Kendo UI Grid for jQuery
+page_title: Set Filter Dialog with More Than Two Fields - Kendo UI Grid for jQuery
 slug: grid-filter-dialog-with-more-than-two-fields
 tags: grid, filter, dialog, more, than, two, fields, multiple, filtering
 ticketid: 1147919

@@ -2,7 +2,7 @@
 title: Insert Rows When Exporting the Grid to Excel
 description: An example on how to intercept the export of the Kendo UI Grid to excel and add rows to the workbook.
 type: how-to
-page_title: Intercept Excel Export and Add Rows | Kendo UI Grid for jQuery
+page_title: Intercept Excel Export and Add Rows - Kendo UI Grid for jQuery
 slug: insert-rows-when-exporting-grid-to-excel
 tags: grid, excel, export, add, rows
 ticketid: 1116551

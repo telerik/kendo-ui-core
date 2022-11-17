@@ -1,6 +1,6 @@
 ---
 title: Drag and Drop Rows between Grids
-page_title: Drag and Drop Rows Between Grids | Kendo UI Grid for jQuery
+page_title: Drag and Drop Rows Between Grids - Kendo UI Grid for jQuery
 description: "An example on how to drag and drop rows between two Kendo UI Grids for jQuery."
 previous_url: /controls/data-management/grid/how-to/drag-and-drop-rows-between-two-grids, /aspne-mvc/controls/data-management/grid/how-to/drag-and-drop-rows-between-two-grids, /controls/data-management/grid/how-to/various/drag-and-drop-rows-between-two-grids
 slug: howto_dragand_drop_rows_between_twogrids_grid

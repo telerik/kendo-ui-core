@@ -1,6 +1,6 @@
 ---
 title: Use Checkbox Column Templates and Edit
-page_title:  Checkbox Column Templates | Kendo UI Grid for jQuery
+page_title:  Checkbox Column Templates - Kendo UI Grid for jQuery
 description: "An example on how to use checkbox column templates and perform editing."
 previous_url: /kendo-uimvc/web/grid/how-to/Templates/grid-with-checkbox-column, /controls/data-management/grid/how-to/Templates/grid-with-checkbox-column
 slug: howto_use_checkbox_column_templateand_edit_grid

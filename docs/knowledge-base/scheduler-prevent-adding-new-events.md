@@ -2,7 +2,7 @@
 title: Prevent Adding New Events And Deleting The Exisitng Ones In Scheduler
 description: An example on how to prevent adding new events and deleting the existing ones Kendo UI Scheduler.
 type: how-to
-page_title: Prevent Adding New Events And Deleting The Exisitng Ones | Kendo UI Scheduler for jQuery
+page_title: Prevent Adding New Events And Deleting The Exisitng Ones - Kendo UI Scheduler for jQuery
 slug: scheduler-prevent-adding-new-events
 tags: kendo, kendo-ui, scheduler
 ticketid: 1110078

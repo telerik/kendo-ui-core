@@ -1,6 +1,6 @@
 ---
 title: Create and Use Auto Layout in the Grid
-page_title:  Create and Use Auto Layout | Kendo UI Grid for jQuery
+page_title:  Create and Use Auto Layout - Kendo UI Grid for jQuery
 description: "An example on how to create and use auto layout in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/auto-layout-grid
 slug: howto_create_and_use_autolayout_grid

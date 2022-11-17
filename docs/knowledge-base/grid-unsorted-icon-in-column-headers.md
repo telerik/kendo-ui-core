@@ -2,7 +2,7 @@
 title: Default Unsorted Icon in Column Headers
 description: How to Add Default Unsorted Icon in Column Headers
 type: how-to
-page_title: How to Add Default Unsorted Icon in Column Headers | Kendo UI Grid for jQuery
+page_title: How to Add Default Unsorted Icon in Column Headers - Kendo UI Grid for jQuery
 slug: grid-unsorted-icon-in-column-headers
 position: 
 tags: 

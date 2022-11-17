@@ -2,7 +2,7 @@
 title: Prevent Grid Popup Editor from Closing on Validation Errors
 description: An example on how to keep the Kendo UI Grid popup editor open after an error occurs on the server.
 type: how-to
-page_title: Keep Popup Open on Server Error | Kendo UI Grid for jQuery
+page_title: Keep Popup Open on Server Error - Kendo UI Grid for jQuery
 slug: grid-prevent-popup-close-on-validation-errors-from-server
 tags: grid, edit, popup, prevent, cancel, stop, close, edit, insert, create, modal, reopen, keep, open, validation, fail, errors
 res_type: kb

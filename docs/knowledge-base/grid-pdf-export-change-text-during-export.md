@@ -2,7 +2,7 @@
 title: Export Grid PDF with Custom Text for Some Columns
 description: Learn how to include special content to be exported to PDF as column template of the Grid
 type: how-to
-page_title: Change the value of grid data in PDF Export | Kendo UI Grid
+page_title: Change the value of grid data in PDF Export - Kendo UI Grid
 slug: grid-pdf-export-change-text-during-export
 position: 
 tags: grid, pdf, export, change, value, only, hidden, content, column, data, template

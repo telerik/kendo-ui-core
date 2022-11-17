@@ -2,7 +2,7 @@
 title: Ambiguous Grid Because Multiple Kinds of Members with This Name Exist
 description: An error message occurs about an ambiguous Grid because multiple kinds of members with this name exist in the Kendo.Mvc.UI.Fluent.WidgetFactory class after an upgrade to the 2017.2.621 version.
 type: troubleshooting
-page_title: The Grid Is Ambiguous Because Multiple Kinds of Members with This Name Exist | Kendo UI Grid for ASP.NET MVC
+page_title: The Grid Is Ambiguous Because Multiple Kinds of Members with This Name Exist - Kendo UI Grid for ASP.NET MVC
 slug: grid-ambiguous-widgetfactory
 tags: ambiguous, grid, upgrade, WidgetFactory
 ticketid: 1117665

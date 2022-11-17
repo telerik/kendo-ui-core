@@ -2,7 +2,7 @@
 title: How to add grid columns dynamically
 description: An example on how to add and remove Kendo UI Grid columns dynamically.
 type: how-to
-page_title: Add and Remove Columns Dynamically | Kendo UI Grid for jQuery
+page_title: Add and Remove Columns Dynamically - Kendo UI Grid for jQuery
 slug: grid-dynamically-add-columns
 tags: grid, dynamically, columns, add
 res_type: kb

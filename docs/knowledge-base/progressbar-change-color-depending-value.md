@@ -2,7 +2,7 @@
 title: Change the Background Color of the ProgressBar Based on the Value
 description: Set the color of the ProgressBar conditionally
 type: how-to
-page_title: Modify the Color Dynamically | Kendo UI ProgressBar
+page_title: Modify the Color Dynamically - Kendo UI ProgressBar
 slug: progressbar-change-color-depending-value
 position: 
 tags: progressbar, change, modify, color, values, value

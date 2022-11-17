@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-page_title: Frequently Asked Questions | Kendo UI Grid for jQuery
+page_title: Frequently Asked Questions - Kendo UI Grid for jQuery
 description: "Find answers to the most frequently asked questions related to the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/grid-faq
 slug: frequently_asked_questions_grid

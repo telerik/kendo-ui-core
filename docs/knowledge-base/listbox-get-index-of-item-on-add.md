@@ -2,7 +2,7 @@
 title: Get Data Index in the ListBox on Add
 description: An example on how to get the index of the newly added item in the ListBox.
 type: how-to
-page_title: Get the Index of an Item on Add | Kendo UI ListBox for jQuery
+page_title: Get the Index of an Item on Add - Kendo UI ListBox for jQuery
 slug: listbox-get-index-of-item-on-add
 tags: listbox, datasource
 ticketid: 1140370

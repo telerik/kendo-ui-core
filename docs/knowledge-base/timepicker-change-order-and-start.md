@@ -2,7 +2,7 @@
 title: Change Order and Start Time in TimePicker Options List
 description: An example on how set a different time value as the start time of a kendo UI TimePicker and change the order of the options in its list.
 type: how-to
-page_title: Change Order and Start Time in the Options List | Kendo UI TimePicker for jQuery
+page_title: Change Order and Start Time in the Options List - Kendo UI TimePicker for jQuery
 slug: timepicker-change-order-and-start
 tags: timepicker, start, order, change, time, picker, list
 ticketid: 1153029

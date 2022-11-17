@@ -1,6 +1,6 @@
 ---
 title: Change the Default Decimals Precision of a Numeric Column Filters in the Grid
-page_title: Change the Decimals Precision of the Numeric Filter | Kendo UI Grid for jQuery
+page_title: Change the Decimals Precision of the Numeric Filter - Kendo UI Grid for jQuery
 description: An example on how to change the culture default decimals precision in the filter NumericTextBox in the Kendo UI Grid.
 type: how-to
 slug: change-decimals-precision-grid

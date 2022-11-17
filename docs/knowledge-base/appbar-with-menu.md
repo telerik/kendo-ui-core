@@ -2,7 +2,7 @@
 title: Add Menu to AppBar
 description: An example on how to add menu to Appbar.
 type: how-to
-page_title: Add Menu to AppBar | Kendo UI AppBar for jQuery
+page_title: Add Menu to AppBar - Kendo UI AppBar for jQuery
 slug: appbar-menu-overflow
 tags: appbar, menu, overflow
 ticketid: 1498194

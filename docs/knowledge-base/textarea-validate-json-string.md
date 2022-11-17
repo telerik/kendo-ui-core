@@ -1,6 +1,6 @@
 ---
 title: Validate JSON String With TextArea and Validator
-page_title: Validate JSON String With TextArea and Validator | Kendo UI TextArea for jQuery
+page_title: Validate JSON String With TextArea and Validator - Kendo UI TextArea for jQuery
 description: "An example demonstrating how to validate a JSON string inside a Kendo UI TextArea with the help of Kendo UI Validator."
 type: how-to
 slug: textarea-validate-json-string

@@ -2,7 +2,7 @@
 title: Copy Entire Row by Using the ContextMenu
 description: An example on how to copy the contents of a Kendo UI Grid row by using a Kendo UI ContextMenu for jQuery.
 type: how-to
-page_title: Copy Row Text with ContextMenu | Kendo UI Grid for jQuery
+page_title: Copy Row Text with ContextMenu - Kendo UI Grid for jQuery
 slug: grid-copy-row-text-select-context-menu
 tags: grid, copy, row, text, select, context, menu
 ticketid: 1407108

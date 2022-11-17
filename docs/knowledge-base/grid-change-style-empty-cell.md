@@ -2,7 +2,7 @@
 title: Change the CSS of an Empty Cell
 description: An example describing how to style a Kendo UI Grid cell which has no value.
 type: how-to
-page_title: Style Cell with No Text | Kendo UI Grid
+page_title: Style Cell with No Text - Kendo UI Grid
 slug: grid-change-style-empty-cell
 position: 
 tags: grid, cell, empty, null, style, css
