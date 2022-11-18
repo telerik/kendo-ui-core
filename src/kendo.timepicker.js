@@ -1526,6 +1526,19 @@ var __meta__ = {
                 content: options.label
             };
 
+            if (that._dateInput) {
+                labelOptions.floatCheck = () => {
+                    that._dateInput._toggleDateMask(true);
+
+                    if (!that.value() && !that._dateInput._hasDateInput() && document.activeElement !== that.element[0]) {
+                        that._dateInput._toggleDateMask(false);
+                        return true;
+                    }
+
+                    return false;
+                };
+            }
+
             that.label = new kendo.ui.Label(null, $.extend({}, labelOptions, {
                 widget: that
             }));

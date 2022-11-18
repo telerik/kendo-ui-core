@@ -456,6 +456,19 @@ it("DatePicker renders floating label", function() {
     assert.isOk(!!dateinput.label.floatingLabel);
 });
 
+it("DatePicker renders floating label with dateInput", function() {
+    var dateinput = input.kendoDatePicker({
+        dateInput: true,
+        label: {
+            content: "some label",
+            floating: true
+        }
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+    assert.isOk(!!dateinput.label.floatingLabel);
+    assert.isOk(dateinput.label.floatingLabel.element.hasClass('k-empty'));
+});
+
 it("renders label with function", function() {
     var dateinput = input.kendoDatePicker({
         label: () => `some label`

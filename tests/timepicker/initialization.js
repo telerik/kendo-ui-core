@@ -467,6 +467,19 @@
             assert.isOk(!!timepicker.label.floatingLabel);
         });
 
+        it("TimePicker renders floating label with dateInput", function() {
+            var timepicker = input.kendoTimePicker({
+                dateInput: true,
+                label: {
+                    content: "some label",
+                    floating: true
+                }
+            }).data("kendoTimePicker");
+            assert.equal(timepicker.label.element.text(), "some label");
+            assert.isOk(!!timepicker.label.floatingLabel);
+            assert.isOk(timepicker.label.floatingLabel.element.hasClass('k-empty'));
+        });
+
         it("renders label with function", function() {
             var timepicker = input.kendoTimePicker({
                 label: () => `some label`
