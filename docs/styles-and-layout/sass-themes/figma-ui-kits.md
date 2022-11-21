@@ -15,7 +15,7 @@ The design files for Figma are the building blocks for designers that match the 
 <img src="../images/styling-ui-kits-for-figma.png" alt="Download Kendo UI Kits" style="max-width: 590px; display: block; margin-left: auto; margin-right: auto;"/>
 </a>
 
-To enable efficient collaboration between designers and developers, Progress provides three Kendo UI Kits for Figma: Material, Bootstrap, and Kendo Default. Each UI kit corresponds to one of the themes that ship with the Kendo UI jQuery components.
+To support the efficient collaboration between designers and developers, Progress provides four Kendo UI Kits for Figma: Material, Bootstrap, Fluent, and Kendo Default. Each UI kit corresponds to one of the themes that ship with the Kendo UI jQuery components.
 
 <a href="https://www.figma.com/@progress" class="track--download-kendoui" style="text-decoration:none; display: inline-flex;" title="Download Kendo UI Kits">
 <button importance="ghost" style="display: flex;
@@ -64,15 +64,16 @@ When you use the UI kits, you enjoy the following advantages:
 
 To download the Kendo UI Kits for Figma, navigate to the desired kit and follow the instructions on [duplicating a file from the Figma Community](https://help.figma.com/hc/en-us/articles/360038510873-Use-files-from-the-Community#Duplicate).
 
-- [Kendo UI Kit for Material](https://www.figma.com/community/file/971704350762479492)
-- [Kendo UI Kit for Bootstrap](https://www.figma.com/community/file/971704996235717509)
-- [Kendo UI Kit Default](https://www.figma.com/community/file/971702824494731137)
+- [Telerik & Kendo UI Kit for Material](https://www.figma.com/community/file/971704350762479492)
+- [Telerik & Kendo UI Kit for Bootstrap](https://www.figma.com/community/file/971704996235717509)
+- [Telerik & Kendo UI Kit Default](https://www.figma.com/community/file/971702824494731137)
+- [Telerik & Kendo UI Kit for MS Fluent](https://www.figma.com/community/file/1174728993763737426)
 
 ## Exploring the UI Kits' Structure
 
-The Kendo UI kits for Figma utilize [nested instances and base components](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/) to provide better manageability of the components. To make them more intuitive to use, we added support for [variants](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) to some of the components, like the chip.
+The Telerik & Kendo UI kits for Figma utilize [nested instances and base components](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/) to provide better manageability of the components. To make them more intuitive to use, we added support for [variants](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) to some of the components, like the chip.
 
-Each Kendo UI Kit for Figma contains the following pages, most of which provide multiple frames that group similar design assets:
+Each UI Kit for Figma contains the following pages, most of which provide multiple frames that group similar design assets:
 
 * **_Cover**&mdash;The cover page of the UI kit.
 * **_Getting Started**&mdash;Briefly explains what you need to know to start using the UI kits.
@@ -88,7 +89,7 @@ Each Kendo UI Kit for Figma contains the following pages, most of which provide 
 
 Most pages contain multiple frames that group similar design assets.
 
-<img src="../images/figma-ui-kit-frames-v1.9.png" alt="Kendo UI Kit Page with Multiple Frames" style="width: 590px; height: 462px; display: block; margin-left: auto; margin-right: auto;"/>
+<img src="../images/figma-ui-kit-frames-v2.2.png" alt="Kendo UI Kit Page with Multiple Frames" style="width: 590px; height: 462px; display: block; margin-left: auto; margin-right: auto;"/>
 
 ## Customizing the UI Kits
 

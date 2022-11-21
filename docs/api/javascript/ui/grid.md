@@ -2658,10 +2658,10 @@ If set to `true` the column will be hidden when the grid is groupd via user iter
     <script>
     $("#grid").kendoGrid({
       columns: [
-        { field: "id" },
+        { field: "id", hideOnGroup: true },
         { field: "name" }
       ],
-      groupable: true
+      groupable: true,
       dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
     });
     </script>
