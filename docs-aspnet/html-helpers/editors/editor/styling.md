@@ -120,7 +120,7 @@ To avoid the default content styles from the previous example, remove or overrid
         });
     </script>
 ```
-```
+
 {% if site.core %}
 ```TagHelper
     <kendo-editor name="editor" value="@{

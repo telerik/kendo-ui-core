@@ -12,10 +12,9 @@ The Editor exposes the capability of editing a data table as any other (X)HTML. 
 
 * [Inserting a Table](#inserting-a-table)
 * [Editing a table](#editing-a-table)
-* [Available Options](#available-options)
-* [Accessibility Tab](#accessibility-tab)
+* [Available **Table**, **Cell**, and **Accessibility** tab options](#available-options)
 
-To enable the table editing, you should add the `TableEditing` tool to the widget's configuration:
+To enable the table editing, add the `TableEditing` tool to the configuration of the component:
 
 ```HtmlHelper
     @(Html.Kendo().Editor()
@@ -24,7 +23,7 @@ To enable the table editing, you should add the `TableEditing` tool to the widge
       .Tools(tools => tools.TableEditing())
     )
 ```
-```
+
 {% if site.core %}
 ```TagHelper
     <kendo-editor name="editor" style="height:440px" aria-label="editor">
@@ -64,16 +63,17 @@ To enable the table editing, you should add the `TableEditing` tool to the widge
 ```
 {% endif %}
 
+
 ## Inserting a Table
 
 To insert a new table by using the Table Wizard dialog:
 
-1. Click on the `Create Table` tool.
-1. To open the dialog, click the `Table Wizard` button.
-1. Configure the table that is to be inserted.
-1. Click the `OK` button.
+1. Click the **Create Table** tool.
+1. To open the dialog, click the **Table Wizard** button.
+1. Configure the table you want to insert.
+1. Click the **OK** button.
 
-To quickly create a plain table, click on the `Create Table` tool and choose the row and column dimensions. 
+To quickly create a plain table, click the **Create Table** tool and choose the row and column dimensions. 
 
 ## Editing a Table
 
@@ -91,6 +91,8 @@ The table and cell options that are available in the **Table Wizard** are displa
 * [**Accessibility**](#accessibility-tab)&mdash;The available options related to accessibility.
 
 ## Available Options
+
+The Editor provides a set of editing options through its **Table**, **Cell**, and **Accessibility** tabs.  
 
 ### Table Tab
 

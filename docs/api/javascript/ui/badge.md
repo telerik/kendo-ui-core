@@ -228,7 +228,7 @@ Specifies the theme color of the component. Valid options are
 * `error`: apply coloring based on **error** theme color.
 * `dark`: apply coloring based on **dark** theme color.
 * `light`: always coloring based on **light** theme color.
-* `inverted`: depending on the luminance of the theme, light or dark, inverted will be dark or light.
+* `inverse`: depending on the luminance of the theme, light or dark, inverse will be dark or light.
 
 #### Example
 
@@ -243,7 +243,7 @@ Specifies the theme color of the component. Valid options are
     <span id="badge-error">Error</span>
     <span id="badge-dark">Dark</span>
     <span id="badge-light">Light</span>
-    <span id="badge-inverted">Inverted</span>
+    <span id="badge-inverse">Inverse</span>
 
     <script>
         $('#badge-inherit').kendoBadge({ themeColor: 'inherit' });
@@ -257,7 +257,7 @@ Specifies the theme color of the component. Valid options are
         $('#badge-error').kendoBadge({ themeColor: 'error' });
         $('#badge-dark').kendoBadge({ themeColor: 'dark' });
         $('#badge-light').kendoBadge({ themeColor: 'light' });
-        $('#badge-inverted').kendoBadge({ themeColor: 'inverted' });
+        $('#badge-inverse').kendoBadge({ themeColor: 'inverse' });
     </script>
 
 
