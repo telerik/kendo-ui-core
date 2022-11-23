@@ -19,7 +19,7 @@ res_type: kb
 
 ## Description
 
-I have a chart with multiple axes. One has negavive values and the other does not. I want the zero on the two axes to be aligned and to show the negative values on one axis.
+I have a chart with multiple axes. One has negative values and the other does not. I want the zero on the two axes to be aligned and to show the negative values on one axis.
 
 ## Solution
 
