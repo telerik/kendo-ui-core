@@ -2291,8 +2291,8 @@ footer:
   links:
     "Getting Started": https://docs.telerik.com/kendo-ui/intro/first-steps
     "Demos": https://demos.telerik.com/kendo-ui/
-    "Whats New": "https://www.telerik.com/support/whats-new/kendo-ui"
-    "Roadmap": https://www.telerik.com/support/whats-new/kendo-ui/roadmap
+    "Whats New": "https://www.telerik.com/support/whats-new/kendo-jquery-ui"
+    "Roadmap": https://www.telerik.com/support/whats-new/kendo-jquery-ui/roadmap
 -
   title: "Community"
   links:
