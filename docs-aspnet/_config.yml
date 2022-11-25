@@ -321,6 +321,8 @@ navigation:
         title: "FlatColorPicker"
      "html-helpers/editors/imageeditor":
         title: "Image Editor"
+     "html-helpers/editors/timedurationpicker":
+         title: "TimeDurationPicker"
      "html-helpers/charts":
         title: "Charts"
      "html-helpers/charts/chart":
@@ -634,6 +636,9 @@ navigation:
         title: "TimeLine"
      "*timepicker":
         title: "TimePicker"
+     "*timedurationpicker":
+        title: "TimeDurationPicker"
+        isNew: true 
      "*tooltip":
         title: "Tooltip"
      "*toolbar":

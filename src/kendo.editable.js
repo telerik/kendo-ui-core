@@ -162,7 +162,7 @@ var __meta__ = {
         "DatePicker", "DateTimePicker", "DropDownTree",
         "Editor", "FlatColorPicker", "MaskedTextBox", "MultiColumnComboBox","MultiSelect",
         "NumericTextBox", "RadioGroup", "Rating", "Slider", "Switch", "TimePicker", "DropDownList",
-        "TextBox", "TextArea", "Captcha", "Signature"
+        "TextBox", "TextArea", "Captcha", "Signature", "TimeDurationPicker"
     ];
 
     var editors = {

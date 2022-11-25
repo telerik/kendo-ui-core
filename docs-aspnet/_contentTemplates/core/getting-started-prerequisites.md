@@ -27,7 +27,7 @@ To successfully complete the tutorial, you need a project that is already config
 
 * To create a new pre-configured project for the Telerik UI for {{ site.framework }} components, you can use [a project template]({% slug gettingstarted_project_template %}).
 
-* To manually configuring an existing project, follow the [First Steps on Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) or [First Steps on Mac]({% slug gettingstarted_firststeps_vsmac %}) articles.
+* To manually configure an existing project, follow the [First Steps on Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) or [First Steps on Mac]({% slug gettingstarted_firststeps_vsmac %}) articles.
 
 {% else %}
 * To create a new pre-configured project for the Telerik UI for {{ site.framework }} components, you can [use a project template]({% slug gettingstarted_aspnetmvc %}).

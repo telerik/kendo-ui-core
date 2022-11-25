@@ -294,5 +294,5 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Using the API of the NumericTextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/api)
 * [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox)
-* [NumericTextBox server-side API](/api/NumericTextBox)
+* [NumericTextBox server-side API](/api/numerictextbox)
 * [Knowledge Base Section](/knowledge-base)

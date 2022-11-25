@@ -38,7 +38,7 @@ navigation:
         position: 4
     "controls/data-management":
         title: "Data Management"
-    "controls/data-management/listview/binding":x
+    "controls/data-management/listview/binding":
         title: "Data Binding"
         position: 2
     "controls/data-management/listview/export":
@@ -2284,8 +2284,8 @@ footer:
   links:
     "Getting Started": https://docs.telerik.com/kendo-ui/intro/first-steps
     "Demos": https://demos.telerik.com/kendo-ui/
-    "Whats New": "https://www.telerik.com/support/whats-new/kendo-jquery-ui"
-    "Roadmap": https://www.telerik.com/support/whats-new/kendo-jqueryui/roadmap
+    "Whats New": "https://www.telerik.com/support/whats-new/kendo-ui"
+    "Roadmap": https://www.telerik.com/support/whats-new/kendo-ui/roadmap
 -
   title: "Community"
   links:
