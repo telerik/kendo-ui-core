@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: "{{ site.product }} AutoComplete Documentation | AutoComplete Accessibility"
+page_title: "{{ site.product }} AutoComplete Documentation - AutoComplete Accessibility"
 description: "Get started with the {{ site.product }} AutoComplete and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_aspnetcore_autocomplete
 position: 1

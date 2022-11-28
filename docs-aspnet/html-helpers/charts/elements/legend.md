@@ -149,6 +149,16 @@ To define a title, configure the [`Title`](/api/Kendo.Mvc.UI.Fluent/ChartLegendS
         // Other options.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-chart name="chart">
+        <chart-legend position="ChartLegendPosition.Top">
+            <title text="Series" />
+        </chart-legend>
+        <!-- Other options.-->
+    </kendo-chart>
+```
+{% endif %}
 
 ## See Also
 

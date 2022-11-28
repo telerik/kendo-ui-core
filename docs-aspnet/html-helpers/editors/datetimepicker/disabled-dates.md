@@ -27,6 +27,13 @@ To disable dates by setting an array, list the names of days that will be disabl
         .DisableDates(new[] {"we", "th" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datetimepicker name="MultiViewCalendar" 
+        disable-dates="new DateTime[] { DateTime.Now }">
+    </kendo-datetimepicker>
+```
+{% endif %}
 
 ## Adding a Function
 
@@ -38,7 +45,14 @@ To disable dates by using a function, set the return value for the date that wil
         .Value(DateTime.Now)
         .DisableDates("disableDatesHandler")
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-datepicker value="DateTime.Now" name="dateTimePicker" disable-dates-handler="disableDatesHandler">
+    </kendo-datepicker>
+```
+{% endif %}
+```JavaScript
     <script type="text/javascript">
         function disableDatesHandler(date){
             var disabled = [13,14,20,21];
