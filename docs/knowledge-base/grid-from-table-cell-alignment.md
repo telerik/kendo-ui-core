@@ -1,6 +1,6 @@
 ---
 title: Align Content When the Grid Is Initialized from an HTML Table 
-description: "An example on how align the content of a Grid initialized from an HTML table in Kendo UI for jQuery."
+description: "An example on how to align the content of a Grid initialized from an HTML table in Kendo UI for jQuery."
 type: how-to
 page_title: Align the Content of a Grid Initialized from an HTML Table - Kendo UI Hierarchy Grid for jQuery
 slug: update-hierarchy-grid-expand-collapse-icons
@@ -15,14 +15,14 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress Kendo UI for jQuery Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-How can I align the content of a Kenod UI for jQuery Grid which is initialized from an HTML table?
+How can I align the content of a Kendo UI for jQuery Grid which is initialized from an HTML table?
 
 ## Solution
 
@@ -217,6 +217,6 @@ To achieve the desired scenario, use the CSS [`:nth-child selectors`](https://ww
 
 ## See Also
 
-* [Kendo UI Grid API Reference](/api/javascript/ui/grid)
-* [Kendo UI Grid Initialization from Table Demo](https://demos.telerik.com/kendo-ui/grid/from-table)
-* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
+* [Kendo UI for jQuery Grid API Reference](/api/javascript/ui/grid)
+* [Kendo UI for jQuery Grid Initialization from a Table Demo](https://demos.telerik.com/kendo-ui/grid/from-table)
+* [Common Issues in Kendo UI for jQuery]({% slug troubleshooting_common_issues_kendoui %})

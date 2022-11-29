@@ -114,13 +114,12 @@ You can find the full example below:
               }
             }
             arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-            return arr; // for testing
+            return arr;
           };
-          var checkInputs = function(elements) {
-            console.log(elements);
+          var checkInputs = function(elements) { 
             elements.each(function() {
               var element = $(this);     
-              var input = element.children("input");
+              var input = element.children().find("input");
 
               input.prop("checked", element.hasClass("k-selected"));
             });

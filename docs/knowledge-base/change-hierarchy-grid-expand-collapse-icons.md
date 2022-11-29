@@ -158,6 +158,6 @@ The following example demonstrates the full implementation of the suggested appr
 ```
 ## See Also
 
-* [Kendo UI Grid API Reference](/api/javascript/ui/grid)
-* [Kendo UI Hierarchical Grid Demo](https://demos.telerik.com/kendo-ui/grid/hierarchy)
-* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
+* [Kendo UI for jQuery Grid API Reference](/api/javascript/ui/grid)
+* [Kendo UI for jQuery Hierarchical Grid Demo](https://demos.telerik.com/kendo-ui/grid/hierarchy)
+* [Common Issues in Kendo UI for jQuery]({% slug troubleshooting_common_issues_kendoui %})
