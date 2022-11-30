@@ -3036,6 +3036,136 @@ declare namespace kendo.ui {
         target?: JQuery | undefined;
     }
 
+    class Chip extends kendo.ui.Widget {
+
+        static fn: Chip;
+
+        options: ChipOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Chip;
+
+        constructor(element: Element, options?: ChipOptions);
+
+
+        setOptions(options: any): void;
+        enable(enable: boolean): void;
+        select(state: boolean): void;
+        focus(): void;
+        destroy(): void;
+
+    }
+
+    interface ChipOptions {
+        name?: string | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        avatarClass?: string | undefined;
+        removeIcon?: string | undefined;
+        removeIconClass?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        label?: string | undefined;
+        themeColor?: string | undefined;
+        removable?: boolean | undefined;
+        selectable?: boolean | undefined;
+        selected?: boolean | undefined;
+        enabled?: boolean | undefined;
+        attributes?: any | undefined;
+        click?(e: ChipClickEvent): void;
+        select?(e: ChipSelectEvent): void;
+        remove?(e: ChipRemoveEvent): void;
+    }
+    interface ChipEvent {
+        sender: Chip;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ChipClickEvent extends ChipEvent {
+        originalEvent?: any;
+    }
+
+    interface ChipSelectEvent extends ChipEvent {
+        originalEvent?: any;
+    }
+
+    interface ChipRemoveEvent extends ChipEvent {
+        originalEvent?: any;
+    }
+
+
+    class ChipList extends kendo.ui.Widget {
+
+        static fn: ChipList;
+
+        options: ChipListOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ChipList;
+
+        constructor(element: Element, options?: ChipListOptions);
+
+
+        add(item: any, beforeElement?: HTMLElement): void;
+        add(item: any, beforeElement?: JQuery): void;
+        enable(element: HTMLElement, state?: boolean): void;
+        enable(element: JQuery, state?: boolean): void;
+        item(index: number): JQuery;
+        item(index: string): JQuery;
+        itemById(id: string): JQuery;
+        items(): JQuery;
+        remove(element: HTMLElement): void;
+        remove(element: JQuery): void;
+        select(element: HTMLElement, state?: boolean): JQuery;
+        select(element: JQuery, state?: boolean): JQuery;
+
+    }
+
+    interface ChipListItem {
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        avatarClass?: string | undefined;
+        label?: string | undefined;
+        themeColor?: string | undefined;
+        selected?: boolean | undefined;
+        enabled?: boolean | undefined;
+        attributes?: any | undefined;
+    }
+
+    interface ChipListOptions {
+        name?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        itemSize?: string | undefined;
+        selectable?: boolean | undefined;
+        items?: ChipListItem[] | undefined;
+        select?(e: ChipListSelectEvent): void;
+        remove?(e: ChipListRemoveEvent): void;
+    }
+    interface ChipListEvent {
+        sender: ChipList;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ChipListSelectEvent extends ChipListEvent {
+        originalEvent?: any;
+        item?: kendo.ui.Chip;
+    }
+
+    interface ChipListRemoveEvent extends ChipListEvent {
+        originalEvent?: any;
+    }
+
     class CircularProgressBar extends kendo.ui.Widget {
 
         static fn: CircularProgressBar;
@@ -25740,6 +25870,14 @@ interface JQuery {
     kendoCheckBoxGroup(): JQuery;
     kendoCheckBoxGroup(options: kendo.ui.CheckBoxGroupOptions): JQuery;
     data(key: "kendoCheckBoxGroup"): kendo.ui.CheckBoxGroup | undefined;
+
+    kendoChip(): JQuery;
+    kendoChip(options: kendo.ui.ChipOptions): JQuery;
+    data(key: "kendoChip"): kendo.ui.Chip;
+
+    kendoChipList(): JQuery;
+    kendoChipList(options: kendo.ui.ChipListOptions): JQuery;
+    data(key: "kendoChipList"): kendo.ui.ChipList;
 
     kendoCircularGauge(): JQuery;
     kendoCircularGauge(options: kendo.dataviz.ui.CircularGaugeOptions): JQuery;

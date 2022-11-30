@@ -619,6 +619,10 @@ navigation:
         title: "Sortable"
      "*splitter":
         title: "Splitter"
+     "*stacklayout":
+        title: "StackLayout"
+     "*gridlayout":
+        title: "GridLayout"
      "*stockchart":
         title: "StockChart"
      "*tabstrip":
@@ -1064,6 +1068,16 @@ defaults:
         path: "html-helpers/layout/splitter"
     values:
         title_prefix: "ASP.NET Core Splitter Component"
+-
+    scope:
+        path: "html-helpers/layout/gridlayout"
+    values:
+        title_prefix: "ASP.NET Core GridLayout Component"
+-
+    scope:
+        path: "html-helpers/layout/stacklayout"
+    values:
+        title_prefix: "ASP.NET Core StackLayout Component"
 -
     scope:
         path: "html-helpers/layout/tilelayout"

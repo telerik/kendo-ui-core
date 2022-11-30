@@ -36,10 +36,12 @@ var __meta__ = {
             themeColor: "base",
             attr: {},
             icon: "",
+            iconClass: "",
             iconAttr: {},
             removable: false,
             removableAttr: {},
             removeIcon: "x-circle",
+            removeIconClass: "",
             content: "",
             text: "",
             stylingOptions: [ "size", "rounded", "fillMode", "themeColor" ]
@@ -48,11 +50,16 @@ var __meta__ = {
             var that = this,
                 options = that.options;
 
-            that.wrapper = that.element.wrap("<span class='k-chip'></span>").parent().attr(options.attr);
+            options.text = options.text || options.label;
+            that.wrapper = that.element.wrap("<div class='k-chip'></div>").parent().attr(options.attr);
             that._addClasses();
 
             if (options.icon) {
                 that.wrapper.prepend($("<span class='k-chip-icon k-icon k-i-" + options.icon + "'></span>").attr(options.iconAttr));
+            } else if (options.iconClass) {
+                that.wrapper.prepend($("<span class='" + options.iconClass + "'></span>").attr(options.iconAttr));
+            } else if (options.avatarClass) {
+                that.wrapper.prepend($("<span class='k-chip-avatar k-avatar " + options.avatarClass + "'></span>").attr(options.iconAttr));
             }
 
             that.element.addClass("k-chip-content");
@@ -60,8 +67,21 @@ var __meta__ = {
                 that.element.html('<span class="k-chip-label">' + options.text + '</span>');
             }
 
+            if (options.visible === false) {
+                that.wrapper.addClass("k-hidden");
+            }
+
+            if (options.selected === true) {
+                that.wrapper.addClass("k-selected");
+            }
+
+            if (options.enabled === false) {
+                that.wrapper.addClass("k-disabled");
+            }
+
             if (options.removable) {
-                that.wrapper.append($("<span class='k-chip-action k-chip-remove-action'><span class='k-icon k-i-" + options.removeIcon + "'></span></span>").attr(options.removableAttr));
+                var removeIconClass = options.removeIconClass ? options.removeIconClass : "k-chip-icon k-icon k-i-" + options.removeIcon;
+                that.wrapper.append($("<span class='k-chip-action k-chip-remove-action'><span class='" + removeIconClass + "'></span></span>").attr(options.removableAttr));
             }
         }
     });
@@ -72,6 +92,11 @@ var __meta__ = {
     });
 
     kendo.cssProperties.registerPrefix("HTMLChip", "k-chip-");
+
+    kendo.cssProperties.registerValues("HTMLChip", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
 
 })(window.kendo.jQuery);
 

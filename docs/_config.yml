@@ -540,6 +540,10 @@ navigation:
         title: "Calendar"
     "*captcha":
         title: "Captcha"
+    "*chip":
+        title: "Chip"
+    "*chiplist":
+        title: "ChipList"
     "controls/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
     "*colorpalette":
@@ -1621,7 +1625,7 @@ defaults:
         path: "controls/charts"
     values:
         component: "charts"
-        
+
 -
     scope:
         path: "controls/editors/checkbox"
@@ -1831,7 +1835,7 @@ defaults:
         path: "controls/navigation/floatingactionbutton"
     values:
         component: "floatingactionbutton"
-        
+
 -
     scope:
         path: "controls/layout/expansionpanel"
