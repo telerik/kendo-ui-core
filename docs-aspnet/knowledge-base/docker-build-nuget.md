@@ -3,6 +3,7 @@ title: Using Telerik NuGet Server in Docker
 description: How to restore Telerik UI for ASP.NET Core NuGet packages in a Docker container build.
 type: how-to
 page_title: Build Applications in Docker with the Telerik NuGet Server 
+previous_url: /aspnet-mvc/knowledge-base/docker-build-nuget
 slug: docker-build-nuget
 tags: docker, dockerfile, nuget, nuget-config, packages, dotnet, restore
 res_type: kb

@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Drawer component for {{ site.framework }}."
+description: "Discover the Telerik UI Drawer component for {{ site.framework }} that provides various display and interaction modes, item templates, and support for hierarchical structures."
 previous_url: /helpers/navigation/drawer/overview
 slug: htmlhelpers_drawer_aspnetcore
-position: 1
+position: 0
 ---
 
 # Drawer Overview
@@ -15,7 +15,7 @@ The Telerik UI Drawer TagHelper and HtmlHelper for {{ site.framework }} are serv
 The Telerik UI Drawer HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Drawer widget.
 {% endif %}
 
-The Drawer is a dismissible panel used for navigation in responsive web applications or for changing a content of a section in the page.
+The Drawer is a dismissible panel used for navigation in responsive web applications or changing the content of a section on a specific page.
 
 * [Demo page for the Drawer HtmlHelper](https://demos.telerik.com/{{ site.platform }}/drawer/index)
 {% if site.core %}
@@ -66,58 +66,21 @@ The following example demonstrates how to define the Drawer.
 
 ## Functionality and Features
 
-* [Display modes]({% slug displaymodes_drawer_aspnetcore %})
-* [Interaction modes]({% slug interactionmodes_drawer_aspnetcore %})
-* [Templates]({% slug templates_drawer_aspnetcore %})
-* [Hierarchy]({% slug hierarchy_drawer_aspnetcore %})
+* [Display modes]({% slug displaymodes_drawer_aspnetcore %})&mdash;The component provides three display modes that allow you to control how the Drawer is displayed on the screen.
+* [Interaction modes]({% slug interactionmodes_drawer_aspnetcore %})&mdash;The Drawer supports the `overlay` and `push` interaction modes, and you can determine if it will be rendered on left or right side.
+* [Templates]({% slug templates_drawer_aspnetcore %})&mdash;With the built-in item templates, you control how the Drawer items are rendered.
+* [Hierarchy]({% slug hierarchy_drawer_aspnetcore %})&mdash;The Drawer allows you to display hierarchically organized items.
+* [Events]({% slug events_drawer %})&mdash;The Drawer allows you to handle its events and implement custom functionality.
 
-## Referencing Existing Instances
+## Next Steps
 
-The following example demonstrates how to get the Drawer instance.
-
-```HtmlHelper
-    @(Html.Kendo().Drawer()
-        .Name("drawer")
-        .Template(@"<ul>
-                <li data-role='drawer-item'>First Item</li>
-                <li data-role='drawer-separator'></li>
-                <li data-role='drawer-item'>Second Item</li>
-            </ul>")
-        .Content(@"<div style='height: 200px;'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error accusantium odit, optio nulla maiores quo neque fugit debitis dignissimos incidunt maxime?</div>")
-    )
-
-    <script type="text/javascript">
-        $(function () {
-            // The Name() of the Drawer is used to get its client-side instance.
-            var drawer = $("#drawer").data("kendoDrawer");
-            console.log(drawer);
-        });
-    </script>
-```
+* [Getting Started with the Drawer]({% slug drawer_getting_started %})
+* [Basic Usage of the Drawer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer/index)
 {% if site.core %}
-```TagHelper
-    <kendo-drawer name="drawer" template-id="template" mode="push" position="left" min-height="330" swipe-to-open="true" on-item-click="onItemClick">
-        <mini enabled="true"/>
-        <content>
-            <h1 class="my-content">Swipe or drag me to the right <span class="k-icon k-i-arrow-chevron-right"></span></h1>
-        </content>
-    </kendo-drawer>
-
-    <script type="text/javascript">
-        $(function () {
-            // The name of the Drawer is used to get its client-side instance.
-            var drawer = $("#drawer").data("kendoDrawer");
-            console.log(drawer);
-        });
-    </script>
-```
+* [Basic Usage of the Drawer TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/tag-helper)
 {% endif %}
 
 ## See Also
 
-* [Basic Usage of the Drawer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer)
-{% if site.core %}
-* [Basic Usage of the Drawer Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/index)
-{% endif %}
-* [Using the API of the Drawer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer/api)
-* [Server-Side API](/api/drawer)
+* [Using the API of the Drawer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer/api)
+* [Knowledge Base Section](/knowledge-base)

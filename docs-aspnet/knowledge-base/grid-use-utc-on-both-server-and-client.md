@@ -2,7 +2,7 @@
 title: Formatting Grid DateTime Data Fields to Use UTC    
 description: "Learn how to use UTC formatting on both the server and the client for {{ site.product }} Grid DateTime data fields."
 type: how-to
-page_title: Use UTC on Both Client and Server {{ site.product }} Grid 
+page_title: Use UTC in Both Client and Server Grids 
 slug: grid-use-utc-on-server-and-client
 tags: grid, utc, format, datetime, client, server
 res_type: kb
