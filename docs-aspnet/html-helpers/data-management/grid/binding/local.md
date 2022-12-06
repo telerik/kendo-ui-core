@@ -77,6 +77,31 @@ To configure the Grid for {{ site.framework }} to do local binding:
             })
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        @addTagHelper *, Kendo.Mvc
+        @model IEnumerable<AspNetCoreGrid.Models.OrderViewModel>
+
+        <kendo-grid name="grid">
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="2" server-operation="false" data="@Model">
+            </datasource>
+            <toolbar>
+                <toolbar-button name="pdf" text="Custom PDF button text"></toolbar-button>
+                <toolbar-button name="excel" text="Custom Excel button text"></toolbar-button>
+            </toolbar>
+            <pageable enabled="true">
+            </pageable>
+            <sortable enabled="true" />
+            <groupable enabled="true" />
+            <columns>
+                <column field="OrderID">
+                </column>
+                <column field="ShipCountry">
+                </column>
+            </columns>
+        </kendo-grid>
+    ```
+    {% endif %}
     
 1. Build and run the application.
 

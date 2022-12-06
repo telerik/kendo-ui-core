@@ -169,6 +169,55 @@ To bind the PivotGridV2 for {{ site.framework }} to local flat data:
             }
         </script>
     ```
+     {% if site.core %}
+    ```TagHelper
+        @addTagHelper *, Kendo.Mvc
+        @model IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>
+
+        <kendo-pivotcontainer name="container" configurator-position="left">
+            <kendo-pivotconfiguratorv2 name="configurator" sortable="true" filterable="true"></kendo-pivotconfiguratorv2>
+
+            <kendo-pivotgridv2 name="pivotgrid" column-width="200" height="580" configurator="#configurator">
+                <pivot-datasource data="@Model" on-error="onError">
+                    <schema>
+                        <model>
+                            <fields>
+                                <field name="CategoryName" from="Category.CategoryName"></field>
+                            </fields>
+                        </model>
+                        <cube>
+                            <dimensions>
+                                <dimension name="ProductName" caption="All Products" />
+                                <dimension name="CategoryName" caption="Categories" />
+                                <dimension name="Discontinued" caption="Discontinued" />
+                            </dimensions>
+                            <measures>
+                                <measure name="Average" format="{0:c}" field="UnitPrice" aggregate="average" />
+                                <measure name="Sum" format="{0:c}" field="UnitPrice" aggregate="sum" />
+                            </measures>
+                        </cube>
+                    </schema>
+                    <columns>
+                        <pivot-datasource-column name="CategoryName" expand="true"></pivot-datasource-column>
+                        <pivot-datasource-column name="ProductName"></pivot-datasource-column>
+                    </columns>
+                    <rows>
+                        <row name="Discontinued" expand="true"></row>
+                    </rows>
+                    <measures values=@(new string[] {"Sum"} )></measures>
+                </pivot-datasource>
+            </kendo-pivotgridv2>
+
+            <kendo-pivotconfiguratorbutton name="button" configurator="configurator"></kendo-pivotconfiguratorbutton>
+        </kendo-pivotcontainer>
+
+        <script>
+            function onError(e) {
+                alert("error: " + kendo.stringify(e.errors[0]));
+            }
+        </script>
+    ```
+    {% endif %}
     
 
 For a full example, refer to the [PivotGridV2 Local Binding demo](https://demos.telerik.com/{{ site.platform }}/pivotgridv2/local-flat-data-binding).

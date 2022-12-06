@@ -82,7 +82,7 @@ The following example demonstrates how to configure CRUD (Create, Read, Update, 
 		</datasource>
 		<column-settings datastatusfield="ID" datatextfield="Text">
 		</column-settings>
-		<editable enabled="false">
+		<editable enabled="true">
 		</editable>
 	</kendo-taskboard>
 
