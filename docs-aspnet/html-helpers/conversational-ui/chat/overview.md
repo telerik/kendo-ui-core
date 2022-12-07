@@ -7,7 +7,7 @@ slug: htmlhelpers_chat_aspnetcore
 position: 1
 ---
 
-# Chat Overview
+# {{ site.framework }} Chat Overview
 
 {% if site.core %}
 The Telerik UI Chat TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Chat widget. To add the component to your ASP.NET Core app, you can use either.

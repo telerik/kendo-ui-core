@@ -6,7 +6,7 @@ slug: htmlhelpers_wizard_aspnetcore_overview
 position: 1
 ---
 
-# Wizard Overview
+# {{ site.framework }} Wizard Overview
 
 {% if site.core %}
 The Telerik UI Wizard TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Wizard widget.

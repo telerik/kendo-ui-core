@@ -7,7 +7,7 @@ slug: overview_colorpickerhelper_aspnetcore
 position: 1
 ---
 
-# ColorPicker Overview
+# {{ site.framework }} ColorPicker Overview
 
 {% if site.core %}
 The Telerik UI ColorPicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ColorPicker widget.

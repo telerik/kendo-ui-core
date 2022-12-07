@@ -8,7 +8,7 @@ position: 1
 permalink: /getting-started/first-steps
 ---
 
-# Starting with a Project Template
+# Starting in {{ site.product }} with a Project Template
 
 Welcome to the Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC in Visual Studio tutorial!
 

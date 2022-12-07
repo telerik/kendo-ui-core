@@ -7,7 +7,7 @@ slug: overview-vs-code-integration
 position: 1
 ---
 
-# Visual Studio Code Integration Overview
+# Telerik UI for {{ site.framework }} Visual Studio Code Integration Overview
 
 The **Telerik UI for ASP.NET Core Productivity Tools** is an extension for [Visual Studio Code](https://code.visualstudio.com/) that enhances the application development experience with Telerik UI for ASP.NET Core.
 

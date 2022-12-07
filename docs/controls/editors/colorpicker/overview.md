@@ -6,7 +6,7 @@ slug: overview_kendoui_colorpicker_widget
 position: 1
 ---
 
-# ColorPicker Overview
+# {{ site.product }} ColorPicker Overview
 
 The ColorPicker is a drop-down list for selecting colors.
 

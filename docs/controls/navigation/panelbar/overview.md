@@ -6,7 +6,7 @@ slug: overview_kendoui_panelbar_widget
 position: 1
 ---
 
-# PanelBar Overview
+# {{ site.product }} PanelBar Overview
 
 The PanelBar displays hierarchical data as a multi-level, expandable widget.
 

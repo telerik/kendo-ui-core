@@ -7,7 +7,7 @@ slug: htmlhelpers_panelbar_aspnetcore
 position: 1
 ---
 
-# PanelBar Overview
+# {{ site.framework }} PanelBar Overview
 
 {% if site.core %}
 The Telerik UI PanelBar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI PanelBar widget.

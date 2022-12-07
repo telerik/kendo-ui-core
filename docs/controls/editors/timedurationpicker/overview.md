@@ -6,7 +6,7 @@ slug: overview_kendoui_timedurationpicker_widget
 position: 0
 ---
 
-# TimeDurationPicker Overview
+# {{ site.product }} TimeDurationPicker Overview
 
 The TimeDurationPicker component enables the end user to select a time range stored in milliseconds.
 

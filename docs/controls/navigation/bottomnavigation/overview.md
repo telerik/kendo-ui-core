@@ -6,7 +6,7 @@ slug: overview_kendoui_bottomnavigation_widget
 position: 1
 ---
 
-# BottomNavigation Overview
+# {{ site.product }} BottomNavigation Overview
 
 The Kendo UI BottomNavigation bar allows movement between primary destinations in an application. The main purpose of the component is to offer a navigation element whose options are represented by an icon and text.
 

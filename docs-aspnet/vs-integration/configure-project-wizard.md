@@ -7,7 +7,7 @@ slug: projectwizardconfig_visualstudio_aspnetcore
 position: 13
 ---
 
-# Configuring Existing Projects
+# Configuring Existing {{ site.product }} Projects
 
 This article demonstrates how to configure an existing {{ site.product }} application by using the **Project Configuration Wizard**. The wizard comes with the {{ site.product }} VS extension and helps you to modify settings like visual theme, use of CDN, localization, and right-to-left configuration in an already existing project.
 

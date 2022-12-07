@@ -6,7 +6,7 @@ slug: snippets-vs
 position: 16
 ---
 
-# Snippets in Visual Studio
+# Snippets in Visual Studio for {{ site.product }}
 
 Visual Studio snippets are templates that make it easier to enter repetitive code patterns. Use the {{site.product}} code snippets for fast declaration of components with their most used features.
 

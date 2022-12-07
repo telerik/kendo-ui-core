@@ -6,7 +6,7 @@ slug: overview_kendoui_numerictextbox_widget
 position: 0
 ---
 
-# NumericTextBox Overview
+# {{ site.product }} NumericTextBox Overview
 
 The NumericTextBox converts an `<input>` element into a numeric, percentage, or currency textbox.
 

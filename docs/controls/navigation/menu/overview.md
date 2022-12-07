@@ -6,7 +6,7 @@ slug: overview_kendoui_menu_widget
 position: 1
 ---
 
-# Menu Overview
+# {{ site.product }} Menu Overview
 
 The Menu displays hierarchical data as a multi-level menu.
 

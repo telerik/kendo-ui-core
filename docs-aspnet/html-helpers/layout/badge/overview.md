@@ -6,7 +6,7 @@ slug: overview_badgehelper_aspnetcore
 position: 1
 ---
 
-# Badge Overview
+# {{ site.framework }} Badge Overview
 
 {% if site.core %}
 The Telerik UI Badge TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Badge widget.

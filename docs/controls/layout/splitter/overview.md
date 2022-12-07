@@ -6,7 +6,7 @@ slug: overview_kendoui_splitter_widget
 position: 1
 ---
 
-# Splitter Overview
+# {{ site.product }} Splitter Overview
 
 The Splitter provides a dynamic layout of resizable and collapsible panes.
 

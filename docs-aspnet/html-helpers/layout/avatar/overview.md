@@ -6,7 +6,7 @@ slug: overview_avatarhelper_aspnetcore
 position: 1
 ---
 
-# Avatar Overview
+# {{ site.framework }} Avatar Overview
 
 The Telerik UI Avatar for {{ site.framework }} is typically used to display images, icons or initials representing people or other entities.
 

@@ -7,7 +7,7 @@ slug: msi_install_aspnetmvc6_aspnetmvc
 position: 2
 ---
 
-# Installing with the MSI Installer for Windows
+# Installing {{ site.product }} with the MSI Installer for Windows
 
 This article describes how to download and install {{ site.product }} on a Windows machine by using the automated MSI installer file.
 

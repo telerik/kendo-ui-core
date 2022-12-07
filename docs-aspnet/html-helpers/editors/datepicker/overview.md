@@ -7,7 +7,7 @@ slug: htmlhelpers_datepicker_aspnetcore
 position: 1
 ---
 
-# DatePicker Overview
+# {{ site.framework }} DatePicker Overview
 
 {% if site.core %}
 The Telerik UI DatePicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DatePicker widget.

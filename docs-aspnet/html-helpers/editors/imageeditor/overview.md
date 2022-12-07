@@ -6,7 +6,7 @@ slug: htmlhelpers_imageeditor_aspnetcore
 position: 1
 ---
 
-# ImageEditor Overview
+# {{ site.framework }} ImageEditor Overview
 
 {% if site.core %}
 The Telerik UI ImageEditor TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ImageEditor widget.

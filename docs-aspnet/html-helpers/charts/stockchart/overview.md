@@ -7,7 +7,7 @@ slug: overview_stockcharthelper_aspnetcore
 position: 1
 ---
 
-# StockChart Overview
+# {{ site.framework }} StockChart Overview
 
 {% if site.core %}
 The Telerik UI StockChart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI StockChart widget.

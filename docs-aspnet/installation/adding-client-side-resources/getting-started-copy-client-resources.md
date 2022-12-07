@@ -7,7 +7,7 @@ slug: copyclientresources_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Providing Client-Side Resources
+# Providing Client-Side Resources for {{ site.product }}
 
 This article outlines the approaches for adding the Kendo client-side assets to your application.
 

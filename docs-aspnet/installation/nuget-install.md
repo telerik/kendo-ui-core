@@ -7,7 +7,7 @@ slug: nuget_install_aspnetmvc6_aspnetmvc
 position: 3
 ---
 
-# Installing with NuGet
+# Installing {{ site.product }} with NuGet
 
 This article describes how to configure your system for the Telerik NuGet source and then use it to install {{ site.product }} in your project. 
 

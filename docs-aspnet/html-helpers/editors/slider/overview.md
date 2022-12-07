@@ -7,7 +7,7 @@ slug: overview_sliderhelper_aspnetcore
 position: 1
 ---
 
-# Slider Overview
+# {{ site.framework }} Slider Overview
 
 {% if site.core %}
 The Telerik UI Slider TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Slider widget.

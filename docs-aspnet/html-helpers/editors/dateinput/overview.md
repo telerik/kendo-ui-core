@@ -7,7 +7,7 @@ slug: htmlhelpers_dateinput_aspnetcore
 position: 1
 ---
 
-# DateInput Overview
+# {{ site.framework }} DateInput Overview
 
 {% if site.core %}
 The Telerik UI DateInput TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DateInput widget.

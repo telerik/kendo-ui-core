@@ -6,7 +6,7 @@ slug: overview_kendoui_listbox_widget
 position: 1
 ---
 
-# ListBox Overview
+# {{ site.product }} ListBox Overview
 
 The ListBox provides suggestions depending on the typed text and allows multiple value entries.
 

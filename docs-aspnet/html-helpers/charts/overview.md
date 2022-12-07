@@ -12,7 +12,7 @@ position: 1
     {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultsbuildert" %}
 {% endif %}
 
-# Chart Overview
+# {{ site.framework }} Chart Overview
 
 {% if site.core %}
 The Chart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Chart widget. To add the component to your ASP.NET Core app, you can use either.

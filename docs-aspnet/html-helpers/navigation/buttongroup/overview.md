@@ -7,7 +7,7 @@ slug: htmlhelpers_buttongroup_aspnetcore
 position: 0
 ---
 
-# ButtonGroup Overview
+# {{ site.framework }} ButtonGroup Overview
 
 {% if site.core %}
 The Telerik UI ButtonGroup TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ButtonGroup widget.

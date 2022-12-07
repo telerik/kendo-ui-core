@@ -6,7 +6,7 @@ slug: overview_kendoui_timeline_widget
 position: 1
 ---
 
-# Timeline Overview
+# {{ site.product }} Timeline Overview
 
 The Kendo UI Timeline widget displays a collection of events and their data in a chronological succession for each year.
 

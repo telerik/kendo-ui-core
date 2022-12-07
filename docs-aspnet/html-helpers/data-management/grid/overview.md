@@ -7,7 +7,7 @@ slug: htmlhelpers_grid_aspnetcore_overview
 position: 0
 ---
 
-# Grid Overview
+# {{ site.framework }} Grid Overview
 
 {% if site.core %}
 The Telerik UI Grid TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Grid widget. To add the component to your ASP.NET Core app, you can use either.

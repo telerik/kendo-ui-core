@@ -6,7 +6,7 @@ slug: azure_blob_storage_aspnetcore
 position: 3
 ---
 
-# Azure Blob Storage
+# Using {{ site.product }} with Azure Blob Storage
 
 The **Azure Blob Storage** is Microsoft's object storage solution for the cloud. The Blob storage is optimized for storing massive amounts of unstructured data (data that doesn't adhere to a particular data model or definition, such as text or binary data).
 

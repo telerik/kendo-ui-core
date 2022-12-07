@@ -6,7 +6,7 @@ slug: overview_kendoui_autocomplete_widget
 position: 1
 ---
 
-# AutoComplete Overview
+# {{ site.product }} AutoComplete Overview
 
 The AutoComplete provides suggestions depending on the typed text and allows multiple value entries.
 

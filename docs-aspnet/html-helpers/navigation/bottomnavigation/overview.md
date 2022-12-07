@@ -6,7 +6,7 @@ slug: htmlhelpers_bottomnavigation_aspnetcore
 position: 1
 ---
 
-# BottomNavigation Overview
+# {{ site.framework }} BottomNavigation Overview
 
 {% if site.core %}
 The Telerik UI BottomNavigation TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI BottomNavigation widget.

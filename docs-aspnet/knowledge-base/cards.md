@@ -8,8 +8,6 @@ tags: cards, card, container, layout, flexible
 res_type: kb
 ---
 
-# Cards
-
 The Telerik UI Cards for {{ site.framework }} is a set of classes that define flexible content containers.
 
 A card can consist of a header, a body, and actions and can also accommodate images, lists, groups, separators, and more.

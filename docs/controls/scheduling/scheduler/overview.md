@@ -6,7 +6,7 @@ slug: overview_kendoui_scheduler_widget
 position: 1
 ---
 
-# Scheduler Overview
+# {{ site.product }} Scheduler Overview
 
 The Scheduler displays a set of events, appointments, or tasks.
 

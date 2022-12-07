@@ -6,7 +6,7 @@ slug: overview_kendoui_scrollview_widget
 position: 1
 ---
 
-# ScrollView Overview
+# {{ site.product }} ScrollView Overview
 
 The ScrollView displays a horizontal collection of content or image views with built-in navigation between them.
 

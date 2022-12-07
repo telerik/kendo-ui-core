@@ -7,7 +7,7 @@ slug: htmlhelpers_sortable_aspnetcore
 position: 1
 ---
 
-# Sortable Overview
+# {{ site.framework }} Sortable Overview
 
 {% if site.core %}
 The Telerik UI Sortable TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Sortable widget.

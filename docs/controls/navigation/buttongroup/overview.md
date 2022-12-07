@@ -6,7 +6,7 @@ slug: overview_kendoui_buttongroup_widget
 position: 1
 ---
 
-# ButtonGroup Overview
+# {{ site.product }} ButtonGroup Overview
 
 The ButtonGroup groups a series of buttons together on a single line.
 

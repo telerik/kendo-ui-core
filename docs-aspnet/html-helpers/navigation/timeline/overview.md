@@ -7,7 +7,7 @@ slug: overview_htmlhelpers_timeline_aspnetcore
 position: 1
 ---
 
-# Timeline Overview
+# {{ site.framework }} Timeline Overview
 
 {% if site.core %}
 The Telerik UI Timeline TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Timeline widget.

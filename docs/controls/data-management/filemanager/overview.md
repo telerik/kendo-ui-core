@@ -6,7 +6,7 @@ slug: overview_kendoui_filemanager_widget
 position: 0
 ---
 
-# FileManager Overview
+# {{ site.product }} FileManager Overview
 
 The Kendo UI FileManager is an Explorer-like component enabling you to manage file and folders. 
 

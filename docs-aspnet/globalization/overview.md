@@ -7,7 +7,7 @@ slug: overview_globalization_core
 position: 1
 ---
 
-# Globalization Overview
+# {{ site.product }} Globalization Overview
 
 Globalization is the process of designing and developing an application that works in multiple cultures and languages.
 

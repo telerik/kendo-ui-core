@@ -7,7 +7,7 @@ slug: overview_localization_core
 position: 3
 ---
 
-# Localization
+# {{ site.product }} Localization
 
 [Localization](https://en.wikipedia.org/wiki/Internationalization_and_localization) is the process of adapting software to meet the requirements of local markets and different languages.
 

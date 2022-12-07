@@ -7,7 +7,7 @@ position: 4
 permalink: /getting-started/first-steps-vs-extensions
 ---
 
-# Using a Project Template in VS for Windows
+# Using a {{ site.product }} Project Template in VS for Windows
 
 This tutorial shows how to create an ASP.NET Core web app that uses [Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui) components. 
 

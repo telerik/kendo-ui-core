@@ -7,7 +7,7 @@ slug: htmlhelpers_diagram_aspnetcore
 position: 1
 ---
 
-# Diagram Overview
+# {{ site.framework }} Diagram Overview
 
 {% if site.core %}
 The Telerik UI Diagram TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Diagram widget.

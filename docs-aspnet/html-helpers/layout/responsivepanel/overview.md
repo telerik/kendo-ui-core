@@ -7,7 +7,7 @@ slug: htmlhelpers_responsivepanel_aspnetcore
 position: 1
 ---
 
-# ResponsivePanel Overview
+# {{ site.framework }} ResponsivePanel Overview
 
 {% if site.core %}
 The Telerik UI Responsive Panel TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Responsive Panel widget.
@@ -18,9 +18,9 @@ The Telerik UI Responsive Panel HtmlHelper for {{ site.framework }} is a server-
 The Responsive Panel allows you to hide part of a page content on small screens. The Component collapses a content element when a `breakpoint` is reached. The collapsed content is then expanded by a button with the `k-rpanel-toggle` class. To set the placement of the expandable content, use the `orientation` option.
 
 
-* [Demo page for the Responsive Panel HtmlHelper](https://demos.telerik.com/{{ site.platform }}/responsivepanel/index)
+* [Demo page for the Responsive Panel HtmlHelper](https://demos.telerik.com/{{ site.platform }}/responsive-panel/index)
 {% if site.core %}
-* [Demo page for the Responsive Panel TagHelper](https://demos.telerik.com/aspnet-core/responsivepanel/tag-helper)
+* [Demo page for the Responsive Panel TagHelper](https://demos.telerik.com/aspnet-core/responsive-panel/tag-helper)
 {% endif %}
 
 ## Initializing the Responsive Panel

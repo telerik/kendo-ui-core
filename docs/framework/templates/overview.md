@@ -6,7 +6,7 @@ slug: overview_kendoui_templatescomponent
 position: 1
 ---
 
-# Templates Overview
+# {{ site.product }} Templates Overview
 
 The [Kendo UI Templates](https://demos.telerik.com/kendo-ui/templates/index) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI toolkit.
 

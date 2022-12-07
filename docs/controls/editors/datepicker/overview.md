@@ -6,7 +6,7 @@ slug: overview_kendoui_datepicker_widget
 position: 1
 ---
 
-# DatePicker Overview
+# {{ site.product }} DatePicker Overview
 
 The DatePicker enables the user to select a date from a calendar or through a direct input.
 

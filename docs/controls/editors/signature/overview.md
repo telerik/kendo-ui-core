@@ -6,7 +6,7 @@ slug: overview_kendoui_signature_widget
 position: 0
 ---
 
-# Signature Overview
+# {{ site.product }} Signature Overview
 
 The Kendo UI for jQuery Signature enables the user to create handwritten signatures.
 

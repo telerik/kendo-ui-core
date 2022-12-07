@@ -7,7 +7,7 @@ slug: overview_multiviewcalendar_htmlhelper_aspnetcore
 position: 1
 ---
 
-# MultiViewCalendar Overview
+# {{ site.framework }} MultiViewCalendar Overview
 
 {% if site.core %}
 The Telerik UI MultiViewCalendar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI MultiViewCalendar widget.

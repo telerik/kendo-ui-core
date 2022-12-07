@@ -6,7 +6,7 @@ slug: overview_kendoui_taskboard_widget
 position: 1
 ---
 
-# TaskBoard Overview
+# {{ site.product }} TaskBoard Overview
 
 The Kendo UI TaskBoard allows you to easily organize items and keep track of their state. The TaskBoard provides a clean and user-friendly interface and enables you to manage tasks, notes, projects, people, or other kinds of items. The component displays columns (lanes), which can represent different types of project/task statuses. Tasks are visualized as cards, which are easily customizable through templates. You can reorder cards within the columns, or drag and drop them onto another column.
 

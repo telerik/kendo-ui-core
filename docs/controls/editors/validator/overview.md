@@ -7,7 +7,7 @@ slug: overview_kendoui_validator_widget
 position: 1
 ---
 
-# Validator Overview
+# {{ site.product }} Validator Overview
 
 The Kendo UI Validator widget offers an easy way to do client-side form validation.
 

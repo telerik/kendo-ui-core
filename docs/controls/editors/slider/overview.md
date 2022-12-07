@@ -6,7 +6,7 @@ slug: overview_kendoui_slider_widget
 position: 1
 ---
 
-# Slider Overview
+# {{ site.product }} Slider Overview
 
 The Slider provides a rich input for selecting numeric values.
 

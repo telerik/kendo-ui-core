@@ -7,7 +7,7 @@ slug: overview_treemaphelper_aspnetcore
 position: 1
 ---
 
-# TreeMap Overview
+# {{ site.framework }} TreeMap Overview
 
 The TreeMap displays hierarchical data in a traditional tree structure. TreeMaps also support different rendering types such us Squarified, Vertical, and Horizontal (slice and dice algorithm).
 

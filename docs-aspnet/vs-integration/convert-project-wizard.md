@@ -7,7 +7,7 @@ slug: convertprojectwizard_visualstudio_aspnetcore
 position: 10
 ---
 
-# Adding Telerik UI to Existing Projects
+# Adding {{ site.product }} to Existing Projects
 
 Enhance existing {{ site.framework }} applications with Telerik UI Components such as [Grid, Chart, DropDownList, and others.]{% if site.core %}(https://demos.telerik.com/aspnet-core){% else %}(https://demos.telerik.com/aspnet-mvc){% endif %} with just a few mouse clicks.
 

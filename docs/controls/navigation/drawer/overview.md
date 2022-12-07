@@ -6,7 +6,7 @@ slug: overview_kendoui_drawer_widget
 position: 1
 ---
 
-# Drawer Overview
+# {{ site.product }} Drawer Overview
 
 The Drawer is a dismissible panel used for navigation in responsive web applications or for changing a content of a section in the page.
 

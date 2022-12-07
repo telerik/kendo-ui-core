@@ -6,7 +6,7 @@ slug: overview_kendoui_calendar_widget
 position: 1
 ---
 
-# Calendar Overview
+# {{ site.product }} Calendar Overview
 
 The Calendar renders a graphical calendar that provides navigation and selection functionalities.
 

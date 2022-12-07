@@ -6,7 +6,7 @@ slug: overview_kendoui_timepicker_widget
 position: 1
 ---
 
-# TimePicker Overview
+# {{ site.product }} TimePicker Overview
 
 The TimePicker enables users to select time values from a predefined list or enter new ones.
 

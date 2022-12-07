@@ -6,7 +6,7 @@ slug: overview_kendoui_textbox_widget
 position: 0
 ---
 
-# TextBox Overview
+# {{ site.product }} TextBox Overview
 
 The TextBox converts an `<input>` element into a styled textbox.
 

@@ -7,7 +7,7 @@ slug: htmlhelpers_menu_aspnetcore
 position: 1
 ---
 
-# Menu Overview
+# {{ site.framework }} Menu Overview
 
 {% if site.core %}
 The Telerik UI Menu TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Menu widget.

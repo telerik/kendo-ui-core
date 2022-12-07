@@ -6,7 +6,7 @@ slug: overview_kendoui_lineargauge_widget
 position: 1
 ---
 
-# LinearGauge Overview
+# {{ site.product }} LinearGauge Overview
 
 The LinearGauge represents values on a linear scale.
 

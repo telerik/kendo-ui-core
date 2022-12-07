@@ -7,7 +7,7 @@ slug: htmlhelpers_treeview_aspnetcore
 position: 1
 ---
 
-# TreeView Overview
+# {{ site.framework }} TreeView Overview
 
 {% if site.core %}
 The Telerik UI TreeView TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TreeView widget.

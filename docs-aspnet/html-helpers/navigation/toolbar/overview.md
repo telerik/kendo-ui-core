@@ -7,7 +7,7 @@ slug: htmlhelpers_toolbar_aspnetcore
 position: 1
 ---
 
-# ToolBar Overview
+# {{ site.framework }} ToolBar Overview
 
 {% if site.core %}
 The Telerik UI ToolBar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ToolBar widget.

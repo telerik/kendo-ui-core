@@ -7,7 +7,7 @@ position: 1
 CTAControlName: SkeletonContainer
 ---
 
-# SkeletonContainer Overview
+# {{ site.product }} SkeletonContainer Overview
 
 The SkeletonContainer widget indicates to the user that the content is coming but has not yet been loaded. It aims at helping the user focus on progress and makes the page load time appear shorter.
 

@@ -6,7 +6,7 @@ slug: overview_kendoui_upload_widget
 position: 1
 ---
 
-# Upload Overview
+# {{ site.product }} Upload Overview
 
 The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer efforts.
 

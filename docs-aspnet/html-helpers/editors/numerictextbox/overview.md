@@ -7,7 +7,7 @@ slug: htmlhelpers_numerictextbox_aspnetcore
 position: 0
 ---
 
-# NumericTextBox Overview
+# {{ site.framework }} NumericTextBox Overview
 
 {% if site.core %}
 The Telerik UI NumericTextBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI NumericTextBox widget.

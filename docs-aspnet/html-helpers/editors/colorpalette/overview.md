@@ -7,7 +7,7 @@ slug: overview_colorpalettehelper_aspnetcore
 position: 1
 ---
 
-# ColorPalette Overview
+# {{ site.framework }} ColorPalette Overview
 
 {% if site.core %}
 The Telerik UI ColorPalette TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ColorPalette widget.

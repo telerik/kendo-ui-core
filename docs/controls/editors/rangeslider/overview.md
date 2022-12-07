@@ -6,7 +6,7 @@ slug: overview_kendoui_rangeslider_widget
 position: 1
 ---
 
-# RangeSlider Overview
+# {{ site.product }} RangeSlider Overview
 
 The Kendo UI RangeSlider displays a range of values and allows you to select ranges of values.
 

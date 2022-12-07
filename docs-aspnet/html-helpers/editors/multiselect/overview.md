@@ -7,7 +7,7 @@ slug: htmlhelpers_multiselect_aspnetcore
 position: 1
 ---
 
-# MultiSelect Overview
+# {{ site.framework }} MultiSelect Overview
 
 {% if site.core %}
 The Telerik UI MultiSelect TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI MultiSelect widget.

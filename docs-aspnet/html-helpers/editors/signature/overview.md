@@ -6,7 +6,7 @@ slug: overview_telerikui_signature_component
 position: 1
 ---
 
-# Signature Overview
+# {{ site.framework }} Signature Overview
 
 The Telerik UI Signature for {{ site.framework }} is a server-side wrapper for the Kendo UI Signature widget.
 

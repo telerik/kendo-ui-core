@@ -7,7 +7,7 @@ relatedDocs: api-web-toolbar
 position: 1
 ---
 
-# ToolBar Overview
+# {{ site.product }} ToolBar Overview
 
 The ToolBar is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
 

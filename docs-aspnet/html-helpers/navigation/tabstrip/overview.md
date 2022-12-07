@@ -7,7 +7,7 @@ slug: htmlhelpers_tabstrip_aspnetcore
 position: 1
 ---
 
-# TabStrip Overview
+# {{ site.framework }} TabStrip Overview
 {% if site.core %}
 The Telerik UI TabStrip TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TabStrip widget.
 {% else %}

@@ -6,7 +6,7 @@ slug: overview_kendoui_daterangepicker_widget
 position: 1
 ---
 
-# DateRangePicker Overview
+# {{ site.product }} DateRangePicker Overview
 
 The DateRangePicker is a container for holding start and end date inputs.
 

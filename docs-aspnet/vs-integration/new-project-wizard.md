@@ -7,7 +7,7 @@ slug: newprojectwizards_visualstudio_aspnetcore
 position: 5
 ---
 
-# Creating New Projects
+# Creating New {{ site.product }} Projects
 
 This article demonstrates how to create a new {{ site.product }} application by using the templates that come with the Telerik Extensions for Visual Studio. The newly created project will have the required setup that enables you to immediately start using the {{ site.product }} components.
 

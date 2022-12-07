@@ -6,7 +6,7 @@ slug: overview_treemap_widget
 position: 1
 ---
 
-# TreeMap Overview
+# {{ site.product }} TreeMap Overview
 
 The TreeMap displays hierarchical data in a traditional tree structure.
 

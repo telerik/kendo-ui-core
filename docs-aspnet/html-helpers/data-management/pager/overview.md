@@ -6,7 +6,7 @@ slug: htmlhelpers_pager_aspnet_overview
 position: 1
 ---
 
-# Pager Overview
+# {{ site.framework }} Pager Overview
 
 {% if site.core %}
 The Telerik UI Pager TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Pager widget. To add the component to your ASP.NET Core app, you can use either.

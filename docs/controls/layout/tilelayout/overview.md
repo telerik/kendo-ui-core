@@ -6,7 +6,7 @@ slug: overview_kendoui_tilelayout_widget
 position: 1
 ---
 
-# TileLayout Overview
+# {{ site.product }} TileLayout Overview
 
 > The TileLayout widget is available as of Kendo UI R2 2020(v2020.2.513).
 

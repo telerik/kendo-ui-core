@@ -6,7 +6,7 @@ slug: htmlhelpers_filemanager_aspnetcore_overview
 position: 0
 ---
 
-# FileManager Overview
+# {{ site.framework }} FileManager Overview
 
 The {{ site.product }} FileManager is an Explorer-like component enabling you to manage file and folders. 
 

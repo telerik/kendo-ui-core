@@ -7,7 +7,7 @@ slug: htmlhelpers_pdfviewer_aspnetcore
 position: 1
 ---
 
-# PDFViewer Overview
+# {{ site.framework }} PDFViewer Overview
 
 {% if site.core %}
 The Telerik UI PDFViewer TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI PDFViewer widget.

@@ -7,7 +7,7 @@ slug: overview_lineargaugehelper_aspnetcore
 position: 1
 ---
 
-# LinearGauge Overview
+# {{ site.framework }} LinearGauge Overview
 
 {% if site.core %}
 The Telerik UI LinearGauge TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI LinearGauge widget.

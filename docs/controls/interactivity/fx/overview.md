@@ -6,7 +6,7 @@ slug: overview_kendoui_fxeffects_widget
 position: 1
 ---
 
-# FX Overview
+# {{ site.product }} FX Overview
 
 The Kendo UI FX (Effects) instances provide a rich, extensible, and performance-optimized toolset for element transitions.
 

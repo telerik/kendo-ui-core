@@ -6,7 +6,7 @@ slug: overview_kendoui_notification_widget
 position: 1
 ---
 
-# Notification Overview
+# {{ site.product }} Notification Overview
 
 The Notification provides a styled UI widget with arbitrary content which can provide information to the user on various occasions.
 

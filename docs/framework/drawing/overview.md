@@ -6,7 +6,7 @@ slug: overview_kendoui_drawingapi
 position: 1
 ---
 
-# Drawing Overview
+# {{ site.product }} Drawing Overview
 
 The [Kendo UI Drawing library (Drawing API)](https://demos.telerik.com/kendo-ui/drawing/index) is a cross-browser vector graphics library and provides a simple object model for building and manipulating visual scenes.
 

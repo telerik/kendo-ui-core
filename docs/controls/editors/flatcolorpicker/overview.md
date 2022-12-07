@@ -6,7 +6,7 @@ slug: overview_kendoui_flatcolorpicker_widget
 position: 1
 ---
 
-# FlatColorPicker Overview
+# {{ site.product }} FlatColorPicker Overview
 
 The FlatColorPicker component provides a rich interface to choose a color from Palette and Gradient views. It enables the user to preview the selected color before submit and to ensure that a certain contrast requirements are met.
 

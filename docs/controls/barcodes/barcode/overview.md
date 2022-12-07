@@ -6,7 +6,7 @@ slug: overview_kendoui_barcode_widget
 position: 1
 ---
 
-# Barcode Overview
+# {{ site.product }} Barcode Overview
 
 The Barcode represents data in a machine-readable format.
 

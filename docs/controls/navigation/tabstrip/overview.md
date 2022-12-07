@@ -6,7 +6,7 @@ slug: overview_kendoui_tabstrip_widget
 position: 0
 ---
 
-# TabStrip Overview
+# {{ site.product }} TabStrip Overview
 
 The TabStrip displays a collection of tabs with associated content.
 

@@ -6,7 +6,7 @@ slug: overview_kendoui_splitbutton_widget
 position: 1
 ---
 
-# SplitButton Overview
+# {{ site.product }} SplitButton Overview
 
 The Kendo UI for jQuery SplitButton widget combines the functionality of a button with that of a dropdown element. It allows users to either click on the primary button and run its default behavior, or to open the drop-down popup and choose from a list of additional actions.
 

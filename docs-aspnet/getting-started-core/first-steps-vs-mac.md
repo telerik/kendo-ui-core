@@ -7,7 +7,7 @@ position: 2
 permalink: /getting-started/first-steps-vs-mac
 ---
 
-# First Steps with VS for Mac
+# Telerik UI for ASP.NET Core First Steps with VS for Mac
 
 <iframe width="700" height="400" src="https://www.youtube.com/embed/901yBM2WYb4?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

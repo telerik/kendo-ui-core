@@ -6,7 +6,7 @@ slug: htmlhelpers_timedurationpickerhelper_overview
 position: 1
 ---
 
-# TimeDurationPicker Overview
+# {{ site.framework }} TimeDurationPicker Overview
 
 {% if site.core %}
 The Telerik UI TimeDurationPicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TimeDurationPicker widget.

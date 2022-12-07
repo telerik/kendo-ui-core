@@ -6,7 +6,7 @@ slug: overview_kendoui_rating_widget
 position: 1
 ---
 
-# Rating Overview
+# {{ site.product }} Rating Overview
 
 The Rating allows to intuitively rate by selecting number of items stars from a predefined maximum number of items.
 

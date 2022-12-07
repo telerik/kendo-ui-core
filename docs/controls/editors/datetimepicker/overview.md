@@ -6,7 +6,7 @@ slug: overview_kendoui_datetimepicker_widget
 position: 1
 ---
 
-# DateTimePicker Overview
+# {{ site.product }} DateTimePicker Overview
 
 The DateTimePicker allows the user to select a value from a calendar, a time drop-down list, or through direct input.
 

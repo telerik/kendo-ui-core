@@ -6,7 +6,7 @@ slug: overview_kendoui_checkbox_widget
 position: 1
 ---
 
-# CheckBox Overview
+# {{ site.product }} CheckBox Overview
 
 The CheckBox allows you to provide checkbox functionality to `<input />` elements, style them, set an encoded or decoded label, and disable the CheckBox.
 

@@ -14,7 +14,7 @@ position: 1
     {% assign GettingStarted = "gettingstarted_aspnetmvc" %}
 {% endif %}
 
-# PivotGrid Overview
+# {{ site.framework }} PivotGrid Overview
 
 {% if site.core %}
 The Telerik UI PivotGrid TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI PivotGrid widget. To add the component to your ASP.NET Core app, you can use either.

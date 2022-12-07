@@ -6,7 +6,7 @@ slug: overview_accessibility_support_kendoui
 position: 1
 ---
 
-# Accessibility Overview
+# {{ site.product }} Accessibility Overview
 
 Refer to our [accessibility demos](https://demos.telerik.com/kendo-ui/accessibility), where accessibility level and compliance of the Kendo UI components can be tested.
 

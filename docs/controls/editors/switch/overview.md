@@ -6,7 +6,7 @@ slug: overview_kendoui_switch_widget
 position: 1
 ---
 
-# Switch Overview
+# {{ site.product }} Switch Overview
 
 The Switch displays two exclusive choices.
 

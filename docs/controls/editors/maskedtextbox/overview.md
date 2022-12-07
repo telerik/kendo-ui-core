@@ -6,7 +6,7 @@ slug: overview_kendoui_maskedtextbox_widget
 position: 1
 ---
 
-# MaskedTextBox Overview
+# {{ site.product }} MaskedTextBox Overview
 
 The MaskedTextBox enables a controlled text input that is based on a specific format.
 

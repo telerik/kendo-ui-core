@@ -7,7 +7,7 @@ slug: htmlhelpers_contextmenu_aspnetcore
 position: 1
 ---
 
-# ContextMenu Overview
+# {{ site.framework }} ContextMenu Overview
 
 {% if site.core %}
 The Telerik UI ContextMenu TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ContextMenu widget.

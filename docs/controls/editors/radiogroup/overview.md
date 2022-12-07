@@ -6,7 +6,7 @@ slug: overview_kendoui_radiogroup_widget
 position: 1
 ---
 
-# RadioGroup Overview
+# {{ site.product }} RadioGroup Overview
 
 The RadioGroup allows to style and provide radio buttons functionality to list elements, set the position of the labels, attributes and custom css classes.
 

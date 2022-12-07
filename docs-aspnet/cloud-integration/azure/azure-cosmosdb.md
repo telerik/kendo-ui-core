@@ -6,7 +6,7 @@ slug: azure_cosmosdb_aspnetcore
 position: 2
 ---
 
-# Azure CosmosDB
+# Using {{ site.product }} with Azure CosmosDB
 
 Microsoft's **Azure CosmosDB** is a fully managed service, providing a NoSQL database for application development.
 

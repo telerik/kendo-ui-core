@@ -6,7 +6,7 @@ slug: htmlhelpers_captcha_overview
 position: 1
 ---
 
-# Captcha Overview
+# {{ site.framework }} Captcha Overview
 
 {% if site.core %}
 The Telerik UI Captcha TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Captcha widget.

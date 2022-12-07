@@ -7,7 +7,7 @@ slug: overview_kendoui_mediaplayer_widget
 position: 1
 ---
 
-# MediaPlayer Overview
+# {{ site.product }} MediaPlayer Overview
 
 The MediaPlayer plays video files from static sources or streams online YouTube videos and enriches your website with dynamic content in a user-friendly interface.
 

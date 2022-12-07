@@ -6,7 +6,7 @@ slug: overview_kendoui_popup_widget
 position: 1
 ---
 
-# Popup Overview
+# {{ site.product }} Popup Overview
 
 The Kendo UI Popup positions content next to a specific anchor.
 

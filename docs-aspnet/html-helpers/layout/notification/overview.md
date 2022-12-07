@@ -7,7 +7,7 @@ slug: htmlhelpers_notification_aspnetcore
 position: 1
 ---
 
-# Notification Overview
+# {{ site.framework }} Notification Overview
 
 {% if site.core %}
 The Telerik UI Notification TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Notification widget.

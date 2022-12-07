@@ -6,7 +6,7 @@ slug: overview_kendoui_radiobutton_widget
 position: 1
 ---
 
-# RadioButton Overview
+# {{ site.product }} RadioButton Overview
 
 The RadioButton allows you to provide radiobutton functionality to `<input />` elements, style them, disable the RadioButton, and set an encoded or decoded label.
 

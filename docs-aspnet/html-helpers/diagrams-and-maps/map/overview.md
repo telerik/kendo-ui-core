@@ -7,7 +7,7 @@ slug: htmlhelpers_map_aspnetcore
 position: 1
 ---
 
-# Map Overview
+# {{ site.framework }} Map Overview
 
 {% if site.core %}
 The Telerik UI Map TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Map widget.

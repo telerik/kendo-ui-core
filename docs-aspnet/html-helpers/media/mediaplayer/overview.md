@@ -7,7 +7,7 @@ slug: htmlhelpers_mediaplayer_aspnetcore
 position: 1
 ---
 
-# MediaPlayer Overview
+# {{ site.framework }} MediaPlayer Overview
 
 {% if site.core %}
 The Telerik UI MediaPlayer TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI MediaPlayer widget.

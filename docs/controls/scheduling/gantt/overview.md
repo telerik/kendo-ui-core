@@ -6,7 +6,7 @@ slug: overview_kendoui_gantt_widget
 position: 1
 ---
 
-# Gantt Overview
+# {{ site.product }} Gantt Overview
 
 The Gantt displays a set of tasks and dependencies which are used to visualize project-planning data.
 

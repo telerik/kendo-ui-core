@@ -7,7 +7,7 @@ slug: overview_barcodehelper_aspnetcore
 position: 1
 ---
 
-# Barcode Overview
+# {{ site.framework }} Barcode Overview
 
 {% if site.core %}
 The Barcode TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Barcode widget. To add the component to your ASP.NET Core app, you can use either.

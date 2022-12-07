@@ -6,7 +6,7 @@ slug: overview_kendoui_sparklinescharts
 position: 1
 ---
 
-# Sparkline Overview
+# {{ site.product }} Sparkline Overview
 
 The Kendo UI Sparkline is a very small chart that is drawn without axes, coordinates, legends, titles, or other chart-specific elements.
 

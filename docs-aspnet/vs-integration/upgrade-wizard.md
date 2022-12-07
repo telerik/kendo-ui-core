@@ -7,7 +7,7 @@ position: 17
 previous_url: /getting-started/vs-integration/upgrade-wizard, /vs-integration-mvc/upgrade-wizard
 ---
 
-# Upgrading Projects
+# Upgrading {{ site.product }} Projects
 
 This article demonstrates how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 

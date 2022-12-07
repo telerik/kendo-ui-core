@@ -6,7 +6,7 @@ slug: htmlhelpers_stepper_aspnetcore_overview
 position: 1
 ---
 
-# Stepper Overview
+# {{ site.framework }} Stepper Overview
 
 {% if site.core %}
 The Telerik UI Stepper TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Stepper widget.

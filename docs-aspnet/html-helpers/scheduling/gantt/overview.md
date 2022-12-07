@@ -7,7 +7,7 @@ slug: htmlhelpers_gantt_aspnetcore
 position: 1
 ---
 
-# Gantt Overview
+# {{ site.framework }} Gantt Overview
 
 {% if site.core %}
 The Telerik UI Gantt TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Gantt widget.

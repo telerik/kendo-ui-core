@@ -8,7 +8,7 @@ position: 1
 permalink: /getting-started/first-steps
 ---
 
-# First Steps with VS for Windows
+# First Steps in {{ site.product }} with VS for Windows
 
 This tutorial demonstrates how to start working with Telerik UI for ASP.NET Core. You will implement the Telerik UI DatePicker for ASP.NET Core in your project by using its dedicated HtmlHelper or TagHelper. In this guide, you will download and implement the components by using NuGet and Visual Studio 2019 for Windows. 
 

@@ -6,7 +6,7 @@ slug: overview_kendoui_responsivepanel_widget
 position: 1
 ---
 
-# ResponsivePanel Overview
+# {{ site.product }} ResponsivePanel Overview
 
 The Kendo UI ResponsivePanel allows you to hide part of a page content on small screens.
 

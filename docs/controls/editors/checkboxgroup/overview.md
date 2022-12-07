@@ -6,7 +6,7 @@ slug: overview_kendoui_checkboxgroup_widget
 position: 1
 ---
 
-# CheckBoxGroup Overview
+# {{ site.product }} CheckBoxGroup Overview
 
 The CheckBoxGroup allows to style and provide checkbox functionality to list elements, set the position of the labels, attributes and custom css classes.
 

@@ -8,7 +8,7 @@ permalink: /getting-started/razor-pages
 position: 5
 ---
 
-# Using Telerik UI in Razor Pages
+# Using {{ site.product }} in Razor Pages
 
 The ASP.NET Razor Pages framework was introduced in ASP.NET Core 2.0 as an alternative to the ASP.NET Core Model-View-Controller (MVC) framework. Some of the key features of Razor Pages are:
 

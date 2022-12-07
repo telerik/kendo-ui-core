@@ -6,7 +6,7 @@ slug: overview_kendoui_editor_widget
 position: 1
 ---
 
-# Editor Overview
+# {{ site.product }} Editor Overview
 
 The Editor allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface and generate widget value as an XHTML markup.
 

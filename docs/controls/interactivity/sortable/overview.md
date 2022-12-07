@@ -6,7 +6,7 @@ slug: overview_kendoui_sortable_widget
 position: 1
 ---
 
-# Sortable Overview
+# {{ site.product }} Sortable Overview
 
 The Sortable provides a sortable drag-and-drop functionality to elements within a list.
 

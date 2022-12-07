@@ -6,7 +6,7 @@ slug: htmlhelpers_expansionpanel_aspnetcore
 position: 1
 ---
 
-# ExpansionPanel Overview
+# {{ site.framework }} ExpansionPanel Overview
 
 {% if site.core %}
 The Telerik UI ExpansionPanel TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ExpansionPanel widget.

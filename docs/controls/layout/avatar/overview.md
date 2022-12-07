@@ -6,7 +6,7 @@ slug: overview_kendoui_avatar_widget
 position: 1
 ---
 
-# Avatar Overview
+# {{ site.product }} Avatar Overview
 
 The Kendo UI for jQuery Avatar is typically used to display images, icons or initials representing people or other entities.
 

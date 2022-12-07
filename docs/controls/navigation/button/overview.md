@@ -6,7 +6,7 @@ slug: overview_kendoui_button_widget
 position: 1
 ---
 
-# Button Overview
+# {{ site.product }} Button Overview
 
 The Button provides consistent styling for a clickable UI functionality rendering arbitrary content and also keyboard operability for elements that do not natively support such (for example, `span`).
 

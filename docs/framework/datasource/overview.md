@@ -7,7 +7,7 @@ slug: overview_kendoui_datasourcecomponent
 position: 1
 ---
 
-# DataSource Overview
+# {{ site.product }} DataSource Overview
 
 The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) plays a central role in all web applications built with Kendo UI for jQuery.
 

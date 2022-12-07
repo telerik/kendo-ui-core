@@ -7,7 +7,7 @@ slug: overview_radialgaugehelper_aspnetcore
 position: 1
 ---
 
-# RadialGauge Overview
+# {{ site.framework }} RadialGauge Overview
 
 {% if site.core %}
 The Telerik UI RadialGauge TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI RadialGauge widget.

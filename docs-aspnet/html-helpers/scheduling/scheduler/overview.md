@@ -7,7 +7,7 @@ slug: htmlhelpers_scheduler_aspnetcore
 position: 1
 ---
 
-# Scheduler Overview
+# {{ site.framework }} Scheduler Overview
 
 {% if site.core %}
 The Telerik UI Scheduler TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Scheduler widget.

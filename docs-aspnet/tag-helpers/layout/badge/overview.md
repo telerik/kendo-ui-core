@@ -6,7 +6,7 @@ slug: taghelpers_badge_aspnetcore
 position: 1
 ---
 
-# Badge Overview
+# {{ site.framework }} Badge Overview
 
 The Badge is an absolutely positioned element that is used to decorate avatars, navigation menus, or other components in the application when the visual notification is needed.
 

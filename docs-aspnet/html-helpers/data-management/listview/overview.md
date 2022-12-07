@@ -7,7 +7,7 @@ slug: htmlhelpers_listview_aspnetcore
 position: 1
 ---
 
-# ListView Overview
+# {{ site.framework }} ListView Overview
 
 {% if site.core %}
 The Telerik UI ListView TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ListView widget. To add the component to your ASP.NET Core app, you can use either.

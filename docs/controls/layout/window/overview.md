@@ -6,7 +6,7 @@ slug: overview_kendoui_window_widget
 position: 0
 ---
 
-# Window Overview
+# {{ site.product }} Window Overview
 
 The Window displays content in a modal or non-modal HTML window.
 

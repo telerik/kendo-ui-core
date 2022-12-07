@@ -7,7 +7,7 @@ slug: overview_flatcolorpickerhelper_aspnetcore
 position: 1
 ---
 
-# FlatColorPicker Overview
+# {{ site.framework }} FlatColorPicker Overview
 
 {% if site.core %}
 The Telerik UI FlatColorPicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI FlatColorPicker widget.

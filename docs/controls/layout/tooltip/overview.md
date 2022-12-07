@@ -6,7 +6,7 @@ slug: overview_kendoui_tooltip_widget
 position: 0
 ---
 
-# Tooltip Overview
+# {{ site.product }} Tooltip Overview
 
 The Tooltip displays a popup hint for a specific HTML element. 
 

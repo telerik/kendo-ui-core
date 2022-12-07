@@ -7,7 +7,7 @@ slug: htmlhelpers_scrollview_aspnetcore
 position: 1
 ---
 
-# ScrollView Overview
+# {{ site.framework }} ScrollView Overview
 
 {% if site.core %}
 The Telerik UI ScrollView TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ScrollView widget.

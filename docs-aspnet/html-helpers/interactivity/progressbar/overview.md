@@ -7,7 +7,7 @@ slug: htmlhelpers_progressbar_aspnetcore
 position: 1
 ---
 
-# ProgressBar Overview
+# {{ site.framework }} ProgressBar Overview
 
 {% if site.core %}
 The Telerik UI ProgressBar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ProgressBar widget.

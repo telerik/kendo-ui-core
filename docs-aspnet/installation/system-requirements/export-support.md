@@ -7,7 +7,7 @@ slug: exportsupport_core
 position: 5
 ---
 
-# Export Support
+# {{ site.product }} Export Support
 
 {{ site.product }} integrates the Pako and JSZip libraries to support the content export of its components to PDF and Excel.
 

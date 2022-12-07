@@ -6,7 +6,7 @@ slug: licensing_aspnetcore
 position: 21
 ---
 
-# Licensing
+# {{ site.product }} Licensing
 
 Progress<sup>®</sup> {{ site.product }} is available under a developer (commercial) or a trial license.
 

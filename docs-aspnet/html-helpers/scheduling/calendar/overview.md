@@ -7,7 +7,7 @@ slug: htmlhelpers_overview_calendarhelper_aspnetcore
 position: 1
 ---
 
-# Calendar Overview
+# {{ site.framework }} Calendar Overview
 
 {% if site.core %}
 The Telerik UI Calendar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Calendar widget.

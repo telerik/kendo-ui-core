@@ -7,7 +7,7 @@ slug: overview_kendoui_contextmenu_widget
 position: 1
 ---
 
-# ContextMenu Overview
+# {{ site.product }} ContextMenu Overview
 
 The ContextMenu displays hierarchical data as a multi-level menu in a popup.
 

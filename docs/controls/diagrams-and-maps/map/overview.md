@@ -6,7 +6,7 @@ slug: overview_kendoui_mapwidget
 position: 1
 ---
 
-# Map Overview
+# {{ site.product }} Map Overview
 
 The Map displays geospatial information organized in layers and is supported for both desktop and mobile devices.
 

@@ -7,7 +7,7 @@ slug: cdnservices_core
 position: 5
 ---
 
-# Using CDN
+# Using CDN with {{ site.product }}
 
 The Kendo UI client-side resources like JavaScript files and CSS files are available online through the Kendo CDN service. Including the client-side resources in your project is essential because the Telerik UI helpers are wrappers over the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/intro/first-steps).
 

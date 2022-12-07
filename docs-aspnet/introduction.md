@@ -12,7 +12,7 @@ position: 1
     {% assign telerik_product_url = "aspnet-mvc" %}
 {% endif %}
 
-# Welcome to {{ site.product }}
+# Welcome to {{ site.product }} Components
 
 Thank you for choosing Progress<sup>®</sup> Telerik<sup>®</sup> {{ site.product_short }}!  
 

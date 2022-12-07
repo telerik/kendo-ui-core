@@ -6,7 +6,7 @@ slug: overview_kendoui_dropdownlist_widget
 position: 0
 ---
 
-# DropDownList Overview
+# {{ site.product }} DropDownList Overview
 
 The DropDownList displays a list of values allowing for a single selection from the list, and supports key features like filtering, item templating, virtualization, and cascading.
 

@@ -6,7 +6,7 @@ slug: overview_kendoui_multicolumncombobox_widget
 position: 1
 ---
 
-# MultiColumnComboBox Overview
+# {{ site.product }} MultiColumnComboBox Overview
 
 The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
 

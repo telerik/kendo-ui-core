@@ -7,7 +7,7 @@ slug: htmlhelpers_splitter_aspnetcore
 position: 1
 ---
 
-# Splitter Overview
+# {{ site.framework }} Splitter Overview
 
 {% if site.core %}
 The Telerik UI Splitter TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Splitter widget.

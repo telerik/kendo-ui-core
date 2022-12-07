@@ -6,7 +6,7 @@ slug: overview_kendoui_textarea_widget
 position: 1
 ---
 
-# TextArea Overview
+# {{ site.product }} TextArea Overview
 
 The TextArea converts a `<textarea>` element into a styled textarea.
 

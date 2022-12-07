@@ -6,7 +6,7 @@ slug: overview_heatmaphelper_aspnetcore
 position: 1
 ---
 
-# HeatMap Overview
+# {{ site.framework }} HeatMap Overview
 
 {% if site.core %}
 The Telerik UI HeatMap TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI HeatMap widget.

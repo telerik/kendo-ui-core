@@ -8,7 +8,7 @@ position: 15
 ---
 
 {% if site.core %}
-# Scaffolding
+# Scaffolding for Telerik UI for ASP.NET Core
 
 Since the 2022 R2 SP2 release, Telerik UI for ASP.NET Core provides new way of generating Scaffolding templates as a convenient productivity feature. 
 ![{{ site.product_short }} Adding a new scaffolded item with the Telerik UI Scaffolder for Core](../images/scaffolding/core-scaffolder-add-new-item.png)
@@ -34,7 +34,7 @@ Then, you are presented with several popular components you can choose from. You
 The final result conveniently generates everything required to run the page from the first go - a View page, a Controller file and a Model definition. This way, you can quickly begin with a working app and modify it to match your own business and development needs.
 
 {% else %}
-# Scaffolding
+# Scaffolding for Telerik UI for ASP.NET MVC
 
 As of the Q1 2015 release, Telerik UI for ASP.NET MVC provides Scaffolding templates.
 

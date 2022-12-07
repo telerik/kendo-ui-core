@@ -6,7 +6,7 @@ slug: overview_kendoui_progressbar_widget
 position: 1
 ---
 
-# ProgressBar Overview
+# {{ site.product }} ProgressBar Overview
 
 The ProgressBar delivers rich functionality for displaying and tracking the progress of a task.
 

@@ -6,7 +6,7 @@ slug: overview_kendoui_pivotgridv2_widget
 position: 1
 ---
 
-# PivotGridV2 Overview
+# {{ site.product }} PivotGridV2 Overview
 
 The Kendo UI PivotGridV2 represents multidimensional data in a cross-tabular format.
 

@@ -7,7 +7,7 @@ slug: htmlhelpers_editor_aspnetcore
 position: 1
 ---
 
-# Editor Overview
+# {{ site.framework }} Editor Overview
 
 {% if site.core %}
 The Telerik UI Editor TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Editor widget.

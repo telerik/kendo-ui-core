@@ -6,7 +6,7 @@ slug: overview_kendoui_multiviewcalendar_widget
 position: 1
 ---
 
-# MultiViewCalendar Overview
+# {{ site.product }} MultiViewCalendar Overview
 
 The MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
 

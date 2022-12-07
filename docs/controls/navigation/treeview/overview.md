@@ -6,7 +6,7 @@ slug: overview_kendoui_treeview_widget
 position: 1
 ---
 
-# TreeView Overview
+# {{ site.product }} TreeView Overview
 
 The Kendo UI TreeView widget displays hierarchical data in a traditional tree structure.
 

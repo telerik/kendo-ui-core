@@ -8,7 +8,7 @@ position: 3
 permalink: /getting-started/first-steps-cli
 ---
 
-# First Steps with CLI
+# Telerik UI for ASP.NET Core First Steps with CLI
 
 Welcome to the First Steps with CLI guide on getting started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core by using the [command-line interface (CLI)](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)!
 

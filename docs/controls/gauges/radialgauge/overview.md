@@ -6,7 +6,7 @@ slug: overview_kendoui_radialgaugewidget
 position: 1
 ---
 
-# RadialGauge Overview
+# {{ site.product }} RadialGauge Overview
 
 The [Kendo UI RadialGauge widget](https://demos.telerik.com/kendo-ui/radial-gauge/index) enables users to quickly understand in what certain range a value lies.
 

@@ -7,7 +7,7 @@ slug: htmlhelpers_listbox_aspnetcore
 position: 1
 ---
 
-# ListBox Overview
+# {{ site.framework }} ListBox Overview
 
 {% if site.core %}
 The Telerik UI ListBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ListBox widget.

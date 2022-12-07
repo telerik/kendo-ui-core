@@ -7,7 +7,7 @@ slug: overview_kendoui_charts_widget
 position: 0
 ---
 
-# Chart Overview
+# {{ site.product }} Chart Overview
 
 The Kendo UI Chart uses modern browser technologies to render high-quality data visualizations.
 

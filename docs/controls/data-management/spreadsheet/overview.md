@@ -6,7 +6,7 @@ slug: overview_spreadsheet_widget
 position: 1
 ---
 
-# Spreadsheet Overview
+# {{ site.product }} Spreadsheet Overview
 
 The Spreadsheet allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 

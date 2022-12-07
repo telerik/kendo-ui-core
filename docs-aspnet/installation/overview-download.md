@@ -7,7 +7,7 @@ slug: downloadinstall_aspnetcore
 position: 1
 ---
 
-# Download and Installation Options
+# {{ site.product }} Download and Installation Options
 
 This article outlines the approaches for downloading and installing the binaries with the {{ site.product }} components and for providing the client-side resources. This approach is applicable only for Windows users.
 

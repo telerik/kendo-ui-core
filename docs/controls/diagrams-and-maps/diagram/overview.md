@@ -6,7 +6,7 @@ slug: overview_kendoui_diagram_widget
 position: 1
 ---
 
-# Diagram Overview
+# {{ site.product }} Diagram Overview
 
 The Diagram represents information in a schematic way and according to particular visualization techniques.
 

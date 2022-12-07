@@ -6,7 +6,7 @@ slug: htmlhelpers_checkbox_aspnetcore_overview
 position: 1
 ---
 
-# CheckBox Overview
+# {{ site.framework }} CheckBox Overview
 
 {% if site.core %}
 The Telerik UI CheckBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI CheckBox widget.

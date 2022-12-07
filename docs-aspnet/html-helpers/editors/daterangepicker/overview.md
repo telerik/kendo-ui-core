@@ -7,7 +7,7 @@ slug: htmlhelpers_daterangepicker_aspnetcore
 position: 1
 ---
 
-# DateRangePicker Overview
+# {{ site.framework }} DateRangePicker Overview
 
 {% if site.core %}
 The Telerik UI DateRangePicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DateRangePicker widget.

@@ -7,7 +7,7 @@ slug: htmlhelpers_tooltip_aspnetcore
 position: 1
 ---
 
-# Tooltip Overview
+# {{ site.framework }} Tooltip Overview
 
 {% if site.core %}
 The Telerik UI Tooltip TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Tooltip widget.

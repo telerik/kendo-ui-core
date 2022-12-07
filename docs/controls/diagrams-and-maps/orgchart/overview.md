@@ -6,7 +6,7 @@ slug: overview_kendoui_orgchart_widget
 position: 1
 ---
 
-# OrgChart Overview
+# {{ site.product }} OrgChart Overview
 
 The Kendo UI OrgChart allows you to view and interact with an organizational structures. It gives the possibility to easily visualize hierarchies and is very useful in scenarios like what teams employees are part of and who they report to. 
 

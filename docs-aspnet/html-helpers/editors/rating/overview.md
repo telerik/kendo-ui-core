@@ -7,7 +7,7 @@ slug: htmlhelpers_rating_aspnetcore_overview
 position: 1
 ---
 
-# Rating Overview
+# {{ site.framework }} Rating Overview
 
 {% if site.core %}
 The Telerik UI Rating TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Rating widget.

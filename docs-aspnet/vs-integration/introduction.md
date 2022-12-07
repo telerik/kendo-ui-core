@@ -7,7 +7,7 @@ slug: overview_visualstudio_aspnetcore
 position: 1
 ---
 
-# Visual Studio Integration Overview
+# Telerik UI for {{ site.framework }} Visual Studio Integration Overview
 
 To integrate with Visual Studio, Telerik provides the Progress&reg; Telerik&reg; UI for {{ site.framework }} Visual Studio (VS) Extensions. They enhance the experience in developing web applications with {{ site.product }}.
 

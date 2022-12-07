@@ -7,7 +7,7 @@ position: 1
 CTAControlName: ActionSheet
 ---
 
-# ActionSheet Overview
+# {{ site.product }} ActionSheet Overview
 
 The Kendo UI ActionSheet is a dialog that displays a set of options for the user to choose from. It appears on top of the app's content, and the user must manually dismiss it before resuming the interaction with the app.
 

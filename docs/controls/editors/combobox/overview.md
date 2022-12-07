@@ -6,7 +6,7 @@ slug: overview_kendoui_combobox_widget
 position: 1
 ---
 
-# ComboBox Overview
+# {{ site.product }} ComboBox Overview
 
 The ComboBox displays a list of values and allows for a single selection from the list.
 

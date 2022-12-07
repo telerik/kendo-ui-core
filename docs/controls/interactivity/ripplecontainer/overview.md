@@ -6,7 +6,7 @@ slug: overview_kendoui_ripplecontainer_widget
 position: 1
 ---
 
-# RippleContainer Overview
+# {{ site.product }} RippleContainer Overview
 
 The Kendo UI RippleContainer widget provides [the Material ink ripple effect](https://material.io/design/motion/choreography.html#sequencing) for the Kendo UI components.
 

@@ -6,7 +6,7 @@ slug: overview_kendoui_colorgradient_widget
 position: 1
 ---
 
-# ColorGradient Overview
+# {{ site.product }} ColorGradient Overview
 
 The Kendo UI for jQuery ColorGradient renders a gradient (a hue and an alpha slider) and inputs to manually enter a desired color. You can directly add the widget to the page instead of rendering it in a popup.
 

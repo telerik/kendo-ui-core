@@ -6,7 +6,7 @@ slug: overview_kendoui_stockcharts
 position: 1
 ---
 
-# StockChart Overview
+# {{ site.product }} StockChart Overview
 
 The StockChart is a specialized control visualizing the price movement of any financial instrument over a certain period of time.
 

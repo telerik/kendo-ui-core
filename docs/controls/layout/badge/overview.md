@@ -6,7 +6,7 @@ slug: overview_kendoui_badge_widget
 position: 1
 ---
 
-# Badge Overview
+# {{ site.product }} Badge Overview
 
 The Badge is an absolutely positioned element that is used to decorate avatars, navigation menus, or other components in the application when the visual notification is needed.
 

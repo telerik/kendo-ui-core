@@ -6,7 +6,7 @@ slug: overview_kendoui_qrcode_widget
 position: 1
 ---
 
-# QRCode Overview
+# {{ site.product }} QRCode Overview
 
 The QRCode generates [Canvas](https://en.wikipedia.org/wiki/Canvas_X) and [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) images that represent [Quick Response (QR) codes](https://en.wikipedia.org/wiki/QR_code).
 

@@ -7,7 +7,7 @@ slug: overview_circulargaugehelper_aspnetcore
 position: 1
 ---
 
-# CircularGauge Overview
+# {{ site.framework }} CircularGauge Overview
 
 {% if site.core %}
 The Telerik UI CircularGauge TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI CircularGauge widget.

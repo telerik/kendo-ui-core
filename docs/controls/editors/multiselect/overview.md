@@ -6,7 +6,7 @@ slug: overview_kendoui_multiselect_widget
 position: 1
 ---
 
-# MultiSelect Overview
+# {{ site.product }} MultiSelect Overview
 
 The MultiSelect displays a list of options and allows multiple selections from this list.
 

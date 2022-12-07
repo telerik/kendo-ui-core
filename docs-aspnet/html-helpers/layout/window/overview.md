@@ -7,7 +7,7 @@ slug: htmlhelpers_window_aspnetcore
 position: 1
 ---
 
-# Window Overview
+# {{ site.framework }} Window Overview
 
 {% if site.core %}
 The Telerik UI Window TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Window widget.

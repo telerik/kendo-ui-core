@@ -7,7 +7,7 @@ slug: upgrade_aspnetcore
 position: 1
 ---
 
-# Upgrading Telerik UI
+# Upgrading {{ site.product }}
 
 This document describes how to upgrade the version of the {{ site.product }} helpers and how to switch from a trial to a developer (commercial) license.
 

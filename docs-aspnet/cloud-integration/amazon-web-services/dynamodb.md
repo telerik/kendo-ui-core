@@ -6,7 +6,7 @@ slug: aws_dynamodb_aspnetcore
 position: 4
 ---
 
-# Amazon DynamoDB
+# Using {{ site.framework }} with Amazon DynamoDB
 
 This tutorial shows how to create a table in [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) and configure the Telerik UI for {{ site.framework }} Grid to perform remote CRUD (Create, Read, Update, Destroy) data operations in the DynamoDB table.
 

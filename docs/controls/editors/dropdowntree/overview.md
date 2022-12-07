@@ -6,7 +6,7 @@ slug: overview_kendoui_dropdowntree_widget
 position: 1
 ---
 
-# DropDownTree Overview
+# {{ site.product }} DropDownTree Overview
 
 The DropDownTree represents an editor of hierarchical data, rendered in a tree-like structure, which provides multiple selection option and custom nodes.
 

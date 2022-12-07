@@ -7,7 +7,7 @@ slug: latestversionretrieval_visualstudio_aspnetcore
 position: 27
 ---
 
-# Downloading New Versions
+# Downloading New Versions of {{ site.product }}
 
 The {{ site.product }} Visual Studio (VS) extensions enable you to keep your projects updated.
 

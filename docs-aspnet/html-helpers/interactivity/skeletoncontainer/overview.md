@@ -6,7 +6,7 @@ slug: htmlhelpers_skeletoncontainer_aspnetcore_overview
 position: 1
 ---
 
-# SkeletonContainer Overview
+# {{ site.framework }} SkeletonContainer Overview
 
 {% if site.core %}
 The Telerik UI SkeletonContainer TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI SkeletonContainer widget.

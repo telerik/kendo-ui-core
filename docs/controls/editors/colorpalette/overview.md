@@ -6,7 +6,7 @@ slug: overview_kendoui_colorpalette_widget
 position: 1
 ---
 
-# ColorPalette Overview
+# {{ site.product }} ColorPalette Overview
 
 The Kendo UI for jQuery ColorPalette renders colors by using color presets (sets of predefined colors) or by implementing a custom color palette.
 

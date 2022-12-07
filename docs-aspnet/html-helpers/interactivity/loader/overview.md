@@ -6,7 +6,7 @@ slug: htmlhelpers_loader_aspnetcore_overview
 position: 1
 ---
 
-# Loader Overview
+# {{ site.framework }} Loader Overview
 {% if site.core %}
 The Telerik UI Loader TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Loader widget.
 {% else %}

@@ -7,7 +7,7 @@ slug: overview_switchhelper_aspnetcore
 position: 1
 ---
 
-# Switch Overview
+# {{ site.framework }} Switch Overview
 
 {% if site.core %}
 The Telerik UI Switch TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Switch widget.

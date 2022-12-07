@@ -6,7 +6,7 @@ slug: overview_kendoui_arcgaugewidget
 position: 1
 ---
 
-# ArcGauge Overview
+# {{ site.product }} ArcGauge Overview
 
 The ArcGauge represents a value on a circular arc.
 

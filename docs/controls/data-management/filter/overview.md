@@ -6,7 +6,7 @@ slug: overview_kendoui_filter_widget
 position: 1
 ---
 
-# Filter Overview
+# {{ site.product }} Filter Overview
 
 The [Kendo UI Filter widget](https://demos.telerik.com/kendo-ui/filter/index) a unified control for filtering data-bound components that have a [data source](/api/javascript/data/datasource).
 

@@ -6,7 +6,7 @@ slug: overview_accessibility
 position: 0
 ---
 
-# Accessibility Overview
+# {{ site.product }} Accessibility Overview
 
 Websites and applications are accessible when they provide full control over their features by enabling users with disabilities to access their content by using assistive technologies or keyboard navigation.
 

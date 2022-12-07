@@ -6,7 +6,7 @@ slug: compliance_accessibility
 position: 90
 ---
 
-# Accessibility {% if site.core %}Compliance{% else %}Support{% endif %}
+# {{ site.product }} Accessibility {% if site.core %}Compliance{% else %}Support{% endif %}
 
 The following table lists the {{ site.product }} components which support accessibility and keyboard navigation options.
 

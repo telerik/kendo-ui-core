@@ -6,7 +6,7 @@ slug: overview_kendoui_chat_widget
 position: 1
 ---
 
-# Chat Overview
+# {{ site.product }} Chat Overview
 
 The Chat allows the user to participate in chat sessions with other users or with chat bots.
 

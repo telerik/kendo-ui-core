@@ -6,7 +6,7 @@ slug: htmlhelpers_orgchart_aspnetcore
 position: 0
 ---
 
-# OrgChart Overview
+# {{ site.framework }} OrgChart Overview
 {% if site.core %}
 The Telerik UI OrgChart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI OrgChart widget.
 {% else %}

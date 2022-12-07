@@ -6,7 +6,7 @@ slug: overview_sparklineshelper_aspnetcore
 position: 1
 ---
 
-# Sparkline Overview
+# {{ site.framework }} Sparkline Overview
 
 The Telerik UI Sparkline TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Sparkline widget.
 

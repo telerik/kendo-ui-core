@@ -6,7 +6,7 @@ slug: overview_kendoui_dateinput_widget
 position: 1
 ---
 
-# DateInput Overview
+# {{ site.product }} DateInput Overview
 
 The DateInput represents an input field that recognizes and formats scheduling values such as dates.
 

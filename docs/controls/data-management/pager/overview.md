@@ -6,7 +6,7 @@ slug: overview_kendoui_pager_widget
 position: 1
 ---
 
-# Pager Overview
+# {{ site.product }} Pager Overview
 
 The [Kendo UI Pager widget](https://demos.telerik.com/kendo-ui/pager/index) enables splitting a set of data into pages with flexible and intuitive UI.
 

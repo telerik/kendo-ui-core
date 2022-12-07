@@ -6,7 +6,7 @@ slug: htmlhelpers_overview_textarea
 position: 1
 ---
 
-# TextArea Overview
+# {{ site.framework }} TextArea Overview
 
 {% if site.core %}
 The Telerik UI TextArea TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TextArea widget.

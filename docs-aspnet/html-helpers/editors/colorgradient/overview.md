@@ -6,7 +6,7 @@ slug: htmlhelpers_overview_colorgradient
 position: 1
 ---
 
-# ColorGradient Overview
+# {{ site.framework }} ColorGradient Overview
 
 {% if site.core %}
 The Telerik UI ColorGradient TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the [Kendo UI ColorGradient](https://docs.telerik.com/kendo-ui/controls/editors/colorgradient/overview) widget.

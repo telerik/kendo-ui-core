@@ -6,7 +6,7 @@ slug: htmlhelpers_radiogroup_aspnetcore_overview
 position: 1
 ---
 
-# RadioGroup Overview
+# {{ site.framework }} RadioGroup Overview
 
 {% if site.core %}
 The Telerik UI RadioGroup TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI RadioGroup widget.

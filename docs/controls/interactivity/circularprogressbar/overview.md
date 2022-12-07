@@ -6,7 +6,7 @@ slug: overview_kendoui_circularprogressbar_widget
 position: 1
 ---
 
-# CirularProgressbar Overview
+# {{ site.product }} CirularProgressbar Overview
 
 The CircularProgressBar delivers functionality for displaying and tracking the progress of a task.
 

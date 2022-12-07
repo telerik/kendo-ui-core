@@ -6,7 +6,7 @@ slug: htmlhelpers_taskboard_aspnetcore_overview
 position: 1
 ---
 
-# TaskBoard Overview
+# {{ site.framework }} TaskBoard Overview
 
 {% if site.core %}
 The Telerik UI TaskBoard TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TaskBoard widget. To add the component to your ASP.NET Core app, you can use either.

@@ -6,7 +6,7 @@ slug: overview_kendoui_captcha_widget
 position: 1
 ---
 
-# Captcha Overview
+# {{ site.product }} Captcha Overview
 
 The Kendo UI Captcha widget is a security measure that prevents automated spam from performing tasks such as form submissions in your application. The widget generates distorted images of letters and numbers that are easily decipherable to humans, but not to automated programs (spam bots).
 

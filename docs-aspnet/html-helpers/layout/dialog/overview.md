@@ -7,7 +7,7 @@ slug: overview_dialoghelper_aspnetcore
 position: 1
 ---
 
-# Dialog Overview
+# {{ site.framework }} Dialog Overview
 
 {% if site.core %}
 The Telerik UI Dialog TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Dialog widget.

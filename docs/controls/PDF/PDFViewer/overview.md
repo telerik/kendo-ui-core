@@ -6,7 +6,7 @@ slug: overview_kendoui_pdfviewer_widget
 position: 1
 ---
 
-# PDFViewer Overview
+# {{ site.product }} PDFViewer Overview
 
 The PDFViewer displays PDF files in the browser and consists of a toolbar and a scrollable container that wraps the page elements.
 

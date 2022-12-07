@@ -7,7 +7,7 @@ slug: overview_timepickerhelper_aspnetcore
 position: 1
 ---
 
-# TimePicker Overview
+# {{ site.framework }} TimePicker Overview
 
 {% if site.core %}
 The Telerik UI TimePicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TimePicker widget.

@@ -7,7 +7,7 @@ slug: overview_kendoui_grid_widget
 position: 0
 ---
 
-# Grid Overview
+# {{ site.product }} Grid Overview
 
 The Grid is a powerful control for displaying data in a tabular format.
 

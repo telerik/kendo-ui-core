@@ -7,7 +7,7 @@ slug: overview_kendoui_dialog_widget
 position: 1
 ---
 
-# Dialog Overview
+# {{ site.product }} Dialog Overview
 
 The Dialog is a modal popup that brings information to the user.
 
