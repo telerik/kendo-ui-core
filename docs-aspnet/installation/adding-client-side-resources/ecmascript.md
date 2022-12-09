@@ -87,15 +87,37 @@ You can manually build the source code of the components by following these step
 1. Navigate to your [downloads](https://www.telerik.com/account/my-downloads) page.
 1. Open the Kendo UI for jQuery page and scroll down to the **Source Code** section.
 1. Once you have downloaded and extracted the source code, navigate to the `src` folder and open a terminal.
-1. Run any of the following commands to build the source code:
+1. Run the following command to install **npm**:
 
   ```javascript
-      npx run scripts // Builds the bundled(traditional) version of the scripts.
-      npx run scripts:mjs // Builds the mjs version of the scripts.
-      npx run scripts:modules // Builds the esm and cjs versions of the scripts.
-      npx run scripts:all // Runs all of the above commands
+    npm install
   ```
 
+1. Once the previous operation is complete, run one of the following commands to build the scripts:
+
+  - The following command builds the traditional version of the scripts:
+
+    ```javascript
+      npm run scripts
+    ```
+
+  - The following command builds the `mjs` version of the scripts:
+
+    ```javascript
+      npm run scripts:mjs
+    ```
+
+  - The following command builds the `esm` and `cjs` versions of the scripts:
+
+    ```javascript
+      npm run scripts:modules
+    ```
+
+  - Runs all of the previous commands at once:
+
+    ```javascript
+      npm run scripts:all
+    ```
 
 ## See Also
 

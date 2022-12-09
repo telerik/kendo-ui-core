@@ -32,7 +32,7 @@ To add the client-side resources to your project:
 1. Copy the `js` and `styles` folders from the archive to your project under `wwwroot\lib\kendo-ui`.
 
 
-The culture and localization (the translation of component messages) scripts are included in the `js` folder. For more information on using localization, internationalization, and right-to-left (RTL) support with {{ site.product }} helpers, refer to the article on [globalization support by {{ site.product }}]({% slug overview_globalization_core %}).
+    The culture and localization (the translation of component messages) scripts are included in the `js` folder. For more information on using localization, internationalization, and right-to-left (RTL) support with {{ site.product }} helpers, refer to the article on [globalization support by {{ site.product }}]({% slug overview_globalization_core %}).
 
 1. Register the UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 

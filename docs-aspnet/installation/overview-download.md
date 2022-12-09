@@ -11,7 +11,7 @@ position: 1
 
 This article outlines the approaches for downloading and installing the binaries with the {{ site.product }} components and for providing the client-side resources. This approach is applicable only for Windows users.
 
-Installing the Telerik UI for ASP.NET MVC provides the opportuity to:
+Installing the {{ site.product }} provides the opportuity to:
 
 * Use the Telerik UI controls offline (no Internet connection required).
 * Running the demos in offline mode.
@@ -52,7 +52,7 @@ To download the {{ site.product }} binaries with the components, you can use eit
 
     * Linux&mdash;download the `.sh` and the `.tar.gz` files.
     
-        To install Telerik UI on Linux, pass `-s {path to the archive}` when running the script. Use the `-d` argument to provide the location where the `.tar.gz` archive will be extracted (defaults to ${HOME}/telerik-aspnetcore") and `-SkipNETCoreInstall` to skip the installation of .NET Core (note that the framework is required).
+        To install Telerik UI on Linux, pass `-s {path to the archive}` when running the script. Use the `-d` argument to provide the location where the `.tar.gz` archive will be extracted (defaults to `${HOME}/telerik-aspnetcore`) and `-SkipNETCoreInstall` to skip the installation of .NET Core (note that the framework is required).
 
 {% else %}
 * Download and install the automated installer&mdash;you can find it in the downloads section of your [Telerik account](https://www.telerik.com/account). 
@@ -62,7 +62,7 @@ To download the {{ site.product }} binaries with the components, you can use eit
     The MSI allows you to choose whether to install the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}) and the offline version of the [Telerik UI for ASP.NET MVC Demos](https://demos.telerik.com/aspnet-mvc). Optionally, the installer can configure the Telerik NuGet feed for you.
 {% endif %}
 
-* An alternative approach to installing the Telerik UI for ASP.NET MVC on your machine is to [use the Telerik NuGet server](https://docs.telerik.com/aspnet-mvc/installation/nuget-install) to add the required packages to your project.
+* An alternative approach to installing the {{ site.product }} on your machine is to [use the Telerik NuGet server]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) to add the required packages to your project.
 
 {% if site.core %}
 * Archives with setup files&mdash;from the downloads section of your [Telerik account](https://www.telerik.com/account), you can get `.zip` and `.7z` files that include the Telerik UI for ASP.NET Core binaries in the form of NuGet packages and the client-side JavaScript and CSS files. The [files included in the archive]({% slug msi_install_aspnetmvc6_aspnetmvc %}#distribution-contents) are identical with those that you get when you use the automated installer, but you don't get the automatic NuGet configuration and the Visual Studio extensions.

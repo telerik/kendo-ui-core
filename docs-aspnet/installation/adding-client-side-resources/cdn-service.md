@@ -45,8 +45,8 @@ To load version `{{site.cdnVersion}}` of the desired visual theme, replace `[VER
 
 To import the JavaScript files required for the Telerik UI components, apply either of the following approaches:
 
- * [Using the JavaScript modules](#javascript-modules)—[A new approach introduced with version `2022.3.1109`]({% slug core_ecmascript_overview %}).
- * [Using the bundled JavaScript](#bundled-javascript)—The traditional way of including the Kendo UI scripts.
+ * [Using the JavaScript modules](#using-javascript-modules)—[A new approach introduced with version `2022.3.1109`]({% slug core_ecmascript_overview %}).
+ * [Using the bundled JavaScript](#using-bundled-javascript)—The traditional way of including the Kendo UI scripts.
 
 ### Using JavaScript Modules
 
