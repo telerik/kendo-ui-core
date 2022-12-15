@@ -18,23 +18,7 @@ You will initialize two button groups, one of them will have an event handler. T
 
 ## 1. Prepare the CSHTML File
 
-The first step is to add the required directives at the top of the `.cshtml` document:
-
-* To use the Telerik UI for {{ site.framework }} HtmlHelpers:
-
-    ```cshtml
-    @using Kendo.Mvc.UI
-    ```
-
-{% if site.core %}
-
-* To use the Telerik UI for {{ site.framework }} TagHelpers:
-
-    ```cshtml
-    @addTagHelper *, Kendo.Mvc
-    ```
-
-{% endif %}
+@[template](/_contentTemplates/core/getting-started-directives.md#gs-adding-directives)
 
 Optionally, you can structure the document by adding the desired HTML elements like headings, divs, paragraphs, and others.
 

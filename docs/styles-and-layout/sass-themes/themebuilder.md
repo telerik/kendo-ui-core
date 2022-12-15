@@ -35,11 +35,7 @@ To customize a theme, use any of the following ThemeBuilder features:
 
 * Manual updates of the component elements&mdash;You can directly enter the desired values into the input field of the selected variable.
 
-<<<<<<< HEAD
 ![Customize UI components with ThemeBuilder](../images/themebuilder-customize-components.png)
-=======
-![Kendo UI for jQuery Apply and Preview Changes](../images/theme-builder-create-and-download-3.png)
->>>>>>> ef65d354a7 (docs: add product to image alt tags #15758)
 
 ## Using Existing Themes
 
@@ -53,11 +49,8 @@ To customize a theme you previously created:
 
 1. Upload the `.json` file that is part of the ZIP archive that you have previously downloaded from ThemeBuilder. It contains the current parameters of the customized theme. As a result, the selected components and styling elements are loaded.
 
-<<<<<<< HEAD
 1. Start customizing your theme by using the ThemeBuilder features your project requires.
-=======
 ![Kendo UI for jQuery Theme Builder Import](../images/theme-builder-import-existing-theme.png)
->>>>>>> ef65d354a7 (docs: add product to image alt tags #15758)
 
 ### JSON File Structure
 
@@ -552,3 +545,10 @@ When you complete the modifications and the theme is ready:
 1. To download the theme as a ZIP archive, select **Export**.
 1. Unpack the zipped folder and add it to your application.
 1. Include the `THEME_NAME.css` file in the `head` tag of your HTML document.
+
+## Using Exported Files
+
+The downloaded compressed theme from [Progress ThemeBuilder](https://themebuilder.telerik.com/) contains three following files:
+- CSS file - is ready for direct use. Refer the file in your project so your customized theme styles will be applied.
+- Scss file - can be used if you prefer to compile styles on your side.
+- Json file - are used for creating theme swatches - theme variations. For example Kendo Sass Default theme has six different swatches (Main, Main Dark, Nordic...). More detailed information about how you can create and use a custom swatch is explained in [this article](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/swatches).

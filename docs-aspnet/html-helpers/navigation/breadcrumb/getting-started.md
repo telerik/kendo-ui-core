@@ -18,18 +18,7 @@ You will initialize a Breadcrumb control, configure its icons, and handle its ev
 
 ## 1. Prepare the CSHTML File
 
-The first step is to add the required directives at the top of the `.cshtml` document:
-
-* To use the Telerik UI for {{ site.framework }} HtmlHelpers:
-    ```
-    @using Kendo.Mvc.UI
-    ```
-{% if site.core %}
-* To use the Telerik UI for {{ site.framework }} TagHelpers:
-    ```
-    @addTagHelper *, Kendo.Mvc
-    ```
-{% endif %}
+@[template](/_contentTemplates/core/getting-started-directives.md#gs-adding-directives)
 
 ## 2. Initialize the Breadcrumb
 

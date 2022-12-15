@@ -3491,6 +3491,8 @@ declare namespace kendo.ui {
         autoWidth?: boolean | undefined;
         cascadeFrom?: string | undefined;
         cascadeFromField?: string | undefined;
+        cascadeFromParentField?: string | undefined;
+        cascadeOnCustomValue?: boolean | undefined;
         clearButton?: boolean | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
         dataTextField?: string | undefined;
@@ -4383,6 +4385,7 @@ declare namespace kendo.ui {
         autoWidth?: boolean | undefined;
         cascadeFrom?: string | undefined;
         cascadeFromField?: string | undefined;
+        cascadeFromParentField?: string | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
@@ -7579,6 +7582,8 @@ declare namespace kendo.ui {
         autoWidth?: boolean | undefined;
         cascadeFrom?: string | undefined;
         cascadeFromField?: string | undefined;
+        cascadeFromParentField?: string | undefined;
+        cascadeOnCustomValue?: boolean | undefined;
         columns?: MultiColumnComboBoxColumn[] | undefined;
         clearButton?: boolean | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;

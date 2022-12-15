@@ -1,9 +1,9 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI FloatingActionButton component for {{ site.framework }}."
+description: "Try now the Telerik UI FloatingActionButton component for {{ site.framework }} providing various alignment options for its items and complete control over its appearance."
 slug: htmlhelpers_floatingactionbutton_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} FloatingActionButton Overview
@@ -14,7 +14,7 @@ The Telerik UI FloatingActionButton TagHelper and HtmlHelper for {{ site.framewo
 The Telerik UI FloatingActionButton HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI FloatingActionButton widget.
 {% endif %}
 
-The FloatingActionButton is a UI component that is tied to the most logical action that we expect from a user looking at a particular screen. For example, the most logical action for a user looking at the main screen of a mobile messaging app is to write a message. You can implement a FloatingActionButton that allows the user to compose a new message. 
+The FloatingActionButton is a UI component that is tied to the most logical action that we expect from a user looking at a particular screen. For example, the most logical action for a user looking at the main screen of a mobile messaging app is to write a message. You can implement a FloatingActionButton that allows the user to compose a new message.
 
 The FloatingActionButton floats in the application above other items, and its main action directly corresponds to the content on the screen. Apart from being a single button with a single action, the FloatingActionButton can also be configured to display additional related actions or speed dial actions.
 
@@ -25,7 +25,7 @@ The FloatingActionButton floats in the application above other items, and its ma
 
 ## Initializing the FloatingActionButton
 
-The following example demonstrates how to initialize the FloatingActionButton.
+The following example demonstrates how to initialize the FloatingActionButton, configure its items, and set its position.
 
 ```HtmlHelper
     @(Html.Kendo().FloatingActionButton()
@@ -87,96 +87,21 @@ The following example demonstrates how to initialize the FloatingActionButton.
 
 ## Functionality and Features
 
-* [Alignment]({% slug htmlhelpers_alignment_floatingactionbutton_aspnetcore %})
-* [Appearance]({% slug htmlhelpers_appearance_floatingactionbutton_aspnetcore %})
-* [Templates]({% slug htmlhelpers_templates_floatingactionbutton_aspnetcore %})
-* [Accessibility]({% slug htmlhelpers_accessibility_floatingactionbutton_aspnetcore %})
+* [Alignment]({% slug htmlhelpers_alignment_floatingactionbutton_aspnetcore %})&mdash;The FloatingActionButton provides options that allow you to manipulate the position of the component.
+* [Appearance]({% slug htmlhelpers_appearance_floatingactionbutton_aspnetcore %})&mdash;You can set the size, shape, color, icon, and text of the FloatingActionButton by using the built-in appearance options.
+* [Templates]({% slug htmlhelpers_templates_floatingactionbutton_aspnetcore %})&mdash;The item templates allow you to control the rendering of the items in the FloatingActionButton popup.
+* [Accessibility]({% slug htmlhelpers_accessibility_floatingactionbutton_aspnetcore %})&mdash;The FloatingActionButton is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Events]({% slug events_floatingactionbutton %})&mdash;The FloatingActionButton emits `Click()`, `Expand()`, and `Collapse()` events that you can use to trigger specific actions.
 
-## Events
+## Next Steps
 
-You can subscribe to all FloatingActionButton events. For a complete example on  FloatingActionButton events, refer to the [demo on using the events of the FloatingActionButton](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/events).
-
-The following example demonstrates how to subscribe to the FloatingActionButton click event.
-
-```HtmlHelper
-    @(Html.Kendo().FloatingActionButton()
-            .Name("fab")
-            .Align(FloatingActionButtonAlign.BottomCenter)
-            .AlignOffset(ao=>ao.Vertical(50))
-            .PositionMode(FloatingActionButtonPositionMode.Fixed)
-            .Items(items=>{
-                items.Add().Icon("download").Label("Download").Click(onItemClick);
-                items.Add().Icon("print").Label("Print").Click(onItemClick);
-                items.Add().Icon("email").Label("Email").Click(onItemClick);
-            })
-            .Events(e =>
-            {
-               e.Click("onClick");
-               e.Expand("onExpand");
-               e.Collapse("onExpand");
-            })
-    )
-    
-   <script>
-        function onClick(e){
-            //handle the FloatingActionButton click event
-        };
-        
-        function onExpand(e){
-            //handle the FloatingActionButton expand event
-        };
-
-        function onCollapse(e){
-            //handle the FloatingActionButton collapse event
-        };
-
-        function onItemClick(e){
-            //handle the FloatingActionButton action item event
-        };
-    </script>
-```
+* [Getting Started with the FloatingActionButton]({% slug floatingactionbutton_getting_started %})
+* [Basic Usage of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/index)
 {% if site.core %}
-```TagHelper
-   <kendo-floatingactionbutton  name="fab"
-                                on-click="onClick"
-                                on-expand="onExpand"
-                                on-collapse="onCollapse"
-                                align="FloatingActionButtonAlign.BottomCenter"
-                                align-offset-vertical="50"
-                                position-mode="FloatingActionButtonPositionMode.Fixed"
-                                icon="share">
-        <floatingactionbutton-items>
-            <floatingactionbutton-item label="Download" icon="download" click="onItemClick"></floatingactionbutton-item>
-            <floatingactionbutton-item label="Print" icon="print" click="onItemClick"></floatingactionbutton-item>
-            <floatingactionbutton-item label="Email" icon="email" click="onItemClick"></floatingactionbutton-item>
-        </floatingactionbutton-items>
-    </kendo-floatingactionbutton>
-
-    <script>
-        function onClick(e){
-            //handle the FloatingActionButton click event
-        };
-        
-        function onExpand(e){
-            //handle the FloatingActionButton expand event
-        };
-
-        function onCollapse(e){
-            //handle the FloatingActionButton collapse event
-        };
-
-        function onItemClick(e){
-            //handle the FloatingActionButton action item event
-        };
-    </script>
-```
+* [Basic Usage of the FloatingActionButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/floatingactionbutton/tag-helper)
 {% endif %}
 
 ## See Also
 
-* [Overview of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton)
-{% if site.core %}
-* [Basic Usage of the FloatingActionButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/floatingactionbutton/taghelper)
-{% endif %}
-* [Using the API of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/api)
-* [Server-Side API](/api/floatingactionbutton)
+* [Using the API of the FloatingActionButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/api)
+* [Knowledge Base Section](/knowledge-base)

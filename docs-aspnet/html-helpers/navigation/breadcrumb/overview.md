@@ -101,5 +101,5 @@ The following example demonstrates the basic configuration for the Breadcrumb.
 
 ## See Also
 
-* [Using the API of the Breadcrumb HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/breadcrumb/api)
+* [Using the API of the Breadcrumb for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/breadcrumb/api)
 * [Knowledge Base Section](/knowledge-base)

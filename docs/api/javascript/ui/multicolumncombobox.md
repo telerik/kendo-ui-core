@@ -276,6 +276,40 @@ Defines the parent field to be used to retain value from. This value will be use
     });
     </script>
 
+### cascadeOnCustomValue `Boolean` *(default: false)*
+
+Applicable to a parent MultiColumnComboBox in а cascading scenario. If set to `true` cascading will be triggered upon custom input in the parent widget. When set to `false` (default) the child will not cascade and it will be disabled upon setting custom input in the parent MultiColumnComboBox. Cascade on custom values works only when `cascadeFromParentField` is not set for the child combo, or it points to the `dataValueField` of the parent.
+
+#### Example
+
+    <p><em>Hint: type `p3` in the parent MultiColumnComboBox input</em></p>
+    <input id="parent" />
+    <input id="child" />
+    <script>
+    $("#parent").kendoMultiColumnComboBox({
+        dataTextField: "name",
+        dataValueField: "id",
+        cascadeOnCustomValue: true,
+        dataSource: [
+            { name: "Parent1", id: "p1" },
+            { name: "Parent2", id: "p2" }
+        ]
+    });
+
+    $("#child").kendoMultiColumnComboBox({
+        cascadeFrom: "parent",
+        cascadeFromField: "parentId",
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Child1", id: 1, parentId: "p1" },
+            { name: "Child2", id: 2, parentId: "p2" },
+            { name: "Child3", id: 3, parentId: "p3" },
+            { name: "Child4", id: 4, parentId: "p3" }
+        ]
+    });
+    </script>
+
 ### columns `Array`
 
 Defines the columns rendered in the table of the MultiColumnComboBox.

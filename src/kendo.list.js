@@ -1852,6 +1852,13 @@ var __meta__ = {
             var valueField = that.options.cascadeFromField || parent.options.dataValueField;
             var expressions;
 
+            // Applicable only when parent is ComboBox or MultiColumnComboBox
+            if (parent.options.cascadeOnCustomValue &&
+                filterValue === null &&
+                (!that.options.cascadeFromParentField || that.options.cascadeFromParentField === parent.options.dataValueField)) {
+                    filterValue = parent.value();
+            }
+
             that._valueBeforeCascade = valueBeforeCascade !== undefined ? valueBeforeCascade : that.value();
 
             if (filterValue || filterValue === 0) {

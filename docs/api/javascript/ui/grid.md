@@ -197,7 +197,14 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
         data: [
           { firstName: "Jane", lastName: "Doe", age: 30 },
           { firstName: "John", lastName: "Doe", age: 33 }
-        ]
+        ],
+        group: {
+          field: "age", aggregates: [
+            { field: "age", aggregate: "count" },
+            { field: "age", aggregate: "min"},
+            { field: "age", aggregate: "max" }
+          ]
+        }
       }
     });
     </script>

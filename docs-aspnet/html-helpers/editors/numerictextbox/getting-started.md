@@ -18,18 +18,7 @@ You will initialize two NumericTextBox components, one of them will have an even
 
 ## 1. Prepare the CSHTML File
 
-The first step is to add the required directives at the top of the `.cshtml` document:
-
-* To use the Telerik UI for {{ site.framework }} HtmlHelpers:
-    ```
-    @using Kendo.Mvc.UI
-    ```
-{% if site.core %}
-* To use the Telerik UI for {{ site.framework }} TagHelpers:
-    ```
-    @addTagHelper *, Kendo.Mvc
-    ```
-{% endif %}
+@[template](/_contentTemplates/core/getting-started-directives.md#gs-adding-directives)
 
 Optionally, you can structure the document by adding the desired HTML elements like headings, divs, paragraphs, and others. In this tutorial, you will create a list that contains two items&mdash;one for each NumericTextBox. You will also add labels.
 

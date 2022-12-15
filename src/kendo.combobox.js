@@ -151,6 +151,7 @@ var __meta__ = {
             cascadeFrom: "",
             cascadeFromField: "",
             cascadeFromParentField: "",
+            cascadeOnCustomValue: false,
             ignoreCase: true,
             animation: {},
             virtual: false,

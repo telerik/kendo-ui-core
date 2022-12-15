@@ -74,7 +74,7 @@ You can configure the MultiSelect to get its data from a remote source by making
                 SelectedOrders = new int[] { 1, 3 }
             });
         }
-
+        {% if site.mvc %}
         public JsonResult GetOrdersAjax()
         {
             var orders = Enumerable.Range(0, 2000).Select(i => new Order
@@ -85,6 +85,18 @@ You can configure the MultiSelect to get its data from a remote source by making
 
             return Json(orders.ToList(), JsonRequestBehavior.AllowGet);
         }
+        {% else %}
+        public JsonResult GetOrdersAjax()
+        {
+            var orders = Enumerable.Range(0, 2000).Select(i => new Order
+            {
+                OrderID = i,
+                OrderName = "OrderName" + i
+            });
+
+            return Json(orders.ToList());
+        }
+        {% endif %}
 
 
 1. Add the MultiSelect to the view and configure its DataSource to use remote data.

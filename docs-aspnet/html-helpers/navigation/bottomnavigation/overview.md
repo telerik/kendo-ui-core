@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI BottomNavigation component for {{ site.framework }}."
+description: "Discover the Telerik UI BottomNavigation component for {{ site.framework }} that provides built-in configuration options for its items and appearance."
 slug: htmlhelpers_bottomnavigation_aspnetcore
 position: 1
 ---
@@ -87,15 +87,21 @@ The following example demonstrates the basic configuration for the BottomNavigat
 
 ## Functionality and Features
 
-* [Items]({% slug htmlhelpers_items_bottomnavigation_aspnetcore %}) - the configuration allows you to set various attributes like icons and text.
-* [Appearance]({% slug htmlhelpers_appearance_bottomnavigation_aspnetcore %}) - the configuration allows you to modify the appearance of the component.
-* [Templates]({% slug htmlhelpers_templates_bottomnavigation_aspnetcore %}) - the configuration allows you to customize how the items will be rendered.
-* [Accessibility]({% slug htmlhelpers_accessibility_bottomnavigation_aspnetcore %}) - the BottomNavigation supports various accessibility standards.
+* [Items]({% slug htmlhelpers_items_bottomnavigation_aspnetcore %})&mdash;The items configuration allows you to set various attributes like icons and text.
+* [Appearance]({% slug htmlhelpers_appearance_bottomnavigation_aspnetcore %})&mdash;The built-in appearance configuration allows you to customize the component.
+* [Templates]({% slug htmlhelpers_templates_bottomnavigation_aspnetcore %})&mdash;The templates give you control over the rendering of the BottomNavigation items.
+* [Accessibility]({% slug htmlhelpers_accessibility_bottomnavigation_aspnetcore %})&mdash;The BottomNavigation supports accessibility standards like WAI-ARIA, Section 508, WCAG 2.1, and provides keyboard support.
+* [Events]({% slug events_bottomnavigation %})&mdash;Use the `Select()` event to control the functions of the component.
 
-## See Also
+## Next Steps
 
+* [Getting Started with the BottomNavigation]({% slug bottomnavigation_getting_started %})
 * [Basic Usage of the BottomNavigation HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/index)
 {% if site.core %}
 * [Basic Usage of the BottomNavigation TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bottomnavigation/tag-helper)
 {% endif %}
-* [Using the API of the BottomNavigation HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/api)
+
+## See Also
+
+* [Using the API of the BottomNavigation for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/api)
+* [Knowledge Base Section](/knowledge-base)

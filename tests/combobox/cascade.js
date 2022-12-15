@@ -1566,5 +1566,41 @@
                 }, 100);
             }, 100);
         });
+
+        it("Parent with custom value activates child", function() {
+            parent.kendoComboBox({
+                dataTextField: "parentID",
+                dataValueField: "parentID",
+                cascadeOnCustomValue: true,
+                dataSource: [
+                    { parentID: 1 },
+                    { parentID: 2 }
+                ]
+            });
+
+            child.kendoComboBox({
+                cascadeFrom: "parent", //id of the parent
+                dataTextField: "childID",
+                dataValueField: "childID",
+                dataSource: [
+                    { parentID: 1, childID: "1" },
+                    { parentID: 2, childID: "2" },
+                    { parentID: 1, childID: "3" },
+                    { parentID: 2, childID: "4" }
+                ]
+            });
+
+            var parentCB = parent.data("kendoComboBox"),
+                childCB = child.data("kendoComboBox"),
+                ds = childCB.dataSource;
+
+            parentCB.select(0);
+            childCB.select(0);
+
+            parentCB.value("custom");
+
+            assert.equal(childCB.selectedIndex, -1);
+            assert.equal(childCB.element.attr("disabled"), undefined);
+        });
     });
 }());

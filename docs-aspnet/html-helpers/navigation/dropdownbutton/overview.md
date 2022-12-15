@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI DropDownButton component for {{ site.framework }}."
+description: "Try now the Telerik UI DropDownButton component for {{ site.framework }} offering various configuration options for its items, icons, and appearance."
 previous_url: /helpers/navigation/dropdownbutton/overview
 slug: htmlhelpers_dropdownbutton_aspnetcore
 position: 1
@@ -51,16 +51,21 @@ The following example demonstrates how to define the DropDownButton.
 
 ## Functionality and Features
 
-* [Items]({% slug htmlhelpers_dropdownbutton_aspnetcore_items %})&mdash;You can configure the DropDownButton by adding items to the popup.
-* [Appearance]({% slug htmlhelpers_dropdownbutton_aspnetcore_appearance %})&mdash;You can control the appearance of the DropDownButton by configuring its styling options.
-* [Icons]({% slug htmlhelpers_dropdownbutton_aspnetcore_icons %})&mdash;You can enchance the DropDownButton's textual content by adding icons.
-* [Accessibility]({% slug accessibility_aspnetcore_dropdownbutton %})&mdash;You can access the DropDownButton by different screen readers.
+* [Items]({% slug htmlhelpers_dropdownbutton_aspnetcore_items %})&mdash;You can configure the DropDownButton by adding items to the popup and customizing them.
+* [Appearance]({% slug htmlhelpers_dropdownbutton_aspnetcore_appearance %})&mdash;You can customize the appearance of the DropDownButton by configuring its size, fill mode, theme color, and border radius.
+* [Icons]({% slug htmlhelpers_dropdownbutton_aspnetcore_icons %})&mdash;You can enhance the DropDownButton's textual content by adding icons.
+* [Accessibility]({% slug accessibility_aspnetcore_dropdownbutton %})&mdash;You can access the DropDownButton by using different screen readers.
+* [Events]({% slug events_dropdownbutton %})&mdash;Handling the `Click()`, `Open()`, and `Close()` events of the DropDownButton allows you to implement custom functionality.
+
+## Next Steps
+
+* [Getting Started with the DropDownButton]({% slug dropdownbutton_getting_started %})
+* [Basic Usage of the DropDownButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/index)
+{% if site.core %}
+* [Basic Usage of the DropDownButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownbutton/tag-helper)
+{% endif %}
 
 ## See Also
 
-* [Overview of the DropDownButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/index)
-* [Using the Basic Events of the DropDownButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/events)
-* [Applying the DropDownButton API (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/api)
-* [Server-Side API](/api/dropdownbutton)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton)
-
+* [Using the API of the DropDownButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/api)
+* [Knowledge Base Section](/knowledge-base)
