@@ -32,7 +32,7 @@ When Kendo widgets are initialized from Html helpers there are inline scripts th
 
 **Solution**
 
-Use the [Deferred initialization](https://docs.telerik.com/aspnet-mvc/getting-started/helper-basics/fundamentals#deferred-initialization)
+Use the [Deferred initialization](https://docs.telerik.com/aspnet-mvc/html-helpers/helper-basics/fundamentals-mvc?#deferred-initialization)
 
 	@(Html.Kendo().PanelBar()
         .Name("IntroPanelBar")

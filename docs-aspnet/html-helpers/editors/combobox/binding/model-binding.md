@@ -83,7 +83,7 @@ You can configure the ComboBox to get its data from a remote source by making an
                 ProductName = "ProductName4"
             });
         }
-
+        {% if site.mvc %}
         public JsonResult GetProductsAjax()
         {
             var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
@@ -94,6 +94,18 @@ You can configure the ComboBox to get its data from a remote source by making an
 
             return Json(products, JsonRequestBehavior.AllowGet);
         }
+        {% else %}
+        public JsonResult GetProductsAjax()
+        {
+            var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
+            {
+                ProductID = i,
+                ProductName = "ProductName" + i
+            });
+
+            return Json(products);
+        }
+        {% endif %}
 
 
 1. Add the ComboBox to the view and configure its DataSource to use remote data.

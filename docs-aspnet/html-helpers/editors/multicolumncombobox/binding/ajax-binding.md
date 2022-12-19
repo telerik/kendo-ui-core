@@ -17,7 +17,7 @@ The MultiColumnComboBox provides support for remote data binding by using a `Dat
         {
             return View();
         }
-
+        {% if site.core %}
         public JsonResult GetProductsAjax()
         {
             var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
@@ -28,6 +28,18 @@ The MultiColumnComboBox provides support for remote data binding by using a `Dat
 
             return Json(products);
         }
+        {% else %}
+        public JsonResult GetProductsAjax()
+        {
+            var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
+            {
+                ProductID = i,
+                ProductName = "ProductName" + i
+            });
+
+            return Json(products, JsonRequestBehavior.AllowGet);
+        }
+        {% endif %}
 
 1. Add the MultiColumnComboBox to the view and configure its DataSource to use remote data.
 
