@@ -56,31 +56,7 @@
             $(".k-overflow-anchor")[0].focus();
             $(".k-overflow-anchor").press(keys.DOWN, false, true);
 
-            assert.isOk(toolbar.popup.element.is(":visible"));
-        });
-
-        it("overflow popup focuses the first item when opened", function(done) {
-            var toolbar = container.kendoToolBar({
-                items: [
-                    { type: "button", id: "foo", text: "foo" },
-                    {
-                        type: "buttonGroup",
-                        buttons: [
-                            { id: "btn1", text: "A" },
-                            { id: "btn2", text: "B" }
-                        ]
-                    },
-                    { type: "button", id: "baz", text: "baz", overflow: "always" }
-                ]
-            }).data("kendoToolBar");
-
-            toolbar.popup.bind("activate", function() {
-                assert.equal(document.activeElement.text, "baz");
-                done();
-            });
-
-            $(".k-overflow-anchor")[0].focus();
-            $(".k-overflow-anchor").press(keys.DOWN, false, true);
+            assert.isOk(toolbar.overflowMenu.element.is(":visible"));
         });
 
         it("end moves focus to the last button", function() {

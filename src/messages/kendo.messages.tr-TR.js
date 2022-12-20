@@ -486,7 +486,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "hizalama",
     "buttons": {
-      "justtifyLeft": "Sola hizalamak",
+      "justifyLeft": "Sola hizalamak",
       "justifyCenter": "merkez",
       "justifyRight": "Sağa hizala",
       "justifyFull": "Savunmak",
@@ -676,7 +676,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Aşağıya satır ekle",
   "alignment": "hizalama",
   "alignmentButtons": {
-    "justtifyLeft": "Sola hizalamak",
+    "justifyLeft": "Sola hizalamak",
     "justifyCenter": "merkez",
     "justifyRight": "Sağa hizala",
     "justifyFull": "Savunmak",

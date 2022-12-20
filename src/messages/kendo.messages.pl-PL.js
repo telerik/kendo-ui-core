@@ -701,7 +701,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Wyrównanie",
     "buttons": {
-      "justtifyLeft": "Wyrównaj w lewo",
+      "justifyLeft": "Wyrównaj w lewo",
       "justifyCenter": "Centruj",
       "justifyRight": "Wyrównaj w prawo",
       "justifyFull": "Dostosuj",
@@ -891,7 +891,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Dodaj wiersz poniżej",
   "alignment": "Wyrównanie",
   "alignmentButtons": {
-    "justtifyLeft": "Wyrównaj w lewo",
+    "justifyLeft": "Wyrównaj w lewo",
     "justifyCenter": "Centruj",
     "justifyRight": "Wyrównaj w prawo",
     "justifyFull": "Dostosuj",

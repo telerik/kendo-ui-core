@@ -677,7 +677,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Igazítás",
     "buttons": {
-     "justtifyLeft": "Balra igazítás",
+     "justifyLeft": "Balra igazítás",
      "justifyCenter": "Középre igazítás",
      "justifyRight": "Jobbra igazítás",
      "justifyFull": "Sorkizárás",
@@ -855,7 +855,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Sor hozzáadása alá",
   "alignment": "Igazítás",
   "alignmentButtons": {
-    "justtifyLeft": "Balra igazítás",
+    "justifyLeft": "Balra igazítás",
     "justifyCenter": "Középre igazítás",
     "justifyRight": "Jobbra igazítás",
     "justifyFull": "Sorkizárás",

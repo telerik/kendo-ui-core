@@ -679,7 +679,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Выравнивание",
     "buttons": {
-      "justtifyLeft": "Выровнять по левому краю",
+      "justifyLeft": "Выровнять по левому краю",
       "justifyCenter": "Центр",
       "justifyRight": "Выровнять по правому краю",
       "justifyFull": "Оправдывать",
@@ -869,7 +869,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Добавить строку ниже",
   "alignment": "Выравнивание",
   "alignmentButtons": {
-    "justtifyLeft": "Выровнять по левому краю",
+    "justifyLeft": "Выровнять по левому краю",
     "justifyCenter": "Центр",
     "justifyRight": "Выровнять по правому краю",
     "justifyFull": "Оправдывать",

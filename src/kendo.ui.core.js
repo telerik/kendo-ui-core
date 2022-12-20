@@ -56,6 +56,7 @@ import "./kendo.splitter.js";
 import "./kendo.dialog.js";
 import "./kendo.window.js";
 import "./kendo.virtuallist.js";
+import "./kendo.togglebutton.js";
 import "./kendo.mobile.popover.js";
 import "./kendo.mobile.loader.js";
 import "./kendo.mobile.scroller.js";

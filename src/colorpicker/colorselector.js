@@ -146,6 +146,10 @@ import "../kendo.core.js";
 
             if (!nohooks) {
                 if ((color && (!prev || !color.equals(prev))) || (color === null && color !== prev)) {
+                    if (color === null && this.element.val) {
+                        this.element.val(color);
+                    }
+
                     this.element.trigger("change");
                     this.trigger("change", { value: this.value() });
                 } else if (!this._standalone) {

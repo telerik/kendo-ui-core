@@ -973,7 +973,7 @@
                 "alignmentDialog": {
                     "title": "对齐",
                     "buttons": {
-                        "justtifyLeft": "左对齐",
+                        "justifyLeft": "左对齐",
                         "justifyCenter": "水平居中",
                         "justifyRight": "右对齐",
                         "justifyFull": "两端对齐",
@@ -1227,7 +1227,7 @@
                 "addRowBelow": "在下面插入行",
                 "alignment": "对齐",
                 "alignmentButtons": {
-                    "justtifyLeft": "左对齐",
+                    "justifyLeft": "左对齐",
                     "justifyCenter": "水平居中",
                     "justifyRight": "右对齐",
                     "justifyFull": "两端对齐",

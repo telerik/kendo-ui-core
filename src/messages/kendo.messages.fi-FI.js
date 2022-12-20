@@ -564,7 +564,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Asemointi",
     "buttons": {
-     "justtifyLeft": "Tasaa vasemmalle",
+     "justifyLeft": "Tasaa vasemmalle",
      "justifyCenter": "Keskitä",
      "justifyRight": "Tasaa oikealle",
      "justifyFull": "Tasaa molemmat reunat",
@@ -716,7 +716,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Lisää rivi alapuolelle",
   "alignment": "Alignment",
   "alignmentButtons": {
-    "justtifyLeft": "Tasaa vasemmalle",
+    "justifyLeft": "Tasaa vasemmalle",
     "justifyCenter": "Keskitä",
     "justifyRight": "Tasaa oikealle",
     "justifyFull": "Tasaa molemmat reunat",

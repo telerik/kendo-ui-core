@@ -165,7 +165,8 @@ var __meta__ = {
             size: "medium",
             fillMode: "solid",
             rounded: "medium",
-            label: null
+            label: null,
+            clearOnEscape: true
         },
 
         events: [
@@ -1080,7 +1081,7 @@ var __meta__ = {
                 }
             } else if (key != keys.TAB && !that._move(e) && !isNonPrintableKey && !isFkey && !e.ctrlKey) {
                that._search();
-            } else if (key === keys.ESC && !that.popup.visible() && that.text()) {
+            } else if (that.options.clearOnEscape && key === keys.ESC && !that.popup.visible() && that.text()) {
                 that._clearValue();
             }
         },

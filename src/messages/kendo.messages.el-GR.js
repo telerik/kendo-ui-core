@@ -676,7 +676,7 @@
         "alignmentDialog": {
           "title": "Στοίχιση",
           "buttons": {
-            "justtifyLeft": "Στοίχιση Αριστερά",
+            "justifyLeft": "Στοίχιση Αριστερά",
             "justifyCenter": "Κέντρο",
             "justifyRight": "Στοίχιση Δεξιά",
             "justifyFull": "Justify",
@@ -844,7 +844,7 @@
         "addRowBelow": "Προσθήκη γραμμής κάτω",
         "alignment": "Ευθυγράμμιση",
         "alignmentButtons": {
-          "justtifyLeft": "Ευθυγράμμιση Αριστερά",
+          "justifyLeft": "Ευθυγράμμιση Αριστερά",
           "justifyCenter": "Κέντρο",
           "justifyRight": "Ευθυγράμμιση Δεξιά",
           "justifyFull": "Ισάζω",

@@ -104,7 +104,7 @@
 
             $(".k-overflow-anchor").trigger('click');
 
-            var overflowWrapper = $(".k-overflow-wrapper");
+            var overflowWrapper = $(".k-context-menu");
 
             axeRun(overflowWrapper, done);
         });
@@ -244,7 +244,7 @@
                 ]
             }).data("kendoToolBar");
 
-            var button = $(".k-overflow-container").find("#id_overflow .k-button");
+            var button = $(".k-context-menu").find("#id_overflow");
 
             assert.equal(button.attr("aria-label"), "Foo");
         });

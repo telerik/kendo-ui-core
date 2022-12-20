@@ -155,23 +155,6 @@
             assert.isOk(button.hasClass("k-button-solid-primary"));
         });
 
-        it("click event handler of the button is stored in the data of the rendered element", function() {
-            container.kendoToolBar({
-                items: [{
-                    type: "button",
-                    id: "foo",
-                    text: "foo",
-                    click: function() { }
-                }]
-            });
-
-            var clickHandler = $("#foo").data("button").clickHandler;
-            var overflowClickHandler = $("#foo_overflow").data("button").clickHandler;
-
-            assert.isOk(kendo.isFunction(clickHandler), "Click event handler is saved in the data of the button element");
-            assert.isOk(kendo.isFunction(overflowClickHandler), "Click event handler is saved in the data of the overflowButton element");
-        });
-
         it("url sets a href to the button element if it is an anchor", function() {
             container.kendoToolBar({
                 items: [
@@ -275,18 +258,6 @@
             assert.isOk(button.hasClass("k-icon-button"));
         });
 
-        it("button receives data-overflow='auto' attribute if no overflow is specified", function() {
-            container.kendoToolBar({
-                items: [
-                    { type: "button", id: "foo", text: "foo" }
-                ]
-            });
-
-            var button = container.find("#foo");
-
-            assert.equal(button.attr("data-overflow"), "auto");
-        });
-
         it("button overflow is set as data attribute to the HTML element", function() {
             container.kendoToolBar({
                 items: [
@@ -307,7 +278,7 @@
             }).data("kendoToolBar");
 
             assert.isOk(container.find("#foo").length);
-            assert.isOk(toolbar.popup.element.find("#foo_overflow").length);
+            assert.isOk(toolbar.overflowMenu.element.find("#foo_overflow").length);
         });
 
         it("button element with overflow: never is not rendered in the overflow popup", function() {
@@ -318,7 +289,7 @@
             }).data("kendoToolBar");
 
             assert.isOk(container.find("#foo").length);
-            assert.isOk(!toolbar.popup.element.find("#foo_overflow").length);
+            assert.isOk(!toolbar.overflowMenu.element.find("#foo_overflow").length);
         });
 
         it("button element with overflow: always is not rendered in the toolbar container", function() {
@@ -329,7 +300,7 @@
             }).data("kendoToolBar");
 
             assert.isOk(!container.find("#foo").length);
-            assert.isOk(toolbar.popup.element.find("#foo_overflow").length);
+            assert.isOk(toolbar.overflowMenu.element.find("#foo_overflow").length);
         });
 
         it("button element in overflow popup has class k-overflow-button", function() {
@@ -339,7 +310,7 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.isOk(toolbar.popup.element.find(".k-overflow-button").length);
+            assert.isOk(toolbar.overflowMenu.element.find(".k-menu-item").length);
         });
 
         it("button element in overflow popup is wrapped inside a <li> tag", function() {
@@ -349,9 +320,9 @@
                 ]
             }).data("kendoToolBar");
 
-            var button = toolbar.popup.element.find(".k-overflow-button");
+            var button = toolbar.overflowMenu.element.find(".k-menu-item");
 
-            assert.equal(button.parent().prop("tagName"), "LI");
+            assert.equal(button.prop("tagName"), "LI");
         });
 
         it("button receives data-uid attribute", function() {
@@ -362,7 +333,7 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#foo");
-            var overflowButton = toolbar.popup.element.children().eq(0);
+            var overflowButton = toolbar.overflowMenu.element.children().eq(0);
 
             assert.isOk(button.data("uid"));
             assert.isOk(overflowButton.data("uid"));
@@ -377,7 +348,7 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#foo");
-            var overflowButton = toolbar.popup.element.children().eq(0);
+            var overflowButton = toolbar.overflowMenu.element.children().eq(0);
 
             assert.equal(button.text(), "foo");
             assert.equal(overflowButton.text(), "foo");
@@ -391,7 +362,7 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#foo");
-            var overflowButton = toolbar.popup.element.children().eq(0);
+            var overflowButton = toolbar.overflowMenu.element.children().eq(0);
 
             assert.equal(button.text(), "foo");
             assert.equal(overflowButton.text(), "");
@@ -405,7 +376,7 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#foo");
-            var overflowButton = toolbar.popup.element.children().eq(0).find("a.k-button");
+            var overflowButton = toolbar.overflowMenu.element.children().eq(0);
 
             assert.equal(button.text(), "");
             assert.equal(overflowButton.text(), "foo");
@@ -423,7 +394,7 @@
             assert.equal(icon.length, 1);
             assert.isOk(icon.hasClass("k-i-foo"));
 
-            icon = toolbar.popup.element.find("#foo_overflow").find("span.k-icon");
+            icon = toolbar.overflowMenu.element.find("#foo_overflow").find("span.k-icon");
 
             assert.equal(icon.length, 1);
             assert.isOk(icon.hasClass("k-i-foo"));
@@ -441,7 +412,7 @@
             assert.equal(icon.length, 1);
             assert.isOk(icon.hasClass("k-i-foo"));
 
-            icon = toolbar.popup.element.find(".k-link.k-overflow-button").children("span.k-icon");
+            icon = toolbar.overflowMenu.element.find(".k-link.k-overflow-button").children("span.k-icon");
 
             assert.equal(icon.length, 0);
         });
@@ -457,7 +428,7 @@
 
             assert.equal(icon.length, 0);
 
-            icon = toolbar.popup.element.find("#foo_overflow").find("span.k-icon");
+            icon = toolbar.overflowMenu.element.find("#foo_overflow").find("span.k-icon");
 
             assert.equal(icon.length, 1);
             assert.isOk(icon.hasClass("k-i-foo"));
@@ -504,7 +475,7 @@
                 ]
             }).data("kendoToolBar");
 
-            var button = toolbar.popup.element.find("#foo_overflow");
+            var button = toolbar.overflowMenu.element.find("#foo_overflow");
             assert.isOk(button.hasClass("foo"));
         });
 
@@ -515,12 +486,9 @@
                 ]
             }).data("kendoToolBar");
 
-            var button = toolbar.popup.element.find("#foo_overflow");
+            var button = toolbar.overflowMenu.element.find("#foo_overflow");
             assert.isOk(button.hasClass("k-item"));
             assert.isOk(button.hasClass("foo"));
-
-            assert.isOk(button.children().hasClass("k-overflow-button"));
-            assert.isOk(button.children().hasClass("foo"));
         });
 
         it("button is initially hidden if hidden option is set to true", function() {
@@ -534,7 +502,7 @@
             assert.isOk(button.hasClass("k-hidden"));
             assert.isOk(button.is(":hidden"));
 
-            var overflowButton = toolbar.popup.element.find("#foo_overflow");
+            var overflowButton = toolbar.overflowMenu.element.find("#foo_overflow");
             assert.isOk(overflowButton.hasClass("k-hidden"));
         });
 
@@ -570,7 +538,7 @@
             });
 
             assert.isOk(container.find(".k-toggle-button.k-selected").length);
-            assert.equal($(".k-overflow-button.k-selected").length, 2);
+            assert.equal($(".k-link.k-selected").length, 2);
         });
 
         it("by default toggleButton does not have group", function() {
@@ -597,24 +565,6 @@
             assert.equal(buttons.eq(1).data("group"), "foo");
         });
 
-        it("toggle event handler of the button is stored in the data of the rendered element", function() {
-            container.kendoToolBar({
-                items: [{
-                    type: "button",
-                    togglable: true,
-                    id: "foo",
-                    text: "foo",
-                    toggle: function() { }
-                }]
-            });
-
-            var toggleHandler = $("#foo").data("button").toggleHandler;
-            var overflowToggleHandler = $("#foo_overflow").data("button").toggleHandler;
-
-            assert.isOk(kendo.isFunction(toggleHandler), "Toggle event handler is saved in the data of the button element");
-            assert.isOk(kendo.isFunction(overflowToggleHandler), "Toggle event handler is saved in the data of the overflowButton element");
-        });
-
         /* BUTTON GROUP */
 
         it("renders ButtonGroup from JSON", function() {
@@ -631,7 +581,7 @@
             });
 
             assert.isOk(container.children(".k-button-group").length, "ButtonGroup element is rendered");
-            assert.equal(container.find(".k-button-group").prop("tagName"), "DIV", "ButtonGroup renders DIV element");
+            assert.equal(container.find(".k-button-group").prop("tagName"), "SPAN", "ButtonGroup renders DIV element");
             assert.equal(container.find(".k-button-group").children().length, 3, "Button group contains correct amount of items");
         });
 
@@ -681,23 +631,6 @@
             assert.isOk(button.hasClass("k-group-end"));
         });
 
-        it("ButtonGroup element receives data-overflow attribute with default value", function() {
-            container.kendoToolBar({
-                items: [
-                    {
-                        type: "buttonGroup", buttons: [
-                            { id: "btn1", text: "Btn1" },
-                            { id: "btn2", text: "Btn2" },
-                            { id: "btn3", text: "Btn3" }
-                        ]
-                    }
-                ]
-            });
-
-            var buttonGroup = container.find(".k-button-group");
-            assert.equal(buttonGroup.attr("data-overflow"), "auto");
-        });
-
         it("ButtonGroup element receives data-overflow attribute with set value", function() {
             container.kendoToolBar({
                 items: [
@@ -731,8 +664,8 @@
             var component = toolbar.element.find(".k-button-group");
             assert.isOk(component.length);
 
-            component = toolbar.popup.element.find(".k-button-group");
-            assert.isOk(component.length);
+            component = toolbar.overflowMenu.element.find(".k-menu-item");
+            assert.equal(component.length, 3);
         });
 
         it("Overflow ButtonGroup renders li tag with buttons", function() {
@@ -748,9 +681,9 @@
                 ]
             }).data("kendoToolBar");
 
-            component = toolbar.popup.element.find(".k-button-group");
+            component = toolbar.overflowMenu.element.find(".k-menu-item");
             assert.equal(component.prop("tagName"), "LI");
-            assert.equal(component.children(".k-overflow-button").length, 3);
+            assert.equal(component.length, 3);
         });
 
         it("Overflow ButtonGroup renders li element which has uid + overflow data", function() {
@@ -766,10 +699,9 @@
                 ]
             }).data("kendoToolBar");
 
-            component = toolbar.popup.element.find(".k-button-group");
+            component = toolbar.overflowMenu.element.find(".k-menu-item");
             assert.equal(component.prop("tagName"), "LI");
             assert.isOk(component.data("uid"));
-            assert.equal(component.data("overflow"), "always");
         });
 
         it("Each button in ButtonGroup receives an uid", function() {
@@ -786,7 +718,7 @@
             }).data("kendoToolBar");
 
             buttons = toolbar.element.find(".k-button-group").children(".k-button");
-            overflowButtons = toolbar.popup.element.find(".k-button-group").children(".k-button");
+            overflowButtons = toolbar.overflowMenu.element.find(".k-menu-item");
 
             for (var i = 0; i < buttons.length; i++) {
                 assert.isOk(buttons.eq(i).data("uid") && overflowButtons.eq(i).data("uid"), "Toolbar and Overflow buttons has ID attribute");
@@ -829,23 +761,6 @@
             assert.isOk(buttonGroup.hasClass("foo"));
         });
 
-        it("options.attributes (buttonGroup level) are attached to the buttonGroup wrapper located in the overflow popup", function() {
-            var toolbar = container.kendoToolBar({
-                items: [
-                    {
-                        type: "buttonGroup", attributes: { "class": "foo" }, buttons: [
-                            { id: "btn1", text: "Btn1" },
-                            { id: "btn2", text: "Btn2" },
-                            { id: "btn3", text: "Btn3" }
-                        ]
-                    }
-                ]
-            }).data("kendoToolBar");
-
-            var buttonGroup = toolbar.popup.element.find(".k-button-group");
-            assert.isOk(buttonGroup.hasClass("foo"));
-        });
-
         it("options.attrbites (button level) does not remove build-in overflow button classes", function() {
             var toolbar = container.kendoToolBar({
                 items: [
@@ -859,9 +774,9 @@
             }).data("kendoToolBar");
 
             var button1 = $("#btn1_overflow");
-            assert.isOk(button1.hasClass("k-overflow-button") && button1.hasClass("myClass"));
+            assert.isOk(button1.hasClass("k-menu-item") && button1.hasClass("myClass"));
             var button2 = $("#btn2_overflow");
-            assert.isOk(button2.hasClass("k-overflow-button") && button1.hasClass("myClass"));
+            assert.isOk(button2.hasClass("k-menu-item") && button1.hasClass("myClass"));
         });
 
         it("ButtonGroup with no buttons does not throw JS error", function() {
@@ -892,7 +807,7 @@
             var button = toolbar.element.find("#btn2");
             assert.isOk(button.hasClass("k-hidden"));
 
-            var overflowButton = toolbar.popup.element.find("#btn2_overflow");
+            var overflowButton = toolbar.overflowMenu.element.find("#btn2_overflow");
             assert.isOk(overflowButton.hasClass("k-hidden"));
         });
 
@@ -911,9 +826,6 @@
 
             var button = toolbar.element.find("#btn2");
             assert.isOk(button.hasClass("k-group-start"));
-
-            var overflowButton = toolbar.popup.element.find("#btn2_overflow");
-            assert.isOk(overflowButton.hasClass("k-group-start"));
         });
 
         it("k-group-end class is set to the last visible button from the group", function() {
@@ -931,9 +843,6 @@
 
             var button = toolbar.element.find("#btn2");
             assert.isOk(button.hasClass("k-group-end"));
-
-            var overflowButton = toolbar.popup.element.find("#btn2_overflow");
-            assert.isOk(overflowButton.hasClass("k-group-end"));
         });
 
         /* SPLIT BUTTON */
@@ -1047,22 +956,6 @@
             assert.isOk(list.attr("id"), "Popup has ID");
         });
 
-        it("SplitButton element receives data-overflow attribute with default value", function() {
-            container.kendoToolBar({
-                items: [
-                    {
-                        type: "splitButton", text: "foo", menuButtons: [
-                            { id: "option1", text: "Option 1" },
-                            { id: "option2", text: "Option 2" }
-                        ]
-                    }
-                ]
-            });
-
-            var splitButton = container.find(".k-split-button.k-button-group");
-            assert.equal(splitButton.attr("data-overflow"), "auto");
-        });
-
         it("SplitButton element receives data-overflow attribute with set value", function() {
             container.kendoToolBar({
                 items: [
@@ -1080,7 +973,7 @@
         });
 
         it("Overflow SplitButton renders li tag with buttons", function() {
-            var splitButton = container.kendoToolBar({
+            var toolbar = container.kendoToolBar({
                 items: [
                     {
                         type: "splitButton", text: "foo", menuButtons: [
@@ -1092,14 +985,14 @@
                 ]
             }).data("kendoToolBar");
 
-            component = splitButton.popup.element.find(".k-split-button");
+            component = toolbar.overflowMenu.element.find(".k-menu-item");
 
             assert.equal(component.prop("tagName"), "LI");
-            assert.equal(component.find(".k-overflow-button").length, 4); //3 items + 1 main button
+            assert.equal(component.length, 4); //3 items + 1 main button
         });
 
         it("Overflow SplitButton items are wrapped in a li tag which has data-uid attribute", function() {
-            var splitButton = container.kendoToolBar({
+            var toolbar = container.kendoToolBar({
                 items: [
                     {
                         type: "splitButton", text: "foo", menuButtons: [
@@ -1111,7 +1004,7 @@
                 ]
             }).data("kendoToolBar");
 
-            component = splitButton.popup.element.find(".k-split-button");
+            component = toolbar.overflowMenu.element.find(".k-menu-item");
 
             assert.equal(component.prop("tagName"), "LI");
             assert.isOk(component.data("uid"));
@@ -1210,7 +1103,7 @@
             assert.isOk(button.hasClass("k-hidden"));
             assert.isOk(button.is(":hidden"));
 
-            var overflowButton = toolbar.popup.element.find("#foo_overflow");
+            var overflowButton = toolbar.overflowMenu.element.find("#foo_overflow");
             assert.isOk(overflowButton.hasClass("k-hidden"));
         });
 
@@ -1325,22 +1218,6 @@
             assert.isOk(list.attr("id"), "Popup has ID");
         });
 
-        it("DropDownButton element receives data-overflow attribute with default value", function() {
-            container.kendoToolBar({
-                items: [
-                    {
-                        type: "dropDownButton", text: "foo", menuButtons: [
-                            { id: "option1", text: "Option 1" },
-                            { id: "option2", text: "Option 2" }
-                        ]
-                    }
-                ]
-            });
-
-            var dropDownButton = container.find(".k-menu-button");
-            assert.equal(dropDownButton.attr("data-overflow"), "auto");
-        });
-
         it("DropDownButton element receives data-overflow attribute with set value", function() {
             container.kendoToolBar({
                 items: [
@@ -1358,7 +1235,7 @@
         });
 
         it("Overflow DropDownButton renders li tag with buttons", function() {
-            var dropDownButton = container.kendoToolBar({
+            var toolbar = container.kendoToolBar({
                 items: [
                     {
                         type: "dropDownButton", text: "foo", menuButtons: [
@@ -1370,14 +1247,15 @@
                 ]
             }).data("kendoToolBar");
 
-            component = dropDownButton.popup.element.find(".k-menu-button");
+            component = toolbar.overflowMenu.element.find(".k-menu-item");
 
             assert.equal(component.prop("tagName"), "LI");
-            assert.equal(component.find(".k-overflow-button").length, 3); // only the items - main item is not rendering in overflow
+            assert.equal(toolbar.overflowMenu.element.find(".k-menu-item").length, 4);
+            assert.isOk(toolbar.overflowMenu.element.find(".k-menu-item").first().hasClass("k-disabled"));
         });
 
         it("Overflow DropDownButton items are wrapped in a li tag which has data-uid attribute", function() {
-            var dropDownButton = container.kendoToolBar({
+            var toolbar = container.kendoToolBar({
                 items: [
                     {
                         type: "dropDownButton", text: "foo", menuButtons: [
@@ -1389,7 +1267,7 @@
                 ]
             }).data("kendoToolBar");
 
-            component = dropDownButton.popup.element.find(".k-menu-button");
+            component = toolbar.overflowMenu.element.find(".k-menu-item");
 
             assert.equal(component.prop("tagName"), "LI");
             assert.isOk(component.data("uid"));
@@ -1487,8 +1365,8 @@
             var button = toolbar.element.find(".k-menu-button");
             assert.isOk(button.hasClass("k-hidden"));
 
-            var overflowButton = toolbar.popup.element.find("#foo_overflow");
-            assert.isOk(overflowButton.parent().hasClass("k-overflow-hidden"));
+            var overflowButton = toolbar.overflowMenu.element.find("#foo_overflow");
+            assert.isOk(overflowButton.hasClass("k-hidden"));
         });
 
         /* SEPARATOR */
@@ -1510,7 +1388,7 @@
                 ]
             }).data("kendoToolBar");
 
-            var separator = toolbar.popup.element.find(".k-separator");
+            var separator = toolbar.overflowMenu.element.find(".k-separator");
 
             assert.equal(separator.prop("tagName"), "LI");
             assert.isOk(separator.data("uid"));
@@ -1562,42 +1440,42 @@
             assert.isOk(!container.find(".k-overflow-anchor").length);
         });
 
-        it("initializes command overflow popup", function() {
+        it("initializes command overflow popup menu", function() {
             var toolbar = container.kendoToolBar().data("kendoToolBar");
 
-            assert.isOk(toolbar.popup instanceof kendo.ui.Popup);
-            assert.isOk(toolbar.popup.element.length);
+            assert.isOk(toolbar.overflowMenu instanceof kendo.ui.ContextMenu);
+            assert.isOk(toolbar.overflowMenu.element.length);
         });
 
-        it("does not initiaze popup if resizable is set to false", function() {
+        it("does not initiaze popup menu if resizable is set to false", function() {
             var toolbar = container.kendoToolBar({
                 resizable: false
             }).data("kendoToolBar");
 
-            assert.isOk(!(toolbar.popup instanceof kendo.ui.Popup));
+            assert.isOk(!toolbar.overflowMenu);
         });
 
-        it("button's wrapper with overflow: auto has k-overflow-hidden class", function() {
+        it("button's wrapper with overflow: auto has k-hidden class", function() {
             var toolbar = container.kendoToolBar({
                 items: [
                     { type: "button", text: "foo" }
                 ]
             }).data("kendoToolBar");
 
-            var wrapper = toolbar.popup.element.children().first();
-            assert.isOk(wrapper.hasClass("k-overflow-hidden"));
+            var wrapper = toolbar.overflowMenu.element.children().first();
+            assert.isOk(wrapper.hasClass("k-hidden"));
             assert.isOk(wrapper.is(":hidden"));
         });
 
-        it("button's wrapper with overflow: always does not have k-overflow-hidden class", function() {
+        it("button's wrapper with overflow: always does not have k-hidden class", function() {
             var toolbar = container.kendoToolBar({
                 items: [
                     { type: "button", text: "foo", overflow: "always" }
                 ]
             }).data("kendoToolBar");
 
-            var wrapper = toolbar.popup.element.find(".k-button").parent();
-            assert.isOk(!wrapper.hasClass("k-overflow-hidden"));
+            var wrapper = toolbar.overflowMenu.element.find(".k-button").parent();
+            assert.isOk(!wrapper.hasClass("k-hidden"));
         });
 
         it("Same uid is attached to the toolbar component and corresponding overflow popup element", function() {
@@ -1608,7 +1486,7 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#foo");
-            var overflowButton = toolbar.popup.element.find(">li:first");
+            var overflowButton = toolbar.overflowMenu.element.find(">li:first");
 
             assert.isOk(button.data("uid") === overflowButton.data("uid"));
         });
@@ -1620,7 +1498,7 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.equal($("#template").parent().data("overflow"), "never");
+            assert.equal(toolbar.overflowMenu.element.children().length, 0);
         });
 
         it("When a template command without overflowTemplate is defined no JS error is thrown", function() {
@@ -1693,18 +1571,14 @@
         });
 
         /* MISC */
-        it("DOM click event of disabled button is prevented", function() {
+        it("click event of disabled button is prevented", function() {
             container.kendoToolBar({
                 items: [
-                    { type: "button", id: "foo", text: "foo", enable: false }
+                    { type: "button", id: "foo", text: "foo", enable: false, click: () => { assert.isOk(false); } }
                 ]
             });
 
             var button = container.find("#foo");
-
-            container.click(function(e) {
-                assert.isOk(e.isDefaultPrevented(), "enable false does not prevent the click");
-            });
 
             click(button);
         });
@@ -1729,9 +1603,9 @@
             assert.isOk($("#bar").hasClass("k-selected"), 2);
             assert.isOk(!$("#baz").hasClass("k-selected"), 3);
 
-            assert.isOk(!$("#foo_overflow").hasClass("k-selected"), 4);
-            assert.isOk($("#bar_overflow").hasClass("k-selected"), 5);
-            assert.isOk(!$("#baz_overflow").hasClass("k-selected"), 6);
+            assert.isOk(!$("#foo_overflow .k-link").hasClass("k-selected"), 4);
+            assert.isOk($("#bar_overflow .k-link").hasClass("k-selected"), 5);
+            assert.isOk(!$("#baz_overflow .k-link").hasClass("k-selected"), 6);
         });
 
         it("split button has k-rounded-md class", function() {

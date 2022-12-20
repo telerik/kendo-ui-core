@@ -74,7 +74,7 @@ var __meta__ = {
         itemSelector = ".k-item",
         availableItemsSelector = ".k-item:not(.k-disabled)",
         linkSelector = ".k-item:not(.k-disabled) > .k-link",
-        exclusionSelector = ":not(.k-item.k-separator)",
+        exclusionSelector = ":not(.k-item.k-separator):visible",
         templateSelector = "div:not(.k-animation-container,.k-list-container)",
         scrollButtonSelector = ".k-menu-scroll-button",
         touchPointerTypes = { "2": 1, "touch": 1 },
@@ -1811,10 +1811,10 @@ var __meta__ = {
             } else if (key == keys.UP) {
                 target = that._itemUp(hoverItem, belongsToVertical, hasChildren);
             } else if (key == keys.HOME) {
-                that._moveHover(hoverItem, hoverItem.parent().children().first());
+                that._moveHover(hoverItem, hoverItem.parent().children(":visible").first());
                 e.preventDefault();
             } else if (key == keys.END) {
-                that._moveHover(hoverItem, hoverItem.parent().children().last());
+                that._moveHover(hoverItem, hoverItem.parent().children(":visible").last());
                 e.preventDefault();
             } else if (key == keys.ESC) {
                 target = that._itemEsc(hoverItem, belongsToVertical);
@@ -1990,7 +1990,7 @@ var __meta__ = {
             }
 
             if (!nextItem.length && item.length) {
-                nextItem = item.parent().children().first();
+                nextItem = item.parent().children(":visible").first();
             } else if (!item.length) {
                 nextItem = that.wrapper.children(".k-item").first();
             }
@@ -2010,7 +2010,7 @@ var __meta__ = {
             }
 
             if (!nextItem.length && item.length) {
-                nextItem = item.parent().children().last();
+                nextItem = item.parent().children(":visible").last();
             } else if (!item.length) {
                 nextItem = that.wrapper.children(".k-item").last();
             }
@@ -2441,7 +2441,9 @@ var __meta__ = {
             orientation: "vertical",
             alignToAnchor: false,
             copyAnchorStyles: true,
-            target: "body"
+            target: "body",
+            origin: undefined,
+            position: undefined
         },
 
         events: [
@@ -2500,6 +2502,11 @@ var __meta__ = {
                         that.popup.element.kendoStop(true);
                     }
 
+                    if (!that._triggerFocusOnActivate) {
+                        that._triggerFocusOnActivate = that._focusMenu.bind(that);
+                    }
+                    that.bind(ACTIVATE, that._triggerFocusOnActivate);
+
                     if (y !== undefined) {
                         var overflowWrapper = that._overflowWrapper();
                         if (overflowWrapper) {
@@ -2520,12 +2527,17 @@ var __meta__ = {
                     DOCUMENT_ELEMENT.off(that.popup.downEvent, that.popup._mousedownProxy);
                     DOCUMENT_ELEMENT
                         .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
-
-                    that.element.trigger("focus");
                 }
             }
 
             return that;
+        },
+
+        _focusMenu: function() {
+            var that = this;
+
+            that.unbind(ACTIVATE, that._triggerFocusOnActivate);
+            that.element.trigger("focus");
         },
 
         _configurePopupScrolling: function(x, y) {
@@ -2722,6 +2734,8 @@ var __meta__ = {
             that.popup = that.element
                             .addClass("k-context-menu")
                             .kendoPopup({
+                                origin: that.options.origin,
+                                position: that.options.position,
                                 autosize: that.options.orientation === "horizontal",
                                 anchor: that.target || "body",
                                 copyAnchorStyles: that.options.copyAnchorStyles,
@@ -2754,7 +2768,7 @@ var __meta__ = {
             Menu.fn._focus.call(this, e);
 
             if (activeElement() === e.currentTarget) {
-                this._moveHover(hoverItem, this.wrapper.children().first());
+                this._moveHover(hoverItem, this.wrapper.children().filter(":visible").not(".k-separator").first());
             }
         }
     });

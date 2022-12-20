@@ -1449,13 +1449,11 @@ The jQuery object that represents the command element.
 
 The id of the command element.
 
-##### e.item `Object`
-
-The item instance of the clicked item.
-
 ##### e.sender `kendo.ui.ToolBar`
 
 The widget instance which fired the event.
+
+> **Important** Starting with R1 2023 the event arguments object no longer holds a reference to the ToolBar item (`e.item`). From that release on, the tools in the ToolBar are actual widget instances that can be taken using the `kendo.widgetInstance()` method: `var widget = kendo.widgetInstance(e.target);`. When the clicked tool is rendered in the OverflowMenu or in a popup of a SplitButton/DropDownButton it represents a menu item. Hence, it is not a Kendo widget. A reference to the jQuery element is still available in those cases in the `e.target` event argument.
 
 #### Example - subscribe to the "click" event during initialization
 
@@ -1631,13 +1629,11 @@ Boolean flag that indicates the button state.
 
 The id of the command element.
 
-##### e.item `Object`
-
-The item instance of the toggled item.
-
 ##### e.sender `kendo.ui.ToolBar`
 
 The widget instance which fired the event.
+
+> **Important** Starting with R1 2023 the event arguments object no longer holds a reference to the ToolBar item (`e.item`). From that release on, the tools in the ToolBar are actual widget instances that can be taken using the `kendo.widgetInstance()` method: `var widget = kendo.widgetInstance(e.target);`. When the toggled tool is rendered in the OverflowMenu it represents a menu item. Hence, it is not a Kendo widget. A reference to the jQuery element is still available in those cases in the `e.target` event argument.
 
 #### Example - subscribe to the "toggle" event during initialization
 

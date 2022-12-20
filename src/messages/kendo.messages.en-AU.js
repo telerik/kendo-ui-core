@@ -833,7 +833,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Alignment",
     "buttons": {
-     "justtifyLeft": "Align left",
+     "justifyLeft": "Align left",
      "justifyCenter": "Center",
      "justifyRight": "Align right",
      "justifyFull": "Justify",
@@ -997,7 +997,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Add row below",
   "alignment": "Alignment",
   "alignmentButtons": {
-    "justtifyLeft": "Align left",
+    "justifyLeft": "Align left",
     "justifyCenter": "Center",
     "justifyRight": "Align right",
     "justifyFull": "Justify",
@@ -1356,7 +1356,8 @@ if (kendo.ui.PDFViewer) {
                 next: "Next Match",
                 previous: "Previous Match",
                 close: "Close",
-                of: "of"
+                of: "of",
+                dragHandle: "Drag search"
             }
         }
     });

@@ -682,7 +682,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Порамнување",
     "buttons": {
-     "justtifyLeft": "Лево порамнување",
+     "justifyLeft": "Лево порамнување",
      "justifyCenter": "Центар",
      "justifyRight": "Десно порамнување",
      "justifyFull": "Порамни",
@@ -860,7 +860,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Додади ред долу",
   "alignment": "Порамнување",
   "alignmentButtons": {
-    "justtifyLeft": "Порамни лево",
+    "justifyLeft": "Порамни лево",
     "justifyCenter": "Центар",
     "justifyRight": "Порамни десно",
     "justifyFull": "Порамни",

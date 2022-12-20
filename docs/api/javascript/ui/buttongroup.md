@@ -49,7 +49,11 @@ Defines the initially selected Button (zero based index).
 
 ### selection `String` *(default "single")*
 
-Defines the selection type.
+Defines the selection type. Allows the following values:
+
+* `single` (default): allows only a single button to be the currently selected in the group.
+* `multiple`: allows multiple buttons to be selected in the group at the same time.
+* `none`: does not allow selection. ButtonGroups acts as a group f clickable Buttons.
 
 #### Example
 

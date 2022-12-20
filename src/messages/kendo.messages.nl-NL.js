@@ -474,7 +474,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Uitlijning",
     "buttons": {
-      "justtifyLeft": "Links uitlijnen",
+      "justifyLeft": "Links uitlijnen",
       "justifyCenter": "Centrum",
       "justifyRight": "Rechts uitlijnen",
       "justifyFull": "Verantwoorden",
@@ -664,7 +664,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Rij hieronder toevoegen",
   "alignment": "Uitlijning",
   "alignmentButtons": {
-    "justtifyLeft": "Links uitlijnen",
+    "justifyLeft": "Links uitlijnen",
     "justifyCenter": "Centrum",
     "justifyRight": "Rechts uitlijnen",
     "justifyFull": "Verantwoorden",

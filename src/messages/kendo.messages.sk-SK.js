@@ -593,7 +593,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs, {
     "alignmentDialog": {
         "title": "Zarovnanie",
         "buttons": {
-            "justtifyLeft": "Zarovnať vľavo",
+            "justifyLeft": "Zarovnať vľavo",
             "justifyCenter": "Centrovať",
             "justifyRight": "Zarovnať vpravo",
             "justifyFull": "Zarovnať do bloku",
@@ -757,7 +757,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar, {
     "addRowBelow": "Pridať riadok pod",
     "alignment": "Zarovnanie",
     "alignmentButtons": {
-        "justtifyLeft": "Zarovnať vľavo",
+        "justifyLeft": "Zarovnať vľavo",
         "justifyCenter": "Centrovať",
         "justifyRight": "Zarovnať vpravo",
         "justifyFull": "Zarovnať do bloku",

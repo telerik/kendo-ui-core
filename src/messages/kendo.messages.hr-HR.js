@@ -499,7 +499,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Poravnanje",
     "buttons": {
-      "justtifyLeft": "Poravnajte lijevo",
+      "justifyLeft": "Poravnajte lijevo",
       "justifyCenter": "Centar",
       "justifyRight": "Poravnajte desno",
       "justifyFull": "Opravdati",
@@ -689,7 +689,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Dodajte red ispod",
   "alignment": "Poravnanje",
   "alignmentButtons": {
-    "justtifyLeft": "Poravnajte lijevo",
+    "justifyLeft": "Poravnajte lijevo",
     "justifyCenter": "Centar",
     "justifyRight": "Poravnajte desno",
     "justifyFull": "Opravdati",

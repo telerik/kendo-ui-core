@@ -615,7 +615,7 @@
         "alignmentDialog": {
           "title": "Alineación",
           "buttons": {
-            "justtifyLeft": "Alinear a la izquierda",
+            "justifyLeft": "Alinear a la izquierda",
             "justifyCenter": "Alinear al centro",
             "justifyRight": "Alinear a la derecha	",
             "justifyFull": "Justificar",
@@ -779,7 +779,7 @@
         "addRowBelow": "Agregar fila debajo",
         "alignment": "Alineación",
         "alignmentButtons": {
-          "justtifyLeft": "Alinear a la izquierda",
+          "justifyLeft": "Alinear a la izquierda",
           "justifyCenter": "Alinear al cenro",
           "justifyRight": "Alinear a la derecha",
           "justifyFull": "Justificar",

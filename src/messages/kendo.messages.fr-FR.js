@@ -681,7 +681,7 @@ if (kendo.ui.PivotGrid) {
         "alignmentDialog": {
           "title": "Alignment",
           "buttons": {
-            "justtifyLeft": "Aligner à gauche",
+            "justifyLeft": "Aligner à gauche",
             "justifyCenter": "Centrer",
             "justifyRight": "Aligner à droite",
             "justifyFull": "Justifier",
@@ -932,7 +932,7 @@ if (kendo.ui.PivotGrid) {
         "addRowBelow": "Ajouter une rangée en dessous",
         "alignment": "Alignement",
         "alignmentButtons": {
-          "justtifyLeft": "Aligner à gauche",
+          "justifyLeft": "Aligner à gauche",
           "justifyCenter": "Centrer",
           "justifyRight": "Aligner à droite",
           "justifyFull": "Justifier",

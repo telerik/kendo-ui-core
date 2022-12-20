@@ -893,7 +893,7 @@
                 "alignmentDialog": {
                     "title": "المحاذاة",
                     "buttons": {
-                        "justtifyLeft": "محاذاة إلى اليسار",
+                        "justifyLeft": "محاذاة إلى اليسار",
                         "justifyCenter": "وسط",
                         "justifyRight": "محاذاة إلي اليمين",
                         "justifyFull": "ضبط",
@@ -1083,7 +1083,7 @@
                 "addRowBelow": "أضف صف إلي الأسفل",
                 "alignment": "محاذاة",
                 "alignmentButtons": {
-                    "justtifyLeft": "محاذاة إلي اليسار",
+                    "justifyLeft": "محاذاة إلي اليسار",
                     "justifyCenter": "وسط",
                     "justifyRight": "محاذاة إلي اليمين",
                     "justifyFull": "ضبط",

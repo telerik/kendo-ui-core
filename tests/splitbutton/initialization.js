@@ -212,5 +212,17 @@
             assert.equal(button.attr("type"), "submit");
             assert.equal(splitButton.arrowButton.attr("type"), "button");
         });
+
+        it("SplitButton renders target attribute on the <a> tag", function() {
+            button.attr("type", "submit");
+            var splitButton = new SplitButton(button, { items: [{
+                test: "Link",
+                url: "https://www.telerik.com",
+                attributes: { target: "_blank" }
+            }] });
+
+            assert.equal(splitButton.menu.list.find(".k-item").attr("target"), undefined);
+            assert.equal(splitButton.menu.list.find(".k-link").attr("target"), "_blank");
+        });
     });
 }());

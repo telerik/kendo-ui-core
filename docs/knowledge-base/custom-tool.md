@@ -39,7 +39,9 @@ How can I develop and register custom tools in the Kendo UI for jQuery ToolBar?
 
 The example below demonstrates how to achieve the desired scenario.
 
-> The following approach works in the Kendo UI Q3 2015 release and later. 
+> The following approach works in the Kendo UI versions from Q3 2015 to R3 2022. 
+
+> If you are using Kendo UI version R1 2023 or later, please refer to the [Custom Tools]({% slug custom_tools_kendoui_toolbar %}) documentation article. 
 
 
 ```dojo

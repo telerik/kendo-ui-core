@@ -68,7 +68,7 @@ var __meta__ = {
 
     var ITEM_TEMPLATE = "<span class=\"" + cssClasses.item + "\">" + IMAGE_TEMPLATE + SPRITE_TEMPLATE + ICON_TEMPLATE + TEXT_TEMPLATE + "</span>";
 
-    var LINK_TEMPLATE = "<a href=\"#:url#\" class=\"" + cssClasses.item + "\">" + IMAGE_TEMPLATE + SPRITE_TEMPLATE + ICON_TEMPLATE + TEXT_TEMPLATE + "</a>";
+    var LINK_TEMPLATE = "<a href=\"#:url#\" #if (attributes.target) {# target=\"#:attributes.target#\" #}# class=\"" + cssClasses.item + "\">" + IMAGE_TEMPLATE + SPRITE_TEMPLATE + ICON_TEMPLATE + TEXT_TEMPLATE + "</a>";
 
     function findFocusableSibling(element, dir) {
         var getSibling = dir === NEXT ? $.fn.next : $.fn.prev;
@@ -153,6 +153,7 @@ var __meta__ = {
             }
 
             if (item.attributes) {
+                delete item.attributes.target;
                 menuItem.attr(item.attributes);
             }
 

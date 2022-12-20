@@ -109,7 +109,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Подравняване",
     "buttons": {
-     "justtifyLeft": "Подравняване отляво",
+     "justifyLeft": "Подравняване отляво",
      "justifyCenter": "Центриране",
      "justifyRight": "Подравняване отдясно",
      "justifyFull": "Двустранно подравняване",
@@ -264,7 +264,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Добави ред отдолу",
   "alignment": "Подравняване",
   "alignmentButtons": {
-    "justtifyLeft": "Подравняване отляво",
+    "justifyLeft": "Подравняване отляво",
     "justifyCenter": "Центрирано",
     "justifyRight": "Подравняване отдясно",
     "justifyFull": "Двустранно подравняване",
@@ -1324,7 +1324,7 @@ if (kendo.ui.PDFViewer) {
                 }
             },
             okText: "ОК",
-            save: "Сапази",
+            save: "Запази",
             cancel: "Отмени",
             search: {
                 inputLabel: "Търси текст",
@@ -1332,7 +1332,8 @@ if (kendo.ui.PDFViewer) {
                 next: "Следващо съвпадение",
                 previous: "Предишно съвпадение",
                 close: "Затвори",
-                of: "от"
+                of: "от",
+                dragHandle: "Премести търсенето"
             }
         }
     });

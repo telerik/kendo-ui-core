@@ -553,7 +553,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Allineamento",
     "buttons": {
-     "justtifyLeft": "Allinea testo a sinistra",
+     "justifyLeft": "Allinea testo a sinistra",
      "justifyCenter": "Allinea al centro",
      "justifyRight": "Allinea testo a destra",
      "justifyFull": "Giustifica",
@@ -705,7 +705,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Aggiungi riga sotto",
   "alignment": "Allineamento",
   "alignmentButtons": {
-  "justtifyLeft": "Allinea testo a sinistra",
+  "justifyLeft": "Allinea testo a sinistra",
   "justifyCenter": "Allinea al centro",
   "justifyRight": "Allinea testo a destra",
   "justifyFull": "Giustifica",

@@ -641,7 +641,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Alinhamento",
     "buttons": {
-     "justtifyLeft": "Alinhar à esquerda",
+     "justifyLeft": "Alinhar à esquerda",
      "justifyCenter": "Centralizar",
      "justifyRight": "Alinhar à direita",
      "justifyFull": "Justificar",
@@ -805,7 +805,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Adicionar linha abaixo",
   "alignment": "Alinhamento",
   "alignmentButtons": {
-    "justtifyLeft": "Alinhar à esquerda",
+    "justifyLeft": "Alinhar à esquerda",
     "justifyCenter": "Centralizar",
     "justifyRight": "Alinha à direita",
     "justifyFull": "Justificar",

@@ -11863,6 +11863,35 @@ declare namespace kendo.ui {
         action?: string | undefined;
     }
 
+    class ToggleButton extends kendo.ui.Button {
+        static fn: ToggleButton;
+
+        options: ToggleButtonOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ToggleButton;
+
+        constructor(element: Element, options?: ToggleButtonOptions);
+
+        toggle(toggle?: boolean): void;
+    }
+
+    interface ToggleButtonOptions extends ButtonOptions {
+        group?: string | undefined;
+        selected?: boolean | undefined;
+        toggle?(e: ToggleButtonToggleEvent): void;
+    }
+
+    interface ToggleButtonToggleEvent {
+        sender: ToggleButton;
+        checked: boolean,
+        group: string,
+        id: string,
+        target: JQuery
+    }
+
     class ToolBar extends kendo.ui.Widget {
 
         static fn: ToolBar;
@@ -26303,6 +26332,10 @@ interface JQuery {
     kendoTimeline(): JQuery;
     kendoTimeline(options: kendo.ui.TimelineOptions): JQuery;
     data(key: "kendoTimeline"): kendo.ui.Timeline | undefined;
+
+    kendoToggleButton(): JQuery;
+    kendoToggleButton(options: kendo.ui.ToggleButtonOptions): JQuery;
+    data(key: "kendoToggleButton"): kendo.ui.ToggleButton | undefined;
 
     kendoToolBar(): JQuery;
     kendoToolBar(options: kendo.ui.ToolBarOptions): JQuery;

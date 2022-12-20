@@ -3,7 +3,7 @@ title: Appearance
 page_title: jQuery ToolBar Documentation - Appearance
 description: "Get started with the jQuery ToolBar by Kendo UI and control its appearance."
 slug: appearance_kendoui_toolbar
-position: 4
+position: 5
 ---
 
 # Appearance
@@ -32,12 +32,6 @@ The following example demonstrates how to use the `overflow` property.
             ]
         });
     </script>
-
-## Mobile Rendering
-
-The widget provides a mobile specific style options when placed within the header or footer of a mobile View. For more information on the mobile rendering feature, refer to the [demo on the ToolBar acting as an ActionBar](https://demos.telerik.com/kendo-ui/m/index#navbar/index).
-
-The mobile view of the Toolbar exposes an additional option for aligning tools to the left or to the right side of the widget. This behavior is achieved by using the `items.align` configuration. For more information, refer to the article on [using the mobile view of the ToolBar]({% slug howto_usemobileview_toolbar %}).
 
 ## See Also
 
