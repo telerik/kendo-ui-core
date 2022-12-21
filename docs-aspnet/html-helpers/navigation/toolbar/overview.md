@@ -179,6 +179,7 @@ For more advanced configuration options you can check:
 * [Spacer]({% slug spacer_toolbar_aspnetcore %})
 * [Manual closing]({% slug htmlhelpers_toolbar_popup_manual_close_aspnetcore %})
 * [Using FontAwesome icons]({% slug htmlhelpers_use_fontawesome_icons_aspnetcore %})
+* [Supported toolbar command types]({% slug htmlhelpers_toolbar_button_aspnetcore %})
 
 ## Events
 

@@ -399,6 +399,9 @@ navigation:
      "html-helpers/interactivity/sortable/integration":
         title: "Integration"
         position: 6
+     "html-helpers/navigation/toolbar/command-types":
+        title: "Command Types"
+        position: 2  
      "html-helpers/media":
         title: "Media"
      "html-helpers/pdf":

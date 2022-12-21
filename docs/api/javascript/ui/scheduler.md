@@ -6577,7 +6577,7 @@ The end date of the period.
 
 ### refresh
 
-Refreshes the Scheduler rendering using the current data items.
+Refreshes the Scheduler data rendering using the current data items. This method will not refresh the slots of the view.
 
 #### Example - refresh the widget
 

@@ -1,15 +1,13 @@
 ---
 title: Spacer
-page_title: Spacer
+page_title: Spacer ToolBar Command Type
 description: "Learn how to use the spacer command type when working with the Telerik UI ToolBar component for {{ site.framework }}."
-previous_url: /helpers/navigation/toolbar/spacer
 slug: spacer_toolbar_aspnetcore
-position: 2
 ---
 
-# Spacer
+# Spacer ToolBar Command Type
 
-The `Spacer` command type moves the tools that are declared after it to the right side of the ToolBar.
+The Spacer command type moves the tools that are declared after it to the right side of the ToolBar and provides space between them and the tools that remain on the left.
 
 ```HtmlHelper
     @(Html.Kendo().ToolBar()
@@ -33,7 +31,7 @@ The `Spacer` command type moves the tools that are declared after it to the righ
 ```
 {% endif %}
 
-You can use multiple spacers to create an equal amount of space between several tools.
+You can use multiple Spacers to create an equal amount of space between several tools.
 
 ```HtmlHelper
     @(Html.Kendo().ToolBar()
@@ -64,3 +62,4 @@ You can use multiple spacers to create an equal amount of space between several 
 ## See Also
 
 * [Server-Side API](/api/toolbar)
+* [Client-Side API Reference of the ToolBar](/api/javascript/ui/toolbar)
