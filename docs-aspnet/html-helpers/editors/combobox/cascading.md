@@ -8,7 +8,7 @@ position: 6
 
 # Cascading
 
-The cascading ComboBox is a series of two or more ComboBox widgets in which each ComboBox is filtered according to the selected options in the previous ComboBox.
+The cascading ComboBox is a series of two or more ComboBox components in which each ComboBox is filtered according to the selected options in the previous ComboBox.
 
 ## Basic Configuration
 
@@ -85,16 +85,66 @@ The child ComboBox cascades from the parent one if the `CascadeFrom` option is d
     }
 ```
 
+For a runnable example, refer to the [demo on cascading comboboxes](https://demos.telerik.com/{{ site.platform }}/combobox/cascadingcombobox).
 
-The child ComboBox takes the following actions during initialization:
+## Cascading on Custom Parent Input 
 
-* Checks if the cascadeFrom property is set. If not, cascading is disabled.
-* Tries to find the parent ComboBox object. If the result is null, then the functionality is omitted.
-* Listens to any changes of the parent value.
-* If the parent does not have a value, the child is disabled. If the parent has a value, the child is enabled and filters its data accordingly. The filter options are similar to the ones demonstrated in the following example.
+To allow custom input in the ComboBox, set the `CascadeOnCustomValue` of the parent ComboBox in а cascading scenario to `true`. As a result, cascading will be triggered upon custom input in the parent component. When `CascadeOnCustomValue` is set to its default `false` configuration, the child will not cascade and will be disabled upon setting custom input in the parent ComboBox. Cascading on custom values works only when `CascadeFromParentField` is not set for the child component or points to the `DataValueField` of the parent.
 
-> * The cascading functionality works only when you define the cascadeFrom property and initialize the parent ComboBox.
-> * The filter operator is always "eq". To filter the data, the child ComboBox uses the dataValueField option of the parent ComboBox.
+When the custom parent input is enabled, the child ComboBox takes the following actions during initialization:
+
+1. Checks if the `cascadeFrom` property is set. If not, cascading is disabled.
+1. Tries to find the parent ComboBox object. If the result is `null`, then the functionality is omitted.
+1. Listens to any changes of the parent value.
+1. If the parent does not have a value, the child is disabled. If the parent has a value, the child is enabled and filters its data accordingly. The filter options are similar to the ones demonstrated in the following example.
+
+> * The cascading functionality works only when you define the `cascadeFrom` property and initialize the parent ComboBox.
+> * The `filter` operator is always `"eq"`. To filter the data, the child ComboBox uses the `dataValueField` option of the parent ComboBox.
+
+The following example shows how to implement the cascading functionality of the ComboBox based on custom parent input. 
+
+```HtmlHelper
+    @(Html.Kendo().ComboBox()
+          .Name("categories")
+          .CascadeOnCustomValue(true)
+          // options removed for clarity
+    )
+
+    @(Html.Kendo().ComboBox()
+          .Name("products")
+          // options removed for clarity
+          .DataSource(source => {
+              source.Read(read =>
+              {
+                  read.Action("GetCascadeProducts", "ComboBox")
+                      .Data("filterProducts");
+              })
+              .ServerFiltering(true);
+          })
+          .Enable(false)
+          .AutoBind(false)
+          .CascadeFrom("categories")
+    )
+```
+{% if site.core %}
+```TagHelper
+
+
+<kendo-combobox name="categories" cascade-on-custom-value="true">
+</kendo-combobox>
+
+<kendo-combobox name="products"
+                enable="false"
+                auto-bind="false"
+                cascade-from="categories">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("GetCascadeProducts", "ComboBox")" data="filterProducts"/>
+        </transport>
+    </datasource>
+</kendo-combobox>
+```
+{% endif %}
 
 ## See Also
 
