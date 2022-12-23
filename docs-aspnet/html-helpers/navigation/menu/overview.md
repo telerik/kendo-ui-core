@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Menu component for {{ site.framework }}."
+description: "Try now the Telerik UI Menu component for {{ site.framework }} providing built-in data-binding and customization options, a ContextMenu, and support for various accessibility standards."
 previous_url: /helpers/html-helpers/menu, /helpers/navigation/menu/overview
 slug: htmlhelpers_menu_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Menu Overview
@@ -275,79 +275,21 @@ The following example demonstrates the basic configuration of the Menu.
 
 ## Functionality and Features
 
-* [Binding]({% slug htmlhelpers_menu_databinding_aspnetcore %})
-* [Context menu]({% slug htmlhelpers_contextmenu_aspnetcore %})
-* [Keyboard navigation]({% slug htmlhelpers_menu_keyboardnavigation_aspnetcore %})
+* [Binding]({% slug htmlhelpers_menu_databinding_aspnetcore %})&mdash;To bind the Menu to data, you can apply various approaches, for example, binding to a server end point, binding to a hierarchical model, or manually defining the properties of the Menu items.
+* [ContextMenu]({% slug htmlhelpers_contextmenu_aspnetcore %})&mdash;The ContextMenu displays hierarchical lists of items in a popup.
+* [Accessibility]({% slug accessibility_aspnetcore_menu %})&mdash;The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Security trimming]({% slug securitytrimming_menu_aspnetmvc %})&mdash;The built-in security trimming functionality of the Menu is enabled by default.
+* [Events]({% slug events_menu %})&mdash;The Menu emits various events that allow you to control what happens when the user interacts with it.
 
-## Events
+## Next Steps
 
-You can subscribe to all Menu events. For a complete example on basic Menu events, refer to the [demo on using the events of the Menu](https://demos.telerik.com/{{ site.platform }}/menu/events).
-
-### Handling by Handler Names
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-@(Html.Kendo().Menu()
-        .Name("menu")
-        .Events(e => e
-            .Open("menu_open")
-            .Close("menu_close")
-        )
-)
-<script>
-    function menu_close() {
-        // Handle the close event.
-    }
-
-    function menu_open() {
-        // Handle the open event.
-    }
-</script>
-```
-
-### Handling by Template Delegates
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-@(Html.Kendo().Menu()
-    .Name("menu")
-    .Events(e => e
-        .Open(@<text>
-            function() {
-                // Handle the open event inline.
-            }
-        </text>)
-        .Close(@<text>
-            function() {
-                // Handle the close event inline.
-            }
-        </text>)
-    )
-)
-```
-
-### Handling by HTML Attributes
-
-The following example demonstrates how to subscribe to the `select` event of a single Menu item.
-
-```HtmlHelper
-@(Html.Kendo().Menu()
-    .Name("menu")
-    .Items(items =>
-    {
-        items.Add().Text("First Item");
-        items.Add().Text("Second Item").HtmlAttributes(new { @onclick = "alert('select');" });
-    })
-)
-```
-
-## See Also
-
-* [Basic Usage of the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu)
+* [Getting Started with the Menu]({% slug menu_getting_started %})
+* [Basic Usage of the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/index)
 {% if site.core %}
 * [Basic Usage of the Menu TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/tag-helper)
 {% endif %}
-* [Using the API of the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/api)
-* [Server-Side API](/api/menu)
+
+## See Also
+
+* [Using the API of the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/api)
+* [Knowledge Base Section](/knowledge-base)

@@ -39,3 +39,7 @@ Starting with R1 2023 the tools in the ToolBar are actual widget instances (inst
 Starting with R1 2023 the ToolBar buttons will always be rendered as `<button>` elements (instead of `<a>`) unless they have a `url` configured in their options. If a `url` is present, those will be rendered as links (`<a>`).
 
 Starting with R1 2023 the ToolBar no longer requires its custom tools to be registered. To explore the new simplified way of defining custom tools in the ToolBar, refer to the [Custom Tools]({% slug custom_tools_kendoui_toolbar %}) documentation article.
+
+**ToolBar**
+
+Starting with R1 2023 the default tools in the Home Tab of the Spreadsheet ToolBar have been re-arranged. The new order and grouping aims to better mimic the order of the tools present in MS Excel. In also offers better logical grouping of similar tools in available in the Spreadsheet.

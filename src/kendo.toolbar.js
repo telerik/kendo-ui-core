@@ -747,7 +747,13 @@ var __meta__ = {
             if (overflowTemplate && this.overflowMenu) {
                 overflowTemplate = isFunction(overflowTemplate) ? overflowTemplate(options)[0] : overflowTemplate;
                 this.overflowMenu.append({});
-                menuitem = this.overflowMenu.element.find(DOT + MENU_ITEM).last().find(DOT + MENU_LINK).html(overflowTemplate).parent();
+                menuitem = this.overflowMenu.element
+                    .find(DOT + MENU_ITEM)
+                    .last()
+                    .addClass(STATE_HIDDEN)
+                    .find(DOT + MENU_LINK)
+                    .html(overflowTemplate)
+                    .parent();
             }
 
             if (element) {

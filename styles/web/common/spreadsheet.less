@@ -749,19 +749,8 @@ div.k-spreadsheet-window {
 .k-spreadsheet-toolbar {
     border-width: 0;
 
-    > .k-widget {
-        &[data-property='fontSize'] { width: 75px; }
-        &[data-property='format'] { width: 100px; }
-        &[data-property='fontFamily'] { width: 130px; }
-    }
-
-    [data-tool=alignment],
-    [data-tool=backgroundColor],
-    [data-tool=borders],
-    [data-tool=freeze],
-    [data-tool=merge],
-    [data-tool=textColor] {
-        width: auto;
+    > [data-property='fontSize'] {
+        width: 7em;
     }
 }
 
