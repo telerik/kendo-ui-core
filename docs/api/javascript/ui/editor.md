@@ -2519,7 +2519,7 @@ Only applicable for the formatting tool. Specifies the context in which the opti
 
 ### tools.palette `String|Array` *(default: null)*
 
-Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools.
+Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools. If you need to use the [color gradient](api/javascript/ui/colorgradient) view in the picker instead of the palette, set this value to null.
 
 #### Example - "websafe" palette
 
@@ -2541,6 +2541,18 @@ Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palet
         tools: [{
             name: "backColor",
             palette: ["#f0d0c9", "#e2a293", "#d4735e", "#65281a"]
+        }]
+    });
+    </script>
+
+#### Example - use gradient
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: [{
+            name: "backColor",
+            palette: null
         }]
     });
     </script>

@@ -47,7 +47,7 @@ The Telerik UI Catpcha server-side provider creates an audio file based on the c
     ```
 
 1. Use the CaptchaHelper.SpeakText() method to create a [wav](https://docs.fileformat.com/audio/wav/) File. Return it to the client-side.
-
+    {% if site.mvc %}
     ```
     public ActionResult Audio(string captchaId)
     {
@@ -63,6 +63,23 @@ The Telerik UI Catpcha server-side provider creates an audio file based on the c
         return File(bmpBytes, "audio/wav");
     }
     ```
+    {% else %}
+    ```
+    public ActionResult Audio(string captchaId)
+    {
+        var sessionValue = HttpContext.Session.GetString("captcha_" + captchaId);
+        CaptchaImage captcha = JsonConvert.DeserializeObject<CaptchaImage>(sessionValue);
+
+        byte[] bmpBytes;
+
+        using (MemoryStream audio = CaptchaHelper.SpeakText(captcha))
+        {
+            bmpBytes = audio.ToArray();
+        }
+        return File(bmpBytes, "audio/wav");
+    }
+    ```
+    {% endif %}
 
 1. The Telerik UI Captcha starts the voice-over of the image after the user clicks the `audio` button.
 

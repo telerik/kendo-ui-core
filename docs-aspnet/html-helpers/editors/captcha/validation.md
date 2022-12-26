@@ -48,7 +48,9 @@ To generate CAPTCHAs and validate the user's input, the Telerik UI Captcha depen
         var image = CaptchaHelper.RenderCaptcha(newCaptcha);
         image.Save(Path.Combine(CaptchaPath, newCaptcha.UniqueId + ".png"), ImageFormat.Png);
 
-        HttpContext.Session.SetString("captcha_" + newCaptcha.UniqueId, newCaptcha.Text);
+        var key = newCaptcha.UniqueId;
+        var value = JsonConvert.SerializeObject(newCaptcha);
+        HttpContext.Session.SetString("captcha_" + key, value);
 
         return newCaptcha;
     }

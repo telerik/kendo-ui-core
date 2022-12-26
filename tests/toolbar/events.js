@@ -859,16 +859,18 @@
             }
         });
 
-        it("navigates to the specified url on click", function() {
-            container.kendoToolBar({
-                items: [
-                    { type: "button", id: "foo", text: "foo", url: "#foo" }
-                ]
+        if (!kendo.support.browser.mozilla) {
+            it("navigates to the specified url on click", function() {
+                container.kendoToolBar({
+                    items: [
+                        { type: "button", id: "foo", text: "foo", url: "#foo" }
+                    ]
+                });
+
+            container.find("#foo")[0].click();
+
+                assert.isOk(window.location.href.indexOf("#foo") !== -1);
             });
-
-           container.find("#foo")[0].click();
-
-            assert.isOk(window.location.href.indexOf("#foo") !== -1);
-        });
+        }
     });
 }());

@@ -115,5 +115,6 @@ The Grid provides options for visualizing the relations between parent and child
 ## See Also
 
 * [Hierarchy by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/hierarchy)
+* [Using Nested Component for Editor in Child Grid](https://docs.telerik.com/aspnet-mvc/knowledge-base/grid-hierarchy-editor-limitation)
 * [Grid Hierarchy with Local Data]({% slug grid-hierarchy-localdata %})
 * [Server-Side API](/api/grid)
