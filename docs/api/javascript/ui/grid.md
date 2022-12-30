@@ -2798,6 +2798,8 @@ so the two should not be used at the same time.
 
 If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page. The [`change`](/api/javascript/ui/grid/events/change) event is fired when a row is selected.
 
+> Setting the [`columns.selectable`](/api/javascript/ui/grid/configuration/columns.selectable) to `true` overrides the [`selectable.mode`](/api/javascript/ui/grid/configuration/selectable.mode) configuration property if it is set to `"single"`.
+
 More about the Grid Selection feature you can find in [this documentation article](/controls/data-management/grid/selection).
 
 #### Example - enable multi-row selection by adding a select column with checkboxes

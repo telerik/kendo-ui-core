@@ -124,4 +124,4 @@ The following example demonstrates a sample filter submitted by the StockChart f
 ## See Also
 
 * [Basic Usage of the StockChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial/index)
-* [Server-Side API](/api/stockchart)
+* [Server-Side API of the StockChart for {{ site.framework }}](/api/stockchart)

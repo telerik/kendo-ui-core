@@ -10,7 +10,7 @@ position: 8
 
 By default, the selection functionality of the Telerik UI Grid for {{ site.framework }} is disabled.
 
-> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
+> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#changesystemstring) event will now be fired only when the Grid performs selection or deselection.
 
 ## Getting Started
 
@@ -37,7 +37,9 @@ The Grid supports the following select modes:
 * [Single and multiple selection (demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection)
 * [Checkbox selection (demo)](https://demos.telerik.com/{{ site.platform }}/grid/checkbox-selection)
 
-You can set the select mode to `Multiple` or `Single`. Additionally, the Grid provides the `Row` and `Cell` select types which allow multiple or single selection of rows or cells.
+You can set the select mode of the Grid to `Multiple` or `Single`. Additionally, the component provides the `Row` and `Cell` select types which allow multiple or single selection of rows or cells.
+
+> If the [`Selectable.Mode`] configuration property is set to `GridSelectionMode.Single`, configuring the [`Select`](/api/Kendo.Mvc.UI.Fluent/GridColumnFactory#select) column of the Grid overrides [`Selectable.Mode`] and sets the selection mode to `Multiple`. 
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -55,9 +57,9 @@ You can set the select mode to `Multiple` or `Single`. Additionally, the Grid pr
 ```
 {% endif %}
 
-## Drag to Select
+## Dragging to Select
 
-The Grid allows conditional drag to select when multiple selection is configured for rows or cells through the `DragToSelect` property.
+The Grid allows you to conditionally drag to select when the multiple selection mode is configured for rows or cells through the `DragToSelect` property.
 
 ```HtmlHelper
         @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -103,9 +105,9 @@ The Grid also provides a built-in functionality for persisting the selection thr
 ```
 {% endif %}
 
-## Getting Selected Rows Data
+## Getting Selected Row Data
 
-To get data from the selected rows, use the `Change` event of the Grid
+To get data from the selected rows, use the `Change` event of the Grid:
 
 1. Specify the name of the JavaScript function which will handle the event.
 
@@ -141,4 +143,4 @@ To get data from the selected rows, use the `Change` event of the Grid
 * [Multiple Selection by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection)
 * [Checkbox Selection by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/checkbox-selection)
 * [Persisting the State of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/persist-state)
-* [Server-Side API](/api/grid)
+* [Server-Side API of the Grid for {{ site.framework }}](/api/grid)

@@ -180,4 +180,4 @@ To disable clipping, set the `Panes.Clip` setting to `false`:
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
-* [Server-Side API](/api/chart)
+* [Server-Side API of the Chart for {{ site.framework }}](/api/chart)
