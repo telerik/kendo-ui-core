@@ -189,6 +189,13 @@ The following table lists the individual script files for the Kendo UI component
 | | kendo.html.base.js | |
 | | kendo.html.button.js | |
 | | kendo.numerictextbox.js | |
+| [Signature](https://demos.telerik.com/kendo-ui/signature/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.drawing.js | |
+| | kendo.signature-pad.js | |
+| | kendo.dialog.js | |
+| | kendo.html.button.js | |
+| | kendo.signature.js | |
 | [Slider](https://demos.telerik.com/kendo-ui/slider/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
