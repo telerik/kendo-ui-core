@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview
+page_title: Chat Overview
 description: "Learn the basics when working with the Telerik UI Chat component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/chat, /helpers/conversational-ui/chat/overview
 slug: htmlhelpers_chat_aspnetcore
@@ -86,5 +86,5 @@ The Chat provides an option for creating a [Peer-to-Peer Chat application by usi
 
 ## See Also
 
-* [Basic Usage of the Chat component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/index)
-* [Server-Side API](/api/chat)
+* [Basic Usage of the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/index)
+* [Server-Side API of the Chat for {{ site.framework }}](/api/chat)

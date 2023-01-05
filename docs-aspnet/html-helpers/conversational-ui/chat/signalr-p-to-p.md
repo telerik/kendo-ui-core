@@ -364,4 +364,4 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 ## See Also
 
 * [Basic Usage of the Chat HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/index)
-* [Server-Side API](/api/chat)
+* [Server-Side API of the Chat for {{ site.framework }}](/api/chat)
