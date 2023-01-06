@@ -434,11 +434,12 @@ The [template](/api/javascript/kendo/methods/template) used to render the fixed 
 
     <input id="customers" style="width: 400px" />
     <script>
+        let encode = kendo.htmlEncode;
         $(document).ready(function() {
             $("#customers").kendoDropDownList({
                 dataTextField: "ContactName",
                 dataValueField: "CustomerID",
-                fixedGroupTemplate: "Fixed group: #: data #",
+                fixedGroupTemplate: (data) => `Fixed group: ${encode(data)}`,
                 height: 400,
                 dataSource: {
                     type: "odata",
@@ -465,6 +466,7 @@ The widget instance.
 
     <input id="dropdownlist" />
     <script>
+    let encode = kendo.htmlEncode;
     $("#dropdownlist").kendoDropDownList({
       dataSource: [
         { id: 1, name: "Apples" },
@@ -472,7 +474,7 @@ The widget instance.
       ],
       dataTextField: "name",
       dataValueField: "id",
-      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+      footerTemplate: ({ instance }) => `Total <strong>${encode(instance.dataSource.total())}</strong> items found`
     });
     </script>
 
@@ -582,11 +584,12 @@ The [template](/api/javascript/kendo/methods/template) used to render the groups
 
     <input id="customers" style="width: 400px" />
     <script>
+        let encode = kendo.htmlEncode;
         $(document).ready(function() {
             $("#customers").kendoDropDownList({
                 dataTextField: "ContactName",
                 dataValueField: "CustomerID",
-                groupTemplate: "Group: #: data #",
+                groupTemplate: (data) => `Group: ${encode(data)}`,
                 height: 400,
                 dataSource: {
                     type: "odata",
@@ -988,16 +991,11 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 The [template](/api/javascript/kendo/methods/template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
-#### Example - specify template as a function
+#### Example - specify template as a string literal
 
     <input id="dropdownlist" />
-    <script id="template" type="text/x-kendo-template">
-      <span>
-        <img src="/img/#: id #.png" alt="#: name #" />
-        #: name #
-      </span>
-    </script>
     <script>
+    let encode = kendo.htmlEncode;
     $("#dropdownlist").kendoDropDownList({
       dataSource: [
         { id: 1, name: "Apples" },
@@ -1005,22 +1003,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the items.
       ],
       dataTextField: "name",
       dataValueField: "id",
-      template: kendo.template($("#template").html())
-    });
-    </script>
-
-#### Example - specify template as a string
-
-    <input id="dropdownlist" />
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      template: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>'
+      template: ({ id, name }) => `<span><img src="/img/${id}.png" alt="${name}" />${name}</span>`
     });
     </script>
 
@@ -1028,13 +1011,11 @@ The [template](/api/javascript/kendo/methods/template) used to render the items.
 
 The [valueTemplate](/api/javascript/kendo/methods/template) used to render the selected value. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
-#### Example - specify valueTemplate as a function
+#### Example - specify template as a string literal
 
     <input id="dropdownlist" />
-    <script id="valueTemplate" type="text/x-kendo-template">
-        <strong>#: name #</strong>
-    </script>
     <script>
+    let encode = kendo.htmlEncode;
     $("#dropdownlist").kendoDropDownList({
       dataSource: [
         { id: 1, name: "Apples" },
@@ -1042,22 +1023,7 @@ The [valueTemplate](/api/javascript/kendo/methods/template) used to render the s
       ],
       dataTextField: "name",
       dataValueField: "id",
-      valueTemplate: kendo.template($("#valueTemplate").html())
-    });
-    </script>
-
-#### Example - specify template as a string
-
-    <input id="dropdownlist" />
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      valueTemplate: '<strong>#: name #</strong>'
+      valueTemplate: ({ name }) => '<strong>${encode(name)}</strong>'
     });
     </script>
 
@@ -1173,7 +1139,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
     <script>
         $(document).ready(function() {
             $("#orders").kendoDropDownList({
-                template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
+                template: ({ OrderID, ShipName, ShipCountry }) => `<span class="order-id">${OrderID}</span> ${ShipName}, ${ShipCountry}`,
                 dataTextField: "ShipName",
                 dataValueField: "OrderID",
                 filter: "contains",

@@ -19,6 +19,7 @@ import "./kendo.sortable.js";
 import "./kendo.selectable.js";
 import "./kendo.badge.js";
 import "./kendo.button.js";
+import "./kendo.buttongroup.js";
 import "./kendo.bottomnavigation.js";
 import "./kendo.pager.js";
 import "./kendo.popup.js";

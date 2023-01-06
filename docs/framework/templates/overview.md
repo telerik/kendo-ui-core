@@ -3,7 +3,7 @@ title: Overview
 page_title: Templates Overview - Kendo UI Templates
 description: "Learn how to use HTML encoding and compilation in the Kendo UI for jQuery Templates component."
 slug: overview_kendoui_templatescomponent
-position: 1
+position: 0
 ---
 
 # {{ site.product }} Templates Overview
@@ -22,6 +22,7 @@ The Kendo UI Templates focus on providing essential templating features for comm
 
 ## Next Steps 
 
+* [Getting Started with Content Security Policy (CSP-Compatible) Templates]({% slug csp_templates %})
 * [Getting Started with Inline Templates]({% slug getting_started_inline_templates %})
 * [Getting Started with External Templates]({% slug getting_started_external_templates %})
 * [Templates Essentials]({% slug essentials_templates %})

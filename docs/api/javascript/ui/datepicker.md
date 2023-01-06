@@ -101,7 +101,7 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
-### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
+### ARIATemplate `String`*(default: "Current focused ${valueType} is ${text}")*
 
  Specifies a template used to populate the value of the aria-label attribute of the currently focused cell of the calendar. The parameters available for the template are:
 
@@ -114,7 +114,7 @@ The duration of the open animation in milliseconds.
     <input id="datepicker" />
     <script>
     $("#datepicker").kendoDatePicker({
-        ARIATemplate: "Date: #=kendo.toString(data.current, 'G')#"
+        ARIATemplate: ({ current }) => `Date: ${kendo.toString(current, 'G')}`
     });
     </script>
 
@@ -179,15 +179,11 @@ Specifies a list of dates, which will be passed to the [month content](/api/java
 
     <input id="datepicker" />
 
-    <script id="cell-template" type="text/x-kendo-template">
-      <span class="#= isInArray(data.date, data.dates) ? 'party' : '' #">#= data.value #</span>
-    </script>
-
     <script>
       $("#datepicker").kendoDatePicker({
         value: new Date(2000, 10, 1),
         month: {
-          content: $("#cell-template").html()
+          content: ({ date, dates, value }) => `<span class="${isInArray(date, dates) ? 'party' : '' }">${value}</span>`
         },
         dates: [
           new Date(2000, 10, 10),
@@ -283,24 +279,12 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
-#### Example - specify footer template as a function
-
-    <input id="datepicker" />
-    <script id="footer-template" type="text/x-kendo-template">
-        Today - #: kendo.toString(data, "d") #
-    </script>
-    <script>
-    $("#datepicker").kendoDatePicker({
-        footer: kendo.template($("#footer-template").html())
-    });
-    </script>
-
-#### Example - specify footer template as a string
+#### Example - specify footer template as a string literal
 
     <input id="datepicker" />
     <script>
     $("#datepicker").kendoDatePicker({
-        footer: "Today - #: kendo.toString(data, 'd') #"
+        footer: (data) => `Today - ${kendo.htmlEncode(kendo.toString(data, 'd'))}`
     });
     </script>
 
@@ -481,7 +465,7 @@ Templates for the cells rendered in the calendar "month" view.
 
 The template to be used for rendering the cells in "month" view, which are between the min/max range.
 
-#### Example - specify cell template as a string
+#### Example - specify cell template as a string literal
 
     <style>
       .exhibition{color:blue}
@@ -490,14 +474,10 @@ The template to be used for rendering the cells in "month" view, which are betwe
 
     <input id="datepicker" />
 
-    <script id="cell-template" type="text/x-kendo-template">
-        <span class="#= data.value < 10 ? 'exhibition' : 'party' #">#= data.value #</span>
-    </script>
-
     <script>
     $("#datepicker").kendoDatePicker({
         month: {
-           content: $("#cell-template").html()
+           content: (data) => `<span class="${data.value < 10 ? 'exhibition' : 'party'}">${data.value}</span>`
         }
     });
     </script>
@@ -522,14 +502,12 @@ The template to be used for rendering the cells in "month" view, which are betwe
     <body>
 
     <input id="datepicker1" />
-    <script id="week-template" type="text/x-kendo-template">
-       <a class="italic">#= data.weekNumber #</a>
-    </script>
+
     <script>
       $("#datepicker1").kendoDatePicker({
         weekNumber: true,
         month: {
-          weekNumber: $("#week-template").html()
+          weekNumber: ({ weekNumber }) => `<a class="italic">${weekNumber}</a>`
         }
       });
     </script>
@@ -555,7 +533,7 @@ The template used for rendering cells in the "month" view, which are outside the
     <script>
     $("#datepicker2").kendoDatePicker({
         month: {
-           empty: '<span style="color:\\#ccc;padding:0 .45em 0 .1em;">#= data.value #</span>'
+           empty: ({ value }) => `<span style="color:#ccc;padding:0 .45em 0 .1em;">${value}</span>`
         }
     });
     </script>

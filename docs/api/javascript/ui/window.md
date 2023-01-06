@@ -277,7 +277,7 @@ If the URL contains a protocol, set `iframe` to `false`. Otherwise, the JSON res
         url: "/userDetails",
         dataType: "json",
         iframe: false,
-        template: "User name: #= data.username #"
+        template: ({ username }) => `User name: ${username}`
       }
     });
     </script>

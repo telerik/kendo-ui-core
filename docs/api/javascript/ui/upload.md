@@ -804,33 +804,13 @@ The `template` data `Array` consists of:
 > * To render an action button for each file, add the following markup to the template: `<button type='button' class='k-upload-action'></button><button type='button' class='k-upload-action'></button>`.
 > * To use the default progress-bar, add the following markup at the beginning of the template: `<span class='k-progress'></span>`. Then, render the rest of the template that relates to it. For a live demo, refer to the example on the [Upload templates](https://demos.telerik.com/kendo-ui/web/upload/templates.html).
 
-#### Example - specifying the template as a function
-
-    <input type="file" name="files" id="upload" />
-    <script id="fileTemplate" type="text/x-kendo-template">
-        <div>
-            <p>Name: #=name#</p>
-            <p>Size: #=size# bytes</p>
-            <p>Extension: #=files[0].extension#</p>
-            <strong class='k-upload-status'>
-                <button type='button' class='k-upload-action'></button>
-                <button type='button' class='k-upload-action'></button>
-            </strong>
-        </div>
-    </script>
-    <script>
-        $("#upload").kendoUpload({
-            template: kendo.template($('#fileTemplate').html())
-        });
-    </script>
-
-#### Example - specifying the template as a string
+#### Example - specifying the template as a string literal
 
     <input type="file" name="files" id="upload" />
     <script>
         $("#upload").kendoUpload({
-        template: "<div><p>Name: #=name#</p>" +
-                  "<p>Size: #=size# bytes</p><p>Extension: #=files[0].extension#</p>" +
+        template: ({ name, size, files }) => `<div><p>Name: ${name}</p>` +
+                  `<p>Size: ${size} bytes</p><p>Extension: ${files[0].extension}</p>` +
                   "<strong class='k-upload-status'>" +
                   "<button type='button' class='k-upload-action'></button>" +
                   "<button type='button' class='k-upload-action'></button>" +
@@ -997,16 +977,12 @@ Visually removes a file by its ID from the UI without issuing requests to the `r
     <input name="files" id="files" type="file" />
     <button id="clearSelected" class="k-button">Clear all checked</button>
 
-    <script id="fileTemplate" type="text/x-kendo-template">
-       <span class='k-progress'></span>
-       <input id='#=files[0].uid#' type='checkbox' class='k-checkbox' />
-       <label for='#=files[0].uid#' class='k-checkbox-label'>Filename: #=name#</label>
-    </script>
-
     <script>
       $(document).ready(function() {
         $("#files").kendoUpload({
-          template: $("#fileTemplate").html()
+          template: ({ files, name }) => "<span class='k-progress'></span>" +
+          `<input id='${files[0].uid}' type='checkbox' class='k-checkbox k-checkbox-md' />` +
+          `<label for='${files[0].uid}' class='k-checkbox-label'>Filename: ${name}</label>`
         });
 
         $("#clearSelected").on('click', function(e){
@@ -1289,16 +1265,12 @@ Removes a file by its ID by sending a standard `remove` request to the handler.
     <input name="files" id="files" type="file" />
     <button id="removeSelected" class="k-button">Remove all checked</button>
 
-    <script id="fileTemplate" type="text/x-kendo-template">
-       <span class='k-progress'></span>
-       <input id='#=files[0].uid#' type='checkbox' class='k-checkbox' />
-       <label for='#=files[0].uid#' class='k-checkbox-label'>Filename: #=name#</label>
-    </script>
-
     <script>
       $(document).ready(function() {
         $("#files").kendoUpload({
-          template: $("#fileTemplate").html(),
+          template: ({ files, name }) => "<span class='k-progress'></span>" +
+          `<input id='${files[0].uid}' type='checkbox' class='k-checkbox k-checkbox-md' />` +
+          `<label for='${files[0].uid}' class='k-checkbox-label'>Filename: ${name}</label>`,
           async: {
             autoUpload: false,
             saveUrl: "http://my-app.localhost/save",

@@ -26,7 +26,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the validat
 
     <script>
         $("#myform").kendoValidator({
-            errorTemplate: "<span>#=message#</span>"
+            errorTemplate: ({ message }) => `<span>${message}</span>`
         });
     </script>
 
@@ -161,18 +161,10 @@ The validation errors.
         <button>Validate</button>
     </form>
 
-    <script type="x/kendo-template" id="summary-template">
-        <ul>
-            #for(var i = 0; i < errors.length; i += 1){#
-                <li><a data-field="#=errors[i].field#" href="\\#">#= errors[i].message #</a></li>
-            # } #
-        </ul>
-    </script>
-
     <script>
         $("#myform").kendoValidator({
           validationSummary: {
-            template: kendo.template($("#summary-template").html())
+            template: ({ errors }) => `<ul>${errors.map(error => '<li><a data-field="' + error.field +'" href="#">' + error.message + '</a></li>')}</ul>`
           }
         });
     </script>
