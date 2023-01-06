@@ -109,7 +109,7 @@
 
         it("setting actions in options adds buttongroup container", function() {
             var dialog = createDialog({
-                actions: [{ text: "OK" }]
+                actions: [{ text: () => "OK" }]
             });
 
             assert.equal(dialog.wrapper.find(".k-dialog-buttongroup").length, 1);
@@ -117,7 +117,7 @@
 
         it("setting an acition in options adds a button", function() {
             var dialog = createDialog({
-                actions: [{ text: "OK" }]
+                actions: [{ text: () => "OK" }]
             });
 
             assert.equal(dialog.wrapper.find(".k-dialog-buttongroup > .k-button").length, 1);
@@ -126,10 +126,10 @@
         it("setting an primary acition in options adds a primary button", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK",
+                    text: () => "OK",
                     primary: true
                 }, {
-                    text: "Cancel"
+                    text: () => "Cancel"
                 }]
             });
             var wrapper = dialog.wrapper;
@@ -252,7 +252,7 @@ console.log(wrapper.find(".k-dialog-buttongroup > .k-button:first")[0]);
             var div = $("<div class='dialog' tabindex='10'>foo</div>").appendTo(Mocha.fixture);
             var dialog = div.kendoDialog({
                 closable: true,
-                actions: [{ text: "ok" }]
+                actions: [{ text: () => "ok" }]
             }).getKendoDialog();
 
             assert.equal(dialog.element.attr("tabindex"), 10);
@@ -270,7 +270,7 @@ console.log(wrapper.find(".k-dialog-buttongroup > .k-button:first")[0]);
         it("buttonLayout stretched", function() {
             var dialog = createDialog({
                 buttonLayout: "stretched",
-                actions: [{ text: "a1" }, { text: "a2" }]
+                actions: [{ text: () => "a1" }, { text: () => "a2" }]
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
@@ -281,7 +281,7 @@ console.log(wrapper.find(".k-dialog-buttongroup > .k-button:first")[0]);
         it("buttonLayout normal", function() {
             var dialog = createDialog({
                 buttonLayout: "normal",
-                actions: [{ text: "a1" }, { text: "a2" }]
+                actions: [{ text: () => "a1" }, { text: () => "a2" }]
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
@@ -328,7 +328,7 @@ console.log(wrapper.find(".k-dialog-buttongroup > .k-button:first")[0]);
         it("buttonLayout is empty string resorts to normal", function() {
             var dialog = createDialog({
                 buttonLayout: "",
-                actions: [{ text: "a1" }, { text: "a2" }]
+                actions: [{ text: () => "a1" }, { text: () => "a2" }]
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 

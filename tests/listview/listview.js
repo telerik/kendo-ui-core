@@ -6,7 +6,7 @@
 
     function setup(options) {
         options = $.extend({
-            template: "<div class='k-listview-item'></div>",
+            template: () => "<div class='k-listview-item'></div>",
             navigatable: true,
             dataSource: dataSource = new DataSource({ data: [1, 2, 3, 4, 5] })
         }, options);
@@ -16,7 +16,7 @@
     function createListView(element, userOptions) {
         var options = $.extend({
             navigatable: true,
-            template: "<div class='k-listview-item'>#= value #</div>",
+            template: (value) => `<div class='k-listview-item'>${value}</div>`,
             dataSource: dataSource = new DataSource({
                 data: [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }, { value: 5 }, { value: 6 }]
             })
@@ -124,28 +124,28 @@
         });
 
         it("altTemplate defaults to template if is not set", function() {
-            var listView = setup({ template: "<li>1</li>" }).data("kendoListView");
+            var listView = setup({ template: () => "<li>1</li>" }).data("kendoListView");
 
             assert.equal(listView.template({}), "<li>1</li>");
             assert.equal(listView.altTemplate({}), "<li>1</li>");
         });
 
         it("altTemplate defined", function() {
-            var listView = setup({ template: "<li>1</li>", altTemplate: "<li>2</li>" }).data("kendoListView");
+            var listView = setup({ template: () => "<li>1</li>", altTemplate: () => "<li>2</li>" }).data("kendoListView");
 
             assert.equal(listView.template({}), "<li>1</li>");
             assert.equal(listView.altTemplate({}), "<li>2</li>");
         });
 
         it("altTemplate is rendered", function() {
-            var dom = setup({ template: "<li>1</li>", altTemplate: "<li>2</li>", contentTemplate: "" });
+            var dom = setup({ template: () => "<li>1</li>", altTemplate: () => "<li>2</li>", contentTemplate: () => "" });
 
             assert.equal(dom.children(".k-listview-content").children().eq(0).html(), "1");
             assert.equal(dom.children(".k-listview-content").children().eq(1).html(), "2");
         });
 
         it("contentElement is rendered correctly", function() {
-            var dom = setup({ contentElement: "ul", template: "<li>1</li>", altTemplate: "<li>2</li>" });
+            var dom = setup({ contentElement: "ul", template: () => "<li>1</li>", altTemplate: () => "<li>2</li>" });
 
             assert.equal(dom.find(".k-listview-content")[0].nodeName.toLocaleLowerCase(), "ul");
         });
@@ -274,7 +274,7 @@
             assert.equal(triggered, 2);
         });
 
-        it("space key on already selected item when multiple selectoin is enabled unselects the item", function() {
+        it("space key on already selected item when multiple selection is enabled unselects the item", function() {
             var dom = setup({ selectable: "multiple" });
 
             dom.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR).press(kendo.keys.SPACEBAR, true);
@@ -370,7 +370,7 @@
         });
 
         it("resetting dataSource detaches the previouse events", function() {
-            var listView = new kendo.ui.ListView($("<ul/>").appendTo(Mocha.fixture), { template: "<li></li>" });
+            var listView = new kendo.ui.ListView($("<ul/>").appendTo(Mocha.fixture), { template: () => "<li></li>" });
 
             var dataSource = listView.dataSource;
             listView._dataSource();
@@ -384,7 +384,7 @@
         });
 
         it("resetting DataSource rebinds the widget", function() {
-            var listView = new kendo.ui.ListView($("<ul/>").appendTo(Mocha.fixture), { template: "<li></li>" });
+            var listView = new kendo.ui.ListView($("<ul/>").appendTo(Mocha.fixture), { template: () => "<li></li>" });
 
             listView.setDataSource(new kendo.data.DataSource({
                 data: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
@@ -410,13 +410,13 @@
             var listView = setup({
                 pageable: {
                     pagerId: "pager",
-                    selectTemplate: "<li>foo</li>"
+                    selectTemplate: () => "<li>foo</li>"
                 }
             })
                 .data("kendoListView");
             var pager = $("#pager").data("kendoPager");
 
-            assert.equal(pager.options.selectTemplate, "<li>foo</li>");
+            assert.equal(pager.options.selectTemplate(), "<li>foo</li>");
         });
 
         it("uid is set to item wrapper", function() {
@@ -527,7 +527,7 @@
         });
 
         it("_setContentHeight sets the height of the content when listview is scrollable", function() {
-            var lv = createListView(element, { scrollable: { endless: true }, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
+            var lv = createListView(element, { scrollable: { endless: true }, height: 400, template: (value) => `<div style='padding:100px' class='k-listview-item'>${value}</div>` });
 
             assert.equal(lv.content.height(), lv.wrapper.innerHeight());
         });
@@ -538,7 +538,7 @@
                     endless: true
                 },
                 height: 400,
-                template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>"
+                template: (value) => `<div style='padding:100px' class='k-listview-item'>${value}</div>`
             });
 
             var lvStub = stub(lv, {
@@ -551,7 +551,7 @@
         });
 
         it("refresh calls _setContentHeight", function() {
-            var lv = createListView(element, { scrollable: { endless: true }, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
+            var lv = createListView(element, { scrollable: { endless: true }, height: 400, template: (value) => `<div style='padding:100px' class='k-listview-item'>${value}</div>` });
 
             var lvStub = stub(lv, {
                 _setContentHeight: $.noop

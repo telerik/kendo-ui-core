@@ -131,7 +131,7 @@
     it("MultiSelect hides popup if no data", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select, {
-            noDataTemplate: ""
+            noDataTemplate: null
         });
 
         multiselect.wrapper.click();

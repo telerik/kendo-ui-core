@@ -1,4 +1,5 @@
 import "./kendo.core.js";
+import { filterExprNoEval } from "./data/filter-expression-no-eval.js";
 import "./kendo.data.odata.js";
 import "./kendo.data.xml.js";
 
@@ -1276,7 +1277,13 @@ var __meta__ = {
         this.data = data || [];
     }
 
-    Query.filterExpr = function(expression) {
+    // Continue to support legacy unsafe-eval for the spreadsheet
+    Query.filterExpr = function(expression, options = { noEval: false }) {
+        if (options.noEval) {
+            // using no-eval for most cases
+            return filterExprNoEval(expression);
+        }
+
         var expressions = [],
             logic = { and: " && ", or: " || " },
             idx,
@@ -1592,16 +1599,9 @@ var __meta__ = {
         },
 
         filter: function(expressions) {
-            var idx,
-            current,
-            length,
-            compiled,
-            predicate,
+            var compiled,
             data = this.data,
-            fields,
-            operators,
-            result = [],
-            filter;
+            result = [];
 
             expressions = normalizeFilter(expressions);
 
@@ -1609,27 +1609,9 @@ var __meta__ = {
                 return this;
             }
 
-            compiled = Query.filterExpr(expressions);
-            fields = compiled.fields;
-            operators = compiled.operators;
+            compiled = Query.filterExpr(expressions, { noEval: true });
 
-            predicate = filter = new Function("d, __f, __o", "return " + compiled.expression);
-
-            if (fields.length || operators.length) {
-                filter = function(d) {
-                    return predicate(d, fields, operators);
-                };
-            }
-
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                current = data[idx];
-
-                if (filter(current)) {
-                    result.push(current);
-                }
-            }
-
+            result = data.filter(compiled);
             return new Query(result);
         },
 
@@ -6183,10 +6165,6 @@ var __meta__ = {
 
         _markHierarchicalQuery: function(expressions) {
             var compiled;
-            var predicate;
-            var fields;
-            var operators;
-            var filter;
             var accentFoldingFiltering = this.options.accentFoldingFiltering;
 
             expressions = accentFoldingFiltering ? $.extend({}, normalizeFilter(expressions), { accentFoldingFiltering: accentFoldingFiltering }) : normalizeFilter(expressions);
@@ -6196,19 +6174,9 @@ var __meta__ = {
                 return false;
             }
 
-            compiled = Query.filterExpr(expressions);
-            fields = compiled.fields;
-            operators = compiled.operators;
+            compiled = Query.filterExpr(expressions, { noEval: true });
 
-            predicate = filter = new Function("d, __f, __o", "return " + compiled.expression);
-
-            if (fields.length || operators.length) {
-                filter = function(d) {
-                    return predicate(d, fields, operators);
-                };
-            }
-
-            this._updateHierarchicalFilter(filter);
+            this._updateHierarchicalFilter(compiled);
             return true;
         },
 

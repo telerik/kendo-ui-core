@@ -83,8 +83,8 @@
             it("DropDownList with templates has accessible popup", function(done) {
                 var ddl = new DropDownList(input, {
                     dataSource: ["Item"],
-                    footerTemplate: 'Total items found',
-                    headerTemplate: 'Total items found',
+                    footerTemplate: () => 'Total items found',
+                    headerTemplate: () => 'Total items found',
                     animation: false
                 });
 

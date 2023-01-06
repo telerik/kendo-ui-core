@@ -39,7 +39,7 @@ import "../kendo.core.js";
         },
         options: {
             name: "ColorSelector",
-            ARIATemplate: 'Current selected color is #=data || "none"#',
+            ARIATemplate: (data) => `Current selected color is ${data || "none"}`,
             value: null,
             _standalone: true
         },

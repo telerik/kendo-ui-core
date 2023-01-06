@@ -440,7 +440,7 @@
 
         it("MultiSelect opens popup if noDataTemplate", function() {
             popuplateSelect();
-            var multiselect = new MultiSelect(select, { noDataTemplate: "no data" });
+            var multiselect = new MultiSelect(select, { noDataTemplate: () => "no data" });
 
             multiselect.open();
 
@@ -591,8 +591,9 @@
                 dataTextField: "anotherName"
             });
 
+            var result = multiselect.listView.options.template({ anotherName: "abc" });
 
-            assert.equal(multiselect.listView.options.template, "#:data.anotherName#");
+            assert.equal(result, "abc");
         });
 
         it("setOptions updates placeholder", function() {
@@ -629,17 +630,17 @@
         it("setOptions method updates footer template", function() {
             var multiselect = new MultiSelect(select, {});
 
-            multiselect.setOptions({ footerTemplate: "footer" });
+            multiselect.setOptions({ footerTemplate: () => "footer" });
 
             assert.equal(multiselect.footer.html(), "footer");
         });
 
         it("setOptions method hides footer template", function() {
             var multiselect = new MultiSelect(select, {
-                footerTemplate: "footer"
+                footerTemplate: () => "footer"
             });
 
-            multiselect.setOptions({ footerTemplate: "" });
+            multiselect.setOptions({ footerTemplate: null });
 
             assert.equal(multiselect.footer, null);
         });
@@ -647,28 +648,28 @@
         it("setOptions method updates header template", function() {
             var multiselect = new MultiSelect(select, {});
 
-            multiselect.setOptions({ headerTemplate: "<div>header</div>" });
+            multiselect.setOptions({ headerTemplate: () => "<div>header</div>" });
 
             assert.equal(multiselect.header.html(), "header");
         });
 
         it("setOptions method hides footer template", function() {
             var multiselect = new MultiSelect(select, {
-                headerTemplate: "header"
+                headerTemplate: () => "header"
             });
 
-            multiselect.setOptions({ headerTemplate: "" });
+            multiselect.setOptions({ headerTemplate: () => "" });
 
             assert.equal(multiselect.header, null);
         });
 
         it("setOptions re-renders noDataTemplate", function() {
             var multiselect = new MultiSelect(select, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             multiselect.setOptions({
-                noDataTemplate: "no data"
+                noDataTemplate: () => "no data"
             });
 
             assert.equal(multiselect.noData.text(), "no data");
@@ -676,7 +677,7 @@
 
         it("setOptions removes noData template", function() {
             var multiselect = new MultiSelect(select, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             multiselect.setOptions({

@@ -12,8 +12,8 @@
         }
 
         options = $.extend({
-            template: "<div class='k-listview-item'>${foo}</div>",
-            editTemplate: "<li class='k-listview-item'><input value='${foo}' /></li>",
+            template: ({ foo }) => `<div class='k-listview-item'>${foo}</div>`,
+            editTemplate: ({ foo }) => `<li class='k-listview-item'><input value='${foo}' /></li>`,
             scrollable: "endless",
             height: 50,
             dataSource: dataSource = new DataSource({

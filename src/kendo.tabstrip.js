@@ -65,22 +65,19 @@ var __meta__ = {
         ARIA_LABELLEDBY = "aria-labelledby",
 
         templates = {
-            content: template(
-                "<div class='k-tabstrip-content k-content' #= contentAttributes(data) # tabindex='0'>#= content(item) #</div>"
-            ),
-            itemWrapper: template(
-                "<#= tag(item) # class='k-link' #= contentUrl(item) # #= textAttributes(item) #>" +
-                    "#= image(item) ##= sprite(item) ##= text(item) #" +
-                "</#= tag(item) #>"
-            ),
-            item: template(
-                "<li class='#= wrapperCssClass(group, item) #' role='tab' #=item.active ? \"aria-selected='true'\" : ''#>" +
-                    "#= itemWrapper(data) #" +
-                "</li>"
-            ),
-            image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
-            sprite: template("<span class='k-sprite #= spriteCssClass #'></span>"),
-            empty: template("")
+            content: (data) =>
+                `<div class='k-tabstrip-content k-content' ${data.contentAttributes(data)} tabindex='0'>${data.content(data.item)}</div>`,
+            itemWrapper: ({ tag, item , contentUrl, textAttributes, image, sprite, text }) =>
+                `<${tag(item)} class='k-link' ${contentUrl(item)} ${textAttributes(item)}>` +
+                    `${image(item)}${sprite(item)}${text(item)}` +
+                `</${tag(item)}>`,
+            item: (data) =>
+                `<li class='${data.wrapperCssClass(data.group, data.item)}' role='tab' ${data.item.active ? "aria-selected='true'" : ''}>` +
+                    `${data.itemWrapper(data)}` +
+                "</li>",
+            image: ({ imageUrl }) => `<img class='k-image' alt='' src='${imageUrl}' />`,
+            sprite: ({ spriteCssClass }) => `<span class='k-sprite ${spriteCssClass}'></span>`,
+            empty: () => ""
         },
 
         rendering = {

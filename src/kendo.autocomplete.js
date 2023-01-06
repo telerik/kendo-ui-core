@@ -23,6 +23,7 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
+        encode = kendo.htmlEncode,
         support = kendo.support,
         caret = kendo.caret,
         activeElement = kendo._activeElement,
@@ -153,8 +154,8 @@ var __meta__ = {
             enabled: true,
             suggest: false,
             template: "",
-            groupTemplate: "#:data#",
-            fixedGroupTemplate: "#:data#",
+            groupTemplate: (data) => encode(data),
+            fixedGroupTemplate: (data) => encode(data),
             dataTextField: "",
             minLength: 1,
             enforceMinLength: false,

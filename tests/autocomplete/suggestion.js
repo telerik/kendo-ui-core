@@ -254,7 +254,7 @@ it("suggestion appends only the rest of the text (filter:contains)", function(do
 it("suggestion should use dataItem.text instead of li.text()", function() {
     var autocomplete = new AutoComplete(input, {
             dataSource: ["foo", "bar"],
-            template: "#=data#<span>List:</span>#=data#"
+            template: (data) => `${data}<span>List:</span>${data}`
         });
 
     input.focus();

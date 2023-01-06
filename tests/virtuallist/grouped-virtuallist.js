@@ -57,7 +57,7 @@
                 autoBind: false,
                 height: CONTAINER_HEIGHT,
                 dataSource: asyncDataSource,
-                template: "#:text#",
+                template: ({ text }) => kendo.htmlEncode(text),
                 dataValueField: "value"
             };
         });

@@ -13,6 +13,7 @@ var __meta__ = {
         ui = kendo.ui,
         keys = kendo.keys,
         extend = $.extend,
+        encode = kendo.htmlEncode,
         each = $.each,
         isArray = Array.isArray,
         template = kendo.template,
@@ -287,7 +288,7 @@ var __meta__ = {
             autoBind: true,
             loadOnDemand: true,
             expandMode: "multiple",
-            template: "",
+            template: null,
             dataTextField: null
         },
 
@@ -352,65 +353,61 @@ var __meta__ = {
               if (options.template && typeof options.template == STRING) {
                     options.template = template(options.template);
               } else if (!options.template) {
-                     options.template = template(
-                        "# var text = " + fieldAccessor("text") + "(data.item); #" +
-                        "# if (typeof data.item.encoded != 'undefined' && data.item.encoded === false) {#" +
-                            "<span class='k-panelbar-item-text'>#= text #</span>" +
-                        "# } else { #" +
-                            "<span class='k-panelbar-item-text'>#: text #</span>" +
-                        "# } #"
-                    );
+                  options.template = template((data) => {
+                      var text = fieldAccessor("text")(data.item);
+                      if (typeof data.item.encoded != 'undefined' && data.item.encoded === false) {
+                          return `<span class='k-panelbar-item-text'>${text}</span>`;
+                      } else {
+                          return `<span class='k-panelbar-item-text'>${encode(text)}</span>`;
+                      }
+                  });
                 }
 
             that.templates = {
                 content: template(
-                    "<div class='k-panelbar-content k-content'#= contentAttributes(data) #>#= content(item) #</div>"
+                   ({ data, item, contentAttributes, content }) => `<div class='k-panelbar-content k-content'${contentAttributes({ data, item, contentAttributes, content })}>${content(item)}</div>`
                 ),
-                group: template(
-                    "<ul role='group' aria-hidden='#= ariaHidden(group) #' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
-                        "#= renderItems(data) #" +
+                group: template( ({ data, items, group, renderItems, panelBar, ariaHidden, groupCssClass, groupAttributes }) =>
+                    `<ul role='group' aria-hidden='${ariaHidden(group)}' class='${groupCssClass(group)}' ${groupAttributes(group)}>` +
+                        renderItems({ data, items, group, renderItems, panelBar, ariaHidden, groupCssClass, groupAttributes }) +
                     "</ul>"
                 ),
-                itemWrapper: template(
-                     "# var url = " + fieldAccessor("url") + "(item); #" +
-                     "# var imageUrl = " + fieldAccessor("imageUrl") + "(item); #" +
-                     "# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(item); #" +
-                     "# var contentUrl = contentUrl(item); #" +
-                     "# var tag = url||contentUrl ? 'a' : 'span'; #" +
+                itemWrapper: template(({ panelBar, item, arrow, textClass, arrowClass, textAttributes, contentUrl }) => {
+                     var url = fieldAccessor("url")(item);
+                     var imageUrl = fieldAccessor("imageUrl")(item);
+                     var spriteCssClass = fieldAccessor("spriteCssClass")(item);
+                     var contentUrl = contentUrl(item);
+                     var tag = url || contentUrl ? 'a' : 'span';
 
-                    "<#= tag # class='#= textClass(item) #' #= contentUrl ##= textAttributes(url) #>" +
-                        "# if (imageUrl) { #" +
-                              "<img class='k-panelbar-item-icon k-image' alt='' src='#= imageUrl #' />" +
-                        "# } #" +
+                    return `<${tag} class='${textClass(item)}' ${contentUrl}${textAttributes(url)}>` +
+                        (imageUrl ? `<img class='k-panelbar-item-icon k-image' alt='' src='${imageUrl}' />` : '') +
+                        (spriteCssClass ? `<span class='k-sprite ${spriteCssClass}'></span>` : '') +
+                        panelBar.options.template({ panelBar, item, arrow, textClass, textAttributes, contentUrl }) +
+                        arrow({ panelBar, item, arrow, textClass, arrowClass, textAttributes, contentUrl }) +
+                    `</${tag}>`;
+                }),
 
-                        "# if (spriteCssClass) { #" +
-                            "<span class='k-sprite #= spriteCssClass #'></span>" +
-                        "# } #" +
-                      "#= data.panelBar.options.template(data) #" +
-                      "#= arrow(data) #" +
-                    "</#= tag #>"
-                ),
-
-                item: template(
-                    "<li aria-selected='false' role='treeitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'" +
-                         kendo.attr("uid") + "='#= item.uid #'>" +
-                        "#= itemWrapper(data) #" +
-                        "# if (item.items && item.items.length > 0) { #" +
-                        "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
-                        "# } else if (item.content || item.contentUrl) { #" +
-                        "#= renderContent(data) #" +
-                        "# } #" +
+                item: template(({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowClass, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes }) =>
+                    `<li aria-selected='false' role='treeitem' ${aria(item)}class='${wrapperCssClass(group, item)}' ` +
+                    kendo.attr("uid") + `='${item.uid}'>` +
+                        itemWrapper({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowClass, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes }) +
+                        ((item.items && item.items.length > 0) ?
+                        subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } })
+                        : ((item.content || item.contentUrl) ?
+                        renderContent({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowClass, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes })
+                        : "")
+                        ) +
                     "</li>"
                 ),
-                loading: template("<li class='k-item'><span class='k-icon k-i-loading'></span> #: data.messages.loading #</li>"),
-                retry: template(
+                loading: template(({ messages }) => `<li class='k-item'><span class='k-icon k-i-loading'></span> ${encode(messages.loading)}</li>`),
+                retry: template(({ messages }) =>
                     "<li class='k-item'>" +
-                        "#: data.messages.requestFailed # " +
-                        "<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-request-retry'><span class='k-button-text'>#: data.messages.retry #</span></button>" +
+                        `${encode(messages.requestFailed)} ` +
+                        `<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-request-retry'><span class='k-button-text'>${encode(messages.retry)}</span></button>` +
                     "</li>"
                 ),
-                arrow: template("<span class='#= arrowClass(item) #'></span>"),
-                empty: template("")
+                arrow: template(({ item, arrowClass }) => `<span class='${arrowClass(item)}'></span>`),
+                empty: template(() => "")
             };
         },
 
@@ -770,23 +767,20 @@ var __meta__ = {
         // generates accessor function for a given field name, honoring the data*Field arrays
         _fieldAccessor: function(fieldName) {
             var fieldBindings = this.options[bindings[fieldName]] || [],
-                count = fieldBindings.length,
-                result = "(function(item) {";
+                count = fieldBindings.length;
 
             if (count === 0) {
-                result += "return item['" + fieldName + "'];";
+                return (function(item) { return item[fieldName]; });
             } else {
-                result += "var levels = [" +
-                            $.map(fieldBindings, function(x) {
-                                return "function(d){ return " + kendo.expr(x) + "}";
-                            }).join(",") + "];";
-                result += "if(item.level){return levels[Math.min(item.level(), " + count + "-1)](item);}else";
-                result += "{return levels[" + count + "-1](item)}";
+                return (function(item) {
+                    var levels = $.map(fieldBindings, kendo.getter);
+                    if (item.level) {
+                        return levels[Math.min(item.level(), count - 1)](item);
+                    } else {
+                        return levels[count - 1](item);
+                    }
+                });
             }
-
-            result += "})";
-
-            return result;
         },
 
         _dataSource: function() {

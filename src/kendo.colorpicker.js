@@ -155,17 +155,15 @@ var __meta__ = {
             }
         },
 
-        _template: kendo.template(
-            '<span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker">' +
-                '<span  class="k-input-inner">' +
-                    '<span class="k-value-icon k-color-preview #: toolIcon ? "k-icon-color-preview" : "" #">' +
-                        '# if (toolIcon) { #' +
-                        '<span class="k-color-preview-icon k-icon #= toolIcon #"></span>' +
-                        '# } #' +
+        _template: kendo.template(({ toolIcon, _buttonHtml }) =>
+           '<span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker">' +
+                '<span class="k-input-inner">' +
+                    `<span class="k-value-icon k-color-preview ${toolIcon ? 'k-icon-color-preview' : ''}">` +
+                        (toolIcon ? `<span class="k-color-preview-icon k-icon ${toolIcon}"></span>` : '') +
                         '<span class="k-color-preview-mask"></span>' +
                     '</span>' +
                 '</span >' +
-                '#= _buttonHtml #' +
+                _buttonHtml +
             '</span>'
         ),
 
@@ -188,7 +186,7 @@ var __meta__ = {
             view: "gradient",
             views: ["gradient", "palette"],
             backgroundColor: null,
-            ARIATemplate: 'Current selected color is #=data || "none"#',
+            ARIATemplate: (data) => `Current selected color is ${data || "none"}`,
             size: "medium",
             rounded: "medium",
             fillMode: "solid"

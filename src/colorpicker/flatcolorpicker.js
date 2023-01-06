@@ -11,6 +11,7 @@ import "../kendo.html.button.js";
         html = kendo.html,
         Color = kendo.Color,
         extend = $.extend,
+        encode = kendo.htmlEncode,
         BACKGROUNDCOLOR = "background-color",
         MESSAGES = {
             apply  : "Apply",
@@ -295,22 +296,22 @@ import "../kendo.html.button.js";
                     rounded: "medium"
                 });
 
-            return kendo.template(
+            return kendo.template((options, buttonOptions) =>
                     '<div class="k-coloreditor-header k-hstack">' +
-                        '# if (views && views.length > 1) { #' +
+                        ((options.views && options.views.length > 1) ?
                         '<div class="k-coloreditor-header-actions k-hstack">' +
                             '<div role="group" class="k-button-group k-button-group-flat">' +
-                                html.renderButton('<button aria-pressed="false" data-view="gradient" title="#:messages.gradient#"></button>', extend({ icon: "color-canvas" }, buttonOptions)) +
-                                html.renderButton('<button aria-pressed="false" data-view="palette" title="#:messages.palette#"></button>', extend({ icon: "palette" }, buttonOptions)) +
+                                html.renderButton(`<button aria-pressed="false" data-view="gradient" title="${encode(options.messages.gradient)}"></button>`, extend({ icon: "color-canvas" }, buttonOptions)) +
+                                html.renderButton(`<button aria-pressed="false" data-view="palette" title="${encode(options.messages.palette)}"></button>`, extend({ icon: "palette" }, buttonOptions)) +
                             '</div>' +
-                        '</div>' +
-                        '# } #' +
+                        '</div>'
+                        : '') +
                         '<div class="k-spacer"></div>' +
                         '<div class="k-coloreditor-header-actions k-hstack">' +
-                            '# if (clearButton) { #' +
-                            html.renderButton('<button class="k-coloreditor-reset" title="#:messages.clearColor#"></button>', extend({ icon: "reset-color" }, buttonOptions)) +
-                            '# } #' +
-                            '# if (preview) { #' +
+                            (options.clearButton ?
+                            html.renderButton(`<button class="k-coloreditor-reset" title="${encode(options.messages.clearColor)}"></button>`, extend({ icon: "reset-color" }, buttonOptions))
+                            : '') +
+                            (options.preview ?
                             '<div class="k-coloreditor-preview k-vstack">' +
                                 '<span class="k-coloreditor-preview-color k-color-preview">' +
                                     '<span class="k-color-preview-mask"></span>' +
@@ -318,18 +319,18 @@ import "../kendo.html.button.js";
                                 '<span class="k-coloreditor-current-color k-color-preview">' +
                                     '<span class="k-color-preview-mask"></span>' +
                                 '</span>' +
-                            '</div>' +
-                            '# } #' +
+                            '</div>'
+                            : '') +
                         '</div>' +
                     '</div>' +
                     '<div class="k-coloreditor-views k-vstack"></div>' +
-                    '# if (buttons) { #' +
+                    (options.buttons ?
                     '<div class="k-coloreditor-footer k-actions k-hstack k-justify-content-end">' +
-                        html.renderButton('<button class="k-coloreditor-cancel" title="#:messages.cancel#">#: messages.cancel #</button>', extend({}, buttonOptions, { fillMode: "solid" })) +
-                        html.renderButton('<button class="k-coloreditor-apply" title="#:messages.apply#">#: messages.apply #</button>', extend({}, buttonOptions, { fillMode: "solid", themeColor: "primary" })) +
-                    '</div>' +
-                    '# } #'
-                )(options);
+                        html.renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: "solid" })) +
+                        html.renderButton(`<button class="k-coloreditor-apply" title="${encode(options.messages.apply)}">${encode(options.messages.apply)}</button>`, extend({}, buttonOptions, { fillMode: "solid", themeColor: "primary" })) +
+                    '</div>'
+                    : '')
+                )(options, buttonOptions);
         },
         _wrapper: function() {
             var options = this.options,

@@ -32,7 +32,11 @@
                 responseText: "foo bar baz"
             });
 
-            Mocha.fixture.html(__html__["tests/window/templates-fixture.html"]);
+            $(`<div id="div-with-template">
+                    <div id="kendo-template">
+                        kendo-template
+                    </div>
+                </div>`).appendTo(Mocha.fixture);
         });
         afterEach(function() {
             Mocha.fixture
@@ -301,7 +305,7 @@
         it("content.template", function() {
             var dialog = createWindow({
                 content: {
-                    template: "foo #= 1 + 1 #"
+                    template: () => `foo ${1 + 1}`
                 }
             });
 
@@ -317,7 +321,7 @@
                         foo: "bar"
                     },
 
-                    template: "templated #= foo #",
+                    template: ({ foo }) => `templated ${foo}`,
 
                     complete: function() {
                         assert.equal(dialog.element.text(), "templated bar");

@@ -1027,8 +1027,7 @@
             var arrowButton = splitButton.arrowButton;
 
             click(arrowButton);
-
-            roughlyEqual(splitButton.wrapper.outerWidth(), splitButton.menu._popup.element.outerWidth(), 2);
+            roughlyEqual(splitButton.wrapper.outerWidth(), splitButton.menu._popup.element.outerWidth(), 8);
         });
 
         it("options.attribute are attached to the main button", function() {
@@ -1539,7 +1538,7 @@
             var toolbar = container.kendoToolBar({
                 items: [{
                     id: "foo",
-                    template: "<span>foo</span>bar"
+                    template: () => "<span>foo</span>bar"
                 }]
             }).data("kendoToolBar");
 

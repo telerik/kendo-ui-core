@@ -701,7 +701,7 @@
         it("pushUpdate updates custom field in template", function() {
             createPanelBar({
                 dataTextField: "foo",
-                template: "#: item.bar #",
+                template: ({ item }) => kendo.htmlEncode(item.bar),
                 dataSource: {
                     data: [
                         { id: 1, bar: "foo" },

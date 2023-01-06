@@ -86,8 +86,8 @@
         it("MultiSelect with templates has accessible popup", function(done) {
             var ms = new MultiSelect(input, {
                 dataSource: [ "foo", "bar" ],
-                footerTemplate: 'Total items found',
-                headerTemplate: 'Total items found',
+                footerTemplate: () => 'Total items found',
+                headerTemplate: () => 'Total items found',
                 filter: "contains",
                 animation: false
             });

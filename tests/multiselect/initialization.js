@@ -89,8 +89,9 @@
         var multiselect = new MultiSelect(select);
 
         var template = multiselect.listView.options.template;
+        var result = template("abc");
 
-        assert.equal(template, "#:data#");
+        assert.equal(result, "abc");
     });
 
     it("template should use defined dataTextField", function() {
@@ -99,25 +100,27 @@
         });
 
         var template = multiselect.listView.options.template;
+        var result = template({ ProductName: "abc" });
 
-        assert.equal(template, "#:data.ProductName#");
+        assert.equal(result, "abc");
     });
 
     it("changing the template", function() {
         var multiselect = new MultiSelect(select, {
             dataTextField: "",
-            template: "#= data.toUpperCase() #"
+            template: (data) => data.toUpperCase()
         });
 
         var template = multiselect.listView.options.template;
+        var result = template("abc");
 
-        assert.equal(template, "#= data.toUpperCase() #");
+        assert.equal(result, "ABC");
     });
 
     it("MultiSelect renders header template", function() {
         var multiselect = new MultiSelect(select, {
-            template: "#= data.toUpperCase() #",
-            headerTemplate: "<div id='t'>Header</div>"
+            template: (data) => data.toUpperCase(),
+            headerTemplate: () => "<div id='t'>Header</div>"
         });
 
         var list = multiselect.list;
@@ -127,7 +130,7 @@
 
     it("render footer container", function() {
         var multiselect = new MultiSelect(select, {
-            footerTemplate: "footer"
+            footerTemplate: () => "footer"
         });
 
         var footer = multiselect.footer;
@@ -139,7 +142,7 @@
     it("render footer template", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: true,
-            footerTemplate: "footer"
+            footerTemplate: () => "footer"
         });
 
         var footer = multiselect.footer;
@@ -150,7 +153,7 @@
     it("compile footer template with the multiselect instance", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: true,
-            footerTemplate: "#: instance.dataSource.total() #"
+            footerTemplate: ({ instance }) => instance.dataSource.total()
         });
 
         var footer = multiselect.footer;
@@ -161,7 +164,7 @@
     it("update footer template on dataBound", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: true,
-            footerTemplate: "#: instance.dataSource.total() #"
+            footerTemplate: ({ instance }) => instance.dataSource.total()
         });
 
         var footer = multiselect.footer;
@@ -176,7 +179,7 @@
             animation: false,
             autoBind: false,
             dataSource: ["item1", "item2", "item3", "item4", "item5"],
-            footerTemplate: "<div>Footer</div>",
+            footerTemplate: () => "<div>Footer</div>",
             height: 100
         });
 
@@ -275,7 +278,7 @@
         var multiselect = select.kendoMultiSelect({
             autoBind: false,
             dataSource: dataSource,
-            template: "<div style='height:30px'><%= data %> </div>",
+            template: () => "<div style='height:30px'><%= data %> </div>",
             height: 50
         }).data("kendoMultiSelect");
 
@@ -873,7 +876,7 @@
     //no data template
     it("MultiSelect builds a noDataTemplate", function() {
         var multiselect = new MultiSelect(select, {
-            noDataTemplate: "test"
+            noDataTemplate: () => "test"
         });
 
         assert.isOk(multiselect.noDataTemplate);
@@ -881,18 +884,18 @@
 
     it("render nodata container", function() {
         var multiselect = new MultiSelect(select, {
-            noDataTemplate: "test"
+            noDataTemplate: () => "test"
         });
 
         assert.isOk(multiselect.noData);
         assert.isOk(multiselect.noData.hasClass("k-no-data"));
-        assert.equal(multiselect.noData.text(), multiselect.options.noDataTemplate);
+        assert.equal(multiselect.noData.text(), multiselect.options.noDataTemplate());
     });
 
     it("render nodata before footerTemplate", function() {
         var multiselect = new MultiSelect(select, {
-            noDataTemplate: "test",
-            footerTemplate: "footer"
+            noDataTemplate: () => "test",
+            footerTemplate: () => "footer"
         });
 
         assert.isOk(multiselect.noData.next().hasClass("k-list-footer"));
@@ -909,8 +912,8 @@
                     { name: "item3", type: "b" }
                 ]
             },
-            noDataTemplate: "no data",
-            template: '#:data.name#'
+            noDataTemplate: () => "no data",
+            template: ({ name }) => name
         });
 
         multiselect.open();
@@ -925,8 +928,8 @@
             dataSource: {
                 data: [ ]
             },
-            noDataTemplate: "no data",
-            template: '#:data.name#'
+            noDataTemplate: () => "no data",
+            template: ({ name }) => name
         });
 
         multiselect.open();
@@ -941,8 +944,8 @@
             dataSource: {
                 data: [ ]
             },
-            noDataTemplate: "no data",
-            template: '#:data.name#'
+            noDataTemplate: () => "no data",
+            template: ({ name }) => name
         });
 
         multiselect.open();
@@ -961,7 +964,7 @@
     it("update noData template on dataBound", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: true,
-            noDataTemplate: "#: instance.dataSource.total() #"
+            noDataTemplate: ({ instance }) => instance.dataSource.total()
         });
 
         var noData = multiselect.noData;

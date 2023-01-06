@@ -12,8 +12,8 @@
         options: {
             name: "TestWidget",
             foo: "",
-            template: "",
-            altTemplate: "",
+            template: () => "",
+            altTemplate: () => "",
             dataMinHeight: "",
             columns: null,
             dataBar: "",
@@ -147,7 +147,7 @@
         });
 
         it("parses strings array option from data attribute", function() {
-            dom = $('<div data-role="testwidget" data-foo="[\'red\']"/>');
+            dom = $(`<div data-role="testwidget" data-foo='["red"]'/>`);
 
             kendo.init(dom);
 
@@ -167,7 +167,7 @@
         });
 
         it("parses object with array from data attribute", function() {
-            dom = $('<div data-role="testwidget" data-foo="{data:[\'[red]\']}"/>');
+            dom = $(`<div data-role="testwidget" data-foo='{"data":["[red]"]}'/>`);
 
             kendo.init(dom);
 
@@ -273,26 +273,6 @@
             assert.equal(testwidget.options.click, bar.baz);
         });
 
-        it("parses templates from data attributes", function() {
-            dom = $('<div data-role="testwidget" data-template="template" />');
-
-            kendo.init(dom);
-
-            var testwidget = dom.data("kendoTestWidget");
-
-            assert.equal(testwidget.options.template({}), $("#template").html());
-        });
-
-        it("parses template options", function() {
-            dom = $('<div data-role="testwidget" data-alt-template="template" />');
-
-            kendo.init(dom);
-
-            var testwidget = dom.data("kendoTestWidget");
-
-            assert.equal(testwidget.options.altTemplate({}), $("#template").html());
-        });
-
         it("does not parse numeric values from format data attributes", function() {
             dom = $('<div data-role="testwidget" data-format="00000" />');
             kendo.init(dom);
@@ -354,15 +334,6 @@
             var testwidget = dom.data("kendoTestWidget");
             assert.equal(testwidget.options.columns.foo, "foo");
             assert.equal(testwidget.options.columns.bar, "bar");
-        });
-
-
-        it("initializes functions from parameters", function() {
-            dom = $('<div data-role="testwidget" data-columns=\'{"foo":foo}\'/>');
-
-            kendo.init(dom);
-            var testwidget = dom.data("kendoTestWidget");
-            assert.equal(testwidget.options.columns.foo, window.foo);
         });
 
         it("does not treat format strings as JSON", function() {

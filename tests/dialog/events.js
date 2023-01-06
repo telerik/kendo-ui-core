@@ -57,7 +57,7 @@
         it("action click calls close event", function() {
             var dialog = createDialog({
                 actions: [
-                    { text: "just close" }
+                    { text: () => "just close" }
                 ],
                 close: function(ev) {
                     assert.isOk(ev.userTriggered);
@@ -220,7 +220,7 @@
         function actionButtonKeyTrigger(keyCode) {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok", action: function() {
+                    text: () => "ok", action: function() {
                         assert.isOk(true);
                     }
                 }]
@@ -235,7 +235,7 @@
         it("esc key on action button just closes the dialog", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(false);
                     }
@@ -249,7 +249,7 @@
         it("enter key on action button runs action only once", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(true);
                     }
@@ -263,7 +263,7 @@
         it("SPACEBAR key on action button runs action only once", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(true);
                     }

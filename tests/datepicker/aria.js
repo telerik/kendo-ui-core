@@ -8,7 +8,7 @@ describe("kendo.ui.DatePicker ARIA", function() {
 
         input = $("<input id='test' />").appendTo(Mocha.fixture);
         instance = new DatePicker(input, {
-            ARIATemplate: "#=kendo.toString(current, 'D')#"
+            ARIATemplate: ({ current }) => `${kendo.toString(current, 'D')}`
         });
     });
     afterEach(function() {
@@ -178,7 +178,9 @@ it("DatePicker add correct aria-label for year", function() {
 
 it("DatePicker add evaluates ariatemplate in correct context", function() {
     var date = kendo.date.today();
-    instance = new DatePicker(input, { ARIATemplate: "Current focused date is #= this.dateView.calendar.view().name === 'month' ? 'test': kendo.toString(data.current, 'MMM yyyy') #" });
+    instance = new DatePicker(input, {
+        ARIATemplate: ({ current }) => `Current focused date is ${instance.dateView.calendar.view().name === 'month' ? 'test' : kendo.toString(current, 'MMM yyyy')}`
+    });
     instance.open();
     instance.element.trigger("focus");
     var cell = instance.dateView.calendar.element.find("td.k-focus");

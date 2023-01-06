@@ -282,7 +282,7 @@
         it("clicking on a button triggers action method", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK",
+                    text: () => "OK",
                     action: function() { assert.isOk(true); }
                 }]
             });
@@ -293,7 +293,7 @@
         it("clicking on an element in the button triggers action method", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "<span class='button-span'>OK</span>",
+                    text: () => "<span class='button-span'>OK</span>",
                     action: function() { assert.isOk(true); }
                 }]
             });
@@ -304,7 +304,7 @@
         it("executing action closes the dialog", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }]
             });
 
@@ -316,7 +316,7 @@
         it("executing action returning false does't closes the dialog", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK",
+                    text: () => "OK",
                     action: function() {
                         return false;
                     }
@@ -331,14 +331,14 @@
         it("setOptions modifies actions", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }]
             });
 
             dialog.setOptions({
                 actions: [
-                    { text: "OK" },
-                    { text: "Cancel" }
+                    { text: () => "OK" },
+                    { text: () => "Cancel" }
                 ]
             });
 
@@ -348,7 +348,7 @@
         it("setOptions modifies title", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }]
             });
 
@@ -362,7 +362,7 @@
         it("setOptions modifies modality", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }],
                 modal: true
             });
@@ -377,7 +377,7 @@
         it("setOptions modifies modality", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }],
                 modal: true
             });

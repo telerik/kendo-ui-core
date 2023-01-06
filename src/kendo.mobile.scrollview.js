@@ -385,14 +385,14 @@ var __meta__ = {
 
             if (typeof template === FUNCTION) {
                 templateProxy.template = template;
-                template = "#=this.template(data)#";
+                template = (data) => this.template(data);
             }
 
             this.template = kendo.template(template).bind(templateProxy);
 
             if (typeof emptyTemplate === FUNCTION) {
                 emptyTemplateProxy.emptyTemplate = emptyTemplate;
-                emptyTemplate = "#=this.emptyTemplate(data)#";
+                emptyTemplate = (data) => this.emptyTemplate(data);
             }
 
             this.emptyTemplate = kendo.template(emptyTemplate).bind(emptyTemplateProxy);
@@ -751,8 +751,8 @@ var __meta__ = {
             enablePager: true,
             pagerOverlay: false,
             autoBind: true,
-            template: "",
-            emptyTemplate: ""
+            template: () => "",
+            emptyTemplate: () => ""
         },
 
         events: [

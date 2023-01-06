@@ -10,7 +10,7 @@
         }
 
         options = $.extend({
-            template: "<li>${foo}</li>",
+            template: ({ foo }) => `<li>${foo}</li>`,
             dataSource: dataSource = new DataSource({
                 transport: {
                     read: function(options) {
@@ -49,15 +49,15 @@
         });
 
         it("editTemplate options defined", function() {
-            var editTemplate = "<li>edit template</li>",
-                listView = setup({ editTemplate: editTemplate });
+            var editTemplateResult = '<li>edit template</li>',
+                listView = setup({ editTemplate: () => editTemplateResult });
 
-            assert.equal(listView.editTemplate({}), editTemplate);
+            assert.equal(listView.editTemplate({}), editTemplateResult);
         });
 
         it("edit renders editTemplate for the current item", function() {
-            var editTemplate = "<li>template</li>",
-                listView = setup({ editTemplate: editTemplate });
+            var editTemplateResult = "<li>template</li>",
+                listView = setup({ editTemplate: () => editTemplateResult });
 
             listView.edit(listView.content.children().first());
             assert.equal(listView.content.children().first().html(), "template");
@@ -65,14 +65,14 @@
         });
 
         it("edit binds the edit template", function() {
-            var listView = setup({ editTemplate: "<li>edit ${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>edit ${foo}</li>` });
 
             listView.edit(listView.content.children().first());
             assert.equal(listView.content.children().first().html(), "edit foo 0");
         });
 
         it("edit instantiates editable for edited item", function() {
-            var listView = setup({ editTemplate: "<li>${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>${foo}</li>` });
 
             listView.edit(listView.content.children().first());
             assert.isOk(listView.content.children().first().data("kendoEditable"));
@@ -80,7 +80,7 @@
         });
 
         it("editable is destroyed on refresh", function() {
-            var listView = setup({ editTemplate: "<li>${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>${foo}</li>` });
 
             listView.edit(listView.content.children().first());
             dataSource.read();
@@ -96,7 +96,7 @@
         });
 
         it("edited item is not refreshed on itemchange", function() {
-            var listView = setup({ editTemplate: "<li>${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>${foo}</li>` });
             listView.edit(listView.element.find("li:first"));
             dataSource.get(0).set("foo", "bar");
 
@@ -105,7 +105,7 @@
         });
 
         it("correct model is passed to editable", function() {
-            var listView = setup({ editTemplate: "<li></li>" });
+            var listView = setup({ editTemplate: () => "<li></li>" });
 
             listView.edit(listView.content.children().first());
             assert.equal(listView.editable.options.model, dataSource.get(0));
@@ -114,7 +114,7 @@
         it("edit item triggers edit event", function() {
             var called = false,
                 listView = setup({
-                    editTemplate: "<li></li>",
+                    editTemplate: () => "<li></li>",
                     edit: function() {
                         called = true;
                     }
@@ -127,7 +127,7 @@
         it("clicking the cancel button raises the cancel event", function() {
             var called = false,
                 listView = setup({
-                    editTemplate: '<li><button class="k-cancel-button"></li>',
+                    editTemplate: () => '<li><button class="k-cancel-button"></li>',
                     cancel: function(e) {
                         assert.isOk(e.model);
                         assert.equal(e.container.length, 1);
@@ -141,7 +141,7 @@
 
         it("clicking the cancel button sets the k-listview-item class", function() {
             var listView = setup({
-                    editTemplate: '<li><button class="k-cancel-button"></li>',
+                    editTemplate: () => '<li><button class="k-cancel-button"></li>',
                 });
 
             listView.edit(listView.content.children().first());
@@ -153,7 +153,7 @@
         it("preventing the cancel event leaves the item in edit mode", function() {
             var called = false,
                 listView = setup({
-                    editTemplate: '<li><button class="k-cancel-button"></li>',
+                    editTemplate: () => '<li><button class="k-cancel-button"></li>',
                     cancel: function(e) {
                         e.preventDefault();
                     }
@@ -169,7 +169,7 @@
         it("item and model is send to edit event arguments", function() {
             var args = {},
                 listView = setup({
-                    editTemplate: "<li></li>",
+                    editTemplate: () => "<li></li>",
                     edit: function() {
                         args = arguments[0];
                     }
@@ -182,7 +182,7 @@
         });
 
         it("save destroys the editable", function() {
-            var listView = setup({ editTemplate: "<li>${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>${foo}</li>` });
 
             listView.edit(listView.content.children().first());
             listView.save();
@@ -192,7 +192,7 @@
         });
 
         it("save renders item template", function() {
-            var listView = setup({ editTemplate: "<li>edit ${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>edit ${foo}</li>` });
 
             listView.edit(listView.content.children().first());
             listView.save();
@@ -202,8 +202,8 @@
 
         it("save renders item alternating template", function() {
             var listView = setup({
-                editTemplate: "<li>edit ${foo}</li>",
-                altTemplate: "<li>bar</li>"
+                editTemplate: ({ foo }) => `<li>edit ${foo}</li>`,
+                altTemplate: () => "<li>bar</li>"
             });
 
             listView.edit(listView.content.children().eq(1));
@@ -213,7 +213,7 @@
         });
 
         it("edit closes previous edited item", function() {
-            var listView = setup({ editTemplate: "<li>${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>${foo}</li>` });
 
             listView.edit(listView.content.children().eq(0));
             listView.edit(listView.content.children().eq(1));
@@ -223,7 +223,7 @@
         });
 
         it("edit cancels previous edited item changes", function() {
-            var listView = setup({ editTemplate: "<li>${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>${foo}</li>` });
 
             listView.edit(listView.content.children().eq(0));
             dataSource.get(0).set("foo", "bar");
@@ -233,7 +233,7 @@
         });
 
         it("save does not close edited item if validation fails", function() {
-            var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
+            var listView = setup({ editTemplate: () => '<li><input data-value="foo" required/></li>' });
 
             listView.edit(listView.content.children().eq(0));
             listView.content.find(":input").val("");
@@ -243,7 +243,7 @@
         });
 
         it("save event is not triggerd if validation fails", function() {
-            var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
+            var listView = setup({ editTemplate: () => '<li><input data-value="foo" required/></li>' });
 
             listView.edit(listView.content.children().eq(0));
             listView.content.find(":input").val("");
@@ -256,7 +256,7 @@
         });
 
         it("save calls DataSource sync", function() {
-            var listView = setup({ editTemplate: '<li><input data-value="foo"/></li>' }),
+            var listView = setup({ editTemplate: () => '<li><input data-value="foo"/></li>' }),
                 sync = stub(dataSource, "sync");
 
             listView.edit(listView.content.children().eq(0));
@@ -356,7 +356,7 @@
 
         it("remove reverts currently edited item", function() {
             var listView = setup({
-                editTemplate: "<li>${foo}</li>"
+                editTemplate: ({ foo }) => `<li>${foo}</li>`
             });
 
             listView.edit(listView.content.children().eq(0));
@@ -383,7 +383,7 @@
 
         it("add adds new model if DataSource has no data", function() {
             var listView = setup({
-                template: "<li></li>",
+                template: () => "<li></li>",
                 dataSource: {
                     schema: {
                         model: {
@@ -399,7 +399,7 @@
 
         it("add edit first item", function() {
             var listView = setup({
-                editTemplate: '<li><input data-value="foo" /></li>'
+                editTemplate: () => '<li><input data-value="foo" /></li>'
             });
 
             listView.add();
@@ -413,7 +413,7 @@
         it("add triggers edit event", function() {
             var args,
                 listView = setup({
-                    editTemplate: '<li><input data-value="foo" /></li>',
+                    editTemplate: () => '<li><input data-value="foo" /></li>',
                     edit: function() {
                         args = arguments[0];
                     }
@@ -427,7 +427,7 @@
         });
 
         it("add cancels previous edited item changes", function() {
-            var listView = setup({ editTemplate: "<li>${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>${foo}</li>` });
 
             listView.edit(listView.content.children().eq(0));
             dataSource.get(0).set("foo", "bar");
@@ -438,7 +438,7 @@
 
         it("cancel calls cancelChanges of DataSource for the edited item", function() {
             var listView = setup({
-                editTemplate: '<li><input data-bind="value:foo" /></li>'
+                editTemplate: ({ foo }) => `<li><input data-bind="value:foo" /></li>`
             });
 
             var cancelChanges = stub(dataSource, "cancelChanges");
@@ -451,7 +451,7 @@
 
         it("cancel does not call cancelChanges of DataSource if no edited item", function() {
             var listView = setup({
-                editTemplate: '<li><input data-bind="value:foo" /></li>'
+                editTemplate: ({ foo }) => `<li><input data-bind="value:foo" /></li>`
             });
 
             var cancelChanges = stub(dataSource, "cancelChanges");
@@ -462,7 +462,7 @@
 
         it("cancel revert the item to item template", function() {
             var listView = setup({
-                editTemplate: '<li><input data-bind="value:foo" /></li>'
+                editTemplate: ({ foo }) => `<li><input data-bind="value:foo" /></li>`
             });
 
             listView.edit(listView.content.children().eq(0));
@@ -473,8 +473,8 @@
 
         it("cancel revert the item to item alternative template", function() {
             var listView = setup({
-                editTemplate: '<li><input data-bind="value:foo" /></li>',
-                altTemplate: "<li>bar</li>"
+                editTemplate: () => '<li><input data-bind="value:foo" /></li>',
+                altTemplate: () => "<li>bar</li>"
             });
 
             listView.edit(listView.content.children().eq(1));
@@ -485,8 +485,8 @@
 
         it("when editing is canceled role attribute is not lost", function() {
             var listView = setup({
-                editTemplate: '<li><input data-bind="value:foo" /></li>',
-                altTemplate: "<li>bar</li>"
+                editTemplate: () => '<li><input data-bind="value:foo" /></li>',
+                altTemplate: () => "<li>bar</li>"
             });
 
             listView.edit(listView.content.children().eq(1));
@@ -498,7 +498,7 @@
         it("save event is triggered", function() {
             var called = false,
                 listView = setup({
-                    editTemplate: "<li></li>",
+                    editTemplate: () => "<li></li>",
                     save: function() {
                         called = true;
                     }
@@ -512,7 +512,7 @@
 
         it("save event can be prevented", function() {
             var listView = setup({
-                editTemplate: "<li></li>",
+                editTemplate: () => "<li></li>",
                 save: function(e) {
                     e.preventDefault();
                 }
@@ -525,7 +525,7 @@
         });
 
         it("edit after add cancels previous edit item", function() {
-            var listView = setup({ editTemplate: "<li>${foo}</li>" });
+            var listView = setup({ editTemplate: ({ foo }) => `<li>${foo}</li>` });
 
             listView.add();
             listView.edit(listView.content.children().eq(1));

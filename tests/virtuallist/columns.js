@@ -75,7 +75,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#:text#"
+                template: ({ text }) => kendo.htmlEncode(text)
             };
         });
 
@@ -138,7 +138,7 @@
     it("each custom template is applied", function() {
         var list = new VirtualList(container, {
             columns: [
-                { field: "name", template: "new #: name #" },
+                { field: "name", template: ({ name }) => `new ${kendo.htmlEncode(name)}` },
                 { field: "id" }
             ],
             dataTextField: "name",

@@ -605,7 +605,7 @@
         it("hitting arrow keys in nested input does not trigger keyboard support", function() {
             var dialogObject = createWindow({
                 content: {
-                    template: "<input class='foo' />"
+                    template: () => "<input class='foo' />"
                 }
             });
             var dialog = dialogObject.element;

@@ -17,6 +17,7 @@ import "./contrastToolUtils.js";
         Observable = kendo.Observable,
         parseColor = kendo.parseColor,
         extend = $.extend,
+        encode = kendo.htmlEncode,
         Color = kendo.Color,
         KEYS = kendo.keys,
         BACKGROUNDCOLOR = "background-color",
@@ -46,9 +47,8 @@ import "./contrastToolUtils.js";
             that._viewModel = kendo.observable({
                 switchMode: that.switchMode.bind(that),
                 keydown: that.keydown.bind(that),
-                mode: function (mode) {
-                    return mode === this.get("format");
-                },
+                isHEXMode: function () { return this.get("format") === 'hex' },
+                isRGBMode: function () { return this.get("format") === 'rgb' },
                 format: options.format,
                 formats: options.formats,
                 rgb: null,
@@ -67,44 +67,66 @@ import "./contrastToolUtils.js";
 
             Observable.fn.init.call(that);
         },
-        _template: kendo.template(
-            '# if (options.formats && options.formats.length > 1) { #' +
-            '<div class="k-vstack">' +
-                '<button class="k-colorgradient-toggle-mode" data-#:ns#role="button" data-#:ns#icon="arrows-kpi" data data-#:ns#bind="click: switchMode" data-#:ns#fill-mode="flat" data-#:ns#size="#: options.size #" title="#: options.messages.toggleFormat #">' +
-               '</button>' +
-            '</div>' +
-            '# } #' +
+        _template: kendo.template(({ options, ns }) => {
+            let optionsSize = encode(options.size);
+            let optionsTabIndex = encode(options.tabindex);
 
+            let vStackElement = "";
+            if (options.formats && options.formats.length > 1) {
+                let optionsMessagesToggleFormat = encode(options.messages.toggleFormat);
+
+                vStackElement =
+                '<div class="k-vstack">' +
+                    `<button class="k-colorgradient-toggle-mode" data-${ns}role="button" data-${ns}icon="arrows-kpi" data data-${ns}bind="click: switchMode" data-${ns}fill-mode="flat" data-${ns}size="${optionsSize}" title="${optionsMessagesToggleFormat}">` +
+                    '</button>' +
+                '</div>';
+            }
 
             // HEX input
-            '# if (options.formats && options.formats.indexOf("hex") >= 0) { #' +
-            '<div class="k-vstack k-flex-1" data-#:ns#bind="visible: mode(\'hex\')">' +
-                '<input type="text" data-#:ns#bind="value: hex" data-#:ns#role="textbox" data-#:ns#size="#: options.size #" tabindex="#:options.tabindex#"  aria-label="#: options.messages.hex #"/>' +
-                '<label class="k-colorgradient-input-label">HEX</label>' +
-            '</div>' +
-            '# } #' +
+            let hexInputElement = "";
+            if (options.formats && options.formats.indexOf("hex") >= 0) {
+                let optionsMessagesHex = encode(options.messages.hex);
+
+                hexInputElement =
+                `<div class="k-vstack k-flex-1" data-${ns}bind="visible: isHEXMode">` +
+                    `<input type="text" data-${ns}bind="value: hex" data-${ns}role="textbox" data-${ns}size="${optionsSize}" tabindex="${optionsTabIndex}"  aria-label="${optionsMessagesHex}"/>` +
+                    '<label class="k-colorgradient-input-label">HEX</label>' +
+                '</div>'
+            }
 
             // RGBA input
-            '# if (options.formats && options.formats.indexOf("rgb") >= 0) { #' +
-            '<div  class="k-vstack" data-#:ns#bind="visible: mode(\'rgb\')">' +
-                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.r" data-#:ns#role="numerictextbox" data-#:ns#size="#: options.size #" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.red #" />' +
-                '<label class="k-colorgradient-input-label">R</label>' +
-            '</div>' +
-            '<div  class="k-vstack" data-#:ns#bind="visible: mode(\'rgb\')">' +
-                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.g" data-#:ns#role="numerictextbox" data-#:ns#size="#: options.size #" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.green #" />' +
-                '<label class="k-colorgradient-input-label">G</label>' +
-            '</div>' +
-            '<div  class="k-vstack" data-#:ns#bind="visible: mode(\'rgb\')">' +
-                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.b" data-#:ns#role="numerictextbox" data-#:ns#size="#: options.size #" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.blue #"/>' +
-                '<label class="k-colorgradient-input-label">B</label>' +
-            '</div>' +
-            '#if(options.opacity){#' +
-            '<div  class="k-vstack" data-#:ns#bind="visible: mode(\'rgb\')">' +
-                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.a" data-#:ns#role="numerictextbox" data-#:ns#size="#: options.size #" data-#:ns#step="0.1" data-#:ns#max="1" data-#:ns#min="0" data-#:ns#decimals="1" data-#:ns#spinners="false" data-#:ns#format="n1"  aria-label="#: options.messages.alpha #" />' +
-                '<label class="k-colorgradient-input-label">A</label>' +
-            '</div>' +
-            '# } #' +
-            '# } #'),
+            let rgbaInputElement = "";
+            if (options.formats && options.formats.indexOf("rgb") >= 0) {
+                let optionsMessagesRed = encode(options.messages.red);
+                let optionsMessagesGreen = encode(options.messages.green);
+                let optionsMessagesBlue = encode(options.messages.blue);
+
+                rgbaInputElement =
+                `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
+                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.r" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesRed}" />` +
+                    '<label class="k-colorgradient-input-label">R</label>' +
+                '</div>' +
+                `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
+                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.g" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesGreen}" />` +
+                    '<label class="k-colorgradient-input-label">G</label>' +
+                '</div>' +
+                `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
+                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.b" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesBlue}"/>` +
+                    '<label class="k-colorgradient-input-label">B</label>' +
+                '</div>';
+
+                if(options.opacity) {
+                    let optionsMessagesAlpha = options.messages.alpha;
+                    rgbaInputElement +=
+                    `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
+                        `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.a" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}step="0.1" data-${ns}max="1" data-${ns}min="0" data-${ns}decimals="1" data-${ns}spinners="false" data-${ns}format="n1" aria-label="${optionsMessagesAlpha}" />` +
+                        '<label class="k-colorgradient-input-label">A</label>' +
+                    '</div>';
+                }
+            }
+
+            return vStackElement + hexInputElement + rgbaInputElement;
+        }),
         destroy: function(){
             var that = this;
 
@@ -222,7 +244,7 @@ import "./contrastToolUtils.js";
         options: {
             name : "ColorGradient",
             opacity : false,
-            hsvDragARIATemplate: 'Color well with two-dimensional slider for selecting saturation and value. Selected color is #=data || "none"#',
+            hsvDragARIATemplate: (data) => `Color well with two-dimensional slider for selecting saturation and value. Selected color is ${data || "none"}`,
             input : true,
             format: "hex",
             formats: ["rgb", "hex"],
@@ -241,27 +263,16 @@ import "./contrastToolUtils.js";
             },
             _otOfPicker: true
         },
-        _template: kendo.template(
-            '<div class="k-colorgradient-canvas k-hstack">' +
-                '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div role="slider" aria-orientation="undefined" class="k-hsv-draghandle k-draghandle"></div></div>' +
-
-                '<div class="k-hsv-controls k-hstack">' +
-                    '<input class="k-hue-slider k-colorgradient-slider" />' +
-                    '# if (opacity) { #' +
-                        '<input class="k-alpha-slider k-colorgradient-slider" />' +
-                    '# } #' +
+        _template: kendo.template((options) =>
+                '<div class="k-colorgradient-canvas k-hstack">' +
+                    '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div role="slider" aria-orientation="undefined" class="k-hsv-draghandle k-draghandle"></div></div>' +
+                    '<div class="k-hsv-controls k-hstack">' +
+                        '<input class="k-hue-slider k-colorgradient-slider" />' +
+                        (options.opacity ? '<input class="k-alpha-slider k-colorgradient-slider" />' : '') +
+                    '</div>' +
                 '</div>' +
-            '</div>' +
-
-            '# if (input) { #' +
-            '<div class="k-colorgradient-inputs k-hstack">' +
-            '</div>' +
-            '# } #' +
-
-            '# if (contrastTool) { #' +
-                '<div class="k-colorgradient-color-contrast k-vbox">' +
-                '</div>' +
-            '# } #'
+                (options.input ? '<div class="k-colorgradient-inputs k-hstack"></div>' : '') +
+                (options.contrastTool ? '<div class="k-colorgradient-color-contrast k-vbox"></div>' : '')
         ),
         focus: function() {
             this._hsvHandle.focus();
@@ -518,23 +529,20 @@ import "./contrastToolUtils.js";
                 contrastOptions = that.options.contrastTool,
                 backgroundColor = contrastOptions.backgroundColor ? parseColor(contrastOptions.backgroundColor) : parseColor(WHITE),
                 contrastRatio = contrastToolUtils.getContrastFromTwoRGBAs(parseColor(color.toCssRgba()), backgroundColor),
-                contrastRatioTemplate = kendo.template('<div class="k-contrast-ratio">' +
-                                            '<span class="k-contrast-ratio-text">#:messages.contrastRatio# #:kendo.toString(ratio, "n2")#</span>' +
-                                            '<span class="k-contrast-validation k-text-success">' +
-                                                '#if (ratio > 4.5) {#' +
-                                                    '<span class="k-icon k-i-check"></span>' +
-                                                '#}#' +
-                                                '#if (ratio > 7) {#' +
-                                                    '<span class="k-icon k-i-check"></span>' +
-                                                '#}#' +
+                contrastRatioTemplate = kendo.template(({ messages, ratio }) =>
+                                            '<div class="k-contrast-ratio">' +
+                                                `<span class="k-contrast-ratio-text">${encode(messages.contrastRatio)} ${encode(kendo.toString(ratio, "n2"))}</span>` +
+                                                '<span class="k-contrast-validation k-text-success">' +
+                                                    (ratio > 4.5 ?  '<span class="k-icon k-i-check"></span>' : '') +
+                                                    (ratio > 7 ?  '<span class="k-icon k-i-check"></span>' : '') +
                                             '</span></div>'),
-                labelTemplate = kendo.template('<div>' +
-                                            '<span>#:level#: #:limit# </span>' +
-                                            '#if (ratio > limit) {#' +
-                                            '<span class="k-contrast-validation k-text-success">#:messages.pass# <span class="k-icon k-i-check"></span></span>' +
-                                            '#} else {#' +
-                                            '<span class="k-contrast-validation k-text-error">#:messages.fail# <span class="k-icon k-i-close"></span></span>' +
-                                            '#}#' +
+                labelTemplate = kendo.template(({ messages, ratio, limit, level }) =>
+                                            '<div>' +
+                                                `<span>${encode(level)}: ${encode(limit)} </span>` +
+                                                (ratio > limit ?
+                                                `<span class="k-contrast-validation k-text-success">${encode(messages.pass)} <span class="k-icon k-i-check"></span></span>`
+                                                :
+                                                `<span class="k-contrast-validation k-text-error">${encode(messages.fail)} <span class="k-icon k-i-close"></span></span>`) +
                                             '</div>'),
                 output = "";
 

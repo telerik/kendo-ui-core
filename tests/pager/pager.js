@@ -78,7 +78,7 @@
             assert.equal(links[2].innerHTML, "3");
         });
 
-        it("page number buttons have data attribute assign exept for the current page index", function() {
+        it("page number buttons have data attribute assign except for the current page index", function() {
             var ul = setup();
 
             dataSource.read();
@@ -216,13 +216,13 @@
         });
 
         it("custom linkTemplate should be used instead of the default", function() {
-            var ul = setup({}, { linkTemplate: "<a>foo</a>" });
+            var ul = setup({}, { linkTemplate: () => "<a>foo</a>" });
             dataSource.read();
             assert.equal(ul.find("a:eq(1)").text(), "foo");
         });
 
         it("custom selectTemplate should be used", function() {
-            var ul = setup({}, { selectTemplate: "<a>foo</a>" });
+            var ul = setup({}, { selectTemplate: () => "<a>foo</a>" });
             dataSource.read();
             assert.equal(ul.find("a:first").text(), "foo");
         });
@@ -765,7 +765,7 @@
                 dataSource: dataSource,
                 previousNext: false
             };
-            var element = $("<div style='width: 480px;' />").appendTo(Mocha.fixture).kendoPager(options);
+            var element = $("<div style='width: 481px;' />").appendTo(Mocha.fixture).kendoPager(options);
             var pager = element.data("kendoPager");
 
             assert.isOk(!pager.element.hasClass("k-pager-sm"));

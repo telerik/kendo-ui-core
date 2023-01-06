@@ -430,7 +430,7 @@ var __meta__ = {
             month: {},
             dates: [],
             disableDates: null,
-            ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
+            ARIATemplate: ({ valueType, text }) => `Current focused ${valueType} is ${text}`,
             dateInput: false,
             weekNumber: false,
             messages: {

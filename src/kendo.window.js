@@ -1793,26 +1793,26 @@ import "./kendo.popup.js";
         });
 
         templates = {
-            wrapper: template("<div class='k-widget k-window'></div>"),
-            action: template(
-                "<a role='button' href='\\#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action' aria-label='#= name #'>" +
-                    "<span class='k-button-icon k-icon k-i-#= name.toLowerCase() #'></span>" +
+            wrapper: template(() => "<div class='k-widget k-window'></div>"),
+            action: template(({ name }) =>
+                `<a role='button' href='#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action' aria-label='${name}'>` +
+                    `<span class='k-button-icon k-icon k-i-${name.toLowerCase()}'></span>` +
                 "</a>"
             ),
-            titlebar: template(
+            titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar k-hstack'>" +
-                    "<span class='k-window-title'>#= title #</span>" +
+                    `<span class='k-window-title'>${title}</span>` +
                     "<div class='k-window-actions k-hstack'></div>" +
                 "</div>"
             ),
             overlay: "<div class='k-overlay'></div>",
-            contentFrame: template(
-                "<iframe frameborder='0' title='#= title #' class='" + KCONTENTFRAME + "' " +
-                "src='#= content.url #'>" +
+            contentFrame: template(({ title, content }) =>
+                `<iframe frameborder='0' title='${title}' class='${KCONTENTFRAME}' ` +
+                `src='${content.url}'>` +
                 "This page requires frames in order to show content" +
                 "</iframe>"
             ),
-            resizeHandle: template("<div aria-hidden='true' class='k-resize-handle k-resize-#= data #'></div>")
+            resizeHandle: template((data) => `<div aria-hidden='true' class='k-resize-handle k-resize-${data}'></div>`)
         };
 
 

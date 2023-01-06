@@ -1174,8 +1174,9 @@
                 dataTextField: "anotherName"
             });
 
+            var result = dropdownlist.listView.options.template({ anotherName: "abc" });
 
-            assert.equal(dropdownlist.listView.options.template, "#:data.anotherName#");
+            assert.equal(result, "abc");
         });
 
         it("setDataSource does not trigger cascade event of the parent widget", function() {
@@ -1279,46 +1280,46 @@
         it("setOptions method updates footer template", function() {
             var dropdownlist = new DropDownList(input, {});
 
-            dropdownlist.setOptions({ footerTemplate: "footer" });
+            dropdownlist.setOptions({ footerTemplate: () => "footer" });
 
             assert.equal(dropdownlist.footer.html(), "footer");
         });
 
         it("setOptions method hides footer template", function() {
             var dropdownlist = new DropDownList(input, {
-                footerTemplate: "footer"
+                footerTemplate: () => "footer"
             });
 
-            dropdownlist.setOptions({ footerTemplate: "" });
+            dropdownlist.setOptions({ footerTemplate: () => "" });
 
-            assert.equal(dropdownlist.footer, null);
+            assert.equal(dropdownlist.footer.html(), "");
         });
 
         it("setOptions method updates header template", function() {
             var dropdownlist = new DropDownList(input, {});
 
-            dropdownlist.setOptions({ headerTemplate: "<div>header</div>" });
+            dropdownlist.setOptions({ headerTemplate: () => "<div>header</div>" });
 
             assert.equal(dropdownlist.header.html(), "header");
         });
 
         it("setOptions method hides footer template", function() {
             var dropdownlist = new DropDownList(input, {
-                headerTemplate: "header"
+                headerTemplate: () => "header"
             });
 
-            dropdownlist.setOptions({ headerTemplate: "" });
+            dropdownlist.setOptions({ headerTemplate: () => "" });
 
             assert.equal(dropdownlist.header, null);
         });
 
         it("setOptions re-renders noDataTemplate", function() {
             var dropdownlist = new DropDownList(input, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             dropdownlist.setOptions({
-                noDataTemplate: "no data"
+                noDataTemplate: () => "no data"
             });
 
             assert.equal(dropdownlist.noData.text(), "no data");
@@ -1326,7 +1327,7 @@
 
         it("setOptions removes noData template", function() {
             var dropdownlist = new DropDownList(input, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             dropdownlist.setOptions({

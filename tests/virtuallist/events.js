@@ -51,7 +51,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#=text#",
+                template: ({ text }) => text,
                 dataValueField: "value"
             };
         });

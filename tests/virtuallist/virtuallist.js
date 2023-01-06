@@ -75,7 +75,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#:text#"
+                template: ({ text }) => kendo.htmlEncode(text)
             };
 
             // TO DO: remove below after implementing new SASS styles in LESS
@@ -380,7 +380,7 @@
 
     it("uses the item template to render items", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            template: "<span class='foo'>#:text#</span>"
+            template: ({ text }) => `<span class='foo'>${kendo.htmlEncode(text)}</span>`
         }));
 
         asyncDataSource.read().then(function() {
@@ -396,7 +396,7 @@
 
     it("wraps the item template in li.k-list-item > div.k-list-item-text", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            template: "<span class='foo'>#:text#</span>"
+            template: ({ text }) => `<span class='foo'>${kendo.htmlEncode(text)}</span>`
         }));
 
         virtualList.bind("listBound", function() {
@@ -432,7 +432,7 @@
 
     it("displays placeholder template when list is scrolled to a not available range", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "<span class='foo'>foo...</span>",
+            placeholderTemplate: () => "<span class='foo'>foo...</span>",
             itemHeight: 20
         }));
 
@@ -462,7 +462,7 @@
 
     it("loads new items when list is scrolled", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -480,7 +480,7 @@
 
     it("shifts the position of item placeholders", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -500,7 +500,7 @@
 
     it("starts dataSource request to fetch the next range when threshold is passed", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -518,7 +518,7 @@
 
     it("does not shift the position of item placeholders until threshold is passed", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -538,7 +538,7 @@
 
     it("user is able to jump to the bottom of the list", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -1051,7 +1051,7 @@
             dataSource: asyncDataSource,
             itemHeight: ITEM_HEIGHT,
             height: CONTAINER_HEIGHT,
-            template: "#:text#"
+            template: ({ text }) => kendo.htmlEncode(text)
         });
 
         virtualList.dataSource.one("change", function() {

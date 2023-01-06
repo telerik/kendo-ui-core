@@ -307,14 +307,5 @@
 
             assert.equal(dom.data("kendoTextBox")._inputLabel[0].innerHTML, "test");
         });
-
-        it("floating label wraps the widget", function() {
-            dom = $('<input data-role="textbox" data-label="{ floating: true }"/>');
-
-            kendo.bind(dom);
-
-            assert.isOk(dom.data("kendoTextBox").wrapper.parent().hasClass("k-floating-label-container"));
-            assert.isOk(dom.data("kendoTextBox").wrapper.parent().hasClass("k-empty"));
-        });
     });
 }());

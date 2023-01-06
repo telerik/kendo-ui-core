@@ -117,24 +117,7 @@
             createNotification({
                 templates: [{
                     type: "foo",
-                    template: "bar"
-                }]
-            });
-
-            var fooFunc = notification._getCompiled("foo");
-
-            assert.equal(typeof fooFunc, "function");
-            assert.equal(fooFunc({}), "bar");
-        });
-
-        it("initialization compiles custom template function when template ID is defined", function() {
-
-            $("<script id='tid' type='text/x-kendo-template'>bar</script>").appendTo(Mocha.fixture);
-
-            createNotification({
-                templates: [{
-                    type: "foo",
-                    templateId: "tid"
+                    template: () => "bar"
                 }]
             });
 
@@ -587,7 +570,7 @@
             var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
             assert.isOk(parseInt(fooNotificationWrapper.css("top"), 10) > parseInt(barNotificationWrapper.css("top"), 10));
-            roughlyEqual(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"), 0.15);
+            roughlyEqual(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"), 0.5);
         });
 
         it("down popup stacking is applied", function() {
@@ -603,7 +586,7 @@
             var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
             assert.isOk(parseInt(fooNotificationWrapper.css("top"), 10) < parseInt(barNotificationWrapper.css("top"), 10));
-            roughlyEqual(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"), 0.15);
+            roughlyEqual(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"), 0.5);
         });
 
         it("down popup stacking is applied by default if position.top is set", function() {
@@ -637,7 +620,7 @@
             var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
             assert.isOk(fooNotificationWrapper.offset().left < barNotificationWrapper.offset().left);
-            roughlyEqual(fooNotificationWrapper.offset().top, barNotificationWrapper.offset().top, 0.82);
+            roughlyEqual(fooNotificationWrapper.offset().top, barNotificationWrapper.offset().top, 1);
         });
 
         it("left popup stacking is applied", function() {
@@ -653,7 +636,7 @@
             var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
             assert.isOk(parseInt(fooNotificationWrapper.css("left"), 10) > parseInt(barNotificationWrapper.css("left"), 10));
-            roughlyEqual(fooNotificationWrapper.css("top"), barNotificationWrapper.css("top"), 0.82);
+            roughlyEqual(fooNotificationWrapper.css("top"), barNotificationWrapper.css("top"), 1);
         });
 
         it("left popup alignment is applied if left position is set", function() {

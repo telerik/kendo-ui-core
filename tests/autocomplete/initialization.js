@@ -92,28 +92,31 @@ it("autocomplete sets default item template", function() {
     var autocomplete = new AutoComplete(input);
 
     var template = autocomplete.listView.options.template;
+    var result = template("abc");
 
-    assert.equal(template, "#:data#");
+    assert.equal(result, "abc");
 });
 
 it("autocomplete sets default item template using dataTextField option", function() {
     var autocomplete = new AutoComplete(input, {
-        dataTextField: "test"
+        dataTextField: "customField"
     });
 
     var template = autocomplete.listView.options.template;
+    var result = template({ customField: "abc" });
 
-    assert.equal(template, "#:data.test#");
+    assert.equal(result, "abc");
 });
 
 it("autocomplete sets custom item template", function() {
     var autocomplete = new AutoComplete(input, {
-        template: "#= data.toUpperCase() #"
+        template: (data) => data.toUpperCase()
     });
 
     var template = autocomplete.listView.options.template;
+    var result = template("abc");
 
-    assert.equal(template, "#= data.toUpperCase() #");
+    assert.equal(result, "ABC");
 });
 
 it("autocomplete sets a default group template", function() {
@@ -121,18 +124,20 @@ it("autocomplete sets a default group template", function() {
     });
 
     var template = autocomplete.listView.options.groupTemplate;
+    var result = template("abc");
 
-    assert.equal(template, "#:data#");
+    assert.equal(result, "abc");
 });
 
 it("autocomplete supports setting a custom group template", function() {
     var autocomplete = new AutoComplete(input, {
-        groupTemplate: "#= data.toUpperCase() #"
+        groupTemplate: (data) => data.toUpperCase()
     });
 
     var template = autocomplete.listView.options.groupTemplate;
+    var result = template("abc");
 
-    assert.equal(template, "#= data.toUpperCase() #");
+    assert.equal(result, "ABC");
 });
 
 it("autocomplete sets a default fixed group template", function() {
@@ -140,24 +145,26 @@ it("autocomplete sets a default fixed group template", function() {
     });
 
     var template = autocomplete.listView.options.fixedGroupTemplate;
+    var result = template("abc");
 
-    assert.equal(template, "#:data#");
+    assert.equal(result, "abc");
 });
 
 it("autocomplete supports setting a custom fixed group template", function() {
     var autocomplete = new AutoComplete(input, {
-        fixedGroupTemplate: "#= data.toUpperCase() #"
+        fixedGroupTemplate: (data) => data.toUpperCase()
     });
 
     var template = autocomplete.listView.options.fixedGroupTemplate;
+    var result = template("abc");
 
-    assert.equal(template, "#= data.toUpperCase() #");
+    assert.equal(result, "ABC");
 });
 
 it("defining header template", function() {
     var autocomplete = new AutoComplete(input, {
-        template: "#= data.toUpperCase() #",
-        headerTemplate: "<div id='t'>Header</div>"
+        template: (data) => data.toUpperCase(),
+        headerTemplate: () => "<div id='t'>Header</div>"
     });
 
     var list = autocomplete.list;
@@ -167,7 +174,7 @@ it("defining header template", function() {
 
 it("render footer container", function() {
     var autocomplete = new AutoComplete(input, {
-        footerTemplate: "footer"
+        footerTemplate: () => "footer"
     });
 
     var footer = autocomplete.footer;
@@ -179,7 +186,7 @@ it("render footer container", function() {
 it("render footer template", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["Item1"],
-        footerTemplate: "footer"
+        footerTemplate: () => "footer"
     });
 
     var footer = autocomplete.footer;
@@ -192,7 +199,7 @@ it("render footer template", function() {
 it("compile footer template with the autocomplete instance", function() {
     var autocomplete = new AutoComplete(input, {
         autoBind: true,
-        footerTemplate: "#: instance.dataSource.total() #"
+        footerTemplate: ({ instance }) => instance.dataSource.total()
     });
 
     var footer = autocomplete.footer;
@@ -203,7 +210,7 @@ it("compile footer template with the autocomplete instance", function() {
 it("update footer template on dataBound", function() {
     var autocomplete = new AutoComplete(input, {
         autoBind: true,
-        footerTemplate: "#: instance.dataSource.total() #"
+        footerTemplate: ({ instance }) => instance.dataSource.total()
     });
 
     var footer = autocomplete.footer;
@@ -218,7 +225,7 @@ it("adjust height if footer template", function() {
         animation: false,
         autoBind: false,
         dataSource: ["item1", "item2", "item3", "item4", "item5"],
-        footerTemplate: "<div>Footer</div>",
+        footerTemplate: () => "<div>Footer</div>",
         height: 100
     });
 
@@ -526,7 +533,9 @@ it("setOptions updates listView template when dataTextField is set", function() 
         dataTextField: "anotherName"
     });
 
-    assert.equal(autocomplete.listView.options.template, "#:data.anotherName#");
+    var result = autocomplete.listView.options.template({ anotherName: "abc" });
+
+    assert.equal(result, "abc");
 });
 
 it("setOptions updates listView dataValueField when dataTextField is set", function() {
@@ -548,17 +557,17 @@ it("setOptions updates listView dataValueField when dataTextField is set", funct
 it("setOptions method updates footer template", function() {
     var autocomplete = new AutoComplete(input, { });
 
-    autocomplete.setOptions({ footerTemplate: "footer" });
+    autocomplete.setOptions({ footerTemplate: () => "footer" });
 
     assert.equal(autocomplete.footer.html(), "footer");
 });
 
 it("setOptions method hides footer template", function() {
     var autocomplete = new AutoComplete(input, {
-        footerTemplate: "footer"
+        footerTemplate: () => "footer"
     });
 
-    autocomplete.setOptions({ footerTemplate: "" });
+    autocomplete.setOptions({ footerTemplate: null });
 
     assert.equal(autocomplete.footer, null);
 });
@@ -566,17 +575,17 @@ it("setOptions method hides footer template", function() {
 it("setOptions method updates header template", function() {
     var autocomplete = new AutoComplete(input, { });
 
-    autocomplete.setOptions({ headerTemplate: "<div>header</div>" });
+    autocomplete.setOptions({ headerTemplate: () => "<div>header</div>" });
 
     assert.equal(autocomplete.header.html(), "header");
 });
 
 it("setOptions method hides header template", function() {
     var autocomplete = new AutoComplete(input, {
-        headerTemplate: "<div>Header</div>"
+        headerTemplate: () => "<div>Header</div>"
     });
 
-    autocomplete.setOptions({ headerTemplate: "" });
+    autocomplete.setOptions({ headerTemplate: null });
 
     assert.equal(autocomplete.header, null);
 });
@@ -590,7 +599,7 @@ it("AutoComlete is disabled when placed in disabled fieldset", function() {
 //no data template
 it("AutoComplete builds a noDataTemplate", function() {
     var autocomplete = new AutoComplete(input, {
-        noDataTemplate: "test"
+        noDataTemplate: () => "test"
     });
 
     assert.isOk(autocomplete.noDataTemplate);
@@ -598,20 +607,20 @@ it("AutoComplete builds a noDataTemplate", function() {
 
 it("render nodata container", function() {
     var autocomplete = new AutoComplete(input, {
-        noDataTemplate: "test"
+        noDataTemplate: () => "test"
     });
 
     autocomplete.search("test");
 
     assert.isOk(autocomplete.noData);
     assert.isOk(autocomplete.noData.hasClass("k-no-data"));
-    assert.equal(autocomplete.noData.text(), autocomplete.options.noDataTemplate);
+    assert.equal(autocomplete.noData.text(), autocomplete.options.noDataTemplate());
 });
 
 it("render nodata before footerTemplate", function() {
     var autocomplete = new AutoComplete(input, {
-        noDataTemplate: "test",
-        footerTemplate: "footer"
+        noDataTemplate: () => "test",
+        footerTemplate: () => "footer"
     });
 
     assert.isOk(autocomplete.noData.next().hasClass("k-list-footer"));
@@ -628,8 +637,8 @@ it("hides noData template if any data", function() {
                 { name: "item3", type: "b" }
             ]
         },
-        noDataTemplate: "no data",
-        template: '#:data.name#'
+        noDataTemplate: () => "no data",
+        template: (data) => data.name
     });
 
     autocomplete.search("item");
@@ -644,8 +653,8 @@ it("shows noData template if no data", function() {
         dataSource: {
             data: [ ]
         },
-        noDataTemplate: "no data",
-        template: '#:data.name#'
+        noDataTemplate: () => "no data",
+        template: (data) => data.name
     });
 
     autocomplete.search("item");
@@ -660,8 +669,8 @@ it("hides noData template if widget is bound on subsequent call", function() {
         dataSource: {
             data: [ ]
         },
-        noDataTemplate: "no data",
-        template: '#:data.name#'
+        noDataTemplate: () => "no data",
+        template: (data) => data.name
     });
 
     autocomplete.search("item");
@@ -680,7 +689,7 @@ it("hides noData template if widget is bound on subsequent call", function() {
 it("update noData template on dataBound", function() {
     var autocomplete = new AutoComplete(input, {
         autoBind: true,
-        noDataTemplate: "#: instance.dataSource.total() #"
+        noDataTemplate: ({ instance }) => instance.dataSource.total()
     });
 
     var noData = autocomplete.noData;
@@ -692,11 +701,11 @@ it("update noData template on dataBound", function() {
 
 it("setOptions re-renders noDataTemplate", function() {
     var autocomplete = new AutoComplete(input, {
-        noDataTemplate: "test"
+        noDataTemplate: () => "test"
     });
 
     autocomplete.setOptions({
-        noDataTemplate: "no data"
+        noDataTemplate: () => "no data"
     });
 
     assert.equal(autocomplete.noData.text(), "no data");
@@ -704,7 +713,7 @@ it("setOptions re-renders noDataTemplate", function() {
 
 it("setOptions removes noData template", function() {
     var autocomplete = new AutoComplete(input, {
-        noDataTemplate: "test"
+        noDataTemplate: () => "test"
     });
 
     autocomplete.setOptions({
@@ -726,7 +735,7 @@ it("hide group header when no data loaded", function() {
             ],
             group: "name"
         },
-        template: '#:data.name#'
+        template: (data) => data.name
     });
 
     autocomplete.search("test");

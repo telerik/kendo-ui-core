@@ -41,51 +41,7 @@
              kendo.destroy(Mocha.fixture);
         });
 
-        ngTest("virtuallist compiles templates", function() {
-            angular.module("kendo.tests").controller("mine", function($scope) {
-                $scope.virtualOptions = {
-                    dataSource: asyncDataSource,
-                    height: CONTAINER_HEIGHT,
-                    itemHeight: ITEM_HEIGHT,
-                    dataValueField: "value",
-                    template: "<span>{{dataItem.text}}</span>"
-                };
-            });
-
-                Mocha.fixture.html('<div ng-controller=mine>' + container + '</div>');
-            },
-
-            function() {
-                var virtualList = $("#container").data("kendoVirtualList");
-                var element = virtualList.items().first();
-                assert.equal(element.text(), "Item 0");
-
-                element = virtualList.items().last();
-                assert.equal(element.text(), "Item 39");
-            }
-        );
-
-        ngTest("scope variables are available in the template context", function() {
-            angular.module("kendo.tests").controller("mine", function($scope) {
-                $scope.foo = "foo";
-
-                $scope.virtualOptions = {
-                    dataSource: asyncDataSource,
-                    height: CONTAINER_HEIGHT,
-                    itemHeight: ITEM_HEIGHT,
-                    dataValueField: "value",
-                    template: "<span>{{foo}}{{dataItem.text}}</span>"
-                };
-            });
-
-                Mocha.fixture.html('<div ng-controller=mine>' + container + '</div>');
-            },
-
-            function() {
-                var virtualList = $("#container").data("kendoVirtualList");
-                var element = virtualList.items().first();
-                assert.equal(element.text(), "fooItem 0");
-            });
+        // REMOVED DUE TO CSP
 
         });
 }());

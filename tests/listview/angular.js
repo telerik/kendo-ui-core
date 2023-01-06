@@ -10,7 +10,7 @@
                     .controller('MyListCtrl', ['$scope', function($scope) {
 
                         $scope.listWidget = null;
-                        $scope.listItemTemplate = '<p class="list-item">{{dataItem.number}}.{{dataItem.title}}</p>';
+                        $scope.listItemTemplate = ()=> '<p class="list-item">{{dataItem.number}}.{{dataItem.title}}</p>';
 
                         $scope.dataSource = [
                             { number: 1, title: 'first title' },
@@ -36,8 +36,8 @@
                     .controller('MyListCtrl', ['$scope', function($scope) {
 
                         $scope.listWidget = null;
-                        $scope.listItemTemplate = '<p class="list-item">{{dataItem.number}}.{{dataItem.title}}</p>';
-                        $scope.listEditTemplate = '<p class="list-item">dummy edit template</p>';
+                        $scope.listItemTemplate = ()=> '<p class="list-item">{{dataItem.number}}.{{dataItem.title}}</p>';
+                        $scope.listEditTemplate = ()=> '<p class="list-item">dummy edit template</p>';
 
                         $scope.dataSource = new kendo.data.DataSource({
                             data: [

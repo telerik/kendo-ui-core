@@ -9,7 +9,7 @@
 
 
             instance = new DateTimePicker(input, {
-                ARIATemplate: "#=kendo.toString(current, 'G')#"
+                ARIATemplate: ({ current }) => `${kendo.toString(current, 'G')}`
             });
         });
         afterEach(function() {
@@ -130,7 +130,9 @@ describe("kendo.ui.DateTimePicker ARIA defaults", function() {
     });
 
     it("DateTimePicker add evaluates ariatemplate in correct context", function() {
-        instance = new DateTimePicker(input, { ARIATemplate: "Current focused date is #= this.dateView.calendar.view().name === 'month' ? 'test': kendo.toString(data.current, 'MMM yyyy') #" });
+        instance = new DateTimePicker(input, {
+             ARIATemplate: ({ current }) => `Current focused date is ${instance.dateView.calendar.view().name === 'month' ? 'test' : kendo.toString(current, 'MMM yyyy')}`
+            });
         instance.open();
         instance.element.trigger("focus");
         var cell = instance.dateView.calendar.element.find("td.k-focus");

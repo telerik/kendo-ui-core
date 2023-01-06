@@ -24,6 +24,7 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
+        encode = kendo.htmlEncode,
         ui = kendo.ui,
         html = kendo.html,
         List = ui.List,
@@ -176,8 +177,8 @@ var __meta__ = {
             template: null,
             valueTemplate: null,
             optionLabelTemplate: null,
-            groupTemplate: "#:data#",
-            fixedGroupTemplate: "#:data#",
+            groupTemplate: (data) => encode(data),
+            fixedGroupTemplate: (data) => encode(data),
             autoWidth: false,
             popup: null,
             filterTitle: null,
@@ -307,7 +308,7 @@ var __meta__ = {
             this._prevent = true;
 
             filterInput.addClass("k-hidden");
-            filterInput.closest(".k-list-filter").css("width", this.popup.element.css("width"));
+            filterInput.closest(".k-list-filter").css("width", this.popup.element.width());
             filterInput.removeClass("k-hidden");
 
             if (isInputActive) {
@@ -476,15 +477,9 @@ var __meta__ = {
             }
 
             if (!template) {
-                template = "#:";
-
-                if (typeof optionLabel === "string") {
-                    template += "data";
-                } else {
-                    template += kendo.expr(options.dataTextField, "data");
-                }
-
-                template += "#";
+                template = (data) => (typeof optionLabel === "string" ?
+                    encode(data) :
+                    encode(kendo.getter(options.dataTextField)(data)));
             }
 
             if (typeof template !== "function") {
@@ -1354,7 +1349,7 @@ var __meta__ = {
 
 
             if (!template) {
-                template = kendo.template('#:this._text(data)#', { useWithBlock: false }).bind(that);
+                template = (data) => encode(that._text(data));
             } else {
                 template = kendo.template(template);
             }

@@ -282,7 +282,7 @@
 
         it("existing error message element container is reused", function() {
             container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/>')),
-            validator = setup(container, { errorTemplate: "<span>${message}</span>" });
+            validator = setup(container, { errorTemplate: ({ message }) => `<span>${message}</span>` });
             validator.validate();
 
             var span = container.find("span");
@@ -293,7 +293,7 @@
 
         it("existing error message element container retains its ID attribute", function() {
             container.append($('<input type="text" name="foo" required /><span class="k-invalid-msg" id="errSpan" data-kendo-for="foo"/>')),
-            validator = setup(container, { errorTemplate: "<span>${message}</span>" });
+            validator = setup(container, { errorTemplate: ({ message }) => `<span>${message}</span>` });
             validator.validate();
 
             var span = container.find("span");
@@ -302,7 +302,7 @@
 
         it("existing error message element in multiple containers is reused", function() {
             container.append($('<div></div><div><input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"></span></div>')),
-            validator = setup(container.find("div"), { errorTemplate: "<span>${message}</span>" });
+            validator = setup(container.find("div"), { errorTemplate: ({ message }) => `<span>${message}</span>` });
             validator.validate();
 
             var span = container.find("span");
@@ -313,7 +313,7 @@
 
         it("existing error message element container is reused on multiple validate calls", function() {
             container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/>')),
-            validator = setup(container, { errorTemplate: "<span>${message}</span>" });
+            validator = setup(container, { errorTemplate: ({ message }) => `<span>${message}</span>` });
             validator.validate();
             validator.validate();
 
@@ -331,7 +331,7 @@
 
         it("error message as external template", function() {
             var input = $('<input type="text" required validationMessage="invalid" />'),
-            validator = setup(input, { errorTemplate: $("#template").html() });
+            validator = setup(input, { errorTemplate: ({ message }) => $("#template").html() });
             validator.validate();
 
             assert.equal(input.next("span").text(), "template text");
@@ -339,7 +339,7 @@
 
         it("displayes message next to the validated element", function() {
             var input = $('<input type="text" required validationMessage="invalid" />'),
-            validator = setup(input, { errorTemplate: "<span>${message}</span>" });
+            validator = setup(input, { errorTemplate: ({ message }) => `<span>${message}</span>` });
             validator.validate();
 
             assert.equal(input.next("span").text(), "invalid");
@@ -347,7 +347,7 @@
 
         it("hideMessages hides the validation message", function() {
             var input = $('<input type="text" required validationMessage="invalid" />'),
-            validator = setup(input, { errorTemplate: "<span>${message}</span>" });
+            validator = setup(input, { errorTemplate: ({ message }) => `<span>${message}</span>` });
 
             validator.validate();
             validator.hideMessages();
@@ -357,7 +357,7 @@
 
         it("hideMessages hides the validation messages for the container", function() {
             container.append($('<input type="text" name="foo" required validationMessage="invalid" /><input type="text" name="bar" required validationMessage="invalid" />')),
-            validator = setup(container, { errorTemplate: "<span>${message}</span>" });
+            validator = setup(container, { errorTemplate: ({ message }) => `<span>${message}</span>` });
 
             validator.validate();
             validator.hideMessages();
@@ -368,7 +368,7 @@
 
         it("hideMessages disassociates the validation message", function() {
             var input = $('<input type="text" required validationMessage="invalid" />'),
-            validator = setup(input, { errorTemplate: "<span>${message}</span>" });
+            validator = setup(input, { errorTemplate: ({ message }) => `<span>${message}</span>` });
 
             validator.validate();
             validator.hideMessages();
@@ -378,7 +378,7 @@
 
         it("multiple calls to validation does not render multiple messages", function() {
             var input = $('<input type="text" required validationMessage="invalid" />'),
-            validator = setup(input, { errorTemplate: "<span>${message}</span>" });
+            validator = setup(input, { errorTemplate: ({ message }) => `<span>${message}</span>` });
 
             validator.validate();
             validator.validate();
@@ -459,7 +459,7 @@
         it("individualErrors template overrides the default template", function() {
             var input = $('<input type="text" required validationMessage="invalid"/>'),
             validator = setup(input, {
-                errorTemplate: "<div>${message}</div>"
+                errorTemplate: ({ message }) => `<div>${message}</div>`
             });
             validator.validate();
             assert.equal(input.next("div").text(), "invalid");
@@ -1732,9 +1732,9 @@
         it("setOptions updates options", function() {
             container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" />'));
             var validator = setup(container);
-
+            var errorTemlate = ({ message }) => `<span>${message}</span>`;
             validator.setOptions({
-                errorTemplate: "<span>#=message#</span>",
+                errorTemplate: errorTemlate,
                 validateOnBlur: false,
                 messages: {
                     custom: "Please enter valid value for my custom rule"
@@ -1745,7 +1745,7 @@
             });
             var options = validator.options;
 
-            assert.equal(options.errorTemplate, "<span>#=message#</span>");
+            assert.equal(options.errorTemplate, errorTemlate);
             assert.equal(options.validateOnBlur, false);
             assert.equal(options.messages.custom, "Please enter valid value for my custom rule");
             assert.equal(options.rules.customRule1.length, 1);
@@ -1753,7 +1753,7 @@
 
         it("reset hides validation messages and summary", function() {
             var input = $('<input type="text" required validationMessage="invalid" />'),
-            validator = setup(input, { errorTemplate: "<span>${message}</span>", validationSummary: true });
+            validator = setup(input, { errorTemplate: ({ message }) => `<span>${message}</span>`, validationSummary: true });
 
             validator.validate();
             validator.reset();
@@ -1765,7 +1765,7 @@
 
         it("reset clears registered errors", function() {
             var input = $('<input type="text" required validationMessage="invalid" />'),
-            validator = setup(input, { errorTemplate: "<span>${message}</span>", validationSummary: true });
+            validator = setup(input, { errorTemplate: ({ message }) => `<span>${message}</span>`, validationSummary: true });
 
             validator.validate();
             validator.reset();

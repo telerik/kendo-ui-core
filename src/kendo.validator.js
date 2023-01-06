@@ -131,11 +131,15 @@ var __meta__ = {
         return true;
     }
 
-    var SUMMARYTEMPLATE = '<ul>' +
-        '#for(var i = 0; i < errors.length; i += 1){#' +
-            '<li><a data-field="#=errors[i].field#" href="\\#">#= errors[i].message #</a></li>' +
-        '# } #' +
-    '</ul>';
+    var SUMMARYTEMPLATE = ({ errors }) => {
+        let result = '<ul>';
+        for (var i = 0; i < errors.length; i += 1) {
+            result += `<li><a data-field="${errors[i].field}" href="#">${errors[i].message}</a></li>`;
+        }
+
+        result += '</ul>';
+        return result;
+    };
 
     var Validator = Widget.extend({
         init: function(element, options) {
@@ -173,7 +177,7 @@ var __meta__ = {
 
         options: {
             name: "Validator",
-            errorTemplate: '<span class="k-form-error">#= message #</span>',
+            errorTemplate: ({ message }) => `<span class="k-form-error">${message}</span>`,
             messages: {
                 required: "{0} is required",
                 pattern: "{0} is not valid",

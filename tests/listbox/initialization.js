@@ -193,7 +193,7 @@
 
         it("when providing a template function the rendered content is wrapped in a li element", function() {
             listbox = createListBox({
-                template: kendo.template("<div>#:text#</div>")
+                template: kendo.template(({ text }) => `<div>${kendo.htmlEncode(text)}</div>`)
             });
 
             assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
@@ -202,7 +202,7 @@
 
         it("when providing a template string the rendered content is wrapped in a li element", function() {
             listbox = createListBox({
-                template: "<div>#:text#</div>"
+                template: ({ text }) => `<div>${kendo.htmlEncode(text)}</div>`
             });
 
             assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");

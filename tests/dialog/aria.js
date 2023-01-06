@@ -35,10 +35,10 @@
                 {
                     title: "Test",
                     actions: [ {
-                        text: "OK",
+                        text: () => "OK",
                         primary: true
                     }, {
-                        text: "Cancel",
+                        text: () => "Cancel",
                         primary: false
                     } ]
                 }

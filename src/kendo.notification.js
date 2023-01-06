@@ -19,6 +19,7 @@ var __meta__ = {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         extend = $.extend,
+        encode = kendo.htmlEncode,
         setTimeout = window.setTimeout,
         CLICK = "click",
         SHOW = "show",
@@ -37,12 +38,14 @@ var __meta__ = {
         UP = "up",
         NS = ".kendoNotification",
         WRAPPER = '<div role="alert" aria-live="polite" class="k-widget k-popup k-notification"></div>',
-        TEMPLATE = '<div class="k-notification-wrap">' +
-                '<span class="k-icon k-i-#:typeIcon#" title="#:typeIcon#"></span>' +
-                '<div class="k-notification-content">#=content#</div>' +
-                '<span aria-hidden="true" class="#: closeButton ? "" : "k-hidden"# k-icon k-i-close" title="Hide"></span>' +
+        GET_TEMPLATE_FUNC = (encodeContent) =>
+            ({ typeIcon, content, closeButton }) => '<div class="k-notification-wrap">' +
+                `<span class="k-icon k-i-${encode(typeIcon)}" title="${encode(typeIcon)}"></span>` +
+                `<div class="k-notification-content">${encodeContent ? encode(content) : content}</div>` +
+                `<span aria-hidden="true" class="${closeButton ? "" : "k-hidden"} k-icon k-i-close" title="Hide"></span>` +
             '</div>',
-        SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
+        TEMPLATE = GET_TEMPLATE_FUNC(false),
+        SAFE_TEMPLATE = GET_TEMPLATE_FUNC(true);
 
     var Notification = Widget.extend({
         init: function(element, options) {

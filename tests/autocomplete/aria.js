@@ -67,8 +67,8 @@
             var autocomplete = new AutoComplete(input, {
                 dataSource: ["Item"],
                 suggest: false,
-                footerTemplate: 'Total items found',
-                headerTemplate: 'Total items found'
+                footerTemplate: () => 'Total items found',
+                headerTemplate: () => 'Total items found'
             });
 
             autocomplete.search("I");

@@ -146,7 +146,7 @@
 
         it("item can be rendered from template", function() {
             var bottomNav = setup({
-                template: '<span class="template">custom template</span>',
+                template: () => '<span class="template">custom template</span>',
                 items: [
                     { text: "home", icon: "home" }
                 ]
@@ -158,7 +158,7 @@
         it("item can be rendered from template in item's options", function() {
             var bottomNav = setup({
                 items: [
-                    { text: "home", icon: "home",template: '<span class="template">custom template</span>' }
+                    { text: "home", icon: "home",template: () => '<span class="template">custom template</span>' }
                 ]
             });
 
@@ -167,10 +167,10 @@
 
         it("item's template overrides the widget's option", function() {
             var bottomNav = setup({
-                template: '<span class="template">custom template</span>',
+                template: () => '<span class="template">custom template</span>',
                 items: [
                     { text: "home", icon: "home" },
-                    { text: "home", icon: "home", template: '<span class="item-template">custom template</span>' }
+                    { text: "home", icon: "home", template: () => '<span class="item-template">custom template</span>' }
                 ]
             });
 

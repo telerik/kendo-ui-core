@@ -24,6 +24,7 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
+        encode = kendo.htmlEncode,
         ui = kendo.ui,
         html = kendo.html,
         List = ui.List,
@@ -156,8 +157,8 @@ var __meta__ = {
             animation: {},
             virtual: false,
             template: null,
-            groupTemplate: "#:data#",
-            fixedGroupTemplate: "#:data#",
+            groupTemplate: (data) => encode(data),
+            fixedGroupTemplate: (data) => encode(data),
             clearButton: true,
             syncValueAndText: true,
             autoWidth: false,

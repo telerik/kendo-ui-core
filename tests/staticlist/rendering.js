@@ -1,5 +1,6 @@
 (function() {
     var StaticList = kendo.ui.StaticList,
+        encode = kendo.htmlEncode,
         element;
 
     describe("kendo.ui.StaticList rendering", function() {
@@ -18,7 +19,7 @@
         it("kendoStaticList renders data source items using template", function() {
             var list = new StaticList(element, {
                 dataSource: ["foo"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -38,7 +39,7 @@
             var list = new StaticList(element, {
                 dataSource: ["item"],
                 value: ["item"],
-                template: '#:data#'
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -53,7 +54,7 @@
                 selectable: "multiple",
                 dataSource: ["item1", "item2", "item3"],
                 value: ["item1", "item3"],
-                template: '#:data#'
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -75,7 +76,7 @@
                     { name: "item3" }
                 ],
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -98,8 +99,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -123,8 +124,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -147,9 +148,9 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -170,9 +171,9 @@
             var list = new StaticList(element, {
                 dataValueField: "name",
                 dataSource: {},
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -197,9 +198,9 @@
                     ],
                     group: "code"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -219,9 +220,9 @@
                         { name: "item3", type: "b" }
                     ]
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -238,9 +239,9 @@
                     data: [],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -260,9 +261,9 @@
                         { name: "item3", type: "b" }
                     ]
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -292,9 +293,9 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -321,8 +322,8 @@
                     group: "type"
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -347,8 +348,8 @@
                     group: "type"
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -372,7 +373,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -409,7 +410,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -441,7 +442,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -467,7 +468,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -493,7 +494,7 @@
                     ]
                 },
                 value: "item2",
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
             });
 
             list.dataSource.read();
@@ -521,7 +522,7 @@
                     ]
                 },
                 value: ["item2"],
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
             });
 
             list.dataSource.read();
@@ -551,7 +552,7 @@
                         }
                     }
                 },
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
                 dataValueField: "value"
             });
 
@@ -572,7 +573,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
                 skipUpdateOnBind: true
             });
 
@@ -597,7 +598,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();

@@ -24,10 +24,10 @@ var __meta__ = {
         attrValue = kendo.attrValue,
         GROUP_CLASS = "km-group-title",
         ACTIVE_CLASS = "km-state-active",
-        GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><div class="km-text"></div></div>',
-        GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
+        GROUP_WRAPPER = `<div class="${GROUP_CLASS}"><div class="km-text"></div></div>`,
+        GROUP_TEMPLATE = kendo.template((data) => `<li><div class="${GROUP_CLASS}"><div class="km-text">${this.headerTemplate(data)}</div></div><ul>${kendo.render(this.template, data.items)}</ul></li>`),
         WRAPPER = '<div class="km-listview-wrapper"></div>',
-        SEARCH_TEMPLATE = kendo.template('<form class="km-filter-form"><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>'),
+        SEARCH_TEMPLATE = kendo.template(({ placeholder }) => `<form class="km-filter-form"><div class="km-filter-wrap"><input type="search" placeholder="${placeholder}"/><a href="#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>`),
         NS = ".kendoMobileListView",
         STYLED = "styled",
         DATABOUND = "dataBound",
@@ -987,8 +987,8 @@ var __meta__ = {
             type: "flat",
             autoBind: true,
             fixedHeaders: false,
-            template: "#:data#",
-            headerTemplate: '<span class="km-text">#:value#</span>',
+            template: (data) => kendo.htmlEncode(data),
+            headerTemplate: ({ value }) => `<span class="km-text">${kendo.htmlEncode(value)}</span>`,
             appendOnRefresh: false,
             loadMore: false,
             endlessScroll: false,
@@ -1209,25 +1209,26 @@ var __meta__ = {
         _templates: function() {
             var template = this.options.template,
                 headerTemplate = this.options.headerTemplate,
-                dataIDAttribute = ' data-uid="#=arguments[0].uid || ""#"',
                 templateProxy = {},
                 groupTemplateProxy = {};
 
             if (typeof template === FUNCTION) {
                 templateProxy.template = template;
-                template = "#=this.template(data)#";
+            } else {
+                templateProxy.template = kendo.template(template);
             }
 
-            this.template = kendo.template("<li" + dataIDAttribute + ">" + template + "</li>").bind(templateProxy);
+            this.template = kendo.template((data) => `<li${data[0].uid ? ` data-uid="${data[0].uid}"` : ""}>${this.template(data)}</li>`).bind(templateProxy);
 
             groupTemplateProxy.template = this.template;
 
             if (typeof headerTemplate === FUNCTION) {
                 groupTemplateProxy._headerTemplate = headerTemplate;
-                headerTemplate = "#=this._headerTemplate(data)#";
+            } else {
+                groupTemplateProxy._headerTemplate = kendo.template(headerTemplate);
             }
 
-            groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
+            groupTemplateProxy.headerTemplate = kendo.template((data)=> this._headerTemplate(data));
 
             this.groupTemplate = GROUP_TEMPLATE.bind(groupTemplateProxy);
         },

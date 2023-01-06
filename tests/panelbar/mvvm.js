@@ -3,8 +3,7 @@
 
     describe('panelbar MVVM', function() {
         beforeEach(function() {
-            Mocha.fixture.html('<script type="text/x-kendo-template" id="template"><li>${text}</li></script>');
-            Mocha.fixture.html('<script type="text/x-kendo-template" id="textTemplate">${text}</script>');
+
         });
         afterEach(function() {
             kendo.destroy(dom);
@@ -58,16 +57,6 @@
             observable.set("text", "bar");
 
             assert.equal(dom.find("span:first").html().trim(), "bar");
-        });
-
-        it("source binding is skipped if set to target element", function() {
-            dom = $('<ul id="container" data-template="textTemplate" data-bind="source:items"></ul>');
-
-            var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
-
-            kendo.bind(dom, observable);
-            dom.kendoPanelBar();
-            assert.equal(dom.children().length, 2);
         });
 
         it("event is raised if attached as option", function() {

@@ -28,7 +28,7 @@ var __meta__ = {
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = kendo.template('<a href="\\#" role="button" title="#=text#" aria-label="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
+        iconTemplate = ({ text, wrapClassName, className }) => `<a href="#" role="button" title="${text}" aria-label="${text}" class="k-link k-pager-nav ${wrapClassName}"><span class="k-icon ${className}"></span></a>`;
 
     function button(options) {
         return options.template( {
@@ -267,10 +267,10 @@ var __meta__ = {
 
         options: {
             name: "Pager",
-            ARIATemplate: "Page navigation, page #=page# of #=totalPages#",
-            selectTemplate: '<li><span role="button" aria-current="page" tabindex="#=tabindex#" aria-label="#=title#" class="k-link k-selected">#=text#</span></li>',
-            linkTemplate: '<li><a role="button" tabindex="#=tabindex#" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
-            numericSelectItemTemplate: '<option value="#= idx #" #if (selected) {# selected="selected" #}#>#= text #</option>',
+            ARIATemplate: ({ page, totalPages }) => `Page navigation, page ${page} of ${totalPages}`,
+            selectTemplate: ({ text, title, tabindex }) => `<li><span role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-link k-selected">${text}</span></li>`,
+            linkTemplate: ({ ns, idx, text, title, tabindex }) => `<li><a role="button" tabindex="${tabindex}" href="#" class="k-link" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}>${text}</a></li>`,
+            numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${text}</option>`,
             buttonCount: 10,
             autoBind: true,
             numeric: true,

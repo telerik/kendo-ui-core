@@ -15,6 +15,7 @@ var __meta__ = {
         NS = ".kendoButtonMenu",
         ui = kendo.ui,
         keys = kendo.keys,
+        encode = kendo.htmlEncode,
         extend = $.extend,
 
         DOT = ".",
@@ -61,14 +62,24 @@ var __meta__ = {
         spriteCssClass: null
     };
 
-    var IMAGE_TEMPLATE = "#if(imageUrl){#<img alt=\"icon\" class=\"" + cssClasses.image + "\" src=\"#:imageUrl#\" />#}#";
-    var SPRITE_TEMPLATE = "#if(spriteCssClass){#<span class=\"" + cssClasses.sprite + " #:spriteCssClass#\"></span>#}#";
-    var ICON_TEMPLATE = "#if(icon){#<span class=\"" + cssClasses.icon + " k-i-#:icon#\"></span>#}#";
-    var TEXT_TEMPLATE = "#if(text){#<span class=\"" + cssClasses.itemText + "\">#:text#</span>#}#";
+    var IMAGE_TEMPLATE = ({ imageUrl }) => `${imageUrl ? `<img alt="icon" class="${cssClasses.image}" src="${encode(imageUrl)}" />` : ''}`;
+    var SPRITE_TEMPLATE = ({ spriteCssClass }) => `${spriteCssClass ? `<span class="${cssClasses.sprite} ${encode(spriteCssClass)}"></span>` : ''}`;
+    var ICON_TEMPLATE = ({ icon }) => `${icon ? `<span class="${cssClasses.icon}" k-i-${encode(icon)}"></span>` : ''}`;
+    var TEXT_TEMPLATE = ({ text }) => `${text ? `<span class="${cssClasses.itemText}">${encode(text)}</span>` : ''}`;
 
-    var ITEM_TEMPLATE = "<span class=\"" + cssClasses.item + "\">" + IMAGE_TEMPLATE + SPRITE_TEMPLATE + ICON_TEMPLATE + TEXT_TEMPLATE + "</span>";
+    var ITEM_TEMPLATE = ({ imageUrl, spriteCssClass, icon, text }) => `<span class="${cssClasses.item}">` +
+                                                        `${IMAGE_TEMPLATE({ imageUrl })}` +
+                                                        `${SPRITE_TEMPLATE({ spriteCssClass })}` +
+                                                        `${ICON_TEMPLATE({ icon })}` +
+                                                        `${TEXT_TEMPLATE({ text })}` +
+                                                    `</span>`;
 
-    var LINK_TEMPLATE = "<a href=\"#:url#\" #if (attributes.target) {# target=\"#:attributes.target#\" #}# class=\"" + cssClasses.item + "\">" + IMAGE_TEMPLATE + SPRITE_TEMPLATE + ICON_TEMPLATE + TEXT_TEMPLATE + "</a>";
+    var LINK_TEMPLATE = ({ url, imageUrl, spriteCssClass, icon, text, attributes }) => `<a href="${encode(url)}" ${attributes.target ? `target="${attributes.target}"` : ''} class="${cssClasses.item}">` +
+                                                    `${IMAGE_TEMPLATE({ imageUrl })}` +
+                                                    `${SPRITE_TEMPLATE({ spriteCssClass })}` +
+                                                    `${ICON_TEMPLATE({ icon })}` +
+                                                    `${TEXT_TEMPLATE({ text })}` +
+                                                `</a>`;
 
     function findFocusableSibling(element, dir) {
         var getSibling = dir === NEXT ? $.fn.next : $.fn.prev;

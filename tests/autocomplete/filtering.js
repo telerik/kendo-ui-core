@@ -59,7 +59,7 @@
                 animation: false,
                 dataTextField: "name",
                 dataSource: [{ name: "foo" }, { name: "bar" }],
-                noDataTemplate: "no data"
+                noDataTemplate: () => "no data"
             });
 
             autocomplete.search("fake");

@@ -11,7 +11,7 @@
         }
 
         options = $.extend({
-            template: "<li>#:data#</li>",
+            template: (data) => `<li>$(kendo.htmlEncode(data}</li>`,
             ariaLabel: "listview label",
             navigatable: true,
             selectable: true,
@@ -133,7 +133,7 @@
 
         it("ListView preserves the id of the LI elements", function() {
             var listview = setup({
-                template: "<li id='custom[#=data#]'>#=data#</li>",
+                template: (data) => `<li id='custom[${data}]'>${data}</li>`,
                 selectable: true,
                 navigatable: true
             }).data("kendoListView");
@@ -146,7 +146,7 @@
 
         it("ListView uses id of the LI element for the aria-activedescendant", function() {
             var listview = setup({
-                template: "<li id='custom[#=data#]'>#=data#</li>",
+                template: (data) => `<li id='custom[${data}]'>${data}</li>`,
                 selectable: true,
                 navigatable: true
             }).data("kendoListView");

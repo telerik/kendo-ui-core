@@ -175,7 +175,7 @@
             createNotification({
                 templates: [{
                     type: "info",
-                    template: "<div id='#= foo #'></div>"
+                    template: ({ foo }) => `<div id='${foo}'></div>`
                 }]
             });
 
@@ -215,7 +215,7 @@
             createNotification({
                 templates: [{
                     type: "info",
-                    template: "<div id='#= foo #'></div>"
+                    template: ({ foo }) => `<div id='${foo}'></div>`
                 }]
             });
 
@@ -385,14 +385,14 @@
             createNotification({
                 templates: [{
                     type: "info",
-                    template: "foo"
+                    template: () => "foo"
                 }]
             });
 
             notification.setOptions({
                 templates: [{
                     type: "info",
-                    template: "bar"
+                    template: () => "bar"
                 }]
             });
 

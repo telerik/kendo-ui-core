@@ -159,7 +159,7 @@
 
             expect(1);
 
-            var template = kendo.template('<some-element></some-element>');
+            var template = kendo.template(() => '<some-element></some-element>');
             var Widget1 = kendo.ui.Widget.extend({
 
                 options: {

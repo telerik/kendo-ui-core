@@ -155,7 +155,7 @@ it("suggest(text) should use dataItem.text instead of li.text()", function() {
         dataTextField: "text",
         dataValueField: "value",
         dataSource: data,
-        template: "<span>List:</span>#=data.text#"
+        template: ({ text }) => `<span>List:</span>${text}`
     }).data("kendoComboBox");
 
     combobox.suggest(combobox.ul.children(":first"));

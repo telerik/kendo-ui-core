@@ -198,20 +198,30 @@ import "../kendo.core.js";
             items.removeClass(ITEMSELECTEDCLASS).removeAttr("aria-selected");
             item.addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
         },
-        _template: kendo.template(
+        _template: kendo.template(({colors, columns, tileSize, value, id}) => {
+            let startPart =
             '<div class="k-colorpalette-table-wrap">' +
-            '<table class="k-colorpalette-table k-palette" role="presentation"><tr role="row">' +
-              '# for (var i = 0; i < colors.length; ++i) { #' +
-                '# var selected = colors[i].equals(value); #' +
-                '# if (i && i % columns == 0) { # </tr><tr role="row"> # } #' +
-                '<td role="gridcell" unselectable="on" style="background-color:#= colors[i].toCss() #"' +
-                    '#= selected ? " aria-selected=true" : "" # ' +
-                    '#=(id && i === 0) ? "id=\\""+id+"\\" " : "" # ' +
-                    'class="k-colorpalette-tile#= selected ? " ' + ITEMSELECTEDCLASS + '" : "" #" ' +
-                    'aria-label="#= colors[i].toCss() #"></td>' +
-              '# } #' +
-            '</tr></table></div>'
-        ),
+            '<table class="k-colorpalette-table k-palette" role="presentation"><tr role="row">';
+
+            let cellElements = "";
+            for (var i = 0; i < colors.length; ++i) {
+                let selected = colors[i].equals(value);
+                if (i && i % columns == 0) {
+                    cellElements += '</tr><tr role="row">';
+                }
+
+                cellElements +=
+                `<td role="gridcell" unselectable="on" style="background-color:${colors[i].toCss()}"` +
+                    `${selected ? " aria-selected=true" : ""} ` +
+                    `${(id && i === 0) ? 'id=\\"' + id + '\\" ' : '' } ` +
+
+                    `class="k-colorpalette-tile${selected ? " " + ITEMSELECTEDCLASS : ""}" ` +
+                    `aria-label="${colors[i].toCss()}"></td>`;
+            }
+
+            let endPart = '</tr></table></div>';
+            return startPart + cellElements + endPart;
+        }),
         _tileSize: function() {
             var tileSize = this.options.tileSize,
                 width, height;

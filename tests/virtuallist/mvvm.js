@@ -83,26 +83,5 @@
         }, 100);
     });
 
-    it("items are rendered", function(done) {
-        virtualList = container.getKendoVirtualList();
-        setTimeout(function() {
-            assert.equal(virtualList.items().eq(0).text(), "Item 0");
-            assert.equal(virtualList.items().last().text(), "Item 39");
-            done();
-        }, 100);
-    });
-
-    it("items are rebound after re-rendering (list scroll)", function(done) {
-        virtualList = container.getKendoVirtualList();
-        setTimeout(function() {
-            scroll(virtualList.content, 620);
-            setTimeout(function() {
-                assert.equal(virtualList.items().eq(0).text(), "Item 11");
-                assert.equal(virtualList.items().last().text(), "Item 50");
-                done();
-            }, 300);
-        }, 100);
-    });
-
     });
 }());

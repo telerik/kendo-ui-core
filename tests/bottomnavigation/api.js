@@ -99,7 +99,7 @@
             });
 
             bottomNav.setOptions({
-                template: "NEW ITEM"
+                template: () => "NEW ITEM"
             });
 
             assert.equal(bottomNav.items().eq(0).text(), "NEW ITEM");

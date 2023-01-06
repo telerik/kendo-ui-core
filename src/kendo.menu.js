@@ -22,6 +22,7 @@ var __meta__ = {
         SCROLLSPEED = 50,
         extend = $.extend,
         each = $.each,
+        encode = kendo.htmlEncode,
         template = kendo.template,
         keys = kendo.keys,
         Widget = ui.Widget,
@@ -508,6 +509,8 @@ var __meta__ = {
 
             if (element[0].id) {
                 that._ariaId = kendo.format("{0}_mn_active", element[0].id);
+            } else {
+                that._ariaId = kendo.format("{0}_mn_active", kendo.guid());
             }
 
             kendo.notify(that);
@@ -2255,23 +2258,20 @@ var __meta__ = {
 
         _fieldAccessor: function(fieldName) {
             var fieldBindings = this.options[bindings[fieldName]] || [],
-                count = fieldBindings.length,
-                result = "(function(item) {";
+                count = fieldBindings.length;
 
             if (count === 0) {
-                result += "return item['" + fieldName + "'];";
+                return (function(item) { return item[fieldName]; });
             } else {
-                result += "var levels = [" +
-                            $.map(fieldBindings, function(x) {
-                                return "function(d){ return " + kendo.expr(x) + "}";
-                            }).join(",") + "];";
-                result += "if(item.level){return levels[Math.min(item.level(), " + count + "-1)](item);}else";
-                result += "{return levels[" + count + "-1](item)}";
+                return (function(item) {
+                    var levels = $.map(fieldBindings, kendo.getter);
+                    if (item.level) {
+                        return levels[Math.min(item.level(), count - 1)](item);
+                    } else {
+                        return levels[count - 1](item);
+                    }
+                });
             }
-
-            result += "})";
-
-            return result;
         },
 
         _templates: function() {
@@ -2280,74 +2280,83 @@ var __meta__ = {
                 fieldAccessor = that._fieldAccessor.bind(that);
 
             if (options.template && typeof options.template == STRING) {
-                    options.template = template(options.template);
+                options.template = template(options.template);
             } else if (!options.template) {
-                    options.template = template(
-                    "<span class='k-menu-link-text'>" +
-                    "# var text = " + fieldAccessor("text") + "(data.item); #" +
-                    "# if (typeof data.item.encoded != 'undefined' && data.item.encoded === false) {#" +
-                        "#= text #" +
-                    "# } else { #" +
-                        "#: text #" +
-                    "# } #</span>"
-                );
+                options.template = template((data) => {
+                    var text = fieldAccessor("text")(data.item);
+                    if (!(typeof data.item.encoded != 'undefined' && data.item.encoded === false)) {
+                        text = encode(text);
+                    }
+
+                    return `<span class='k-menu-link-text'>${text}</span>`;
+                });
             }
 
             that.templates = {
-                content: template(
-                    "#var contentHtml = " + fieldAccessor("content") + "(item);#" +
-                    "<div #= contentCssAttributes(item.toJSON ? item.toJSON() : item) # tabindex='-1'>#= contentHtml || '' #</div>"
-                ),
-                group: template(
-                    "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) # role='menu' aria-hidden='true'>" +
-                        "#= renderItems(data) #" +
+                content: template((data) => {
+                    var item = data.item;
+                    var contentHtml = fieldAccessor("content")(item);
+                    var contCssAttributes = data.contentCssAttributes(item.toJSON ? item.toJSON() : item);
+                    return `<div ${contCssAttributes} tabindex='-1'>${contentHtml || ''}</div>`;
+                }),
+                group: template((data) =>
+                    `<ul class='${data.groupCssClass(data.group)}' ${data.groupAttributes(data.group)} role='menu' aria-hidden='true'>` +
+                    `${data.renderItems(data)}` +
                     "</ul>"
                 ),
-                itemWrapper: template(
-                    "# var url = " + fieldAccessor("url") + "(item); #" +
-                    "# var imageUrl = " + fieldAccessor("imageUrl") + "(item); #" +
-                    "# var imgAttributes = " + fieldAccessor("imageAttr") + "(item);#" +
-                    "# var tag = url ? 'a' : 'span' #" +
-                    "<#= tag # class='#= textClass(item) #' #if(url){#href='#= url #'#}#>" +
+                itemWrapper: template((data) => {
+                    var item = data.item;
+                    var url = fieldAccessor("url")(item);
+                    var imageUrl = fieldAccessor("imageUrl")(item);
+                    var imgAttributes = fieldAccessor("imageAttr")(item);
+                    var tag = url ? 'a' : 'span';
 
-                    "# if (imageUrl) { #" +
-                              "<img #= imageCssAttributes(imgAttributes) #  alt='' src='#= imageUrl #' />" +
-                    "# } #" +
-
-                    "#= sprite(item) #" +
-                    "#= data.menu.options.template(data) #" +
-                    "#= arrow(data) #" +
-                    "</#= tag #>"
-                ),
-                item: template(
-                    "#var contentHtml = " + fieldAccessor("content") + "(item);#" +
-                    "<li class='#= wrapperCssClass(group, item) #' #= itemCssAttributes(item.toJSON ? item.toJSON() : item) # role='menuitem'  #=item.items ? \"aria-haspopup='true'\": \"\"#" +
-                        "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
-                        kendo.attr("uid") + "='#= item.uid #' " +
-                        "# if(item.items && item.items.length > 0) { # " +
-                            "# if(item.expanded) { # " +
-                                " aria-expanded='true'" +
-                            "# } else { #" +
-                                " aria-expanded='false'" +
-                            "# } #" +
-                        "# } #" +
-                    ">" +
-                        "#= itemWrapper(data) #" +
-                        "#if (item.hasChildren || item.items) { #" +
-                            "#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #" +
-                        "# } else if (item.content || item.contentUrl || contentHtml) { #" +
-                            "#= renderContent(data) #" +
-                        "# } #" +
-                    "</li>"
-                ),
-                scrollButton: template(
-                    "<span class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button k-menu-scroll-button k-scroll-#= direction #' unselectable='on'>" +
-                        "<span class='k-button-icon k-icon k-i-arrow-60-#= direction #'></span>" +
+                    return `<${tag} class='${rendering.textClass(item)}' ${url ? `href='${url}'` : ''} >` +
+                        (imageUrl ? `<img ${rendering.imageCssAttributes(imgAttributes)}  alt='' src='${imageUrl}' />` : '') +
+                        this.templates.sprite(item) +
+                        this.options.template(data) +
+                        data.arrow(data) +
+                        `</${tag}>`;
+                }),
+                item: template((data) => {
+                    var item = data.item,
+                        menu = data.menu,
+                        group = data.group,
+                        subGroup = data.subGroup;
+                    var contentHtml = fieldAccessor("content")(item);
+                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items ? "aria-haspopup='true'" : ''}` +
+                        `${item.enabled === false ? "aria-disabled='true'" : ''}` +
+                        kendo.attr("uid") + `='${item.uid}' ` +
+                        (item.items && item.items.length > 0 ?
+                            (item.expanded ?
+                                " aria-expanded='true'"
+                                : " aria-expanded='false'")
+                            : '') +
+                        ">" +
+                        `${this.templates.itemWrapper(data)}` +
+                        (item.hasChildren || item.items ?
+                            `${subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } })}`
+                            : (item.content || item.contentUrl || contentHtml ?
+                            `${data.renderContent(data)}`
+                            : '')
+                        ) +
+                        "</li>";
+                }),
+                scrollButton: template(({ direction }) =>
+                    `<span class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button k-menu-scroll-button k-scroll-${direction}' unselectable='on'>` +
+                    `<span class='k-button-icon k-icon k-i-arrow-60-${direction}'></span>` +
                     "</span>"
                 ),
-                arrow: template("<span aria-hidden='true' class='k-menu-expand-arrow'><span class='#= arrowClass(item, group) #'></span></span>"),
-                sprite: template("# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(data); if(spriteCssClass) {#<span class='k-sprite #= spriteCssClass #'></span>#}#"),
-                empty: template("")
+                arrow: template(({ item, group }) =>
+                    `<span aria-hidden='true' class='k-menu-expand-arrow'><span class='${rendering.arrowClass(item, group)}'></span></span>`),
+                sprite: template((data) => {
+                    var spriteCssClass = fieldAccessor("spriteCssClass")(data);
+                    if (spriteCssClass) {
+                        return `<span class='k-sprite ${spriteCssClass}'></span>`;
+                    }
+                    return '';
+                }),
+                empty: template(() => "")
             };
         },
 
@@ -2363,7 +2372,7 @@ var __meta__ = {
                 itemWrapper: that.templates.itemWrapper,
                 renderContent: that.renderContent,
                 arrow: item.items || item.content || item[that.options.dataContentField[0]] ? that.templates.arrow : empty,
-                subGroup: that.renderGroup
+                subGroup: that.renderGroup.bind(that)
             }, rendering));
         },
 

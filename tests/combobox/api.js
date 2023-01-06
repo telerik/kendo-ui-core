@@ -1209,56 +1209,56 @@
         it("setOptions method updates footer template", function() {
             var combobox = new ComboBox(input, {});
 
-            combobox.setOptions({ footerTemplate: "footer" });
+            combobox.setOptions({ footerTemplate: () => "footer" });
 
             assert.equal(combobox.footer.html(), "footer");
         });
 
         it("setOptions method hides footer template", function() {
             var combobox = new ComboBox(input, {
-                footerTemplate: "footer"
+                footerTemplate: () => "footer"
             });
 
-            combobox.setOptions({ footerTemplate: "" });
+            combobox.setOptions({ footerTemplate: () => "" });
 
-            assert.equal(combobox.footer, null);
+            assert.equal(combobox.footer.html(), "");
         });
 
         it("setOptions method updates header template", function() {
             var combobox = new ComboBox(input, {});
 
-            combobox.setOptions({ headerTemplate: "<div>header</div>" });
+            combobox.setOptions({ headerTemplate: () => "<div>header</div>" });
 
             assert.equal(combobox.header.html(), "header");
         });
 
         it("setOptions method hides footer template", function() {
             var combobox = new ComboBox(input, {
-                headerTemplate: "header"
+                headerTemplate: () => "header"
             });
 
-            combobox.setOptions({ headerTemplate: "" });
+            combobox.setOptions({ headerTemplate: null });
 
             assert.equal(combobox.header, null);
         });
 
         it("setOptions method hides footer template", function() {
             var combobox = new ComboBox(input, {
-                headerTemplate: "header"
+                headerTemplate: () => "header"
             });
 
-            combobox.setOptions({ headerTemplate: "" });
+            combobox.setOptions({ headerTemplate: () => "" });
 
             assert.equal(combobox.header, null);
         });
 
         it("setOptions re-renders noDataTemplate", function() {
             var combobox = new ComboBox(input, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             combobox.setOptions({
-                noDataTemplate: "no data"
+                noDataTemplate: () => "no data"
             });
 
             assert.equal(combobox.noData.text(), "no data");
@@ -1266,7 +1266,7 @@
 
         it("setOptions removes noData template", function() {
             var combobox = new ComboBox(input, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             combobox.setOptions({

@@ -53,14 +53,14 @@ var __meta__ = {
         dateViewParams = { view: "date" },
         timeViewParams = { view: "time" },
         extend = $.extend,
-        SINGLE_POPUP_TEMPLATE = '<div class="k-date-tab k-datetime-wrap">' +
+        SINGLE_POPUP_TEMPLATE = ({ buttonSize, messages }) => '<div class="k-date-tab k-datetime-wrap">' +
                                     '<div class="k-datetime-buttongroup">' +
                                         '<div class="k-button-group k-button-group-stretched">' +
-                                            '<button class="k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-base k-selected k-group-start">' +
-                                                '<span class="k-button-text">#=messages.date#</span>' +
+                                            `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-selected k-group-start">` +
+                                                `<span class="k-button-text">${messages.date}</span>` +
                                             '</button>' +
-                                            '<button class="k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-base k-group-end">' +
-                                                '<span class="k-button-text">#=messages.time#</span>' +
+                                            `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-group-end">` +
+                                                `<span class="k-button-text">${messages.time}</span>` +
                                             '</button>' +
                                         '</div>' +
                                     '</div>' +
@@ -71,11 +71,11 @@ var __meta__ = {
                                         '</div>' +
                                     '</div>' +
                                     '<div class="k-datetime-footer k-action-buttons">' +
-                                        '<button class="k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel" aria-label="Cancel">' +
-                                            '<span class="k-button-text">#=messages.cancel#</span>' +
+                                        `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel" aria-label="Cancel">` +
+                                            `<span class="k-button-text">${messages.cancel}</span>` +
                                         '</button>' +
-                                        '<button class="k-time-accept k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-primary" title="Set" aria-label="Set">' +
-                                            '<span class="k-button-text">#=messages.set#</span>' +
+                                        `<button class="k-time-accept k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-primary" title="Set" aria-label="Set">` +
+                                            `<span class="k-button-text">${messages.set}</span>` +
                                         '</button>' +
                                     '</div>' +
                                 '</div>',
@@ -175,7 +175,7 @@ var __meta__ = {
             depth: MONTH,
             animation: {},
             month: {},
-            ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
+            ARIATemplate: ({ valueType, text }) => `Current focused ${valueType} is ${text}`,
             dateButtonText: "Open the date view",
             timeButtonText: "Open the time view",
             dateInput: false,

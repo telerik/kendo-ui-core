@@ -51,7 +51,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#=text#",
+                template: ({ text }) => text,
                 dataValueField: "value"
             };
         });
@@ -390,7 +390,7 @@
                 assert.equal(virtualList.items().first().text(), "Item 0");
 
                 virtualList.setOptions({
-                    template: "<span class='foo'>#:text#</span>"
+                    template: ({ text }) => `<span class='foo'>${kendo.htmlEncode(text)}</span>`
                 });
 
                 assert.equal(virtualList.items().first().find(".k-list-item-text").html(), '<span class="foo">Item 0</span>');

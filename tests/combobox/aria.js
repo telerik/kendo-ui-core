@@ -74,8 +74,8 @@ var ComboBox = kendo.ui.ComboBox,
         it("ComboBox with templates has accessible popup", function(done) {
             var combo = new ComboBox(input, {
                 dataSource: ["Item"],
-                footerTemplate: 'Total items found',
-                headerTemplate: 'Total items found'
+                footerTemplate: () => 'Total items found',
+                headerTemplate: () => 'Total items found'
             });
 
             combo.search("I");

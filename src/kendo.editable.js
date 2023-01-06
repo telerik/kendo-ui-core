@@ -25,9 +25,9 @@ var __meta__ = {
         POINT = ".",
         AUTOCOMPLETEVALUE = "off",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
-        ERRORTEMPLATE = '<div class="k-tooltip k-tooltip-error k-validator-tooltip">' +
+        ERRORTEMPLATE = ({ message }) => '<div class="k-tooltip k-tooltip-error k-validator-tooltip">' +
             '<span class="k-tooltip-icon k-icon k-i-warning"></span>' +
-            '<span class="k-tooltip-content">#= message #</span>' +
+            `<span class="k-tooltip-content">${message}</span>` +
             '<span class="k-callout k-callout-n"></span>' +
         '</div>',
         CHANGE = "change";

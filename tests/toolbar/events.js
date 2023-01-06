@@ -849,7 +849,7 @@
 
         it("clicking on a template button does not throw JavaScript error", function() {
             var toolbar = container.kendoToolBar({
-                items: [{ template: "<input type='button' class='k-button' sprite-css-class='k-tool-icon k-i-align-left'/>" }]
+                items: [{ template: () => "<input type='button' class='k-button' sprite-css-class='k-tool-icon k-i-align-left'/>" }]
             });
 
             try {

@@ -14,8 +14,8 @@ var __meta__ = {
     var ui = kendo.ui;
     var HIDDEN = 'k-hidden';
 
-    var iconTemplate = '<span class=\'k-badge-icon k-icon k-i-#= icon #\'></span>';
-    var svgIconTemplate = '<span class=\'k-badge-icon k-svg-icon\'>#= icon #</span>';
+    var iconTemplate = ({ icon }) => `<span class='k-badge-icon k-icon k-i-${icon}'></span>`;
+    var svgIconTemplate = ({ icon }) => `<span class='k-badge-icon k-svg-icon'>${icon}</span>`;
 
     var Badge = Widget.extend({
         init: function(element, options) {

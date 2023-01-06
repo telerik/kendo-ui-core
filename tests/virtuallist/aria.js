@@ -46,7 +46,7 @@
                 dataSource: asyncDataSource,
                 height: CONTAINER_HEIGHT,
                 itemHeight: ITEM_HEIGHT,
-                template: "#=text#",
+                template: ({ text }) => text,
                 dataValueField: "value",
                 selectable: true
             });

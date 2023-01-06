@@ -22,7 +22,7 @@ var __meta__ = {
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
         WRAP = '<div class="km-actionsheet-wrapper"></div>',
-        cancelTemplate = kendo.template('<li class="km-actionsheet-cancel"><a href="\\#">#:cancel#</a></li>');
+        cancelTemplate = kendo.template(({ cancel }) => `<li class="km-actionsheet-cancel"><a href="#">${kendo.htmlEncode(cancel)}</a></li>`);
 
     var ActionSheet = Widget.extend({
         init: function(element, options) {

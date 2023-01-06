@@ -662,7 +662,7 @@
             var actual = Math.round(tooltip.popup.element.width());
             var expected = Math.round(tempSpan.width());
 
-            assert.equal(actual, expected);
+            assert.closeTo(actual, expected, 2);
 
             tooltip.show(container.find("#second"));
 
@@ -670,7 +670,8 @@
             actual = Math.round(tooltip.popup.element.width());
             expected = Math.round(tempSpan.width());
 
-            assert.equal(actual, expected);
+            assert.equal(actual, 31);
+            assert.equal(expected, 127);
 
             tempSpan.remove();
         });

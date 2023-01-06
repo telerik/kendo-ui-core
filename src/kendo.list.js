@@ -293,7 +293,8 @@ var __meta__ = {
             for (var idx = 0; idx < this.options.columns.length; idx++) {
                 var currentColumn = this.options.columns[idx];
                 var title = currentColumn.title || currentColumn.field || "";
-                var template = currentColumn.headerTemplate || title;
+                var titleFunc = () => title;
+                var template = currentColumn.headerTemplate || titleFunc;
                 var columnsHeaderTemplate = typeof template !== "function" ? kendo.template(template) : template;
                 var currentWidth = currentColumn.width;
                 var currentWidthInt = parseInt(currentWidth, 10);
@@ -328,7 +329,7 @@ var __meta__ = {
         _noData: function() {
             var list = this;
             var noData = $(list.noData);
-            var template = list.options.noDataTemplate === true ? list.options.messages.noData : list.options.noDataTemplate;
+            var template = list.options.noDataTemplate === true ? () => list.options.messages.noData : list.options.noDataTemplate;
 
             list.angular("cleanup", function() { return { elements: noData }; });
             kendo.destroy(noData);
@@ -403,7 +404,7 @@ var __meta__ = {
             }, options, virtual, changeEventOption);
 
             if (!options.template) {
-                options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
+                options.template = (data) => htmlEncode(kendo.getter(options.dataTextField)(data));
             }
 
             if (currentOptions.$angular) {
@@ -2365,8 +2366,6 @@ var __meta__ = {
         _valueExpr: function(type, values) {
             var that = this;
             var idx = 0;
-
-            var body;
             var comparer;
             var normalized = [];
 
@@ -2377,14 +2376,14 @@ var __meta__ = {
                     normalized.push(unifyType(values[idx], type));
                 }
 
-                body = "for (var idx = 0; idx < " + normalized.length + "; idx++) {" +
-                        " if (current === values[idx]) {" +
-                        "   return idx;" +
-                        " }" +
-                        "} " +
-                        "return -1;";
-
-                comparer = new Function("current", "values", body);
+                comparer = (current, values) => {
+                    for (var idx = 0; idx < normalized.length; idx++) {
+                        if (current === values[idx]) {
+                            return idx;
+                        }
+                    }
+                    return -1;
+                };
 
                 that._valueComparer = function(current) {
                     return comparer(current, normalized);
@@ -2584,12 +2583,12 @@ var __meta__ = {
             };
 
             if (options.columns) {
-                for (var i = 0; i < options.columns.length; i++) {
-                    var currentColumn = options.columns[i];
-                    var templateText = currentColumn.field ? currentColumn.field.toString() : TEXT;
+                options.columns.forEach((column, i) => {
+                    var templateText = column.field ? column.field.toString() : TEXT;
+                    var templateFunc = data => htmlEncode(kendo.getter(templateText)(data));
 
-                    templates["column" + i] = currentColumn.template || "#: " + templateText + "#";
-                }
+                    templates["column" + i] = column.template || templateFunc;
+                });
             }
 
             for (var key in templates) {

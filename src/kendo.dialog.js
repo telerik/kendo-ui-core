@@ -17,6 +17,7 @@ import "./kendo.textbox.js";
             template = kendo.template,
             keys = kendo.keys,
             isFunction = kendo.isFunction,
+            encode = kendo.htmlEncode,
             NS = "kendoWindow",
             KDIALOG = ".k-dialog",
             KWINDOW = ".k-window",
@@ -840,7 +841,7 @@ import "./kendo.textbox.js";
                     options = that.options,
                     titlebar = wrapper.children(KDIALOGTITLEBAR),
                     title = titlebar.children(KDIALOGTITLE),
-                    encodedHtml = kendo.htmlEncode(html);
+                    encodedHtml = encode(html);
 
                 if (!arguments.length) {
                     return title.html();
@@ -1007,7 +1008,7 @@ import "./kendo.textbox.js";
                 name: "Alert",
                 modal: true,
                 actions: [{
-                    text: "#: messages.okText #"
+                    text: () => `${encode(messages.okText)}`
                 }]
             }
         });
@@ -1030,13 +1031,13 @@ import "./kendo.textbox.js";
                 name: "Confirm",
                 modal: true,
                 actions: [{
-                    text: "#: messages.okText #",
+                    text: ({ messages }) => `${encode(messages.okText)}`,
                     primary: true,
                     action: function(e) {
                         e.sender.result.resolve();
                     }
                 }, {
-                    text: "#: messages.cancel #",
+                    text: ({ messages }) => `${encode(messages.cancel)}`,
                     action: function(e) {
                         e.sender.result.reject();
                     }
@@ -1083,7 +1084,7 @@ import "./kendo.textbox.js";
                 modal: true,
                 value: "",
                 actions: [{
-                    text: "#: messages.okText #",
+                    text: ({ messages }) => `${encode(messages.okText)}`,
                     primary: true,
                     action: function(e) {
                         var sender = e.sender,
@@ -1092,7 +1093,7 @@ import "./kendo.textbox.js";
                         sender.result.resolve(value);
                     }
                 }, {
-                    text: "#: messages.cancel #",
+                    text: ({ messages }) => `${encode(messages.cancel)}`,
                     action: function(e) {
                         var sender = e.sender,
                             value = sender.input.value();
@@ -1115,23 +1116,23 @@ import "./kendo.textbox.js";
         };
 
         templates = {
-            wrapper: template("<div class='k-widget k-window k-dialog' role='dialog'></div>"),
-            action: template("<button type='button' class='k-button k-button-md k-rounded-md k-button-solid # if (data.primary) { # k-button-solid-primary # } else { # k-button-solid-base # } #'></button>"),
-            titlebar: template(
+            wrapper: template(() => "<div class='k-widget k-window k-dialog' role='dialog'></div>"),
+            action: template((data) => `<button type='button' class='k-button k-button-md k-rounded-md k-button-solid ${data.primary ? 'k-button-solid-primary' : 'k-button-solid-base'}'></button>`),
+            titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar k-dialog-titlebar k-hstack'>" +
-                    "<span class='k-window-title k-dialog-title'>#: title #</span>" +
+                    `<span class='k-window-title k-dialog-title'>${encode(title)}</span>` +
                     "<div class='k-window-actions k-dialog-actions k-hstack'></div>" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'>" +
+            close: template(({ messages }) => `<a role='button' href='#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action k-dialog-action k-dialog-close' title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>` +
                 "<span class='k-button-icon k-icon k-i-close'></span></a>"),
-            actionbar: template("<div class='k-dialog-buttongroup k-actions k-hstack k-justify-content-#: buttonLayout #'></div>"),
+            actionbar: template(({ buttonLayout }) => `<div class='k-dialog-buttongroup k-actions k-hstack k-justify-content-${encode(buttonLayout)}'></div>`),
             overlay: "<div class='k-overlay'></div>",
-            alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog'></div>"),
+            alertWrapper: template(() => "<div class='k-widget k-window k-dialog' role='alertdialog'></div>"),
             alert: "<div></div>",
             confirm: "<div></div>",
             prompt: "<div></div>",
-            promptInputContainer: template("<div class='k-prompt-container'><input type='text' title='#: messages.promptInput #' aria-label='#: messages.promptInput #' /></div>")
+            promptInputContainer: template(({ messages }) => `<div class='k-prompt-container'><input type='text' title='${encode(messages.promptInput)}' aria-label='${encode(messages.promptInput)}' /></div>`)
         };
 
         kendo.alert = kendoAlert;

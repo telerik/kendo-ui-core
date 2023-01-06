@@ -114,18 +114,18 @@ var __meta__ = {
             }
         },
         TODAY = new DATE(),
-        MODERN_RENDERING_TEMPLATE = '<div tabindex="0" class="k-timeselector #=mainSize#">' +
+        MODERN_RENDERING_TEMPLATE = ({ mainSize, messages, buttonSize }) => `<div tabindex="0" class="k-timeselector ${mainSize}">` +
             '<div class="k-time-header">' +
                 '<span class="k-title"></span>' +
-                '<button class="k-button #=buttonSize# k-rounded-md k-button-flat k-button-flat-base k-time-now" title="Select now" aria-label="Select now"><span class="k-button-text">#=messages.now#</span></button>' +
+                `<button class="k-button ${buttonSize} k-rounded-md k-button-flat k-button-flat-base k-time-now" title="Select now" aria-label="Select now"><span class="k-button-text">${messages.now}</span></button>` +
             '</div>' +
             '<div class="k-time-list-container">' +
                 '<span class="k-time-highlight"></span>' +
             '</div>' +
         '</div>',
-        NEW_RENDERING_FOOTER = '<div class="k-time-footer k-action-buttons">' +
-            '<button class="k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel changes" aria-label="Cancel changes"><span class="k-button-text">#=messages.cancel#</span></button>' +
-            '<button class="k-time-accept k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-primary" title="Set time" aria-label="Set time"><span class="k-button-text">#=messages.set#</span></button>' +
+        NEW_RENDERING_FOOTER = ({ buttonSize, messages }) => '<div class="k-time-footer k-action-buttons">' +
+            `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel changes" aria-label="Cancel changes"><span class="k-button-text">${messages.cancel}</span></button>` +
+            `<button class="k-time-accept k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-primary" title="Set time" aria-label="Set time"><span class="k-button-text">${messages.set}</span></button>` +
             '</div>',
         HIGHLIGHTCONTAINER = '<span class="k-time-highlight"></span>';
 
@@ -246,9 +246,7 @@ var __meta__ = {
                 .append(listParent)
                 .on(MOUSEDOWN, preventDefault);
 
-            that.template = kendo.template('<li tabindex="-1" role="option" class="k-list-item" unselectable="on"><span class="k-list-item-text">#=data#</span></li>', {
-                useWithBlock: false
-            });
+            that.template = (data) => `<li tabindex="-1" role="option" class="k-list-item" unselectable="on"><span class="k-list-item-text">${data}</span></li>`;
 
         },
         current: function(candidate) {

@@ -330,7 +330,7 @@
             ];
             var combobox = new ComboBox(input, {
                 dataSource: data,
-                headerTemplate: "<div>Header</div>"
+                headerTemplate: () => "<div>Header</div>"
             });
 
             combobox.options.height = 100;
@@ -372,8 +372,9 @@
         it("combobox sets default item template", function() {
             var combobox = new ComboBox(input, { });
             var template = combobox.listView.options.template;
+            var result = template("abc");
 
-            assert.equal(template, "#:data#");
+            assert.equal(result, "abc");
         });
 
         it("template should use defined dataTextField", function() {
@@ -381,24 +382,26 @@
                 dataTextField: "ProductName"
             });
             var template = combobox.listView.options.template;
+            var result = template({ ProductName: "abc" });
 
-            assert.equal(template, "#:data.ProductName#");
+            assert.equal(result, "abc");
         });
 
         it("changing the template", function() {
             var combobox = new ComboBox(input, {
                 dataTextField: "",
-                template: "#= data.toUpperCase() #"
+                template: (data) => data.toUpperCase()
             });
             var template = combobox.listView.options.template;
+            var result = template("abc");
 
-            assert.equal(template, "#= data.toUpperCase() #");
+            assert.equal(result, "ABC");
         });
 
         it("defining header template", function() {
             var combobox = new ComboBox(input, {
-                template: "#= data.toUpperCase() #",
-                headerTemplate: "<div id='t'>Header</div>"
+                template: (data) => data.toUpperCase(),
+                headerTemplate: () => "<div id='t'>Header</div>"
             });
             var list = combobox.list;
 
@@ -407,7 +410,7 @@
 
         it("render footer container", function() {
             var combobox = new ComboBox(input, {
-                footerTemplate: "footer"
+                footerTemplate: () => "footer"
             });
             var footer = combobox.footer;
 
@@ -418,7 +421,7 @@
         it("render footer template", function() {
             var combobox = new ComboBox(input, {
                 autoBind: true,
-                footerTemplate: "footer"
+                footerTemplate: () => "footer"
             });
             var footer = combobox.footer;
 
@@ -428,7 +431,7 @@
         it("compile footer template with the combobox instance", function() {
             var combobox = new ComboBox(input, {
                 autoBind: true,
-                footerTemplate: "#: instance.dataSource.total() #"
+                footerTemplate: ({ instance }) => instance.dataSource.total()
             });
             var footer = combobox.footer;
 
@@ -438,7 +441,7 @@
         it("update footer template on dataBound", function() {
             var combobox = new ComboBox(input, {
                 autoBind: true,
-                footerTemplate: "#: instance.dataSource.total() #"
+                footerTemplate: ({ instance }) => instance.dataSource.total()
             });
             var footer = combobox.footer;
 
@@ -452,7 +455,7 @@
                 animation: false,
                 autoBind: false,
                 dataSource: ["item1", "item2", "item3", "item4", "item5"],
-                footerTemplate: "<div>Footer</div>",
+                footerTemplate: () => "<div>Footer</div>",
                 height: 100
             });
 
@@ -577,7 +580,7 @@
             var combobox = new ComboBox(input, {
                 autoBind: false,
                 dataSource: dataSource,
-                template: "<div style='height:30px'>#= text # </div>",
+                template: ({ text }) => `<div style='height:30px'>${text} </div>`,
                 height: 50
             });
 
@@ -1065,7 +1068,7 @@
 
         it("ComboBox opens the popup if noDataTemplate", function() {
             var combobox = new ComboBox(input, {
-                noDataTemplate: "no data"
+                noDataTemplate: () => "no data"
             });
 
             combobox.wrapper.find(".k-icon:last").click();
@@ -1075,7 +1078,7 @@
 
         it("ComboBox doesn't open the popup if no data", function() {
             var combobox = new ComboBox(input, {
-                noDataTemplate: ""
+                noDataTemplate: null
             });
 
             combobox.wrapper.find(".k-icon:last").click();
@@ -1132,7 +1135,7 @@
         //no data template
         it("ComboBox builds a noDataTemplate", function() {
             var combobox = new ComboBox(input, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             assert.isOk(combobox.noDataTemplate);
@@ -1140,18 +1143,18 @@
 
         it("render nodata container", function() {
             var combobox = new ComboBox(input, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             assert.isOk(combobox.noData);
             assert.isOk(combobox.noData.hasClass("k-no-data"));
-            assert.equal(combobox.noData.text(), combobox.options.noDataTemplate);
+            assert.equal(combobox.noData.text(), combobox.options.noDataTemplate());
         });
 
         it("render nodata before footerTemplate", function() {
             var combobox = new ComboBox(input, {
-                noDataTemplate: "test",
-                footerTemplate: "footer"
+                noDataTemplate: () => "test",
+                footerTemplate: () => "footer"
             });
 
             assert.isOk(combobox.noData.next().hasClass("k-list-footer"));
@@ -1168,8 +1171,8 @@
                         { name: "item3", type: "b" }
                     ]
                 },
-                noDataTemplate: "no data",
-                template: '#:data.name#'
+                noDataTemplate: () => "no data",
+                template: ({ name }) => name
             });
 
             combobox.open();
@@ -1184,8 +1187,8 @@
                 dataSource: {
                     data: [ ]
                 },
-                noDataTemplate: "no data",
-                template: '#:data.name#'
+                noDataTemplate: () => "no data",
+                template: ({ name }) => name
             });
 
             combobox.open();
@@ -1200,8 +1203,8 @@
                 dataSource: {
                     data: [ ]
                 },
-                noDataTemplate: "no data",
-                template: '#:data.name#'
+                noDataTemplate: () => "no data",
+                template: ({ name }) => name
             });
 
             combobox.open();
@@ -1220,7 +1223,7 @@
         it("update noData template on dataBound", function() {
             var combobox = new ComboBox(input, {
                 autoBind: true,
-                noDataTemplate: "#: instance.dataSource.total() #"
+                noDataTemplate: ({ instance }) => instance.dataSource.total()
             });
 
             var noData = combobox.noData;

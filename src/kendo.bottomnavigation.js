@@ -47,10 +47,10 @@ var __meta__ = {
     };
 
     var templates = {
-        item: template("<span class='" + bottomNavigationStyles.item + "'></span>"),
-        anchor: template("<a class='" + bottomNavigationStyles.item + "' href='#:url#'></a>"),
-        text: template("<span class='" + bottomNavigationStyles.text + "'>#=text#</span>"),
-        icon: template("<span class='" + bottomNavigationStyles.navIcon + "#if(icon){# k-icon k-i-#:icon# #}#'></span>")
+        item: template(() => `<span class="${bottomNavigationStyles.item}"></span>`),
+        anchor: template(({ url }) => `<a class="${bottomNavigationStyles.item}"  href="${kendo.htmlEncode(url)}"></a>`),
+        text: template(({ text }) => `<span class="${bottomNavigationStyles.text}" >${text}</span>`),
+        icon: template(({ icon }) => `<span class="${bottomNavigationStyles.navIcon} ${icon ? `k-icon k-i-${icon}` : ''}"></span>`)
     };
 
     var BottomNavigation = Widget.extend({

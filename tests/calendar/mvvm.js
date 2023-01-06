@@ -37,7 +37,7 @@ it("initializes a options from data attributes", function() {
 });
 
 it("initializes a disabledDates from data attributes", function() {
-    dom = $('<div data-role="calendar" data-disable-dates="[\'sa\', \'su\']" ></div>');
+    dom = $('<div data-role="calendar" data-disable-dates=\'["sa", "su"]\' ></div>');
 
     kendo.bind(dom);
 

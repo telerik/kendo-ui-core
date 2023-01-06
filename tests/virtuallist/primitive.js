@@ -45,7 +45,7 @@
                 autoBind: false,
                 dataSource: asyncDataSource,
                 height: CONTAINER_HEIGHT,
-                template: "#=data#"
+                template: (data) => data
             };
         });
 

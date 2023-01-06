@@ -24,10 +24,10 @@ var __meta__ = {
         getCulture = kendo.getCulture,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
-        cellTemplate = template('<td class="#=data.cssClass#" role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
-        emptyCellTemplate = template('<td role="gridcell" class="k-calendar-td k-out-of-range"><a class="k-link"></a></td>', { useWithBlock: false }),
-        otherMonthCellTemplate = template('<td role="gridcell" class="k-calendar-td k-out-of-range">&nbsp;</td>', { useWithBlock: false }),
-        weekNumberTemplate = template('<td class="k-calendar-td k-alt">#= data.weekNumber #</td>', { useWithBlock: false }),
+        cellTemplate = template((data) => `<td class="${data.cssClass}" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-${data.ns}value="${data.dateString}">${data.value}</a></td>`),
+        emptyCellTemplate = template(() => '<td role="gridcell" class="k-calendar-td k-out-of-range"><a class="k-link"></a></td>'),
+        otherMonthCellTemplate = template(() => '<td role="gridcell" class="k-calendar-td k-out-of-range">&nbsp;</td>'),
+        weekNumberTemplate = template((data) => `<td class="k-calendar-td k-alt">${data.weekNumber}</td>`),
         outerWidth = kendo._outerWidth,
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
@@ -73,24 +73,24 @@ var __meta__ = {
             century: 3
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
-        CLASSIC_HEADER_TEMPLATE = '<div class="k-header k-hstack">' +
-            '<a tabindex="-1" href="\\#" #=actionAttr#="prev" role="button" class="k-nav-prev k-button #=size# k-rounded-md k-button-flat k-button-flat-base k-icon-button" ' + ARIA_LABEL + '="Previous"><span class="k-button-icon k-icon k-i-arrow-60-left"></span></a>' +
-            '<a tabindex="-1" href="\\#" #=actionAttr#="nav-up" role="button" id="nav-up" class="k-nav-fast k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>' +
-            '<a tabindex="-1" href="\\#" #=actionAttr#="next" role="button" class="k-nav-next k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
-        '</div>',
-        MODERN_HEADER_TEMPLATE = '<div class="k-calendar-header k-hstack">' +
-            '<a href="\\#" #=actionAttr#="nav-up" id="nav-up" role="button" class="k-calendar-title k-title k-button #=size# k-rounded-md k-button-flat k-button-flat-base "></a>' +
-            '<span class="k-spacer"></span>' +
-            '<span class="k-calendar-nav k-hstack">' +
-                '<a tabindex="-1" #=actionAttr#="prev" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-prev-view">' +
-                    '<span class="k-button-icon k-icon k-i-arrow-60-left"></span>' +
-                '</a>' +
-                '<a tabindex="-1" #=actionAttr#="today" class="k-nav-today">#=messages.today#</a>' +
-                '<a tabindex="-1" #=actionAttr#="next" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-next-view">' +
-                    '<span class="k-button-icon k-icon k-i-arrow-60-right"></span>' +
-                '</a>' +
-            '</span>' +
-        '</div>';
+        CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size }) => `<div class="k-header k-hstack">
+            <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous"><span class="k-button-icon k-icon k-i-arrow-60-left"></span></a>
+            <a tabindex="-1" href="#" ${actionAttr}="nav-up" role="button" id="nav-up" class="k-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>
+            <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next"><span class="k-icon k-i-arrow-60-right"></span></a>
+        </div>`,
+        MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages }) => `<div class="k-calendar-header k-hstack">
+            <a href="\\#" ${actionAttr}="nav-up" id="nav-up" role="button" class="k-calendar-title k-title k-button ${size} k-rounded-md k-button-flat k-button-flat-base "></a>
+            <span class="k-spacer"></span>
+            <span class="k-calendar-nav k-hstack">
+                <a tabindex="-1" ${actionAttr}="prev" class="k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-prev-view">
+                    <span class="k-button-icon k-icon k-i-arrow-60-left"></span>
+                </a>
+                <a tabindex="-1" ${actionAttr}="today" class="k-nav-today">${messages.today}</a>
+                <a tabindex="-1" ${actionAttr}="next" class="k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-next-view">
+                    <span class="k-button-icon k-icon k-i-arrow-60-right"></span>
+                </a>
+            </span>
+        </div>`;
 
     var Calendar = Widget.extend({
         init: function(element, options) {
@@ -1350,16 +1350,16 @@ var __meta__ = {
                 content = month.content,
                 weekNumber = month.weekNumber,
                 empty = month.empty,
-                footerTemplate = '#= kendo.toString(data,"D","' + options.culture + '") #';
+                footerTemplate = (data) => `${kendo.toString(data,"D",options.culture)}`;
 
             that.month = {
-                content: template('<td class="#=data.cssClass#" role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr(VALUE) + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
-                empty: template('<td role="gridcell">' + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty }),
-                weekNumber: template('<td class="k-alt">' + (weekNumber || "#= data.weekNumber #") + "</td>", { useWithBlock: !!weekNumber })
+                content: (data) => `<td class="${data.cssClass}" role="gridcell"><a tabindex="-1" class="k-link ${data.linkClass}" href="${data.url}" ${kendo.attr(VALUE)}="${data.dateString}" title="${data.title}">${executeTemplate(content, data) || data.value}</a></td>`,
+                empty: (data) => `<td role="gridcell">${executeTemplate(empty, data) || "&nbsp;"}</td>`,
+                weekNumber: (data) => `<td class="k-alt">${executeTemplate(weekNumber, data) || data.weekNumber}</td>`
             };
 
             that.year = {
-                content: template('<td class="#=data.cssClass#" role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#" aria-label="#=data.label#">#=data.value#</a></td>', { useWithBlock: false })
+                content: template((data) => `<td class="${data.cssClass}" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-${data.ns}value="${data.dateString}" aria-label="${data.label}">${data.value}</a></td>`)
             };
 
             if (footer && footer !== true) {
@@ -2054,30 +2054,24 @@ var __meta__ = {
     }
 
     function createDisabledExpr(dates) {
-        var body, callback,
+        var callback,
             disabledDates = [],
-            days = ["su", "mo", "tu", "we", "th", "fr", "sa"],
-            searchExpression = "if (found) {" +
-                    " return true " +
-                "} else {" +
-                    "return false" +
-                "}";
+            days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
 
         if (dates[0] instanceof DATE) {
             disabledDates = convertDatesArray(dates);
-            body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.setHours(0, 0, 0, 0),[" + disabledDates + "]) > -1;" + searchExpression;
+            callback = (date) => !!(date && disabledDates.indexOf((new Date(date)).setHours(0, 0, 0, 0)) > -1);
         } else {
-            for (var i = 0; i < dates.length; i++) {
-                var day = dates[i].slice(0,2).toLowerCase();
-                var index = $.inArray(day, days);
+            disabledDates = dates.map(day => {
+                day = day.slice(0,2).toLowerCase();
+                let index = days.indexOf(day);
                 if (index > -1) {
-                    disabledDates.push(index);
+                    return index;
                 }
-            }
-            body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.getDay(),[" + disabledDates + "]) > -1;" + searchExpression;
-        }
+            });
 
-        callback = new Function("date", body);
+            callback = (date) => !!(date && disabledDates.indexOf((new Date(date)).getDay()) > -1);
+        }
 
         return callback;
     }
@@ -2097,6 +2091,17 @@ var __meta__ = {
         value = createDate(value[0], value[1], value[2]);
 
         return value;
+    }
+
+    // Backwards compatibility after CSP changes.
+    function executeTemplate(tmpl, data) {
+        if (tmpl) {
+            if (kendo.isFunction(tmpl)) {
+                return tmpl(data);
+            }
+            return template(tmpl)(data);
+        }
+        return undefined;
     }
 
     calendar.isEqualDatePart = isEqualDatePart;

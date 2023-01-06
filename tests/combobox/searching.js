@@ -1176,13 +1176,13 @@
         });
 
         it("close popup opened on empty search result", function() {
-            var combobox = new ComboBox(input, {
+            combobox = new ComboBox(input, {
                 animation: false,
                 dataTextField: "text",
                 dataValueField: "value",
                 filter: "contains",
                 dataSource: [{ text: "Foo", value: 1 }, { text: "Bar", value: 2 }, { text: "Baz", value: 3 }],
-                noDataTemplate: ""
+                noDataTemplate: null
             });
 
             combobox.search("Foo");

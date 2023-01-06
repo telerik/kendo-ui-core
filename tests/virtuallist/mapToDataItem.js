@@ -76,7 +76,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#:text#",
+                template: ({ text }) => kendo.htmlEncode(text),
                 dataValueField: "value",
                 selectable: true,
                 mapValueTo: "dataItem",
