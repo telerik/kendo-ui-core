@@ -214,4 +214,4 @@ namespace Telerik.Examples.RazorPages.Models
 }
 ```
 
-* [Server-Side API](/api/mediaplayer)
+* [Server-Side API of the MediaPlayer for {{ site.framework }}](/api/mediaplayer)

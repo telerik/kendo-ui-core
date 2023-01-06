@@ -367,12 +367,18 @@ navigation:
         title: "Appbar"
      "html-helpers/navigation/bottomnavigation":
         title: "BottomNavigation"
-        isNew: true
+        isNew: true 
      "html-helpers/navigation/breadcrumb":
         title: "Breadcrumb"
      "html-helpers/navigation/floatingactionbutton":
         title: "FloatingActionButton"
         isNew: true
+     "html-helpers/navigation/chiplist":
+         title: "ChipList"
+         isNew: true
+     "html-helpers/navigation/chip":
+         title: "Chip"
+         isNew: true
      "html-helpers/navigation/stepper":
         title: "Stepper"
      "html-helpers/navigation/wizard":
@@ -401,7 +407,7 @@ navigation:
         position: 6
      "html-helpers/navigation/toolbar/command-types":
         title: "Command Types"
-        position: 2  
+        position: 2
      "html-helpers/media":
         title: "Media"
      "html-helpers/pdf":
@@ -645,7 +651,7 @@ navigation:
         title: "TimePicker"
      "*timedurationpicker":
         title: "TimeDurationPicker"
-        isNew: true 
+        isNew: true
      "*tooltip":
         title: "Tooltip"
      "*toolbar":
@@ -681,10 +687,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2022.3.1109"
+cdnVersion: "2023.1.117"
 
 ## The MVC Core version used
-mvcCoreVersion: "2022.3.1109"
+mvcCoreVersion: "2023.1.117"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
@@ -1121,6 +1127,16 @@ defaults:
         path: "html-helpers/navigation/breadcrumb"
     values:
         title_prefix: "ASP.NET Core Breadcrumb Component"
+-
+    scope:
+        path: "html-helpers/navigation/chip"
+    values:
+        title_prefix: "ASP.NET Core Chip Component"
+-
+    scope:
+        path: "html-helpers/navigation/chiplist"
+    values:
+        title_prefix: "ASP.NET Core ChipList Component"
 -
     scope:
         path: "html-helpers/navigation/floatingactionbutton"

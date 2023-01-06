@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview
+page_title: MediaPlayer Overview
 description: "Learn the basics when working with the Telerik UI MediaPlayer for {{ site.framework }}."
 previous_url: /helpers/html-helpers/mediaplayer, /helpers/media/mediaplayer/overview
 slug: htmlhelpers_mediaplayer_aspnetcore
@@ -162,4 +162,4 @@ To reference an existing MediaPlayer instance, use the [`jQuery.data()`](http://
 
 * [Basic Usage of the MediaPlayer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/index)
 * [Using the API of the MediaPlayer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/api)
-* [Server-Side API](/api/mediaplayer)
+* [Server-Side API of the MediaPlayer for {{ site.framework }}](/api/mediaplayer)

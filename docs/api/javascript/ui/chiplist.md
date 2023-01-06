@@ -91,7 +91,7 @@ Specifies the size of the chip. Valid options are `small`, `medium`, `large` and
         });
     </script>
 
-### selectable `Boolean` *(default: 'none')*
+### selectable `String` *(default: 'none')*
 
 Sets the selection mode of the ChipList.
 

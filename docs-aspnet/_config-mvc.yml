@@ -571,6 +571,16 @@ defaults:
         title: "Breadcrumb"
 -
     scope:
+        path: "html-helpers/navigation/chip"
+    values:
+        title_prefix: "ASP.NET MVC Chip Component"
+-
+    scope:
+        path: "html-helpers/navigation/chiplist"
+    values:
+        title_prefix: "ASP.NET MVC ChipList Component"
+-
+    scope:
         path: "html-helpers/navigation/floatingactionbutton"
     values:
         title_prefix: "ASP.NET MVC FloatingActionButton Component"
