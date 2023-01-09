@@ -1,7 +1,5 @@
 exports.beforeTestFiles = [
-    'dist/styles/web/kendo.common.min.css',
-    'dist/styles/mobile/kendo.mobile.all.min.css',
-    'dist/styles/web/kendo.rtl.css',
+    'https://kendo.cdn.telerik.com/themes/5.10.0/default/default-ocean-blue.css',
     { pattern: 'dist/styles/**/*.*', watched: true, included: false },
     { pattern: 'tests/window/blank.html', watched: true, included: false },
     { pattern: 'tests/**/*-fixture.html' }
