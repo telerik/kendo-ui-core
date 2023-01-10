@@ -5323,6 +5323,7 @@ declare namespace kendo.ui {
     interface FilterField {
         defaultValue?: any;
         editorTemplate?: string|Function | undefined;
+        operators?: FilterOperators | undefined;
         label?: string | undefined;
         name?: string | undefined;
         type?: string | undefined;

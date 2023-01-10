@@ -3171,7 +3171,7 @@ var __meta__ = {
                 data = this._flatData(this._data, this.options.useRanges);
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx].isNew && data[idx].isNew()) {
+                if (data[idx].isNew && data[idx].isNew() && !data[idx].notFetched) {
                     result.push(data[idx]);
                 }
             }

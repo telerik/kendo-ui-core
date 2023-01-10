@@ -52,4 +52,4 @@ This ButtonGroup configuration is expected to produce the following HTML output:
 ## See Also
 
 * [Adding Images to the ButtonGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/icons)
-* [Server-Side API](/api/buttongroup)
+* [Server-Side API of the ButtonGroup for {{ site.framework }}](/api/buttongroup)

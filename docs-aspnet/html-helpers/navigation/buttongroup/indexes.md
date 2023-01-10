@@ -41,4 +41,4 @@ The following example demonstrates how to select a button by its index.
 
 ## See Also
 
-* [Server-Side API](/api/buttongroup)
+* [Server-Side API of the ButtonGroup for {{ site.framework }}](/api/buttongroup)

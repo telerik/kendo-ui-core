@@ -42,4 +42,4 @@ The following example demonstrates how to use the `.Selection()` configuration.
 ## See Also
 
 * [Selection by the Telerik UI ButtonGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/selection)
-* [Server-Side API](/api/buttongroup)
+* [Server-Side API of the ButtonGroup for {{ site.framework }}](/api/buttongroup)

@@ -247,5 +247,5 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Using the API of the ButtonGroup for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/api)
 * [ButtonGroup Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup)
-* [Server-Side API of the ButtonGroup](/api/buttongroup)
+* [Server-Side API of the ButtonGroup for {{ site.framework }}](/api/buttongroup)
 * [Knowledge Base Section](/knowledge-base)

@@ -41,4 +41,4 @@ The following example demonstrates how to enable and disable the ButtonGroup ove
 
 ## See Also
 
-* [Server-Side API](/api/buttongroup)
+* [Server-Side API of the ButtonGroup for {{ site.framework }}](/api/buttongroup)

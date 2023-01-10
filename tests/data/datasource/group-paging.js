@@ -164,6 +164,7 @@
                             return total;
                         },
                         model: {
+                            id: "OrderID",
                             fields: {
                                 OrderID: {
                                     type: "number"
@@ -1992,6 +1993,22 @@
             });
 
             assert.equal(dataSourceStub.calls("_expandedSubGroupItemsCount"), 1);
+        });
+
+        it("data items with default id and marked as non-fetched are not marked as new", function() {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            dataSource.read();
+            var group = dataSource._ranges[0].data[0];
+            group.items[0].notFetched = true;
+
+            assert.isNotOk(dataSource.created().length);
         });
 
         it("_expandedSubGroupItemsCount returns the correct count of expanded subgroups", function() {
