@@ -64,7 +64,7 @@ var __meta__ = {
 
     var IMAGE_TEMPLATE = ({ imageUrl }) => `${imageUrl ? `<img alt="icon" class="${cssClasses.image}" src="${encode(imageUrl)}" />` : ''}`;
     var SPRITE_TEMPLATE = ({ spriteCssClass }) => `${spriteCssClass ? `<span class="${cssClasses.sprite} ${encode(spriteCssClass)}"></span>` : ''}`;
-    var ICON_TEMPLATE = ({ icon }) => `${icon ? `<span class="${cssClasses.icon}" k-i-${encode(icon)}"></span>` : ''}`;
+    var ICON_TEMPLATE = ({ icon }) => `${icon ? `<span class="${cssClasses.icon} k-i-${encode(icon)}"></span>` : ''}`;
     var TEXT_TEMPLATE = ({ text }) => `${text ? `<span class="${cssClasses.itemText}">${encode(text)}</span>` : ''}`;
 
     var ITEM_TEMPLATE = ({ imageUrl, spriteCssClass, icon, text }) => `<span class="${cssClasses.item}">` +
