@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview
+page_title: Map Overview
 description: "Learn the basics when working with the Telerik UI Map component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/map, /helpers/diagrams-and-maps/map/overview
 slug: htmlhelpers_map_aspnetcore
@@ -222,4 +222,4 @@ For a complete example on basic Map events, refer to the [demo on using the even
 {% if site.core %}
 * [Basic Usage of the Map TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/map/tag-helper)
 {% endif %}
-* [Server-Side API](/api/map)
+* [Server-Side API of the Map for {{ site.framework }}](/api/map)
