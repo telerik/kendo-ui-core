@@ -35,7 +35,11 @@ The following example shows how to disable the built-in validation on blur.
                     {
                         field: "Address",
                         label: "Address:",
-                        validation: { required: true, message: "custom validation message" }
+                        validation: { 
+                            required: {
+                                message: "custom validation message"
+                            }
+                        }
                     }
                 ]
             });
@@ -175,7 +179,7 @@ The following example demonstrates custom validation of the `RetireDate` field.
                     label: "Employee Information",
                     items: [
                         { field: "FirstName", label: "First Name:", validation: { required: true } },
-                        { field: "LastName", label: "LastName:", validation: { required: true, message: "test" }, hint: "Hint: enter alphanumeric characters only." },
+                        { field: "LastName", label: "LastName:", validation: { required: { message: "test" }}, hint: "Hint: enter alphanumeric characters only." },
                         { field: "HireDate", label: { text: "Hire Date:" }, validation: { required: true }, },
                         {
                             field: "RetireDate",
