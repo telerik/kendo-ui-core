@@ -27,7 +27,20 @@
 
 
 // Actionsheet item
-.k-actionsheet-item {}
+.k-actionsheet-item {
+    // Focus state
+    &:focus,
+    &.k-state-focus,
+    &.k-focus {
+        .fill(
+            @actionsheet-item-focus-text,
+            @actionsheet-item-focus-bg,
+            @actionsheet-item-focus-border,
+            @actionsheet-item-focus-gradient
+        );
+        .box-shadow( @actionsheet-item-focus-shadow );
+    }
+}
 
 
 // Actionsheet action
@@ -46,21 +59,6 @@
         );
         .box-shadow( @actionsheet-item-hover-shadow );
     }
-
-
-    // Focus state
-    &:focus,
-    &.k-state-focus,
-    &.k-focus {
-        .fill(
-            @actionsheet-item-focus-text,
-            @actionsheet-item-focus-bg,
-            @actionsheet-item-focus-border,
-            @actionsheet-item-focus-gradient
-        );
-        .box-shadow( @actionsheet-item-focus-shadow );
-    }
-
 
     // Disabed state
     &:disabled,

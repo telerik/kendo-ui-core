@@ -2556,23 +2556,6 @@ var __meta__ = {
             return candidate;
         },
 
-        _template: function() {
-            var that = this;
-            var options = that.options;
-            var template = options.template;
-
-            if (!template) {
-                template = kendo.template('<li tabindex="-1" role="option" unselectable="on" class="k-list-item"><span class="k-list-item-text">${' + kendo.expr(options.dataTextField, "data") + "}</span></li>", { useWithBlock: false });
-            } else {
-                template = kendo.template(template);
-                template = function(data) {
-                    return '<li tabindex="-1" role="option" unselectable="on" class="k-list-item">' + template(data) + "</li>";
-                };
-            }
-
-            return template;
-        },
-
         _templates: function() {
             var template;
             var options = this.options;
