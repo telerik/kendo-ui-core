@@ -3,7 +3,7 @@ title: 2021 Releases
 page_title: 2021 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2021."
 slug: breakingchanges_2021
-position: 2
+position: 3
 ---
 
 # 2021 Releases
