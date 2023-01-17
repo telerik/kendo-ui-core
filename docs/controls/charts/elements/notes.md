@@ -10,7 +10,7 @@ slug: chartnotes_charts_widget
 
 The Kendo UI Chart enables you to display the metadata of a point or a specific part of the axis.
 
-![Kendo UI for jQuery Notes displayed in a chart](../chart-notes.png)
+![Kendo UI for jQuery Chart Notes](../chart-notes.png)
 
 ## Getting Started
 

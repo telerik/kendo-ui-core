@@ -57,15 +57,15 @@ Make sure the naming prefix of the IntelliSense file matches the `kendoui` bundl
 
 * Options for widget initialization
 
-    ![Kendo UI for jQuery jquery plugin](../images/vsdoc/jquery-plugin.png)
+    ![Kendo UI for jQuery plugin](../images/vsdoc/jquery-plugin.png)
 
 * Widget accessors
 
-    ![Kendo UI for jQuery jquery plugin](../images/vsdoc/jquery-accessor.png)
+    ![Kendo UI for jQuery plugin](../images/vsdoc/jquery-accessor.png)
 
 * Widget methods
 
-    ![Kendo UI for jQuery jquery plugin](../images/vsdoc/widget-method.png)
+    ![Kendo UI for jQuery plugin](../images/vsdoc/widget-method.png)
 
 ## Reference
 

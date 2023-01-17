@@ -59,7 +59,7 @@ The following example demonstrates how to configure the PivotConfigurator.
 
 The following image demonstrates the output from the previous example.
 
-![Kendo UI for jQuery PivotConfigurator](../../../../images/pivotconfigurator.png)
+![Kendo UI for jQuery PivotConfigurator Overview](../../../../images/pivotconfigurator-overview.png)
 
 ## Referencing Existing Instances
 

@@ -63,7 +63,7 @@ If the series contain two or more values for a specific period (base unit), they
 
 The following image demonstrates a chart with a set date category axis.
 
-![Kendo UI for jQuery A Chart with a date category axis](../chart-category-date-axis.png)
+![Kendo UI for jQuery Chart with a date category axis](../chart-category-date-axis.png)
 
 The following example demonstrates date series that are grouped by the year.
 
@@ -103,7 +103,7 @@ The following example demonstrates date series that are grouped by the year.
 
 The following image displays a chart with a grouped date category axis. Note how the maximum value for each year is now displayed.
 
-![Kendo UI for jQuery A Chart with a grouped date category axis](../chart-category-date-axis-grouped.png)
+![Kendo UI for jQuery Chart with a grouped date category axis](../chart-category-date-axis-grouped.png)
 
 ### Setting Aggregates
 

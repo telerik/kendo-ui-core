@@ -12,7 +12,7 @@ The  ChipList allows you to maintain a set of selected chips.
 
 The ChipList is a container for two or more individual Chip components. They represent a complex piece of information in a compact form—for example, an entity that can be a person, a place, or a thing. Each chip from the list can be selected or removed and supports various styling options. The ChipList component is commonly used for single or multiple selections such as additions to an ordered meal.
 
-![Kendo UI for jQuery Chip with Basic Configuration](basic-chiplist.png)
+![Kendo UI for jQuery ChipList with Basic Configuration](basic-chiplist.png)
 
 ## Functionality and Features
 

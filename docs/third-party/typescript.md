@@ -37,7 +37,7 @@ Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped]
 
 * Initializing and configuring widgets
 
-    ![Kendo UI for jQuery All Kendo UI widgets](../images/init.png)
+    ![Kendo UI for jQuery All Kendo UI widgets](../images/all-widgets.png)
 
 * Initializing the Kendo UI DataSource
 

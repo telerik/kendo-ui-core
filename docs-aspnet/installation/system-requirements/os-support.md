@@ -79,7 +79,6 @@ Most [{{ site.product }} helpers]({% slug overview_aspnetmvc6_aspnetmvc %}#list-
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
 | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-| Internet Explorer* | 9 or later                    | Some features may not be available due to browser limitations
 | Chrome            | Current and previous          |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
@@ -94,7 +93,6 @@ The [{{ site.product }} helpers which render data visualization]({% slug overvie
     | BROWSER           | SUPPORTED VERSIONS            |
     | :---------------- | :---------------------------- |
     | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-    | Internet Explorer | 9 or later                    |
     | Chrome            | Current and previous          |
     | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
     | Opera             | 15 or later                   |
@@ -106,14 +104,11 @@ The [{{ site.product }} helpers which render data visualization]({% slug overvie
 
     | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS                               |
     | :---------------- | :---------------------------- | :-----------                              |
-    | Internet Explorer | 10                            | Dashed lines in canvas are not supported, which affects the image export as well |
-    |                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
     | Android           | 2.3                           | The Canvas rendering mode is only supported
 
 ### Support for PDF Export
 
 The Telerik PDF generator is tested and supported in the following desktop browsers:
-* Internet Explorer 9 and later.
 * Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
 
 > Internet Explorer 9 and Safari do not support the PDF-related option for saving files. To achieve this, you need to [implement a server proxy](https://docs.telerik.com/kendo-ui/controls/data-management/grid/export/pdf-export#using-server-proxy).
@@ -125,11 +120,10 @@ Officially, PDF export is not supported on mobile because of browser limitations
 To boost the performance of your project:
 * Always use an up-to-date browser version.
 * Check **Disable Script Debugging** from your browser configuration options.
-* Activate **Caching** in Internet Explorer.
 
 ### Limitations
 
-* As of the {{ site.product }} 2017 R1 release, Internet Explorer 8 is no longer supported.
+* As of the {{ site.product }} R1 2023 release, the support for all versions of Internet Explorer is discontinued.
 * Browsers in beta stage are not supported.
 * Zoomed-in pages are not supported.
 * Zoomed-out pages are not supported. Different browsers handle sub-pixel calculations differently and zooming out the page may lead to unexpected behavior&mdash;for example, missing borders.
@@ -138,7 +132,7 @@ To boost the performance of your project:
 
     > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended DOCTYPEs include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPEs](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 
-* Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
+* In product versions before R1 2023, Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
 * It is highly advisable to use [Internet Explorer Edge mode](https://docs.microsoft.com/en-us/internet-explorer/ie11-deploy-guide/tips-and-tricks-to-manage-ie-compatibility) over a META tag or an HTTP header:
 
     ```

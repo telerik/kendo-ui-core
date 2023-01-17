@@ -14,7 +14,7 @@ The Upload supports a [synchronous](#synchronous-mode) and [asynchronous](#async
 
 When the Upload is in its synchronous mode, the widget behaves like a regular file input. The selected files are uploaded upon form submission, the user can select a variable number of files, and the browser in use is not required to support the selection of multiple files.
 
-![Kendo UI for jQuery An Upload in the synchronous mode](upload-sync.png)
+![Kendo UI for jQuery Upload Synchronous mode](upload-sync.png)
 
 The following example demonstrates how to initialize the Upload in a synchronous mode from an existing file input that is placed in a form. The array syntax in the input name is used to hint the Upload handler to treat the photos as an array. For more information on how to handle the uploaded files, refer to the documentation of your specific server technology.
 
@@ -32,7 +32,7 @@ The following example demonstrates how to initialize the Upload in a synchronous
 
 When the Upload is in its asynchronous mode, the widget requires dedicated server handlers to store and remove the uploaded files. The selected files are immediately uploaded or, optionally, the selected files are uploaded upon user confirmation. The upload request is executed out-of-band without interrupting the page flow. For the runnable example, refer to the [demo on setting the Upload in an asynchronous mode of operation](https://demos.telerik.com/kendo-ui/upload/async).
 
-![Kendo UI for jQuery An Upload in the asynchronous mode](upload-async.png)
+![Kendo UI for jQuery Upload Asynchronous mode](upload-async.png)
 
 ### Getting Started
 

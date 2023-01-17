@@ -47,7 +47,7 @@ Compared to the legacy PivotGrid, the new PivotGridV2 offers a brand new design,
 
 The following image demonstrates the output from the previous example.
 
-![Kendo UI for jQuery PivotGridV2](../../../images/pivotgridv2.png)
+![Kendo UI for jQuery PivotGridV2 Overview](../../../images/pivotgridv2-overview.png)
 
 ## Functionality and Features
 

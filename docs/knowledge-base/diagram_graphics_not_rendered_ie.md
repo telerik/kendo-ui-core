@@ -36,7 +36,7 @@ To troubleshoot this issue:
 1. Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**.
 1. Enable **Binary and script behaviors** by ticking the **Enable** radio button.
 
-![Kendo UI for jQuery Options and settings to apply to render the chart graphics](../../../styles-and-layout/chart-ie-script-behaviors.png)
+![Kendo UI for jQuery Options and settings to apply to render the chart graphics](../styles-and-layout/chart-ie-script-behaviors.png)
 
 
 ## See Also
