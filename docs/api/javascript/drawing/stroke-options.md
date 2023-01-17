@@ -54,12 +54,12 @@ The stroke dash type.
 | Value            |                                              | Description
 | ---              | :---:                                        | ---
 | `dash`           | ![Kendo UI for jQuery dash](images/stroke-dash.png)              | a line consisting of dashes
-| `dashDot`        | ![Kendo UI for jQuery dash](images/stroke-dash-dot.png)          | a line consisting of a repeating pattern of dash-dot
-| `dot`            | ![Kendo UI for jQuery dash](images/stroke-dot.png)               | a line consisting of dots
-| `longDash`       | ![Kendo UI for jQuery dash](images/stroke-long-dash.png)         | a line consisting of a repeating pattern of long-dash
-| `longDashDot`    | ![Kendo UI for jQuery dash](images/stroke-long-dash-dot.png)     | a line consisting of a repeating pattern of long-dash dot
-| `longDashDotDot` | ![Kendo UI for jQuery dash](images/stroke-long-dash-dot-dot.png) | a line consisting of a repeating pattern of long-dash dot-dot
-| `solid`          | ![Kendo UI for jQuery dash](images/stroke-solid.png)             | a solid line
+| `dashDot`        | ![Kendo UI for jQuery dashDot](images/stroke-dash-dot.png)          | a line consisting of a repeating pattern of dash-dot
+| `dot`            | ![Kendo UI for jQuery dot](images/stroke-dot.png)               | a line consisting of dots
+| `longDash`       | ![Kendo UI for jQuery longDash](images/stroke-long-dash.png)         | a line consisting of a repeating pattern of long-dash
+| `longDashDot`    | ![Kendo UI for jQuery longDashDot](images/stroke-long-dash-dot.png)     | a line consisting of a repeating pattern of long-dash dot
+| `longDashDotDot` | ![Kendo UI for jQuery longDashDotDot](images/stroke-long-dash-dot-dot.png) | a line consisting of a repeating pattern of long-dash dot-dot
+| `solid`          | ![Kendo UI for jQuery solid](images/stroke-solid.png)             | a solid line
 
 #### Example - Creating a drawing surface
     <div id="surface"></div>

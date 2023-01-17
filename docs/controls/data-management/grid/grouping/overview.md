@@ -25,11 +25,11 @@ To sort the grouped content, click the grouping tab. To toggle the sort order of
 
 **Figure 1: A Grid with its grouping functionality enabled**
 
-![Kendo UI for jQuery Grid with Grouping Enabled](../grid5_1.png)
+![Kendo UI for jQuery Grid with Grouping Enabled](../grid-grouping.png)
 
 **Figure 2: A Grid with its data grouped by last name**
 
-![Kendo UI for jQuery Grid Grouped by Last Name](../grid6_1.png)
+![Kendo UI for jQuery Grid Grouped by Last Name](../grid-grouping-lastname.png)
 
 > Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be groupable. To enable grouping on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
 

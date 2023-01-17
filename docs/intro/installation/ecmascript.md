@@ -87,7 +87,7 @@ You can manually build the source code of the components by following these step
 1. Navigate to your [downloads](https://www.telerik.com/account/my-downloads) page.
 1. Open the Kendo UI for jQuery page and scroll down to the **Source Code** section.
 
-  ![Download the Kendo UI for jQuery source code](images/source-code.png)
+  ![Download the Kendo UI for jQuery Source Code](images/source-code.png)
 
 1. Once you have downloaded and extracted the source code, navigate to the `src` folder and open a terminal.
 1. Run the following command to install **npm**:

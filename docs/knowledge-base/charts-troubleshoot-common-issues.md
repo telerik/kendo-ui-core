@@ -129,7 +129,7 @@ The following Dojo example demonstrates how to handle the issue by using `kendo-
 
 ## Chart graphics do not render in Internet Explorer
 
-![Kendo UI for jQuery A Chart in the Internet Explorer with its graphics failing to render](../../../styles-and-layout/chart-ie.png)
+![Kendo UI for jQuery A Chart in the Internet Explorer with its graphics failing to render](../styles-and-layout/chart-ie.png)
 
 > A security message which prompts you to enable the Intranet settings might appear. If you do so, skip the following steps.
 
@@ -137,7 +137,7 @@ The following Dojo example demonstrates how to handle the issue by using `kendo-
 
 Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**  and enable **Binary and script behaviors** by ticking the **Enable** radio button.
 
-![Kendo UI for jQuery Options and settings to apply to render the chart graphics](../../../styles-and-layout/chart-ie-script-behaviors.png)
+![Kendo UI for jQuery Options and settings to apply to render the chart graphics](../styles-and-layout/chart-ie-script-behaviors.png)
 
 ### The Chart does not render when JavaScript is disabled
 

@@ -10,7 +10,7 @@ position: 0
 
 The TimeDurationPicker component enables the end user to select a time range stored in milliseconds.
 
-![Kendo UI for jQuery TimeDurationPicker Overview](images/tdp-overview.png)
+![Kendo UI for jQuery TimeDurationPicker Overview](images/timedurationpicker-overview.png)
 
 ## Functionality and Features
 

@@ -37,7 +37,7 @@ The following example demonstrates how to add a basic tile layer to the Map that
     });
     </script>
 
-![Kendo UI for jQuery A Map with basic configuration](/controls/diagrams-and-maps/map/images/map-basic.png)
+![Kendo UI for jQuery Map with basic configuration](/controls/diagrams-and-maps/map/images/map-basic.png)
 
 ## Functionality and Features
 

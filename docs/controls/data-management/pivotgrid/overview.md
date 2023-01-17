@@ -55,7 +55,7 @@ The Kendo UI PivotGrid represents multidimensional data in a cross-tabular forma
 
 The previous example outputs the following result.
 
-![Kendo UI for jQuery A sample Kendo UI PivotGrid](../../../images/pivotgrid.png)
+![Kendo UI for jQuery PivotGrid Overview](../../../images/pivotgrid-overview.png)
 
 ## Functionality and Features
 

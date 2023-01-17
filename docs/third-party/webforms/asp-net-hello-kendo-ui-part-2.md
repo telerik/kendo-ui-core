@@ -88,7 +88,7 @@ To start, open the `Default.aspx` file. Specify `editable: true` in the Grid, as
 
 **Figure 1: An editable Grid**
 
-![Kendo UI for jQuery grid_is_editable](../../images/webforms/grid_is_editable.png)
+![Kendo UI for jQuery Editable Grid](../../images/webforms/grid_is_editable.png)
 
 ### Use Command Columns
 
@@ -155,7 +155,7 @@ Run the application now and notice that when you put the grid into edit mode you
 
 **Figure 2: An editable Grid with a model**
 
-![Kendo UI for jQuery grid_is_editable_with_model](../../images/webforms/grid_is_editable_with_model.png)
+![Kendo UI for jQuery Editable Grid with a Model](../../images/webforms/grid_is_editable_with_model.png)
 
 If you want to tweak this validation message, change the model definition for the **LastName** so it looks like the one demonstrated in the example below.
 
@@ -404,7 +404,7 @@ In the above scenario, the error is thrown out to the screen. If you try to dele
 
 **Figure 4: A sample server error**
 
-![Kendo UI for jQuery sample_error](../../images/webforms/sample_error.png)
+![Kendo UI for jQuery Sample Error](../../images/webforms/sample_error.png)
 
 > **Important**
 >

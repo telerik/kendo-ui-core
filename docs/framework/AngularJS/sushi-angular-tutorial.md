@@ -186,7 +186,7 @@ Now define a basic template to verify that the data is loaded and displayed corr
 
 **Figure 1: Application displaying a products view**
 
-![Kendo UI for jQuery products view](image-02.png)
+![Kendo UI for jQuery Products View](angularjs-products-view.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/3).
 
@@ -226,7 +226,7 @@ Reload the application and see the new look. Have in mind that at present the **
 
 **Figure 2: Index view with a layout**
 
-![Kendo UI for jQuery index view with layout](image-03.png)
+![Kendo UI for jQuery Index View with Layout](angularjs-index-view-layout.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/4).
 
@@ -349,7 +349,7 @@ Last, tell the ListViews to use the new template. Add the `k-template="sushiCart
 
 **Figure 3: A grouped ListView**
 
-![Kendo UI for jQuery grouped listview](image-04.png)
+![Kendo UI for jQuery Grouped ListView](angularjs-grouped-listview.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/6).
 
@@ -418,7 +418,7 @@ Now if the user clicks on an item, the application navigates to a new View and d
 
 **Figure 4: Product details view**
 
-![Kendo UI for jQuery product details](image-05.png)
+![Kendo UI for jQuery Product Details](angularjs-product-details.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/7).
 
@@ -464,7 +464,7 @@ Add `cartController` with a dependency to the `sushiCart` and `templates` servic
 
 **Figure 5: An empty cart**
 
-![Kendo UI for jQuery empty cart](image-06.png)
+![Kendo UI for jQuery Empty Cart](angularjs-empty-cart.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/8).
 

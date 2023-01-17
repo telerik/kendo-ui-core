@@ -31,8 +31,6 @@ The **Select** button of the jQuery Upload is partially visible and doesn't disp
 
 The [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) uses an opacity filter to overlay the default **Select** button of the file input. This filter is implemented as an ActiveX control in Internet Explorer version 8 and earlier. As such, it is subject to security settings and can be disabled. The following image demonstrates an affected component.
 
-![Kendo UI for jQuery Upload ActiveX](upload-activex.png)
-
 ## Solution
 
 To handle this issue in Internet Explorer, set **Internet Options** > **Security** > **Internet** (or Local intranet) > **Custom Level** > **Binary and script behaviors** to **Enable**.

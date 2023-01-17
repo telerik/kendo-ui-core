@@ -20,7 +20,7 @@ All of the following series types that are supported by the StockChart are also 
 * Line
 * Area
 
-![Kendo UI for jQuery Stock Chart](stock-chart.png)
+![Kendo UI for jQuery Stock Chart Overview](stock-chart-overview.png)
 
 * [Demo page for the StockChart](https://demos.telerik.com/kendo-ui/financial/index)
 

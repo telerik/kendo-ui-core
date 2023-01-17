@@ -174,6 +174,7 @@ The next step is to select some predefined values of the MultiSelect. The follow
     new SelectListItem() {Text = "Antarctica", Value = "6"},
     new SelectListItem() {Text = "Australia", Value = "7"}
     };
+    }
 
     <h4>MultiSelect with a Default Value</h4>
     <div>

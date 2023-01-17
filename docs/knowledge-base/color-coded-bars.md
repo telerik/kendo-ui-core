@@ -41,7 +41,7 @@ You can use color ranges for conveying additional information, for example, valu
 
 To achieve this behavior, you can normally use the stacked bar series. However, if you need to convey more flexibility, consider the following Chart.
 
-![Kendo UI for jQuery Color ranges in a Kendo UI Chart](../images/color-coded-bars.png)
+![Kendo UI for jQuery Color ranges in a Kendo UI Chart](../knowledge-base/images/color-coded-bars.png)
 
 To implement the functionality as shown in the image, define a [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) that draws the ranges dynamically. Note that the visual remains in use until the next [`render` event](/api/javascript/dataviz/ui/chart/events/render). This allows you to update it asynchronously or in real-time.
 

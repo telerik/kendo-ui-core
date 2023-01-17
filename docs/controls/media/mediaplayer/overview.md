@@ -19,7 +19,7 @@ To respond to cutting-end design practices and trends, the MediaPlayer component
 
 The following image demonstrates a template of the MediaPlayer.
 
-![Kendo UI for jQuery Template of the MediaPlayer](images/mediaplayer-overview1.png)
+![Kendo UI for jQuery MediaPlayer Template](images/mediaplayer-overview1.png)
 
 ## Initializing the MediaPlayer
 

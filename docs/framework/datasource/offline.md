@@ -14,7 +14,7 @@ Users can continue to work with the available data until the network connectivit
 
 **Offline storage mechanism**
 
-![Kendo UI for jQuery Offline Storage](/framework/datasource/OfflineStorage.gif)
+![Kendo UI for jQuery DataSource Offline Storage](/framework/datasource/OfflineStorage.gif)
 
 ## Enabling Offline Storage
 

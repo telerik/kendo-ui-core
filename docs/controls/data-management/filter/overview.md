@@ -14,7 +14,7 @@ The user interface of the Filter is useful for data-bound components that do not
 
 * [Demo page for the Filter](https://demos.telerik.com/kendo-ui/filter/index)
 
-![Kendo UI for jQuery A Filter widget](images/filter-overview.png)
+![Kendo UI for jQuery Filter Component Overview](images/filter-overview.png)
 
 ## Initializing the Filter
 

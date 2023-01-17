@@ -14,7 +14,7 @@ You can define its content either as static text or load it dynamically with AJA
 
 // add an image here
 
-![Kendo UI for jQuery Tooltip Overview](tooltip.png)
+![Kendo UI for jQuery Tooltip Overview](tooltip-overview.png)
 
 ## Functionality and Features
 

@@ -24,7 +24,7 @@ The MultiSelect has three building blocks which, depending on the current state 
 * Tag list&mdash;Displays the selected values.
 * Items popup&mdash;Displays the list of items that can be selected.
 
-![Kendo UI for jQuery Structure of the MultiSelect](../images/multiselect-structure.png)
+![Kendo UI for jQuery MultiSelect Structure](../images/multiselect-structure.png)
 
 ### Search Input
 

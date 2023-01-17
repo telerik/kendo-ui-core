@@ -31,7 +31,7 @@ To bind the Grid to local data, set the `dataSource` option of the `kendoGrid` o
 
 **Figure 1: A Grid that is bound to a local data array**
 
-![Kendo UI for jQuery Grid bound to a local data array](../grid2_1.png)
+![Kendo UI for jQuery Grid Local Data Binding](../grid-local-data-binding.png)
 
 ## See Also
 

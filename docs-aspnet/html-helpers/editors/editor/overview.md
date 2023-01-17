@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI Editor component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/editor, /helpers/editors/editor/overview
 slug: htmlhelpers_editor_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Editor Overview

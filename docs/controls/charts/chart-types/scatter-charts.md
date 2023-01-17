@@ -58,7 +58,7 @@ Each data point of a Scatter Chart is an array that contains the `X` and `Y` val
         }
     });
 
-![Kendo UI for jQuery A sample Scatter Line Chart](chart-scatter-line.png)
+![Kendo UI for jQuery Scatter Line Chart overview](chart-scatter-line-overview.png)
 
 ## Setting the Line Type
 
@@ -71,13 +71,13 @@ The default line type of a Scatter Chart is solid. You can implement the dash li
       dashType: "dot"
   }]
 
-![Kendo UI for jQuery A Scatter Chart with a dash type of line](chart-dash-types.png)
+![Kendo UI for jQuery Scatter Chart with a dash type of line](chart-dash-types.png)
 
 ## Removing Connecting Lines
 
 To remove the connecting lines, specify `"scatter"` instead of `"scatterLine"`.
 
-![Kendo UI for jQuery A Scatter Chart with removed connecting lines](chart-scatter.png)
+![Kendo UI for jQuery Scatter Chart with removed connecting lines](chart-scatter-without-connecting-lines.png)
 
 ## See Also
 

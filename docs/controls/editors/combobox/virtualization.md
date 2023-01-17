@@ -175,7 +175,7 @@ On initial load, the widget checks whether the selected value is present in the 
 7. The `service 2` returns the corresponding 25th page.
 8. The `dataSource` changes the page to `25` and displays the items showing the selected item too.
 
-![Kendo UI for jQuery The virtualization process](../mapValueTo-index.png)
+![Kendo UI for jQuery ComboBox Virtualization Process](../virtualization-mapValueTo-index.png)
 
 **Function result** The `valueMapper` is expected to return a row index or a list of indices when a multiple selection is available. That being said, the service is expected to return either an index (number) or a list of indices. If the value does not exist, the `valueMapper` returns `null`, `[]`, or `-1`, and the widget deselects the currently selected items. For an example, refer to the result of [the test service](https://demos.telerik.com/kendo-ui/combobox/virtualization) that is used in the online demos.
 
@@ -215,7 +215,7 @@ On initial load, the widget checks whether the selected value is present in the 
 7. The `service 2` returns the first data page.
 8. The widget list displays the items from the first page no matter if the selected items are part of it or not.
 
-![Kendo UI for jQuery The virtualization process](../mapValueTo-dataItem.png)
+![Kendo UI for jQuery ComboBox Virtualization Process](../virtualization-mapValueTo-dataItem.png)
 
 **Function result** The `valueMapper` is expected to return a data item or a list of data items when a multiple selection is available. That being said, the service is expected to return either an data item (object) or a list of data items. If the values does not exist, the `valueMapper` returns `null` or `[]`, and the widget deselects the currently selected values.
 

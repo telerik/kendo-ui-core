@@ -12,7 +12,7 @@ The NumericTextBox converts an `<input>` element into a numeric, percentage, or 
 
 By default, the widget renders **Spin** buttons which increase or decrease the value with a predefined step.
 
-![Kendo UI for jQuery NumericTextBox Overview](numeric-overview.png)
+![Kendo UI for jQuery NumericTextBox Overview](numerictextbox-overview.png)
 
 ## Functionality and Features
 

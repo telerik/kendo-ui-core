@@ -48,7 +48,7 @@ The following implementation demonstrates the code needed for the Swiss Type:
 ```
 Overview of the Swiss Type:
 
-![Kendo UI for jQuery Swiss Type](images/swissType.png)
+![Kendo UI for jQuery QRCode Swiss Type](images/qrcode_swissType.png)
 
 * [Demo showing Swiss QRCode format](https://demos.telerik.com/kendo-ui/qrcode/swiss)
 
@@ -92,7 +92,7 @@ The following implementation demonstrates the code needed for the Image Type:
 ```
 Overview of the Image Type:
 
-![Kendo UI for jQuery Image Type](images/imageType.png)
+![Kendo UI for jQuery QRCode Image Type](images/qrcode_imageType.png)
 
 * [Demo of QRCode with image](https://demos.telerik.com/kendo-ui/qrcode/image)
 
