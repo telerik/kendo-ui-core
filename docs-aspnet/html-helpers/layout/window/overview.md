@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Window component for {{ site.framework }}."
+description: "The Telerik UI Window component for {{ site.framework }} enables users to select multiple items, supports local and remote data binding, and provides templates for easier customization."
 previous_url: /helpers/html-helpers/window, /helpers/layout/window/overview
 slug: htmlhelpers_window_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Window Overview
@@ -106,94 +106,29 @@ The following example demonstrates the basic configuration of the Window.
 
 ## Functionality and Features
 
-* [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %})
-* [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})
-* [Constraining the position]({% slug htmlhelpers_window_constrain_aspnetcore %})
-* [Loading content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
-* [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})
-* [Integration with forms]({% slug htmlhelpers_window_forms_aspnetcore %})
+* [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %})—The Window supports setting different dimensions.
+* [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})—It is possible to predefine the position of the Window.
+* [Constraining the position]({% slug htmlhelpers_window_constrain_aspnetcore %})—The draggable area can be restricted.
+* [Loading content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})—The MultiSelect offers dynamic content loading.
+* [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})—Explains rendering container specifics.
+* [Integration with forms]({% slug htmlhelpers_window_forms_aspnetcore %})—The Window has a built-in integration with the Form component.
 {% if site.core %}
-* [Razor Page configuration]({% slug htmlhelpers_window_razorpage_aspnetcore %})
+* [Razor Page configuration]({% slug htmlhelpers_window_razorpage_aspnetcore %})—Explains using the Window in Razor Page environment.
 {% endif %}
-* [Custom actions]({% slug htmlhelpers_window_customactions_aspnetcore %})
-* [Animations]({% slug htmlhelpers_window_animations_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_window %})
+* [Custom actions]({% slug htmlhelpers_window_customactions_aspnetcore %})—One of the powerful capabilities of the Window is customizing its actions.
+* [Animations]({% slug htmlhelpers_window_animations_aspnetcore %})—The Window provides rich animation configuration.
+* [Accessibility]({% slug accessibility_aspnetcore_window %})—The Window is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
-## Events
+## Next Steps
 
-You can subscribe to all Window [events](/api/Kendo.Mvc.UI.Fluent/WindowEventBuilder). For a complete example on basic Window events, refer to the [demo on using the events of the Window](https://demos.telerik.com/{{ site.platform }}/window/events).
-
-### Handling by Handler Name
-
-The following example demonstrates how to subscribe to events by handler name.
-
-```HtmlHelper
-    @(Html.Kendo().Window()
-        .Name("window")
-        .Events(e => e
-            .Open("window_open")
-            .Close("window_close")
-        )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-window name="window" on-open="window_open" on-close="window_close">
-    </kendo-window>
-```
-{% endif %}
-```JavaScript
-    <script>
-        function window_open() {
-            // Handle the open event.
-        }
-
-        function window_close() {
-            // Handle the close event.
-        }
-    </script>
-
-```
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by using a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().Window()
-        .Name("window")
-        .Events(e => e
-            .Open(@<text>
-                function() {
-                    // Handle the open event inline.
-                }
-            </text>)
-            .Close(@<text>
-                function() {
-                    // Handle the close event inline.
-                }
-            </text>)
-        )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-window name="window"
-     on-open="function() {
-        //Handle the open event inline.
-    }"
-     on-close="function() {
-       //Handle the open event inline.
-    }">
-    </kendo-window>
-```
-{% endif %}
-
-## See Also
-
+* [Getting Started with the Window]({% slug aspnetcore_window_getting_started %})
 * [Basic Usage of the Window HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/index)
 {% if site.core %}
 * [Basic Usage of the Window TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/tag-helper)
 {% endif %}
-* [Using the API of the Window HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/api)
-* [Server-Side API](/api/window)
+
+## See Also
+
+* [Using the API of the Window for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/api)
+* [Knowledge Base Section](/knowledge-base)
+

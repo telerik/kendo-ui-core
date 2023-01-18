@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI TreeView component for {{ site.framework }}."
+description: "The Telerik UI TreeView component for {{ site.framework }} displays items in a tree-shape hierarchy, supports local and remote data binding, and provides templates for easier customization."
 previous_url: /helpers/html-helpers/treeview, /helpers/navigation/treeview/overview
 slug: htmlhelpers_treeview_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} TreeView Overview
@@ -150,148 +150,20 @@ The following example demonstrates the basic configuration of the TreeView HtmlH
 
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_treeview_binding_aspnetcore %})
-* [Items]({% slug htmlhelpers_treeview_items_aspnetcore %})
-* [Dragging and dropping]({% slug htmlhelpers_treeview_drag_drop_aspnetcore %})
-* [Checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %})
+* [Data binding]({% slug htmlhelpers_treeview_binding_aspnetcore %})—The TreeView supports remote and local binding to data.
+* [Items]({% slug htmlhelpers_treeview_items_aspnetcore %})—The Items collection holds the records displayed by the TreeView.
+* [Dragging and dropping]({% slug htmlhelpers_treeview_drag_drop_aspnetcore %})—The TreeView provides convenient built-in interaction.
+* [Checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %})—This feature presents you with the option to have Checkboxes rendered for each item.
 
-## Events
+## Next Steps
 
-The following example demonstrates the available TreeView events and how an event handler could be implemented for each of them. For a complete example on basic TreeView events, refer to the [demo on using the events of the TreeView](https://demos.telerik.com/{{ site.platform }}/treeview/events).
-
-```HtmlHelper
-    @(Html.Kendo().TreeView()
-            .Name("treeview")
-            .Checkboxes(true)
-            .DragAndDrop(true)
-            .LoadOnDemand(false)
-            .Events(events => events
-                .Change("onChange")
-                .Select("onSelect")
-                .Check("onCheck")
-                .Collapse("onCollapse")
-                .Expand("onExpand")
-                .DragStart("onDragStart")
-                .Drag("onDrag")
-                .Drop("onDrop")
-                .DragEnd("onDragEnd")
-                .Navigate("onNavigate")
-                .LoadCompleted("onLoadCompleted")
-            )
-            .DataTextField("Name")
-            .DataSource(dataSource => dataSource
-                .Read(read => read
-                    .Action("Employees", "treeview")
-                )
-            )
-        )
-
-    <script type="text/javascript">
-            function onChange(e) {
-            console.log('Selected node changed to:', e.sender.select());
-        }
-
-        function onSelect(e) {
-            console.log('Selected node:', e.node);
-        }
-
-        function onCheck(e) {
-            console.log('Checked node:', e.node);
-        }
-
-        function onCollapse(e) {
-            console.log('Collapsed node:', e.node);
-        }
-
-        function onExpand(e) {
-            console.log('Expanded node:', e.node);
-        }
-
-        function onDragStart(e) {
-            console.log('Started dragging:', e.sourceNode);
-        }
-
-        function onDrag(e) {
-            console.log("Dragging:", e.sourceNode);
-        }
-
-        function onDragEnd(e) {
-            console.log("Finished dragging:", e.sourceNode);
-        }
-
-        function onDrop(e) {
-            console.log("Dropped:", e.sourceNode);
-        }
-
-        function onLoadCompleted(e) {
-            console.log("Load Completed: ", Array.prototype.map.call(e.nodes, function (item) { return item.Name; }).join(", "));
-        }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-treeview auto-bind="true" drag-and-drop="true" load-on-demand="false" datatextfield="Name" name="treeview" on-change="onChange" on-select="onSelect" on-check="onCheck" on-collapse="onCollapse" on-expand="onExpand" on-dragstart="onDragStart" on-drag="onDrag" on-drop="onDrop" on-dragend="onDragEnd" on-navigate="onNavigate" on-load-completed="onLoadCompleted">
-        <hierarchical-datasource>
-            <schema>
-                <hierarchical-model id="id"></hierarchical-model>
-            </schema>
-            <transport>
-                <read url="@Url.Action("Employees", "treeview")" cache="true" />
-            </transport>
-        </hierarchical-datasource>
-        <checkboxes enabled="true" />
-    </kendo-treeview>
-
-    <script type="text/javascript">
-        function onChange(e) {
-            console.log('Selected node changed to:', e.sender.select());
-        }
-
-        function onSelect(e) {
-            console.log('Selected node:', e.node);
-        }
-
-        function onCheck(e) {
-            console.log('Checked node:', e.node);
-        }
-
-        function onCollapse(e) {
-            console.log('Collapsed node:', e.node);
-        }
-
-        function onExpand(e) {
-            console.log('Expanded node:', e.node);
-        }
-
-        function onDragStart(e) {
-            console.log('Started dragging:', e.sourceNode);
-        }
-
-        function onDrag(e) {
-            console.log("Dragging:", e.sourceNode);
-        }
-
-        function onDragEnd(e) {
-            console.log("Finished dragging:", e.sourceNode);
-        }
-
-        function onDrop(e) {
-            console.log("Dropped:", e.sourceNode);
-        }
-
-        function onLoadCompleted(e) {
-            console.log("Load Completed: ", Array.prototype.map.call(e.nodes, function (item) { return item.Name; }).join(", "));
-        }
-    </script>
-```
-{% endif %}
-
-## See Also
-
+* [Getting Started with the TreeView]({% slug aspnetcore_treeview_getting_started %})
 * [Basic Usage of the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/index)
 {% if site.core %}
 * [Basic Usage of the TreeView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/tag-helper)
 {% endif %}
-* [Using the API of the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/api)
-* [Telerik UI for {{site.framework}} DataSource configuration]({% slug htmlhelpers_datasource_aspnetcore %})
-* [Server-Side API](/api/treeview)
+
+## See Also
+
+* [Using the API of the TreeView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/api)
+* [Knowledge Base Section](/knowledge-base)

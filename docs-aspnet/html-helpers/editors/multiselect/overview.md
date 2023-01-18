@@ -164,7 +164,7 @@ The following example demonstrates the basic configuration of the MultiSelect. T
 
 ## Functionality and Features
 
-* [Binding]({% slug htmlhelpers_multiselect_databinding_aspnetcore %})—The MultiSelect support remote and local binding to data.
+* [Binding]({% slug htmlhelpers_multiselect_databinding_aspnetcore %})—The MultiSelect supports remote and local binding to data.
 * [Grouping]({% slug htmlhelpers_multiselect_grouping_aspnetcore %})—The built-in grouping features allows you to arrange the items in separate sets. 
 * [Virtualization]({% slug htmlhelpers_multiselect_virtualization_aspnetcore %})—To improve the performance when displaying a large number of records, take advantage of the MultiSelect virtualization.
 * [Templates]({% slug htmlhelpers_multiselect_templates_aspnetcore %})—The templates allow you to customize the rendering of the items, tags, and pop-up header.
