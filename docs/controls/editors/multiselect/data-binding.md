@@ -3,7 +3,7 @@ title: Data Binding
 page_title: jQuery MultiSelect Documentation - Data Binding
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to bind the MultiSelect to local data arrays and to remote data sources."
 slug: databinding_multiselect
-position: 2
+position: 3
 ---
 
 # Data Binding
@@ -14,9 +14,21 @@ For more information on initializing the MultiSelect through the `<option>` tag 
 
 > When you configure the local or remote data source of the MultiSelect, enabling the paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_ddl_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
 
+## Basic Approaches for Initialization
+
+The MultiSelect supports the following binding approaches for its initialization:
+
+* Binding the component to a local data array and using the `<option>` tag of an existing `<select>` element with defined data items.
+* Binding the component to a local data array and using the `<select>` element.
+* Binding the component to a remote data service and using the `<select>` element.
+
+When you initialize the MultiSelect, note the following specifics:
+* Create the MultiSelect within a `$(document).ready()` statement because the component has to be initialized after the DOM fully loads.
+* The MultiSelect copies the styles and CSS classes from the `input` element to the `wrapper` element.
+
 ## Binding to Local Data
 
-To initialize the MultiSelect by binding the widget to a local data array and utilizing the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+To initialize the MultiSelect by binding the component to a local data array and utilizing the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
     <select id="multiselect"></select>
 
@@ -35,7 +47,7 @@ To initialize the MultiSelect by binding the widget to a local data array and ut
 
 ## Binding to Remote Data
 
-To initialize the MultiSelect by binding the widget to remote data arrays and then utilizing the `<input>` or the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets so that items can be loaded on demand when they are displayed. You can use the Data Source for serving data from a variety of data services such as [XML](https://en.wikipedia.org/wiki/XML), [JSON](https://en.wikipedia.org/wiki/JSON), and [JSONP](https://en.wikipedia.org/wiki/JSONP).
+To initialize the MultiSelect by binding the component to remote data arrays and then utilizing the `<input>` or the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets so that items can be loaded on demand when they are displayed. You can use the Data Source for serving data from a variety of data services such as [XML](https://en.wikipedia.org/wiki/XML), [JSON](https://en.wikipedia.org/wiki/JSON), and [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
     <select id="multiselect" multiple></select>
 
@@ -90,7 +102,7 @@ The following example demonstrates how to preselect values on initial loading.
 
 ## Removing Input Values
 
-The MultiSelect enables you to remove the values from its input area by using the `clearButton` configuration option. As a result, an **x** button appears in the input area on hover and when clicked by the user, the button resets the value of the widget and triggers the `change` event. By default, the `clearButton` option is enabled.
+The MultiSelect enables you to remove the values from its input area by using the `clearButton` configuration option. As a result, an **x** button appears in the input area on hover and when clicked by the user, the button resets the value of the component and triggers the `change` event. By default, the `clearButton` option is enabled.
 
 ## See Also
 

@@ -20,7 +20,7 @@ You will initialize a TabStrip component with several items and a basic content 
 
 @[template](/_contentTemplates/core/getting-started-directives.md#gs-adding-directives)
 
-You will also add some sample content that the TabStrip will present. Optionally, you can structure the document by adding the desired HTML elements like headings, divs, paragraphs, and others.
+Optionally, you can structure the document by adding the desired HTML elements like headings, divs, paragraphs, and others.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -60,7 +60,7 @@ Use the TabStrip HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
     {
         tabstrip.Add().Text("Paris")
             .Selected(true)
-            .ImageUrl(Url.Content("~/shared/icons/16/photo.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/photo.png"))
             .Content(@<text>
             <div class="weather">
                 <h2>17<span>ºC</span></h2>
@@ -70,7 +70,7 @@ Use the TabStrip HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
             </text>);
 
         tabstrip.Add().Text("New York")
-            .ImageUrl(Url.Content("~/shared/icons/16/star.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/star.png"))
             .Content(@<text>
             <div class="weather">
                 <h2>29<span>ºC</span></h2>
@@ -91,7 +91,7 @@ Use the TabStrip HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
     <kendo-tabstrip name="tabstrip">
         <items>
             <tabstrip-item text="Paris" selected="true" 
-            image-url="@Url.Content("~/shared/icons/16/photo.png")">
+            image-url="@Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/photo.png")">
                 <content>
                     <div class="weather">
                         <h2>17<span>&ordm;C</span></h2>
@@ -101,7 +101,7 @@ Use the TabStrip HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
                 </content>
             </tabstrip-item>
             <tabstrip-item text="New York" 
-            image-url="@Url.Content("~/shared/icons/16/star.png")">
+            image-url="@Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/star.png")">
                 <content>
                     <div class="weather">
                         <h2>29<span>&ordm;C</span></h2>
@@ -116,9 +116,9 @@ Use the TabStrip HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
 ```
 {% endif %}
 
-## 3. Using SelectedIndex
+## 3. Setting the Tab Position
 
-The next step is to demonstrate how you can set the `TabPosition()` option which allows you to dictate where the tabs should be rendered. The default setting is Top, but you can also use Left, Bottom, etc.
+The next step is to demonstrate how you can set the `TabPosition()` option which allows you to dictate where the tabs are rendered. The default setting is `Top`, but you can also use `Left`, `Bottom`, etc.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -132,7 +132,7 @@ The next step is to demonstrate how you can set the `TabPosition()` option which
     {
         tabstrip.Add().Text("Paris")
             .Selected(true)
-            .ImageUrl(Url.Content("~/shared/icons/16/photo.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/photo.png"))
             .Content(@<text>
             <div class="weather">
                 <h2>17<span>ºC</span></h2>
@@ -142,7 +142,7 @@ The next step is to demonstrate how you can set the `TabPosition()` option which
             </text>);
 
         tabstrip.Add().Text("New York")
-            .ImageUrl(Url.Content("~/shared/icons/16/star.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/star.png"))
             .Content(@<text>
             <div class="weather">
                 <h2>29<span>ºC</span></h2>
@@ -163,7 +163,7 @@ The next step is to demonstrate how you can set the `TabPosition()` option which
     <kendo-tabstrip name="tabstrip" tab-position="top">
         <items>
             <tabstrip-item text="Paris" selected="true" 
-            image-url="@Url.Content("~/shared/icons/16/photo.png")">
+            image-url="@Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/photo.png")">
                 <content>
                     <div class="weather">
                         <h2>17<span>&ordm;C</span></h2>
@@ -173,7 +173,7 @@ The next step is to demonstrate how you can set the `TabPosition()` option which
                 </content>
             </tabstrip-item>
             <tabstrip-item text="New York" 
-            image-url="@Url.Content("~/shared/icons/16/star.png")">
+            image-url="@Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/star.png")">
                 <content>
                     <div class="weather">
                         <h2>29<span>&ordm;C</span></h2>
@@ -211,7 +211,7 @@ The TabStrip component provides convenient events for implementing your desired 
     {
         tabstrip.Add().Text("Paris")
             .Selected(true)
-            .ImageUrl(Url.Content("~/shared/icons/16/photo.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/photo.png"))
             .Content(@<text>
             <div class="weather">
                 <h2>17<span>ºC</span></h2>
@@ -221,7 +221,7 @@ The TabStrip component provides convenient events for implementing your desired 
             </text>);
 
         tabstrip.Add().Text("New York")
-            .ImageUrl(Url.Content("~/shared/icons/16/star.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/star.png"))
             .Content(@<text>
             <div class="weather">
                 <h2>29<span>ºC</span></h2>
@@ -248,7 +248,7 @@ The TabStrip component provides convenient events for implementing your desired 
     <kendo-tabstrip name="tabstrip" tab-position="top" on-select="select">
         <items>
             <tabstrip-item text="Paris" selected="true" 
-            image-url="@Url.Content("~/shared/icons/16/photo.png")">
+            image-url="@Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/photo.png")">
                 <content>
                     <div class="weather">
                         <h2>17<span>&ordm;C</span></h2>
@@ -258,7 +258,7 @@ The TabStrip component provides convenient events for implementing your desired 
                 </content>
             </tabstrip-item>
             <tabstrip-item text="New York" 
-            image-url="@Url.Content("~/shared/icons/16/star.png")">
+            image-url="@Url.Content("https://demos.telerik.com/aspnet-core/shared/icons/16/star.png")">
                 <content>
                     <div class="weather">
                         <h2>29<span>&ordm;C</span></h2>
@@ -300,16 +300,16 @@ You can reference the TabStrip instances that you have created and build on top 
 
 You can continue experimenting with the code sample above by running it in the Telerik REPL server playground:
 
-* [Sample code with the TabStrip HtmlHelper](https://netcorerepl.telerik.com/GxEPvfFn57pvHH5H49)
-* [Sample code with the TabStrip TagHelper](https://netcorerepl.telerik.com/GRaFPJFn587ZL70m01)
+* [Sample code with the TabStrip HtmlHelper](https://netcorerepl.telerik.com/Qdalvrlh218JkVt549)
+* [Sample code with the TabStrip TagHelper](https://netcorerepl.telerik.com/QHubbrFr23Qwf7NT06)
 
 {% endif %}
 
 ## Next Steps
 
-* [TabStrip Items Binding](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/tabstrip/binding/items-binding)
-* [Keyboard Navigation in TabStrip]({% slug keynav_aspnetcore_tabstrip %})
-* [TabStrip Content]({% slug htmlhelpers_tabstrip_aspnetcore_content %})
+* [Binding the TabStrip Items](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/tabstrip/binding/items-binding)
+* [Configuring the TabStrip Content Area]({% slug htmlhelpers_tabstrip_aspnetcore_content %})
+* [Configuring the Animation Effects of the TabStrip]({% slug htmlhelpers_tabstrip_animations_aspnetcore %})
 
 ## See Also
 

@@ -3,7 +3,7 @@ title: Floating Label
 page_title: jQuery MultiSelect Documentation - Floating Label
 description: "Learn how to create and initialize a floating label for the Kendo UI for jQuery MultiSelect component."
 slug: floating_label_kendoui_multiselect_widget
-position: 10
+position: 11
 ---
 
 # Floating Label

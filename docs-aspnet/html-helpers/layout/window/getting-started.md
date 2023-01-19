@@ -46,7 +46,7 @@ You will also control the dragging of the Window. Optionally, you can structure 
 Use the Window HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to a page:
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the name attributes of the Window element.
-* The `Title()` configuration specifies the text that is shown at the header bar of the Window.
+* The `Title()` configuration specifies the text that is shown in the header of the Window.
 * The `Content()` setting contains the inner structure of the component. 
 
 ```HtmlHelper
@@ -91,7 +91,7 @@ Use the Window HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the c
 ```
 {% endif %}
 
-## 3. Enable dragging and buttons
+## 3. Enable Dragging and Buttons
 
 The next step is to switch on the dragging feature of the Window and include more action buttons.
 

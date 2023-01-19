@@ -18,7 +18,7 @@ For more information, refer to:
 
 The component follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. For more information, refer to the article on [WAI-ARIA support in Kendo UI for jQuery]({% slug wai_aria_accessibility_support %}).
 
-The MultiSelect has three building blocks which, depending on the current state of the widget and its options, use different aria properties on their nested elements:
+The MultiSelect has three building blocks which, depending on the current state of the component and its options, use different aria properties on their nested elements:
 
 * Search input&mdash;Filters the list of choices.
 * Tag list&mdash;Displays the selected values.
@@ -36,11 +36,11 @@ The MultiSelect implements the following WAI-ARIA roles, states, and properties 
 |----------|---------------------- |---------------------------------------------|
 |[`listbox`](https://www.w3.org/TR/wai-aria-1.1/#listbox)  |                              | Identifies the popup with items.
 |          | [`aria-expanded`](https://www.w3.org/TR/wai-aria-1.1/#aria-expanded)         | Indicates the state of the popup with items - expanded or collapsed. |
-|          | [`aria-haspopup`](https://www.w3.org/TR/wai-aria-1.1/#aria-haspopup)         | Indicates that the widget has a popup. |
+|          | [`aria-haspopup`](https://www.w3.org/TR/wai-aria-1.1/#aria-haspopup)         | Indicates that the component has a popup. |
 |          | [`aria-autocomplete`](https://www.w3.org/TR/wai-aria-1.1/#aria-autocomplete) | Indicates that the provided user input will display a popup that contains a list of values that could complete the provided input. |
 |          | [`aria-describedby`](https://www.w3.org/TR/wai-aria-1.1/#aria-describedby)   | Identifies the tag list as the description object and allows screen readers to announce the selected options upon focusing them. |
-|          | [`aria-busy`](https://www.w3.org/TR/wai-aria-1.1/#aria-busy)                 | Indicates if the widget is in the process of loading data. |
-|          | [`aria-disabled`](https://www.w3.org/TR/wai-aria-1.1/#aria-disabled)         | Indicates if the widget is disabled. |
+|          | [`aria-busy`](https://www.w3.org/TR/wai-aria-1.1/#aria-busy)                 | Indicates if the component is in the process of loading data. |
+|          | [`aria-disabled`](https://www.w3.org/TR/wai-aria-1.1/#aria-disabled)         | Indicates if the component is disabled. |
 |          | [`aria-activedescendant`](https://www.w3.org/TR/wai-aria-1.1/#aria-activedescendant) | Indicates the active element when navigating through the list of selected options. |
 
 ### Tag List

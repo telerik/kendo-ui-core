@@ -3,7 +3,7 @@ title: Templates
 page_title: jQuery ComboBox Documentation - Templates
 description: "Get started with the jQuery ComboBox by Kendo UI and use the item, header, footer, and no-data templates to organize its data."
 slug: templates_kendoui_combobox
-position: 5
+position: 6
 ---
 
 # Templates
@@ -74,7 +74,7 @@ The header template manages the way the popup header of a ComboBox is rendered.
 
 ## Footer Templates
 
-The footer template manages the way the pop-up footer of a ComboBox is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
+The footer template manages the way the pop-up footer of a ComboBox is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the component itself.
 
     <input id="comboBox" />
     <!-- Template -->

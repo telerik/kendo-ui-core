@@ -1,14 +1,14 @@
 ---
 title: Appearance
 page_title: jQuery MultiSelect Documentation - MultiSelect Appearance
-description: "Learn how to apply different styling options to the MultiSelect widget."
+description: "Learn how to apply different styling options to the MultiSelect component."
 slug: appearance_kendoui_multiselect_widget
-position: 9
+position: 10
 ---
 
 # Appearance
 
-> As of Kendo UI R1 2022, the jQuery MultiSelect widget has new rendering and styling options. 
+> As of Kendo UI R1 2022, the jQuery MultiSelect component has new rendering and styling options. 
 
 In this article, you will find information about the rendering of the Kendo UI MultiSelect.
 
@@ -62,7 +62,7 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 ### Rounded
 
-The `rounded` option controls how much border radius is applied to the tags for the selected items in the widget. The structure of the class is `k-rounded-{size}`.
+The `rounded` option controls how much border radius is applied to the tags for the selected items in the component. The structure of the class is `k-rounded-{size}`.
 
 The following values are available for the [`rounded`](/api/javascript/ui/multiselect/configuration/rounded) option:
 

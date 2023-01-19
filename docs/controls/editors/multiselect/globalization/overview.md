@@ -15,7 +15,7 @@ The globalization functionality of the MultiSelect is enabled through:
 * [Localization of messages]({% slug localization_multiselect %})
 * [Right-to-left support]({% slug rtl_multiselect %})
 
-For more information on using localization, internationalization, and right-to-left languages with Kendo UI widgets, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
+For more information on using localization, internationalization, and right-to-left languages with Kendo UI components, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
 
 ## See Also
 

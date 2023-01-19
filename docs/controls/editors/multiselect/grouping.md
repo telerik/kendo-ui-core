@@ -3,7 +3,7 @@ title: Grouping
 page_title: jQuery MultiSelect Documentation - Grouping
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to configure its grouping functionality."
 slug: grouping_kendoui_multiselect_widget
-position: 3
+position: 4
 ---
 
 # Grouping
@@ -14,7 +14,7 @@ The grouping functionality allows you to display data items that are categorized
 
 ## Getting Started
 
-To enable grouping, use the remote `transport` configuration and a grouped DataSource. To display grouped items in the widget, group the DataSource component by using its [`group`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) configuration option. Once you define the `group` option, the MultiSelect will automatically display the grouped suggestion items.
+To enable grouping, use the remote `transport` configuration and a grouped DataSource. To display grouped items in the component, group the DataSource component by using its [`group`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) configuration option. Once you define the `group` option, the MultiSelect will automatically display the grouped suggestion items.
 
 > The grouped data will be sorted either in ascending or descending order which is expected behavior and cannot be modified. To group the data in a specific order, use [server grouping](/api/javascript/data/datasource/configuration/servergrouping).
 

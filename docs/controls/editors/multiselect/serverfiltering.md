@@ -3,7 +3,7 @@ title: Server Filtering
 page_title: jQuery MultiSelect Documentation - Server Filtering
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to filter its data on the server."
 slug: server_filtering_kendoui_multiselect_widget
-position: 4
+position: 5
 ---
 
 # Server Filtering
@@ -29,7 +29,7 @@ For a runnable example, refer to the [demo on server filtering in the MultiSelec
 
 Displaying a subset of the whole data is useful to apply for large datasets which contain thousands of records. In such cases, define a minimum filter length by using the [`minLength`](/api/javascript/ui/multiselect/configuration/minlength) option. For example, if you set `minLength` to `3`, the MultiSelect will not start filtering the dataset until the user enters at least three characters.
 
-Server filtering also enables you to bind the MultiSelect to just one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text which boosts the loading time of the widget. To apply this approach, send the selected value to the server and return only the matching data item. Use the [`data`](/api/javascript/data/datasource/configuration/transport.read.data) callback of the DataSource.
+Server filtering also enables you to bind the MultiSelect to just one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text which boosts the loading time of the component. To apply this approach, send the selected value to the server and return only the matching data item. Use the [`data`](/api/javascript/data/datasource/configuration/transport.read.data) callback of the DataSource.
 
 ```javascript
 data: function() {

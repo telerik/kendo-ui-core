@@ -3,7 +3,7 @@ title: Rendering and Dimensions
 page_title: jQuery MultiSelect Documentation - Rendering and Dimensions
 description: "Get started with the jQuery MultiSelect by Kendo UI and configure its layout and the rendering of its elements."
 slug: rendering_multiselect
-position: 11
+position: 12
 ---
 
 # Rendering and Dimensions
@@ -39,9 +39,9 @@ You can enable the `popup` element to automatically adjust its width according t
 
 ## Accessing list Elements
 
-The MultiSelect renders an `ID` attribute that is generated from the ID of the widget and the `-list` suffix. You can use the `ID` to style the element or to access a specific element inside the `popup` element.
+The MultiSelect renders an `ID` attribute that is generated from the ID of the component and the `-list` suffix. You can use the `ID` to style the element or to access a specific element inside the `popup` element.
 
-> If the widget has no ID, the drop-down element will have no ID either.
+> If the component has no ID, the drop-down element will have no ID either.
 
     <select id="multiselect"></select>
     <script>
@@ -59,7 +59,7 @@ The MultiSelect renders an `ID` attribute that is generated from the ID of the w
 
 ## Focusing
 
-Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information, refer to [this Kendo UI Dojo snippet](https://dojo.telerik.com/uSeho).
+Because of its complex rendering, focusing the component by using a `label` element requires additional implementation. For more information, refer to [this Kendo UI Dojo snippet](https://dojo.telerik.com/uSeho).
 
 ## Managing Scrollable Content
 

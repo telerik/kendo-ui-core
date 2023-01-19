@@ -3,7 +3,7 @@ title: Adding New Items
 page_title: jQuery MultiSelect Documentation - Adding New Items
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to add new items."
 slug: newitems_multiselect
-position: 8
+position: 9
 ---
 
 # Adding New Items

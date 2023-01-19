@@ -3,7 +3,7 @@ title: Summary-Tag Mode
 page_title: jQuery MultiSelect Documentation - Summary-Tag Mode
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to display single or multiple tags for the selected items."
 slug: tagmode_multiselect
-position: 6
+position: 7
 ---
 
 # Summary-Tag Mode

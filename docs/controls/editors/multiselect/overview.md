@@ -1,43 +1,16 @@
 ---
 title: Overview
 page_title: jQuery MultiSelect Documentation - MultiSelect Overview
-description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Try now the Kendo UI for jQuery MultiSelect component covering everything from binding it to local arrays of data and remote data services, grouping its data and filter it on the server, using templates to customize its content and layout to virtualizing its records and loading them on demand, implementing a summary tag mode and offering a comprehensive set of options for styling its appearance."
 slug: overview_kendoui_multiselect_widget
-position: 1
+position: 2
 ---
 
 # {{ site.product }} MultiSelect Overview
 
-The MultiSelect displays a list of options and allows multiple selections from this list.
-
-The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
+The MultiSelect displays a list of options and allows for multiple selections from that list. The component represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
 
 * [Demo page for the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index)
-
-## Initializing the MultiSelect
-
-To initialize the MultiSelect, use the `<option>` tag of an existing `<select>` element with defined data items.
-
-You can also initialize the MultiSelect through binding it to local or remote data and then using the `<select>` element. For more information, refer to the [article on data binding]({% slug databinding_multiselect %}).
-
-Regardless of the applied initialization, the performance and functionality of the MultiSelect are consistent. For a complete example, refer to the [demo on the basic usage of the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index).
-
-> * When you initialize the MultiSelect, create it within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
-> * The MultiSelect copies any styles and CSS classes from the `input` element to the `wrapper` element and visible input.
-
-The following example demonstrates how to initialize the MultiSelect from an existing `<select>` element with defined data items.
-
-    <select id="multiselect">
-        <option>Item 1</option>
-        <option>Item 2</option>
-        <option>Item 3</option>
-    </select>
-
-    <script>
-        $(document).ready(function(){
-            $("#multiselect").kendoMultiSelect();
-        });
-    </script>
 
 ## Functionality and Features
 
@@ -53,14 +26,15 @@ The following example demonstrates how to initialize the MultiSelect from an exi
 * [Globalization]({% slug globalization_multiselect %})
 * [Accessibility]({% slug accessibility_kendoui_multiselect_widget %})
 
-## Events
+## Next Steps
 
-For a complete example on the basic MultiSelect events, refer to the [demo on using the events of the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/events).
+* [Getting Started with the Kendo UI MultiSelect for jQuery]({% slug getting_started_kendoui_multiselect_widget %})
+* [Overview of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/index)
+* [Using the API of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/api)
 
 ## See Also
 
-* [Basic Usage of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/index)
-* [Using the Basic Events of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/events)
-* [Using the MultiSelect with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/multiselect/angular)
-* [Using the API of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/api)
 * [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [Demo Page for the jQuery MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index)
+* [Knowledge Base Section](/knowledge-base)
+* [jQuery MultiSelect Product Page](https://www.telerik.com/kendo-jquery-ui/multiselect)

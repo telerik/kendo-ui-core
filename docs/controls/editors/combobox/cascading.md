@@ -3,7 +3,7 @@ title: Cascading ComboBoxes
 page_title: jQuery ComboBox Documentation - Cascading ComboBoxes
 description: "Get started with the jQuery ComboBox by Kendo UI and implement cascading ComboBoxes."
 slug: cascading_kendoui_combobox_widget
-position: 8
+position: 9
 ---
 
 # Cascading ComboBoxes
@@ -68,10 +68,10 @@ The following example demonstrates how to initialize a cascading ComboBox.
 
 ## MVVM Value Binding
 
-The MVVM [value]({% slug valuebinding_mvvm_kendoui %}) binding updates the `model` when a UI element triggers a `change` event. When widgets cascade, however, they do not raise a `change` event and the `model` is not updated.
+The MVVM [value]({% slug valuebinding_mvvm_kendoui %}) binding updates the `model` when a UI element triggers a `change` event. When components cascade, however, they do not raise a `change` event and the `model` is not updated.
 
 * For more information on using a synced `model` and implementing a [custom MVVM binding]({% slug custombinding_mvvm_kendoui %}) that will update the model accordingly, refer to [this demo](https://dojo.telerik.com/@ggkrustev/aSAlU).
-* For more information on the reason a widget does not trigger a `change` event, refer to [this GitHub discussion](https://github.com/telerik/kendo-ui-core/issues/661).
+* For more information on the reason a component does not trigger a `change` event, refer to [this GitHub discussion](https://github.com/telerik/kendo-ui-core/issues/661).
 
 ## FAQ
 

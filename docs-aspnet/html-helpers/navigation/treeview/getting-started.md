@@ -20,7 +20,7 @@ You will initialize a TreeView component with several items and checkboxes. {% i
 
 @[template](/_contentTemplates/core/getting-started-directives.md#gs-adding-directives)
 
-You will also add some sample data that the TreeView will present. Optionally, you can structure the document by adding the desired HTML elements like headings, divs, paragraphs, and others.
+Optionally, you can structure the document by adding the desired HTML elements like headings, divs, paragraphs, and others.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -117,7 +117,7 @@ Use the TreeView HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
 
 ## 3. Select a Default Value
 
-The next step is to enable the `Checkboxes()` of the TreeView and check two of the items by default. 
+The next step is to enable the `Checkboxes()` of the TreeView and to configure two of the items as checked by default. 
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -310,7 +310,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## Next Steps
 
 * [Binding the TreeView to Data]({% slug htmlhelpers_treeview_binding_aspnetcore %})
-* [Customize the Appearance of the TreeView]({% slug appearance_treeview %})
+* [Customizing the Appearance of the TreeView]({% slug appearance_treeview %})
 * [Using Checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %})
 
 ## See Also

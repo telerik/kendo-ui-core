@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Dialog component for {{ site.framework }}."
+description: "Discover the Telerik UI for {{ site.framework }} Dialog component and its features like custom action buttons and built-in customization options."
 previous_url: /helpers/layout/dialog/overview
 slug: overview_dialoghelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Dialog Overview
@@ -15,7 +15,7 @@ The Telerik UI Dialog TagHelper and HtmlHelper for {{ site.framework }} are serv
 The Telerik UI Dialog HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Dialog widget.
 {% endif %}
 
-The Dialog is a modal popup that brings information to the user. It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog is a subset of the [Kendo UI for jQuery Window]({% slug htmlhelpers_window_aspnetcore %}) where the most prominent difference is the added functionality for actions and predefined dialogs.
+The Dialog is a modal popup that brings information to the user. It also enables the user to perform specific actions by using action buttons, for example, to enter data or choose between options. If needed, the Dialog can accommodate complex UI elements that require the focus of the user. The Dialog is a subtype of the [Kendo UI for jQuery Window]({% slug htmlhelpers_window_aspnetcore %}) with the most prominent differences being the added actions and predefined dialogs.
 
 * [Demo page for the Dialog HtmlHelper](https://demos.telerik.com/{{ site.platform }}/dialog/index)
 {% if site.core %}
@@ -24,7 +24,7 @@ The Dialog is a modal popup that brings information to the user. It also provide
 
 ## Initializing the Dialog
 
-The Dialog is often opened as a result of a user action rather than of the `load` event of the page. Basically, you can initialize the widget as non-visible and open it when needed.
+In the most common use case, the Dialog opens as a result of a user action rather than of the `load` event of the page. To achieve this, you must initialize the widget as non-visible and open it when needed.
 
 The following example demonstrates how to define the Dialog.
 
@@ -47,9 +47,9 @@ The following example demonstrates how to define the Dialog.
 
 ## Basic Configuration
 
-The Dialog provides default configuration options that can be set during initialization such as its height and width, custom action buttons, title and **Close** buttons, animation effects and duration, and so on.
+The Dialog provides default configuration options that you can set during its initialization&mdash;height and width, custom action buttons, title, close buttons, animation effects, and so on.
 
-The following example demonstrates a basic configuration of the Dialog.
+The following example demonstrates a basic Dialog configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Dialog()
@@ -93,59 +93,21 @@ The following example demonstrates a basic configuration of the Dialog.
 
 ## Functionality and Features
 
-* [Height and width]({% slug dimensions_dialoghelper_aspnetcore %})
-* [Custom action buttons]({% slug action_buttons_dialoghelper_aspnetcore %})
-* [HTML structure and DOM placement]({% slug structure_and_placement_dialoghelper_aspnetcore %})
+* [Custom action buttons]({% slug action_buttons_dialoghelper_aspnetcore %})—Adding action buttons to the Dialog allows you to interact with the user. 
+* [Height and width]({% slug dimensions_dialoghelper_aspnetcore %})—You can control the dimensions of the Dialog by setting its height and width. The default size of the Dialog depends on its content.
+* [HTML structure and DOM placement]({% slug structure_and_placement_dialoghelper_aspnetcore %})—Regardless of where you initialize the UI component, the HTML code of the Dialog will be appended as a child of the document's `<body>` element.
+* [Accessibility]({% slug accessbility_aspnetcore_dialog %})—The Dialog is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_numerictextbox_aspnetcore %}) for faster navigation.
+* [Events]({% slug events_dialog %})—The Dialog emits a variety of events that allow you to implement custom functionality.
 
-## Events
+## Next Steps
 
-You can subscribe to all Dialog events. For a complete example on basic Dialog events, refer to the [demo on using the events of the Dialog](https://demos.telerik.com/{{ site.platform }}/dialog/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().Dialog()
-        .Name("dialog")
-        .Events(e => e
-            .InitOpen("onInitOpen")
-            .Open("dialog_open")
-            .Close("dialog_close")
-            .Show("onShow")
-            .Hide("onHide")
-        )
-    )
-    <script>
-        function onInitOpen(e) {
-            // Handle the InitOpen event.
-        }
-
-        function onOpen(e) {
-            // Handle the open event.
-        }
-
-        function onClose(e) {
-            // Handle the close event.
-        }
-
-        function onShow(e) {
-            // Handle the show event.
-        }
-
-        function onHide(e) {
-            // Handle the hide event.
-        }
-    </script>
-```
-
-The full list of events with explanations of when they are triggered is available here:
-
-* [Dialog Events](/api/Kendo.Mvc.UI.Fluent/DialogBuilder#eventssystemactionkendomvcuifluentdialogeventbuilder)
-
-## See Also
-
+* [Getting Started with the Dialog]({% slug getting_started_dialog %})
 * [Basic Usage of the Dialog HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog)
 {% if site.core %}
 * [Basic Usage of the Dialog TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dialog/tag-helper)
 {% endif %}
-* [Using the API of the Dialog HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog/api)
-* [Server-Side API](/api/dialog)
+
+## See Also
+
+* [Using the API of the Dialog for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog/api)
+* [Knowledge Base Section](/knowledge-base)

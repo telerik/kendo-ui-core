@@ -3,7 +3,7 @@ title: Templates
 page_title: jQuery MultiSelect Documentation - Templates
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to customize its item, value, header, footer, and no-data templates."
 slug: templates_multiselect
-position: 7
+position: 8
 ---
 
 # Templates
@@ -109,7 +109,7 @@ The header template manages the way the popup header of a MultiSelect is rendere
 
 ## Footer Templates
 
-The footer template manages the way the pop-up footer of a MultiSelect is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
+The footer template manages the way the pop-up footer of a MultiSelect is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the component itself.
 
     <select id="multiselect" />
     <!-- Template -->
@@ -138,7 +138,7 @@ The footer template manages the way the pop-up footer of a MultiSelect is render
 
 ## No-Data Templates
 
-The MultiSelect widget displays `noDataTemplate` in the popup when the data source is empty.
+The MultiSelect component displays `noDataTemplate` in the popup when the data source is empty.
 
 > When the `noDataTemplate` option is defined, the MultiSelect always opens the popup element.
 

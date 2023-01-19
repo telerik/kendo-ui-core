@@ -1,14 +1,14 @@
 ---
 title: Appearance
 page_title: jQuery ComboBox Documentation - Appearance
-description: "Get started with the jQuery ComboBox by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery ComboBox by Kendo UI and learn how to create, initialize, and enable the component."
 slug: appearance_kendoui_combobox
-position: 7
+position: 8
 ---
 
 # Appearance
 
-> As of Kendo UI R1 2022, the jQuery ComboBox widget has new rendering and styling options.
+> As of Kendo UI R1 2022, the jQuery ComboBox component has new rendering and styling options.
 
 In this article, you will find information about the rendering of the Kendo UI ComboBox.
 
@@ -58,7 +58,7 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 ### Rounded
 
-The `rounded` option controls how much border radius is applied to the tags for the selected items in the widget. The structure of the class is `k-rounded-{size}`.
+The `rounded` option controls how much border radius is applied to the tags for the selected items in the component. The structure of the class is `k-rounded-{size}`.
 
 The following values are available for the [`rounded`](/api/javascript/ui/combobox/configuration/rounded) option:
 
@@ -160,7 +160,7 @@ The old rendering of the component consisted of several wrapping elements:
 
 The new rendering of the component consists of a wrapping `span` element that contains the child `input` and `button` elements:
 
-- The `span` element controls the overall appearance of the widget and has the following class structure:
+- The `span` element controls the overall appearance of the component and has the following class structure:
 
   ```html
   <span class="k-input k-combobox k-widget k-input-solid k-input-md k-rounded-md">
@@ -519,7 +519,7 @@ You can enable the `popup` element to automatically adjust its width according t
 
 ## Accessing list Elements
 
-The ComboBox list renders an `ID` attribute which is generated from the ID of the widget and the `-list` suffix. You can use the `ID` to style the element or to access a specific element inside the popup element.
+The ComboBox list renders an `ID` attribute which is generated from the ID of the component and the `-list` suffix. You can use the `ID` to style the element or to access a specific element inside the popup element.
 
 > If the ComboBox has no ID, the `list` element will have no `ID` either.
 
@@ -539,11 +539,11 @@ The ComboBox list renders an `ID` attribute which is generated from the ID of th
 
 ## Supporting label Elements
 
-Because of its complex rendering, the focusing of the widget by using a `label` element requires additional implementation. For a runnable example, refer to [this Kendo UI Dojo demo](https://dojo.telerik.com/uSeho).
+Because of its complex rendering, the focusing of the component by using a `label` element requires additional implementation. For a runnable example, refer to [this Kendo UI Dojo demo](https://dojo.telerik.com/uSeho).
 
 ## Removing Input Values
 
-The ComboBox enables you to remove the values from its input area by using the `clearButton` configuration option. As a result, an **X** button appears in the input area on hover and when clicked, it resets the value of the widget and triggers the `change` event. By default, `clearButton` is enabled and is set to `true`.
+The ComboBox enables you to remove the values from its input area by using the `clearButton` configuration option. As a result, an **X** button appears in the input area on hover and when clicked, it resets the value of the component and triggers the `change` event. By default, `clearButton` is enabled and is set to `true`.
 
 ## See Also
 

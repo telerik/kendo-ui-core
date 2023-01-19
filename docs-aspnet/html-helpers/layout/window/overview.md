@@ -106,18 +106,17 @@ The following example demonstrates the basic configuration of the Window.
 
 ## Functionality and Features
 
-* [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %})—The Window supports setting different dimensions.
-* [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})—It is possible to predefine the position of the Window.
-* [Constraining the position]({% slug htmlhelpers_window_constrain_aspnetcore %})—The draggable area can be restricted.
-* [Loading content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})—The MultiSelect offers dynamic content loading.
-* [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})—Explains rendering container specifics.
-* [Integration with forms]({% slug htmlhelpers_window_forms_aspnetcore %})—The Window has a built-in integration with the Form component.
-{% if site.core %}
-* [Razor Page configuration]({% slug htmlhelpers_window_razorpage_aspnetcore %})—Explains using the Window in Razor Page environment.
-{% endif %}
-* [Custom actions]({% slug htmlhelpers_window_customactions_aspnetcore %})—One of the powerful capabilities of the Window is customizing its actions.
-* [Animations]({% slug htmlhelpers_window_animations_aspnetcore %})—The Window provides rich animation configuration.
-* [Accessibility]({% slug accessibility_aspnetcore_window %})—The Window is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+| Feature | Description |
+|---------|-------------|
+| [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %}) |The Window supports setting different dimensions.|
+| [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %}) |It is possible to predefine the position of the Window.|
+| [Constraining the position]({% slug htmlhelpers_window_constrain_aspnetcore %}) |The draggable area can be restricted.|
+| [Loading content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %}) |The MultiSelect offers dynamic content loading.|
+| [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %}) | You can configure the Window to display its content in an iframe.|
+| [Integration with forms]({% slug htmlhelpers_window_forms_aspnetcore %}) |The Window has a built-in integration with the Form component.|
+| [Custom actions]({% slug htmlhelpers_window_customactions_aspnetcore %}) |One of the powerful capabilities of the Window is customizing its actions.|
+| [Animations]({% slug htmlhelpers_window_animations_aspnetcore %}) |The Window provides rich animation configuration.|
+| [Accessibility]({% slug accessibility_aspnetcore_window %}) |The Window is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
 
 ## Next Steps
 

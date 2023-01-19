@@ -152,6 +152,7 @@ The following example demonstrates the basic configuration of the TreeView HtmlH
 
 * [Data binding]({% slug htmlhelpers_treeview_binding_aspnetcore %})—The TreeView supports remote and local binding to data.
 * [Items]({% slug htmlhelpers_treeview_items_aspnetcore %})—The Items collection holds the records displayed by the TreeView.
+* [Appearance]({% slug appearance_treeview %})—The TreeView has built-in styling options that allow you to customize its appearance.
 * [Dragging and dropping]({% slug htmlhelpers_treeview_drag_drop_aspnetcore %})—The TreeView provides convenient built-in interaction.
 * [Checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %})—This feature presents you with the option to have Checkboxes rendered for each item.
 

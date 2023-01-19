@@ -3,7 +3,7 @@ title: Grouping
 page_title: jQuery ComboBox Documentation - Grouping
 description: "Get started with the jQuery ComboBox by Kendo UI and group its data."
 slug: grouping_kendoui_combobox_widget
-position: 3
+position: 4
 ---
 
 # Grouping
@@ -12,7 +12,7 @@ As of the Kendo UI Q1 2015 (2015.1.318) release, the [Kendo UI AutoComplete](htt
 
 Grouping enables you to display data items that are categorized by a specific model field. The ComboBox supports grouping by utilizing the [`group` configuration of the Kendo UI DataSource](/api/javascript/data/datasource/configuration/group).
 
-The approaches for configuring the grouping functionality of the ComboBox that are demonstrated in this article are identical for configuring the grouping functionality of the AutoComplete, DropDownList, and MultiSelect widgets.
+The approaches for configuring the grouping functionality of the ComboBox that are demonstrated in this article are identical for configuring the grouping functionality of the AutoComplete, DropDownList, and MultiSelect components.
 
 For runnable examples on grouping, refer to the following demos:
 * [Grouping in the ComboBox (demo)](https://demos.telerik.com/kendo-ui/combobox/grouping)

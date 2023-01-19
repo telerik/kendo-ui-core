@@ -1,30 +1,16 @@
 ---
 title: Overview
 page_title: jQuery ComboBox Documentation - ComboBox Overview
-description: "Get started with the jQuery ComboBox by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Try now the Kendo UI for jQuery ComboBox component covering everything from binding it to local arrays of data and remote data services, grouping its data and filter it on the server, using templates to customize its content and layout to virtualizing its records and loading them on demand, implementing cascading ComboBoxes and offering a comprehensive set of options for styling its appearance."
 slug: overview_kendoui_combobox_widget
-position: 1
+position: 2
 ---
 
 # {{ site.product }} ComboBox Overview
 
-The ComboBox displays a list of values and allows for a single selection from the list.
-
-The widget enables the user to enter custom values through the keyboard and represents a richer version of the `<select>` element.
+The ComboBox displays a list of values, allowing for making a single selection from that list. The component enables the user to enter custom values through the keyboard and represents a richer version of the `<select>` element.
 
 * [Demo page for the ComboBox](https://demos.telerik.com/kendo-ui/combobox/index)
-
-## Initializing the ComboBox
-
-To initialize the ComboBox, use any of the following approaches:
-
-* [Bind the widget to a local data array]({% slug databinding_kendoui_combobox %}#binding-to-local-data) and use the `<option>` tag of an existing `<select>` element with defined data items.
-* [Bind the widget to a local data array]({% slug databinding_kendoui_combobox %}#binding-to-local-data) and use the `<input>` element.
-* [Bind the widget to a remote data service]({% slug databinding_kendoui_combobox %}#binding-to-remote-data) and use the `<input>` element.
-
-When you initialize the ComboBox, note the following specifics:
-* Create the ComboBox within a `$(document).ready()` statement because the widget has to be initialized after the DOM fully loads.
-* The ComboBox copies the styles and CSS classes from the `input` element to the `wrapper` element.
 
 ## Functionality and Features
 
@@ -36,18 +22,15 @@ When you initialize the ComboBox, note the following specifics:
 * [Appearance]({% slug appearance_kendoui_combobox %})
 * [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
 
-## Referencing Existing Instances
+## Next Steps
 
-To refer an existing ComboBox widget, use the [jQuery.data()](https://api.jquery.com/jQuery.data/) configuration option.
-
-    <input id="comboBox" />
-
-    <script>
-        var comboBox = $("#comboBox").data("kendoComboBox");
-    </script>
+* [Getting Started with the Kendo UI ComboBox for jQuery]({% slug getting_started_kendoui_combobox_widget %})
+* [Overview of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/index)
+* [Using the API of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/api)
 
 ## See Also
 
-* [Basic Usage of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/index)
-* [Using the API of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/api)
 * [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [Demo Page for the jQuery ComboBox](https://demos.telerik.com/kendo-ui/combobox/index)
+* [Knowledge Base Section](/knowledge-base)
+* [jQuery ComboBox Product Page](https://www.telerik.com/kendo-jquery-ui/combbox)

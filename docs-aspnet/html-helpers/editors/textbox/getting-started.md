@@ -20,7 +20,7 @@ You will initialize a TextBox component with a placeholder text and a label. {% 
 
 @[template](/_contentTemplates/core/getting-started-directives.md#gs-adding-directives)
 
-You will also add some sample value that the TextBox will present to the user. Optionally, you can structure the document by adding the desired HTML elements like headings, divs, paragraphs, and others.
+Optionally, you can structure the document by adding the desired HTML elements like headings, divs, paragraphs, and others.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -46,7 +46,7 @@ You will also add some sample value that the TextBox will present to the user. O
 Use the TextBox HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to a page:
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the name attributes of the TextBox element.
-* The `Placeholder()` configuration specifies the dummy text that is shown initially to hint the user. 
+* The `Placeholder()` configuration specifies the text that appears initially as a hint. 
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -75,7 +75,7 @@ Use the TextBox HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
 
 ## 3. Define a Label Text
 
-The next step is to present some description text in front of the TextBox component using the `Label()` property.
+The next step is to present a description in front of the TextBox component by using the `Label()` property.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -182,11 +182,11 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Set Labels to the TextBox]({% slug htmlhelpers_labels_textbox %})
 * [Customize the Appearance of the TextBox]({% slug textbox_appearance %})
-* [Accessibility]({% slug accessibility_textbox_aspnetcore %})
+* [Explore the Accessibility Features of the TextBox]({% slug accessibility_textbox_aspnetcore %})
 
 ## See Also
 
 * [Using the API of the TextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textbox/api)
-* [TextBox Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox)
+* [Client-Side API of the TextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox)
 * [Server-Side API of the TextBox](/api/textbox)
 * [Knowledge Base Section](/knowledge-base)
