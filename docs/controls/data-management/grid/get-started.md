@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 page_title: jQuery Grid Documentation - Getting Started with the Grid
-description: "Get started with the jQuery Grid by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Grid by Kendo UI and learn how to create, initialize, and enable the component."
 slug: getting_started_kendoui_grid_widget
 position: 1
 ---
@@ -63,7 +63,7 @@ After the completion of this guide, you will be able to achieve the following en
 
 ## 1. Create an Empty div Element
 
-First, create an empty `<div>` element on the page that will serve as the main container of the Grid widget.
+First, create an empty `<div>` element on the page that will serve as the main container of the Grid component.
 
 ```html
 <div id="my-grid"></div>
@@ -237,7 +237,7 @@ Among other functionalities, the Grid supports editing and filtering. The [editi
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
 
 ## See Also 

@@ -8,7 +8,7 @@ position: 7
 
 # Search Panel
 
-The Grid widget has a built-in feature that enables the users to search through the data. The Search Panel uses filtering under the hood to show only the relevant records in the Grid.
+The Grid component has a built-in feature that enables the users to search through the data. The Search Panel uses filtering under the hood to show only the relevant records in the Grid.
 
 > Search Panel functionality is available as of [`Kendo UI R3 2019`](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2019) release.
 

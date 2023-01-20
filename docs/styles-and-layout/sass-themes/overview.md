@@ -21,6 +21,8 @@ Currently, Kendo UI delivers the following Sass themes:
 
 ## Less- vs. Sass-Based Themes
 
+> R1 2023 is the last official release of Kendo jQuery, where Less Themes are supported and shipped with the product.
+
 Apart from being written in a different language, the Sass-based themes are slightly different from the Less-based ones. This article outlines those differences and demonstrates how to use the Sass-based themes.
 
 In Kendo UI, the Sass-based themes demonstrate the following differences from the Less-based ones:

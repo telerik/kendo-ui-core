@@ -185,7 +185,9 @@ The following example demonstrates the basic configuration of the TabStrip.
 * [Tabs]({% slug htmlhelpers_tabstrip_aspnetcore_tabs %})—The TabStrip provides various configuration options for the tabs, which allows you to organize the content into different views.
 * [Tab content]({% slug htmlhelpers_tabstrip_aspnetcore_content %})—You can customize the content shown to the user.
 * [Animation effects]({% slug htmlhelpers_tabstrip_animations_aspnetcore %})—The animation options help you to configure the desired switch transitions between the different tabs.
+{% if site.mvc %}
 * [Forms]({% slug forms_tabstrip_aspnetmvc %})—You can render forms inside the TabStrip and let users submit data.
+{% endif %}
 * [Images]({% slug htmlhelpers_tabstrip_images_aspnetcore %})—The TabStrip supports adding custom images.
 
 ## Next Steps

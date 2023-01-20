@@ -3,12 +3,12 @@ title: Tools
 page_title: jQuery Editor Documentation - Tools
 description: "Get started with the jQuery Editor by Kendo UI and use and customize its tools."
 slug: tools_kendoui_editor_widget
-position: 4
+position: 5
 ---
 
 # Tools
 
-The Editor provides a predefined collection of tools that are used to interact with the widget.
+The Editor provides a predefined collection of tools that are used to interact with the component.
 
 You can enable any of these tools by using the [`tools`](/api/web/editor#tools) configuration option.
 

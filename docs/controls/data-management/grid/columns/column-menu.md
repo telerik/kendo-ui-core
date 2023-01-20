@@ -45,9 +45,9 @@ The `columnMenu` configuration setting accepts a `columns.groups` array that ena
 
 ## Column Menu Types
 
-As of R1 2021 version of the Kendo UI suite, the Grid widget introduces the `modern` render mode that aims to deliver a fresh look and feel. It aims to enhance the existing rendering and deliver a fresh and modern look and feel. 
+As of R1 2021 version of the Kendo UI suite, the Grid component introduces the `modern` render mode that aims to deliver a fresh look and feel. It aims to enhance the existing rendering and deliver a fresh and modern look and feel. 
 
-By default, the column menu of the Grid is initialized in the `classic` render mode. To set it to `modern`, configure the options of the widget as follows:
+By default, the column menu of the Grid is initialized in the `classic` render mode. To set it to `modern`, configure the options of the component as follows:
 
 ```
     $("#grid").kendoGrid({

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation - Grid Overview
+page_title: jQuery Grid Documentation - Data Grid Overview
 description: "Try now the Kendo UI for jQuery Data Grid component covering everything from paging, sorting, filtering, editing, and grouping to exporting to PDF and Excel."
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget
@@ -46,6 +46,6 @@ It provides options for executing data operations, such as paging, sorting, filt
 
 * [Initializing the Grid from an HTML Table (Guide)]({% slug html_table_kendoui_grid_widget %})
 * [Initializing the Grid from an HTML Table (Demo)](https://demos.telerik.com/kendo-ui/grid/from-table)
-* [Demo Page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
+* [Demo Page for the jQuery Data Grid](https://demos.telerik.com/kendo-ui/grid/index)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

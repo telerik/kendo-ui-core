@@ -17,7 +17,7 @@ This article lists the best practices and approaches which optimize and boost th
 
 ## Enabling Paging
 
-In theory, if paging is enabled, all performance issues will be resolved. Limiting the number of records per page to a reasonable count enables you to implement all Grid functionality without affecting its performance. For example, rendering 50 records per page even with 20 columns results in 1,000 cells which will be handled quickly by the browsers. For more complex scenarios where, for example, you need to render editors directly in the column template instead of in the editor template, you can further reduce the `pageSize`&mdash;if you initialize a widget in each cell, you will end up with 1,000 widgets which will be a major hit.
+In theory, if paging is enabled, all performance issues will be resolved. Limiting the number of records per page to a reasonable count enables you to implement all Grid functionality without affecting its performance. For example, rendering 50 records per page even with 20 columns results in 1,000 cells which will be handled quickly by the browsers. For more complex scenarios where, for example, you need to render editors directly in the column template instead of in the editor template, you can further reduce the `pageSize`&mdash;if you initialize a component in each cell, you will end up with 1,000 components which will be a major hit.
 
 After you enable the paging functionality, you have to decide whether to handle the data operations on the client or on the server. This approach applies to all data operations such as filtering, grouping, and sorting.
 
@@ -38,13 +38,13 @@ Use server-side operations when:
 
 ## Reducing the Quantity of Data
 
-Reducing the quantity of data by using external or initial filter is not directly related to the Grid but is a general approach for handling huge amounts of data. The concept is to implement additional filter criteria that will reduce the records which are bound to the Grid. Some projects allow the usage of external filter widgets, such as the DropDownList, and their selected value is used to filter the data prior to its passing it to the Grid. For example, if you have millions of orders from different companies, you can use an external DropDownList listing of all companies and then apply the currently selected one as an additional parameter in the `read` data operation of the dataSource. In this way, you can apply an initial filter and return only the orders from that company.
+Reducing the quantity of data by using external or initial filter is not directly related to the Grid but is a general approach for handling huge amounts of data. The concept is to implement additional filter criteria that will reduce the records which are bound to the Grid. Some projects allow the usage of external filter components, such as the DropDownList, and their selected value is used to filter the data prior to its passing it to the Grid. For example, if you have millions of orders from different companies, you can use an external DropDownList listing of all companies and then apply the currently selected one as an additional parameter in the `read` data operation of the dataSource. In this way, you can apply an initial filter and return only the orders from that company.
 
 To reduce the quantity of data, you can also set initial filter criteria for a specific field in the dataSource of the Grid. However, if filtering is enabled and the column which is bound to that field is visible, the user will be able to remove it.
 
 ## Using Fast Browsers
 
-Internet Explorer slowly handles widgets which use too many DOM elements and event listeners on the page. Using Chrome provides the best user experience in the context of the Kendo UI widgets.
+Internet Explorer slowly handles components which use too many DOM elements and event listeners on the page. Using Chrome provides the best user experience in the context of the Kendo UI components.
 
 ## See Also
 

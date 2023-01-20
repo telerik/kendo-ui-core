@@ -11,7 +11,7 @@ position: 2
 This article lists the configuration approaches which most frequently affect the performance of the Grid.
 
 * [Rendering everything](#rendering-everything)
-* [Excessive use of editors or widgets directly in the columns](#excessive-use-of-editors-or-widgets-in-cells)
+* [Excessive use of editors or components directly in the columns](#excessive-use-of-editors-or-widgets-in-cells)
 * [Extreme number of columns](#using-too-many-columns)
 * [Expanding all content](#expanding-all-content)
 
@@ -19,11 +19,11 @@ This article lists the configuration approaches which most frequently affect the
 
 If the Grid displays too many records and columns without having its paging or virtual scrolling functionality enabled, the result is a huge amount of DOM elements and event listeners on the page. While some browsers can handle more records than others, avoid rendering more than 100 records per page without paging or virtualization. To find specific records, enable filtering which is faster than, for example, rendering 1,000 records and scrolling down to find what the user is looking for.
 
-## Using Editors or Widgets in Cells Excessively
+## Using Editors or Components in Cells Excessively
 
-Rendering editors directly in the columns looks great but hinders performance. Initializing widgets in each cell is a slow operation and will be a major performance issue when the Grid displays many records. Additionally, if you use custom code for the two-way binding between the editors and the underlying data items, each change will initiate the re-rendering of the entire data which will trigger the re-initialization of the editors  and will lead to slow performance.
+Rendering editors directly in the columns looks great but hinders performance. Initializing components in each cell is a slow operation and will be a major performance issue when the Grid displays many records. Additionally, if you use custom code for the two-way binding between the editors and the underlying data items, each change will initiate the re-rendering of the entire data which will trigger the re-initialization of the editors  and will lead to slow performance.
 
-If you prevent the rebinding of the Grid after each change by removing the two-way binding and by manually changing the dataItem values (changing the properties without using the `set` method and setting the dirty property to `true`), you can edit multiple records without re-rendering the Grid. However, the issue with the initial initialization of the widget is still present and to work around it, reduce the `pageSize` up to five or ten records per page depending on the number of columns.
+If you prevent the rebinding of the Grid after each change by removing the two-way binding and by manually changing the dataItem values (changing the properties without using the `set` method and setting the dirty property to `true`), you can edit multiple records without re-rendering the Grid. However, the issue with the initial initialization of the component is still present and to work around it, reduce the `pageSize` up to five or ten records per page depending on the number of columns.
 
 ## Using Too Many Columns
 

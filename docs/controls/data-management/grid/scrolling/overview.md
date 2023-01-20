@@ -24,7 +24,7 @@ Depending on the enabled scroll mode, the rendering of the dimensions and layout
 
 ## Getting Started  
 
-When scrolling is enabled, the widget renders two tables by default&mdash;one for the header area and one for the scrollable data area. The two tables are important when you need to manually make JavaScript or CSS updates to the Grid tables.
+When scrolling is enabled, the component renders two tables by default&mdash;one for the header area and one for the scrollable data area. The two tables are important when you need to manually make JavaScript or CSS updates to the Grid tables.
 
     <div class="k-widget k-grid">
         <div class="k-grid-header">
@@ -66,7 +66,7 @@ By default, the Grid does not display scrollbars when scrolling is enabled. To r
 * To achieve vertical scrolling, set the height of the Grid. Otherwise, it will expand vertically to show all rows.
 * To achieve horizontal scrolling, explicitly define the width of all columns in pixels and make sure their sum exceeds the width of the Grid.
 
-When scrolling is enabled, the vertical scrollbar of the Grid is always visible even if not needed which simplifies the implementation and improves the performance of the widget. To remove the vertical scrollbar, use CSS rules and make sure that neither the Grid nor its data area apply fixed heights so that they are able to shrink and expand according to the number of table rows. In the following example, the `#GridID` allows the application of styles only to a particular Grid instance. To use these styles in all Grid instances, replace the `ID` with the `.k-grid` CSS class. For a complete example on showing and hiding the scrollbar depending on the number of Grid rows, refer to [this example]({% slug howto_hide_vertical_scrollbar_grid %}).
+When scrolling is enabled, the vertical scrollbar of the Grid is always visible even if not needed which simplifies the implementation and improves the performance of the component. To remove the vertical scrollbar, use CSS rules and make sure that neither the Grid nor its data area apply fixed heights so that they are able to shrink and expand according to the number of table rows. In the following example, the `#GridID` allows the application of styles only to a particular Grid instance. To use these styles in all Grid instances, replace the `ID` with the `.k-grid` CSS class. For a complete example on showing and hiding the scrollbar depending on the number of Grid rows, refer to [this example]({% slug howto_hide_vertical_scrollbar_grid %}).
 
     #GridID .k-grid-header
     {
@@ -80,12 +80,12 @@ When scrolling is enabled, the vertical scrollbar of the Grid is always visible 
 
 ## Restoring the Scroll Position
 
-In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. To prevent the restoration of the scroll position:
+In some scenarios, the scroll position of the Grid might be reset when the component is rebound. To prevent the restoration of the scroll position:
 
 1. Save the scroll position in the [`dataBinding`](/api/javascript/ui/grid/events/databinding) event.
 1. Restore the scroll position in the [`databound`](/api/javascript/ui/grid/events/databound) event.
 
-The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
+The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the component [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 
     $(function () {
         // Initialize the variable which will hold the scroll positions.

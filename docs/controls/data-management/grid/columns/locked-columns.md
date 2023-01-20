@@ -21,7 +21,7 @@ For the feature to work properly, the following configuration settings has to be
 * Make sure that the total width of all locked columns is equal to or less than the width of the Grid minus three times the width of the scrollbar.
 * Make sure that the Grid is not [initialized inside a hidden container](#hidden-containers).
 
-> * The [JavaScript API of the Grid](/api/javascript/ui/grid) allows you to lock and unlock columns on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are different when you apply frozen columns. That is why the widget cannot switch between frozen and unfrozen mode after initialization.
+> * The [JavaScript API of the Grid](/api/javascript/ui/grid) allows you to lock and unlock columns on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are different when you apply frozen columns. That is why the component cannot switch between frozen and unfrozen mode after initialization.
 > * The locked columns can be positioned only at the left side of the Grid. Positioning them on the right side is not supported.
 > * The row template and detail features are not supported in combination with locked columns. If you use [multi-column headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders), you can lock a column at the topmost level only.
 

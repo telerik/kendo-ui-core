@@ -3,7 +3,7 @@ title: Preventing Cross-Site Scripting
 page_title: jQuery Editor Documentation - Preventing Cross-Site Scripting
 description: "Get started with the jQuery Editor by Kendo UI and learn about the security implications of allowing an HTML editing in your pages and how to secure them."
 slug: prevent_xss_editor_widget
-position: 11
+position: 12
 ---
 
 # Preventing Cross-Site Scripting
@@ -14,7 +14,7 @@ Allowing users to enter the HTML of your site imposes security risks that you ne
 
 The following steps demonstrate the way a typical XSS attack proceeds.
 
-1. A malicious user visits a page that uses the Editor widget. Let us assume that there is a `<textarea id="editor">` element on the page.
+1. A malicious user visits a page that uses the Editor component. Let us assume that there is a `<textarea id="editor">` element on the page.
 
         $("#editor").kendoEditor();
 

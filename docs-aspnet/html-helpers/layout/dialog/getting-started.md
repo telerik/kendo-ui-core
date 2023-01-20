@@ -219,7 +219,9 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Configure the action buttons in the Dialog]({% slug action_buttons_dialoghelper_aspnetcore %})
 * [Set the Dimensions of the Dialog]({% slug dimensions_dialoghelper_aspnetcore %})
+{% if site.core %}
 * [Using the Dialog in a Razor Pages scenario]({% slug htmlhelpers_dialog_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

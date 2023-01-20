@@ -22,7 +22,7 @@ When scrolling is enabled and a column is resized, all other columns maintain th
 * If the sum of all column widths is equal to the width of the Grid, no horizontal scrollbar appears.
 * If the sum of all column widths is less than the width of the Grid, an empty space after the last column appears.
 
-By design, the last column of the Grid has no right border, so that no double border appears at the right end of the Grid if the Grid table width matches the Grid widget width. If needed, you can apply a right border with the CSS code from the following example. The color value of the `#ccc` border has to match the color of the cell border from the [Kendo UI theme]({% slug themesandappearnce_kendoui_desktopwidgets %}). To obtain this, check the styles of the table cell by using a DOM inspector.
+By design, the last column of the Grid has no right border, so that no double border appears at the right end of the Grid if the Grid table width matches the Grid component width. If needed, you can apply a right border with the CSS code from the following example. The color value of the `#ccc` border has to match the color of the cell border from the [Kendo UI theme]({% slug themesandappearnce_kendoui_desktopwidgets %}). To obtain this, check the styles of the table cell by using a DOM inspector.
 
     .k-grid-header-wrap > table,
     .k-grid-content > table {

@@ -8,7 +8,7 @@ position: 1
 
 # Overview
 
-> * The LESS themes will be deprecated with the Kendo UI R1 2023 release.
+> * R1 2023 is the last official release of Telerik UI for {{ site.framework }}, where LESS Themes are supported and shipped with the product.
 > * The LESS themes support only the default values of the new [Components Styling Options]({% slug components_rendering_overview %}#styling-options).
 > * As of 2022 R1, the default value for the [Rounded styling option]({% slug components_rendering_overview %}#rounded) of the components is `Medium`. It is applyed through the `k-rounded-md` class. See the [Backwards Compatibility](#backwards-compatibility) section, for more details.
 

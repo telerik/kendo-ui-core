@@ -3,7 +3,7 @@ title: Appearance
 page_title: jQuery Editor Documentation - Appearance
 description: "Get started with the jQuery Editor by Kendo UI and set its size and use the default content styles or implement custom styles."
 slug: appearance_kendoui_editor_widget
-position: 13
+position: 14
 ---
 
 # Appearance
@@ -14,7 +14,7 @@ The Editor provides options for [setting its size](#setting-the-size), [using th
 
 Prior to the Q3 2012 (2012.3.1114) release, the Editor assumed the pixel offset width of the `<textarea>` from which it was created.
 
-The current behavior of the widget exposes the following specifics:
+The current behavior of the component exposes the following specifics:
 * If a width or a height value is set through an inline style in the `<textarea>` element, the Editor applies it.
 * If the `<textarea>` does not display such explicit values, the Editor applies a 100% width dimension and a default height of 250px.
 
@@ -22,7 +22,7 @@ If the `<textarea>` width and height are applied through external CSS styles, us
 
 The `<textarea>`, `cols`, and `rows` attributes are required. They can influence the dimensions of a `<textarea>` element as well. However, browsers do not apply them in a consistent manner and the Editor ignores them when its size is rendered.
 
-When you use the classic (iframe) Editor mode, the widget does not assume a very small height because it needs some minimum reasonable space for its toolbar and editable areas. The default widget height is 250px. To set a height less than 100px, use the [inline Editor mode]({% slug modes_kendoui_editor_widget %}#inline-mode). When you use the Editor MVC helper, apply the CSS class through `.HtmlAttributes()`.
+When you use the classic (iframe) Editor mode, the component does not assume a very small height because it needs some minimum reasonable space for its toolbar and editable areas. The default component height is 250px. To set a height less than 100px, use the [inline Editor mode]({% slug modes_kendoui_editor_widget %}#inline-mode). When you use the Editor MVC helper, apply the CSS class through `.HtmlAttributes()`.
 
 The following example demonstrates how to set a height less than 200px.
 
@@ -60,7 +60,7 @@ The following example demonstrates how to set a height less than 200px.
 
 ## Using the Default Styles
 
-When the [classic Editor mode]({% slug modes_kendoui_editor_widget %}#classic-mode) is enabled, the Editor uses an `iframe` and applies some default CSS styles to its content. This behavior overrides the default browser styling that is demonstrated in the following example and which targets mainly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class which is not included in the value of the widget.
+When the [classic Editor mode]({% slug modes_kendoui_editor_widget %}#classic-mode) is enabled, the Editor uses an `iframe` and applies some default CSS styles to its content. This behavior overrides the default browser styling that is demonstrated in the following example and which targets mainly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class which is not included in the value of the component.
 
     html,
     body {

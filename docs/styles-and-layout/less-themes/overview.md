@@ -9,7 +9,7 @@ position: 1
 
 # Overview
 
-> * The Less themes will be deprecated with the Kendo UI R1 2023 release.
+> * R1 2023 is the last official release of Kendo jQuery, where Less Themes are supported and shipped with the product.
 > * The Less-based themes support only the default value of the [Size styling option]({% slug components_rendering_overview %}#size).
 > * As of 2022 R1, components receive the default value for the [Rounded styling option]({% slug components_rendering_overview %}#rounded) through the `k-rounded-md` class. Check the [Backwards Compatibility section](#backwards-compatibility) for more details.
 

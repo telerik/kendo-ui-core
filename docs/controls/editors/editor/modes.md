@@ -3,7 +3,7 @@ title: Modes of Operation
 page_title: jQuery Editor Documentation - Modes of Operation
 description: "Get started with the jQuery Editor by Kendo UI and use its modes of operation."
 slug: modes_kendoui_editor_widget
-position: 3
+position: 4
 ---
 
 # Modes of Operation
@@ -18,11 +18,11 @@ The classic Editor posts its value automatically because it is based on a `form`
 
 ## Inline Mode
 
-If you initialize the Editor from a `"div"` element, the widget assumes its inline mode. The `<div>` element is content-editable and is used by the widget to return its value. For a runnable example, refer to the [demo on the inline Editor mode](https://demos.telerik.com/kendo-ui/web/editor/inline-editing.html).
+If you initialize the Editor from a `"div"` element, the component assumes its inline mode. The `<div>` element is content-editable and is used by the component to return its value. For a runnable example, refer to the [demo on the inline Editor mode](https://demos.telerik.com/kendo-ui/web/editor/inline-editing.html).
 
 > While it is possible to initialize an inline Editor from a non-`div` element, such as `p` or `h1`, it is strongly recommended that you use the `<div>` one. Do not use `<table>` elements for creating inline Editors because of Internet Explorer browser limitations.
 
-By default, inline Editors do not post their value and you have to [post their value manually]({% slug troubleshooting_editor_widget %}). The tools of the Editor are only visible when the widget is focused. Its content resides on the main web page and the styling of the page influences the editable content.
+By default, inline Editors do not post their value and you have to [post their value manually]({% slug troubleshooting_editor_widget %}). The tools of the Editor are only visible when the component is focused. Its content resides on the main web page and the styling of the page influences the editable content.
 
 > Because of the limited `iframe` support by the iOS Safari browser, it is recommended to use the inline Editor mode on iOS devices.
 

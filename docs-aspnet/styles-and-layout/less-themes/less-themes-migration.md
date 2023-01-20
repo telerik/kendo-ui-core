@@ -9,6 +9,8 @@ position: 3
 
 # LESS to SASS Theme Migration
 
+> R1 2023 is the last official release of Telerik UI for {{ site.framework }}, where LESS Themes are supported and shipped with the product.
+
 In this article you will learn how to migrate your project from a LESS theme to a SASS theme. If you are not sure whether you are using a LESS theme, check the following section of the [Components Rendering Overview]({% slug components_rendering_overview %}#how-do-i-know-if-i-am-using-a-less-theme) article.
 
 For additional information about the SASS themes, visit the [`SASS-Based Themes`](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) article.

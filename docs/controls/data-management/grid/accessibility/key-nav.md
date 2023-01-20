@@ -21,7 +21,7 @@ The following example demonstrates how to enable the key navigation in the Grid.
          // Other configuration.
     });
 
-The keyboard navigation of the Grid works by listening to the `keydown` events on the wrapper element of the widget. Its behavior is based on the assumption that whatever the user does is in accordance with the currently focused Grid cell and not with the focused element of the browser. If the data cells of the Grid contain hyperlinks that have to be activated through the keyboard:
+The keyboard navigation of the Grid works by listening to the `keydown` events on the wrapper element of the component. Its behavior is based on the assumption that whatever the user does is in accordance with the currently focused Grid cell and not with the focused element of the browser. If the data cells of the Grid contain hyperlinks that have to be activated through the keyboard:
 
 1. Navigate to the respective Grid cell by using the `Arrow` keys.
 1. Press `Enter` to focus the hyperlink inside the cell.

@@ -13,7 +13,7 @@ The Kendo UI Grid provides a templating engine and a built-in DataSource which a
 
 ## Getting Started
 
-To bind the Grid to remote data, specify the `dataSource` option. You can either create the data source outside the widget, or pass it in it. If multiple widgets are bound to the same data set, you have to create the data source as an object that you can refer to in different widgets. If the Grid is the only item that is bound to the data, create it inline.
+To bind the Grid to remote data, specify the `dataSource` option. You can either create the data source outside the component, or pass it in it. If multiple components are bound to the same data set, you have to create the data source as an object that you can refer to in different components. If the Grid is the only item that is bound to the data, create it inline.
 
     $("#grid").kendoGrid({
          dataSource: {
@@ -37,13 +37,13 @@ To configure the data source of the Grid:
 
 ### Supplying the Remote Endpoint
 
-Kendo UI provides a [data-binding framework](https://demos.telerik.com/kendo-ui/datasource/index) that can be used inline with the Grid by defining the `dataSource` of the widget and supplying the remote endpoint.
+Kendo UI provides a [data-binding framework](https://demos.telerik.com/kendo-ui/datasource/index) that can be used inline with the Grid by defining the `dataSource` of the component and supplying the remote endpoint.
 
 The following example demonstrates how to implement the suggested approach. In the example:
 
 * The `dataSource` creates a new Kendo UI DataSource and assigns it as the data source for the Grid.
 * The `transport` defines the way you will communicate with the remote data source.
-* The `url` points to the location of the data to which you want to bind the widget.
+* The `url` points to the location of the data to which you want to bind the component.
 * The `data` lists additional URL parameters that need to be sent to the remote endpoint.
 * The `dataType` indicates the format of the response in which the data source is expected to be (JSONP in the example). JSONP is a way of returning JSON from a cross-browser request without getting blocked. It wraps the JSON response in a callback to intentionally mislead the browser&mdash;however, it is not recommended to do so unless you are fully aware of the containing data.
 * The `schema` indicates to the Grid what the schema of the response is.
@@ -137,7 +137,7 @@ The following example demonstrates how to specify the `field` attribute in the c
 
 Instead of showing an image in the **Image** column, the Grid renders the string output of a JavaScript object and, also, the date does not appear in a user-friendly format.
 
-The following example demonstrates how to indicate to the Grid the way you want the widget to display the **Image** column by using an inline `template` for the image. The date is properly formatted by using the `format` option of the column.
+The following example demonstrates how to indicate to the Grid the way you want the component to display the **Image** column by using an inline `template` for the image. The date is properly formatted by using the `format` option of the column.
 
 ```dojo
     <div id="grid">
@@ -289,7 +289,7 @@ The Kendo UI Grid exposes two types of loading indicators:
 
 * The `loadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
 
-* The `skeleton` uses the [SkeletonContainer widget]({% slug overview_kendoui_skeletoncontainer_widget %}) to show a simplified preview of each of the grid's cells. The `skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
+* The `skeleton` uses the [SkeletonContainer component]({% slug overview_kendoui_skeletoncontainer_widget %}) to show a simplified preview of each of the grid's cells. The `skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
 
 Check the `skeleton` loading type in action in the live demo below:
 

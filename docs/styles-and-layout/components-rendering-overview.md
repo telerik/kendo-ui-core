@@ -8,6 +8,8 @@ position: 0
 
 # Overview
 
+> R1 2023 is the last official release of Kendo jQuery, where Less Themes are supported and shipped with the product.
+
 Kendo UI R1 2022 introduces new rendering for several components. As the new rendering implementation is an ongoing effort, there may be slight changes and touch-ups after the release. 
 
 The new rendering will cover the entire list of the Kendo UI web components.
@@ -131,6 +133,6 @@ The following table showcases the old and updated versions of the Kendo state cl
 
 ## Less Themes Migration
 
-> The Less themes will be deprecated with Kendo UI R1 2023.
+> R1 2023 is the last official release of Kendo jQuery, where Less Themes are supported and shipped with the product.
 
 For additional information about the required steps for migrating to a Sass theme, visit the [Less Migration]({% slug less_themes_migration %}) help article.

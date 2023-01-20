@@ -51,7 +51,7 @@ In virtual scrolling, the HTML output is different from the standard scrolling f
         </div>
     </div>
 
-When the user scrolls a Grid in its virtual-scrolling mode, the Grid renders the table rows for the reached scroll position on the fly. If the Gris uses local data or if its remote data has already been loaded and cached, the rendering rate and performance of the widget depend on:
+When the user scrolls a Grid in its virtual-scrolling mode, the Grid renders the table rows for the reached scroll position on the fly. If the Gris uses local data or if its remote data has already been loaded and cached, the rendering rate and performance of the component depend on:
 * The page size.
 * The Grid height.
 * The scrolling speed.
@@ -101,10 +101,10 @@ On mobile devices where a scrollbar that can be grabbed and dragged is not visib
 * Virtual scrolling is not compatible with drag selection.
 * Virtual scrolling relies on calculating the average row height based on already loaded data. Having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
 * Provide for a page size of the Grid that is large enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created. The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
-* A scrollable Grid with a set height needs to be visible when initialized. In this way the Grid adjusts the height of its scrollable data area in accordance with the total height of the widget. In certain scenarios the Grid might be invisible when initialized - for example, when placed inside an initially inactive TabStrip tab or in another widget. In such cases use either of the following options:
+* A scrollable Grid with a set height needs to be visible when initialized. In this way the Grid adjusts the height of its scrollable data area in accordance with the total height of the component. In certain scenarios the Grid might be invisible when initialized - for example, when placed inside an initially inactive TabStrip tab or in another component. In such cases use either of the following options:
     * Initialize the Grid while its element is still visible.
-    * Initialize the Grid in a suitable event of the parent widget - for example, in the `activate` event of the TabStrip.
-* Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to one or two million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
+    * Initialize the Grid in a suitable event of the parent component - for example, in the `activate` event of the TabStrip.
+* Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to one or two million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected component behavior or JavaScript errors might occur. In such cases, revert to standard paging.
 * Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero&mdash;for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`. In some scenarios, you might also need to call the [`refresh()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/refresh).
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 * When the Grid is `navigatable`, keyboard navigation supports only the `Up Arrow` and `Down Arrow` keys. The `Page Up` and `Page Down` key scrolling is not supported.

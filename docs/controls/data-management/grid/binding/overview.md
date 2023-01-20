@@ -11,7 +11,7 @@ position: 1
 
 By default, the Kendo UI Grid for jQuery automatically binds to data.
 
-Immediately after the Grid loads, the [DataSource]({% slug overview_kendoui_datasourcecomponent %}) sends a query and the data is loaded to the widget. To disable this behavior, set the `autoBind` option of the widget to `false`, as shown below.
+Immediately after the Grid loads, the [DataSource]({% slug overview_kendoui_datasourcecomponent %}) sends a query and the data is loaded to the component. To disable this behavior, set the `autoBind` option of the component to `false`, as shown below.
 
     $("#grid").kendoGrid({
         autoBind: false,

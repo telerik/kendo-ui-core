@@ -32,7 +32,7 @@ For more information, refer to:
 
 ## Hierarchical Grid
 
-Customization of the text in the column header for the expand or collapse columns in Hierarchical Grids can be made via the [messages.expandCollapseColumnHeader property](/api/javascript/dataviz/ui/chart#configuration-series.spacing). This sets the value to make the widget compliant with the web accessibility standards.
+Customization of the text in the column header for the expand or collapse columns in Hierarchical Grids can be made via the [messages.expandCollapseColumnHeader property](/api/javascript/dataviz/ui/chart#configuration-series.spacing). This sets the value to make the component compliant with the web accessibility standards.
 
 ## Scrollable Grid
 

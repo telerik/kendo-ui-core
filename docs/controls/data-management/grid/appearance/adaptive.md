@@ -17,8 +17,8 @@ For example, when you filter or edit data on mobile, Kendo UI slides in a new sc
 
 To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid/configuration/mobile) property to `true` or `"phone"`:
 
-* If set to `true`, the widget will use adaptive rendering when viewed on a mobile browser.
-* If set to `"phone"`, the widget will be forced to use adaptive rendering regardless of the browser type.
+* If set to `true`, the component will use adaptive rendering when viewed on a mobile browser.
+* If set to `"phone"`, the component will be forced to use adaptive rendering regardless of the browser type.
 
 > Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the grid might have a different height.
 
@@ -121,11 +121,11 @@ The column resizing feature on touch screen devices is triggered when the user h
 
 ## Destroying Adaptive Grids
 
-When in adaptive mode, the Grid generates auxiliary markup which needs to be removed if the widget is to be [destroyed]({% slug destroywidgets_kendoui_gettingstarted %}) manually.
+When in adaptive mode, the Grid generates auxiliary markup which needs to be removed if the component is to be [destroyed]({% slug destroywidgets_kendoui_gettingstarted %}) manually.
 
 To manually destroy the Grid:
 
-1. Call [`kendo.destroy()`](/api/javascript/kendo/methods/destroy) over the closest `.k-pane-wrapper` ancestor which is created around the Grid widget.
+1. Call [`kendo.destroy()`](/api/javascript/kendo/methods/destroy) over the closest `.k-pane-wrapper` ancestor which is created around the Grid component.
 1. Remove the whole `.k-pane-wrapper` element from the DOM.
 
 To re-create the Grid, insert a new `<div>` at the same place where the previous Grid `<div>` was initially placed.

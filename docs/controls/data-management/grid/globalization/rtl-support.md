@@ -8,7 +8,7 @@ position: 4
 
 # Right-to-Left Support
 
-Right-to-left (RTL) support reflects the ability of a widget to render its content in a right-to-left direction for right-to-left languages, such as Arabic, Hebrew, Chinese, or Japanese.
+Right-to-left (RTL) support reflects the ability of a component to render its content in a right-to-left direction for right-to-left languages, such as Arabic, Hebrew, Chinese, or Japanese.
 
 For more information, refer to:
 * [RTL support by the Grid (demo)](https://demos.telerik.com/kendo-ui/grid/right-to-left-support)

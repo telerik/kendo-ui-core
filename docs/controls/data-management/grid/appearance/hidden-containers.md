@@ -20,8 +20,8 @@ You can identify that the Grid is initialized in a hidden state if any of the fo
 * The pager may not appear or may be the smallest responsive pager instead of the full one
 
 To handle the behavior that is related to the initialization of the Grid inside a hidden container, use any of the following approaches:
-* Delay the initialization of the Grid or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized after its element becomes visible.
-* Execute the [`resize`](/api/javascript/kendo/methods/resize) method of the Grid after the widget becomes visible.
+* Delay the initialization of the Grid or change the order in which various Kendo UI components are initialized, so that the Grid is initialized after its element becomes visible.
+* Execute the [`resize`](/api/javascript/kendo/methods/resize) method of the Grid after the component becomes visible.
 * Instead of setting an overall height for the Grid in its configuration, define the height for the scrollable data area only. In this case, no height calculations are made. This approach is applicable only if frozen columns and virtual scrolling are _not_ used.
 
     ```

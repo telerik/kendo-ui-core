@@ -12,7 +12,7 @@ The following table lists the Telerik UI for {{ site.framework }} themes and the
 
 | Telerik UI for {{ site.framework }} | Kendo UI Sass Themes |
 |:---         |:---                     |
-| Telerik UI 2023.1.117 (R1 2023) | @progress/kendo-theme-bootstrap@5.10.0<br>@progress/kendo-theme-classic@5.10.0<br>@progress/kendo-theme-default@5.10.0<br>@progress/kendo-theme-fluent@5.10.0<br>@progress/kendo-theme-material@5.10.0<br> |
+| Telerik UI 2023.1.117 (R1 2023) | @progress/kendo-theme-bootstrap@5.10.0<br>@progress/kendo-theme-classic@5.10.0<br>@progress/kendo-theme-default@5.10.0<br>@progress/kendo-theme-fluent@5.10.0<br>@progress/kendo-theme-material@5.10.0 |
 | Telerik UI 2022.3.1109 (R3 2022 SP1) | @progress/kendo-theme-bootstrap@5.10.0<br>@progress/kendo-theme-default@5.10.0<br>@progress/kendo-theme-material@5.10.0<br>@progress/kendo-theme-classic@5.10.0<br>@progress/kendo-theme-fluent@5.10.0 |
 | Telerik UI 2022.3.913 (R3 2022) | @progress/kendo-theme-bootstrap@5.8.0<br>@progress/kendo-theme-default@5.8.0<br>@progress/kendo-theme-material@5.8.0<br>@progress/kendo-theme-classic@5.8.0<br>@progress/kendo-theme-fluent@5.8.0 |
 | Telerik UI 2022.2.802 (R2 2022 SP2) | @progress/kendo-theme-bootstrap@5.6.0<br>@progress/kendo-theme-default@5.6.0<br>@progress/kendo-theme-material@5.6.0<br>@progress/kendo-theme-classic@5.6.0 |

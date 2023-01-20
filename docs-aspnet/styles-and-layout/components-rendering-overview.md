@@ -8,6 +8,8 @@ position: 0
 
 # Components Rendering Overview
 
+> R1 2023 is the last official release of Telerik UI for {{ site.framework }}, where LESS Themes are supported and shipped with the product.
+
 The R1 2022 release introduces new rendering for several components. In the long run, we will make similar rendering improvements to most of the UI components in the suite. These are breaking changes that affect both the SASS and the LESS-based themes.
 
 > Larger visual updates like these can have implications in the form of visual regressions, which could appear when upgrading from an older version to R1 2022. While we believe that we have caught and resolved many visual regression issues while getting ready for R1 2022, there may be additional issues discovered after the release. We are firmly committed to address these issues as quickly as possible and will continue to push out updates with fixes to our themes and components after the R1 2022 release.
@@ -201,7 +203,7 @@ The following table shows the old and the updated versions of the state classes:
 
 ## LESS Themes Migration
 
-> The LESS themes will be deprecated with the R1 2023 release.
+> R1 2023 is the last official release of Telerik UI for {{ site.framework }}, where LESS Themes are supported and shipped with the product.
 
 This section concerns developers who use the original LESS-based themes and have not migrated to the SASS-based themes yet.
 

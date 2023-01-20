@@ -1,14 +1,14 @@
 ---
 title: Selection & Export
 page_title: jQuery Grid Documentation - Selection & Export
-description: "The jQuery Grid by Kendo UI allows you to select cells and then export them. This article explains the steps required to configure and use the widget."
+description: "The jQuery Grid by Kendo UI allows you to select cells and then export them. This article explains the steps required to configure and use the component."
 slug: exporting_selection_kendoui_grid
 position: 4
 ---
 
 # Selection & Export
 
-The Grid widget allows users to select specific cells and then export them to MS Excel or a Kendo UI Chart.
+The Grid component allows users to select specific cells and then export them to MS Excel or a Kendo UI Chart.
 
 For runnable example, refer to the [Demo on copying/exporting selected cells](https://demos.telerik.com/kendo-ui/grid/selection-export).
 
@@ -47,7 +47,7 @@ The following sections provide step-by-step instructions and examples on getting
     })
     ```
 
-1. Initialize the `ContextMenu` widget.
+1. Initialize the `ContextMenu` component.
 
     ```javascript
     $("#contextmenu").kendoContextMenu({
@@ -147,7 +147,7 @@ To enable users to export the selected data to a Kendo UI Chart:
         <div id="chart-container"></div>
     ```
 
-1. Call the [`getSelectedData`](/api/javascript/ui/grid/methods/getselecteddata) method and initialize a Chart widget with the data.
+1. Call the [`getSelectedData`](/api/javascript/ui/grid/methods/getselecteddata) method and initialize a Chart component with the data.
 
     ```javascript
             function exportToChart() {

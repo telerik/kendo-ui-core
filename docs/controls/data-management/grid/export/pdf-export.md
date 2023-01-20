@@ -9,7 +9,7 @@ position: 2
 
 # PDF Export
 
-The Grid widget provides a built-in PDF export functionality.
+The Grid component provides a built-in PDF export functionality.
 
 For a runnable example, refer to the [demo on exporting the Grid to PDF](https://demos.telerik.com/kendo-ui/grid/pdf-export).
 
