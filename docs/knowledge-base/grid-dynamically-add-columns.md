@@ -1,6 +1,6 @@
 ---
-title: How to add grid columns dynamically
-description: An example on how to add and remove Kendo UI Grid columns dynamically.
+title: Dynamically Add and Remove Columns to the Grid
+description: Learn how to dynamically add and remove columns to the Kendo UI for jQuery Grid component.
 type: how-to
 page_title: Add and Remove Columns Dynamically - Kendo UI Grid for jQuery
 slug: grid-dynamically-add-columns
@@ -15,20 +15,22 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® for jQuery Grid</td>
  </tr>
 </table>
 
 ## Description
 
-I need to add columns dynamically. What are my options?
+How can I add and remove columns to the jQuery Grid component dynamically?
 
 ## Solution
 
-1. The simplest option is to have [hidden columns](/api/javascript/ui/grid/configuration/columns.hidden) and allow the users to unhide them with the help of the [column menu](/api/javascript/ui/grid/configuration/columnmenu).
-1. Another option could be to use the [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method with a custom UI, for example a Kendo UI MultiSelect that holds a collection of all the available columns. 
-    1. In the MultiSelect [`change`](/api/javascript/ui/multiselect/events/change) event handler, get the current selection with the [`value()`](/api/javascript/ui/multiselect/methods/value) method
-    1. Call the grid [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method with the selected items
+The most straightforward way to achieve the desired scenario is to have [hidden columns](/api/javascript/ui/grid/configuration/columns.hidden) and allow the users to unhide them with the help of the [column menu](/api/javascript/ui/grid/configuration/columnmenu).
+
+An alternative option is to use the [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method with a custom UI, for example, a Kendo UI for jQuery MultiSelect that holds a collection of all the available columns: 
+
+1. In the [`change`](/api/javascript/ui/multiselect/events/change) event handler of the MultiSelect, get the current selection with the [`value()`](/api/javascript/ui/multiselect/methods/value) method.
+1. Call the [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method of the Grid with the selected items.
 
 ```dojo
     <label for="multiselect">Select Columns to display</label>
@@ -98,4 +100,4 @@ I need to add columns dynamically. What are my options?
 
 ## See Also
 
-* [Create Grids with Dynamic Columns and Data Types]({% slug howto_createdynamiccolumnsdatatypes_grid %})
+* [Creating Grids with Dynamic Columns and Data Types]({% slug howto_createdynamiccolumnsdatatypes_grid %})

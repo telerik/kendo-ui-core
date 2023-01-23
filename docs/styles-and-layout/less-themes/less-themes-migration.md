@@ -76,8 +76,8 @@ The following table contains the name of the Less theme and its Sass counterpart
 |:---         |:---        |:---        |:---
 | `Default` | `Classic - Main` | Available | https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.classic-main.min.css |
 | `Default Dark` | `Classic - Main Dark` | Available | https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.classic-main-dark.min.css |
-| `Black` | `Classic - Opal Dark` | Available | https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.classic-opal-dark.min.css |
-| `Blue Opal` | `Classic - Opal` | In Progress | ETA March 2023 |
+| `Black` | `Classic - Opal Dark` | In Progress | ETA March 2023 |
+| `Blue Opal` | `Classic - Opal` | Available | https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.classic-opal.min.css |
 | `Silver` | `Classic - Silver` | Available | https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.classic-silver.min.css |
 | `Metro` | `Classic - Metro` | In Research | TBA |
 | `Metro Black` | `Classic - Metro Dark` | In Research | TBA |
