@@ -64,7 +64,7 @@ You will also add some sample data that the DropDownList will display. Optionall
 Use the DropDownList HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to the page:
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the DropDownList element.
-* The `.OptionLabel()` configuration adds an empty item in the list and shows its text as selected, when none of the items in the data source is selected.
+* The `.OptionLabel()` configuration adds an empty item in the list and shows its text as selected when none of the items in the data source is selected.
 * The `DataTextField()` option specifies the name of the field in the data, which will be used to show text in the items.
 * The `DataValueField()` option specifies the name of the field, which holds the value of the items.  
 
@@ -126,7 +126,7 @@ Use the DropDownList HtmlHelper {% if site.core %}or TagHelper{% endif %} to add
 
 ## 3. Select a Default Value
 
-The next step is to set one of the items of the DropDownList as selected. The following example shows how to use the `.Value()` method of the DropDownList, to select the item with value `2`.
+The next step is to set one of the items of the DropDownList as selected. The following example shows how to use the `.Value()` method of the DropDownList, to select the item with a value of `2`.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -315,6 +315,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the DropDownList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/api)
-* [DropDownList Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Client-Side API of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
 * [Server-Side API of the DropDownList](/api/dropdownlist)
 * [Knowledge Base Section](/knowledge-base)

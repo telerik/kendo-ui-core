@@ -153,6 +153,6 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-* [Using the API of the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/api)
-* [AutoComplete Server-Side API](/api/autocomplete)
-* [AutoComplete Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [Using the API of the AutoComplete for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/api)
+* [Server-Side API of the AutoComplete](/api/autocomplete)
+* [Client-Side API of the AutoComplete](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)

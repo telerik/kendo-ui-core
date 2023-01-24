@@ -1,0 +1,17 @@
+# jQuery Docs owners
+/docs/ @NikoPenev21 @gdenchevprog @nelito987 @martintabakov
+# MVC/Core Docs owners
+/docs-aspnet/ @eyupyusein @alestoya @yanisslav @aleksandarevangelatov @StoyanGoranov @mihaela-lukanova @antonmironovv @VicTachev @IvanDanchev
+# Source owners
+/src/ @Iankodj @ag-petrov @veselints
+/tests/ @Iankodj @ag-petrov @veselints
+/typescript/ @Iankodj @ag-petrov @veselints
+# Infrastructure owners
+/build/ @Iankodj @ag-petrov
+gulpfile.js @Iankodj @ag-petrov @veselints
+package.json @Iankodj @ag-petrov @MilenaCh @Dimitar-Goshev
+package-lock.json @Iankodj @ag-petrov @MilenaCh @Dimitar-Goshev
+# Workflow owners
+/.github/ @VicTachev @nenchef
+# LESS owners
+/styles/ @NikoPenev21 @magdalenaan

@@ -43,7 +43,7 @@ Indicates whether the Steps in the **Stepper** will render their label element (
 
 ### linear `Boolean` *(default: true)*
 
-Indicates whether the **Stepper** will force the user to follow the Steps sequence or not. If set to "false" it will allow the user to select any step. If in its default state ("true") the user will be able to select the step immediately after the currently selected step or any previous step.
+Indicates whether the **Stepper** will force the user to follow the Steps sequence or not. If set to "false" it will allow the user to select any step. If in its default state ("true") the user will be able to select the step immediately after the currently selected step or the previous step.
 
 #### Example
 

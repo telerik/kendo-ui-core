@@ -25,10 +25,18 @@ The following example shows how to utilize both of them:
         .Name("appbar")
         .ThemeColor(AppBarThemeColor.Inherit)
         .Items(items=> {
-            items.Add().Template("<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
+            items.Add().Template("<a class='k-button k-button-solid-base k-button-solid k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
             items.Add().TemplateId("search-template").Type(AppBarItemType.ContentItem);
         })
     )
+    <script id="search-template" type="text/x-kendo-tmpl">
+        <span class="k-textbox k-display-flex">
+            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+            <span class="k-input-icon">
+                <span class="k-icon k-i-search"></span>
+            </span>
+        </span>
+    </script>
 
 ```
 {% if site.core %}
@@ -37,7 +45,7 @@ The following example shows how to utilize both of them:
 
    <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Inherit" >
         <items>
-            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button k-button-solid-base k-button-solid k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
             <appbar-item type="AppBarItemType.ContentItem" template-id="search-template"></appbar-item>
         </items>   
     </kendo-appbar>
@@ -61,7 +69,7 @@ The `Spacer` item could be utilized to easily separate the content items from ea
     @(Html.Kendo().AppBar()
         .Name("appbar")
         .Items(items=> {
-            items.Add().Template("<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
+            items.Add().Template("<a class='k-button k-button-solid-base k-button-solid k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
             items.Add().Type(AppBarItemType.Spacer).Width("16px");
             items.Add().Template("<h3>AppBar Demo</h3>").Type(AppBarItemType.ContentItem);
         })
@@ -71,11 +79,11 @@ The `Spacer` item could be utilized to easily separate the content items from ea
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
-      <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Inherit" >
+    <kendo-appbar name="appbar">
         <items>
-            <appbar-item type="AppBarItemType.ContentItem" template="<h3 class='title'>All Products</h3>"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button k-button-solid-base k-button-solid  k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
             <appbar-item type="AppBarItemType.Spacer" width="16px"></appbar-item>
-            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button k-clear-search' href='\\#'>Clear search</a>"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template="<h3>AppBar Demo</h3>"></appbar-item>
         </items>   
     </kendo-appbar>
 ```

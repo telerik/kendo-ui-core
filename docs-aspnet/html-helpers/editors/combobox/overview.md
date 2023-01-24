@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI ComboBox component for {{ site.framework }}."
+description: "Discover the Telerik UI ComboBox component for {{ site.framework }} and its features like the built-in virtualization, customization, grouping and filtering."
 previous_url: /helpers/html-helpers/combobox, /helpers/editors/combobox/overview
 slug: htmlhelpers_combobox_aspnetcore
 position: 0
@@ -161,91 +161,26 @@ The following example demonstrates the basic configuration of the ComboBox.
 
 ## Functionality and Features
 
-* [Binding]({% slug htmlhelpers_combobox_databinding_aspnetcore %})
-* [Appearance]({% slug appearance_combobox_aspnetcore %})
-* [Grouping]({% slug htmlhelpers_combobox_grouping_aspnetcore %})
-* [Virtualization]({% slug htmlhelpers_combobox_virtualization_aspnetcore %})
-* [Filtering]({% slug htmlhelpers_combobox_filtering_aspnetcore %})
-* [Templates]({% slug htmlhelpers_combobox_templates_aspnetcore %})
-* [Cascading]({% slug htmlhelpers_combobox_cascading_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_combobox %})
+|Feature|Description|
+|------|------|
+| [Binding]({% slug htmlhelpers_combobox_databinding_aspnetcore %})|You can bind the ComboBox to local arrays of data and to remote data services.
+| [Appearance]({% slug appearance_combobox_aspnetcore %})|You can customize the appearance of the ComboBox by configuring its size, fill mode, and border radius.
+| [Grouping]({% slug htmlhelpers_combobox_grouping_aspnetcore %})|In the ComboBox, you can display data items that are grouped by a specific model field.
+| [Virtualization]({% slug htmlhelpers_combobox_virtualization_aspnetcore %})|The built-in virtualization of the ComboBox allows you to display large datasets.|
+| [Filtering]({% slug htmlhelpers_combobox_filtering_aspnetcore %})| You can display only a subset of the available data by using the server-side filtering of the ComboBox.|
+| [Templates]({% slug htmlhelpers_combobox_templates_aspnetcore %})|To take full control over the rendering of the ComboBox items, popup header, and popup footer, you can use the available templates.|
+| [Cascading]({% slug htmlhelpers_combobox_cascading_aspnetcore %})|You can use a series of two or more cascaded ComboBoxes.|
+| [Accessibility]({% slug accessibility_aspnetcore_combobox %})|The ComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
 
-## Events
+## Next Steps
 
-You can subscribe to all ComboBox [events](/api/combobox). For a complete example on basic ComboBox events, refer to the [demo on using the events of the ComboBox](https://demos.telerik.com/{{ site.platform }}/combobox/events).
-
-### Handling by Handler Name
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().ComboBox()
-        .Name("combobox")
-        .BindTo(new string[] { "Item1", "Item2", "Item3" })
-        .Events(e => e
-            .Select("combobox_select")
-            .Change("combobox_change")
-        )
-    )
-```
-{% if site.core %}
-```TagHelper
-@{ 
-    var items = new string[] { "Item 1", "Item 2", "Item 3" };
-}
-<kendo-combobox name="combobox"
-                bind-to="items"
-                on-select="combobox_select"
-                on-change="combobox_change">
-</kendo-combobox>
-```
-{% endif %}
-```script
-    <script>
-    function combobox_select() {
-        // Handle the select event.
-    }
-
-    function combobox_change() {
-        // Handle the change event.
-    }
-
-    $(document).ready(function() {
-        var comboBoxWidget = $("#combobox").data("kendoComboBox"); //Get an instance of the ComboBox.
-        comboBoxWidget.value("Item3"); //Set the value of the ComboBox programmatically when the page has finished loading.
-        comboBoxWidget.trigger("change"); //Trigger the "change" event manually (the value() method does not trigger it). Refer to the client-side API for further details.
-    });
-    </script>
-```
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().ComboBox()
-        .Name("combobox")
-        .BindTo(new string[] { "Item1", "Item2", "Item3" })
-        .Events(e => e
-            .Select(@<text>
-            function() {
-                // Handle the select event inline.
-            }
-            </text>)
-            .Change(@<text>
-            function() {
-                // Handle the change event inline.
-            }
-            </text>)
-        )
-    )
-```
-
-## See Also
-
-* [Basic Usage of the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox)
+* [Getting Started with the ComboBox]({% slug aspnetcore_combobox_getting_started %})
+* [Basic Usage of the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/index)
 {% if site.core %}
 * [Basic Usage of the ComboBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/tag-helper)
 {% endif %}
-* [Using the API of the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/api)
-* [Server-Side API](/api/combobox)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+
+## See Also
+
+* [Using the API of the ComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/api)
+* [Knowledge Base Section](/knowledge-base)

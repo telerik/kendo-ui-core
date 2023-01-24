@@ -123,7 +123,7 @@ Use the AutoComplete HtmlHelper {% if site.core %}or TagHelper{% endif %} to add
 
 ## 3. Select a Default Value
 
-The next step is to set one of the items of the AutoComplete as selected. The following example shows how to use the `.Value()` method of the AutoComplete, to select the item with text `Europe`.
+The next step is to set one of the items of the AutoComplete as selected. The following example shows how to use the `.Value()` method of the AutoComplete to select the item with text `Europe`.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -181,7 +181,7 @@ The next step is to set one of the items of the AutoComplete as selected. The fo
 
 ## 4. Handle an AutoComplete Event
 
-The AutoComplete component exposes convenient events for implementing your desired logic. In this example, you will use the `Change()` event to log the value of the selected item in the browser's console. You will also handle the `Open()` event and log an entry in the browser's console, when the event fires. 
+The AutoComplete component exposes convenient events for implementing your desired logic. In this example, you will use the `Change()` event to log the value of the selected item in the browser's console. You will also handle the `Open()` event and log an entry in the browser's console when the event fires. 
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -308,6 +308,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the AutoComplete for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/api)
-* [AutoComplete Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [Client-Side API of the AutoComplete ](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
 * [Server-Side API of the AutoComplete](/api/autocomplete)
 * [Knowledge Base Section](/knowledge-base)

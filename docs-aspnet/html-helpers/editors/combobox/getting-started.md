@@ -124,7 +124,7 @@ Use the ComboBox HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
 
 ## 3. Select a Default Value
 
-The next step is to set one of the items of the ComboBox as selected. The following example shows how to use the `.Value()` method of the ComboBox, to select the item with value `2`.
+The next step is to set one of the items of the ComboBox as selected. The following example shows how to use the `.Value()` method of the ComboBox, to select the item with a value of `2`.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -314,6 +314,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/api)
-* [ComboBox Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [Client-Side API of the ComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
 * [Server-Side API of the ComboBox](/api/combobox)
 * [Knowledge Base Section](/knowledge-base)

@@ -98,6 +98,6 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-* [Using the API of the Editor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/api)
-* [Editor Server-Side API](/api/editor)
-* [Editor Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [Using the API of the Editor for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/api)
+* [Server-Side API of the Editor](/api/editor)
+* [Client-Side API of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)

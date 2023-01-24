@@ -159,70 +159,27 @@ The following example demonstrates the basic configuration of the Editor.
 
 ## Functionality and Features
 
-* [Modes of operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
-* [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
-* [Pasting content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
-* [Serializing and deserializing content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
-* [Image browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
-* [Immutable elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
-* [CRUD operations]({% slug htmlhelpers_crud_editor_aspnetcore %})
-* [Styling the content]({% slug htmlhelpers_editor_styling_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_editor %})
+|Feature|Description|
+|-------|-----------|
+| [Modes of operation]({% slug htmlhelpers_editor_modes_aspnetcore %})| The Editor supports two operation modes: classic and inline.|
+| [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})| The Editor allows you to enable a large set of built-in text editing tools. You can also add your custom tools. |
+| [Pasting content]({% slug htmlhelpers_editor_pasting_aspnetcore %})| The users can paste content from HTML and Microsoft Word documents into the Editor.|
+| [Serializing and deserializing content]({% slug htmlhelpers_editor_serialize_aspnetcore %})| You can configure custom definitions for serializing and deserializing of the Editor's content.|
+| [Image browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})| The Editor allows the user to insert an image by browsing a list of predefined files and directories.|
+| [Immutable elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})| By using the immutable feature, the Editor allows you to add HTML elements that cannot be edited by the user.|
+| [CRUD operations]({% slug htmlhelpers_crud_editor_aspnetcore %})| The Editor docs and demos demonstrate how to save, read, update, and delete text content in a database.|
+| [Styling the content]({% slug htmlhelpers_editor_styling_aspnetcore %})| You can choose between the default styling options for the Editor's content or add your custom styles.|
+| [Accessibility]({% slug accessibility_aspnetcore_editor %})| The Editor is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
 
-## Events
+## Next Steps
 
-The following example demonstrates Editor events, which could be handled on the client-side. For a complete example on basic Editor events, refer to the [demo on using the events of the Editor](https://demos.telerik.com/{{ site.platform }}/editor/events).
-
-```HtmlHelper
-    @(Html.Kendo().Editor()
-        .Name("editor")
-        .Events(e => e
-            .Change("onChange")
-            .Execute("onExecute")
-            .Keydown("onKeydown")
-            .Keyup("onKeyup")
-            .Paste("onPaste")
-            .PdfExport("onPdfExport")
-            .Select("onSelect")
-        )
-    )
-
-    <script>
-        function onChange(e) {
-            kendoConsole.log("value change");
-        }
-
-        function onExecute(e) {
-            kendoConsole.log("command :: " + e.name);
-        }
-
-        function onKeydown(e) {
-            kendoConsole.log("key down");
-        }
-
-        function onKeyup(e) {
-            kendoConsole.log("key up");
-        }
-
-        function onPaste(e) {
-            kendoConsole.log("paste :: " + kendo.htmlEncode(e.html));
-        }
-
-        function onPdfExport(e) {
-            kendoConsole.log("PDF export");
-        }
-
-        function onSelect(e) {
-            kendoConsole.log("selection  change");
-        }
-    </script>
-```
-
-## See Also
-
-* [Basic Usage of the Editor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor)
+* [Getting Started with the Editor]({% slug aspnetcore_editor_getting_started %})
+* [Basic Usage of the Editor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/index)
 {% if site.core %}
 * [Basic Usage of the Editor TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/tag-helper)
 {% endif %}
-* [Using the API of the Editor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/api)
-* [Server-Side API](/api/editor)
+
+## See Also
+
+* [Using the API of the Editor for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/api)
+* [Knowledge Base Section](/knowledge-base)

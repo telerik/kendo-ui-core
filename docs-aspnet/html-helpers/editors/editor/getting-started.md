@@ -71,9 +71,9 @@ Use the Editor HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the c
 
 >Do not set the `Name()` option when using `EditorFor`. The `[ComponentName]For` method automatically sets the control's `Name()` to the field it is bound to. For more information, see the [Fundamentals]{% if site.core %}({% slug fundamentals_core %}){% else %}({% slug fundamentals_aspnetmvc %}){% endif %} article.
 
-## 3. Add Html Content to the Editor
+## 3. Add HTML Content to the Editor
 
-You can display arbitrary Html in the Editor. In this tutorial, you will use the `.Value()` configuration option to set the value of the control.
+You can display arbitrary HTML in the Editor. In this tutorial, you will use the `.Value()` configuration option to set the value of the control.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -221,6 +221,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Editor for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/api)
-* [Editor Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [Client-Side API of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
 * [Server-Side API of the Editor](/api/editor)
 * [Knowledge Base Section](/knowledge-base)

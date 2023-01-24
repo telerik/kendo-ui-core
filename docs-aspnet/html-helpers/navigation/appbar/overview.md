@@ -57,7 +57,7 @@ You can subscribe to the AppBar widget's events.
         .Name("appbar")
         .ThemeColor(AppBarThemeColor.Inherit)
         .Items(items=> {
-            items.Add().Template("<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
+            items.Add().Template("<a class='k-button k-button-solid-base k-button-solid k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
             items.Add().Type(AppBarItemType.Spacer).Width("16px");
             items.Add().TemplateId("search-template").Type(AppBarItemType.ContentItem);
         })
@@ -83,7 +83,7 @@ You can subscribe to the AppBar widget's events.
   
     <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Inherit" on-resize="onResize">
         <items>
-            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button k-button-solid-base k-button-solid k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
             <appbar-item type="AppBarItemType.Spacer" width="16px"></appbar-item>
             <appbar-item type="AppBarItemType.ContentItem" template-id="search-template"></appbar-item>
         </items>   

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI AutoComplete component for {{ site.framework }}."
+description: "Learn more about the Telerik UI AutoComplete component for {{ site.framework }} and its various features like virtualization, data binding options, and accessibility support."
 previous_url: /helpers/html-helpers/autocomplete, /helpers/editors/autocomplete/overview
 slug: htmlhelpers_autocomplete_aspnetcore
 position: 0
@@ -188,35 +188,21 @@ The following example demonstrates the basic configuration of the AutoComplete.
 
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_autocomplete_databinding_aspnetcore %})
-* [Grouping]({% slug htmlhelpers_autocomplete_grouping_aspnetcore %})
-* [Templates]({% slug htmlhelpers_autocomplete_templates_aspnetcore %})
-* [Virtualization]({% slug virtualization_autocomplete_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_autocomplete %})
+* [Data binding]({% slug htmlhelpers_autocomplete_databinding_aspnetcore %})—The AutoComplete supports multiple data binding approaches: server, model, custom, and ajax binding. 
+* [Grouping]({% slug htmlhelpers_autocomplete_grouping_aspnetcore %})—You can group the data that is displayed in the AutoComplete.
+* [Templates]({% slug htmlhelpers_autocomplete_templates_aspnetcore %})—To take full control over the rendering of the AutoComplete items, popup header, and popup footer, you can use the available templates.
+* [Virtualization]({% slug virtualization_autocomplete_aspnetcore %})—The built-in virtualization allows you to display large datasets.
+* [Accessibility]({% slug accessibility_aspnetcore_autocomplete %})—The AutoComplete is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
-## Events
+## Next Steps
 
-For a complete example on basic AutoComplete events, refer to the [demo on using the events of the AutoComplete](https://demos.telerik.com/{{ site.platform }}/autocomplete/events).
-
-## Referencing Existing Instances
-
-To reference an existing AutoComplete instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [AutoComplete client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#methods) to control its behavior.
-
-```
-    // Place the following after your Telerik UI AutoComplete for {{ site.framework }} declaration.
-    <script>
-        $(document).ready(function() {
-            // The Name() of the AutoComplete is used to get its client-side instance.
-            var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-        });
-    </script>
-```
-
-## See Also
-
+* [Getting Started with the AutoComplete]({% slug aspnetcore_autocomplete_getting_started %})
 * [Basic Usage of the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/index)
 {% if site.core %}
 * [Basic Usage of the AutoComplete TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
 {% endif %}
-* [Using the API of the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/api)
-* [Server-Side API](/api/autocomplete)
+
+## See Also
+
+* [Using the API of the AutoComplete for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/api)
+* [Knowledge Base Section](/knowledge-base)
