@@ -27,6 +27,8 @@ The [Telerik UI Donut Chart component for {{ site.framework }}](https://demos.te
 To create a Pie series in the Chart component, use `Pie` in the `Series` configuration.
 
 * [Creating the Pie Chart](#creating-the-pie-chart)
+* [Configuring the labels visibility](#configuring-the-labels-visibility)
+* [Configuring the labels alignment](#configuring-the-labels-alignment)
 * [Configuring the effects overlay](#configuring-the-effects-overlay)
 
 ## Creating the Pie Chart
@@ -74,7 +76,62 @@ The following example demonstrates how to define a single series of type `"pie"`
     </kendo-chart>
 ```
 {% endif %}
-![{{ site.product_short }} A sample Pie Chart](images/pie-chart.png)
+![{{ site.product_short }} A sample Pie Chart](images/pie-chart-roundedbevel.png)
+
+## Configuring the Labels Visibility
+
+The Telerik UI for {{ site.framework }} Pie Chart enables you to show or hide labels through the `Visible()` configuration method for the given series.
+
+```HtmlHelper
+    .Series(series =>
+    {
+        series.Pie(new dynamic[] {})
+    		.Labels(labels => labels
+    			.Visible(true)
+    		);
+    })
+```
+{% if site.core %}
+```TagHelper
+    <series>
+        <series-item data='new dynamic[] {}'>
+            <labels visible="true"></labels>
+        </series-item>
+    </series>
+```
+{% endif %}
+
+## Configuring the Labels Alignment
+
+The Telerik UI for {{ site.framework }} Pie Chart allows you to configure the label alignment for the series through the `Align()` configuration method.
+
+```HtmlHelper
+    .Series(series =>
+    {
+        series.Pie(new dynamic[] {})
+    		.Labels(labels => labels
+    			.Align(ChartSeriesLabelsAlign.Circle)
+    		);
+    })
+```
+{% if site.core %}
+```TagHelper
+    <series>
+        <series-item data='new dynamic[] {}'>
+            <labels align="ChartSeriesLabelsAlign.Circle"></labels>
+        </series-item>
+    </series>
+```
+{% endif %}
+
+The Pie Chart support two modes of label alignment:
+
+* `Circle`(default)&mdash;The labels are positioned in a circle around the Chart.
+        
+    ![{{ site.product_short}} A Pie Chart with circle aligned labels](images/pie-chart-labels-circle.png)
+* `Column`&mdash;The labels are positioned in columns to the left and right of the Chart.
+        
+    ![{{ site.product_short}} A Pie Chart with column aligned labels](images/pie-chart-labels-column.png)
 
 ## Configuring the Effects Overlay
 
@@ -89,7 +146,7 @@ Each segment has a transparent effect overlay that adds depth to the two-dimensi
 ```
 {% if site.core %}
 ```TagHelper
-      <series>
+    <series>
         <series-item data='new dynamic[] {}'>
             <overlay gradient="ChartSeriesGradient.None" />
         </series-item>

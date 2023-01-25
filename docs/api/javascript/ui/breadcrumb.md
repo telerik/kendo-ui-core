@@ -74,6 +74,10 @@ Array of items to be rendered in **Breadcrumb**.
 		});
 	</script>
 
+### items.encoded `Boolean` _(default: true)_
+
+Defines whether to encode the item's text. To render entities or HTML, set it to `false`.
+
 ### items.type `String` 
 
 Defines the type of the item "rootitem" or "item".
