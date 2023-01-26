@@ -33,7 +33,7 @@ That common header in turn can be a child of another upper `MultiColumn` header 
 
 The previous example will present the following output.
 
-<img src="multicolumn-headers.png">
+![Kendo UI for jQuery TreeList MultiColumn Headers](multicolumn-headers.png)
 
 ## See Also
 

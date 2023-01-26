@@ -36,7 +36,7 @@ That common header in turn can be a child of another upper `MultiColumn` header 
 
 The previous example results in the following output.
 
-<img src="multicolumn-headers.png">
+![Kendo UI for jQuery Grid MultiColumn Headers](multicolumn-headers.png)
 
 ## KB Articles on Column Headers
 

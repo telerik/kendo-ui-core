@@ -19,7 +19,8 @@ The tool from the toolbar exposes several options to sort by:
 * Date Modified
 
 **Inbuilt Sort  functionality in FileManager:** 
-<img src="sort.png">
+
+![Kendo UI for jQuery FileManager Sort Popup](sort-dropdown.png)
 
 
 ## See Also

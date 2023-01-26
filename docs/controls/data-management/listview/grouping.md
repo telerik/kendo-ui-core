@@ -27,7 +27,7 @@ The key part is to configure the ListView Template for proper accomodation of th
         <div class="cards">
             # for (var i = 0; i < data.items.length; i++) { #
             <div class="k-card" style="width: 15em; margin:2%">
-                <img class="k-card-image" src="#=destinationURL(data.items[i].ImageUrl)#" />
+                <img alt="Kendo UI for jQuery ListView #= data.items[i].Title #" class="k-card-image" src="#=destinationURL(data.items[i].ImageUrl)#" />
                 <div class="k-card-body">
                     <h4 class="k-card-title">#= data.items[i].Title #</h4>
                     <h5 class="k-card-subtitle">#= data.items[i].Description #</h5>

@@ -45,7 +45,6 @@ Manually change the content of the filter menu container and its logic by subscr
 
 <div id="example">
   <div id="grid"></div>
-
   <script>
     $(document).ready(function() {
       $("#grid").kendoGrid({
@@ -73,15 +72,12 @@ Manually change the content of the filter menu container and its logic by subscr
             .empty()
             .append($('<span>First name: </span><br /><input id="first-name-operators" /><input id="first-name-tb" class="k-textbox" /><br /><input id="first-logic" /><br /><span>Last name: </span><br /><input id="last-name-operators" /><input id="last-name-tb" class="k-textbox" /><br /><input id="second-logic" /><br /><span>JobTitle: </span><br /><input id="job-title-operators" /><input id="job-title-tb" class="k-textbox" /><div><button type="submit" class="k-button k-primary" id="submit">Filter</button><button type="reset" class="k-button" id="clear">Clear</button></div>'));
           var operators = ['eq', 'startswith', 'contains'];
-
           $('#first-name-operators, #last-name-operators, #job-title-operators').kendoDropDownList({
             dataSource: operators
           });
-
           $('#first-logic, #second-logic').kendoDropDownList({
             dataSource: ['and', 'or']
           });
-
           $('#submit').kendoButton({
             click: function(){
               var firstName = $('#first-name-tb').val();
@@ -91,28 +87,31 @@ Manually change the content of the filter menu container and its logic by subscr
               var lastNameOperator = $('#last-name-operators').data('kendoDropDownList').value();
               var titleOperator = $('#job-title-operators').data('kendoDropDownList').value();
               var logic = $('#first-logic').data('kendoDropDownList').value();
-
-              var filter = {
-                logic: logic,
-                filters: [{
-                    field: 'FirstName',
-                    operator: firstNameOperator,
-                    value: firstName
-                  }, {
-                    field: 'LastName',
-                    operator: lastNameOperator,
-                    value: lastName
-                  }, {
-                    field: 'Title',
-                    operator: titleOperator,
-                    value: title
-                  }]
+              var filter = { logic: logic, filters: [] };
+              if(firstName.length) {
+                filter.filters.push({
+                  field: 'FirstName',
+                  operator: firstNameOperator,
+                  value: firstName
+                });
               }
-
+              if(lastName.length) {
+                filter.filters.push({
+                  field: 'LastName',
+                  operator: lastNameOperator,
+                  value: lastName
+                });
+              }
+              if(title.length) {
+                filter.filters.push({
+                  field: 'Title',
+                  operator: titleOperator,
+                  value: title
+                });
+              }
               e.sender.dataSource.filter(filter);
             }
           });
-
           $('#clear').kendoButton({
             click: function(){
               e.sender.dataSource.filter({});
@@ -121,7 +120,6 @@ Manually change the content of the filter menu container and its logic by subscr
         }
       });
     });
-
   </script>
 </div>
 ```

@@ -19,7 +19,7 @@ The following example demonstrates how to initialize the Menu by using HTML mark
         <li>Normal Item
             <ul>
                 <li><span class="k-sprite icon-class"></span>Item with a Sprite</li>
-                <li><img src="Icons/contacts.gif" />Item with an Icon</li>
+                <li><img src="images/contacts.gif" />Item with an Icon</li>
             </ul>
         </li>
         <li><a href="https://www.google.com">Navigation Item</a></li>

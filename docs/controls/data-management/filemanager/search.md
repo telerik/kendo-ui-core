@@ -11,7 +11,8 @@ position: 7
 The FileManager provides an inbuilt Search functionality, allowing you to find the specific file in the currently selected folder. 
 
 **Inbuilt Search textbox in FileManager:** 
-<img src="search.png">
+
+![Kendo UI for jQuery FileManager Search Field](search-field.png)
 
 
 ## See Also

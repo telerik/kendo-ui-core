@@ -25,19 +25,19 @@ The example below demonstrates how you can enable users to remove a tile from th
       <!-- container templates -->
       <script id="barcelona" type="text/x-kendo-template">
         <a class='k-button k-button-icon k-flat k-close-button'><span class='k-icon k-i-close'></span></a>
-            <img class="k-card-image" draggable="false" src="../content/web/cards/barcelona.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout Arc de Triomf' class="k-card-image" draggable="false" src="../content/web/cards/barcelona.jpg")" />
       </script>
       <script id="sofia" type="text/x-kendo-template">
         <a class='k-button k-button-icon k-flat k-close-button'><span class='k-icon k-i-close'></span></a>
-            <img class="k-card-image" draggable="false" src="../content/web/cards/sofia.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout St. Alexander Nevsky Cathedral' class="k-card-image" draggable="false" src="../content/web/cards/sofia.jpg")" />
       </script>
       <script id="rome" type="text/x-kendo-template">
         <a class='k-button k-button-icon k-flat k-close-button'><span class='k-icon k-i-close'></span></a>
-            <img class="k-card-image" draggable="false" src="../content/web/cards/rome.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout The Colosseum' class="k-card-image" draggable="false" src="../content/web/cards/rome.jpg")" />
       </script>
       <script id="sa" type="text/x-kendo-template">
         <a class='k-button k-button-icon k-flat k-close-button'><span class='k-icon k-i-close'></span></a>
-            <img class="k-card-image" draggable="false" src="../content/web/cards/south-africa.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout Rhinos' class="k-card-image" draggable="false" src="../content/web/cards/south-africa.jpg")" />
       </script>
 
       <script>
@@ -120,19 +120,19 @@ The following example demonstrates how you can enable users to add a tile to the
 
         <!-- container templates -->
         <script id="barcelona" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="../content/web/cards/barcelona.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout Arc de Triomf' class="k-card-image" draggable="false" src="../content/web/cards/barcelona.jpg")" />
         </script>
         <script id="sofia" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="../content/web/cards/sofia.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout St. Alexander Nevsky Cathedral' class="k-card-image" draggable="false" src="../content/web/cards/sofia.jpg")" />
         </script>
         <script id="rome" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="../content/web/cards/rome.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout The Colosseum' class="k-card-image" draggable="false" src="../content/web/cards/rome.jpg")" />
         </script>
         <script id="sa" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="../content/web/cards/south-africa.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout Rhinos' class="k-card-image" draggable="false" src="../content/web/cards/south-africa.jpg")" />
         </script>
         <script id="sanfran" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="../content/web/cards/sanfran.jpg")" />
+            <img alt='Kendo UI for jQuery TileLayout Golden Gate Bridge'  class="k-card-image" draggable="false" src="../content/web/cards/sanfran.jpg")" />
         </script>
 
         <script>

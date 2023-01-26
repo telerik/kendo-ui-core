@@ -20,7 +20,8 @@ The toolbar has a predefined set of tools which you can show or hide, depending 
 * *Search* textbox to filter the content
 
 **Inbuilt Sort  functionality in FileManager:** 
-<img src="toolbar.png">
+
+![Kendo UI for jQuery FileManager Toolbar](toolbar.png)
 
 ## Customizing the Toolbar Commands
 

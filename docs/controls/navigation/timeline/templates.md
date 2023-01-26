@@ -27,7 +27,7 @@ The following example demonstrates how to customize the template of the Timeline
             <p>#= data.description #</p>
             <div class="imageContainer">
                 # for (var i = 0; i < data.images.length; i++) { #
-                <img src="#= data.images[i].src #" class="k-card-image">
+                <img alt="Kendo UI for jQuery TimeLine #= data.title #" src="#= data.images[i].src #" class="k-card-image">
                 # } #
             </div>
         </div>
