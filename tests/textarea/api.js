@@ -121,7 +121,7 @@
                 size: "small"
             });
 
-            assert.isOk(widget.element.hasClass("k-overflow-hidden"));
+            assert.isOk(widget.element.hasClass("!k-overflow-hidden"));
             assert.isOk(widget.wrapper.hasClass("k-input-sm"));
 
             widget.setOptions({
@@ -129,9 +129,9 @@
                 size: "large"
             });
 
-            assert.isNotOk(widget.element.hasClass("k-overflow-hidden"));
+            assert.isNotOk(widget.element.hasClass("!k-overflow-hidden"));
             assert.isNotOk(widget.wrapper.hasClass("k-input-sm"));
-            assert.isOk(widget.element.hasClass("k-overflow-clip"));
+            assert.isOk(widget.element.hasClass("!k-overflow-clip"));
             assert.isOk(widget.wrapper.hasClass("k-input-lg"));
         });
     });

@@ -200,13 +200,29 @@
                 overflow: "hidden"
             });
 
-            assert.isOk(widget.element.hasClass("k-overflow-hidden"));
+            assert.isOk(widget.element.hasClass("!k-overflow-hidden"));
         });
 
         it("default overflow class check", function() {
             var widget = new TextArea(textarea, {});
 
-            assert.isOk(widget.element.hasClass("!k-overflow-y-auto"));
+            assert.isOk(widget.element.hasClass("!k-overflow-auto"));
+        });
+
+        for (const overflowOption of ["auto", "hidden", "visible", "scroll", "clip"]) {
+            it("apply important overflow class check - " + overflowOption, function() {
+                let widget = new TextArea(textarea, { overflow: overflowOption });
+
+                assert.isOk(widget.element.hasClass(`!k-overflow-${overflowOption}`));
+            });
+        }
+
+        it("overflow none class check", function() {
+            var widget = new TextArea(textarea, { overflow: "none" });
+
+            assert.isNotOk(widget.element.hasClass(`!k-overflow-none`));
+            assert.isNotOk(widget.element.hasClass(`!k-overflow-auto`));
+            assert.isNotOk(widget.element.hasClass(`!`));
         });
 
         it("styling options - checks for valid options", function() {
