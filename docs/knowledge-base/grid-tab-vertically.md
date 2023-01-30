@@ -1,10 +1,10 @@
 ---
-title: Vertically Tab Cells in Editable Grid
-description: An example on how to vertically tab through the columns of the Kendo UI Grid.
+title: Vertically Tab Cells in an Editable Grid
+description: Learn how to vertically tab through the columns of the Kendo UI for jQuery Data Grid component.
 type: how-to
 page_title: Tab through Columns Vertically - Kendo UI Grid for jQuery
 slug: grid-tab-vertically
-tags: grid, tab, editing, vertical
+tags: kendo, jquery, grid, tab, editing, vertical
 ticketid: 1140359
 res_type: kb
 ---
@@ -14,11 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
- </tr>
- <tr>
-  <td>Progress Kendo UI version</td>
-  <td>Created with the 2017.3.1026 version</td>
+  <td>Progress® Kendo UI® for jQuery Grid</td>
  </tr>
 </table>
 
@@ -27,6 +23,8 @@ res_type: kb
 How can I vertically navigate down through the columns when I use the `Tab` key in the Kendo UI Grid?
 
 ## Solution
+
+To achieve the desired scenario:
 
 1. Handle the [`keydown`](https://api.jquery.com/keydown/) table event.
 1. If the key is `Tab`, prevent the default behavior.
@@ -128,7 +126,7 @@ How can I vertically navigate down through the columns when I use the `Tab` key 
                     return;
                 }
 
-                // wait for cell to close and Grid to rebind when changes have been made
+                // Wait for the cell to close and for the Grid to rebind when the changes have been made.s
                 setTimeout(function() {
                     grid.editCell(grid.tbody.find("tr:eq(" + nextCellRow + ") td:eq(" + nextCellCol + ")"));
                 });
@@ -140,4 +138,7 @@ How can I vertically navigate down through the columns when I use the `Tab` key 
 
 ## See Also
 
-* [Skip Non-Editable Cells When Tabbing](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/Editing/skip-non-editable-cells-when-tabbing)
+* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
+* [jQuery Grid Overview Demo](https://demos.telerik.com/kendo-ui/grid/index)
+* [Vertically Tab Cells in Editable and Grouped Grids](/knowledge-base/grid-tab-vertically-grouping)
+* [Skip Non-Editable Cells When Tabbing](/knowledge-base/skip-non-editable-cells-when-tabbing)
