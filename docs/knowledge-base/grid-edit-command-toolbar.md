@@ -47,9 +47,9 @@ How can I limit the number of columns in the Grid and move the **Edit** and **Up
 
     </div>
     <div class="updateCancelContainer">
-    		<a role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-update" href="\\#"> 
+    		<a role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-save-command" href="\\#"> 
         <span class="k-icon k-i-check k-button-icon"></span>Update</a>
-        <a role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-cancel" href="\\#">
+        <a role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-cancel-command" href="\\#">
         <span class="k-icon k-i-cancel k-button-icon"></span>Cancel</a>
     </div>
 </script>
@@ -123,14 +123,14 @@ How can I limit the number of columns in the Grid and move the **Edit** and **Up
             }
         });
 
-        $(".k-grid-update").on("click", function (e) {
+        $(".k-grid-save-command").on("click", function (e) {
             e.preventDefault();
             var grid = $("#grid").getKendoGrid();
             grid.dataSource.sync();
             $(".editBtnContainer, .updateCancelContainer").toggle();
         });
 
-        $(".k-grid-cancel").on("click", function (e) {
+        $(".k-grid-cancel-command").on("click", function (e) {
             e.preventDefault();
             var grid = $("#grid").getKendoGrid();
             grid.cancelChanges();

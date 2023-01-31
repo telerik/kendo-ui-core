@@ -1706,6 +1706,20 @@ The title of the Wrap Text option in Table Wizard.
     });
     </script>
 
+### navigateOnTab `Boolean` *(default: false)*
+
+If set to `true` this configuration option would enable Tab-based navigation among Editor ToolBar items. By default navigation is arrow-based.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+      $("#editor").kendoEditor({
+          navigateOnTab: true
+      });
+    </script>
+
+
 ### pasteCleanup `Object`
 
 Options for controlling how the pasting content is modified before it is added in the editor.

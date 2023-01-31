@@ -122,7 +122,7 @@ To filter the hidden column:
 						dataBound: function(e) {
 							var grid = e.sender;
 							var gridEl = grid.element;
-							var filterElem = gridEl.find("[data-field='Discontinued']").find(".k-grid-filter");
+							var filterElem = gridEl.find("[data-field='Discontinued']").find(".k-grid-filter-menu");
 							var myFilterPlaceholder = gridEl.find("th.k-group-cell.k-header");
 
 							myFilterPlaceholder.append(filterElem);

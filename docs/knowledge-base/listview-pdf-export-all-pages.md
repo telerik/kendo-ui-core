@@ -57,7 +57,7 @@ How can I export all ListView pages to a PDF file?
 
     <div class="demo-section k-content wide">
         <div id="listView"></div>
-        <div id="pager" class="k-pager-wrap"></div>
+        <div id="pager" class="k-pager"></div>
     </div>
 
     <script type="text/x-kendo-template" id="template">

@@ -370,25 +370,25 @@
         it("shows prev button", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.equal(pager.find(".k-i-arrow-60-left").length, 1);
+            assert.equal(pager.find(".k-i-caret-alt-left").length, 1);
         });
 
         it("shows first button", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.equal(pager.find(".k-pager-first .k-i-arrow-end-left").length, 1);
+            assert.equal(pager.find(".k-pager-first .k-i-caret-alt-to-left").length, 1);
         });
 
         it("shows next button", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.equal(pager.find(".k-i-arrow-60-right").length, 1);
+            assert.equal(pager.find(".k-i-caret-alt-right").length, 1);
         });
 
         it("shows last button", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.equal(pager.find(".k-pager-last .k-i-arrow-end-right").length, 1);
+            assert.equal(pager.find(".k-pager-last .k-i-caret-alt-to-right").length, 1);
         });
 
         it("first button is disabled on the first page", function() {
@@ -408,7 +408,7 @@
         it("prev button is disabled on the first page", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.isOk(pager.find(".k-i-arrow-60-left").parent().hasClass("k-disabled"));
+            assert.isOk(pager.find(".k-i-caret-alt-left").parent().hasClass("k-disabled"));
         });
 
         it("prev button is enabled on any page but first", function() {
@@ -417,7 +417,7 @@
             dataSource.read();
             dataSource.page(2);
 
-            assert.isOk(!pager.find(".k-i-arrow-60-left").parent().hasClass("k-disabled"));
+            assert.isOk(!pager.find(".k-i-caret-alt-left").parent().hasClass("k-disabled"));
         });
 
         it("prev button page data attribute is set to page minus one", function() {
@@ -426,7 +426,7 @@
             dataSource.read();
             dataSource.page(3);
 
-            assert.equal(pager.find(".k-i-arrow-60-left").parent().data(kendo.ns + "page"), 2);
+            assert.equal(pager.find(".k-i-caret-alt-left").parent().data(kendo.ns + "page"), 2);
         });
 
         it("next button is disabled on the last page", function() {
@@ -434,14 +434,14 @@
 
             dataSource.read();
             dataSource.page(5);
-            assert.isOk(pager.find(".k-i-arrow-60-right").parent().hasClass("k-disabled"));
+            assert.isOk(pager.find(".k-i-caret-alt-right").parent().hasClass("k-disabled"));
         });
 
         it("next button is enabled on any page but last", function() {
             var pager = setup({}, { previousNext: true });
 
             dataSource.read();
-            assert.isOk(!pager.find(".k-i-arrow-60-right").parent().hasClass("k-disabled"));
+            assert.isOk(!pager.find(".k-i-caret-alt-right").parent().hasClass("k-disabled"));
         });
 
         it("next button page data attribute is set to page plus one", function() {
@@ -450,7 +450,7 @@
             dataSource.read();
             dataSource.page(3);
 
-            assert.equal(pager.find(".k-i-arrow-60-right").parent().data(kendo.ns + "page"), 4);
+            assert.equal(pager.find(".k-i-caret-alt-right").parent().data(kendo.ns + "page"), 4);
         });
 
         it("last button is disabled on the last page", function() {
@@ -508,7 +508,7 @@
                 autoBind: false
             });
 
-            assert.isOk(!pager.find(".k-i-arrow-60-left").parent().hasClass("k-disabled"));
+            assert.isOk(!pager.find(".k-i-caret-alt-left").parent().hasClass("k-disabled"));
         });
 
         it("next is enabled if the data source is read before pager init", function() {
@@ -525,7 +525,7 @@
                 autoBind: false
             });
 
-            assert.isOk(!pager.find(".k-i-arrow-60-right").parent().hasClass("k-disabled"));
+            assert.isOk(!pager.find(".k-i-caret-alt-right").parent().hasClass("k-disabled"));
         });
 
         it("last is enabled if the data source is read before pager init", function() {
@@ -659,7 +659,7 @@
         it("displays refresh button", function() {
             var pager = setup({}, { refresh: true });
 
-            assert.equal(pager.find(".k-i-reload").length, 1);
+            assert.equal(pager.find(".k-i-arrow-rotate-cw").length, 1);
         });
 
         it("clicking the refresh button reads from the data source", function() {
@@ -672,7 +672,7 @@
                 }
             });
 
-            pager.find(".k-i-reload").click();
+            pager.find(".k-i-arrow-rotate-cw").click();
 
             assert.equal(dataSource.calls("read"), 1);
         });

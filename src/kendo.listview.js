@@ -242,7 +242,7 @@ var __meta__ = {
             var options = this.options;
             var height = options.height;
 
-            this.element.addClass("k-widget k-listview");
+            this.element.addClass("k-listview");
 
 
             if (options.contentElement) {
@@ -262,7 +262,7 @@ var __meta__ = {
             var flex = options.flex;
             var grid = options.grid;
             var element = that.element;
-            var elementClassNames = ["k-widget", "k-listview"];
+            var elementClassNames = ["k-listview"];
             var content = that.content;
             var contentClassNames = ["k-listview-content"];
 

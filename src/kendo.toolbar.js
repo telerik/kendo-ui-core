@@ -42,7 +42,7 @@ var __meta__ = {
         GROUP_END = "k-group-end",
         MENU_LINK = "k-menu-link",
         MENU_ITEM = "k-menu-item",
-        OVERFLOW_ANCHOR = "k-overflow-anchor",
+        OVERFLOW_ANCHOR = "k-toolbar-overflow-button",
         TEMPLATE_ITEM = "k-toolbar-item",
         TOOLBAR_TOOL = "k-toolbar-tool",
         MENU_LINK_TOGGLE = "k-menu-link-toggle",
@@ -119,7 +119,17 @@ var __meta__ = {
         open: "Button"
     };
 
-    var SAFE_COMPONENTS = [ "Button", "SplitButton", "DropDownButton", "ButtonGroup", "Switch" ];
+    var TOOLBAR_TOOLS_CLASSES = {
+        Button: "k-toolbar-button",
+        ToggleButton: "k-toolbar-toggle-button",
+        SplitButton: "k-toolbar-split-button",
+        DropDownButton: "k-toolbar-menu-button",
+        ButtonGroup: "k-toolbar-button-group",
+        ColorPicker: "k-toolbar-color-picker",
+        Switch: "k-toolbar-switch"
+    };
+
+    var SAFE_COMPONENTS = [ "Button", "SplitButton", "DropDownButton", "ButtonGroup", "Switch", "ColorPicker" ];
 
     var POPUP_BUTTON_TEMPLATE = '<button class="k-popup-button"><span class="k-button-icon k-icon k-icon"></span><span class="k-button-text"><span class="k-icon k-i-arrow-s"></span></span></button>';
     var TEMPLATE_WRAPPER = "<div class='k-toolbar-item' aria-keyshortcuts='Enter'></div>";
@@ -127,7 +137,7 @@ var __meta__ = {
     var SEPARATOR_OVERFLOW_EL = "<li role='separator' class='k-separator k-menu-separator k-hidden'></li>";
     var SEPARATOR_EL = '<div role="separator">&nbsp;</div>';
     var SPACER_EL = '<div>&nbsp;</div>';
-    var OVERFLOW_ANCHOR_EL = '<div title="More tools" class="k-overflow-anchor k-toolbar-tool k-button k-button-md k-rounded-md k-button-flat k-button-flat-base" title="More tools" role="button"><span class="k-icon k-i-more-vertical"></span></div>';
+    var OVERFLOW_ANCHOR_EL = '<div title="More tools" class="k-toolbar-overflow-button k-overflow-anchor k-toolbar-tool k-button k-button-md k-rounded-md k-button-flat k-button-flat-base" title="More tools" role="button"><span class="k-icon k-i-more-vertical"></span></div>';
 
     var ToolBar = Widget.extend({
         init: function(element, options) {
@@ -267,7 +277,7 @@ var __meta__ = {
             var that = this,
                 uid = this._getUid(candidate),
                 item = that._getItem(candidate, uid),
-                elements, parentButtonGroup, children;
+                elements, parentButtonGroup, children, parentGroupEl;
 
             if (!item) {
                 return;
@@ -288,10 +298,15 @@ var __meta__ = {
                 });
             }
 
-            parentButtonGroup = item.toolbarEl.closest(DOT + BUTTON_GROUP).data(K_BUTTON_GROUP);
+            parentGroupEl = item.toolbarEl.parent().closest(DOT + BUTTON_GROUP);
+            parentButtonGroup = parentGroupEl.data(K_BUTTON_GROUP);
 
             if (parentButtonGroup) {
-                that._groupVisibleButtons(parentButtonGroup.element);
+                if (parentGroupEl.children(":not(.k-hidden)").length === 0) {
+                    that.hide(parentGroupEl);
+                } else {
+                    that._groupVisibleButtons(parentGroupEl);
+                }
             }
 
             if (this.options.resizable) {
@@ -351,7 +366,7 @@ var __meta__ = {
             var that = this,
                 uid = this._getUid(candidate),
                 item = this._getItem(candidate, uid),
-                elements, parentButtonGroup, children;
+                elements, parentButtonGroup, children, parentGroupEl;
 
             if (!item) {
                 return;
@@ -372,10 +387,15 @@ var __meta__ = {
                 });
             }
 
-            parentButtonGroup = item.toolbarEl.closest(DOT + BUTTON_GROUP).data(K_BUTTON_GROUP);
+            parentGroupEl = item.toolbarEl.parent().closest(DOT + BUTTON_GROUP);
+            parentButtonGroup = parentGroupEl.data(K_BUTTON_GROUP);
 
             if (parentButtonGroup) {
-                that._groupVisibleButtons(parentButtonGroup.element);
+                if (parentGroupEl.hasClass("k-hidden") && parentGroupEl.children(":not(.k-hidden)").length > 0) {
+                    that.show(parentGroupEl);
+                } else {
+                    that._groupVisibleButtons(parentGroupEl);
+                }
             }
 
             if (this.options.resizable) {
@@ -560,7 +580,7 @@ var __meta__ = {
             widget = new kendo.ui[options.component](element, options.componentOptions);
 
             if (SAFE_COMPONENTS.indexOf(options.component) > -1) {
-                widget.wrapper.addClass(TOOLBAR_TOOL);
+                widget.wrapper.addClass(TOOLBAR_TOOL + " " + TOOLBAR_TOOLS_CLASSES[options.component]);
                 result = widget.wrapper;
             } else {
                 result = (widget.wrapper || widget.element).wrap(CUSTOM_WIDGET_WRAP).parent();
@@ -844,6 +864,7 @@ var __meta__ = {
 
             widget = new kendo.ui[component]($(widgetElement), options);
             element = widget.wrapper || widget.element;
+            element.addClass(TOOLBAR_TOOLS_CLASSES[component]);
             this._addAttributes(options, element);
 
             if (hasButtons) {
@@ -1194,7 +1215,7 @@ var __meta__ = {
             var that = this,
                 componentOptions = component.componentOptions,
                 componentMessages = componentOptions.messages,
-                attributes = $.extend({}, component.attributes, that._mapAttributes(component, messages)),
+                attributes = $.extend({}, that._mapAttributes(component, messages), component.attributes),
                 options;
 
             if (component.overflowComponent) {
@@ -1259,7 +1280,7 @@ var __meta__ = {
             tool = isBuiltInTool ? tool.name : tool;
             toolOptions = $.isPlainObject(tool) ? tool : $.extend({}, defaultTools[tool]);
 
-            attributes = that._mapAttributes(toolOptions, messages);
+            attributes = $.extend({}, that._mapAttributes(toolOptions, messages), toolOptions.attributes);
 
             kendo.deepExtend(toolOptions, {
                 text: messages[toolOptions.name || toolOptions.property],

@@ -49,7 +49,7 @@
         });
 
         it("tools should have title attribute", function() {
-            var toolsButtons = listbox.toolbar.element.find("a.k-button");
+            var toolsButtons = listbox.toolbar.element.find("button.k-button");
             var titleAttr = "title";
 
             assert.equal(toolsButtons.filter('[data-command="remove"]').attr(titleAttr), "Delete");

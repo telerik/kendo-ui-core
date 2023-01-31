@@ -41,8 +41,8 @@
             assert.isOk(downArrow.hasClass("k-spinner-decrease"));
             assert.equal(downArrow.attr("aria-label"), textbox.options.downArrowText);
 
-            assert.isOk(upArrow.children(":first").hasClass("k-icon k-i-arrow-n k-button-icon"));
-            assert.isOk(downArrow.children(":first").hasClass("k-icon k-i-arrow-s k-button-icon"));
+            assert.isOk(upArrow.children(":first").hasClass("k-icon k-i-caret-alt-up k-button-icon"));
+            assert.isOk(downArrow.children(":first").hasClass("k-icon k-i-caret-alt-down k-button-icon"));
             assert.equal(upArrow.children(":first").html(), "");
             assert.equal(downArrow.children(":first").html(), "");
         });

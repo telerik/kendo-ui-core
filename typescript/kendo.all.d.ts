@@ -5003,6 +5003,7 @@ declare namespace kendo.ui {
         tools?: EditorTool[]|string[] | undefined;
         imageBrowser?: EditorImageBrowser | undefined;
         fileBrowser?: EditorFileBrowser | undefined;
+        navigateOnTab?: boolean | undefined;
         change?(e: EditorEvent): void;
         execute?(e: EditorExecuteEvent): void;
         keydown?(e: EditorEvent): void;

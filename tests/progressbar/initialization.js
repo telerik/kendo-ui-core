@@ -41,7 +41,6 @@
         it("Css classes are added to the wrapper", function() {
             var pb = new ProgressBar(container);
 
-            assert.isOk(pb.wrapper.hasClass("k-widget"));
             assert.isOk(pb.wrapper.hasClass("k-progressbar"));
         });
 
@@ -573,12 +572,20 @@
             assert.equal(pb.wrapper.find("ul.k-reset").length, 1);
         });
 
+        it("Chunk ProgressBar ul element has necessary classes", function() {
+            var pb = new ProgressBar(container, {
+                type: "chunk"
+            });
+
+            assert.equal(pb.wrapper.find("ul.k-reset.k-progressbar-chunks").length, 1);
+        });
+
         it("Chunk ProgressBar contains a li element for each chunk", function() {
             var pb = new ProgressBar(container, {
                 type: "chunk"
             });
 
-            assert.equal(pb.wrapper.find("li.k-item").length, pb.options.chunkCount);
+            assert.equal(pb.wrapper.find("li.k-chunk-progressbar").length, pb.options.chunkCount);
         });
 
         it("Correct css class is added to the first chunk", function() {
@@ -586,7 +593,7 @@
                 type: "chunk"
             });
 
-            assert.isOk(pb.wrapper.find("li.k-item:first").hasClass("k-first"));
+            assert.isOk(pb.wrapper.find("li.k-chunk-progressbar:first").hasClass("k-first"));
         });
 
         it("Correct css class is added to the last chunk", function() {
@@ -594,7 +601,7 @@
                 type: "chunk"
             });
 
-            assert.isOk(pb.wrapper.find("li.k-item:last").hasClass("k-last"));
+            assert.isOk(pb.wrapper.find("li.k-chunk-progressbar:last").hasClass("k-last"));
         });
 
         it("Correct css class is added to the completed chunks", function() {
@@ -603,9 +610,9 @@
                 value: 45
             });
 
-            var completedChunks = pb.wrapper.find("li.k-item:lt(2)");
+            var completedChunks = pb.wrapper.find("li.k-chunk-progressbar:lt(2)");
 
-            assert.equal(pb.wrapper.find("li.k-item.k-selected").length, completedChunks.length);
+            assert.equal(pb.wrapper.find("li.k-chunk-progressbar.k-selected.k-progressbar-value").length, completedChunks.length);
         });
 
         it("Chunk size is calculated correctly according to chunk count", function() {
@@ -615,7 +622,7 @@
             });
 
             var chunkCount = pb.options.chunkCount;
-            var expectedChunkSize = parseFloat(pb.wrapper.find("ul.k-reset li.k-item:first")[0].style.width).toFixed(2);
+            var expectedChunkSize = parseFloat(pb.wrapper.find("ul.k-reset li.k-chunk-progressbar:first")[0].style.width).toFixed(2);
             var actualChunkSize = (100 / chunkCount).toFixed(2);
 
             assert.equal(actualChunkSize, expectedChunkSize);

@@ -10,8 +10,7 @@ it("container with pixel width produces wrapper with pixel width", function() {
     span.width("50px");
 
     var wrap = kendo.wrap(span);
-
-    assert.isOk(wrap[0].style.width == "50px");
+    assert.isOk(span[0].style.width == "50px");
     assert.isOk(wrap.children()[0].style.width == "50px");
 });
 
@@ -20,7 +19,7 @@ it("container with pixel height produces wrapper with pixel height", function() 
 
     var wrap = kendo.wrap(span);
 
-    assert.isOk(wrap[0].style.height == "50px");
+    assert.isOk(span[0].style.height == "50px");
     assert.isOk(wrap.children()[0].style.height == "50px");
 });
 
@@ -33,7 +32,7 @@ it("updated container with pixel width updates wrapper pixel width", function() 
 
     var wrap = kendo.wrap(span);
 
-    assert.isOk(wrap[0].style.width == "60px");
+    assert.isOk(span[0].style.width == "60px");
     assert.isOk(wrap.children()[0].style.width == "60px");
 });
 
@@ -42,8 +41,8 @@ it("container with percent height produces wrapper with percent height", functio
 
     var wrap = kendo.wrap(span);
 
-    assert.isOk(wrap[0].style.height == "50%");
-    assert.isOk(wrap.children()[0].style.height == "100%");
+    assert.isOk(span[0].style.height == "100%");
+    assert.isOk(wrap.children()[0].style.height == "50%");
 });
 
 it("container with percent width produces wrapper with percent width", function() {
@@ -51,8 +50,8 @@ it("container with percent width produces wrapper with percent width", function(
 
     var wrap = kendo.wrap(span);
 
-    assert.isOk(wrap[0].style.width == "50%");
-    assert.isOk(wrap.children()[0].style.width == "100%");
+    assert.isOk(span[0].style.width == "100%");
+    assert.isOk(wrap.children()[0].style.width == "50%");
 });
 
     });

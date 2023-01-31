@@ -43,8 +43,8 @@
                 componentType: 'modern'
             });
 
-            assert.equal(picker.timeView.list.find(".k-time-footer").length, 1);
-            assert.equal(picker.timeView.list.find(".k-time-footer button").length, 2);
+            assert.equal(picker.timeView.popupContent.find(".k-time-footer").length, 1);
+            assert.equal(picker.timeView.popupContent.find(".k-time-footer button").length, 2);
         });
 
         it("_updateTitle should update the title", function() {

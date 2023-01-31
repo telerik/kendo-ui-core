@@ -57,7 +57,7 @@
         it("PanelBar adds tab role to the panelbar items", function() {
             addItems(2);
 
-            var items = ul.find(".k-item");
+            var items = ul.find(".k-panelbar-item");
             assert.equal(items.eq(0).attr("role"), "treeitem");
             assert.equal(items.eq(1).attr("role"), "treeitem");
         });
@@ -65,21 +65,21 @@
         it("PanelBar adds tab role to items during init", function() {
             var panel = $("<ul id='test'><li>Test</li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
 
-            var items = panel.find(".k-item");
+            var items = panel.find(".k-panelbar-item");
             assert.equal(items.eq(0).attr("role"), "treeitem");
         });
 
         it("PanelBar adds tab role to the added items", function() {
             addItems(2);
 
-            var items = ul.find(".k-item");
+            var items = ul.find(".k-panelbar-item");
             assert.equal(items.eq(0).attr("role"), "treeitem");
             assert.equal(items.eq(1).attr("role"), "treeitem");
         });
 
         it("PanelBar adds role group to the k-group elements", function() {
             addItems(2);
-            addItems(2, ul.find(".k-item:first"));
+            addItems(2, ul.find(".k-panelbar-item:first"));
 
             var items = ul.find(".k-group");
             assert.equal(items.eq(0).attr("role"), "group");
@@ -97,8 +97,8 @@
 
             ul.focus();
 
-            assert.isOk(ul.find(".k-item:first > .k-link").hasClass("k-focus"));
-            assert.equal(ul.find(".k-item:first").attr("id"), "test_pb_active");
+            assert.isOk(ul.find(".k-panelbar-item:first > .k-link").hasClass("k-focus"));
+            assert.equal(ul.find(".k-panelbar-item:first").attr("id"), "test_pb_active");
         });
 
         it("PanelBar adds aria-selected=true on selection", function() {
@@ -117,9 +117,9 @@
                 preventDefault: $.noop
             });
 
-            assert.isOk(ul.find(".k-item:last > .k-link").hasClass("k-focus"));
-            assert.equal(ul.find(".k-item:first").attr("aria-selected"), "false");
-            assert.equal(ul.find(".k-item:last").attr("aria-selected"), "true");
+            assert.isOk(ul.find(".k-panelbar-item:last > .k-link").hasClass("k-focus"));
+            assert.equal(ul.find(".k-panelbar-item:first").attr("aria-selected"), "false");
+            assert.equal(ul.find(".k-panelbar-item:last").attr("aria-selected"), "true");
         });
 
         it("PanelBar aria-activedescendant", function() {
@@ -143,28 +143,28 @@
         it("PanelBar adds aria-expanded to the item during init", function() {
             var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li><li>Last<ul><li>test</li></ul></li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
 
-            var items = panel.find(".k-item").filter("[aria-expanded=false]");
+            var items = panel.find(".k-panelbar-item").filter("[aria-expanded=false]");
 
             assert.equal(items.length, 2);
         });
 
         it("PanelBar adds aria-expanded=false to all items with content", function() {
             addItems(3);
-            addItems(2, ul.find(".k-item:last"));
+            addItems(2, ul.find(".k-panelbar-item:last"));
 
             panelbar.append({
                 text: "test",
                 content: "content"
-            }, ul.children(".k-item").eq(1));
+            }, ul.children(".k-panelbar-item").eq(1));
 
-            var items = ul.find(".k-item").filter("[aria-expanded=false]");
+            var items = ul.find(".k-panelbar-item").filter("[aria-expanded=false]");
 
             assert.equal(items.length, 3);
         });
 
         it("PanelBar updates aria-expanded state", function() {
             addItems(3);
-            var last = ul.find(".k-item:last");
+            var last = ul.find(".k-panelbar-item:last");
 
             addItems(2, last);
 
@@ -174,7 +174,7 @@
 
         it("PanelBar updates aria-expanded state on collapse", function() {
             addItems(3);
-            var last = ul.find(".k-item:last");
+            var last = ul.find(".k-panelbar-item:last");
 
             addItems(2, last);
 
@@ -186,7 +186,7 @@
 
         it("PanelBar updates aria-hidden state", function() {
             addItems(3);
-            var last = ul.find(".k-item:last");
+            var last = ul.find(".k-panelbar-item:last");
 
             addItems(2, last);
 
@@ -196,7 +196,7 @@
 
         it("PanelBar updates aria-hidden state on collapse", function() {
             addItems(3);
-            var last = ul.find(".k-item:last");
+            var last = ul.find(".k-panelbar-item:last");
 
             addItems(2, last);
 
@@ -208,7 +208,7 @@
 
         it("PanelBar adds aria-hidden to the group when it is added with API", function() {
             addItems(3);
-            var last = ul.find(".k-item:last");
+            var last = ul.find(".k-panelbar-item:last");
 
             addItems(2, last);
 
@@ -229,7 +229,7 @@
 
         it("PanelBar adds aria-disabled attr", function() {
             addItems(3);
-            var first = ul.find(".k-item:first");
+            var first = ul.find(".k-panelbar-item:first");
 
             panelbar.enable(first, false);
 
@@ -238,7 +238,7 @@
 
         it("PanelBar adds aria-disabled=false", function() {
             addItems(3);
-            var first = ul.find(".k-item:first");
+            var first = ul.find(".k-panelbar-item:first");
 
             panelbar.enable(first, false);
             panelbar.enable(first);
@@ -249,7 +249,7 @@
         it("PanelBar adds aria-disabled on init", function() {
             var panel = $("<ul id='test2'><li disabled='disabled'>Test</li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
 
-            assert.equal(panel.find(".k-item:first").attr("aria-disabled"), "true");
+            assert.equal(panel.find(".k-panelbar-item:first").attr("aria-disabled"), "true");
         });
 
         it("PanelBar adds aria-disabled on append", function() {
@@ -258,7 +258,7 @@
                 enabled: false
             });
 
-            assert.equal(ul.find(".k-item:first").attr("aria-disabled"), "true");
+            assert.equal(ul.find(".k-panelbar-item:first").attr("aria-disabled"), "true");
         });
 
         it("PanelBar adds aria-selected on init", function() {
@@ -277,7 +277,7 @@
             panelbar.select("li:last");
             panelbar.select("li:first");
 
-            var li = panelbar.element.find(".k-selected").closest(".k-item");
+            var li = panelbar.element.find(".k-selected").closest(".k-panelbar-item");
 
             assert.equal(li.attr("id"), "custom");
         });

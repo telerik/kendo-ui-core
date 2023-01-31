@@ -890,8 +890,12 @@ var __meta__ = {
             that._search();
         },
 
-        _popupOpen: function() {
+        _popupOpen: function(e) {
             var popup = this.popup;
+
+            if (e.isDefaultPrevented()) {
+                return;
+            }
 
             popup.wrapper = kendo.wrap(popup.element);
 
@@ -1269,7 +1273,7 @@ var __meta__ = {
 
             if (!span[0]) {
                 arrowBtn = html.renderButton('<span role="button" class="k-input-button" aria-label="select"></span>', {
-                    icon: "arrow-s",
+                    icon: "caret-alt-down",
                     size: options.size,
                     fillMode: options.fillMode,
                     shape: "none",

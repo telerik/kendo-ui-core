@@ -27,7 +27,7 @@ var __meta__ = {
         LINK = "k-link",
         LINKSELECTOR = "." + LINK,
         ERROR = "error",
-        ITEM = ".k-item",
+        ITEM = ".k-panelbar-item",
         GROUP = ".k-group",
         VISIBLEGROUP = GROUP + ":visible",
         IMAGE = "k-image",
@@ -45,6 +45,7 @@ var __meta__ = {
         CONTENTLOAD = "contentLoad",
         UNDEFINED = "undefined",
         ACTIVECLASS = "k-active",
+        EXPANDEDCLASS = "k-expanded",
         GROUPS = "> .k-panel",
         CONTENTS = "> .k-content",
         STRING = "string",
@@ -87,15 +88,18 @@ var __meta__ = {
         },
 
     wrapperCssClass: function(group, item) {
-        var result = "k-item",
+        var result = "k-panelbar-item",
             index = item.index;
 
-        result += group.firstLevel ? " k-panelbar-header" : " k-panelbar-item";
+        if (group.firstLevel) {
+            result += " k-panelbar-header";
+        }
 
         if (item.enabled === false) {
             result += " " + DISABLEDCLASS;
         } else if (item.expanded === true) {
             result += " " + ACTIVECLASS;
+            result += " " + EXPANDEDCLASS;
         }
 
         if (index === 0) {
@@ -132,7 +136,7 @@ var __meta__ = {
     arrowClass: function(item) {
         var result = "k-icon";
 
-        result += item.expanded ? " k-panelbar-toggle k-panelbar-collapse k-i-arrow-chevron-up" : " k-panelbar-toggle k-panelbar-expand k-i-arrow-chevron-down";
+        result += item.expanded ? " k-panelbar-toggle k-panelbar-collapse k-i-chevron-up" : " k-panelbar-toggle k-panelbar-expand k-i-chevron-down";
 
         return result;
     },
@@ -399,9 +403,9 @@ var __meta__ = {
                         ) +
                     "</li>"
                 ),
-                loading: template(({ messages }) => `<li class='k-item'><span class='k-icon k-i-loading'></span> ${encode(messages.loading)}</li>`),
+                loading: template(({ messages }) => `<li class='k-panelbar-item'><span class='k-icon k-i-loading'></span> ${encode(messages.loading)}</li>`),
                 retry: template(({ messages }) =>
-                    "<li class='k-item'>" +
+                    "<li class='k-panelbar-item'>" +
                         `${encode(messages.requestFailed)} ` +
                         `<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-request-retry'><span class='k-button-text'>${encode(messages.retry)}</span></button>` +
                     "</li>"
@@ -531,12 +535,12 @@ var __meta__ = {
 
                         return dataItem.hasChildren || dataItem.content || dataItem.contentUrl;
                     })
-                    .children(".k-link:not(:has([class*=k-i-arrow]))")
+                    .children(".k-link:not(:has([class*=k-i-chevron]))")
                     .each(function() {
                         var item = $(this),
                             parent = item.parent();
 
-                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-toggle k-panelbar-collapse k-i-arrow-chevron-up" : " k-panelbar-toggle k-panelbar-expand k-i-arrow-chevron-down") + "'/>");
+                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-toggle k-panelbar-collapse k-i-chevron-up" : " k-panelbar-toggle k-panelbar-expand k-i-chevron-down") + "'/>");
                     });
          },
 
@@ -580,7 +584,7 @@ var __meta__ = {
                 }
             }
             else {
-                itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-refresh");
+                itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-arrow-rotate-cw");
             }
         },
 
@@ -608,7 +612,7 @@ var __meta__ = {
             });
 
             this.element.append(rootItemsHtml);
-            var elements = this.element.children(".k-item");
+            var elements = this.element.children(".k-panelbar-item");
             for (var i = 0; i < items.length; i++) {
                 this.trigger("itemChange", {
                     item: elements.eq(i).find(".k-link").first(),
@@ -648,7 +652,7 @@ var __meta__ = {
         },
 
         findByUid: function(uid) {
-            var items = this.element.find(".k-item");
+            var items = this.element.find(".k-panelbar-item");
             var uidAttr = kendo.attr("uid");
             var result;
 
@@ -716,7 +720,7 @@ var __meta__ = {
             if (node) {
                 this._progress(node, false);
                 this._expanded(node, false);
-                itemIcon(node).addClass("k-i-refresh");
+                itemIcon(node).addClass("k-i-arrow-rotate-cw");
                 e.node.loaded(false);
             } else {
                 this._progress(false);
@@ -731,7 +735,7 @@ var __meta__ = {
         },
 
          items: function() {
-            return this.element.find(".k-item > span:first-child");
+            return this.element.find(".k-panelbar-item > span:first-child");
         },
 
         setDataSource: function(dataSource) {
@@ -1324,7 +1328,7 @@ var __meta__ = {
                 wrapElement, link;
 
             item = $(item)
-                .addClass("k-item")
+                .addClass("k-panelbar-item")
                 .attr({
                     role: "treeitem",
                     "aria-selected": false
@@ -1541,10 +1545,11 @@ var __meta__ = {
             element.parent()
                 .attr(ARIA_EXPANDED, !visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
+                .toggleClass(EXPANDEDCLASS, !visibility)
                 .find("> .k-link > .k-panelbar-collapse,> .k-link > .k-panelbar-expand")
-                    .toggleClass("k-i-arrow-chevron-up", !visibility)
+                    .toggleClass("k-i-chevron-up", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
-                    .toggleClass("k-i-arrow-chevron-down", visibility)
+                    .toggleClass("k-i-chevron-down", visibility)
                     .toggleClass("k-panelbar-expand", visibility);
             if (visibility) {
                 animation = extend(collapse, { hide: true });

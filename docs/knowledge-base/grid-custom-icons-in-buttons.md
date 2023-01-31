@@ -60,11 +60,11 @@ The following example demonstrates how to implement the approach in JavaScript.
 However, the option to change the icons is scheduled for the next major Kendo UI release at the beginning of next year. Meanwhile, you can achieve the same with CSS rules, as demonstrated in the following example.
 
 ```
-.k-grid-update .k-icon:before{
+.k-grid-save-command .k-icon:before{
   content: "\e143";
 }
 
- .k-grid-cancel .k-icon:before{
+ .k-grid-cancel-command .k-icon:before{
   content: "\e400";
 }
 ```
@@ -95,11 +95,11 @@ However, the option to change the icons is scheduled for the next major Kendo UI
       });
     </script>
     <style>
-      .k-grid-update .k-icon:before{
+      .k-grid-save-command .k-icon:before{
         content: "\e143";
       }
 
-      .k-grid-cancel .k-icon:before{
+      .k-grid-cancel-command .k-icon:before{
         content: "\e400";
       }
     </style>

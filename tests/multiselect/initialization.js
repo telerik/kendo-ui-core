@@ -990,7 +990,7 @@
         });
 
         assert.equal(multiselect._arrow.length, 1);
-        assert.equal(multiselect.wrapper.find("> .k-input-button > .k-i-arrow-s").length, 1);
+        assert.equal(multiselect.wrapper.find("> .k-input-button > .k-i-caret-alt-down").length, 1);
     });
 
     it("k-multiselect-wrap-arrow class is applied when down arrow is configured", function() {

@@ -137,7 +137,7 @@ To set up the ListView component bindings, you need to configure the `Create`, `
         padding: 5px;
         background-color: rgba(0,0,0,0.1);
     }
-    .k-pager-wrap {
+    .k-pager {
         border-top: 0;
     }
     span.k-invalid-msg {

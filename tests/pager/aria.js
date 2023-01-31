@@ -106,8 +106,8 @@
         it("prev button is disabled on the first page", function() {
             var pager = setup({}, { navigatable: true, previousNext: true });
 
-            assert.isOk(pager.find(".k-i-arrow-60-left").parent().hasClass("k-disabled"));
-            assert.equal(pager.find(".k-i-arrow-60-left").parent().attr("aria-disabled"), "true");
+            assert.isOk(pager.find(".k-i-caret-alt-left").parent().hasClass("k-disabled"));
+            assert.equal(pager.find(".k-i-caret-alt-left").parent().attr("aria-disabled"), "true");
         });
     });
 

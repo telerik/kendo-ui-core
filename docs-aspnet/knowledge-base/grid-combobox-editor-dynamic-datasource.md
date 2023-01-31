@@ -35,7 +35,7 @@ The desired behaviour can be accomplished by using:
 
 ```
     @model int
-    
+
     @(Html.Kendo().DropDownList()
        .Name("ContentId")
        .DataValueField("ContentId")
@@ -55,8 +55,8 @@ The desired behaviour can be accomplished by using:
 ```
     <script>
         function getContentId() {
-            var row = $(".k-grid-update").closest("tr");
-            var grid = $(".k-grid-update").closest("[data-role=grid]").data("kendoGrid");
+            var row = $(".k-grid-save-command").closest("tr");
+            var grid = $(".k-grid-save-command").closest("[data-role=grid]").data("kendoGrid");
             var dataItem = grid.dataItem(row);
             return { ContentId: dataItem.ContentId }
         }

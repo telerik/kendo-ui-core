@@ -320,7 +320,7 @@ var __meta__ = {
                 return;
             }
 
-            arrow = target.children(".k-icon:not(.k-resize-handle)");
+            arrow = target.children("span:not(.k-resize-handle)");
 
             if (arrow.length !== 1) {
                 return;
@@ -340,7 +340,7 @@ var __meta__ = {
             var that = this;
 
             return function(e) {
-                var target = $(e.target),
+                var target = $(e.currentTarget),
                     pane;
 
                 if (target.closest(".k-splitter")[0] != that.element[0]) {
@@ -356,8 +356,9 @@ var __meta__ = {
             };
         },
         _updateSplitBar: function(splitbar, previousPane, nextPane, previousPaneEl) {
-            var catIconIf = function(iconType, condition) {
-                   return condition ? "<div class='k-icon " + iconType + "'></div>" : "";
+            var catIconIf = function(actionType, iconType, condition) {
+                    var icon = iconType ? "<span class='k-icon k-i-" + iconType + "'></span>" : "";
+                    return condition ? "<span class='k-" + actionType + "'>" + icon + "</span>" : "";
                 },
                 orientation = this.orientation,
                 draggable = (previousPane.resizable !== false) && (nextPane.resizable !== false),
@@ -383,16 +384,16 @@ var __meta__ = {
                     .toggleClass("k-splitbar-static-" + orientation,
                         !draggable && !prevCollapsible && !nextCollapsible)
                     .html(
-                        catIconIf("k-collapse-prev k-i-arrow-60-up", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-collapse-prev k-i-arrow-60-left", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
-                        catIconIf("k-expand-prev k-i-arrow-60-down", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-expand-prev k-i-arrow-60-right", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
-                        catIconIf("k-resize-handle k-i-hbar", draggable && orientation == VERTICAL) +
-                        catIconIf("k-resize-handle k-i-vbar", draggable && orientation == HORIZONTAL) +
-                        catIconIf("k-collapse-next k-i-arrow-60-down", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-collapse-next k-i-arrow-60-right", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == HORIZONTAL) +
-                        catIconIf("k-expand-next k-i-arrow-60-up", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-expand-next k-i-arrow-60-left", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
+                        catIconIf("collapse-prev", "caret-alt-up", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                        catIconIf("collapse-prev", "caret-alt-left", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("expand-prev", "caret-alt-down", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                        catIconIf("expand-prev", "caret-alt-right", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("resize-handle", null, draggable && orientation == VERTICAL) +
+                        catIconIf("resize-handle", null, draggable && orientation == HORIZONTAL) +
+                        catIconIf("collapse-next", "caret-alt-down", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                        catIconIf("collapse-next", "caret-alt-right", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("expand-next", "caret-alt-up", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                        catIconIf("expand-next", "caret-alt-left", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
                     );
 
             if (previousPane.labelId) {

@@ -46,7 +46,7 @@ Use the following CSS rules.
 
 ```css
 .k-pdf-export .k-grid-toolbar,
-.k-pdf-export .k-pager-wrap
+.k-pdf-export .k-pager
 {
   display: none;
 }
@@ -54,7 +54,7 @@ Use the following CSS rules.
 - Filter Menu icon
 
 ```css
-  .k-pdf-export .k-grid-filter {
+  .k-pdf-export .k-grid-filter-menu {
     display:none;
   }
 ```
@@ -62,7 +62,7 @@ Use the following CSS rules.
 - Column Menu icon
 
 ```css
-  .k-pdf-export .k-header-column-menu {
+  .k-pdf-export .k-grid-column-menu {
     display:none;
   }
 ```
@@ -127,7 +127,7 @@ The following example demonstrates the outcome of the suggested approach.
 
     /* Hide the Grid header and pager during export */
     .k-pdf-export .k-grid-toolbar,
-    .k-pdf-export .k-pager-wrap
+    .k-pdf-export .k-pager
     {
       display: none;
     }

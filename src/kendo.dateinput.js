@@ -45,25 +45,26 @@ var __meta__ = {
             options.max = kendo.parseDate(element.attr("max")) || kendo.parseDate(options.max);
 
             var wrapperClass = (element.parent().attr("class") || "");
-            var skipWrapping = wrapperClass.indexOf("picker") >= 0 && wrapperClass.indexOf("rangepicker") < 0;
+            var skipStyling = wrapperClass.indexOf("picker") >= 0 && wrapperClass.indexOf("rangepicker") < 0;
 
-            if (skipWrapping) {
-                that.wrapper = element.parent();
+            that.wrapper = element.wrap("<span class='k-dateinput k-input'></span>").parent();
+            if (skipStyling) {
+                that.wrapper = that.wrapper.parent();
             } else {
-                that.wrapper = element.wrap("<span class='k-dateinput k-input'></span>").parent();
                 that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
-                that.wrapper[0].style.cssText = element[0].style.cssText;
-                element.css({
-                    height: element[0].style.height
-                });
             }
+            that.wrapper[0].style.cssText = element[0].style.cssText;
+            element.css({
+                height: element[0].style.height
+            });
+
 
             that._validationIcon = $("<span class='k-input-validation-icon k-icon k-i-warning k-hidden'></span>").insertAfter(element);
 
             that._form();
 
             that.element
-                .addClass(skipWrapping ? " " : "k-input-inner")
+                .addClass("k-input-inner")
                 .attr("autocomplete", "off")
                 .on("focus" + ns, function() {
                     that.wrapper.addClass(FOCUSED);
@@ -87,7 +88,9 @@ var __meta__ = {
                 that.readonly(element.is("[readonly]"));
             }
             that.value(that.options.value || element.val());
-            that._applyCssClasses();
+            if (!skipStyling) {
+                that._applyCssClasses();
+            }
 
             if (options.label) {
                 that._label();

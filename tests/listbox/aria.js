@@ -124,7 +124,7 @@
         });
 
         it("toolbar's tools have aria-label", function() {
-            var toolsButtons = listA.toolbar.element.find("a.k-button");
+            var toolsButtons = listA.toolbar.element.find("button.k-button");
             var ariaLabelAttr = "aria-label";
 
             assert.equal(toolsButtons.filter('[data-command="remove"]').attr(ariaLabelAttr), "Delete");

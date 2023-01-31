@@ -548,15 +548,15 @@ var __meta__ = {
 
         if (isHorizontal) {
             if (type === "increase") {
-                buttonCssClass = "k-i-arrow-e";
+                buttonCssClass = "k-i-caret-alt-right";
             } else {
-                buttonCssClass = "k-i-arrow-w";
+                buttonCssClass = "k-i-caret-alt-left";
             }
         } else {
             if (type == "increase") {
-                buttonCssClass = "k-i-arrow-n";
+                buttonCssClass = "k-i-caret-alt-up";
             } else {
-                buttonCssClass = "k-i-arrow-s";
+                buttonCssClass = "k-i-caret-alt-down";
             }
         }
 

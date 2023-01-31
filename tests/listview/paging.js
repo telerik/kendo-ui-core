@@ -87,7 +87,7 @@
             assert.equal(instance.items().first().attr("aria-posinset"), 1);
             assert.equal(instance.items().last().attr("aria-posinset"), 2);
 
-            instance.wrapper.find(".k-pager-wrap li:last > a").click();
+            instance.wrapper.find(".k-pager li:last > a").click();
 
             assert.equal(instance.items().first().attr("aria-posinset"), 5);
         });

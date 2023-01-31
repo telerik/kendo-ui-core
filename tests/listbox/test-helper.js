@@ -101,12 +101,12 @@ function getDataItem(listbox, item) {
 function getToolElementClassName(command) {
     var clssClassNames = {
         "remove": "k-i-x",
-        "moveUp": "k-i-arrow-60-up",
-        "moveDown": "k-i-arrow-60-down",
-        "transferTo": "k-i-arrow-60-right",
-        "transferFrom": "k-i-arrow-60-left",
-        "transferAllTo": "k-i-arrow-double-60-right",
-        "transferAllFrom": "k-i-arrow-double-60-left"
+        "moveUp": "k-i-caret-alt-up",
+        "moveDown": "k-i-caret-alt-down",
+        "transferTo": "k-i-caret-alt-right",
+        "transferFrom": "k-i-caret-alt-left",
+        "transferAllTo": "k-i-caret-double-alt-right",
+        "transferAllFrom": "k-i-caret-double-alt-left"
     };
 
     return clssClassNames[command];
@@ -114,7 +114,7 @@ function getToolElementClassName(command) {
 
 function clickButton(listbox, command, event) {
     listbox.toolbar.element
-        .find("a.k-button>." + getToolElementClassName(command))
+        .find("button.k-button>." + getToolElementClassName(command))
         .trigger(event || $.Event({ type: "click", preventDefault: $.noop }));
 }
 

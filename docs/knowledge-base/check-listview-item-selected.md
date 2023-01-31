@@ -46,7 +46,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
       <div class="demo-section k-content wide">
         <button onclick="checked()">Is <b>Queso Cabrales</b> selected?</button>
         <div id="listView"></div>
-        <div id="pager" class="k-pager-wrap"> </div>
+        <div id="pager" class="k-pager"> </div>
       </div>
 
       <div class="box wide">
@@ -143,7 +143,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
           max-width: 100px;
           text-transform: uppercase;
         }
-        .k-pager-wrap
+        .k-pager
         {
           border-top: 0;
         }

@@ -123,7 +123,7 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-refresh").trigger("click");
+            dialog.wrapper.find(".k-i-arrow-rotate-cw").trigger("click");
 
             assert.equal(triggers, 1);
         });
@@ -136,7 +136,7 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-close").trigger("click");
+            dialog.wrapper.find(".k-i-x").trigger("click");
         });
 
         it("clicking the close button triggers close event when default is prevented", function() {
@@ -149,8 +149,8 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-close").trigger("click");
-            dialog.wrapper.find(".k-i-close").trigger("click");
+            dialog.wrapper.find(".k-i-x").trigger("click");
+            dialog.wrapper.find(".k-i-x").trigger("click");
         });
 
         it("minimize triggers minimize event", function() {
@@ -176,7 +176,7 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-window-maximize").trigger("click");
+            dialog.wrapper.find(".k-i-window").trigger("click");
 
             assert.equal(triggers, 1);
         });

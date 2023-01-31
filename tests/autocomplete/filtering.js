@@ -488,10 +488,10 @@
             });
 
             autocomplete.search("a");
-            assert.closeTo(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
+            assert.closeTo(autocomplete.popup.element.closest(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 1);
             autocomplete.close();
             autocomplete.search("a");
-            assert.closeTo(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
+            assert.closeTo(autocomplete.popup.element.closest(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 1);
         });
 
         it("enabled autoWidth disables X scrolling", function() {

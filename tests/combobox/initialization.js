@@ -90,7 +90,7 @@
             assert.isOk(button.is("button"));
             assert.isOk(button.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
-            assert.isOk(arrow.hasClass("k-icon k-i-arrow-s"));
+            assert.isOk(arrow.hasClass("k-icon k-i-caret-alt-down"));
             assert.equal(arrow.html(), "");
         });
 

@@ -39,7 +39,7 @@ The following example demonstrates the full implementation of the suggested appr
 
 ```dojo
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
-<div class="k-pager-wrap">
+<div class="k-pager">
     <div id="pager"></div>
 </div>
 

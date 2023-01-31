@@ -60,7 +60,7 @@ The following example demonstrates the complete implementation of the suggested 
 
 ```dojo
     <style>
-      .nameFilter > .k-grid-filter {
+      .nameFilter > .k-grid-filter-menu {
         padding: 0;
         left: 0;
         bottom: 0;

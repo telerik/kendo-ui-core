@@ -104,7 +104,7 @@ The following example demonstrates how to use FontAwesome icons with the built-i
             </div>
       </script>
       <style>
-      .k-header-column-menu .k-icon,
+      .k-grid-column-menu .k-icon,
       .k-column-menu .k-icon,
       .k-column-menu .k-sprite {
         background-image: none;
@@ -112,8 +112,8 @@ The following example demonstrates how to use FontAwesome icons with the built-i
         font-family: FontAwesome;
       }
 
-      .k-header-column-menu .k-icon:before,
-      .k-header-column-menu .k-sprite:before,
+      .k-grid-column-menu .k-icon:before,
+      .k-grid-column-menu .k-sprite:before,
       .k-column-menu .k-icon:before,
       .k-column-menu .k-sprite:before {
         display: inline-block;
@@ -126,7 +126,7 @@ The following example demonstrates how to use FontAwesome icons with the built-i
       .k-column-menu .k-i-arrow-e:before {
         content: "\f061";
       }
-       .k-header-column-menu .k-i-more-vertical:before{
+       .k-grid-column-menu .k-i-more-vertical:before{
         content: "\f063";
       }
 

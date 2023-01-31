@@ -40,6 +40,38 @@ Starting with R1 2023 the ToolBar buttons will always be rendered as `<button>` 
 
 Starting with R1 2023 the ToolBar no longer requires its custom tools to be registered. To explore the new simplified way of defining custom tools in the ToolBar, refer to the [Custom Tools]({% slug custom_tools_kendoui_toolbar %}) documentation article.
 
-**Spreadsheet**
+Starting with R1 2023 release the ToolBar no longer allows the use of togglable and non-togglable buttons in the same ButtonGroup. If such a configuration is present, all buttons will be rendered and behave as simple (non-togglable) buttons.
 
-Starting with R1 2023 the default tools in the Home Tab of the Spreadsheet ToolBar have been re-arranged. The new order and grouping aims to better mimic the order of the tools present in MS Excel. In also offers better logical grouping of similar tools in available in the Spreadsheet.
+## Kendo UI 2023 R1 SP1
+
+**Editor**
+
+Starting with R1 2023 SP1 the Editor widget features an improved method to register custom Tools. The main difference with the previous implementation is the substitution of the `ToolTemplate` instance with a `ui` configuration object. An example of of the new approach of registering tools could be found in the [Create Custom Editor Tool]({% slug editor-custom-tool %}) KB article.
+
+Starting with R1 2023 SP1 release the Editor no longer allows the use of togglable and non-togglable buttons in the same ButtonGroup of its ToolBar. If such a configuration is present, all buttons will be rendered as simple (non-togglable) buttons.
+
+Starting with R1 2023 SP1 release the `break` pseudo tool is no longer needed in order to separate tools from the same logical group. In order to display such tools separately, you should simply place them in separate arrays in the `tools` configuration:
+
+```dojo
+    <textarea id="editor" rows="10" cols="30" style="width:100%; height: 440px;"></textarea>
+    $("#editor").kendoEditor({
+        tools: [
+            ["bold"],
+            ["italic"],
+            ["underline"],
+            ["strikethrough"]
+        ]
+    });
+```
+
+Multiple tools could also be grouped in a group by following the same approach:
+
+```dojo
+    <textarea id="editor" rows="10" cols="30" style="width:100%; height: 440px;"></textarea>
+    $("#editor").kendoEditor({
+        tools: [
+            ["bold", "italic"],
+            ["underline", "strikethrough"]
+        ]
+    });
+```

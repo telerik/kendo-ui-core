@@ -364,7 +364,7 @@
 
             multiselect.enable(false);
 
-            multiselect.tagList.find(".k-i-close").click();
+            multiselect.tagList.find(".k-i-x").click();
 
             assert.equal(multiselect.tagList.children(".k-chip").length, 1);
             assert.isOk(multiselect.wrapper.hasClass("k-disabled"));

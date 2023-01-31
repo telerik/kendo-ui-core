@@ -33,17 +33,17 @@ How can I set a command button in the Telerik UI Grid that contains only an icon
 
 Use either of the following approaches:
 
-* Use CSS to style the **Edit** button by setting the `.k-grid-edit` CSS of the button as desired. Include the following configuration in the `k-button-icon` class.
+* Use CSS to style the **Edit** button by setting the `.k-grid-edit-command` CSS of the button as desired. Include the following configuration in the `k-button-icon` class.
 
 		```css
-		      .k-grid tbody .k-grid-edit {
+		      .k-grid tbody .k-grid-edit-command {
 		          min-width: 0;
 		          width: calc(2px + .75rem + 1.5em);
 		          height: calc(2px + .75rem + 1.5em);
 		          padding: .375rem;
 		      }
 
-		      .k-grid tbody .k-grid-edit .k-icon{
+		      .k-grid tbody .k-grid-edit-command .k-icon{
 		           margin: 0;
 		      }
 		```

@@ -110,7 +110,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
         }
     };
 
-    $(".k-grid-cancel").on("mousedown", function (e) {
+    $(".k-grid-cancel-command").on("mousedown", function (e) {
         preventCloseOnSave = false;
     });
 </script>

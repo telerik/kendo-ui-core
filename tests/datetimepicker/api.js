@@ -932,7 +932,7 @@
                 value: new Date(2015,9,3),
                 disableDates: [new Date(2015,9,12), new Date(2015,9,22)]
             });
-            debugger;
+
             datetimepicker.timeView.refresh();
             datetimepicker.timeView.ul.find("li:eq(4)").trigger("click");
 

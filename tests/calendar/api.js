@@ -36,7 +36,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past", funct
         min: date
     });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future", function() {
@@ -46,7 +46,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future", fun
         max: date
     });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (year)", function() {
@@ -57,7 +57,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (year)"
             firstView: 1
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (year)", function() {
@@ -68,7 +68,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (year
             firstView: 1
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (decade)", function() {
@@ -79,7 +79,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (decade
             firstView: 2
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (decade)", function() {
@@ -90,7 +90,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (deca
             firstView: 2
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (century)", function() {
@@ -101,7 +101,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (centur
             firstView: 3
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (century)", function() {
@@ -112,7 +112,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (cent
             firstView: 3
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate should select date equal to _value", function() {

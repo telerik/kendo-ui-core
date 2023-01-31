@@ -36,7 +36,7 @@ The Pager wrapper can be focused via the `Tab` key. But if the TreeList contains
     $(document.body).keydown(function (e) {
         // ALT KEY + S will focus the pager wrapper.
         if (e.altKey && e.keyCode == 83) {
-            $("#treelist .k-pager-wrap").focus();
+            $("#treelist .k-pager").focus();
         }
     });
 

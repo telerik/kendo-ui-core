@@ -1274,8 +1274,8 @@ var __meta__ = {
                     var browser = kendo.support.browser;
                     var isRtlScrollDirection = that._isRtl && !browser.msie && !browser.edge;
 
-                    that.tabWrapper.prepend(scrollButtonHtml("prev", "k-i-arrow-60-left"));
-                    that.tabWrapper.append(scrollButtonHtml("next", "k-i-arrow-60-right"));
+                    that.tabWrapper.prepend(scrollButtonHtml("prev", "k-i-caret-alt-left"));
+                    that.tabWrapper.append(scrollButtonHtml("next", "k-i-caret-alt-right"));
 
                     scrollPrevButton = that._scrollPrevButton = that.tabWrapper.children(".k-tabstrip-prev");
                     scrollNextButton = that._scrollNextButton = that.tabWrapper.children(".k-tabstrip-next");
@@ -1378,7 +1378,7 @@ var __meta__ = {
             var that = this,
                 tabPosition = that.options.tabPosition;
 
-            that.wrapper.addClass("k-floatwrap k-tabstrip-" + tabPosition);
+            that.wrapper.addClass("k-tabstrip-" + tabPosition);
 
             if (tabPosition == "bottom") {
                 that.tabWrapper.appendTo(that.wrapper);

@@ -27,6 +27,8 @@ var __meta__ = {
         LABEL_POSITION_END = "k-progress-end",
         KCOMPLETEDCHUNK = "k-selected",
         STATEDISABLED = "k-disabled",
+        PROGRESS_VALUE = "k-progressbar-value",
+        CHUNK_ITEM = "k-chunk-progressbar",
         PROGRESSTYPE = {
             VALUE: "value",
             PERCENT: "percent",
@@ -178,7 +180,7 @@ var __meta__ = {
             var orientation = options.orientation;
             var initialValue = (options.value !== false) ? options.value : options.min;
 
-            container.addClass("k-widget " + KPROGRESSBAR);
+            container.addClass(KPROGRESSBAR);
 
             container.addClass(KPROGRESSBAR + "-" + ((orientation === HORIZONTAL) ? HORIZONTAL : VERTICAL));
 
@@ -311,17 +313,17 @@ var __meta__ = {
 
             if ((options.orientation === HORIZONTAL && !(options.reverse)) ||
                (options.orientation === VERTICAL && options.reverse)) {
-                completedChunks = that.wrapper.find("li.k-item").slice(0, completedChunksCount);
+                completedChunks = that.wrapper.find("li." + CHUNK_ITEM).slice(0, completedChunksCount);
             } else if (completedChunksCount === 0) {
                 completedChunks = kendo.jQuery();
             } else {
-                completedChunks = that.wrapper.find("li.k-item").slice(completedChunksCount * -1);
+                completedChunks = that.wrapper.find("li." + CHUNK_ITEM).slice(completedChunksCount * -1);
             }
 
             that.wrapper.find("." + KCOMPLETEDCHUNK)
-                        .removeClass(KCOMPLETEDCHUNK);
+                        .removeClass(KCOMPLETEDCHUNK + " " + PROGRESS_VALUE);
 
-            completedChunks.addClass(KCOMPLETEDCHUNK);
+            completedChunks.addClass(KCOMPLETEDCHUNK + " " + PROGRESS_VALUE);
         },
 
         _updateProgressWrapper: function(percentage) {
@@ -434,13 +436,13 @@ var __meta__ = {
                 options.chunkCount = 1;
             }
 
-            html += "<ul class='k-reset'>";
+            html += "<ul class='k-reset k-progressbar-chunks'>";
             for (var i = options.chunkCount - 1; i >= 0; i--) {
-                html += "<li class='k-item'></li>";
+                html += "<li class='" + CHUNK_ITEM + "'></li>";
             }
             html += "</ul>";
 
-            container.append(html).find(".k-item").css(that._progressProperty, chunkSize + "%")
+            container.append(html).find("." + CHUNK_ITEM).css(that._progressProperty, chunkSize + "%")
                      .first().addClass("k-first")
                      .end()
                      .last().addClass("k-last");
@@ -451,7 +453,7 @@ var __meta__ = {
         _normalizeChunkSize: function() {
             var that = this;
             var options = that.options;
-            var lastChunk = that.wrapper.find(".k-item").last();
+            var lastChunk = that.wrapper.find("." + CHUNK_ITEM).last();
             var currentSize = parseFloat(lastChunk[0].style[that._progressProperty]);
             var difference = HUNDREDPERCENT - (options.chunkCount * currentSize);
 
@@ -463,7 +465,7 @@ var __meta__ = {
         _addRegularProgressWrapper: function() {
             var that = this;
 
-            that.progressWrapper = $("<div class='" + KPROGRESSWRAPPER + "'></div>").appendTo(that.wrapper);
+            that.progressWrapper = $("<div class='" + KPROGRESSWRAPPER + " " + PROGRESS_VALUE + "'></div>").appendTo(that.wrapper);
 
             if (that.options.showStatus) {
                 that.progressWrapper.append(templates.progressStatus);

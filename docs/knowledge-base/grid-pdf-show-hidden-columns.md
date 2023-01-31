@@ -71,7 +71,7 @@ The usage of the `showColumn()` and `hideColumn()` methods [is known for causing
         display: table-cell !important;        
       }
 
-      .k-pdf-export .k-header-column-menu{
+      .k-pdf-export .k-grid-column-menu{
         display: none;
       }
     </style>

@@ -47,11 +47,11 @@ https://themebuilder.telerik.com/kendo-ui
       .k-grid .k-grid-header .k-header a{
         color: white;
       }
-      .k-pager-wrap{
+      .k-pager{
         background-color: gray;
         color: white;
       }
-      .k-pager-wrap .k-link.k-selected
+      .k-pager .k-link.k-selected
       {
         background-color: lime;
       }

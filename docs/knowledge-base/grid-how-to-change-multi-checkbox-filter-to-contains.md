@@ -91,7 +91,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
 ```
   grid.one("dataBound", function(e){
     setTimeout(function(){
-        grid.thead.find("[data-field='FirstName']").find(".k-grid-filter").addClass ("k-active");
+        grid.thead.find("[data-field='FirstName']").find(".k-grid-filter-menu").addClass ("k-active");
     });            
   });
 ```
@@ -293,7 +293,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
           
           grid.one("dataBound", function(e){
             setTimeout(function(){
-            	grid.thead.find("[data-field='FirstName']").find(".k-grid-filter").addClass("k-active");
+            	grid.thead.find("[data-field='FirstName']").find(".k-grid-filter-menu").addClass("k-active");
             });          	
           });
         });

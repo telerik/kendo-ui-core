@@ -24,7 +24,7 @@
 
             notification.show("foo");
 
-            assert.isOk($(".k-notification").parent().hasClass(guid));
+            assert.isOk($(".k-notification").closest(".k-animation-container").hasClass(guid));
         });
 
         it("show method adds internal stacking GUID to static notification", function() {
@@ -39,12 +39,12 @@
             assert.isOk($(".k-notification").hasClass(guid));
         });
 
-        it("show method creates div.k-widget.k-notification element", function() {
+        it("show method creates div.k-notification element", function() {
             createNotification();
 
             notification.show("foo");
 
-            assert.equal($(document.body).find("div.k-widget.k-notification").length, 1);
+            assert.equal($(document.body).find("div.k-notification").length, 1);
         });
 
         it("show method creates a Kendo UI Popup when appendTo is not set", function() {
@@ -60,7 +60,7 @@
 
             notification.show("foo");
 
-            assert.equal($(document.body).find(".k-notification").parent()[0].style.margin, "0px"); // using .css("margin") will fail in Firefox
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container")[0].style.margin, "0px"); // using .css("margin") will fail in Firefox
         });
 
         it("show method creates a Kendo UI Popup with three zero paddings, except top by default", function() {
@@ -68,9 +68,9 @@
 
             notification.show("foo");
 
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingBottom"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingLeft"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingRight"), "0px");
         });
 
         it("show method creates a Kendo UI Popup with three zero paddings, except top", function() {
@@ -80,9 +80,9 @@
 
             notification.show("foo");
 
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingBottom"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingLeft"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingRight"), "0px");
         });
 
         it("show method creates a Kendo UI Popup with three zero paddings, except bottom", function() {
@@ -92,9 +92,9 @@
 
             notification.show("foo");
 
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingTop"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingLeft"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingRight"), "0px");
         });
 
         it("show method creates a Kendo UI Popup with three zero paddings, except left", function() {
@@ -104,9 +104,9 @@
 
             notification.show("foo");
 
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingTop"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingBottom"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingRight"), "0px");
         });
 
         it("show method creates a Kendo UI Popup with three zero paddings, except right", function() {
@@ -116,9 +116,9 @@
 
             notification.show("foo");
 
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
-            assert.equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingTop"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingBottom"), "0px");
+            assert.equal($(document.body).find(".k-notification").closest(".k-animation-container").css("paddingLeft"), "0px");
         });
 
         it("show method does not create a Kendo UI Popup when appendTo is set", function() {
@@ -141,7 +141,7 @@
             notification.show();
             notification.show(null);
 
-            assert.equal($(document.body).find("div.k-widget.k-notification").length, 0);
+            assert.equal($(document.body).find("div.k-notification").length, 0);
         });
 
         it("show method supports empty object as content", function() {
@@ -149,7 +149,7 @@
 
             notification.show({});
 
-            assert.equal($(document.body).find("div.k-widget.k-notification").length, 1);
+            assert.equal($(document.body).find("div.k-notification").length, 1);
         });
 
         it("show method renders passed string content", function() {
@@ -157,7 +157,7 @@
 
             notification.show("<span id='foo'></span>");
 
-            assert.equal($(document.body).find("div.k-widget.k-notification").find("#foo").length, 1);
+            assert.equal($(document.body).find("div.k-notification").find("#foo").length, 1);
         });
 
         it("showText method escapes passed markup content", function() {
@@ -166,7 +166,7 @@
             notification.showText("<span>Foo</span>");
 
             assert.include(
-                $(document.body).find("div.k-widget.k-notification").html(),
+                $(document.body).find("div.k-notification").html(),
                 "&lt;span&gt;Foo&lt;/span&gt;"
             );
         });
@@ -181,7 +181,7 @@
 
             notification.show({ foo: "bar" });
 
-            assert.equal($(document.body).find("div.k-widget.k-notification").find("#bar").length, 1);
+            assert.equal($(document.body).find("div.k-notification").find("#bar").length, 1);
         });
 
         it("show method renders passed function content", function() {
@@ -193,7 +193,7 @@
                 return html;
             });
 
-            assert.isOk($(document.body).find("div.k-widget.k-notification").html().indexOf(html) > -1);
+            assert.isOk($(document.body).find("div.k-notification").html().indexOf(html) > -1);
         });
 
         it("showText method escapes passed function content", function() {
@@ -206,7 +206,7 @@
             });
 
             assert.include(
-                $(document.body).find("div.k-widget.k-notification").html(),
+                $(document.body).find("div.k-notification").html(),
                 "&lt;div id=\"foo\"&gt;&lt;/div&gt;"
             );
         });
@@ -223,7 +223,7 @@
                 return { foo: "bar" };
             });
 
-            assert.equal($(document.body).find("div.k-widget.k-notification").find("#bar").length, 1);
+            assert.equal($(document.body).find("div.k-notification").find("#bar").length, 1);
         });
 
         it("show method adds notification type CSS class to popup and text to note icon", function() {
@@ -333,7 +333,7 @@
             notification.show("foo");
             notification.hide();
 
-            assert.isOk($(".k-notification").parent().hasClass("k-hiding"));
+            assert.isOk($(".k-notification").closest(".k-animation-container").hasClass("k-hiding"));
 
             kendo.effects.disable();
         });
@@ -447,7 +447,7 @@
 
             notification.destroy();
 
-            $(".k-notification .k-i-close").click();
+            $(".k-notification .k-i-x").click();
 
             assert.equal($(".k-notification").length, 1);
         });
@@ -479,7 +479,7 @@
 
             notification.destroy();
 
-            $(".k-notification .k-i-close").click();
+            $(".k-notification .k-i-x").click();
 
             assert.equal($(".k-notification").length, 1);
         });

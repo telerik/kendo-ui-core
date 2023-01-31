@@ -683,7 +683,7 @@
 
         it("same value in previous month can be choosed when navigate to prev month", function() {
             calendar.value(new Date(2015, 11, 1));
-            $(".k-nav-prev").trigger("click");
+            $(".k-calendar-nav-prev").trigger("click");
             var valueCell = $(".k-other-month").eq(7);
             valueCell.trigger("click");
             assert.equal(calendar._current.getMonth(), 11);
@@ -782,7 +782,7 @@
             calendar.value(new Date(2015, 10, 16));
             var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
-                nextPeriodButton = $(".k-nav-next");
+                nextPeriodButton = $(".k-calendar-nav-next");
 
             currentCell.trigger("click");
 
@@ -799,7 +799,7 @@
             calendar.value(new Date(2015, 10, 10));
             var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
-                prevButton = $(".k-nav-prev");
+                prevButton = $(".k-calendar-nav-prev");
 
             currentCell.trigger("click");
             prevButton.trigger("click");
@@ -814,7 +814,7 @@
             calendar.value(new Date(2015, 10, 10));
             var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
-                prevButton = $(".k-nav-prev"),
+                prevButton = $(".k-calendar-nav-prev"),
                 secondEvent = $.Event("click", { shiftKey: true });
 
             currentCell.trigger("click");
@@ -833,7 +833,7 @@
             calendar.value(new Date(2015, 10, 10));
             var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
-                prevButton = $(".k-nav-prev"),
+                prevButton = $(".k-calendar-nav-prev"),
                 secondEvent = $.Event("click", { shiftKey: true });
 
             currentCell.trigger("click");

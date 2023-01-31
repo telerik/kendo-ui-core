@@ -46,7 +46,7 @@
             Mocha.fixture.attr("role", "main");
         });
         afterEach(function() {
-            kendo.destroy(menu.element);
+            menu.destroy();
         });
 
     it('.k-context-menu is placed on root element', function() {
@@ -54,7 +54,7 @@
     });
 
     it('Popup widget is initialized on the root element', function() {
-        assert.isOk(menu.popup == menu.element.data("kendoPopup"));
+        assert.isOk(menu.popup == menu.element.parent().data("kendoPopup"));
     });
 
     it('right click on target opens menu', function() {
@@ -322,7 +322,7 @@
         var secondContextMenu = $('<div id="context-menu">&nbsp;</div>').appendTo(Mocha.fixture);
         var contextMenu = new kendo.ui.ContextMenu("#context-menu", { target: "#menu-container", appendTo: "#menu-container" });
 
-        assert.isOk($('#context-menu').parent().is("#menu-container"));
+        assert.isOk($('#context-menu').parent().parent().is("#menu-container"));
         contextMenu.destroy();
         menuContainer.remove();
     });

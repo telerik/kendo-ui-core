@@ -96,7 +96,7 @@ The following example demonstrates how to show the **Edit** buttons in the Grid 
                var trs = this.tbody.find('tr').each(function(){
                  var item = grid.dataItem($(this));
                  if( item.UnitPrice % 5 == 0) {
-                   $(this).find('.k-grid-edit,.k-grid-delete').hide();
+                   $(this).find('.k-grid-edit-command,.k-grid-remove-command').hide();
                  }
 
                });               

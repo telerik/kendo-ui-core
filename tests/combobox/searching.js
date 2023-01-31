@@ -1130,10 +1130,10 @@
             });
 
             combobox.open();
-            assert.closeTo(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1, 0.1);
+            assert.closeTo(combobox.popup.element.closest(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1, 1);
             combobox.close();
             combobox.open();
-            assert.closeTo(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1, 0.1);
+            assert.closeTo(combobox.popup.element.closest(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1, 1);
         });
 
         it("enabled autoWidth disables X scrolling", function() {

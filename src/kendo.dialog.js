@@ -1125,7 +1125,7 @@ import "./kendo.textbox.js";
                 "</div>"
             ),
             close: template(({ messages }) => `<a role='button' href='#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action k-dialog-action k-dialog-close' title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>` +
-                "<span class='k-button-icon k-icon k-i-close'></span></a>"),
+                "<span class='k-button-icon k-icon k-i-x'></span></a>"),
             actionbar: template(({ buttonLayout }) => `<div class='k-dialog-buttongroup k-actions k-hstack k-justify-content-${encode(buttonLayout)}'></div>`),
             overlay: "<div class='k-overlay'></div>",
             alertWrapper: template(() => "<div class='k-widget k-window k-dialog' role='alertdialog'></div>"),

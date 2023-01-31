@@ -58,7 +58,7 @@
             });
             notification.show("foo");
 
-            var element = $(".k-notification .k-i-close");
+            var element = $(".k-notification .k-i-x");
 
             assert.equal(element.attr("aria-hidden"), "true");
         });

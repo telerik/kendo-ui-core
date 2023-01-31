@@ -268,7 +268,7 @@
                 }
             });
 
-            dialog.wrapper.find(".k-i-close").click();
+            dialog.wrapper.find(".k-i-x").click();
         });
 
         it("closing a modal window moves overlay below previous window", function(done) {
@@ -946,7 +946,7 @@
             dialog.maximize();
 
             assert.equal(
-                dialog.wrapper.find(".k-i-window-maximize:visible").length,
+                dialog.wrapper.find(".k-i-window:visible").length,
                 0
             );
         });

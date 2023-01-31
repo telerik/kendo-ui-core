@@ -37,7 +37,7 @@ How can I allow the users to select or deselect ListView items only with the mou
 ```dojo
 <div class="demo-section k-content wide">
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"> </div>
+    <div id="pager" class="k-pager"> </div>
 </div>
 
 <script type="text/x-kendo-tmpl" id="template">
@@ -144,7 +144,7 @@ How can I allow the users to select or deselect ListView items only with the mou
         text-transform: uppercase;
     }
 
-    .k-pager-wrap {
+    .k-pager {
         border-top: 0;
     }
 

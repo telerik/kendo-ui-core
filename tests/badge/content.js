@@ -141,30 +141,30 @@
         // #region badge.options.icon
         test('badge.options.icon sets the content of the badge', function() {
             badge = new Badge(span, {
-                icon: 'add'
+                icon: 'plus'
             });
 
-            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-add\"></span>');
+            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-plus\"></span>');
         });
 
         test('badge.options.icon overides the initial HTML of the badge element', function() {
             span.html('<strong>text</strong>');
             badge = new Badge(span, {
-                icon: 'add'
+                icon: 'plus'
             });
 
-            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-add\"></span>');
+            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-plus\"></span>');
         });
 
         test('badge.options.icon takes precedense over badge.options.text', function() {
             span.html('<strong>text</strong>');
             badge = new Badge(span, {
                 text: 100,
-                icon: 'add'
+                icon: 'plus'
             });
 
             assert.equal(badge.text(), undefined);
-            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-add\"></span>');
+            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-plus\"></span>');
         });
         // #endregion
 
@@ -208,10 +208,10 @@
         test('badge.setOptions({icon: icon}) works correctly', function() {
             badge = new Badge(span);
 
-            badge.setOptions({ icon: 'add' });
+            badge.setOptions({ icon: 'plus' });
 
-            assert.equal(badge.icon(), 'add');
-            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-add\"></span>');
+            assert.equal(badge.icon(), 'plus');
+            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-plus\"></span>');
         });
         test('badge.setOptions({template: tmeplate}) works correctly', function() {
             badge = new Badge(span);

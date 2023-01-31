@@ -301,7 +301,7 @@ import "../kendo.html.button.js";
                         ((options.views && options.views.length > 1) ?
                         '<div class="k-coloreditor-header-actions k-hstack">' +
                             '<div role="group" class="k-button-group k-button-group-flat">' +
-                                html.renderButton(`<button aria-pressed="false" data-view="gradient" title="${encode(options.messages.gradient)}"></button>`, extend({ icon: "color-canvas" }, buttonOptions)) +
+                                html.renderButton(`<button aria-pressed="false" data-view="gradient" title="${encode(options.messages.gradient)}"></button>`, extend({ icon: "droplet-slider" }, buttonOptions)) +
                                 html.renderButton(`<button aria-pressed="false" data-view="palette" title="${encode(options.messages.palette)}"></button>`, extend({ icon: "palette" }, buttonOptions)) +
                             '</div>' +
                         '</div>'
@@ -309,7 +309,7 @@ import "../kendo.html.button.js";
                         '<div class="k-spacer"></div>' +
                         '<div class="k-coloreditor-header-actions k-hstack">' +
                             (options.clearButton ?
-                            html.renderButton(`<button class="k-coloreditor-reset" title="${encode(options.messages.clearColor)}"></button>`, extend({ icon: "reset-color" }, buttonOptions))
+                            html.renderButton(`<button class="k-coloreditor-reset" title="${encode(options.messages.clearColor)}"></button>`, extend({ icon: "droplet-slash" }, buttonOptions))
                             : '') +
                             (options.preview ?
                             '<div class="k-coloreditor-preview k-vstack">' +

@@ -69,7 +69,6 @@
         it("k-widget and k-listview classes are applied on element", function() {
             var dom = setup();
 
-            assert.isOk(dom.hasClass("k-widget"));
             assert.isOk(dom.hasClass("k-listview"));
         });
 

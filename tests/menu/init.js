@@ -70,10 +70,10 @@ it('menu is inside scroll wrapper', function() {
 });
 
 
-it('menu does not strip "k-i-arrow-chevron-right" icons', function() {
-    var m = new kendo.ui.Menu("<ul><li><span class='k-icon k-i-arrow-chevron-right'></span>Next</li><li>Refresh</li></ul>");
+it('menu does not strip "k-i-chevron-right" icons', function() {
+    var m = new kendo.ui.Menu("<ul><li><span class='k-icon k-i-chevron-right'></span>Next</li><li>Refresh</li></ul>");
 
-    assert.isOk(m.element.find(".k-i-arrow-chevron-right")[0]);
+    assert.isOk(m.element.find(".k-i-chevron-right")[0]);
     m.destroy();
 });
 

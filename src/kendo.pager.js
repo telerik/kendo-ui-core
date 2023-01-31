@@ -14,10 +14,10 @@ var __meta__ = {
         Widget = ui.Widget,
         keys = kendo.keys,
         template = kendo.template,
-        FIRST = ".k-i-arrow-end-left",
-        LAST = ".k-i-arrow-end-right",
-        PREV = ".k-i-arrow-60-left",
-        NEXT = ".k-i-arrow-60-right",
+        FIRST = ".k-i-caret-alt-to-left",
+        LAST = ".k-i-caret-alt-to-right",
+        PREV = ".k-i-caret-alt-left",
+        NEXT = ".k-i-caret-alt-right",
         SIZE = "k-pager-md k-pager-sm",
         FOCUSABLE = ":kendoFocusable:not([tabindex='-1'])",
         CHANGE = "change",
@@ -212,7 +212,7 @@ var __meta__ = {
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
                     that.element.append('<a role="button" href="#" class="k-pager-refresh k-link" title="' + options.messages.refresh +
-                        '" aria-label="' + options.messages.refresh + '"><span class="k-icon k-i-reload"></span></a>');
+                        '" aria-label="' + options.messages.refresh + '"><span class="k-icon k-i-arrow-rotate-cw"></span></a>');
                 }
 
                 that.element.on(CLICK + NS, ".k-pager-refresh", that._refreshClick.bind(that));
@@ -227,7 +227,7 @@ var __meta__ = {
             that.element
                 .on(CLICK + NS , "a", that._click.bind(that))
                 .on(CHANGE + NS , "select.k-dropdown", that._numericSelectChange.bind(that))
-                .addClass("k-pager-wrap k-widget k-floatwrap");
+                .addClass("k-pager k-floatwrap");
 
             if (options.autoBind) {
                 that.refresh();

@@ -257,7 +257,7 @@ The following example demonstrates how to add a custom **Delete** confirmation d
           padding: 5px;
           background-color: rgba(0,0,0,0.1);
         }
-        .k-pager-wrap
+        .k-pager
         {
           border-top: 0;
         }

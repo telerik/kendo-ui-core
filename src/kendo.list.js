@@ -1126,8 +1126,10 @@ var __meta__ = {
 
             if (!this.popup.element.is(":visible")) {
                 this.popup.one("open", (function(force) {
-                    return (function() {
-                        this._calculatePopupHeight(force);
+                    return (function(e) {
+                        if (!e.isDefaultPrevented()) {
+                            this._calculatePopupHeight(force);
+                        }
                     }).bind(this);
                 }).call(this, force));
 

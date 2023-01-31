@@ -35,16 +35,16 @@
             var arrowBtn = button.next();
             var arrowIcon = arrowBtn.children().eq(0);
             assert.isOk(arrowIcon.hasClass("k-icon"));
-            assert.isOk(arrowIcon.hasClass("k-i-arrow-s"));
+            assert.isOk(arrowIcon.hasClass("k-i-caret-alt-down"));
         });
 
         it("SplitButton renders arrow button with custom icon", function() {
-            var splitButton = new SplitButton(button, { items: defaultItems, arrowIcon: "arrow-n" });
+            var splitButton = new SplitButton(button, { items: defaultItems, arrowIcon: "caret-alt-up" });
             var arrowBtn = button.next();
             var arrowIcon = arrowBtn.children().eq(0);
             assert.isOk(arrowIcon.hasClass("k-icon"));
             assert.isNotOk(arrowIcon.hasClass("k-i-arrow-s"));
-            assert.isOk(arrowIcon.hasClass("k-i-arrow-n"));
+            assert.isOk(arrowIcon.hasClass("k-i-caret-alt-up"));
         });
 
         it("SplitButton renders button with text", function() {

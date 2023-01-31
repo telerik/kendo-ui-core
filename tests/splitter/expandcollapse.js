@@ -16,7 +16,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+            splitter.dom.find(".k-i-caret-alt-left").trigger("click");
 
             assert.isOk(triggered);
             assert.equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
@@ -30,7 +30,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+            splitter.dom.find(".k-i-caret-alt-left").trigger("click");
 
             assert.isOk(!splitter.dom.find(".k-pane:first").data("pane").collapsed);
         });
@@ -46,7 +46,7 @@
                 called = pane;
             };
 
-            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+            splitter.dom.find(".k-i-caret-alt-left").trigger("click");
 
             assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
         });
@@ -99,7 +99,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+            splitter.dom.find(".k-i-caret-alt-right").trigger("click");
 
             assert.isOk(triggered);
             assert.equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
@@ -113,7 +113,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+            splitter.dom.find(".k-i-caret-alt-right").trigger("click");
 
             assert.isOk(splitter.dom.find(".k-pane:first").data("pane").collapsed);
         });
@@ -128,7 +128,7 @@
                 called = pane;
             };
 
-            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+            splitter.dom.find(".k-i-caret-alt-right").trigger("click");
 
             assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
         });
@@ -242,7 +242,7 @@
             splitter.object.collapse(".k-pane:first");
 
             assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-arrow-60-left").length);
+            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-caret-alt-left").length);
         });
 
         it("collapsing pane disables collapsing of previous pane", function() {
@@ -253,7 +253,7 @@
             splitter.object.collapse(".k-pane:last");
 
             assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-arrow-60-right").length);
+            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-caret-alt-right").length);
         });
 
         it("collapsing the last fluid pane distributes remaining size to neighbour pane", function() {
@@ -311,7 +311,7 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-arrow-60-left")
+            splitter.dom.find(".k-i-caret-alt-left")
                 .trigger("mousedown")
                 .trigger("mouseup")
                 .trigger("click");
@@ -324,7 +324,7 @@
                 panes: [{ collapsible: true }, {}]
             });
 
-            splitter.dom.find(".k-i-arrow-60-left")
+            splitter.dom.find(".k-i-caret-alt-left")
                 .trigger("mousedown");
 
             splitter.dom.find(".k-overlay:first")
@@ -342,9 +342,9 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-arrow-60-up").click();
+            splitter.dom.find(".k-i-caret-alt-up").click();
 
-            splitter.dom.find(".k-i-arrow-60-down").click();
+            splitter.dom.find(".k-i-caret-alt-down").click();
 
             assert.equal(splitter.dom.find(".k-pane:first").width(), 98);
         });
@@ -366,7 +366,7 @@
                 keyCode: keys.ENTER
             });
 
-            splitbar.find(".k-i-arrow-60-left").click();
+            splitbar.find(".k-i-caret-alt-left").click();
 
             assert.equal(splitter.dom.find(".k-pane:first").width(), 0);
         });
@@ -379,7 +379,7 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-arrow-60-left").click();
+            splitter.dom.find(".k-i-caret-alt-left").click();
 
             assert.equal(splitter.dom.find(".k-pane:first").width(), 20);
         });
@@ -403,7 +403,7 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-arrow-60-left").click();
+            splitter.dom.find(".k-i-caret-alt-left").click();
 
             assert.isOk(splitter.dom.find(".k-pane:first").hasClass("k-collapsed"));
         });

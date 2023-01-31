@@ -740,10 +740,10 @@
             });
 
             dropdownlist.open();
-            assert.closeTo(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1, 0.1);
+            assert.closeTo(dropdownlist.popup.element.closest(".k-animation-container").outerWidth(), dropdownlist.popup.element.outerWidth(true) + 1, 1);
             dropdownlist.close();
             dropdownlist.open();
-            assert.closeTo(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1, 0.1);
+            assert.closeTo(dropdownlist.popup.element.closest(".k-animation-container").outerWidth(), dropdownlist.popup.element.outerWidth(true) + 1, 1);
         });
 
         it("enabled autoWidth disables X scrolling", function() {

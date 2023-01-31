@@ -228,7 +228,7 @@ Specify the layout of listview content. Valid options are:
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"></div>
+    <div id="pager" class="k-pager"></div>
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
@@ -286,7 +286,7 @@ Defines the direction flex items are placed in the flex container. Think of flex
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"></div>
+    <div id="pager" class="k-pager"></div>
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
@@ -342,7 +342,7 @@ By default, flex items will all try to fit onto one line. Customizing the proper
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"></div>
+    <div id="pager" class="k-pager"></div>
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
@@ -394,7 +394,7 @@ Grid layout settings.
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"></div>
+    <div id="pager" class="k-pager"></div>
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
@@ -446,7 +446,7 @@ Defines the columns of the grid.
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"></div>
+    <div id="pager" class="k-pager"></div>
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
@@ -499,7 +499,7 @@ Defines the rows of the grid.
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"></div>
+    <div id="pager" class="k-pager"></div>
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
@@ -553,7 +553,7 @@ Defines the width of the gutters between the columns / rows.
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"></div>
+    <div id="pager" class="k-pager"></div>
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">

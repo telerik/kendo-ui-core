@@ -67,7 +67,7 @@ The following example demonstrates how you can duplicate and add the Pager above
 
 
         var grid = $("#grid").data("kendoGrid");
-        var wrapper = $('<div class="k-pager-wrap k-grid-pager pagerTop"/>').insertBefore(grid.element.children(".k-grid-header"));
+        var wrapper = $('<div class="k-pager k-grid-pager pagerTop"/>').insertBefore(grid.element.children(".k-grid-header"));
         grid.pagerTop = new kendo.ui.Pager(wrapper, $.extend({}, grid.options.pageable, { dataSource: grid.dataSource }));
         grid.element.height("").find(".pagerTop").css("border-width", "0 0 1px 0");
     });

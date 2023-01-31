@@ -90,7 +90,7 @@ You can also target specific columns by using the `:nth-child()` selector.
       .k-pdf-export td {
         white-space: nowrap;
       }
-      .k-pdf-export .k-header-column-menu{
+      .k-pdf-export .k-grid-column-menu{
         display: none;
       }
     </style>

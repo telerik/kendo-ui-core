@@ -35,8 +35,18 @@ var __meta__ = {
         OPEN = "menuOpen",
         CLOSE = "menuClose",
         KEYDOWN = "keydown",
+        FOCUS = "focus",
 
-        FOCUS = "focus";
+        DIRECTIONS = {
+            "down": {
+                origin: "bottom left",
+                position: "top left"
+            },
+            "up": {
+                origin: "top left",
+                position: "bottom left"
+            }
+        };
 
     var cssClasses = {
         popup: "k-menu-popup",
@@ -123,6 +133,7 @@ var __meta__ = {
 
         options: {
             name: "ButtonMenu",
+            direction: "down",
             element: null,
             items: [],
             size: "medium",
@@ -195,7 +206,8 @@ var __meta__ = {
 
         _initPopup: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                direction = options.direction || "down";
 
             that._popup = new ui.Popup(that.element, extend({}, options.popup, {
                 anchor: that.mainButton,
@@ -206,7 +218,7 @@ var __meta__ = {
                 open: that._popupOpenHandler.bind(that),
                 close: that._popupCloseHandler.bind(that),
                 activate: that._popupExpandHandler.bind(that)
-            }));
+            }, DIRECTIONS[direction]));
         },
 
         _popupOpenHandler: function(ev) {

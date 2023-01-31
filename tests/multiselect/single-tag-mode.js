@@ -43,7 +43,7 @@
 
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 item(s) selected</span>');
-        assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-caret-alt-down"));
         assert.equal(tag.find(".k-chip-icon").attr("aria-label"), "open");
         assert.equal(tag.find(".k-chip-icon").html(), "");
     });
@@ -61,7 +61,7 @@
 
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 selected of 15</span>');
-        assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-caret-alt-down"));
     });
 
     it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
@@ -77,7 +77,7 @@
 
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 (1) selected of 15</span>');
-        assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-caret-alt-down"));
     });
 
     it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
@@ -93,7 +93,7 @@
 
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 (1) selected of 15</span>');
-        assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-caret-alt-down"));
     });
 
     it("Updates the text of the selected tag when value is changed", function() {

@@ -76,7 +76,7 @@ var __meta__ = {
             themeColor: "base",
             icon: null,
             popup: null,
-            arrowIcon: "arrow-s",
+            arrowIcon: "caret-alt-down",
             messages: {
                 labelSuffix: "splitbutton"
             }

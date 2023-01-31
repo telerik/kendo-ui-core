@@ -39,6 +39,7 @@ import "./kendo.popup.js";
             KDIALOGCONTENT = ".k-dialog-content",
             KWINDOWRESIZEHANDLES = ".k-resize-handle",
             KOVERLAY = ".k-overlay",
+            KWINDOWMINIMIZED = "k-window-minimized",
             KCONTENTFRAME = "k-content-frame",
             LOADING = "k-i-loading",
             KHOVERSTATE = "k-hover",
@@ -68,12 +69,12 @@ import "./kendo.popup.js";
             OVERFLOW = "overflow",
             DATADOCOVERFLOWRULE = "original-overflow-rule",
             ZINDEX = "zIndex",
-            MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-window-minimize,.k-window-actions .k-i-window-maximize",
+            MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-window-minimize,.k-window-actions .k-i-window",
             KPIN = ".k-i-pin",
             KUNPIN = ".k-i-unpin",
             PIN_UNPIN = KPIN + "," + KUNPIN,
             TITLEBAR_BUTTONS = ".k-window-titlebar .k-window-action",
-            REFRESHICON = ".k-window-titlebar .k-i-refresh",
+            REFRESHICON = ".k-window-titlebar .k-i-arrow-rotate-cw",
             WINDOWEVENTSHANDLED = "WindowEventsHandled",
             zero = /^0[a-z]*$/i,
             isLocalUrl = kendo.isLocalUrl,
@@ -519,11 +520,17 @@ import "./kendo.popup.js";
                 var pinned = options.pinned;
                 var titlebar = this.wrapper.children(KWINDOWTITLEBAR);
                 var container = titlebar.find(".k-window-actions");
-                var windowSpecificCommands = [ "maximize", "minimize" ];
+                var windowSpecificCommands = [ "minimize", "maximize" ];
+                var icons = {
+                    "maximize": "window",
+                    "refresh": "arrow-rotate-cw"
+                };
+                var icon;
 
                 actions = $.map(actions, function(action) {
                     action = pinned && action.toLowerCase() === "pin" ? "unpin" : action;
-                    return { name: (windowSpecificCommands.indexOf(action.toLowerCase()) > - 1) ? "window-" + action : action };
+                    icon = icons[action.toLowerCase()] || "";
+                    return { name: (windowSpecificCommands.indexOf(action.toLowerCase()) > - 1) ? "window-" + action : action, icon: action.toLowerCase() == "close" ? "x" : icon };
                 });
 
                 container.html(kendo.render(templates.action, actions));
@@ -788,11 +795,11 @@ import "./kendo.popup.js";
             _actionForIcon: function(icon) {
                 var iconClass = /\bk-i(-\w+)+\b/.exec(icon[0].className)[0];
                 return {
-                    "k-i-close": "_close",
-                    "k-i-window-maximize": "maximize",
+                    "k-i-x": "_close",
+                    "k-i-window": "maximize",
                     "k-i-window-minimize": "minimize",
                     "k-i-window-restore": "restore",
-                    "k-i-refresh": "refresh",
+                    "k-i-arrow-rotate-cw": "refresh",
                     "k-i-pin": "pin",
                     "k-i-unpin": "unpin"
                 }[iconClass];
@@ -1282,13 +1289,14 @@ import "./kendo.popup.js";
                         height: restoreOptions.height
                     })
                     .removeClass(MAXIMIZEDSTATE)
+                    .removeClass(KWINDOWMINIMIZED)
                     .find(".k-window-content,.k-resize-handle").show().end()
                     .find(".k-window-titlebar .k-i-window-restore").parent().remove().end().end()
                     .find(MINIMIZE_MAXIMIZE).parent().show().end().end()
                     .find(PIN_UNPIN).parent().show();
 
                 if (options.isMaximized) {
-                    that.wrapper.find(".k-i-window-maximize").parent().trigger("focus");
+                    that.wrapper.find(".k-i-window").parent().trigger("focus");
                 } else if (options.isMinimized) {
                     that.wrapper.find(".k-i-window-minimize").parent().trigger("focus");
                 }
@@ -1469,6 +1477,7 @@ import "./kendo.popup.js";
                 });
 
                 this.wrapper.attr("aria-labelled-by", this.element.attr("aria-labelled-by"));
+                this.wrapper.addClass(KWINDOWMINIMIZED);
 
                 this._updateBoundaries();
 
@@ -1794,9 +1803,9 @@ import "./kendo.popup.js";
 
         templates = {
             wrapper: template(() => "<div class='k-widget k-window'></div>"),
-            action: template(({ name }) =>
+            action: template(({ name, icon }) =>
                 `<a role='button' href='#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action' aria-label='${name}'>` +
-                    `<span class='k-button-icon k-icon k-i-${name.toLowerCase()}'></span>` +
+                    `<span class='k-button-icon k-icon k-i-${(icon || "").toLowerCase() || name.toLowerCase()}'></span>` +
                 "</a>"
             ),
             titlebar: template(({ title }) =>

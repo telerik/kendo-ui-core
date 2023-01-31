@@ -10,7 +10,7 @@ position: 2
 
 By default, the keyboard navigation of the TreeList is disabled.
 
-For a complete example, refer to the [demo on using the keyboard navigation of the TreeList](https://demos.telerik.com/{{ site.platform }}/treelist/keyboard-navigation).  
+For a complete example, refer to the [demo on using the keyboard navigation of the TreeList](https://demos.telerik.com/{{ site.platform }}/treelist/keyboard-navigation).
 
 The TreeList supports its keyboard navigation functionality through the `Navigatable()` method. When enabled, you can initially select a row or cell and then move within the TreeList by using the `Arrow` keys. The navigation occurs at a cell level regardless of what the `Selectable()` mode is. To select the current row or cell, press `Space`.
 
@@ -48,7 +48,7 @@ The Pager wrapper can be focused via the `Tab` key. In case of multiple focusabl
     $(document.body).keydown(function (e) {
         // ALT KEY + S will focus the pager wrapper
         if (e.altKey && e.keyCode == 83) {
-            $("#treelist .k-pager-wrap").focus();
+            $("#treelist .k-pager").focus();
         }
     });
 

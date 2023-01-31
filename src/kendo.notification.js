@@ -25,7 +25,7 @@ var __meta__ = {
         SHOW = "show",
         HIDE = "hide",
         KNOTIFICATION = "k-notification",
-        KICLOSE = ".k-notification-wrap .k-i-close",
+        KICLOSE = ".k-notification-actions .k-i-x",
         KHIDING = "k-hiding",
         INFO = "info",
         SUCCESS = "success",
@@ -37,15 +37,18 @@ var __meta__ = {
         RIGHT = "right",
         UP = "up",
         NS = ".kendoNotification",
-        WRAPPER = '<div role="alert" aria-live="polite" class="k-widget k-popup k-notification"></div>',
+        WRAPPER = '<div role="alert" aria-live="polite" class="k-notification"></div>',
         GET_TEMPLATE_FUNC = (encodeContent) =>
-            ({ typeIcon, content, closeButton }) => '<div class="k-notification-wrap">' +
+            ({ typeIcon, content, closeButton }) =>
                 `<span class="k-icon k-i-${encode(typeIcon)}" title="${encode(typeIcon)}"></span>` +
-                `<div class="k-notification-content">${encodeContent ? encode(content) : content}</div>` +
-                `<span aria-hidden="true" class="${closeButton ? "" : "k-hidden"} k-icon k-i-close" title="Hide"></span>` +
-            '</div>',
+                `<div class="k-notification-content">${encodeContent ? encode(content) : content}</div>`,
         TEMPLATE = GET_TEMPLATE_FUNC(false),
-        SAFE_TEMPLATE = GET_TEMPLATE_FUNC(true);
+        SAFE_TEMPLATE = GET_TEMPLATE_FUNC(true),
+        defaultActions = {
+            close: {
+                template: '<span aria-hidden="true" class="k-icon k-i-x" title="Hide"></span>'
+            }
+        };
 
     var Notification = Widget.extend({
         init: function(element, options) {
@@ -386,7 +389,6 @@ var __meta__ = {
 
                 wrapper
                     .addClass(KNOTIFICATION + "-" + type)
-                    .toggleClass(KNOTIFICATION + "-button", options.button)
                     .toggleClass(KNOTIFICATION + "-closable", options.button)
                     .attr({
                         "data-role": "alert",
@@ -394,6 +396,10 @@ var __meta__ = {
                     })
                     .css({ width: options.width, height: options.height })
                     .append(that._getCompiled(type, safe)(args));
+
+                if (that.options.button) {
+                    wrapper.append(that.addActions("close"));
+                }
 
                 wrapper.find(".k-notification-content").attr("id", contentId);
                 wrapper.attr("aria-describedby", contentId);
@@ -468,7 +474,7 @@ var __meta__ = {
             if (that.options.appendTo) {
                 return guidElements;
             } else {
-                return guidElements.children("." + KNOTIFICATION);
+                return guidElements.find(">.k-child-animation-container >." + KNOTIFICATION);
             }
         },
 
@@ -492,6 +498,23 @@ var __meta__ = {
         destroy: function() {
             Widget.fn.destroy.call(this);
             this.getNotifications().off(NS).find(KICLOSE).off(NS);
+        },
+
+        addActions: function(actions) {
+            var actionsContainer = $('<span class="k-notification-actions"/>');
+
+            if (!Array.isArray(actions)) {
+                actions = [actions];
+            }
+
+            actions.forEach(function(action) {
+                $(defaultActions[action].template)
+                    .wrap(`<span class="k-notification-action k-notification-${action}-action">`)
+                    .parent()
+                    .appendTo(actionsContainer);
+            });
+
+            return actionsContainer;
         }
     });
 

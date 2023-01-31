@@ -45,7 +45,7 @@
                 componentType: 'modern'
             });
 
-            assert.equal(cal.element.find(".k-calendar-header .k-nav-today").length, 1);
+            assert.equal(cal.element.find(".k-calendar-header .k-calendar-nav-today").length, 1);
         });
 
         it("calendar should not create a footer when componentType is set to modern", function() {

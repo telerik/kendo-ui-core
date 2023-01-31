@@ -41,7 +41,7 @@ There a different options to choose from when it comes to the UI of the aggregat
         display: flex;
       }
 
-      .aggregate-selector > .k-grid-filter {
+      .aggregate-selector > .k-grid-filter-menu {
         right: 30px;
       }
     </style>

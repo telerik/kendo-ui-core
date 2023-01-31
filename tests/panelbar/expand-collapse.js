@@ -8,89 +8,89 @@
 
             Mocha.fixture.append(
                 '<ul id="panelbar">' +
-                '    <li class="k-item"><span class="k-link k-header">Mail<span' +
-                '            class="k-icon k-i-arrow-chevron-down k-panelbar-expand"></span></span>' +
+                '    <li class="k-panelbar-item"><span class="k-link k-header">Mail<span' +
+                '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
                 '        <ul style="display: none;" class="k-group">' +
-                '            <li class="k-item"><span class="k-link">Personal Folders</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Personal Folders</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Deleted Items</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Deleted Items</span>' +
                 '            </li>' +
-                '            <li class="k-item k-disabled"><span class="k-link">Inbox</span>' +
+                '            <li class="k-panelbar-item k-disabled"><span class="k-link">Inbox</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">My Mail</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Mail</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Sent Items</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Sent Items</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Outbox</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Outbox</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Search Folders</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Search Folders</span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-disabled"><span class="k-link k-header">Contacts<span' +
-                '            class="k-icon k-i-arrow-chevron-down k-panelbar-expand"></span></span>' +
+                '    <li class="k-panelbar-item k-disabled"><span class="k-link k-header">Contacts<span' +
+                '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item"><span class="k-link">My Contacts</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Contacts</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Address Cards</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Address Cards</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Phone List</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Phone List</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Shared Contacts</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Shared Contacts</span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item"><span class="k-link k-header">Tasks<span' +
-                '            class="k-icon k-i-arrow-chevron-down k-panelbar-expand"></span></span>' +
+                '    <li class="k-panelbar-item"><span class="k-link k-header">Tasks<span' +
+                '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item"><span class="k-link">My Tasks</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Tasks</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Shared Tasks</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Shared Tasks</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Active Tasks</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Active Tasks</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Completed Tasks</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Completed Tasks</span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-active"><span class="k-link k-header k-selected">Notes<span' +
+                '    <li class="k-panelbar-item k-active"><span class="k-link k-header k-selected">Notes<span' +
                 '            class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
                 '        <ul class="k-group" style="display: block;">' +
-                '            <li class="k-item"><span class="k-link">My Notes</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Notes</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Notes List</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Notes List</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Shared Notes</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Shared Notes</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">Archive</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Archive</span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item"><span class="k-link k-header">Folders List<span' +
-                '            class="k-icon k-i-arrow-chevron-down k-panelbar-expand"></span></span>' +
+                '    <li class="k-panelbar-item"><span class="k-link k-header">Folders List<span' +
+                '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item"><span class="k-link">My Client.Net</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Client.Net</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">My Profile<span' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
                 '                <ul style="display: none;" class="k-group">' +
-                '                    <li class="k-item"><a href="#"' +
+                '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +
-                '                    <li class="k-item"><a href="#"' +
+                '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Ajax Binding</a></li>' +
-                '                    <li class="k-item"><a href="#"' +
+                '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Web Service Binding</a></li>' +
-                '                    <li class="k-item"><a href="#"' +
+                '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Custom Binding</a></li>' +
-                '                    <li class="k-item"><a href="#"' +
+                '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Twitter Binding</a></li>' +
-                '                    <li class="k-item"><a href="#"' +
+                '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Facebook Binding</a></li>' +
                 '                </ul>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">My Support Tickets</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Support Tickets</span>' +
                 '            </li>' +
-                '            <li class="k-item"><span class="k-link">My Licenses</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Licenses</span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
@@ -124,7 +124,7 @@
 
             item.find("> .k-link").trigger("click");
 
-            assert.isOk(item.find(".k-icon").hasClass("k-i-arrow-chevron-down"));
+            assert.isOk(item.find(".k-icon").hasClass("k-i-chevron-down"));
         });
 
         it("clicking collapsed items should expand them", function() {
@@ -140,7 +140,7 @@
 
             item.find("> .k-link").trigger("click");
 
-            assert.isOk(item.find(".k-icon").hasClass("k-i-arrow-chevron-up"));
+            assert.isOk(item.find(".k-icon").hasClass("k-i-chevron-up"));
         });
 
         it("clicking collapsed items should not expand child groups", function() {
@@ -156,7 +156,7 @@
 
             panelbar.expand(item);
 
-            item.find(".k-item > .k-link").trigger("click");
+            item.find(".k-panelbar-item > .k-link").trigger("click");
 
             assert.equal(item.find(".k-group").css("display"), "block");
         });
@@ -167,6 +167,14 @@
             item.find("> .k-link > .k-icon").trigger("click");
 
             assert.equal(item.find(".k-group").css("display"), "none");
+        });
+
+        it("expanded items should have k-expanded class", function() {
+            var item = getRootItem(2);
+
+            item.find("> .k-link").trigger("click");
+
+            assert.isTrue(item.hasClass("k-expanded"));
         });
     });
 }());

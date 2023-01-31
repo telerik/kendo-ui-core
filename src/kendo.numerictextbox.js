@@ -961,7 +961,7 @@ var __meta__ = {
     }]);
 
     function buttonHtml(direction, text, options) {
-        var className = direction === "increase" ? "arrow-n" : "arrow-s";
+        var className = direction === "increase" ? "caret-alt-up" : "caret-alt-down";
         var dir = direction === "increase" ? "increase" : "decrease";
 
         return html.renderButton('<button role="button" tabindex="-1" unselectable="on" class="k-spinner-' + dir + '" aria-label="' + text + '" title="' + text + '"></button>', extend({}, options, {

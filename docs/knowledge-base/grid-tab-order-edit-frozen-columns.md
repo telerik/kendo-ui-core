@@ -96,11 +96,11 @@ To keep the tab order:
             filterable: true,
             columnMenu: true,
             dataBound: function (e) {
-                $(".k-grid-edit, .k-grid-delete").attr("tabindex", "1");
+                $(".k-grid-edit-command, .k-grid-remove-command").attr("tabindex", "1");
             },
             cancel: function (e) {
                 setTimeout(function () {
-                    $(".k-grid-edit, .k-grid-delete").attr("tabindex", "1");
+                    $(".k-grid-edit-command, .k-grid-remove-command").attr("tabindex", "1");
                 });
             },
             columns: [

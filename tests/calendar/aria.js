@@ -166,10 +166,10 @@ it("Calendar with enabled week has not empty th if not message is set", function
 });
 
 it("only role='grid' element remains in the tabsequence", function() {
-    assert.equal(div.find(".k-nav-prev").attr("tabindex"), -1);
-    assert.equal(div.find(".k-nav-next").attr("tabindex"), -1);
-    assert.equal(div.find(".k-nav-today").attr("tabindex"), -1);
-    assert.equal(div.find(".k-nav-fast").attr("tabindex"), -1);
+    assert.equal(div.find(".k-calendar-nav-prev").attr("tabindex"), -1);
+    assert.equal(div.find(".k-calendar-nav-next").attr("tabindex"), -1);
+    assert.equal(div.find(".k-calendar-nav-today").attr("tabindex"), -1);
+    assert.equal(div.find(".k-calendar-nav-fast").attr("tabindex"), -1);
 });
 
     });

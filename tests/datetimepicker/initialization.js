@@ -48,7 +48,7 @@
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
             datetimepicker.value(new Date(2099, 11, 10, 10, 10, 10));
             datetimepicker.open();
-            assert.equal($(".k-link").not(".k-nav-today").last().text(), 31);
+            assert.equal($(".k-link").not(".k-calendar-nav-today").last().text(), 31);
         });
 
         it("DateTimePicker creates DateView", function() {

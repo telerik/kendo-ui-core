@@ -77,7 +77,7 @@ import "./contrastToolUtils.js";
 
                 vStackElement =
                 '<div class="k-vstack">' +
-                    `<button class="k-colorgradient-toggle-mode" data-${ns}role="button" data-${ns}icon="arrows-kpi" data data-${ns}bind="click: switchMode" data-${ns}fill-mode="flat" data-${ns}size="${optionsSize}" title="${optionsMessagesToggleFormat}">` +
+                    `<button class="k-colorgradient-toggle-mode" data-${ns}role="button" data-${ns}icon="caret-alt-expand" data data-${ns}bind="click: switchMode" data-${ns}fill-mode="flat" data-${ns}size="${optionsSize}" title="${optionsMessagesToggleFormat}">` +
                     '</button>' +
                 '</div>';
             }
@@ -542,7 +542,7 @@ import "./contrastToolUtils.js";
                                                 (ratio > limit ?
                                                 `<span class="k-contrast-validation k-text-success">${encode(messages.pass)} <span class="k-icon k-i-check"></span></span>`
                                                 :
-                                                `<span class="k-contrast-validation k-text-error">${encode(messages.fail)} <span class="k-icon k-i-close"></span></span>`) +
+                                                `<span class="k-contrast-validation k-text-error">${encode(messages.fail)} <span class="k-icon k-i-x"></span></span>`) +
                                             '</div>'),
                 output = "";
 

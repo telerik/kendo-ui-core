@@ -36,7 +36,7 @@ var __meta__ = {
         TEMPLATE = ({ autoHide, callout, dir }) =>
             `<div role="tooltip" class="k-widget k-tooltip${!autoHide ? ' k-tooltip-closable' : ''}">` +
                 '<div class="k-tooltip-content"></div>' +
-                (!autoHide ? '<div class="k-tooltip-button"><a href="#" class="k-icon k-i-close" title="Close"></a></div>' : '') +
+                (!autoHide ? '<div class="k-tooltip-button"><a href="#" class="k-icon k-i-x" title="Close"></a></div>' : '') +
                 (callout ? `<div class="k-callout k-callout-${dir}"></div>` : '') +
             '</div>',
         IFRAMETEMPLATE = kendo.template(({ content }) =>

@@ -70,7 +70,7 @@ var __meta__ = {
                                         '<div class="k-datetime-time-wrap">' +
                                         '</div>' +
                                     '</div>' +
-                                    '<div class="k-datetime-footer k-action-buttons">' +
+                                    '<div class="k-datetime-footer k-actions">' +
                                         `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel" aria-label="Cancel">` +
                                             `<span class="k-button-text">${messages.cancel}</span>` +
                                         '</button>' +

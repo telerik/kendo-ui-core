@@ -89,7 +89,7 @@ For the full implementation of this approach, refer to [this runnable example](h
     .k-pager-numbers.k-state-expanded li {
         display: inline-block;
     }
-    .k-pager-wrap .k-pager-numbers .k-current-page {
+    .k-pager .k-pager-numbers .k-current-page {
         display: block;
     }
 
@@ -174,7 +174,7 @@ For the full implementation of this approach, refer to [this runnable example](h
     .k-pager-numbers.k-state-expanded li {
         display: inline-block;
     }
-    .k-pager-wrap .k-pager-numbers .k-current-page {
+    .k-pager .k-pager-numbers .k-current-page {
         display: block;
     }
 

@@ -69,6 +69,7 @@ var __meta__ = {
         menuSelector = ".k-menu",
         groupSelector = ".k-menu-group",
         animationContainerSelector = ".k-animation-container",
+        childAnimationContainerSelector = ".k-child-animation-container",
         popupSelector = groupSelector + "," + animationContainerSelector,
         allItemsSelector = ":not(.k-list) > .k-item:not([role='treeitem'])",
         disabledSelector = ".k-item.k-disabled",
@@ -185,9 +186,9 @@ var __meta__ = {
                 var result = "k-menu-expand-arrow-icon k-icon";
 
                 if (group.horizontal) {
-                    result += " k-i-arrow-s";
+                    result += " k-i-caret-alt-down";
                 } else {
-                    result += " k-i-arrow-e";
+                    result += " k-i-caret-alt-right";
                 }
 
                 return result;
@@ -309,13 +310,13 @@ var __meta__ = {
             isRtl = kendo.support.isRtl(parent);
 
         if (parent.hasClass(MENU + "-horizontal")) {
-            arrowCssClass = "k-i-arrow-s";
+            arrowCssClass = "k-i-caret-alt-down";
         } else {
             if (isRtl) {
-                arrowCssClass = "k-i-arrow-w";
+                arrowCssClass = "k-i-caret-alt-left";
             }
             else {
-                arrowCssClass = "k-i-arrow-e";
+                arrowCssClass = "k-i-caret-alt-right";
             }
         }
         return arrowCssClass;
@@ -412,7 +413,7 @@ var __meta__ = {
 
     function itemPopup(item, overflowWrapper) {
         var popupId = item.data(POPUP_OPENER_ATTR);
-        return popupId ? overflowWrapper.children(animationContainerSelector).children(popupGroupSelector(popupId)) : $([]);
+        return popupId ? overflowWrapper.children(animationContainerSelector).find(popupGroupSelector(popupId)) : $([]);
     }
 
     function overflowMenuParents(current, overflowWrapper) {
@@ -694,7 +695,7 @@ var __meta__ = {
                 overflowWrapper.off(NS);
                 overflowWrapper.find(scrollButtonSelector).off(NS).remove();
                 overflowWrapper.children(animationContainerSelector).each(function(i, popupWrapper) {
-                    var ul = $(popupWrapper).children(groupSelector);
+                    var ul = $(popupWrapper).find(".k-child-animation-container > " + groupSelector);
                     ul.off(MOUSEWHEEL);
                     var popupParentLi = popupParentItem(ul, overflowWrapper);
                     if (popupParentLi.length) {
@@ -1036,7 +1037,7 @@ var __meta__ = {
                 }
             }
 
-            var visiblePopups = ">.k-popup:visible,>.k-animation-container>.k-popup:visible";
+            var visiblePopups = ">.k-popup:visible,>.k-animation-container > .k-child-animation-container > .k-popup:visible";
             var closePopup = function() {
                 var popup = $(this).data(KENDOPOPUP);
                 if (popup) {
@@ -1063,7 +1064,7 @@ var __meta__ = {
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function() {
-                    var ul = li.find("> .k-menu-group, > .k-animation-container > .k-menu-group").filter(":hidden").first();
+                    var ul = li.find("> .k-menu-group, > .k-animation-container > .k-child-animation-container > .k-menu-group").filter(":hidden").first();
                     var popup;
                     var overflowPopup;
 
@@ -1190,7 +1191,7 @@ var __meta__ = {
         },
 
         _wrapPopupElement: function(popup) {
-            if (!popup.element.parent().is(animationContainerSelector)) {
+            if (!popup.element.parent().is(childAnimationContainerSelector)) {
                 popup.wrapper = kendo.wrap(popup.element, popup.options.autosize)
                     .css({
                         overflow: "hidden",
@@ -1253,7 +1254,7 @@ var __meta__ = {
 
         _setPopupHeight: function(popup, isFixed) {
             var popupElement = popup.element;
-            var popups = popupElement.add(popupElement.parent(animationContainerSelector));
+            var popups = popupElement.add(popupElement.parent(childAnimationContainerSelector));
 
             popups.height((popupElement.hasClass(MENU) && this._initialHeight) || "");
 
@@ -1533,7 +1534,7 @@ var __meta__ = {
             var that = this;
             var popupElement = $(e.currentTarget);
 
-            if (popupElement.parent().is(animationContainerSelector)) {
+            if (popupElement.parent().is(childAnimationContainerSelector)) {
                  return;
             }
 
@@ -2426,7 +2427,7 @@ var __meta__ = {
             if (options.scrollable && !that._overflowWrapper()) {
                 that._openedPopups = {};
 
-                that._popupsWrapper = (that.element.parent().is(animationContainerSelector) ? that.element.parent() : that.element)
+                that._popupsWrapper = (that.element.parent().is(childAnimationContainerSelector) ? that.element.closes(animationContainerSelector) : that.element)
                     .wrap("<div class='k-popups-wrapper " + options.orientation + "'></div>").parent();
 
                 if (that.options.orientation == "horizontal") {
@@ -2495,6 +2496,10 @@ var __meta__ = {
             }
 
             Menu.fn.destroy.call(that);
+
+            if (that.popup) {
+                that.popup.destroy();
+            }
         },
 
         open: function(x, y) {
@@ -2587,7 +2592,7 @@ var __meta__ = {
 
         _setPopupWidth: function(popup, isFixed) {
             var popupElement = popup.element;
-            var popups = popupElement.add(popupElement.parent(animationContainerSelector));
+            var popups = popupElement.add(popupElement.parent(childAnimationContainerSelector));
 
             popups.width(this._initialWidth || "");
 
@@ -2737,11 +2742,12 @@ var __meta__ = {
         _popup: function() {
             var that = this;
             var overflowWrapper = that._overflowWrapper();
+            var contextMenuElement = that.element.addClass("k-context-menu");
 
             that._triggerProxy = that._triggerEvent.bind(that);
 
-            that.popup = that.element
-                            .addClass("k-context-menu")
+            that.popup = $("<div></div>")
+                            .append(contextMenuElement)
                             .kendoPopup({
                                 origin: that.options.origin,
                                 position: that.options.position,

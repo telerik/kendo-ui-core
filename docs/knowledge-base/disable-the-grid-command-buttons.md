@@ -44,8 +44,8 @@ Apply the logic on the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javas
       $("#grid").kendoGrid({
         dataBound:function(e){
           $( ".k-disabled" ).each(function( index ) {
-            $(this).removeClass('k-grid-delete')
-            $(this).removeClass('k-grid-edit')
+            $(this).removeClass('k-grid-remove-command')
+            $(this).removeClass('k-grid-edit-command')
           });
         },
         columns: [

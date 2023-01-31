@@ -42,25 +42,26 @@ Register a new tool for the Editor.
     kendo.ui.editor.EditorUtils.registerTool(
         "fontWeight",
         new kendo.ui.editor.FontTool({
-            cssAttr:"font-weight",
-            domAttr: "fontWeight",
             name:"fontWeight",
+            domAttr: "fontWeight",
+            items: [
+                { text: "bold", value: "900" }
+            ],
             defaultValue: [{ text: "fontWeight",  value: "normal" }],
-            template: new kendo.ui.editor.ToolTemplate({
-                template: kendo.ui.editor.EditorUtils.comboBoxTemplate,
-                title: "Font Size"
-            })
+            ui: {
+                type: "component",
+                component: "ComboBox",
+                componentOptions: {
+                    dataValueField: "value",
+                    dataTextField: "text"
+                }
+            }
         })
     );
 
     var editor = $("#editor").kendoEditor({
         tools: [
-            {
-                name: "fontWeight",
-                items: [
-                    { text: "bold", value: "900" }
-                ]
-            },
+            "fontWeight",
             "fontName"
         ],
         messages: {
@@ -68,10 +69,10 @@ Register a new tool for the Editor.
         }
     }).getKendoEditor();
 
-    var fontNameCombo = kendo.widgetInstance($(editor.wrapper.find("select.k-fontName")[0]));
+    var fontNameCombo = kendo.widgetInstance($(editor.wrapper.find("input[data-command=fontName]")[0]));
 
     function fontNameComboChange(e) {
-        var fontWeightCombo = kendo.widgetInstance($(editor.wrapper.find("select.k-fontWeight")[0]));
+        var fontWeightCombo = kendo.widgetInstance($(editor.wrapper.find("input[data-command=fontWeight]")[0]));
 
         fontWeightCombo.setDataSource([
             { text: "Light", value: "300" },

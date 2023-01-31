@@ -959,7 +959,7 @@ var __meta__ = {
 
             if (!input[0]) {
                 arrowBtn = html.renderButton('<button type="button" class="k-input-button" aria-label="expand combobox"></button>', {
-                    icon: "arrow-s",
+                    icon: "caret-alt-down",
                     size: options.size,
                     fillMode: options.fillMode,
                     shape: "none",
