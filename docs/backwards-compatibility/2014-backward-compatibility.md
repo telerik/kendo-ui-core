@@ -4,7 +4,7 @@ page_title: 2014 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2014."
 previous_url: /backwards-compatibility/2014/2014-backward-compatibility
 slug: breakingchanges2014_kendoui
-position: 8
+position: 9
 ---
 
 # 2014 Releases

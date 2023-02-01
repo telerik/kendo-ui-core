@@ -250,7 +250,7 @@ var __meta__ = {
                 wrapper.removeAttr("disabled");
 
                 if (focused) {
-                    wrapper.addClass("k-focus").trigger("focus");
+                    wrapper.addClass(KFOCUS).trigger("focus");
                 }
             } else if (item.buttonsPopupItem.length > 0) {
                 buttonPopup = kendo.widgetInstance(item.buttonsPopupItem.closest(DOT + MENU_POPUP));
@@ -936,10 +936,12 @@ var __meta__ = {
         },
 
         _focusIn: function(e) {
-            var target = $(e.target);
+            var target = $(e.target),
+                button = target.closest(DOT + KBUTTON);
 
-            if (target.closest(DOT + KBUTTON).length > 0) {
-                target.closest(DOT + KBUTTON).addClass(KFOCUS);
+            if (button.length > 0) {
+                this._resetTabIndex(button);
+                button.addClass(KFOCUS);
             }
         },
 

@@ -3,12 +3,29 @@ title: 2022 Releases
 page_title: 2022 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2022."
 slug: breakingchanges2022_kendoui
-position: 0
+position: 1
 ---
 
 # 2022 Releases
 
 This article lists the breaking or important changes in the 2022 releases of Kendo UI.
+
+## Kendo UI 2022 R3
+
+**Selectable**
+
+As of the 2022 R3 release, the `Selectable` events mechanism is altered for a variety of the components. The `change` event will now be fired only when selection/deselection is performed. Invoking the client-side API methods would not fire the event as well. 
+
+Below you can find a list of the impacted components:
+
+* `Grid`
+* `Calendar`
+* `MultiViewCalendar`
+* `ListBox`
+* `ListView`
+* `TreeList`
+* `FileManager`
+* `Gantt`
 
 ## Kendo UI 2022 R2 SP1
 
