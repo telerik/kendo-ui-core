@@ -59,6 +59,15 @@ The following example shows how to set the `Label` of an item. Enabling the `Opt
 ```
 {% endif %}
 
+## Default Value for Label and Title
+
+It is possible to set the (Name Data Annotation)[https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.displayattribute.name?view=net-7.0] of the Field directly in the Model and then it will be automatically set in the Form as the default Label and Title of the Item:
+
+```C#
+        [Display(Name = "User Name")]  
+        public string FirstName { get; set; }  
+```
+
 ## Configure Hint
 
 The following example shows how to set the `Hint` of an item. The hint is displayed below the editor of the field.
