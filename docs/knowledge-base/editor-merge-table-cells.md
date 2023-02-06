@@ -18,7 +18,7 @@ component: editor
  </tr>
  <tr>
   <td>Kendo UI version</td>
-  <td>Created with the 2019.1.220 version</td>
+  <td>2023.1.315</td>
  </tr>
 </table>
 

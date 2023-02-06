@@ -2224,7 +2224,7 @@ The maximum height that the editor can be resized to.
 
 If `resizable` is set to `true` the widget will detect changes in the viewport width and will hide the overflowing controls in the tool overflow popup.
 
-> Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor` and `formatting` will be hidden but **not** moved to the tool overflow popup.
+> Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor`, `formatting` and `createTable` will **not** be moved to the tool overflow popup and will be always visible.
 
 #### Example
 
@@ -2438,7 +2438,7 @@ The JavaScript function which will be executed when the end-user clicks the tool
         {
           name: "custom",
           exec: function(e) {
-            var editor = $(this).data("kendoEditor");
+            var editor = this;
             // ...
           }
         }

@@ -133,7 +133,7 @@ var __meta__ = {
 
     var POPUP_BUTTON_TEMPLATE = '<button class="k-popup-button"><span class="k-button-icon k-icon k-icon"></span><span class="k-button-text"><span class="k-icon k-i-arrow-s"></span></span></button>';
     var TEMPLATE_WRAPPER = "<div class='k-toolbar-item' aria-keyshortcuts='Enter'></div>";
-    var CUSTOM_WIDGET_WRAP = "<span class='k-toolbar-tool k-toolbar-item'>";
+    var CUSTOM_WIDGET_WRAP = "<span class='k-toolbar-tool k-toolbar-item' tabindex='0'>";
     var SEPARATOR_OVERFLOW_EL = "<li role='separator' class='k-separator k-menu-separator k-hidden'></li>";
     var SEPARATOR_EL = '<div role="separator">&nbsp;</div>';
     var SPACER_EL = '<div>&nbsp;</div>';
@@ -307,6 +307,10 @@ var __meta__ = {
                 } else {
                     that._groupVisibleButtons(parentGroupEl);
                 }
+            }
+
+            if (elements.find("[tabindex=0]").addBack("[tabindex=0]").length > 0) {
+                this._resetTabIndex(that._getAllItems().first());
             }
 
             if (this.options.resizable) {
@@ -1745,7 +1749,7 @@ var __meta__ = {
                 }
             }
 
-            if (overflowAnchor.is("[tabindex=0]")) {
+            if (!this.options.navigateOnTab && overflowAnchor.is("[tabindex=0]")) {
                 overflowAnchor.attr(TABINDEX, -1);
                 this._resetTabIndex(this._getAllItems().first());
             }
@@ -1758,6 +1762,8 @@ var __meta__ = {
             if (this.options.navigateOnTab !== true) {
                 focusableItems.attr(TABINDEX, -1);
                 firstFocusable.attr(TABINDEX, 0);
+            } else {
+                this.wrapper.find(".k-toolbar-item.k-toolbar-tool").removeAttr(TABINDEX);
             }
         },
 
