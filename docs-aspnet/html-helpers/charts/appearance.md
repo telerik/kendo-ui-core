@@ -11,7 +11,7 @@ position: 3
 
 Unlike other {{ site.product }} components which use only CSS for styling, you can mainly control the appearance of the Chart elements by using JavaScript style options.
 
-For more information on the structure of the Chart, refer to the articles on the [Chart building elements]({% slug htmlhelpers_charts_dataseries_aspnetcore %}).   
+For more information on the structure of the Chart, refer to the articles on the [Chart building elements]({% slug htmlhelpers_charts_dataseries_aspnetcore %}).
 
 ## Predefined Themes
 

@@ -122,4 +122,4 @@ For the full implementation, open the following example in the Dojo.
 
 ## See Also
 
-* [Customization of Appearance in Kendo UI](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#customization-of-appearance)
+* [Customization of Appearance in Kendo UI]({% slug sassbasedthemes_customization_kendoui %})

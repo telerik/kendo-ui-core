@@ -29,4 +29,4 @@ The icons get loaded from another font(in this case it looks like the emoji buil
 
 We have logged an item in the official Kendo UI Feedback Portal for enhancing the themes with a font-loading strategy that handles the reserved unicode numbers. Vote for it [here](https://feedback.telerik.com/kendo-jquery-ui/1405895-add-font-loading-strategy-to-handle-reserved-unicode-numbers-in-ios).
 
-Meanwhile, add the styles folder with the styles files on the server. This will reduce the time it takes for the styles to get loaded and should solve the issue with the man and the T-shirt. [Here](/styles-and-layout/appearance-styling#theme-related-folders) is a list of the folders which should be placed inside a `/styles` folder.
+Meanwhile, add the styles folder with the styles files on the server. This will reduce the time it takes for the styles to get loaded and should solve the issue with the man and the T-shirt.

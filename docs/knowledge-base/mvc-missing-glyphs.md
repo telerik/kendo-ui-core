@@ -1,6 +1,6 @@
 ---
-title: Cannot Find Icons to Display in Kendo UI for ASP.NET MVC Project
-description: The Kendo UI Web Font Icons are missing in a Kendo UI for ASP.NET MVC projects after I switch to the local Kendo UI files.
+title: Cannot Display Kendo UI Web Font Icons in Telerik UI for ASP.NET MVC Projects
+description: The Kendo UI Web Font Icons are missing in a Telerik UI for ASP.NET MVC project after I switch to the local Kendo UI files.
 type: troubleshooting
 page_title: Web Font Icons Are Missing after Switching to Local Files | UI for ASP.NET MVC
 slug: mvc-missing-glyphs
@@ -33,5 +33,5 @@ To make the Web Font Icons available, either:
 
 ## See Also
 
-* [Theme-Related Folders](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#theme-related-folders)
+* [Kendo UI Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [Forum Thread on Not Loading Font Icons in IE11 or Edge that Runs on Windows 10](https://www.telerik.com/forums/font-icons-are-not-loaded-in-ie11-edge-running-on-windows-10)

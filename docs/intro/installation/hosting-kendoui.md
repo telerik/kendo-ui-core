@@ -28,7 +28,7 @@ When the download completes, each folder inside the downloaded archive contains 
 |`/mjs`							|Contains the JavaScript modules that can be used instead of the bundled scripts from the `js` folder.|
 |`/license-agreements`| Contains the End User License Agreement (EULA) that has to be read before installing Kendo UI.|
 |`/src`							|Used to hold the source code files but they are now provided in a separate download package. Access the source code package from the [**Downloads** section](https://www.telerik.com/account/my-downloads) of your account. Note that the source code is not available to trial users.|
-|`/styles`					|Contains the definitions of all [SASS](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) and [LESS](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling)-based themes that Kendo UI provides. |
+|`/styles`					|Contains the definitions of all [SASS]({% slug sassbasedthemes_kendoui %}) themes that Kendo UI provides. |
 |`/typescript`			|Includes the Kendo UI [TypeScript definitions](https://docs.telerik.com/kendo-ui/third-party/typescript).|
 |`/vsdoc`				    |Includes the files that provide the intellisense.  |
 |`changelog.html`		|Provides the Kendo UI release notes.|

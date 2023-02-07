@@ -39,7 +39,8 @@ How can I set the Kendo UI TreeMap tiles color from the items?
 
 Obtain the node elements in the [`dataBound`](/api/javascript/dataviz/ui/treemap/events/databound) event handler and apply the style through the [`css()`](https://api.jquery.com/css/) jQuery method.
 
-> When you use a [Sass-based theme](/styles-and-layout/appearance-styling), you need to apply an additional `.k-treemap .k-treemap-title { background-color: inherit; }` style.
+> * When you use a [Sass-based theme]({% slug sassbasedthemes_kendoui %}), apply an additional `.k-treemap .k-treemap-title { background-color: inherit; }` style.
+> * R1 2023 is the last official release of Kendo jQuery, which supports and ships [Less themes]({% slug themesandappearnce_kendoui_desktopwidgets %}) with the product.
 
 The following example demonstrates how to set the Kendo UI TreeMap tiles color from the items.
 
