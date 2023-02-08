@@ -291,11 +291,10 @@ var __meta__ = {
 
     function updateArrow(item) {
         item = $(item);
-
-        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-arrow]:not(.k-sprite)").parent().remove();
+        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-caret]:not(.k-sprite)").parent().remove();
 
         item.filter(":has(.k-menu-group)")
-            .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
+            .children(".k-link:not(:has([class*=k-i-caret]:not(.k-sprite)))")
             .each(function() {
                 var item = $(this),
                     arrowCssClass = getArrowCssClass(item);
@@ -2345,7 +2344,7 @@ var __meta__ = {
                 }),
                 scrollButton: template(({ direction }) =>
                     `<span class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button k-menu-scroll-button k-scroll-${direction}' unselectable='on'>` +
-                    `<span class='k-button-icon k-icon k-i-arrow-60-${direction}'></span>` +
+                    `<span class='k-button-icon k-icon k-i-caret-alt-${direction}'></span>` +
                     "</span>"
                 ),
                 arrow: template(({ item, group }) =>

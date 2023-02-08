@@ -28,7 +28,7 @@ var __meta__ = {
         KCOMPLETEDCHUNK = "k-selected",
         STATEDISABLED = "k-disabled",
         PROGRESS_VALUE = "k-progressbar-value",
-        CHUNK_ITEM = "k-chunk-progressbar",
+        CHUNK_ITEM = "k-progressbar-chunk",
         PROGRESSTYPE = {
             VALUE: "value",
             PERCENT: "percent",
@@ -436,6 +436,7 @@ var __meta__ = {
                 options.chunkCount = 1;
             }
 
+            that.element.addClass("k-chunk-progressbar");
             html += "<ul class='k-reset k-progressbar-chunks'>";
             for (var i = options.chunkCount - 1; i >= 0; i--) {
                 html += "<li class='" + CHUNK_ITEM + "'></li>";

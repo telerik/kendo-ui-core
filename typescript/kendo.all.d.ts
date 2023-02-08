@@ -1841,6 +1841,7 @@ declare namespace kendo.ui {
         validationSummary: boolean;
         errorTemplate: string;
         skipFocus: boolean;
+        size?: string | undefined;
     }
     interface EditorField {
         field?: string | undefined;
@@ -2716,6 +2717,7 @@ declare namespace kendo.ui {
         weekColumnHeader?: string | undefined;
         navigateTo?: string | undefined;
         parentViews?: CalendarMessagesParentViews;
+		today?: string | undefined;
     }
 
     interface CalendarMonth {
@@ -5690,6 +5692,7 @@ declare namespace kendo.ui {
         layout?: string | "grid" | undefined;
         grid?: FormGridOptions | undefined;
         validatable?: FormValidatable | undefined;
+        size?: string | undefined;
 
         change?(e: FormChangeEvent): void;
         validate?(e: FormValidateEvent): void;
@@ -5708,9 +5711,14 @@ declare namespace kendo.ui {
         encoded?: boolean | undefined;
     }
 
+    interface FormGridGutterOptions {
+        rows?: string | number | undefined;
+        cols?: string | number | undefined;
+    }
+
     interface FormGridOptions {
         cols?: string | number | undefined;
-        gutter?: string | number | undefined;
+        gutter?: string | number | FormGridGutterOptions | undefined;
     }
 
     interface FormItem {

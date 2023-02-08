@@ -293,6 +293,22 @@ Allows customization of parent view name used in the `title` attribute of the Ca
      })
     </script>
 
+### messages.today `String` *(default: "Today")*
+
+Allows customization of the text of the Today button present in the widget in its `modern` rendering.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        componentType: "modern",
+        messages: {
+            today: "Click me"
+        }
+     })
+    </script>
+
 ### min `Date`*(default: Date(1900, 0, 1))*
 
  Specifies the minimum date, which the calendar can show.
