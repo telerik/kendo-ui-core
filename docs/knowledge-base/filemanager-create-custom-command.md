@@ -1,7 +1,7 @@
 ---
 title: Create Custom File Manager Command
 page_title: Create Custom Command
-description: "An example on how to create a custom command for the Kendo UI File Manager for jQuery."
+description: "Learn how to create a custom command for the Kendo UI File Manager for jQuery."
 slug: howto_create_custom_filemanager_command
 tags: filemanager, custom command,
 component: filemanager
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI File Manager for jQuery</td>
+  <td>Progress® Kendo UI® File Manager for jQuery</td>
  </tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Show Tooltip for Tasks in Gantt Treelist
-description: An example on how to show a tooltip when a task in the treelist section of the Kendo UI Gantt is hovered.
+description: Learn how to show a tooltip when a task in the treelist section of the Kendo UI Gantt is hovered.
 type: how-to
 page_title: Show Tooltip on Hovering Tasks in the Treelist - Kendo UI Gantt for jQuery
 slug: gantt-show-tooltip-for-treelist-tasks
@@ -15,7 +15,7 @@ component: gantt
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Gantt</td>
+  <td>Progress® Kendo UI® Gantt for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

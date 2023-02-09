@@ -15,7 +15,7 @@ component: dialog
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Dialog</td>
+  <td>Progress® Kendo UI® Dialog for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -27,11 +27,11 @@ component: dialog
 
 The scrollbar of the jQuery Dialog overlaps on OS X.
 
-## Cause 
+## Cause
 
 A scrollbar of an element below the Dialog popup might be displayed incorrectly over the Dialog popup in the Safari and Chrome browsers which run on OS X.
 
-## Solution 
+## Solution
 
 To handle the issue, apply the CSS style to the scrollbar container below the Dialog as demonstrated in the example below.
 

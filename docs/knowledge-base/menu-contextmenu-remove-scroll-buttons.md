@@ -4,7 +4,7 @@ description: The scroll buttons of the Kendo UI Menu and Context Menu can be hid
 type: how-to
 page_title: Hide Scroll Buttons - Kendo UI Menu for jQuery
 slug: menu-contextmenu-remove-scroll-buttons
-position: 
+position:
 tags: menu, contextmenu, scroll, buttons, remove, hide, navigation
 ticketid: 1442750
 res_type: kb
@@ -19,7 +19,8 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Progress® Kendo UI® Menu, Progress® Kendo UI® ContextMenu</td>
+			<td>Progress® Kendo UI® Menu for jQuery</td>
+			<td>Progress® Kendo UI® ContextMenu for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -43,7 +44,7 @@ Using the ```important``` selector with the specific class will make the scrollb
 
 ```css
       .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-down,
-      .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-up, 
+      .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-up,
       .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-left,
       .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-right {
         display: none !important;
@@ -189,7 +190,7 @@ Using the ```important``` selector with the specific class will make the scrollb
 
     <style>
       .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-down,
-      .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-up, 
+      .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-up,
       .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-left,
       .noScrollButtons ~ span.k-menu-scroll-button.k-scroll-right {
         display: none !important;

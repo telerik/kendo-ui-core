@@ -1,16 +1,17 @@
 ---
-title: Reorder Grid Rows without Removing the "dragged" Row 
-description: Keep the dragged row visible in Grid until reordered
+title: Reorder Grid Rows without Removing the Dragged Row
+description: Learn how to keep the dragged row visible in the Kendo UI for jQuery Grid until reordered.
 type: how-to
-page_title: Keep Row Visible while reordering - Kendo UI Grid
+page_title: Keep the Row Visible While Reordering - Kendo UI for jQuery Grid
 slug: grid-sortable-keep-row-visible-until-drop
-position: 
+position:
 tags: grid, sortable, dragging, row, visible, reorder
 ticketid: 1409839
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
@@ -19,7 +20,8 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Grid and Sortable for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Grid for jQuery</td>
+			<td>Progress® Kendo UI® Sortable for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -33,7 +35,7 @@ Is there a way to configure the grid to NOT remove the row when I click and drag
 
 ## Solution
 
-You may entirely prevent the row from being hidden but involves altering a private method. So if you do decide to go down this road, leave a comment in the project so you can test when updating to another version. Private methods can be changed without notice and that could cause unexpected behaviour. 
+You may entirely prevent the row from being hidden but involves altering a private method. So if you do decide to go down this road, leave a comment in the project so you can test when updating to another version. Private methods can be changed without notice and that could cause unexpected behaviour.
 
 Here is the method, just place it before the grid/sortable is initialized and remove the move handler:
 
@@ -44,20 +46,20 @@ Here is the method, just place it before the grid/sortable is initialized and re
             handler = this.options.handler,
             _placeholder = this.options.placeholder,
             placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call   (this, draggedElement)) : $(_placeholder);
-    
+
         if(disabled && draggedElement.is(disabled)) {
             e.preventDefault();
         } else if(handler && !$(e.initialTarget).is(handler)) {
             e.preventDefault();
         } else {
-        
+
             if(this.trigger("start", { item: draggedElement, draggableEvent: e })) {
                 e.preventDefault();
             } else {
                 draggedElement.before(placeholder);
                 this._setCursor();
             }
-    
+
         }
     }
 ```

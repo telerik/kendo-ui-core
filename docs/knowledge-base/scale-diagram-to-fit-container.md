@@ -1,6 +1,6 @@
 ---
 title: Scale Diagram to Fit Container upon Resizing
-description: An example on how to scale Kendo UI Diagram to fit its container upon resizing
+description: Learn how to scale Kendo UI Diagram to fit its container upon resizing
 type: how-to
 page_title: Scale Diagram to Fit its Container upon Resizing - Kendo UI Diagram for jQuery
 slug: scale-diagram-to-fit-container-upon-resizing
@@ -14,7 +14,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Diagram</td>
+		<td>Progress® Kendo UI® Diagram for jQuery</td>
 	</tr>
 </table>
 

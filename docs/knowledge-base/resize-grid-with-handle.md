@@ -1,7 +1,7 @@
 ---
 title: Resize the Grid by Dragging and Apply the New Size
 page_title: Resize via Drag Handle | Kendo UI Grid for jQuery
-description: "An example on how to resize the widget via drag handle and apply the new size."
+description: "Learn how to resize the widget via drag handle and apply the new size."
 previous_url: /controls/data-management/grid/how-to/Layout/resize-grid-with-handle
 slug: howto_resize_by_dragging_and_apply_the_new_size_grid
 tags: resize, grid, via, drag, dragging, handle, apply, new, size
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

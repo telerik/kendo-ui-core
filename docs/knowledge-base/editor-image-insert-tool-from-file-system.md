@@ -15,7 +15,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
   <tr>
   <td>Product Version</td>

@@ -1,6 +1,6 @@
 ---
 title: Prevent Editing while Grid Is in Edit Mode
-description: An example on how to prevent editing while the Kendo UI Grid is in edit mode.
+description: Learn how to prevent editing while the Kendo UI Grid is in edit mode.
 type: how-to
 page_title: Prevent Adding New Records and Editing while in Edit Mode - Kendo UI Grid for jQuery
 slug: grid-prevent-editing-when-editing
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 

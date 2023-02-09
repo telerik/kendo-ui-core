@@ -1,6 +1,6 @@
 ---
 title: Show and Hide Detail Rows Based on Master Row Value
-description: An example on how to disable the detail Grid row based on the checkbox in the master row and how to persist expanded rows after the Grid is refreshed.
+description: Learn how to disable the detail Grid row based on the checkbox in the master row and how to persist expanded rows after the Grid is refreshed.
 type: how-to
 page_title: Disable Detail Rows With Checkboxes - Kendo UI Grid for jQuery
 slug: disable-detail-rows-with-checkboxes
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 504</td>
  </tr>
 </table>

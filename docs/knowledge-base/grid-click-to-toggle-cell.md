@@ -1,6 +1,6 @@
 ---
 title: Toggle Content of Cell on Click
-description: An example on how to toggle the contents of a Kendo UI Grid cell on click.
+description: Learn how to toggle the contents of a Kendo UI Grid cell on click.
 type: how-to
 page_title: Toggle Content of Cell on Click - Kendo UI Grid for jQuery
 slug: grid-click-to-toggle-cell
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

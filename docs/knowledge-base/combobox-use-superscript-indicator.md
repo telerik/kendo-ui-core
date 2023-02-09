@@ -1,6 +1,6 @@
 ---
-title: Use Subscript Indicators
-description: An example on how to use subscript indicators in the Kendo UI ComboBox.
+title: Use Subscript Indicators in the ComboBox
+description: Learn how to use subscript indicators in the Kendo UI ComboBox.
 type: how-to
 page_title: Use Subscript Indicators - Kendo UI ComboBox for jQuery
 slug: combobox-use-subscript-indicators
@@ -14,7 +14,7 @@ component: combobox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ComboBox</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td>
  </tr>
 </table>
 

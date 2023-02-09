@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ColorPicker for jQuery</td>
+  <td>Progress® Kendo UI® ColorPicker for jQuery</td>
  </tr>
 </table>
 

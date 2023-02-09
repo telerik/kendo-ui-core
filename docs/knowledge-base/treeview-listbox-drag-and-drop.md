@@ -1,6 +1,6 @@
 ---
 title: Drag and Drop Nodes from TreeView to ListBox
-description: An example on how to drag a node from the Kendo UI TreeView and drop it in the Kendo UI ListBox.
+description: Learn how to drag a node from the Kendo UI TreeView and drop it in the Kendo UI ListBox.
 type: how-to
 page_title: Drag Nodes from TreeView and Drop Them in ListBox - Kendo UI TreeView and ListBox for jQuery
 slug: treeview-listbox-drag-and-drop
@@ -14,8 +14,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI TreeView</td>
-  <td>Progress Kendo UI ListBox</td>
+  <td>Progress® Kendo UI® TreeView for jQuery</td>
+  <td>Progress® Kendo UI® ListBox for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

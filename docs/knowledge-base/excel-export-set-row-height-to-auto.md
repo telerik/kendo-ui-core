@@ -1,6 +1,6 @@
 ---
-title: Exporting to Excel - auto row height for wrapped cells
-description: An example on how to adjust the row height in Excel when the cells are wrapped
+title: Set an Automatic Row Height for Wrapped Cells When Exporting to Excel
+description: Learn how to adjust the row height in Excel when the cells are wrapped
 type: how-to
 page_title: Auto Row Height for Wrapped Cells - Excel Export - Kendo ooxml Workbook for jQuery
 slug: excel-export-set-row-height-to-auto
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Workbook for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Workbook for jQuery</td>
  </tr>
 </table>
 

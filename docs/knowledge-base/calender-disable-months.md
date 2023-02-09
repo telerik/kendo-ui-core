@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Calendar for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Calendar for jQuery</td>
 	</tr>
 </table>
 

@@ -14,7 +14,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Treeview for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® TreeView for jQuery</td>
 	</tr>
 </table>
 

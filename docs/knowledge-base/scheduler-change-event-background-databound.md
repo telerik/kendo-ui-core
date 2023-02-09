@@ -1,6 +1,6 @@
 ---
 title: Change background color of event in the databound of the Scheduler
-description: An example on how to change the color of the entire event of the Kendo UI Scheduler.
+description: Learn how to change the color of the entire event of the Kendo UI Scheduler.
 type: how-to
 page_title: Change event background - Kendo UI Scheduler for jQuery
 slug: scheduler-change-event-background-databound
@@ -15,7 +15,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -35,10 +35,10 @@ I want to change the color of the entire element of the Scheduler event.
 ## Solution
 
 1. Subscribe to the `dataBound` event of the Scheduler.
-1. In the dataBound event handler iterate over the rendered events and change the background of the needed events. 
+1. In the dataBound event handler iterate over the rendered events and change the background of the needed events.
 
 ```dojo
-<div id="scheduler"></div> 
+<div id="scheduler"></div>
 
 <script>
     $(function() {
@@ -54,7 +54,7 @@ I want to change the color of the entire element of the Scheduler event.
           var events = this.dataSource.view();
           var eventElement;
           var event;
-    
+
           for (var idx = 0, length = events.length; idx < length; idx++) {
             event = events[idx];
 	  		if(event.title === "The Help"){

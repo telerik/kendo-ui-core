@@ -1,10 +1,10 @@
 ---
-title: Handle Double-Clicking on Scheduler Events Conditionally Based On the View Name
-page_title: Handle Double-Clicking on Scheduler Events Conditionally Based On the View Name
+title: Handle Double-Clicking on Scheduler Events Conditionally Based on the View Name
+page_title: Handle Double-Clicking on Scheduler Events Conditionally Based on the View Name
 description: "Learn how to handle double-clicking on events conditionally based on the view name in a Kendo UI for jQuery Scheduler widget."
 previous_url: /controls/scheduling/scheduler/how-to/conditionally-handle-doubleclicking-on-events, /controls/scheduling/scheduler/how-to/editing/conditionally-handle-doubleclicking-on-events
 slug: howto_conditionally_handle_doubleclicking_events_scheduler
-tags: telerik, kendo, jquery, scheduler, handle, double, click, on, events, conditionally, based, on, the, view, name 
+tags: telerik, kendo, jquery, scheduler, handle, double, click, on, events, conditionally, based, on, the, view, name
 component: scheduler
 type: how-to
 res_type: kb
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler for jQuery</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

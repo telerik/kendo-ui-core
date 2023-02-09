@@ -1,6 +1,6 @@
 ---
 title: Add an icon in the DropDownList placeholder
-description: An example on how to Add an icon in the DropDownList placeholder.
+description: Learn how to Add an icon in the DropDownList placeholder.
 type: how-to
 page_title: Add an icon in the DropDownList placeholder - Kendo UI DropDownList for jQuery
 slug: dropdownlist-add-icon-placeholder
@@ -14,7 +14,7 @@ component: dropdownlist
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DropDownList</td>
+  <td>Progress® Kendo UI® DropDownList for jQuery</td>
  </tr>
 </table>
 

@@ -1,7 +1,7 @@
 ---
 title: Show Custom Editor Using the Selected Item outside the Grid
 page_title: Custom Editor Outside the Grid - Kendo UI Grid for jQuery
-description: "An example on how to show a custom editor, which uses the currently selected item, outside the Kendo UI Grid for jQuery."
+description: "Learn how to show a custom editor, which uses the currently selected item, outside the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/custom-editor-outside-the-grid
 slug: howto_use_show_custom_editor_selected_item_outside_grid
 tags: grid, custom, editor, selected, item, outside
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

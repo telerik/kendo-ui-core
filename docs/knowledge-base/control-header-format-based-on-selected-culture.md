@@ -1,6 +1,6 @@
 ---
 title: Control the Header Format of the Calendar
-page_title: Control the Header Format of the Calendar
+page_title: Manage the Header Format of the Calendar
 description: "Learn how to control the header format of the Kendo UI for jQuery Calendar widget."
 slug: howto_control_header_format_calendar
 previous_url: /controls/scheduling/calendar/how-to/control-header-format-based-on-selected-culture
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Calendar for jQuery</td>
+  <td>Progress® Kendo UI® Calendar for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

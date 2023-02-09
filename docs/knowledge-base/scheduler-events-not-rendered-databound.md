@@ -15,7 +15,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -27,7 +27,7 @@ component: scheduler
 
 The events of the Kendo UI for jQuery Scheduler are not rendered.
 
-## Cause 
+## Cause
 
 If the remote data request is successful and the Scheduler is data-bound, but no events are rendered, this indicates that the date format of the events is not correct, and the browser is unable to create JavaScript Date objects from the date strings. As a result, the events in the dataSource of the Scheduler have `null` values for their `start` and `end` properties, and the events are not rendered.
 

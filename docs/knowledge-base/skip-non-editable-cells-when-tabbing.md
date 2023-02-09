@@ -1,7 +1,7 @@
 ---
 title: Skip Non-Editable Cells When Tabbing
 page_title:  Skip Non|Editable Cells - Kendo UI Grid for jQuery
-description: "An example on how to skip non-editable cells when tabbing in the Kendo UI Grid for jQuery."
+description: "Learn how to skip non-editable cells when tabbing in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/skip-non-editable-cells-when-tabbing
 slug: howto_skip_noneditable_cells_when_tabbing_grid
 tags: skip, noneditable, grid, cells, when, tabbing
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

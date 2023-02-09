@@ -1,6 +1,6 @@
 ---
 title: Calculate and Set Major Unit for Value Chart Axis
-page_title: Calculate and Set Major Unit for Value Chart Axis
+page_title: Calculate and Set a Major Unit for the Value Axis of the Chart
 description: "Learn how to dynamically calculate and set the major unit for the value axis in a Kendo UI Chart."
 previous_url: /controls/charts/how-to/configure-major-lines-in-value-axis, /controls/charts/how-to/various/configure-major-lines-in-value-axis
 slug: howto_calculatemajorunit_charts
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Chart for jQuery</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

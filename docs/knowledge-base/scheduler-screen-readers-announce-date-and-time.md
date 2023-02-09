@@ -1,6 +1,6 @@
 ---
 title: Make Screen Readers Read Date and Time of Appointment Slots
-description: An example on how to configure the Kendo UI Scheduler so that the screen readers announce both the date and time of the selected slot.
+description: Learn how to configure the Kendo UI Scheduler so that the screen readers announce both the date and time of the selected slot.
 type: how-to
 page_title: Announce Dates and Times in Appointment Slot - Kendo UI Scheduler for jQuery
 slug: scheduler-screen-readers-announce-date-and-time
@@ -14,7 +14,7 @@ res_type: kb
 <table>
     <tr>
         <td>Product</td>
-        <td>Scheduler for Progress® Kendo UI®</td>
+        <td>Progress® Kendo UI® Scheduler for jQuery</td>
     </tr>
 </table>
 

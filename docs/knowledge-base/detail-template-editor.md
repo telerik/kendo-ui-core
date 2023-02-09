@@ -1,7 +1,7 @@
 ---
 title: Create Custom Editor in Detail Template
 page_title: Custom Detail Template Editor - Kendo UI Grid for jQuery
-description: "An example on how to create custom editor in the detail template of the Kendo UI Grid for jQuery."
+description: "Learn how to create custom editor in the detail template of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Templates/detail-template-editor
 slug: howto_create_custom_editorin_detail_template_grid
 tags: grid, create, custom, editor, detail, template
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

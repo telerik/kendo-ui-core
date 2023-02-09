@@ -1,7 +1,7 @@
 ---
-title: Change Options of Widgets Dynamically
-page_title: Change the Options of a Widget Programmatically 
-description: An example on how to change the options of the Kendo UI Grid dynamically.
+title: Change Options of Components Dynamically
+page_title: Change the Options of a Widget Programmatically
+description: Learn how to change the options of the Kendo UI for jQuery Grid dynamically.
 type: how-to
 slug: change-a-widget-options-dynamically
 previous_url: /knowledge-base/how-to-change-a-widget-options-dinamically
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery</td>
+  <td>Progress® Kendo UI® for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

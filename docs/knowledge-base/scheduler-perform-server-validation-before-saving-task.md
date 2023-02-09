@@ -1,6 +1,6 @@
 ---
 title: Retrieve Information on the Server before Saving Events
-description: An example on how to perform server validation before saving a new or edited Kendo UI Scheduler task or event.
+description: Learn how to perform server validation before saving a new or edited Kendo UI Scheduler task or event.
 type: how-to
 page_title: Perform Server Validation before Saving New or Edited Tasks - Kendo UI Scheduler for jQuery
 slug: scheduler-perform-server-validation-before-saving-task
@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

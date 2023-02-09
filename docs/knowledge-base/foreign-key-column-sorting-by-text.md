@@ -1,7 +1,7 @@
 ---
 title: Enable ForeignKey Column Sorting by Text
 page_title: ForeignKey Column Sorting by Text - Kendo UI Grid for jQuery
-description: "An example on how to enable ForeignKey column sorting by text in the Kendo UI Grid for jQuery."
+description: "Learn how to enable ForeignKey column sorting by text in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/foreign-key-column-sorting-by-text, /controls/data-management/grid/how-to/various/foreign-key-column-sorting-by-text
 slug: howto_enable_foreignkey_sotringby_text_grid
 tags: grid, enable, freignkey, column, sort, text
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,7 +1,7 @@
 ---
 title: Create Stock Chart Navigator in Categorical Charts
 page_title: Create Stock Chart Navigator in Categorical Charts - Kendo UI Chart for jQuery
-description: "An example on how to create stock chart navigator in categorical charts in the Kendo UI Chart for jQuery."
+description: "Learn how to create stock chart navigator in categorical charts in the Kendo UI Chart for jQuery."
 slug: howto_stock_navigator_categorical_charts
 tags: chart, navigator, stock, categorical, linechart
 component: chart
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -187,7 +187,7 @@ The following example demonstrates how to implement a stock navigator with the c
           });
         }
 
-        function onSelectEnd(e) { 
+        function onSelectEnd(e) {
          setTimeout(function(){ // ensure that the selection has finished before rendering the seconary chart
             formatRange(e)
           });

@@ -1,7 +1,7 @@
 ---
 title: Filter by Date Only
 page_title: Filter by Date - Kendo UI Grid for jQuery
-description: "An example on how to filter date columns in the Kendo UI Grid for jQuery."
+description: "Learn how to filter date columns in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/filter-by-date, /controls/data-management/grid/how-to/filtering/filter-by-date
 slug: howto_filter_date_columns_grid
 tags: grid, filter, date, columns
@@ -16,7 +16,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

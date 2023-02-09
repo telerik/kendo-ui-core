@@ -1,6 +1,6 @@
 ---
 title: Add Keyup Event to TextBox
-description: An example on how extend the existing functionality of the TextBox and add a keyup event.
+description: Learn how extend the existing functionality of the TextBox and add a keyup event.
 type: how-to
 page_title: Add Keyup event to textBox - Kendo UI TextBox for jQuery
 slug: textbox-keyup-event
@@ -13,10 +13,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI TextBox</td>
+  <td>Progress® Kendo UI® TextBox for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2022.1.119 version</td>
  </tr>
 </table>

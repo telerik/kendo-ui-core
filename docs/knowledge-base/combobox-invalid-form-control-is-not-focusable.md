@@ -13,7 +13,9 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>ComboBox for Kendo UI for jQuery, ComboBox for ASP.NET Core, ComboBox for ASP.NET MVC</td>
+		<td>Progress® Kendo UI® ComboBox for jQuery</td>
+		<td>Progress® Telerik® UI ComboBox for ASP.NET Core</td>
+		<td>Progress® Telerik® UI ComboBox for ASP.NET MVC</td>
 	</tr>
 	<tr>
 		<td>Browser</td>

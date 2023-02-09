@@ -1,6 +1,6 @@
 ---
 title: Add Overlay Text in ImageEditor On Top of an Image
-description: An example on how to add overlay text in ImageEditor on top of an image.
+description: Learn how to add overlay text in ImageEditor on top of an image.
 type: how-to
 page_title: Create a Custom Command to Add Overlay Text in ImageEditor On Top of an Image - Kendo UI ImageEditor for jQuery
 slug: imageeditor-add-overlay-text
@@ -14,7 +14,7 @@ component: imageeditor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ImageEditor</td>
+  <td>Progress® Kendo UI® ImageEditor for jQuery</td>
  </tr>
 </table>
  
@@ -25,8 +25,8 @@ How can I add overlay text over an image in ImageEditor?
 
 ## Solution
 
-Adding an overlay text over image could be achieved by utilizing [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) through the [ImageEditor's methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor#methods). 
-By getting the Image's [canvas](/api/javascript/ui/imageeditor/methods/getcanvaselement) element and [context](/api/javascript/ui/imageeditor/methods/getcurrent2dcontext) object, the developer can customize the content placed on the image. 
+Adding an overlay text over image could be achieved by utilizing [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) through the [ImageEditor's methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor#methods).
+By getting the Image's [canvas](/api/javascript/ui/imageeditor/methods/getcanvaselement) element and [context](/api/javascript/ui/imageeditor/methods/getcurrent2dcontext) object, the developer can customize the content placed on the image.
 
 
 ### DatePicker
@@ -70,15 +70,15 @@ The following example demonstrates how a [custom command](https://docs.telerik.c
 
                 //clear the contents
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-			    
+
                 //Draws the image to te canvas
                 ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-			    
+
                 //Custom text is configured
                 ctx.fillStyle = "#ffffff";
                 ctx.font = "100pt Calibri";
                 ctx.fillText('My Custom Text', canvas.width/2, canvas.height/2);
-			    
+
                 //Draws the image instance
                 imageeditor.drawImage(canvas.toDataURL()).done(function(image){
 

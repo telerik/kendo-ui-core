@@ -15,7 +15,7 @@ component: numeric-textbox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI NumericTextBox</td>
+  <td>Progress® Kendo UI® NumericTextBox for jQuery</td>
  </tr>
 </table>
 

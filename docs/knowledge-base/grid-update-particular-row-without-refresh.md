@@ -1,6 +1,6 @@
 ---
 title: Refresh Particular Rows without Rendering the Entire Grid
-description: An example on how to render the content of a particular Kendo UI Grid row when manually changing its values and without refreshing the entire Grid.
+description: Learn how to render the content of a particular Kendo UI Grid row when manually changing its values and without refreshing the entire Grid.
 type: how-to
 page_title: Refresh the Content of a Row Only - Kendo UI Grid for jQuery
 slug: grid-update-particular-row-without-refresh
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>

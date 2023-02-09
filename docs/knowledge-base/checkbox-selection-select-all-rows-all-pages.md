@@ -1,6 +1,6 @@
 ---
 title: Select All Rows on All Grid Pages
-description: An example on how to select all the rows on all the pages of the Kendo UI Grid.
+description: Learn how to select all the rows on all the pages of the Kendo UI Grid.
 type: how-to
 page_title: Select All Rows on All Pages with a Master Checkbox - Kendo UI Grid for jQuery
 slug: checkbox-selection-select-all-rows-all-pages
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>

@@ -1,6 +1,6 @@
 ---
 title: Add a Control to the Toolbar of the Scheduler
-description: An example on how to add a DropDownList or other control to the toolbar of the Kendo UI Scheduler.
+description: Learn how to add a DropDownList or other control to the toolbar of the Kendo UI Scheduler.
 type: how-to
 page_title: Add a Control to the Toolbar - Kendo UI Scheduler for jQuery
 slug: scheduler-add-control-to-toolbar
@@ -15,7 +15,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

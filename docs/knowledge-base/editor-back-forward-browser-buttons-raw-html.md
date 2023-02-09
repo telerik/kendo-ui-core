@@ -1,5 +1,5 @@
 ---
-title: Back and Forward Browser Buttons Display Raw HTML in the Editor 
+title: Back and Forward Browser Buttons Display Raw HTML in the Editor
 page_title: Back and Forward Browser Buttons Display Raw HTML in the Editor
 description: "Learn how to handle the Kendo UI for jQuery Editor when the Back and Forward browser button render raw HTML."
 slug: editor_back_forward_buttons_raw_html
@@ -14,7 +14,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -26,7 +26,7 @@ component: editor
 
 The **Back** and **Forward** browser buttons display raw HTML in the jQuery Editor.
 
-## Cause 
+## Cause
 
 By default, the Editor stores its value encoded. When the page is retrieved from the `bfcache` (back-forward cache), the `textarea` value is persisted as encoded and the Editor encodes it again. This process can be easily observed if you navigate several times back and forth. On each navigation, the Editor value is encoded once more.
 

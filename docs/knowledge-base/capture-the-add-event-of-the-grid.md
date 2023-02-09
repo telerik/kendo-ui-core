@@ -1,7 +1,7 @@
 ---
 title: Capture the Event for Adding New Rows
 page_title: Capture the add Event - Kendo UI Grid for jQuery
-description: An example on how to capture the add event of the Kendo UI Grid.
+description: Learn how to capture the add event of the Kendo UI Grid.
 type: how-to
 slug: how-to-capture-the-add-event-of-the-grid
 previous_url: /knowledge-base/how-to-capture-the-add-event-of-the-grid
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -31,7 +31,7 @@ component: grid
   <td>56</td>
  </tr>
   <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2020.3.1021</td>
  </tr>
 </table>

@@ -1,6 +1,6 @@
 ---
 title: Integrate an ImageEditor in the Editor Component
-description: "An example on how to use the ImageEditor to edit images in the Kendo UI for jQuery Editor."
+description: "Learn how to use the ImageEditor to edit images in the Kendo UI for jQuery Editor."
 type: how-to
 page_title: Integrate an ImageEditor to Edit Images in the Editor
 slug: editor-imageeditor-intergration
@@ -15,7 +15,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Set Form field programmatically
-description: An example on how to set a Form field programmatically.
+description: Learn how to set a Form field programmatically.
 type: how-to
 page_title: Set Form field programmatically
 slug: form-set-field-programmatically
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Form</td>
+  <td>Progress® Kendo UI® Form for jQuery</td>
  </tr>
 </table>
 
@@ -121,7 +121,7 @@ Get a reference to the Form instance and set the value of the required model fie
           function onDdlChange(e){
             var form = $("#exampleForm").getKendoForm();
             var dataItem = e.sender.dataItem();
-            
+
             form.editable.options.model.set("City", dataItem.ShipCity);
             form.editable.options.model.set("AddressLine", dataItem.ShipAddress);
           };

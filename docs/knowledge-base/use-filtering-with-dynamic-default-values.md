@@ -1,7 +1,7 @@
 ---
 title: Use Grid Filtering with Dynamic Default Values
 page_title: Filter with Dynamic Default Values - Kendo UI Grid for jQuery
-description: "An example on how to use dynamic default field values in the jQuery Grid by Kendo UI when you apply its filtering functionality."
+description: "Learn how to use dynamic default field values in the jQuery Grid by Kendo UI when you apply its filtering functionality."
 previous_url: /controls/data-management/grid/how-to/use-filtering-with-dynamic-default-values, /controls/data-management/grid/how-to/filtering/use-filtering-with-dynamic-default-values
 slug: howto_gridfiltering_dynamicdefaultvalues_grid
 tags: use, grid, filtering, dynamic, default, values
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

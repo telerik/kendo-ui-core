@@ -15,8 +15,8 @@ component: multiselect
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery MultiSelect</td>
-  <td>Progress® Kendo UI® for jQuery DataSource</td>
+  <td>Progress® Kendo UI® MultiSelect for jQuery</td>
+  <td>Progress® Kendo UI® DataSource for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -28,11 +28,11 @@ component: multiselect
 
 The selected item in the jQuery MultiSelect gets lost when bound to a shared data source.
 
-## Cause 
+## Cause
 
 This behavior is expected. The selected item of the component is directly related to the data source view and if it does not contain the selected item, then the widget removes its current value.
 
-## Solution 
+## Solution
 
 To handle this issue, use separate data sources. The following example demonstrates a sample issue.
 

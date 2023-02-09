@@ -1,6 +1,6 @@
 ---
 title: Attach click Event Handler for Custom Commands in AngularJS Grid
-description: An example on how to attach a click event handler for a custom command in an AngularJS Grid.
+description: Learn how to attach a click event handler for a custom command in an AngularJS Grid.
 type: how-to
 page_title: Attach a Handler for the Command click Event in AngularJS - Kendo UI Grid for jQuery
 slug: grid-angular-click-handler-for-command
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>

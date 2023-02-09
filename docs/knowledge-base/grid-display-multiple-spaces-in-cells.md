@@ -1,6 +1,6 @@
 ---
 title: Show Multiple Spaces in Grid Cells
-description: An example on how to have multiple spaces in the cells of the Kendo UI Grid.
+description: Learn how to have multiple spaces in the cells of the Kendo UI Grid.
 type: how-to
 page_title: Display Whitespaces in Cells - Kendo UI Grid for jQuery
 slug: grid-display-multiple-spaces-in-cells
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2017.3.1026</td>
  </tr>
 </table>

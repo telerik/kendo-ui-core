@@ -1,7 +1,7 @@
 ---
 title: Use Nested Chart
 page_title: Use Nested Chart - Kendo UI Grid and Chart for jQuery
-description: "An example on how to nest a chart inside the Kendo UI Grid for jQuery template."
+description: "Learn how to nest a chart inside the Kendo UI Grid for jQuery template."
 previous_url: /controls/data-management/grid/how-to/use-nested-chart, /controls/data-management/grid/how-to/integration/use-nested-chart, /controls/charts/how-to/use-nested-chart-ingrid, /controls/charts/how-to/integration/use-nested-chart-ingrid
 slug: howto_use_nested_charts_grid
 tags: use, nested, chart, grid, template
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

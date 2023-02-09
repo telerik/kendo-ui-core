@@ -1,7 +1,7 @@
 ---
 title: Change Group Header Position When Columns Are Locked
-page_title: Header Position of Locked Columns - Kendo UI Grid for jQuery
-description: "An example on how to change the position of the group header when locked columns are used in the Kendo UI Grid."
+page_title: Change the Header Position of Locked Columns - Kendo UI Grid for jQuery
+description: "Learn how to change the position of the group header when locked columns are used in the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Layout/change-group-header-position-when-locked-columns-are-used
 slug: howto_change_group_header_position_wthlocked_columns_grid
 tags: grid, change, group, header, position, locked, frozen, columns
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,7 +1,7 @@
 ---
 title: Increase the Stroke Size in the Chart Legend
 page_title: Change the Legend Stroke Size - Kendo UI Chart for jQuery
-description: An example on how to change the size of the legend stroke in the Kendo UI Chart.
+description: Learn how to change the size of the legend stroke in the Kendo UI Chart.
 type: how-to
 slug: chart-legend-stroke-size
 tags: chart, legend, stroke, size
@@ -15,10 +15,10 @@ res_type: kb
  <tr>
   <td>Product</td>
   <td> Kendo UI®</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2017.3.1026 version</td>
  </tr>
 </table>

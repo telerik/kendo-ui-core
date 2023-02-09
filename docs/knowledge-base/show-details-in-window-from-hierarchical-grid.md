@@ -1,6 +1,6 @@
 ---
 title: Display Details of Hierarchical Grid in Window
-description: An example on how to use a window to display details of a hierarchical Grid.
+description: Learn how to use a window to display details of a hierarchical Grid.
 type: how-to
 page_title: Show Details of Hierarchical Grids in a Window - Kendo UI Grid for jQuery
 slug: show-details-in-window-from-hierarchical-grid
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

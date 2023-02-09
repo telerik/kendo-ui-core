@@ -1,6 +1,6 @@
 ---
 title: Copy Columns from Excel and Paste Them on Selected Grid Columns
-description: An example on how to paste columns from Excel to the selected columns of the Kendo UI Grid.
+description: Learn how to paste columns from Excel to the selected columns of the Kendo UI Grid.
 type: how-to
 page_title: Paste Columns from Excel to Selected Columns - Kendo UI Grid for jQuery
 slug: grid-copy-columns-from-excel-paste-on-selected-columns
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 

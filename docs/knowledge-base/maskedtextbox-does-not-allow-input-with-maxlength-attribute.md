@@ -15,7 +15,7 @@ component: maskedtextbox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI MaskedTextBox</td>
+  <td>Progress® Kendo UI® MaskedTextBox for jQuery</td>
  </tr>
  <tr>
   <td>Kendo Version</td>

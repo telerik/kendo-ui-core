@@ -1,6 +1,6 @@
 ---
 title: Persist the Selection in the ComboBox
-description: An example on how to persist the selected item in a Kendo UI ComboBox.
+description: Learn how to persist the selected item in a Kendo UI ComboBox.
 type: how-to
 page_title: Persist the ComboBox Selection - Kendo UI ComboBox for jQuery
 slug: persist-combobox-selection
@@ -15,7 +15,7 @@ component: combobox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ComboBox</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

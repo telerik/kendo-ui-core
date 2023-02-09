@@ -1,6 +1,6 @@
 ---
 title: Cascading DropDownLists by Using Transport Binding with AngularJS and WebAPI
-description: An example on how to implement cascading DropDownLists with transport binding with WebAPI with AngularJS.
+description: Learn how to implement cascading DropDownLists with transport binding with WebAPI with AngularJS.
 type: how-to
 page_title: Implement Cascading DropDownLists with AngularJS by Using Transport Binding and WebAPI - Kendo DropDownList for jQuery
 slug: dropdownlist-cascading-angularjs-webapi
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DropDownList</td>
+  <td>Progress® Kendo UI® DropDownList for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

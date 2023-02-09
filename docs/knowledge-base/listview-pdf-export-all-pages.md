@@ -1,6 +1,6 @@
 ---
 title: Export All ListView Pages to PDF
-description: An example on how to export all pages of a Kendo UI ListView to a PDF file.
+description: Learn how to export all pages of a Kendo UI ListView to a PDF file.
 type: how-to
 page_title: Export All Pages to PDF - Kendo UI ListView for jQuery
 slug: listview-pdf-export-all-pages
@@ -14,10 +14,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListView</td>
+  <td>Progress® Kendo UI® ListView for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2017.3.1026 version</td>
  </tr>
 </table>

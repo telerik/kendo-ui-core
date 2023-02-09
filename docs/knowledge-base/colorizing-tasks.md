@@ -1,6 +1,6 @@
 ---
 title: Colorize Gantt Tasks
-page_title: Colorize Gantt Tasks
+page_title: Add Color to the Gantt Tasks
 description: "Learn how to colorize tasks in the Kendo UI for jQuery Gantt widget."
 slug: howto_colorize_tasks_gantt
 previous_url: /controls/scheduling/gantt/how-to/colorizing-tasks
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Gantt for jQuery</td>
+  <td>Progress® Kendo UI® Gantt for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

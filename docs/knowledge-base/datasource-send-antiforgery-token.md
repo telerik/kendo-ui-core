@@ -15,7 +15,7 @@ component: data-source
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DataSource</td>
+  <td>Progress® Kendo UI® DataSource for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

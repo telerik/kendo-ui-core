@@ -15,7 +15,7 @@ component: charts
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,6 +1,6 @@
 ---
 title: Start Typing in Unordered List in Editor
-description: An example on how to start typing in a Kendo UI Editor and automatically create <ul> and <li> elements.
+description: Learn how to start typing in a Kendo UI Editor and automatically create <ul> and <li> elements.
 type: how-to
 page_title: Set the Editor Value to Start as a Bullet List - Kendo UI Editor for jQuery
 slug: editor-start-typing-in-unordered-list
@@ -15,7 +15,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
 </table>
 

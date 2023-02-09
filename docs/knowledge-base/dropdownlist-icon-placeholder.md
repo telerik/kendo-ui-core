@@ -1,6 +1,6 @@
 ---
 title: Place Icon in DropDownList Placeholder
-description: An example on how to place an icon in the placeholder of the Kendo UI DropDownList.
+description: Learn how to place an icon in the placeholder of the Kendo UI DropDownList.
 type: how-to
 page_title: Place Icon in the Placeholder - Kendo UI DropDownList for jQuery
 slug: dropdownlist-icon-placeholder
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>DropDownList for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® DropDownList for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

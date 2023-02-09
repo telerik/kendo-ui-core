@@ -1,6 +1,6 @@
 ---
 title: Use Different Editors Based on the Column Values of the Grid
-description: An example on how to use a different editor based on the value of a column in a Kendo UI Grid.
+description: Learn how to use a different editor based on the value of a column in a Kendo UI Grid.
 type: how-to
 page_title: Use Different Editor Based on the Column Value - Kendo UI Grid for jQuery
 slug: grid-different-editor-based-on-column-value
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2018.1.221</td>
  </tr>
 </table>

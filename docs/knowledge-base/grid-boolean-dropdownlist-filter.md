@@ -1,6 +1,6 @@
 ---
 title: Use DropDownList as Boolean Filter in Grid
-description: An example on how to use a DropDownList to filter a Boolean column.
+description: Learn how to use a DropDownList to filter a Boolean column.
 type: how-to
 page_title: Filter Boolean Grid Column with DropDownList - Kendo UI Grid for jQuery
 slug: grid-boolean-dropdownlist-filter
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 

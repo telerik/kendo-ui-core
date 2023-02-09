@@ -1,7 +1,7 @@
 ---
 title: Style Grid Table Rows and Cells Based on Values
 page_title: Style Grid Table Rows and Cells by Data Item Values
-description: "An example on how to customize the tables cells and rows styles of the Kendo UI Grid for jQuery based on data items values."
+description: "Learn how to customize the tables cells and rows styles of the Kendo UI Grid for jQuery based on data items values."
 previous_url: /controls/data-management/grid/how-to/style-rows-cells-based-on-data-item-values, /controls/data-management/grid/how-to/style-rows-cells-based-on-data-item-values, /asp-mvc/controls/data-management/grid/how-to/style-rows-cells-based-on-data-item-values, /controls/data-management/grid/how-to/Layout/style-rows-cells-based-on-data-item-values
 slug: howto_customize_rowsand_cells_basedon_dataitem_values_grid
 tags: customize, grid, rows, cells, basedon, data, item, value
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

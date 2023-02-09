@@ -1,7 +1,7 @@
 ---
-title: Kendo Calendar with Timezone
-page_title: Timezone Calendar  - Kendo UI Calendar for jQuery
-description: An example on how to create a calendar that shows the current day in a selected timezone with the Kendo UI Calendar widget.
+title: Create a Calendar with a Timezone
+page_title: Implement a Timezone Calendar - Kendo UI Calendar for jQuery
+description: Learn how to create a calendar that shows the current day in a selected timezone with the Kendo UI Calendar component.
 type: how-to
 slug: calendar-with-timezone
 tags: kendo, ui, calendar, timezone, time, zone, current, today
@@ -15,10 +15,10 @@ component: calendar
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Calendar</td>
+  <td>Progress® Kendo UI® Calendar for jQuery</td>
  </tr>
  <tr>
-  <td>Created with Kendo UI version</td>
+  <td>Product Version</td>
   <td>2020.1.406</td>
  </tr>
 </table>
@@ -68,7 +68,7 @@ To implement a timezone we need to take care of the following:
           footer: kendo.template($("#footer-template").html()),
           navigate: addTodayStyle
         }).data("kendoCalendar");
-      
+
         function addTodayStyle(e){
             var todayString = e.sender._view.toDateString(converted);
             e.sender.element.find(".k-today").removeClass("k-today");

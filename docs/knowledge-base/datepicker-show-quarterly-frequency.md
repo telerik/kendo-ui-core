@@ -1,6 +1,6 @@
 ---
 title: Show Quarterly Frequency
-description: An example on how to show a quarterly frequency in the Kendo UI DatePicker.
+description: Learn how to show a quarterly frequency in the Kendo UI DatePicker.
 type: how-to
 page_title: Display Quarterly Frequency - Kendo UI DatePicker for jQuery
 slug: datepicker-show-quarterly-frequency
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>DatePicker for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® DatePicker for jQuery</td>
 	</tr>
 </table>
 

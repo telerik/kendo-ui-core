@@ -1,6 +1,6 @@
 ---
 title: Set Image to Custom Tool in Editor
-description: An example on how to set an image to a custom tool that is added to the Kendo UI Editor.
+description: Learn how to set an image to a custom tool that is added to the Kendo UI Editor.
 type: how-to
 page_title: Set Background Image to Custom Tool - Kendo UI Editor for jQuery
 slug: editor-custom-tool-image
@@ -15,7 +15,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

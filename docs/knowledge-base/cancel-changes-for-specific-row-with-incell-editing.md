@@ -1,7 +1,7 @@
 ---
-title: Cancel Changes Per Row by Using the Incell Editing Mode of the Grid
+title: Cancel Changes per Row by Using the Incell Editing Mode of the Grid
 page_title: Cancel Changes for Specific Row in Incell Editing Mode - Kendo UI Grid for jQuery
-description: An example on how to cancel the changes for a specific Kendo UI Grid row when the Grid is in the incell editing mode.
+description: Learn how to cancel the changes for a specific Kendo UI Grid row when the Grid is in the incell editing mode.
 type: how-to
 slug: cancel-changes-for-specific-row-with-incell-editing
 tags: grid, editing
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -30,7 +30,7 @@ component: grid
   <td>58.0.3029.110</td>
  </tr>
   <tr>
-  <td>Made With Version</td>
+  <td>Product Version</td>
   <td>2020.3.1021</td>
  </tr>
 </table>

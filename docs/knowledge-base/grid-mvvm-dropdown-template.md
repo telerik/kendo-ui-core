@@ -1,6 +1,6 @@
 ---
 title: Use DropDownLists in the Column Template of MVVM Grids
-description: An example on how to use a Kendo UI DropDownList widget in the column template of an MVVM Kendo UI Grid.
+description: Learn how to use a Kendo UI DropDownList widget in the column template of an MVVM Kendo UI Grid.
 type: how-to
 page_title: Use DropDownList Widgets in the Column Templates of MVVM Grids - Kendo UI Grid for jQuery
 slug: grid-mvvm-dropdown-template
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2018.1.221</td>
  </tr>
 </table>

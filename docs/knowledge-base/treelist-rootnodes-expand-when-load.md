@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>TreeList for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® TreeList for jQuery</td>
 		</tr>
 	</tbody>
 </table>

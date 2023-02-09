@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Wizard for jQuery</td>
+  <td>Progress® Kendo UI® Wizard for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>

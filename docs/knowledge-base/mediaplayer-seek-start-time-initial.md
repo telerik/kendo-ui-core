@@ -1,6 +1,6 @@
 ---
 title: Start at a Specific Place on the Seek-Bar
-description: An example on how to configure the initial starting point of a video when working with the Kendo UI MediaPlayer.
+description: Learn how to configure the initial starting point of a video when working with the Kendo UI MediaPlayer.
 type: how-to
 page_title: Set the Initial Start Time - Kendo UI MediaPlayer for jQuery
 slug: mediaplayer-seek-start-time-initial
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>MediaPlayer for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® MediaPlayer for jQuery</td>
  </tr>
 
   <td>Product Version</td>

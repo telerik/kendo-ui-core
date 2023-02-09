@@ -4,9 +4,9 @@ description: How to Achieve Tab Navigation for Filter Menu Date Pickers
 type: how-to
 page_title: How to Achieve Tab Navigation for Filter Menu Date Pickers - Kendo UI Grid for jQuery
 slug: grid-tab-navigation-for-pickers
-position: 
-tags: 
-ticketid: 
+position:
+tags:
+ticketid:
 res_type: kb
 ---
 
@@ -15,7 +15,8 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>Grid, DatePicker for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® DatePicker for jQuery</td>
+			<td>Progress® Kendo UI® Grid for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -28,7 +29,7 @@ This sample demonstrates how to achieve keyboard navigation with Tab press for D
 ## Solution
 
 ```dojo
-  
+
     <div id="example">
       <div id="grid"></div>
       <script>
@@ -58,7 +59,7 @@ This sample demonstrates how to achieve keyboard navigation with Tab press for D
             filterMenuInit: gridFilterInit,
             filterable: true,
             pageable: true,
-            columns: 
+            columns:
             [{
               field: "OrderID",
               width: 225,
@@ -109,4 +110,4 @@ This sample demonstrates how to achieve keyboard navigation with Tab press for D
       </script>
     </div>
 
-``` 
+```

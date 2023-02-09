@@ -1,6 +1,6 @@
 ---
 title: Filter Menu Items in AngularJS
-description: An example on how to filter the items of the Kendo UI Menu widget.
+description: Learn how to filter the items of the Kendo UI Menu widget.
 type: how-to
 page_title: Filter Menu Items in AngularJS - Kendo UI Menu for jQuery
 slug: menu-angularjs-filter-items
@@ -14,10 +14,10 @@ component: menu
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI Menu</td>
+  <td>Progress® Kendo UI® Menu for jQuery</td>
  </tr>
  <tr>
-  <td>Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2019.1.220 version</td>
  </tr>
 </table>

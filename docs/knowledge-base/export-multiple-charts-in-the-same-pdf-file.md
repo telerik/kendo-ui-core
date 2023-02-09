@@ -1,6 +1,6 @@
 ---
 title: Export Multiple Charts in the Same PDF File
-description: "An example on how to export multiple Kendo UI Charts in the same PDF file."
+description: "Learn how to export multiple Kendo UI Charts in the same PDF file."
 type: how-to
 page_title: Export Multiple Charts in the Same PDF File - Kendo UI Grid for jQuery
 slug: export-multiple-charts-in-the-same-pdf-file
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Preferred Language</td>

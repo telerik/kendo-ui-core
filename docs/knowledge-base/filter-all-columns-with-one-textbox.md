@@ -1,6 +1,6 @@
 ---
 title: Filter All Grid Columns with Single Textbox
-description: An example on how to filter all columns with a single textbox in the Kendo UI Grid.
+description: Learn how to filter all columns with a single textbox in the Kendo UI Grid.
 type: how-to
 page_title: Filter All Columns with Single Textbox - Kendo UI Grid for jQuery
 slug: filter-all-columns-with-one-textbox
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2017.3.1026</td>
  </tr>
 </table>

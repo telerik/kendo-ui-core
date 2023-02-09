@@ -1,5 +1,5 @@
 ---
-title: Chrome Browser Causes Auto-Fill Popup Issues in the AutoComplete 
+title: Chrome Browser Causes Auto-Fill Popup Issues in the AutoComplete
 page_title: Chrome Browser Performs Auto-Fill Popup Issues in the AutoComplete
 description: "Learn how to handle the Kendo UI for jQuery AutoComplete component when the Chrome browser performs auto-fill popup issues."
 previous_url: /controls/editors/autocomplete/troubleshooting
@@ -15,7 +15,7 @@ component: autocomplete
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery AutoComplete</td>
+  <td>Progress® Kendo UI® AutoComplete for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -25,15 +25,15 @@ component: autocomplete
 
 ## Description 
 
-The Chrome browser performs auto-fill popup issues in the AutoComplete component. 
+The Chrome browser performs auto-fill popup issues in the AutoComplete component.
 
-## Cause 
+## Cause
 
 If the input name matches any of the predefined autofill fields, the Chrome browser ignores the `autocomplete="off"` setting and also the value that is set to the attribute.
 
 ## Solution
 
-To handle this issue: 
+To handle this issue:
 
 1. Use a `name` attribute that is not contained in the predefined auto-fill fields of Chrome.
 1. Toggle the `name` attribute on `focus` and `focusout`.
@@ -63,7 +63,7 @@ To handle this issue:
             name = this.name;
             this.name = kendo.guid().substr(0, 8);
         });
-        
+
         CityAutoComplete.element.on("focusout", function () {
             this.name = name;
         });

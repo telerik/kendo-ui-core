@@ -1,7 +1,7 @@
 ---
 title: Show Switch label messages with Bootstrap 4 theme
 page_title: Label Messages in Bootstrap 4 - Kendo UI Switch for jQuery
-description: "An example on how to display the defined messages in the Boostrap v4 theme in the Kendo UI Switch."
+description: "Learn how to display the defined messages in the Boostrap v4 theme in the Kendo UI Switch."
 slug: switch-label-messages-bootstrap-v4
 tags: switch, label, messages, bootstrap, 4, v4, show, display, use, visible
 component: switch
@@ -15,10 +15,10 @@ ticketid: 1455921
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Switch</td>
+  <td>Progress® Kendo UI® Switch for jQuery</td>
  </tr>
  <tr>
-   <td>Created with Kendo UI version</td>
+   <td>Product Version</td>
    <td>Tested up to version {{ site.cdnVersion }}</td>
   </tr>
 </table>

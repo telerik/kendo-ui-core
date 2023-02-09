@@ -1,6 +1,6 @@
 ---
 title: Manually Export All Sheets in a Single PDF
-description: An example on how to manually export all Kendo UI Spreadsheet sheets in a single PDF.
+description: Learn how to manually export all Kendo UI Spreadsheet sheets in a single PDF.
 type: how-to
 page_title: Save Sheets on Separate Pages in the same PDF - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-manually-export-all-sheets-in-a-pdf
@@ -15,8 +15,8 @@ component: spreadsheet
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
-  <td>Progress Kendo UI PDF Export</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
+  <td>Progress® Kendo UI® PDF Export for jQuery</td>
  </tr>
 </table>
 

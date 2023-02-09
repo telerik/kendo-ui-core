@@ -1,6 +1,6 @@
 ---
 title: Highlight Clicked Line Chart Segments
-description: An example on how to highlight the clicked line segment in the Kendo UI Line Chart.
+description: Learn how to highlight the clicked line segment in the Kendo UI Line Chart.
 type: how-to
 page_title: Highlight Line on Click - Kendo UI Chart for jQuery
 slug: chart-line-highlight-clicked-segment
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Chart for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 

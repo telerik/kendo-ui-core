@@ -1,6 +1,6 @@
 ---
 title: Dynamically Filter Resource Groups by Using MultiSelect in Scheduler
-description: An example on how to filter the groups of the resources in the Kendo UI Scheduler.
+description: Learn how to filter the groups of the resources in the Kendo UI Scheduler.
 type: how-to
 page_title: Implement Resource Group Filtering by Using MultiSelect - Kendo UI Scheduler for jQuery
 slug: scheduler-filter-groups-resources-multiselect
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

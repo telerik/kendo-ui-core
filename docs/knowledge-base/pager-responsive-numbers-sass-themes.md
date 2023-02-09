@@ -1,6 +1,6 @@
 ---
 title: Make Page Number Responsive for SASS Themes
-description: An example on how to make the page numbers in SASS themes responsive.
+description: Learn how to make the page numbers in SASS themes responsive.
 type: how-to
 page_title: Responsive Pager for SASS Themes - Kendo UI Pager for jQuery
 slug: pager-responsive-numbers-sass-themes
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Pager</td>
+  <td>Progress® Kendo UI® Pager for jQuery</td>
  </tr>
 </table>
 

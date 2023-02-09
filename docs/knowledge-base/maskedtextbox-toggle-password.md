@@ -1,6 +1,6 @@
 ---
 title: Show and Hide Passwords in MaskedTextBox
-description: An example on how to show and hide the input of a Kendo UI MaskedTextBox widget.
+description: Learn how to show and hide the input of a Kendo UI MaskedTextBox widget.
 type: how-to
 page_title: Show and Hide a Password - Kendo UI MaskedTextBox for jQuery
 slug: maskedtextbox-toggle-password
@@ -14,10 +14,10 @@ component: maskedtextbox
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI MaskedTextBox</td>
+  <td>Progress® Kendo UI® MaskedTextBox for jQuery</td>
  </tr>
  <tr>
-  <td>Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2018.3.1017 version</td>
  </tr>
 </table>

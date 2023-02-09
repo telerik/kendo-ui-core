@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>TextArea for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® TextArea for jQuery</td>
 	</tr>
 </table>
 

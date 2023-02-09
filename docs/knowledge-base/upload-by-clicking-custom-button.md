@@ -1,6 +1,6 @@
 ---
 title: Upload Files by Clicking Custom Buttons
-description: An example on how to trigger the upload with Kendo UI Upload by clicking a custom button.
+description: Learn how to trigger the upload with Kendo UI Upload by clicking a custom button.
 type: how-to
 page_title: Upload Selected Files by Clicking Custom Buttons - Kendo UI Upload for jQuery
 slug: upload-by-clicking-custom-button
@@ -15,7 +15,7 @@ component: upload
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Upload</td>
+  <td>Progress® Kendo UI® Upload for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

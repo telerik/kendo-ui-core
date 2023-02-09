@@ -1,7 +1,7 @@
 ---
 title: Implement Stable Sorting in Chrome
 page_title: Stable Sorting in Chrome - Kendo UI Grid for jQuery
-description: "An example on how to implement stable sorting in Google Chrome with the Kendo UI Grid for jQuery. "
+description: "Learn how to implement stable sorting in Google Chrome with the Kendo UI Grid for jQuery. "
 previous_url: /controls/data-management/grid/how-to/stable-sort-chrome, /controls/data-management/grid/how-to/sorting/stable-sort-chrome
 slug: howto_implement_stable_sortin_chrome_grid
 tags: implement, stable, sorting, grid, chrome
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

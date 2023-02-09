@@ -1,6 +1,6 @@
 ---
 title: Dynamic Tooltip in Diagram
-description: An example on how to conditionally show a tooltip over shapes.
+description: Learn how to conditionally show a tooltip over shapes.
 type: how-to
 page_title: Custom Shape Tooltip - Kendo UI Diagram for jQuery
 slug: diagram-dynamic-tooltip
@@ -15,7 +15,7 @@ component: diagram
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Diagram</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
  </tr>
  <tr>
   <td>Created with version</td>
@@ -26,10 +26,10 @@ component: diagram
 
 ## Description
 
-I would like to show a tooltip for the shapes of the diagram. 
+I would like to show a tooltip for the shapes of the diagram.
 
-1. How to set the backgroundcolor of tooltip to match the shape color? 
-1. Can I customize the tooltip to be used by shapes dynamically? 
+1. How to set the backgroundcolor of tooltip to match the shape color?
+1. Can I customize the tooltip to be used by shapes dynamically?
 
 ## Solution
 
@@ -110,7 +110,7 @@ The following example demonstrates how to show a tooltip conditionally with a dy
         var dataviz = kendo.dataviz;
         var g = new dataviz.diagram.Group();
         var dataItem = options.dataItem;
-        
+
         if(dataItem.hasChildren){
           g.drawingElement.options.tooltip = {
             content: "<span style='background:" + dataItem.colorScheme + "; float:left;width:100%'>" + dataItem.title + "</span>",

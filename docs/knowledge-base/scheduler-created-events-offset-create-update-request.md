@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -26,7 +26,7 @@ component: scheduler
 
 Created jQuery Scheduler events are offset after a create or update request.
 
-## Cause 
+## Cause
 
 This behavior may be caused if the Scheduler [`timezone`](/api/javascript/ui/scheduler/configuration/timezone) option is not set, or if the remote service does not keep dates in the correct format.
 

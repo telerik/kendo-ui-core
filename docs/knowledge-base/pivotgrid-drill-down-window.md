@@ -4,9 +4,9 @@ description: How to Implement Drill Down Navigation
 type: how-to
 page_title: How to Implement Drill Down Functionality - Kendo UI PivotGrid for jQuery
 slug: pivotgrid-drill-down-window
-position: 
-tags: 
-ticketid: 
+position:
+tags:
+ticketid:
 res_type: kb
 ---
 
@@ -15,7 +15,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>PivotGrid for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® PivotGrid for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -183,7 +183,7 @@ The key part is creating a secondary **drillDownDataSource**, which will request
           {
             if(type == "number") {
               return parseFloat(value);
-            } 
+            }
             else if(type == "boolean")
             {
               return (value == 'true');
@@ -213,4 +213,4 @@ The key part is creating a secondary **drillDownDataSource**, which will request
                 # } #
       </script>
     </div>
-``` 
+```

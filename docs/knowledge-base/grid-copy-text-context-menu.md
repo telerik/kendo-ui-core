@@ -1,6 +1,6 @@
 ---
 title: Copy Cell Content in Grid by Using Context Menu
-description: An example on how to use context menu for copying cell content in Kendo Grid.
+description: Learn how to use context menu for copying cell content in Kendo Grid.
 type: how-to
 page_title: Copy Text in Cells with Context Menu - Kendo UI Grid for jQuery
 slug: grid-copy-text-context-menu
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

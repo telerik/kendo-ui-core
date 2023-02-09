@@ -15,8 +15,8 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Grid</td>
-  <td>Progress® Kendo UI® for jQuery MultiSelect</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+  <td>Progress® Kendo UI® MultiSelect for jQuery</td>
  </tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Hide Chart Legends That Have No Visual Appearance
-description: An example on how to hide the Kendo UI Chart legends which have no visual appearance in the widget.
+description: Learn how to hide the Kendo UI Chart legends which have no visual appearance in the widget.
 type: how-to
 page_title: Hide the Non-Visible Legends Items - Kendo UI Chart for jQuery
 slug: hide-legends-items-that-are-not-visible-in-the-chart
@@ -16,7 +16,7 @@ component: charts
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

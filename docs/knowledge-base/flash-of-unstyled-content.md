@@ -1,8 +1,8 @@
 ---
 title: Flash of Unstyled Content with Kendo UI Widgets
-description: An example on how to work around the cases when FUOC is observed when DOM manipulations are used to style a page in Kendo UI.
+description: Learn how to work around the cases when FUOC is observed when DOM manipulations are used to style a page in Kendo UI.
 type: troubleshooting
-page_title: Flash of Unstyled Content 
+page_title: Flash of Unstyled Content
 slug: flash-of-unstyled-content
 tags: flash,unstyled,content,fuoc
 ticketid: 1383118, 1364951, 1365360
@@ -14,7 +14,9 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery, UI for ASP.NET MVC, UI for ASP.NET Core</td>
+  <td>Progress® Kendo UI® for jQuery</td>
+  <td>Progress® Telerik® UI for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
   <tr>
   <td>Version</td>

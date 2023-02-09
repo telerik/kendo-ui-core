@@ -1,6 +1,6 @@
 ---
 title: Include Negative Values in the Total in Stacked Column Chart
-description: "An example on how to include negative values in the label's total of a Stacked Column Chart"
+description: "Learn how to include negative values in the label's total of a Stacked Column Chart"
 type: how-to
 page_title: Include Negative Values in the Total in Stacked Column Chart's labels - Kendo UI Chart for jQuery
 slug: include-negative-values-in-stacked-chart
@@ -15,7 +15,7 @@ component: chart
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Column Chart</td>
+  <td>Progress® Kendo UI® Column Chart for jQuery</td>
  </tr>
 </table>
 

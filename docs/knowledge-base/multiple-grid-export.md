@@ -1,7 +1,7 @@
 ---
 title: Export Multiple Grids
 page_title: Export Multiple Grids - Kendo UI Grid for jQuery
-description: "An example on how to export two kendo UI Grids for jQuery in the same Excel document."
+description: "Learn how to export two kendo UI Grids for jQuery in the same Excel document."
 previous_url: /controls/data-management/grid/how-to/excel/multiple-grid-export
 slug: howto_export_excel_multiple_grids_grid
 tags: export, multiple, grids, same, excel, document
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

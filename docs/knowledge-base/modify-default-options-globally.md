@@ -1,7 +1,7 @@
 ---
 title: Globally Modify Default DatePicker Options
 page_title: Globally Modify Default DatePicker Options
-description: "An example on how to globally modify default options in the Kendo UI DatePicker widget."
+description: "Learn how to globally modify default options in the Kendo UI DatePicker widget."
 slug: howto_globally_modify_default_options_datepicker
 previous_url: /controls/editors/datepicker/how-to/modify-default-options-globally
 tags: kendo, jquery, datepicker, modify, default, options, globally
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

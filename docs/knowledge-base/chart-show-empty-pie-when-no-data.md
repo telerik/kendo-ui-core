@@ -1,8 +1,8 @@
 ---
-title: Show empty Pie when no data available
-description: An example on how to show an empty pie chart when no data is available.
+title: Show an Empty Pie in the Chart When No Data Is Available
+description: Learn how to show an empty Kendo UI for jQuery Pie Chart when no data is available.
 type: how-to
-page_title: Render Blank Pie Chartwhen no data - Kendo UI Chart for jQuery
+page_title: Render Blank Pie Chart If No Data Is Available - Kendo UI Chart for jQuery
 slug: chart-show-empty-pie-when-no-data
 tags: chart, pie, empty, blank, no data
 ticketid: 1167421
@@ -13,12 +13,12 @@ res_type: kb
 
 <table>
 	<tr>
-		<td>Created with Product Version</td>
+		<td>Product Version</td>
 		<td>2018.1.221</td>
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Chart</td>
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 
@@ -31,8 +31,8 @@ When my dataset is empty the pie chart is not showing. I want to show a blank pi
 
 We have a [how-to article]({% slug howto_showemptymessage_whencharthasnodata_charts %}) which shows a similar case - when there is no data, an overlay is displayed.
 
-1. Modify the article above to use a circle with some text in using any CSS styles to alter it. 
-1. Add a handler to the `dataBound` event of the chart and check if there is any data(the article uses the data source [`view()`](/api/javascript/data/datasource/methods/view) method). 
+1. Modify the article above to use a circle with some text in using any CSS styles to alter it.
+1. Add a handler to the `dataBound` event of the chart and check if there is any data(the article uses the data source [`view()`](/api/javascript/data/datasource/methods/view) method).
 1. If there is data, hide the overlay:
 
     ```
@@ -60,7 +60,7 @@ The following example demonstrates how to toggle a circle overlay when there is 
           visible: true,
           position: "top"
         },
-        dataSource: { 
+        dataSource: {
           transport: {
             read: function(e) {
               setTimeout(function() {

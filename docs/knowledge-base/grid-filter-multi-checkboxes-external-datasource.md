@@ -1,6 +1,6 @@
 ---
 title: Filter Multi Checkboxes Based on Previous Filters in Grid
-description: An example on how to display the valid possibilities in the multi-checkboxes filter list based on the previous filters in the Kendo UI Grid.
+description: Learn how to display the valid possibilities in the multi-checkboxes filter list based on the previous filters in the Kendo UI Grid.
 type: how-to
 page_title: Make Multi Checkboxes Filter Display Valid Possibilities Only - Kendo UI Grid for jQuery
 slug: grid-filter-multi-checkboxes-external-datasource
@@ -14,10 +14,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Updated with the 2021.3.914 version</td>
  </tr>
 </table>

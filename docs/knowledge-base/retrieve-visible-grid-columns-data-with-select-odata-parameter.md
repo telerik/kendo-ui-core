@@ -1,6 +1,6 @@
 ---
 title: Retrieve Only the Visible Grid Columns Data with the $select oData Parameter
-description: An example on how to retrieve only the visible columns data with the $select oData parameter in the Kendo UI Grid.
+description: Learn how to retrieve only the visible columns data with the $select oData parameter in the Kendo UI Grid.
 type: how-to
 page_title: Retrieve Visible Columns Data with the $select oData Parameter - Kendo UI Grid for jQuery
 slug: retrieve-visible-grid-columns-data-with-select-odata-parameter
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

@@ -1,7 +1,7 @@
 ---
 title: Select or Deselect Dates with Click Only
 page_title: Select Multiple Dates without Using the Ctrl Key - Kendo UI Calendar for jQuery
-description: An example on how to select multiple dates in the Kendo UI Calendar without holding the Ctrl key.
+description: Learn how to select multiple dates in the Kendo UI Calendar without holding the Ctrl key.
 type: how-to
 slug: calendar-select-dates-click
 tags: kendo, ui, calendar, select, range, dates, multiple, click, mouse, only, control, ctrl
@@ -14,10 +14,10 @@ component: calendar
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Calendar</td>
+  <td>Progress® Kendo UI® Calendar for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2018.1.226</td>
  </tr>
 </table>

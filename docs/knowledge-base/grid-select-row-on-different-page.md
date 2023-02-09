@@ -1,6 +1,6 @@
 ---
 title: Dynamically Select a Row on Any Page in the Grid
-description: An example on how to select a row that may be placed on a different page in the Grid.
+description: Learn how to select a row that may be placed on a different page in the Grid.
 type: how-to
 page_title: Dynamically Select Row in Pageable Grid - Kendo UI Grid
 slug: grid-select-row-on-different-page
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

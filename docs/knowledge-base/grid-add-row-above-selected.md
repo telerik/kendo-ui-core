@@ -1,6 +1,6 @@
 ---
 title: Add row in Grid above selected row
-description: "An example on how to add a row above the selected onе in Grid."
+description: "Learn how to add a row above the selected onе in Grid."
 type: how-to
 page_title: Add a row above the selected one - Kendo UI Grid for jQuery
 slug: grid-add-row-above-selected
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

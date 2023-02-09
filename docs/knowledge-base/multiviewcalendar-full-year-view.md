@@ -4,7 +4,7 @@ description: "Configure the MultiViewCalendar to show a 3 X 4 full year view"
 type: how-to
 page_title: Display Full Year in MultiViewCalendar
 slug: multiviewcalendar-full-year-view
-position: 
+position:
 tags: kendoui, multiviewcalendar, months, full, year, view
 ticketid: 1591326
 res_type: kb
@@ -16,7 +16,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>Progress® Kendo UI® for jQuery MultiViewCalendar</td>
+			<td>Progress® Kendo UI® MultiViewCalendar for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -54,7 +54,7 @@ Then, modify the calendar's view to adapt to the width.
             flex-flow: row wrap;
             display: flex;
         }
-	
+
 	div[data-role="multiviewcalendar"] {
             width: 1100px;
         }

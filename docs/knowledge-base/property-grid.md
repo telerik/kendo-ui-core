@@ -1,6 +1,6 @@
 ---
 title: Convert Kendo UI Grid to Property Grid
-description: An example on how to convert the Kendo UI Grid to a property grid.
+description: Learn how to convert the Kendo UI Grid to a property grid.
 type: how-to
 page_title: Transform Kendo UI Grid into Property Grid - Kendo UI Grid for jQuery
 slug: property-grid
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

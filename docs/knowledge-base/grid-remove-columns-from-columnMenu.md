@@ -1,6 +1,6 @@
 ---
 title: Remove Specific Grid Columns from ColumnMenu
-description: An example on how to hide columns from the columnMenu in the Kendo UI Grid.
+description: Learn how to hide columns from the columnMenu in the Kendo UI Grid.
 type: how-to
 page_title: Remove Specific Column from ColumnMenu - Kendo UI Grid for jQuery
 slug: grid-remove-columns-from-columnmenu
@@ -16,7 +16,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 

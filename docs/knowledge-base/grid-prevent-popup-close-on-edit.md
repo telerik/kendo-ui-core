@@ -1,6 +1,6 @@
 ---
 title: Prevent Grid Popup Editor from Closing on Update and Create
-description: An example on how to keep the Kendo UI Grid popup editor open after an update is finished.
+description: Learn how to keep the Kendo UI Grid popup editor open after an update is finished.
 type: how-to
 page_title: Keep Popup Open - Kendo UI Grid for jQuery
 slug: grid-prevent-popup-close-on-edit
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2020.3.1021</td>
  </tr>
 </table>

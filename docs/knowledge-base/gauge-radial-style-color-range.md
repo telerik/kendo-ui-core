@@ -1,6 +1,6 @@
 ---
 title: Configure the Colors of RadialGauge Ranges
-description: An example on how to change the styles of the Kendo UI RadialGauge range.
+description: Learn how to change the styles of the Kendo UI RadialGauge range.
 type: how-to
 page_title: Customize the Range Colors - Kendo UI Radial Gauge for jQuery
 slug: gauge-radial-style-color-range
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Radial Gauge for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® RadialGauge for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>

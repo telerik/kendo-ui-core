@@ -1,6 +1,6 @@
 ---
 title: Create Cascading MultiSelects
-page_title: Create Cascading MultiSelects
+page_title: Implement a Cascading Feature for MultiSelects
 description: "Learn how to create cascading Kendo UI MultiSelect widgets."
 previous_url: /controls/editors/multiselect/how-to/cascading-multiselects, /controls/editors/multiselect/how-to/cascade/cascading-multiselects
 slug: howto_create_cascading_widgets_multiselect
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI MultiSelect for jQuery</td>
+  <td>Progress® Kendo UI® MultiSelect for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

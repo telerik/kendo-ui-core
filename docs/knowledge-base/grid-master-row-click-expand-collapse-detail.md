@@ -1,6 +1,6 @@
 ---
 title: Expand and Collapse Details on Master Row Click in Grid
-description: An example on how to expand and collapse the detail rows by clicking the master rows in the Kendo UI Grid.
+description: Learn how to expand and collapse the detail rows by clicking the master rows in the Kendo UI Grid.
 type: how-to
 page_title: Click the Master and Expand and Collapse the Detail Row - Kendo UI Grid for jQuery
 slug: grid-master-row-click-expand-collapse-detail
@@ -14,10 +14,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2017.3.1026 version</td>
  </tr>
 </table>

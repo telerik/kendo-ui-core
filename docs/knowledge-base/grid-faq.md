@@ -10,6 +10,8 @@ type: how-to
 res_type: kb
 ---
 
+## FAQ about the Kendo UI Data Grid for jQuery
+
 This article provides a collection of the most frequently asked questions (FAQ) on checkbox and answers related to the Kendo UI Grid.
 
 > * The latest tested version is 2017.2 621.

@@ -1,6 +1,6 @@
 ---
-title: Performance Issues
-page_title: jQuery Chart Documentation | Performance Issues
+title: Manage Chart Performance Issues
+page_title: Handle Performance Issues in the Chart - Kendo UI for jQuery Chart
 description: "Learn the tips and tricks for improving the performance of the Kendo UI widgets rendering data visualization."
 previous_url: /dataviz/performance-tips, /controls/charts/troubleshoot/performance-tips
 slug: tipsandtricks_kendouistyling
@@ -15,7 +15,11 @@ component: chart
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Charts, Maps, Diagrams, Barcodes, and Gauges</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
+  <td>Progress® Kendo UI® Map for jQuery</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
+  <td>Progress® Kendo UI® Barcode for jQuery</td>
+  <td>Progress® Kendo UI® Gauge for jQuery</td>
  </tr>
  <tr>
   <td>Kendo Version</td>

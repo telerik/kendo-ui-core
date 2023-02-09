@@ -1,6 +1,6 @@
 ---
 title: Identify when the DropDownTree is Fully Loaded
-description: An example on how to identify when the last DataBound event is fired in the Kendo UI DropDownTree.
+description: Learn how to identify when the last DataBound event is fired in the Kendo UI DropDownTree.
 type: how-to
 page_title: Identify when the DropDownTree is Fully Loaded - Kendo UI DropDownTree for jQuery
 slug: dropdowntree-fully-loaded
@@ -14,7 +14,7 @@ component: dropdowntree
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DropDownTree</td>
+  <td>Progress® Kendo UI® DropDownTree for jQuery</td>
  </tr>
 </table>
 

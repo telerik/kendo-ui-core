@@ -2,7 +2,7 @@
 title: Incorrect Drop-Down Position with jQuery 2
 description: When the page is scrolled, the position of the drop-down is incorrect and is detached from the element.
 type: troubleshooting
-page_title: Incorrect Drop-Down Position with Scrolled Pages 
+page_title: Incorrect Drop-Down Position with Scrolled Pages
 slug: dropdown-position-incorrect-with-scroll
 ticketid: 1398729, 1387564
 res_type: kb
@@ -13,13 +13,14 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Progress® Kendo UI®, UI for ASP.NET MVC, UI for ASP.NET Core</td>
+		<td>Progress® Telerik® UI for ASP.NET MVC</td>
+		<td>Progress® Telerik® UI for ASP.NET Core</td>
 	</tr>
 </table>
 
 ## Description
 
-When the page is scrolled down, the drop-down position is incorrect&mdash;it does not consider the page scroll position and is detached from its element by roughly the scroll distance. This issue affects widgets that contain dropdowns such as the Kendo UI ComboBox, DatePicker, DropDownList, Multiselect, and so on. It could also affect other popup components like the ToolTip. 
+When the page is scrolled down, the drop-down position is incorrect&mdash;it does not consider the page scroll position and is detached from its element by roughly the scroll distance. This issue affects widgets that contain dropdowns such as the Kendo UI ComboBox, DatePicker, DropDownList, Multiselect, and so on. It could also affect other popup components like the ToolTip.
 
 **Table 1: A demonstration of the issue**
 

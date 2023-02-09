@@ -1,6 +1,6 @@
 ---
 title: Hide Series of the Pie Chart by Filtering the Grid
-description: An example on how to show and hide series of the Kendo UI Pie Chart by filtering the Kendo UI Grid.
+description: Learn how to show and hide series of the Kendo UI Pie Chart by filtering the Kendo UI Grid.
 type: how-to
 page_title: Filter Grid to Hide Chart Series - Kendo UI Grid for jQuery
 slug: grid-filter-hides-series-chart
@@ -19,8 +19,8 @@ component: grid
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
-		<td>Progress Kendo UI Chart</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 

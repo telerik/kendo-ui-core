@@ -1,6 +1,6 @@
 ---
 title: Mark Holidays in Month View
-description: An example on how to apply different styling on national-holiday time-slots in the Kendo UI Scheduler.
+description: Learn how to apply different styling on national-holiday time-slots in the Kendo UI Scheduler.
 type: how-to
 page_title: Apply Custom Styling to Holiday Time-Slots - Kendo UI Scheduler for jQuery
 slug: scheduler-mark-holidays-in-month-view
@@ -15,7 +15,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Show Popup next to a Custom Cell Editor in Spreadsheet
-description: An example on how to display a popup next to a custom cell editor in a Kendo UI Spreadsheet.
+description: Learn how to display a popup next to a custom cell editor in a Kendo UI Spreadsheet.
 type: how-to
 page_title: Show Custom Cell Editor with a Kendo UI Popup - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-custom-cell-editor-popup
@@ -15,7 +15,7 @@ component: spreadsheet
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
 </table>
 

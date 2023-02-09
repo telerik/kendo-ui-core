@@ -1,7 +1,7 @@
 ---
 title: Center Image within the Button
 page_title: Center Image with Minimal Space - Kendo UI Button for jQuery
-description: An example on how to center an image in a Kendo UI Button.
+description: Learn how to center an image in a Kendo UI Button.
 type: how-to
 slug: button-center-image-style
 tags: button, center, image, style
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Button for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Button for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>

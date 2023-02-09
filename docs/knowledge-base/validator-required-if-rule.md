@@ -1,6 +1,6 @@
 ---
 title: Validate Required Conditional Fields
-description: An example on how to implement required conditional field validation based on the value of another input on the form when working with the Kendo UI Validator.
+description: Learn how to implement required conditional field validation based on the value of another input on the form when working with the Kendo UI Validator.
 page_title: Validate Required Conditional Fields - Kendo UI Validator for jQuery
 slug: validator-required-if-rule
 tags: validator, required, required if, required-if, validation, conditional
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Validator</td>
+  <td>Progress® Kendo UI® Validator for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,6 +1,6 @@
 ---
 title: Include Hidden Grid Columns in Exported Excel Files
-description: An example on how to include hidden columns when you export the contents of a Kendo UI Grid to Excel.
+description: Learn how to include hidden columns when you export the contents of a Kendo UI Grid to Excel.
 type: how-to
 page_title: Include Hidden Columns When Exporting to Excel - Kendo UI Grid for jQuery
 slug: grid-include-hidden-columns-in-excel-export
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>

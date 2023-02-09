@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Scheduler for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Scheduler for jQuery</td>
 		</tr>
 	</tbody>
 </table>

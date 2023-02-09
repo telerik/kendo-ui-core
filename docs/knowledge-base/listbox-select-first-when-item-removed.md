@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>ListBox for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® ListBox for jQuery</td>
 		</tr>
 	</tbody>
 </table>

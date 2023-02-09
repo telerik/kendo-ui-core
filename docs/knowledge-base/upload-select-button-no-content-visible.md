@@ -15,7 +15,7 @@ component: upload
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Upload</td>
+  <td>Progress® Kendo UI® Upload for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

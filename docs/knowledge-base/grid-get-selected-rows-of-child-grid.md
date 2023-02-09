@@ -1,6 +1,6 @@
 ---
 title: Get the Selected Rows of a Child Grid
-description: An example on how to get the selected rows of a child Kendo UI Grid.
+description: Learn how to get the selected rows of a child Kendo UI Grid.
 type: how-to
 page_title: Get the Selected Rows of a Child Grid - Kendo UI Gird for jQuery
 slug: grid-get-selected-rows-of-child-grid
@@ -14,10 +14,10 @@ component: listview
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created version 2018.1.117</td>
  </tr>
 </table>

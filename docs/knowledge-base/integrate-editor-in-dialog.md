@@ -1,6 +1,6 @@
 ---
 title: Integrate Editor into Dialog
-description: An example on how to integrate the Kendo UI Editor into the Kendo UI Dialog widget.
+description: Learn how to integrate the Kendo UI Editor into the Kendo UI Dialog widget.
 type: how-to
 page_title: Integrate Editor into Dialog Widget - Kendo UI Editor for jQuery
 slug: integrate-editor-in-dialog
@@ -15,11 +15,11 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Editor</td>
-  <td>Progress Kendo UI Dialog</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
+  <td>Progress® Kendo UI® Dialog for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2.621</td>
  </tr>
 </table>

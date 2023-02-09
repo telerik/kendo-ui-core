@@ -1,6 +1,6 @@
 ---
 title: Use Radio Buttons as Custom Grid Editor
-description: An example on how to use radio buttons as a custom editor in the Kendo UI Grid.
+description: Learn how to use radio buttons as a custom editor in the Kendo UI Grid.
 type: how-to
 page_title: Use Radio Buttons as Custom Editor - Kendo UI Grid for jQuery
 slug: radio-buttons-custom-editor
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>

@@ -1,7 +1,7 @@
 ---
-title: Change MultiSelect's tag background from a ToolTip with ColorPalette
-page_title: Change MultiSelect's tag background from a ToolTip with ColorPalette - Kendo UI MultiSelect for jQuery
-description: An example on how to Change MultiSelect's tag background using a ToolTip with ColorPalette.
+title: Change the Background of the MultiSelect Tag from a Tooltip with a ColorPalette
+page_title: Change the Tag Background from a Tooltip with ColorPalette - Kendo UI MultiSelect for jQuery
+description: Learn how to change the tag background of the Kendo UI for jQuery MultiSelect by using a Tooltip with a ColorPalette component.
 type: how-to
 slug: change-multiselect-tag-background
 tags: multiselect, tag, change, background, tooltip, colorpalette
@@ -14,7 +14,7 @@ component: multi-select
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI MultiSelect</td>
+  <td>Progress® Kendo UI® MultiSelect for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

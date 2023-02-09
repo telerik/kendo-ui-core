@@ -14,7 +14,7 @@ component: combobox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery ComboBox</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -26,7 +26,7 @@ component: combobox
 
 Repetitive requests in the jQuery ComboBox are performed while filtering in ASP.NET.
 
-## Cause 
+## Cause
 
 Repetitive requests that are performed by the Kendo UI ComboBox component are caused by the response from the ASP.NET Web API Order controller.
 

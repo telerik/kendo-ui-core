@@ -1,6 +1,6 @@
 ---
 title: Grid in the Scheduler Edit Template  
-description: An example on how to use Grid in Scheduler edit template with an additionally dynamically bound row editor.
+description: Learn how to use Grid in Scheduler edit template with an additionally dynamically bound row editor.
 type: how-to
 page_title: How to Add a Grid in the Scheduler Edit Template with an Additionally Dynamically Bound Row Editor  - Kendo UI Scheduler for jQuery
 slug: scheduler-grid-editable-template
@@ -14,8 +14,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
-  <td>Progress Kendo UI Grid</td>
+  Progress® Kendo UI® Scheduler for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

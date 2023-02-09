@@ -1,6 +1,6 @@
 ---
 title: Left-Align Bar Chart Category Axis Labels
-description: An example on how to align the Category Axis labels of a Kendo UI Bar Chart.
+description: Learn how to align the Category Axis labels of a Kendo UI Bar Chart.
 type: how-to
 page_title: Align Category Y-Axis Labels on Bar Chart - Kendo UI Chart
 slug: chart-left-align-bar-label-y-axis
@@ -14,9 +14,9 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Chart for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
-
+ <tr>
   <td>Product Version</td>
   <td>2019.1.220</td>
  </tr>

@@ -2,7 +2,7 @@
 title: Unicode Characters Are Rendered as Emojis
 description: Font icons fall back to emojis on iOS and Safari
 type: kb
-page_title: Prevent emojis from rendering instead of Kendo icons 
+page_title: Prevent emojis from rendering instead of Kendo icons
 slug: icons-rendered-as-emojis-on-ios
 tags: icons, font, emoji, shoe, woman, man, tshirt, numerictextbox, menu, unicode, characters, render, ios, safari, mac, apple
 ticketid: 1405468, 1129136
@@ -15,7 +15,7 @@ component: fonticons
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI</td>
+  <td>Progress® Kendo UI® for jQuery</td>
  </tr>
 </table>
 

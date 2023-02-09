@@ -1,6 +1,6 @@
 ---
 title: Setting the Default Numeric Filter Value in the Grid Filter Menu
-description: "An example on how to set the default filter number values of the Kendo UI Grid filter menu."
+description: "Learn how to set the default filter number values of the Kendo UI Grid filter menu."
 type: how-to
 page_title: Set the Default Filter Values - Kendo UI Grid for jQuery
 slug: default-grid-filter-values
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

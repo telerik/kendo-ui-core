@@ -1,6 +1,6 @@
 ---
 title: Deselect Grid Rows on Click
-description: An example on how to deselect rows on a click in a Kendo UI Grid.
+description: Learn how to deselect rows on a click in a Kendo UI Grid.
 type: how-to
 page_title: Deselect Rows on Click - Kendo UI Grid for jQuery
 slug: grid-deselect-row-click
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2017.3.913</td>
  </tr>
 </table>

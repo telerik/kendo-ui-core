@@ -1,6 +1,6 @@
 ---
 title: Perform DropDownList Selection in AngularJS Only If Confirmed
-description: An example on how to cancel or not the actual selection of an item in the DropDownList by using the Kendo UI confirmation Dialog in AngularJS applications.
+description: Learn how to cancel or not the actual selection of an item in the DropDownList by using the Kendo UI confirmation Dialog in AngularJS applications.
 type: how-to
 page_title: Cancel Selection in AngularJS If Not Confirmed - Kendo UI DropDownList for jQuery
 slug: dropdownlist-cancel-select-if-not-confirmed
@@ -14,7 +14,7 @@ component: dropdownlist
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DropDownList</td>
+  <td>Progress® Kendo UI® DropDownList for jQuery</td>
  </tr>
 </table>
 

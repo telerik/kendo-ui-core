@@ -1,6 +1,6 @@
 ---
 title: Add nested child grids
-description: "An example on how to add nested child grids."
+description: "Learn how to add nested child grids."
 type: how-to
 page_title: Add nested Child Grids - Kendo UI Grid for jQuery
 slug: grid-add-nested-child-grids
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2021.2.616 version</td>
  </tr>
 </table>

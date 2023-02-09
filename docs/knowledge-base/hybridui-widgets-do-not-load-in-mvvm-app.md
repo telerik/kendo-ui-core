@@ -14,7 +14,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo Hybrid UI/MVVM</td>
+  <td>Progress® Kendo UI® Hybrid Components</td>
+  <td>Progress® Kendo UI® MVVM Architecture</td>
  </tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Pan when dragging shapes in Diagram
-description: An example on how to pan the viewport when dragging shapes in the Kendo UI Diagram.
+description: Learn how to pan the viewport when dragging shapes in the Kendo UI Diagram.
 type: how-to
 page_title: Pan viewport when dragging past boundary - Kendo UI Diagram for jQuery
 slug: diagram-pan-viewport-on-drag
@@ -15,7 +15,7 @@ component: diagram
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Diagram</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
  </tr>
  <tr>
   <td>Created with Version</td>

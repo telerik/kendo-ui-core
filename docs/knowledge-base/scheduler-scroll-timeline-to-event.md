@@ -1,6 +1,6 @@
 ---
 title: Scroll to and Select Scheduler Events
-description: An example on how to vertically and horizontally scroll the Kendo UI Scheduler timeline to an event and then select it.
+description: Learn how to vertically and horizontally scroll the Kendo UI Scheduler timeline to an event and then select it.
 type: how-to
 page_title: Scroll Scheduler Timeline to an Event and Select It - Kendo UI Scheduler for jQuery
 slug: scheduler-scroll-timeline-to-event
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

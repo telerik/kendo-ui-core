@@ -1,6 +1,6 @@
 ---
 title: Animate Detail Row Which Opens with Kendo UI Effects in Grid
-description: An example on how to animate the opening of a detail row with Kendo UI Effects in a Kendo UI Grid.
+description: Learn how to animate the opening of a detail row with Kendo UI Effects in a Kendo UI Grid.
 type: how-to
 page_title: Animate the Opening of Detail Rows - Kendo UI Grid for jQuery
 slug: grid-animate-detail-row-with-kendo-effect
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

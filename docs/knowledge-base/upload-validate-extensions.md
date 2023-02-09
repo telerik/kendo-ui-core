@@ -1,6 +1,6 @@
 ---
 title: Validate Files and File Extensions on Upload
-description: An example on how to validate the selection and file extension in the Kendo UI Upload.
+description: Learn how to validate the selection and file extension in the Kendo UI Upload.
 type: how-to
 page_title: Implement File and Extension Validation on Submit - Kendo UI Upload for jQuery
 slug: upload-validate-extensions
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Upload</td>
+  <td>Progress® Kendo UI® Upload for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

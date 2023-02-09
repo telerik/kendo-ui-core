@@ -1,7 +1,7 @@
 ---
 title: Configure the CategoryAxis Labels of the Chart to Fit
 page_title: Prevent CategoryAxis Label Overlap - Kendo UI Chart for jQuery
-description: An example on how to display the CategoryAxis labels of the Kendo UI Chart without any overlapping.
+description: Learn how to display the CategoryAxis labels of the Kendo UI Chart without any overlapping.
 type: how-to
 slug: chart-category-axis-label-fit
 tags: chart, category, axis, label, fit
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Chart for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>

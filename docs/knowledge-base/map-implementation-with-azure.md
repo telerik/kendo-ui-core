@@ -1,6 +1,6 @@
 ---
 title: Implementation with Azure
-description: An example on how to include Azure maps' geospatial capabilities in Kendo UI Map.
+description: Learn how to include Azure maps' geospatial capabilities in Kendo UI Map.
 type: how-to
 page_title: Use Azure maps in Kendo UI Map
 slug: map-using-azure
@@ -14,7 +14,7 @@ component: map
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Map</td>
+  <td>Progress® Kendo UI® Map for jQuery</td>
  </tr>
  <tr>
   <td>Progress Kendo UI</td>  

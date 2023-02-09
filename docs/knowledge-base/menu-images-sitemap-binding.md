@@ -1,6 +1,6 @@
 ---
 title: Display Images in Menu Items When Using Sitemap Binding
-description: An example on how to display images in the items when the Knedo UI Menu is bound by using a sitemap binding.
+description: Learn how to display images in the items when the Knedo UI Menu is bound by using a sitemap binding.
 type: how-to
 page_title: Show Images in Items When Using Sitemap Binding - Kendo UI Menu for ASP.NET MVC
 slug: menu-images-sitemap-binding
@@ -15,7 +15,7 @@ component: menu
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Menu for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI Menu for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>

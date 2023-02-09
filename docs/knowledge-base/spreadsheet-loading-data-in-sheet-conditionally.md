@@ -13,12 +13,12 @@ res_type: kb
 
 <table>
 	<tr>
-		<td>Created with Product Version</td>
+		<td>Product Version</td>
 		<td>2021.1.224</td>
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI for jQuery</td>
+		<td>Progress® Kendo UI® for jQuery</td>
 	</tr>
 </table>
 

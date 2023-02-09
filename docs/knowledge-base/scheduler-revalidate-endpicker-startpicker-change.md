@@ -1,6 +1,6 @@
 ---
 title: Re-validate End DatePicker OnStart DatePicker Change
-description: An example on how to revalidate the end DatePicker when the date in the start DatePicker is changed in the Kendo UI Scheduler.
+description: Learn how to revalidate the end DatePicker when the date in the start DatePicker is changed in the Kendo UI Scheduler.
 type: how-to
 page_title: Re-validate End Picker On Start Picker Change - Kendo UI Scheduler for jQuery
 slug: scheduler-revalidate-endpicker-startpicker-change
@@ -14,20 +14,20 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 
 
 ## Description
 
-How can I validate again the end date in the Scheduler editor, when the start date of the event has been changed? 
+How can I validate again the end date in the Scheduler editor, when the start date of the event has been changed?
 
 ## Solution
 
 1. Subscribe to the Scheduler [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/edit) event.
 1. Get reference to the start DatePicker and DateTimePicker and bind their change event.
-1. In the change event handler take reference to the respective End pickers. Set their value to the value entered in their input elements and trigger End picker change events to update the End field value. 
+1. In the change event handler take reference to the respective End pickers. Set their value to the value entered in their input elements and trigger End picker change events to update the End field value.
 
 ````dojo
 	<input type="button" value="Select All" onclick="SelectAll()" />
@@ -52,7 +52,7 @@ How can I validate again the end date in the Scheduler editor, when the start da
         function schedulerEdit(e) {
           var startDateTimePicker =  $("[data-container-for=start] input[data-role=datetimepicker]").data("kendoDateTimePicker");
           startDateTimePicker.bind("change", updateEndDateTimePicker);
-          
+
           var startDatePicker =  $("[data-container-for=start] input[data-role=datepicker]").data("kendoDatePicker");
           startDatePicker.bind("change", updateEndDatePicker);
 

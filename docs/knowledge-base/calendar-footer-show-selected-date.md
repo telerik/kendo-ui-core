@@ -1,7 +1,7 @@
 ---
-title: Calendar Footer Show Selected Date
-page_title: Show Selected Date in Footer  - Kendo UI Calendar for jQuery
-description: An example on how to show the currently selected date in the footer of the calendar and navigate to it when clicked.
+title: Show the Selected Date in the Calendar Footer
+page_title: Display the Selected Calendar Date in the Footer - Kendo UI Calendar for jQuery
+description: Learn how to show the currently selected date in the footer of the calendar and navigate to it when clicked.
 type: how-to
 slug: calendar-footer-show-selected-date
 tags: kendo, ui, calendar, footer, show, selected, current, date, select, navigate
@@ -15,10 +15,10 @@ component: calendar
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Calendar</td>
+  <td>Progress® Kendo UI® Calendar for jQuery</td>
  </tr>
  <tr>
-  <td>Created with Kendo UI version</td>
+  <td>Product Version</td>
   <td>2019.2.514</td>
  </tr>
 </table>

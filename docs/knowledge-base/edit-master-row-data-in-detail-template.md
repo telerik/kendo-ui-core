@@ -1,7 +1,7 @@
 ---
 title: Edit Records in Child Grids
 page_title: Edit Records in Child Grids - Kendo UI Grid for jQuery
-description: "An example on how to edit records in hierarchical Kendo UI Grid widgets for jQuery."
+description: "Learn how to edit records in hierarchical Kendo UI Grid widgets for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/edit-master-row-data-in-detail-template
 slug: howto_edit_recordsin_children_grid
 tags: grid, edit, records, child, hierarchy
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,6 +1,6 @@
 ---
 title: Prevent Header Remove When Removing by Checked Select Column
-description: An example on how to prevent the header row from being removed when removing by select column checked checkboxes
+description: Learn how to prevent the header row from being removed when removing by select column checked checkboxes
 type: how-to
 page_title: Prevent Header Remove When Removing by Checked Select Column - Kendo UI Grid for jQuery
 slug: grid-remove-by-checked-select-column
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

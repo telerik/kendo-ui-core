@@ -4,7 +4,7 @@ description: Replace the default icon of the Kendo UI DatePicker with a Web Font
 type: how-to
 page_title: Modify the Default Icon - Kendo UI DatePicker
 slug: datepicker-change-icon-web-font
-position: 
+position:
 tags: change, icon, datepicker
 ticketid: 1434944
 res_type: kb
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>DatePicker for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® DatePicker for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -34,7 +34,7 @@ In order to replace the default icon, use the [.removeClass()](https://api.jquer
 ```javascript
 $(".k-icon").removeClass("k-i-calendar");
 $(".k-icon").addClass('k-i-calendar-date');
-``` 
+```
 #### Example
 
 ```dojo

@@ -1,6 +1,6 @@
 ---
 title: Merge Table Cells in the Editor
-description: An example on how to merge table cells in the Kendo UI Editor.
+description: Learn how to merge table cells in the Kendo UI Editor.
 type: how-to
 page_title: Merge Table Cells - Kendo UI Editor for jQuery
 slug: editor-merge-table-cells
@@ -14,10 +14,10 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
-  <td>Kendo UI version</td>
+  <td>Product Version</td>
   <td>2023.1.315</td>
  </tr>
 </table>

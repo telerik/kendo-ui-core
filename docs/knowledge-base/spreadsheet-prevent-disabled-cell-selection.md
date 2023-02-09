@@ -1,6 +1,6 @@
 ---
 title: Prevent selection for disabled cells in Spreadsheet
-description: An example on how to prevent the selection of disabled cells in the Kendo UI Spreadsheet.
+description: Learn how to prevent the selection of disabled cells in the Kendo UI Spreadsheet.
 type: how-to
 page_title: Prevent selection for disabled cells in Spreadsheet - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-prevent-selection-disabled-cells
@@ -14,7 +14,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Spreadsheet for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Spreadsheet for jQuery</td>
 	</tr>
 </table>
 

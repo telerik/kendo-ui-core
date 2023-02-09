@@ -1,6 +1,6 @@
 ---
 title: Reload DropDownList Options in Scheduler Edit Form
-description: An example on how to change the items that are available in a resource DropDownList on a Scheduler edit form.
+description: Learn how to change the items that are available in a resource DropDownList on a Scheduler edit form.
 type: how-to
 page_title: Alter Available Data Placed on Scheduler Edit Form - Kendo UI DropDownList for jQuery
 slug: dropdownlist-reloading-options-in-scheduler-edit-form
@@ -15,7 +15,7 @@ component: dropdownlist
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

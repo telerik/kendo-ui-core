@@ -1,6 +1,6 @@
 ---
 title: Open Popup of Custom DropDownList Editor on Cell Click in Grid with Batch Editing
-description: An example on how to display the list of a Grid DropDownList with one click instead of two.
+description: Learn how to display the list of a Grid DropDownList with one click instead of two.
 type: how-to
 page_title: Open the Popup of a Custom DropDownList Editor on Cell Click in Batch Editing - Kendo UI Grid for jQuery
 slug: grid-dropdown-list-first-click
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

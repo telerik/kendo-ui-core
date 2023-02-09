@@ -1,6 +1,6 @@
 ---
 title: Show DataItem Property as Command Button Text
-description: An example on how to display the value of a DataItem property in a custom command button of the Kendo UI Grid.
+description: Learn how to display the value of a DataItem property in a custom command button of the Kendo UI Grid.
 type: how-to
 page_title: Show DataItem Property as Text in Custom Command Button - Kendo UI Grid for jQuery
 slug: grid-command-button-text-dataitem-property
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
 	 <td>Product Version</td>

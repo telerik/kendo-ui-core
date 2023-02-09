@@ -1,6 +1,6 @@
 ---
 title: Display DateTime Value as ComboBox Group Header
-description: An example on how to format properly the date in the group header when it was used for grouping the items in a Kendo UI ComboBox.
+description: Learn how to format properly the date in the group header when it was used for grouping the items in a Kendo UI ComboBox.
 type: how-to
 page_title: Configure the Proper Date Format for the Group Label - Kendo UI ComboBox for jQuery
 slug: combobox-display-date-as-group-header
@@ -15,7 +15,7 @@ component: combobox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ComboBox</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td>
  </tr>
 </table>
 

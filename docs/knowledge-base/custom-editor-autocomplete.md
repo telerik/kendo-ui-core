@@ -1,7 +1,7 @@
 ---
 title: Use AutoComplete as Custom Column Editor
 page_title: AutoComplete as Column Editor - Kendo UI Grid for jQuery
-description: "An example on how to use the Kendo UI AutoComplete as a custom column editor for the Kendo UI Grid for jQuery."
+description: "Learn how to use the Kendo UI AutoComplete as a custom column editor for the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/custom-editor-autocomplete, /controls/editors/autocomplete/how-to/integration/custom-editor-autocomplete-grid
 slug: howto_use_autocompleteas_custom_column_editor_grid
 tags: telerik, kendo, jquery, grid, autocomplete, custom, column, editor
@@ -15,8 +15,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
-  <td>Progress Kendo UI AutoComplete for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+  <td>Progress® Kendo UI® AutoComplete for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

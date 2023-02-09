@@ -1,6 +1,6 @@
 ---
 title: Parse Two-Digit Dates Greater Than 2029
-description: An example on how to parse dates after year 2029 which are entered with two digits in the Kendo UI DatePicker.  
+description: Learn how to parse dates after year 2029 which are entered with two digits in the Kendo UI DatePicker.  
 type: how-to
 page_title: Parse Two-Digit Dates Greater Than 2029 - Kendo UI DatePicker for jQuery
 slug: datepicker-parse-dates-greater-than-2029
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
  </tr>
  <tr>
   <td>Created with version</td>

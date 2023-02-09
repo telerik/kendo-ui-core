@@ -1,8 +1,8 @@
 ---
-title: Change label style in TextBox 
-description: An example on how change the style of a textbox before and after floating of its label.
+title: Change the Label Style in the TextBox
+description: Learn how change the style of a textbox before and after floating of its label.
 type: how-to
-page_title: Change lable style before and after float - Kendo UI TextBox for jQuery
+page_title: Change the Lable Style before and after TextBox Float - Kendo UI TextBox for jQuery
 slug: textbox-label-change-floating-style
 tags: textbox, floating, style, before, after, empty, filled
 ticketid: 1498326
@@ -38,7 +38,7 @@ To achieve the desired behaviour, we will need both some JavaScript and CSS beca
         .k-floating-label-container {
           width: 100%;          
         }
-        
+
         .k-floating-label-container:not(.k-focus) {
           color: red; font-style: italic;
         }       
@@ -85,11 +85,11 @@ To achieve the desired behaviour, we will need both some JavaScript and CSS beca
         .k-floating-label-container {
           width: 100%;          
         }
-        
+
         .k-floating-label-container:not(.k-focus) {
           color: red; font-style: italic;
         }
-       
+
       </style>
     </div>
 ```

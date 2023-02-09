@@ -1,6 +1,6 @@
 ---
 title: Place Vertical Scrollbars at the Top of Grids
-description: An example on how to synchronize an external vertical scrollbar with the inner scrollbar of the Grid.
+description: Learn how to synchronize an external vertical scrollbar with the inner scrollbar of the Grid.
 type: how-to
 page_title: Render a Second Vertical Scrollbar - Kendo UI Grid for jQuery
 slug: grid-two-scrollbars
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>

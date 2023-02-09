@@ -1,7 +1,7 @@
 ---
 title: Use Grid in Kendo UI SPA Application
 page_title: Use in SPA Application - Kendo UI Grid for jQuery
-description: "An example on how to initialize the Kendo UI Grid for jQuery in a SPA application."
+description: "Learn how to initialize the Kendo UI Grid for jQuery in a SPA application."
 previous_url: /controls/data-management/grid/how-to/kendo-grid-in-spa-application, /controls/data-management/grid/how-to/various/kendo-grid-in-spa-application
 slug: howto_use_gridin_kendouispa_app_grid
 tags: grid, initialize, spa, apps
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

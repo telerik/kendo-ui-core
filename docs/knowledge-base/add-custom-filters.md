@@ -1,7 +1,7 @@
 ---
 title: Combine Regular and Custom Filters in Grid for ASP.NET MVC
 page_title: Add Custom Filters to Grid - Kendo UI Grid for ASP.NET MVC
-description: An example on how to combine custom with build-in filters in a Kendo UI Grid for ASP.NET MVC.
+description: Learn how to combine custom with build-in filters in a Kendo UI Grid for ASP.NET MVC.
 type: how-to
 previous_url: /knowledge-base/how-to-add-custom-filters
 slug: add-custom-filters
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
+  <td>Progress® Telerik UI® Grid for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>

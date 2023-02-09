@@ -1,6 +1,6 @@
 ---
 title: Update and Add Text to the Expand and Collapse Icons in the Hierarchy Grid
-description: "An example on how to update and add text to the Expand and Collapse icons in a Kendo UI for jQuery hierarchical Grid."
+description: "Learn how to update and add text to the Expand and Collapse icons in a Kendo UI for jQuery hierarchical Grid."
 type: how-to
 page_title: Update and Add Text to Expand and Collapse Icons - Kendo UI Hierarchy Grid for jQuery
 slug: update-hierarchy-grid-expand-collapse-icons
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 
@@ -27,7 +27,7 @@ How can I change the **Expand** and **Collapse** icons in the Kendo UI for jQuer
 ## Solution
 
 To achieve the desired scenario:
- 
+
 1. Update the **Expand** and **Collapse** icons by using the following CSS rules. For the full list of the Kendo UI Web Font Icons, refer to the [list of Font icons](/styles-and-layout/sass-themes/font-icons#list-of-font-icons).
 
 ```

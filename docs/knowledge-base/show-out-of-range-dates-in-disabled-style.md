@@ -1,7 +1,7 @@
 ---
 title: Show Out-of-Range DatePicker Dates as Disabled
 page_title: Show Out-of-Range DatePicker Dates as Disabled
-description: "An example on how to show dates that are out of range in a disabled style in the Kendo UI datePicker widget."
+description: "Learn how to show dates that are out of range in a disabled style in the Kendo UI datePicker widget."
 slug: howto_show_outofrange_dates_disabled_datepicker
 previous_url: /controls/editors/datepicker/how-to/show-out-of-range-dates-in-disabled-style
 tags: kendo, jquery, datepicker, show, out, of, range, dates, as, disabled, inactive
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

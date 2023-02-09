@@ -15,7 +15,7 @@ component: combobox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery ComboBox</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -27,7 +27,7 @@ component: combobox
 
 The selected jQuery ComboBox item is lost when it is bound to the shared DataSource.
 
-## Cause 
+## Cause
 
 The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. Such behavior is expected.
 

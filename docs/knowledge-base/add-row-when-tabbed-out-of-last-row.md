@@ -1,7 +1,7 @@
 ---
-title: Add New Rows When Tabbing Out of the Last One
-page_title: Add New Rows When Tabbed Out - Kendo UI Grid for jQuery
-description: "An example on how to add a new row to the Kendo UI Grid for jQuery when the user navigates out of the last one."
+title: Add New Grid Rows When Tabbing Out of the Last One
+page_title: Add New Data Grid Rows When Tabbing Out - Kendo UI Grid for jQuery
+description: "Learn how to add a new row to the Kendo UI Grid for jQuery when the user navigates out of the last one."
 previous_url: /controls/data-management/grid/how-to/Editing/add-row-when-tabbed-out-of-last-row
 slug: howto_add_new_rows_when_tabbingoutof_thelast_one_grid
 tags: grid, rows, tabbing
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Preferred Language</td>

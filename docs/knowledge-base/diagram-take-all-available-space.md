@@ -1,6 +1,6 @@
 ---
 title: Make Diagram Take All Available Space
-description: An example on how to make the Kendo UI Diagram take all white space that is available.
+description: Learn how to make the Kendo UI Diagram take all white space that is available.
 type: how-to
 page_title: Enable the Diagram to Take All Space That Is Available - Kendo UI Diagram for jQuery
 slug: diagram-take-all-available-space
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Diagram</td>
+		<td>Progress® Kendo UI® Diagram for jQuery</td>
 	</tr>
 </table>
 

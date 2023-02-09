@@ -1,6 +1,6 @@
 ---
 title: Sort Scheduler Events in Descending Order
-description: An example on how to sort events in a descending order for the Kendo UI Scheduler AgendaView.
+description: Learn how to sort events in a descending order for the Kendo UI Scheduler AgendaView.
 type: how-to
 page_title: Sort Events in Descending Order - Kendo UI Scheduler for jQuery
 slug: scheduler-agenda-view-sort-events-descending
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Scheduler for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Scheduler for jQuery</td>
 	</tr>
 </table>
 

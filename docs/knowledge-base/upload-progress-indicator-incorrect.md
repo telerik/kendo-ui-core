@@ -14,7 +14,7 @@ component: upload
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Upload</td>
+  <td>Progress® Kendo UI® Upload for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -22,11 +22,11 @@ component: upload
  </tr>
 </table>
 
-## Description 
+## Description
 
 The jQuery Upload progress indicator incorrectly renders the progress of the upload.
 
-## Cause 
+## Cause
 
 When working in Internet Explorer version 10 or 11 with Windows authentication, the upload progress indicator can go over 100% or freeze but does not indicate that the request is complete. The issue is not related to Kendo UI and is caused by a bug in Internet Explorer which can be observed with any `FormData XMLHttpRequest`. The problem seems to occur only when accessing a web server on `localhost`.
 

@@ -1,6 +1,6 @@
 ---
 title: Persist Hidden Columns after setOptions Is Applied
-description: An example on how to hide columns after the setOptions method is applied to the Kendo UI Grid.
+description: Learn how to hide columns after the setOptions method is applied to the Kendo UI Grid.
 type: how-to
 page_title: Persist Hidden Columns after setOptions - Kendo UI Grid for jQuery
 slug: grid-setoptions-hide-columns
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 

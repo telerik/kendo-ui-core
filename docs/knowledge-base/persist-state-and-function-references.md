@@ -1,6 +1,6 @@
 ---
 title: Persist Function References of Custom Command Buttons in the Grid
-description: An example on how to persist the function references of the custom command buttons in the Kendo UI Grid after serialization.
+description: Learn how to persist the function references of the custom command buttons in the Kendo UI Grid after serialization.
 type: how-to
 page_title: Persist the Command Button State and Function References - Kendo UI Grid for jQuery
 slug: persist-state-and-function-references
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -31,7 +31,7 @@ component: grid
   <td>Latest</td>
  </tr>
   <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>

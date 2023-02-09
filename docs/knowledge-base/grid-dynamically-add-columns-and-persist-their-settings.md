@@ -15,8 +15,8 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Grid</td>
-  <td>Progress® Kendo UI® for jQuery MultiSelect</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+  <td>Progress® Kendo UI® MultiSelect for jQuery</td>
  </tr>
 </table>
 
@@ -26,7 +26,7 @@ How can I add and remove columns to the jQuery Grid component dynamically by usi
 
 ## Solution
 
-To achieve the desired scenario: 
+To achieve the desired scenario:
 
 1. In the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler of the Grid, obtain the column configurations of the component with the initial Grid load.
 1. In the [`change`](/api/javascript/ui/multiselect/events/change) event handler of the MultiSelect, set the new columns configuration object.

@@ -1,6 +1,6 @@
 ---
 title: Filter Hidden Group Columns
-description: An example on how to filter a hidden grouped column in the Kendo UI Grid.
+description: Learn how to filter a hidden grouped column in the Kendo UI Grid.
 type: how-to
 page_title: Move the Filter Button of a Hidden Group Column to the First Cell of the Header - Kendo UI Grid for jQuery
 slug: grid-filter-hidden-group-column
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 

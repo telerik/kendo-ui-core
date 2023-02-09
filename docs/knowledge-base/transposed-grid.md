@@ -1,6 +1,6 @@
 ---
 title: Transpose Grid Data
-description: An example on how to transpose the data of a Kendo UI Grid.
+description: Learn how to transpose the data of a Kendo UI Grid.
 type: how-to
 page_title: Transpose Data - Kendo UI Grid for jQuery
 slug: transposed-grid
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

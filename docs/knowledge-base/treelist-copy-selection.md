@@ -1,6 +1,6 @@
 ---
 title: Implement allowCopy in TreeList
-description: An example on how to enable the copying of the selected items in the Kendo UI TreeList.
+description: Learn how to enable the copying of the selected items in the Kendo UI TreeList.
 type: how-to
 page_title: Enable Copy of Selected Items - Kendo UI TreeList for jQuery
 slug: treelist-copy-selection
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>TreeList for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® TreeList for jQuery</td>
 	</tr>
 </table>
 

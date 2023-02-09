@@ -1,6 +1,6 @@
 ---
 title: Create Header and Footer Rows for a Spreadsheet with DataSource
-description: An example on how to insert a custom header and footer in a Kendo UI Spreadsheet sheet and load its data with a DataSource from a remote call.
+description: Learn how to insert a custom header and footer in a Kendo UI Spreadsheet sheet and load its data with a DataSource from a remote call.
 type: how-to
 page_title: Insert Custom Header and Footer in Spreadsheet with DataSource - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-with-datasource-insert-header-and-footer
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
 </table>
 

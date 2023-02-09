@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI for jQuery CDN Installation</td>
+  <td>Progress® Kendo UI® for jQuery CDN Installation</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -23,9 +23,9 @@ res_type: kb
 
 ## Description
 
-I cannot refer the internal Kendo UI for jQuery builds from the CDN. 
+I cannot refer the internal Kendo UI for jQuery builds from the CDN.
 
-## Cause 
+## Cause
 
 The internal Kendo UI for jQuery builds are not uploaded to CDN because they are intended only for clients with a commercial license. Only major Kendo UI for jQuery releases and service packs are available on CDN.
 
@@ -68,4 +68,3 @@ For internal builds, use private CDN services. It is recommended that you implem
         Hello world!
     </body>
     </html>
-

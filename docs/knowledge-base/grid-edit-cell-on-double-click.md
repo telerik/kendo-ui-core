@@ -1,6 +1,6 @@
 ---
 title: Edit Cells on Double-Click in Grid
-description: An example on how to edit cells in the batch edit mode of the Kendo UI Grid on double-click.
+description: Learn how to edit cells in the batch edit mode of the Kendo UI Grid on double-click.
 type: how-to
 page_title: Implement Double-Click Batch Editing in Selectable Grids - Kendo UI Grid for jQuery
 slug: grid-edit-cell-on-double-click
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

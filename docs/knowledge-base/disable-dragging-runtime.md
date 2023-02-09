@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Drag and Drop for jQuery</td>
+  <td>Progress® Kendo UI® Drag and Drop for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

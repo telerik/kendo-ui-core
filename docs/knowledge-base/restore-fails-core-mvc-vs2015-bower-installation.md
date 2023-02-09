@@ -1,6 +1,6 @@
 ---
-title: Restore Fails for ASP.NET Core MVC RC in VS 2015 When Installing with Bower 
-page_title: Restore Fails for ASP.NET Core MVC RC in VS 2015 When Installing with Bower 
+title: Restore Fails for ASP.NET Core MVC RC in VS 2015 When Installing with Bower
+page_title: Restore Fails for ASP.NET Core MVC RC in VS 2015 When Installing with Bower
 description: "Learn how to handle the issue when restore fails in ASP.NET Core MVC RC projects in Visual Studio 2015 when installing Kendo UI for jQuery with Bower."
 slug: restore_fails_core_mvc_vs2015
 tags: progress, kendoui, jquery, restore, fails, aspnet, core, rc, projects, vs2015, bower, installation
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI for jQuery Bower Installation</td>
+  <td>Progress® Kendo UI® for jQuery Bower Installation</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -24,9 +24,9 @@ res_type: kb
 
 ## Description
 
-A Git client that is bundled in Visual Studio is unable to authenticate with the Kendo UI Bower repository. 
+A Git client that is bundled in Visual Studio is unable to authenticate with the Kendo UI Bower repository.
 
-## Error Message 
+## Error Message
 
 `ECMDERR Failed to execute "git ls-remote --tags --heads https://bower.telerik.com/bower-kendo-ui.git", exit code of #-532462766`.
 
@@ -44,4 +44,3 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 **Add a new entry**
 
 ![Kendo UI for jQuery Adding New Entry](./images/vs2015-external-tools.png)
-	  

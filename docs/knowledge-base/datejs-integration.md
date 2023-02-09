@@ -1,7 +1,7 @@
 ---
 title: Integrate the DatePicker with the DateJS Library
 page_title: Integrate the DatePicker with the DateJS Library
-description: "An example on how to integrate the Kendo UI DatePicker widget with the DateJS library and use its syntactic sugar."
+description: "Learn how to integrate the Kendo UI DatePicker widget with the DateJS library and use its syntactic sugar."
 slug: howto_integrate_withdatejs_library_datepicker
 previous_url: /controls/editors/datepicker/how-to/datejs-integration
 tags: kendo, jquery, datepicker, integrate, with, datejs, library
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

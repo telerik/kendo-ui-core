@@ -1,6 +1,6 @@
 ---
 title: Select a parent row if any of the child rows are selected in the Grid
-description: An example on how to select a parent row when any row of the child is selected in the Grid.
+description: Learn how to select a parent row when any row of the child is selected in the Grid.
 type: how-to
 page_title: Select Parent Row when any Child Grid Row is Selected - Kendo UI Grid
 slug: grid-select-parent-row-when-a-child-row-is-selected
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

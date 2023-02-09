@@ -1,6 +1,6 @@
 ---
 title: Bind to the Events of the NumericTextBox Editor in Grid
-description: An example on how to attach an event listener to the NumericTextBox editor of the Kendo UI Grid.
+description: Learn how to attach an event listener to the NumericTextBox editor of the Kendo UI Grid.
 type: how-to
 page_title: Attach Event Listener to the NumericTextBox Editor - Kendo UI Grid for jQuery
 slug: grid-attach-event-listener-to-the-grid-numeric-editor
@@ -14,9 +14,9 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr> <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2017.3.1026/</td>
  </tr>
 </table>

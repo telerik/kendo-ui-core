@@ -1,6 +1,6 @@
 ---
 title: Send DateTime instead of String to Controller through POST Request
-description: An example on how to send a DateTime type from the Kendo UI DatePicker for jQuery to a controller through a POST request.
+description: Learn how to send a DateTime type from the Kendo UI DatePicker for jQuery to a controller through a POST request.
 type: how-to
 page_title: Send DatePicker Value as a DateTime in POST Request - Kendo UI DatePicker for ASP.NET MVC
 slug: datepicker-send-datetime-in-post-request
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® DatePicker for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI DatePicker for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Product Version</td>

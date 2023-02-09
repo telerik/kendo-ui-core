@@ -1,6 +1,6 @@
 ---
 title: Dynamic User Defined Grid Row Styles
-description: An example on how to dynamically change the grid row background and hover styles based on user selected values.
+description: Learn how to dynamically change the grid row background and hover styles based on user selected values.
 type: how-to
 page_title: User Selected Row Styles - Kendo UI Grid for jQuery
 slug: grid-user-defined-row-styles
@@ -15,7 +15,7 @@ component: grid, colorpicker
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Created with version</td>

@@ -1,7 +1,7 @@
 ---
 title: Store Widgets' State in Local Storage Using Generic Functions
 page_title: Store Widgets' State in Local Storage Using Generic Functions
-description: "An example on how to save and restore Knedo UI widgets' state, value and options using local storage."
+description: "Learn how to save and restore Knedo UI widgets' state, value and options using local storage."
 slug: howto_store_state_in_local_storage
 tags: local, storage, localstorage, widgets, kendo, options, value, state, save
 type: how-to
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery</td>
+  <td>Progress® Kendo UI® for jQuery</td>
  </tr>
  <tr>
   <td>Preferred Language</td>

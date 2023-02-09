@@ -1,8 +1,8 @@
 ---
-title: Add Menu to AppBar
-description: An example on how to add menu to Appbar.
+title: Add a Menu to the AppBar Component
+description: Learn how to add a Kendo UI for jQuery Menu to the Kendo UI for jQuery Appbar component.
 type: how-to
-page_title: Add Menu to AppBar - Kendo UI AppBar for jQuery
+page_title: Add a Menu to the AppBar - Kendo UI AppBar for jQuery
 slug: appbar-menu-overflow
 tags: appbar, menu, overflow
 ticketid: 1498194
@@ -14,10 +14,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI AppBar</td>
+  <td>Progress® Kendo UI® AppBar for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2020.3.1118 version</td>
  </tr>
 </table>
@@ -156,7 +156,7 @@ How can I add a Menu to AppBar and set the overflow?
 
         $(kendo.roleSelector('appbar')).find(kendo.roleSelector('menu')).kendoMenu();
     </script>
-  
+
   <style>
     .k-appbar{
           overflow: visible;

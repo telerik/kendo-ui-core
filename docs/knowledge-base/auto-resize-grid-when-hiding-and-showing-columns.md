@@ -1,7 +1,7 @@
 ---
 title: Resize to Match the Visible Column Widths When Hiding or Showing Grid Columns
 page_title:  Resize When Hiding Columns - Kendo UI Grid for jQuery
-description: "An example on how to match the visible column widths when hiding or showing columns in the Kendo UI Grid for jQuery."
+description: "Learn how to match the visible column widths when hiding or showing columns in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/auto-resize-grid-when-hiding-and-showing-columns
 slug: howto_resize_grid_when_hiding_columns_grid
 tags: grid, match, visible, column, width
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Preferred Language</td>

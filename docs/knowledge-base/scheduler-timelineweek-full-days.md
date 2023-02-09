@@ -1,6 +1,6 @@
 ---
 title: Show Full Days in Scheduler TimelineWeek View
-description: An example on how to show full days in the TimelineWeek view of the Scheduler.
+description: Learn how to show full days in the TimelineWeek view of the Scheduler.
 type: how-to
 page_title: Show Full Days in the TimelineWeek View - Kendo UI Scheduler for jQuery
 slug: scheduler-timelineweek-full-days
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

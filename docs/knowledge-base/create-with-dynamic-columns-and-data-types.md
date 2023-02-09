@@ -1,7 +1,7 @@
 ---
 title: Create Grids with Dynamic Columns and Data Types
 page_title: Dynamic Columns and Data Types - Kendo UI Grid for jQuery
-description: "An example on how to create a Kendo UI jQuery Grid with column and data fields information which is retrieved during runtime."
+description: "Learn how to create a Kendo UI jQuery Grid with column and data fields information which is retrieved during runtime."
 previous_url: /controls/data-management/grid/how-to/create-with-dynamic-columns-and-data-types, /controls/data-management/grid/how-to/various/create-with-dynamic-columns-and-data-types, /controls/data-management/grid/how-to/binding/create-with-dynamic-columns-and-data-types
 slug: howto_createdynamiccolumnsdatatypes_grid
 tags: grid, create, dynamic, columns, data, types
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

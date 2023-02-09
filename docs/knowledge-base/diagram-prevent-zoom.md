@@ -1,6 +1,6 @@
 ---
 title: Prevent Zoom in Diagram
-description: An example on how to prevent the user from zooming in Diagram.
+description: Learn how to prevent the user from zooming in Diagram.
 type: how-to
 page_title: Prevent Zoom in Diagram - Kendo UI Diagram for jQuery
 slug: diagram-prevent-zoom
@@ -15,7 +15,7 @@ component: diagram
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Diagram</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
  </tr>
  <tr>
   <td>Created with version</td>

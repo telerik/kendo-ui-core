@@ -14,8 +14,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Tooltip for jQuery</td>
-  <td>Progress Kendo UI Spreadsheet for jQuery</td>
+  <td>Progress® Kendo UI® Tooltip for jQuery</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
 </table>
 

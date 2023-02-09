@@ -1,6 +1,6 @@
 ---
 title: Create DropDownLists with Long Items
-page_title: Create DropDownLists with Long Items
+page_title: Create Long-Item DropDownLists
 description: "Learn how to create Kendo UI DropDownLists with long items."
 previous_url: /controls/editors/dropdownlist/how-to/create-dropdownlist-with-long-items, /controls/editors/dropdownlist/how-to/appearance/create-dropdownlist-with-long-items
 slug: howto_create_listswith_long_items_dropdownlist
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DropDownList for jQuery</td>
+  <td>Progress® Kendo UI® DropDownList for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

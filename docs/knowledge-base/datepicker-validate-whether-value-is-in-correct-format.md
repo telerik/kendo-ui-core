@@ -1,6 +1,6 @@
 ---
 title: Validate If Value Is in the Correct Format
-description: An example on how to validate whether value is in the correct format in the Kendo UI DatePicker and DateTimePicker widgets.
+description: Learn how to validate whether value is in the correct format in the Kendo UI DatePicker and DateTimePicker widgets.
 type: how-to
 page_title: Validate Whether Value Is in the Correct Format - Kendo UI DatePicker for jQuery
 slug: datepicker-validate-whether-value-is-in-correct-format
@@ -14,11 +14,11 @@ component: date-time-pickers
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker</td>
-  <td>Progress Kendo UI DateTimePicker</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DateTimePicker for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.3.1026</td>
  </tr>
 </table>

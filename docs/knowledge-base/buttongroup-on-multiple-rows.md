@@ -1,7 +1,7 @@
 ---
-title: Display ButtonGroup On Multiple Rows
-page_title: Display ButtonGroup On Multiple Rows - Kendo UI ButtonGroup for jQuery
-description: An example on how to display Kendo UI ButtonGroup on multiple rows.
+title: Display a ButtonGroup on Multiple Rows
+page_title: Render ButtonGroups on Multiple Rows - Kendo UI ButtonGroup for jQuery
+description: Learn how to show a Kendo UI for jQuery ButtonGroup on multiple rows.
 type: how-to
 slug: buttongroup-on-multiple-rows
 tags: button, buttongroup, multiple, rows
@@ -14,13 +14,13 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>ButtonGroup for Progress® Kendo UI®</td>
- </tr> 
+  <td>Progress® Kendo UI® ButtonGroup for jQuery</td>
+ </tr>
 </table>
 
 ## Description
 
-How can I display the buttons in the ButtonGroup on multiple rows? 
+How can I display the buttons in the ButtonGroup on multiple rows?
 
 ## Solution
 

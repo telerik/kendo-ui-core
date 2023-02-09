@@ -1,6 +1,6 @@
 ---
 title: Apply Drawing API Transformations during Export
-page_title: Apply Drawing API Library Transformations during Export 
+page_title: Apply Drawing API Library Transformations during Export
 description: "Learn how to transform the content during export while applying the Kendo UI Drawing API."
 slug: howto_applytransformationsduringexport_drawingapi
 previous_url: /framework/drawing/how-to/export-transform
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Drawing Library</td>
+  <td>Progress® Kendo UI® Drawing API</td>
  </tr>
  <tr>
   <td>Operating System</td>

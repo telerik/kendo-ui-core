@@ -1,6 +1,6 @@
 ---
 title: Set the name Attribute to ComboBox Items
-description: An example on how to set the name attribute to the items of the Kendo UI ComboBox.
+description: Learn how to set the name attribute to the items of the Kendo UI ComboBox.
 type: how-to
 page_title: Set the name Attribute to ComboBox Items after They Load - Kendo UI ComboBox for jQuery
 slug: set-items-name-attribute
@@ -15,7 +15,7 @@ component: combobox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ComboBox</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

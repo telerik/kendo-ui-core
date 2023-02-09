@@ -1,8 +1,8 @@
 ---
 title: Overlay Bar Chart Series
-description: An example on how to display overlaid Column or Bar Chart series where the top series is narrower tan the overlaid series.
+description: Learn how to display overlaid Column or Bar Chart series where the top series is narrower tan the overlaid series.
 type: how-to
-page_title: Display Bar Chart Series That Are Overlaid on Top of Each Other - Kendo UI Chart for jQuery
+page_title: Display Bar Chart Series that Are Overlaid on Top of Each Other - Kendo UI Chart for jQuery
 slug: chart-overlay-bar-series
 tags: chart, visual
 ticketid: 1158675, 1154649
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Chart</td>
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 

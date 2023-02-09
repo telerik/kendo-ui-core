@@ -1,6 +1,6 @@
 ---
 title: Export the Grid to Excel after Confirmation
-description: An example on how to export the Kendo UI Grid to Excel only after confirmation.
+description: Learn how to export the Kendo UI Grid to Excel only after confirmation.
 type: how-to
 page_title: Export Grid to Excel only after Confirmation | UI for JSP
 slug: export-the-grid-to-excel-only-after-confirmation
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for JSP</td>
+  <td>Progress® Kendo UI® Grid for JSP</td>
  </tr>
  <tr>
   <td>Operating System</td>

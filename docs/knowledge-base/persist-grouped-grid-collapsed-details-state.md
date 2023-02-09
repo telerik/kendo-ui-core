@@ -1,7 +1,7 @@
 ---
 title: Persist Collapsed State of Grouped Records
 page_title: Persist Collapsed State - Kendo UI Grid for jQuery
-description: "An example on how to create persist the collapsed state of grouped records in the Kendo UI Grid for jQuery."
+description: "Learn how to create persist the collapsed state of grouped records in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/persist-grouped-grid-collapsed-details-state, /controls/data-management/grid/how-to/state/persist-grouped-grid-collapsed-details-state
 slug: howto_persist_collapsed_stateof_grouped_records_grid
 tags: persist, collapsed, state, grid, grouped, records, data, items
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

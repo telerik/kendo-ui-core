@@ -4,9 +4,9 @@ description: How to Add Initial Poster on Media Player
 type: how-to
 page_title: How to Add Initial Poster on Media Player - Kendo UI MediaPlayer for jQuery
 slug: mediaplayer-add-initial-poster
-position: 
-tags: 
-ticketid: 
+position:
+tags:
+ticketid:
 res_type: kb
 ---
 
@@ -15,7 +15,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>MediaPlayer for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® MediaPlayer for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -28,7 +28,7 @@ This sample demonstrates how you can a separate image as the Poster of the playe
 ## Solution
 
 ```dojo
-  
+
     <div id="example">
       <div class="demo-section k-content wide" style="max-width: 925px;">
         <div id="mediaplayer" style="height:360px"></div>
@@ -79,7 +79,7 @@ $(document).ready(function () {
 
 });
       </script>
-    
+
       <script type="text/x-kendo-template" id="template">
         <li class="k-item k-state-default" onmouseover="$(this).addClass('k-hover')"
             onmouseout="$(this).removeClass('k-hover')">
@@ -151,5 +151,5 @@ $(document).ready(function () {
         }
       </style>
     </div>
-      
-``` 
+
+```

@@ -1,6 +1,6 @@
 ---
 title: Make Kendo UI Window Responsive
-description: An example on how to make a Kendo UI Window responsive so that it reacts to changes in the size of the viewport and adapts to small screens.
+description: Learn how to make a Kendo UI Window responsive so that it reacts to changes in the size of the viewport and adapts to small screens.
 type: how-to
 page_title: Adapt Window to Viewport Size - Kendo UI Window for jQuery
 slug: responsive-kendo-window
@@ -14,7 +14,9 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Window for Progress® Kendo UI®, Progress® Kendo UI® Window for ASP.NET MVC and Progress® Kendo UI® Window for ASP.NET Core</td>
+		<td>Progress® Kendo UI® Window for jQuery</td>
+		<td>Progress® Telerik® UI Window for ASP.NET MVC</td>
+		<td>Progress® Telerik® UI Window for ASP.NET Core</td>
 	</tr>
 </table>
 

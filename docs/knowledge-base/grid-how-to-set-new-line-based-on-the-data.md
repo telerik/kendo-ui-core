@@ -1,6 +1,6 @@
 ---
 title: Set New Lines in Grid Column From Data
-description: An example on how to set a new line based on the data of a Kendo UI Grid.
+description: Learn how to set a new line based on the data of a Kendo UI Grid.
 type: how-to
 page_title: Set a New Line Based On the Data - Kendo UI Grid for jQuery
 slug: grid-how-to-set-new-line-based-on-the-data
@@ -15,9 +15,9 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr> <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2017.3.1026</td>
  </tr>
 </table>

@@ -1,6 +1,6 @@
 ---
 title: Set Custom Time Ruler Indicators in Gantt
-description: An example on how to set custom time ruler indicators in the Kendo UI Gantt.
+description: Learn how to set custom time ruler indicators in the Kendo UI Gantt.
 type: how-to
 page_title: Define Custom Time Ruler Indicators in Gantt - Kendo UI Gantt for jQuery
 slug: custom-time-ruler-indicators-in-gantt
@@ -14,7 +14,7 @@ component: gantt
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Gantt</td>
+  <td>Progress® Kendo UI® Gantt for jQuery</td>
  </tr>
 </table>
 

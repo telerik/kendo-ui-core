@@ -14,7 +14,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>TileLayout for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® TileLayout for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -22,7 +22,7 @@ res_type: kb
 
 ## Description
 
-How can I Make the columns of the TileLayout widget responsive? 
+How can I Make the columns of the TileLayout widget responsive?
 
 ## Solution
 
@@ -30,7 +30,7 @@ You can use the [`setOptions()`] method of the TileLayout to update its [`column
 
 
 ```dojo
-  
+
     <div id="tilelayout"></div>
 
     <!-- container templates -->
@@ -134,7 +134,7 @@ You can use the [`setOptions()`] method of the TileLayout to update its [`column
         height: 290px;
       }
     </style>
-``` 
+```
 
 ## See Also
 

@@ -1,6 +1,6 @@
 ---
 title: Dynamically Change the Displayed Grouping in Scheduler
-description: An example on how to change the groups in a Kendo UI Scheduler to reflect the selected resource values.
+description: Learn how to change the groups in a Kendo UI Scheduler to reflect the selected resource values.
 type: how-to
 page_title: Dynamically Change Grouping Resources - Kendo UI Scheduler for jQuery
 slug: scheduler-dynamically-change-grouping-options
@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

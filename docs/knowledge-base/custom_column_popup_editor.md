@@ -1,6 +1,6 @@
 ---
 title: Add Custom Column Popup Editor
-description: "An example on how to add a custom popup editor for a column in the Kendo UI Grid."
+description: "Learn how to add a custom popup editor for a column in the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Editing/custom_column_popup_editor
 type: how-to
 page_title: Add Custom Column Popup Editor - Kendo UI Grid for jQuery
@@ -15,10 +15,10 @@ ticketid: 1112542
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
-   <td>Progress® Kendo UI® version</td>
+   <td>Product Version</td>
    <td>Tested up to version 2017.2 504</td>
   </tr>
 </table>

@@ -1,6 +1,6 @@
 ---
 title: Customize Delete Confirmation Window in Gantt
-description: An example on how to customize a delete confirmation dialog in the Kendo UI Gantt for jQuery
+description: Learn how to customize a delete confirmation dialog in the Kendo UI Gantt for jQuery
 type: how-to
 page_title: Customize Delete Confirmation Window in Gantt - Kendo UI Gantt for jQuery
 slug: gantt-customize-confirmation-window
@@ -15,7 +15,7 @@ component: gantt
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Gantt</td>
+  <td>Progress® Kendo UI® Gantt for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

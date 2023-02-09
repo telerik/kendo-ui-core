@@ -1,6 +1,6 @@
 ---
 title: Add a Loading Indicator to Spreadsheet While Filtering and Sorting
-description: An example on how to add loading indicator to Spreadsheet while filtering or sorting.
+description: Learn how to add loading indicator to Spreadsheet while filtering or sorting.
 type: how-to
 page_title: How to Add Loading Indicator to Spreadsheet While Filtering or Sorting - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-loadingindicator-filtering-sorting
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
 </table>
 

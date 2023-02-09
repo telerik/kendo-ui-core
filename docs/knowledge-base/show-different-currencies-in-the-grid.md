@@ -1,6 +1,6 @@
 ---
 title: Display Mixed Currencies in Grid
-description: An example on how to show different currencies in the Kendo UI Grid.
+description: Learn how to show different currencies in the Kendo UI Grid.
 type: how-to
 page_title: Show Different Currencies - Kendo UI Grid for jQuery
 slug: show-different-currencies-in-the-grid
@@ -16,10 +16,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2017.1.223</td>
  </tr>
 </table>

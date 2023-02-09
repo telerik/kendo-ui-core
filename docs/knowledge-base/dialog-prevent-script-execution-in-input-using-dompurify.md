@@ -1,6 +1,6 @@
 ---
 title: Prevent script execution in the input of the kendo.prompt predefined dialog using DOMPurify.
-description: An example on how to prevent script execution in the input of the kendo.prompt predefined dialog.
+description: Learn how to prevent script execution in the input of the kendo.prompt predefined dialog.
 type: how-to
 page_title:  Prevent script execution in the input of the kendo.prompt predefined dialog using DOMPurify - Kendo UI Dialog for jQuery
 slug: dialog-prevent-js-execution
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Dialog</td>
+  <td>Progress® Kendo UI® Dialog for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -44,7 +44,7 @@ If you type some JavaScript in the kendo.prompt input field, it will execute. Th
       <button id="promptBtn" class="k-button">kendo.prompt</button>
 
       <script>
-        
+
         //Sanitized data from input
         function sanitizeHtml(html) {
           var temp = $("<div></div>").html(window.DOMPurify.sanitize(html));
@@ -56,7 +56,7 @@ If you type some JavaScript in the kendo.prompt input field, it will execute. Th
 
             //Get the cleaned data from the function
             var cleanedData = sanitizeHtml(data);
-            
+
 						//Output your results
             kendo.alert(kendo.format("The value that you entered is '{0}'", cleanedData));
 

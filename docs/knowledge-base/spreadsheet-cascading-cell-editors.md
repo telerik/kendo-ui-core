@@ -1,6 +1,6 @@
 ---
-title: Implement Cascading Cell Editors in the Spreadsheet 
-description: "An example on how to implement cascading cell editors in the Kendo UI for jQuery Spreadsheet."
+title: Implement Cascading Cell Editors in the Spreadsheet
+description: "Learn how to implement cascading cell editors in the Kendo UI for jQuery Spreadsheet."
 type: how-to
 page_title: Implement Cascading Cell Editors in the Spreadsheet
 slug: spreadsheet-cascading-cell-editors
@@ -14,7 +14,7 @@ component: spreadsheet
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
 </table>
 
@@ -25,7 +25,7 @@ How can I implement cascading cell editors in the Kendo UI for jQuery Spreadshee
 
 ## Solution
 
-To achieve the desired scenario, refer to the following implementation: 
+To achieve the desired scenario, refer to the following implementation:
 
 ```dojo
     <div id="example">

@@ -1,7 +1,7 @@
 ---
 title: Use Nested Model Properties
 page_title: Use Nested Model Properties - Kendo UI Grid for jQuery
-description: "An example on how to use nested model properties in the Kendo UI Grid for jQuery."
+description: "Learn how to use nested model properties in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/use-nested-model-properties, /controls/data-management/grid/how-to/binding/use-nested-model-properties
 slug: howto_use_nested_model_properties_grid
 tags: use, nested, model, properties, grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

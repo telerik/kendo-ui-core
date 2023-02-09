@@ -1,6 +1,6 @@
 ---
 title: Change text alignment in Grid cells
-description: An example on how to change the text alignment in a Grid column.
+description: Learn how to change the text alignment in a Grid column.
 type: how-to
 page_title: Grid Cells Text Alignment - Kendo UI Grid for jQuery
 slug: grid-change-cells-text-alignment
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2021.2.511</td>
  </tr>
 </table>

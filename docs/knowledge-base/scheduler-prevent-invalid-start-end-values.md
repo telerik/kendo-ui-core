@@ -1,8 +1,8 @@
 ---
 title: Prevent invalid start/end date values in the Scheduler popup editor.
-description: An example on how to prevent the user from entering invalid start/end date values in the Kendo jQuery Scheduler popup editor.
+description: Learn how to prevent the user from entering invalid start/end date values in the Kendo jQuery Scheduler popup editor.
 type: how-to
-page_title: Prevent invalid start/end date values in the Scheduler popup editor - Kendo UI Scheduler for jQuery 
+page_title: Prevent invalid start/end date values in the Scheduler popup editor - Kendo UI Scheduler for jQuery
 slug: scheduler-start-end-invalid-input
 tags: scheduler, start, end, inputs, readonly, datepickers
 res_type: kb
@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Kendo UI for jQuery</td>
@@ -38,7 +38,7 @@ Handle the [edit event](api/javascript/ui/scheduler/events/edit) and add "readon
     $(function() {
         function scheduler_edit(e) {
             // Make Start and End DateTimePickers INPUTS readonly, allowing date selection only through dropdowns
-        
+
             $("[name='start']").prop("readonly", true);
             $("[name='end']").prop("readonly", true);
         }

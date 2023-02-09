@@ -1,6 +1,6 @@
 ---
 title: Lock and Unlock Grid Columns by Using Toolbar instead of Column Menu
-description: An example on how to lock and unlock Kendo UI Grid columns by using the Toolbar instead of the Column Menu.
+description: Learn how to lock and unlock Kendo UI Grid columns by using the Toolbar instead of the Column Menu.
 type: how-to
 page_title: Lock and Unlock Columns with Toolbar instead of Column Menu - Kendo UI Grid for jQuery
 slug: grid-lock-unlock-using-toolbar
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

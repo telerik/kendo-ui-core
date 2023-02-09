@@ -1,7 +1,7 @@
 ---
 title: Bypass Boundary Detection in the ComboBox
 page_title: Bypass Boundary Detection in the ComboBox
-description: "Learn how to auto-size the popup height in a Kendo UI ComboBox."
+description: "Learn how to auto-size the popup height in a Kendo UI for jQuery ComboBox component."
 previous_url: /controls/editors/combobox/how-to/bypass-boundary-detection, /controls/editors/combobox/how-to/customize/bypass-boundary-detection
 slug: howto_bypass_boudary_detection_combobox
 tags: telerik, kendo, jquery, combobox, bypass, boudary, detection
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ComboBox for jQuery</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,6 +1,6 @@
 ---
 title: Use Grid Edit Buttons with Icons Only and No Text
-description: An example on how to remove the text from the Edit buttons of a Kendo UI Grid and leave only the icons.
+description: Learn how to remove the text from the Edit buttons of a Kendo UI Grid and leave only the icons.
 type: how-to
 page_title: Use the Grid Edit Buttons only with Icons and without Text - Kendo UI Grid for jQuery
 slug: grid-icon-only-buttons
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.2.504</td>
  </tr>
 </table>

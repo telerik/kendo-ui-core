@@ -1,6 +1,6 @@
 ---
 title: Add Font Icons to Menu Items
-description: An example on how to add font icons to a Kendo UI Menu item.
+description: Learn how to add font icons to a Kendo UI Menu item.
 type: how-to
 page_title: Add Font Icons to Menu Items - Kendo UI Menu
 slug: menu-font-icon-in-item
@@ -15,7 +15,9 @@ res_type: kb
     <tbody>
 	    <tr>
 	    	<td>Product</td>
-	    	<td>Menu for ASP.NET Core, Menu for ASP.NET MVC, Menu for jQuery</td>
+        <td>Progress® Kendo UI® Menu for jQuery</td>
+	    	<td>Progress® Telerik® UI Menu for ASP.NET Core</td>
+	    	<td>Progress® Telerik® UI Menu for ASP.NET MVC</td>
 	    </tr>
     </tbody>
 </table>

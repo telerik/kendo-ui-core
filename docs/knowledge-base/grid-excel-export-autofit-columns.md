@@ -1,6 +1,6 @@
 ---
 title: Set Grid Auto Width When Exporting to Excel
-description: An example on how to set the auto width of the Kendo UI Grid when exporting it to Excel.
+description: Learn how to set the auto width of the Kendo UI Grid when exporting it to Excel.
 type: how-to
 page_title: Auto-fit Columns in Excel - Kendo UI Grid for jQuery
 slug: grid-excel-export-autofit-columns
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

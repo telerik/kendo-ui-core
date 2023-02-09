@@ -1,7 +1,7 @@
 ---
 title: Use MultiSelect for Column Filtering
 page_title: MultiSelect for Column Filtering - Kendo UI Grid for jQuery
-description: "An example on how to use a Kendo UI MultiSelect for column filtering of the Kendo UI Grid for jQuery."
+description: "Learn how to use a Kendo UI MultiSelect for column filtering of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/filtering-array-column-using-multiselect, /controls/data-management/grid/how-to/multiselect-used-for-column-filtering, /web/grid/how-to/multiselect-used-for-column-filtering, /controls/data-management/grid/how-to/filtering/multiselect-used-for-column-filtering, /controls/editors/multiselect/how-to/multiselect-for-grid-column-filtering, /controls/editors/multiselect/how-to/integration/multiselect-for-grid-column-filtering
 slug: howto_use_multiselect_forcolumn_filtering_grid
 tags: use, multiselect, grid, column, filtering
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

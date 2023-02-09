@@ -1,6 +1,6 @@
 ---
 title: Export Custom Headers to Excel in Grid
-description: An example on how to add an extra row to the Excel Export for custom Kendo UI Grid headers.
+description: Learn how to add an extra row to the Excel Export for custom Kendo UI Grid headers.
 type: how-to
 page_title: Add Custom Headers When Exporting to Excel - Kendo UI Grid for jQuery
 slug: grid-excel-export-custom-headers
@@ -15,8 +15,8 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
-  <td>Progress Kendo UI Excel Export</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+  <td>Progress® Kendo UI® Excel Export for jQuery</td>
  </tr>
 </table>
 

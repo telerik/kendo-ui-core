@@ -1,6 +1,6 @@
 ---
 title: Implement Custom MVVM Bindings in Custom Widgets
-description: An example on how to implement custom MVVM bindings in custom Kendo UI widgets for jQuery.
+description: Learn how to implement custom MVVM bindings in custom Kendo UI widgets for jQuery.
 type: how-to
 page_title: Implement Custom MVVM Bindings in Custom Widgets - Kendo UI MVVM for jQuery
 slug: mvvm-custom-binding-on-custom-widget
@@ -15,7 +15,7 @@ component: mvvm
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI MVVM</td>
+  <td>Progress® Kendo UI® MVVM Architecture</td>
  </tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Create Custom Editor Tool
-description: An example on how to create a custom tool for the Kendo UI Editor.
+description: Learn how to create a custom tool for the Kendo UI Editor.
 type: how-to
 page_title: Create Custom Tool - Kendo UI Editor for jQuery
 slug: editor-custom-tool
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Editor for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Editor for jQuery</td>
 	</tr>
 </table>
 

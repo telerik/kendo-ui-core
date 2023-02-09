@@ -1,11 +1,11 @@
 ---
 title: How To Make Screen Readers Read Either Label Or Title Of A DropDownList
-description: An example on how to make Screen Readers read label or title of a Kendo UI DropDownList.
+description: Learn how to make Screen Readers read label or title of a Kendo UI DropDownList.
 type: how-to
 page_title: Screen Readers Read Title - Kendo UI DropDownList for jQuery
 slug: dropdownlist-screenreaders-read-title
 tags: dropdownlist, screenreaders, title
-ticketid: 1142772 
+ticketid: 1142772
 res_type: kb
 component: dropdownlist, combobox, multiselect
 ---
@@ -15,8 +15,8 @@ component: dropdownlist, combobox, multiselect
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DropDownList</td>
- </tr> 
+  <td>Progress® Kendo UI® DropDownList for jQuery</td>
+ </tr>
 </table>
 
 ## Description

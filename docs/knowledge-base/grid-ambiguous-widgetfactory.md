@@ -15,8 +15,9 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
- </tr> <tr>
+  <td>Progress® Telerik® UI Grid for ASP.NET MVC</td>
+ </tr>
+ <tr>
   <td>UI for ASP.NET MVC version</td>  
   <td>2017.2 621</td>
  </tr>

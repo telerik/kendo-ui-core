@@ -1,6 +1,6 @@
 ---
 title: Make MultiSelect Placeholder Accessible
-description: An example on how to make the Kendo UI MultiSelect placeholder accessible to screen readers.
+description: Learn how to make the Kendo UI MultiSelect placeholder accessible to screen readers.
 type: how-to
 page_title: Make MultiSelect Placeholder Accessible - Kendo UI MultiSelect for jQuery
 slug: multiselect-make-placeholder-accessible
@@ -14,10 +14,10 @@ component: multiselect
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI MultiSelect</td>
+  <td>Progress® Kendo UI® MultiSelect for jQuery</td>
  </tr>
  <tr>
-  <td>Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2019.1.220 version</td>
  </tr>
 </table>

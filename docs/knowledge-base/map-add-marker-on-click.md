@@ -4,7 +4,7 @@ description: An example that shows how to add and remove a marker at the locatio
 type: how-to
 page_title: Add and remove a marker on click
 slug: map-add-marker-on-click
-position: 
+position:
 tags: map, add, markers, on, click, location, marker
 res_type: kb
 ---
@@ -13,12 +13,12 @@ res_type: kb
 <table>
 	<tbody>
 		<tr>
-			<td>Created with Product Version</td>
+			<td>Product Version</td>
 			<td>2019.2.619</td>
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Map for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Map for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -101,7 +101,7 @@ I have a map that a user will utilize in order to mark their position. I want th
             }
           });
         }
-        
+
         function remove(btn){
           var markerLocation = $(btn).data("location");
           var markers = map.markers.items;
@@ -114,7 +114,7 @@ I have a map that a user will utilize in order to mark their position. I want th
         }
 
         function show(){
-          var markers = map.markers.items; 
+          var markers = map.markers.items;
           var message = "";
          	for(var i=0; i< markers.length; i++){
             message += kendo.format("Marker {0} Location - {1}</br>", i+1, markers[i].location());

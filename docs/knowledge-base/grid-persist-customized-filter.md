@@ -1,6 +1,6 @@
 ---
 title: Persist Custom Filters in Grid
-description: An example on how to persist a custom filter when restoring the state of a Kendo UI Grid.
+description: Learn how to persist a custom filter when restoring the state of a Kendo UI Grid.
 type: how-to
 page_title: Persist the State of Custom Filters - Kendo UI Grid for jQuery
 slug: grid-persist-customized-filter
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2017.3.913</td>
  </tr>
 </table>

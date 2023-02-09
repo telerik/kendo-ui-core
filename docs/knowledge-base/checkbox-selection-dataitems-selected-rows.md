@@ -1,6 +1,6 @@
 ---
 title: Get the Selected Grid Rows Data
-description: An example on how to get the dataItem for every selected row by using the change event of the Kendo UI Grid.
+description: Learn how to get the dataItem for every selected row by using the change event of the Kendo UI Grid.
 type: how-to
 page_title: Get the DataItems of the Selected Rows - Kendo UI Grid for jQuery
 slug: checkbox-selection-dataitems-selected-rows
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>
@@ -189,8 +189,8 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
           //Get the id field values of the selected rows
           var keyNames = $("#grid").data("kendoGrid").selectedKeyNames();
           // convert string values to number
-          var ids = keyNames.map(function (x) { 
-            return parseInt(x, 10); 
+          var ids = keyNames.map(function (x) {
+            return parseInt(x, 10);
           });
           var gridData = $("#grid").data("kendoGrid").dataSource.data();
           var selected =[];
@@ -199,7 +199,7 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
               if(number === dataItem.id) {
                 selected.push(dataItem)
               }
-            }) 
+            })
           });
           var listBox = $("#listBox").data("kendoListBox");
           listBox.dataSource.data(selected);

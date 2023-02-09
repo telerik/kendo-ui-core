@@ -1,6 +1,6 @@
 ---
 title:  Responsive column editing template
-description: An example on how to use editing when responsive columns templates are used in the jQuery Kendo UI Grid.
+description: Learn how to use editing when responsive columns templates are used in the jQuery Kendo UI Grid.
 type: how-to
 page_title: Use editing with responsive columns template - Kendo UI Grid for jQuery
 slug: grid-responsive-columns-editing
@@ -15,17 +15,17 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
-  <td>Created with Kendo UI version</td>
+  <td>Product Version</td>
   <td>2020.2.617</td>
  </tr>
 </table>
 
 ## Description
 
-My current grid is editable, but how can I use editing in a smaller screen when only the template is shown that combines all the other columns values as seen in your [Responsive Columns Demo](https://demos.telerik.com/kendo-ui/grid/responsive-columns)? 
+My current grid is editable, but how can I use editing in a smaller screen when only the template is shown that combines all the other columns values as seen in your [Responsive Columns Demo](https://demos.telerik.com/kendo-ui/grid/responsive-columns)?
 
 ## Solution
 

@@ -1,6 +1,6 @@
 ---
 title: How to Get the Row and Column Index of Failed Cell Validation in Spreadsheet
-description: An example on how to get the row and column index of failed cell validation in Spreadsheet.
+description: Learn how to get the row and column index of failed cell validation in Spreadsheet.
 type: how-to
 page_title: How to Get the Row and Column Index of Failed Cell Validation in Spreadsheet - Kendo UI Tooltip for jQuery
 slug: spreadsheet-row-column-index-fail-validation
@@ -15,7 +15,7 @@ component: spreadsheet
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
 </table>
  

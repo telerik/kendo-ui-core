@@ -1,6 +1,6 @@
 ---
 title: Display Hidden Column Values in Detail Template
-description: An example on how to show the values of the hidden column in the detail template of the Kendo UI Grid.
+description: Learn how to show the values of the hidden column in the detail template of the Kendo UI Grid.
 type: how-to
 page_title: Implement Responsive Value Display - Kendo UI Grid for jQuery
 slug: grid-display-hidden-values-in-details
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 

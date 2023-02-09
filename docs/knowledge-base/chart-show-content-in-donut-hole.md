@@ -1,6 +1,6 @@
 ---
 title: Show Text in the Center of a Donut Chart
-description: An example on how to show custom content centered in the Donut Chart.
+description: Learn how to show custom content centered in the Donut Chart.
 type: how-to
 page_title: Render Content Inside the Center of the Donut Chart - Kendo UI Chart for jQuery
 slug: chart-show-content-in-donut-hole
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Chart</td>
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 

@@ -1,7 +1,7 @@
 ---
 title: Make DatePicker Input Elements Read-Only
 page_title: Make DatePicker Input Elements Read-Only
-description: "An example on how to make input elements of the Kendo UI for jQuery DatePicker read-only."
+description: "Learn how to make input elements of the Kendo UI for jQuery DatePicker read-only."
 slug: howto_make_input_elements_readonly_datepicker
 previous_url: /controls/editors/datepicker/how-to/readonly-input
 tags: kendo, jquery, datepicker, make, input, elements, readonly
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

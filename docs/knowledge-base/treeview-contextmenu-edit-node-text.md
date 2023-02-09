@@ -1,6 +1,6 @@
 ---
 title: Edit TreeView Node Text through Context Menu
-description: An example on how to edit the text of a Kendo UI TreeView node by using a context menu.
+description: Learn how to edit the text of a Kendo UI TreeView node by using a context menu.
 type: how-to
 page_title: Edit Node Text through Context Menu - Kendo UI TreeView for jQuery
 slug: treeview-contextmenu-edit-node-text
@@ -17,7 +17,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>TreeView for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® TreeView for jQuery</td>
 	</tr>
 </table>
 

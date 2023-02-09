@@ -1,6 +1,6 @@
 ---
 title: Show Gantt Task Progress Handle When Using Task Template
-description: An example on how to display a progress drag handle for the Kendo UI Gantt tasks when a taskTemplate is set.
+description: Learn how to display a progress drag handle for the Kendo UI Gantt tasks when a taskTemplate is set.
 type: how-to
 page_title: Display Task Progress Drag Handle When taskTemplate Is Used - Kendo UI Gantt for jQuery
 slug: gantt-task-progress-drag-handle
@@ -15,7 +15,7 @@ component: gantt
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Gantt</td>
+  <td>Progress® Kendo UI® Gantt for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,6 +1,6 @@
 ---
 title: Load shape from context menu in the Diagram
-description: An example on how to dynamically add shapes to a Kendo UI Diagram using a context menu.
+description: Learn how to dynamically add shapes to a Kendo UI Diagram using a context menu.
 type: how-to
 page_title: Create shapes dynamically with ContextMenu - Kendo UI Diagram for jQuery
 slug: diagram-add-shapes-from-context-menu
@@ -15,7 +15,7 @@ component: diagram
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Diagram</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
  </tr>
 </table>
 
@@ -345,7 +345,7 @@ I want to use the context menu over shapes to create a chain of dynamic options 
           var selectedShape = diagram.getShapeByModelId(contextDataItem.id);
           var newShapeId = thisDataSource.length +=1;
           diagram.dataSource.add({
-            x: contextDataItem.x + selectedShape.options.width + 50, 
+            x: contextDataItem.x + selectedShape.options.width + 50,
             y: contextDataItem.y ,
             eventType: $(e.item).text(),
             id: newShapeId

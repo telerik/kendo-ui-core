@@ -1,6 +1,6 @@
 ---
 title: Change the Icons of Update and Cancel Buttons
-description: An example on how to change the icons of the Update and Cancel buttons in the Kendo UI Grid.
+description: Learn how to change the icons of the Update and Cancel buttons in the Kendo UI Grid.
 type: how-to
 page_title: Implement Custom Buttons - Kendo UI Grid for jQuery
 slug: grid-custom-icons-in-buttons
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

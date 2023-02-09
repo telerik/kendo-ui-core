@@ -1,6 +1,6 @@
 ---
 title: Set the Default Filter Operator in the Grid
-description: An example on how to set the default filter operators of the Kendo UI Grid rows.
+description: Learn how to set the default filter operators of the Kendo UI Grid rows.
 type: how-to
 page_title: Set the Default Filter Operator - Kendo UI Grid for jQuery
 slug: default-grid-filter
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

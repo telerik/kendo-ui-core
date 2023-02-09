@@ -1,7 +1,7 @@
 ---
 title: Hide the Default DatePicker Button
 page_title: Hide the Default DatePicker Button
-description: "An example on how to hide the default widget button in the Kendo UI DatePicker."
+description: "Learn how to hide the default widget button in the Kendo UI DatePicker."
 slug: howto_hide_default_button_datepicker
 previous_url: /controls/editors/datepicker/how-to/hide-button-with-css
 tags: kendo, jquery, datepicker, hide, default, button, with, css
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

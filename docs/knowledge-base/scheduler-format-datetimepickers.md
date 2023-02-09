@@ -15,8 +15,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler for jQuery</td>
-  <td>Progress Kendo UI DateTimePicker for jQuery</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
+  <td>Progress® Kendo UI® DateTimePicker for jQuery</td>
  </tr> 
 </table>
 

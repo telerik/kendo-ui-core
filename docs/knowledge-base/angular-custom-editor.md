@@ -1,7 +1,7 @@
 ---
-title: Create Custom Editors in AngularJS
-page_title: Create Custom Editors in AngularJS - Kendo UI Grid for jQuery
-description: "An example on how to create custom editors in the Kendo UI Grid by using AngularJS."
+title: Create Custom Grid Editors in AngularJS
+page_title: Create Custom Editors in the Data Grid in AngularJS - Kendo UI Grid for jQuery
+description: "Learn how to create custom editors in the Kendo UI Grid by using AngularJS."
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-custom-editor
 slug: howto_create_custom_editors_grid
 tags: grid, create, custom, editors, angularjs
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress AngularJS Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Preferred Language</td>

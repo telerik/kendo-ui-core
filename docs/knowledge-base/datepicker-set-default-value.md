@@ -4,9 +4,9 @@ description: How to Set Default Value for Date Picker
 type: how-to
 page_title: How to Set Default Value for Date Picker - Kendo UI DatePicker for jQuery
 slug: datepicker-set-default-value
-position: 
-tags: 
-ticketid: 
+position:
+tags:
+ticketid:
 res_type: kb
 ---
 
@@ -15,7 +15,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>DatePicker for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® DatePicker for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -30,7 +30,7 @@ https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/methods/value
 ## Solution
 
 ```dojo
-  
+
     <input id="datepicker" />
     <script>
       $("#datepicker").kendoDatePicker({
@@ -46,4 +46,4 @@ https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/methods/value
       datepicker.value(new Date());
     </script>
 
-``` 
+```

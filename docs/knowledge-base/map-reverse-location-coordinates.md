@@ -15,10 +15,10 @@ component: map
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Map</td>
+  <td>Progress® Kendo UI® Map for jQuery</td>
  </tr>
   <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 504</td>
  </tr>
 </table>

@@ -1,6 +1,6 @@
 ---
 title: Print Agenda View On Multiple Pages
-description: An example on how to print the Kendo UI Scheduler on multiple pages when agenda view is selected.
+description: Learn how to print the Kendo UI Scheduler on multiple pages when agenda view is selected.
 type: how-to
 page_title: Print To PDF Agenda View On Multiple Pages - Kendo UI Scheduler for jQuery
 slug: scheduler-print-pdf-agenda-multiple-pages
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 
@@ -111,7 +111,7 @@ How can I print the Kendo UI Scheduler on multiple pages when agenda view is sel
         font-family: "DejaVu Sans", "Arial", sans-serif;
         font-size: .9em;
       }
-      
+
       html body .k-pdf-export .k-scheduler-content .k-scheduler-table tr > td:first-child {
         width: 172px;
       }

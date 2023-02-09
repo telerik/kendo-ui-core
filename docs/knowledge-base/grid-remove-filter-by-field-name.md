@@ -1,6 +1,6 @@
 ---
 title: Grid Remove Filter By Field Name
-description: "An example on how to remove a specific filter applied to the DataSource of Kendo UI Grid."
+description: "Learn how to remove a specific filter applied to the DataSource of Kendo UI Grid."
 type: how-to
 page_title: Remove Filter By Field Name - Kendo UI Grid for jQuery
 slug: grid-remove-filter-by-field-name
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2021.2.616</td>
  </tr>
 </table>

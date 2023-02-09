@@ -1,7 +1,7 @@
 ---
 title: Integrate the PivotGrid with the Kendo UI Chart
-page_title: Integrate PivotGrid with Kendo UI Chart
-description: "Learn how to integrate a Kendo UI PivotGrid widget with a Kendo UI Chart widget."
+page_title: Integrate the PivotGrid and Chart Components
+description: "Learn how to integrate a Kendo UI PivotGrid component with a Kendo UI Chart widget."
 slug: howto_integratewith_kendoui_chart_pivotgrid
 previous_url: /controls/charts/how-to/binding/bind-chart-to-pivotgrid-data, /controls/data-management/pivotgrid/how-to/chart-integration, /controls/charts/how-to/integration/pivotgrid-chart-integration
 tags: kendoui, pivotgrid, integrate, with, kendo, chart
@@ -15,8 +15,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI PivotGrid</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® PivotGrid for jQuery</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

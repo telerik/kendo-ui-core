@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Timeline for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Timeline for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -37,7 +37,7 @@ Utilize the [`sort`](https://docs.telerik.com/kendo-ui/api/javascript/data/datas
     <div id="timeline"></div>
     <script>
       	const baseUrl = "https://demos.telerik.com/kendo-ui";
-      
+
         $(document).ready(function () {
             $("#timeline").kendoTimeline({
                 dataSource: {

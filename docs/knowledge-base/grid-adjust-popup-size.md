@@ -1,6 +1,6 @@
 ---
 title: Change Size of Popup Editor
-description: An example on how to specify dimensions for the Kendo UI Grid popup editor.
+description: Learn how to specify dimensions for the Kendo UI Grid popup editor.
 type: how-to
 page_title: Change Popup Editor Dimensions - Kendo UI Grid for jQuery
 slug: grid-adjust-popup-size
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2020.3.1021 version</td>
  </tr>
 </table>

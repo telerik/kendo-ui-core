@@ -1,6 +1,6 @@
 ---
 title: Make the Weekly Recurrence Option Mandatory in the Scheduler
-description: "An example on how to make the weekly recurrence option in the Kendo UI for jQuery  Scheduler mandatory."
+description: "Learn how to make the weekly recurrence option in the Kendo UI for jQuery  Scheduler mandatory."
 type: how-to
 page_title: Make the Weekly Recurrence Option Mandatory in the Hierarchy Scheduler
 slug: scheduler-weekly-recurrence-mandatory
@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

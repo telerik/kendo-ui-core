@@ -4,9 +4,9 @@ description: TreeList Aggregate Specifics
 type: how-to
 page_title: TreeList Aggregate Specifics - Kendo UI TreeList for jQuery
 slug: treelist-aggregate-specifics
-position: 
-tags: 
-ticketid: 
+position:
+tags:
+ticketid:
 res_type: kb
 ---
 
@@ -15,7 +15,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>TreeList for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® TreeList for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -48,6 +48,6 @@ For better clarification, you can open the following live sample:
 As a Total count in the TreeList, there are 99 employees. But when you expand the CEO Daryl there are 98 people under him and he himself is the last 99th employee.
 
 Another example you can find here which demonstrates the same thing (different Product's TreeList developed by another team):
-<https://demos.telerik.com/aspnet-ajax/treelist/examples/columns/aggregates/defaultcs.aspx> 
+<https://demos.telerik.com/aspnet-ajax/treelist/examples/columns/aggregates/defaultcs.aspx>
 
 Where although the Countries seem to be like children of Continents, in the context of records they are all intrepreted as Region Units. Therefore, the total aggregate calculation shows over 10 billion (total of all items) instead of 6.5 billion (total of just parent level).

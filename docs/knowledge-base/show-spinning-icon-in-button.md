@@ -1,6 +1,6 @@
 ---
 title: Show Spinning Icon in Button
-description: An example on how to add a spinning icon to the Kendo UI Button.
+description: Learn how to add a spinning icon to the Kendo UI Button.
 type: how-to
 page_title: Show Spinning Icon - Kendo UI Button for jQuery
 slug: show-spinning-icon-in-button
@@ -14,7 +14,7 @@ component: button
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Button</td>
+  <td>Progress® Kendo UI® Button for jQuery</td>
  </tr>
 </table>
 

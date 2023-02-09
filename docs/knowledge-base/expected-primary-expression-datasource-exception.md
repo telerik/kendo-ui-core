@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DataSource for ASP.NET MVC</td>
+  <td>Progress® Kendo UI® DataSource for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -14,7 +14,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -26,11 +26,11 @@ component: editor
 
 The jQuery Editor on iPad expands instead of being scrollable.
 
-## Cause 
+## Cause
 
 Iframes cannot be scrollable on iOS and always expand to display all their content.
 
-## Solution 
+## Solution
 
 Use the inline Editor mode that excludes an `iframe`. When in inline mode, you need to manually post the value of the Editor.
 

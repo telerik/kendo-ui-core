@@ -1,6 +1,6 @@
 ---
 title: Share Legend Between Charts
-description: An example on how to create a shared legend to show and hide series in two or more Kendo UI Charts.
+description: Learn how to create a shared legend to show and hide series in two or more Kendo UI Charts.
 type: how-to
 page_title: Create Common Legend for Two or More Charts - Kendo UI Chart for jQuery
 slug: share-legend-between-charts
@@ -15,10 +15,10 @@ component: charts
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.2.621</td>
  </tr>
 </table>

@@ -1,7 +1,7 @@
 ---
-title: Export All Pages to PDF
-page_title: Export All Pages to PDF - Kendo UI Grid for jQuery
-description: "An example on how to export all pages of the Kendo UI Grid for jQuery and their full data and visual content in a PDF file."
+title: Export All Grid Pages to PDF
+page_title: Export All Data Grid Pages to PDF - Kendo UI Grid for jQuery
+description: "Learn how to export all pages of the Kendo UI Grid for jQuery and their full data and visual content in a PDF file."
 previous_url: /controls/data-management/grid/how-to/pdf-export/all-pages
 slug: howto_export_all_pagesto_pdf_grid
 tags: grid,export, pdf, all, pages

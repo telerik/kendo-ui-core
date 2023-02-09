@@ -1,6 +1,6 @@
 ---
 title: Use Custom Edit Form in Diagram
-description: An example on how to display custom UI when editing the shapes of the Kendo UI Diagram.
+description: Learn how to display custom UI when editing the shapes of the Kendo UI Diagram.
 type: how-to
 page_title: Use Edit Form Template for Diagram Shapes - Kendo UI Diagram for jQuery
 slug: diagram-custom-edit-form
@@ -15,7 +15,7 @@ component: diagram
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Diagram</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
  </tr>
 </table>
 

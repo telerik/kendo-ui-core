@@ -1,6 +1,6 @@
 ---
 title: Place Pagers at Top and Bottom of the ListView
-description: An example on how to display pagers at the top and bottom of a Kendo UI ListView.
+description: Learn how to display pagers at the top and bottom of a Kendo UI ListView.
 type: how-to
 page_title: Use Two Pagers for the ListView - Kendo UI ListView for ASP.NET MVC
 slug: listview-two-pagers
@@ -15,10 +15,10 @@ component: listview
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListView for ASP.NET MVC (version 2017.2 504)</td>
+  <td>Progress® Telerik® UI ListView for ASP.NET MVC</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.2 504</td>
  </tr>
  <tr>

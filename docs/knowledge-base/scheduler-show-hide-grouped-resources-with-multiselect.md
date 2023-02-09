@@ -1,6 +1,6 @@
 ---
 title: Show or Hide Grouped Resources with MultiSelect in Scheduler
-description: An example on how to filter grouped resources in a Kendo UI Scheduler.
+description: Learn how to filter grouped resources in a Kendo UI Scheduler.
 type: how-to
 page_title: Show or Hide Grouped Resources - Kendo UI Scheduler for jQuery
 slug: show-hide-grouped-resources-with-multiselect-in-scheduler
@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

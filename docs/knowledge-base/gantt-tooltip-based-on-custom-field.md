@@ -1,6 +1,6 @@
 ---
 title: Show Different Gantt Task Tooltip Based on a Field in the DataSource
-description: An example on how to display different tooltip content on hovering Kendo UI Gantt tasks based on the value of a custom field.
+description: Learn how to display different tooltip content on hovering Kendo UI Gantt tasks based on the value of a custom field.
 type: how-to
 page_title: Show Tooltip Content Based on Custom Task Field Value - Kendo UI Gantt for jQuery
 slug: gantt-tooltip-based-on-custom-field
@@ -15,7 +15,7 @@ component: gantt
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Gantt</td>
+  <td>Progress® Kendo UI® Gantt for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

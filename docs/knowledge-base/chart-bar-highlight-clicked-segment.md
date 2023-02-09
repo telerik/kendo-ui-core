@@ -1,7 +1,7 @@
 ---
 title: Highlight Clicked Bar Chart Segments
 page_title: Highlight Bar on Click - Kendo UI Chart for jQuery
-description: An example on how to highlight the clicked bar segment in the Kendo UI Bar Chart.
+description: Learn how to highlight the clicked bar segment in the Kendo UI Bar Chart.
 type: how-to
 slug: chart-bar-highlight-clicked-segment
 tags: chart, bar, highlight, click, series
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Chart for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 

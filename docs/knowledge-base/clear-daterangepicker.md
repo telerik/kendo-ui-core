@@ -1,12 +1,9 @@
 ---
-title: Clear DateRangePicker
-description: How to Clear DateRangePicker Selection
+title: Clear the DateRangePicker Selection
+description: Learn how to clear the selection in the Kendo UI for jQuery DateRangePicker component.
 type: how-to
-page_title: How to Clear DateRangePicker Selection - Kendo UI DateRangePicker for jQuery
+page_title: Clear the Selection of the DateRangePicker - Kendo UI DateRangePicker for jQuery
 slug: clear-daterangepicker
-position: 
-tags: 
-ticketid: 
 res_type: kb
 ---
 
@@ -15,7 +12,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>DateRangePicker for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® DateRangePicker for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -28,7 +25,7 @@ This sample demonstrates how you can clear the values of the date range picker u
 ## Solution
 
 ```dojo
-  
+
     <div id="daterangepicker"></div>
     <br/>
     <button onclick='buttonClick();'>Clear Range Picker</button>
@@ -47,5 +44,5 @@ This sample demonstrates how you can clear the values of the date range picker u
         });
       }
     </script>
-      
-``` 
+
+```

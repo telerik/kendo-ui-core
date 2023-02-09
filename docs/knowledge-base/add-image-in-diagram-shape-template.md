@@ -1,12 +1,9 @@
 ---
 title: Add Image in Diagram Shape Template
-description: How to Add Image in Diagram Shape Template
+description: Learn how to add an image to the shape template of the Kendo UI for jQuery Diagram component.
 type: how-to
-page_title: How to Add Image in Diagram Shape Template - Kendo UI Diagram for jQuery
+page_title: Add Image in Diagram Shape Template - Kendo UI Diagram for jQuery
 slug: add-image-in-diagram-shape-template
-position: 
-tags: 
-ticketid: 
 res_type: kb
 ---
 
@@ -15,7 +12,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>Diagram for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Diagram for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -30,7 +27,7 @@ These samples demonstrate how you can include images in Diagram shapes.
 Using height and width:
 
 ```dojo
-  
+
 <style>
       .container {
         /* Move rendering container off-screen */
@@ -84,7 +81,7 @@ Using height and width:
         var height = renderElement.height();
         // Create a rectangle using the renderElement dimensions to expand the group while waiting for its actual content
         var geom = new kendo.geometry.Rect([0, 0], [width, height]);
-        
+
         output.append(new kendo.drawing.Rect(geom, { stroke: { width: 0 }}));
 
         draw.drawDOM(renderElement)
@@ -129,15 +126,15 @@ Using height and width:
         }
       });
     </script>
-      
-``` 
+
+```
 
 ## Solution 2
 
 Using [kendo.dataviz.diagram.Image](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/diagram/image)
 
 ```dojo
-  
+
 <style>
       .container {
         /* Move rendering container off-screen */
@@ -220,5 +217,5 @@ Using [kendo.dataviz.diagram.Image](https://docs.telerik.com/kendo-ui/api/javasc
         }
       });
     </script>
-      
-``` 
+
+```

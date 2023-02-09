@@ -10,10 +10,23 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+ 
+## Description
+
 Your project might require you to move a row from one Kendo UI Grid to another by dragging.
+
+## Solution
 
 To see the example, refer to [this how-to article]({% slug howto_transfergridrows_sortable %}).
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)

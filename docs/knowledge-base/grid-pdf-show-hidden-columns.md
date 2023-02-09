@@ -1,6 +1,6 @@
 ---
 title: Show hidden columns during PDF Export
-description: An example on how to show hidden columns in the Kendo UI Grid during PDF Export using only CSS rules.
+description: Learn how to show hidden columns in the Kendo UI Grid during PDF Export using only CSS rules.
 type: how-to
 page_title: Show hidden columns in PDF - Kendo UI Grid for jQuery
 slug: grid-pdf-show-hidden-columns
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2019.1.115 version</td>
  </tr>
 </table>

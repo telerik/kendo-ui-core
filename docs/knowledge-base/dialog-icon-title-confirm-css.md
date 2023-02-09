@@ -1,6 +1,6 @@
 ---
 title: Add Icon to a Confirm Box Titlebar
-description: An example on how to add a FontAwesome icon to the title bar in a Kendo UI Confirm box.
+description: Learn how to add a FontAwesome icon to the title bar in a Kendo UI Confirm box.
 type: how-to
 page_title: Append FontAwesome Icons to Predefined Dialog Titles - Kendo UI Dialog for jQuery
 slug: dialog-icon-title-confirm-css
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Dialog for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Dialog for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>

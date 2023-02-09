@@ -1,6 +1,6 @@
 ---
 title: Pre-Populate and Save Editor Data to DOCX Server-Side
-description: An example on how to pre-load and save the Kendo UI Editor for ASP.NET MVC value from a file on the server.
+description: Learn how to pre-load and save the Kendo UI Editor for ASP.NET MVC value from a file on the server.
 type: how-to
 page_title: Load and Save Editor Value from docx File on the Server - Kendo UI Editor for ASP.NET MVC
 slug: editor-mvc-load-and-save-to-file-on-server
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Editor for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI Editor for ASP.NET MVC</td>
  </tr>
 </table>
 

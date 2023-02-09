@@ -1,6 +1,6 @@
 ---
 title: Implement Custom InsertSymbol Tool for Editor
-description: An example on how to add a custom insert-symbol tool to the Kendo UI Editor.
+description: Learn how to add a custom insert-symbol tool to the Kendo UI Editor.
 type: how-to
 page_title: Add a Custom InsertSymbol Tool - Kendo UI Editor for jQuery
 slug: editor-custom-insert-symbol-tool
@@ -15,7 +15,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

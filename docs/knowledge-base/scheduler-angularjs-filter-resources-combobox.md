@@ -1,6 +1,6 @@
 ---
 title: Filer the Scheduler with a ComBox in AngularJS
-description: An example on how to filter the grouped resources in the Kendo UI Scheduler by using a Kendo UI ComboBox in an AngularJS scenario.
+description: Learn how to filter the grouped resources in the Kendo UI Scheduler by using a Kendo UI ComboBox in an AngularJS scenario.
 type: how-to
 page_title: Filter Grouped Resources in AngularJS with ComboBox - Kendo UI Scheduler for jQuery
 slug: scheduler-angularjs-filter-resources-combobox
@@ -14,7 +14,7 @@ res_type: kb
 <table>
     <tr>
         <td>Product</td>
-        <td>Scheduler for Progress® Kendo UI®</td>
+        <td>Progress® Kendo UI® Scheduler for jQuery</td>
     </tr>
 </table>
 

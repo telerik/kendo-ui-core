@@ -1,14 +1,15 @@
 ---
-title: Display a Kendo UI Wizard widget in a Dialog component
-description: Initialize a Kendo UI Wizard in a Kendo UI Dialog.
+title: Display a Wizard Component in a Dialog Component
+description: Learn how to initialize a Kendo UI for jQuery Wizard in a Kendo UI for jQuery Dialog component.
 type: how-to
-page_title: Display a Kendo UI Wizard in a Dialog component
+page_title: Display a Kendo UI for jQuery Wizard in a Dialog Component
 slug: wizard-show-in-dialog
-tags: wizard, dialog
+tags: wizard, dialog, kendoui, jquery, display
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
@@ -17,7 +18,8 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Wizard for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Dialog for jQuery</td>
+			<td>Progress® Kendo UI® Wizard for jQuery</td>
 		</tr>
 	</tbody>
 </table>

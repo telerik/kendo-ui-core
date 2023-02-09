@@ -1,7 +1,7 @@
 ---
 title: Use Different Popup Editors for Create and Update Operations
 page_title: Use Different Popup Editors - Kendo UI Grid for jQuery
-description: "An example on how to use different popup editors for create and update operations in the Kendo UI Grid for jQuery."
+description: "Learn how to use different popup editors for create and update operations in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/use-different-popup-editor-for-create-update
 slug: howto_use_different_poup_editors_for_create_update_operations
 tags: use, various, popup, editors, grid, create, update, operations
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

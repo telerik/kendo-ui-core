@@ -1,6 +1,6 @@
 ---
 title: Remove Dirty Indicator when Value Is in Original State
-description: An example on how to remove the dirty indicator when the value is put back to the original state in the Kendo UI Grid.
+description: Learn how to remove the dirty indicator when the value is put back to the original state in the Kendo UI Grid.
 type: how-to
 page_title: Remove Dirty Flag When Cell Value Is Changed to Original - Kendo UI Grid for jQuery
 slug: grid-remove-dirty-indicator-when-value-is-original-state
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 

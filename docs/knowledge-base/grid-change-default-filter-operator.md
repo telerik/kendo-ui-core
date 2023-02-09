@@ -1,6 +1,6 @@
 ---
 title: Change the Default Filter Operator
-description: An example on how to change the default filter operator in the Kendo UI Grid.
+description: Learn how to change the default filter operator in the Kendo UI Grid.
 type: how-to
 page_title: Change the Default Filter Operator - Kendo UI Grid for jQuery
 slug: grid-change-default-filter-operator
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2017.3.1026 version</td>
  </tr>
 </table>

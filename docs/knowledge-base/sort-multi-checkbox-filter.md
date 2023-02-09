@@ -1,7 +1,7 @@
 ---
 title: Sort Multiple Checkbox Filter
 page_title: Sort Multiple Checkbox Filter - Kendo UI Grid for jQuery
-description: "An example on how to sort the multiple checkbox filter while using the Kendo UI Grid for jQuery."
+description: "Learn how to sort the multiple checkbox filter while using the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/sort-multi-checkbox-filter, /kendo-mvc/web/grid/how-to/sort-multi-checkbox-filter, /kendo-ui-mvc/controls/data-management/grid/how-to/sort-multi-checkbox-filter, /controls/data-management/grid/how-to/filtering/sort-multi-checkbox-filter
 slug: howto_sort_multiple_checkbox_filter_grid
 tags: sort, multiple, checkbox, filter, using, grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

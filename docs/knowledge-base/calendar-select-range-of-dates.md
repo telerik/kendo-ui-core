@@ -1,7 +1,7 @@
 ---
 title: Select a Range of Dates
 page_title: Select a Range of Dates - Kendo UI Calendar for jQuery
-description: An example on how to select a range of dates in the Kendo UI Calendar widget.
+description: Learn how to select a range of dates in the Kendo UI Calendar widget.
 type: how-to
 slug: calendar-select-range-of-dates
 tags: kendo, ui, calendar, select, range, dates, multiple, between, datepicker
@@ -14,10 +14,10 @@ component: calendar
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Calendar</td>
+  <td>Progress® Kendo UI® Calendar for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.3.1026</td>
  </tr>
 </table>

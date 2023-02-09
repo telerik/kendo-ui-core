@@ -1,5 +1,5 @@
 ---
-title: Creating Multiple Widgets Throws JavaScript Errors
+title: Creating Multiple Components Throws JavaScript Errors
 page_title: Creating Multiple Widgets Throws JavaScript Errors
 description: "Learn how to handle the JavaScript errors that are thrown when creating multiple widgets with Kendo UI for jQuery."
 slug: creating_multiple_widgets_javascript_error

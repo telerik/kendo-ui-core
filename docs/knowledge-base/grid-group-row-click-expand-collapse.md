@@ -1,6 +1,6 @@
 ---
 title: Expand and Collapse Group on Group Row Click in Grid
-description: An example on how to expand and collapse the group rows by clicking the group rows in the Kendo UI Grid.
+description: Learn how to expand and collapse the group rows by clicking the group rows in the Kendo UI Grid.
 type: how-to
 page_title: Click the Group Row and Expand and Collapse the Group - Kendo UI Grid for jQuery
 slug: grid-group-row-click-expand-collapse
@@ -14,10 +14,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with 2018.1.221 version</td>
  </tr>
 </table>

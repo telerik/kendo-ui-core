@@ -15,7 +15,7 @@ component: diagram
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Diagram</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -25,13 +25,13 @@ component: diagram
 
 ## Description 
 
-The graphics and visual elements of the Diagram are not rendered in Internet Explorer. 
+The graphics and visual elements of the Diagram are not rendered in Internet Explorer.
 
-## Solution 
+## Solution
 
 > If a security message for enabling the Intranet settings appear and you follow its instructions, skip the following steps.
 
-To troubleshoot this issue: 
+To troubleshoot this issue:
 
 1. Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**.
 1. Enable **Binary and script behaviors** by ticking the **Enable** radio button.

@@ -1,6 +1,6 @@
 ---
 title: Export Grid to Excel with the RadSpreadStreamProcessing Library
-description: An example on how to export a Kendo UI Grid for jQuery on the server with the RadSpreadStreamProcessing library
+description: Learn how to export a Kendo UI Grid for jQuery on the server with the RadSpreadStreamProcessing library
 type: how-to
 page_title: Server-side Excel Export of Grid Data - Kendo UI Grid for jQuery
 slug: grid-excel-export-server
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product</td>

@@ -1,7 +1,7 @@
 ---
 title: Print the Barcode
 page_title: Print the Barcode - Kendo UI Barcode for jQuery
-description: An example on how to print a Kendo UI Barcode.
+description: Learn how to print a Kendo UI for jQuery Barcode component.
 type: how-to
 slug: barcode-how-to-print-the-barcode
 tags: barcode, print
@@ -15,7 +15,7 @@ component: barcode
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Barcode</td>
+  <td>Progress® Kendo UI® Barcode for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -29,7 +29,7 @@ component: barcode
   <td>Browser Version</td>
   <td>Microsoft Edge 40.15063.0.0</td>
  </tr> <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2017.3.1018</td>
  </tr>
 </table>

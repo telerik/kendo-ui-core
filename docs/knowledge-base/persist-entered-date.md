@@ -1,7 +1,7 @@
 ---
 title: Persist the Entered Dates of the DatePicker
 page_title: Persist the Entered Dates of the DatePicker
-description: "An example on how to persist an entered date in the Kendo UI DatePicker upon user navigation between pages for Internet Explorer 9 or older."
+description: "Learn how to persist an entered date in the Kendo UI DatePicker upon user navigation between pages for Internet Explorer 9 or older."
 slug: howto_persist_entered_dates_datepicker
 previous_url: /controls/editors/datepicker/how-to/persist-entered-date
 tags: kendo, jquery, datepicker, persist, entered, dates, and, navigation, between, pages
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

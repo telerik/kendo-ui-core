@@ -1,7 +1,7 @@
 ---
 title: Format Cell Values in the Grid
-page_title: Format Cell Values - Kendo UI Grid for jQuery
-description: "An example on how to format the cell values of the Kendo UI Grid during Excel export."
+page_title: Format Data Grid Cell Values - Kendo UI Grid for jQuery
+description: "Learn how to format the cell values of the Kendo UI Grid during Excel export."
 previous_url: /controls/data-management/grid/how-to/excel/cell-format
 slug: howto_format_cell_values_grid
 tags: grid, cell, values
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

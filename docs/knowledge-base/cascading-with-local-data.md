@@ -1,6 +1,6 @@
 ---
 title: Implement Cascading with Local Data in the ComboBox
-page_title: Implement Cascading with Local Data in the ComboBox
+page_title: Implement a Cascading Feature with Local Data in the ComboBox
 description: "Learn how to cascade Kendo UI ComboBoxes when working with local data."
 previous_url: /controls/editors/combobox/how-to/cascading-with-local-data, /controls/editors/combobox/how-to/cascade/cascading-with-local-data
 slug: howto_implement_cascading_local_data_combobox
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ComboBox for jQuery</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

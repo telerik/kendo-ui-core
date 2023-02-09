@@ -1,8 +1,8 @@
 ---
-title: Chart LTR, Labels RTL
-description: An example on how to display the Chart left-to-right and the labels right-to-left.
+title: Display the Chart in LTR and Its Labels in RTL Direction
+description: Learn how to display the Chart left-to-right and the labels right-to-left.
 type: how-to
-page_title: Display Chart LTR with RTL Labels - Kendo UI Chart for jQuery
+page_title: Display the Chart from Left to Right and Labels from Right to Left - Kendo UI Chart for jQuery
 slug: chart-ltr-labels-rtl
 tags: chart, ltr, rtl, labels,alignment
 ticketid: 1493757
@@ -13,12 +13,12 @@ res_type: kb
 
 <table>
 	<tr>
-		<td>Created with Product Version</td>
+		<td>Product Version</td>
 		<td>2019.2.514</td>
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Chart</td>
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 
@@ -43,7 +43,7 @@ The scenario is not a built-in one and to achieve it we need to override two thi
         direction:rtl;
       }
   ```
-  
+
 1. The [text-anchor](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/text-anchor) attribute of the label. To change the text-anchor, we need to override the internal SVG `TextNode` function before the chart is initialized
 
   ```
@@ -75,7 +75,7 @@ The following example demonstrates how to apply the suggested approach to a Bar 
         function renderAttr(name, value) {
           return (typeof value !== "undefined" && value !== null) ? (" " + name + "=\"" + value + "\" ") : "";
         }
-        
+
           $("#chart").kendoChart({
             title: {
               text: "Gross domestic product growth /GDP annual %/"

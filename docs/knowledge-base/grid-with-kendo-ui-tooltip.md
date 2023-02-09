@@ -1,7 +1,7 @@
 ---
 title: Show Tooltip for Column Records
 page_title: Show Tooltip for Column Records - Kendo UI Grid for jQuery
-description: "An example on how to show Kendo UI Tooltip for the Kendo UI Grid for jQuery columns."
+description: "Learn how to show Kendo UI Tooltip for the Kendo UI Grid for jQuery columns."
 previous_url: /controls/data-management/grid/how-to/add-tooltip-for-cell, /controls/data-management/grid/how-to/grid-with-kendo-ui-tooltip, /controls/data-management/grid/how-to/Layout/grid-with-kendo-ui-tooltip
 slug: howto_show_tooltipfor_column_records_grid
 tags: grid, show, display, tooltip, column, records
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

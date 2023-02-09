@@ -1,6 +1,6 @@
 ---
 title: Filter a Column with a DropDownList Editor When the Column Is Bound To a Complex Object
-description: An example on how to filter Kendo UI Grid columns with complex objects.
+description: Learn how to filter Kendo UI Grid columns with complex objects.
 type: how-to
 page_title: Filter Columns with Complex Objects - Kendo UI Grid for jQuery
 slug: grid-filter-column-with-dropdownlist
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 

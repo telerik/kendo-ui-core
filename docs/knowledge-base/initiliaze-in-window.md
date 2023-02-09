@@ -10,7 +10,21 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+  <td>Progress® Kendo UI® Window for jQuery</td>
+ </tr>
+</table>
+
+## Description
+
 Your project might require you to initialize a Kendo UI Grid within a Kendo UI Window.
+
+## Solution
 
 To achieve this behavior, use the `activate` event to resize the Grid according to the dimensions of its container. To see the example, refer to [this how-to article]({% slug initialize_thegrid_window_widget %}).
 

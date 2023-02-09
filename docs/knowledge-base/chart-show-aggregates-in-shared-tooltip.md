@@ -1,6 +1,6 @@
 ---
 title: Show Aggregates of the Series Points in the Chart Shared Tooltip
-description: An example on how to show an total of all points in a shared tooltip template in the Kendo Chart.
+description: Learn how to show an total of all points in a shared tooltip template in the Kendo Chart.
 type: how-to
 page_title: Custom Shared Chart tooltip with aggregates - Kendo UI Chart for jQuery
 slug: chart-show-aggregates-in-shared-tooltip
@@ -12,12 +12,12 @@ res_type: kb
 
 <table>
 	<tr>
-		<td>Created with Product Version</td>
+		<td>Product Version</td>
 		<td>2017.3.1026</td>
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Chart</td>
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Make Grid Cells Temporarily Blink Depending on DataItem Property
-description: An example on how to make one of the Kendo UI Grid cells in a row blink if a certain condition is met.
+description: Learn how to make one of the Kendo UI Grid cells in a row blink if a certain condition is met.
 type: how-to
 page_title: Make Cells Temporarily Blink Depending on the DataItem Property - Kendo UI Grid for jQuery
 slug: grid-blink-cell
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

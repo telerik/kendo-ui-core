@@ -1,6 +1,6 @@
 ---
 title: Show Hidden Columns When Editing the Grid
-description: An example on how to show the hidden columns when editing a Kendo UI Grid.
+description: Learn how to show the hidden columns when editing a Kendo UI Grid.
 type: how-to
 page_title: Show Hidden Columns When Editing the Grid - Kendo UI Grid for jQuery
 slug: grid-show-hidden-on-edit
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2020.3.1021</td>
  </tr>
 </table>

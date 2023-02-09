@@ -1,7 +1,7 @@
 ---
-title: Create Confirmation Dialog by Using Promises
+title: Create Confirmation Dialogs by Using Promises
 page_title: Create Confirmation Dialog by Using Promises
-description: "Learn how to create a confirmation dialog in a Kendo UI Window by using promises for deferred execution."
+description: "Learn how to create a confirmation dialog in a Kendo UI for jQuery Window by using promises for deferred execution."
 slug: howto_createconfirmationdialog_viapromises_window
 previous_url: /controls/layout/window/how-to/confirmation-dialog-promise
 tags: telerik, kendo, jquery, window, create, confirmation, dialogs, with, promises, deferred, execution
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Window for jQuery</td>
+  <td>Progress® Kendo UI® Window for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -105,5 +105,3 @@ The example below demonstrates how to achieve the desired scenario.
 * [How to Initialize the Grid]({% slug initialize_thegrid_window_widget %})
 * [How to Post to Iframe]({% slug howto_posttoiframe_window %})
 * [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
-
-

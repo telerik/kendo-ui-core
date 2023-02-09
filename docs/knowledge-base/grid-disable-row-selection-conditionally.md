@@ -1,6 +1,6 @@
 ---
 title: Select Rows on Conditions
-description: An example on how to conditionally select rows in the Kendo UI Grid.
+description: Learn how to conditionally select rows in the Kendo UI Grid.
 type: how-to
 page_title: Disable Selection of Specific Rows - Kendo UI Grid for jQuery
 slug: grid-disable-row-selection-conditionally
@@ -19,7 +19,7 @@ component: grid
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 

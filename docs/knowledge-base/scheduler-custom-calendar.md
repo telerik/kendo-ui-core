@@ -1,6 +1,6 @@
 ---
 title: Configure Custom Template for the Dates in the Embedded Calendar
-description: An example on how to customize the rendering of the dates in the toolbar calendar of the Kendo UI Scheduler.
+description: Learn how to customize the rendering of the dates in the toolbar calendar of the Kendo UI Scheduler.
 type: how-to
 page_title: Customize the Toolbar Calendar - Kendo UI Scheduler for jQuery
 slug: scheduler-custom-calendar
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

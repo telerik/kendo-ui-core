@@ -1,6 +1,6 @@
 ---
 title: Configure Server Grouping and Sorting in MultiSelect
-description: An example on how to configure the Kendo UI MultiSelect for ASP.NET MVC server grouping and sorting.
+description: Learn how to configure the Kendo UI MultiSelect for ASP.NET MVC server grouping and sorting.
 type: how-to
 page_title: Enable Server Grouping and Sorting - Kendo UI MultiSelect for ASP.NET MVC
 slug: mutliselect-server-grouping-and-sorting
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI MultiSelect for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI MultiSelect for ASP.NET MVC</td>
  </tr>
 </table>
 

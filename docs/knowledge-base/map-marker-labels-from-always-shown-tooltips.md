@@ -1,6 +1,6 @@
 ---
 title: Always Show Marker Tooltip
-description: An example on how to show labels on the map markers by utilizing their tooltips in the Kendo UI Map.
+description: Learn how to show labels on the map markers by utilizing their tooltips in the Kendo UI Map.
 type: how-to
 page_title: Always Show Marker Tooltips Like Labels - Kendo UI Map
 slug: map-marker-labels-from-always-shown-tooltips
@@ -15,7 +15,7 @@ res_type: kb
     <tbody>
 	    <tr>
 	    	<td>Product</td>
-	    	<td>Map for Progress® Kendo UI®</td>
+	    	<td>Progress® Kendo UI® Map for jQuery</td>
 	    </tr>
     </tbody>
 </table>

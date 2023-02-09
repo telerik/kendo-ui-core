@@ -1,6 +1,6 @@
 ---
 title: Add Clear Button
-description: An example on how to add a Clear button to the Kendo UI DateTimePicker.
+description: Learn how to add a Clear button to the Kendo UI DateTimePicker.
 type: how-to
 page_title: Clear Dates with Button - Kendo UI DateTimePicker for jQuery
 slug: datetimepicker-clear-button
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Date/Time Pickers for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Date and Time Pickers for jQuery</td>
 	</tr>
 </table>
 

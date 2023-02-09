@@ -1,6 +1,6 @@
 ---
 title: Add DatePicker to Gantt Toolbar in AngularJS Applications
-description: An example on how to inject a Kendo UI DatePicker widget in the Kendo UI Gantt in AngularJS applications.
+description: Learn how to inject a Kendo UI DatePicker widget in the Kendo UI Gantt in AngularJS applications.
 type: how-to
 page_title: Place DatePicker in the Toolbar | AngularJS Kendo UI Gantt
 slug: gantt-angularjs-inject-datepicker-in-tooblar
@@ -14,7 +14,7 @@ component: gantt
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Gantt</td>
+  <td>Progress® Kendo UI® Gantt for jQuery</td>
  </tr>
 </table>
 

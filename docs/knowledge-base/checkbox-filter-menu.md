@@ -1,7 +1,7 @@
 ---
 title: Create Checkbox Filter Menu
 page_title: Create Checkbox Filter Menu - Kendo UI Grid for jQuery
-description: "An example on how to create a checkbox filter menu functionality in the widget."
+description: "Learn how to create a checkbox filter menu functionality in the widget."
 previous_url: /controls/data-management/grid/how-to/checkbox-filter-menu, /web/grid/how-to/checkbox-filter-menu, /controls/data-management/grid/how-to/filtering/checkbox-filter-menu
 slug: howto_create_checkbox_filter_menu_grid
 tags: grid, create, checkbox, filter, menu
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

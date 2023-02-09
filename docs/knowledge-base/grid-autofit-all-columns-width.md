@@ -1,6 +1,6 @@
 ---
 title: Automatically Fit Width of Grid Columns to Show All Data
-description: An example on how to automatically fit the width of all Kendo UI Grid columns to show all data.
+description: Learn how to automatically fit the width of all Kendo UI Grid columns to show all data.
 type: how-to
 page_title: Automatically Fit Column Width to Show All Data - Kendo UI Grid for jQuery
 slug: grid-autofit-all-columns-width
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

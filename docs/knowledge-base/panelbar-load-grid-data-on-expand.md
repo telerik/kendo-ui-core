@@ -2,7 +2,7 @@
 title: Load the Grid When the PanelBar Is Selected
 page_title: Load the Grid When Its PanelBar Is Expanded - Kendo UI Grid and PanelBar for jQuery
 type: how-to
-description: An example on how to load the Kendo UI Grid for jQuery when its PanelBar item is activated.
+description: Learn how to load the Kendo UI Grid for jQuery when its PanelBar item is activated.
 slug: panelbar-load-grid-data-on-expand
 tags: grid, panelbar, item, expanded, selected
 ticketid: 1401786, 1386928
@@ -14,7 +14,10 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Progress® Kendo UI® PanelBar, Progress® Kendo UI® PanelBar for ASP.NET MVC, Progress® Kendo UI® Grid, Progress® Kendo UI® Grid for ASP.NET MVC</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
+		<td>Progress® Telerik® UI Grid for ASP.NET MVC</td>
+		<td>Progress® Kendo UI® PanelBar for jQuery</td>
+		<td>Progress® Telerik® UI PanelBar for ASP.NET MVC</td>
 	</tr>
 </table>
 

@@ -1,7 +1,7 @@
 ---
 title: Change Grid Height When Using Frozen Columns
 page_title: Change the Height in Grid with Frozen Columns - Kendo UI Grid for jQuery
-description: "An example on how to resize the Kendo UI Grid when using frozen columns."
+description: "Learn how to resize the Kendo UI Grid when using frozen columns."
 previous_url: /controls/data-management/grid/how-to/Layout/change-grid-height-when-using-frozen-columns
 slug: howto_change_grid_height_frozen_columns
 tags: grid, change, height, frozen, locked, columns
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -17,7 +17,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>DatePicker for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® DatePicker for jQuery</td>
 	</tr>
 </table>
 

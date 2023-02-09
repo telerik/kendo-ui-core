@@ -1,6 +1,6 @@
 ---
 title: Diagram Layout Is Different in the Exported PDF Files
-page_title: The Diagram Layout in the Exported PDF Files Is Different 
+page_title: The Diagram Layout in the Exported PDF Files Is Different
 description: "Learn how to handle the Kendo UI for jQuery Diagram component when its layout is different in the exported PDF files."
 slug: diagram_layout_different_pdf
 tags: telerik, progress, kendoui, diagram, pdf, layout, different
@@ -14,7 +14,7 @@ component: diagram
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® for jQuery Diagram</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -24,7 +24,7 @@ component: diagram
 
 ## Description 
 
-The layout of the exported Kendo UI for jQuery Diagram to PDF is different from the source. 
+The layout of the exported Kendo UI for jQuery Diagram to PDF is different from the source.
 
 ## Cause  
 

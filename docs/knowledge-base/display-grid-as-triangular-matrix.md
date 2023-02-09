@@ -1,7 +1,7 @@
 ---
 title: Display Grid as Triangular Matrix
 page_title:  Display Grid as Triangular Matrix - Kendo UI Grid for jQuery
-description: "An example on how to change its default data layout to a Triangular matrix in the Kendo UI Grid for jQuery."
+description: "Learn how to change its default data layout to a Triangular matrix in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/display-grid-as-triangular-matrix
 slug: howto_display_grid_as_triangular_matrix_grid
 tags: grid, show, triangular, matrix
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

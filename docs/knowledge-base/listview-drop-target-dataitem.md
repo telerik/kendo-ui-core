@@ -1,6 +1,6 @@
 ---
 title: Find the dataItem target of a drag and drop in ListView
-description: An example on how to identify ListView entry that is the target of a dragdrop operation
+description: Learn how to identify ListView entry that is the target of a dragdrop operation
 type: how-to
 page_title: Target DataItem on Drop - Kendo UI ListView for jQuery
 slug: listview-drop-target-dataitem
@@ -15,10 +15,10 @@ component: listview
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListView</td>
+  <td>Progress® Kendo UI® ListView for jQuery</td>
  </tr>
  <tr>
-  <td>Created with Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2020.3.915</td>
  </tr>
 </table>

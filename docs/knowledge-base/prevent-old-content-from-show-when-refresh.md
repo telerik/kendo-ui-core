@@ -1,6 +1,6 @@
 ---
 title: Prevent Old Content from Showing When Refreshing
-description: An example on how to prevent the old content from showing up for a moment until the new content is fetched in a Kendo Window.
+description: Learn how to prevent the old content from showing up for a moment until the new content is fetched in a Kendo Window.
 type: troubleshooting
 page_title: Prevent Old Content from Showing When Refreshing - Kendo UI Window for jQuery
 slug: window-prevent-old-content-from-show
@@ -15,7 +15,7 @@ res_type: kb
     <tbody>
 	    <tr>
 	    	<td>Product</td>
-	    	<td>Progress® Kendo UI® ListView for ASP.NET MVC</td>
+	    	<td>Progress® Telerik® UI ListView for ASP.NET MVC</td>
 	    </tr>
     </tbody>
 </table>

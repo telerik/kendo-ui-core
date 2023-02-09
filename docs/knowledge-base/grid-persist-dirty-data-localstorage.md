@@ -1,6 +1,6 @@
 ---
 title: Persist Dirty Fields in the Local Storage
-description: An example on how to persist dirty fields data in the localStorage when working with the Kendo UI Grid.
+description: Learn how to persist dirty fields data in the localStorage when working with the Kendo UI Grid.
 type: how-to
 page_title: Save Dirty Data in Local Storage - Kendo UI Grid for jQuery
 slug: grid-persist-dirty-data-localstorage
@@ -19,7 +19,7 @@ component: grid
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 

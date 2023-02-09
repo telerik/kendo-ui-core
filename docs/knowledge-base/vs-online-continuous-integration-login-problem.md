@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Telerik UI for ASP.NET Core</td>
+  <td>Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,8 +1,8 @@
 ---
-title: Markdown rendering in Chat Messages
-description: Create a custom message type that uses third party libraries to render Markdown
+title: Render Chat Messages in Markdown
+description: Learn how to create a custom message type that uses third-party libraries to render Markdown in the Kendo UI for jQuery.
 type: how-to
-page_title: Rendering Markdown in Chat
+page_title: Show Markdown Messages - Kendo UI for jQuery Chat
 slug: chat-markdown
 tags: chat, markdown, kendo ui
 ticketid: 1411881
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Chat</td>
+		<td>Progress® Kendo UI® Chat for jQuery</td>
 	</tr>
 </table>
 
@@ -46,7 +46,7 @@ To show the message:
 <script src="https://unpkg.com/turndown@5.0.3/dist/turndown.js"></script>
 </head>
 <body>
-  
+
 <div id="chat"></div>
 <script>
   	var MD_MESSAGE = kendo.template(
@@ -56,9 +56,9 @@ To show the message:
       '</div>' +
       '</div>'
     );
-  
+
   	kendo.chat.registerTemplate("md_message", MD_MESSAGE);
-    
+
   	$("#chat").kendoChat();
 
     var chat = $("#chat").data("kendoChat");
@@ -75,7 +75,7 @@ To show the message:
 ```
 
 
-## See also 
+## See also
 
 * [Kendo UI Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview)
 * [JavaScript API Reference of the Chat renderMessage method](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/methods/rendermessage)

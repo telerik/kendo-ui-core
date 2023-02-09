@@ -1,6 +1,6 @@
 ---
 title: Highlight Matched Text from ComboBox Items
-description: An example on how to highlight the text in the Kendo UI ComboBox items, which matches the search criteria.
+description: Learn how to highlight the text in the Kendo UI ComboBox items, which matches the search criteria.
 type: how-to
 page_title: Highlight the Item Text Which Matches Search Criteria - Kendo UI ComboBox for jQuery
 slug: combobox-highlight-matched-text
@@ -14,7 +14,7 @@ component: combobox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ComboBox</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td> 
  </tr>
 </table>
 

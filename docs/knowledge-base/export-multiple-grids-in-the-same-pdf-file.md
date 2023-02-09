@@ -1,6 +1,6 @@
 ---
 title: Export Multiple Grids in the Same PDF File
-description: An example on how to export multiple Kendo UI Grids in the same PDF file.
+description: Learn how to export multiple Kendo UI Grids in the same PDF file.
 type: how-to
 page_title: Export Multiple Grids in the Same PDF File - Kendo UI Grid for jQuery
 slug: export-multiple-grids-in-the-same-pdf-file
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
-   <td>Progress Kendo UI version</td>
+   <td>Product Version</td>
    <td>Created with version 2017.3.913</td>
   </tr>
 </table>

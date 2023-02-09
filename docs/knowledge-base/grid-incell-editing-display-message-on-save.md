@@ -1,6 +1,6 @@
 ---
 title: Display Warning on Save in Kendo UI Grid
-description: An example on how to display a warning message when leaving an edit cell.
+description: Learn how to display a warning message when leaving an edit cell.
 type: how-to
 page_title: Incell Editing Display a Warning Message on Save
 slug: grid-incell-editing-display-message-on-save
@@ -14,7 +14,7 @@ res_type: kb
 <table>
 	<tbody>
 		<tr>
-			<td>Created with Product Version</td>
+			<td>Product Version</td>
 			<td>2017.3 1026</td>
 		</tr>
 		<tr>

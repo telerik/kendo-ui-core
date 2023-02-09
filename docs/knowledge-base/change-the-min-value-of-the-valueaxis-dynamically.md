@@ -1,7 +1,7 @@
 ---
 title: Set the Min Value of the ValueAxis Dynamically
 page_title: Change the Min Value of the ValueAxis Dynamically - Kendo UI Chart for jQuery
-description: An example on how to dynamically set the min value of the valueAxis in the Kendo UI Chart.
+description: Learn how to dynamically set the min value of the valueAxis in the Kendo UI Chart.
 type: how-to
 slug: change-the-min-value-of-the-valueaxis-dynamically
 tags: chart, valueaxis, min, dynamically
@@ -15,7 +15,7 @@ component: charts
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

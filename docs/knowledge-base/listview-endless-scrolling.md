@@ -1,6 +1,6 @@
 ---
 title: Allow Endless Scrolling of Remote Data in ListView
-description: An example on how to create an endless scrolling in the Kendo ListView
+description: Learn how to create an endless scrolling in the Kendo ListView
 type: how-to
 page_title: Enable Endless Scrolling of Remote Data - Kendo UI ListView for jQuery
 slug: listview-endless-scrolling
@@ -14,10 +14,10 @@ component: listview
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListView</td>
+  <td>Progress® Kendo UI® ListView for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2018.1.117</td>
  </tr>
 </table>

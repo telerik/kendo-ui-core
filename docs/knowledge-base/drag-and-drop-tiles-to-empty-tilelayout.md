@@ -14,7 +14,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>TileLayout for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® TileLayout for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -22,7 +22,7 @@ res_type: kb
 
 ## Description
 
-How can I drag and drop new tiles after removing all of the tiles from the TileLayout? 
+How can I drag and drop new tiles after removing all of the tiles from the TileLayout?
 
 ## Solution
 
@@ -31,7 +31,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
 3. Add logic for removing the empty tile when the first new tile is dropped.
 
 ```dojo
-  
+
         <div id="example">
       <div id="main-layout"></div>
       <div id="side-layout"></div>
@@ -537,7 +537,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
         color: #fff;
       }
     </style>
-``` 
+```
 
 ## See Also
 

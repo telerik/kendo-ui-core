@@ -1,6 +1,6 @@
 ---
 title: Share Selection between MultiSelect and Grid
-description: An example on how to select rows from the MultiSelect in the Kendo UI Grid and choose values by selecting Grid rows in the MultiSelect.
+description: Learn how to select rows from the MultiSelect in the Kendo UI Grid and choose values by selecting Grid rows in the MultiSelect.
 type: how-to
 page_title: Select Rows From MultiSelect - Kendo UI Grid for jQuery
 slug: grid-multiselect-share-selection
@@ -13,11 +13,11 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
-  <td>Progress Kendo UI MultiSelect</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+  <td>Progress® Kendo UI® MultiSelect for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2017.3.1026 version</td>
  </tr>
 </table>

@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI for jQuery CDN Installation</td>
+  <td>Progress® Kendo UI® for jQuery CDN Installation</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -26,7 +26,7 @@ res_type: kb
 
 Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) provides a reliable level of uptime support, you might encounter disruption or connection issues. After you check the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and operates normally.
 
-## Cause 
+## Cause
 
 You may be experiencing Internet, network connectivity, or DNS problems. It is also possible that firewalls, antivirus, or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on the fly.
 

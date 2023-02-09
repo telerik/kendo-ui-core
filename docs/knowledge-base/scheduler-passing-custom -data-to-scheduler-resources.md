@@ -1,6 +1,6 @@
 ---
 title: Pass custom data to Scheduler Resources to be consumed in HeaderTemplate
-description: An example on how to pass custom data to Scheduler Resources to be consumed in HeaderTemplate
+description: Learn how to pass custom data to Scheduler Resources to be consumed in HeaderTemplate
 type: how-to
 page_title: Passing custom Scheduler resources fields to groupHeaderTemplate
 slug: scheduler-passing-custom-data-to-scheduler-resources
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Scheduler for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Scheduler for jQuery</td>
 		</tr>
 	</tbody>
 </table>

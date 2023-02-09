@@ -1,6 +1,6 @@
 ---
 title: Calculate Custom Aggregates by Unique Value in Grid
-description: An example on how to display custom aggregate results in a Kendo UI Grid.
+description: Learn how to display custom aggregate results in a Kendo UI Grid.
 type: how-to
 page_title: Calculate and Display Custom Aggregate Results - Kendo UI Grid for jQuery
 slug: grid-custom-aggregate-by-unique-value
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

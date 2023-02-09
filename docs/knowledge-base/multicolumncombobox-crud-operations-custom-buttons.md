@@ -1,6 +1,6 @@
 ---
 title: Insert, Add, and Delete MulticolumnComboBox Records
-description: An example on how to add, update, and delete records in the Kendo UI MulticolumnComboBox.
+description: Learn how to add, update, and delete records in the Kendo UI MulticolumnComboBox.
 type: how-to
 page_title: Perform CRUD Operations - Kendo UI MulticolumnComboBox for ASP.NET MVC
 slug: multicolumncombobox-crud-operations-custom-buttons
@@ -13,7 +13,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Progress® Kendo UI® MultiColumnComboBox for ASP.NET MVC</td>
+		<td>Progress® Telerik® UI MultiColumnComboBox for ASP.NET MVC</td>
 	</tr>
 </table>
 

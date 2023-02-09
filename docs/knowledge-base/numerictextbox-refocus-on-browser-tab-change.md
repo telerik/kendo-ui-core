@@ -13,7 +13,7 @@ res_type: kb
 	<tbody>
 		<tr>
 			<td>Product</td>
-			<td>NumericTextBox for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® NumericTextBox for jQuery</td>
 		</tr>
 	</tbody>
 </table>

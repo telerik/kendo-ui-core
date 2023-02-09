@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Menu for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Menu for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>

@@ -1,6 +1,6 @@
 ---
 title: Implement Toggle Visibility Menu on Right-Clicking the Column Header
-description: An example on how to add a custom menu that opens when the user right-clicks the column header of the Kendo UI Grid.
+description: Learn how to add a custom menu that opens when the user right-clicks the column header of the Kendo UI Grid.
 type: how-to
 page_title: Implement Custom Menu for Toggling the Visibility of Columns on Right-Clicking the Column Header - Kendo UI Grid for jQuery
 slug: open-column-visibility-menu-on-right-click-on-header
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>

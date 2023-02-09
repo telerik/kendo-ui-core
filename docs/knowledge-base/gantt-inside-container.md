@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Telerik UI for ASP.NET MVC Gantt</td>
+  <td>Progress® Telerik® UI Gantt for ASP.NET MVC</td>
  </tr>
 </table>
 

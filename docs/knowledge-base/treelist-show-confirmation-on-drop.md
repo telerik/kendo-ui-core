@@ -1,6 +1,6 @@
 ---
 title: Show Confirmation in TreeList When Doing Drag-and-Drop
-description: An example on how to show a confirmation dialog before changing the position of a dropped row in the Kendo UI TreeList.
+description: Learn how to show a confirmation dialog before changing the position of a dropped row in the Kendo UI TreeList.
 type: how-to
 page_title: Show Confirmation for Dragged and Dropped Items - Kendo UI TreeList for jQuery
 slug: treelist-show-confirmation-on-drop
@@ -13,7 +13,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI TreeList</td>
+		<td>Progress® Kendo UI® TreeList for jQuery</td>
 	</tr>
 	<tr>
 		<td>Product Version</td>

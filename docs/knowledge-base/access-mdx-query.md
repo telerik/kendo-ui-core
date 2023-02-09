@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI PivotGrid</td>
+  <td>Progress® Kendo UI® PivotGrid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

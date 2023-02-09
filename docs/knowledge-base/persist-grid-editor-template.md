@@ -1,7 +1,7 @@
 ---
 title: Persist Grid Editor Template While Restoring State
 page_title: Persist Grid Editor Template While Restoring State with getOptions and setOptions methods - Kendo UI Grid for jQuery
-description: "An example on how to keep the editor template after restoring Grid options with getOptions and setOptions methods."
+description: "Learn how to keep the editor template after restoring Grid options with getOptions and setOptions methods."
 type: how-to
 tags: kendo, ui, grid, persist, editor, template, setOptions, getOptions, restore
 res_type: kb
@@ -14,7 +14,7 @@ slug: howto_persist_editor_template__while_restoring_state
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

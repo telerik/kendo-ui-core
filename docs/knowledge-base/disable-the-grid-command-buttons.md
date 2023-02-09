@@ -1,6 +1,6 @@
 ---
 title: Disable the Command Button in Grids
-description: An example on how to disable the command buttons in Kendo UI Grids.
+description: Learn how to disable the command buttons in Kendo UI Grids.
 type: how-to
 page_title: Disable the Command Button - Kendo UI Grid for jQuery
 slug: disable-the-grid-command-buttons
@@ -16,10 +16,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
   <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>

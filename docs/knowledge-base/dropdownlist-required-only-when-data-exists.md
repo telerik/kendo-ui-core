@@ -1,6 +1,6 @@
 ---
 title: Make DropDownList Selection Mandatory Only If Data Exists
-description: An example on how to make the Kendo UI DropDownList a required field only if the user has data options to select from.
+description: Learn how to make the Kendo UI DropDownList a required field only if the user has data options to select from.
 type: how-to
 page_title: Make DropDownList Selection Mandatory Only If Data Exists - Kendo UI DropDownList for jQuery
 slug: dropdownlist-required-only-when-data-exists
@@ -14,7 +14,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Progress® Kendo UI® DropDownList for ASP.NET MVC</td>
+		<td>Progress® Telerik® UI DropDownList for ASP.NET MVC</td>
 	</tr>
 </table>
 
@@ -141,7 +141,7 @@ public JsonResult Questions_GetClasses(string text)
 }
 ```
 
-The following code implements the simple model on which the previous example is based. 
+The following code implements the simple model on which the previous example is based.
 
 ```
 namespace SampleMvcApp.Models
