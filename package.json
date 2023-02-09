@@ -20,6 +20,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-virtual": "^2.1.0",
     "@rollup/stream": "^2.0.0",
+    "@types/jquery": "3.5.16",
     "acorn": "^8.8.0",
     "autoprefixer": "^9.1.5",
     "axe-core": "^4.4.2",

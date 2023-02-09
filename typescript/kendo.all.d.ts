@@ -610,17 +610,17 @@ declare namespace kendo.data {
     interface BinderOptions {
     }
 
-    class ObservableObject extends Observable{
+    class ObservableObject<T = Object> extends Observable{
         constructor(value?: any);
         uid: string;
         init(value?: any): void;
-        get(name: string): any;
+        get: <K extends keyof T>(name: K) => T[K];
         parent(): ObservableObject;
-        set(name: string, value: any): void;
-        toJSON(): Object;
+        set: <K extends keyof T>(name: K, value: T[K]) => void;
+        toJSON(): T;
     }
 
-    class Model extends ObservableObject {
+    class Model<T = any> extends ObservableObject<T> {
         static idField: string;
         static fields: DataSourceSchemaModelFields;
 
@@ -1200,7 +1200,7 @@ declare namespace kendo.data {
         [rule: string]: any;
     }
 
-    class ObservableArray extends Observable {
+    class ObservableArray<T = any> extends Observable {
         length: number;
         [index: number]: any;
 
@@ -1210,7 +1210,7 @@ declare namespace kendo.data {
         every(callback: (item: Object, index: number, source: ObservableArray) => boolean): boolean;
         filter(callback: (item: Object, index: number, source: ObservableArray) => boolean): any[];
         find(callback: (item: Object, index: number, source: ObservableArray) => boolean): any;
-        forEach(callback: (item: Object, index: number, source: ObservableArray) => void ): void;
+        forEach(callback: (item: kendo.data.Model<T>, index: number, source: ObservableArray<T>) => void ): void;
         indexOf(item: any): number;
         join(separator: string): string;
         map(callback: (item: Object, index: number, source: ObservableArray) => any): any[];
@@ -1224,7 +1224,7 @@ declare namespace kendo.data {
         sort(compareFn?: (a: any, b: any) => number): any[];
         splice(start: number): any[];
         splice(start: number, deleteCount: number, ...items: any[]): any[];
-        toJSON(): any[];
+        toJSON(): T[];
         unshift(...items: any[]): number;
         wrap(object: Object, parent: Object): any;
         wrapAll(source: Object, target: Object): any;
@@ -1237,7 +1237,7 @@ declare namespace kendo.data {
         items?: kendo.data.Model[] | undefined;
     }
 
-    class DataSource extends Observable{
+    class DataSource<T = any> extends Observable{
         options: DataSourceOptions;
 
         static create(options?: DataSourceOptions): DataSource;
@@ -1251,15 +1251,15 @@ declare namespace kendo.data {
         aggregates(): any;
         at(index: number): kendo.data.ObservableObject;
         cancelChanges(model?: kendo.data.Model): void;
-        data(): kendo.data.ObservableArray;
-        data(value: any): void;
+        data(): kendo.data.ObservableArray<T>;
+        data<T = any>(value: T[]): void;
         fetch(callback?: Function): JQueryPromise<any>;
-        filter(filters: DataSourceFilterItem): void;
-        filter(filters: DataSourceFilterItem[]): void;
+        filter(filters: DataSourceFilterItem<T>): void;
+        filter(filters: DataSourceFilterItem<T>[]): void;
         filter(filters: DataSourceFilters): void;
         filter(): DataSourceFilters;
-        get(id: any): kendo.data.Model;
-        getByUid(uid: string): kendo.data.Model;
+        get(id: any): kendo.data.Model<T>;
+        getByUid(uid: string): kendo.data.Model<T>;
         group(groups: any): void;
         group(): any;
         hasChanges(): boolean;
@@ -1286,9 +1286,9 @@ declare namespace kendo.data {
         read(data?: any): JQueryPromise<any>;
         remove(model: kendo.data.ObservableObject): void;
         skip(): number;
-        sort(sort: DataSourceSortItem): void;
-        sort(sort: DataSourceSortItem[]): void;
-        sort(): DataSourceSortItem[];
+        sort(sort: DataSourceSortItem<T>): void;
+        sort(sort: DataSourceSortItem<T>[]): void;
+        sort(): DataSourceSortItem<T>[];
         sync(): JQueryPromise<any>;
         total(): number;
         totalPages(): number;
@@ -1328,14 +1328,14 @@ declare namespace kendo.data {
     interface DataSourceFilter {
     }
 
-    interface DataSourceFilterItem extends DataSourceFilter {
-        operator?: string|Function | undefined;
-        field?: string | undefined;
+    interface DataSourceFilterItem<T = any> extends DataSourceFilter {
+        operator?: string|Function;
+        field?: keyof T;
         value?: any;
     }
 
     interface DataSourceFilters extends DataSourceFilter {
-        logic?: string | undefined;
+        logic?: 'and' | 'or';
         filters?: DataSourceFilter[] | undefined;
     }
 
@@ -1367,9 +1367,9 @@ declare namespace kendo.data {
         type?: string | undefined;
     }
 
-    interface DataSourceSortItem {
-        field?: string | undefined;
-        dir?: string | undefined;
+    interface DataSourceSortItem<T = any> {
+        field?: keyof T;
+        dir?: 'asc' | 'desc';
         compare?: Function | undefined;
     }
 
@@ -1859,8 +1859,8 @@ declare namespace kendo.ui {
         destroy(): void;
     }
 
-    interface GridColumnEditorOptions {
-        field?: string | undefined;
+    interface GridColumnEditorOptions<T = any> {
+        field?: keyof T;
         format?: string | undefined;
         model?: kendo.data.Model | undefined;
         values?: any[] | undefined;
@@ -4308,13 +4308,13 @@ declare namespace kendo.ui {
         id?: string | undefined;
     }
 
-    class DropDownList extends kendo.ui.Widget {
+    class DropDownList<T = any> extends kendo.ui.Widget {
 
         static fn: DropDownList;
 
-        options: DropDownListOptions;
+        options: DropDownListOptions<T>;
 
-        dataSource: kendo.data.DataSource;
+        dataSource: kendo.data.DataSource<T>;
         span: JQuery;
         filterInput: JQuery;
         list: JQuery;
@@ -4380,7 +4380,7 @@ declare namespace kendo.ui {
         valueMapper?: Function | undefined;
     }
 
-    interface DropDownListOptions {
+    interface DropDownListOptions<T = any> {
         name?: string | undefined;
         animation?: boolean | DropDownListAnimation | undefined;
         autoBind?: boolean | undefined;
@@ -4389,8 +4389,8 @@ declare namespace kendo.ui {
         cascadeFromField?: string | undefined;
         cascadeFromParentField?: string | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
-        dataTextField?: string | undefined;
-        dataValueField?: string | undefined;
+        dataTextField?: keyof T;
+        dataValueField?: keyof T;
         delay?: number | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
@@ -4412,8 +4412,8 @@ declare namespace kendo.ui {
         rounded?: string | undefined;
         size?: string | undefined;
         headerTemplate?: string|Function | undefined;
-        template?: string|Function | undefined;
-        valueTemplate?: string|Function | undefined;
+        template?: string | ((item: kendo.data.Model<T>) => string);
+        valueTemplate?: string | ((item: kendo.data.Model<T>) => string);
         text?: string | undefined;
         value?: string | undefined;
         valuePrimitive?: boolean | undefined;
@@ -6144,13 +6144,13 @@ declare namespace kendo.ui {
     }
 
 
-    class Grid extends kendo.ui.Widget {
+    class Grid<T = any> extends kendo.ui.Widget {
 
         static fn: Grid;
 
         options: GridOptions;
 
-        dataSource: kendo.data.DataSource;
+        dataSource: kendo.data.DataSource<T>;
         editable?: kendo.ui.Editable | undefined;
         columns: GridColumn[];
         footer: JQuery;
@@ -6343,7 +6343,7 @@ declare namespace kendo.ui {
         initialDirection?: string | undefined;
     }
 
-    interface GridColumn {
+    interface GridColumn<T = any> {
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
         dataSource?: kendo.data.DataSource | kendo.data.DataSourceOptions | undefined;
@@ -6354,7 +6354,7 @@ declare namespace kendo.ui {
         editable?: Function | undefined;
         encoded?: boolean | undefined;
         exportable?: boolean | GridColumnExportable | undefined;
-        field?: string | undefined;
+        field?: keyof T;
         filterable?: boolean | GridColumnFilterable | undefined;
         footerAttributes?: any;
         footerTemplate?: string|Function | undefined;
@@ -6376,7 +6376,7 @@ declare namespace kendo.ui {
         sortable?: boolean | GridColumnSortable | undefined;
         sticky?: boolean | undefined;
         stickable?: boolean | undefined;
-        template?: string|Function | undefined;
+        template?: string | ((item: kendo.data.Model<T>) => string);
         title?: string | undefined;
         width?: string|number | undefined;
         values?: any;
@@ -6599,13 +6599,13 @@ declare namespace kendo.ui {
         text?: string | undefined;
     }
 
-    interface GridOptions {
+    interface GridOptions<T = any> {
         name?: string | undefined;
         allowCopy?: boolean | GridAllowCopy | undefined;
         altRowTemplate?: string|Function | undefined;
         autoBind?: boolean | undefined;
         columnResizeHandleWidth?: number | undefined;
-        columns?: GridColumn[] | undefined;
+        columns?: GridColumn<T>[] | undefined;
         columnMenu?: boolean | GridColumnMenu | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
         detailTemplate?: string|Function | undefined;
@@ -25992,8 +25992,8 @@ interface JQuery {
     data(key: "kendoDropDownButton"): kendo.ui.DropDownButton;
 
     kendoDropDownList(): JQuery;
-    kendoDropDownList(options: kendo.ui.DropDownListOptions): JQuery;
-    data(key: "kendoDropDownList"): kendo.ui.DropDownList | undefined;
+    kendoDropDownList<T = any>(options: kendo.ui.DropDownListOptions<T>): JQuery;
+    data<T = any>(key: "kendoDropDownList"): kendo.ui.DropDownList<T> | undefined;
 
     kendoDropDownTree(): JQuery;
     kendoDropDownTree(options: kendo.ui.DropDownTreeOptions): JQuery;
@@ -26040,8 +26040,8 @@ interface JQuery {
     data(key: "kendoGantt"): kendo.ui.Gantt | undefined;
 
     kendoGrid(): JQuery;
-    kendoGrid(options: kendo.ui.GridOptions): JQuery;
-    data(key: "kendoGrid"): kendo.ui.Grid | undefined;
+    kendoGrid<T = any>(options: kendo.ui.GridOptions<T>): JQuery;
+    data<T = any>(key: "kendoGrid"): kendo.ui.Grid<T> | undefined;
 
     kendoImageEditor(): JQuery;
     kendoImageEditor(options: kendo.ui.ImageEditorOptions): JQuery;
