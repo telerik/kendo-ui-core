@@ -1,7 +1,7 @@
 ---
-title: Store Widgets' State in Local Storage Using Generic Functions
+title: Store the Component State in Local Storage by Using Generic Functions
 page_title: Store Widgets' State in Local Storage Using Generic Functions
-description: "Learn how to save and restore Knedo UI widgets' state, value and options using local storage."
+description: "Learn how to save and restore the state, value, and options of Kendo UI for jQuery components by using local storage."
 slug: howto_store_state_in_local_storage
 tags: local, storage, localstorage, widgets, kendo, options, value, state, save
 type: how-to
@@ -87,7 +87,7 @@ jQuery.fn.kendoGridStoreUserOptions = function (name, options) {
         try {
             let storage = JSON.parse(localStorage[name]);
             if (!storage) return;
-           
+
             if (storage.gridOptions) {               
                 for (let index in grid.columns) {
                     if (storage.gridOptions.columns[index].field !== grid.columns[index].field) continue;
@@ -143,7 +143,7 @@ jQuery.fn.kendoDropDownListStoreUserOptions = function (name, options) {
 
     var dropdownlist = $(self).data("kendoDropDownList");
 
- 
+
     load();
     self.on('change', save);
 
@@ -179,7 +179,7 @@ jQuery.fn.kendoDropDownListStoreUserOptions = function (name, options) {
 
 //Combobox Widget
 jQuery.fn.kendoComboboxStoreUserOptions = function (name, options) {
-    
+
     let self = this;
 
     if (typeof (name) === 'object' && options === undefined) {
@@ -228,7 +228,7 @@ jQuery.fn.kendoComboboxStoreUserOptions = function (name, options) {
 
 //Multiselect Widget
 jQuery.fn.kendoMultiSelectStoreUserOptions = function (name, options) {
-  
+
     let self = this;
 
     if (typeof (name) === 'object' && options === undefined) {
@@ -284,7 +284,7 @@ $("#dropdownlistDay").kendoDropDownList({
                     dataValueField: "value",
                     dataSource: datadropdownDay,
                     change: CombodateFilter
-                }).kendoDropDownListStoreUserOptions(); 
+                }).kendoDropDownListStoreUserOptions();
 ````
 
 ## See Also

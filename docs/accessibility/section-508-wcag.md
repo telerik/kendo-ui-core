@@ -18,7 +18,7 @@ Applications built with components that adhere to these guidelines will not only
 
 The following table lists the Section 508 and WCAG 2.1 compliance levels of support for the Kendo UI widgets. 
 
-> The described level of compliance in the table below is achievable with the **Ocean Blue Sass Swatch.**
+> The described level of compliance in the table below is achievable with the **Ocean Blue A11y Sass Swatch.**
 
 **Table 1: 508 and WCAG 2.1 compliance with Kendo UI widgets**
 
@@ -27,9 +27,9 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |ActionSheet   |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
 |AppBar	       |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/appbar)|
 |AutoComplete  |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/autocomplete)|
-|Avatar        |Yes |AA  | [Demo](https://demos.telerik.com/kendo-ui/accessibility/avatar)|
-|BarCode	   |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/barcode)|
-|BottomNavigation |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|Avatar        |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/avatar)|
+|BarCode	   |Yes |AAA| [Demo](https://demos.telerik.com/kendo-ui/accessibility/barcode)|
+|BottomNavigation |No |n/a |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
 |Breadcrumb	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/breadcrumb)|
 |Button 	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/button)|
 |ButtonGroup   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/buttongroup)|
@@ -41,7 +41,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |CheckBoxGroup |Yes |AA |[Demo](hhttps://demos.telerik.com/kendo-ui/accessibility/checkboxgroup)|
 |ComboBox      |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/combobox)|
 |ColorGradient |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorgradient)|
-|ColorPalette  |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpalette)|
+|ColorPalette  |No  |n/a  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpalette)|
 |ColorPicker   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpicker)|
 |DateInput	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
 |DatePicker	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
@@ -65,7 +65,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Loader        |Yes |AА |[Demo](https://demos.telerik.com/kendo-ui/accessibility/loader)|
 |LinearGauge   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/lineargauge)|
 |ListBox       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/listbox)|
-|ListView	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/listview)|
+|ListView	   |Yes |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/listview)|
 |Map	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/map)|
 |MaskedTextbox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/maskedtextbox)|
 |MediaPlayer   |No  |n/a|n/a|
@@ -78,7 +78,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Pager         |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/pager)|
 |PanelBar	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/panelbar)|
 |PopOver	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/popover)|
-|QRCode	   	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/qrcode)|
+|QRCode	   	   |Yes |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/qrcode)|
 |RadialGauge   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radialgauge)|
 |RadioButton   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radiobutton)|
 |RadioGroup    |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radiogroup)|
@@ -93,9 +93,9 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Switch        |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/switch)|
 |TabStrip	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/tabstrip)|
 |TaskBoard	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/taskboard)|
-|TextArea	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textarea)|
+|TextArea	   |Yes |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/textarea)|
 |TextBox	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textbox)|
-|TileLayout	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/tilelayout)|
+|TileLayout	   |Yes |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/tilelayout)|
 |TimeLine	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timeline)|
 |TimePicker	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timepicker)|
 |ToolBar	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/toolbar)|
@@ -107,6 +107,8 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Wizard		   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/wizard)|
 
 > The DropDownTree widget will be identified as not compliant to the WAI-ARIA spec when tested with static HTML analyzer if there is no selection in the widget and the `placeholder` configuration is not used. That is because the DropDownTree wrapper element, which has `role="listbox"` will not contain any `option` elements. That should be considered a known limitation in the widget. Detailed information on the scenario could be found in [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/6558#issuecomment-938449528).
+
+> BottomNavigation, ColorPalette and Rating fail WCAG success criteria 1.4.11 Non-text contrast for the focus indicator on its items.
 
 ## Special Considerations
 
