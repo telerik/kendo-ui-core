@@ -1,37 +1,66 @@
 // Notification
-
-.k-notification-wrap
-{
-    padding: .6em .5em;
+.k-notification {
+    border-width: @notification-border-width;
+    border-style: solid;
     cursor: default;
     position: relative;
     white-space: nowrap;
+    box-sizing: border-box;
+
+    > .k-notification-wrap {
+        padding: @notification-padding-y @notification-padding-x;
+    }
+
+    &-closable > .k-notification-wrap {
+        padding-right: @notification-padding-end;
+    }
+
+    .k-notification-content {
+        display: inline-block;
+        vertical-align: top;
+        white-space: normal;
+    }
 }
 
-.k-notification-button .k-notification-wrap
-{
-    padding-right: 20px;
-}
-
-.k-notification-wrap > .k-i-information,
-.k-notification-wrap > .k-i-information,
-.k-notification-wrap > .k-i-information,
+.k-notification-wrap > .k-i-info,
+.k-notification-wrap > .k-i-success,
 .k-notification-wrap > .k-i-warning,
-.k-notification-wrap > .k-i-information
-{
+.k-notification-wrap > .k-i-error {
+    margin-right: @notification-icon-spacing;
     vertical-align: text-bottom;
-    margin-right: 4px;
 }
 
-.k-notification-wrap > .k-i-close
-{
+.k-notification-wrap > .k-i-close {
     position: absolute;
-    top: 7px;
+    top: 50%;
     right: 4px;
+    transform: translateY(-50%);
     display: none;
 }
 
-.k-notification-button .k-notification-wrap > .k-i-close
-{
+.k-notification-closable .k-notification-wrap > .k-i-close {
     display: block;
+}
+
+
+
+
+// RTL
+.k-rtl .k-notification-closable .k-notification-wrap,
+.k-rtl.k-notification-closable .k-notification-wrap {
+    padding-right: @notification-padding-x;
+    padding-left: @notification-padding-end;
+}
+
+.k-rtl .k-notification-wrap > .k-i-info,
+.k-rtl .k-notification-wrap > .k-i-success,
+.k-rtl .k-notification-wrap > .k-i-warning,
+.k-rtl .k-notification-wrap > .k-i-error {
+    margin-right: 0;
+    margin-left: @notification-icon-spacing;
+}
+
+.k-rtl .k-notification-wrap > .k-i-close {
+    right: auto;
+    left: 4px;
 }

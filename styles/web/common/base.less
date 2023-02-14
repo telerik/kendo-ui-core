@@ -8,10 +8,6 @@
 
 .k-no-click { pointer-events: none; }
 
-.k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after {content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
-.k-floatwrap,.k-slider-items,.k-grid-toolbar {display:inline-block;}
-.k-floatwrap,.k-slider-items,.k-grid-toolbar {display:block;}
-
 // main gradient
 
 .k-block,
@@ -19,28 +15,15 @@
 .k-grid-header,
 .k-toolbar,
 .k-grouping-header,
-.k-tooltip,
 .k-pager-wrap,
 .k-tabstrip-items .k-item,
 .k-link.k-state-hover,
-.k-textbox,
-.k-textbox:hover,
-.k-autocomplete,
-.k-dropdown-wrap,
-.k-picker-wrap,
-.k-numeric-wrap,
-.k-autocomplete.k-state-hover,
-.k-dropdown-wrap.k-state-hover,
-.k-picker-wrap.k-state-hover,
-.k-numeric-wrap.k-state-hover,
-.k-draghandle
-{
+.k-link.k-hover {
     background-repeat: repeat;
     background-position: 0 center;
 }
 
-.k-link:hover
-{
+.k-link:hover {
     text-decoration: none;
 }
 
@@ -51,24 +34,30 @@
 
 // widget
 
-.k-textbox > input,
-.k-multiselect .k-input,
-.k-input[type="text"],
-.k-input[type="number"],
-.k-textbox,
-.k-picker-wrap .k-input {
-    font-size: 100%;
-    font-family: inherit;
-    border-style: solid;
-    border-width: 1px;
+// TODO: Refactor after R1 2020; After unifying inputs features/rendering.
+.k-searchbox > .k-input {
+    margin: 0;
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+    box-shadow: none;
+    color: inherit;
+    background: none;
+    font: inherit;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
     -webkit-appearance: none;
 }
 
 .k-widget,
 .k-block,
-.k-inline-block,
-.k-draghandle
-{
+.k-inline-block {
     border-style: solid;
     border-width: 1px;
     -webkit-appearance: none;
@@ -81,8 +70,7 @@
     outline: 0;
 }
 
-.k-widget .k-input::-ms-clear,
-.k-list-filter ::-ms-clear {
+.k-widget .k-input::-ms-clear {
     width : 0;
     height: 0;
 }
@@ -90,9 +78,7 @@
 .k-block,
 .k-widget,
 .k-grid,
-.k-slider,
 .k-splitter,
-.k-treeview,
 .k-panelbar,
 .k-content,
 .k-header-column-menu {
@@ -101,10 +87,8 @@
 }
 
 .k-block,
-.k-slider,
 .k-splitbar,
 .k-calendar,
-.k-treeview,
 .k-pager-wrap,
 .k-grid-header .k-i-link-horizontal,
 .k-header-column-menu {
@@ -112,7 +96,7 @@
 }
 
 .k-header-column-menu {
-    color: inhert;
+    color: inherit;
 }
 
 // Block
@@ -166,30 +150,40 @@ input[type="reset"].k-button-expand
 }
 
 // states
-
+.k-disabled,
 .k-state-disabled,
+.k-disabled,
 .k-state-disabled .k-link,
+.k-disabled .k-link,
+.k-disabled .k-icon,
 .k-state-disabled .k-icon,
-.k-state-disabled .k-draghandle,
-.k-state-disabled .k-upload-button input
-{
+.k-disabled .k-icon,
+.k-state-disabled .k-upload-button input,
+.k-disabled .k-upload-button input {
     cursor: default !important;
     pointer-events: none;
     outline: 0;
 }
 
-.k-state-disabled
+.k-disabled,
+.k-state-disabled,
+.k-disabled
 {
-    opacity:.7;
+    opacity:.6;
 
+    & .k-disabled,
     & > .k-button {
         opacity: 1;
     }
 }
 
 @media print {
+    .k-disabled,
     .k-state-disabled,
-    .k-state-disabled .k-input
+    .k-disabled,
+    .k-disabled .k-input,
+    .k-state-disabled .k-input,
+    .k-disabled .k-input
     {
         opacity:1 !important;
     }
@@ -219,17 +213,11 @@ input[type="reset"].k-button-expand
     border: 0;
 }
 
-// Badges
-.k-badge {
-    max-width: 100%;
-    font-size: .7em;
-    line-height: 2em;
-    margin-left: 6px;
-    padding: 0 6px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    box-sizing: border-box;
+.k-widget .k-icon {
+    &.k-i-expand,
+    &.k-i-collapse {
+        cursor: pointer;
+    }
 }
 
 
@@ -332,7 +320,6 @@ html .k-error-colored
 
 .k-loading-color
 {
-    filter: alpha(opacity=30);
     opacity: .3;
 }
 
@@ -343,29 +330,25 @@ html .k-error-colored
 }
 
 .k-pane > .k-splitter-overlay {
-    filter: alpha(opacity=0);
     opacity: 0;
     position: absolute;
 }
 
 // drag n drop
 
-.k-drag-clue
-{
+.k-drag-clue {
+    margin: 0;
+    padding: 4px 8px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 1em;
+    line-height: normal;
+    white-space: nowrap;
+    list-style: none;
+    cursor: default;
+    overflow: hidden;
     position: absolute;
     z-index: 10003;
-    border-style: solid;
-    border-width: 1px;
-    font-size: .9em;
-    padding: .2em .4em;
-    white-space: nowrap;
-    cursor: default;
-}
-
-
-// ListBox Drag Clue
-.k-item.k-drag-clue {
-    font-size: inherit;
 }
 
 .k-drag-status
@@ -484,24 +467,18 @@ html .k-error-colored
 .k-animation-container *,
 .k-widget *:before,
 .k-animation-container *:after,
-.k-block .k-header,
-.k-list-container,
-.k-dialog .k-window-content
-{
+.k-block .k-header {
     .box-sizing(content-box);
 }
 
 .k-textbox,
-.k-autocomplete,
 .k-tabstrip > .k-content > .km-scroll-container,
 .k-block,
 .k-edit-cell .k-widget,
 .k-grid-edit-row .k-widget,
 .k-grid-edit-row .text-box,
 .km-actionsheet > li,
-.km-shim,
-div.k-window-content
-{
+.km-shim {
     .box-sizing(border-box);
 }
 
@@ -524,126 +501,6 @@ div.k-window-content
     -moz-background-clip: border-box;
     -webkit-background-clip: border-box;
     background-clip: border-box;
-}
-
-@checkbox-tick-icon-content: "\e118";
-@checkbox-border-width: 1px;
-@checkbox-size: 14px;
-@checkbox-check-size: @checkbox-size;
-
-// styled checkboxes
-// changes here may reflect in treeview span.k-checkbox>input[type=checkbox]
-input.k-checkbox,
-.k-radio {
-    display: inline;
-    opacity: 0;
-    width: 0;
-    margin: 0;
-    -webkit-appearance: none;
-    overflow: hidden;
-
-    .k-ff & {
-        // -moz-appearance: none does not remove all styles
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=605985
-        position: absolute;
-
-    }
-}
-
-.k-checkbox-label,
-.k-radio-label {
-   display: inline-block;
-   position: relative;
-   padding-left: (@checkbox-size * 1.8);
-   vertical-align: top;
-   line-height: 16px;
-   cursor: pointer;
-   border-style: solid;
-   border-width: 0;
-}
-
-.k-checkbox-label:before {
-  font: @checkbox-size "WebComponentsIcons", monospace;
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-width: @checkbox-border-width;
-  border-style: solid;
-  width: @checkbox-size;
-  height: @checkbox-size;
-  font-size: @checkbox-check-size;
-  line-height: @checkbox-size;
-  text-align: center;
-}
-
-.k-checkbox:indeterminate + .k-checkbox-label:after {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  border-width: @checkbox-border-width;
-  border-style: solid;
-  width: 8px;
-  height: 8px;
-  font-size: @checkbox-check-size;
-  text-align: center;
-  content: " ";
-}
-
-.k-checkbox:checked + .k-checkbox-label:before {
-  content: @checkbox-tick-icon-content;
-}
-
-.k-checkbox:disabled + .k-checkbox-label {
-   cursor: auto;
-}
-
-//Radio buttons
-.k-radio-label:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 14px;
-  height: 14px;
-  border-style: solid;
-}
-
-.k-radio:checked + .k-radio-label:after {
-  content: "";
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 3px;
-  left: 3px
-}
-
-.k-radio:disabled + .k-radio-label {
-   cursor: auto;
-}
-
-// RTL for checkboxes and radio buttons
-.k-rtl .k-checkbox-label,
-.k-rtl .k-radio-label {
-    padding-left: 0;
-    padding-right: 25.2px;
-}
-
-.k-rtl .k-checkbox-label:before,
-.k-rtl .k-radio-label:before {
-    right: 0;
-}
-
-.k-rtl .k-radio:checked + .k-radio-label:after {
-    right: 3px;
-}
-
-// Avoid double-click bug with checkbox + label combination in Google Chrome
-input.k-checkbox + label {
-    -webkit-user-select: none;
 }
 
 // Off-screen container used during export
@@ -682,13 +539,70 @@ input.k-checkbox + label {
     color: inherit;
 }
 
-.k-i-drag-and-drop,
+// Drop Hint
+.k-drop-hint {
+    display: flex;
+    gap: @drop-hint-arrow-spacing;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+}
+
+.k-drop-hint-start,
+.k-drop-hint-end {
+    flex-shrink: 0;
+    border-width: (@drop-hint-arrow-size / 2);
+    border-style: solid;
+    border-color: transparent;
+}
+
+.k-drop-hint-line {
+    flex-grow: 1;
+}
+
+.k-drop-hint-h {
+    .k-drop-hint-start {
+        border-left-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-right-width: 0;
+    }
+
+    .k-drop-hint-line {
+        width: @drop-hint-line-h-width;
+        height: @drop-hint-line-h-height;
+    }
+
+    .k-drop-hint-end {
+        border-right-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-left-width: 0;
+    }
+}
+
+.k-drop-hint-v {
+    flex-direction: column;
+
+    .k-drop-hint-start {
+        border-top-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-bottom-width: 0;
+    }
+
+    .k-drop-hint-line {
+        width: @drop-hint-line-v-width;
+        height: @drop-hint-line-v-height;
+    }
+
+    .k-drop-hint-end {
+        border-bottom-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-top-width: 0;
+    }
+}
+
+
 .k-column-menu .k-sprite,
 .k-grid-mobile .k-resize-handle-inner:before,
 .k-grid-mobile .k-resize-handle-inner:after,
-.k-pager-numbers .k-current-page .k-link:after,
-.k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view > .k-link:after,
-.k-gantt-views > .k-current-view > .k-link:after {
+.k-pager-numbers .k-current-page .k-link:after {
     .use-font-icon();
 }
 .k-icon:before {
@@ -731,21 +645,6 @@ input.k-checkbox + label {
     .disable-high-contrast();
 }
 
-// Header/Footer templates
-.k-list-container {
-
-    .k-footer {
-
-        // ensure right calculating of popup - expanding parent to children with margin
-        &:before,
-        &:after {
-            content: "";
-            display: block;
-            overflow: hidden;
-        }
-    }
-}
-
 // Reorder cue
 .k-reorder-cue {
     position: absolute;
@@ -776,3 +675,30 @@ input.k-checkbox + label {
 .k-flip-h { transform: scaleX(-1); }
 .k-flip-v { transform: scaleY(-1); }
 .k-flip-h.k-flip-v { transform: scale(-1, -1); }
+
+// Text align
+.k-text-align-left,
+.k-text-left {
+    text-align: left;
+}
+
+.k-text-align-center,
+.k-text-center {
+    text-align: center;
+}
+
+.k-text-align-right,
+.k-text-right {
+    text-align: right;
+}
+
+.k-text-align-justify,
+.k-text-justify {
+    text-align: justify;
+}
+
+// Hide Script tags
+// see https://github.com/telerik/kendo-themes/issues/2360
+script {
+    display: none !important;
+}

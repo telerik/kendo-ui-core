@@ -1,6 +1,6 @@
 ---
 title: Endless Scrolling
-page_title: jQuery Grid Documentation | Endless Scrolling | Kendo UI
+page_title: jQuery Grid Documentation - Endless Scrolling
 description: "Get started with the jQuery Grid by Kendo UI supporting endless scrolling mode suitable for displaying large number of items."
 slug: endless_scrolling_kendoui_grid_widget
 position: 3
@@ -8,7 +8,7 @@ position: 3
 
 # Endless Scrolling
 
-Endless scrolling is suitable when you display large number of items and use editing, grouping, filtering, sorting, or hierarchy.
+Endless scrolling is an alternative to paging. The functionality is suitable when you display large number of items and use editing, grouping, filtering, sorting, or hierarchy.
 
 For runnable examples, refer to:
 * [Demo on endless scrolling of local data by the Grid](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local)
@@ -18,18 +18,20 @@ For runnable examples, refer to:
 
 To enable endless scrolling, set the [`scrollable.endless`](/api/javascript/ui/grid/configuration/scrollable.endless) property to `true`.
 
+> For the functionality to work as expected there are two requirements:
+> - There needs to be a vertical scrollbar
+> - The height of the grid should be constant
+
 The Grid supports endless scrolling both when it is bound to local and remote data:
-* When bound to local data arrays, the Grid serializes all items to the client and while the user scrolls, the widget displays new items.
+* When bound to local data arrays, the Grid serializes all items to the client and while the user scrolls, the component displays new items.
 * When bound to remote data, the Grid serializes only the items for one page. When the user scrolls to the end of the list, the Grid sends an AJAX request to get the items for the next page. When the data is returned, the Grid renders only the new items and appends them to the old ones.
 
-###### Example
-
-    $("#grid").kendoGrid({
-        scrollable: {
-            endless: true
-        },
-        // Other configuration.
-    });
+        $("#grid").kendoGrid({
+            scrollable: {
+                endless: true
+            },
+            // Other configuration.
+        });
 
 
 ## Using with Editing
@@ -52,9 +54,41 @@ If the Grid displays hierarchical data and an item gets expanded, it will not be
 
 > The filtering, sorting, and grouping operations reset the scroll position.
 
+## Using with DataSource operations
+
+When a filter, sort, or group is applied through the [`DataSource methods`](/api/javascript/data/datasource#methods) rather than the Grid UI, the scroll position isn't automatically reset.
+
+In such cases, the scroll position and [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) should be updated manually.
+
+        $("#grid").kendoGrid({
+            scrollable: {
+                endless: true
+            },
+            // Other configuration.
+        });
+
+        let grid = $("#grid").data("kendoGrid");
+
+        // Reset the scroll position and update the pageSize before invoking the operation.
+        grid.dataSource.options.endless = null;
+        grid._endlessPageSize = grid.dataSource.options.pageSize;
+        grid.dataSource.pageSize(grid.dataSource.options.pageSize);
+        
+        // Apply a filter, sort or group after that.
+        let filter = {field: "exampleField", operator: "eq", value: "example value"}
+        grid.dataSource.filter(filter);
+
+## Known Limitations
+
+* Either enable endless scrolling or paging. Do not apply both features at the same time.
+
+## KB Articles on Scrolling
+
+* [Hiding the Vertical Scrollbar]({% slug howto_hide_vertical_scrollbar_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Endless Scrolling of Local Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local)
 * [Endless Scrolling of Remote Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote)
-* [Kendo UI Knowledge Base](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

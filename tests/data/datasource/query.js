@@ -5,7 +5,7 @@
             $.mockjaxSettings.responseTime = 0;
         });
         afterEach(function() {
-            $.mockjax.clear()
+            $.mockjax.clear();
         });
 
         var data = [];
@@ -67,6 +67,29 @@
             assert.equal(dataSource.sort()[0].field, "foo");
             assert.equal(dataSource.sort()[0].dir, "asc");
 
+        });
+
+        it("query should correctly calculate aggregates if inPlaceSort is enabled and filter and grouping are applied", function() {
+            var dataSource = new DataSource({
+                data: [{
+                    "Col1": 97.5690346607209,
+                    "Col2": "USD",
+                    "Col3": 0
+                },
+                {
+                    "Col1": 0.13031241570657351,
+                    "Col2": "USD",
+                    "Col3": 1
+                }],
+                inPlaceSort: true
+            });
+
+            dataSource.query({
+                filter: { value: 1, field: "Col3", operator: "eq" },
+                group: { field: "Col2", dir: "asc", aggregates: [{ field: "Col1", aggregate: "average" }] }
+            });
+
+            assert.equal(dataSource.view()[0].aggregates.Col1.average, 0.1303124157065735);
         });
 
         it("query should sort the data array when inPlaceSort is enabled and filter is applied", function() {
@@ -749,7 +772,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -887,7 +910,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -918,7 +941,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -1112,6 +1135,24 @@
             assert.equal(dataSource.filter().filters[0].operator, "eq");
         });
 
+        it("using string filter with zero works correctly", function() {
+            var dataSource = new DataSource({
+                data: [{ id: 1 }, { id: 0 }]
+            });
+
+            dataSource.filter({ field: "id", operator: "contains", value: "0" });
+            assert.equal(dataSource.view().length, 1);
+        });
+
+        it("using string filter with false works correctly", function() {
+            var dataSource = new DataSource({
+                data: [{ id: true }, { id: false }]
+            });
+
+            dataSource.filter({ field: "id", operator: "contains", value: "false" });
+            assert.equal(dataSource.view().length, 1);
+        });
+
         it("query should update the total if filtering is enabled", function() {
             var dataSource = new DataSource({
                 data: [{ id: 1, bar: "foo" }, { id: 2, bar: "baz" }]
@@ -1241,6 +1282,58 @@
             var model = dataSource.get("");
             dataSource.cancelChanges(model);
             assert.equal(dataSource.view().length, 2);
+        });
+
+        it("cancelChanges of a newly inserted item removes the empty groups if serverpaging is enabled and nested grouping is applied", function() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ group: [{ items: [{ id: 1, bar: "foo" }, { id: 2, bar: "baz" }] }, { items: [{ id: 3, bar: "foo" }] }], total: 10 });
+                    }
+                },
+                schema: {
+                    groups: "group",
+                    model: {
+                        id: "id"
+                    }
+                },
+                group: [{ field: "id" }, { field: "bar" }],
+                serverPaging: true,
+                serverGrouping: true
+            });
+
+            dataSource.read();
+            dataSource.add({ bar: "test" });
+            var model = dataSource.get("");
+            dataSource.cancelChanges(model);
+            assert.equal(dataSource.view().length, 2);
+        });
+
+        it("cancelChanges of a newly inserted item updates the total if serverGrouping is enabled", function() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ group: [{ items: [{ id: 1, bar: "foo" }, { id: 2, bar: "baz" }] }, { items: [{ id: 3, bar: "foo" }] }], total: 10 });
+                    }
+                },
+                schema: {
+                    groups: "group",
+                    total: "total",
+                    model: {
+                        id: "id"
+                    }
+                },
+                group: [{ field: "id" }, { field: "bar" }],
+                serverPaging: true,
+                serverGrouping: true
+            });
+
+            dataSource.read();
+            dataSource.add({ bar: "test" });
+            var model = dataSource.get("");
+            dataSource.cancelChanges(model);
+
+            assert.equal(dataSource.total(), 10);
         });
 
         it("delete the last item in group removes the empty group if serverpaging is enabled and grouping is applied", function() {
@@ -1932,7 +2025,7 @@
                 serverPaging: true,
                 schema: {
                     total: function() {
-                        return "2"
+                        return "2";
                     }
                 }
             });

@@ -1,5 +1,5 @@
 (function() {
-    describe("events", function () {
+    describe("events", function() {
         beforeEach(function() {
 
         });
@@ -8,7 +8,7 @@
                 notification.destroy();
             }
 
-            $(".k-notification").each(function(idx, element){
+            $(".k-notification").each(function(idx, element) {
                 var popup = $(element).data("kendoPopup");
                 if (popup) {
                     popup.destroy();
@@ -19,79 +19,79 @@
 
         });
 
-    it("show method triggers show event with popup element as argument", function() {
-        var triggered = false;
-        var args = {};
+        it("show method triggers show event with popup element as argument", function() {
+            var triggered = false;
+            var args = {};
 
-        createNotification({
-            show: function(e) {
-                triggered = true;
-                args = e;
-            }
+            createNotification({
+                show: function(e) {
+                    triggered = true;
+                    args = e;
+                }
+            });
+
+            notification.show("foo");
+
+            assert.isOk(triggered);
+            assert.isOk(args.element && args.element.length && args.element.length == 1);
         });
 
-        notification.show("foo");
+        it("show method triggers show event with static element as argument", function() {
+            var triggered = false;
+            var args = {};
 
-        assert.isOk(triggered);
-        assert.isOk(args.element && args.element.length && args.element.length == 1);
-    });
+            createNotification({
+                appendTo: Mocha.fixture,
+                show: function(e) {
+                    triggered = true;
+                    args = e;
+                }
+            });
 
-    it("show method triggers show event with static element as argument", function() {
-        var triggered = false;
-        var args = {};
+            notification.show("foo");
 
-        createNotification({
-            appendTo: Mocha.fixture,
-            show: function(e) {
-                triggered = true;
-                args = e;
-            }
+            assert.isOk(triggered);
+            assert.isOk(args.element && args.element.length && args.element.length == 1);
         });
 
-        notification.show("foo");
+        it("notification hide triggers hide event with popup element as argument", function() {
+            var triggered = false;
+            var args = {};
 
-        assert.isOk(triggered);
-        assert.isOk(args.element && args.element.length && args.element.length == 1);
-    });
+            createNotification({
+                hide: function(e) {
+                    triggered = true;
+                    args = e;
+                }
+            });
 
-    it("notification hide triggers hide event with popup element as argument", function() {
-        var triggered = false;
-        var args = {};
+            notification.show("foo");
 
-        createNotification({
-            hide: function(e) {
-                triggered = true;
-                args = e;
-            }
+            notification.hide();
+
+            assert.isOk(triggered);
+            assert.isOk(args.element && args.element.length && args.element.length == 1);
         });
 
-        notification.show("foo");
+        it("notification hide triggers hide event with static element as argument", function() {
+            var triggered = false;
+            var args = {};
 
-        notification.hide();
+            createNotification({
+                appendTo: Mocha.fixture,
+                hide: function(e) {
+                    triggered = true;
+                    args = e;
+                }
+            });
 
-        assert.isOk(triggered);
-        assert.isOk(args.element && args.element.length && args.element.length == 1);
-    });
+            notification.show("foo");
 
-    it("notification hide triggers hide event with static element as argument", function() {
-        var triggered = false;
-        var args = {};
+            notification.hide();
 
-        createNotification({
-            appendTo: Mocha.fixture,
-            hide: function(e) {
-                triggered = true;
-                args = e;
-            }
+            assert.isOk(triggered);
+            assert.isOk(args.element && args.element.length && args.element.length == 1);
         });
-
-        notification.show("foo");
-
-        notification.hide();
-
-        assert.isOk(triggered);
-        assert.isOk(args.element && args.element.length && args.element.length == 1);
-    });
 
     });
 }());

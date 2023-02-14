@@ -1,6 +1,6 @@
 ---
 title: Show Tab Text in Android Skin
-page_title: Show Tab Text in Android Skin | Hybrid UI ScrollView
+page_title: Show Tab Text in Android Skin - Hybrid UI ScrollView
 description: "Learn how to show the tab text of the TabStrip in Android skin."
 slug: howto_showtabtextandroidskin_hybridtabstrip
 ---
@@ -9,7 +9,7 @@ slug: howto_showtabtextandroidskin_hybridtabstrip
 
 The example below demonstrates how to show the tab text of a Hybrid UI TabStrip widget in Android skin.
 
-###### Example
+
 
 ```dojo
   <div data-role="view" data-layout="mobile-tabstrip">

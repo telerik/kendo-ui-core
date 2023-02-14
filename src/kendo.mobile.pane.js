@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.mobile.view", "./kendo.mobile.loader" ], f);
-})(function(){
+import "./kendo.mobile.view.js";
+import "./kendo.mobile.loader.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.pane",
     name: "Pane",
     category: "mobile",
@@ -126,7 +125,7 @@ var __meta__ = { // jshint ignore:line
                 },
 
                 viewTypeDetermined: function(e) {
-                    if (!e.remote || !that.options.serverNavigation)  {
+                    if (!e.remote || !that.options.serverNavigation) {
                         that.trigger(NAVIGATE, { url: e.url });
                     }
                 }
@@ -297,11 +296,11 @@ var __meta__ = { // jshint ignore:line
             this.element.css('-ms-touch-action', '');
         },
 
-        _appLinkClick: function (e) {
+        _appLinkClick: function(e) {
             var href = $(e.currentTarget).attr("href");
             var remote = href && href[0] !== "#" && this.options.serverNavigation;
 
-            if(!remote && attrValue($(e.currentTarget), "rel") != EXTERNAL) {
+            if (!remote && attrValue($(e.currentTarget), "rel") != EXTERNAL) {
                 e.preventDefault();
             }
         },
@@ -365,6 +364,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(Pane);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

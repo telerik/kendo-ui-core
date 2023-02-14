@@ -1,6 +1,6 @@
 ---
 title: Culture Definition
-page_title: Culture Definition | Kendo UI Globalization
+page_title: Culture Definition - Kendo UI Globalization
 description: "Learn about the default culture information settings in Kendo UI and how to define culture information in culture files and then extend it."
 previous_url: /framework/globalization/definecultureinfo
 slug: culture_definition_kendoui_globalization
@@ -11,7 +11,7 @@ position: 2
 
 The information on each culture is placed in a separate JavaScript file and shares the `kendo.culture.<language code>[-<country/region code>].js` naming convention.
 
-You can include as many culture files as you want. Every file that is included extends the `kendo.cultures` mapping. Note that the included culture file does not automatically become the current culture used by Kendo UI.
+You can include as many culture files as you want. Every file that is included extends the `kendo.cultures` mapping. Note that the included culture file does not automatically become the current culture used by Kendo UI. For further information how to set different culture, check out [this section from the Overview article](https://docs.telerik.com/kendo-ui/globalization/intl/overview#defining-the-current-culture)
 
 ## Applying the Default Cultures
 

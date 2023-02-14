@@ -1,8 +1,8 @@
 ---
 title: Implement Single-Row Selection on Click in Batch Edit Grid
-description: An example on how to allow click selection in a Kendo UI Grid in batch edit mode.
+description: Learn how to allow click selection in a Kendo UI Grid in batch edit mode.
 type: how-to
-page_title: Implement Single-Row Selection on Click in Batch Edit Mode | Kendo UI Grid
+page_title: Implement Single-Row Selection on Click in Batch Edit Mode - Kendo UI Grid for jQuery
 slug: grid-click-selection-batch-edit
 tags: single, row, selection, grid, batch, edit, mode
 ticketid: 1125960
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -96,7 +97,7 @@ Use the `closeCell` and `editCell` methods of the Grid on single or double click
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
           { field: "UnitsInStock", title: "Units In Stock", width: 120 },
-          { field: "Discontinued", width: 120, editor: customBoolEditor },
+          { field: "Discontinued", width: 120 },
           { command: "destroy", title: "&nbsp;", width: 150 }],
         editable: true,
         selectable: true
@@ -110,11 +111,6 @@ Use the `closeCell` and `editCell` methods of the Grid on single or double click
         grid.editCell($(this));
       });
     });
-
-    function customBoolEditor(container, options) {
-      $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-      $('<label class="k-checkbox-label">​</label>').appendTo(container);
-    }
   </script>
 </div>
 ```

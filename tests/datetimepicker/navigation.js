@@ -101,7 +101,7 @@
 
             input.focus();
 
-            assert.isOk(datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
+            assert.isOk(datetimepicker.wrapper.hasClass("k-focus"));
         });
 
         it("DateTimePicker remove focus state to the wrapper on blur", function() {
@@ -109,7 +109,7 @@
 
             input.focus().blur();
 
-            assert.isOk(!datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
+            assert.isOk(!datetimepicker.wrapper.hasClass("k-focus"));
         });
 
         it("DateTimePicker opens DateView when press ALT + DOWN", function() {
@@ -139,6 +139,20 @@
             assert.isOk(datetimepicker.timeView.popup.visible());
         });
 
+        it("DateTimePicker opens TimeView when press ENTER while DateView is open", function() {
+            var datetimepicker = new DateTimePicker(input);
+
+            datetimepicker.open("date");
+
+            input.focus().trigger({
+                type: "keydown",
+                keyCode: kendo.keys.ENTER
+            });
+
+            assert.isOk(!datetimepicker.dateView.popup.visible());
+            assert.isOk(datetimepicker.timeView.popup.visible());
+        });
+
         it("DateTimePicker closes DateView when press ALT + UP", function() {
             var datetimepicker = new DateTimePicker(input);
 
@@ -151,6 +165,19 @@
             });
 
             assert.isOk(!datetimepicker.dateView.popup.visible());
+        });
+
+        it("deleting the value in the input sets the current day to the dateview", function() {
+            var datepicker = new DateTimePicker(input, {
+                value: "1/1/2011 11:00 AM"
+            });
+            datepicker.open();
+            datepicker.close();
+            input.focus().val("");
+
+            input.trigger("focusout");
+
+            assert.deepEqual(datepicker.dateView.calendar.current(), kendo.calendar.getToday());
         });
 
         it("DateTimePicker closes TimeView when press ALT + UP", function() {
@@ -244,7 +271,7 @@
 
             assert.equal(datetimepicker.timeView.ul.children().length, 1);
             assert.equal(datetimepicker.timeView.ul.children().text(), "12:00 AM");
-            assert.isOk(datetimepicker.timeView.ul.children().hasClass("k-state-selected"));
+            assert.isOk(datetimepicker.timeView.ul.children().hasClass("k-selected"));
         });
 
         it("DateTimePicker limits the available times to the max date", function() {
@@ -485,7 +512,7 @@
             $(".k-weekend").eq(1).trigger("click");
 
             assert.equal(input.val(), "1/16/2016 12:00 AM");
-        })
+        });
 
 
         it("TimeView uses input value on open", function() {

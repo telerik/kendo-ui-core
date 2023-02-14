@@ -1,20 +1,20 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI RippleContainer
-description: "Learn how to initialize the Kendo UI RippleContainer widget and configure its behavior."
+page_title: jQuery RippleContainer Documentation - RippleContainer Overview
+description: "Get started with the jQuery RippleContainer by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_ripplecontainer_widget
 position: 1
 ---
 
-# RippleContainer Overview
+# {{ site.product }} RippleContainer Overview
 
-The [Kendo UI RippleContainer widget](http://demos.telerik.com/kendo-ui/ripplecontainer/index) provides [the Material ink ripple effect](https://material.io/design/motion/choreography.html#sequencing) for the Kendo UI components and is compatible only with [the Sass-based Material Theme](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes).
+The Kendo UI RippleContainer widget provides [the Material ink ripple effect](https://material.io/design/motion/choreography.html#sequencing) for the Kendo UI components.
 
-The ripple effect is applied to all components that are located inside the `RippleContainer` element.
+The RippleContainer is compatible only with [the SASS-based Material Theme](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes). The ripple effect is applied to all components that are located inside the `RippleContainer` element.
 
-## Getting Started
+* [Demo page for the RippleContainer](https://demos.telerik.com/kendo-ui/ripplecontainer/index)
 
-### Initialize the RippleContainer
+## Initializing the RippleContainer
 
 The following example demonstrates how to initialize the RippleContainer.
 
@@ -30,38 +30,13 @@ The following example demonstrates how to initialize the RippleContainer.
     </script>
 ```
 
-## Configuration
+## Functionality and Features
 
-### Elements
+The RippleContainer provides a [set of elements]({% slug elements_kendoui_ripplecontainer %}).
 
-By default, the RippleContainer renders the ripple effect to all supported elements:
+## Referencing Existing Instances
 
-* Buttons
-* Checkboxes
-* Radio buttons
-* List items
-
-When the `elements` option is configured, the ripple effect will be displayed only for the specified elements.
-
-```dojo
-    <div id="container">
-        <p>Ripple on Buttons</p>
-        <button class="k-button">Default Button</button><br />
-    </div>
-    <script>
-        $("#container").kendoRippleContainer({
-            elements: [
-                { selector: ".k-button:not(li)" }
-            ]
-        });
-    </script>
-```
-
-## Reference
-
-### Existing Instances
-
-Make a reference to an existing RippleContainer instance through [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once done, use the [RippleContainer API](/api/web/ripplecontainer) to control its behavior.
+To reference an existing RippleContainer instance, use [`jQuery.data()`](https://api.jquery.com/jQuery.data/) and the [RippleContainer API](/api/web/ripplecontainer) to control its behavior.
 
 The following example demonstrates how to access an existing RippleContainer instance.
 
@@ -71,4 +46,5 @@ var ripple = $("#container").data("kendoRippleContainer");
 
 ## See Also
 
-* [RippleContainer JavaScript API Reference](/api/javascript/ui/ripplecontainer)
+* [Basic Usage of the RippleContainer (Demo)](https://demos.telerik.com/kendo-ui/ripplecontainer/index)
+* [JavaScript API Reference of the RippleContainer](/api/javascript/ui/ripplecontainer)

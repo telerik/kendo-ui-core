@@ -1,8 +1,8 @@
 ---
-title: Bind RGBA Hexadecimal Color Value to ColorPicker
-description: An example on how to create a custom MVVM binding to allow the Kendo UI ColorPicker to accept RGBA hexadecimal values.
+title: Bind an RGBA Hexadecimal Color Value to the ColorPicker
+page_title: Bind RGBA Hexadecimal Color Value to ColorPicker - Kendo UI ColorPicker for jQuery
+description: Learn how to create a custom MVVM binding to allow the Kendo UI ColorPicker to accept RGBA hexadecimal values.
 type: how-to
-page_title: Bind RGBA Hexadecimal Color Value to ColorPicker | Kendo UI ColorPicker
 slug: bind-rgba-hexadecimal-color-value-to-colorpicker
 tags: colorpicker, mvvm, rgba, hexadecimal, color
 res_type: kb
@@ -14,7 +14,7 @@ component: color-picker
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ColorPicker</td>
+  <td>Progress® Kendo UI® ColorPicker for jQuery</td>
  </tr>
 </table>
 

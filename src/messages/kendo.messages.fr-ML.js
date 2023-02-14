@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -177,7 +178,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Export to PDF",
     "select": "Sélectionner",
     "cancel": "Annuler les modifications",
-    "save": "Enregistrer les modifications"
+    "save": "Enregistrer les modifications",
+    "search": "Rechercher..."
   },
   "editable": {
     "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
@@ -366,7 +368,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Style de bordure",
   "collapseBorders": "Rétracter bordures",
   "wrapText": "Renvoi à la ligne",
-  "associateCellsWithHeaders": "Cellules associées aux entêtes",
+  "associateCellsWithHeaders": "Entêtes associées",
   "alignLeft": "Aligner à gauche",
   "alignCenter": "Aligner le centre",
   "alignRight": "Aligner à droite",
@@ -389,17 +391,17 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
 /* FileBrowser and ImageBrowser messages */
 
 var browserMessages = {
-  "uploadFile" : "Charger",
-  "orderBy" : "Trier par",
-  "orderByName" : "Nom",
-  "orderBySize" : "Taille",
-  "directoryNotFound" : "Aucun répértoire de ce nom.",
-  "emptyFolder" : "Répertoire vide",
-  "deleteFile" : 'Etes-vous sûr de vouloir supprimer "{0}"?',
-  "invalidFileType" : "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
-  "overwriteFile" : "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
-  "dropFilesHere" : "glissez les fichiers ici pour les charger",
-  "search" : "Recherche"
+  "uploadFile": "Charger",
+  "orderBy": "Trier par",
+  "orderByName": "Nom",
+  "orderBySize": "Taille",
+  "directoryNotFound": "Aucun répértoire de ce nom.",
+  "emptyFolder": "Répertoire vide",
+  "deleteFile": 'Etes-vous sûr de vouloir supprimer "{0}"?',
+  "invalidFileType": "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
+  "overwriteFile": "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
+  "dropFilesHere": "glissez les fichiers ici pour les charger",
+  "search": "Recherche"
 };
 
 if (kendo.ui.FileBrowser) {
@@ -541,6 +543,40 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
   "okText": "OK",
   "cancel": "Annuler"
 });
+}
+
+/* FlatColorPicker messages */
+
+if (kendo.ui.FlatColorPicker) {
+  kendo.ui.FlatColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "aucune couleur",
+      "clearColor": "Supprimer la couleur"
+  });
+}
+
+/* ColorPicker messages */
+
+if (kendo.ui.ColorPicker) {
+  kendo.ui.ColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "aucune couleur",
+      "clearColor": "Supprimer la couleur"
+  });
+}
+
+/* Numeric text box messages */
+
+if (kendo.ui.NumericTextBox) {
+  kendo.ui.NumericTextBox.prototype.options =
+  $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
+    "upArrowText": "Augmenter la valeur",
+    "downArrowText": "Diminuer la valeur"
+  });
 }
 
 })(window.kendo.jQuery);

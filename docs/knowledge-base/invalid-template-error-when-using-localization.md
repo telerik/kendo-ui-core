@@ -2,7 +2,7 @@
 title: "'Invalid Template' Error Occurs When Using Localization and Templates"
 description: "An 'Invalid Template' error occurs when I use nested templates which contain localized strings in ASP.NET Core projects."
 type: troubleshooting
-page_title: "'Invalid Template' Error Is Thrown When Nested Templates and Localization Are Used"
+page_title: Invalid Template Error Is Thrown When Nested Templates and Localization Are Used | UI for ASP.NET Core
 slug: invalid-template-during-localization
 ticketid: 1146274
 res_type: kb
@@ -13,7 +13,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Progress UI for ASP.NET Core</td>
+		<td>Progress® Telerik® UI for ASP.NET Core</td>
 	</tr>
 </table>
 

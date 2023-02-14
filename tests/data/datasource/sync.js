@@ -482,6 +482,37 @@
             assert.equal(models.length, 1);
         });
 
+        it("the destroyed record is pushed into the destroyed collection", function() {
+            var dataSource = new DataSource({
+                schema: {
+                    model: { id: "id" },
+                    groups: function(data) {
+                        return [{
+                            items: [{ foo: 1, id: 0 }],
+                            field: "foo",
+                            value: "bar"
+                        }];
+                    },
+                    total: function() {
+                        return 1;
+                    }
+                },
+                batch: true,
+                autoSync: true,
+                serverGrouping: true,
+                group: { field: "foo" }
+            });
+
+            stub(dataSource.transport, "destroy");
+            dataSource.read();
+
+            dataSource.sync = function() {
+                assert.equal(dataSource._destroyed.length, 1);
+            };
+
+            dataSource.remove(dataSource.get(0));
+        });
+
         it("hasChanges returns true if model is updated", function() {
             var dataSource = new DataSource({
                 schema: {

@@ -1,0 +1,19 @@
+// Floating label
+.k-textbox-container,
+.k-floating-label-container {
+    > .k-textarea {
+        flex: 1 1 auto;
+        width: auto;
+    }
+}
+
+// TODO: Remove once we drop IE support
+.k-ie {
+    .k-textarea > .k-input {
+        background-clip: border-box;
+    }
+
+    textarea.k-textarea {
+        background-clip: border-box;
+    }
+}

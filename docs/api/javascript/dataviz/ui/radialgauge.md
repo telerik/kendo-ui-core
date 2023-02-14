@@ -293,7 +293,7 @@ The font style of the labels.
 
 ### scale.labels.format `String`
 
-The format of the labels.
+The [`format`](/globalization/intl/numberformatting) of the labels.
 
 #### Example
 
@@ -510,9 +510,47 @@ The default color for the ranges.
 
 The width of the range indicators.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+      $("#gauge").kendoRadialGauge({
+        pointer: {
+          value: 50
+        },
+        scale: {
+          ranges: [{
+            from: 10,
+            to: 20,
+            color: "green"
+          }],   
+          rangeSize: 20
+        }
+      });
+    </script>
+
 ### scale.rangeDistance `Number`
 
 The distance from the range indicators to the ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+      $("#gauge").kendoRadialGauge({
+        pointer: {
+          value: 50
+        },
+        scale: {
+          ranges: [{
+            from: 10,
+            to: 20,
+            color: "green"
+          }],
+          rangeDistance: 10
+        }
+      });
+    </script>
 
 ### scale.reverse `Boolean`*(default: false)*
 
@@ -622,7 +660,7 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 Exports the Gauge as an image.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -666,7 +704,7 @@ The height of the exported image. Defaults to the Gauge height.
 Exports the Gauge as a PDF file.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -703,7 +741,7 @@ Parameters for the exported PDF file.
 Exports the Gauge as an SVG document.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -814,10 +852,10 @@ The gauge settings to update.
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the gauge.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the gauge.
 The returned string is a self-contained SVG document that can be used as is or
 converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
-[ImageMagick](http://www.imagemagick.org/).
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/radialgauge/methods/exportsvg), but will remain fully functional.
@@ -837,6 +875,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var gauge = $("#gauge").data("kendoRadialGauge");
     var svg = gauge.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -877,7 +916,7 @@ Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozil
     }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
     var rawData = base64.substring(base64.indexOf("base64,") + 7);
     var data = atob(rawData);

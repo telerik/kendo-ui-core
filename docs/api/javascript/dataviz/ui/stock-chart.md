@@ -496,6 +496,10 @@ The maximum number of groups (categories) to display when
 [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
 [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
+### navigator.categoryAxis.maxDivisions `Number`
+
+The maximum number of ticks and labels to display.
+
 ### navigator.categoryAxis.min `Object`
 
 The first date displayed on the category date axis. By default, the minimum date is the same as the first category.
@@ -4679,42 +4683,67 @@ A function that can be used to create a custom visual for the legend items. The 
 
     <div id="chart"></div>
     <script>
-      $("#chart").kendoStockChart({
-        legend: {
-          item: {
-            visual: function (e) {
-              var color = e.options.markers.background;
-              var labelColor = e.options.labels.color;
-              var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
-              var layout = new kendo.drawing.Layout(rect, {
-                spacing: 5,
-                alignItems: "center"
-              });
-
-              var marker = new kendo.drawing.Path({
-                fill: {
-                  color: color
+        $("#chart").kendoStockChart({
+            legend: {
+                visible: true,
+                position: "bottom",
+                item: {
+                    visual: function (e) {
+                        var color = e.options.markers.background;
+                        var labelColor = e.options.labels.color;
+                        var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+                        var layout = new kendo.drawing.Layout(rect, {
+                            spacing: 5,
+                            alignItems: "center"
+                        });
+    
+                        var marker = new kendo.drawing.Path({
+                            fill: {
+                                color: color
+                            }
+                        }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+    
+                        var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                            fill: {
+                                color: labelColor
+                            }
+                        });
+    
+                        layout.append(marker, label);
+                        layout.reflow()
+    
+                        return layout;
+                    }
                 }
-              }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
-
-              var label = new kendo.drawing.Text(e.series.name, [0, 0], {
-                fill: {
-                  color: labelColor
+            },
+            dataSource: {
+                data: [{
+                    "Date": "2016/01/01",
+                    "Open": 41.62,
+                    "High": 41.69,
+                    "Low": 39.81,
+                    "Close": 40.12,
+                    "Volume": 2632000
+                }, {
+                    "Date": "2016/03/01",
+                    "Open": 40.62,
+                    "High": 39.69,
+                    "Low": 40.81,
+                    "Close": 39.12,
+                    "Volume": 2631986
                 }
-              });
-
-              layout.append(marker, label);
-              layout.reflow()
-
-              return layout;
-            }
-          }
-        },
-        series: [
-          { name: "Series 1", data: [1, 2, 3] },
-          { name: "Series 2", data: [3, 4, 5] }
-        ]
-      });
+                ]
+            },
+            dateField: "Date",
+            series: [{
+                name: "Series 1",
+                type: "candlestick",
+                openField: "Open",
+                highField: "High",
+                lowField: "Low",
+                closeField: "Close"
+            }]
+        });
     </script>
 
 ### legend.labels `Object`
@@ -4914,6 +4943,113 @@ Configures the legend markers.
 
 The color of the markers.
 Any valid CSS color string will work here, including hex and rgb.
+
+### legend.title `Object`
+
+The legend title configuration options or text.
+
+### legend.title.align `String` *(default: "center")*
+
+The alignment of the title.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+### legend.title.background `String` *(default: "white")*
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border `Object`
+
+The border of the title.
+
+### legend.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the legend title border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### legend.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+### legend.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+### legend.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### legend.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### legend.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### legend.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### legend.title.padding `Number|Object` *(default: 5)*
+
+The padding of the title. A numeric value will set all margins.
+
+### legend.title.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the title.
+
+### legend.title.padding.left `Number` *(default: 0)*
+
+The left padding of the title.
+
+### legend.title.padding.right `Number` *(default: 0)*
+
+The right padding of the title.
+
+### legend.title.padding.top `Number` *(default: 0)*
+
+The top padding of the title.
+
+### legend.title.position `String` *(default: "top")*
+
+The position of the title.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+### legend.title.text `String`
+
+The text of the legend title. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### legend.title.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the title. By default the title will be displayed.
 
 ### panes `Array`
 
@@ -7113,6 +7249,484 @@ Template variables:
 ### seriesDefaults.tooltip.visible `Boolean`*(default: false)*
 
  A value indicating if the tooltip should be displayed.
+
+### subtitle `Object|String`
+
+The chart subtitle configuration options or text.
+
+#### Example - set the chart title and subtitle as a string
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: "Title",
+      subtitle: "Subtitle"
+    });
+    </script>
+
+#### Example - configure the chart title and subtitle
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        align: "left"
+      },
+      subtitle: {
+        text: "Subtitle",
+        align: "left"
+      }
+    });
+    </script>
+
+### subtitle.align `String`
+
+The alignment of the subtitle.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+By default, the subtitle has the same alignment as the title.
+
+#### Example - configure the chart title and subtitle alignment
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        align: "left"
+      },
+      subtitle: {
+        text: "Subtitle",
+        align: "left"
+      }
+    });
+    </script>
+
+### subtitle.background `String` *(default: "white")*
+
+The background color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - configure the chart subtitle alignment
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        background: "green"
+      }
+    });
+    </script>
+
+### subtitle.border `Object`
+
+The border of the subtitle.
+
+#### Example - set the chart subtitle border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          color: "green",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the chart subtitle border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          color: "green",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.dashType `String` *(default: "solid")*
+
+The dash type of the chart subtitle border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the chart subtitle border dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          dashType: "dashDot",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+#### Example - set the chart subtitle border width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.color `String`
+
+The text color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the subtitle color as a hex string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Chart Title"
+      },
+      subtitle: {
+        text: "Chart Subtitle",
+        color: "#aa00bb"
+      }
+    });
+    </script>
+
+### subtitle.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+#### Example - set the chart title and subtitle font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        font: "20px sans-serif"
+      }
+    });
+    </script>
+
+### subtitle.margin `Number|Object` *(default: 5)*
+
+The margin of the subtitle. A numeric value will set all margins.
+
+#### Example - set the chart subtitle margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: 10
+      }
+    });
+    </script>
+
+### subtitle.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the subtitle.
+
+#### Example - set the chart subtitle bottom margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: {
+          bottom: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.margin.left `Number` *(default: 0)*
+
+The left margin of the subtitle.
+
+#### Example - set the chart subtitle left margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        margin: {
+          left: 10
+        }
+      },
+      subtitle: {
+        text: "Subtitle"
+      }
+    });
+    </script>
+
+### subtitle.margin.right `Number` *(default: 0)*
+
+The right margin of the subtitle.
+
+#### Example - set the chart series subtitle right margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        margin: {
+          right: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.margin.top `Number` *(default: 0)*
+
+The top margin of the subtitle.
+
+#### Example - set the chart subtitle top margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: {
+          top: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding `Number|Object` *(default: 5)*
+
+The padding of the subtitle. A numeric value will set all margins.
+
+#### Example - set the chart subtitle padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: 10
+      }
+    });
+    </script>
+
+### subtitle.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the subtitle.
+
+#### Example - set the chart subtitle bottom padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        padding: {
+          bottom: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.left `Number` *(default: 0)*
+
+The left padding of the subtitle.
+
+#### Example - set the chart subtitle left padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: {
+          left: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.right `Number` *(default: 0)*
+
+The right padding of the subtitle.
+
+#### Example - set the chart subtitle right padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        padding: {
+          right: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.top `Number` *(default: 0)*
+
+The top padding of the subtitle.
+
+#### Example - set the chart subtitle top padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: {
+          top: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.position `String` *(default: "top")*
+
+The position of the subtitle.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+By default, the subtitle is placed in the same position as the title.
+
+#### Example - set the chart subtitle position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        position: "bottom"
+      },
+      subtitle: {
+        text: "Subtitle",
+        position: "bottom"
+      }
+    });
+    </script>
+
+### subtitle.text `String`
+
+The text of the chart subtitle. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+#### Example - set the chart subtitle text
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        position: "bottom"
+      }
+    });
+    </script>
+
+### subtitle.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the subtitle. By default the subtitle will be displayed.
+
+#### Example - hide the subtitle
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        visible: false
+      },
+      subtitle: {
+        text: "Subtitle",
+        visible: false
+      }
+    });
+    </script>
 
 ### theme `String`
 
@@ -9443,10 +10057,10 @@ The chart settings to update.
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the chart.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the chart.
 The returned string is a self-contained SVG document that can be used as is or
 converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
-[ImageMagick](http://www.imagemagick.org/).
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/stock-chart/methods/exportsvg), but will remain fully functional.
@@ -9472,6 +10086,7 @@ Both programs provide command-line interface suitable for server-side processing
 
     var chart = $("#stock-chart").data("kendoStockChart");
     var svg = chart.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -9514,7 +10129,7 @@ Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozil
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);

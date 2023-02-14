@@ -1,8 +1,8 @@
 ---
 title: Clear Filters When Text Is Cleared in Grid
-description: An example on how to clear the filters when the text is cleared in a Kendo UI Grid.
+description: Learn how to clear the filters when the text is cleared in a Kendo UI Grid.
 type: how-to
-page_title: Clear the Filters When the Text is Cleared | Kendo UI Grid
+page_title: Clear the Filters When the Text is Cleared - Kendo UI Grid for jQuery
 slug: grid-how-to-clear-the-filters-when-the-text-is-cleared
 tags: grid, filter, clear
 ticketid: 1136856
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -29,7 +29,7 @@ component: grid
   <td>Browser Version</td>
   <td>Chrome 61.0.3163.100</td>
  </tr> <tr>
-  <td>Made with Version</td>
+  <td>Product Version</td>
   <td>2017.3.1018</td>
  </tr></table>
 
@@ -38,7 +38,7 @@ component: grid
 
 How can I make the filter menu customization in the Grid fire the `filter` event when the text is cleared?
 
-To replicate the [**ColumnMenu** demo](http://demos.telerik.com/kendo-ui/grid/column-menu):
+To replicate the [**ColumnMenu** demo](https://demos.telerik.com/kendo-ui/grid/column-menu):
 
 1. Note the count as 1-30 of 830 items.
 1. Click the **Ship Country** column menu.

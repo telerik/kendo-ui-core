@@ -1,0 +1,34 @@
+.k-dropdown {}
+
+
+// Native select
+select.k-dropdown,
+select.k-dropdownlist {
+    .fill(
+        @dropdownlist-text,
+        @dropdownlist-bg,
+        @dropdownlist-border,
+        @dropdownlist-gradient
+    );
+
+    // Hover state
+    &:hover {
+        .fill(
+            @dropdownlist-hovered-text,
+            @dropdownlist-hovered-bg,
+            @dropdownlist-hovered-border,
+            @dropdownlist-hovered-gradient
+        );
+    }
+
+    // Focused state
+    &:focus {
+        .fill(
+            @dropdownlist-focused-text,
+            @dropdownlist-focused-bg,
+            @dropdownlist-focused-border,
+            @dropdownlist-focused-gradient
+        );
+        .box-shadow(@dropdownlist-focused-shadow);
+    }
+}

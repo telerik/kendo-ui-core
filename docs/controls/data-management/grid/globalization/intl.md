@@ -1,8 +1,8 @@
 ---
 title: Internationalization
-page_title: jQuery Grid Documentation | Grid Internationalization | Kendo UI
+page_title: jQuery Grid Documentation - Grid Internationalization
 description: "Get started with the jQuery Grid by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
-previous_url: /data-management/grid/date-formats
+previous_url: /controls/data-management/grid/date-formats
 slug: intl_kendoui_grid_widget
 position: 2
 ---
@@ -44,7 +44,7 @@ The following example demonstrates how to create different time with an offset d
 
 ## Using UTC on Both Client and Server
 
-To display the date in a UTC timezone regardless of the user timezone, refer to the complete example on [setting the UTC timezone on both client and server](http://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/utc-time-on-both-server-and-client).
+To display the date in a UTC timezone regardless of the user timezone, refer to the complete example on [setting the UTC timezone on both client and server](https://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/utc-time-on-both-server-and-client).
 
 ## Allowing the User to Customize the Timezone
 

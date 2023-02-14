@@ -748,7 +748,7 @@
                 var input = validateInput.args("validateInput", 0)[0];
                 assert.equal(input.length, 1);
                 assert.equal(input.val(), "1");
-            })
+            });
 
         });
     }());

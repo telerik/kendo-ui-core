@@ -20,7 +20,7 @@
                     items: [],
                     hasSubgroups: false,
                     value: key + " - " + (key + 30)
-                }
+                };
 
                 groups.push(groupsDict[key]);
             }
@@ -31,7 +31,7 @@
         return groups;
     }
 
-    describe("Grouped VirtualList: ", function () {
+    describe("Grouped VirtualList: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
@@ -57,7 +57,7 @@
                 autoBind: false,
                 height: CONTAINER_HEIGHT,
                 dataSource: asyncDataSource,
-                template: "#:text#",
+                template: ({ text }) => kendo.htmlEncode(text),
                 dataValueField: "value"
             };
         });
@@ -76,7 +76,7 @@
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read();
-        assert.equal(virtualList.wrapper.find(".k-group-header").length, 1);
+        assert.isOk(virtualList.wrapper.prev().hasClass("k-list-group-sticky-header"));
     });
 
     it("does not render item level group label for the first item (offset index 0)", function(done) {
@@ -103,8 +103,10 @@
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
-            assert.equal($(virtualList.header).text(), virtualList.dataSource.view()[0].value);
-            done();
+            setTimeout(function() {
+                assert.equal($(virtualList.header).text(), virtualList.dataSource.view()[0].value);
+                done();
+            });
         });
     });
 

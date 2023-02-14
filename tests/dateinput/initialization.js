@@ -33,14 +33,13 @@
 
             var dateinput = input.kendoDateInput().data("kendoDateInput");
 
-            assert.isOk(input.parent().hasClass("k-state-default"));
-            assert.equal(dateinput.wrapper.attr("class"), "k-widget k-dateinput k-state-default");
+            assert.equal(dateinput.wrapper.attr("class"), "k-dateinput k-input k-input-solid k-input-md k-rounded-md");
         });
 
-        it("_input should add k-textbox to the element", function() {
+        it("_input should add k-input-inner to the element", function() {
             var dateinput = input.kendoDateInput().data("kendoDateInput");
 
-            assert.isOk(dateinput.element.hasClass("k-textbox"));
+            assert.isOk(dateinput.element.hasClass("k-input-inner"));
         });
 
         it("DateInput copies input's className to the wrapper", function() {
@@ -103,6 +102,56 @@
             }).data("kendoDateInput");
             assert.equal(dateinput.value(), null);
             assert.equal(dateinput.element.val(), "month/day/year");
+        });
+
+        it("DateInput renders not-floating label from string", function() {
+            var dateinput = input.kendoDateInput({
+                label: "some label"
+            }).data("kendoDateInput");
+            assert.equal(dateinput.label.element.text(), "some label");
+            assert.isNotOk(!!dateinput.label.floatingLabel);
+        });
+
+        it("DateInput renders label from object", function() {
+            var dateinput = input.kendoDateInput({
+                label: {
+                    content: "some label"
+                }
+            }).data("kendoDateInput");
+            assert.equal(dateinput.label.element.text(), "some label");
+        });
+
+        it("DateInput renders floating label", function() {
+            var dateinput = input.kendoDateInput({
+                label: {
+                    content: "some label",
+                    floating: true
+                }
+            }).data("kendoDateInput");
+            assert.equal(dateinput.label.element.text(), "some label");
+            assert.isOk(!!dateinput.label.floatingLabel);
+        });
+
+        it("DateInput renders label with funciton", function() {
+            var dateinput = input.kendoDateInput({
+                label: () => `some label`
+            }).data("kendoDateInput");
+            assert.equal(dateinput.label.element.text(), "some label");
+        });
+
+        it("form reset support", function(done) {
+            var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+                dateInput = input.kendoDateInput({ value: new Date(2018, 1, 1) }).data("kendoDateInput");
+
+            dateInput.value(new Date(2011, 1, 1));
+
+            form[0].reset();
+
+            setTimeout(function() {
+                assert.equal(dateInput.element.val(), "2/1/2018");
+                assert.deepEqual(dateInput.value(), new Date(2018, 1, 1));
+                done();
+            }, 200);
         });
 
     });

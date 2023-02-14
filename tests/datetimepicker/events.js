@@ -161,5 +161,31 @@
                 .trigger($.Event("keydown", { keyCode: 13 }));
         });
 
+        it("DateTimePicker triggers close event when dateView is opened", function() {
+            var count = 0;
+            var datetimepicker = new DateTimePicker(input, {
+                componentType: "modern",
+                open: function() {
+                    count++;
+                }
+            });
+
+            datetimepicker.open();
+            assert.equal(count, 1);
+        });
+
+        it("DateTimePicker with Modern rendering triggers close event with e.view in args", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                value: new Date(2000, 10, 10),
+                componentType: "modern",
+                close: function(e) {
+                    assert.isOk(true);
+                    assert.equal(e.view, "date");
+                }
+            });
+
+            datetimepicker.open();
+            datetimepicker.close();
+        });
     });
 }());

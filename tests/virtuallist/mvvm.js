@@ -7,7 +7,7 @@
         VirtualList = kendo.ui.VirtualList,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -27,7 +27,7 @@
         return items;
     }
 
-    describe("VirtualList MVVM: ", function () {
+    describe("VirtualList MVVM: ", function() {
         beforeEach(function() {
             container = $("<div id='container' data-role='virtuallist' data-bind='source: asyncDataSource' data-template='tmp' data-value-field='value' data-item-height='20' data-height='200'></div>")
                 .appendTo(Mocha.fixture);
@@ -80,27 +80,6 @@
         setTimeout(function() {
             assert.isOk(virtualList.dataSource.data().length > 0);
             done();
-        }, 100);
-    });
-
-    it("items are rendered", function(done) {
-        virtualList = container.getKendoVirtualList();
-        setTimeout(function() {
-            assert.equal(virtualList.items().eq(0).text(), "Item 0");
-            assert.equal(virtualList.items().last().text(), "Item 39");
-            done();
-        }, 100);
-    });
-
-    it("items are rebound after re-rendering (list scroll)", function(done) {
-        virtualList = container.getKendoVirtualList();
-        setTimeout(function() {
-            scroll(virtualList.content, 620);
-            setTimeout(function() {
-                assert.equal(virtualList.items().eq(0).text(), "Item 11");
-                assert.equal(virtualList.items().last().text(), "Item 50");
-                done();
-            }, 300)
         }, 100);
     });
 

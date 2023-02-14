@@ -263,7 +263,7 @@ Refer to the example below for a list of the supported properties.
           [{
             text: "Item 1",
             cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-            url: "http://www.kendoui.com",               // Link URL if navigation is needed, optional.
+            url: "https://www.telerik.com/kendo-ui",               // Link URL if navigation is needed, optional.
             attr: {
               custom: 'value',                            // Add attributes with specified values
               other: 'value'
@@ -424,18 +424,12 @@ Sets the field of the data item that provides the image url of the menu items.
         $("#menu").kendoMenu({
             dataSource: {
             data: [{
-                    Name: "Item 1",
-                    UrlPath: "urlPath",
-                    Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
-                    description: "some description"
+                    Name: "Item 1",                
+                    imgUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/golf.png"
                 }]
             },
-            dataTextField:"Name",
-            dataUrlField:"UrlPath",
-            dataSpriteCssClassField:"Sprite",
-            dataImageUrlField:"imgUrl",
-            dataContentField:"description"
+            dataTextField:"Name",            
+            dataImageUrlField:"imgUrl"
         });
     </script>
 
@@ -740,7 +734,7 @@ Appends an item to a **Menu** in the specified referenceItem's sub menu.
             {
                 text: "Item 1",
                 cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -968,7 +962,7 @@ Inserts an item into a **Menu** after the specified referenceItem.
         menu.insertAfter(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1036,7 +1030,7 @@ Inserts an item into a **Menu** before the specified referenceItem.
         menu.insertBefore(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1045,7 +1039,7 @@ Inserts an item into a **Menu** before the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },
@@ -1259,6 +1253,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
             dataTextField: "FullName",
             dataSource: dataSource,
             dataBound: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("dataBound");
             }
         })
@@ -1289,6 +1284,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
         }).data("kendoMenu");
 
         menu.bind("dataBound", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
         });
     </script>

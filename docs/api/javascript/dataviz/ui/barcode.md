@@ -187,6 +187,20 @@ The color of the text. Any valid CSS color string will work here, including hex 
 
 The font of the text.
 
+#### Example - set the font of the text
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        color: "red",
+        font: "20px sans-serif"
+      }
+    });
+    </script>
+
 ### text.margin `Object`
 
 The margin of the text
@@ -210,17 +224,77 @@ The margin of the text
 
 The bottom margin of the text.
 
+#### Example - apply a bottom margin
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        margin: {
+        	bottom: 20
+      	}
+      }
+    });
+    </script>
+
 ### text.margin.left `Number` *(default: 0)*
 
 The left margin of the text.
+
+#### Example - apply a left margin
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        margin: {
+        	left: 20
+      	}
+      }
+    });
+    </script>
 
 ### text.margin.right `Number` *(default: 0)*
 
 The right margin of the text.
 
+#### Example - apply a right margin
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        margin: {
+        	right: 20
+      	}
+      }
+    });
+    </script>
+
 ### text.margin.top `Number` *(default: 0)*
 
 The top margin of the text.
+
+#### Example - apply a top margin
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        margin: {
+        	top: 20
+      	}
+      }
+    });
+    </script>
 
 ### text.visible `Boolean` *(default:true)*
 
@@ -310,7 +384,7 @@ The width of the barcode in pixels.  By default the width is 300.
 Exports the barcode as an image.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -349,7 +423,7 @@ The height of the exported image. Defaults to the barcode height.
 Exports the barcode as a PDF file.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -382,7 +456,7 @@ Parameters for the exported PDF file.
 Exports the barcode as an SVG document.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -445,7 +519,7 @@ Returns a PNG image of the barcode encoded as a [Data URL](https://developer.moz
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);
@@ -520,8 +594,8 @@ Defines whether the widget should proceed with resizing even if the element dime
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the barcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
-[ImageMagick](http://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the barcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
+[ImageMagick](https://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/barcode/methods/exportsvg), but will remain fully functional.
 
@@ -539,6 +613,7 @@ Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the barcode
     });
     var barcode = $("#barcode").data("kendoBarcode");
     var svg = barcode.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -559,6 +634,7 @@ Gets/Sets the value of the barcode.
 
     // get the value of the barcode.
     var value = barcode.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
 
     // sets the value of the barcode and redraws it.

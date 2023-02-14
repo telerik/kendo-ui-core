@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -59,7 +60,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "insertImage": "Vložiť obrázok",
   "insertFile": "Vložiť súbor",
   "insertHtml": "Vložiť HTML",
-  "viewHtml": "View HTML",
+  "viewHtml": "Náhľad HTML",
   "fontName": "Vyberte písmo",
   "fontNameInherit": "(predvolené písmo)",
   "fontSize": "Vyberte veľkosť písma",
@@ -466,7 +467,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "never": "Nikdy",
     "after": "Po ",
     "occurrence": " opakovaní(-iach)",
-    "on": "On "
+    "on": "V"
   },
   "offsetPositions": {
     "first": "prvý",
@@ -490,6 +491,7 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "celý deň",
   "date": "Dátum",
+  "search": "Hľadať...",
   "event": "Udalosť",
   "time": "Čas",
   "showFullDay": "Zobraziť celý deň",
@@ -528,7 +530,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "allDayEvent": "Celodenný",
     "description": "Popis",
     "repeat": "Opakovať",
-    "timezone": " ",
+    "timezone": "Časové pásmo",
     "startTimezone": "Časové pásmo začiatku",
     "endTimezone": "Časové pásmo konca",
     "separateTimezones": "Rôzne časové pásma pre začiatok a koniec",
@@ -591,7 +593,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs, {
     "alignmentDialog": {
         "title": "Zarovnanie",
         "buttons": {
-            "justtifyLeft": "Zarovnať vľavo",
+            "justifyLeft": "Zarovnať vľavo",
             "justifyCenter": "Centrovať",
             "justifyRight": "Zarovnať vpravo",
             "justifyFull": "Zarovnať do bloku",
@@ -755,7 +757,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar, {
     "addRowBelow": "Pridať riadok pod",
     "alignment": "Zarovnanie",
     "alignmentButtons": {
-        "justtifyLeft": "Zarovnať vľavo",
+        "justifyLeft": "Zarovnať vľavo",
         "justifyCenter": "Centrovať",
         "justifyRight": "Zarovnať vpravo",
         "justifyFull": "Zarovnať do bloku",
@@ -892,7 +894,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Vyberte súbory...",
   "cancel": "Storno",

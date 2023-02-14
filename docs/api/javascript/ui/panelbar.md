@@ -258,7 +258,7 @@ data source is fired. By default the widget will bind to the data source specifi
 
 #### Example - disable automatic binding
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var dataSource = new kendo.data.HierarchicalDataSource({
       data: [ { text: "Jane Doe" }, { text: "John Doe" }]
@@ -301,7 +301,7 @@ Sets the field of the data item that provides the image URL of the **PanelBar** 
 
 #### Example - specify custom image URL field
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { text: "Baseball", image: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png" },
@@ -323,9 +323,9 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
 
 #### Example - set dataSource as a JavaScript object
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
-    $("#panelbar").kendoTreeView({
+    $("#panelbar").kendoPanelBar({
       dataSource: {
         data: [
           { text: "foo", items: [
@@ -345,7 +345,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
               {
                   text: "Item 1 (link)",
                   cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                  url: "http://www.kendoui.com/"                  // link URL if navigation is needed (optional)
+                  url: "https://www.telerik.com/kendo-ui/"                  // link URL if navigation is needed (optional)
               },
               {
                   text: "<b>Item 2</b>",
@@ -378,7 +378,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
 
 #### Example - set dataSource as an existing kendo.data.HierarchicalDataSource instance
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var dataSource = new kendo.data.HierarchicalDataSource({
       transport: {
@@ -413,7 +413,7 @@ If an array, each level uses the field that is at the same index in the array, o
             background-image: url("https://demos.telerik.com/kendo-ui/content/shared/styles/flags.png");
         }
     </style>
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { text: "Brazil", sprite: "brazilFlag" },
@@ -432,7 +432,7 @@ If an array, each level uses the field that is at the same index in the array, o
 
 #### Example
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { ProductName: "Tea", items: [
@@ -449,7 +449,7 @@ If an array, each level uses the field that is at the same index in the array, o
 
 #### Example - using different fields on different levels
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { CategoryName: "Tea", items: [
@@ -470,7 +470,7 @@ Sets the field of the data item that provides the link URL of the nodes.
 
 #### Example
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { text: "Tea", LinksTo: "http://tea.example.com" },
@@ -526,7 +526,7 @@ Setting this to false causes all child DataSources to be loaded at initializatio
 
 #### Example - force lazy loading of sublevels
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       loadOnDemand: true,
@@ -542,9 +542,9 @@ Setting this to false causes all child DataSources to be loaded at initializatio
 
 The text messages displayed in the widget. Use it to customize or localize the messages.
 
-#### Example - customize TreeView messages
+#### Example - customize PanelBar messages
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -571,7 +571,7 @@ The text message shown while the root level items are loading.
 
 #### Example - customize loading message
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -596,7 +596,7 @@ The text message shown when an error occurs while fetching the content.
 
 #### Example - customize requestFailed message
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -621,7 +621,7 @@ The text message shown in the retry button.
 
 #### Example - customize retry message
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -646,7 +646,7 @@ Template for rendering each node.
 
 #### Example
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       template: "#= item.text # (#= item.inStock #)",
@@ -677,7 +677,7 @@ Appends an item(s) to the PanelBar.
                 {
                     text: "Item 1",
                     cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                    url: "http://www.telerik.com/"                  // link URL if navigation is needed, optional.
+                    url: "https://www.telerik.com/"                  // link URL if navigation is needed, optional.
                 },
                 {
                     text: "<b>Item 2</b>",
@@ -788,7 +788,7 @@ Collapses the specified item(s) of a **PanelBar**.
 ##### element `String|Element|jQuery`
 
 The **PanelBar** item(s) to be collapsed, expressed as a string containing a selector
-expression or represented by a [jQuery selector](http://api.jquery.com/category/selectors/).
+expression or represented by a [jQuery selector](https://api.jquery.com/category/selectors/).
 
 ##### useAnimation `Boolean`
 
@@ -800,6 +800,37 @@ when collapsing items.
 #### Returns
 
 `kendo.ui.PanelBar` Returns the PanelBar object to support chaining.
+
+### dataItem
+
+Returns the data item to which the specified item is bound. The method will return an item only when the PanelBar is populated using a DataSource.
+
+#### Parameters
+
+##### node `jQuery|Element|String`
+
+A string, DOM element or jQuery object which represents the item. A string is treated as a jQuery selector.
+
+#### Returns
+
+`kendo.data.Node` The model of the item that was passed as a parameter.
+
+#### Example - get the data item of the first node
+
+    <ul id="panelBar"></ul>
+    <script>
+        $("#panelBar").kendoPanelBar({
+            dataSource: [
+                { id: 1, text: "foo" },
+                { id: 2, text: "bar" }
+            ]
+        });
+
+        var panelBar = $("#panelBar").data("kendoPanelBar");
+        var dataItem = panelBar.dataItem(".k-item:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(dataItem.text); // displays "foo"
+    </script>
 
 ### destroy
 Prepares the **PanelBar** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
@@ -874,7 +905,7 @@ Enables (**true**) or disables (**false**) the specified item(s) of the
 
 The **PanelBar** item(s) to be enabled (**true**) or disabled (**false**), expressed as a
 string containing a selector expression or represented by a
-[jQuery selector](http://api.jquery.com/category/selectors/).
+[jQuery selector](https://api.jquery.com/category/selectors/).
 
 ##### enable `Boolean`
 
@@ -961,7 +992,7 @@ Inserts a PanelBar item after the specified referenceItem
         panelBar.insertAfter(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1030,7 +1061,7 @@ Inserts a PanelBar item before the specified referenceItem
         panelBar.insertBefore(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1181,11 +1212,47 @@ Gets or sets the selected item.
 ##### element `String|Element|jQuery` *(optional)*
 
 The **PanelBar** item to be selected, expressed as a string containing a selector expression or
-represented by a [jQuery selector](http://api.jquery.com/category/selectors/).
+represented by a [jQuery selector](https://api.jquery.com/category/selectors/).
 
 #### Returns
 
 `jQuery` the selected item if called without arguments. `kendo.ui.PanelBar` if called with arguments.
+
+### setDataSource
+
+Sets the dataSource of an existing PanelBar and rebinds it.
+
+#### Parameters
+
+##### dataSource `kendo.data.HierarchicalDataSource`
+
+The new dataSource that the widget will bind to
+
+#### Example
+
+    <ul id="panelbar"></ul>
+    <script>
+      var panelbar = $("#panelbar").kendoPanelBar({
+        dataTextField: "FullName"
+      }).data('kendoPanelBar');
+
+     var ds = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+      panelbar.setDataSource(ds)
+    </script>
 
 ## Events
 
@@ -1420,7 +1487,7 @@ The node whose children have been changed. If the changes have occurred on the r
 
 #### Example - subscribe to the "dataBound" event during initialization
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: [
@@ -1429,6 +1496,7 @@ The node whose children have been changed. If the changes have occurred on the r
         ] }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("DataBound", e.node);
       }
     });
@@ -1436,9 +1504,10 @@ The node whose children have been changed. If the changes have occurred on the r
 
 #### Example - subscribe to the "dataBound" event after initialization
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     function panelbar_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("DataBound", e.node);
     }
     $("#panelbar").kendoPanelBar({
@@ -1454,7 +1523,7 @@ The node whose children have been changed. If the changes have occurred on the r
 
 #### Example - show an empty message when no items have been loaded from the server
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
       $("#panelbar").kendoPanelBar({
         dataSource: [],

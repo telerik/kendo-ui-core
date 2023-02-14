@@ -1,0 +1,24 @@
+@utils-text-align: left, right, center, justify;
+@utils-text-transform: lowercase, uppercase, capitalize;
+@utils-font-weight-light: 300;
+@utils-font-weight-normal: 400;
+@utils-font-weight-bold: 700;
+
+// Wrapping
+.k-text-nowrap                  { white-space: nowrap !important; }
+.k-text-ellipsis                { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+// Align
+each( @utils-text-align, {
+    .k-text-@{value} { text-align: @value !important; }
+});
+
+// Transform
+each( @utils-text-transform, {
+    .k-text-@{value} { text-transform: @value !important; }
+});
+
+// Named font-weight
+.k-font-weight-light            { font-weight: @utils-font-weight-light !important; }
+.k-font-weight-normal           { font-weight: @utils-font-weight-normal !important; }
+.k-font-weight-bold             { font-weight: @utils-font-weight-bold !important; }

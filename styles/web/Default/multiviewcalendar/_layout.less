@@ -14,7 +14,7 @@
 
         .k-button {
             white-space: nowrap;
-            .k-button.k-flat();
+            .k-button-flat();
         }
     }
 
@@ -33,6 +33,7 @@
         min-height: (7 * @multiviewcalendar-cell-size );
         text-align: center;
         white-space: nowrap;
+        outline: none;
 
         .k-animation-container-sm & {
             display: flex;
@@ -144,16 +145,22 @@
 
 
     // Reset states
-    .k-state-selected {
+    .k-state-selected,
+    .k-selected {
         color: inherit;
         background: transparent;
         border-color: transparent;
     }
     .k-state-focused,
-    .k-state-focused.k-state-selected {
+    .k-focus,
+    .k-state-focused.k-state-selected,
+    .k-focus.k-state-selected,
+    .k-state-focused.k-selected,
+    .k-focus.k-selected {
         box-shadow: none;
     }
-    td.k-state-disabled {
+    td.k-state-disabled,
+    td.k-disabled {
         opacity: .5;
 
         .k-link {
@@ -170,6 +177,13 @@
             height: auto;
             display: block;
         }
+    }
+
+    .k-calendar-monthview,
+    .k-calendar-yearview,
+    .k-calendar-decadeview,
+    .k-calendar-decadeview {
+        padding: 0;
     }
 }
 

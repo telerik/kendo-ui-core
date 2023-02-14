@@ -1,6 +1,6 @@
 ---
 title: Electron
-page_title: Electron | Kendo UI Third-Party Tools
+page_title: Electron - Kendo UI Third-Party Tools
 description: "Learn how to use the Kendo UI widgets in an Electron application."
 slug: electron_integration_kendoui
 ---

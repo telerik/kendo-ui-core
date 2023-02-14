@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function(){
+import "./kendo.core.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "fx",
     name: "Effects",
     category: "framework",
@@ -15,7 +13,6 @@ var __meta__ = { // jshint ignore:line
         fx = kendo.effects,
         each = $.each,
         extend = $.extend,
-        proxy = $.proxy,
         support = kendo.support,
         browser = support.browser,
         transforms = support.transforms,
@@ -138,13 +135,13 @@ var __meta__ = { // jshint ignore:line
                 return this;
             };
 
-            $.fx.step[value] = function (fx) {
+            $.fx.step[value] = function(fx) {
                 $(fx.elem)[value](fx.now);
             };
         });
 
         var curProxy = $.fx.prototype.cur;
-        $.fx.prototype.cur = function () {
+        $.fx.prototype.cur = function() {
             if (transform2d.indexOf(this.prop) != -1) {
                 return parseFloat($(this.elem)[this.prop]());
             }
@@ -308,9 +305,16 @@ var __meta__ = { // jshint ignore:line
                 css = normalizeCSS(element, properties);
 
                 $.merge(oldKeys, keys(css));
-                element
-                    .data("keys", $.uniqueSort(oldKeys))
-                    .height();
+
+                if ($.hasOwnProperty("uniqueSort")) {
+                    element
+                        .data("keys", $.uniqueSort(oldKeys))
+                        .height();
+                } else {
+                    element
+                        .data("keys", $.unique(oldKeys))
+                        .height();
+                }
 
                 element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease).css(TRANSITION);
                 element.css(css).css(TRANSFORM);
@@ -417,7 +421,7 @@ var __meta__ = { // jshint ignore:line
 
             that.effects = effects;
 
-            deferred.done($.proxy(that, "complete"));
+            deferred.done(that.complete.bind(that));
 
             element.data("animating", true);
 
@@ -528,7 +532,7 @@ var __meta__ = { // jshint ignore:line
             this.restoreCallback();
 
             if (hasZoom && !transforms) {
-                setTimeout($.proxy(this, "restoreCallback"), 0); // Again jQuery callback in IE8-
+                setTimeout(this.restoreCallback.bind(this), 0); // Again jQuery callback in IE8-
             }
 
             for (; idx < length; idx ++) {
@@ -592,7 +596,7 @@ var __meta__ = { // jshint ignore:line
 
                         each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
                             var params,
-                                currentValue = properties ? properties[value]+ " " : null; // We need to match
+                                currentValue = properties ? properties[value] + " " : null; // We need to match
 
                             if (currentValue) {
                                 var single = properties;
@@ -739,7 +743,7 @@ var __meta__ = { // jshint ignore:line
                 children = that.children(),
                 childrenLength = children.length;
 
-            deferred.done($.proxy(that, "_complete"));
+            deferred.done(that._complete.bind(that));
 
             element.data("animating", true);
 
@@ -822,7 +826,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (hasZoom && !transforms) {
-                setTimeout($.proxy(that, "restoreCallback"), 0); // Again jQuery callback in IE8-
+                setTimeout(that.restoreCallback.bind(that), 0); // Again jQuery callback in IE8-
             }
 
             that.teardown();
@@ -1131,10 +1135,10 @@ var __meta__ = { // jshint ignore:line
     };
 
     var ROTATIONS = {
-        top:    { start: "rotatex(0deg)", end: "rotatex(180deg)" },
+        top: { start: "rotatex(0deg)", end: "rotatex(180deg)" },
         bottom: { start: "rotatex(-180deg)", end: "rotatex(0deg)" },
-        left:   { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
-        right:  { start: "rotatey(180deg)", end: "rotatey(0deg)" }
+        left: { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
+        right: { start: "rotatey(180deg)", end: "rotatey(0deg)" }
     };
 
     function clipInHalf(container, direction) {
@@ -1409,7 +1413,7 @@ var __meta__ = { // jshint ignore:line
 
             this.container = container;
             this.deferred = deferred;
-            this.isAbsolute = originalPosition  == "absolute";
+            this.isAbsolute = originalPosition == "absolute";
 
             if (!this.isAbsolute) {
                 both.css(POSITION, "absolute");
@@ -1427,7 +1431,7 @@ var __meta__ = { // jshint ignore:line
 
                 container.addClass(this._containerClass());
 
-                this.completeProxy = $.proxy(this, "complete");
+                this.completeProxy = this.complete.bind(this);
                 container.on(transitions.event, this.completeProxy);
 
                 kendo.animationFrame(function() {
@@ -1452,7 +1456,7 @@ var __meta__ = { // jshint ignore:line
     var Animation = kendo.Class.extend({
         init: function() {
             var that = this;
-            that._tickProxy = proxy(that._tick, that);
+            that._tickProxy = that._tick.bind(that);
             that._started = false;
         },
 
@@ -1538,13 +1542,13 @@ var __meta__ = { // jshint ignore:line
     });
 
     extend(Transition, {
-        easeOutExpo: function (t, b, c, d) {
-            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+        easeOutExpo: function(t, b, c, d) {
+            return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
         },
 
-        easeOutBack: function (t, b, c, d, s) {
+        easeOutBack: function(t, b, c, d, s) {
             s = 1.70158;
-            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+            return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
         }
     });
 
@@ -1579,6 +1583,3 @@ var __meta__ = { // jshint ignore:line
     };
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

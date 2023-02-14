@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.mobile.popover", "./kendo.mobile.shim" ], f);
-})(function(){
+import "./kendo.mobile.popover.js";
+import "./kendo.mobile.shim.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.actionsheet",
     name: "ActionSheet",
     category: "mobile",
@@ -22,8 +21,8 @@ var __meta__ = { // jshint ignore:line
         COMMAND = "command",
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
-        WRAP = '<div class="km-actionsheet-wrapper" />',
-        cancelTemplate = kendo.template('<li class="km-actionsheet-cancel"><a href="\\#">#:cancel#</a></li>');
+        WRAP = '<div class="km-actionsheet-wrapper"></div>',
+        cancelTemplate = kendo.template(({ cancel }) => `<li class="km-actionsheet-cancel"><a href="#">${kendo.htmlEncode(cancel)}</a></li>`);
 
     var ActionSheet = Widget.extend({
         init: function(element, options) {
@@ -53,7 +52,7 @@ var __meta__ = { // jshint ignore:line
 
             element
                 .addClass("km-actionsheet")
-                .append(cancelTemplate({cancel: that.options.cancel}))
+                .append(cancelTemplate({ cancel: that.options.cancel }))
                 .wrap(WRAP)
                 .on("up", BUTTONS, "_click")
                 .on("click", BUTTONS, kendo.preventDefault);
@@ -64,10 +63,10 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = element.parent().addClass(type ? " km-actionsheet-" + type : "");
 
-            that.shim = new ShimClass(that.wrapper, $.extend({modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root"}, that.options.popup) );
+            that.shim = new ShimClass(that.wrapper, $.extend({ modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root" }, that.options.popup) );
 
-            that._closeProxy = $.proxy(that, "_close");
-            that._shimHideProxy = $.proxy(that, "_shimHide");
+            that._closeProxy = that._close.bind(that);
+            that._shimHideProxy = that._shimHide.bind(that);
             that.shim.bind("hide", that._shimHideProxy);
 
             if (tablet) {
@@ -164,6 +163,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(ActionSheet);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

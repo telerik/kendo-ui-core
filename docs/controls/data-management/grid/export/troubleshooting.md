@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery Grid Documentation | Export Troubleshooting | Kendo UI
+page_title: jQuery Grid Documentation - Export Troubleshooting
 description: "Get started with the jQuery Grid by Kendo UI and learn how to solve issues you might encounter while exporting the content of the Grid to Excel."
 slug: exporttroubleshoot_kendoui_grid_widget
 position: 80
@@ -21,8 +21,7 @@ Clicking **Export to Excel** or calling the `saveAsExcel` throws an exception if
 
 Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To work around this issue, set the [`proxyURL`](/api/javascript/ui/grid/configuration/excel.proxyurl) option to specify the server proxy URL.
 
-###### Example
-
+```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
     <div id="grid"></div>
@@ -49,6 +48,7 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
             ]
         });
     </script>
+```
 
 ## See Also
 

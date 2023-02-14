@@ -1,9 +1,9 @@
 ---
 title: 2017 Releases
-page_title: 2017 Releases | Kendo UI Backwards Compatibility
+page_title: 2017 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2017."
 slug: breakingchanges2017_kendoui
-position: 3
+position: 6
 ---
 
 # 2017 Releases
@@ -152,6 +152,7 @@ fonts in fonts/
 
 ## See Also
 
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
 * [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
 * [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})

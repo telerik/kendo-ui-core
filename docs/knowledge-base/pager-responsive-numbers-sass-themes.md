@@ -1,8 +1,8 @@
 ---
 title: Make Page Number Responsive for SASS Themes
-description: An example on how to make the page numbers in SASS themes responsive.
+description: Learn how to make the page numbers in SASS themes responsive.
 type: how-to
-page_title: Responsive Pager for SASS Themes | Kendo UI Pager
+page_title: Responsive Pager for SASS Themes - Kendo UI Pager for jQuery
 slug: pager-responsive-numbers-sass-themes
 tags: kendo, pager, responsive, dropdown, numbers, bootstrap, default
 res_type: kb
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Pager</td>
+  <td>Progress® Kendo UI® Pager for jQuery</td>
  </tr>
 </table>
 
@@ -24,8 +24,6 @@ How can I make the Pager show a drop-down list with the pages when the Grid is s
 
 ## Solution
 
-> **Important**
->
 > As of the R1 2019 release, the responsive page number for SASS themes feature is available out of the box.
 
 Unlike the functionality in the LESS themes, in the SASS themes the Pager does not change to a drop-down list automatically. To work around this issue, use either the Kendo UI Default (v2) or the Kendo UI Bootstrap (v4) theme. Depending on your project and scenario, you may need to adjust the CSS.
@@ -73,7 +71,7 @@ For the full implementation of this approach, refer to [this runnable example](h
         margin-left: 4.8em;
     }
 
-    .k-pager-numbers .k-state-selected,
+    .k-pager-numbers .k-selected,
     .k-pager-numbers .k-link {
         display: block;
         margin-right: 0;
@@ -91,7 +89,7 @@ For the full implementation of this approach, refer to [this runnable example](h
     .k-pager-numbers.k-state-expanded li {
         display: inline-block;
     }
-    .k-pager-wrap .k-pager-numbers .k-current-page {
+    .k-pager .k-pager-numbers .k-current-page {
         display: block;
     }
 
@@ -148,7 +146,7 @@ For the full implementation of this approach, refer to [this runnable example](h
         margin-left: 4.8em;
     }
 
-    .k-pager-numbers .k-state-selected,
+    .k-pager-numbers .k-selected,
     .k-pager-numbers .k-link {
         display: block;
         margin-right: 0;
@@ -176,7 +174,7 @@ For the full implementation of this approach, refer to [this runnable example](h
     .k-pager-numbers.k-state-expanded li {
         display: inline-block;
     }
-    .k-pager-wrap .k-pager-numbers .k-current-page {
+    .k-pager .k-pager-numbers .k-current-page {
         display: block;
     }
 

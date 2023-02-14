@@ -19,6 +19,7 @@ To create a new `ObservableObject`, use its constructor or the `kendo.observable
 
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.name); // outputs "John Doe"
     </script>
 
@@ -26,6 +27,7 @@ To create a new `ObservableObject`, use its constructor or the `kendo.observable
 
     <script>
     var observable = kendo.observable({ name: "John Doe" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.name); // outputs "John Doe"
     </script>
 
@@ -45,7 +47,9 @@ To create a new `ObservableObject`, use its constructor or the `kendo.observable
         numbers: [1, 2, 3]
     });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.person instanceof kendo.data.ObservableObject); // outputs "true"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.numbers instanceof kendo.data.ObservableArray); // outputs "true"
     </script>
 
@@ -59,6 +63,7 @@ The unique identifier of the `ObservableObject`.
 
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.uid); // outputs "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" where "x" is a number or letter
     </script>
 
@@ -73,6 +78,7 @@ Attaches a handler to an event. For more information and examples, refer to the 
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
     observable.bind("change", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.field); // will output the changed field once the event is raised
     });
     observable.set("name", "Jane Doe"); // raises the "change" event and the handler outputs "name"
@@ -97,6 +103,7 @@ The name of the field whose value will be returned.
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
     var name = observable.get("name");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(name); //outputs "John Doe"
     </script>
 
@@ -105,6 +112,7 @@ The name of the field whose value will be returned.
     <script>
     var observable = new kendo.data.ObservableObject({ person: { name: "John Doe" } });
     var name = observable.get("person.name"); // use dot notation to denote nested fields
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(name); //outputs "John Doe"
     </script>
 
@@ -121,7 +129,9 @@ Gets the parent of the object if such a parent exists.
     <script>
     var observable = new kendo.data.ObservableObject({ person: { name: "John Doe" } });
     var person = observable.get("person");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.parent()); // outputs "undefined"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(person.parent() === observable); // outputs "true"
     </script>
 
@@ -144,6 +154,7 @@ The new value of the field.
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
     observable.set("name", "Jane Doe"); // set the value
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.get("name")); //outputs the new value "Jane Doe"
     </script>
 
@@ -152,6 +163,7 @@ The new value of the field.
     <script>
     var observable = new kendo.data.ObservableObject({ person: { name: "John Doe" } });
     observable.set("person.name", "Jane Doe"); // set the value
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.get("person.name")); //outputs the new value "Jane Doe"
     </script>
 
@@ -168,6 +180,7 @@ Creates a plain JavaScript object which contains all fields of the `ObservableOb
     <script>
     var observable = new kendo.data.ObservableObject({ person: { name: "John Doe" } });
     var json = observable.toJSON();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(JSON.stringify(json)); // outputs {"person":{"name":"John Doe"}}
     </script>
 
@@ -190,6 +203,7 @@ The name of the field which changed.
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
     observable.bind("change", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.field); // will output the field name when the event is raised
     });
     observable.set("name", "Jane Doe"); // raises the "change" event and the handler outputs "name"
@@ -210,6 +224,7 @@ The name of the field which is retrieved.
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
     observable.bind("get", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.field); // will output the field name when the event is raised
     });
     observable.get("name"); // raises the "get" event and the handler outputs "name"
@@ -240,6 +255,7 @@ A function which may prevent the update of the value. Can be used to perform val
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
     observable.bind("set", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.field); // will output the field name when the event is raised
     });
     observable.set("name", "Jane Doe"); // raises the "set" event and the handler outputs "name"

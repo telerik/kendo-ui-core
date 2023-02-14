@@ -75,11 +75,11 @@ Using [Fontello](http://fontello.com/) is pretty straightforward&mdash;pick the 
 
 #### Create Icons Manually
 
-The manual approach is considerably more difficult. First, create the desired icons using a vector editing software such as Inkscape or Adobe Illustrator. Export them to the `SVG` format. Consult [these](http://www.webdesignerdepot.com/2012/01/how-to-make-your-own-icon-webfont/) [articles](http://cleversomeday.wordpress.com/2010/02/09/inkscape-dings/) about `SVG` font creation using [Inkscape](https://inkscape.org/en). Import the `SVG` icons in Inkscape and create the `SVG` font icon by icon, assigning them to separate characters. After creating the `SVG` font, convert it to `TTF`/`WOFF` formats, using the [Online Font Converter](https://onlinefontconverter.com/) or other similar service.
+The manual approach is considerably more difficult. First, create the desired icons using a vector editing software such as Inkscape or Adobe Illustrator. Export them to the `SVG` format. Consult [these](https://www.webdesignerdepot.com/2012/01/how-to-make-your-own-icon-webfont/) [articles](https://cleversomeday.com/inkscape-dings/) about `SVG` font creation using [Inkscape](https://inkscape.org/en). Import the `SVG` icons in Inkscape and create the `SVG` font icon by icon, assigning them to separate characters. After creating the `SVG` font, convert it to `TTF`/`WOFF` formats, using the [Online Font Converter](https://onlinefontconverter.com/) or other similar service.
 
 The example below demonstrates how to load the two fonts (`TTF`/`WOFF`) with `@font-face`.
 
-###### Example
+
 
     <style>
         @font-face {
@@ -91,7 +91,7 @@ The example below demonstrates how to load the two fonts (`TTF`/`WOFF`) with `@f
 
 The example below demonstrates how to override the Kendo UI font for all icons. Note that, alternatively, separate classes can be used to override them one by one.
 
-###### Example
+
 
     <style>
         .km-icon:after,
@@ -107,7 +107,7 @@ The example below demonstrates how to override the Kendo UI font for all icons. 
 
 The example below demonstrates how to specify the character corresponding to every custom icon.
 
-###### Example
+
 
     <style>
         .km-mycustomicon:after,
@@ -133,7 +133,7 @@ The two mime types can be specified either through the IIS management console (i
 
 The example below demonstrates how to configure IIS `Web.config`.
 
-###### Example
+
 
     <?xml version="1.0"?>
     <configuration>
@@ -159,7 +159,7 @@ Apache configuration in some distributions includes mime-types `application/x-fo
 
 The example below demonstrates how to configure Apache in `.htaccess`.
 
-###### Example
+
 
     AddType application/x-font-ttf .ttf
     AddType application/x-font-woff .woff
@@ -168,7 +168,7 @@ The example below demonstrates how to configure Apache in `.htaccess`.
 
 The example below demonstrates how to configure the Apache `mime.types` file.
 
-###### Example
+
 
     application/x-font-ttf .ttf
     application/x-font-woff .woff
@@ -194,7 +194,7 @@ Since fonts are usually copyrighted, most browsers do not allow using them acros
 
 The example demonstrates how to configure IIS by placing a `web.config` in the font folder and adding the code below to it.
 
-###### Example
+
 
     <httpProtocol>
       <customHeaders>
@@ -207,7 +207,7 @@ The example demonstrates how to configure IIS by placing a `web.config` in the f
 
 The example demonstrates how to configure Apache.
 
-###### Example
+
 
     <FilesMatch "\.(ttf|woff)$">
     <IfModule mod_headers.c>
@@ -220,7 +220,7 @@ The example demonstrates how to configure Apache.
 
 The example demonstrates how to configure Nginx.
 
-###### Example
+
 
     location / {
         ...
@@ -238,7 +238,7 @@ To use any image for an icon in the Kendo UI hybrid framework, raise the specifi
 
 The example below demonstrates how to define custom background-image icon.
 
-###### Example
+
 
     <style>
         .km-root .km-pane .km-view .km-custom
@@ -264,7 +264,7 @@ To use colorizable icon masks, specify the icon image as a `box mask`&mdash;eith
 
 The example below demonstrates how to define a custom WebKit mask for an icon.
 
-###### Example
+
 
     <style>
         .km-custom {
@@ -286,7 +286,7 @@ In Kendo UIQ3 2012 WebKit mask icons were deprecated due to numerous issues with
 
 This example demonstrates how to define custom icon after Kendo UI Q3 2012. Note that the the code from below is going to disable all font icons.
 
-###### Example
+
 
     <style>
         .km-root .km-pane .km-view .km-icon {
@@ -309,7 +309,7 @@ This example demonstrates how to define custom icon after Kendo UI Q3 2012. Note
 
 If you want to add only one or two custom icons, specify them with their respective classes&mdash;`.km- + data-icon name`. The example below demonstrates how to restyle only the custom icons.
 
-###### Example
+
 
     <style>
         .km-root .km-pane .km-view .km-question {
@@ -332,7 +332,7 @@ If you want to add only one or two custom icons, specify them with their respect
 
 When custom icons are used and their names are the same as the integrated Kendo UI hybrid icon names, make sure that the font icons are not rendered. The example below demonstrates how to hide all Kendo UI hybrid font icons.
 
-###### Example
+
 
     <style>
         .km-root .km-pane .km-view .km-icon:after,
@@ -350,7 +350,7 @@ When custom icons are used and their names are the same as the integrated Kendo 
 
 Again, if only several icons should be overridden, specify them with their classes instead. The example below demonstrates how to hide only one Kendo UI hybrid font icon.
 
-###### Example
+
 
     <style>
         .km-root .km-pane .km-view .km-favorites:after,
@@ -366,13 +366,13 @@ Again, if only several icons should be overridden, specify them with their class
 
 ### Custom Icons on Windows Phone 8
 
-Windows Phone 8.0 has some severe issues that may affect your icons usage. First of all, masks are not supported in any way&mdash;Firefox allows `SVG` mask usage, WebKit/Blink have image masks, although broken in Android. If you plan to have only a web application that runs in the browser, you can go for font icons as they look better across different resolutions and can be colorized. The default Kendo UI hybrid icons work as any icon font such as Font Awesome. Learn more about using font icons and Font Awesome from [this blog post](http://blogs.telerik.com/kendoui/posts/13-09-17/easy-custom-kendo-ui-mobile-icons-with-font-awesome).
+Windows Phone 8.0 has some severe issues that may affect your icons usage. First of all, masks are not supported in any way&mdash;Firefox allows `SVG` mask usage, WebKit/Blink have image masks, although broken in Android. If you plan to have only a web application that runs in the browser, you can go for font icons as they look better across different resolutions and can be colorized. The default Kendo UI hybrid icons work as any icon font such as Font Awesome. Learn more about using font icons and Font Awesome from [this blog post](https://www.telerik.com/blogs/easy-custom-kendo-ui-mobile-icons-with-font-awesome).
 
-However, if you plan to create a hybrid application with PhoneGap or HTML5 template in WP8 SDK, font icons do not work there&mdash;the WebView [does not load them at all](http://stackoverflow.com/questions/14575208/using-css-font-face-in-a-phonegap-windows-phone-8-app). Kendo UI provides image replacements for its default icons, but if you want custom ones, you are left out with only normal images/backgrounds and you need to provide one for normal and another one for the selected state, if they differ. You should also think about the dark and light background themes in WP8, as the Kendo UI hybrid framework automatically supports them in Cordova.
+However, if you plan to create a hybrid application with PhoneGap or HTML5 template in WP8 SDK, font icons do not work there&mdash;the WebView [does not load them at all](https://stackoverflow.com/questions/14575208/using-css-font-face-in-a-phonegap-windows-phone-8-app). Kendo UI provides image replacements for its default icons, but if you want custom ones, you are left out with only normal images/backgrounds and you need to provide one for normal and another one for the selected state, if they differ. You should also think about the dark and light background themes in WP8, as the Kendo UI hybrid framework automatically supports them in Cordova.
 
 The example below demonstrates how the WP8 application icon backgrounds are defined in the Kendo UI hybrid framework.
 
-###### Example
+
 
     <style>
         .km-on-wp.km-app .km-icon:after,
@@ -402,7 +402,7 @@ The sprite is laid out horizontally and `background-size` and `background-positi
 
 The icon font shipped with the Kendo UI hybrid distribution contains much more icons than the 34 defined ones&mdash;about ten times more than that. The reason for this is that the framework aims at keeping its CSS small. To use them, choose an icon from the list below and add a definition for it in your CSS using its Unicode character code. Make sure you have a `km-` prefix.
 
-###### Example
+
 
     <style>
         .km-arrow-e:after,

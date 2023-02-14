@@ -1,8 +1,8 @@
 ---
 title: Keep Tab Order on Edited Grid Row with Frozen Columns
-description: An example on how to keep the focus on edited inputs when the frozen columns functionality of the Kendo UI Grid is enabled.
+description: Learn how to keep the focus on edited inputs when the frozen columns functionality of the Kendo UI Grid is enabled.
 type: how-to
-page_title: Tab through Editors When Columns Are Frozen | Kendo UI Grid
+page_title: Tab through Editors When Columns Are Frozen - Kendo UI Grid for jQuery
 slug: grid-tab-order-edit-frozen-columns
 tags: grid, frozen, columns, tab, order, focus, input, buttons, tabbing, tabindex
 ticketid: 1142004
@@ -15,11 +15,11 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Made with version</td>
-  <td>2017.3.1026</td>
+  <td>Product Version</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -96,30 +96,24 @@ To keep the tab order:
             filterable: true,
             columnMenu: true,
             dataBound: function (e) {
-                $(".k-grid-edit, .k-grid-delete").attr("tabindex", "1");
+                $(".k-grid-edit-command, .k-grid-remove-command").attr("tabindex", "1");
             },
             cancel: function (e) {
                 setTimeout(function () {
-                    $(".k-grid-edit, .k-grid-delete").attr("tabindex", "1");
+                    $(".k-grid-edit-command, .k-grid-remove-command").attr("tabindex", "1");
                 });
             },
             columns: [
                 { width: "200px", field: "ProductName", title: "Product Name", locked: true, lockable: false },
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
                 { field: "UnitsInStock", title: "Units In Stock", width: "120px" },
-                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "inline"
         });
 
 
     });
-
-    function customBoolEditor(container, options) {
-        var guid = kendo.guid();
-        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-    }
 </script>
 </div>
 ```

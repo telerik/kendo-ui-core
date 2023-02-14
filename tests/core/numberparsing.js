@@ -1,4 +1,4 @@
-(function(){
+(function() {
 
 var parseF = kendo.parseFloat;
 var customCulture = {
@@ -28,7 +28,7 @@ var customCulture = {
     }
 };
 
-describe("number parsing", function () {
+describe("number parsing", function() {
     beforeEach(function() {
         kendo.cultures["custom"] = customCulture;
     });
@@ -134,6 +134,13 @@ it("parseF should parse negative percent number", function() {
     var value = kendo.culture().numberFormat.percent.pattern[0].replace("n", "1,123.23");
 
     assert.equal(parseF(value), -11.2323);
+});
+
+it("parseF should trim whitespaces", function() {
+    var value = "1 000 000";
+    var expected = 1000000;
+
+    assert.equal(parseF(value), expected);
 });
 
 it("parse exponential number", function() {

@@ -1,0 +1,115 @@
+{
+    "root": true,
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2018
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "globals": {
+        "define": "writable",
+        "kendo": "writable",
+        "jQuery": "readonly"
+    },
+    "rules": {
+        "array-bracket-spacing": "off", //["error", "always"],
+        "arrow-body-style": "error",
+        "block-scoped-var": "off", //"error",
+        "brace-style": "off", //["error", "1tbs", { "allowSingleLine": true }],
+        "camelcase": "off", //"error",
+        "comma-dangle": "off", // "error"
+        "comma-style": "error",
+        "complexity": "off", //[ "error", { "max": 15 } ],
+        "consistent-return": "off", //"error",
+        "consistent-this": "off", //["error", "that"],
+        "curly": "error",
+        "default-case": "off", //"error",
+        "dot-location": ["error", "property"],
+        "eqeqeq": "off", //["error", "smart"],
+        "eol-last": "off", // "error"
+        "indent": "off", //["error", 4, { "SwitchCase": 1, "outerIIFEBody": 0 }],
+        "jsx-quotes": "error",
+        "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+        "keyword-spacing": ["error", { "before": true, "after": true }],
+        "linebreak-style": ["error", "unix"],
+        "max-params": ["error", 10], // ["error", 4]
+        "no-alert": "error",
+        "no-bitwise": "off", // "error"
+        "no-caller": "error",
+        "no-class-assign": "error",
+        "no-cond-assign": "off", // "error",
+        "no-confusing-arrow": "error",
+        "no-console": "error",
+        "no-const-assign": "error",
+        "no-constant-condition": "off", //"error",
+        "no-control-regex": "off", //"error",
+        "no-debugger": "error",
+        "no-dupe-class-members": "error",
+        "no-else-return": "off", //"error",
+        "no-empty": "off", //"error",
+        "no-eval": "error",
+        "no-extend-native": "off", //"error",
+        "no-extra-bind": "error",
+        "no-extra-boolean-cast": "off", //"error",
+        "no-fallthrough": "error",
+        "no-implicit-coercion": "off", //"error",
+        "no-implied-eval": "error",
+        "no-invalid-this": "off", //"error",
+        "no-lone-blocks": "off", //"error",
+        "no-loop-func": "off", //"error",
+        "no-misleading-character-class": "off",//"error
+        "no-multi-spaces": "error",
+        "no-multiple-empty-lines": ["error", {"max": 2}],
+        "no-native-reassign": "error",
+        "no-nested-ternary": "off", // "error",
+        "no-new": "error",
+        "no-param-reassign": "off", //"error",
+        "no-prototype-builtins": "off", //"error",
+        "no-redeclare": "off", //"error",
+        "no-return-assign": "off", //"error",
+        "no-restricted-imports": "off",
+        "no-self-assign": "off", //"error",
+        "no-sequences": "error",
+        "no-shadow-restricted-names": "off", //"error",
+        "no-spaced-func": "off", //"error",
+        "no-this-before-super": "error",
+        "no-trailing-spaces": "error",
+        "no-unexpected-multiline": "off", //"error",
+        "no-unused-vars": "off", //"error"
+        "no-useless-call": "off", //"error",
+        "no-useless-escape": "off", //"error",
+        "no-var": "off", //"error",
+        "object-curly-spacing": ["error", "always"],
+        "semi": [ "error", "always" ],
+        "semi-spacing": "error",
+        "space-before-blocks": "error",
+        "space-before-function-paren": ["error", "never"],
+        "space-infix-ops": ["error", {"int32Hint": false} ],
+        "yoda": ["error", "never", { "exceptRange": true }]
+    },
+    "overrides": [
+        {
+            "files": ["tests/**/*.js"],
+            "globals": {
+                "$": true,
+                "stub": true,
+                "spy": true,
+                "press": true,
+                "move": true,
+                "release": true,
+                "Mocha": true,
+                "describe": true,
+                "beforeEach": true,
+                "afterEach": true,
+                "it": true,
+                "assert": true,
+                "assertEvent": true,
+                "roughlyEqual": true
+            }
+        }
+    ]
+}

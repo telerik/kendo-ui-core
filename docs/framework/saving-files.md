@@ -1,10 +1,10 @@
 ---
 title: Saving Files
-page_title: Saving Files | Kendo UI Saving Files
+page_title: Saving Files - Kendo UI Saving Files
 description: "Learn how to save files on the client machine when working with Kendo UI."
 previous_url: /framework/save-files/introduction
 slug: overview_savingfiles_kendoui
-position: 9
+position: 7
 ---
 
 # Saving Files
@@ -46,6 +46,8 @@ The following example demonstrates how to save a text file on the client by usin
 
 The `kendo.saveAs` will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and Firefox). If the browser does not implement an API for saving files, then `kendo.saveAs` could POST the content to a server-side proxy, which will stream the file back to the end user. The server-side proxy approach works in all [supported browsers]({% slug wbe_browserand_operating_system_support %}). Set the `proxyURL` option to enable the server proxy, as demonstrated below.
 
+When a proxy is used the `kendo.saveAs()` method includes any CSRF and anti-forgery tokens out of the box as long as they are present on the page. The logic internally uses the [`kendo.antiForgeryTokens()`](/api/javascript/kendo/methods/antiforgerytokens) method and adds that to the request data as it posts to the proxy.
+
 ```
 <script>
 	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
@@ -82,6 +84,7 @@ The proxy receives a POST request with the following parameters in the request b
 * `contentType`&mdash;This is the MIME type of the file.
 * `base64`&mdash;The `base-64`-encoded file content.
 * `fileName`&mdash;The file name as requested by the caller.
+* Any anti-forgery tokens if present on the page
 
 The proxy is expected to return the decoded file with set `"Content-Disposition"` header.
 
@@ -161,6 +164,7 @@ public class SaveFile : ApiController
 public class HomeController
 {
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public ActionResult Save(string contentType, string base64, string fileName)
     {
         var fileContents = Convert.FromBase64String(base64);
@@ -216,7 +220,7 @@ public @ResponseBody void save(String fileName, String base64, String contentTyp
 }
 ```
 
-## See also
+## See Also
 
 * [Overview of the Excel Export Feature]({% slug introduction_excelexport_kendoui %})
 * [Overview of Kendo UI Drawing API](/framework/drawing/overview)

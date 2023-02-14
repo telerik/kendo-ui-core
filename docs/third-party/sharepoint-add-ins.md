@@ -1,6 +1,6 @@
 ---
 title: SharePoint Add-Ins
-page_title: SharePoint Add-Ins | Kendo UI Third-Party Frameworks
+page_title: SharePoint Add-Ins - Kendo UI Third-Party Frameworks
 description: "Learn in theory and in practice how to build SharePoint add-ins with Kendo UI."
 slug: sharepoint_tutorials
 ---
@@ -10,10 +10,10 @@ slug: sharepoint_tutorials
 This article provides general information and configuration specifics for building SharePoint add-ins with Kendo UI.
 
 For more information on building SharePoint add-ins with Kendo UI, refer to:
-* [Online tutorial by John Bristowe](http://developer.telerik.com/featured/building-sharepoint-add-ins-with-kendo-ui/)
+* [Online tutorial by John Bristowe](https://www.telerik.com/blogs/building-sharepoint-add-ins-with-kendo-ui)
 * [GitHub project repository](https://github.com/telerik/kendo-ui-sharepoint-2013-demo)
 
-> Both the [tutorial](http://developer.telerik.com/featured/building-sharepoint-add-ins-with-kendo-ui/) and [project repository](https://github.com/telerik/kendo-ui-sharepoint-2013-demo) refer to the Chart, DropDownList, and Scheduler widgets.
+> Both the [tutorial](https://www.telerik.com/blogs/building-sharepoint-add-ins-with-kendo-ui) and [project repository](https://github.com/telerik/kendo-ui-sharepoint-2013-demo) refer to the Chart, DropDownList, and Scheduler widgets.
 
 ## Getting Started
 
@@ -31,7 +31,7 @@ Kendo UI is a well-suited solution when building SharePoint add-ins because of t
 * Easy integration with the SharePoint REST API.
 * Built-in themes, including one that matches the Office 365 look and feel.
 * Built-in export functionalities to most common office formats, such as Excel, PDF, and image files.
-* Widely-recognized accessibility standards like WAI-ARIA, WCAG 2.0, and Section 508.
+* Widely-recognized accessibility standards like WAI-ARIA, WCAG 2.1, and Section 508.
 
 ## Configuring DataSource
 
@@ -39,7 +39,7 @@ The proper configuration of the Kendo UI DataSource ensures its proper connectio
 
 To configure the Kendo UI Data Source:
 
-1. Use the [`transport`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport) option. To enable the Data Source to utilize the SharePoint services and perform CRUD operation against them, use `transport`. Note that you need to define a model for the Data Source because it drives the serialization plumbing.
+1. Use the [`transport`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport) option. To enable the Data Source to utilize the SharePoint services and perform CRUD operation against them, use `transport`. Note that you need to define a model for the Data Source because it drives the serialization plumbing.
 2. Include the `accept` request-header. To inform the receiving endpoint to issue a reply through JSON, include the `accept` request-header with the JSON MIME-type specified.
 3. Define the `data()` function. The `data()` function is necessary to parse the payload that is returned by the SharePoint REST API due to the presence of the `odata=verbose` request-header.
 
@@ -54,7 +54,7 @@ For more information on the Kendo UI Data Source abstraction, refer to [its intr
 ## See Also
 
 * [Kendo UI DataSource API](/api/javascript/data/datasource.html)
-* [Online Tutorial](http://developer.telerik.com/featured/building-sharepoint-add-ins-with-kendo-ui/)
+* [Online Tutorial](https://www.telerik.com/blogs/building-sharepoint-add-ins-with-kendo-ui)
 * [GitHub Project](https://github.com/telerik/kendo-ui-sharepoint-2013-demo)
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})

@@ -38,13 +38,13 @@
         var toCamelCase = kendo.toCamelCase;
 
         it("replaces dashes with next letter in upper case", function() {
-            assert.equal(toCamelCase("foo-bar-baz"), "fooBarBaz")
+            assert.equal(toCamelCase("foo-bar-baz"), "fooBarBaz");
         });
 
         var toHyphens = kendo.toHyphens;
 
         it("replaces ...-a... with ...A...", function() {
-            assert.equal(toHyphens("fooBarBaz"), "foo-bar-baz")
+            assert.equal(toHyphens("fooBarBaz"), "foo-bar-baz");
         });
 
         it("widgetInstance supports array of namespaces as an argument", function() {
@@ -56,6 +56,14 @@
             }
             assert.isOk(kendo.widgetInstance(testbed.filter(".km-scroll-wrapper"), [kendo.mobile.ui, kendo.dataviz.ui]));
             assert.isOk(!kendo.widgetInstance(testbed.filter(".k-calendar"), [kendo.mobile.ui, kendo.dataviz.ui]));
+            kendo.destroy(testbed);
+        });
+
+        it("widgetInstance returns mobile view instances correctly", function() {
+            var testbed = $("<div data-role='view'>test</div>");
+            kendo.init(testbed, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
+
+            assert.isOk(kendo.widgetInstance(testbed.filter(".km-view"), [kendo.mobile.ui]));
             kendo.destroy(testbed);
         });
 
@@ -73,6 +81,16 @@
 
         it("works with 'view' selector", function() {
             assert.equal(directiveSelector("view"), "kendo-mobile-view");
+        });
+
+        var getFileSizeMessage = kendo.getFileSizeMessage;
+
+        it("returns correct message according to the size", function() {
+            assert.equal(getFileSizeMessage(0), "0 Byte");
+            assert.equal(getFileSizeMessage(1024), "1 KB");
+            assert.equal(getFileSizeMessage(1048576), "1 MB");
+            assert.equal(getFileSizeMessage(1073741824), "1 GB");
+            assert.equal(getFileSizeMessage(1099511627776), "1 TB");
         });
 
     });

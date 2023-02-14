@@ -2,7 +2,7 @@
 title: Cannot Preserve the Popup Template When Using the Grid setOptions Method in AngularJS
 description: The popup template gets lost when I use setOptions in the Kendo UI Grid.
 type: troubleshooting
-page_title: Popup Template Gets Lost When setOptions Is Used | Kendo UI Grid
+page_title: Popup Template Gets Lost When setOptions Is Used - Kendo UI Grid for jQuery
 slug: grid-setoptions-angularjs
 tags: angularjs, grid
 ticketid: 1099270
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

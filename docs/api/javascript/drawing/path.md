@@ -105,7 +105,7 @@ The [configuration](/api/javascript/drawing/path#configuration) options for the 
 
 ### parse
 
-Parses a path encoded in [SVG Path Data format](http://www.w3.org/TR/SVG/paths.html#PathData).
+Parses a path encoded in [SVG Path Data format](https://www.w3.org/TR/SVG/paths.html#PathData).
 
 #### Example - Parse an SVG path
     <div id="container"></div>
@@ -127,7 +127,7 @@ Parses a path encoded in [SVG Path Data format](http://www.w3.org/TR/SVG/paths.h
 #### Parameters
 
 ##### svgPath `String`
-The path encoded in [SVG Path Data format](http://www.w3.org/TR/SVG/paths.html#PathData).
+The path encoded in [SVG Path Data format](https://www.w3.org/TR/SVG/paths.html#PathData).
 
 ##### options `Object` *optional*
 The [configuration](/api/javascript/drawing/path#configuration) options for the path.

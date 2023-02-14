@@ -34,11 +34,31 @@ The [DataSource](/framework/datasource/overview) instance to which the Sheet is 
       var sheet = spreadsheet.activeSheet();
       sheet.setDataSource(dataSource);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(sheet.dataSource);
 
     </script>
 
 ## Methods
+
+### addDrawing
+
+Adds a new drawing to this sheet.
+
+#### Parameters
+
+##### drawing `Object`
+
+This can contain the same properties as you can pass to
+[`sheets.drawings`](/api/javascript/ui/spreadsheet#configuration-sheets.drawings)
+configuration options.
+
+#### Returns
+
+`Object` an internal Drawing object containing the passed properties.  The
+internals of this object are not intended to be public API at this point, but
+you can pass this object reference to [`removeDrawing`](#methods-removeDrawing)
+if you want to remove this drawing.
 
 ### clearFilter
 
@@ -173,6 +193,10 @@ Deletes the contents of the row at the provided index and shifts the remaining c
 ##### index `Number`
 
 The zero-based index of the row
+
+##### skipDataSourceDelete `Boolean` *optional*
+
+If passed `true`, the method does not delete item from the DataSource.
 
 #### Example
 
@@ -412,6 +436,10 @@ Inserts a new, empty row at the provided index. The contents of the spreadsheet 
 
 The zero-based index of the column
 
+##### skipDataSourceInsert `Boolean` *optional*
+
+If passed `true`, the method does not insert item in the DataSource.
+
 #### Example
 
     <div id="spreadsheet"></div>
@@ -444,7 +472,7 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
 
 ##### columnCount `Number` *optional*
 
-If the parameter is a `string`, it should represent an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html) reference of the cells.
+If the parameter is a `string`, it should represent an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](https://excelribbon.tips.net/T008803_Understanding_R1C1_References) reference of the cells.
 
 If the parameters are `Numbers`, the first two would represent the row index (the first parameter) and the column index (the second parameter) of the top-left cell of the `range`. If there are only two parameters, only one cell will be included in the `range`. If the other two `Numbers` are also present, they will represent the number of rows (the third parameter) and number of columns (the forth parameter) that would be included in the `range`, starting from the specified top-left cell. If the third or the forth parameter is set to 0 or 1, only one row / column will be included in the `range`.
 
@@ -479,6 +507,44 @@ If the parameters are `Numbers`, the first two would represent the row index (th
 
         // select the B3:C6 range
         sheet.range(2,1,4,2).select();
+    </script>
+
+### removeDrawing
+
+Removes a drawing previously added with [`addDrawing`](#methods-addDrawing).
+
+#### Parameters
+
+##### drawing `Object`
+
+The drawing object.
+
+### resize
+
+Resize the sheet to accommodate the specified number of rows and columns. If the
+new dimensions are smaller than the current ones, any existing data in the rows
+or columns that are to be removed will be discarded.
+
+#### Parameters
+
+##### newRows `Number`
+
+The new number of rows.
+
+##### newColumns `Number`
+
+The new number of columns.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({ rows: 10, columns: 5 });
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.resize(1000, 30);
+        // the sheet will now contain 1000 rows and 30 columns
     </script>
 
 ### rowHeight
@@ -766,6 +832,7 @@ The sheet instance.
         var sheet = spreadsheet.activeSheet();
 
         sheet.bind("change", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("sheet state changed");
         });
 

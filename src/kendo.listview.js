@@ -1,8 +1,9 @@
-(function(f, define){
-    define([ "./kendo.data", "./kendo.editable", "./kendo.selectable" ], f);
-})(function(){
+import "./kendo.data.js";
+import "./kendo.editable.js";
+import "./kendo.selectable.js";
+import "./kendo.pager.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "listview",
     name: "ListView",
     category: "web",
@@ -18,23 +19,40 @@ var __meta__ = { // jshint ignore:line
         name: "Selection",
         description: "Support for selection",
         depends: [ "selectable" ]
+    }, {
+        id: "listview-paging",
+        name: "Paging",
+        description: "Support for paging",
+        depends: [ "pager" ]
     } ]
 };
 
 (function($, undefined) {
     var kendo = window.kendo,
         CHANGE = "change",
+        KENDO_KEYDOWN = "kendoKeydown",
         CANCEL = "cancel",
         DATABOUND = "dataBound",
         DATABINDING = "dataBinding",
         Widget = kendo.ui.Widget,
         keys = kendo.keys,
-        FOCUSSELECTOR =  ">*:not(.k-loading-mask)",
+        EMPTY_STRING = "",
+        EMPTY_STRING_TEMPLATE = () => EMPTY_STRING,
+        DOT = ".",
+        FOCUSSELECTOR = "> *:not(.k-loading-mask)",
         PROGRESS = "progress",
         ERROR = "error",
-        FOCUSED = "k-state-focused",
-        SELECTED = "k-state-selected",
+        FOCUSED = "k-focus",
+        SELECTED = "k-selected",
         KEDITITEM = "k-edit-item",
+        PAGER_CLASS = "k-listview-pager",
+        ITEM_CLASS = "k-listview-item",
+        ARIA_SETSIZE = "aria-setsize",
+        ARIA_POSINSET = "aria-posinset",
+        ARIA_ROLE = "role",
+        ARIA_LABEL = "aria-label",
+        ARIA_MULTISELECTABLE = "aria-multiselectable",
+        ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         EDIT = "edit",
         REMOVE = "remove",
         SAVE = "save",
@@ -42,7 +60,6 @@ var __meta__ = { // jshint ignore:line
         CLICK = "click",
         TOUCHSTART = "touchstart",
         NS = ".kendoListView",
-        proxy = $.proxy,
         activeElement = kendo._activeElement,
         progress = kendo.ui.progress,
         DataSource = kendo.data.DataSource;
@@ -51,7 +68,7 @@ var __meta__ = { // jshint ignore:line
         init: function(element, options) {
             var that = this;
 
-            options = $.isArray(options) ? { dataSource: options } : options;
+            options = Array.isArray(options) ? { dataSource: options } : options;
 
             Widget.fn.init.call(that, element, options);
 
@@ -61,11 +78,17 @@ var __meta__ = { // jshint ignore:line
 
             if (element[0].id) {
                 that._itemId = element[0].id + "_lv_active";
+            } else {
+                that._itemId = kendo.guid() + "_lv_active";
             }
 
             that._element();
 
+            that._layout();
+
             that._dataSource();
+
+            that._setContentHeight();
 
             that._templates();
 
@@ -79,7 +102,7 @@ var __meta__ = { // jshint ignore:line
 
             that._scrollable();
 
-            if (that.options.autoBind){
+            if (that.options.autoBind) {
                 that.dataSource.fetch();
             }
 
@@ -93,22 +116,38 @@ var __meta__ = { // jshint ignore:line
             DATABOUND,
             EDIT,
             REMOVE,
-            SAVE
+            SAVE,
+            KENDO_KEYDOWN
         ],
 
         options: {
             name: "ListView",
+            ariaLabel: null,
             autoBind: true,
             selectable: false,
             navigatable: false,
+            pageable: false,
             height: null,
-            template: "",
-            altTemplate: "",
-            editTemplate: ""
+            template: EMPTY_STRING_TEMPLATE,
+            altTemplate: null,
+            editTemplate: null,
+            contentTemplate: () => "<div data-content='true' />",
+            contentElement: "div",
+            bordered: true,
+            borders: "",
+            layout: "",
+            flex: {
+                direction: "row",
+                wrap: "nowrap"
+            },
+            grid: {},
+            scrollable: false
         },
 
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
+
+            this._layout();
 
             this._templates();
 
@@ -123,17 +162,17 @@ var __meta__ = { // jshint ignore:line
         _templates: function() {
             var options = this.options;
 
-            this.template = kendo.template(options.template || "");
-            this.altTemplate = kendo.template(options.altTemplate || options.template);
-            this.editTemplate = kendo.template(options.editTemplate || "");
+            this.template = kendo.template(options.template || EMPTY_STRING_TEMPLATE);
+            this.altTemplate = kendo.template(options.altTemplate || options.template || EMPTY_STRING_TEMPLATE);
+            this.editTemplate = kendo.template(options.editTemplate || EMPTY_STRING_TEMPLATE);
         },
 
         _item: function(action) {
-            return this.element.children()[action]();
+            return this.content.children()[action]();
         },
 
         items: function() {
-            return this.element.children();
+            return this.content.children(":not(.k-loading-mask)");
         },
 
         dataItem: function(element) {
@@ -150,6 +189,10 @@ var __meta__ = { // jshint ignore:line
             if (this.options.autoBind) {
                 dataSource.fetch();
             }
+
+            if (this.options.scrollable === "endless") {
+                this._bindScrollable();
+            }
         },
 
         _unbindDataSource: function() {
@@ -161,40 +204,137 @@ var __meta__ = { // jshint ignore:line
         },
 
         _dataSource: function() {
-            var that = this;
+            var that = this,
+                pageable = that.options.pageable,
+                dataSource = that.options.dataSource;
+
+            if ($.isPlainObject(pageable) && pageable.pageSize !== undefined) {
+                dataSource.pageSize = pageable.pageSize;
+            }
 
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._refreshHandler = proxy(that.refresh, that);
-                that._progressHandler = proxy(that._progress, that);
-                that._errorHandler = proxy(that._error, that);
+                that._refreshHandler = that.refresh.bind(that);
+                that._progressHandler = that._progress.bind(that);
+                that._errorHandler = that._error.bind(that);
             }
 
-            that.dataSource = DataSource.create(that.options.dataSource)
+            that.dataSource = DataSource.create(dataSource)
                                 .bind(CHANGE, that._refreshHandler)
                                 .bind(PROGRESS, that._progressHandler)
                                 .bind(ERROR, that._errorHandler);
         },
 
         _progress: function(toggle) {
-            var element = this.element;
-            progress(element, toggle, { opacity: true});
+            var element = this.wrapper;
+            if (toggle && this.content.height()) {
+                element = this.content;
+            }
+            progress(element, toggle, { opacity: true });
         },
 
         _error: function() {
-            progress(this.element, false);
+            progress(this.content, false);
         },
 
         _element: function() {
-            var height = this.options.height;
+            var options = this.options;
+            var height = options.height;
 
-            this.hasHeight = height || this.element.height();
+            this.element.addClass("k-listview");
 
-            this.element.addClass("k-widget k-listview").attr("role", "listbox");
+
+            if (options.contentElement) {
+                this.content = $(document.createElement(options.contentElement)).appendTo(this.element);
+            } else {
+                this.content = this.element;
+            }
 
             if (height) {
                 this.element.css("height", height);
+            }
+        },
+
+        _layout: function() {
+            var that = this;
+            var options = that.options;
+            var flex = options.flex;
+            var grid = options.grid;
+            var element = that.element;
+            var elementClassNames = ["k-listview"];
+            var content = that.content;
+            var contentClassNames = ["k-listview-content"];
+
+            element.add(content).removeClass(function(index, className) {
+                if (className.indexOf("k-") >= 0) {
+                    return true;
+                }
+            });
+
+            // Element class names
+            if (options.bordered === true) {
+                elementClassNames.push("k-listview-bordered");
+            }
+
+            if (typeof options.borders === "string" && options.borders !== EMPTY_STRING) {
+                elementClassNames.push("k-listview-borders-" + options.borders);
+            }
+
+
+            // Content class names
+            if (typeof options.contentPadding === "string" && options.contentPadding !== EMPTY_STRING) {
+                contentClassNames.push("k-listview-content-padding-" + options.contentPadding);
+            }
+
+            if (typeof options.layout === "string" && options.layout !== EMPTY_STRING) {
+                contentClassNames.push("k-d-" + options.layout);
+            }
+
+            if (options.layout === "flex" && typeof flex === "object") {
+                if (typeof flex.direction === "string" && flex.direction !== "") {
+                    contentClassNames.push("k-flex-" + flex.direction);
+                }
+
+                if (typeof flex.wrap === "string" && flex.wrap !== "") {
+                    contentClassNames.push("k-flex-" + flex.wrap);
+                }
+            }
+
+            if (options.layout === "grid" && typeof grid === "object") {
+                if (typeof grid.cols === "number") {
+                    content.css("grid-template-columns", "repeat(" + grid.cols + ", 1fr)");
+                } else if (typeof grid.cols === "string") {
+                    content.css("grid-template-columns", grid.cols);
+                }
+
+                if (typeof grid.rows === "number") {
+                    content.css("grid-template-rows", "repeat(" + grid.rows + ", " + (grid.rowHeight !== undefined ? grid.rowHeight : "1fr") + ")");
+                } else if (typeof grid.rows === "string") {
+                    content.css("grid-template-rows", grid.rows);
+                }
+
+                if (typeof grid.gutter === "number") {
+                    content.css("grid-gap", grid.gutter);
+                } else if (typeof grid.gutter === "string") {
+                    content.css("grid-gap", grid.gutter);
+                }
+            }
+
+            that.element.addClass(elementClassNames.join(" "));
+            that.content.addClass(contentClassNames.join(" "));
+
+        },
+
+        _setContentHeight: function() {
+            var that = this,
+                options = that.options,
+                height;
+
+            if (options.scrollable && that.wrapper.is(":visible")) {
+
+                height = that.wrapper.innerHeight();
+                that.content.height(height);
             }
         },
 
@@ -209,10 +349,12 @@ var __meta__ = { // jshint ignore:line
                 length,
                 template = that.template,
                 altTemplate = that.altTemplate,
+                options = that.options,
+                role = options.selectable ? "option" : "listitem",
                 active = activeElement(),
-                endlessAppend =  that._endlessFetchInProgress,
+                endlessAppend = that._endlessFetchInProgress,
                 index = endlessAppend ? that._skipRerenderItemsCount : 0,
-                height = that.hasHeight;
+                scrollable = that.options.scrollable;
 
             e = e || {};
 
@@ -225,7 +367,7 @@ var __meta__ = { // jshint ignore:line
                         idx = item.index();
 
                         that.angular("cleanup", function() {
-                            return { elements: [ item ]};
+                            return { elements: [ item ] };
                         });
 
                         item.replaceWith(template(data));
@@ -233,7 +375,7 @@ var __meta__ = { // jshint ignore:line
                         item.attr(kendo.attr("uid"), data.uid);
 
                         that.angular("compile", function() {
-                            return { elements: [ item ], data: [ { dataItem: data } ]};
+                            return { elements: [ item ], data: [ { dataItem: data } ] };
                         });
 
                         that.trigger("itemChange", {
@@ -252,7 +394,7 @@ var __meta__ = { // jshint ignore:line
 
             that._angularItems("cleanup");
 
-            if(!endlessAppend) {
+            if (!endlessAppend) {
                 that._destroyEditable();
             }
 
@@ -263,31 +405,51 @@ var __meta__ = { // jshint ignore:line
                     html += template(view[idx]);
                 }
             }
+
             if (endlessAppend) {
-                that.element.append(html);
-            }
-            else {
-                that.element.html(html);
+                that.content.append(html);
+            } else {
+                that.content.html(html);
             }
 
             items = that.items().not(".k-loading-mask");
+
+            that._ariaAttributes(view.length);
+
             for (idx = index, length = view.length; idx < length; idx++) {
-                items.eq(idx).attr(kendo.attr("uid"), view[idx].uid)
-                             .attr("role", "option")
-                             .attr("aria-selected", "false");
+                item = items.eq(idx);
+
+                item.addClass(ITEM_CLASS);
+
+                item.attr(kendo.attr("uid"), view[idx].uid)
+                    .attr(ARIA_ROLE, role);
+
+                if (that.options.selectable) {
+                    item.attr("aria-selected", "false");
+                }
+
+                if (that.options.pageable) {
+                    item.attr(ARIA_SETSIZE, that.dataSource.total());
+                    item.attr(ARIA_POSINSET, that.dataSource.indexOf(that.dataItem(item)) + 1);
+                }
             }
 
-            if (that.element[0] === active && that.options.navigatable) {
+            if (that.content[0] === active && that.options.navigatable) {
                 if (that._focusNext) {
                     that.current(that.current().next());
-                }
-                else {
-                    if (!height) {
+                } else {
+                    if (!scrollable) {
                         that.current(items.eq(0));
                     }
                 }
             }
 
+            if (that.element.attr(ARIA_ACTIVEDESCENDANT) &&
+                that.element.find("#" + that.element.attr(ARIA_ACTIVEDESCENDANT)).length === 0) {
+                    that.element.removeAttr(ARIA_ACTIVEDESCENDANT);
+            }
+
+            that._setContentHeight();
             that._angularItems("compile");
 
             that._progress(false);
@@ -296,20 +458,75 @@ var __meta__ = { // jshint ignore:line
             that.trigger(DATABOUND, { action: e.action || "rebind", items: e.items, index: e.index });
         },
 
+        _ariaAttributes: function(length) {
+            var content = this.content,
+                options = this.options,
+                selectable = options.selectable;
+
+            this._ariaLabelValue = this._ariaLabelValue || this.options.ariaLabel;
+
+            if (length === 0) {
+                content.removeAttr(ARIA_ROLE);
+                content.removeAttr(ARIA_MULTISELECTABLE);
+
+                if (content.attr(ARIA_LABEL)) {
+                    this._ariaLabelValue = content.attr(ARIA_LABEL);
+                    content.removeAttr(ARIA_LABEL);
+                }
+            } else {
+                content.attr(ARIA_ROLE, selectable ? "listbox" : "list");
+
+                if (selectable && kendo.ui.Selectable.parseOptions(selectable).multiple) {
+                    content.attr(ARIA_MULTISELECTABLE, true);
+                }
+
+                if (this._ariaLabelValue) {
+                    content.attr(ARIA_LABEL, this._ariaLabelValue);
+                }
+            }
+        },
+
         _pageable: function() {
             var that = this,
                 pageable = that.options.pageable,
-                settings,
-                pagerId;
+                navigatable = that.options.navigatable,
+                pagerWrap,
+                settings;
 
-            if ($.isPlainObject(pageable)) {
-                pagerId = pageable.pagerId;
+            if (!pageable) {
+                return;
+            }
+
+            pagerWrap = that.wrapper.find(DOT + PAGER_CLASS);
+
+            if (!pagerWrap.length) {
+                pagerWrap = $('<div />').addClass(PAGER_CLASS);
+            }
+
+            if (pageable.position === "top") {
+                pagerWrap
+                    .addClass(kendo.format("{0}-{1}", PAGER_CLASS, pageable.position))
+                    .prependTo(that.wrapper);
+            } else {
+                pagerWrap.appendTo(that.wrapper);
+            }
+
+            if (that.pager) {
+                that.pager.destroy();
+            }
+
+            if (typeof pageable === "object" && pageable instanceof kendo.ui.Pager) {
+                that.pager = pageable;
+            } else {
+                pagerWrap = pageable.pagerId ? $("#" + pageable.pagerId) : pagerWrap;
+
                 settings = $.extend({}, pageable, {
                     dataSource: that.dataSource,
+                    navigatable: navigatable,
                     pagerId: null
                 });
 
-                that.pager = new kendo.ui.Pager($("#" + pagerId), settings);
+                that.pager = new kendo.ui.Pager(pagerWrap, settings);
             }
         },
 
@@ -326,7 +543,7 @@ var __meta__ = { // jshint ignore:line
                 that.selectable = new kendo.ui.Selectable(that.element, {
                     aria: true,
                     multiple: multi,
-                    filter: FOCUSSELECTOR,
+                    filter: that.options.contentElement ? ".k-listview-content " + FOCUSSELECTOR : FOCUSSELECTOR,
                     change: function() {
                         that.trigger(CHANGE);
                     }
@@ -334,17 +551,23 @@ var __meta__ = { // jshint ignore:line
 
                 if (navigatable) {
                     that.element.on("keydown" + NS, function(e) {
+
+                        if (!$(e.target).is(that.element)) { return; }
+
                         if (e.keyCode === keys.SPACEBAR) {
                             current = that.current();
+
                             if (e.target == e.currentTarget) {
                                 e.preventDefault();
                             }
-                            if(multi) {
-                                if(!e.ctrlKey) {
+
+                            if (multi) {
+                                if (!e.ctrlKey) {
                                     that.selectable.clear();
                                 } else {
                                     if (current && current.hasClass(SELECTED)) {
                                         current.removeClass(SELECTED);
+                                        that.trigger(CHANGE);
                                         return;
                                     }
                                 }
@@ -353,6 +576,7 @@ var __meta__ = { // jshint ignore:line
                             }
 
                             that.selectable.value(current);
+                            that.trigger(CHANGE);
                         }
                     });
                 }
@@ -362,32 +586,38 @@ var __meta__ = { // jshint ignore:line
         _scrollable: function() {
             var that = this;
             var scrollable = that.options.scrollable;
-            var height = that.hasHeight;
 
-            if (scrollable || height) {
+            if (scrollable) {
 
-                that.element.css({
-                    "overflow": "scroll",
+                that.content.css({
+                    "overflow-y": "scroll",
                     "position": "relative",
                     "-webkit-overflow-scrolling": "touch"
                 });
 
                 if (scrollable === "endless") {
-                    var originalPageSize = that._endlessPageSize = that.dataSource.options.pageSize;
-
-                    that.element.off("scroll" + NS).on("scroll" + NS, function () {
-                        if (this.scrollTop + this.clientHeight - this.scrollHeight >= -15 &&
-                        !that._endlessFetchInProgress &&
-                        that._endlessPageSize < that.dataSource.total()) {
-                            that._skipRerenderItemsCount =  that._endlessPageSize;
-                            that._endlessPageSize = that._skipRerenderItemsCount  + originalPageSize;
-                            that.dataSource.options.endless = true;
-                            that._endlessFetchInProgress = true;
-                            that.dataSource.pageSize(that._endlessPageSize);
-                        }
-                    });
+                    that._bindScrollable();
                 }
             }
+        },
+
+        _bindScrollable: function() {
+            var that = this;
+            var originalPageSize = that._endlessPageSize = that.dataSource.options.pageSize;
+
+            that.content
+                .off("scroll" + NS)
+                .on("scroll" + NS, function() {
+                    if (this.scrollTop + this.clientHeight - this.scrollHeight >= -15 &&
+                    !that._endlessFetchInProgress &&
+                    that._endlessPageSize < that.dataSource.total()) {
+                        that._skipRerenderItemsCount = that._endlessPageSize;
+                        that._endlessPageSize = that._skipRerenderItemsCount + originalPageSize;
+                        that.dataSource.options.endless = true;
+                        that._endlessFetchInProgress = true;
+                        that.dataSource.pageSize(that._endlessPageSize);
+                    }
+                });
         },
 
         current: function(candidate) {
@@ -406,7 +636,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 current.removeClass(FOCUSED);
-                element.removeAttr("aria-activedescendant");
+                element.removeAttr(ARIA_ACTIVEDESCENDANT);
             }
 
             if (candidate && candidate[0]) {
@@ -414,7 +644,7 @@ var __meta__ = { // jshint ignore:line
 
                 that._scrollTo(candidate[0]);
 
-                element.attr("aria-activedescendant", id);
+                element.attr(ARIA_ACTIVEDESCENDANT, id);
                 candidate.addClass(FOCUSED).attr("id", id);
             }
 
@@ -423,12 +653,13 @@ var __meta__ = { // jshint ignore:line
 
         _scrollTo: function(element) {
             var that = this,
+                content = that.content,
                 container,
                 UseJQueryoffset = false,
                 SCROLL = "scroll";
 
-            if (that.wrapper.css("overflow") == "auto" || that.wrapper.css("overflow") == SCROLL) {
-                container = that.wrapper[0];
+            if (content.css("overflow") === "auto" || content.css("overflow") === SCROLL || content.css("overflow-y") === SCROLL) {
+                container = content[0];
             } else {
                 container = window;
                 UseJQueryoffset = true;
@@ -456,18 +687,22 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 navigatable = that.options.navigatable,
                 element = that.element,
+                content = that.content,
                 clickCallback = function(e) {
                     that.current($(e.currentTarget));
-                    if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
+                    if (!$(e.target).is(":button, a, :input, a > .k-icon, textarea")) {
                         kendo.focusElement(element);
                     }
                 };
 
             if (navigatable) {
                 that._tabindex();
-                element.on("focus" + NS, function() {
+
+                element
+                    .on("focus" + NS, function() {
                         var current = that._current;
-                        if(!current || !current.is(":visible")) {
+
+                        if (!current || !current.is(":visible")) {
                             current = that._item("first");
                         }
 
@@ -478,23 +713,22 @@ var __meta__ = { // jshint ignore:line
                             that._current.removeClass(FOCUSED);
                         }
                     })
-                    .on("keydown" + NS, function(e) {
+                    .on("keydown" + NS, that, function(e) {
                         var key = e.keyCode,
                             current = that.current(),
                             target = $(e.target),
-                            canHandle = !target.is(":button,textarea,a,a>.t-icon,input"),
-                            isTextBox = target.is(":text,:password"),
+                            canHandle = !target.is(":button, textarea, a, a > .t-icon, input"),
+                            isTextBox = target.is(":text, :password"),
                             preventDefault = kendo.preventDefault,
-                            editItem = element.find("." + KEDITITEM),
+                            editItem = content.find("." + KEDITITEM),
                             active = activeElement(), idx,
-                            scrollable = that.options.scrollable,
-                            height = that.hasHeight;
+                            scrollable = that.options.scrollable;
 
-                        if ((!canHandle && !isTextBox && keys.ESC != key) || (isTextBox && keys.ESC != key && keys.ENTER != key)) {
+                        if (target.hasClass(PAGER_CLASS) || (!canHandle && !isTextBox && key !== keys.ESC) || (isTextBox && key !== keys.ESC && key !== keys.ENTER)) {
                             return;
                         }
 
-                        if (keys.UP === key || keys.LEFT === key) {
+                        if (key === keys.UP || key === keys.LEFT) {
                             if (current && current[0]) {
                                 current = current.prev();
                             }
@@ -502,17 +736,20 @@ var __meta__ = { // jshint ignore:line
                             if (current && current[0]) {
                                 that.current(current);
                             }
-                            else if (!height) {
+                            else if (!scrollable) {
                                 that.current(that._item("last"));
                             }
                             preventDefault(e);
-                        } else if (keys.DOWN === key || keys.RIGHT === key) {
-                            if (scrollable || height) {
-                                if(that.options.scrollable === "endless" && !current.next().length) {
-                                    that.element[0].scrollTop = that.element[0].scrollHeight;
+                        }
+
+                        if (key === keys.DOWN || key === keys.RIGHT) {
+                            if (scrollable) {
+                                if (that.options.scrollable === "endless" && !current.next().length) {
+                                    that.content[0].scrollTop = that.content[0].scrollHeight;
                                     that._focusNext = true;
                                 } else {
                                     current = current.next();
+
                                     if (current && current[0]) {
                                         that.current(current);
                                     }
@@ -523,40 +760,58 @@ var __meta__ = { // jshint ignore:line
                                 that.current(!current || !current[0] ? that._item("first") : current);
                             }
                             preventDefault(e);
-                        } else if (keys.PAGEUP === key) {
+                        }
+
+                        if (key === keys.PAGEUP) {
                             that.current(null);
                             that.dataSource.page(that.dataSource.page() - 1);
                             preventDefault(e);
-                        } else if (keys.PAGEDOWN === key) {
+                        }
+
+                        if (key === keys.PAGEDOWN) {
                             that.current(null);
                             that.dataSource.page(that.dataSource.page() + 1);
                             preventDefault(e);
-                        } else if (keys.HOME === key) {
+                        }
+
+                        if (key === keys.HOME) {
                             that.current(that._item("first"));
                             preventDefault(e);
-                        } else if (keys.END === key) {
+                        }
+
+                        if (key === keys.END) {
                             that.current(that._item("last"));
                             preventDefault(e);
-                        } else if (keys.ENTER === key) {
+                        }
+
+                        if (key === keys.ENTER) {
                             if (editItem.length !== 0 && (canHandle || isTextBox)) {
                                 idx = that.items().index(editItem);
+
                                 if (active) {
                                     active.blur();
                                 }
+
                                 that.save();
-                                var focusAgain = function(){
+
+                                var focusAgain = function() {
                                     that.element.trigger("focus");
                                     that.current(that.items().eq(idx));
                                 };
+
                                 that.one("dataBound", focusAgain);
-                            } else if (that.options.editTemplate !== "") {
+                            } else if (that.options.editTemplate) {
                                 that.edit(current);
                             }
-                        } else if (keys.ESC === key) {
-                            editItem = element.find("." + KEDITITEM);
+                        }
+
+                        if (key === keys.ESC) {
+                            editItem = content.find("." + KEDITITEM);
+
                             if (editItem.length === 0) {
                                 return;
                             }
+
                             idx = that.items().index(editItem);
                             that.cancel();
                             that.element.trigger("focus");
@@ -564,23 +819,23 @@ var __meta__ = { // jshint ignore:line
                         }
                     });
 
-                element.on(MOUSEDOWN + NS + " " + TOUCHSTART + NS, FOCUSSELECTOR, proxy(clickCallback, that));
+                element.on(MOUSEDOWN + NS + " " + TOUCHSTART + NS, that.options.contentElement ? ".k-listview-content " + FOCUSSELECTOR : FOCUSSELECTOR, clickCallback.bind(that));
             }
-       },
+        },
 
-       clearSelection: function() {
-           var that = this;
-           that.selectable.clear();
-           that.trigger(CHANGE);
-       },
+        clearSelection: function() {
+            var that = this;
+            that.selectable.clear();
+        },
 
-       select: function(items) {
-           var that = this,
-               selectable = that.selectable;
+        select: function(items) {
+            var that = this,
+                selectable = that.selectable;
 
             items = $(items);
-            if(items.length) {
-                if(!selectable.options.multiple) {
+
+            if (items.length) {
+                if (!selectable.options.multiple) {
                     selectable.clear();
                     items = items.first();
                 }
@@ -588,65 +843,69 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-           return selectable.value();
-       },
+            return selectable.value();
+        },
 
-       _destroyEditable: function() {
-           var that = this;
-           if (that.editable) {
-               that.editable.destroy();
-               delete that.editable;
-           }
-       },
+        _destroyEditable: function() {
+            var that = this;
+            if (that.editable) {
+                that.editable.destroy();
+                delete that.editable;
+            }
+        },
 
-       _modelFromElement: function(element) {
-           var uid = element.attr(kendo.attr("uid"));
+        _modelFromElement: function(element) {
+            var uid = element.attr(kendo.attr("uid"));
 
-           return this.dataSource.getByUid(uid);
-       },
+            return this.dataSource.getByUid(uid);
+        },
 
-       _closeEditable: function() {
-           var that = this,
-               editable = that.editable,
-               data,
-               item,
-               index,
-               template = that.template;
+        _closeEditable: function() {
+            var that = this,
+                editable = that.editable,
+                options = that.options,
+                role = options.selectable ? "option" : "listitem",
+                data,
+                item,
+                index,
+                template = that.template;
 
-           if (editable) {
-               if (editable.element.index() % 2) {
-                   template = that.altTemplate;
-               }
+            if (editable) {
+                if (editable.element.index() % 2) {
+                    template = that.altTemplate;
+                }
 
-               that.angular("cleanup", function() {
-                   return { elements: [ editable.element ]};
-               });
+                that.angular("cleanup", function() {
+                    return { elements: [ editable.element ] };
+                });
 
-               data = that._modelFromElement(editable.element);
-               that._destroyEditable();
+                data = that._modelFromElement(editable.element);
+                that._destroyEditable();
 
-               index = editable.element.index();
-               editable.element.replaceWith(template(data));
-               item = that.items().eq(index);
-               item.attr(kendo.attr("uid"), data.uid);
+                index = editable.element.index();
+                editable.element.replaceWith(template(data));
+                item = that.items().eq(index);
+                item.addClass(ITEM_CLASS);
+                item.attr(kendo.attr("uid"), data.uid);
+                item.attr(ARIA_ROLE, role);
 
-               if (that._hasBindingTarget()) {
-                   kendo.bind(item, data);
-               }
+                if (that._hasBindingTarget()) {
+                    kendo.bind(item, data);
+                }
 
-               that.angular("compile", function() {
-                   return { elements: [ item ], data: [ { dataItem: data } ]};
-               });
-           }
-           return true;
-       },
+                that.angular("compile", function() {
+                    return { elements: [ item ], data: [ { dataItem: data } ] };
+                });
+            }
+            return true;
+        },
 
-       edit: function(item) {
-           var that = this,
-               data = that._modelFromElement(item),
-               container,
-               uid = data.uid,
-               index;
+        edit: function(item) {
+            var that = this,
+                data = that._modelFromElement(item),
+                container,
+                uid = data.uid,
+                index;
 
             that.cancel();
 
@@ -662,131 +921,132 @@ var __meta__ = { // jshint ignore:line
             }).data("kendoEditable");
 
             that.trigger(EDIT, { model: data, item: container });
-       },
+        },
 
-       save: function() {
-           var that = this,
-               editable = that.editable,
-               model;
+        save: function() {
+            var that = this,
+                editable = that.editable,
+                model;
 
-           if (!editable) {
-               return;
-           }
+            if (!editable) {
+                return;
+            }
 
-           var container = editable.element;
-           model = that._modelFromElement(container);
+            var container = editable.element;
+            model = that._modelFromElement(container);
 
-           if (editable.end() && !that.trigger(SAVE, { model: model, item: container }))  {
-               that._closeEditable();
-               that.dataSource.sync();
-           }
-       },
+            if (editable.end() && !that.trigger(SAVE, { model: model, item: container })) {
+                that._closeEditable();
+                that.dataSource.sync();
+            }
+        },
 
-       remove: function(item) {
-           var that = this,
-               dataSource = that.dataSource,
-               data = that._modelFromElement(item);
+        remove: function(item) {
+            var that = this,
+                dataSource = that.dataSource,
+                data = that._modelFromElement(item);
 
-           if (that.editable) {
-               dataSource.cancelChanges(that._modelFromElement(that.editable.element));
-               that._closeEditable();
-           }
+            if (that.editable) {
+                dataSource.cancelChanges(that._modelFromElement(that.editable.element));
+                that._closeEditable();
+            }
 
-           if (!that.trigger(REMOVE, { model: data, item: item })) {
-               item.hide();
-               dataSource.remove(data);
-               dataSource.sync();
-           }
-       },
+            if (!that.trigger(REMOVE, { model: data, item: item })) {
+                if (item.attr("id") === that.element.attr(ARIA_ACTIVEDESCENDANT)) {
+                    that.element.removeAttr(ARIA_ACTIVEDESCENDANT);
+                }
 
-       add: function() {
-           var that = this,
-               dataItem,
-               dataSource = that.dataSource,
-               index = dataSource.indexOf((dataSource.view() || [])[0]);
+                item.hide();
+                dataSource.remove(data);
+                dataSource.sync();
+            }
+        },
 
-           if (index < 0) {
-               index = 0;
-           }
+        add: function() {
+            var that = this,
+                dataItem,
+                dataSource = that.dataSource,
+                index = dataSource.indexOf((dataSource.view() || [])[0]);
 
-           that.cancel();
-           dataItem = dataSource.insert(index, {});
-           that.edit(that.element.find("[data-uid='" + dataItem.uid + "']"));
-       },
+            if (index < 0) {
+                index = 0;
+            }
 
-       cancel: function() {
-           var that = this,
-               dataSource = that.dataSource;
+            that.cancel();
+            dataItem = dataSource.insert(index, {});
+            that.edit(that.element.find("[data-uid='" + dataItem.uid + "']"));
+        },
 
-           if (that.editable) {
-               var container = that.editable.element;
-               var model = that._modelFromElement(container);
+        cancel: function() {
+            var that = this,
+                dataSource = that.dataSource;
 
-               if (!that.trigger(CANCEL, { model: model, container: container})) {
-                   dataSource.cancelChanges(model);
-                   that._closeEditable();
-               }
-           }
-       },
+            if (that.editable) {
+                var container = that.editable.element;
+                var model = that._modelFromElement(container);
 
-       _crudHandlers: function() {
-           var that = this,
-               mousedownNs = MOUSEDOWN + NS,
-               touchstartNs = TOUCHSTART + NS,
-               clickNs = CLICK + NS;
+                if (!that.trigger(CANCEL, { model: model, container: container })) {
+                    dataSource.cancelChanges(model);
+                    that._closeEditable();
+                }
+            }
+        },
 
-           that.element.on(mousedownNs + " " + touchstartNs, ".k-edit-button", function(e) {
-               e.preventDefault();
-               var item = $(this).closest("[" + kendo.attr("uid") + "]");
+        _crudHandlers: function() {
+            var that = this,
+                touchstartNs = TOUCHSTART + NS,
+                clickNs = CLICK + NS;
+
+            that.content.on(touchstartNs + " " + clickNs, ".k-edit-button", function(e) {
+                e.preventDefault();
+                var item = $(this).closest("[" + kendo.attr("uid") + "]");
                 setTimeout(function() {
                     that.edit(item);
                 });
             });
 
 
-            that.element.on(mousedownNs + " " + touchstartNs, ".k-delete-button", function(e) {
+            that.content.on(touchstartNs + " " + clickNs, ".k-delete-button", function(e) {
                 e.preventDefault();
                 var item = $(this).closest("[" + kendo.attr("uid") + "]");
                  setTimeout(function() {
                     that.remove(item);
                  });
-             });
+            });
 
-             that.element.on(clickNs, ".k-update-button", function(e) {
+            that.content.on(clickNs, ".k-update-button", function(e) {
                 that.save();
                 e.preventDefault();
-           });
+            });
 
-           that.element.on(clickNs, ".k-cancel-button", function(e) {
+            that.content.on(clickNs, ".k-cancel-button", function(e) {
                 that.cancel();
                 e.preventDefault();
-           });
-       },
+            });
+        },
 
-       destroy: function() {
-           var that = this;
+        destroy: function() {
+            var that = this;
 
-           Widget.fn.destroy.call(that);
+            Widget.fn.destroy.call(that);
 
-           that._unbindDataSource();
+            that._unbindDataSource();
 
-           that._destroyEditable();
+            that._destroyEditable();
 
-           that.element.off(NS);
+            that.element.off(NS);
+            that.content.off(NS);
 
-           that._endlessFetchInProgress = that._endlessPageSize = that._skipRerenderItemsCount = that._focusNext = null;
+            that._endlessFetchInProgress = that._endlessPageSize = that._skipRerenderItemsCount = that._focusNext = null;
 
-           if (that.pager) {
-               that.pager.destroy();
-           }
+            if (that.pager) {
+                that.pager.destroy();
+            }
 
-           kendo.destroy(that.element);
-       }
+            kendo.destroy(that.element);
+        }
     });
 
     kendo.ui.plugin(ListView);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

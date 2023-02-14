@@ -1,7 +1,7 @@
 ---
 title: User Guide
-page_title: User Guide | Kendo UI Spreadsheet
-description: "A user guide for the Kendo UI Spreadsheet widget."
+page_title: jQuery Spreadsheet Documentation - User Guide
+description: "Get started with the jQuery Spreadsheet by Kendo UI and check out its user guide."
 slug: user_guide_spreadsheet_widget
 position: 1
 ---
@@ -26,11 +26,18 @@ This guide uses the following conventions:
 
 The Kendo UI Spreadsheet is used for the implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the touch and feel of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes while utilizing simpler and easy-to-master user interface.
 
-**Figure 1: Main Elements of the Spreadsheet**
-
-<center>![Spreadsheet UI components](../images/spreadsheet-components.png)</center>
+<center>![Kendo UI for jQuery Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
 ## Actions
+
+* [Sheets](#sheets)
+* [Cells](#cells)
+* [Rows](#rows)
+* [Columns](#columns)
+* [Fonts](#fonts)
+* [Filters](#filters)
+* [File import and export](#file-import-and-export)
+* [Other](#other)
 
 ### Sheets
 
@@ -135,7 +142,6 @@ You are able to export the content of your Spreadsheet to Portable Document Form
 
 <br>
 
-> **Important**
 > * To close an active drop-down list or menu or exit an open window and then return to the worksheet, click **Cancel** whenever displayed as a command.
 > * To apply an options you have already selected, click **Apply** whenever displayed as a command.
 

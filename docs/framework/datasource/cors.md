@@ -1,21 +1,21 @@
 ---
 title: CORS Data Fetching
-page_title: CORS Data Fetching | Kendo UI Data Source
-description: "Learn how to fetch data from another domain by using CORS with all modern browsers."
+page_title: CORS Data Fetching - Kendo UI for jQuery DataSource
+description: "Learn how to fetch data from another domain by using CORS with all modern browsers when working with the Kendo UI for jQuery DataSource component and your JavaScript widgets."
 previous_url: /howto/use-cors-with-all-modern-browsers
 slug: corsdatafetching_anotherdomain_datasourcecomponent
-position: 4
+position: 6
 ---
 
 # CORS Data Fetching
 
-This article was written by Todd Anglin, [originally published in the Kendo UI Blogs](http://www.telerik.com/blogs/using-cors-with-all-modern-browsers) on October 3, 2011 and consequently updated in July 2012.
+This article was written by Todd Anglin, [originally published in the Kendo UI Blogs](https://www.telerik.com/blogs/using-cors-with-all-modern-browsers) on October 3, 2011 and consequently updated in July 2012.
 
 The original spelling, grammar, and structure of the item is preserved here for consistency.
 
 ## Using CORS with All (Modern) Browsers
 
-[Cross-Origin Resource Sharing (CORS)](http://www.w3.org/TR/cors/) is a (slowly) emerging technology for the web that finally gives async web operations a way to directly grab resources from different domains. In fact, we've talked about CORS a couple of times on the Kendo UI blogs [here](http://www.telerik.com/blogs/shields-up-web-service-abstraction-with-kendo-ui) and [here](http://www.telerik.com/blogs/cross-domain-queries-to-odata-services-with-jquery).
+[Cross-Origin Resource Sharing (CORS)](https://www.w3.org/TR/cors/) is a (slowly) emerging technology for the web that finally gives async web operations a way to directly grab resources from different domains. In fact, we've talked about CORS a couple of times on the Kendo UI blogs [here](https://www.telerik.com/blogs/shields-up-web-service-abstraction-with-kendo-ui) and [here](https://www.telerik.com/blogs/cross-domain-queries-to-odata-services-with-jquery).
 
 By default, the "[same origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)" security sandbox built-in to all browsers does not allow XHR (Ajax) calls across different domains. You can try, but you'll get an error that looks something like this:
 
@@ -25,7 +25,7 @@ This message basically says that you can't use Ajax to load resources from a dif
 
 ### Access-Control-Allow-Origin
 
-CORS works by adding a special header to responses from a server to the client. If a response contains the `Access-Control-Allow-Origin` header, and if the browser supports CORS, then there is a chance you can load the resource directly with Ajax&dmash;no need for a proxy or [JSONP hacks](http://en.wikipedia.org/wiki/JSONP).
+CORS works by adding a special header to responses from a server to the client. If a response contains the `Access-Control-Allow-Origin` header, and if the browser supports CORS, then there is a chance you can load the resource directly with Ajax&dmash;no need for a proxy or [JSONP hacks](https://en.wikipedia.org/wiki/JSONP).
 
 Why just a chance?
 
@@ -47,7 +47,7 @@ Anyone can CORS-enable their site by simply having the web server add the necess
 
 It's never simple with browsers, especially when you want to ensure broad compatibility.
 
-As confirmed by the useful [`CanIUse.com`](http://caniuse.com/#search=CORS), support for CORS is a bit of a mixed-bag. CORS is 100% ready to roll in:
+As confirmed by the useful [`CanIUse.com`](https://caniuse.com/#search=CORS), support for CORS is a bit of a mixed-bag. CORS is 100% ready to roll in:
 
 - WebKit browsers (Chrome, Safari, iOS, Android)
 - Gecko browsers (Firefox)
@@ -60,7 +60,7 @@ We'll talk about handling old Opera versions more in a minute, but let's first a
 
 #### Internet Explorer and XDomainRequest
 
-Internet Explorer, pre IE10, approaches cross-origin resource sharing a bit differently. Rather than go the route of WebKit and Gecko, IE 8 and 9 do not reuse the standard Ajax `XMLHttpRequest` object for CORS requests. Instead, they introduce a brand new object for cross-origin resource sharing called [`XDomainRequest`](https://msdn.microsoft.com/en-us/library/cc288060(v=vs.85).aspx).
+Internet Explorer, pre IE10, approaches cross-origin resource sharing a bit differently. Rather than go the route of WebKit and Gecko, IE 8 and 9 do not reuse the standard Ajax `XMLHttpRequest` object for CORS requests. Instead, they introduce a brand new object for cross-origin resource sharing called [`XDomainRequest`](https://developer.mozilla.org/en-US/docs/Web/API/XDomainRequest).
 
 This means your Ajax code for cross-domain calls looks 100% identical to `same-domain` calls in Chrome and Firefox, but it will have to fork in Internet Explorer to use the new XDR object with CORS requests. A pain, but a solvable problem. There are some other limits with XDR, [but we'll leave that to you to research](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx).
 
@@ -84,7 +84,7 @@ With this small snippet, we can write code that works with CORS XHR, XDR, and wh
 <!--*-->
 You can [try this code snippet live in different browsers](http://jsbin.com/ohugih/8/edit) to confirm it works.
 
-The [`XMLHttpRequest2` object](http://www.w3.org/TR/XMLHttpRequest2/), which includes required support for CORS, can be used to feature-detect browser support for CORS. If the browser's `XHR` object has the XHR2 `"withCredentials"` property, you're in business. If not, step 2.
+The [`XMLHttpRequest2` object](https://www.w3.org/TR/XMLHttpRequest2/), which includes required support for CORS, can be used to feature-detect browser support for CORS. If the browser's `XHR` object has the XHR2 `"withCredentials"` property, you're in business. If not, step 2.
 
 In step 2, we take one more attempt to use CORS by looking for IE's proprietary `XDomainRequest` object (which works with the same `Access-Control-Allow-Origin` headers, by the way). If the XDR object exists, we're in IE and we can write the necessary code to do XDR CORS.
 
@@ -107,7 +107,7 @@ The choice is yours, but clearly, you have *some* choice that should still make 
 
 ### Putting It All Together
 
-In the [Kendo UI Feed Reader demo](http://www.telerik.com/blogs/rss-feed-reader-built-with-kendo-ui-yql-amp-less), we use [YQL](https://developer.yahoo.com/yql/) to feed RSS XML directly to the browser. YQL supports CORS, so we elected to send XML to the browser instead of JSONP to highlight [Kendo UI's data source support for XML](http://demos.telerik.com/kendo-ui/datasource/xml-data).
+In the [Kendo UI Feed Reader demo](https://www.telerik.com/blogs/rss-feed-reader-built-with-kendo-ui-yql-amp-less), we use [YQL](https://developer.yahoo.com/yql/) to feed RSS XML directly to the browser. YQL supports CORS, so we elected to send XML to the browser instead of JSONP to highlight [Kendo UI's data source support for XML](https://demos.telerik.com/kendo-ui/datasource/xml-data).
 
 Version 1 of this demo did not support non-CORS browsers. To add support for these browsers, we modified the code to use XDR with IE and YQL JSONP with Opera and all non-CORS browsers.
 
@@ -122,7 +122,7 @@ So, to make the Feed Reader demo CORS work in IE 8/9, a small snippet is added t
     <!--[if lt IE 10]>
     <!--iecors provides a jQuery ajax custom transport for IE8/9 XDR-->
     <script src="scripts/jquery.iecors.js"></script>
-    <![endif]-->
+    <![Kendo UI for jQuery endif]-->
 
 #### Fixing Opera with More Code and JSONP
 
@@ -163,10 +163,9 @@ Now, Opera (any other non-CORS browser) will use an alternate configuration of t
 
 Hopefully this post helps highlight the value of CORS and how it can be used with most modern browsers. As more app code moves to the client, the need for CORS will only grow. Start playing with it today and help push web standards to the next level.
 
-## See Also
+## See Also 
 
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
-* [Basic Usage]({% slug basicusage_kendoui_datasourcecomponent %})
 * [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})
 * [CRUD Data Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %})
 * [DataSource JavaScript API Reference](/api/javascript/data/datasource)

@@ -1,8 +1,8 @@
 ---
 title: Chart Stops Responding on Mobile Devices after Multiple Pan and Zoom Gestures
+page_title: SVG-Rendered Chart Stops Responding on Mobile after Multiple Pan and Zoom Gestures
 description: On mobile browsers, the Chart eventually freezes and stops responding to touch gestures after multiple zooms and pans.
 type: troubleshooting
-page_title: SVG-Rendered Chart Stops Responding on Mobile after Multiple Pan and Zoom Gestures
 slug: chart-cannot-pan-and-zoom-continuously-on-mobile
 tags: chart, mobile, svg-rendering
 ticketid: 1129220
@@ -15,7 +15,7 @@ component: charts
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -80,7 +80,3 @@ Kendo UI does not provide a built-in solution for avoiding this behavior. Howeve
       $(document).ready(createChart);
     </script>
 ```
-
-## See Also
-
-* [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})

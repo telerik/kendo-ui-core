@@ -4,7 +4,7 @@
 
     function startResizing(splitter, options) {
         var resizingHandler = splitter.object.resizing;
-        options = $.extend({ x: { location: 0 }, y: { location: 0 }, currentTarget: splitter.dom.find(".k-splitbar") }, options)
+        options = $.extend({ x: { location: 0 }, y: { location: 0 }, currentTarget: splitter.dom.find(".k-splitbar") }, options);
         options.x.startLocation = options.x.location;
         options.y.startLocation = options.y.location;
 
@@ -69,8 +69,8 @@
             startResizing(splitter);
 
             // min and max will be calculated with the previous pane as the origin, taking splitbar width into account
-            assert.equal(resizingHandler._min(), 50);
-            assert.equal(resizingHandler._max(), 165);
+            assert.equal(resizingHandler._min(), 47);
+            assert.equal(resizingHandler._max(), 162);
         });
 
         it("resizing constraints calculated from splitbar width", function() {
@@ -119,7 +119,7 @@
             startResizing(splitter);
 
             assert.equal(resizingHandler._min(), 60);
-            assert.equal(resizingHandler._max(), 165);
+            assert.equal(resizingHandler._max(), 162);
         });
 
         it("resizing constraints for middle panes", function() {
@@ -129,8 +129,8 @@
 
             startResizing(splitter, { currentTarget: splitter.dom.find(".k-splitbar").eq(1) });
 
-            assert.equal(resizingHandler._min(), 107);
-            assert.equal(resizingHandler._max(), 307);
+            assert.equal(resizingHandler._min(), 106);
+            assert.equal(resizingHandler._max(), 302);
         });
 
         it("resizing.stop modifies pane sizes", function() {
@@ -191,7 +191,7 @@
         it("resizing.stop fires splitter resize", function() {
             var triggered = false;
 
-            splitter = create({ resize: function() { triggered = true } });
+            splitter = create({ resize: function() { triggered = true; } });
 
             var splitBar = splitter.dom.find(".k-splitbar"),
                 resizingHandler = splitter.object.resizing;
@@ -215,7 +215,7 @@
             resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: 0 } });
 
             assert.equal(panes[0].offsetWidth, 50);
-            assert.equal(panes[1].offsetWidth, 150);
+            assert.equal(panes[1].offsetWidth, 147);
         });
 
         it("resizing.stop assigns percentage sizes when resizing fluid panes", function() {
@@ -302,8 +302,8 @@
 
 
             // min and max will be calculated with the previous pane as the origin, taking splitbar height into account
-            assert.equal(resizingHandler._min(), 50);
-            assert.equal(resizingHandler._max(), 165);
+            assert.equal(resizingHandler._min(), 47);
+            assert.equal(resizingHandler._max(), 162);
         });
 
         it("resizing constraints calculated from pane extremes", function() {
@@ -317,7 +317,7 @@
             startResizing(splitter);
 
             assert.equal(resizingHandler._min(), 60);
-            assert.equal(resizingHandler._max(), 165);
+            assert.equal(resizingHandler._max(), 162);
         });
 
         it("resizing constraints for middle panes", function() {
@@ -327,8 +327,8 @@
 
             startResizing(splitter, { currentTarget: splitter.dom.find(".k-splitbar").eq(1) });
 
-            assert.equal(resizingHandler._min(), 107);
-            assert.equal(resizingHandler._max(), 307);
+            assert.equal(resizingHandler._min(), 106);
+            assert.equal(resizingHandler._max(), 302);
         });
 
         it("resizing.stop modifies pane sizes", function() {
@@ -438,9 +438,9 @@
 
             splitter.object.size(".k-pane:first", 60);
 
-            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+            splitter.dom.find(".k-i-caret-alt-left").trigger("click");
 
-            assert.equal(panes.eq(0).width(), 0)
+            assert.equal(panes.eq(0).width(), 0);
         });
     });
 

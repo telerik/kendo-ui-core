@@ -154,7 +154,7 @@ If set to `true`, the widget automatically adjusts the width of the popup elemen
 
 When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
 
-> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
+> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'false' because otherwise checkAll may not interact with all subnodes of the treeview.
 
 #### Example - disable the clear button
 
@@ -209,7 +209,9 @@ If `true` or an object, renders checkboxes beside each node. In this case the wi
 Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked. This
 also enables tri-state checkboxes with an indeterminate state.
 
-> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario not supported by the widget.
+> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario is not supported by the widget.
+
+> When this property is enabled, it should be used with [loadOnDemand](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree/configuration/loadondemand) set to 'false'. Otherwise, after expand of a checked node (and load of its inner items) the value selected in the widget and the checked items in the drop-down will no longer be in sync. Currently, such scenario is not among the supported.
 
 #### Example - enable tri-state checkboxes and propagate checked state to children
 
@@ -565,6 +567,40 @@ The supported filter values are `startswith`, `endswith` and `contains`.
     });
     </script>
 
+### filterLabel `String`
+
+When filtering is enabled, allows aria-label to be defined for the filter input element.
+
+#### Example - set the filter
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      filter: "contains",
+      filterLabel: "custom title"
+    });
+    </script>
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      fillMode: "flat"
+    });
+    </script>
+
 ### footerTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
@@ -589,6 +625,111 @@ The widget instance.
             footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
         });
     </script>
+
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: "Fruits"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: function() {
+            return "Fruits";
+        }ß
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: { content: "Fruits" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: {
+            content: function() {
+                return "Fruits";
+            }
+        }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/dropdowntree/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#dropdowntree").data("kendoDropDownTree").label.floatingLabel.refresh();`
+
+#### Example - create a label from a function
+
+    <input id="customers">
+    <script>
+    $("#customers").kendoDropDownTree({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        label: {
+            content: "Fruits",
+            floating: true
+        }
+    });
+    </script>
+
 
 ### height `String|Number`*(default: 200)*
 
@@ -708,6 +849,22 @@ The text message shown when hovering delete icon in a selected tag.
         });
     </script>
 
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="dropdowntree" />
+    <script>
+        $("#dropdowntree").kendoDropDownTree({
+            dataSource: [],
+            messages: {
+                noData: "There is no data!"
+            }
+        });
+    </script>
+
 ### messages.singleTag `String` *(default: "item(s) selected")*
 
 The text message shown in the single TagMode tag.
@@ -749,7 +906,7 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -1069,6 +1226,45 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
         });
 
         kendo.bind($("#dropdowntree"), viewModel);
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      size: "large"
+    });
     </script>
 
 ## Fields
@@ -1398,7 +1594,7 @@ You can overcome this behavior by triggering the `change` event manually using [
 
 ##### value `Array|String`
 
-The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false' and an *Array of strings* when `checkboxes` is true. To clear the value, pass an empty array.
+The value to set. A *String* value, when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false', and an *Array* of items of the value field type (number or string), when `checkboxes` is true. To clear the value, pass an empty array.
 
 #### Returns
 
@@ -1411,16 +1607,17 @@ The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdown
     <script>
         $("#dropdowntree").kendoDropDownTree({
             dataSource: [{ text: "Item1", value: 1 }, { text: "Item2", value: 2 }],
-            checkboxes:true,
+            checkboxes:true
         });
 
         var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
 
-        // get the value of the dropdowntree.
-        var value = dropdowntree.value();
+        // set the value of the dropdowntree
+        dropdowntree.value([1, 2]); //select items which have value respectively 1 and 2
 
-        // set the value of the dropdowntree.
-        dropdowntree.value(["1", "2"]); //select items which have value respectively "1" and "2"
+        // get the value of the dropdowntree
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(dropdowntree.value());
     </script>
 
 ## Events
@@ -1671,7 +1868,9 @@ The selected node
     $("#dropdowntree").kendoDropDownTree({
       dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }],
       select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Select", e.node);
+        console.log("Node text --> " + $(e.node).text())
       }
     });
     </script>
@@ -1681,6 +1880,7 @@ The selected node
     <input id="dropdowntree"/>
     <script>
     function dropdowntree_select(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("select", e.node);
     }
     $("#dropdowntree").kendoDropDownTree({

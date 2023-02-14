@@ -1,8 +1,8 @@
 ---
 title: Increase Width to Potentially Show Full Column Values
-description: An example on how to increase the width of the filter menu in the Kendo UI Grid for ASP.NET MVC.
+description: Learn how to increase the width of the filter menu in the Kendo UI Grid for ASP.NET MVC.
 type: how-to
-page_title: Increase the Width of the Filter Menu | Kendo UI Grid
+page_title: Increase the Width of the Filter Menu - Kendo UI Grid for jQuery
 slug: increase-the-width-of-the-filter-menu
 previous_url: /knowledge-base/how-to-increase-the-width-of-the-filter-menu
 tags: grid, filter, width
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI Grid for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -54,7 +54,7 @@ Use CSS rules to expand the width of the container and the elements that are loc
 .k-animation-container>form {
   width: 300px;
 }
-.k-filter-menu .k-datepicker, .k-filter-menu .k-datetimepicker, .k-filter-menu .k-dropdown, .k-filter-menu .k-numerictextbox, .k-filter-menu .k-textbox, .k-filter-menu .k-timepicker {
+.k-filter-menu .k-datepicker, .k-filter-menu .k-datetimepicker, .k-filter-menu .k-dropdownlist, .k-filter-menu .k-numerictextbox, .k-filter-menu .k-textbox, .k-filter-menu .k-timepicker {
   width: 100%;
 }
 .k-filter-menu span.k-filter-and {
@@ -62,18 +62,18 @@ Use CSS rules to expand the width of the container and the elements that are loc
 }
 ```
 
-On the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event, you can also set the width of the container per menu.  
+On the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event, you can also set the width of the container per menu.
 
 ```dojo
 <div id="grid"></div>
 
 <style>
-      .k-filter-menu .k-datepicker, .k-filter-menu .k-datetimepicker, .k-filter-menu .k-dropdown, .k-filter-menu .k-numerictextbox, .k-filter-menu .k-textbox, .k-filter-menu .k-timepicker {
+      .k-filter-menu .k-datepicker, .k-filter-menu .k-datetimepicker, .k-filter-menu .k-dropdownlist, .k-filter-menu .k-numerictextbox, .k-filter-menu .k-textbox, .k-filter-menu .k-timepicker {
         width: 100%;
       }
       .k-filter-menu span.k-filter-and {
         width: 100%;
-      }      
+      }
 </style>
 
 <script>

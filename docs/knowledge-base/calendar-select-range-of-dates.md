@@ -1,8 +1,8 @@
 ---
-title: Select a range of dates
-description: An example on how to select a range of dates in the Kendo UI Calendar widget.
+title: Select a Range of Dates
+page_title: Select a Range of Dates - Kendo UI Calendar for jQuery
+description: Learn how to select a range of dates in the Kendo UI Calendar widget.
 type: how-to
-page_title: Select a range of dates | Kendo UI Calendar
 slug: calendar-select-range-of-dates
 tags: kendo, ui, calendar, select, range, dates, multiple, between, datepicker
 res_type: kb
@@ -14,10 +14,10 @@ component: calendar
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Calendar</td>
+  <td>Progress® Kendo UI® Calendar for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.3.1026</td>
  </tr>
 </table>
@@ -29,7 +29,7 @@ How can I select a range of dates in the Kendo Calendar widget?
 
 ## Solution
 
-Once the user chooses both end and start dates, select the dates in the selected range using the [selectDates method](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods/selectdates)
+Once the user chooses both the end and start dates, select the dates in the selected range by using the [`selectDates` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods/selectdates).
 
 ```dojo
     <label>Start:</label>
@@ -47,7 +47,7 @@ Once the user chooses both end and start dates, select the dates in the selected
         dat.setDate(dat.getDate() + days);
         return dat;
       }
-      
+
       $('#start').kendoDatePicker({
         change: rangeSelection
       });
@@ -89,6 +89,6 @@ Once the user chooses both end and start dates, select the dates in the selected
 
 ## See Also
 
-* [API Reference of the DatePicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [API Reference of the DateTimePicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)

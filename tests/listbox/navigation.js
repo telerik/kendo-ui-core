@@ -2,7 +2,7 @@
     var ListBox = kendo.ui.ListBox,
         listA,
         keys = kendo.keys,
-        FOCUSED_CLASS = "k-state-focused",
+        FOCUSED_CLASS = "k-focus",
         DOT = ".",
         TRANSFER_TO = "transferTo",
         TRANSFER_FROM = "transferFrom",
@@ -10,7 +10,7 @@
         TRANSFER_ALL_FROM = "transferAllFrom",
         MOVE_UP = "moveUp",
         MOVE_DOWN = "moveDown";
-    var TABINDEX = "tabindex"
+    var TABINDEX = "tabindex";
     var wrapper;
     var listbox;
 
@@ -47,18 +47,19 @@
 
         it("enabled tool should be focusable", function() {
             listA.select(listA.items().first());
+            listA._onSelect();
 
             var tool = getToolElement(listA, MOVE_DOWN);
 
             assert.equal(tool.attr(TABINDEX), undefined);
         });
 
-        it("disabled tool should not be focusable", function() {
+        it("disabled tool should be focusable", function() {
             listA.select(listA.items().last());
 
             var tool = getToolElement(listA, MOVE_DOWN);
 
-            assert.isOk(tool.attr(TABINDEX) === "-1");
+            assert.equal(tool.attr(TABINDEX), undefined);
         });
 
         it("First item gets focused on keydown if focused item is not present", function() {
@@ -110,7 +111,7 @@
 
             assert.isOk(listA.select().length === 4);
         });
-        ;
+
 
         it("Item is correctly deselected using ctrl + space", function() {
             listA.select(listA.items().first());
@@ -137,7 +138,7 @@
         it("MOVE_DOWN is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === MOVE_DOWN);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, ctrlKey: true, preventDefault: $.noop });
@@ -146,7 +147,7 @@
         it("MOVE_UP is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === MOVE_UP);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.UP, shiftKey: true, ctrlKey: true, preventDefault: $.noop });
@@ -155,7 +156,7 @@
         it("TRANSFER_ALL_TO is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === TRANSFER_ALL_TO);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.RIGHT, shiftKey: true, ctrlKey: true, preventDefault: $.noop });
@@ -164,7 +165,7 @@
         it("TRANSFER_TO is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === TRANSFER_TO);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.RIGHT, ctrlKey: true, preventDefault: $.noop });
@@ -173,7 +174,7 @@
         it("TRANSFER_ALL_TO is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === TRANSFER_ALL_FROM);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.LEFT, shiftKey: true, ctrlKey: true, preventDefault: $.noop });
@@ -182,7 +183,7 @@
         it("TRANSFER_ALL_TO is correctly called", function() {
             listA._executeCommand = function(param1) {
                 assert.isOk(param1 === TRANSFER_FROM);
-            }
+            };
 
             listA.focus();
             listA._keyDown({ keyCode: keys.LEFT, ctrlKey: true, preventDefault: $.noop });
@@ -195,7 +196,7 @@
             listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
             listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
 
-            assert.isOk(listA.items().eq(2).hasClass("k-state-selected") === true);
+            assert.isOk(listA.items().eq(2).hasClass("k-selected") === true);
         });
 
 
@@ -258,16 +259,16 @@
         });
 
         it("selecting an item focuses it", function() {
-            listbox.wrapper.find(".k-list").find(".k-item").first().click();
+            listbox.wrapper.find(".k-list-ul").find(".k-list-item").first().click();
 
-            assert.equal(kendo._activeElement(), listbox.wrapper.find(".k-list")[0]);
+            assert.equal(kendo._activeElement(), listbox.wrapper.find(".k-list-ul")[0]);
         });
 
         it("selecting an item does not scroll the listbox", function() {
             listbox.wrapper.scrollTop(listbox.wrapper[0].scrollHeight);
             var initialScrollTop = listbox.wrapper.scrollTop();
 
-            listbox.wrapper.find(".k-list").find(".k-item").last().click();
+            listbox.wrapper.find(".k-list-ul").find(".k-list-item").last().click();
 
             assert.equal(initialScrollTop, wrapper.scrollTop());
         });
@@ -277,7 +278,7 @@
             listbox.wrapper.scrollTop(listbox.wrapper[0].scrollHeight);
             var initialScrollTop = wrapper.scrollTop();
 
-            listbox.wrapper.find(".k-list").find(".k-item").last().click();
+            listbox.wrapper.find(".k-list-ul").find(".k-list-item").last().click();
 
             assert.equal(initialScrollTop, wrapper.scrollTop());
         });

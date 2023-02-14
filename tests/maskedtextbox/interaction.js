@@ -54,6 +54,24 @@
             });
         });
 
+        it("sets the k-focus class on focusin", function() {
+            var maskedtextbox = new MaskedTextBox(input);
+
+            maskedtextbox.element[0].focus();
+
+            assert.isOk(maskedtextbox.wrapper.hasClass("k-focus"));
+        });
+
+        it("removes the k-focus class on focusout", function() {
+            var maskedtextbox = new MaskedTextBox(input);
+
+            maskedtextbox.element[0].focus();
+            maskedtextbox.element.blur();
+
+            assert.isNotOk(maskedtextbox.wrapper.hasClass("k-focus"));
+        });
+
+
         it("MaskedTextBox does not remove input value on blur", function(done) {
             var maskedtextbox = new MaskedTextBox(input, {
                 mask: "0-0"

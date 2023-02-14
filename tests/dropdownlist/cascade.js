@@ -31,9 +31,13 @@
 
         afterEach(function() {
             kendo.ns = "";
+
             if (parent.data("kendoDropDownList")) {
                 parent.data("kendoDropDownList").destroy();
+            } else if (parent.data("kendoComboBox")) {
+                parent.data("kendoComboBox").destroy();
             }
+
             if (child.data("kendoDropDownList")) {
                 child.data("kendoDropDownList").destroy();
             }
@@ -1337,6 +1341,46 @@
                 assert.equal(ddl2.value(), "3");
                 done();
             }, 100);
+        });
+
+        it("cascades from ComboBox widget", function() {
+            // array of all brands
+            var brands = [
+                { id: 1, name: "Ford" },
+                { id: 2, name: "BMW" },
+                { id: 3, name: "Chevrolet" }
+            ];
+
+            // array of all models
+            var models = [
+                { modelId: 1, name: "Explorer", brandId: 1 },
+                { modelId: 2, name: "Focus", brandId: 1 },
+                { modelId: 3, name: "X3", brandId: 2 },
+                { modelId: 4, name: "X5", brandId: 2 },
+                { modelId: 5, name: "Impala", brandId: 3 },
+                { modelId: 6, name: "Cruze", brandId: 3 }
+            ];
+
+            parent.kendoComboBox({
+                dataTextField: "name",
+                dataValueField: "id",
+                dataSource: brands
+            });
+
+            child.kendoDropDownList({
+                dataTextField: "name",
+                dataValueField: "modelId",
+                cascadeFrom: "parent",
+                cascadeFromField: "brandId",
+                dataSource: models
+            });
+
+            child.data("kendoDropDownList").one("dataBound", function(ev) {
+                ev.sender.select(1);
+            });
+            parent.data("kendoComboBox").select(1);
+
+            assert.equal(child.data("kendoDropDownList").text(), "X5");
         });
     });
 }());

@@ -1,18 +1,16 @@
 ---
 title: Multiple Views
-page_title: Multiple Views| Kendo UI MultiViewCalendar
-description: "Control the visible date ranges in the Kendo UI MultiViewCalendar and manage the number of its horizontally rendered views."
+page_title: jQuery MultiViewCalendar Documentation - Disabled Dates
+description: "Get started with the jQuery MultiViewCalendar by Kendo UI and control and manage the number of the visible date ranges in horizontally rendered views."
 slug: multiple_views_multiviewcalendar
 position: 3
 ---
 
 # Multiple Views
 
-The Kendo UI MultiViewCalendar allows you to define the number of views and months that are displayed at a time.
+The MultiViewCalendar allows you to define the number of views and months that are displayed at a time.
 
-In some scenarios it might be necessary to display more than two months. This is helpful especially in case of range selection among a couple of months.
-
-###### Example
+To display two or more months and especially in case of range selection among a couple of months, use the following approach.
 
 ```dojo
     <input id="numberOfViews" />
@@ -47,5 +45,5 @@ In some scenarios it might be necessary to display more than two months. This is
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)
+* [Using Multiple Views in the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/multiple-views)
+* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)

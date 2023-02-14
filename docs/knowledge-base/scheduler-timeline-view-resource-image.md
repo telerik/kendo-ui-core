@@ -1,8 +1,8 @@
 ---
 title: Add Image to Resource on Timeline View
-description: An example on how to insert an image on the Timeline view resources in the Kendo UI Scheduler.
+description: Learn how to insert an image on the Timeline view resources in the Kendo UI Scheduler.
 type: how-to
-page_title: Add Image to Resource on Timeline View | Kendo UI Scheduler
+page_title: Add Image to Resource on Timeline View - Kendo UI Scheduler for jQuery
 slug: scheduler-timeline-view-resource-image
 tags: scheduler, timeline, view, resource, add, image
 ticketid: 1155292
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 
@@ -82,19 +82,19 @@ Extend the view and override the functions that are responsible for rendering th
         batch: true,
         transport: {
           read: {
-            url: "http://demos.telerik.com/kendo-ui/service/meetings",
+            url: "https://demos.telerik.com/kendo-ui/service/meetings",
             dataType: "jsonp"
           },
           update: {
-            url: "http://demos.telerik.com/kendo-ui/service/meetings/update",
+            url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
             dataType: "jsonp"
           },
           create: {
-            url: "http://demos.telerik.com/kendo-ui/service/meetings/create",
+            url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
             dataType: "jsonp"
           },
           destroy: {
-            url: "http://demos.telerik.com/kendo-ui/service/meetings/destroy",
+            url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
             dataType: "jsonp"
           },
           parameterMap: function(options, operation) {

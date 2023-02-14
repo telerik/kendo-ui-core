@@ -1,7 +1,7 @@
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input,
-        STATE_INVALID = "k-state-invalid",
+        STATE_INVALID = "k-invalid",
         keyPressA = $.Event("keypress", { keyCode: 65 });
 
     describe("kendo.ui.MaskedTextBox validation", function() {

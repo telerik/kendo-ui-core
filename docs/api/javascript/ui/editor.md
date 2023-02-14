@@ -63,6 +63,7 @@ Indicates whether the Editor should submit encoded HTML tags. By default, the su
       value: "<p>foo</p>",
       encoded: false
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").val()); // logs "<p>foo</p>"
     </script>
 
@@ -474,6 +475,51 @@ The title of the tool that aligns the cell text.
     });
     </script>
 
+### messages.tableAlignLeft `String` *(default: 'Table Align Left')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignLeft: "Table Align Left"
+      }
+    });
+    </script>
+
+### messages.tableAlignCenter `String` *(default: 'Table Align Center')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignCenter: "Table Align Center"
+      }
+    });
+    </script>
+
+### messages.tableAlignRight `String` *(default: 'Table Align Right')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignRight: "Table Align Right"
+      }
+    });
+    </script>
+
 ### messages.alignment `String` *(default: 'Alignment')*
 
 The title of the tool that aligns the cell text.
@@ -485,6 +531,21 @@ The title of the tool that aligns the cell text.
     $("#editor").kendoEditor({
       messages: {
         alignment: "Alignment"
+      }
+    });
+    </script>
+
+### messages.applyFormat `String` *(default: 'Apply format')*
+
+The title of the format painter tool button that applies the copied format.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        applyFormat: "Apply the format that has been copied"
       }
     });
     </script>
@@ -695,6 +756,21 @@ The title of the Columns tool in Table Wizard.
     $("#editor").kendoEditor({
       messages: {
         columns: "Columns"
+      }
+    });
+    </script>
+
+### messages.copyFormat `String` *(default: 'Copy format')*
+
+The title of the format painter tool button that copies format.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        copyFormat: "Copy format from selected range"
       }
     });
     </script>
@@ -933,6 +1009,7 @@ The title of the tool that changes the text size.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+      tools: ["fontSize"],
       messages: {
         fontSize: "Select font size"
       }
@@ -1179,6 +1256,36 @@ The title of the tool that inserts an unordered list.
     });
     </script>
 
+### messages.insertUpperRomanList `String` *(default: "Insert upper roman list")*
+
+The title of the tool that inserts an upper roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertUpperRomanList: "Insert upper roman list"
+      }
+    });
+    </script>
+
+### messages.insertLowerRomanList `String` *(default: "Insert lower roman list")*
+
+The title of the tool that inserts an lower roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertLowerRomanList: "Insert lower roman list"
+      }
+    });
+    </script>
+
 ### messages.italic `String` *(default: "Italic")*
 
 The title of the tool that makes text italicized.
@@ -1359,6 +1466,21 @@ The title of the Print tool.
     });
     </script>
 
+### messages.redo `String` *(default: "Redo")*
+
+The title of the redo tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        redo: "Redo task"
+      }
+    });
+    </script>
+
 ### messages.rows `String` *(default: 'Rows')*
 
 The title of the Rows field in Table Wizard.
@@ -1494,6 +1616,21 @@ The title of the tool that underlines text.
     });
     </script>
 
+### messages.undo `String` *(default: "Undo")*
+
+The title of the undo tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        undo: "Undo task"
+      }
+    });
+    </script>
+
 ### messages.units `String` *(default: "Units")*
 
 The label of the Units dropdowns in TableWizard dialog.
@@ -1568,6 +1705,20 @@ The title of the Wrap Text option in Table Wizard.
       }
     });
     </script>
+
+### navigateOnTab `Boolean` *(default: false)*
+
+If set to `true` this configuration option would enable Tab-based navigation among Editor ToolBar items. By default navigation is arrow-based.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+      $("#editor").kendoEditor({
+          navigateOnTab: true
+      });
+    </script>
+
 
 ### pasteCleanup `Object`
 
@@ -1749,6 +1900,12 @@ The author of the PDF document.
         });
     </script>
 
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
@@ -1806,6 +1963,14 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -2059,7 +2224,7 @@ The maximum height that the editor can be resized to.
 
 If `resizable` is set to `true` the widget will detect changes in the viewport width and will hide the overflowing controls in the tool overflow popup.
 
-> Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor` and `formatting` will be hidden but **not** moved to the tool overflow popup.
+> Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor`, `formatting` and `createTable` will **not** be moved to the tool overflow popup and will be always visible.
 
 #### Example
 
@@ -2107,6 +2272,25 @@ Indicates whether the characters outside the ASCII range will be encoded as HTML
         entities: true
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log($("#editor").data("kendoEditor").value()); // logs "The character &auml; is an umlaut"
+    </script>
+
+### serialization.optimizeTags `Boolean` *(default: false)*
+
+Indicates whether optizable tags should be removed from the DOM. Currently, optimizable tags are `span` and `font` elements with no attributes and no decoration or formatting applied (via inline styles/attributes).
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      value: "<p><span>non-decorated text</span></p><p><span style=\"text-decoration: underline;\">underline text</span></p>",
+      serialization: {
+        optimizeTags: true
+      }
+    });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // logs "The character &auml; is an umlaut"
     </script>
 
@@ -2127,6 +2311,7 @@ Indicates whether inline scripts will be serialized and posted to the server.
         scripts: true
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // log will contain the script tag
     </script>
 
@@ -2145,6 +2330,7 @@ or as presentational (b / i / u / font) tags. Used for outputting content for le
         semantic: false
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // logs "Check out <i>this</i> <b>kata</b>.",
     </script>
 
@@ -2195,6 +2381,8 @@ The available editor commands are:
         - **print**
 *   Export to PDF
         - **pdf**
+*   Format painter
+        - **copyFormat**, **applyFormat**
 
 #### Example
 
@@ -2250,7 +2438,7 @@ The JavaScript function which will be executed when the end-user clicks the tool
         {
           name: "custom",
           exec: function(e) {
-            var editor = $(this).data("kendoEditor");
+            var editor = this;
             // ...
           }
         }
@@ -2345,7 +2533,7 @@ Only applicable for the formatting tool. Specifies the context in which the opti
 
 ### tools.palette `String|Array` *(default: null)*
 
-Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools.
+Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools. If you need to use the [color gradient](api/javascript/ui/colorgradient) view in the picker instead of the palette, set this value to null.
 
 #### Example - "websafe" palette
 
@@ -2367,6 +2555,18 @@ Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palet
         tools: [{
             name: "backColor",
             palette: ["#f0d0c9", "#e2a293", "#d4735e", "#65281a"]
+        }]
+    });
+    </script>
+
+#### Example - use gradient
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: [{
+            name: "backColor",
+            palette: null
         }]
     });
     </script>
@@ -2490,7 +2690,7 @@ Specifies the settings for loading and saving data.
 
 Options or URL for remote image retrieval.
 
-> **Important:** The value of `transport.read` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.read` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example - specify a read URL
 
@@ -2527,7 +2727,7 @@ Options or URL for remote image retrieval.
 ### imageBrowser.transport.read.contentType `String` *(default: "application/x-www-form-urlencoded")*
 
 The content-type HTTP header sent to the server. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2548,7 +2748,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.read.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify Data As Object
 
@@ -2588,7 +2788,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.read.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2608,7 +2808,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.read.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2751,7 +2951,7 @@ The URL responsible for serving the original image. A file name placeholder shou
 
 Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.
 
-> **Important:** The value of `transport.destroy` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.destroy` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example
 
@@ -2769,7 +2969,7 @@ Options or URL which will handle the file and directory deletion. If not specifi
 ### imageBrowser.transport.destroy.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2789,7 +2989,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.destroy.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify Data As Object
 
@@ -2832,7 +3032,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.destroy.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2852,7 +3052,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.destroy.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2910,7 +3110,7 @@ The remote url to call when creating a new record.
 
 Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.
 
-> **Important:** The value of `transport.create` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.create` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example
 
@@ -2928,7 +3128,7 @@ Options or URL which will handle the directory creation. If not specified that c
 ### imageBrowser.transport.create.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -2948,7 +3148,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.create.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify data as object
 
@@ -2991,7 +3191,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.create.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3011,7 +3211,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### imageBrowser.transport.create.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3304,13 +3504,12 @@ Configuration for file browser dialog.
 	  ],
       fileBrowser: {
         transport: {
-          read: "filebrowser/read",
-          destroy: "filebrowser/destroy",
-          create: "filebrowser/createDirectory",
-          uploadUrl: "filebrowser/upload",
-          fileUrl: "/content/files/{0}",
-        },
-        path: "/myInitialPath/"
+          read: "https://demos.telerik.com/kendo-ui/service/filebrowser/read",
+          destroy: "https://demos.telerik.com/kendo-ui/service/filebrowser/destroy",
+          create: "https://demos.telerik.com/kendo-ui/service/filebrowser/createDirectory",
+          uploadUrl: "https://demos.telerik.com/kendo-ui/service/filebrowser/upload",
+          fileUrl: "https://demos.telerik.com/kendo-ui/service//content/File?fileName={0}",
+        }
       }
     });
     </script>
@@ -3361,7 +3560,7 @@ Specifies the settings for loading and saving data.
 
 Options or URL for remote file retrieval.
 
-> **Important:** The value of `transport.read` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.read` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example - specify a read URL
 
@@ -3404,7 +3603,7 @@ Options or URL for remote file retrieval.
 ### fileBrowser.transport.read.contentType `String` *(default: "application/x-www-form-urlencoded")*
 
 The content-type HTTP header sent to the server. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3428,7 +3627,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.read.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify Data As Object
 
@@ -3474,7 +3673,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.read.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3497,7 +3696,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.read.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3622,7 +3821,7 @@ The URL responsible for serving the original file. A file name placeholder shoul
 
 Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.
 
-> **Important:** The value of `transport.destroy` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.destroy` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example
 
@@ -3643,7 +3842,7 @@ Options or URL which will handle the file and directory deletion. If not specifi
 ### fileBrowser.transport.destroy.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3666,7 +3865,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.destroy.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify Data As Object
 
@@ -3715,7 +3914,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.destroy.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3738,7 +3937,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.destroy.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3805,7 +4004,7 @@ The remote url to call when creating a new record.
 
 Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.
 
-> **Important:** The value of `transport.create` is passed to [jQuery.ajax](http://api.jquery.com/jQuery.ajax).
+> **Important:** The value of `transport.create` is passed to [jQuery.ajax](https://api.jquery.com/jQuery.ajax).
 
 #### Example
 
@@ -3826,7 +4025,7 @@ Options or URL which will handle the directory creation. If not specified that c
 ### fileBrowser.transport.create.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3849,7 +4048,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.create.data `Object|String|Function`
 
 Data to be send to the server.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - specify data as object
 
@@ -3898,7 +4097,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.create.dataType `String`
 
 The type of data that you're expecting back from the server. Commonly used values are `"json"` and `"jsonp"`.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -3921,7 +4120,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### fileBrowser.transport.create.type `String`
 
 The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
 
@@ -4320,6 +4519,7 @@ Gets the HTML encoded value of the editor.
     <script>
     $("#editor").kendoEditor({ value: "<p>foo</p>" });
     var editor = $("#editor").data("kendoEditor");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.encodedValue()); // logs "&lt;p&gt;foo&lt;/p&gt;"
     </script>
 
@@ -4378,6 +4578,7 @@ Gets a **Range** object form the editable area.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     var range = editor.getRange();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(range);
     </script>
 
@@ -4396,6 +4597,7 @@ Gets a W3C-compatible **Selection** object form the editable area.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     var selection = editor.getSelection();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(selection);
     </script>
 
@@ -4538,8 +4740,10 @@ This method should be called after modifying the editor content through the DOM.
     textarea.kendoEditor({ value: "Hello, " });
     var editor = textarea.data("kendoEditor");
     editor.body.appendChild(editor.document.createTextNode("World"));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(textarea.val()); // logs "Hello, "
     editor.update();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(textarea.val()); // logs "Hello, World"
     </script>
 
@@ -4567,7 +4771,9 @@ The name of the tool that will be tested if formatted.
     var range = editor.createRange();
     range.selectNodeContents(editor.body.firstChild);
     editor.selectRange(range);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.state("italic")); // logs true
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.state("bold")); // logs false
     </script>
 
@@ -4592,6 +4798,7 @@ The value to set.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     editor.value("<p>New content</p>");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.value()); // logs "<p>New content</p>"
     </script>
 
@@ -4607,6 +4814,7 @@ Fires when Editor is blurred and its content has changed.
     <script>
     $("#editor").kendoEditor({
       change: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(this.value());
       }
     });
@@ -4617,6 +4825,7 @@ Fires when Editor is blurred and its content has changed.
     <textarea id="editor"></textarea>
     <script>
     function editor_change() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(this.value());
     }
     $("#editor").kendoEditor();
@@ -4644,6 +4853,7 @@ The command instance
     <script>
     $("#editor").kendoEditor({
       execute: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("executing command", e.name, e.command);
       }
     });
@@ -4654,6 +4864,7 @@ The command instance
     <textarea id="editor"></textarea>
     <script>
     function editor_execute(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("executing command", e.name, e.command);
     }
     $("#editor").kendoEditor();
@@ -4671,6 +4882,7 @@ Fires when the user depresses a keyboard key. Triggered multiple times if the us
     <script>
     $("#editor").kendoEditor({
       keydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("keydown : keyCode=",e.keyCode);
       }
     });
@@ -4681,6 +4893,7 @@ Fires when the user depresses a keyboard key. Triggered multiple times if the us
     <textarea id="editor"></textarea>
     <script>
     function editor_keydown(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("keydown : keyCode=", e.keyCode);
     }
     $("#editor").kendoEditor();
@@ -4698,6 +4911,7 @@ Fires when the user releases a keyboard key.
     <script>
     $("#editor").kendoEditor({
       keyup: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("keyup : keyCode=",e.keyCode);
       }
     });
@@ -4708,6 +4922,7 @@ Fires when the user releases a keyboard key.
     <textarea id="editor"></textarea>
     <script>
     function editor_keyup(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("keyup : keyCode=",e.keyCode);
     }
     $("#editor").kendoEditor();
@@ -4749,6 +4964,7 @@ The pasted content
     <script>
     $("#editor").kendoEditor({
       paste: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.html);
       }
     });
@@ -4759,6 +4975,7 @@ The pasted content
     <textarea id="editor"></textarea>
     <script>
     function editor_paste(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.html);
     }
     $("#editor").kendoEditor();
@@ -4802,6 +5019,7 @@ A promise that will be resolved when the export completes.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	    tools: ["pdf"],
       pdfExport: function(e) {
       }
     });
@@ -4813,7 +5031,9 @@ A promise that will be resolved when the export completes.
     <script>
     function onEditorExport(e) {
     }
-    $("#editor").kendoEditor();
+    $("#editor").kendoEditor({
+		   tools: ["pdf"]
+	  });
     var editor = $("#editor").data("kendoEditor");
     editor.bind("pdfExport", onEditorExport);
     </script>

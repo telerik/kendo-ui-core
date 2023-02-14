@@ -1,6 +1,6 @@
 ---
 title: Telerik Data Access
-page_title: Telerik Data Access | Kendo UI Third-Party Tools
+page_title: Telerik Data Access - Kendo UI Third-Party Tools
 description: "Learn how to leverage Telerik Data Access Framework on the backend and let Kendo UI take care of the user interface."
 previous_url: /using-kendo-with-open-access, /third-party/using-kendo-with-open-access.html
 slug: bindtotelerikdataaccesstool_integration_kendoui
@@ -8,13 +8,13 @@ slug: bindtotelerikdataaccesstool_integration_kendoui
 
 # Telerik Data Access
 
-This article demonstrates how to leverage [Telerik Data Access](http://www.telerik.com/data-access) on the backend and let [Kendo UI](http://www.telerik.com/kendo-ui) take care of the user interface.
+This article demonstrates how to leverage [Telerik Data Access](https://www.telerik.com/data-access) on the backend and let [Kendo UI](https://www.telerik.com/kendo-ui) take care of the user interface.
 
 ## Setting Up the Project
 
 To get started, create a new Telerik MVC Web Application.
 
-![New Web Project](../images/oa1.png)
+![Kendo UI for jQuery New Web Project](../images/new-mvc-project.png)
 
 When asked about the Data Access approach, select **Skip Creating a Telerik Data Access Model Library Project**. This is going to create an empty Telerik UI for an MVC project.
 
@@ -22,21 +22,21 @@ When asked about the Data Access approach, select **Skip Creating a Telerik Data
 
 1. To build a Data Access data model, select **TELERIK** > **Telerik Data Access** > **Add Domain Model**, as shown below.
 
-    > If you do not have Telerik Data Access installed, you are able to get the trial edition on the [Free Trials page](http://www.telerik.com/download-trial-file.aspx?pid=638).
+    > If you do not have Telerik Data Access installed, you are able to get the trial edition on the [Free Trials page](https://www.telerik.com/download-trial-file.aspx?pid=638).
 
-    ![Build The Model](../images/oa3.png)
+    ![Kendo UI for jQuery Build The Model](../images/add-model.png)
 
 1. On the window that opens next, select **Populate from database**. Click **Next**.
 
-    ![Populate From Data](../images/oa4.png)
+    ![Kendo UI for jQuery Populate From Data](../images/populate-from-database.png)
 
 1. Set up a connection to NorthwindOA, installed with Data Access, by choosing the option from the drop-down list. Click **Next**.
 
-    ![Connect To NorthwindOA](../images/oa5.png)
+    ![Kendo UI for jQuery Connect To NorthwindOA](../images/connect-to-northwind.png)
 
 1. Include all tables from the database in the data model by ticking the **Tables** check box.
 
-    ![Include All Tables](../images/oa6.png)
+    ![Kendo UI for jQuery Include All Tables](../images/include-all-tables.png)
 
 1. Click **Finish**. The data model is now ready to be used. Next, you need to expose this data model through a service layer.
 
@@ -44,19 +44,19 @@ When asked about the Data Access approach, select **Skip Creating a Telerik Data
 
 1. Perform a build on the application. Right-click the `.rlinq` file in **Solution Explorer**. Select **Add Telerik Data Access Service** so that the domain service wizard fires up.
 
-    ![Generate OpenAccess Domain Model](../images/oa7.png)
+    ![Kendo UI for jQuery Generate OpenAccess Domain Model](../images/telerik-access-data-service.png)
 
 1. From the drop-down list of the wizard select **EntitiesModel**. Click **Next**.
 
-    ![Select Northwind OA](../images/oa9.png)
+    ![Kendo UI for jQuery Select Northwind OA](../images/select-northwind.png)
 
 1. The screen that loads next allows you to configure the service that is going to be created. Select **WCF Service - OData v3** and click **Next**.
 
-    ![Configure The Service](../images/oa10.png)
+    ![Kendo UI for jQuery Configure The Service](../images/service-configuration.png)
 
 1. On the next screen you are able to change the name of the service and select which tables to include. Click **Finish** to create your service.
 
-    ![Configure The entitites](../images/oa11.png)
+    ![Kendo UI for jQuery Configure The Entities](../images/entities-configuration.png)
 
 ## Connecting oData to the Grid
 
@@ -66,7 +66,7 @@ Now configure the front end. Wire up the Orders to a Kendo UI Grid. Kendo UI is 
 
     RouteTable.Routes.IgnoreRoute("EntitiesModelService.svc/{*pathInfo}"); // specify the correct service path here
 
-1. Set up the Grid widget. For detailed information on how to configure data binding, visit the [Kendo UI live demo page](http://demos.telerik.com/kendo-ui/web/grid/index.html). Basically, use a `div` that is going to be applied as the container for the Grid and configure the widget in script.
+1. Set up the Grid widget. For detailed information on how to configure data binding, visit the [Kendo UI live demo page](https://demos.telerik.com/kendo-ui/web/grid/index.html). Basically, use a `div` that is going to be applied as the container for the Grid and configure the widget in script.
 
 The following example demonstrates some sample code you need.
 
@@ -129,7 +129,7 @@ The following example demonstrates some sample code you need.
 
 1. Run the application. The following screenshot demonstrates the Grid you are expected to see as a result.
 
-    ![Grid](../images/oa12.png)
+    ![Kendo UI for jQuery Grid](../images/grid-example.png)
 
 ## See Also
 

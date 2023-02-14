@@ -1,45 +1,33 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Linear Gauge
-description: "Learn how to initialize and set the Kendo UI Linear gauge."
+page_title: jQuery LinearGauge Documentation - LinearGauge Overview
+description: "Get started with the jQuery LinearGauge by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_lineargauge_widget
 position: 1
 ---
 
-# Linear Gauge Overview
+# {{ site.product }} LinearGauge Overview
 
-The [Kendo UI Linear Gauge widget](http://demos.telerik.com/kendo-ui/linear-gauge/index) enables users to quickly understand in what certain range a value lies.
+The LinearGauge represents values on a linear scale.
 
 All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 
-## Getting Started
+* [Demo page for the LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index)
 
-### Create the Linear Gauge
+## Initializing the LinearGauge
 
-To create the Linear Gauge, use a `div` element and optionally set a height and width by using CSS.
-
-###### Example
+To create the LinearGauge, use a `div` element and, optionally, set a height and width by using CSS.
 
     <div id="linear-gauge"></div>
 
-### Initialize the Linear Gauge
-
-To initialize the Linear Gauge with its default configuration, use the following example.
-
-###### Example
+The following example demonstrates how to initialize the LinearGauge with its default configuration.
 
        $(document).ready(function() {
            $("#linear-gauge").kendoLinearGauge();
        });
     </p>
 
-## Configuration
-
-### Create Horizontal Linear Gauge with Value and Min Value
-
-The following example demonstrates how to create a horizontal Linear Gauge with a value of 20 and a minimum value of 10.
-
-###### Example
+The following example demonstrates how to create a horizontal LinearGauge with a value of `20` and a minimum value of `10`.
 
         $("#linear-gauge").kendoLinearGauge({
             pointer: {
@@ -51,11 +39,7 @@ The following example demonstrates how to create a horizontal Linear Gauge with 
             }
         });
 
-For a detailed list with all configuration options of the Kendo UI Linear Gauge, refer to its [JavaScript API](/api/javascript/dataviz/ui/lineargauge).
-
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Linear Gauge Widget](/aspnet-mvc/helpers/lineargauge/overview)
-* [Overview of the Linear Gauge JSP Tag]({% slug overview_lineargauge_uiforjsp %})
-* [Overview of the Linear Gauge PHP Class](/php/widgets/lineargauge/overview)
-* [Linear Gauge JavaScript API Reference](/api/javascript/dataviz/ui/lineargauge)
+* [Basic Usage of the LinearGauge (Demo)](https://demos.telerik.com/kendo-ui/linear-gauge/index)
+* [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)

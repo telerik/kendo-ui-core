@@ -1,0 +1,5 @@
+@utils-touch-action: none, auto;
+
+each( @utils-touch-action, {
+    .k-touch-action-@{value} { touch-action: @value !important; }
+});

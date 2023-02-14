@@ -1,8 +1,8 @@
 ---
 title: Filter All Grid Columns with Single Textbox
-description: An example on how to filter all columns with a single textbox in the Kendo UI Grid.
+description: Learn how to filter all columns with a single textbox in the Kendo UI Grid.
 type: how-to
-page_title: Filter All Columns with Single Textbox | Kendo UI Grid
+page_title: Filter All Columns with Single Textbox - Kendo UI Grid for jQuery
 slug: filter-all-columns-with-one-textbox
 tags: grid, filter, all, columns, single, input, textbox, one, global, search, entire, whole
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2017.3.1026</td>
  </tr>
 </table>
@@ -35,7 +35,7 @@ How can I implement a global Grid search and enable the users to search through 
 
     <div id="example">
       Filter all fields:
-      <input id='filter' class='k-textbox'/>
+      <span style="width: 30%;" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input id='filter' class='k-input-inner'/></span>
       <div id="grid"></div>
 
       <script>        
@@ -70,7 +70,7 @@ How can I implement a global Grid search and enable the users to search through 
             },
             height: 550,
             columns: [
-              { field:"id"}, 
+              { field:"id"},
               { field: "dob", format: "{0:dd/MM/yyyy}"},
               { field: "name"},
               { field: "isAdmin", title: "Is Admin"}
@@ -104,9 +104,9 @@ How can I implement a global Grid search and enable the users to search through 
                 } else if (type == 'date') {
                   var data = grid.dataSource.data();
                   for (var i=0;i<data.length ; i++){
-                    var dateStr = kendo.format(x.format, data[i][x.field]); 
+                    var dateStr = kendo.format(x.format, data[i][x.field]);
                     // change to includes() if you wish to filter that way https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
-                    if(dateStr.startsWith(e.target.value)){ 
+                    if(dateStr.startsWith(e.target.value)){
                       filter.filters.push({
                         field: x.field,
                         operator:'eq',

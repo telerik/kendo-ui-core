@@ -1,6 +1,6 @@
 ---
 title: Remote Data
-page_title: jQuery Grid Documentation | Remote Data | Kendo UI
+page_title: jQuery Grid Documentation - Remote Data
 description: "Get started with the jQuery Grid by Kendo UI featuring a built-in DataSource which allows you to bind the Grid to remote data."
 previous_url: /howto/bind-the-grid-to-remote-data
 slug: remote_data_binding_grid
@@ -13,9 +13,7 @@ The Kendo UI Grid provides a templating engine and a built-in DataSource which a
 
 ## Getting Started
 
-To bind the Grid to remote data, specify the `dataSource` option. You can either create the data source outside the widget, or pass it in it. If multiple widgets are bound to the same data set, you have to create the data source as an object that you can refer to in different widgets. If the Grid is the only item that is bound to the data, create it inline.
-
-###### Example
+To bind the Grid to remote data, specify the `dataSource` option. You can either create the data source outside the component, or pass it in it. If multiple components are bound to the same data set, you have to create the data source as an object that you can refer to in different components. If the Grid is the only item that is bound to the data, create it inline.
 
     $("#grid").kendoGrid({
          dataSource: {
@@ -33,62 +31,60 @@ To bind the Grid to remote data, specify the `dataSource` option. You can either
 To configure the data source of the Grid:
 
 1. [Supply the remote endpoint](#supplying-the-remote-endpoint)
-1. [Adding the data](#adding-the-data)
-1. [Handling visualization](#handling-visualization)
-1. [Setting the row template](#setting-the-row-template)
+1. [Add the data](#adding-the-data)
+1. [Handle visualization](#handling-visualization)
+1. [Set the row template](#setting-the-row-template)
 
 ### Supplying the Remote Endpoint
 
-Kendo UI provides a [data-binding framework](http://demos.telerik.com/kendo-ui/datasource/index) that can be used inline with the Grid by defining the `dataSource` of the widget and supplying the remote endpoint.
+Kendo UI provides a [data-binding framework](https://demos.telerik.com/kendo-ui/datasource/index) that can be used inline with the Grid by defining the `dataSource` of the component and supplying the remote endpoint.
 
 The following example demonstrates how to implement the suggested approach. In the example:
 
 * The `dataSource` creates a new Kendo UI DataSource and assigns it as the data source for the Grid.
 * The `transport` defines the way you will communicate with the remote data source.
-* The `url` points to the location of the data to which you want to bind the widget.
+* The `url` points to the location of the data to which you want to bind the component.
 * The `data` lists additional URL parameters that need to be sent to the remote endpoint.
 * The `dataType` indicates the format of the response in which the data source is expected to be (JSONP in the example). JSONP is a way of returning JSON from a cross-browser request without getting blocked. It wraps the JSON response in a callback to intentionally mislead the browser&mdash;however, it is not recommended to do so unless you are fully aware of the containing data.
 * The `schema` indicates to the Grid what the schema of the response is.
 * The `data` functions as the JSON element that will be repeated&mdash;based on this element, Kendo UI binds each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
 * The `model` describes the structure of the data. By using it, you can specify the data type of each field in the data for proper handling as well as, when needed, explicitly state which is the unique id field.
 
-###### Example
+      ```dojo
+          <div id="grid">
+          </div>
 
-```dojo
-    <div id="grid">
-    </div>
-
-    <script>
-      $(function() {
-        $("#grid").kendoGrid({
-          dataSource: {   
-            transport: {   
-              read: {
-                url: "https://api.flickr.com/services/feeds/photos_public.gne",
-                data: {
-                  tags: "nature",
-                  format: "json"
+          <script>
+            $(function() {
+              $("#grid").kendoGrid({
+                dataSource: {   
+                  transport: {   
+                    read: {
+                      url: "https://api.flickr.com/services/feeds/photos_public.gne",
+                      data: {
+                        tags: "nature",
+                        format: "json"
+                      },
+                      dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                      jsonp: "jsoncallback",
+                    }
+                  },
+                  schema: {
+                    data: "items",
+                    model: {
+                      fields: {
+                        published: {type: "date"}
+                      }
+                    }
+                  }
                 },
-                dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-                jsonp: "jsoncallback",
-              }
-            },
-            schema: {
-              data: "items",
-              model: {
-                fields: {
-                  published: {type: "date"}
-                }
-              }
-            }
-          },
-          height: 500,
-          scrollable: true,
-          selectable: true
-        });
-      });
-    </script>   
-```
+                height: 500,
+                scrollable: true,
+                selectable: true
+              });
+            });
+          </script>   
+      ```
 
 ### Adding the Data
 
@@ -96,10 +92,7 @@ The previous example renders a Grid with auto-generated columns with a column fo
 
 The following example demonstrates how to specify the `field` attribute in the column array so that the Grid displays the required data from the response. The columns also have a `title` property which provides more user-friendly header titles for the columns.
 
-###### Example
-
 ```dojo
-
     <div id="grid">
     </div>
 
@@ -138,19 +131,15 @@ The following example demonstrates how to specify the `field` attribute in the c
         });
       });
     </script>
-
 ```
 
 ### Handling Visualization
 
 Instead of showing an image in the **Image** column, the Grid renders the string output of a JavaScript object and, also, the date does not appear in a user-friendly format.
 
-The following example demonstrates how to indicate to the Grid the way you want the widget to display the **Image** column by using an inline `template` for the image. The date is properly formatted by using the `format` option of the column.
-
-###### Example
+The following example demonstrates how to indicate to the Grid the way you want the component to display the **Image** column by using an inline `template` for the image. The date is properly formatted by using the `format` option of the column.
 
 ```dojo
-
     <div id="grid">
     </div>
 
@@ -199,10 +188,7 @@ The following example demonstrates how to fully customize the Grid by applying a
 
 > The `html` code in the following example displays special script blocks which contain the templating syntax for the [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}). The JavaScript that is used is also mixed with the HTML content and the syntax of the templates is similar to the syntax that is applied in the creation of a PHP, Razor, or other server-side templating engine.
 
-###### Example
-
 ```dojo
-
     <div id="grid">
     </div>
     <script id="detailsTemplate" type="text/x-kendo-template">
@@ -296,6 +282,25 @@ The following example demonstrates how to fully customize the Grid by applying a
       }
     </style>
 ```
+
+## Loading Overlay Types
+
+The Kendo UI Grid exposes two types of loading indicators:
+
+* The `loadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
+
+* The `skeleton` uses the [SkeletonContainer component]({% slug overview_kendoui_skeletoncontainer_widget %}) to show a simplified preview of each of the grid's cells. The `skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
+
+Check the `skeleton` loading type in action in the live demo below:
+
+* [Skeleton Loading Type Demo](https://demos.telerik.com/kendo-ui/skeletoncontainer/grid-integration)
+
+## KB Articles on Remote Data Binding
+
+* [Binding the Grid to XML Data]({% slug howto_bindgridtoxmldata_grid %})
+* [Creating Grids with Dynamic Columns and Data Types]({% slug howto_createdynamiccolumnsdatatypes_grid %})
+* [Using Web API with Server-Side Operations]({% slug howto_use_webapi_withserverside_operations_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
 
 ## See Also
 

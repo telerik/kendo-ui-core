@@ -1,6 +1,6 @@
 ---
 title: Change Options Dynamically
-page_title: Change Options Dynamically | Hybrid UI ActionSheet
+page_title: Change Options Dynamically - Hybrid UI ActionSheet
 description: "Learn how to change options dynamically when working with the Hybrid UI ActionSheet in Kendo UI."
 previous_url: /controls/hybrid/mobileactionsheet/how-to/change-options-dynamically
 slug: howto_changeoptiojnsdynamically_hybridactionsheet
@@ -10,7 +10,7 @@ slug: howto_changeoptiojnsdynamically_hybridactionsheet
 
 The example below demonstrates how to change the Hybrid UI ActionSheet options dynamically on demand in Kendo UI.
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-title="Inbox" id="actionsheet-view">

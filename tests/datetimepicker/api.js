@@ -113,7 +113,7 @@
             datetimepicker.timeView.refresh();
             datetimepicker.value(value);
 
-            assert.isOk(datetimepicker.timeView.ul.find(".k-state-selected")[0]);
+            assert.isOk(datetimepicker.timeView.ul.find(".k-selected")[0]);
         });
 
         it("value method returns value of the datetimepicker", function() {
@@ -123,6 +123,24 @@
             datetimepicker.value(value);
 
             assert.equal(+datetimepicker.value(), +value);
+        });
+
+        it("value method should not clear DateInput format", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                dateInput: true
+            });
+            datetimepicker.value(null);
+            assert.isOk(datetimepicker.element.val());
+        });
+
+        it("value method should not clear DateInput format if initial value was provided", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                dateInput: true,
+                value: new Date()
+            });
+            datetimepicker.value(null);
+            assert.equal(datetimepicker.element.val(), "month/day/year hours:minutes AM/PM");
+            assert.isOk(datetimepicker.element.val());
         });
 
         it("value method sets null if date is out of range", function() {
@@ -210,10 +228,7 @@
 
             datetimepicker.enable(false);
 
-            var inputwrapper = datetimepicker.wrapper.children(":first");
-
-            assert.isOk(inputwrapper.hasClass("k-state-disabled"));
-            assert.isOk(!inputwrapper.hasClass("k-state-default"));
+            assert.isOk(datetimepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("enable method with true remove disabled attribute", function() {
@@ -231,8 +246,7 @@
             datetimepicker.enable(false);
             datetimepicker.enable(true);
 
-            assert.isOk(datetimepicker.wrapper.children(":first").hasClass("k-state-default"));
-            assert.isOk(!datetimepicker.wrapper.children(":first").hasClass("k-state-disabled"));
+            assert.isOk(!datetimepicker.wrapper.children(":first").hasClass("k-disabled"));
         });
 
         it("readonly() makes  input element readonly", function() {
@@ -280,8 +294,7 @@
 
             assert.equal(datetimepicker.element.attr("readonly"), "readonly");
             assert.equal(datetimepicker.element.attr("disabled"), undefined);
-            assert.isOk(datetimepicker._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!datetimepicker._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!datetimepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(false) removes readonly attribute and default class", function() {
@@ -292,8 +305,7 @@
 
             assert.equal(datetimepicker.element.attr("readonly"), undefined);
             assert.equal(datetimepicker.element.attr("disabled"), "disabled");
-            assert.isOk(!datetimepicker._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(datetimepicker._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(datetimepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("enable() enables widget after readonly()", function() {
@@ -304,8 +316,7 @@
 
             assert.equal(datetimepicker.element.attr("readonly"), undefined);
             assert.equal(datetimepicker.element.attr("disabled"), undefined);
-            assert.isOk(datetimepicker._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!datetimepicker._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!datetimepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("min method returns min value", function() {
@@ -399,7 +410,7 @@
 
             datetimepicker.max(new Date(2011, 11, 11, 16, 0, 0));
 
-            assert.equal(datetimepicker.timeView.ul.children(":last").html(), "11:30 PM");
+            assert.equal(datetimepicker.timeView.ul.children(":last").find("span").html(), "11:30 PM");
         });
 
         it("max method limits start hours if current value is equal to min", function() {
@@ -417,8 +428,8 @@
 
             var li = datetimepicker.timeView.ul.find("li");
 
-            assert.equal(li.first().html(), "10:00 AM");
-            assert.equal(li.last().html(), "11:30 PM");
+            assert.equal(li.first().find("span").html(), "10:00 AM");
+            assert.equal(li.last().find("span").html(), "11:30 PM");
         });
 
         it("max method rebinds list if min and max are in the same day", function() {
@@ -433,8 +444,8 @@
             var li = datetimepicker.timeView.ul.find("li");
 
             assert.equal(li.length, 3);
-            assert.equal(li.first().html(), "10:00 AM");
-            assert.equal(li.last().html(), "11:00 AM");
+            assert.equal(li.first().find("span").html(), "10:00 AM");
+            assert.equal(li.last().find("span").html(), "11:00 AM");
         });
 
         it("min method shows all hours in timeView if not edge date", function() {
@@ -446,8 +457,8 @@
 
             var ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "12:00 AM");
-            assert.equal(ul.children(":last").html(), "11:30 PM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "11:30 PM");
         });
 
         it("max method shows only hour from max date if current is edge", function() {
@@ -460,7 +471,7 @@
             var ul = datetimepicker.timeView.ul;
 
             assert.equal(ul.children().length, 1);
-            assert.equal(ul.children(":first").html(), "12:00 AM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
         });
 
         it("min method rebinds timeView to honor min value if current value is min", function() {
@@ -472,8 +483,8 @@
 
             var ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "10:00 AM");
-            assert.equal(ul.children(":last").html(), "11:30 PM");
+            assert.equal(ul.children(":first").find("span").html(), "10:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "11:30 PM");
         });
 
         it("max method rebinds timeView to honor max value if current value is max", function() {
@@ -485,8 +496,8 @@
 
             var ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "12:00 AM");
-            assert.equal(ul.children(":last").html(), "10:00 AM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "10:00 AM");
         });
 
         it("min method shows all hours if current value is null", function() {
@@ -496,8 +507,8 @@
 
             var ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "12:00 AM");
-            assert.equal(ul.children(":last").html(), "11:30 PM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "11:30 PM");
         });
 
         it("value method do not rebind timeView if date is not edge", function() {
@@ -520,8 +531,8 @@
 
             var ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "12:00 AM");
-            assert.equal(ul.children(":last").html(), "11:30 PM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "11:30 PM");
         });
 
         it("value method rebinds timeView if current is equal to max", function() {
@@ -534,8 +545,8 @@
 
             var ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "12:00 AM");
-            assert.equal(ul.children(":last").html(), "8:00 PM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "8:00 PM");
         });
 
         it("value method shows only one hour when max is midnight", function() {
@@ -549,7 +560,7 @@
             var ul = datetimepicker.timeView.ul;
 
             assert.equal(ul.children().length, 1);
-            assert.equal(ul.children(":first").html(), "12:00 AM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
         });
 
         it("value method shows all hours when set diff then edge", function() {
@@ -561,15 +572,15 @@
             var ul = datetimepicker.timeView.ul;
 
             assert.equal(ul.children().length, 1);
-            assert.equal(ul.children(":first").html(), "12:00 AM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
 
             //set value
             datetimepicker.value(new Date(2000, 10, 10));
 
             ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "12:00 AM");
-            assert.equal(ul.children(":last").html(), "11:30 PM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "11:30 PM");
         });
 
         it("value method do nothing if set to same value as current", function() {
@@ -606,7 +617,7 @@
             var ul = datetimepicker.timeView.ul;
 
             assert.equal(ul.children().length, 1);
-            assert.equal(ul.children(":first").html(), "12:00 AM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
         });
 
         it("value method should rebind timeView if select min after max was selected", function() {
@@ -620,16 +631,16 @@
 
             var ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "12:00 AM");
-            assert.equal(ul.children(":last").html(), "8:00 PM");
+            assert.equal(ul.children(":first").find("span").html(), "12:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "8:00 PM");
 
             //set value
             datetimepicker.value(new Date(2000, 10, 10, 10, 0, 0));
 
             ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "10:00 AM");
-            assert.equal(ul.children(":last").html(), "11:30 PM");
+            assert.equal(ul.children(":first").find("span").html(), "10:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "11:30 PM");
         });
 
         it("value method persist min and max range in timeview", function() {
@@ -643,8 +654,8 @@
 
             var ul = datetimepicker.timeView.ul;
 
-            assert.equal(ul.children(":first").html(), "10:00 AM");
-            assert.equal(ul.children(":last").html(), "8:00 PM");
+            assert.equal(ul.children(":first").find("span").html(), "10:00 AM");
+            assert.equal(ul.children(":last").find("span").html(), "8:00 PM");
         });
 
         it("value method updates input element when select max date", function() {
@@ -756,6 +767,19 @@
             assert.equal(timeView.calls("bind"), 1);
         });
 
+        it("setOptions updates the button size correctly", function() {
+            var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+            datetimepicker.setOptions({
+                size: "small"
+            });
+
+            assert.isOk(datetimepicker._dateIcon.hasClass("k-button-sm"));
+            assert.isNotOk(datetimepicker._dateIcon.hasClass("k-button-md"));
+            assert.isOk(datetimepicker._timeIcon.hasClass("k-button-sm"));
+            assert.isNotOk(datetimepicker._timeIcon.hasClass("k-button-md"));
+        });
+
         it("setOptions supports dynamically format change", function() {
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
             var timeView = datetimepicker.timeView;
@@ -766,7 +790,7 @@
 
             var first = timeView.ul.children().first();
 
-            assert.equal(first.html(), "00:00");
+            assert.equal(first.find("span").html(), "00:00");
         });
 
         it("setOptions method updates calendar options", function() {
@@ -901,6 +925,18 @@
             assert.equal(datetimepicker.dateView._current.getHours(), 0);
             assert.equal(datetimepicker.dateView._current.getMinutes(), 0);
             assert.equal(datetimepicker.dateView._current.getSeconds(), 0);
+        });
+
+        it("time is correctly selected when disabledDates are specified", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                value: new Date(2015,9,3),
+                disableDates: [new Date(2015,9,12), new Date(2015,9,22)]
+            });
+
+            datetimepicker.timeView.refresh();
+            datetimepicker.timeView.ul.find("li:eq(4)").trigger("click");
+
+            assert.equal(datetimepicker.element.val(), "10/3/2015 2:00 AM");
         });
     });
 }());

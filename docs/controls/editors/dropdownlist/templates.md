@@ -1,7 +1,7 @@
 ---
 title: Templates
-page_title: jQuery DropDownList Documentation | Templates | Kendo UI
-description: "Get started with the jQuery DropDownList by Kendo UI and learn how to customize its templates."
+page_title: jQuery DropDownList Documentation - Templates
+description: "Get started with the jQuery DropDownList by Kendo UI and learn how to customize its item, value, header, footer, and no-data templates."
 slug: templates_dropdownlist_widget
 position: 6
 ---
@@ -24,8 +24,7 @@ The DropDownList supports the following templates:
 
 The item template manages the way the list items of a DropDownList are rendered.
 
-###### Example
-
+```dojo
     <input id="dropdownlist" />
     <!-- Template -->
     <script id="scriptTemplate" type="text/x-kendo-template">
@@ -50,6 +49,7 @@ The item template manages the way the list items of a DropDownList are rendered.
             });
         });
     </script>
+```
 
 ## Value Templates
 
@@ -57,8 +57,7 @@ The value template manages the way the selected value of a DropDownList is rende
 
 > Value templates must consist of inline HTML elements only.
 
-###### Example
-
+```dojo
     <input id="dropdownlist" />
     <!-- Template -->
     <script id="valueTemplate" type="text/x-kendo-template">
@@ -83,13 +82,13 @@ The value template manages the way the selected value of a DropDownList is rende
             });
         });
     </script>
+```
 
 ## Header Templates
 
 The header template manages the way the popup header of a DropDownList is rendered.
 
-###### Example
-
+```dojo
     <input id="dropdownlist" />
     <!-- Template -->
     <script id="headerTemplate" type="text/x-kendo-template">
@@ -114,13 +113,13 @@ The header template manages the way the popup header of a DropDownList is render
             });
         });
     </script>
+```
 
 ## Footer Templates
 
 The footer template manages the way the popup footer of a DropDownList is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
-###### Example
-
+```dojo
     <input id="dropdownlist" />
     <!-- Template -->
     <script id="footerTemplate" type="text/x-kendo-template">
@@ -145,6 +144,7 @@ The footer template manages the way the popup footer of a DropDownList is render
             });
         });
     </script>
+```
 
 ## No-Data Templates
 
@@ -152,8 +152,7 @@ The DropDownList widget displays `noDataTemplate` in the popup when the data sou
 
 > When the `noDataTemplate` option is defined, the DropDownList always opens the popup element.
 
-###### Example
-
+```dojo
     <input id="dropDownList" />
     <!-- Template -->
     <script id="noDataTemplate" type="text/x-kendo-template">
@@ -178,6 +177,7 @@ The DropDownList widget displays `noDataTemplate` in the popup when the data sou
             });
         });
     </script>
+```
 
 ## See Also
 

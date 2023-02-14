@@ -11,7 +11,7 @@ Represents a path.
 
 ### data `String`
 
-The SVG Path data. The format follows the standard [SVG format](http://www.w3.org/TR/SVG/paths.html#PathData).
+The SVG Path data. The format follows the standard [SVG format](https://www.w3.org/TR/SVG/paths.html#PathData).
 
 #### Example
 
@@ -149,7 +149,7 @@ The color in any of the following formats.
 
 | Format         | Description
 | ---            | --- | ---
-| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| red            | [Basic](https://www.w3.org/TR/css3-color/#html4) or [Extended](https://www.w3.org/TR/css3-color/#svg-color) CSS Color name
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 
@@ -234,9 +234,52 @@ Defines the stroke configuration.
 
 Defines the line color of the path.
 
+#### Example - setting the stroke color
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          visual: function() {
+            var group = new kendo.dataviz.diagram.Group();
+            group.append(new kendo.dataviz.diagram.Path({
+              data: "M 80 0 C 100 0 100 0 100 20 L 100 80 C 100 100 100 100 80 100 L 20 100 C 0 100 0 100 0 80 L 0 20 C 0 0 0 0 20 0Z",
+              fill: "red",
+              stroke: {
+                color: "blue" // Stroke color
+              }
+            }));
+            return group;
+          }
+        }]
+      });
+    </script>
+
 ### stroke.width `Number`
 
 Defines the stroke width of the path.
+
+#### Example - setting the stroke width
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          visual: function() {
+            var group = new kendo.dataviz.diagram.Group();
+            group.append(new kendo.dataviz.diagram.Path({
+              data: "M 80 0 C 100 0 100 0 100 20 L 100 80 C 100 100 100 100 80 100 L 20 100 C 0 100 0 100 0 80 L 0 20 C 0 0 0 0 20 0Z",
+              fill: "red",
+              stroke: {
+                color: "blue",
+                width: 5 // Stroke width
+              }
+            }));
+            return group;
+          }
+        }]
+      });
+    </script>
 
 ### width `Number`
 

@@ -1,4 +1,4 @@
-(function(){
+(function() {
 
 var detect = kendo.support.detectOS;
 var detectBrowser = kendo.support.detectBrowser;
@@ -7,7 +7,7 @@ var sw = kendo.support.screenWidth;
 var sh = kendo.support.screenHeight;
 var span;
 
-describe("detect", function () {
+describe("detect", function() {
     afterEach(function() {
         kendo.support.screenWidth = sw;
         kendo.support.screenHeight = sh;

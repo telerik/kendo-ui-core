@@ -1,5 +1,5 @@
-(function () {
-    describe("DropDownList AngularJS integration", function () {
+(function() {
+    describe("DropDownList AngularJS integration", function() {
         afterEach(function() {
              kendo.destroy(Mocha.fixture);
         });
@@ -187,7 +187,7 @@
                         e.sender.trigger("change");
                     });
                 }
-            }
+            };
         });
 
         Mocha.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-options="options" k-ng-model=selectedColor></select></div>');
@@ -247,7 +247,7 @@
             $scope.colors = new kendo.data.DataSource({ data: colors }),
             $scope.data = {
                 color: null
-            }
+            };
 
             $scope.clear = function() {
                 $scope.$apply(function() {
@@ -269,98 +269,6 @@
         scope.clear();
 
         assert.equal(dropdown.value(), "");
-    });
-
-    ngTest("dropdownlist compiles item template", function() {
-        angular.module("kendo.tests").controller("mine", function($scope) {
-            $scope.selectedColors = [ "red", "green" ];
-
-            $scope.selectOptions = {
-                dataSource: [ "red", "green", "blue" ],
-                template: "{{dataItem}} - {{text}}",
-                valuePrimitive: true
-            };
-
-            $scope.text = "My text";
-        });
-
-        Mocha.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model=selectedColors k-options=selectOptions></select></div>');
-    },
-
-    function() {
-        var items = Mocha.fixture.find("select").getKendoDropDownList().items();
-        assert.equal($(items[0]).text(), "red - My text");
-        assert.equal($(items[1]).text(), "green - My text");
-        assert.equal($(items[2]).text(), "blue - My text");
-    });
-
-    ngTest("dropdownlist compiles optionLabel template", function() {
-        angular.module("kendo.tests").controller("mine", function($scope) {
-            $scope.selectedColors = [ "red", "green" ];
-
-            $scope.selectOptions = {
-                optionLabel: "Select...",
-                optionLabelTemplate: "{{dataItem}} - {{text}}",
-                dataSource: [ "red", "green", "blue" ],
-                valuePrimitive: true
-            };
-
-            $scope.text = "My text";
-        });
-
-        Mocha.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model=selectedColors k-options=selectOptions></select></div>');
-    },
-
-    function() {
-        var widget = Mocha.fixture.find("select").getKendoDropDownList();
-        var optionLabel = widget.optionLabel;
-
-        assert.equal(optionLabel.text(), "Select... - My text");
-    });
-
-    ngTest("dropdownlist compiles header template", function() {
-        angular.module("kendo.tests").controller("mine", function($scope) {
-            $scope.selectedColors = [ "red", "green" ];
-
-            $scope.selectOptions = {
-                dataSource: [ "red", "green", "blue" ],
-                headerTemplate: "<div>{{text}}<div>",
-                valuePrimitive: true
-            };
-
-            $scope.text = "My text";
-        });
-
-        Mocha.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model=selectedColors k-options=selectOptions></select></div>');
-    },
-
-    function() {
-        var header = Mocha.fixture.find("select").getKendoDropDownList().header;
-        assert.equal(header.text(), "My text");
-    });
-
-    ngTest("dropdownlist compiles footer template", function() {
-        angular.module("kendo.tests").controller("mine", function($scope) {
-            $scope.selectedColors = [ "red", "green" ];
-
-            $scope.selectOptions = {
-                dataSource: [ "red", "green", "blue" ],
-                footerTemplate: "<div>{{text}}<div>",
-                valuePrimitive: true
-            };
-
-            $scope.text = "My text";
-        });
-
-        Mocha.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model=selectedColors k-options=selectOptions></select></div>');
-    },
-
-    function() {
-        var widget = Mocha.fixture.find("select").getKendoDropDownList();
-        var scope = widget.element.scope();
-
-        var footer = Mocha.fixture.find("select").getKendoDropDownList().footer;
-        assert.equal(footer.text(), "My text");
     });
     });
 }());

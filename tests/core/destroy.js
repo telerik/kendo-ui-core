@@ -62,7 +62,7 @@
 
             kendo.ui.plugin(Foo);
 
-            var dom = $("<div><div/></div>").find("div").kendoFoo().end();
+            var dom = $("<div><div></div></div>").find("div").kendoFoo().end();
 
             kendo.destroy(dom);
 

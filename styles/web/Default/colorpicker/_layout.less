@@ -1,0 +1,355 @@
+// ColorPalette
+.k-colorpalette {
+    border-width: 0;
+    box-sizing: border-box;
+    outline: 0;
+    font-size: @colorpalette-font-size;
+    font-family: @colorpalette-font-family;
+    line-height: @colorpalette-line-height;
+    display: inline-flex;
+    position: relative;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.k-colorpalette-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    position: relative;
+}
+
+.k-colorpalette-tile {
+    width: @colorpalette-tile-width;
+    height: @colorpalette-tile-height;
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: pointer;
+    -ms-high-contrast-adjust: none;
+
+    &:hover,
+    &.k-state-hover,
+    &.k-hover {
+        position: relative;
+        z-index: 101;
+    }
+
+    &:focus,
+    &.k-state-focus,
+    &.k-focus,
+    &.k-state-selected,
+    &.k-selected,
+    &.k-state-selected:hover,
+    &.k-selected:hover {
+        position: relative;
+        z-index: 100;
+    }
+}
+
+// ColorGradient
+.k-colorgradient {
+    border-radius: @colorgradient-border-radius;
+    width: @colorgradient-width;
+    padding: @colorgradient-padding-y @colorgradient-padding-x;
+    border-style: solid;
+    border-width: @colorgradient-border-width;
+    box-sizing: border-box;
+    outline: 0;
+    font-size: @colorgradient-font-size;
+    font-family: @colorgradient-font-family;
+    line-height: @colorgradient-line-height;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: @colorgradient-gap;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.k-colorgradient-canvas {
+    gap: @colorgradient-canvas-gap;
+
+    .k-hsv-rectangle {
+        border-radius: @colorgradient-canvas-border-radius;
+        position: relative;
+        flex: 1 1 auto;
+        user-select: none;
+        -ms-touch-action: pinch-zoom double-tap-zoom;
+    }
+
+    .k-hsv-gradient {
+        border-radius: @colorgradient-canvas-border-radius;
+        height: @colorgradient-canvas-rectangle-height;
+    }
+
+    .k-hsv-draghandle {
+        margin-top: @colorgradient-canvas-draghandle-margin-y;
+        margin-left: @colorgradient-canvas-draghandle-margin-x;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 10;
+        cursor: pointer;
+    }
+
+    .k-hsv-controls {
+        position: relative;
+        flex-shrink: 0;
+        gap: @colorgradient-canvas-gap;
+    }
+}
+
+.k-colorgradient .k-draghandle {
+    border-radius: @colorgradient-draghandle-border-radius;
+    width: @colorgradient-draghandle-width;
+    height: @colorgradient-draghandle-height;
+    border-width: @colorgradient-draghandle-border-width;
+    border-style: solid;
+    box-sizing: border-box;
+}
+
+.k-colorgradient-slider {
+
+    &.k-slider-vertical {
+        width: @colorgradient-slider-track-size;
+        height: @colorgradient-slider-vertical-size;
+        flex: 0 0 @colorgradient-slider-track-size;
+    }
+    &.k-slider-vertical .k-slider-track {
+        width: @colorgradient-slider-track-size;
+        border-radius: @colorgradient-slider-border-radius;
+        margin-left: -(@colorgradient-slider-track-size / 2);
+    }
+    &.k-slider-vertical .k-draghandle {
+        width: @colorgradient-draghandle-width;
+        height: @colorgradient-draghandle-height;
+    }
+
+    &.k-slider-horizontal {
+        width: @colorgradient-slider-horizontal-size;
+        height: @colorgradient-slider-track-size;
+        flex: 0 0 @colorgradient-slider-track-size;
+    }
+    &.k-slider-horizontal .k-slider-track {
+        height: @colorgradient-slider-track-size;
+        border-radius: @colorgradient-slider-border-radius;
+        margin-top: -(@colorgradient-slider-track-size / 2);
+    }
+
+    &.k-alpha-slider .k-slider-track::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 10px;
+        position: relative;
+        z-index: -1;
+    }
+
+    .k-slider-wrap,
+    .k-slider-track-wrap {
+        z-index: 1;
+        position: relative;
+    }
+
+    .k-slider-wrap > .k-slider-track {
+        height: @colorgradient-slider-vertical-size;
+    }
+
+    .k-slider-selection {
+        display: none;
+    }
+
+    .k-draghandle {
+        border-width: @colorgradient-slider-draghandle-border-width;
+    }
+}
+
+.k-colorgradient-inputs {
+    gap: @colorgradient-input-gap;
+
+    .k-colorgradient-input-label {
+        text-transform: uppercase;
+    }
+
+    > .k-vstack {
+        gap: @colorgradient-input-label-gap;
+    }
+
+    .k-numerictextbox {
+        width: @colorgradient-input-width;
+    }
+
+    .k-textbox {
+        width: 100%;
+    }
+}
+
+.k-colorgradient-color-contrast {
+
+    > div {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: @colorgradient-contrast-spacer;
+    }
+
+    .k-contrast-ratio {
+        margin-bottom: @colorgradient-contrast-spacer;
+    }
+
+    .k-contrast-ratio-text {
+        font-weight: @colorgradient-contrast-ratio-font-weight;
+    }
+
+    .k-contrast-validation {
+        display: inline-flex;
+        align-items: center;
+        gap: ( @colorgradient-contrast-spacer / 2 );
+
+        .k-icon {
+            vertical-align: middle;
+        }
+
+        // Needed for the double check icons
+        .k-i-check + .k-i-check {
+            margin-left: -13px;
+        }
+    }
+}
+
+.k-rtl,
+[dir="rtl"] {
+
+    .k-colorgradient-color-contrast .k-i-check + .k-i-check {
+        margin-left: 0;
+        margin-right: -13px;
+    }
+
+}
+
+// Color Preview
+.k-color-preview {
+    width: 100%;
+    height: 100%;
+    border-width: @color-preview-border-width;
+    border-radius: @color-preview-border-radius;
+    border-style: solid;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+// Current Color
+.k-coloreditor-current-color {
+    cursor: pointer;
+}
+
+// Icon color preview
+.k-icon-color-preview {
+    border-width: 0;
+    border-radius: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    .k-color-preview-mask {
+        width: ~"calc( @{icon-size} - 2px )";
+        height: 2px;
+    }
+}
+
+// Color Preview Mask
+.k-color-preview-mask {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.k-color-preview-mask::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+
+// ColorEditor/FlatColorPicker
+ .k-coloreditor {
+    border-radius: @coloreditor-border-radius;
+    min-width: @coloreditor-min-width;
+    border-width: @coloreditor-border-width;
+    border-style: solid;
+    box-sizing: border-box;
+    outline: 0;
+    font-size: @coloreditor-font-size;
+    font-family: @coloreditor-font-family;
+    line-height: @coloreditor-line-height;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.k-coloreditor-header {
+    padding: @coloreditor-header-padding-y @coloreditor-header-padding-x 0;
+}
+
+.k-coloreditor-header-actions {
+    gap: @coloreditor-header-actions-gap;
+}
+
+.k-coloreditor-preview {
+    position: relative;
+    gap: @coloreditor-preview-gap;
+    z-index: 1;
+}
+.k-coloreditor-preview .k-color-preview {
+    width: @coloreditor-color-preview-width;
+    height: @coloreditor-color-preview-height;
+}
+
+.k-coloreditor-views {
+    min-width: calc( var(--kendo-color-preview-width, 24px) * var(--kendo-color-preview-columns, 10) );
+    padding: @coloreditor-views-padding-y @coloreditor-views-padding-x;
+    gap: @coloreditor-views-gap;
+
+    .k-colorgradient {
+        padding: 0;
+        width: auto;
+        border-width: 0;
+    }
+
+    .k-colorpalette {
+        align-self: center;
+    }
+
+    .k-colorpalette-tile {
+        width: var(--kendo-color-preview-width, @colorpalette-tile-width);
+        height: var(--kendo-color-preview-height, @colorpalette-tile-height);
+    }
+}
+
+.k-coloreditor-footer.k-actions {
+    margin: 0;
+}
+
+// Colorpicker
+.k-colorpicker {
+    width: min-content;
+}
+
+.k-colorpicker-popup .k-coloreditor {
+    border-color: transparent;
+}
+
+.k-colorpicker-popup {
+    padding: 0;
+}
+

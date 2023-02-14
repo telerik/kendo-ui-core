@@ -2,7 +2,7 @@
 title: Parent Containers Continue to Scroll When the Last Grid Record Is Reached
 description: When the last Grid record is reached, the parent container continues to scroll.
 type: troubleshooting
-page_title: Cannot Prevent the Propagation of Scrolling | Kendo UI Grid
+page_title: Cannot Prevent the Propagation of Scrolling - Kendo UI Grid for jQuery
 slug: grid-prevent-scrolling-for-parent-containers
 tags: grid, scroll, scrollbar, vertical
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>
@@ -29,7 +29,6 @@ I have a scrollable Grid which is placed within a scrollable container. When I r
 ## Solution
 
 1. Handle the `scroll` event of the scrollable container of the Grid.
-
 1. Conditionally prevent the scrolling when the scroll position is either at the top or at the bottom of the Grid.
 
 ```dojo

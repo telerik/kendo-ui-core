@@ -5,14 +5,7 @@
         beforeEach(function() {
             window.multiSelectDataBound = function() {
                 assert.isOk(true);
-            }
-
-            Mocha.fixture.html('<script id="template" type="text/x-kendo-template"> \
-               <strong>#:text#</strong> \
-            </script> \
-            <script id="template-with-attributes" type="text/x-kendo-template"> \
-                <strong data-bind="text:text"></strong> \
-            </script>');
+            };
         });
 
         afterEach(function() {
@@ -353,7 +346,7 @@
             kendo.bind(dom, observable);
 
             var widget = dom.data("kendoMultiSelect");
-            var tags = widget.tagList.children();
+            var tags = widget.tagList.children(".k-chip");
 
             assert.equal(widget.dataSource.view().length, 1);
 
@@ -374,7 +367,7 @@
             kendo.bind(dom, observable);
 
             var widget = dom.data("kendoMultiSelect");
-            var tags = widget.tagList.children();
+            var tags = widget.tagList.children(".k-chip");
 
             assert.equal(widget.dataSource.view().length, 2);
 
@@ -427,49 +420,6 @@
 
             assert.equal(values.length, 1);
             assert.equal(values[0], "bar");
-        });
-
-        it("binding template", function() {
-            dom = $('<select data-item-template="template" data-role="multiselect" data-bind="source:items" />');
-
-            var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
-
-            kendo.bind(dom, observable);
-
-            assert.equal($.trim(dom.data("kendoMultiSelect").ul.children().eq(0).html()), "<strong>foo</strong>");
-        });
-
-        it("binding template containing binding attributes", function() {
-            dom = $('<select data-role="multiselect" data-item-template="template-with-attributes" data-bind="source:items" />');
-
-            var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
-
-            kendo.bind(dom, observable);
-
-            assert.equal($.trim(dom.data("kendoMultiSelect").ul.children().eq(0).html()), '<strong data-bind="text:text">foo</strong>');
-        });
-
-        it("updating an item from the data source updates the corresponding multiselect item", function() {
-            dom = $('<select data-role="multiselect" data-item-template="template-with-attributes" data-bind="source:items" />');
-
-            var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
-
-            kendo.bind(dom, observable);
-
-            observable.items[0].set("text", "baz");
-
-            assert.equal($.trim(dom.data("kendoMultiSelect").ul.children().eq(0).text()), "baz");
-        });
-
-        it("destroying binding targets when the datasource changes", function() {
-            dom = $('<select data-role="multiselect" data-item-template="template-with-attributes" data-bind="source:items" />');
-
-            var observable = kendo.observable({ items: [{ text: "foo" }] });
-
-            kendo.bind(dom, observable);
-            dom.data("kendoMultiSelect").refresh();
-
-            assert.equal(observable.items[0]._events["change"].length, 2); //1 for the text binding and 1 for the ObservableArray
         });
 
         it("removing items from the model updates the UI", function() {
@@ -724,8 +674,8 @@
 
             assert.strictEqual(multiselect.dataSource, dataSource);
 
-            assert.equal($.trim(multiselect.ul.children().eq(0).text()), "foo");
-            assert.equal($.trim(multiselect.ul.children().eq(1).text()), "bar");
+            assert.equal(multiselect.ul.children().eq(0).text().trim(), "foo");
+            assert.equal(multiselect.ul.children().eq(1).text().trim(), "bar");
         });
 
         it("Support for binding to ObservableArray of not ObservableObjects", function() {

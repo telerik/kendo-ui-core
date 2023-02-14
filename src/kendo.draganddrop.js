@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.core", "./kendo.userevents" ], f);
-})(function(){
+import "./kendo.core.js";
+import "./kendo.userevents.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "draganddrop",
     name: "Drag & drop",
     category: "framework",
@@ -10,7 +9,7 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core", "userevents" ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
         document = window.document,
@@ -19,7 +18,6 @@ var __meta__ = { // jshint ignore:line
         Widget = kendo.ui.Widget,
         Observable = kendo.Observable,
         UserEvents = kendo.UserEvents,
-        proxy = $.proxy,
         extend = $.extend,
         getOffset = kendo.getOffset,
         draggables = {},
@@ -109,17 +107,17 @@ var __meta__ = { // jshint ignore:line
 
             if (domElement.addEventListener) {
                 $.each(kendo.eventMap.down.split(" "), function() {
-                    domElement.addEventListener(this, proxy(that._press, that), true);
+                    domElement.addEventListener(this, that._press.bind(that), true);
                 });
                 $.each(kendo.eventMap.up.split(" "), function() {
-                    domElement.addEventListener(this, proxy(that._release, that), true);
+                    domElement.addEventListener(this, that._release.bind(that), true);
                 });
             } else {
                 $.each(kendo.eventMap.down.split(" "), function() {
-                    domElement.attachEvent(this, proxy(that._press, that));
+                    domElement.attachEvent(this, that._press.bind(that));
                 });
                 $.each(kendo.eventMap.up.split(" "), function() {
-                    domElement.attachEvent(this, proxy(that._release, that));
+                    domElement.attachEvent(this, that._release.bind(that));
                 });
             }
 
@@ -245,8 +243,8 @@ var __meta__ = { // jshint ignore:line
 
             Observable.fn.init.call(that);
 
-            that.x = new PaneDimension(extend({horizontal: true}, options));
-            that.y = new PaneDimension(extend({horizontal: false}, options));
+            that.x = new PaneDimension(extend({ horizontal: true }, options));
+            that.y = new PaneDimension(extend({ horizontal: false }, options));
             that.container = options.container;
             that.forcedMinScale = options.minScale;
             that.maxScale = options.maxScale || 100;
@@ -315,7 +313,7 @@ var __meta__ = { // jshint ignore:line
                 resistance,
                 movable;
 
-            extend(that, {elastic: true}, options);
+            extend(that, { elastic: true }, options);
 
             resistance = that.elastic ? 0.5 : 0;
             movable = that.movable;
@@ -412,11 +410,11 @@ var __meta__ = { // jshint ignore:line
 
     if (support.hasHW3D) {
         translate = function(x, y, scale) {
-            return "translate3d(" + x + "px," + y +"px,0) scale(" + scale + ")";
+            return "translate3d(" + x + "px," + y + "px,0) scale(" + scale + ")";
         };
     } else {
         translate = function(x, y, scale) {
-            return "translate(" + x + "px," + y +"px) scale(" + scale + ")";
+            return "translate(" + x + "px," + y + "px) scale(" + scale + ")";
         };
     }
 
@@ -621,7 +619,7 @@ var __meta__ = { // jshint ignore:line
     });
 
     var Draggable = Widget.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
@@ -633,16 +631,20 @@ var __meta__ = { // jshint ignore:line
                 allowSelection: true,
                 filter: that.options.filter,
                 threshold: that.options.distance,
-                start: proxy(that._start, that),
-                hold: proxy(that._hold, that),
-                move: proxy(that._drag, that),
-                end: proxy(that._end, that),
-                cancel: proxy(that._cancel, that),
-                select: proxy(that._select, that)
+                start: that._start.bind(that),
+                hold: that._hold.bind(that),
+                move: that._drag.bind(that),
+                end: that._end.bind(that),
+                cancel: that._cancel.bind(that),
+                select: that._select.bind(that)
             });
 
-            that._afterEndHandler = proxy(that._afterEnd, that);
-            that._captureEscape = proxy(that._captureEscape, that);
+            if (kendo.support.touch) {
+                that.element.find(that.options.filter).css('touch-action', 'none');
+            }
+
+            that._afterEndHandler = that._afterEnd.bind(that);
+            that._captureEscape = that._captureEscape.bind(that);
         },
 
         events: [
@@ -725,7 +727,7 @@ var __meta__ = { // jshint ignore:line
         _start: function(e) {
             var that = this,
                 options = that.options,
-                container = options.container ? $(options.container): null,
+                container = options.container ? $(options.container) : null,
                 hint = options.hint;
 
             if (this._shouldIgnoreTarget(e.touch.initialTouch) || (options.holdToDrag && !that._activated)) {
@@ -754,7 +756,7 @@ var __meta__ = { // jshint ignore:line
                 })
                 .appendTo(document.body);
 
-                that.angular("compile", function(){
+                that.angular("compile", function() {
                     that.hint.removeAttr("ng-repeat");
                     var scopeTarget = $(e.target);
 
@@ -790,7 +792,7 @@ var __meta__ = { // jshint ignore:line
         _hold: function(e) {
             this.currentTarget = e.target;
 
-            if (this.options.holdToDrag && this._trigger(HOLD, e)) {
+            if (this._trigger(HOLD, e)) {
                 this.userEvents.cancel();
             } else {
                 this._activated = true;
@@ -822,8 +824,8 @@ var __meta__ = { // jshint ignore:line
                     if (velocity.y === 0 && velocity.x === 0) {
                         clearInterval(this._scrollInterval);
                         this._scrollInterval = null;
-                    } else if(!this._scrollInterval) {
-                        this._scrollInterval = setInterval($.proxy(this, "_autoScroll"), 50);
+                    } else if (!this._scrollInterval) {
+                        this._scrollInterval = setInterval(this._autoScroll.bind(this), 50);
                     }
                 }
             }
@@ -890,10 +892,14 @@ var __meta__ = { // jshint ignore:line
 
             if (yInBounds) {
                 parent.scrollTop += velocity.y;
+            } else if (yIsScrollable && yDelta < 0) {
+                parent.scrollTop = 0;
             }
 
             if (xInBounds) {
                 parent.scrollLeft += velocity.x;
+            } else if (xIsScrollable && xDelta < 0) {
+                parent.scrollLeft = 0;
             }
 
             if (this.hint && isRootNode && (xInBounds || yInBounds)) {
@@ -917,6 +923,8 @@ var __meta__ = { // jshint ignore:line
                 }
             });
 
+            clearInterval(this._scrollInterval);
+            this._scrollInterval = null;
             this._cancel(this._trigger(DRAGEND, e));
         },
 
@@ -1058,7 +1066,7 @@ var __meta__ = { // jshint ignore:line
         } else {
             offset = element.offset();
             offset.bottom = offset.top + element.height();
-            offset.right =  offset.left + element.width();
+            offset.right = offset.left + element.width();
             return offset;
         }
     }
@@ -1116,6 +1124,3 @@ var __meta__ = { // jshint ignore:line
 
  })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

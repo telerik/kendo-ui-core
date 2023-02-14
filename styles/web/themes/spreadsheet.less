@@ -48,6 +48,10 @@
         background-color: @background;
     }
 
+    .k-spreadsheet-disabled-mask {
+        background-color: @background;
+    }
+
     .k-selection-partial,
     .k-selection-full {
         border-color: @spreadsheet-selection-background;
@@ -73,10 +77,6 @@
 .k-spreadsheet-selection {
     border-color: @spreadsheet-selection-border;
     box-shadow: inset 0 0 0 1px @spreadsheet-selection-border;
-}
-
-.k-auto-fill-wrapper .k-tooltip {
-    background: @widget-background-color;
 }
 
 .k-spreadsheet-selection {
@@ -114,7 +114,7 @@
             border-color: @spreadsheet-header-border;
         }
 
-        .k-spreadsheet-formula-bar::before {
+        .k-spreadsheet-formula-bar > .k-i-formula-fx {
             border-color: @spreadsheet-header-border;
         }
     }
@@ -147,6 +147,20 @@
     .k-single-selection.k-dim-auto-fill-handle::after {
         background-color: fadeout(@spreadsheet-selection-border, 50%);
     }
+
+    .k-spreadsheet-cell-comment {
+        color: @tooltip-text;
+        background-color: @tooltip-bg;
+        border-color: @tooltip-border;
+    }
+
+    .k-spreadsheet-has-comment:after {
+        border-color: @spreadsheet-selection-border @spreadsheet-selection-border transparent transparent;
+    }
+
+    .k-dirty {
+        border-color: @input-validation-error transparent transparent @input-validation-error;
+    }
 }
 
 .k-spreadsheet-format-cells .k-spreadsheet-preview {
@@ -159,7 +173,8 @@
 
     box-shadow: inset 0 0 0 1px @spreadsheet-cell-border;
 
-    &.k-state-active {
+    &.k-state-active,
+    &.k-active {
         color: @selected-text-color;
         background-color: @selected-background;
     }
@@ -173,40 +188,15 @@
 
 .k-action-window .k-action-buttons {
     border-color: @widget-border-color;
-    background: @header-background-color;
+    background: @footer-background-color;
 }
 
 .k-spreadsheet-sample {
     color: lighten(@normal-text-color, 30%);
 
-    .k-state-selected & {
+    .k-state-selected,
+    .k-selected & {
         color: inherit;
-    }
-}
-
-.k-spreadsheet-window .k-list {
-    border-color: @widget-border-color;
-    border-radius: @border-radius;
-}
-
-.k-spreadsheet-toolbar {
-
-    &.k-toolbar .k-button-group .k-button:not(.k-toggle-button) {
-        border-radius: @border-radius;
-    }
-
-    > .k-widget,
-    > .k-button,
-    > .k-button-group {
-        border-radius: @border-radius;
-    }
-
-    > .k-separator {
-        border-color: @widget-border-color;
-    }
-
-    .k-overflow-anchor {
-        border-radius: 0;
     }
 }
 
@@ -217,15 +207,8 @@
         background-color: @widget-border-color;
     }
 
-    .k-button {
-        background-color: transparent;
-
-        &:hover {
-            background-color: @hover-background;
-        }
-    }
-
-    .k-state-active {
+    .k-state-active,
+    .k-active {
         background-color: @selected-background;
         color: contrast(@selected-text-color);
 
@@ -267,27 +250,27 @@
 
 .k-series-b {
     border-color: @series-b;
-    background-color: fade(@series-b, 15%);;
+    background-color: fade(@series-b, 15%);
 }
 
 .k-series-c {
     border-color: @series-c;
-    background-color: fade(@series-c, 15%);;
+    background-color: fade(@series-c, 15%);
 }
 
 .k-series-d {
     border-color: @series-d;
-    background-color: fade(@series-d, 15%);;
+    background-color: fade(@series-d, 15%);
 }
 
 .k-series-e {
     border-color: @series-e;
-    background-color: fade(@series-e, 15%);;
+    background-color: fade(@series-e, 15%);
 }
 
 .k-series-f {
     border-color: @series-f;
-    background-color: fade(@series-f, 15%);;
+    background-color: fade(@series-f, 15%);
 }
 
 
@@ -296,8 +279,59 @@
 }
 
 .k-spreadsheet-formula-list {
-    .k-state-focused {
+    .k-state-focused,
+    .k-focus {
         background-color: @selected-background;
         color: @selected-text-color;
+    }
+}
+
+
+// Images
+.k-spreadsheet-insert-image-dialog {
+    border-color: @widget-border-color;
+    border-radius: @border-radius;
+
+    .k-spreadsheet-has-image {
+        &:hover,
+        &.k-state-hovered,
+        &.k-hover {
+            box-shadow: @spreadsheet-insert-image-dialog-preview-overlay;
+            border-radius: @border-radius;
+        }
+
+        &:hover div,
+        &.k-state-hovered div,
+        &.k-hover div {
+            color: @spreadsheet-insert-image-dialog-hovered-text;
+        }
+    }
+}
+
+.k-spreadsheet-drawing {
+    &.k-spreadsheet-active-drawing {
+        outline-color: @spreadsheet-drawing-handle-outline;
+    }
+
+    .k-spreadsheet-drawing-handle {
+        border-color: @spreadsheet-drawing-handle-border-color;
+        background-color: @spreadsheet-drawing-handle-bg;
+        border-radius: @spreadsheet-drawing-handle-border-radius;
+    }
+}
+
+.k-spreadsheet-drawing-anchor-cell {
+    background: @spreadsheet-drawing-anchor-bg;
+}
+
+
+// RTL
+.k-rtl .k-spreadsheet {
+    .k-spreadsheet-has-comment::after {
+        border-color: @spreadsheet-selection-border transparent transparent @spreadsheet-selection-border;
+    }
+
+    .k-dirty {
+        border-color: @input-validation-error @input-validation-error transparent transparent;
     }
 }

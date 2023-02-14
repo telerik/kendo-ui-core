@@ -1,8 +1,8 @@
 ---
-title: Make Toolbar Commands Respond on Mousedown Event
-description: An example on how to create custom commands that look like the original create, save, and cancel commands but respond to the jQuery Mousedown event in the Kendo UI Grid.
+title: Make Toolbar Commands Respond on mousedown Event
+description: Learn how to create custom commands that look like the original create, save, and cancel commands but respond to the jQuery Mousedown event in the Kendo UI Grid.
 type: how-to
-page_title: Fire Events on Mousedown by Creating Custom Toolbar Commands | Kendo UI Grid
+page_title: Fire Events on mousedown by Creating Custom Toolbar Commands - Kendo UI Grid for jQuery
 slug: grid-custom-command-mousedown-toolbar
 tags: grid, command, toolbar, mousedown, create, save, cancel
 ticketid: 1134663
@@ -11,13 +11,14 @@ component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2017.3.1018 version</td>
  </tr>
 </table>

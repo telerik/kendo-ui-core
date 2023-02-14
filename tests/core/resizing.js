@@ -81,7 +81,7 @@
             widget._resize = function(size) {
                 assert.equal(size.width, 500);
                 assert.equal(size.height, 400);
-            }
+            };
 
             widget.resize();
         });
@@ -89,7 +89,7 @@
         it("resize caches the size value and ignores subsequent calls", function() {
             widget._resize = function(size) {
                 assert.isOk(true);
-            }
+            };
 
             widget.resize();
             widget.resize();
@@ -107,7 +107,7 @@
         it("changing dimensions invalidates the caching", function() {
             widget._resize = function(size) {
                 assert.isOk(true);
-            }
+            };
 
             widget.resize();
             div.css({ width: "90%", height: "90%" });
@@ -163,7 +163,7 @@
         it("resize passes force value to widget's internal _resize method", function() {
             widget._resize = function(size, force) {
                 assert.isOk(force);
-            }
+            };
 
             widget.resize(true);
         });

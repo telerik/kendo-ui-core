@@ -3,7 +3,7 @@
 var ComboBox = kendo.ui.ComboBox,
     input;
 
-describe("kendo.ui.ComboBox placeholder", function () {
+describe("kendo.ui.ComboBox placeholder", function() {
     beforeEach(function() {
         input = $("<input />").appendTo(Mocha.fixture);
     });
@@ -42,7 +42,7 @@ if (!kendo.support.placeholder) {
         var combo = input.kendoComboBox({
             dataTextField: "text",
             dataValueField: "value",
-            dataSource: [{text: 1, value: 1}],
+            dataSource: [{ text: 1, value: 1 }],
             placeholder: "Select...",
             index: 0
         }).data("kendoComboBox");
@@ -59,7 +59,7 @@ if (!kendo.support.placeholder) {
         var combo = input.kendoComboBox({
             dataTextField: "text",
             dataValueField: "value",
-            dataSource: [{text: 1, value: 1}],
+            dataSource: [{ text: 1, value: 1 }],
             placeholder: "Select...",
             index: 0
         }).data("kendoComboBox");

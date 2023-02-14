@@ -1,13 +1,13 @@
 ---
-title: Basics
-page_title: jQuery Grid Documentation | Scrolling Basics | Kendo UI
+title: Overview
+page_title: jQuery Grid Documentation - Scrolling Overview
 description: "Get started with the jQuery Grid by Kendo UI and learn how to configure the scrolling functionality of the widget."
 previous_url: /appearance/scrolling/overview, /appearance/scrolling/virtual-scrolling, /appearance/scrolling/endless-scrolling
 slug: scrolling_kendoui_grid_widget
 position: 1
 ---
 
-# Scrolling Basics
+# Scrolling Overview
 
 By default, the scrolling functionality of the Grid is enabled.
 
@@ -24,9 +24,7 @@ Depending on the enabled scroll mode, the rendering of the dimensions and layout
 
 ## Getting Started  
 
-When scrolling is enabled, the widget renders two tables by default&mdash;one for the header area and one for the scrollable data area. The two tables are important when you need to manually make JavaScript or CSS updates to the Grid tables.
-
-###### Example
+When scrolling is enabled, the component renders two tables by default&mdash;one for the header area and one for the scrollable data area. The two tables are important when you need to manually make JavaScript or CSS updates to the Grid tables.
 
     <div class="k-widget k-grid">
         <div class="k-grid-header">
@@ -40,8 +38,6 @@ When scrolling is enabled, the widget renders two tables by default&mdash;one fo
     </div>
 
 The following example demonstrates the HTML output in a Grid with virtual scrolling. For more information, refer to the article on [on virtual scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}).
-
-###### Example
 
     <div class="k-widget k-grid">
         <div class="k-grid-header">
@@ -59,8 +55,6 @@ The following example demonstrates the HTML output in a Grid with virtual scroll
 
 However, to achieve a maximum level of accessibility through assistive technologies, disable the scrolling feature of the Grid. To disable scrolling, set the `scrollable` option to `false`.
 
-###### Example
-
     $("#grid").kendoGrid({
         scrollable: false,
         // other configuration
@@ -72,9 +66,7 @@ By default, the Grid does not display scrollbars when scrolling is enabled. To r
 * To achieve vertical scrolling, set the height of the Grid. Otherwise, it will expand vertically to show all rows.
 * To achieve horizontal scrolling, explicitly define the width of all columns in pixels and make sure their sum exceeds the width of the Grid.
 
-When scrolling is enabled, the vertical scrollbar of the Grid is always visible even if not needed which simplifies the implementation and improves the performance of the widget. To remove the vertical scrollbar, use CSS rules and make sure that neither the Grid nor its data area apply fixed heights so that they are able to shrink and expand according to the number of table rows. In the following example, the `#GridID` allows the application of styles only to a particular Grid instance. To use these styles in all Grid instances, replace the `ID` with the `.k-grid` CSS class. For a complete example on showing and hiding the scrollbar depending on the number of Grid rows, refer to [this example]({% slug howto_hide_vertical_scrollbar_grid %}).
-
-###### Example
+When scrolling is enabled, the vertical scrollbar of the Grid is always visible even if not needed which simplifies the implementation and improves the performance of the component. To remove the vertical scrollbar, use CSS rules and make sure that neither the Grid nor its data area apply fixed heights so that they are able to shrink and expand according to the number of table rows. In the following example, the `#GridID` allows the application of styles only to a particular Grid instance. To use these styles in all Grid instances, replace the `ID` with the `.k-grid` CSS class. For a complete example on showing and hiding the scrollbar depending on the number of Grid rows, refer to [this example]({% slug howto_hide_vertical_scrollbar_grid %}).
 
     #GridID .k-grid-header
     {
@@ -88,14 +80,12 @@ When scrolling is enabled, the vertical scrollbar of the Grid is always visible 
 
 ## Restoring the Scroll Position
 
-In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. To prevent the restoration of the scroll position:
+In some scenarios, the scroll position of the Grid might be reset when the component is rebound. To prevent the restoration of the scroll position:
 
 1. Save the scroll position in the [`dataBinding`](/api/javascript/ui/grid/events/databinding) event.
 1. Restore the scroll position in the [`databound`](/api/javascript/ui/grid/events/databound) event.
 
-The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
-
-###### Example
+The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the component [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 
     $(function () {
         // Initialize the variable which will hold the scroll positions.
@@ -132,13 +122,11 @@ When a web page is zoomed, the browser changes the content size of all pages exc
 
 > If the Grid is in the right-to-left (RTL) mode, use the `"padding-left"` instead of the `"padding-right"` configuration.
 
-###### Example
-
     var grid = $('#GridID').data('kendoGrid');
     grid.thead.closest(".k-grid-header").css("padding-right", kendo.support.scrollbar(true));
 
 ## See Also
 
 * [Scrolling Grids with Locked Columns (Demo)](https://demos.telerik.com/kendo-ui/grid/frozen-columns)
-* [Kendo UI Knowledge Base](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [Knowledge Base Section](/knowledge-base)

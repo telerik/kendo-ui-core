@@ -63,7 +63,7 @@ Plays the effect
 
 #### Returns
 
-`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/).
+`Promise` a [jQuery promise instance](https://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](https://api.jquery.com/jQuery.when/).
 
 #### Example
 
@@ -73,6 +73,7 @@ Plays the effect
 
     <script>
         kendo.fx($("#foo")).fadeOut().play().then(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Foo faded out");
         });
     </script>
@@ -83,7 +84,7 @@ Plays the effect in reverse.
 
 #### Returns
 
-`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/).
+`Promise` a [jQuery promise instance](https://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](https://api.jquery.com/jQuery.when/).
 
 #### Example
 
@@ -93,6 +94,7 @@ Plays the effect in reverse.
 
     <script>
         kendo.fx($("#foo")).fadeOut().reverse().then(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Foo faded out");
         });
     </script>

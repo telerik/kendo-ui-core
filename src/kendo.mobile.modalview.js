@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.mobile.shim", "./kendo.mobile.view" ], f);
-})(function(){
+import "./kendo.mobile.shim.js";
+import "./kendo.mobile.view.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.modalview",
     name: "ModalView",
     category: "mobile",
@@ -19,7 +18,7 @@ var __meta__ = { // jshint ignore:line
         OPEN = "open",
         CLOSE = "close",
         INIT = "init",
-        WRAP = '<div class="km-modalview-wrapper" />';
+        WRAP = '<div class="km-modalview-wrapper"></div>';
 
     var ModalView = ui.View.extend({
         init: function(element, options) {
@@ -126,6 +125,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(ModalView);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -487,6 +488,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "todo o dia",
   "date": "Data",
   "event": "Evento",
+  "search": "Pesquisa...",
   "time": "Hora",
   "showFullDay": "Mostrar dia completo",
   "showWorkDay": "Mostrar horário de trabalho",
@@ -524,7 +526,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "allDayEvent": "Evento todo o dia",
     "description": "Descrição",
     "repeat": "Repetição",
-    "timezone": " ",
+    "timezone": "Fuso Horário",
     "startTimezone": "Início do fuso horário",
     "endTimezone": "Fim do fuso horário",
     "separateTimezones": "Usar fusos horários de início e fim separados",
@@ -589,7 +591,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Alinhamento de texto",
     "buttons": {
-     "justtifyLeft": "Alinhar à esquerda",
+     "justifyLeft": "Alinhar à esquerda",
      "justifyCenter": "Centro",
      "justifyRight": "Alinhar à direita",
      "justifyFull": "Justificar",
@@ -727,10 +729,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Texto termina com"
     },
     "date": {
-      "eq":  "Data é",
+      "eq": "Data é",
       "neq": "Data não é",
-      "lt":  "Data é anterior",
-      "gt":  "Data é posterior"
+      "lt": "Data é anterior",
+      "gt": "Data é posterior"
     },
     "number": {
       "eq": "É igual a",
@@ -753,7 +755,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Adicionar linha abaixo",
   "alignment": "Alinhmento",
   "alignmentButtons": {
-    "justtifyLeft": "Alinhar à esquerda",
+    "justifyLeft": "Alinhar à esquerda",
     "justifyCenter": "Centrar",
     "justifyRight": "Alinhar à direita",
     "justifyFull": "Justificar",
@@ -890,7 +892,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Selecionar ficheiros...",
   "cancel": "Cancelar",

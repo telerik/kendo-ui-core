@@ -5,7 +5,7 @@ function initMock(callback, context) {
         mock.callCount++;
         if (typeof(callback) === "function") {
             var result = callback.apply(context || this, arguments);
-            if(mock.callbacks) {
+            if (mock.callbacks) {
                 for (var i = 0; i < mock.callbacks.length; i++) {
                     mock.callbacks[i].apply(context || this, arguments);
                 }

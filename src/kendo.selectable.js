@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.core", "./kendo.userevents" ], f);
-})(function(){
+import "./kendo.core.js";
+import "./kendo.userevents.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "selectable",
     name: "Selectable",
     category: "framework",
@@ -10,26 +9,26 @@ var __meta__ = { // jshint ignore:line
     advanced: true
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
-        proxy = $.proxy,
         abs = Math.abs,
         ARIASELECTED = "aria-selected",
-        SELECTED = "k-state-selected",
-        ACTIVE = "k-state-selecting",
+        SELECTED = "k-selected",
+        ACTIVE = "k-selecting",
         SELECTABLE = "k-selectable",
         CHANGE = "change",
         NS = ".kendoSelectable",
         UNSELECT = "unselect",
-        UNSELECTING = "k-state-unselecting",
-        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up,label.k-checkbox-label.k-no-text,.k-icon.k-i-collapse,.k-icon.k-i-expand",
+        UNSELECTING = "k-unselecting",
+        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,label.k-checkbox-label.k-no-text,.k-icon.k-i-caret-alt-down,.k-icon.k-i-caret-alt-right,span.k-numeric-wrap,.k-focusable",
         msie = kendo.support.browser.msie,
-        supportEventDelegation = false;
+        supportEventDelegation = false,
+        extend = $.extend;
 
         (function($) {
             (function() {
-                $('<div class="parent"><span /></div>')
+                $('<div class="parent"><span></span></div>')
                 .on("click", ">*", function() {
                     supportEventDelegation = true;
                 })
@@ -43,7 +42,8 @@ var __meta__ = { // jshint ignore:line
     var Selectable = Widget.extend({
         init: function(element, options) {
             var that = this,
-                multiple;
+                multiple,
+                dragToSelect;
 
             Widget.fn.init.call(that, element, options);
 
@@ -54,25 +54,25 @@ var __meta__ = { // jshint ignore:line
             that.relatedTarget = that.options.relatedTarget;
 
             multiple = that.options.multiple;
-
-            if (this.options.aria && multiple) {
-                that.element.attr("aria-multiselectable", true);
-            }
+            dragToSelect = that.options.dragToSelect;
 
             that.userEvents = new kendo.UserEvents(that.element, {
                 global: true,
                 allowSelection: true,
                 filter: (!supportEventDelegation ? "." + SELECTABLE + " " : "") + that.options.filter,
-                tap: proxy(that._tap, that),
+                tap: that._tap.bind(that),
                 touchAction: multiple ? "none" : "pan-x pan-y"
             });
 
             if (multiple) {
+                if (dragToSelect) {
+                    that.userEvents
+                        .bind("start", that._start.bind(that))
+                        .bind("move", that._move.bind(that))
+                        .bind("end", that._end.bind(that));
+                }
                 that.userEvents
-                   .bind("start", proxy(that._start, that))
-                   .bind("move", proxy(that._move, that))
-                   .bind("end", proxy(that._end, that))
-                   .bind("select", proxy(that._select, that));
+                   .bind("select", that._select.bind(that));
             }
         },
 
@@ -83,7 +83,10 @@ var __meta__ = { // jshint ignore:line
             filter: ">*",
             inputSelectors: INPUTSELECTOR,
             multiple: false,
-            relatedTarget: $.noop
+            dragToSelect: true,
+            relatedTarget: $.noop,
+            ignoreOverlapped: false,
+            addIdToRanges: false
         },
 
         _isElement: function(target) {
@@ -108,6 +111,7 @@ var __meta__ = { // jshint ignore:line
                 ctrlKey = e.event.ctrlKey || e.event.metaKey,
                 multiple = that.options.multiple,
                 shiftKey = multiple && e.event.shiftKey,
+                selectedClass = that.options.selectedClass || SELECTED,
                 selected,
                 whichCode = e.event.which,
                 buttonCode = e.event.button;
@@ -121,31 +125,50 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            selected = target.hasClass(SELECTED);
-            if (!multiple || !ctrlKey) {
-                that.clear();
-            }
+            selected = target.hasClass(selectedClass);
 
             target = target.add(that.relatedTarget(target));
 
-            if (shiftKey) {
-                that.selectRange(that._firstSelectee(), target, e);
-            } else {
+            if (!multiple) {
                 if (selected && ctrlKey) {
                     that._unselect(target);
                     that._notify(CHANGE, e);
-                } else {
+                } else if (!selected) {
+                    that.clear();
                     that.value(target, e);
+                    that._notify(CHANGE, e);
                 }
+            } else {
+                if (shiftKey) {
+                    if (!that._lastRange || !compareElements(that._lastRange, target)) {
+                        that.selectRange(that._firstSelectee(), target, e);
+                        that._notify(CHANGE, e);
+                    }
+                    that._lastRange = target;
+                } else {
+                    that._lastRange = null;
+                    if (selected && ctrlKey) {
+                        that._unselect(target);
+                        that._notify(CHANGE, e);
+                    } else if (ctrlKey) {
+                        that.value(target, e);
+                        that._notify(CHANGE, e);
+                    } else if (!selected || that.value().length > 1) {
+                        that.clear();
+                        that.value(target, e);
+                        that._notify(CHANGE, e);
+                    }
 
-                that._lastActive = that._downTarget = target;
+                    that._lastActive = that._downTarget = target;
+                }
             }
         },
 
         _start: function(e) {
             var that = this,
                 target = $(e.target),
-                selected = target.hasClass(SELECTED),
+                selectedClass = that.options.selectedClass || SELECTED,
+                selected = target.hasClass(selectedClass),
                 currentElement,
                 ctrlKey = e.event.ctrlKey || e.event.metaKey;
 
@@ -209,7 +232,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _end: function(e) {
-            var that = this;
+            var that = this,
+            rangeSelectedAttr = kendo.attr("range-selected"),
+            uid = kendo.guid();
 
             that._marquee.remove();
 
@@ -221,7 +246,17 @@ var __meta__ = { // jshint ignore:line
             var target = that.element.find(that.options.filter + "." + ACTIVE);
             target = target.add(that.relatedTarget(target));
 
-            that.value(target, e);
+            if (that.options.addIdToRanges) {
+                for (var i = 0; i < that._currentlyActive.length; i++) {
+                    $(that._currentlyActive[i]).attr(rangeSelectedAttr, uid);
+                }
+            }
+
+            if (!that._lastRange || !compareElements(that._lastRange, target)) {
+                that.value(target, e);
+                that._notify(CHANGE, e);
+            }
+            that._lastRange = target;
             that._lastActive = that._downTarget;
             that._items = null;
         },
@@ -231,52 +266,113 @@ var __meta__ = { // jshint ignore:line
                 length,
                 target = this._downTarget[0],
                 items = this._items,
+                selectedClass = this.options.selectedClass || SELECTED,
                 related,
                 toSelect;
+
+            this._currentlyActive = [];
 
             for (idx = 0, length = items.length; idx < length; idx ++) {
                 toSelect = items.eq(idx);
                 related = toSelect.add(this.relatedTarget(toSelect));
 
                 if (collision(toSelect, position)) {
-                    if(toSelect.hasClass(SELECTED)) {
-                        if(ctrlKey && target !== toSelect[0]) {
-                            related.removeClass(SELECTED).addClass(UNSELECTING);
+                    if (toSelect.hasClass(selectedClass)) {
+                        if (ctrlKey && target !== toSelect[0]) {
+                            related.removeClass(selectedClass).addClass(UNSELECTING);
                         }
-                    } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING)) {
+                    } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING) && !this._collidesWithActiveElement(related, position)) {
                         related.addClass(ACTIVE);
                     }
+                    this._currentlyActive.push(related[0]);
                 } else {
                     if (toSelect.hasClass(ACTIVE)) {
                         related.removeClass(ACTIVE);
-                    } else if(ctrlKey && toSelect.hasClass(UNSELECTING)) {
-                        related.removeClass(UNSELECTING).addClass(SELECTED);
+                    } else if (ctrlKey && toSelect.hasClass(UNSELECTING)) {
+                        related.removeClass(UNSELECTING).addClass(selectedClass);
                     }
                 }
             }
         },
 
-        value: function(val, e) {
-            var that = this,
-                selectElement = proxy(that._selectElement, that);
+        _collidesWithActiveElement: function(element, marqueeRect) {
+            if (!this.options.ignoreOverlapped) {
+                return false;
+            }
 
-            if(val) {
+            var activeElements = this._currentlyActive;
+            var elemRect = element[0].getBoundingClientRect();
+            var activeElementRect;
+            var collision = false;
+            var isRtl = kendo.support.isRtl(element);
+            var leftRight = isRtl ? "right" : "left";
+            var tempRect = {};
+
+            marqueeRect.right = marqueeRect.left + marqueeRect.width;
+            marqueeRect.bottom = marqueeRect.top + marqueeRect.height;
+
+            for (var i = 0; i < activeElements.length; i++) {
+                activeElementRect = activeElements[i].getBoundingClientRect();
+                if (overlaps(elemRect, activeElementRect)) {
+                    tempRect[leftRight] = leftRight === "left" ? activeElementRect.right : activeElementRect.left;
+                    elemRect = extend({}, elemRect, tempRect);
+                    if (elemRect.left > elemRect.right) {
+                        return true;
+                    }
+                    collision = !overlaps(elemRect, marqueeRect);
+                }
+            }
+            return collision;
+        },
+
+        value: function(val) {
+            var that = this,
+                selectElement = that._selectElement.bind(that);
+
+            if (val) {
                 val.each(function() {
                     selectElement(this);
                 });
 
-                that._notify(CHANGE, e);
                 return;
             }
 
-            return that.element.find(that.options.filter + "." + SELECTED);
+            return that.element.find(that.options.filter + "." + (that.options.selectedClass || SELECTED));
+        },
+
+        selectedRanges: function() {
+            var that = this;
+            var rangeSelectedAttr = kendo.attr("range-selected");
+            var map = {};
+
+            that.element.find("[" + rangeSelectedAttr + "]").each(function(_, elem) {
+                var rangeId = $(elem).attr(rangeSelectedAttr);
+                var mapLocation = map[rangeId];
+
+                if (!mapLocation) {
+                    mapLocation = map[rangeId] = [];
+                }
+
+                mapLocation.push($(elem));
+            });
+
+            return map;
+        },
+
+        selectedSingleItems: function() {
+            var that = this;
+            var rangeSelectedAttr = kendo.attr("range-selected");
+
+            return that.element.find(that.options.filter + "." + (that.options.selectedClass || SELECTED) + ":not([" + rangeSelectedAttr + "])").toArray().map(function(elem) {
+                return $(elem);
+            });
         },
 
         _firstSelectee: function() {
             var that = this,
                 selected;
 
-            if(that._lastActive !== null) {
+            if (that._lastActive !== null) {
                 return that._lastActive;
             }
 
@@ -288,11 +384,12 @@ var __meta__ = { // jshint ignore:line
 
         _selectElement: function(element, preventNotify) {
             var toSelect = $(element),
-                isPrevented =  !preventNotify && this._notify("select", { element: element });
+                selectedClass = this.options.selectedClass || SELECTED,
+                isPrevented = !preventNotify && this._notify("select", { element: element });
 
             toSelect.removeClass(ACTIVE);
-            if(!isPrevented) {
-                 toSelect.addClass(SELECTED);
+            if (!isPrevented) {
+                 toSelect.addClass(selectedClass);
 
                 if (this.options.aria) {
                     toSelect.attr(ARIASELECTED, true);
@@ -306,11 +403,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _unselect: function(element) {
-            if (this.trigger(UNSELECT, { element: element})) {
+            if (this.trigger(UNSELECT, { element: element })) {
                 return;
             }
 
-            element.removeClass(SELECTED);
+            var rangeSelectedAttr = kendo.attr("range-selected");
+
+            element.removeClass(this.options.selectedClass || SELECTED).removeAttr(rangeSelectedAttr);
 
             if (this.options.aria) {
                 element.attr(ARIASELECTED, false);
@@ -342,11 +441,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         clear: function() {
-            var items = this.element.find(this.options.filter + "." + SELECTED);
+            var items = this.element.find(this.options.filter + "." + (this.options.selectedClass || SELECTED));
             this._unselect(items);
         },
 
-        selectRange: function(start, end, e) {
+        selectRange: function(start, end) {
             var that = this,
                 idx,
                 tmp,
@@ -376,10 +475,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             for (idx = start; idx <= end; idx ++ ) {
-                that._selectElement(items[idx]);
+                that._selectElement(items[idx], true);
             }
-
-            that._notify(CHANGE, e);
         },
 
         destroy: function() {
@@ -396,13 +493,28 @@ var __meta__ = { // jshint ignore:line
     });
 
     Selectable.parseOptions = function(selectable) {
-        var asLowerString = typeof selectable === "string" && selectable.toLowerCase();
-
+        var selectableMode = selectable.mode || selectable;
+        var asLowerString = typeof selectableMode === "string" && selectableMode.toLowerCase();
         return {
             multiple: asLowerString && asLowerString.indexOf("multiple") > -1,
             cell: asLowerString && asLowerString.indexOf("cell") > -1
         };
     };
+
+    function compareElements(element, toCompare) {
+
+        if (element.length !== toCompare.length) {
+            return false;
+        }
+
+        for (var i = 0; i < element.length; i++) {
+            if (element[i] !== toCompare[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     function collision(element, position) {
         if (!element.is(":visible")) {
@@ -416,16 +528,20 @@ var __meta__ = { // jshint ignore:line
         elementPosition.right = elementPosition.left + kendo._outerWidth(element);
         elementPosition.bottom = elementPosition.top + kendo._outerHeight(element);
 
-        return !(elementPosition.left > right||
+        return !(elementPosition.left > right ||
             elementPosition.right < position.left ||
             elementPosition.top > bottom ||
             elementPosition.bottom < position.top);
+    }
+
+    function overlaps(firstRect, secondRect) {
+        return !(firstRect.right <= secondRect.left ||
+            firstRect.left >= secondRect.right ||
+            firstRect.bottom <= secondRect.top ||
+            firstRect.top >= secondRect.bottom);
     }
 
     kendo.ui.plugin(Selectable);
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

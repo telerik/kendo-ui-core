@@ -1,8 +1,8 @@
 ---
-title: Merge table cells in the Editor
-description: An example on how to merge table cells in the Kendo UI Editor.
+title: Merge Table Cells in the Editor
+description: Learn how to merge table cells in the Kendo UI Editor.
 type: how-to
-page_title: Merge table cells | Kendo UI Editor
+page_title: Merge Table Cells - Kendo UI Editor for jQuery
 slug: editor-merge-table-cells
 tags: editor, table, merge, cells
 res_type: kb
@@ -14,21 +14,21 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
-  <td>Kendo UI version</td>
-  <td>Created with the 2019.1.220 version</td>
+  <td>Product Version</td>
+  <td>2023.1.315</td>
  </tr>
 </table>
 
 ## Description
 
-How to make merge table cells with the Kendo UI Editor?
+How can I make merge table cells with the Kendo UI Editor?
 
 ## Solution
 
-Merging of table cells in the Kendo UI Editor can be achieved by registering two new custom tools that merge cells horizontally and vertically as follows:
+Register two new custom tools that merge cells horizontally and vertically.
 
 ```dojo
     <div id="example">
@@ -39,7 +39,7 @@ Merging of table cells in the Kendo UI Editor can be achieved by registering two
                 exec: function () {
                     var range = this.lockRange(true),
                         currentTd = kendo.ui.editor.Dom.closest(range.endContainer, "td"),
-                        columnIndex = kendo.ui.editor.Dom.findNodeIndex(currentTd);
+                        columnIndex = kendo.ui.editor.Dom.findNodeIndex(currentTd),
                         nextTd = $(currentTd).parent().next().children()[columnIndex];
 
                     if(currentTd && nextTd) {
@@ -80,7 +80,8 @@ Merging of table cells in the Kendo UI Editor can be achieved by registering two
                     } else {
                         return new MergeRowCellsCommand($.extend(commandArguments, { }));
                     }
-                }
+                },
+                update: $.noop
             });
 
             kendo.ui.editor.EditorUtils.registerTool(
@@ -88,10 +89,11 @@ Merging of table cells in the Kendo UI Editor can be achieved by registering two
                 new mergeTool({
                     type: "column",
                     action: "merge",
-                    template: new kendo.ui.editor.ToolTemplate({
-                        template: kendo.ui.editor.EditorUtils.buttonTemplate,
-                        title: "Merge Next Column"
-                    })
+                    ui: {
+                        attributes: {
+                            title: "Merge Next Column"
+                        }
+                    }
                 })
             );
 
@@ -100,15 +102,13 @@ Merging of table cells in the Kendo UI Editor can be achieved by registering two
                 new mergeTool({
                     type: "row",
                     action: "merge",
-                    template: new kendo.ui.editor.ToolTemplate({
-                        template: kendo.ui.editor.EditorUtils.buttonTemplate,
-                        title: "Merge Next Row"
-                    })
+                    ui: {
+                        attributes: {
+                            title: "Merge Next Row"
+                        }
+                    }
                 })
             );
-        </script>
-
-        <script>
             $("#editor").kendoEditor({
                 tools: [
                     "tableWizard",
@@ -129,4 +129,4 @@ Merging of table cells in the Kendo UI Editor can be achieved by registering two
 
 ## See Also
 
-* [Editor API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor](/api/javascript/ui/editor)

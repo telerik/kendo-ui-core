@@ -1,0 +1,73 @@
+.k-skeleton {
+    display: block;
+}
+
+.k-skeleton-text {
+    border-radius: @border-radius;
+    transform: scale( 1, .6 );
+
+    &:empty::before {
+        content: "\00a0";
+    }
+}
+
+.k-skeleton-circle {
+    border-radius: 9999px;
+}
+
+
+// Skeleton Wave
+@keyframes k-skeleton-wave {
+    0% {
+        transform: translateX(-100%);
+    }
+    60% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.k-skeleton-wave {
+
+    .k-skeleton,
+    &.k-skeleton {
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            animation: k-skeleton-wave 1.6s linear .5s infinite;
+        }
+    }
+
+}
+
+// Skeleton Pulse
+@keyframes k-skeleton-pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.k-skeleton-pulse {
+
+    .k-skeleton,
+    &.k-skeleton {
+        animation: k-skeleton-pulse 1.5s ease-in-out .5s infinite;
+    }
+
+}

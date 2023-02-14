@@ -7,7 +7,7 @@ var argv = require('yargs').argv;
 var meta = require("../../kendo-meta.js");
 
 // all files (including subfiles like editor/main.js etc.)
-var allKendoFiles = meta.loadAll().map((f) => path.join('src', f));
+const allKendoFiles = () => meta.loadAll().map((f) => path.join('dist', 'dev', 'js', f));
 
 // support different test sets for public|private repo
 var TESTS = require(glob.sync('../../test-paths-*.js', { cwd: __dirname })[0]);
@@ -42,6 +42,7 @@ TESTS.beforeTestFiles.push('src/angular.js');
 TESTS.beforeTestFiles.push('tests/angular-route.js');
 TESTS.beforeTestFiles.push('tests/jasmine.js');
 TESTS.beforeTestFiles.push('tests/jasmine-boot.js');
+TESTS.beforeTestFiles.push('node_modules/axe-core/axe.js');
 
 var defaultOptions = {
     reportSlowerThan: 500,
@@ -55,12 +56,6 @@ var defaultOptions = {
     colors: true,
     autoWatch: true,
     browsers: browsers,
-    customLaunchers: {
-        ChromiumTravis: {
-            base: 'ChromeHeadless',
-            flags: ['--no-sandbox']
-        }
-    },
     client: {
         mocha: {
             timeout: 10000
@@ -76,23 +71,10 @@ var defaultOptions = {
 };
 
 var flavours = {
-    jenkins: {
+    ci: {
         reporters: ['dots', 'junit'],
         singleRun: true,
-        browsers: browsers,
-
-        files: [].concat(
-            TESTS.beforeTestFiles,
-            allKendoFiles,
-            TESTS.afterTestFiles,
-            tests
-        )
-    },
-
-    travis: {
-        reporters: ['dots'],
-        singleRun: true,
-        browsers: [ 'ChromiumTravis' ],
+        browsers: [ 'ChromeHeadless' ],
 
         files: [].concat(
             TESTS.beforeTestFiles,
@@ -101,11 +83,15 @@ var flavours = {
             tests
         )
     },
-
     mocha: {
         files: [].concat(
             TESTS.beforeTestFiles,
-            allKendoFiles,
+            allKendoFiles(),
+            'dist/dev/js/cultures/kendo.culture.de-DE.js',
+            'dist/dev/js/cultures/kendo.culture.bg-BG.js',
+            'dist/dev/js/cultures/kendo.culture.en-ZA.js',
+            'dist/dev/js/cultures/kendo.culture.es-ES.js',
+            'dist/dev/js/kendo.timezones.js',
             TESTS.afterTestFiles,
             tests
         )

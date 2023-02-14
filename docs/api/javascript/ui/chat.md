@@ -41,6 +41,42 @@ The hint that is displayed in the input textbox of the widget.
     }).data("kendoChat");
     </script>
 
+### messages.sendButton `String` *(default: "Send message")*
+
+The title and the aria-label attribute of the message box send button.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        messages: {
+            sendButton: "This is send"
+        }
+    }).data("kendoChat");
+    </script>
+
+### messages.toggleButton `String` *(default: "Toggle toolbar")*
+
+The title and the aria-label attribute of the toggle toolbar button.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        messages: {
+            toggleButton: "Show/hide toolbar"
+        },
+        toolbar: {
+            toggleable: true,
+            buttons: [
+                {name: "restart", iconClass: "k-icon k-i-reload"}
+            ]
+        },
+    }).data("kendoChat");
+    </script>
+
 ### user `Object`
 
 Configures the user information of the Chat.
@@ -440,6 +476,7 @@ Gets the user information that is associated with the Chat instance.
 
         var chat = $("#chat").data("kendoChat");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(chat.getUser().name);
     </script>
 
@@ -770,6 +807,7 @@ The text value of the clicked action button.
     <script>
     $("#chat").kendoChat({
         actionClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Action Clicked: " + e.text);
         }
     });
@@ -801,6 +839,7 @@ The text value of the clicked action button.
     <div id="chat"></div>
     <script>
     function chat_actionClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Action Clicked: " + e.text);
     }
     $("#chat").kendoChat();
@@ -834,6 +873,7 @@ The text value of the clicked action button.
     <script>
     $("#chat").kendoChat({
         actionClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Action Clicked: " + e.text);
         }
     });
@@ -877,6 +917,7 @@ The user information for the current chat. Contains the `id`, `name`, and `iconU
     <script>
     $("#chat").kendoChat({
         post: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Post: " + e.text);
         }
     });
@@ -887,6 +928,7 @@ The user information for the current chat. Contains the `id`, `name`, and `iconU
     <div id="chat"></div>
     <script>
     function chat_post(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Post: " + e.text);
     }
     $("#chat").kendoChat();
@@ -915,6 +957,7 @@ The text value that was entered in the message box.
     <script>
     $("#chat").kendoChat({
         sendMessage: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Message sent: " + e.text);
         }
     });
@@ -925,6 +968,7 @@ The text value that was entered in the message box.
     <div id="chat"></div>
     <script>
     function chat_sendMessage(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Message sent: " + e.text);
     }
     $("#chat").kendoChat();
@@ -949,6 +993,7 @@ The widget instance which fired the event.
     <script>
     $("#chat").kendoChat({
         typingEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("End typing");
         }
     });
@@ -959,6 +1004,7 @@ The widget instance which fired the event.
     <div id="chat"></div>
     <script>
     function chat_typingEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("End typing");
     }
     $("#chat").kendoChat();
@@ -983,6 +1029,7 @@ The widget instance which fired the event.
     <script>
     $("#chat").kendoChat({
         typingStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Started typing");
         }
     });
@@ -993,6 +1040,7 @@ The widget instance which fired the event.
     <div id="chat"></div>
     <script>
     function chat_typingStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Started typing");
     }
     $("#chat").kendoChat();

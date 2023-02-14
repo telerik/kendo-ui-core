@@ -409,7 +409,7 @@ Refer to the example below for a list of the supported properties.
                     [{
                         text: "Item 1",
                         cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                        url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
+                        url: "https://www.telerik.com/kendo-ui"                // Link URL if navigation is needed, optional.
                     },
                     {
                         text: "<b>Item 2</b>",
@@ -418,7 +418,7 @@ Refer to the example below for a list of the supported properties.
                     },
                     {
                         text: "Item 3",
-                        imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+                        imageUrl: "https://www.telerik.com/kendo-ui/test.jpg", // Item image URL, optional.
                         items: [{                                    // Sub item collection
                              text: "Sub Item 1"
                         },
@@ -901,7 +901,7 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
             [{
                 text: "Item 1",
                 cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -910,7 +910,7 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
             },
             {
                 text: "Item 3",
-                imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://demos.telerik.com/kendo-ui/content/web/toolbar/todo.png", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },
@@ -920,10 +920,15 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
             },
             {
                 text: "Item 4",
-                spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
+                spriteCssClass: "mail"                // Item image sprite CSS class, optional.
             }]
         );
     </script>
+    <style>
+    .k-sprite {
+            background-image: url("https://demos.telerik.com/kendo-ui/content/web/toolbar/mail.png");
+        }
+    </style>
 
 #### Parameters
 
@@ -970,7 +975,7 @@ Closes the **ContextMenu**. This method can be prevented to stop the closure.
         // get a reference to the ContextMenu widget
         var contextMenu = $("#context-menu").data("kendoContextMenu");
         // close the ContextMenu
-        contextMenu.close(100, 100);
+        contextMenu.close();
     </script>
 
 #### Parameters
@@ -1152,7 +1157,7 @@ Inserts an item into a **ContextMenu** after the specified referenceItem.
         contextMenu.insertAfter(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1161,7 +1166,7 @@ Inserts an item into a **ContextMenu** after the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },
@@ -1225,7 +1230,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
         contextMenu.insertBefore(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1234,7 +1239,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },
@@ -1478,6 +1483,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
             dataTextField: "FullName",
             dataSource: dataSource,
             dataBound: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("dataBound");
             }
         })
@@ -1510,6 +1516,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
         }).data("kendoContextMenu");
 
         contextMenu.bind("dataBound", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
         });
     </script>
@@ -1539,6 +1546,7 @@ The jQuery event that triggered this one - only available for the open event of 
 #### Example
 
     <div id="target">Target</div>
+    <input type="checkbox" id="cbx"/> Prevent the `open` event
     <ul id="context-menu">
         <li>Item 1
             <ul>
@@ -1559,7 +1567,9 @@ The jQuery event that triggered this one - only available for the open event of 
         $("#context-menu").kendoContextMenu({
             target: "#target",
             open: function(e) {
-                // handle event
+                if($('#cbx').is(':checked')){
+                    e.preventDefault();
+                }
             }
         });
     </script>
@@ -1636,8 +1646,15 @@ The current target of the ContextMenu - either the init target or the current el
     <script>
         $("#context-menu").kendoContextMenu({
             target: "#target",
-            activate: function(e) {
-                // handle event
+            activate: function(e){
+                $('li.k-item.k-hover').css('font-weight','bold');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+                console.log(e.item);
+            },
+            deactivate: function(e) {
+                $('li.k-item').css('font-weight','');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+                console.log(e.item);
             }
         });
     </script>
@@ -1714,8 +1731,15 @@ The current target of the ContextMenu - either the init target or the current el
     <script>
         $("#context-menu").kendoContextMenu({
             target: "#target",
+            activate: function(e){
+                $('li.k-item.k-hover').css('font-weight','bold');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log(e.item);
+            },
             deactivate: function(e) {
-                // handle event
+                $('li.k-item').css('font-weight','');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+                console.log(e.item);
             }
         });
     </script>

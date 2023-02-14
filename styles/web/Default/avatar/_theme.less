@@ -1,0 +1,25 @@
+// Solid Avatars
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+
+    .k-avatar-solid.k-avatar-solid-@{name} {
+        border-color: @color;
+        color: contrast(@color);
+        background-color: @color;
+    }
+});
+
+// Outline avatars
+.k-avatar-outline {
+    border-color: currentColor;
+}
+
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+
+    .k-avatar-outline.k-avatar-outline-@{name} {
+        color: @color;
+    }
+});

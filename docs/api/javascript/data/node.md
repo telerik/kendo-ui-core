@@ -22,8 +22,10 @@ The child `kendo.data.HierarchicalDataSource` of the node. This field is initial
     <script>
     var parent = new kendo.data.Node({ text: "Parent" });
     parent.append({ text: "Child" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(parent.children.data().length); // outputs "1"
     var child = parent.children.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(child.text); // outputs "Child"
     </script>
 
@@ -54,8 +56,10 @@ The data for the new item.
     <script>
     var parent = new kendo.data.Node({ text: "Parent" });
     parent.append({ text: "Child" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(parent.children.data().length); // outputs "1"
     var child = parent.children.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(child.text); // outputs "Child"
     </script>
 
@@ -83,9 +87,11 @@ Gets the current nesting level of the node within the data source.
     });
     dataSource.read();
     var root = dataSource.get(1);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(root.level()); // outputs "0"
     root.load(); // Load child nodes
     var child = dataSource.get(2);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(child.level()); // outputs "1"
     </script>
 
@@ -170,9 +176,11 @@ Gets the parent node.
     });
     dataSource.read();
     var root = dataSource.get(1);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(root.parentNode()); // outputs "null"
     root.load(); // load child nodes
     var child = dataSource.get(2);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(child.parentNode().text); // outputs "Root"
     </script>
 

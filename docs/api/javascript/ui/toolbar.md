@@ -151,6 +151,7 @@ Specifies the click event handler of the button. Applicable only for the childre
 
     <script>
     function onClick() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("click");
     }
 
@@ -411,6 +412,7 @@ Specifies the toggle event handler of the button. Applicable only for the childr
 
     <script>
         function toggle(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.group);
         }
 
@@ -485,8 +487,8 @@ Specifies the url of the button to navigate to.
             {
                 type: "buttonGroup",
                 buttons: [
-                { text: "foo", url: "http://www.telerik.com" },
-                { text: "bar", url: "http://www.google.com" },
+                { text: "foo", url: "https://www.telerik.com" },
+                { text: "bar", url: "https://www.google.com" },
                 ]
             }
             ]
@@ -508,6 +510,7 @@ Specifies the click event handler of the button. Applicable only for commands of
                 type: "button",
                 text: "foo",
                 click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(e.target.text() + " is clicked");
                 }
             }
@@ -628,7 +631,7 @@ If set, the ToolBar will render an image with the specified URL in the button.
 
 ### items.menuButtons `Array`
 
-Specifies the menu buttons of a SplitButton.
+Specifies the menu buttons of a SplitButton or a DropDownButton.
 
 #### Example
 
@@ -639,6 +642,24 @@ Specifies the menu buttons of a SplitButton.
             items: [ {
                 type: "splitButton",
                 text: "splitButton",
+                menuButtons: [
+                    { id: "foo", text: "Foo" },
+                    { id: "bar", text: "Bar" },
+                    { id: "baz", text: "Baz" }
+                ]
+            } ]
+        });
+    </script>
+
+#### Example - DropDownButton
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [ {
+                type: "dropDownButton",
+                text: "dropDownButton",
                 menuButtons: [
                     { id: "foo", text: "Foo" },
                     { id: "bar", text: "Bar" },
@@ -863,8 +884,8 @@ Specifies the url of the menu button to navigate to.
                 type: "splitButton",
                 text: "splitButton",
                 menuButtons: [
-                    { id: "foo", text: "Telerik", url: "http://www.telerik.com" },
-                    { id: "bar", text: "Google", url: "http://www.google.com" }
+                    { id: "foo", text: "Telerik", url: "https://www.telerik.com" },
+                    { id: "bar", text: "Google", url: "https://www.google.com" }
                 ]
             }
             ]
@@ -1079,6 +1100,7 @@ Specifies the toggle event handler of the button. Applicable only for commands o
                 text: "Foo",
                 togglable: true,
                 toggle: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log("toggle!");
                 }
             }
@@ -1088,7 +1110,7 @@ Specifies the toggle event handler of the button. Applicable only for commands o
 
 ### items.type `String`
 
-Specifies the command type. Supported types are "button", "splitButton", "buttonGroup", "separator".
+Specifies the command type. Supported types are "button", "splitButton", "dropDownButton", "buttonGroup", "separator", "spacer".
 
 > Specifying the type is **mandatory**. Only commands that have a `template` do not need a `type`.
 
@@ -1105,6 +1127,14 @@ Specifies the command type. Supported types are "button", "splitButton", "button
                     menuButtons: [
                         { id: "foo", text: "Foo" },
                         { id: "bar", text: "Bar" }
+                    ]
+                },
+                {
+                    type: "dropDownButton",
+                    text: "dropDownButton",
+                    menuButtons: [
+                        { id: "foobar", text: "FooBar" },
+                        { id: "barbaz", text: "BarBaz" }
                     ]
                 },
                 {
@@ -1140,8 +1170,28 @@ Specifies the url to navigate to.
             {
                 type: "button",
                 text: "Foo",
-                url: "http://www.google.com"
+                url: "https://www.google.com"
             }
+            ]
+        });
+    </script>
+
+### navigateOnTab `Boolean` *(default: false)*
+
+If set to `true` this configuration option would enable Tab-based navigation among ToolBar items.
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            navigateOnTab: true,
+            items: [
+                { type: "button", text: "Button 1" },
+                { type: "button", text: "Button 2" },
+                { type: "button", text: "Button 3" },
+                { type: "button", text: "Button 4" }
             ]
         });
     </script>
@@ -1267,6 +1317,7 @@ The name of the group.
         var toolbar = $("#toolbar").data("kendoToolBar");
         var selected = toolbar.getSelectedFromGroup("radio");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(selected.attr("id"));
     </script>
 
@@ -1398,13 +1449,11 @@ The jQuery object that represents the command element.
 
 The id of the command element.
 
-##### e.item `Object`
-
-The item instance of the clicked item.
-
 ##### e.sender `kendo.ui.ToolBar`
 
 The widget instance which fired the event.
+
+> **Important** Starting with R1 2023 the event arguments object no longer holds a reference to the ToolBar item (`e.item`). From that release on, the tools in the ToolBar are actual widget instances that can be taken using the `kendo.widgetInstance()` method: `var widget = kendo.widgetInstance(e.target);`. When the clicked tool is rendered in the OverflowMenu or in a popup of a SplitButton/DropDownButton it represents a menu item. Hence, it is not a Kendo widget. A reference to the jQuery element is still available in those cases in the `e.target` event argument.
 
 #### Example - subscribe to the "click" event during initialization
 
@@ -1416,6 +1465,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2" }
             ],
             click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("click", e.target.text());
             }
         });
@@ -1434,6 +1484,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("click", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("click", e.target.text());
         });
     </script>
@@ -1470,6 +1521,7 @@ The widget instance which fired the event.
                 ] }
             ],
             close: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("close", e);
             }
         });
@@ -1492,6 +1544,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("close", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("close", e);
         });
     </script>
@@ -1528,6 +1581,7 @@ The widget instance which fired the event.
                 ] }
             ],
             open: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("open", e);
             }
         });
@@ -1550,6 +1604,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("open", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("open", e);
         });
     </script>
@@ -1574,13 +1629,11 @@ Boolean flag that indicates the button state.
 
 The id of the command element.
 
-##### e.item `Object`
-
-The item instance of the toggled item.
-
 ##### e.sender `kendo.ui.ToolBar`
 
 The widget instance which fired the event.
+
+> **Important** Starting with R1 2023 the event arguments object no longer holds a reference to the ToolBar item (`e.item`). From that release on, the tools in the ToolBar are actual widget instances that can be taken using the `kendo.widgetInstance()` method: `var widget = kendo.widgetInstance(e.target);`. When the toggled tool is rendered in the OverflowMenu it represents a menu item. Hence, it is not a Kendo widget. A reference to the jQuery element is still available in those cases in the `e.target` event argument.
 
 #### Example - subscribe to the "toggle" event during initialization
 
@@ -1592,6 +1645,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", togglable: true }
             ],
             toggle: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("toggle", e.target.text(), e.checked);
             }
         });
@@ -1610,6 +1664,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("toggle", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("toggle", e.target.text(), e.checked);
         });
     </script>
@@ -1638,6 +1693,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", overflow: "always" }
             ],
             overflowClose: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("close");
             }
         });
@@ -1656,6 +1712,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("overflowClose", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("close");
         });
     </script>
@@ -1684,6 +1741,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", overflow: "always" }
             ],
             overflowOpen: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("open");
             }
         });
@@ -1702,6 +1760,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("overflowOpen", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("open");
         });
     </script>

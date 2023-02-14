@@ -3,6 +3,7 @@
 @background: #fff;
 
 @border-radius: 0;
+@icon-size: 16px;
 
 @normal-background: #fff;
 @normal-text-color: #32364c;
@@ -14,10 +15,32 @@
 @selected-text-color: #fff;
 @selected-gradient: none;
 
-@error: #ffbfc4;
-@warning: #ffecc7;
-@success: #a5d6a7;
-@info: #80deea;
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #00acc1;
+@info: #1ea2b3;
+@success: #479b4a;
+@warning: #ffb82e;
+@error: #ff2637;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
 
 @series-a: #ff4350;
 @series-b: #ff9ea5;
@@ -36,3 +59,6 @@
 @selected-border-color: transparent;
 
 @import "type-nova.less";
+
+@chat-bubble-bg: @hover-bg;
+@tooltip-callout-s-border: @tooltip-bg;

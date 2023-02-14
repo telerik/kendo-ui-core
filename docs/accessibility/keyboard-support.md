@@ -1,6 +1,6 @@
 ---
 title: Keyboard Shortcuts
-page_title: Keyboard Shortcuts | Kendo UI Accessibility Support
+page_title: Keyboard Shortcuts - Kendo UI Accessibility Support
 description: "Learn more about the keyboard Accessibility standards supported by Kendo UI controls."
 slug: keyboard_shortcuts_accessibility_support
 position: 5
@@ -25,22 +25,34 @@ Keyboard support in Kendo UI maps access-key combinations and ensures that users
 In addition to the `accesskey` attribute support, most Kendo UI widgets also offer a series of keyboard controls for interacting with them. The specific keyboard shortcuts supported by each widget are provided in the following keyboard examples.
 
 - [AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/keyboard-navigation)
+- [BottomNavigation](https://demos.telerik.com/kendo-ui/bottomnavigaiton/keyboard-navigation)
+- [Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/keyboard-navigation)
 - [Button](https://demos.telerik.com/kendo-ui/button/keyboard-navigation)
 - [ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/keyboard-navigation)
 - [Calendar](https://demos.telerik.com/kendo-ui/calendar/keyboard-navigation)
+- [Captcha](https://demos.telerik.com/kendo-ui/captcha/keyboard-navigation)
+- [ColorGradient](https://demos.telerik.com/kendo-ui/colorgradient/keyboard-navigation)
+- [ColorPalette](https://demos.telerik.com/kendo-ui/colorpalette/keyboard-navigation)
 - [ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/keyboard-navigation)
 - [ComboBox](https://demos.telerik.com/kendo-ui/combobox/keyboard-navigation)
+- [CheckBoxGroup](https://demos.telerik.com/kendo-ui/checkboxgroup/keyboard-navigation)
 - [DateInput](https://demos.telerik.com/kendo-ui/dateinput/keyboard-navigation)
 - [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
 - [DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/keyboard-navigation)
 - [DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/keyboard-navigation)
 - [Dialog](https://demos.telerik.com/kendo-ui/dialog/keyboard-navigation)
+- [Drawer](https://demos.telerik.com/kendo-ui/drawer/keyboard-navigation)
+- [DropDownButton](https://demos.telerik.com/kendo-ui/dropdownbutton/keyboard-navigation)
 - [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/keyboard-navigation)
 - [DropDownTree](https://demos.telerik.com/kendo-ui/dropdowntree/keyboard-navigation)
 - [Editor](https://demos.telerik.com/kendo-ui/editor/keyboard-navigation)
+- [ImageEditor](https://demos.telerik.com/kendo-ui/imageeditor/keyboard-navigation)
+- [FileManager](https://demos.telerik.com/kendo-ui/filemanager/keyboard-navigation)
+- [FlatColorPicker](https://demos.telerik.com/kendo-ui/flatcolorpicker/keyboard-navigation)
+- [FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/keyboard-navigation)
 - [Gantt](https://demos.telerik.com/kendo-ui/gantt/keyboard-navigation)
 - [Grid](https://demos.telerik.com/kendo-ui/grid/keyboard-navigation)
-- [ListBox](https://demos.telerik.com/kendo-ui/listview/keyboard-navigation)
+- [ListBox](https://demos.telerik.com/kendo-ui/listbox/keyboard-navigation)
 - [ListView](https://demos.telerik.com/kendo-ui/listview/keyboard-navigation)
 - [MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/keyboard-navigation)
 - [Menu](https://demos.telerik.com/kendo-ui/menu/keyboard-navigation)
@@ -48,17 +60,27 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/keyboard-navigation)
 - [MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/keyboard-navigation)
 - [NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/keyboard-navigation)
+- [Pager](https://demos.telerik.com/kendo-ui/pager/keyboard-navigation)
 - [PanelBar](https://demos.telerik.com/kendo-ui/panelbar/keyboard-navigation)
+- [PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer/keyboard-navigation)
+- [Rating](https://demos.telerik.com/kendo-ui/rating/keyboard-navigation)
+- [RadioGroup](https://demos.telerik.com/kendo-ui/radiogroup/keyboard-navigation)
 - [Scheduler](https://demos.telerik.com/kendo-ui/scheduler/selection)
 - [Slider](https://demos.telerik.com/kendo-ui/slider/keyboard-navigation)
+- [SplitButton](https://demos.telerik.com/kendo-ui/splitbutton/keyboard-navigation)
 - [Splitter](https://demos.telerik.com/kendo-ui/splitter/keyboard-navigation)
+- [Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/keyboard-navigation)
+- [Stepper](https://demos.telerik.com/kendo-ui/stepper/keyboard-navigation)
 - [Switch](https://demos.telerik.com/kendo-ui/switch/keyboard-navigation)
 - [TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/keyboard-navigation)
+- [TaskBoard](https://demos.telerik.com/kendo-ui/taskboard/keyboard-navigation)
+- [TimeLine](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation)
 - [TimePicker](https://demos.telerik.com/kendo-ui/timepicker/keyboard-navigation)
 - [ToolBar](https://demos.telerik.com/kendo-ui/toolbar/keyboard-navigation)
 - [TreeList](https://demos.telerik.com/kendo-ui/treelist/keyboard-navigation)
 - [TreeView](https://demos.telerik.com/kendo-ui/treeview/keyboard-navigation)
 - [Window](https://demos.telerik.com/kendo-ui/window/keyboard-navigation)
+- [Wizard](https://demos.telerik.com/kendo-ui/wizard/keyboard-navigation)
 
 ## In-Widget Keyboard Navigation
 
@@ -73,7 +95,7 @@ Kendo UI supports the second suggested approach and uses an `aria-activedescenda
 
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [Section 508 and WCAG 2.1 Compliance of Kendo UI Widgets]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})
 * [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})

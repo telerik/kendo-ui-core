@@ -37,7 +37,9 @@ Introduced in the Kendo UI 2019 R1 SP1 (2019.1.220) release.
       });
       dataSource.fetch(function(){
         var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].name); // displays "KIZILTOPRAK"
       });
     </script>
@@ -72,6 +74,7 @@ The supported aggregates are:
     });
     dataSource.fetch(function(){
       var results = dataSource.aggregates().age;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(results.sum, results.min, results.max); // displays "63 30 33"
     });
     </script>
@@ -102,6 +105,7 @@ The supported aggregates are:
     });
     dataSource.fetch(function(){
       var results = dataSource.aggregates().age;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(results.sum); // displays "63"
     });
     </script>
@@ -124,6 +128,7 @@ The data item field which will be used to calculate the aggregates.
     });
     dataSource.fetch(function(){
       var results = dataSource.aggregates().age;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(results.sum); // displays "63"
     });
     </script>
@@ -197,6 +202,8 @@ The array of data items which the data source contains. The data source will wra
 
 Can be set to a string value if the [`schema.type`](/api/javascript/data/datasource#configuration-schema.type) option is set to `"xml"`.
 
+> A field in the DataSource cannot be named "data". The latter should be considered a limitation.
+
 #### Example - set the data items of a data source
 
     <script>
@@ -208,6 +215,7 @@ Can be set to a string value if the [`schema.type`](/api/javascript/data/datasou
     });
     dataSource.fetch(function(){
       var janeDoe = dataSource.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(janeDoe.name); // displays "Jane Doe"
     });
     </script>
@@ -236,6 +244,7 @@ Can be set to a string value if the [`schema.type`](/api/javascript/data/datasou
     });
     dataSource.fetch(function() {
       var books = dataSource.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(books[0].title); // displays "Secrets of the JavaScript Ninja"
     });
     </script>
@@ -248,30 +257,49 @@ The filters which are applied over the data items. By default, no filter is appl
 
 #### Example - set a single filter
 
+    <h3>All names(no filters)</h3>
+    <div id="non-filtered"></div>
+    <h3>All names that start with "Ja"</h3>
+    <div id="filtered"></div>
+      
     <script>
+    var data = [
+      { name: "Jane Doe" },
+      { name: "John Doe" },
+      { name: "Jane Sam" },
+      { name: "John Doe" },
+      { name: "Jane Mike" }
+    ];
     var dataSource = new kendo.data.DataSource({
-      data: [
-        { name: "Jane Doe" },
-        { name: "John Doe" }
-      ],
-      filter: { field: "name", operator: "startswith", value: "Jane" }
+      data: data,
+      filter: { field: "name", operator: "startswith", value: "Ja" }
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
-      console.log(view.length); // displays "1"
-      console.log(view[0].name); // displays "Jane Doe"
+    	view.forEach(function(item) {
+        $("#filtered").append("name - " + item.name + "<br>");
+      });
+    });
+      
+    data.forEach(function(item) {
+      $("#non-filtered").append("name - " + item.name + "<br>");
     });
     </script>
 
 #### Example - set the filter as a conjunction (and)
 
+    <h3>All products(no filters)</h3>
+    <div id="non-filtered"></div>
+    <h3>All products with category "Beverages" that are not "Coffee".</h3>
+    <div id="filtered"></div>
+
     <script>
-    var dataSource = new kendo.data.DataSource({
-      data: [
-        { name: "Tea", category: "Beverages" },
+    var data = [{ name: "Tea", category: "Beverages" },
         { name: "Coffee", category: "Beverages" },
-        { name: "Ham", category: "Food" }
-      ],
+        { name: "Ham", category: "Food" }];
+      
+    var dataSource = new kendo.data.DataSource({
+      data: data,
       filter: [
         // leave data items which are "Beverage" and not "Coffee"
         { field: "category", operator: "eq", value: "Beverages" },
@@ -280,20 +308,32 @@ The filters which are applied over the data items. By default, no filter is appl
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
-      console.log(view.length); // displays "1"
-      console.log(view[0].name); // displays "Tea"
+      view.forEach(function(item) {
+        $("#filtered").append("name - " + item.name + ", category - " + item.category + "<br>");
+      });
+    });
+      
+    data.forEach(function(item) {
+      $("#non-filtered").append("name - " + item.name + ", category - " + item.category + "<br>");
     });
     </script>
 
 #### Example - set the filter as a disjunction (or)
 
+    <h3>All products(no filters)</h3>
+    <div id="non-filtered"></div>
+    <h3>All products with category "Food" or name "Tea".</h3>
+    <div id="filtered"></div>
+      
     <script>
-    var dataSource = new kendo.data.DataSource({
-      data: [
+    var data = [
         { name: "Tea", category: "Beverages" },
         { name: "Coffee", category: "Beverages" },
         { name: "Ham", category: "Food" }
-      ],
+      ];
+      
+    var dataSource = new kendo.data.DataSource({
+      data: data,
       filter: {
         // leave data items which are "Food" or "Tea"
         logic: "or",
@@ -305,9 +345,13 @@ The filters which are applied over the data items. By default, no filter is appl
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
-      console.log(view.length); // displays "2"
-      console.log(view[0].name); // displays "Tea"
-      console.log(view[1].name); // displays "Ham"
+      view.forEach(function(item) {
+        $("#filtered").append("name - " + item.name + ", category - " + item.category + "<br>");
+      });
+    });
+      
+    data.forEach(function(item) {
+      $("#non-filtered").append("name - " + item.name + ", category - " + item.category + "<br>");
     });
     </script>
 
@@ -327,7 +371,9 @@ The data item field to which the filter operator is applied.
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "Jane Doe"
     });
     </script>
@@ -356,8 +402,11 @@ The nested filter expressions. Supports the same options as [`filter`](/api/java
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "2"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "Tea"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[1].name); // displays "Ham"
     });
     </script>
@@ -392,8 +441,11 @@ The supported values are:
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "2"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "Tea"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[1].name); // displays "Ham"
     });
     </script>
@@ -421,7 +473,7 @@ The supported operators are:
 * `"isempty"`
 * `"isnotempty"`
 
-The last five are supported only for string fields.
+The last eight are supported only for string fields.
 
 #### Example - set the filter operator
 
@@ -435,7 +487,9 @@ The last five are supported only for string fields.
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "Jane Doe"
     });
     </script>
@@ -458,7 +512,9 @@ The value to which the [`field`](/api/javascript/data/datasource#configuration-f
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "Jane Doe"
     });
     </script>
@@ -483,13 +539,19 @@ The grouping configuration of the data source. If set, the data items will be gr
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "2"
       var beverages = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.value); // displays "Beverages"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.items[0].name); // displays "Tea"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.items[1].name); // displays "Coffee"
       var food = view[1];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(food.value); // displays "Food"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(food.items[0].name); // displays "Ham"
     });
     </script>
@@ -511,17 +573,26 @@ The grouping configuration of the data source. If set, the data items will be gr
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "1"
       var food = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(food.value); // displays "Food"
       var meat = food.items[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(meat.value); // displays "Meat"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(meat.items.length); // displays "2"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(meat.items[0].name); // displays "Pork"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(meat.items[1].name); // displays "Beef"
       var vegetables = food.items[1];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(vegetables.value); // displays "Vegetables"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(vegetables.items.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(vegetables.items[0].name); // displays "Pepper"
     });
     </script>
@@ -558,10 +629,14 @@ The supported aggregates are:
     dataSource.fetch(function(){
       var view = dataSource.view();
       var beverages = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.aggregates.price.max); // displays "2"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.aggregates.price.min); // displays "1"
       var food = view[1];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(food.aggregates.price.max); // displays "3"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(food.aggregates.price.min); // displays "3"
     });
     </script>
@@ -598,6 +673,7 @@ The supported aggregates are:
     dataSource.fetch(function(){
       var view = dataSource.view();
       var beverages = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.aggregates.price.max); // displays "2"
     });
     </script>
@@ -626,6 +702,7 @@ The data item field which will be used to calculate the aggregates.
     dataSource.fetch(function(){
       var view = dataSource.view();
       var beverages = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.aggregates.price.max); // displays "2"
     });
     </script>
@@ -665,10 +742,13 @@ A JavaScript function which is used to compare the groups (refer to [`sort.compa
         dataSource.fetch(function() {
             var view = dataSource.view();
             var beverages = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(kendo.stringify(beverages.items));
             var seafood = view[1];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(kendo.stringify(seafood.items));
             var desserts = view[2];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(kendo.stringify(desserts.items));
         });
     </script>>
@@ -698,8 +778,10 @@ The default sort order is ascending.
     dataSource.fetch(function(){
       var view = dataSource.view();
       var food = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(food.value); // displays "Food"
       var beverages = view[1];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.value); // displays "Beverages"
     });
     </script>
@@ -723,12 +805,19 @@ The data item field to group by.
     dataSource.fetch(function(){
       var view = dataSource.view();
       var beverages = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.items[0].name); // displays "Tea"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.items[1].name); // displays "Coffee"
       var food = view[1];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(food.items[0].name); // displays "Ham"
     });
     </script>
+
+### groupPaging `Boolean` *(default: false)*
+
+When set to true, dataSource treats groups as items during pagination.
 
 ### inPlaceSort `Boolean` *(default: false)*
 
@@ -795,7 +884,9 @@ The page of data which the data source will return when the [`view`](/api/javasc
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "Ham"
     });
     </script>
@@ -821,8 +912,11 @@ The number of data items per page. The property has no default value. Therefore,
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "2"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "Tea"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[1].name); // displays "Coffee"
     });
     </script>
@@ -850,6 +944,7 @@ The configuration used to parse the remote service response.
     });
     dataSource.fetch(function(){
       var data = this.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data.length);
     });
     </script>
@@ -910,7 +1005,7 @@ The aggregate results should have the following format:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverAggregates: true,
       schema: {
         aggregates: "aggregates" // aggregate results are returned in the "aggregates" field of the response
@@ -938,6 +1033,8 @@ The aggregate results should have the following format:
 
 The field from the server response which contains the data items. Can be set to a function which is called to return the data items for the response.
 
+> The `data` option will not be used if the data source is grouped and set for [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping).
+
 #### Returns
 
 `Array`&mdash;The data items from the response.
@@ -959,6 +1056,7 @@ The field from the server response which contains the data items. Can be set to 
     });
     dataSource.fetch(function(){
       var data = this.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data.length);
     });
     </script>
@@ -982,6 +1080,7 @@ The field from the server response which contains the data items. Can be set to 
     });
     dataSource.fetch(function(){
       var data = this.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data.length);
     });
     </script>
@@ -1004,11 +1103,13 @@ The field from the server response which contains server-side errors. Can be set
       schema: {
         data: "items",
         errors: function(response) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("errors as function", response.errors[0])
           return response.errors;
         }
       },
       error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("error event handler", e.errors[0]);
       }
     });
@@ -1032,6 +1133,7 @@ The field from the server response which contains server-side errors. Can be set
         }
       },
       error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.errors);
       }
     });
@@ -1136,7 +1238,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
               validation: { required: true }
             },
             UnitPrice: {
-              //data type of the field {Number|String|Boolean|Date} default is String
+              //data type of the field {number|string|boolean|date} default is string
               type: "number",
               // used when new model is created
               defaultValue: 42,
@@ -1165,7 +1267,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
           validation: { required: true }
         },
         UnitPrice: {
-          //data type of the field {Number|String|Boolean|Date} default is String
+          //data type of the field {number|string|boolean|date} default is string
           type: "number",
           // used when new model is created
           defaultValue: 42,
@@ -1221,6 +1323,7 @@ The initially parsed server response that may need additional modifications.
     dataSource.fetch(function(){
       var data = dataSource.data();
       var product = data[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(product.name); // displays "Chai"
     });
     </script>
@@ -1301,6 +1404,7 @@ By default, the schema interprets the server response as JSON.
     });
     dataSource.fetch(function() {
       var books = dataSource.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(books[0].title); // displays "Secrets of the JavaScript Ninja"
     });
     </script>
@@ -1399,22 +1503,43 @@ The following options are sent to the server when server paging is enabled:
 - `skip` - The number of data items to skip.
 - `take` - The number of data items to return (the same as `pageSize`).
 
+The `skip` and `take` values are automatically calculated based on the current `page` and `pageSize`. This means that a dataSource with `page` = 3 and `pageSize` = 20 will generate a request that has `skip` = 40 and `take` = 20.
+
 Use the [`parameterMap`](/api/javascript/data/datasource#configuration-transport.parameterMap) option to send the paging options in a different format.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
+
+For a runnable example with enabled server paging, you can visit [the Grid remote data binding demo.](https://demos.telerik.com/kendo-ui/grid/remote-data-binding)
 
 #### Example - enable server paging
 
+    <div id="container"></div>
+    
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        /* transport configuration */
-      },
-      serverPaging: true,
-      schema: {
-        total: "total" // total is returned in the "total" field of the response
-      }
-    });
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          // The remote endpoint which will receive the request parameters and return the response containing the data.
+          read: {
+            dataType: "jsonp",
+            url: "https://demos.telerik.com/kendo-ui/service/Products/Read",
+          }
+        },
+        serverPaging: true,
+        pageSize: 10, // The number of items per page.
+        page: 3 // Change the page property to see a different set of items. The endpoint contains 77 items in total. This means that there are eight pages (eight pages multiplied by 10 records each).
+      });
+      
+      // The remote endpoint is configured to return the items in descending order. The first item is with ID = 77, the last item is with ID = 1
+      dataSource.fetch(function() {
+        let data = this.data(),
+            currentPage = this.page();
+        
+        // For demo purposes, each item in the current page is rendered on the screen.
+        data.forEach((item) => {
+          let element = `<p>ID - ${item.ProductID}, Name = ${item.ProductName}, Page = ${currentPage}</p>`;
+          $("#container").append($(element));
+        });
+      });
     </script>
 
 ### serverSorting `Boolean` *(default: false)*
@@ -1462,6 +1587,7 @@ The sort order which will be applied over the data items. By default, the data i
     });
     dataSource.fetch(function(){
       var data = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data[0].age); // displays "33"
     });
     </script>
@@ -1483,6 +1609,7 @@ The sort order which will be applied over the data items. By default, the data i
     });
     dataSource.fetch(function(){
       var data = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data[1].name); // displays "Coffee"
     });
     </script>
@@ -1509,6 +1636,7 @@ The supported values are:
     });
     dataSource.fetch(function(){
       var data = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data[0].age); // displays "33"
     });
     </script>
@@ -1530,6 +1658,7 @@ The field by which the data items are sorted.
     });
     dataSource.fetch(function(){
       var data = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data[0].age); // displays "33"
     });
     </script>
@@ -1597,6 +1726,7 @@ Local data sources are bound to a JavaScript array via the [`data`](/api/javascr
     });
     dataSource.fetch(function() {
       var products = dataSource.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(products[0].ProductName); // displays "Chai"
     });
     </script>
@@ -2292,6 +2422,7 @@ The supported values are:
       serverPaging: true // enable serverPaging so take and skip are sent as request parameters
     });
     dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.view().length); // displays "20"
     });
     </script>
@@ -2354,14 +2485,17 @@ which should follow the `schema.data` configuration.
     transport: {
       push: function(callbacks) {
         hub.on("create", function(result) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("push create");
           callbacks.pushCreate(result);
         });
         hub.on("update", function(result) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("push update");
           callbacks.pushUpdate(result);
         });
         hub.on("destroy", function(result) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("push destroy");
           callbacks.pushDestroy(result);
         });
@@ -2406,6 +2540,7 @@ If the value of `transport.read` is a string, the data source uses this string a
       }
     });
     dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.view().length); // displays "77"
     });
     </script>
@@ -2454,6 +2589,7 @@ If the value of `transport.read` is a string, the data source uses this string a
       }
     });
     dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.view().length); // displays "77"
     });
     </script>
@@ -2596,6 +2732,7 @@ If set to a function, the data source will invoke it and use the result as the U
       }
     });
     dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.view().length); // displays "77"
     });
     </script>
@@ -2614,6 +2751,7 @@ If set to a function, the data source will invoke it and use the result as the U
         }
       });
     dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.view().length); // displays "72"
     });
     </script>
@@ -2806,6 +2944,7 @@ A callback that should be called in case of failure of any of the operations.
               },
               submit: function(e) {
                 var data = e.data;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(data);
 
                 // send batch update to desired URL, then notify success/error
@@ -3116,6 +3255,7 @@ odata version 4
       serverPaging: true
     });
     dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.view().length); // displays "20"
     });
     </script>
@@ -3147,7 +3287,9 @@ Either a [`kendo.data.Model`](/api/javascript/data/model) instance or JavaScript
     dataSource.add({ name: "John Doe", age: 33 });
     var data = dataSource.data();
     var lastItem = data[data.length - 1];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(lastItem.name); // displays "John Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(lastItem.age); // displays "33"
     </script>
 
@@ -3208,7 +3350,9 @@ The aggregate configuration. Accepts the same values as the [`aggregate`](/api/j
       { field: "age", aggregate: "max" }
     ]);
     var ageAggregates = dataSource.aggregates().age;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(ageAggregates.min); // displays "30"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(ageAggregates.max); // displays "33"
     </script>
 
@@ -3226,6 +3370,7 @@ The aggregate configuration. Accepts the same values as the [`aggregate`](/api/j
       ]
     });
     var aggregates = dataSource.aggregate();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.stringify(aggregates[0])); // displays {"aggregate": "min", "field": "age"}
     </script>
 
@@ -3247,12 +3392,14 @@ Returns the aggregate results.
       ],
       aggregate: [
         { field: "age", aggregate: "min" },
-        { field: "name", aggregate: "max" }
+        { field: "age", aggregate: "max" }
       ]
     });
     dataSource.read();
     var ageAggregates = dataSource.aggregates().age;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(ageAggregates.min); // displays "30"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(ageAggregates.max); // displays "33"
     </script>
 
@@ -3281,8 +3428,10 @@ Returns a `kendo.data.Model` instance if the [schema.model](/api/javascript/data
     });
     dataSource.fetch(function(){
       var dataItem = dataSource.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataItem.name); // displays "Jane Doe"
       var dataItemWhichDoesNotExist = dataSource.at(3);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataItemWhichDoesNotExist); // displays "undefined"
     });
     </script>
@@ -3321,7 +3470,9 @@ The optional data item (model). If specified, only the changes of this data item
       // cancel all changes
       dataSource.cancelChanges();
       dataItem = dataSource.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataItem.name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.data().length); // displays "1"
     });
     </script>
@@ -3345,7 +3496,9 @@ The optional data item (model). If specified, only the changes of this data item
       dataItem.set("name", "Jane Doe 2");
       // cancel the changes of the dataItem
       dataSource.cancelChanges(dataItem);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataItem.name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.data().length); // displays "2"
     });
     </script>
@@ -3387,8 +3540,11 @@ The data items which will replace the current ones in the data source. If omitte
     });
     dataSource.fetch(function(){
       var data = dataSource.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data.length);  // displays "2"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data[0].name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data[1].name); // displays "John Doe"
     });
     </script>
@@ -3406,7 +3562,9 @@ The data items which will replace the current ones in the data source. If omitte
     });
     dataSource.fetch(function(){
       var data = dataSource.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data.length);  // displays "77"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data[0].ProductName); // displays "Chai"
     });
     </script>
@@ -3414,16 +3572,24 @@ The data items which will replace the current ones in the data source. If omitte
 #### Example - set the data items
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      data: [
-        { name: "Jane Doe" }
-      ]
-    });
-    dataSource.fetch(function(){
-      dataSource.data([ { name: "John Doe" } ]);
-      var data = dataSource.data();
-      console.log(data[0].name); // displays "John Doe"
-    });
+      var dataSource = new kendo.data.DataSource({
+        data: [
+          { name: "Jane Doe" },
+          { name: "John Smith" },
+          { name: "Andrew Robertson" }
+        ]
+      });
+      dataSource.fetch(function(){
+        var newData = [
+          { name: "Samuell Dean" },
+          { name: "John Doe" }
+        ]
+        dataSource.data(newData);
+        var data = dataSource.data();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(data); 
+        console.log(data[0].name); // displays "Samuel Dean"        
+      });
     </script>
 
 ### fetch
@@ -3444,41 +3610,58 @@ The optional function which is executed when the remote request is finished. The
 
 #### Example - read data from a remote data source
 
+    <div id="grid"></div>
+
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read:  {
-          url: "https://demos.telerik.com/kendo-ui/service/products",
-          dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-        }
-      }
-    });
-    // read the data items from https://demos.telerik.com/kendo-ui/service/products
-    dataSource.fetch(function(){
-      var data = this.data();
-      console.log(data.length);  // displays "77"
-      console.log(data[0].ProductName); // displays "Chai"
-    });
+    	var dataSource = new kendo.data.DataSource({
+    	  transport: {
+    	    read:  {
+    	      url: "https://demos.telerik.com/kendo-ui/service/products",
+    	      dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+    	    }
+    	  }
+    	});
+
+      // read the data items from https://demos.telerik.com/kendo-ui/service/products
+      dataSource.fetch(function() {
+        let data = this.data();
+
+        // initialize a Kendo Grid with the returned data from the server.
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: data
+          },
+          height: 800
+        });
+      });
     </script>
 
 #### Example - use the Promise API to track when a request finishes
 
+    <div id="grid"></div>
+      
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read:  {
-          url: "https://demos.telerik.com/kendo-ui/service/products",
-          dataType: "jsonp"
-        }
-      }
-    });
-
-    // read the data items from https://demos.telerik.com/kendo-ui/service/products
-    dataSource.fetch().then(function(){
-      var data = dataSource.data();
-      console.log(data.length);  // displays "77"
-      console.log(data[0].ProductName); // displays "Chai"
-    });
+    	var dataSource = new kendo.data.DataSource({
+    	  transport: {
+    	    read:  {
+    	      url: "https://demos.telerik.com/kendo-ui/service/products",
+    	      dataType: "jsonp"
+    	    }
+    	  }
+    	});
+    
+    	// read the data items from https://demos.telerik.com/kendo-ui/service/products
+    	dataSource.fetch().then(function(){
+      	var data = dataSource.data();
+    
+        // initialize a Kendo Grid with the returned data from the server.
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: data
+          },
+          height: 800
+        });
+    	});
     </script>
 
 ### filter
@@ -3506,7 +3689,9 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
     });
     dataSource.filter( { field: "name", operator: "startswith", value: "Jane" });
     var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(view.length);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(view[0].name); // displays "Jane Doe"
     </script>
 
@@ -3521,7 +3706,9 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
       filter: { field: "name", operator: "startswith", value: "Jane" }
     });
     var filter = dataSource.filter();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(filter.logic);  // displays "and"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(filter.filters[0]); //displays '{field: "name", operator: "startswith", value: "Jane"}'
     </script>
 
@@ -3529,7 +3716,7 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
 
 Gets the data item (model) with the specified [`id`](/api/javascript/data/model#fields-id).
 
-> The `get` method requires the [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) option to be set and the `id` of the model to be specified.
+> The `get` method requires the [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) option to be set and the `id` of the model to be specified. The `get` method will look for items only on the current page if [`serverPaging`](/api/javascript/data/datasource/configuration/serverpaging) is enabled.
 
 #### Parameters
 
@@ -3555,6 +3742,7 @@ The id of the model to look for.
     });
     dataSource.fetch(function() {
       var dataItem = dataSource.get(1);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataItem.name); // displays "Jane Doe"
     });
     </script>
@@ -3572,6 +3760,31 @@ The `uid` of the model to look for.
 #### Returns
 
 `kendo.data.ObservableObject`&mdash;The model instance. Returns `undefined` if a model with the specified `uid` is not found.
+
+#### Example - find model by uid
+
+    <button id="get">Get By UID</button>
+    <div id="grid"></div>
+    <div id="result"></div>
+
+    <script>
+      var dataSource = new kendo.data.DataSource({
+        data: [{ID: 1, Name: "Name 1"}, {ID: 2, Name: "Name 2"}]
+      });
+      $("#grid").kendoGrid({
+        dataSource: dataSource
+      });
+      
+      $("#get").on("click", function() {
+        let secondRow = $("#grid tr:last"),
+            uid = secondRow.data("uid");
+        
+        // Get the dataItem by using the uid property.
+        let dataItem = dataSource.getByUid(uid);
+        
+        $("#result").html(`<h4>Result</h4><p>Name - ${dataItem.Name}</p><p>ID - ${dataItem.ID}</p>`);
+      });
+    </script>
 
 ### group
 
@@ -3599,13 +3812,19 @@ The grouping configuration. Accepts the same values as the [`group`](/api/javasc
     });
     dataSource.group({ field: "category" });
     var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(view.length); // displays "2"
     var beverages = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(beverages.value); // displays "Beverages"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(beverages.items[0].name); // displays "Tea"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(beverages.items[1].name); // displays "Coffee"
     var food = view[1];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(food.value); // displays "Food"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(food.items[0].name); // displays "Ham"
     </script>
 
@@ -3621,7 +3840,9 @@ The grouping configuration. Accepts the same values as the [`group`](/api/javasc
       group: { field: "category" }
     });
     var groups = dataSource.group();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(groups.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(groups[0].field); // displays "category"
     </script>
 
@@ -3647,8 +3868,10 @@ Checks if the data items have changed.
       }
     });
     dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.hasChanges()); // displays "false"
       dataSource.add({ name: "John Doe" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.hasChanges()); // displays "true"
     });
     </script>
@@ -3679,6 +3902,7 @@ The target data item.
     dataSource.fetch(function() {
       var dataItem = dataSource.at(0);
       var index = dataSource.indexOf(dataItem);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(index); // displays "0"
     });
     </script>
@@ -3715,6 +3939,7 @@ Either a [`kendo.data.Model`](/api/javascript/data/model) instance or a JavaScri
     dataSource.fetch(function() {
       var dataItem = dataSource.insert(0, { name: "John Doe" });
       var index = dataSource.indexOf(dataItem);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(index); // displays "0"
     });
     </script>
@@ -3786,6 +4011,7 @@ The online state - `true` for online, `false` for offline.
         }
     });
     dataSource.online(false);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.online()); // displays "false"
 
 ### offlineData
@@ -3838,6 +4064,7 @@ The array of data items that replace the current offline state of the data sourc
         dataSource.sync();
         // get the offline data
         var offlineData = dataSource.offlineData();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(offlineData[0].__state__); // displays "update"
     });
     </script>
@@ -3869,6 +4096,7 @@ The new page.
     dataSource.fetch(function() {
       dataSource.page(2);
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "John Doe"
     });
     </script>
@@ -3884,6 +4112,7 @@ The new page.
       pageSize: 1,
       page: 2
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.page()); // displays "2"
     </script>
 
@@ -3914,6 +4143,7 @@ The new page size.
     dataSource.fetch(function() {
       dataSource.page(2);
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "John Doe"
     });
     </script>
@@ -3928,6 +4158,7 @@ The new page size.
       ],
       pageSize: 1
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.pageSize()); // displays "1"
     </script>
 
@@ -3954,7 +4185,9 @@ The data item or data items to append to the data source.
       }
     });
     dataSource.pushCreate({ id: 1, name: "John Doe" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(0).name); // displays "John Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(0).isNew()); // displays "false"
     </script>
 
@@ -3972,7 +4205,9 @@ The data item or data items to append to the data source.
         { id: 1, name: "John Doe" },
         { id: 2, name: "Jane Doe" }
     ]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(1).name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(1).isNew()); // displays "false"
     </script>
 
@@ -4003,7 +4238,9 @@ The data item or data items to remove from the data source.
     });
     dataSource.read();
     dataSource.pushDestroy({ id: 1, name: "John Doe" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.total()); // displays "0"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.hasChanges()); // displays "false"
     </script>
 
@@ -4026,7 +4263,9 @@ The data item or data items to remove from the data source.
         { id: 1, name: "John Doe" },
         { id: 2, name: "Jane Doe" }
     ]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.total()); // displays "0"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.hasChanges()); // displays "false"
     </script>
 
@@ -4061,7 +4300,44 @@ The data item or data items to append to the data source.
 
     //insert record at specified index
     dataSource.pushInsert(1, { id: 2, name: "Peter" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(1).name); // displays "Peter"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(dataSource.at(1).isNew()); // displays "false"
+    </script>
+
+### pushMove
+
+Moves the specified data items to the data source without marking them as "new". The data source cannot reorder data items to the server without explicit knowledge of the sorting mechanism. Therefore, this is an explicitly client-side operation. 
+
+#### Parameters
+
+##### index `Number`
+
+The zero-based index at which the data item should be moved to.
+
+##### items `Object|Array`
+
+The data item or data items to append to the data source.
+
+#### Example - pushInsert with a single item
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      schema: {
+        model: {
+          id: "id"
+        }
+      }
+    });
+    dataSource.pushCreate([{ id: 1, name: "John Doe" }, { id: 2, name: "Alex" }, { id: 3, name: "Peter" }]);
+
+    /* Move the first item to second position. */
+    dataSource.pushMove(2, dataSource.at(0));
+
+	  /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(dataSource.at(1).name); // displays "John Doe"
+	  /* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(1).isNew()); // displays "false"
     </script>
 
@@ -4092,8 +4368,11 @@ The data item or data items to update.
     });
     dataSource.read();
     dataSource.pushUpdate({ id: 1, name: "Jane Doe" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(0).name); // displays "Jane Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(0).dirty); // displays "false"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.hasChanges()); // displays "false"
     </script>
 
@@ -4116,8 +4395,11 @@ The data item or data items to update.
         { id: 1, name: "John" },
         { id: 2, name: "Jane" }
     ]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(0).name); // displays "John"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.at(0).dirty); // displays "false"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.hasChanges()); // displays "false"
     </script>
 
@@ -4175,13 +4457,16 @@ The sort configuration. Accepts the same values as the [`sort`](/api/javascript/
       },
       change: function(e) {
         var view = this.view();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(view)
         console.log(view[0].ProductName); // displays "Manjimup Dried Apples"
       }
     });
-    // sort by "ProductName" and get the third page with page size set to 20
+    // Filter only results with ProductID greather than 30, sort by "ProductName" and get the second page with page size set to 20. 
     dataSource.query({
       sort: { field: "ProductName", dir: "desc" },
-      page: 3,
+	  filter: { field: "ProductID", operator: "gt", value: 30 },
+      page: 2,
       pageSize: 20
     });
     </script>
@@ -4205,6 +4490,7 @@ The sort configuration. Accepts the same values as the [`sort`](/api/javascript/
       pageSize: 20
     }).then(function(e) {
         var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].ProductName); // displays "Manjimup Dried Apples"
       });
     </script>
@@ -4237,6 +4523,7 @@ Optional data to pass to the remote service. If you need to filter, it is better
       },
       change: function(e) {
         var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view[0].ProductName); // displays "Chai"
       }
     });
@@ -4260,6 +4547,7 @@ Optional data to pass to the remote service. If you need to filter, it is better
 
     dataSource.read().then(function() {
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].ProductName); // displays "Chai"
     });
     </script>
@@ -4290,7 +4578,9 @@ The data item which should be removed.
       var dataItem = dataSource.at(0);
       dataSource.remove(dataItem);
       var data = dataSource.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data.length);  // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data[0].name); // displays "John Doe"
     });
     </script>
@@ -4314,6 +4604,7 @@ Gets the current skip parameter of the dataSource. The skip parameter indicates 
       pageSize: 1,
       page: 2
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.skip()); // displays "1"
     </script>
 
@@ -4342,6 +4633,7 @@ The sort configuration. Accepts the same values as the [`sort`](/api/javascript/
     });
     dataSource.sort({ field: "age", dir: "desc" });
     var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(view[0].name); // displays "John Doe"
     </script>
 
@@ -4356,7 +4648,9 @@ The sort configuration. Accepts the same values as the [`sort`](/api/javascript/
       sort: { field: "age", dir: "desc" }
     });
     var sort = dataSource.sort();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sort.length);   // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sort[0].field); // displays "age"
     </script>
 
@@ -4427,6 +4721,7 @@ Returns `0` if the data source was not populated with data items via the [`read`
       ]
     });
     dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.total()); // displays "2"
     });
     </script>
@@ -4449,6 +4744,7 @@ Gets the number of available pages.
       ],
       pageSize: 1
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.totalPages());   // displays "2"
     </script>
 
@@ -4477,7 +4773,9 @@ To ensure that data is available this method should be used within the [`change`
     });
     dataSource.fetch(function() {
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view[0].name); // displays "Tea"
     });
     </script>
@@ -4498,11 +4796,16 @@ To ensure that data is available this method should be used within the [`change`
     });
     dataSource.fetch(function() {
       var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(view.length); // displays "1"
       var beverages = view[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.value); // displays "Beverages"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.items.length); // displays "2"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.items[0].name); // displays "Coffee"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(beverages.items[1].name); // displays "Tea"
     });
     </script>
@@ -4552,6 +4855,7 @@ The array of data items that were affected (or read).
       },
       change: function(e) {
         var data = this.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(data.length); // displays "77"
       }
     });
@@ -4563,6 +4867,7 @@ The array of data items that were affected (or read).
     <script>
     function dataSource_change(e) {
       var data = this.data();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(data.length); // displays "77"
     }
     var dataSource = new kendo.data.DataSource({
@@ -4608,6 +4913,7 @@ The current [`jqXHR`](https://api.jquery.com/Types/#jqXHR).
 
     <script>
     function dataSource_error(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.status); // displays "error"
     }
     var dataSource = new kendo.data.DataSource({
@@ -4649,7 +4955,9 @@ The data source instance which fired the event.
 
     <script>
     function dataSource_push(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.type); // displays "update"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.items[0].name); // displays "Jane Doe"
     }
     var dataSource = new kendo.data.DataSource({
@@ -4709,7 +5017,9 @@ Set to:
       requestEnd: function(e) {
         var response = e.response;
         var type = e.type;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(type); // displays "read"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(response.length); // displays "77"
       }
     });
@@ -4729,6 +5039,7 @@ Set to:
       requestEnd: function(e) {
         //check the "response" argument to skip the local operations
         if (e.type === "read" && e.response) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Current request is 'read'.");
         }
       }
@@ -4742,7 +5053,9 @@ Set to:
     function dataSource_requestEnd(e) {
       var response = e.response;
       var type = e.type;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(type); // displays "read"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(response.length); // displays "77"
     }
     var dataSource = new kendo.data.DataSource({
@@ -4797,6 +5110,7 @@ Set to:
         }
       },
       requestStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("request started");
       }
     });
@@ -4807,6 +5121,7 @@ Set to:
 
     <script>
     function dataSource_requestStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("request started");
     }
     var dataSource = new kendo.data.DataSource({
@@ -4870,6 +5185,7 @@ The data source instance which fired the event.
         }
       },
       sync: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("sync complete");
       },
       schema: {
@@ -4884,6 +5200,7 @@ The data source instance which fired the event.
 
     <script>
     function dataSource_sync(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("sync complete");
     }
     var dataSource = new kendo.data.DataSource({

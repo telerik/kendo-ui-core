@@ -1,6 +1,6 @@
 ---
 title: Column Templates
-page_title: jQuery Grid Documentation | Column Templates | Kendo UI
+page_title: jQuery Grid Documentation - Column Templates
 description: "Get started with the jQuery Grid by Kendo UI and learn how to customize the way the column displays its value."
 slug: column_templates_kendoui_grid_widget
 position: 3
@@ -23,6 +23,7 @@ The following examples demonstrate how to customize the way the column displays 
 
 The following example demonstrates how to set the template as a string and wrap the column value in HTML.
 
+```dojo
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -33,11 +34,13 @@ The following example demonstrates how to set the template as a string and wrap 
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
     </script>
+```
 
 ## Setting Column Templates as Functions
 
 The following example demonstrates how to set the template as a function that is returned by `kendo.template`.
 
+```dojo
     <div id="grid"></div>
     <script id="name-template" type="text/x-kendo-template">
       <strong>#: name #</strong>
@@ -51,9 +54,11 @@ The following example demonstrates how to set the template as a function that is
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
     </script>
+```
 
 The following example demonstrates how to set the template as a function which returns a string.  
 
+```dojo
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -66,6 +71,13 @@ The following example demonstrates how to set the template as a function which r
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
     </script>
+```
+
+## KB Articles on Column Templates
+
+* [Using Checkbox Column Templates and Editing]({% slug howto_use_checkbox_column_templateand_edit_grid %})
+* [Rendering a Grid Editor in the Column Template]({% slug howto_render_editor_column_template_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
 
 ## See Also
 

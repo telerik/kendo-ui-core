@@ -20,8 +20,8 @@
             assert.equal(input.attr("aria-expanded"), "false");
         });
 
-        it("TimePicker adds aria-owns", function() {
-            assert.equal(input.attr("aria-owns"), instance.timeView.ul.attr("id"));
+        it("TimePicker adds aria-controls", function() {
+            assert.equal(input.attr("aria-controls"), instance.timeView.ul.attr("id"));
         });
 
         it("TimePicker sets aria-expanded=true", function() {
@@ -37,10 +37,6 @@
 
         it("TimePicker adds role to the toggle button", function() {
             assert.equal(instance._arrow.attr("role"), "button");
-        });
-
-        it("TimePicker adds aria-controls to the toggle button", function() {
-            assert.equal(instance._arrow.attr("aria-controls"), instance.timeView.ul.attr("id"));
         });
 
         it("TimePicker sets id to the ul element", function() {
@@ -98,5 +94,31 @@
         });
 
 
+    });
+
+    describe("kendo.ui.TimePicker aria with AXE", function() {
+        beforeEach(function() {
+            $("<label for='hiredate'>Deliver hour</label><input id='hiredate' />").appendTo(Mocha.fixture);
+            input = $(Mocha.fixture).find("input");
+            Mocha.fixture.attr("role", "main");
+        });
+
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("TimePicker is accessible", function(done) {
+            var timepicker = new TimePicker(input);
+
+            axeRunFixture(done);
+        });
+
+        it("TimePicker has accessible time popup", function(done) {
+            instance = new TimePicker(input);
+
+            instance.open();
+
+            axeRun(instance.timeView.popup.element.closest(".k-animation-container").parent(), done, ["scrollable-region-focusable"]);
+        });
     });
 }());

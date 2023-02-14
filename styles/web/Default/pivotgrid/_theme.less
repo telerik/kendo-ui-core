@@ -1,0 +1,170 @@
+.k-pivotgrid {
+    .fill (
+        @pivotgrid-text,
+        @pivotgrid-bg,
+        @pivotgrid-border
+    );
+}
+
+.k-pivotgrid-column-headers,
+.k-pivotgrid-row-headers,
+.k-pivotgrid-empty-cell {
+    .fill (
+        @pivotgrid-headers-text,
+        @pivotgrid-headers-bg,
+        @pivotgrid-headers-border
+    );
+}
+
+.k-pivotgrid-empty-cell {
+    .fill (
+        @border: @pivotgrid-alt-border
+    );
+}
+
+.k-pivotgrid-row-headers .k-pivotgrid-row .k-pivotgrid-cell:last-child {
+    border-right-color: @pivotgrid-alt-border;
+}
+
+.k-pivotgrid-column-headers .k-pivotgrid-column-total:nth-last-of-type(2) .k-pivotgrid-cell:not(.k-pivotgrid-expanded),
+.k-pivotgrid-column-headers .k-pivotgrid-row:last-child {
+    border-bottom-color: @pivotgrid-alt-border;
+}
+
+
+.k-pivotgrid-header-total,
+.k-pivotgrid-total {
+    .fill (
+        @pivotgrid-total-text,
+        @pivotgrid-total-bg,
+        @pivotgrid-total-border
+    );
+}
+
+
+// Hover state
+.k-pivotgrid-row-headers tbody > .k-pivotgrid-row.k-state-hover,
+.k-pivotgrid-row-headers tbody > .k-pivotgrid-row.k-hover,
+.k-pivotgrid-row-headers tbody > .k-pivotgrid-row:hover,
+.k-pivotgrid-column-headers tbody > .k-pivotgrid-row.k-state-hover,
+.k-pivotgrid-column-headers tbody > .k-pivotgrid-row.k-hover,
+.k-pivotgrid-column-headers tbody > .k-pivotgrid-row:hover,
+.k-pivotgrid-values tbody > .k-pivotgrid-row.k-state-hover,
+.k-pivotgrid-values tbody > .k-pivotgrid-row.k-hover,
+.k-pivotgrid-values tbody > .k-pivotgrid-row:hover {
+    .fill (
+        @pivotgrid-hover-text,
+        @pivotgrid-hover-bg,
+        @pivotgrid-hover-border
+    );
+}
+
+// Focus state
+.k-pivotgrid-cell.k-state-focus,
+.k-pivotgrid-cell.k-focus,
+.k-pivotgrid-cell:focus,
+.k-master-row > .k-pivotgrid-cell:focus,
+.k-grouping-row > .k-pivotgrid-cell:focus,
+.k-detail-row > .k-pivotgrid-cell:focus,
+.k-group-footer > .k-pivotgrid-cell:focus {
+    .box-shadow(@pivotgrid-focus-shadow);
+}
+
+// Selected state
+.k-pivotgrid-cell.k-state-selected,
+.k-pivotgrid-cell.k-selected,
+.k-pivotgrid-row.k-state-selected > .k-pivotgrid-cell,
+.k-pivotgrid-row.k-selected > .k-pivotgrid-cell {
+    .fill (
+        @pivotgrid-selected-text,
+        @pivotgrid-selected-bg,
+        @pivotgrid-selected-border
+    );
+}
+
+.k-pivotgrid-configurator-button,
+.k-pivotgrid-configurator-panel {
+    .fill (
+        @pivotgrid-configurator-text,
+        @pivotgrid-configurator-bg,
+        @pivotgrid-configurator-border
+    );
+}
+
+.k-pivotgrid-configurator-header {
+    .fill(
+        @pivotgrid-configurator-header-text,
+        @pivotgrid-configurator-header-bg,
+        @pivotgrid-configurator-header-border
+    );
+}
+
+.k-pivotgrid-configurator-content .k-fields-list-wrapper {
+    .fill(
+        @border: @pivotgrid-configurator-border
+    );
+}
+
+
+// Calculated field
+.k-calculated-field {
+    .fill (
+        @pivotgrid-calculated-field-text,
+        @pivotgrid-calculated-field-bg,
+        @pivotgrid-calculated-field-border
+    );
+}
+
+.k-calculated-field-header {
+    .fill(
+        @pivotgrid-calculated-field-header-text,
+        @pivotgrid-calculated-field-header-bg,
+        @pivotgrid-calculated-field-header-border
+    );
+}
+
+.k-filter-menu .k-calculated-item  {
+    .fill( @border: @component-border );
+}
+
+.k-pivotgrid-configurator-content .k-form-field-wrapper {
+    .fill( @border: @component-border );
+}
+
+
+// Overlay mode
+.k-pivotgrid-configurator-overlay {
+    .k-flex-row & {
+        .box-shadow( @pivotgrid-configurator-end-shadow );
+    }
+
+    .k-flex-row-reverse & {
+        .box-shadow( @pivotgrid-configurator-start-shadow );
+    }
+
+    .k-flex-col & {
+        .box-shadow( @pivotgrid-configurator-top-shadow );
+    }
+
+    .k-flex-col-reverse & {
+        .box-shadow( @pivotgrid-configurator-bottom-shadow );
+    }
+}
+
+// Column Menu
+.k-pivotgrid-column-menu .k-actions {
+    .fill( @border: @component-border );
+}
+
+
+// jquery specific -- old pivot
+.k-pivotgrid-configurator-panel.kendo-jquery {
+
+    .k-column-fields {
+        border-color: @component-border;
+    }
+
+}
+.k-pivot-table {
+    border-color: @component-border;
+}

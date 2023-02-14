@@ -1,6 +1,6 @@
 ---
 title: Excel Export
-page_title: jQuery Grid Documentation | Excel Export | Kendo UI
+page_title: jQuery Grid Documentation - Excel Export
 description: "Get started with the jQuery Grid by Kendo UI and learn how to set the Excel export functionality."
 previous_url: /excel-export
 slug: exporting_excel_kendoui_grid_widget
@@ -9,7 +9,7 @@ position: 1
 
 # Excel Export
 
-As of the Kendo UI Q3 2014 (2014.3.1119) release, the Grid widget provides built-in Excel export functionality.
+As of the Kendo UI Q3 2014 (2014.3.1119) release, the Grid component provides built-in Excel export functionality.
 
 For runnable examples, refer to:
 * [Demo on exporting the Grid to Excel](https://demos.telerik.com/kendo-ui/grid/excel-export)
@@ -30,15 +30,13 @@ To initiate Excel export through code, call the [`saveAsExcel`](/api/javascript/
 > * The Grid uses the current column order, visibility, and dimensions to generate the Excel file.
 > * The Grid does not export the current CSS theme in the Excel file. For more information on how to change the visual appearance of the Excel document, refer to the below section about [customization of the Excel document]({% slug exporting_excel_kendoui_grid_widget %}#excel-customization).
 > * The Grid exports only data-bound columns. All columns that do not have their [field](/api/javascript/ui/grid/configuration/columns.field) option set are ignored.
-> * The [`format`](/api/javascript/ui/grid/configuration/columns.format) option is not used during export. For more information, refer to the section on [column formats]({% slug exporting_excel_kendoui_grid_widget %}#limitations).
-> * The [`template`](/api/javascript/ui/grid/configuration/columns.template) option is not used during export. For more information, refer to the section on [column templates]({% slug exporting_excel_kendoui_grid_widget %}#limitations).
-> * The [`detailTemplate`](/api/javascript/ui/grid/configuration/detailtemplate) option is not used during export. For more information, refer to the section on [detail templates]({% slug exporting_excel_kendoui_grid_widget %}#limitations).
+> * The [`format`](/api/javascript/ui/grid/configuration/columns.format) option is not used during export. For more information, refer to the section on [column formats](#known-limitations).
+> * The [`template`](/api/javascript/ui/grid/configuration/columns.template) option is not used during export. For more information, refer to the section on [column templates](#known-limitations).
+> * The [`detailTemplate`](/api/javascript/ui/grid/configuration/detailtemplate) option is not used during export. For more information, refer to the section on [detail templates](#known-limitations).
 
-For more information, refer to the [online demo on Excel export](http://demos.telerik.com/kendo-ui/grid/excel-export).
+For more information, refer to the [online demo on Excel export](https://demos.telerik.com/kendo-ui/grid/excel-export).
 
 The following example demonstrates how to enable the Excel export functionality of the Grid.
-
-###### Example
 
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
@@ -82,8 +80,6 @@ With regard to its Excel export, the Grid enables you to:
 By default, the Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/javascript/ui/grid/configuration/excel.allpages) option to `true`.
 
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use [server-side export](#server-side-processing).
-
-###### Example
 
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
@@ -129,8 +125,6 @@ Each row has a `type` field that can be used to distinguish between the various 
 - `"group-header"`
 - `"group-footer"`
 - `"data"`
-
-###### Example
 
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
@@ -180,8 +174,7 @@ By default, each Grid exports its content in a separate Excel sheet. For more in
 
 To send the generated file to a remote service, prevent the default file saving and post the `base64` encoded contents.
 
-###### Example
-
+```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
     <div id="grid"></div>
@@ -216,18 +209,34 @@ To send the generated file to a remote service, prevent the default file saving 
             }
         });
     </script>
+```
 
 ## Server-Side Processing
 
-To export huge datasets to Excel, use the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
-* For examples on exporting Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
-* For more information on the Grid server-side processing, refer to [this article](http://docs.telerik.com/aspnet-mvc/helpers/grid/excel-export#use-server-side-processing).
+* For examples on exporting Excel files, refer to the [RadSpreadProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
+* For more information on the Grid server-side processing, refer to [this article](https://docs.telerik.com/aspnet-mvc/helpers/grid/excel-export#use-server-side-processing).
+
+## Exclude Column From Exporting
+
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+
+It can also be set to an Object containing different values for Excel and PDF exporting modes, providing separate options for each:
+
+```javascript
+columns: [
+   { 
+       field: 'ContactTitle',
+       exportable: { pdf: true, excel: false }
+   }
+]
+```
 
 ## Known Limitations
 
 * The Grid and its DataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.
-* The maximum size of the exported file has a system-specific limit. For large data sets, use the server-side solution which is provided by the [RadSpreadStreamProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) as part of the [Document Processing Library](http://docs.telerik.com/devtools/document-processing/introduction).
+* The maximum size of the exported file has a system-specific limit. For large data sets, use the server-side solution which is provided by the [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) as part of the [Document Processing Library](https://docs.telerik.com/devtools/document-processing/introduction).
 * Exporting the Grid to Excel in older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid/configuration/excel.proxyurl).
 * If you use Kendo UI Q2 2014 SP2 (2014.2.1008) or earlier, the export requires a custom implementation. To achieve that task, either:
     * Use a server-side implementation to directly export the data that is otherwise displayed by the Grid, or
@@ -240,17 +249,22 @@ To export huge datasets to Excel, use the new [RadSpreadStreamProcessing library
 
 ## Further Reading
 
-* [Exporting Kendo UI Grid to Excel](http://www.telerik.com/support/code-library/export-grid-to-excel-8d91dd145501)
-* [Exporting MVC Grid to Excel](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/excel-export-server-side)
-* [Exporting MVC Grid to PDF](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/pdf-export-server-side)
-* [Exporting MVC Grid to CSV](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/csv-export-server-side)
+* [Exporting Kendo UI Grid to Excel](https://www.telerik.com/support/code-library/export-grid-to-excel-8d91dd145501)
 * [Creating Excel Documents with Kendo UI](/framework/excel/introduction)
 * [Saving Files with Kendo UI](/framework/save-files/introduction)
 * [JavaScript API Reference: kendo.ooxml.Workbook](/api/javascript/ooxml/workbook)
 
+## KB Articles on Excel Export
+
+* [Formatting Cell Values]({% slug howto_format_cell_values_grid %})
+* [Using the Column Template]({% slug howto_use_column_template_grid %})
+* [Exporting Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
+* [Exporting Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Exporting the Grid to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/excel-export)
+* [Export Images to Excel]({% slug export-images-in-grid %})
 * [Copying Data to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/copy-to-excel)
-* [Knowledge Base Section](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

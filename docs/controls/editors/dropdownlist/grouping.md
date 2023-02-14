@@ -1,6 +1,6 @@
 ---
 title: Grouping
-page_title: jQuery DropDownList Documentation | Grouping | Kendo UI
+page_title: jQuery DropDownList Documentation - Grouping
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to configure its grouping functionality."
 slug: grouping_kendoui_ddl_widget
 position: 3
@@ -10,15 +10,13 @@ position: 3
 
 As of the Kendo UI Q1 2015 (2015.1.318) release, the Kendo UI DropDownList provides options for binding it to a grouped [Kendo UI DataSource component]({% slug overview_kendoui_datasourcecomponent %}).
 
-The grouping functionality allows you to display data items that are categorized by a specific model field. For more information, refer to the article on the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) configuration.
+The grouping functionality allows you to display data items that are categorized by a specific model field. For more information, refer to the article on the [`group`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) configuration.
 
 ## Getting Started
 
-To enable grouping, use the remote `transport` configuration and a grouped DataSource. To display grouped items in the widget, group the DataSource component by using its [`group`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) configuration option. Once you define the `group` option, the DropDownList will automatically display the grouped suggestion items.
+To enable grouping, use the remote `transport` configuration and a grouped DataSource. To display grouped items in the widget, group the DataSource component by using its [`group`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) configuration option. Once you define the `group` option, the DropDownList will automatically display the grouped suggestion items.
 
 > The grouped data will be sorted either in ascending or descending order which is expected behavior and cannot be modified. To group the data in a specific order, use [server grouping](/api/javascript/data/datasource/configuration/servergrouping).
-
-###### Example
 
 ```dojo
 <div class="demo-section k-header">
@@ -50,8 +48,6 @@ To customize the inline group title which is displayed next to the suggestion it
 
 The following example demonstrates how to define a custom group template.
 
-###### Example
-
 ```dojo
 <div class="demo-section k-header">
     <h4>Customers</h4>
@@ -79,11 +75,9 @@ The following example demonstrates how to define a custom group template.
 
 ## Customizing the Fixed Group Header
 
-To customize the group title which is displayed in the fixed group header positioned on top of the list, use the [`fixedGroupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/fixedgrouptemplate) option. It displays the group title of the current visible group. The value is updated dynamically on the scroll position of the grouped list. The parameter that is passed to the template is the group title value.
+To customize the group title which is displayed in the fixed group header positioned on top of the list, use the [`fixedGroupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/fixedgrouptemplate) option. It displays the group title of the current visible group. The value is updated dynamically on the scroll position of the grouped list. The parameter that is passed to the template is the group title value.
 
 The following example demonstrates how to define a custom fixed group template.
-
-###### Example
 
 ```dojo
 <div class="demo-section k-header">

@@ -5,11 +5,6 @@
     direction: rtl;
 }
 
-.k-rtl .k-badge {
-    margin-left: 0;
-    margin-right: 6px;
-}
-
 // AutoComplete
 
 .k-rtl .k-autocomplete .k-i-loading,
@@ -30,122 +25,11 @@
     margin-right: -.125rem;
 }
 
-// TextBoxes, Pickers, Combos
-
-.k-rtl .k-numeric-wrap.k-expand-padding
-{
-    padding-left: 0;
-}
-
-.k-rtl .k-datetimepicker .k-picker-wrap {
-    padding-right: 0;
-    padding-left: 4em;
-}
-
-.k-rtl span.k-picker-wrap .k-select,
-.k-rtl .k-numeric-wrap .k-select,
-.k-rtl .k-dropdown-wrap .k-select
-{
-    right: auto;
-    left: 0;
-    border-width: 0 1px 0 0;
-}
-
-.k-rtl .k-dropdown-wrap .k-input,
-.k-rtl .k-picker-wrap .k-input,
-.k-rtl .k-numeric-wrap .k-input
-{
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-
-.k-rtl .k-autocomplete > .k-i-close,
-.k-rtl .k-multiselect > .k-multiselect-wrap > .k-i-close {
-    right: auto;
-    margin-right: 0;
-}
-
-.k-rtl .k-combobox > .k-dropdown-wrap > .k-i-close {
-    right: auto;
-}
-
-.k-rtl .k-dropdowntree > .k-dropdown-wrap > .k-i-close {
-    right: auto;
-}
-
-.k-rtl .k-datetimepicker .k-picker-wrap .k-icon
-{
-    margin: 0 2px 0 0;
-}
-
-.k-rtl.k-popup > .k-static-header
-{
-    text-align: left;
-    padding-left: 22px;
-}
-
-.k-rtl.k-popup .k-item > .k-group {
-    right: auto;
-    left: 0;
-}
-
-.k-rtl.k-popup .k-state-hover > .k-group {
-    right: auto;
-    left: -1px;
-}
-
-.k-rtl.k-popup > .k-group-header,
-.k-rtl.k-popup > .k-virtual-wrap > .k-group-header
-{
-    text-align: left;
-}
-
-.k-rtl .k-list-filter {
-
-    & > .k-icon {
-        right: auto;
-        left: 6px;
-    }
-
-    & > .k-textbox {
-        padding-left: 20px;
-        padding-right: 0;
-    }
-}
-
-.k-rtl .k-datetimepicker .k-select
-{
-
-    .k-link-date
-    {
-        margin-right: -.285em;
-        margin-left: auto;
-    }
-
-    .k-link-time
-    {
-        margin-right: .428em;
-        margin-left: -.285em;
-    }
-}
 
 // Calendar
 
-.k-rtl .k-widget.k-calendar .k-nav-prev { left: auto; right: 1%; }
-.k-rtl .k-widget.k-calendar .k-nav-next { right: auto; left: 1%; }
-
 .k-rtl .k-calendar .k-i-arrow-60-right,
 .k-rtl .k-calendar .k-i-arrow-60-left
-{
-    transform: scaleX(-1);
-}
-
-// Scheduler
-
-.k-rtl .k-scheduler .k-scheduler-navigation .k-i-arrow-60-right,
-.k-rtl .k-scheduler .k-scheduler-navigation .k-i-arrow-60-left
 {
     transform: scaleX(-1);
 }
@@ -170,13 +54,6 @@
     padding-right: 0.3em;
 }
 
-.k-rtl .k-breadcrumbs
-{
-    float: right;
-    padding-right: 0;
-    padding-left: 2px;
-}
-
 .k-rtl .k-search-wrap
 {
     float: left;
@@ -186,14 +63,6 @@
 {
     right: auto;
     left: 2px;
-}
-
-.k-rtl .k-breadcrumbs-wrap
-{
-    left: auto;
-    right: 0;
-    padding-left: 0;
-    padding-right: 5px;
 }
 
 .k-rtl .k-editor-dialog .k-button-wrapper
@@ -206,9 +75,7 @@
     float: left;
 }
 
-.k-rtl .k-toolbar-wrap,
-.k-rtl .k-tile
-{
+.k-rtl .k-toolbar-wrap {
     float: right;
 }
 
@@ -218,15 +85,15 @@
     margin: 4px 4px 0 10px;
 }
 
-.k-rtl .k-tile strong
-{
-    float: right;
-}
-
 .k-rtl .k-i-indent-increase,
 .k-rtl .k-i-indent-decrease
 {
     transform: scaleX(-1);
+}
+
+.k-rtl .k-overflow-tools {
+    left: 0;
+    right: auto;
 }
 
 // Grid
@@ -295,9 +162,9 @@
 }
 
 .k-rtl .k-grid-header-locked,
-.k-rtl .k-grid-content-locked
-{
-    border-width: 0;
+.k-rtl .k-grid-content-locked {
+    border-right-width: 0;
+    border-left-width: 1px;
 }
 
 .k-rtl .k-grid-header th.k-with-icon .k-link
@@ -305,30 +172,6 @@
     margin: -.5em 0 -.4em -.6em;
     padding: .5em 0 .4em .6em;
     margin-left: 18px;
-}
-
-.k-rtl .k-filtercell > span
-{
-    padding-right: 0;
-    padding-left: 4.8em;
-}
-
-.k-rtl .k-filtercell > .k-operator-hidden
-{
-    padding-right: 0;
-    padding-left: 2.3em;
-}
-
-.k-rtl .k-filtercell > span > .k-button
-{
-    right: auto;
-    left: 0;
-}
-
-.k-rtl .k-filter-row .k-dropdown-operator
-{
-    right: auto;
-    left: 2.5em;
 }
 
 // Editing
@@ -352,11 +195,7 @@
     margin-left: 2%;
 }
 
-.k-rtl .k-edit-field > input[type="checkbox"]:first-child,
-.k-rtl .k-edit-field > input[type="radio"]:first-child,
-.k-rtl .k-edit-field > label:first-child > input[type="checkbox"],
-.k-rtl .k-edit-field > .k-button:first-child
-{
+.k-rtl .k-edit-field > .k-button:first-child {
     margin-right: 0;
 }
 
@@ -373,11 +212,6 @@
     right: 0;
 }
 
-.k-webkit .k-rtl .k-dirty
-{
-    margin: -0.4em 0.7em 0 0;
-}
-
 // Gantt
 .k-rtl {
     .k-gantt .k-grid-header .k-header {
@@ -388,11 +222,6 @@
         float: right;
         margin-right: 0;
         margin-left: .6em;
-    }
-
-    .k-gantt-toolbar > .k-gantt-views {
-        float: left;
-        margin-left: 0;
     }
 
     button.k-gantt-toggle {
@@ -492,95 +321,6 @@
     border-left-width: 1px;
 }
 
-// Menu
-
-.k-rtl .k-menu .k-item,
-.k-rtl .k-widget.k-menu-horizontal > .k-item
-{
-    border-width: 0 0 0 1px;
-}
-
-.k-rtl .k-widget.k-menu-horizontal > .k-item
-{
-    float: right;
-}
-
-.k-rtl .k-menu .k-item > .k-link > .k-i-arrow-60-down
-{
-    margin-right: 0;
-    margin-left: -8px;
-}
-
-.k-rtl .k-menu-group .k-item > .k-link > .k-menu-expand-arrow,
-.k-rtl .k-menu-vertical .k-item > .k-link > .k-menu-expand-arrow,
-{
-    right: auto;
-    left: .2rem;
-}
-
-.k-rtl .k-menu .k-menu-group .k-item > .k-link
-{
-    padding-left: 4.929em;
-    padding-right: 1.714em;
-}
-
-.k-rtl .k-menu .k-image,
-.k-rtl .k-menu .k-sprite
-{
-    margin-left: 4px;
-    margin-right: -4px;
-}
-
-// Multiselect
-
-.k-rtl .k-multiselect-wrap .k-input
-{
-    float: right;
-}
-
-.k-rtl .k-multiselect-wrap li
-{
-    float: right;
-    padding: .1em .4em .1em 1.6em;
-    margin: 2px 2px 2px 0;
-}
-
-.k-rtl .k-multiselect-wrap .k-select {
-    right: auto;
-    left: 0;
-    padding: .03em .2em;
-}
-
-.k-rtl .k-autocomplete > .k-i-close,
-.k-rtl .k-multiselect-wrap > .k-i-close {
-    right: auto;
-}
-
-// Notification
-
-.k-rtl .k-notification-button .k-notification-wrap,
-.k-rtl.k-notification-button .k-notification-wrap
-{
-    padding-right: .5em;
-    padding-left: 20px;
-}
-
-.k-rtl .k-notification-wrap > .k-i-information,
-.k-rtl .k-notification-wrap > .k-i-information,
-.k-rtl .k-notification-wrap > .k-i-information,
-.k-rtl .k-notification-wrap > .k-i-warning,
-.k-rtl .k-notification-wrap > .k-i-erorr
-{
-    margin-right: 0;
-    margin-left: 4px;
-}
-
-.k-rtl .k-notification-wrap > .k-i-close
-{
-    right: auto;
-    left: 4px;
-}
-
 // PanelBar
 
 .k-rtl .k-panelbar-expand,
@@ -613,38 +353,9 @@
 
 // Scheduler
 
-.k-rtl .k-scheduler-toolbar > ul
-{
-    float: left;
-}
-
-.k-rtl .k-scheduler-toolbar > ul:first-child
-{
-    float: right;
-}
-
-.k-rtl .k-scheduler-toolbar > ul > li,
-.k-rtl .k-scheduler-footer > ul > li
-{
-    border-width: 1px 0 1px 1px;
-}
-
-.k-rtl .k-scheduler-toolbar > ul > li:first-child
-{
-    border-right-width: 1px;
-}
-
-.k-rtl .k-scheduler div.k-scheduler-footer ul li
-{
-    margin-right: 0;
-    margin-left: .6em;
-}
-
-.k-rtl .k-scheduler-toolbar .k-i-calendar,
-.k-rtl .k-scheduler-footer .k-icon
-{
-    margin-right: 0;
-    margin-left: 6px;
+.k-rtl .k-scheduler .k-i-arrow-60-left,
+.k-rtl .k-scheduler .k-i-arrow-60-right {
+    transform: scale(-1);
 }
 
 .k-rtl .k-scheduler .k-scrollbar-v .k-scheduler-header-wrap
@@ -675,6 +386,11 @@
 {
     border-left-width: 0;
     border-right-width: 1px;
+}
+
+.k-rtl .k-scheduler-agendaview .k-scheduler-table td.k-first
+{
+    border-right-width: 0;
 }
 
 .k-rtl .k-scheduler-agendaview .k-scheduler-table td.k-scheduler-datecolumn
@@ -780,24 +496,6 @@
     left: .81em;
 }
 
-.k-rtl .k-tooltip-bottom
-{
-    text-align: right;
-}
-
-.k-rtl .k-tooltip-bottom .k-button
-{
-    float: right;
-    margin-right: 0;
-    margin-left: .3em;
-}
-
-.k-rtl .k-tooltip-bottom .k-quickedit-details
-{
-    float: left;
-    margin-left: 0;
-}
-
 .k-rtl .k-scheduler-agendaview .k-scheduler-table th,
 .k-rtl .k-scheduler-agendaview .k-scheduler-table td
 {
@@ -858,31 +556,6 @@
 
 // Slider
 
-.k-rtl .k-slider .k-button-decrease
-{
-    left: auto;
-    right: 0;
-}
-
-.k-rtl .k-slider .k-button-increase
-{
-    right: auto;
-    left: 0;
-}
-
-.k-rtl .k-slider-horizontal .k-slider-track,
-.k-rtl .k-slider-horizontal .k-slider-selection
-{
-    left: auto;
-    right: 0;
-}
-
-.k-rtl .k-slider-horizontal .k-slider-buttons .k-slider-track
-{
-    left: auto;
-    right: 34px;
-}
-
 // TabStrip
 
 .k-rtl {
@@ -890,110 +563,15 @@
     .k-panelbar .k-tabstrip-items .k-item {
         margin-left: -1px;
         margin-right: 0;
-
-        .k-image,
-        .k-sprite {
-            margin: -3px -6px 0 3px;
-        }
     }
 
     .k-tabstrip-prev {
-        left: auto;
-        right: .4em;
         transform: scaleX(-1);
     }
 
     .k-tabstrip-next {
-        right: auto;
-        left: .4em;
         transform: scaleX(-1);
     }
-}
-
-// ToolBar
-
-
-.k-rtl .k-toolbar {
-
-    .k-overflow-anchor {
-        right: auto;
-        left: -1px;
-        border-width: 0 1px 0 0;
-    }
-
-    .k-toolbar-first-visible {
-        margin-left: 0.2em;
-        margin-right: 0;
-    }
-
-    .k-button-group .k-button {
-        margin-right: -1px;
-    }
-
-    .k-split-button .k-button:first-child {
-        margin-left: 0;
-        margin-right: -1px;
-    }
-}
-
-.k-rtl.k-overflow-container .k-overflow-button,
-.k-rtl.k-split-container .k-button
-{
-    text-align: right;
-}
-
-// ToolTip
-
-.k-rtl .k-tooltip-button
-{
-    text-align: left;
-}
-
-.k-rtl .k-tooltip-closable .k-tooltip-content
-{
-    padding-right: 0;
-    padding-left: 20px;
-}
-
-// TreeView
-
-.k-rtl .k-treeview .k-item
-{
-    padding: 0 16px 0 0;
-}
-
-.k-rtl .k-treeview .k-i-plus,
-.k-rtl .k-treeview .k-i-minus,
-.k-rtl .k-treeview .k-i-plus,
-.k-rtl .k-treeview .k-minus-disabled,
-.k-rtl .k-treeview .k-i-plus,
-.k-rtl .k-treeview .k-i-minus,
-.k-rtl .k-treeview .k-i-plus,
-.k-rtl .k-treeview .k-i-minus-disabled,
-.k-rtl .k-treeview .k-i-arrow-60-down,
-.k-rtl .k-treeview .k-i-arrow-60-up
-{
-    margin-left: 0;
-    margin-right: -16px;
-}
-
-.k-rtl .k-treeview .k-sprite,
-.k-rtl .k-treeview .k-image
-{
-    margin-right: 0;
-    margin-left: 3px;
-}
-
-.k-rtl .k-treeview .k-i-arrow-60-right,
-.k-rtl .k-treeview .k-i-arrow-45-down-right {
-    transform: scaleX(-1);
-    margin-right: -16px;
-    margin-left: auto;
-}
-
-.k-rtl .k-treeview .k-checkbox-label {
-    padding-left: 0;
-    padding-right: calc(14px + 0.7ex);
 }
 
 //  TreeList
@@ -1050,84 +628,30 @@
     right: 0;
 }
 
-.k-rtl .k-upload-selected
+.k-rtl .k-upload .k-action-buttons .k-button + .k-button
 {
-    margin-right: .8em;
-    margin-left: .2em;
+    margin-right: 6px;
+    margin-left: 0;
 }
 
-// Window
-
-.k-rtl .k-window-titlebar .k-window-actions
-{
-    right: auto;
-    left: .5em;
+.k-rtl .k-file-name-size-wrapper {
+    margin-left: 0;
+    margin-right: 1em;
 }
 
-// Dialog
+// Spreadsheet
 
-.k-rtl .k-dialog, .k-rtl.k-dialog
-{
+.k-rtl .k-spreadsheet {
 
-    .k-dialog-buttongroup
-    {
-        &.k-dialog-button-layout-stretched
-        {
-            .k-button {
-                border-radius: 0;
-            }
-            .k-button:first-child
-            {
-                border-right-width: 0;
-                border-left-width: 1px;
-            }
-            .k-button:last-child
-            {
-                border-left-width: 0;
-                border-right-width: 0;
-            }
+    .k-spreadsheet-cell {
+
+        .k-dirty {
+            margin: 0;
         }
-        &.k-dialog-button-layout-normal {
 
-            .k-button {
-                margin-left: 0;
-                margin-right: 0.5em;
-                &:first-child {
-                margin-right: 0;
-                }
-            }
+        &.k-spreadsheet-has-comment::after {
+            left: 0;
+            right: auto;
         }
-    }
-}
-
-.k-rtl .k-maskedtextbox .k-i-warning {
-    right: auto;
-    left: 0;
-}
-
-.k-rtl .k-dateinput .k-i-warning {
-    right: auto;
-    left: 0;
-}
-
-.k-rtl .k-datepicker .k-picker-wrap,
-.k-rtl .k-timepicker .k-picker-wrap,
-.k-rtl .k-datetimepicker .k-picker-wrap {
-    .k-icon.k-i-warning {
-        right: auto;
-        left: 0;
-    }
-}
-
-.k-rtl .k-grid {
-
-    th .k-checkbox {
-        margin-top: 0;
-        margin-right: 1px;
-        margin-left: 0;
-    }
-
-    td .k-checkbox {
-        margin-left: 0;
     }
 }

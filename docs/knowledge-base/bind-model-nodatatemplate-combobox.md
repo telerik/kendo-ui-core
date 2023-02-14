@@ -1,8 +1,8 @@
 ---
 title: Bind the viewModel in the noData Template of the ComboBox
-description: An example on how to bind the viewModel in the noData template of the Kendo UI ComboBox.
+page_title: Bind the viewModel in the noData Template - Kendo UI ComboBox for jQuery
+description: Learn how to bind the viewModel in the noData template of the Kendo UI ComboBox.
 type: how-to
-page_title: Bind the viewModel in the noData Template | Kendo UI ComboBox
 slug: bind-model-nodatatemplate-combobox
 tags: combobox, kendoui, kendo, mvvm, nodatatemplate, event, trigger, bind, viewmodel
 ticketid: 1133381
@@ -15,7 +15,7 @@ component: combobox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ComboBox</td>
+  <td>Progress® Kendo UI® ComboBox for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,14 +34,13 @@ component: combobox
 
 ## Description
 
-How to trigger the `click` event of a button which is nested in the `noDataTemplate` of the ComboBox?
+How can I trigger the `click` event of a button which is nested in the `noDataTemplate` of the ComboBox?
 
 ## Solution
 
 The `noDataTemplate` is initially hidden which means that the binding of the model is not applied to it. This logic causes the inability to trigger events of widgets that are nested in the template. As a result, once the template is rendered, you have to manually bind of the `viewModel` in the `dataBound` event of the Combobox.
 
 1. Check the number of rendered items. Zero items suggest that the `noDataTemplate` is rendered.
-
 1. Manually invoke the binding of the `viewModel` by using the client API of the ComboBox.
 
 ```dojo

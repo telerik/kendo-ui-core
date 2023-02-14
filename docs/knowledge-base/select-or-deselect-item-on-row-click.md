@@ -1,8 +1,8 @@
 ---
 title: Select or Deselect Items on Row Click in Grid
-description: An example on how to select or deselect by clicking a row in the Kendo UI Grid.
+description: Learn how to select or deselect by clicking a row in the Kendo UI Grid.
 type: how-to
-page_title: Select or Deselect Items on Row Click | Kendo UI Grid
+page_title: Select or Deselect Items on Row Click - Kendo UI Grid for jQuery
 slug: select-or-deselect-item-on-row-click
 tags: grid, selection, remove, deselect, unselect, select, row, click, multiple, persist
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2017.3.1026</td>
  </tr>
 </table>
@@ -28,7 +28,7 @@ How can I select and deselect multiple rows by clicking on a row in a Grid with 
 
 ## Solution
 
-When selection is enabled in the Grid component, the built-in option for deselecting a row or selecting multiple rows is `Ctrl`+ click. To deselect a row or select multiple rows by row clicking and without holding the `Ctrl` key, use the following approach. 
+When selection is enabled in the Grid component, the built-in option for deselecting a row or selecting multiple rows is `Ctrl`+ click. To deselect a row or select multiple rows by row clicking and without holding the `Ctrl` key, use the following approach.
 
 ```dojo
 
@@ -80,7 +80,7 @@ When selection is enabled in the Grid component, the built-in option for deselec
           var row = $(rowElement);
           var grid = $("#grid").getKendoGrid();
 
-          if (row.hasClass("k-state-selected")) {
+          if (row.hasClass("k-selected")) {
 
             var selected = grid.select();
 

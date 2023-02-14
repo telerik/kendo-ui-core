@@ -161,7 +161,7 @@ Which element the popup will be appended to. The element needs to be relatively 
 
 Configures how the popup should behave when it cannot be properly displayed and fully visible, if its `origin` and `position` settings are obeyed.
 
-Valid values are: `"fit"`, `"flip"`, `"flip fit"` and `"fit flip"`. "Fit" allows the popup to be shifted (moved) until it is fully visible. "Flip" allows the popup to switch its position, according to its anchor. If two words are used, the first one applies to the horizontal dimension and the second one - to the vertical dimension. If one word is used, the setting is applied to both dimensions.
+Valid values are: `"fit"`, `"flip"`, `"flip fit"` and `"fit flip"`. "Fit" allows the popup to be shifted (moved) until it is fully visible. "Flip" allows the popup to switch its position, according to its anchor. If two words are used, the first one applies to the vertical dimension and the second one - to the horizontal dimension. If one word is used, the setting is applied to both dimensions.
 
     <div style="height:500px;">&nbsp;</div>
     <p style="text-align:right;"><input id="datepicker" /></p>
@@ -312,6 +312,40 @@ The new configuration options.
 	popup.open();
     </script>
 
+### toggle
+
+Opens or closes the Popup component.
+
+#### Parameters
+
+##### toggle `Boolean` *(optional)*
+
+Defines the whether to open/close the Popup.
+
+#### Example
+
+    <input id="name" class='k-textbox'/>
+    <button class='k-button'>Open/Close</button>
+    <div id="popup" style="width:33%">
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        $("#popup").kendoPopup({
+          anchor: $("#name")
+        });
+      })
+
+      $("button").click(function(){
+        $("#popup").data("kendoPopup").toggle();
+      });
+    </script>
+    
 ### visible
 
 Checks whether the popup is visible
@@ -349,6 +383,7 @@ The widget instance which fired the event.
     <script>
     $("#popup").kendoPopup({
         activate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.sender.element[0]);
         }
     }).data("kendoPopup").open();
@@ -363,6 +398,7 @@ The widget instance which fired the event.
     var popup = $("#popup").data("kendoPopup");
 
     popup.bind("activate", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.sender.element[0]);
     });
 
@@ -421,6 +457,7 @@ The widget instance which fired the event.
     <script>
     $("#popup").kendoPopup({
         deactivate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.sender.element[0]);
         }
     }).data("kendoPopup").open();
@@ -435,6 +472,7 @@ The widget instance which fired the event.
     var popup = $("#popup").data("kendoPopup");
 
     popup.bind("deactivate", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.sender.element[0]);
     });
 

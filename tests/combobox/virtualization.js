@@ -40,7 +40,7 @@
         });
     }
 
-    describe("kendo.ui.ComboBox Virtualization", function () {
+    describe("kendo.ui.ComboBox Virtualization", function() {
         beforeEach(function() {
             kendo.ns = "";
             select = $("<select />").appendTo(Mocha.fixture);
@@ -123,14 +123,14 @@
         combobox.one("dataBound", function() {
             combobox.search("0");
             combobox.select(0).done(function() {
-                assert.isOk(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+                assert.isOk(combobox.listView.items().eq(0).hasClass("k-selected"));
 
                 combobox.close();
                 combobox.open();
             });
 
             setTimeout(function() {
-                assert.isOk(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+                assert.isOk(combobox.listView.items().eq(0).hasClass("k-selected"));
                 done();
             }, 200);
         });
@@ -189,8 +189,8 @@
                         if (combobox.dataSource.page() > 1) { //wait until the binding is done
                             assert.equal(combobox.select(), 111);
                             assert.equal(combobox.dataItem().value, 111);
-                            assert.isOk($("[data-offset-index=111]").hasClass("k-state-focused"));
-                            assert.isOk($("[data-offset-index=111]").hasClass("k-state-selected"));
+                            assert.isOk($("[data-offset-index=111]").hasClass("k-focus"));
+                            assert.isOk($("[data-offset-index=111]").hasClass("k-selected"));
                             done();
                         }
                     });
@@ -260,8 +260,8 @@
                 combobox.one("dataBound", function() {
                     assert.equal(combobox.select(), 11);
                     assert.equal(combobox.dataItem().value, 11);
-                    assert.isOk($("[data-offset-index=11]").hasClass("k-state-focused"));
-                    assert.isOk($("[data-offset-index=11]").hasClass("k-state-selected"));
+                    assert.isOk($("[data-offset-index=11]").hasClass("k-focus"));
+                    assert.isOk($("[data-offset-index=11]").hasClass("k-selected"));
                     done();
                 });
 
@@ -316,7 +316,7 @@
             animation: false,
             dataTextField: "text",
             dataValueField: "value",
-            dataSource : new kendo.data.DataSource({
+            dataSource: new kendo.data.DataSource({
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
@@ -342,7 +342,7 @@
         combobox.one("dataBound", function() {
             combobox.one("dataBound", function() {
                 var item49 = combobox.listView.content.find("li")
-                                     .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
+                                     .filter(function(_, li) { return $(li).data("offsetIndex") == 49; });
 
                 var dataItem = combobox.dataItem(item49);
 
@@ -375,7 +375,7 @@
             combobox.input.trigger({ type: "keydown" });
 
             setTimeout(function() {
-                assert.isOk($("[data-offset-index=1]").hasClass("k-state-focused"));
+                assert.isOk($("[data-offset-index=1]").hasClass("k-focus"));
                 done();
             }, 100);
         });
@@ -451,7 +451,7 @@
         var dataSource = new kendo.data.DataSource({
             transport: {
                 read: function(o) {
-                    o.success([{text: "asd", value: 1}]);
+                    o.success([{ text: "asd", value: 1 }]);
                 }
             }
         });
@@ -470,10 +470,91 @@
                     itemHeight: 20
                 }
             });
-        } catch(err) {
+        } catch (err) {
             noErrors = false;
         }
         assert.isOk(noErrors);
+    });
+
+    it("doesn't sync value with text when mapValueTo dataItem and dataItem is selected", function() {
+        var noErrors = true;
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(o) {
+                    o.success([{ text: "asd", value: 1 }]);
+                }
+            }
+        });
+        dataSource.read();
+
+        var combobox = new ComboBox(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: dataSource,
+            virtual: {
+                valueMapper: function(o) { o.success({ text: "foo", value: 2 }); },
+                itemHeight: 20,
+                mapValueTo: "dataItem"
+            }
+        });
+
+        combobox.value(2);
+
+        assert.equal(combobox.dataItem().text, "foo");
+
+        combobox.text("foo");
+
+        assert.equal(combobox.value(), 2);
+    });
+
+    it("item is selected on DOWN after going to next page", function(done) {
+        var combobox = new ComboBox(select, {
+            height: CONTAINER_HEIGHT,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success({ data: [
+                                { id: 1, value: 1, text: "Item 1" },
+                                { id: 2, value: 2, text: "Item 2" },
+                                { id: 3, value: 3, text: "Item 3" },
+                                { id: 4, value: 4, text: "Item 4" },
+                                { id: 5, value: 5, text: "Item 5" },
+                                { id: 7, value: 6, text: "Item 6" },
+                                { id: 7, value: 6, text: "Item 7" }
+                            ], total: 300 });
+                        }, 0);
+                    }
+                },
+                serverPaging: true,
+                pageSize: 4,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            select: function(e) {
+                assert.equal(e.dataItem.value, "5");
+                done();
+            },
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 200
+            },
+            value: 4
+        });
+
+        combobox.one("dataBound", function() {
+            setTimeout(function() {
+                combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+            });
+        });
     });
     });
 }());

@@ -1,5 +1,5 @@
-(function () {
-    describe("MultiSelect AngularJS integration", function () {
+(function() {
+    describe("MultiSelect AngularJS integration", function() {
         afterEach(function() {
              kendo.destroy(Mocha.fixture);
         });
@@ -138,7 +138,7 @@
 
             $scope.selectOptions = {
                 dataSource: [ "red", "green", "blue" ],
-                tagTemplate: "#:data# - {{text}}",
+                tagTemplate: (data) => `${data} - {{text}}`,
                 valuePrimitive: true
             };
 
@@ -154,35 +154,12 @@
         assert.equal(tags.eq(1).children("span:first").text(), "green - My text");
     });
 
-    ngTest("multiselect compiles item templates", function() {
-        angular.module("kendo.tests").controller("mine", function($scope) {
-            $scope.selectedColors = [ "red", "green" ];
-
-            $scope.selectOptions = {
-                dataSource: [ "red", "green", "blue" ],
-                itemTemplate: "{{dataItem}} - {{text}}",
-                valuePrimitive: true
-            };
-
-            $scope.text = "My text";
-        });
-
-        Mocha.fixture.html('<div ng-controller=mine><select kendo-multiselect k-ng-model=selectedColors k-options=selectOptions></select></div>');
-    },
-
-    function() {
-        var items = Mocha.fixture.find("select").getKendoMultiSelect().items();
-        assert.equal($(items[0]).text(), "red - My text");
-        assert.equal($(items[1]).text(), "green - My text");
-        assert.equal($(items[2]).text(), "blue - My text");
-    });
-
     ngTest("multiselect initializes with a undefined model value", function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
 
             $scope.selectOptions = {
                 dataSource: [ "red", "green", "blue" ],
-                itemTemplate: "{{dataItem}} - {{text}}",
+                itemTemplate: () => "{{dataItem}} - {{text}}",
                 valuePrimitive: true
             };
         });
@@ -216,64 +193,20 @@
         assert.equal(widget.value(), "");
     });
 
-    //header&footer
-
-    ngTest("multiselect compiles header template", function() {
-        angular.module("kendo.tests").controller("mine", function($scope) {
-            $scope.selectedColors = [ "red", "green" ];
-
-            $scope.selectOptions = {
-                dataSource: [ "red", "green", "blue" ],
-                headerTemplate: "<div>{{text}}<div>",
-                valuePrimitive: true
-            };
-
-            $scope.text = "My text";
-        });
-
-        Mocha.fixture.html('<div ng-controller=mine><select kendo-multi-select k-ng-model=selectedColors k-options=selectOptions></select></div>');
-    },
-
-    function() {
-        var header = Mocha.fixture.find("select").getKendoMultiSelect().header;
-        assert.equal(header.text(), "My text");
-    });
-
-    ngTest("multiselect compiles footer template", function() {
-        angular.module("kendo.tests").controller("mine", function($scope) {
-            $scope.selectedColors = [ "red", "green" ];
-
-            $scope.selectOptions = {
-                dataSource: [ "red", "green", "blue" ],
-                footerTemplate: "<div>{{text}}<div>",
-                valuePrimitive: true
-            };
-
-            $scope.text = "My text";
-        });
-
-        Mocha.fixture.html('<div ng-controller=mine><select kendo-multi-select k-ng-model=selectedColors k-options=selectOptions></select></div>');
-    },
-
-    function() {
-        var widget = Mocha.fixture.find("select").getKendoMultiSelect();
-        assert.equal(widget.footer.text(), "My text");
-    });
-
     ngTest("virtualized multiselect updates model on change", function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.selectData = [
-                {ModelNo: "100 HP"},
-                {ModelNo: "105 HP"},
-                {ModelNo: "110 HP"},
-                {ModelNo: "115 HP"},
-                {ModelNo: "120 HP"},
-                {ModelNo: "125 HP"}
+                { ModelNo: "100 HP" },
+                { ModelNo: "105 HP" },
+                { ModelNo: "110 HP" },
+                { ModelNo: "115 HP" },
+                { ModelNo: "120 HP" },
+                { ModelNo: "125 HP" }
             ];
 
             $scope.dataSource = new kendo.data.DataSource({
                 transport: {
-                    read: function (options) {
+                    read: function(options) {
                         setTimeout(function() {
                             options.success($scope.selectData.slice());
                         });

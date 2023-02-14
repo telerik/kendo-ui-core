@@ -1,9 +1,9 @@
 ---
 title: Filtering
-page_title: jQuery Grid Documentation | Filtering | Kendo UI
+page_title: jQuery Grid Documentation - Filtering
 description: "Get started with the jQuery Grid by Kendo UI and learn how to filter its data."
 slug: filtering_kendoui_grid_widget
-position: 4
+position: 6
 ---
 
 # Filtering
@@ -11,6 +11,8 @@ position: 4
 By default, the filtering functionality of the Kendo UI Grid is disabled.
 
 To control filtering in the Grid, use the `filterable` property.
+
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be filterable. To enable filtering on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
 
 The Grid enables you to implement the following filter options:
 * [Header row filtering](#filtering-by-rows)
@@ -36,9 +38,18 @@ The runnable [demo on implementing custom menu filtering](https://demos.telerik.
 1. Define the built-in date-picker UI to filter the date-time column in the Grid.
 1. Instantiate the Kendo UI AutoComplete and DropDownList for the **Title** and **City** columns respectively.
 
+## KB Articles on Filtering
+
+* [Enable Filtering for Columns Bound to Complex Object]({% slug enable-operations-for-object-column %})
+* [Filtering by Date Only]({% slug howto_filter_date_columns_grid %})
+* [Using MultiSelect for Column Filtering]({% slug howto_use_multiselect_forcolumn_filtering_grid %})
+* [Using Filtering with Dynamic Default Values]({% slug howto_gridfiltering_dynamicdefaultvalues_grid %})
+* [Implementing Excel-Like Filter Menus]({% slug howto_gridfiltering_excellike_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Header Row Filtering by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/filter-row)
 * [Multi-Checkbox Filtering by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/filter-multi-checkboxes)
 * [Custom Menu Filtering by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/filter-menu-customization)
-* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

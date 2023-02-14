@@ -1,8 +1,8 @@
 ---
 title: Export to Excel Grids with Multiple Column Templates and Arbitrary Template Content
-description: An example on how to export multiple column templates that might contain additional HTML.
+description: Learn how to export multiple column templates that might contain additional HTML.
 type: how-to
-page_title: Export to Excel Grids with Many Template Columns and HTML Content in Their Templates | Kendo UI Grid
+page_title: Export to Excel Grids with Many Template Columns and HTML Content in Their Templates - Kendo UI Grid for jQuery
 slug: grid-export-arbitrary-column-templates
 tags: grid, export, excel, templates
 res_type: kb
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 
@@ -30,6 +30,8 @@ How can I export my Kendo UI Grid with multiple template columns with arbitrary 
 1. Replace the cell content for template columns.
 
 > The following example produces text-only content in the exported Excel file. The Grid is able to export only data values to Excel.
+
+> The following example does not work with grouped data and for such the custom excelExport logic needs to be adjusted.
 
 ```dojo
     <div id="grid"></div>

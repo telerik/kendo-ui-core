@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
   /* FlatColorPicker messages */
 
   if (kendo.ui.FlatColorPicker) {
@@ -254,7 +255,8 @@
         "checkAll": "Seleccionar todo",
         "clear": "Limpiar filtros",
         "filter": "Filtrar",
-        "search": "Buscar"
+        "search": "Buscar",
+        "selectedItemsFormat": "{0} articulos seleccionados"
       });
   }
 
@@ -613,7 +615,7 @@
         "alignmentDialog": {
           "title": "Alineación",
           "buttons": {
-            "justtifyLeft": "Alinear a la izquierda",
+            "justifyLeft": "Alinear a la izquierda",
             "justifyCenter": "Alinear al centro",
             "justifyRight": "Alinear a la derecha	",
             "justifyFull": "Justificar",
@@ -777,7 +779,7 @@
         "addRowBelow": "Agregar fila debajo",
         "alignment": "Alineación",
         "alignmentButtons": {
-          "justtifyLeft": "Alinear a la izquierda",
+          "justifyLeft": "Alinear a la izquierda",
           "justifyCenter": "Alinear al cenro",
           "justifyRight": "Alinear a la derecha",
           "justifyFull": "Justificar",

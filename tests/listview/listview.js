@@ -1,22 +1,22 @@
 (function() {
     var DataSource = kendo.data.DataSource,
-        ul,
+        dom,
         dataSource;
     var wrapper;
 
     function setup(options) {
         options = $.extend({
-            template: "<li></li>",
+            template: () => "<div class='k-listview-item'></div>",
             navigatable: true,
             dataSource: dataSource = new DataSource({ data: [1, 2, 3, 4, 5] })
         }, options);
-        return ul.kendoListView(options);
+        return dom.kendoListView(options);
     }
 
     function createListView(element, userOptions) {
         var options = $.extend({
             navigatable: true,
-            template: "<div>#= value #</div>",
+            template: (value) => `<div class='k-listview-item'>${value}</div>`,
             dataSource: dataSource = new DataSource({
                 data: [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }, { value: 5 }, { value: 6 }]
             })
@@ -33,45 +33,61 @@
                 return this.trigger({ type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift });
             };
 
-            ul = $("<ul />").appendTo(Mocha.fixture);
+            dom = $("<div />").appendTo(Mocha.fixture);
             $("<div id=\"pager\"></div>").appendTo(Mocha.fixture);
         });
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
             kendo.ns = "";
             $("#pager").remove();
-            ul.remove();
+            dom.remove();
+        });
+
+        it("when contentElement is an empty string content wrapper is not rendered", function() {
+            var dom = setup({
+                contentElement: ''
+            });
+
+            assert.equal(dom.find(".k-listview-content").length, 0);
+        });
+
+        it("when listview is empty loader is placed inside the wrapper", function() {
+            var dom = setup({
+                dataSource: []
+            });
+
+            dom.data("kendoListView")._progress(true);
+            assert.equal(dom.find(".k-loading-mask").parent()[0], dom[0]);
         });
 
         it("kendoListView attaches listView to element", function() {
-            var ul = setup();
+            var dom = setup();
 
-            assert.isOk(ul.data("kendoListView") instanceof kendo.ui.ListView);
+            assert.isOk(dom.data("kendoListView") instanceof kendo.ui.ListView);
         });
 
         it("k-widget and k-listview classes are applied on element", function() {
-            var ul = setup();
+            var dom = setup();
 
-            assert.isOk(ul.hasClass("k-widget"));
-            assert.isOk(ul.hasClass("k-listview"));
+            assert.isOk(dom.hasClass("k-listview"));
         });
 
         it("renders item for dataSource items", function() {
-            var ul = setup();
+            var dom = setup();
 
-            assert.equal(ul.find("li").length, 5);
+            assert.equal(dom.find(".k-listview-content > .k-listview-item").length, 5);
         });
 
         it("options as array is used for dataSource", function() {
-            var div = $("<div></div>").appendTo(Mocha.fixture).kendoListView([1, 2, 3]),
-                dataSource = div.data("kendoListView").dataSource.data();
+            var dom = $("<div></div>").appendTo(Mocha.fixture).kendoListView([1, 2, 3]),
+                dataSource = dom.data("kendoListView").dataSource.data();
 
             assert.equal(dataSource.length, 3);
         });
 
         it("dataBound event should be raised when bound", function() {
             var called = false,
-                ul = setup({
+                dom = setup({
                     dataBound: function() {
                         called = true;
                     }
@@ -80,13 +96,13 @@
         });
 
         it("cancelling databinding event prevents refresh", function() {
-            var ul = setup({
+            var dom = setup({
                 dataBinding: function(e) {
                     e.preventDefault();
                 }
             });
 
-            assert.equal(ul.find("li").length, 0);
+            assert.equal(dom.find(".k-listview-content > .k-listview-item").length, 0);
         });
 
         it("DataSource change action is passed to databinding event", function() {
@@ -102,56 +118,62 @@
         });
 
         it("autoBind false does not populate listView", function() {
-            var ul = setup({ autoBind: false });
-            assert.equal(ul.find("li").length, 0);
+            var dom = setup({ autoBind: false });
+            assert.equal(dom.find(".k-listview-content > .k-listview-item").length, 0);
         });
 
         it("altTemplate defaults to template if is not set", function() {
-            var listView = setup({ template: "<li>1</li>" }).data("kendoListView");
+            var listView = setup({ template: () => "<li>1</li>" }).data("kendoListView");
 
             assert.equal(listView.template({}), "<li>1</li>");
             assert.equal(listView.altTemplate({}), "<li>1</li>");
         });
 
         it("altTemplate defined", function() {
-            var listView = setup({ template: "<li>1</li>", altTemplate: "<li>2</li>" }).data("kendoListView");
+            var listView = setup({ template: () => "<li>1</li>", altTemplate: () => "<li>2</li>" }).data("kendoListView");
 
             assert.equal(listView.template({}), "<li>1</li>");
             assert.equal(listView.altTemplate({}), "<li>2</li>");
         });
 
         it("altTemplate is rendered", function() {
-            var ul = setup({ template: "<li>1</li>", altTemplate: "<li>2</li>" });
+            var dom = setup({ template: () => "<li>1</li>", altTemplate: () => "<li>2</li>", contentTemplate: () => "" });
 
-            assert.equal(ul.children().eq(0).html(), "1");
-            assert.equal(ul.children().eq(1).html(), "2");
+            assert.equal(dom.children(".k-listview-content").children().eq(0).html(), "1");
+            assert.equal(dom.children(".k-listview-content").children().eq(1).html(), "2");
+        });
+
+        it("contentElement is rendered correctly", function() {
+            var dom = setup({ contentElement: "ul", template: () => "<li>1</li>", altTemplate: () => "<li>2</li>" });
+
+            assert.equal(dom.find(".k-listview-content")[0].nodeName.toLocaleLowerCase(), "ul");
         });
 
         it("progress mask is shown when request starts", function() {
-            var ul = setup();
+            var dom = setup();
 
             dataSource.bind("progress", function() {
-                assert.equal(ul.find("div.k-loading-mask").length, 1);
+                assert.equal(dom.find("div.k-loading-mask").length, 1);
             });
             dataSource.read();
         });
 
         it("progress mask is hidden when request finish", function() {
-            var ul = setup();
+            var dom = setup();
 
             dataSource.read();
 
-            assert.equal(ul.find("div.k-loading-mask").length, 0);
+            assert.equal(dom.find("div.k-loading-mask").length, 0);
         });
 
         it("selectable false does not instantiate Selectable object", function() {
-            var ul = setup({ selectable: false });
-            assert.isOk(!ul.data("kendoListView").selectable);
+            var dom = setup({ selectable: false });
+            assert.isOk(!dom.data("kendoListView").selectable);
         });
 
         it("selectable true instantiate Selectable object", function() {
-            var ul = setup({ selectable: true });
-            assert.isOk(ul.data("kendoListView").selectable);
+            var dom = setup({ selectable: true });
+            assert.isOk(dom.data("kendoListView").selectable);
         });
 
         it("selectable true instantiate Selectable object", function() {
@@ -184,148 +206,170 @@
         });
 
         it("focusing grid element focus first item ", function() {
-            var listView = setup();
-            listView.focus();
-            assert.isOk(listView.find("li").first().is(".k-state-focused"));
+            var dom = setup();
+
+            dom.focus();
+            assert.isOk(dom.find(".k-listview-content > .k-listview-item").first().is(".k-focus"));
         });
 
         it("down arrow moves focus on the next row same cell", function() {
-            var listView = setup();
-            listView.focus().press(kendo.keys.DOWN);
-            assert.isOk(listView.find("li:eq(1)").hasClass("k-state-focused"));
+            var dom = setup();
+
+            dom.focus().press(kendo.keys.DOWN);
+            assert.isOk(dom.find(".k-listview-content > .k-listview-item:eq(1)").hasClass("k-focus"));
         });
 
         it("right arrow moves focus on the next cell on the same row", function() {
-            var listView = setup();
-            listView.focus().press(kendo.keys.RIGHT);
-            assert.isOk(listView.find("li:eq(1)").hasClass("k-state-focused"));
+            var dom = setup();
+            dom.focus().press(kendo.keys.RIGHT);
+            assert.isOk(dom.find(".k-listview-content > .k-listview-item:eq(1)").hasClass("k-focus"));
         });
 
         it("left arrow moves focus on the prev cell on the same row", function() {
-            var listView = setup();
-            listView.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
-            assert.isOk(listView.find("li:eq(0)").hasClass("k-state-focused"));
+            var dom = setup();
+            dom.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
+            assert.isOk(dom.find(".k-listview-content > .k-listview-item:eq(0)").hasClass("k-focus"));
         });
 
         it("up arrow moves focus on the prev row same cell", function() {
-            var listView = setup();
-            listView.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
-            assert.isOk(listView.find("li:eq(0)").hasClass("k-state-focused"));
+            var dom = setup();
+            dom.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
+            assert.isOk(dom.find(".k-listview-content > .k-listview-item:eq(0)").hasClass("k-focus"));
         });
 
         it("space key select the focused item", function() {
-            var listView = setup({ selectable: true });
+            var dom = setup({ selectable: true });
 
-            listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+            dom.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
-            assert.isOk(listView.find("li:eq(1)").hasClass("k-state-selected"));
+            assert.isOk(dom.find(".k-listview-content > .k-listview-item:eq(1)").hasClass("k-selected"));
         });
 
         it("ctrl + space key when multiple selectoin is enabled persist the selected items", function() {
-            var listView = setup({ selectable: "multiple" });
+            var dom = setup({ selectable: "multiple" });
 
-            listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
-            listView.press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR, true);
+            dom.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+            dom.press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR, true);
 
-            assert.equal(listView.find(".k-state-selected").length, 2);
-            assert.isOk(listView.find("li:eq(1)").hasClass("k-state-selected"));
-            assert.isOk(listView.find("li:eq(2)").hasClass("k-state-selected"));
+            assert.equal(dom.find(".k-listview-content > .k-listview-item.k-selected").length, 2);
+            assert.isOk(dom.find(".k-listview-content > .k-listview-item:eq(1)").hasClass("k-selected"));
+            assert.isOk(dom.find(".k-listview-content > .k-listview-item:eq(2)").hasClass("k-selected"));
         });
 
-        it("space key on already selected item when multiple selectoin is enabled unselects the item", function() {
-            var listView = setup({ selectable: "multiple" });
+        it("ctrl + space key when multiple selectoin is enabled triggers change event", function() {
+            var triggered = 0;
+            var dom = setup({
+                selectable: "multiple",
+                change: function() {
+                    triggered += 1;
+                }
+            });
 
-            listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR).press(kendo.keys.SPACEBAR, true);
+            dom.focus()
+                .press(kendo.keys.DOWN)
+                .press(kendo.keys.SPACEBAR)
+                .press(kendo.keys.SPACEBAR, true);
 
-            assert.isOk(!listView.find("li:eq(1)").hasClass("k-state-selected"));
+            assert.equal(triggered, 2);
+        });
+
+        it("space key on already selected item when multiple selection is enabled unselects the item", function() {
+            var dom = setup({ selectable: "multiple" });
+
+            dom.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR).press(kendo.keys.SPACEBAR, true);
+
+            assert.isOk(!dom.find(".k-listview-content > .k-listview-item:eq(1)").hasClass("k-selected"));
         });
 
         it("select without arguments returns selected items", function() {
-            var ul = setup({ selectable: true }),
+            var dom = setup({ selectable: true }),
                 selected;
 
-            ul.find("li:first").addClass("k-state-selected");
+            dom.find(".k-listview-content > .k-listview-item:first").addClass("k-selected");
 
-            selected = ul.data("kendoListView").select();
+            selected = dom.data("kendoListView").select();
             assert.equal(selected.length, 1);
         });
 
         it("select with arguments mark the arguments as selected", function() {
-            var ul = setup({
+            var dom = setup({
                 selectable: true
             }),
-                item = ul.find("li:eq(0)");
+                item = dom.find(".k-listview-content > .k-listview-item:eq(0)");
 
-            ul.data("kendoListView").select(item);
+            dom.data("kendoListView").select(item);
 
-            assert.isOk(item.hasClass("k-state-selected"));
+            assert.isOk(item.hasClass("k-selected"));
         });
 
         it("select clears previously selected items if single select", function() {
-            var ul = setup({
+            var dom = setup({
                 selectable: true
             }),
-                items = ul.children();
-            items.eq(0).addClass("k-state-selected");
-            ul.data("kendoListView").select(items.eq(1));
+                items = dom.children(".k-listview-content").children();
 
-            assert.isOk(!items.eq(0).hasClass("k-state-selected"));
-            assert.isOk(items.eq(1).hasClass("k-state-selected"));
+            items.eq(0).addClass("k-selected");
+            dom.data("kendoListView").select(items.eq(1));
+
+            assert.isOk(!items.eq(0).hasClass("k-selected"));
+            assert.isOk(items.eq(1).hasClass("k-selected"));
         });
 
         it("select persist previously selected items if multi select", function() {
-            var ul = setup({
-                selectable: "multiple"
+            var dom = setup({
+                selectable: "multiple",
             }),
-                items = ul.children();
-            items.eq(0).addClass("k-state-selected");
-            ul.data("kendoListView").select(items.eq(1));
+                items = dom.children(".k-listview-content").children();
 
-            assert.isOk(items.eq(0).hasClass("k-state-selected"));
-            assert.isOk(items.eq(1).hasClass("k-state-selected"));
+            items.eq(0).addClass("k-selected");
+            dom.data("kendoListView").select(items.eq(1));
+
+            assert.isOk(items.eq(0).hasClass("k-selected"));
+            assert.isOk(items.eq(1).hasClass("k-selected"));
         });
 
         it("select with array of items as argument select first if single select", function() {
-            var ul = setup({
+            var dom = setup({
                 selectable: true
             }),
-                items = ul.children();
+                items = dom.children();
 
-            ul.data("kendoListView").select(items);
+            dom.data("kendoListView").select(items);
 
-            assert.isOk(items.eq(0).hasClass("k-state-selected"));
-            assert.isOk(!items.eq(1).hasClass("k-state-selected"));
-            assert.isOk(!items.eq(2).hasClass("k-state-selected"));
+            assert.isOk(items.eq(0).hasClass("k-selected"));
+            assert.isOk(!items.eq(1).hasClass("k-selected"));
+            assert.isOk(!items.eq(2).hasClass("k-selected"));
         });
 
         it("clearSelection clears selected items", function() {
             var listView = setup({
                 selectable: true
             }).data("kendoListView"),
-                item = listView.element.find("li:eq(1)").addClass("k-state-selected");
+                item = listView.element.find(".k-listview-content > .k-listview-item:eq(1)").addClass("k-selected");
 
             listView.clearSelection();
 
-            assert.isOk(!item.hasClass("k-state-selected"));
+            assert.isOk(!item.hasClass("k-selected"));
         });
 
-        it("clearSelection triggers change event", function() {
+        it("clearSelection does not trigger change event", function() {
             var triggered = false,
                 listView = setup({
                     selectable: true,
                     change: function() {
                         triggered = true;
                     }
-                }).data("kendoListView"),
-                item = listView.element.find("li:eq(1)").addClass("k-state-selected");
+                }).data("kendoListView");
+
+            listView.element.find(".k-listview-content > .k-listview-item:eq(1)").addClass("k-selected");
 
             listView.clearSelection();
 
-            assert.isOk(triggered);
+            assert.isNotOk(triggered);
         });
 
         it("resetting dataSource detaches the previouse events", function() {
-            var listView = new kendo.ui.ListView($("<ul/>").appendTo(Mocha.fixture), { template: "<li></li>" });
+            var listView = new kendo.ui.ListView($("<ul/>").appendTo(Mocha.fixture), { template: () => "<li></li>" });
 
             var dataSource = listView.dataSource;
             listView._dataSource();
@@ -339,7 +383,7 @@
         });
 
         it("resetting DataSource rebinds the widget", function() {
-            var listView = new kendo.ui.ListView($("<ul/>").appendTo(Mocha.fixture), { template: "<li></li>" });
+            var listView = new kendo.ui.ListView($("<ul/>").appendTo(Mocha.fixture), { template: () => "<li></li>" });
 
             listView.setDataSource(new kendo.data.DataSource({
                 data: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
@@ -349,7 +393,7 @@
         });
 
         it("pageable option initialize pager", function() {
-            var listView = setup({ pageable: { pagerId: "pager" } });
+            var dom = setup({ pageable: { pagerId: "pager" } });
 
             assert.isOk($("#pager").data("kendoPager") instanceof kendo.ui.Pager);
         });
@@ -365,13 +409,13 @@
             var listView = setup({
                 pageable: {
                     pagerId: "pager",
-                    selectTemplate: "<li>foo</li>"
+                    selectTemplate: () => "<li>foo</li>"
                 }
             })
                 .data("kendoListView");
             var pager = $("#pager").data("kendoPager");
 
-            assert.equal(pager.options.selectTemplate, "<li>foo</li>");
+            assert.equal(pager.options.selectTemplate(), "<li>foo</li>");
         });
 
         it("uid is set to item wrapper", function() {
@@ -443,38 +487,78 @@
         });
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
+            kendo.destroy(element);
             element.remove();
         });
 
         it("selecting an item focuses it", function() {
             var listView = createListView(element, { selectable: "multiple" });
-            element.children().css("height", 100);
+
+            listView.content.children().css("height", 100);
             wrapper.scrollTop(wrapper[0].scrollHeight);
 
-            element.children().last().mousedown();
+            listView.content.children().last().mousedown();
 
             assert.equal(kendo._activeElement(), element[0]);
         });
 
         it("selecting an item sets it as current", function() {
             var listView = createListView(element, { selectable: "multiple" });
-            element.children().css("height", 100);
+
+            element.find(".k-listview-content").children().css("height", 100);
             wrapper.scrollTop(wrapper[0].scrollHeight);
 
-            element.children().last().mousedown();
+            element.find(".k-listview-content").children().last().mousedown();
 
-            assert.equal(listView.current()[0], element.children().last()[0]);
+            assert.equal(listView.current()[0], element.find(".k-listview-content").children().last()[0]);
         });
 
         it("selecting an item does not scroll parent element", function() {
-            var listView = createListView(element, { selectable: "multiple" });
-            element.children().css("height", 100);
-            wrapper.scrollTop(wrapper[0].scrollHeight);;
+            createListView(element, { selectable: "multiple" });
+
+            element.find(".k-listview-content").children().css("height", 100);
+            wrapper.scrollTop(wrapper[0].scrollHeight);
             var initialScrollTop = wrapper.scrollTop();
 
-            element.children().last().mousedown();
+            element.find(".k-listview-content").children().last().mousedown();
 
             assert.equal(initialScrollTop, wrapper.scrollTop());
+        });
+
+        it("_setContentHeight sets the height of the content when listview is scrollable", function() {
+            var lv = createListView(element, { scrollable: { endless: true }, height: 400, template: (value) => `<div style='padding:100px' class='k-listview-item'>${value}</div>` });
+
+            assert.equal(lv.content.height(), lv.wrapper.innerHeight());
+        });
+
+        it("init calls _setContentHeight", function() {
+            var lv = createListView(element, {
+                scrollable: {
+                    endless: true
+                },
+                height: 400,
+                template: (value) => `<div style='padding:100px' class='k-listview-item'>${value}</div>`
+            });
+
+            var lvStub = stub(lv, {
+                _setContentHeight: $.noop
+            });
+
+            lv.init(lv.element, lv.options);
+
+            assert.equal(lvStub.calls('_setContentHeight'), 2);
+        });
+
+        it("refresh calls _setContentHeight", function() {
+            var lv = createListView(element, { scrollable: { endless: true }, height: 400, template: (value) => `<div style='padding:100px' class='k-listview-item'>${value}</div>` });
+
+            var lvStub = stub(lv, {
+                _setContentHeight: $.noop
+            });
+
+            lv.refresh();
+
+            assert.equal(lvStub.calls('_setContentHeight'), 1);
         });
     });
 }());

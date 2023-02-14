@@ -9,7 +9,7 @@ position: 1
 
 # Integration with Kendo UI for the Web
 
-As of the Kendo UI Q1 2014 release, the [Kendo UI hybrid for mobile devices](http://demos.telerik.com/kendo-ui/m/index) can be used alongside the Kendo UI widgets for the web in a regular web page, without an active mobile application instance.
+As of the Kendo UI Q1 2014 release, the [Kendo UI hybrid for mobile devices](https://demos.telerik.com/kendo-ui/m/index) can be used alongside the Kendo UI widgets for the web in a regular web page, without an active mobile application instance.
 
 ## Basic Usage
 
@@ -19,7 +19,7 @@ This approach is suitable if you use Kendo UI hybrid UI with third-party Single-
 >
 > In addition to `kendo.common.css` and the skin stylesheet, the hybrid mobile widgets need one additional reference&mdash;`kendo.[skin].mobile.css` or `kendo.[skin].mobile.min.css`, where `[skin]` is your current Kendo UI web skin name. The stylesheets are available in the `Web/Complete bundles`. For instance, if the `Silver` Kendo UI web skin should be used for styling Kendo UI web and hybrid widgets, the stylesheet references shown in the example below are needed.
 
-###### Example
+
 
     <link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
     <link href="styles/kendo.silver.min.css" rel="stylesheet" type="text/css" />
@@ -33,7 +33,7 @@ Additionally, these web mobile skins can be used with a normal hybrid mobile Ken
 
 The example below demonstrates how to instantiate a hybrid mobile Switch widget.
 
-###### Example
+
 
     <input type="checkbox" id="my-switch" />
 

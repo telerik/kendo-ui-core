@@ -1,8 +1,8 @@
 ---
 title: Conditionally Show ColumnMenu Options per Grid Column
-description: An example on how to conditionally show the filter and sort options in the columnMenu of the Kendo UI Grid.
+description: Learn how to conditionally show the filter and sort options in the columnMenu of the Kendo UI Grid.
 type: how-to
-page_title: Show columnMenu Options for Specific Columns | Kendo UI Grid
+page_title: Show columnMenu Options for Specific Columns - Kendo UI Grid for jQUery
 slug: grid-conditional-columnMenu
 tags: grid, columnMenu, columns
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>
@@ -62,8 +62,8 @@ The following example demonstrates how to hide the `columnMenu` options for some
             			columnMenuInit: function(e) {
             				var menu = e.container.find(".k-menu").data("kendoMenu");
             				var field = e.field;
-                    //Only the OrderID and ShipAddress columnMenu will show Columns and Sorting options
-                    //ShipCountry and ShipName will display only the filter menu (directly in the columnMenu)
+                    // Only the OrderID and ShipAddress columnMenu will show Columns and Sorting options.
+                    // ShipCountry and ShipName will display only the filter menu (directly in the columnMenu).
             				if (field != "OrderID" && field != "ShipAddress") {                      
             					menu.element.find(">li:not(.k-filter-item)").hide();                      
                       menu.element.find(">li.k-filter-item>ul").unwrap("li").show().prev().hide();

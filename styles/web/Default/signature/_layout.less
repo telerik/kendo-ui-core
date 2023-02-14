@@ -1,0 +1,52 @@
+.k-signature {
+    width: @kendo-signature-width;
+    min-height: @kendo-signature-height;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-inline: @kendo-signature-padding-x;
+    padding-block: @kendo-signature-padding-y;
+
+    &.k-signature-maximized {
+        width: @kendo-signature-maximized-width;
+        height: @kendo-signature-maximized-height;
+
+        > .k-signature-line {
+            border-bottom-width: @kendo-signature-maximized-line-width;
+        }
+    }
+}
+
+.k-signature-actions {
+    display: flex;
+    width: min-content;
+    margin-inline-start: auto;
+    gap: @kendo-signature-actions-gap;
+    z-index: 2;
+}
+
+.k-signature-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+.k-signature-line {
+    position: absolute;
+    bottom: @kendo-signature-line-bottom-offset;
+    z-index: 2;
+    pointer-events: none;
+    border-bottom-width: @kendo-signature-line-width;
+    border-bottom-style: @kendo-signature-line-style;
+    width: @kendo-signature-line-size;
+}

@@ -143,10 +143,28 @@
             panel.open();
             panel._close({
                 target: document.body,
-                isDefaultPrevented: function() { return true }
+                isDefaultPrevented: function() { return true; }
             });
 
             assert.isOk(dom.hasClass("k-rpanel-expanded"));
+        });
+
+        it("touchend event is prevented", function() {
+            new ResponsivePanel(dom);
+            var button = $("<button class='k-rpanel-toggle' />").appendTo(Mocha.fixture);
+
+            button.trigger('touchend');
+
+            assert.isOk(!dom.hasClass("k-rpanel-expanded"));
+        });
+
+        it("set content html from options", function() {
+
+            var panel = new ResponsivePanel(dom, {
+                content: "content text"
+            });
+
+            assert.equal(panel.element.html(), "content text");
         });
     });
 }());

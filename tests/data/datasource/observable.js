@@ -105,6 +105,19 @@
             assert.isOk(dataSource.view()[0] instanceof ObservableObject);
         });
 
+        it("view returns new object when data is filtered", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 10,
+                filter: { field: "foo", operator: "eq", value: "bar" }
+            });
+
+            dataSource.read();
+            dataSource.add({ foo: "three" });
+
+            assert.equal(dataSource.view().length, 2);
+        });
+
         it("view returns instances of the model", function() {
             setup({
                 data: [{ foo: "foo" }, { foo: "bar" }],

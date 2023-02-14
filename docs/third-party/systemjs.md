@@ -1,6 +1,6 @@
 ---
 title: SystemJS
-page_title: SystemJS | Kendo UI Third-Party Tools
+page_title: SystemJS - Kendo UI Third-Party Tools
 description: "Include Kendo UI with SystemJS."
 slug: systemjs_integration_kendoui
 ---
@@ -29,9 +29,9 @@ The following example demonstrates the configuration for SystemJS up to 0.20 ver
     <!DOCTYPE html>
     <html>
     <head>
-      <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.common.min.css">
-      <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.rtl.min.css">
-      <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.default.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
@@ -70,7 +70,7 @@ The following example demonstrates the configuration for SystemJS up to 0.20 ver
 
 The following example demonstrates the configuration for SystemJS 0.20.x.
 
-![Folder structure](../images/systemjs020-folder-structure.png)
+![Kendo UI for jQuery Folder structure](../images/systemjs020-folder-structure.png)
 
 ```tab-index.html
     <body>

@@ -1,8 +1,8 @@
 ---
 title: Part 5 - Hello CRUD Data Operations
-page_title: Part 5 - Hello CRUD Data Operations | Kendo UI Third-Party Frameworks
+page_title: Part 5 - Hello CRUD Data Operations - Kendo UI Third-Party Frameworks
 description: "Learn how to enable CRUD operations, handle the editing functionality and failed requests in the Kendo UI Grid widget."
-previous_url: /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-2
+previous_url: /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-2, /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-2.html
 slug: part5_aspnetwebforms_tutorials
 position: 5
 ---
@@ -25,7 +25,7 @@ To start with, return some additional data from the database. Add in the **Title
 
 The example below demonstrates how the `Employee` model object now looks like.
 
-###### Example
+
 
     public class Employee {
 
@@ -52,7 +52,7 @@ The example below demonstrates how the `Employee` model object now looks like.
 
 The `EmployeesController` `Get` method now looks a bit different. Notice that it is now quite slim and consists mostly of comments, as demonstrated in the example below.
 
-###### Example
+
 
     // WebAPI will respond to an HTTP GET with this method
     public Models.Response Get() {
@@ -76,29 +76,29 @@ The `EmployeesController` `Get` method now looks a bit different. Notice that it
 <!--_-->
 ### Enable Editing in Grid
 
-To enable full CRUD operations in the Grid, add the interactive bit of UI. Kendo UI has several options for how to do this. You can edit grid rows in a [popup](http://demos.telerik.com/kendo-ui/web/grid/editing-popup.html), or [inline](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html). You can get very granular control over the look and feel of the editing experience with [custom editors](http://demos.telerik.com/kendo-ui/web/grid/editing-custom.html).
+To enable full CRUD operations in the Grid, add the interactive bit of UI. Kendo UI has several options for how to do this. You can edit grid rows in a [popup](https://demos.telerik.com/kendo-ui/web/grid/editing-popup.html), or [inline](https://demos.telerik.com/kendo-ui/web/grid/editing-inline.html). You can get very granular control over the look and feel of the editing experience with [custom editors](https://demos.telerik.com/kendo-ui/web/grid/editing-custom.html).
 
-This example uses the built-in [inline](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) editing that comes with the Kendo UI Grid widget.
+This example uses the built-in [inline](https://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) editing that comes with the Kendo UI Grid widget.
 
 To start, open the `Default.aspx` file. Specify `editable: true` in the Grid, as demonstrated in the example below. With this change, you can now save the page and launch it with Visual Studio. When you click on a row, it becomes editable.
 
-###### Example
+
 
     editable: true
 
 **Figure 1: An editable Grid**
 
-![grid_is_editable](../../../images/webforms/grid_is_editable.png)
+![Kendo UI for jQuery Editable Grid](../../images/webforms/grid_is_editable.png)
 
 ### Use Command Columns
 
-To get a better editing experience, use a [command column](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) in the grid.
+To get a better editing experience, use a [command column](https://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) in the grid.
 
 In the `Default.aspx` file, add a column to the columns definition that specifies the commands that you want to include. For this example, specify `edit` and `destroy` Make the `title` an empty string. Also, format the DateTime that will be coming back as the `BirthDate` to make the date cleaner.
 
 The example below demonstrates how to specify command columns.
 
-###### Example
+
 
     // specify the columns on the grid
     columns: [
@@ -114,7 +114,7 @@ The example below demonstrates how to specify command columns.
 
 This will create the **Edit** and **Delete** buttons in the last column of the Grid with no title on the column. At this point, the application shows the buttons. However, if you click them, nothing happens, because the Grid is expecting you to click on the cell to edit the field. To fix this, change the `editable: true` to `editable: "inline"`, as demonstrated in the example below.
 
-###### Example
+
 
     editable: "inline"
 
@@ -124,11 +124,11 @@ With this change, the Grid puts the entire row in edit mode when you click the *
 
 However, you will notice that the Grid currently has the `BirthDate` field as a textbox and allows you to completely null out the **LastName**. This is not ideal. You can add constraints for column editing by specifying a model in the schema on the DataSource. The [`Model`](/api/javascript/data/model) object specifies a client-side model structure that can describe the data in terms of type and validation rules.
 
-Add a `model` to the `schema` declaration specifying that the `id` is mapped to the **Id** field from the database. Then specify a `fields` object. Each object in the fields can be either a simple string, or an object that provides some more information about the `model` field. To specify that fields are required, add a `validation` object. Also, specify that its type is `date`, so that the Grid gives you a [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column when in edit mode.
+Add a `model` to the `schema` declaration specifying that the `id` is mapped to the **Id** field from the database. Then specify a `fields` object. Each object in the fields can be either a simple string, or an object that provides some more information about the `model` field. To specify that fields are required, add a `validation` object. Also, specify that its type is `date`, so that the Grid gives you a [DatePicker](https://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column when in edit mode.
 
 The example below demonstrates how to specify a model for the DataSource.
 
-###### Example
+
 
     // the schema defines the schema of the JSON coming
     // back from the server so the datasource can parse it
@@ -151,15 +151,15 @@ The example below demonstrates how to specify a model for the DataSource.
 
 In the above declaration, the `FirstName` field is additionally marked as being not editable.
 
-Run the application now and notice that when you put the grid into edit mode you get a Kendo UI [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column. You cannot edit the **FirstName** column either. If you try and null out the **LastName** field, the Grid displays a popup message telling you that the **LastName** is required.
+Run the application now and notice that when you put the grid into edit mode you get a Kendo UI [DatePicker](https://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column. You cannot edit the **FirstName** column either. If you try and null out the **LastName** field, the Grid displays a popup message telling you that the **LastName** is required.
 
 **Figure 2: An editable Grid with a model**
 
-![grid_is_editable_with_model](../../../images/webforms/grid_is_editable_with_model.png)
+![Kendo UI for jQuery Editable Grid with a Model](../../images/webforms/grid_is_editable_with_model.png)
 
 If you want to tweak this validation message, change the model definition for the **LastName** so it looks like the one demonstrated in the example below.
 
-###### Example
+
 
     LastName: {
         editable: true,
@@ -181,7 +181,7 @@ The required `Id` parameter can be retrieved by setting the `url` portion of the
 
 The example below demonstrates how to add updates, create, and destroy to the transport.
 
-###### Example
+
 
     // the transport tells the datasource what endpoints
     // to use for CRUD actions
@@ -209,7 +209,7 @@ Since you cannot rely on client-side validation, as anything in the browser can 
 
 The example below demonstrates how to add `POST` to the transport.
 
-###### Example
+
 
     public HttpResponseMessage Post(int id) {
         // create a response message to send back
@@ -261,13 +261,13 @@ You are expected to see an error in the Network requests. If you click into the 
 
 **Figure 3: A strange date format appearing in the Grid**
 
-![grid_bad_datetime](../../../images/webforms/grid_bad_datetime.png)
+![Kendo UI for jQuery grid_bad_datetime](../../images/webforms/grid_bad_datetime.png)
 
 This is because Dates are formatted for JavaScript and you need to get the date formatted correctly. To do so, add a `parameterMap` method to the `transport` on the DataSource. The `parameterMap` takes in two parameters: `options` and `operation`. `options` are the parameters as Kendo UI is about to try to send them. `operation` is `read`, `update`, `create`, or `destroy`. You must always return at least `options` out of this function when you specify it. In this case, check for the `update` operation. If the current operation is indeed an update, format the date and reset the parameter value on the options.
 
 The example below demonstrates how to cleanse the  BirthDate in the parameter map.
 
-###### Example
+
 
     // the transport tells the datasource what endpoints
     // to use for CRUD actions
@@ -310,7 +310,7 @@ There is more than one way to tell Kendo UI that there has been an error. All yo
 
 The example below demonstrates how to add an `Errors` field  to the response object.
 
-###### Example
+
 
     public class Response {
 
@@ -333,7 +333,7 @@ If the update succeeds, you can return an empty `Models.Response` object. If it 
 
 The example below demonstrates how to return an `Errors` property on error.
 
-###### Example
+
 
     public Models.Response Delete(int id) {
 
@@ -369,7 +369,7 @@ Now modify the `schema` to map the `Errors` property of the response to the `Err
 
 This demonstration is made for the sake of showing how to do things differently on the `update` and `delete` for accomplishing the same thing. The example below demonstrates how to map the `errors` field int he `schema`.
 
-###### Example
+
 
     // the schema defines the schema of the JSON coming
     // back from the server so the datasource can parse it
@@ -404,7 +404,7 @@ In the above scenario, the error is thrown out to the screen. If you try to dele
 
 **Figure 4: A sample server error**
 
-![sample_error](../../../images/webforms/sample_error.png)
+![Kendo UI for jQuery Sample Error](../../images/webforms/sample_error.png)
 
 > **Important**
 >
@@ -416,7 +416,7 @@ If you did not throw the error, the user is not aware that the `delete` failed b
 
 The example below demonstrates how to cancel changes on a failed request.
 
-###### Example
+
 
     error: function (e) {
         alert("The action failed. Please see the logs.");
@@ -433,11 +433,11 @@ Build on this tutorial by gradually adding more advanced functionalities to this
 
 * [Hello Kendo UI Tutorial Part 1 on GitHub](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-1)
 * [Hello Kendo UI Tutorial Part 2 on GitHub](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2)
-* [Kendo UI Grid Editing Functionality in Popups](http://demos.telerik.com/kendo-ui/web/grid/editing-popup.html)
-* [Kendo UI Grid Editing Functionality Inline](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html)
-* [Kendo UI Grid Custom Editing](http://demos.telerik.com/kendo-ui/web/grid/editing-custom.html)
+* [Kendo UI Grid Editing Functionality in Popups](https://demos.telerik.com/kendo-ui/web/grid/editing-popup.html)
+* [Kendo UI Grid Editing Functionality Inline](https://demos.telerik.com/kendo-ui/web/grid/editing-inline.html)
+* [Kendo UI Grid Custom Editing](https://demos.telerik.com/kendo-ui/web/grid/editing-custom.html)
 * [JavaScript `model` API](/api/javascript/data/model)
-* [Kendo UI DatePicker Demo Online](http://demos.telerik.com/kendo-ui/web/datepicker)
+* [Kendo UI DatePicker Demo Online](https://demos.telerik.com/kendo-ui/web/datepicker)
 
 ## See Also
 

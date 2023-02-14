@@ -1,7 +1,3 @@
-.transition(@transition) {
-    transition: ~"@{transition}";
-}
-
 .flexbox() {
     display: flex;
 }
@@ -31,7 +27,7 @@
 }
 
 .flex-align(@alignment) {
-    flex-align: @alignment;
+    align-self: @alignment;
 }
 
 .flex-align-items(@alignment) {
@@ -40,10 +36,6 @@
 
 .flex-align-content(@alignment) {
     align-content: @alignment;
-}
-
-.flex-pack(@pack) {
-    flex-pack: @pack;
 }
 
 .text-size-adjust(...) {
@@ -82,10 +74,6 @@
     transform-style: @arguments;
 }
 
-.transition(...) {
-    transition: @arguments;
-}
-
 .guarded-border-radius(@value) when (@value < 0) {
     border-radius: 0;
 }
@@ -94,34 +82,8 @@
     border-radius: @value;
 }
 
-.box-shadow(@shadow; @rest...) when not (@shadow = false) {
+.box-shadow(@shadow; @rest...) when not (@shadow = null) {
     box-shadow: @arguments;
-}
-
-.window-shadow(@shadow-color) when not (@shadow-color = transparent) {
-    border-color: @shadow-color;
-    .box-shadow(@window-shadow-style lighten(@shadow-color, 50%));
-
-    &.k-state-focused {
-        border-color: @shadow-color;
-        .box-shadow(@window-shadow-style @shadow-color);
-    }
-}
-
-.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) < 50%) {
-    border-color: @widget-border-color;
-
-    &.k-state-focused {
-        border-color: lighten(@widget-border-color, 20%);
-    }
-}
-
-.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) >= 50%) {
-    border-color: @widget-border-color;
-
-    &.k-state-focused {
-        border-color: darken(@widget-border-color, 10%);
-    }
 }
 
 .background-clip(@type) {
@@ -133,7 +95,7 @@
 }
 
 
-.composite-background(@gradient) when not (@gradient = none) and not (@gradient = false) {
+.composite-background(@gradient) when not (@gradient = none) and not (@gradient = null) {
     background-image: @fallback-texture;
     background-image: @texture, ~"linear-gradient(to bottom, @{gradient})";
 }
@@ -198,11 +160,29 @@
 .background-color(@bg) when not (@bg = null) {
     background-color: @bg;
 }
-.border-color(@border) when not (@border = null) {
-    border-color: @border;
+.border-color(@border, @rest...) when not (@border = null) {
+    border-color: @arguments;
 }
-.fill(@text: null, @bg: null, @border: null) {
+.linear-gradient(@gradient; @rest...) when not (@gradient = null) {
+    background-image: linear-gradient( @arguments );
+}
+.fill(@text: null; @bg: null; @border: null; @gradient: null) {
     .border-color(@border);
     .color(@text);
     .background-color(@bg);
+    .linear-gradient(@gradient);
+}
+
+
+.hide-scrollbar(@dir: right, @max-scrollbar: 100px) {
+    // anything larger than the scrollbar width will do
+    @scrollbar-size: 17px;
+    @margin: calc(-@max-scrollbar - @scrollbar-size);
+
+    padding-right: @max-scrollbar;
+    padding-left: @max-scrollbar;
+    margin-left: -@max-scrollbar;
+    margin-right: -@max-scrollbar;
+
+    margin-@{dir}: @margin;
 }

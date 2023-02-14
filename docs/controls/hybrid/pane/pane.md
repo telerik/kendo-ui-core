@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI Pane
+page_title: Overview - Hybrid UI Pane
 description: "Initialize and use the Hybrid UI Pane widget to change mobile views within the main view application in the Kendo UI framework."
 slug: overview_hybridpane
 position: 1
@@ -20,7 +20,7 @@ By default, navigational widgets change views in the containing pane. To target 
 
 The example below demonstrates how to implement navigation between Hybrid UI Panes.
 
-###### Example  
+  
 
     <div data-role="splitview" id="main">
        <div data-role="pane" id="side-pane">

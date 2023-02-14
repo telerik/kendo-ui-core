@@ -1,14 +1,62 @@
 ---
 title: 2019 Releases
-page_title: 2019 Releases | Kendo UI Backwards Compatibility
+page_title: 2019 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2019."
 slug: breakingchanges2019_kendoui
-position: 1
+position: 4
 ---
 
 # 2019 Releases
 
-This article lists the breaking changes in the Kendo UI 2019 releases. 
+This article lists the breaking changes in the Kendo UI 2019 releases.
+
+## Kendo UI 2019 R3 SP1
+
+**Draggable**
+
+As of the Kendo UI 2019 R3 SP1 release, setting [the holdToDrag option](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable/configuration/holdtodrag) to `false` does not cancel the [hold event](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable/events/hold).
+
+## Kendo UI 2019 R2 SP1
+
+**ToolBar**
+
+As of the Kendo UI 2019 R2 SP1 release, the recommended approach for moving tools to the right side of the [ToolBar]({% slug overview_kendoui_toolbar_widget %}) is by using the newly added `Spacer` command type. If you prefer to float some of the tools instead of using the spacer, apply `display: block;` to the wrapping element of the ToolBar.
+
+```
+<style>
+  .k-toolbar {
+    display: block;
+  }
+
+  .k-toolbar #button3 {
+    float: right;
+  }
+</style>
+
+<div id="toolbar"></div>
+
+<script>
+  $("#toolbar").kendoToolBar({
+    items: [
+      { type: "button", text: "Button 1" },
+      { type: "button", text: "Button 2" },
+      { type: "button", text: "Button 3", id: "button3"  }
+    ]
+  });
+</script>
+```
+
+## Kendo UI 2019 R2
+
+**Pager**, **Grid**, **TreeList**, **ListView**
+
+* Pager layout changed from Float to Flex for the [LESS-based themes]({% slug themesandappearnce_kendoui_desktopwidgets %}).
+
+* The `k-pager-numbers` `ul` of the Pager is now wrapped in a `div` with the `k-pager-numbers-wrap` class.
+
+**Scheduler**
+
+The mobile pane in which [the Adaptive Scheduler]({% slug adaptiverendering_kendoui_scheduler_widget %}) is placed does not automatically expand its height. Therefore, it is required to define an explicit pixel Scheduler height by setting [the height option](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/height). This change is part of the improved adaptive rendering of the widget.
 
 ## Kendo UI 2019 R1
 
@@ -26,6 +74,7 @@ As of the Kendo UI 2019 R1 release, the [MobileSwitch widget]({% slug overview_h
 
 ## See Also
 
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
 * [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})

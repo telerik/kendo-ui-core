@@ -1,8 +1,8 @@
 ---
 title: Remove Up and Down Arrows from the Grid NumericTextBox Editors
-description: An example on how to remove the Up Arrow and Down Arrow from the Kendo UI Grid editor.
+description: Learn how to remove the Up Arrow and Down Arrow from the Kendo UI Grid editor.
 type: how-to
-page_title: Remove Spinners from the NumericTextbox Editor | Kendo UI Grid
+page_title: Remove Spinners from the NumericTextbox Editor - Kendo UI Grid for jQuery
 slug: grid-remove-spinners-from-the-grid-numerictextbox-editor
 tags: grid, numerictextbox, spinners
 ticketid: 1142901
@@ -14,10 +14,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr> <tr>
-  <td>Made with version</td>
-  <td>2017.3.1026</td>
+  <td>Product Version</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -85,17 +85,11 @@ Set a custom editor for the numeric columns by using the [`column.editor`](https
             columns: [
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120,editor: editNumber },
-              { field: "Discontinued", width: 120, editor: customBoolEditor },
+              { field: "Discontinued", width: 120 },
               { command: "destroy", title: "&nbsp;", width: 150 }],
             editable: true
           });
         });
-
-        function customBoolEditor(container, options) {
-          var guid = kendo.guid();
-          $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-        }
 
         function editNumber(container, options) {
           $('<input data-bind="value:' + options.field + '"/>')
@@ -110,4 +104,4 @@ Set a custom editor for the numeric columns by using the [`column.editor`](https
 
 ## See Also
 
-* [Remove Spinners from NumericTextBox Editors in MVC Grid](https://docs.telerik.com/kendo-ui/knowledge-base/grid-mvc-remove-spinner-numerictextbox-editor)
+* [Remove Spinners from NumericTextBox Editors in Kendo UI Grid for ASP.NET MVC](/knowledge-base/grid-mvc-remove-spinner-numerictextbox-editor)

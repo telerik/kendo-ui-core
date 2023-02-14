@@ -41,8 +41,8 @@
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar.k-dialog-titlebar"));
             assert.isOk(wrapperChildren.eq(0).children().eq(1).is(".k-window-actions.k-dialog-actions"));
             assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-window-action.k-dialog-action.k-dialog-close"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).children().eq(0).is(".k-icon.k-i-close"));
-            assert.isOk(wrapperChildren.eq(1).is(".k-content.k-window-content.k-dialog-content"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).children().eq(0).is(".k-icon.k-i-x"));
+            assert.isOk(wrapperChildren.eq(1).is(".k-window-content.k-dialog-content"));
             assert.equal(wrapper.find(".k-dialog-buttongroup").length, 0);
         });
 
@@ -55,8 +55,8 @@
 
             assert.isOk(wrapper.is(".k-widget.k-dialog.k-window"));
             assert.isOk(wrapperChildren.eq(0).is(".k-dialog-action.k-dialog-close"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(0).is(".k-icon.k-i-close"));
-            assert.isOk(wrapperChildren.eq(1).is(".k-content"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(0).is(".k-icon.k-i-x"));
+            assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
             assert.equal(wrapper.find(".k-dialog-buttongroup").length, 0);
         });
 
@@ -79,7 +79,7 @@
             });
             var wrapper = dialog.wrapper;
             var wrapperChildren = wrapper.children();
-            assert.isOk(!wrapperChildren.eq(0).is(".k-i-close"));
+            assert.isOk(!wrapperChildren.eq(0).is(".k-i-x"));
         });
 
         it("title=false does not render title and adds css class", function() {
@@ -104,12 +104,12 @@
                 content: "content text"
             });
 
-            assert.equal(dialog.wrapper.find(".k-content").html(), "content text");
+            assert.equal(dialog.wrapper.find(".k-window-content").html(), "content text");
         });
 
         it("setting actions in options adds buttongroup container", function() {
             var dialog = createDialog({
-                actions: [{ text: "OK" }]
+                actions: [{ text: () => "OK" }]
             });
 
             assert.equal(dialog.wrapper.find(".k-dialog-buttongroup").length, 1);
@@ -117,7 +117,7 @@
 
         it("setting an acition in options adds a button", function() {
             var dialog = createDialog({
-                actions: [{ text: "OK" }]
+                actions: [{ text: () => "OK" }]
             });
 
             assert.equal(dialog.wrapper.find(".k-dialog-buttongroup > .k-button").length, 1);
@@ -126,16 +126,16 @@
         it("setting an primary acition in options adds a primary button", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK",
+                    text: () => "OK",
                     primary: true
                 }, {
-                    text: "Cancel"
+                    text: () => "Cancel"
                 }]
             });
             var wrapper = dialog.wrapper;
-
+console.log(wrapper.find(".k-dialog-buttongroup > .k-button:first")[0]);
             assert.equal(wrapper.find(".k-dialog-buttongroup > .k-button").length, 2);
-            assert.isOk(wrapper.find(".k-dialog-buttongroup > .k-button:first").is(".k-primary"));
+            assert.isOk(wrapper.find(".k-dialog-buttongroup > .k-button:first").is(".k-button-solid-primary"));
         });
 
         it("visible:true option is inferred from content element", function() {
@@ -201,7 +201,7 @@
         it("set zero content height by creating dialog with string insufficient height", function() {
             var dialog = createDialog({ height: "10px", buttonLayout: "normal" });
 
-            assert.equal(dialog.element.prop("style").getPropertyValue("height"), "0px");
+            assert.equal(dialog.element.height(), 0);
         });
 
         it("apply scroll class name to dialog content", function() {
@@ -252,7 +252,7 @@
             var div = $("<div class='dialog' tabindex='10'>foo</div>").appendTo(Mocha.fixture);
             var dialog = div.kendoDialog({
                 closable: true,
-                actions: [{ text: "ok" }]
+                actions: [{ text: () => "ok" }]
             }).getKendoDialog();
 
             assert.equal(dialog.element.attr("tabindex"), 10);
@@ -270,22 +270,22 @@
         it("buttonLayout stretched", function() {
             var dialog = createDialog({
                 buttonLayout: "stretched",
-                actions: [{ text: "a1" }, { text: "a2" }]
+                actions: [{ text: () => "a1" }, { text: () => "a2" }]
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-stretched"));
+            assert.isOk(actionbar.hasClass("k-justify-content-stretch"));
             assert.equal(actionbar.find(".k-button").eq(0).width, actionbar.find(".k-button").eq(1).width);
         });
 
         it("buttonLayout normal", function() {
             var dialog = createDialog({
                 buttonLayout: "normal",
-                actions: [{ text: "a1" }, { text: "a2" }]
+                actions: [{ text: () => "a1" }, { text: () => "a2" }]
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-normal"));
+            assert.isOk(actionbar.hasClass("k-justify-content-end"));
             assert.equal(actionbar.find(".k-button").get(0).style.width, "");
         });
 
@@ -328,11 +328,11 @@
         it("buttonLayout is empty string resorts to normal", function() {
             var dialog = createDialog({
                 buttonLayout: "",
-                actions: [{ text: "a1" }, { text: "a2" }]
+                actions: [{ text: () => "a1" }, { text: () => "a2" }]
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-normal"));
+            assert.isOk(actionbar.hasClass("k-justify-content-end"));
             assert.equal(actionbar.find(".k-button").get(0).style.width, "");
         });
 

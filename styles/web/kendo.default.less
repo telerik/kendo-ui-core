@@ -3,6 +3,7 @@
 @background: #fff;
 
 @border-radius: 4px;
+@icon-size: 16px;
 
 @normal-background: #fff;
 @normal-text-color: #2e2e2e;
@@ -14,10 +15,32 @@
 @selected-text-color: #fff;
 @selected-gradient: "rgba(255,255,255,.15) 0%, rgba(255,255,255,.0) 100%";
 
-@error: #db4240;
-@warning: #ffc000;
-@success: #37b400;
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: #666666;
+@tertiary: #a0a700;
 @info: #0066cc;
+@success: #37b400;
+@warning: #ffc000;
+@error: #db4240;
+@dark: #404040;
+@light: #ebebeb;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
 
 @series-a: #ff6800;
 @series-b: #a0a700;
@@ -35,3 +58,4 @@
 
 @checkbox-active-border-color: darken(@base, 24%);
 @checkbox-active-box-shadow: 0 0 2px 0 @checkbox-active-border-color;
+@tooltip-callout-s-border: @tooltip-bg;

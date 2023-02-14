@@ -1,9 +1,7 @@
-/* jshint eqnull: true */
-(function(f, define){
-    define([ "./kendo.draganddrop" ], f);
-})(function(){
 
-var __meta__ = { // jshint ignore:line
+import "./kendo.draganddrop.js";
+
+var __meta__ = {
     id: "sortable",
     name: "Sortable",
     category: "framework",
@@ -52,11 +50,11 @@ var __meta__ = { // jshint ignore:line
 
             Widget.fn.init.call(that, element, options);
 
-            if(!that.options.placeholder) {
+            if (!that.options.placeholder) {
                 that.options.placeholder = defaultPlaceholder;
             }
 
-            if(!that.options.hint) {
+            if (!that.options.hint) {
                 that.options.hint = defaultHint;
             }
 
@@ -109,10 +107,10 @@ var __meta__ = { // jshint ignore:line
                 axis: options.axis,
                 ignore: options.ignore,
                 autoScroll: options.autoScroll,
-                dragstart: $.proxy(that._dragstart, that),
-                dragcancel: $.proxy(that._dragcancel, that),
-                drag: $.proxy(that._drag, that),
-                dragend: $.proxy(that._dragend, that)
+                dragstart: that._dragstart.bind(that),
+                dragcancel: that._dragcancel.bind(that),
+                drag: that._drag.bind(that),
+                dragend: that._dragend.bind(that)
             });
         },
 
@@ -123,13 +121,13 @@ var __meta__ = { // jshint ignore:line
                 _placeholder = this.options.placeholder,
                 placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : $(_placeholder);
 
-            if(disabled && draggedElement.is(disabled)) {
+            if (disabled && draggedElement.is(disabled)) {
                 e.preventDefault();
-            } else if(handler && !$(e.initialTarget).is(handler)) {
+            } else if (handler && !$(e.initialTarget).is(handler)) {
                 e.preventDefault();
             } else {
 
-                if(this.trigger(START, { item: draggedElement, draggableEvent: e })) {
+                if (this.trigger(START, { item: draggedElement, draggableEvent: e })) {
                     e.preventDefault();
                 } else {
                     draggedElement.css("display", "none");
@@ -159,15 +157,15 @@ var __meta__ = { // jshint ignore:line
                 sibling,
                 getSibling,
                 axis = this.options.axis,
-                moveOnDragEnter= this.options.moveOnDragEnter,
+                moveOnDragEnter = this.options.moveOnDragEnter,
                 eventData = { item: draggedElement, list: this, draggableEvent: e };
 
-            if(axis === "x" || axis === "y") {
+            if (axis === "x" || axis === "y") {
                 this._movementByAxis(axis, cursorOffset, axisDelta[axis], eventData);
                 return;
             }
 
-            if(target) {
+            if (target) {
                 targetCenter = this._getElementCenter(target.element);
 
                 offsetDelta = {
@@ -177,40 +175,40 @@ var __meta__ = { // jshint ignore:line
 
                 $.extend(eventData, { target: target.element });
 
-                if(target.appendToBottom) {
+                if (target.appendToBottom) {
                     this._movePlaceholder(target, null, eventData);
                     return;
                 }
 
-                if(target.appendAfterHidden) {
+                if (target.appendAfterHidden) {
                     this._movePlaceholder(target, "next", eventData);
                 }
 
-                if(this._isFloating(target.element)) { //horizontal
-                    if((axisDelta.x < 0 && moveOnDragEnter) || (!moveOnDragEnter && offsetDelta.left < 0)) {
+                if (this._isFloating(target.element)) { //horizontal
+                    if ((axisDelta.x < 0 && moveOnDragEnter) || (!moveOnDragEnter && offsetDelta.left < 0)) {
                         direction = "prev";
-                    } else if((axisDelta.x > 0 && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.left > 0)) {
+                    } else if ((axisDelta.x > 0 && moveOnDragEnter) || (!moveOnDragEnter && offsetDelta.left > 0)) {
                         direction = "next";
                     }
                 } else { //vertical
-                    if((axisDelta.y < 0  && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.top < 0)) {
+                    if ((axisDelta.y < 0 && moveOnDragEnter) || (!moveOnDragEnter && offsetDelta.top < 0)) {
                         direction = "prev";
-                    } else if((axisDelta.y > 0  && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.top > 0)) {
+                    } else if ((axisDelta.y > 0 && moveOnDragEnter) || (!moveOnDragEnter && offsetDelta.top > 0)) {
                         direction = "next";
                     }
                 }
 
-                if(direction) {
+                if (direction) {
                     getSibling = (direction === "prev") ? jQuery.fn.prev : jQuery.fn.next;
 
                     sibling = getSibling.call(target.element);
 
                     //find the prev/next visible sibling
-                    while(sibling.length && !sibling.is(":visible")) {
+                    while (sibling.length && !sibling.is(":visible")) {
                         sibling = getSibling.call(sibling);
                     }
 
-                    if(sibling[0] != this.placeholder[0]) {
+                    if (sibling[0] != this.placeholder[0]) {
                         this._movePlaceholder(target, direction, eventData);
                     }
                 }
@@ -238,7 +236,7 @@ var __meta__ = { // jshint ignore:line
                 draggableEvent: e
             };
 
-            if(placeholderIndex >= 0) {
+            if (placeholderIndex >= 0) {
                 isDefaultPrevented = this.trigger(END, eventData);
             } else {
                 connectedList = placeholder.parents(connectWith).getKendoSortable();
@@ -253,7 +251,7 @@ var __meta__ = { // jshint ignore:line
                 isDefaultPrevented = !(!this.trigger(END, eventData) && !connectedList.trigger(END, connectedListEventData));
             }
 
-            if(isDefaultPrevented || placeholderIndex === draggedIndex) {
+            if (isDefaultPrevented || placeholderIndex === draggedIndex) {
                 this._cancel();
                 return;
             }
@@ -273,7 +271,7 @@ var __meta__ = { // jshint ignore:line
 
             this.trigger(CHANGE, eventData);
 
-            if(connectedList) {
+            if (connectedList) {
                 connectedListEventData = $.extend({}, eventData, {
                     action: ACTION_RECEIVE,
                     oldIndex: MISSING_INDEX,
@@ -291,7 +289,7 @@ var __meta__ = { // jshint ignore:line
                 connectWith = this.options.connectWith,
                 node;
 
-            if($.contains(this.element[0], element)) { //the element is part of the sortable container
+            if ($.contains(this.element[0], element)) { //the element is part of the sortable container
                 items = this.items();
                 node = items.filter(element)[0] || items.has(element)[0];
 
@@ -310,7 +308,7 @@ var __meta__ = { // jshint ignore:line
             var elementUnderCursor = kendo.elementUnderCursor(e),
                 draggable = e.sender;
 
-            if(containsOrEqualTo(draggable.hint[0], elementUnderCursor)) {
+            if (containsOrEqualTo(draggable.hint[0], elementUnderCursor)) {
                 draggable.hint.hide();
                 elementUnderCursor = kendo.elementUnderCursor(e);
                 // IE8 does not return the element in iframe from first attempt
@@ -332,20 +330,20 @@ var __meta__ = { // jshint ignore:line
             for (var i = 0; i < connected.length; i++) {
                 sortableInstance = connected.eq(i).getKendoSortable();
 
-                if($.contains(connected[i], element)) {
-                    if(sortableInstance) {
+                if ($.contains(connected[i], element)) {
+                    if (sortableInstance) {
                         items = sortableInstance.items();
                         node = items.filter(element)[0] || items.has(element)[0];
 
-                        if(node) {
+                        if (node) {
                             sortableInstance.placeholder = this.placeholder;
                             return { element: $(node), sortable: sortableInstance };
                         } else {
                             return null;
                         }
                     }
-                } else if(connected[i] == element) {
-                    if(sortableInstance && sortableInstance._isEmpty()) {
+                } else if (connected[i] == element) {
+                    if (sortableInstance && sortableInstance._isEmpty()) {
                         return { element: connected.eq(i), sortable: sortableInstance, appendToBottom: true };
                     } else if (this._isCursorAfterLast(sortableInstance, e)) {
                         node = sortableInstance.items().last();
@@ -366,7 +364,7 @@ var __meta__ = { // jshint ignore:line
             lastItemOffset.top += outerHeight(lastItem);
             lastItemOffset.left += outerWidth(lastItem);
 
-            if(this._isFloating(lastItem)) { //horizontal
+            if (this._isFloating(lastItem)) { //horizontal
                 delta = lastItemOffset.left - cursorOffset.left;
             } else { //vertical
                 delta = lastItemOffset.top - cursorOffset.top;
@@ -382,7 +380,7 @@ var __meta__ = { // jshint ignore:line
                 targetCenter;
 
             if (target.length && !target.is(":visible")) {
-                target = (delta <0) ? target.prev() : target.next();
+                target = (delta < 0) ? target.prev() : target.next();
             }
 
             if (!items.filter(target).length) {
@@ -424,13 +422,13 @@ var __meta__ = { // jshint ignore:line
             var cursor = this.options.cursor,
                 body;
 
-            if(cursor && cursor !== "auto") {
+            if (cursor && cursor !== "auto") {
                 body = $(document.body);
 
                 this._originalCursorType = body.css("cursor");
                 body.css({ "cursor": cursor });
 
-                if(!this._cursorStylesheet) {
+                if (!this._cursorStylesheet) {
                     this._cursorStylesheet = $("<style>* { cursor: " + cursor + " !important; }</style>");
                 }
 
@@ -439,7 +437,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _resetCursor: function() {
-            if(this._originalCursorType) {
+            if (this._originalCursorType) {
                 $(document.body).css("cursor", this._originalCursorType);
                 this._originalCursorType = null;
 
@@ -449,7 +447,7 @@ var __meta__ = { // jshint ignore:line
 
         _getElementCenter: function(element) {
             var center = element.length ? kendo.getOffset(element) : null;
-            if(center) {
+            if (center) {
                 center.top += outerHeight(element) / 2;
                 center.left += outerWidth(element) / 2;
             }
@@ -458,19 +456,23 @@ var __meta__ = { // jshint ignore:line
         },
 
         _isFloating: function(item) {
-            return (/left|right/).test(item.css("float")) || (/inline|table-cell/).test(item.css("display"));
+            var isFloating = /left|right/.test(item.css('float'));
+            var isTable = /inline|table-cell/.test(item.css('display'));
+            var isHorizontalFlex = /flex/.test(item.parent().css('display')) && (/row|row-reverse/.test(item.parent().css('flex-direction')) || !item.parent().css('flex-direction'));
+            return isFloating || isTable || isHorizontalFlex;
         },
 
         _cancel: function() {
             this.draggedElement.show();
             this.placeholder.remove();
+            this.draggable.dropped = true;
         },
 
         _items: function() {
             var filter = this.options.filter,
                 items;
 
-            if(filter) {
+            if (filter) {
                 items = this.element.find(filter);
             } else {
                 items = this.element.children();
@@ -484,7 +486,7 @@ var __meta__ = { // jshint ignore:line
                 placeholder = this.placeholder,
                 draggedElement = this.draggedElement;
 
-            if(placeholder && element[0] == placeholder[0]) {
+            if (placeholder && element[0] == placeholder[0]) {
                 return items.not(draggedElement).index(element);
             } else {
                 return items.not(placeholder).index(element);
@@ -495,7 +497,7 @@ var __meta__ = { // jshint ignore:line
             var placeholder = this.placeholder,
                 items = this._items();
 
-            if(placeholder) {
+            if (placeholder) {
                 items = items.not(placeholder);
             }
 
@@ -515,6 +517,3 @@ var __meta__ = { // jshint ignore:line
     kendo.ui.plugin(Sortable);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

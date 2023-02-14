@@ -1,7 +1,7 @@
 ---
 title: List of Formulas and Functions
-page_title: List of Formulas and Functions | Kendo UI Spreadsheet
-description: "A list of the formulas and functions available in the Kendo UI Spreadsheet widget."
+page_title: jQuery Spreadsheet Documentation - List of Formulas and Functions
+description: "Get started with the jQuery Spreadsheet by Kendo UI and check out the list of its formulas and functions."
 slug: list_offormulas_andfunctions_spreadsheet_widget
 position: 2
 ---
@@ -254,8 +254,8 @@ The following table provides a list of the formulas and functions the Spreadshee
 | TRIM                      | Removes spaces from text; replaces all internal multiple spaces with a single space
 | TRIMMEAN                  | Returns the mean of the interior of a data set, ignoring a proportion of high and low values
 | TRUE                      | Returns the logical value `True`
-| UNICHAR                   | Returns the character represented by the given numeric value according to the [Unicode Standard](http://unicode.org/standard/standard.html)
-| UNICODE                   | Returns the [Unicode](http://unicode.org/standard/standard.html) code point that corresponds to the first character of a text value
+| UNICHAR                   | Returns the character represented by the given numeric value according to the [Unicode Standard](https://unicode.org/standard/standard.html)
+| UNICODE                   | Returns the [Unicode](https://unicode.org/standard/standard.html) code point that corresponds to the first character of a text value
 | UPPER                     | Converts text to uppercase
 | VALUE                     | Converts a text argument to a number
 | VAR.P                     | Calculates variance based on the entire population

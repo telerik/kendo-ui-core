@@ -1,13 +1,13 @@
 ---
 title: CSS
-page_title: CSS Binding | Kendo UI MVVM
+page_title: CSS Binding - Kendo UI MVVM
 description: "Learn how to update the classes of the DOM element to a View-Model value with CSS binding in Kendo UI MVVM."
 slug: cssbinding_mvvm_kendoui
 ---
 
 # CSS Binding
 
-The [Kendo UI CSS (`css`) binding](http://demos.telerik.com/kendo-ui/mvvm/css) sets a predefined CSS class of the target DOM element to a Boolean View-Model value.
+The [Kendo UI CSS (`css`) binding](https://demos.telerik.com/kendo-ui/mvvm/css) sets a predefined CSS class of the target DOM element to a Boolean View-Model value.
 
 Changing the View-Model value via code is going to either add, or remove the CSS class of the DOM element.
 

@@ -2,29 +2,79 @@
 
 // Gantt Main Layout
 
-.k-gantt
-{
+.k-gantt {
+    box-sizing: border-box;
     white-space: nowrap;
     position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+
+    .k-splitbar {
+        width: 5px;
+        border-width: 0 1px;
+        background-repeat: repeat-y;
+        position: relative;
+        cursor: e-resize;
+        display: inline-block;
+        vertical-align: top;
+        flex-shrink: 0;
+    }
 }
 
-.k-gantt-layout
-{
-    display: inline-block;
-    white-space: normal;
-    vertical-align: top;
+
+// Gantt header
+.k-gantt-header {
+    border-width: 0 0 @toolbar-border-width;
+    flex: 0 0 auto;
+    z-index: 2;
 }
 
-.k-gantt .k-splitbar
-{
-    position: relative;
-    cursor: e-resize;
-    width: 5px;
-    border-width: 0 1px;
-    background-repeat: repeat-y;
+
+// Gantt footer
+.k-gantt-footer {
+    border-width: @toolbar-border-width 0 0;
+    flex: 0 0 auto;
 }
 
-.k-gantt .k-gantt-layout th
+
+// Toolbar
+.k-gantt-toolbar {}
+.k-gantt-toggle {
+    display: none;
+}
+
+
+// View switcher
+.k-gantt-views-wrapper {
+
+    select.k-dropdown {
+        width: auto;
+        font: inherit;
+        display: none;
+        cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+        select.k-dropdown {
+            display: inline-flex;
+        }
+        .k-gantt-views {
+            display: none;
+        }
+    }
+}
+
+
+// Content
+.k-gantt-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.k-gantt .k-gantt-content th,
+.k-gantt .k-gantt-content .k-grid-header td
 {
     vertical-align: bottom;
 }
@@ -48,84 +98,12 @@
     height: 100%;
 }
 
-// Gantt Toolbar, footer
-
-.k-gantt-toolbar
-{
-    border-style: solid;
-    border-width: 0 0 1px;
-    line-height: 2.4em;
-    padding: .5em;
-}
-
-.k-gantt-layout + .k-gantt-toolbar
-{
-    border-width: 1px 0 0;
-}
-
-.k-gantt-actions,
-.k-gantt-toolbar > ul
-{
-    float: left;
-    margin-right: .6em;
-}
-
-.k-gantt-actions > .k-button
-{
-    margin-right: .5em;
-    vertical-align: top;
-}
-
-.k-gantt-toolbar > .k-gantt-views
-{
-    float: right;
-    margin-right: 0;
-}
-
-.k-gantt-toolbar > .k-gantt-views > li.k-current-view {
-    display: none;
-}
-
-.k-gantt-toolbar > ul > li
-{
-    display: inline-block;
-    border-style: solid;
-    border-width: 1px 1px 1px 0;
-}
-
-.k-gantt-toolbar > ul > li:first-child+li
-{
-    border-left-width: 1px;
-}
-
-.k-gantt-toolbar .k-link
-{
-    display: inline-block;
-    padding: 0 1.1em;
-}
-
-.k-gantt-toolbar li:first-child+li,
-.k-gantt-toolbar li:first-child+li > .k-link
-{
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-
-.k-gantt-toolbar li:last-child,
-.k-gantt-toolbar li:last-child > .k-link
-{
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-
-.k-gantt-toolbar li.k-button
-{
-    line-height: inherit;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
 // Gantt TreeList
+.k-gantt-treelist {
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
 
 .k-gantt-treelist .k-grid-header tr
 {
@@ -153,11 +131,23 @@
     font-weight: normal;
 }
 
-// Gantt TimeLine
 
-.k-gantt-timeline .k-grid-header tr
+// Gantt TimeLine
+.k-gantt-timeline {
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
+
+.k-gantt-timeline .k-grid-header tr,
+.k-gantt-treelist .k-gantt-treelist-nested-columns .k-grid-header tr
 {
     height: 2.5em;
+}
+
+.k-gantt-timeline .k-grid-header .k-header {
+    vertical-align: bottom;
+    cursor: default;
 }
 
 .k-gantt-tasks
@@ -201,14 +191,26 @@
     overflow-x: scroll;
 }
 
-.k-gantt .k-gantt-timeline th
+.k-gantt .k-gantt-timeline th,
+.k-gantt-timeline .k-grid-header td
 {
     text-align: center;
 }
 
-.k-gantt .k-gantt-timeline tr:first-child th
+.k-gantt .k-gantt-timeline tr:first-child th,
+.k-gantt .k-gantt-timeline .k-grid-header tr:first-child td
 {
     border-bottom-width: 1px;
+}
+
+.k-gantt-timeline td.k-header {
+    overflow: hidden;
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+    padding: .5em .6em .4em .6em;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 // Gantt TimeLine objects
@@ -266,19 +268,18 @@
 }
 
 // Lines
-
-.k-line-h,
-.k-line-v
+.k-gantt-line-h,
+.k-gantt-line-v
 {
     position: absolute;
 }
 
-.k-line-h
+.k-gantt-line-h
 {
     height: 2px;
 }
 
-.k-line-v
+.k-gantt-line-v
 {
     width: 2px;
 }
@@ -320,38 +321,14 @@
     border-style: solid;
     border-width: 1px;
     transform: rotate(45deg);
+    margin-left: -0.2em;
 }
 
 // Button
-
-.k-gantt .k-gantt-treelist .k-button,
-.k-gantt .k-gantt-tasks .k-button-icon
-{
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.k-gantt .k-gantt-tasks .k-button-icon
-{
-    margin-top: 4px;
-}
-
-.k-gantt .k-gantt-treelist .k-button
-{
-    margin-top: -4px;
-    margin-bottom: -2px;
-}
-
-.k-gantt .k-gantt-tasks .k-button-icon
+.k-gantt .k-gantt-tasks .k-button.k-button-icon
 {
     padding-left: 2px;
     padding-right: 2px;
-}
-
-.k-gantt .k-gantt-treelist .k-button .k-icon,
-.k-gantt .k-gantt-tasks .k-button .k-icon
-{
-    vertical-align: text-top;
 }
 
 .k-rel .k-button-icon
@@ -372,13 +349,15 @@
 .k-task-wrap
 {
     position: absolute;
+    display: inline;
     padding: 0 23px 5px;
     margin: -1px -23px 0;
     z-index: 2;
 }
 
 .k-task-wrap:hover,
-.k-line.k-state-selected
+.k-gantt-line.k-state-selected,
+.k-gantt-line.k-selected
 {
     z-index: 3;
 }
@@ -415,7 +394,8 @@
     cursor: pointer;
 }
 
-.k-task-dot.k-state-hover
+.k-task-dot.k-state-hover,
+.k-task-dot.k-hover
 {
     background-color: transparent;
 }
@@ -453,6 +433,7 @@
 
 .k-task-dot:hover:after,
 .k-task-dot.k-state-hover:after,
+.k-task-dot.k-hover:after,
 .k-task-wrap-active .k-task-dot:after
 {
     border-style: solid;
@@ -478,13 +459,28 @@
     overflow: hidden;
     cursor: default;
     min-height: 1.3em;
+    line-height: @line-height;
     white-space: nowrap;
+
+    .k-task-actions .k-link {
+        color: inherit;
+
+        .k-icon {
+            opacity: .5;
+        }
+
+        &:hover .k-icon {
+            opacity: 1;
+        }
+    }
 }
 
 .k-task-template
 {
     padding: .2em 1.4em .2em .6em;
     line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .k-task-actions,
@@ -547,7 +543,6 @@
 {
     content: "";
     position: absolute;
-    filter: alpha(opacity=50);
     opacity: .5;
 }
 
@@ -605,7 +600,7 @@
     display: block;
 }
 
-.k-dependency-hint
+.k-gantt-dependency-hint
 {
     z-index: 4;
 }
@@ -688,6 +683,7 @@
 .k-resources-wrap
 {
     position: absolute;
+    display: inline;
     z-index: 2;
     zoom: 1;
     margin-left: 20px;
@@ -717,12 +713,6 @@
 .k-resources-form-container > .k-grid
 {
     margin: 0 .9em;
-}
-
-.k-gantt-edit-form > .k-edit-form-container .k-textbox,
-.k-gantt-edit-form > .k-edit-form-container .k-numerictextbox
-{
-    width: 15em;
 }
 
 .k-gantt-edit-form .k-edit-buttons .k-gantt-delete
@@ -765,128 +755,29 @@
     display: none;
 }
 
+
 // Responsive styles
 
-button.k-gantt-toggle
-{
-    display: none;
-    float: left;
-    margin-right: .5em;
-}
-
-@media only screen and (max-width: 1024px) {
-    .k-gantt-toolbar > ul.k-gantt-views
-    {
-        position: absolute;
-        right: 6px;
-        top: 6px;
-        z-index: 10000;
-    }
-
-    .k-rtl .k-gantt-toolbar > ul.k-gantt-views
-    {
-        right: auto;
-        left: 6px;
-    }
-
-    .k-gantt-toolbar > ul.k-gantt-views > li:not(.k-current-view)
-    {
-        display: none;
-    }
-
-    .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view
-    {
-        display: block;
-        border-width: 1px;
-    }
-
-    .k-rtl .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view {
-        text-align: left;
-        padding-left: 1em;
-    }
-
-    .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view > .k-link
-    {
-        display: block;
-        position: relative;
-        padding-right: 2.5em;
-        padding-left: 1em;
-    }
-
-    .k-rtl .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view > .k-link
-    {
-        padding-left: 0;
-    }
-
-    .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view > .k-link:after
-    {
-        content: "\E006";
-        position: absolute;
-        top: 50%;
-        right: 0.6em;
-        margin-top: -0.5em;
-        line-height: 1em;
-    }
-
-    .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > li,
-    .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > li:first-child + li
-    {
-        display: block;
-        border: 0;
-        border-radius: 0;
-    }
-
-    .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded {
-        border: 1px solid #c5c5c5;
-        background-color: #fff;
-        background-image: none;
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.3);
-    }
-
-    .k-rtl .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded {
-        text-align: left;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    button.k-gantt-toggle
-    {
-        display: inline-block;
-    }
-
-    .k-gantt-create span + span,
-    .k-gantt-pdf span + span
-    {
-        display: none;
-    }
-
-    .k-gantt-create .k-icon,
-    .k-gantt-pdf .k-icon
-    {
-        margin: 0;
-    }
-
-    .k-gantt .k-splitbar
-    {
-        display: none;
-        width: 0;
-        border-width: 0;
-    }
-
-    .k-gantt .k-gantt-treelist
-    {
-        display: none;
-        max-width: 0;
+@media (max-width: 480px) {
+    .k-gantt-toolbar {
+        .k-gantt-toggle { display: inline-flex; }
+        .k-button {
+            padding: @button-padding-y;
+            width: @button-calc-size;
+            height: @button-calc-size;
+        }
+        .k-button .k-icon { margin: 0; }
+        .k-button .k-button-text { display: none; }
     }
 
     .k-gantt .k-treelist .k-grid-content {
         overflow-y: scroll;
     }
-
-    .k-gantt .k-gantt-timeline
-    {
-       width: 100%;
-    }
 }
 
 // Gantt Chart end
+
+
+.k-gantt-resize-hint {
+    white-space: nowrap;
+}

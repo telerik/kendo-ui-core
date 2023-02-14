@@ -1,189 +1,214 @@
 // Toolbar
 .k-toolbar {
-    position: relative;
-    display: block;
-    vertical-align: middle;
-    padding: 0.28571428em 0;
-    overflow: hidden;
-    min-height: 2.4375em;
+    margin: 0;
+    padding: (@toolbar-padding-y /2) @toolbar-padding-x;
+    border-width: @toolbar-border-width;
+    border-style: solid;
+    .border-radius( @toolbar-border-radius );
     box-sizing: border-box;
-}
+    outline: 0;
+    font-size: @toolbar-font-size;
+    line-height: @toolbar-line-height;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
 
-.k-toolbar .k-button .k-sprite,
-.k-overflow-container .k-button .k-sprite {
-    vertical-align: middle;
-    margin-top: -7px;
-    margin-bottom: -5px;
-}
-
-.k-toolbar .k-input:before {
-    content: "\a0";
-    display: inline-block;
-    width: 0;
-}
-
-.k-toolbar .k-combobox .k-dropdown-wrap:before,
-.k-toolbar .k-picker-wrap:before,
-.k-toolbar .k-numeric-wrap:before {
-    display: none;
-}
-
-.k-overflow-container .k-sprite {
-    margin-left: -4px;
-}
-
-.k-toolbar-resizable {
-    white-space: nowrap;
-}
-
-.k-toolbar > .k-align-left {
-    float: none;
-}
-
-.k-toolbar > .k-align-right {
-    float: right;
-}
-
-.k-toolbar > * {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.k-toolbar .k-separator {
-    border-width: 0 0 0 1px;
-    border-style: solid;
-    width: 1px;
-    line-height: calc((30/14)*1em);
-}
-
-.k-toolbar .k-button-group {
-    list-style-type: none;
-}
-
-.k-toolbar .k-button-group > li {
-    display: inline-block;
-}
-
-.k-toolbar .k-button-group .k-button {
-    margin-left: -1px;
-    margin-right: 0;
-    border-radius: 0;
-}
-
-.k-toolbar .k-button,
-.k-toolbar .k-split-button,
-.k-toolbar .k-button-group,
-.k-toolbar .k-widget,
-.k-toolbar span:not(.k-maskedtextbox) .k-textbox,
-.k-toolbar label,
-.k-toolbar .k-separator {
-    margin: 0 .2em;
-    vertical-align: middle;
-}
-
-.k-toolbar .k-split-button {
-    padding-left: 0;
-    border: 1px solid transparent;
-
-    .k-button {
-        margin: -1px 0 -1px -1px;
+    &::before {
+        content: "";
+        height: @button-calc-size;
     }
 
-    .k-split-button-arrow {
-        margin: -1px;
+    &.k-toolbar-resizable {
+       flex-wrap: nowrap;
     }
-}
 
-.k-toolbar .k-button-group .k-group-start {
-    margin-left: 0;
-    margin-right: 0;
-}
+    > * {
+        // Until flex gap is available in chrome
+        margin-top: (@toolbar-padding-y / 2);
+        margin-bottom: (@toolbar-padding-y / 2);
+        margin-right: @toolbar-spacing;
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: stretch;
+        align-content: center;
+        vertical-align: middle;
 
-.k-toolbar .k-button-icontext {
-    padding-right: .8em;
-}
+        > label {
+            margin-right: @toolbar-spacing;
+        }
+    }
+    > :last-child {
+        margin-right: 0;
+    }
 
+    .k-button,
+    .k-button-group,
+    .k-separator,
+    .k-split-button,
+    .k-textbox,
+    .k-widget,
+    label {
+        align-self: center;
+    }
+    .k-split-button > .k-button {
+        align-self: stretch;
+    }
 
+     // Input
+    .k-input,
+    .k-picker {
+        width: 10em;
+    }
+    .k-colorpicker {
+        width: min-content;
+    }
 
-.k-toolbar .k-overflow-anchor {
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    bottom: -1px;
-    width: calc((40/14)*1em);
-    margin: 0;
-    line-height: inherit;
-    border-radius: 0;
-
-    & > .k-icon {
+    // Overflow anchor
+    .k-overflow-anchor {
+        margin: 0;
+        width: @toolbar-calc-inner-size;
+        height: 100%;
+        border-width: 0;
+        border-left-width: @button-border-width;
+        border-radius: 0;
+        border-color: inherit;
+        box-sizing: border-box;
+        justify-content: center;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -8px;
+        top: 0;
+        right: 0;
+    }
+
+
+    // Separator
+    .k-separator,
+    .k-toolbar-separator {
+        width: 0;
+        height: @line-height-em;
+        border-width: 0 0 0 1px;
+        border-style: solid;
+    }
+
+
+    // Spacer
+    .k-spacer,
+    .k-toolbar-spacer {
+        height: @line-height-em;
+        flex: 1 1 auto;
+    }
+
+}
+
+// Overflow container
+.k-overflow-container {
+
+    > .k-item {
+        padding: 1px;
+    }
+
+    // Group
+    .k-overflow-tool-group {
+        display: block;
+    }
+
+    // Button
+    .k-overflow-button {
+        width: 100%;
+        border-color: transparent;
+        background-color: transparent;
+        background-image: none !important;
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    // Button group
+    .k-button-group {
+        display: flex;
+        flex-direction: column;
+
+        .k-button ~ .k-button {
+            margin: 0;
+        }
+    }
+
+    // Split button
+    .k-split-button {
+        display: flex;
+        flex-direction: column;
+
+        .k-button {
+            padding: @button-padding-y @button-padding-x;
+        }
+
+        .k-button ~ .k-button {
+            margin: 0;
+        }
+    }
+
+    // Separators
+    .k-separator {
+        display: none;
+    }
+
+    // Hidden items
+    .k-overflow-hidden {
+        display: none;
     }
 }
 
-.k-overflow-container .k-button-group .k-button {
-    margin: 0;
+
+
+
+// RTL
+.k-rtl {
+    .k-toolbar {
+        > * {
+            margin-right: 0;
+            margin-left: @toolbar-spacing;
+        }
+        > :last-child {
+            margin-left: 0;
+        }
+        .k-overflow-anchor {
+            border-left-width: 0;
+            border-right-width: @button-border-width;
+            right: auto;
+            left: 0;
+        }
+    }
+    .k-overflow-container {
+        .k-overflow-button {
+            text-align: right;
+        }
+    }
 }
 
-.k-overflow-container .k-item {
-    float: none;
-    border: 0;
-}
 
-.k-overflow-container .k-separator {
-    border-width: 0 0 1px;
-    border-style: solid;
-    height: 1px;
-    line-height: 0;
-    font-size: 0;
-    padding: 0;
-}
 
-.k-overflow-container .k-overflow-button,
-.k-split-container .k-button {
-    text-align: left;
+
+// No flexbox
+.k-no-flexbox .k-toolbar {
     display: block;
-    background: none;
-    border-color: transparent;
-    white-space: nowrap;
-}
 
-.k-split-container {
-    margin-top: -1px;
-}
+    &.k-toolbar-resizable {
+        white-space: nowrap;
+    }
 
-.k-overflow-container .k-button-group > li {
-    display: block;
-}
+    > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
 
-.k-overflow-container .k-overflow-group {
-    display: block;
-    border-width: 1px 0;
-    border-style: solid;
-    border-radius: 0;
-    margin: 1px 0;
-}
+    > .k-align-left {
+        float: none;
+    }
 
-.k-overflow-container .k-overflow-hidden {
-    display: none;
-}
-
-.k-overflow-container .k-toolbar-first-visible,
-.k-overflow-container .k-overflow-group + .k-overflow-group,
-.k-overflow-container .k-separator + .k-overflow-group {
-    border-top: 0;
-    margin-top: 0;
-    padding-top: 1px;
-}
-
-.k-overflow-container .k-overflow-group + .k-separator {
-    display: none;
-}
-
-.k-overflow-container .k-toolbar-last-visible {
-    border-bottom: 0;
-    margin-bottom: 0;
-    padding-bottom: 1px;
+    > .k-align-right {
+        float: right;
+    }
 }

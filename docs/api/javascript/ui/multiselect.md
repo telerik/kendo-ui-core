@@ -273,7 +273,7 @@ The field of the data item that provides the value of the widget.
 
 ### delay `Number`*(default: 200)*
 
- Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
+Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
 
 #### Example - set the delay
 
@@ -284,6 +284,22 @@ The field of the data item that provides the value of the widget.
     <script>
     $("#multiselect").kendoMultiSelect({
         delay: 1000 // wait 1 second before filtering
+    });
+    </script>
+
+### downArrow `Boolean`*(default: false)*
+
+Configures MultiSelect to render a down arrow that opens and closes its popup.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        downArrow: true
     });
     </script>
 
@@ -331,6 +347,28 @@ If set to `true` the widget will not show all items when the text of the search 
             { ProductName: "Chang", ProductID: 2 },
             { ProductName: "Uncle Bob's Organic Dried Pears", ProductID: 7 }
         ]
+    });
+    </script>
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      filter: "contains",
+      fillMode: "flat"
     });
     </script>
 
@@ -399,6 +437,126 @@ The widget instance.
       footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
     });
     </script>
+
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+      label: "Customers"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+      label: function() {
+          return "Customers";
+      }
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+        label: { content: "Customers" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+      label: {
+        content: function() {
+            return "Customers";
+        }
+      }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/multiselect/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#multiselect").data("kendoMultiColumnComboBox").label.floatingLabel.refresh();`
+
+#### Example
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+        label: { 
+            content: "Customers",
+            floating: true
+        }
+    });
+    </script>
+
 
 ### groupTemplate `String|Function`
 
@@ -472,6 +630,122 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize MultiSelect messages
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          clear: "clear!",
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.clear `String` *(default: "clear")*
+
+The text message when hovering the input clear button.
+
+#### Example - customize clear message
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          clear: "clear!"
+        }
+      });
+    </script>
+
+### messages.deleteTag `String` *(default: "delete")*
+
+The text message shown when hovering delete icon in a selected tag.
+
+#### Example - customize deleteTag message
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                deleteTag: "delete!"
+            }
+        });
+    </script>
+
+### messages.downArrow `String` *(default: "select")*
+
+Specifies the text that will be used for the MultiSelect `downArrow` title attribute.
+
+#### Example
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                downArrow: "custom!"
+            }
+        });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <select id="multiselect" multiple="multiple"></select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.singleTag `String` *(default: "item(s) selected")*
+
+The text message shown in the single TagMode tag.
+
+#### Example - customize singleTag message
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                singleTag: "item(s) selected!",
+            },
+            tagMode: "single"
+        });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
@@ -509,7 +783,7 @@ A zero value means that a request will be made as soon as the user focuses the w
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -634,10 +908,21 @@ The available "x" positions are:
       dataTextField: "name",
       dataValueField: "id",
       popup: {
-        origin: "top left"
+        position: "top center"
       }
     });
     </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
 
 ### popup.position `String`
 
@@ -836,6 +1121,22 @@ The mode used to render the selected tags. The available modes are:
 
 > Every tagMode has a specific `tagTemplate` value. If you would like to control the content of the rendered tags,
 set a custom a [tagTemplate](/api/javascript/ui/multiselect#configuration-tagTemplate) value.
+
+#### Example - set the tagMode
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" },
+                { id: 3, name: "Bananas" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",            
+            tagMode: "single"
+        });
+    </script>
 
 ### value `Array`*(default: [])*
 
@@ -1170,6 +1471,49 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
             return data;
         }
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      size: "large"
+    });
     </script>
 
 ## Fields

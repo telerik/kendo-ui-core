@@ -1,28 +1,24 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ResponsivePanel
-description: "Learn how to initialize the Kendo UI ResponsivePanel widget and configure its behaviors."
+page_title: jQuery ResponsivePanel Documentation - ResponsivePanel Overview
+description: "Try now the Kendo UI for jQuery ResponsivePanel component providing options for hiding parts of the page content when the user is viewing the application on a small screen."
 slug: overview_kendoui_responsivepanel_widget
 position: 1
 ---
 
-# ResponsivePanel Overview
+# {{ site.product }} ResponsivePanel Overview
 
-The [Kendo UI ResponsivePanel widget](http://demos.telerik.com/kendo-ui/responsive-panel/index) allows you to hide part of a page content on small screens. This allows more space for content on mobile screens.
+The Kendo UI ResponsivePanel allows you to hide part of the page content when the user is viewing it on a small screen.
 
-> **Important**  
->
-> CSS3 media queries are supported in Internet Explorer 9 and later versions.
+> Only Internet Explorer 9 and later versions support CSS3 media queries.
 
-## Configuration
+* [Demo page for the ResponsivePanel](https://demos.telerik.com/kendo-ui/responsive-panel/index)
 
-### Specify Width and Placement
+## Basic Configuration
 
-Specify the page width when the content becomes hidden via the `breakpoint` configuration option. The placement of the expandable content can be configured via the `orientation` option.
+To specify the page width where the content will become hidden, use the `breakpoint` configuration option of the ResponsivePanel. To define the placement of the expandable content, use the `orientation` option of the component.
 
-The example below demonstrates how to collapse the menu on the left of small screens.
-
-###### Example
+The following example demonstrates how to collapse the menu on the left of small screens.
 
 ```dojo
   <header>
@@ -49,7 +45,7 @@ The example below demonstrates how to collapse the menu on the left of small scr
         orientation: "left"
       })
       .on("click", "a", function(e) {
-        // handle clicks of dummy items, actual links do not need this
+        // Handle clicks of dummy items. Actual links do not need this.
         alert($(e.target).text() + " clicked");
         $("#sidebar").kendoResponsivePanel("close");
       });
@@ -57,12 +53,12 @@ The example below demonstrates how to collapse the menu on the left of small scr
 
   <style>
     #sidebar {
-      /* panel background should be set to match design */
+      /* The panel background has to be set to match the design. */
         background: #092646;
     }
 
     article {
-      /* clear the floating sidebar */
+      /* Clear the floating sidebar. */
       overflow: hidden;
     }
 
@@ -91,6 +87,13 @@ The example below demonstrates how to collapse the menu on the left of small scr
   </style>
 ```
 
+## Next Steps 
+
+* [Getting Started with the Kendo UI Editor for ResponsivePanel]({% slug getting_started_kendoui_editor_widget %})
+* [Basic Usage of the ResponsivePanel (Demo)](https://demos.telerik.com/kendo-ui/responsive-panel/index)
+
 ## See Also
 
-* [ResponsivePanel JavaScript API Reference](/api/javascript/ui/responsivepanel)
+* [JavaScript API Reference of the ResponsivePanel](/api/javascript/ui/responsivepanel)
+* [Knowledge Base Section](/knowledge-base)
+* [jQuery ResponsivePanel Product Page](https://www.telerik.com/kendo-jquery-ui/responsivepanel)

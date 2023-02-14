@@ -1,8 +1,8 @@
 ---
 title: Prevent Grid Popup Editor from Closing on Update and Create
-description: An example on how to keep the Kendo UI Grid popup editor open after an update is finished.
+description: Learn how to keep the Kendo UI Grid popup editor open after an update is finished.
 type: how-to
-page_title: Keep Popup Open | Kendo UI Grid
+page_title: Keep Popup Open - Kendo UI Grid for jQuery
 slug: grid-prevent-popup-close-on-edit
 tags: grid, edit, popup, prevent, cancel, stop, close, edit, insert, create, modal, reopen, keep, open
 res_type: kb
@@ -14,11 +14,11 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
-  <td>2017.3.1026</td>
+  <td>Product Version</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -28,7 +28,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
 
 ## Solution
 
-1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid and attach an event handler for the [`close`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/events/close) event of the Popup window.
+1. Handle the [`edit`](/api/javascript/ui/grid/events/edit) event of the Grid and attach an event handler for the [`close`](/api/javascript/ui/window/events/close) event of the Popup window.
 1. In the `close` handler, the `e.preventDefault()` method will be called to prevent the popup from closing.
 1. To allow the user to close the editor, set the flag when the **Cancel** and **Close** buttons are clicked.
 
@@ -89,12 +89,12 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
                 { field: "ProductName", title: "Product Name" },
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
                 { field: "UnitsInStock", title: "Units In Stock", width: "120px" },
-                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "popup",
             edit: function (e) {
-                var editWindow = this.editable.element.data("kendoWindow");
-                editWindow.unbind("close");
+                var editWindow = e.container.data("kendoWindow");
+               // editWindow.unbind("close");
                 editWindow.bind("close", onWindowEditClose);
             },
             save: function (e) {
@@ -110,14 +110,12 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
         }
     };
 
-    $(".k-grid-cancel").on("mousedown", function (e) {
+    $(".k-grid-cancel-command").on("mousedown", function (e) {
         preventCloseOnSave = false;
     });
-
-    function customBoolEditor(container, options) {
-        var guid = kendo.guid();
-        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-    }
 </script>
 ```
+
+## See Also
+
+* [Prevent Grid Popup Editor from Closing on Validation Errors]({% slug grid-prevent-popup-close-on-validation-errors-from-server %})

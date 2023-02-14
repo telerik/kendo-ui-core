@@ -1,12 +1,8 @@
-(function(f, define){
-    define([
-        "./kendo.core",
-        "./kendo.binder",
-        "./kendo.fx"
-    ], f);
-})(function(){
+import "./kendo.core.js";
+import "./kendo.binder.js";
+import "./kendo.fx.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "view",
     name: "View",
     category: "framework",
@@ -17,7 +13,7 @@ var __meta__ = { // jshint ignore:line
 
 (function($, undefined) {
     var kendo = window.kendo,
-        attr =  kendo.attr,
+        attr = kendo.attr,
         ui = kendo.ui,
         attrValue = kendo.attrValue,
         directiveSelector = kendo.directiveSelector,
@@ -59,7 +55,7 @@ var __meta__ = { // jshint ignore:line
             that.id = kendo.guid();
 
             Observable.fn.init.call(that);
-            that._initOptions(options);
+            this.options = $.extend({}, this.options, options);
 
             that.content = content;
 
@@ -75,6 +71,7 @@ var __meta__ = { // jshint ignore:line
             that.model = options.model;
             that._wrap = options.wrap !== false;
             this._evalTemplate = options.evalTemplate || false;
+            this._useWithBlock = options.useWithBlock;
             that._fragments = {};
 
             that.bind([ INIT, SHOW, HIDE, TRANSITION_START, TRANSITION_END ], options);
@@ -135,7 +132,7 @@ var __meta__ = { // jshint ignore:line
                 element.css("display", "");
             }
 
-            this.trigger(SHOW, { view: this });
+            this.trigger(SHOW_START, { view: this });
         },
 
         showEnd: function() {
@@ -145,11 +142,11 @@ var __meta__ = { // jshint ignore:line
             this.hide();
         },
 
-        beforeTransition: function(type){
+        beforeTransition: function(type) {
             this.trigger(TRANSITION_START, { type: type });
         },
 
-        afterTransition: function(type){
+        afterTransition: function(type) {
             this.trigger(TRANSITION_END, { type: type });
         },
 
@@ -198,7 +195,7 @@ var __meta__ = { // jshint ignore:line
 
         _createElement: function() {
             var that = this,
-                wrapper = "<" + that.tagName + " />",
+                wrapper = "<" + that.tagName + ">",
                 element,
                 content;
 
@@ -208,7 +205,7 @@ var __meta__ = { // jshint ignore:line
                 if (content[0].tagName === SCRIPT) {
                     content = content.html();
                 }
-            } catch(e) {
+            } catch (e) {
                 if (sizzleErrorRegExp.test(e.message)) {
                     content = that.content;
                 }
@@ -217,7 +214,7 @@ var __meta__ = { // jshint ignore:line
             if (typeof content === "string") {
                 content = content.replace(/^\s+|\s+$/g, '');
                 if (that._evalTemplate) {
-                    content = kendo.template(content)(that.model || {});
+                    content = kendo.template(content, { useWithBlock: that._useWithBlock })(that.model || {});
                 }
 
                 element = $(wrapper).append(content);
@@ -232,7 +229,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 element = content;
                 if (that._evalTemplate) {
-                    var result = $(kendo.template($("<div />").append(element.clone(true)).html())(that.model || {}));
+                    var result = $(kendo.template($("<div />").append(element.clone(true)).html(), { useWithBlock: that._useWithBlock })(that.model || {}));
 
                     // template uses DOM
                     if ($.contains(document, element[0])) {
@@ -396,7 +393,7 @@ var __meta__ = { // jshint ignore:line
     var transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
 
     function parseTransition(transition) {
-        if (!transition){
+        if (!transition) {
             return {};
         }
 
@@ -420,7 +417,7 @@ var __meta__ = { // jshint ignore:line
 
         after: function() {
             this.running = false;
-            this.trigger("complete", {view: this.view});
+            this.trigger("complete", { view: this.view });
             this.trigger("after");
         },
 
@@ -722,6 +719,3 @@ var __meta__ = { // jshint ignore:line
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

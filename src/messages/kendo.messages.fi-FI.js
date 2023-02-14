@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -563,7 +564,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Asemointi",
     "buttons": {
-     "justtifyLeft": "Tasaa vasemmalle",
+     "justifyLeft": "Tasaa vasemmalle",
      "justifyCenter": "Keskitä",
      "justifyRight": "Tasaa oikealle",
      "justifyFull": "Tasaa molemmat reunat",
@@ -689,10 +690,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Teksti loppuu"
     },
     "date": {
-      "eq":  "Päivämäärä on",
+      "eq": "Päivämäärä on",
       "neq": "Päivämäärä ei ole",
-      "lt":  "Päivämäärä on aiemmin kuin",
-      "gt":  "Päivämäärä on myöhemmin kuin"
+      "lt": "Päivämäärä on aiemmin kuin",
+      "gt": "Päivämäärä on myöhemmin kuin"
     },
     "number": {
       "eq": "On",
@@ -715,7 +716,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Lisää rivi alapuolelle",
   "alignment": "Alignment",
   "alignmentButtons": {
-    "justtifyLeft": "Tasaa vasemmalle",
+    "justifyLeft": "Tasaa vasemmalle",
     "justifyCenter": "Keskitä",
     "justifyRight": "Tasaa oikealle",
     "justifyFull": "Tasaa molemmat reunat",
@@ -847,7 +848,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Valitse tiedostoja...",
   "cancel": "Peruuta",

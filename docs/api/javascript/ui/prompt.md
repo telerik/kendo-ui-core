@@ -61,7 +61,7 @@ The title of the Cancel button.
 
 ### result `Promise`
 
-`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
+`Promise` a [jQuery promise instance](https://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](https://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
 
 * `done()` - when user has pressed the "OK" button and the **data** passed to the callback is the inputted text;
 * `fail()` - when user has pressed the "Cancel" button and the **data** passed to the callback is the inputted text.
@@ -77,9 +77,11 @@ The title of the Cancel button.
       okText: "OK"
     }
     }).data("kendoPrompt").result.done(function(data){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("User accepted with text: " + data);
       })
       .fail(function(data){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("User rejected with text: " + data);
       });
     </script>

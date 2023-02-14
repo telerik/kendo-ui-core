@@ -75,7 +75,7 @@ Specifies whether the connectors should appear on hover.
 
 ### path `String`
 
-The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
+The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (https://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
 
 #### Example - declaring a custom path for the shape
 
@@ -407,7 +407,7 @@ The color in any of the following formats.
 
 | Format         | Description
 | ---            | --- | ---
-| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| red            | [Basic](https://www.w3.org/TR/css3-color/#html4) or [Extended](https://www.w3.org/TR/css3-color/#svg-color) CSS Color name
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 
@@ -796,6 +796,7 @@ The connectors defined on this shape.
       diagram.addShape(shape);
 
       var connectors = shape.connectors;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Shape has " + connectors.length + " connectors.");
     </script>
 
@@ -835,6 +836,7 @@ The data item that this shape is bound to, if any.
         }
       }).getKendoDiagram();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(diagram.shapes[0].dataItem);
     </script>
 
@@ -877,6 +879,7 @@ or a [predefined type](/api/javascript/dataviz/ui/diagram/configuration/shapes.t
           }
         }
       }).getKendoDiagram();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(diagram.shapes[0].shapeVisual);
     </script>
 
@@ -1060,6 +1063,7 @@ If not parameter specified all connections are returned, if "in" then only the i
       }).getKendoDiagram();
 
       var outConnections = diagram.shapes[0].connections("out");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(outConnections);
     </script>
 
@@ -1106,6 +1110,7 @@ The name of the connector to get from the shape.
       }).getKendoDiagram();
 
       var connectorTop = diagram.shapes[0].getConnector("top");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(connectorTop);
     </script>
 
@@ -1152,6 +1157,7 @@ One of the four sides of a bound; "left", "right", "top", "bottom". If none spec
       }).getKendoDiagram();
 
       var position = diagram.shapes[0].getPosition("top");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(position);
     </script>
 

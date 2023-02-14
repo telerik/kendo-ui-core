@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function() {
+import "./kendo.core.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "angular",
     name: "AngularJS Directives",
     category: "framework",
@@ -11,7 +9,7 @@ var __meta__ = { // jshint ignore:line
     defer: true
 };
 
-(function ($, angular, undefined) {
+(function($, angular, undefined) {
     "use strict";
 
     // Angular2 exposes a global angular object, but it does not have an injector...
@@ -19,7 +17,6 @@ var __meta__ = { // jshint ignore:line
         return;
     }
 
-    /*jshint eqnull:true,loopfunc:true,-W052,-W028  */
 
     var module = angular.module('kendo.directives', []),
         $injector = angular.injector(['ng']),
@@ -31,7 +28,7 @@ var __meta__ = { // jshint ignore:line
     function withoutTimeout(f) {
         var save = $timeout;
         try {
-            $timeout = function(f){ return f(); };
+            $timeout = function(f) { return f(); };
             return f();
         } finally {
             $timeout = save;
@@ -42,14 +39,14 @@ var __meta__ = { // jshint ignore:line
 
     var createDataSource = (function() {
         var types = {
-            TreeList    : 'TreeListDataSource',
-            TreeView    : 'HierarchicalDataSource',
-            Scheduler   : 'SchedulerDataSource',
-            PivotGrid   : 'PivotDataSource',
-            PivotConfigurator   : 'PivotDataSource',
-            PanelBar    : 'HierarchicalDataSource',
-            Menu        : "$PLAIN",
-            ContextMenu : "$PLAIN"
+            TreeList: 'TreeListDataSource',
+            TreeView: 'HierarchicalDataSource',
+            Scheduler: 'SchedulerDataSource',
+            PivotGrid: 'PivotDataSource',
+            PivotConfigurator: 'PivotDataSource',
+            PanelBar: 'HierarchicalDataSource',
+            Menu: "$PLAIN",
+            ContextMenu: "$PLAIN"
         };
         var toDataSource = function(dataSource, type) {
             if (type == '$PLAIN') {
@@ -78,22 +75,22 @@ var __meta__ = { // jshint ignore:line
     }());
 
     var ignoredAttributes = {
-        kDataSource : true,
-        kOptions    : true,
-        kRebind     : true,
-        kNgModel    : true,
-        kNgDelay    : true
+        kDataSource: true,
+        kOptions: true,
+        kRebind: true,
+        kNgModel: true,
+        kNgDelay: true
     };
 
     var ignoredOwnProperties = {
         // XXX: other names to ignore here?
-        name    : true,
-        title   : true,
-        style   : true
+        name: true,
+        title: true,
+        style: true
     };
 
     function createWidget(scope, element, attrs, widget, origAttr, controllers) {
-        /* jshint latedef: false */
+
         if (!(element instanceof jQuery)) {
             throw new Error("The Kendo UI directives require jQuery to be available before AngularJS. Please include jquery before angular in the document.");
         }
@@ -180,7 +177,7 @@ var __meta__ = { // jshint ignore:line
             options = parseOptions(scope, element, attrs, widget, ctor).options;
 
             if (element.is("select")) {
-                (function(options){
+                (function(options) {
                     if (options.length > 0) {
                         var first = $(options[0]);
                         if (!/\S/.test(first.text()) && /^\?/.test(first.val())) {
@@ -409,7 +406,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             haveChangeOnElement = true;
-            setTimeout(function(){
+            setTimeout(function() {
                 haveChangeOnElement = false;
                 if (widget) { // might have been destroyed in between. :-(
                     var kNgModel = scope[widget.element.attr("k-ng-model")];
@@ -487,12 +484,29 @@ var __meta__ = { // jshint ignore:line
     }
 
     function bindToKNgModel(widget, scope, kNgModel) {
+        if (kendo.ui.DateRangePicker && widget instanceof kendo.ui.DateRangePicker) {
+            var rangePickerModels = kNgModel.split(",");
+            var rangePickerStartModel = rangePickerModels[0].trim();
+            var rangePickerEndModel;
+
+            bindToKNgModel(widget._startDateInput, scope, rangePickerStartModel);
+            if (rangePickerModels[1]) {
+                rangePickerEndModel = rangePickerModels[1].trim();
+                bindToKNgModel(widget._endDateInput, scope, rangePickerEndModel);
+                widget.range({ start: scope[rangePickerStartModel], end: scope[rangePickerEndModel] });
+            } else {
+                widget.range({ start: scope[rangePickerStartModel], end: null });
+            }
+
+            return;
+        }
+
         if (typeof widget.value != "function") {
             $log.warn("k-ng-model specified on a widget that does not have the value() method: " + (widget.options.name));
             return;
         }
 
-        var form  = $(widget.element).parents("ng-form, form").first();
+        var form = $(widget.element).parents("ng-form, form").first();
         var ngForm = kendo.getter(form.attr("name"), true)(scope);
         var getter = $parse(kNgModel);
         var setter = getter.assign;
@@ -541,7 +555,7 @@ var __meta__ = { // jshint ignore:line
                 ngForm.$setDirty();
             }
 
-            digest(scope, function(){
+            digest(scope, function() {
                 setter(scope, widget.$angular_getLogicValue());
                 currentValueLength = length(getter(scope));
             });
@@ -574,20 +588,20 @@ var __meta__ = { // jshint ignore:line
 
         var prevClassList = [].slice.call($(element)[0].classList);
 
-        var mo = new MutationObserver(function(changes){
-            suspend();    // make sure we don't trigger a loop
+        var mo = new MutationObserver(function(changes) {
+            suspend(); // make sure we don't trigger a loop
             if (!widget) {
                 return;
             }
 
-            changes.forEach(function(chg){
+            changes.forEach(function(chg) {
                 var w = $(widget.wrapper)[0];
                 switch (chg.attributeName) {
 
                     case "class":
                         // sync classes to the wrapper element
                         var currClassList = [].slice.call(chg.target.classList);
-                        currClassList.forEach(function(cls){
+                        currClassList.forEach(function(cls) {
                             if (prevClassList.indexOf(cls) < 0) {
                                 w.classList.add(cls);
                                 if (kendo.ui.ComboBox && widget instanceof kendo.ui.ComboBox) { // https://github.com/kendo-labs/angular-kendo/issues/356
@@ -595,7 +609,7 @@ var __meta__ = { // jshint ignore:line
                                 }
                             }
                         });
-                        prevClassList.forEach(function(cls){
+                        prevClassList.forEach(function(cls) {
                             if (currClassList.indexOf(cls) < 0) {
                                 w.classList.remove(cls);
                                 if (kendo.ui.ComboBox && widget instanceof kendo.ui.ComboBox) { // https://github.com/kendo-labs/angular-kendo/issues/356
@@ -694,7 +708,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function setTemplate(key, value) {
-        this[key] = kendo.stringify(value); // jshint ignore:line
+        this[key] = kendo.stringify(value);
     }
 
     module.factory('directiveFactory', [ '$compile', function(compile) {
@@ -713,7 +727,7 @@ var __meta__ = { // jshint ignore:line
 
                 controller: [ '$scope', '$attrs', '$element', function($scope, $attrs) {
                     this.template = bind(setTemplate, $attrs);
-                    $attrs._cleanUp = bind(function(){
+                    $attrs._cleanUp = bind(function() {
                         this.template = null;
                         $attrs._cleanUp = null;
                     }, this);
@@ -749,7 +763,7 @@ var __meta__ = { // jshint ignore:line
                         scope.$emit("kendoRendered");
                         if (!RENDERED) {
                             RENDERED = true;
-                            $("form").each(function(){
+                            $("form").each(function() {
                                 var form = $(this).controller("form");
                                 if (form) {
                                     form.$setPristine();
@@ -767,30 +781,30 @@ var __meta__ = { // jshint ignore:line
     }]);
 
     var TAGNAMES = {
-        Editor         : "textarea",
-        NumericTextBox : "input",
-        DatePicker     : "input",
-        DateTimePicker : "input",
-        TimePicker     : "input",
-        AutoComplete   : "input",
-        ColorPicker    : "input",
-        MaskedTextBox  : "input",
-        MultiSelect    : "input",
-        Upload         : "input",
-        Validator      : "form",
-        Button         : "button",
-        MobileButton        : "a",
-        MobileBackButton    : "a",
-        MobileDetailButton  : "a",
-        ListView       : "ul",
+        Editor: "textarea",
+        NumericTextBox: "input",
+        DatePicker: "input",
+        DateTimePicker: "input",
+        TimePicker: "input",
+        AutoComplete: "input",
+        ColorPicker: "input",
+        MaskedTextBox: "input",
+        MultiSelect: "input",
+        Upload: "input",
+        Validator: "form",
+        Button: "button",
+        MobileButton: "a",
+        MobileBackButton: "a",
+        MobileDetailButton: "a",
+        ListView: "ul",
         MobileListView: "ul",
-        ScrollView       : "div",
-        PanelBar       : "ul",
-        TreeView       : "ul",
-        Menu           : "ul",
-        ContextMenu    : "ul",
-        ActionSheet    : "ul",
-        Switch    : "input"
+        ScrollView: "div",
+        PanelBar: "ul",
+        TreeView: "ul",
+        Menu: "ul",
+        ContextMenu: "ul",
+        ActionSheet: "ul",
+        Switch: "input"
     };
 
     var SKIP_SHORTCUTS = [
@@ -851,11 +865,11 @@ var __meta__ = { // jshint ignore:line
         if (SKIP_SHORTCUTS.indexOf(name.replace("kendo", "")) == -1) {
             var names = name === shortcut ? [ name ] : [ name, shortcut ];
             angular.forEach(names, function(directiveName) {
-                module.directive(directiveName, function(){
+                module.directive(directiveName, function() {
                     return {
-                        restrict : "E",
-                        replace  : true,
-                        template : function(element, attributes) {
+                        restrict: "E",
+                        replace: true,
+                        template: function(element, attributes) {
                             var tag = TAGNAMES[className] || "div";
                             var scopeField = attributes.kScopeField || attributes.scopeField;
 
@@ -935,8 +949,8 @@ var __meta__ = { // jshint ignore:line
     // the next method) and `object` (a reference to the original
     // object).
     function defadvice(klass, methodName, func) {
-        if ($.isArray(klass)) {
-            return angular.forEach(klass, function(klass){
+        if (Array.isArray(klass)) {
+            return angular.forEach(klass, function(klass) {
                 defadvice(klass, methodName, func);
             });
         }
@@ -965,8 +979,8 @@ var __meta__ = { // jshint ignore:line
         return true;
     }
 
-    kendo.onWidgetRegistered(function(entry){
-        pendingPatches = $.grep(pendingPatches, function(args){
+    kendo.onWidgetRegistered(function(entry) {
+        pendingPatches = $.grep(pendingPatches, function(args) {
             return !defadvice.apply(null, args);
         });
         createDirectives(entry.widget, entry.prefix == "Mobile");
@@ -974,7 +988,7 @@ var __meta__ = { // jshint ignore:line
 
     /* -----[ Customize widgets for Angular ]----- */
 
-    defadvice([ "ui.Widget", "mobile.ui.Widget" ], "angular", function(cmd, arg){
+    defadvice([ "ui.Widget", "mobile.ui.Widget" ], "angular", function(cmd, arg) {
         var self = this.self;
         if (cmd == "init") {
             // `arg` here should be the widget options.
@@ -994,13 +1008,13 @@ var __meta__ = { // jshint ignore:line
         var scope = self.$angular_scope;
 
         if (scope) {
-            withoutTimeout(function(){
+            withoutTimeout(function() {
                 var x = arg(), elements = x.elements, data = x.data;
                 if (elements.length > 0) {
                     switch (cmd) {
 
                       case "cleanup":
-                        angular.forEach(elements, function(el){
+                        angular.forEach(elements, function(el) {
                             var itemScope = $(el).data("$$kendoScope");
 
                             if (itemScope && itemScope !== scope && itemScope.$$kendoScope) {
@@ -1013,7 +1027,7 @@ var __meta__ = { // jshint ignore:line
                         var injector = self.element.injector();
                         var compile = injector ? injector.get("$compile") : $defaultCompile;
 
-                        angular.forEach(elements, function(el, i){
+                        angular.forEach(elements, function(el, i) {
                             var itemScope;
                             if (x.scopeFrom) {
                                 itemScope = x.scopeFrom;
@@ -1038,15 +1052,15 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
-    defadvice("ui.Widget", "$angular_getLogicValue", function(){
+    defadvice("ui.Widget", "$angular_getLogicValue", function() {
         return this.self.value();
     });
 
-    defadvice("ui.Widget", "$angular_setLogicValue", function(val){
+    defadvice("ui.Widget", "$angular_setLogicValue", function(val) {
         this.self.value(val);
     });
 
-    defadvice("ui.Select", "$angular_getLogicValue", function(){
+    defadvice("ui.Select", "$angular_getLogicValue", function() {
         var item = this.self.dataItem(),
             valueField = this.self.options.dataValueField;
 
@@ -1065,7 +1079,7 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
-    defadvice("ui.Select", "$angular_setLogicValue", function(val){
+    defadvice("ui.Select", "$angular_setLogicValue", function(val) {
         var self = this.self;
         var options = self.options;
         var valueField = options.dataValueField;
@@ -1104,7 +1118,7 @@ var __meta__ = { // jshint ignore:line
         return value;
     });
 
-    defadvice("ui.MultiSelect", "$angular_setLogicValue", function(val){
+    defadvice("ui.MultiSelect", "$angular_setLogicValue", function(val) {
         if (val == null) {
             val = [];
         }
@@ -1137,7 +1151,7 @@ var __meta__ = { // jshint ignore:line
     // All event handlers that are strings are compiled the Angular way.
     defadvice("ui.Widget", "$angular_init", function(element, options) {
         var self = this.self;
-        if (options && !$.isArray(options)) {
+        if (options && !Array.isArray(options)) {
             var scope = self.$angular_scope;
             for (var i = self.events.length; --i >= 0;) {
                 var event = self.events[i];
@@ -1150,7 +1164,7 @@ var __meta__ = { // jshint ignore:line
     });
 
     // most handers will only contain a kendoEvent in the scope.
-    defadvice("ui.Widget", "$angular_makeEventHandler", function(event, scope, handler){
+    defadvice("ui.Widget", "$angular_makeEventHandler", function(event, scope, handler) {
         handler = $parse(handler);
         return function(e) {
             digest(scope, function() {
@@ -1160,7 +1174,7 @@ var __meta__ = { // jshint ignore:line
     });
 
     // for the Grid and ListView we add `data` and `selected` too.
-    defadvice([ "ui.Grid", "ui.ListView", "ui.TreeView", "ui.PanelBar" ], "$angular_makeEventHandler", function(event, scope, handler){
+    defadvice([ "ui.Grid", "ui.ListView", "ui.TreeView", "ui.PanelBar" ], "$angular_makeEventHandler", function(event, scope, handler) {
         if (event != "change") {
             return this.next();
         }
@@ -1212,11 +1226,11 @@ var __meta__ = { // jshint ignore:line
     // If no `template` is supplied for Grid columns, provide an Angular
     // template.  The reason is that in this way AngularJS will take
     // care to update the view as the data in scope changes.
-    defadvice("ui.Grid", "$angular_init", function(element, options){
+    defadvice("ui.Grid", "$angular_init", function(element, options) {
         this.next();
         if (options.columns) {
             var settings = $.extend({}, kendo.Template, options.templateSettings);
-            angular.forEach(options.columns, function(col){
+            angular.forEach(options.columns, function(col) {
                 if (col.field && !col.template && !col.format && !col.values && (col.encoded === undefined || col.encoded)) {
                     col.template = "<span ng-bind='" +
                         kendo.expr(col.field, "dataItem") + "'>#: " +
@@ -1230,7 +1244,7 @@ var __meta__ = { // jshint ignore:line
         // mobile/ButtonGroup does not have a "value" method, but looks
         // like it would be useful.  We provide it here.
 
-        defadvice("mobile.ui.ButtonGroup", "value", function(mew){
+        defadvice("mobile.ui.ButtonGroup", "value", function(mew) {
             var self = this.self;
             if (mew != null) {
                 self.select(self.element.children("li.km-button").eq(mew));
@@ -1240,7 +1254,7 @@ var __meta__ = { // jshint ignore:line
             return self.selectedIndex;
         });
 
-        defadvice("mobile.ui.ButtonGroup", "_select", function(){
+        defadvice("mobile.ui.ButtonGroup", "_select", function() {
             this.next();
             this.self.trigger("change");
         });
@@ -1327,7 +1341,7 @@ var __meta__ = { // jshint ignore:line
     }).directive('kendoMobileLayout', function() {
         return {
             link: {
-                pre: function (scope, element, attrs) {
+                pre: function(scope, element, attrs) {
                     createWidget(scope, element, attrs, 'kendoMobileLayout', 'kendoMobileLayout');
                 }
             }
@@ -1353,11 +1367,11 @@ var __meta__ = { // jshint ignore:line
                 }
             }
         };
-    }).directive('kendoViewTitle', function(){
+    }).directive('kendoViewTitle', function() {
         return {
-            restrict : "E",
-            replace  : true,
-            template : function(element) {
+            restrict: "E",
+            replace: true,
+            template: function(element) {
                 return "<span data-" + kendo.ns + "role='view-title'>" + element.html() + "</span>";
             }
         };
@@ -1375,11 +1389,11 @@ var __meta__ = { // jshint ignore:line
                     element.addClass("km-footer").attr("data-role", "footer");
                 }
             };
-    }).directive('kendoMobileScrollViewPage', function(){
+    }).directive('kendoMobileScrollViewPage', function() {
         return {
-            restrict : "E",
-            replace  : true,
-            template : function(element) {
+            restrict: "E",
+            replace: true,
+            template: function(element) {
                 return "<div data-" + kendo.ns + "role='page'>" + element.html() + "</div>";
             }
         };
@@ -1445,7 +1459,7 @@ var __meta__ = { // jshint ignore:line
                         return function(scope, element, attrs, controllers) {
                             var controller;
 
-                            while(!controller && controllers.length) {
+                            while (!controller && controllers.length) {
                                 controller = controllers.shift();
                             }
 
@@ -1466,6 +1480,3 @@ var __meta__ = { // jshint ignore:line
 
 })(window.kendo.jQuery, window.angular);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

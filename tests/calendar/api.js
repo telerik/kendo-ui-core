@@ -2,7 +2,7 @@
 var Calendar = kendo.ui.Calendar;
 var div;
 
-describe("kendo.ui.Calendar API", function () {
+describe("kendo.ui.Calendar API", function() {
     beforeEach(function() {
 
         div = $("<div />").appendTo(Mocha.fixture);
@@ -36,7 +36,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past", funct
         min: date
     });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future", function() {
@@ -46,7 +46,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future", fun
         max: date
     });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (year)", function() {
@@ -57,7 +57,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (year)"
             firstView: 1
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (year)", function() {
@@ -68,7 +68,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (year
             firstView: 1
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (decade)", function() {
@@ -79,7 +79,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (decade
             firstView: 2
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (decade)", function() {
@@ -90,7 +90,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (deca
             firstView: 2
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past (century)", function() {
@@ -101,7 +101,7 @@ it("navigate method should disable._prevArrow if cannot navigate to past (centur
             firstView: 3
         });
 
-    assert.isOk(div.find(".k-nav-prev").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-prev").hasClass("k-disabled"));
 });
 
 it("navigate method should disable._nextArrow if cannot navigate to future (century)", function() {
@@ -112,7 +112,7 @@ it("navigate method should disable._nextArrow if cannot navigate to future (cent
             firstView: 3
         });
 
-    assert.isOk(div.find(".k-nav-next").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-calendar-nav-next").hasClass("k-disabled"));
 });
 
 it("navigate should select date equal to _value", function() {
@@ -123,7 +123,7 @@ it("navigate should select date equal to _value", function() {
 
     cal.navigateToPast();
 
-    assert.equal(div.find("td.k-state-selected").length, 0);
+    assert.equal(div.find("td.k-selected").length, 0);
 });
 
 it("navigateToPast should navigate to previous month when month view", function() {
@@ -153,7 +153,7 @@ it("navigateToPast should navigate to previous year when year view", function() 
 });
 
 it("navigateToPast should navigate to previous decade when decade view", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 2;
@@ -168,7 +168,7 @@ it("navigateToPast should navigate to previous decade when decade view", functio
 });
 
 it("navigateToPast should navigate to previous century when century view", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 3;
@@ -184,7 +184,7 @@ it("navigateToPast should navigate to previous century when century view", funct
 });
 
 it("navigateToFuture should navigate to next month when month view", function() {
-    var cal = new Calendar(div, {value: new Date(2000, 10, 10), animation: false}),
+    var cal = new Calendar(div, { value: new Date(2000, 10, 10), animation: false }),
         modified = new Date(cal._current),
         names = kendo.culture().calendar.months.names;
 
@@ -198,7 +198,7 @@ it("navigateToFuture should navigate to next month when month view", function() 
 });
 
 it("navigateToFuture should navigate to next year when year view", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 1;
@@ -211,7 +211,7 @@ it("navigateToFuture should navigate to next year when year view", function() {
 });
 
 it("navigateToFuture should navigate to next decade when decade view", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 2;
@@ -246,7 +246,7 @@ it("navigateToFuture should navigate to next century when century view", functio
 });
 
 it("navigateUp should navigate upper view (year)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 0;
@@ -257,7 +257,7 @@ it("navigateUp should navigate upper view (year)", function() {
 });
 
 it("navigateUp should navigate upper view (decade)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 1;
@@ -268,7 +268,7 @@ it("navigateUp should navigate upper view (decade)", function() {
 });
 
 it("navigateUp should navigate upper view (century)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 2;
@@ -276,11 +276,11 @@ it("navigateUp should navigate upper view (century)", function() {
     cal.navigateUp();
 
     assert.equal(cal._index, 3);
-    assert.isOk(cal._title.hasClass("k-state-disabled"));
+    assert.isOk(cal._title.hasClass("k-disabled"));
 });
 
 it("navigateDown should navigate lower view (decade)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 3;
@@ -291,7 +291,7 @@ it("navigateDown should navigate lower view (decade)", function() {
 });
 
 it("navigateDown should navigate lower view (year)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 2;
@@ -302,7 +302,7 @@ it("navigateDown should navigate lower view (year)", function() {
 });
 
 it("navigateDown should navigate lower view (month)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 1;
@@ -313,7 +313,7 @@ it("navigateDown should navigate lower view (month)", function() {
 });
 
 it("navigateDown should navigate lower view (month)", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         modified = new Date(cal._current);
 
     cal._index = 1;
@@ -324,7 +324,7 @@ it("navigateDown should navigate lower view (month)", function() {
 });
 
 it("navigateDown with date navigate to cell's date", function() {
-    var cal = stub(new Calendar(div, {animation: false}), "navigate"),
+    var cal = stub(new Calendar(div, { animation: false }), "navigate"),
         value = new Date(2000, 10, 10);
 
     cal._index = 1;
@@ -336,7 +336,7 @@ it("navigateDown with date navigate to cell's date", function() {
 });
 
 it("navigateDown should call value method if _index === options.depth", function() {
-    var cal = stub(new Calendar(div, {animation: false}), "value"),
+    var cal = stub(new Calendar(div, { animation: false }), "value"),
         value = new Date(2000, 10, 10);
 
     cal.navigateDown(value);
@@ -346,7 +346,7 @@ it("navigateDown should call value method if _index === options.depth", function
 });
 
 it("navigate should put in range passed date", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         value = new Date(1800, 10, 10);
 
     cal.navigate(value);
@@ -355,7 +355,7 @@ it("navigate should put in range passed date", function() {
 });
 
 it("value should select set selectedValue property", function() {
-    var cal = new Calendar(div, {animation: false}),
+    var cal = new Calendar(div, { animation: false }),
         value = new Date(2000, 10, 10);
 
     cal.value(value);
@@ -367,14 +367,14 @@ it("value should return selectedValue", function() {
     var value = new Date(2000, 10, 10);
     var cal = new Calendar(div, {
         value: value
-    })
+    });
 
     assert.deepEqual(cal.value(), value);
 });
 
 it("value method should call navigate method with correct date", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
     stub(cal, "navigate");
 
@@ -386,28 +386,28 @@ it("value method should call navigate method with correct date", function() {
 
 it("value method should update selection of the view", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
         value.setDate(17);
 
         cal.value(value);
 
-    assert.isOk(cal.element.find(".k-content td").eq(19).hasClass("k-state-selected"));
+    assert.isOk(cal.element.find(".k-content td").eq(19).hasClass("k-selected"));
 });
 
 it("value should clear _value if null", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {min: value});
+        cal = new Calendar(div, { min: value });
 
     cal.value(null);
 
     assert.equal(cal.value(), null);
-    assert.equal(cal.element.find(".k-content td:has(k-state-selected)").length, 0);
+    assert.equal(cal.element.find(".k-content td:has(k-selected)").length, 0);
 });
 
 it("value should not accept value lower than min", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {min: value});
+        cal = new Calendar(div, { min: value });
 
     cal.value(new Date(1900, 10,10));
 
@@ -416,7 +416,7 @@ it("value should not accept value lower than min", function() {
 
 it("value should not accept value bigger than max", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {max: value});
+        cal = new Calendar(div, { max: value });
 
     cal.value(new Date(2900, 10,10));
 
@@ -425,7 +425,7 @@ it("value should not accept value bigger than max", function() {
 
 it("value should not accept invalid date", function() {
     var value = new Date(2000,10,10),
-        cal = new Calendar(div, {max: value});
+        cal = new Calendar(div, { max: value });
 
     cal.value("dsadasDA");
 
@@ -439,22 +439,22 @@ it("focus date depending on given value", function() {
     cal.focus();
     cal._focus(value);
 
-    assert.equal(cal._table.find(".k-state-focused").length, 1);
-    assert.equal(cal._table.find(".k-state-focused").text(), "10");
+    assert.equal(cal._table.find(".k-focus").length, 1);
+    assert.equal(cal._table.find(".k-focus").text(), "10");
 });
 
 it("focus date in current view without navigating", function() {
     var value = new Date(2000,10,10),
         viewedValue = new Date(2000, 10, 15),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
     cal.navigate(null, 1);
 
     cal.focus();
     cal._focus(value);
 
-    assert.equal(cal._table.find(".k-state-focused").length, 1);
-    assert.equal(cal._table.find(".k-state-focused").text(), "Nov");
+    assert.equal(cal._table.find(".k-focus").length, 1);
+    assert.equal(cal._table.find(".k-focus").text(), "Nov");
 });
 
 it("focus should not call navigate if need to focus next cell in current decade view", function() {
@@ -465,7 +465,7 @@ it("focus should not call navigate if need to focus next cell in current decade 
     cal._current = viewedValue;
     cal._view = kendo.calendar.views[2];
 
-    stub(cal, {navigate: cal.navigate});
+    stub(cal, { navigate: cal.navigate });
 
     cal.focus();
     cal._focus(value);
@@ -475,7 +475,7 @@ it("focus should not call navigate if need to focus next cell in current decade 
 
 it("navigate should not re-render view if it was not changed", function() {
     var value = new Date(2000, 10, 10),
-        cal = new Calendar(div, {value: value});
+        cal = new Calendar(div, { value: value });
 
     stub(kendo.calendar.views[0], {
         content: kendo.calendar.views[0].content
@@ -488,7 +488,7 @@ it("navigate should not re-render view if it was not changed", function() {
 
 it("min() returns current min value", function() {
      var value = new Date(2000, 10, 10),
-     cal = new Calendar(div, {min: value});
+     cal = new Calendar(div, { min: value });
 
      var result = cal.min();
 
@@ -539,12 +539,12 @@ it("max method persists selected value when max is in current month", function()
 
      cal.max(new Date(2000, 10, 11));
 
-     assert.equal(div.find("td.k-state-selected").length, 1);
+     assert.equal(div.find("td.k-selected").length, 1);
 });
 
 it("Should navigate if min is bigger then _current", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(5); //should re-render in order to hide dates before 5th
 
@@ -557,7 +557,7 @@ it("Should navigate if min is bigger then _current", function() {
 
 it("Navigates widget when set min value bigger than selected date", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(15); //should re-render in order to hide dates before 5th
 
@@ -570,7 +570,7 @@ it("Navigates widget when set min value bigger than selected date", function() {
 
 it("Should clear _value if less then min", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(13);
 
@@ -584,7 +584,7 @@ it("Should clear _value if less then min", function() {
 
 it("max() returns current max value", function() {
      var value = new Date(2000, 10, 10),
-     cal = new Calendar(div, {max: value});
+     cal = new Calendar(div, { max: value });
 
      var result = cal.max();
 
@@ -604,7 +604,7 @@ it("max() should set max value value of the calendar", function() {
 
 it("Should navigate if max is less then _current", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(15); //should re-render in order to hide dates after 15th
 
@@ -617,7 +617,7 @@ it("Should navigate if max is less then _current", function() {
 
 it("Should clear _value if bigger then max", function() {
      var value = new Date(2000, 10, 10),
-         cal = new Calendar(div, {value: value});
+         cal = new Calendar(div, { value: value });
 
      value.setDate(5);
 
@@ -650,7 +650,7 @@ it("today link should be disabled when min() with bigger then today", function()
     cal._today.click();
 
     assert.isOk(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
-    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 0);
 });
 
@@ -665,7 +665,7 @@ it("today link should be disabled when max() with less then today", function() {
     cal._today.click();
 
     assert.isOk(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
-    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-state-disabled"));
+    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 0);
 });
 
@@ -676,7 +676,7 @@ it("today link should be enabled on _footer(true)", function() {
     cal._footer(cal.footer);
 
     assert.isOk(cal._today[0]);
-    assert.isOk(!cal._today.hasClass("k-state-disabled"));
+    assert.isOk(!cal._today.hasClass("k-disabled"));
 });
 
 it("value method honors options.culture", function() {
@@ -706,7 +706,7 @@ it("min method enables prev link", function() {
 
     calendar.min(new Date(2000, 9, 10));
 
-    assert.isOk(!calendar._prevArrow.hasClass("k-state-disabled"));
+    assert.isOk(!calendar._prevArrow.hasClass("k-disabled"));
 });
 
 it("min method navigates if selected date is null and current date is equal to min", function() {
@@ -727,7 +727,7 @@ it("max method enables prev link", function() {
 
     calendar.max(new Date(2000, 11, 10));
 
-    assert.isOk(!calendar._nextArrow.hasClass("k-state-disabled"));
+    assert.isOk(!calendar._nextArrow.hasClass("k-disabled"));
 });
 
 it("current method returns currently focused date", function() {
@@ -808,14 +808,25 @@ it("setOptions updates options.dates", function() {
     assert.equal(calendar.options.dates.length, 2);
 });
 
-it("disabled date does get k-state-focused class", function() {
+it("setOptions should destroy selectable", function() {
+    var value = new Date(2000,10,10),
+        cal = new Calendar(div, { value: value });
+
+    stub(cal, "_destroySelectable");
+
+    cal.setOptions({});
+
+    assert.equal(cal.calls("_destroySelectable"), 1);
+});
+
+it("disabled date does get k-focus class", function() {
     var calendar = new Calendar(div, {
         value: new Date(2015,9,3),
 		disableDates: ["MON", "sa"]
     });
     var cell = calendar.element.find("td").eq(6);
     cell.trigger("click");
-    var focused = cell.hasClass("k-state-focused");
+    var focused = cell.hasClass("k-focus");
     assert.equal(focused, false);
 });
 
@@ -825,23 +836,23 @@ it("dates are disabled when array of dates is used", function() {
         disableDates: [new Date(2015,9,12)]
     });
     var cell = calendar.element.find("td").eq(15);
-    var disabled = cell.hasClass("k-state-disabled");
+    var disabled = cell.hasClass("k-disabled");
     assert.equal(disabled, true);
 });
 
 
-it("disabled date does get k-state-focused class when calleback is used", function() {
+it("disabled date does get k-focus class when calleback is used", function() {
     var calendar = new Calendar(div, {
         value: new Date(2015,9,3),
 		disableDates: function(date) {
             if (date && date.getDate() == 4) {
-                return true
+                return true;
             } else {
-                return false
+                return false;
             }
         }
         });
-   assert.equal($("tr").eq(2).find("td").hasClass("k-state-disabled"), true);
+   assert.equal($("tr").eq(2).find("td").hasClass("k-disabled"), true);
 });
 
 it("clicking today button does not set the widgets value", function() {
@@ -860,7 +871,7 @@ it("today link is disabled if the respecitve date is disabled", function() {
         disableDates: ["mo", "tu", "we", "th", "fr", "sa", "su"]
     });
     calendar.max(max);
-    assert.equal($(".k-footer>a").hasClass("k-state-disabled"), true);
+    assert.equal($(".k-footer>a").hasClass("k-disabled"), true);
 });
 
 it("_current is not set if date is disabled", function() {

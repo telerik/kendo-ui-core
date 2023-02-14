@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function(){
+import "./kendo.core.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.navbar",
     name: "NavBar",
     category: "mobile",
@@ -27,12 +25,12 @@ var __meta__ = { // jshint ignore:line
     function toggleTitle(centerElement) {
         var siblings = centerElement.siblings(),
             noTitle = !!centerElement.children("ul")[0],
-            showTitle = (!!siblings[0] && $.trim(centerElement.text()) === ""),
+            showTitle = (!!siblings[0] && kendo.trim(centerElement.text()) === ""),
             android = !!(kendo.mobile.application && kendo.mobile.application.element.is(".km-android"));
 
         centerElement.prevAll().toggleClass("km-absolute", noTitle);
         centerElement.toggleClass("km-show-title", showTitle);
-        centerElement.toggleClass("km-fill-title", showTitle && !$.trim(centerElement.html()));
+        centerElement.toggleClass("km-fill-title", showTitle && !kendo.trim(centerElement.html()));
         centerElement.toggleClass("km-no-title", noTitle);
         centerElement.toggleClass("km-hide-title", android && !siblings.children().is(":visible"));
     }
@@ -45,7 +43,7 @@ var __meta__ = { // jshint ignore:line
 
             element = that.element;
 
-            that.container().bind("show", $.proxy(this, "refresh"));
+            that.container().bind("show", this.refresh.bind(this));
 
             element.addClass("km-navbar").wrapInner($('<div class="km-view-title km-show-title" />'));
             that.leftElement = createContainer("left", element);
@@ -76,6 +74,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(NavBar);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

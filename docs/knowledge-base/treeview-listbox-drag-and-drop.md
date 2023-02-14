@@ -1,8 +1,8 @@
 ---
 title: Drag and Drop Nodes from TreeView to ListBox
-description: An example on how to drag a node from the Kendo UI TreeView and drop it in the Kendo UI ListBox.
+description: Learn how to drag a node from the Kendo UI TreeView and drop it in the Kendo UI ListBox.
 type: how-to
-page_title: Drag Nodes from TreeView and Drop Them in ListBox | Kendo UI TreeView
+page_title: Drag Nodes from TreeView and Drop Them in ListBox - Kendo UI TreeView and ListBox for jQuery
 slug: treeview-listbox-drag-and-drop
 tags: treeview, listbox
 ticketid: 1163151  
@@ -14,8 +14,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI TreeView</td>
-  <td>Progress Kendo UI ListBox</td>
+  <td>Progress® Kendo UI® TreeView for jQuery</td>
+  <td>Progress® Kendo UI® ListBox for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -62,20 +62,25 @@ In the `drop` event handler of the TreeView, get the dropped node and add it to 
 	});
 
 	$("#optional").kendoListBox({
-	dataTextField: "text",
-	dataValueField: "id",
-	dataSource: [{ id: 8, text: "Other products" }]
+	    dataTextField: "text",
+	    dataValueField: "id",
+	    dataSource: [{ id: 8, text: "Other products" }]
 	});
 
 	function onDrop(e){          
-	var item = e.sender.dataItem(e.sourceNode);         
-	var listbox = $('#optional').data('kendoListBox');         
-	listbox.add(item)
-	if(item.hasChildren){
-		for(var p=0; p <item.items.length;p++){
-			listbox.add(item.items[p])
-		}
-	}
-	}
+        if($(e.dropTarget).hasClass('k-list-scroller')){
+          var item = e.sender.dataItem(e.sourceNode);         
+          var listbox = $('#optional').data('kendoListBox');         
+          listbox.add(item)
+          if(item.hasChildren){
+            for(var p=0; p <item.items.length;p++){
+              listbox.add(item.items[p])
+            }
+          }
+        }else{
+          e.preventDefault()
+          alert('Please drop the node in the ListBox')
+        }
+    }
 </script>
 ```

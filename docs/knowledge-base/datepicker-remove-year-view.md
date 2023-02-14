@@ -1,8 +1,8 @@
 ---
 title: Hide Year Selection from DatePicker and DateTimePicker
-description: An example on how to disable the year view of the Kendo UI DatePicker and DateTimePicker widgets.
+description: Learn how to disable the year view of the Kendo UI DatePicker and DateTimePicker widgets.
 type: how-to
-page_title: Remove the Year View | Kendo UI DatePicker
+page_title: Remove the Year View - Kendo UI DatePicker for jQuery
 slug: datepicker-remove-year-view
 tags: kendo ui, datepicker, datetimepicker, year view
 ticketid: 1115942, 1116792
@@ -15,10 +15,10 @@ component: date-time-pickers
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 504</td>
  </tr>
 </table>
@@ -64,7 +64,7 @@ The following example demonstrates how to hide the year view in a Kendo UI DateP
 
 
             if (calendar.view().name === "year") {
-                calendar.element.find(".k-header").css("display", "none");
+                calendar.element.find(".k-header").addClass("k-hidden");
             };
 
             calendar.bind("navigate", function(e) {
@@ -72,11 +72,11 @@ The following example demonstrates how to hide the year view in a Kendo UI DateP
                 var view = cal.view();
 
                 if (view.name === "year") {
-                    cal.element.find(".k-header").css("display", "none");
+                    cal.element.find(".k-header").addClass("k-hidden");
                 } else {
                     var navFast = $(".k-nav-fast");
 
-                    var dsa = cal.element.find(".k-header").css("display", "block");
+                    var dsa = cal.element.find(".k-header").removeClass("k-hidden");
                     navFast[0].innerText = navFast[0].innerText.slice(0, -5);
                 }
 
@@ -86,7 +86,7 @@ The following example demonstrates how to hide the year view in a Kendo UI DateP
             var calendar = e.sender.dateView.calendar;
 
             calendar.unbind("navigate");
-            calendar.element.find(".k-header").css("display", "block");
+            calendar.element.find(".k-header").removeClass("k-hidden");
         }
     });
 </script>
@@ -162,6 +162,6 @@ The following example demonstrates how to hide the year view in a Kendo UI DateT
 
 ## See Also
 
-* [DatePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [DateTimePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [Calendar API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [DateTimePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [Calendar API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)

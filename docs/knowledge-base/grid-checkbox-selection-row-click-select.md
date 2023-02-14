@@ -1,8 +1,8 @@
 ---
 title: Select Checkbox Rows by Clicking Anywhere on the Row
-description: An example on how to select a row with a checkbox by clicking the row of the Kendo UI Grid.
+description: Learn how to select a row with a checkbox by clicking the row of the Kendo UI Grid.
 type: how-to
-page_title: Click Anywhere to Select Rows with Checkboxes | Kendo UI Grid
+page_title: Click Anywhere to Select Rows with Checkboxes - Kendo UI Grid for jQuery
 slug: grid-checkbox-selection-row-click-select
 tags: grid, checkbox selection, kendo ui
 ticketid: 1144198
@@ -15,11 +15,11 @@ component: grid
 <table>
 	<tr>
 		<td>Product Version</td>
-		<td>2017.3 1026</td>
+		<td>2020.3.1021</td>
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 
@@ -93,7 +93,7 @@ How can I select rows with checkboxes by clicking anywhere on the row of the Gri
         };
 
         function onClick(e) {
-            if ($(e.target).hasClass("k-checkbox-label")) {
+            if ($(e.target).hasClass("k-checkbox")) {
                 return;
             }
             var row = $(e.target).closest("tr");

@@ -1,8 +1,8 @@
 ---
 title: Exclude Content from PDF Export with Drawing API
-description: An example on how to exclude specific content while exporting to PDF by using the Kendo UI Drawing API.
+description: Learn how to exclude specific content while exporting to PDF by using the Kendo UI Drawing API.
 type: how-to
-page_title: Prevent the Export of Content to PDF | Kendo UI Drawing API
+page_title: Prevent the Export of Content to PDF - Kendo UI Drawing Library
 slug: pdf-export-exclude-content
 tags: pdf, export, content, exclude, drawing, api
 ticketid: 1135598
@@ -15,7 +15,7 @@ component: drawing-api
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Drawing API</td>
+  <td>Progress® Kendo UI® Drawing API</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -41,40 +41,38 @@ Elements that you do not want to be exported can be hidden just before the expor
 
 ```dojo
 	<div id="example">
-	  <button class='export-pdf k-button'>Export as PDF</button>
-		<div class="container">
-		  Export the container's content, but exclude the next element:
-		  <h4 class="noExport">Element that will be excluded from export</h4>
-		</div>
+		<button class='export-pdf k-button'>Export as PDF</button>
+	    <div class="container">
+	      Export the container's content, but exclude the next element:
+	      <h4 class="noExport">Element that will be excluded from export</h4>
+	    </div>
 	</div>
 	<style>
 	  .k-pdf-export .noExport {
-		display: none;
+	    display: none;
 	  }
 	</style>
 	<script>
 	  $(document).ready(function() {
-		  $(".export-pdf").click(function() {
-			  // Convert the DOM element to a drawing using kendo.drawing.drawDOM
-			  kendo.drawing.drawDOM($(".container"))
-			  .then(function(group) {
-				  // Render the result as a PDF file
-				  return kendo.drawing.exportPDF(group, {
-					  paperSize: "a4",
-					  margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" }
-				  });
-			  })
-			  .done(function(data) {
-				  // Save the PDF file
-				  kendo.saveAs({
-					  dataURI: data,
-					  fileName: "Example.pdf",
-					  proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
-				  });
-			  });
-		  });
+	      $(".export-pdf").click(function() {
+	          // Convert the DOM element to a drawing using kendo.drawing.drawDOM
+	          kendo.drawing.drawDOM($(".container"))
+	          .then(function(group) {
+	              // Render the result as a PDF file
+	              return kendo.drawing.exportPDF(group, {
+	                  paperSize: "a4",
+	                  margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" }
+	              });
+	          })
+	          .done(function(data) {
+	              // Save the PDF file
+	              kendo.saveAs({
+	                  dataURI: data,
+	                  fileName: "Example.pdf",
+	                  proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+	              });
+	          });
+	      });
 	  });
 	</script>
 ```
-
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/aGUTa).

@@ -1,0 +1,82 @@
+// Checkbox
+.k-checkbox {
+    .border-radius( @checkbox-radius );
+    .fill(
+        @checkbox-text,
+        @checkbox-bg,
+        @checkbox-border
+    );
+
+    &:checked::before {
+        .border-radius( @checkbox-radius );
+    }
+}
+
+
+// Invalid
+.k-checkbox.k-invalid,
+.k-checkbox.k-state-invalid,
+.k-checkbox.k-invalid {
+    border-color: @checkbox-invalid-border;
+}
+
+
+// Hover state
+.k-checkbox:hover {
+    .fill(
+        @checkbox-hovered-text,
+        @checkbox-hovered-bg,
+        @checkbox-hovered-border
+    );
+}
+
+
+// Focus state
+.k-checkbox:focus {
+    .box-shadow( @checkbox-focused-shadow );
+    border-color: @checkbox-focused-border;
+}
+
+
+// Indeterminate
+.k-checkbox:indeterminate,
+.k-checkbox.k-state-indeterminate {
+    .fill(
+        @checkbox-indeterminate-text,
+        @checkbox-indeterminate-bg,
+        @checkbox-indeterminate-border
+    );
+}
+
+
+// Checked
+.k-checkbox:checked {
+    .fill(
+        @checkbox-checked-text,
+        @checkbox-checked-bg,
+        @checkbox-checked-border
+    );
+}
+.k-checkbox:checked:focus {
+    .box-shadow( @checkbox-focused-checked-shadow );
+    border-color: @checkbox-focused-checked-border;
+}
+
+
+// Disabled
+.k-checkbox:disabled {
+    .fill(
+        @checkbox-disabled-text,
+        @checkbox-disabled-bg,
+        @checkbox-disabled-border
+    );
+}
+.k-checkbox:checked:disabled,
+.k-checkbox:indeterminate:disabled,
+.k-checkbox.k-state-indeterminate:disabled {
+    .fill(
+        @checkbox-disabled-checked-text,
+        @checkbox-disabled-checked-bg,
+        @checkbox-disabled-checked-border
+    );
+}

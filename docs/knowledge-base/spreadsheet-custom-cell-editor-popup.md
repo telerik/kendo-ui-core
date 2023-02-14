@@ -1,8 +1,8 @@
 ---
 title: Show Popup next to a Custom Cell Editor in Spreadsheet
-description: An example on how to display a popup next to a custom cell editor in a Kendo UI Spreadsheet.
+description: Learn how to display a popup next to a custom cell editor in a Kendo UI Spreadsheet.
 type: how-to
-page_title: Show Custom Cell Editor with a Kendo UI Popup | Kendo UI Spreadsheet
+page_title: Show Custom Cell Editor with a Kendo UI Popup - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-custom-cell-editor-popup
 tags: spreadsheet, custom, editor, cell, popup
 ticketid: 1115323
@@ -15,7 +15,7 @@ component: spreadsheet
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
 </table>
 
@@ -34,11 +34,11 @@ The following example demonstrates how to implement this scenario.
             <base href="https://demos.telerik.com/kendo-ui/spreadsheet/custom-editors">
             <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
             <title></title>
-            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.default-v2.min.css" />
+            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-v2.min.css" />
 
-            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
         </head>
         <body>
             <div id="example">

@@ -1,72 +1,63 @@
 ---
-title: Methods and Events
-page_title: Methods and Events | Kendo UI Getting Started
-description: "Obtain a reference to an initialized Kendo UI widget instance and call its methods and events."
+title: Methods, Events, and References 
+page_title: Methods, Events, and References - Working with Components 
+description: "Get started with Kendo UI for jQuery, obtain a reference to initialized component instances and call their methods and events."
 previous_url: /basics/events-and-methods, /intro/events-and-methods, /intro/installation/events-and-methods
 slug: widget_methodsand_events_kendoui_installation
-position: 3
+position: 5
 ---
 
 # Methods and Events
 
-In addition to the initialization configuration options, each Kendo UI widget instance features methods and events that may be used to query or modify its state during run time. In order to use them, you should obtain a reference to the widget instance first.
+All Kendo UI components (widgets) provide methods and events that you can use to query or modify their state at runtime, and to reference existing component instances.
 
-## Getting Widget References
+## Referencing Existing Component Instances
 
-To get a widget reference, you can:
-* Use the [jQuery `data` method](#jquery-data-method).
-* Use the [`getKendo<WidgetName>` method](#getkendo-method).
-* Use the [standard JavaScript method syntax](#javascript-method).
+To obtain a reference to the specific component instance, either use the jQuery `data` method, or the `getKendo<WidgetName>` method.
 
-### The jQuery Data Method
+* The Kendo UI components are jQuery plugins. A common way to get a reference to a component instance is to use the [jQuery `data`](https://api.jquery.com/data/) method with the jQuery object of the component element, and pass the plugin name as a string.
 
-To get a reference to a widget instance, use the [jQuery `data`](http://api.jquery.com/data/) method and pass the plug-in name as a string (the Kendo UI widgets are jQuery plug-ins).
+    ```
+        <p>Animal: <input id="animal" /></p>
 
-###### Example
+        <script>
+            $(function() {
+              // Create a new component instance.
+              $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
 
-```
-    <p>Animal: <input id="animal" /></p>
+              // Retrieve the component instance.
+              var autoComplete = $("#animal").data("kendoAutoComplete");
 
-    <script>
-        $(function() {
-          // create a new widget instance
-          $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
+              console.log(autoComplete);
+            });
+        </script>
+    ```
 
-          // retrieve the widget instance
-          var autoComplete = $("#animal").data("kendoAutoComplete");
+* To get a reference to a component instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element applies to component initialization plugin methods too. This means that the plugin method, for example `kendoAutoComplete()`, does not return the component instance, but the jQuery object of the element.
 
-          console.log(autoComplete);
-        });
-    </script>
-```
+    ```
+        <p>Animal: <input id="animal" /></p>
 
-### The getKendo* Method
+        <script>
+            $(function() {
+              // Create a new component instance.
+              $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
 
-To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element(s) applies to widget initialization plug-in methods too. This means that the plug-in method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector that the method was used on.
+              // Retrieve the component instance.
+              var autoComplete = $("#animal").getKendoAutoComplete();
 
-###### Example
+              console.log(autoComplete);
+            });
+        </script>
+    ```
 
-```
-    <p>Animal: <input id="animal" /></p>
+* If the code which will return a component instance returns `undefined`, then the component might still not be initialized or the selector can be wrong or missing. A common example is when a component is created in a `document.ready` handler but the component instance is referenced from code that was executed earlier.
 
-    <script>
-        $(function() {
-          // create a new widget instance
-          $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
+## Calling the Methods
 
-          // retrieve the widget instance
-          var autoComplete = $("#animal").getKendoAutoComplete();
+After the component instance is available, you can call its methods by using the standard JavaScript method syntax. The complete list and examples of the component methods and method parameters is available in the [API reference](/api/javascript/kendo) section.
 
-          console.log(autoComplete);
-        });
-    </script>
-```
-
-### The JavaScript Method Syntax
-
-After the widget instance is available, you can call its methods using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](/api/javascript/kendo) section.
-
-###### Example
+The following example demonstrates how to call the [`focus`](/api/javascript/ui/autocomplete/methods/focus) method of the AutoComplete.
 
 ```
         <p>Animal: <input id="animal" /></p>
@@ -74,26 +65,31 @@ After the widget instance is available, you can call its methods using the stand
         <script>
             $(function() {
               $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
-
               var autoComplete = $("#animal").data("kendoAutoComplete");
 
-              // focus the widget
+              // Focus the component by calling the focus() method.
               autoComplete.focus();
             });
         </script>
 ```
 
-If the code, which should return a widget instance, returns `undefined`, this means that the widget has not been initialized yet. Such a problem may occur, for example, if a widget is being created in a `document.ready` handler, but the widget instance is being referenced from code that was executed earlier.
+## About Kendo UI Events
 
-## Handling Widget Events
+By design and as a good practice, Kendo UI does not fire an event when the corresponding method is invoked. For example, the `select` event of the Kendo UI PanelBar component is not fired if you call the `select` method through the API.
 
-Depending on the its specific features, each widget exposes different events. For example, the `AutoComplete` widget triggers `change`, `close`, `dataBound`, etc. You may pass event handlers when you instantiate the widget or afterwards.
+You can bind events either [during component initialization](#binding-events-during-initialization) or [after component initialization](#binding-events-after-initialization).
 
-### Event Binding during Initialization
+When you work with the events of the Kendo UI components, you can also:
 
-Event handlers, which are attached during widget initialization, will be executed every time the event is fired. If you need the handler to be executed only once, then attach it after the widget initialization with the `one` method.
+* [Use event handler arguments](#using-event-handler-arguments)
+* [Prevent events](#preventing-events)
+* [Unbind from events](#unbinding-from-events)
 
-###### Example
+## Binding Events during Initialization
+
+Event handlers which are attached during the initialization of the component will be executed every time the event is fired. To execute the handler only once, attach it [after the component initialization with the `one` method](#binding-events-after-initialization).
+
+The following example demonstrates how to bind events during component initialization.
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -112,11 +108,9 @@ Event handlers, which are attached during widget initialization, will be execute
     </script>
 ```
 
-### Event Binding after Initialization
+## Binding Events after Initialization
 
-There are two methods, which all Kendo UI widgets have, namely `bind` and `one`. Both of them are used to attach event handlers to already existing widget instances. The only difference is that event handlers attached with `one` will be executed only once.
-
-###### Example
+All Kendo UI components provide the `bind` and the `one` method. Both methods attach event handlers to already existing component instances but the event handlers that are attached with `one` will be executed only once.
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -132,12 +126,12 @@ There are two methods, which all Kendo UI widgets have, namely `bind` and `one`.
 
           var autocomplete = $("#animal").data("kendoAutoComplete");
 
-          // attach an event handler that will be executed each time the event is fired
+          // Attach an event handler that will be executed each time the event is fired.
           autocomplete.bind("change", function(e) {
                 console.log("change event handler");
           });
 
-          // attach an event handler that will be executed only the first time the event is fired
+          // Attach an event handler that will be executed only the first time the event is fired.
           autocomplete.one("open", function(e) {
                 console.log("open event handler");
           });
@@ -146,15 +140,9 @@ There are two methods, which all Kendo UI widgets have, namely `bind` and `one`.
     </script>
 ```
 
-### Event Handler Arguments
+## Using Event Handler Arguments
 
-Each Kendo UI widget passes one argument to the event handler, which is the so called "event object". Usually, it has one or more fields containing information that is specific to the event. All event objects have a `sender` field, which provides a reference to the widget instance that triggered the event.
-
-Passing additional custom event arguments to the handler is not supported.
-
-The full list and examples of the widget events and the fields available in the event objects is available in the [API reference](/api/javascript/kendo) section.
-
-###### Example
+Each Kendo UI component passes a single argument to the event handler&mdash;the so-called "event object". Usually, it has one or more fields which contain specific information for the event. All event objects have a `sender` field which provides a reference to the component instance that triggered the event. Passing additional custom event arguments to the handler is not supported. The full list and examples of the component events and the fields in the event objects is available in the [API reference](/api/javascript/kendo) section.
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -173,11 +161,9 @@ The full list and examples of the widget events and the fields available in the 
     </script>
 ```
 
-### Preventing Events
+## Preventing Events
 
-Certain widget events may be prevented by calling the `preventDefault` method of the event object. The effect of the event prevention is specific for each event and is documented in the [API reference](/api/javascript/kendo).
-
-###### Example
+Certain component events can be prevented by calling the `preventDefault` method of the event object. The effect of the event prevention is specific for each event and is documented in the [API reference](/api/javascript/kendo).
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -190,7 +176,7 @@ Certain widget events may be prevented by calling the `preventDefault` method of
 
           var autoComplete = $("#animal").data("kendoAutoComplete");
 
-          // prevent the autocomplete from opening the suggestions list
+          // Prevent the AutoComplete from opening the suggestions list.
           autoComplete.bind('open', function(e) {
             e.preventDefault();
           });
@@ -198,11 +184,9 @@ Certain widget events may be prevented by calling the `preventDefault` method of
     </script>
 ```
 
-### Unbinding from Events
+## Unbinding from Events
 
-To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without any argument unbinds all event handlers from the event.
-
-###### Example
+To unbind from a specific event, keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without any argument unbinds all handlers for all events.
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -219,28 +203,14 @@ To unbind from a given event, you should keep a reference to the event handler f
           autoComplete.bind("open", handler);
 
           $("#unbindButton").on("click", function() {
+              //unbind open event of the AutoComplete
               autoComplete.unbind("open", handler);
           });
         });
     </script>
 ```
 
-## Known Limitations
-
-Kendo UI does not fire an event when the corresponding method is invoked. For example, the `select` event of the Kendo UI PanelBar widget is not fired if you call the `select` method through the API.
-
 ## See Also
 
-* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
-* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
-* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
-* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
-* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
-* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
-* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
-* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
-* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
-* [NuGet Packages]({% slug kendoui_nuget_packages %})
+* [Creating Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Getting Up and Running with Kendo UI (Guide)]({% slug getting_started_installation_kendoui %})

@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | StockChart JSP Tag
+page_title: Ajax Binding - StockChart JSP Tag
 description: "Get started with the Ajax binding of the StockChart JSP tag in Kendo UI."
 slug: ajaxbinding_stockchart_uiforjsp
 position: 2
@@ -16,7 +16,7 @@ To configure the Kendo UI StockChart for Ajax binding, follow the steps below (u
 
 **Step 1** Add a new action method which will return data to populate the StockChart.
 
-###### Example
+
 
 	    @RequestMapping(value = "/index/read", method = RequestMethod.POST)
 	    public @ResponseBody List<StockDataPoint> read() {
@@ -24,7 +24,7 @@ To configure the Kendo UI StockChart for Ajax binding, follow the steps below (u
 
 **Step 2** Return the data as JSON.
 
-###### Example
+
 
 	    @RequestMapping(value = "/index/read", method = RequestMethod.POST)
 	    public @ResponseBody List<StockDataPoint> read() {
@@ -33,7 +33,7 @@ To configure the Kendo UI StockChart for Ajax binding, follow the steps below (u
 
 **Step 3** In the view, configure the StockChart to use the action method created in the previous steps.
 
-###### Example
+
 
          <kendo:stockChart name="stockChart" dateField="date">
          	<kendo:stockChart-title text="The Boeing Company (NYSE:BA)" />

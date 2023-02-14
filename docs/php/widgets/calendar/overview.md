@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Calendar PHP Class
+page_title: Overview - Calendar PHP Class
 description: "Get started with the Calendar PHP class in Kendo UI."
 slug: overview_calendar_uiforphp
 position: 1
@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
 **Step 2** Create a [Calendar](/api/php/Kendo/UI/Calendar), configure its [`min`](/api/php/Kendo/UI/Calendar#min), [`max`](/api/php/Kendo/UI/Calendar#max), and [`value`](/api/php/Kendo/UI/Calendar#value) options.
 
-###### Example
+
 
     <?php
     $calendar = new \Kendo\UI\Calendar('calendar');
@@ -37,7 +37,7 @@ You can subscribe to all Calendar [events](/api/javascript/ui/calendar#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
     <?php
     $calendar = new \Kendo\UI\Calendar('calendar');
@@ -57,7 +57,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
     <?php
     $calendar = new \Kendo\UI\Calendar('calendar');
@@ -73,9 +73,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing Calendar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Calendar API](/api/javascript/ui/calendar#methods) to control its behavior.
+You are able to reference an existing Calendar instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Calendar API](/api/javascript/ui/calendar#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $calendar = new \Kendo\UI\Calendar('calendar');

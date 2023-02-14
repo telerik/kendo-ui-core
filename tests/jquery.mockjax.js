@@ -1,11 +1,11 @@
 /*! jQuery Mockjax
  * A Plugin providing simple and flexible mocking of ajax requests and responses
- * 
+ *
  * Version: 2.1.1
  * Home: https://github.com/jakerella/jquery-mockjax
  * Copyright (c) 2016 Jordan Kasper, formerly appendTo;
  * NOTE: This repository was taken over by Jordan Kasper (@jakerella) October, 2014
- * 
+ *
  * Dual licensed under the MIT or GPL licenses.
  * http://opensource.org/licenses/MIT OR http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -65,7 +65,7 @@
 				throw new Error('Unable to parse XML');
 			}
 			return xmlDoc;
-		} catch( e ) {
+		} catch ( e ) {
 			var msg = ( e.name === undefined ? e : e.name + ': ' + e.message );
 			$(document).trigger('xmlParseError', [ msg ]);
 			return undefined;
@@ -88,7 +88,7 @@
 				return mock === live;
 			}
 		}
-		
+
 		$.each(mock, function(k) {
 			if ( live[k] === undefined ) {
 				identical = false;
@@ -111,22 +111,22 @@
 
 		return identical;
 	}
-	
+
 	function getQueryParams(queryString) {
 		var i, l, param, tmp,
 			paramsObj = {},
 			params = String(queryString).split(/&/);
-		
-		for (i=0, l=params.length; i<l; ++i) {
+
+		for (i = 0, l = params.length; i < l; ++i) {
 			param = params[i];
 			try {
 				param = decodeURIComponent(param.replace(/\+/g, ' '));
 				param = param.split(/=/);
-			} catch(e) {
+			} catch (e) {
 				// Can't parse this one, so let it go?
 				continue;
 			}
-			
+
 			if (paramsObj[param[0]]) {
 				// this is an array query param (more than one entry in query)
 				if (!paramsObj[param[0]].splice) {
@@ -140,7 +140,7 @@
 				paramsObj[param[0]] = param[1];
 			}
 		}
-		
+
 		return paramsObj;
 	}
 
@@ -191,7 +191,7 @@
 				var headersMismatch = false;
 				$.each(handler.requestHeaders, function(key, value) {
 					var v = requestSettings.headers[key];
-					if(v !== value) {
+					if (v !== value) {
 						headersMismatch = true;
 						return false;
 					}
@@ -228,10 +228,10 @@
 		if ($.isArray(responseTime) && responseTime.length === 2) {
 			var min = responseTime[0];
 			var max = responseTime[1];
-			if(isPosNum(min) && isPosNum(max)) {
+			if (isPosNum(min) && isPosNum(max)) {
 				return Math.floor(Math.random() * (max - min)) + min;
 			}
-		} else if(isPosNum(responseTime)) {
+		} else if (isPosNum(responseTime)) {
 			return responseTime;
 		}
 		return DEFAULT_RESPONSE_TIME;
@@ -249,7 +249,7 @@
 					this.statusText = mockHandler.statusText;
 					this.readyState	= 1;
 
-					var finishRequest = function () {
+					var finishRequest = function() {
 						this.readyState	= 4;
 
 						var onReady;
@@ -272,10 +272,10 @@
 						} else {
 							this.responseText = mockHandler.responseText;
 						}
-						if( typeof mockHandler.status === 'number' || typeof mockHandler.status === 'string' ) {
+						if ( typeof mockHandler.status === 'number' || typeof mockHandler.status === 'string' ) {
 							this.status = mockHandler.status;
 						}
-						if( typeof mockHandler.statusText === 'string') {
+						if ( typeof mockHandler.statusText === 'string') {
 							this.statusText = mockHandler.statusText;
 						}
 						// jQuery 2.0 renamed onreadystatechange to onload
@@ -283,7 +283,7 @@
 
 						// jQuery < 1.4 doesn't have onreadystate change for xhr
 						if ( $.isFunction( onReady ) ) {
-							if( mockHandler.isTimeout) {
+							if ( mockHandler.isTimeout) {
 								this.status = -1;
 							}
 							onReady.call( this, mockHandler.isTimeout ? 'timeout' : undefined );
@@ -298,7 +298,7 @@
 					if ( $.isFunction(mockHandler.response) ) {
 						// Wait for it to finish
 						if ( mockHandler.response.length === 2 ) {
-							mockHandler.response(origSettings, function () {
+							mockHandler.response(origSettings, function() {
 								finishRequest.call(that);
 							});
 							return;
@@ -326,7 +326,7 @@
 					// jQuery will convert the text to XML for us, and if we use the actual responseXML here
 					// then some other things don't happen, resulting in no data given to the 'success' cb
 					mockHandler.responseXML = mockHandler.responseText = xhr.responseText;
-					
+
 					// Don't override the handler status/statusText if it's specified by the config
 					if (isDefaultSetting(mockHandler, 'status')) {
 						mockHandler.status = xhr.status;
@@ -420,7 +420,7 @@
 		processJsonpUrl( requestSettings );
 
 		requestSettings.dataType = 'json';
-		if(requestSettings.data && CALLBACK_REGEX.test(requestSettings.data) || CALLBACK_REGEX.test(requestSettings.url)) {
+		if (requestSettings.data && CALLBACK_REGEX.test(requestSettings.data) || CALLBACK_REGEX.test(requestSettings.url)) {
 			createJsonpCallback(requestSettings, mockHandler, origSettings);
 
 			// We need to make sure
@@ -431,12 +431,12 @@
 				remote = parts && (parts[1] && parts[1] !== location.protocol || parts[2] !== location.host);
 
 			requestSettings.dataType = 'script';
-			if(requestSettings.type.toUpperCase() === 'GET' && remote ) {
+			if (requestSettings.type.toUpperCase() === 'GET' && remote ) {
 				var newMockReturn = processJsonpRequest( requestSettings, mockHandler, origSettings );
 
 				// Check if we are supposed to return a Deferred back to the mock call, or just
 				// signal success
-				if(newMockReturn) {
+				if (newMockReturn) {
 					return newMockReturn;
 				} else {
 					return true;
@@ -494,8 +494,8 @@
 			return newMock;
 
 		} else {
-			$.globalEval( '(' + 
-				((typeof mockHandler.responseText === 'string') ? 
+			$.globalEval( '(' +
+				((typeof mockHandler.responseText === 'string') ?
 					('"' + mockHandler.responseText + '"') : mockHandler.responseText) +
 			')');
 		}
@@ -546,7 +546,7 @@
 
 			try {
 				delete window[ jsonp ];
-			} catch(e) {}
+			} catch (e) {}
 		};
 		requestSettings.jsonpCallback = jsonp;
 	}
@@ -617,13 +617,13 @@
 
 		// Iterate over our mock handlers (in registration order) until we find
 		// one that is willing to intercept the request
-		for(var k = 0; k < mockHandlers.length; k++) {
+		for (var k = 0; k < mockHandlers.length; k++) {
 			if ( !mockHandlers[k] ) {
 				continue;
 			}
 
 			mockHandler = getMockForRequest( mockHandlers[k], requestSettings );
-			if(!mockHandler) {
+			if (!mockHandler) {
 				// No valid mock found for this request
 				continue;
 			}
@@ -642,10 +642,10 @@
 			}
 
             // We are mocking, so there will be no cross domain request, however, jQuery
-            // aggressively pursues this if the domains don't match, so we need to 
-            // explicitly disallow it. (See #136) 
-            origSettings.crossDomain = false;            
-            
+            // aggressively pursues this if the domains don't match, so we need to
+            // explicitly disallow it. (See #136)
+            origSettings.crossDomain = false;
+
 			// Removed to fix #54 - keep the mocking data object intact
 			//mockHandler.data = requestSettings.data;
 
@@ -678,7 +678,7 @@
 
 			copyUrlParameters(mockHandler, origSettings);
 
-			/* jshint loopfunc:true */
+
 			(function(mockHandler, requestSettings, origSettings, origHandler) {
 
 				mockRequest = _ajax.call($, $.extend(true, {}, origSettings, {
@@ -686,14 +686,14 @@
 					xhr: function() { return xhr( mockHandler, requestSettings, origSettings, origHandler ); }
 				}));
 			})(mockHandler, requestSettings, origSettings, mockHandlers[k]);
-			/* jshint loopfunc:false */
+
 
 			return mockRequest;
 		}
 
 		// We don't have a mock request
 		unmockedAjaxCalls.push(origSettings);
-		if($.mockjaxSettings.throwUnmocked === true) {
+		if ($.mockjaxSettings.throwUnmocked === true) {
 			throw new Error('AJAX not mocked: ' + origSettings.url);
 		}
 		else { // trigger a normal request
@@ -744,10 +744,10 @@
 		var i, len,
 			handler,
 			results = [],
-			match=url instanceof RegExp ?
+			match = url instanceof RegExp ?
 				function(testUrl) { return url.test(testUrl); } :
 				function(testUrl) { return url === testUrl; };
-		for (i=0, len=mockHandlers.length; i<len; i++) {
+		for (i = 0, len = mockHandlers.length; i < len; i++) {
 			handler = mockHandlers[i];
 			if (!match(handler.url)) {
 				results.push(handler);
@@ -789,25 +789,25 @@
 				}
 			}
 		},
-		logging:       true,
-		namespace:     null,
-		status:        200,
-		statusText:    'OK',
-		responseTime:  DEFAULT_RESPONSE_TIME,
-		isTimeout:     false,
+		logging: true,
+		namespace: null,
+		status: 200,
+		statusText: 'OK',
+		responseTime: DEFAULT_RESPONSE_TIME,
+		isTimeout: false,
 		throwUnmocked: false,
-		contentType:   'text/plain',
-		response:      '',
-		responseText:  '',
-		responseXML:   '',
-		proxy:         '',
-		proxyType:     'GET',
+		contentType: 'text/plain',
+		response: '',
+		responseText: '',
+		responseXML: '',
+		proxy: '',
+		proxyType: 'GET',
 
-		lastModified:  null,
-		etag:          '',
+		lastModified: null,
+		etag: '',
 		headers: {
 			etag: 'IJF@H#@923uf8023hFO@I#H#',
-			'content-type' : 'text/plain'
+			'content-type': 'text/plain'
 		}
 	};
 
@@ -837,7 +837,7 @@
 	};
 	$.mockjax.unfiredHandlers = function() {
 		var results = [];
-		for (var i=0, len=mockHandlers.length; i<len; i++) {
+		for (var i = 0, len = mockHandlers.length; i < len; i++) {
 			var handler = mockHandlers[i];
 			if (handler !== null && !handler.fired) {
 				results.push(handler);

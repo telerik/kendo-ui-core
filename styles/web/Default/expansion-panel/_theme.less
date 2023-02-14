@@ -1,0 +1,42 @@
+.k-expander {
+    .fill(
+        @expander-text,
+        @expander-bg,
+        @expander-border
+    );
+}
+
+.k-expander-header {
+    .fill(
+        @expander-header-text,
+        @expander-header-bg,
+        @expander-header-border
+    );
+    outline: none;
+
+    &:hover,
+    &.k-state-hover,
+    &.k-hover {
+        .fill(
+            @bg: @expander-header-hover-bg
+        );
+    }
+
+    &:focus,
+    &.k-state-focused,
+    &.k-focus {
+        .fill(
+            @bg: @expander-header-focused-bg
+        );
+        .box-shadow(@expander-header-focused-shadow);
+    }
+}
+
+.k-expander-title {
+    color: @expander-title-text;
+}
+
+
+.k-expander-sub-title {
+    opacity: @expander-header-sub-title-opacity;
+}

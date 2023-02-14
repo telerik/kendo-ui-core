@@ -1,7 +1,7 @@
 (function() {
     var keys = window.kendo.keys;
 
-    describe("navigation", function () {
+    describe("navigation", function() {
         beforeEach(function() {
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key, preventDefault: $.noop });
@@ -17,52 +17,52 @@
             }
         });
 
-    it("focusing adds a focused class", function() {
-        var buttonObject = getButton().kendoButton();
+        it("focusing adds a focused class", function() {
+            var buttonObject = getButton().kendoButton();
 
-        button.focus();
+            button.focus();
 
-        assert.isOk(button.hasClass("k-state-focused"));
-    });
-
-    it("blurring removes a focused class", function() {
-        var buttonObject = getButton().addClass("k-state-focused").kendoButton();
-
-        button.blur();
-
-        assert.isOk(!button.hasClass("k-state-focused"));
-    });
-
-    it("Enter key triggers click event for non-button elements", function() {
-        var fired = false;
-
-        function clickHandler(e) {
-            fired = true;
-        }
-
-        getSpanButton().kendoButton({
-            click: clickHandler
+            assert.isOk(button.hasClass("k-focus"));
         });
 
-        button.press(keys.ENTER);
+        it("blurring removes a focused class", function() {
+            var buttonObject = getButton().addClass("k-focus").kendoButton();
 
-        assert.isOk(fired);
-    });
+            button.blur();
 
-    it("Spacebar triggers click event for non-button elements", function() {
-        var fired = false;
-
-        function clickHandler(e) {
-            fired = true;
-        }
-
-        getSpanButton().kendoButton({
-            click: clickHandler
+            assert.isOk(!button.hasClass("k-focus"));
         });
 
-        button.press(keys.SPACEBAR);
+        it("Enter key triggers click event for non-button elements", function() {
+            var fired = false;
 
-        assert.isOk(fired);
-    });
+            function clickHandler(e) {
+                fired = true;
+            }
+
+            getSpanButton().kendoButton({
+                click: clickHandler
+            });
+
+            button.press(keys.ENTER);
+
+            assert.isOk(fired);
+        });
+
+        it("Spacebar triggers click event for non-button elements", function() {
+            var fired = false;
+
+            function clickHandler(e) {
+                fired = true;
+            }
+
+            getSpanButton().kendoButton({
+                click: clickHandler
+            });
+
+            button.press(keys.SPACEBAR);
+
+            assert.isOk(fired);
+        });
     });
 }());

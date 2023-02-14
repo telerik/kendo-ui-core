@@ -1,6 +1,6 @@
 ---
 title: Cascading DropDownLists
-page_title: jQuery DropDownList Documentation | Cascading DropDownLists | Kendo UI
+page_title: jQuery DropDownList Documentation - Cascading DropDownLists
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to implement a series of two or more DropDownLists and cascade them."
 slug: cascading_kendoui_ddl_widget
 position: 8
@@ -38,8 +38,6 @@ The child DropDownList takes the following actions during initialization:
 
 The following example demonstrates how to initialize a cascading DropDownList.
 
-###### Example
-
     <input id="parent" />
     <input id="child" />
 
@@ -62,8 +60,8 @@ The following example demonstrates how to initialize a cascading DropDownList.
 
 The MVVM [`value`]({% slug valuebinding_mvvm_kendoui %}) binding updates the `model` when a UI element triggers a `change` event. When widgets cascade, however, they do not raise a `change` event and the `model` is not updated.
 
-* For more information on how to sync a `model` by implementing a [custom MVVM binding]({% slug custombinding_mvvm_kendoui %}) that will update the model accordingly, refer to [this runnable demo example](http://dojo.telerik.com/@ggkrustev/aSAlU) .
-* For more information on why a widget does not trigger a `change` event, refer to [this GitHub discussion](http://github.com/telerik/kendo-ui-core/issues/661).
+* For more information on how to sync a `model` by implementing a [custom MVVM binding]({% slug custombinding_mvvm_kendoui %}) that will update the model accordingly, refer to [this runnable demo example](https://dojo.telerik.com/@ggkrustev/aSAlU) .
+* For more information on why a widget does not trigger a `change` event, refer to [this GitHub discussion](https://github.com/telerik/kendo-ui-core/issues/661).
 
 ## See Also
 

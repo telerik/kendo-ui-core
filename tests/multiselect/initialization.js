@@ -4,16 +4,16 @@
 
     var CONTAINER_HEIGHT = 200;
 
-    function popuplateSelect() {
+    function populateSelect() {
         var options = [];
-        for (var i=0; i < 5; i++) {
+        for (var i = 0; i < 5; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
         select.html(options);
     }
 
-    describe("kendo.ui.MultiSelect Initialization", function () {
+    describe("kendo.ui.MultiSelect Initialization", function() {
         beforeEach(function() {
             kendo.ns = "";
             select = $("<select multiple />").appendTo(Mocha.fixture);
@@ -30,8 +30,7 @@
         var multiselect = new MultiSelect(select),
             wrapper = multiselect.wrapper;
 
-        assert.equal(wrapper[0].nodeName, "DIV");
-        assert.isOk(wrapper.hasClass("k-widget"));
+        assert.equal(wrapper[0].nodeName, "SPAN");
         assert.isOk(wrapper.hasClass("k-multiselect"));
     });
 
@@ -58,14 +57,13 @@
     it("MultiSelect wraps tagList and clears float", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.isOk(multiselect.tagList.parent().hasClass("k-multiselect-wrap"));
-        assert.isOk(multiselect.tagList.parent().hasClass("k-floatwrap"));
+        assert.isOk(multiselect.tagList.parent().hasClass("k-multiselect"));
     });
 
-    it("MultiSelect appends ul to the wrapper", function() {
+    it("MultiSelect appends tagList to the wrapper", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect._innerWrapper.children().first()[0], multiselect.tagList[0]);
+        assert.equal(multiselect.wrapper.children(".k-chip-list")[0], multiselect.tagList[0]);
     });
 
     it("MultiSelect creates input element", function() {
@@ -78,7 +76,7 @@
     it("MultiSelect appends input to the wrapper", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect._innerWrapper.children().eq(1)[0], multiselect.input[0]);
+        assert.equal(multiselect.wrapper.find(".k-input-values").find(".k-input-inner").eq(0)[0], multiselect.input[0]);
     });
 
     it("MultiSelect builds templates", function() {
@@ -87,61 +85,64 @@
         assert.isOk(multiselect.tagTemplate);
     });
 
-    it("multiselect sets default item template", function(){
-        multiselect = new MultiSelect(select);
+    it("multiselect sets default item template", function() {
+        var multiselect = new MultiSelect(select);
 
         var template = multiselect.listView.options.template;
+        var result = template("abc");
 
-        assert.equal(template, "#:data#");
+        assert.equal(result, "abc");
     });
 
-    it("template should use defined datatextField", function(){
-        multiselect = new MultiSelect(select, {
-            dataTextField : "ProductName"
+    it("template should use defined dataTextField", function() {
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "ProductName"
         });
 
         var template = multiselect.listView.options.template;
+        var result = template({ ProductName: "abc" });
 
-        assert.equal(template, "#:data.ProductName#");
+        assert.equal(result, "abc");
     });
 
     it("changing the template", function() {
-        multiselect = new MultiSelect(select, {
-            datatextField: "",
-            template: "#= data.toUpperCase() #"
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "",
+            template: (data) => data.toUpperCase()
         });
 
         var template = multiselect.listView.options.template;
+        var result = template("abc");
 
-        assert.equal(template, "#= data.toUpperCase() #");
+        assert.equal(result, "ABC");
     });
 
     it("MultiSelect renders header template", function() {
         var multiselect = new MultiSelect(select, {
-            template: "#= data.toUpperCase() #",
-            headerTemplate: "<div>Header</div>"
+            template: (data) => data.toUpperCase(),
+            headerTemplate: () => "<div id='t'>Header</div>"
         });
 
         var list = multiselect.list;
 
-        assert.equal(list.children()[0].outerHTML, "<div>Header</div>");
+        assert.equal(list.prev()[0].outerHTML, '<div id="t">Header</div>');
     });
 
     it("render footer container", function() {
         var multiselect = new MultiSelect(select, {
-            footerTemplate: "footer"
+            footerTemplate: () => "footer"
         });
 
         var footer = multiselect.footer;
 
         assert.isOk(footer);
-        assert.isOk(footer.hasClass("k-footer"));
+        assert.isOk(footer.hasClass("k-list-footer"));
     });
 
     it("render footer template", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: true,
-            footerTemplate: "footer"
+            footerTemplate: () => "footer"
         });
 
         var footer = multiselect.footer;
@@ -152,7 +153,7 @@
     it("compile footer template with the multiselect instance", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: true,
-            footerTemplate: "#: instance.dataSource.total() #"
+            footerTemplate: ({ instance }) => instance.dataSource.total()
         });
 
         var footer = multiselect.footer;
@@ -163,7 +164,7 @@
     it("update footer template on dataBound", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: true,
-            footerTemplate: "#: instance.dataSource.total() #"
+            footerTemplate: ({ instance }) => instance.dataSource.total()
         });
 
         var footer = multiselect.footer;
@@ -178,7 +179,7 @@
             animation: false,
             autoBind: false,
             dataSource: ["item1", "item2", "item3", "item4", "item5"],
-            footerTemplate: "<div>Footer</div>",
+            footerTemplate: () => "<div>Footer</div>",
             height: 100
         });
 
@@ -194,7 +195,7 @@
     });
 
     it("MultiSelect binds DataSource if autoBind: true", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select);
 
         assert.equal(multiselect.ul.children().length, select.children().length);
@@ -206,7 +207,7 @@
         assert.isOk(multiselect.popup);
         assert.isOk(multiselect.popup instanceof kendo.ui.Popup);
         assert.equal(multiselect.popup.options.anchor[0], multiselect.wrapper[0]);
-        assert.equal(multiselect.popup.element[0], multiselect.list[0]);
+        assert.equal(multiselect.popup.element[0], multiselect.list.parent()[0]);
     });
 
     it("MultiSelect initializes an UL for its items", function() {
@@ -216,20 +217,20 @@
         assert.isOk(multiselect.ul);
         assert.isOk(multiselect.ul.is("ul"));
         assert.isOk(multiselect.list.attr("id"), select.attr("id") + "-list");
-        assert.equal(multiselect.listView.content.css("overflow"), "auto");
+        assert.equal(multiselect.listView.content.css("overflow"), "hidden auto");
     });
 
     it("MultiSelect calls value method on init", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select, {
             value: "0"
         });
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect creates _searchText", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select),
             searchText = multiselect._span,
             input = multiselect.input;
@@ -242,13 +243,13 @@
         assert.equal(searchText.css("font-style"), input.css("font-style"));
         assert.equal(searchText.css("font-weight"), input.css("font-weight"));
         assert.equal(searchText.css("font-family"), input.css("font-family"));
-        assert.equal(searchText.css("line-heigth"), input.css("line-heigth"));
+        assert.equal(searchText.css("line-height"), input.css("line-height"));
         assert.equal(searchText.css("text-transform"), input.css("text-transform"));
         assert.equal(searchText.css("letter-spacing"), input.css("letter-spacing"));
     });
 
     /*it("multiselect can be initialized in hidden container", function() {
-        popuplateSelect();
+        populateSelect();
 
         var div = $("<div style='display: none'></div>").appendTo(Mocha.fixture),
             multiselect = select.appendTo(div).kendoMultiSelect().data("kendoMultiSelect");
@@ -260,7 +261,7 @@
     });*/
 
     it("multiselect does not set width if list has style.width", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = select.kendoMultiSelect().data("kendoMultiSelect");
 
         multiselect.list.width(400);
@@ -277,7 +278,7 @@
         var multiselect = select.kendoMultiSelect({
             autoBind: false,
             dataSource: dataSource,
-            template: "<div style='height:30px'><%= data %> </div>",
+            template: () => "<div style='height:30px'><%= data %> </div>",
             height: 50
         }).data("kendoMultiSelect");
 
@@ -288,7 +289,7 @@
     });
 
     it("MultiSelect shrinks ul if the height of the items is more then options.height", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = select.kendoMultiSelect().data("kendoMultiSelect");
         multiselect.options.height = 50;
 
@@ -299,7 +300,7 @@
     });
 
     it("MultiSelect calculates popup height properly when ul has overflow-x styling", function() {
-        multiselect = new MultiSelect(select, {
+        var multiselect = new MultiSelect(select, {
              dataSource: ["item1", "item2", "item3", "item4", "item5"],
              height: 50
         });
@@ -332,7 +333,7 @@
 
         multiselect.open();
 
-        var padding = multiselect.list.find(".k-group-header").css("padding-right");
+        var padding = multiselect.list.find(".k-list-group-sticky-header").css("padding-right");
 
         assert.isOk(parseFloat(padding) >= kendo.support.scrollbar());
     });
@@ -356,29 +357,29 @@
 
         multiselect.open();
 
-        var padding = multiselect.list.find(".k-group-header").css("padding-right");
+        var padding = multiselect.list.find(".k-list-group-sticky-header").css("padding-right");
 
         assert.isOk(parseFloat(padding) < 15);
     });
 
     it("MultiSelect uses select.value on init", function() {
-        popuplateSelect();
+        populateSelect();
         select.val("0");
 
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect creates loading element", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select);
 
         assert.isOk(multiselect._loading);
     });
 
     it("MultiSelect disables widget on init", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select.attr("disabled", "disabled"));
 
         assert.isOk(multiselect.input.attr("disabled"));
@@ -393,7 +394,7 @@
     });
 /*
     it("MultiSelect shows loading icon on progress", function(done) {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select);
 
         multiselect.dataSource.trigger("progress");
@@ -405,7 +406,7 @@
     });
 
     it("MultiSelect hides loading icon on dataSource change", function(done) {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select);
 
         multiselect._showBusy();
@@ -418,12 +419,12 @@
     });
 */
     it("form reset support", function(done) {
-        popuplateSelect();
+        populateSelect();
 
         select[0].children[1].setAttribute("selected", "selected");
         select[0].children[2].setAttribute("selected", "selected");
 
-        var form = $("<form/>").appendTo(document.documentElement).append(select),
+        var form = $("<form/>").appendTo(Mocha.fixture).append(select),
             multiselect = new MultiSelect(select);
 
         multiselect.value(["3","4"]);
@@ -437,13 +438,13 @@
     });
 
     it("reset support for form defined by attribute", function(done) {
-        popuplateSelect();
+        populateSelect();
 
         select[0].children[1].setAttribute("selected", "selected");
         select[0].children[2].setAttribute("selected", "selected");
 
         select.attr("form", "form1");
-        var form = $('<form id="form1"/>').appendTo(document.documentElement),
+        var form = $('<form id="form1"/>').appendTo(Mocha.fixture),
             multiselect = new MultiSelect(select);
 
         multiselect.value(["3","4"]);
@@ -457,9 +458,9 @@
     });
 
     it("form reset support does not remove place2older", function(done) {
-        popuplateSelect();
+        populateSelect();
 
-        var form = $("<form/>").appendTo(document.documentElement).append(select);
+        var form = $("<form/>").appendTo(Mocha.fixture).append(select);
         var multiselect = new MultiSelect(select, {
             placeholder: "Select..."
         });
@@ -473,7 +474,7 @@
     });
 
     it("widget sets only option.selected property", function() {
-        popuplateSelect();
+        populateSelect();
 
         var multiselect = new MultiSelect(select);
 
@@ -487,7 +488,7 @@
     });
 
     it("widget persists defaultSelected property", function() {
-        popuplateSelect();
+        populateSelect();
 
         select[0].children[1].setAttribute("selected", "selected");
         select[0].children[2].setAttribute("selected", "selected");
@@ -517,7 +518,7 @@
     });
 
     it("do not highlight first on open", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select, { highlightFirst: false });
 
         multiselect.open();
@@ -526,7 +527,7 @@
     });
 
     it("do not highlight first item on refresh", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select, { highlightFirst: false });
 
         multiselect.open();
@@ -554,20 +555,30 @@
         assert.equal(multiselect.listView.calls("focusFirst"), 1);
     });
 
+    it("do not highlight first item when autoBind is false", function() {
+        populateSelect();
+        var multiselect = new MultiSelect(select, {
+            highlightFirst: false,
+            autoBind: false
+        });
+
+        multiselect.open();
+
+        assert.equal(multiselect.current(), null);
+    });
+
     it("Copy accesskey to the visible input", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = new MultiSelect(select.attr("accesskey", "w"), { highlightFirst: false });
 
         assert.isOk(!multiselect.element.attr("accesskey"));
         assert.equal(multiselect.input.attr("accesskey"), "w");
     });
 
-    it("Scales correctly input element when init in hidden element", function() {
-        var div = $("<div style='display:none'/>").appendTo(document.documentElement);
-        div.append(select);
-        var multiselect = new MultiSelect(select, { placeholder: "Select something..." });
+    it("should not render accesskey on its input when none is configured", function() {
+        var multiselect = new MultiSelect(select);
 
-        assert.isOk(multiselect.input.width() > 50);
+        assert.isOk(!multiselect.input[0].hasAttribute("accesskey"));
     });
 
     it("MultiSelect honors readonly attribute", function() {
@@ -577,10 +588,17 @@
         assert.equal(multiselect.element.attr("disabled"), undefined);
     });
 
+    it("MultiSelect adds k-no-click to wrapper element when readonly", function() {
+        var multiselect = new MultiSelect(select.attr("readonly", true));
+
+        assert.isOk(multiselect.wrapper.hasClass('k-no-click'));
+    });
+
     it("MultiSelect uses disabled attr over the readonly", function() {
         var multiselect = new MultiSelect(select.attr("readonly", true).attr("disabled", true));
 
-        assert.equal(select.attr("readonly"), undefined);
+        assert.equal(multiselect.input.attr("readonly"), undefined);
+        assert.equal(multiselect.input.attr("disabled"), "disabled");
     });
 
     it("MultiSelect binds to simple data passed to value option if autoBind is false", function() {
@@ -777,7 +795,7 @@
     });
 
     it("copy select title attribute to the visible input", function() {
-        popuplateSelect();
+        populateSelect();
         var multiselect = select.attr("title", "foo").kendoMultiSelect().data("kendoMultiSelect");
         var title = select.attr("title");
 
@@ -804,7 +822,7 @@
 
         dataSource.view()[2].set("text", "updated");
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
 
         assert.equal(tags.length, 3);
         assert.equal(tags.eq(1).children(":first").text(), "updated");
@@ -842,7 +860,7 @@
     });
 
     it("MultiSelect doesn't re-render options on list change when value exists", function() {
-        popuplateSelect();
+        populateSelect();
 
         var multiselect = select.kendoMultiSelect().data("kendoMultiSelect");
 
@@ -858,7 +876,7 @@
     //no data template
     it("MultiSelect builds a noDataTemplate", function() {
         var multiselect = new MultiSelect(select, {
-            noDataTemplate: "test"
+            noDataTemplate: () => "test"
         });
 
         assert.isOk(multiselect.noDataTemplate);
@@ -866,22 +884,21 @@
 
     it("render nodata container", function() {
         var multiselect = new MultiSelect(select, {
-            noDataTemplate: "test"
+            noDataTemplate: () => "test"
         });
 
         assert.isOk(multiselect.noData);
-        assert.isOk(multiselect.noData.hasClass("k-nodata"));
-        assert.equal(multiselect.noData.children("div").length, 1);
-        assert.equal(multiselect.noData.text(), multiselect.options.noDataTemplate);
+        assert.isOk(multiselect.noData.hasClass("k-no-data"));
+        assert.equal(multiselect.noData.text(), multiselect.options.noDataTemplate());
     });
 
     it("render nodata before footerTemplate", function() {
         var multiselect = new MultiSelect(select, {
-            noDataTemplate: "test",
-            footerTemplate: "footer"
+            noDataTemplate: () => "test",
+            footerTemplate: () => "footer"
         });
 
-        assert.isOk(multiselect.noData.next().hasClass("k-footer"));
+        assert.isOk(multiselect.noData.next().hasClass("k-list-footer"));
     });
 
     it("hides noData template if any data", function() {
@@ -895,8 +912,8 @@
                     { name: "item3", type: "b" }
                 ]
             },
-            noDataTemplate: "no data",
-            template: '#:data.name#'
+            noDataTemplate: () => "no data",
+            template: ({ name }) => name
         });
 
         multiselect.open();
@@ -911,8 +928,8 @@
             dataSource: {
                 data: [ ]
             },
-            noDataTemplate: "no data",
-            template: '#:data.name#'
+            noDataTemplate: () => "no data",
+            template: ({ name }) => name
         });
 
         multiselect.open();
@@ -927,8 +944,8 @@
             dataSource: {
                 data: [ ]
             },
-            noDataTemplate: "no data",
-            template: '#:data.name#'
+            noDataTemplate: () => "no data",
+            template: ({ name }) => name
         });
 
         multiselect.open();
@@ -947,7 +964,7 @@
     it("update noData template on dataBound", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: true,
-            noDataTemplate: "#: instance.dataSource.total() #"
+            noDataTemplate: ({ instance }) => instance.dataSource.total()
         });
 
         var noData = multiselect.noData;
@@ -962,9 +979,120 @@
             clearButton: true
         });
 
-        multiselect._hideBusy()
+        multiselect._hideBusy();
 
         assert.isOk(multiselect._clear.hasClass("k-hidden"));
+    });
+
+    it("down arrow is rendered if configured", function() {
+        var multiselect = new MultiSelect(select, {
+            downArrow: true
+        });
+
+        assert.equal(multiselect._arrow.length, 1);
+        assert.equal(multiselect.wrapper.find("> .k-input-button > .k-i-caret-alt-down").length, 1);
+    });
+
+    it("k-multiselect-wrap-arrow class is applied when down arrow is configured", function() {
+        var multiselect = new MultiSelect(select, {
+            downArrow: true
+        });
+
+        assert.equal(multiselect._arrow.length, 1);
+    });
+
+    it("styling options - fillMode", function() {
+        var multiselect = new MultiSelect(select, {
+            fillMode: "outline"
+        });
+
+        assert.isOk(multiselect.wrapper.hasClass("k-input-outline"));
+    });
+
+    it("styling options - size", function() {
+        var multiselect = new MultiSelect(select, {
+            size: "small"
+        });
+
+        assert.isOk(multiselect.wrapper.hasClass("k-input-sm"));
+    });
+
+    it("styling options - rounded", function() {
+        var multiselect = new MultiSelect(select, {
+            rounded: "large"
+        });
+
+        assert.isOk(multiselect.wrapper.hasClass("k-rounded-lg"));
+    });
+
+    it("styling options - checks for valid options", function() {
+        var multiselect = new MultiSelect(select, {
+            size: "full"
+        });
+
+        assert.isNotOk(multiselect.wrapper.hasClass("k-rounded-large")); // Does not add valid class for other option
+        assert.isNotOk(multiselect.wrapper.hasClass("k-input-full")); // Does not add invalid class with prefix
+        assert.isNotOk(multiselect.wrapper.hasClass("k-input-md")); // Does not add default class for the option
+        assert.isOk(multiselect.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
+    });
+
+    it("renders not-floating label from string", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            label: "Label"
+        });
+
+        assert.equal(multiselect.label.element.text(), "Label");
+        assert.isNotOk(!!multiselect.label.floatingLabel);
+    });
+
+    it("renders label from object", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            label: {
+                content: "some label"
+            }
+        });
+
+        assert.equal(multiselect.label.element.text(), "some label");
+    });
+
+    it("renders floating label", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            label: {
+                content: "some label",
+                floating: true
+            }
+        });
+
+        assert.equal(multiselect.label.element.text(), "some label");
+        assert.isOk(!!multiselect.label.floatingLabel);
+    });
+
+    it("renders label with funciton", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            label: () => `some label`
+        });
+
+        assert.equal(multiselect.label.element.text(), "some label");
     });
     });
 }());

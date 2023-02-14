@@ -1,6 +1,6 @@
 ---
 title: Group Templates
-page_title: jQuery Grid Documentation | Group Templates | Kendo UI
+page_title: jQuery Grid Documentation - Group Templates
 description: "Get started with the jQuery Grid by Kendo UI and learn how to customize the group rows when data is grouped."
 slug: group_templates_kendoui_grid_widget
 position: 2
@@ -24,18 +24,17 @@ If you do not define a template, the name of the field and the current group are
 
 **Figure 1: A Grid with no group templates**
 
-![Grid with no group templates](../grid-no-group-header-template.png)
+![Kendo UI for jQuery Grid with no group templates](../grid-no-group-header-template.png)
 
 The only difference in the use of `GroupHeaderTemplate` is that the template content is compiled and displayed instead of the field and current group value. Both `GroupHeaderColumnTemplate` and `GroupFooterTemplate` work in a similar way. `GroupHeaderColumnTemplate` displays the content as aligned to the column in the group row. `GroupFooterTemplate` displays the content as aligned to the column in the group footer row. Their content is displayed as aligned to the column as shown in the following way.
 
-**Figure 1: A Grid with defined group header and group footer templates**
+**Figure 2: A Grid with defined group header and group footer templates**
 
-![Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../grid-group-header-column-template.png)
+![Kendo UI for jQuery Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../grid-group-header-column-template.png)
 
 Because `GroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `GroupHeaderColumnTemplate` of the first visible column. To show the `GroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `GroupHeaderTemplate` for the group column. The following Grid configuration demonstrates that commenting the `GroupHeaderTemplate` for the **Units In Stock** column shows the `GroupHeaderColumnTemplate` for the **Product Name** column.
 
-#### Example
-
+```dojo
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -70,10 +69,18 @@ Because `GroupHeaderTemplate` is displayed next to the expanding icon of the gro
             ]
         });
     </script>
+```
 
-**Figure 2: A Grid with a group header template applied to the first column and no group header template defined**
+**Figure 3: A Grid with a group header template applied to the first column and no group header template defined**
 
-![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../grid-group-header-column-template-first-column.png)
+![Kendo UI for jQuery Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../grid-group-header-column-template-first-column.png)
+
+## KB Articles on Templates
+
+* [Editing Records in Child Grids]({% slug howto_edit_recordsin_children_grid %})
+* [Refreshing the Grid in the Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
+* [Creating a Custom Editor in the Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
 
 ## See Also
 

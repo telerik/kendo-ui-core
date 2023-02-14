@@ -11,9 +11,13 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
 
 ## Configuration
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'D')#")*
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
- Specifies a template used to populate value of the aria-label attribute.
+ Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar..The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -34,10 +38,10 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <div id="daterangepicker"></div>
@@ -153,6 +157,46 @@ you can also pass a function that will be dynamically resolved for each date of 
 
 note that a check for an empty `date` is needed, as the widget can work with a null value as well.
 
+### endField `String`*(default: "")*
+
+Specifies the end field name for model binding.
+
+#### Example - specify the initial view, which calendar renders
+
+	<div id="example">
+		<div id="daterangepicker" title="daterangepicker"></div>
+		<script>
+			$(document).ready(function () {
+				$("#daterangepicker").kendoDateRangePicker({
+					endField: "endField"
+				});
+
+				var viewModel = kendo.observable({
+					endField: new Date()
+				});
+				kendo.bind($("#example"), viewModel);
+			});
+		</script>
+	</div>
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### footer `String|Function`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
@@ -217,7 +261,7 @@ Allows localization of the strings that are used in the widget.
     $("#daterangepicker").kendoDateRangePicker({
         "messages": {
             "startLabel": "The Start",
-            "startLabel": "The End"
+            "endLabel": "The End"
         }
      })
     </script>
@@ -415,6 +459,43 @@ This sets the end date of the range selection.
         });
     </script>
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius of the inputs. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        size: "large"
+    });
+    </script>
+
 ### start `String`*(default: "month")*
 
 Specifies the start view.
@@ -433,6 +514,28 @@ The following settings are available for the **start** value:
             start: "year"
         });
     </script>
+	
+### startField `String`*(default: "")*
+
+Specifies the start field name for model binding.
+
+#### Example - specify the initial view, which calendar renders
+
+	<div id="example">
+		<div id="daterangepicker" title="daterangepicker"></div>
+		<script>
+			$(document).ready(function () {
+				$("#daterangepicker").kendoDateRangePicker({
+					startField: "startField"
+				});
+
+				var viewModel = kendo.observable({
+					startField: new Date()
+				});
+				kendo.bind($("#example"), viewModel);
+			});
+		</script>
+	</div>
 
 ## Fields
 
@@ -577,6 +680,7 @@ The max date to set.
 
     var max = daterangepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -615,6 +719,7 @@ The min date to set.
 
     var min = daterangepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -735,6 +840,7 @@ The widget instance which fired the event.
     $("#daterangepicker").kendoDateRangePicker({
         change: function() {
             var range = this.range();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(range);
         }
     });
@@ -750,6 +856,7 @@ The widget instance which fired the event.
 
     daterangepicker.bind("change", function() {
         var range = this.range();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(range);
     });
     </script>

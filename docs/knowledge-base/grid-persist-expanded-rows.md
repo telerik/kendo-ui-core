@@ -1,8 +1,8 @@
 ---
 title: Persist expanded rows in Kendo Grid
-description: An example on how to persist the Kendo UI Grid expanded rows.
+description: Learn how to persist the Kendo UI Grid expanded rows.
 type: how-to
-page_title:  Persist expanded rows in Kendo Grid | Kendo UI Grid
+page_title:  Persist expanded rows in Kendo Grid - Kendo UI Grid for jQuery
 slug: grid-persist-expanded-rows
 tags: grid, persist, detail, expand, expanded, refresh
 res_type: kb
@@ -14,21 +14,25 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.1026</td>
  </tr>
 </table>
 
 ## Description
 
-How can I persist expanded rows after grid refresh?
+How can I persist expanded rows after the Grid is refreshed?
 
 ## Solution
 
-A possible solution is to save the expanded rows in the [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) of the browser. Within the [detailExpand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event handler add the expanded row to the `localStorage` and then remove it within the [detailCollapse](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailcollapse) event handler. Finally, when the [dataBound](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event is fired, expand all rows saved to the `localStorage` using the [expandRow](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/expandrow) method.
+A possible solution is to:
+
+1. Save the expanded rows in the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) of the browser.
+1. Within the [`detailExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event handler, add the expanded row to the `localStorage` and then remove it within the [`detailCollapse`](/api/javascript/ui/grid/events/detailcollapse) event handler.
+1. When the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event is fired, expand all rows saved to the `localStorage` using the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/expandrow) method.
 
 ```dojo
   <div id="example">
@@ -37,7 +41,7 @@ A possible solution is to save the expanded rows in the [localStorage](https://d
       <script type="text/x-kendo-template" id="template">
         <div class="tabstrip">
            <ul>
-              <li class="k-state-active">
+              <li class="k-active">
                  Orders
               </li>
               <li>

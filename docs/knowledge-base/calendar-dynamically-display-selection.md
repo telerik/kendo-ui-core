@@ -1,8 +1,8 @@
 ---
 title: Dynamically Display the Selected Calendar Dates
-description: An example on how to dynamically display the selected dates from the Kendo UI Calendar.
+page_title: Dynamically Display the Selected Dates from the Calendar - Kendo UI Calendar for ASP.NET Core
+description: Learn how to dynamically display the selected dates from the Kendo UI Calendar.
 type: how-to
-page_title: Dynamically Display the Selected Dates from the Calendar | Kendo UI Calendar
 slug: calendar-dynamically-display-selection
 tags: kendo, kendoui, calendar, multiselect, dynamical, select
 ticketid: 1145054
@@ -18,10 +18,9 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Calendar for ASP.NET Core</td>
+		<td>Progress® Telerik® UI Calendar for ASP.NET Core</td>
 	</tr>
 </table>
-
 
 ## Description
 

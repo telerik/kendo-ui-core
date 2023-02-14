@@ -1,302 +1,303 @@
 (function() {
-var dom;
+    var dom;
 
-describe("tabstrip mvvm", function () {
-    afterEach(function() {
-        kendo.destroy(dom);
-    });
+    describe("tabstrip mvvm", function() {
+        afterEach(function() {
+            kendo.destroy(dom);
+        });
 
-it("initializes a tabstrip when data role is tabstrip", function() {
-    dom = $('<div data-role="tabstrip"></div>');
+        it("initializes a tabstrip when data role is tabstrip", function() {
+            dom = $('<div data-role="tabstrip"></div>');
 
-    kendo.bind(dom);
+            kendo.bind(dom);
 
-    assert.isOk(dom.data("kendoTabStrip") instanceof kendo.ui.TabStrip);
-});
+            assert.isOk(dom.data("kendoTabStrip") instanceof kendo.ui.TabStrip);
+        });
 
-it("initializes a options from data attributes", function() {
-    dom = $('<div data-role="tabstrip" data-animation="false"></div>');
+        it("initializes a options from data attributes", function() {
+            dom = $('<div data-role="tabstrip" data-animation="false"></div>');
 
-    kendo.bind(dom);
+            kendo.bind(dom);
 
-    var tabstrip = dom.data("kendoTabStrip");
+            var tabstrip = dom.data("kendoTabStrip");
 
-    assert.isOk($.isEmptyObject(tabstrip.options.animation.effects));
-});
+            assert.isOk($.isEmptyObject(tabstrip.options.animation.effects));
+        });
 
-it("binding tabstrip initialized before binding", function() {
-    dom = $('<div data-animation="false"></div>');
+        it("binding tabstrip initialized before binding", function() {
+            dom = $('<div data-animation="false"></div>');
 
-    var tabstrip = dom.kendoTabStrip().data("kendoTabStrip");
+            var tabstrip = dom.kendoTabStrip().data("kendoTabStrip");
 
-    kendo.bind(dom);
+            kendo.bind(dom);
 
-    assert.isOk($.isEmptyObject(tabstrip.options.animation.effects));
-});
+            assert.isOk($.isEmptyObject(tabstrip.options.animation.effects));
+        });
 
-it("binding containing binding attributes", function() {
-    dom = $('<div data-role="tabstrip"><span data-bind="text:text"></span></div>');
+        it("binding containing binding attributes", function() {
+            dom = $('<div data-role="tabstrip"><span data-bind="text:text"></span></div>');
 
-    var observable = kendo.observable({ text:"foo" });
+            var observable = kendo.observable({ text: "foo" });
 
-    kendo.bind(dom, observable);
+            kendo.bind(dom, observable);
 
-    assert.equal($.trim(dom.find("span:first").html()), "foo");
-});
+            assert.equal(dom.find("span:first").html().trim(), "foo");
+        });
 
-it("animation is extended if widget is initialized before the binding", function() {
-    dom = $('<div data-role="tabstrip" data-animation=\"{"open":{"effects":"fadeIn"}}\"/>');
+        it("animation is extended if widget is initialized before the binding", function() {
+            dom = $('<div data-role="tabstrip" data-animation=\"{"open":{"effects":"fadeIn"}}\"/>');
 
-    dom.kendoTabStrip();
+            dom.kendoTabStrip();
 
-    kendo.bind(dom);
+            kendo.bind(dom);
 
-    assert.equal(dom.data("kendoTabStrip").options.animation.open.duration, 200);
-});
+            assert.equal(dom.data("kendoTabStrip").options.animation.open.duration, 200);
+        });
 
-it("updating viewModel updates the content", function() {
-    dom = $('<div data-role="tabstrip"><span data-bind="text:text"></span></div>');
+        it("updating viewModel updates the content", function() {
+            dom = $('<div data-role="tabstrip"><span data-bind="text:text"></span></div>');
 
-    var observable = kendo.observable({ text:"foo" });
+            var observable = kendo.observable({ text: "foo" });
 
-    kendo.bind(dom, observable);
+            kendo.bind(dom, observable);
 
-    observable.set("text", "bar");
+            observable.set("text", "bar");
 
-    assert.equal($.trim(dom.find("span:first").html()), "bar");
-});
+            assert.equal(dom.find("span:first").html().trim(), "bar");
+        });
 
-it("event is raised if attached as option", function() {
-    window.tabstripMVVMSelect = function() {
-        assert.isOk(true);
-    }
-    dom = $('<div data-role="tabstrip" data-select="tabstripMVVMSelect"></div>');
+        it("event is raised if attached as option", function() {
+            window.tabstripMVVMSelect = function() {
+                assert.isOk(true);
+            };
 
-    kendo.bind(dom);
+            dom = $('<div data-role="tabstrip" data-select="tabstripMVVMSelect"></div>');
 
-    dom.data("kendoTabStrip").trigger("select");
-});
+            kendo.bind(dom);
 
+            dom.data("kendoTabStrip").trigger("select");
+        });
 
-it("tabstrip is bound to data source", function() {
-    dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
-    var viewModel = {
-        tabs: ["foo", "bar"]
-    };
 
-    kendo.bind(dom, viewModel);
+        it("tabstrip is bound to data source", function() {
+            dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+            var viewModel = {
+                tabs: ["foo", "bar"]
+            };
 
-    assert.equal(dom.find("li").length, 2);
-});
+            kendo.bind(dom, viewModel);
 
-it("data text field is used when data binding", function() {
-    dom = $('<div data-role="tabstrip" data-text-field="foo" data-bind="source: tabs"></div>');
+            assert.equal(dom.find("li").length, 2);
+        });
 
-    var viewModel = {
-        tabs: [{ foo: "foo"}]
-    };
+        it("data text field is used when data binding", function() {
+            dom = $('<div data-role="tabstrip" data-text-field="foo" data-bind="source: tabs"></div>');
 
-    kendo.bind(dom, viewModel);
+            var viewModel = {
+                tabs: [{ foo: "foo" }]
+            };
 
-    assert.equal(dom.find("li").text(), "foo");
-});
+            kendo.bind(dom, viewModel);
 
-it("adding items to array adds tabs to tabstrip", function() {
-    dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
-    var viewModel = kendo.observable({
-        tabs: ["foo", "bar"]
-    });
+            assert.equal(dom.find("li").text(), "foo");
+        });
 
-    kendo.bind(dom, viewModel);
+        it("adding items to array adds tabs to tabstrip", function() {
+            dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+            var viewModel = kendo.observable({
+                tabs: ["foo", "bar"]
+            });
 
-    viewModel.tabs.push("baz");
-    assert.equal(dom.find("li:last").text(), "baz");
-});
+            kendo.bind(dom, viewModel);
 
-it("inserting items to array adds tabs to tabstrip", function() {
-    dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
-    var viewModel = kendo.observable({
-        tabs: ["foo", "bar"]
-    });
+            viewModel.tabs.push("baz");
+            assert.equal(dom.find("li:last").text(), "baz");
+        });
 
-    kendo.bind(dom, viewModel);
+        it("inserting items to array adds tabs to tabstrip", function() {
+            dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+            var viewModel = kendo.observable({
+                tabs: ["foo", "bar"]
+            });
 
-    viewModel.tabs.splice(1, 0, "baz");
-    assert.equal(dom.find("li:eq(1)").text(), "baz");
-});
+            kendo.bind(dom, viewModel);
 
-it("adding items to array does not recreate all tabs", function() {
-    dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
-    var viewModel = kendo.observable({
-        tabs: ["foo", "bar"]
-    });
+            viewModel.tabs.splice(1, 0, "baz");
+            assert.equal(dom.find("li:eq(1)").text(), "baz");
+        });
 
-    kendo.bind(dom, viewModel);
-    var firstTab = dom.find("li:first")[0];
+        it("adding items to array does not recreate all tabs", function() {
+            dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+            var viewModel = kendo.observable({
+                tabs: ["foo", "bar"]
+            });
 
-    viewModel.tabs.push("baz");
-    assert.strictEqual(dom.find("li:first")[0], firstTab);
-});
+            kendo.bind(dom, viewModel);
+            var firstTab = dom.find("li:first")[0];
 
-it("removing items from array adds tabs to tabstrip", function() {
-    dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
-    var viewModel = kendo.observable({
-        tabs: ["foo", "bar"]
-    });
+            viewModel.tabs.push("baz");
+            assert.strictEqual(dom.find("li:first")[0], firstTab);
+        });
 
-    kendo.bind(dom, viewModel);
+        it("removing items from array adds tabs to tabstrip", function() {
+            dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+            var viewModel = kendo.observable({
+                tabs: ["foo", "bar"]
+            });
 
-    viewModel.tabs.pop();
-    assert.equal(dom.find("li:last").text(), "foo");
-});
+            kendo.bind(dom, viewModel);
 
-it("removing items from array does not recreate all tabs", function() {
-    dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
-    var viewModel = kendo.observable({
-        tabs: ["foo", "bar"]
-    });
+            viewModel.tabs.pop();
+            assert.equal(dom.find("li:last").text(), "foo");
+        });
 
-    kendo.bind(dom, viewModel);
+        it("removing items from array does not recreate all tabs", function() {
+            dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+            var viewModel = kendo.observable({
+                tabs: ["foo", "bar"]
+            });
 
-    var firstTab = dom.find("li:first")[0];
-    viewModel.tabs.pop();
-    assert.strictEqual(dom.find("li:first")[0], firstTab);
-});
+            kendo.bind(dom, viewModel);
 
-it("setting the value of the tabstrip", function() {
-    dom = $('<div data-role="tabstrip" data-bind="value: tab, source: tabs"></div>');
+            var firstTab = dom.find("li:first")[0];
+            viewModel.tabs.pop();
+            assert.strictEqual(dom.find("li:first")[0], firstTab);
+        });
 
-    var viewModel = kendo.observable({
-        tab: "bar",
-        tabs: ["foo", "bar"]
-    });
+        it("setting the value of the tabstrip", function() {
+            dom = $('<div data-role="tabstrip" data-bind="value: tab, source: tabs"></div>');
 
-    kendo.bind(dom, viewModel);
+            var viewModel = kendo.observable({
+                tab: "bar",
+                tabs: ["foo", "bar"]
+            });
 
-    assert.isOk(dom.find("li:last").is(".k-state-active"), "Tab is active");
-});
+            kendo.bind(dom, viewModel);
 
-it("setting the value of the tabstrip when bound to complex object", function() {
-    dom = $('<div data-role="tabstrip" data-text-field="name" data-bind="value: tab, source: tabs"></div>');
+            assert.isOk(dom.find("li:last").is(".k-active"), "Tab is active");
+        });
 
-    var viewModel = kendo.observable({
-        tabs: [{ name:"foo" },{ name: "bar" }]
-    });
+        it("setting the value of the tabstrip when bound to complex object", function() {
+            dom = $('<div data-role="tabstrip" data-text-field="name" data-bind="value: tab, source: tabs"></div>');
 
-    viewModel.tab = viewModel.tabs[1];
-    kendo.bind(dom, viewModel);
+            var viewModel = kendo.observable({
+                tabs: [{ name: "foo" }, { name: "bar" }]
+            });
 
-    assert.isOk(dom.find("li:last").is(".k-state-active"), "Tab is active");
-});
+            viewModel.tab = viewModel.tabs[1];
+            kendo.bind(dom, viewModel);
 
-it("selecting a tab changes the bound value in the view model", function() {
-    dom = $('<div data-role="tabstrip" data-bind="value: tab, source: tabs"></div>');
+            assert.isOk(dom.find("li:last").is(".k-active"), "Tab is active");
+        });
 
-    var viewModel = kendo.observable({
-        tab: "bar",
-        tabs: ["foo", "bar"]
-    });
+        it("selecting a tab changes the bound value in the view model", function() {
+            dom = $('<div data-role="tabstrip" data-bind="value: tab, source: tabs"></div>');
 
-    kendo.bind(dom, viewModel);
+            var viewModel = kendo.observable({
+                tab: "bar",
+                tabs: ["foo", "bar"]
+            });
 
-    dom.find("li:first").trigger('click');
+            kendo.bind(dom, viewModel);
 
-    assert.equal(viewModel.tab, "foo");
-});
+            dom.find("li:first").trigger('click');
 
-it("selecting a tab changes the bound value in the view model when bound to complex object", function() {
-    dom = $('<div data-role="tabstrip" data-text-field="name" data-bind="value: tab, source: tabs"></div>');
+            assert.equal(viewModel.tab, "foo");
+        });
 
-    var viewModel = kendo.observable({
-        tabs: [{ name:"foo" },{ name: "bar" }]
-    });
+        it("selecting a tab changes the bound value in the view model when bound to complex object", function() {
+            dom = $('<div data-role="tabstrip" data-text-field="name" data-bind="value: tab, source: tabs"></div>');
 
-    viewModel.tab = viewModel.tabs[1];
-    kendo.bind(dom, viewModel);
+            var viewModel = kendo.observable({
+                tabs: [{ name: "foo" }, { name: "bar" }]
+            });
 
-    dom.find("li:first").trigger("click");
+            viewModel.tab = viewModel.tabs[1];
+            kendo.bind(dom, viewModel);
 
-    assert.equal(viewModel.tab, viewModel.tabs[0]);
-});
+            dom.find("li:first").trigger("click");
 
-it("updating an item from the array updates the corresponding tab", function() {
-    dom = $('<div data-role="tabstrip" data-text-field="name" data-bind="source: tabs"></div>');
+            assert.equal(viewModel.tab, viewModel.tabs[0]);
+        });
 
-    var viewModel = kendo.observable({
-        tabs: [{ name:"foo" }]
-    });
+        it("updating an item from the array updates the corresponding tab", function() {
+            dom = $('<div data-role="tabstrip" data-text-field="name" data-bind="source: tabs"></div>');
 
-    kendo.bind(dom, viewModel);
-    viewModel.tabs[0].set("name", "bar");
+            var viewModel = kendo.observable({
+                tabs: [{ name: "foo" }]
+            });
 
-    assert.equal(dom.find("li").text(), "bar");
-});
+            kendo.bind(dom, viewModel);
+            viewModel.tabs[0].set("name", "bar");
 
-it("assign to DataSource as ViewModel field", function() {
-    dom = $('<div data-role="tabstrip" data-bind="source:dataSource" />');
+            assert.equal(dom.find("li").text(), "bar");
+        });
 
-    var dataSource = new kendo.data.DataSource({
-        data: [{text:"foo"}, {text:"bar"}]
-    });
+        it("assign to DataSource as ViewModel field", function() {
+            dom = $('<div data-role="tabstrip" data-bind="source:dataSource" />');
 
-    var observable = kendo.observable({
-        dataSource: dataSource
-    });
+            var dataSource = new kendo.data.DataSource({
+                data: [{ text: "foo" }, { text: "bar" }]
+            });
 
-    kendo.bind(dom, observable);
-    var tabstrip = dom.data("kendoTabStrip");
+            var observable = kendo.observable({
+                dataSource: dataSource
+            });
 
-    assert.strictEqual(tabstrip.dataSource, dataSource);
-});
+            kendo.bind(dom, observable);
+            var tabstrip = dom.data("kendoTabStrip");
 
-it("binding visible to true shows the tabstrip", function() {
-    dom = $('<div data-role="tabstrip" data-bind="visible: visible"></div>');
+            assert.strictEqual(tabstrip.dataSource, dataSource);
+        });
 
-    kendo.bind(dom, { visible: true });
+        it("binding visible to true shows the tabstrip", function() {
+            dom = $('<div data-role="tabstrip" data-bind="visible: visible"></div>');
 
-    var tabstrip = dom.data("kendoTabStrip");
+            kendo.bind(dom, { visible: true });
 
-    assert.isOk(tabstrip.wrapper.css("display") != "none", "TabStrip is visible");
-});
+            var tabstrip = dom.data("kendoTabStrip");
 
-it("binding visible to false hides the tabstrip", function() {
-    dom = $('<div data-role="tabstrip" data-bind="visible: visible"></div>');
+            assert.isOk(tabstrip.wrapper.css("display") != "none", "TabStrip is visible");
+        });
 
-    kendo.bind(dom, { visible: false });
+        it("binding visible to false hides the tabstrip", function() {
+            dom = $('<div data-role="tabstrip" data-bind="visible: visible"></div>');
 
-    var tabstrip = dom.data("kendoTabStrip");
+            kendo.bind(dom, { visible: false });
 
-    assert.isOk(tabstrip.wrapper.css("display") == "none", "TabStrip is not visible");
-});
+            var tabstrip = dom.data("kendoTabStrip");
 
-it("binding invisible to true hides the tabstrip", function() {
-    dom = $('<div data-role="tabstrip" data-bind="invisible: invisible"></div>');
+            assert.isOk(tabstrip.wrapper.css("display") == "none", "TabStrip is not visible");
+        });
 
-    kendo.bind(dom, { invisible: true });
+        it("binding invisible to true hides the tabstrip", function() {
+            dom = $('<div data-role="tabstrip" data-bind="invisible: invisible"></div>');
 
-    var tabstrip = dom.data("kendoTabStrip");
+            kendo.bind(dom, { invisible: true });
 
-    assert.isOk(tabstrip.wrapper.css("display") == "none", "TabStrip is invisible");
-});
+            var tabstrip = dom.data("kendoTabStrip");
 
-it("binding invisible to false shows the tabstrip", function() {
-    dom = $('<div data-role="tabstrip" data-bind="invisible: invisible"></div>');
+            assert.isOk(tabstrip.wrapper.css("display") == "none", "TabStrip is invisible");
+        });
 
-    kendo.bind(dom, { invisible: false });
+        it("binding invisible to false shows the tabstrip", function() {
+            dom = $('<div data-role="tabstrip" data-bind="invisible: invisible"></div>');
 
-    var tabstrip = dom.data("kendoTabStrip");
+            kendo.bind(dom, { invisible: false });
 
-    assert.isOk(tabstrip.wrapper.css("display") != "none", "TabStrip is not invisible");
-});
+            var tabstrip = dom.data("kendoTabStrip");
 
-it("tab is correctly selected based on value binding", function() {
-    dom = $('<div data-role="tabstrip" data-text-field="Name" data-content-field="Content" data-bind="source: dataSource, value: selected"></div>');
+            assert.isOk(tabstrip.wrapper.css("display") != "none", "TabStrip is not invisible");
+        });
 
-    kendo.bind(dom, {selected: "Tab1",dataSource: [{ Name: "Tab1", Content: "Tab1: content" },{ Name: "Tab2", Content: "Tab2: content" }]});
+        it("tab is correctly selected based on value binding", function() {
+            dom = $('<div data-role="tabstrip" data-text-field="Name" data-content-field="Content" data-bind="source: dataSource, value: selected"></div>');
 
-    var tabstrip = dom.data("kendoTabStrip");
+            kendo.bind(dom, { selected: "Tab1", dataSource: [{ Name: "Tab1", Content: "Tab1: content" }, { Name: "Tab2", Content: "Tab2: content" }] });
 
-    assert.isOk(tabstrip.element.find("li").first().hasClass("k-state-active"));
-});
+            var tabstrip = dom.data("kendoTabStrip");
+
+            assert.isOk(tabstrip.element.find("li").first().hasClass("k-active"));
+        });
     });
 }());

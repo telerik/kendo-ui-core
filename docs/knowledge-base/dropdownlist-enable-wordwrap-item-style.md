@@ -1,8 +1,8 @@
 ---
 title: Enable Word-Wrapping for DropDownList Items
-description: An example on how to wrap long words in the Kendo UI DropDownList without adding a horizontal scrollbar and while keeping its width.
+description: Learn how to wrap long words in the Kendo UI DropDownList without adding a horizontal scrollbar and while keeping its width.
 type: how-to
-page_title: Prevent Scrolling and Changing Width with Word-Wrap | Kendo UI DropDownList
+page_title: Prevent Scrolling and Changing Width with Word-Wrap - Kendo UI DropDownList for jQuery
 slug: dropdownlist-enable-wordwrap-item-style
 tags: dropdownlist, enable, wordwrap, item, style
 ticketid: 1160023
@@ -14,11 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>DropDownList for Progress® Kendo UI®</td>
- </tr>
- <tr>
-  <td>Product Version</td>
-  <td>2018.2.516</td>
+  <td>Progress® Kendo UI® DropDownList for jQuery</td>
  </tr>
 </table>
 
@@ -33,6 +29,7 @@ Implement [word-wrapping](https://www.w3schools.com/cssref/css3_pr_word-wrap.asp
 ```
   #myDropDownList-list.k-popup .k-list .k-item{
     word-wrap: break-word;
+    display: block !important;
   }
 ```
 
@@ -43,6 +40,7 @@ The following example demonstrates how to wrap words in the DropDownList while t
       /*For a specific Kendo UI DropDownList*/
       #myDropDownList-list.k-popup .k-list .k-item{
         word-wrap: break-word;
+        display: block !important;
       }
     </style>
 

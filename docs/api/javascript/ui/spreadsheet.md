@@ -141,6 +141,61 @@ The proxy will receive a POST request with the following parameters in the reque
         spreadsheet.saveAsExcel();
     </script>
 
+### images `Object` *(default: null)*
+
+An object containing any images used in the Spreadsheet.  The keys
+should be image ID-s (they are referenced by this ID in
+[`sheets.drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings)) and the values
+should be image URLs.
+
+The image URLs can be either
+[data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs),
+in which case the images are fully contained by the JSON, or can be external
+URLs.
+
+Note that when external URLs are used, they should reside on the same domain, or
+the server must be configured with the proper
+[CORS headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS), for the
+Spreadsheet to be able to fetch binary image data using a XMLHttpRequest.  If it
+cannot fetch the image, export to Excel or PDF might not work.
+
+#### Example - declaring images in JSON
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            images: {
+                "1": "data:image/png;base64,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"
+            },
+
+            sheets: [{
+                name: "Sample image",
+                drawings: [
+                    {
+                        topLeftCell: "C2",
+                        offsetX: 32,
+                        offsetY: 10,
+                        width: 48,
+                        height: 48,
+                        image: "1"
+                    }, {
+                        topLeftCell: "E3",
+                        offsetX: 16,
+                        offsetY: 10,
+                        width: 48,
+                        height: 48,
+                        image: "1"
+                    }
+                ]
+            }]
+        });
+    </script>
+
+Note, we can reference the same image ID in two different drawings,
+anchored to cells C2 and E3.  See the
+[`sheets.drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings) property for more
+information about a drawing's properties.
+
 ### pdf `Object`
 
 Configures the PDF export settings of the Spreadsheet.
@@ -203,6 +258,11 @@ The author of the PDF document.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -371,6 +431,14 @@ Indicates whether to center the content horizontally. For more information, refe
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -666,6 +734,15 @@ The default row height in pixels.
 
 The number of rows in the document.
 
+#### Example - configure the rows count
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            rows: 300
+        });
+    </script>
+
 ### sheets `Array`
 
 An array which defins the document sheets and their content.
@@ -673,6 +750,19 @@ An array which defins the document sheets and their content.
 ### sheets.activeCell `String`
 
 The active cell in the sheet, for example, `A1`.
+
+#### Example - configure the initially active cell
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            activeCell: "C3"
+          }
+        ]
+      });
+    </script>
 
 ### sheets.name `String`
 
@@ -693,6 +783,34 @@ The width of the column in pixels. Defaults to [`columnWidth`](/api/javascript/u
 ### sheets.dataSource `kendo.data.DataSource`
 
 The DataSource instance for this sheet. For more information, refer to the article on [binding to the DataSource](/web/spreadsheet/import-and-export-data/bind-to-data-source).
+
+### sheets.drawings `Array`
+
+An array which contains the drawings used in this sheet.
+
+### sheets.drawings.topLeftCell `String`
+
+A cell to which the drawing's top-left corner is anchored.
+
+### sheets.drawings.offsetX `Number`
+
+The horizontal offset from the anchor cell's top-left corner, in pixels.
+
+### sheets.drawings.offsetY `Number`
+
+The vertical offset from the anchor cell's top-left corner, in pixels.
+
+### sheets.drawings.width `Number`
+
+The drawing's width in pixels.
+
+### sheets.drawings.height `Number`
+
+The drawing's height in pixels.
+
+### sheets.drawings.image `String`
+
+The ID of the image to display.
 
 ### sheets.filter `Object`
 
@@ -879,7 +997,7 @@ The font color of the cell. Many standard CSS formats are supported. However, th
 
 ### sheets.rows.cells.comment `String`
 
-The comment of the cell — a tooltip that appears when the cell is hovered.
+The comment of the cell - a tooltip that appears when the cell is hovered.
 
 ### sheets.rows.cells.fontFamily `String`
 
@@ -905,9 +1023,30 @@ If set to `false`, disables the cell.
 
 The format of the cell text. For more information, refer to the article on [creating or deleting a custom number format on MS Office](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 
+#### Example - setting the format of a cell
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Order",               
+                rows: [{
+                    cells: [{
+                        value: 12.39, format: "$#,##0.00"
+                    }]
+                }],
+            }]
+        });
+    </script>
+
 ### sheets.rows.cells.formula `String`
 
 The cell formula without the leading equals sign, for example, `A1 * 10`.
+
+### sheets.rows.cells.html `Boolean`
+
+If set to `true`, renders the cell value as HTML. 
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
 ### sheets.rows.cells.index `Number`
 
@@ -934,6 +1073,26 @@ If set to `true`, sets the cell font to underline.
 ### sheets.rows.cells.value `Number|String|Boolean|Date`
 
 The cell value.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            rows: [
+              {
+                cells: [{ value: "Name" },{ value: "age" }]
+              },
+              {
+                cells: [{ value: "Peter" },{ value: 34 }]
+              }
+            ]
+          }
+        ]
+      });
+    </script>
 
 ### sheets.rows.cells.validation `Object`
 
@@ -1250,7 +1409,7 @@ The following list indicates the available tools. The tools which are part of a 
             toolbar: {
                 home: [
                     // for all available options, see the toolbar items configuration
-                    // http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
+                    // https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
                     {
                         type: "button",
                         text: "Custom",
@@ -1344,6 +1503,7 @@ This flag only affects the presentation - the way formulas are entered by the en
     sheet.range('B1').input('=SUM(A1, A2, 3.14)');
 
     // prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 To make the API functions obey `useCultureDecimals`, wrap your code in a call to `sheet.withCultureDecimals`. Assuming a culture where the comma is used for decimals, compare the previous example with the following one.
@@ -1354,10 +1514,12 @@ To make the API functions obey `useCultureDecimals`, wrap your code in a call to
         sheet.range('B1').input('=SUM(A1; A2; 3,14)');
 
         // prints: SUM(A1; A2; 3,14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(sheet.range('B1').formula());
     });
 
     // back to canonical form; this prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 ## Methods
@@ -1374,7 +1536,7 @@ The [sheet](/api/javascript/spreadsheet/sheet) to set as active.
 
 #### Returns
 
-`kendo.spreadsheet.Sheet` - The active sheet.
+`kendo.spreadsheet.Sheet` - The active [sheet](/api/javascript/spreadsheet/sheet).
 
 #### Example - changing the active sheet
 
@@ -1385,6 +1547,42 @@ The [sheet](/api/javascript/spreadsheet/sheet) to set as active.
         });
         var sheets = $("#spreadsheet").data("kendoSpreadsheet").sheets();
         $("#spreadsheet").data("kendoSpreadsheet").activeSheet(sheets[1]);
+    </script>
+
+### addImage
+
+Adds an image to this spreadsheet.
+
+#### Parameters
+
+##### image `Blob|String`
+
+The image to add.  If it's a string it will be interpreted as an URL.
+It can be a data URL, or an external URL.  [Read more
+information](#configuration-images) about image URLs in the
+configuration section.
+
+#### Returns
+
+`String` - The new image ID.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+        var spreadsheet = $("#spreadsheet").kendoSpreadsheet().getKendoSpreadsheet();
+        var imageId = spreadsheet.addImage("data:image/png;base64,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");
+        var sheet = spreadsheet.activeSheet();
+        sheet.batch(function(){
+            sheet.addDrawing({
+                topLeftCell: "B2",
+                offsetX: 0,
+                offsetY: 0,
+                width: 48,
+                height: 48,
+                image: imageId
+            });
+        });
     </script>
 
 ### cellContextMenu
@@ -1418,6 +1616,14 @@ Gets the `contextMenu` instance of the cell.
            });
         });
     </script>
+
+### cleanupImages
+
+Discards the images that are no longer in use.  Note that you cannot
+remove a particular image directly by ID, for it might be used in
+multiple sheets, or they can be referenced by the undo/redo queue.
+This function acts like a "garbage collector" — it checks which images
+are no longer needed, and removes them.
 
 ### rowHeaderContextMenu
 
@@ -1497,7 +1703,7 @@ Returns an array with the sheets in the workbook.
 
 Clears the spreadsheet and populates it with data from the specified Excel (`.xlsx`) file.
 
-> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/installation/prerequisites#jszip-library) for the import from file functionality.
+> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/supporting/export-support#jszip-library) for the import from file functionality.
 
 #### Parameters
 
@@ -1554,7 +1760,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/sp
     </script>
 
     <!-- Load JSZIP library to enable Excel export -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
 
 ### saveAsPDF
 
@@ -1598,7 +1804,7 @@ An `options` object with the same structure as the [`pdf`](/api/javascript/ui/sp
     </script>
 
     <!-- Load Pako library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
 ### sheetByName
 
@@ -1734,9 +1940,43 @@ The new name of the sheet.
 
 `kendo.spreadsheet.Sheet` - The renamed sheet.
 
+### saveJSON
+
+Serializes the workbook in the format that is defined in the
+[configuration](#configuration).  This method does not return the
+JSON, but a `Promise` object which will yield the JSON data when it is
+available.
+
+This method is functionally similar to `toJSON`, but it is also able
+to save the embedded images (this is the reason why it must be
+asynchronous).
+
+#### Returns
+
+`Promise` - A Promise object which will be resolved with the JSON
+data.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <pre id="result"></pre>
+    <script>
+        var spreadsheet = $("#spreadsheet").kendoSpreadsheet().getKendoSpreadsheet();
+        spreadsheet
+            .saveJSON()
+            .then(function(data){
+                var json = JSON.stringify(data, null, 2);
+                $("#result").text(json);
+            });
+    </script>
+
 ### toJSON
 
 Serializes the workbook in the format that is defined in the [configuration](#configuration).
+
+Note that this method is unable to serialize embedded images.  To
+properly save images you need to use [`saveJSON`](#methods-saveJSON),
+which is asynchronous (returns a `Promise`).
 
 #### Example - storing the spreadsheet to JSON
 
@@ -1772,7 +2012,7 @@ Serializes the workbook in the format that is defined in the [configuration](#co
 
 ### fromJSON
 
-Loads the workbook data from an object with the format that si defined in the [configuration](#configuration).
+Loads the workbook data from an object with the format that is defined in the [configuration](#configuration).
 
 > All existing sheets and their data will be lost.
 
@@ -1807,7 +2047,9 @@ The object from where data will be loaded. This has to be the deserialized objec
 
 ### defineName
 
-Defines a custom name that will be  available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
+Defines a custom name that will be available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
+
+> If the name of the sheet consists of multiple words, separated by space, the sheet name should be wrapped in quotes `'Sheet Name With Space'!$A$1`.
 
 #### Parameters
 
@@ -2138,6 +2380,87 @@ The widget instance which fired the event.
 
 The [`Range`](/api/javascript/spreadsheet/range) whose format is changed.
 
+### changing
+
+Triggered when a value or validation in the Spreadsheet is about to be changed upon user interaction.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.range `kendo.spreadsheet.Range`
+
+The [Range](/api/javascript/spreadsheet/range) which values are about to be changed in the spreadsheet.
+
+##### e.changeType `String`
+
+The type of command that triggered the changing event. The possible types are:
+* `autoFill` - when the user uses the Spreadsheet AutoFill functionality.
+* `clear` - when the user clears content by selecting a cell / range and pressing Delete or Backspace keys.
+* `cut` - when the user cuts a range from the Spreadsheet.
+* `edit` - when the user types in a cell.
+* `paste` - when the user pastes some data in a range.
+* `validation` - when the user alters validation for a cell or range of cells.
+
+##### e.data `Object`
+
+The new value(s) that is(are) about to be applied to the range. Depending on the changeType the data parameter will be the following:
+* `autoFill` - the data will be an `Array` of `Arrays` holding all properties for the cells (including the values) that are about to be changed.
+* `clear` - the data will be an `Array` of `Arrays` holding null values.
+* `cut` - the data will be an `Array` of `Arrays` holding empty objects.
+* `edit` - the data will be a `String`.
+* `paste` - the data will be an `Array` of `Arrays` holding all properties for the cells (including the values) that are about to be changed.
+* `validation` - the data will hold the new `validation Object`.
+
+##### e.preventDefault `Function`
+
+If invoked the changing will not be performed and no changes will be applied to the sheet.
+
+#### Example - subscribe to the "changing" event during initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{               
+          rows: [{           
+            cells: [
+              { value: "First"},
+              { value: "Second"},
+              { value: "Third"}
+            ]
+          }]
+        }],
+        changing: function(e){
+        		console.log("The netered value is: " + e.data)
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "changing" event after initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+      function spread_changing(e){
+        console.log("The netered value is: " + e.data)
+      }
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{               
+          rows: [{           
+            cells: [
+              { value: "First"},
+              { value: "Second"},
+              { value: "Third"}
+            ]
+          }]
+        }]        
+      });
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      spreadsheet.bind("changing", spread_changing);
+    </script>
+
 ### change
 
 Triggered when a value in the Spreadsheet has been changed. Introduced in the 2016.Q1.SP1 release.
@@ -2154,7 +2477,7 @@ The [`Range`](/api/javascript/spreadsheet/range) that triggered the change.
 
 ### render
 
-Triggered after the widget has completed rendering.
+Triggered after the widget has completed rendering. The event will also fire when a cell is selected or when the Spreadsheet's tools (bold, italic) are used, as the target element is re-generated with new styles (e.g background-color, box-shadow, font-weight, etc.).
 
 #### Event Data
 
@@ -2259,7 +2582,7 @@ If invoked, the Spreadsheet will not import the file.
 
 A promise that will be resolved when the import operation completes.
 
-The [progress handler](http://api.jquery.com/deferred.progress/) of the promise will be called periodically with the following arguments:
+The [progress handler](https://api.jquery.com/deferred.progress/) of the promise will be called periodically with the following arguments:
 * `sheet` - The current sheet. An instance of [`kendo.spreadsheet.Sheet`](/api/javascript/spreadsheet/sheet).
 * `progress` - A number if the range is from `0` to `1` which indicates the progress of the current import operation.
 
@@ -2271,6 +2594,7 @@ The [progress handler](http://api.jquery.com/deferred.progress/) of the promise 
             excelImport: function(e) {
                 e.promise
                 .progress(function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(kendo.format("{0:P} complete", e.progress));
                 })
                 .done(function() {

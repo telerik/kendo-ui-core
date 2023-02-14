@@ -1,10 +1,11 @@
 /* JS for All Kendo UI Components Simplified Chinese (zh-CN) Language Pack | Written by IKKI | 2018-02-03 */
-(function ($, undefined) {
+(function($, undefined) {
 
     /* FlatColorPicker messages */
+
     if (kendo.ui.FlatColorPicker) {
         kendo.ui.FlatColorPicker.prototype.options.messages =
-            $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages,{
+            $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
                 "apply": "确定",
                 "cancel": "取消",
                 "noColor": "无颜色",
@@ -16,7 +17,7 @@
     /* ColorPicker messages */
     if (kendo.ui.ColorPicker) {
         kendo.ui.ColorPicker.prototype.options.messages =
-            $.extend(true, kendo.ui.ColorPicker.prototype.options.messages,{
+            $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
                 "apply": "确定",
                 "cancel": "取消",
                 "noColor": "无颜色",
@@ -28,11 +29,15 @@
     /* ColumnMenu messages */
     if (kendo.ui.ColumnMenu) {
         kendo.ui.ColumnMenu.prototype.options.messages =
-            $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
+            $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages, {
                 "sortAscending": "升序排列",
                 "sortDescending": "降序排列",
                 "filter": "筛选",
+                "column": "字段列",
                 "columns": "字段列",
+                "columnVisibility": "字段列可见性",
+                "clear": "清空",
+                "cancel": "取消",
                 "done": "完成",
                 "settings": "列设置",
                 "lock": "锁定",
@@ -43,7 +48,7 @@
     /* DateRangePicker messages */
     if (kendo.ui.DateRangePicker) {
         kendo.ui.DateRangePicker.prototype.options.messages =
-            $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages,{
+            $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages, {
                 "startLabel": "开始",
                 "endLabel": "结束"
             });
@@ -52,7 +57,7 @@
     /* Editor messages */
     if (kendo.ui.Editor) {
         kendo.ui.Editor.prototype.options.messages =
-            $.extend(true, kendo.ui.Editor.prototype.options.messages,{
+            $.extend(true, kendo.ui.Editor.prototype.options.messages, {
                 "bold": "粗体",
                 "italic": "斜体",
                 "underline": "下划线",
@@ -71,7 +76,7 @@
                 "unlink": "删除链接",
                 "insertImage": "插入图片",
                 "insertFile": "插入文件",
-                "insertHtml": "插入HTML",
+                "insertHtml": "插入代码块",
                 "viewHtml": "源代码编辑",
                 "fontName": "请选择字体",
                 "fontNameInherit": "（默认字体）",
@@ -98,7 +103,8 @@
                 "imageWidth": "图片宽度（单位px）",
                 "imageHeight": "图片高度（单位px）",
                 "fileWebAddress": "文件链接地址",
-                "fileTitle": "文件标题",
+                "fileText": "文件显示文字",
+                "fileTitle": "文件悬停文字",
                 "linkWebAddress": "链接地址",
                 "linkText": "链接文字",
                 "linkToolTip": "链接提示",
@@ -117,6 +123,10 @@
                 "addRowBelow": "在下方插入行",
                 "deleteRow": "删除行",
                 "deleteColumn": "删除列",
+                "mergeCellsHorizontally": "水平合并单元格",
+                "mergeCellsVertically": "垂直合并单元格",
+                "splitCellHorizontally": "水平拆分单元格",
+                "splitCellVertically": "垂直拆分单元格",
                 "tableWizard": "表格向导",
                 "tableTab": "表格",
                 "cellTab": "单元格",
@@ -155,7 +165,30 @@
                 "rows": "行",
                 "selectAllCells": "选择所有单元格",
                 "exportAs": "导出",
-                "import": "导入"
+                "import": "导入",
+                "print": "打印"
+            });
+        kendo.ui.Editor.defaultTools.pdf.options.template.options =
+            $.extend(true, kendo.ui.Editor.defaultTools.pdf.options.template.options, {
+                "title": "导出 PDF"
+            });
+    }
+
+    /* ImageBrowser messages */
+    if (kendo.ui.ImageBrowser) {
+        kendo.ui.ImageBrowser.prototype.options.messages =
+            $.extend(true, kendo.ui.ImageBrowser.prototype.options.messages, {
+                "uploadFile": "上传图片",
+                "orderBy": "排序方式",
+                "orderByName": "按名称排序",
+                "orderBySize": "按大小排序",
+                "directoryNotFound": "文件夹未找到",
+                "emptyFolder": "文件夹为空",
+                "deleteFile": "你确定要删除【{0}】这张图片吗？",
+                "invalidFileType": "你上传的图片格式 {0} 是无效的，支持的图片类型为：{1}",
+                "overwriteFile": "当前文件夹已存在文件名为【{0}】的图片，是否覆盖？",
+                "dropFilesHere": "将图片拖拽到此处上传",
+                "search": "搜索"
             });
     }
 
@@ -177,22 +210,74 @@
             });
     }
 
+    /* Filter messages */
+    if (kendo.ui.Filter) {
+        kendo.ui.Filter.prototype.options.messages =
+            $.extend(true, kendo.ui.Filter.prototype.options.messages, {
+                "and": "与",
+                "or": "或",
+                "apply": "确定",
+                "close": "关闭",
+                "addExpression": "添加表达式",
+                "addGroup": "添加分组",
+                "fields": "字段",
+                "operators": "运算符"
+            });
+        kendo.ui.Filter.prototype.options.operators =
+            $.extend(true, kendo.ui.Filter.prototype.options.operators, {
+                "string": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "startswith": "开头是",
+                    "contains": "包含",
+                    "doesnotcontain": "不含",
+                    "endswith": "结尾是",
+                    "isnull": "为空",
+                    "isnotnull": "非空",
+                    "isempty": "空字符串",
+                    "isnotempty": "非空字符串",
+                    "isnullorempty": "无值",
+                    "isnotnullorempty": "有值"
+                },
+                "number": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "gte": "大于等于",
+                    "gt": "大于",
+                    "lte": "小于等于",
+                    "lt": "小于",
+                    "isnull": "为空",
+                    "isnotnull": "非空"
+                },
+                "date": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "gte": "晚于等于",
+                    "gt": "晚于",
+                    "lte": "早于等于",
+                    "lt": "早于",
+                    "isnull": "为空",
+                    "isnotnull": "非空"
+                },
+                "boolean": {
+                    "eq": "等于",
+                    "neq": "不等于"
+                }
+            });
+    }
+
     /* FilterCell messages */
     if (kendo.ui.FilterCell) {
         kendo.ui.FilterCell.prototype.options.messages =
-            $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+            $.extend(true, kendo.ui.FilterCell.prototype.options.messages, {
                 "isTrue": "是",
                 "isFalse": "否",
                 "filter": "筛选",
                 "clear": "清空",
                 "operator": "运算符"
             });
-    }
-
-    /* FilterCell operators */
-    if (kendo.ui.FilterCell) {
         kendo.ui.FilterCell.prototype.options.operators =
-            $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+            $.extend(true, kendo.ui.FilterCell.prototype.options.operators, {
                 "string": {
                     "eq": "等于",
                     "neq": "不等于",
@@ -239,7 +324,7 @@
     /* FilterMenu messages */
     if (kendo.ui.FilterMenu) {
         kendo.ui.FilterMenu.prototype.options.messages =
-            $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
+            $.extend(true, kendo.ui.FilterMenu.prototype.options.messages, {
                 "info": "筛选条件：",
                 "title": "筛选条件：",
                 "isTrue": "是",
@@ -254,14 +339,12 @@
                 "additionalValue": "附加值",
                 "additionalOperator": "附加运算",
                 "logic": "筛选逻辑",
-                "cancel": "取消"
+                "cancel": "取消",
+                "done": "完成",
+                "into": "在"
             });
-    }
-
-    /* FilterMenu operator messages */
-    if (kendo.ui.FilterMenu) {
         kendo.ui.FilterMenu.prototype.options.operators =
-            $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
+            $.extend(true, kendo.ui.FilterMenu.prototype.options.operators, {
                 "string": {
                     "eq": "等于",
                     "neq": "不等于",
@@ -308,20 +391,23 @@
     /* FilterMultiCheck messages */
     if (kendo.ui.FilterMultiCheck) {
         kendo.ui.FilterMultiCheck.prototype.options.messages =
-            $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+            $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages, {
                 "checkAll": "全选",
-                "clear": "清空",
+                "clearAll": "全部清除",
+                "clear": "清除",
                 "filter": "筛选",
                 "search": "搜索",
                 "cancel": "取消",
-                "selectedItemsFormat": "已选择 {0} 条数据"
+                "selectedItemsFormat": "已选择 {0} 条数据",
+                "done": "完成",
+                "into": "在"
             });
     }
 
     /* Gantt messages */
     if (kendo.ui.Gantt) {
         kendo.ui.Gantt.prototype.options.messages =
-            $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
+            $.extend(true, kendo.ui.Gantt.prototype.options.messages, {
                 "actions": {
                     "addChild": "新增子任务",
                     "append": "新增任务",
@@ -336,7 +422,7 @@
                 "deleteTaskConfirmation": "你确定要删除这项任务吗？",
                 "destroy": "删除",
                 "editor": {
-                    "assingButton": "资源分配",
+                    "assignButton": "资源分配",
                     "editorTitle": "编辑任务",
                     "end": "结束时间",
                     "percentComplete": "完成进度",
@@ -362,7 +448,7 @@
     /* GanttTimeline messages */
     if (kendo.ui.GanttTimeline) {
         kendo.ui.GanttTimeline.prototype.options.messages =
-            $.extend(true, kendo.ui.GanttTimeline.prototype.options.messages,{
+            $.extend(true, kendo.ui.GanttTimeline.prototype.options.messages, {
                 "views": {
                     "day": "日视图",
                     "week": "周视图",
@@ -377,7 +463,7 @@
     /* Grid messages */
     if (kendo.ui.Grid) {
         kendo.ui.Grid.prototype.options.messages =
-            $.extend(true, kendo.ui.Grid.prototype.options.messages,{
+            $.extend(true, kendo.ui.Grid.prototype.options.messages, {
                 "commands": {
                     "cancel": "取消",
                     "canceledit": "取消",
@@ -388,7 +474,8 @@
                     "pdf": "导出 PDF",
                     "save": "保存",
                     "select": "选择",
-                    "update": "更新"
+                    "update": "更新",
+                    "search": "搜索..."
                 },
                 "editable": {
                     "cancelDelete": "取消删除",
@@ -396,24 +483,28 @@
                     "confirmDelete": "确定删除"
                 },
                 "noRecords": "无相关数据",
-                "expandCollapseColumnHeader": "",
+                "expandCollapseColumnHeader": "...",
                 "groupHeader": "按 Ctrl + 空格 进行分组",
                 "ungroupHeader": "按 Ctrl + 空格 取消分组"
+            });
+        kendo.ui.Grid.prototype.options =
+            $.extend(true, kendo.ui.Grid.prototype.options, {
+                "noRecords": "无相关数据"
             });
     }
 
     /* Groupable messages */
     if (kendo.ui.Groupable) {
         kendo.ui.Groupable.prototype.options.messages =
-            $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
+            $.extend(true, kendo.ui.Groupable.prototype.options.messages, {
                 "empty": "将字段列名称拖拽到此处可进行该列的分组显示"
             });
     }
 
-    /* NumericTextBox messages */
+    /* NumericTextBox options */
     if (kendo.ui.NumericTextBox) {
         kendo.ui.NumericTextBox.prototype.options =
-            $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
+            $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
                 "upArrowText": "增加",
                 "downArrowText": "减少"
             });
@@ -422,7 +513,7 @@
     /* MediaPlayer messages */
     if (kendo.ui.MediaPlayer) {
         kendo.ui.MediaPlayer.prototype.options.messages =
-            $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+            $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages, {
                 "pause": "暂停",
                 "play": "播放",
                 "mute": "静音",
@@ -435,7 +526,7 @@
     /* Pager messages */
     if (kendo.ui.Pager) {
         kendo.ui.Pager.prototype.options.messages =
-            $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+            $.extend(true, kendo.ui.Pager.prototype.options.messages, {
                 "allPages": "全部",
                 "display": "{0} - {1} 条　共 {2} 条数据",
                 "empty": "无相关数据",
@@ -454,7 +545,7 @@
     /* TreeListPager messages */
     if (kendo.ui.TreeListPager) {
         kendo.ui.TreeListPager.prototype.options.messages =
-            $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+            $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
                 "allPages": "全部",
                 "display": "{0} - {1} 条　共 {2} 条数据",
                 "empty": "无相关数据",
@@ -473,8 +564,8 @@
     /* PivotGrid messages */
     if (kendo.ui.PivotGrid) {
         kendo.ui.PivotGrid.prototype.options.messages =
-            $.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
-                "measureFields": "拖拽数据字段到此处",
+            $.extend(true, kendo.ui.PivotGrid.prototype.options.messages, {
+                "measureFields": "拖拽值字段到此处",
                 "columnFields": "拖拽列字段到此处",
                 "rowFields": "拖拽行字段到此处"
             });
@@ -483,7 +574,7 @@
     /* PivotFieldMenu messages */
     if (kendo.ui.PivotFieldMenu) {
         kendo.ui.PivotFieldMenu.prototype.options.messages =
-            $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
+            $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
                 "info": "筛选条件：",
                 "sortAscending": "升序排列",
                 "sortDescending": "降序排列",
@@ -508,7 +599,7 @@
     /* PivotSettingTarget messages */
     if (kendo.ui.PivotSettingTarget) {
         kendo.ui.PivotSettingTarget.prototype.options.messages =
-            $.extend(true, kendo.ui.PivotSettingTarget.prototype.options.messages,{
+            $.extend(true, kendo.ui.PivotSettingTarget.prototype.options.messages, {
                 "empty": "拖拽字段到此处"
             });
     }
@@ -516,11 +607,11 @@
     /* PivotConfigurator messages */
     if (kendo.ui.PivotConfigurator) {
         kendo.ui.PivotConfigurator.prototype.options.messages =
-            $.extend(true, kendo.ui.PivotConfigurator.prototype.options.messages,{
-                "measures": "拖拽数据字段到此处",
+            $.extend(true, kendo.ui.PivotConfigurator.prototype.options.messages, {
+                "measures": "拖拽值字段到此处",
                 "columns": "拖拽列字段到此处",
                 "rows": "拖拽行字段到此处",
-                "measuresLabel": "量",
+                "measuresLabel": "值",
                 "columnsLabel": "列",
                 "rowsLabel": "行",
                 "fieldsLabel": "字段"
@@ -530,7 +621,7 @@
     /* RecurrenceEditor messages */
     if (kendo.ui.RecurrenceEditor) {
         kendo.ui.RecurrenceEditor.prototype.options.messages =
-            $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+            $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
                 "recurrenceEditorTitle": "周期类型事件编辑",
                 "frequencies": {
                     "never": "从不",
@@ -591,57 +682,104 @@
     /* MobileRecurrenceEditor messages */
     if (kendo.ui.MobileRecurrenceEditor) {
         kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
-            $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages,{
+            $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
+                "recurrenceEditorTitle": "周期类型事件编辑",
                 "cancel": "取消",
                 "update": "保存",
                 "endTitle": "周期截止",
                 "repeatTitle": "周期模式",
                 "headerTitle": "周期事件",
+                "frequencies": {
+                    "never": "从不",
+                    "hourly": "每小时",
+                    "daily": "每天",
+                    "weekly": "每周",
+                    "monthly": "每月",
+                    "yearly": "每年"
+                },
+                "hourly": {
+                    "repeatEvery": "周期",
+                    "interval": " 小时"
+                },
+                "daily": {
+                    "repeatEvery": "周期",
+                    "interval": " 天"
+                },
+                "weekly": {
+                    "repeatEvery": "周期",
+                    "repeatOn": "重复于",
+                    "interval": " 周"
+                },
+                "monthly": {
+                    "repeatBy": "重复到：",
+                    "repeatEvery": "周期",
+                    "repeatOn": "重复于",
+                    "interval": " 月",
+                    "dayOfMonth": "几号",
+                    "dayOfWeek": "周几",
+                    "every": "每",
+                    "day": "几号 "
+                },
+                "yearly": {
+                    "repeatBy": "重复到：",
+                    "repeatEvery": "周期",
+                    "repeatOn": "重复于",
+                    "interval": " 年",
+                    "dayOfMonth": "几号",
+                    "dayOfWeek": "周几",
+                    "every": "每",
+                    "month": "月",
+                    "day": "天",
+                    "of": " 在 "
+                },
                 "end": {
                     "patterns": {
                         "never": "从不",
-                        "after": "重复...",
-                        "on": "止于..."
+                        "after": "重复 ",
+                        "on": "止于 "
                     },
+                    "label": "截止",
+                    "mobileLabel": "截止",
                     "never": "从不",
-                    "after": "周期后截止",
-                    "on": "周期时截止"
+                    "after": "重复 ",
+                    "occurrence": " 次后",
+                    "on": "止于 "
                 },
-                "daily": {
-                    "interval": ""
+                "offsetPositions": {
+                    "first": "第一",
+                    "second": "第二",
+                    "third": "第三",
+                    "fourth": "第四",
+                    "last": "最后一"
                 },
-                "hourly": {
-                    "interval": ""
-                },
-                "weekly": {
-                    "interval": ""
-                },
-                "monthly": {
-                    "interval": "",
-                    "repeatBy": "重复到：",
-                    "dayOfMonth": "几号",
-                    "dayOfWeek": "周几",
-                    "repeatEvery": "全部重复",
-                    "every": "每",
-                    "day": "天"
-                },
-                "yearly": {
-                    "interval": "",
-                    "repeatBy": "重复到：",
-                    "dayOfMonth": "几号",
-                    "dayOfWeek": "周几",
-                    "repeatEvery": "全部重复",
-                    "every": "每",
-                    "month": "月",
-                    "day": "天"
+                "weekdays": {
+                    "day": "天",
+                    "weekday": "工作日",
+                    "weekend": "周末"
                 }
+            });
+    }
+
+    /* TimezoneEditor options */
+    if (kendo.ui.TimezoneEditor) {
+        kendo.ui.TimezoneEditor.prototype.options =
+            $.extend(true, kendo.ui.TimezoneEditor.prototype.options, {
+                "optionLabel": "无时区"
+            });
+    }
+
+    /* MobileTimezoneEditor options */
+    if (kendo.ui.MobileTimezoneEditor) {
+        kendo.ui.MobileTimezoneEditor.prototype.options =
+            $.extend(true, kendo.ui.MobileTimezoneEditor.prototype.options, {
+                "optionLabel": "无时区"
             });
     }
 
     /* Scheduler messages */
     if (kendo.ui.Scheduler) {
         kendo.ui.Scheduler.prototype.options.messages =
-            $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
+            $.extend(true, kendo.ui.Scheduler.prototype.options.messages, {
                 "allDay": "全天",
                 "date": "日期",
                 "event": "事件",
@@ -706,10 +844,92 @@
             });
     }
 
+    if (kendo.ui.DayView) {
+        kendo.ui.DayView.prototype.options.messages =
+            $.extend(true, kendo.ui.DayView.prototype.options.messages, {
+                "allDay": "全天",
+                "showFullDay": "显示全天",
+                "showWorkDay": "显示工作时间"
+            });
+    }
+
+    if (kendo.ui.MultiDayView) {
+        kendo.ui.MultiDayView.prototype.options.messages =
+            $.extend(true, kendo.ui.MultiDayView.prototype.options.messages, {
+                "allDay": "全天",
+                "showFullDay": "显示全天",
+                "showWorkDay": "显示工作时间"
+            });
+    }
+
+    if (kendo.ui.WeekView) {
+        kendo.ui.WeekView.prototype.options.messages =
+            $.extend(true, kendo.ui.WeekView.prototype.options.messages, {
+                "allDay": "全天",
+                "showFullDay": "显示全天",
+                "showWorkDay": "显示工作时间"
+            });
+    }
+
+    if (kendo.ui.WorkWeekView) {
+        kendo.ui.WorkWeekView.prototype.options.messages =
+            $.extend(true, kendo.ui.WorkWeekView.prototype.options.messages, {
+                "allDay": "全天",
+                "showFullDay": "显示全天",
+                "showWorkDay": "显示工作时间"
+            });
+    }
+
+    if (kendo.ui.AgendaView) {
+        kendo.ui.AgendaView.prototype.options.messages =
+            $.extend(true, kendo.ui.AgendaView.prototype.options.messages, {
+                "event": "事件",
+                "date": "日期",
+                "time": "时间",
+                "allDay": "全天"
+            });
+    }
+
+    if (kendo.ui.TimelineView) {
+        kendo.ui.TimelineView.prototype.options.messages =
+            $.extend(true, kendo.ui.TimelineView.prototype.options.messages, {
+                "defaultRowText": "全部事件",
+                "showFullDay": "显示全天",
+                "showWorkDay": "显示工作时间"
+            });
+    }
+
+    if (kendo.ui.TimelineWeekView) {
+        kendo.ui.TimelineWeekView.prototype.options.messages =
+            $.extend(true, kendo.ui.TimelineWeekView.prototype.options.messages, {
+                "defaultRowText": "全部事件",
+                "showFullDay": "显示全天",
+                "showWorkDay": "显示工作时间"
+            });
+    }
+
+    if (kendo.ui.TimelineWorkWeekView) {
+        kendo.ui.TimelineWorkWeekView.prototype.options.messages =
+            $.extend(true, kendo.ui.TimelineWorkWeekView.prototype.options.messages, {
+                "defaultRowText": "全部事件",
+                "showFullDay": "显示全天",
+                "showWorkDay": "显示工作时间"
+            });
+    }
+
+    if (kendo.ui.TimelineMonthView) {
+        kendo.ui.TimelineMonthView.prototype.options.messages =
+            $.extend(true, kendo.ui.TimelineMonthView.prototype.options.messages, {
+                "defaultRowText": "全部事件",
+                "showFullDay": "显示全天",
+                "showWorkDay": "显示工作时间"
+            });
+    }
+
     /* Spreadsheet messages */
     if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
         kendo.spreadsheet.messages.borderPalette =
-            $.extend(true, kendo.spreadsheet.messages.borderPalette,{
+            $.extend(true, kendo.spreadsheet.messages.borderPalette, {
                 "allBorders": "内外框线",
                 "insideBorders": "内框线",
                 "insideHorizontalBorders": "横向内框线",
@@ -719,17 +939,13 @@
                 "topBorder": "上框线",
                 "rightBorder": "右框线",
                 "bottomBorder": "下框线",
-                "noBorders": "无框线",
-                "reset": "无填充颜色",
-                "customColor": "其他颜色...",
-                "apply": "确定",
-                "cancel": "取消"
+                "noBorders": "无框线"
             });
     }
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
         kendo.spreadsheet.messages.dialogs =
-            $.extend(true, kendo.spreadsheet.messages.dialogs,{
+            $.extend(true, kendo.spreadsheet.messages.dialogs, {
                 "apply": "确定",
                 "save": "保存",
                 "cancel": "取消",
@@ -757,7 +973,7 @@
                 "alignmentDialog": {
                     "title": "对齐",
                     "buttons": {
-                        "justtifyLeft": "左对齐",
+                        "justifyLeft": "左对齐",
                         "justifyCenter": "水平居中",
                         "justifyRight": "右对齐",
                         "justifyFull": "两端对齐",
@@ -846,6 +1062,37 @@
                 },
                 "exportAsDialog": {
                     "title": "导出...",
+                    "defaultFileName": "工作簿",
+                    "xlsx": {
+                        "description": "Excel 工作簿(.xlsx)"
+                    },
+                    "pdf": {
+                        "description": "便携式文档格式(.pdf)",
+                        "area": {
+                            "workbook": "整个工作簿",
+                            "sheet": "活动工作表",
+                            "selection": "选定区域"
+                        },
+                        "paper": {
+                            "a2": "A2 (420 mm × 594 mm)",
+                            "a3": "A3 (297 mm x 420 mm)",
+                            "a4": "A4 (210 mm x 297 mm)",
+                            "a5": "A5 (148 mm x 210 mm)",
+                            "b3": "B3 (353 mm × 500 mm)",
+                            "b4": "B4 (250 mm x 353 mm)",
+                            "b5": "B5 (176 mm x 250 mm)",
+                            "folio": 'Folio (8.5" x 13")',
+                            "legal": 'Legal (8.5" x 14")',
+                            "letter": 'Letter (8.5" x 11")',
+                            "tabloid": 'Tabloid (11" x 17")',
+                            "executive": 'Executive (7.25" x 10.5")'
+                        },
+                        "margin": {
+                            "normal": "普通",
+                            "narrow": "窄",
+                            "wide": "宽"
+                        }
+                    },
                     "labels": {
                         "scale": "缩放",
                         "fit": "调整为一页",
@@ -867,6 +1114,9 @@
                 },
                 "rangeDisabledDialog": {
                     "errorMessage": "指定范围包含禁用单元格。"
+                },
+                "intersectsArrayDialog": {
+                    "errorMessage": "不能更改数组的一部分"
                 },
                 "incompatibleRangesDialog": {
                     "errorMessage": "范围不匹配"
@@ -899,13 +1149,26 @@
                         "url": "链接地址",
                         "removeLink": "移除链接"
                     }
+                },
+                "insertCommentDialog": {
+                    "title": "插入注释",
+                    "labels": {
+                        "comment": "注释",
+                        "removeComment": "移除注释"
+                    }
+                },
+                "insertImageDialog": {
+                    "title": "插入图片",
+                    "info": "将图片拖到此处或点击选择",
+                    "typeError": "请选择一个JPG、PNG或GIF格式的图片"
                 }
             });
     }
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
         kendo.spreadsheet.messages.filterMenu =
-            $.extend(true, kendo.spreadsheet.messages.filterMenu,{
+            $.extend(true, kendo.spreadsheet.messages.filterMenu, {
+                "all": "全部",
                 "sortAscending": "按A到Z升序排列",
                 "sortDescending": "按Z到A降序排列",
                 "filterByValue": "内容筛选",
@@ -928,10 +1191,10 @@
                         "doesnotmatch": "文本不等于"
                     },
                     "date": {
-                        "eq":  "日期等于",
+                        "eq": "日期等于",
                         "neq": "日期不等于",
-                        "lt":  "日期早于",
-                        "gt":  "日期晚于"
+                        "lt": "日期早于",
+                        "gt": "日期晚于"
                     },
                     "number": {
                         "eq": "数字等于",
@@ -947,7 +1210,7 @@
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
         kendo.spreadsheet.messages.colorPicker =
-            $.extend(true, kendo.spreadsheet.messages.colorPicker,{
+            $.extend(true, kendo.spreadsheet.messages.colorPicker, {
                 "reset": "无填充颜色",
                 "customColor": "其他颜色...",
                 "apply": "确定",
@@ -957,14 +1220,14 @@
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
         kendo.spreadsheet.messages.toolbar =
-            $.extend(true, kendo.spreadsheet.messages.toolbar,{
+            $.extend(true, kendo.spreadsheet.messages.toolbar, {
                 "addColumnLeft": "在左侧插入列",
                 "addColumnRight": "在右侧插入列",
                 "addRowAbove": "在上面插入行",
                 "addRowBelow": "在下面插入行",
                 "alignment": "对齐",
                 "alignmentButtons": {
-                    "justtifyLeft": "左对齐",
+                    "justifyLeft": "左对齐",
                     "justifyCenter": "水平居中",
                     "justifyRight": "右对齐",
                     "justifyFull": "两端对齐",
@@ -1011,6 +1274,8 @@
                     "freezeColumns": "冻结左侧列",
                     "unfreeze": "取消冻结"
                 },
+                "insertComment": "插入注释",
+                "insertImage": "插入图片",
                 "italic": "斜体",
                 "merge": "合并单元格",
                 "mergeButtons": {
@@ -1046,7 +1311,8 @@
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
         kendo.spreadsheet.messages.view =
-            $.extend(true, kendo.spreadsheet.messages.view,{
+            $.extend(true, kendo.spreadsheet.messages.view, {
+                "nameBox": "文件名框",
                 "errors": {
                     "openUnsupported": "不支持的格式，请选择一个后缀名为 .xlsx 的文件。",
                     "shiftingNonblankCells": "由于数据可能丢失无法插入单元格，请选择另一处插入或者从工作表的尾部删除数据。",
@@ -1068,20 +1334,52 @@
             });
     }
 
-    /* Slider messages */
+    if (kendo.spreadsheet && kendo.spreadsheet.messages.workbook) {
+        kendo.spreadsheet.messages.workbook =
+            $.extend(true, kendo.spreadsheet.messages.workbook, {
+                "defaultSheetName": "工作表"
+            });
+    }
+
+    if (kendo.spreadsheet && kendo.spreadsheet.messages.menus) {
+        kendo.spreadsheet.messages.menus =
+            $.extend(true, kendo.spreadsheet.messages.menus, {
+                "cut": "剪切",
+                "copy": "复制",
+                "paste": "粘贴",
+                "merge": "合并单元格",
+                "unmerge": "取消合并",
+                "delete": "删除",
+                "hide": "隐藏",
+                "unhide": "取消隐藏",
+                "bringToFront": "置于顶层",
+                "sendToBack": "置于底层"
+            });
+    }
+
+    /* Slider options */
     if (kendo.ui.Slider) {
         kendo.ui.Slider.prototype.options =
             $.extend(true, kendo.ui.Slider.prototype.options,{
                 "increaseButtonTitle": "增加",
                 "decreaseButtonTitle": "减少",
-                "dragHandleTitle": "拖"
+                "dragHandleTitle": "拖动"
+            });
+    }
+
+    /* RangeSlider options */
+    if (kendo.ui.RangeSlider) {
+        kendo.ui.RangeSlider.prototype.options =
+            $.extend(true, kendo.ui.RangeSlider.prototype.options, {
+                "leftDragHandleTitle": "拖动",
+                "rightDragHandleTitle": "拖动"
             });
     }
 
     /* ListBox messages */
     if (kendo.ui.ListBox) {
         kendo.ui.ListBox.prototype.options.messages =
-            $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+            $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
                 "tools": {
                     "remove": "删除",
                     "moveUp": "上移",
@@ -1097,7 +1395,7 @@
     /* TreeList messages */
     if (kendo.ui.TreeList) {
         kendo.ui.TreeList.prototype.options.messages =
-            $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+            $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
                 "noRows": "无相关数据",
                 "loading": "载入中...",
                 "requestFailed": "请求失败！",
@@ -1110,7 +1408,9 @@
                     "createchild": "新增子项",
                     "destroy": "删除",
                     "excel": "导出 Excel",
-                    "pdf": "导出 PDF"
+                    "pdf": "导出 PDF",
+                    "save": "保存",
+                    "cancel": "取消"
                 }
             });
     }
@@ -1118,7 +1418,7 @@
     /* TreeView messages */
     if (kendo.ui.TreeView) {
         kendo.ui.TreeView.prototype.options.messages =
-            $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
+            $.extend(true, kendo.ui.TreeView.prototype.options.messages, {
                 "loading": "载入中...",
                 "requestFailed": "请求失败！",
                 "retry": "重试"
@@ -1128,17 +1428,17 @@
     /* PanelBar messages */
     if (kendo.ui.PanelBar) {
         kendo.ui.PanelBar.prototype.options.messages =
-            $.extend(true, kendo.ui.PanelBar.prototype.options.messages,{
+            $.extend(true, kendo.ui.PanelBar.prototype.options.messages, {
                 "loading": "载入中...",
                 "requestFailed": "请求失败！",
                 "retry": "重试"
             });
     }
 
-    /* Upload messages */
+    /* Upload localization */
     if (kendo.ui.Upload) {
-        kendo.ui.Upload.prototype.options.localization=
-            $.extend(true, kendo.ui.Upload.prototype.options.localization,{
+        kendo.ui.Upload.prototype.options.localization =
+            $.extend(true, kendo.ui.Upload.prototype.options.localization, {
                 "select": "选择文件",
                 "cancel": "取消",
                 "retry": "重试",
@@ -1165,7 +1465,7 @@
     /* Validator messages */
     if (kendo.ui.Validator) {
         kendo.ui.Validator.prototype.options.messages =
-            $.extend(true, kendo.ui.Validator.prototype.options.messages,{
+            $.extend(true, kendo.ui.Validator.prototype.options.messages, {
                 "required": "{0} 是必填项！",
                 "pattern": "{0} 的格式不正确！",
                 "min": "{0} 必须大于或等于 {1} ！",
@@ -1186,10 +1486,18 @@
             });
     }
 
+    /* VirtualList options */
+    if (kendo.ui.VirtualList) {
+        kendo.ui.VirtualList.prototype.options =
+            $.extend(true, kendo.ui.VirtualList.prototype.options, {
+                "placeholderTemplate": "载入中..."
+            });
+    }
+
     /* Dialog messages */
     if (kendo.ui.Dialog) {
         kendo.ui.Dialog.prototype.options.messages =
-            $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+            $.extend(true, kendo.ui.Dialog.prototype.options.messages, {
                 "close": "关闭"
             });
     }
@@ -1198,33 +1506,45 @@
     if (kendo.ui.Calendar) {
         kendo.ui.Calendar.prototype.options.messages =
             $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
-                "weekColumnHeader": ""
+                "weekColumnHeader": "周"
+            });
+    }
+
+    /* MultiViewCalendar messages */
+    if (kendo.ui.MultiViewCalendar) {
+        kendo.ui.MultiViewCalendar.prototype.options.messages =
+            $.extend(true, kendo.ui.MultiViewCalendar.prototype.options.messages, {
+                "weekColumnHeader": "周"
             });
     }
 
     /* Alert messages */
     if (kendo.ui.Alert) {
         kendo.ui.Alert.prototype.options.messages =
-            $.extend(true, kendo.ui.Alert.prototype.options.localization, {
-                "okText": "确定"
+            $.extend(true, kendo.ui.Alert.prototype.options.messages, {
+                "okText": "确定",
+                "cancel": "取消",
+                "promptInput": "输入"
             });
     }
 
     /* Confirm messages */
     if (kendo.ui.Confirm) {
         kendo.ui.Confirm.prototype.options.messages =
-            $.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+            $.extend(true, kendo.ui.Confirm.prototype.options.messages, {
                 "okText": "确定",
-                "cancel": "取消"
+                "cancel": "取消",
+                "promptInput": "输入"
             });
     }
 
     /* Prompt messages */
     if (kendo.ui.Prompt) {
         kendo.ui.Prompt.prototype.options.messages =
-            $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+            $.extend(true, kendo.ui.Prompt.prototype.options.messages, {
                 "okText": "确定",
-                "cancel": "取消"
+                "cancel": "取消",
+                "promptInput": "输入"
             });
     }
 
@@ -1235,7 +1555,7 @@
                 "year": "年",
                 "month": "月",
                 "day": "日",
-                "weekday": "周",
+                "weekday": "星期",
                 "hour": "时",
                 "minute": "分",
                 "second": "秒",
@@ -1247,9 +1567,15 @@
     if (kendo.ui.DropDownTree) {
         kendo.ui.DropDownTree.prototype.options.messages =
             $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
-                clear: "清空",
-                deleteTag: "删除",
-                singleTag: "项已选择"
+                "noData": "无相关数据",
+                "clear": "清空",
+                "deleteTag": "删除",
+                "singleTag": "项已选择"
+            });
+        kendo.ui.DropDownTree.prototype.options =
+            $.extend(true, kendo.ui.DropDownTree.prototype.options, {
+                "noDataTemplate": "无相关数据",
+                "checkAllTemplate": "全选"
             });
     }
 
@@ -1257,16 +1583,182 @@
     if (kendo.ui.Chat) {
         kendo.ui.Chat.prototype.options.messages =
             $.extend(true, kendo.ui.Chat.prototype.options.messages, {
-                placeholder: "请输入..."
+                "placeholder": "请输入..."
+            });
+    }
+
+    if (kendo.chat.ChatView) {
+        kendo.chat.ChatView.prototype.options.messages =
+            $.extend(true, kendo.chat.ChatView.prototype.options.messages, {
+                "isTyping": " 正在输入...",
+                "areTyping": " 正在输入...",
+                "and": " 和 "
             });
     }
 
     /* Switch messages */
     if (kendo.ui.Switch) {
         kendo.ui.Switch.prototype.options.messages =
-            $.extend(true, kendo.ui.Switch.prototype.options.messages,{
+            $.extend(true, kendo.ui.Switch.prototype.options.messages, {
                 "checked": "开",
                 "unchecked": "关"
+            });
+    }
+
+    /* List messages */
+    if (kendo.ui.List) {
+        kendo.ui.List.prototype.options.messages =
+            $.extend(true, kendo.ui.List.prototype.options.messages, {
+                "noData": "无相关数据",
+                "clear": "清空"
+            });
+        kendo.ui.List.prototype.options =
+            $.extend(true, kendo.ui.List.prototype.options, {
+                "noDataTemplate": "无相关数据"
+            });
+    }
+
+    /* SelectBox messages */
+    if (kendo.ui.SelectBox) {
+        kendo.ui.SelectBox.prototype.options.messages =
+            $.extend(true, kendo.ui.SelectBox.prototype.options.messages, {
+                "noData": "无相关数据",
+                "clear": "清空"
+            });
+        kendo.ui.SelectBox.prototype.options =
+            $.extend(true, kendo.ui.SelectBox.prototype.options, {
+                "noDataTemplate": "无相关数据"
+            });
+    }
+
+    /* AutoComplete messages */
+    if (kendo.ui.AutoComplete) {
+        kendo.ui.AutoComplete.prototype.options.messages =
+            $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, {
+                "noData": "无相关数据",
+                "clear": "清空"
+            });
+        kendo.ui.AutoComplete.prototype.options =
+            $.extend(true, kendo.ui.AutoComplete.prototype.options, {
+                "noDataTemplate": "无相关数据"
+            });
+    }
+
+    /* DropDownList messages */
+    if (kendo.ui.DropDownList) {
+        kendo.ui.DropDownList.prototype.options.messages =
+            $.extend(true, kendo.ui.DropDownList.prototype.options.messages, {
+                "noData": "无相关数据",
+                "clear": "清空"
+            });
+        kendo.ui.DropDownList.prototype.options =
+            $.extend(true, kendo.ui.DropDownList.prototype.options, {
+                "noDataTemplate": "无相关数据"
+            });
+    }
+
+    /* ComboBox messages */
+    if (kendo.ui.ComboBox) {
+        kendo.ui.ComboBox.prototype.options.messages =
+            $.extend(true, kendo.ui.ComboBox.prototype.options.messages, {
+                "noData": "无相关数据",
+                "clear": "清空"
+            });
+        kendo.ui.ComboBox.prototype.options =
+            $.extend(true, kendo.ui.ComboBox.prototype.options, {
+                "noDataTemplate": "无相关数据"
+            });
+    }
+
+    /* MultiColumnComboBox messages */
+    if (kendo.ui.MultiColumnComboBox) {
+        kendo.ui.MultiColumnComboBox.prototype.options.messages =
+            $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, {
+                "noData": "无相关数据",
+                "clear": "清空"
+            });
+        kendo.ui.MultiColumnComboBox.prototype.options =
+            $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options, {
+                "noDataTemplate": "无相关数据"
+            });
+    }
+
+    /* MultiSelect messages */
+    if (kendo.ui.MultiSelect) {
+        kendo.ui.MultiSelect.prototype.options.messages =
+            $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
+                "noData": "无相关数据",
+                "clear": "清空",
+                "deleteTag": "删除",
+                "singleTag": "项已选择"
+            });
+        kendo.ui.MultiSelect.prototype.options =
+            $.extend(true, kendo.ui.MultiSelect.prototype.options, {
+                "noDataTemplate": "无相关数据"
+            });
+    }
+
+    /* PDFViewer messages */
+    if (kendo.ui.PDFViewer) {
+        kendo.ui.PDFViewer.prototype.options.messages =
+            $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+                "defaultFileName": "PDF 文档",
+                "toolbar": {
+                    "zoom": {
+                        "zoomOut": "缩小",
+                        "zoomIn": "放大",
+                        "actualWidth": "实际宽度",
+                        "autoWidth": "自动宽度",
+                        "fitToWidth": "适应宽度",
+                        "fitToPage": "适应页面"
+                    },
+                    "open": "打开",
+                    "exportAs": "导出",
+                    "download": "下载",
+                    "pager": {
+                        "first": "首页",
+                        "previous": "上一页",
+                        "next": "下一页",
+                        "last": "末页",
+                        "of": "页　共 {0} 页",
+                        "page": "转到第",
+                        "pages": "页"
+                    },
+                    "print": "打印",
+                    "toggleSelection": "启用选择",
+                    "togglePan": "启用平移",
+                    "search": "搜索"
+                },
+                "errorMessages": {
+                    "notSupported": "只支持 PDF 文件！",
+                    "parseError": "无法处理 PDF 文件！",
+                    "notFound": "找不到文件！"
+                },
+                "dialogs": {
+                    "exportAsDialog": {
+                        "title": "导出...",
+                        "defaultFileName": "PDF 文档",
+                        "pdf": "便携式文档格式(.pdf)",
+                        "png": "便携式网络图形(.png)",
+                        "svg": "可缩放矢量图形(.svg)",
+                        "labels": {
+                            "fileName": "文件名",
+                            "saveAsType": "另存为",
+                            "page": "页"
+                        }
+                    },
+                    "okText": "确定",
+                    "save": "保存",
+                    "cancel": "取消",
+                    "search": {
+                        "inputLabel": "关键字",
+                        "matchCase": "匹配大小写",
+                        "next": "下一个匹配",
+                        "previous": "上一个匹配",
+                        "close": "关闭",
+                        "of": " / "
+                    }
+                }
             });
     }
 
@@ -1290,6 +1782,31 @@
                 "pullTemplate": "下拉刷新",
                 "releaseTemplate": "释放刷新",
                 "refreshTemplate": "刷新中..."
+            });
+    }
+
+    /* Mobile Loader options */
+    if (kendo.mobile.ui.Loader) {
+        kendo.mobile.ui.Loader.prototype.options =
+            $.extend(true, kendo.mobile.ui.Loader.prototype.options, {
+                "loading": "<h1>载入中...</h1>"
+            });
+    }
+
+    /* Mobile Pane options */
+    if (kendo.mobile.ui.Pane) {
+        kendo.mobile.ui.Pane.prototype.options =
+            $.extend(true, kendo.mobile.ui.Pane.prototype.options, {
+                "loading": "<h1>载入中...</h1>"
+            });
+    }
+
+    /* Mobile Switch options */
+    if (kendo.mobile.ui.Switch) {
+        kendo.mobile.ui.Switch.prototype.options =
+            $.extend(true, kendo.mobile.ui.Switch.prototype.options, {
+                "onLabel": "开",
+                "offLabel": "关"
             });
     }
 

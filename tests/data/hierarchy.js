@@ -314,7 +314,7 @@
             var dataSource = new HierarchicalDataSource({
                 transport: {
                     read: function(options) {
-                        options.success([{ hasChildren: true, categoryId: 1 }])
+                        options.success([{ hasChildren: true, categoryId: 1 }]);
                     }
                 },
                 schema: {
@@ -354,7 +354,7 @@
                         options.success([
                             { id: 1, isParent: true },
                             { id: 2, isParent: false }
-                        ])
+                        ]);
                     }
                 },
                 schema: {
@@ -366,8 +366,8 @@
 
             dataSource.fetch();
 
-            assert.equal(dataSource.view()[0].hasChildren, true)
-            assert.equal(dataSource.view()[1].hasChildren, false)
+            assert.equal(dataSource.view()[0].hasChildren, true);
+            assert.equal(dataSource.view()[1].hasChildren, false);
         });
 
         it("hasChildren returns the false if the specified field is undefined", function() {
@@ -376,7 +376,7 @@
                     read: function(options) {
                         options.success([
                             { id: 1 }
-                        ])
+                        ]);
                     }
                 },
                 schema: {
@@ -388,7 +388,7 @@
 
             dataSource.fetch();
 
-            assert.equal(dataSource.view()[0].hasChildren, false)
+            assert.equal(dataSource.view()[0].hasChildren, false);
         });
 
         it("hasChildren returns false by default", function() {
@@ -398,7 +398,7 @@
                         options.success([
                             { id: 1 },
                             { id: 2 }
-                        ])
+                        ]);
                     }
                 }
             });
@@ -413,7 +413,7 @@
                     read: function(options) {
                         options.success([
                             { id: 1 }
-                        ])
+                        ]);
                     }
                 },
                 schema: {
@@ -434,7 +434,7 @@
                     read: function(options) {
                         options.success([
                             { id: 1 }
-                        ])
+                        ]);
                     }
                 },
                 schema: {
@@ -454,7 +454,7 @@
                     read: function(options) {
                         options.success([
                             { id: 1 }
-                        ])
+                        ]);
                     }
                 },
                 schema: {
@@ -476,7 +476,7 @@
                     read: function(options) {
                         options.success([
                             { id: 1 }
-                        ])
+                        ]);
                     }
                 },
                 schema: {
@@ -545,7 +545,7 @@
             var readData = function(options) {
                 options.success([
                     { isParent: true }
-                ])
+                ]);
             },
                 dataSource = new HierarchicalDataSource({
                     transport: {
@@ -580,7 +580,7 @@
             var dataSource = categories();
 
             dataSource.fetch();
-            dataSource.data()[0].load()
+            dataSource.data()[0].load();
 
             assert.isOk(dataSource.data()[0].loaded());
         });
@@ -589,8 +589,8 @@
             var dataSource = categories();
 
             dataSource.fetch();
-            dataSource.data()[0].load()
-            dataSource.data()[0].loaded(false)
+            dataSource.data()[0].load();
+            dataSource.data()[0].loaded(false);
 
             assert.isOk(!dataSource.data()[0].loaded());
         });
@@ -599,7 +599,7 @@
             var dataSource = new HierarchicalDataSource({
                 transport: {
                     read: function(options) {
-                        options.success([{ hasChildren: true, categoryId: 1 }])
+                        options.success([{ hasChildren: true, categoryId: 1 }]);
                     }
                 },
                 schema: {
@@ -982,7 +982,7 @@
             var children = dataSource.data()[0].children;
             children.read();
 
-            assert.isOk(dataSource.get(2))
+            assert.isOk(dataSource.get(2));
             assert.equal(dataSource.get(2).text, children.data()[0].text);
         });
 
@@ -1008,7 +1008,7 @@
 
             dataSource.data()[0].load();
 
-            assert.isOk(dataSource.get(2))
+            assert.isOk(dataSource.get(2));
             assert.equal(dataSource.get(2).text, "bar");
         });
 

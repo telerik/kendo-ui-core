@@ -1,6 +1,6 @@
 ---
 title: Azure Face API
-page_title: Azure Face API | Kendo UI in the Cloud
+page_title: Azure Face API - Kendo UI in the Cloud
 description: "Learn how to upload images and consume the returned data from Azure Face API when working with Kendo UI."
 slug: azure_faceapi
 position: 2

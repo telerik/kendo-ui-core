@@ -32,7 +32,11 @@
                 responseText: "foo bar baz"
             });
 
-            Mocha.fixture.html(__html__["tests/window/templates-fixture.html"]);
+            $(`<div id="div-with-template">
+                    <div id="kendo-template">
+                        kendo-template
+                    </div>
+                </div>`).appendTo(Mocha.fixture);
         });
         afterEach(function() {
             Mocha.fixture
@@ -301,7 +305,7 @@
         it("content.template", function() {
             var dialog = createWindow({
                 content: {
-                    template: "foo #= 1 + 1 #"
+                    template: () => `foo ${1 + 1}`
                 }
             });
 
@@ -317,7 +321,7 @@
                         foo: "bar"
                     },
 
-                    template: "templated #= foo #",
+                    template: ({ foo }) => `templated ${foo}`,
 
                     complete: function() {
                         assert.equal(dialog.element.text(), "templated bar");
@@ -336,20 +340,6 @@
             assert.isOk(dialog.wrapper.is(".k-window-titleless"));
         });
 
-        it("window has margin and padding that match the titlebar height", function() {
-            var dialog = createWindow({
-                title: "foo"
-            });
-
-            var titleBar = dialog.wrapper.children(".k-window-titlebar");
-            var titleBarHeight = parseInt(titleBar.outerHeight(), 10);
-            var margin = parseInt(titleBar.css("margin-top"), 10);
-            var padding = parseInt(dialog.wrapper.css("padding-top"), 10);
-
-            assert.equal(margin, -titleBarHeight);
-            assert.equal(padding, titleBarHeight);
-        });
-
         it("k-rtl class is not rendered by default", function() {
             var dialog = createWindow({
                 title: "foo"
@@ -359,7 +349,7 @@
         });
 
         it("k-rtl class is rendered when in k-rtl container", function() {
-            var element = $("<div class='k-rtl'><div /></div>").appendTo(
+            var element = $("<div class='k-rtl'><div></div></div>").appendTo(
                     Mocha.fixture
                 ),
                 dialog = createWindow({}, element.find("> div"));
@@ -404,6 +394,7 @@
             clientObject = div.data("kendoWindow");
 
             assert.isOk(clientObject.wrapper.is(":hidden"));
+            assert.isOk(!clientObject.wrapper.hasClass("k-display-inline-flex"));
             assert.equal(div.css("display"), "block");
             assert.isOk(!clientObject.options.visible);
         });
@@ -436,6 +427,7 @@
             clientObject = div.data("kendoWindow");
 
             assert.isOk(!clientObject.wrapper.is(":visible"));
+            assert.isOk(!clientObject.wrapper.hasClass("k-display-inline-flex"));
             assert.isOk(!div.is(":visible"));
             assert.isOk(!clientObject.options.visible);
         });
@@ -464,27 +456,27 @@
 
         it("width is constrained by minWidth", function() {
             var dialog = createWindow({ minWidth: 100, width: 90 });
-            assert.equal(dialog.wrapper.width(), 100);
+            assert.equal(dialog.wrapper.outerWidth(), 100);
         });
 
         it("width is constrained by maxWidth", function() {
             var dialog = createWindow({ maxWidth: 100, width: 190 });
-            assert.equal(dialog.wrapper.width(), 100);
+            assert.equal(dialog.wrapper.outerWidth(), 100);
         });
 
         it("height is constrained by minHeight", function() {
             var dialog = createWindow({ minHeight: 100, height: 90 });
-            assert.equal(dialog.wrapper.height(), 100);
+            assert.equal(dialog.wrapper.outerHeight(), 100);
         });
 
         it("height is constrained by maxHeight", function() {
             var dialog = createWindow({ maxHeight: 100, height: 190 });
-            assert.equal(dialog.wrapper.height(), 100);
+            assert.equal(dialog.wrapper.outerHeight(), 100);
         });
 
         it("creating window with string width", function() {
             var dialog = createWindow({ width: "190px" });
-            assert.equal(dialog.wrapper.width(), 190);
+            assert.equal(dialog.wrapper.outerWidth(), 190);
         });
 
         it("creating window with percent width", function() {
@@ -504,7 +496,7 @@
 
         it("creating window with literal string height", function() {
             var dialog = createWindow({ height: "190px" });
-            assert.equal(dialog.wrapper.height(), 190);
+            assert.equal(dialog.wrapper.outerHeight(), 190);
         });
 
         it("creating window with percent height", function() {
@@ -640,6 +632,16 @@
 
             assert.equal(dialog.wrapper.css("left"), "1px");
         });
+
+        it("k-window-content has its tabindex set to 0", function() {
+            var dialog = createWindow({
+                position: {
+                    left: "1px"
+                }
+            });
+
+            assert.equal(dialog.element.attr("tabindex"), "0");
+        });
     });
 
     describe("appendTo option", function() {
@@ -722,6 +724,23 @@
             dialog.setOptions({ scrollable: false });
 
             assert.equal(dialog.element.css("overflow"), "hidden");
+        });
+
+        it("should not scroll down to Window if not modal and initially visible", function() {
+            jasmine.clock().install();
+
+            createWindow({
+                title: "Window Web: title 1t",
+                content: "test",
+                position: { top: 8240 , left: 50 },
+                height: "470px",
+                width: "1450px",
+                animation: false
+            });
+
+            jasmine.clock().tick(1);
+            assert.equal(document.documentElement.scrollTop, 0);
+            jasmine.clock().uninstall();
         });
     });
 })();

@@ -1,16 +1,20 @@
 ---
 title: Overview
-page_title: MVVM Pattern Overview | Kendo UI MVVM
+page_title: MVVM Pattern Overview - Kendo UI MVVM
 description: "Learn more about the Kendo UI Model View ViewModel, which is an implementation of the MVVM pattern, integrated with the Kendo UI framework."
 slug: overview_mvvmpattern_kendoui
 position: 1
 ---
 
+{% if site.has_cta_panels == true %}
+{% include cta-panel-small.html %}
+{% endif %}
+
 # MVVM Pattern Overview
 
-[Model View ViewModel (MVVM)](http://en.wikipedia.org/wiki/Model_View_ViewModel) is a design pattern which helps developers separate the Model, which is the data, from the View, which is the user interface (UI).
+[Model View ViewModel (MVVM)](https://en.wikipedia.org/wiki/Model_View_ViewModel) is a design pattern which helps developers separate the Model, which is the data, from the View, which is the user interface (UI).
 
-The View-Model part of the MVVM is responsible for exposing the data objects from the Model in such a way that those objects are easily consumed in the View. The [Kendo UI MVVM component](http://demos.telerik.com/kendo-ui/mvvm/index) is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo UI framework&mdash;Kendo UI widgets and Kendo UI DataSource.
+The View-Model part of the MVVM is responsible for exposing the data objects from the Model in such a way that those objects are easily consumed in the View. The [Kendo UI MVVM component](https://demos.telerik.com/kendo-ui/mvvm/index) is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo UI framework&mdash;Kendo UI widgets and Kendo UI DataSource.
 
 > Kendo UI MVVM initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plugin syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). If you want to create Kendo UI widget instances via the MVVM pattern, then do not use server wrappers for these instances.
 
@@ -37,7 +41,7 @@ The View-Model part of the MVVM is responsible for exposing the data objects fro
 
 ## Setting the data-* Options
 
-For more information on the naming convention setting the configuration options of the Kendo UI MVVM widgets, check the naming convention for the [set `data` options](http://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization#set-data--options).
+For more information on the naming convention setting the configuration options of the Kendo UI MVVM widgets, check the naming convention for the [set `data` options](https://docs.telerik.com/kendo-ui/intro/widget-basics/mvvm-initialization#setting-the-data-options).
 
 > The hybrid widgets and frameworks in Kendo UI are not included in the default list of initialized namespaces. You can initialize them explicitly by running `kendo.bind(element, viewModel, kendo.mobile.ui);`.
 
@@ -69,6 +73,7 @@ The Kendo UI MVVM also supports data binding to nested View-Model fields.
 
 ## Important Notes
 
+* The MVVM pattern works only with [external templates]({% slug getting_started_external_templates %}), thus the [CSP compatible templates]({% slug csp_templates %}) cannot be used in an MVVM scenario.
 * Set numeric options as strings. Some Kendo UI widgets accept string options, which represent numbers and can be parsed as such, for example, `<input data-role="maskedtextbox" data-mask="09">`. This mask will be parsed as a number and the widget will receive a single 9-digit in its initialization method, instead of a `"09"` string. In such scenarios, the widget options must be [set with custom MVVM binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %}).
 * Bindings are not JavaScript code. Although bindings look like JavaScript code, they are not. The `<div data-bind="text: person.name.toLowerCase()"></div>` chunk of code is not a valid Kendo UI MVVM binding declaration. If a value from the View-Model requires processing before displaying it in the View, a method should be created and used instead.
 

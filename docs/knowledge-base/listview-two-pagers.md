@@ -1,8 +1,8 @@
 ---
 title: Place Pagers at Top and Bottom of the ListView
-description: An example on how to display pagers at the top and bottom of a Kendo UI ListView.
+description: Learn how to display pagers at the top and bottom of a Kendo UI ListView.
 type: how-to
-page_title: Use Two Pagers for the ListView | UI for ASP.NET MVC
+page_title: Use Two Pagers for the ListView - Kendo UI ListView for ASP.NET MVC
 slug: listview-two-pagers
 tags: listview, paging, pager, mvc, kendo ui, two pagers
 ticketid: 1111995
@@ -15,10 +15,10 @@ component: listview
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListView for ASP.NET MVC (version 2017.2 504)</td>
+  <td>Progress® Telerik® UI ListView for ASP.NET MVC</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.2 504</td>
  </tr>
  <tr>
@@ -58,12 +58,12 @@ The following example demonstrates how to customize the default behavior of the 
     <base href="https://demos.telerik.com/kendo-ui/listview/index">
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common-material.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.material.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.material.mobile.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.material.mobile.min.css" />
 
-    <script src="https://kendo.cdn.telerik.com/2017.2.504/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 </head>
 <body>
 <div id="example">
@@ -71,9 +71,9 @@ The following example demonstrates how to customize the default behavior of the 
     <script src="../content/shared/js/products.js"></script>
 
     <div class="demo-section k-content wide">
-        <div id="pager1" class="k-pager-wrap"></div>
+        <div id="pager1" class="k-pager"></div>
         <div id="listView"></div>
-        <div id="pager2" class="k-pager-wrap"></div>
+        <div id="pager2" class="k-pager"></div>
     </div>
 
     <script type="text/x-kendo-template" id="template">
@@ -110,12 +110,12 @@ The following example demonstrates how to customize the default behavior of the 
 
 ### ListView Wrapper
 
-To add a pager to an MVC ListView wrapper, apply the same configuration approach in regard to the page at the top. The aim is to initialize another pager through a jQuery initialization within `document ready` and pass the `dataSource` of the ListBox.  
+To add a pager to a Kendo UI ListView for ASP.NET MVC, apply the same configuration approach in regard to the page at the top. The aim is to initialize another pager through a jQuery initialization within `document ready` and pass the `dataSource` of the ListBox.  
 
 The following example demonstrates how to customize the default behavior of the ListView wrapper and implement a pager at its top and bottom.
 
 ```dojo
-<div id="pager1" class="k-pager-wrap"></div>
+<div id="pager1" class="k-pager"></div>
 @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("listView")
     .TagName("div")

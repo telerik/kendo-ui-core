@@ -1,8 +1,8 @@
 ---
 title: Transfer ListBox Items on Double Click
-description: An example on how to transfer items from one Kendo UI ListBox to another by double-clicking them.
+description: Learn how to transfer items from one Kendo UI ListBox to another by double-clicking them.
 type: how-to
-page_title: Move Elements on Double Click | Kendo UI ListBox
+page_title: Move Elements on Double Click - Kendo UI ListBox for jQuery
 slug: listbox-move-double-click
 tags: listbox, doubleclick, transfer
 ticketid: 1147380
@@ -19,7 +19,7 @@ component: listbox
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI ListBox</td>
+		<td>Progress® Kendo UI® ListBox for jQuery</td>
 	</tr>
 </table>
 
@@ -58,11 +58,11 @@ How can I transfer items between ListBoxes by double-clicking the Kendo UI ListB
 
     var listBoxB = $("#listBoxB").kendoListBox().data("kendoListBox");
 
-    listBoxA.wrapper.find(".k-list").on("dblclick", ".k-item", function(e) {
+    listBoxA.wrapper.find(".k-list").on("dblclick", ".k-list-item", function(e) {
         listBoxA._executeCommand("transferTo");
     });
 
-    listBoxB.wrapper.find(".k-list").on("dblclick", ".k-item", function(e) {
+    listBoxB.wrapper.find(".k-list").on("dblclick", ".k-list-item", function(e) {
         listBoxA._executeCommand("transferFrom");
     });
 </script>

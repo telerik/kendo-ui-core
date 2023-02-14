@@ -1,6 +1,6 @@
 ---
 title: Router
-page_title: Router | Kendo UI Single-Page Application
+page_title: Router - Kendo UI Single-Page Application
 description: "Learn how to handle the router class in a Kendo UI Single-Page Application."
 slug: router_kendoui_singlepageapplication
 position: 2

@@ -99,11 +99,11 @@
                 }
             });
 
-            assert.equal(listbox.toolbar.element.find("li>a.k-button").length, 1);
-            assert.equal(listbox.toolbar.element.find("li>a.k-button").data("command"), REMOVE);
+            assert.equal(listbox.toolbar.element.find("button.k-button").length, 1);
+            assert.equal(listbox.toolbar.element.find("button.k-button").data("command"), REMOVE);
         });
 
-        it("tollbar with position left should add k-listbox-toolbar-left class", function() {
+        it("tollbar with position left should add k-listbox-actions-left class", function() {
             listbox = createListBoxWithToolbar({
                 toolbar: {
                     position: "left",
@@ -111,10 +111,10 @@
                 }
             });
 
-            assert.equal(listbox.wrapper.hasClass("k-listbox-toolbar-left"), true);
+            assert.equal(listbox.wrapper.hasClass("k-listbox-actions-left"), true);
         });
 
-        it("tollbar with position right should add k-listbox-toolbar-right class", function() {
+        it("tollbar with position right should add k-listbox-actions-right class", function() {
             listbox = createListBoxWithToolbar({
                 toolbar: {
                     position: "right",
@@ -122,10 +122,10 @@
                 }
             });
 
-            assert.equal(listbox.wrapper.hasClass("k-listbox-toolbar-right"), true);
+            assert.equal(listbox.wrapper.hasClass("k-listbox-actions-right"), true);
         });
 
-        it("tollbar with position top should add k-listbox-toolbar-top class", function() {
+        it("tollbar with position top should add k-listbox-actions-top class", function() {
             listbox = createListBoxWithToolbar({
                 toolbar: {
                     position: "top",
@@ -133,10 +133,10 @@
                 }
             });
 
-            assert.equal(listbox.wrapper.hasClass("k-listbox-toolbar-top"), true);
+            assert.equal(listbox.wrapper.hasClass("k-listbox-actions-top"), true);
         });
 
-        it("tollbar with position bottom should add k-listbox-toolbar-bottom class", function() {
+        it("tollbar with position bottom should add k-listbox-actions-bottom class", function() {
             listbox = createListBoxWithToolbar({
                 toolbar: {
                     position: "bottom",
@@ -144,7 +144,7 @@
                 }
             });
 
-            assert.equal(listbox.wrapper.hasClass("k-listbox-toolbar-bottom"), true);
+            assert.equal(listbox.wrapper.hasClass("k-listbox-actions-bottom"), true);
         });
 
         it("tollbar element is inserted before list when position is left", function() {
@@ -193,20 +193,20 @@
 
         it("when providing a template function the rendered content is wrapped in a li element", function() {
             listbox = createListBox({
-                template: kendo.template("<div>#:text#</div>")
+                template: kendo.template(({ text }) => `<div>${kendo.htmlEncode(text)}</div>`)
             });
 
             assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
-            assert.equal(listbox.items().first().html(), "<div>item1</div>");
+            assert.equal(listbox.items().first().find("span").html(), "<div>item1</div>");
         });
 
         it("when providing a template string the rendered content is wrapped in a li element", function() {
             listbox = createListBox({
-                template: "<div>#:text#</div>"
+                template: ({ text }) => `<div>${kendo.htmlEncode(text)}</div>`
             });
 
             assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
-            assert.equal(listbox.items().first().html(), "<div>item1</div>");
+            assert.equal(listbox.items().first().find("span").html(), "<div>item1</div>");
         });
     });
 }());

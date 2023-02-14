@@ -1,6 +1,6 @@
 ---
 title: Twitter Bootstrap
-page_title: Twitter Bootstrap | Kendo UI Third-Party Tools
+page_title: Twitter Bootstrap - Kendo UI Third-Party Tools
 description: "Learn more about the integration with the Twitter Bootstrap framework that Kendo UI provides to its users and enjoy the full set of resulting functionalities."
 previous_url: /using-kendo-with-twitter-bootstrap
 slug: twitterbootstrapintegration_integration_kendoui
@@ -8,7 +8,7 @@ slug: twitterbootstrapintegration_integration_kendoui
 
 # Twitter Bootstrap
 
-The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) can be used seamlessly alongside [Twitter Bootstrap](http://getbootstrap.com/), as demonstrated in [this live demo](http://demos.telerik.com/kendo-ui/bootstrap) having its [source on GitHub](https://github.com/telerik/kendo-bootstrap-demo).
+The [Kendo UI widgets](https://demos.telerik.com/kendo-ui/) can be used seamlessly alongside [Twitter Bootstrap](http://getbootstrap.com/), as demonstrated in [this live demo](https://demos.telerik.com/kendo-ui/bootstrap) having its [source on GitHub](https://github.com/telerik/kendo-bootstrap-demo).
 
 ## Getting Started
 
@@ -19,18 +19,16 @@ To replicate the look and feel of Bootstrap in Kendo UI, follow the steps below:
 
 The following example demonstrates the necessary links to these stylesheets. Make sure you replace **VERSION** with the Kendo UI version that you want to use.
 
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/VERSION/styles/kendo.common-bootstrap.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/VERSION/styles/kendo.bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/VERSION/styles/kendo.common-bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/VERSION/styles/kendo.bootstrap.min.css">
 
 While these files ensure that Kendo UI looks a lot like Bootstrap, it is not mandatory to use them. The default Kendo UI `common.css` and any other theme are going to style the widgets differently, but they will continue to function properly.
 
-Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the default Bootstrap look and feel. Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme, such as themes created with the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder).
+Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the default Bootstrap look and feel. Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme, such as themes created with the [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder).
 
 ## Using Bootstrap Responsive Features
 
 Using the responsive features of Bootstrap does not differ from other responsive sites.
-
-For detailed information on how to use Kendo UI in responsive web pages, refer to [this article on responsive web design]({% slug responsivewebdesign_integration_kendoui %}).
 
 ## Using Custom Bootstrap Themes
 
@@ -38,7 +36,7 @@ If you have customized the Bootstrap color scheme and need Kendo UI to match it,
 
 ### Option One
 
-1. Customize the Bootstrap theme of Kendo UI through the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html).
+1. Customize the Bootstrap theme of Kendo UI through the [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder/web.html).
 2. Compile a custom version of the Kendo UI Bootstrap theme by using the Bootstrap Less file and an auxiliary file that Kendo UI provides, which maps Bootstrap Less variables to Kendo UI variables.
 
 This second option assumes that you are familiar with the process of [generating CSS files from Less files](http://lesscss.org/#getting-started).
@@ -80,18 +78,19 @@ You can add the following CSS rules _after_ the Bootstrap and Kendo UI styleshee
     .container,
     .container-fluid,
     .row,
-    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
-    .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
-    .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
-    .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
-    .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
-    .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
-    .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
-    .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
-    .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
-    .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
-    .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
-    .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
+    a.dropdown-item,
+    .col-1, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xl-1, .col-xxl-1,
+    .col-2, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xl-2, .col-xxl-2,
+    .col-3, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xl-3, .col-xxl-3,
+    .col-4, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xl-4, .col-xxl-4,
+    .col-5, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xl-5, .col-xxl-5,
+    .col-6, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xl-6, .col-xxl-6,
+    .col-7, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xl-7, .col-xxl-7,
+    .col-8, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xl-8, .col-xxl-8,
+    .col-9, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xl-9, .col-xxl-9,
+    .col-10, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xl-10, .col-xxl-10,
+    .col-11, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xl-11, .col-xxl-11,
+    .col-12, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 .col-xl-12, .col-xxl-12
     {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;

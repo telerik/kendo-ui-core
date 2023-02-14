@@ -1,8 +1,7 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Grid Globalization | Kendo UI
+page_title: jQuery Grid Documentation - Grid Globalization
 description: "Get started with the jQuery Grid by Kendo UI and learn about the globalization options it supports."
-previous_url: /localization
 slug: globalization_kendoui_grid_widget
 position: 1
 ---
@@ -12,11 +11,11 @@ position: 1
 The globalization process combines the translation of component messages (localization) with adapting them to specific cultures (internationalization and right-to-left support).
 
 The globalization functionality of the Grid is enabled through:
-* [Internationalization for culture locales]({% slug localization_kendoui_grid_widget %})
+* [Internationalization for culture locales]({% slug intl_kendoui_grid_widget %})
 * [Localization of messages]({% slug localization_kendoui_grid_widget %})
-* [Right-to-left support]({% slug localization_kendoui_grid_widget %})
+* [Right-to-left support]({% slug rtl_kendoui_grid_widget %})
 
-For more information on using localization, internationalization, and right-to-left languages with Kendo UI widgets, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
+For more information on using localization, internationalization, and right-to-left languages with Kendo UI components, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
 
 ## See Also
 

@@ -376,6 +376,28 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <select id="dropdown">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#dropdown").kendoDropDownList({
+        filter: "contains",
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/dropdownlist#configuration-dataTextField) option).
@@ -391,17 +413,33 @@ The supported filter values are `startswith`, `endswith` and `contains`.
     });
     </script>
 
+### filterTitle `String`
+
+When filtering is enabled, allows custom title to be defined for the filter input element.
+
+#### Example - set the filter
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      filter: "contains",
+      filterTitle: "custom title"
+    });
+    </script>
+
 ### fixedGroupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <input id="customers" style="width: 400px" />
     <script>
+        let encode = kendo.htmlEncode;
         $(document).ready(function() {
             $("#customers").kendoDropDownList({
                 dataTextField: "ContactName",
                 dataValueField: "CustomerID",
-                fixedGroupTemplate: "Fixed group: #: data #",
+                fixedGroupTemplate: (data) => `Fixed group: ${encode(data)}`,
                 height: 400,
                 dataSource: {
                     type: "odata",
@@ -428,6 +466,7 @@ The widget instance.
 
     <input id="dropdownlist" />
     <script>
+    let encode = kendo.htmlEncode;
     $("#dropdownlist").kendoDropDownList({
       dataSource: [
         { id: 1, name: "Apples" },
@@ -435,9 +474,109 @@ The widget instance.
       ],
       dataTextField: "name",
       dataValueField: "id",
-      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+      footerTemplate: ({ instance }) => `Total <strong>${encode(instance.dataSource.total())}</strong> items found`
     });
     </script>
+
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: "Fruits"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: function() {
+          return "Fruits";
+      }
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: { content: "Fruits" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: {
+        content: function() {
+            return "Fruits";
+        }
+      }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/dropdownlist/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#dropdownlist").data("kendoDropDownList").label.floatingLabel.refresh();`
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: { 
+        content: "Fruits",
+        floating: true
+      }
+    });
+    </script>
+
 
 ### groupTemplate `String|Function`
 
@@ -445,11 +584,12 @@ The [template](/api/javascript/kendo/methods/template) used to render the groups
 
     <input id="customers" style="width: 400px" />
     <script>
+        let encode = kendo.htmlEncode;
         $(document).ready(function() {
             $("#customers").kendoDropDownList({
                 dataTextField: "ContactName",
                 dataValueField: "CustomerID",
-                groupTemplate: "Group: #: data #",
+                groupTemplate: (data) => `Group: ${encode(data)}`,
                 height: 400,
                 dataSource: {
                     type: "odata",
@@ -515,6 +655,42 @@ The index of the initially selected item. The index is `0` based.
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize DropDownList messages
+
+    <input id="dropdownlist" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#dropdownlist").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="dropdownlist" />
+    <script>
+      $("#dropdownlist").kendoDropDownList({
+        dataSource: [],
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a filter is performed. Set to higher value than `1` if the search could match a lot of items.
@@ -532,7 +708,7 @@ The minimum number of characters the user must type before a filter is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -650,23 +826,33 @@ The available "x" positions are:
 
 #### Example - append the popup to a specific element
 
-    <div id="container">
-        <input id="dropdownlist" />
-    </div>
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      popup: {
-        origin: "top left"
-      }
-    });
-    </script>
-
+  <div id="container">
+      <input id="dropdownlist" />
+  </div>
+  <script>
+  $("#dropdownlist").kendoDropDownList({
+    dataSource: [
+      { id: 1, name: "Apples" },
+      { id: 2, name: "Oranges" }
+    ],
+    dataTextField: "name",
+    dataValueField: "id",
+    popup: {
+      position: "top center"
+    }
+  });
+  </script>
+  <style>
+    #container{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
 
 ### optionLabel `String | Object`*(default: "")*
 
@@ -712,9 +898,72 @@ in the optionLabel object**.
 
 ### optionLabelTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the option label.
+The [template](/api/javascript/kendo/methods/template) used to render the option label. Use optionLabelTemplate if you want to customize the markup of the optionLabel.
 
-> Define the [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) as **object** if complex template structure is used
+> * [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) has to be defined for the optionLabelTemplate to take effect.
+> * Define the [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) as **object** if complex template structure is used
+
+#### Example - specify the optionLabelTemplate as a string
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: [
+          { productName: "Product 1", productId: 1 },
+          { productName: "Product 2", productId: 2 },
+          { productName: "Product 3", productId: 3 },
+          { productName: "Product 4", productId: 4 }
+        ],
+        dataTextField: "productName",
+        dataValueField: "productId",
+        optionLabel: "-- Please select --",
+        optionLabelTemplate:'<span style="color:red">-- Please select --</span>'
+    });
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <select id="dropdown">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#dropdown").kendoDropDownList({
+        filter: "contains",
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <select id="dropdown">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#dropdown").kendoDropDownList({
+        filter: "contains",
+        size: "large"
+      });
+    </script>
 
 ### headerTemplate `String|Function`
 
@@ -742,16 +991,11 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 The [template](/api/javascript/kendo/methods/template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
-#### Example - specify template as a function
+#### Example - specify template as a string literal
 
     <input id="dropdownlist" />
-    <script id="template" type="text/x-kendo-template">
-      <span>
-        <img src="/img/#: id #.png" alt="#: name #" />
-        #: name #
-      </span>
-    </script>
     <script>
+    let encode = kendo.htmlEncode;
     $("#dropdownlist").kendoDropDownList({
       dataSource: [
         { id: 1, name: "Apples" },
@@ -759,22 +1003,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the items.
       ],
       dataTextField: "name",
       dataValueField: "id",
-      template: kendo.template($("#template").html())
-    });
-    </script>
-
-#### Example - specify template as a string
-
-    <input id="dropdownlist" />
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      template: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>'
+      template: ({ id, name }) => `<span><img src="/img/${id}.png" alt="${name}" />${name}</span>`
     });
     </script>
 
@@ -782,14 +1011,11 @@ The [template](/api/javascript/kendo/methods/template) used to render the items.
 
 The [valueTemplate](/api/javascript/kendo/methods/template) used to render the selected value. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
-#### Example - specify valueTemplate as a function
+#### Example - specify template as a string literal
 
     <input id="dropdownlist" />
-    <script id="valueTemplate" type="text/x-kendo-template">
-        <img src="/img/#: id #.png" alt="#: name #" />
-        #: name #
-    </script>
     <script>
+    let encode = kendo.htmlEncode;
     $("#dropdownlist").kendoDropDownList({
       dataSource: [
         { id: 1, name: "Apples" },
@@ -797,22 +1023,7 @@ The [valueTemplate](/api/javascript/kendo/methods/template) used to render the s
       ],
       dataTextField: "name",
       dataValueField: "id",
-      valueTemplate: kendo.template($("#valueTemplate").html())
-    });
-    </script>
-
-#### Example - specify template as a string
-
-    <input id="dropdownlist" />
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      valueTemplate: '<img src="/img/#: id #.png" alt="#: name #" />#: name #'
+      valueTemplate: ({ name }) => '<strong>${encode(name)}</strong>'
     });
     </script>
 
@@ -846,22 +1057,39 @@ The value of the widget.
 
 ### valuePrimitive `Boolean`*(default: false)*
 
-Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.
+Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the widget when the initial model value is null. If set to `true`, the View-Model field will be updated with the primitive value of the selected item's field (defined in the dataValueField option).if set to `false`, the View-Model field will be updated with the selected item - the entire non-primitive object.
+
 
 #### Example - specify that the View-Model field should be updated with the selected item value
 
-    <select id="dropdown" data-bind="value: selectedProductId, source: products" >
-    </select>
+    <div id="example">
+      <div>Change the value of the dropdowns and observe the logged value in the console.</div>
+      <br/>
 
+      <select id="dropdownPrimitive" data-bind="value: selectedProductId, source: products" >
+      </select>
+
+      <select id="dropdown" data-bind="value: selectedProduct, source: products" >
+      </select>
+    </div>
     <script>
-    $("#dropdown").kendoDropDownList({
+    $("#dropdownPrimitive").kendoDropDownList({
       valuePrimitive: true,
       dataTextField: "name",
       dataValueField: "id",
       optionLabel: "Select product..."
     });
+
+    $("#dropdown").kendoDropDownList({
+      valuePrimitive: false,
+      dataTextField: "name",
+      dataValueField: "id",
+      optionLabel: "Select product..."
+    });
+
     var viewModel = kendo.observable({
       selectedProductId: null,
+      selectedProduct: null,
       products: [
         { id: 1, name: "Coffee" },
         { id: 2, name: "Tea" },
@@ -869,8 +1097,16 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
       ]
     });
 
-    kendo.bind($("#dropdown"), viewModel);
-    </script>
+    viewModel.bind("change", function(ev) {
+      if (ev.field === "selectedProduct") {
+        console.log("value: " + JSON.stringify(this.get(ev.field)));
+      } else if (ev.field === "selectedProductId") {
+        console.log("value: " + this.get(ev.field));
+      }
+    });
+
+    kendo.bind($("#example"), viewModel);
+
 
 ### virtual `Boolean|Object`*(default: false)*
 
@@ -903,7 +1139,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
     <script>
         $(document).ready(function() {
             $("#orders").kendoDropDownList({
-                template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
+                template: ({ OrderID, ShipName, ShipCountry }) => `<span class="order-id">${OrderID}</span> ${ShipName}, ${ShipCountry}`,
                 dataTextField: "ShipName",
                 dataValueField: "OrderID",
                 filter: "contains",
@@ -1064,7 +1300,14 @@ A jQuery object of the span element which holds the selected text.
 
     <input id="dropdownlist" />
     <script>
-    $("#dropdownlist").kendoDropDownList();
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: [
+          { name: "Apples" },
+          { name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "name"
+    });
 
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
@@ -1082,7 +1325,10 @@ A jQuery object of the filter input element, where the user types.
 
     <input id="dropdownlist" />
     <script>
-    $("#dropdownlist").kendoDropDownList();
+    $("#dropdownlist").kendoDropDownList({
+      filter:"startswith",
+      dataSource:["Chai", "Chang","Tofu"]
+    });
 
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
@@ -1090,7 +1336,7 @@ A jQuery object of the filter input element, where the user types.
     </script>
 
 ### options `Object`
-An object, which holds the options of the widget.
+An object, which holds the information about the configuration options of the widget.
 
 #### Example - get options of the widget
 
@@ -1101,6 +1347,7 @@ An object, which holds the options of the widget.
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
     var options = dropdownlist.options;
+    console.log(options) //open the console to see the options object
     </script>
 
 ### list `jQuery`
@@ -1582,6 +1829,58 @@ The value to set.
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
     dropdownlist.value("Oranges");
+    </script>
+
+#### Example - set value of the widget bound to remote data
+
+    <input id="products" style="width: 100%" />
+    <script>
+        $("#products").kendoDropDownList({
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "jsonp",
+                        url: "https://demos.telerik.com/kendo-ui/service/Products",
+                    }
+               }
+            }
+        });
+
+        var dropdownlist = $("#products").data("kendoDropDownList");
+        dropdownlist.value(2);
+    </script>
+
+#### Example - set the value of the widget when `autobind` is set to `false`
+
+    <input id="products" style="width: 100%" />
+    <script>
+      $("#products").kendoDropDownList({
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        autoBind: false,
+        dataSource: {
+          transport: {
+            read: {
+              dataType: "jsonp",
+              url: "https://demos.telerik.com/kendo-ui/service/Products",
+            }
+          }
+        }
+      });
+
+      /* Log the data length before using the DropDownList value method */
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+
+      console.log($("#products").data("kendoDropDownList").dataSource.data())
+
+      $("#products").data("kendoDropDownList").value(2);
+      setTimeout(function(){
+        /* Log the data after setting the DropDownList value */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log($("#products").data("kendoDropDownList").dataSource.data())
+      }, 500)
     </script>
 
 ## Events

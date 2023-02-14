@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.popup", "./kendo.mobile.pane" ], f);
-})(function(){
+import "./kendo.popup.js";
+import "./kendo.mobile.pane.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.popover",
     name: "PopOver",
     category: "mobile",
@@ -17,9 +16,9 @@ var __meta__ = { // jshint ignore:line
         HIDE = "hide",
         OPEN = "open",
         CLOSE = "close",
-        WRAPPER = '<div class="km-popup-wrapper" />',
-        ARROW = '<div class="km-popup-arrow" />',
-        OVERLAY = '<div class="km-popup-overlay" />',
+        WRAPPER = '<div class="km-popup-wrapper"></div>',
+        ARROW = '<div class="km-popup-arrow"></div>',
+        OVERLAY = '<div class="km-popup-overlay"></div>',
         DIRECTION_CLASSES = "km-up km-down km-left km-right",
         Widget = ui.Widget,
         DIRECTIONS = {
@@ -96,7 +95,7 @@ var __meta__ = { // jshint ignore:line
                     that.overlay.show();
                 },
 
-                activate: $.proxy(that._activate, that),
+                activate: that._activate.bind(that),
 
                 deactivate: function() {
                     that.overlay.hide();
@@ -271,6 +270,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(PopOver);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

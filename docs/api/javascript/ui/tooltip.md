@@ -550,6 +550,7 @@ Gets the current target of the Tooltip.
         $("#targetButton").click(function() {
           var target = tooltip.target();
           if (target) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(target.attr("id"));
           }
         });
@@ -581,6 +582,7 @@ Fires when an AJAX request for the content completes.
           width: 220,
           height: 280,
           contentLoad: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("content is loaded");
           }
         });
@@ -604,6 +606,7 @@ Fires when an AJAX request for the content completes.
         }).data("kendoTooltip");
 
         tooltip.bind("contentLoad", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("content is loaded");
         });
       });
@@ -623,6 +626,7 @@ Fires when a Tooltip is shown.
       $(document).ready(function() {
         $("#target").kendoTooltip({
           show: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is shown");
           }
         });
@@ -642,6 +646,7 @@ Fires when a Tooltip is shown.
         }).data("kendoTooltip");
 
         tooltip.bind("show", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("tooltip is shown");
         });
       });
@@ -682,6 +687,7 @@ Fires when a Tooltip is hidden.
       $(document).ready(function() {
         $("#target").kendoTooltip({
           hide: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is hidden!");
           }
         });
@@ -700,6 +706,7 @@ Fires when a Tooltip is hidden.
         var tooltip = $("#target").kendoTooltip().data("kendoTooltip");
 
         tooltip.bind("hide", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is hidden!");
         });
       });
@@ -725,6 +732,7 @@ Fires before an AJAX request starts. Note that this event is triggered only when
           width: 220,
           height: 280,
           requestStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("request is started");
           }
         });
@@ -749,6 +757,7 @@ Fires before an AJAX request starts. Note that this event is triggered only when
         }).data("kendoTooltip");
 
         tooltip.bind("requestStart", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("request is started");
         });
       });
@@ -762,7 +771,7 @@ The target element for which the Tooltip is shown.
 
 ##### e.options `Object`
 
-The request options which will be set to [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/) or to the `iframe`.
+The request options which will be set to [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) or to the `iframe`.
 
 ### error
 
@@ -784,6 +793,7 @@ Fires when an AJAX request for content fails.
           width: 220,
           height: 280,
           error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("error");
           }
         });
@@ -808,6 +818,7 @@ Fires when an AJAX request for content fails.
         }).data("kendoTooltip");
 
         tooltip.bind("error", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("error");
         });
       });
@@ -817,8 +828,8 @@ Fires when an AJAX request for content fails.
 
 ##### e.xhr `jqXHR`
 
-The XHR request object as returned by [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/).
+The XHR request object as returned by [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
 
 ##### e.status `String`
 
-The status of the request as returned by [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/).
+The status of the request as returned by [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).

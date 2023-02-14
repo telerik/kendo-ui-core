@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ButtonGroup PHP Class
+page_title: Overview - ButtonGroup PHP Class
 description: "Get started with the ButtonGroup PHP class in Kendo UI."
 slug: overview_buttongroup_uiforphp
 position: 1
@@ -22,7 +22,7 @@ The ButtonGroup widget groups a series of buttons together on a single line.
 
 The example below demonstrates how to initialize the ButtonGroup by using the default `buttongroup` tag.
 
-###### Example
+
 
     $buttonGroup = new \Kendo\UI\ButtonGroup('select-period');
     $month = new \Kendo\UI\ButtonGroupItem();
@@ -44,7 +44,7 @@ You can configure the ButtonGroup to be initially disabled by using its `enable`
 
 The following example demonstrates how to enable and disable the ButtonGroup.
 
-###### Example
+
 
     $disabledButtonGroup = new \Kendo\UI\ButtonGroup('disabledButton');
     $disabledButtonGroup->attr('type', 'buttongroup')

@@ -1,7 +1,7 @@
 ---
 title: Validate Required Conditional Fields
-description: An example on how to implement required conditional field validation based on the value of another input on the form when working with the Kendo UI Validator.
-page_title: Validate Required Conditional Fields | Kendo UI Validator
+description: Learn how to implement required conditional field validation based on the value of another input on the form when working with the Kendo UI Validator.
+page_title: Validate Required Conditional Fields - Kendo UI Validator for jQuery
 slug: validator-required-if-rule
 tags: validator, required, required if, required-if, validation, conditional
 ticketid: 1384728
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Validator</td>
+  <td>Progress® Kendo UI® Validator for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -41,15 +41,15 @@ The code comments contain tips for the suggested implementation. For more inform
 
 * The `form` elements must have a `name` attribute so that the Kendo UI Validator can properly attach to them.
 * The suggested approach is only one out of many ways to implement conditional validation.
-* The suggested approach can also apply to other technologies, such as MVC, as it requires only the setting of an attribute on the DOM element. For example, for the Kendo UI for MVC MultiSelect Html Helper, adding the `.HtmlAttributes(new { requiredIf = "input1" })` setting is equivalent to the markup from the following example.
+* The suggested approach can also apply to other technologies, such as MVC, as it requires only the setting of an attribute on the DOM element. For example, for the Kendo UI MultiSelect for ASP.NET MVC Html helper, adding the `.HtmlAttributes(new { requiredIf = "input1" })` setting is equivalent to the markup from the following example.
 
 ```dojo
 <form id="myform">
-	<input type="text" id="input1" name="input1" placeholder="type something here and click Validate" style="width: 250px" />
+	<span style="width: 250px" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input type="text" id="input1" name="input1" placeholder="type something here and click Validate" class='k-input-inner'/></span>
 
 	<br /><br />
 
-	<select id="requiredIfSample" multiple="multiple" requiredIf="input1" data-placeholder="Select attendees..." name="multiSelect">
+	<select style="width: 250px" id="requiredIfSample" multiple="multiple" requiredIf="input1" data-placeholder="Select attendees..." name="multiSelect">
 		<option>Steven White</option>
 		<option>Nancy King</option>
 		<option>Nancy Davolio</option>
@@ -73,11 +73,11 @@ The code comments contain tips for the suggested implementation. For more inform
 
 	<br /><br />
 
-	<input type="text" id="secondInput" requiredIf="input1" name="secondInput" />
+	<span style="width: 250px" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input type="text" id="secondInput" requiredIf="input1" name="secondInput" class='k-input-inner'/></span>
 
 	<br /><br />
 
-	<button id="save">Validate</button>
+	<button id="save" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">Validate</span></button>
 
 </form>
 

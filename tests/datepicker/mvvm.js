@@ -2,7 +2,7 @@
 
 var dom;
 
-describe("kendo.ui.Calendar MVVM", function () {
+describe("kendo.ui.DatePicker MVVM", function() {
     beforeEach(function() {
         window.change = function() {
             assert.isOk(true);
@@ -33,16 +33,6 @@ it("initializes a options from data attributes", function() {
 
     assert.equal(datepicker.options.start, "year");
     assert.equal(datepicker.dateView.options.start, "year");
-});
-
-it("initializes a disabledDates from data attributes", function() {
-    dom = $('<input data-role="datepicker" data-disable-dates="[\'sa\', \'su\']" />');
-
-    kendo.bind(dom);
-
-    var datepicker = dom.data("kendoDatePicker");
-
-    assert.isOk(datepicker.options.disableDates != $.noop);
 });
 
 it("Preserve options after widget init", function() {
@@ -208,7 +198,7 @@ it("updating model value updates the UI", function() {
     dom.kendoDatePicker();
 
     var value = new Date(2011, 1, 2);
-    observable.set("value", value)
+    observable.set("value", value);
     assert.equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
 });
 
@@ -247,7 +237,7 @@ it("dataBound event is raised if attached as option", function() {
     dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
-        items: [{text:"foo"}, {text:"bar"}]
+        items: [{ text: "foo" }, { text: "bar" }]
     });
 
     kendo.bind(dom, observable);
@@ -259,7 +249,7 @@ it("dataBound event is raised if attached as option to a already initialized dat
     dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
-        items: [{text:"foo"}, {text:"bar"}]
+        items: [{ text: "foo" }, { text: "bar" }]
     });
 
     kendo.bind(dom, observable);

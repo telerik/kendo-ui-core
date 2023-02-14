@@ -5,7 +5,7 @@ var dateview;
 var anchor;
 var div;
 
-describe("kendo.ui.DateView initialization", function () {
+describe("kendo.ui.DateView initialization", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
 
@@ -59,7 +59,7 @@ it("DateView persist focused value when calendar navigate", function() {
     dateview._calendar();
     dateview.calendar.navigate(date, "month");
 
-    assert.equal(dateview.calendar._table.find(".k-state-focused").children().attr("data-kendo-value"), "2000/10/10");
+    assert.equal(dateview.calendar._table.find(".k-focus").children().attr("data-kendo-value"), "2000/10/10");
     assert.equal(+dateview._current, +dateview.calendar._current);
 });
 });
@@ -67,7 +67,7 @@ it("DateView persist focused value when calendar navigate", function() {
 var input;
 var DatePicker = kendo.ui.DatePicker;
 
-describe("kendo.ui.DatePicker initialization", function () {
+describe("kendo.ui.DatePicker initialization", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
 
@@ -103,25 +103,25 @@ it("_wrapper() wraps input element", function() {
 
     var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-    assert.isOk(input.parent().hasClass("k-picker-wrap k-state-default"));
-    assert.isOk(datepicker.wrapper.hasClass("k-widget k-datepicker"));
+    assert.isOk(datepicker.wrapper.hasClass("k-datepicker"));
 });
 
-it("_input should add k-input to the element", function() {
+it("_input should add k-input-inner to the element", function() {
     var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-    assert.isOk(datepicker.element.hasClass("k-input"));
+    assert.isOk(datepicker.element.hasClass("k-input-inner"));
 });
 
 it("_input create calendar button", function() {
     var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
-        icon = datepicker.wrapper.find(".k-select");
+        icon = datepicker.wrapper.find(".k-button");
 
     assert.isOk(icon);
-    assert.isOk(icon.is("span"));
-    assert.isOk(icon.hasClass("k-select"));
+    assert.isOk(icon.is("button"));
+    assert.equal(icon.attr("tabindex"), "-1");
+    assert.isOk(icon.hasClass("k-input-button k-button k-icon-button k-button-md k-button-solid k-button-solid-base"));
     assert.isOk(icon.children().is("span"));
-    assert.isOk(icon.children().hasClass("k-icon k-i-calendar"));
+    assert.isOk(icon.children().hasClass("k-icon k-i-calendar k-button-icon"));
     assert.equal(icon.children().html(), "");
 });
 
@@ -132,7 +132,7 @@ it("create dateview", function() {
 });
 
 it("dateView should have correct options", function() {
-    var datepicker = input.kendoDatePicker({open: function() {}, close: $.noop, showWeekNumber: true}).data("kendoDatePicker"),
+    var datepicker = input.kendoDatePicker({ open: function() {}, close: $.noop, showWeekNumber: true }).data("kendoDatePicker"),
         dateView = datepicker.dateView,
         options = dateView.options,
         dpOptions = datepicker.options;
@@ -144,6 +144,16 @@ it("dateView should have correct options", function() {
     assert.equal(+options.max, +dpOptions.max);
     assert.equal(+options.showWeekNumber, +dpOptions.showWeekNumber);
     assert.notEqual(options.change, dpOptions.change);
+});
+
+it("dateview passes messages to calendar", function() {
+    var datepicker = new DatePicker(input, { weekNumber: true,
+        messages: {
+            weekColumnHeader: "test"
+        }
+    });
+    datepicker.open();
+    assert.equal(datepicker.dateView.calendar.options.messages.weekColumnHeader, "test");
 });
 
 it("dateview updates datepicker on calendar change", function() {
@@ -167,7 +177,7 @@ it("DatePicker wire icon click", function() {
 });
 
 it("DatePicker initializes dateInput with initial value", function() {
-    var datepicker = input.kendoDatePicker({ dateInput: true, value: new Date(2000, 10, 10)}).data("kendoDatePicker");
+    var datepicker = input.kendoDatePicker({ dateInput: true, value: new Date(2000, 10, 10) }).data("kendoDatePicker");
 
     assert.equal(datepicker.element.val(), "11/10/2000");
 });
@@ -186,6 +196,37 @@ it("form reset support", function(done) {
     setTimeout(function() {
         assert.equal(datepicker.element.val(), "12/12/2000");
         assert.equal(datepicker.dateView.calendar.value().getFullYear(), "2000");
+        done();
+    }, 200);
+});
+
+it("form reset support works correctly using the options value", function(done) {
+    var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+        datepicker = input.kendoDatePicker({ value: new Date(2018, 1, 1) }).data("kendoDatePicker");
+
+    datepicker.value("12/12/2010");
+
+    form[0].reset();
+
+    setTimeout(function() {
+        assert.equal(datepicker.element.val(), "2/1/2018");
+        assert.deepEqual(datepicker.value(), new Date(2018, 1, 1));
+        done();
+    }, 200);
+});
+
+it("form reset support works correctly using the options value and format from server", function(done) {
+    input.attr("value", "M/d/yyyy");
+    var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+        datepicker = input.kendoDatePicker({ value: new Date(2018, 1, 1) }).data("kendoDatePicker");
+
+    datepicker.value("12/12/2010");
+
+    form[0].reset();
+
+    setTimeout(function() {
+        assert.equal(datepicker.element.val(), "2/1/2018");
+        assert.deepEqual(datepicker.value(), new Date(2018, 1, 1));
         done();
     }, 200);
 });
@@ -218,6 +259,17 @@ it("extend popup options if datepicker.options.popup", function() {
         });
 
     assert.equal(datepicker.dateView.popup.options.appendTo[0], $(appendTo)[0]);
+});
+
+it("DatePicker correctly parses initial value when DateInput is present", function() {
+    input.val("09/01/2021 22:10:10");
+    var datepicker = input.kendoDatePicker({
+        format: "MMMM yyyy",
+        dateInput: true,
+        parseFormats: ["MM/dd/yyyy HH:mm:ss"]
+    }).data("kendoDatePicker");
+
+    assert.equal(datepicker.value().getFullYear(), "2021");
 });
 
 it("DatePicker adds format to parseFormats array", function() {
@@ -266,7 +318,7 @@ it("DatePicker updates calendar's focused date", function() {
     input.focus().val(kendo.toString(date, "MM/dd/yyyy"));
     datepicker.open();
 
-    var link = datepicker.dateView.calendar.element.find(".k-state-focused > .k-link");
+    var link = datepicker.dateView.calendar.element.find(".k-focus > .k-link");
 
     assert.equal(+datepicker.dateView.calendar.value(), +datepicker.value());
     assert.equal(link.html(), date.getDate());
@@ -284,7 +336,7 @@ if (!kendo.support.touch) {
 }
 
 it("DatePicker sets dates property of the calendar", function() {
-    var dates =  [new Date(2000, 10, 10)],
+    var dates = [new Date(2000, 10, 10)],
         datepicker = input.kendoDatePicker({
             dates: dates
         }).data("kendoDatePicker");
@@ -297,7 +349,7 @@ it("DatePicker sets dates property of the calendar", function() {
 it("DatePicker honors readonly attribute", function() {
     var datepicker = input.attr("readonly", true).kendoDatePicker().data("kendoDatePicker");
 
-    stub(datepicker.dateView, {toggle: datepicker.dateView.toggle});
+    stub(datepicker.dateView, { toggle: datepicker.dateView.toggle });
 
     datepicker.wrapper.find(".k-select").click();
 
@@ -344,8 +396,8 @@ it("DatePicker sets max from max attribute", function() {
 
 it("DatePicker parseFormats contains default ISO format if no parseFromats are configured", function() {
     var datepicker = input.kendoDatePicker().data("kendoDatePicker");
-    var ISOFormat = $.inArray('yyyy-MM-dd', datepicker.options.parseFormats) > -1
-    assert.isOk(ISOFormat)
+    var ISOFormat = $.inArray('yyyy-MM-dd', datepicker.options.parseFormats) > -1;
+    assert.isOk(ISOFormat);
 });
 
 it("DatePicker max and min values are reset to initial when form is reset", function() {
@@ -353,7 +405,7 @@ it("DatePicker max and min values are reset to initial when form is reset", func
     var datepicker = input.kendoDatePicker({
         min: new Date(2000, 0, 1),
         max: new Date(2000, 0, 2)
-    }).data("kendoDatePicker")
+    }).data("kendoDatePicker");
 
     datepicker.setOptions({
         max: new Date(2000, 0, 4)
@@ -374,6 +426,54 @@ it("DatePicker renders formatted value even when out of range", function() {
 
     assert.equal(datepicker.value(), null);
     assert.equal(datepicker.element.val(), kendo.toString(value, datepicker.options.format));
+});
+
+it("DatePicker renders not-floating label from string", function() {
+    var dateinput = input.kendoDatePicker({
+        label: "some label"
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+    assert.isNotOk(!!dateinput.label.floatingLabel);
+});
+
+it("DatePicker renders label from object", function() {
+    var dateinput = input.kendoDatePicker({
+        label: {
+            content: "some label"
+        }
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+});
+
+it("DatePicker renders floating label", function() {
+    var dateinput = input.kendoDatePicker({
+        label: {
+            content: "some label",
+            floating: true
+        }
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+    assert.isOk(!!dateinput.label.floatingLabel);
+});
+
+it("DatePicker renders floating label with dateInput", function() {
+    var dateinput = input.kendoDatePicker({
+        dateInput: true,
+        label: {
+            content: "some label",
+            floating: true
+        }
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
+    assert.isOk(!!dateinput.label.floatingLabel);
+    assert.isOk(dateinput.label.floatingLabel.element.hasClass('k-empty'));
+});
+
+it("renders label with function", function() {
+    var dateinput = input.kendoDatePicker({
+        label: () => `some label`
+    }).data("kendoDatePicker");
+    assert.equal(dateinput.label.element.text(), "some label");
 });
 
     });

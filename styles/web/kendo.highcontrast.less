@@ -3,6 +3,7 @@
 @background: #1b141a;
 
 @border-radius: 13px;
+@icon-size: 16px;
 
 @normal-background: #1b141a;
 @normal-text-color: #fff;
@@ -14,10 +15,32 @@
 @selected-text-color: #fff;
 @selected-gradient: "rgba(255,255,255,.3) 0%, rgba(255,255,255,.1) 100%";
 
-@error: #be5138;
-@warning: #e9a71d;
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #a7008f;
+@info: #007da7;
 @success: #2b893c;
-@info: #0c779b;
+@warning: #e9a71d;
+@error: #e33a13;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
 
 @series-a: #a7008f;
 @series-b: #ffb800;

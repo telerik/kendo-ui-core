@@ -1,21 +1,29 @@
 ---
 title: Bullet Charts
-page_title: Bullet Charts | Kendo UI Charts
+page_title: jQuery Chart Documentation - Bullet Charts
 description: "Learn how to create a Kendo UI Bullet Chart and configure its options."
 slug: chart-types-bullet
 ---
 
 # Bullet Charts
 
-The [Kendo UI Bullet Chart widget](http://demos.telerik.com/kendo-ui/bullet-charts/index) is a variation of a Bar chart.  You can use it to visualize a comparison between an expected (target) and actual (current) value. For example, with a Bullet Chart you can display company profit, employee performance, weather data and so on.
+Bullet Charts represent a variation of the [Bar Chart]({% slug bartypeofcharts_widget %}).
 
-## Configuration
+* [Demo page for the Bullet Chart](https://demos.telerik.com/kendo-ui/bullet-charts/index)
 
-Use the `bullet` series type to create a Kendo UI Bullet Chart.
+## Getting Started
 
-When binding the Bullet Chart to a DataSource, use the special `currentField` and `targetField` properties of the `series` object to point to the fields in the DataSource that hold the current and target values for each data point.
+You can use the Bullet Chart to visualize a comparison between an expected (target) and actual (current) value&mdash;for example, company profit, employee performance, weather data, and so on.
 
-###### Example
+To create a Bullet series, use `bullet` in the `series` configuration.
+
+* [Binding the Bullet chart](#binding-the-bullet-chart)
+* [Setting the orientation](#setting-the-orientation)
+* [Customizing the target value lines](#customizing-the-target-value-lines)
+
+## Binding the Bullet Chart
+
+To bind the Bullet Chart to a DataSource, set the special `currentField` and `targetField` properties of the `series` object and point them to the fields in the DataSource that hold the current and target values for each data point.
 
 ```dojo
       <div id="chart-sales"></div>
@@ -56,11 +64,9 @@ When binding the Bullet Chart to a DataSource, use the special `currentField` an
       </script>
 ```
 
-### Orientation
+## Setting the Orientation
 
-The Bullet Chart orientation can be changed by setting the series type to `verticalBullet`.
-
-###### Example
+You can change the orientation of the Bullet Chart by setting the series type to `verticalBullet`.
 
 ```dojo
       <div id="chart-sales"></div>
@@ -90,12 +96,50 @@ The Bullet Chart orientation can be changed by setting the series type to `verti
       </script>
 ```
 
+## Displaying labels
 
-### Customizing the Target Line
+To display labels for the bullet chart value, set the [`labels.visible`](/api/javascript/dataviz/ui/chart/configuration/series.labels.visible) option to `true`.
 
-You can customize the line that represents the target value using the `series.target` configuration. It exposes three main  options - `border`, `color` and `line` that control the line appearance. Below, you can see an example that uses all three options to customize the target line:
+The label content can be customized using the [`format`](/api/javascript/dataviz/ui/chart/configuration/series.labels.format) or
+[`template`](/api/javascript/dataviz/ui/chart/configuration/series.labels.template) options.
 
-###### Example
+```dojo
+      <div id="chart-sales"></div>
+      <script>
+        function createChart() {
+          var salesData = [
+            { current: 750, target: 762.5, category: 1 }, { current: 764, target: 768.5, category: 2 },
+            { current: 772, target: 770, category: 3 }, { current: 764, target: 773, category: 4 },
+            { current: 763, target: 760, category: 5 }, { current: 758, target: 765, category: 6 }];
+
+          $("#chart-sales").kendoChart({
+            dataSource: {
+              data: salesData
+            },
+            series: [{
+              type: "bullet",
+              currentField: "current",
+              targetField: "target",
+              labels: {
+                visible: true,
+                format: "{0:C}"
+              }
+            }],
+            categoryAxis: {
+              field: "category"
+            }
+          });
+        }
+
+        $(document).ready(createChart);
+      </script>
+```
+
+### Customizing the Target Value Lines
+
+You can customize the line that represents the target value through the `series.target` configuration. `target` exposes the `border`, `color`, and `line` main settings that control the line appearance.
+
+The following example demonstrates how to use all three options to customize the target line.
 
 ```dojo
       <div id="chart-sales"></div>
@@ -138,15 +182,5 @@ You can customize the line that represents the target value using the `series.ta
 
 ## See Also
 
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
-* [Area Charts]({% slug areacharts_widget %})
-* [Bar Charts]({% slug bartypeofcharts_widget %})
-* [Bubble Charts]({% slug bubblecharts_widget %})
-* [Line Charts]({% slug linetypeoscharts_widget %})
-* [Pie Charts]({% slug pietypecharts_widget %})
-* [Scatter Charts]({% slug scattercharts_widget %})
-* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
-* [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [TreeMap]({% slug overview_treemap_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Bullet Chart (Demo)](https://demos.telerik.com/kendo-ui/bullet-charts/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

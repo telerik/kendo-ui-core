@@ -2,7 +2,7 @@
 title: Cannot Display GeoJSON Coordinates in Proper Order for Bubble Type Layer in Map
 description: The received GeoJSON data is handled in a reversed longitude-latitude order when displaying a bubble-type layer in a Kendo UI Map.
 type: troubleshooting
-page_title: Problem with GeoJSON Coordinates for Bubble-Type Map Layer Received in Reversed Order | Kendo UI Map
+page_title: Problem with GeoJSON Coordinates for Bubble-Type Map Layer Received in Reversed Order - Kendo UI Map for jQuery
 slug: map-reverse-location-coordinates
 tags: kendo ui map, location, coordinates, longitude, latitude
 ticketid: 1111871
@@ -15,10 +15,10 @@ component: map
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Map</td>
+  <td>Progress® Kendo UI® Map for jQuery</td>
  </tr>
   <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 504</td>
  </tr>
 </table>
@@ -40,12 +40,12 @@ The Map accepts a `[Latitude, Longitude]` format for its locations field. When y
     <base href="https://demos.telerik.com/kendo-ui/map/bubble-layer">
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common-material.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.material.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.material.mobile.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.material.mobile.min.css" />
 
-    <script src="https://kendo.cdn.telerik.com/2017.2.504/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 </head>
 <body>
 <div id="example">

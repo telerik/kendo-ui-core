@@ -3,6 +3,7 @@
 @background: #414550;
 
 @border-radius: 2px;
+@icon-size: 16px;
 
 @normal-background: #212a33;
 @normal-text-color: #fff;
@@ -14,10 +15,32 @@
 @selected-text-color: #171e28;
 @selected-gradient: "#f4af03 0%, #ee9f05 100%";
 
-@error: #be5138;
-@warning: #ea9d07;
-@success: #2b893c;
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #ffca08;
 @info: #0c779b;
+@success: #2b893c;
+@warning: #ea9d07;
+@error: #be5138;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
 
 @series-a: #ffca08;
 @series-b: #ff710f;

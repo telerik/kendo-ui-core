@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.mobile.view", "./kendo.userevents" ], f);
-})(function(){
+import "./kendo.mobile.view.js";
+import "./kendo.userevents.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.drawer",
     name: "Drawer",
     category: "mobile",
@@ -309,7 +308,7 @@ var __meta__ = { // jshint ignore:line
                 shouldShow = velocity < velocityThreshold && (velocity < -velocityThreshold || pastHalf);
             }
 
-            if(shouldShow) {
+            if (shouldShow) {
                 this._show();
             } else {
                 this.hide();
@@ -320,6 +319,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(Drawer);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

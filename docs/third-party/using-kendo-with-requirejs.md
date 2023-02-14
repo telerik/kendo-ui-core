@@ -1,6 +1,6 @@
 ---
 title: RequireJS
-page_title: RequireJS | Kendo UI Third-Party Tools
+page_title: RequireJS - Kendo UI Third-Party Tools
 description: "Learn how to work with Kendo UI and RequireJS compatible loader."
 previous_url: /using-kendo-with-requirejs
 slug: requirejs_integration_kendoui
@@ -13,7 +13,7 @@ The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.or
 > * As of 2016, the RequireJS project is mostly superseded by solutions such as [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
 > * You may check the help articles on their integration too&mdash;[Webpack support]({% slug webpacksupport_integration_kendoui %}) and [SystemJS support]({% slug systemjs_integration_kendoui %}).
 > * Due to a bug, the examples below do not work with the official Kendo UI Q1 2016 release. They should work as expected with the versions 2016.1.118 and later.
-> * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder) using RequireJS.
+> * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_scripts %}#employ-download-builder) using RequireJS.
 
 ## Loading from Local Directories
 
@@ -58,12 +58,12 @@ The following example demonstrates how to load the Kendo UI JavaScript files fro
 
 The following example demonstrates how to use a bundle script with RequireJS.
 
-```dojo
+```pseudo
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -72,9 +72,9 @@ The following example demonstrates how to use a bundle script with RequireJS.
 
       require.config({
         paths: {
-          "jquery": "https://code.jquery.com/jquery-1.9.1.min",          
-          "jszip": "https://kendo.cdn.telerik.com/2018.1.221/js/jszip.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min",
+          "jquery": "https://code.jquery.com/jquery-1.9.1.min",
+          "jszip": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min",
+          "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min",
         }
       });
 
@@ -96,13 +96,13 @@ The following example demonstrates how to use a bundle script with RequireJS.
 
 The following example demonstrates how to load AngularJS and initialize it with [`angular.bootsrap`](https://docs.angularjs.org/api/ng/function/angular.bootstrap) when all `.js` files are loaded.
 
-```dojo
+```pseudo
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -115,7 +115,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
         paths: {
           "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/2016.1.406/js/kendo.all.min"
+          "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min"
         },
         shim: {
           "angular": { deps: ["jquery"] },
@@ -124,6 +124,58 @@ The following example demonstrates how to load AngularJS and initialize it with 
       });
 
       require([ "angular", "kendo.all.min" ], function() {
+        var app = angular.module("app", ["kendo.directives"]);
+
+        app.controller("controller", ["$scope", function($scope) {
+          $scope.options = {
+            dataSource: {
+              data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
+            },
+            dataTextField: "name",
+            dataValueField: "value"
+          };
+        }]);
+
+        angular.bootstrap(document, ["app"]);
+      });
+    </script>
+  </body>
+</html>
+```
+
+## Using Custom Kendo Scripts in AngularJS
+
+The following example demonstrates how to use a [custom Kendo script created with `gulp`]({% slug include_only_what_you_need_kendoui_scripts %}#use-gulp) with RequireJS and AngularJS. The script for the below example has been created with the following command: `npx gulp custom -c dropdownlist,angular`.
+
+```pseudo
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+  </head>
+  <body>
+    <div ng-controller="controller">
+      <select kendo-drop-down-list k-options="options"></select>
+    </div>
+
+    <script>
+      require.config({
+        paths: {
+          "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular.min",
+          "jquery": "https://code.jquery.com/jquery-3.1.1.min",
+          "kendo.angular.min": "dist/js/kendo.custom.min",
+          "kendo.dropdownlist.min": "dist/js/kendo.custom.min"
+        },
+        shim: {
+          "angular": { deps: ["jquery"] },
+          "kendo.angular.min": { deps: ["angular"] },
+          "kendo.dropdownlist.min": { deps: ["kendo.angular.min"] },
+        }
+      });
+
+      require([ "jquery", "angular", "kendo.angular.min", "kendo.dropdownlist.min" ], function() {
         var app = angular.module("app", ["kendo.directives"]);
 
         app.controller("controller", ["$scope", function($scope) {

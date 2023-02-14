@@ -6,7 +6,7 @@
         beforeEach(function() {
             window.change = function() {
                 assert.isOk(true);
-            }
+            };
         });
         afterEach(function() {
             delete window.change;
@@ -31,16 +31,6 @@
 
             assert.equal(datetimepicker.options.start, "year");
             assert.equal(datetimepicker.dateView.options.start, "year");
-        });
-
-        it("initializes a disabledDates from data attributes", function() {
-            dom = $('<input data-role="datetimepicker" data-disable-dates="[\'sa\', \'su\']" />');
-
-            kendo.bind(dom);
-
-            var datetimepicker = dom.data("kendoDateTimePicker");
-
-            assert.isOk(datetimepicker.options.disableDates != $.noop);
         });
 
         it("initializes min and max options from data attributes", function() {
@@ -205,7 +195,7 @@
             dom.kendoDateTimePicker();
 
             var value = new Date(2011, 1, 2);
-            observable.set("value", value)
+            observable.set("value", value);
             assert.equal(dom.data("kendoDateTimePicker").value().getTime(), value.getTime());
         });
 

@@ -1,10 +1,10 @@
 ---
 title: Building the Hybrid Sushi Application
-page_title: Building the Hybrid Sushi Application | Kendo UI Hybrid Components
+page_title: Building the Hybrid Sushi Application - Kendo UI Hybrid Components
 description: "Build the Sushi single-page application by using the Kendo UI hybrid components in AngularJS."
 previous_url: /controls/hybrid/angular/sushi-angular-tutorial, /controls/hybrid/support/angular/tutorials/sushi-angular-tutorial, /AngularJS/tutorials/sushi-angular-tutorial
 slug: buildappswithangular_tutorial_hybridkendoui
-position: 8
+position: 9
 ---
 
 # Building the Hybrid Sushi Application
@@ -38,13 +38,13 @@ Create a new empty HTML file and include jQuery, AngularJS, and Kendo UI. In thi
         <meta charset="utf-8">
         <title>Kendo UI Mobile Loves AngularJS</title>
 
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.3.1029/styles/kendo.mobile.all.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
         <link rel="https://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-        <script src="http://kendo.cdn.telerik.com/2014.3.1029/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
     </head>
     <body>
 
@@ -65,13 +65,13 @@ To initialize the hybrid mobile application, add a `kendo-mobile-application` at
         <meta charset="utf-8">
         <title>Kendo UI Mobile Loves AngularJS</title>
 
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.3.1029/styles/kendo.mobile.all.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
         <link rel="https://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-        <script src="http://kendo.cdn.telerik.com/2014.3.1029/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
     </head>
     <body kendo-mobile-application ng-app="sushiMobileApp">
 
@@ -98,7 +98,7 @@ The **Home** View will display a list of featured products and is also going to 
 
     </body>
 
-Run the application. The screen is expected to display the index View. For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS).
+Run the application. The screen is expected to display the index View. For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS).
 
 ### Making the Application SEO-Friendly
 
@@ -186,9 +186,9 @@ Now define a basic template to verify that the data is loaded and displayed corr
 
 **Figure 1: Application displaying a products view**
 
-![products view](image-02.png)
+![Kendo UI for jQuery Products View](angularjs-products-view.png)
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/3).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/3).
 
 ## Adding the Layout
 
@@ -226,9 +226,9 @@ Reload the application and see the new look. Have in mind that at present the **
 
 **Figure 2: Index view with a layout**
 
-![index view with layout](image-03.png)
+![Kendo UI for jQuery Index View with Layout](angularjs-index-view-layout.png)
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/4).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/4).
 
 ## Creating the Our Menu View
 
@@ -287,7 +287,7 @@ The `filterFeatured` and `groupByCategory` event handlers have to be declared in
         }
     }])
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/5).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/5).
 
 ## Customizing Templates
 
@@ -349,9 +349,9 @@ Last, tell the ListViews to use the new template. Add the `k-template="sushiCart
 
 **Figure 3: A grouped ListView**
 
-![grouped listview](image-04.png)
+![Kendo UI for jQuery Grouped ListView](angularjs-grouped-listview.png)
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/6).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/6).
 
 ## Displaying the Record Details
 
@@ -418,9 +418,9 @@ Now if the user clicks on an item, the application navigates to a new View and d
 
 **Figure 4: Product details view**
 
-![product details](image-05.png)
+![Kendo UI for jQuery Product Details](angularjs-product-details.png)
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/7).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/7).
 
 ## Creating the Cart View
 
@@ -464,9 +464,9 @@ Add `cartController` with a dependency to the `sushiCart` and `templates` servic
 
 **Figure 5: An empty cart**
 
-![empty cart](image-06.png)
+![Kendo UI for jQuery Empty Cart](angularjs-empty-cart.png)
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/8).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/8).
 
 ## Adding Functionalities
 
@@ -580,7 +580,7 @@ The `showLabel` method is used to determine whether the ordered label is to be d
 
     <span class="added" ng-show="sushiCart.showLabel()">{{sushiCart.currentItem.ordered}}</span>
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/9).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/9).
 
 ## Creating the Account View
 
@@ -607,7 +607,7 @@ The **Account** View is going to display some basic information for the user suc
 
 Note that it is possible to include other widgets in the ListView items&mdash;the corresponding directives will be automatically executed. Since this View will not provide any extra functionality it does not need a controller.
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/10).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/10).
 
 ## Creating the Done View
 
@@ -628,7 +628,7 @@ The **Done** View is going to be shown after checkout and is to indicate that th
         </kendo-mobile-content>
     </kendo-mobile-view>
 
-For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/11).
+For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/11).
 
 ## Handling Remote Views
 
@@ -668,7 +668,7 @@ If something goes wrong:
 
 - [Check for JavaScript errors]({% slug troubleshooting_javascript_errors_kendoui %}).
 - Check if the issue you encounter is not already described in the [troubleshooting article on common issues]({% slug troubleshooting_common_issues_kendoui %}).
-- Check [this screen cast](http://blogs.telerik.com/kendoui/posts/13-01-02/screencast_debugging_kendo_ui_applications) as it provides a brief overview of how to easily debug Kendo UI Applications.
+- Check [this screen cast](https://www.telerik.com/blogs/screencast-debugging-kendo-ui-applications) as it provides a brief overview of how to easily debug Kendo UI Applications.
 
 ## See Also
 

@@ -22,9 +22,6 @@ The schema configuration of the TreeListDataSource.
 
 ### schema.model `Object`
 
-> The `Id` and `ParentId` fields of the model have to be of type `number` or `numeric string` that can be parsed to number. 
-    
-
 The model configuration of the TreeListDataSource. See [kendo.data.TreeListModel](/api/javascript/data/treelistmodel) for more info.
 
 #### Example
@@ -93,6 +90,7 @@ The model that must be loaded.
         // log child nodes of first root
         var root = dataSource.at(0);
         var children = dataSource.childNodes(root);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(children);
       });
     </script>
@@ -131,7 +129,8 @@ The model whose children must be returned.
       dataSource.read();
 
       var firstNode = dataSource.view()[0];
-      var childNodes = dataSource.childNodes(firstNode); 
+      var childNodes = dataSource.childNodes(firstNode);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(childNodes); // returns an array of the child nodes of the first node
     </script>
 
@@ -162,7 +161,8 @@ Return all root nodes.
 
       dataSource.read();
 
-      var rootNodes = dataSource.rootNodes(); 
+      var rootNodes = dataSource.rootNodes();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(rootNodes); // returns an array of the root nodes
     </script>
 
@@ -200,8 +200,9 @@ The model whose parent must be returned.
       dataSource.read();
 
       var childNode = dataSource.view()[1];
-      var parentNode = dataSource.parentNode(childNode); 
-      console.log(parentNode); // returns the parent node of the passed node 
+      var parentNode = dataSource.parentNode(childNode);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(parentNode); // returns the parent node of the passed node
     </script>
 
 ### level
@@ -240,6 +241,7 @@ The model whose level must be calculated.
         },
         change: function(e){
           var item = dataSource.get(9);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Employee with name " + item.FirstName + "is at level: " + dataSource.level(item));
         }
       });

@@ -1,9 +1,9 @@
 ---
 title: Paging
-page_title: jQuery Grid Documentation | Paging | Kendo UI
+page_title: jQuery Grid Documentation - Paging
 description: "Get started with the jQuery Grid by Kendo UI and implement its paging functionality to page the displayed data and learn how to do paging on the server."
 slug: paging_kendoui_grid_widget
-position: 6
+position: 8
 ---
 
 # Paging
@@ -19,12 +19,10 @@ In order for paging to work properly:
 * Define the total number of records in the dataset.
 * Specify the `pageSize` on the data source and the field in the dataset that will contain the total number of records.
 
-###### Example
-
-$("#grid").kendoGrid({
-  pageable: true
-  // Other configuration.
-  });
+    $("#grid").kendoGrid({
+      pageable: true
+      // Other configuration.
+      });
 
 ## Paging on the Server
 
@@ -34,9 +32,7 @@ To enhance the performance of the Grid, apply the paging operations on the serve
 
 For example, to display page 3 out of a 60-record dataset as split into ten records per page, the Grid will send `skip: 20`, `top: 10`.
 
-The Grid works with HTTP requests which send and receive JSON payload. For example, to bind the widget to a particular page of a specific data subset, instruct the dataSource to use [`serverPaging`](/api/javascript/data/datasource/configuration/serverpaging). As a result, it will directly use the received data. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
-
-###### Example
+The Grid works with HTTP requests which send and receive JSON payload. For example, to bind the component to a particular page of a specific data subset, instruct the dataSource to use [`serverPaging`](/api/javascript/data/datasource/configuration/serverpaging). As a result, it will directly use the received data. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
 
        $(document).ready(function(){
           $("#grid").kendoGrid({
@@ -59,8 +55,12 @@ As of the Kendo UI 2017 R3 release, the Grid enables you to toggle the visibilit
 
 For a runnable example, refer to the [demo on controlling the pager visibility in the Grid](https://demos.telerik.com/kendo-ui/grid/pager-visibility).
 
+## KB Articles on Paging
+
+* [Changing the Grid Pager to Slider]({% slug howto_change_grid_pager_to_slider %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Pager Visibility by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/pager-visibility)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Knowledge Base Section](/knowledge-base)

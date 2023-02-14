@@ -61,7 +61,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.find("span:first").html()), "foo");
+            assert.equal(dom.find("span:first").html().trim(), "foo");
         });
 
         it("updating viewModel updates the content", function() {
@@ -75,7 +75,7 @@
 
             observable.set("text", "bar");
 
-            assert.equal($.trim(dom.find("span:first").html()), "bar");
+            assert.equal(dom.find("span:first").html().trim(), "bar");
         });
 
         it("event is raised if attached as option", function() {
@@ -169,8 +169,8 @@
 
             var window = dom.data("kendoWindow");
 
-            assert.equal(window.wrapper.width(), 144);
-            assert.closeTo(window.wrapper.height(), 233, 1);
+            assert.equal(window.wrapper.outerWidth(), 144);
+            assert.closeTo(window.wrapper.outerHeight(), 233, 1);
         });
 
         it("set content through data attribute", function() {
@@ -188,7 +188,7 @@
 
         it("set appendTo through data attribute", function() {
             var dom = $(
-                '<div data-role="window" data-append-to="#bar" /><div id="bar" />'
+                '<div data-role="window" data-append-to="#bar"></div><div id="bar"></div>'
             ).appendTo(Mocha.fixture);
 
             kendo.bind(dom, {});

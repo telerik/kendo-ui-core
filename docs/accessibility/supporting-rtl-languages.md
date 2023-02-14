@@ -1,6 +1,6 @@
 ---
 title: Right-to-Left Languages
-page_title: Right-to-Left Languages | Kendo UI Accessibility Support
+page_title: Right-to-Left Languages - Kendo UI Accessibility Support
 related: a11y-accessibility-overview, widget-appearance-rtl
 description: "Learn more about the Accessibility features related to bidirectional languages, supported by Kendo UI controls."
 slug: right_toleft_languages_accessibility_support
@@ -66,7 +66,7 @@ For more information on appearance and layout in Kendo UI, refer to [the article
 
 ## Automatic Implementation
 
-Your project might require you to trigger the RTL support automatically and not upon user interaction. In such cases, you can inspect the [`Accept-Language`](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4) HTTP header to determine if a user prefers an RTL language.
+Your project might require you to trigger the RTL support automatically and not upon user interaction. In such cases, you can inspect the [`Accept-Language`](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4) HTTP header to determine if a user prefers an RTL language.
 
 The `Accept-Language` header is provided with every HTTP request, and is typically exposed as a property on a request object in server-side frameworks. If you are using ASP.NET, for instance, you can access the `Accept-Language` header by calling `userLangs = Request.Headers["Accept-Language"];`.
 
@@ -78,7 +78,7 @@ The `Accept-Language` header may return a comma-separated list of languages, ord
 
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [Section 508 and WCAG 2.1 Compliance of Kendo UI Widgets]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})

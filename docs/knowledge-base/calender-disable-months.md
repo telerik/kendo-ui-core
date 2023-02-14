@@ -1,16 +1,16 @@
 ---
 title: Disable Months in the Kendo UI Calendar Year View
-description: An example how to disable months in year view of the Kendo UI Calendar
+page_title: Disable Months in Calendar Year View - Kendo UI Calendar for jQuery
+description: An example how to disable months in the year view of the Kendo UI Calendar.
 type: how-to
-page_title: Disable Months in Calendar Year View | Kendo UI Calendar
 slug: calender-disable-months
-position: 
 tags: calendar, disable, year view, month
 ticketid: 1144828
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,29 +18,32 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Calendar for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Calendar for jQuery</td>
 	</tr>
 </table>
 
 
 ## Description
 
-Is there any way to disable the months in the calendar for the year. My min and max dates are from 1st January 2017 to 31st August 2017. My requirement is to show the months from September 2017 - December 2017 but in the disabled state.
+How can I disable the months in the calendar for the year? My min and max dates are from 1st January 2017 to 31st August 2017 and I'd like to show the months from September 2017 to December 2017 but in the disabled state.
 
 ## Solution
 
-At present, the Kendo UI Calendar does not have a year template, so to disable the dates, we need to select the cells from the generated table and add the `k-state-disabled` class to them and prevent the selection. We can stop the click from propagating and triggering change with the [`e.stopImmediatePropagation()`](https://api.jquery.com/event.stopimmediatepropagation/) method.
+The Kendo UI Calendar does not have a year template. As a result, to disable the dates:
 
-The Kendo UI Calendar has a [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/events/navigate) event which is suitable to implement disabled months in the year view if the users will be allowed to navigate to other views.
+1. Select the cells from the generated table.
+1. Add the `k-disabled` class to them to prevent the selection.
 
-###### Example:
-  
+You can stop the click from propagating and triggering a change with the [`e.stopImmediatePropagation()`](https://api.jquery.com/event.stopimmediatepropagation/) method.
+
+The Calendar exposes a [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/events/navigate) event which is suitable for implementing disabled months in the year view if the users will be allowed to navigate to other views.
+
 ```dojo
 <div id="monthpicker"></div>
 <script>
    function disableDates(calendar){
      calendar.element.find("tr:last-child td")
-       .addClass("k-state-disabled")
+       .addClass("k-disabled")
        .click(function(e){
        e.stopImmediatePropagation();
      });

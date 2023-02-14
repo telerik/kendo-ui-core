@@ -1,6 +1,6 @@
 ---
 title: View
-page_title: View | Kendo UI Single-Page Application
+page_title: View - Kendo UI Single-Page Application
 description: "Learn how to handle the view class in a Kendo UI Single-Page Application."
 slug: viewclass_kendoui_singlepageapplication
 position: 4
@@ -69,7 +69,7 @@ Note that subsequent `render` calls will not re-instantiate the `view` element, 
 
 ## Integrating Views with MVVM
 
-If an `observable` object is passed as a `model` configuration option to the `view` constructor, the view binds it to the element when instantiated. If no `model` is present, the content will be processed using [`data` attribute initialization]({% slug initialize_widgets_using_markup_installation %}).
+If an `observable` object is passed as a `model` configuration option to the `view` constructor, the view binds it to the element when instantiated. If no `model` is present, the content will be processed using [`data` attribute initialization]({% slug mvvm_initialization_kendoui %}).
 
 If the view `evalTemplate` configuration option is set to `true`, the template is treated as a [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}) and evaluated against the passed model instance when the view is rendered initially.
 

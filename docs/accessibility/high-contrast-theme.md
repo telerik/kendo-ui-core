@@ -1,6 +1,6 @@
 ---
 title: High-Contrast Theme
-page_title: High-Contrast Theme | Kendo UI Accessibility Support
+page_title: High-Contrast Theme - Kendo UI Accessibility Support
 related: a11y-accessibility-overview
 description: "Accessibility support through setting Kendo UI high-contrast theme for HTML5 UI controls."
 slug: high_contrast_theme_accessibility_support
@@ -27,7 +27,7 @@ To address this issue, apply the high-contrast styles to all or part of a page b
 
 ## WCAG 2.1
 
-The [Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG21) sections [1.4.3 Contrast (Minimum)](hhttps://www.w3.org/TR/WCAG21/#contrast-minimum) and [1.4.6 Contrast (Enhanced)](https://www.w3.org/TR/WCAG21/#contrast-enhanced) state that to be compliant, text and images in a web page must adhere to minimum contrast ratios (with respect to their background elements). The Kendo UI High Contrast theme was tested by using an [online color contrast checker](http://www.snook.ca/technical/colour_contrast/colour.html) which yielded the following results:
+The [Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG21) sections [1.4.3 Contrast (Minimum)](https://www.w3.org/TR/WCAG21/#contrast-minimum) and [1.4.6 Contrast (Enhanced)](https://www.w3.org/TR/WCAG21/#contrast-enhanced) state that to be compliant, text and images in a web page must adhere to minimum contrast ratios (with respect to their background elements). The Kendo UI High Contrast theme was tested by using an [online color contrast checker](https://www.snook.ca/technical/colour_contrast/colour.html) which yielded the following results:
 
 1. Normal Text Color / Background = 15.9
 2. Selected Text Color / Background = 8.59
@@ -39,7 +39,7 @@ The first two results exceed the enhanced minimum ratio of seven that is specifi
 
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [Section 508 and WCAG 2.1 Compliance of Kendo UI Widgets]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})

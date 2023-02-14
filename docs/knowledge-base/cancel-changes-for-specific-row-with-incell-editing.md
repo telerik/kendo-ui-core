@@ -1,8 +1,8 @@
 ---
-title: Cancel Changes Per Row by Using the In-Cell Editing Mode of the Grid
-description: An example on how to cancel the changes for a specific Kendo UI Grid row when the Grid is in the in-cell editing mode.
+title: Cancel Changes per Row by Using the Incell Editing Mode of the Grid
+page_title: Cancel Changes for Specific Row in Incell Editing Mode - Kendo UI Grid for jQuery
+description: Learn how to cancel the changes for a specific Kendo UI Grid row when the Grid is in the incell editing mode.
 type: how-to
-page_title: Cancel Changes for Specific Row in In-Cell Editing Mode | Kendo UI Grid
 slug: cancel-changes-for-specific-row-with-incell-editing
 tags: grid, editing
 ticketid: 1111657
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -30,8 +30,8 @@ component: grid
   <td>58.0.3029.110</td>
  </tr>
   <tr>
-  <td>Made With Version</td>
-  <td>2017.2.504</td>
+  <td>Product Version</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -59,11 +59,11 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 
 For more details, refer to the following articles:
 
-* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/getbyuid](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/getbyuid)
-* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/cancelchanges](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/cancelchanges)
-* [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/configuration/columns.command](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command)
+* [https://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/getbyuid](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/getbyuid)
+* [https://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/cancelchanges](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/cancelchanges)
+* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/configuration/columns.command](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command)
 
-To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](http://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
+To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
 
 ````dojo
 <div id="example">
@@ -131,7 +131,7 @@ To resolve the resulting scroll-related issue which occurs after the refresh, [r
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
               { field: "UnitsInStock", title: "Units In Stock", width: 120 },
-              { field: "Discontinued", width: 120, editor: customBoolEditor },
+              { field: "Discontinued", width: 120 },
               { command: [{
                 name: "Cancel",
                 click: function(e) {
@@ -153,11 +153,6 @@ To resolve the resulting scroll-related issue which occurs after the refresh, [r
             editable: true
           });
         });
-
-        function customBoolEditor(container, options) {
-          $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label">​</label>').appendTo(container);
-        }
       </script>
     </div>
 ````

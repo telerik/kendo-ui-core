@@ -1,8 +1,8 @@
 ---
 title: Add Multi-Check Filter to Grid in Row Mode
-description: An example on how to enable the multi-check filter in a Kendo UI Grid
+description: Learn how to enable the multi-check filter in a Kendo UI Grid
 type: how-to
-page_title: Implement Multi-Checkbox Filter in Row-Filterable Grid | Kendo UI Grid
+page_title: Implement Multi-Checkbox Filter in Row-Filterable Grid - Kendo UI Grid for jQuery
 slug: filter-multi-check-row-filter
 tags: checkbox, filter, row, multi, kendo, grid
 ticketid: 1123045
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 
@@ -60,19 +60,14 @@ The following example demonstrates the complete implementation of the suggested 
 
 ```dojo
     <style>
-      body .k-button-icon, body .k-split-button-arrow {
+      .nameFilter > .k-grid-filter-menu {
         padding: 0;
-      }
-
-      .k-button.k-button-icon .k-icon, .k-grid-filter .k-icon, .k-header .k-icon {
-        padding: 0 0.4em;
-      }
-
-      a.k-grid-filter:focus, input[type="checkbox"]{
-        outline:0;
+        left: 0;
+        bottom: 0;
       }
     </style>
-        <div id="grid"></div>
+  
+    <div id="grid"></div>
     <script>
       var grid = $("#grid").kendoGrid({
         columns: [
@@ -108,7 +103,7 @@ The following example demonstrates the complete implementation of the suggested 
           var ageFilter = e.sender.thead.find("th[data-field='age']>a").hide();
           if(multifilter){
             $("span[data-field='name']").first().replaceWith(multifilter);
-            multifilter.wrap("<span class='k-button k-button-icon k-dropdown-wrap'></span>");
+            multifilter.wrap("<span class='nameFilter k-button k-button-icon k-dropdown-wrap'></span>");
           }
         }
       }).data("kendoGrid");

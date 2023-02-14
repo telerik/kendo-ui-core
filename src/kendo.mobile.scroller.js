@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.fx", "./kendo.draganddrop" ], f);
-})(function(){
+import "./kendo.fx.js";
+import "./kendo.draganddrop.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.scroller",
     name: "Scroller",
     category: "mobile",
@@ -15,7 +14,6 @@ var __meta__ = { // jshint ignore:line
         mobile = kendo.mobile,
         fx = kendo.effects,
         ui = mobile.ui,
-        proxy = $.proxy,
         extend = $.extend,
         Widget = ui.Widget,
         Class = kendo.Class,
@@ -46,8 +44,8 @@ var __meta__ = { // jshint ignore:line
             Animation.fn.init.call(that);
             extend(that, options);
 
-            that.userEvents.bind("gestureend", proxy(that.start, that));
-            that.tapCapture.bind("press", proxy(that.cancel, that));
+            that.userEvents.bind("gestureend", that.start.bind(that));
+            that.tapCapture.bind("press", that.cancel.bind(that));
         },
 
         enabled: function() {
@@ -86,9 +84,9 @@ var __meta__ = { // jshint ignore:line
             });
 
             that.tapCapture.bind("press", function() { that.cancel(); });
-            that.userEvents.bind("end", proxy(that.start, that));
-            that.userEvents.bind("gestureend", proxy(that.start, that));
-            that.userEvents.bind("tap", proxy(that.onEnd, that));
+            that.userEvents.bind("end", that.start.bind(that));
+            that.userEvents.bind("gestureend", that.start.bind(that));
+            that.userEvents.bind("tap", that.onEnd.bind(that));
         },
 
         onCancel: function() {
@@ -120,9 +118,15 @@ var __meta__ = { // jshint ignore:line
 
             if (!that.dimension.enabled) { return; }
 
-
             if (that.paneAxis.outOfBounds()) {
-                that._snapBack();
+                if (that.transition._started) {
+                    that.transition.cancel();
+                    that.velocity = Math.min(e.touch[that.axis].velocity * that.velocityMultiplier, MAX_VELOCITY);
+
+                    Animation.fn.start.call(that);
+                } else {
+                    that._snapBack();
+                }
             } else {
                 velocity = e.touch.id === MOUSE_WHEEL_ID ? 0 : e.touch[that.axis].velocity;
                 that.velocity = Math.max(Math.min(velocity * that.velocityMultiplier, MAX_VELOCITY), -MAX_VELOCITY);
@@ -224,7 +228,11 @@ var __meta__ = { // jshint ignore:line
         init: function(options) {
             var that = this,
                 horizontal = options.axis === "x",
-                element = $('<div class="km-touch-scrollbar km-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
+                element = $('<div role="scrollbar" aria-controls="' + options.controlsId + '" class="km-touch-scrollbar km-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
+
+            if (horizontal) {
+                element.attr("aria-orientation", "horizontal");
+            }
 
             extend(that, options, {
                 element: element,
@@ -235,7 +243,7 @@ var __meta__ = { // jshint ignore:line
                 size: horizontal ? "width" : "height"
             });
 
-            that.scrollMovable.bind(CHANGE, proxy(that.refresh, that));
+            that.scrollMovable.bind(CHANGE, that.refresh.bind(that));
             that.container.append(element);
             if (options.alwaysVisible) {
                 that.show();
@@ -270,17 +278,30 @@ var __meta__ = { // jshint ignore:line
                 that.elementSize = size;
             }
 
+            that._ariaValue(position, dimension.size - that.elementSize);
+
             that.movable.moveAxis(axis, position);
         },
 
         show: function() {
-            this.element.css({opacity: SCROLLBAR_OPACITY, visibility: "visible"});
+            this.element.css({ opacity: SCROLLBAR_OPACITY, visibility: "visible" });
         },
 
         hide: function() {
             if (!this.alwaysVisible) {
-                this.element.css({opacity: 0});
+                this.element.css({ opacity: 0 });
             }
+        },
+
+        _ariaValue: function(current, total) {
+            var element = this.element;
+
+            if (current > total) {
+                current = total;
+            }
+
+            element.attr("aria-valuemax", total);
+            element.attr("aria-valuenow", current);
         }
     });
 
@@ -337,7 +358,7 @@ var __meta__ = { // jshint ignore:line
 
                         var velocityX = abs(e.x.velocity),
                             velocityY = abs(e.y.velocity),
-                            horizontalSwipe  = velocityX * 2 >= velocityY,
+                            horizontalSwipe = velocityX * 2 >= velocityY,
                             originatedFromFixedContainer = $.contains(that.fixedContainer[0], e.event.target),
                             verticalSwipe = velocityY * 2 >= velocityX;
 
@@ -381,7 +402,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             if (that.options.mousewheelScrolling) {
-                element.on("DOMMouseScroll mousewheel",  proxy(this, "_wheelScroll"));
+                element.on("DOMMouseScroll mousewheel", this._wheelScroll.bind(this));
             }
 
             extend(that, {
@@ -417,6 +438,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         _wheelScroll: function(e) {
+            if (e.ctrlKey) {
+                return;
+            }
+
             if (!this._wheel) {
                 this._wheel = true;
                 this._wheelY = 0;
@@ -497,7 +522,7 @@ var __meta__ = { // jshint ignore:line
             if (this._native) {
                 this.scrollElement.scrollTop(0);
             } else {
-                this.movable.moveTo({x: 0, y: 0});
+                this.movable.moveTo({ x: 0, y: 0 });
                 this._scale(1);
             }
         },
@@ -530,11 +555,11 @@ var __meta__ = { // jshint ignore:line
 
         scrollTo: function(x, y) {
             if (this._native) {
-                this.scrollElement.scrollLeft(abs(x));
+                kendo.scrollLeft(this.scrollElement, abs(x));
                 this.scrollElement.scrollTop(abs(y));
             } else {
                 this.dimensions.refresh();
-                this.movable.moveTo({x: x, y: y});
+                this.movable.moveTo({ x: x, y: y });
             }
         },
 
@@ -542,7 +567,7 @@ var __meta__ = { // jshint ignore:line
             var from,
                 to;
 
-            if(this._native) {
+            if (this._native) {
                 this.scrollTo(x, y);
             } else {
                 from = { x: this.movable.x, y: this.movable.y };
@@ -587,14 +612,14 @@ var __meta__ = { // jshint ignore:line
             that.refreshHint = that.scrollElement.children().first();
             that.hintContainer = that.refreshHint.children(".km-template");
 
-            that.pane.y.bind("change", proxy(that._paneChange, that));
-            that.userEvents.bind("end", proxy(that._dragEnd, that));
+            that.pane.y.bind("change", that._paneChange.bind(that));
+            that.userEvents.bind("end", that._dragEnd.bind(that));
         },
 
         _dragEnd: function() {
             var that = this;
 
-            if(!that.pulled) {
+            if (!that.pulled) {
                 return;
             }
 
@@ -623,17 +648,26 @@ var __meta__ = { // jshint ignore:line
 
         _initAxis: function(axis) {
             var that = this,
+                elementId = that.element.attr("id"),
                 movable = that.movable,
                 dimension = that.dimensions[axis],
                 tapCapture = that.tapCapture,
                 paneAxis = that.pane[axis],
-                scrollBar = new ScrollBar({
-                    axis: axis,
-                    movable: movable,
-                    dimension: dimension,
-                    container: that.element,
-                    alwaysVisible: that.options.visibleScrollHints
-                });
+                scrollBar;
+
+            if (!elementId) {
+                elementId = kendo.guid();
+                that.element.attr("id", elementId);
+            }
+
+            scrollBar = new ScrollBar({
+                axis: axis,
+                movable: movable,
+                dimension: dimension,
+                container: that.element,
+                alwaysVisible: that.options.visibleScrollHints,
+                controlsId: elementId
+            });
 
             dimension.bind(CHANGE, function() {
                 scrollBar.refresh();
@@ -668,6 +702,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(Scroller);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

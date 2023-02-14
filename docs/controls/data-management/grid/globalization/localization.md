@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: jQuery Grid Documentation | Grid Localization | Kendo UI
+page_title: jQuery Grid Documentation - Grid Localization
 description: "Get started with the jQuery Grid by Kendo UI and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
 slug: localization_kendoui_grid_widget
 position: 3
@@ -14,8 +14,6 @@ The Grid provides options for localizing its user interface by utilizing the ava
 
 The following example demonstrates how to implement the translation of the toolbar messages in the Grid. For more information, refer to the [`toolbar`](/api/javascript/ui/grid/configuration/toolbar) API reference.
 
-###### Example
-
     toolbar: [
 		// name is the name of the available commands.
     // text is the text that will be set to the button.
@@ -24,12 +22,9 @@ The following example demonstrates how to implement the translation of the toolb
 		{ name: "cancel", text: "Custom Cancel" }
 	]
 
-
 ## Menu Messages
 
 The following example demonstrates how to implement the message translation of the column menu in the Grid. For more information, refer to the [`columnMenu.messages`](/api/javascript/ui/grid/configuration/columnmenu.messages) API reference.  
-
-###### Example
 
     columnMenu: {
         messages: {
@@ -43,8 +38,6 @@ The following example demonstrates how to implement the message translation of t
 ## Command Messages
 
 The following example demonstrates how to implement the translation of the column command messages in the Grid. For more information, refer to the [`columns.command`](/api/javascript/ui/grid/configuration/columns.command) API reference.  
-
-###### Example
 
     columns: [
         { field: "FirstName", title: "First Name" },
@@ -68,62 +61,58 @@ The following example demonstrates how to implement the translation of the colum
 
 The following example demonstrates how to implement the translations of the filter menu and operator messages in the Grid. For more information, refer to the [`filterable`](/api/javascript/ui/grid/configuration/filterable.messages) API reference.  
 
-###### Example
+  	filterable: {
+  		messages: {
+  			info: "Custom header text:", // Sets the text on top of the Filter menu.
+  			filter: "CustomFilter", // Sets the text for the "Filter" button.
+  			clear: "CustomClear", // Sets the text for the "Clear" button.
 
-	filterable: {
-		messages: {
-			info: "Custom header text:", // sets the text on top of the Filter menu
-			filter: "CustomFilter", // sets the text for the "Filter" button
-			clear: "CustomClear", // sets the text for the "Clear" button
+  			// When filtering Boolean numbers.
+  			isTrue: "custom is true", // Sets the text for "isTrue" radio button.
+  			isFalse: "custom is false", // Sets the text for "isFalse" radio button.
 
-			// When filtering Boolean numbers.
-			isTrue: "custom is true", // Sets the text for "isTrue" radio button.
-			isFalse: "custom is false", // Sets the text for "isFalse" radio button.
-
-			// Changes the text of the "And" and "Or" of the Filter menu.
-			and: "CustomAnd",
-			or: "CustomOr"
-		},
-		operators: {
-			// The filter menu for "string" type columns.
-			string: {
-				eq: "Custom Equal to",
-				neq: "Custom Not equal to",
-				startswith: "Custom Starts with",
-				contains: "Custom Contains",
-				endswith: "Custom Ends with"
-			},
-			// The filter menu for "number" type columns.
-			number: {
-				eq: "Custom Equal to",
-				neq: "Custom Not equal to",
-				gte: "Custom Is greater than or equal to",
-				gt: "Custom Is greater than",
-				lte: "Custom Is less than or equal to",
-				lt: "Custom Is less than"
-			},
-			// The filter menu for "date" type columns.
-			date: {
-				eq: "Custom Equal to",
-				neq: "Custom Not equal to",
-				gte: "Custom Is after or equal to",
-				gt: "Custom Is after",
-				lte: "Custom Is before or equal to",
-				lt: "Custom Is before"
-			},
-            // The filter menu for foreign key values.
-            enums: {
-                eq: "custom Is Equal to",
-                neq: "custom Is Not equal to"
-            }
-		}
-	}
+  			// Changes the text of the "And" and "Or" of the Filter menu.
+  			and: "CustomAnd",
+  			or: "CustomOr"
+  		},
+  		operators: {
+  			// The filter menu for "string" type columns.
+  			string: {
+  				eq: "Custom Equal to",
+  				neq: "Custom Not equal to",
+  				startswith: "Custom Starts with",
+  				contains: "Custom Contains",
+  				endswith: "Custom Ends with"
+  			},
+  			// The filter menu for "number" type columns.
+  			number: {
+  				eq: "Custom Equal to",
+  				neq: "Custom Not equal to",
+  				gte: "Custom Is greater than or equal to",
+  				gt: "Custom Is greater than",
+  				lte: "Custom Is less than or equal to",
+  				lt: "Custom Is less than"
+  			},
+  			// The filter menu for "date" type columns.
+  			date: {
+  				eq: "Custom Equal to",
+  				neq: "Custom Not equal to",
+  				gte: "Custom Is after or equal to",
+  				gt: "Custom Is after",
+  				lte: "Custom Is before or equal to",
+  				lt: "Custom Is before"
+  			},
+              // The filter menu for foreign key values.
+              enums: {
+                  eq: "custom Is Equal to",
+                  neq: "custom Is Not equal to"
+              }
+  		}
+  	}
 
 ## Grouping Header Messages
 
 The following example demonstrates how to implement the translations of the group header messages in the Grid. For more information, refer to the [`groupable.messages`](/api/javascript/ui/grid/configuration/columnmenu.messages) API reference.
-
-###### Example
 
     groupable: {
         messages: {
@@ -134,8 +123,6 @@ The following example demonstrates how to implement the translations of the grou
 ## Pager Messages
 
 The following example demonstrates how to implement the translations of the pager messages in the Grid. For more information, refer to the [`messages`](/api/javascript/ui/pager#messages-object) API reference.
-
-###### Example
 
     pageable: {
         messages: {
@@ -152,6 +139,166 @@ The following example demonstrates how to implement the translations of the page
             refresh: "Refresh"
         }
     }
+
+## Example
+
+The following example demonstrates a Grid with localized user interface for all listed above configuration options.
+
+```dojo
+      <div id="grid"></div>
+      <script>
+        $(document).ready(function () {
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+              dataSource = new kendo.data.DataSource({
+                transport: {
+                  read:  {
+                    url: crudServiceBaseUrl + "/Products",
+                    dataType: "jsonp"
+                  },
+                  update: {
+                    url: crudServiceBaseUrl + "/Products/Update",
+                    dataType: "jsonp"
+                  },
+                  destroy: {
+                    url: crudServiceBaseUrl + "/Products/Destroy",
+                    dataType: "jsonp"
+                  },
+                  create: {
+                    url: crudServiceBaseUrl + "/Products/Create",
+                    dataType: "jsonp"
+                  },
+                  parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                      return {models: kendo.stringify(options.models)};
+                    }
+                  }
+                },
+                batch: true,
+                pageSize: 20,
+                schema: {
+                  model: {
+                    id: "ProductID",
+                    fields: {
+                      ProductID: { editable: false, nullable: true },
+                      ProductName: { validation: { required: true } },
+                      UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                      Discontinued: { type: "boolean" },
+                      UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                    }
+                  }
+                }
+              });
+
+          $("#grid").kendoGrid({
+            dataSource: dataSource,
+            sortable: true,
+            height: 550,
+            toolbar: [
+              // name is the name of the available commands.
+              // text is the text that will be set to the button.
+              { name: "create", text: "Custom Create" }
+            ],
+            columns: [
+              "ProductName",
+              { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
+              { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+              { field: "Discontinued", width: "120px" },
+              { command: [
+                {
+                  name: "edit",
+                  text: { // Sets the text of the "Edit", "Update" and "Cancel" buttons.
+                    edit: "CustomEdit",
+                    update: "CustomUpdate",
+                    cancel: "CustomCancel"
+                  }
+                },
+                { name: "destroy", text: "CustomDelete" } // Sets the text of the "Delete" button.
+              ],
+               title: "&nbsp;", width: "300px" }],
+            editable: "inline",
+            columnMenu: {
+              messages: {
+                sortAscending: "Custom Sort Ascending",
+                sortDescending: "Custom Sort Descending",
+                filter: "Filter",
+                columns: "Columns"
+              }
+            },
+            filterable: {
+              messages: {
+                info: "Custom header text:", // Sets the text on top of the Filter menu.
+                filter: "CustomFilter", // Sets the text for the "Filter" button.
+                clear: "CustomClear", // Sets the text for the "Clear" button.
+
+                // When filtering Boolean numbers.
+                isTrue: "custom is true", // Sets the text for "isTrue" radio button.
+                isFalse: "custom is false", // Sets the text for "isFalse" radio button.
+
+                // Changes the text of the "And" and "Or" of the Filter menu.
+                and: "CustomAnd",
+                or: "CustomOr"
+              },
+              operators: {
+                // The filter menu for "string" type columns.
+                string: {
+                  eq: "Custom Equal to",
+                  neq: "Custom Not equal to",
+                  startswith: "Custom Starts with",
+                  contains: "Custom Contains",
+                  endswith: "Custom Ends with"
+                },
+                // The filter menu for "number" type columns.
+                number: {
+                  eq: "Custom Equal to",
+                  neq: "Custom Not equal to",
+                  gte: "Custom Is greater than or equal to",
+                  gt: "Custom Is greater than",
+                  lte: "Custom Is less than or equal to",
+                  lt: "Custom Is less than"
+                },
+                // The filter menu for "date" type columns.
+                date: {
+                  eq: "Custom Equal to",
+                  neq: "Custom Not equal to",
+                  gte: "Custom Is after or equal to",
+                  gt: "Custom Is after",
+                  lte: "Custom Is before or equal to",
+                  lt: "Custom Is before"
+                },
+                // The filter menu for foreign key values.
+                enums: {
+                  eq: "custom Is Equal to",
+                  neq: "custom Is Not equal to"
+                }
+              }
+            },
+            pageable: {
+              input: true,
+              pageSizes: [2, 3, 4, "all"],
+              refresh: true,
+              messages: {
+                display: "{0} - {1} of {2} items", // {0} is the index of the first record on the page, {1} - the index of the last record on the page, {2} is the total amount of records.
+                empty: "No items to display",
+                page: "Custom Page",
+                allPages: "Custom All",
+                of: "of {0}", // {0} is total amount of pages.
+                itemsPerPage: "items per page",
+                first: "Custom Go to the first page",
+                previous: "Custom Go to the previous page",
+                next: "Custom Go to the next page",
+                last: "Custom Go to the last page",
+                refresh: "Custom Refresh"
+              }
+            },
+            groupable: {
+              messages: {
+                empty: "Custom message text"
+              }
+            }
+          });
+        });
+      </script>
+```
 
 ## See Also
 

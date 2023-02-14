@@ -1,8 +1,8 @@
 ---
 title: Render External Chart Legend with AngularJS
-description: An example on how to render an external Chart legend for the categorical series when working with Kendo UI in AngularJS applications.
+page_title: Show External Legend in AngularJS - Kendo UI Chart for jQuery
+description: Learn how to render an external Chart legend for the categorical series when working with Kendo UI in AngularJS applications.
 type: how-to
-page_title: Show External Legend in AngularJS | Kendo UI Charts
 slug: chart-external-legend-angularjs
 tags: chart, angularjs, legend
 ticketid: 1161365
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Chart</td>
+		<td>Progress® Kendo UI® Chart for jQuery</td>
 	</tr>
 </table>
 
@@ -35,8 +35,6 @@ In an AngularJS page, use the `ng-repeat` directive to render the external legen
 
 * `mouseenter` and `mouseleave` events of the external legend items to achieve the series highlight effect.
 * `click` event of the external legend to toggle the visibility of the series.
-
-###### Example
 
 ```dojo
     <style>

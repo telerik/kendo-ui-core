@@ -12,6 +12,22 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            componentType: "modern"
+        });
+    </script>
+
 ### culture `String`*(default: "en-US")*
 
  Specifies the culture info used by the widget.
@@ -22,10 +38,10 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <div id="calendar"></div>
@@ -203,6 +219,96 @@ Allows customization of the week column header text. Set the value to make the w
      })
     </script>
 
+### messages.navigateTo `String` *(default: "Navigate to ")*
+
+Allows customization of the "Navigate to " text that would be used for `title` attribute of the Calendar title in the header. The label is also a button allowing navigation to parent view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "navigateTo": "Go to "
+        }
+     })
+    </script>
+
+### messages.parentViews `Object`
+
+Allows customization of names of the views used in the `title` attribute of the Calendar title in the header. The label is also a button allowing navigation to parent view.
+
+### messages.parentViews.month `String` *(default: "year view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Month view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                month: "parent year"
+            }
+        }
+     })
+    </script>
+
+### messages.parentViews.year `String` *(default: "decade view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Year view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                year: "parent decade"
+            }
+        }
+     })
+    </script>
+
+### messages.parentViews.decade `String` *(default: "century view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Decade view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                decade: "parent century"
+            }
+        }
+     })
+    </script>
+
+### messages.today `String` *(default: "Today")*
+
+Allows customization of the text of the Today button present in the widget in its `modern` rendering.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        componentType: "modern",
+        messages: {
+            today: "Click me"
+        }
+     })
+    </script>
+
 ### min `Date`*(default: Date(1900, 0, 1))*
 
  Specifies the minimum date, which the calendar can show.
@@ -315,7 +421,7 @@ By default user is able to select a single date. The property can also be set to
         });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
+> Check [Selection](https://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
 
 ### selectDates `Array`  *(default: [])*
 
@@ -332,7 +438,7 @@ Specifies which dates to be selected when the calendar is initialized.
         });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
+> Check [Selection](https://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
 
 ### weekNumber `Boolean` *(default: false)*
 
@@ -683,6 +789,7 @@ Fires when the selected date is changed.
         $("#calendar").kendoCalendar({
             change: function() {
                 var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(value); //value is the selected date in the calendar
             }
         });
@@ -698,6 +805,7 @@ Fires when the selected date is changed.
 
         calendar.bind("change", function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the calendar
         });
     </script>
@@ -713,9 +821,11 @@ Fires when calendar navigates.
         $("#calendar").kendoCalendar({
             navigate: function() {
                 var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(view.name); //name of the current view
 
                 var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(current); //currently focused date
             }
         });
@@ -731,9 +841,11 @@ Fires when calendar navigates.
 
         calendar.bind("navigate", function() {
             var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view.name); //name of the current view
 
             var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(current); //currently focused date
         });
     </script>

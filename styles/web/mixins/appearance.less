@@ -37,15 +37,6 @@
 .appearance( @what ) when ( @what = toolbar ) {
     &:extend(.toolbar);
 }
-.appearance( @what ) when ( @what = input ) {
-    &:extend(.input);
-}
-.appearance( @what ) when ( @what = hovered-input ) {
-    &:extend(.hovered-input);
-}
-.appearance( @what ) when ( @what = focused-input ) {
-    &:extend(.focused-input);
-}
 .appearance( @what ) when ( @what = node ) {
     &:extend(.node);
 }
@@ -155,23 +146,6 @@
     .linear-gradient( @toolbar-gradient );
 }
 
-
-// Input
-.input {
-    border-color: @input-border;
-    color: @input-text;
-    background-color: @input-bg;
-}
-.hovered-input {
-    border-color: @input-hovered-border;
-    color: @input-hovered-text;
-    background-color: @input-hovered-bg;
-}
-.focused-input {
-    border-color: @input-focused-border;
-    color: @input-focused-text;
-    background-color: @input-focused-bg;
-}
 
 
 // Node

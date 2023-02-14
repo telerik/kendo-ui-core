@@ -1,35 +1,30 @@
 ---
 title: Export
-page_title: Export | Kendo UI Charts
-description: "Set the export functionality of the Kendo UI Chart widget to produce PDF, SVG, and Images."
+page_title: jQuery Chart Documentation - Export
+description: "Get started with the jQuery Chart by Kendo UI and set its export functionality to produce PDF, SVG, and Images."
+previous_url: /controls/charts/chart/export
 slug: exporting_kendoui_chart_widget
-position: 6
+position: 3
 ---
 
 # Export
 
-The Kendo UI Charts enable you to export their content to PDF, SVG, or Image files.
-
-There is no built-in UI for the exporting functionality. To initiate the export, use an API call.
+The Chart enables you to export their content to PDF, SVG, or Image files.
 
 ## PDF Export
 
-To initiate the export in PDF through code, call the [`saveAsPdf`](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method.
+To initiate the export to PDF, call the [`saveAsPdf`](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method. To enable compression, include the [Pako Deflate library](https://github.com/nodeca/pako) in the page.
 
-For more information on PDF export, refer to:
+For more information, refer to the following resources:
 
-* [PDF Export API Configuration](/api/javascript/dataviz/ui/chart/configuration/pdf)
-* [Online Demo](http://demos.telerik.com/kendo-ui/chart-api/pdf-export)
+* [API configuration for exporting the Chart to PDF](/api/javascript/dataviz/ui/chart/configuration/pdf)
+* [Exporting Charts to PDF (demo)](https://demos.telerik.com/kendo-ui/chart-api/pdf-export)
 
-To enable compression, it is highly recommended that you include the [Pako Deflate library](https://github.com/nodeca/pako) in the page.
-
-The example below demonstrates how to enable the PDF export functionality of a Kendo UI Chart.
-
-###### Example
+The following example demonstrates how to enable the PDF export functionality of the Chart.
 
 ```dojo
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -90,19 +85,14 @@ The example below demonstrates how to enable the PDF export functionality of a K
 
 ## Advanced Export
 
-The Chart allows you to retrieve Scalable Vector Graphics (SVG), Image (PNG) or PDF representation of its content as a `Base64`-encoded string. You are able to send this content to a service for further processing or to offer it as a file to the user.
-
-For more information on how to do this, refer to the [online demo](http://demos.telerik.com/kendo-ui/chart-api/export).
+The Chart allows you to retrieve Scalable Vector Graphics (SVG), Image (PNG) or PDF representation of its content as a `Base64`-encoded string. You can send this content to a service for further processing or to offer it as a file to the user. For more information, refer to [this online demo](https://demos.telerik.com/kendo-ui/chart-api/export).
 
 The advanced export functionality is delivered though the following methods:
-
 * [`exportPDF`](/api/javascript/dataviz/ui/chart/methods/exportpdf)
 * [`exportImage`](/api/javascript/dataviz/ui/chart/methods/exportimage)
 * [`exportSVG`](/api/javascript/dataviz/ui/chart/methods/exportsvg)
 
-The example below demonstrates how to obtain an image from the Chart.
-
-###### Example
+The following example demonstrates how to obtain an image from the Chart.
 
 ```dojo
     <div id="chart"></div>
@@ -131,16 +121,12 @@ The example below demonstrates how to obtain an image from the Chart.
     </script>
 ```
 
-## Features
+## Using Server Proxy
 
-### Server Proxy
-
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option to specify the server proxy URL, as shown below.
-
-###### Example
+Internet Explorer 9 and Safari do not support the saving of files and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -198,18 +184,14 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
         $(document).ready(createChart);
     </script>
 
-### File Saving on Server
+## Saving Files on the Server
 
-In some cases it is useful to send the generated file to a remote service. Do this by setting the `proxyUrl` and `forceProxy` to `true`.
+To send the generated file to a remote service, set the `proxyUrl` and `forceProxy` to `true`. If the proxy returns `204 No Content`, the **Save As...** dialog will not appear on the client.
 
-If the proxy returns `204 No Content`, no **Save As...** dialog appears on the client.
-
-The example below demonstrates how to post files to the server.
-
-###### Example
+The following example demonstrates how to post files to the server.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -268,33 +250,27 @@ The example below demonstrates how to post files to the server.
         $(document).ready(createChart);
     </script>
 
-### Custom Fonts Embedding
+## Embedding Custom Fonts
 
-**Unicode Support**
+The default fonts in PDF files do not support Unicode. To support international characters, you have to embed an external font.
 
-The default fonts in PDF files do not support Unicode. To support international characters we need to embed an external font.
-
-> **Important**
 > * Fonts must be loaded by the browser before the Chart is initialized. It is usually sufficient to make use of the font on a portion of the page.
-> * The Chart pre-loads automatically in browsers that support the [CSS Font Loading Module](https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/load).
+> * The Chart preloads automatically in browsers that support the [CSS Font Loading Module](https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/load).
 
-Kendo UI ships the [Deja Vu font family](https://dejavu-fonts.github.io/) as part of its distributions. For more details on the supported fonts by Kendo UI, refer to the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
+Kendo UI ships the [Deja Vu font family](https://dejavu-fonts.github.io/) as part of its distributions. For more information, refer to the article on the [supported custom fonts by Kendo UI]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
 
-The example below demonstrates how to handle custom fonts by embedding a custom font for a Chart title.
-
-###### Example
+The following example demonstrates how to handle custom fonts by embedding a custom font for a Chart title.
 
 ```dojo
     <script>
         // Import DejaVu Sans font for embedding.
-
         // NOTE: Only required if the Kendo UI stylesheets are loaded
         // from a different origin, e.g. kendo.cdn.telerik.com.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 
@@ -361,29 +337,19 @@ The example below demonstrates how to handle custom fonts by embedding a custom 
 
 ## Known Limitations
 
-All [known limitations]({% slug drawingofhtmlelements_drawingapi %}#known-limitations) of the HTML Drawing module apply.
+All [known limitations of the Drawing library]({% slug drawingofhtmlelements_drawingapi %}#known-limitations) apply to the PDF export of the Chart.
 
-Below are listed the most important ones for you to note:
+The following limitations are the most important among the listed ones for exporting the Chart to PDF:
 
 * The maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
-* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid/configuration/pdf.proxyurl).
+* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information, refer to the [`proxyUrl`](/api/javascript/ui/grid/configuration/pdf.proxyurl) API reference.
 
 ## Further Reading
 
-* [Drawing HTML]({% slug drawingofhtmlelements_drawingapi %})
-* [Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
+* [Drawing HTML Elements with the Drawing Library]({% slug drawingofhtmlelements_drawingapi %})
+* [Saving Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
 
 ## See Also
 
-* [Data Binding of the Chart Widgets]({% slug databinding_charts_widget %})
-* [Date Series]({% slug dateseries_charts_widget %})
-* [Tooltip]({% slug tooltip_charts_widget %})
-* [Chart Notes]({% slug chartnotes_charts_widget %})
-* [Title and Legend]({% slug titlelegend_features_charts %})
-* [Appearance]({% slug appearance_charts_widget %})
-* [Error Bars]({% slug errorbars_charts_widget %})
-* [Data Series]({% slug seriestypeofcharts_widget %})
-* [Types of Kendo UI Charts]({% slug areacharts_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
-
-For runnable examples on Kendo UI Charts, refer to the [how-to section of articles]({% slug howto_createdynamicplotbands_charts %}).
+* [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - '.github/workflows/ci.yml'
+      - 'package.json'
+      - 'gulpfile.js'
+      - 'build/**'
+      - 'src/**'
+      - 'tests/**'
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install
+        run: npm ci
+
+      - name: Build less themes
+        run: npx gulp styles
+
+      - name: Build scripts
+        run: npx gulp scripts
+
+      - name: Karma
+        run: npx gulp karma-ci
+        env:
+          CHROME_BIN: /usr/bin/google-chrome

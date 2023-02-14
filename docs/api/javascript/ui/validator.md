@@ -8,6 +8,8 @@ component: validation
 
 # kendo.ui.Validator
 
+Represents the Kendo UI Validator widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### errorTemplate `String`
@@ -24,7 +26,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the validat
 
     <script>
         $("#myform").kendoValidator({
-            errorTemplate: "<span>#=message#</span>"
+            errorTemplate: ({ message }) => `<span>${message}</span>`
         });
     </script>
 
@@ -105,6 +107,67 @@ Set of custom validation rules. Those rules will extend the [built-in ones](/fra
         });
     </script>
 
+### validationSummary `Boolean|Object` *(default: false)*
+
+Determines if validation summary will be displayed. Default value is `false`.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Validate</button>
+    </form>
+
+    <script>
+        $("#myform").kendoValidator({
+          validationSummary: true
+        });
+    </script>
+
+### validationSummary.container `String|jQuery`
+
+Defines the element in which the validation summary will be rendered. By default, the validation summary is rendered before the element on which the Validator is initialized.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Validate</button>
+    </form>
+    <div id="summary"></div>
+
+    <script>
+        $("#myform").kendoValidator({
+          validationSummary: {
+            container: "#summary"
+          }
+        });
+    </script>
+
+### validationSummary.template `String|Function`
+
+Specifies the template for rendering the validation summary.
+
+#### Parameters
+
+##### errors `Array`
+
+The validation errors.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Validate</button>
+    </form>
+
+    <script>
+        $("#myform").kendoValidator({
+          validationSummary: {
+            template: ({ errors }) => `<ul>${errors.map(error => '<li><a data-field="' + error.field +'" href="#">' + error.message + '</a></li>')}</ul>`
+          }
+        });
+    </script>
 
 ### validateOnBlur `Boolean`
 
@@ -114,7 +177,7 @@ Determines if validation will be triggered when element loses focus. Default val
 
     <form id="myform">
         <input name="username"/> <br />
-        <button>Validate</button>
+        <button onclick="event.preventDefault()">Validate</button>
     </form>
 
     <script>
@@ -176,6 +239,60 @@ Hides the validation messages.
         //hide the validation messages when hide button is clicked
         $("#hide").click(function() {
             validator.hideMessages();
+        });
+    </script>
+
+### hideValidationSummary
+
+Hides the validation summary.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Save</button>
+        <button id="hide" type="button">Hide Summary</button>
+    </form>
+
+    <script>
+        // attach a validator to the container and get a reference
+        var validator = $("#myform").kendoValidator({
+          validationSummary: true
+        }).data("kendoValidator");
+
+        // trigger validation to display the validation summary
+        validator.validate();
+
+        //hide the validation summary when hide button is clicked
+        $("#hide").click(function() {
+            validator.hideValidationSummary();
+        });
+    </script>
+
+### showValidationSummary
+
+Shows the validation summary.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Save</button>
+        <button id="hide" type="button">Show Summary</button>
+    </form>
+
+    <script>
+        // attach a validator to the container and get a reference
+        var validator = $("#myform").kendoValidator({
+          validationSummary: false
+        }).data("kendoValidator");
+
+        // trigger validation
+        validator.validate();
+
+        //show the validation summary when show button is clicked
+        $("#hide").click(function() {
+            validator.showValidationSummary();
         });
     </script>
 
@@ -245,6 +362,61 @@ Input element to be validated.
 
 `Boolean` `true` if all validation rules passed successfully.
 
+### reset
+
+Clears the registered errors and hides the validation messages and validation summary.
+
+#### Example - set sortable feature of the Grid to true
+
+    <div id="myform">
+        <input name="username" required /> <br />
+        <input name="location" required /> <br />
+
+        <button>Validate</button>
+    </div>
+
+    <script>
+        // attach a validator to the container and get a reference
+        var validator = $("#myform").kendoValidator({
+          validationSummary: true
+        }).data("kendoValidator");
+
+        //trigger validation
+        validator.validate();
+
+        //reset
+        validator.reset();
+    </script>
+
+### setOptions
+
+Sets the options of the Validator. Use this method if you want to enable/disable a particular option dynamically.
+
+When `setOptions` is called, the Validator widget will be destroyed and recreated with the new options.
+
+#### Parameters
+
+##### options `Object`
+
+The configuration options to be set.
+
+#### Example - set validateOnBlur option of the Validator to true
+
+    <div id="myform">
+        <input name="username" required /> <br />
+        <input name="location" required /> <br />
+
+        <button>Validate</button>
+    </div>
+
+    <script>
+        // attach a validator to the container and get a reference
+        var validator = $("#myform").kendoValidator().data("kendoValidator");
+
+        //update options
+        validator.setOptions({ validateOnBlur: false });
+    </script>
+
 ## Events
 
 ### validate
@@ -265,6 +437,10 @@ The validator instance which fired the event.
 
 True if validation is passed, otherwise false.
 
+##### errors `Array`
+
+The validation errors.
+
 #### Example - subscribe to the "validate" event during initialization
 
       <form>
@@ -276,6 +452,7 @@ True if validation is passed, otherwise false.
         // attach a validator to the container
         $("form").kendoValidator({
             validate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("valid" + e.valid);
             }
         });
@@ -293,6 +470,7 @@ True if validation is passed, otherwise false.
         var validatable = $("form").kendoValidator().data("kendoValidator");
 
         validatable.bind("validate", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("valid" + e.valid);
         });
       </script>
@@ -305,17 +483,25 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Event Data
 
-##### e.input `jQuery`
-
-The object of the validated input.
-
 ##### e.sender `kendo.ui.Validator`
 
 The validator instance which fired the event.
 
+##### e.input `jQuery`
+
+The object of the validated input.
+
 ##### e.valid `Boolean`
 
 True if validation is passed, otherwise false.
+
+##### e.field `String`
+
+The name of the validated input.
+
+##### e.error `String`
+
+The error message text.
 
 #### Example - subscribe to the "validateInput" event during initialization
 
@@ -328,6 +514,7 @@ True if validation is passed, otherwise false.
         // attach a validator to the container
         $("form").kendoValidator({
             validateInput: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
             }
         });
@@ -345,6 +532,7 @@ True if validation is passed, otherwise false.
         var validatable = $("form").kendoValidator().data("kendoValidator");
 
         validatable.bind("validateInput", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
         });
-      </script>      
+      </script>

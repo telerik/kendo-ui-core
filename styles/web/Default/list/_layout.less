@@ -1,0 +1,188 @@
+// List
+.k-list {
+    margin: 0;
+    padding: 0;
+    font-family: @kendo-list-font-family;
+    font-size: @kendo-list-font-size;
+    line-height: @kendo-list-line-height;
+    display: flex;
+    flex-flow: column nowrap;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+.k-list-scroller {
+    padding: @kendo-list-padding-y @kendo-list-padding-x;
+    box-sizing: border-box;
+
+    .k-list-scroller {
+        padding: 0;
+    }
+}
+
+
+// List in popup
+.k-popup > .k-list {
+    height: 100%;
+    border-width: 0;
+}
+
+
+// List header
+// .k-list-header,
+.k-list-group-sticky-header {
+    padding: @kendo-list-item-padding-y @kendo-list-item-padding-x;
+    border-width: 0 0 1px;
+    border-style: solid;
+    font-weight: bold;
+    white-space: nowrap;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    flex: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.k-list-optionlabel {
+    &:extend(.k-list-group-sticky-header);
+}
+
+
+// List content
+.k-list-content {
+    border-color: inherit;
+    flex: 1 1 auto;
+    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+
+// List UL
+.k-list-ul {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    outline: 0;
+    border-color: inherit;
+    height: auto;
+    list-style: none;
+}
+
+
+// List item
+.k-list-item {
+    .border-radius( @kendo-list-item-border-radius );
+    padding: @kendo-list-item-padding-y @kendo-list-item-padding-x;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    align-content: center;
+    gap: @spacing[1];
+    position: relative;
+
+    &.k-first::before {
+        content: "";
+        border-width: 1px 0 0;
+        border-style: solid;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+.k-list-item-text,
+.k-list-optionlabel {
+    &::before {
+        content: "\200b";
+        width: 0px;
+        overflow: hidden;
+    }
+}
+
+// List group item
+.k-list-group-item {
+    padding: @kendo-list-item-padding-y @kendo-list-item-padding-x;
+    border-style: solid;
+    font-weight: bold;
+    cursor: default;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    align-content: center;
+    gap: @spacing[1];
+    position: relative;
+}
+
+
+// List item group label
+.k-list-item-group-label {
+    padding: 0 .5em;
+    font-size: .75em;
+    position: absolute;
+    top: 0;
+    inset-inline-end: 0;
+
+    .k-ie & {
+        right: 0;
+    }
+    .k-ie .k-rtl &,
+    .k-ie [dir="rtl"] & {
+        right: auto;
+        left: 0;
+    }
+}
+
+
+// Virtualization
+.k-virtual-list {}
+.k-virtual-content {
+    overflow-y: scroll;
+}
+.k-virtual-list .k-list-item,
+.k-virtual-list .k-list-group-item,
+.k-virtual-content .k-list-item,
+.k-virtual-content .k-list-group-item {
+    position: absolute;
+    width: 100%;
+}
+.k-virtual-list .k-list-item-text,
+.k-virtual-list .k-list-header-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+// Filter
+.k-list-filter {
+    display: block;
+    position: relative;
+    padding: @spacing[2];
+    box-sizing: border-box;
+    flex: 0 0 auto;
+}
+
+
+// No data
+.k-no-data {
+    min-height: 138px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: lighter;
+    text-align: center;
+    white-space: normal;
+}
+
+
+// Alias
+.k-nodata {
+    &:extend(.k-no-data);
+}

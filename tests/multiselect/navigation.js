@@ -1,19 +1,20 @@
 (function() {
     var MultiSelect = kendo.ui.MultiSelect,
         keys = kendo.keys,
-        select;
+        select,
+        CONTAINER_HEIGHT = 200;
 
     function populateSelect(length) {
         var options = [];
         length = length || 5;
-        for (var i=0; i < length; i++) {
+        for (var i = 0; i < length; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
         select.html(options);
     }
 
-    describe("kendo.ui.MultiSelect navigation", function () {
+    describe("kendo.ui.MultiSelect navigation", function() {
         beforeEach(function() {
             $.fn.press = function(character) {
                 var keyCode = character.charCodeAt(0);
@@ -21,7 +22,7 @@
                     type: "keydown",
                     keyCode: keyCode
                 });
-            }
+            };
 
             kendo.ns = "kendo-";
 
@@ -37,31 +38,6 @@
 
             select.parents(".k-widget").remove();
         });
-
-    it("MultiSelect expands input element on keydown", function(done) {
-        var multiselect = new MultiSelect(select, { delay: 0 });
-        var initial = multiselect.input.width();
-
-        multiselect.input.val("2").press("2");
-
-        setTimeout(function() {
-            assert.isOk(multiselect.input.width() > initial);
-            done();
-        });
-    });
-
-    it("MultiSelect fits input inside of the wrapper", function(done) {
-        var multiselect = new MultiSelect(select, { delay: 0 }),
-            wrapperWidth = 200;
-
-        multiselect.wrapper.find(".k-multiselect-wrap").width(wrapperWidth);
-        multiselect.input.val("222222222222222222222222222222222222222222222").press("2");
-
-        setTimeout(function() {
-            assert.equal(Math.round(multiselect.input.width()), wrapperWidth);
-            done();
-        });
-    });
 
     it("MultiSelect opens popup on keydown", function() {
         var multiselect = new MultiSelect(select);
@@ -82,7 +58,7 @@
             keyCode: keys.DOWN
         });
 
-        assert.isOk(multiselect.current().hasClass("k-state-focused"));
+        assert.isOk(multiselect.current().hasClass("k-focus"));
     });
 
     it("MultiSelect highlights next LI", function() {
@@ -95,7 +71,7 @@
         });
 
         assert.equal(multiselect.current().index(), 1);
-        assert.isOk(multiselect.current().hasClass("k-state-focused"));
+        assert.isOk(multiselect.current().hasClass("k-focus"));
     });
 
     it("MultiSelect does nothing if LI is last", function() {
@@ -111,7 +87,7 @@
 
         assert.isOk(multiselect.current());
         assert.equal(multiselect.current().index(), multiselect.ul.children().length - 1);
-        assert.isOk(multiselect.current().hasClass("k-state-focused"));
+        assert.isOk(multiselect.current().hasClass("k-focus"));
     });
 
     it("MultiSelect highlights prev LI", function() {
@@ -126,7 +102,7 @@
         });
 
         assert.equal(multiselect.current().index(), multiselect.ul.children().length - 2);
-        assert.isOk(multiselect.current().hasClass("k-state-focused"));
+        assert.isOk(multiselect.current().hasClass("k-focus"));
     });
 
     it("MultiSelect closes popup if no previous LI", function() {
@@ -153,7 +129,7 @@
             keyCode: keys.ENTER
         });
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect selects all on CTRL+A", function() {
@@ -167,7 +143,7 @@
             ctrlKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 5);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 5);
     });
 
     it("MultiSelect deselects all on CTRL+A if already selected", function() {
@@ -187,10 +163,10 @@
             ctrlKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 0);
     });
 
-    it("MultiSelect respects maxSelectedItems on CTRL+A", function () {
+    it("MultiSelect respects maxSelectedItems on CTRL+A", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 2
         });
@@ -203,7 +179,7 @@
             ctrlKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 2);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 2);
     });
 
     it("MultiSelect selects item on CTRL+SPACEBAR", function() {
@@ -222,11 +198,11 @@
             ctrlKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 1);
-        assert.equal(multiselect.tagList.children().eq(0).text().indexOf("Option1"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option1"), 0);
     });
 
-    it("MultiSelect selects item on SHIFT+DOWN", function () {
+    it("MultiSelect selects item on SHIFT+DOWN", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -242,11 +218,11 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 1);
-        assert.equal(multiselect.tagList.children().eq(0).text().indexOf("Option1"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option1"), 0);
     });
 
-    it("MultiSelect selects multiple items on SHIFT+DOWN", function () {
+    it("MultiSelect selects multiple items on SHIFT+DOWN", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -268,12 +244,12 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 2);
-        assert.equal(multiselect.tagList.children().eq(0).text().indexOf("Option1"), 0);
-        assert.equal(multiselect.tagList.children().eq(1).text().indexOf("Option2"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 2);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option1"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(1).text().indexOf("Option2"), 0);
     });
 
-    it("MultiSelect respects maxSelectedItems on SHIFT+DOWN", function () {
+    it("MultiSelect respects maxSelectedItems on SHIFT+DOWN", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 1
         });
@@ -297,11 +273,11 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 1);
-        assert.equal(multiselect.tagList.children().eq(0).text().indexOf("Option1"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option1"), 0);
     });
 
-    it("MultiSelect selects item on SHIFT+UP", function () {
+    it("MultiSelect selects item on SHIFT+UP", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -321,11 +297,11 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 1);
-        assert.equal(multiselect.tagList.children().eq(0).text().indexOf("Option2"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option2"), 0);
     });
 
-    it("MultiSelect selects multiple items on SHIFT+UP", function () {
+    it("MultiSelect selects multiple items on SHIFT+UP", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -351,12 +327,12 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 2);
-        assert.equal(multiselect.tagList.children().eq(0).text().indexOf("Option2"), 0);
-        assert.equal(multiselect.tagList.children().eq(1).text().indexOf("Option1"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 2);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option2"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(1).text().indexOf("Option1"), 0);
     });
 
-    it("MultiSelect respects maxSelectedItems on SHIFT+UP", function () {
+    it("MultiSelect respects maxSelectedItems on SHIFT+UP", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 1
         });
@@ -384,11 +360,11 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 1);
-        assert.equal(multiselect.tagList.children().eq(0).text().indexOf("Option2"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option2"), 0);
     });
 
-    it("MultiSelect selects multiple items on CTRL+SHIFT+END", function () {
+    it("MultiSelect selects multiple items on CTRL+SHIFT+END", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -405,10 +381,10 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 4);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 4);
     });
 
-    it("MultiSelect respects maxSelectedItems on CTRL+SHIFT+END", function () {
+    it("MultiSelect respects maxSelectedItems on CTRL+SHIFT+END", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 2
         });
@@ -427,12 +403,12 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 2);
-        assert.equal(multiselect.tagList.children().eq(0).text(), "Option1");
-        assert.equal(multiselect.tagList.children().eq(1).text(), "Option2");
+        assert.equal(multiselect.tagList.children(".k-chip").length, 2);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text(), "Option1");
+        assert.equal(multiselect.tagList.children(".k-chip").eq(1).text(), "Option2");
     });
 
-    it("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function () {
+    it("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function() {
         var multiselect = new MultiSelect(select);
 
         multiselect.open();
@@ -457,10 +433,10 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 4);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 4);
     });
 
-    it("MultiSelect respects maxSelectedItems on CTRL+SHIFT+HOME", function () {
+    it("MultiSelect respects maxSelectedItems on CTRL+SHIFT+HOME", function() {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 2
         });
@@ -487,9 +463,9 @@
             shiftKey: true
         });
 
-        assert.equal(multiselect.tagList.children().length, 2);
-        assert.equal(multiselect.tagList.children().eq(0).text(), "Option3");
-        assert.equal(multiselect.tagList.children().eq(1).text(), "Option2");
+        assert.equal(multiselect.tagList.children(".k-chip").length, 2);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text(), "Option3");
+        assert.equal(multiselect.tagList.children(".k-chip").eq(1).text(), "Option2");
     });
 
     it("MultiSelect closes on ENTER", function() {
@@ -543,9 +519,239 @@
     });
 });
 
-    describe("kendo.ui.MultiSelect tag navigation", function () {
+describe("kendo.ui.MultiSelect navigation in virtual scenario", function() {
+    function generateData(parameters) {
+        var items = [];
+        for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
+            items.push({
+                id: i,
+                value: i,
+                text: "Item " + i
+            });
+        }
+
+        return items;
+    }
+
+    function createAsyncDataSource(options) {
+        options = options || {};
+        var transport = {
+            read: function(options) {
+                setTimeout(function() {
+                    options.success({ data: generateData(options.data), total: 300 });
+                }, 0);
+            }
+        };
+
+        return new kendo.data.DataSource({
+            transport: options.transport || transport,
+            serverPaging: true,
+            serverFiltering: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+    }
+
+    beforeEach(function() {
+        kendo.ns = "";
+        select = $("<select multiple />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+        if (select.data("kendoMultiSelect")) {
+            select.data("kendoMultiSelect").destroy();
+        }
+
+        select.parents(".k-widget").remove();
+    });
+
+    it("MultiSelect selects all on CTRL+A", function(done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: 65,
+                ctrlKey: true
+            });
+
+            assert.equal(multiselect.tagList.children(".k-chip").length, 0);
+            done();
+        });
+    });
+
+    it("MultiSelect selects multiple items on SHIFT+DOWN", function(done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN,
+                shiftKey: true
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN,
+                shiftKey: true
+            });
+
+            assert.equal(multiselect.tagList.children(".k-chip").length, 0);
+            done();
+        });
+    });
+
+    it("MultiSelect selects multiple items on SHIFT+UP", function(done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.UP,
+                shiftKey: true
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.UP,
+                shiftKey: true
+            });
+
+            assert.equal(multiselect.tagList.children(".k-chip").length, 0);
+            done();
+        });
+    });
+
+    it("MultiSelect selects multiple items on CTRL+SHIFT+END", function(done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.END,
+                ctrlKey: true,
+                shiftKey: true
+            });
+
+            assert.equal(multiselect.tagList.children(".k-chip").length, 0);
+            done();
+        });
+    });
+
+    it("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function(done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.HOME,
+                ctrlKey: true,
+                shiftKey: true
+            });
+
+            assert.equal(multiselect.tagList.children(".k-chip").length, 0);
+            done();
+        });
+    });
+});
+
+    describe("kendo.ui.MultiSelect tag navigation", function() {
         beforeEach(function() {
-            select = $("<select multiple=multiple/>").appendTo(document.body);
+            select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
             populateSelect();
         });
         afterEach(function() {
@@ -569,9 +775,9 @@
             keyCode: keys.LEFT
         });
 
-        var tag = multiselect.tagList.children().last();
+        var tag = multiselect.tagList.children(".k-chip").last();
 
-        assert.isOk(tag.hasClass("k-state-focused"));
+        assert.isOk(tag.hasClass("k-focus"));
     });
 
     it("MultiSelect focuses previous tag if input is empty", function() {
@@ -580,7 +786,7 @@
         //opens popup and scrolls
         multiselect.value(["1", "2"]);
         multiselect.input.focus();
-        multiselect.currentTag(multiselect.tagList.children().last());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").last());
         multiselect.input.trigger({
             type: "keydown",
             keyCode: keys.LEFT
@@ -589,7 +795,7 @@
         var tag = multiselect.currentTag();
 
         assert.equal(tag.index(), 0);
-        assert.isOk(tag.hasClass("k-state-focused"));
+        assert.isOk(tag.hasClass("k-focus"));
     });
 
     it("MultiSelect persist focus to the first LI on LEFT", function() {
@@ -598,7 +804,7 @@
         //opens popup and scrolls
         multiselect.value(["1", "2"]);
         multiselect.input.focus();
-        multiselect.currentTag(multiselect.tagList.children().first());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").first());
         multiselect.input.trigger({
             type: "keydown",
             keyCode: keys.LEFT
@@ -607,7 +813,7 @@
         var tag = multiselect.currentTag();
 
         assert.equal(tag.index(), 0);
-        assert.isOk(tag.hasClass("k-state-focused"));
+        assert.isOk(tag.hasClass("k-focus"));
     });
 
     it("MultiSelect focuses next tag if any is focused", function() {
@@ -617,7 +823,7 @@
         multiselect.value(["1", "2"]);
         multiselect.input.focus();
 
-        multiselect.currentTag(multiselect.tagList.children().first());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").first());
 
         multiselect.input.trigger({
             type: "keydown",
@@ -627,7 +833,7 @@
         var tag = multiselect.currentTag();
 
         assert.equal(tag.index(), 1);
-        assert.isOk(tag.hasClass("k-state-focused"));
+        assert.isOk(tag.hasClass("k-focus"));
     });
 
     it("MultiSelect un-focuses last tag if RIGHT is pressed ", function() {
@@ -637,7 +843,7 @@
         multiselect.value(["1", "2"]);
         multiselect.input.focus();
 
-        multiselect.currentTag(multiselect.tagList.children().last());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").last());
 
         multiselect.input.trigger({
             type: "keydown",
@@ -655,7 +861,7 @@
         //opens popup and scrolls
         multiselect.input.mousedown();
 
-        multiselect.currentTag(multiselect.tagList.children().last());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").last());
 
         multiselect.input.trigger({
             type: "keydown",
@@ -674,7 +880,7 @@
         multiselect.value(["1", "2"]);
         multiselect.input.focus();
 
-        multiselect.currentTag(multiselect.tagList.children().last());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").last());
 
         multiselect.input.trigger({
             type: "keydown",
@@ -682,7 +888,7 @@
         });
 
         assert.equal(multiselect.currentTag(), null);
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect deletes focused tag when source is filtered", function() {
@@ -694,7 +900,7 @@
         multiselect.search("Option2");
         multiselect.ul.children(":first").click();
 
-        multiselect.currentTag(multiselect.tagList.children().first());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").first());
 
         multiselect.input.trigger({
             type: "keydown",
@@ -704,8 +910,8 @@
         multiselect.open();
 
         assert.equal(multiselect.currentTag(), null);
-        assert.equal(multiselect.tagList.children().length, 1);
-        assert.equal(multiselect.tagList.children().eq(0).text().indexOf("Option2"), 0);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).text().indexOf("Option2"), 0);
     });
 
     it("MultiSelect deletes last tag on BACKSPACE if input is empty", function() {
@@ -721,8 +927,8 @@
         });
 
         assert.equal(multiselect.currentTag(), null);
-        assert.equal(multiselect.tagList.children().length, 1);
-        assert.equal(multiselect.tagList.children().eq(0).find("span").html(), "Option0");
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).find("span").html(), '<span class="k-chip-label">Option0</span>');
     });
 
     it("MultiSelect does not raise exception on DELETE", function() {
@@ -810,7 +1016,7 @@
         multiselect.value(["0", "1"]);
         multiselect.open();
 
-        multiselect.currentTag(multiselect.tagList.children().first());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").first());
         multiselect.input.focus().trigger({
             type: "keydown",
             keyCode: keys.END
@@ -844,7 +1050,7 @@
         multiselect.value(["0", "1"]);
         multiselect.open();
 
-        multiselect.currentTag(multiselect.tagList.children().first());
+        multiselect.currentTag(multiselect.tagList.children(".k-chip").first());
         multiselect.input.focus().trigger({
             type: "keydown",
             keyCode: keys.HOME

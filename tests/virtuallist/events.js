@@ -6,7 +6,7 @@
         ITEM_HEIGHT = 40,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -26,7 +26,7 @@
         return items;
     }
 
-    describe("VirtualList API: ", function () {
+    describe("VirtualList API: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
@@ -51,7 +51,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#=text#",
+                template: ({ text }) => text,
                 dataValueField: "value"
             };
         });
@@ -155,7 +155,7 @@
             value: [0]
         }));
 
-        virtualList.dataSource.read().done(function () {
+        virtualList.dataSource.read().done(function() {
             virtualList.one("change", function(e) {
                 assert.isOk(false);
             });
@@ -374,7 +374,7 @@
 
                     assert.equal(removed[0].position, 1);
                     assert.equal(removed[0].dataItem.text, "Item 2");
-                    assert.equal(virtualList.element.find(".k-state-selected").length, 0);
+                    assert.equal(virtualList.element.find(".k-selected").length, 0);
                 });
 
                 virtualList.select(0);
@@ -410,7 +410,7 @@
             virtualList.bind("change", function() {
                 done();
 
-                assert.equal(container.find(".k-state-selected").length, 0);
+                assert.equal(container.find(".k-selected").length, 0);
             })
             virtualList.select(-1);
         });

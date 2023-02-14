@@ -1,2 +1,55 @@
-# Disable LF normalization for all files
-* -text
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# ES
+*.js        eol=lf
+*.jsx       eol=lf
+*.ts        eol=lf
+*.tsx       eol=lf
+*.json      eol=lf
+
+# Markup
+*.md        eol=lf
+*.xml       eol=lf
+*.html      eol=lf
+
+# Styles
+*.css       eol=lf
+*.scss      eol=lf
+*.less      eol=lf
+
+# SVG
+*.svg       eol=lf
+
+# .NET
+*.csproj    eol=crlf
+*.sln       eol=crlf
+*.cs        eol=lf
+*.cshtml    eol=lf
+*.razor     eol=lf
+*.aspx      eol=lf
+*.ascx      eol=lf
+*.asax      eol=lf
+
+# Java
+*.java      eol=lf
+*.jsp       eol=lf
+
+# PHP
+*.php       eol=lf
+
+# Ruby
+*.rb        eol=lf
+*.erb       eol=lf
+
+# Images
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+
+# Binaries
+*.db        binary
+*.dll       binary
+*.zip       binary

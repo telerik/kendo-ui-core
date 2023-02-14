@@ -1,46 +1,37 @@
 ---
 title: Custom Cell Editors
-page_title: Custom Cell Editors | Kendo UI Spreadsheet
-description: "Define custom cell editors in a Kendo UI Spreadsheet widget."
+page_title: jQuery Spreadsheet Documentation - Custom Cell Editors
+description: "Get started with the jQuery Spreadsheet by Kendo UI and define custom editors for its cells."
 slug: custom_editors_spreadsheet_widget
-position: 3
+position: 5
 ---
 
 # Custom Cell Editors
 
-Custom editors are helpers that facilitate the user input of correct values.
+Custom editors facilitate the user input of correct values.
 
-For example, a custom editor allows the user to enter a date in a cell by picking it from a calendar rather than typing it. This functionality is achieved by applying data validation with the `Date` criteria, and selecting the **Display button to show calendar** checkbox. Another built-in editor is for the `List` validation criterion&mdash;it displays a popup displaying the allowed values.
-
-## Definition
+For example, a custom editor allows the user to enter a date in a cell by picking it from a calendar rather than typing it. This functionality is achieved by applying data validation with the `Date` criteria and selecting the **Display button to show calendar** checkbox. Another built-in editor is for the `List` validation criterion&mdash;it displays a popup displaying the allowed values.
 
 To define custom editors, use `kendo.spreadsheet.registerEditor(name, editor)`. The `name` is an ID of your choice, which you will later use to select this particular editor on a `Range`. The `editor` can be an object or a function. As an object, it should currently have an `edit` method, and an `icon` property, as explained below.
 
-## Configuration
-
 The `edit(options)` method is invoked with the following options:
-
 * `range`&mdash;The cell that is currently selected as a `Range` object.
 * `rect`&mdash;The rectangle with the position of the selected cell on the screen. It has `top`, `left`, `width`, `height`, `right`, and `bottom` properties. Use this option to position the editor near the cell, for example.
 * `callback`&mdash;A function which your editor calls when a value is selected. It receives the `value` and an optional second argument `parse`. When `parse` is `true`, the `value` should be a string and it is then parsed as if input by the end user through the inline editor. Use this option to return a formula, for example&mdash;`callback("=sum(a1:a5)", true)`.
 
 The `icon` property is a string which contains a CSS class name that is to be applied to the drop-down button.
 
-When the `editor` is a function, it is called the first time a cell, having this editor, is displayed. It returns an object as in the case above&mdash;having the `edit` method and the `icon` property, and the result is cached. Use this trick to delay the initialization of the editor until it is first needed.
+When the `editor` is a function, it is called the first time when a cell with this editor is displayed. It returns an object as in the previous case&mdash;having the `edit` method and the `icon` property, and the result is cached. You can use this approach to delay the initialization of the editor until the first time it is needed.
 
 The following example demonstrates how to set up a color-picking custom editor.
-
-###### Example
 
 ```dojo
   <div id="spreadsheet" style="width: 100%;"></div>
   <script>
     kendo.spreadsheet.registerEditor("color", function(){
         var context, dlg, model;
-
         // Further delay the initialization of the UI until the `edit` method is
         // actually called, so here just return the object with the required API.
-
         return {
             edit: function(options) {
                 context = options;
@@ -48,7 +39,6 @@ The following example demonstrates how to set up a color-picking custom editor.
             },
             icon: "k-icon k-i-background"
         };
-
         // This function actually creates the UI if not already there, and
         // caches the dialog and the model.
         function create() {
@@ -56,8 +46,8 @@ The following example demonstrates how to set up a color-picking custom editor.
                 model = kendo.observable({
                     value: "#000000",
                     ok: function() {
-                        // This is the result when OK is clicked. Invoke the
-                        // callback with the value.
+                        // This is the result when OK is clicked.
+                        // Invoke the callback with the value.
                         context.callback(model.value);
                         dlg.close();
                     },
@@ -78,12 +68,10 @@ The following example demonstrates how to set up a color-picking custom editor.
                 dlg = el.getKendoWindow();
             }
         }
-
         function open() {
             create();
             dlg.open();
             dlg.center();
-
             // If the selected cell already contains some value, reflect
             // it in the custom editor.
             var value = context.range.value();
@@ -97,7 +85,7 @@ The following example demonstrates how to set up a color-picking custom editor.
        $("#spreadsheet").kendoSpreadsheet({
            sheetsbar: false,
            excel: {
-               // Required to enable Excel Export in some browsers
+               // Required to enable Excel Export in some browsers.
                proxyURL: "//demos.telerik.com/kendo-ui/service/export"
            },
            sheets: [{
@@ -116,8 +104,6 @@ The following example demonstrates how to set up a color-picking custom editor.
 
 After the editor is defined, you can apply it to any cell through the API.
 
-###### Example
-
     var sheet = spreadsheet.activeSheet();
     sheet.range("A5").editor("color");
 
@@ -128,11 +114,5 @@ The `edit` method provides a complete flexibility. As an example, you can use a 
 
 ## See Also
 
-* [Overview]({% slug overview_spreadsheet_widget %})
-* [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
-* [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
-* [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
-* [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
-* [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
-* [User Guide]({% slug user_guide_spreadsheet_widget %})
+* [Implementing Custom Cell Editors in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/custom-editors)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

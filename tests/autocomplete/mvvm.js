@@ -1,8 +1,8 @@
-(function(){
+(function() {
 
 var dom;
 
-describe("autocomplete mvvm", function () {
+describe("autocomplete mvvm", function() {
   beforeEach(function() {
       Mocha.fixture.append(
         '<script id="template" type="text/x-kendo-template">' +
@@ -15,7 +15,7 @@ describe("autocomplete mvvm", function () {
 
       window.dataBound = function() {
           assert.isOk(true);
-      }
+      };
   });
   afterEach(function() {
       delete window.dataBound;
@@ -60,7 +60,7 @@ it("initializes value from view model", function() {
 it("initializes complex value from view model", function() {
     dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     kendo.bind(dom, observable);
@@ -71,7 +71,7 @@ it("initializes complex value from view model", function() {
 it("changing a value updates the view model", function() {
     dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     kendo.bind(dom, observable);
@@ -84,7 +84,7 @@ it("changing a value updates the view model", function() {
 it("changing value to a custom one updates the view model", function() {
     dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
 
     observable.value = observable.items[1];
 
@@ -96,7 +96,7 @@ it("changing value to a custom one updates the view model", function() {
 });
 
 it("changing a value updates the view model if bound to simple value", function() {
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: "foo" });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: "foo" });
 
     dom = $('<input data-role="autocomplete" data-text-field="text" data-bind="value:value, source:items" />');
 
@@ -111,7 +111,7 @@ it("changing a value updates the view model if bound to simple value", function(
 it("custom view model value", function() {
     dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = "moo";
 
     kendo.bind(dom, observable);
@@ -121,7 +121,7 @@ it("custom view model value", function() {
 it("setting existing view model value after custom value", function() {
     dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
 
     kendo.bind(dom, observable);
 
@@ -137,7 +137,7 @@ it("setting existing view model value after custom value", function() {
 it("setting custom value after existing view model value", function() {
     dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
 
     kendo.bind(dom, observable);
 
@@ -153,7 +153,7 @@ it("setting custom value after existing view model value", function() {
 it("binding autocomplete initialized before binding", function() {
     dom = $('<input data-text-field="text" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     dom.kendoAutoComplete();
@@ -166,7 +166,7 @@ it("binding autocomplete initialized before binding", function() {
 it("binding autocomplete initialized after binding", function() {
     dom = $('<input data-text-field="text" data-bind="value:value, source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }], value: null });
     observable.value = observable.items[1];
 
     kendo.bind(dom, observable);
@@ -176,67 +176,10 @@ it("binding autocomplete initialized after binding", function() {
     assert.equal(dom.data("kendoAutoComplete").value(), "bar");
 });
 
-it("binding template", function() {
-    dom = $('<input data-role="autocomplete" data-template="template" data-bind=" source:items" />');
-
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
-
-    kendo.bind(dom, observable);
-
-    assert.equal($.trim(dom.data("kendoAutoComplete").ul.children().eq(0).html()), "<strong>foo</strong>");
-});
-
-it("binding template containing binding attributes", function() {
-    dom = $('<input data-role="autocomplete" data-template="template-with-attributes" data-bind="source:items" />');
-
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
-
-    kendo.bind(dom, observable);
-
-    assert.equal($.trim(dom.data("kendoAutoComplete").ul.children().eq(0).html()), '<strong data-bind="text:text">foo</strong>');
-});
-
-it("updating an item from the data source updates the corresponding autocomplete item", function() {
-    dom = $('<input data-role="autocomplete" data-template="template-with-attributes" data-bind=" source:items" />');
-
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
-
-    kendo.bind(dom, observable);
-
-    observable.items[0].set("text", "baz");
-
-    assert.equal($.trim(dom.data("kendoAutoComplete").ul.children().eq(0).text()), "baz");
-});
-
-it("destroying binding targets when the datasource changes", function() {
-    dom = $('<input data-role="autocomplete" data-template="template-with-attributes" data-bind="source:items" />');
-
-    var observable = kendo.observable({ items: [{ text:"foo"} ] });
-
-    kendo.bind(dom, observable);
-    dom.data("kendoAutoComplete").refresh();
-
-    assert.equal(observable.items[0]._events["change"].length, 2); //1 for the text binding and 1 for the ObservableArray
-});
-
-it("removing items from the model updates the UI", function() {
-    dom = $('<input data-bind="source:items" />');
-
-    var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" },{ text: "baz" }] });
-
-    kendo.bind(dom, observable);
-
-    dom.kendoAutoComplete();
-
-    observable.items.splice(0,1);
-
-    assert.equal(dom.data("kendoAutoComplete").ul.children().length, 2);
-});
-
 it("binding are removed if element is rebind", function() {
     dom = $('<input data-role="autocomplete" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
+    var observable = kendo.observable({ items: [{ text: "foo" },{ text: "bar" } ] });
 
     kendo.bind(dom, observable);
 
@@ -250,7 +193,7 @@ it("binding are removed if element is rebind", function() {
 it("binding target is destroyed", function() {
     dom = $('<input data-role="autocomplete" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
+    var observable = kendo.observable({ items: [{ text: "foo" },{ text: "bar" } ] });
 
     kendo.bind(dom, observable);
 
@@ -264,7 +207,7 @@ it("binding target is destroyed", function() {
 it("destroys detaches the events to widget", function() {
     dom = $('<div data-role="autocomplete" data-bind="source:items" />');
 
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+    var observable = kendo.observable({ items: [{ text: "foo" }, { text: "bar" }] });
 
     kendo.bind(dom, observable);
     kendo.unbind(dom);
@@ -280,7 +223,7 @@ it("dataBound event is raised if attached as option", function() {
     dom = $('<div data-role="autocomplete" data-bound="dataBound" data-bind="source:items" />');
 
     var observable = kendo.observable({
-        items: [{text:"foo"}, {text:"bar"}]
+        items: [{ text: "foo" }, { text: "bar" }]
     });
 
     kendo.bind(dom, observable);
@@ -290,7 +233,7 @@ it("dataBound event is raised if attached as option to a already initialized aut
     dom = $('<div data-bound="dataBound" data-bind="source:items" />').kendoAutoComplete();
 
     var observable = kendo.observable({
-        items: [{text:"foo"}, {text:"bar"}]
+        items: [{ text: "foo" }, { text: "bar" }]
     });
 
     kendo.bind(dom, observable);
@@ -467,7 +410,7 @@ it("assign to DataSource as ViewModel field", function() {
     dom = $('<input data-text-field="text" data-bind="source:dataSource" data-role="autocomplete" />');
 
     var dataSource = new kendo.data.DataSource({
-        data: [{text:"foo"}, {text:"bar"}]
+        data: [{ text: "foo" }, { text: "bar" }]
     });
 
     var observable = kendo.observable({

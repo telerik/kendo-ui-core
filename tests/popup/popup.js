@@ -24,7 +24,7 @@
             popup = new Popup(div, { anchor: anchor });
 
             popup.open();
-            assert.equal(div.parent().css("zIndex"), "12");
+            assert.equal(div.closest(".k-animation-container").css("zIndex"), "12");
         });
 
         it("mousedown outside the element should close it", function() {
@@ -157,15 +157,16 @@
                 }
             });
             popup = div.data('kendoPopup');
-
-            div.show().data("kendoPopup").close();
+            popup.open();
+            popup.close();
         });
 
         it("close closes the element", function(done) {
             div.kendoPopup();
             popup = div.data('kendoPopup');
 
-            div.show().data("kendoPopup").close();
+            popup.open();
+            popup.close();
 
             setTimeout(function() {
                 assert.isOk(!div.is(":visible"));
@@ -185,7 +186,8 @@
         it("popup is made absolute", function() {
             div.kendoPopup();
             popup = div.data('kendoPopup');
-            assert.equal(div.css("position"), "absolute");
+            popup.open();
+            assert.equal(popup.wrapper.css("position"), "absolute");
         });
 
         it("default popup origin is bottom left", function() {
@@ -489,7 +491,7 @@
                 }
             });
 
-            div.show();
+            popup.open();
             popup.toggle();
         });
 
@@ -578,7 +580,7 @@
             var calledCount = 0,
                 MyPopup = Popup.extend({
                     _fit: function() {
-                        calledCount++
+                        calledCount++;
                     }
                 });
 
@@ -723,7 +725,7 @@
             });
 
             popup.open();
-            assert.isOk(anchor.children().hasClass("k-state-active"));
+            assert.isOk(anchor.children().hasClass("k-active"));
         });
 
         it("gets biggest zindex if sibling container does not have zIndex", function() {
@@ -733,7 +735,7 @@
             popup = new Popup(div, { anchor: anchor });
             popup.open();
 
-            assert.isOk(div.parent().css("zIndex") > 2);
+            assert.isOk(div.closest(".k-animation-container").css("zIndex") > 2);
         });
 
         it("copy font styles from anchor", function() {
@@ -858,6 +860,7 @@
             popup.open();
             popup.close();
             popup.element.css("width", "10vw");
+
             popup.open();
 
             var animationContainer = popup.wrapper;

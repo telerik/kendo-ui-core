@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.resizable" ], f);
-})(function(){
+import "./kendo.resizable.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "splitter",
     name: "Splitter",
     category: "web",
@@ -10,12 +8,11 @@ var __meta__ = { // jshint ignore:line
     depends: [ "resizable" ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         keys = kendo.keys,
         extend = $.extend,
-        proxy = $.proxy,
         Widget = ui.Widget,
         pxUnitsRegex = /^\d+(\.\d+)?px$/i,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
@@ -32,9 +29,17 @@ var __meta__ = { // jshint ignore:line
         CLICK = "click",
         PANE = "pane",
         MOUSELEAVE = "mouseleave",
-        FOCUSED = "k-state-focused",
+        FOCUSED = "k-focus",
         KPANE = "k-" + PANE,
-        PANECLASS = "." + KPANE;
+        PANECLASS = "." + KPANE,
+        TABINDEX = "tabindex",
+        ARIA_VALUEMIN = "aria-valuemin",
+        ARIA_VALUEMAX = "aria-valuemax",
+        ARIA_VALUENOW = "aria-valuenow",
+        ARIA_CONTROLS = "aria-controls",
+        ARIA_LABEL = "aria-label",
+        ARIA_LABELLEDBY = "aria-labelledby",
+        ARIA_ORIENTATION = "aria-orientation";
 
     function isPercentageSize(size) {
         return percentageUnitsRegex.test(size);
@@ -84,7 +89,7 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = that.element;
 
-            if(that.options.orientation){
+            if (that.options.orientation) {
                 isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
             }
 
@@ -129,9 +134,9 @@ var __meta__ = { // jshint ignore:line
             // do not use delegated events to increase performance of nested elements
             that.element
                 .children(".k-splitbar-draggable-" + orientation)
-                    .on("keydown" + NS, proxy(that._keydown, that))
+                    .on("keydown" + NS, that._keydown.bind(that))
                     .on("mousedown" + NS, function(e) { e.currentTarget.focus(); })
-                    .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
+                    .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED); })
                     .on("blur" + NS, function(e) { $(e.currentTarget).removeClass(FOCUSED);
                         if (that.resizing) {
                             that.resizing.end();
@@ -139,16 +144,16 @@ var __meta__ = { // jshint ignore:line
                     })
                     .on(MOUSEENTER + NS, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                     .on(MOUSELEAVE + NS, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                    .on("mousedown" + NS, proxy(that._addOverlays, that))
+                    .on("mousedown" + NS, that._addOverlays.bind(that))
                 .end()
                 .children(".k-splitbar")
-                    .on("dblclick" + NS, proxy(that._togglePane, that))
+                    .on("dblclick" + NS, that._togglePane.bind(that))
                     .children(".k-collapse-next, .k-collapse-prev").on(CLICK + NS, that._arrowClick(COLLAPSE)).end()
                     .children(".k-expand-next, .k-expand-prev").on(CLICK + NS, that._arrowClick(EXPAND)).end()
                 .end();
 
-            $(window).on("resize" + NS + that._marker, proxy(that.resize, that, false));
-            $(document).on("mouseup" + NS + that._marker, proxy(that._removeOverlays, that));
+            $(window).on("resize" + NS + that._marker, that.resize.bind(that, false));
+            $(document).on("mouseup" + NS + that._marker, that._removeOverlays.bind(that));
         },
 
         _detachEvents: function() {
@@ -211,10 +216,12 @@ var __meta__ = { // jshint ignore:line
                 }
                 e.preventDefault();
             } else if (key === keys.HOME) {
-                resizing.move(-resizing._maxPosition, target);
+                pane = target.prev();
+                that.collapse(pane);
                 e.preventDefault();
             } else if (key === keys.END) {
-                resizing.move(resizing._maxPosition, target);
+                pane = target.prev();
+                that.expand(pane);
                 e.preventDefault();
             } else if (key === keys.ENTER && resizing) {
                 resizing.end();
@@ -267,14 +274,14 @@ var __meta__ = { // jshint ignore:line
                         data: data || {},
                         type: "GET",
                         dataType: "html",
-                        success: function (data) {
-                            that.angular("cleanup", function(){ return { elements: pane.get() }; });
+                        success: function(data) {
+                            that.angular("cleanup", function() { return { elements: pane.get() }; });
                             pane.html(data);
-                            that.angular("compile", function(){ return { elements: pane.get() }; });
+                            that.angular("compile", function() { return { elements: pane.get() }; });
 
                             that.trigger(CONTENTLOAD, { pane: pane[0] });
                         },
-                        error: function (xhr, status) {
+                        error: function(xhr, status) {
                             that.trigger(ERROR, {
                                 pane: pane[0],
                                 status: status,
@@ -292,7 +299,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _triggerAction: function(type, pane) {
-            if (!this.trigger(type, { pane: pane[0] })) {
+            var paneConfig = pane.data(PANE);
+            var shouldExecute = (paneConfig.collapsed && type == EXPAND) || (!paneConfig.collapsed && type == COLLAPSE);
+
+            if (!paneConfig.collapsible) {
+                return;
+            }
+
+            if (shouldExecute && !this.trigger(type, { pane: pane[0] })) {
                 this[type](pane[0]);
             }
         },
@@ -306,7 +320,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            arrow = target.children(".k-icon:not(.k-resize-handle)");
+            arrow = target.children("span:not(.k-resize-handle)");
 
             if (arrow.length !== 1) {
                 return;
@@ -322,11 +336,11 @@ var __meta__ = { // jshint ignore:line
                 that._triggerAction(EXPAND, target.next());
             }
         },
-        _arrowClick: function (arrowType) {
+        _arrowClick: function(arrowType) {
             var that = this;
 
             return function(e) {
-                var target = $(e.target),
+                var target = $(e.currentTarget),
                     pane;
 
                 if (target.closest(".k-splitter")[0] != that.element[0]) {
@@ -341,40 +355,59 @@ var __meta__ = { // jshint ignore:line
                 that._triggerAction(arrowType, pane);
             };
         },
-        _updateSplitBar: function(splitbar, previousPane, nextPane) {
-            var catIconIf = function(iconType, condition) {
-                   return condition ? "<div class='k-icon " + iconType + "' />" : "";
+        _updateSplitBar: function(splitbar, previousPane, nextPane, previousPaneEl) {
+            var catIconIf = function(actionType, iconType, condition) {
+                    var icon = iconType ? "<span class='k-icon k-i-" + iconType + "'></span>" : "";
+                    return condition ? "<span class='k-" + actionType + "'>" + icon + "</span>" : "";
                 },
                 orientation = this.orientation,
                 draggable = (previousPane.resizable !== false) && (nextPane.resizable !== false),
                 prevCollapsible = previousPane.collapsible,
                 prevCollapsed = previousPane.collapsed,
                 nextCollapsible = nextPane.collapsible,
-                nextCollapsed = nextPane.collapsed;
+                nextCollapsed = nextPane.collapsed,
+                previousPaneId = previousPaneEl.attr("id");
 
-            splitbar.addClass("k-splitbar k-state-default k-splitbar-" + orientation)
+            if (!previousPaneId) {
+                previousPaneId = kendo.guid();
+                previousPaneEl.attr("id", previousPaneId);
+            }
+
+            splitbar.addClass("k-splitbar k-splitbar-" + orientation)
                     .attr("role", "separator")
-                    .attr("aria-expanded", !(prevCollapsed || nextCollapsed))
+                    .attr(ARIA_VALUEMIN, "0")
+                    .attr(ARIA_VALUEMAX, "100")
+                    .attr(ARIA_CONTROLS, previousPaneId)
                     .removeClass("k-splitbar-" + orientation + "-hover")
                     .toggleClass("k-splitbar-draggable-" + orientation,
                         draggable && !prevCollapsed && !nextCollapsed)
                     .toggleClass("k-splitbar-static-" + orientation,
                         !draggable && !prevCollapsible && !nextCollapsible)
                     .html(
-                        catIconIf("k-collapse-prev k-i-arrow-60-up", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-collapse-prev k-i-arrow-60-left", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
-                        catIconIf("k-expand-prev k-i-arrow-60-down", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-expand-prev k-i-arrow-60-right", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
-                        catIconIf("k-resize-handle k-i-hbar", draggable && orientation == VERTICAL) +
-                        catIconIf("k-resize-handle k-i-vbar", draggable && orientation == HORIZONTAL) +
-                        catIconIf("k-collapse-next k-i-arrow-60-down", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-collapse-next k-i-arrow-60-right", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == HORIZONTAL) +
-                        catIconIf("k-expand-next k-i-arrow-60-up", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-expand-next k-i-arrow-60-left", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
+                        catIconIf("collapse-prev", "caret-alt-up", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                        catIconIf("collapse-prev", "caret-alt-left", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("expand-prev", "caret-alt-down", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                        catIconIf("expand-prev", "caret-alt-right", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("resize-handle", null, draggable && orientation == VERTICAL) +
+                        catIconIf("resize-handle", null, draggable && orientation == HORIZONTAL) +
+                        catIconIf("collapse-next", "caret-alt-down", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                        catIconIf("collapse-next", "caret-alt-right", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("expand-next", "caret-alt-up", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                        catIconIf("expand-next", "caret-alt-left", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
                     );
 
+            if (previousPane.labelId) {
+                splitbar.attr(ARIA_LABELLEDBY, previousPane.labelId);
+            } else if (previousPane.label) {
+                splitbar.attr(ARIA_LABEL, previousPane.label);
+            }
+
+            if (orientation == HORIZONTAL) {
+                splitbar.attr(ARIA_ORIENTATION, VERTICAL);
+            }
+
             if (!draggable && !prevCollapsible && !nextCollapsible) {
-                splitbar.removeAttr("tabindex");
+                splitbar.removeAttr(TABINDEX);
             }
         },
         _updateSplitBars: function() {
@@ -382,14 +415,15 @@ var __meta__ = { // jshint ignore:line
 
             this.element.children(".k-splitbar").each(function() {
                 var splitbar = $(this),
-                    previousPane = splitbar.prevAll(PANECLASS).first().data(PANE),
+                    previousPaneEl = splitbar.prevAll(PANECLASS).first(),
+                    previousPane = previousPaneEl.data(PANE),
                     nextPane = splitbar.nextAll(PANECLASS).first().data(PANE);
 
                 if (!nextPane) {
                     return;
                 }
 
-                that._updateSplitBar(splitbar, previousPane, nextPane);
+                that._updateSplitBar(splitbar, previousPane, nextPane, previousPaneEl);
             });
         },
         _removeSplitBars: function() {
@@ -402,6 +436,17 @@ var __meta__ = { // jshint ignore:line
             return this.element.children(PANECLASS);
         },
 
+        _resetAriaValueNow: function(splitBars, panesSizes) {
+            var i, splitbar, valueNow, joinDimension;
+
+            for (i = 0; i < splitBars.length; i++) {
+                joinDimension = (panesSizes[i] + panesSizes[i + 1]) || 1;
+                valueNow = Math.round(panesSizes[i] / joinDimension * 100);
+                splitbar = splitBars[i];
+                splitbar.setAttribute(ARIA_VALUENOW, valueNow);
+            }
+        },
+
         _resize: function() {
             var that = this,
                 element = that.element,
@@ -410,7 +455,8 @@ var __meta__ = { // jshint ignore:line
                 splitBars = element.children(".k-splitbar"),
                 splitBarsCount = splitBars.length,
                 sizingProperty = isHorizontal ? "width" : "height",
-                totalSize = element[sizingProperty]();
+                totalSize = element[sizingProperty](),
+                panesSizes = [];
 
             that.wrapper.addClass("k-splitter-resizing");
 
@@ -439,12 +485,13 @@ var __meta__ = { // jshint ignore:line
                     var element = $(this),
                         config = element.data(PANE) || {}, size;
 
-                    element.removeClass("k-state-collapsed");
+                    element.removeClass("k-collapsed");
                     if (config.collapsed) {
                         size = config.collapsedSize ? calculateSize(config.collapsedSize, totalSize) : 0;
-                        element.css("overflow", "hidden").addClass("k-state-collapsed");
+                        element.css("overflow", "hidden").addClass("k-collapsed");
                     } else if (isFluid(config.size)) {
                         freeSizedPanes = freeSizedPanes.add(this);
+                        panesSizes.push(false);
                         return;
                     } else { // sized in px/%, not collapsed
                         size = calculateSize(config.size, totalSize);
@@ -452,6 +499,7 @@ var __meta__ = { // jshint ignore:line
 
                     sizedPanesCount++;
                     sizedPanesWidth += size;
+                    panesSizes.push(size);
 
                     return size;
                 });
@@ -467,6 +515,14 @@ var __meta__ = { // jshint ignore:line
                 .end()
                 .eq(freeSizePanesCount - 1)
                     .css(sizingProperty, totalSize - (freeSizePanesCount - 1) * freeSizePaneWidth);
+
+            panesSizes.forEach(function(size, i) {
+                if (size === false) {
+                    panesSizes[i] = freeSizePaneWidth;
+                }
+            });
+
+            that._resetAriaValueNow(splitBars, panesSizes);
 
             // arrange panes
             var sum = 0,
@@ -484,7 +540,7 @@ var __meta__ = { // jshint ignore:line
 
             element.children()
                 .css(alternateSizingProperty, element[alternateSizingProperty]())
-                .each(function (i, child) {
+                .each(function(i, child) {
                     if (child.tagName.toLowerCase() != "script") {
                         child.style[positioningProperty] = Math.floor(sum) + "px";
                         sum += child[sizingDomProperty];
@@ -586,7 +642,7 @@ var __meta__ = { // jshint ignore:line
 
             if (pane.length) {
                 kendo.destroy(pane);
-                pane.each(function(idx, element){
+                pane.each(function(idx, element) {
                     that.options.panes.splice(that.wrapper.children(".k-pane").index(element), 1);
                     $(element).remove();
                 });
@@ -639,12 +695,12 @@ var __meta__ = { // jshint ignore:line
         that._resizable = new kendo.ui.Resizable(splitter.element, {
             orientation: orientation,
             handle: ".k-splitbar-draggable-" + orientation + "[data-marker=" + splitter._marker + "]",
-            hint: proxy(that._createHint, that),
-            start: proxy(that._start, that),
-            max: proxy(that._max, that),
-            min: proxy(that._min, that),
-            invalidClass:"k-restricted-size-" + orientation,
-            resizeend: proxy(that._stop, that)
+            hint: that._createHint.bind(that),
+            start: that._start.bind(that),
+            max: that._max.bind(that),
+            min: that._min.bind(that),
+            invalidClass: "k-restricted-size-" + orientation,
+            resizeend: that._stop.bind(that)
         });
     }
 
@@ -682,7 +738,7 @@ var __meta__ = { // jshint ignore:line
 
         _createHint: function(handle) {
             var that = this;
-            return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + " k-state-default' />")
+            return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + "' />")
                         .css(that.alternateSizingProperty, handle[that.alternateSizingProperty]());
         },
 
@@ -696,7 +752,7 @@ var __meta__ = { // jshint ignore:line
                 prevBoundary = parseInt(previousPane[0].style[that.positioningProperty], 10),
                 nextBoundary = parseInt(nextPane[0].style[that.positioningProperty], 10) + nextPane[0][that.sizingDomProperty] - splitbar[0][that.sizingDomProperty],
                 totalSize = parseInt(that._element.css(that.sizingProperty), 10),
-                toPx = function (value) {
+                toPx = function(value) {
                     var val = parseInt(value, 10);
                     return (isPixelSize(value) ? val : (totalSize * val) / 100) || 0;
                 },
@@ -711,7 +767,7 @@ var __meta__ = { // jshint ignore:line
             that._minPosition = Math.max(prevBoundary + prevMinSize, nextBoundary - nextMaxSize);
         },
         _max: function() {
-              return this._maxPosition;
+            return this._maxPosition;
         },
         _min: function() {
             return this._minPosition;
@@ -754,6 +810,3 @@ var __meta__ = { // jshint ignore:line
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

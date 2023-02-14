@@ -1,8 +1,8 @@
 ---
 title: Expand and Collapse All Detail Rows in Grid
-description: An example on how to expand and collapse all detail rows in a Kendo UI Grid.
+description: Learn how to expand and collapse all detail rows in a Kendo UI Grid.
 type: how-to
-page_title: Expand and Collapse All Detail Rows | Kendo UI Grid
+page_title: Expand and Collapse All Detail Rows - Kendo UI Grid for jQuery
 slug: grid-how-to-expand-and-collapse-details-rows
 tags: grid, expand, collapse, details
 ticketid: 1137592
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -29,7 +29,7 @@ component: grid
   <td>Browser Version</td>
   <td>61</td>
  </tr> <tr>
-  <td>Made with Version</td>
+  <td>Product Version</td>
   <td>2017.3.1026</td>
  </tr>
 </table>
@@ -47,8 +47,8 @@ Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/m
 
 ```dojo
 <div id="example">
-      <button class="k-button" id="expand">Expand All</button>
-      <button class="k-button" id="collapse">Collapse All</button>
+      <button id="expand" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'><span class='k-button-text'>Expand All</span></button>
+      <button id="collapse" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'><span class='k-button-text'>Collapse All</span></button>
       <div id="grid"></div>
 
       <script>

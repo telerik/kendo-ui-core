@@ -18,7 +18,7 @@
             currency: {
                 name: "Brazilian Real",
                 abbr: "BRL",
-                pattern: ["-$n","$n"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -59,5 +59,5 @@
                 firstDay: 0
             }
         }
-    }
-})(this);
+    };
+})();

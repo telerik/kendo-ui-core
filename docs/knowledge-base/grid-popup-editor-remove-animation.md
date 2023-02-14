@@ -1,8 +1,8 @@
 ---
 title: Disable Popup Editor Animations
-description: An example on how to remove the animation of the popup editor in the Kendo UI Grid.
+description: Learn how to remove the animation of the popup editor in the Kendo UI Grid.
 type: how-to
-page_title: Remove Popup Window Animation | Kendo UI Grid
+page_title: Remove Popup Window Animation - Kendo UI Grid for jQuery
 slug: grid-popup-editor-remove-animation
 tags: grid, popup, editor, animation
 ticketid: 1135955
@@ -15,11 +15,11 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
-  <td>Created with the 2017.3.1026 version</td>
+  <td>Product Version</td>
+  <td>Created with the 2020.3.1021 version</td>
  </tr>
 </table>
 
@@ -130,8 +130,7 @@ $.fn.kendoWindow.widget.prototype.options.animation = false;
                     },
                     {
                         field: "Discontinued",
-                        width: "120px",
-                        editor: customBoolEditor
+                        width: "120px"
                     },
                     {
                         command: ["edit", "destroy"],
@@ -142,12 +141,6 @@ $.fn.kendoWindow.widget.prototype.options.animation = false;
                 editable: "popup"
             });
         });
-
-        function customBoolEditor(container, options) {
-            var guid = kendo.guid();
-            $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-            $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-        }
     </script>
 </div>
 ```

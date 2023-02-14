@@ -1,5 +1,6 @@
 (function() {
     var StaticList = kendo.ui.StaticList,
+        encode = kendo.htmlEncode,
         element;
 
     describe("kendo.ui.StaticList events", function() {
@@ -18,7 +19,7 @@
         it("widget triggers dataBound event", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 dataBound: function() {
                     assert.isOk(true);
                 }
@@ -30,7 +31,7 @@
         it("widget triggers change event on load when initial values are present", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 change: function() {
                     assert.isOk(true);
                 },
@@ -44,7 +45,7 @@
             var triggered = false;
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item"],
                 dataBound: function() {
                     assert.isOk(triggered);
@@ -60,7 +61,7 @@
         it("widget triggers change event on select", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 change: function() {
                     assert.isOk(true);
                 }
@@ -74,7 +75,7 @@
         it("widget triggers change event when item is deselected", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item"]
             });
 
@@ -90,7 +91,7 @@
         it("widget triggers change event when change value to a custom one", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item"]
             });
 
@@ -106,7 +107,7 @@
         it("widget does not trigger change when new item is added to the source", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item"]
             });
 
@@ -123,7 +124,7 @@
             var list = new StaticList(element, {
                 dataValueField: "text",
                 dataSource: [{ text: "item" }, { text: "item1" }],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item"]
             });
 
@@ -140,7 +141,7 @@
             var list = new StaticList(element, {
                 dataValueField: "text",
                 dataSource: [{ text: "item" }, { text: "item1" }],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item"]
             });
 
@@ -156,7 +157,7 @@
         it("widget passes deselected dataItem", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item"]
             });
 
@@ -175,7 +176,7 @@
         it("widget passes deselected order index", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item"]
             });
 
@@ -193,7 +194,7 @@
         it("widget passes deselected indices when multiple selection is enabled", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 selectable: "multiple",
                 value: ["item2", "item3"]
             });
@@ -214,7 +215,7 @@
         it("widget passes deselected order indices when multiple selection is enabled", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 selectable: "multiple",
                 value: ["item2", "item3"]
             });
@@ -235,7 +236,7 @@
         it("widget passes selected indices", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -255,7 +256,7 @@
         it("widget triggers change when value is cleared", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 selectable: "multiple",
                 value: ["item1"]
             });
@@ -272,7 +273,7 @@
         it("widget triggers activate event when the item is focused", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 activate: function() {
                     assert.isOk(true);
                 }
@@ -286,7 +287,7 @@
         it("widget triggers deactivate event when the item is unfocused", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 deactivate: function() {
                     assert.isOk(true);
                 },
@@ -301,7 +302,7 @@
         it("widget triggers selectedItemChange event when the selected item has changed (single selection)", function() {
             var list = new StaticList(element, {
                 dataSource: [{ value: "item" }],
-                template: "#:data.value#",
+                template: (data) => encode(data.value),
                 dataValueField: "value",
                 selectedItemChange: function(e) {
                     var items = e.items;
@@ -320,7 +321,7 @@
         it("widget does not trigger selectedItemChange event when updated item is not updated", function() {
             var list = new StaticList(element, {
                 dataSource: [{ value: "item1" }, { value: "item2" }],
-                template: "#:data.value#",
+                template: (data) => encode(data.value),
                 dataValueField: "value",
                 selectedItemChange: function(e) {
                     assert.isOk(false);
@@ -336,7 +337,7 @@
             var list = new StaticList(element, {
                 selectable: "multiple",
                 dataSource: [{ value: "item1" }, { value: "item2" }],
-                template: "#:data.value#",
+                template: (data) => encode(data.value),
                 dataValueField: "value",
                 selectedItemChange: function(e) {
                     var items = e.items;

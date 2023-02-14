@@ -15,10 +15,118 @@ component: gauges
 The gauge area configuration options.
 This is the entire visible area of the gauge.
 
+#### Example - set gaugeArea border width and color
+
+    <div id="gauge-container">
+      <div id="gauge"></div>
+    </div>
+
+    <script>
+      $(function() {
+        var value = $("#gauge-value").val();
+        $("#gauge").kendoLinearGauge({
+          pointer: {
+            value: 28
+          },
+          gaugeArea: {
+            border: {
+              color: "green",
+              width: "4px"
+            }
+          },
+          scale: {
+            majorUnit: 20,
+            minorUnit: 2,
+            min: -40,
+            max: 60,
+            vertical: true,
+            ranges: [
+              {
+                from: -40,
+                to: -20,
+                color: "#2798df"
+              }
+            ]
+          }
+        });
+      });
+    </script>
+
+    <style>
+      #gauge-container {
+        text-align: center;
+        margin: 0 auto;
+        background-size: contain;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+      }
+
+      #gauge {
+        height: 100%;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+      }
+    </style>
+
 ### gaugeArea.background `String`*(default: "white")*
 
 The background of the gauge area.
 Any valid CSS color string will work here, including hex and rgb.
+
+#### Example - set gaugeArea background color
+
+    <div id="gauge-container">
+      <div id="gauge"></div>
+    </div>
+
+    <script>
+      $(function() {
+        var value = $("#gauge-value").val();
+        $("#gauge").kendoLinearGauge({
+          pointer: {
+            value: 28
+          },
+          gaugeArea: {
+            background: "#c7d6d1",
+          },
+          scale: {
+            majorUnit: 20,
+            minorUnit: 2,
+            min: -40,
+            max: 60,
+            vertical: true,
+            ranges: [
+              {
+                from: -40,
+                to: -20,
+                color: "#2798df"
+              }
+            ]
+          }
+        });
+      });
+    </script>
+
+    <style>
+      #gauge-container {
+        text-align: center;
+        margin: 0 auto;
+        background-size: contain;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+      }
+
+      #gauge {
+        height: 100%;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+      }
+    </style>
+
 
 ### gaugeArea.border `Object`
 
@@ -27,6 +135,61 @@ The border of the gauge area.
 ### gaugeArea.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
+
+#### Example - set gaugeArea border color
+
+    <div id="gauge-container">
+      <div id="gauge"></div>
+    </div>
+
+    <script>
+      $(function() {
+        var value = $("#gauge-value").val();
+        $("#gauge").kendoLinearGauge({
+          pointer: {
+            value: 28
+          },
+          gaugeArea: {
+            border: {
+              color: "green",
+              width: "4px"
+            }
+          },
+          scale: {
+            majorUnit: 20,
+            minorUnit: 2,
+            min: -40,
+            max: 60,
+            vertical: true,
+            ranges: [
+              {
+                from: -40,
+                to: -20,
+                color: "#2798df"
+              }
+            ]
+          }
+        });
+      });
+    </script>
+
+    <style>
+      #gauge-container {
+        text-align: center;
+        margin: 0 auto;
+        background-size: contain;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+      }
+
+      #gauge {
+        height: 100%;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+      }
+    </style>
 
 ### gaugeArea.border.dashType `String`*(default: "solid")*
 
@@ -64,6 +227,61 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 ### gaugeArea.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+ #### Example - set gaugeArea border width
+
+    <div id="gauge-container">
+      <div id="gauge"></div>
+    </div>
+
+    <script>
+      $(function() {
+        var value = $("#gauge-value").val();
+        $("#gauge").kendoLinearGauge({
+          pointer: {
+            value: 28
+          },
+          gaugeArea: {
+            border: {
+              color: "green",
+              width: 4
+            }
+          },
+          scale: {
+            majorUnit: 20,
+            minorUnit: 2,
+            min: -40,
+            max: 60,
+            vertical: true,
+            ranges: [
+              {
+                from: -40,
+                to: -20,
+                color: "#2798df"
+              }
+            ]
+          }
+        });
+      });
+    </script>
+
+    <style>
+      #gauge-container {
+        text-align: center;
+        margin: 0 auto;
+        background-size: contain;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+      }
+
+      #gauge {
+        height: 100%;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+      }
+    </style>
 
 ### gaugeArea.height `Number`
 
@@ -109,6 +327,7 @@ horizontal gauge is 200px.
 The pointer configuration options. It accepts an `Array` of pointers, each with it's own configuration options.
 
 #### Example - specify single pointer
+
     <div id="gauge"></div>
     <script>
 	  $("#gauge").kendoLinearGauge({
@@ -116,9 +335,10 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
           value: 40
         }
       });
-    <script>
+    </script>
 
 #### Example - specify multiple pointers
+
 	<div id="gauge"></div>
     <script>
 	  $("#gauge").kendoLinearGauge({
@@ -128,7 +348,7 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
           value: 40
         }]
       });
-    <script>
+    </script>
 
 ### pointer.border `Object`
 
@@ -430,14 +650,17 @@ The format of the labels.
 
 #### Example
 
+    <div id="linear-gauge"></div>
+    <script>
     $("#linear-gauge").kendoLinearGauge({
         scale: {
-           labels: {
-               // set the format to currency
-               format: "C"
-           }
+            labels: {
+                // set the format to currency
+                format: "C"
+            }
         }
     });
+    </script>
 
 ### scale.labels.margin `Number|Object`*(default: 5)*
 
@@ -498,15 +721,18 @@ Template variables:
 
 #### Example
 
-    // chart initialization
+    <div id="linear-gauge"></div>
+    <script>
+      // gauge initialization
     $("#linear-gauge").kendoLinearGauge({
-         scale: {
-             labels: {
-                 // labels template
-                 template: "#= value #%"
-             }
-         }
+        scale: {
+            labels: {
+                // labels template
+                template: "#= value #%"
+            }
+        }
     });
+    </script>
 
 ### scale.labels.visible `Boolean`*(default: true)*
 
@@ -583,15 +809,18 @@ The ranges of the scale.
 
 #### Example
 
-    $("#linear-gauge").kendoLinearGauge({
-        scale: {
+    <div id="linear-gauge"></div>
+    <script>
+        $("#linear-gauge").kendoLinearGauge({
+          scale: {
             ranges: [{
-                from: 10,
-                to: 20,
-                color: "green"
+              from: 10,
+              to: 20,
+              color: "green"
             }]
-        }
-     });
+          }
+        });
+    </script>
 
 ### scale.ranges.from `Number`
 
@@ -617,6 +846,22 @@ The default color for the ranges.
 ### scale.rangeSize `Number`
 
 The width of the range indicators.
+
+#### Example
+
+<div id="linear-gauge"></div>
+<script>
+    $("#linear-gauge").kendoLinearGauge({
+      scale: {
+        ranges: [{
+          from: 10,
+          to: 20,
+          color: "green"
+        }],
+        rangeSize: 20
+      }
+    });
+</script>
 
 ### scale.reverse `Boolean`*(default: false)*
 
@@ -666,32 +911,32 @@ An array of values to be set.
 #### Example - setting multiple values
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoLinearGauge({
+	$("#gauge").kendoLinearGauge({
         pointer: [{
-          value: 20
+            value: 20
         }, {
-          value: 40
+            value: 40
         }]
-      });
+    });
 
-      var gauge = $("#gauge").data("kendoLinearGauge");
-      gauge.allValues([60, 10]);
-    <script>
+    var gauge = $("#gauge").data("kendoLinearGauge");
+    gauge.allValues([60, 10]);
+    </script>
 
 #### Example - retrieving all values
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoLinearGauge({
+	$("#gauge").kendoLinearGauge({
         pointer: [{
-          value: 20
+            value: 20
         }, {
-          value: 40
+            value: 40
         }]
-      });
+    });
 
-      var gauge = $("#gauge").data("kendoLinearGauge");
-      var allValues = gauge.allValues();
-    <script>
+    var gauge = $("#gauge").data("kendoLinearGauge");
+    var allValues = gauge.allValues();
+    </script>
 
 ### destroy
 
@@ -703,7 +948,7 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 Exports the Gauge as an image.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -721,6 +966,7 @@ The height of the exported image. Defaults to the Gauge height.
 `Promise` A promise that will be resolved with a PNG image encoded as a Data URI.
 
 #### Example - Exporting a Gauge to an image
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -742,12 +988,11 @@ The height of the exported image. Defaults to the Gauge height.
         });
     </script>
 
-
 ### exportPDF
 Exports the Gauge as a PDF file.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -759,6 +1004,7 @@ Parameters for the exported PDF file.
 `Promise` A promise that will be resolved with a PDF file encoded as a Data URI.
 
 #### Example - Exporting a chart to a PDF file
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -785,7 +1031,7 @@ Parameters for the exported PDF file.
 Exports the Gauge as an SVG document.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -800,6 +1046,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 `Promise` A promise that will be resolved with a SVG document encoded as a Data URI.
 
 #### Example - Exporting a chart to an SVG document
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -878,21 +1125,21 @@ The gauge settings to update.
 
     <div id="gauge"></div>
     <script>
-        $("#gauge").kendoLinearGauge({
-            pointer: [{
-                value: 20
-            }]
-        });
+    $("#gauge").kendoLinearGauge({
+        pointer: [{
+            value: 20
+        }]
+    });
 
-        $("#gauge").data("kendoLinearGauge").setOptions({ theme: 'metro' });
+    $("#gauge").data("kendoLinearGauge").setOptions({ theme: 'metro' });
     </script>
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the gauge.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the gauge.
 The returned string is a self-contained SVG document that can be used as is or
 converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
-[ImageMagick](http://www.imagemagick.org/).
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/lineargauge/methods/exportsvg), but will remain fully functional.
@@ -912,6 +1159,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var gauge = $("#gauge").data("kendoLinearGauge");
     var svg = gauge.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -952,7 +1200,7 @@ Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozil
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);

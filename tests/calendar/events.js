@@ -4,7 +4,7 @@ var Calendar = kendo.ui.Calendar,
     instance,
     div;
 
-describe("kendo.ui.Calendar events", function () {
+describe("kendo.ui.Calendar events", function() {
     beforeEach(function() {
 
         div = $("<div />").appendTo(Mocha.fixture);
@@ -63,7 +63,7 @@ it("click on cell put in range", function() {
 
     instance._current = new Date(2000, 10, 1, 16, 0, 0);
 
-    stub(instance, { navigateDown: instance.navigateDown});
+    stub(instance, { navigateDown: instance.navigateDown });
 
     div.find("tbody").find("td:has(.k-link)").last().click();
 

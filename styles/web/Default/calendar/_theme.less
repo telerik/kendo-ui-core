@@ -15,15 +15,10 @@
             @calendar-header-border
         );
         .composite-background(@calendar-header-gradient);
+    }
 
-        .k-link.k-state-hover when (@theme-name = material) {
-            color: inherit;
-            background-color: shade(@calendar-header-bg, 20);
-            box-shadow: none;
-        }
-        .k-nav-fast when (@theme-name = material) {
-            border-radius: 0;
-        }
+    > .k-header .k-button {
+        color: inherit;
     }
 
 
@@ -75,7 +70,8 @@
 
 
     // States
-    td.k-state-hover {
+    td.k-state-hover,
+    td.k-hover {
         .k-link {
             .fill(
                 @calendar-cell-hovered-text,
@@ -85,7 +81,8 @@
             .composite-background(@hover-gradient);
         }
     }
-    td.k-state-selected {
+    td.k-state-selected,
+    td.k-selected {
         .k-link {
             .fill(
                 @calendar-cell-selected-text,
@@ -95,19 +92,19 @@
             .composite-background(@selected-gradient);
         }
     }
-    td.k-state-focused {
+    td.k-state-focused,
+    td.k-focus {
         .k-link {
             box-shadow: @calendar-cell-focused-shadow;
         }
     }
 
+    .k-footer .k-nav-today,
+    .k-calendar-header .k-nav-today {
+        color: @link-text;
 
-    // Footer
-    .k-footer {
-        .k-nav-today {
-            color: @link-text;
-        }
-        .k-nav-today:hover {
+        &:hover,
+        &:focus {
             color: @link-hovered-text;
         }
     }

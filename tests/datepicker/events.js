@@ -5,7 +5,7 @@ var DateView = kendo.DateView,
     datepicker,
     div, input;
 
-describe("kendo.ui.DatePicker Events", function () {
+describe("kendo.ui.DatePicker Events", function() {
     beforeEach(function() {
         div = $("<div />").appendTo(Mocha.fixture);
         input = $("<input />").appendTo(Mocha.fixture);
@@ -58,9 +58,9 @@ it("does not force element's DOM change event when the user manually edits the v
     });
 
     input.focus()
-        .trigger($.Event("keydown", {keyCode: 8}))
+        .trigger($.Event("keydown", { keyCode: 8 }))
         .val("10/10/2010")
-        .trigger($.Event("keydown", {keyCode: 13}));
+        .trigger($.Event("keydown", { keyCode: 13 }));
 });
 
 it("do not raise change event when use API", function() {

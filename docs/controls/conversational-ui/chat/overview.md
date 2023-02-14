@@ -1,24 +1,24 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Chat
-description: "Learn how to create a Chat UI, integrate it with different frameworks and configure its templates."
+page_title: jQuery Chat Documentation - Chat Overview
+description: "Get started with the jQuery Chat by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_chat_widget
 position: 1
 ---
 
-# Chat Overview
+# {{ site.product }} Chat Overview
 
-The [Kendo UI Chat](http://demos.telerik.com/kendo-ui/chat/index) widget allows the user to participate in chat sessions with other users or with chat bots.
+The Chat allows the user to participate in chat sessions with other users or with chat bots.
 
-The Chat provides rich conversational experience that goes beyond the natural language understanding and personality of your chatbot. These features allow you to implement conversational UI in your applications by utilizing AI-powered frameworks that work with natural language processing either by following a predefined logical tree or for integrating P2P chat capabilities in the applications.
+Chats provide support for default cards and actions, and enable the configuration of custom templates and custom components. They provide rich conversational experience that goes beyond the natural language understanding and personality of the chatbot. These features allow you to implement conversational UI in your applications by utilizing AI-powered frameworks that work with natural language processing either by following a predefined logical tree or for integrating P2P chat capabilities in the applications.
 
- **Figure 1: Structure of the Chat widget**
+* [Demo page for the Chat](https://demos.telerik.com/kendo-ui/chat/index)
 
-![Template of the MediaPlayer](images/chat-structure-no-toolbar.png)
+![Kendo UI for jQuery Chat Structure](images/chat-structure-no-toolbar.png)
 
-## Getting Started
+## Initializing the Chat
 
-### Creating the Chat
+To create the Chat:
 
 1. Add an empty `div` to the HTML.
 1. Provide it with an ID.
@@ -28,7 +28,7 @@ The Chat provides rich conversational experience that goes beyond the natural la
 <div id="chat" style="width: 400px; height: 600px"></div>
 ```
 
-### Initializing the Chat
+To initialize the Chat:
 
 1. Select the `div` with a jQuery selector.
 1. Call the `kendoChat()` function.
@@ -39,26 +39,22 @@ The Chat provides rich conversational experience that goes beyond the natural la
 <script>
 	var chat = $("#chat").kendoChat({
 		post: function (args) {
-			// react on a user post action
+			// React on a user post action.
 		}
 	}).data("kendoChat");
 </script>
 ```
 
-## Features
+## Functionality and Features
 
 * [Items]({% slug chat_items %})
 * [Toolbar]({% slug toolbar_for_chat %})
-* [Connecting to Chat Bot services]({% slug connect_to_chatbot_service %})
-* [Connecting to Microsoft Bot Framework]({% slug connect_to_ms_bot_framework %})
-* [Connecting to Google DialogFlow]({% slug connect_to_google_dialogflow %})
+* [Peer-to-Peer Chat with SignalR]({% slug peertopeerp_chat_kendoui %})
+* [Chat Bot service integration]({% slug connect_to_chatbot_service %})
+* [Microsoft Bot Framework integration]({% slug connect_to_ms_bot_framework %})
+* [Google DialogFlow integration]({% slug connect_to_google_dialogflow %})
 
 ## See Also
 
-* [Chat Items]({% slug chat_items %})
-* [Connecting to Chat Bot Services]({% slug connect_to_chatbot_service %})
-* [Connecting to Microsoft Bot Framework]({% slug connect_to_ms_bot_framework %})
-* [Connecting to Google DialogFlow]({% slug connect_to_google_dialogflow %})
-* [Chat JavaScript API Reference](/api/javascript/ui/chat)
-
-For runnable examples on Kendo UI Chat, refer to the [Kendo UI Demos site](http://demos.telerik.com/kendo-ui/chat/index).
+* [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
+* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

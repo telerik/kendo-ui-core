@@ -1,9 +1,9 @@
 ---
 title: Rendering and Dimensions
-page_title: jQuery DropDownList Documentation | Rendering and Dimensions | Kendo UI
+page_title: jQuery DropDownList Documentation - Rendering and Dimensions
 description: "Get started with the jQuery DropDownList by Kendo UI and configure its layout and the rendering of its elements."
 slug: rendering_dropdownlist_widget
-position: 9
+position: 11
 ---
 
 # Rendering and Dimensions
@@ -13,8 +13,6 @@ The DropDownList enables you to configure its layout and the rendering of its el
 ## Setting the Width of the List
 
 To customize the width of the DropDownList and change its dimensions, use the jQuery `width()` method.
-
-###### Example
 
     <input id="dropDownList">
     <script>
@@ -26,8 +24,6 @@ To customize the width of the DropDownList and change its dimensions, use the jQ
     </script>
 
 The following example demonstrates how to set the list dimensions through an MVVM binding.
-
-###### Example
 
 ```dojo
   <input id="ddl" data-role="dropdownlist" data-bind="source: foo" />
@@ -46,8 +42,7 @@ The following example demonstrates how to set the list dimensions through an MVV
 
 You can enable the `popup` element to automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content as a single line and does not wrap it up.
 
-###### Example
-
+```dojo
     <input id="dropdownlist" style="width: 100px;" />
     <script>
     $("#dropdownlist").kendoDropDownList({
@@ -57,6 +52,7 @@ You can enable the `popup` element to automatically adjust its width according t
       }
     });
     </script>
+```
 
 ## Accessing list Elements
 
@@ -64,8 +60,7 @@ The DropDownList renders an `ID` attribute that is generated from the ID of the 
 
 > If the widget has no ID, the drop-down element will have no ID either.
 
-###### Example
-
+```dojo
     <input id="ddl">
     <script>
       $(document).ready(function() {
@@ -75,14 +70,16 @@ The DropDownList renders an `ID` attribute that is generated from the ID of the 
 
         // The div popup element that holds the header and footer templates, and the suggestion options.
         var popupElement = $("#ddl-list");
+        popupElement.css('border','2px solid red');
 
         console.log(popupElement);
       });
     </script>
+```
 
 ## Focusing
 
-Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information, refer to [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
+Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information, refer to [this Kendo UI Dojo snippet](https://dojo.telerik.com/uSeho).
 
 ## See Also
 

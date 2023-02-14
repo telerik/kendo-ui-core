@@ -1,8 +1,8 @@
 ---
 title: Pass Additional Parameters to Custom DataSource
-description: An example on how to send additional parameters to a custom DataSource in the Kendo UI Grid.
+description: Learn how to send additional parameters to a custom DataSource in the Kendo UI Grid.
 type: how-to
-page_title: Pass Parameters to Custom DataSource in the Grid | UI for ASP.NET MVC
+page_title: Pass Parameters to Custom DataSource in the Grid - Kendo UI Grid for ASP.NET MVC 
 slug: grid-additional-parameters-custom-datasource
 tags: grid, custom, datasource, additional, parameters
 res_type: kb
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Telerik UI for ASP.NET MVC</td>
@@ -24,7 +24,7 @@ component: grid
 
 ## Description
 
-I have a hierarchical Grid with a [custom DataSource](http://demos.telerik.com/aspnet-mvc/grid/custom-datasource) and a `ClientHandlerDescriptor` which is defined as [described here](https://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#common-scenarios).
+I have a hierarchical Grid with a [custom DataSource](https://demos.telerik.com/aspnet-mvc/grid/custom-datasource) and a `ClientHandlerDescriptor` which is defined as [described here](https://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#common-scenarios).
 
 How can I pass additional parameters to the `ClientHandlerDescriptor`?
 

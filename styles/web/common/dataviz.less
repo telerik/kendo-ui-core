@@ -47,15 +47,15 @@ span.k-sparkline,
 }
 
 .k-chart-tooltip {
+    padding: 4px 8px;
     border-radius: 4px;
-    padding: 6px;
+    color: #fff;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNJREFUeNpi/P//vwMDFQELEP8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    line-height: normal;
     white-space: nowrap;
     z-index: 12000;
-    line-height: normal;
-    background-repeat: repeat-x;
-    background-position: 0 0;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNJREFUeNpi/P//vwMDFQELEP8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);
-    color: #fff;
 }
 
 .k-chart-tooltip-inverse {
@@ -109,7 +109,6 @@ span.k-sparkline,
     height: 100%;
     background-color: #fff;
     background-color: rgba(255, 255, 255, 0.01);
-    filter: alpha(opacity=1);
 }
 
 .k-handle {
@@ -159,15 +158,7 @@ span.k-sparkline,
     position: absolute;
     height: 100%;
     background-color: #fff;
-    filter: alpha(opacity=80);
     opacity: 0.80;
-}
-
-.k-border {
-    background: #d2d2d2;
-    width: 1px;
-    height: 100%;
-    position: absolute;
 }
 
 // Navigator hint
@@ -243,132 +234,134 @@ span.k-sparkline,
     display: none;
 }
 
-.k-map .k-marker {
-    width: 28px;
-    height: 40px;
-    margin: -40px 0 0 -14px;
-    position: absolute;
-    // width: 1em;
-    // height: 1em;
-    // transform: translate(-50%, -100%);
-    cursor: pointer;
-    overflow: visible;
+
+
+
+// Map
+.k-map {
+    border-width: 0;
+    border-style: solid;
+    box-sizing: border-box;
+
+
+    // Controls
+    .k-map-controls {
+        position: absolute;
+    }
+    .k-pos-top { top: 0; }
+    .k-pos-bottom { bottom: 0; }
+    .k-pos-left { left: 0; }
+    .k-pos-right { right: 0; }
+
+
+    // Navigator
+    .k-navigator {
+        margin: 1em;
+        width: 50px;
+        height: 50px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 80px;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+
+        .k-pdf-export & { display: none; }
+    }
+
+
+    // Zoom control
+    .k-zoom-control {
+        margin: 1em;
+        vertical-align: middle;
+
+        .k-button {
+            width: auto;
+            height: auto;
+        }
+
+        .k-pdf-export & { display: none; }
+    }
+
+
+    // Attribution
+    .k-attribution {
+        padding: 2px 4px;
+        font-size: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        z-index: 1000;
+    }
+
+
+    // Marker
+    .k-marker {
+        width: 28px;
+        height: 40px;
+        transform: translate(-50%,-100%);
+        font-size: 28px;
+        position: absolute;
+        // width: 1em;
+        // height: 1em;
+        cursor: pointer;
+        overflow: visible;
+    }
 }
 
-// Control positions
-.k-map .k-pos-top {
-    top: 0;
-}
 
-.k-map .k-pos-bottom {
-    bottom: 0;
-}
+// Navigator
+.k-navigator {
 
-.k-map .k-pos-left {
-    left: 0;
-}
 
-.k-map .k-pos-right {
-    right: 0;
-}
+    // Buttons
+    > .k-button {
+        margin: 0;
+        padding: 0;
+        width: auto;
+        height: auto;
+        border-color: transparent;
+        border-radius: 16px;
+        line-height: 1;
+        background: none;
+        position: absolute;
 
-.k-map-controls {
-    position: absolute;
-}
+        .k-icon {
+            min-width: 0;
+            min-height: 0;
+        }
+    }
 
-.k-map-controls.k-pos-left .k-widget:first-child {
-    margin-right: 0;
-}
+    .k-navigator-n,
+    .k-navigator-up {
+        top: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-.k-map-controls.k-pos-right .k-widget:first-child {
-    margin-left: 0;
-}
+    .k-navigator-e,
+    .k-navigator-right {
+        right: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-// Map navigator
+    .k-navigator-s,
+    .k-navigator-down {
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-.k-navigator
-{
-    width: 50px;
-    height: 50px;
-    margin: 20px;
-    border-radius: 80px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-}
+    .k-navigator-w,
+    .k-navigator-left {
+        left: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-.k-pdf-export .k-navigator {
-    display: none;
-}
-
-.k-navigator > button
-{
-    border-color: transparent;
-    background: none;
-}
-
-div.k-navigator > .k-button
-{
-    margin: 0;
-    padding: 0;
-    line-height: 10px;
-    border-radius: 16px;
-    position: absolute;
-    font-size: 1px; // IE7
-    line-height: 1px;
-}
-
-div.k-navigator .k-navigator-n,
-div.k-navigator .k-navigator-up
-{
-    top: 2px;
-    left: 50%;
-    margin-left: -9px;
-}
-
-div.k-navigator .k-navigator-e,
-div.k-navigator .k-navigator-right
-{
-    right: 2px;
-    top: 50%;
-    margin-top: -9px;
-}
-
-div.k-navigator .k-navigator-s,
-div.k-navigator .k-navigator-down
-{
-    bottom: 2px;
-    left: 50%;
-    margin-left: -9px;
-}
-
-div.k-navigator .k-navigator-w,
-div.k-navigator .k-navigator-left
-{
-    left: 2px;
-    top: 50%;
-    margin-top: -9px;
-}
-
-// Attribution
-
-.k-map .k-attribution {
-    background-color: rgba(255, 255, 255, 0.8);
-    font-size: 10px;
-    padding: 2px 4px;
-    z-index: 1000;
+    .k-pdf-export & { display: none; }
 }
 
 // Zoom
-
-.k-zoom-control {
-    margin: 14px;
-    vertical-align: middle;
-}
-
-.k-pdf-export .k-zoom-control {
-    display: none;
-}
 
 .k-button-wrap
 {
@@ -512,7 +505,8 @@ div.k-navigator .k-navigator-left
     padding: .3em;
 }
 
-.k-treemap-tile.k-state-hover {
+.k-treemap-tile.k-state-hover,
+.k-treemap-tile.k-hover {
     z-index: 2;
     background-image: none;
 }

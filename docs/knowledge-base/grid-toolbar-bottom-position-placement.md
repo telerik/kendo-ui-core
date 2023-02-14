@@ -1,8 +1,8 @@
 ---
 title: Display Toolbar at the Bottom of the Grid
-description: An example on how to display a toolbar at the bottom of the Kendo UI Grid.
+description: Learn how to display a toolbar at the bottom of the Kendo UI Grid.
 type: how-to
-page_title: Position a Toolbar under the Table | Kendo UI Grid
+page_title: Position a Toolbar under the Table - Kendo UI Grid for jQuery
 slug: grid-toolbar-bottom-position-placement
 tags: grid, toolbar, bottom, position, placement
 ticketid: 1120199
@@ -14,11 +14,11 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
-  <td>2018.2.620</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -86,7 +86,7 @@ The following example demonstrates how to display a toolbar above the pager and 
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
               { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-              { field: "Discontinued", width: "120px", editor: customBoolEditor },
+              { field: "Discontinued", width: "120px" },
               { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "inline"
           });
@@ -94,11 +94,6 @@ The following example demonstrates how to display a toolbar above the pager and 
           // Sets toolbar under the Grid body
           $("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content"));
         });
-
-        function customBoolEditor(container, options) {
-          $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label">​</label>').appendTo(container);
-        }
       </script>
     </div>
 ```
@@ -106,4 +101,4 @@ The following example demonstrates how to display a toolbar above the pager and 
 ## See Also
 
 * [jQuery Documentation: .find()](https://api.jquery.com/find/)
-* [jQuery Documentation: .insertAfter()](http://api.jquery.com/insertafter/)
+* [jQuery Documentation: .insertAfter()](https://api.jquery.com/insertafter/)

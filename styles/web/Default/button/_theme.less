@@ -1,0 +1,330 @@
+// Solid Base
+.k-button-solid-base {
+    .fill(
+        @button-text-color,
+        @button-background-color,
+        @button-border-color
+    );
+    .linear-gradient( @button-gradient );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @button-hover-text-color,
+            @button-hover-background-color,
+            @button-hover-border-color
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill( @border: @button-focused-border-color );
+        .box-shadow(@button-focused-shadow);
+    }
+
+    &:active,
+    &.k-active,
+    &.k-selected {
+        .fill(
+            @button-active-text-color,
+            @button-active-background,
+            @button-active-border-color
+        );
+    }
+
+    &.k-active
+    &.k-selected {
+        &:hover {
+            color: @primary-hover-text-color;
+            border-color: @primary-hover-border-color;
+            background-color: @primary-hover-background-color;
+        }
+    }
+}
+
+// Solid ThemeColors
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+    @_button-text: contrast( @color );
+    @_button-bg: @color;
+    @_button-border: shade( @color, 20%);
+    @_button-gradient: rgba( white, .1 ), rgba( white, 0 );
+    @_button-shadow: 0px 0px 4px 0px rgba( @_button-border, .75);
+
+    & when (@name = primary) {
+        .k-button-solid-primary {
+            .fill(
+                @primary-text-color,
+                @primary-background-color,
+                @primary-border-color
+            );
+            .linear-gradient( @primary-gradient );
+
+            &:hover,
+            &.k-hover {
+                .fill(
+                    @primary-hover-text-color,
+                    @primary-hover-background-color,
+                    @primary-hover-border-color
+                );
+                .linear-gradient( @primary-gradient );
+            }
+
+            &:focus,
+            &.k-focus {
+                .fill( @border: @primary-focused-border-color );
+                .box-shadow( @primary-focused-shadow );
+            }
+
+            &:active,
+            &.k-active,
+            &.k-selected {
+                .fill(
+                    @primary-active-text-color,
+                    @primary-active-background-color,
+                    @primary-active-border-color
+                );
+            }
+
+            &.k-active
+            &.k-selected {
+                &:hover {
+                    color: @primary-hover-text-color;
+                    border-color: @primary-hover-border-color;
+                    background-color: @primary-hover-background-color;
+                }
+            }
+
+            &.k-disabled {
+                border-color: @primary-border-color;
+            }
+        }
+    }
+
+    & when not (@name = primary) {
+        .k-button-solid-@{name} {
+            .fill(
+                @_button-text,
+                @_button-bg,
+                @_button-border
+            );
+            .linear-gradient( @_button-gradient );
+
+            &:hover,
+            &.k-hover {
+                .fill(
+                    @bg: shade( @color, 10% ),
+                    @border: shade( @color, 30% )
+                );
+            }
+
+            &:focus,
+            &.k-focus {
+                box-shadow: @_button-shadow;
+            }
+
+            &:active,
+            &.k-active,
+            &.k-selected {
+                .fill(
+                    @bg: shade( @color, 20% ),
+                    @border: shade( @color, 40% )
+                );
+            }
+        }
+    }
+});
+
+
+// Outline Base
+.k-button-outline-base {
+    .fill(
+        @normal-text-color,
+        transparent,
+        currentColor
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            contrast( @normal-text-color ),
+            @normal-text-color,
+            @normal-text-color
+        );
+        background-image: none;
+    }
+
+    &:focus,
+    &.k-focus {
+        border-color: currentColor;
+        box-shadow: 0px 0px 4px 0px rgba( @normal-text-color, .75 );
+    }
+
+    &:active,
+    &.k-active,
+    &.k-selected {
+        .fill(
+            contrast( @normal-text-color ),
+            @normal-text-color,
+            @normal-text-color
+        );
+    }
+}
+
+// Outline ThemeColors
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+
+    .k-button-outline-@{name} {
+        .fill(
+            @color,
+            transparent,
+            currentColor
+        );
+
+        &:hover,
+        &.k-hover {
+            .fill(
+                contrast( @color ),
+                @color,
+                @color,
+            );
+            background-image: none;
+        }
+
+        &:focus,
+        &.k-focus {
+            border-color: currentColor;
+            box-shadow: 0px 0px 4px 0px rgba( @color, .75 );
+        }
+
+        &:active,
+        &.k-active,
+        &.k-selected {
+            .fill(
+                contrast( @color ),
+                @color,
+                @color
+            );
+        }
+    }
+});
+
+
+// Link Base
+.k-button-link-base {
+    .fill( @text: @normal-text-color );
+
+    &:hover,
+    &.k-hover {
+        .fill( @text: shade( @normal-text-color, 20% ) );
+    }
+
+    &:focus,
+    &.k-focus {
+        box-shadow: 0px 0px 4px 0px rgba( @normal-text-color, .75 );
+    }
+
+    &:active,
+    &.k-active,
+    &.k-selected {
+        .fill( @text: shade( @normal-text-color, 20% ) );
+    }
+}
+
+// Link ThemeColors
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+
+    .k-button-link-@{name} {
+        .fill( @text: @color );
+
+        &:hover,
+        &.k-hover {
+            .fill( @text: shade( @color, 20% ) );
+        }
+
+        &:focus,
+        &.k-focus {
+            box-shadow: 0px 0px 4px 0px rgba( @color, .75 );
+        }
+
+        &:active,
+        &.k-active,
+        &.k-selected {
+            .fill( @text: shade( @color, 20% ) );
+        }
+    }
+});
+
+// Flat
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+
+    .k-button-flat-@{name} {
+        &,
+        &.k-hover,
+        &.k-active {
+            .fill( @text: @color );
+        }
+    }
+});
+
+// TODO: refactor when k-widgte is gone
+.k-widget.k-button-group {
+    background: none;
+}
+
+// Split button
+.k-split-button {
+
+    // Focus state
+    &:focus {
+        .box-shadow(@button-focused-shadow);
+        border-color: @button-focused-border-color;
+
+        .k-button {
+            .box-shadow(none);
+            border-color: inherit;
+        }
+    }
+}
+
+// RTL
+.k-rtl {
+    .k-button-group {
+        .k-button {
+            .border-radius( 0 );
+        }
+
+        .k-group-start,
+        .k-button:first-child {
+            .border-right-radius();
+        }
+        .k-group-end,
+        .k-button:last-child {
+            .border-left-radius();
+        }
+        .k-group-start.k-group-end,
+        .k-button:first-child:last-child {
+            .border-radius();
+        }
+    }
+
+    .k-split-button {
+        .k-button {
+            .border-radius( 0 );
+        }
+
+        .k-button:first-child {
+            .border-right-radius();
+        }
+        .k-button:last-child {
+            .border-left-radius();
+        }
+    }
+}

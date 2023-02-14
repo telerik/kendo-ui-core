@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.draganddrop" ], f);
-})(function(){
+import "./kendo.draganddrop.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "slider",
     name: "Slider",
     category: "web",
@@ -19,8 +17,7 @@ var __meta__ = { // jshint ignore:line
         extend = $.extend,
         format = kendo.format,
         parse = kendo.parseFloat,
-        proxy = $.proxy,
-        isArray = $.isArray,
+        isArray = Array.isArray,
         math = Math,
         support = kendo.support,
         pointers = support.pointers,
@@ -41,14 +38,16 @@ var __meta__ = { // jshint ignore:line
         DRAG_HANDLE = ".k-draghandle",
         TRACK_SELECTOR = ".k-slider-track",
         TICK_SELECTOR = ".k-tick",
-        STATE_SELECTED = "k-state-selected",
-        STATE_FOCUSED = "k-state-focused",
-        STATE_DEFAULT = "k-state-default",
-        STATE_DISABLED = "k-state-disabled",
+        STATE_SELECTED = "k-selected",
+        STATE_FOCUSED = "k-focus",
+        STATE_DISABLED = "k-disabled",
         DISABLED = "disabled",
         UNDEFINED = "undefined",
         TABINDEX = "tabindex",
-        getTouches = kendo.getTouches;
+        getTouches = kendo.getTouches,
+
+        ARIA_VALUETEXT = "aria-valuetext",
+        ARIA_VALUENOW = "aria-valuenow";
 
     var SliderBase = Widget.extend({
         init: function(element, options) {
@@ -70,10 +69,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._createHtml();
-            that.wrapper = that.element.closest(".k-slider");
             that._trackDiv = that.wrapper.find(TRACK_SELECTOR);
-
-            that._setTrackDivWidth();
 
             that._maxSelection = that._trackDiv[that._sizeFn]();
 
@@ -94,8 +90,10 @@ var __meta__ = { // jshint ignore:line
                 35: setValue(options.max), // end
                 36: setValue(options.min), // home
                 33: step(+options.largeStep), // page up
-                34: step(-options.largeStep)  // page down
+                34: step(-options.largeStep) // page down
             };
+
+            that._ariaLabel(that.wrapper.find(DRAG_HANDLE));
 
             kendo.notify(that);
         },
@@ -116,12 +114,11 @@ var __meta__ = { // jshint ignore:line
             tooltip: { enabled: true, format: "{0}" }
         },
 
-        _distance: function(){
+        _distance: function() {
             return round(this.options.max - this.options.min);
         },
 
         _resize: function() {
-            this._setTrackDivWidth();
             this.wrapper.find(".k-slider-items").remove();
 
             this._maxSelection = this._trackDiv[this._sizeFn]();
@@ -137,13 +134,14 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 options = that.options;
 
-            var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
-            var pixelWidths = that._calculateItemsWidth(math.floor(that._distance() / options.smallStep));
+            // [Backwards compatibilty]: maxSelection is reduced with 2 to compensate new styling and preserve automatic calculation to not show ticks.
+            var sizeBetweenTicks = (that._maxSelection - 2) / ((options.max - options.min) / options.smallStep);
+
+            var pixelWidths = that._calculateItemsWidth(math.floor(removeFraction(that._distance()) / removeFraction(options.smallStep)));
 
             if (options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
                 $(this.element).parent().find(".k-slider-items").remove();
                 that._trackDiv.before(createSliderItems(options, that._distance()));
-                that._setItemsWidth(pixelWidths);
                 that._setItemsTitle();
             }
 
@@ -152,6 +150,8 @@ var __meta__ = { // jshint ignore:line
             if (options.tickPlacement != "none" && sizeBetweenTicks >= 2 &&
                 options.largeStep >= options.smallStep) {
                 that._setItemsLargeTick();
+                that.wrapper.find(TICK_SELECTOR).first().addClass("k-first");
+                that.wrapper.find(TICK_SELECTOR).last().addClass("k-last");
             }
         },
 
@@ -159,60 +159,14 @@ var __meta__ = { // jshint ignore:line
             return kendo.dimensions(this.wrapper);
         },
 
-        _setTrackDivWidth: function() {
-            var that = this,
-                trackDivPosition = parseFloat(that._trackDiv.css(that._isRtl ? "right" : that._position), 10) * 2;
-
-            that._trackDiv[that._sizeFn]((that.wrapper[that._sizeFn]() - 2) - trackDivPosition);
-        },
-
-        _setItemsWidth: function(pixelWidths) {
-            var that = this,
-                options = that.options,
-                first = 0,
-                last = pixelWidths.length - 1,
-                items = that.wrapper.find(TICK_SELECTOR),
-                i,
-                paddingTop = 0,
-                bordersWidth = 2,
-                count = items.length,
-                selection = 0;
-
-            for (i = 0; i < count - 2; i++) {
-                $(items[i + 1])[that._sizeFn](pixelWidths[i]);
-            }
-
-            if (that._isHorizontal) {
-                $(items[first]).addClass("k-first")[that._sizeFn](pixelWidths[last - 1]);
-                $(items[last]).addClass("k-last")[that._sizeFn](pixelWidths[last]);
-            } else {
-                $(items[last]).addClass("k-first")[that._sizeFn](pixelWidths[last]);
-                $(items[first]).addClass("k-last")[that._sizeFn](pixelWidths[last - 1]);
-            }
-
-            if (that._distance() % options.smallStep !== 0 && !that._isHorizontal) {
-                for (i = 0; i < pixelWidths.length; i++) {
-                    selection += pixelWidths[i];
-                }
-
-                paddingTop = that._maxSelection - selection;
-                paddingTop += parseFloat(that._trackDiv.css(that._position), 10) + bordersWidth;
-
-                that.wrapper.find(".k-slider-items").css("padding-top", paddingTop);
-            }
-        },
-
         _setItemsTitle: function() {
             var that = this,
                 options = that.options,
                 items = that.wrapper.find(TICK_SELECTOR),
                 titleNumber = options.min,
-                count = items.length,
-                i = that._isHorizontal && !that._isRtl ? 0 : count - 1,
-                limit = that._isHorizontal && !that._isRtl ? count : -1,
-                increment = that._isHorizontal && !that._isRtl ? 1 : -1;
+                count = items.length;
 
-            for (; i - limit !== 0 ; i += increment) {
+            for (var i = 0; i <= count; i += 1) {
                 $(items[i]).attr("title", format(options.tooltip.format, round(titleNumber)));
                 titleNumber += options.smallStep;
             }
@@ -250,13 +204,14 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 trackDivSize = parseFloat(that._trackDiv.css(that._sizeFn)) + 1,
                 distance = that._distance(),
-                pixelStep = trackDivSize / distance,
+                preciseItemsCount = removeFraction(distance) / removeFraction(options.smallStep),
+                pixelStep = trackDivSize / removeFraction(distance),
                 itemWidth,
                 pixelWidths,
                 i;
 
-            if ((distance / options.smallStep) - math.floor(distance / options.smallStep) > 0) {
-                trackDivSize -= ((distance % options.smallStep) * pixelStep);
+            if (preciseItemsCount - itemsCount > 0) {
+                trackDivSize -= ((removeFraction(distance) % removeFraction(options.smallStep)) * pixelStep);
             }
 
             itemWidth = trackDivSize / itemsCount;
@@ -307,13 +262,13 @@ var __meta__ = { // jshint ignore:line
                 val = options.min,
                 selection = 0,
                 distance = that._distance(),
-                itemsCount = math.ceil(distance / options.smallStep),
+                itemsCount = math.ceil(removeFraction(distance) / removeFraction(options.smallStep)),
                 i = 1,
                 lastItem;
 
-            itemsCount += (distance / options.smallStep) % 1 === 0 ? 1 : 0;
+            itemsCount += (removeFraction(distance) / removeFraction(options.smallStep)) % 1 === 0 ? 1 : 0;
             pixelWidths.splice(0, 0, pixelWidths[itemsCount - 2] * 2);
-            pixelWidths.splice(itemsCount -1, 1, pixelWidths.pop() * 2);
+            pixelWidths.splice(itemsCount - 1, 1, pixelWidths.pop() * 2);
 
             that._pixelSteps = [selection];
             that._values = [val];
@@ -331,7 +286,7 @@ var __meta__ = { // jshint ignore:line
                 i++;
             }
 
-            lastItem = distance % options.smallStep === 0 ? itemsCount - 1 : itemsCount;
+            lastItem = (removeFraction(distance) % removeFraction(options.smallStep)) === 0 ? itemsCount - 1 : itemsCount;
 
             that._pixelSteps[lastItem] = that._maxSelection;
             that._values[lastItem] = options.max;
@@ -342,7 +297,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _getValueFromPosition: function(mousePosition, dragableArea) {
+        _getValueFromPosition: function(mousePosition, draggableArea) {
             var that = this,
                 options = that.options,
                 step = math.max(options.smallStep * (that._maxSelection / that._distance()), 0),
@@ -351,12 +306,12 @@ var __meta__ = { // jshint ignore:line
                 i;
 
             if (that._isHorizontal) {
-                position = mousePosition - dragableArea.startPoint;
+                position = mousePosition - draggableArea.startPoint;
                 if (that._isRtl) {
                     position = that._maxSelection - position;
                 }
             } else {
-                position = dragableArea.startPoint - mousePosition;
+                position = draggableArea.startPoint - mousePosition;
             }
 
             if (that._maxSelection - ((parseInt(that._maxSelection % step, 10) - 3) / 2) < position) {
@@ -445,14 +400,15 @@ var __meta__ = { // jshint ignore:line
                 element.prop("value", formatValue(options.value));
             }
 
-            element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
+            that.wrapper = element.wrap(createWrapper(options, element, that._isHorizontal)).hide().parents(".k-slider");
 
             if (options.showButtons) {
-                element.before(createButton(options, "increase", that._isHorizontal, that._isRtl))
+                that.wrapper.find(".k-slider-track-wrap")
+                       .after(createButton(options, "increase", that._isHorizontal, that._isRtl))
                        .before(createButton(options, "decrease", that._isHorizontal, that._isRtl));
             }
 
-            element.before(createTrack(options, element));
+            element.before(createTrack(options, element, that._isHorizontal));
         },
 
         _focus: function(e) {
@@ -490,7 +446,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 idx = target.is(DRAG_HANDLE) ? target.index() : 0;
 
-            window.setTimeout(function(){
+            window.setTimeout(function() {
                 that.wrapper.find(DRAG_HANDLE)[idx == 2 ? 1 : 0].focus();
             }, 1);
 
@@ -512,7 +468,7 @@ var __meta__ = { // jshint ignore:line
 
         _setTooltipTimeout: function() {
             var that = this;
-            that._tooltipTimeout = window.setTimeout(function(){
+            that._tooltipTimeout = window.setTimeout(function() {
                 var drag = that._drag || that._activeHandleDrag;
                 if (drag) {
                     drag._removeTooltip();
@@ -529,29 +485,29 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _reset: function () {
+        _reset: function() {
             var that = this,
                 element = that.element,
                 formId = element.attr("form"),
                 form = formId ? $("#" + formId) : element.closest("form");
 
             if (form[0]) {
-                that._form = form.on("reset", proxy(that._formResetHandler, that));
+                that._form = form.on("reset", that._formResetHandler.bind(that));
             }
         },
 
-        min: function(value){
-            if(!value){
+        min: function(value) {
+            if (!value) {
                 return this.options.min;
             }
-            this.setOptions({"min":value});
+            this.setOptions({ "min": value });
         },
 
-        max: function(value){
-            if(!value){
+        max: function(value) {
+            if (!value) {
                 return this.options.max;
             }
-            this.setOptions({"max":value});
+            this.setOptions({ "max": value });
         },
 
         setOptions: function(options) {
@@ -560,7 +516,7 @@ var __meta__ = { // jshint ignore:line
             this._refresh();
         },
 
-        destroy: function () {
+        destroy: function() {
             if (this._form) {
                 this._form.off("reset", this._formResetHandler);
             }
@@ -568,7 +524,7 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
-    function createWrapper (options, element, isHorizontal) {
+    function createWrapper(options, element, isHorizontal) {
         var orientationCssClass = isHorizontal ? " k-slider-horizontal" : " k-slider-vertical",
             style = options.style ? options.style : element.attr("style"),
             cssClasses = element.attr("class") ? (" " + element.attr("class")) : "",
@@ -583,40 +539,40 @@ var __meta__ = { // jshint ignore:line
         style = style ? " style='" + style + "'" : "";
 
         return "<div class='k-widget k-slider" + orientationCssClass + cssClasses + "'" + style + ">" +
-               "<div class='k-slider-wrap" + (options.showButtons ? " k-slider-buttons" : "") + tickPlacementCssClass +
+               "<div class='k-slider-track-wrap" + tickPlacementCssClass +
                "'></div></div>";
     }
 
-    function createButton (options, type, isHorizontal, isRtl) {
+    function createButton(options, type, isHorizontal) {
         var buttonCssClass = "";
 
-        if(isHorizontal) {
-            if ((!isRtl && type == "increase") || (isRtl && type != "increase")) {
-                buttonCssClass = "k-i-arrow-60-right";
+        if (isHorizontal) {
+            if (type === "increase") {
+                buttonCssClass = "k-i-caret-alt-right";
             } else {
-                buttonCssClass = "k-i-arrow-60-left";
+                buttonCssClass = "k-i-caret-alt-left";
             }
         } else {
             if (type == "increase") {
-                buttonCssClass = "k-i-arrow-60-up";
+                buttonCssClass = "k-i-caret-alt-up";
             } else {
-                buttonCssClass = "k-i-arrow-60-down";
+                buttonCssClass = "k-i-caret-alt-down";
             }
         }
 
-        return "<a class='k-button k-button-" + type + "' " +
+        return "<a role='button' class='k-button k-button-md k-rounded-full k-button-solid k-button-solid-base k-icon-button k-button-" + type + "' " +
                 "title='" + options[type + "ButtonTitle"] + "' " +
                 "aria-label='" + options[type + "ButtonTitle"] + "'>" +
-                "<span class='k-icon " + buttonCssClass + "'></span></a>";
+                "<span class='k-button-icon k-icon " + buttonCssClass + "'></span></a>";
     }
 
-    function createSliderItems (options, distance) {
-        var result = "<ul class='k-reset k-slider-items'>",
+    function createSliderItems(options, distance) {
+        var result = "<ul class='k-reset k-slider-items' role='presentation'>",
             count = math.floor(round(distance / options.smallStep)) + 1,
             i;
 
-        for(i = 0; i < count; i++) {
-            result += "<li class='k-tick' role='presentation'>&nbsp;</li>";
+        for (i = 0; i < count; i++) {
+            result += "<li class='k-tick'></li>";
         }
 
         result += "</ul>";
@@ -624,24 +580,59 @@ var __meta__ = { // jshint ignore:line
         return result;
     }
 
-    function createTrack (options, element) {
+    function createTrack(options, element, isHorizontal) {
         var dragHandleCount = element.is("input") ? 1 : 2,
-            firstDragHandleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle;
+            firstDragHandleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle,
+            value = options.value,
+            min = options.selectionStart,
+            max = options.selectionEnd,
+            elementValue, minElementValue, maxElementValue;
 
-        return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
-               "<a href='#' class='k-draghandle' title='" + firstDragHandleTitle + "' role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (dragHandleCount > 1 ? (options.selectionStart || options.min) : options.value || options.min) + "'>Drag</a>" +
-               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (options.selectionEnd || options.max) + "'>Drag</a>" : "") +
+        if (dragHandleCount === 1) {
+            elementValue = element.val();
+
+            if (elementValue !== null && elementValue !== undefined && elementValue !== 'null') {
+                if (value === null || value === undefined) {
+                    value = elementValue;
+                }
+            }
+        } else {
+            minElementValue = element.find("input").eq(0).val();
+            maxElementValue = element.find("input").eq(1).val();
+
+            if (minElementValue !== null && minElementValue !== undefined && minElementValue !== 'null') {
+                if (min === null || min === undefined) {
+                    min = minElementValue;
+                }
+            }
+
+            if (maxElementValue !== null && maxElementValue !== undefined && maxElementValue !== 'null') {
+                if (max === null || max === undefined) {
+                    max = maxElementValue;
+                }
+            }
+        }
+
+        var result = "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
+               "<span tabindex='0' class='k-draghandle' title='" + firstDragHandleTitle + "' role='slider' " +
+               (isHorizontal === false ? "aria-orientation='vertical' " : "") +
+               "aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (dragHandleCount > 1 ? (min || options.min) : value || options.min) + "'></span>" +
+               (dragHandleCount > 1 ? "<span tabindex='0' class='k-draghandle' title='" + options.rightDragHandleTitle + "'role='slider' " +
+               (isHorizontal === false ? "aria-orientation='vertical' " : "") +
+               "aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (max || options.max) + "'></span>" : "") +
                "</div>";
+
+        return result;
     }
 
     function step(stepValue) {
-        return function (value) {
+        return function(value) {
             return value + stepValue;
         };
     }
 
     function setValue(value) {
-        return function () {
+        return function() {
             return value;
         };
     }
@@ -719,8 +710,10 @@ var __meta__ = { // jshint ignore:line
 
             dragHandle = that.wrapper.find(DRAG_HANDLE);
 
-            this._selection = new Slider.Selection(dragHandle, that, options);
+            that._selection = new Slider.Selection(dragHandle, that, options);
             that._drag = new Slider.Drag(dragHandle, "", that, options);
+
+            that._refreshAriaAttr(options.value);
         },
 
         options: {
@@ -733,7 +726,7 @@ var __meta__ = { // jshint ignore:line
             value: null
         },
 
-        enable: function (enable) {
+        enable: function(enable) {
             var that = this,
                 options = that.options,
                 clickHandler,
@@ -745,12 +738,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.wrapper
-                .removeClass(STATE_DISABLED)
-                .addClass(STATE_DEFAULT);
+                .removeClass(STATE_DISABLED);
 
-            that.wrapper.find("input").removeAttr(DISABLED);
+            that.wrapper.find("input").prop(DISABLED, false);
 
-            clickHandler = function (e) {
+            clickHandler = function(e) {
                 var touch = getTouches(e)[0];
 
                 if (!touch) {
@@ -758,7 +750,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 var mousePosition = that._isHorizontal ? touch.location.pageX : touch.location.pageY,
-                    dragableArea = that._getDraggableArea(),
+                    draggableArea = that._getDraggableArea(),
                     target = $(e.target);
 
                 if (target.hasClass("k-draghandle")) {
@@ -766,7 +758,7 @@ var __meta__ = { // jshint ignore:line
                     return;
                 }
 
-                that._update(that._getValueFromPosition(mousePosition, dragableArea));
+                that._update(that._getValueFromPosition(mousePosition, draggableArea));
 
                 that._focusWithMouse(e.target);
 
@@ -788,74 +780,67 @@ var __meta__ = { // jshint ignore:line
             that.wrapper
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, 0)
-                .on(MOUSE_UP, function () {
+                .on(MOUSE_UP, function() {
                     that._setTooltipTimeout();
                 })
-                .on(CLICK, function (e) {
+                .on(CLICK, function(e) {
                     that._focusWithMouse(e.target);
                     e.preventDefault();
                 })
-                .on(FOCUS, proxy(that._focus, that))
-                .on(BLUR, proxy(that._blur, that));
+                .on(FOCUS, that._focus.bind(that))
+                .on(BLUR, that._blur.bind(that));
 
-            move = proxy(function (sign) {
+            move = (function(sign) {
                 var newVal = that._nextValueByIndex(that._valueIndex + (sign * 1));
                 that._setValueInRange(newVal);
                 that._drag._updateTooltip(newVal);
-            }, that);
+            });
 
             if (options.showButtons) {
-                var mouseDownHandler = proxy(function(e, sign) {
+                var mouseDownHandler = (function(e, sign) {
                     this._clearTooltipTimeout();
                     if (e.which === 1 || (support.touch && e.which === 0)) {
                         move(sign);
 
-                        this.timeout = setTimeout(proxy(function () {
-                            this.timer = setInterval(function () {
+                        this.timeout = setTimeout((function() {
+                            this.timer = setInterval(function() {
                                 move(sign);
                             }, 60);
-                        }, this), 200);
+                        }).bind(this), 200);
                     }
-                }, that);
+                }).bind(that);
 
                 that.wrapper.find(".k-button")
-                    .on(MOUSE_UP, proxy(function (e) {
+                    .on(MOUSE_UP, (function(e) {
                         this._clearTimer();
                         that._focusWithMouse(e.target);
-                    }, that))
-                    .on(MOUSE_OVER, function (e) {
-                        $(e.currentTarget).addClass("k-state-hover");
+                    }).bind(that))
+                    .on(MOUSE_OVER, function(e) {
+                        $(e.currentTarget).addClass("k-hover");
                     })
-                    .on("mouseout" + NS, proxy(function (e) {
-                        $(e.currentTarget).removeClass("k-state-hover");
+                    .on("mouseout" + NS, (function(e) {
+                        $(e.currentTarget).removeClass("k-hover");
                         this._clearTimer();
-                    }, that))
-                    .eq(0)
-                    .on(MOUSE_DOWN, proxy(function (e) {
-                        mouseDownHandler(e, 1);
-                    }, that))
-                    .click(false)
-                    .end()
-                    .eq(1)
-                    .on(MOUSE_DOWN, proxy(function (e) {
-                        mouseDownHandler(e, -1);
-                    }, that))
-                    .click(kendo.preventDefault);
+                    }).bind(that))
+                    .on(MOUSE_DOWN, (function(e) {
+                        var sign = $(e.target).closest(".k-button").is(".k-button-increase") ? 1 : -1;
+                        mouseDownHandler(e, sign);
+                    }))
+                    .on("click", kendo.preventDefault);
             }
 
             that.wrapper
                 .find(DRAG_HANDLE)
                 .off(KEY_DOWN, false)
-                .on(KEY_DOWN, proxy(this._keydown, that));
+                .on(KEY_DOWN, this._keydown.bind(that));
 
             options.enabled = true;
         },
 
-        disable: function () {
+        disable: function() {
             var that = this;
 
             that.wrapper
-                .removeClass(STATE_DEFAULT)
                 .addClass(STATE_DISABLED);
 
             $(that.element).prop(DISABLED, DISABLED);
@@ -865,12 +850,12 @@ var __meta__ = { // jshint ignore:line
                 .off(MOUSE_DOWN)
                 .on(MOUSE_DOWN, function(e) {
                     e.preventDefault();
-                    $(this).addClass("k-state-active");
+                    $(this).addClass("k-active");
                 })
                 .off(MOUSE_UP)
                 .on(MOUSE_UP, function(e) {
                     e.preventDefault();
-                    $(this).removeClass("k-state-active");
+                    $(this).removeClass("k-active");
                 })
                 .off("mouseleave" + NS)
                 .on("mouseleave" + NS, kendo.preventDefault)
@@ -892,7 +877,7 @@ var __meta__ = { // jshint ignore:line
             that.options.enabled = false;
         },
 
-        _update: function (val) {
+        _update: function(val) {
             var that = this,
                 change = that.value() != val;
 
@@ -903,7 +888,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        value: function (value) {
+        value: function(value) {
             var that = this,
                 options = that.options;
 
@@ -922,7 +907,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _refresh: function () {
+        _refresh: function() {
             this.trigger(MOVE_SELECTION, { value: this.options.value });
         },
 
@@ -936,15 +921,15 @@ var __meta__ = { // jshint ignore:line
             } else {
                 formattedValue = that._getFormattedValue(value, null);
             }
-            this.wrapper.find(DRAG_HANDLE).attr("aria-valuenow", value).attr("aria-valuetext", formattedValue);
+            this.wrapper.find(DRAG_HANDLE).attr(ARIA_VALUENOW, value).attr(ARIA_VALUETEXT, formattedValue);
         },
 
-        _clearTimer: function () {
+        _clearTimer: function() {
             clearTimeout(this.timeout);
             clearInterval(this.timer);
         },
 
-        _keydown: function (e) {
+        _keydown: function(e) {
             var that = this;
 
             if (e.keyCode in that._keyMap) {
@@ -955,7 +940,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _setValueInRange: function (val) {
+        _setValueInRange: function(val) {
             var that = this,
                 options = that.options;
 
@@ -969,7 +954,7 @@ var __meta__ = { // jshint ignore:line
             that._update(val);
         },
 
-        _nextValueByIndex: function (index) {
+        _nextValueByIndex: function(index) {
             var count = this._values.length;
             if (this._isRtl) {
                 index = count - 1 - index;
@@ -977,11 +962,11 @@ var __meta__ = { // jshint ignore:line
             return this._values[math.max(0, math.min(index, count - 1))];
         },
 
-        _formResetHandler: function () {
+        _formResetHandler: function() {
             var that = this,
                 min = that.options.min;
 
-            setTimeout(function () {
+            setTimeout(function() {
                 var value = that.element[0].value;
                 that.value(value === "" || isNaN(value) ? min : value);
             });
@@ -1005,32 +990,30 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
-    Slider.Selection = function (dragHandle, that, options) {
-        function moveSelection (val) {
+    Slider.Selection = function(dragHandle, that, options) {
+        function moveSelection(val) {
             var selectionValue = val - options.min,
                 index = that._valueIndex = math.ceil(round(selectionValue / options.smallStep)),
                 selection = parseInt(that._pixelSteps[index], 10),
                 selectionDiv = that._trackDiv.find(".k-slider-selection"),
-
-                halfDragHanndle = parseInt(that._outerSize(dragHandle) / 2, 10),
                 rtlCorrection = that._isRtl ? 2 : 0;
 
             selectionDiv[that._sizeFn](that._isRtl ? that._maxSelection - selection : selection);
-            dragHandle.css(that._position, selection - halfDragHanndle - rtlCorrection);
+            dragHandle.css(that._position, selection - rtlCorrection);
         }
 
         moveSelection(options.value);
 
-        that.bind([SLIDE, MOVE_SELECTION], function (e) {
+        that.bind([SLIDE, MOVE_SELECTION], function(e) {
             moveSelection(parseFloat(e.value, 10));
         });
 
-        that.bind(CHANGE, function (e) {
+        that.bind(CHANGE, function(e) {
             moveSelection(parseFloat(e.sender.value(), 10));
         });
     };
 
-    Slider.Drag = function (element, type, owner, options) {
+    Slider.Drag = function(element, type, owner, options) {
         var that = this;
         that.owner = owner;
         that.options = options;
@@ -1039,16 +1022,16 @@ var __meta__ = { // jshint ignore:line
 
         that.draggable = new Draggable(element, {
             distance: 0,
-            dragstart: proxy(that._dragstart, that),
-            drag: proxy(that.drag, that),
-            dragend: proxy(that.dragend, that),
-            dragcancel: proxy(that.dragcancel, that)
+            dragstart: that._dragstart.bind(that),
+            drag: that.drag.bind(that),
+            dragend: that.dragend.bind(that),
+            dragcancel: that.dragcancel.bind(that)
         });
 
         element.click(false);
 
         // Disable link dragging
-        element.on("dragstart", function(e){
+        element.on("dragstart", function(e) {
             e.preventDefault();
         });
     };
@@ -1081,7 +1064,7 @@ var __meta__ = { // jshint ignore:line
             that.element.addClass(STATE_FOCUSED + " " + STATE_SELECTED);
             $(document.documentElement).css("cursor", "pointer");
 
-            that.dragableArea = owner._getDraggableArea();
+            that.draggableArea = owner._getDraggableArea();
             that.step = math.max(options.smallStep * (owner._maxSelection / owner._distance()), 0);
 
             if (that.type) {
@@ -1102,7 +1085,7 @@ var __meta__ = { // jshint ignore:line
                 tooltip = that.options.tooltip,
                 html = '',
                 wnd = $(window),
-                tooltipTemplate, colloutCssClass;
+                tooltipTemplate, calloutCssClass;
 
             if (!tooltip.enabled) {
                 return;
@@ -1113,13 +1096,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             $(".k-slider-tooltip").remove(); // if user changes window while tooltip is visible, a second one will be created
-            that.tooltipDiv = $("<div class='k-widget k-tooltip k-slider-tooltip'><!-- --></div>").appendTo(document.body);
+            that.tooltipDiv = $("<div role='tooltip' class='k-tooltip k-slider-tooltip'><!-- --></div>").appendTo(document.body);
 
             html = owner._getFormattedValue(that.val || owner.value(), that);
 
             if (!that.type) {
-                colloutCssClass = "k-callout-" + (owner._isHorizontal ? 's' : 'e');
-                that.tooltipInnerDiv = "<div class='k-callout " + colloutCssClass + "'><!-- --></div>";
+                calloutCssClass = "k-callout-" + (owner._isHorizontal ? 's' : 'e');
+                that.tooltipInnerDiv = "<div class='k-callout " + calloutCssClass + "'><!-- --></div>";
                 html += that.tooltipInnerDiv;
             }
 
@@ -1127,19 +1110,19 @@ var __meta__ = { // jshint ignore:line
 
             that._scrollOffset = {
                 top: wnd.scrollTop(),
-                left: wnd.scrollLeft()
+                left: kendo.scrollLeft(wnd)
             };
 
             that.moveTooltip();
         },
 
-        drag: function (e) {
+        drag: function(e) {
             var that = this,
                 owner = that.owner,
                 x = e.x.location,
                 y = e.y.location,
-                startPoint = that.dragableArea.startPoint,
-                endPoint = that.dragableArea.endPoint,
+                startPoint = that.draggableArea.startPoint,
+                endPoint = that.draggableArea.endPoint,
                 slideParams;
 
             e.preventDefault();
@@ -1251,7 +1234,7 @@ var __meta__ = { // jshint ignore:line
                     that.tooltipDiv.remove();
                     that.tooltipDiv = null;
                 } else {
-                    that.tooltipDiv.fadeOut("slow", function(){
+                    that.tooltipDiv.fadeOut("slow", function() {
                         $(this).remove();
                         that.tooltipDiv = null;
                     });
@@ -1259,7 +1242,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        moveTooltip: function () {
+        moveTooltip: function() {
             var that = this,
                 owner = that.owner,
                 top = 0,
@@ -1347,12 +1330,12 @@ var __meta__ = { // jshint ignore:line
             return output;
         },
 
-        constrainValue: function (position, min, max, maxOverflow) {
+        constrainValue: function(position, min, max, maxOverflow) {
             var that = this,
                 val = 0;
 
             if (min < position && position < max) {
-                val = that.owner._getValueFromPosition(position, that.dragableArea);
+                val = that.owner._getValueFromPosition(position, that.draggableArea);
             } else {
                 if (maxOverflow ) {
                     val = that.options.max;
@@ -1419,6 +1402,8 @@ var __meta__ = { // jshint ignore:line
             this._selection = new RangeSlider.Selection(dragHandles, that, options);
             that._firstHandleDrag = new Slider.Drag(dragHandles.eq(0), "firstHandle", that, options);
             that._lastHandleDrag = new Slider.Drag(dragHandles.eq(1), "lastHandle" , that, options);
+
+            that._refreshAriaAttr(options.selectionStart , options.selectionEnd);
         },
 
         options: {
@@ -1430,7 +1415,7 @@ var __meta__ = { // jshint ignore:line
             selectionEnd: null
         },
 
-        enable: function (enable) {
+        enable: function(enable) {
             var that = this,
                 options = that.options,
                 clickHandler;
@@ -1441,12 +1426,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.wrapper
-                .removeClass(STATE_DISABLED)
-                .addClass(STATE_DEFAULT);
+                .removeClass(STATE_DISABLED);
 
-            that.wrapper.find("input").removeAttr(DISABLED);
+            that.wrapper.find("input").prop(DISABLED, false);
 
-            clickHandler = function (e) {
+            clickHandler = function(e) {
                 var touch = getTouches(e)[0];
 
                 if (!touch) {
@@ -1454,8 +1438,8 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 var mousePosition = that._isHorizontal ? touch.location.pageX : touch.location.pageY,
-                    dragableArea = that._getDraggableArea(),
-                    val = that._getValueFromPosition(mousePosition, dragableArea),
+                    draggableArea = that._getDraggableArea(),
+                    val = that._getValueFromPosition(mousePosition, draggableArea),
                     target = $(e.target),
                     from, to, drag;
 
@@ -1506,38 +1490,37 @@ var __meta__ = { // jshint ignore:line
             that.wrapper
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, 0)
-                .on(MOUSE_UP, function () {
+                .on(MOUSE_UP, function() {
                     that._setTooltipTimeout();
                 })
-                .on(CLICK, function (e) {
+                .on(CLICK, function(e) {
                     that._focusWithMouse(e.target);
                     e.preventDefault();
                 })
-                .on(FOCUS, proxy(that._focus, that))
-                .on(BLUR, proxy(that._blur, that));
+                .on(FOCUS, that._focus.bind(that))
+                .on(BLUR, that._blur.bind(that));
 
             that.wrapper.find(DRAG_HANDLE)
                 .off(KEY_DOWN, kendo.preventDefault)
                 .eq(0).on(KEY_DOWN,
-                    proxy(function(e) {
+                    (function(e) {
                         this._keydown(e, "firstHandle");
-                    }, that)
+                    }).bind(that)
                 )
                 .end()
                 .eq(1).on(KEY_DOWN,
-                    proxy(function(e) {
+                    (function(e) {
                         this._keydown(e, "lastHandle");
-                    }, that)
+                    }).bind(that)
                 );
 
             that.options.enabled = true;
         },
 
-        disable: function () {
+        disable: function() {
             var that = this;
 
             that.wrapper
-                .removeClass(STATE_DEFAULT)
                 .addClass(STATE_DISABLED);
 
             that.wrapper.find("input").prop(DISABLED, DISABLED);
@@ -1557,7 +1540,7 @@ var __meta__ = { // jshint ignore:line
             that.options.enabled = false;
         },
 
-        _keydown: function (e, handle) {
+        _keydown: function(e, handle) {
             var that = this,
                 selectionStartValue = that.options.selectionStart,
                 selectionEndValue = that.options.selectionEnd,
@@ -1599,7 +1582,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _update: function (selectionStart, selectionEnd) {
+        _update: function(selectionStart, selectionEnd) {
             var that = this,
                 values = that.value();
 
@@ -1652,7 +1635,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        values: function (start, end) {
+        values: function(start, end) {
             if (isArray(start)) {
                 return this._value(start[0], start[1]);
             } else {
@@ -1682,12 +1665,12 @@ var __meta__ = { // jshint ignore:line
 
             formattedValue = that._getFormattedValue([start, end], drag);
 
-            dragHandles.eq(0).attr("aria-valuenow", start);
-            dragHandles.eq(1).attr("aria-valuenow", end);
-            dragHandles.attr("aria-valuetext", formattedValue);
+            dragHandles.eq(0).attr(ARIA_VALUENOW, start);
+            dragHandles.eq(1).attr(ARIA_VALUENOW, end);
+            dragHandles.attr(ARIA_VALUETEXT, formattedValue);
         },
 
-        _setValueInRange: function (selectionStart, selectionEnd) {
+        _setValueInRange: function(selectionStart, selectionEnd) {
             var options = this.options;
 
             selectionStart = math.max(math.min(selectionStart, options.max), options.min);
@@ -1701,17 +1684,17 @@ var __meta__ = { // jshint ignore:line
             this._update(math.min(selectionStart, selectionEnd), math.max(selectionStart, selectionEnd));
         },
 
-        _setZIndex: function (type) {
-            this.wrapper.find(DRAG_HANDLE).each(function (index) {
+        _setZIndex: function(type) {
+            this.wrapper.find(DRAG_HANDLE).each(function(index) {
                 $(this).css("z-index", type == "firstHandle" ? 1 - index : index);
             });
         },
 
-        _formResetHandler: function () {
+        _formResetHandler: function() {
             var that = this,
                 options = that.options;
 
-            setTimeout(function () {
+            setTimeout(function() {
                 var inputs = that.element.find("input");
                 var start = inputs[0].value;
                 var end = inputs[1].value;
@@ -1734,7 +1717,7 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
-    RangeSlider.Selection = function (dragHandles, that, options) {
+    RangeSlider.Selection = function(dragHandles, that, options) {
         function moveSelection(value) {
             value = value || [];
             var selectionStartValue = value[0] - options.min,
@@ -1743,12 +1726,11 @@ var __meta__ = { // jshint ignore:line
                 selectionEndIndex = math.ceil(round(selectionEndValue / options.smallStep)),
                 selectionStart = that._pixelSteps[selectionStartIndex],
                 selectionEnd = that._pixelSteps[selectionEndIndex],
-                halfHandle = parseInt(that._outerSize(dragHandles.eq(0)) / 2, 10),
                 rtlCorrection = that._isRtl ? 2 : 0;
 
-            dragHandles.eq(0).css(that._position, selectionStart - halfHandle - rtlCorrection)
+            dragHandles.eq(0).css(that._position, selectionStart - rtlCorrection)
                        .end()
-                       .eq(1).css(that._position, selectionEnd - halfHandle - rtlCorrection);
+                       .eq(1).css(that._position, selectionEnd - rtlCorrection);
 
             makeSelection(selectionStart, selectionEnd);
         }
@@ -1772,7 +1754,7 @@ var __meta__ = { // jshint ignore:line
 
         moveSelection(that.value());
 
-        that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], function (e) {
+        that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], function(e) {
             moveSelection(e.values);
         });
     };
@@ -1781,6 +1763,3 @@ var __meta__ = { // jshint ignore:line
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

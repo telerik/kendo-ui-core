@@ -1,9 +1,9 @@
 ---
 title: Custom Functions
-page_title: Custom Functions | Kendo UI Spreadsheet
-description: "Learn how to make your own JavaScript functions in the Kendo UI Spreadsheet widget."
+page_title: jQuery Spreadsheet Documentation - Custom Functions
+description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to make your own JavaScript functions in the widget."
 slug: custom_functions_spreadsheet_widget
-position: 4
+position: 6
 ---
 
 # Custom Functions
@@ -18,8 +18,6 @@ The first argument (string) is the name for your function in formulas (case-inse
 
 The following example demonstrates how to define a function that calculates the distance between two points.
 
-###### Example
-
     kendo.spreadsheet.defineFunction("distance", function(x1, y1, x2, y2){
         var dx = Math.abs(x1 - x2);
         var dy = Math.abs(y1 - y2);
@@ -32,15 +30,45 @@ The following example demonstrates how to define a function that calculates the 
         [ "y2", "number" ]
     ]);
 
-If you include the above JavaScript code, you can then use `DISTANCE` in formulas. For example, to find the distance between coordinate points `(2,2)` and `(5,6)`, type in a cell `=DISTANCE(2, 2, 5, 6)`. Optionally, you can use the function in combined expressions such as `=DISTANCE(0, 0, 1, 1) + DISTANCE(2, 2, 5, 6)`.
+If you include the above JavaScript code, you can then use `DISTANCE` in formulas. For example, to find the distance between coordinate points `(2,2)` and `(5,6)`, type in a cell `=DISTANCE(2, 2, 5, 6)`. Optionally, you can use the function in combined expressions such as `=DISTANCE(0, 0, 1, 1) + DISTANCE(2, 2, 5, 6)`. Below you will find a runnable example:
+
+```dojo
+    <div id="spreadsheet" style="width: 100%;"></div>
+    <script>
+        kendo.spreadsheet.defineFunction("distance", function(x1, y1, x2, y2){
+          var dx = Math.abs(x1 - x2);
+          var dy = Math.abs(y1 - y2);
+          var dist = Math.sqrt(dx*dx + dy*dy);
+          return dist;
+        }).args([
+          [ "x1", "number" ],
+          [ "y1", "number" ],
+          [ "x2", "number" ],
+          [ "y2", "number" ]
+        ]);
+
+
+        $("#spreadsheet").kendoSpreadsheet({
+          sheets: [{
+            rows: [{
+              cells: [{
+                index: 0,
+                value: 40
+              }, {
+                index: 1,
+                formula: '=DISTANCE(2, 2, 5, 6)'
+              }]
+            }]
+          }]
+        });
+    </script>
+```
 
 In the above example, `defineFunction` returns an object that has an `args` method. You can use it to specify the expected types of arguments. If the function is called with mismatching argument types, the runtime of the Spreadsheet automatically returns an error and your implementation is not called. This spares the time for manually writing code that does argument type checking and provides a nice declarative syntax instead.
 
 ### Asynchronous Primitives
 
 To retrieve currency information from a remote server, define a primitive to make this information available in formulas. To define an asynchronous function, call `argsAsync` instead of `args`.
-
-###### Example
 
     kendo.spreadsheet.defineFunction("currency", function(callback, base, curr){
         // let's say we have this fetchCurrency function;
@@ -53,8 +81,6 @@ To retrieve currency information from a remote server, define a primitive to mak
         [ "curr", "string" ]
     ]);
 
-> **Important**
->
 > The `argsAsync` passes a callback as the first argument to your implementation function, which you need to call with the return value.
 
 It is possible to use new approaches in formulas such as `=CURRENCY("EUR", "USD")` and `=A1 * CURRENCY("EUR", "USD")`. Note that the callback is invisible in formulas. The second formula shows that even though the implementation itself is asynchronous, it can be used in formulas in a synchronous way&mdash;that is, the result yielded by `CURRENCY` is multiplied by the value in **A1**.
@@ -87,8 +113,6 @@ As of now, the following basic specifiers are supported:
 
 Again, to make it clear, some specifiers actually modify the value that your function receives. For example, you could implement a function that truncates the argument to integer, as shown below.
 
-###### Example
-
     defineFunction("truncate", function(value){
         return value;
     }).args([
@@ -99,9 +123,7 @@ If you call `=TRUNCATE(12.634)`, the result is `12`. You can also call `=TRUNCAT
 
 ### Getting Error Values
 
-By default, if an argument is an error, your function is not called and that error is returned.  
-
-###### Example
+By default, if an argument is an error, your function is not called and that error is returned.
 
     defineFunction("iserror", function(value){
         return value instanceof kendo.spreadsheet.CalcError;
@@ -110,8 +132,6 @@ By default, if an argument is an error, your function is not called and that err
     ]);
 
 With this implementation, when you type `=ISERROR(1/0)`, `#DIV/0!` instead of `true` is returned&mdash;the error is passed over and aborts the computation. To allow the passing of errors, append a `!` to the type.
-
-###### Example
 
     ...args([
         [ "value", "anyvalue!" ]
@@ -124,8 +144,6 @@ The result is that `true` is returned.
 All above-mentioned type specifiers force references. FBecasues of this, `=TRUNCATE(A5)` also works. The function gets the value in the `A5` cell. If `A5` contains a formula, the runtime library verifies you get the current value&mdash;that is, `A5` is evaluated first. All of this goes under the hood and you need not worry about it.
 
 Sometimes you might need to write functions that receive a reference instead of a resolved value. Such an example is the `ROW` function of Excel. In its basic form, it takes a cell reference and returns its row number, as demonstrated in the following example. The actual `ROW` function is more complicated.
-
-###### Example
 
     defineFunction("row", function(cell){
         // add 1 because internally row indexes are zero-based
@@ -169,8 +187,6 @@ In addition to the basic type specifiers that are strings, you can also use the 
 ### Previous Arguments Reference
 
 In certain clauses you might need to refer to values of previously type-checked arguments. For example, if you want to write a primitive that takes a minimum, a maximum, and a value that must be between them, and should return as a fraction the position of that value between min and max.
-
-###### Example
 
     defineFunction("my.position", function(min, max, value){
         return (value - min) / (max - min);
@@ -245,8 +261,6 @@ The type specification for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. Th
 
 To return an error code, return a `spreadsheet.CalcError` object.
 
-###### Example
-
     defineFunction("tan", function(x){
         // if x is sufficiently close to PI, tan would return
         // Infinity, or some really big number; let's error out instead
@@ -258,8 +272,6 @@ To return an error code, return a `spreadsheet.CalcError` object.
         [ "x", "number" ]
     ]);
 
-> **Important**
->
 > For convenience, you can also `throw` a `CalcError` object for synchronous primitives&mdash;that is, if you use `args` and not `argsAsync`.
 
 Note that it is possible to do the above through an assertion as well, as demonstrated in the following example.
@@ -280,8 +292,6 @@ The type checking mechanism errors out when your primitive receives more argumen
 The simplest way is to use the `"rest"` type specifier. In such cases, the last argument is an array that contains all remaining arguments, whatever types they might be.
 
 The following example demonstrates how to use a function that joins arguments with a separator producing a string.
-
-###### Example
 
     defineFunction("join", function(sep, list){
         return list.join(sep);
@@ -348,11 +358,9 @@ Time is kept as a fraction of a day&mdash;that is, 0.5 means 12:00:00. For examp
 
 Functions to pack or unpack dates are available in `spreadsheet.calc.runtime`.
 
-###### Example
-
     var runtime = kendo.spreadsheet.calc.runtime;
 
-    // unpacking
+    // Unpacking.
     var date = runtime.unpackDate(28922.55);
     console.log(date); // { year: 1979, month: 2, date: 8, day: 4 }
 
@@ -362,7 +370,7 @@ Functions to pack or unpack dates are available in `spreadsheet.calc.runtime`.
     var date = runtime.serialToDate(28922.55); // produces JavaScript Date object
     console.log(date.toISOString()); // 1979-03-08T13:12:00.000Z
 
-    // packing
+    // Packing.
     console.log(runtime.packDate(2015, 5, 25)); // year, month, date
     console.log(runtime.packTime(13, 35, 0, 0)); // hours, minutes, seconds, ms
     console.log(runtime.dateToSerial(new Date()))
@@ -372,8 +380,6 @@ Note that the serial date representation does not carry any timezone information
 ## References
 
 As mentioned earlier, certain type specifiers allow you to get a reference in your function rather than the resolved value. Note that when you do so, you cannot rely on the values in those cells to be calculated. As a result, if your function might need the values as well, you have to compute them. Because the function which does this is asynchronous, your primitive has to be defined in an asynchronous style as well.
-
-###### Example
 
     defineFunction("test", function(callback, x){
         this.resolveCells([ x ], function(){
@@ -401,8 +407,6 @@ The following list explains the types of references that your primitive can rece
 * `spreadsheet.UnionRef`&mdash;A union. It contains a `refs` property, which is an array of references (it can be empty). A `UnionRef` can be created by the union operator, which is the comma.
 
 The following example demonstrates how to use a function that takes an arbitrary reference and returns its type of reference.
-
-###### Example
 
       defineFunction("refkind", function(x){
           if (x === spreadsheet.NULLREF) {
@@ -472,8 +476,6 @@ Matrices were primarily added to deal with the “array formulas” concept in E
 
 The following example demonstrates how to use a function that doubles each number in a range and returns a matrix of the same shape.
 
-###### Example
-
     defineFunction("doublematrix", function(m){
         return m.map(function(value){
             return value * 2;
@@ -530,8 +532,6 @@ If `args` or `argsAsync` are not called, the primitive function receives exactly
 
 The following example demonstrates how to use a function that adds two things.
 
-###### Example
-
     defineFunction("add", function(callback, args){
         callback(args[0] + args[1]);
     });
@@ -547,10 +547,5 @@ In other words, if you use this raw form, you are responsible for type-checking 
 
 ## See Also
 
-* [Overview]({% slug overview_spreadsheet_widget %})
-* [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
-* [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})
-* [Store Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
-* [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
-* [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
-* [User Guide]({% slug user_guide_spreadsheet_widget %})
+* [Validation in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/validation)
+* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

@@ -1,8 +1,8 @@
 ---
 title: Set Different Colors to Every Child Grid Header
-description: An example on how to change the color of every child Grid header in a hierarchical Kendo UI Grid.
+page_title: Change Header Colors of Child Grids - Kendo UI Grid for jQuery
+description: Learn how to change the color of every child Grid header in a hierarchical Kendo UI Grid.
 type: how-to
-page_title: Change Header Colors of Child Grids | Kendo UI Grid
 slug: change-header-color-child-grids
 tags: kendo ui, mvc, grid, hierarchy, child grids, header colors
 ticketid: 1101311
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
-   <td>Progress Kendo UI version</td>
+   <td>Product Version</td>
    <td>Tested up to version 2017.2 504</td>
   </tr>
 </table>

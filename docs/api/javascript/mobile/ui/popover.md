@@ -304,6 +304,7 @@ The widget instance which fired the event.
     var app = new kendo.mobile.Application();
 
     function onClose(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("close");
       //handle event
     }
@@ -339,6 +340,7 @@ The widget instance which fired the event.
     var app = new kendo.mobile.Application();
 
     function onOpen(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("open");
       //handle event
     }

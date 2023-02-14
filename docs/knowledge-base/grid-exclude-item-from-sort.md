@@ -1,8 +1,8 @@
 ---
 title: Exclude Specific Items When Sorting Grid Data
-description: An example on how to exclude one or more specific items when the user sorts data in the Kendo UI Grid.
+description: Learn how to exclude one or more specific items when the user sorts data in the Kendo UI Grid.
 type: how-to
-page_title: Exclude Specific Items When Sorting | Kendo UI Grid
+page_title: Exclude Specific Items When Sorting - Kendo UI Grid for jQuery
 slug: grid-exclude-item-from-sort
 tags: grid, exclude, item, sort, sorting, items, row, record
 ticketid: 1158437
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
 	 <td>Product Version</td>
@@ -57,10 +57,10 @@ Use the [`compare`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/con
         sortable: {
           compare: function(a, b, descending) {
             if (descending){
-              return b.ProductName == "Chai" ? -1 : a.ProductName === b.ProductName ? 0 : (a.ProductName > b.ProductName) ? 1 : -1;
+              return a.ProductName == "Chai" ? 1 : a.ProductName === b.ProductName ? 0 : (a.ProductName > b.ProductName) ? 1 : -1;
             }
             else{
-              return a.ProductName == "Chai" ? -1 : a.ProductName === b.ProductName ? 0 : (a.ProductName > b.ProductName) ? 1 : -1;
+              return b.ProductName == "Chai" ? 1 : a.ProductName === b.ProductName ? 0 : (a.ProductName > b.ProductName) ? 1 : -1;
             }
           }
         },

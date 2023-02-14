@@ -1,8 +1,8 @@
 ---
-title: Disable Dynamically Dates in Calendar
-description: An example on how to dynamically disable dates in the Kendo UI Calendar.
+title: Disable Dynamically Dates in the Calendar
+page_title: Disable Dates Dynamically - Kendo UI Calendar for jQuery
+description: Learn how to dynamically disable dates in the Kendo UI Calendar.
 type: how-to
-page_title: Disable Dates Dynamically | Kendo UI Calendar
 slug: calendar-disable-dates-dynamically
 tags: calendar, disable, dates, dynamically, javascript,js
 res_type: kb
@@ -13,13 +13,12 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Calendar</td>
+  <td>Progress® Kendo UI® Calendar for jQuery</td>
  </tr> <tr>
-  <td>Made with version</td>
+  <td>Product Version</td>
   <td>2017.3.1026</td>
  </tr>
 </table>
-
 
 ## Description
 

@@ -1,0 +1,65 @@
+.k-rating {
+    &.k-widget {
+        background-color: transparent;
+    }
+
+    &:focus,
+    &.k-state-focused,
+    &.k-focus {
+        box-shadow: none;
+
+        .k-rating-item {
+            > .k-icon {
+                text-shadow: @rating-icon-focused-shadow;
+            }
+
+            &.k-state-selected > .k-icon,
+            &.k-selected > .k-icon {
+                text-shadow: @rating-icon-focused-selected-shadow;
+            }
+        }
+    }
+}
+
+.k-rating-item {
+    color: @rating-icon-text;
+
+    &.k-state-selected,
+    &.k-selected {
+        color: @rating-icon-selected-text;
+        background: none;
+        box-shadow: none;
+
+        &:focus,
+        &.k-state-focused,
+        &.k-focus {
+            color: @rating-icon-focused-text;
+        }
+    }
+
+    &:hover,
+    &.k-state-hover,
+    &.k-hover {
+        color: @rating-icon-hover-text;
+        cursor: pointer;
+        background: none;
+        box-shadow: none;
+
+        &.k-state-selected,
+        &.k-selected {
+            box-shadow: none;
+        }
+    }
+
+    &:focus,
+    &.k-state-focused,
+    &.k-focus {
+        background: none;
+        box-shadow: none;
+
+        &.k-state-selected,
+        &.k-selected {
+            box-shadow: none;
+        }
+    }
+}

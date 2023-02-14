@@ -99,10 +99,12 @@ The configuration of measures. A string array whose values are interpreted as th
 
 #### Example - set the measures
 
+    <div id="pivot"></div>
+
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
-      measures: ["[Measures].[Internet Order Lines Count]"],
+      measures: ["[Measures].[Reseller Freight Cost]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
@@ -114,7 +116,10 @@ The configuration of measures. A string array whose values are interpreted as th
         type: "xmla"
       }
     });
-    dataSource.fetch();
+
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### measures.values `Array`
@@ -123,11 +128,13 @@ A string array whose values are interpreted as the name of the measures that wil
 
 #### Example - set the measures
 
+    <div id="pivot"></div>
+
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
-          values: ["[Measures].[Internet Order Lines Count]"]
+          values: ["[Measures].[Reseller Freight Cost]"]
       },
       transport: {
         connection: {
@@ -140,7 +147,10 @@ A string array whose values are interpreted as the name of the measures that wil
         type: "xmla"
       }
     });
-    dataSource.fetch();
+
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### measures.axis `String` *(default: columns)*
@@ -149,11 +159,13 @@ The name of the axis on which the measures will be displayed. The supported valu
 
 #### Example - set the axis of the measures
 
+    <div id="pivot"></div>
+    
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
-          values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
+          values: ["[Measures].[Internet Revenue Trend]", "[Measures].[Internet Revenue Status]"],
           axis: "rows"
       },
       transport: {
@@ -167,7 +179,10 @@ The name of the axis on which the measures will be displayed. The supported valu
         type: "xmla"
       }
     });
-    dataSource.fetch();
+    
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### rows `Array`
@@ -274,6 +289,7 @@ The configuration which is used when the data source discovers the schema inform
       }
     });
     dataSource.schemaDimensions().done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dimensions.length);
     });
     </script>
@@ -511,6 +527,7 @@ A set of key/value pairs which specifies the field-dimension mapping that is ava
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -557,6 +574,7 @@ A set of key/value pairs which specifies the available measures. The key specifi
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -629,6 +647,7 @@ The context for the current aggregate call. Includes the current data item and i
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -659,6 +678,7 @@ The context for the current aggregate call. Includes the current data item and i
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -715,6 +735,7 @@ The last aggregated result of the function for already processed records.
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -1078,6 +1099,7 @@ The name of the catalog.
     });
 
     var catalogName = dataSource.catalog();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(catalogName);// prints "Adventure Works DW 2008R2"
     </script>
 
@@ -1133,6 +1155,7 @@ The columns configuration. Accepts the same values as the [`columns`](/api/javas
     });
 
     var columns = dataSource.columns();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(columns);// [{ name: ["[Date].[Calendar]"] }]
     </script>
 
@@ -1191,6 +1214,7 @@ The name of the cube.
     });
 
     var cubeName = dataSource.cube();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(cubeName);// prints "Adventure Works"
     </script>
 
@@ -1232,6 +1256,7 @@ The options of the discover request.
             cubeName: dataSource.cube()
           }
         }).done(function(response) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(response);
         });
     </script>
@@ -1294,7 +1319,7 @@ The path which uniquely specifies the tuple member that needs to be expanded.
 
 #### Example - expand the second-level tuple member
 
-    <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
+    <!-- Real life demo: https://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -1376,6 +1401,7 @@ The measures configuration. Accepts the same values as the [`measures`](/api/jav
     });
 
     var measures = dataSource.measures();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(measures);// [{ name: "[Measures].[Internet Order Lines Count]" }]
     </script>
 
@@ -1409,6 +1435,7 @@ Gets the name of the axis on which the measures are displayed.
     });
 
     var axis = dataSource.measuresAxis();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(axis); // "rows"
     </script>
 
@@ -1464,6 +1491,7 @@ The rows configuration. Accepts the same values as the [`row`](/api/javascript/d
     });
 
     var rows = dataSource.rows();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(rows);// [{ name: ["[Date].[Calendar]"] }]
     </script>
 
@@ -1490,6 +1518,7 @@ Requests the catalogs information.
 
     dataSource.schemaCatalogs()
         .done(function(catalogs) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(catalogs);
         });
     </script>
@@ -1520,6 +1549,7 @@ Requests the cubes schema information.
 
     dataSource.schemaCubes()
         .done(function(cubes) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(cubes);
         });
     </script>
@@ -1550,6 +1580,7 @@ Requests the dimensions schema information.
 
     dataSource.schemaDimensions()
         .done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(dimensions);
         });
     </script>
@@ -1588,6 +1619,7 @@ The name of the dimensions which is the "owner" of the hierarchy.
 
     dataSource.schemaHierarchies(dimensionName)
         .done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(dimensions);
         });
     </script>
@@ -1626,6 +1658,7 @@ The name of the hierarchy which is the "owner" of the level.
 
     dataSource.schemaLevels(hierarchyName)
         .done(function(levels) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(levels);
         });
     </script>
@@ -1656,6 +1689,7 @@ Requests the measures schema information.
 
     dataSource.schemaMeasures()
         .done(function(measures) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(measures);
         });
     </script>

@@ -1,13 +1,12 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function(){
+import "./kendo.core.js";
+import "./kendo.floatinglabel.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "maskedtextbox",
     name: "MaskedTextBox",
     category: "web",
     description: "The MaskedTextBox widget allows to specify a mask type on an input field.",
-    depends: [ "core" ]
+    depends: ["core", "floatinglabel"]
 };
 
 (function($, undefined) {
@@ -19,11 +18,13 @@ var __meta__ = { // jshint ignore:line
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var NS = ".kendoMaskedTextBox";
-    var proxy = $.proxy;
+    var isPlainObject = $.isPlainObject;
     var setTimeout = window.setTimeout;
 
-    var STATEDISABLED = "k-state-disabled";
-    var STATEINVALID = "k-state-invalid";
+    var LABELCLASSES = "k-label k-input-label";
+    var STATEDISABLED = "k-disabled";
+    var STATEINVALID = "k-invalid";
+    var FOCUSED = "k-focus";
     var DISABLED = "disabled";
     var READONLY = "readonly";
     var CHANGE = "change";
@@ -65,7 +66,7 @@ var __meta__ = { // jshint ignore:line
             that._form();
 
             that.element
-                .addClass("k-textbox")
+                .addClass("k-input-inner")
                 .attr("autocomplete", "off")
                 .on("focus" + NS, function() {
                     var value = DOMElement.value;
@@ -77,6 +78,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     that._oldValue = value;
+                    that.wrapper.addClass(FOCUSED);
 
                     that._timeoutId = setTimeout(function() {
                         caret(element, 0, value ? that._maskLength : 0);
@@ -92,24 +94,30 @@ var __meta__ = { // jshint ignore:line
                         DOMElement.value = that._old = value;
                     }
 
+                    that.wrapper.removeClass(FOCUSED);
                     that._change();
                     that._togglePrompt();
                 });
 
-             var disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
+            if (that.options.mask && that.options.mask.length > 0) {
+                that.element.attr("aria-placeholder", that.options.mask);
+            }
 
-             if (disabled) {
-                 that.enable(false);
-             } else {
-                 that.readonly(element.is("[readonly]"));
-             }
+            var disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
 
-             that.value(that.options.value || element.val());
+            if (disabled) {
+                that.enable(false);
+            } else {
+                that.readonly(element.is("[readonly]"));
+            }
 
-             that._validationIcon = $("<span class='k-icon k-i-warning'></span>")
-                .insertAfter(element);
+            that.value(that.options.value || element.val());
 
-             kendo.notify(that);
+            that._validationIcon = $("<span class='k-input-validation-icon k-icon k-i-warning k-hidden'></span>").insertAfter(element);
+
+            that._label();
+            that._applyCssClasses();
+            kendo.notify(that);
         },
 
         options: {
@@ -120,7 +128,11 @@ var __meta__ = { // jshint ignore:line
             culture: "",
             rules: {},
             value: "",
-            mask: ""
+            mask: "",
+            label: null,
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium"
         },
 
         events: [
@@ -156,6 +168,10 @@ var __meta__ = { // jshint ignore:line
 
         destroy: function() {
             var that = this;
+
+            if (that.floatingLabel) {
+                that.floatingLabel.destroy();
+            }
 
             that.element.off(NS);
 
@@ -207,6 +223,10 @@ var __meta__ = { // jshint ignore:line
                     this._togglePrompt();
                 }
             }
+
+            if (this.floatingLabel) {
+                this.floatingLabel.refresh();
+            }
         },
 
         _togglePrompt: function(show) {
@@ -225,38 +245,50 @@ var __meta__ = { // jshint ignore:line
         },
 
         readonly: function(readonly) {
+            var that = this;
+
             this._editable({
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
+            var that = this;
+
             this._editable({
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
         },
 
         _bindInput: function() {
             var that = this;
 
             if (that._maskLength) {
-                if(that.options.$angular) {//detach "input" event in angular scenario to keep the ng-model consistent and updated only when the change event of the textbox is raised.
+                if (that.options.$angular) {//detach "input" event in angular scenario to keep the ng-model consistent and updated only when the change event of the textbox is raised.
                     that.element.off(INPUT);
                 }
                 that.element
-                    .on(ns(KEYDOWN), proxy(that._keydown, that))
-                    .on(ns(DROP), proxy(that._drop, that))
-                    .on(ns(CHANGE), proxy(that._trackChange, that))
-                    .on(INPUT_EVENT_NAME, proxy(that._inputHandler, that));
+                    .on(ns(KEYDOWN), that._keydown.bind(that))
+                    .on(ns(DROP), that._drop.bind(that))
+                    .on(ns(CHANGE), that._trackChange.bind(that))
+                    .on(INPUT_EVENT_NAME, that._inputHandler.bind(that));
 
 
                 if (kendo.support.browser.msie) {
                     var version = kendo.support.browser.version;
                     if (version > 8 && version < 11) {
                         var events = [ns(MOUSEUP), ns(DROP), ns(KEYDOWN), ns(PASTE)].join(" ");
-                        that.element.on(events, proxy(that._legacyIEInputHandler, that));
+                        that.element.on(events, that._legacyIEInputHandler.bind(that));
                     }
                 }
             }
@@ -278,8 +310,8 @@ var __meta__ = { // jshint ignore:line
             that._unbindInput();
 
             if (!readonly && !disable) {
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY);
+                element.prop(DISABLED, false)
+                       .prop(READONLY, false);
 
                 wrapper.removeClass(STATEDISABLED);
 
@@ -382,7 +414,7 @@ var __meta__ = { // jshint ignore:line
             that.__pasting = (type === "paste");
 
             setTimeout(function() {
-                if(type === "mouseup" && that.__pasting) {
+                if (type === "mouseup" && that.__pasting) {
                     return;
                 }
                 if (input.value && input.value !== value) {
@@ -540,7 +572,7 @@ var __meta__ = { // jshint ignore:line
                     chrIdx += 1;
                     tokenIdx += 1;
                 } else if (typeof token !== "string") {
-                    if ((token && token.test && token.test(chr)) || ($.isFunction(token) && token(chr))) {
+                    if ((token && token.test && token.test(chr)) || (kendo.isFunction(token) && token(chr))) {
                         result += chr;
                         tokenIdx += 1;
                     } else {
@@ -562,29 +594,71 @@ var __meta__ = { // jshint ignore:line
             return result;
         },
 
-        _wrapper: function () {
+        _label: function() {
+            var that = this;
+            var element = that.element;
+            var options = that.options;
+            var id = element.attr("id");
+            var floating;
+            var labelText;
+
+            if (options.label !== null) {
+                floating = isPlainObject(options.label) ? options.label.floating : false;
+                labelText = isPlainObject(options.label) ? options.label.content : options.label;
+
+                if (floating) {
+                    that._floatingLabelContainer = that.wrapper.wrap("<span></span>").parent();
+                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that });
+                }
+
+                if (kendo.isFunction(labelText)) {
+                    labelText = labelText.call(that);
+                }
+
+                if (!labelText) {
+                    labelText = "";
+                }
+
+                if (!id) {
+                    id = options.name + "_" + kendo.guid();
+                    element.attr("id", id);
+                }
+
+                that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
+            }
+        },
+
+        _wrapper: function() {
             var that = this;
             var element = that.element;
             var DOMElement = element[0];
 
-            var wrapper = element.wrap("<span class='k-widget k-maskedtextbox'></span>").parent();
+            var wrapper = element.wrap("<span class='k-input k-maskedtextbox'></span>").parent();
             wrapper[0].style.cssText = DOMElement.style.cssText;
             DOMElement.style.width = "100%";
-            that.wrapper = wrapper.addClass(DOMElement.className);
+            that.wrapper = wrapper.addClass(DOMElement.className).removeClass('input-validation-error');
         },
 
-        _blinkInvalidState: function () {
+        _blinkInvalidState: function() {
+            var that = this;
+
+            that._addInvalidState();
+            clearTimeout(that._invalidStateTimeout);
+            that._invalidStateTimeout = setTimeout(that._removeInvalidState.bind(that), 100);
+        },
+
+        _addInvalidState: function() {
             var that = this;
 
             that.wrapper.addClass(STATEINVALID);
-            clearTimeout(that._invalidStateTimeout);
-            that._invalidStateTimeout = setTimeout(proxy(that._removeInvalidState, that), 100);
+            that._validationIcon.removeClass("k-hidden");
         },
 
-        _removeInvalidState: function () {
+        _removeInvalidState: function() {
             var that = this;
 
             that.wrapper.removeClass(STATEINVALID);
+            that._validationIcon.addClass("k-hidden");
             that._invalidStateTimeout = null;
         },
 
@@ -643,10 +717,14 @@ var __meta__ = { // jshint ignore:line
         return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
     }
 
+    kendo.cssProperties.registerPrefix("MaskedTextBox", "k-input-");
+
+    kendo.cssProperties.registerValues("MaskedTextBox", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
+
     ui.plugin(MaskedTextBox);
 
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

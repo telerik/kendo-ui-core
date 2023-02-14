@@ -1,102 +1,37 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ListView
-description: "Learn how to initialize the Kendo UI ListView widget, customize its layout, and configure its behavior."
+page_title: jQuery ListView Documentation - ListView Overview
+description: "Learn about the jQuery ListView by Kendo UI and see the features it supports."
 slug: overview_kendoui_listview_widget
-position: 2
+position: 0
 ---
 
-# ListView Overview
+# {{ site.product }} ListView Overview
 
-The [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/listview/index) enables you to specify a custom type of layout for the items that are displayed in the control.
+The Kendo UI ListView enables you to display a custom layout of data-bound items.
 
-It can be bound to local JSON data or to remote data by using the Kendo UI DataSource component.
+The ListView is ideally suited for displaying a list of items in a consistent manner. You can see commonplace examples of its use in the design structures of the Internet, search engine results, tweets from Twitter, Facebook updates, inbox items in Gmail, card lists in Trello, and so on.
 
-## Getting Started
+The ListView can be bound to local JSON data or to remote data by using the Kendo UI DataSource component. It enables you to control the display of data. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
 
-### Initialize the ListView
+![Kendo UI for jQuery ListView Overview](images/overview.png)
 
-The ListView can be created out of an existing `<span>`, `<div>`, or `<ul>` HTML element.
+## Functionality and Features
 
-      <ul id="listView"></ul>
+* [Items]({% slug items_kendoui_listview %})&mdash;The ListView allows you to visually differentiate each alternating item in a ListView.
+* [Editing]({% slug editing_kendoui_listview %})&mdash;The ListView allows you to edit its dataitems.
+* [Selection]({% slug selection_kendoui_listview %})&mdash;The ListView supports the item selection functionality.
+* [Paging]({% slug paging_kendoui_listview %})&mdash;You can paginate your ListView data to optimize the performance of the widget.
+* [Scrolling]({% slug scrolling_kendoui_listview_widget %})&mdash;You can add scrolling functionality to the ListView.
+* [Templates]({% slug templates_kendoui_listview %})&mdash;The ListView allows you to use templates to format the appearance of the items.
 
-To initialize the widget, use the code from the following example.
+## Next Steps 
 
-###### Example
-
-      $(document).ready(function() {
-          $("#listView").kendoListView({
-              template: "<li>${FirstName} ${LastName}</li>",
-              dataSource: {
-                  data: [
-                      {
-                          FirstName: "Joe",
-                          LastName: "Smith"
-                      },
-                      {
-                          FirstName: "Jane",
-                          LastName: "Smith"
-                  }]
-              }
-          });
-      });
-
-## Configuration
-
-### Selection, Navigation, and Editing
-
-The ListView supports selection, navigation, and editing which, by default, are disabled. You can configure any of these functionalities by using Boolean options.
-
-###### Example
-
-      $(document).ready(function() {
-          $("#listView").kendoListView({
-             selectable: true,
-             navigatable: true,
-             editable: true,
-             template: "<li>${FirstName}</li>",
-             editTemplate: '<li><input type="text" data-bind="value:FirstName" name="FirstName" required="required"/></li>'
-          });
-      });
-
-### Paging
-
-To enable paging, instantiate a separate pager control and bind it to the same DataSource.
-
-###### Example
-
-    <div id="listview"></div>
-    <div id="pager"></div>
-    <script>
-        var dataSource = new kendo.data.DataSource({
-            data: [
-                { id: 1, item: "Item 1" },
-                { id: 2, item: "Item 2" },
-                { id: 3, item: "Item 3" },
-                { id: 4, item: "Item 4" },
-                { id: 5, item: "Item 5" },
-                { id: 6, item: "Item 6" }
-            ],
-            pageSize: 2
-        });
-
-        $("#listview").kendoListView({
-            dataSource: dataSource,
-            template: "<div>#: item #</div>"
-        });
-
-        $("#pager").kendoPager({
-            dataSource: dataSource
-        });
-    </script>
+* [Getting Started with the Kendo UI ListView for jQuery]({% slug getting_started_kendoui_listview_widget %})
+* [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
+* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
 
 ## See Also
 
-* [Walkthrough]({% slug basic_usage_kendoui_listview_widget %})
-* [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
-* [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
-* [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/listview/overview)
-* [Overview of the JSP Tag]({% slug overview_listview_uiforjsp %})
-* [Overview of the PHP Class](/php/widgets/listview/overview)
-* [JavaScript API Reference](/api/javascript/ui/listview)
+* [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
+* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)

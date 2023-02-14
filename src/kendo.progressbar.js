@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function(){
+import "./kendo.core.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "progressbar",
     name: "ProgressBar",
     category: "web",
@@ -10,7 +8,7 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core" ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
@@ -24,11 +22,13 @@ var __meta__ = { // jshint ignore:line
         KPROGRESSBARREVERSE = "k-progressbar-reverse",
         KPROGRESSBARINDETERMINATE = "k-progressbar-indeterminate",
         KPROGRESSBARCOMPLETE = "k-complete",
-        KPROGRESSWRAPPER = "k-state-selected",
+        KPROGRESSWRAPPER = "k-selected",
         KPROGRESSSTATUS = "k-progress-status",
-        KCOMPLETEDCHUNK = "k-state-selected",
-        KUPCOMINGCHUNK = "k-state-default",
-        KSTATEDISABLED = "k-state-disabled",
+        LABEL_POSITION_END = "k-progress-end",
+        KCOMPLETEDCHUNK = "k-selected",
+        STATEDISABLED = "k-disabled",
+        PROGRESS_VALUE = "k-progressbar-value",
+        CHUNK_ITEM = "k-progressbar-chunk",
         PROGRESSTYPE = {
             VALUE: "value",
             PERCENT: "percent",
@@ -39,12 +39,12 @@ var __meta__ = { // jshint ignore:line
         BOOLEAN = "boolean",
         math = Math,
         extend = $.extend,
-        proxy = $.proxy,
         HUNDREDPERCENT = 100,
         DEFAULTANIMATIONDURATION = 400,
         PRECISION = 3,
         templates = {
-            progressStatus: "<span class='k-progress-status-wrap'><span class='k-progress-status'></span></span>"
+            progressStatus: "<span class='k-progress-status-wrap " + LABEL_POSITION_END + "'><span class='k-progress-status'></span></span>",
+            announceElement: '<span aria-live="polite" class="k-sr-only k-progress-announce"></span>'
         };
 
     var ProgressBar = Widget.extend({
@@ -65,6 +65,10 @@ var __meta__ = { // jshint ignore:line
 
             that._wrapper();
 
+            if (options.ariaRole) {
+                that._aria();
+            }
+
             that._progressAnimation();
 
             if ((options.value !== options.min) && (options.value !== false)) {
@@ -73,16 +77,21 @@ var __meta__ = { // jshint ignore:line
         },
 
         setOptions: function(options) {
-            var that = this;
+            var that = this,
+                wrapper = that.wrapper;
 
             Widget.fn.setOptions.call(that, options);
 
             if (options.hasOwnProperty("reverse")) {
-                that.wrapper.toggleClass("k-progressbar-reverse", options.reverse);
+                wrapper.toggleClass("k-progressbar-reverse", options.reverse);
             }
 
             if (options.hasOwnProperty("enable")) {
                 that.enable(options.enable);
+            }
+
+            if (options.ariaRole) {
+                that._aria();
             }
 
             that._progressAnimation();
@@ -108,7 +117,37 @@ var __meta__ = { // jshint ignore:line
             type: PROGRESSTYPE.VALUE,
             chunkCount: DEFAULTCHUNKCOUNT,
             showStatus: true,
-            animation: { }
+            animation: { },
+            label: null,
+            labelId: null,
+            ariaRole: false
+        },
+
+        _aria: function() {
+            var that = this,
+                options = that.options,
+                wrapper = that.wrapper;
+
+            wrapper.attr({
+                "role": "progressbar",
+                "aria-valuemin": options.min,
+                "aria-valuemax": options.max
+            });
+
+            if (!!options.labelId) {
+                wrapper.attr("aria-labelledby", options.labelId);
+            } else if (!!options.label) {
+                wrapper.attr("aria-label", options.label);
+            }
+
+            that.announce = $(templates.announceElement);
+            that.announce.appendTo($("body"));
+
+            if (options.value !== false) {
+                wrapper.attr("aria-valuenow", options.value);
+
+                that.announce.text(that._calculatePercentage().toFixed() + "%");
+            }
         },
 
         _fields: function() {
@@ -139,14 +178,14 @@ var __meta__ = { // jshint ignore:line
             var container = that.wrapper = that.element;
             var options = that.options;
             var orientation = options.orientation;
-            var initialStatusValue;
+            var initialValue = (options.value !== false) ? options.value : options.min;
 
-            container.addClass("k-widget " + KPROGRESSBAR);
+            container.addClass(KPROGRESSBAR);
 
             container.addClass(KPROGRESSBAR + "-" + ((orientation === HORIZONTAL) ? HORIZONTAL : VERTICAL));
 
-            if(options.enable === false) {
-                container.addClass(KSTATEDISABLED);
+            if (options.enable === false) {
+                container.addClass(STATEDISABLED);
             }
 
             if (options.reverse) {
@@ -160,16 +199,14 @@ var __meta__ = { // jshint ignore:line
             if (options.type === PROGRESSTYPE.CHUNK) {
                 that._addChunkProgressWrapper();
             } else {
-                if (options.showStatus){
+                if (options.showStatus) {
                     that.progressStatus = that.wrapper.prepend(templates.progressStatus)
                                               .find("." + KPROGRESSSTATUS);
 
-                    initialStatusValue = (options.value !== false) ? options.value : options.min;
-
                     if (options.type === PROGRESSTYPE.VALUE) {
-                        that.progressStatus.text(initialStatusValue);
+                        that.progressStatus.text(initialValue);
                     } else {
-                        that.progressStatus.text(that._calculatePercentage(initialStatusValue).toFixed() + "%");
+                        that.progressStatus.text(that._calculatePercentage(initialValue).toFixed() + "%");
                     }
                 }
             }
@@ -179,7 +216,7 @@ var __meta__ = { // jshint ignore:line
             return this._value(value);
         },
 
-        _value: function(value){
+        _value: function(value) {
             var that = this;
             var options = that.options;
             var validated;
@@ -190,7 +227,7 @@ var __meta__ = { // jshint ignore:line
                 if (typeof value !== BOOLEAN) {
                     value = that._roundValue(value);
 
-                    if(!isNaN(value)) {
+                    if (!isNaN(value)) {
                         validated = that._validateValue(value);
 
                         if (validated !== options.value) {
@@ -205,17 +242,22 @@ var __meta__ = { // jshint ignore:line
                     }
                 } else if (!value) {
                     that.wrapper.addClass(KPROGRESSBARINDETERMINATE);
+                    that.wrapper.removeAttr("aria-valuenow");
                     options.value = false;
+
+                    if (that.announce) {
+                        that.announce.text("");
+                    }
                 }
             }
         },
 
         _roundValue: function(value) {
-            value = parseFloat(value);
+             value = parseFloat(value);
 
-            var power = math.pow(10, PRECISION);
+             var power = math.pow(10, PRECISION);
 
-            return math.floor(value * power) / power;
+             return kendo._round(value * power) / power;
         },
 
         _validateValue: function(value) {
@@ -232,7 +274,7 @@ var __meta__ = { // jshint ignore:line
                 return false;
             }
 
-            if(isNaN(that._roundValue(value))) {
+            if (isNaN(that._roundValue(value))) {
                 return options.min;
             }
 
@@ -250,30 +292,38 @@ var __meta__ = { // jshint ignore:line
             } else {
                 that._updateProgressWrapper(percentage);
             }
+
+            if (options.ariaRole) {
+                that.wrapper.attr("aria-valuenow", that.options.value);
+
+                if (that.announce) {
+                    that.announce.text(percentage.toFixed() + "%");
+                }
+            }
         },
 
         _updateChunks: function(percentage) {
             var that = this;
             var options = that.options;
             var chunkCount = options.chunkCount;
-            var percentagesPerChunk =  parseInt((HUNDREDPERCENT / chunkCount) * 100, 10) / 100;
+            var percentagesPerChunk = parseInt((HUNDREDPERCENT / chunkCount) * 100, 10) / 100;
             var percentageParsed = parseInt(percentage * 100, 10) / 100;
             var completedChunksCount = math.floor(percentageParsed / percentagesPerChunk);
             var completedChunks;
 
-            if((options.orientation === HORIZONTAL && !(options.reverse)) ||
+            if ((options.orientation === HORIZONTAL && !(options.reverse)) ||
                (options.orientation === VERTICAL && options.reverse)) {
-                completedChunks = that.wrapper.find("li.k-item:lt(" + completedChunksCount + ")");
+                completedChunks = that.wrapper.find("li." + CHUNK_ITEM).slice(0, completedChunksCount);
+            } else if (completedChunksCount === 0) {
+                completedChunks = kendo.jQuery();
             } else {
-                completedChunks = that.wrapper.find("li.k-item:gt(-" + (completedChunksCount + 1) + ")");
+                completedChunks = that.wrapper.find("li." + CHUNK_ITEM).slice(completedChunksCount * -1);
             }
 
             that.wrapper.find("." + KCOMPLETEDCHUNK)
-                        .removeClass(KCOMPLETEDCHUNK)
-                        .addClass(KUPCOMINGCHUNK);
+                        .removeClass(KCOMPLETEDCHUNK + " " + PROGRESS_VALUE);
 
-            completedChunks.removeClass(KUPCOMINGCHUNK)
-                           .addClass(KCOMPLETEDCHUNK);
+            completedChunks.addClass(KCOMPLETEDCHUNK + " " + PROGRESS_VALUE);
         },
 
         _updateProgressWrapper: function(percentage) {
@@ -290,10 +340,10 @@ var __meta__ = { // jshint ignore:line
             animationCssOptions[that._progressProperty] = percentage + "%";
             that.progressWrapper.animate(animationCssOptions, {
                 duration: animationDuration,
-                start: proxy(that._onProgressAnimateStart, that),
-                progress: proxy(that._onProgressAnimate, that),
-                complete: proxy(that._onProgressAnimateComplete, that, options.value),
-                always: proxy(that._onProgressUpdateAlways, that, options.value)
+                start: that._onProgressAnimateStart.bind(that),
+                progress: that._onProgressAnimate.bind(that),
+                complete: that._onProgressAnimateComplete.bind(that, options.value),
+                always: that._onProgressUpdateAlways.bind(that, options.value)
             });
         },
 
@@ -362,16 +412,20 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
 
             options.enable = typeof(enable) === "undefined" ? true : enable;
-            that.wrapper.toggleClass(KSTATEDISABLED, !options.enable);
+            that.wrapper.toggleClass(STATEDISABLED, !options.enable);
         },
 
         destroy: function() {
             var that = this;
 
+            if (that.announce) {
+                that.announce.remove();
+            }
+
             Widget.fn.destroy.call(that);
         },
 
-        _addChunkProgressWrapper: function () {
+        _addChunkProgressWrapper: function() {
             var that = this;
             var options = that.options;
             var container = that.wrapper;
@@ -382,13 +436,14 @@ var __meta__ = { // jshint ignore:line
                 options.chunkCount = 1;
             }
 
-            html += "<ul class='k-reset'>";
+            that.element.addClass("k-chunk-progressbar");
+            html += "<ul class='k-reset k-progressbar-chunks'>";
             for (var i = options.chunkCount - 1; i >= 0; i--) {
-                html += "<li class='k-item k-state-default'></li>";
+                html += "<li class='" + CHUNK_ITEM + "'></li>";
             }
             html += "</ul>";
 
-            container.append(html).find(".k-item").css(that._progressProperty, chunkSize + "%")
+            container.append(html).find("." + CHUNK_ITEM).css(that._progressProperty, chunkSize + "%")
                      .first().addClass("k-first")
                      .end()
                      .last().addClass("k-last");
@@ -399,7 +454,7 @@ var __meta__ = { // jshint ignore:line
         _normalizeChunkSize: function() {
             var that = this;
             var options = that.options;
-            var lastChunk = that.wrapper.find(".k-item:last");
+            var lastChunk = that.wrapper.find("." + CHUNK_ITEM).last();
             var currentSize = parseFloat(lastChunk[0].style[that._progressProperty]);
             var difference = HUNDREDPERCENT - (options.chunkCount * currentSize);
 
@@ -411,7 +466,7 @@ var __meta__ = { // jshint ignore:line
         _addRegularProgressWrapper: function() {
             var that = this;
 
-            that.progressWrapper = $("<div class='" + KPROGRESSWRAPPER + "'></div>").appendTo(that.wrapper);
+            that.progressWrapper = $("<div class='" + KPROGRESSWRAPPER + " " + PROGRESS_VALUE + "'></div>").appendTo(that.wrapper);
 
             if (that.options.showStatus) {
                 that.progressWrapper.append(templates.progressStatus);
@@ -457,6 +512,3 @@ var __meta__ = { // jshint ignore:line
     kendo.ui.plugin(ProgressBar);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

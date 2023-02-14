@@ -1,10 +1,10 @@
 ---
 title: 2016 Releases
-page_title: 2016 Releases | Kendo UI Backwards Compatibility
+page_title: 2016 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2016."
 previous_url: /changes-and-backward-compatibility, /install/changes-and-backward-compatibility, /backwards-compatibility/2016/2016-backward-compatibility
 slug: breakingchanges2016_kendoui
-position: 4
+position: 7
 ---
 
 # 2016 Releases
@@ -58,13 +58,13 @@ The email validation rule has been changed to match the [HTML5 specification sug
 
 **Scheduler**
 
-The widget will use the `,` separator for the `recurrenceException` values to conform the [RFC5545](http://tools.ietf.org/html/rfc5545#page-120) specs. More details can be found in this [forum thread](http://www.telerik.com/forums/breaking-change-recurrence-exceptions-delimiter-change).
+The widget will use the `,` separator for the `recurrenceException` values to conform the [RFC5545](http://tools.ietf.org/html/rfc5545#page-120) specs. More details can be found in this [forum thread](https://www.telerik.com/forums/breaking-change-recurrence-exceptions-delimiter-change).
 
 ## Kendo UI 2016 R2
 
 **Scheduler**
 
-The widget will keep the selection state on `blur`. The change was introduced to behave similarly to the Kendo UI Grid. To bring the old behavior back, use the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method to clear the selection on `blur`.
+The widget will keep the selection state on `blur`. The change was introduced to behave similarly to the Kendo UI Grid. To bring the old behavior back, use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method to clear the selection on `blur`.
 
 ## Kendo UI 2016 Q1
 
@@ -123,6 +123,7 @@ The  **Grid**, **Gantt**, **TreeList**, **Scheduler**, **Toolbar**, and **Spread
 
 ## See Also
 
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
 * [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
 * [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})

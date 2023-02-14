@@ -48,7 +48,7 @@ The date at which the scheduler event ends. The `end` date is mandatory.
 
 The timezone of the `end` date. If not specified the [timezone](/api/javascript/ui/scheduler/configuration/timezone) will be used.
 
-The complete list of the supported timezones is available in the [List of IANA time zones](http://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
+The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 
 #### Example - set the end timezone of an event
 
@@ -93,6 +93,8 @@ If set to `true` the event is "all day". By default events are not all day.
         end: new Date("2013/4/4 00:00"),
         isAllDay: true
     });
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(event.isAllDay); // outputs "true"
     </script>
 
 ### recurrenceException `String` *(default: undefined)*
@@ -147,7 +149,7 @@ The `id` of the recurrence parent event. Required for events that are recurrence
 
 ### recurrenceRule `String` *(default: undefined)*
 
-The recurrence rule describing the recurring pattern of the event. The format follows the [iCal specification](http://tools.ietf.org/html/rfc5545).
+The recurrence rule describing the recurring pattern of the event. The format follows the [iCal specification](https://tools.ietf.org/html/rfc5545). You can find the recurrenceRule information under [section 3.3.10](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10).
 
 #### Example - set the recurrence rule
     <script>
@@ -179,7 +181,7 @@ The date at which the scheduler event starts. The `start` date is mandatory.
 
 The timezone of the `start` date. If not specified the [timezone](/api/javascript/ui/scheduler/configuration/timezone) will be used.
 
-The complete list of the supported timezones is available in the [List of IANA time zones](http://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
+The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 
 #### Example - set the end timezone of an event
 
@@ -224,6 +226,7 @@ The optional event description.
         end: new Date("2013/4/4 13:00"),
         description: "Lunch with Harry and Steve"
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.description); // outputs "Lunch with Harry and Steve"
     </script>
 
@@ -240,6 +243,7 @@ The date at which the scheduler event ends.
         start: new Date("2013/4/4 12:00"),
         end: new Date("2013/4/4 13:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.end); // outputs the end date
     </script>
 
@@ -257,6 +261,7 @@ The timezone of the `end` date.
         end: new Date("2013/4/4 13:00"),
         endTimezone: "Europe/Sofia"
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.endTimezone); // outputs "Europe/Sofia"
     </script>
 
@@ -273,6 +278,7 @@ The unique identifier of the event.
         start: new Date("2013/4/4 12:00"),
         end: new Date("2013/4/4 13:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.id); // outputs "1"
     </script>
 
@@ -289,6 +295,7 @@ If set to `true` the event is "all day".
         end: new Date("2013/4/4 00:00"),
         isAllDay: true
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.isAllDay); // outputs "true"
     </script>
 
@@ -306,6 +313,7 @@ The recurrence exceptions. A list of comma separated dates formatted using the `
         recurrenceRule: "FREQ=DAILY",
         recurrenceException: new Date("2013/9/3 12:00").toISOString()
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.recurrenceException); // outputs the recurrence exception
     </script>
 
@@ -330,6 +338,7 @@ The `id` of the recurrence parent event.
         title: "Lunch",
         recurrenceId: 1
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(exception.recurrenceId); // outputs "1"
     </script>
 
@@ -347,6 +356,7 @@ The recurrence rule describing the recurring pattern of the event.
         title: "Lunch",
         recurrenceRule: "FREQ=DAILY"
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.recurrenceRule); // outputs "FREQ=DAILY"
     </script>
 
@@ -362,6 +372,7 @@ The date at which the scheduler event starts.
         start: new Date("2013/4/4 12:00"),
         end: new Date("2013/4/4 13:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.start); // outputs the end date
     </script>
 
@@ -379,6 +390,7 @@ The timezone of the `start` date.
         startTimezone: "Europe/Sofia",
         end: new Date("2013/4/4 13:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.startTimezone); // outputs "Europe/Sofia"
     </script>
 
@@ -395,6 +407,7 @@ The title of the event which is displayed by the scheduler widget.
         start: new Date("2013/4/4 12:00"),
         end: new Date("2013/4/4 13:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.title); // outputs "Lunch"
     </script>
 
@@ -533,6 +546,7 @@ Returns the scheduler event length in milliseconds.
             end: new Date("2013/4/4 14:00")
         });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.duration());
     </script>
 
@@ -616,6 +630,7 @@ Checks whether the event is equal to or longer then twenty four hours.
             end: new Date("2013/4/7")
         });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.isMultiDay()); //logs 'true'
     </script>
 
@@ -638,6 +653,7 @@ Checks whether the event is a recurrence exception.
             end: new Date("2013/4/4")
         });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.isException()); //logs 'true'
     </script>
 
@@ -660,6 +676,7 @@ Checks whether the event is an occurrence part of a recurring series.
             end: new Date("2013/4/4")
         });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.isOccurrence()); //logs 'true'
     </script>
 
@@ -690,7 +707,9 @@ Checks whether the event is part of a recurring series.
             recurrenceRule: "FREQ=DAILY"
         });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.isRecurring()); //logs 'true'
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event2.isRecurring()); //logs 'true'
     </script>
 
@@ -713,6 +732,7 @@ Checks whether the event is the head of a recurring series.
             recurrenceRule: "FREQ=DAILY"
         });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.isRecurrenceHead()); //logs 'true'
     </script>
 
@@ -745,8 +765,11 @@ Additional options passed to the SchedulerEvent constructor.
 
         var occurrence = event.toOccurrence();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(occurrence.id); //logs default id
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(occurrence.recurrenceId); //logs id of the head. In this case '1'
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(occurrence.recurrenceRule); //logs 'null'
     </script>
 

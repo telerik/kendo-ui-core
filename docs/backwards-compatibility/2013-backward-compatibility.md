@@ -1,10 +1,10 @@
 ---
 title: 2013 Releases
-page_title: 2013 Releases | Kendo UI Backwards Compatibility
+page_title: 2013 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2013."
 previous_url: /backwards-compatibility/2013/2013-backward-compatibility
 slug: breakingchanges2013_kendoui
-position: 7
+position: 10
 ---
 
 # 2013 Releases
@@ -19,7 +19,7 @@ The `kendo.support.pointers` now only shows support for Internet Explorer (IE) 1
 
 **Splitter**
 
-* The internal `trigger("resize")` method, which has been provided as a workaround in certain scenarios, no longer works. It is now replaced with the [`resize()`]({% slug responsivewebdesign_integration_kendoui %}) public API method, which is now available in all Kendo UI widgets. For more information, refer to [`kendo.resize()`](/api/javascript/kendo/methods/resize).
+* The internal `trigger("resize")` method, which has been provided as a workaround in certain scenarios, no longer works. It is now replaced with the [`resize()`](/api/javascript/kendo/methods/resize) public API method, which is now available in all Kendo UI widgets. For more information, refer to [`kendo.resize()`](/api/javascript/kendo/methods/resize).
 
 * The `layoutChange` event is now obsolete and will be removed in the future. Use the `resize` event instead.
 
@@ -75,7 +75,7 @@ The icons in the sprite image have been rearranged to include more icons in two 
       });
     ```
 
-* Initializing the editor from a `div` element triggers the [inline editing mode](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html). To revert to the old behavior, initialize it from a `<textarea>` element.
+* Initializing the editor from a `div` element triggers the [inline editing mode](https://demos.telerik.com/kendo-ui/web/editor/inline-editing.html). To revert to the old behavior, initialize it from a `<textarea>` element.
 
 **Mobile ListView**
 
@@ -151,6 +151,7 @@ Some ASP.NET MVC applications may be broken if using other libraries incompatibl
 
 ## See Also
 
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
 * [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
 * [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})

@@ -100,9 +100,11 @@ Whether to turn the widget on or off.
       var switchInstance = $("#switch").data("kendoMobileSwitch");
 
       // get the checked state of the switch.
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(switchInstance.check());
       // set the checked state of the switch.
       switchInstance.check(true);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(switchInstance.check());
     }
     </script>
@@ -208,7 +210,9 @@ Toggle the checked state of the widget.
 
 ### change
 
-Fires when the state of the widget changes
+Fires when the state of the widget changes.
+
+More information about the Kendo UI Application for mobile can be found in [`this article`](/controls/hybrid/application).
 
 #### Event Data
 
@@ -223,9 +227,11 @@ The checked state of the widget.
     </div>
 
     <script>
+    // the content of the document.body is used by default
     var app = new kendo.mobile.Application();
 
     function onChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.checked);//true of false
     }
     </script>

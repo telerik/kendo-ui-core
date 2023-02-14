@@ -1,183 +1,51 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Grid Overview | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to create, initialize, and enable the widget."
+page_title: jQuery Grid Documentation - Data Grid Overview
+description: "Try now the Kendo UI for jQuery Data Grid component covering everything from paging, sorting, filtering, editing, and grouping to exporting to PDF and Excel."
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget
-position: 1
+position: 0
 ---
 
-# Grid Overview
+# {{ site.product }} Grid Overview
 
-The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful control for displaying data in a tabular format.
+The Grid is a powerful control for displaying data in a tabular format.
 
-It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the Kendo UI DataSource component.
+It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
 
-## Advance Reading
-
-Because of the numerous functionalities it supports, the Grid is the most complex of the Kendo UI widgets. To gain greater confidence before you start working with it, make sure you get familiar with the following concepts:
-
-* [DataSource]({% slug overview_kendoui_datasourcecomponent %})&mdash;The DataSource is one of the pivotal Kendo UI components. It is an abstraction for using local or remote data and a key concept in understanding how the Grid functions.
-* [Remote CRUD operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}#remote-transport-crud-operations)&mdash;The section elaborates on scenarios, in which data is retrieved from and submitted to a remote data service through HTTP requests made by the Kendo UI DataSource.
-* [Remote data binding]({% slug remote_data_binding_grid %})&mdash;The article provides information on server filtering, paging, and other features of the Grid.
-* [Kendo UI editing functionality]({% slug kendoui_editing_gettingstarted %})&mdash;The editing functionality in some Kendo UI widgets, including the Grid, is implemented with a specific editor element or form that is bound to the model by using the [Kendo UI MVVM bindings]({% slug overview_mvvmpattern_kendoui %}).
-
-## Initializing the Grid
-
-To initialize the Grid, use either of the following approaches:
-
-* [Using an empty `<div>` element](#using-an-empty-div)
-* [Using an HTML table](#using-an-html-table)
-
-### Using an Empty div
-
-When you initialize the Grid from an empty `<div>` element, all Grid settings are provided in the initialization script statement. This means that you have to describe the layout and configuration of the Grid in JavaScript.
-
-###### Example
-
-    // Define the HTML div that will contain the Grid.
-    <div id="grid"></div>
-
-    // Initialize the Grid.
-    <script>
-
-        $(document).ready(function(){
-            $("#grid").kendoGrid({
-                columns: [{
-                    field: "FirstName",
-                    title: "First Name"
-                },
-                {
-                    field: "LastName",
-                    title: "Last Name"
-                }],
-                dataSource: {
-                    data: [{
-                        FirstName: "Joe",
-                        LastName: "Smith"
-                    },
-                    {
-                        FirstName: "Jane",
-                        LastName: "Smith"
-                    }]
-                }
-            });
-        });
-
-    </script>
-
-### Using an HTML Table
-
-When you initialize the Grid from an HTML table, some of its settings can be inferred from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table. The HTML table is usually already populated with data which improves the accessibility and search engine optimization, and ensures that the user will see data even if JavaScript is disabled or there is a JavaScript error on the page.
-
-When you initialize the Grid from an HTML table, the widget uses a Kendo UI DataSource instance. The content of the cell is extracted and populates the DataSource in the following way:
-
-1. The names of the data fields in the DataSource are either created from the content of the header cells or from the `data-field` attributes of the header cells.
-2. The names of the data fields have to be valid JavaScript identifiers. Therefore, it is recommended to use the `data-field` attributes. Otherwise the cell content of the header has to meet the following requirements:
-   * No spaces
-   * No special characters
-   * The first character has to be a letter
-
-If you create the Grid from an HTML table but the DataSource is configured to use transport and remote operations, a remote request is made for the initial Grid state even though the table might be already populated. This behavior is defined by design and cannot be avoided except when using the MVC wrapper of the Grid.
-
-When the Grid is created from an existing table, the Grid provides the following `column` settings that can be defined through the HTML attributes. Except for the width column styles, all attributes have to be applied to the `<th>` elements:
-* The `id` attributes define the id of the columns.
-* The `data-field` attributes define the names of the data fields.
-* The `width` styles when applied to the respective `<col>` elements set the width of the columns.
-* The `data-type` attributes define the data types.
-* The `data-template` attributes set the column templates.
-* The `data-menu` attributes enable or disable the column menu.
-* The `data-sortable` attributes enable or disable sorting.
-* The `data-filterable` attributes enable or disable filtering.
-* The `data-groupable` attributes enable or disable grouping.
-* The `data-index` attributes define a zero-based number indicator for the columns.
-
-> To associate the `aria-describedby` attribute of the cells to the corresponding column header in a navigable Kendo UI Grid, define the `id` and `data-index` attributes for each `<th>` element.
-
-It is not possible to define other column-related settings through HTML attributes in the `<table>`. If you have to use settings, such as commands, locking, editors, custom rows, cell CSS classes, and others, skip the above attribute configuration and include all settings in the JavaScript initialization statement of the Grid. Note that you have to set the column properties through the `data-columns` attribute when using the declarative widget initialization.
-
-As the previous and the following examples demonstrate, the client object of the Grid is attached to a `<div>` in the first case and to a `<table>` in the second case. However, the generated HTML output of the Grid entirely depends on the settings of the widget and it will always be the same regardless of the way the widget is initialized. For the complete example, refer to the [demo on initializing the Grid from an HTML table](https://demos.telerik.com/kendo-ui/grid/from-table).
-
-###### Example
-
-    // Define the HTML table with rows, columns, and data.
-    <table id="grid">
-        <colgroup>
-            <col />
-            <col style="width:100px" />
-        </colgroup>
-        <thead>
-            <tr>
-                <th data-field="title" data-filterable="false">Title</th>
-                <th data-field="year" data-type="number" data-template="<strong>#=year#</strong>">Year</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Star Wars: A New Hope</td>
-                <td>1977</td>
-            </tr>
-            <tr>
-                <td>Star Wars: The Empire Strikes Back</td>
-                <td>1980</td>
-            </tr>
-        </tbody>
-    </table>
-
-    // Initialize the Grid.
-    <script>
-
-        $(document).ready(function(){
-          $("#grid").kendoGrid({
-            sortable: true,
-            filterable: true
-          });
-        });
-
-    </script>
-
-## Referencing Existing Instances
-
-To refer to an existing Grid instance:
-
-1. Use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.
-1. Once a reference is established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
-
-###### Example
-
-    var grid = $("#grid").data("kendoGrid");
+![Kendo UI for jQuery Grid Overview](grid-overview.png)
 
 ## Functionality and Features
 
-* Data operations
-    * [Data binding]({% slug data_binding_grid %})
-    * [Editing]({% slug editing_kendoui_grid_widget %})
-    * [Filtering]({% slug filtering_kendoui_grid_widget %})
-    * [Grouping]({% slug grouping_kendoui_grid_widget %})
-    * [Paging]({% slug paging_kendoui_grid_widget %})
-    * [Sorting]({% slug sorting_kendoui_grid_widget %})
-* Export options
-    * [Excel]({% slug exporting_excel_kendoui_grid_widget %})
-    * [PDF]({% slug exporting_pdf_kendoui_grid_widget %})
-    * [Printing]({% slug printing_kendoui_grid %})
-* Advanced implementations
-    * [Column enhancements]({% slug column_widths_kendoui_grid_widget %})
-    * [State persistence]({% slug persiststate_kendoui_grid_widget %})
-    * [Hierarchy]({% slug hierarchy_kendoui_grid_widget %})
-    * [Templates]({% slug row_templates_kendoui_grid_widget %})
-* More settings
-    * [Scroll modes]({% slug scrolling_kendoui_grid_widget %})
-    * [Selection]({% slug selection_kendoui_grid_widget %})
-    * [Rendering and dimensions]({% slug width_kendoui_grid_widget %})
-    * [Performance tips]({% slug performance_kendoui_grid_widget %})
-    * [Globalization]({% slug globalization_kendoui_grid_widget %})
-    * [Accessibility]({% slug accessibility_kendoui_grid_widget %})
+|Feature|Definition
+|:---   |:---
+|[Data binding]({% slug data_binding_grid %}) | By default, the Grid automatically binds to data through the DataSource component. However, you can disable this behavior and bind the control to [local arrays of data]({% slug local_data_grid %}) and to [remote data]({% slug remote_data_binding_grid %}) of your choice. 
+|[Editing]({% slug editing_kendoui_grid_widget %}) | The Grid supports various types of editing scenarios such as [creating and saving batch updates]({% slug batchediting_grid %}), [editing data inline on row click]({% slug inlineediting_grid %}), or [in a popup]({% slug popupediting_grid %}), and also enables you to [implement custom column editors and specify your own validation rules]({% slug customediting_grid %}).   
+|[Filtering]({% slug filtering_kendoui_grid_widget %}) | You can control the filtering functionality of the Grid and implement header row, checkbox, and custom menu filtering.
+|[Grouping]({% slug grouping_kendoui_grid_widget %}) | The Grid enables you to group its data by using row templates and while paging is enabled. Additionally, you can [load groups on demand and page through the groups at the same time]({% slug grouppaging_kendoui_grid_widget %}) and [display aggregated number results]({% slug aggregates_kendoui_grid_widget %}).
+|[Paging]({% slug paging_kendoui_grid_widget %}) | You can paginate your Grid data as required and optimize the performance of the control by applying the paging operations on the server.
+|[Sorting]({% slug sorting_kendoui_grid_widget %}) | The Grid allows you to cover a set of sorting approaches by providing the single-, multi-, and mixed-sort modes. 
+|Export options | The Grid enables you to export it to [Excel]({% slug exporting_excel_kendoui_grid_widget %}) and [PDF]({% slug exporting_pdf_kendoui_grid_widget %}) documents, and also delivers options to [print only its contents]({% slug printing_kendoui_grid %}) and ignore the rest of the page.
+|[Column enhancements]({% slug column_widths_kendoui_grid_widget %}) | The Grid provides various options to control its column behavior by delivering features such as [locked]({% slug locked_columns_kendoui_grid_widget %}) and [sticky columns]({% slug sticky_columns_kendoui_grid_widget %}), [built-in column operations]({% slug columnmenu_kendoui_grid_widget %}), [multi-column headers]({% slug multicolumn_headers_kendoui_grid_widget %}) as well as supporting [column resizing]({% slug column_resizing_kendoui_grid_widget %}) and [column reordering]({% slug reordercols_kendoui_grid_widget %}) actions.  
+|[State persistence]({% slug persiststate_kendoui_grid_widget %}) | You persist the state of the Grid if saving custom user settings and restoring them afterwards is required.
+|[Hierarchy]({% slug hierarchy_kendoui_grid_widget %}) | The Grid also enables you to visualize the relations between parent and child records and display the table data in a hierarchical fashion.
+|Templates | You can use the available Grid options for implementing [row]({% slug row_templates_kendoui_grid_widget %}), [column]({% slug column_templates_kendoui_grid_widget %}), ad [group templates]({% slug group_templates_kendoui_grid_widget %}).
+|[Scroll modes]({% slug scrolling_kendoui_grid_widget %}) | The scrolling feature of the Grid includes the [endless scroll mode]({% slug endless_scrolling_kendoui_grid_widget %}) and [virtual scrolling optimization]({% slug virtual_scrolling_kendoui_grid_widget %}). 
+|[Selection]({% slug selection_kendoui_grid_widget %}) | The Grid is highly flexible on selection as it provides a number of selection modes such as the checkbox-column, single-row, multi-row, single-cell, and multi-cell selection mechanisms. 
+|Rendering and styling | You can take full advantage of the appearance control options the Grid provides, which include [adaptive rendering]({% slug adaptive_rendering_kendoui_grid_widget %}), [initializing the Grid in hidden containers]({% slug hidden_containers_kendoui_grid_widget %}), [styling its rows]({% slug rows_kendoui_grid_widget %}), and [setting its height]({% slug height_kendoui_grid_widget %}) and [width]({% slug width_kendoui_grid_widget %}).
+|[Globalization]({% slug globalization_kendoui_grid_widget %}) | The Grid supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_kendoui_grid_widget %}) need to be supported. Additionally, the Grid supports [rendering in a right-to-left (RTL) direction]({% slug rtl_kendoui_grid_widget %}).
+|[Accessibility]({% slug accessibility_kendoui_grid_widget %}) | The Grid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_grid_widget %}).
 
-For more information on implementing specific scenarios, refer to the [**Knowledge Base** section](https://docs.telerik.com/kendo-ui/knowledge-base).
+## Next Steps 
+
+* [Getting Started with the Kendo UI Grid for jQuery]({% slug getting_started_kendoui_grid_widget %})
+* [Basic Usage of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 
 ## See Also
 
-* [Basic Usage of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
-* [Initializing the Grid from HTML Tables (Demo)](https://demos.telerik.com/kendo-ui/grid/from-table)
-* [Knowledge Base Section](/knowledge-base)
+* [Initializing the Grid from an HTML Table (Guide)]({% slug html_table_kendoui_grid_widget %})
+* [Initializing the Grid from an HTML Table (Demo)](https://demos.telerik.com/kendo-ui/grid/from-table)
+* [Demo Page for the jQuery Data Grid](https://demos.telerik.com/kendo-ui/grid/index)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [Knowledge Base Section](/knowledge-base)

@@ -1,5 +1,6 @@
-(function ($, undefined) {
-/* Filter menu operator messages */
+(function($, undefined) {
+
+/* Filter menu operator messages  */
 
 if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.operators =
@@ -199,6 +200,28 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Нет записей доступны.",
+    "loading": "Loading...",
+    "requestFailed": "Request failed.",
+    "retry": "Retry",
+    "commands": {
+        "edit": "Изменить",
+        "update": "Обновить",
+        "canceledit": "Отмена",
+        "create": "Добавить",
+        "createchild": "Добавить ребенка",
+        "destroy": "Удалить",
+        "excel": "Экспорт в Excel",
+        "pdf": "Экспорт в PDF"
+    }
+});
+}
+
 /* TreeListPager messages */
 
 if (kendo.ui.TreeListPager) {
@@ -295,7 +318,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "justifyRight": "Вправо",
   "outdent": "Уменьшить отступ",
   "strikethrough": "Зачеркнутый",
-  "styles": "Стиль",
+  "style": "Стиль",
   "subscript": "Под строкой",
   "superscript": "Над строкой",
   "underline": "Подчеркнутый",
@@ -509,6 +532,432 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
     "endswith": "Заканчивается на",
     "eq": "Равно",
     "neq": "Не равно"
+  }
+});
+}
+
+/* Gantt */
+
+if (kendo.ui.Gantt) {
+kendo.ui.Gantt.prototype.options.messages =
+$.extend(true, kendo.ui.Gantt.prototype.options.messages, {
+  "actions": {
+    "addChild": "Добавить подзадачу",
+    "append": "Добавить задачу",
+    "insertAfter": "Добавить после",
+    "insertBefore": "Добавить до",
+    "pdf": "Экспорт в PDF"
+  },
+  "cancel": "Отмена",
+  "deleteDependencyWindowTitle": "Удалить зависимость",
+  "deleteTaskWindowTitle": "Удалить задачу",
+  "destroy": "Удалить",
+  "editor": {
+    "assingButton": "Задать",
+    "editorTitle": "Задача",
+    "end": "Окончание",
+    "percentComplete": "Завершено",
+    "resources": "Ресурсы",
+    "resourcesEditorTitle": "Ресурсы",
+    "resourcesHeader": "Ресурсы",
+    "start": "Начало",
+    "title": "Название",
+    "unitsHeader": "Единицы"
+  },
+  "save": "Сохранить",
+  "views": {
+    "day": "День",
+    "end": "Окончание",
+    "month": "Месяц",
+    "start": "Начало",
+    "week": "Неделя",
+    "year": "Год"
+  }
+});
+}
+
+/* Filter messages */
+
+if (kendo.ui.Filter) {
+  kendo.ui.Filter.prototype.options.messages = $.extend(
+  true,
+    kendo.ui.Filter.prototype.options.messages,
+      {
+        and: "И",
+        or: "Или",
+        apply: "Применить"
+      }
+  );
+}
+
+if (kendo.ui.Filter) {
+kendo.ui.Filter.prototype.options.operators = $.extend(
+true,
+kendo.ui.Filter.prototype.options.operators,
+{
+  date: {
+    eq: "равна",
+    gte: "после или равна",
+    gt: "после",
+    lte: "до или равна",
+    lt: "до",
+    neq: "не равна"
+  },
+  number: {
+    eq: "равно",
+    gte: "больше или равно",
+    gt: "больше",
+    lte: "меньше или равно",
+    lt: "меньше",
+    neq: "не равно"
+  },
+  string: {
+    endswith: "оканчивается на",
+    eq: "равно",
+    neq: "не равно",
+    startswith: "начинающимися на",
+    contains: "содержащими",
+    doesnotcontain: "не содержит"
+  },
+  enums: {
+    eq: "равно",
+    neq: "не равно"
+  }
+}
+);
+}
+
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette,{
+  "allBorders": "Все границы",
+  "insideBorders": "Внутри границ",
+  "insideHorizontalBorders": "Внутри горизонтальных границ",
+  "insideVerticalBorders": "Внутри вертикальных границ",
+  "outsideBorders": "За пределами границ",
+  "leftBorder": "Левая граница",
+  "topBorder": "Верхняя граница",
+  "rightBorder": "Правая граница",
+  "bottomBorder": "Нижняя граница",
+  "noBorders": "Без границ",
+  "reset": "Сбросить цвет",
+  "customColor": "Пользовательский цвет ...",
+  "apply": "Применять",
+  "cancel": "Отмена"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs,{
+  "apply": "Применять",
+  "save": "Сохранять",
+  "cancel": "Отмена",
+  "remove": "Удалять",
+  "retry": "Повторить",
+  "revert": "Возвращаться",
+  "okText": "В ПОРЯДКЕ",
+  "formatCellsDialog": {
+    "title": "Формат",
+    "categories": {
+      "number": "Число",
+      "currency": "Валюта",
+      "date": "Дата"
+    }
+  },
+  "fontFamilyDialog": {
+    "title": "Шрифт"
+  },
+  "fontSizeDialog": {
+    "title": "Размер шрифта"
+  },
+  "bordersDialog": {
+    "title": "Границы"
+  },
+  "alignmentDialog": {
+    "title": "Выравнивание",
+    "buttons": {
+      "justifyLeft": "Выровнять по левому краю",
+      "justifyCenter": "Центр",
+      "justifyRight": "Выровнять по правому краю",
+      "justifyFull": "Оправдывать",
+      "alignTop": "Выровнять по верху",
+      "alignMiddle": "Выровнять по центру",
+      "alignBottom": "Выровнять по низу"
+    }
+  },
+  "mergeDialog": {
+    "title": "Объединить ячейки",
+    "buttons": {
+      "mergeCells": "Слить все",
+      "mergeHorizontally": "Слить по горизонтали",
+      "mergeVertically": "Слить по вертикали",
+      "unmerge": "Разъединить"
+    }
+  },
+  "freezeDialog": {
+    "title": "Замерзшие оконные стекла",
+    "buttons": {
+      "freezePanes": "Замерзшие оконные стекла",
+      "freezeRows": "Закрепить строки",
+      "freezeColumns": "Закрепить столбцы",
+      "unfreeze": "Разморозить стекла"
+    }
+  },
+  "confirmationDialog": {
+    "text": "Вы уверены, что хотите удалить этот лист?",
+    "title": "Удаление листа"
+  },
+  "validationDialog": {
+    "title": "Проверка достоверности данных",
+    "hintMessage": "Введите допустимое {0} значение {1}.",
+    "hintTitle": "Проверка {0}",
+    "criteria": {
+      "any": "Любое значение",
+      "number": "Число",
+      "text": "Текст",
+      "date": "Дата",
+      "custom": "Пользовательская формула",
+      "list": "Список"
+    },
+    "comparers": {
+      "greaterThan": "лучше чем",
+      "lessThan": "меньше, чем",
+      "between": "между",
+      "notBetween": "не между",
+      "equalTo": "равно",
+      "notEqualTo": "не равно",
+      "greaterThanOrEqualTo": "больше или равно",
+      "lessThanOrEqualTo": "меньше или равно"
+    },
+    "comparerMessages": {
+      "greaterThan": "больше чем {0}",
+      "lessThan": "меньше чем {0}",
+      "between": "между {0} и {1}",
+      "notBetween": "не между {0} и {1}",
+      "equalTo": "равно {0}",
+      "notEqualTo": "не равно {0}",
+      "greaterThanOrEqualTo": "больше или равно {0}",
+      "lessThanOrEqualTo": "меньше или равно {0}",
+      "custom": "удовлетворяющий формуле: {0}"
+    },
+    "labels": {
+      "criteria": "Критерии",
+      "comparer": "Сравнить",
+      "min": "Мин.",
+      "max": "Максимум",
+      "value": "Ценность",
+      "start": "Начинать",
+      "end": "Конец",
+      "onInvalidData": "О неверных данных",
+      "rejectInput": "Отклонить ввод",
+      "showWarning": "Показать предупреждение",
+      "showHint": "Показать подсказку",
+      "hintTitle": "Подсказка заголовка",
+      "hintMessage": "Подсказка",
+      "ignoreBlank": "Игнорировать пустое поле"
+    },
+    "placeholders": {
+      "typeTitle": "Тип заголовка",
+      "typeMessage": "Введите сообщение"
+    }
+  },
+  "exportAsDialog": {
+    "title": "Экспорт ...",
+    "labels": {
+      "fileName": "Имя файла",
+      "saveAsType": "Сохранить как тип",
+      "exportArea": "Экспорт",
+      "paperSize": "Размер бумаги",
+      "margins": "Маржа",
+      "orientation": "Ориентация",
+      "print": "Распечатать",
+      "guidelines": "Методические рекомендации",
+      "center": "Центр",
+      "horizontally": "По горизонтали",
+      "vertically": "Вертикально"
+    }
+  },
+  "modifyMergedDialog": {
+    "errorMessage": "Невозможно изменить часть объединенной ячейки."
+  },
+  "useKeyboardDialog": {
+    "title": "Копирование и вставка",
+    "errorMessage": "Эти действия нельзя вызвать через меню. Вместо этого используйте сочетания клавиш:",
+    "labels": {
+      "forCopy": "для копирования",
+      "forCut": "для резки",
+      "forPaste": "для пасты"
+    }
+  },
+  "unsupportedSelectionDialog": {
+    "errorMessage": "Это действие нельзя выполнить при множественном выборе."
+  },
+  "insertCommentDialog": {
+    "title": "Вставить комментарий",
+    "labels": {
+      "comment": "Комментарий",
+      "removeComment": "Удалить комментарий"
+    }
+  },
+  "insertImageDialog": {
+    "title": "Вставить изображение",
+    "info": "Перетащите изображение сюда или щелкните, чтобы выбрать",
+    "typeError": "Выберите изображение в формате JPEG, PNG или GIF."
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "Сортировать по диапазону от А до Я",
+  "sortDescending": "Диапазон сортировки от Я до А",
+  "filterByValue": "Фильтр по значению",
+  "filterByCondition": "Фильтр по условию",
+  "apply": "Применять",
+  "search": "Поиск",
+  "addToCurrent": "Добавить к текущему выбору",
+  "clear": "Прозрачный",
+  "blanks": "(Пробелы)",
+  "operatorNone": "Никто",
+  "and": "И",
+  "or": "ИЛИ",
+  "operators": {
+    "string": {
+      "contains": "Текст содержит",
+      "doesnotcontain": "Текст не содержит",
+      "startswith": "Текст начинается с",
+      "endswith": "Текст заканчивается на"
+    },
+    "date": {
+      "eq": "Дата",
+      "neq": "Дата не",
+      "lt": "Дата раньше",
+      "gt": "Дата после"
+    },
+    "number": {
+      "eq": "Равно",
+      "neq": "Не равно",
+      "gte": "Больше или равно",
+      "gt": "Больше, чем",
+      "lte": "Меньше или равно",
+      "lt": "Меньше чем"
+    }
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
+kendo.spreadsheet.messages.colorPicker =
+$.extend(true, kendo.spreadsheet.messages.colorPicker,{
+  "reset": "Сбросить цвет",
+  "customColor": "Пользовательский цвет ...",
+  "apply": "Применять",
+  "cancel": "Отмена"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar,{
+  "addColumnLeft": "Добавить столбец слева",
+  "addColumnRight": "Добавить столбец справа",
+  "addRowAbove": "Добавить строку выше",
+  "addRowBelow": "Добавить строку ниже",
+  "alignment": "Выравнивание",
+  "alignmentButtons": {
+    "justifyLeft": "Выровнять по левому краю",
+    "justifyCenter": "Центр",
+    "justifyRight": "Выровнять по правому краю",
+    "justifyFull": "Оправдывать",
+    "alignTop": "Выровнять по верху",
+    "alignMiddle": "Выровнять по центру",
+    "alignBottom": "Выровнять по низу"
+  },
+  "backgroundColor": "Задний план",
+  "bold": "Смелый",
+  "borders": "Границы",
+  "colorPicker": {
+    "reset": "Сбросить цвет",
+    "customColor": "Пользовательский цвет ..."
+  },
+  "copy": "Копировать",
+  "cut": "Резать",
+  "deleteColumn": "Удалить столбец",
+  "deleteRow": "Удалить строку",
+  "excelImport": "Импорт из Excel ...",
+  "filter": "Фильтр",
+  "fontFamily": "Шрифт",
+  "fontSize": "Размер шрифта",
+  "format": "Пользовательский формат ...",
+  "formatTypes": {
+    "automatic": "Автоматическая",
+    "number": "Число",
+    "percent": "Процентов",
+    "financial": "Финансовый",
+    "currency": "Валюта",
+    "date": "Дата",
+    "time": "Время",
+    "dateTime": "Дата время",
+    "duration": "Продолжительность",
+    "moreFormats": "Еще форматы ..."
+  },
+  "formatDecreaseDecimal": "Уменьшить десятичный",
+  "formatIncreaseDecimal": "Увеличить десятичную дробь",
+  "freeze": "Замерзшие оконные стекла",
+  "freezeButtons": {
+    "freezePanes": "Замерзшие оконные стекла",
+    "freezeRows": "Закрепить строки",
+    "freezeColumns": "Закрепить столбцы",
+    "unfreeze": "Разморозить стекла"
+  },
+  "insertComment": "Вставить комментарий",
+  "insertImage": "Вставить изображение",
+  "italic": "Курсив",
+  "merge": "Объединить ячейки",
+  "mergeButtons": {
+    "mergeCells": "Слить все",
+    "mergeHorizontally": "Слить по горизонтали",
+    "mergeVertically": "Слить по вертикали",
+    "unmerge": "Разъединить"
+  },
+  "open": "Открытым...",
+  "paste": "Вставить",
+  "quickAccess": {
+    "redo": "Повторить",
+    "undo": "Отменить"
+  },
+  "saveAs": "Сохранить как...",
+  "sortAsc": "Сортировать по возрастанию",
+  "sortDesc": "Сортировать по убыванию",
+  "sortButtons": {
+    "sortSheetAsc": "Сортировать лист от А до Я",
+    "sortSheetDesc": "Сортировать лист от Я до А",
+    "sortRangeAsc": "Сортировать по диапазону от А до Я",
+    "sortRangeDesc": "Диапазон сортировки от Я до А"
+  },
+  "textColor": "Цвет текста",
+  "textWrap": "Перенести текст",
+  "underline": "Подчеркивание",
+  "validation": "Проверка достоверности данных..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view,{
+  "errors": {
+    "shiftingNonblankCells": "Не удается вставить ячейки из-за возможности потери данных. Выберите другое место для вставки или удалите данные с конца рабочего листа.",
+    "filterRangeContainingMerges": "Невозможно создать фильтр в диапазоне, содержащем слияния",
+    "validationError": "Введенное вами значение нарушает правила проверки, установленные для ячейки."
+  },
+  "tabs": {
+    "home": "Домой",
+    "insert": "Вставлять",
+    "data": "Данные"
   }
 });
 }

@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Eastern Caribbean Dollar",
+                name: "East Caribbean Dollar",
                 abbr: "XCD",
                 pattern: ["-n $","n $"],
                 decimals: 2,
@@ -59,5 +59,5 @@
                 firstDay: 1
             }
         }
-    }
-})(this);
+    };
+})();

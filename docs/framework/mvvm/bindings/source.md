@@ -1,13 +1,13 @@
 ---
 title: Source
-page_title: Source Binding | Kendo UI MVVM
+page_title: Source Binding - Kendo UI MVVM
 description: "Learn how to use source binding in Kendo UI MVVM to set the HTML5 content of the target element by rendering a Kendo UI template with a View-Model value."
 slug: sourceblebinding_mvvm_kendoui
 ---
 
 # Source Binding
 
-The [Kendo UI Source (`source`) binding](http://demos.telerik.com/kendo-ui/mvvm/source) sets the HTML content of the target element by rendering a Kendo UI template with a View-Model value.
+The [Kendo UI Source (`source`) binding](https://demos.telerik.com/kendo-ui/mvvm/source) sets the HTML content of the target element by rendering a Kendo UI template with a View-Model value.
 
 If the View-Model value changes, the HTML content of the target element is updated.
 

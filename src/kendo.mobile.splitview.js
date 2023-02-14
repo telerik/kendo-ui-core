@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.mobile.pane" ], f);
-})(function(){
+import "./kendo.mobile.pane.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.splitview",
     name: "SplitView",
     category: "mobile",
@@ -14,7 +12,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
-        EXPANED_PANE_SHIM = "<div class='km-expanded-pane-shim' />",
+        EXPANED_PANE_SHIM = "<div class='km-expanded-pane-shim'></div>",
         View = ui.View;
 
     var SplitView = View.extend({
@@ -106,14 +104,14 @@ var __meta__ = { // jshint ignore:line
             that.content.addClass("km-split-content");
         },
 
-        _style: function () {
+        _style: function() {
             var style = this.options.style,
                 element = this.element,
                 styles;
 
             if (style) {
                 styles = style.split(" ");
-                $.each(styles, function () {
+                $.each(styles, function() {
                     element.addClass("km-split-" + this);
                 });
             }
@@ -132,18 +130,15 @@ var __meta__ = { // jshint ignore:line
                         this.navigate("");
                     }
                 });
-                that.trigger("init", {view: that});
+                that.trigger("init", { view: that });
             } else {
                 this._invokeNgController();
             }
 
-            that.trigger("show", {view: that});
+            that.trigger("show", { view: that });
         }
     });
 
     ui.plugin(SplitView);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

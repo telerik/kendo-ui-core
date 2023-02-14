@@ -1,6 +1,6 @@
 ---
 title: Hybrid UI Integration
-page_title: Hybrid UI Integration | Kendo UI Hybrid Components
+page_title: Hybrid UI Integration | AngularJS Directives
 description: "Use the AngularJS directives with hybrid mobile Kendo UI components."
 previous_url: /controls/hybrid/angular/angular, /controls/hybrid/support/angular/angular, /AngularJS/angular-hybrid
 slug: angularjssupport_hybridkendoui
@@ -47,7 +47,7 @@ event.
 
 ## Widgets
 
-All directives may be used as elements or as attributes. If a directive is used as an element name, it is replaced with a standard HTML element once the directive is compiled. Each mobile widget features AngularJS on the [Kendo UI demos website](http://demos.telerik.com/kendo-ui/).
+All directives may be used as elements or as attributes. If a directive is used as an element name, it is replaced with a standard HTML element once the directive is compiled. Each mobile widget features AngularJS on the [Kendo UI demos website](https://demos.telerik.com/kendo-ui/).
 
 * ActionSheet&mdash;The widget is instantiated from the `kendo-mobile-action-sheet` directive. The item actions are assigned with the `k-action` attribute and are resolved from the widget scope.
 * Button&mdash;The widget is instantiated from the `kendo-mobile-button` directive.
@@ -79,4 +79,4 @@ To configure the hybrid widgets, you can use the `k-` prefixed attributes. For m
 * [Integration with Kendo UI for the Web]({% slug integrationkendouiweb_hybridkendoui %})
 * [MVVM Integration]({% slug mvvmintegration_hybridkendoui %})
 * [Build Applications with AngularJS and the Hybrid UI]({% slug buildappswithangular_tutorial_hybridkendoui %})
-* [Angular 2 Migration Guide](http://ngmigrate.telerik.com/)
+* [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)

@@ -1,15 +1,15 @@
-(function () {
+(function() {
 
 var ComboBox = kendo.ui.ComboBox;
-var data = [{text: "Foo", value: 1}, {text:"Bar", value:2}];
+var data = [{ text: "Foo", value: 1 }, { text: "Bar", value: 2 }];
 var CLICK = kendo.support.touch ? "touchend" : "click";
-var SELECTED = "k-state-selected";
-var FOCUSED = "k-state-focused";
+var SELECTED = "k-selected";
+var FOCUSED = "k-focus";
 var keys = kendo.keys;
 var combobox;
 var input;
 
-describe("kendo.ui.ComboBox selection", function () {
+describe("kendo.ui.ComboBox selection", function() {
     beforeEach(function() {
 
 
@@ -35,7 +35,7 @@ function create(options) {
 
 var getData = function(length) {
     var result = [];
-    for(var idx=0; idx < length; idx++) {
+    for (var idx = 0; idx < length; idx++) {
         result.push("item" + idx);
     }
     return result;
@@ -43,21 +43,39 @@ var getData = function(length) {
 
 it("pressing alt + down should open popup", function() {
     create();
-    combobox.popup.bind("open", function(){
+    combobox.popup.bind("open", function() {
         assert.isOk(true);
     });
 
-    combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.DOWN});
+    combobox.input.trigger({ type: "keydown", altKey: true, keyCode: kendo.keys.DOWN });
 });
 
 it("pressing alt + up should close popup", function() {
     create();
-    combobox.popup.bind("close", function(){
+    combobox.popup.bind("close", function() {
         assert.isOk(true);
     });
     combobox.open();
 
-    combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
+    combobox.input.trigger({ type: "keydown", altKey: true, keyCode: kendo.keys.UP });
+});
+
+it("pressing Capse lock should not open popup", function(done) {
+    create({
+        filter: "contains",
+        delay: 0
+    });
+    combobox.popup.bind("open", function() {
+        assert.isOk(false);
+        done();
+    });
+
+    combobox.input.trigger({ type: "keydown", altKey: true, keyCode: 20 });
+
+    setTimeout(function() {
+        assert.isOk(true);
+        done();
+    }, 0);
 });
 
 it("_arrow click should focus the input", function() {
@@ -72,7 +90,7 @@ it("select item depending on the options.index", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
-        dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
+        dataSource: [{ text: "foo", value: 1 }, { text: 2, value: 2 }],
         index: 1
     });
 
@@ -109,7 +127,7 @@ it("click li should remove readonly css", function() {
 });
 
 it("value should be set to item.text if no item.value", function() {
-    var localData = [{text: "Foo", value: 1}, {text:"Bar"}];
+    var localData = [{ text: "Foo", value: 1 }, { text: "Bar" }];
 
     combobox = new ComboBox(input, {
         dataTextField: "text",
@@ -133,7 +151,7 @@ it("select li should update text and value", function() {
 
 it("click li should close popup", function() {
     create();
-    combobox.popup.bind("close", function(){
+    combobox.popup.bind("close", function() {
         assert.isOk(true);
     });
 
@@ -149,7 +167,7 @@ it("select should select li by index", function() {
     assert.equal(combobox.value(), data[1].value);
 });
 
-it("selected should be persisted", function(){
+it("selected should be persisted", function() {
     create();
     combobox.select(1);
 
@@ -158,7 +176,7 @@ it("selected should be persisted", function(){
     assert.isOk(combobox.ul.children().eq(1).hasClass(SELECTED));
 });
 
-it("only one li should be selected at a time", function(){
+it("only one li should be selected at a time", function() {
     create();
     combobox.select(1);
     combobox.select(0);
@@ -225,7 +243,7 @@ it("press down selects only LI which is focused", function() {
 
 it("press enter should close popup when no change in selection", function() {
     create();
-    combobox.popup.bind("close", function(){
+    combobox.popup.bind("close", function() {
         assert.isOk(true);
     });
 
@@ -237,7 +255,7 @@ it("press enter should close popup when no change in selection", function() {
 
 it("press Tab should close popup when no change in selection", function() {
     create();
-    combobox.popup.bind("close", function(){
+    combobox.popup.bind("close", function() {
         assert.isOk(true);
     });
 
@@ -307,7 +325,7 @@ it("press enter accepts user value before the filtration has been completed", fu
 
 it("press esc should close popup when no change in selection", function() {
     create();
-    combobox.popup.bind("close", function(){
+    combobox.popup.bind("close", function() {
         assert.isOk(true);
     });
 
@@ -323,7 +341,7 @@ it("pressing enter selects an item", function() {
         dataValueField: "value",
         dataSource: data,
         change: function() {
-            assert.isOk(combobox.current().hasClass("k-state-selected"));
+            assert.isOk(combobox.current().hasClass("k-selected"));
         }
     });
 
@@ -339,7 +357,7 @@ it("pressing Tab selects an item", function() {
         dataValueField: "value",
         dataSource: data,
         change: function() {
-            assert.isOk(combobox.current().hasClass("k-state-selected"));
+            assert.isOk(combobox.current().hasClass("k-selected"));
         }
     });
 
@@ -602,7 +620,7 @@ it("Selects first item if it is focused but not selected", function() {
     var current = combobox.current();
 
     assert.equal(current.index(), 0);
-    assert.isOk(current.hasClass("k-state-selected"));
+    assert.isOk(current.hasClass("k-selected"));
 });
 
 it("ComboBox scrolls content down", function() {

@@ -1,6 +1,6 @@
 ---
 title: Part 3 - Hello HTML5
-page_title: Part 3 - Hello HTML5 | Kendo UI Third-Party Frameworks
+page_title: Part 3 - Hello HTML5 - Kendo UI Third-Party Frameworks
 description: "Learn in theory and in practice how to implement HTML5 in Visual Studio and build an HTML application in ASP.NET."
 previous_url: /third-party/tutorials/webforms/asp-net-hello-html5
 slug: part3_aspnetwebforms_tutorials
@@ -39,11 +39,11 @@ The new `<canvas>` tag creates an area on the page that can be drawn to with Jav
 
 ### CSS
 
-[CSS3](http://www.css3.info/) is the new standard for Cascading Style Sheets that has vastly expanded to including new layouts (such as the box), animations and transitions that are hardware accelerated (yes, you can move things around the page with CSS) and support for new color standards, such as [RGBA](http://www.css3.info/preview/rgba/) and [HSL](http://en.wikipedia.org/wiki/HSL_and_HSV).
+[CSS3](http://www.css3.info/) is the new standard for Cascading Style Sheets that has vastly expanded to including new layouts (such as the box), animations and transitions that are hardware accelerated (yes, you can move things around the page with CSS) and support for new color standards, such as [RGBA](http://www.css3.info/preview/rgba/) and [HSL](https://en.wikipedia.org/wiki/HSL_and_HSV).
 
 ### JavaScript API
 
-The JavaScript Application Programming Interface (API) is one of the most important pieces of HTML5. JavaScript has gained massive popularity, largely in conjunction with the amazing success of jQuery. New APIs include [GeoLocation](http://en.wikipedia.org/wiki/Geolocation), [Device Orientation](http://dev.w3.org/geo/api/spec-source-orientation.html), [FileAPI](http://www.w3.org/TR/FileAPI/), [HistoryAPI](https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history) and many others.
+The JavaScript Application Programming Interface (API) is one of the most important pieces of HTML5. JavaScript has gained massive popularity, largely in conjunction with the amazing success of jQuery. New APIs include [GeoLocation](https://en.wikipedia.org/wiki/Geolocation), [Device Orientation](http://dev.w3.org/geo/api/spec-source-orientation.html), [FileAPI](https://www.w3.org/TR/FileAPI/), [HistoryAPI](https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history) and many others.
 
 ### Browser Support
 
@@ -61,7 +61,7 @@ Open Visual Studio. Create a blank ASP.NET Web Application called **hello-html5*
 
 **Figure 1: A new Web Form**
 
-![New Web Form](../../../images/webforms/hello-html5-new-web-form.png)
+![Kendo UI for jQuery New Web Form](../../images/webforms/hello-html5-new-web-form.png)
 
 When the `Default.aspx` file is added, it opens in the designer. If it does not, open the file. Make sure you are viewing the HTML source of the Web Form and not the code behind.
 
@@ -73,7 +73,7 @@ The new HTML5 DOCTYPE is very simple and replaces much of the unnecessary verbos
 
 The example below demonstrates how to add the  new HTML5 DOCTYPE to your page by using a line of code where the previous DOCTYPE declaration is removed.
 
-###### Example
+
 
     <!doctype html>
 
@@ -85,9 +85,9 @@ The figures below demonstrate how to remove excess attributes.
 
 **Figure 2: Removing the unnecessary xmlns attribute**
 
-![xmlns](../../../images/webforms/hello-html5-xmlns.png)
+![Kendo UI for jQuery xmlns](../../images/webforms/hello-html5-xmlns.png)
 
-![No XMLNS](../../../images/webforms/hello-html5-no-xmlns.png)
+![Kendo UI for jQuery No XMLNS](../../images/webforms/hello-html5-no-xmlns.png)
 
 Some of HTML5 involves simplifying the web development experience and removing all of the unnecessary and confusing configuration attributes.
 
@@ -97,13 +97,13 @@ Inside the `form` tag, add some new HTML5 semantic tags to the page to demonstra
 
 **Figure 3: Adding of the semantic tags**
 
-![Semantic Tags](../../../images/webforms/hello-html5-semantic-tags.png)
+![Kendo UI for jQuery Semantic Tags](../../images/webforms/hello-html5-semantic-tags.png)
 
 Note that Visual Studio IntelliSense recognizes these as valid tags. Ensure that the schema validation selection is set to `HTML5`.
 
 **Figure 4: The validation of the HTML5 Schema**
 
-![HTML5 Schema Validation](../../../images/webforms/hello-html5-html5-schema-validation.png)
+![Kendo UI for jQuery HTML5 Schema Validation](../../images/webforms/hello-html5-html5-schema-validation.png)
 
 If **HTML5** is not available in the select box, ensure that you are running at least Visual Studio 2008 SP 1. If you cannot run at least Visual Studio 2008 SP1, you can get support for HTML5 schema validation in Visual Studio by downloading these packages:
 
@@ -115,7 +115,7 @@ Add some filler text to the article section. You can use a Lorem Ipsum generator
 
 **Figure 6: Adding a text**
 
-![Lorem Ipsum](../../../images/webforms/hello-html5-lorem-ipsum.png)
+![Kendo UI for jQuery Lorem Ipsum](../../images/webforms/hello-html5-lorem-ipsum.png)
 
 #### Test the application
 
@@ -123,13 +123,13 @@ Press `F5` to run the application. Notice that there is nothing special about th
 
 **Figure 7: Output of the added text**
 
-![F5 No Style](../../../images/webforms/hello-html5-f5-no-style.png)
+![Kendo UI for jQuery F5 No Style](../../images/webforms/hello-html5-f5-no-style.png)
 
 Press `F12` to open the IE Developer Tools. Change the rendering mode from IE 9 to IE 7. Observe that there is virtually no change in the display.
 
 **Figure 8: Internet Explorer 7 browser mode**
 
-![Browser Mode IE 7 No Style](../../../images/webforms/hello-html5-browser-mode-ie-7-no-style.png)
+![Kendo UI for jQuery Browser Mode IE 7 No Style](../../images/webforms/hello-html5-browser-mode-ie-7-no-style.png)
 
 ### Display HTML5 in Older Browsers
 
@@ -137,11 +137,11 @@ Return to Visual Studio and add a stylesheet to the application by right-clickin
 
 **Figure 9: Linking the stylesheet**
 
-![Link Stylesheet](../../../images/webforms/hello-html5-link-stylesheet.png)
+![Kendo UI for jQuery Link Stylesheet](../../images/webforms/hello-html5-link-stylesheet.png)
 
 Open `site.css` and add some style to change the background color of the article to `salmon`, as demonstrated in the example below.
 
-###### Example
+
 
     article {
 
@@ -161,7 +161,7 @@ Return to Visual Studio and stop the application if necessary. Right-click the p
 
 **Figure 10: Modernizr**
 
-![Modernizr](../../../images/webforms/hello-html5-modernizr.png)
+![Kendo UI for jQuery Modernizr](../../images/webforms/hello-html5-modernizr.png)
 
 Add **Modernizr** to the head of the page by dragging it from the scripts folder into the **Default.aspx** page and drop it directly below the stylesheet reference.
 

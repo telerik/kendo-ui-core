@@ -25,7 +25,7 @@
         });
 
         it("dialog actions have kendoNS", function() {
-            var dialog = createDialog({ actions: [{}, {}] })
+            var dialog = createDialog({ actions: [{}, {}] });
             var actionBtns = dialog.wrapper.find(".k-dialog-buttongroup > .k-button");
             actionBtns.each(function() {
                 assert.isOk($(this).data("kendoNS"));
@@ -57,7 +57,7 @@
         it("action click calls close event", function() {
             var dialog = createDialog({
                 actions: [
-                    { text: "just close" }
+                    { text: () => "just close" }
                 ],
                 close: function(ev) {
                     assert.isOk(ev.userTriggered);
@@ -203,7 +203,7 @@
         function keyboardCloseButton_closesDialog(keyCode) {
             var dialog = createDialog({
                 closable: true,
-                close: function (ev) {
+                close: function(ev) {
                     assert.isOk(ev.userTriggered);
                 }
             });
@@ -220,7 +220,7 @@
         function actionButtonKeyTrigger(keyCode) {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok", action: function() {
+                    text: () => "ok", action: function() {
                         assert.isOk(true);
                     }
                 }]
@@ -235,7 +235,7 @@
         it("esc key on action button just closes the dialog", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(false);
                     }
@@ -249,7 +249,7 @@
         it("enter key on action button runs action only once", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(true);
                     }
@@ -263,7 +263,7 @@
         it("SPACEBAR key on action button runs action only once", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(true);
                     }

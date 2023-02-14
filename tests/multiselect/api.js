@@ -80,8 +80,8 @@
 
             multiselect.value("0");
 
-            assert.equal(multiselect.tagList.children().length, 1);
-            assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+            assert.equal(multiselect.tagList.children(":first").find("span").html(), '<span class="k-chip-label">Option0</span>');
             assert.isOk(multiselect.element[0].children[0].selected);
         });
 
@@ -92,8 +92,8 @@
             multiselect.value("0");
             multiselect.value("1");
 
-            assert.equal(multiselect.tagList.children().length, 1);
-            assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option1");
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+            assert.equal(multiselect.tagList.children(":first").find("span").html(), '<span class="k-chip-label">Option1</span>');
             assert.isOk(multiselect.element[0].children[1].selected);
             assert.isOk(!multiselect.element[0].children[0].selected);
         });
@@ -177,7 +177,27 @@
             multiselect.close();
             multiselect.open();
 
-            assert.equal(multiselect.tagList.children().length, 1);
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        });
+
+        it("Multiselect value is not deselected if the value is changed before first open", function() {
+            var multiselect = new MultiSelect(select, {
+                autoBind: false,
+                dataValueField: "value",
+                dataTextField: "text",
+                dataSource: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }],
+                value: [1],
+                dataBound: function() {
+                    this.value([2]);
+                    this.trigger("change");
+                }
+            });
+
+            multiselect.dataSource.read();
+            multiselect.open();
+
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+            assert.equal(multiselect.tagList.children(".k-chip")[0].textContent, "bar");
         });
 
         it("MultiSelect supports multiple values", function() {
@@ -186,9 +206,9 @@
 
             multiselect.value(["0", "1"]);
 
-            assert.equal(multiselect.tagList.children().length, 2);
-            assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
-            assert.equal(multiselect.tagList.children(":last").find("span").html(), "Option1");
+            assert.equal(multiselect.tagList.children(".k-chip").length, 2);
+            assert.equal(multiselect.tagList.children(".k-chip:first").find("span").html(), '<span class="k-chip-label">Option0</span>');
+            assert.equal(multiselect.tagList.children(".k-chip:last").find("span").html(), '<span class="k-chip-label">Option1</span>');
             assert.isOk(multiselect.element[0].children[0].selected);
             assert.isOk(multiselect.element[0].children[1].selected);
         });
@@ -200,8 +220,8 @@
 
             multiselect.value(value);
 
-            assert.equal(multiselect.tagList.children().length, 1);
-            assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+            assert.equal(multiselect.tagList.children(":first").find("span").html(), '<span class="k-chip-label">Option0</span>');
             assert.isOk(multiselect.element[0].children[0].selected);
         });
 
@@ -299,7 +319,7 @@
         it("change is not triggered on blur after value()", function() {
             popuplateSelect();
             var multiselect = new MultiSelect(select, {
-                change: function () {
+                change: function() {
                     assert.isOk(false);
                 }
             });
@@ -344,11 +364,10 @@
 
             multiselect.enable(false);
 
-            multiselect.tagList.find(".k-i-close").click();
+            multiselect.tagList.find(".k-i-x").click();
 
-            assert.equal(multiselect.tagList.children().length, 1);
-            assert.isOk(multiselect.wrapper.hasClass("k-state-disabled"));
-            assert.isOk(!multiselect._innerWrapper.hasClass("k-state-disabled"));
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+            assert.isOk(multiselect.wrapper.hasClass("k-disabled"));
             assert.isOk(multiselect.input.attr("disabled"));
         });
 
@@ -359,11 +378,11 @@
             multiselect.enable(false);
             multiselect.enable(true);
 
-            multiselect.tagList.find(".k-i-close").click();
+            multiselect.tagList.find(".k-i-x-circle").click();
             multiselect.wrapper.mousedown();
 
-            assert.equal(multiselect.tagList.children().length, 0);
-            assert.isOk(!multiselect.wrapper.hasClass("k-state-disabled"));
+            assert.equal(multiselect.tagList.children(".k-chip").length, 0);
+            assert.isOk(!multiselect.wrapper.hasClass("k-disabled"));
             assert.isOk(!multiselect.input.attr("disabled"));
             assert.isOk(multiselect.popup.visible());
         });
@@ -421,7 +440,7 @@
 
         it("MultiSelect opens popup if noDataTemplate", function() {
             popuplateSelect();
-            var multiselect = new MultiSelect(select, { noDataTemplate: "no data" });
+            var multiselect = new MultiSelect(select, { noDataTemplate: () => "no data" });
 
             multiselect.open();
 
@@ -433,7 +452,7 @@
 
             multiselect.readonly();
 
-            assert.equal(multiselect.element.attr("readonly"), "readonly");
+            assert.equal(multiselect.input.attr("readonly"), "readonly");
         });
 
         it("readonly method unbinds input click", function() {
@@ -445,13 +464,13 @@
             assert.isOk(!multiselect.popup.visible());
         });
 
-        it("readonly(false) removes readonly attribute", function() {
+        it("readonly(false) removes k-no-click class from the wrapper", function() {
             var multiselect = new MultiSelect(select);
 
             multiselect.readonly();
             multiselect.readonly(false);
 
-            assert.equal(multiselect.element.attr("readonly"), undefined);
+            assert.ok(!multiselect.wrapper.hasClass("k-no-click"));
         });
 
         it("readonly() removes disabled attribute and disabled class", function() {
@@ -460,9 +479,10 @@
             multiselect.enable(false);
             multiselect.readonly();
 
-            assert.equal(multiselect.element.attr("readonly"), "readonly");
+            assert.equal(multiselect.input.attr("readonly"), "readonly");
+            assert.equal(multiselect.input.attr("disabled"), undefined);
             assert.equal(multiselect.element.attr("disabled"), undefined);
-            assert.isOk(!multiselect.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!multiselect.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(false) removes readonly attribute and default class", function() {
@@ -471,9 +491,10 @@
             multiselect.readonly();
             multiselect.enable(false);
 
-            assert.equal(multiselect.element.attr("readonly"), undefined);
+            assert.equal(multiselect.input.attr("readonly"), undefined);
+            assert.equal(multiselect.input.attr("disabled"), "disabled");
             assert.equal(multiselect.element.attr("disabled"), "disabled");
-            assert.isOk(multiselect.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(multiselect.wrapper.hasClass("k-disabled"));
         });
 
         it("enable() enables widget after readonly()", function() {
@@ -482,9 +503,10 @@
             multiselect.readonly();
             multiselect.enable();
 
-            assert.equal(multiselect.element.attr("readonly"), undefined);
+            assert.equal(multiselect.input.attr("readonly"), undefined);
+            assert.equal(multiselect.input.attr("disabled"), undefined);
             assert.equal(multiselect.element.attr("disabled"), undefined);
-            assert.isOk(!multiselect.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!multiselect.wrapper.hasClass("k-disabled"));
         });
 
         it("MultiSelect does not pass placeholder on search", function() {
@@ -554,7 +576,7 @@
 
             multiselect.setDataSource(multiselect.dataSource);
 
-            assert.equal(multiselect.tagList.children().length, 2);
+            assert.equal(multiselect.tagList.children(".k-chip").length, 2);
         });
 
         it("setOptions updates listView template when dataTextField is set", function() {
@@ -569,8 +591,9 @@
                 dataTextField: "anotherName"
             });
 
+            var result = multiselect.listView.options.template({ anotherName: "abc" });
 
-            assert.equal(multiselect.listView.options.template, "#:data.anotherName#");
+            assert.equal(result, "abc");
         });
 
         it("setOptions updates placeholder", function() {
@@ -601,23 +624,23 @@
 
             multiselect.value("item2");
 
-            assert.equal(multiselect.tagList.children().length, 1)
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
         });
 
         it("setOptions method updates footer template", function() {
             var multiselect = new MultiSelect(select, {});
 
-            multiselect.setOptions({ footerTemplate: "footer" });
+            multiselect.setOptions({ footerTemplate: () => "footer" });
 
             assert.equal(multiselect.footer.html(), "footer");
         });
 
         it("setOptions method hides footer template", function() {
             var multiselect = new MultiSelect(select, {
-                footerTemplate: "footer"
+                footerTemplate: () => "footer"
             });
 
-            multiselect.setOptions({ footerTemplate: "" });
+            multiselect.setOptions({ footerTemplate: null });
 
             assert.equal(multiselect.footer, null);
         });
@@ -625,28 +648,28 @@
         it("setOptions method updates header template", function() {
             var multiselect = new MultiSelect(select, {});
 
-            multiselect.setOptions({ headerTemplate: "<div>header</div>" });
+            multiselect.setOptions({ headerTemplate: () => "<div>header</div>" });
 
             assert.equal(multiselect.header.html(), "header");
         });
 
         it("setOptions method hides footer template", function() {
             var multiselect = new MultiSelect(select, {
-                headerTemplate: "header"
+                headerTemplate: () => "header"
             });
 
-            multiselect.setOptions({ headerTemplate: "" });
+            multiselect.setOptions({ headerTemplate: () => "" });
 
             assert.equal(multiselect.header, null);
         });
 
         it("setOptions re-renders noDataTemplate", function() {
             var multiselect = new MultiSelect(select, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             multiselect.setOptions({
-                noDataTemplate: "no data"
+                noDataTemplate: () => "no data"
             });
 
             assert.equal(multiselect.noData.text(), "no data");
@@ -654,7 +677,7 @@
 
         it("setOptions removes noData template", function() {
             var multiselect = new MultiSelect(select, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             multiselect.setOptions({

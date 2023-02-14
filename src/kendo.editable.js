@@ -1,46 +1,53 @@
-(function(f, define){
-    define([ "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.validator", "./kendo.binder" ], f);
-})(function(){
+import "./kendo.checkbox.js";
+import "./kendo.dropdownlist.js";
+import "./kendo.datepicker.js";
+import "./kendo.numerictextbox.js";
+import "./kendo.validator.js";
+import "./kendo.binder.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "editable",
     name: "Editable",
     category: "framework",
-    depends: [ "datepicker", "numerictextbox", "validator", "binder" ],
+    depends: [ "checkbox", "dropdownlist", "datepicker", "numerictextbox", "validator", "binder" ],
     hidden: true
 };
 
-/* jshint eqnull: true */
+
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
         extend = $.extend,
-        oldIE = kendo.support.browser.msie && kendo.support.browser.version < 9,
         isFunction = kendo.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
         POINT = ".",
+        AUTOCOMPLETEVALUE = "off",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
-        ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' +
-                    '#=message#<div class="k-callout k-callout-n"></div></div>',
+        ERRORTEMPLATE = ({ message }) => '<div class="k-tooltip k-tooltip-error k-validator-tooltip">' +
+            '<span class="k-tooltip-icon k-icon k-i-warning"></span>' +
+            `<span class="k-tooltip-content">${message}</span>` +
+            '<span class="k-callout k-callout-n"></span>' +
+        '</div>',
         CHANGE = "change";
     var EQUAL_SET = "equalSet";
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
     function fieldType(field) {
         field = field != null ? field : "";
-        return field.type || $.type(field) || "string";
+        return field.type || kendo.type(field) || "string";
     }
 
     function convertToValueBinding(container) {
-        container.find(":input:not(:button, .k-combobox .k-input, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file])").each(function() {
+        container.find(":input:not(:button, .k-combobox .k-input, .k-checkbox-list .k-checkbox, .k-radio-list .k-radio, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file])").each(function() {
             var bindAttr = kendo.attr("bind"),
                 binding = this.getAttribute(bindAttr) || "",
                 bindingName = this.type === "checkbox" || this.type === "radio" ? "checked:" : "value:",
+                isAntiForgeryToken = this.getAttribute("name") === Editable.antiForgeryTokenName,
                 fieldName = this.name;
 
-            if (binding.indexOf(bindingName) === -1 && fieldName) {
+            if (binding.indexOf(bindingName) === -1 && fieldName && !isAntiForgeryToken) {
                 binding += (binding.length ? "," : "") + bindingName + fieldName;
 
                 $(this).attr(bindAttr, binding);
@@ -52,13 +59,15 @@ var __meta__ = { // jshint ignore:line
         var field = (options.model.fields || options.model)[options.field],
             type = fieldType(field),
             validation = field ? field.validation : {},
+            attributes = field ? field.attributes : {},
             ruleName,
             DATATYPE = kendo.attr("type"),
             BINDING = kendo.attr("bind"),
             rule,
             attr = {
+                id: options.id || options.field,
                 name: options.field,
-                title: options.title
+                title: options.title ? options.title : options.field
             };
 
         for (ruleName in validation) {
@@ -81,6 +90,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             attr[kendo.attr(ruleName + "-msg")] = rule.message;
+
+            attr.autocomplete = AUTOCOMPLETEVALUE;
+        }
+
+        for (var attributeName in attributes) {
+            attr[attributeName] = attributes[attributeName];
         }
 
         if (inArray(type, specialRules) >= 0) {
@@ -88,6 +103,17 @@ var __meta__ = { // jshint ignore:line
         }
 
         attr[BINDING] = (type === "boolean" ? "checked:" : "value:") + options.field;
+
+        return attr;
+    }
+
+    function addIdAttribute(container, attr) {
+        var id = container.attr("id");
+
+        if (id) {
+            attr.id = id;
+            container.removeAttr("id");
+        }
 
         return attr;
     }
@@ -113,11 +139,41 @@ var __meta__ = { // jshint ignore:line
         return result;
     }
 
+    function getEditorTag(type, options) {
+        var tag;
+
+        if (!type.length) { return; }
+
+        if ((type === "DropDownTree" && options && options.checkboxes) || type === "MultiSelect") {
+            tag = "<select />";
+        } else if (type === "RadioGroup" || type === "CheckBoxGroup") {
+            tag = "<ul />";
+        } else if (type === "Signature") {
+            tag = "<div></div>";
+        } else {
+            tag = type === "Editor" || type === "TextArea" ? "<textarea />" : "<input />";
+        }
+
+        return tag;
+    }
+
+    var kendoEditors = [
+        "AutoComplete", "CheckBox", "CheckBoxGroup", "ColorGradient", "ColorPicker", "ColorPalette", "ComboBox", "DateInput",
+        "DatePicker", "DateTimePicker", "DropDownTree",
+        "Editor", "FlatColorPicker", "MaskedTextBox", "MultiColumnComboBox","MultiSelect",
+        "NumericTextBox", "RadioGroup", "Rating", "Slider", "Switch", "TimePicker", "DropDownList",
+        "TextBox", "TextArea", "Captcha", "Signature", "TimeDurationPicker"
+    ];
+
     var editors = {
+        "hidden": function(container, options) {
+            var attr = createAttributes(options);
+            $('<input type="hidden"/>').attr(attr).appendTo(container);
+        },
         "number": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="text"/>').attr(attr).appendTo(container).kendoNumericTextBox({ format: options.format });
-            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+            $('<input type="text"/>').attr(attr).appendTo(container).kendoNumericTextBox(extend({}, options.editorOptions, { format: options.format }));
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg k-hidden"/>').appendTo(container);
         },
         "date": function(container, options) {
             var attr = createAttributes(options),
@@ -129,53 +185,79 @@ var __meta__ = { // jshint ignore:line
 
             attr[kendo.attr("format")] = format;
 
-            $('<input type="text"/>').attr(attr).appendTo(container).kendoDatePicker({ format: options.format });
-            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+            $('<input type="text"/>').attr(attr).appendTo(container).kendoDatePicker(extend({}, options.editorOptions, { format: options.format }));
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg k-hidden"/>').appendTo(container);
         },
         "string": function(container, options) {
             var attr = createAttributes(options);
 
-            $('<input type="text" class="k-input k-textbox"/>').attr(attr).appendTo(container);
+            $('<input type="text"/>').attr(attr).appendTo(container).kendoTextBox(options.editorOptions);
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="checkbox" />').attr(attr).appendTo(container);
+            var element = $('<input type="checkbox" />').attr(attr).kendoCheckBox(options.editorOptions).appendTo(container);
+
+            renderHiddenForMvcCheckbox(element, container, options);
         },
         "values": function(container, options) {
             var attr = createAttributes(options);
             var items = kendo.stringify(convertItems(options.values));
-            $('<select ' + kendo.attr("text-field") + '="text"' + kendo.attr("value-field") + '="value"' +
-                kendo.attr("source") + "=\'" + (items ? items.replace(/\'/g,"&apos;") : items) +
-                "\'" + kendo.attr("role") + '="dropdownlist"/>') .attr(attr).appendTo(container);
-            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+            $('<select ' +
+                kendo.attr("text-field") + '="text"' +
+                kendo.attr("value-field") + '="value"' +
+                kendo.attr("source") + "=\'" + (items ? items.replace(/\'/g,"&apos;") : items) + "\'" +
+                kendo.attr("size") + '="' + options.editorOptions.size + '"' +
+                kendo.attr("role") + '="dropdownlist"/>')
+                .attr(attr).appendTo(container);
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg  k-hidden"/>').appendTo(container);
+        },
+        "kendoEditor": function(container, options) {
+            var attr = createAttributes(options);
+            var type = options.editor;
+            var editor = "kendo" + type;
+            var editorOptions = options.editorOptions;
+            var tagElement = getEditorTag(type, editorOptions);
+
+            var element = $(tagElement)
+                .attr(attr)
+                .appendTo(container)
+                [editor](editorOptions);
+
+            renderHiddenForMvcCheckbox(element, container, options);
         }
     };
 
     var mobileEditors = {
-        "number": function (container, options) {
+        "number": function(container, options) {
             var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
 
             $('<input type="number"/>').attr(attr).appendTo(container);
         },
-        "date": function (container, options) {
+        "date": function(container, options) {
             var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
 
             $('<input type="date"/>').attr(attr).appendTo(container);
         },
-        "string": function (container, options) {
+        "string": function(container, options) {
             var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
 
             $('<input type="text" />').attr(attr).appendTo(container);
         },
-        "boolean": function (container, options) {
+        "boolean": function(container, options) {
             var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
 
             $('<input type="checkbox" />').attr(attr).appendTo(container);
         },
-        "values": function (container, options) {
+        "values": function(container, options) {
             var attr = createAttributes(options);
             var items = options.values;
             var select = $('<select />');
+
+            attr = addIdAttribute(container, attr);
 
             for (var index in items) {
                 $('<option value="' + items[index].value + '">' + items[index].text + '</option>').appendTo(select);
@@ -203,6 +285,15 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
+    function renderHiddenForMvcCheckbox(tag, container, field) {
+        var addHidden = field ? (field.shouldRenderHidden || false) : false;
+
+        if (addHidden) {
+            tag.val(true);
+            container.append($("<input type='hidden' name='" + field.field + "' value='false' data-skip='true' data-validate='false'/>"));
+        }
+    }
+
     var Editable = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -215,7 +306,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
             Widget.fn.init.call(that, element, options);
-            that._validateProxy = $.proxy(that._validate, that);
+            that._validateProxy = that._validate.bind(that);
             that.refresh();
         },
 
@@ -226,8 +317,11 @@ var __meta__ = { // jshint ignore:line
             editors: editors,
             mobileEditors: mobileEditors,
             clearContainer: true,
+            validateOnBlur: true,
+            validationSummary: false,
             errorTemplate: ERRORTEMPLATE,
-            skipFocus: false
+            skipFocus: false,
+            size: "medium"
         },
 
         editor: function(field, modelField) {
@@ -238,20 +332,41 @@ var __meta__ = { // jshint ignore:line
                 model = that.options.model || {},
                 isValuesEditor = isObject && field.values,
                 type = isValuesEditor ? "values" : fieldType(modelField),
-                isCustomEditor = isObject && field.editor,
-                editor = isCustomEditor ? field.editor : editors[type],
-                container = that.element.find("[" + kendo.attr("container-for") + "=" + fieldName.replace(nameSpecialCharRegExp, "\\$1")+ "]");
+                isHidden = isObject && typeof field.editor === "string" && field.editor === "hidden",
+                isCustomEditor = isObject && !isHidden && field.editor,
+                isKendoEditor = isObject && $.inArray(field.editor, kendoEditors) !== -1,
+                editor = isCustomEditor ? field.editor : editors[isHidden ? "hidden" : type],
+                container = that.element.find("[" + kendo.attr("container-for") + "=" + fieldName.replace(nameSpecialCharRegExp, "\\$1") + "]"),
+                op;
 
             editor = editor ? editor : editors.string;
 
-            if (isCustomEditor && typeof field.editor === "string") {
+            if (isKendoEditor) {
+                editor = editors.kendoEditor;
+            } else if (isCustomEditor && typeof field.editor === "string") {
                 editor = function(container) {
                     container.append(field.editor);
                 };
             }
 
+            if (!isObject) {
+                op = {
+                    field: fieldName,
+                    editorOptions: {
+                        size: that.options.size
+                    }
+                };
+            } else {
+                if (!field.editorOptions) {
+                    field.editorOptions = {};
+                }
+
+                field.editorOptions = extend({}, { size: that.options.size }, field.editorOptions);
+                op = field;
+            }
+
             container = container.length ? container : that.element;
-            editor(container, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
+            editor(container, extend(true, {}, op, { model: model }));
         },
 
         _validate: function(e) {
@@ -271,7 +386,7 @@ var __meta__ = { // jshint ignore:line
                    return bindingRegex.test($(this).attr(bindAttribute));
                 });
             if (input.length > 1) {
-                input = input.filter(function () {
+                input = input.filter(function() {
                     var element = $(this);
                     return !element.is(":radio") || element.val() == value;
                 });
@@ -296,7 +411,7 @@ var __meta__ = { // jshint ignore:line
         destroy: function() {
             var that = this;
 
-            that.angular("cleanup", function(){
+            that.angular("cleanup", function() {
                 return { elements: that.element };
             });
 
@@ -333,7 +448,7 @@ var __meta__ = { // jshint ignore:line
                 modelField,
                 modelFields;
 
-            if (!$.isArray(fields)) {
+            if (!Array.isArray(fields)) {
                 fields = [fields];
             }
 
@@ -349,7 +464,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (that.options.target) {
-                that.angular("compile", function(){
+                that.angular("compile", function() {
                     return {
                         elements: container,
                         data: container.map(function() { return { dataItem: model }; })
@@ -372,29 +487,30 @@ var __meta__ = { // jshint ignore:line
 
             kendo.bind(container, that.options.model);
 
-            that.options.model.unbind("set", that._validateProxy);
-            that.options.model.bind("set", that._validateProxy);
+            if (that.options.validateOnBlur) {
+                that.options.model
+                    .unbind("set", that._validateProxy)
+                    .bind("set", that._validateProxy);
 
-            that.options.model.unbind(EQUAL_SET, that._validateProxy);
-            that.options.model.bind(EQUAL_SET, that._validateProxy);
+                that.options.model
+                    .unbind(EQUAL_SET, that._validateProxy)
+                    .bind(EQUAL_SET, that._validateProxy);
+            }
 
             that.validatable = new kendo.ui.Validator(container, {
-                validateOnBlur: false,
+                validateOnBlur: that.options.validateOnBlur,
+                validationSummary: that.options.validationSummary,
                 errorTemplate: that.options.errorTemplate || undefined,
                 rules: rules });
 
             if (!that.options.skipFocus) {
-                var focusable = container.find(":kendoFocusable").eq(0).focus();
-                if (oldIE) {
-                    focusable.focus();
-                }
+                container.find(":kendoFocusable").eq(0).trigger("focus");
             }
         }
    });
 
+   Editable.antiForgeryTokenName = "__RequestVerificationToken";
+
    ui.plugin(Editable);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

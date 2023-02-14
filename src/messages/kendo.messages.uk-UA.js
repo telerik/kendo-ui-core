@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -187,6 +188,28 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+  "noRows": "No records to display",
+  "loading": "Loading...",
+  "requestFailed": "Request failed.",
+  "retry": "Retry",
+  "commands": {
+      "edit": "Редагувати",
+      "update": "Оновити",
+      "canceledit": "Cancel",
+      "create": "Додати",
+      "createchild": "Add child record",
+      "destroy": "Видалити",
+      "excel": "Export to Excel",
+      "pdf": "Export to PDF"
+  }
+});
+}
+
 /* TreeListPager messages */
 
 if (kendo.ui.TreeListPager) {
@@ -273,7 +296,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "justifyRight": "По правому краю",
   "outdent": "Зменшити відступ",
   "strikethrough": "Закреслений",
-  "styles": "Стиль",
+  "style": "Стиль",
   "subscript": "Subscript",
   "superscript": "Superscript",
   "underline": "Підкреслений",

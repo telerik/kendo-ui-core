@@ -1,8 +1,8 @@
-(function(f, define){
-    define([ "./kendo.data", "./kendo.userevents", "./kendo.mobile.button" ], f);
-})(function(){
+import "./kendo.data.js";
+import "./kendo.userevents.js";
+import "./kendo.mobile.button.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.listview",
     name: "ListView",
     category: "mobile",
@@ -21,14 +21,13 @@ var __meta__ = { // jshint ignore:line
         ITEM_SELECTOR = ".km-list > li, > li:not(.km-group-container)",
         HIGHLIGHT_SELECTOR = ".km-listview-link, .km-listview-label",
         ICON_SELECTOR = "[" + kendo.attr("icon") + "]",
-        proxy = $.proxy,
         attrValue = kendo.attrValue,
         GROUP_CLASS = "km-group-title",
         ACTIVE_CLASS = "km-state-active",
-        GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><div class="km-text"></div></div>',
-        GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
-        WRAPPER = '<div class="km-listview-wrapper" />',
-        SEARCH_TEMPLATE = kendo.template('<form class="km-filter-form"><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>'),
+        GROUP_WRAPPER = `<div class="${GROUP_CLASS}"><div class="km-text"></div></div>`,
+        GROUP_TEMPLATE = kendo.template((data) => `<li><div class="${GROUP_CLASS}"><div class="km-text">${this.headerTemplate(data)}</div></div><ul>${kendo.render(this.template, data.items)}</ul></li>`),
+        WRAPPER = '<div class="km-listview-wrapper"></div>',
+        SEARCH_TEMPLATE = kendo.template(({ placeholder }) => `<form class="km-filter-form"><div class="km-filter-wrap"><input type="search" placeholder="${placeholder}"/><a href="#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>`),
         NS = ".kendoMobileListView",
         STYLED = "styled",
         DATABOUND = "dataBound",
@@ -277,7 +276,7 @@ var __meta__ = { // jshint ignore:line
                 items = this.items,
                 endReached = false;
 
-            while(items.length) {
+            while (items.length) {
                 items.pop().destroy();
             }
 
@@ -335,7 +334,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (this.lastDirection) { // scrolling up
-                while(items[items.length - 1].bottom > top + height * 2) {
+                while (items[items.length - 1].bottom > top + height * 2) {
                     if (this.offset === 0) {
                         break;
                     }
@@ -393,7 +392,7 @@ var __meta__ = { // jshint ignore:line
             this.lastDirection = up;
 
             if (up) { // scrolling up
-               if (items[0].top > topBorder &&  // needs reorder
+               if (items[0].top > topBorder && // needs reorder
                    items[items.length - 1].bottom > bottomBorder + padding && // enough padding below
                    this.offset > 0 // we are not at the top
                   )
@@ -729,7 +728,7 @@ var __meta__ = { // jshint ignore:line
 
 
             if (action === "itemchange") {
-                if(!listView._hasBindingTarget()) {
+                if (!listView._hasBindingTarget()) {
                     item = listView.findByDataItem(dataItems)[0];
                     if (item) {
                         listView.setDataItem(item, dataItems[0]);
@@ -833,13 +832,13 @@ var __meta__ = { // jshint ignore:line
                 .on("focus" + NS, function() {
                     filter._oldFilter = filter.searchInput.val();
                 })
-                .on(events.split(" ").join(NS + " ") + NS, proxy(this._filterChange, this));
+                .on(events.split(" ").join(NS + " ") + NS, this._filterChange.bind(this));
 
             this.clearButton = listView.wrapper.find(".km-filter-reset")
-                .on(CLICK, proxy(this, "_clearFilter"))
+                .on(CLICK, this._clearFilter.bind(this))
                 .hide();
 
-             this._dataSourceChange = $.proxy(this._refreshInput, this);
+             this._dataSourceChange = this._refreshInput.bind(this);
              listView.bind("_dataSource", function(e) {
                  e.dataSource.bind("change", that._dataSourceChange);
              });
@@ -849,7 +848,7 @@ var __meta__ = { // jshint ignore:line
             var appliedFilters = this.listView.dataSource.filter();
             var searchInput = this.listView._filter.searchInput;
 
-            if (!appliedFilters || appliedFilters.filters[0].field !== this.listView.options.filterable.field)  {
+            if (!appliedFilters || appliedFilters.filters[0].field !== this.listView.options.filterable.field) {
                 searchInput.val("");
             } else {
                 searchInput.val(appliedFilters.filters[0].value);
@@ -944,7 +943,7 @@ var __meta__ = { // jshint ignore:line
             this._style();
 
             if (this.options.$angular && (this.virtual || this.options.pullToRefresh)) {
-                setTimeout($.proxy(this, "_start"));
+                setTimeout(this._start.bind(this));
             } else {
                 this._start();
             }
@@ -988,8 +987,8 @@ var __meta__ = { // jshint ignore:line
             type: "flat",
             autoBind: true,
             fixedHeaders: false,
-            template: "#:data#",
-            headerTemplate: '<span class="km-text">#:value#</span>',
+            template: (data) => kendo.htmlEncode(data),
+            headerTemplate: ({ value }) => `<span class="km-text">${kendo.htmlEncode(value)}</span>`,
             appendOnRefresh: false,
             loadMore: false,
             endlessScroll: false,
@@ -1035,7 +1034,7 @@ var __meta__ = { // jshint ignore:line
                 this._itemBinder.destroy();
             }
 
-            if(this._headerFixer) {
+            if (this._headerFixer) {
                 this._headerFixer.destroy();
             }
 
@@ -1128,7 +1127,7 @@ var __meta__ = { // jshint ignore:line
 
         remove: function(dataItems) {
             var items = this.findByDataItem(dataItems);
-            this.angular("cleanup", function(){
+            this.angular("cleanup", function() {
                 return { elements: items };
             });
             kendo.destroy(items);
@@ -1151,7 +1150,7 @@ var __meta__ = { // jshint ignore:line
                 replaceItem = function(items) {
                     var newItem = $(items[0]);
                     kendo.destroy(item);
-                    listView.angular("cleanup", function(){ return { elements: [ $(item) ] }; });
+                    listView.angular("cleanup", function() { return { elements: [ $(item) ] }; });
                     $(item).replaceWith(newItem);
                     listView.trigger(ITEM_CHANGE, { item: newItem, data: dataItem, ns: ui });
                 };
@@ -1171,7 +1170,7 @@ var __meta__ = { // jshint ignore:line
             this.angular("compile", function() {
                 return {
                     elements: items,
-                    data: dataItems.map(function(data){
+                    data: dataItems.map(function(data) {
                         return { dataItem: data };
                     })
                 };
@@ -1210,27 +1209,28 @@ var __meta__ = { // jshint ignore:line
         _templates: function() {
             var template = this.options.template,
                 headerTemplate = this.options.headerTemplate,
-                dataIDAttribute = ' data-uid="#=arguments[0].uid || ""#"',
                 templateProxy = {},
                 groupTemplateProxy = {};
 
             if (typeof template === FUNCTION) {
                 templateProxy.template = template;
-                template = "#=this.template(data)#";
+            } else {
+                templateProxy.template = kendo.template(template);
             }
 
-            this.template = proxy(kendo.template("<li" + dataIDAttribute + ">" + template + "</li>"), templateProxy);
+            this.template = kendo.template((data) => `<li${data[0].uid ? ` data-uid="${data[0].uid}"` : ""}>${this.template(data)}</li>`).bind(templateProxy);
 
             groupTemplateProxy.template = this.template;
 
             if (typeof headerTemplate === FUNCTION) {
                 groupTemplateProxy._headerTemplate = headerTemplate;
-                headerTemplate = "#=this._headerTemplate(data)#";
+            } else {
+                groupTemplateProxy._headerTemplate = kendo.template(headerTemplate);
             }
 
-            groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
+            groupTemplateProxy.headerTemplate = kendo.template((data)=> this._headerTemplate(data));
 
-            this.groupTemplate = proxy(GROUP_TEMPLATE, groupTemplateProxy);
+            this.groupTemplate = GROUP_TEMPLATE.bind(groupTemplateProxy);
         },
 
         _click: function(e) {
@@ -1249,7 +1249,7 @@ var __meta__ = { // jshint ignore:line
                 dataItem = this.dataSource.getByUid(id);
             }
 
-            if (this.trigger(CLICK, {target: target, item: item, dataItem: dataItem, button: button})) {
+            if (this.trigger(CLICK, { target: target, item: item, dataItem: dataItem, button: button })) {
                 e.preventDefault();
             }
         },
@@ -1321,6 +1321,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(ListView);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

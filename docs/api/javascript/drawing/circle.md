@@ -26,8 +26,36 @@ Draws a circle with set geometry, fill and stroke.
 ### geometry `kendo.geometry.Circle`
 The geometric object that defines the circle center and radius.
 
+#### Example - creating a circle
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var circleGeometry = new geom.Circle([100, 100], 20);
+        var circle = new draw.Circle(circleGeometry).stroke("red", 1);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(circle);
+    </script>
+
 ### options `Object`
 The configuration options.
+
+#### Example - Log in the console the circle options object
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var circleGeometry = new geom.Circle([100, 100], 20);
+      var circle = new draw.Circle(circleGeometry).stroke("red", 1);
+      //press f!2 to open the console to see the logged options
+      console.log(circle.options)
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(circle);
+    </script>
 
 ## Configuration
 

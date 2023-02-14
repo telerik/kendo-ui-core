@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -676,7 +677,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Igazítás",
     "buttons": {
-     "justtifyLeft": "Balra igazítás",
+     "justifyLeft": "Balra igazítás",
      "justifyCenter": "Középre igazítás",
      "justifyRight": "Jobbra igazítás",
      "justifyFull": "Sorkizárás",
@@ -706,6 +707,9 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "confirmationDialog": {
     "text": "Biztos, hogy törli ezt a munkalapot?",
     "title": "Munkalap törlése"
+  },
+  "overflowDialog": {
+    "errorMessage": 'Nem illeszthető be, mert a másolási és a beillesztési terület nem azonos méretű és alakú.'
   },
   "validationDialog": {
     "title": "Adatellenőrzés",
@@ -818,10 +822,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "A szöveg vége"
     },
     "date": {
-      "eq":  "A dátum",
+      "eq": "A dátum",
       "neq": "A dátum nem",
-      "lt":  "Ezen dátum előtt",
-      "gt":  "Ezen dátum után"
+      "lt": "Ezen dátum előtt",
+      "gt": "Ezen dátum után"
     },
     "number": {
       "eq": "egyenlő",
@@ -854,7 +858,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Sor hozzáadása alá",
   "alignment": "Igazítás",
   "alignmentButtons": {
-    "justtifyLeft": "Balra igazítás",
+    "justifyLeft": "Balra igazítás",
     "justifyCenter": "Középre igazítás",
     "justifyRight": "Jobbra igazítás",
     "justifyFull": "Sorkizárás",
@@ -935,7 +939,8 @@ $.extend(true, kendo.spreadsheet.messages.view,{
   "errors": {
     "shiftingNonblankCells": "Adatvesztés nélkül nem lehet a cellákat beszúrni. Válasszon másik beszúrási pozíciót, vagy törölje az adatokat a munkalap végéről.",
     "filterRangeContainingMerges": "Nem lehet szűrőt készíteni összevonásokat tartalmazó tartományon belül",
-    "validationError": "A beírt érték megsérti a cellára beállított adatellenőrzési szabályokat."
+    "validationError": "A beírt érték megsérti a cellára beállított adatellenőrzési szabályokat.",
+	"cannotModifyDisabled": 'Nem lehet módosítani a letiltott cellákat.'
   },
   "tabs": {
     "home": "Elejére",
@@ -969,6 +974,22 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
     "transferAllTo": "Összes felvétele",
     "transferAllFrom": "Összes eltávolítása"
   }
+});
+}
+
+/* DateTimePicker messages */
+if (kendo.ui.DateTimePicker) {
+kendo.ui.DateTimePicker.prototype.options.messages =
+$.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+  "set": "Beállít",
+  "cancel": "Mégse",
+  "hour": "Óra",
+  "minute": "Perc",
+  "second": "Másodperc",
+  "milisecond": "Millisec",
+  "now": "Most",
+  "date": "Dátum",
+  "time": "Idő"
 });
 }
 
@@ -1008,7 +1029,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Választás...",
   "cancel": "Mégse",
@@ -1067,7 +1088,8 @@ $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
 if (kendo.ui.Calendar) {
 kendo.ui.Calendar.prototype.options.messages =
 $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
-  "weekColumnHeader": ""
+  "weekColumnHeader": "",
+  "today": "Ma"
 });
 }
 

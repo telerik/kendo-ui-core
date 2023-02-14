@@ -21,8 +21,8 @@
  * <div doc-module-components="ngRoute"></div>
  */
  /* global -ngRouteModule */
-var ngRouteModule = angular.module('ngRoute', ['ng']).
-                        provider('$route', $RouteProvider);
+var ngRouteModule = angular.module('ngRoute', ['ng'])
+                        .provider('$route', $RouteProvider);
 
 /**
  * @ngdoc provider
@@ -39,9 +39,9 @@ var ngRouteModule = angular.module('ngRoute', ['ng']).
  * ## Dependencies
  * Requires the {@link ngRoute `ngRoute`} module to be installed.
  */
-function $RouteProvider(){
+function $RouteProvider() {
   function inherit(parent, extra) {
-    return angular.extend(new (angular.extend(function() {}, {prototype:parent}))(), extra);
+    return angular.extend(new (angular.extend(function() {}, { prototype: parent }))(), extra);
   }
 
   var routes = {};
@@ -147,19 +147,19 @@ function $RouteProvider(){
    */
   this.when = function(path, route) {
     routes[path] = angular.extend(
-      {reloadOnSearch: true},
+      { reloadOnSearch: true },
       route,
       path && pathRegExp(path, route)
     );
 
     // create redirection for trailing slashes
     if (path) {
-      var redirectPath = (path[path.length-1] == '/')
-            ? path.substr(0, path.length-1)
-            : path +'/';
+      var redirectPath = (path[path.length - 1] == '/')
+            ? path.substr(0, path.length - 1)
+            : path + '/';
 
       routes[redirectPath] = angular.extend(
-        {redirectTo: path},
+        { redirectTo: path },
         pathRegExp(redirectPath, route)
       );
     }
@@ -188,7 +188,7 @@ function $RouteProvider(){
 
     path = path
       .replace(/([().])/g, '\\$1')
-      .replace(/(\/)?:(\w+)([\?\*])?/g, function(_, slash, key, option){
+      .replace(/(\/)?:(\w+)([\?\*])?/g, function(_, slash, key, option) {
         var optional = option === '?' ? option : null;
         var star = option === '*' ? option : null;
         keys.push({ name: key, optional: !!optional });
@@ -465,15 +465,15 @@ function $RouteProvider(){
       var keys = route.keys,
           params = {};
 
-      if (!route.regexp) return null;
+      if (!route.regexp) {return null;}
 
       var m = route.regexp.exec(on);
-      if (!m) return null;
+      if (!m) {return null;}
 
       for (var i = 1, len = m.length; i < len; ++i) {
         var key = keys[i - 1];
 
-        var val = 'string' == typeof m[i]
+        var val = typeof m[i] == 'string'
               ? decodeURIComponent(m[i])
               : m[i];
 
@@ -510,8 +510,8 @@ function $RouteProvider(){
           }
         }
 
-        $q.when(next).
-          then(function() {
+        $q.when(next)
+          .then(function() {
             if (next) {
               var locals = angular.extend({}, next.resolve),
                   template, templateUrl;
@@ -532,8 +532,8 @@ function $RouteProvider(){
                 templateUrl = $sce.getTrustedResourceUrl(templateUrl);
                 if (angular.isDefined(templateUrl)) {
                   next.loadedTemplateUrl = templateUrl;
-                  template = $http.get(templateUrl, {cache: $templateCache}).
-                      then(function(response) { return response.data; });
+                  template = $http.get(templateUrl, { cache: $templateCache })
+                      .then(function(response) { return response.data; });
                 }
               }
               if (angular.isDefined(template)) {
@@ -541,9 +541,9 @@ function $RouteProvider(){
               }
               return $q.all(locals);
             }
-          }).
+          })
           // after route change
-          then(function(locals) {
+          .then(function(locals) {
             if (next == $route.current) {
               if (next) {
                 next.locals = locals;
@@ -570,12 +570,12 @@ function $RouteProvider(){
         if (!match && (params = switchRouteMatcher($location.path(), route))) {
           match = inherit(route, {
             params: angular.extend({}, $location.search(), params),
-            pathParams: params});
+            pathParams: params });
           match.$$route = route;
         }
       });
       // No route matched; fallback to "otherwise" route
-      return match || routes[null] && inherit(routes[null], {params: {}, pathParams:{}});
+      return match || routes[null] && inherit(routes[null], { params: {}, pathParams: {} });
     }
 
     /**
@@ -583,7 +583,7 @@ function $RouteProvider(){
      */
     function interpolate(string, params) {
       var result = [];
-      angular.forEach((string||'').split(':'), function(segment, i) {
+      angular.forEach((string || '').split(':'), function(segment, i) {
         if (i === 0) {
           result.push(segment);
         } else {
@@ -820,7 +820,7 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
  * Emitted every time the ngView content is reloaded.
  */
 ngViewFactory.$inject = ['$route', '$anchorScroll', '$animate'];
-function ngViewFactory(   $route,   $anchorScroll,   $animate) {
+function ngViewFactory( $route, $anchorScroll, $animate) {
   return {
     restrict: 'ECA',
     terminal: true,
@@ -837,15 +837,15 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
         update();
 
         function cleanupLastView() {
-          if(previousElement) {
+          if (previousElement) {
             previousElement.remove();
             previousElement = null;
           }
-          if(currentScope) {
+          if (currentScope) {
             currentScope.$destroy();
             currentScope = null;
           }
-          if(currentElement) {
+          if (currentElement) {
             $animate.leave(currentElement, function() {
               previousElement = null;
             });
@@ -869,7 +869,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
             // function is called before linking the content, which would apply child
             // directives to non existing elements.
             var clone = $transclude(newScope, function(clone) {
-              $animate.enter(clone, null, currentElement || $element, function onNgViewEnter () {
+              $animate.enter(clone, null, currentElement || $element, function onNgViewEnter() {
                 if (angular.isDefined(autoScrollExp)
                   && (!autoScrollExp || scope.$eval(autoScrollExp))) {
                   $anchorScroll();

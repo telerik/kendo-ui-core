@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.popup" ], f);
-})(function(){
+import "./kendo.popup.js";
 
-var __meta__ = { // jshint ignore:line
+var __meta__ = {
     id: "mobile.shim",
     name: "Shim",
     category: "mobile",
@@ -15,7 +13,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Popup = kendo.ui.Popup,
-        SHIM = '<div class="km-shim"/>',
+        SHIM = '<div class="km-shim"></div>',
         HIDE = "hide",
         Widget = ui.Widget;
 
@@ -27,7 +25,7 @@ var __meta__ = { // jshint ignore:line
                 osname = app ? app.os.name : (os ? os.name : "ios"),
                 ioswp = osname === "ios" || osname === "wp" || (app ? app.os.skin : false),
                 bb = osname === "blackberry",
-                align = options.align || (ioswp ?  "bottom center" : bb ? "center right" : "center center"),
+                align = options.align || (ioswp ? "bottom center" : bb ? "center right" : "center center"),
                 position = options.position || (ioswp ? "bottom center" : bb ? "center right" : "center center"),
                 effect = options.effect || (ioswp ? "slideIn:up" : bb ? "slideIn:left" : "fade:in"),
                 shim = $(SHIM).handler(that).hide();
@@ -127,6 +125,3 @@ var __meta__ = { // jshint ignore:line
     ui.plugin(Shim);
 })(window.kendo.jQuery);
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

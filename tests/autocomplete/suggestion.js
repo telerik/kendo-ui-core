@@ -1,4 +1,4 @@
-(function(){
+(function() {
 
 var AutoComplete = kendo.ui.AutoComplete,
     input;
@@ -60,7 +60,7 @@ $.fn.type = function(value) {
         });
 };
 
-describe("kendo.ui.AutoComplete suggestion", function () {
+describe("kendo.ui.AutoComplete suggestion", function() {
     beforeEach(function() {
         input = $("<input>").appendTo(Mocha.fixture);
     });
@@ -254,7 +254,7 @@ it("suggestion appends only the rest of the text (filter:contains)", function(do
 it("suggestion should use dataItem.text instead of li.text()", function() {
     var autocomplete = new AutoComplete(input, {
             dataSource: ["foo", "bar"],
-            template: "#=data#<span>List:</span>#=data#"
+            template: (data) => `${data}<span>List:</span>${data}`
         });
 
     input.focus();
@@ -346,7 +346,7 @@ it("suggest with null does not throw exception", function() {
     try {
         autocomplete.suggest(null);
         assert.isOk(true);
-    } catch(e) {
+    } catch (e) {
         assert.isOk(false);
     }
     });
@@ -368,7 +368,7 @@ it("search should filter items using filter property", function(done) {
 });
 
 it("filtering honors dataTextField", function(done) {
-    var data = [{text: "foo"}, {text: "2"}], autocomplete = new AutoComplete(input, {
+    var data = [{ text: "foo" }, { text: "2" }], autocomplete = new AutoComplete(input, {
         dataSource: data,
         dataTextField: "text"
     });
@@ -428,6 +428,38 @@ it("suggest method accepts an object", function() {
     autocomplete.suggest(autocomplete.dataSource.view()[0]);
 
     assert.equal(autocomplete.value(), "Foo");
+});
+
+it("suggest is not triggered after value is cleared", function(done) {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        if (options.data.filter && options.data.filter.filters[0]) {
+                            options.success([{ text: "foo", value: 1 }]);
+                        } else {
+                            options.success([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
+                        }
+                    });
+                }
+            },
+            serverFiltering: true
+        },
+        dataTextField: "text",
+        suggest: true,
+        filter: "contains",
+        placeholder: "..."
+    });
+
+    autocomplete.suggest("fo");
+    autocomplete._clearValue();
+
+    setTimeout(function() {
+        assert.equal(autocomplete.value(), "");
+        assert.equal(autocomplete.element.val(), "");
+        done();
+    });
 });
 
     });

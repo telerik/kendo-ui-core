@@ -1,12 +1,12 @@
 ---
-title: Chat Items
-page_title: Chat Items | Kendo UI Chat
-description: "Learn about the predefined Chat Items and how to configure custom ones."
+title: Items
+page_title: jQuery Chat Documentation - Items
+description: "Get started with the jQuery Chat by Kendo UI and use the predefined Chat items and configure custom ones."
 slug: chat_items
 position: 2
 ---
 
-# Chat Items
+# Items
 
 To provide better customer experience, the Chat offers support for predefined and customizable items.
 
@@ -163,14 +163,14 @@ The following example demonstrates how to place a [Kendo UI Calendar]({% slug ov
 	init: function (options, view) {
 	  kendo.chat.Component.fn.init.call(this, options, view);
 
-	  // Create a <div> from which the Calendar will be initialized
+	  // Create a <div> from which the Calendar will be initialized.
 	  var calendarElement = $('<div>');
 
-	  // Initialize the Calendar widget passing the provided value
+	  // Initialize the Calendar widget by passing the provided value.
 	  calendarElement.kendoCalendar({
 		value: options.value,
-		// Implement the logic to be executed
-		// when the user selects a date
+		// Implement the logic that will be executed
+		// when the user selects a date.
 		change: function(e) {
 		  var chat = $('#chat').getKendoChat();
 		  chat.postMessage('You have selected ' + kendo.toString(e.sender.value(), 'D') + '!');
@@ -184,7 +184,7 @@ The following example demonstrates how to place a [Kendo UI Calendar]({% slug ov
 		}
 	  });
 
-	  // Place the calendar within the Chat Card
+	  // Place the calendar within the Chat card.
 	  var bodyElement = $('<div>').addClass("k-card-body").append(calendarElement);
 	  this.element.addClass("k-card").append(bodyElement);
 	}
@@ -210,8 +210,5 @@ The following example demonstrates how to place a [Kendo UI Calendar]({% slug ov
 
 ## See Also
 
-* [Chat Overview]({% slug overview_kendoui_chat_widget %})
-* [Connecting to Chat Bot Services]({% slug connect_to_chatbot_service %})
-* [Chat JavaScript API Reference](/api/javascript/ui/chat)
-
-For runnable examples on Kendo UI Chat, refer to the [Kendo UI Demos site](http://demos.telerik.com/kendo-ui/chat/index).
+* [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
+* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

@@ -1,106 +1,46 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Upload
-description: "Initialize the Kendo UI Upload widget and configure its behavior."
+page_title: jQuery Upload Documentation - Upload Overview
+description: "Try now the Kendo UI for jQuery Upload component covering everything from operation modes and templates to file processing and dragging and dropping."
 slug: overview_kendoui_upload_widget
 position: 1
 ---
 
-# Upload Overview
+# {{ site.product }} Upload Overview
 
-The [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/upload/index) uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
+The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer efforts.
 
-## Getting Started
+The Upload provides a set of [default API configuration options](/api/javascript/ui/upload) that you can set during its initialization, for example, synchronous and asynchronous modes of operation, chunk upload of files, multiple files selection and removal, progress tracking and in-progress cancellation of the upload, and so on.
 
-### Initialize the Upload
+> * The Upload does not currently support the upload of large files in chunks because the feature requires an additional Flash or Silverlight plugin to compensate for the missing API support in older browsers.
+> * The Upload works in `<input type="file" />` elements. Therefore, you can only upload files that are selected and exist in the file system. To upload files that are generated with JavaScript on the fly use Ajax requests.
 
-Kendo UI Upload can be initiated from a simple HTML `form`, an `input` element of the `"file"` type, and a jQuery selector.
+* [Demo page for the Upload](https://demos.telerik.com/kendo-ui/upload/index)
 
-The following example demonstrates how to create and initialize the Upload.
+## Functionality and Features
 
-###### Example
+| Feature                                                               |Definition
+| :---                                                                  |:---
+| [Dragging and dropping]({% slug dragandrop_upload_widget %})          |You can select files for upload by dragging and dropping them over the component.
+| [File processing]({% slug chunkupload_upload_widget %})               |The Upload enables you to persist the initially selected files as well as upload batches of files and files that are selected through multiple requests.
+| [Modes of operation]({% slug modes_upload_widget %})                  |The Upload can work in a synchronous and asynchronous mode.
+| [File restrictions]({% slug validation_upload_widget %})              |You can also use the Upload to validate the files selected for upload in terms of their extension and size.
+| [Templates]({% slug templates_upload %})                              |The Upload enables you to use templates for rendering its content and layout. 
+| [Globalization]({% slug globalization_upload %})                      |The Upload supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_upload %}) need to be supported. Additionally, the Upload supports [rendering in a right-to-left (RTL) direction]({% slug rtl_upload %}).
+| [Accessibility]({% slug accessibility_upload %})                      |The Upload is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_upload %}).
 
-    <!-- Kendo will automatically set the form enctype attribute to "multi-part/form-data" -->
-    <form method="post" action="handler.php">
-        <div>
-            <input name="photos[]" id="photos" type="file" />
-        </div>
-    </form>
+## Next Steps
 
-    $(document).ready(function() {
-        $("#photos").kendoUpload();
-    });
-
-Note the array syntax in the input name: it is used to hint the Upload handler to treat the photos as an array.
-
-For detailed information on how to send metadata to the save handler and receive metadata in the Upload widget, see [this article]({% slug metadata_upload_widget %}).
-
-For more information on how to handle the uploaded files, refer to the documentation of your specific server technology.
-
-## Features
-
-### Basic Functionalities
-
-Kendo UI Upload is a widget based on standards and requires no plug-ins. It supports the following functionalities:
-
-*   Asynchronous and synchronous (on form `submit`) upload of files in the user's file system
-*   Chunk upload functionality that enables upload of large files, pause and resume
-*   Multiple file selection
-*   Removal of uploaded files
-*   Progress tracking
-*   File drag-and-drop
-*   In-progress cancellation of upload
-
-Progress tracking, file drag-and-drop, and in-progress cancellation of upload are automatically enabled if supported by the browser. For detailed information on the browser versions which support the Upload features, refer to [this article]({% slug browsersupport_upload_widget %}).
-
-> **Important**
-> * Uploading large files in chunks is currently not supported, as it would require an additional plug-in&mdash;either Flash, or Silverlight&mdash;to compensate for the missing File API support in older browsers.
-> * The Upload widget works in `<input type="file" />` elements, so it is only able to upload files selected by the user, which exist in the file system. For uploading files generated with JavaScript on the fly, use another approach, e.g. an Ajax request.
-
-### Modes of Operation
-
-For detailed information on the modes of operation Kendo UI Upload supports, refer to [this article]({% slug modes_upload_widget %}).
-
-### Drag and Drop
-
-For detailed information on the drag-and-drop functionality Kendo UI Upload supports, refer to [this article]({% slug dragandrop_upload_widget %}).
-
-### Chunk Upload
-
-For detailed information on the chunk upload functionality Kendo UI Upload supports, refer to [this article]({% slug chunkupload_upload_widget %}).
-
-## Common Scenarios
-
-### Identify Files When Uploading
-
-Regardless of the mode of operation, a unique identifier (`uid`) is generated for each file. In the case of a synchronous or asynchronous upload with the [batch option](/api/javascript/ui/upload/configuration/async.batch) enabled, the single `uid` that is generated, stands for the whole batch of files, selected at the same time. In the case of asynchronous upload with the [batch option](/api/javascript/ui/upload/configuration/async.batch) disabled, a `uid` is generated for each separate file.
-
-The generated `uid` is added to the [`cancel`](/api/javascript/ui/upload/events/cancel) [`error`](/api/javascript/ui/upload/events/error), [`progress`](/api/javascript/ui/upload/events/progress), [`remove`](/api/javascript/ui/upload/events/remove), [`select`](/api/javascript/ui/upload/events/select), and [`upload`](/api/javascript/ui/upload/events/upload) events as a property of the `e.files` collection.
-
-## Reference
-
-### Existing Instances
-
-Refer to an existing Upload instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Upload API](/api/javascript/ui/upload) to control its behavior.
-
-The following example demonstrates how to access an existing Upload instance.
-
-###### Example
-
-    var upload = $("#upload").data("kendoUpload");
+* [Getting Started with the Kendo UI Upload for jQuery]({% slug getting_started_kendoui_upload_widget %})
+* [Basic Usage of the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/index)
+* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [Browser Support]({% slug browsersupport_upload_widget %})
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Upload Widget](/aspnet-mvc/helpers/upload/overview)
-* [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
-* [Overview of the Upload PHP Class](/php/widgets/upload/overview)
-* [Drag and Drop]({% slug dragandrop_upload_widget %})
-* [Chunk Upload]({% slug chunkupload_upload_widget %})
-* [Send and Receive Metadata]({% slug metadata_upload_widget %})
-* [Modes of Operation]({% slug modes_upload_widget %})
-* [Browser Support]({% slug browsersupport_upload_widget %})
-* [Troubleshooting]({% slug troubleshooting_upload_widget %})
-* [How to Serialize Form Data during Async Upload]({% slug howto_serialize_form_data_upload %})
-* [Upload JavaScript API Reference](/api/javascript/ui/upload)
-* [How-To Examples]({% slug howto_remove_files_with_errors %})
-* [Knowledge Base Section](/knowledge-base)
+* [Basic Usage of the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/index)
+* [Using the Basic Events of the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/events)
+* [Binding the Upload over MVVM (Demo)](https://demos.telerik.com/kendo-ui/upload/mvvm)
+* [Using the Upload with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/upload/angular)
+* [Applying the Upload API (Demo)](https://demos.telerik.com/kendo-ui/upload/api)
+* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)

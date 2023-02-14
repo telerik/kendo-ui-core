@@ -1,6 +1,6 @@
 ---
 title: Aurelia
-page_title: Aurelia | Kendo UI Third-Party Tools
+page_title: Aurelia - Kendo UI Third-Party Tools
 description: "Create Aurelia applications by using Kendo UI controls through applying the Aurelia-KendoUI Bridge."
 slug: aurelia_integration_kendoui
 ---

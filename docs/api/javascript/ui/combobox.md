@@ -165,6 +165,8 @@ Use it to set the Id of the parent ComboBox widget.
 Defines the field to be used to filter the data source. If not defined, it is set to a field with the same name as the [parent's dataValueField option](/api/javascript/ui/combobox/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/web/combobox/cascading)
 
+ > Note: As the dataItems of the dataSource inherit from the kendo.ObservableObject class and this class has a method named [parent](/api/javascript/data/observableobject/methods/parent), setting the cascadeFromField to a field named "parent" is not supported.
+
 #### Example
 
     <input id="parent" />
@@ -222,6 +224,40 @@ Defines the parent field to be used to retain value from. This value will be use
             { name: "Child2", id: 2, parentId: 2 },
             { name: "Child3", id: 3, parentId: 1 },
             { name: "Child4", id: 4, parentId: 2 }
+        ]
+    });
+    </script>
+
+### cascadeOnCustomValue `Boolean` *(default: false)*
+
+Applicable to a parent ComboBox in а cascading scenario. If set to `true` cascading will be triggered upon custom input in the parent widget. When set to `false` (default) the child will not cascade and it will be disabled upon setting custom input in the parent ComboBox. Cascade on custom values works only when `cascadeFromParentField` is not set for the child combo, or it points to the `dataValueField` of the parent.
+
+#### Example
+
+    <p><em>Hint: type `p3` in the parent ComboBox input</em></p>
+    <input id="parent" />
+    <input id="child" />
+    <script>
+    $("#parent").kendoComboBox({
+        dataTextField: "name",
+        dataValueField: "id",
+        cascadeOnCustomValue: true,
+        dataSource: [
+            { name: "Parent1", id: "p1" },
+            { name: "Parent2", id: "p2" }
+        ]
+    });
+
+    $("#child").kendoComboBox({
+        cascadeFrom: "parent",
+        cascadeFromField: "parentId",
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Child1", id: 1, parentId: "p1" },
+            { name: "Child2", id: 2, parentId: "p2" },
+            { name: "Child3", id: 3, parentId: "p3" },
+            { name: "Child4", id: 4, parentId: "p3" }
         ]
     });
     </script>
@@ -382,6 +418,30 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/combobox#configuration-dataTextField) option).
@@ -441,6 +501,105 @@ The widget instance.
       dataTextField: "name",
       dataValueField: "id",
       footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
+    </script>
+
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: "Fruits"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: function() {
+          return "Fruits";
+      }
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: { content: "Fruits" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: {
+        content: function() {
+            return "Fruits";
+        }
+      }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/combobox/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#combobox").data("kendoComboBox").label.floatingLabel.refresh();`
+
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: { 
+        content: "Fruits",
+        floating: true 
+      }
     });
     </script>
 
@@ -523,6 +682,63 @@ The index of the initially selected item. The index is `0` based.
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize ComboBox messages
+
+    <input id="combobox" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#combobox").kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          clear: "clear!",
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.clear `String` *(default: "clear")*
+
+The text message when hovering the input clear button.
+
+#### Example - customize clear message
+
+    <input id="combobox" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#combobox").kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          clear: "clear!"
+        }
+      });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="combobox" />
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [],
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
@@ -538,7 +754,7 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -690,9 +906,69 @@ The available "x" positions are:
       dataTextField: "name",
       dataValueField: "id",
       popup: {
-        origin: "top left"
+        position: "top center"
       }
     });
+    </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        size: "large"
+      });
     </script>
 
 ### suggest `Boolean`*(default: false)*
@@ -1733,7 +2009,7 @@ The filter descriptor that will be used to filter the data source.
       filtering: function(e) {
           var filter = e.filter;
 
-          if (!filter.value) {
+          if (filter && !filter.value) {
             //prevent filtering if the filter does not value
             e.preventDefault();
           }

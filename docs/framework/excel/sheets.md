@@ -1,6 +1,6 @@
 ---
 title: Sheets
-page_title: Sheets | Kendo UI Excel Export
+page_title: Sheets - Kendo UI Excel Export
 description: "Learn how to create multiple sheets when exporting a Kendo UI component to Excel."
 slug: sheets_excelexport_kendoui
 position: 6

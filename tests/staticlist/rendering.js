@@ -1,5 +1,6 @@
 (function() {
     var StaticList = kendo.ui.StaticList,
+        encode = kendo.htmlEncode,
         element;
 
     describe("kendo.ui.StaticList rendering", function() {
@@ -18,18 +19,19 @@
         it("kendoStaticList renders data source items using template", function() {
             var list = new StaticList(element, {
                 dataSource: ["foo"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
 
             var li = element.children(":first");
+            var textElement = li.children(".k-list-item-text");
 
-            assert.equal(li.html(), "foo");
+            assert.equal(textElement.html(), "foo");
             assert.equal(li.attr("tabindex"), -1);
             assert.equal(li.attr("role"), "option");
             assert.equal(li.attr("unselectable"), "on");
-            assert.equal(li.attr("class"), "k-item");
+            assert.equal(li.attr("class"), "k-list-item");
             assert.equal(li.attr("data-offset-index"), 0);
         });
 
@@ -37,14 +39,14 @@
             var list = new StaticList(element, {
                 dataSource: ["item"],
                 value: ["item"],
-                template: '#:data#'
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
 
             var li = element.children(":first");
 
-            assert.equal(li.attr("class"), "k-item k-state-selected k-state-focused");
+            assert.equal(li.attr("class"), "k-list-item k-selected k-focus");
         });
 
         it("kendoStaticList renders multiple selected class if multiple items are selected", function() {
@@ -52,16 +54,16 @@
                 selectable: "multiple",
                 dataSource: ["item1", "item2", "item3"],
                 value: ["item1", "item3"],
-                template: '#:data#'
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-selected");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-selected k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-selected");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-selected k-focus");
         });
 
         it("kendoStaticList renders selected item when object is complex", function() {
@@ -74,16 +76,16 @@
                     { name: "item3" }
                 ],
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-selected");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-selected k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-selected");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-selected k-focus");
         });
 
         it("kendoStaticList renders grouped data source", function() {
@@ -97,17 +99,18 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
 
             var children = element.children();
 
-            assert.isOk(!children.eq(0).children(".k-group")[0]);
-            assert.isOk(!children.eq(1).children(".k-group")[0]);
-            assert.isOk(children.eq(2).children(".k-group")[0]);
+            assert.isOk(!children.eq(0).hasClass("k-list-item-group-label"));
+            assert.isOk(!children.eq(1).hasClass("k-list-item-group-label"));
+            assert.isOk(!children.eq(2).hasClass("k-list-item-group-label"));
+            assert.equal(children.eq(2).find(".k-list-item-group-label").length, 1);
         });
 
         it("kendoStaticList renders k-first class to the group header element", function() {
@@ -121,8 +124,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -145,9 +148,9 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -168,9 +171,9 @@
             var list = new StaticList(element, {
                 dataValueField: "name",
                 dataSource: {},
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -184,6 +187,29 @@
             assert.isOk(!header[0].style.display);
         });
 
+        it("kendoStaticList shows fixed group header value if item group is 0", function() {
+            var list = new StaticList(element, {
+                dataValueField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", code: 0 },
+                        { name: "item2", code: 1 },
+                        { name: "item3", code: 2 }
+                    ],
+                    group: "code"
+                },
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
+            });
+
+            list.dataSource.read();
+
+            var header = list.header;
+
+            assert.equal(header.html(), "0");
+        });
+
         it("kendoStaticList hides fixed group header container if datasource is not grouped", function() {
             var list = new StaticList(element, {
                 dataValueField: "name",
@@ -194,9 +220,9 @@
                         { name: "item3", type: "b" }
                     ]
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -213,9 +239,9 @@
                     data: [],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -235,9 +261,9 @@
                         { name: "item3", type: "b" }
                     ]
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -250,7 +276,7 @@
         //TODO: Fix as it is unstable
         /*it("kendoStaticList renders fixed header to first visible item after scroll", function() {
             var wrapper = $('<div style="overflow:hidden;height:60px;position:absolute;"/>').appendTo(Mocha.fixture).append(element.height("100%"));
-    
+
             var list = new StaticList(element, {
                 dataValueField: "name",
                 dataSource: {
@@ -267,19 +293,19 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
-                fixedGroupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
+                fixedGroupTemplate: (data) => encode(data)
             });
-    
+
             list.dataSource.read();
-    
+
             element[0].scrollTop = 145; //scroll
-    
+
             list.refresh();
-    
+
             var header = list.header;
-    
+
             assert.equal(header.html(), "b");
         });*/
 
@@ -296,17 +322,17 @@
                     group: "type"
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-selected");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-first k-state-selected k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-selected");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-first k-selected k-focus");
         });
 
         it("kendoStaticList sets a data items collection during rendering", function() {
@@ -322,8 +348,8 @@
                     group: "type"
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -347,7 +373,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -384,7 +410,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -416,7 +442,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -442,7 +468,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();
@@ -468,7 +494,7 @@
                     ]
                 },
                 value: "item2",
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
             });
 
             list.dataSource.read();
@@ -479,7 +505,7 @@
                 value: "item2"
             });
 
-            var selectedItems = list.element.find(".k-state-selected");
+            var selectedItems = list.element.find(".k-selected");
 
             assert.equal(selectedItems.length, 0);
         });
@@ -496,7 +522,7 @@
                     ]
                 },
                 value: ["item2"],
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
             });
 
             list.dataSource.read();
@@ -507,7 +533,7 @@
                 value: "item2"
             });
 
-            var selectedItems = list.element.find(".k-state-selected");
+            var selectedItems = list.element.find(".k-selected");
 
             assert.equal(selectedItems.length, 1);
         });
@@ -526,7 +552,7 @@
                         }
                     }
                 },
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
                 dataValueField: "value"
             });
 
@@ -547,7 +573,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
                 skipUpdateOnBind: true
             });
 
@@ -572,7 +598,7 @@
                     ]
                 },
                 value: ["item1", "item3"],
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();

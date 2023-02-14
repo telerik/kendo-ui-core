@@ -2,7 +2,7 @@
 title: When Setting the Initial DataSource Filter an Expected Primary Expression Exception Occurs
 description: Setting the initial filter in the Kendo UI Grid throws an Expected primaryExpression exception.
 type: troubleshooting
-page_title: Expected Primary Expression Exception Occurs When Setting the Initial DataSource Filter | Kendo UI DataSource
+page_title: Expected Primary Expression Exception Occurs When Setting the Initial DataSource Filter - Kendo UI DataSource for ASP.NET MVC
 slug: expected-primary-expression-datasource-exception
 tags: expected, primary, expression, exception, datasource, filter, mvc
 ticketid: 1135350
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DataSource for ASP.NET MVC</td>
+  <td>Progress® Kendo UI® DataSource for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -48,7 +48,7 @@ The server returns an exception when it tries to load data from the DataSource b
 
 ## Error Message
 
-An `Expected primaryExpression` exception occurs:
+An `Expected primaryExpression` exception occurs.
 
 ````
 [FilterParserException: Expected primaryExpression]
@@ -89,7 +89,7 @@ The `Expected primaryExpression` exception is frequently caused by the incorrect
 
 ## Solution
 
-Use the following syntax in the filter instead:
+Use the following syntax in the filter instead.
 
 ````c#
 .DataSource(dataSource => dataSource

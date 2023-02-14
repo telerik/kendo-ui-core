@@ -6,11 +6,11 @@
         var isValid = true;
 
         if (year != date.getFullYear())
-            isValid = false;
+            {isValid = false;}
         else if (month != date.getMonth() + 1)
-            isValid = false;
+            {isValid = false;}
         else if (day != date.getDate())
-            isValid = false;
+            {isValid = false;}
 
         return isValid;
     }
@@ -19,19 +19,19 @@
         var isValid = true;
 
         if (year != date.getFullYear())
-            isValid = false;
+            {isValid = false;}
         else if (month != date.getMonth() + 1)
-            isValid = false;
+            {isValid = false;}
         else if (day != date.getDate())
-            isValid = false;
+            {isValid = false;}
         else if (hours && hours != date.getHours())
-            isValid = false;
+            {isValid = false;}
         else if (minutes && minutes != date.getMinutes())
-            isValid = false;
+            {isValid = false;}
         else if (seconds && seconds != date.getSeconds())
-            isValid = false;
+            {isValid = false;}
         else if (milliseconds && milliseconds != date.getMilliseconds())
-            isValid = false;
+            {isValid = false;}
 
         return isValid;
     }
@@ -962,7 +962,7 @@
 
         it("parseExact method parses date string with UTC 'Z' zone designator", function() {
             var utcDate = new Date(Date.UTC(2014, 4, 21, 0, 0, 0));
-            var result = kendo.parseDate("2014-05-21 00:00:00Z", "yyyy-MM-dd HH:mm:sszz")
+            var result = kendo.parseDate("2014-05-21 00:00:00Z", "yyyy-MM-dd HH:mm:sszz");
 
             assert.deepEqual(result, utcDate);
         });
@@ -982,6 +982,14 @@
         it('positive sign for minutes is taken into account when parsing', function() {
             var date = new Date(2017, 1, 23, 10, 0, 0);
             assert.deepEqual(parse('2017-02-23T10:00:00+00:30'), new Date(2017, 1, 23, 10 + date.getTimezoneOffset() * (-1) / 60, -30, 0));
+        });
+
+        it('setHours should work correctly when daylight saving time change occurs', function() {
+            var initialDate = new Date(2019, 2, 30, 23, 59, 0);
+            var newDate = new Date(2019, 2, 31, 0, 0, 0);
+            var expectedDate = new Date(2019, 2, 31, 23, 59, 0);
+
+            assert.deepEqual(kendo.date.setHours(newDate, initialDate), expectedDate);
         });
 
     });

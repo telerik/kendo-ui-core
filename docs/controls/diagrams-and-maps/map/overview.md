@@ -1,47 +1,30 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Map
-description: "Learn how to initialize the Kendo UI Map widget, and create and bind layers to it."
+page_title: jQuery Map Documentation - Map Overview
+description: "Get started with the jQuery Map by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_mapwidget
 position: 1
 ---
 
-# Map Overview
+# {{ site.product }} Map Overview
 
-The [Kendo UI Map widget](http://demos.telerik.com/kendo-ui/map/index) displays geospatial information organized in layers and is supported for both desktop and mobile devices.
+The Map displays geospatial information organized in layers and is supported for both desktop and mobile devices.
 
-The layers that the Map provides are:
-* Tile layers
-* Shape (vector) layers
-* Marker layers
+It also provides tile layers, shape (vector) layers, and marker layers.
 
-For more detailed information on any new features, refer to [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui/roadmap).
+* [Demo page for the Map](https://demos.telerik.com/kendo-ui/map/index)
 
-## Getting Started
+## Basic Configuration
 
-### Create the Map
-
-To create a Kendo UI Map, add an empty `div` element in the HTML, provide it with an ID, and, optionally, set its desired width and height inline or via CSS.
-
-###### Example
+To create a Map, add an empty `div` element to the HTML, provide it with an ID, and, optionally, set its desired width and height inline or by using CSS.
 
     <div id="map" style="width: 400px; height: 600px"></div>
 
-### Initialize the Map
-
 To render the Map, select the `div` with a jQuery selector and call the `kendoMap()` function.
-
-###### Example
 
     $("#map").kendoMap();
 
-## Configuration
-
-### Add Layers
-
 The following example demonstrates how to add a basic tile layer to the Map that is bound to OpenStreetMap.
-
-###### Example
 
     <div id="map" style="width: 600px; height: 400px;"></div>
     <script>
@@ -54,24 +37,20 @@ The following example demonstrates how to add a basic tile layer to the Map that
     });
     </script>
 
-**Figure 1: A basic map**
+![Kendo UI for jQuery Map with basic configuration](/controls/diagrams-and-maps/map/images/map-basic.png)
 
-![Basic map](/controls/diagrams-and-maps/map/images/map-basic.png)
+## Functionality and Features
+
+* [Layers]({% slug maplayers_mapwidget %})
+* [Creating maps]({% slug mapauthoring_mapwidget %})
+* [Implementation with Azure](https://docs.telerik.com/kendo-ui/knowledge-base/map-implementation-with-azure)
+
+## Events
+
+For a complete example, refer to the [demo on using the events of the Map](https://demos.telerik.com/kendo-ui/map/events).
 
 ## See Also
 
-* [Map Layers]({% slug maplayers_mapwidget %})
-* [Map Authoring]({% slug mapauthoring_mapwidget %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Map Widget](/aspnet-mvc/helpers/map/overview)
-* [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
-* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
-* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
-* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
-* [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
-* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
-* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
-* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
-* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
-* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
-* [How to Zoom on Area]({% slug howto_zoomonarea_map %})
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

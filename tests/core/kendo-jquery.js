@@ -1,7 +1,7 @@
 (function() {
     var $$ = kendo.jQuery;
 
-    describe("kendo jQuery", function () {
+    describe("kendo jQuery", function() {
         beforeEach(function() {
             kendo.support.touch = true;
         });
@@ -10,7 +10,7 @@
         });
 
     it("Executes listener event handler", function() {
-        var div = $$("<div />").handler({ _click: function() { assert.isOk(true) } });
+        var div = $$("<div />").handler({ _click: function() { assert.isOk(true); } });
 
         div.on("click", "_click");
 
@@ -18,7 +18,7 @@
     });
 
     it("Unbinds all listeners", function() {
-        var div = $$("<div />").handler({ _click: function() { assert.isOk(true) } });
+        var div = $$("<div />").handler({ _click: function() { assert.isOk(true); } });
 
         div.autoApplyNS();
         div.on("click", "_click");
@@ -39,7 +39,7 @@
 
     if (!kendo.support.browser.msie) {
         it("Recognizes event aliases", function() {
-            var div = $$("<div />").handler({ _up: function() { assert.isOk(true) } });
+            var div = $$("<div />").handler({ _up: function() { assert.isOk(true); } });
 
             div.on("up", "_up");
 
@@ -53,9 +53,9 @@
 
             try {
                 var div = $$("<div />").appendTo(Mocha.fixture).handler({
-                        _down: function() { assert.isOk(true) },
-                        _move: function() { assert.isOk(true) },
-                        _up: function() { assert.isOk(true) }
+                        _down: function() { assert.isOk(true); },
+                        _move: function() { assert.isOk(true); },
+                        _up: function() { assert.isOk(true); }
                     });
 
                 div.on("up", "_up");
@@ -75,7 +75,7 @@
         });
 
         it("Registers real mouse events", function(done) {
-            var div = $$("<div />").handler({ _down: function() { assert.isOk(true) } });
+            var div = $$("<div />").handler({ _down: function() { assert.isOk(true); } });
 
             div.on("down", "_down");
 

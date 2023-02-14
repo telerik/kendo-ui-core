@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ButtonGroup JSP Tag
+page_title: Overview - ButtonGroup JSP Tag
 description: "Get started with the ButtonGroup JSP tag in Kendo UI."
 slug: overview_buttongroup_uiforjsp
 position: 1
@@ -23,7 +23,7 @@ The ButtonGroup widget groups a series of buttons together on a single line.
 
 The example below demonstrates how to initialize the ButtonGroup by using the default `buttongroup` tag.
 
-###### Example
+
 
     <kendo:buttonGroup name="select-period">
     	<kendo:buttonGroup-items>
@@ -44,7 +44,7 @@ You can configure the ButtonGroup to be initially disabled by using its `enable`
 
 The following example demonstrates how to enable and disable the ButtonGroup.
 
-###### Example
+
 
     <kendo:buttonGroup name="select-period" enable="false">
     	<kendo:buttonGroup-items>

@@ -69,6 +69,7 @@ The model configuration of the SchedulerDataSource. See [SchedulerEvent](/api/fr
     });
     dataSource.fetch(function() {
         var event = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.title); // outputs "Bowling tournament"
     });
     </script>
@@ -78,7 +79,7 @@ The model configuration of the SchedulerDataSource. See [SchedulerEvent](/api/fr
 The timezone which the data source will use to convert the scheduler event dates. By default the current system timezone is used.
 If the data source is initialized by the scheduler, its [timezone](/api/javascript/ui/scheduler/configuration/timezone) option will be used.
 
-The complete list of the supported timezones is available in the [List of IANA time zones](http://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
+The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 
 #### Example - configure the data source model model
 
@@ -125,6 +126,7 @@ The complete list of the supported timezones is available in the [List of IANA t
     });
     dataSource.fetch(function() {
         var event = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.start); // outputs converted date based on defined timezone
     });
     </script>

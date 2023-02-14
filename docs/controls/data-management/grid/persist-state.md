@@ -1,9 +1,9 @@
 ---
 title: State Persistence
-page_title: jQuery Grid Documentation | State Persistence | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and persist the state of the widget."
+page_title: jQuery Grid Documentation - State Persistence
+description: "Get started with the jQuery Grid by Kendo UI and persist the state of the component."
 slug: persiststate_kendoui_grid_widget
-position: 9
+position: 11
 ---
 
 # State Persistence
@@ -14,6 +14,6 @@ To persist the settings that were previously applied to its structure, use the `
 
 ## See Also
 
-* [State Persistence by the Grid](https://demos.telerik.com/kendo-ui/grid/persist-state)
+* [State Persistence by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/persist-state)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

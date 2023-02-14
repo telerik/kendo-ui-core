@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | Sparkline PHP Class
+page_title: Remote Binding - Sparkline PHP Class
 description: "Bind Kendo UI Sparkline PHP class to JSON."
 slug: remotebinding_sparkline_uiforphp
 position: 3
@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -59,7 +59,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 3** Create a Sparkline, configure its columns and set its data source.
 
-###### Example
+
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
@@ -73,7 +73,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 4** Output the Sparkline by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $sparkline->render();
@@ -85,7 +85,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -93,7 +93,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 3** Retrieve records from the **Weather** table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT TMax FROM Weather LIMIT 10');
@@ -103,7 +103,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 4** Return the records as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type

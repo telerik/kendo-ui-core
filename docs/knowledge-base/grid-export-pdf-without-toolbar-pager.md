@@ -1,10 +1,10 @@
 ---
 title: Exclude Toolbar and Pager from Grid PDF Export
-description: An example on how to export the Kendo UI Grid to PDF without the toolbar and pager.
+description: Learn how to export the Kendo UI Grid to PDF without the toolbar and pager.
 type: how-to
-page_title: Exclude Toolbar and Pager from PDF Export | Kendo UI Grid
+page_title: Exclude Toolbar and Pager from PDF Export - Kendo UI Grid for jQuery
 slug: grid-export-pdf-without-toolbar-pager
-tags: grid, export, pdf, toolbar, pager, ignore, exclude
+tags: grid, export, pdf, toolbar, pager, ignore, exclude, columnmenu, column, menu, filter, icon
 ticketid: 1143253
 res_type: kb
 ---
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -36,17 +36,36 @@ When I export a Kendo UI Grid to PDF, the custom toolbar and pager are included.
 
 How can I prevent the custom toolbar and pager from appearing in the exported PDF file?
 
+How can I prevent the column menu icon and filter from appearing in the exported PDF file?
+
 ## Solution
 
 Use the following CSS rules.
 
-````css
+- Toolbar and Pager
+
+```css
 .k-pdf-export .k-grid-toolbar,
-.k-pdf-export .k-pager-wrap
+.k-pdf-export .k-pager
 {
   display: none;
 }
-````
+```
+- Filter Menu icon
+
+```css
+  .k-pdf-export .k-grid-filter-menu {
+    display:none;
+  }
+```
+
+- Column Menu icon
+
+```css
+  .k-pdf-export .k-grid-column-menu {
+    display:none;
+  }
+```
 
 The following example demonstrates the outcome of the suggested approach.
 
@@ -108,7 +127,7 @@ The following example demonstrates the outcome of the suggested approach.
 
     /* Hide the Grid header and pager during export */
     .k-pdf-export .k-grid-toolbar,
-    .k-pdf-export .k-pager-wrap
+    .k-pdf-export .k-pager
     {
       display: none;
     }
@@ -205,4 +224,7 @@ The following example demonstrates the outcome of the suggested approach.
 
 ## See Also
 
-* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/data-management/grid/pdf-export)
+* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/data-management/grid/export/pdf-export)
+* [Change Column Widths during PDF Export]({% slug grid-pdf-export-change-column-widths %})
+* [Exclude Certain Columns from the Exported PDF File]({% slug grid-exclude-columns-from-exported-pdf %})
+* [Show hidden columns during PDF Export]({% slug grid-pdf-show-hidden-columns %})

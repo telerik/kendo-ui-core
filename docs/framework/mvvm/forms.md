@@ -1,10 +1,10 @@
 ---
 title: Building MVVM-Bound Forms
-page_title: Building MVVM-Bound Forms | Kendo UI MVVM
+page_title: Building MVVM-Bound Forms - Kendo UI MVVM
 description: "Learn how to build MVVM-bound forms with Kendo UI."
-previous_url: /tutorials/mvvm-in-kendo-ui, /framework/mvvm/forms, /framework/mvvm/tutorials/forms
+previous_url: /tutorials/mvvm-in-kendo-ui, /framework/mvvm/tutorials/forms
 slug: mvvmboundforms_mvvmpattern_kendoui
-position: 5
+position: 6
 ---
 
 # Building MVVM Bound Forms

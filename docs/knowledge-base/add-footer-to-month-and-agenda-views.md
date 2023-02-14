@@ -1,8 +1,8 @@
 ---
 title: Add Footer to Month and Agenda Views in Scheduler
-description: An example on how to add a footer to the month and agenda views of the Kendo UI Scheduler.
+page_title: Add Footer to Month and Agenda Views - Kendo UI Scheduler for jQuery
+description: Learn how to add a footer to the month and agenda views of the Kendo UI for jQuery Scheduler.
 type: how-to
-page_title: Add Footer to Month and Agenda Views | Kendo UI Scheduler
 slug: add-footer-to-month-and-agenda-views
 tags: add, footer, month, agenda, views, scheduler
 ticketid: 1116003
@@ -15,7 +15,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 
@@ -47,7 +47,7 @@ $("#scheduler").kendoScheduler({
     dataBound: function(e) {
         $(".custom-footer").remove();
         if(e.sender.view().name == "agenda" || e.sender.view().name == "month") {
-            $(".k-scheduler").append('<div class="k-header k-scheduler-footer custom-footer"><input type="button" class="k-button" value="MyButton" /></div>');
+            $(".k-scheduler").append('<div class="k-scheduler-footer custom-footer"><input type="button" class="k-button" value="MyButton" /></div>');
         }
     }
 });

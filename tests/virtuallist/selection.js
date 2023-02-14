@@ -6,8 +6,8 @@
         ITEM_HEIGHT = 20,
         CONTAINER_HEIGHT = 200,
 
-        FOCUSED = "k-state-focused",
-        SELECTED = "k-state-selected";
+        FOCUSED = "k-focus",
+        SELECTED = "k-selected";
 
     function selectAll(virtual, elements, done) {
         var item = elements.shift();
@@ -71,9 +71,9 @@
                 dataSource: asyncDataSource,
                 height: CONTAINER_HEIGHT,
                 itemHeight: ITEM_HEIGHT,
-                template: "#=text#",
+                template: ({ text }) => text,
                 dataValueField: "value"
-            }
+            };
         });
 
         afterEach(function() {
@@ -259,9 +259,9 @@
                 elements.push(virtualList.items().eq(7));
 
                 selectAll(virtualList, elements, function() {
-                    assert.isOk(virtualList.items().eq(1).hasClass(SELECTED))
-                    assert.isOk(virtualList.items().eq(2).hasClass(SELECTED))
-                    assert.isOk(virtualList.items().eq(7).hasClass(SELECTED))
+                    assert.isOk(virtualList.items().eq(1).hasClass(SELECTED));
+                    assert.isOk(virtualList.items().eq(2).hasClass(SELECTED));
+                    assert.isOk(virtualList.items().eq(7).hasClass(SELECTED));
                     done();
                 });
             });
@@ -277,12 +277,12 @@
             var selectElementDone2 = function() {
                 assert.isOk(element.hasClass(SELECTED));
                 done();
-            }
+            };
 
             var selectElementDone1 = function() {
                 assert.isOk(element.hasClass(SELECTED));
                 virtualList.select(element).done(selectElementDone2);
-            }
+            };
 
             var asyncDataSourceThen = function() {
                 element = virtualList.items().first();
@@ -910,17 +910,17 @@
                     text: "Option Label"
                 }
             });
-    
+
             setTimeout(function() {
                 done();
                 virtualList.select(-1);
-    
+
                 var optionLabel = virtualList.optionLabel;
-    
+
                 assert.isOk(optionLabel.hasClass(FOCUSED));
             }, 100);
         });
-    
+
         it("select method selects the optionLabel", function(done) {
             var virtualList = new VirtualList(container, {
                 dataSource: asyncDataSource,
@@ -932,13 +932,13 @@
                     text: "Option Label"
                 }
             });
-    
+
             setTimeout(function() {
                 done();
                 virtualList.select(-1);
-    
+
                 var optionLabel = virtualList.optionLabel;
-    
+
                 assert.isOk(optionLabel.hasClass(FOCUSED));
                 assert.isOk(optionLabel.hasClass(SELECTED));
                 assert.equal()
@@ -1157,26 +1157,26 @@
                     total: "total"
                 }
             });
-    
+
             var virtualList = new VirtualList(container, $.extend(virtualSettings, {
                 selectable: true,
                 dataSource: asyncDataSource
             }));
-    
+
             asyncDataSource.read().then(function() {
                 virtualList.select(39);
-    
+
                 setTimeout(function() {
                     done();
-    
+
                     var current = virtualList.focus();
                     virtualList.focusNext();
-    
+
                     assert.equal(virtualList.focus()[0], current[0], "incorrect item is focused");
                 });
             });
         });
-    
+
         it("prev method does not focus prev item if it is not loaded", function(done) {
             var asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -1193,21 +1193,21 @@
                     total: "total"
                 }
             });
-    
+
             var virtualList = new VirtualList(container, $.extend(virtualSettings, {
                 selectable: true,
                 dataSource: asyncDataSource
             }));
-    
+
             asyncDataSource.read().then(function() {
                 virtualList.select(201);
-    
+
                 setTimeout(function() {
                     done();
-    
+
                     var current = virtualList.focus();
                     virtualList.focusPrev();
-    
+
                     assert.equal(virtualList.focus()[0], current[0], "incorrect item is focused");
                 }, 150);
             });

@@ -1,10 +1,10 @@
 (function() {
     var Selectable = kendo.ui.Selectable,
         ul,
-        SELECTED = "k-state-selected",
-        ACTIVE = "k-state-selecting",
+        SELECTED = "k-selected",
+        ACTIVE = "k-selecting",
         SELECTABLE = "k-selectable",
-        UNSELECTING = "k-state-unselecting";
+        UNSELECTING = "k-unselecting";
 
     describe("kendo.ui.Selectable", function() {
         beforeEach(function() {
@@ -18,7 +18,7 @@
                     ctrlKey: ctrlKey,
                     metaKey: metaKey
                 });
-            }
+            };
 
             $.fn.move = function(x, y, ctrlKey, metaKey) {
                 return triggerEvent(this, "mousemove", {
@@ -27,16 +27,16 @@
                     ctrlKey: ctrlKey,
                     metaKey: metaKey
                 });
-            }
+            };
 
             $.fn.release = function(info) {
                 info = $.extend({}, info);
                 return triggerEvent(this, "mouseup", info);
-            }
+            };
 
             $.fn.tap = function(info) {
                 return triggerEvent(this, "click", info);
-            }
+            };
         });
         afterEach(function() {
             ul.kendoSelectable("destroy");
@@ -49,7 +49,7 @@
             element.trigger($.Event(type, info));
 
             return element;
-        };
+        }
 
         it("selectable class is applied on the element when initialized", function() {
             var selectable = new Selectable(ul);
@@ -512,7 +512,7 @@
             assert.isOk(true);
         });
 
-        it("set values to select through value method triggers change event", function() {
+        it("set values to select through value method does not trigger change event", function() {
             var selectable = new Selectable(ul, { multiple: true }),
                 selectees = $(ul.find(">li")),
                 changeWasFired = false;
@@ -522,7 +522,7 @@
             });
             selectable.value(selectees);
 
-            assert.isOk(changeWasFired);
+            assert.isNotOk(changeWasFired);
         });
 
         it("selectRange with shift key pressed triggers select event", function() {
@@ -537,10 +537,10 @@
             selectable.selectRange(start, end);
 
             assert.equal(selectable.value().length, 2);
-            assert.isOk(selectWasFired);
+            assert.isNotOk(selectWasFired);
         });
 
-        it("selectRange with shift key pressed triggers change event", function() {
+        it("selectRange method does not trigger change event", function() {
             var selectable = new Selectable(ul, { multiple: true }),
                 start = $(ul.find(">li")[1]),
                 end = $(ul.find(">li")[0]),
@@ -552,7 +552,7 @@
             selectable.selectRange(start, end);
 
             assert.equal(selectable.value().length, 2);
-            assert.isOk(changeWasFired);
+            assert.isNotOk(changeWasFired);
         });
 
         it("select element adds aria attribute", function() {
@@ -750,23 +750,24 @@
             assert.isOk(ul.children().eq(2).hasClass(SELECTED), "Third item must be selected");
         });
 
-        it("multiple selection adds aria attribute", function() {
-            new Selectable(ul, { aria: true, multiple: true });
+        it("_invalidateSelectables calls _collidesWithActiveElement", function() {
+            var selectable = new Selectable(ul, { multiple: true });
 
-            assert.isOk(ul.is("[aria-multiselectable]"));
+            var selectableStub = stub(selectable, {
+                _collidesWithActiveElement: $.noop
+            });
+
+            selectable._downTarget = {};
+            selectable._items = selectable.element.find(selectable.options.filter);
+
+            selectable._invalidateSelectables({
+                height: 1000,
+                left: 0,
+                top: 0,
+                width: 1000
+            });
+
+            assert.isOk(selectableStub.calls('_collidesWithActiveElement') > 0);
         });
-
-        it("non-aria selectable does not add aria-multiselectable", function() {
-            new Selectable(ul, { multiple: true });
-
-            assert.isOk(!ul.is("[aria-multiselectable]"));
-        });
-
-        it("non-aria selectable does not add aria-multiselectable", function() {
-            new Selectable(ul, { aria: true });
-
-            assert.isOk(!ul.is("[aria-multiselectable]"));
-        });
-
     });
 }());

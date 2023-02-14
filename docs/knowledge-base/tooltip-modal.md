@@ -1,8 +1,8 @@
 ---
 title: Simulate Modal Behavior of the Tooltip
-description: An example on how to make the Kendo UI Tooltip display a modal overlay over the page.
+description: Learn how to make the Kendo UI Tooltip display a modal overlay over the page.
 type: how-to
-page_title: Make the Tooltip Modal | Kendo UI Tooltip
+page_title: Make the Tooltip Modal - Kendo UI Tooltip for jQuery
 slug: tooltip-modal
 tags: kendo, tooltip, modal
 ticketid: 1112824
@@ -15,7 +15,7 @@ component: tooltip
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Tooltip</td>
+  <td>Progress® Kendo UI® Tooltip for jQuery</td>
  </tr>
 </table>
 
@@ -68,4 +68,4 @@ Place a semi-transparent &lth;div&gth; element as an overlay over the entire HTM
 
 ## See Also
 
-* [Kendo UI Tooltip JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
+* [Kendo UI Tooltip JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)

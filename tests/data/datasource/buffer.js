@@ -110,7 +110,7 @@
                 assert.equal(ds.view()[19], 32);
                 assert.equal(buffer.at(25), 25);
                 done();
-            })
+            });
         });
 
         it("pulling back from the mid range shifts range back to initial page", function(done) {
@@ -133,7 +133,7 @@
                 assert.equal(buffer.at(26), 26); // second re-range
                 assert.equal(ds.view()[0], 20);
                 done();
-            })
+            });
         });
 
         it("pulling back from next page restores the mid-range", function(done) {
@@ -314,7 +314,7 @@
             timeout = window.setTimeout;
             window.setTimeout = function(callback) {
                 callback();
-            }
+            };
             ds = new kendo.data.DataSource({
                 transport: {
                     read: function(options) {

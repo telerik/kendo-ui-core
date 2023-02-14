@@ -1,8 +1,8 @@
 ---
 title: Capture the Event for Adding New Rows
-description: An example on how to capture the add event of the Kendo UI Grid.
+page_title: Capture the add Event - Kendo UI Grid for jQuery
+description: Learn how to capture the add event of the Kendo UI Grid.
 type: how-to
-page_title: Capture the add Event | Kendo UI Grid
 slug: how-to-capture-the-add-event-of-the-grid
 previous_url: /knowledge-base/how-to-capture-the-add-event-of-the-grid
 tags: add, event, grid
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -31,8 +31,8 @@ component: grid
   <td>56</td>
  </tr>
   <tr>
-  <td>Made with version</td>
-  <td>2017.3.913</td>
+  <td>Product Version</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -100,7 +100,7 @@ Attach an event handler for the **Add New Row** button to the `dataBound` event 
             navigatable: true,
             dataBound:function(e){
               $('.k-grid-add').unbind("click");
-              
+
               $('.k-grid-add').bind("click", function(){
                 console.log("Handle the add button click")
               });
@@ -112,16 +112,11 @@ Attach an event handler for the **Add New Row** button to the `dataBound` event 
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
               { field: "UnitsInStock", title: "Units In Stock", width: 120 },
-              { field: "Discontinued", width: 120, editor: customBoolEditor },
+              { field: "Discontinued", width: 120 },
               { command: "destroy", title: "&nbsp;", width: 150 }],
             editable: true
           });
         });
-
-        function customBoolEditor(container, options) {
-          $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label">​</label>').appendTo(container);
-        }
       </script>
     </div>
 ```

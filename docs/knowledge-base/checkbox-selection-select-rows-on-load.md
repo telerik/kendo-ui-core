@@ -1,8 +1,8 @@
 ---
 title: Select Grid Rows Programmatically Based on the DataItem
-description: An example on how to select rows in a Kendo UI Grid based on the values of the data items.
+description: Learn how to select rows in a Kendo UI Grid based on the values of the data items.
 type: how-to
-page_title: Automatically Check Checkboxes on Load | Kendo UI Grid
+page_title: Automatically Check Checkboxes on Load - Kendo UI Grid for jQuery
 slug: checkbox-selection-select-rows-on-load
 tags: checkbox selection, grid, kendo ui
 ticketid: 1117204
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>
@@ -100,12 +100,12 @@ I want to have a Grid with some of its checkboxes checked by default when it loa
 </div>
 ```
 
-### Notes
+## Notes
 
 The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 release.
 
 ## See Also
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
-* [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)
+* [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

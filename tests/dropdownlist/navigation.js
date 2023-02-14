@@ -1,7 +1,7 @@
 (function() {
     var DropDownList = kendo.ui.DropDownList,
         data = ["foo", "bar"],
-        SELECTED = "k-state-selected",
+        SELECTED = "k-selected",
         keys = kendo.keys,
         CLICK = kendo.support.touch ? "touchend" : "click",
         input;
@@ -205,7 +205,9 @@
             var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
             dropdownlist.select(1);
-            dropdownlist.wrapper.focus().press(keys.HOME);
+            dropdownlist.wrapper.focus();
+            dropdownlist.open();
+            dropdownlist.wrapper.press(keys.HOME);
 
             assert.isOk(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
             assert.equal(dropdownlist.text(), data[0]);
@@ -219,7 +221,9 @@
             dropdownlist.dataSource.read();
 
             dropdownlist.select(0);
-            dropdownlist.wrapper.focus().press(keys.END);
+            dropdownlist.wrapper.focus();
+            dropdownlist.open();
+            dropdownlist.wrapper.press(keys.END);
 
             assert.isOk(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
             assert.equal(dropdownlist.text(), data[1]);
@@ -263,8 +267,8 @@
             dropdownlist.popup.bind("close", function() {
                 var current = dropdownlist.current();
                 assert.equal(current.index(), 1);
-                assert.isOk(current.hasClass("k-state-focused"));
-                assert.isOk(current.hasClass("k-state-selected"));
+                assert.isOk(current.hasClass("k-focus"));
+                assert.isOk(current.hasClass("k-selected"));
             });
 
             dropdownlist.popup.open();
@@ -307,8 +311,8 @@
 
             var current = dropdownlist.current();
             assert.equal(current.index(), 1);
-            assert.isOk(current.hasClass("k-state-focused"));
-            assert.isOk(current.hasClass("k-state-selected"));
+            assert.isOk(current.hasClass("k-focus"));
+            assert.isOk(current.hasClass("k-selected"));
         });
 
         it("press enter should not throw an error", function() {
@@ -420,7 +424,7 @@
             dropdownlist.readonly();
             dropdownlist.wrapper.focusin();
 
-            assert.isOk(dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+            assert.isOk(dropdownlist.wrapper.hasClass("k-focus"));
         });
 
         it("DropDownList selects by index after continues selection", function() {
@@ -566,11 +570,11 @@
             var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
             dropdownlist.wrapper.mousedown().focusin().click();
-            assert.isOk(dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+            assert.isOk(dropdownlist.wrapper.hasClass("k-focus"));
 
             dropdownlist.wrapper.focusout();
 
-            assert.isOk(!dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+            assert.isOk(!dropdownlist.wrapper.hasClass("k-focus"));
         });
 
         it("DropDownList removes focused state on blur when arrow is clicked", function() {
@@ -579,7 +583,7 @@
             dropdownlist.wrapper.find(".k-icon").mousedown().click();
             dropdownlist.wrapper.focusout();
 
-            assert.isOk(!dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+            assert.isOk(!dropdownlist.wrapper.hasClass("k-focus"));
         });
 
         it("DropDownList closes popup with filter input on scroll", function() {
@@ -615,7 +619,7 @@
             var current = dropdownlist.current();
 
             assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.isOk(current.hasClass("k-state-focused"));
+            assert.isOk(current.hasClass("k-focus"));
         });
 
         it("first item is selected on down when option label is focused", function() {
@@ -643,8 +647,8 @@
             var current = dropdownlist.current();
 
             assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.isOk(current.hasClass("k-state-focused"));
-            assert.isOk(current.hasClass("k-state-selected"));
+            assert.isOk(current.hasClass("k-focus"));
+            assert.isOk(current.hasClass("k-selected"));
         });
 
         it("stays on option label on UP", function() {
@@ -658,8 +662,8 @@
             var current = dropdownlist.current();
 
             assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.isOk(current.hasClass("k-state-focused"));
-            assert.isOk(current.hasClass("k-state-selected"));
+            assert.isOk(current.hasClass("k-focus"));
+            assert.isOk(current.hasClass("k-selected"));
         });
 
         it("focus optionLabel on HOME", function() {
@@ -669,13 +673,15 @@
                 index: 1
             });
 
-            dropdownlist.wrapper.focus().press(keys.HOME);
+            dropdownlist.wrapper.focus();
+            dropdownlist.open();
+            dropdownlist.wrapper.press(keys.HOME);
 
             var current = dropdownlist.current();
 
             assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.isOk(current.hasClass("k-state-focused"));
-            assert.isOk(current.hasClass("k-state-selected"));
+            assert.isOk(current.hasClass("k-focus"));
+            assert.isOk(current.hasClass("k-selected"));
         });
 
         it("unfocus optionLabel on END", function() {
@@ -684,15 +690,17 @@
                 optionLabel: "Any"
             });
 
-            dropdownlist.wrapper.focus().press(keys.END);
+            dropdownlist.wrapper.focus();
+            dropdownlist.open();
+            dropdownlist.wrapper.press(keys.END);
 
             var optionLabel = dropdownlist.optionLabel;
             var current = dropdownlist.current();
 
             assert.equal(current[0], dropdownlist.ul.children()[data.length - 1]);
 
-            assert.isOk(!optionLabel.hasClass("k-state-focused"));
-            assert.isOk(!optionLabel.hasClass("k-state-selected"));
+            assert.isOk(!optionLabel.hasClass("k-focus"));
+            assert.isOk(!optionLabel.hasClass("k-selected"));
         });
 
         it("widget sets option label value if complex object", function() {
@@ -741,7 +749,7 @@
             var current = dropdownlist.current();
 
             assert.equal(current.index(), 0);
-            assert.isOk(current.hasClass("k-state-selected"));
+            assert.isOk(current.hasClass("k-selected"));
         });
 
         it("DropDownList does not focus filter input if mobile device", function() {

@@ -22,7 +22,7 @@ The Kendo UI Application for mobile devices provides the necessary tools for bui
 
 The simplest Application for mobile consists of a single mobile `View`.
 
-###### Example
+
 
     <body>
        <div data-role="view">
@@ -43,11 +43,11 @@ The mobile Application consists of a single HTML page with one or more mobile Vi
 
 When a mobile View is initialized, that is, the first time the user visits it, it initializes all Kendo UI web and hybrid mobile widgets, as well as the Kendo UI widgets for data visualization it contains.
 
-For more details on the declarative widget initialization, refer to the [article about setting data attributes]({% slug dataattributes_configuration_installation %}).
+For more details on the declarative widget initialization, refer to the [article about setting data attributes]({% slug mvvm_initialization_kendoui %}).
 
 The example below demonstrates a mobile view with a mobile Button widget.
 
-###### Example
+
 
     <body>
        <div data-role="view">
@@ -70,7 +70,7 @@ When initialized, the mobile Application modifies the behavior of the Kendo UI h
 
 The example below demonstrates views linked with mobile buttons.
 
-###### Example
+
 
     <div data-role="view" id="foo">Foo <a href="#bar" data-role="button">Go to Bar</a></div>
     <div data-role="view" id="bar">Bar <a href="#foo" data-role="button">Go to Foo</a></div>
@@ -79,9 +79,9 @@ The example below demonstrates views linked with mobile buttons.
 
 By default, all navigational widgets try to navigate to local views when tapped. This behavior can be overridden by setting the `data-rel="external"` attribute to the `link` element.
 
-###### Example
 
-    <a href="http://telerik.com/" data-role="button" data-rel="external">Visit KendoUI</a>
+
+    <a href="https://www.telerik.com/" data-role="button" data-rel="external">Visit KendoUI</a>
 
 ## Transitions
 
@@ -89,7 +89,7 @@ The View transitions are defined by setting a `data-transition` attribute to the
 
 The example below demonstrates views with transitions.
 
-###### Example
+
 
     <div data-role="view" id="foo" data-transition="slide">Foo <a href="#bar" data-role="button">Go to Bar</a></div>
     <div data-role="view" id="bar" data-transition="overlay:up">Bar <a href="#foo" data-role="button">Go to Foo</a></div>
@@ -125,7 +125,7 @@ The transition direction can be specified by using the `overlay:(direction)` for
 
 Each transition may be played in reverse. To do so, add `" reverse"` after the transition definition. For instance, to simulate returning to previous view using the `slide` transition, use `"slide:left reverse"`.
 
-###### Example
+
 
     <div data-role="view" id="foo">Foo <a href="#bar" data-role="button">Go to Bar</a></div>
     <div data-role="view" id="bar">Bar <a href="#foo" data-role="button" data-transition="slide:left reverse">Go to Foo</a></div>
@@ -140,7 +140,7 @@ The Kendo UI hybrid mobile Application can load Views remotely by using AJAX. If
 
 The View content&mdash;the first element with `data-role="view"`&mdash;is extracted from the AJAX response and appended to the Application DOM element. If no element with `data-role="view"` is found, the `body` contents are wrapped in a `<div data-role="view">` tag and used as a remote view. If no element with `data-role="view"` is found and no body element is present, the entire response is wrapped in a `<div data-role="view">` tag and used as a remote view. Once the remote View is fetched, no additional round trips to the server occur when the View is displayed again.
 
-###### Example
+
 
     <!-- foo.html -->
     <div data-role="view">Foo <a href="bar.html" data-role="button">Go to Bar</a></div>
@@ -154,7 +154,7 @@ The remote view request will also append&mdash;but not initialize&mdash;any addi
 
 If the remote view needs an additional scripting (widget-initialization or widget-binding) logic, it may be defined in the view `init` event handler, in the AJAX response.
 
-###### Example
+
 
     <!-- foo.html -->
     <div data-role="view">
@@ -178,7 +178,7 @@ Once a remote view is loaded, by default, subsequent view displays for the same 
 
 The example below demonstrates a remote view that is refreshed on every request.
 
-###### Example
+
 
     <!-- foo.html -->
     <div data-role="view">
@@ -199,7 +199,7 @@ The Application component provides a way to specify the initial view to show. Th
 
 The example below demonstrates how to define an initial view.
 
-###### Example
+
 
     <script>
          new kendo.mobile.Application($(document.body), {
@@ -213,7 +213,7 @@ The example below demonstrates how to define an initial view.
 
 The mobile devices can create a bookmark placed on the **Home** screen, which is called a web clip. Users can use the shortcut to open that web page later. While instantiating the Application, you can specify a custom icon or disable the app mode.
 
-###### Example
+
 
     <script>
          new kendo.mobile.Application($(document.body), {
@@ -227,7 +227,7 @@ Multiple icons for different sizes can be defined, as demonstrated in the exampl
 
 For more information, refer to the [Apple web clip icons article](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/index.html#//apple_ref/doc/uid/TP40006556-CH14-SW11).
 
-###### Example
+
 
     <script>
          new kendo.mobile.Application($(document.body), {
@@ -242,7 +242,7 @@ For more information, refer to the [Apple web clip icons article](https://develo
 
 As of Kendo UI Q2 2013, you can disable the app mode and open the home screen web clip link in the browser (by default Kendo UI Mobile applications are web app capable and open without the browser chrome).
 
-###### Example
+
 
     <script>
          new kendo.mobile.Application($(document.body), {
@@ -256,7 +256,7 @@ As of Kendo UI Q2 2013, you can disable the app mode and open the home screen we
 
 To hide the status bar in an application deployed with Cordova, the [Cordova Status Bar Plugin](https://github.com/apache/cordova-plugin-statusbar) should be enabled. Next, call the StatusBar `hide` method and set the mobile application `statusBarStyle` to `hidden`, as demonstrated in the example below.
 
-###### Example
+
 
     <div data-role="view" data-title="Pink">
         <header data-role="header">
@@ -280,7 +280,7 @@ The iOS7 introduced application status bars that merge with your application and
 
 The example demonstrates how to make a pink NavBar with seamless status bar on top of it.
 
-###### Example
+
 
     <style scoped>
         .km-on-ios .km-header .km-navbar
@@ -314,7 +314,7 @@ The example demonstrates how to make a pink NavBar with seamless status bar on t
 
 Another neat addition to iOS7 Mobile Safari is that the browser address bar and the status bar above it inherit a tint from the open web page. The tint is directly taken from the background-color of the page, so to use it in your Kendo UI hybrid mobile application, apply the example below.
 
-###### Example
+
 
     .km-on-ios.km-ios7
     {
@@ -329,7 +329,7 @@ By default, Kendo UI hybrid mobile styling in Android switches the places of the
 
 The example below demonstrates how to switch the places of the header and the footer.
 
-###### Example
+
 
     .km-android .km-view:not(.km-splitview) {
         -webkit-box-direction: normal;
@@ -342,7 +342,7 @@ The example below demonstrates how to switch the places of the header and the fo
 
 By default, Windows Phone 8 highlights all links when they are active (hold down). Stopping this behavior requires manually adding a meta tag to your application or website, as shown in the example below. Note that the adding of the tag through JavaScript is ignored.
 
-###### Example
+
 
     <meta name="msapplication-tap-highlight" content="no" />
 
@@ -355,7 +355,7 @@ To use the Kendo UI hybrid mobile framework in an ASP.NET WebForms project you s
 
 The example below demonstrates how to initialize a Kendo UI hybrid mobile application in an ASP.NET WebForms project.
 
-###### Example
+
 
     <form id="mobileContainer" runat="server">
         <div data-role="view">
@@ -376,7 +376,7 @@ The example below demonstrates how to initialize a Kendo UI hybrid mobile applic
 <!--*-->
 > **Important**
 >
-> The Kendo UI application for mobile is a type of a [single page application](http://en.wikipedia.org/wiki/Single-page_application). This type of web applications fits on a single page to provide a more fluid user experience and native-like responsiveness. Forms post-backs, which cause page reloading, are in conflict with that approach. That said, forms post-backs that the .NET framework makes automatically should be avoided&mdash;in the mobile application all the dynamic content should be sent or retrieved via Ajax requests.
+> The Kendo UI application for mobile is a type of a [single page application](https://en.wikipedia.org/wiki/Single-page_application). This type of web applications fits on a single page to provide a more fluid user experience and native-like responsiveness. Forms post-backs, which cause page reloading, are in conflict with that approach. That said, forms post-backs that the .NET framework makes automatically should be avoided&mdash;in the mobile application all the dynamic content should be sent or retrieved via Ajax requests.
 
 ## See Also
 

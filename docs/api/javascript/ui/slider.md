@@ -231,6 +231,7 @@ The max value to set.
 
     var max = slider.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -269,6 +270,7 @@ The min value to set.
 
     var min = slider.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -336,6 +338,7 @@ a number representing the underlying value.
 	  
     var slider = $("#slider").data("kendoSlider");
     var sliderValue = slider.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 	console.log(sliderValue);
 	
     </script>

@@ -1,9 +1,11 @@
 ---
 title: Overview
-page_title: Excel Export Overview | Kendo UI Excel Export
+page_title: Excel Export Overview - Kendo UI Excel Export
 description: "Learn how to create Excel documents with Kendo UI."
 slug: introduction_excelexport_kendoui
 position: 1
+CTAControlName: Excel Export
+
 ---
 
 # Excel Export Overview
@@ -12,20 +14,24 @@ As of the Kendo UI 2014 Q3 release, Kendo UI has provided Excel generation suppo
 
 Excel export allows you to create Excel documents in JavaScript and save them on the client machine.
 
+{% if site.has_cta_panels == true %}
+{% include cta-panel-overview.html %}
+{% endif %}
+
 ## Requirements
 
 To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
 
 ```
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
-<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 ```
 
 JSZip is part of the Kendo UI distribution and is also available through the Kendo UI CDN:
 
 ```
-<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
 ```
 
 > * If you do not include JSZip in the page, Kendo UI will raise a runtime exception.

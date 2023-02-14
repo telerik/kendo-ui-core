@@ -41,7 +41,6 @@
         it("Css classes are added to the wrapper", function() {
             var pb = new ProgressBar(container);
 
-            assert.isOk(pb.wrapper.hasClass("k-widget"));
             assert.isOk(pb.wrapper.hasClass("k-progressbar"));
         });
 
@@ -213,12 +212,12 @@
             assert.isOk(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
         });
 
-        it("k-state-disabled class is added when ProgressBar is disabled initially", function() {
+        it("k-disabled class is added when ProgressBar is disabled initially", function() {
             var pb = new ProgressBar(container, {
                 enable: false
             });
 
-            assert.isOk(pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(pb.wrapper.hasClass("k-disabled"));
         });
 
         it("Initial value is set correctly to false", function() {
@@ -252,7 +251,7 @@
                 value: false
             });
 
-            assert.equal(pb.wrapper.find(".k-state-selected").length, 0);
+            assert.equal(pb.wrapper.find(".k-selected").length, 0);
         });
 
         it("ProgressBar is correctly disabled and initial value is set to false (type='value')", function() {
@@ -263,7 +262,7 @@
             });
 
             assert.isOk(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            assert.isOk(pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(pb.wrapper.hasClass("k-disabled"));
             assert.equal(pb.options.value, false);
         });
 
@@ -275,7 +274,7 @@
             });
 
             assert.isOk(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            assert.isOk(pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(pb.wrapper.hasClass("k-disabled"));
             assert.equal(pb.options.value, false);
         });
 
@@ -287,7 +286,7 @@
             });
 
             assert.isOk(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            assert.isOk(pb.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(pb.wrapper.hasClass("k-disabled"));
             assert.equal(pb.options.value, false);
         });
 
@@ -502,7 +501,7 @@
                 showStatus: false
             });
 
-            var progressWrapper = pb.wrapper.find(".k-state-selected");
+            var progressWrapper = pb.wrapper.find(".k-selected");
 
             assert.equal(progressWrapper.length, 1);
             assert.isOk(progressWrapper.is(":empty"));
@@ -517,7 +516,7 @@
             });
 
             var progressWrapperExpectedSize = pb._calculatePercentage().toFixed(2);
-            var actualProgressWrapperSize = parseFloat(pb.wrapper.find(".k-state-selected")[0].style.width).toFixed(2);
+            var actualProgressWrapperSize = parseFloat(pb.wrapper.find(".k-selected")[0].style.width).toFixed(2);
 
             assert.equal(actualProgressWrapperSize, progressWrapperExpectedSize);
         });
@@ -541,7 +540,7 @@
             });
 
             var progressStatusHolder = pb.wrapper.children("span.k-progress-status-wrap");
-            var progressWrapper = pb.wrapper.find(".k-state-selected");
+            var progressWrapper = pb.wrapper.find(".k-selected");
             var progressWrapperStatusHolder = $("span.k-progress-status-wrap", progressWrapper);
 
             assert.equal(progressStatusHolder.length, 1);
@@ -573,20 +572,20 @@
             assert.equal(pb.wrapper.find("ul.k-reset").length, 1);
         });
 
+        it("Chunk ProgressBar ul element has necessary classes", function() {
+            var pb = new ProgressBar(container, {
+                type: "chunk"
+            });
+
+            assert.equal(pb.wrapper.find("ul.k-reset.k-progressbar-chunks").length, 1);
+        });
+
         it("Chunk ProgressBar contains a li element for each chunk", function() {
             var pb = new ProgressBar(container, {
                 type: "chunk"
             });
 
-            assert.equal(pb.wrapper.find("li.k-item").length, pb.options.chunkCount);
-        });
-
-        it("Correct css class is added to each upcoming chunk", function() {
-            var pb = new ProgressBar(container, {
-                type: "chunk"
-            });
-
-            assert.isOk(pb.wrapper.find("li.k-item").hasClass("k-state-default"));
+            assert.equal(pb.wrapper.find("li.k-progressbar-chunk").length, pb.options.chunkCount);
         });
 
         it("Correct css class is added to the first chunk", function() {
@@ -594,7 +593,7 @@
                 type: "chunk"
             });
 
-            assert.isOk(pb.wrapper.find("li.k-item:first").hasClass("k-first"));
+            assert.isOk(pb.wrapper.find("li.k-progressbar-chunk:first").hasClass("k-first"));
         });
 
         it("Correct css class is added to the last chunk", function() {
@@ -602,7 +601,7 @@
                 type: "chunk"
             });
 
-            assert.isOk(pb.wrapper.find("li.k-item:last").hasClass("k-last"));
+            assert.isOk(pb.wrapper.find("li.k-progressbar-chunk:last").hasClass("k-last"));
         });
 
         it("Correct css class is added to the completed chunks", function() {
@@ -611,9 +610,9 @@
                 value: 45
             });
 
-            var completedChunks = pb.wrapper.find("li.k-item:lt(2)");
+            var completedChunks = pb.wrapper.find("li.k-progressbar-chunk:lt(2)");
 
-            assert.equal(pb.wrapper.find("li.k-item.k-state-selected").length, completedChunks.length);
+            assert.equal(pb.wrapper.find("li.k-progressbar-chunk.k-selected.k-progressbar-value").length, completedChunks.length);
         });
 
         it("Chunk size is calculated correctly according to chunk count", function() {
@@ -623,7 +622,7 @@
             });
 
             var chunkCount = pb.options.chunkCount;
-            var expectedChunkSize = parseFloat(pb.wrapper.find("ul.k-reset li.k-item:first")[0].style.width).toFixed(2);
+            var expectedChunkSize = parseFloat(pb.wrapper.find("ul.k-reset li.k-progressbar-chunk:first")[0].style.width).toFixed(2);
             var actualChunkSize = (100 / chunkCount).toFixed(2);
 
             assert.equal(actualChunkSize, expectedChunkSize);

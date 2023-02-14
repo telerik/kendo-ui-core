@@ -65,6 +65,7 @@ Fires after the mobile SplitView and its child widgets are initialized.
 
     <script>
     function onInit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e);
     }
     new kendo.mobile.Application();
@@ -93,6 +94,7 @@ Fires when the mobile SplitView becomes visible.
 
     <script>
     function onShow(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e);
     }
     new kendo.mobile.Application();

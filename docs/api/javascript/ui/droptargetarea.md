@@ -7,6 +7,8 @@ res_type: api
 
 # kendo.ui.DropTargetArea
 
+Represents the Kendo UI DropTargetArea widget. Inherits from [DropTarget](/api/javascript/ui/droptarget).
+
 ## Configuration
 
 ### group `String`*(default: "default")*
@@ -137,7 +139,7 @@ res_type: api
 ### dragenter
 
 Fired when draggable moves over one of the drop targets.
-The `dragenter` event represents a jQuery `mousemove` event and contains all the event data of the [jQuery Event Object](http://api.jquery.com/category/events/event-object/).
+The `dragenter` event represents a jQuery `mousemove` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
 
 #### Example - modify the hint element on dragenter
 
@@ -209,7 +211,7 @@ The current Draggable element.
 ### dragleave
 
 Fired when draggable moves out of one of the drop targets.
-The `dragleave` event represents a jQuery `mousemove` event and contains all the event data of the [jQuery Event Object](http://api.jquery.com/category/events/event-object/).
+The `dragleave` event represents a jQuery `mousemove` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
 
 #### Example - modify the hint element on dragenter
 
@@ -281,7 +283,7 @@ The current Draggable element.
 ### drop
 
 Fired when draggable is dropped over one of the drop targets.
-The `drop` event represents a jQuery `mouseup` event and contains all the event data of the [jQuery Event Object](http://api.jquery.com/category/events/event-object/).
+The `drop` event represents a jQuery `mouseup` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
 
 #### Example - modify the dropTarget and draggable element on successful drop
 

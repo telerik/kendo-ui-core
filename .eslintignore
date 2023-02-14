@@ -1,0 +1,27 @@
+**/node_modules
+!src/**/*.js
+
+# kendo files to ignore
+src/module.js
+
+# dependencies to ignore
+src/angular.js
+src/angular.min.js
+src/jquery.js
+src/jquery.min.js
+src/jszip.js
+src/jszip.min.js
+src/pako_deflate.js
+src/pako_deflate.min.js
+
+src/pivotgrid/common.js
+src/signature/signature-pad.js
+src/drawing/kendo-drawing.js
+src/ooxml
+
+# folders to ignore
+src/colorpicker
+src/pdf
+src/spreadsheet
+src/util
+src-modules

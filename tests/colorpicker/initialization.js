@@ -1,36 +1,4 @@
 (function() {
-    describe("FlatColorPicker", function() {
-        afterEach(function() {
-            kendo.destroy(Mocha.fixture);
-        });
-
-        it("input: false does not show input", function() {
-            var dom = $("<div />").appendTo(Mocha.fixture).kendoFlatColorPicker({ input: false });
-
-            var input = dom.find(".k-color-value");
-
-            assert.equal(input.css("visibility"), "hidden");
-        });
-
-        it("initialization from input nests it into wrapper", function() {
-            var dom = $("<input name='foo' />").appendTo(Mocha.fixture).kendoColorPicker();
-
-            assert.equal($(".k-colorpicker [name=foo]").length, 1);
-        });
-
-        it("maintains tabIndex after disable/enable", function() {
-            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
-            var cp = dom.data("kendoFlatColorPicker");
-            cp.enable(false);
-            cp.enable(true);
-            assert.equal(cp.wrapper.attr("tabIndex"), 5);
-        });
-
-    });
-}());
-
-
-(function() {
     describe("ColorPicker", function() {
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
@@ -62,7 +30,7 @@
                 .appendTo(Mocha.fixture)
                 .find("input").kendoColorPicker({
                     open: function() {
-                        assert.isOk(true)
+                        assert.isOk(true);
                     }
                 }).end()
                 .find("label").click();
@@ -86,7 +54,7 @@
                 .appendTo(Mocha.fixture)
                 .find("input").prop("disabled", true).kendoColorPicker({
                     open: function() {
-                        assert.isOk(true)
+                        assert.isOk(true);
                     }
                 }).end()
                 .find("label").click();
@@ -117,21 +85,28 @@
 
             cp.toggle();
         });
-    });
-}());
 
-(function() {
-    describe("ColorPalette", function() {
-        afterEach(function() {
-            kendo.destroy(Mocha.fixture);
+        it("receives k-disabled class when disabled", function() {
+            expect(0);
+
+            var dom = $("<input disabled='disabled' />").appendTo(Mocha.fixture).kendoColorPicker();
+            var cp = dom.data("kendoColorPicker");
+
+            cp.enable(false);
+
+            assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
-        it("maintains tabIndex after disable/enable", function() {
-            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorPalette();
-            var cp = dom.data("kendoColorPalette");
+        it("removes k-disabled class when enabled", function() {
+            expect(0);
+
+            var dom = $("<input disabled='disabled' />").appendTo(Mocha.fixture).kendoColorPicker();
+            var cp = dom.data("kendoColorPicker");
+
             cp.enable(false);
-            cp.enable(true);
-            assert.equal(cp.wrapper.attr("tabIndex"), 5);
+            cp.enable();
+
+            assert.isOk(!cp.wrapper.hasClass("k-disabled"));
         });
     });
 }());

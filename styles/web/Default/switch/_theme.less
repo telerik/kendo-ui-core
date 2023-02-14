@@ -1,17 +1,17 @@
 // Switch
 
-.k-switch-container {
+.k-switch-track {
     .box-shadow( @switch-container-shadow );
 }
 
-.k-switch-handle {
+.k-switch-thumb {
     background-clip: border-box;
 }
 
 .k-switch-on {
     .box-shadow( @switch-on-shadow );
 
-    .k-switch-container {
+    .k-switch-track {
         .fill(
             @switch-on-text,
             @switch-on-bg,
@@ -20,7 +20,7 @@
         .composite-background( @switch-on-gradient );
     }
 
-    .k-switch-handle {
+    .k-switch-thumb {
         .fill(
             @switch-on-handle-text,
             @switch-on-handle-bg,
@@ -31,10 +31,11 @@
     }
 
     &:focus,
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
         .box-shadow( @switch-on-focused-shadow );
 
-        .k-switch-container {
+        .k-switch-track {
             .fill(
                 @switch-on-focused-text,
                 @switch-on-focused-bg,
@@ -43,7 +44,7 @@
             .composite-background( @switch-on-focused-gradient );
         }
 
-        .k-switch-handle {
+        .k-switch-thumb {
             .fill(
                 @switch-on-handle-focused-text,
                 @switch-on-handle-focused-bg,
@@ -54,8 +55,9 @@
     }
 
     &:hover,
-    &.k-state-hover {
-        .k-switch-container {
+    &.k-state-hover,
+    &.k-hover {
+        .k-switch-track {
             .fill(
                 @switch-on-hovered-text,
                 @switch-on-hovered-bg,
@@ -64,7 +66,7 @@
             .composite-background( @switch-on-hovered-gradient );
         }
 
-        .k-switch-handle {
+        .k-switch-thumb {
             .fill(
                 @switch-on-handle-hovered-text,
                 @switch-on-handle-hovered-bg,
@@ -82,7 +84,7 @@
 .k-switch-off {
     .box-shadow( @switch-off-shadow );
 
-    .k-switch-container {
+    .k-switch-track {
         .fill(
             @switch-off-text,
             @switch-off-bg,
@@ -91,7 +93,7 @@
         .composite-background( @switch-off-gradient );
     }
 
-    .k-switch-handle {
+    .k-switch-thumb {
         .fill(
             @switch-off-handle-text,
             @switch-off-handle-bg,
@@ -102,10 +104,11 @@
     }
 
     &:focus,
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
         .box-shadow( @switch-off-focused-shadow );
 
-        .k-switch-container {
+        .k-switch-track {
             .fill(
                 @switch-off-focused-text,
                 @switch-off-focused-bg,
@@ -114,7 +117,7 @@
             .composite-background(@switch-off-focused-gradient);
         }
 
-        .k-switch-handle {
+        .k-switch-thumb {
             .fill(
                 @switch-off-handle-focused-text,
                 @switch-off-handle-focused-bg,
@@ -125,8 +128,9 @@
     }
 
     &:hover,
-    &.k-state-hover {
-        .k-switch-container {
+    &.k-state-hover,
+    &.k-hover {
+        .k-switch-track {
             .fill(
                 @switch-off-hovered-text,
                 @switch-off-hovered-bg,
@@ -135,7 +139,7 @@
             .composite-background(@switch-off-hovered-gradient);
         }
 
-        .k-switch-handle {
+        .k-switch-thumb {
             .fill(
                 @switch-off-handle-hovered-text,
                 @switch-off-handle-hovered-bg,
@@ -155,27 +159,31 @@
     box-shadow: none;
 
     &:focus,
-    &.k-state-focused {
+    &.k-state-focused,
+    &.k-focus {
 
-        .k-switch-container {
+        .k-switch-track {
             outline: none;
             .box-shadow( @switch-container-focused-shadow );
         }
     }
 
     &:hover,
-    &.k-state-hover {
+    &.k-state-hover,
+    &.k-hover {
 
-        .k-switch-container {
+        .k-switch-track {
             .box-shadow( @switch-container-hovered-shadow );
         }
     }
 
-    &.k-state-disabled {
+    &.k-state-disabled,
+    &.k-disabled {
         cursor: default;
 
         &:focus,
-        &.k-state-focused {
+        &.k-state-focused,
+        &.k-focus {
             .box-shadow( @switch-container-shadow );
         }
     }

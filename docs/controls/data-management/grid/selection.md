@@ -1,9 +1,9 @@
 ---
 title: Selection
-page_title: jQuery Grid Documentation | Selection | Kendo UI
+page_title: jQuery Grid Documentation - Selection
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: selection_kendoui_grid_widget
-position: 8
+position: 10
 ---
 
 # Selection
@@ -18,8 +18,6 @@ For a runnable example, refer to the [demo on selection in the Grid](https://dem
 
 To enable the selection functionality of the Grid, set the [`selectable`](/api/javascript/ui/grid/configuration/selectable) option to `true`. As a result, the default single-row selection functionality will be applied.
 
-###### Example
-
         $("#grid").kendoGrid({
             selectable: true,
             // Other configuration.
@@ -27,7 +25,7 @@ To enable the selection functionality of the Grid, set the [`selectable`](/api/j
 
 **Figure 1: A Grid with enabled row selection**
 
-![Grid with enabled row selection](grid4_1.png)
+![Kendo UI for jQuery Grid with enabled row selection](grid-row-selection.png)
 
 ## Select Modes
 
@@ -45,8 +43,6 @@ The Grid supports the following select modes:
 
 As of the R2 2017 SP1 release, the Grid provides an option for setting multiple selection through rendering a checkbox column. To enable the checkbox column selection, configure the [`columns.selectable`](/api/javascript/ui/grid/configuration/columns.selectable) property. Enabling the `selectable` property for a column will also render a checkbox in the header and will allow the selection and deselection of all rows on the current page.
 
-###### Example
-
     $("#grid").kendoGrid({
       columns: [
         { selectable: true },
@@ -59,8 +55,6 @@ As of the R2 2017 SP1 release, the Grid provides an option for setting multiple 
 
 The single-row selection is enabled through the default configuration of the `selectable` option to `row`. `selectable: "row"` functions in the same way as the `selectable: true` one.
 
-###### Example
-
     $("#grid").kendoGrid({
         selectable: "row",
         // Other configuration.
@@ -70,18 +64,14 @@ The single-row selection is enabled through the default configuration of the `se
 
 To enable the selection of multiple Grid rows, set `selectable` to `multiple row`. When the multiple row selection is enabled, the user can select multiple rows by dragging them.
 
-###### Example
-
-$("#grid").kendoGrid({
-  selectable: "multiple row",
-  // Other configuration.
-  });
+    $("#grid").kendoGrid({
+      selectable: "multiple row",
+      // Other configuration.
+      });
 
 ### Single-Cell Selection
 
 To enable the selection of individual Grid cells, set `selectable` to `cell`.
-
-###### Example
 
     $("#grid").kendoGrid({
         selectable: "cell",
@@ -92,12 +82,28 @@ To enable the selection of individual Grid cells, set `selectable` to `cell`.
 
 To enable the selection of multiple Grid cells, set `selectable` to `multiple cell`. When the multiple cell selection is enabled, the user can select multiple cells by dragging them.
 
-###### Example
-
     $("#grid").kendoGrid({
         selectable: "multiple cell",
         // Other configuration.
     });
+
+## Ignored Elements
+
+By default, the Grid excludes some elements from the target list so that a click on any of these elements will not result in a row selection.
+
+The following code snippet contains all of the ignored selectors:
+
+```javascript
+input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up,label.k-checkbox-label.k-no-text,.k-icon.k-i-collapse,.k-icon.k-i-expand,span.k-numeric-wrap,.k-focusable
+```
+
+## KB Articles on Selection
+
+* [Selecting or Deselecting All Rows with a Select All Header Checkbox]({% slug howto_select_deselect_all_rowswith_checkboxes_grid %})
+* [Making the Selection with a Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})
+* [Selecting Multiple Rows with Checkboxes]({% slug howto_select_multiple_rowswith_checkboxes_grid %})
+* [Binding the Selection to the Model Field with a Checkbox Column]({% slug howto_bind_selection_to_model_field %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
 
 ## See Also
 

@@ -119,10 +119,10 @@
             });
 
             autocomplete.popup.one("activate", function() {
-                var selectedCount = autocomplete.listView.items().filter(".k-state-selected").length
+                var selectedCount = autocomplete.listView.items().filter(".k-selected").length;
 
                 assert.equal(selectedCount, 0);
-                assert.isOk(!autocomplete.listView.items().eq(0).hasClass("k-state-selected"));
+                assert.isOk(!autocomplete.listView.items().eq(0).hasClass("k-selected"));
                 done();
             });
 
@@ -161,7 +161,7 @@
             autocomplete.one("dataBound", function() {
                 autocomplete.one("dataBound", function() {
                     var item49 = autocomplete.listView.content.find("li")
-                        .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
+                        .filter(function(_, li) { return $(li).data("offsetIndex") == 49; });
 
                     var dataItem = autocomplete.dataItem(item49);
 
@@ -209,7 +209,7 @@
                 autocomplete.one("dataBound", function() {
                     var firstItem = autocomplete.listView.content.find("li:first");
 
-                    assert.equal(firstItem.hasClass("k-state-focused"), false);
+                    assert.equal(firstItem.hasClass("k-focus"), false);
                     done();
                 });
 

@@ -1,8 +1,8 @@
 ---
 title: Allow Editing When Creating New Records for the New Records Only
-description: An example on how to conditionally configure the Kendo UI Grid to allow editing during the Create operation only.
+description: Learn how to conditionally configure the Kendo UI Grid to allow editing during the Create operation only.
 type: how-to
-page_title: Modify Specific Fields on Insert and Read-Only while Updating | Kendo UI Grid
+page_title: Modify Specific Fields on Insert and Read-Only while Updating - Kendo UI Grid for jQuery
 slug: grid-editable-readonly-edit-create.md
 tags: grid, editable, readonly, edit, create
 ticketid: 1168477
@@ -14,11 +14,11 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
-  <td>2018.2.516</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -123,7 +123,7 @@ The following example demonstrates how, upon creating a new record, `ProductName
             { field: "ProductName", editable: isEditable},
             { field: "UnitPrice", editable: isEditable, title: "Unit Price", format: "{0:c}", width: "120px" },
             { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-            { field: "Discontinued", width: "120px", editor: customBoolEditor },
+            { field: "Discontinued", width: "120px" },
             { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
           editable: "inline"
         });
@@ -133,12 +133,6 @@ The following example demonstrates how, upon creating a new record, `ProductName
         var dataSource = $("#grid").data("kendoGrid").dataSource;
         // If the id(ProductID) is null, then it is editable.
         return e.ProductID == null;
-      }
-
-      function customBoolEditor(container, options) {
-        var guid = kendo.guid();
-        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
       }
     </script>
 ```
