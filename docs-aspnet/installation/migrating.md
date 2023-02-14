@@ -31,7 +31,8 @@ There are couple of differences worth mentioning to ease your migration process.
 1. MVC Grid server rendered templates should transfer to client rendered templates in Core MVC Grid. Therefore, you will now use `.HeaderTemplate()` instead of `.ClientHeaderTemplate()`.
 
 2. We have a Blog post covering common code-behind steps:
-- [Migrate to ASP.NET Core MVC from ASP.NET Framework MVC](https://www.telerik.com/blogs/migrate-aspnet-core-mvc-aspnet-framework-mvc)
+
+    [Migrate to ASP.NET Core MVC from ASP.NET Framework MVC](https://www.telerik.com/blogs/migrate-aspnet-core-mvc-aspnet-framework-mvc)
 
 3. The rest are syntax sugar differences caused by the frameworks themselves. For instance, here is a Validation action definition of the Upload component in MVC:
 ```C#
@@ -47,10 +48,12 @@ And this is the equivalent implementation in Core MVC:
 ```
 
 4. The same is true for the **Startup.cs** file:
-- [JSON serialization in Core](https://docs.telerik.com/aspnet-core/installation/json-serialization)
+
+    [JSON serialization in Core](https://docs.telerik.com/aspnet-core/installation/json-serialization)
 
 5. You can check this nice MSDN article for general points when migrating:
-- [Migrate from ASP.NET MVC to ASP.NET Core MVC](https://learn.microsoft.com/en-us/aspnet/core/migration/mvc?view=aspnetcore-7.0)
+
+    [Migrate from ASP.NET MVC to ASP.NET Core MVC](https://learn.microsoft.com/en-us/aspnet/core/migration/mvc?view=aspnetcore-7.0)
 
 
 ## Migrating from Another Technology

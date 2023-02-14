@@ -42,7 +42,8 @@ The Telerik UI Catpcha server-side provider creates an audio file based on the c
 
     ```
     function audioHandler(args) {
-        args.success("@Url.Action("Audio")?captchaId=" + args.data.CaptchaID);
+        //pass the name of the action "Audio" and the name of the controller (in this case "Captcha") to the Url.Action method. Add captchaId as a parameter:
+        args.success("@Url.Action("Audio", "Captcha")?captchaId=" + args.data.CaptchaID);
     }
     ```
 
