@@ -408,7 +408,6 @@ The available dataType options are:
 * `"number"`
 * `"boolean"`
 * `"date"`
-* `"object"`
 
 #### Example - set the editorTemplate
 

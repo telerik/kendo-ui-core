@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI Upload component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/upload, /helpers/editors/upload/overview
 slug: htmlhelpers_upload_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Upload Overview
@@ -200,154 +200,29 @@ An Upload widget configured in such way offers support for multiple file selecti
 
 ## Functionality and Features
 
-* [Modes of operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Dragging and dropping of files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Chunk upload of files]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [Validation of files]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Identification of files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
-* [Sending and receiving metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_upload %})
+| Feature | Description |
+|---------|-------------|
+| [Modes of operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})| You can specify whether the Upload behaves like a regular file input or like a standalone component with asynchronous operations.|
+| [Dragging and dropping of files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})| The Upload enables you to drag and drop items within the component's drop zone.|
+| [Chunk upload of files]({% slug htmlhelpers_upload_chunks_aspnetcore %})| You can send large chunks of files that will be processed asynchronously.|
+| [Validation of files]({% slug htmlhelpers_upload_validation_aspnetcore %})| The Upload enables you to integrate file validation for each of the selected files.|
+| [Identification of files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})|You can identify the file object during its upload process.|
+| [Sending and receiving metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %}) | You can send additional information to the specified endpoint which is used for storing the uploaded file.|
+| [Accessibility]({% slug accessibility_aspnetcore_upload %})| The Upload is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_upload %}) for faster navigation.| 
+| [Events]({% slug events_upload_aspnetcore %})| The Upload allows you to handle its file processing events and implement custom functionality.
 
-## Events
+## Next Steps
 
-The following example demonstrates Upload HTML helper exposes several events, which could be handled on the client-side. For a complete example on basic Upload events, refer to the [demo on using the events of the Upload](https://demos.telerik.com/{{ site.platform }}/upload/events).
-
-```HtmlHelper
-@(Html.Kendo().Upload()
-    .Name("files")
-    .Async(a => a
-        .Save("Save", "Upload")
-        .Remove("Remove", "Upload")
-        .AutoUpload(true)
-    )
-    .Events(events => events
-        .Cancel("onCancel")
-        .Complete("onComplete")
-        .Error("onError")
-        .Progress("onProgress")
-        .Remove("onRemove")
-        .Select("onSelect")
-        .Success("onSuccess")
-        .Upload("onUpload")
-    )
-)
-
-<script type="text/javascript">
-    function onSelect(e) {
-        console.log("Select :: " + getFileInfo(e));
-    }
-
-    function onUpload(e) {
-        console.log("Upload :: " + getFileInfo(e));
-    }
-
-    function onSuccess(e) {
-        console.log("Success (" + e.operation + ") :: " + getFileInfo(e));
-    }
-
-    function onError(e) {
-        console.log("Error (" + e.operation + ") :: " + getFileInfo(e));
-    }
-
-    function onComplete(e) {
-        console.log("Complete");
-    }
-
-    function onCancel(e) {
-        console.log("Cancel :: " + getFileInfo(e));
-    }
-
-    function onRemove(e) {
-        console.log("Remove :: " + getFileInfo(e));
-    }
-
-    function onProgress(e) {
-        console.log("Upload progress :: " + e.percentComplete + "% :: " + getFileInfo(e));
-    }
-
-    function getFileInfo(e) {
-        return $.map(e.files, function(file) {
-            var info = file.name;
-
-            // File size is not available in all browsers.
-            if (file.size > 0) {
-                info  += " (" + Math.ceil(file.size / 1024) + " KB)";
-            }
-            return info;
-        }).join(", ");
-    }
-</script>
-```
-{% if site.core %}
-```TagHelper
-<kendo-upload name="files" 
-			  on-cancel="onCancel" 
-			  on-complete="onComplete"
-			  on-error="onError" 
-			  on-progress="onProgress" 
-			  on-remove="onRemove" 
-			  on-select="onSelect"
-			  on-success="onSuccess" 
-			  on-upload="onUpload">
-	<async auto-upload="true" 
-           save-url="@Url.Action("Save","Upload")" 
-           remove-url="@Url.Action("Remove","Upload")"/>
-</kendo-upload>
-
-
-<script type="text/javascript">
-    function onSelect(e) {
-        console.log("Select :: " + getFileInfo(e));
-    }
-
-    function onUpload(e) {
-        console.log("Upload :: " + getFileInfo(e));
-    }
-
-    function onSuccess(e) {
-        console.log("Success (" + e.operation + ") :: " + getFileInfo(e));
-    }
-
-    function onError(e) {
-        console.log("Error (" + e.operation + ") :: " + getFileInfo(e));
-    }
-
-    function onComplete(e) {
-        console.log("Complete");
-    }
-
-    function onCancel(e) {
-        console.log("Cancel :: " + getFileInfo(e));
-    }
-
-    function onRemove(e) {
-        console.log("Remove :: " + getFileInfo(e));
-    }
-
-    function onProgress(e) {
-        console.log("Upload progress :: " + e.percentComplete + "% :: " + getFileInfo(e));
-    }
-
-    function getFileInfo(e) {
-        return $.map(e.files, function(file) {
-            var info = file.name;
-
-            // File size is not available in all browsers.
-            if (file.size > 0) {
-                info  += " (" + Math.ceil(file.size / 1024) + " KB)";
-            }
-            return info;
-        }).join(", ");
-    }
-</script>
-```
-{% endif %}
-
-## See Also
-
-* [Basic Usage by the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload)
+* [Getting Started with the Upload]({% slug aspnetcore_upload_getting_started %})
+* [Basic Usage of the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload)
 {% if site.core %}
 * [Basic Usage of the Upload TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/tag-helper)
 {% endif %}
 * [Using the API of the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/api)
-* [Server-Side API](/api/upload)
+
+## See Also
+
+* [Using the API of the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/api)
+* [Server-Side API for {{ site.framework }}](/api/upload)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Knowledge Base Section](/knowledge-base)

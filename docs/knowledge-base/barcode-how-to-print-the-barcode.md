@@ -17,21 +17,6 @@ component: barcode
   <td>Product</td>
   <td>Progress® Kendo UI® Barcode for jQuery</td>
  </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Browser</td>
-  <td>Edge</td>
- </tr>
- <tr>
-  <td>Browser Version</td>
-  <td>Microsoft Edge 40.15063.0.0</td>
- </tr> <tr>
-  <td>Product Version</td>
-  <td>2017.3.1018</td>
- </tr>
 </table>
 
 
@@ -58,7 +43,7 @@ Open a new window and place the Barcode DOM elements on the page.
           var divToPrint=document.getElementById('toPrint');
           var newWin=window.open('','Print-Window');
           newWin.document.open();
-          newWin.document.write('<head> <link href="https://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /></head>  <body onload="window.print()">'+divToPrint.innerHTML+'</body>');
+          newWin.document.write('<head> <link href="https://kendo.cdn.telerik.com/themes/5.11.0/default/default-main.css" rel="stylesheet" /></head>  <body onload="window.print()">'+divToPrint.innerHTML+'</body>');
           newWin.document.close();
         })
       });

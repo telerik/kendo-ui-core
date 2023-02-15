@@ -24,7 +24,7 @@ The Kendo UI CDN provides the following services:
 
 ### Adding the Required CSS Files
 
-The minified versions of the `.css` files are available at `https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`. For example, you can load the `{{site.cdnVersion}}` version from the `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css` location.
+The minified versions of the `.css` files are available at `https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`. For example, you can load the `{{site.themesCdnVersion }}` version from the `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css` location.
 
 ### Adding the Required JavaScript Files
 
@@ -71,7 +71,7 @@ Depending on the component you require, you can initialize the Kendo UI controls
         <meta charset="utf-8">
         <title>Kendo UI using CDN</title>
         
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
         
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
@@ -93,7 +93,7 @@ The following example demonstrates how to initialize a DropDownList with some ba
         <meta charset="utf-8">
         <title>Kendo UI using CDN</title>
 
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-ocean-blue.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>

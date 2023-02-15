@@ -17,10 +17,6 @@ component: map
   <td>Product</td>
   <td>Progress® Kendo UI® Map for jQuery</td>
  </tr>
-  <tr>
-  <td>Product Version</td>
-  <td>Tested up to version 2017.2 504</td>
- </tr>
 </table>
 
 ## Description
@@ -34,75 +30,54 @@ The Kendo UI Map does not provide a built-in solution for achieving this behavio
 The Map accepts a `[Latitude, Longitude]` format for its locations field. When you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to update the array.
 
 ```dojo
-<!DOCTYPE html>
-<html>
-<head>
-    <base href="https://demos.telerik.com/kendo-ui/map/bubble-layer">
-    <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
-    <title></title>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-material.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.material.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.material.mobile.min.css" />
-
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
-</head>
-<body>
-<div id="example">
-    <div id="map"></div>
-
+<div id="map"></div>
     <script>
-    function createMap() {
-
+      function createMap() {
         $("#map").kendoMap({
-            center: [45, 45],
-            minZoom: 3,
-            zoom: 4,
-            wraparound: false,
-            layers: [{
-                type: "tile",
-                urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                subdomains: ["a", "b", "c"],
-                attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
-            }, {
-                type: "bubble",
-                attribution: "Population data from Nordpil and UN Population Division.",
-                style: {
-                    fill: {
-                        color: "#00f",
-                        opacity: 0.4
-                    },
-                    stroke: {
-                        width: 0
-                    }
-                },
-                dataSource: {
-                    transport: {
-                        read: {
-                            url: "../content/dataviz/map/urban-areas.json",
-                            dataType: "json"
-                        }
-                    },
-                  schema: {
-                    parse: function(response) {
-                      for (var i = 0; i < response.length; i++) {
-                        var loc =  response[i].Location; // Location is the locationField with the coordinates
-                        response[i].Location = [loc[1], loc[0]];
-                      }
-                      return response;
-                    }
+          center: [45, 45],
+          minZoom: 3,
+          zoom: 4,
+          wraparound: false,
+          layers: [{
+            type: "tile",
+            urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            subdomains: ["a", "b", "c"],
+            attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+          }, {
+            type: "bubble",
+            attribution: "Population data from Nordpil and UN Population Division.",
+            style: {
+              fill: {
+                color: "#00f",
+                opacity: 0.4
+              },
+              stroke: {
+                width: 0
+              }
+            },
+            dataSource: {
+              transport: {
+                read: {
+                  url: "https://demos.telerik.com/kendo-ui/content/dataviz/map/urban-areas.json",
+                  dataType: "json"
+                }
+              },
+              schema: {
+                parse: function(response) {
+                  for (var i = 0; i < response.length; i++) {
+                    var loc =  response[i].Location; // Location is the locationField with the coordinates
+                    response[i].Location = [loc[1], loc[0]];
                   }
-                },
-                locationField: "Location",
-                valueField: "Pop2010"
-            }]
+                  return response;
+                }
+              }
+            },
+            locationField: "Location",
+            valueField: "Pop2010"
+          }]
         });
-    }
+      }
 
-    $(document).ready(createMap);
+      $(document).ready(createMap);
     </script>
-</div>
-</body>
-</html>
-
 ```

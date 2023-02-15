@@ -49,8 +49,7 @@ To see the runnable examples on how to use Kendo UI with Webpack in both JavaScr
     <head>
       <title>Kendo UI with webpack</title>
       <!-- the styles may also be loaded with webpack -->
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
       <meta charset="utf-8" />
       <script src="bundle.js" type="text/javascript" charset="utf-8"></script>
     </head>

@@ -725,6 +725,9 @@ baseurl: /kendo-ui
 ## The Kendo UI version used
 cdnVersion: "2023.1.117"
 
+## The themes CDN used
+themesCdnVersion: "5.11.0"
+
 ## The MVC Core version used
 mvcCoreVersion: "2023.1.117"
 

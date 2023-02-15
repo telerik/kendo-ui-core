@@ -143,8 +143,7 @@ You are also able to include the JavaScript and CSS files from CDN. Do not forge
 
 
 
-       <link href="https://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
-       <link href="https://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+       <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
        <script src="https://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>

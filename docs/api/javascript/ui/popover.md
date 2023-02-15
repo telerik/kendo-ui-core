@@ -48,7 +48,7 @@ A handler function to be called when the action button is clicked
             header: "Header text",
             body: "Content description",
             actionsPosition: "center",
-            actions: [{ text: "update", click: function(е) { console.log(e.target.text()); }}, { text: "create", click: function(е) { console.log(e.target.text()); }}]
+            actions: [{ text: "update", click: function(e) { console.log(e.target.text()); }}, { text: "create", click: function(e) { console.log(e.target.text()); }}]
           });
         });
     </script>

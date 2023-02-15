@@ -23,8 +23,7 @@ The following example demonstrates how to load the Kendo UI JavaScript files fro
 <!DOCTYPE HTML>
 <html>
     <head>
-        <link rel="stylesheet" href="/styles/my-kendo-styles/kendo.common.core.min.css" />
-        <link rel="stylesheet" href="/styles/my-kendo-styles/kendo.default.min.css" />
+        <link rel="stylesheet" href="/styles/my-kendo-styles/default-main.css" />
         <!-- Include RequireJS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
     </head>
@@ -62,8 +61,7 @@ The following example demonstrates how to use a bundle script with RequireJS.
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -100,7 +98,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
@@ -151,9 +149,8 @@ The following example demonstrates how to use a [custom Kendo script created wit
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
     <div ng-controller="controller">

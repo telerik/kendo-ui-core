@@ -36,7 +36,7 @@ To make sure all scripts are loaded, make a simple API call to render the [Kendo
 > The `$(function() { });` code block is a [jQuery `document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) handler. All JavaScript code from this guide has to go inside this closure.
 
 	```html
-		<link href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css" rel="stylesheet" />
+		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" />
 		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 		
     <!-- Add the Kendo library by either using the JAVASCRIPT MODULES -->
@@ -157,7 +157,7 @@ The runnable example below demonstrates the final version of the page that you w
     <meta charset="utf-8" />
     <title>Getting Started with Kendo UI for jQuery</title>
 
-    <link href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>

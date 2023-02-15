@@ -17,10 +17,6 @@ component: grid
   <td>Product</td>
   <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
- <tr>
-  <td>Product Version</td>
-  <td>Tested up to version {{ site.cdnVersion }}</td>
- </tr>
 </table>
 
 ## Description
@@ -33,25 +29,7 @@ How can I enable my users to reorder the Grid rows by adding buttons to each row
 1. In the click handlers of the buttons, find a reference to the corresponding row and attach the click handlers to the `dataBound` event of the Grid.
 
 ```dojo
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <title>Kendo UI Snippet</title>
-
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.silver.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.mobile.all.min.css"/>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
-
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
-
-  </head>
-  <body>
-
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>
 
     <script>
@@ -122,13 +100,8 @@ How can I enable my users to reorder the Grid rows by adding buttons to each row
 
               //content.scrollTop(offset);
             }
-
-
           });
         }
       }).data("kendoGrid");
-
     </script>
-  </body>
-</html>
 ```

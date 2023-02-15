@@ -37,8 +37,7 @@ For internal builds, use private CDN services. It is recommended that you implem
     <html>
     <head>
         <title>Welcome to Kendo UI for jQuery</title>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css" />
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.blueopal.min.css" />
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
         <script>
@@ -55,8 +54,7 @@ For internal builds, use private CDN services. It is recommended that you implem
                 // therefore assume that if the scripts have failed, so have the stylesheets.
 
                 // Fallback to local Kendo UI for jQuery stylesheets.
-                document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.common.min.css" %3C/%3E'));
-                document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.blueopal.min.css" %3C/%3E'));
+                document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/default-main.css" %3C/%3E'));
 
                 // Fallback to local Kendo UI for jQuery scripts.
                 document.write(decodeURIComponent('%3Cscript src="/path/to/local/kendo.all.min.js" %3E%3C/script%3E'));
