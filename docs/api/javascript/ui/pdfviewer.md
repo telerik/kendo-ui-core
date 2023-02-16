@@ -164,7 +164,7 @@ The width of the PDFViewer.
 
     <div id="pdf-viewer"></div>
     <script>
-        $("#pdfviewer").kendoPDFViewer({
+        $("#pdf-viewer").kendoPDFViewer({
             width: 480
         });
     </script>
@@ -464,6 +464,289 @@ Specifies the localization messages of the toolbar.
 
 ### messages.toolbar.pager.pages `String` *(default: "pages")*
 
+### messages.toolbar.print `String` *(default: "Print")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for Print message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            print: "Custom Print Message" 
+          }
+        }
+      });
+    </script>
+
+### messages.toolbar.toggleSelection `String` *(default: "Enable Selection")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for toggleSelection message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+              toggleSelection: "Custom Enable Selection Message"  
+          }
+        }
+      });
+    </script>
+
+### messages.toolbar.togglePan `String` *(default: "Enable Panning")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for togglePan message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+              togglePan: "Custom Enable Panning Message"  
+          }
+        }
+      });
+    </script>
+
+### messages.toolbar.search `String` *(default: "Search")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for search message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+              search: "Custom Search Message"  
+          }
+        }
+      });
+    </script>
+
+### messages.toolbar.zoom `Object`
+
+### messages.toolbar.zoom.actualWidth `String` *(default: "Actual Width")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for Actual Width message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            zoom: {
+              actualWidth: "Custom Actual Width Message"                  
+            }
+          }
+        }
+      });
+    </script>
+
+### messages.toolbar.zoom.autoWidth `String` *(default: "Automatic Width")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for Auto width message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            zoom: {
+              autoWidth: "Custom Automatic Width Message"                  
+            }
+          }
+        }
+      });
+    </script>
+
+### messages.toolbar.zoom.fitToWidth `String` *(default: "Fit To Width")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for Fit To Width message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            zoom: {
+              fitToWidth: "Custom Fit To Width Message"                  
+            }
+          }
+        }
+      });
+    </script>
+
+### messages.toolbar.zoom.fitToPage `String` *(default: "Fit To Page")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for Fit To Page message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            zoom: {
+              fitToPage: "Custom Fit To Page Message"                  
+            }
+          }
+        }
+      });
+    </script>
+
+
+### messages.toolbar.zoom.zoomIn `String` *(default: "Zoom In")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for Zoom In message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            zoom: {
+              zoomIn: "Custom Zoom In Message"                  
+            }
+          }
+        }
+      });
+    </script>
+
+### messages.toolbar.zoom.zoomLevel `String` *(default: "Zoom Level")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for Zoom In message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            zoom: {
+              zoomLevel: "Custom Zoom Level Message"                  
+            }
+          }
+        }
+      });
+    </script>
+
+
+### messages.toolbar.zoom.zoomOut `String` *(default: "Zoom Out")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for Zoom Out message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            zoom: {
+              zoomOut: "Custom Zoom Out Message"                  
+            }
+          }
+        }
+      });
+    </script>
+
+
 ### messages.errorMessages `Object`
 
 ### messages.errorMessages.notSupported  `String` *(default: "Only pdf files allowed.")*
@@ -471,6 +754,8 @@ Specifies the localization messages of the toolbar.
 ### messages.errorMessages.parseError  `String` *(default: "PDF file fails to process.")*
 
 ### messages.errorMessages.notFound  `String` *(default: "File is not found.")*
+
+### messages.errorMessages.popupBlocked  `String` *(default: "Popup is blocked.")*
 
 ### messages.dialogs `Object`
 
@@ -499,6 +784,154 @@ Specifies the localization messages of the toolbar.
 ### messages.dialogs.save `String`  *(default: "Save")*
 
 ### messages.dialogs.cancel `String`  *(default: "Cancel")*
+
+### messages.dialogs.search `Object`
+
+### messages.dialogs.search.close `String` *(default: "Close")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for search dialog close message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          search: {
+              close: "Custom Close Message"  
+          }
+        }
+      });
+    </script>
+
+### messages.dialogs.search.dragHandle `String` *(default: "Drag search")*
+
+### messages.dialogs.search.inputLabel `String` *(default: "Search Text")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for search dialog input label text message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          search: {
+              inputLabel: "Custom Search Text Message"  
+          }
+        }
+      });
+    </script>
+
+### messages.dialogs.search.matchCase `String` *(default: "Match Case")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for search dialog match case text message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          search: {
+              matchCase: "Custom Match Case Message"  
+          }
+        }
+      });
+    </script>
+
+### messages.dialogs.search.next `String` *(default: "Next Match")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for search dialog next message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          search: {
+              next: "Custom Next Match Message"  
+          }
+        }
+      });
+    </script>
+
+### messages.dialogs.search.previous `String` *(default: "Previous Match")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for search dialog previous message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          search: {
+              previous: "Custom Previous Match Message"  
+          }
+        }
+      });
+    </script>
+
+### messages.dialogs.search.of `String` *(default: " of {0}")*
+
+> To run the below example, open it in Dojo
+
+#### Example - set custom text for search dialog of message
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          search: {
+              of: "Custom Of Message"  
+          }
+        }
+      });
+    </script>
 
 ## Methods
 

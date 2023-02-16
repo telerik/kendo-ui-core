@@ -115,10 +115,7 @@ How can I add a button which will expand or collapse all tasks in my Gantt?
                             parentId: {
                                 from: "ParentID",
                                 type: "number",
-                                defaultValue: null,
-                                validation: {
-                                    required: true
-                                }
+                                defaultValue: null
                             },
                             start: {
                                 from: "Start",

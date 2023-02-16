@@ -113,7 +113,7 @@ To achieve this behavior:
                 fields: {
                   id: { from: "ID", type: "number" },
                   orderId: { from: "OrderID", type: "number", validation: { required: true } },
-                  parentId: { from: "ParentID", type: "number", defaultValue: null, nullable: true, validation: { required: true } },
+                  parentId: { from: "ParentID", type: "number", defaultValue: null, nullable: true },
                   start: { from: "Start", type: "date" },
                   end: { from: "End", type: "date" },
                   title: { from: "Title", defaultValue: "", type: "string" },

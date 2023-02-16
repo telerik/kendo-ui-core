@@ -98,7 +98,7 @@ The following example demonstrates how to bind the widget to a remote service. N
                   type: "number"
                 },
                 orderId: { from: "OrderID", type: "number", validation: { required: true } },
-                parentId: { from: "ParentID", type: "number", nullable: true, validation: { required: true } },
+                parentId: { from: "ParentID", type: "number", nullable: true },
                 start: { from: "Start", type: "date" },
                 end: { from: "End", type: "date" },
                 title: { from: "Title", defaultValue: "", type: "string" },

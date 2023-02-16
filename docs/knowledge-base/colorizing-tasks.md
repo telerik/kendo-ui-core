@@ -91,7 +91,7 @@ The following example demonstrates how to achieve the desired behavior.
               fields: {
                 id: { from: "ID", type: "number" },
                 orderId: { from: "OrderID", type: "number", validation: { required: true } },
-                parentId: { from: "ParentID", type: "number", defaultValue: null, validation: { required: true } },
+                parentId: { from: "ParentID", type: "number", defaultValue: null },
                 start: { from: "Start", type: "date" },
                 end: { from: "End", type: "date" },
                 title: { from: "Title", defaultValue: "", type: "string" },

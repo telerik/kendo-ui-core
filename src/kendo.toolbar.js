@@ -250,7 +250,7 @@ var __meta__ = {
                 wrapper.removeAttr("disabled");
 
                 if (focused) {
-                    wrapper.addClass(KFOCUS).trigger("focus");
+                    wrapper.addClass(KFOCUS).trigger(FOCUS);
                 }
             } else if (item.buttonsPopupItem.length > 0) {
                 buttonPopup = kendo.widgetInstance(item.buttonsPopupItem.closest(DOT + MENU_POPUP));
@@ -1573,9 +1573,10 @@ var __meta__ = {
                 close: function(e) {
                     if (that.trigger(OVERFLOW_CLOSE)) {
                         e.preventDefault();
+                    } else {
+                        that._resetTabIndex(that.overflowAnchor);
+                        that.overflowAnchor.trigger(FOCUS);
                     }
-
-                    that.element.trigger(FOCUS);
                 }
             });
 
@@ -1693,6 +1694,10 @@ var __meta__ = {
 
                 if (this.options.navigateOnTab !== true) {
                     item.find(KENDO_FOCUSABLE).attr(TABINDEX, -1);
+                } else {
+                    if (item.is("[tabindex=-1]")) {
+                        item.removeAttr(TABINDEX);
+                    }
                 }
 
                 if (this.overflowMenu) {

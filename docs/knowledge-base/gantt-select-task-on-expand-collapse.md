@@ -82,7 +82,7 @@ I want to be able to click on the expand/collapse icon of the parent task and se
                 fields: {
                     id: { from: "ID", type: "number" },
                     orderId: { from: "OrderID", type: "number", validation: { required: true } },
-                    parentId: { from: "ParentID", type: "number", defaultValue: null, validation: { required: true } },
+                    parentId: { from: "ParentID", type: "number", defaultValue: null },
                     start: { from: "Start", type: "date" },
                     end: { from: "End", type: "date" },
                     title: { from: "Title", defaultValue: "", type: "string" },

@@ -42,6 +42,8 @@ Starting with R1 2023 the ToolBar no longer requires its custom tools to be regi
 
 Starting with R1 2023 release the ToolBar no longer allows the use of togglable and non-togglable buttons in the same ButtonGroup. If such a configuration is present, all buttons will be rendered and behave as simple (non-togglable) buttons.
 
+Starting with R1 2023 release the ToolBar Overflow menu will open on each click on its button. That is the behavior of the ContextMenu component used in that scenario.
+
 ## Kendo UI 2023 R1 SP1
 
 **Editor**

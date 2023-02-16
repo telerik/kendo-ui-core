@@ -52,7 +52,7 @@ Note that if the `parentId` type is `number`, its `defaultValue` should be set t
           fields: {
             id: { from: "ID", type: "number" },
             orderId: { from: "OrderID", type: "number", validation: { required: true } },
-            parentId: { from: "ParentID", type: "number", validation: { required: true }, defaultValue: null },
+            parentId: { from: "ParentID", type: "number", nullable: true },
             start: { from: "Start", type: "date" },
             end: { from: "End", type: "date" },
             title: { from: "Title", defaultValue: "", type: "string" },

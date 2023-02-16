@@ -98,23 +98,29 @@ Your project may require you to create a custom editor for a specific property. 
         })
     ```
 
-1. In the action method, which renders the view that contains the Grid, populate the `ViewData` with a list of all employees.
+1. In the action method, which renders the view that contains the Grid, populate the `ViewData` with a list of all employees. Point the DefaultValue for the `Employee` field when adding a new item.
 
         public ActionResult Index()
         {
-            ViewData["employees"] = new NorthwindDataContext()
-                            .Employees
-                            .Select(e => new Employee
-                            {
-                                EmployeeID = e.EmployeeID,
-                                EmployeeName = e.FirstName + " " + e.LastName
-                            })
-                            .OrderBy(e => e.EmployeeName);
+            List<Employee> employees = new List<Employee>();
+
+            for (int i = 1; i < 6; i++)
+            {
+                Employee employee = new Employee
+                {
+                    EmployeeID = i,
+                    EmployeeName = "EmployeeName " + i
+                };
+                employees.Add(employee);
+            }
+
+            ViewData["employees"] = employees;
+            ViewData["defaultEmployee"] = employees[0];
 
             return View();
         }
 
-1. Decorate the `Employee` property with the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute. It needs the name of the editor template created in **Step 3** without the extension `"EmployeeEditor"`.
+1. Decorate the `Employee` property with the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute. It needs the name of the editor template ("EmployeeEditor") created in **Step 3** without the extension `".cshtml"`.
 
         public class Order
         {
@@ -125,6 +131,22 @@ Your project may require you to create a custom editor for a specific property. 
             [UIHint("EmployeeEditor")]
             public Employee Employee { get; set; }
         }
+
+1. Specify default value for the column in the Model of the DataSource.
+
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Model(model =>
+                {
+                    model.Id(p => p.OrderID);
+                    model.Field(p => p.Employee).DefaultValue(
+                        ViewData["defaultEmployee"] as TelerikMvcApp31.Models.Employee);
+                })
+                .PageSize(20)
+                .Create(c => c.Action("Create", "Grid"))
+                .Read(read => read.Action("Orders_Read", "Grid"))
+                .Update(u => u.Action("Update", "Grid"))
+            )
 
 
 {% if site.core %}
