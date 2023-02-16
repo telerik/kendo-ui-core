@@ -9739,6 +9739,8 @@ declare namespace kendo.ui {
         month?: string | undefined;
         agenda?: string | undefined;
         year?: string | undefined;
+        timelineMonth?: string;
+        timelineWeek?: string;
     }
 
     interface SchedulerMessages {
