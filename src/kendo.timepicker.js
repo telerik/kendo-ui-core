@@ -119,7 +119,10 @@ var __meta__ = {
             `<div tabindex="0" class="k-timeselector ${mainSize}">` +
                 '<div class="k-time-header">' +
                     '<span class="k-title"></span>' +
-                    `<button class="k-button ${buttonSize} k-rounded-md k-button-flat k-button-flat-base k-time-now" title="Select now" aria-label="Select now"><span class="k-button-text">${messages.now}</span></button>` +
+                    kendo.html.renderButton(`<button class="k-time-now" title="Select now" aria-label="Select now">${messages.now}</button>`, {
+                        fillMode: "flat",
+                        size: buttonSize
+                    }) +
                 '</div>' +
                 '<div class="k-time-list-container">' +
                     '<span class="k-time-highlight"></span>' +
@@ -128,9 +131,14 @@ var __meta__ = {
             NEW_RENDERING_FOOTER(buttonSize, messages) +
         '</div>',
         NEW_RENDERING_FOOTER = (buttonSize, messages) => '<div class="k-time-footer k-actions k-actions-stretched k-actions-horizontal">' +
-            `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel changes" aria-label="Cancel changes"><span class="k-button-text">${messages.cancel}</span></button>` +
-            `<button class="k-time-accept k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-primary" title="Set time" aria-label="Set time"><span class="k-button-text">${messages.set}</span></button>` +
-            '</div>',
+            kendo.html.renderButton(`<button class="k-time-accept" title="Set time" aria-label="Set time">${messages.set}</button>`, {
+                size: buttonSize,
+                themeColor: "primary"
+            }) +
+            kendo.html.renderButton(`<button class="k-time-cancel" title="Cancel changes" aria-label="Cancel changes">${messages.cancel}</button>`, {
+                size: buttonSize
+            }) +
+        '</div>',
         HIGHLIGHTCONTAINER = '<span class="k-time-highlight"></span>';
 
         TODAY = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate(), 0, 0, 0);
@@ -166,7 +174,7 @@ var __meta__ = {
         _createScrollList: function() {
             var templateOptions = $.extend({}, this.options, {
                 mainSize: kendo.getValidCssClass("k-timeselector-", "size", this.options.size || "medium"),
-                buttonSize: kendo.getValidCssClass("k-button-", "size", this.options.size || "medium")
+                buttonSize: this.options.size || "medium"
             });
             this.popupContent = $(kendo.template(MODERN_RENDERING_TEMPLATE)(templateOptions))
             .on(MOUSEDOWN, preventDefault);

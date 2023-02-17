@@ -79,7 +79,7 @@ The following example demonstrates how to change the TreeView animations.
 
 * [Animation Effects TreeView (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/animation)
 * [Server-Side API Reference of the TreeView for {{ site.product }}](/api/treeview)
-* [Client-Side API Reference of the TreeView](/api/javascript/ui/treeview)
+* [Client-Side API Reference of the TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
 
 
 

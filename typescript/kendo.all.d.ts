@@ -9739,8 +9739,6 @@ declare namespace kendo.ui {
         month?: string | undefined;
         agenda?: string | undefined;
         year?: string | undefined;
-        timelineMonth?: string;
-        timelineWeek?: string;
     }
 
     interface SchedulerMessages {
@@ -16709,7 +16707,6 @@ declare namespace kendo.dataviz.ui {
         axisCrossingValue?: any|Date|any | undefined;
         background?: string | undefined;
         baseUnit?: string | undefined;
-        categories?: any[] | undefined;
         color?: string | undefined;
         crosshair?: ChartXAxisItemCrosshair | undefined;
         labels?: ChartXAxisItemLabels | undefined;
@@ -17000,7 +16997,6 @@ declare namespace kendo.dataviz.ui {
         axisCrossingValue?: any|Date|any | undefined;
         background?: string | undefined;
         baseUnit?: string | undefined;
-        categories?: any[] | undefined;
         color?: string | undefined;
         crosshair?: ChartYAxisItemCrosshair | undefined;
         labels?: ChartYAxisItemLabels | undefined;

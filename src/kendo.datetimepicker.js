@@ -56,12 +56,12 @@ var __meta__ = {
         SINGLE_POPUP_TEMPLATE = ({ buttonSize, messages }) => '<div class="k-date-tab k-datetime-wrap">' +
                                     '<div class="k-datetime-buttongroup">' +
                                         '<div class="k-button-group k-button-group-stretched">' +
-                                            `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-selected k-group-start">` +
-                                                `<span class="k-button-text">${messages.date}</span>` +
-                                            '</button>' +
-                                            `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-group-end">` +
-                                                `<span class="k-button-text">${messages.time}</span>` +
-                                            '</button>' +
+                                            kendo.html.renderButton(`<button class="k-selected k-group-start">${messages.date}</button>`, {
+                                                size: buttonSize
+                                            }) +
+                                            kendo.html.renderButton(`<button class="k-group-end">${messages.time}</button>`, {
+                                                size: buttonSize
+                                            }) +
                                         '</div>' +
                                     '</div>' +
                                     '<div class="k-datetime-selector">' +
@@ -71,12 +71,13 @@ var __meta__ = {
                                         '</div>' +
                                     '</div>' +
                                     '<div class="k-datetime-footer k-actions">' +
-                                        `<button class="k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel" aria-label="Cancel">` +
-                                            `<span class="k-button-text">${messages.cancel}</span>` +
-                                        '</button>' +
-                                        `<button class="k-time-accept k-button ${buttonSize} k-rounded-md k-button-solid k-button-solid-primary" title="Set" aria-label="Set">` +
-                                            `<span class="k-button-text">${messages.set}</span>` +
-                                        '</button>' +
+                                        kendo.html.renderButton(`<button class="k-time-accept" title="Set" aria-label="Set">${messages.set}</button>`, {
+                                            size: buttonSize,
+                                            themeColor: "primary"
+                                        }) +
+                                        kendo.html.renderButton(`<button class="k-time-cancel" title="Cancel" aria-label="Cancel">${messages.cancel}</button>`, {
+                                            size: buttonSize
+                                        }) +
                                     '</div>' +
                                 '</div>',
         STATE_SELECTED = "k-selected";
@@ -1080,7 +1081,7 @@ var __meta__ = {
                 .appendTo(document.body);
 
             div.append(kendo.template(SINGLE_POPUP_TEMPLATE)(extend({}, that.options, {
-                buttonSize: kendo.getValidCssClass("k-button-", "size", that.options.size)
+                buttonSize: that.options.size
             })));
             that.popup = new ui.Popup(div, extend(options.popup, options, {
                 name: "Popup",

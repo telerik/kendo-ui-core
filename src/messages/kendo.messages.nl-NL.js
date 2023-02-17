@@ -308,7 +308,7 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "allPages": "Alle",
+  "allPages": "All",
   "display": "items {0} - {1} van {2}",
   "empty": "Geen items om te tonen",
   "first": "Ga naar eerste pagina",
@@ -316,10 +316,10 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "last": "Ga naar laatste pagina",
   "next": "Ga naar volgende pagina",
   "of": "van {0}",
-  "page": "Pagina {0}",
+  "page": "Pagina",
   "previous": "Ga naar vorige pagina",
   "refresh": "Verversen",
-  "morePages": "Meer pagina's"
+  "morePages": "Meer pagina"
 });
 }
 
