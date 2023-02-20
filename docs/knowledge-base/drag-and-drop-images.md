@@ -1,7 +1,7 @@
 ---
 title: Drag and Drop Images in the Editor
 page_title: Drag and Drop Images in the Editor
-description: "Learn how drag and drop images in the Kendo UI Editor widget."
+description: "Learn how drag and drop images in the Kendo UI Editor component."
 previous_url: /controls/editors/editor/how-to/drag-and-drop-images, /controls/editors/editor/how-to/customize/drag-and-drop-images
 slug: howto_drag_and_drop_images_editor
 tags: telerik, kendo, jquery, editor, drag, and, drop, images
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

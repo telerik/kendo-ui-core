@@ -1,6 +1,6 @@
 ---
 title: Implement Stable Sorting in Chrome
-page_title: Stable Sorting in Chrome - Kendo UI Grid for jQuery
+page_title: Stable Sorting in Chrome - Kendo UI for jQuery Data Grid
 description: "Learn how to implement stable sorting in Google Chrome with the Kendo UI Grid for jQuery. "
 previous_url: /controls/data-management/grid/how-to/stable-sort-chrome, /controls/data-management/grid/how-to/sorting/stable-sort-chrome
 slug: howto_implement_stable_sortin_chrome_grid
@@ -123,4 +123,4 @@ The solution for this issue is to add a position field and use it to maintain st
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

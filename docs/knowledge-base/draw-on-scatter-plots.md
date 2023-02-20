@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -107,6 +107,6 @@ The following example demonstrates how to draw freely on the Scatter plot surfac
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
-* [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
-* [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
+* [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
+* [Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
+* [Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})

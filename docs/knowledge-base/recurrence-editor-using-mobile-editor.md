@@ -1,7 +1,7 @@
 ---
 title: Create a Recurrence Editor in the Scheduler by Using a Mobile Editor
 page_title: Create a Recurrence Editor in the Scheduler by Using a Mobile Editor
-description: "Learn how to create a recurrence editor by using a mobile editor approach in a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to create a recurrence editor by using a mobile editor approach in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/recurrence-editor-using-mobile-editor, /controls/scheduling/scheduler/how-to/editing/recurrence-editor-using-mobile-editor
 slug: howto_createrecurrenceeditor_byusingmobileeditor_scheduler
 tags: telerik, kendo, jquery, scheduler, create, recurrence, editor, using, with, mobile, editor 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

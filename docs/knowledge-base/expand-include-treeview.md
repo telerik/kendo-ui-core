@@ -1,7 +1,7 @@
 ---
 title: Expand the TreeView with the Include Fields Items of the PivotGrid
 page_title: Expand TreeView with PivotGrid Include Fields Items
-description: "Learn how to access the TreeView with the Include Fields items and expand the root node on opening the window in a Kendo UI PivotGrid widget."
+description: "Learn how to access the TreeView with the Include Fields items and expand the root node on opening the window in a Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/expand-include-treeview, /controls/data-management/pivotgrid/how-to/dimensions/expand-include-treeview
 slug: howto_expand_include_fields_treeview_pivotgrid
 tags: kendoui, pivotgrid, expand, treeview, with, include, fields, items
@@ -103,7 +103,7 @@ The following example demonstrates how to access the TreeView with the **Include
 ## See Also
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
+* [Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})

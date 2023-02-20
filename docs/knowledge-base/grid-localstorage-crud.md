@@ -1,6 +1,6 @@
 ---
 title: Perform CRUD Operations with Local Storage Data
-page_title: CRUD Operations via Local Storage - Kendo UI Grid for jQuery
+page_title: CRUD Operations via Local Storage - Kendo UI for jQuery Data Grid
 description: "Learn how to perform CRUD operations with local storage data in the Kendo UI Grid widget for jQuery."
 previous_url: /controls/data-management/grid/how-to/grid-localstorage-crud, /controls/data-management/grid/how-to/Editing/grid-localstorage-crud
 slug: howto_perform_crud_operationswith_local_storage_data_grid
@@ -131,4 +131,4 @@ $(document).ready(function () {
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

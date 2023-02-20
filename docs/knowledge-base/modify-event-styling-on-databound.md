@@ -1,7 +1,7 @@
 ---
 title: Modify the Event Styling of the Scheduler on databound
 page_title: Modify the Event Styling of the Scheduler on databound
-description: "Learn how to use the databound event to modify the event styling in a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to use the databound event to modify the event styling in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/modify-event-styling-on-databound, /controls/scheduling/scheduler/how-to/appearance/modify-event-styling-on-databound
 slug: howto_modifyeventstyling_ondatabound_scheduler
 tags: telerik, kendo, jquery, scheduler, modify, event, styling, on, databound 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

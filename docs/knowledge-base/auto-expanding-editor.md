@@ -1,7 +1,7 @@
 ---
 title: Create Auto-Expanding Editors
-page_title: Create Auto-Expanding Editors
-description: "Learn how to make the Kendo UI for jQuery Editor automatically expand."
+page_title: Create Editors Which Auto-Expand - jQuery Rich Text Editor
+description: "Learn how to make the Kendo UI for jQuery Editor control automatically expand."
 previous_url: /controls/editors/editor/how-to/auto-expanding-editor, /controls/editors/editor/how-to/appearance/auto-expanding-editor
 slug: howto_make_the_editor_auto_expanding_editor
 tags: telerik, kendo, jquery, editor, create, auto, expanding, editors
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -62,3 +62,4 @@ The following example demonstrates how to achieve the desired scenario.
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
 * [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [Product Page of the Rich Text Editor](https://www.telerik.com/kendo-jquery-ui/rich-text-editor)

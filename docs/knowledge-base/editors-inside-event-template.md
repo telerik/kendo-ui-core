@@ -1,7 +1,7 @@
 ---
 title: Nest Editors inside the Event Templates of the Scheduler 
 page_title: Nest Editors inside the Event Templates of the Scheduler 
-description: "Learn how to nest editors inside event templates and update the underlying model in a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to nest editors inside event templates and update the underlying model in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/editors-inside-event-template, /controls/scheduling/scheduler/how-to/editing/editors-inside-event-template
 slug: howto_nest_editorsinside_event_templates_scheduler
 tags: telerik, kendo, jquery, scheduler, nest, editors, inside, event, templates 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

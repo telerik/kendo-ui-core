@@ -1,6 +1,6 @@
 ---
 title: Edit Records in Child Grids
-page_title: Edit Records in Child Grids - Kendo UI Grid for jQuery
+page_title: Edit Records in Child Grids - Kendo UI for jQuery Data Grid
 description: "Learn how to edit records in hierarchical Kendo UI Grid widgets for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/edit-master-row-data-in-detail-template
 slug: howto_edit_recordsin_children_grid
@@ -160,4 +160,4 @@ function detailInit(e) {
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

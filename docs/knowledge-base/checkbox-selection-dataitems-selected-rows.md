@@ -2,7 +2,7 @@
 title: Get the Selected Grid Rows Data
 description: Learn how to get the dataItem for every selected row by using the change event of the Kendo UI Grid.
 type: how-to
-page_title: Get the DataItems of the Selected Rows - Kendo UI Grid for jQuery
+page_title: Get the DataItems of the Selected Rows - Kendo UI for jQuery Data Grid
 slug: checkbox-selection-dataitems-selected-rows
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716

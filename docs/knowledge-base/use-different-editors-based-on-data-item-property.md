@@ -1,6 +1,6 @@
 ---
 title: Use Editors Based on dataItem Property
-page_title: Use dataItem Property Editors - Kendo UI Grid for jQuery
+page_title: Use dataItem Property Editors - Kendo UI for jQuery Data Grid
 description: "Learn how to use different editors based on the dataItem property of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/use-different-editors-based-on-data-item-property
 slug: howto_use_editors_basedon_dataitem_property_grid
@@ -116,4 +116,4 @@ The following example demonstrates how to use different editors based on a prope
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -1,7 +1,7 @@
 ---
 title: Dynamically Change Languages in the Grid in AngularJS
-page_title: Change Languages Dynamically in the Data Grid in AngularJS - Kendo UI Grid for jQuery
-description: "Learn how to dynamically change the language of the Kendo UI Grid in an AngularJS application."
+page_title: Change Languages Dynamically When Using AngularJS - jQuery Data Grid
+description: "Learn how to dynamically change the language of the Kendo UI for jQuery Data Grid in an AngularJS application."
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-dynamic-language-change
 slug: howto_dynamic_language_change
 tags: grid, change, languages, dynamically, angularjs
@@ -112,4 +112,7 @@ The following example represents the AngularJS version of [this demo](https://de
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
+* [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

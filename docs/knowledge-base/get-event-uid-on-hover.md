@@ -1,7 +1,7 @@
 ---
 title: Get the UID of the Scheduler Event on Hover
 page_title: Get the UID of the Scheduler Event on Hover
-description: "Learn how to get the UID of events on hover in the Kendo UI for jQuery Scheduler widget."
+description: "Learn how to get the UID of events on hover in the Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/get-event-uid-on-hover, /controls/scheduling/scheduler/how-to/editing/get-event-uid-on-hover
 slug: howto_get_the_uid_of_an_event_on_hover_scheduler
 tags: telerik, kendo, jquery, scheduler, get, the, uid, of, event, on, hover 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

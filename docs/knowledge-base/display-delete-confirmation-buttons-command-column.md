@@ -1,6 +1,6 @@
 ---
 title: Display Delete Confirmation as Button in the Command Column
-page_title: Delete Confirmation as Button - Kendo UI Grid for jQuery
+page_title: Delete Confirmation as Button - Kendo UI for jQuery Data Grid
 description: "Learn how to display the Delete confirmation as a button instead of a dialog in the command column of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/display-delete-confirmation-buttons-command-column
 slug: howto_display_delete_confirmation_buttons_command_column
@@ -137,4 +137,4 @@ The following example demonstrates how to render the delete confirmation for a G
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

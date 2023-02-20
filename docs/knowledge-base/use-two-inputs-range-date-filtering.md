@@ -1,6 +1,6 @@
 ---
 title: Use Grid Filtering with Kendo UI DateTimePickers in Row Modes
-page_title: Range Date Filtering - Kendo UI Grid for jQuery
+page_title: Range Date Filtering - Kendo UI for jQuery Data Grid
 description: "Learn how to create range filtering for dates in the Kendo UI Grid for jQuery by using two Kendo UI DateTimePickers in row filtering modes."
 previous_url: /controls/data-management/grid/how-to/use-two-inputs-range-date-filtering, /controls/data-management/grid/how-to/filtering/use-two-inputs-range-date-filtering
 slug: howto_gridfiltering_rangedatefiltering_grid
@@ -143,4 +143,4 @@ To see how the following example works, filter the date column in a range. As a 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -1,6 +1,6 @@
 ---
 title: Format Cell Values in the Grid
-page_title: Format Data Grid Cell Values - Kendo UI Grid for jQuery
+page_title: Format Data Grid Cell Values - Kendo UI for jQuery Data Grid
 description: "Learn how to format the cell values of the Kendo UI Grid during Excel export."
 previous_url: /controls/data-management/grid/how-to/excel/cell-format
 slug: howto_format_cell_values_grid
@@ -113,4 +113,4 @@ The following example demonstrates how to set a custom format for `date` values.
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

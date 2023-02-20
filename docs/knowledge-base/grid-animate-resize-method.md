@@ -2,7 +2,7 @@
 title: Animate the resize Method
 description: Learn how to animate the resize method of the Kendo UI Grid.
 type: how-to
-page_title: Change Height with Animation - Kendo UI Grid for jQuery
+page_title: Change Height with Animation - Kendo UI for jQuery Data Grid
 slug: grid-animate-resize-method
 tags: grid, animation, resize, height
 ticketid: 1151627

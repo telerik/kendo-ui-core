@@ -1,7 +1,7 @@
 ---
 title: Change the Field Names of the PivotGrid
 page_title: Change PivotGrid Field Names
-description: "Learn how to change the field names in a Kendo UI PivotGrid widget."
+description: "Learn how to change the field names in a Kendo UI PivotGrid component."
 slug: howto_change_pivotgrid_fields_names_pivotgrid
 previous_url: /controls/data-management/pivotgrid/how-to/fields-name-change, /controls/data-management/pivotgrid/how-to/appearance/fields-name-change
 tags: pivotgrid, change, field, names
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -97,7 +97,7 @@ The following example demonstrates how to change the text displayed by the `[Dat
 ## See Also
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
-* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand the Include fields TreeView]({% slug howto_expand_include_fields_treeview_pivotgrid %})
+* [Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
+* [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Expand the Include fields TreeView]({% slug howto_expand_include_fields_treeview_pivotgrid %})

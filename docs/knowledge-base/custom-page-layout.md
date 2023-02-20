@@ -1,6 +1,6 @@
 ---
 title: Customize Page Layout
-page_title: Customize Page Layout - Kendo UI Grid for jQuery
+page_title: Customize Page Layout - Kendo UI for jQuery Data Grid
 description: "Learn how to customize the page layout of the Kendo UI Grid for jQuery in PDF."
 previous_url: /framework/drawing/how-to/custom-page-layout, /kendo-mvc/controls/data-management/grid/how-to/pdf-export/custom-page-layout, /controls/data-management/grid/how-to/pdf-export/custom-page-layout
 slug: howto_customize_page_layout_pdf_grid
@@ -15,4 +15,4 @@ refer to the article on [PDF export of a page template]({% slug exporting_pdf_ke
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

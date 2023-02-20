@@ -2,7 +2,7 @@
 title: Update Calculated Cell Value on the Fly
 description: Learn how to update the calculated cell on the fly in a Kendo UI Grid.
 type: how-to
-page_title: Update Calculated Cell Value on the Fly - Kendo UI Grid for jQuery
+page_title: Update Calculated Cell Value on the Fly - Kendo UI for jQuery Data Grid
 slug: grid-calculate-value-on-the-fly
 tags: grid, calculated, cell, value, dynamically, calculate, update, result
 res_type: kb

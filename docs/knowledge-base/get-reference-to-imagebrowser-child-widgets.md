@@ -1,7 +1,7 @@
 ---
 title: Get Reference to Child Widgets in the Editor
 page_title: Get Reference to Child Widgets in the Editor
-description: "Learn how to get a reference to the ImageBrowser and FileBrowser child widgets in the Kendo UI Editor widget."
+description: "Learn how to get a reference to the ImageBrowser and FileBrowser child widgets in the Kendo UI Editor component."
 previous_url: /controls/editors/editor/how-to/get-reference-to-imagebrowser-child-widgets, /controls/editors/editor/how-to/integration/get-reference-to-imagebrowser-child-widgets
 slug: howto_get_referenceto_child_widgets_editor
 tags: telerik, kendo, jquery, editor, get, reference, to, child, widgets
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

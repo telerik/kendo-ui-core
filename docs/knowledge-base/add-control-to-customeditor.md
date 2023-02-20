@@ -1,7 +1,7 @@
 ---
 title: Add Controls to the Custom Event Editor of the Scheduler
-page_title: Add Controls to the Custom Event Editor of the Scheduler
-description: "Learn how to add Kendo UI controls to a custom event editor in a Kendo UI Scheduler widget."
+page_title: Add Controls to the Custom Event Editor of the Scheduler - jQuery Scheduler
+description: "Learn how to add Kendo UI controls to a custom event editor in a Kendo UI for jQuery Scheduler component."
 previous_url: /kendo-mvc/web/scheduler/how-to/add-control-to-customeditor, /controls/scheduling/scheduler/how-to/add-control-to-customeditor, /controls/scheduling/scheduler/how-to/editing/add-control-to-customeditor
 slug: howto_add_controlsto_custom_event_editor_scheduler
 tags: telerik, kendo, jquery, scheduler, add, controls, to, the, custom, event, editor
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -121,7 +121,7 @@ The following example demonstrates how to achieve the desired scenario.
           edit: function(e) {
                 var container = e.container;
 
-                /* ACTION: ADD custom button */
+                /* ACTION: Ading a custom button. */
                 var newButton = $('<a class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" href="#">New button</a>');
 
                 // Wire its click event.
@@ -131,7 +131,7 @@ The following example demonstrates how to achieve the desired scenario.
                 var buttonsContainer = container.find(".k-edit-buttons");
                 buttonsContainer.append(newButton);
 
-                /* ACTION: Accessing dropdownlist widget */
+                /* ACTION: Accessing the DropDownList control. */
                 container.find("[data-container-for=ownerId]")
                 .find("[data-role=dropdownlist]")
                 .data("kendoDropDownList")
@@ -159,6 +159,7 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
-* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [Basic Usage of the Kendo UI for jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
 * [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [jQuery Scheduler Product Page](https://www.telerik.com/kendo-jquery-ui/scheduler)

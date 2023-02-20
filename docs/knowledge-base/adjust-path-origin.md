@@ -1,7 +1,7 @@
 ---
 title: Adjust the Path Origin of the Diagram
-page_title: Adjust the Path Origin of the Diagram
-description: "Learn how to adjust a path or the origin of an element when using a custom visual in the Kendo UI Diagram."
+page_title: Adjust the Path Origin When Using Custom Visuals - jQuery Diagram
+description: "Learn how to adjust a path or the origin of an element when using a custom visual in the Kendo UI for jQuery Diagram component."
 slug: howto_adjustpathorigin_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/adjust-path-origin
 tags: kendo, jquery, diagram, adjust, path, origin
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -68,8 +68,8 @@ The following example demonstrates how to position any path at the origin of the
 
 ## See Also
 
-* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [Basic Usage of the jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
-* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
-* [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
-* [How to Wrap Text]({% slug howto_wraptext_diagram %})
+* [Implement Local Data Diagram Editing]({% slug howto_editlocaladata_diagram %})
+* [Render External Content in Diagram Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
+* [Wrap Diagram Text]({% slug howto_wraptext_diagram %})

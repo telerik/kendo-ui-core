@@ -2,7 +2,7 @@
 title: Toggle Font Styles in Grids
 description: Learn how to set a different time value as the start time of a TimePicker and change the order of the options in the list of the Kendo UI Grid.
 type: how-to
-page_title: Toggle the Font Style - Kendo UI Grid for jQuery
+page_title: Toggle the Font Style - Kendo UI for jQuery Data Grid
 slug: grid-toggle-font-style
 tags: grid, toggle, font, style, body
 ticketid: 1154127

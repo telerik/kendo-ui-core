@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -42,11 +42,11 @@ The HTML markup in the Window resembles the HTML markup internally used by the K
 However, this is not required as demonstrated in the following example, which shows how to use a custom Kendo UI Editor tool and a Kendo UI Window for inserting HTML content in the Editor.
 
 For additional information about the code used in the example, refer to the following resources:
-* [How to Configure Editor Tools](/api/javascript/ui/editor/configuration/tools)
-* [How to Execute Editor Commands](/api/javascript/ui/editor/methods/exec)
+* [Configure Editor Tools](/api/javascript/ui/editor/configuration/tools)
+* [Execute Editor Commands](/api/javascript/ui/editor/methods/exec)
 * [Editor Custom Tools Demo](https://demos.telerik.com/kendo-ui/editor/custom-tools)
-* [How to Configure a Window](/api/javascript/ui/window)
-* [How to Obtain Widget's Element from Its Client Object](/framework/widgets/wrapper-element)
+* [Configure a Window](/api/javascript/ui/window)
+* [Obtain Widget's Element from Its Client Object](/framework/widgets/wrapper-element)
 * [Notes on Destroying Windows]({% slug overview_kendoui_window_widget %}#configuration-Destroy)
 
 ```dojo

@@ -1,7 +1,7 @@
 ---
 title: Drag and Drop Map Markers
 page_title: Drag and Drop Map Markers
-description: "Learn how to integrate the Kendo UI Draggable widget with the Kendo UI Map widget."
+description: "Learn how to integrate the Kendo UI Draggable widget with the Kendo UI Map component."
 slug: howto_draganddropmarkers_map
 previous_url: /controls/diagrams-and-maps/map/how-to/drag-and-drop-markers
 tags: kendo, jquery, map, drag, and, drop, markers
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

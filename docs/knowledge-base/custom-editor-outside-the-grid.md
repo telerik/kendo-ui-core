@@ -1,6 +1,6 @@
 ---
 title: Show Custom Editor Using the Selected Item outside the Grid
-page_title: Custom Editor Outside the Grid - Kendo UI Grid for jQuery
+page_title: Custom Editor Outside the Grid - Kendo UI for jQuery Data Grid
 description: "Learn how to show a custom editor, which uses the currently selected item, outside the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/custom-editor-outside-the-grid
 slug: howto_use_show_custom_editor_selected_item_outside_grid
@@ -148,4 +148,4 @@ The following example demonstrates how to use a custom editor, which uses the cu
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -21,7 +21,7 @@ res_type: kb
   <td>All</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>All</td>
  </tr>
  <tr>

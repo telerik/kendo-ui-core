@@ -1,7 +1,7 @@
 ---
 title: Use the Compact UI Mode of the Upload
 page_title: Use Compact UI Mode of the Upload
-description: "Learn how to hide the selected files for upload from the user interface and render the button for the upload confirmation only in the Kendo UI Upload widget."
+description: "Learn how to hide the selected files for upload from the user interface and render the button for the upload confirmation only in the Kendo UI Upload component."
 slug: howto_usecompactuimode_upload
 previous_url: /controls/editors/upload/how-to/use-compact-mode
 tags: telerik, kendo, jquery, upload, use, compact, ui, mode
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

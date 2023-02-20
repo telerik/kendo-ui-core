@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -69,10 +69,10 @@ html { font: 12px sans-serif; }
 ## See Also
 
 * [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
-* [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
-* [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
-* [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})
-* [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
-* [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
-* [How to Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
-* [How to Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})
+* [Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
+* [Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
+* [Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})
+* [Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
+* [Remove Items]({% slug howto_remove_items_dropdownlist %})
+* [Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
+* [Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})

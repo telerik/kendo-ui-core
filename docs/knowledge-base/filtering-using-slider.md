@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -102,5 +102,5 @@ The following example demonstrates how to achieve this behavior and display the 
 ## See Also
 
 * [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
-* [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
-* [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
+* [Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
+* [Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})

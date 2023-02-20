@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -66,5 +66,5 @@ The example below demonstrates how to close the ToolBar popup from a button `cli
 ## See Also
 
 * [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
-* [How to Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})
+* [Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})
+* [Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})

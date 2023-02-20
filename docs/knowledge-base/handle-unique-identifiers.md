@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -139,6 +139,6 @@ The following examples demonstrate how to handle a custom command attribute to a
 ## See Also
 
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
-* [How to Create Split Button]({% slug howto_createa_split_button_menu %})
-* [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
+* [Create Split Button]({% slug howto_createa_split_button_menu %})
+* [Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
 

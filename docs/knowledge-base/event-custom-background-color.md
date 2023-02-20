@@ -1,7 +1,7 @@
 ---
 title: Use Custom Event Template with Specific Background Color in the Scheduler
 page_title: Use Custom Event Template with Specific Background Color in the Scheduler
-description: "Learn how to use a custom event template to render events with specific background color in a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to use a custom event template to render events with specific background color in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/event-custom-background-color, /controls/scheduling/scheduler/how-to/appearance/event-custom-background-color
 slug: howto_use_custom_event_templatewith_specific_background_color_scheduler
 tags: telerik, kendo, jquery, scheduler, use, custom, event, template, with, specific, background, color 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

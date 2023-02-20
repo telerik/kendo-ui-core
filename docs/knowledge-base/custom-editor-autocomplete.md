@@ -1,6 +1,6 @@
 ---
 title: Use AutoComplete as Custom Column Editor
-page_title: AutoComplete as Column Editor - Kendo UI Grid for jQuery
+page_title: AutoComplete as Column Editor - Kendo UI for jQuery Data Grid
 description: "Learn how to use the Kendo UI AutoComplete as a custom column editor for the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/custom-editor-autocomplete, /controls/editors/autocomplete/how-to/integration/custom-editor-autocomplete-grid
 slug: howto_use_autocompleteas_custom_column_editor_grid
@@ -160,4 +160,4 @@ $(document).ready(function () {
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

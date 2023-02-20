@@ -1,7 +1,7 @@
 ---
 title: Edit the Scheduler by Using ContextMenu
 page_title: Edit the Scheduler by Using ContextMenu
-description: "Learn how to edit the Kendo UI for jQuery Scheduler by using the Kendo UI ContextMenu widget."
+description: "Learn how to edit the Kendo UI for jQuery Scheduler by using the Kendo UI ContextMenu component."
 previous_url: /aspnet/web/scheduler/how-to/editing-using-contextmenu, /controls/scheduling/scheduler/how-to/editing-using-contextmenu, /controls/scheduling/scheduler/how-to/editing/editing-using-contextmenu
 slug: howto_edit_using_kendouicontextmenu_scheduler
 tags: telerik, kendo, jquery, scheduler, edit, with, using, the, contextmenu 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

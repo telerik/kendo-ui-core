@@ -1,7 +1,7 @@
 ---
 title: Hide Time Headers in the Scheduler
 page_title: Hide Time Headers in the Scheduler
-description: "Learn how to hide the time headers of the day, week, and workWeek views in a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to hide the time headers of the day, week, and workWeek views in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/hide-time-header, /controls/scheduling/scheduler/how-to/appearance/hide-time-header
 slug: howto_hide_time_headers_scheduler
 tags: telerik, kendo, jquery, scheduler, hide, time, headers
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

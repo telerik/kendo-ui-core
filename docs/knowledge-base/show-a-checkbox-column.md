@@ -1,7 +1,7 @@
 ---
 title: Show a Checkbox Column in the TreeList
 page_title: Show a Checkbox Column in the TreeList
-description: "Learn how to show a checkbox column bound to the item model in a Kendo UI TreeList widget."
+description: "Learn how to show a checkbox column bound to the item model in a Kendo UI TreeList component."
 slug: howto_showcheckboxcolumn_treelist
 previous_url: /controls/data-management/treelist/how-to/show-a-checkbox-column
 tags: kendo, jquery, treelist, show, a, checkbox, column
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

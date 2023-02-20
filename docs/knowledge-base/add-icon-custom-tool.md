@@ -1,7 +1,7 @@
 ---
-title: Add Icon or Image to a Custom Editor Tool
-page_title: Add Icon or Image to a Custom Editor Tool
-description: "Learn how to add an icon or a plain image to a custom tool in the Kendo UI Editor widget."
+title: Add Icons or Images to Custom Editor Tools
+page_title: Add an Icon or an Image to a Custom Editor Tool - jQuery Editor
+description: "Learn how to add an icon or a plain image to a custom tool in the Kendo UI for jQuery Editor component."
 previous_url: /controls/editors/editor/how-to/add-icon-custom-tool, /controls/editors/editor/how-to/appearance/add-icon-custom-tool
 slug: howto_add_add_icon_custom_tool
 tags: telerik, kendo, jquery, editor, add, icon, image, to, custom, tool
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I add an item or an image to a custom editor tool?
+How can I add an item or an image to a custom Editor tool?
 
 ## Solution
 
@@ -46,14 +46,14 @@ The following example demonstrates how to decorate your own custom tool with a b
 ```dojo
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <style>
-  /* Using plain image for background */
+  /* Using plain image for the background. */
 
   .k-editor .k-i-my-tool
   {
       background: 50% 50% no-repeat url(https://demos.telerik.com/kendo-ui/content/web/16x16/Chart.png);
   }
 
-  /* Using FontAwesome icon for background */
+  /* Using a FontAwesome icon for the background. */
 
   .k-editor .k-i-my-second-tool:before
   {
@@ -94,3 +94,4 @@ The following example demonstrates how to decorate your own custom tool with a b
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
 * [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [jQuery Rich Text Editor Product Page](https://www.telerik.com/kendo-jquery-ui/rich-text-editor)

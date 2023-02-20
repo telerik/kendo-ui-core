@@ -2,7 +2,7 @@
 title: Display Toolbar at the Bottom of the Grid
 description: Learn how to display a toolbar at the bottom of the Kendo UI Grid.
 type: how-to
-page_title: Position a Toolbar under the Table - Kendo UI Grid for jQuery
+page_title: Position a Toolbar under the Table - Kendo UI for jQuery Data Grid
 slug: grid-toolbar-bottom-position-placement
 tags: grid, toolbar, bottom, position, placement
 ticketid: 1120199

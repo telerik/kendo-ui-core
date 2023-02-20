@@ -3330,6 +3330,54 @@ The text similar to "Units" displayed in Gantt task editor.
     });
     </script>
 
+### messages.editor.addNew `String` *(default: "Add")*
+
+The text that will be rendered in the Create button of the Dependencies and Assignments edit tables.
+
+### messages.editor.name `String` *(default: "Name")*
+
+The text that will be rendered as a title of the Predecessor and Successor columns in the Dependencies edit tables, and the Dependency column in the Assignments edit table.
+
+### messages.editor.percentCompleteHint `String` *(default: "value from 0 to 1")*
+
+The hint text that will be rendered for the percentCompleted NumericTextBox on the popup edit Form.
+
+### messages.editor.remove `String` *(default: "Remove")*
+
+The text that will be rendered in the Remove button of the Dependencies and Assignments edit tables.
+
+### messages.editor.actualStart `String` *(default: "Actual Start")*
+
+The label text of the start DateTimePicker editor when the planned editors are also present on the form.
+
+### messages.editor.actualEnd `String` *(default: "Actual End")*
+
+The label text of the end DateTimePicker editor when the planned editors are also present on the form.
+
+### messages.editor.parentOptionLabel `String` *(default: "-None-")*
+
+The optionLabel of the parent DropDownList editor.
+
+### messages.editor.general `String` *(default: "General")*
+
+The text used for the main (general) tab on the edit popup TabStrip.
+
+### messages.editor.predecessors `String` *(default: "Predecessors")*
+
+The text used for the predecessors tab on the edit popup TabStrip.
+
+### messages.editor.successors `String` *(default: "Successors")*
+
+The text used for the successors tab on the edit popup TabStrip.
+
+### messages.editor.other `String` *(default: "Other")*
+
+The text used for the other tab on the edit popup TabStrip.
+
+### messages.editor.dependencyType `String` *(default: "Type")*
+
+The text that will be rendered as a title of the Type column in the Dependencies edit tables.
+
 ### messages.plannedTasks `Object`
 
 The configuration of the Gantt messages for Planned tasks.

@@ -1,7 +1,7 @@
 ---
 title: Bind MultiSelect Values to Templates
 page_title: Bind MultiSelect Values to Templates
-description: "Learn how to bind values to a template by using MVVM in the Kendo UI MultiSelect widget."
+description: "Learn how to bind values to a template by using MVVM in the Kendo UI MultiSelect component."
 previous_url: /controls/editors/multiselect/how-to/bind-values-to-template, /controls/editors/multiselect/how-to/templates/bind-values-to-template
 slug: howto_bind_values_totemplate_multiselect
 tags: telerik, kendo, jquery, multiselect, bind, values, to, templates
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -115,9 +115,9 @@ The following example demonstrates how to achieve the desired scenario.
 ## See Also
 
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
-* [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
-* [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
-* [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
-* [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
-* [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
-* [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
+* [Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
+* [Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
+* [Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
+* [Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
+* [Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
+* [Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})

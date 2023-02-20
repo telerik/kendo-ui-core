@@ -1,7 +1,7 @@
 ---
 title: Clone Scheduler Events on Ctrl+move
 page_title: Clone Scheduler Events on Ctrl+move
-description: "Learn how to clone events on Ctrl + move in the Kendo UI for jQuery Scheduler widget."
+description: "Learn how to clone events on Ctrl + move in the Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/clone-events-on-ctrl-and-click, /controls/scheduling/scheduler/how-to/editing/clone-events-on-ctrl-and-click
 slug: howto_clone_eventson_ctrlplus_move_scheduler
 tags: telerik, kendo, jquery, scheduler, clone, copy, events, on, ctrl, and, plus, move 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

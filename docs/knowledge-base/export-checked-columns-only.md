@@ -1,6 +1,6 @@
 ---
 title: Export Checked Columns Only in Grid
-page_title:  Export Checked Columns Only - Kendo UI Grid for jQuery
+page_title:  Export Checked Columns Only - Kendo UI for jQuery Data Grid
 description: "Learn how to create Excel documents by exporting the checked columns only in a Kendo UI Grid widget for jQuery."
 previous_url: /controls/data-management/grid/how-to/excel/export-checked-columns-only
 slug: howto_export_checked_columns_only_grid
@@ -96,4 +96,4 @@ The following example demonstrates how to create Excel documents by exporting on
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

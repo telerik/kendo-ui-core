@@ -1,6 +1,6 @@
 ---
 title: Customize Data Source
-page_title: Customize Data Source - Kendo UI Grid for jQuery
+page_title: Customize Data Source - Kendo UI for jQuery Data Grid
 description: "Learn how to customize the data source options for PDF export of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/pdf-export/custom-data-source
 slug: howto_customize_data_source_pdf_grid
@@ -184,4 +184,4 @@ The following example demonstrates how to switch to client paging during PDF exp
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

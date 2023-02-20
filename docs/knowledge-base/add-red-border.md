@@ -1,7 +1,7 @@
 ---
 title: Add a Red Border and Hide the Tooltip in the Validator
-page_title: Add Red Border and Hide Tooltip in the Validator
-description: "Learn how to add a red border and hide the tooltip in the Kendo UI Validator."
+page_title: Show a Red Border and Hide the Tooltip - jQuery Validator
+description: "Learn how to add a red border and hide the tooltip in the Kendo UI for jQuery Validator."
 slug: howto_addredborderandhidetooltip_validator
 previous_url: /framework/validator/how-to/add-red-border, /controls/editors/validator/how-to/add-red-border
 tags: telerik, kendo, jquery, validator, add, red, border, hide, tooltip
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I hide the validation tooltip and add borders around `input` elements and widgets that failed to validate?
+How can I hide the validation tooltip and add borders around `input` elements and components that failed to validate?
 
 ## Solution
 
@@ -155,5 +155,6 @@ The following example demonstrates how to achieve this behavior and add a red bo
 
 ## See Also
 
-* [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
+* [Basic Usage of the jQuery Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
 * [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [Product Page of the Validator](https://www.telerik.com/kendo-jquery-ui/validator)

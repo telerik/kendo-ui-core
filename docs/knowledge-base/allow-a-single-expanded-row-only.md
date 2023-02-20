@@ -1,6 +1,6 @@
 ---
-title: Allow Single Row in Master Grid to be Expanded
-page_title: Allow Single Row Expansion in Master Grids - Kendo UI Grid for jQuery
+title: Allow the Expansion of a Single Row in Master Data Grids
+page_title: Allow Single-Row Expansion in Master Grids - jQuery Data Grid
 description: "Learn how to collapse a row that was previously expanded when the user expands a new one in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/allow-a-single-expanded-row-only
 slug: howto_allowonlyasingleexpandedrow_grid
@@ -114,4 +114,7 @@ The following example demonstrates how to collapse a Grid row that was previousl
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
+* [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

@@ -1,7 +1,7 @@
 ---
 title: Expand Multiple Column Dimensions in the PivotGrid
 page_title: Expand Multiple PivotGrid Column Dimensions
-description: "Learn how to expand multiple column dimensions by using the dataBound event in a Kendo UI PivotGrid widget."
+description: "Learn how to expand multiple column dimensions by using the dataBound event in a Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/expand-multiple-dimensions, /controls/data-management/pivotgrid/how-to/dimensions/expand-multiple-dimensions
 slug: howto_expand_multiple_column_dimensions_pivotgrid
 tags: kendoui, pivotgrid, access, mdx, query
@@ -95,7 +95,7 @@ The following example demonstrates how to expand multiple column dimensions by u
 ## See Also
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
-* [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
+* [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})

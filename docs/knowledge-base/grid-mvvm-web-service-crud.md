@@ -1,6 +1,6 @@
 ---
 title: Use CRUD Operations when Grid Is Bound through MVVM
-page_title: CRUD Operations Through MVVM - Kendo UI Grid for jQuery
+page_title: CRUD Operations Through MVVM - Kendo UI for jQuery Data Grid
 description: "Learn how to use CRUD operations when the Kendo UI Grid for jQuery is bound through MVVM."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-mvvm-web-service-crud
 slug: howto_use_crud_operationswith_mvvmbound_grid
@@ -30,4 +30,4 @@ To see the example on how to achieve this behavior, refer to [this project](http
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

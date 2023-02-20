@@ -1,7 +1,7 @@
 ---
 title: Render the Row Header Captions of the PivotGrid As Anchors
 page_title: Render PivotGrid Row Header Captions As Anchors
-description: "Learn how to render a row header captino as an anchor in a Kendo UI PivotGrid widget."
+description: "Learn how to render a row header captino as an anchor in a Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/render-anchor, /controls/data-management/pivotgrid/how-to/appearance/render-anchor
 slug: howto_render_rowheader_captionas_anchor_pivotgrid
 tags: pivotgrid, render, row, header, captions, as, anchors
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -103,7 +103,7 @@ To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/a
 ## See Also
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
+* [Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})

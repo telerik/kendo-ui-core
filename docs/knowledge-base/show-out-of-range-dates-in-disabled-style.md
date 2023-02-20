@@ -1,7 +1,7 @@
 ---
 title: Show Out-of-Range DatePicker Dates as Disabled
 page_title: Show Out-of-Range DatePicker Dates as Disabled
-description: "Learn how to show dates that are out of range in a disabled style in the Kendo UI datePicker widget."
+description: "Learn how to show dates that are out of range in a disabled style in the Kendo UI datePicker component."
 slug: howto_show_outofrange_dates_disabled_datepicker
 previous_url: /controls/editors/datepicker/how-to/show-out-of-range-dates-in-disabled-style
 tags: kendo, jquery, datepicker, show, out, of, range, dates, as, disabled, inactive
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -58,10 +58,10 @@ The following example demonstrates how to show the dates that are out of the min
 ## See Also
 
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
-* [How to Create Date Masking]({% slug masks_kendoui_maskedtextbox_widget %})
-* [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
-* [How to Hide the Default Button]({% slug howto_hide_default_button_datepicker %})
-* [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
-* [How to Make Input Elements Read-Only]({% slug howto_make_input_elements_readonly_datepicker %})
-* [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
-* [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
+* [Create Date Masking]({% slug masks_kendoui_maskedtextbox_widget %})
+* [Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
+* [Hide the Default Button]({% slug howto_hide_default_button_datepicker %})
+* [Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
+* [Make Input Elements Read-Only]({% slug howto_make_input_elements_readonly_datepicker %})
+* [Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
+* [Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})

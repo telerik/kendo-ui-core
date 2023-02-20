@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -125,7 +125,7 @@ The following example demonstrates how to implement the suggested approach.
 ## See Also
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
-* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
-* [How to Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
+* [Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
+* [Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
 
 

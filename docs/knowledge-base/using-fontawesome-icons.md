@@ -1,7 +1,7 @@
 ---
 title: Use FontAwesome Icons in the Menu
 page_title: Use FontAwesome Icons in the Menu
-description: "Learn how to include custom FontAwesome icons in the Kendo UI for jQuery Menu widget."
+description: "Learn how to include custom FontAwesome icons in the Kendo UI for jQuery Menu component."
 slug: howto_use_fontawesome_icons_menu
 previous_url: /controls/navigation/menu/how-to/using-fontawesome-icons
 tags: telerik, kendo, jquery, menu, use, fontawesome, icons
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -73,6 +73,6 @@ The example below demonstrates how to achieve the desired scenario.
 ## See Also
 
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
-* [How to Create Split Button]({% slug howto_createa_split_button_menu %})
-* [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
+* [Create Split Button]({% slug howto_createa_split_button_menu %})
+* [Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
 

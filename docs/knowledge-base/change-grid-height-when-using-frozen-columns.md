@@ -1,6 +1,6 @@
 ---
 title: Change Grid Height When Using Frozen Columns
-page_title: Change the Height in Grid with Frozen Columns - Kendo UI Grid for jQuery
+page_title: Change the Height in Grid with Frozen Columns - Kendo UI for jQuery Data Grid
 description: "Learn how to resize the Kendo UI Grid when using frozen columns."
 previous_url: /controls/data-management/grid/how-to/Layout/change-grid-height-when-using-frozen-columns
 slug: howto_change_grid_height_frozen_columns
@@ -134,4 +134,4 @@ The following example demonstrates how to change the height style of the [`<div>
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

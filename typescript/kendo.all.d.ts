@@ -5895,6 +5895,19 @@ declare namespace kendo.ui {
         start?: string | undefined;
         title?: string | undefined;
         unitsHeader?: string | undefined;
+        parent?: string | undefined;
+        addNew?: string | undefined;
+        name?: string | undefined;
+        percentCompleteHint?: string | undefined;
+        remove?: string | undefined;
+        actualStart?: string | undefined;
+        actualEnd?: string | undefined;
+        parentOptionLabel?: string | undefined;
+        general?: string | undefined;
+        predecessors?: string | undefined;
+        successors?: string | undefined;
+        other?: string | undefined;
+        dependencyType?: string | undefined;
     }
 
     interface GanttMessagesPlannedTasks {

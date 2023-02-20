@@ -1,7 +1,7 @@
 ---
 title: Persist the Old NumericTextBox Value
 page_title: Persist the Old NumericTextBox Value
-description: "Learn how to persist the old value of the Kendo UI NumericTextBox widget."
+description: "Learn how to persist the old value of the Kendo UI NumericTextBox component."
 slug: howto_persist_old_value_numerictextbox
 previous_url: /controls/editors/numerictextbox/how-to/persist-old-value
 tags: telerik, kendo, jquery, numerictextbox, persist, old, values
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -76,6 +76,6 @@ The following example demonstrates how to achieve the desired scenario.
 ## See Also
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
-* [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
-* [How to Select All Text on Focus]({% slug howto_select_all_texton_focus_numerictextbox %})
-* [How to Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})
+* [Change Text Color]({% slug howto_change_text_color_numerictextbox %})
+* [Select All Text on Focus]({% slug howto_select_all_texton_focus_numerictextbox %})
+* [Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})

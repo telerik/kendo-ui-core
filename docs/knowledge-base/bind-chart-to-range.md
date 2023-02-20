@@ -1,7 +1,7 @@
 ---
 title: Bind Charts to Spreadsheet Data
 page_title: Bind Charts to Spreadsheet Data
-description: "Learn how to bind a Kendo UI Chart to the data of a Kendo UI Spreadsheet widget."
+description: "Learn how to bind a Kendo UI Chart to the data of a Kendo UI Spreadsheet component."
 slug: howto_bindcharttosheet_spreadsheet_widget
 pevious_url: /controls/charts/how-to/bind-chart-to-spreadsheet-data, /controls/charts/how-to/binding/bind-chart-to-spreadsheet-data, /controls/data-management/spreadsheet/how-to/bind-chart-to-range
 tags: kendo, jquery, spreadsheet, bind, chart, to, sheet, data
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

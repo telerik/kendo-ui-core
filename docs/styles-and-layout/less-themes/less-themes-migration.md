@@ -72,20 +72,22 @@ The following table contains the name of the Less theme and its Sass counterpart
 
 > The Bootstrap and Material Less themes will not have their own Sass swatches. Instead, use the dedicated Bootstrap and Material Sass themes.
 
+> These are alternative variants to the LESS themes and they do not provide a one-to-one conversion, but rather a similar and improved look-and-feel.
+
 | Less Theme   | Sass Theme | Status | Sass Theme CDN
 |:---         |:---        |:---        |:---
 | `Default` | `Classic - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-main.css |
 | `Default Dark` | `Classic - Main Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-main-dark.css |
-| `Black` | `Classic - Opal Dark` | In Progress | ETA March 2023 |
+| `Black` | `Classic - Opal Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-opal-dark.css |
 | `Blue Opal` | `Classic - Opal` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-opal.css |
 | `Silver` | `Classic - Silver` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-silver.min.css |
 | `Metro` | `Classic - Metro` | In Research | TBA |
 | `Metro Black` | `Classic - Metro Dark` | In Research | TBA |
 | `Moonlight` | `Classic - Moonlight` | In Research | TBA |
-| `Bootstrap 3` | `Bootstrap - Bootstrap 3` | In Progress | ETA March 2023 |
-| `Bootstrap 3 Dark` | `Bootstrap - Bootstrap 3 Dark` | In Progress | ETA March 2023 |
-| `Flat` | `Bootstrap - Turquoise` | In Progress | ETA March 2023 |
-| `Flat Dark` | `Bootstrap - Turquoise Dark` | In Progress | ETA March 2023 |
+| `Bootstrap 3` | `Bootstrap - Bootstrap 3` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-3.css |
+| `Bootstrap 3 Dark` | `Bootstrap - Bootstrap 3 Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-3-dark.css |
+| `Flat` | `Bootstrap - Turquoise` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-turquoise.css |
+| `Flat Dark` | `Bootstrap - Turquoise Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-turquoise-dark.css |
 | `Material` | `Material - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-main.css |
 | `Material Black` | `Material - Main Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-main-dark.css |
 | `Nova` | `Material - Nova` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-nova.css |

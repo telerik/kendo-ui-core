@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -129,7 +129,7 @@ The example below demonstrates how to disable content scrolling for a specific T
 ## See Also
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
-* [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
-* [How to Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
+* [Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
+* [Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
 
 

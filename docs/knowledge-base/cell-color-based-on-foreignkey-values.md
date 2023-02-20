@@ -1,6 +1,6 @@
 ---
 title: Set Cell Color Based on ForeignKey Values in the Grid
-page_title: Use ForeignKey Values to Define the Cell Color - Kendo UI Grid for jQuery
+page_title: Use ForeignKey Values to Define the Cell Color - Kendo UI for jQuery Data Grid
 description: "Learn how to set the color of a text cell based on ForeignKey values in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/cell-color-based-on-foreignkey-values, /controls/data-management/grid/how-to/Layout/cell-color-based-on-foreignkey-values
 slug: howto_set_cell_color_basedon_foreignkey_values_grid
@@ -128,4 +128,4 @@ The following example demonstrates how to set the color of a text cell based on 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

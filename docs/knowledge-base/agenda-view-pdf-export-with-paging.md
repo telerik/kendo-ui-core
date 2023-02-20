@@ -1,10 +1,10 @@
 ---
 title: Export the Agenda View of a Scheduler with Paging in PDF
-page_title: Export the Agenda View of a Scheduler with Paging in PDF
-description: "Learn how to export the Agenda view of the Kendo UI for jQuery Scheduler to a paged PDF."
+page_title: Export the Agenda View in PDF - jQuery Scheduler
+description: "Learn how to export the Agenda view of the Kendo UI for jQuery Scheduler control to a paged PDF."
 previous_url: /controls/scheduling/scheduler/how-to/agenda-view-pdf-export-with-paging, /controls/scheduling/scheduler/how-to/export/agenda-view-pdf-export-with-paging
 slug: howto_implement_pdf_export_inagenda_view_scheduler
-tags: telerik, kendo, jquery, scheduler, export, agenda, view, with, paging, in, pdf 
+tags: telerik, kendo, jquery, scheduler, export, agenda, view, with, paging, in, pdf
 component: scheduler
 type: how-to
 res_type: kb
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -80,7 +80,7 @@ To achieve the desired scenario, use the [drawing API]({% slug multipagecontent_
         $("#export").on("click", function() {
           drawing = kendo.drawing;
 
-          //workaround PDF export rowspan limitation
+          // Work around the PDF export rowspan limitation.
           $(".k-scheduler-content table [rowspan]").each(function() {
             var currentCell = $(this);
             var rowSpan = parseInt(currentCell.attr("rowspan"));
@@ -125,10 +125,10 @@ To achieve the desired scenario, use the [drawing API]({% slug multipagecontent_
     </style>
 
     <script>
-      // Import DejaVu Sans font for embedding
+      // Import the DejaVu Sans font for embedding.
 
       // NOTE: Only required if the Kendo UI stylesheets are loaded
-      // from a different origin, e.g. cdn.kendostatic.com
+      // from a different origin, for example, cdn.kendostatic.com.
       kendo.pdf.defineFont({
         "DejaVu Sans"             : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans.ttf",
         "DejaVu Sans|Bold"        : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
@@ -1237,6 +1237,7 @@ To achieve the desired scenario, use the [drawing API]({% slug multipagecontent_
 
 ## See Also
 
-* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
-* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [Basic Usage of the jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
 * [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [Product Page of the Scheduler](https://www.telerik.com/kendo-jquery-ui/scheduler)

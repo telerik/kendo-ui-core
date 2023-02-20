@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -83,8 +83,8 @@ The following example demonstrates how to make the Window behave as a sliding pa
 ## See Also
 
 * [Window JavaScript API Reference](/api/javascript/ui/window)
-* [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
-* [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
-* [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
-* [How to Post to Iframe]({% slug howto_posttoiframe_window %})
-* [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
+* [Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
+* [Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
+* [Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
+* [Post to Iframe]({% slug howto_posttoiframe_window %})
+* [Use Custom Action Icons]({% slug howto_customactionicons_window %})

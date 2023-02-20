@@ -2,7 +2,7 @@
 title: Use Different Editors Based on the Column Values of the Grid
 description: Learn how to use a different editor based on the value of a column in a Kendo UI Grid.
 type: how-to
-page_title: Use Different Editor Based on the Column Value - Kendo UI Grid for jQuery
+page_title: Use Different Editor Based on the Column Value - Kendo UI for jQuery Data Grid
 slug: grid-different-editor-based-on-column-value
 tags: grid, different, condition, editor, value, data, type, dynamic
 res_type: kb

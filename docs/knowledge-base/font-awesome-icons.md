@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -187,6 +187,6 @@ The following example demonstrates how to construct a visual that uses two [Text
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [API Reference of the Drawing layout](/api/javascript/drawing/layout)
-* [How to Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
-* [How to Display Checkboxes Next to Legend Items]({% slug howto_displaycheckboxes_nexttolegenditems_charts %})
-* [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
+* [Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
+* [Display Checkboxes Next to Legend Items]({% slug howto_displaycheckboxes_nexttolegenditems_charts %})
+* [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

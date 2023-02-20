@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -84,6 +84,6 @@ To persist the scroll position, use the [`select`](/api/javascript/ui/tabstrip/e
 ## See Also
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
-* [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
-* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
-* [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
+* [Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
+* [Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
+* [Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})

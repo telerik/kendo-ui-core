@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -164,7 +164,7 @@ The following example demonstrates how to create Kendo UI Stock Charts by using 
 ## See Also
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
-* [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
-* [How to Create Dynamic Plot Bands]({% slug howto_createdynamicplotbands_charts %})
-* [How to Create Timeline Using Range Bars]({% slug howto_createtimeline_usingrangebars_charts %})
-* [How to Customize Chart Themes]({% slug howto_customizechartthemes_charts %})
+* [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
+* [Create Dynamic Plot Bands]({% slug howto_createdynamicplotbands_charts %})
+* [Create Timeline Using Range Bars]({% slug howto_createtimeline_usingrangebars_charts %})
+* [Customize Chart Themes]({% slug howto_customizechartthemes_charts %})

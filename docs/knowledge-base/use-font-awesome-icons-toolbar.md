@@ -1,7 +1,7 @@
 ---
 title: Use FontAwesome Icons in the ToolBar
 page_title: Use FontAwesome Icons in the ToolBar
-description: "Learn how to use FontAwesome icons in the Kendo UI for jQuery ToolBar widget."
+description: "Learn how to use FontAwesome icons in the Kendo UI for jQuery ToolBar component."
 slug: howto_usefontawesomeicons_toolbar
 previous_url: /controls/navigation/toolbar/how-to/use-font-awesome-icons
 tags: telerik, kendo, jquery, toolbar, use, fontawesome, icons
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -66,5 +66,5 @@ The example below demonstrates how to use [FontAwesome icons](http://fortawesome
 ## See Also
 
 * [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
-* [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})
-* [How to Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})
+* [Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})
+* [Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})

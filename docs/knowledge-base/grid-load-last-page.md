@@ -2,7 +2,7 @@
 title: Load the Last Grid Page by Default
 description: Learn how to show the last page in the Kendo UI Grid.
 type: how-to
-page_title: Show Last Page by Default - Kendo UI Grid for jQuery
+page_title: Show Last Page by Default - Kendo UI for jQuery Data Grid
 slug: grid-load-last-page
 tags: grid, pager, page
 ticketid: 1149264

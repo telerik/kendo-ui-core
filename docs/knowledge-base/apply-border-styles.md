@@ -1,7 +1,7 @@
 ---
 title: Apply Border Styles to TreeMap Tiles
-page_title: Apply Border Styles to the TreeMap Tiles
-description: "Learn how to apply border styles to the Kendo UI TreeMap tiles."
+page_title: Apply Border Styles to the Tiles - jQuery TreeMap
+description: "Learn how to apply border styles to the tiles of the Kendo UI for jQuery TreeMap control."
 previous_url: /controls/charts/treemap/how-to/apply-border-styles, /controls/charts/how-to/appearance/apply-border-styles
 slug: howto_applyborderstyles_treemap
 tags: treemap, apply, border, styles
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -37,7 +37,7 @@ How can I apply border styles to the tiles of the TreeMap?
 
 ## Solution
 
-The Kendo UI TreeMap widget considers the width of its container and calculates the dimensions of its tiles accordingly. If the `border-width` configuration of the tiles is changed to a value that is greater than 1px, then a negative value must be provided as a margin to compensate the update of the dimensions.
+The Kendo UI TreeMap control considers the width of its container and calculates the dimensions of its tiles accordingly. If the `border-width` configuration of the tiles is changed to a value that is greater than 1px, then a negative value must be provided as a margin to compensate the update of the dimensions.
 
 > * This approach is applicable only when you use [Less-based themes]({% slug themesandappearnce_kendoui_desktopwidgets %}).
 > * R1 2023 is the last official release of Kendo jQuery, which supports and ships [Less themes]({% slug themesandappearnce_kendoui_desktopwidgets %}) with the product.
@@ -81,5 +81,5 @@ The following example demonstrates how to apply border styles to the Kendo UI Tr
 
 ## See Also
 
-* [TreeMap JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
-* [How to Set Header Items Color]({% slug howto_setheaderitemscolor_treemap %})
+* [JavaScript API Reference of the jQuery TreeMap](/api/javascript/dataviz/ui/treemap)
+* [Set the Color for the TreeMap Header Items]({% slug howto_setheaderitemscolor_treemap %})

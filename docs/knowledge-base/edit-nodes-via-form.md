@@ -1,7 +1,7 @@
 ---
 title: Edit TreeView Nodes with a Form
 page_title: Edit TreeView Nodes with a Form
-description: "Learn how to allow users to edit nodes by using a standalone form in the Kendo UI for jQuery TreeView widget."
+description: "Learn how to allow users to edit nodes by using a standalone form in the Kendo UI for jQuery TreeView component."
 slug: howto_editnodesviaform_treeview
 previous_url: /controls/navigation/treeview/how-to/editing/edit-nodes-via-form
 tags: telerik, kendo, jquery, treeview, edit, nodes, with, standalone, form
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

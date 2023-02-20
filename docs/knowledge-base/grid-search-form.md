@@ -2,7 +2,7 @@
 title: Grid External Search Form
 description: Learn how to implement an external search form for the Kendo UI Grid.
 type: how-to
-page_title: Search Form for Grid - Kendo UI Grid for jQuery
+page_title: Search Form for Grid - Kendo UI for jQuery Data Grid
 slug: grid-search-form
 tags: kendoui, kendo, grid, search, panel, form, external, filter, before, load
 res_type: kb

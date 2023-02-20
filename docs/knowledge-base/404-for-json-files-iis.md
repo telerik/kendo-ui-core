@@ -3,7 +3,7 @@ title: 404 Status Code Is Thrown for JSON Files on IIS
 page_title: 404 Status Code Is Thrown for JSON Files on IIS
 description: "Learn how to handle the 404 error for JSON files on IIS in Kendo UI for jQuery."
 slug: 404_json_files_iis
-tags: telerik, kendoui, jquery, troubleshooting, error, 404, status, code, thrown, json, files, iis 
+tags: telerik, kendoui, jquery, troubleshooting, error, 404, status, code, thrown, json, files, iis
 type: troubleshooting
 res_type: kb
 component: kendoui
@@ -27,8 +27,8 @@ component: kendoui
 A 404 status code is thrown for JSON files on IIS.
 
 ## Cause
- 
-By default, IIS does not serve files with unknown extensions. The mime types can be specified either through the IIS management console (inetmgr) or in the site `Web.config`.
+
+By default, IIS does not serve files with unknown extensions. The mime types can be specified either through the IIS management console (`inetmgr`) or in the site `Web.config`.
 
 ## Solution
 
@@ -49,3 +49,8 @@ The example below demonstrates how to configure the IIS `Web.config`. Note that,
     </configuration>
 ```
 
+## See Also
+
+* [Kendo UI for jQuery Product Page](https://www.telerik.com/kendo-jquery-ui)
+* [Kendo UI for jQuery Demos](https://demos.telerik.com/kendo-ui)
+* [Telerik and Kendo UI Virtual Classroom](https://learn.telerik.com/learn)

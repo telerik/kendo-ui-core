@@ -1,6 +1,6 @@
 ---
 title: Change Grid Pager to Slider
-page_title: Change Pager to Slider - Kendo UI Grid for jQuery
+page_title: Change Pager to Slider - Kendo UI for jQuery Data Grid
 description: "Learn how to change the default paging to a slider in a Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/change-grid-pager-to-slider, /controls/data-management/grid/how-to/Paging/change-grid-pager-to-slider
 slug: howto_change_grid_pager_to_slider
@@ -99,4 +99,4 @@ How can I change the default pager of the Kendo UI Grid to a slider?
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

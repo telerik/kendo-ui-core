@@ -2,7 +2,7 @@
 title: Add nested child grids
 description: "Learn how to add nested child grids."
 type: how-to
-page_title: Add nested Child Grids - Kendo UI Grid for jQuery
+page_title: Add nested Child Grids - Kendo UI for jQuery Data Grid
 slug: grid-add-nested-child-grids
 tags: grid, hierarchy, nested, child
 ticketid: 1528111

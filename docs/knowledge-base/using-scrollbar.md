@@ -1,7 +1,7 @@
 ---
 title: Use Scrollbars in the Diagram
 page_title: Use Scrollbars in the Diagram
-description: "Learn how to use a scrollbar for a Kendo UI Diagram widget."
+description: "Learn how to use a scrollbar for a Kendo UI Diagram component."
 slug: howto_usescrollbar_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/using-scrollbar
 tags: kendo, jquery, diagram, add, implement, use, scrollbars
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -94,6 +94,6 @@ The following example demonstrates how to use a scrollbar as a Diagram element.
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
-* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
-* [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
-* [How to Wrap Text]({% slug howto_wraptext_diagram %})
+* [Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
+* [Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
+* [Wrap Text]({% slug howto_wraptext_diagram %})

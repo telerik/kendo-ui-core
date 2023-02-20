@@ -1,7 +1,7 @@
 ---
 title: Add ProgressBars to Grid Cells
-page_title: Add a ProgressBar to Cells - Kendo UI Grid for jQuery
-description: Learn how to add a ProgressBar to a cell in the Kendo UI Grid.
+page_title: Add a ProgressBar to Cells - jQuery Data Grid
+description: Learn how to add a ProgressBar to a cell in the Kendo UI for jQuery Data Grid.
 type: how-to
 slug: add-a-progressbar-in-a-grid-cell
 previous_url: /knowledge-base/how-to-add-a-progressbar-in-a-grid-cell
@@ -30,6 +30,8 @@ component: grid
 How can I add a ProgressBar to a Kendo UI Grid cell?
 
 ## Solution
+
+To achieve the desired scenario:
 
 1. Add the DOM elements for the ProgressBar by using the [`column.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template) configuration.
 
@@ -61,3 +63,9 @@ $("#grid").kendoGrid({
 });
 </script>
 ```
+
+## See Also
+
+* [Kendo UI for jQuery Data Grid (Product Page)](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})

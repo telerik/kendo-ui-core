@@ -220,4 +220,4 @@ The following example demonstrates how to implement a stock navigator with the c
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Data Grid](/api/javascript/dataviz/ui/chart)

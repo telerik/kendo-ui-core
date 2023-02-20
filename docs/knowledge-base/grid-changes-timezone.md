@@ -26,7 +26,7 @@ component: grid
   <td>All</td>
  </tr>
  <tr>
-  <td>.Net framework</td>
+  <td>.NET Framework</td>
   <td>All</td>
  </tr>
 </table>

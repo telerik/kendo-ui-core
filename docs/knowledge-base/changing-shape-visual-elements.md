@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -191,6 +191,6 @@ The following example demonstrates how to achieve the desired scenario, which me
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
-* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
-* [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
-* [How to Wrap Text]({% slug howto_wraptext_diagram %})
+* [Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
+* [Use Scrollbars]({% slug howto_usescrollbar_diagram %})
+* [Wrap Text]({% slug howto_wraptext_diagram %})

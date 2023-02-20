@@ -1,7 +1,7 @@
 ---
 title: Serialize Form Data during Async Upload
 page_title: Serialize Form Data during Async Upload 
-description: "Learn how to serialize form data with the Kendo UI Upload widget."
+description: "Learn how to serialize form data with the Kendo UI Upload component."
 slug: howto_serialize_form_data_upload
 previous_url: /controls/editors/upload/how-to/serialize-form-data
 tags: telerik, kendo, jquery, upload, serialize, form, data, during, async, upload
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

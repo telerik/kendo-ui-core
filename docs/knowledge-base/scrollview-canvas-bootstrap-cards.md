@@ -147,4 +147,4 @@ The following example demonstrates how create a ScrollView-based canvas with Boo
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/scrollview)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/scrollview)

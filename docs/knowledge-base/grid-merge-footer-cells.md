@@ -2,7 +2,7 @@
 title: Merge Cells in the Grid Footer
 description: Learn how to fake merging cells in the footer of the Kendo UI Grid.
 type: how-to
-page_title: Combine Footer Cells - Kendo UI Grid for jQuery
+page_title: Combine Footer Cells - Kendo UI for jQuery Data Grid
 slug: grid-merge-footer-cells
 tags: grid, merge, cells, footer
 ticketid: 1149497

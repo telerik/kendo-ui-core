@@ -1,7 +1,7 @@
 ---
 title: Add an Auto-Resizing Splitter to the Window
-page_title: Add an Auto-Resizing Splitter to the Window
-description: "Learn how to add a Splitter that resizes automatically along with the Kendo UI for jQuery Window."
+page_title: Implement Auto-Resizing Splitter to Window - jQuery Window
+description: "Learn how to add a splitter that resizes automatically along with the Kendo UI for jQuery Window."
 slug: howto_addautoresizingsplitter_window
 previous_url: /controls/layout/splitter/how-to/add-auto-resizing-splitter-to-window, /controls/layout/window/how-to/add-auto-resizing-splitter
 tags: telerik, kendo, jquery, window, add, sutoresizing, splitter
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I add a Splitter that resizes automatically along with the Kendo UI Window widget?
+How can I add a Splitter that resizes automatically along with the Kendo UI Window component?
 
 ## Solution
 
@@ -82,7 +82,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
-* [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
-* [How to Post to Iframe]({% slug howto_posttoiframe_window %})
-* [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
+* [Knendo UI for jQuery Window JavaScript API Reference](/api/javascript/ui/window)
+* [Create Confirmation Dialogs by Using Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
+* [Post to Iframes in the Window]({% slug howto_posttoiframe_window %})
+* [Restrict Window Positioning]({% slug howto_restrictpositioning_window %})

@@ -1,6 +1,6 @@
 ---
 title: Change Group Header Position When Columns Are Locked
-page_title: Change the Header Position of Locked Columns - Kendo UI Grid for jQuery
+page_title: Change the Header Position of Locked Columns - Kendo UI for jQuery Data Grid
 description: "Learn how to change the position of the group header when locked columns are used in the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Layout/change-group-header-position-when-locked-columns-are-used
 slug: howto_change_group_header_position_wthlocked_columns_grid
@@ -110,4 +110,4 @@ The following example demonstrates how to change the group header position when 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

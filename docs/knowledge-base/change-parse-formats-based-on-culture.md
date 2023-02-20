@@ -1,7 +1,7 @@
 ---
 title: Use the Current DateTimePicker Culture Default Date Format as a Parse Format
 page_title: Use the Current DateTimePicker Culture Default Date Format as a Parse Format
-description: "Learn how to use the default date format of the current culture as a parse format for the Kendo UI DateTimePicker widget."
+description: "Learn how to use the default date format of the current culture as a parse format for the Kendo UI DateTimePicker component."
 slug: howto_use_current_culture_date_format_in_datetimepicker
 previous_url: /controls/editors/datetimepicker/how-to/change-parse-formats-based-on-culture
 tags: telerik, kendo, jquery, datetimepicker, use, current, default, culture, format, as, parse, format
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

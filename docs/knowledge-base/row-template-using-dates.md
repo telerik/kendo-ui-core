@@ -1,6 +1,6 @@
 ---
 title: Use Dates inside Row Template
-page_title:  Dates Inside a Row Template - Kendo UI Grid for jQuery
+page_title:  Dates Inside a Row Template - Kendo UI for jQuery Data Grid
 description: "Learn how to use dates inside the row template of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Templates/row-template-using-dates
 slug: howto_use_dates_inside_row_template_grid
@@ -180,4 +180,4 @@ The following example demonstrates how to use dates inside a Grid row template.
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

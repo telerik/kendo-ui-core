@@ -1,7 +1,7 @@
 ---
 title: Remove Files in the Upload with Confirmation Dialog
 page_title: Remove Files in the Upload with Confirmation Dialog
-description: "Learn how to display a custom confirmation dialog when removing files from the Kendo UI Upload widget."
+description: "Learn how to display a custom confirmation dialog when removing files from the Kendo UI Upload component."
 slug: howto_remove_files_with_confirmation
 previous_url: /controls/editors/upload/how-to/remove-files-with-confirmation-dialog
 tags: telerik, kendo, jquery, upload, remove, files, using, confirmation, dialog
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

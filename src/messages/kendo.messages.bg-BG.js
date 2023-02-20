@@ -415,7 +415,20 @@ $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
     "resourcesHeader": "Ресурси",
     "start": "Начало",
     "title": "Заглавие",
-    "unitsHeader": "Единици"
+    "unitsHeader": "Единици",
+    "parent": "Родител",
+    "addNew": "Добави",
+    "name": "Име",
+    "percentCompleteHint": "стойност от 0 до 1",
+    "remove": "Премахни",
+    "actualStart": "Действително начало",
+    "actualEnd": "Действителен край",
+    "parentOptionLabel": "-Няма-",
+    "general": "Общи",
+    "predecessors": "Предходни",
+    "successors": "Следващи",
+    "other": "Други",
+    "dependencyType": "Тип"
   },
   "plannedTasks": {
     "switchText": "Планирана задача",

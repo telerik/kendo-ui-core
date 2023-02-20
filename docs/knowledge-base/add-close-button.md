@@ -1,6 +1,6 @@
 ---
-title: Add a Close Button inside Modal Windows
-page_title: Add a Close Button inside Modal Windows 
+title: Add Close Buttons inside Modal Windows
+page_title: Add a Close Button inside a Modal Window - jQuery Window
 description: "Learn how to add a Close button to a modal Kendo UI for jQuery Window."
 slug: howto_addclosebutton_insidemodalwindows_window
 previous_url: /controls/layout/window/how-to/add-close-button
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -75,7 +75,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
-* [How to Post to Iframe]({% slug howto_posttoiframe_window %})
-* [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
-* [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
+* [JavaScript API Reference of the Kendo UI for jQuery Window](/api/javascript/ui/window)
+* [Post to Iframes in the Window]({% slug howto_posttoiframe_window %})
+* [Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
+* [Use Custom Action Icons in the Window]({% slug howto_customactionicons_window %})

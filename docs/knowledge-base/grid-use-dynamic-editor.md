@@ -2,7 +2,7 @@
 title: Use Dynamic Editor in the Grid
 description: Learn how to use a dynamic editor in the Kendo UI Grid.
 type: how-to
-page_title: Use Dynamic Editor - Kendo UI Grid for jQuery
+page_title: Use Dynamic Editor - Kendo UI for jQuery Data Grid
 slug: grid-use-dynamic-editor
 tags: grid, editor, dynamic, different, single, input, textbox
 res_type: kb

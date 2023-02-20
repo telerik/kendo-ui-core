@@ -26,7 +26,7 @@ component: grid
   <td>All</td>
  </tr>
  <tr>
-  <td>.Net framework</td>
+  <td>.NET Framework</td>
   <td>Version 1 0</td>
  </tr>
 </table>

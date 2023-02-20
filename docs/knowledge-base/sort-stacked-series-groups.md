@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -139,6 +139,6 @@ The following example demonstrates how to sort stacked series values in a groupe
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
-* [How to Sort Categories in Grouped Charts]({% slug howto_sortcategorisinagroupedchart_charts %})
-* [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
-* [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
+* [Sort Categories in Grouped Charts]({% slug howto_sortcategorisinagroupedchart_charts %})
+* [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
+* [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

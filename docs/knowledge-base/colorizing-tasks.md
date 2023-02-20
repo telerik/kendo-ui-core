@@ -1,7 +1,7 @@
 ---
 title: Colorize Gantt Tasks
 page_title: Add Color to the Gantt Tasks
-description: "Learn how to colorize tasks in the Kendo UI for jQuery Gantt widget."
+description: "Learn how to colorize tasks in the Kendo UI for jQuery Gantt component."
 slug: howto_colorize_tasks_gantt
 previous_url: /controls/scheduling/gantt/how-to/colorizing-tasks
 tags: telerik, kendo, jquery, gantt, colorize, tasks
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

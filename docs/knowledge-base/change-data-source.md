@@ -1,7 +1,7 @@
 ---
 title: Change the DataSource of the PivotGrid Dynamically
 page_title: Change the PivotGrid DataSource Dynamically
-description: "Learn how to change the PivotGrid data source dynamically in a Kendo UI PivotGrid widget."
+description: "Learn how to change the PivotGrid data source dynamically in a Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/change-data-source, /controls/data-management/pivotgrid/how-to/dimensions/change-data-source
 slug: howto_change_datasource_dynamically_pivotgrid
 tags: kendoui, pivotgrid, change, data, source, dynamically
@@ -120,7 +120,7 @@ The following example demonstrates how to dynamically change the data source of 
 ## See Also
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
-* [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
+* [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
+* [Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})

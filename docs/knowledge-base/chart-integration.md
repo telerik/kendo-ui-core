@@ -1,7 +1,7 @@
 ---
 title: Integrate the PivotGrid with the Kendo UI Chart
 page_title: Integrate the PivotGrid and Chart Components
-description: "Learn how to integrate a Kendo UI PivotGrid component with a Kendo UI Chart widget."
+description: "Learn how to integrate a Kendo UI PivotGrid component with a Kendo UI Chart component."
 slug: howto_integratewith_kendoui_chart_pivotgrid
 previous_url: /controls/charts/how-to/binding/bind-chart-to-pivotgrid-data, /controls/data-management/pivotgrid/how-to/chart-integration, /controls/charts/how-to/integration/pivotgrid-chart-integration
 tags: kendoui, pivotgrid, integrate, with, kendo, chart
@@ -311,15 +311,15 @@ The following example demonstrates how to integrate a Kendo UI PivotGrid widget 
 ## See Also
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
-* [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
-* [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
-* [How to Reload PivotGrid Configuration Options]({% slug howto_reload_configuration_options_pivotgrid %})
-* [How to Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})
-* [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
-* [How to Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
+* [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
+* [Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
+* [Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
+* [Reload PivotGrid Configuration Options]({% slug howto_reload_configuration_options_pivotgrid %})
+* [Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})
+* [Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
+* [Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
 
 For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).

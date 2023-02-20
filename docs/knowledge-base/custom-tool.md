@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -152,5 +152,5 @@ The example below demonstrates how to achieve the desired scenario.
 ## See Also
 
 * [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})
-* [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})
+* [Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})
+* [Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

@@ -2,7 +2,7 @@
 title: Setting the Default Numeric Filter Value in the Grid Filter Menu
 description: "Learn how to set the default filter number values of the Kendo UI Grid filter menu."
 type: how-to
-page_title: Set the Default Filter Values - Kendo UI Grid for jQuery
+page_title: Set the Default Filter Values - Kendo UI for jQuery Data Grid
 slug: default-grid-filter-values
 tags: grid, default filter, values, filter menu, kendo grid
 ticketid: 1583924

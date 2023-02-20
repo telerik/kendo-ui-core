@@ -1,7 +1,7 @@
 ---
 title: Set Caret Positions in the Editor
 page_title: Set Caret Positions in the Editor
-description: "Learn how to set the caret position in a Kendo UI Editor widget."
+description: "Learn how to set the caret position in a Kendo UI Editor component."
 previous_url: /controls/editors/editor/how-to/set-caret-position-using-javascript, /controls/editors/editor/how-to/customize/set-caret-position-using-javascript
 slug: howto_set_caret_position_editor
 tags: telerik, kendo, jquery, editor, set, caret, positions
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

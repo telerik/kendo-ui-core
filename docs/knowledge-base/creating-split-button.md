@@ -1,7 +1,7 @@
 ---
 title: Create a Split Button in the Menu
 page_title: Create a Split Button in the Menu
-description: "Learn how to create a Split button in the Kendo UI Menu widget."
+description: "Learn how to create a Split button in the Kendo UI Menu component."
 slug: howto_createa_split_button_menu
 previous_url: /controls/navigation/menu/how-to/creating-split-button
 tags: telerik, kendo, jquery, menu, create, a, split, button
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -89,7 +89,7 @@ The example below demonstrates how to achieve the desired scenario.
 ## See Also
 
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
-* [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
-* [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
+* [Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
+* [Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
 
 

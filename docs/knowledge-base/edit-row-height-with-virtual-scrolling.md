@@ -1,6 +1,6 @@
 ---
 title: Adjust Row Height with Virtual Scrolling
-page_title: Row Height via Virtual Scrolling - Kendo UI Grid for jQuery
+page_title: Row Height via Virtual Scrolling - Kendo UI for jQuery Data Grid
 description: "Learn how to adjust row height when virtual scrolling is enabled in the Kendo UI Grid widget for jQuery."
 previous_url: /mvc/kendo-ui/controls/data-management/grid/how-to/Layout/edit-row-height-with-virtual-scrolling, /controls/data-management/grid/how-to/Layout/edit-row-height-with-virtual-scrolling
 slug: howto_adjust_row_height_withvirtual_scrolling_grid
@@ -91,4 +91,4 @@ The following example demonstrates how to adjust the row height of the Grid when
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -1,7 +1,7 @@
 ---
 title: Attach Methods to Data Items in the TreeView
-page_title: Attach Methods to Data Items in the TreeView
-description: "Learn how to attach methods to data items at different levels of the Kendo UI for jQuery TreeView widget and use them in a template."
+page_title: Attach Methods to Data Items and Use Templates - jQuery TreeView
+description: "Learn how to attach methods to data items at different levels of the Kendo UI for jQuery TreeView component and use them in a template."
 slug: howto_attache_methodsto_dataitems_treeview
 previous_url: /controls/navigation/treeview/how-to/templates/attach-methods-to-items
 tags: telerik, kendo, jquery, treeview, atach, methods, to, data, items
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -86,6 +86,6 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
-* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [Basic Usage of the jQuery TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the jQuery TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
 * [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

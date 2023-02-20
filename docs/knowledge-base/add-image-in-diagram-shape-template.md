@@ -1,13 +1,14 @@
 ---
-title: Add Image in Diagram Shape Template
+title: Add an Image to the Diagram Shape Template
+page_title: Show Images in the Shape Template - jQuery Diagram
 description: Learn how to add an image to the shape template of the Kendo UI for jQuery Diagram component.
 type: how-to
-page_title: Add Image in Diagram Shape Template - Kendo UI Diagram for jQuery
 slug: add-image-in-diagram-shape-template
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
@@ -20,21 +21,28 @@ res_type: kb
 
 ## Description
 
-These samples demonstrate how you can include images in Diagram shapes.
+How can I include images in the Diagram shapes?
 
-## Solution 1
+## Solution
 
-Using height and width:
+To achieve the desired scenario, use either of the available approaches:
+
+* [Use the `height` and `width` definitions](#using-the-height-and-width).
+* [Use the `Image` setting](#using-the-image-setting).
+
+### Using the Height and Width
+
+The following example demonstrates how to implement the suggested approach.
 
 ```dojo
 
 <style>
       .container {
-        /* Move rendering container off-screen */
+        /* Move the rendering container off-screen. */
         position: absolute;
         left: -4000px;
 
-        /* Set dimensions */
+        /* Set the dimensions. */
         width: 100px;
         height: 100px;
       }
@@ -62,36 +70,36 @@ Using height and width:
 
     <div id="diagram"></div>
     <script>
-      // Import the Drawing API namespaces
+      // Import the Drawing API namespaces.
       var geom = kendo.geometry;
       var draw = kendo.drawing;
 
-      // Compile the shape template
+      // Compile the shape template.
       var contentTemplate = kendo.template($("#template").html());
 
       function visualTemplate(options) {
-        // Render template and bind it to the current data item
+        // Render the template and bind it to the current data item.
         var dataItem = options.dataItem;
         var renderElement = $("<div style='display:inline-block' />").appendTo("body");
         renderElement.html(contentTemplate(dataItem));
 
-        // Create a new group that will hold the rendered content
+        // Create a new group that will hold the rendered content.
         var output = new kendo.drawing.Group();
         var width = renderElement.width();
         var height = renderElement.height();
-        // Create a rectangle using the renderElement dimensions to expand the group while waiting for its actual content
+        // Create a rectangle by using the renderElement dimensions to expand the group while waiting for its actual content.
         var geom = new kendo.geometry.Rect([0, 0], [width, height]);
 
         output.append(new kendo.drawing.Rect(geom, { stroke: { width: 0 }}));
 
         draw.drawDOM(renderElement)
           .then(function(group) {
-          /* Remove helper rectangle */
+          /* Remove the helper rectangle. */
           output.clear();
 
           output.append(group);
 
-          /* Clean-up */
+          /* Clean up. */
           renderElement.remove();
         });
 
@@ -129,19 +137,19 @@ Using height and width:
 
 ```
 
-## Solution 2
+### Using the Image Setting
 
-Using [kendo.dataviz.diagram.Image](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/diagram/image)
+The following example shows how to implement the desired scenario by using the [`kendo.dataviz.diagram.Image`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/diagram/image) setting.
 
 ```dojo
 
 <style>
       .container {
-        /* Move rendering container off-screen */
+        /* Move the rendering container off-screen. */
         position: absolute;
         left: -4000px;
 
-        /* Set dimensions */
+        /* Set the dimensions. */
         width: 100px;
         height: 100px;
       }
@@ -169,11 +177,11 @@ Using [kendo.dataviz.diagram.Image](https://docs.telerik.com/kendo-ui/api/javasc
 
     <div id="diagram"></div>
     <script>
-      // Import the Drawing API namespaces
+      // Import the Drawing API namespaces.
       var geom = kendo.geometry;
       var draw = kendo.drawing;
 
-      // Compile the shape template
+      // Compile the shape template.
       var contentTemplate = kendo.template($("#template").html());
 
       function visualTemplate(options) {
@@ -219,3 +227,10 @@ Using [kendo.dataviz.diagram.Image](https://docs.telerik.com/kendo-ui/api/javasc
     </script>
 
 ```
+
+## See Also
+
+* [Overview of the Kendo UI for jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [Using the API of the jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/api)
+* [JavaScript API Reference of the jQuery Diagram](/api/javascript/ui/diagram)
+* [jQuery Diagram Product Page](https://www.telerik.com/kendo-jquery-ui/diagram)

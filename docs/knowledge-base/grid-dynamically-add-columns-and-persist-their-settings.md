@@ -2,7 +2,7 @@
 title: Dynamically Add and Remove Columns to the Grid by Using the MultiSelect and Persist Their Settings
 description: Learn how to dynamically add and remove columns in the Kendo UI for jQuery Grid by using the MultiSelect component and then persist their settings.
 type: how-to
-page_title: Add and Remove Columns Dynamically and Persist Their Settings - Kendo UI Grid for jQuery
+page_title: Add and Remove Columns Dynamically and Persist Their Settings - Kendo UI for jQuery Data Grid
 slug: grid-dynamically-add-remove-columns-persist-settings
 tags: grid, dynamically, columns, add, persist, settings
 res_type: kb

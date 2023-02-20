@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -82,9 +82,9 @@ The following example demonstrates how to integrate the DatePicker with DateJS a
 ## See Also
 
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
-* [How to Create Date Masking]({% slug masks_kendoui_maskedtextbox_widget %})
-* [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
-* [How to Hide the Default Button]({% slug howto_hide_default_button_datepicker %})
-* [How to Make Input Elements Read-Only]({% slug howto_make_input_elements_readonly_datepicker %})
-* [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
-* [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
+* [Create Date Masking]({% slug masks_kendoui_maskedtextbox_widget %})
+* [Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
+* [Hide the Default Button]({% slug howto_hide_default_button_datepicker %})
+* [Make Input Elements Read-Only]({% slug howto_make_input_elements_readonly_datepicker %})
+* [Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
+* [Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})

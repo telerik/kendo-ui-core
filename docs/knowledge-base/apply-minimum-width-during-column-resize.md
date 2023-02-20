@@ -1,7 +1,7 @@
 ---
-title: Apply Minimum Width during Column Resize
-page_title:  Apply Minimum Width during Column Resize - Kendo UI Grid for jQuery
-description: "Learn how to enforce a minimum column width during column resizing in the Kendo UI Grid for jQuery."
+title: Apply Minimum Width When Resizing Grid Columns
+page_title: Apply a Minimum Width during Column Resize - jQuery Data Grid
+description: "Learn how to enforce a minimum column width during column resizing in the Kendo UI Data Grid for jQuery control."
 previous_url: /controls/data-management/grid/how-to/Layout/apply-minimum-width-during-column-resize
 slug: howto_apply_min_width_during_column_resize_grid
 tags: grid, min, width, column, resize
@@ -76,7 +76,7 @@ The following example demonstrates how to use the API for internal Grid column r
     </script>
 ```
 
-Example: Apply a minimum width during column resize for a single column.
+The following example shows how to apply a minimum width when resizing a single Data Grid column.
 
 ```dojo
 <div id="grid"></div>
@@ -91,7 +91,7 @@ Example: Apply a minimum width during column resize for a single column.
             {field: "bar"},
             {field: "baz"}
           ],
-          resizable: true 
+          resizable: true
         });
 
         var minTableWidth;
@@ -114,7 +114,7 @@ Example: Apply a minimum width during column resize for a single column.
             }
 
             if (fooTh.width() < minColumnWidth) {
-              // the next line is ONLY needed if Grid scrolling is enabled
+              // The next line is ONLY needed if the scrolling of the Grid is enabled.
               grid.thead.closest("table").width(minTableWidth).children("colgroup").find("col").eq(idxOfRestrictedColumn).width(minColumnWidth);
               grid.tbody.closest("table").width(minTableWidth).children("colgroup").find("col").eq(idxOfRestrictedColumn).width(minColumnWidth);
             }
@@ -125,9 +125,7 @@ Example: Apply a minimum width during column resize for a single column.
     </script>
 ```
 
-Example: Apply width on a certain column if window with less than specific number.
-
-This is done utilizing the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
+The following example shows how to apply the width to a certain column if the window is smaller than the specified number by utilizing the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
 
 ```dojo
     <div id="grid"></div>
@@ -142,7 +140,7 @@ This is done utilizing the [`setOptions`](/api/javascript/ui/grid/methods/setopt
             {field: "bar"},
             {field: "baz"}
           ],
-          resizable: true 
+          resizable: true
         });
       });
 
@@ -169,4 +167,7 @@ This is done utilizing the [`setOptions`](/api/javascript/ui/grid/methods/setopt
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
+* [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

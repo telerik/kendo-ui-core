@@ -2,7 +2,7 @@
 title: Select Rows on Conditions
 description: Learn how to conditionally select rows in the Kendo UI Grid.
 type: how-to
-page_title: Disable Selection of Specific Rows - Kendo UI Grid for jQuery
+page_title: Disable Selection of Specific Rows - Kendo UI for jQuery Data Grid
 slug: grid-disable-row-selection-conditionally
 tags: grid, selection, row
 ticketid: 1147832

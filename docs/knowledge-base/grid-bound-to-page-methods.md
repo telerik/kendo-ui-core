@@ -1,6 +1,6 @@
 ---
 title: Use CRUD Operations when Grid Is Bound to Web Methods
-page_title: CRUD Operations via Web Methods - Kendo UI Grid for jQuery
+page_title: CRUD Operations via Web Methods - Kendo UI for jQuery Data Grid
 description: "Learn how to use CRUD operations when the Kendo UI Grid widget for jQuery is bound to web methods."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-bound-to-page-methods
 slug: howto_use_crud_boundto_web_methods_grid
@@ -16,4 +16,4 @@ To see the example on how to achieve this behavior, refer to [this project](http
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

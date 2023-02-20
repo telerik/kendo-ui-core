@@ -1,7 +1,7 @@
 ---
 title: Remove Files for Upload with Errors
 page_title: Remove Files for Upload with Errors
-description: "Learn how to remove files with errors using the Kendo UI Upload widget."
+description: "Learn how to remove files with errors using the Kendo UI Upload component."
 slug: howto_remove_files_with_errors
 previous_url: /controls/editors/upload/how-to/remove-files-with-errors
 tags: telerik, kendo, jquery, upload, remove, files, for, upload, with, errors
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

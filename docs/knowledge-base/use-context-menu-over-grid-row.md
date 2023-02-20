@@ -2,7 +2,7 @@
 title: Use ContextMenu on Grid Cell
 description: Learn how to use the Kendo UI ContextMenu over a Kendo UI Grid row.
 type: how-to
-page_title: Use ContextMenu over Grid Row - Kendo UI Grid for jQuery
+page_title: Use ContextMenu over Grid Row - Kendo UI for jQuery Data Grid
 previous_url: /knowledge-base/how-to-use-context-menu-over-grid-row
 slug: use-context-menu-over-grid-row
 ticketid: 1114321

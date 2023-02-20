@@ -47,4 +47,4 @@ To work around this issue, define a custom data-binding mechanism. After applyin
 ## See Also
 
 * [Implementing Foreign-Key Columns in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/foreignkeycolumn)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -292,5 +292,5 @@ The following example demonstrates how to add a custom **Delete** confirmation d
 ## See Also
 
 * [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
-* [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
-* [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
+* [Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
+* [Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})

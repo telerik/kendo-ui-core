@@ -2,7 +2,7 @@
 title: Persist Checkbox Selection in Child Grids
 description: Learn how to persist the checkbox selection in the child Grids of the Kendo UI Grid.
 type: how-to
-page_title: Save Selected Rows During Paging in Child Grids - Kendo UI Grid for jQuery
+page_title: Save Selected Rows During Paging in Child Grids - Kendo UI for jQuery Data Grid
 slug: grid-persist-child-grids-checkbox-selection
 tags: grid, checkbox, selection, hierarchy, child, persist
 ticketid: 1150871

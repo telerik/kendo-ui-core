@@ -1,7 +1,7 @@
 ---
 title: Transfer Grid Rows by Using the Sortable
 page_title: Transfer Grid Rows by Using the Sortable
-description: "Learn how to move a row from one Grid to another using the Kendo UI Sortable widget."
+description: "Learn how to move a row from one Grid to another using the Kendo UI Sortable component."
 slug: howto_transfergridrows_sortable
 previous_url: /controls/interactivity/sortable/how-to/transfer-grid-rows
 tags: telerik, kendo, jquery, sortable, transfer, grid, rows
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

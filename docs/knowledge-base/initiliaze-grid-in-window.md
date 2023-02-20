@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -86,9 +86,9 @@ The example below demonstrates how to use the `activate` event when initializing
 * [Initialize the Grid inside a Hidden Container](/web/grid/appearance#initialize-the-grid-inside-a-hidden-container)
 * [JavaScript API Reference: Configuration of Window Animations](/api/javascript/ui/window/configuration/animation)
 * [Window JavaScript Window API Reference](/api/javascript/ui/window)
-* [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
-* [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
-* [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
-* [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
+* [Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
+* [Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
+* [Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
+* [Use Custom Action Icons]({% slug howto_customactionicons_window %})
 
 

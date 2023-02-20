@@ -1,7 +1,7 @@
 ---
 title: Link Map Markers to Locations
 page_title: Link Map Markers to Locations
-description: "Learn how to link markers to locations in a Kendo UI Map widget."
+description: "Learn how to link markers to locations in a Kendo UI Map component."
 slug: howto_linkmarkertolocation_map
 previous_url: /controls/diagrams-and-maps/map/how-to/link-marker-to-location
 tags: kendo, jquery, map, link, markers, to, locations
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

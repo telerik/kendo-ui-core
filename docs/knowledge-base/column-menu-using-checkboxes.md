@@ -1,6 +1,6 @@
 ---
 title: Use Checkboxes inside the Column Menus of the Grid
-page_title: Add Checkboxes inside the Column Menus - Kendo UI Grid for jQuery
+page_title: Add Checkboxes inside the Column Menus - Kendo UI for jQuery Data Grid
 description: "Learn how to use checkboxes inside the column menu of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/column-menu-using-checkboxes, /controls/data-management/grid/how-to/various/column-menu-using-checkboxes
 slug: howto_use_checkboxes_inside_column_menu_grid
@@ -64,4 +64,4 @@ The following example demonstrates how to use checkboxes inside the column menu 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -1,6 +1,6 @@
 ---
 title: Select or Deselect All Rows with Select All Header Checkbox
-page_title: Select or Deselect All Checkboxes - Kendo UI Grid for jQuery
+page_title: Select or Deselect All Checkboxes - Kendo UI for jQuery Data Grid
 description: "Learn how to select or deselect all rows in the Kendo UI Grid for jQuery with a Select All header checkbox."
 previous_url: /controls/data-management/grid/how-to/Selection/select-deselect-all-checkbox
 slug: howto_select_deselect_all_rowswith_checkboxes_grid
@@ -231,4 +231,4 @@ You can also select multiple rows by using the checkboxes and applying custom st
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

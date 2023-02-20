@@ -1,7 +1,7 @@
 ---
-title: Insert New Scheduler Items into Resource DataSource
-page_title: Insert New Scheduler Items into Resource DataSource 
-description: "Learn how to insert new items into a resource DataSource in a Kendo UI for jQuery Scheduler widget."
+title: Insert New Scheduler Items into the Resource DataSource
+page_title: Add New Items to the DataSource of the Resources - jQuery Scheduler
+description: "Learn how to insert new items into a resource DataSource in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/add-items-to-resource-datasource, /controls/scheduling/scheduler/how-to/binding/add-items-to-resource-datasource
 slug: howto_insert_items_in_resource_datasource_scheduler
 tags: telerik, kendo, jquery, scheduler, insert, new, items, into, resource, datasource
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -143,6 +143,7 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Basic Usage of the jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
 * [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [Product Page of the jQuery Scheduler](https://www.telerik.com/kendo-jquery-ui/scheduler)

@@ -1,7 +1,7 @@
 ---
 title: Select the Focused NumericTextBox Text
 page_title: Select the Whole NumericTextBox Text on Focus
-description: "Learn how to select all the text when on focus in the Kendo UI NumericTextBox widget."
+description: "Learn how to select all the text when on focus in the Kendo UI NumericTextBox component."
 previous_url: /aspmvc/web/numerictextbox/how-to/select-all-on-focus, /asp-mvc/web/numerictextbox/how-to/select-all-on-focus, /controls/editors/numerictextbox/how-to/select-all-on-focus
 slug: howto_select_all_texton_focus_numerictextbox
 tags: telerik, kendo, jquery, numerictextbox, select, all, text, when, on, focus
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -71,6 +71,6 @@ $(function () {
 ## See Also
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
-* [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
-* [How to Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})
-* [How to Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})
+* [Change Text Color]({% slug howto_change_text_color_numerictextbox %})
+* [Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})
+* [Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})

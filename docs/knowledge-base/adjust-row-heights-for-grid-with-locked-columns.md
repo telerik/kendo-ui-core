@@ -1,7 +1,7 @@
 ---
-title: Adjust Row Heights When Grid Columns Are Locked
-page_title: Adjust the Row Heights of Data Grid Locked Columns - Kendo UI Grid for jQuery
-description: "Learn how to adjust the height of the Kendo UI Grid for jQuery rows when columns are locked."
+title: Adjust Row Heights When Data Grid Columns Are Locked
+page_title: Adjust the Row Heights of the Locked Columns - jQuery Data Grid
+description: "Learn how to adjust the height of the rows when the columns are locked in the Kendo UI Data Grid for jQuery control."
 previous_url: /controls/data-management/grid/how-to/AngularJS/adjust-row-heights-for-grid-with-locked-columns
 slug: howto_adjust_row_heights_template_locked_columns_grid
 tags: grid, adjust, row, height, locked
@@ -111,4 +111,7 @@ The following example demonstrates how to adjust the row heights in a Kendo UI G
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})

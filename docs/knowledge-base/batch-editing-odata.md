@@ -1,6 +1,6 @@
 ---
 title: Implement Batch Editing in the Grid with OData
-page_title: Apply Batch Editing with OData in the Data Grid - Kendo UI Grid for jQuery
+page_title: Apply Batch Editing with OData in the Data Grid - Kendo UI for jQuery Data Grid
 description: "Learn how to implement batch editing when binding the Kendo UI Grid for jQuery to an OData service."
 previous_url: /controls/data-management/grid/how-to/Editing/batch-editing-odata
 slug: howto_batch_editing_odata_grid
@@ -156,4 +156,4 @@ Use a third-party library. To submit the actual request, the following example u
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

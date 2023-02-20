@@ -2,7 +2,7 @@
 title: Place Edit or Update Buttons to Grid Toolbar
 description: Learn how to use the toolbar template with the edit and update commands in the Kendo UI Grid.
 type: how-to
-page_title: Implement the Edit or Update Commands in the Toolbar - Kendo UI Grid for jQuery
+page_title: Implement the Edit or Update Commands in the Toolbar - Kendo UI for jQuery Data Grid
 slug: grid-edit-command-toolbar
 tags: grid, toolbar, edit, update, command, template, custom, replace, move,
 res_type: kb

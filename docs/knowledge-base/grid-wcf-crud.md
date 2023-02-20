@@ -1,6 +1,6 @@
 ---
 title: Use WCF with CRUD Operations
-page_title: Use WCF with CRUD Operations - Kendo UI Grid for jQuery
+page_title: Use WCF with CRUD Operations - Kendo UI for jQuery Data Grid
 description: "Learn how to use WCF service with remote CRUD operations in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-wcf-crud
 slug: howto_use_wcf_service_crud_operations_grid
@@ -32,4 +32,4 @@ To see the example on how to achieve this behavior, refer to [this project](http
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

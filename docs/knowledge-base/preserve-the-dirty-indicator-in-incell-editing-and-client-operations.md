@@ -1,6 +1,6 @@
 ---
 title: Preserve Dirty Indicator in Incell Editing and Client Operations
-page_title: Preserve Dirty Indicator - Kendo UI Grid for jQuery
+page_title: Preserve Dirty Indicator - Kendo UI for jQuery Data Grid
 description: "Learn how to preserve the dirty indicator in the incell editing mode of the Kendo UI Grid for jQueryss and during client operations."
 previous_url: /controls/data-management/grid/how-to/Editing/preserve-the-dirty-indicator-in-incell-editing-and-client-operations
 slug: howto_preserve_dirty_indicator_incell_editing_client_operations_grid
@@ -124,4 +124,4 @@ The following example demonstrates how to achieve this behavior also in case new
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -2,7 +2,7 @@
 title: Scroll to Selected Row
 description: Learn how to scroll to the selected row in the Kendo UI Grid.
 type: how-to
-page_title: Force Scrolling to Selected Element - Kendo UI Grid for jQuery
+page_title: Force Scrolling to Selected Element - Kendo UI for jQuery Data Grid
 slug: grid-scroll-selected-row
 tags: grid, scroll, select
 ticketid: 1141172

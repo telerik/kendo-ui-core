@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -116,5 +116,5 @@ To achieve this behavior:
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
-* [How to Pan with Mouse Wheel]({% slug howto_pan_with_mouse_wheel %})
-* [How to Drag and Drop on Existing Shapes]({% slug howto_draganddrop_onshapes_diagram %})
+* [Pan with Mouse Wheel]({% slug howto_pan_with_mouse_wheel %})
+* [Drag and Drop on Existing Shapes]({% slug howto_draganddrop_onshapes_diagram %})

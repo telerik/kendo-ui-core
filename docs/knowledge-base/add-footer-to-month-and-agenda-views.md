@@ -1,7 +1,7 @@
 ---
-title: Add Footer to Month and Agenda Views in Scheduler
-page_title: Add Footer to Month and Agenda Views - Kendo UI Scheduler for jQuery
-description: Learn how to add a footer to the month and agenda views of the Kendo UI for jQuery Scheduler.
+title: Add Footer to the Month and Agenda Views of the Scheduler
+page_title: Add Footer to Month and Agenda Views - jQuery Scheduler
+description: Learn how to add a footer to the Month and Agenda views of the Kendo UI for jQuery Scheduler.
 type: how-to
 slug: add-footer-to-month-and-agenda-views
 tags: add, footer, month, agenda, views, scheduler
@@ -53,3 +53,9 @@ $("#scheduler").kendoScheduler({
 });
 </script>
 ```
+
+## See Also
+
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [Product Page of the Scheduler](https://www.telerik.com/kendo-jquery-ui/scheduler)

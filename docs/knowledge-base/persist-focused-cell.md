@@ -1,6 +1,6 @@
 ---
 title: Persist Focused Grid Cells after Rebind
-page_title: Persist Focused Cells after Rebind - Kendo UI Grid for jQuery
+page_title: Persist Focused Cells after Rebind - Kendo UI for jQuery Data Grid
 description: "Learn how to persist a focused cell in the Kendo UI Grid for jQuery after rebind."
 previous_url: /controls/data-management/grid/how-to/Editing/persist-focused-cell
 slug: howto_persist_focused_grid_cell_grid
@@ -145,4 +145,4 @@ Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/dataso
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -1,7 +1,7 @@
 ---
 title: Use Custom Culture Script in the NumericTextBox
 page_title: Use Custom Culture Script in the NumericTextBox
-description: "Learn how to use a custom culture script in the Kendo UI NumericTextBox widget."
+description: "Learn how to use a custom culture script in the Kendo UI NumericTextBox component."
 slug: howto_use_custom_culture_script_numerictextbox
 previous_url: /controls/editors/numerictextbox/how-to/use-custom-culture
 tags: telerik, kendo, jquery, numerictextbox, use, custom, culture, script
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -73,6 +73,6 @@ The following example demonstrates how to extend an existing culture script, cre
 ## See Also
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
-* [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
-* [How to Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})
-* [How to Select All Text on Focus]({% slug howto_select_all_texton_focus_numerictextbox %})
+* [Change Text Color]({% slug howto_change_text_color_numerictextbox %})
+* [Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})
+* [Select All Text on Focus]({% slug howto_select_all_texton_focus_numerictextbox %})

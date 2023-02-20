@@ -1,7 +1,7 @@
 ---
 title: Show Tooltip in the PivotGrid with Data Cell Information
 page_title: Show Tooltip with Data Cell Information in the PivotGrid
-description: "Learn how to display a tooltip hint on hover a data cell element in a Kendo UI PivotGrid widget."
+description: "Learn how to display a tooltip hint on hover a data cell element in a Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/tooltip-hint, /controls/data-management/pivotgrid/how-to/appearance/tooltip-hint, /controls/layout/tooltip/how-to/tooltip-hint-in-pivotgrid
 slug: howto_show_tooltip_withdata_cellinformation_pivotgrid
 tags: pivotgrid, show, render, tooltip, with, data, cell, information
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -132,7 +132,7 @@ The following example demonstrates how to display a tooltip hint when users hove
 ## See Also
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
+* [Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})

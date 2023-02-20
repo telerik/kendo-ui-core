@@ -2,7 +2,7 @@
 title: Expand and Collapse All Detail Rows in Grid
 description: Learn how to expand and collapse all detail rows in a Kendo UI Grid.
 type: how-to
-page_title: Expand and Collapse All Detail Rows - Kendo UI Grid for jQuery
+page_title: Expand and Collapse All Detail Rows - Kendo UI for jQuery Data Grid
 slug: grid-how-to-expand-and-collapse-details-rows
 tags: grid, expand, collapse, details
 ticketid: 1137592

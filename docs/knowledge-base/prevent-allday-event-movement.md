@@ -1,7 +1,7 @@
 ---
 title: Prevent Moving All-Day Scheduler Events outside the All-Day Header
 page_title: Prevent Moving All-Day Scheduler Events outside the All-Day Header
-description: "Learn how to prevent event movement if users try to drop it outside the AllDay header of a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to prevent event movement if users try to drop it outside the AllDay header of a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/prevent-allday-event-movement, /controls/scheduling/scheduler/how-to/editing/prevent-allday-event-movement
 slug: howto_preventmovingalldayevents_fromalldayheader_scheduler
 tags: telerik, kendo, jquery, scheduler, prevent, moving, allday, events, outside, the, header 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

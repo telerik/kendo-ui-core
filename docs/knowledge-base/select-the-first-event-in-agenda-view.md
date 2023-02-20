@@ -1,7 +1,7 @@
 ---
 title: Select the First Event in the Agenda View of the Scheduler 
 page_title: Select the First Event in the Agenda View of the Scheduler
-description: "Select the first event in the agenda view of a Kendo UI for jQuery Scheduler widget."
+description: "Select the first event in the agenda view of a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/select-the-first-event-in-agenda-view, /controls/scheduling/scheduler/how-to/various/select-the-first-event-in-agenda-view
 slug: howto_select_the_first_event_in_agenda_view_scheduler
 tags: telerik, kendo, jquery, scheduler, select, the, first, event, in, agenda, view 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

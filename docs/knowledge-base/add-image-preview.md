@@ -1,7 +1,7 @@
 ---
 title: Add Image Previews before Uploading Files in the Upload
-page_title: Add Image Previews before Uploading Files in the Upload
-description: "Learn how to add an image preview to a file with the Kendo UI Upload widget."
+page_title: Show a Preview of the Images before Uploading the Files - jQuery Upload
+description: "Learn how to add an image preview to a file with the Kendo UI for jQuery Upload component."
 slug: howto_add_image_preview
 previous_url: /controls/editors/upload/how-to/add-image-preview
 tags: telerik, kendo, jquery, upload, add, image, preview, before, uploading, files
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I add an image preview before you upload a file when working with the Kendo UI Upload?
+How can I add an image preview for the user before the file is uploaded in the Kendo UI Upload?
 
 ## Solution
 
@@ -93,6 +93,6 @@ The following example demonstrates how to add an image preview and read the file
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
-* [Modes of Operation]({% slug modes_upload_widget %})
-* [Metadata]({% slug metadata_upload_widget %})
+* [JavaScript API Reference of the jQuery Upload](/api/javascript/ui/upload)
+* [Modes of Upload Operation]({% slug modes_upload_widget %})
+* [Handling Metadata in the Upload]({% slug metadata_upload_widget %})

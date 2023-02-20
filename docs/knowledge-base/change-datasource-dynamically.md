@@ -1,7 +1,7 @@
 ---
 title: Change AutoComplete DataSource Dynamically
 page_title: Change AutoComplete DataSource Dynamically
-description: "Learn how to dynamically change the DataSource based on user selections that are made through radio buttons in a Kendo UI AutoComplete widget."
+description: "Learn how to dynamically change the DataSource based on user selections that are made through radio buttons in a Kendo UI AutoComplete component."
 previous_url: /controls/editors/autocomplete/how-to/change-datasource-dynamically, /controls/editors/autocomplete/how-to/binding/change-datasource-dynamically
 slug: howto_change_datasource_dynamically_autocomplete
 tags: telerik, kendo, jquery, autocomplete, dynamically, change, datasource, on, user, selection, of, radio, buttons
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot Common Issues in the Charts
 page_title: Troubleshoot Common Issues in the Charts
-description: "Learn how to deal with issues you may encounter while using the Kendo UI Chart widget."
+description: "Learn how to deal with issues you may encounter while using the Kendo UI Chart component."
 previous_url: /dataviz/troubleshooting, /controls/charts/troubleshoot/common-issues
 slug: troubleshooting_chart_widget
 type: troubleshooting

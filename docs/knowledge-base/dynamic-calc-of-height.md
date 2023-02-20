@@ -1,7 +1,7 @@
 ---
 title: Calculate Scheduler Height Dynamically
 page_title: Calculate Scheduler Height Dynamically
-description: "Learn how to dynamically calculate the height of a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to dynamically calculate the height of a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/dynamic-calc-of-height, /controls/scheduling/scheduler/how-to/appearance/dynamic-calc-of-height
 slug: howto_calculate_scheduler_height_dunamically_scheduler
 tags: telerik, kendo, jquery, scheduler, calculate, height, dynamically 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

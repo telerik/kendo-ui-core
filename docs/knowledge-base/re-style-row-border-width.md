@@ -1,7 +1,7 @@
 ---
 title: Restyle the Width of the Scheduler Row Borders
 page_title: Restyle the Width of the Scheduler Row Borders
-description: "Learn how to restyle the row border width in a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to restyle the row border width in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/re-style-row-border-width, /controls/scheduling/scheduler/how-to/appearance/re-style-row-border-width
 slug: howto_restyle_row_border_width_scheduler
 tags: telerik, kendo, jquery, scheduler, restyle, width, of, row, borders 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

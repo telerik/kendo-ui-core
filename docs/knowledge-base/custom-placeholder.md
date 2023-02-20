@@ -1,7 +1,7 @@
 ---
 title: Show a Custom MaskedTextBox Placeholder on Blur
 page_title: Render a Custom MaskedTextBox Placeholder on Blur
-description: "Learn how to show a custom placeholder on blur in the Kendo UI MaskedTextBox widget."
+description: "Learn how to show a custom placeholder on blur in the Kendo UI MaskedTextBox component."
 slug: howto_show_custom_placeholderon_blur_maskedtextbox
 previous_url: /controls/editors/maskedtextbox/how-to/custom-placeholder
 tags: telerik, kendo, jquery, maskedtextbox, show, render, custom, placeholder, on, blur
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

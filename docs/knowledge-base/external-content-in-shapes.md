@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -144,6 +144,6 @@ The shape visual templates allow you to override the rendering entirely as demon
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
-* [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
-* [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
-* [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
+* [Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
+* [Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
+* [Use Scrollbars]({% slug howto_usescrollbar_diagram %})

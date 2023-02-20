@@ -2,7 +2,7 @@
 title: Ignore Time Portion of DateTime in Grid When Grouping
 description: Learn how to group the Kendo UI Grid data by the datetime field without taking into account different times but only the dates.
 type: how-to
-page_title: Ignore Time Portion of DateTime when Grouping - Kendo UI Grid for jQuery
+page_title: Ignore Time Portion of DateTime when Grouping - Kendo UI for jQuery Data Grid
 slug: grid-group-by-date-only
 tags: ignore, group, grouping, time, datetime, grid
 ticketid: 1140806

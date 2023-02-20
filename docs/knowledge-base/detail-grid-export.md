@@ -1,6 +1,6 @@
 ---
 title: Export Detail Grids
-page_title:  Export Detail Grids - Kendo UI Grid for jQuery
+page_title:  Export Detail Grids - Kendo UI for jQuery Data Grid
 description: "Get started with Kendo UI for jQuery enabling you to export to Excel master and detail Grids."
 previous_url: /controls/data-management/grid/how-to/excel/detail-grid-export
 slug: howto_exportto_excel_masterand_detail_grid
@@ -368,4 +368,4 @@ The following example demonstrates how to export a detail Grid to Excel includin
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

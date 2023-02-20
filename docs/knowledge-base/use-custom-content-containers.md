@@ -1,7 +1,7 @@
 ---
 title: Use Custom Content Containers in the PanelBar
 page_title: Use Custom Content Containers in the PanelBar 
-description: "Learn how to use custom content containers in the Kendo UI PanelBar widget."
+description: "Learn how to use custom content containers in the Kendo UI PanelBar component."
 slug: howto_use_custom_content_containers_in_the_panelbar_widget
 previous_url: /controls/navigation/panelbar/how-to/use-custom-content-containers
 tags: telerik, kendo, jquery, panelbar, use, custom, content, containers
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

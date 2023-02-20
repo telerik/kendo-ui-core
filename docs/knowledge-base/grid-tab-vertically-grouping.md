@@ -2,7 +2,7 @@
 title: Vertically Tab Cells in an Editable and Grouped Grid
 description: Learn how to vertically tab through the columns of a grouped Kendo UI for jQuery Data Grid component.
 type: how-to
-page_title: Tab through Columns Vertically - Kendo UI Grid for jQuery
+page_title: Tab through Columns Vertically - Kendo UI for jQuery Data Grid
 slug: grid-tab-vertically-grouping
 tags: kendo, jquery, grid, tab, editing, vertical, grouping
 ticketid: 1587893

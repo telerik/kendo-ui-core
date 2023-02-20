@@ -1,7 +1,7 @@
 ---
 title: Execute Custom Click Actions Based on the Class Name in the Menu
 page_title: Execute Custom Click Actions Based on the Class Name in the Menu
-description: "Learn how to execute a custom click action depending on the class name of the clicked item in the Kendo UI Menu widget."
+description: "Learn how to execute a custom click action depending on the class name of the clicked item in the Kendo UI Menu component."
 slug: howto_execute_custom_click_actions_basedon_classnames_menu
 previous_url: /controls/navigation/menu/how-to/execute-custom-action-on-click-based-on-class-name
 tags: telerik, kendo, jquery, menu, execute, custom, click, actions, based, on, class, name
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -127,6 +127,6 @@ The example below demonstrates how to achieve the desired scenario.
 ## See Also
 
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
-* [How to Create Split Button]({% slug howto_createa_split_button_menu %})
-* [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
+* [Create Split Button]({% slug howto_createa_split_button_menu %})
+* [Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
 

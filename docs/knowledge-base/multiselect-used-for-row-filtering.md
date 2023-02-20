@@ -1,6 +1,6 @@
 ---
 title: Use MultiSelect for Row Filtering in Combination with Menu Multi Checkbox Filtering
-page_title: MultiSelect for Row Filtering with Menu Multi Checkbox Filtering - Kendo UI Grid for jQuery
+page_title: MultiSelect for Row Filtering with Menu Multi Checkbox Filtering - Kendo UI for jQuery Data Grid
 description: "Learn how to set a Kendo UI MultiSelect for row filtering of the Kendo UI Grid and Make it Work in Combination with Menu Multi Checkbox Filtering."
 slug: howto_use_multiselect_forrow_filtering__incombination_withmenu_chechbox_filter_grid
 tags: use, multiselect, grid, row, filtering, menu, checkbox
@@ -133,4 +133,4 @@ The following example demonstrates the full implementation of the suggested appr
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

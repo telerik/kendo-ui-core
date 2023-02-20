@@ -26,7 +26,7 @@ component: spreadsheet
   <td>All</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2015</td>
  </tr>
 </table>

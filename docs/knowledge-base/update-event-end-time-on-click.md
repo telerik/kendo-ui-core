@@ -1,7 +1,7 @@
 ---
 title: Update the End Time of the Scheduler Events on Click
 page_title: Update the End Time of the Scheduler Events on Click
-description: "Learn how to update the end time of an event on click in a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to update the end time of an event on click in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/update-event-end-time-on-click, /controls/scheduling/scheduler/how-to/editing/update-event-end-time-on-click
 slug: howto_update_event_end_time_on_click_scheduler
 tags: telerik, kendo, jquery, scheduler, update, the, end, time, of, events, on, click 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

@@ -1,7 +1,7 @@
 ---
 title: Reset the Expand State of the PivotGrid
 page_title: Reset PivotGrid Expand State
-description: "Learn how to reset expand/collapse state and fetch the data again in a Kendo UI PivotGrid widget."
+description: "Learn how to reset expand/collapse state and fetch the data again in a Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/reset-expand-state, /controls/data-management/pivotgrid/how-to/dimensions/reset-expand-state
 slug: howto_reset_expand_state_pivotgrid
 tags: kendoui, pivotgrid, reset, expand, state
@@ -97,7 +97,7 @@ The following example demonstrates how to reset the expand/collapse state and fe
 ## See Also
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
+* [Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})

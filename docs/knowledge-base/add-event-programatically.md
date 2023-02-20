@@ -1,7 +1,7 @@
 ---
 title: Add Scheduler Events Programmatically
-page_title: Add Scheduler Events Programmatically
-description: "Learn how to programmatically add an event to the Kendo UI for jQuery Scheduler widget."
+page_title: Add Scheduler Events Programmatically - jQuery Scheduler
+description: "Learn how to programmatically add an event to the Kendo UI for jQuery Scheduler control."
 previous_url: /aspnetmvc/controls/scheduling/scheduler/how-to/add-event-programatically, /controls/scheduling/scheduler/how-to/add-event-programatically, /controls/scheduling/scheduler/how-to/editing/add-event-programatically
 slug: howto_add_events_programatically_scheduler
 tags: telerik, kendo, jquery, scheduler, add, events, programmatically
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

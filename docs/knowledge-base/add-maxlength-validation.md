@@ -1,7 +1,7 @@
 ---
 title: Add maxLength Validation in the Editor
-page_title: Add maxLength Validation in the Editor
-description: "Learn how to add a maxLength validation to the Kendo UI Editor widget."
+page_title: Implement a maxLength-Validation Feature - jQuery Editor
+description: "Learn how to add a maxLength validation to the Kendo UI for jQuery Editor component."
 previous_url: /controls/editors/editor/how-to/add-maxlength-validation, /controls/editors/editor/how-to/editing/add-maxlength-validation
 slug: howto_add_max_length_validation_editor
 tags: telerik, kendo, jquery, editor, add, maxLength, maximum, length, validation
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -105,6 +105,7 @@ The following example demonstrates how to define custom Kendo UI validators to c
 
 ## See Also
 
-* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Basic Usage of the jQuery Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
 * [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [Product Page of the jQuery Editor](https://www.telerik.com/kendo-jquery-ui/rich-text-editor)

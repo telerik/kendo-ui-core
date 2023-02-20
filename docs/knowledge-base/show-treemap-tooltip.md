@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -82,4 +82,4 @@ The following example demonstrates how to use the Kendo UI Tooltip for the Kendo
 ## See Also
 
 * [TreeMap JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
-* [How to Set Header Items Color]({% slug howto_setheaderitemscolor_treemap %})
+* [Set Header Items Color]({% slug howto_setheaderitemscolor_treemap %})

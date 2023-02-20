@@ -29,11 +29,11 @@ res_type: kb
   <td>25</td>
  </tr>
  <tr>
-  <td>.Net framework</td>
+  <td>.NET Framework</td>
   <td>Version 4.6.1</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio Online</td>
  </tr>
  <tr>

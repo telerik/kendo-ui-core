@@ -2,7 +2,7 @@
 title: Use Both Multi-Checkbox and Default Grid Filtering
 description: Learn how to modify the Kendo UI Grid to use both its multi-checkbox and default filtering.
 type: how-to
-page_title: Use Multi-Checkbox and Default Filtering - Kendo UI Grid for jQuery
+page_title: Use Multi-Checkbox and Default Filtering - Kendo UI for jQuery Data Grid
 slug: use-both-multi-and-default-filtering
 tags: grid, filtering, multi, default
 ticketid: 1120044

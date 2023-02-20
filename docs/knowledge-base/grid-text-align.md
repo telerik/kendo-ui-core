@@ -2,7 +2,7 @@
 title: Change text alignment in Grid cells
 description: Learn how to change the text alignment in a Grid column.
 type: how-to
-page_title: Grid Cells Text Alignment - Kendo UI Grid for jQuery
+page_title: Grid Cells Text Alignment - Kendo UI for jQuery Data Grid
 slug: grid-change-cells-text-alignment
 tags: grid, cells, text, align
 res_type: kb
@@ -64,4 +64,4 @@ Apply the `k-text-left`, `k-text-right` or `k-text-center` classes through the G
 
 ## Notes
 
-* [JavaScript API Reference of the Grid](/api/javascript/dataviz/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/dataviz/ui/grid)

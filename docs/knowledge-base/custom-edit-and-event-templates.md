@@ -1,7 +1,7 @@
 ---
 title: Customize the Edit and Events Scheduler Templates
 page_title: Customize the Edit and Events Scheduler Templates
-description: "Learn how to create and use custom templates for the events and the Edit window of the Kendo UI for jQuery Scheduler widget."
+description: "Learn how to create and use custom templates for the events and the Edit window of the Kendo UI for jQuery Scheduler component."
 previous_url: /asp.net/mvc/controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /kendo-mvc/controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /controls/scheduling/scheduler/how-to/editing/custom-edit-and-event-templates
 slug: howto_customize_editand_event_templates_scheduler
 tags: telerik, kendo, jquery, scheduler, customize, edit, and, events, templates 
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

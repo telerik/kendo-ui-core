@@ -2,7 +2,7 @@
 title: Remove Operators from the Grid Filter Row
 description: Learn how to remove the drop-down filter operator from the filter row in the Kendo UI Grid.
 type: how-to
-page_title: Remove Drop-Down Filter Operators When Using Filter Row - Kendo UI Grid for jQuery
+page_title: Remove Drop-Down Filter Operators When Using Filter Row - Kendo UI for jQuery Data Grid
 slug: grid-remove-filter-row-operators
 tags: grid, remove, filter, filter row, row, operator
 ticketid: 1171789

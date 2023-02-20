@@ -1,7 +1,7 @@
 ---
 title: Wrap Text in the Diagram
 page_title: Wrap Text in the Diagram
-description: "Learn how to use the layout element to wrap text in the Kendo UI Diagram widget."
+description: "Learn how to use the layout element to wrap text in the Kendo UI Diagram component."
 slug: howto_wraptext_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/text-wrapping
 tags: kendo, jquery, diagram, wrap, text
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -105,6 +105,6 @@ The following example demonstrates how to use the [`Layout`](/api/javascript/dat
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
-* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
-* [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
-* [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
+* [Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
+* [Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
+* [Use Scrollbars]({% slug howto_usescrollbar_diagram %})

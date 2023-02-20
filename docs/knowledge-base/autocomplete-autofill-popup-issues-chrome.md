@@ -1,6 +1,6 @@
 ---
 title: Chrome Browser Causes Auto-Fill Popup Issues in the AutoComplete
-page_title: Chrome Browser Performs Auto-Fill Popup Issues in the AutoComplete
+page_title: Chrome Browser Performs Auto-Fill Popup Issues - jQuery AutoComplete
 description: "Learn how to handle the Kendo UI for jQuery AutoComplete component when the Chrome browser performs auto-fill popup issues."
 previous_url: /controls/editors/autocomplete/troubleshooting
 slug: troubleshooting_autocomplete_widget
@@ -73,3 +73,5 @@ To handle this issue:
 ## See Also
 
 * [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [Product Page of the jQuery AutoComplete](https://www.telerik.com/kendo-jquery-ui/autocomplete)
+* [jQuery AutoComplete Overview (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)

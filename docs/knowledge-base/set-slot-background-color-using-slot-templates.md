@@ -1,7 +1,7 @@
 ---
 title: Set the Slot Background Color by Using Slot Templates in the Scheduler
 page_title: Set the Slot Background Color by Using Slot Templates in the Scheduler
-description: "Learn how to set the cell background color by using slotTemplate and allDaySlotTemplate, based on the slot date, in a Kendo UI for jQuery Scheduler widget."
+description: "Learn how to set the cell background color by using slotTemplate and allDaySlotTemplate, based on the slot date, in a Kendo UI for jQuery Scheduler component."
 previous_url: /controls/scheduling/scheduler/how-to/set-slot-background-color-using-slot-templates, /controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates
 slug: howto_setslotbackgroundcolor_usingslottemplates_scheduler
 tags: telerik, kendo, jquery, scheduler, set, the, slot, color, using, templates
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

@@ -1,7 +1,7 @@
 ---
-title: Bind AutoComplete for AngularJS with WebAPI
-page_title: Implement WebAPI Binding in AngularJS - Kendo UI AutoComplete for jQuery
-description: Learn how to bind the Kendo UI AutoComplete for AngularJS with WebAPI.
+title: Bind AngularJS AutoComplete with WebAPI
+page_title: Implement WebAPI Binding in AngularJS - jQuery AutoComplete
+description: Learn how to bind the Kendo UI for jQuery AutoComplete component in AngularJS with WebAPI.
 type: how-to
 slug: autocomplete-angularjs-bind-webapi
 tags: kendoui, kendo, autocomplete, webapi, angularjs
@@ -38,7 +38,7 @@ How can I bind a Kendo UI AutoComplete to the WebAPI in an AngularJS scenario?
 
 ## Solution
 
-Set the `dataSource` type to `webapi` and the `transport` `read` URL to the method in your controller.
+To achieve the desired scenario, set the `dataSource` type to `webapi` and the `transport` `read` URL to the method in your controller.
 
 ```dojo
 <div id="example" ng-app="KendoDemos">
@@ -87,3 +87,9 @@ Set the `dataSource` type to `webapi` and the `transport` `read` URL to the meth
       return products.ToDataSourceResult(request);
   }
 ```
+
+## See Also
+
+* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [Product Page of the jQuery AutoComplete](https://www.telerik.com/kendo-jquery-ui/autocomplete)
+* [jQuery AutoComplete Overview (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)

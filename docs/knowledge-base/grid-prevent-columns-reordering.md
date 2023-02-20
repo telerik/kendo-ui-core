@@ -2,7 +2,7 @@
 title: Prevent Specific Column Reordering in Grid
 description: Learn how to prevent the reordering of specific columns in the Kendo UI Grid.
 type: how-to
-page_title: Prevent Column Reordering - Kendo UI Grid for jQuery
+page_title: Prevent Column Reordering - Kendo UI for jQuery Data Grid
 slug: grid-prevent-columns-reordering
 tags: grid, columns, reorder
 ticketid: 1138136

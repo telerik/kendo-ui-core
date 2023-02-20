@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -72,9 +72,9 @@ The example below demonstrates how to achieve the desired scenario.
 ## See Also
 
 * [Window JavaScript API Reference](/api/javascript/ui/window)
-* [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
-* [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
-* [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
-* [How to Initialize the Grid]({% slug initialize_thegrid_window_widget %})
-* [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
+* [Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
+* [Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
+* [Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
+* [Initialize the Grid]({% slug initialize_thegrid_window_widget %})
+* [Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
 

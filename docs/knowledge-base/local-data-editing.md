@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -306,6 +306,6 @@ You need this functionality because assigning a non-default `id` value for the n
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
-* [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
-* [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
-* [How to Wrap Text]({% slug howto_wraptext_diagram %})
+* [Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
+* [Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
+* [Wrap Text]({% slug howto_wraptext_diagram %})

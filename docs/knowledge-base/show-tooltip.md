@@ -1,7 +1,7 @@
 ---
 title: Show Extra TreeList Information in a Tooltip
 page_title: Show Additional TreeList Information a Tooltip
-description: "Learn how to show additional information about a Kendo UI TreeList entry by using the Kendo UI Tooltip widget."
+description: "Learn how to show additional information about a Kendo UI TreeList entry by using the Kendo UI Tooltip component."
 slug: howto_showtooltip_treelist
 previous_url: /controls/data-management/treelist/how-to/show-tooltip, /controls/layout/tooltip/how-to/kendoui-tooltip-in-treelist
 tags: kendo, jquery, treelist, show, extra, additional, information, in, tooltip
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>

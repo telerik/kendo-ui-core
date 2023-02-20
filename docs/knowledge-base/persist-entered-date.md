@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -85,9 +85,9 @@ The following example demonstrates how to achieve the desired scenario. While su
 ## See Also
 
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
-* [How to Create Date Masking]({% slug masks_kendoui_maskedtextbox_widget %})
-* [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
-* [How to Hide the Default Button]({% slug howto_hide_default_button_datepicker %})
-* [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
-* [How to Make Input Elements Read-Only]({% slug howto_make_input_elements_readonly_datepicker %})
-* [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
+* [Create Date Masking]({% slug masks_kendoui_maskedtextbox_widget %})
+* [Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
+* [Hide the Default Button]({% slug howto_hide_default_button_datepicker %})
+* [Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
+* [Make Input Elements Read-Only]({% slug howto_make_input_elements_readonly_datepicker %})
+* [Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})

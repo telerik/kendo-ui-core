@@ -1,7 +1,7 @@
 ---
-title: Adjust the DropDownList Width Automatically
-page_title: Adjust the DropDownList Width Automatically
-description: "Learn how to automatically adjust the width of a Kendo UI DropDownList widget."
+title: Automatically Adjust the DropDownList Width
+page_title: Adjust the Width Automatically - jQuery DropDownList
+description: "Learn how to automatically adjust the width of a Kendo UI for jQuery DropDownList component."
 previous_url: /controls/editors/dropdownlist/how-to/auto-adjust-the-width, /controls/editors/dropdownlist/how-to/appearance/auto-adjust-the-width
 slug: howto_automatically_adjust_width_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, adjust, width, automatically
@@ -22,7 +22,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -39,7 +39,7 @@ How can I automatically adjust the width of the DropDownList depending on its li
 
 To achieve this behavior:
 
-1. After the widget is initialized, reset the list width of the widget to `auto`.
+1. After the control is initialized, reset the list width of the control to `auto`.
 2. In the `adjustDropDownWidth` function, add the scrollbar width to the list width.
 
 Either of the following scenarios occur:
@@ -92,8 +92,8 @@ The following example demonstrates how to automatically adjust the width of a Dr
       { text: "Orange 12", value: "12" }
     ];
 
-    // DropDownList bound to remote data that is fetched on open
-    // use a dataBound handler
+    // A DropDownList bound to remote data that is fetched on open.
+    // Use a dataBound handler.
 
     $("#color-remote").kendoDropDownList({
       dataTextField: "text",
@@ -115,8 +115,8 @@ The following example demonstrates how to automatically adjust the width of a Dr
 
     remoteDropDown.list.width("auto");
 
-    // DropDownList bound to local data or remote data that is fetched immediately upon initialization
-    // use an open handler
+    // A DropDownList bound to local data or remote data that is fetched immediately upon initialization.
+    // Use an open handler.
 
     $("#color-local").kendoDropDownList({
       dataTextField: "text",
@@ -141,10 +141,5 @@ The following example demonstrates how to automatically adjust the width of a Dr
 ## See Also
 
 * [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
-* [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
-* [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
-* [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})
-* [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
-* [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
-* [How to Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
-* [How to Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})
+* [Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
+* [Detect Wrapper Focus Events in the DropDownList]({% slug howto_detect_wrapper_focus_events_dropdownlist %})

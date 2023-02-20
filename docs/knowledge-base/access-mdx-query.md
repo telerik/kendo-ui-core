@@ -1,7 +1,7 @@
 ---
 title: Access MDX Query in the PivotGrid
-page_title: Access MDX Query in the PivotGrid
-description: "Learn how to access a MultiDimensional eXpressions (MDS) query in a Kendo UI PivotGrid widget."
+page_title: Access MDX Query in the PivotGrid - jQuery PivotGrid
+description: "Learn how to access a MultiDimensional eXpressions (MDS) query in a Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/access-mdx-query, /controls/data-management/pivotgrid/how-to/dimensions/access-mdx-query
 slug: howto_access_mdx_query_pivotgrid
 tags: kendoui, pivotgrid, access, mdx, query
@@ -64,7 +64,7 @@ To achieve this behavior, access the generated [MDX Query](https://en.wikipedia.
                       parameterMap: function(options, type) {
                         var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
 
-                        //modify the query here if needed
+                        //Modify the query here if needed.
 
                         return query;
                       }
@@ -84,8 +84,8 @@ To achieve this behavior, access the generated [MDX Query](https://en.wikipedia.
 
 ## See Also
 
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
-* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [JavaScript API Reference of the jQuery PivotGrid](/api/javascript/ui/pivotgrid)
+* [Change the Data Source of the PivotGrid Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [Drill Down Navigation Always Starting from PivotGrid Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [Expand Multiple PivotGrid Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
+* [Filter PivotGrid by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
