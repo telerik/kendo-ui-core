@@ -69,7 +69,7 @@ import "./kendo.popup.js";
             OVERFLOW = "overflow",
             DATADOCOVERFLOWRULE = "original-overflow-rule",
             ZINDEX = "zIndex",
-            MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-window-minimize,.k-window-actions .k-i-window",
+            MINIMIZE_MAXIMIZE = ".k-window-titlebar-actions .k-i-window-minimize,.k-window-titlebar-actions .k-i-window",
             KPIN = ".k-i-pin",
             KUNPIN = ".k-i-unpin",
             PIN_UNPIN = KPIN + "," + KUNPIN,
@@ -519,7 +519,7 @@ import "./kendo.popup.js";
                 var actions = options.actions;
                 var pinned = options.pinned;
                 var titlebar = this.wrapper.children(KWINDOWTITLEBAR);
-                var container = titlebar.find(".k-window-actions");
+                var container = titlebar.find(".k-window-titlebar-actions");
                 var windowSpecificCommands = [ "minimize", "maximize" ];
                 var icons = {
                     "maximize": "window",
@@ -1785,7 +1785,7 @@ import "./kendo.popup.js";
                 }
 
                 wrapper.find(".k-window-title")
-                    .css(isRtl ? "left" : "right", outerWidth(wrapper.find(".k-window-actions")) + 10);
+                    .css(isRtl ? "left" : "right", outerWidth(wrapper.find(".k-window-titlebar-actions")) + 10);
 
                 contentHtml.css("visibility", "").show();
 
@@ -1811,7 +1811,7 @@ import "./kendo.popup.js";
             titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar k-hstack'>" +
                     `<span class='k-window-title'>${title}</span>` +
-                    "<div class='k-window-actions k-hstack'></div>" +
+                    "<div class='k-window-titlebar-actions k-hstack'></div>" +
                 "</div>"
             ),
             overlay: "<div class='k-overlay'></div>",
@@ -2039,7 +2039,7 @@ import "./kendo.popup.js";
                 var wnd = this.owner,
                     draggable = wnd.options.draggable,
                     element = wnd.element,
-                    actions = element.find(".k-window-actions"),
+                    actions = element.find(".k-window-titlebar-actions"),
                     containerOffset = kendo.getOffset(wnd.appendTo);
 
                 this._preventDragging = wnd.trigger(DRAGSTART) || !draggable;

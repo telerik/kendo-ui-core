@@ -10,167 +10,23 @@ slug: peertopeerp_chat_kendoui
 
 You can configure a Kendo UI Chat widget and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
 
-To create the Peer-to-Peer Chat you have to implement the SignalR Hub and, then, to implement the application client:
+To create the Peer-to-Peer Chat, first you have to implement the SignalR Hub, and, then, to implement the application client by following the steps below:
 
-1. [Initialize the Chat](#initializing-the-chat)
-1. [Configure the SignalR Client Hub proxy](#configuring-the-signalr-hub-server)
 1. [Set up the project](#setting-up-the-project)
+1. [Initialize the Chat](#initializing-the-chat)
 1. [Configure the SignalR Hub](#configuring-the-signalr-hub)
-
-## Initializing the Chat
-
-The following example demonstrates how to initialize the Chat and implement the handlers for its [`post`](/api/javascript/ui/chat/events/post) and [`typingStart`](/api/javascript/ui/chat/events/typingstart) events.
-
-```JavaScript
-var chat = $("#chat").kendoChat({
-    // Each instance of the application will generate a unique username.
-    // In this way, the SignalR Hub "knows" who is the user that sends the message
-    // and who are the clients that have to receive that message.
-    user: {
-        name: kendo.guid(),
-        iconUrl: "https://demos.telerik.com/kendo-ui/content/chat/avatar.png"
-    },
-    // This will notify the SignallR Hub that the current client is typing.
-    // The Hub, in turn, will notify all the other clients
-    // that the user has started typing.
-    typingStart: function() {
-        chatHub.invoke("sendTyping", chat.getUser());
-    },
-    // The post handler will send the user data and the typed text to the SignalR Hub.
-    // The Hub will then forward that info to the other clients.
-    post: function(args) {
-        chatHub.invoke("send", chat.getUser(), args.text);
-    }
-}).data("kendoChat");
-```
-
-## Configuring the SignalR Client Hub Proxy
-
-1. Get the SignalR client script from NPM.
-
-    ```sh
-    npm install @aspnet/signalr
-    ```
-
-1. Include the SignalR script on the HTML page.
-
-    ```dojo
-    <script src="@aspnet/signalr/dist/browser/signalr.min.js"></script>
-    ```
-
-1. Initialize the SignalR Hub proxy.
-
-    ```js
-    // Point to the Hub remote endpoint.
-    window.chatHub = new signalR.HubConnectionBuilder()
-        .withUrl('http://localhost:5000/chat')
-        .build();
-    ```
-
-1. Start the Hub proxy and configure it to detect errors.
-
-    ```js
-    chatHub.start()
-        .catch(function(err) {
-            console.error(err.toString());
-        });
-    ```
-
-1. Attach event handlers for the respective remote hub actions.
-
-    ```js
-    chatHub.on('broadcastMessage', function(sender, message) {
-        var message = {
-            type: 'text',
-            text: message
-        };
-
-        // Render the received message in the Chat.
-        chat.renderMessage(message, sender);
-    });
-
-    chatHub.on('typing', function(sender) {
-        // Display the typing notification in the Chat.
-        chat.renderMessage({ type: 'typing' }, sender);
-    });
-    ```
 
 ## Setting Up the Project
 
-1. Create a new ASP.NET Core Empty Web Application.
+1. Create a new ASP.NET Core Web App project.
 
-    ```sh
-    dotnet new web
-    ```
-
-1. Add the `AspNetCore.App` package which includes the SignalR to the application.
-
-    ```sh
-    dotnet add package Microsoft.AspNetCore.App
-    ```
-
-1. Run the application to test whether it is properly built.
-
-    ```sh
-    dotnet run
-    ```
-
-## Configuring the SignalR Hub
-
-1. Implement `Startup.cs`.
+1. Add a `Hubs` folder with a `ChatHub` class to the project:
 
     ```cs
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.DependencyInjection;
-
-    namespace CoreSignalR
-    {
-        public class Startup
-        {
-            public void ConfigureServices(IServiceCollection services)
-            {
-                // Configure CORS to allow requests from other domains
-                services.AddCors(options => options.AddPolicy("AllowCors",
-                    builder =>
-                    {
-                        builder
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowAnyOrigin()
-                            .AllowCredentials();
-                    })
-                );
-
-                // Add the SignalR service
-                services.AddSignalR();
-            }
-
-            public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-            {
-                // Use the CORS configuration.
-                app.UseCors("AllowCors");
-
-                // Point to the route that will return the SignalR Hub.
-                app.UseSignalR(routes =>
-                {
-                    routes.MapHub<ChatHub>("/chat");
-                });
-            }
-        }
-    }
-
-    ```
-
-1. Add a `ChatHub` class to the project.
-
-    ```cs
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR;
 
-    namespace CoreSignalR
+    namespace SignalRChat.Hubs
     {
-        // The Hub class has to inherit from the Microsoft.AspNet.SignalR.Hub.
         public class ChatHub : Hub
         {
             public async Task Send(object sender, string message)
@@ -186,13 +42,90 @@ var chat = $("#chat").kendoChat({
             }
         }
     }
-    ```
 
-1. Start the Chat SignalR Hub. The hub is now accessible on the `http://localhost:5000/chat` URL.
-
-    ```sh
-    dotnet run
     ```
+1. In the `Index.cshtml` Razor Page, add a `div` from which the chat will be created:
+
+```
+    @page
+    @{
+        ViewData["Title"] = "Kendo UI Chat Peer-to-peer example";
+        Layout = "_Layout";
+    }
+
+    <div id="chat"></div>
+
+
+    <script src="~/js/chat.js"></script>
+```
+
+1. On the `_Layout.cshtml` page and in the `<head>` tag, add a reference to Kendo UI and SignalR:
+
+```
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2023.1.117/styles/kendo.default-ocean-blue.min.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.1.117/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.1.117/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.1.117/js/kendo.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.2/signalr.min.js"></script>
+```
+
+## Initializing the Chat
+
+In the `wwwroot/js` folder, create a `chat.js` file where the Chat will be initialized.
+
+```js
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+    connection.start().then(function () {
+
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    var chat = $("#chat").kendoChat({
+        // Each instance of the application will generate a unique username.
+        // In this way, the SignalR Hub "knows" who is the user that sends the message
+        // and who are the clients that have to receive that message.
+        user: {
+            name: kendo.guid(),
+            iconUrl: "https://demos.telerik.com/kendo-ui/content/chat/avatar.png"
+        },
+        // This will notify the SignallR Hub that the current client is typing.
+        // The Hub, in turn, will notify all the other clients
+        // that the user has started typing.
+        typingStart: function () {
+            connection.invoke("sendTyping", chat.getUser());
+        },
+        // The post handler will send the user data and the typed text to the SignalR Hub.
+        // The Hub will then forward that info to the other clients.
+        post: function (args) {
+            connection.invoke("send", chat.getUser(), args.text);
+        }
+    }).data("kendoChat");
+
+
+    connection.on('broadcastMessage', function (sender, message) {
+        var message = {
+            type: 'text',
+            text: message
+        };
+
+        // Render the received message in the Chat.
+        chat.renderMessage(message, sender);
+    });
+
+    connection.on('typing', function (sender) {
+        // Display the typing notification in the Chat.
+        chat.renderMessage({ type: 'typing' }, sender);
+    });
+```
+
+You are now ready to run the project! Open the Chat in two separate tabs and start typing.
+
+To review the complete project, go to the [Kendo UI examples repository](https://github.com/telerik/kendo-examples-asp-net).
+
 
 ## See Also
 

@@ -331,6 +331,78 @@ Specifies if text field of the ButtonGroup item should be encoded.
         });
     </script>
 
+### fillMode `String` *(default: 'solid')*
+
+Controls how the color is applied to the buttons in the Group. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `"none"`. Default value is `"solid"`.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            fillMode: "outline",
+            items: [
+                { text: "<b>foo</b>", encoded: false },
+                { text: "<b>bar</b>", encoded: true }
+            ]
+        });
+    </script>
+
+### rounded `String` *(default: 'medium')*
+
+Controls what border radius is applied to first and last button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`. Default value is `"medium"`.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            rounded: "full",
+            items: [
+                { text: "<b>foo</b>", encoded: false },
+                { text: "<b>bar</b>", encoded: true }
+            ]
+        });
+    </script>
+
+### size `String` *(default: 'medium')*
+
+Controls the overall physical size of all buttons in the Group. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            size: "large",
+            items: [
+                { text: "<b>foo</b>", encoded: false },
+                { text: "<b>bar</b>", encoded: true }
+            ]
+        });
+    </script>
+
+### themeColor `String` *(default: 'base')*
+
+Controls the main color applied to the buttons in the Group. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            themeColor: "dark",
+            items: [
+                { text: "<b>foo</b>", encoded: false },
+                { text: "<b>bar</b>", encoded: true }
+            ]
+        });
+    </script>
+
 ## Methods
 
 ### badge

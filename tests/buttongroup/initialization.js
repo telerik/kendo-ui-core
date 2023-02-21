@@ -162,5 +162,57 @@
             var badge = buttonGroup.element.children().eq(0).find('.k-badge').data('kendoBadge');
             assert.isOk(badge instanceof kendo.ui.Badge);
         });
+
+        it("passes the proper sizing option to the buttons", function() {
+            buttonGroup = initializeButtonGroup({
+                size: "small",
+                items: [
+                    { text: "test1" },
+                    { text: "test2" }
+                ]
+            });
+
+            assert.isOk(buttonGroup.element.children().eq(0).hasClass("k-button-sm"));
+            assert.isOk(buttonGroup.element.children().eq(1).hasClass("k-button-sm"));
+        });
+
+        it("passes the proper fillMode option to the buttons", function() {
+            buttonGroup = initializeButtonGroup({
+                fillMode: "flat",
+                items: [
+                    { text: "test1" },
+                    { text: "test2" }
+                ]
+            });
+
+            assert.isOk(buttonGroup.element.children().eq(0).hasClass("k-button-flat"));
+            assert.isOk(buttonGroup.element.children().eq(1).hasClass("k-button-flat"));
+        });
+
+        it("passes the proper themeColor option to the buttons", function() {
+            buttonGroup = initializeButtonGroup({
+                themeColor: "primary",
+                items: [
+                    { text: "test1" },
+                    { text: "test2" }
+                ]
+            });
+
+            assert.isOk(buttonGroup.element.children().eq(0).hasClass("k-button-solid-primary"));
+            assert.isOk(buttonGroup.element.children().eq(1).hasClass("k-button-solid-primary"));
+        });
+
+        it("passes the proper rounded option to the buttons", function() {
+            buttonGroup = initializeButtonGroup({
+                rounded: "full",
+                items: [
+                    { text: "test1" },
+                    { text: "test2" }
+                ]
+            });
+
+            assert.isOk(buttonGroup.element.children().eq(0).hasClass("k-rounded-full"));
+            assert.isOk(buttonGroup.element.children().eq(1).hasClass("k-rounded-full"));
+        });
     });
 }());

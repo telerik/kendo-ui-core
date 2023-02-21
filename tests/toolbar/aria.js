@@ -102,7 +102,7 @@
                 ]
             });
 
-            $(".k-overflow-anchor").trigger('click');
+            $(".k-toolbar-overflow-button").trigger('click');
 
             var overflowWrapper = $(".k-context-menu");
 
@@ -217,7 +217,7 @@
                 ]
             }).data("kendoToolBar");
 
-            $(".k-overflow-anchor").trigger('click');
+            $(".k-toolbar-overflow-button").trigger('click');
             var separators = $(".k-separator");
 
             separators.each(function(i, sep) {

@@ -8930,6 +8930,31 @@ When set to true, visually hidden elements that match by the filter option crite
     });
     </script>
 
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      size: "small",
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
 ### sortable `Boolean|Object` *(default: false)*
 
 If set to `true` the user could sort the grid by clicking the column header cells. By default sorting is disabled.

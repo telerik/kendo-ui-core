@@ -30,18 +30,33 @@
         }
 
         it("kendoPager attach pager to an element", function() {
-            var ul = setup();
+            var div = setup();
 
-            assert.isOk(ul.data("kendoPager") instanceof kendo.ui.Pager);
+            assert.isOk(div.data("kendoPager") instanceof kendo.ui.Pager);
             assert.isOk(pager instanceof kendo.ui.Pager);
         });
 
-        it("renders buttons for all pages", function() {
-            var ul = setup();
+        it("setting size sets size for wrapper and buttons", function() {
+            var div = setup({}, { size: "small"});
 
             dataSource.read();
 
-            var links = ul.find("a").add(ul.find(".k-selected"));
+            var links = div.find("button");
+
+            assert.isOk(div.hasClass("k-pager-sm"));
+            assert.isOk(links.hasClass("k-button-sm"));
+            assert.isOk(links.hasClass("k-button-sm"));
+            assert.isOk(links.hasClass("k-button-sm"));
+            assert.isOk(links.hasClass("k-button-sm"));
+            assert.isOk(links.hasClass("k-button-sm"));
+        });
+
+        it("renders buttons for all pages", function() {
+            var div = setup();
+
+            dataSource.read();
+
+            var links = div.find("button").add(div.find(".k-selected"));
             assert.equal(links.length, 5);
             assert.equal(links[0].innerHTML, "1");
             assert.equal(links[1].innerHTML, "2");
@@ -51,8 +66,8 @@
         });
 
         it("one button is rendered on init", function() {
-            var ul = setup();
-            var links = ul.find("a").add(ul.find(".k-selected"));
+            var div = setup();
+            var links = div.find("button").add(div.find(".k-selected"));
 
             assert.equal(links.length, 1);
             assert.equal(links[0].innerHTML, "0");
@@ -66,11 +81,11 @@
 
             dataSource.read();
 
-            var ul = $("<ul />").appendTo(Mocha.fixture).kendoPager({
+            var div = $("<div />").appendTo(Mocha.fixture).kendoPager({
                 dataSource: dataSource,
                 previousNext: false
             });
-            var links = ul.find("a").add(ul.find(".k-selected"));
+            var links = div.find("button").add(div.find(".k-selected"));
 
             assert.equal(links.length, 3);
             assert.equal(links[0].innerHTML, "1");
@@ -79,12 +94,12 @@
         });
 
         it("page number buttons have data attribute assign except for the current page index", function() {
-            var ul = setup();
+            var div = setup();
 
             dataSource.read();
 
-            var links = ul.find("a");
-            assert.equal(ul.find(".k-selected").data("page"), undefined);
+            var links = div.find("button:not(.k-selected)");
+            assert.equal(div.find(".k-selected").data("page"), undefined);
             assert.equal(links.eq(0).attr("data-kendo-page"), "2");
             assert.equal(links.eq(1).attr("data-kendo-page"), "3");
             assert.equal(links.eq(2).attr("data-kendo-page"), "4");
@@ -92,12 +107,12 @@
         });
 
         it("clear page number buttons on multiple datasource rebinds", function() {
-            var ul = setup();
+            var div = setup();
 
             dataSource.read();
             dataSource.read();
 
-            var links = ul.find("a").add(ul.find(".k-selected"));
+            var links = div.find("button");
             assert.equal(links.length, 5);
             assert.equal(links[0].innerHTML, "1");
             assert.equal(links[1].innerHTML, "2");
@@ -107,22 +122,21 @@
         });
 
         it("does not render page numbers if total pages are zero", function() {
-            var ul = setup({ pageSize: -1 });
+            var div = setup({ pageSize: -1 });
 
             dataSource.read();
-
-            assert.equal(ul.find("a").length, 0);
+            assert.equal(div.find("button:not(.k-selected)").length, 0);
         });
 
         it("currentPage css class is added to current page a", function() {
-            var ul = setup();
+            var div = setup();
 
             dataSource.read();
-            assert.isOk(ul.find("span").hasClass("k-selected"));
+            assert.isOk(div.find(".k-selected").length === 1);
         });
 
         it("changing page raises change event passing the new index", function() {
-            var ul = setup(),
+            var div = setup(),
                 index;
 
             dataSource.read();
@@ -130,7 +144,7 @@
                 index = arguments[0].index;
             });
 
-            ul.find("a:eq(0)").click();
+            div.find("button:not(.k-selected):eq(0)").click();
             assert.equal(index, 2);
         });
 
@@ -139,17 +153,17 @@
                 changeHandler = function(e) {
                     index = e.index;
                 },
-                ul = setup({}, { change: changeHandler });
+                div = setup({}, { change: changeHandler });
 
             dataSource.read();
 
-            ul.find("a:eq(0)").click();
+            div.find("button:not(.k-selected):eq(0)").click();
             assert.equal(index, 2);
             assert.equal(typeof index, "number");
         });
 
         it("clicking on the current page does not trigger change event", function() {
-            var ul = setup(),
+            var div = setup(),
                 called = false;
 
             dataSource.read();
@@ -157,82 +171,82 @@
                 called = true;
             });
 
-            ul.find("a.currentPage").click();
+            div.find("button.currentPage").click();
             assert.isOk(!called);
         });
 
         it("changing page is paging datasource", function() {
-            var ul = setup();
+            var div = setup();
 
             dataSource.read();
-            ul.find("a:eq(0)").click();
+            div.find("button:not(.k-selected):eq(0)").click();
             assert.equal(dataSource.page(), 2);
         });
 
         it("show more button should be shown if page buttons are more than the threshold", function() {
-            var ul = setup({}, { buttonCount: 3 });
+            var div = setup({}, { buttonCount: 3 });
 
             dataSource.read();
-            assert.equal(ul.find("a").add(ul.find(".k-selected")).length, 4);
-            assert.equal(ul.find("a:last").attr("data-kendo-page"), "4");
+            assert.equal(div.find("button").add(div.find(".k-selected")).length, 4);
+            assert.equal(div.find("button:last").attr("data-kendo-page"), "4");
         });
 
         it("show less button should be shown if page buttons are more than the threshold", function() {
-            var ul = setup({ page: 4 }, { buttonCount: 3 });
+            var div = setup({ page: 4 }, { buttonCount: 3 });
 
             dataSource.read();
-            assert.equal(ul.find("a").add(ul.find(".k-selected")).length, 3);
-            assert.equal(ul.find("a:first").attr("data-kendo-page"), "3");
+            assert.equal(div.find("button").add(div.find(".k-selected")).length, 3);
+            assert.equal(div.find("button:first").attr("data-kendo-page"), "3");
         });
 
         it("clicking more button pages to next pages group", function() {
-            var ul = setup({}, { buttonCount: 3 });
+            var div = setup({}, { buttonCount: 3 });
 
             dataSource.read();
-            ul.find("a:last").click();
+            div.find("button:last").click();
             assert.equal(dataSource.page(), 4);
         });
 
         it("totalPages", function() {
-            var ul = setup();
+            var div = setup();
 
             dataSource.read();
-            assert.equal(ul.data("kendoPager").totalPages(), 5);
+            assert.equal(div.data("kendoPager").totalPages(), 5);
         });
 
         it("pageSize returns the dataSource pageSize value", function() {
-            var ul = setup();
+            var div = setup();
             dataSource.read();
 
-            assert.equal(ul.data("kendoPager").pageSize(), dataSource.pageSize());
+            assert.equal(div.data("kendoPager").pageSize(), dataSource.pageSize());
         });
 
         it("page returns the current page", function() {
-            var ul = setup();
+            var div = setup();
             dataSource.read();
-            ul.find("a:eq(0)").click();
+            div.find("button:not(.k-selected):eq(0)").click();
 
-            assert.equal(ul.data("kendoPager").page(), 2);
+            assert.equal(div.data("kendoPager").page(), 2);
         });
 
         it("custom linkTemplate should be used instead of the default", function() {
-            var ul = setup({}, { linkTemplate: () => "<a>foo</a>" });
+            var div = setup({}, { linkTemplate: () => "<a>foo</a>" });
             dataSource.read();
-            assert.equal(ul.find("a:eq(1)").text(), "foo");
+            assert.equal(div.find("a:eq(0)").text(), "foo");
         });
 
         it("custom selectTemplate should be used", function() {
-            var ul = setup({}, { selectTemplate: () => "<a>foo</a>" });
+            var div = setup({}, { selectTemplate: () => "<a>foo</a>" });
             dataSource.read();
-            assert.equal(ul.find("a:first").text(), "foo");
+            assert.equal(div.find("a:first").text(), "foo");
         });
 
         it("single page is rendered if no pageSize is set", function() {
             var data = new DataSource({ data: [1, 2, 3, 4, 5], page: 1 }),
-                ul = $("<ul/>").appendTo(Mocha.fixture).kendoPager({ dataSource: data });
+                div = $("<div/>").appendTo(Mocha.fixture).kendoPager({ dataSource: data });
 
             data.read();
-            assert.equal(ul.find(".k-selected").length, 1);
+            assert.equal(div.find(".k-selected").length, 1);
         });
 
         it("pager displays info", function() {
@@ -591,6 +605,14 @@
             assert.equal(pager.find(".k-pager-sizes select").kendoDropDownList("text"), "All");
         });
 
+        it("drop down inherits size of pager", function() {
+            var pager = setup({}, { pageSizes: ["all", 1, 2], size: "small" });
+
+            dataSource.pageSize(5);
+
+            assert.isOk(pager.find(".k-pager-sizes select").getKendoDropDownList().wrapper.hasClass("k-picker-sm"));
+        });
+
         it("changing page size to All with upper case letter sets page size to all pages", function() {
             var pager = setup({}, { pageSizes: [1, 2, "All"] });
             var dropdownlist = pager.find(".k-pager-sizes select").data("kendoDropDownList");
@@ -662,6 +684,13 @@
             assert.equal(pager.find(".k-i-arrow-rotate-cw").length, 1);
         });
 
+        it("refresh button inherits size", function() {
+            var pager = setup({}, { refresh: true, size:"small" });
+
+            assert.equal(pager.find(".k-i-arrow-rotate-cw").length, 1);
+            assert.isOk(pager.find(".k-i-arrow-rotate-cw").parent().hasClass("k-button-sm"));
+        });
+
         it("clicking the refresh button reads from the data source", function() {
             var pager = setup({}, { refresh: true });
 
@@ -725,36 +754,36 @@
             assert.isOk(!dataSource._take);
         });
 
-        it("no k-pager-lg/md/sm classes", function() {
+        it("no k-pager-mobile-lg/md/sm classes", function() {
             var pager = setup();
 
             pager.css("width", "1100px");
             pager.data("kendoPager").resize();
 
-            assert.isOk(!pager.hasClass("k-pager-lg"));
-            assert.isOk(!pager.hasClass("k-pager-md"));
-            assert.isOk(!pager.hasClass("k-pager-sm"));
+            assert.isOk(!pager.hasClass("k-pager-mobile-lg"));
+            assert.isOk(!pager.hasClass("k-pager-mobile-md"));
+            assert.isOk(!pager.hasClass("k-pager-mobile-sm"));
         });
 
-        it("add k-pager-md class", function() {
+        it("add k-pager-mobile-md class", function() {
             var pager = setup();
 
             pager.css("width", "500px");
             pager.data("kendoPager").resize();
 
-            assert.isOk(pager.hasClass("k-pager-md"));
+            assert.isOk(pager.hasClass("k-pager-mobile-md"));
         });
 
-        it("add k-pager-sm class", function() {
+        it("add k-pager-mobile-sm class", function() {
             var pager = setup();
 
             pager.css("width", "450px");
             pager.data("kendoPager").resize();
 
-            assert.isOk(pager.hasClass("k-pager-sm"));
+            assert.isOk(pager.hasClass("k-pager-mobile-sm"));
         });
 
-        it("no k-pager-sm class on breakpoint width", function() {
+        it("no k-pager-mobile-sm class on breakpoint width", function() {
             var dataOptions = {
                 data: [1, 2, 3, 4, 5],
                 page: 1,
@@ -768,34 +797,34 @@
             var element = $("<div style='width: 481px;' />").appendTo(Mocha.fixture).kendoPager(options);
             var pager = element.data("kendoPager");
 
-            assert.isOk(!pager.element.hasClass("k-pager-sm"));
+            assert.isOk(!pager.element.hasClass("k-pager-mobile-sm"));
         });
 
-        it("no k-pager-lg class when responsive is false", function() {
+        it("no k-pager-mobile-lg class when responsive is false", function() {
             var pager = setup({}, { responsive: false });
 
             pager.css("width", "1000px");
             pager.data("kendoPager").resize();
 
-            assert.isOk(!pager.hasClass("k-pager-lg"));
+            assert.isOk(!pager.hasClass("k-pager-mobile-lg"));
         });
 
-        it("no k-pager-md class when responsive is false", function() {
+        it("no k-pager-mobile-md class when responsive is false", function() {
             var pager = setup({}, { responsive: false });
 
             pager.css("width", "600px");
             pager.data("kendoPager").resize();
 
-            assert.isOk(!pager.hasClass("k-pager-md"));
+            assert.isOk(!pager.hasClass("k-pager-mobile-md"));
         });
 
-        it("no k-pager-sm class when responsive is false", function() {
+        it("no k-pager-mobile-sm class when responsive is false", function() {
             var pager = setup({}, { responsive: false });
 
             pager.css("width", "450px");
             pager.data("kendoPager").resize();
 
-            assert.isOk(!pager.hasClass("k-pager-sm"));
+            assert.isOk(!pager.hasClass("k-pager-mobile-sm"));
         });
 
         it("numbers wrap select element is present when AutoBind is false", function() {

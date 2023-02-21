@@ -16,7 +16,10 @@ In this case, the establishment of a connection to the service and the binding o
 <div id="chat"></div>
 
 <!-- Load Bot Framework Client API -->
-<script src="https://unpkg.com/botframework-directlinejs/directLine.js"></script>
+<script src="https://unpkg.com/botframework-directlinejs@0.11.5/dist/directline.js"></script>
+
+    <!-- Load Adaptive Cards Client API -->
+<script src="https://unpkg.com/adaptivecards@2.10.0/dist/adaptivecards.min.js"></script>
 
 <script>
   $(document).ready(function () {

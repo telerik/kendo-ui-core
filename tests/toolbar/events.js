@@ -756,7 +756,7 @@
                 }
             }).data("kendoToolBar");
 
-            var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+            var overflowAnchor = toolbar.element.find(".k-toolbar-overflow-button");
 
             click(overflowAnchor);
         });
@@ -772,7 +772,7 @@
                 }
             }).data("kendoToolBar");
 
-            var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+            var overflowAnchor = toolbar.element.find(".k-toolbar-overflow-button");
 
             click(overflowAnchor);
         });
@@ -788,7 +788,7 @@
                 }
             }).data("kendoToolBar");
 
-            var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+            var overflowAnchor = toolbar.element.find(".k-toolbar-overflow-button");
 
             click(overflowAnchor);
 
@@ -806,7 +806,7 @@
                 }
             }).data("kendoToolBar");
 
-            var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+            var overflowAnchor = toolbar.element.find(".k-toolbar-overflow-button");
 
             toolbar.overflowMenu.open();
 
@@ -824,7 +824,7 @@
                 }
             }).data("kendoToolBar");
 
-            var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+            var overflowAnchor = toolbar.element.find(".k-toolbar-overflow-button");
 
             toolbar.overflowMenu.open();
             click(overflowAnchor);

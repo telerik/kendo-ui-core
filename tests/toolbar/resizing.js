@@ -23,8 +23,8 @@
                 ]
             }).data("kendoToolBar");
 
-            container.find(".k-overflow-anchor").width(28);
-            container.find(".k-button:not(.k-overflow-anchor)").width(68);
+            container.find(".k-toolbar-overflow-button").width(28);
+            container.find(".k-button:not(.k-toolbar-overflow-button)").width(68);
 
             var toolbarButtons = container.find("#foo, #bar");
             assert.isOk(toolbarButtons.eq(0).is(":visible"), "First button is visible");
@@ -52,8 +52,8 @@
                 ]
             }).data("kendoToolBar");
 
-            container.find(".k-overflow-anchor").width(28);
-            container.find(".k-button:not(.k-overflow-anchor)").width(50);
+            container.find(".k-toolbar-overflow-button").width(28);
+            container.find(".k-button:not(.k-toolbar-overflow-button)").width(50);
 
             var toolbarButtons = container.find("#foo, #bar");
             assert.isOk(toolbarButtons.eq(0).is(":visible"), "First button is visible");
@@ -105,7 +105,7 @@
             container.width(150);
             toolbar.resize();
 
-            var button = toolbar.element.find(".k-button").not(".k-overflow-anchor").last();
+            var button = toolbar.element.find(".k-button").not(".k-toolbar-overflow-button").last();
 
             assert.isOk(button.is(":hidden"));
 

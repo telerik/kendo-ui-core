@@ -973,6 +973,39 @@ If set to `true` the user could navigate the widget using the keyboard navigatio
       }
     </style>
 
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          size: "small",
+          refresh: true
+        });
+
+        dataSource.read();
+    </script>
+
 ## Methods
 
 ### totalPages

@@ -137,7 +137,6 @@ var __meta__ = {
     var SEPARATOR_OVERFLOW_EL = "<li role='separator' class='k-separator k-menu-separator k-hidden'></li>";
     var SEPARATOR_EL = '<div role="separator">&nbsp;</div>';
     var SPACER_EL = '<div>&nbsp;</div>';
-    var OVERFLOW_ANCHOR_EL = '<div title="More tools" class="k-toolbar-overflow-button k-overflow-anchor k-toolbar-tool k-button k-button-md k-rounded-md k-button-flat k-button-flat-base" title="More tools" role="button"><span class="k-icon k-i-more-vertical"></span></div>';
 
     var ToolBar = Widget.extend({
         init: function(element, options) {
@@ -166,8 +165,8 @@ var __meta__ = {
             }
 
             this._attachEvents();
-
             this._tabIndex();
+            this._applyCssClasses();
 
             if (options.resizable) {
                 this._shrink(this.element.innerWidth());
@@ -192,7 +191,8 @@ var __meta__ = {
             name: "ToolBar",
             items: [],
             resizable: true,
-            navigateOnTab: false
+            navigateOnTab: false,
+            size: "medium"
         },
 
         destroy: function() {
@@ -581,6 +581,12 @@ var __meta__ = {
                 delete options.attributes[ARIA_LABEL];
             }
 
+            if (!options.componentOptions) {
+                options.componentOptions = {};
+            }
+
+            options.componentOptions.size = this.options.size;
+
             widget = new kendo.ui[options.component](element, options.componentOptions);
 
             if (SAFE_COMPONENTS.indexOf(options.component) > -1) {
@@ -866,6 +872,8 @@ var __meta__ = {
                 delete options.id;
             }
 
+            options.size = this.options.size;
+
             widget = new kendo.ui[component]($(widgetElement), options);
             element = widget.wrapper || widget.element;
             element.addClass(TOOLBAR_TOOLS_CLASSES[component]);
@@ -920,11 +928,11 @@ var __meta__ = {
         },
 
         _childrenWidth: function() {
-            var childrenWidth = 0;
             var gap = parseInt(this.element.css('gap'), 10) || 0;
+            var childrenWidth = gap;
 
             this.element.children(":visible:not(" + DOT + SPACER_CLASS + ")").each(function() {
-                childrenWidth += outerWidth($(this), true) + gap;
+                childrenWidth += outerWidth($(this), false) + gap;
             });
 
             return Math.ceil(childrenWidth);
@@ -1552,14 +1560,20 @@ var __meta__ = {
                 isRtl = that._isRtl,
                 horizontalDirection = isRtl ? "left" : "right";
 
-            that.overflowAnchor = $(OVERFLOW_ANCHOR_EL);
+            that.overflowAnchor = $("<button class='k-toolbar-overflow-button k-toolbar-tool' title='More tools'>");
             that.element.append(that.overflowAnchor);
+            that.overflowAnchor.kendoButton({
+                icon: "more-vertical",
+                fillMode: "flat",
+                size: that.options.size
+            });
 
-            if (that.options.navigateOnTab) {
-                that.overflowAnchor.attr(TABINDEX, 0);
+            if (!that.options.navigateOnTab) {
+                that.overflowAnchor.attr(TABINDEX, -1);
             }
 
             that.overflowMenu = new kendo.ui.ContextMenu($("<ul>"), {
+                size: that.options.size,
                 showOn: "click tap",
                 origin: "bottom " + horizontalDirection,
                 position: "top " + horizontalDirection,
@@ -1774,7 +1788,6 @@ var __meta__ = {
 
         _toggleOverflowAnchor: function() {
             var hasVisibleChildren = false;
-            var paddingEnd = this._isRtl ? "padding-left" : "padding-right";
 
             hasVisibleChildren = this.overflowMenu.element.children(":not(." + STATE_HIDDEN + ", ." + POPUP + ")").length > 0;
 
@@ -1783,13 +1796,11 @@ var __meta__ = {
                     visibility: "visible",
                     width: NOTHING
                 });
-                this.wrapper.css(paddingEnd, this.overflowAnchor.outerWidth(true));
             } else {
                 this.overflowAnchor.css({
                     visibility: HIDDEN,
                     width: "1px"
                 });
-                this.wrapper.css(paddingEnd, NOTHING);
             }
         }
     });
@@ -1801,6 +1812,8 @@ var __meta__ = {
         ToolBarButton: kendo.Class,
         registerComponent: () => null
     };
+
+    kendo.cssProperties.registerPrefix("ToolBar", "k-toolbar-");
 
     kendo.ui.plugin(ToolBar);
 })(window.kendo.jQuery);

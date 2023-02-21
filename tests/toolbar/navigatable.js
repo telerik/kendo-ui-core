@@ -53,8 +53,8 @@
                 ]
             }).data("kendoToolBar");
 
-            $(".k-overflow-anchor")[0].focus();
-            $(".k-overflow-anchor").press(keys.DOWN, false, true);
+            $(".k-toolbar-overflow-button")[0].focus();
+            $(".k-toolbar-overflow-button").press(keys.DOWN, false, true);
 
             assert.isOk(toolbar.overflowMenu.element.is(":visible"));
         });
@@ -244,7 +244,7 @@
             $("#bar")[0].focus();
             $("#bar").press(keys.RIGHT);
 
-            assert.isOk($(document.activeElement).is(".k-overflow-anchor"));
+            assert.isOk($(document.activeElement).is(".k-toolbar-overflow-button"));
         });
 
         it("left arrow moves focus from overflowAnchor to the last focusable element in the ToolBar", function() {
@@ -262,8 +262,8 @@
                 ]
             }).data("kendoToolBar");
 
-            $(".k-overflow-anchor")[0].focus();
-            $(".k-overflow-anchor").press(keys.LEFT);
+            $(".k-toolbar-overflow-button")[0].focus();
+            $(".k-toolbar-overflow-button").press(keys.LEFT);
 
             assert.isOk(document.activeElement.id, "btn2");
         });

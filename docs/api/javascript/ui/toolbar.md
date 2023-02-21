@@ -1196,6 +1196,27 @@ If set to `true` this configuration option would enable Tab-based navigation amo
         });
     </script>
 
+### size `String` *(default: 'medium')*
+
+Controls the overall physical size of the ToolBar and its items. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            size: "large",
+            items: [
+                { type: "button", text: "Button 1" },
+                { type: "button", text: "Button 2" },
+                { type: "button", text: "Button 3" },
+                { type: "button", text: "Button 4" }
+            ]
+        });
+    </script>
+
+
 ## Methods
 
 ### add

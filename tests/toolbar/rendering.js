@@ -25,6 +25,20 @@
             assert.isOk(container.hasClass("k-toolbar"));
         });
 
+        it("toolbar element has a k-toolbar-md class by default", function() {
+            container.kendoToolBar();
+
+            assert.isOk(container.hasClass("k-toolbar-md"));
+        });
+
+        it("toolbar element sets the proper sizing class", function() {
+            container.kendoToolBar({
+                size: "small"
+            });
+
+            assert.isOk(container.hasClass("k-toolbar-sm"));
+        });
+
         it("toolbar is resizable by default", function() {
             container.kendoToolBar();
             assert.isOk(container.data("kendoToolBar").options.resizable);
@@ -506,6 +520,17 @@
             assert.isOk(overflowButton.hasClass("k-hidden"));
         });
 
+        it("applies the proper sizing class to the button", function() {
+            container.kendoToolBar({
+                size: "small",
+                items: [
+                    { type: "button", id: "foo", text: "foo" }
+                ]
+            });
+
+            assert.isOk(container.find("#foo").hasClass("k-button-sm"));
+        });
+
         /* TOGGLE BUTTON */
 
         it("toggleButton has k-toggle-button class", function() {
@@ -845,6 +870,24 @@
             assert.isOk(button.hasClass("k-group-end"));
         });
 
+        it("applies the proper sizing class to the buttons in the ButtonGroup", function() {
+            container.kendoToolBar({
+                size: "large",
+                items: [
+                    {
+                        type: "buttonGroup", buttons: [
+                            { id: "btn1", text: "Btn1" },
+                            { id: "btn2", text: "Btn2" },
+                            { id: "btn3", text: "Btn3" }
+                        ]
+                    }
+                ]
+            });
+
+            assert.isOk(container.find(".k-button-group .k-button").hasClass("k-button-lg"));
+        });
+
+
         /* SPLIT BUTTON */
 
         it("renders splitButton from JSON", function() {
@@ -1104,6 +1147,23 @@
 
             var overflowButton = toolbar.overflowMenu.element.find("#foo_overflow");
             assert.isOk(overflowButton.hasClass("k-hidden"));
+        });
+
+        it("applies the proper sizing class to the SplitButton", function() {
+            var toolbar = container.kendoToolBar({
+                size: "large",
+                items: [
+                    {
+                        type: "splitButton", id: "foo", text: "foo", hidden: true, menuButtons: [
+                            { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                            { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                            { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            assert.isOk(container.find("#foo").hasClass("k-button-lg"));
         });
 
         /* DROPDOWN BUTTON */
@@ -1368,6 +1428,23 @@
             assert.isOk(overflowButton.hasClass("k-hidden"));
         });
 
+        it("applies the proper sizing class to the DropDownButton", function() {
+            var toolbar = container.kendoToolBar({
+                size: "large",
+                items: [
+                    {
+                        type: "dropDownButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                            { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                            { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            assert.isOk(container.find("#foo").hasClass("k-button-lg"));
+        });
+
         /* SEPARATOR */
 
         it("renders separator from JSON", function() {
@@ -1430,13 +1507,13 @@
         it("renders overflow anchor", function() {
             container.kendoToolBar();
 
-            assert.isOk(container.find(".k-overflow-anchor").length, "Anchor element is rendered");
+            assert.isOk(container.find(".k-toolbar-overflow-button").length, "Anchor element is rendered");
         });
 
         it("does not renders overflow anchor if resizable is set to false", function() {
             container.kendoToolBar({ resizable: false });
 
-            assert.isOk(!container.find(".k-overflow-anchor").length);
+            assert.isOk(!container.find(".k-toolbar-overflow-button").length);
         });
 
         it("initializes command overflow popup menu", function() {

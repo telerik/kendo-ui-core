@@ -2658,6 +2658,10 @@ declare namespace kendo.ui {
         index?: number | undefined;
         selection?: string | undefined;
         items?: ButtonGroupItem[] | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        themeColor?: string | undefined;
         select?(e: ButtonGroupSelectEvent): void;
     }
     interface ButtonGroupEvent {
@@ -8444,6 +8448,7 @@ declare namespace kendo.ui {
         info?: boolean | undefined;
         input?: boolean | undefined;
         numeric?: boolean | undefined;
+        size?: string | undefined;
         pageSizes?: boolean|any | undefined;
         previousNext?: boolean | undefined;
         refresh?: boolean | undefined;
@@ -12016,6 +12021,7 @@ declare namespace kendo.ui {
         resizable?: boolean | undefined;
         items?: ToolBarItem[] | undefined;
         navigateOnTab?: boolean | undefined;
+        size?: string | undefined;
         click?(e: ToolBarClickEvent): void;
         close?(e: ToolBarCloseEvent): void;
         open?(e: ToolBarOpenEvent): void;

@@ -60,13 +60,13 @@
             var enter = { keyCode: keys.ENTER, preventDefault: $.noop, stopPropagation: $.noop, target: element };
             pager._keyDown(enter);
             var activeElement = $(document.activeElement);
-            assert.isOk(activeElement.hasClass("k-link"));
+            assert.isOk(activeElement.hasClass("k-button"));
             assert.equal(activeElement.text(), "1");
             assert.isOk(!element.hasClass("k-focus"));
         });
 
         it("escape focuses pager", function() {
-            var focusEl = element.find(".k-link:eq(3)");
+            var focusEl = element.find(".k-button:eq(3)");
             pager._restoreTabIndexes();
             focusEl.focus();
             var esc = { keyCode: keys.ESC, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
@@ -76,29 +76,29 @@
         });
 
         it("tab moves focus to next focusable", function() {
-            var focusEl = element.find(".k-link:eq(3)");
+            var focusEl = element.find(".k-button:eq(3)");
             focusEl.click();
             var tab = { keyCode: keys.TAB, preventDefault: $.noop, stopPropagation: $.noop, target: kendo._activeElement() };
             pager._keyDown(tab);
-            assert.equal(element.find(".k-link:eq(4)")[0], document.activeElement);
+            assert.equal(element.find(".k-button:eq(4)")[0], document.activeElement);
         });
 
         it("shift + tab moves focus to prev focusable", function() {
-            var focusEl = element.find(".k-link:eq(4)");
+            var focusEl = element.find(".k-button:eq(4)");
             focusEl.click();
             var tab = { keyCode: keys.TAB, shiftKey: true, preventDefault: $.noop, stopPropagation: $.noop, target: kendo._activeElement() };
             pager._keyDown(tab);
-            assert.equal(element.find(".k-link:eq(3)")[0], document.activeElement);
+            assert.equal(element.find(".k-button:eq(3)")[0], document.activeElement);
         });
 
         it("selected page button remains focused after enter", function() {
-            var focusEl = element.find(".k-link:eq(4)");
+            var focusEl = element.find(".k-button:eq(3)");
             pager._restoreTabIndexes();
             focusEl.focus();
             var enter = { keyCode: keys.ENTER, shiftKey: true, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(enter);
 
-            assert.equal(element.find(".k-link:eq(4)")[0], document.activeElement);
+            assert.equal(element.find(".k-button:eq(3)")[0], document.activeElement);
         });
 
         it("arrow button remains focused after enter", function() {
@@ -117,29 +117,28 @@
             focusEl.focus();
             var tab = { keyCode: keys.TAB, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(tab);
-
-            assert.equal(element.find(".k-link:eq(2)")[0], document.activeElement);
+            assert.equal(element.find(".k-button:eq(2)")[0], document.activeElement);
         });
 
         it("more pages button remains focused after enter", function() {
-            var focusEl = element.find(".k-link:eq(5)");
+            var focusEl = element.find(".k-button:eq(5)");
             pager._restoreTabIndexes();
             focusEl.focus();
             var enter = { keyCode: keys.ENTER, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(enter);
 
-            assert.equal(element.find(".k-link:eq(5)")[0], document.activeElement);
+            assert.equal(element.find(".k-button:eq(5)")[0], document.activeElement);
         });
 
         it("first more pages button remains focused after enter", function() {
             pager.page(7);
-            var focusEl = element.find(".k-link:eq(2)");
+            var focusEl = element.find(".k-button:eq(2)");
             pager._restoreTabIndexes();
             focusEl.focus();
             var enter = { keyCode: keys.ENTER, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(enter);
 
-            assert.equal(element.find(".k-link:eq(2)")[0], document.activeElement);
+            assert.equal(element.find(".k-button:eq(2)")[0], document.activeElement);
         });
 
         it("home pages to first page", function() {
@@ -181,7 +180,7 @@
             var tab = { keyCode: keys.TAB, preventDefault: $.noop, stopPropagation: $.noop, target: element };
             pager._keyDown(tab);
 
-            assert.notEqual(element.find(".k-link:eq(2)")[0], document.activeElement);
+            assert.notEqual(element.find(".k-button:eq(2)")[0], document.activeElement);
         });
     });
 }());

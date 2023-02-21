@@ -70,22 +70,22 @@
             assert.equal(element.find("input").attr("aria-label"), pager.options.messages.page + " 1");
         });
 
-        it("page link buttons should have role=button", function() {
+        it("page buttons should have role=button", function() {
             var element = setup(null, { navigatable: true, numeric: true });
             pager.page(1);
-            assert.equal(element.find(".k-pager-numbers .k-link:eq(0)").attr("role"), "button");
+            assert.equal(element.find(".k-pager-numbers .k-button:eq(0)").attr("role"), "button");
         });
 
-        it("page link buttons should have aria-label", function() {
+        it("page buttons should have aria-label", function() {
             var element = setup(null, { navigatable: true, numeric: true });
             pager.page(1);
-            assert.equal(element.find(".k-pager-numbers .k-link:eq(0)").attr("aria-label"), "Page 1");
+            assert.equal(element.find(".k-pager-numbers .k-button:eq(0)").attr("aria-label"), "Page 1");
         });
 
         it("selected page button should have role button", function() {
             var element = setup(null, { navigatable: true, numeric: true });
             pager.page(1);
-            assert.equal(element.find(".k-pager-numbers .k-link:eq(0)").attr("role"), "button");
+            assert.equal(element.find(".k-pager-numbers .k-button:eq(0)").attr("role"), "button");
         });
 
         it("page size dropdown should have aria-label", function() {
