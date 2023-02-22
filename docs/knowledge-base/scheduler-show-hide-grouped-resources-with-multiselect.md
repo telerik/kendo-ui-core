@@ -93,8 +93,8 @@ How to filter the Kendo UI Scheduler resources and show or hide the filtered tas
     });
 
     var sched = $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       height: 600,
       views: [
         "timeline",

@@ -69,8 +69,8 @@ You can also select the desired event by using the [`select`](https://docs.teler
     $("#scheduler").kendoScheduler({
       height: 300,
       selectable: true,
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       eventHeight: 50,
       majorTick: 60,
       views: [ "timelineWeek" ],

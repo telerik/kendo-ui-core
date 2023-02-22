@@ -48,8 +48,8 @@ The following example demonstrates how to achieve the desired scenario.
       function initScheduler() {
         $("#scheduler").kendoScheduler({
           footer: false,
-          date: new Date("2013/6/26"),
-          startTime: new Date("2013/6/26 07:00 AM"),
+          date: new Date("2022/6/26"),
+          startTime: new Date("2022/6/26 07:00 AM"),
           height: kendo.support.mobileOS.wp ? "28em" : 600,
           views: [
             "day"

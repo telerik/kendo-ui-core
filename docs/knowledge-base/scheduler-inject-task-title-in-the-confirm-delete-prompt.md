@@ -57,8 +57,8 @@ Handle the `dataBound` event and attach a `click` event handler to the `k-event-
 				dataBound: function(e) {
 					$('.k-event-delete').on('click', handleDeleteClick);
 				},
-				date: new Date("2013/6/13"),
-				startTime: new Date("2013/6/13 07:00 AM"),
+				date: new Date("2022/6/13"),
+				startTime: new Date("2022/6/13 07:00 AM"),
 				height: 600,
 				views: [ "workWeek" ],
 				timezone: "Etc/UTC",

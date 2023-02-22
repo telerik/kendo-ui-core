@@ -75,8 +75,8 @@ body,
 <script>
 $(function() {
     $("#scheduler").kendoScheduler({
-        date: new Date("2013/6/13"),
-        startTime: new Date("2013/6/13 07:00 AM"),
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
         views: [
             "day",
             { type: "week", selected: true },

@@ -53,8 +53,8 @@ For the full implementation of the approach, refer to [this Dojo example](https:
 <script>
     $(function() {
         var scheduler = $("#scheduler").kendoScheduler({
-            date: new Date("2013/6/13"),
-            startTime: new Date("2013/6/13 07:00 AM"),
+            date: new Date("2022/6/13"),
+            startTime: new Date("2022/6/13 07:00 AM"),
             height: 600,
             views: [
                 "day",

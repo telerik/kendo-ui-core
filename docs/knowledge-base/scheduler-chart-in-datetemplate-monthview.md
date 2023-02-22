@@ -81,7 +81,7 @@ Place and initialize the Chart in the [`dayTemplate`](https://docs.telerik.com/k
         }
       },
       dayTemplate: kendo.template($("#dayTemplate").html()),
-      date: new Date("2013/6/13"),
+      date: new Date("2022/6/13"),
       editable: false,
       height: 1000,
       views: [

@@ -35,8 +35,8 @@ How to implement a Kendo ContextMenu, which allows the user to change the resour
   <script>
     $(function() {
       var scheduler = $("#scheduler").kendoScheduler({
-        date: new Date("2013/6/23"),
-        startTime: new Date("2013/6/23 07:00 AM"),
+        date: new Date("2022/6/23"),
+        startTime: new Date("2022/6/23 07:00 AM"),
         height: 600,
         views: [{ type: "agenda" }],
         timezone: "Etc/UTC",

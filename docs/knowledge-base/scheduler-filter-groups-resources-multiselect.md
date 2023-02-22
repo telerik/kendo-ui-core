@@ -53,8 +53,8 @@ How can I show only the selected resource groups in the Scheduler and use the Ke
     <script>
         $(function() {
             $("#scheduler").kendoScheduler({
-                date: new Date("2013/6/13"),
-                startTime: new Date("2013/6/13 07:00 AM"),
+                date: new Date("2022/6/13"),
+                startTime: new Date("2022/6/13 07:00 AM"),
                 height: 600,
                 views: [
                     "day",

@@ -51,8 +51,8 @@ The following example demonstrates how to achieve the desired scenario.
     <script>
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2013/6/26"),
-          startTime: new Date("2013/6/26 07:00 AM"),
+          date: new Date("2022/6/26"),
+          startTime: new Date("2022/6/26 07:00 AM"),
 					views: [
             { type: "day", selected: true },
             { type: "week", selectedDateFormat: "{0:ddd,MMM dd,yyyy} - {1:ddd,MMM dd,yyyy}" },

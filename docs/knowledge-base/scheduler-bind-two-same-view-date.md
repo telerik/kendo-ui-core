@@ -54,8 +54,8 @@ My application displays two Kendo UI Schedulers on the same page. How can I bind
 <script>
   $(function() {
     $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       height: 600,
       views: [
         "day",
@@ -198,8 +198,8 @@ My application displays two Kendo UI Schedulers on the same page. How can I bind
     });
 
     $("#schedulerTwo").kendoScheduler({
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       height: 600,
       views: [
         "day",

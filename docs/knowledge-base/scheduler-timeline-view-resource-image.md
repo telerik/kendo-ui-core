@@ -70,8 +70,8 @@ Extend the view and override the functions that are responsible for rendering th
 
   $(function() {
     $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       height: 600,
       views: [{
         type: "week",

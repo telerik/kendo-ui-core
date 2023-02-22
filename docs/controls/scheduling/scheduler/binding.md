@@ -49,7 +49,7 @@ You can bind the Scheduler to a remote service which will return, create, update
 The following example demonstrates how to bind the widget to a remote service. Note how the fields of the event in the `schema.model` section are configured and mapped to the fields that are returned by the remote service by using the `from` option.
 
     $("#scheduler").kendoScheduler({
-        date: new Date("2013/6/13"),
+        date: new Date("2022/6/13"),
         timezone: "Etc/UTC", // Setting the timezone is recommended when binding to a remote service.
         dataSource: {
             batch: true, // Enable the batch updates.

@@ -61,8 +61,8 @@ The Kendo UI Scheduler views are normally 100% wide and depend on the width of t
     <script>
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2013/6/13"),
-          startTime: new Date("2013/6/13 07:00 AM"),
+          date: new Date("2022/6/13"),
+          startTime: new Date("2022/6/13 07:00 AM"),
           height: 400,
           views: [
             "day",

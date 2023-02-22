@@ -3,7 +3,7 @@ title: Overview
 page_title: Overview
 description: "How to use the TextArea component for {{ site.framework }}."
 slug: htmlhelpers_overview_textarea
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} TextArea Overview
@@ -42,57 +42,20 @@ The following example demonstrates the basic configuration for the TextArea.
 {% endif %}
 ## Functionality and Features
 
-* [Labels]({% slug htmlhelpers_textarea_labels %})
-* [RTL Support]({% slug rtl_textarea_aspnetcore %})
+* [Labels]({% slug htmlhelpers_textarea_labels %})&mdash;You can integrate a label HTML element within the boundaries of the TextArea.
+* [RTL Support]({% slug rtl_textarea_aspnetcore %})&mdash;The TextArea enables you to render its content content in a right-to-left direction for right-to-left languages.
+* [Events]({% slug events_textarea %})&mdash;The TextArea allows you to handle its events and implement custom functionality.
 
-## Events
 
-Here is a [demo on using some basic events of the TextArea](https://demos.telerik.com/{{ site.platform }}/textarea/events). For a full list, refer to the TextArea events documentation in the API section.
+## Next Steps
 
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-  @(Html.Kendo().TextArea()
-        .Name("textarea")
-        .Events(e => e
-            .Change("textarea_change")
-        )
-  )
-```
-{% if site.core %}
-```TagHelper
-<kendo-textarea name="textarea"
-                on-change="textarea-change">
-</kendo-textarea>
-```
-{% endif %}
-```script
-  <script>
-  function textarea_change() {
-      // Handle the change event.
-  }
-  </script>
-```
-
-## Referencing Existing Instances
-
-To reference an existing Telerik UI TextArea instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [TextArea client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea#methods) to control its behavior.
-
-The following example demonstrates how to access an existing TextArea instance.
-
-      // Place the following after your Telerik UI TextArea for {{ site.framework }} declaration.
-      <script>
-      $(function() {
-          // The Name() of the TextArea is used to get its client-side instance.
-          var textarea = $("#textarea").data("kendoTextArea");
-      });
-      </script>
-
-## See Also
-
+* [Getting Started with the TextArea ]({% slug aspnetcore_textarea_getting_started %})
 * [Basic Usage of the TextArea HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textarea/index)
 {% if site.core %}
 * [Basic Usage of the TextArea TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/textarea/tag-helper)
 {% endif %}
+
+## See Also
+
 * [Using the API of the TextArea HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textarea/api)
-* [Server-Side API](/api/textarea)
+* [Knowledge Base Section](/knowledge-base)

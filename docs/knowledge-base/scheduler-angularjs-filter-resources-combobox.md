@@ -64,8 +64,8 @@ The following example demonstrates the full implementation of the suggested appr
     var $ctrl = this;
 
     this.schedulerOptions = {
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       eventHeight: 50,
       majorTick: 60,
       views: [ "timeline", "timelineWeek", "timelineWorkWeek", {

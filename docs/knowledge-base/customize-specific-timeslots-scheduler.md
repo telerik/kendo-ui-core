@@ -57,10 +57,10 @@ How can I disable timeslots for a specific day and style them?
 
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2013/6/13"),
+          date: new Date("2022/6/13"),
           add: function(e) {
 
-              var myDate = new Date("Thu Jun 13 2013 08:30:00 GMT+0300");
+              var myDate = new Date("Thu Jun 13 2022 08:30:00 GMT+0300");
          			if(e.event.start.getDay() == myDate.getDay())
               {
                   setTimeout(function() {
@@ -70,7 +70,7 @@ How can I disable timeslots for a specific day and style them?
             		return false;
               }
         	},
-          startTime: new Date("2013/6/13 07:00 AM"),
+          startTime: new Date("2022/6/13 07:00 AM"),
           height: 600,
           slotTemplate: "<div class='myClass' style='background:#=getColorBasedOnHour(date)#; height: 100%;width: 100%;'></div>",
           views: [

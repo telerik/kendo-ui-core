@@ -74,8 +74,8 @@ How can I prevent having 'None' as an option and as a default value in the Dropd
 	<script>
 	$(function() {
 	    $("#scheduler").kendoScheduler({
-		date: new Date("2013/6/13"),
-		startTime: new Date("2013/6/13 07:00 AM"),
+		date: new Date("2022/6/13"),
+		startTime: new Date("2022/6/13 07:00 AM"),
 		height: 600,
 		views: [
 		    "day",

@@ -181,8 +181,8 @@ The following example demonstrates a StockChart in the master and navigator data
                 field: "High"
             },
             select: {
-                from: "2009/02/05",
-                to: "2011/10/07"
+                from: "2017/02/05",
+                to: "2019/10/07"
             }
         }
     });

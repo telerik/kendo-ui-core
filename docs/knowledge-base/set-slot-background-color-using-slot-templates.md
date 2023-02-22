@@ -64,8 +64,8 @@ The following example demonstrates how to achieve the desired behavior by using 
 
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2013/6/13"),
-          startTime: new Date("2013/6/13 07:00 AM"),
+          date: new Date("2022/6/13"),
+          startTime: new Date("2022/6/13 07:00 AM"),
           height: 600,
           allDaySlotTemplate: "<div style='background:\\#A2A2AA; height: 100%;width: 100%;'></div>",
           slotTemplate: "<div style='background:#=getColorBasedOnHour(date)#; height: 100%;width: 100%;'></div>",

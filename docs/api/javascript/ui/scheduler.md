@@ -181,7 +181,7 @@ If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
+      date: new Date("2022/6/6"),
       dataSource: {
         batch: true,
         transport: {
@@ -264,7 +264,7 @@ If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/
       }
     });
     $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
+      date: new Date("2022/6/6"),
       dataSource: dataSource
     });
     </script>
@@ -4498,7 +4498,7 @@ The complete list of the supported timezones is available in the [List of IANA t
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
-        date: new Date("2013/6/13"),
+        date: new Date("2022/6/13"),
         timezone: "Etc/UTC",
         dataSource: {
             batch: true,

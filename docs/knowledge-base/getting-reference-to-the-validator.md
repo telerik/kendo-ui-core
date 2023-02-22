@@ -49,8 +49,8 @@ The following example demonstrates how to acieve the desired scenario.
         }       
 
         $("#scheduler").kendoScheduler({
-          date: new Date("2013/6/13"),
-          startTime: new Date("2013/6/13 7:00"),
+          date: new Date("2022/6/13"),
+          startTime: new Date("2022/6/13 7:00"),
           height: 400,
           timezone: "Etc/UTC",
           views: [
