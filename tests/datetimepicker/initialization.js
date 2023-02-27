@@ -19,6 +19,14 @@
             assert.isOk(datetimepicker.wrapper.hasClass("k-datetimepicker k-input k-input-solid k-input-md k-rounded-md"));
         });
 
+        it("initial width of input is preserved in DateInput scenario", function() {
+            input.css("width", "200");
+
+            var datetimepicker = input.kendoDateTimePicker({ dateInput: true }).data("kendoDateTimePicker");
+
+            assert.equal(datetimepicker.wrapper.attr("style"), "width: 200px;");
+        });
+
         it("DateTimePicker adds k-input class to the element", function() {
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 

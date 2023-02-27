@@ -111,7 +111,7 @@ After the modification the `package.json` file will look like in the example bel
 ### 5. Add Webpack Configuration File
 In the root of the directory add the following `webpack.config.js` file:
 
-Note, that which [module system]({% slug kendoui_npm_packages_kendoui_installation#4-bundling-the-scripts %}) will be used depends on the order the modules are listed in the `mainFields` field. 
+Note, that which [module system]({% slug kendoui_npm_packages_kendoui_installation %}#4-bundling-the-scripts) will be used depends on the order the modules are listed in the `mainFields` field. 
 In the current sample we will use the ECMAScript modules and the files located in the `esm` folder. Thus, the `module` string is placed first in the list. 
 
 ```

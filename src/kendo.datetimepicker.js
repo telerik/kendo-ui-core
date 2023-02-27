@@ -995,7 +995,6 @@ var __meta__ = {
 
             wrapper[0].style.cssText = element[0].style.cssText;
             element.css({
-                width: "100%",
                 height: element[0].style.height
             });
 
