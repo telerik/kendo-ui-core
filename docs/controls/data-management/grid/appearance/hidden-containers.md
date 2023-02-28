@@ -33,9 +33,12 @@ To handle the behavior that is related to the initialization of the Grid inside 
 
 * Fetch the data source instead of calling the `resize()` method. This approach is applicable if virtual scrolling is enabled and the Kendo UI version is older than 2014.3.1119.
 
+  Note that Grids that are rendered inside a container component, such as a Kendo UI for jQuery TabStrib, PanelBar, or Window, have to be resized once the container is visible and its animation completed.
+
     ```
     $("#GridID").data("kendoGrid").dataSource.fetch();
     ```
+
 
 ## KB Articles on Hidden Containers
 
