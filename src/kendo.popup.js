@@ -700,7 +700,7 @@ var __meta__ = {
                 appendTo = $(that.options.appendTo),
                 appendToOffset,
                 width = outerWidth(element),
-                height = outerHeight(element) || outerHeight(element.children().first()),
+                height = outerHeight(element) || outerHeight(element.find(".k-child-animation-container").children().first()),
                 anchorWidth = outerWidth(anchor),
                 anchorHeight = outerHeight(anchor),
                 top = that.options.omitOriginOffsets ? 0 : anchorOffset.top,

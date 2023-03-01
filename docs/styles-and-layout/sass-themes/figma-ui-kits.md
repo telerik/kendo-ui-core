@@ -4,7 +4,7 @@ page_title: Kendo UI Design Kits for Figma - Styles and Appearance
 description: "Discover the UI Design Kits for Figma and learn how to use them to create stylish jQuery applications."
 previous_url: /styles-and-layout/design-files, /styles-and-layout/figma-ui-kits
 slug: ui_kits_figma_kendouistyling
-position: 9
+position: 10
 ---
 
 # Kendo UI Design Kits for Figma
@@ -117,6 +117,7 @@ Depending on your requirements, you can take advantage of three distinct levels 
 
 * [Getting Started with Kendo UI for jQuery]({% slug welcometo_kendoui %})
 * [Sass ThemeBuilder Overview]({% slug sassbasedthemes_themebuilder_kendoui %})
+* [SVG Icons]({% slug svgicons_kendoui_desktopwidgets %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [Browse the Components](https://demos.telerik.com/kendo-ui/) 
 * [Figma for Developers (blog)](https://www.telerik.com/blogs/figma-developers)

@@ -649,8 +649,8 @@ it("today link should be disabled when min() with bigger then today", function()
     stub(cal, "navigate");
     cal._today.click();
 
-    assert.isOk(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
-    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-disabled"));
+    assert.isOk(!div.find(".k-footer").find(".k-button-md").hasClass("k-nav-today"));
+    assert.isOk(div.find(".k-footer").find(".k-button-md").hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 0);
 });
 
@@ -664,8 +664,8 @@ it("today link should be disabled when max() with less then today", function() {
     stub(cal, "navigate");
     cal._today.click();
 
-    assert.isOk(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
-    assert.isOk(div.find(".k-footer").find(".k-link").hasClass("k-disabled"));
+    assert.isOk(!div.find(".k-footer").find(".k-button-md").hasClass("k-nav-today"));
+    assert.isOk(div.find(".k-footer").find(".k-button-md").hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 0);
 });
 
@@ -871,7 +871,7 @@ it("today link is disabled if the respecitve date is disabled", function() {
         disableDates: ["mo", "tu", "we", "th", "fr", "sa", "su"]
     });
     calendar.max(max);
-    assert.equal($(".k-footer>a").hasClass("k-disabled"), true);
+    assert.equal($(".k-footer>button").hasClass("k-disabled"), true);
 });
 
 it("_current is not set if date is disabled", function() {

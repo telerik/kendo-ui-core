@@ -168,7 +168,7 @@ it("today link should have k-nav-today", function() {
 
     stub(cal, "navigate");
 
-    var link = div.find(".k-footer").find(".k-link");
+    var link = div.find(".k-footer").find(".k-button-md");
 
     link.click();
 
@@ -185,7 +185,7 @@ it("today link should not have k-nav-today", function() {
 
     stub(cal, "_todayClick");
 
-    var link = div.find(".k-footer").find(".k-link");
+    var link = div.find(".k-footer").find(".k-button-md");
     link.click();
 
     assert.isOk(!link.hasClass("k-calendar-nav-today"));
@@ -201,7 +201,7 @@ it("today link sets today not now", function() {
 
     stub(cal, "_todayClick");
 
-    div.find(".k-footer").find(".k-link").click();
+    div.find(".k-footer").find(".k-button-md").click();
 
     assert.equal(+cal.value(), +new Date(today.getFullYear(), today.getMonth(), today.getDate()));
 });
@@ -248,9 +248,9 @@ it("footer honours culture option", function() {
 
     var culture = kendo.getCulture("bg-BG");
     var format = culture.calendars.standard.patterns["d"];
-    var link = div.find(".k-footer").find(".k-link");
+    var link = div.find(".k-footer").find(".k-button-md");
 
-    assert.equal(link.html(), kendo.toString(new Date(), "D", culture));
+    assert.equal(link.children().first().html(), kendo.toString(new Date(), "D", culture));
     assert.equal(link.attr("title"), kendo.toString(new Date(), "D", culture));
 });
 

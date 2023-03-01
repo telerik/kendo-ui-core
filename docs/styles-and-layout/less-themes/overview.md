@@ -175,5 +175,6 @@ To revert back to the previous border-radius (9999px) value, use any of the foll
 
 ## See Also
 
+* [SVG Icons]({% slug svgicons_kendoui_desktopwidgets %})
 * [Sass Themes Overview]({% slug sassbasedthemes_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})

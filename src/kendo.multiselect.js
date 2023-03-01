@@ -1554,6 +1554,7 @@ var __meta__ = {
                 '</span>', $.extend({}, options, {
                         fillMode: "solid",
                         rounded: "medium",
+                        enabled: !that.element.is("[disabled]"),
                         themeColor: "base",
                         text: tagTemplate(data),
                         attr: {

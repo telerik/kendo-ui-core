@@ -509,6 +509,17 @@
             assert.isOk(!multiselect.wrapper.hasClass("k-disabled"));
         });
 
+        it("enable() allows adding enabled chips", function() {
+            popuplateSelect();
+            var multiselect = new MultiSelect(select, { enable: false});
+            multiselect.enable();
+
+            multiselect.value(["0", "1"]);
+
+            assert.equal(multiselect.tagList.children(".k-chip").length, 2);
+            assert.equal(multiselect.tagList.children(".k-chip[class*=k-disabled]").length, 0);
+        });
+
         it("MultiSelect does not pass placeholder on search", function() {
             var multiselect = new MultiSelect(select, {
                 autoBind: false,

@@ -1,10 +1,10 @@
 ---
 title: Font Icons
 page_title: Font Icons - Sass Themes
-description: "Learn about the available Kendo UI Font Icons."
+description: "Learn more about what icon fonts are and how to define, implement, and render the available Kendo UI Font Icons out of the supported list."
 previous_url: /web/icons-web, /styles-and-layout/icons-web
 slug: webfonticons_kendoui_desktopwidgets
-position: 6
+position: 7
 ---
 
 # Web Font Icons
@@ -133,9 +133,9 @@ To better accommodate an icon in your application, flip it by using the `k-flip-
     }
 
     .icons-frame {
-        width: 100%; 
-        height: 100%; 
-        background-color: rgb(248, 248, 248); 
+        width: 100%;
+        height: 100%;
+        background-color: rgb(248, 248, 248);
         border: 2px dashed rgb(235, 236, 238);
     }
 </style>

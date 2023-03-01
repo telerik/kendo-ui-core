@@ -75,20 +75,24 @@ var __meta__ = {
         HEADERSELECTOR = '.k-header, .k-calendar-header',
         CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size }) => `<div class="k-header k-hstack">
             <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous"><span class="k-button-icon k-icon k-i-caret-alt-left"></span></a>
-            <a tabindex="-1" href="#" ${actionAttr}="nav-up" role="button" id="nav-up" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>
+            <a tabindex="-1" href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>
             <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next"><span class="k-icon k-i-caret-alt-right"></span></a>
         </div>`,
         MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages }) => `<div class="k-calendar-header k-hstack">
-            <a href="\\#" ${actionAttr}="nav-up" id="nav-up" role="button" class="k-calendar-title k-title k-button ${size} k-rounded-md k-button-flat k-button-flat-base "></a>
+            <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-flat-base k-rounded-md">
+                <span class="k-button-text"></span>
+            </button>
             <span class="k-spacer"></span>
-            <span class="k-calendar-nav k-hstack">
-                <a tabindex="-1" ${actionAttr}="prev" class="k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-prev-view">
-                    <span class="k-button-icon k-icon k-i-caret-alt-left"></span>
-                </a>
-                <a tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today">${messages.today}</a>
-                <a tabindex="-1" ${actionAttr}="next" class="k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-next-view">
-                    <span class="k-button-icon k-icon k-i-caret-alt-right"></span>
-                </a>
+            <span class="k-calendar-nav">
+                <button tabindex="-1" ${actionAttr}="prev" class="k-calendar-nav-prev k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
+                    <span class="k-button-icon k-icon k-i-arrow-chevron-left"></span>
+                </button>
+                <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat k-button-flat-primary k-rounded-md">
+                    <span class="k-button-text">${messages.today}</span>
+                </button>
+                <button tabindex="-1" ${actionAttr}="next" class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
+                    <span class="k-button-icon k-icon k-i-arrow-chevron-right"></span>
+                </button>
             </span>
         </div>`;
 
@@ -117,7 +121,7 @@ var __meta__ = {
             if (that.options.hasFooter) {
                 that._footer(that.footer);
             } else {
-                that._today = that.element.find('a.k-calendar-nav-today');
+                that._today = that.element.find('.k-calendar-nav-today');
                 that._toggle();
             }
 
@@ -1179,13 +1183,19 @@ var __meta__ = {
             }
 
             if (!footer[0]) {
-                footer = $('<div class="k-footer"><a tabindex="-1" href="#" class="k-link k-calendar-nav-today"></a></div>').appendTo(element);
+                footer = $(`<div class="k-footer">
+                    <button tabindex="-1" class="k-calendar-nav-today k-flex k-button k-button-md k-button-flat k-button-flat-primary k-rounded-md">
+                        <span class="k-button-text"></span>
+                    </button>
+                </div>`).appendTo(element);
             }
 
             that._today = footer.show()
-                .find(".k-link")
-                .html(template(today))
+                .find(".k-button-flat-primary")
                 .attr("title", kendo.toString(today, "D", that.options.culture));
+
+            footer.find(".k-button-text")
+                .html(template(today));
 
             that._toggle();
         },
