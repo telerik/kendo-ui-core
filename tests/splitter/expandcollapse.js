@@ -16,7 +16,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-caret-alt-left").trigger("click");
+            splitter.dom.find(".k-collapse-prev").trigger("click");
 
             assert.isOk(triggered);
             assert.equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
@@ -46,7 +46,7 @@
                 called = pane;
             };
 
-            splitter.dom.find(".k-i-caret-alt-left").trigger("click");
+            splitter.dom.find(".k-collapse-prev").trigger("click");
 
             assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
         });
@@ -99,7 +99,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-caret-alt-right").trigger("click");
+            splitter.dom.find(".k-expand-prev").trigger("click");
 
             assert.isOk(triggered);
             assert.equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
@@ -113,7 +113,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-caret-alt-right").trigger("click");
+            splitter.dom.find(".k-expand-prev").trigger("click");
 
             assert.isOk(splitter.dom.find(".k-pane:first").data("pane").collapsed);
         });
@@ -128,7 +128,7 @@
                 called = pane;
             };
 
-            splitter.dom.find(".k-i-caret-alt-right").trigger("click");
+            splitter.dom.find(".k-expand-prev").trigger("click");
 
             assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
         });
@@ -366,7 +366,7 @@
                 keyCode: keys.ENTER
             });
 
-            splitbar.find(".k-i-caret-alt-left").click();
+            splitbar.find(".k-collapse-prev").click();
 
             assert.equal(splitter.dom.find(".k-pane:first").width(), 0);
         });
@@ -379,7 +379,7 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-caret-alt-left").click();
+            splitter.dom.find(".k-collapse-prev").click();
 
             assert.equal(splitter.dom.find(".k-pane:first").width(), 20);
         });
@@ -403,7 +403,7 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-caret-alt-left").click();
+            splitter.dom.find(".k-collapse-prev").click();
 
             assert.isOk(splitter.dom.find(".k-pane:first").hasClass("k-collapsed"));
         });

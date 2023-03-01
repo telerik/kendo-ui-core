@@ -1,10 +1,11 @@
 import "./kendo.data.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "pager",
     name: "Pager",
     category: "framework",
-    depends: [ "data" ],
+    depends: [ "data", "icons" ],
     advanced: true
 };
 
@@ -14,10 +15,10 @@ var __meta__ = {
         Widget = ui.Widget,
         keys = kendo.keys,
         template = kendo.template,
-        FIRST = ".k-i-caret-alt-to-left",
-        LAST = ".k-i-caret-alt-to-right",
-        PREV = ".k-i-caret-alt-left",
-        NEXT = ".k-i-caret-alt-right",
+        FIRST = "caret-alt-to-left",
+        LAST = "caret-alt-to-right",
+        PREV = "caret-alt-left",
+        NEXT = "caret-alt-right",
         SIZE = "k-pager-mobile-md k-pager-mobile-sm",
         FOCUSABLE = ":kendoFocusable:not([tabindex='-1'])",
         CHANGE = "change",
@@ -28,7 +29,7 @@ var __meta__ = {
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-button-flat-base k-icon-button ${wrapClassName} ${size}"><span class="k-icon ${className}"></button>`;
+        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-button-flat-base k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon(className)}</button>`;
 
     function button(options) {
         return options.template( {
@@ -53,7 +54,7 @@ var __meta__ = {
 
     function icon(className, text, wrapClassName, id, size) {
         return iconTemplate({
-            className: className.substring(1),
+            className: className,
             text: text,
             wrapClassName: wrapClassName || "",
             id: id || "",
@@ -61,8 +62,8 @@ var __meta__ = {
         });
     }
 
-    function update(element, selector, page, disabled) {
-       element.find(selector)
+    function update(element, className, page, disabled) {
+       element.find(`[class*="-i-${className}"]`)
               .parent()
               .attr(kendo.attr("page"), page)
               .attr("tabindex", disabled ? -1 : 0)
@@ -220,7 +221,7 @@ var __meta__ = {
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
                     that.element.append('<button role="button" href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-button-flat-base k-icon-button" title="' + options.messages.refresh +
-                        '" aria-label="' + options.messages.refresh + '"><span class="k-icon k-i-arrow-rotate-cw"></span></button>');
+                        '" aria-label="' + options.messages.refresh + '">' + kendo.ui.icon("arrow-rotate-cw") + '</button>');
                 }
 
                 that.element.on(CLICK + NS, ".k-pager-refresh", that._refreshClick.bind(that));

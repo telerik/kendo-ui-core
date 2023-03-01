@@ -268,7 +268,7 @@
                 }
             });
 
-            dialog.wrapper.find(".k-i-x").click();
+            dialog.wrapper.find(".k-i-x,.k-svg-i-x").click();
         });
 
         it("closing a modal window moves overlay below previous window", function(done) {
@@ -623,7 +623,7 @@
             assert.isOk(dialog.options.visible);
         });
 
-        it("open() adds k-display-inline-flex class to wrapper", function() {
+        it("open() adds inline-flex display to wrapper", function() {
             var dialog = createWindow({
                 visible: false,
                 animation: false
@@ -631,7 +631,7 @@
 
             dialog.open();
 
-            assert.isOk(dialog.wrapper.hasClass("k-display-inline-flex"));
+            assert.equal(dialog.wrapper[0].style['display'], "inline-flex");
         });
 
         it("close() sets options.visible", function() {
@@ -675,13 +675,13 @@
                 actions: ["Pin"]
             });
 
-            assert.equal(dialog.wrapper.find(".k-i-pin").length, 1);
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-pin,.k-svg-i-pin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 0);
 
             dialog.pin();
 
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 1);
-            assert.equal(dialog.wrapper.find(".k-i-pin").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-pin,.k-svg-i-pin").length, 0);
         });
 
         it("pin() substracts the browser scroll position from the wrapper's top and left styles", function() {
@@ -789,13 +789,13 @@
                 pinned: true
             });
 
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 1);
-            assert.equal(dialog.wrapper.find(".k-i-pin").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-pin,.k-svg-i-pin").length, 0);
 
             dialog.unpin();
 
-            assert.equal(dialog.wrapper.find(".k-i-pin").length, 1);
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-pin,.k-svg-i-pin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 0);
         });
 
         it("unpin() adds the browser scroll position to the wrapper's top and left styles", function() {
@@ -933,7 +933,7 @@
 
             dialog.maximize();
 
-            assert.equal(dialog.wrapper.find(".k-i-pin:visible").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-pin:visible,.k-svg-i-pin:visible").length, 0);
         });
 
         it("maximize() hides the maximize icon", function() {
@@ -946,7 +946,7 @@
             dialog.maximize();
 
             assert.equal(
-                dialog.wrapper.find(".k-i-window:visible").length,
+                dialog.wrapper.find(".k-i-window:visible,.k-svg-i-window:visible").length,
                 0
             );
         });
@@ -961,7 +961,7 @@
             dialog.maximize();
 
             assert.equal(
-                dialog.wrapper.find(".k-i-window-restore:visible").length,
+                dialog.wrapper.find(".k-i-window-restore:visible,.k-svg-i-window-restore:visible").length,
                 1
             );
         });
@@ -988,7 +988,7 @@
             dialog.maximize();
             dialog.restore();
 
-            assert.equal(dialog.wrapper.find(".k-i-pin:visible").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-pin:visible,.k-svg-i-pin:visible").length, 1);
         });
 
         it("restore() removes the k-window-maximized class", function() {
@@ -1344,7 +1344,7 @@
                 actions: ["Minimize", "Close"]
             });
 
-            assert.equal(dialog.wrapper.find(".k-i-window-minimize").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-window-minimize,.k-svg-i-window-minimize").length, 1);
         });
 
         it("toFront does not scroll page when windows are pinned", function() {

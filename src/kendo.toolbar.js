@@ -3,13 +3,14 @@ import "./kendo.splitbutton.js";
 import "./kendo.dropdownbutton.js";
 import "./kendo.buttongroup.js";
 import "./kendo.menu.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "toolbar",
     name: "ToolBar",
     category: "web",
     description: "The ToolBar widget displays one or more command buttons divided into groups.",
-    depends: [ "core", "splitbutton", "dropdownbutton", "buttongroup", "menu" ]
+    depends: [ "core", "splitbutton", "dropdownbutton", "buttongroup", "menu", "icons" ]
 };
 
 (function($, undefined) {
@@ -131,7 +132,7 @@ var __meta__ = {
 
     var SAFE_COMPONENTS = [ "Button", "SplitButton", "DropDownButton", "ButtonGroup", "Switch", "ColorPicker" ];
 
-    var POPUP_BUTTON_TEMPLATE = '<button class="k-popup-button"><span class="k-button-icon k-icon k-icon"></span><span class="k-button-text"><span class="k-icon k-i-arrow-s"></span></span></button>';
+    var POPUP_BUTTON_TEMPLATE = `<button class="k-popup-button"><span class="k-button-icon k-icon"></span><span class="k-button-text">${kendo.ui.icon("caret-alt-down")}</span></button>`;
     var TEMPLATE_WRAPPER = "<div class='k-toolbar-item' aria-keyshortcuts='Enter'></div>";
     var CUSTOM_WIDGET_WRAP = "<span class='k-toolbar-tool k-toolbar-item' tabindex='0'>";
     var SEPARATOR_OVERFLOW_EL = "<li role='separator' class='k-separator k-menu-separator k-hidden'></li>";
@@ -653,7 +654,7 @@ var __meta__ = {
             menuitem = that.overflowMenu.element.find(DOT + MENU_ITEM).last();
 
             if (options.icon) {
-                menuitem.find(DOT + MENU_LINK).prepend('<span class="k-icon k-i-' + options.icon + '"></span>');
+                menuitem.find(DOT + MENU_LINK).prepend(kendo.ui.icon(options.icon));
             }
 
             if (component === "ToggleButton" || (component === "Button" && options.togglable === true)) {
@@ -714,7 +715,6 @@ var __meta__ = {
                 component = options.popupComponent,
                 popup, chooser;
 
-            widgetElement.find(DOT + BUTTON_ICON).first().addClass("k-i-" + options.icon);
             widgetElement.attr(ARIA_LABEL, options.text);
 
             popup = $("<div/>").appendTo($("<body>")).kendoPopup({
@@ -891,6 +891,7 @@ var __meta__ = {
             } else if (options.type === "open") {
                 widgetElement.addClass(UPLOAD_BUTTON);
                 this._resetOpen(widgetElement, options.extensions);
+                element = widgetElement.parent();
             } else {
                 widget.chooser = popupRef.chooser;
                 widget.popup = popupRef.popup;
@@ -1603,9 +1604,11 @@ var __meta__ = {
 
         _resetOpen: function(element, extensions) {
             var that = this,
+                uploadWrapper,
                 input;
 
-            element.find("input").remove();
+            element.closest(".k-upload-button-wrap").find("input").remove();
+            uploadWrapper = element.wrap("<div class='k-upload-button-wrap'></span>").parent();
 
             input = $("<input type='file' autocomplete='off' accept='" + extensions + "'/>")
                 .attr("aria-hidden", true)
@@ -1617,7 +1620,7 @@ var __meta__ = {
 
                     that._resetOpen(element, extensions);
                 })
-                .appendTo(element);
+                .appendTo(uploadWrapper);
 
             element.off(KEYDOWN).on(KEYDOWN, (e) => {
                 if (e.keyCode === kendo.keys.ENTER) {

@@ -178,7 +178,7 @@
 
         menu.dataSource.view()[0].load();
 
-        var expandArrow = menu.element.find(".k-menu-group .k-icon");
+        var expandArrow = menu.element.find(".k-menu-group .k-icon, .k-menu-group .k-svg-icon");
 
         assert.isOk(expandArrow.hasClass("k-menu-expand-arrow-icon"));
     });

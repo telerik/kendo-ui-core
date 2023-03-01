@@ -384,25 +384,25 @@
         it("shows prev button", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.equal(pager.find(".k-i-caret-alt-left").length, 1);
+            assert.equal(pager.find(".k-i-caret-alt-left,.k-svg-i-caret-alt-left").length, 1);
         });
 
         it("shows first button", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.equal(pager.find(".k-pager-first .k-i-caret-alt-to-left").length, 1);
+            assert.equal(pager.find(".k-pager-first .k-i-caret-alt-to-left,.k-pager-first .k-svg-i-caret-alt-to-left").length, 1);
         });
 
         it("shows next button", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.equal(pager.find(".k-i-caret-alt-right").length, 1);
+            assert.equal(pager.find(".k-i-caret-alt-right,.k-svg-i-caret-alt-right").length, 1);
         });
 
         it("shows last button", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.equal(pager.find(".k-pager-last .k-i-caret-alt-to-right").length, 1);
+            assert.equal(pager.find(".k-pager-last .k-i-caret-alt-to-right,.k-pager-last .k-svg-i-caret-alt-to-right").length, 1);
         });
 
         it("first button is disabled on the first page", function() {
@@ -422,7 +422,7 @@
         it("prev button is disabled on the first page", function() {
             var pager = setup({}, { previousNext: true });
 
-            assert.isOk(pager.find(".k-i-caret-alt-left").parent().hasClass("k-disabled"));
+            assert.isOk(pager.find(".k-i-caret-alt-left,.k-svg-i-caret-alt-left").parent().hasClass("k-disabled"));
         });
 
         it("prev button is enabled on any page but first", function() {
@@ -440,7 +440,7 @@
             dataSource.read();
             dataSource.page(3);
 
-            assert.equal(pager.find(".k-i-caret-alt-left").parent().data(kendo.ns + "page"), 2);
+            assert.equal(pager.find(".k-i-caret-alt-left,.k-svg-i-caret-alt-left").parent().data(kendo.ns + "page"), 2);
         });
 
         it("next button is disabled on the last page", function() {
@@ -448,14 +448,14 @@
 
             dataSource.read();
             dataSource.page(5);
-            assert.isOk(pager.find(".k-i-caret-alt-right").parent().hasClass("k-disabled"));
+            assert.isOk(pager.find(".k-i-caret-alt-right,.k-svg-i-caret-alt-right").parent().hasClass("k-disabled"));
         });
 
         it("next button is enabled on any page but last", function() {
             var pager = setup({}, { previousNext: true });
 
             dataSource.read();
-            assert.isOk(!pager.find(".k-i-caret-alt-right").parent().hasClass("k-disabled"));
+            assert.isOk(!pager.find(".k-i-caret-alt-right,.k-svg-i-caret-alt-right").parent().hasClass("k-disabled"));
         });
 
         it("next button page data attribute is set to page plus one", function() {
@@ -464,7 +464,7 @@
             dataSource.read();
             dataSource.page(3);
 
-            assert.equal(pager.find(".k-i-caret-alt-right").parent().data(kendo.ns + "page"), 4);
+            assert.equal(pager.find(".k-i-caret-alt-right,.k-svg-i-caret-alt-right").parent().data(kendo.ns + "page"), 4);
         });
 
         it("last button is disabled on the last page", function() {
@@ -681,14 +681,14 @@
         it("displays refresh button", function() {
             var pager = setup({}, { refresh: true });
 
-            assert.equal(pager.find(".k-i-arrow-rotate-cw").length, 1);
+            assert.equal(pager.find(".k-i-arrow-rotate-cw,.k-svg-i-arrow-rotate-cw").length, 1);
         });
 
         it("refresh button inherits size", function() {
             var pager = setup({}, { refresh: true, size:"small" });
 
-            assert.equal(pager.find(".k-i-arrow-rotate-cw").length, 1);
-            assert.isOk(pager.find(".k-i-arrow-rotate-cw").parent().hasClass("k-button-sm"));
+            assert.equal(pager.find(".k-i-arrow-rotate-cw,.k-svg-i-arrow-rotate-cw").length, 1);
+            assert.isOk(pager.find(".k-i-arrow-rotate-cw,.k-svg-i-arrow-rotate-cw").parent().hasClass("k-button-sm"));
         });
 
         it("clicking the refresh button reads from the data source", function() {
@@ -701,7 +701,7 @@
                 }
             });
 
-            pager.find(".k-i-arrow-rotate-cw").click();
+            pager.find(".k-i-arrow-rotate-cw,.k-svg-i-arrow-rotate-cw").click();
 
             assert.equal(dataSource.calls("read"), 1);
         });

@@ -308,7 +308,7 @@
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            dialog.wrapper.find(".k-dialog-actions .k-button").click();
             assert.isOk(!dialog.options.visible);
             assert.isOk(!dialog.wrapper.is(":visible"));
         });
@@ -323,7 +323,7 @@
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            dialog.wrapper.find(".k-dialog-actions .k-button").click();
             assert.isOk(dialog.options.visible);
             assert.isOk(dialog.wrapper.is(":visible"));
         });
@@ -342,7 +342,7 @@
                 ]
             });
 
-            assert.equal(dialog.wrapper.find(".k-dialog-buttongroup .k-button").length, 2);
+            assert.equal(dialog.wrapper.find(".k-dialog-actions .k-button").length, 2);
         });
 
         it("setOptions modifies title", function() {

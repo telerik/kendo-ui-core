@@ -40,7 +40,7 @@ The TabStrip is used inside a mobile view or layout footer element to display an
                         items.Add().Icon("contacts").Text("Profile");
                         items.Add().Icon("history").Text("Sales");
                         items.Add().Icon("favorites").Text("Rating");
-                        items.Add().Icon("settings").Text("Settings");
+                        items.Add().Icon("wrench").Text("Settings");
                     })
                 )
 
@@ -68,7 +68,7 @@ The following example demonstrates how to subscribe to events by a handler name.
             items.Add().Icon("contacts").Text("Profile");
             items.Add().Icon("history").Text("Sales");
             items.Add().Icon("favorites").Text("Rating");
-            items.Add().Icon("settings").Text("Settings");
+            items.Add().Icon("wrench").Text("Settings");
         })
         .Events(events => events
             .Select("onSelect")
@@ -92,7 +92,7 @@ You can reference a hybrid TabStrip instance by using the [`jQuery.data()`](http
             items.Add().Icon("contacts").Text("Profile");
             items.Add().Icon("history").Text("Sales");
             items.Add().Icon("favorites").Text("Rating");
-            items.Add().Icon("settings").Text("Settings");
+            items.Add().Icon("wrench").Text("Settings");
         })
     )
     <script>

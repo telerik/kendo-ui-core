@@ -362,8 +362,8 @@ var __meta__ = {
             var that = this;
             var notInput = e.target.nodeName.toLowerCase() !== "input";
             var target = $(e.target);
-            var closeButton = target.closest(".k-multiselect-toggle-button, .k-chip").children(".k-i-caret-alt-down")[0];
-            var removeButton = target.closest(".k-i-x, .k-i-x-circle")[0];
+            var closeButton = target.closest(".k-multiselect-toggle-button, .k-chip").children("[class*='-i-caret-alt-down']")[0];
+            var removeButton = target.closest("[class*='-i-x']")[0];
 
             if (notInput && !(removeButton && kendo.support.mobileOS) && e.cancelable) {
                 e.preventDefault();
@@ -475,7 +475,7 @@ var __meta__ = {
             e.stopPropagation();
             var target = $(e.currentTarget);
 
-            if (target.is(".k-i-x-circle")) {
+            if (target.is("[class*='-i-x-circle']")) {
                 this._removeTag(target.closest(CHIP), true);
             }
         },
@@ -567,7 +567,7 @@ var __meta__ = {
                 tagList
                     .on(MOUSEENTER, CHIP, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, CHIP, function() { $(this).removeClass(HOVERCLASS); })
-                    .on(CLICK + " touchend" + ns, ".k-chip .k-icon", that._tagListClick.bind(that));
+                    .on(CLICK + " touchend" + ns, ".k-chip .k-icon,.k-chip .k-svg-icon", that._tagListClick.bind(that));
             } else {
 
                 wrapper.toggleClass(STATEDISABLED, disable)

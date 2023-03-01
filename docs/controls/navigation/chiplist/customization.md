@@ -25,8 +25,8 @@ To define a custom attributes for the Chip inside the ChipList, use the [`items.
         $('#chiplist').kendoChipList({
             items: [
                 { text: "Home", icon: "home", attributes: { "data-val" : "custom data attribute" } },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>

@@ -122,14 +122,14 @@
         it("click on a toggleButton's icon changes the button state", function() {
             container.kendoToolBar({
                 items: [
-                    { type: "button", togglable: true, id: "foo", icon: "foo" }
+                    { type: "button", togglable: true, id: "foo", icon: "plus" }
                 ]
             });
 
             var button = container.find("#foo");
             assert.isOk(!button.hasClass("k-selected"));
 
-            click(container.find("span.k-i-foo"));
+            click(container.find("span.k-i-plus, span.k-svg-i-plus"));
             assert.isOk(button.hasClass("k-selected"), "Button receives k-selected class after click");
         });
 

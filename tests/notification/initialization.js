@@ -107,8 +107,7 @@
 
             var defaultFunc = notification._getCompiled();
             var params = { typeIcon: "info", content: "foo", closeButton: false };
-            var defaultOutput = '<span class="k-icon k-i-info" title="info"></span><div class="k-notification-content">foo</div>';
-
+            var defaultOutput = '<span title="info" class="k-svg-icon k-svg-i-info-circle"><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M288 352h32v32H192v-32h32v-96h-32v-32h96v128zm0-224h-64v64h64v-64zm192 128c0 123.7-100.3 224-224 224S32 379.7 32 256 132.3 32 256 32s224 100.3 224 224zm-32 0c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"></path></svg></span><div class="k-notification-content">foo</div>';
             assert.equal(typeof defaultFunc, "function");
             assert.equal(defaultFunc(params), defaultOutput);
         });
@@ -284,7 +283,7 @@
 
             setTimeout(function() {
                 var notificationPopup = $(".k-notification");
-                var closeIcon = notificationPopup.find(".k-i-x");
+                var closeIcon = notificationPopup.find(".k-close-icon");
                 assert.isTrue(!closeIcon.length);
                 done();
             }, 400);
@@ -308,7 +307,7 @@
 
             notification.show("foo");
 
-            assert.isOk($(".k-notification").find(".k-i-x").is(":visible"));
+            assert.isOk($(".k-notification").find(".k-close-icon").is(":visible"));
         });
 
         it("clicking on static notification hides it when button is pressed", function() {
@@ -321,7 +320,7 @@
 
             notification.show("foo");
 
-            $(".k-notification").find(".k-i-x").click();
+            $(".k-notification").find(".k-close-icon").click();
 
             assert.equal($(".k-notification").length, 0);
         });
@@ -335,7 +334,7 @@
 
             notification.show("foo");
 
-            $(".k-notification").find(".k-i-x").click();
+            $(".k-notification").find(".k-close-icon").click();
 
             assert.equal($(".k-notification").length, 0);
         });
@@ -690,13 +689,13 @@
 
             notification.show("foo");
 
-            $(".k-notification").find(".k-i-x").click();
+            $(".k-notification").find(".k-close-icon").click();
 
             assert.equal($(".k-notification").length, 1);
 
             setTimeout(function() {
 
-                $(".k-notification").find(".k-i-x").click();
+                $(".k-notification").find(".k-close-icon").click();
                 assert.equal($(".k-notification").length, 0);
 
                 done();
@@ -744,7 +743,7 @@
 
             notification.show("foo");
 
-            assert.isOk(notification.element.find(".k-notification-actions .k-notification-close-action .k-i-x").length);
+            assert.isOk(notification.element.find(".k-notification-actions .k-notification-close-action .k-close-icon").length);
         });
 
     });

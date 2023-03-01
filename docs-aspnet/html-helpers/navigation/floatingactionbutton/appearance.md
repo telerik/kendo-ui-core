@@ -43,7 +43,7 @@ The `Icon` configuration option specifies the name of an icon. The selected icon
         .Icon("plus")
         .Items(items=>{
             items.Add().Icon("star").Label("Add Rating");
-            items.Add().Icon("edit").Label("Add comment");
+            items.Add().Icon("pencil").Label("Add comment");
         })
     )
 ```

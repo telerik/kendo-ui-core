@@ -9,11 +9,11 @@ position: 1
 
 # Fundamentals
 
-Telerik UI for ASP.NET MVC is a set of server-side wrappers (HTML helpers) that allow you to use the Kendo UI widgets in .NET MVC.
+Telerik UI for ASP.NET MVC is a set of server-side wrappers (HTML helpers) that allow you to use the Kendo UI components in .NET MVC.
 
-For more information on the difference between helpers and widgets, refer to the [Telerik UI for ASP.NET MVC introduction article]({% slug knownissues_aspnetmvc6_aspnetmvc %}#widgets-vs-helpers).
+For more information on the difference between helpers and components, refer to the [Telerik UI for ASP.NET MVC introduction article]({% slug knownissues_aspnetmvc6_aspnetmvc %}#components-vs-helpers).
 
-As of the jQuery 3.0 release, the [document-ready handlers are called asynchronously](https://demos.telerik.com/kendo-ui/). As a result, regardless of whether the document is ready at the point of execution or not, the code placed outside a document-ready handler is executed before the code within the handler. This change affects the usage of the Telerik UI for ASP.NET MVC components because the widgets for the MVC helpers are initialized in a document-ready handler. This means that after the jQuery 3.0 release you need to get the reference of a widget and its API calls within a document-ready handler.
+As of the jQuery 3.0 release, the [document-ready handlers are called asynchronously](https://demos.telerik.com/kendo-ui/). As a result, regardless of whether the document is ready at the point of execution or not, the code placed outside a document-ready handler is executed before the code within the handler. This change affects the usage of the Telerik UI for ASP.NET MVC components because the components for the MVC helpers are initialized in a document-ready handler. This means that after the jQuery 3.0 release you need to get the reference of a component and its API calls within a document-ready handler.
 
 ## Basic Configuration
 
@@ -43,9 +43,18 @@ Alternatively, you can use the `NumericTextBoxFor` helper method. All Telerik UI
 
 ## Deferred Initialization
 
-By default, the helpers output the widget initialization script immediately after the HTML markup of the widget. This scenario may not always be desired&mdash;for example, if the script files are registered at the bottom of the page or when you nest widgets.
+By default, the helpers output the initialization script of the component immediately after its HTML markup. This scenario may not always be desired&mdash;for example, if the script files are registered at the bottom of the page, or when you nest components.
 
-To defer the initialization:
+To defer the initialization script, apply either of the following approaches:
+
+ * [Defer only certain components](#deferring-specific-components)
+ * [Defer all components globally](#deferring-components-globally)
+
+### Deferring Specific Components
+
+> Avoid deferring child components such as editors, components initialized inside client templates, or inside ([inline or external Kendo UI templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)). Otherwise, the initialization script of each child component will appear outside the parent component.
+
+To defer individual components:
 
 1. Call the `Deferred` method of the helper. This approach suppresses the immediate rendering of the script statement.
 
@@ -54,17 +63,19 @@ To defer the initialization:
                 .Deferred()
           )
 
-1. Call the `DeferredScripts` method. As a result, all previously deferred initialization statements are output.
+1. Serialize the component initialization script by using any of the following methods:
+
+* Call the `DeferredScripts` method. As a result, all previously deferred initialization statements will be output as an inline script.
 
           @Html.Kendo().DeferredScripts()
 
-  The `DeferredScripts` method accepts a Boolean parameter which determines whether script elements will be automatically rendered. This behavior is useful for rendering the deferred initialization scripts inside existing script element.
+    The `DeferredScripts` method accepts a `Boolean` parameter which determines whether script elements will be automatically rendered. This behavior is useful for rendering the deferred initialization scripts inside existing script element.
 
           <script>
               @Html.Kendo().DeferredScripts(false)
           </script>
 
-1. Render the deferred initialization script of a particular helper by using the `DeferredScriptsFor` method.
+    To render the deferred initialization script of a particular helper, use the `DeferredScriptsFor` method.
 
           @(Html.Kendo().NumericTextBox()
                 .Name("age")
@@ -73,11 +84,91 @@ To defer the initialization:
           <!-- other code -->
           @Html.Kendo().DeferredScriptsFor("age")
 
-  You can also use the `DeferredScriptsFor` method to suppress the output of `script` elements around the initialization script.
+    You can also use the `DeferredScriptsFor` method to suppress the output of `script` elements around the initialization script.
 
         <script>
         @Html.Kendo().DeferredScriptsFor("age", false)
         </script>
+
+* Use the `DeferredScriptFile` method to serialize the deferred initialization script to a file.
+
+          @Html.Kendo().DeferredScriptFile()
+
+
+### Deferring Components Globally
+
+As of the R1 2023 SP1 release, you can configure a global option to defer the initialization scripts of all components in your application and avoid setting the deferred option for every component.
+
+To defer components globally:
+
+1. Enable the `DeferToScriptFiles` setting in the `Global.asax.cs` file.
+
+    ```
+        KendoMvc.Setup(x =>
+        {
+            x.DeferToScriptFiles = true;
+        });
+    ```
+
+1. Configure a `HttpModule` in the `Web.config` file that returns the cached scripts when the browser request them.
+
+    ```
+    <configuration>
+        ...
+        <system.webServer>
+            <modules>
+                <add name="KendoDeferredScriptsModule" type="Kendo.Mvc.KendoDeferredScriptsModule"  />
+            </modules>
+        </system.webServer>
+        ...
+    </configuration>
+    ```
+
+1. Serialize the script tag into a file by adding `@(Html.Kendo().DeferredScriptFile())` after all components declarations. Any components registered after it will not be included in the script.
+
+    Alternatively, call the `DeferredScripts` method to format the components scripts as inline script.
+
+    ```Serialization_to_file
+        @(Html.Kendo().DeferredScriptFile())
+    ```
+    ```Serialization_to_inline_script
+        @Html.Kendo().DeferredScripts()
+    ```
+
+If a component contains child components, such as editors or components defined inside client templates or partial views, and the global deferring is enabled, add the `AsChildComponent()` option in the helper configuration of each child component.
+
+> If the components are deferred through the global setting, you must add `AsChildComponent()` option to all child components.
+
+The following example demonstrates how to add the `AsChildComponent()` option to a [DateTimePicker]({% slug htmlhelpers_datetimepicker_aspnetcore %}) editor displayed in a globally deferred [Form]({% slug htmlhelpers_form_aspnetcore_overview %}) component.
+
+```HtmlHelper
+    @(Html.Kendo().Form<MyApplication.Models.FormItemsViewModels>()
+        .Name("exampleForm")
+        .HtmlAttributes(new { action = "Items", method = "POST" })
+        .Items(item =>
+        {
+            item.Add()
+            .Field(f => f.StartDate)
+            .Label(l => l.Text("Start date:"))
+            .Editor(e => e.DateTimePicker()
+                .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+                .DateInput()
+                .AsChildComponent()
+            );
+        })
+    )
+
+    @(Html.Kendo().DeferredScriptFile())
+```
+
+Another example of child components is the default [Grid editors]({% slug editortemplates_grid_aspnetcore %}), which are located in the `~/Views/Shared/EditorTemplates` folder. Ensure that each editor template used in the Grid has the `AsChildComponent()` method at the end of its configuration.
+
+```String.cshtml
+    @model object
+
+    @Html.Kendo().TextBoxFor(model => model).AsChildComponent()
+
+```
 
 ## Event Handling
 
@@ -106,7 +197,7 @@ To subscribe to the client-side events that are exposed by a helper, use the `Ev
 
 ## Referencing Client-Side Objects
 
-You can get a reference to the client-side object that is initialized by the helper through the [`data`](http://api.jquery.com/data/) jQuery method. Use the `Name` of the widget in an `ID` jQuery selector, and obtain the reference in a `document.ready` handler which is placed or called after the widget is declared. This ensures that the widget is already initialized and the client-side object exists. After you get the object reference, use the client-side API of the widget.
+You can get a reference to the client-side object that is initialized by the helper through the [`data`](http://api.jquery.com/data/) jQuery method. Use the `Name` of the component in an `ID` jQuery selector, and obtain the reference in a `document.ready` handler which is placed or called after the component is declared. This ensures that the component is already initialized and the client-side object exists. After you get the object reference, use the client-side API of the component.
 
     @(Html.Kendo().NumericTextBox()
         .Name("age")
@@ -119,7 +210,7 @@ You can get a reference to the client-side object that is initialized by the hel
     });
     </script>
 
-If you have deferred the initialization of the widget, make sure you get its instance after calling `DeferredScripts` or `DeferredScriptsFor`.
+If you have deferred the initialization of the component, make sure you get its instance after calling `DeferredScripts`, `DeferredScriptsFor` or `DeferredScriptFile`.
 
     @(Html.Kendo().NumericTextBox()
         .Name("age")

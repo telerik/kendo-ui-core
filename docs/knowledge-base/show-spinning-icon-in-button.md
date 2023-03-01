@@ -58,7 +58,7 @@ How can I add a spinning icon to the Kendo UI Button?
 <script>
     $(document).ready(function() {
         $("#primaryTextButton").kendoButton({
-        icon: "refresh"
+        icon: "arrow-rotate-cw"
         });
     });
 </script>

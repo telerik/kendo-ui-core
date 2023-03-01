@@ -34,7 +34,7 @@ The BottomNavigation provides a set of default API configuration options that ca
 
         <kendo:bottomNavigation name="bottomNavigation" positionMode="absolute">
 	            <kendo:bottomNavigation-items>
-	            	<kendo:bottomNavigation-item text="Inbox"  icon="email" data="<%=inboxData %>" selected="true" template='<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top: 2px; left: 55px"></span>'></kendo:bottomNavigation-item>
+	            	<kendo:bottomNavigation-item text="Inbox"  icon="envelop" data="<%=inboxData %>" selected="true" template='<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top: 2px; left: 55px"></span>'></kendo:bottomNavigation-item>
 	            	<kendo:bottomNavigation-item text="Calendar"  icon="calendar-date" data="<%=calendarData %>"></kendo:bottomNavigation-item>
 	            	<kendo:bottomNavigation-item text="Profile"  icon="user" data="<%=profileData %>"></kendo:bottomNavigation-item>
 	           	</kendo:bottomNavigation-items>
@@ -42,13 +42,13 @@ The BottomNavigation provides a set of default API configuration options that ca
 
 ## Items
 
-The Kendo UI BottomNavigation's items configuration allows setting various properties. For the full set, refer to the [API reference](api/javascript/ui/bottomnavigation/configuration/items). 
+The Kendo UI BottomNavigation's items configuration allows setting various properties. For the full set, refer to the [API reference](api/javascript/ui/bottomnavigation/configuration/items).
 
 > **Note:** When the `items.url` configuration is set, the items will be rendered as `<a>` tags. Otherwise, they will be rendered as `<span>` tags.
 
         <kendo:bottomNavigation name="bottomNavigation" positionMode="absolute">
 	            <kendo:bottomNavigation-items>
-	            	<kendo:bottomNavigation-item text="Inbox" url="#inbox" icon="email" data="<%=inboxData %>" selected="true" template='<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top: 2px; left: 55px"></span>'></kendo:bottomNavigation-item>
+	            	<kendo:bottomNavigation-item text="Inbox" url="#inbox" icon="envelop" data="<%=inboxData %>" selected="true" template='<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top: 2px; left: 55px"></span>'></kendo:bottomNavigation-item>
 	            	<kendo:bottomNavigation-item text="Calendar" url="#calendar" enabled="false" icon="calendar-date" data="<%=calendarData %>"></kendo:bottomNavigation-item>
 	            	<kendo:bottomNavigation-item text="Profile" icon="user" data="<%=profileData %>"></kendo:bottomNavigation-item>
 	           	</kendo:bottomNavigation-items>
@@ -56,11 +56,11 @@ The Kendo UI BottomNavigation's items configuration allows setting various prope
 
 ## Appearance
 
-The Kendo UI BottomNavigation for JSP allows you to alter the appearance of the component by setting the `itemFlow`, `themeColor`, `shadow` `border` and `fill`. 
+The Kendo UI BottomNavigation for JSP allows you to alter the appearance of the component by setting the `itemFlow`, `themeColor`, `shadow` `border` and `fill`.
 
         <kendo:bottomNavigation name="bottomNavigation" positionMode="absolute" itemFlow="horizontal" themeColor="secondary" border="false" shadow="true" fill="solid">
 	            <kendo:bottomNavigation-items>
-	            	<kendo:bottomNavigation-item text="Inbox"  icon="email" data="<%=inboxData %>" selected="true" template='<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top: 2px; left: 55px"></span>'></kendo:bottomNavigation-item>
+	            	<kendo:bottomNavigation-item text="Inbox"  icon="envelop" data="<%=inboxData %>" selected="true" template='<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top: 2px; left: 55px"></span>'></kendo:bottomNavigation-item>
 	            	<kendo:bottomNavigation-item text="Calendar" icon="calendar-date" data="<%=calendarData %>"></kendo:bottomNavigation-item>
 	            	<kendo:bottomNavigation-item text="Profile" icon="user" data="<%=profileData %>"></kendo:bottomNavigation-item>
 	           	</kendo:bottomNavigation-items>
@@ -74,7 +74,7 @@ You can subscribe to the [events exposed by Kendo UI BottomNavigation](/api/java
 
     <kendo:bottomNavigation name="bottomNavigation" positionMode="absolute" select="onSelect">
             <kendo:bottomNavigation-items>
-                <kendo:bottomNavigation-item text="Inbox"  icon="email" data="<%=inboxData %>" selected="true"></kendo:bottomNavigation-item>
+                <kendo:bottomNavigation-item text="Inbox"  icon="envelop" data="<%=inboxData %>" selected="true"></kendo:bottomNavigation-item>
                 <kendo:bottomNavigation-item text="Calendar"  icon="calendar-date" data="<%=calendarData %>"></kendo:bottomNavigation-item>
                 <kendo:bottomNavigation-item text="Profile"  icon="user" data="<%=profileData %>"></kendo:bottomNavigation-item>
             </kendo:bottomNavigation-items>
@@ -83,7 +83,7 @@ You can subscribe to the [events exposed by Kendo UI BottomNavigation](/api/java
 	    function onSelect(e) {
 	       // handle the BottomNavigation select event
 	    }
-      
+
     </script>
 ## Reference
 
@@ -93,12 +93,12 @@ You are able to reference an existing BottomNavigation instance via the [`jQuery
 
     <kendo:bottomNavigation name="bottomNavigation" positionMode="absolute" select="onSelect">
             <kendo:bottomNavigation-items>
-                <kendo:bottomNavigation-item text="Inbox"  icon="email" data="<%=inboxData %>" selected="true"></kendo:bottomNavigation-item>
+                <kendo:bottomNavigation-item text="Inbox"  icon="envelop" data="<%=inboxData %>" selected="true"></kendo:bottomNavigation-item>
                 <kendo:bottomNavigation-item text="Calendar"  icon="calendar-date" data="<%=calendarData %>"></kendo:bottomNavigation-item>
                 <kendo:bottomNavigation-item text="Profile"  icon="user" data="<%=profileData %>">
             </kendo:bottomNavigation-item>
     </kendo:bottomNavigation-items>
-    
+
     // Put this after your Kendo BottomNavigation tag declaration
     <script>
     $(function() {

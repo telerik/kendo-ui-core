@@ -34,17 +34,17 @@
             var splitButton = new SplitButton(button, { items: defaultItems });
             var arrowBtn = button.next();
             var arrowIcon = arrowBtn.children().eq(0);
-            assert.isOk(arrowIcon.hasClass("k-icon"));
-            assert.isOk(arrowIcon.hasClass("k-i-caret-alt-down"));
+            assert.isOk(arrowIcon.is(".k-icon, .k-svg-icon"));
+            assert.isOk(arrowIcon.is(".k-i-caret-alt-down, .k-svg-i-caret-alt-down"));
         });
 
         it("SplitButton renders arrow button with custom icon", function() {
             var splitButton = new SplitButton(button, { items: defaultItems, arrowIcon: "caret-alt-up" });
             var arrowBtn = button.next();
             var arrowIcon = arrowBtn.children().eq(0);
-            assert.isOk(arrowIcon.hasClass("k-icon"));
+            assert.isOk(arrowIcon.is(".k-icon, .k-svg-icon"));
             assert.isNotOk(arrowIcon.hasClass("k-i-arrow-s"));
-            assert.isOk(arrowIcon.hasClass("k-i-caret-alt-up"));
+            assert.isOk(arrowIcon.is(".k-i-caret-alt-up, .k-svg-i-caret-alt-up"));
         });
 
         it("SplitButton renders button with text", function() {
@@ -56,8 +56,8 @@
         it("SplitButton renders button with icon and text", function() {
             var splitButton = new SplitButton(button, { icon: "gear", items: defaultItems });
 
-            assert.isOk(button.children().eq(0).hasClass("k-icon"));
-            assert.isOk(button.children().eq(0).hasClass("k-i-gear"));
+            assert.isOk(button.children().eq(0).is(".k-icon, .k-svg-icon"));
+            assert.isOk(button.children().eq(0).is(".k-i-gear, .k-svg-i-gear"));
             assert.equal(button.children().eq(1).text(), "Button");
         });
 

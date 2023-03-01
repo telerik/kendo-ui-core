@@ -64,7 +64,7 @@ Next, use the `Items()` method to specify the items that you want to render in t
         {
             items.Add().Label("Download").Icon("download");
             items.Add().Label("Print").Icon("print");
-            items.Add().Label("Email").Icon("email");
+            items.Add().Label("Email").Icon("envelop");
         }))
 ```
 {% if site.core %}
@@ -75,14 +75,14 @@ Next, use the `Items()` method to specify the items that you want to render in t
                                 align="FloatingActionButtonAlign.TopCenter"
                                 icon="share">
         <floatingactionbutton-items>
-            <floatingactionbutton-item label="Download" 
+            <floatingactionbutton-item label="Download"
                                         icon="download">
             </floatingactionbutton-item>
             <floatingactionbutton-item label="Print"
                                         icon="print">
             </floatingactionbutton-item>
             <floatingactionbutton-item label="Email"
-                                        icon="email">
+                                        icon="envelop">
             </floatingactionbutton-item>
         </floatingactionbutton-items>
     </kendo-floatingactionbutton>
@@ -106,7 +106,7 @@ To change the [appearance]({% slug htmlhelpers_appearance_floatingactionbutton_a
         {
             items.Add().Label("Download").Icon("download");
             items.Add().Label("Print").Icon("print");
-            items.Add().Label("Email").Icon("email");
+            items.Add().Label("Email").Icon("envelop");
         }))
 ```
 {% if site.core %}
@@ -119,14 +119,14 @@ To change the [appearance]({% slug htmlhelpers_appearance_floatingactionbutton_a
                                 size="FloatingActionButtonSize.Medium"
                                 icon="share">
         <floatingactionbutton-items>
-            <floatingactionbutton-item label="Download" 
+            <floatingactionbutton-item label="Download"
                                         icon="download">
             </floatingactionbutton-item>
             <floatingactionbutton-item label="Print"
                                         icon="print">
             </floatingactionbutton-item>
             <floatingactionbutton-item label="Email"
-                                        icon="email">
+                                        icon="envelop">
             </floatingactionbutton-item>
         </floatingactionbutton-items>
     </kendo-floatingactionbutton>
@@ -142,7 +142,7 @@ The FloatingActionButton [exposes the `Click()`, `Expand()`, and `Collapse()` ev
 
     @(Html.Kendo().FloatingActionButton()
         .Name("fab")
-        .Align(FloatingActionButtonAlign.TopCenter)    
+        .Align(FloatingActionButtonAlign.TopCenter)
         .ThemeColor(FloatingActionButtonThemeColor.Primary)
         .Size(FloatingActionButtonSize.Medium)
         .Icon("share")
@@ -150,7 +150,7 @@ The FloatingActionButton [exposes the `Click()`, `Expand()`, and `Collapse()` ev
         {
             items.Add().Label("Download").Icon("download").Click("onItemClick");
             items.Add().Label("Print").Icon("print").Click("onItemClick");
-            items.Add().Label("Email").Icon("email").Click("onItemClick");
+            items.Add().Label("Email").Icon("envelop").Click("onItemClick");
         })
         .Events(ev=>ev.Click("onClick").Collapse("onCollapse").Expand("onExpand"))
         )
@@ -183,7 +183,7 @@ The FloatingActionButton [exposes the `Click()`, `Expand()`, and `Collapse()` ev
                                 size="FloatingActionButtonSize.Medium"
                                 icon="share">
         <floatingactionbutton-items>
-            <floatingactionbutton-item label="Download" 
+            <floatingactionbutton-item label="Download"
                                         icon="download"
                                         click="onItemClick">
             </floatingactionbutton-item>
@@ -192,7 +192,7 @@ The FloatingActionButton [exposes the `Click()`, `Expand()`, and `Collapse()` ev
                                         click="onItemClick">
             </floatingactionbutton-item>
             <floatingactionbutton-item label="Email"
-                                        icon="email"
+                                        icon="envelop"
                                         click="onItemClick">
             </floatingactionbutton-item>
         </floatingactionbutton-items>

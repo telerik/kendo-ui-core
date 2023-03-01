@@ -59,7 +59,7 @@ The Drawer provides a slide to reveal the global mobile application toolbox or n
 
                         root.Add().Text("Account").Items(items =>
                         {
-                            items.Add().Icon("settings").Text("Settings");
+                            items.Add().Icon("wrench").Text("Settings");
                             items.Add().Icon("off").Text("Log Out");
                         });
                     })

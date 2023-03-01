@@ -438,7 +438,7 @@
 
             splitter.object.size(".k-pane:first", 60);
 
-            splitter.dom.find(".k-i-caret-alt-left").trigger("click");
+            splitter.dom.find(".k-collapse-prev").trigger("click");
 
             assert.equal(panes.eq(0).width(), 0);
         });

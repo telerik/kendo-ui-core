@@ -758,7 +758,6 @@
 
             assert.equal(anchor.hasClass("k-state-border-down"), true);
             assert.equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), true);
-            assert.equal(div.hasClass("k-state-border-up"), true);
         });
 
         it("removes direction class from the anchor and popup", function() {

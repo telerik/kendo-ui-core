@@ -121,8 +121,7 @@ it("_input create calendar button", function() {
     assert.equal(icon.attr("tabindex"), "-1");
     assert.isOk(icon.hasClass("k-input-button k-button k-icon-button k-button-md k-button-solid k-button-solid-base"));
     assert.isOk(icon.children().is("span"));
-    assert.isOk(icon.children().hasClass("k-icon k-i-calendar k-button-icon"));
-    assert.equal(icon.children().html(), "");
+    assert.isOk(icon.children().is(".k-icon.k-i-calendar.k-button-icon, .k-svg-icon.k-svg-i-calendar.k-button-icon"));
 });
 
 it("create dateview", function() {

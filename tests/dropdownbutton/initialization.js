@@ -32,8 +32,8 @@
         it("DropDownButton renders button with icon and text", function() {
             var dropDownButton = new DropDownButton(button, { icon: "gear", items: defaultItems });
 
-            assert.isOk(button.children().eq(0).hasClass("k-icon"));
-            assert.isOk(button.children().eq(0).hasClass("k-i-gear"));
+            assert.isOk(button.children().eq(0).is(".k-icon, .k-svg-icon"));
+            assert.isOk(button.children().eq(0).is(".k-i-gear, .k-svg-i-gear"));
             assert.equal(button.children().eq(1).text(), "Button");
         });
 

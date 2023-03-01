@@ -18,7 +18,7 @@ You can configure the icons by using the `icon` and `imageUrl` properties of the
   <script>
       $("#buttongroup").kendoButtonGroup({
           items: [
-              { icon: "edit" },
+              { icon: "pencil" },
               { imageUrl: "/images/myEditIcon.gif" }
           ]
       });

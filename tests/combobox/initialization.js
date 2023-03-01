@@ -90,8 +90,7 @@
             assert.isOk(button.is("button"));
             assert.isOk(button.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
-            assert.isOk(arrow.hasClass("k-icon k-i-caret-alt-down"));
-            assert.equal(arrow.html(), "");
+            assert.isOk(arrow.is(".k-icon.k-i-caret-alt-down, .k-svg-icon.k-svg-i-caret-alt-down"));
         });
 
         it("text input should keep the visible input empty on init", function() {
@@ -1071,7 +1070,7 @@
                 noDataTemplate: () => "no data"
             });
 
-            combobox.wrapper.find(".k-icon:last").click();
+            combobox.wrapper.find(".k-icon:last, .k-svg-icon:last").click();
 
             assert.isOk(combobox.popup.visible());
         });
@@ -1113,7 +1112,7 @@
             combobox.dataSource.bind("change", function() {
                 assert.isOk(false, "dataSource should not be read");
             });
-            combobox.wrapper.find(".k-icon:last").click();
+            combobox.wrapper.find(".k-i-caret-alt-down, .k-svg-i-caret-alt-down").click();
 
             assert.isOk(combobox.popup.visible());
         });
@@ -1127,7 +1126,7 @@
             combobox.dataSource.bind("change", function() {
                 assert.isOk(false, "dataSource should not be read");
             });
-            combobox.wrapper.find(".k-icon:last").click();
+            combobox.wrapper.find(".k-i-caret-alt-down, .k-svg-i-caret-alt-down").click();
 
             assert.isOk(combobox.popup.visible());
         });

@@ -296,7 +296,7 @@ The [`icon`](/api/javascript/ui/floatingactionbutton/configuration/icon) configu
                 icon:"plus",
                 items:[
                     {icon:"star",label:"Add Rating"},
-                    {icon:"edit", label:"Add Comment"}
+                    {icon: "pencil", label:"Add Comment"}
                 ]
             });
         });

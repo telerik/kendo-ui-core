@@ -1,5 +1,6 @@
 import "./kendo.core.js";
 import "./kendo.selectable.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "calendar",
@@ -74,9 +75,9 @@ var __meta__ = {
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
         CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size }) => `<div class="k-header k-hstack">
-            <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous"><span class="k-button-icon k-icon k-i-caret-alt-left"></span></a>
+            <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: "caret-alt-left", iconClass: "k-button-icon" })}</span></a>
             <a tabindex="-1" href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>
-            <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next"><span class="k-icon k-i-caret-alt-right"></span></a>
+            <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: "caret-alt-right", iconClass: "k-button-icon" })}</a>
         </div>`,
         MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages }) => `<div class="k-calendar-header k-hstack">
             <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-flat-base k-rounded-md">
@@ -85,13 +86,13 @@ var __meta__ = {
             <span class="k-spacer"></span>
             <span class="k-calendar-nav">
                 <button tabindex="-1" ${actionAttr}="prev" class="k-calendar-nav-prev k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
-                    <span class="k-button-icon k-icon k-i-arrow-chevron-left"></span>
+                    ${kendo.ui.icon({ icon: "chevron-left", iconClass: "k-button-icon" })}
                 </button>
                 <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat k-button-flat-primary k-rounded-md">
                     <span class="k-button-text">${messages.today}</span>
                 </button>
                 <button tabindex="-1" ${actionAttr}="next" class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
-                    <span class="k-button-icon k-icon k-i-arrow-chevron-right"></span>
+                    ${kendo.ui.icon({ icon: "chevron-right", iconClass: "k-button-icon" })}
                 </button>
             </span>
         </div>`;
@@ -609,7 +610,7 @@ var __meta__ = {
             that.selectable = new Selectable(that.wrapper, {
                 aria: true,
                 //excludes the anchor element
-                inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up",
+                inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,span.k-svg-icon.k-svg-i-caret-alt-down,span.k-svg-icon.k-svg-i-caret-alt-up",
                 multiple: selectableOptions.multiple,
                 filter: "table.k-month:eq(0) " + CELLSELECTORVALID,
                 change: that._onSelect.bind(that),

@@ -135,7 +135,7 @@ If set to true a default overlay badge will be displayed. If set to a string, an
                 {
                     text: "bar",
                     badge: {
-                        icon: "add",
+                        icon: "plus",
                         themeColor: "success",
                         cutoutBorder: true
                     }

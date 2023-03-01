@@ -527,7 +527,7 @@
 
         it("creating pinned window with a Pin command adds an Unpin button", function() {
             var dialog = createWindow({ pinned: true, actions: ["Pin"] });
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 1);
         });
 
         it("creating pinned window pins the window if initially visible", function() {

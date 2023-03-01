@@ -22,7 +22,7 @@ The `Template` and `TemplateId` configuration options allow you to manage the wa
         .Icon("plus")
         .Items(items=>{
             items.Add().Icon("star").Label("Add Rating").TemplateId("fabTemplate");
-            items.Add().Icon("edit").Label("Add comment").TemplateId("fabTemplate");
+            items.Add().Icon("pencil").Label("Add comment").TemplateId("fabTemplate");
         })
     )
 

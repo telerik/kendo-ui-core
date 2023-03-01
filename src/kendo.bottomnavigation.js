@@ -1,11 +1,12 @@
 import "./kendo.core.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "bottomnavigation",
     name: "BottomNavigation",
     category: "web",
     description: "The BottomNavigation widget is a navigation element that allows movement between primary destinations in an app.",
-    depends: [ "core" ]
+    depends: [ "core", "icons" ]
 };
 
 (function($, undefined) {
@@ -50,7 +51,7 @@ var __meta__ = {
         item: template(() => `<span class="${bottomNavigationStyles.item}"></span>`),
         anchor: template(({ url }) => `<a class="${bottomNavigationStyles.item}"  href="${kendo.htmlEncode(url)}"></a>`),
         text: template(({ text }) => `<span class="${bottomNavigationStyles.text}" >${text}</span>`),
-        icon: template(({ icon }) => `<span class="${bottomNavigationStyles.navIcon} ${icon ? `k-icon k-i-${icon}` : ''}"></span>`)
+        icon: template(({ icon }) => kendo.ui.icon($(`<span class="${bottomNavigationStyles.navIcon}"></span>`), { icon: icon }))
     };
 
     var BottomNavigation = Widget.extend({

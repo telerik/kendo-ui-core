@@ -690,7 +690,7 @@ var __meta__ = {
                 content = that.content,
                 clickCallback = function(e) {
                     that.current($(e.currentTarget));
-                    if (!$(e.target).is(":button, a, :input, a > .k-icon, textarea")) {
+                    if (!$(e.target).is(":button, a, :input, a > .k-icon, a > k-svg-icon, textarea")) {
                         kendo.focusElement(element);
                     }
                 };

@@ -1,5 +1,6 @@
 import "./kendo.popup.js";
 import "./kendo.data.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "menu",
@@ -182,18 +183,6 @@ var __meta__ = {
                 return LINK;
             },
 
-            arrowClass: function(item, group) {
-                var result = "k-menu-expand-arrow-icon k-icon";
-
-                if (group.horizontal) {
-                    result += " k-i-caret-alt-down";
-                } else {
-                    result += " k-i-caret-alt-right";
-                }
-
-                return result;
-            },
-
             groupAttributes: function(group) {
                 return group.expanded !== true ? " style='display:none'" : "";
             },
@@ -291,34 +280,33 @@ var __meta__ = {
 
     function updateArrow(item) {
         item = $(item);
-        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-caret]:not(.k-sprite)").parent().remove();
+        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-caret]:not(.k-sprite),> .k-link > .k-menu-expand-arrow > [class*=k-svg-i-caret]:not(.k-sprite)").parent().remove();
 
         item.filter(":has(.k-menu-group)")
-            .children(".k-link:not(:has([class*=k-i-caret]:not(.k-sprite)))")
+            .children(".k-link:not(:has([class*=k-i-caret]:not(.k-sprite))),.k-link:not(:has([class*=k-svg-i-caret]:not(.k-sprite)))")
             .each(function() {
-                var item = $(this),
-                    arrowCssClass = getArrowCssClass(item);
+                var item = $(this);
 
-                item.append("<span aria-hidden='true' class='k-menu-expand-arrow'><span class='k-menu-expand-arrow-icon k-icon " + arrowCssClass + "'></span></span>");
+                item.append(`<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: getArrowIconName(item), iconClass: "k-menu-expand-arrow-icon" })}</span>`);
             });
     }
 
-    function getArrowCssClass(item) {
-        var arrowCssClass,
+    function getArrowIconName(item) {
+        var arrowIconName,
             parent = item.parent().parent(),
             isRtl = kendo.support.isRtl(parent);
 
         if (parent.hasClass(MENU + "-horizontal")) {
-            arrowCssClass = "k-i-caret-alt-down";
+            arrowIconName = "caret-alt-down";
         } else {
             if (isRtl) {
-                arrowCssClass = "k-i-caret-alt-left";
+                arrowIconName = "caret-alt-left";
             }
             else {
-                arrowCssClass = "k-i-caret-alt-right";
+                arrowIconName = "caret-alt-right";
             }
         }
-        return arrowCssClass;
+        return arrowIconName;
     }
 
     function updateFirstLast(item) {
@@ -1633,7 +1621,7 @@ var __meta__ = {
                 return;
             }
 
-            if ($(target).hasClass('k-menu-expand-arrow-icon')) {
+            if ($(target).closest("span").hasClass('k-menu-expand-arrow-icon')) {
                 this._lastClickedElement = itemElement;
             }
 
@@ -1752,7 +1740,7 @@ var __meta__ = {
 
         _documentClick: function(e) {
             var that = this;
-            var target = $(e.target).hasClass('k-menu-expand-arrow-icon') ? that._lastClickedElement : e.target;
+            var target = $(e.target).closest("span").hasClass('k-menu-expand-arrow-icon') ? that._lastClickedElement : e.target;
 
             if (contains((that._overflowWrapper() || that.element)[0], target)) {
                 that._lastClickedElement = undefined;
@@ -2344,11 +2332,11 @@ var __meta__ = {
                 }),
                 scrollButton: template(({ direction }) =>
                     `<span class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button k-menu-scroll-button k-scroll-${direction}' unselectable='on'>` +
-                    `<span class='k-button-icon k-icon k-i-caret-alt-${direction}'></span>` +
+                        kendo.ui.icon({ icon: `caret-alt-${direction}`, iconClass: "k-button-icon" }) +
                     "</span>"
                 ),
                 arrow: template(({ item, group }) =>
-                    `<span aria-hidden='true' class='k-menu-expand-arrow'><span class='${rendering.arrowClass(item, group)}'></span></span>`),
+                    `<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: group.horizontal ? "caret-alt-down" : "caret-alt-right", iconClass: "k-menu-expand-arrow-icon" })}</span>`),
                 sprite: template((data) => {
                     var spriteCssClass = fieldAccessor("spriteCssClass")(data);
                     if (spriteCssClass) {

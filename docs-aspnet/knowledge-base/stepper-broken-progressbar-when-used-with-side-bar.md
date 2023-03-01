@@ -73,8 +73,8 @@ A stepper control used with a vertical menu which is expanding and collapsing up
         .Orientation(StepperOrientationType.Horizontal)
         .Steps(s =>
         {
-            s.Add().Label("Level 1").Icon("dictionary-add").Selected(true);
-            s.Add().Label("Level 2").Icon("dictionary-add");
+            s.Add().Label("Level 1").Icon("book").Selected(true);
+            s.Add().Label("Level 2").Icon("book");
             s.Add().Label("Level 3").Icon("not-equal");
             s.Add().Label("Level 4").Icon("user");
             s.Add().Label("Level 5").Icon("user");

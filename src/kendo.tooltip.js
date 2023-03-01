@@ -1,13 +1,14 @@
 import "./kendo.core.js";
 import "./kendo.popup.js";
 import "./kendo.fx.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "tooltip",
     name: "Tooltip",
     category: "web",
     description: "The Tooltip widget displays a popup hint for a given html element.",
-    depends: [ "core", "popup" ],
+    depends: [ "core", "popup", "icons" ],
     features: [ {
         id: "tooltip-fx",
         name: "Animation",
@@ -36,7 +37,7 @@ var __meta__ = {
         TEMPLATE = ({ autoHide, callout, dir }) =>
             `<div role="tooltip" class="k-widget k-tooltip${!autoHide ? ' k-tooltip-closable' : ''}">` +
                 '<div class="k-tooltip-content"></div>' +
-                (!autoHide ? '<div class="k-tooltip-button"><a href="#" class="k-icon k-i-x" title="Close"></a></div>' : '') +
+                (!autoHide ? `<div class="k-tooltip-button">${kendo.ui.icon($('<a href="#" title="Close"></a>'), { icon: "x" })}</div>` : '') +
                 (callout ? `<div class="k-callout k-callout-${dir}"></div>` : '') +
             '</div>',
         IFRAMETEMPLATE = kendo.template(({ content }) =>

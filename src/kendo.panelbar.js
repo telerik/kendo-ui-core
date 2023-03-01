@@ -1,11 +1,12 @@
 import "./kendo.data.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "panelbar",
     name: "PanelBar",
     category: "web",
     description: "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
-    depends: [ "core", "data", "data.odata" ]
+    depends: ["core", "data", "data.odata", "icons"]
 };
 
 (function($, undefined) {
@@ -133,12 +134,11 @@ var __meta__ = {
     textAttributes: function(url) {
         return url ? " href='" + url + "'" : "";
     },
-    arrowClass: function(item) {
-        var result = "k-icon";
-
-        result += item.expanded ? " k-panelbar-toggle k-panelbar-collapse k-i-chevron-up" : " k-panelbar-toggle k-panelbar-expand k-i-chevron-down";
-
-        return result;
+    arrowIconOptions: function(item) {
+        return {
+            icon: item.expanded ? "chevron-up" : "chevron-down",
+            iconClass: `k-panelbar-toggle k-panelbar-${item.expanded ? "collapse" : "expand"}`
+        };
     },
     text: function(item) {
          return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
@@ -181,14 +181,14 @@ var __meta__ = {
      function updateItemHtml(item) {
         var wrapper = item,
             group = item.children("ul"),
-            toggleButton = wrapper.children(".k-link").children(".k-icon");
+            toggleButton = wrapper.children(".k-link").children(".k-panelbar-toggle");
 
         if (item.hasClass("k-panelbar")) {
             return;
         }
 
         if (!toggleButton.length && group.length) {
-            toggleButton = $("<span class='k-icon' />").appendTo(wrapper);
+            toggleButton = $("<span class='k-panelbar-toggle' />").appendTo(wrapper);
         } else if (!group.length || !group.children().length) {
             toggleButton.remove();
             group.remove();
@@ -196,7 +196,7 @@ var __meta__ = {
      }
 
     itemIcon = function(item) {
-        return item.children("span").children(".k-icon");
+        return item.children("span").children(".k-panelbar-toggle");
     };
 
     var PanelBar = kendo.ui.DataBoundWidget.extend({
@@ -376,7 +376,7 @@ var __meta__ = {
                         renderItems({ data, items, group, renderItems, panelBar, ariaHidden, groupCssClass, groupAttributes }) +
                     "</ul>"
                 ),
-                itemWrapper: template(({ panelBar, item, arrow, textClass, arrowClass, textAttributes, contentUrl }) => {
+                itemWrapper: template(({ panelBar, item, arrow, textClass, arrowIconOptions, textAttributes, contentUrl }) => {
                      var url = fieldAccessor("url")(item);
                      var imageUrl = fieldAccessor("imageUrl")(item);
                      var spriteCssClass = fieldAccessor("spriteCssClass")(item);
@@ -387,18 +387,18 @@ var __meta__ = {
                         (imageUrl ? `<img class='k-panelbar-item-icon k-image' alt='' src='${imageUrl}' />` : '') +
                         (spriteCssClass ? `<span class='k-sprite ${spriteCssClass}'></span>` : '') +
                         panelBar.options.template({ panelBar, item, arrow, textClass, textAttributes, contentUrl }) +
-                        arrow({ panelBar, item, arrow, textClass, arrowClass, textAttributes, contentUrl }) +
+                        arrow({ panelBar, item, arrow, textClass, arrowIconOptions, textAttributes, contentUrl }) +
                     `</${tag}>`;
                 }),
 
-                item: template(({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowClass, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes }) =>
+                item: template(({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowIconOptions, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes }) =>
                     `<li aria-selected='false' role='treeitem' ${aria(item)}class='${wrapperCssClass(group, item)}' ` +
                     kendo.attr("uid") + `='${item.uid}'>` +
-                        itemWrapper({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowClass, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes }) +
+                        itemWrapper({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowIconOptions, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes }) +
                         ((item.items && item.items.length > 0) ?
                         subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } })
                         : ((item.content || item.contentUrl) ?
-                        renderContent({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowClass, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes })
+                        renderContent({ data, group, item, panelBar, itemWrapper, renderContent, arrow, arrowIconOptions, subGroup, aria, wrapperCssClass, contentUrl, textClass, textAttributes })
                         : "")
                         ) +
                     "</li>"
@@ -410,7 +410,7 @@ var __meta__ = {
                         `<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-request-retry'><span class='k-button-text'>${encode(messages.retry)}</span></button>` +
                     "</li>"
                 ),
-                arrow: template(({ item, arrowClass }) => `<span class='${arrowClass(item)}'></span>`),
+                arrow: template(({ item, arrowIconOptions }) => kendo.ui.icon(arrowIconOptions(item))),
                 empty: template(() => "")
             };
         },
@@ -535,12 +535,16 @@ var __meta__ = {
 
                         return dataItem.hasChildren || dataItem.content || dataItem.contentUrl;
                     })
-                    .children(".k-link:not(:has([class*=k-i-chevron]))")
+                    .children(".k-link:not(:has([class*=-i-chevron]))")
                     .each(function() {
                         var item = $(this),
                             parent = item.parent();
+                        let icon = kendo.ui.icon({
+                            icon: parent.hasClass(ACTIVECLASS) ? "chevron-up" : "chevron-down",
+                            iconClass: `k-panelbar-toggle k-panelbar-${parent.hasClass(ACTIVECLASS) ? "collapse" : "expand" }`
+                        });
 
-                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-toggle k-panelbar-collapse k-i-chevron-up" : " k-panelbar-toggle k-panelbar-expand k-i-chevron-down") + "'/>");
+                        item.append(icon);
                     });
          },
 
@@ -584,7 +588,10 @@ var __meta__ = {
                 }
             }
             else {
-                itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-arrow-rotate-cw");
+                itemIcon(item)
+                    .empty()
+                    .removeClass("k-i-arrow-rotate-cw k-svg-i-arrow-rotate-cw")
+                    .toggleClass("k-i-loading", showProgress);
             }
         },
 
@@ -720,7 +727,7 @@ var __meta__ = {
             if (node) {
                 this._progress(node, false);
                 this._expanded(node, false);
-                itemIcon(node).addClass("k-i-arrow-rotate-cw");
+                kendo.ui.icon(itemIcon(node), { icon: "arrow-rotate-cw" });
                 e.node.loaded(false);
             } else {
                 this._progress(false);
@@ -1547,10 +1554,14 @@ var __meta__ = {
                 .toggleClass(ACTIVECLASS, !visibility)
                 .toggleClass(EXPANDEDCLASS, !visibility)
                 .find("> .k-link > .k-panelbar-collapse,> .k-link > .k-panelbar-expand")
-                    .toggleClass("k-i-chevron-up", !visibility)
-                    .toggleClass("k-panelbar-collapse", !visibility)
-                    .toggleClass("k-i-chevron-down", visibility)
-                    .toggleClass("k-panelbar-expand", visibility);
+                .each(function(ind, el) {
+                    let iconEl = $(el);
+                    iconEl.removeClass("k-panelbar-expand k-panelbar-collapse");
+                    kendo.ui.icon(iconEl, {
+                        icon: visibility ? "chevron-down" : "chevron-up",
+                        iconClass: visibility ? "k-panelbar-expand" : "k-panelbar-collapse"
+                    });
+                });
             if (visibility) {
                 animation = extend(collapse, { hide: true });
 
@@ -1627,7 +1638,10 @@ var __meta__ = {
                 statusIcon = element.find(".k-panelbar-collapse, .k-panelbar-expand"),
                 link = element.find(LINKSELECTOR),
                 loadingIconTimeout = setTimeout(function() {
-                    statusIcon.addClass("k-i-loading");
+                    statusIcon
+                        .empty()
+                        .removeClass("k-i-chevron-up k-i-chevron-down k-svg-i-chevron-up k-svg-i-chevron-down")
+                        .addClass("k-i-loading");
                 }, 100),
                 data = {},
                 url = link.attr(HREF);
@@ -1641,6 +1655,7 @@ var __meta__ = {
 
                 error: function(xhr, status) {
                     statusIcon.removeClass("k-i-loading");
+                    kendo.ui.icon(statusIcon, { icon: statusIcon.hasClass("k-panelbar-expand") ? "chevron-down" : "chevron-up" });
                     if (that.trigger(ERROR, { xhr: xhr, status: status })) {
                         this.complete();
                     }
@@ -1648,6 +1663,7 @@ var __meta__ = {
 
                 complete: function() {
                     clearTimeout(loadingIconTimeout);
+                    kendo.ui.icon(statusIcon, { icon: statusIcon.hasClass("k-panelbar-expand") ? "chevron-down" : "chevron-up" });
                     statusIcon.removeClass("k-i-loading");
                 },
 

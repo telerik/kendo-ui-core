@@ -21,7 +21,7 @@ The following example demonstrates how to subscribe to the FloatingActionButton 
             .Items(items=>{
                 items.Add().Icon("download").Label("Download").Click(onItemClick);
                 items.Add().Icon("print").Label("Print").Click(onItemClick);
-                items.Add().Icon("email").Label("Email").Click(onItemClick);
+                items.Add().Icon("envelop").Label("Email").Click(onItemClick);
             })
             .Events(e =>
             {
@@ -30,12 +30,12 @@ The following example demonstrates how to subscribe to the FloatingActionButton 
                e.Collapse("onExpand");
             })
     )
-    
+
    <script>
         function onClick(e){
             // Handle the FloatingActionButton click event.
         };
-        
+
         function onExpand(e){
             // Handle the FloatingActionButton expand event.
         };
@@ -62,7 +62,7 @@ The following example demonstrates how to subscribe to the FloatingActionButton 
         <floatingactionbutton-items>
             <floatingactionbutton-item label="Download" icon="download" click="onItemClick"></floatingactionbutton-item>
             <floatingactionbutton-item label="Print" icon="print" click="onItemClick"></floatingactionbutton-item>
-            <floatingactionbutton-item label="Email" icon="email" click="onItemClick"></floatingactionbutton-item>
+            <floatingactionbutton-item label="Email" icon="envelop" click="onItemClick"></floatingactionbutton-item>
         </floatingactionbutton-items>
     </kendo-floatingactionbutton>
 
@@ -70,7 +70,7 @@ The following example demonstrates how to subscribe to the FloatingActionButton 
         function onClick(e){
             // Handle the FloatingActionButton click event.
         };
-        
+
         function onExpand(e){
             // Handle the FloatingActionButton expand event.
         };

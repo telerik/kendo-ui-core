@@ -18,13 +18,13 @@ The `Template` and `TemplateId` configurations manage the rendering of the Botto
 
 ```HtmlHelper
     @(Html.Kendo().BottomNavigation()
-        .Name("bottomNavigation")                    
+        .Name("bottomNavigation")
         .PositionMode(BottomNavigationPositionMode.Absolute)
         .HtmlAttributes(new { style = "bottom:0;" })
         .TemplateId("bottomnav-template")
         .Items(i =>
         {
-            i.Add().Text("Inbox").Data(new { view = "inbox" }).Icon("email").Selected(true).HtmlAttributes(new { id = "Inbox" });
+            i.Add().Text("Inbox").Data(new { view = "inbox" }).Icon("envelop").Selected(true).HtmlAttributes(new { id = "Inbox" });
             i.Add().Text("Calendar").Data(new { view = "calendar" }).Icon("calendar-date").HtmlAttributes(new { id = "Calendar" });
             i.Add().Text("Profile").Data(new { view = "profile" }).Icon("user").HtmlAttributes(new { id = "Profile" });
         })
@@ -43,27 +43,27 @@ The `Template` and `TemplateId` configurations manage the rendering of the Botto
         var inbox = new { view= "inbox" };
         var calendar = new { view = "calendar" };
         var profile = new { view = "profile" };
-    }  
+    }
 
     <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute" style="bottom:0;" template-id="bottomnav-template">
             <bottomnavigation-items>
-                <bottomnavigation-item 
-                    context-data="@inbox" 
-                    text="Inbox" 
-                    icon="email" 
-                    selected="true" 
+                <bottomnavigation-item
+                    context-data="@inbox"
+                    text="Inbox"
+                    icon="envelop"
+                    selected="true"
                     html-attributes='new Dictionary<string,object> { ["id"] = "Inbox" }'>
                 </bottomnavigation-item>
-                <bottomnavigation-item 
-                    context-data="@calendar" 
-                    text="Calendar" 
-                    icon="calendar-date" 
+                <bottomnavigation-item
+                    context-data="@calendar"
+                    text="Calendar"
+                    icon="calendar-date"
                     html-attributes='new Dictionary<string,object> { ["id"] = "Calendar" }'>
                 </bottomnavigation-item>
-                <bottomnavigation-item 
-                    context-data="@profile" 
-                    text="Profile" 
-                    icon="user" 
+                <bottomnavigation-item
+                    context-data="@profile"
+                    text="Profile"
+                    icon="user"
                     html-attributes='new Dictionary<string,object> { ["id"] = "Profile" }'>
                 </bottomnavigation-item>
             </bottomnavigation-items>

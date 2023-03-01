@@ -20,8 +20,8 @@ The following example demonstrates how to define a ButtonGroup in the ToolBar co
         {
             items.Add().Type(CommandType.ButtonGroup).Id("btnGroup").Buttons(buttons =>
             {
-                buttons.Add().Text("Prev").Icon("arrow-w");
-                buttons.Add().Text("Next").Icon("arrow-e");
+                buttons.Add().Text("Prev").Icon("caret-alt-left");
+                buttons.Add().Text("Next").Icon("caret-alt-right");
             });
 
         })

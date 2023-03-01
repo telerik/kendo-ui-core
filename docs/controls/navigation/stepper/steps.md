@@ -25,11 +25,11 @@ The following example demonstrates how the set the configuration for the Steps o
                     icon:"home",
                 },{
                     label: "Second step",
-                    icon: "attachment",
+                    icon: "paperclip",
                     error: true
                 },{
                     label: "Preview",
-                    icon: "preview",
+                    icon: "eye",
                     selected: true
                 },{
                     label: "Last step",

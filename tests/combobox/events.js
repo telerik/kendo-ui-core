@@ -405,7 +405,7 @@ it("open event when click _arrow", function(done) {
         }
     }).data("kendoComboBox");
 
-    input.data("kendoComboBox").wrapper.find(".k-icon").trigger(CLICK);
+    input.data("kendoComboBox").wrapper.find(".k-icon, .k-svg-icon").trigger(CLICK);
 });
 
 it("open event should be cancellable", function() {

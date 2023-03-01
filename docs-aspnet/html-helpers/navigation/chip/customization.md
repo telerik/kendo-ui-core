@@ -23,7 +23,7 @@ To specify a custom **Remove** icon, use the [`RemoveIcon`](/api/Kendo.Mvc.UI.Fl
      @(Html.Kendo().Chip()
             .Name("chip")
             .Removable(true)
-            .RemoveIcon("close")
+            .RemoveIcon("x")
             .Label("Close")
     )
 ```

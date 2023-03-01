@@ -18,7 +18,7 @@ The FloatingActionButton provides a set of [default API configuration options](/
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
 **Step 2** Create a [FloatingActionButton](/api/php/Kendo/UI/FloatingActionButton).
-    
+
         $fab = new \Kendo\UI\FloatingActionButton('fab');
 
         $fab->positionMode("absolute")
@@ -54,7 +54,7 @@ The Kendo UI FloatingActionButton for PHP allows you to customize the appearance
             ->click(onItemClick);
 
         $email = new \Kendo\UI\FloatingActionButtonItem();
-        $email->icon("email")
+        $email->icon("envelop")
             ->label("Email")
             ->click(onItemClick);
 

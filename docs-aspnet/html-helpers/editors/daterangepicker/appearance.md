@@ -164,7 +164,7 @@ The new rendering of the component consists of individual wrapping `span` elemen
     <span class="k-floating-label-container">
         <span class="k-dateinput k-input k-input-solid k-input-md k-rounded-md" style="">
             <input id="f354d807-3c52-4295-82c6-65aa4d534d40" data-role="dateinput" class="k-input-inner">
-            <span class="k-input-validation-icon k-icon k-i-warning k-hidden"></span>
+            <span class="k-input-validation-icon k-icon k-i-exclamation-circle k-hidden"></span>
         </span>
         <label for="f354d807-3c52-4295-82c6-65aa4d534d40" class="k-label">Start</label>
     </span>
@@ -172,7 +172,7 @@ The new rendering of the component consists of individual wrapping `span` elemen
     <span class="k-floating-label-container">
         <span class="k-dateinput k-input k-input-solid k-input-md k-rounded-md" style="">
             <input id="aeae6624-123d-4d50-9c6c-9d792dafc4db" class="k-input-inner">
-            <span class="k-input-validation-icon k-icon k-i-warning k-hidden"></span>
+            <span class="k-input-validation-icon k-icon k-i-exclamation-circle k-hidden"></span>
         </span>
         <label for="aeae6624-123d-4d50-9c6c-9d792dafc4db" class="k-label">End</label>
     </span>

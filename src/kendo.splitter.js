@@ -1,11 +1,12 @@
 import "./kendo.resizable.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "splitter",
     name: "Splitter",
     category: "web",
     description: "The Splitter widget provides an easy way to create a dynamic layout of resizable and collapsible panes.",
-    depends: [ "resizable" ]
+    depends: [ "resizable", "icons" ]
 };
 
 (function($, undefined) {
@@ -357,7 +358,7 @@ var __meta__ = {
         },
         _updateSplitBar: function(splitbar, previousPane, nextPane, previousPaneEl) {
             var catIconIf = function(actionType, iconType, condition) {
-                    var icon = iconType ? "<span class='k-icon k-i-" + iconType + "'></span>" : "";
+                    var icon = iconType ? ui.icon(iconType) : "";
                     return condition ? "<span class='k-" + actionType + "'>" + icon + "</span>" : "";
                 },
                 orientation = this.orientation,

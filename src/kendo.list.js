@@ -1,12 +1,13 @@
 import "./kendo.data.js";
 import "./kendo.popup.js";
 import "./kendo.label.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "list",
     name: "List",
     category: "framework",
-    depends: [ "data", "popup", "label" ],
+    depends: [ "data", "popup", "label", "icons" ],
     hidden: true
 };
 
@@ -698,7 +699,7 @@ var __meta__ = {
             var clearTitle = list.options.messages.clear;
 
             if (!list._clear) {
-                list._clear = $('<span unselectable="on" class="k-clear-value" title="' + clearTitle + '"><span class="k-icon k-i-x"></span></span>').attr({
+                list._clear = $(`<span unselectable="on" class="k-clear-value" title="${clearTitle}">${kendo.ui.icon("x")}</span>`).attr({
                     "role": "button",
                     "tabIndex": -1
                 });

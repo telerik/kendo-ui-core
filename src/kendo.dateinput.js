@@ -1,5 +1,6 @@
 import "./kendo.core.js";
 import "./kendo.label.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "dateinput",
@@ -59,7 +60,7 @@ var __meta__ = {
             });
 
 
-            that._validationIcon = $("<span class='k-input-validation-icon k-icon k-i-warning k-hidden'></span>").insertAfter(element);
+            that._validationIcon = $(kendo.ui.icon({ icon: "exclamation-circle", iconClass: "k-input-validation-icon k-hidden" })).insertAfter(element);
 
             that._form();
 

@@ -39,27 +39,27 @@ To achieve this behavior:
 
 1. Add a Kendo UI Window component and create its template.
 1. Subscribe to the [`remove`](/api/javascript/javascript/ui/gantt/events/remove) event and prevent the default behavior.
-1. Add [`Kendo UI Template`]({% slug overview_kendoui_templatescomponent %}) and handle the button configurations to remove the task/close the window. 
+1. Add [`Kendo UI Template`]({% slug overview_kendoui_templatescomponent %}) and handle the button configurations to remove the task/close the window.
 1. The Kendo UI Gantt's [`editable.confirmation'](/api/javascript/javascript/ui/gantt/configuration/editable.confirmation) should be set to `false` to prevent the default confirm window from showing.
 
 ```dojo
 	<style>
-        span.k-icon.k-i-warning
+        span.k-icon.k-i-exclamation-circle
         {
           background-color: khaki;
           color: white;
           font-size: 32px;
           margin-right: 5px;
         }
-  
+
         div.deleteMessage
         {
-          margin-bottom: 80px  
+          margin-bottom: 80px
         }
-  
+
         button#cancelButton, button#deleteButton
         {
-          float: right;  
+          float: right;
           margin-right: 15px;
         }
     </style>
@@ -69,7 +69,7 @@ To achieve this behavior:
       <div id="window"></div>
 
       <script type="text/x-kendo-template" id="windowTemplate">
-        <div class="deleteMessage"><span class="k-icon k-i-warning"></span>Are you sure you want to delete this task?</div>
+        <div class="deleteMessage"><span class="k-icon k-i-exclamation-circle"></span>Are you sure you want to delete this task?</div>
         <hr />
         <button class="k-button k-primary" id="deleteButton">Delete</button>
         <button class="k-button" id="cancelButton"> Cancel</button>

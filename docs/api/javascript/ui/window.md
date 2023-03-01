@@ -577,6 +577,27 @@ Enables (`true`) or disables (`false`) the scrolling of the Window contents.
 	    });
     </script>
 
+### themeColor `String` *default: ""*
+
+The `themeColor` option controls the color that will be applied.
+
+The following values are available for the themeColor:
+
+- `primary`
+- `dark`
+- `light`
+- `none`
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      actions: ["Maximize"],
+      title: "Customer details"
+    });
+    </script>
+
 ### title `Object|String|Boolean` *default: ""*
 
 The text in the title bar of the Window. If set to `false`, the Window will be displayed without a title bar.

@@ -253,8 +253,8 @@ Sets icon for the menu button. The icon should be one of the existing in the Ken
           type: "buttonGroup",
           buttons: [
             { text: "foo", icon: "clock" },
-            { text: "bar", icon: "note" },
-            { text: "baz", icon: "refresh" }
+            { text: "bar", icon: "info-circle" },
+            { text: "baz", icon: "arrow-rotate-cw" }
           ]
         }
       ]
@@ -348,8 +348,8 @@ Applicable only for the buttons of a ButtonGroup. Specifies where the icon of th
 				type: "buttonGroup",
 				buttons: [
 					{ text: "foo", icon: "clock", showIcon: "overflow" },
-					{ text: "bar", icon: "error", showIcon: "both" },
-					{ text: "baz", icon: "refresh", showIcon: "toolbar" }
+					{ text: "bar", icon: "x-outline", showIcon: "both" },
+					{ text: "baz", icon: "arrow-rotate-cw", showIcon: "toolbar" }
 				]
 			}]
 		});
@@ -372,8 +372,8 @@ Applicable only for the buttons of a ButtonGroup. Specifies where the text of th
 				type: "buttonGroup",
 				buttons: [
 					{ text: "foo", icon: "clock", showText: "overflow" },
-					{ text: "bar", icon: "error", showText: "both" },
-					{ text: "baz", icon: "refresh", showText: "toolbar" }
+					{ text: "bar", icon: "x-outline", showText: "both" },
+					{ text: "baz", icon: "arrow-rotate-cw", showText: "toolbar" }
 				]
 			}]
 		});
@@ -585,8 +585,8 @@ Sets icon for the item. The icon should be one of the existing in the Kendo UI t
         $("#toolbar").kendoToolBar({
             items: [
             { type: "button", text: "foo", icon: "clock" },
-            { type: "button", text: "bar", icon: "note" },
-            { type: "button", text: "baz", icon: "refresh" }
+            { type: "button", text: "bar", icon: "info-circle" },
+            { type: "button", text: "baz", icon: "arrow-rotate-cw" }
             ]
         });
     </script>
@@ -688,9 +688,9 @@ Specifies the HTML attributes of a menu button.
                 text: "Insert",
                 attributes: { "class": "red" },
                 menuButtons: [
-                    { text: "Insert above", icon: "insert-n", attributes: { "class": "blue" } },
-                    { text: "Insert between", icon: "insert-m" },
-                    { text: "Insert below", icon: "insert-s" }
+                    { text: "Insert above", icon: "insert-top", attributes: { "class": "blue" } },
+                    { text: "Insert between", icon: "insert-middle" },
+                    { text: "Insert below", icon: "insert-bottom" }
                 ]
             }
             ]
@@ -764,8 +764,8 @@ Sets icon for the menu buttons. The icon should be one of the existing in the Ke
                 type: "splitButton",
                 text: "splitButton",
                 menuButtons: [
-                    { id: "foo", text: "Foo", icon: "tick" },
-                    { id: "bar", text: "Bar", icon: "note" },
+                    { id: "foo", text: "Foo", icon: "check" },
+                    { id: "bar", text: "Bar", icon: "info-circle" },
                     { id: "baz", text: "Baz", icon: "clock" }
                 ]
             }
@@ -993,7 +993,7 @@ Specifies where the button icon will be displayed. Possible values are: "toolbar
     <script>
         $("#toolbar").kendoToolBar({
             items: [
-                { type: "button", text: "Foo", icon: "tick", showIcon: "toolbar" }
+                { type: "button", text: "Foo", icon: "check", showIcon: "toolbar" }
             ]
         });
     </script>
@@ -1009,7 +1009,7 @@ Specifies where the text will be displayed. Possible values are: "toolbar", "ove
     <script>
         $("#toolbar").kendoToolBar({
             items: [
-                { type: "button", text: "Foo", icon: "tick", showText: "overflow" }
+                { type: "button", text: "Foo", icon: "check", showText: "overflow" }
             ]
         });
     </script>

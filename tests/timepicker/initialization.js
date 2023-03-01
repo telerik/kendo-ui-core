@@ -96,8 +96,7 @@
             assert.equal(icon.attr("tabindex"), "-1");
             assert.isOk(icon.hasClass("k-button-md"));
             assert.isOk(icon.children().is("span"));
-            assert.isOk(icon.children().hasClass("k-icon k-i-clock"));
-            assert.equal(icon.children().html(), "");
+            assert.isOk(icon.children().is(".k-icon.k-i-clock, .k-svg-icon.k-svg-i-clock"));
         });
 
         it("timeView is defined", function() {

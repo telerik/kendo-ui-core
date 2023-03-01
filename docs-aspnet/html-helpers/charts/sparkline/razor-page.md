@@ -22,6 +22,15 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             .Read(r => r.Url("/Sparkline/SparklineRemoteBidning?handler=Read").Data("forgeryToken"))
             )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="/Sparkline/SparklineRemoteBidning?handler=Read" data="forgeryToken" />
+            </transport>
+        </datasource>
+    ```
+    {% endif %}
 
 2. Add an AntiForgeryToken at the top of the RazorPage:
 

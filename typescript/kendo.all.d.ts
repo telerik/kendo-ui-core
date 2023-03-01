@@ -1658,6 +1658,10 @@ declare namespace kendo.data.schemas {
 
 declare namespace kendo.ui {
     function progress(container: JQuery, toggle: boolean): void;
+    function icon(element: JQuery, options: string | FontIconOptions | SvgIconOptions): string;
+    function icon(options: string | FontIconOptions | SvgIconOptions): string;
+
+    svgIcons: any;
 
     class Widget extends Observable {
         static fn: any;
@@ -4165,6 +4169,7 @@ declare namespace kendo.ui {
         minHeight?: number | undefined;
         minWidth?: number | undefined;
         modal?: boolean | DialogModal | undefined;
+        themeColor?: string | undefined;
         title?: string|boolean | undefined;
         visible?: boolean | undefined;
         width?: number|string | undefined;
@@ -13266,6 +13271,7 @@ declare namespace kendo.ui {
         position?: WindowPosition | undefined;
         resizable?: boolean | undefined;
         scrollable?: boolean | undefined;
+        themeColor?: string | undefined;
         title?: string|boolean | undefined;
         visible?: boolean | undefined;
         width?: number|string | undefined;
@@ -13414,6 +13420,45 @@ declare namespace kendo.ui {
     interface WizardFormValidateFailedEvent extends WizardEvent {
         form?: kendo.ui.Form | undefined;
         step?: kendo.wizard.Step | undefined;
+    }
+
+    class FontIcon extends kendo.ui.Widget {
+        static fn: FontIcon;
+
+        options: FontIconOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Wizard;
+        constructor(element: Element, options?: FontIconOptions);
+    }
+
+    class SvgIcon extends kendo.ui.Widget {
+        static fn: FontIcon;
+
+        options: SvgIconOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Wizard;
+        constructor(element: Element, options?: FontIconOptions);
+    }
+
+    interface IconOptions {
+        size?: string | undefined;
+        themeColor?: string | undefined;
+        flip?: 'default' | 'both' | 'vertical' | 'horizontal' | undefined;
+        iconClass?: string | undefined;
+    }
+
+    interface FontIconOptions extends IconOptions {
+        icon?: string | undefined
+    }
+
+    interface SvgIconOptions extends IconOptions {
+        icon?: any
     }
 }
 declare namespace kendo.drawing {
@@ -26406,6 +26451,13 @@ interface JQuery {
     kendoWizard(options: kendo.ui.WizardOptions): JQuery;
     data(key: "kendoWizard"): kendo.ui.Wizard | undefined;
 
+    kendoFontIcon(): JQuery;
+    kendoFontIcon(options: kendo.ui.FontIconOptions): JQuery;
+    data(key: "kendoFontIcon"): kendo.ui.FontIcon | undefined;
+
+    kendoSvgIcon(): JQuery;
+    kendoSvgIcon(options: kendo.ui.SvgIconOptions): JQuery;
+    data(key: "kendoSvgIcon"): kendo.ui.SvgIcon | undefined;
 }
 
 declare namespace KendoLicensing {

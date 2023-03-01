@@ -159,7 +159,7 @@ var __meta__ = {
            '<span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker">' +
                 '<span class="k-input-inner">' +
                     `<span class="k-value-icon k-color-preview ${toolIcon ? 'k-icon-color-preview' : ''}">` +
-                        (toolIcon ? `<span class="k-color-preview-icon k-icon ${toolIcon}"></span>` : '') +
+                        (toolIcon ? kendo.ui.icon({ icon: toolIcon, iconClass: "k-color-preview-icon" }) : '') +
                         '<span class="k-color-preview-mask"></span>' +
                     '</span>' +
                 '</span >' +

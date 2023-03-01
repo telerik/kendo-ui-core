@@ -228,17 +228,17 @@
         it('dataSource should spawn arrows for items with group, content or contentUrl', function() {
             new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1", content: "Test" }, { text: "Item 2", items: [{ text: "SubChild" }] }, { text: "Item 3", contentUrl: "http://www.google.com" }] });
 
-            var icons = empty_panelbar.find(".k-panelbar-item > .k-link > .k-icon");
+            var icons = empty_panelbar.find(".k-panelbar-item > .k-link > .k-icon,.k-panelbar-item > .k-link > .k-svg-icon");
 
-            assert.isOk(icons.eq(0).is(".k-panelbar-expand.k-i-chevron-down"));
-            assert.isOk(icons.eq(1).is(".k-panelbar-expand.k-i-chevron-down"));
-            assert.isOk(icons.eq(2).is(".k-panelbar-expand.k-i-chevron-down"));
+            assert.isOk(icons.eq(0).is(".k-panelbar-expand.k-i-chevron-down,.k-panelbar-expand.k-svg-i-chevron-down"));
+            assert.isOk(icons.eq(1).is(".k-panelbar-expand.k-i-chevron-down,.k-panelbar-expand.k-svg-i-chevron-down"));
+            assert.isOk(icons.eq(2).is(".k-panelbar-expand.k-i-chevron-down,.k-panelbar-expand.k-svg-i-chevron-down"));
         });
 
         it('dataSource should show collapse arrows for expanded items', function() {
             new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1", content: "Test", expanded: true }] });
 
-            assert.isOk(empty_panelbar.find(".k-panelbar-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-chevron-up"));
+            assert.isOk(empty_panelbar.find(".k-panelbar-item > .k-link > .k-icon,.k-panelbar-item > .k-link > .k-svg-icon").is(".k-panelbar-collapse.k-i-chevron-up,.k-panelbar-collapse.k-svg-i-chevron-up"));
         });
 
         it('setOptions resets the animation', function() {

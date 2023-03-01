@@ -24,7 +24,7 @@ The following example demonstrates how to configure different icons.
         .Steps(s =>
         {
             s.Add().Label("First Step").Icon("home");
-            s.Add().Label("Second Step").Icon("attachment");
+            s.Add().Label("Second Step").Icon("paperclip");
             s.Add().Label("Last Step").Icon("save");
         })
     )

@@ -1,11 +1,12 @@
 import "./kendo.html.base.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "html.button",
     name: "Html.Button",
     category: "web",
     description: "HTML rendering utility for Kendo UI for jQuery.",
-    depends: [ "html.base" ],
+    depends: [ "html.base", "icons" ],
     features: []
 };
 
@@ -67,7 +68,7 @@ var __meta__ = {
                 isEmpty = true;
 
                 element.contents().filter(function() {
-                    return (!$(this).hasClass("k-sprite") && !$(this).hasClass("k-icon") && !$(this).hasClass("k-image"));
+                    return (!$(this).hasClass("k-sprite") && !$(this).hasClass("k-icon") && !$(this).hasClass("k-svg-icon") && !$(this).hasClass("k-image"));
                 }).each(function(idx, el) {
                     if (el.nodeType == 1 || el.nodeType == 3 && kendo.trim(el.nodeValue).length > 0) {
                         isEmpty = false;
@@ -87,11 +88,13 @@ var __meta__ = {
                 img.attr("src", imageUrl);
                 img.addClass(KBUTTONICON);
             } else if (icon || iconClass) {
-                span = element.children("span.k-icon").first();
+                span = element.children("span.k-icon, span.k-svg-icon").first();
                 if (!span[0]) {
-                    span = $('<span></span>').prependTo(element);
+                    span = $(kendo.ui.icon({ icon, iconClass })).prependTo(element);
+                } else {
+                    kendo.ui.icon(span, { icon, iconClass });
                 }
-                span.attr("class", icon ? "k-icon k-i-" + icon : iconClass);
+
                 span.addClass(KBUTTONICON);
             } else if (spriteCssClass) {
                 span = element.children("span.k-sprite").first();

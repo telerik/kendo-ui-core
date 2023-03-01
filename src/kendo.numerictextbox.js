@@ -2,13 +2,14 @@ import "./kendo.core.js";
 import "./kendo.userevents.js";
 import "./kendo.floatinglabel.js";
 import "./kendo.html.button.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "numerictextbox",
     name: "NumericTextBox",
     category: "web",
     description: "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
-    depends: [ "core", "userevents", "floatinglabel", "html.button" ]
+    depends: [ "core", "userevents", "floatinglabel", "html.button", "icons" ]
 };
 
 (function($, undefined) {
@@ -426,7 +427,7 @@ var __meta__ = {
             var that = this;
             var element = that.element;
 
-            that._validationIcon = $("<span class='k-input-validation-icon " + CLASS_ICON + " k-i-warning k-hidden'></span>").insertAfter(element);
+            that._validationIcon = $(kendo.ui.icon({ icon: "exclamation-circle", iconClass: "k-input-validation-icon k-hidden" })).insertAfter(element);
         },
 
         _blur: function() {

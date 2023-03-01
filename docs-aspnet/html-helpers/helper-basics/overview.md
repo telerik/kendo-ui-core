@@ -9,17 +9,17 @@ position: 0
 {% if site.mvc %}
 # HTML Helpers Overview
 
-The Telerik UI HTML Helpers for {{ site.framework }} are server-side wrappers  that enable you to use and configure the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery widgets</a> in an {{ site.framework }} application.
+The Telerik UI HTML Helpers for {{ site.framework }} are server-side wrappers that enable you to use and configure the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> in an {{ site.framework }} application.
 
 You can add HTML Helpers to your application and then configure them further by using predefined strongly typed attributes. Most of the components expose events, which you can handle by using the `Events` configuration of the helpers.  
 
-## Widgets vs. Helpers
+## Components vs. Helpers
 
-The following list describes how the {{ site.framework }} helpers differ from the Kendo UI widgets.
+The following list describes how the {{ site.framework }} helpers differ from the Kendo UI components.
 
 The Telerik UI for {{ site.framework }} HTML helpers:
 
-* Allow you to create widgets with no HTML and JavaScript coding.
+* Allow you to create components with no HTML and JavaScript coding.
 * Provide for server-side data binding and, in some cases, server-side rendering.
 * Allow you to use the `ToDataSourceResult()` extension method for binding to server-side collections and for performing data operations (paging, sorting, filtering, and grouping).
 * Provide integration with some {{ site.framework }} features such as security trimming and editor templates.
@@ -27,9 +27,9 @@ The Telerik UI for {{ site.framework }} HTML helpers:
 * Enable a simple implementation of CRUD operations.
 * Support Visual Studio IntelliSense for the server-side configuration syntax.
 * Enable Visual Studio Extensions for automatic creation of new {{ site.product }} applications and for automatic updating of the Telerik UI version.
-* Enable you to use scaffolding to generate widget declarations and related controller action methods.
+* Enable you to use scaffolding to generate component declarations and related controller action methods.
 
-The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery widgets</a> widgets:
+The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> components:
 
 * Allow for a complete server-platform independence.
 * Provide full control over the placement of the initialization scripts.
@@ -45,27 +45,27 @@ The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI f
 {% else %}
 # Tag and HTML Helpers Overview
 
-The Telerik UI Tag and HTML Helpers for {{ site.framework }} are server-side wrappers that enable you to use and configure the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery widgets</a> in an {{ site.framework }} application. Both helper flavors offer the same functionality, and you can choose which one to use depending on your preferences. 
+The Telerik UI Tag and HTML Helpers for {{ site.framework }} are server-side wrappers that enable you to use and configure the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> in an {{ site.framework }} application. Both helper flavors offer the same functionality, and you can choose which one to use depending on your preferences. 
 
-You can add the desired Tag or HTML Helpers to your application and then configure them further by using predefined strongly typed attributes. The helpers also allow you to handle the events of the widgets in your {{ site.framework }} projects.
+You can add the desired Tag or HTML Helpers to your application and then configure them further by using predefined strongly typed attributes. The helpers also allow you to handle the events of the components in your {{ site.framework }} projects.
 
-## Widgets vs. Helpers
+## Components vs. Helpers
 
-The following list describes how the {{ site.product_short }} helpers differ from the Kendo UI widgets.
+The following list describes how the {{ site.product_short }} helpers differ from the Kendo UI components.
 
 The {{ site.product_short }} helpers:
 
-* Allow you to create widgets with no HTML and JavaScript coding.
+* Allow you to create components with no HTML and JavaScript coding.
 * Provide for server-side data binding and, in some cases, server-side rendering.
-* Allow you to use the `ToDataSourceResult()` extension method for binding Kendo UI widgets to server-side collections and for performing data operations (paging, sorting, filtering, and grouping).
+* Allow you to use the `ToDataSourceResult()` extension method for binding Kendo UI components to server-side collections and for performing data operations (paging, sorting, filtering, and grouping).
 * Provide integration with some {{ site.framework }} features such as security trimming and editor templates.
 * Support unobtrusive validation based on Data Annotation attributes.
 * Enable a simple implementation of CRUD operations.
 * Support Visual Studio IntelliSense for the server-side configuration syntax.
 * Enable Visual Studio Extensions for automatic creation of new {{ site.product }} applications and for automatic updating of the Telerik UI version.
-* Enable you to use scaffolding to generate widget declarations and related controller action methods.
+* Enable you to use scaffolding to generate component declarations and related controller action methods.
 
-The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery widgets</a> widgets:
+The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> components:
 
 * Allow for a complete server-platform independence.
 * Provide full control over the placement of the initialization scripts.
@@ -74,13 +74,13 @@ The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI f
 
 ## Known Issues
 
-* Tag Helpers might need to be disabled on pages where widgets render custom content&mdash;for example, the Button, Editor, Splitter, Tooltip, or Window. Some Tag Helpers, such as the `href` one, are processed automatically and result in invalid HTML.
+* Tag Helpers might need to be disabled on pages where components render custom content&mdash;for example, the Button, Editor, Splitter, Tooltip, or Window. Some Tag Helpers, such as the `href` one, are processed automatically and result in invalid HTML.
 
         @removeTagHelper "*, Microsoft.AspNet.Mvc.Razor"
         @removeTagHelper "*, Microsoft.AspNetCore.Mvc.Razor"
 
 * The `TagMode` enum of the MultiSelect is now renamed to `MultiSelectTagMode`.
-* [`Deferred()`](https://docs.telerik.com/aspnet-mvc/getting-started/fundamentals#configuration-Deferred) can be invoked only as a last setting.
+* [`Deferred()`]({% slug fundamentals_core%}#deferred-initialization) can be invoked only as a last setting.
 
         @(Html.Kendo().NumericTextBox()
               .Name("age")

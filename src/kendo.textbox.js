@@ -1,12 +1,13 @@
 import "./kendo.core.js";
 import "./kendo.floatinglabel.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "textbox",
     name: "TextBox",
     category: "web",
     description: "The TextBox widget enables you to style and provide a floating label functionality to input elements",
-    depends: ["core", "floatinglabel"]
+    depends: ["core", "floatinglabel", "icons"]
 };
 
 (function($, undefined) {
@@ -191,7 +192,7 @@ var __meta__ = {
         },
 
         _icon: function() {
-            this.wrapper.prepend('<span class="k-input-icon k-icon k-i-' + this.options.icon + '"></span>');
+            this.wrapper.prepend(kendo.ui.icon({ icon: this.options.icon, iconClass: "k-input-icon" }));
         },
 
         _input: function(e) {

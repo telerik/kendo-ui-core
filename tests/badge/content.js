@@ -144,7 +144,7 @@
                 icon: 'plus'
             });
 
-            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-plus\"></span>');
+            assert.equal(badge.element.find(".k-badge-icon").length, 1);
         });
 
         test('badge.options.icon overides the initial HTML of the badge element', function() {
@@ -153,7 +153,7 @@
                 icon: 'plus'
             });
 
-            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-plus\"></span>');
+            assert.equal(badge.element.find(".k-badge-icon").length, 1);
         });
 
         test('badge.options.icon takes precedense over badge.options.text', function() {
@@ -164,7 +164,7 @@
             });
 
             assert.equal(badge.text(), undefined);
-            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-plus\"></span>');
+            assert.equal(badge.element.find(".k-badge-icon").length, 1);
         });
         // #endregion
 
@@ -211,7 +211,7 @@
             badge.setOptions({ icon: 'plus' });
 
             assert.equal(badge.icon(), 'plus');
-            assert.equal(badge.element.html(), '<span class=\"k-badge-icon k-icon k-i-plus\"></span>');
+            assert.equal(badge.element.find(".k-badge-icon").length, 1);
         });
         test('badge.setOptions({template: tmeplate}) works correctly', function() {
             badge = new Badge(span);

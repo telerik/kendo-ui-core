@@ -123,7 +123,7 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-arrow-rotate-cw").trigger("click");
+            dialog.wrapper.find(".k-i-arrow-rotate-cw,.k-svg-i-arrow-rotate-cw").trigger("click");
 
             assert.equal(triggers, 1);
         });
@@ -136,7 +136,7 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-x").trigger("click");
+            dialog.wrapper.find(".k-i-x,.k-svg-i-x").trigger("click");
         });
 
         it("clicking the close button triggers close event when default is prevented", function() {
@@ -149,8 +149,8 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-x").trigger("click");
-            dialog.wrapper.find(".k-i-x").trigger("click");
+            dialog.wrapper.find(".k-i-x,.k-svg-i-x").trigger("click");
+            dialog.wrapper.find(".k-i-x,.k-svg-i-x").trigger("click");
         });
 
         it("minimize triggers minimize event", function() {
@@ -162,7 +162,7 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-window-minimize").trigger("click");
+            dialog.wrapper.find(".k-i-window-minimize,.k-svg-i-window-minimize").trigger("click");
 
             assert.equal(triggers, 1);
         });
@@ -176,7 +176,7 @@
                     }
                 });
 
-            dialog.wrapper.find(".k-i-window").trigger("click");
+            dialog.wrapper.find(".k-i-window,.k-svg-i-window").trigger("click");
 
             assert.equal(triggers, 1);
         });
@@ -621,7 +621,7 @@
             var handler = spy();
 
             var dialogObject = createWindow({
-                actions: ["custom"],
+                actions: ["gear"],
                 close: handler
             });
 

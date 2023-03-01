@@ -37,13 +37,13 @@ The default `Size` value is `Medium`.
 ```HtmlHelper
     @(Html.Kendo().SplitButton()
         .Name("splitButton")
-        .Icon("paste")
+        .Icon("clipboard")
         .Size(ComponentSize.Medium)
         .Items(items =>
         {
-            items.Add().Id("keep-text").Text("Keep Text Only").Icon("paste-plain-text");
-            items.Add().Id("paste-html").Text("Paste as HTML").Icon("paste-as-html");
-            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("paste-markdown");
+            items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
+            items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
+            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
         }
     )
 ```
@@ -73,13 +73,13 @@ The default `FillMode` value is `Solid`.
 ```HtmlHelper
     @(Html.Kendo().SplitButton()
         .Name("splitButton")
-        .Icon("paste")
+        .Icon("clipboard")
         .FillMode(FillMode.Solid)
         .Items(items =>
         {
-            items.Add().Id("keep-text").Text("Keep Text Only").Icon("paste-plain-text");
-            items.Add().Id("paste-html").Text("Paste as HTML").Icon("paste-as-html");
-            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("paste-markdown");
+            items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
+            items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
+            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
         }
     )
 ```
@@ -116,13 +116,13 @@ The default `ThemeColor` value is `Base`.
 ```HtmlHelper
     @(Html.Kendo().SplitButton()
         .Name("splitButton")
-        .Icon("paste")
+        .Icon("clipboard")
         .ThemeColor(ThemeColor.Base)
         .Items(items =>
         {
-            items.Add().Id("keep-text").Text("Keep Text Only").Icon("paste-plain-text");
-            items.Add().Id("paste-html").Text("Paste as HTML").Icon("paste-as-html");
-            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("paste-markdown");
+            items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
+            items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
+            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
         }
     )
 ```
@@ -153,13 +153,13 @@ The default `Rounded` value is `Medium`.
 ```HtmlHelper
     @(Html.Kendo().SplitButton()
         .Name("splitButton")
-        .Icon("paste")
+        .Icon("clipboard")
         .Rounded(Rounded.Medium)
         .Items(items =>
         {
-            items.Add().Id("keep-text").Text("Keep Text Only").Icon("paste-plain-text");
-            items.Add().Id("paste-html").Text("Paste as HTML").Icon("paste-as-html");
-            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("paste-markdown");
+            items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
+            items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
+            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
         }
     )
 ```

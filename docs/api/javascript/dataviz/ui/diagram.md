@@ -1209,7 +1209,7 @@ Specifies the the toolbar tools. Supports all options supported for the [toolbar
             },
             editable: {
               tools: [
-                { type: "button", id: "1", text: "Info", icon: "info", click: showMoreInfo },
+                { type: "button", id: "1", text: "Info", icon: "info-circle", click: showMoreInfo },
               ]
             }
           }

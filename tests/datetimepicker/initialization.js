@@ -48,8 +48,8 @@
             assert.isOk(date.attr("aria-label"), datetimepicker.options.dateButtonText);
             assert.isOk(time.attr("aria-label"), datetimepicker.options.timeButtonText);
 
-            assert.isOk(date.children().eq(0).hasClass("k-icon k-i-clock k-button-icon"));
-            assert.isOk(time.children().eq(0).hasClass("k-icon k-i-calendar k-button-icon"));
+            assert.isOk(date.children().eq(0).is(".k-icon.k-i-clock.k-button-icon, .k-svg-icon.k-svg-i-clock.k-button-icon"));
+            assert.isOk(time.children().eq(0).is("k-icon.k-i-calendar.k-button-icon, .k-svg-icon.k-svg-i-calendar.k-button-icon"));
         });
 
         it("DateTimePicker renders last date when navigating", function() {

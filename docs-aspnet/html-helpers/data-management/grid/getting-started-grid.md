@@ -10,6 +10,8 @@ position: 1
 
 This tutorial explains how to set up the Telerik UI for {{ site.framework }} Grid and highlights the major steps in the configuration of the component.
 
+You will declare a view model for the Data Grid, initialize the UI component by adding a data source, configure the columns, and enable a few optional Grid features. To make the Grid editable, you will configure the CRUD operations. Finally, you will handle a Grid JavaScript event and reference an existing instance of the component.
+
 After completing this guide, you will achieve the following results:
 
  ![Sample Telerik UI for {{ site.framework }} Grid](images/grid-getting-started-result.png)

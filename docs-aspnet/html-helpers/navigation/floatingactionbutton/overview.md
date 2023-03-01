@@ -40,7 +40,7 @@ The following example demonstrates how to initialize the FloatingActionButton, c
         .Items(items=>{
             items.Add().Icon("download").Label("Download").Click(onItemClick);
             items.Add().Icon("print").Label("Print").Click(onItemClick);
-            items.Add().Icon("email").Label("Email").Click(onItemClick);
+            items.Add().Icon("envelop").Label("Email").Click(onItemClick);
         })
     )
 
@@ -68,16 +68,16 @@ The following example demonstrates how to initialize the FloatingActionButton, c
                                 size="FloatingActionButtonSize.Medium"
                                 theme-color="FloatingActionButtonThemeColor.Info">
         <floatingactionbutton-items>
-            <floatingactionbutton-item label="Download" 
-                                       icon="download" 
+            <floatingactionbutton-item label="Download"
+                                       icon="download"
                                        click="onItemClick">
             </floatingactionbutton-item>
-            <floatingactionbutton-item label="Print" 
-                                       icon="print" 
+            <floatingactionbutton-item label="Print"
+                                       icon="print"
                                        click="onItemClick">
             </floatingactionbutton-item>
-            <floatingactionbutton-item label="Email" 
-                                       icon="email"
+            <floatingactionbutton-item label="Email"
+                                       icon="envelop"
                                        click="onItemClick">
             </floatingactionbutton-item>
         </floatingactionbutton-items>

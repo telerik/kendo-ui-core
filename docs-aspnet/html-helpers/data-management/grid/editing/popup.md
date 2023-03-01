@@ -257,7 +257,7 @@ When editing is performed, server validation is often needed. This section demon
                         }
 
                         // As long as the key matches the field name, this line of code will be displayed as validation message in the popup.
-                        grid.editable.element.find("[data-valmsg-for='" + key + "']").replaceWith('<div class="k-widget k-tooltip k-tooltip-error" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' + message + '<div class="k-callout k-callout-n"></div></div>').show();
+                        grid.editable.element.find("[data-valmsg-for='" + key + "']").replaceWith('<div class="k-widget k-tooltip k-tooltip-error" style="margin:0.5em"><span class="k-icon k-i-exclamation-circle"> </span>' + message + '<div class="k-callout k-callout-n"></div></div>').show();
                 });
             });
         }

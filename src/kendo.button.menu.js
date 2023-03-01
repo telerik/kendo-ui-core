@@ -1,12 +1,13 @@
 import "./kendo.core.js";
 import "./kendo.popup.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "button.menu",
     name: "ButtonMenu",
     category: "web",
     description: "The popup Menu list part of the SplitButton and the DropDownButton",
-    depends: ["core", "popup"]
+    depends: ["core", "popup", "icons"]
 };
 
 (function($, undefined) {
@@ -74,7 +75,7 @@ var __meta__ = {
 
     var IMAGE_TEMPLATE = ({ imageUrl }) => `${imageUrl ? `<img alt="icon" class="${cssClasses.image}" src="${encode(imageUrl)}" />` : ''}`;
     var SPRITE_TEMPLATE = ({ spriteCssClass }) => `${spriteCssClass ? `<span class="${cssClasses.sprite} ${encode(spriteCssClass)}"></span>` : ''}`;
-    var ICON_TEMPLATE = ({ icon }) => `${icon ? `<span class="${cssClasses.icon} k-i-${encode(icon)}"></span>` : ''}`;
+    var ICON_TEMPLATE = ({ icon }) => `${icon ? kendo.ui.icon(encode(icon)) : ''}`;
     var TEXT_TEMPLATE = ({ text }) => `${text ? `<span class="${cssClasses.itemText}">${encode(text)}</span>` : ''}`;
 
     var ITEM_TEMPLATE = ({ imageUrl, spriteCssClass, icon, text }) => `<span class="${cssClasses.item}">` +

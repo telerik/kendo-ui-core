@@ -6,13 +6,13 @@ slug: overview_kendoui_floatingactionbutton_widget
 position: 1
 ---
 
-# Overview 
+# Overview
 
-The FloatingActionButton is a UI component that is tied to the most logical action that we expect from a user looking at a particular screen. For example, the most logical action for a user looking at the main screen of a mobile messaging app is to write a message. You can implement a FloatingActionButton that allows the user to compose a new message. 
+The FloatingActionButton is a UI component that is tied to the most logical action that we expect from a user looking at a particular screen. For example, the most logical action for a user looking at the main screen of a mobile messaging app is to write a message. You can implement a FloatingActionButton that allows the user to compose a new message.
 
 The FloatingActionButton floats in the application above other items, and its main action directly corresponds to the content on the screen. Apart from being a single button with a single action, the FloatingActionButton can also be configured to display additional related actions or speed dial actions.
 
-* [Demo page for the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/index) 
+* [Demo page for the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/index)
 
 ## Initializing the FloatingActionButton
 
@@ -43,7 +43,7 @@ The following example demonstrates how to initialize the FloatingActionButton.
                     click: function () { console.log("print action"); },
                 }, {
                     label: "Email",
-                    icon: "email",
+                    icon: "envelop",
                     click: function () { console.log("email action"); }
                 }]
             });

@@ -33,11 +33,11 @@ The following example demonstrates how to use icons in the Button widget.
 	<script>
 	$(function(){
 		$("#editButton").kendoButton({
-			icon: "edit"
+			icon: "pencil"
 		});
 
 		$("#deleteButton").kendoButton({
-			icon: "delete"
+			icon: "trash"
 		});
 	});
 	</script>

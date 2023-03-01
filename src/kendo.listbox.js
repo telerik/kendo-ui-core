@@ -2,12 +2,13 @@
 import "./kendo.draganddrop.js";
 import "./kendo.data.js";
 import "./kendo.selectable.js";
+import "./kendo.html.button.js";
 
 var __meta__ = {
     id: "listbox",
     name: "ListBox",
     category: "web",
-    depends: ["draganddrop", "data", "selectable"]
+    depends: ["draganddrop", "data", "selectable", 'html.button']
 };
 
 (function($, undefined) {
@@ -1575,10 +1576,8 @@ var __meta__ = {
 
         _initTemplates: function() {
             this.templates = {
-                tool: kendoTemplate( ({ iconClass, command, text }) =>
-                        `<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button' data-command='${command}' title='${text}' aria-label='${text}' role='button'>` +
-                            `<span class='k-button-icon k-icon ${iconClass}'></span>` +
-                        "</button>")
+                tool: kendoTemplate( ({ icon, iconClass, command, text }) =>
+                    kendo.html.renderButton(`<button data-command='${command}' title='${text}' aria-label='${text}'></button>`, { icon, iconClass }))
             };
         },
 
@@ -1656,31 +1655,31 @@ var __meta__ = {
     ToolBar.defaultTools = {
         remove: {
             command: REMOVE,
-            iconClass: "k-i-x"
+            icon: "x"
         },
         moveUp: {
             command: MOVE_UP,
-            iconClass: "k-i-caret-alt-up"
+            icon: "caret-alt-up"
         },
         moveDown: {
             command: MOVE_DOWN,
-            iconClass: "k-i-caret-alt-down"
+            icon: "caret-alt-down"
         },
         transferTo: {
             command: TRANSFER_TO,
-            iconClass: "k-i-caret-alt-right"
+            icon: "caret-alt-right"
         },
         transferFrom: {
             command: TRANSFER_FROM,
-            iconClass: "k-i-caret-alt-left"
+            icon: "caret-alt-left"
         },
         transferAllTo: {
             command: TRANSFER_ALL_TO,
-            iconClass: "k-i-caret-double-alt-right"
+            icon: "caret-double-alt-right"
         },
         transferAllFrom: {
             command: TRANSFER_ALL_FROM,
-            iconClass: "k-i-caret-double-alt-left"
+            icon: "caret-double-alt-left"
         }
     };
 
@@ -1689,7 +1688,7 @@ var __meta__ = {
     });
 
     function isInputElement(element) {
-        return $(element).is(":button,a,:input,a>.k-icon,textarea,span.k-select,span.k-icon,span.k-link,label.k-checkbox-label,.k-input,.k-multiselect-wrap,.k-picker-wrap,.k-picker-wrap>.k-selected-color,.k-tool-icon,.k-dropdownlist");
+        return $(element).is(":button,a,:input,a>.k-icon,a>.k-svg-icon,textarea,span.k-select,span.k-icon,span.k-svg-icon,span.k-link,label.k-checkbox-label,.k-input,.k-multiselect-wrap,.k-picker-wrap,.k-picker-wrap>.k-selected-color,.k-tool-icon,.k-dropdownlist");
     }
 
 })(window.kendo.jQuery);

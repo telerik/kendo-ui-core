@@ -479,6 +479,27 @@ Specifies whether the document should stop scrolling when modal dialog is opened
     });
     </script>
 
+### themeColor `String` *default: ""*
+
+The `themeColor` option controls the color that will be applied.
+
+The following values are available for the themeColor:
+
+- `primary`
+- `dark`
+- `light`
+- `none`
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoDialog({
+      actions: ["Maximize"],
+      title: "Customer details"
+    });
+    </script>
+
 ### title `String|Boolean` *default: ""*
 
 The text in the dialog title bar. If `false`, the dialog will be displayed without a title bar.

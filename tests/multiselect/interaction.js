@@ -116,7 +116,7 @@
             multiselect.ul.children().eq(0).click();
 
             var tag = multiselect.tagList.children().first();
-            tag.find(".k-i-x-circle").click();
+            tag.find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
             assert.isOk(!tag.parent()[0]);
         });
@@ -130,7 +130,7 @@
             var item = multiselect.ul.children().eq(1).click();
             multiselect.ul.children().eq(0).click();
 
-            multiselect.tagList.children().first().find(".k-i-x-circle").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
             multiselect.popup.open();
 
             assert.notEqual(item[0].style.display, "none");
@@ -165,7 +165,7 @@
             multiselect.input.mousedown();
             multiselect.ul.children().eq(1).click();
 
-            multiselect.tagList.children().first().find(".k-i-x-circle").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
             assert.isOk(!select[0].children[1].selected);
         });
@@ -192,7 +192,7 @@
             multiselect.ul.children().eq(0).click();
 
             //unselect item
-            multiselect.tagList.children().first().find(".k-i-x-circle").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
             //TODO: use method instead of _dataItems
             assert.equal(multiselect.dataItems().length, 1);
@@ -252,7 +252,7 @@
             multiselect.ul.children().eq(0).click();
             multiselect.open();
 
-            multiselect.tagList.children().first().find(".k-i-x-circle").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
             assert.isOk(!multiselect.popup.visible());
         });
@@ -309,7 +309,7 @@
             multiselect.dataSource.filter({ value: "3", operator: "contains", field: "text" });
 
             multiselect.ul.children().eq(0).click();
-            multiselect.tagList.children().first().find(".k-i-x-circle").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
             assert.isOk(select[0].children[0].selected); //item3
             assert.isOk(!select[0].children[1].selected); //item4
@@ -365,7 +365,7 @@
             multiselect.dataSource.filter({ value: "3", operator: "contains", field: "text" });
 
             multiselect.ul.children().eq(0).click();
-            multiselect.tagList.children().first().find(".k-i-x-circle").click();
+            multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
             var value = multiselect.value();
 
@@ -558,7 +558,7 @@
                 value: ["foo"]
             });
 
-            multiselect.tagList.children(":first").find(".k-i-x-circle").click();
+            multiselect.tagList.children(":first").find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
             var selectedItems = multiselect.ul.children(".k-selected");
 
@@ -595,7 +595,7 @@
 
             multiselect.search("item");
             multiselect.ul.children(":last").click();
-            multiselect.tagList.children(":first").find(".k-i-x-circle").click();
+            multiselect.tagList.children(":first").find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
             var tags = multiselect.tagList.children(".k-chip");
 

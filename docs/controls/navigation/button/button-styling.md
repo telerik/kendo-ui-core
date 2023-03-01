@@ -211,7 +211,7 @@ The following example showcases how to customize the styles of the **Button** wi
             icon: "filter-clear"
           });
           $("#iconButton").kendoButton({
-            icon: "refresh"
+            icon: "arrow-rotate-cw"
           });
         });
       </script>

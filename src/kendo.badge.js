@@ -1,11 +1,12 @@
 import "./kendo.core.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "badge",
     name: "Badge",
     category: "web", // suite
     description: "The Badge decorates avatars, navigation menus, or other components in the application when visual notification is needed",
-    depends: ["core"] // dependencies
+    depends: ["core", "icons"] // dependencies
 };
 
 (function($, undefined) {
@@ -14,7 +15,7 @@ var __meta__ = {
     var ui = kendo.ui;
     var HIDDEN = 'k-hidden';
 
-    var iconTemplate = ({ icon }) => `<span class='k-badge-icon k-icon k-i-${icon}'></span>`;
+    var iconTemplate = ({ icon }) => kendo.ui.icon($(`<span class='k-badge-icon'></span>`), { icon: icon });
     var svgIconTemplate = ({ icon }) => `<span class='k-badge-icon k-svg-icon'>${icon}</span>`;
 
     var Badge = Widget.extend({

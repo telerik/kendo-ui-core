@@ -111,7 +111,7 @@
                 ]
             });
 
-            assert.isOk(bottomNav.items().eq(0).find(".k-bottom-nav-item-icon").is(".k-icon.k-i-home"));
+            assert.isOk(bottomNav.items().eq(0).find(".k-bottom-nav-item-icon").is(".k-svg-i-home, .k-i-home"));
         });
 
         it("item with no icon omits k-icon class", function() {
@@ -121,7 +121,7 @@
                 ]
             });
 
-            assert.isFalse(bottomNav.items().eq(0).find(".k-bottom-nav-item-icon").is(".k-icon"));
+            assert.isFalse(bottomNav.items().eq(0).find(".k-bottom-nav-item-icon").is(".k-svg-i-home, .k-i-home"));
         });
 
         it("item can be disabled", function() {

@@ -80,7 +80,7 @@ Specifies an icon name to be used if the avatar `type` is set to `icon`. For a l
     <script>
         $("#avatar").kendoAvatar({
             type: "icon",
-            icon: "config"
+            icon: "file-config"
         });
     </script>
 

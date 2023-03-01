@@ -69,8 +69,8 @@
             var iconEl = buttonGroup.element.children().eq(0).children();
 
             assert.isOk(iconEl.hasClass("k-button-icon"));
-            assert.isOk(iconEl.hasClass("k-icon"));
-            assert.isOk(iconEl.hasClass("k-i-align-center"));
+            assert.isOk(iconEl.is(".k-icon, .k-svg-icon"));
+            assert.isOk(iconEl.is(".k-i-align-center, .k-svg-i-align-center"));
         });
         it("image is added to the button", function() {
             var img = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/snowboarding.png";

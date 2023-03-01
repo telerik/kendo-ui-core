@@ -1008,7 +1008,7 @@ var __meta__ = {
                     "role": "button",
                     "tabIndex": -1
                 });
-            that._arrowIcon = that._arrow.find(".k-icon");
+            that._arrowIcon = that._arrow.find(".k-icon, .k-svg-icon");
         },
 
         _clearButton: function() {

@@ -28,7 +28,7 @@ The [`items.template`](/api/javascript/ui/floatingactionbutton/configuration/ite
                 label:"Add Rating",
                 template:kendo.template($("#fabTemplate").html())
             },{
-                icon:"edit",
+                icon: "pencil",
                 label:"Add Comment",
                 template:kendo.template($("#fabTemplate").html())}]
         });

@@ -24,7 +24,7 @@ The `Icon()` method displays the appropriate [Kendo UI for jQuery font icon](htt
 ```HtmlHelper
 	@(Html.Kendo().Button()
 		.Name("textButton")
-		.Icon("delete")
+		.Icon("trash")
 	)
 ```
 {% if site.core %}

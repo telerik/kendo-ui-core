@@ -100,24 +100,24 @@
 
         it("icon prepends a span element with corresponding class(es)", function() {
             getButton().kendoButton({
-                icon: "foo"
+                icon: "plus"
             });
 
-            var icon = button.data("kendoButton").element.children("span.k-icon");
+            var icon = button.data("kendoButton").element.children("span.k-svg-icon");
 
             assert.equal(icon.length, 1);
-            assert.isOk(icon.hasClass("k-i-foo"));
+            assert.isOk(icon.hasClass("k-svg-i-plus"));
         });
 
         it("icon adds corresponding class(es) to span.k-icon element if already exists", function() {
-            getButton('<span class="k-icon"></span>text').kendoButton({
-                icon: "foo"
+            getButton('<span class="k-icon khjgjhg"></span>text').kendoButton({
+                icon: "plus"
             });
 
             var icon = button.data("kendoButton").element.children("span.k-icon");
 
             assert.equal(icon.length, 1);
-            assert.isOk(icon.hasClass("k-i-foo"));
+            assert.isOk(icon.hasClass("k-svg-i-plus"));
         });
 
         it("icon adds a k-button-icon and k-icon-button class to empty button", function() {

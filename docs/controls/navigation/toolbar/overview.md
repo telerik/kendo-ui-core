@@ -32,7 +32,7 @@ The following example demonstrates how to initialize the ToolBar and apply its b
                 {
                     type: "button",
                     text: "Button",
-                    icon: "note",
+                    icon: "info-circle",
                     showIcon: "toolbar"
                 },
 
@@ -41,7 +41,7 @@ The following example demonstrates how to initialize the ToolBar and apply its b
                     type: "button",
                     togglable: true,
                     text: "Toggle Button",
-                    icon: "tick",
+                    icon: "check",
                     selected: true
                 },
 

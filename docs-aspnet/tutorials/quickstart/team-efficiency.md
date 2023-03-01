@@ -1426,7 +1426,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
                 @(Html.Kendo().Button()
                    .Name("menuPanelClose")
                    .Content("Close")
-                   .Icon("close")
+                   .Icon("x")
                    .HtmlAttributes(new { @class = "k-rpanel-toggle" })
                 )
             </div>

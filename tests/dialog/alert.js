@@ -20,10 +20,10 @@
             var wrapper = alertDialog.wrapper;
             var wrapperChildren = wrapper.children();
 
-            assert.isOk(wrapper.is(".k-alert.k-widget.k-dialog.k-window"));
+            assert.isOk(wrapper.is(".k-alert.k-dialog.k-window"));
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar"));
             assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
-            assert.isOk(wrapperChildren.eq(2).is(".k-dialog-buttongroup"));
+            assert.isOk(wrapperChildren.eq(2).is(".k-dialog-actions"));
             assert.isOk(wrapperChildren.eq(2).children().eq(0).is(".k-button"));
         });
 

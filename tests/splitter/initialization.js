@@ -55,8 +55,8 @@
 
             var splitbars = splitter.dom.find(".k-splitbar");
 
-            assert.equal(splitbars.eq(0).find(".k-icon.k-i-caret-alt-left").length, 1);
-            assert.equal(splitbars.eq(1).find(".k-icon.k-i-caret-alt-right").length, 1);
+            assert.equal(splitbars.eq(0).find(".k-svg-icon.k-svg-i-caret-alt-left").length, 1);
+            assert.equal(splitbars.eq(1).find(".k-svg-icon.k-svg-i-caret-alt-right").length, 1);
         });
 
         it("splitbars have resize handle between resizable panes", function() {
@@ -79,7 +79,7 @@
                 ]
             });
 
-            assert.equal(splitter.dom.find(".k-i-caret-alt-right").length, 1);
+            assert.equal(splitter.dom.find(".k-expand-prev").length, 1);
         });
 
         it("splibars next to initially collapsed panes are not draggable", function() {

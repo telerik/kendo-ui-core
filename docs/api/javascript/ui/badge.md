@@ -83,7 +83,7 @@ See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for mor
     <span id="badge"></span>
     <script>
         $('#badge').kendoBadge({
-            icon: 'add',
+            icon: 'plus',
             themeColor: 'primary'
         });
     </script>
@@ -314,7 +314,7 @@ Set badge icon after initialization.
     <span id="badge">Badge</span>
 
     <script>
-        var badge = $('#badge').kendoBadge({ icon: 'add' }).data('kendoBadge');
+        var badge = $('#badge').kendoBadge({ icon: 'plus' }).data('kendoBadge');
 
         window.setTimeout(function() {
             badge.icon('cog');

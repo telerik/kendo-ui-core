@@ -221,3 +221,91 @@ The flag, which indicates whether to show or hide the loading overlay.
       background-image: url('...non-animated.image.here...');
     }
 ```
+
+### icon
+
+Returns a generated HTML string that represents a n SVG or Font icon depending on the globally set configation (by default 'svg'). 
+
+To set the global iconType use `kendo.setDefaults('iconType', 'font');` method before the widgets initialization. 
+
+#### Parameters
+
+##### element `jQuery` *(optional)*
+
+If a jQuery element is passed as the first it will render an icon classes and content for the configured icon. 
+
+##### options `Object|String` *(required)*
+
+If `string` is provided it will attempt to render a valid SVG icon from the predefined kendo svg collection (`kendo.ui.svgIcons`). Or add class for the font icon by preffixing with `k-i-`. Check teh available options in FontIcon or SvgIcon API sections.
+
+#### Example - extending an element
+
+    <span id="icon"></span>
+
+    <script>
+        kendo.ui.icon($("#icon"), { icon: 'camera' });
+    </script>
+
+#### Example - using without element
+
+    <script>
+        var icon =  kendo.ui.icon('camera');
+        $('body').append(icon);
+    </script>
+
+#### Example - configure specific icon type
+
+    <script>
+        var icon =  kendo.ui.icon({ icon: 'camera', type: 'font' });
+        $('body').append(icon);
+    </script>
+
+#### Example - using advanced 
+
+    <script>
+        var icon =  kendo.ui.icon({ icon: 'camera', type: 'font' });
+        $('body').append(icon);
+    </script>
+
+#### Example - setup a new global default iconType
+
+    <script>
+        kendo.setDefaults('iconType', 'font');
+        var icon =  kendo.ui.icon({ icon: 'camera' });
+        $('body').append(icon);
+    </script>
+
+#### Example - setup a custom svg icon
+
+    <script>
+        var icon =  kendo.ui.icon({ 
+            type: 'svg', // if default is svg you can omit this option
+            icon:{
+                viewBox: '0 0 512 512',
+                content: '<path d="M448 128h-64l-64-64H192l-64 64H64c-17.6 0-32 14.4-32 32v288c0 17.6 14.4 32 32 32h384c17.6 0 32-14.4 32-32V160c0-17.6-14.4-32-32-32zM256 416c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112zm64-112c0 35.3-28.7 64-64 64s-64-28.7-64-64 28.7-64 64-64 64 28.7 64 64z" />'
+            } 
+        });
+        $('body').append(icon);
+    </script>
+
+#### Example - setup a custom icon renderer
+
+    <script>
+        var icon =  kendo.ui.icon({ 
+            type: (element, options) => `<span class="my-custom-icon"><span class="k-icon k-i-${options.icon}"></span></span>`
+            icon: 'camera'
+        });
+        $('body').append(icon);
+    </script>
+
+#### Example - setup a global custom icon renderer
+
+    <script>
+        kendo.setDefaults('iconType', (element, options) => `<span class="my-custom-icon"><span class="k-icon k-i-${options.icon}"></span></span>`);
+        
+        var icon =  kendo.ui.icon({ 
+            icon: 'camera'
+        });
+        
+        $('body').append(icon);
+    </script>

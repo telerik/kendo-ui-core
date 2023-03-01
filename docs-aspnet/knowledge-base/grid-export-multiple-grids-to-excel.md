@@ -42,7 +42,7 @@ The example below relies on the following key steps:
     @(Html.Kendo().Button()
         .Name("exportData")
         .Content("Export to Excel")
-        .Icon("excel")
+        .Icon("file-excel")
         .Events(ev => ev.Click("exportDataClick"))
     )
 

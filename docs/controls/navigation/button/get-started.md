@@ -17,7 +17,7 @@ After the completion of this guide, you will be able to achieve the following en
 
 	<script>    
 	    $("#btn").kendoButton({
-			icon: "edit",
+			icon: "pencil",
 			badge: {
 	            text: "!Note",            
 	            themeColor: "warning",
@@ -61,7 +61,7 @@ You can display an icon in the Button by configuring the [`icon`](/api/javascrip
 
 <script>    
     $("#btn").kendoButton({
-		icon: "edit"
+		icon: "pencil"
 	});
 </script>
 ```
@@ -75,7 +75,7 @@ Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) opt
 
 <script>    
     $("#btn").kendoButton({
-		icon: "edit",
+		icon: "pencil",
 		badge: {
             text: "!Note",            
             themeColor: "warning",

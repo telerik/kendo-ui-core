@@ -115,7 +115,7 @@
             value: ["1", "2"]
         });
 
-        multiselect.tagList.find(".k-i-x-circle").first().click();
+        multiselect.tagList.find(".k-i-x-circle,.k-svg-i-x-circle").first().click();
     });
 
     it("MultiSelect raises select event", function() {

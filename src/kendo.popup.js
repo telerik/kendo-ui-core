@@ -388,8 +388,6 @@ var __meta__ = {
                 .children(ACTIVECHILDREN)
                 .addClass(ACTIVE)
                 .addClass(dirClass);
-
-            this.element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
         },
 
         position: function() {

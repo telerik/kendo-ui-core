@@ -106,8 +106,7 @@
             assert.isOk(spanArrow.is("span"));
             assert.isOk(spanArrow.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
-            assert.isOk(arrow.hasClass("k-icon k-i-caret-alt-down"));
-            assert.equal(arrow.html(), "");
+            assert.isOk(arrow.is(".k-icon.k-i-caret-alt-down, .k-svg-icon.k-svg-i-caret-alt-down"));
         });
 
         it("arrow button dows not have tabindex", function() {
@@ -1120,7 +1119,7 @@
             var icon = filterHeader.find(".k-input-icon");
 
             assert.isOk(icon[0]);
-            assert.isOk(icon.hasClass("k-i-search"));
+            assert.isOk(icon.is(".k-i-search,.k-svg-i-search"));
         });
 
         it("widget does not retrieve data attributes if options are set", function() {

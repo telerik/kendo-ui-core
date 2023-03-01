@@ -225,14 +225,14 @@
         it("icon prepends a span element with corresponding class(es) to the button element", function() {
             container.kendoToolBar({
                 items: [
-                    { type: "button", id: "foo", icon: "foo" }
+                    { type: "button", id: "foo", icon: "plus" }
                 ]
             });
 
-            var icon = container.find("#foo").children("span.k-icon");
+            var icon = container.find("#foo").children("span.k-icon, span.k-svg-icon");
 
             assert.equal(icon.length, 1);
-            assert.isOk(icon.hasClass("k-i-foo"));
+            assert.isOk(icon.is(".k-i-plus, .k-svg-i-plus"));
         });
 
         it("icon adds a k-icon-button class to button with no text", function() {
@@ -399,34 +399,34 @@
         it("button with showIcon: both has icon both in toolbar and overflow popup", function() {
             var toolbar = container.kendoToolBar({
                 items: [
-                    { type: "button", id: "foo", icon: "foo", showIcon: "both" }
+                    { type: "button", id: "foo", icon: "plus", showIcon: "both" }
                 ]
             }).data("kendoToolBar");
 
-            var icon = toolbar.element.find("#foo").find("span.k-icon");
+            var icon = toolbar.element.find("#foo").find("span.k-icon, span.k-svg-icon");
 
             assert.equal(icon.length, 1);
-            assert.isOk(icon.hasClass("k-i-foo"));
+            assert.isOk(icon.is(".k-i-plus, .k-svg-i-plus"));
 
-            icon = toolbar.overflowMenu.element.find("#foo_overflow").find("span.k-icon");
+            icon = toolbar.overflowMenu.element.find("#foo_overflow").find("span.k-icon, span.k-svg-icon");
 
             assert.equal(icon.length, 1);
-            assert.isOk(icon.hasClass("k-i-foo"));
+            assert.isOk(icon.is(".k-i-plus, .k-svg-i-plus"));
         });
 
         it("button with showIcon: toolbar has icon only in toolbar", function() {
             var toolbar = container.kendoToolBar({
                 items: [
-                    { type: "button", id: "foo", icon: "foo", showIcon: "toolbar" }
+                    { type: "button", id: "foo", icon: "plus", showIcon: "toolbar" }
                 ]
             }).data("kendoToolBar");
 
-            var icon = toolbar.element.find("#foo").children("span.k-icon");
+            var icon = toolbar.element.find("#foo").children("span.k-icon, span.k-svg-icon");
 
             assert.equal(icon.length, 1);
-            assert.isOk(icon.hasClass("k-i-foo"));
+            assert.isOk(icon.is(".k-i-plus, .k-svg-i-plus"));
 
-            icon = toolbar.overflowMenu.element.find(".k-link.k-overflow-button").children("span.k-icon");
+            icon = toolbar.overflowMenu.element.find(".k-link.k-overflow-button").children("span.k-icon, span.k-svg-icon");
 
             assert.equal(icon.length, 0);
         });
@@ -434,18 +434,18 @@
         it("button with showIcon: overflow has icon only in overflow container", function() {
             var toolbar = container.kendoToolBar({
                 items: [
-                    { type: "button", id: "foo", icon: "foo", showIcon: "overflow" }
+                    { type: "button", id: "foo", icon: "plus", showIcon: "overflow" }
                 ]
             }).data("kendoToolBar");
 
-            var icon = toolbar.element.find("#foo").find("span.k-icon");
+            var icon = toolbar.element.find("#foo").find("span.k-icon, span.k-svg-icon");
 
             assert.equal(icon.length, 0);
 
-            icon = toolbar.overflowMenu.element.find("#foo_overflow").find("span.k-icon");
+            icon = toolbar.overflowMenu.element.find("#foo_overflow").find("span.k-icon, span.k-svg-icon");
 
             assert.equal(icon.length, 1);
-            assert.isOk(icon.hasClass("k-i-foo"));
+            assert.isOk(icon.is(".k-i-plus, .k-svg-i-plus"));
         });
 
         it("button renders <button> tag when useButtonTag is set to true", function() {
@@ -1070,7 +1070,7 @@
             var arrowButton = splitButton.arrowButton;
 
             click(arrowButton);
-            roughlyEqual(splitButton.wrapper.outerWidth(), splitButton.menu._popup.element.outerWidth(), 8);
+            roughlyEqual(splitButton.wrapper.outerWidth(), splitButton.menu._popup.element.outerWidth(), 10);
         });
 
         it("options.attribute are attached to the main button", function() {

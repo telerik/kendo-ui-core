@@ -62,8 +62,8 @@ I have a requirement to validate an email address and web address for basic form
                                 message += this + "\n";
                             });
                         }
-                        grid.editable.element.find("[data-valmsg-for='" + key + "']").replaceWith('<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-warning"></span>' + message + '<div class="k-callout k-callout-n"></div></div>').show();
-                    });       
+                        grid.editable.element.find("[data-valmsg-for='" + key + "']").replaceWith('<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-exclamation-circle"></span>' + message + '<div class="k-callout k-callout-n"></div></div>').show();
+                    });
                 });
             }
         }

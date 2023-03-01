@@ -15,12 +15,12 @@ The following example demonstrates how to configure the DropDownButton items.
 ```HtmlHelper
     @(Html.Kendo().DropDownButton()
         .Name("DropDownButton")
-        .Icon("paste")
+        .Icon("clipboard")
         .Items(items =>
         {
-            items.Add().Id("keep-text").Text("Keep Text Only").Icon("paste-plain-text");
-            items.Add().Id("paste-html").Text("Paste as HTML").Icon("paste-as-html").Hidden(true);
-            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("paste-markdown").Enabled(false);
+            items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
+            items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code").Hidden(true);
+            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown").Enabled(false);
             items.Add().Id("favorite").Text("Mark As Favorite").ImageUrl(Url.Content("~/content/shared/icons/16/star.png"));
         })
     )

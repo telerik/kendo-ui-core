@@ -1,13 +1,14 @@
 import "./kendo.core.js";
 import "./kendo.popup.js";
 import "./kendo.textbox.js";
+import "./kendo.icons.js";
 
     var __meta__ = {
         id: "dialog",
         name: "Dialog",
         category: "web", // suite
         description: "The dialog widget is a modal popup that brings information to the user.",
-        depends: ["core", "popup", "textbox"] // dependencies
+        depends: ["core", "popup", "textbox", "icons"] // dependencies
     };
 
     (function($, undefined) {
@@ -28,7 +29,7 @@ import "./kendo.textbox.js";
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-dialog-titlebar",
-            KBUTTONGROUP = ".k-dialog-buttongroup",
+            KBUTTONGROUP = ".k-dialog-actions",
             // KACTIONS = ".k-actions",
             KBUTTON = ".k-button",
             KALERT = "k-alert",
@@ -121,6 +122,7 @@ import "./kendo.textbox.js";
             setOptions: function(options) {
                 var that = this;
                 var sizeClass = that.options.size;
+                that.wrapper.removeClass(kendo.getValidCssClass("k-dialog-", "themeColor", that.options.themeColor));
 
                 options = $.extend(that.options, options);
 
@@ -150,6 +152,10 @@ import "./kendo.textbox.js";
                     that.wrapper.hide();
                 } else {
                     that._triggerOpen();
+                }
+
+                if (options.themeColor && options.themeColor !== "none") {
+                    that.wrapper.addClass(kendo.getValidCssClass("k-dialog-", "themeColor", that.options.themeColor));
                 }
 
                 if (typeof options.modal !== "undefined") {
@@ -354,6 +360,9 @@ import "./kendo.textbox.js";
                 that._closable(wrapper);
 
                 wrapper.append(content);
+                if (options.themeColor && options.themeColor !== "none") {
+                    wrapper.addClass(wrapper.addClass(kendo.getValidCssClass("k-dialog-", "themeColor", options.themeColor)));
+                }
 
                 if (options.content) {
                     kendo.destroy(content.children());
@@ -369,7 +378,7 @@ import "./kendo.textbox.js";
                 var that = this;
                 var options = that.options;
                 var titlebar = wrapper.children(KDIALOGTITLEBAR);
-                var titlebarActions = titlebar.find(".k-window-actions");
+                var titlebarActions = titlebar.find(".k-window-titlebar-actions");
                 var closeAction = titlebarActions.length ? titlebarActions.find(".k-dialog-close") : wrapper.find(".k-dialog-close");
 
                 closeAction.remove();
@@ -923,6 +932,7 @@ import "./kendo.textbox.js";
             options: {
                 title: "",
                 buttonLayout: "stretched",
+                themeColor: "",
                 actions: [],
                 modal: true,
                 size: "auto",
@@ -1116,19 +1126,20 @@ import "./kendo.textbox.js";
         };
 
         templates = {
-            wrapper: template(() => "<div class='k-widget k-window k-dialog' role='dialog'></div>"),
+            wrapper: template(() => "<div class='k-window k-dialog' role='dialog'></div>"),
             action: template((data) => `<button type='button' class='k-button k-button-md k-rounded-md k-button-solid ${data.primary ? 'k-button-solid-primary' : 'k-button-solid-base'}'></button>`),
             titlebar: template(({ title }) =>
-                "<div class='k-window-titlebar k-dialog-titlebar k-hstack'>" +
+                "<div class='k-window-titlebar k-dialog-titlebar'>" +
                     `<span class='k-window-title k-dialog-title'>${encode(title)}</span>` +
-                    "<div class='k-window-actions k-dialog-actions k-hstack'></div>" +
+                    "<div class='k-window-titlebar-actions k-dialog-titlebar-actions k-hstack'></div>" +
                 "</div>"
             ),
-            close: template(({ messages }) => `<a role='button' href='#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action k-dialog-action k-dialog-close' title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>` +
-                "<span class='k-button-icon k-icon k-i-x'></span></a>"),
-            actionbar: template(({ buttonLayout }) => `<div class='k-dialog-buttongroup k-actions k-hstack k-justify-content-${encode(buttonLayout)}'></div>`),
+            close: template(({ messages }) => `<button class="k-window-titlebar-action k-dialog-titlebar-action k-button k-button-md k-button-flat k-button-flat-base k-rounded-md k-icon-button k-dialog-close" title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>
+                                                    ${kendo.ui.icon({ icon: "x", iconClass: "k-button-icon" })}
+                                                </button>`),
+            actionbar: template(({ buttonLayout }) => `<div class='k-dialog-actions k-actions k-hstack k-justify-content-${encode(buttonLayout)}'></div>`),
             overlay: "<div class='k-overlay'></div>",
-            alertWrapper: template(() => "<div class='k-widget k-window k-dialog' role='alertdialog'></div>"),
+            alertWrapper: template(() => "<div class='k-window k-dialog' role='alertdialog'></div>"),
             alert: "<div></div>",
             confirm: "<div></div>",
             prompt: "<div></div>",

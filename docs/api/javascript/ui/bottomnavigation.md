@@ -24,8 +24,8 @@ Toggles the border of the widget.
             border: false,
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
@@ -43,8 +43,8 @@ Toggles the shadow of the widget.
             shadow: true,
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
@@ -62,15 +62,15 @@ Specifies how fill is applied to the BottomNavigation. Valid options are `flat` 
             fill: "solid",
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
 ### itemFlow `String` *(default: "vertical")*
 
-Sets the position of the text label. Valid options are `vertical` and `horizontal`.  
+Sets the position of the text label. Valid options are `vertical` and `horizontal`.
 
 #### Example
 
@@ -81,8 +81,8 @@ Sets the position of the text label. Valid options are `vertical` and `horizonta
             itemFlow: "horizontal",
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
@@ -113,13 +113,13 @@ Specifies the theme color of the component. Valid options are:
             themeColor: "dark",
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### items `Array` 
+### items `Array`
 
 Specifies the items of the BottomNavigation component.
 
@@ -131,13 +131,13 @@ Specifies the items of the BottomNavigation component.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### items.url `String` 
+### items.url `String`
 
 The URL (href) to which the item will navigate to.
 
@@ -149,13 +149,13 @@ The URL (href) to which the item will navigate to.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", url: "http://www.telerik.com" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### items.data `Object` 
+### items.data `Object`
 
 Contextual data to be used for events within the component.
 
@@ -167,8 +167,8 @@ Contextual data to be used for events within the component.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", data: { view: "home" } },
-                { text: "Info", icon: "info", data: { view: "info" } },
-                { text: "Contact", icon: "email", data: { view: "info" } }
+                { text: "Info", icon: "info-circle", data: { view: "info" } },
+                { text: "Contact", icon: "envelop", data: { view: "info" } }
             ],
             select: function (ev) {
                 alert(ev.data.view);
@@ -176,7 +176,7 @@ Contextual data to be used for events within the component.
         });
     </script>
 
-### items.icon `String` 
+### items.icon `String`
 
 Defines the name for an existing icon in a Kendo UI theme.
 
@@ -190,13 +190,13 @@ See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for mor
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### items.text `String` 
+### items.text `String`
 
 The text of the item. It is optional - if not set, no text will be rendered.
 
@@ -208,8 +208,8 @@ The text of the item. It is optional - if not set, no text will be rendered.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { icon: "home" },
-                { icon: "info" },
-                { icon: "email" }
+                { icon: "info-circle" },
+                { icon: "envelop" }
             ]
         });
     </script>
@@ -226,13 +226,13 @@ If false, the text will be able to render HTML.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "<strong>Home</strong>", icon: "home", encoded: false },
-                { text: "<strong>Info</strong>", icon: "info", encoded: true },
-                { text: "Contact", icon: "email" }
+                { text: "<strong>Info</strong>", icon: "info-circle", encoded: true },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### items.iconClass `String` 
+### items.iconClass `String`
 
 Defines the class name added to the icon element.
 
@@ -244,13 +244,13 @@ Defines the class name added to the icon element.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", iconClass: "my-icon-class" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### items.cssClass `String` 
+### items.cssClass `String`
 
 Defines the class names of the item's element.
 
@@ -262,13 +262,13 @@ Defines the class names of the item's element.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", cssClass: "my-css-class" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### items.attributes `Object` 
+### items.attributes `Object`
 
 Defines custom attributes of the item's element.
 
@@ -280,8 +280,8 @@ Defines custom attributes of the item's element.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", attributes: { "data-val" : "custom data attribute" } },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
@@ -298,8 +298,8 @@ Toggles the enabled state of the item.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", enabled: false },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
@@ -316,13 +316,13 @@ Toggles the selected state of the item.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", selected: true },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### items.template `String|Function` 
+### items.template `String|Function`
 
 Sets a custom template for the item (overrides the `template` option).
 
@@ -334,13 +334,13 @@ Sets a custom template for the item (overrides the `template` option).
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", template: "<span>#:text#</span>" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
 
-### template `String | Function` 
+### template `String | Function`
 
 Sets a custom template for the items.
 
@@ -352,9 +352,9 @@ Sets a custom template for the items.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
-            ], 
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
+            ],
             template: "<span>#:text#</span>"
         });
     </script>
@@ -372,8 +372,8 @@ Specifies CSS position of the BottomNavigation in the document. Valid options ar
             positionMode: "absolute",
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         });
     </script>
@@ -405,8 +405,8 @@ Add item before an already existing item.
             ]
         }).data("kendoBottomNavigation");
 
-        bottomNav.add({ text: "Contact", icon: "email", attributes: { id: "email" } });
-        bottomNav.add({ text: "Info", icon: "info" }, $("#email"));
+        bottomNav.add({ text: "Contact", icon: "envelop", attributes: { id: "email" } });
+        bottomNav.add({ text: "Info", icon: "info-circle" }, $("#email"));
     </script>
 
 
@@ -432,8 +432,8 @@ Specifies the state of the element.
         var bottomNav = $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", enabled: false, attributes: { id: "home" } },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -463,8 +463,8 @@ The zero-based index of the item.
         var bottomNav = $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", enabled: false },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -494,8 +494,8 @@ The id of the item.
         var bottomNav = $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", enabled: false, attr: { id: "home" } },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -503,7 +503,7 @@ The id of the item.
         bottomNav.enable(home, true);
     </script>
 
-### items 
+### items
 
 Gets items' elements in a jQuery array.
 
@@ -519,8 +519,8 @@ Gets items' elements in a jQuery array.
         var bottomNav = $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -545,8 +545,8 @@ The element to be removed.
         var bottomNav = $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -580,8 +580,8 @@ Forces the selected state to the specified one.
         var bottomNav = $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -607,8 +607,8 @@ A bool value to toggle the visibility state of the text element.
         var bottomNav = $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home" },
-                { text: "Info", icon: "info" },
-                { text: "Contact", icon: "email" }
+                { text: "Info", icon: "info-circle" },
+                { text: "Contact", icon: "envelop" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -651,8 +651,8 @@ If invoked prevents the item selection.
         $("#bottomnav").kendoBottomNavigation({
             items: [
                 { text: "Home", icon: "home", url: "http://www.telerik.com", data: { view: "home" } },
-                { text: "Info", icon: "info", data: { view: "info" } },
-                { text: "Contact", icon: "email", data: { view: "email" } }
+                { text: "Info", icon: "info-circle", data: { view: "info" } },
+                { text: "Contact", icon: "envelop", data: { view: "email" } }
             ],
             select: function (ev) {
                 var data = ev.data;

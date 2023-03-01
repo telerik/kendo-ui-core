@@ -53,7 +53,7 @@ The following example demonstrates how to configure different icons.
                 .IconClass("item")
                 .LinkClass("item");
         })
-        .DelimiterIcon("line")
+        .DelimiterIcon("shape-line")
     )
 ```
 {% if site.core %}

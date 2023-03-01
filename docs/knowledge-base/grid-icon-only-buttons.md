@@ -63,8 +63,8 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
 
       .k-grid .k-grid-toolbar .k-grid-add .k-icon,
       .k-grid tbody .k-grid-edit-command .k-icon,
-      .k-grid tbody .k-grid-save-command .k-icon,
-      .k-grid tbody .k-grid-cancel-command .k-icon,
+      .k-grid tbody .k-grid-update .k-icon,
+      .k-grid tbody .k-grid-cancel .k-icon,
       .k-grid tbody .k-grid-remove-command .k-icon {
         margin: 0;
       }
@@ -76,16 +76,16 @@ The following example demonstrates the full implementation of the suggested appr
     <style>
       .k-grid .k-grid-toolbar .k-grid-add,
       .k-grid tbody .k-grid-edit-command,
-      .k-grid tbody .k-grid-save-command,
-      .k-grid tbody .k-grid-cancel-command,
+      .k-grid tbody .k-grid-update,
+      .k-grid tbody .k-grid-cancel,
       .k-grid tbody .k-grid-remove-command {
         min-width: 0;
       }
 
       .k-grid .k-grid-toolbar .k-grid-add .k-icon,
       .k-grid tbody .k-grid-edit-command .k-icon,
-      .k-grid tbody .k-grid-save-command .k-icon,
-      .k-grid tbody .k-grid-cancel-command .k-icon,
+      .k-grid tbody .k-grid-update .k-icon,
+      .k-grid tbody .k-grid-cancel .k-icon,
       .k-grid tbody .k-grid-remove-command .k-icon {
         margin: 0;
       }

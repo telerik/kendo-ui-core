@@ -23,9 +23,9 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
             items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true);
             items.Add().Type(CommandType.SplitButton).Text("Insert").MenuButtons(menuButtons =>
             {
-                menuButtons.Add().Text("Insert above").Icon("insert-up");
+                menuButtons.Add().Text("Insert above").Icon("insert-top");
                 menuButtons.Add().Text("Insert between").Icon("insert-middle");
-                menuButtons.Add().Text("Insert below").Icon("insert-down");
+                menuButtons.Add().Text("Insert below").Icon("insert-bottom");
             });
             items.Add().Type(CommandType.Separator);
             items.Add().Template("<label for='dropdown'>Format:</label>");

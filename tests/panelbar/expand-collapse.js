@@ -124,7 +124,7 @@
 
             item.find("> .k-link").trigger("click");
 
-            assert.isOk(item.find(".k-icon").hasClass("k-i-chevron-down"));
+            assert.isOk(item.find(".k-icon,.k-svg-icon").is(".k-i-chevron-down,.k-svg-i-chevron-down"));
         });
 
         it("clicking collapsed items should expand them", function() {
@@ -140,7 +140,7 @@
 
             item.find("> .k-link").trigger("click");
 
-            assert.isOk(item.find(".k-icon").hasClass("k-i-chevron-up"));
+            assert.isOk(item.find(".k-icon,.k-svg-icon").is(".k-i-chevron-up,.k-svg-i-chevron-up"));
         });
 
         it("clicking collapsed items should not expand child groups", function() {
@@ -164,7 +164,7 @@
         it("clicking arrows toggles child groups", function() {
             var item = getRootItem(3);
 
-            item.find("> .k-link > .k-icon").trigger("click");
+            item.find("> .k-link > .k-icon,> .k-link > .k-svg-icon").trigger("click");
 
             assert.equal(item.find(".k-group").css("display"), "none");
         });

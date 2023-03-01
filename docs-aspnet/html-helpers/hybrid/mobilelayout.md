@@ -44,7 +44,7 @@ The hybrid Telerik UI Layout HtmlHelper for ASP.NET MVC is a server-side wrapper
                 Html.Kendo().MobileTabStrip()
                     .Items(items => {
                         items.Add().Icon("contacts").Text("Profile");
-                        items.Add().Icon("settings").Text("Settings");
+                        items.Add().Icon("wrench").Text("Settings");
                     })
             )
         )

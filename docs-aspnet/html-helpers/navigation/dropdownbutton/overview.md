@@ -27,11 +27,11 @@ The following example demonstrates how to define the DropDownButton.
     @(Html.Kendo().DropDownButton()
         .Name("DropDownButton")
         .Text("Paste")
-        .Icon("paste")
+        .Icon("clipboard")
         .Items(items => {
-            items.Add().Id("keep-text").Text("Keep Text Only").Icon("paste-plain-text");
-            items.Add().Id("paste-html").Text("Paste as HTML").Icon("paste-as-html");
-            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("paste-markdown");
+            items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
+            items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
+            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
             items.Add().Id("paste-default").Text("Set Default Paste");
         })
     )

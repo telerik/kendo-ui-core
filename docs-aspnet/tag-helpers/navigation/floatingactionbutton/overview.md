@@ -33,7 +33,7 @@ The following example demonstrates how to initialize the FloatingActionButton us
         <floatingactionbutton-items>
             <floatingactionbutton-item label="Download" icon="download" click="onItemClick"></floatingactionbutton-item>
             <floatingactionbutton-item label="Print" icon="print" click="onItemClick"></floatingactionbutton-item>
-            <floatingactionbutton-item label="Email" icon="email" click="onItemClick"></floatingactionbutton-item>
+            <floatingactionbutton-item label="Email" icon="envelop" click="onItemClick"></floatingactionbutton-item>
         </floatingactionbutton-items>
     </kendo-floatingactionbutton>
 ```
@@ -61,7 +61,7 @@ You can subscribe to all FloatingActionButton events.
         <floatingactionbutton-items>
             <floatingactionbutton-item label="Download" icon="download" click="onItemClick"></floatingactionbutton-item>
             <floatingactionbutton-item label="Print" icon="print" click="onItemClick"></floatingactionbutton-item>
-            <floatingactionbutton-item label="Email" icon="email" click="onItemClick"></floatingactionbutton-item>
+            <floatingactionbutton-item label="Email" icon="envelop" click="onItemClick"></floatingactionbutton-item>
         </floatingactionbutton-items>
     </kendo-floatingactionbutton>
 
@@ -69,7 +69,7 @@ You can subscribe to all FloatingActionButton events.
         function onClick(e){
             //handle the FloatingActionButton click event
         };
-        
+
         function onExpand(e){
             //handle the FloatingActionButton expand event
         };

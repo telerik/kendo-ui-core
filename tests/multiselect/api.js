@@ -378,7 +378,7 @@
             multiselect.enable(false);
             multiselect.enable(true);
 
-            multiselect.tagList.find(".k-i-x-circle").click();
+            multiselect.tagList.find(".k-i-x-circle,.k-svg-i-x-circle").click();
             multiselect.wrapper.mousedown();
 
             assert.equal(multiselect.tagList.children(".k-chip").length, 0);

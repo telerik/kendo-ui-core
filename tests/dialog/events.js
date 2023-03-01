@@ -26,7 +26,7 @@
 
         it("dialog actions have kendoNS", function() {
             var dialog = createDialog({ actions: [{}, {}] });
-            var actionBtns = dialog.wrapper.find(".k-dialog-buttongroup > .k-button");
+            var actionBtns = dialog.wrapper.find(".k-dialog-actions > .k-button");
             actionBtns.each(function() {
                 assert.isOk($(this).data("kendoNS"));
             });
@@ -226,7 +226,7 @@
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keyCode);
+            dialog.wrapper.find(".k-dialog-actions .k-button").press(keyCode);
         }
 
         it("action button triggered by enter key", $.proxy(actionButtonKeyTrigger, this, keys.ENTER));
@@ -242,7 +242,7 @@
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ESC);
+            dialog.wrapper.find(".k-dialog-actions .k-button").press(keys.ESC);
             assert.isOk(!dialog.options.visible);
         });
 
@@ -256,8 +256,8 @@
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ENTER);
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            dialog.wrapper.find(".k-dialog-actions .k-button").press(keys.ENTER);
+            dialog.wrapper.find(".k-dialog-actions .k-button").click();
         });
 
         it("SPACEBAR key on action button runs action only once", function() {
@@ -270,8 +270,8 @@
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.SPACEBAR);
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            dialog.wrapper.find(".k-dialog-actions .k-button").press(keys.SPACEBAR);
+            dialog.wrapper.find(".k-dialog-actions .k-button").click();
         });
     });
 }());

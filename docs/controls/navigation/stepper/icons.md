@@ -28,7 +28,7 @@ The following example demonstrates how to configure different icons.
                     icon:"home"
                 },{
                     label: "Second step",
-                    icon: "attachment"
+                    icon: "paperclip"
                 },{
                     label: "Last step",
                     icon: "save"

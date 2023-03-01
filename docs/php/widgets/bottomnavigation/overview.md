@@ -18,14 +18,14 @@ The BottomNavigation provides a set of [default API configuration options](/api/
 **Step 1** Make sure you followed all the steps in the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
 **Step 2** Create a [BottomNavigation](/api/php/Kendo/UI/BottomNavigation):
-    
+
         $bottomNav = new \Kendo\UI\BottomNavigation('bottomNav');
 
         $inboxItem = new \Kendo\UI\BottomNavigationItem();
         $inboxItem->text("Inbox")
             ->template('<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top:2px; left:55px"></span>')
             ->data(array('view' => 'inbox'))
-            ->icon("email")
+            ->icon("envelop")
             ->selected(true);
 
         $calendarItem = new \Kendo\UI\BottomNavigationItem();
@@ -50,7 +50,7 @@ The BottomNavigation provides a set of [default API configuration options](/api/
 
 ## Items
 
-The Kendo UI BottomNavigation's items configuration allows setting various properties. For the full set, refer to the [API reference](api/javascript/ui/bottomnavigation/configuration/items). 
+The Kendo UI BottomNavigation's items configuration allows setting various properties. For the full set, refer to the [API reference](api/javascript/ui/bottomnavigation/configuration/items).
 
 > **Note:** When the `items.url` configuration is set, the items will be rendered as `<a>` tags. Otherwise, they will be rendered as `<span>` tags.
 
@@ -60,7 +60,7 @@ The Kendo UI BottomNavigation's items configuration allows setting various prope
         $inboxItem->text("Inbox")
             ->template('<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top:2px; left:55px"></span>')
             ->data(array('view' => 'inbox'))
-            ->icon("email")
+            ->icon("envelop")
             ->selected(true);
 
         $calendarItem = new \Kendo\UI\BottomNavigationItem();
@@ -81,14 +81,14 @@ The Kendo UI BottomNavigation's items configuration allows setting various prope
 
 ## Appearance
 
-The Kendo UI BottomNavigation for PHP allows you to alter the appearance of the component by setting the `itemFlow`, `themeColor`, `shadow` `border` and `fill`. 
+The Kendo UI BottomNavigation for PHP allows you to alter the appearance of the component by setting the `itemFlow`, `themeColor`, `shadow` `border` and `fill`.
 
         $bottomNav = new \Kendo\UI\BottomNavigation('bottomNav');
 
         $inboxItem = new \Kendo\UI\BottomNavigationItem();
-        $inboxItem->text("Inbox")           
+        $inboxItem->text("Inbox")
             ->data(array('view' => 'inbox'))
-            ->icon("email")
+            ->icon("envelop")
             ->selected(true);
 
         $calendarItem = new \Kendo\UI\BottomNavigationItem();
@@ -113,7 +113,7 @@ The Kendo UI BottomNavigation for PHP allows you to alter the appearance of the 
 
 ## Event Handling
 
-You can subscribe to the [select](/api/javascript/ui/bottomnavigation/events/select) event by the handler name. 
+You can subscribe to the [select](/api/javascript/ui/bottomnavigation/events/select) event by the handler name.
 
 ### Specify Function Names
 
@@ -124,7 +124,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
         $inboxItem = new \Kendo\UI\BottomNavigationItem();
         $inboxItem->text("Inbox")
             ->data(array('view' => 'inbox'))
-            ->icon("email")
+            ->icon("envelop")
             ->selected(true);
 
         $calendarItem = new \Kendo\UI\BottomNavigationItem();

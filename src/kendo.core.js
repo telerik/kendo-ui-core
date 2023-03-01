@@ -4956,6 +4956,7 @@ function pad(number, digits, end) {
                 cssProperties = kendo.cssProperties,
                 defaultValues = cssProperties.defaultValues[propName],
                 widgetProperties = cssProperties.propertyDictionary[widget],
+                overridePrefix = args.prefix,
                 widgetValues, validValue, prefix;
 
             if (!widgetProperties) {
@@ -4979,6 +4980,8 @@ function pad(number, digits, end) {
                 } else {
                     prefix = widgetProperties[PREFIX];
                 }
+
+                prefix = overridePrefix || prefix;
 
                 return prefix + validValue;
             } else {

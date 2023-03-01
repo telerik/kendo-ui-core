@@ -100,16 +100,16 @@ function getDataItem(listbox, item) {
 
 function getToolElementClassName(command) {
     var clssClassNames = {
-        "remove": "k-i-x",
-        "moveUp": "k-i-caret-alt-up",
-        "moveDown": "k-i-caret-alt-down",
-        "transferTo": "k-i-caret-alt-right",
-        "transferFrom": "k-i-caret-alt-left",
-        "transferAllTo": "k-i-caret-double-alt-right",
-        "transferAllFrom": "k-i-caret-double-alt-left"
+        "remove": "x",
+        "moveUp": "caret-alt-up",
+        "moveDown": "caret-alt-down",
+        "transferTo": "caret-alt-right",
+        "transferFrom": "caret-alt-left",
+        "transferAllTo": "caret-double-alt-right",
+        "transferAllFrom": "caret-double-alt-left"
     };
 
-    return clssClassNames[command];
+    return "k-svg-i-" + clssClassNames[command];
 }
 
 function clickButton(listbox, command, event) {

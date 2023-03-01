@@ -32,7 +32,7 @@ The following example demonstrates how to instantiate an ImageEditor with predef
                     {
                         type: "button",
                         text: "Custom Button",
-                        icon: "info",
+                        icon: "info-circle",
                         enable: true,
                         click:function(){
                             alert('button clicked')

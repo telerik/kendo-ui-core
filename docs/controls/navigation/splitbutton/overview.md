@@ -23,11 +23,11 @@ The following example demonstrates how to initialize the SplitButton from a `<bu
         $(document).ready(function () {
 
             $("#splitButton").kendoSplitButton({                  
-                icon:"paste",
+                icon: "clipboard",
                 items: [
-                    { id: "keep-text", text: "Keep Text Only", icon: "paste-plain-text" },
-                    { id: "paste-html", text: "Paste as HTML", icon: "paste-as-html" },
-                    { id: "paste-markdown", text: "Paste Markdown", icon: "paste-markdown" },
+                    { id: "keep-text", text: "Keep Text Only", icon: "clipboard-text" },
+                    { id: "paste-html", text: "Paste as HTML", icon: "clipboard-code" },
+                    { id: "paste-markdown", text: "Paste Markdown", icon: "clipboard-markdown" },
                     { id: "paste-default", text: "Set Default Paste"  }
                 ]
             });

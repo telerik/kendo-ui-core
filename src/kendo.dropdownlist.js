@@ -2,13 +2,14 @@ import "./kendo.list.js";
 import "./kendo.mobile.scroller.js";
 import "./kendo.virtuallist.js";
 import "./kendo.html.button.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "dropdownlist",
     name: "DropDownList",
     category: "web",
     description: "The DropDownList widget displays a list of values and allows the selection of a single value from the list.",
-    depends: [ "list", "html.button" ],
+    depends: [ "list", "html.button", "icons" ],
     features: [ {
         id: "mobile-scroller",
         name: "Mobile scroller",
@@ -1229,7 +1230,7 @@ var __meta__ = {
         _filterHeader: function() {
             var filterTemplate = '<div class="k-list-filter">' +
                 '<span class="k-searchbox k-input k-input-md k-rounded-md k-input-solid" type="text" autocomplete="off">' +
-                    '<span class="k-input-icon k-icon k-i-search"></span>' +
+                    kendo.ui.icon({ icon: "search", iconClass: "k-input-icon" }) +
                 '</span>' +
             '</div>';
 
@@ -1291,7 +1292,7 @@ var __meta__ = {
 
             that.span = span;
             that._arrow = wrapper.find(".k-input-button");
-            that._arrowIcon = that._arrow.find(".k-icon");
+            that._arrowIcon = that._arrow.find(".k-icon,.k-svg-icon");
         },
 
         _wrapper: function() {

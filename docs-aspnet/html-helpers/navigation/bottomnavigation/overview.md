@@ -47,7 +47,7 @@ The following example demonstrates the basic configuration for the BottomNavigat
         .PositionMode(BottomNavigationPositionMode.Absolute)
         .HtmlAttributes( new { style="bottom:0;"})
         .Items(i=> {
-            i.Add().Text("Inbox").Data(new { view = "inbox" }).Icon("email").Selected(true);
+            i.Add().Text("Inbox").Data(new { view = "inbox" }).Icon("envelop").Selected(true);
             i.Add().Text("Calendar").Data(new { view = "calendar" }).Icon("calendar-date");
             i.Add().Text("Profile").Data(new { view = "profile" }).Icon("user");
         })
@@ -67,10 +67,10 @@ The following example demonstrates the basic configuration for the BottomNavigat
         var inbox = new { view= "inbox" };
         var calendar = new { view = "calendar" };
         var profile = new { view = "profile" };
-    }  
+    }
     <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute" style="bottom:0;">
             <bottomnavigation-items>
-                <bottomnavigation-item context-data="@inbox" text="Inbox" icon="email" selected="true"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@inbox" text="Inbox" icon="envelop" selected="true"></bottomnavigation-item>
                 <bottomnavigation-item context-data="@calendar" text="Calendar" icon="calendar-date"></bottomnavigation-item>
                 <bottomnavigation-item context-data="@profile" text="Profile" icon="user"></bottomnavigation-item>
             </bottomnavigation-items>

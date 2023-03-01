@@ -125,7 +125,7 @@
                 $("<div id='window'>Content</div>")
             );
             assert.equal(
-                wnd.wrapper.find(".k-window-action").attr("role"),
+                wnd.wrapper.find(".k-window-titlebar-action").attr("role"),
                 "button"
             );
         });

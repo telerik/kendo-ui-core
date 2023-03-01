@@ -45,6 +45,15 @@ To create the Sparklines, add the component tags to the view and provide it with
             .Data(ViewBag.TemperatureData)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-sparkline name="temp-log"
+                     data="@ViewBag.TemperatureData"
+                     type="SparklineType.Column">
+        <tooltip format="{0} &deg;C"></tooltip>
+    </kendo-sparkline>
+```
+{% endif %}
 
 ## Functionality and Features
 

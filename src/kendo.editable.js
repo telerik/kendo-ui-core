@@ -4,12 +4,13 @@ import "./kendo.datepicker.js";
 import "./kendo.numerictextbox.js";
 import "./kendo.validator.js";
 import "./kendo.binder.js";
+import "./kendo.icons.js";
 
 var __meta__ = {
     id: "editable",
     name: "Editable",
     category: "framework",
-    depends: [ "checkbox", "dropdownlist", "datepicker", "numerictextbox", "validator", "binder" ],
+    depends: [ "checkbox", "dropdownlist", "datepicker", "numerictextbox", "validator", "binder", "icons" ],
     hidden: true
 };
 
@@ -26,7 +27,7 @@ var __meta__ = {
         AUTOCOMPLETEVALUE = "off",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
         ERRORTEMPLATE = ({ message }) => '<div class="k-tooltip k-tooltip-error k-validator-tooltip">' +
-            '<span class="k-tooltip-icon k-icon k-i-warning"></span>' +
+            kendo.ui.icon({ icon: "exclamation-circle", iconClass: "k-tooltip-icon" }) +
             `<span class="k-tooltip-content">${message}</span>` +
             '<span class="k-callout k-callout-n"></span>' +
         '</div>',
