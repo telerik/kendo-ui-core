@@ -1,6 +1,6 @@
 ---
-title: Show a Message When the Chart Has No Data
-page_title: Show a Message When the Chart Has No Data
+title: Showing a Message When the Chart Has No Data
+page_title: Showing a Message When the Chart Has No Data
 description: "An example on how to show a message when the {{ site.product }} Chart has no data."
 slug: chart-no-data-message
 tags: telerik, chart, no, data, message
@@ -28,7 +28,7 @@ How can I display a message in the {{ site.product }} Chart when its data source
 
 ## Solution
 
-The following example demonstrates how to achieve such behavior. Note that the `div` element of the message is positioned and decorated through CSS.
+The following example demonstrates how to achieve such behavior in the {{ site.product }} Chart. Note that the `div` element of the message is positioned and decorated through CSS.
 
 
 ```Index.cshtml
@@ -82,8 +82,33 @@ The following example demonstrates how to achieve such behavior. Note that the `
 
 ```
 
-For the complete implementation of the suggested approach, refer to the [Telerik REPL example on displaying the Chart when its data source is empty](https://netcorerepl.telerik.com/cQbPQFFd41Tge1n326).
+For the complete implementation of the suggested approach, refer to the [Telerik REPL example on displaying the {{ site.product }} Chart when its data source is empty](https://netcorerepl.telerik.com/cQbPQFFd41Tge1n326).
 
-## See Also 
+## More {{ site.framework }} Chart Resources
 
-* [API Reference of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [{{ site.framework }} Chart Documentation]({%slug htmlhelpers_charts_aspnetcore%})
+
+* [{{ site.framework }} Chart Demos](https://demos.telerik.com/{{ site.platform }}/charts/index)
+
+{% if site.core %}
+* [{{ site.framework }} Chart Product Page](https://www.telerik.com/aspnet-core-ui/charts)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Chart Product Page](https://www.telerik.com/aspnet-mvc/charts)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
+* [Telerik REPL Example on Displaying the {{ site.product }} Chart When Its Data Source is Empty](https://netcorerepl.telerik.com/cQbPQFFd41Tge1n326)

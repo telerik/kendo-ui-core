@@ -1,6 +1,6 @@
 ---
-title: Aligning Zero With Multiple Axes in the Chart
-page_title: Aligning Zero With Multiple Axes in the Chart
+title: Aligning Zero with Multiple Axes in the Chart
+page_title: Aligning Zero with Multiple Axes in the Chart
 description: "An example on how to align the zero value for multiple value axes in the {{ site.product }} Chart."
 type: how-to
 slug: chart-align-zero-multiple-axes
@@ -25,7 +25,7 @@ res_type: kb
 
 ## Description
 
-I have a chart with multiple axes. One has negative values and the other does not. How can I configure the zero on the two axes to be aligned and how can I show the negative values on one axis as well?
+I have a {{ site.product }} Chart with multiple axes. One has negative values and the other does not. How can I configure the zero on the two axes to be aligned and how can I show the negative values on one axis as well?
 
 ## Solution
 
@@ -111,10 +111,33 @@ I have a chart with multiple axes. One has negative values and the other does no
     </script>
 ```
 
-For the complete implementation of the suggested approach, refer to the [Telerik REPL example on aligning zero values with multiple axes within the Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500).
+For the complete implementation of the suggested approach, refer to the [Telerik REPL example on aligning zero values with multiple axes within the {{ site.framework }} Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500).
+
+## More {{ site.framework }} Chart Resources
+
+* [{{ site.framework }} Chart Documentation]({%slug htmlhelpers_charts_aspnetcore%})
+
+* [{{ site.framework }} Chart Demos](https://demos.telerik.com/{{ site.platform }}/charts/index)
+
+{% if site.core %}
+* [{{ site.framework }} Chart Product Page](https://www.telerik.com/aspnet-core-ui/charts)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Chart Product Page](https://www.telerik.com/aspnet-mvc/charts)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
 
-* [Client-Side API Reference of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
-* [Server-Side API Reference of the Chart](https://docs.telerik.com/{{ site.platform }}/api/chart)
-* [Telerik REPL: Align zero with multiple axes in the Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
+* [Telerik REPL: Align Zero with Multiple Axes in the Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500)

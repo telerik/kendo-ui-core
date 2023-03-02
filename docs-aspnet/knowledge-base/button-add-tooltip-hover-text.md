@@ -1,8 +1,8 @@
 ---
-title: Add Tooltips to Buttons
-description: An example on how to set a tooltip to a Button in {{ site.product }}.
+title: Adding Tooltips to Buttons
+description: An example on how to set a tooltip for a Button in {{ site.product }}.
 type: how-to
-page_title: Add Kendo UI Tooltips to Buttons
+page_title: Adding Tooltips to Buttons
 slug: button-add-tooltip-hover-text
 tags: button, add, tooltip, hover, text
 ticketid: 1413806
@@ -24,11 +24,11 @@ res_type: kb
 
 ## Description
 
-How can I add a Kendo UI Tooltip to a Button?
+How can I add a {{ site.product }}Tooltip to a Button?
 
 ## Solution
 
-To associate a tooltip with a Button in {{ site.product }}, follow the approach demonstrated in the [demo on the Kendo UI Tooltip](https://demos.telerik.com/{{ site.platform }}/tooltip/index).  
+To associate a tooltip with a Button in {{ site.product }}, follow the approach demonstrated in the [demo on the {{ site.product }} Tooltip](https://demos.telerik.com/{{ site.platform }}/tooltip/index).  
 
 ```javascript
     @(Html.Kendo().Button()
@@ -46,6 +46,30 @@ To associate a tooltip with a Button in {{ site.product }}, follow the approach 
     )
 ```
 
+## More {{ site.framework }} Button Resources
+
+* [{{ site.framework }} Button Documentation]({%slug htmlhelpers_button_aspnetcore%})
+
+* [{{ site.framework }} Button Demos](https://demos.telerik.com/{{ site.platform }}/button/index)
+
+{% if site.core %}
+* [{{ site.framework }} Button Product Page](https://www.telerik.com/aspnet-core-ui/button)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Button Product Page](https://www.telerik.com/aspnet-mvc/button)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Basic Usage of the Tooltip (Demo)](https://demos.telerik.com/{{ site.platform }}/tooltip/index)
+* [Client-Side API Reference of the Button for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+* [Server-Side API Reference of the Button for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/button)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

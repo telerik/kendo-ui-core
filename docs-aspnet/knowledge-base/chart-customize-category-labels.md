@@ -28,7 +28,7 @@ How can I customize the Category Axis labels of the Telerik UI for {{ site.frame
 
 ## Solution
 
-Use the [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/framework/drawing/overview) to customize the appearance of the labels in the Bar Chart. You can adjust the suggested approach to your preferences through the following steps:
+Use the [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/framework/drawing/overview) to customize the appearance of the labels in the {{ site.framework }} Bar Chart. You can adjust the suggested approach to your preferences through the following steps:
 
 1. Create a new function and pass its reference through the [Visual()](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#visualsystemstring) configuration method for the labels of the category axis.
 1. Initialize a new [`kendo.drawing.Group` object](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group).
@@ -85,15 +85,33 @@ Use the [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/framework/drawi
     </script>
 ```
 
-For the complete implementation of the suggested approach, refer to the [Telerik REPL example on customizing the category labels of the Bar Chart](https://netcorerepl.telerik.com/cRYFEKlh02kX4pEE00).
+For the complete implementation of the suggested approach, refer to the [Telerik REPL example on customizing the category labels of the {{ site.framework }} Bar Chart](https://netcorerepl.telerik.com/cRYFEKlh02kX4pEE00).
+
+## More {{ site.framework }} Chart Resources
+
+* [{{ site.framework }} Chart Documentation]({%slug htmlhelpers_charts_aspnetcore%})
+
+* [{{ site.framework }} Chart Demos](https://demos.telerik.com/{{ site.platform }}/charts/index)
+
+{% if site.core %}
+* [{{ site.framework }} Chart Product Page](https://www.telerik.com/aspnet-core-ui/charts)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Chart Product Page](https://www.telerik.com/aspnet-mvc/charts)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
 
-* [Client-Side API Reference of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
-* [Server-Side API Reference of the Chart](https://docs.telerik.com/{{ site.platform }}/api/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
 * [Telerik REPL: Customize the Category Labels of the Bar Chart](https://netcorerepl.telerik.com/cRYFEKlh02kX4pEE00)
-
-
-
-
-
