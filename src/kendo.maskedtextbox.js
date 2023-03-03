@@ -112,9 +112,9 @@ var __meta__ = {
                 that.readonly(element.is("[readonly]"));
             }
 
-            that.value(that.options.value || element.val());
-
             that._validationIcon = $(kendo.ui.icon({ icon: "exclamation-circle", iconClass: "k-input-validation-icon k-hidden" })).insertAfter(element);
+
+            that.value(that.options.value || element.val());
 
             that._label();
             that._applyCssClasses();

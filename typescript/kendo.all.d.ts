@@ -1661,7 +1661,7 @@ declare namespace kendo.ui {
     function icon(element: JQuery, options: string | FontIconOptions | SvgIconOptions): string;
     function icon(options: string | FontIconOptions | SvgIconOptions): string;
 
-    svgIcons: any;
+    var svgIcons: any;
 
     class Widget extends Observable {
         static fn: any;

@@ -25,9 +25,6 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Build less themes
-        run: npx gulp styles
-
       - name: Build scripts
         run: npx gulp scripts
 

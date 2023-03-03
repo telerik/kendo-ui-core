@@ -8,7 +8,7 @@ position: 3
 
 # Binding to Arrays
 
-The ListBox provides options for binding it to server-side arrays, client-side arrays, and to remote data. 
+The ListBox provides options for binding it to server-side and client-side arrays.
 
 ## Server-Side Arrays
 

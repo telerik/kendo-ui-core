@@ -54,6 +54,15 @@
             assert.isOk(input.attr("autocomplete"), "off");
         });
 
+        it("MaskedTextBox does not throw error on initially invalid value", function() {
+            input.val(1);
+
+            assert.doesNotThrow(() => new MaskedTextBox(input, {
+                mask: "L0L 0L0",
+                rules: {}
+            }));
+        });
+
         it("MaskedTextBox extends built-in rules", function() {
             var rule = /[+-]/;
             var maskedtextbox = new MaskedTextBox(input, {

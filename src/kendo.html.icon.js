@@ -5,7 +5,7 @@ var __meta__ = {
     name: "Html.Icon",
     category: "web",
     description: "HTML font icon rendering utility for Kendo UI for jQuery.",
-    depends: [ "html.base" ]
+    depends: ["html.base"]
 };
 
 (function($, undefined) {
@@ -169,7 +169,7 @@ var __meta__ = {
                 let iconNameMatch = iconClass.match(regex);
                 if (iconNameMatch) {
                     icon = iconNameMatch[1];
-                    iconClass.replace(iconNameMatch[0], "");
+                    iconClass = iconClass.replace(iconNameMatch[0], "");
                 }
             }
 

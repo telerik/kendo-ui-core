@@ -1,3 +1,5 @@
+kendo.setDefaults('iconType', 'svg');
+
 function callbackHash(object) {
     if (typeof object === "string") {
         var obj = {};

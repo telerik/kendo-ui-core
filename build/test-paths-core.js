@@ -1,5 +1,12 @@
+const packageJson = require("../package.json");
+const themesVersion = packageJson.devDependencies[
+    Object.keys(packageJson.devDependencies).filter((dep) =>
+        dep.startsWith("@progress/kendo-theme")
+    )[0]
+].replace(/[\^~\*x]/, "");
+
 exports.beforeTestFiles = [
-    'https://kendo.cdn.telerik.com/themes/5.10.0/default/default-ocean-blue.css',
+    `https://kendo.cdn.telerik.com/themes/${themesVersion}/default/default-ocean-blue.css`,
     { pattern: 'dist/styles/**/*.*', watched: true, included: false },
     { pattern: 'tests/window/blank.html', watched: true, included: false },
     { pattern: 'tests/**/*-fixture.html' }

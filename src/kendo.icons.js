@@ -69,7 +69,7 @@ var __meta__ = {
     kendo.ui.plugin(FontIcon);
     kendo.ui.plugin(SvgIcon);
 
-    kendo.setDefaults('iconType', 'svg');
+    kendo.setDefaults('iconType', 'font');
     kendo.ui.svgIcons = svgIcons;
     kendo.ui.icon = html.renderIcon;
 })(window.kendo.jQuery);
