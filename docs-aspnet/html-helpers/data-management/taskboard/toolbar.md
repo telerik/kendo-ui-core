@@ -24,7 +24,7 @@ The following example demonstrates how to add a custom tool to the toolbar.
         {
             items.Add().Type("button").Command("CustomAddCardCommand").Name("addCard").Text("Add New Card").Icon("plus");
             items.Add().Type("spacer");
-            items.Add().Type("TaskBoardSearch").Command("SearchCommand").Name("search").Text("Search").Icon("search");
+            items.Add().Name("search");
         }))
         .Columns(c =>
         {
@@ -56,7 +56,7 @@ The following example demonstrates how to add a custom tool to the toolbar.
             <items>
                 <item type="button" command="CustomAddCardCommand" name="addCard" text="Add New Card" icon="plus"></item>
                 <item type="spacer"></item>
-                <item type="TaskBoardSearch" command="SearchCommand" name="search" text="Search" icon="search"></item>
+                <item name="search"></item>
             </items>
         </toolbar>
         <taskboard-columns>
