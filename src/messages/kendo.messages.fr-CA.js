@@ -619,6 +619,21 @@ $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
 });
 }
 
+/* Calendar */
+
+if (kendo.ui.Calendar) {
+kendo.ui.Calendar.prototype.options.messages =
+$.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+  "weekColumnHeader": "S",
+  "navigateTo": "Naviguer à la vue ",
+  "parentViews": {
+    "month": "de l'année",
+    "year": "de la décennie",
+    "decade": "du centenaire"
+  }
+});
+}
+
 /* Alert */
 
 if (kendo.ui.Alert) {
