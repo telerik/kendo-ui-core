@@ -26,16 +26,16 @@ To upgrade the version with NuGet or Bower:
 
 1. In Visual Studio, open the NuGet Package Manager and navigate to the **Installed** tab. Click **Update** for the **Telerik.UI.for.AspNet.Core** package.
    * If you use Bower instead of NuGet, open the Bower Package Manager and select the **Installed** tab. Click **Update** for the **kendo-ui** package.
-1. In the application, manually replace any references which point to the old Kendo UI resource files such as [scripts and styles](#providing-the-client-side-resources).
+1. In the application, manually replace any references which point to the old Kendo UI resource files such as [scripts and styles]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
 > To properly load the Telerik and Kendo UI packages, both [NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) and [Bower](https://docs.telerik.com/kendo-ui/intro/installation/bower-install#kendo-ui-professional) require authentication.
 
 ### Upgrading Manually
 
-1. [Download]({% slug downloadinstall_aspnetcore %}#download) the desired version from the **Download** section of your account.
+1. [Download]({% slug downloadinstall_aspnetcore %}#getting-the-binaries) the desired version from the **Download** section of your account.
 1. Replace all scripts, styles, and images that are related to Telerik UI for ASP.NET Core with the desired version of the framework.
 1. Change the reference to the new `Kendo.MVC` dll. Verify that the dll refers to the correct ASP.NET Core version.
-1. In the application, manually replace any references which point to the old Kendo UI resource files such as [scripts and styles](#providing-the-client-side-resources).
+1. In the application, manually replace any references which point to the old Kendo UI resource files such as [scripts and styles]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
 ## Switching to a Developer License
 

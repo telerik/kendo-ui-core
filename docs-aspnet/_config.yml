@@ -83,6 +83,7 @@ exclude_navigation: ["knowledge-base/*",
 api/Kendo.Mvc/*,
 api/Kendo.Mvc.UI/*,
 api/Kendo.Mvc.UI.Fluent/*,
+api/Kendo.Mvc.TagHelpers/*,
 getting-started-core/*]
 
 navigation:
