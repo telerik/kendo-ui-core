@@ -30,6 +30,23 @@ The single selection functionality allows the user to select only one item at a 
         .Pageable() // Enable paging.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="productListView"
+                    tag-name="div"
+                    template-id="template"
+                    style="height:350px;">
+        <scrollable enabled="true" />
+        <selectable mode="ListViewSelectionMode.Single" />
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read", "ListView")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-listview>
+```
+{% endif %}
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
@@ -60,6 +77,23 @@ The multiple selection functionality allows the user to select one or more items
         .Pageable() // Enable paging.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="productListView"
+                    tag-name="div"
+                    template-id="template"
+                    style="height:350px;">
+        <scrollable enabled="true" />
+        <selectable mode="ListViewSelectionMode.Multiple" />
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read", "ListView")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-listview>
+```
+{% endif %}
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">

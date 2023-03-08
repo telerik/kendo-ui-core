@@ -42,7 +42,22 @@ The Diagram represents information in a schematic way and according to particula
             .Layout(l => l.Type(DiagramLayoutType.Layered))
         )
     ```
-
+    {% if site.core %}
+    ```TagHelper
+        <kendo-diagram name="diagram">
+            <hierarchical-datasource server-operation="false">
+                <transport>
+                    <read url="@Url.Action("_OrgChart", "Diagram")" />
+                </transport>
+                <schema>
+                    <hierarchical-model children="Items"></hierarchical-model>
+                </schema>
+            </hierarchical-datasource>
+            <editable enabled="false" />
+            <layout type="DiagramLayoutType.Layered"></layout>
+        </kendo-diagram>
+    ```
+    {% endif %}
 ## Functionality and Features
 
 * [Data binding]({% slug htmlhelpers_diagram_aspnetcore_binding %})

@@ -23,6 +23,16 @@ The following example demonstrates how to enable the key navigation in the ListV
         .HtmlAttributes(new { style="height:350px;" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="productListView"
+                    tag-name="div"
+                    template-id="template"
+                    style="height:350px;"
+                    navigatable="true">
+    </kendo-listview>
+```
+{% endif %}
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">

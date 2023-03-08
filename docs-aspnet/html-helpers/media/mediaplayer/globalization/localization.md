@@ -28,6 +28,16 @@ For a complete list of localizable messages, refer to the [MediaPlayer server-si
         .HtmlAttributes(new { style = "height:360px; width:640px" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-mediaplayer name="mediaplayer1"
+        style = "height:360px; width:640px">
+        <messages play="Wiedergabe" pause="Pausieren"/>
+        <media title="Mein Video" source="Video/video1.mp4" />
+    </kendo-mediaplayer>
+```
+{% endif %}
+
 
 ## See Also
 

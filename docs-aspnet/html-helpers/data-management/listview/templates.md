@@ -29,6 +29,22 @@ To set the template, refer it when you initialize the ListView. The template dis
         .Pageable() // Enable paging.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="productListView"
+                    tag-name="div"
+                    template-id="template"
+                    style="height:350px;">
+        <scrollable enabled="true" />
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read", "ListView")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-listview>
+```
+{% endif %}
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
@@ -59,6 +75,23 @@ Your project might require you to visually differentiate each alternating item i
         .Pageable() // Enable paging.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="productListView"
+                    tag-name="div"
+                    template-id="template"
+                    alt-template-id="altTemplate"
+                    style="height:350px;">
+        <scrollable enabled="true" />
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read", "ListView")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-listview>
+```
+{% endif %}
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">

@@ -50,6 +50,52 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
               .Update(r => r.Url("/Diagram/DiagramEditing?handler=UpdateConnection").Data("forgeryToken"))
           )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-diagram name="diagram">
+            <hierarchical-datasource server-operation="false" type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Page("DiagramData", "ReadShapes")" />
+                    <create url="@Url.Page("DiagramData", "CreateShape")" />
+                    <destroy url="@Url.Page("DiagramData", "DestroyShape")" />
+                    <update url="@Url.Page("DiagramData", "UpdateShape")" />
+                </transport>
+                <schema>
+                    <hierarchical-model id="Id">
+                        <fields>
+                            <field name="Id" editable="false" type="number"></field>
+                            <field name="JobTitle" type="string"></field>
+                            <field name="Color" type="string"></field>
+                        </fields>
+                    </hierarchical-model>
+                </schema>
+            </hierarchical-datasource>
+            <connections-datasource server-operation="false" type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Page("DiagramData", "ReadShapes")" />
+                    <create url="@Url.Page("DiagramData", "CreateShape")" />
+                    <destroy url="@Url.Page("DiagramData", "DestroyShape")" />
+                    <update url="@Url.Page("DiagramData", "UpdateShape")" />
+                </transport>
+                <schema>
+                    <model id="id">
+                        <fields>
+                            <field name="id" editable="false" type="number"></field>
+                            <field name="text" editable="false" type="string"></field>
+                            <field name="from" from="FromShapeId" type="number"></field>
+                            <field name="to" from="ToShapeId" type="number"></field>
+                            <field name="fromX" from="FromPointX" type="number"></field>
+                            <field name="fromY" from="FromPointY" type="number"></field>
+                            <field name="toX" from="ToPointX" type="number"></field>
+                            <field name="toY" from="ToPointY" type="number"></field>
+                        </fields>
+                    </model>
+                </schema>
+            </connections-datasource>
+
+        </kendo-diagram>
+    ```
+    {% endif %}
 1. Add an AntiForgeryToken on top of the `RazorPage`.
 
     ```

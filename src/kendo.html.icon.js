@@ -131,7 +131,7 @@ var __meta__ = {
             var that = this,
                 // Find if there is an existing k-i- class appended to the element.
                 currentIconClass = that.element[0].className.split(" ").find(x => x.includes(KI_PREFFIX)),
-                className = `${KI_PREFFIX}${that.options.icon}`;
+                className = that.options.icon ? `${that.options.icon.startsWith(KI_PREFFIX) ? "" : KI_PREFFIX}${that.options.icon}` : "";
 
             that._className = className;
             that.wrapper = that.element

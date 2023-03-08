@@ -29,6 +29,24 @@ The following example demonstrates how to configure multiple sources with differ
 		.HtmlAttributes(new { style = "height:360px; width:640px" })
 	)
 ```
+{% if site.core %}
+```TagHelper
+	@{
+		var sources = new[] { // Define the media files for different quality options.
+				new { quality = "480p", url = "Video/videoLQ.mp4" },
+				new { quality = "720p", url = "Video/videoHD.mp4" },
+				new { quality = "1080p", url = "Video/videoFHD.mp4" },
+			};
+	}
+    <kendo-mediaplayer name="mediaPlayer"
+        auto-play="true"
+        navigatable="true"
+        style = "height:360px; width:640px">
+        <media title="Our Company Culture - Lesson 1" source="@sources" />
+    </kendo-mediaplayer>
+```
+{% endif %}
+
 ## See Also
 
 * [Basic Usage of the MediaPlayer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/index)

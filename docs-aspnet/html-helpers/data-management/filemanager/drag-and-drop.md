@@ -15,13 +15,28 @@ The following example demonstrates how to disable the Drag and Drop functionalit
 
 ```HtmlHelper
     @(Html.Kendo().FileManager()
-        .Name("filemanager")              
-            .Name("filemanager")              
-        .Name("filemanager")              
-            .Name("filemanager")              
-        .Name("filemanager")              
+        .Name("filemanager")
+        .UploadUrl("Upload", "FileManagerData")
         .Draggable(false)
-        ...
+        .DataSource(ds =>
+        {
+            ds.Read(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Read", "FileManagerData")
+            );
+            ds.Destroy(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Destroy", "FileManagerData")
+            );
+            ds.Create(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Create", "FileManagerData")
+            );
+            ds.Update(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Update", "FileManagerData")
+            );
+        })
     )
 ```
 {% if site.core %}

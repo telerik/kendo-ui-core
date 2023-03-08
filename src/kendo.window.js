@@ -220,6 +220,10 @@ import "./kendo.html.button.js";
 
                     that.title(that.options.title);
                     that._dimensions();
+
+                    if (options._footerTemplate) {
+                        that.wrapper.append(kendo.template(options._footerTemplate)(options._footerMessages));
+                    }
                 }
 
                 that.minTop = that.minLeft = -Infinity;

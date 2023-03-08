@@ -45,6 +45,17 @@ The following example uses the `autoPlay` property:
         .HtmlAttributes(new { style = "height:360px; width:640px" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-mediaplayer name="mediaplayer"
+        auto-play="true"
+        navigatable="true"
+        style = "height:360px; width:640px">
+        <media title="Our Company Culture - Lesson 1" source="Video/video1.mp4" />
+    </kendo-mediaplayer>
+```
+{% endif %}
+
 
 ## Basic Configuration
 
@@ -67,6 +78,23 @@ The following example demonstrates the basic configuration of the MediaPlayer.
                 .HtmlAttributes(new { style = "height:360px; width:640px" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-mediaplayer 
+        name="mediaplayer"
+        auto-play="true"
+        navigatable="true"
+        auto-repeat="true"
+        forward-seek="false"
+        full-screen="false"
+        mute="true"
+        volume="20"
+        style = "height:360px; width:640px">
+        <media title="Our Company Culture - Lesson 1" source="Video/video1.mp4" />
+    </kendo-mediaplayer>
+```
+{% endif %}
+
 
 ## Functionality and Features
 
@@ -97,6 +125,19 @@ The following example demonstrates how to subscribe to events by using a handler
         )
         .HtmlAttributes(new { style = "height:360px; width:640px" })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-mediaplayer name="mediaplayer"
+        auto-play="true"
+        on-pause="playerPause"
+        on-volume-change="playerVolumeChange"
+        style = "height:360px; width:640px">
+        <media title="Our Company Culture - Lesson 1" source="Video/video1.mp4" />
+    </kendo-mediaplayer>
+```
+{% endif %}
+```JavaScript
     <script>
         function playerPause(e) {
             // Handle the pause event.
@@ -152,11 +193,28 @@ To reference an existing MediaPlayer instance, use the [`jQuery.data()`](http://
     <button onclick="buttonClick();">Pause Video</button>
     <script>
         function buttonClick() {
+            var player = $("#mediaplayer").data("kendoMediaPlayer");
+            player.pause();
+        }
+    </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-mediaplayer name="mediaplayer"
+        auto-play="true"
+        style = "height:360px; width:640px">
+        <media title="Our Company Culture - Lesson 1" source="Video/video1.mp4" />
+    </kendo-mediaplayer>
+    <button onclick="buttonClick();">Pause Video</button>
+    <script>
+        function buttonClick() {
             var player = $("#mediaplayer1").data("kendoMediaPlayer");
             player.pause();
         }
     </script>
 ```
+{% endif %}
+
 
 ## See Also
 

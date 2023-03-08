@@ -35,9 +35,19 @@ Some applications enforce the user to watch only the currently loaded content wi
 ```HtmlHelper
     @(Html.Kendo().MediaPlayer()
         .Name("mediaPlayer")
+        .AutoPlay(true)
         .ForwardSeek(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-mediaplayer name="mediaPlayer"
+        auto-play="true"
+        forward-seek="true"
+    </kendo-mediaplayer>
+```
+{% endif %}
+
 ## See Also
 
 * [Adding Custom Playlists to the MediaPlayer HTML Helper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/playlist)

@@ -64,6 +64,27 @@ To enable PDF export in the Diagram through code, call the [`saveAsPdf`](https:/
     )
 
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-diagram name="diagram" on-data-bound="onDataBound">
+        <pdf file-name="Kendo UI Diagram Export.pdf" proxy-url="@Url.Action("Pdf_Export_Save", "Diagram" )" />
+        <hierarchical-datasource server-operation="false">
+            <transport>
+                <read url="@Url.Action("Pdf_Export_Read", "Diagram")" />
+            </transport>
+            <schema>
+                <hierarchical-model children="Items"></hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+        <editable enabled="false" />
+        <layout type="DiagramLayoutType.Layered"></layout>
+        <shape-defaults visual="visualTemplate"></shape-defaults>
+        <connection-defaults>
+            <stroke color="#979797" width="2" />
+        </connection-defaults>
+    </kendo-diagram>
+```
+{% endif %}
 ```JavaScript
     <script>
         $(".export-pdf").click(function () {

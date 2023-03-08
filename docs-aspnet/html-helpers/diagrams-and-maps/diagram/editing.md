@@ -32,6 +32,29 @@ To enable the editing functionality of the Diagram:
             .Update("UpdateShape", "DiagramData")
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-diagram name="diagram">
+            <hierarchical-datasource server-operation="false" type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("ReadShapes", "DiagramData")" />
+                    <create url="@Url.Action("CreateShapes", "DiagramData")" />
+                    <destroy url="@Url.Action("DestroyShapes", "DiagramData")" />
+                    <update url="@Url.Action("UpdateShapes", "DiagramData")" />
+                </transport>
+                <schema>
+                    <hierarchical-model id="Id">
+                        <fields>
+                            <field name="Id" editable="false" type="number"></field>
+                            <field name="JobTitle" type="string"></field>
+                            <field name="Color" type="string"></field>
+                        </fields>
+                    </hierarchical-model>
+                </schema>
+            </hierarchical-datasource>
+        </kendo-diagram>
+    ```
+    {% endif %}
 
 1. Configure the `ConnectionsDataSource` for remote CRUD operations. Without setting the `ConnectionsDataSource`, editing is disabled.
 
@@ -55,6 +78,35 @@ To enable the editing functionality of the Diagram:
             .Update("UpdateConnection", "DiagramData")
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-diagram name="diagram">
+            <connections-datasource server-operation="false" type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("ReadConnections", "DiagramData")" />
+                    <create url="@Url.Action("CreateConnections", "DiagramData")" />
+                    <destroy url="@Url.Action("DestroyConnections", "DiagramData")" />
+                    <update url="@Url.Action("UpdateConnections", "DiagramData")" />
+                </transport>
+                <schema>
+                    <model id="id">
+                        <fields>
+                            <field name="id" editable="false" type="number"></field>
+                            <field name="text" editable="false" type="string"></field>
+                            <field name="from" from="FromShapeId" type="number"></field>
+                            <field name="to" from="ToShapeId" type="number"></field>
+                            <field name="fromX" from="FromPointX" type="number"></field>
+                            <field name="fromY" from="FromPointY" type="number"></field>
+                            <field name="toX" from="ToPointX" type="number"></field>
+                            <field name="toY" from="ToPointY" type="number"></field>
+                        </fields>
+                    </model>
+                </schema>
+            </connections-datasource>
+        </kendo-diagram>
+    ```
+    
+    {% endif %}
 ## Model Fields
 
 The shape model provides the following fields:
