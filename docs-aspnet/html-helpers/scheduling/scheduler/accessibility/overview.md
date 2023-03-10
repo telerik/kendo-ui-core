@@ -28,6 +28,6 @@ The Scheduler supports the standards for providing accessible web content which 
 
 ## See Also
 
-* [Keyboard Navigation by the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/selection)
+* [Keyboard Navigation by the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/keyboard-navigation)
 * [Keyboard Navigation by the Scheduler HtmlHelper for {{ site.framework }}]({% slug keynav_aspnetcore_scheduler %})
 * [Accessibility in {{ site.product }}]({% slug compliance_accessibility %})

@@ -8,7 +8,7 @@ position: 6
 
 # SVG Icons
 
-As of the R1 SP1 2023 release, the Kendo UI for jQuery Font icons will be replaced with SVG icons.
+As of the R1 SP1 2023 release, the Kendo UI for jQuery supports rendering of SVG icons instead of the traditional [Font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
 
 > To ensure that all icons are displayed correctly, use one of the supported SASS themes. For installing a SASS theme, go to the article on [adding SASS themes to your Kendo UI for jQuery project]({% slug sassbasedthemes_installation_kendoui %}).
 
@@ -48,11 +48,11 @@ The following example shows how to create an SVG icon without an element.
 </script>
 ```
 
-The following example shows how to create aa specific SVG icon.
+The following example shows how to create a specific SVG icon.
 
 ```dojo
 <script>
-    var icon =  kendo.ui.icon({ icon: 'camera', type: 'font' });
+    var icon =  kendo.ui.icon({ icon: 'camera', type: 'svg' });
     $('body').append(icon);
 </script>
 ```

@@ -10,9 +10,9 @@ position: 2
 
 The keyboard navigation of the Scheduler is always available.
 
-For a complete example, refer to the [demo on keyboard navigation of the Scheduler](https://demos.telerik.com/{{ site.platform }}/scheduler/selection).
+For a complete example, refer to the [demo on keyboard navigation of the Scheduler](https://demos.telerik.com/{{ site.platform }}/scheduler/keyboard-navigation).
 
 ## See Also
 
-* [Keyboard Navigation in the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/selection)
+* [Keyboard Navigation in the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/keyboard-navigation)
 * [Accessibility in the Scheduler HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_scheduler %})

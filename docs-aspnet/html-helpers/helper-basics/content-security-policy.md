@@ -60,9 +60,9 @@ Call the method after all components declarations to serialize the deferred init
 
 ### Creating Content Security Policy Templates
 
-Most of the components support templating options, which use the [Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview), for example, [Grid templates]({% slug htmlhelpers_grid_aspnetcore_templates_overview %}), [DropDownList templates]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %}), and more. To avoid using the [inline](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline) and [external](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external) Kendo UI templates and remove the `unsafe-eval` keyword from the `meta` tag of your Telerik UI for {{ site.framework }} application, you can define the templates in partial views and load them by using the overload of the template option that accepts {% if site.core %}`IHtmlContent`{% else %}`MvcHtmlString`{% endif %}. For more information on the CSP-Compatible templates, [refer to the Client Templates section]().
+Most of the components support templating options, which use the [Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview), for example, [Grid templates]({% slug htmlhelpers_grid_aspnetcore_templates_overview %}), [DropDownList templates]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %}), and more. To avoid using the [inline](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline) and [external](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external) Kendo UI templates and remove the `unsafe-eval` keyword from the `meta` tag of your Telerik UI for {{ site.framework }} application, you can define the templates in partial views and load them by using the overload of the template option that accepts {% if site.core %}`IHtmlContent`{% else %}`MvcHtmlString`{% endif %}. For more information on the CSP-compatible templates, [refer to the CSP-compatible templates section]({% slug client_templates_overview %}#content-security-policy-csp-templates).
 
-The example below demonstrates how to define a CSP-Compatible [client detail template of a Grid]({% slug clientdetailtemplate_grid_aspnetcore %}).
+The example below demonstrates how to define a CSP-compatible [client detail template of a Grid]({% slug clientdetailtemplate_grid_aspnetcore %}). You can pass either the relative or absolute path to the partial view in the `ClientDetailTemplateView` method.
 
 {% if site.core %}
 ```HtmlHelper
@@ -74,16 +74,68 @@ The example below demonstrates how to define a CSP-Compatible [client detail tem
             columns.Bound(product => product.CategoryName);
         })
         .Pageable()
-        .ClientDetailTemplate(await Html.PartialAsync("DetailTemplate"))
+        .ClientDetailTemplateView(await Html.PartialAsync("../GridPartials/DetailTemplate.cshtml")) // The "DetailTemplate.cshtml" is added in "~/Views/GridPartials/" directory.
         .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
             .Read(read => read.Action("Categories_Read", "Home"))
         )
-        .Deferred()
     )
 
     @Html.Kendo().DeferredScriptFile()
+```
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        // The "DetailTemplateTagHelper.cshtml" is added in "~/Views/GridPartials/" directory.
+        var detailTemplate = await Html.PartialAsync("../GridPartials/DetailTemplateTagHelper.cshtml");
+    }
+
+    <kendo-grid name="grid" detail-template-view="detailTemplate">
+        <columns>
+            <column field="CategoryID"/>
+            <column field="CategoryName"/>
+        </columns>
+        <pageable enabled="true"/>
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+            <schema>
+                <model id="CategoryID">
+                    <fields>
+                        <field name="CategoryID" type="number"></field>
+                        <field name="CategoryName" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Categories_Read","Home")"/>
+            </transport>
+        </datasource>
+    </kendo-grid>
+```
+```DetailTemplateTagHelper.cshtml
+    // Partial View that contains the detail TagHelper Grid.
+    @addTagHelper *, Kendo.Mvc
+    @{
+        Layout = null;
+        var url = @Url.Action("Products_Read", "Home");
+    }
+
+    <kendo-grid name="grid_#=CategoryID#" is-in-client-template="true">
+        <columns>
+            <column field="ProductID"/>
+            <column field="ProductName"/>
+        </columns>
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+            <schema data="Data" total="Total" errors="Errors">
+            </schema>
+            <transport>
+                <read url="@Html.Raw(url+"?categoryId=#=CategoryID#")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-grid>
+
 ```
 {% else %}
 ```HtmlHelper
@@ -95,19 +147,19 @@ The example below demonstrates how to define a CSP-Compatible [client detail tem
             columns.Bound(product => product.CategoryName);
         })
         .Pageable()
-        .ClientDetailTemplate(Html.Partial("DetailTemplate"))
+        .ClientDetailTemplateView(Html.Partial("../GridPartials/DetailTemplate.cshtml")) // The "DetailTemplate.cshtml" is added in "~/Views/GridPartials/" directory.
         .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
             .Read(read => read.Action("Categories_Read", "Home"))
         )
-        .Deferred()
     )
 
     @Html.Kendo().DeferredScriptFile()
 ```
 {% endif %}
-```PartialView_DetailTemplate.cshtml
+```DetailTemplate.cshtml
+    // Partial View that contains the detail Grid.
     @{
         Layout = null;
     }
@@ -121,35 +173,13 @@ The example below demonstrates how to define a CSP-Compatible [client detail tem
         })
         .DataSource(dataSource => dataSource
             .Ajax()
+            .PageSize(20)
             .Read(read => read.Action("Products_Read", "Home", new { categoryId = "#=CategoryID#" }))
         )
         .Pageable()
+        .ToClientTemplate()
     )
 ```
-
-Alternatively, you can rewrite all [inline](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline) and [external](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external) templates into [CSP-compatible functional templates](https://docs.telerik.com/kendo-ui/framework/templates/get-started-csp-templates).
-
-```HtmlHelper
-    @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
-        .Name("grid")
-        .Columns(columns =>
-        {
-            columns.Bound(product => product.CategoryName)
-              .ClientTemplate("<span>Name: ${kendo.htmlEncode(CategoryName)}</span>")
-        })
-        ...
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-grid name="grid">
-        <columns>
-            <column field="CategoryName" template="<span>Name: ${kendo.htmlEncode(CategoryName)}</span>"></column>
-        </columns>
-        ...
-    </kendo-grid>
-```
-{% endif %}
 
 The engine for the [inline](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline) and [external](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external) templates will remain available. However, if you are using the previous template syntax, you must include the `usafe-eval` directive in the `meta` tag.
 
@@ -204,6 +234,7 @@ The Telerik UI for {{ site.framework }} releases prior to the R1 2023 SP1 one do
 
 ## See Also
 
+* [Content Security Policy (CSP) Templates]({% slug client_templates_overview %}#content-security-policy-(csp)-templates)
 * [Content Security Policy in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
 * [Getting Started with Content Security Policy (CSP) Templates in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/framework/templates/get-started-csp-templates)
 

@@ -131,7 +131,8 @@ To defer individual components:
             @Html.Kendo().DeferredScriptsFor("age", false)
         </script>
 
-* Use the `DeferredScriptFile` method to serialize the deferred initialization script to a file.
+* Use the `DeferredScriptFile` method to serialize the deferred initialization script to a file. The method simulates loading the initialization scripts as a `JS` file through a middleware. To use this feature, enable the required settings described in the [deferring components globally section](#deferring-components-globally).
+ 
 
           @Html.Kendo().DeferredScriptFile()
 
@@ -144,6 +145,17 @@ To defer components globally:
 
 1. Enable the `DeferToScriptFiles` setting in the `AddKendo` method that registers the Kendo UI service.
 
+ * For applications using .NET 6 or later and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model), the `AddKendo` method is defined in the `Program.cs` file.
+
+	```
+	var builder = WebApplication.CreateBuilder(args);
+
+	builder.Services.AddKendo(x =>
+    {
+        x.DeferToScriptFiles = true;
+    });
+	```
+
  * For applications using .NET 5 or earlier, the `AddKendo` method is defined in the `ConfigureServices` method in the `Startup.cs` file.
 
 	```
@@ -154,17 +166,6 @@ To defer components globally:
             x.DeferToScriptFiles = true;
         });
 	}
-	```
-
- * For applications using .NET 6 or later and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model), the `AddKendo` method is defined in the `Program.cs` file.
-
-	```
-	var builder = WebApplication.CreateBuilder(args);
-
-	builder.Services.AddKendo(x =>
-    {
-        x.DeferToScriptFiles = true;
-    });
 	```
 
 1. Set the `KendoDefferedScriptsMiddleware` middleware. After the compilation of the views, all scripts are stored in the memory cache. When the browser requests the dynamic `js` file, this middleware handles the request and returns the cached scripts.
@@ -281,65 +282,8 @@ If you have deferred the initialization of the component, make sure you get its 
 
 ```
 
-## Using Client Templates
-
-The Telerik UI for ASP.NET Core enables you to implement client templates for its [HTML Helper](#html-helper-client-templates) and [Tag Helper](#tag-helper-client-templates) components.
-
-### HTML Helper Client Templates
-
-By default, every Telerik UI helper renders a script element with an initialization statement. If the helper declaration is placed inside a Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
-
-    <script id="template" type="text/x-kendo-template">
-        @(Html.Kendo().NumericTextBox()
-              .Name("age")
-              .ToClientTemplate()
-        )
-    </script>
-    <div id="container"></div>
-    <script>
-        $(function () {
-           var template = kendo.template($("#template").html());
-           $("#container").append( template ({}) );
-        })
-    </script>
-
-### Tag Helper Client Templates
-
-Тhe .NET framework ignores any Tag Helpers which are within script tags. In order to compile them correctly, when placing a Tag Helper within a Kendo Template, set the type to `text/html` and add the `is-in-client-template="true"` attribute.
-
-The following example demonstrates how to include Chart TagHelpers in the TileLayout TagHelper.
-
-        <!-- container chart templates -->
-        <script id="downloads-template" type="text/html">
-            <kendo-chart name="downloads" is-in-client-template="true">
-                <series>
-                    <series-item type="ChartSeriesType.Line" data="new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }">
-                    </series-item>
-                </series>
-            </kendo-chart>
-        </script>
-        <script id="devices-template" type="text/html">
-            <kendo-chart name="devices" is-in-client-template="true">
-                <series>
-                    <series-item type="ChartSeriesType.Donut" auto-fit="true" data='new dynamic[] {
-                        new {category = "Asia",value = 30.8,color = "\\#006634"},
-                        new {category = "Europe",value = 69.2,color = "\\#90cc38"}}'>
-                    </series-item>
-                </series>
-            </kendo-chart>
-        </script>
-        <kendo-tilelayout name="tilelayout" columns="2" resizable="true" reorderable="true">
-            <containers>
-                <container body-template-id="downloads-template" col-span="1" row-span="1">
-                    <container-header text="Weekly Recap-Downloads" />
-                </container>
-                <container body-template-id="devices-template" col-span="1" row-span="1">
-                    <container-header text="Devices" />
-                </container>
-            </containers>
-        </kendo-tilelayout>
-
 ## See Also
 
+* [Using Client Templates]({% slug client_templates_overview %})
 * [JSON Serialization]({% slug jsonserialization_core %})
 * [Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)

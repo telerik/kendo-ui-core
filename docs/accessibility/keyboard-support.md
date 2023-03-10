@@ -65,7 +65,7 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer/keyboard-navigation)
 - [Rating](https://demos.telerik.com/kendo-ui/rating/keyboard-navigation)
 - [RadioGroup](https://demos.telerik.com/kendo-ui/radiogroup/keyboard-navigation)
-- [Scheduler](https://demos.telerik.com/kendo-ui/scheduler/selection)
+- [Scheduler](https://demos.telerik.com/kendo-ui/scheduler/keyboard-navigation)
 - [Slider](https://demos.telerik.com/kendo-ui/slider/keyboard-navigation)
 - [SplitButton](https://demos.telerik.com/kendo-ui/splitbutton/keyboard-navigation)
 - [Splitter](https://demos.telerik.com/kendo-ui/splitter/keyboard-navigation)

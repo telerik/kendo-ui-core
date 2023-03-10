@@ -254,6 +254,7 @@ var __meta__ = {
 
                 popup.open(x, y);
             }
+            wrapper.removeClass("k-popup");
 
             popup.wrapper.addClass(that._guid).css(extend({ margin: 0,zIndex: 10050 }, that._popupPaddings));
 
@@ -334,6 +335,7 @@ var __meta__ = {
                 .hide()
                 .kendoAnimate(animation.open || false);
 
+            wrapper.css("display", "");
             initializedNotifications = that.getNotifications();
             initializedNotifications.each(function(idx, element) {
                 that._attachStaticEvents(options, $(element));

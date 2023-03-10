@@ -298,7 +298,7 @@ var __meta__ = {
                 that.flipped = that._position(fixed);
                 animation = that._openAnimation();
 
-                if (options.anchor != BODY) {
+                if (options.anchor != BODY && !that.element.hasClass("k-tooltip")) {
                     that._showDirClass(animation);
                 }
 

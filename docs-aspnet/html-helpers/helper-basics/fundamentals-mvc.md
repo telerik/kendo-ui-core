@@ -90,7 +90,7 @@ To defer individual components:
         @Html.Kendo().DeferredScriptsFor("age", false)
         </script>
 
-* Use the `DeferredScriptFile` method to serialize the deferred initialization script to a file.
+* Use the `DeferredScriptFile` method to serialize the deferred initialization script to a file. The method simulates loading the initialization scripts as a `JS` file through an `HttpModule`. To use this feature, enable the required settings described in the [deferring components globally section](#deferring-components-globally).
 
           @Html.Kendo().DeferredScriptFile()
 
@@ -124,7 +124,8 @@ To defer components globally:
     </configuration>
     ```
 
-1. Serialize the script tag into a file by adding `@(Html.Kendo().DeferredScriptFile())` after all components declarations. Any components registered after it will not be included in the script.
+1. Serialize the script tag into a file by adding `@(Html.Kendo().DeferredScriptFile())` after all components declarations. 
+Any components registered after it will not be included in the script.
 
     Alternatively, call the `DeferredScripts` method to format the components scripts as inline script.
 
@@ -228,22 +229,6 @@ If you have deferred the initialization of the component, make sure you get its 
     });
     </script>
 
-## Using Client Templates
-
-By default, every Telerik UI helper renders a script element with an initialization statement. If the helper declaration is placed inside a Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
-
-    <script id="template" type="text/x-kendo-template">
-        @(Html.Kendo().NumericTextBox()
-              .Name("age").ToClientTemplate()
-        )
-    </script>
-    <div id="container"></div>
-    <script>
-        $(function () {
-           var template = kendo.template($("#template").html());
-           $("#container").append( template ({}) );
-        })
-    </script>
 
 ## Rendering of Forms
 
@@ -323,5 +308,6 @@ The explanations and requirements in this section are applicable to all styleshe
 
 ## See Also
 
+* [Using Client Templates]({% slug client_templates_overview %})
 * [Telerik UI for ASP.NET MVC Download and Installation]({% slug downloadinstall_aspnetcore %})
 * [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
