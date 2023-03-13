@@ -354,5 +354,5 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Using the API of the Scheduler for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/api)
 * [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Server-Side API of the Scheduler](/api/grid)
+* [Server-Side API of the Scheduler](/api/scheduler)
 * [Knowledge Base Section](/knowledge-base)

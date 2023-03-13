@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Scheduler component for {{ site.framework }}."
 slug: scheduler_events
-position: 8
+position: 4
 ---
 
 # Events

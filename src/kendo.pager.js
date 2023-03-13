@@ -122,13 +122,13 @@ var __meta__ = {
             that._template();
 
             if (options.previousNext) {
-                if (!that.element.find(FIRST).length) {
+                if (!that.element.find("[class*='-i-" + FIRST + "']").length) {
                     that.element.append(icon(FIRST, options.messages.first, "k-pager-first", that._id, buttonSize));
 
                     first(that.element, page, totalPages);
                 }
 
-                if (!that.element.find(PREV).length) {
+                if (!that.element.find("[class*='-i-" + PREV + "']").length) {
                     that.element.append(icon(PREV, options.messages.previous, null, that._id, buttonSize));
 
                     prev(that.element, page, totalPages);
@@ -179,13 +179,13 @@ var __meta__ = {
             }
 
             if (options.previousNext) {
-                if (!that.element.find(NEXT).length) {
+                if (!that.element.find("[class*='-i-" + NEXT + "']").length) {
                     that.element.append(icon(NEXT, options.messages.next, null, that._id, buttonSize));
 
                     next(that.element, page, totalPages);
                 }
 
-                if (!that.element.find(LAST).length) {
+                if (!that.element.find("[class*='-i-" + LAST + "']").length) {
                     that.element.append(icon(LAST, options.messages.last, "k-pager-last", that._id, buttonSize));
 
                     last(that.element, page, totalPages);

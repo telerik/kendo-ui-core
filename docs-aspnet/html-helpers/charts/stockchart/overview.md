@@ -51,6 +51,35 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
             .DateField("Date")
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-stockchart name="stockChart"
+                date-field="Date">
+            <chart-title text=" The Boeing Company (NYSE:BA)"></chart-title>
+            <datasource custom-type="aspnetmvc-ajax"
+                    server-paging="true"
+                    server-filtering="true"
+                    server-grouping="true">
+                <transport>
+                    <read  url="@Url.Action("_BoeingStockData", "Financial")"/>
+                </transport>
+                 <schema>
+                <model>
+                    <fields>
+                        <field name="Date" type="date"></field>
+                        <field name="Close" type="number"></field>
+                        <field name="Volume" type="number"></field>
+                        <field name="Open" type="number"></field>
+                        <field name="High" type="number"></field>
+                        <field name="Low" type="number"></field>
+                        <field name="Symbol" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+            </datasource>
+        </kendo-stockchart>
+    ```
+    {% endif %}
     ```Model
         public class StockDataPoint
         {
@@ -109,7 +138,7 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
                 .Action("_BoeingStockData", "Home")
             ))
             .DateField("Date")
-                    .Series(series => {
+            .Series(series => {
                 series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
             })
             .Navigator(nav => nav
@@ -119,6 +148,44 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-stockchart name="stockChart"
+                date-field="Date">
+            <chart-title text=" The Boeing Company (NYSE:BA)"></chart-title>
+            <datasource custom-type="aspnetmvc-ajax"
+                    server-paging="true"
+                    server-filtering="true"
+                    server-grouping="true">
+                <transport>
+                    <read  url="@Url.Action("_BoeingStockData", "Financial")"/>
+                </transport>
+                 <schema>
+                <model>
+                    <fields>
+                        <field name="Date" type="date"></field>
+                        <field name="Close" type="number"></field>
+                        <field name="Volume" type="number"></field>
+                        <field name="Open" type="number"></field>
+                        <field name="High" type="number"></field>
+                        <field name="Low" type="number"></field>
+                        <field name="Symbol" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+            </datasource>
+            <series>
+                <series-item type="ChartSeriesType.Candlestick" open-field="Open" high-field="High" low-field="Low" close-field="Close"></series-item>
+            </series>
+            <navigator>
+            <navigator-series>
+                    <series-item type="ChartSeriesType.Line" field="Volume"></series-item>
+                </navigator-series>
+                <select from="new DateTime(2009,02,05)" to="new DateTime(2011,10,07)"></select>
+            </navigator>
+        </kendo-stockchart>
+    ```
+    {% endif %}
 
 ## Functionality and Features
 
@@ -139,7 +206,8 @@ The following example demonstrates how to subscribe to events by a handler name.
     	.DateField("Date")
     	.Series(series => {
     	    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    	}){% if site.core %}
+    	})
+        {% if site.core %}
         .Events((Action<Kendo.Mvc.UI.Fluent.StockChartEventBuilder>)(x => 
             x.DataBound("stockChart_dataBound")
             .SeriesClick("stockChart_seriesClick")
@@ -162,6 +230,28 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-stockchart name="stockChart"
+            date-field="Date" 
+            on-data-bound="stockChart_dataBound"
+            on-series-click="stockChart_seriesClick">
+        <chart-title text=" The Boeing Company (NYSE:BA)"></chart-title>
+        <series>
+            <series-item type="ChartSeriesType.Candlestick" open-field="Open" high-field="High" low-field="Low" close-field="Close"></series-item>
+        </series>
+    </kendo-stockchart>
+    <script>
+        function stockChart_dataBound(e) {
+            // Handle the dataBound event.
+        }
+
+         function stockChart_seriesClick(e) {
+             // Handle the seriesClick event.
+         }
+     </script>   
+ ```
+{% endif %}
 
 ### Handling Events by Template Delegate
 
