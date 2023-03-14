@@ -112,4 +112,5 @@ To revert back to the previous border-radius (9999px) value, set the `Rounded` o
 ## See Also
 
 * [Sass Themes Overview]({% slug sassbasedthemes_overview %})
+* [SVG Icons]({% slug svgicons_core_mvc %})
 * [Web Font Icons]({% slug webfonticons_aspnetmvc6_aspnetmvc %})

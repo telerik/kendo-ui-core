@@ -29,7 +29,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |AutoComplete  |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/autocomplete)|
 |Avatar        |Yes |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/avatar)|
 |BarCode	   |Yes |AAA| [Demo](https://demos.telerik.com/kendo-ui/accessibility/barcode)|
-|BottomNavigation |No |n/a |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|BottomNavigation |No |n/a |[Demo](https://demos.telerik.com/kendo-ui/accessibility/bottomnavigation)|
 |Breadcrumb	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/breadcrumb)|
 |Button 	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/button)|
 |ButtonGroup   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/buttongroup)|
@@ -37,19 +37,20 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Captcha       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/captcha)|
 |Charts        |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/chart)|
 |Chat          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/chat)|
-|CheckBox      |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/checkbox)|
+|CheckBox      |Yes |AA |n/a|
 |CheckBoxGroup |Yes |AA |[Demo](hhttps://demos.telerik.com/kendo-ui/accessibility/checkboxgroup)|
+|CircularGauge |Yes |AA |[Demo](hhttps://demos.telerik.com/kendo-ui/accessibility/circulargauge)|
 |ComboBox      |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/combobox)|
 |ColorGradient |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorgradient)|
 |ColorPalette  |No  |n/a  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpalette)|
 |ColorPicker   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpicker)|
-|DateInput	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
-|DatePicker	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
-|DateTimePicker|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
-|Diagram	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
-|Dialog	       |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
-|Drawer	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
-|DropDownButton|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dateinput)|
+|DateInput	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dateinput)|
+|DatePicker	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/datepicker)|
+|DateTimePicker|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/datetimepicker)|
+|Diagram	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/diagram)|
+|Dialog	       |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dialog)|
+|Drawer	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/drawer)|
+|DropDownButton|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dropdownbutton)|
 |DropDownList  |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dropdownlist)|
 |DropDownTree* |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/dropdowntree)|
 |Editor        |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/editor)|
@@ -62,25 +63,27 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Gantt         |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/gantt)|
 |Grid          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/grid)|
 |ImageEditor   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/imageeditor)|
-|Loader        |Yes |AА |[Demo](https://demos.telerik.com/kendo-ui/accessibility/loader)|
+|Loader        |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/loader)|
 |LinearGauge   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/lineargauge)|
 |ListBox       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/listbox)|
 |ListView	   |Yes |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/listview)|
 |Map	       |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/map)|
 |MaskedTextbox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/maskedtextbox)|
-|MediaPlayer   |No  |n/a|n/a|
+|MediaPlayer   |No  |n/a|[Demo](https://demos.telerik.com/kendo-ui/accessibility/mediaplayer)|
 |Menu          |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/menu)|
 |MultiColumnComboBox |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicombobox)|
 |MultiSelect   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multiselect)|
 |Notification  |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/notification)|
-|NumericTextbox|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/numericTextbox)|
+|NumericTextbox|Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/numerictextbox)|
 |OrgChart	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/orgchart)|
 |Pager         |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/pager)|
 |PanelBar	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/panelbar)|
+|PivotGrid	   |No |n/a |n/a|
+|PivotGridV2   |No |n/a |n/a|
 |PopOver	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/popover)|
 |QRCode	   	   |Yes |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/qrcode)|
 |RadialGauge   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radialgauge)|
-|RadioButton   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radiobutton)|
+|RadioButton   |Yes |AA  |n/a|
 |RadioGroup    |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/radiogroup)|
 |Responsive Panel |Yes |AA |n/a|
 |ScrollView	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scrollview)|
@@ -97,6 +100,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |TextBox	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textbox)|
 |TileLayout	   |Yes |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/tilelayout)|
 |TimeLine	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timeline)|
+|TimeDurationPicker	   |Yes |AA |n/a|
 |TimePicker	   |Yes |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timepicker)|
 |ToolBar	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/toolbar)|
 |Tooltip	   |Yes |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/tooltip)|

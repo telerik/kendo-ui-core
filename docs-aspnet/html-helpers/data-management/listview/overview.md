@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI ListView component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/listview, /helpers/data-management/listview/overview, /helpers/data-management/listview/configuration
 slug: htmlhelpers_listview_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} ListView Overview
@@ -201,14 +201,25 @@ The following example demonstrates the basic configuration for the ListView.
 
 ## Functionality and Features
 
-* [Ajax binding]({% slug htmlhelpers_listview_aspnetcore_ajaxbinding %})
-* [Editing]({% slug htmlhelpers_listview_aspnetcore_editing %})
-* [Paging]({% slug htmlhelpers_listview_aspnetcore_paging %})
-* [Templates]({% slug htmlhelpers_listview_aspnetcore_templates%})
-* [Scroll modes]({% slug htmlhelpers_listview_aspnetcore_scrolling %})
-* [Selection]({% slug htmlhelpers_listview_aspnetcore_selection %})
-* [Globalization]({% slug globalization_htmlhelpers_listview %})
-* [Accessibility]({% slug accessibility_htmlhelpers_listview %})
+
+|Feature|Description|
+|-------|-----------|
+| [Ajax binding]({% slug htmlhelpers_listview_aspnetcore_ajaxbinding %}) | You can bind the ListView to an [Ajax DataSource](https://docs.telerik.com/aspnet-core/html-helpers/datasource/types#ajax-datasource) which formats the request and parses the server response out-of-the-box. | 
+| [Editing]({% slug htmlhelpers_listview_aspnetcore_editing %}) | To customize the editing functionality of the ListView, configure the provided editing templates. |
+| [Paging]({% slug htmlhelpers_listview_aspnetcore_paging %}) | The ListView component supports the paging functionality. |
+| [Templates]({% slug htmlhelpers_listview_aspnetcore_templates%}) | To customize the visualization of the ListView items, use the provided [Kendo templates](https://docs.telerik.com/kendo-ui/framework/templates/overview). |
+| [Scroll modes]({% slug htmlhelpers_listview_aspnetcore_scrolling %}) | ListView enables you to use the default scroll mode or utilize endless scrolling. |
+| [Selection]({% slug htmlhelpers_listview_aspnetcore_selection %}) | Choose between single or multiple selection mode. |
+| [Globalization]({% slug globalization_htmlhelpers_listview %}) | The ListView component allows you to adapt your apps for international users by translating the component messages and applying a right-to-left layout. |
+| [Accessibility]({% slug accessibility_htmlhelpers_listview %}) | The ListView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support. |
+
+## Next Steps
+
+* [Getting Started with ListView]({% slug listview_getting_started %})
+* [Basic Usage of the ListView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/index)
+{% if site.core %}
+* [Basic Usage of the ListView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/tag-helper)
+{% endif %}
 
 ## See Also
 

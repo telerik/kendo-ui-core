@@ -3,7 +3,7 @@ title: Selection
 page_title: Selection
 description: "Configure the Telerik UI ListView for {{ site.framework }} to enable selection functionality."
 slug: htmlhelpers_listview_aspnetcore_selection
-position: 7
+position: 8
 ---
 
 # Selection

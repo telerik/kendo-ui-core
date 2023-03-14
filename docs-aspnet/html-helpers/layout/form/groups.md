@@ -3,7 +3,7 @@ title: Groups
 page_title: Groups
 description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn how to set up groups."
 slug: htmlhelpers_form_aspnetcore_groups
-position: 5
+position: 6
 ---
 
 # Groups

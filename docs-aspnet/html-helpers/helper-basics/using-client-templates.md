@@ -131,7 +131,7 @@ To set an inline template as a function, pass the name of the function in the te
 
 The external client templates are preferable for more advanced and complex scenarios. Within an external template, you can add HTML markup and JavaScript logic, as long as the JavaScript is properly formatted with the [Kendo UI Template syntax](https://docs.telerik.com/kendo-ui/framework/templates/essentials#handling-external-templates-and-expressions).
 
-The external template is a Kendo UI Template defined by using HTML script blocks, which is suitable for larger templates. 
+The external template is a Kendo UI Template defined by using HTML script blocks, which is suitable for larger templates.
 
 For example, you can define an external client template for a [Grid column]({% slug htmlhelper_grid_template_columns %}) by following the steps below:
 
@@ -280,11 +280,9 @@ The following example demonstrates how to include Chart TagHelpers in the TileLa
 
 As of the R1 SP1 2023 release, Telerik UI for {{ site.framework }} addresses the [content security policy issues]({% slug troubleshooting_content_security_policy_aspnetmvc %}) related to the `usafe-eval` directive for components except for the Spreadsheet.
 
-To create CSP-compatible templates, Telerik UI for {{ site.framework }} introduces an overload of the components template methods that accept {% if site.core %}`IHtmlContent`{% else %}`MvcHtmlString`{% endif %}. It allows you to define the template content in a partial view. This way, you can prevent the components from being dependent on the `unsafe-eval` and reuse the templates within multiple components in different application pages.
+To create CSP-compatible templates, Telerik UI for {{ site.framework }} introduces an overload of the components template methods that accept JS function name. It allows you to define the template content by a client side handler. This way, you can prevent the components from being dependent on the `unsafe-eval` and reuse the templates within multiple components in different application pages.
 
-Within the partial view that contains the template, you can access the properties of the Model bound to the respective component.
-
-The example below demonstrates how to load the [item template of a ComboBox]({% slug htmlhelpers_combobox_templates_aspnetcore %}#item-template) through a partial view. You can pass either the relative or absolute path to the partial view in the `TemplateView` method.
+The example below demonstrates how to load the [item template of a ComboBox]({% slug htmlhelpers_combobox_templates_aspnetcore %}#item-template) through a function handler.
 
 {% if site.core %}
 ```HtmlHelper
@@ -300,20 +298,16 @@ The example below demonstrates how to load the [item template of a ComboBox]({% 
                 read.Action("Template_GetCustomers", "ComboBox");
             });
         })
-        .TemplateView(await Html.PartialAsync("../MyPartialViews/Item_template.cshtml")) // The "Item_template.cshtml" is added in "~/Views/MyPartialViews/" directory.
+        .TemplateHandler("itemTemplateHandler")
     )
 ```
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
-    @{
-        // The "Item_template.cshtml" is added in "~/Views/MyPartialViews/" directory.
-        var itemTemplateView = await Html.PartialAsync("../MyPartialViews/Item_template.cshtml");
-    }   
 
     <kendo-combobox name="customers" style="width: 100%;"
-        datatextfield="ContactName" 
-        datavaluefield="CustomerID" 
-        template-view="@itemTemplateView">
+        datatextfield="ContactName"
+        datavaluefield="CustomerID"
+        template-handler="itemTemplateHandler">
         <datasource>
             <transport>
                 <read url="@Url.Action("Template_GetCustomers","ComboBox")"/>
@@ -335,20 +329,18 @@ The example below demonstrates how to load the [item template of a ComboBox]({% 
                 read.Action("Template_GetCustomers", "ComboBox");
             });
         })
-        .TemplateView(Html.Partial("../MyPartialViews/Item_template.cshtml")) // The "Item_template.cshtml" is added in "~/Views/MyPartialViews/" directory.
+        .TemplateHandler("itemTemplateHandler")
     )
 ```
 {% endif %}
-```Item_template.cshtml
-    @{
-        Layout = null;
+```scripts.js
+    function itemTemplateHandler(data) {
+        if(data.Country == "Germany"){
+            return `<div><b>${data.ContactName}</b></div>`
+        } else {
+            return `<div><i>${ContactTitle}</i> - <b>${ContactName}</b></div>`
+        }
     }
-
-    #if(Country == "Germany"){#
-        <div><b>#: ContactName #</b></div>
-    #}else{#
-        <div><i>#=ContactTitle#</i> - <b>#= ContactName#</b></div>
-    #}#
 ```
 
 ## See Also

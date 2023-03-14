@@ -1,9 +1,9 @@
 ---
 title: Font Icons
 page_title: Font Icons
-description: "Learn about the available Telerik UI Font Icons."
+description: "Learn more about what icon fonts are and how to define, implement, and render the available Telerik UI Font Icons out of the supported list."
 slug: webfonticons_aspnetmvc6_aspnetmvc
-position: 6
+position: 7
 ---
 
 # Web Font Icons
@@ -127,9 +127,9 @@ To better accommodate an icon in your application, flip it by using the `k-flip-
     }
 
     .icons-frame {
-        width: 100%; 
-        height: 100%; 
-        background-color: rgb(248, 248, 248); 
+        width: 100%;
+        height: 100%;
+        background-color: rgb(248, 248, 248);
         border: 2px dashed rgb(235, 236, 238);
     }
 </style>

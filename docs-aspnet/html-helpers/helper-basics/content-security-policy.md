@@ -9,7 +9,7 @@ position: 6
 
 # Content Security Policy
 
-[Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) is a supplementary security approach which helps you detect and handle specific security attacks such as Cross-Site Scripting (XSS) and data-injection ones. 
+[Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) is a supplementary security approach which helps you detect and handle specific security attacks such as Cross-Site Scripting (XSS) and data-injection ones.
 
 If the strict CSP mode is enabled, some browser features are disabled by default:
 
@@ -56,13 +56,13 @@ Call the method after all components declarations to serialize the deferred init
 ```
     @Html.Kendo().DeferredScriptFile()
 
-``` 
+```
 
 ### Creating Content Security Policy Templates
 
-Most of the components support templating options, which use the [Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview), for example, [Grid templates]({% slug htmlhelpers_grid_aspnetcore_templates_overview %}), [DropDownList templates]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %}), and more. To avoid using the [inline](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline) and [external](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external) Kendo UI templates and remove the `unsafe-eval` keyword from the `meta` tag of your Telerik UI for {{ site.framework }} application, you can define the templates in partial views and load them by using the overload of the template option that accepts {% if site.core %}`IHtmlContent`{% else %}`MvcHtmlString`{% endif %}. For more information on the CSP-compatible templates, [refer to the CSP-compatible templates section]({% slug client_templates_overview %}#content-security-policy-csp-templates).
+Most of the components support templating options, which use the [Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview), for example, [Grid templates]({% slug htmlhelpers_grid_aspnetcore_templates_overview %}), [DropDownList templates]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %}), and more. To avoid using the [inline](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline) and [external](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external) Kendo UI templates and remove the `unsafe-eval` keyword from the `meta` tag of your Telerik UI for {{ site.framework }} application, you can define functional templates. For more information on the CSP-compatible templates, [refer to the CSP-compatible templates section]({% slug client_templates_overview %}#content-security-policy-csp-templates).
 
-The example below demonstrates how to define a CSP-compatible [client detail template of a Grid]({% slug clientdetailtemplate_grid_aspnetcore %}). You can pass either the relative or absolute path to the partial view in the `ClientDetailTemplateView` method.
+The example below demonstrates how to define a CSP-compatible [client detail template of a Grid]({% slug clientdetailtemplate_grid_aspnetcore %}).
 
 {% if site.core %}
 ```HtmlHelper
@@ -74,7 +74,7 @@ The example below demonstrates how to define a CSP-compatible [client detail tem
             columns.Bound(product => product.CategoryName);
         })
         .Pageable()
-        .ClientDetailTemplateView(await Html.PartialAsync("../GridPartials/DetailTemplate.cshtml")) // The "DetailTemplate.cshtml" is added in "~/Views/GridPartials/" directory.
+        .ClientDetailTemplateHandler("clientDetailTemplateHandler")
         .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
@@ -87,12 +87,7 @@ The example below demonstrates how to define a CSP-compatible [client detail tem
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
-    @{
-        // The "DetailTemplateTagHelper.cshtml" is added in "~/Views/GridPartials/" directory.
-        var detailTemplate = await Html.PartialAsync("../GridPartials/DetailTemplateTagHelper.cshtml");
-    }
-
-    <kendo-grid name="grid" detail-template-view="detailTemplate">
+    <kendo-grid name="grid" detail-template-handler="clientDetailTemplateHandler">
         <columns>
             <column field="CategoryID"/>
             <column field="CategoryName"/>
@@ -113,28 +108,10 @@ The example below demonstrates how to define a CSP-compatible [client detail tem
         </datasource>
     </kendo-grid>
 ```
-```DetailTemplateTagHelper.cshtml
-    // Partial View that contains the detail TagHelper Grid.
-    @addTagHelper *, Kendo.Mvc
-    @{
-        Layout = null;
-        var url = @Url.Action("Products_Read", "Home");
+```scripts.js
+    function clientDetailTemplateHandler(data) {
+        return `<p>${data.CategoryDetails}</p>`
     }
-
-    <kendo-grid name="grid_#=CategoryID#" is-in-client-template="true">
-        <columns>
-            <column field="ProductID"/>
-            <column field="ProductName"/>
-        </columns>
-        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
-            <schema data="Data" total="Total" errors="Errors">
-            </schema>
-            <transport>
-                <read url="@Html.Raw(url+"?categoryId=#=CategoryID#")" />
-            </transport>
-        </datasource>
-        <pageable enabled="true" />
-    </kendo-grid>
 
 ```
 {% else %}
@@ -147,7 +124,7 @@ The example below demonstrates how to define a CSP-compatible [client detail tem
             columns.Bound(product => product.CategoryName);
         })
         .Pageable()
-        .ClientDetailTemplateView(Html.Partial("../GridPartials/DetailTemplate.cshtml")) // The "DetailTemplate.cshtml" is added in "~/Views/GridPartials/" directory.
+        .ClientDetailTemplateHandler(clientDetailTemplateHandler)
         .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
@@ -158,34 +135,18 @@ The example below demonstrates how to define a CSP-compatible [client detail tem
     @Html.Kendo().DeferredScriptFile()
 ```
 {% endif %}
-```DetailTemplate.cshtml
-    // Partial View that contains the detail Grid.
-    @{
-        Layout = null;
+```scripts.js
+    function clientDetailTemplateHandler(data) {
+        return `<p>${data.CategoryDetails}</p>`
     }
 
-    @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Product>()
-        .Name("grid_#=CategoryID#")
-        .Columns(columns =>
-        {
-            columns.Bound(product => product.ProductID);
-            columns.Bound(product => product.ProductName);
-        })
-        .DataSource(dataSource => dataSource
-            .Ajax()
-            .PageSize(20)
-            .Read(read => read.Action("Products_Read", "Home", new { categoryId = "#=CategoryID#" }))
-        )
-        .Pageable()
-        .ToClientTemplate()
-    )
 ```
 
 The engine for the [inline](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline) and [external](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external) templates will remain available. However, if you are using the previous template syntax, you must include the `usafe-eval` directive in the `meta` tag.
 
 ## (Prior to R1 2023 SP1) Working with Telerik UI for {{ site.framework }} Components
 
-The Telerik UI for {{ site.framework }} releases prior to the R1 2023 SP1 one does not support the strict CSP mode. Thus, in these previous versions, if the Content Security Policy (CSP) is enabled, you could set the [`script-src` policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) as follows: 
+The Telerik UI for {{ site.framework }} releases prior to the R1 2023 SP1 one does not support the strict CSP mode. Thus, in these previous versions, if the Content Security Policy (CSP) is enabled, you could set the [`script-src` policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) as follows:
 
 {% if site.core %}
 
@@ -216,7 +177,7 @@ The Telerik UI for {{ site.framework }} releases prior to the R1 2023 SP1 one do
         </kendo-panelbar>
     ```
     {% endif %}
-	
+
 1. Render the initialization logic in a script using `nonce`.
 
     ```
