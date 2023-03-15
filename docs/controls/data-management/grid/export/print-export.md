@@ -43,7 +43,7 @@ It also addresses the following important issues:
                 '<head>' +
                 '<meta charset="utf-8" />' +
                 '<title>Kendo UI Grid</title>' +
-                '<link href="https://kendo.cdn.telerik.com/themes/' + kendo.themesCdnVersion + '/default/default-main.css" rel="stylesheet" /> ' +
+                '<link href="https://kendo.cdn.telerik.com/themes/' + {{site.themesCdnVersion}} + '/default/default-main.css" rel="stylesheet" /> ' +
                 '<style>' +
                 'html { font: 11pt sans-serif; }' +
                 '.k-grid { border-top-width: 0; }' +

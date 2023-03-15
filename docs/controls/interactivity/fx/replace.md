@@ -88,7 +88,7 @@ The following example demonstrates how to apply a faster `replace` effect transi
 
     <html>
         <head>
-            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{themesCdnVersion}/default/default-main.css" type="text/css" />
+            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{site.themesCdnVersion}}/default/default-main.css" type="text/css" />
             <style>
                 .k-fx-end .k-fx-next,
                 .k-fx-end .k-fx-current {

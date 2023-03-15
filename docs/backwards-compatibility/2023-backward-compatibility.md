@@ -24,10 +24,10 @@ As of the 2023 R1 SP1 release, to unify their support for the new [ThemeBuilder 
 * [Notification]({% slug overview_kendoui_notification_widget %})
 * [Upload]({% slug overview_kendoui_upload_widget %})
 * [Pager]({% slug overview_kendoui_pager_widget %})
-* [Toolbar]({% slug api-web-toolbar %})
+* [Toolbar]({% slug overview_kendoui_toolbar_widget %})
 * [Window]({% slug overview_kendoui_window_widget %})
 * [Editor]({% slug overview_kendoui_editor_widget %})
-* [Calendar]({% overview_kendoui_calendar_widget %}) and [MultiViewCalendar](overview_kendoui_multiviewcalendar_widget)
+* [Calendar]({% slug overview_kendoui_calendar_widget %}) and [MultiViewCalendar]({% slug overview_kendoui_multiviewcalendar_widget %})
 * Animation Containers and their dependent components
 
 **Animation Containers**
