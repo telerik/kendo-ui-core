@@ -10,7 +10,7 @@ permalink: /getting-started/first-steps
 
 # First Steps in {{ site.product }} with VS for Windows
 
-This tutorial demonstrates how to start working with Telerik UI for ASP.NET Core. You will implement the Telerik UI DatePicker for ASP.NET Core in your project by using its dedicated HtmlHelper or TagHelper. In this guide, you will download and implement the components by using NuGet and Visual Studio 2019 for Windows. 
+This tutorial demonstrates how to start working with Telerik UI for ASP.NET Core. You will implement the Telerik UI DatePicker for ASP.NET Core in your project by using its dedicated HtmlHelper or TagHelper. In this guide, you will download and implement the components by using NuGet and Visual Studio 2019 for Windows.
 
 The approach demonstrated in this guide is applicable both for new projects and for already existing projects where you want to implement Telerik UI controls.
 
@@ -43,7 +43,7 @@ In this tutorial, you will:
 * Windows 10 or higher
 * [Telerik account](https://www.telerik.com/account)&mdash;if you don't have an account yet, you can [create one for free](https://www.telerik.com/account).
 
-> For .NET Core 3.1 version or later, Visual Studio 2019 is required. 
+> For .NET Core 3.1 version or later, Visual Studio 2019 is required.
 
 ## Creating the Application
 
@@ -55,7 +55,7 @@ In this tutorial, you will:
 
 1. Enter **MyTelerikProject** as a project name, and then select **Next**.
 
-	Using this project name guarantees that the namespace from the code snippets in this tutorial will match your project. 
+	Using this project name guarantees that the namespace from the code snippets in this tutorial will match your project.
 
 1. Select the **.NET** target framework of your choice from the dropdown box, and then select **Create**.
 
@@ -88,7 +88,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you are a tria
 
 The easiest way to add the Telerik NuGet feed to Visual Studio if you have purchased a commercial license is to use the Progress Control Panel:
 
-1. Download the Progress Control Panel from the **Overview** page of your [Telerik account](https://www.telerik.com/account/). 
+1. Download the Progress Control Panel from the **Overview** page of your [Telerik account](https://www.telerik.com/account/).
 
     ![{{ site.product_short }} Download Progress Control Panel](../getting-started-core/images/download-control-panel-2022.png)
 
@@ -122,7 +122,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 ## Adding a Reference to Kendo.Mvc.UI
 
-1. Register the Kendo UI service in the services container. 
+1. Register the Kendo UI service in the services container.
 
  * For applications using .NET 5 or earlier, open the `Startup.cs` file and register the Kendo UI services in the `ConfigureServices` method.
 
@@ -158,7 +158,7 @@ To implement Telerik UI for ASP.NET Core in an application, you must provide not
 >* The CDN links and/or package versions must point to the same UI for ASP.NET Core version that your project references.
 >* The Kendo UI scripts must be placed after the `jQuery` script.
 
-Before you can use a Telerik UI component, you must include the theme, the jQuery script, and the Kendo UI scripts: 
+Before you can use a Telerik UI component, you must include the theme, the jQuery script, and the Kendo UI scripts:
 
 1. Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it:
 
@@ -168,11 +168,11 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		<link rel="stylesheet" href="~/css/site.css" />
 
 		@* Add the Kendo Bootstrap theme: *@
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
 		...
 		</head>
 
-1. The Microsoft ASP.NET Core Web Application template comes with a jQuery script reference at the end of _Layout.cshtml file. Find the `jquery.min.js` script line in the `<body>` of the document and remove it.  
+1. The Microsoft ASP.NET Core Web Application template comes with a jQuery script reference at the end of _Layout.cshtml file. Find the `jquery.min.js` script line in the `<body>` of the document and remove it.
 
 1. Add the `jQuery` script hosted on the Telerik CDN:
 
@@ -180,7 +180,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		...
 		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="~/css/site.css" />
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
 
 		@* Add the the jQuery script from the Telerik CDN: *@
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
@@ -193,7 +193,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		...
 		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="~/css/site.css" />
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}bootstrap/bootstrap-main.css" />
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
 
 		@* Add the Kendo UI scripts: *@

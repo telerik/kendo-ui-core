@@ -33,7 +33,7 @@ The Kendo UI Sass-based themes are hosted on the official [Kendo UI CDN](https:/
 The following example showcases how to include the **Default** theme from the CDN:
 
 ```html
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 ```
 
 ## Using NPM Packages

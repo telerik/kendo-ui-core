@@ -45,14 +45,14 @@ To add the client-side resources to your project:
             <environment include="Development">
                 ...
 
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.default-main.min.css" />
+                <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
             </environment>
             <environment exclude="Development">
                 ...
 
                 <link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.default-main.min.css"
+                    href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
+                    asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
                     asp-fallback-test-class="k-theme-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
             </environment>
@@ -111,7 +111,7 @@ To add the client-side resources to your project:
             // "~/Scripts/kendo/kendo.timezones.min.js",
             "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
 
-1. Add a style bundle for Telerik UI for ASP.NET MVC.
+1. If you are using UI for ASP.NET MVC R1 2023 (version 2023.1.117) or older version with LESS themes - Add a style bundle for Telerik UI for ASP.NET MVC. For the SASS themes, Telerik is shipping one file and CSS bundling is not needed.
 
     > Make sure you are familiar with the [Telerik UI for ASP.NET MVC fundamentals and CSS bundling]({% slug fundamentals_aspnetmvc %}).
 
@@ -125,7 +125,7 @@ To add the client-side resources to your project:
 
 1. Open the layout of the application. By default, if using ASPX, it is `Views/Shared/_Layout.cshtml`, or `Site.master`.
 
-1. Render the Telerik UI for ASP.NET MVC style bundle.
+1. For Less themes - Render the Telerik UI for ASP.NET MVC style bundle. For SASS themes - add reference to the respective css file, e.g. `default-main.css`.
 
     ```ASPX
         <%: Styles.Render("~/Content/kendo/css") %>
@@ -158,21 +158,20 @@ To add the client-side resources to your project:
             <environment include="Development">
                 ...
 
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-nova.min.css" />
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.nova.min.css" />
+                <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
             </environment>
             <environment exclude="Development">
                 ...
 
                 <link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.common-nova.min.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
+                    href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
+                    asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
                     asp-fallback-test-class="k-common-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
 
                 <link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.nova.min.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
+                    href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
+                    asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
                     asp-fallback-test-class="k-theme-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
             </environment>

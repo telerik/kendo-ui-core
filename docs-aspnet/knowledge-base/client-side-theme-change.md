@@ -1,5 +1,5 @@
 ---
-title: Change Theme On The Client 
+title: Change Theme On The Client
 page_title: Change Theme On The Client
 description: "How to Change The {{ site.product }} Application Theme On The Client"
 slug: howto_changethemeontheclient
@@ -25,7 +25,7 @@ How can I allow the user to change the theme in my {{ site.product }} applicatio
 
 ## Solution
 
-The Step by Step guide below demonstrates how to allow the user to change the theme of the application. The approach demonstrated uses cookies to store the theme selected by the user. For a runnable example, refer to the GitHub repo on how to [change the theme on the client]{% if site.core %}(https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/StylesAndLayout/ClientThemeChange.cshtml){% else %}(https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/styles-and-layout/ChangingThemesOnTheClient){% endif %}.
+The Step by Step guide below demonstrates how to allow the user to change the theme of the application. The approach demonstrated uses cookies to store the theme selected by the user.
 
 ### Adding a DropDownList for theme selection
 
@@ -108,9 +108,9 @@ Set the theme in the _Layout.cshtml file, by following the requirements discusse
 ```razor
     @{
         var specialThemes = new string[] { "nova", "bootstrap", "fiori", "material", "materialblack", "office365" };
-        var sassThemes = new string[] { "default-v2", "bootstrap-v4", "material-v2" };
+        var sassThemes = new string[] { "default-main", "bootstrap-main", "material-main" };
         var commonThemeName = "common";
-        var mainHref = "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.";
+        var mainHref = "https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/";
         var isThemeSelected = Context.Request.Cookies.TryGetValue("theme", out string selectedTheme);
 
         if (!isThemeSelected)

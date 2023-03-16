@@ -252,6 +252,8 @@ This approach is required with components such as the Window, TabStrip, Splitter
 
 ## Bundling Resources
 
+For the SASS themes, Telerik is shipping one file and bundling is not needed. If you are using UI for ASP.NET MVC R1 2023 (version 2023.1.117) or older version with LESS themes follow the instructions below.
+
 Bundling combines resources and improves the loading time by reducing the number of requests to the server. By default, bundling is disabled in development (debug configuration).
 
 To enable bundling in development, use either of the following approaches:

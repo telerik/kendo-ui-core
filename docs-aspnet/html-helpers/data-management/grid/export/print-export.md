@@ -54,7 +54,7 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
                     '<head>' +
                     '<meta charset="utf-8" />' +
                     '<title>Kendo UI Grid</title>' +
-                    '<link href="https://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
+                    '<link href="https://kendo.cdn.telerik.com/themes/' + {{ site.themesCdnVersion }} + '/default/default-main.css" rel="stylesheet" /> ' +
                     '<style>' +
                     'html { font: 11pt sans-serif; }' +
                     '.k-grid { border-top-width: 0; }' +

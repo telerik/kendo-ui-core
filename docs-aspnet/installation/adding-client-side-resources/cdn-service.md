@@ -91,7 +91,7 @@ The following complete example demonstrates how to add the [CSS files](#adding-t
 1. To add the Bootstrap theme files, insert a `link` tag within the `head` tag of the layout and include the style file or files.
 
     ```
-        <link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" rel="stylesheet" type="text/css" /> 
+         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
     ```
 
 1. To add the JavaScript files, insert a `script` tag and include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after the jQuery script.
@@ -103,11 +103,6 @@ The following complete example demonstrates how to add the [CSS files](#adding-t
 
 {% else %}
 1. Open the layout of the application. By default, it is `~/Views/Shared/_Layout.cshtml` or `Site.master`, if using ASPX.
-
-1. To add the Bootstrap theme files, include the `kendo.common-bootstrap.min.css` and `kendo.bootstrap.min.css` files. Add a `link` tag within the `head` tag of the layout. For more information on the CSS files which are used by the predefined Less themes, refer to the documentation on the [Less-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling).
-
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.common-bootstrap.min.css" />
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap.min.css" />
 
 1. To add the JavaScript files, insert a `script` tag and include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after the jQuery script.
 

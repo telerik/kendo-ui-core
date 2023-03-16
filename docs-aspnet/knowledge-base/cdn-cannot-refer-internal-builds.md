@@ -33,8 +33,7 @@ For access to internal builds over CDN, use private CDN services. Always impleme
     <html>
     <head>
         <title>Welcome to Kendo UI</title>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.common.min.css" />
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.blueopal.min.css" />
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
         <script>
@@ -51,8 +50,7 @@ For access to internal builds over CDN, use private CDN services. Always impleme
                 // Therefore, assume that if the scripts have failed, so have the stylesheets.
 
                 // A fallback to the local Kendo UI stylesheets.
-                document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.common.min.css" %3C/%3E'));
-                document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.blueopal.min.css" %3C/%3E'));
+                document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/default-main.css" %3C/%3E'));
 
                 // A fallback to the local Kendo UI scripts.
                 document.write(decodeURIComponent('%3Cscript src="/path/to/local/kendo.all.min.js" %3E%3C/script%3E'));

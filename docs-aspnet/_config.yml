@@ -689,6 +689,9 @@ baseurl: /aspnet-core
 ## The Kendo UI version used
 cdnVersion: "2023.1.314"
 
+## The themes CDN used
+themesCdnVersion: "6.2.0"
+
 ## The MVC Core version used
 mvcCoreVersion: "2023.1.314"
 
