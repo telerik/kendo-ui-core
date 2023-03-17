@@ -26,20 +26,21 @@ To access the Kendo UI CDN services, you can use either the HTTP or the HTTPS pr
 
 The URLs of the Telerik CDN have the following structure:
 
-* `https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`&mdash;The `styles` folder contains the [minified `.css` files](#adding-the-required-css-files).
+* `https://kendo.cdn.telerik.com/themes/[THEMEVERSION]/default/[FILENAME]`&mdash;The `themes` folder contains the [`.css` files](#adding-the-required-css-files) of the SASS themes for {{ site.product }} versions after R1 2023 SP1.
+* `https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`&mdash;The `styles` folder contains the [minified `.css` files](#adding-the-required-css-files) (SASS and LESS) for {{ site.product }} versions before R1 2023 SP1. 
 * `https://kendo.cdn.telerik.com/[VERSION]/mjs/[FILENAME]`&mdash;The `mjs` folder contains the [JavaScript modules](#using-javascript-modules).
 * `https://kendo.cdn.telerik.com/[VERSION]/js/[FILENAME]`&mdash;The `js` folder contains the [bundled Kendo UI JavaScript files](#using-bundled-javascript).
 
-In the sample URLs above, you must replace `[VERSION]` and `[FILENAME]` with the client-side resource that you need and its version. For example, to load version `{{ site.mvcCoreVersion }}` of the Kendo JavaScript modules and the CSS files for the Kendo Default visual theme, use these URLs:
+In the sample URLs above, you must replace `[VERSION]`, [THEMEVERSION] and `[FILENAME]` with the client-side resource that you need and its version. For example, to load version `{{ site.mvcCoreVersion }}` of the Kendo JavaScript modules and the CSS files for the Kendo Default visual theme, use these URLs:
 
 * `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js`
-* `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.default-main.min.css`
+* `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`
 
 ## Adding the Required CSS Files
 
-Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The minified versions of the `.css` files are available in the `styles` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`.
+Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The minified versions of the `.css` files are available in the `themes` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/themes/[THEMEVERSION]/default/[FILENAME]`.
 
-To load version `{{site.cdnVersion}}` of the desired visual theme, replace `[VERSION]` and `[FILENAME]` with their actual values, for example, `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css`.
+To load version `{{site.cdnVersion}}` of the desired visual theme, replace `[THEMEVERSION]` and `[FILENAME]` with their actual values, for example, `ttps://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`.
 
 ## Adding the Required JavaScript Files
 
@@ -83,7 +84,7 @@ To load version `{{site.cdnVersion}}` of the bundled Kendo JavaScript files, rep
 
 The following complete example demonstrates how to add the [CSS files](#adding-the-required-css-files) and the [bundled JavaScript](#using-bundled-javascript).
 
->Replace the Kendo UI version from the following code snippets with the version of the product you are using&mdash;for example, `{{ site.mvcCoreVersion }}`.
+>Replace the {{ site.product }} version in the script `src` attribute with the version of the product you are using&mdash;for example, `{{ site.mvcCoreVersion }}`. Replace the theme version in the stylesheet `href` attribute with the respective version of the theme you are using.
 
 {% if site.core %}
 1. Open the layout of the application. By default, it is `~\Views\Shared\_Layout.cshtml`.

@@ -9,9 +9,9 @@ position: 3
 
 # Using Local Files
 
-To render correctly, the Telerik UI components need the corresponding client-side JavaScript and CSS files. This guide demonstrates how to import these client-side assets in your project by using files that you will download from the Telerik website to your local machine.
+To render correctly, the {{ site.product }} components need the corresponding client-side JavaScript and CSS files. This guide demonstrates how to import these client-side assets in your project by using files that you will download from the Telerik website to your local machine.
 
->tip If you used the [automated MSI installer]({%slug msi_install_aspnetmvc6_aspnetmvc%}) to install {{ site.product }}, all required files are already available on your machine and you can skip the downloading instructions and jump to Step 4 below. By default, these js and CSS files are located in the Telerik UI installation folder under `C:\Program Files (x86)\Progress\{{ site.product }} <version>`.
+>tip If you used the [automated MSI installer]({%slug msi_install_aspnetmvc6_aspnetmvc%}) to install {{ site.product }}, all required files are already available on your machine and you can skip the downloading instructions and jump to Step 4 below. By default, these js and CSS files are located in the {{ site.product }} installation folder under `C:\Program Files (x86)\Progress\{{ site.product }} <version>`.
 
 ## Adding the Resources
 
@@ -37,7 +37,7 @@ To add the client-side resources to your project:
 1. Register the UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
     > * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
-    > * In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HTML Helpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
+    > * In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the {{ site.product }} HTML Helpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
         <head>
             ...
@@ -101,9 +101,9 @@ To add the client-side resources to your project:
 
     ![{{ site.product_short }} The Kendo UI directories in the Solution Explorer](../../images/mvc5-solution.png)
 
-1. Open `App_Start/BundleConfig.cs` to add bundles for Telerik UI for ASP.NET MVC.
+1. Open `App_Start/BundleConfig.cs` to add bundles for {{ site.product }}.
 
-1. Add a script bundle for Telerik UI for ASP.NET MVC.
+1. Add a script bundle for {{ site.product }}.
 
         bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
             "~/Scripts/kendo/kendo.all.min.js",
@@ -111,9 +111,13 @@ To add the client-side resources to your project:
             // "~/Scripts/kendo/kendo.timezones.min.js",
             "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
 
-1. If you are using UI for ASP.NET MVC R1 2023 (version 2023.1.117) or older version with LESS themes - Add a style bundle for Telerik UI for ASP.NET MVC. For the SASS themes, Telerik is shipping one file and CSS bundling is not needed.
+1. If you are using {{ site.product }} R1 2023 SP1 (version 2023.1.314) or newer, add a reference to a local theme CSS file or use the CDN, as shown in step 1. Bundling is not needed, because a single theme CSS file must be referenced.  
 
-    > Make sure you are familiar with the [Telerik UI for ASP.NET MVC fundamentals and CSS bundling]({% slug fundamentals_aspnetmvc %}).
+
+        <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
+
+
+    > For product versions older than R1 2023 SP1, if you are using LESS CSS files, you can bundle them as shown below. Make sure you are familiar with CSS bundling.
 
         bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
             "~/Content/kendo/kendo.common-bootstrap.min.css",
@@ -121,36 +125,42 @@ To add the client-side resources to your project:
 
 1. Set the ASP.NET bundles to allow minified files in debug mode.
 
+
         bundles.IgnoreList.Clear();
 
 1. Open the layout of the application. By default, if using ASPX, it is `Views/Shared/_Layout.cshtml`, or `Site.master`.
 
-1. For Less themes - Render the Telerik UI for ASP.NET MVC style bundle. For SASS themes - add reference to the respective css file, e.g. `default-main.css`.
+1. For SASS themes - add reference to the respective css file, e.g. `default-main.css`. For {{ site.product }} versions older than R1 2023 SP1 and LESS themes - render the {{ site.product }} style bundle. 
 
+
+    ```Razor
+        @*For SASS themes in the _Layout.cshtml (after the R1 2023 SP1 release):*@
+        <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
+
+        @*For LESS themes in the _Layout.cshtml (before the R1 2023 SP1 release):*@
+        @*@Styles.Render("~/Content/kendo/css")*@
+    ```
     ```ASPX
         <%: Styles.Render("~/Content/kendo/css") %>
-    ```
-    ```Razor
-        @Styles.Render("~/Content/kendo/css")
     ```
 
 1. Move the jQuery bundle to the `head` tag of the page. By default, it is located at the end of the page.
 
-1. Render the Telerik UI for ASP.NET MVC script bundle after jQuery. Make sure that the jQuery version you load is [supported]({% slug jquerysupport_core %})
+1. Render the {{ site.product }} script bundle after jQuery. Make sure that the jQuery version you load is [supported]({% slug jquerysupport_core %})
 
-    ```ASPX
-        <%: Scripts.Render("~/bundles/jquery") %>
-        <%: Scripts.Render("~/bundles/kendo") %>
-    ```
     ```Razor
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/kendo")
     ```
+    ```ASPX
+        <%: Scripts.Render("~/bundles/jquery") %>
+        <%: Scripts.Render("~/bundles/kendo") %>
+    ```
 
 1. Register the UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
-    > * The CDN links and/or package versions have to point to the same UI for ASP.NET MVC version which your project references.
-    > * In the default .NET MVC template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HTML Helpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
+    > * The CDN links and/or package versions have to point to the same {{ site.product }} version, which your project references.
+    > * In the default .NET MVC template, the jQuery scripts are included at the end of the `<body>` element. To properly load the {{ site.product }} HTML Helpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
         <head>
             ...
@@ -167,12 +177,6 @@ To add the client-side resources to your project:
                     href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
                     asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
                     asp-fallback-test-class="k-common-test-class"
-                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-
-                <link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
-                    asp-fallback-test-class="k-theme-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
             </environment>
 

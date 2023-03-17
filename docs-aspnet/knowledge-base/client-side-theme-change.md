@@ -118,8 +118,8 @@ Set the theme in the _Layout.cshtml file, by following the requirements discusse
             selectedTheme = "default";
         }
 
-        var themeHref = mainHref + selectedTheme + ".min.css";
-        var commonThemeHref = mainHref + commonThemeName + ".min.css";
+        var themeHref = mainHref + selectedTheme + ".css";
+        var commonThemeHref = mainHref + commonThemeName + ".css";
         if (specialThemes.Any(x => x == selectedTheme))
         {
             commonThemeName += "-" + selectedTheme.Replace("materialblack", "material");

@@ -24,25 +24,25 @@ The following example showcases several swatches:
   Theme name - default
   Swatch name - ocean-blue
  -->
- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-ocean-blue.min.css" />
+ <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-ocean-blue.css" />
 
  <!-- 
   Theme name - default
   Swatch name - purple
  -->
- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-purple.min.css" />
+ <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-purple.css" />
 
  <!-- 
   Theme name - bootstrap
   Swatch name - vintage
  -->
- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.bootstrap-vintage.min.css" />
+ <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-vintage.css" />
 
  <!-- 
   Theme name - material
   Swatch name - nova
  -->
- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.material-nova.min.css" />
+ <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-nova.css" />
 ```
 
 ## Using Built-in Swatches

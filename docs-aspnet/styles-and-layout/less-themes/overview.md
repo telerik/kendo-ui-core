@@ -39,8 +39,8 @@ The following example demonstrates how to reference the required stylesheets of 
 The following example demonstrates how to reference the required stylesheets of the `Default` LESS theme in your project, when using the Kendo CDN:
 
 ```html
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.default.min.css">
 ```
 
 ## Common CSS Files

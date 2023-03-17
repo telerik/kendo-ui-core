@@ -97,14 +97,14 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@ViewBag.Title - UI for MVC / Kendo Quick Start Guide</title>
-        <link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.common-bootstrap.min.css" rel="stylesheet"   type="text/css" />
-        <link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap.min.css" rel="stylesheet"  type="text/css" />
+        <link href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.common-bootstrap.min.css" rel="stylesheet"   type="text/css" />
+        <link href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.bootstrap.min.css" rel="stylesheet"  type="text/css" />
         <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/jquery.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/jszip.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.aspnetmvc.min.js"></script>
         <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
         <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
         @Styles.Render("~/Content/css")

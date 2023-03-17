@@ -288,20 +288,20 @@ The themes are usually referenced in the _Layout file of the application. To cha
 If during the creation the project you've chosen the Bootstrap theme, the `_Layout.cshtml` file should contain the following CSS link:
 
 ```
-	<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
 ```
 
 To change the theme to the Default theme, substitute the link above with the following:
 
 ```
-	<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.default-main.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" type="text/css" />
 ```
 
-Since both the Bootstrap and Default themes are Sass-based themes, no additional CSS files are required. To reference a Less-based theme, you must add an additional common CSS file. To use the Less-based Default theme, substitute the link above with the following two links:
+Since both the Bootstrap and Default themes are Sass-based themes, no additional CSS files are required. LESS theme files are no longer support after the R1 2023 SP1 release. If you need to reference LESS CSS files in an older version of the {{ site.product }}, you must add a common and a theme CSS files. The following example shows how to reference the Default LESS theme (applicable to versions of {{ site.product }} before R1 2023 SP1):
 
 ```
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.default.min.css" />
 ```
 
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
