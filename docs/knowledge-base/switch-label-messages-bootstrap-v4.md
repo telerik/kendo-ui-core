@@ -41,8 +41,7 @@ The Kendo UI Bootstrap theme follows the designs as laid out in [Bootstrap v4](h
     </style>
 ```
 
-```dojo
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.bootstrap-v4.min.css" />
+```dojo    
     <style>
         .k-switch-label-on,.k-switch-label-off {
           display:block;

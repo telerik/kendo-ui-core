@@ -24,7 +24,7 @@ The Kendo UI CDN provides the following services:
 
 ### Adding the Required CSS Files
 
-The minified versions of the `.css` files are available at `https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`. For example, you can load the `{{site.themesCdnVersion }}` version from the `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css` location.
+The `.css` files are available at `https://kendo.cdn.telerik.com/themes/<version>/<theme>/<swatch>.css`. For example, you can load the `{{site.themesCdnVersion }}` version of the `Default` theme  from the `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css` location.
 
 ### Adding the Required JavaScript Files
 

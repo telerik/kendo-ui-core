@@ -38,13 +38,13 @@ Create a new empty HTML file and include jQuery, AngularJS, and Kendo UI. In thi
         <meta charset="utf-8">
         <title>Kendo UI Mobile Loves AngularJS</title>
 
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.mobile.all.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.412/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
         <link rel="https://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2022.1.412/js/kendo.all.min.js"></script>
     </head>
     <body>
 
@@ -65,13 +65,13 @@ To initialize the hybrid mobile application, add a `kendo-mobile-application` at
         <meta charset="utf-8">
         <title>Kendo UI Mobile Loves AngularJS</title>
 
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.mobile.all.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.412/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
         <link rel="https://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2022.1.412/js/kendo.all.min.js"></script>
     </head>
     <body kendo-mobile-application ng-app="sushiMobileApp">
 

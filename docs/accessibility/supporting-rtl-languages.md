@@ -38,18 +38,12 @@ You also need to configure your project with the proper styles for the RTL rende
 
 ### Setup
 
-1. Register the `kendo.rtl.css` stylesheet. It is located in the same folder as the `kendo.common.css` file&mdash;the Kendo UI `styles` folder in the latest release.
-
-		> You have to register the RTL stylesheet after the common stylesheet and before the theme stylesheet.
-
-				<link rel='stylesheet' href='/stylesheets/kendo.rtl.min.css' />
-
-2. Wrap the Kendo UI widgets in an HTML element with the `k-rtl` CSS class. Assign this class to the `<body>` tag so that no additional DOM elements are required.
+Wrap the Kendo UI widgets in an HTML element with the `k-rtl` CSS class. Assign this class to the `<body>` tag so that no additional DOM elements are required.
 
 		The `k-rtl` class has the following effects:
 
 		* Applies a `direction:rtl` style, so you do not have to set it yourself when creating right-to-left applications.
-		* Causes the widgets to change their layout in accordance with the common RTL conventions. The `kendo.rtl.css` stylesheet is required for this to happen.
+		* Causes the widgets to change their layout in accordance with the common RTL conventions. 
 		* Helps widget scripts to detect the RTL mode and, accordingly, widgets change their behavior.
 
 				<body class="k-rtl">

@@ -16,8 +16,6 @@ To use Kendo UI in your Electron projects, include the required JavaScript and C
 Due to the Node.js integration of Electron, some extra symbols were inserted into the DOM&mdash;`module`, `exports`, and `require`. To include the scripts, use the `require` symbol.
 
     <link href="lib/css/kendo.default-main.css" rel="stylesheet">
-    <link href="lib/css/kendo.rtl.min.css" rel="stylesheet">
-    <link href="lib/css/kendo.mobile.all.min.css" rel="stylesheet">
 
     <script>window.$ = window.jQuery = require('./lib/js/jquery.min.js');</script>
     <script>require('./lib/js/kendo.all.min.js')</script>
@@ -26,10 +24,7 @@ Due to the Node.js integration of Electron, some extra symbols were inserted int
 
 Before you include the jQuery library, unset `module`.
 
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion  }}/default/default-main.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.mobile.all.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion  }}/default/default-main.css">    
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>

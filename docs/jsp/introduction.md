@@ -94,7 +94,7 @@ Follow the steps below to add Kendo UI to your JSP application.
 
 If you intend to use CDN services, skip steps 3, 4, and 5, and check the [section on CDN below](#use-cdn-services).
 
-**Step 4** Copy the Kendo UI CSS files and folders from the `\styles` folder of the installation to the `WebContent/resources/styles` folder of your application. If you want to use only one theme, copy `kendo.common.min.css`, the theme file (e.g. `kendo.default.min.css`), the theme folder (e.g. `Default`) and the `textures` folder.
+**Step 4** Copy the Kendo UI CSS files from the `\styles` folder of the installation to the `WebContent/resources/styles` folder of your application. If you want to use only one theme copy only its theme file (e.g. `default-main.css`), the theme folder (e.g. `Default Main`).
 
 **Step 5** Add a JSP page.
 1. Right-click the `WebContent` folder.
@@ -103,10 +103,8 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 **Step 6** Configure your page to include the Kendo UI web JavaScript and CSS files to the page, as shown in the example below.
 
-
-
-        <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
-        <link href="resources/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+        
+        <link href="resources/styles/kendo.default-main.css" rel="stylesheet" type="text/css" />
         <script src="resources/js/jquery.min.js"></script>
         <script src="resources/js/kendo.web.min.js"></script>
 
@@ -118,9 +116,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 
 
-        <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
-        <link href="resources/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
-        <link href="resources/styles/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" />
+        <link href="resources/styles/kendo.default-main.css" rel="stylesheet" type="text/css" />
 
         <script src="resources/js/jquery.min.js"></script>
         <script src="resources/js/kendo.dataviz.min.js"></script>
