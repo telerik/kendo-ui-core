@@ -15,13 +15,13 @@
         it("renders role='textbox' to the wrapper", function() {
             var wrapper = colorPicker.wrapper;
 
-            assert.equal(wrapper.attr("role"), "textbox");
+            assert.equal(wrapper.attr("role"), "combobox");
         });
 
         it("renders aria-haspopup='true' to the wrapper", function() {
             var wrapper = colorPicker.wrapper;
 
-            assert.equal(wrapper.attr("aria-haspopup"), "true");
+            assert.equal(wrapper.attr("aria-haspopup"), "dialog");
         });
 
         it("render popup with id", function() {
@@ -35,7 +35,7 @@
         it("render aria-owns to the wrapper", function() {
             colorPicker.open();
 
-            assert.equal(colorPicker.wrapper.attr("aria-owns"), colorPicker._popup.element.attr("id"));
+            assert.equal(colorPicker.wrapper.attr("aria-controls"), colorPicker._popup.element.attr("id"));
         });
 
         it("renders aria-disabled=false", function() {

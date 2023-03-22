@@ -6975,6 +6975,7 @@ declare namespace kendo.ui {
         width?: number|string | undefined;
         height?: number|string | undefined;
         imageUrl?: string | undefined;
+        imageLabel?: string | undefined;
         saveAs?: ImageEditorSaveAs | undefined;
         toolbar?: boolean | ImageEditorToolbar | undefined;
         messages?: ImageEditorMessages | undefined;

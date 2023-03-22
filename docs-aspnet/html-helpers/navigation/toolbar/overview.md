@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI ToolBar component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/toolbar, /helpers/navigation/toolbar/overview
 slug: htmlhelpers_toolbar_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} ToolBar Overview
@@ -176,21 +176,20 @@ The ToolBar component provides the .NavigateOnTab() property which can be used t
 
 For more advanced configuration options you can check:
 
-* [Spacer]({% slug spacer_toolbar_aspnetcore %})
-* [Manual closing]({% slug htmlhelpers_toolbar_popup_manual_close_aspnetcore %})
-* [Using FontAwesome icons]({% slug htmlhelpers_use_fontawesome_icons_aspnetcore %})
-* [Supported toolbar command types]({% slug htmlhelpers_toolbar_button_aspnetcore %})
+* [Spacer]({% slug spacer_toolbar_aspnetcore %})&mdash;You can use the `Spacer` command type to move the tools that are declared after it to the right side of the ToolBar. The `Spacer` creates space between them and the tools that remain on the left.
+* [Manual closing]({% slug htmlhelpers_toolbar_popup_manual_close_aspnetcore %})&mdash;You can configure the ToolBar to close its popup from a button `click` event.
+* [Using FontAwesome icons]({% slug htmlhelpers_use_fontawesome_icons_aspnetcore %})&mdash;The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) through its `SpriteCssClass` configuration option.
+* [Supported toolbar command types]({% slug htmlhelpers_toolbar_button_aspnetcore %})&mdash;The ToolBar supports various button command types.
 
-## Events
+## Next Steps
 
-For a complete example on basic ToolBar events, refer to the [demo on using the events of the ToolBar](https://demos.telerik.com/{{ site.platform }}/toolbar/events).
+* [Getting Started with the ToolBar]({% slug toolbar_getting_started %})
+* [Basic Usage of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/index)
+{% if site.core %}
+* [Basic Usage of the ToolBar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
+{% endif %}
 
 ## See Also
 
-* [Basic Usage of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar)
-{% if site.core %}
-* [Basic Usage of the ToolBar Tag lHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
-{% endif %}
 * [Using the API of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/api)
-* [ToolBar Server-Side API](/api/toolbar)
-* [ToolBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [Knowledge Base Section](/knowledge-base)

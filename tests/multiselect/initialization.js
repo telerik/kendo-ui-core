@@ -54,16 +54,16 @@
         assert.isOk(multiselect.tagList);
     });
 
-    it("MultiSelect wraps tagList and clears float", function() {
+    it("MultiSelect wraps tagList with k-input-values and clears float", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.isOk(multiselect.tagList.parent().hasClass("k-multiselect"));
+        assert.isOk(multiselect.tagList.parent().parent().hasClass("k-multiselect"));
     });
 
-    it("MultiSelect appends tagList to the wrapper", function() {
+    it("MultiSelect appends tagList to k-input-values element in the wrapper", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect.wrapper.children(".k-chip-list")[0], multiselect.tagList[0]);
+        assert.equal(multiselect.wrapper.children(".k-input-values").children(".k-chip-list")[0], multiselect.tagList[0]);
     });
 
     it("MultiSelect creates input element", function() {

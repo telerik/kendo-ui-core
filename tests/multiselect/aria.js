@@ -357,8 +357,7 @@
 
         it("MultiSelect does not assign role to its TagList", function() {
             var multiselect = new MultiSelect(input, {
-                dataSource: ["item1", "item2"],
-                value: "item1"
+                dataSource: ["item1", "item2"]
             });
 
             assert.equal(multiselect.tagList.attr("role"), undefined);

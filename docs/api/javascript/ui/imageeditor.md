@@ -55,6 +55,21 @@ Sets the url (or base64 string) for the image to open.
     });
     </script>
 
+### imageLabel `String`
+
+Sets the label used for the `<canvas>` element to describe the image contents.
+
+#### Example
+
+    <div id="imageEditor"></div>
+    <script>
+    $("#imageEditor").kendoImageEditor({
+        imageUrl: "image.jpg",
+        imageLabel: "Fontana del Moro by night, Piazza Navona, Rome, Italy."
+    });
+    </script>
+
+
 ### saveAs `Object`
 
 Sets the saveAs options for the save command. Utilizes the [kendo.saveAs](/api/javascript/kendo/methods/saveas) method.

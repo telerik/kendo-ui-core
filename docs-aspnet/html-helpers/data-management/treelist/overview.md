@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI TreeList component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/treelist, /helpers/data-management/treelist/overview
 slug: htmlhelpers_treelist_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} TreeList Overview
@@ -152,133 +152,29 @@ The following example demonstrates how to define the TreeList.
 
 ## Functionality and Features
 
-* Data operations
-    * [Ajax binding]({% slug htmlhelpers_treelist_aspnetcore_ajaxbinding %})
-    * [Editing]({% slug editing_aspnetcore_treelist_helper %})
-    * [Paging]({% slug client_side_paging_aspnetcore_treelist_helper %})
-    * [Grouping with aggregates]({% slug htmlhelpers_treelist_aspnetcore_aggregates %})
-* Export options
-    * [Excel]({% slug htmlhelpers_treelist_aspnetcore_excelexport %})
-    * [PDF]({% slug htmlhelpers_treelist_aspnetcore_pdfexport %})
-* More settings
-    * [Column enhancements]({% slug htmlhelpers_treelist_aspnetcore_locked_columns %})
-    * [Scrolling]({% slug htmlhelpers_treelist_aspnetcore_scrolling %})
-    * [Row Selection]({% slug htmlhelpers_treelist_selection %})
-    * [Globalization]({% slug globalization_htmlhelpers_treelist %})
-    * [Accessibility]({% slug htmlhelpers_treelist_aspnetcore_accessibility %})
+| Feature | Description |
+|---------|-------------|
+| [Ajax binding]({% slug htmlhelpers_treelist_aspnetcore_ajaxbinding %}) | You can bind the TreeList to remote data. |
+| [Editing]({% slug editing_aspnetcore_treelist_helper %}) | The TreeList supports various editing modes that allow you to control the way the data is represented.  |
+| [Paging]({% slug client_side_paging_aspnetcore_treelist_helper %}) | Use the built-in paging functionality to paginate the data. |
+| [Grouping with aggregates]({% slug htmlhelpers_treelist_aspnetcore_aggregates %}) | The TreeList allows you to display built-in aggregate calculations, when the supplied data is grouped. |
+| [Excel]({% slug htmlhelpers_treelist_aspnetcore_excelexport %}) |The control enables you to export its content to Excel. |
+| [PDF]({% slug htmlhelpers_treelist_aspnetcore_pdfexport %}) | You can export the content of the TreeList to PDF with this built-in functionality. |
+| [Column enhancements]({% slug htmlhelpers_treelist_aspnetcore_locked_columns %}) | The TreeList allows you to set locked (frozen) columns, which remain visible while you scroll the TreeList horizontally. |
+| [Scrolling]({% slug htmlhelpers_treelist_aspnetcore_scrolling %}) | You can independently control vertical and horizontal scrolling in the component. |
+| [Row Selection]({% slug htmlhelpers_treelist_selection %}) | The TreeList supports different modes of row selection. |
+| [Localization]({% slug globalization_htmlhelpers_treelist %}) | The control provides [localization]({% slug htmlhelpers_treelist_aspnetcore_localization_overview %}) of its messages. |
+| [Accessibility]({% slug htmlhelpers_treelist_aspnetcore_accessibility %}) | The TreeList is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug htmlhelpers_treelist_aspnetcore_keynav %}) for faster navigation.|
 
-## Events
+## Next Steps
 
-You can subscribe to all TreeList [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#events). For a complete example on basic TreeList events, refer to the [demo on using the events of the TreeList](https://demos.telerik.com/{{ site.platform }}/treelist/events).
-
-```HtmlHelper
-    @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
-        .Name("treelist")
-        /* Other configurations. */
-        .Events(events => {
-            events.DataBinding("onDataBinding");
-            events.DataBound("onDataBound");
-        })
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-treelist name="treelist" on-data-bound="onDataBound" on-data-binding="onDataBinding">
-        <!-- Other configurations. -->
-    </kendo-treelist>
-```
-{% endif %}
-```JavaScript
-    <script>
-        function onDataBinding(e) {
-            // Handle the dataBinding event.
-            var treelist = this;
-        }
-
-        function onDataBound(e) {
-            // Handle the dataBound event.
-            var treelist = e.sender;
-        }
-    </script>
-```
-
-## Referencing Existing Instances
-
-To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
-
-{% if site.core %}
-```HtmlHelper
-    @(Html.Kendo().TreeList<dynamic>()
-                .Name("treelist")
-                .Columns(x =>
-                {
-                    x.Add().Field("Name");
-                    x.Add().Field("Position");
-                })
-                .DataSource("dataSource")
-    )
-
-    <script>
-
-        $(function () {
-            // Get a reference to the kendo.ui.TreeList instance.
-            var treelist = $("#treelist").data("kendoTreeList");
-        })
-
-        var dataSource = new kendo.data.TreeListDataSource({
-            data: [
-                { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-                { id: 2, parentId: 1, Name: "Alex Sells", Position: "EVP Sales" },
-                { id: 3, parentId: 1, Name: "Bob Price", Position: "EVP Marketing" }
-            ]
-
-        })
-    </script>
-```
-```TagHelper
-    <kendo-treelist datasource-id="dataSource" name="treelist">
-        <columns>
-            <treelist-column field="Name"></treelist-column>
-            <treelist-column field="Position"></treelist-column>
-        </columns>
-    </kendo-treelist>
-
-    <script>
-
-        $(function () {
-            // Get reference to the kendo.ui.TreeList instance
-            var treelist = $("#treelist").data("kendoTreeList");
-        })
-
-        var dataSource = new kendo.data.TreeListDataSource({
-            data: [
-                { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-                { id: 2, parentId: 1, Name: "Alex Sells", Position: "EVP Sales" },
-                { id: 3, parentId: 1, Name: "Bob Price", Position: "EVP Marketing" }
-            ]
-
-        })
-    </script>
-```
-{% else %}
-```HtmlHelper
-    @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
-        .Name("treelist")
-        /* Other configurations. */
-    )
-    <script>
-        $(function() {
-            // The Name() of the TreeList is used to get its client-side instance.
-            var treelist = $("#treelist").data("kendoTreeList");
-        });
-    </script>
-```
-{% endif %}
-
-## See Also
-
+* [Getting Started with the TreeList]({% slug aspnetcore_treelist_getting_started %})
 * [Basic Usage of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/index)
 {% if site.core %}
 * [Basic Usage of the TreeList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
 {% endif %}
-* [Server-Side API](/api/treelist)
+
+## See Also
+
+* [Using the API of the TreeList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/api)
+* [Knowledge Base Section](/knowledge-base)
