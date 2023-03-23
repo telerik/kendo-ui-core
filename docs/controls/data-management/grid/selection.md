@@ -38,6 +38,7 @@ The Grid supports the following select modes:
 
 > * The Grid does not support the simultaneous usage of the built-in checkbox-column selection and the selection which is enabled through the [`selectable`](/api/javascript/ui/grid/configuration/selectable) option.
 > * To persists the selection of rows in a Grid which is re-bound, that is, when paging, filtering, sorting, editing, or virtual scrolling occur, enable the [`persistSelection`](/api/javascript/ui/grid/configuration/persistselection) property. To persist the row selection and avoid the usage of the `persistSelection` property, refer to the knowledge base article on [persisting row selection during data operations]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
+> * The Grid will not scroll down as you try to select more elements that are outside of the visible view.
 
 ### Checkbox-Column Selection
 
