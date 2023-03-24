@@ -27,7 +27,7 @@ SVG icons provide the following benefits over Font icons:
 
 ## Rendering SVG Icons
 
-With the R1 SP1 2023 release, Kendo UI for jQuery introduced a new `kendo.ui.icon` method. Depending on the global configuration, which is `svg` by default, `kendo.ui.icon` allows you to render either an SVG icon or a Font icon. Through the method, you can also specify the icon over the `iconType` field.
+With the R1 SP1 2023 release, Kendo UI for jQuery introduced a new `kendo.ui.icon` method. Depending on the global configuration, which is `font` by default, `kendo.ui.icon` allows you to render either an SVG icon or a Font icon. Through the method, you can also specify the icon over the `iconType` field.
 
 The following example shows how to create an SVG icon by extending an existing HTML element.
 
