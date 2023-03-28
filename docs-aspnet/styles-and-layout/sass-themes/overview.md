@@ -18,6 +18,8 @@ Currently, Kendo UI for {{ site.framework }} delivers the following Sass themes:
 * Kendo UI Classic&mdash;An SCSS-based variant of the Less Default theme.
 * Kendo UI Fluent&mdash;Implements the look and feel of [Microsoft Fluent UI](https://developer.microsoft.com/en-us/fluentui#/).
 
+>If you have an older version of the Telerik Extensions for Visual Studio and you want to create a new {{ site.product }} project with version 2023.1.314 (R1 2023 SP1), or a newer version of the components, you must first update the Telerik Extension. To download and install the latest version of the Telerik Extensions, follow the [Installing from Visual Studio Marketplace]({% slug overview_visualstudio_aspnetcore %}#installing-from-visual-studio-marketplace) instructions.
+
 ## Less- vs. Sass-Based Themes
 
 > R1 2023 is the last official release of Telerik UI for {{ site.framework }}, where LESS Themes are supported and shipped with the product.

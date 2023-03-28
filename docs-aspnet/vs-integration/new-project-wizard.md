@@ -17,6 +17,8 @@ To use the project templates, you start the **Create New Project Wizard** provid
 
 To use the **Create New Project Wizard**, [install the {{ site.product }} Extension]({% slug overview_visualstudio_aspnetcore %}#installing-the-extensions).
 
+>If you have an older version of the Telerik Extensions for Visual Studio and you want to create a new {{ site.product }} project with version 2023.1.314 (R1 2023 SP1), or a newer version of the components, you must first update the Telerik Extension. To download and install the latest version of the Telerik Extensions, follow the [Installing from Visual Studio Marketplace]({% slug overview_visualstudio_aspnetcore %}#installing-from-visual-studio-marketplace) instructions.
+
 ## Using the Wizard
 
 >The exact steps to start the wizard may vary between the different Visual Studio versions. The following instructions describe the steps for Visual Studio 2019.

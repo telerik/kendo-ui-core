@@ -12,6 +12,8 @@ This article lists the breaking or important changes in the 2023 releases of {{ 
 
 ## {{ site.product }} R1 2023 SP1
 
+Drop of the development and support of the LESS themes. 
+
 As of the 2023 R1 SP1 release, to unify their support for the new [ThemeBuilder Pro](https://docs.telerik.com/themebuilder/introduction), the following components have changed their rendering:
 
 * [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %})

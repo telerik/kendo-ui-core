@@ -8,7 +8,7 @@ position: 1
 
 # Getting Started with the Grid
 
-This guide demonstrates how to get up and running with the Kendo UI for jQuery Grid. 
+This guide demonstrates how to get up and running with the Kendo UI for jQuery Grid.
 
 After the completion of this guide, you will be able to achieve the following end result:
 
@@ -69,11 +69,11 @@ First, create an empty `<div>` element on the page that will serve as the main c
 <div id="my-grid"></div>
 ```
 
-## 2. Initialize the Grid 
+## 2. Initialize the Grid
 
 In this step, you will initialize the Grid from the empty `<div>` element. When you initialize the component from an empty `div`, all settings of the Grid will be provided in the initialization script statement and you have to describe its layout and configuration in JavaScript.
 
-For more information about the alternative initialization approach, refer to the article on [initializing the Grid from an HTML table]({% slug html_table_kendoui_grid_widget %}). 
+For more information about the alternative initialization approach, refer to the article on [initializing the Grid from an HTML table]({% slug html_table_kendoui_grid_widget %}).
 
 ```html
 <div id="my-grid"></div>
@@ -109,7 +109,7 @@ Once the basic initialization is completed, you can start adding additional conf
     {ID: 10, Name: "Marten", Date: "02/13/2022"},
     {ID: 11, Name: "Rosmunda", Date: "08/15/2022"},
   ];
-  
+
   // Target the div element by using jQuery and then call the kendoGrid() method.
   $("#my-grid").kendoGrid({
     width: "700px",
@@ -152,7 +152,7 @@ The Grid allows you to configure each individual column and apply a set of [colu
     {ID: 10, Name: "Marten", Date: "02/13/2022"},
     {ID: 11, Name: "Rosmunda", Date: "08/15/2022"},
   ];
-  
+
   $("#my-grid").kendoGrid({
     width: "700px",
     height: "400px"
@@ -201,7 +201,7 @@ Among other functionalities, the Grid supports editing and filtering. The [editi
     {ID: 10, Name: "Marten", Date: "02/13/2022"},
     {ID: 11, Name: "Rosmunda", Date: "08/15/2022"},
   ];
-  
+
   $("#my-grid").kendoGrid({
     width: "700px",
     height: "400px"
@@ -235,12 +235,12 @@ Among other functionalities, the Grid supports editing and filtering. The [editi
 </script>
 ```
 
-## Next Steps 
+## Next Steps
 
-* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
 
-## See Also 
+## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)
