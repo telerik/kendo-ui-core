@@ -20,10 +20,10 @@ To get the theme you need, use any of the following possibilities:
 
 To get a complete theme by using its pre-built CSS files, apply either of the following approaches:
 
-- Use the CSS files that are shipped with the Kendo UI distribution. For example, the **Default** theme is distributed as `styles/kendo.default-main.min.css`.
+- Use the CSS files that are shipped with the Kendo UI distribution. For example, the **Default** theme is distributed as `styles/default-main.css`.
 
   ```html
-  <link rel="stylesheet" href="pathToLocalFile/styles/kendo.default-main.min.css" />
+  <link rel="stylesheet" href="pathToLocalFile/styles/default-main.css" />
   ```
   
 - Use the NPM package which contains a pre-built `dist/all.css` CSS file for the theme. For more information on how to obtain the NPM package, refer to the following [section on using NPM packages](#using-npm-packages).

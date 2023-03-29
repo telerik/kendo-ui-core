@@ -273,6 +273,8 @@ Sometimes it is convenient to use view model objects instead of entities returne
 
 To map to a ViewModel on the fly pass a mapping lambda as a second parameter to the `ToDataSourceResult()` extension method.
 
+ > The naming of the model properties of the view model objects and entities returned by Entity Framework should match. If usage of different naming is desired implement [model mapping]({% slug datasource_model_mapping %}).
+
     public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
     {
         using (var northwind = new NorthwindEntities())
