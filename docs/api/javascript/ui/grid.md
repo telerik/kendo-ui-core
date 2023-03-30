@@ -180,24 +180,23 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
             { firstName: "Jane", lastName: "Doe", age: 30 },
             { firstName: "John", lastName: "Doe", age: 33 }
           ]
+        },
+        groupable: true,
+        scrollable: false,
+        dataSource: {
+          data: [
+            { firstName: "Jane", lastName: "Doe", age: 30 },
+            { firstName: "John", lastName: "Doe", age: 33 }
+          ],
+          group: {
+            field: "age", aggregates: [
+              { field: "age", aggregate: "count" },
+              { field: "age", aggregate: "min"},
+              { field: "age", aggregate: "max" }
+            ]
+          }
         }
-      ],
-      groupable: true,
-      scrollable: false,
-      dataSource: {
-        data: [
-          { firstName: "Jane", lastName: "Doe", age: 30 },
-          { firstName: "John", lastName: "Doe", age: 33 }
-        ],
-        group: {
-          field: "age", aggregates: [
-            { field: "age", aggregate: "count" },
-            { field: "age", aggregate: "min"},
-            { field: "age", aggregate: "max" }
-          ]
-        }
-      }
-    });
+      });
     </script>
 
 > Check [Aggregates](https://demos.telerik.com/kendo-ui/grid/aggregates) for a live demo.
