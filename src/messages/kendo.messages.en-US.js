@@ -524,7 +524,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Export to PDF",
     "save": "Save changes",
     "select": "Select",
-    "update": "Update",
+    "update": "Save",
     "search": "Search..."
   },
   "editable": {
@@ -581,7 +581,7 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
     "retry": "Retry",
     "commands": {
         "edit": "Edit",
-        "update": "Update",
+        "update": "Save",
         "canceledit": "Cancel",
         "create": "Add new record",
         "createchild": "Add child record",

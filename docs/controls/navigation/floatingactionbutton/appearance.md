@@ -1,7 +1,7 @@
 ---
 title: Appearance
 page_title: jQuery FloatingActionButton Documentation
-description: "Learn how to customize the jQuery FloatingActionButton by Kendo UI by setting its size, shape, color, icon and text."
+description: "Learn how to customize the jQuery FloatingActionButton by Kendo UI by setting its size, color, icon and text."
 slug: appearance_floatingactionbutton_widget
 position: 3
 ---
@@ -22,7 +22,6 @@ For a live example, visit the [Appearance Demo of the FloatingActionButton](http
 The Kendo UI FloatingActionButton supports the following styling options:
 
 - [`size`](#size)—configures the overall size of the component.
-- [`shape`](#shape)—configures the shape of the component.
 - [`fillMode`](#fillmode)—configures how the color is applied to the component.
 - [`themeColor`](#themecolor)—configures what color will be applied to the component.
 - [`rounded`](#rounded)—configures the border radius of the component.
@@ -54,33 +53,6 @@ The default size value is `medium` and it is applied to the wrapping span elemen
 
 ```html
 <button class="k-fab k-fab-sm">
-</button>
-```
-
-### Shape
-
-The `shape` option controls if the FloatingActionButton has square shape or not. The structure of the class is `k-fab-{shape}`.
-
-The following values are available for the [`shape`](/api/javascript/ui/floatingactionbutton/configuration/shape) option:
-
-- `rectangle`
-- `square`
-
-The following example demonstrates how to configure the `shape` of the component through the widget configuration:
-
-```dojo
-<button id="fab"></button>
-<script>
-$("#fab").kendoFloatingActionButton({
-    shape: "square"
-});
-</script>
-```
-
-By default, the FloatingActionButton will have a rectangular shape. The default shape will be applied to the button element through the `k-fab-rectangle` class.
-
-```html
-<button class="k-button k-fab-rectangle" >
 </button>
 ```
 
@@ -188,7 +160,7 @@ The default rounded value is `full` and it is applied to the button element thro
 
 ```html
 <!-- NEW -->
-<button id="fab" class="k-fab k-fab-solid-primary k-fab-solid k-fab-rectangle k-fab-md k-rounded-full">
+<button id="fab" class="k-fab k-fab-solid-primary k-fab-solid k-fab-md k-rounded-full">
 	<span class="k-fab-icon k-icon k-i-home"></span>
 	<span class="k-fab-text">Home</span>
 </button>

@@ -1,14 +1,14 @@
 ---
 title: Appearance
 page_title: Appearance
-description: "Learn how to customize the Telerik UI FloatingActionButton component for {{ site.framework }} by setting its size, shape, color, icon and text."
+description: "Learn how to customize the Telerik UI FloatingActionButton component for {{ site.framework }} by setting its size, color, icon and text."
 slug: htmlhelpers_appearance_floatingactionbutton_aspnetcore
 position: 3
 ---
 
 # Appearance
 
-The Telerik UI FloatingActionButton for {{ site.framework }} allows you to customize the appearance of the component by setting its the size, shape, color, icon and text.
+The Telerik UI FloatingActionButton for {{ site.framework }} allows you to customize the appearance of the component by setting its the size, color, icon and text.
 
 ## Best Practices
 
@@ -52,10 +52,10 @@ The `Icon` configuration option specifies the name of an icon. The selected icon
     <kendo-floatingactionbutton name="fab"
                                 icon="plus">
         <floatingactionbutton-items>
-            <floatingactionbutton-item label="Add Rating" 
+            <floatingactionbutton-item label="Add Rating"
                                        icon="star">
             </floatingactionbutton-item>
-            <floatingactionbutton-item label="Add Comment" 
+            <floatingactionbutton-item label="Add Comment"
                                        icon="edit">
             </floatingactionbutton-item>
         </floatingactionbutton-items>
@@ -69,26 +69,26 @@ In order to achieve the same look and feel as the old rendering (prior to R1 202
 
 > The new styling and rendering support only the [default options](#options) when you use a LESS theme.
 
-If you are upgrading from a version prior to R1 2022 and you are using custom CSS to override default FloatingActionButton styles, you will need to update the classes used in the selectors of your custom CSS rules. The following example shows how to achieve the same customization in the FloatingActionButton, depending on whether your Telerik UI for {{ site.framework }} version is older than R1 2022, or newer. 
+If you are upgrading from a version prior to R1 2022 and you are using custom CSS to override default FloatingActionButton styles, you will need to update the classes used in the selectors of your custom CSS rules. The following example shows how to achieve the same customization in the FloatingActionButton, depending on whether your Telerik UI for {{ site.framework }} version is older than R1 2022, or newer.
 
 The first set of CSS rules relies on the classes available in the old rendering.
 
 ```
 <style>
-/*  Old rendering (versions prior to R1 2022)*/ 
+/*  Old rendering (versions prior to R1 2022)*/
 
 /* Applies lightblue background-color to the primary FloatingActionButton */
-.k-fab.k-fab-primary { 
+.k-fab.k-fab-primary {
   background-color: lightblue;
 }
 
 /* Applies lightgreen background-color to the secondary FloatingActionButton */
-.k-fab.k-fab-secondary { 
+.k-fab.k-fab-secondary {
   background-color: lightgreen;
 }
 
 /* Applies coral background-color to the tertiary FloatingActionButton */
-.k-fab.k-fab-tertiary { 
+.k-fab.k-fab-tertiary {
   background-color: coral;
 }
 </style>
@@ -98,20 +98,20 @@ The second set of CSS rules relies on the classes available in the new rendering
 
 ```
 <style>
-/*  New Rendering (versions after R1 2022) */   
-      
+/*  New Rendering (versions after R1 2022) */
+
 /* Applies lightblue background-color to the primary FloatingActionButton */
-.k-fab.k-fab-solid-primary { 
+.k-fab.k-fab-solid-primary {
   background-color: lightblue;
 }
 
 /* Applies lightgreen background-color to the secondary FloatingActionButton */
-.k-fab.k-fab-solid-secondary { 
+.k-fab.k-fab-solid-secondary {
   background-color: lightgreen;
 }
 
 /* Applies coral background-color to the tertiary FloatingActionButton */
-.k-fab.k-fab-solid-tertiary { 
+.k-fab.k-fab-solid-tertiary {
   background-color: coral;
 }
 </style>

@@ -216,7 +216,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
         field: "name",
         title: "Name",
         attributes: {
-          "class": "table-cell k-text-right",
+          "class": "table-cell !k-text-right",
           style: "font-size: 14px"
         }
       } ],
@@ -225,6 +225,36 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
     </script>
 
 The table cells would look like this: `<td class="table-cell" style="text-align: right; font-size: 14px">...</td>`.
+
+> Since R2 2023 attributes logic has changed due to Kendo templates evaluation rendering updates. Now we deliver a new attributes overload that accepts a single string parameter and the name of the JS handler that returns the attributes.
+
+#### Example - set cells background color using a dynamic property value
+
+    <div id="grid"></div>
+    <script>
+      let ageAttributes = (data) => {
+        return { style: `background-color: ${data.color} ` }
+      }
+
+      $("#grid").kendoGrid({
+        columns: [ 
+          {
+            field: "name",
+            title: "Name",
+            attributes: { "class": "table-cell !k-text-right" }
+          },
+          {
+            field: "age",
+            title: "Age",
+            attributes: ageAttributes
+          }
+        ],
+        dataSource: [ 
+          { name: "Anne Smith", age: 30, color: "#FFD68A" }, 
+          { name: "John Doe", age: 22, color: "#B2AC88" }
+        ]
+      });
+    </script>
 
 ### columns.columnMenu `Boolean` *(default: true)*
 
@@ -2534,7 +2564,7 @@ HTML attributes of the column header. The grid renders a table header cell (`<th
       columns: [{
         field: "name",
         headerAttributes: {
-          "class": "table-header-cell k-text-right",
+          "class": "table-header-cell !k-text-right",
           style: "font-size: 14px"
         }
       }],

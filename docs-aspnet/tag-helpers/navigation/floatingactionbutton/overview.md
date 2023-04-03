@@ -26,7 +26,6 @@ The following example demonstrates how to initialize the FloatingActionButton us
                                 align-offset-vertical="50"
                                 position-mode="FloatingActionButtonPositionMode.Absolute"
                                 icon="share"
-                                shape="FloatingActionButtonShape.Pill"
                                 size="FloatingActionButtonSize.Medium"
                                 theme-color="FloatingActionButtonThemeColor.Info"
                                 >
