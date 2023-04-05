@@ -126,9 +126,9 @@ html-helpers/media/mediaplayer/razor-page.md,
 html-helpers/overview-taghelpers.md]
 
 exclude_navigation: ["knowledge-base/*",
-api/Kendo.Mvc/*,
-api/Kendo.Mvc.UI/*,
-api/Kendo.Mvc.UI.Fluent/*,
+api/kendo.mvc/*,
+api/kendo.mvc.ui/*,
+api/kendo.mvc.ui.fluent/*,
 asp-net-mvc-3.html,
 asp-net-mvc-4.html,
 getting-started-mvc/*]

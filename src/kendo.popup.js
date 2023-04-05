@@ -87,7 +87,7 @@ var __meta__ = {
             options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || document.body);
 
             that.element.hide()
-                .addClass("k-popup k-group k-reset")
+                .addClass("k-popup")
                 .toggleClass("k-rtl", !!options.isRtl)
                 .appendTo(options.appendTo)
                 .attr("aria-hidden", true)

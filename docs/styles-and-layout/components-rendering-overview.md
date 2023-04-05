@@ -8,7 +8,8 @@ position: 0
 
 # Overview
 
-> R1 2023 is the last official release of Kendo jQuery, where Less Themes are supported and shipped with the product.
+> * R1 2023 is the last official release of Kendo jQuery, where Less Themes are supported and shipped with the product.
+> * With the upcoming R3 2023 release, the fonts will no longer be delivered with the Telerik and Kendo UI themes. To continue using the font icons, you must add a separate CDN reference to the font icons stylesheet.
 
 Kendo UI R1 2022 introduces new rendering for several components. As the new rendering implementation is an ongoing effort, there may be slight changes and touch-ups after the release. 
 

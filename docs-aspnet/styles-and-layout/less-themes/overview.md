@@ -8,9 +8,7 @@ position: 1
 
 # Overview
 
-> * R1 2023 is the last official release of Telerik UI for {{ site.framework }}, where LESS Themes are supported and shipped with the product.
-> * The LESS themes support only the default values of the new [Components Styling Options]({% slug components_rendering_overview %}#styling-options).
-> * As of 2022 R1, the default value for the [Rounded styling option]({% slug components_rendering_overview %}#rounded) of the components is `Medium`. It is applyed through the `k-rounded-md` class. See the [Backwards Compatibility](#backwards-compatibility) section, for more details.
+> * R1 2023 is the last official release of Telerik UI for {{ site.framework }}, where LESS Themes are supported and shipped with the product. See the [Less to Sass Theme Migration Article]({% slug less_themes_migration %}) for more information on how to migrate to SASS.
 
 The appearance of the Telerik UI for {{ site.framework }} components is achieved by rendering predefined classes in the various Html elements of the components. The themes use these classes, to apply styles to the respective elements. 
 
@@ -103,9 +101,11 @@ The appearance of a component may well depend on its state, which is also tied t
 
 This section includes issues related to the backwards compatibility. 
 
+The LESS themes support only the default values of the new [Components Styling Options]({% slug components_rendering_overview %}#styling-options). If you want to use the full potential of the styling options, consider [migrating to the SASS themes]({% slug less_themes_migration %}).
+
 ### Rounded Components with the High Contrast Theme
 
-As of 2022 R1, the default value of the [`Rounded` option]({% slug components_rendering_overview %}#rounded) of the components is set to `Medium`.
+As of 2022 R1, the default value for the [Rounded styling option]({% slug components_rendering_overview %}#rounded) of the components is `Medium`. It is applyed through the `k-rounded-md` class.
 
 To revert back to the previous border-radius (9999px) value, set the `Rounded` option of the component to `Full`.
 

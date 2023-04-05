@@ -80,9 +80,10 @@ tag-helpers/*,
 knowledge-base/switch-change-messages-inside-grid.md]
 
 exclude_navigation: ["knowledge-base/*",
-api/Kendo.Mvc/*,
-api/Kendo.Mvc.UI/*,
-api/Kendo.Mvc.UI.Fluent/*,
+api/kendo.mvc/*,
+api/kendo.mvc.ui/*,
+api/kendo.mvc.ui.fluent/*,
+api/kendo.mvc.taghelpers/*,
 getting-started-core/*]
 
 navigation:
@@ -92,6 +93,12 @@ navigation:
      "api":
         title: "API Reference"
         position: 0
+     "api/kendo.mvc.extensions":
+        title: "Kendo.Mvc.Extensions"
+        position: 1
+     "api/taghelpers":
+        title: "TagHelpers API Reference"
+        position: 2
      "getting-started":
         title: "Getting Started"
         position: 2
