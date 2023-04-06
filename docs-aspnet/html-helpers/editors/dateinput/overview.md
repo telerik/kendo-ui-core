@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI DateInput component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/dateinput, /helpers/editors/dateinput/overview
 slug: htmlhelpers_dateinput_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} DateInput Overview
@@ -39,82 +39,24 @@ The following example demonstrates the basic configuration for the DateInput.
 ```
 {% endif %}
 
-## Events
+## Functionality and Features
 
-You can subscribe to all DateInput [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#events). For a complete example on basic DateInput events, refer to the [demo on using the events of the DateInput](https://demos.telerik.com/{{ site.platform }}/dateinput/events).
+* [Appearance](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/appearance)&mdash;You are able to customize the appearance of the DateInput by configuring its size, fill mode, and border radius.
+* [Floating Label](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/floating-label)&mdash;You can configure a floating label placeholder text for the DateInput. This label will float above that field and remain visible once the user starts interacting with that input.
+* [Globalization](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/globalization/localization)&mdash;You can employ globalization which adjusts the date formats (localization) and adapts the component to specific cultures (internationalization and right-to-left support).
+* [Accessibility](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/accessibility/overview)&mdash;The DateInput is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
-The following example demonstrates how to subscribe to events by a handler name.
+## Next Steps
 
-```HtmlHelper
-    @(Html.Kendo().DateInput()
-        .Name("dateinput")
-        .Events(e => e
-            .Change("dateInput_change")
-        )
-    )
-    <script>
-    function dateInput_change() {
-        // Handle the change event.
-    }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-dateinput name="dateinput" on-change="dateInput_change">
-    </kendo-dateinput>
-
-    <script>
-        function dateInput_change() {
-            // Handle the change event.
-        }
-    </script>
-```
-{% endif %}
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().DateInput()
-      .Name("dateinput")
-      .Events(e => e
-          .Change(@<text>
-            function(e) {
-                console.log(this.value());
-            }
-            </text>)
-      )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-dateinput name="dateinput" 
-        on-change='function(e)
-        {
-            console.log(this.value());
-        }'>
-    </kendo-dateinput>
-```
-{% endif %}
-
-## Referencing Existing Instances
-
-To reference an existing Telerik UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.
-
-        // Place the following after your Telerik UI DateInput for {{ site.framework }} declaration.
-        <script>
-        $(function() {
-        // The Name() of the DateInput is used to get its client-side instance.
-            var dateInput = $("#dateinput").data("kendoDateInput");
-        });
-        </script>
-
-## See Also
-
+* [Getting Started with the DateInput]({% slug dateinput_getting_started %})
 * [Basic Usage of the DateInput HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/index)
 {% if site.core %}
 * [Basic Usage of the DateInput TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dateinput/tag-helper)
 {% endif %}
+
+## See Also
+
 * [Using the API of the DateInput HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/api)
+* [Knowledge Base Section](/knowledge-base)
+* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput)
 * [Server-Side API](/api/dateinput)
