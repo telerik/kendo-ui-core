@@ -1348,6 +1348,7 @@ if (kendo.ui.Calendar) {
 kendo.ui.Calendar.prototype.options.messages =
 $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
     "weekColumnHeader": "",
+    "today": "Today",
     "navigateTo": "Navigate to ",
     "parentViews": {
         "month": "year view",
