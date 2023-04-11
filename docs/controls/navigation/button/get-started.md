@@ -87,7 +87,7 @@ Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) opt
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the Button](https://demos.telerik.com/kendo-ui/button/index)
 
 ## See Also 

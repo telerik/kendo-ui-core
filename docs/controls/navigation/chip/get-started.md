@@ -77,7 +77,7 @@ Now you can use the [`label`](/api/javascript/ui/chip/configuration/label) optio
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the Chip](https://demos.telerik.com/kendo-ui/chip/index)
 
 ## See Also 

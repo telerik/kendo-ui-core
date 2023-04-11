@@ -296,7 +296,7 @@ The Chart [`tooltip`](/api/javascript/dataviz/ui/chart/configuration/tooltip#too
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the Chart](https://demos.telerik.com/kendo-ui/chart/index)
 
 ## See Also 

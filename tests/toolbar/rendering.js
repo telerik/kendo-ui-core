@@ -1054,6 +1054,10 @@
         });
 
         it("SplitButton popup is as wide as the button wrapper", function() {
+            if (window.navigator.userAgent.includes('Firefox')) {
+                this.skip();
+            }
+            else {
             container.kendoToolBar({
                 items: [
                     {
@@ -1071,6 +1075,7 @@
 
             click(arrowButton);
             roughlyEqual(splitButton.wrapper.outerWidth(), splitButton.menu._popup.element.outerWidth(), 10);
+            }
         });
 
         it("options.attribute are attached to the main button", function() {

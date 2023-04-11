@@ -99,7 +99,7 @@ For more information about the alternative approach to load the content, refer t
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/index)
 
 ## See Also 

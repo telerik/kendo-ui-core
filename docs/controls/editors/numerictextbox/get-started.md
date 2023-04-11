@@ -76,7 +76,7 @@ You can now refer to the NumericTextBox instance and build on top of its existin
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index)
 
 ## See Also 

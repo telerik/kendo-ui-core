@@ -108,7 +108,7 @@ You can now set where the Tooltip will be displayed. For example,  if there is e
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the Tooltip](https://demos.telerik.com/kendo-ui/tooltip/index)
 
 ## See Also 

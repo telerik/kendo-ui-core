@@ -86,7 +86,7 @@ Now you can use the [`items.icon`](/api/javascript/ui/chiplist/configuration/ite
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the ChipList](https://demos.telerik.com/kendo-ui/chiplist/index)
 
 ## See Also 

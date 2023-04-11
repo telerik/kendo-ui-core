@@ -282,7 +282,7 @@ The ListView allows you to display a scrollbar inside the widget so end-users do
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the ListView](https://demos.telerik.com/kendo-ui/listview/index)
 
 ## See Also 

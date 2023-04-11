@@ -115,7 +115,7 @@ Among other functionalities, the DropDownList supports filtering. The filtering 
 
 ## Next Steps 
 
-* [Referencing Existing Widget Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index)
 
 ## See Also 

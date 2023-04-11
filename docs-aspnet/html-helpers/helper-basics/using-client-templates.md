@@ -16,6 +16,7 @@ The available template types are:
 
 * [Inline Client Templates](#inline-client-templates)
 * [External Client Templates](#external-client-templates)
+* [Partial Client Templates](#partial-client-templates)
 * [Content Security Policy Templates](#content-security-policy-csp-templates)
 
 
@@ -216,6 +217,76 @@ For example, you can define an external client template for a [Grid column]({% s
 
 
 Also, you can integrate Telerik UI for {{ site.framework }} components in the external client templates by using the [HTML Helpers](#adding-html-helpers-inside-external-client-templates) {% if site.core %}or [Tag Helpers](adding-tag-helpers-inside-external-client-templates){% endif %}.
+## Partial Client Templates
+
+As of the R1 SP1 2023 release, the majority of the Telerik UI for {{ site.framework }} components expose the ability to include arbitrary client template content within the boundaries of a Partial View by using the respective component's new `TemplateView` method.
+
+The example below illustrates how to incorporate the Grid Toolbar's template content within a Partial View.
+
+```HtmlHelper
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+        .Name("grid")
+        .Columns(columns => {
+            columns.Bound(p => p.ProductID).Visible(true).Width(100);
+            columns.Bound(p => p.ProductName);
+            columns.Bound(p => p.UnitPrice).Width(150);
+            columns.Bound(p => p.QuantityPerUnit);
+        })
+        .ToolBar(toolbar => {
+            toolbar.ClientTemplateView(Html.Partial("_ToolbarTemplatePartial"));
+        })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .ServerOperation(false)
+            .Model(model => model.Id(p => p.ProductID))
+            .Read("ToolbarTemplate_Read", "Grid")
+        )
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="500">
+        <columns>
+            <column field="ProductID" visible="true" width="100">
+                <exportable pdf="true" />
+            </column>
+            <column field="ProductName">
+            </column>
+            <column field="UnitPrice" width="150">
+            </column>
+            <column field="QuantityPerUnit">
+            </column>
+        </columns>
+        <toolbar client-template-view="@Html.Partial("_ToolbarTemplatePartial")">
+        </toolbar>
+        <datasource page="0" type="DataSourceTagHelperType.Ajax" page-size="20" server-operation="false">
+            <schema data="Data" total="Total" errors="Errors">
+                <model id="ProductID"></model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("ToolbarTemplate_Read","Grid")" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+```
+{% endif %}
+```_Partial.cshtml
+    <div class="toolbar">
+     <label class="category-label" for="category">Show products by category:</label>
+     @(Html.Kendo().DropDownList()
+         .Name("categories")
+         .OptionLabel("All")
+         .DataTextField("CategoryName")
+         .DataValueField("CategoryID")
+         .HtmlAttributes(new { style = "width: 150px;" })
+         .DataSource(ds =>
+         {
+             ds.Read("ToolbarTemplate_Categories", "Grid");
+         })
+         .ToClientTemplate()
+     )
+    </div>
+```
 
 ### Adding HTML Helpers inside External Client Templates
 

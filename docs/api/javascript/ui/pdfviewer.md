@@ -458,7 +458,7 @@ Specifies the localization messages of the toolbar.
 
 ### messages.toolbar.pager.last `String` *(default: "Go to the last page")*
 
-### messages.toolbar.pager.of `String` *(default: " of {0} ")*
+### messages.toolbar.pager.of `String` *(default: "of")*
 
 ### messages.toolbar.pager.page `String` *(default: "page")*
 
