@@ -1,7 +1,7 @@
 ---
 title: Storing Data as JSON
 page_title: jQuery Spreadsheet Documentation - Storing Data as JSON
-description: "Get started with the jQuery Spreadsheet by Kendo UI and learn about the data persistence options in the Kendo UI Spreadsheet widget."
+description: "Get started with the jQuery Spreadsheet by Kendo UI and learn about the data persistence options in the Kendo UI Spreadsheet component."
 slug: loadand_saveas_json_spreadsheet_widget
 position: 1
 ---
@@ -23,7 +23,7 @@ The information that is persisted includes:
 
 ## Using the Serialization API
 
-The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet/methods/fromjson) and [`toJSON`](/api/javascript/ui/spreadsheet/methods/tojson) methods for loading and storing its state. To load the Spreadsheet with data, pass an object matching the required schema to `fromJSON`. This resets the widget and clears all existing data.
+The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet/methods/fromjson) and [`toJSON`](/api/javascript/ui/spreadsheet/methods/tojson) methods for loading and storing its state. To load the Spreadsheet with data, pass an object matching the required schema to `fromJSON`. This resets the component and clears all existing data.
 
 The following example demonstrates how to load data by using `fromJSON`.
 

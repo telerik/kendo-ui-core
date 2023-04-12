@@ -8,7 +8,7 @@ position: 4
 
 # Server-Side Processing
 
-The native data format for the Spreadsheet widget is [JSON]({% slug loadand_saveas_json_spreadsheet_widget %}).
+The native data format for the Spreadsheet component is [JSON]({% slug loadand_saveas_json_spreadsheet_widget %}).
 
 The Spreadsheet also features built-in support for [Excel export]({% slug export_toexcel_spreadsheet_widget %}) that runs in the browser. To export huge datasets to Excel, you can use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP)](https://docs.telerik.com/devtools/document-processing/introduction).  
 

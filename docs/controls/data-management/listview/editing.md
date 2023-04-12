@@ -14,7 +14,7 @@ For a runnable example on a ListView with editing enabled refer to the [Editing 
 
 ## Getting Started
 
-To enable editing, use the Boolean options. For more information, refer to the article on [editing widgets]({% slug kendoui_editing_gettingstarted %}).
+To enable editing, use the Boolean options. For more information, refer to the article on [editing components]({% slug kendoui_editing_gettingstarted %}).
 
       $(document).ready(function() {
           $("#listView").kendoListView({
@@ -69,7 +69,7 @@ The ListView encapsulates operations for adding, removing, selecting, and editin
         });
     });
 
-The template you define for the inline editing of items may include other Kendo UI widgets. For more information, refer to [demo on defining a series of widgets for editing an item](https://demos.telerik.com/kendo-ui/web/listview/editing.html).
+The template you define for the inline editing of items may include other Kendo UI components. For more information, refer to [demo on defining a series of components for editing an item](https://demos.telerik.com/kendo-ui/web/listview/editing.html).
 
 ![Kendo UI for jQuery ListView Item editing](../../../images/listview-item-editing.png)
 

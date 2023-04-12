@@ -10,7 +10,7 @@ position: 5
 
 The [Kendo UI AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](https://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index), and the [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) support server-side filtering.
 
-Server filtering enables you to display a subset of data - a reduced portion of the whole dataset which is returned from the server. The ComboBox supports server filtering by utilizing the [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option of the Kendo UI DataSource component.
+Server filtering enables you to display a subset of data, a reduced portion of the whole dataset, which is returned from the server. The ComboBox supports server filtering by utilizing the [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option of the Kendo UI DataSource component.
 
 The approaches for configuring the server filtering functionality of the ComboBox that are demonstrated in this article are identical for configuring the server filtering functionality of the AutoComplete, DropDownList, and MultiSelect components.
 

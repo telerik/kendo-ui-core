@@ -8,7 +8,7 @@ position: 20
 
 # Common Scenarios
 
-This article provides common scenarios you might encounter when working with the Kendo UI TreeView widget.
+This article provides common scenarios you might encounter when working with the Kendo UI TreeView component.
 
 * [Getting the data of the nodes](#getting-the-node-data)
 * [Reloading child nodes when nodes expand](#reloading-child-nodes-when-nodes-expand)

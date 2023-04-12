@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Grid Documentation - Scrolling Overview
-description: "Get started with the jQuery Grid by Kendo UI and learn how to configure the scrolling functionality of the widget."
+description: "Get started with the jQuery Grid by Kendo UI and learn how to configure the scrolling functionality of the component."
 previous_url: /appearance/scrolling/overview, /appearance/scrolling/virtual-scrolling, /appearance/scrolling/endless-scrolling
 slug: scrolling_kendoui_grid_widget
 position: 1

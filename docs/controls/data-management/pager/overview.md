@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: jQuery Pager Documentation - Pager Overview
-description: "Get started with the jQuery Pager by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Pager by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_pager_widget
 position: 1
 ---
 
 # {{ site.product }} Pager Overview
 
-The [Kendo UI Pager widget](https://demos.telerik.com/kendo-ui/pager/index) enables splitting a set of data into pages with flexible and intuitive UI.
+The [Kendo UI Pager component](https://demos.telerik.com/kendo-ui/pager/index) enables splitting a set of data into pages with flexible and intuitive UI.
 
 The user interface of the Pager is useful for paging data-bound components that have a [data source](/api/javascript/data/datasource) and do not have a built-in UI for paging such as the ListView or scenarios that require  paging options&mdash;for example, Kendo Templates with a data source.
 

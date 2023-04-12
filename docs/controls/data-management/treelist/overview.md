@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery TreeList Documentation - TreeList Overview
-description: "Get started with the jQuery TreeList by Kendo UI and learn how to initialize and configure the widget."
+description: "Get started with the jQuery TreeList by Kendo UI and learn how to initialize and configure the component."
 slug: overview_kendoui_treelist_widget
 position: 1
 ---
@@ -19,7 +19,7 @@ To initialize a the TreeList, use an empty `div` element and supply all TreeList
     <!-- Define the HTML div that is going to hold the TreeList -->
     <div id="treelist"></div>
 
-Kendo UI TreeList needs a data source from which it will retrieve the data for display. The widget uses a special [`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource) type which contains instances of a custom [`kendo.data.TreeListModel`](/api/javascript/data/treelistmodel) that represents the data items.
+Kendo UI TreeList needs a data source from which it will retrieve the data for display. The component uses a special [`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource) type which contains instances of a custom [`kendo.data.TreeListModel`](/api/javascript/data/treelistmodel) that represents the data items.
 
 The TreeList renders its hierarchy based on the `parentId`-`id` relationship. The data objects contain both an `id` and a `parentId` field which describe the hierarchy of the items. You can change these field names by using the [`schema.model` definition](/api/javascript/data/datasource/configuration/schema#schema.model).
 
@@ -83,12 +83,12 @@ The following example demonstrates how to use [methods](/api/javascript/ui/treel
 
 To handle the [events](/api/javascript/ui/treelist#events) of the TreeList, use either of the following approaches:
 
-* Specify the JavaScript function which will handle the event during the initialization of the widget.
-* Use the `bind` method of the widget after initialization.
+* Specify the JavaScript function which will handle the event during the initialization of the component.
+* Use the `bind` method of the component after initialization.
 
-The event handler is the JavaScript function that is invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event-specific data. Get a reference of the widget which fired the event through the `sender` field of the event argument. The function context of the event handler which is available through the `this` keyword is set to the instance of the widget which fired the event. For a runnable example, refer to the [demo on using the events of the TreeList](https://demos.telerik.com/kendo-ui/treelist/events).
+The event handler is the JavaScript function that is invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event-specific data. Get a reference of the component which fired the event through the `sender` field of the event argument. The function context of the event handler which is available through the `this` keyword is set to the instance of the component which fired the event. For a runnable example, refer to the [demo on using the events of the TreeList](https://demos.telerik.com/kendo-ui/treelist/events).
 
-The following example demonstrates how to subscribe to a TreeList event during the initialization of the widget.
+The following example demonstrates how to subscribe to a TreeList event during the initialization of the component.
 
 ```dojo
     <div id="treelist"></div>

@@ -13,12 +13,12 @@ Language localization of software is the process of its adaptation to a specific
 
 ## Getting Started
 
-In terms of the Spreadsheet widget, you can localize its messages by using either of the following approaches:
+In terms of the Spreadsheet component, you can localize its messages by using either of the following approaches:
 
 1. An external localization file where all text messages are translated in the language you need for your project.
 2. JavaScript to manipulate the translation of only certain text entities.
 
-The messages represent the default written content of a widget that appears to end users. For example, the **Copy**, **Cut**, and **Paste** Toolbar commands.
+The messages represent the default written content of a component that appears to end users. For example, the **Copy**, **Cut**, and **Paste** Toolbar commands.
 
 ### Using External Files
 
@@ -44,7 +44,7 @@ To change the messages that are displayed in the Spreadsheet, add a script file 
 
 ### Using JavaScript
 
-To manipulate the content of a specific message and not of all messages, use JavaScript. Depending on its location or function representation within the widget, each message has a corresponding namespace listed under a category. The following list provides all namespace categories that the Spreadsheet supports.
+To manipulate the content of a specific message and not of all messages, use JavaScript. Depending on its location or function representation within the component, each message has a corresponding namespace listed under a category. The following list provides all namespace categories that the Spreadsheet supports.
 
 - [`kendo.spreadsheet.messages.borderPalette`](#border-palette-messages)
 - [`kendo.spreadsheet.messages.colorPicker`](#color-picker-messages)

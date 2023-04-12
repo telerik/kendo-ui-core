@@ -1,14 +1,14 @@
 ---
 title: Microsoft Bot Framework
 page_title: jQuery Chat Documentation - Microsoft Bot Framework
-description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat widget to the Microsoft Bot Framework."
+description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat component to the Microsoft Bot Framework."
 previous_url: /controls/conversational-ui/chat/connect-to-ms-bot-framework
 slug: connect_to_ms_bot_framework
 ---
 
 # Microsoft Bot Framework
 
-You can configure a [Chat `agent` class]({% slug connect_to_chatbot_service %}) that handles the communication between the [Chat](https://demos.telerik.com/kendo-ui/chat/index) widget and the [Microsoft Bot Framework](https://dev.botframework.com/).
+You can configure a [Chat `agent` class]({% slug connect_to_chatbot_service %}) that handles the communication between the [Chat](https://demos.telerik.com/kendo-ui/chat/index) component and the [Microsoft Bot Framework](https://dev.botframework.com/).
 
 In this case, the establishment of a connection to the service and the binding of the appropriate events are done within the `init` method. The `agent` is subscribed to listen for any `activity$` of the remote service. When an activity is detected, the appropriate method from the Chat public API is invoked to render the data. To handle the user input, the example implements the [`post`](/api/javascript/ui/chat/events/post) event handler of the Chat and the arguments are passed to the Chat Bot service.
 
@@ -30,7 +30,7 @@ In this case, the establishment of a connection to the service and the binding o
       }
     }).data("kendoChat");
 
-	// Create a new agent and pass the Chat widget.
+	// Create a new agent and pass the Chat component.
     var agent = new DirectLineAgent(chat, "Y_ly-If6haE.cwA.PQE.ZwOOsq4MlHcD3_YLFI-t9oW6L6DXMMBoi67LBz9WaWA");
   });
 </script>

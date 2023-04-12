@@ -10,7 +10,7 @@ position: 4
 
 The ToolBar allows you to define custom and use custom tools.
 
-The following example demonstrates how to add a custom tool to the widget if you are using version 2023 R1 or newer of Kendo UI.
+The following example demonstrates how to add a custom tool to the component if you are using version 2023 R1 or newer of Kendo UI.
 
 ```dojo
     <div id="toolbar"></div>
@@ -27,33 +27,33 @@ The following example demonstrates how to add a custom tool to the widget if you
 
         $("#toolbar").kendoToolBar({
             items: [{
-                //initialize standard tool
+                // Initialize the standard tool.
                 type: "button",
                 id: "myButton",
                 text: "My Button",
                 click: onMyButtonClick
             },
             {
-                //initialize the custom tool with options
-                component: "DropDownList", // specify the widget type that will be used in the ToolBar element
-                // specify the configuration options of the widget
+                // Initialize the custom tool with options.
+                component: "DropDownList", // Specify the component type that will be used in the ToolBar element.
+                // Specify the configuration options of the component.
                 componentOptions: {
                     dataSource: source,
                     height: "auto",
                     dataTextField: "text",
                     dataValueField: "value",
                     optionLabel: toolText,
-                    change: (e) => { //do something when the value changes
+                    change: (e) => { // Do something when the value changes.
                         console.log("Option " + e.sender.value() + " is selected");
                     }
                 },
-                // specify configuration for the OverflowMenu item of the tool
+                // Specify the configuration for the OverflowMenu item of the tool.
                 overflowComponent: {
                     type: "button",
                     text: toolText,
                 },
                 click: (e) => {
-                    // Initialize the dialog if the OverflowMenu item has been clicked
+                    // Initialize the dialog if the OverflowMenu item has been clicked.
                     var dialogEl = $("<div><div class='k-list'></div></div>"),
                         uid = e.target.data("uid"),
                         ddlEl = $("#toolbar").find("[data-uid=" + uid + "] [data-role=dropdownlist]"),
@@ -66,7 +66,7 @@ The following example demonstrates how to add a custom tool to the widget if you
                         width: 280,
                         height: 220,
                         deactivate: () => {
-                            // destroy widgets and clear DOM upon closing window
+                            // Destroy the components and clear the DOM upon closing the window.
                             listView.destroy();
                             dialog.destroy();
                             dialogEl.remove();
@@ -81,14 +81,14 @@ The following example demonstrates how to add a custom tool to the widget if you
                             var listView = ev.sender,
                                 dataItem = listView.dataSource.getByUid(listView.select().data("uid"));
 
-                            // keep DDL value in sync
+                            // Keep the DDL value in sync.
                             ddl.value(dataItem.value);
-                            //do something when the value changes
+                            // Do something when the value changes.
                             console.log("Option " + dataItem.value + " is selected");
                         }
                     }).data("kendoListView");
 
-                    // keep ListView value in sync if selection is present in the DDL
+                    // Keep the ListView value in sync if selection is present in the DDL.
                     if (selectedValue) {
                         listView.select($("[data-value=" + selectedValue + "]"));
                     }

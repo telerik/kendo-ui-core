@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: jQuery Filter Documentation - Filter Overview
-description: "Get started with the jQuery Filter by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Filter by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_filter_widget
 position: 1
 ---
 
 # {{ site.product }} Filter Overview
 
-The [Kendo UI Filter widget](https://demos.telerik.com/kendo-ui/filter/index) a unified control for filtering data-bound components that have a [data source](/api/javascript/data/datasource).
+The [Kendo UI Filter component](https://demos.telerik.com/kendo-ui/filter/index) a unified control for filtering data-bound components that have a [data source](/api/javascript/data/datasource).
 
 The user interface of the Filter is useful for data-bound components that do not have a built-in UI for filtering but are required to provide filter options&mdash;for example, the ListView, Chart, and Scheduler. You can add or remove the fields by which the data will be filtered and select the global logic of the filters (`AND` or `OR`) and the filter operator for each field (for example, `contains` or `equals`). You can apply the filtering through a built-in button or through an API call. You can also select the name by which the fields will be displayed to the user and [localize]({% slug localization_kendoui_filter_widget %}) the filter operators and messages.
 
@@ -78,7 +78,7 @@ The following example demonstrates how to:
                 ]
             }
         }).data("kendoFilter").applyFilter();
-        // Chain the method call to immediately apply filtering after the widget initialization because an initial filter is set.
+        // Chain the method call to immediately apply filtering after the component initialization because an initial filter is set.
 
         $("#listView").kendoListView({
             dataSource: dataSource,

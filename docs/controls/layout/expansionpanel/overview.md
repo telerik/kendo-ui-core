@@ -1,22 +1,22 @@
 ---
 title: Overview
 page_title: jQuery ExpansionPanel Documentation - ExpansionPanel Overview
-description: "Get started with the jQuery ExpansionPanel by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery ExpansionPanel by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_expansionpanel_widget
 position: 1
 ---
 
 # {{ site.product }} ExpansionPanel Overview
 
-The Kendo UI ExpansionPanel control is a layout widget that provides the user with an easy way to expand and collapse  a content area within the application.
+The Kendo UI ExpansionPanel control is a layout component that provides the user with an easy way to expand and collapse  a content area within the application.
 
 * [Demo page for the ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index)
 
 ## Initializing the ExpansionPanel
 
-To initialize an ExpansionPanel, use a `div` element where its content will be used as a content for the ExpansionPanel. 
+To initialize an ExpansionPanel, use a `div` element where its content will be used as a content for the ExpansionPanel.
 
-The following example demonstrates how to initialize an expanded ExpansionPanel widget.
+The following example demonstrates how to initialize an expanded ExpansionPanel component.
 
 ```dojo
 <div id="brazil">

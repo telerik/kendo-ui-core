@@ -8,7 +8,7 @@ position: 4
 
 # Filtering
 
-The TreeList widget comes with built-in filtering that enables you to display only the rows that match specific search criteria.
+The TreeList component comes with built-in filtering that enables you to display only the rows that match specific search criteria.
 
 To enable filtering in TreeList, use the `filterable` property.
 

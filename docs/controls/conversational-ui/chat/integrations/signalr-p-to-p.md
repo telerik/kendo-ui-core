@@ -8,7 +8,7 @@ slug: peertopeerp_chat_kendoui
 
 # Peer-to-Peer Chat
 
-You can configure a Kendo UI Chat widget and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
+You can configure a Kendo UI Chat component and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
 
 To create the Peer-to-Peer Chat, first you have to implement the SignalR Hub, and, then, to implement the application client by following the steps below:
 

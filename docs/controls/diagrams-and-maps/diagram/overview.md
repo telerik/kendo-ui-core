@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Diagram Documentation - Diagram Overview
-description: "Get started with the jQuery Diagram by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Diagram by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_diagram_widget
 position: 1
 ---
@@ -18,7 +18,7 @@ To create a Diagram, use a `div` element and optionally set a height and width v
 
     <div id="diagram"></div>
 
-The following example demonstrates how to initialize the Diagram with its default configuration. The widget will render an empty diagramming surface and the changes will be visible only in the resulting HTML.
+The following example demonstrates how to initialize the Diagram with its default configuration. The component will render an empty diagramming surface and the changes will be visible only in the resulting HTML.
 
        $(document).ready(function() {
            $("#diagram").kendoDiagram();

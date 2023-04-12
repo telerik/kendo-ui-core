@@ -1,7 +1,7 @@
 ---
 title: TabStrip
 page_title: jQuery Sortable Documentation - TabStrip Integration
-description: "Get started with the jQuery Sortable by Kendo UI and integrate the widget with the Kendo UI TabStrip."
+description: "Get started with the jQuery Sortable by Kendo UI and integrate the component with the Kendo UI TabStrip."
 previous_url: /controls/interactivity/sortable/integration-tabstrip
 slug: integrationwith_tabstrip_sortable_widget
 ---
@@ -12,8 +12,8 @@ You can use the [Kendo UI Sortable wisget](https://demos.telerik.com/kendo-ui/so
 
 ## Prerequisites
 
-* [Overview of the Kendo UI Sortable widget]({% slug overview_kendoui_sortable_widget %})
-* [Overview of Kendo UI TabStrip widget]({% slug overview_kendoui_tabstrip_widget %})
+* [Overview of the Kendo UI Sortable component]({% slug overview_kendoui_sortable_widget %})
+* [Overview of Kendo UI TabStrip component]({% slug overview_kendoui_tabstrip_widget %})
 * [API reference of the Kendo UI DataSource component](/api/javascript/data/datasource#methods)
 
 ## Reordering of Sortable Items

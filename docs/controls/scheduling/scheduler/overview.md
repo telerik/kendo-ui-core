@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Scheduler Documentation - Scheduler Overview
-description: "Get started with the jQuery Scheduler by Kendo UI and learn how to initialize the widget and use its events."
+description: "Get started with the jQuery Scheduler by Kendo UI and learn how to initialize the component and use its events."
 slug: overview_kendoui_scheduler_widget
 position: 1
 ---
@@ -93,7 +93,7 @@ The following example demonstrates how to map remote service fields to client-si
 
 ## Methods, Fields, and Events
 
-The Scheduler exposes a set of [methods](/api/web/scheduler#methods) and [fields](/api/web/scheduler#fields) that you can use to configure the widget.
+The Scheduler exposes a set of [methods](/api/web/scheduler#methods) and [fields](/api/web/scheduler#fields) that you can use to configure the component.
 
     <div id="scheduler"></div>
     <script>
@@ -113,11 +113,11 @@ The Scheduler exposes a set of [methods](/api/web/scheduler#methods) and [fields
     scheduler.view("week"); // Go to the Week view.
     </script>
 
-The Scheduler also supports a set of [events](/api/web/scheduler#events) to which you can subscribe. To handle the events, either specify the JavaScript function which will handle the event during the initialization of the widget, or use the `bind` method of the widget after initialization.
+The Scheduler also supports a set of [events](/api/web/scheduler#events) to which you can subscribe. To handle the events, either specify the JavaScript function which will handle the event during the initialization of the component, or use the `bind` method of the component after initialization.
 
-The event handler is the JavaScript function is invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event specific data. To get a reference to the widget which fired the event, use the `sender` field of the event argument. The function context of the event handler which is available through the `this` keyword is set to the instance of the widget which fired the event.
+The event handler is the JavaScript function is invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event specific data. To get a reference to the component which fired the event, use the `sender` field of the event argument. The function context of the event handler which is available through the `this` keyword is set to the instance of the component which fired the event.
 
-The following example demonstrates how to subscribe to a Scheduler event during the initialization of the widget.
+The following example demonstrates how to subscribe to a Scheduler event during the initialization of the component.
 
     <div id="scheduler"></div>
     <script>

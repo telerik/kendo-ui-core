@@ -1,14 +1,14 @@
 ---
 title: Data Binding
 page_title: jQuery Menu Documentation - Data Binding
-description: "Get started with the jQuery Menu by Kendo UI and bind the widget to local data arrays or to remote data services."
+description: "Get started with the jQuery Menu by Kendo UI and bind the component to local data arrays or to remote data services."
 slug: databinding_kendoui_menu
 position: 2
 ---
 
 # Data Binding
 
-As of the Kendo UI R2 2019 release, you can use the [`HierarchicalDataSource`](/api/framework/hierarchicaldatasource) for binding widgets to data.
+As of the Kendo UI R2 2019 release, you can use the [`HierarchicalDataSource`](/api/framework/hierarchicaldatasource) for binding components to data.
 
 ## Binding to Local Data
 

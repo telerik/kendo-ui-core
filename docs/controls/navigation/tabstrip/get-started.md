@@ -1,14 +1,14 @@
 ---
 title: Getting Started
 page_title: jQuery TabStrip Documentation - Getting Started with the TabStrip
-description: "Get started with the jQuery TabStrip by Kendo UI and learn how to initialize the widget."
+description: "Get started with the jQuery TabStrip by Kendo UI and learn how to initialize the component."
 slug: getting_started_kendoui_tabstrip_widget
 position: 1
 ---
 
 # Getting Started with the TabStrip
 
-This guide demonstrates how to get up and running with the Kendo UI for jQuery TabStrip. 
+This guide demonstrates how to get up and running with the Kendo UI for jQuery TabStrip.
 
 After the completion of this guide, you will be able to achieve the following end result:
 
@@ -49,10 +49,10 @@ First, create a `<div>` element on the page that contains a `ul` element. The `l
 </div>
 ```
 
-## 2. Initialize the TabStrip 
+## 2. Initialize the TabStrip
 
 In this step, you will initialize the TabStrip from the `<div>` element. You can describe its layout and configuration in the initialization script statement.
- 
+
 ```html
 <div id="tabstrip">
     <ul>
@@ -72,7 +72,7 @@ In this step, you will initialize the TabStrip from the `<div>` element. You can
 
 Once the basic initialization is completed, you can determine how to add the content of the TabStrip. The code snippet below demonstrates how to define the content from HTML markup. After the closing the `ul` tag, you need to add as many `div` elements as the number of tabs that are defined through the `li` elements within.
 
-For more information about the alternative approach to load the content, refer to the article on [loading TabStrip content with AJAX]({% slug content_tabstrip %}). 
+For more information about the alternative approach to load the content, refer to the article on [loading TabStrip content with AJAX]({% slug content_tabstrip %}).
 
 ```html
 <div id="tabstrip">
@@ -97,12 +97,12 @@ For more information about the alternative approach to load the content, refer t
 </script>
 ```
 
-## Next Steps 
+## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
 * [Demo Page for the TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/index)
 
-## See Also 
+## See Also
 
 * [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
 * [Knowledge Base Section](/knowledge-base)

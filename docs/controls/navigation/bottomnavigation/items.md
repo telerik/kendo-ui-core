@@ -1,18 +1,18 @@
 ---
 title: Items
 page_title: jQuery BottomNavigation Documentation - Items
-description: "Get started with the jQuery BottomNavigation by Kendo UI and learn how to configure the items of the widget."
+description: "Get started with the jQuery BottomNavigation by Kendo UI and learn how to configure the items of the component."
 slug: items_bottomnavigation_widget
 position: 2
 ---
 
 # Items
 
-The [`items`](/api/javascript/ui/bottomnavigation/configuration/items) configuration allows you to set specific attributes of the BottomNavigation items. You can set their text (optionally) and the icon. The configuration also allows you to add classes for the different items that are rendered when initializing the widget. You can also set the *selected* and *enabled* state for the items.
+The [`items`](/api/javascript/ui/bottomnavigation/configuration/items) configuration allows you to set specific attributes of the BottomNavigation items. You can set their text (optionally) and the icon. The configuration also allows you to add classes for the different items that are rendered when initializing the component. You can also set the *selected* and *enabled* state for the items.
 
 > **Note:** When the `items.url` configuration is set, the items will be rendered as `<a>` tags. Otherwise, they will be rendered as `<span>` tags.
 
-The following example demonstrates the possible options for the *items* configuration of the BottomNavigation widget: 
+The following example demonstrates the possible options for the *items* configuration of the BottomNavigation component: 
 
 ```dojo
     <nav id="bottomNavigation"></nav>

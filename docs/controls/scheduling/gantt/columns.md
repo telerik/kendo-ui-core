@@ -19,7 +19,7 @@ The Gantt supports the following configuration options:
 - `expandable`&mdash;If set to `true`, the column will show the icons that are used for expanding and collapsing child rows. By default, the first column of the TreeList is expandable.
 - `field`&mdash;The field from the task model which will be used to populate the column.
 - `filterable`&mdash;If set to `true` and if filtering is enabled, a filter menu will be displayed for this column. If set to `false`, the filter menu will not be displayed. By default, a filter menu is displayed for all columns when filtering is enabled through the filterable option.
-- `filterable.ui`&mdash;The `role` data attribute of the widget that is used in the filter menu, or a JavaScript function which initializes that widget.
+- `filterable.ui`&mdash;The `role` data attribute of the component that is used in the filter menu, or a JavaScript function which initializes that component.
 - `format`&mdash;The format in which the data in the column is represented.
 - `headerAttributes`&mdash;The HTML attributes of the table header cell (`th`) that is rendered for the column.
 - `headerTemplate`&mdash;The template which renders the column header content. By default, the value of the title column option is displayed in the column header cell.

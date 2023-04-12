@@ -12,7 +12,7 @@ The globalization process combines the translation of component messages (locali
 
 The globalization functionality of the Pager is enabled through the [localization of its messages]({% slug localization_kendoui_pager_widget %}).
 
-For more information on using localization, internationalization, and right-to-left languages with Kendo UI widgets, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
+For more information on using localization, internationalization, and right-to-left languages with Kendo UI components, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
 
 ## See Also
 

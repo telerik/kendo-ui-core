@@ -1,19 +1,19 @@
 ---
 title: Grid
 page_title: jQuery Sortable Documentation - Grid Integration
-description: "Get started with the jQuery Sortable by Kendo UI and integrate the widget with the Kendo UI Grid."
+description: "Get started with the jQuery Sortable by Kendo UI and integrate the component with the Kendo UI Grid."
 previous_url: /controls/interactivity/sortable/integration
 slug: integrationwith_grid_sortable
 ---
 
 # Grid Integration
 
-You can use the [Kendo UI Sortable widget](https://demos.telerik.com/kendo-ui/sortable/index) to reorder the items in a Grid by dragging and dropping.
+You can use the [Kendo UI Sortable component](https://demos.telerik.com/kendo-ui/sortable/index) to reorder the items in a Grid by dragging and dropping.
 
 ## Prerequisites
 
-* [Overview of the Kendo UI Sortable widget]({% slug overview_kendoui_sortable_widget %})
-* [Overview of Kendo UI Grid widget]({% slug overview_kendoui_grid_widget %})
+* [Overview of the Kendo UI Sortable component]({% slug overview_kendoui_sortable_widget %})
+* [Overview of Kendo UI Grid component]({% slug overview_kendoui_grid_widget %})
 * [API reference of the Kendo UI DataSource component](/api/javascript/data/datasource#methods)
 
 ## Reordering of Sortable Items
@@ -24,7 +24,7 @@ The Sortable reorders the HTML DOM elements. It does not automatically update th
 
 To reorder the table rows of the Grid, initialize the Sortable on the [`table` element](/api/javascript/ui/grid#fields-table) of the Grid. Normally, the `filter` property of the Sortable selects all `tr` elements that are direct children of the table `tbody` element, for example, `filter: ">tbody >tr"`.
 
-> In AngularJS applications, initialize the Sortable as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. 
+> In AngularJS applications, initialize the Sortable as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper.
 
 ## Setting the Hint in the Grid
 
@@ -92,13 +92,13 @@ The draggable functionality of the Sortable prevents the `mousedown` event. As a
 
 If you use the batch (incell) edit mode, the code from the previous example that is applied to the inline and popup edit modes will not work. To work around this issue, use [custom editors](/api/javascript/ui/grid/configuration/columns.editor) and configure them to [update when the `input` event fires]({% slug valuebinding_mvvm_kendoui %}#controlling-when-the-view-model-is-updated)&mdash;by default, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the `input` event does not work for earlier Internet Explorer versions.
 
-> The `data-value-update` approach works with regular inputs. However, you must manually configure the Kendo UI widgets as they do not support the `data-value-update` attribute.
+> The `data-value-update` approach works with regular inputs. However, you must manually configure the Kendo UI components as they do not support the `data-value-update` attribute.
 
 For a runnable example, refer to the article on [using the Sortable with Grids in incell edit mode]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
 
 ## Reordering of DataSource Items
 
-The `change` event of the Sortable widget will fire after a row position is changed. You can bind to the `change` event to update the order of the items in the DataSource.
+The `change` event of the Sortable component will fire after a row position is changed. You can bind to the `change` event to update the order of the items in the DataSource.
 
 The following example demonstrates how to shift the position of the items in the DataSource.
 

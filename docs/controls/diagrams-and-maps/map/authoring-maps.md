@@ -1,7 +1,7 @@
 ---
 title: Creating Maps
 page_title: jQuery Map Documentation - Creating Maps
-description: "Get started with the jQuery Diagram by Kendo UI, process and transform maps from external sources, and use them with the Map widget."
+description: "Get started with the jQuery Diagram by Kendo UI, process and transform maps from external sources, and use them with the Map component."
 slug: mapauthoring_mapwidget
 position: 3
 ---
@@ -36,7 +36,7 @@ To explore new map datasets, use a traditional [desktop geographic information s
 
 ## Processing the Data
 
-You need to extract the data for the target region and process it in a usable format for the Map widget by converting it to GeoJSON. To convert between different vector formats, you can use the [OGR Library and utilities](https://gdal.org/development/rfc/rfc59.1_utilities_as_a_library.html) project which is part of the [Geospatial Data Abstraction Library](http://www.gdal.org/) and which includes the [ogr2ogr](http://www.gdal.org/ogr2ogr.html) command-line tool. As an alternative, you can also use the [Mapshaper](http://www.mapshaper.org/) tool that allows you to do many edits directly in the browser.
+You need to extract the data for the target region and process it in a usable format for the Map component by converting it to GeoJSON. To convert between different vector formats, you can use the [OGR Library and utilities](https://gdal.org/development/rfc/rfc59.1_utilities_as_a_library.html) project which is part of the [Geospatial Data Abstraction Library](http://www.gdal.org/) and which includes the [ogr2ogr](http://www.gdal.org/ogr2ogr.html) command-line tool. As an alternative, you can also use the [Mapshaper](http://www.mapshaper.org/) tool that allows you to do many edits directly in the browser.
 
 The following example demonstrates how to convert the dataset to GeoJSON and filter it out. As a result, your dataset is ready and can be displayed.
 
@@ -44,7 +44,7 @@ The following example demonstrates how to convert the dataset to GeoJSON and fil
 
 ## Loading the Data
 
-The following example demonstrates how to set up a simple Map widget and add a single shape layer to it. The GeoJSON data source will point to your processed dataset.
+The following example demonstrates how to set up a simple Map component and add a single shape layer to it. The GeoJSON data source will point to your processed dataset.
 
 > Make sure the GeoJSON files are properly encoded, preferably in UTF-8.
 

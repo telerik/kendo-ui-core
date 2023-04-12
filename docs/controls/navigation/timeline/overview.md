@@ -1,37 +1,37 @@
 ---
 title: Overview
 page_title: jQuery Timeline Documentation - Timeline Overview
-description: "Get started with the jQuery Timeline by Kendo UI and learn how to initialize the widget and use its events."
+description: "Get started with the jQuery Timeline by Kendo UI and learn how to initialize the component and use its events."
 slug: overview_kendoui_timeline_widget
 position: 1
 ---
 
 # {{ site.product }} Timeline Overview
 
-The Kendo UI Timeline widget displays a collection of events and their data in a chronological succession for each year.
+The Kendo UI Timeline component displays a collection of events and their data in a chronological succession for each year.
 
-You can scroll through the events and collapse/expand them. The events order can be vertical or horizontal, and you can customize their templates, as well as respond to events and use API control the widget behavior. You can also control the format of the rendered date for the event. If you provide a list of actions, they will be rendered as links after the description and images.
+You can scroll through the events and collapse/expand them. The events order can be vertical or horizontal, and you can customize their templates, as well as respond to events and use API control the component behavior. You can also control the format of the rendered date for the event. If you provide a list of actions, they will be rendered as links after the description and images.
 
 * [Demo page for the Timeline](https://demos.telerik.com/kendo-ui/timeline/index)
 
-The following image demonstrates a Timeline widget.
+The following image demonstrates a Timeline component.
 
 ![Kendo UI for jQuery Timeline Overview](images/timeline-overview.png)
 
 ## Initializing the Timeline
 
-To initialize the Timeline, use a blank `<div>` element and the `kendoTimeline()` method. In its arguments, provide a JSON literal with the options for the widget and a data source that contains the information about the events.
+To initialize the Timeline, use a blank `<div>` element and the `kendoTimeline()` method. In its arguments, provide a JSON literal with the options for the component and a data source that contains the information about the events.
 
-> Create the Timeline within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
+> Create the Timeline within a `$(document).ready()` statement because the component has to be initialized after the DOM is fully loaded.
 
-The following example demonstrates how to initialize the Timeline from a JSON `data` object. You can use a remote data source that will return the array of JSON literals instead of a local array of data. The `date` field in such a data source must be parsable by JavaScript (for example, `yyyy-mm-dd` or [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)). The widget data source is a [Kendo DataSource](/framework/datasource/overview) widget so you can use its features.
+The following example demonstrates how to initialize the Timeline from a JSON `data` object. You can use a remote data source that will return the array of JSON literals instead of a local array of data. The `date` field in such a data source must be parsable by JavaScript (for example, `yyyy-mm-dd` or [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)). The component data source is a [Kendo DataSource](/framework/datasource/overview) component so you can use its features.
 
 ```dojo
 <div id="timeline"></div>
 <script>
     $(document).ready(function () {
         $("#timeline").kendoTimeline({
-            orientation: "vertical", // Define the layout of the widget.
+            orientation: "vertical", // Define the layout of the component.
             alterMode: true, // Render the events on both sides of the axis in the vertical mode.
             collapsibleEvents: true, // Start all collapsed events in the vertical mode.
             dataSource: {
@@ -49,7 +49,7 @@ The following example demonstrates how to initialize the Timeline from a JSON `d
         });
     });
 
-    // The literals in this example use the default field names the widget takes.
+    // The literals in this example use the default field names the component takes.
     var eventsData = [
         {
             description: "First event description.",

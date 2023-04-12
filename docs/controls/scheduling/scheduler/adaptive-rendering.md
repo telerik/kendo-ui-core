@@ -16,8 +16,8 @@ For example, when editing is done on a mobile device, the Scheduler will slide i
 
 To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/scheduler/configuration/mobile) property to `true` or `"phone"`:
 
-* If set to `true`, the widget will use adaptive rendering when viewed on a mobile browser.
-* If set to `"phone"`, the widget will be forced to use adaptive rendering regardless of the browser type.
+* If set to `true`, the component will use adaptive rendering when viewed on a mobile browser.
+* If set to `"phone"`, the component will be forced to use adaptive rendering regardless of the browser type.
 
 > Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the scheduler might have a different height.
 

@@ -8,11 +8,11 @@ position: 2
 
 # Layout
 
-The layout of the Gantt consists of a GanttList and a Timeline sections. They are divided by a splitbar, which allows increasing the width of one of the sections at the expense of the other. 
+The layout of the Gantt consists of a GanttList and a Timeline sections. They are divided by a splitbar, which allows increasing the width of one of the sections at the expense of the other.
 
 ## GanttList
 
-The GanttList of the Gantt extends the TreeList widget and offers its functionality. For more details on the configuration and features of the TreeList, refer to its documentation and demos.
+The GanttList of the Gantt extends the TreeList component and offers its functionality. For more details on the configuration and features of the TreeList, refer to its documentation and demos.
 
 * [TreeList Documentation]({% slug overview_kendoui_treelist_widget %})
 * [TreeList Demos](https://demos.telerik.com/kendo-ui/treelist/index)
@@ -52,7 +52,7 @@ The example below demonstrates how to get a reference to a GanttList.
 
 ## Timeline
 
-The Timeline section visualizes the tasks and diplays start and end dates, progress, resources, and dependency relationships between tasks. The Timeline allows different ways of interaction with the tasks. You can resize, move, remove, edit, or change the dependencies of the tasks. 
+The Timeline section visualizes the tasks and diplays start and end dates, progress, resources, and dependency relationships between tasks. The Timeline allows different ways of interaction with the tasks. You can resize, move, remove, edit, or change the dependencies of the tasks.
 
 ## See Also
 

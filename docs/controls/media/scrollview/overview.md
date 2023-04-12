@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery ScrollView Documentation - ScrollView Overview
-description: "Get started with the jQuery ScrollView by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery ScrollView by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_scrollview_widget
 position: 1
 ---
@@ -20,7 +20,7 @@ You can initialize the ScrollView either [from HTML](#from-html) or [from a data
 
 ### From HTML
 
-1. Add a `<div>` element which will be used to initialize the widget.
+1. Add a `<div>` element which will be used to initialize the component.
 1. Nest a `<div data-role="page"></div>` for each page and place any template inside the `<div>`.
 
 ```dojo

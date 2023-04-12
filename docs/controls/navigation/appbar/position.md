@@ -1,18 +1,18 @@
 ---
 title: Positioning
 page_title: jQuery AppBar Documentation - Positioning
-description: "Learn how to configure the position of the jQuery AppBar widget."
+description: "Learn how to configure the position of the jQuery AppBar component."
 slug: position_kendoui_appbar_widget
 position: 3
 ---
 
 # Positioning
 
-The AppBar widget enables you to set its [position](#position) and its [position mode](#position-mode).
+The AppBar component enables you to set its [position](#position) and its [position mode](#position-mode).
 
 ## Position
 
-The `position` option of the Kendo UI AppBar defines where the widget has to be positioned on the page. The predefined position options are the following:
+The `position` option of the Kendo UI AppBar defines where the component has to be positioned on the page. The predefined position options are the following:
 
 * `none` - no positioning CSS style are applied
 * `top` - places the AppBar at the top of the page
@@ -20,7 +20,7 @@ The `position` option of the Kendo UI AppBar defines where the widget has to be 
 
 ## Position Mode
 
-The `positionMode` option defines the position of the widget relative to its parent container or viewport. The predefined **Position Mode** options are the following::
+The `positionMode` option defines the position of the component relative to its parent container or viewport. The predefined **Position Mode** options are the following::
 
 * `static` - positions the AppBar according to the normal flow of the page.
 * `sticky` - sticks the AppBar to a given position(top or bottom).

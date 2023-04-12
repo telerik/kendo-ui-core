@@ -8,7 +8,7 @@ position: 2
 
 # ExpansionPanel Default State
 
-You can configure the default state of The Kendo UI for jQuery ExpansionPanel widget by using the `disabled`, `expanded`, `toggleable` and `animation` properties.
+You can configure the default state of The Kendo UI for jQuery ExpansionPanel component by using the `disabled`, `expanded`, `toggleable` and `animation` properties.
 
 ## ExpansionPanel Disabled State
 
@@ -30,7 +30,7 @@ You can disable the Kendo UI ExpansionPanel component and make the user unable t
 
 ## ExpansionPanel Expanded State
 
-The Kendo UI ExpansionPanel widget can be expanded by default. To configure this state, set the [`expanded`](/api/javascript/ui/expansionpanel/configuration/expanded) property to `true`.
+The Kendo UI ExpansionPanel component can be expanded by default. To configure this state, set the [`expanded`](/api/javascript/ui/expansionpanel/configuration/expanded) property to `true`.
 
 ```dojo
 <div id="brazil">
@@ -48,7 +48,7 @@ The Kendo UI ExpansionPanel widget can be expanded by default. To configure this
 
 ## ExpansionPanel Toggleable State
 
-By default, the user can expand or collapse the ExpansionPanel widget. To prevent this, set the [`toggleable `](/api/javascript/ui/expansionpanel/configuration/toggleable) property to `false`.
+By default, the user can expand or collapse the ExpansionPanel component. To prevent this, set the [`toggleable `](/api/javascript/ui/expansionpanel/configuration/toggleable) property to `false`.
 
 
 ```dojo

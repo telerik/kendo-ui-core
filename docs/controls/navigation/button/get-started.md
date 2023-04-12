@@ -1,14 +1,14 @@
 ---
 title: Getting Started
 page_title: jQuery Button Documentation - Getting Started with the Button
-description: "Get started with the jQuery Button by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Button by Kendo UI and learn how to create, initialize, and enable the component."
 slug: getting_started_kendoui_button_widget
 position: 2
 ---
 
 # Getting Started with the Button
 
-This guide demonstrates how to get up and running with the Kendo UI for jQuery Button. 
+This guide demonstrates how to get up and running with the Kendo UI for jQuery Button.
 
 After the completion of this guide, you will be able to achieve the following end result:
 
@@ -29,17 +29,17 @@ After the completion of this guide, you will be able to achieve the following en
 
 ## 1. Create a select Element
 
-First, create a `<button>` element on the page from which the Button widget will be initialized.
+First, create a `<button>` element on the page from which the Button component will be initialized.
 
 ```html
 <button id="btn">My Button</button>
 ```
 
-## 2. Initialize the Button 
+## 2. Initialize the Button
 
 While you can initialize the Button from any element and with any content, it is intuitive to use the `button` or the `a` element. When you use a `button` element inside a `form`, the default `type` HTML attribute for buttons is `submit` and clicking the button will submit the form and reload the page. To change this behavior, use an explicit `type="button"` HTML attribute.
 
-In this step, you will initialize the Button from the `<button>` element. When you initialize the widget, all settings of the Button will be provided in the script statement. You have to describe its configuration and event handlers in JavaScript.
+In this step, you will initialize the Button from the `<button>` element. When you initialize the component, all settings of the Button will be provided in the script statement. You have to describe its configuration and event handlers in JavaScript.
 
 ```html
 <button id="btn">My Button</button>
@@ -50,7 +50,7 @@ In this step, you will initialize the Button from the `<button>` element. When y
 </script>
 ```
 
-Once the basic initialization is completed, you can start adding additional configurations to the Button. 
+Once the basic initialization is completed, you can start adding additional configurations to the Button.
 
 ## 3. Add an Icon
 
@@ -85,12 +85,12 @@ Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) opt
 </script>
 ```
 
-## Next Steps 
+## Next Steps
 
-* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the Button](https://demos.telerik.com/kendo-ui/button/index)
 
-## See Also 
+## See Also
 
 * [JavaScript API Reference of the Button](/api/javascript/ui/button)
 * [Knowledge Base Section](/knowledge-base)

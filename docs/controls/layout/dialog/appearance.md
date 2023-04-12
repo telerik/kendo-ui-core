@@ -12,13 +12,13 @@ The Dialog provides options for setting its dimensions and customizing its appea
 
 ## Setting the Dimensions
 
-By default, the Dialog does not have any preset dimensions and its size depends on its content. If the Dialog contains horizontally expandable block-level elements&mdash;including Kendo UI widgets such as the Grid, Editor, and others&mdash;the widget can expand horizontally to the point of touching the right edge of the browser viewport. In such cases, the widget sticks to the right viewport edge and cannot be separated from it. This issue occurs because the Dialog is absolutely positioned with CSS. To avoid such behavior, set an appropriate width to the widget, or a (max-)width to its content.
+By default, the Dialog does not have any preset dimensions and its size depends on its content. If the Dialog contains horizontally expandable block-level elements&mdash;including Kendo UI components such as the Grid, Editor, and others&mdash;the component can expand horizontally to the point of touching the right edge of the browser viewport. In such cases, the component sticks to the right viewport edge and cannot be separated from it. This issue occurs because the Dialog is absolutely positioned with CSS. To avoid such behavior, set an appropriate width to the component, or a (max-)width to its content.
 
 The lack of restrictions over the dimensions for vertical expanding of the Dialog and its content might result in undesired behavior&mdash;for example, the rendition of a popup which is higher than the browser viewport.
 
 ## Customizing Size and Position
 
-Similar to other Kendo UI widgets, the Dialog has two DOM elements which can be accessed and used to customize the appearance of the widget or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the widget which are provided as fields of the widget object. In specific scenarios, the Dialog wrapper can be used to tweak the position or the size of the widget although this is normally done through the API and the [`setOptions` method](/api/javascript/ui/widget/methods/setoptions).
+Similar to other Kendo UI components, the Dialog has two DOM elements which can be accessed and used to customize the appearance of the component or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the component which are provided as fields of the component object. In specific scenarios, the Dialog wrapper can be used to tweak the position or the size of the component although this is normally done through the API and the [`setOptions` method](/api/javascript/ui/widget/methods/setoptions).
 
     var dialog = $("#dialog").data("kendoDialog");
     var dialogWrapper = dialog.wrapper;
@@ -29,7 +29,7 @@ Similar to other Kendo UI widgets, the Dialog has two DOM elements which can be 
 
 By default, after the Dialog is initialized, it is moved in the DOM and placed as a child of the `body` element which positions it on top of all other page content. However, this approach might cause undesired side-effects if the Dialog is created from an element inside a form because the moved form fields will not be submitted. To avoid such issues, place the whole form, including its opening and closing tags, inside the element from which the Dialog is created.
 
-When the Dialog contains a form, which is submitted through a standard POST request, the widget will close and the page will reload. If you have to avoid this behavior, submit the form through Ajax. The approach is strongly recommended when the submitted data is validated on the server, because in such cases the Dialog is expected to remain visible and to display the validation messages that might be returned.
+When the Dialog contains a form, which is submitted through a standard POST request, the component will close and the page will reload. If you have to avoid this behavior, submit the form through Ajax. The approach is strongly recommended when the submitted data is validated on the server, because in such cases the Dialog is expected to remain visible and to display the validation messages that might be returned.
 
 ## See Also
 

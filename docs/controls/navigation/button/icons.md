@@ -1,7 +1,7 @@
 ---
 title: Icon Button
 page_title: jQuery Button Documentation - Icon Button
-description: "Get started with the jQuery Button by Kendo UI and add background, image, or font icons to enhance the visualization of the widget."
+description: "Get started with the jQuery Button by Kendo UI and add background, image, or font icons to enhance the visualization of the component."
 slug: icons_button
 position: 5
 ---
@@ -25,7 +25,7 @@ To visually enhance the Button:
 
 Background icons are applied over the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The Button can automatically render the `span` element, or use an existing `span` element if it has a `k-sprite` CSS class or a `k-icon` class if the `icon` property is used. The difference between the `icon` or `spriteCssClass` properties is that `icon` is intended to be used for built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [demo on using icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
-The following example demonstrates how to use icons in the Button widget.
+The following example demonstrates how to use icons in the Button component.
 
 	<button type="button" id="editButton">Edit</button>
 	<button type="button" id="deleteButton"><span class="k-icon"></span>Delete</button>
@@ -76,7 +76,7 @@ Technically, `spriteCssClass` can be used to achieve the same result as `icon`. 
 		});
 	});
 
-In some cases, you may want to use a Button that renders an icon and no text. To increase the accessibility of the widget in this case, you can include a text label inside the sprite `span`.
+In some cases, you may want to use a Button that renders an icon and no text. To increase the accessibility of the component in this case, you can include a text label inside the sprite `span`.
 
 	<button type="button" id="deleteButton"><span class="k-sprite">Delete</span></button>
 
@@ -90,7 +90,7 @@ In some cases, you may want to use a Button that renders an icon and no text. To
 
 ## Image Icons
 
-Image icons are applied over the `imageUrl` property and are displayed as an `img` element. The Button can automatically render the `img` element or use an existing `img` element if it has a `k-image` CSS class. To increase the accessibility of the widget when you manually add an `img` element, apply an `alt` attribute.
+Image icons are applied over the `imageUrl` property and are displayed as an `img` element. The Button can automatically render the `img` element or use an existing `img` element if it has a `k-image` CSS class. To increase the accessibility of the component when you manually add an `img` element, apply an `alt` attribute.
 
 The following example demonstrates how to use the `imageUrl`.
 

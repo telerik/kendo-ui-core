@@ -20,7 +20,7 @@ The following example demonstrates how to use the `change` event to automaticall
 <ol>
     <li>Change the filter.</li>
     <li>Reload the page: <button type="button" onclick="reloadPage();">Reload</button></li>
-    <li>The widget will be initialized with the settings that were stored.</li>
+    <li>The component will be initialized with the settings that were stored.</li>
     <li>Clear the stored information to start fresh: <button onclick="clearData();">Clear</button></li>
 </ol>
 <div id="filter"></div>

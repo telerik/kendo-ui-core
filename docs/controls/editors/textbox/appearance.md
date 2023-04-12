@@ -1,7 +1,7 @@
 ---
 title: Appearance
 page_title: jQuery TextBox Documentation - TextBox Appearance
-description: "Learn how to apply different styling options to the TextBox widget."
+description: "Learn how to apply different styling options to the TextBox component."
 previous_url: /styles-and-layout/styling-components/textbox-styling
 slug: appearance_kendoui_textbox_widget
 position: 2
@@ -9,7 +9,7 @@ position: 2
 
 # TextBox Appearance
 
-> As of Kendo UI R1 2022, the TextBox widget uses brand new rendering.
+> As of Kendo UI R1 2022, the TextBox component uses brand new rendering.
 
 In this article, you will find information about the new rendering of the Kendo UI TextBox.
 
@@ -82,7 +82,7 @@ The default fillMode value is `solid` and it is applied to the wrapping span ele
 
 ## Old vs New Rendering
 
-The old rendering of the TextBox consisted of a span wrapper element with a single class named `k-textbox` that held all the styling information related to the widget. 
+The old rendering of the TextBox consisted of a span wrapper element with a single class named `k-textbox` that held all the styling information related to the component.
 
 ```html
  <!-- OLD -->
@@ -93,7 +93,7 @@ The old rendering of the TextBox consisted of a span wrapper element with a sing
 
 The new rendering of the component consists of a wrapping `span` element that has a child `input` element.
 
-The `span` element controls the overall appearance of the widget and has the following class structure:
+The `span` element controls the overall appearance of the component and has the following class structure:
 
 ```html
 <!-- NEW -->
@@ -109,7 +109,7 @@ The full rendering of the component has the following HTML structure:
 </span>
 ```
 
-The following example demonstrates how to configure the appearance of the widget through its configuration:
+The following example demonstrates how to configure the appearance of the component through its configuration:
 
 ```dojo
 <input id="textbox" />

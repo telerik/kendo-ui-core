@@ -1,7 +1,7 @@
 ---
 title: Excel Export
 page_title: jQuery Spreadsheet Documentation - Excel Export
-description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to export the content of the widget in an Excel file in the browser."
+description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to export the content of the component in an Excel file in the browser."
 slug: export_toexcel_spreadsheet_widget
 position: 2
 ---
@@ -28,7 +28,7 @@ The Spreadsheet client-side API includes the [`saveAsExcel`](/api/javascript/ui/
 
 ## Known Issues
 
-Currently, the export module does not handle sorting and filtering. This limitation will be addressed before the widget goes out of its Beta version.
+Currently, the export module does not handle sorting and filtering. This limitation will be addressed before the component goes out of its Beta version.
 
 ## See Also
 

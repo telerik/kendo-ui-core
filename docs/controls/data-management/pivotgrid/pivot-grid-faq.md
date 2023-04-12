@@ -1,7 +1,7 @@
 ---
 title: FAQ
 page_title: jQuery PivotGrid Documentation - Frequently Asked Questions
-description: "Get started with the jQuery PivotGrid by Kendo UI and find the most frequently asked questions related to the Kendo UI PivotGrid widget and their answers."
+description: "Get started with the jQuery PivotGrid by Kendo UI and find the most frequently asked questions related to the Kendo UI PivotGrid component and their answers."
 slug: frequently_asked_questions_pivotgrid
 position: 80
 ---
@@ -34,7 +34,7 @@ For more information, refer to the [section on accessing the cube securely]({% s
 
 ## If I do not have an OLAP cube, can I still use the PivotGrid?
 
-Currently, the Kendo UI `PivotDataSource` has limited support for [binding to flat data](https://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features that are available when the widget is bound to an OLAP cube (such as hierarchies and other) are supported.
+Currently, the Kendo UI `PivotDataSource` has limited support for [binding to flat data](https://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features that are available when the component is bound to an OLAP cube (such as hierarchies and other) are supported.
 
 ## See Also
 

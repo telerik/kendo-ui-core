@@ -41,7 +41,7 @@ The following example demonstrates how to add a new TabStrip tab.
 
 ## Scrollable Tabs
 
-As of the Kendo UI 2015 Q2 (2015.2.624) release, the TabStrip supports scrollable tabs for the `"top"` and `"bottom"` options of the `tabPosition` configuration. By default, during initialization the widget checks if the tabs fit in the available horizontal space. If they do not fit, the TabStrip renders scroll buttons on its sides. To disable this behavior, [use the `scrollable` option](/api/javascript/ui/tabstrip/configuration/scrollable).
+As of the Kendo UI 2015 Q2 (2015.2.624) release, the TabStrip supports scrollable tabs for the `"top"` and `"bottom"` options of the `tabPosition` configuration. By default, during initialization the component checks if the tabs fit in the available horizontal space. If they do not fit, the TabStrip renders scroll buttons on its sides. To disable this behavior, [use the `scrollable` option](/api/javascript/ui/tabstrip/configuration/scrollable).
 
 If the TabStrip has no fixed width and is placed in a fluid layout, you can set it to check again whether or not the tab scrolling is required. To enable tab scrolling in fluid containers, use the [`resize()` method](/using-kendo-in-responsive-web-pages#individual-widget-resizing)&mdash;for example, in `window.resize`. If the tab which was last selected becomes invisible because of the TabStrip shrinking, `resize` will also show the right scroll button. For more information, refer to the [TabStrip API](/api/javascript/ui/tabstrip).
 

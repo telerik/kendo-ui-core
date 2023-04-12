@@ -82,7 +82,7 @@ The `overflow` property accepts the following values:
 ## Appearance of the Button
 
 * `icon`&mdash;The property defines a name of an existing icon from the Kendo UI theme sprite. The icon will be applied as a background image of a `span` element that is rendered inside the Button. For a list of available icon names, refer to the [demo on icons](https://demos.telerik.com/kendo-ui/styling/icons).
-* `imageUrl`&mdash;The property defines an URL which will be used for an `img` element inside the Button. The `img` element will be rendered automatically by the widget.
+* `imageUrl`&mdash;The property defines an URL which will be used for an `img` element inside the Button. The `img` element will be rendered automatically by the component.
 * `spriteCssClass`&mdash;The property defines one or more CSS classes that are separated by spaces which will be used for applying a background image to a `span` element inside the Button. To use an icon from the Kendo UI theme sprite background image, use the `icon` property.
 
 The following example demonstrates how to use icons in the ToolBar when you set the appearance of the Button.

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery TextArea Documentation - TextArea Overview
-description: "Get started with the jQuery TextArea by Kendo UI and learn how to create and initialize the widget."
+description: "Get started with the jQuery TextArea by Kendo UI and learn how to create and initialize the component."
 slug: overview_kendoui_textarea_widget
 position: 1
 ---
@@ -10,7 +10,7 @@ position: 1
 
 The TextArea converts a `<textarea>` element into a styled textarea.
 
-* [Demo page for the TextArea](https://demos.telerik.com/kendo-ui/textarea/index) 
+* [Demo page for the TextArea](https://demos.telerik.com/kendo-ui/textarea/index)
 
 ## Basic Usage
 
@@ -24,7 +24,7 @@ The following example demonstrates how to create a TextArea and set some of its 
 <script>
     $(document).ready(function(){
         $("#description").kendoTextArea({
-            value: "A library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library",
+            value: "A library of 70+ UI components, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library",
             placeholder: "Description...",
             rows:5
         });
@@ -52,9 +52,9 @@ The following example demonstrates how to initialize the TextArea.
 
 The TextArea supports the [`change`](/api/javascript/ui/textarea/events/change) event. The `change` fires each time a new value is set by the user.
 
-> **Important:** The [`change`](/api/javascript/ui/textarea/events/change) event is not fired when the value of the widget is changed from JavaScript code.
+> **Important:** The [`change`](/api/javascript/ui/textarea/events/change) event is not fired when the value of the component is changed from JavaScript code.
 
-To handle the TextArea events, you can specify the JavaScript function which will handle the event during the initialization of the widget or use the `bind` method of the widget after its initialization.
+To handle the TextArea events, you can specify the JavaScript function which will handle the event during the initialization of the component or use the `bind` method of the component after its initialization.
 
 The following example demonstrates how to subscribe to the `change` event during initialization.
 

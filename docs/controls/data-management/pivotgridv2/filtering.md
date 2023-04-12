@@ -35,7 +35,7 @@ $("#configurator").kendoPivotConfiguratorV2({
 
 The filter descriptor is similar to [the filter option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/filter) and contains the following options:
 - `field`&mdash;The full path to the tuple member. For example, `[Date].[Calendar].[Calendar Year].&[2005]`.
-- `operator`&mdash;All operators that work with strings. Note that the widget treats field values as strings.
+- `operator`&mdash;All operators that work with strings. Note that the component treats field values as strings.
 - `value`&mdash;The filter value.
 
 ## See Also

@@ -1,7 +1,7 @@
 ---
 title: Flat Data
-page_title: jQuery TreeView Documentation - Flat Data 
-description: "Get started with the jQuery TreeView by Kendo UI and learn how to bind the widget to a flat data table that keeps references about the hierarchical structure."
+page_title: jQuery TreeView Documentation - Flat Data
+description: "Get started with the jQuery TreeView by Kendo UI and learn how to bind the component to a flat data table that keeps references about the hierarchical structure."
 previous_url: /controls/navigation/treeview/binding-to-flat-data
 slug: bindtoflattables_treeview_widget
 position: 2
@@ -9,7 +9,7 @@ position: 2
 
 # Flat Data Binding
 
-The TreeView expects hierarchical data and you have to convert all flat structures to hierarchical data before binding the widget to it.
+The TreeView expects hierarchical data and you have to convert all flat structures to hierarchical data before binding the component to it.
 
 To convert flat data into hierarchical structure, use either of the following approaches which differ in the necessary time for their completion and the resulting tree:
 
@@ -18,7 +18,7 @@ To convert flat data into hierarchical structure, use either of the following ap
 
 ## Initial All-Data Pre-Processing
 
-The pre-processing of all available data and its conversion into a hierarchy prior to binding the TreeView widget requires more time and memory, and the resulting tree is fully rendered.
+The pre-processing of all available data and its conversion into a hierarchy prior to binding the TreeView component requires more time and memory, and the resulting tree is fully rendered.
 
     <div id="tree"></div>
     <script>

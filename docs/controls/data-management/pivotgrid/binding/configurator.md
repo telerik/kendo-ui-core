@@ -33,7 +33,7 @@ The following example demonstrates how to configure the PivotConfigurator.
             $("#pivotconfigurator").kendoPivotConfigurator();
 
             $("#pivotgrid").kendoPivotGrid({
-                configurator: "#pivotconfigurator", //specify the ID of the configurator widget
+                configurator: "#pivotconfigurator", //Specify the ID of the configurator component.
                 height: 550,
                 dataSource: {
                     type: "xmla",

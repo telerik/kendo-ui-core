@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Kendo UI for jQuery TaskBoard Documentation - TaskBoard Overview
-description: "Get started with the Kendo UI for jQuery TaskBoard and learn about its features and how to initialize the widget."
+description: "Get started with the Kendo UI for jQuery TaskBoard and learn about its features and how to initialize the component."
 slug: overview_kendoui_taskboard_widget
 position: 1
 ---
@@ -10,11 +10,11 @@ position: 1
 
 The Kendo UI TaskBoard allows you to easily organize items and keep track of their state. The TaskBoard provides a clean and user-friendly interface and enables you to manage tasks, notes, projects, people, or other kinds of items. The component displays columns (lanes), which can represent different types of project/task statuses. Tasks are visualized as cards, which are easily customizable through templates. You can reorder cards within the columns, or drag and drop them onto another column.
 
-* [TaskBoard demos](https://demos.telerik.com/kendo-ui/taskboard/index) 
+* [TaskBoard demos](https://demos.telerik.com/kendo-ui/taskboard/index)
 
 ## Initializing the TaskBoard
 
-The following example demonstrates how to initialize the TaskBoard from an existing `<div>` element. 
+The following example demonstrates how to initialize the TaskBoard from an existing `<div>` element.
 
 ```dojo
     <div id="taskBoard"></div>

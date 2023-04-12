@@ -25,16 +25,16 @@ When the `pageSize` of the ScrollView is more than one, the data that is passed 
 
 ## Rendering Page Elements
 
-When the ScrollView is in a data-bound mode, it generates its page elements automatically. When the DataSource is populated with data, the widget uses its `template` to render the content of the pages.
+When the ScrollView is in a data-bound mode, it generates its page elements automatically. When the DataSource is populated with data, the component uses its `template` to render the content of the pages.
 
-By default, the widget displays one data record per page. You can display multiple data records on a single page by setting the `itemsPerPage` configuration option. In such cases, the specified amount of data records is passed to the template and it is your responsibility to handle the way they are going to be displayed.
+By default, the component displays one data record per page. You can display multiple data records on a single page by setting the `itemsPerPage` configuration option. In such cases, the specified amount of data records is passed to the template and it is your responsibility to handle the way they are going to be displayed.
 
-> * You have to specify `template`. Otherwise, the widget will not be able to render the content.
+> * You have to specify `template`. Otherwise, the component will not be able to render the content.
 > * To ensure smooth scrolling, the `pageSize` of the DataSource has to be six or more times the `itemsPerPage` amount. For example, if the `itemsPerPage` is set to `4`, the `pageSize` must be `24` (4*6) or more.
 
 ## Displaying Incomplete Pages
 
-When the ScrollView is configured to display multiple items per page, sometimes the last data view may not be complete. For example, if `itemsPerPage: 3` and you have a total of seven records in the DataSource, the widget will render three pages in total. The first two contain three items while the last one has only one remaining item to display. In such cases, it is your responsibility to configure the template of the widget so it is able to handle the missing records. Otherwise, a JavaScript error occurs. A possible approach to handle this issue is to use JavaScript logic (the `for` loop) inside the template.
+When the ScrollView is configured to display multiple items per page, sometimes the last data view may not be complete. For example, if `itemsPerPage: 3` and you have a total of seven records in the DataSource, the component will render three pages in total. The first two contain three items while the last one has only one remaining item to display. In such cases, it is your responsibility to configure the template of the component so it is able to handle the missing records. Otherwise, a JavaScript error occurs. A possible approach to handle this issue is to use JavaScript logic (the `for` loop) inside the template.
 
 The following example demonstrates a template with a JavaScript `for` loop.
 

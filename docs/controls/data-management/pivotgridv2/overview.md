@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery PivotGridV2 Documentation - PivotGridV2 Overview
-description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to create and configure the widget."
+description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to create and configure the component."
 slug: overview_kendoui_pivotgridv2_widget
 position: 1
 ---
@@ -16,7 +16,7 @@ Compared to the legacy PivotGrid, the new PivotGridV2 offers a brand new design,
 
 ## Basic Configuration
 
-1. Start with the initialization of the PivotGridV2 widget. Create the widget by defining an HTML `<div>` element.
+1. Start with the initialization of the PivotGridV2 component. Create the component by defining an HTML `<div>` element.
 
         <!-- Define	 the HTML div that will hold the PivotGridV2 -->
         <div id="pivotgrid">
@@ -27,7 +27,7 @@ Compared to the legacy PivotGrid, the new PivotGridV2 offers a brand new design,
         <script>
             $(document).ready(function () {
                 $("#pivotgrid").kendoPivotGridV2({
-                    height: 700, // Define the height of the widget.
+                    height: 700, // Define the height of the component.
                     dataSource: {
                         type: "xmla", // Define the type of the DataSource.
                         columns: [{ name: ['[Date].[Calendar]'] }], // Specify a columns dimension.

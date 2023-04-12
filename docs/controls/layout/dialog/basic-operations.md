@@ -12,7 +12,7 @@ You can control the opened and closed state of the Dialog as well as its destroy
 
 ## Opening and Closing
 
-Usually, a Dialog is opened as a result of a user action rather than of the `load` event of the page. The [Dialog API](/api/javascript/ui/dialog) provides methods for handling such scenarios. Basically, the widget can be initialized as non-visible and can opened when needed.
+Usually, a Dialog is opened as a result of a user action rather than of the `load` event of the page. The [Dialog API](/api/javascript/ui/dialog) provides methods for handling such scenarios. Basically, the component can be initialized as non-visible and can opened when needed.
 
 The following example demonstrates how to open a Dialog on a button click.
 
@@ -39,7 +39,7 @@ The following example demonstrates how to initialize a Dialog, center, and confi
 
 ## Destroying
 
-Unlike most widgets, the Dialog is completely removed from the DOM when it is [destroyed]({% slug destroywidgets_kendoui_gettingstarted %}). This means that the element from which the Dialog was initialized no longer exists on the page. Therefore, you can create a new Dialog instance only from another element.
+Unlike most components, the Dialog is completely removed from the DOM when it is [destroyed]({% slug destroywidgets_kendoui_gettingstarted %}). This means that the element from which the Dialog was initialized no longer exists on the page. Therefore, you can create a new Dialog instance only from another element.
 
 ## See Also
 

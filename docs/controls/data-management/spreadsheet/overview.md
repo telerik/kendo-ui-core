@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Spreadsheet Documentation - Spreadsheet Overview
-description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to initialize and configure the widget."
+description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to initialize and configure the component."
 slug: overview_spreadsheet_widget
 position: 1
 ---
@@ -10,7 +10,7 @@ position: 1
 
 The Spreadsheet allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
-The Spreadsheet supports Internet Explorer 9 and later versions. The widget is primarily targeted at desktop users and, therefore, its performance and functionalities on mobile devices are limited.
+The Spreadsheet supports Internet Explorer 9 and later versions. The component is primarily targeted at desktop users and, therefore, its performance and functionalities on mobile devices are limited.
 
 * [Demo page for the Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 
@@ -45,7 +45,7 @@ The following example demonstrates how to set the value for a range of cells.
 
         $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet"); // The widget instance.
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet"); // The component instance.
 
         var sheet = spreadsheet.activeSheet(); // The current active sheet.
 

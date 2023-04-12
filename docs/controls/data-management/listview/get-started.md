@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 page_title: jQuery ListView Documentation - Getting Started with the ListView
-description: "Get started with the jQuery ListView by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery ListView by Kendo UI and learn how to create, initialize, and enable the component."
 slug: getting_started_kendoui_listview_widget
 position: 1
 ---
@@ -105,13 +105,13 @@ After the completion of this guide, you will be able to achieve the following en
 
 ## 1. Create a div Element
 
-First, create an empty `<div>` element that you will use to initialize the widget.
+First, create an empty `<div>` element that you will use to initialize the component.
 
 ```html
 <div id="listView"></div>
 ```
 
-## 2. Initialize the ListView 
+## 2. Initialize the ListView
 
 In this step, you will initialize the ListView from the `<div>` element.
 
@@ -259,7 +259,7 @@ The ListView allows you to display a specific amount of items per page. This imp
 
 ## 6. Configure Scrolling for the ListView
 
-The ListView allows you to display a scrollbar inside the widget so end-users don't have to scroll the entire page in their browser. To enable the scrolling functionality, set the [`scrollable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/scrollable) property to `true`.
+The ListView allows you to display a scrollbar inside the component so end-users don't have to scroll the entire page in their browser. To enable the scrolling functionality, set the [`scrollable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/scrollable) property to `true`.
 
 ```html
       <div id="listView"></div>
@@ -280,9 +280,9 @@ The ListView allows you to display a scrollbar inside the widget so end-users do
       </script>
 ```
 
-## Next Steps 
+## Next Steps
 
-* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the ListView](https://demos.telerik.com/kendo-ui/listview/index)
 
 ## See Also 

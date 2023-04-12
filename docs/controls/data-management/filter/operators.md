@@ -76,7 +76,7 @@ The following example demonstrates how to set the `equals` and `contains` filter
                 ]
             }
         }).data("kendoFilter").applyFilter();
-        // Chain the method call to immediately apply filtering after the widget initialization because an initial filter is set.
+        // Chain the method call to immediately apply filtering after the component initialization because an initial filter is set.
 
         $("#listView").kendoListView({
             dataSource: dataSource,
@@ -145,7 +145,7 @@ The following example demonstrates how to set the `equals` and `contains` filter
                 ]
             }
         }).data("kendoFilter").applyFilter();
-        // Chain the method call to immediately apply filtering after the widget initialization because an initial filter is set.
+        // Chain the method call to immediately apply filtering after the component initialization because an initial filter is set.
 
         $("#listView").kendoListView({
             dataSource: dataSource,
@@ -227,7 +227,7 @@ The following example demonstrates how to create a custom operator for string fi
                 ]
             }
         }).data("kendoFilter").applyFilter();
-        // Chain the method call to immediately apply filtering after the widget initialization because an initial filter is set.
+        // Chain the method call to immediately apply filtering after the component initialization because an initial filter is set.
 
         $("#listView").kendoListView({
             dataSource: dataSource,

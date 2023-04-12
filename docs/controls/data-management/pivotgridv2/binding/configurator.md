@@ -16,10 +16,10 @@ The PivotConfiguratorV2 can be used for configuring the column and row dimension
 
 There are four elements that need to be configured for the PivotConfiguratorV2 to function properly:
 
-* PivotGridV2—The PivotGridV2 widget which will be managed by the PivotConfiguratorV2.
-* PivotConfiguratorV2—The configurator widget itself.
+* PivotGridV2—The PivotGridV2 component which will be managed by the PivotConfiguratorV2.
+* PivotConfiguratorV2—The configurator component itself.
 * PivotConfiguratorButton—The button which expands/collapses the PivotConfiguratorV2.
-* PivotContainer—The container which holds all of the above widgets.
+* PivotContainer—The container which holds all of the above components.
 
 The following example demonstrates the HTML structure of the elements.
 
@@ -31,7 +31,7 @@ The following example demonstrates the HTML structure of the elements.
 
 ## Basic Configuration
 
-The following example demonstrates how to configure the widgets.
+The following example demonstrates how to configure the components.
 
     <script>
         $(document).ready(function () {
@@ -68,7 +68,7 @@ The following example demonstrates how to configure the widgets.
 
             // Initialize the PivotConfiguratorButton.
             $("#pivotbutton").kendoPivotConfiguratorButton({
-                configurator: "configurator" // Specify which KendoConfiguratorV2 widget will the button be related to.
+                configurator: "configurator" // Specify which KendoConfiguratorV2 component will the button be related to.
             });
         });
     </script>

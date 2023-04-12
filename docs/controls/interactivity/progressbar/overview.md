@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery ProgressBar Documentation - ProgressBar Overview
-description: "Get started with the jQuery ProgressBar by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery ProgressBar by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_progressbar_widget
 position: 1
 ---
@@ -12,7 +12,7 @@ The ProgressBar delivers rich functionality for displaying and tracking the prog
 
 To see the ProgressBar in action, visit its [demo page](https://demos.telerik.com/kendo-ui/progressbar/index).
 
-The widget provides the following types:
+The component provides the following types:
 
 * `value`&mdash;Represents a regular ProgressBar which displays the progress status as an absolute value.
 * `percent`&mdash;Represents a regular ProgressBar which displays the progress status in percentage.
@@ -67,7 +67,7 @@ You can [set the appearance]({% slug appearance_kendoui_progressbar %}) of the P
 
 The ProgressBar supports the `change` and `complete` events. `change` fires each time a new value is set. `complete` fires when the progress of the task is completed, that is, each time the ProgressBar reaches its maximum value.
 
-To handle these events, you can specify the JavaScript function which will handle the event during the initialization of the widget or use the `bind` method of the widget after its initialization.
+To handle these events, you can specify the JavaScript function which will handle the event during the initialization of the component or use the `bind` method of the component after its initialization.
 
 For a runnable example, refer to the [demo on using the events of the ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/events).
 

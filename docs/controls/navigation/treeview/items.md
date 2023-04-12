@@ -12,7 +12,7 @@ When you bind the TreeView through the `dataSource` configuration option, each i
 
 The following example demonstrates how to pass item properties to the TreeView. You can configure the `text`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`datatextfield`](/api/web/treeview#dataTextField), [`dataimageurlfield`](/api/web/treeview#dataImageUrlField), [`dataspritecssclassfield`](/api/web/treeview#dataSpriteCssClassField), and [`dataurlfield`](/api/web/treeview#dataUrlField) options respectively.
 
-To add arbitrary fields when binding the TreeView, use the `dataSource` configuration. The fields are stored in the `HierarchicalDataSource` and can be easily accessed through the [`dataItem`](/api/web/treeview#dataitem) method of the widget.
+To add arbitrary fields when binding the TreeView, use the `dataSource` configuration. The fields are stored in the `HierarchicalDataSource` and can be easily accessed through the [`dataItem`](/api/web/treeview#dataitem) method of the component.
 
     var item = {
         text: "Item text",

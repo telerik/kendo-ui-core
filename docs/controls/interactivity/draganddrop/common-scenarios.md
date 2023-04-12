@@ -12,7 +12,7 @@ The Kendo UI Draggable, DropTarget, and DropTargetArea provide options for imple
 
 ## Creating Lists or Tables with Draggable Items
 
-The Draggable does not support binding to the DataSource component. To work around this issue, bind a DataSource instance to a Kendo UI ListView or Grid widget and initialize a Draggable widget for it. If you asynchronously retrieve the data from a remote server, by the time the Draggable is initialized the items that have to be draggable will not be rendered. As a result, you have to initialize the Draggable on the parent container and use the `filter` Draggable configuration option with a selector that matches the Grid or ListView item elements.
+The Draggable does not support binding to the DataSource component. To work around this issue, bind a DataSource instance to a Kendo UI ListView or Grid component and initialize a Draggable component for it. If you asynchronously retrieve the data from a remote server, by the time the Draggable is initialized the items that have to be draggable will not be rendered. As a result, you have to initialize the Draggable on the parent container and use the `filter` Draggable configuration option with a selector that matches the Grid or ListView item elements.
 
 The following example demonstrates how to create a ListView with draggable items.
 
@@ -72,7 +72,7 @@ The following example demonstrates how to create a ListView with draggable items
 
 ## Getting the Corresponding Dragged dataItem Element
 
-Data management widgets, such as the Kendo UI Grid or ListView, append a `uid` data attribute to the DOM elements of their items. You can use the `uid` attribute to get a reference to the `dataItem` from the DataSource instance.
+Data management components, such as the Kendo UI Grid or ListView, append a `uid` data attribute to the DOM elements of their items. You can use the `uid` attribute to get a reference to the `dataItem` from the DataSource instance.
 
     <div id="listA"></div>
     <script>
@@ -199,7 +199,7 @@ You can also use the `dragenter` and `dragleave` DropTarget events to visually i
 <!--*-->
 ## Moving Items between Lists
 
-The Drag-and-Drop components do not automatically change the data-bound widget data. To apply the move changes to the DataSource instances, use the `drop` event and the `add` and `remove` methods of the DataSource.
+The Drag-and-Drop components do not automatically change the data-bound component data. To apply the move changes to the DataSource instances, use the `drop` event and the `add` and `remove` methods of the DataSource.
 
     <div id="listA"></div>
     <div id="listB"></div>

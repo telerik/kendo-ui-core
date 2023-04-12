@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Drag-and-Drop Documentation - Drag-and-Drop Overview
-description: "Get started with the jQuery Drag-and-Drop by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Drag-and-Drop by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_draganddrop_intercativityandux
 position: 1
 ---
@@ -18,7 +18,7 @@ Kendo UI for jQuery provides options to handle drag-and-drop scenarios by combin
 
 ## Initializing the Drag-and-Drop
 
-The following example demonstrates how to initialize the Draggable widget.
+The following example demonstrates how to initialize the Draggable component.
 
 > In order for the user to have a visual indication of the dragged item, specify the `hint` configuration option.
 
@@ -31,7 +31,7 @@ The following example demonstrates how to initialize the Draggable widget.
         });
     </script>
 
-The following example demonstrates how to initialize the DropTarget widget.
+The following example demonstrates how to initialize the DropTarget component.
 
 > If the DropTarget element is initially empty, set the `height` or `min-height` properties of the element through CSS. The user will not be able to drag on targets with a zero height.
 

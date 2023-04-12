@@ -1,7 +1,7 @@
 ---
 title: Data Binding
 page_title: jQuery Gantt Documentation - Data Binding
-description: "Get started with the jQuery Gantt by Kendo UI and bind the widget to local data arrays or remote data services."
+description: "Get started with the jQuery Gantt by Kendo UI and bind the component to local data arrays or remote data services."
 slug: databinding_kendoui_gantt
 position: 3
 ---
@@ -58,7 +58,7 @@ You can bind the Gantt to a remote service which will return, create, update, or
 
 > If the service you use resides in the same domain as your website, use JSON instead. For more information on cross-domain requests, refer to [this article]({% slug corsdatafetching_anotherdomain_datasourcecomponent %}).
 
-The following example demonstrates how to bind the widget to a remote service. Note how the fields of the event in the `schema.model` section are configured and mapped to the fields that are returned by the remote service by using the `from` option.
+The following example demonstrates how to bind the component to a remote service. Note how the fields of the event in the `schema.model` section are configured and mapped to the fields that are returned by the remote service by using the `from` option.
 
     <div id="gantt"></div>
     <script>      
@@ -148,7 +148,7 @@ The following example demonstrates how to bind the widget to a remote service. N
       });
     </script>
 
-When defining the `GanttDataSource` schema fields, `parentId` should be explicitly set as `nullable`: 
+When defining the `GanttDataSource` schema fields, `parentId` should be explicitly set as `nullable`:
 
     parentId: { from: "ParentID", type: "number", nullable: true }
 

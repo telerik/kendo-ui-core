@@ -19,7 +19,7 @@ The following example demonstrates how to enable the keyboard navigation in the 
          // List any other configuration options here.
     });
 
-The keyboard navigation of the TreeList works by listening to the `keydown` events on the wrapper element of the widget. Its behavior is based on the assumption that whatever the user does is in accordance with the currently focused TreeList cell and not with the focused element of the browser. If the data cells of the TreeList contain hyperlinks that have to be activated through the keyboard:
+The keyboard navigation of the TreeList works by listening to the `keydown` events on the wrapper element of the component. Its behavior is based on the assumption that whatever the user does is in accordance with the currently focused TreeList cell and not with the focused element of the browser. If the data cells of the TreeList contain hyperlinks that have to be activated through the keyboard:
 
 1. Navigate to the respective TreeList cell by using the `Arrow` keys.
 1. Press `Enter` to focus the hyperlink inside the cell.

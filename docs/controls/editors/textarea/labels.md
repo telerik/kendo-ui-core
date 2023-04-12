@@ -10,13 +10,13 @@ position: 2
 
 The Label enables you to associate a `label` HTML element with the TextArea.
 
-* [Demo page for the TextArea Floating Label](https://demos.telerik.com/kendo-ui/textarea/floating-label) 
+* [Demo page for the TextArea Floating Label](https://demos.telerik.com/kendo-ui/textarea/floating-label)
 
 ## Basic Usage
 
 To associate a TextArea with a Label, set the `label` property by providing a string or a function. The `string` and the `function` parameters are setting the inner HTML of the label.
 
-The following example demonstrates how to set a Label for a TextArea from a string. 
+The following example demonstrates how to set a Label for a TextArea from a string.
 
 ```dojo
     <!-- Define the HTML element that will contain the textarea. -->
@@ -31,7 +31,7 @@ The following example demonstrates how to set a Label for a TextArea from a stri
     </script>
 ```
 
-The following example demonstrates how to set a Label for a TextArea from a function. The function context (available via the `this` keyword) will be set to the widget instance.
+The following example demonstrates how to set a Label for a TextArea from a function. The function context (available via the `this` keyword) will be set to the component instance.
 
 ```dojo
     <!-- Define the HTML element that will contain the textarea. -->
@@ -108,7 +108,7 @@ The following example demonstrates how to set a Floating Label for a TextArea.
     </script>
 ```
 
-If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+If set to `true`, the component will be wrapped in a container that will allow the floating label functionality.
 
 > **Important:** The [value](/api/javascript/ui/textarea/methods/value) method **does not trigger** the `focusout` event of the textarea.
 This could affect the floating label functionality.

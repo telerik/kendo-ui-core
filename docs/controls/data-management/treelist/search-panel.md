@@ -1,6 +1,6 @@
 ---
 title: Search Panel
-page_title: jQuery TreeList Documentation - Search Panel | Kendo UI 
+page_title: jQuery TreeList Documentation - Search Panel | Kendo UI
 description: "Get started with the jQuery TreeList by Kendo UI and learn how to enable search panel to search through its data."
 slug: searchpanel_kendoui_treelist_widget
 position: 5
@@ -8,7 +8,7 @@ position: 5
 
 # Search Panel
 
-The TreeList widget has a built-in feature that enables the users to search through the data. The Search Panel uses filtering under the hood to show only the relevant records in the TreeList.
+The TreeList component has a built-in feature that enables the users to search through the data. The Search Panel uses filtering under the hood to show only the relevant records in the TreeList.
 
 ## Getting Started
 

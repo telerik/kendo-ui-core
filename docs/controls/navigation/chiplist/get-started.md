@@ -1,14 +1,14 @@
 ---
 title: Getting Started
 page_title: jQuery ChipList Documentation - Getting Started with the ChipList
-description: "Get started with the jQuery ChipList by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery ChipList by Kendo UI and learn how to create, initialize, and enable the component."
 slug: getting_started_kendoui_chiplist_widget
 position: 2
 ---
 
 # Getting Started with the ChipList
 
-This guide demonstrates how to get up and running with the Kendo UI for jQuery ChipList. 
+This guide demonstrates how to get up and running with the Kendo UI for jQuery ChipList.
 
 After the completion of this guide, you will be able to achieve the following end result:
 
@@ -36,7 +36,7 @@ First, create a `<span>` element on the page where you will initialize the ChipL
 
 ## 2. Initialize the ChipList
 
-When you initialize the widget, all settings of the ChipList will be provided in the script statement. Describe the configuration and event handlers of the widget in JavaScript.
+When you initialize the component, all settings of the ChipList will be provided in the script statement. Describe the configuration and event handlers of the component in JavaScript.
 
 ```html
 <span id="chiplist"></span>
@@ -47,7 +47,7 @@ When you initialize the widget, all settings of the ChipList will be provided in
 </script>
 ```
 
-Once the basic initialization is completed, you can start adding additional configurations to the ChipList. 
+Once the basic initialization is completed, you can start adding additional configurations to the ChipList.
 
 ## 3. Add Items with Labels
 
@@ -84,12 +84,12 @@ Now you can use the [`items.icon`](/api/javascript/ui/chiplist/configuration/ite
     </script>
 ```
 
-## Next Steps 
+## Next Steps
 
-* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the ChipList](https://demos.telerik.com/kendo-ui/chiplist/index)
 
-## See Also 
+## See Also
 
 * [JavaScript API Reference of the ChipList](/api/javascript/ui/chiplist)
 * [Knowledge Base Section](/knowledge-base)

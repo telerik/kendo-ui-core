@@ -1,7 +1,7 @@
 ---
 title: Data Binding
 page_title: jQuery Scheduler Documentation - Data Binding
-description: "Get started with the jQuery Scheduler by Kendo UI and bind the widget to local data arrays or remote data services."
+description: "Get started with the jQuery Scheduler by Kendo UI and bind the component to local data arrays or remote data services."
 slug: databinding_kendoui_scheduler
 position: 2
 ---
@@ -46,7 +46,7 @@ You can bind the Scheduler to a remote service which will return, create, update
 
 > If the service you use resides in the same domain as your website, use JSON instead. For more information on cross-domain requests, refer to [this article]({% slug corsdatafetching_anotherdomain_datasourcecomponent %}).
 
-The following example demonstrates how to bind the widget to a remote service. Note how the fields of the event in the `schema.model` section are configured and mapped to the fields that are returned by the remote service by using the `from` option.
+The following example demonstrates how to bind the component to a remote service. Note how the fields of the event in the `schema.model` section are configured and mapped to the fields that are returned by the remote service by using the `from` option.
 
     $("#scheduler").kendoScheduler({
         date: new Date("2022/6/13"),
@@ -103,7 +103,7 @@ The following example demonstrates how to bind the widget to a remote service. N
 
 When you bind the Scheduler to a remote service:
 
-* Set the [`timezone`](/api/web/scheduler#configuration-timezone) option of the Scheduler. It is used to indicate to the widget in what timezone its events are created and stored on the server. If the timezone is not set, the Scheduler will use the current timezone. This means that users with different timezone settings will see different start and end times. Setting the timezone of the Scheduler will make the widget display the same start and end times regardless of the current user timezone. For more information, refer to the [article about timezones]({% slug timezones_kendoui_scheduler_widget %}).
+* Set the [`timezone`](/api/web/scheduler#configuration-timezone) option of the Scheduler. It is used to indicate to the component in what timezone its events are created and stored on the server. If the timezone is not set, the Scheduler will use the current timezone. This means that users with different timezone settings will see different start and end times. Setting the timezone of the Scheduler will make the component display the same start and end times regardless of the current user timezone. For more information, refer to the [article about timezones]({% slug timezones_kendoui_scheduler_widget %}).
 * Send the start and end date fields of the Scheduler event to the remote service in [UTC format](https://en.wikipedia.org/wiki/Coordinated_Universal_Time). The `parameterMap` option from the previous example implements the same functionality.
 
         parameterMap: function(options, operation) {

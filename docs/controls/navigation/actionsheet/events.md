@@ -1,7 +1,7 @@
 ---
 title: Events
 page_title: jQuery ActionSheet Documentation - Events
-description: "Get started with the jQuery ActionSheet by Kendo UI and learn how to handle the events of the widget."
+description: "Get started with the jQuery ActionSheet by Kendo UI and learn how to handle the events of the component."
 slug: events_actionsheet_widget
 position: 3
 ---
@@ -14,7 +14,7 @@ The Kendo UI ActionSheet exposes events which provide easy configuration or exte
 
 The `open` event fires when the ActionSheet is opened.
 
-The following example demonstrates how you can subscribe to the `open` event of the widget:
+The following example demonstrates how you can subscribe to the `open` event of the component:
 
 ```dojo
     <div id="actionsheet"></div>
@@ -66,7 +66,7 @@ The following example demonstrates how you can subscribe to the `open` event of 
 
 The `close` event fires when the ActionSheet is closed.
 
-The following example demonstrates how you can subscribe to the `open` event of the widget:
+The following example demonstrates how you can subscribe to the `open` event of the component:
 
 ```dojo
     <div id="actionsheet"></div>

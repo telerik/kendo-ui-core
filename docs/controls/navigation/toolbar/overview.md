@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery ToolBar Documentation - ToolBar Overview
-description: "Get started with the jQuery ToolBar by Kendo UI and learn how to initialize the widget and use its events."
+description: "Get started with the jQuery ToolBar by Kendo UI and learn how to initialize the component and use its events."
 slug: overview_kendoui_toolbar_widget
 relatedDocs: api-web-toolbar
 position: 1
@@ -88,7 +88,7 @@ The following example demonstrates how to initialize the ToolBar and apply its b
 
 ## Events
 
-The ToolBar widget exposes a set of [events](/api/javascript/ui/toolbar#events). For a runnable example, refer to the [demo on using the event of the ToolBar](https://demos.telerik.com/kendo-ui/toolbar/events).
+The ToolBar component exposes a set of [events](/api/javascript/ui/toolbar#events). For a runnable example, refer to the [demo on using the event of the ToolBar](https://demos.telerik.com/kendo-ui/toolbar/events).
 
     <div id="toolbar"></div>
 

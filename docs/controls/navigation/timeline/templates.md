@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: jQuery Timeline Documentation - Templates
-description: "Event templates in the Kendo UI jQuery Timeline widget allow you to customize the appearance of the cards."
+description: "Event templates in the Kendo UI jQuery Timeline component allow you to customize the appearance of the cards."
 slug: templates_kendoui_timeline_widget
 position: 5
 ---

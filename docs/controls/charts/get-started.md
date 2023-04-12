@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 page_title: jQuery Chart Documentation - Getting Started with the Chart
-description: "Get started with the jQuery Chart by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Chart by Kendo UI and learn how to create, initialize, and enable the component."
 slug: getting_started_kendoui_chart_widget
 position: 1
 ---
@@ -56,13 +56,13 @@ After the completion of this guide, you will be able to achieve the following en
 
 ## 1. Create a div Element
 
-First, create an empty `<div>` element that you will use to initialize the widget.
+First, create an empty `<div>` element that you will use to initialize the component.
 
 ```html
 <div id="chart"></div>
 ```
 
-## 2. Initialize the Chart 
+## 2. Initialize the Chart
 
 In this step, you will initialize the Chart from the `<div>` element.
 
@@ -78,7 +78,7 @@ In this step, you will initialize the Chart from the `<div>` element.
 
 Once the basic initialization is completed, you can start adding additional configurations to the Chart. The first and most important configuration is the [`series`](/api/javascript/dataviz/ui/chart/configuration/series).
 
-You can combine several different [Chart types]({% slug overview_charttypes_charts %}) by configuring multiple [`series.types`](/api/javascript/dataviz/ui/chart/configuration/series.type) in the same widget configuration.
+You can combine several different [Chart types]({% slug overview_charttypes_charts %}) by configuring multiple [`series.types`](/api/javascript/dataviz/ui/chart/configuration/series.type) in the same component configuration.
 
 ```html
     <div id="chart"></div>
@@ -294,9 +294,9 @@ The Chart [`tooltip`](/api/javascript/dataviz/ui/chart/configuration/tooltip#too
     </script>
 ```
 
-## Next Steps 
+## Next Steps
 
-* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the Chart](https://demos.telerik.com/kendo-ui/chart/index)
 
 ## See Also 

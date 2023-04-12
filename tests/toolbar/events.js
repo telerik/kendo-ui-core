@@ -198,13 +198,14 @@
             click(button);
         });
 
-        it("click on toggleButton triggers toggle event", function() {
+        it("click on toggleButton triggers toggle event", function(done) {
             container.kendoToolBar({
                 items: [
                     { type: "button", togglable: true, id: "foo", text: "foo" }
                 ],
                 toggle: function(e) {
                     assert.isOk(true, "Toggle event is clicked");
+                    done();
                 }
             });
 
@@ -213,7 +214,7 @@
             click(button);
         });
 
-        it("click on toggleButton triggers toggle event (button level)", function() {
+        it("click on toggleButton triggers toggle event (button level)", function(done) {
             container.kendoToolBar({
                 items: [
                     {
@@ -223,12 +224,35 @@
                         text: "foo",
                         toggle: function(e) {
                             assert.isOk(true, "Toggle event is clicked");
+                            done();
                         }
                     }
                 ]
             });
 
             var button = container.find("#foo");
+
+            click(button);
+        });
+
+        it("click on toggleButton in overflow menu triggers toggle event (button level)", function(done) {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "button",
+                        togglable: true,
+                        id: "foo",
+                        text: "foo",
+                        overflow: "always",
+                        toggle: function(e) {
+                            assert.isOk(true, "Toggle event is clicked");
+                            done();
+                        }
+                    }
+                ]
+            }).getKendoToolBar();
+
+            var button = toolbar.overflowMenu.element.find("#foo_overflow");
 
             click(button);
         });

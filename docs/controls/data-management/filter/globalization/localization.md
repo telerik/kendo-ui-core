@@ -77,7 +77,7 @@ To localize the messages, set the desired strings in the [`messages`](/api/javas
                 ]
             }
         }).data("kendoFilter").applyFilter();
-        // Chain the method call to immediately apply filtering after the widget initialization because an initial filter is set.
+        // Chain the method call to immediately apply filtering after the component initialization because an initial filter is set.
 
         $("#listView").kendoListView({
             dataSource: dataSource,

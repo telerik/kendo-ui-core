@@ -14,7 +14,7 @@ To define a ToggleButton, set the `togglable` property of the button to `true`. 
 
 > Clicking a ToggleButton triggers the `toggle` event but does not trigger the `click` event.
 
-The following example demonstrates how to define a ToggleButton in the ToolBar widget.
+The following example demonstrates how to define a ToggleButton in the ToolBar component.
 
     <div id="toolbar"></div>
 

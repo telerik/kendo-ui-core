@@ -6,9 +6,9 @@ slug: appearance_floatingactionbutton_widget
 position: 3
 ---
 
-# Appearance 
+# Appearance
 
-> As of Kendo UI R1 2022, the FloatingActionButton widget uses brand new rendering.
+> As of Kendo UI R1 2022, the FloatingActionButton component uses brand new rendering.
 
 In this article, you will find information about the new rendering of the Kendo UI FloatingActionButton.
 
@@ -38,7 +38,7 @@ The following values are available for the [`size`](/api/javascript/ui/floatinga
 - `lg`—large size
 - `none`—unset
 
-The following example demonstrates how to configure the `size` of the component through the widget configuration:
+The following example demonstrates how to configure the `size` of the component through the component configuration:
 
 ```dojo
 <button id="fab"></button>
@@ -60,9 +60,9 @@ The default size value is `medium` and it is applied to the wrapping span elemen
 
 The `fillMode` option controls the way the color is applied to the rendered FloatingActionButton. The structure of the class is `k-fab-{fillMode}`.
 
-You can set the [`fillMode`](/api/javascript/ui/floatingactionbutton/configuration/fillmode) either to `solid` or to *null*. 
+You can set the [`fillMode`](/api/javascript/ui/floatingactionbutton/configuration/fillmode) either to `solid` or to *null*.
 
-The following example demonstrates how to configure the `fillMode` of the component through the widget configuration:
+The following example demonstrates how to configure the `fillMode` of the component through the component configuration:
 
 ```dojo
 <input id="fab" />
@@ -86,15 +86,15 @@ The `themeColor` option controls the color that will be applied to the rendered 
 
 The following values are available for the [`themeColor`](/api/javascript/ui/floatingactionbutton/configuration/themecolor) option:
 
-- `primary` 
-- `secondary` 
-- `tertiary` 
-- `info` 
-- `success` 
-- `warning` 
-- `error` 
+- `primary`
+- `secondary`
+- `tertiary`
+- `info`
+- `success`
+- `warning`
+- `error`
 - `dark`
-- `light` 
+- `light`
 - `inverse`
 - `none`
 
@@ -126,7 +126,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/floati
 - `full`—largest border radius
 - `none`—unset
 
-The example below demonstrates how to configure the `rounded` of the component through the widget configuration:
+The example below demonstrates how to configure the `rounded` of the component through the component configuration:
 
 ```dojo
 <input id="fab" />
@@ -146,7 +146,7 @@ The default rounded value is `full` and it is applied to the button element thro
 
 ## Old vs New Rendering
 
-- Previously the `themeColor` of the FloatingActionButton was applied using the `k-fab-{themeColor}` class. 
+- Previously the `themeColor` of the FloatingActionButton was applied using the `k-fab-{themeColor}` class.
 
 ```html
  <!-- OLD -->
@@ -156,7 +156,7 @@ The default rounded value is `full` and it is applied to the button element thro
 </button>
 ```
 
-- Currently, the `themeColor` is applied using the `k-fab-{fillMode}-{themeColor}` class. Additionally, classes for `fillMode` and `rounded` are applied to the button element. 
+- Currently, the `themeColor` is applied using the `k-fab-{fillMode}-{themeColor}` class. Additionally, classes for `fillMode` and `rounded` are applied to the button element.
 
 ```html
 <!-- NEW -->

@@ -8,20 +8,20 @@ position: 5
 
 # Paging
 
-By default, the paging functionality of the ListView is disabled. 
+By default, the paging functionality of the ListView is disabled.
 
-To enable it, use either of the following approaches: 
+To enable it, use either of the following approaches:
 
 * (Available as of the R3 2021 release) Use the built-in paging functionality by setting the [`pageable`](/api/javascript/ui/listview/configuration/pageable) property.
-* Use the [Kendo UI Pager](/controls/data-management/pager/overview) widget.
+* Use the [Kendo UI Pager](/controls/data-management/pager/overview) component.
 
 ## Using the Built-in Paging Functionality
 
-Enabling the built-in paging renders the Pager as part of the ListView widget.
+Enabling the built-in paging renders the Pager as part of the ListView component.
 
 To enable paging, set [`pageable`](/api/javascript/ui/listview/configuration/pageable) to `true`. For more information about the `pageable` properties, refer to the [API documentation](/api/javascript/ui/listview/configuration/pageable#related-properties).
 
-The following example demonstrates how to implement the suggested approach. 
+The following example demonstrates how to implement the suggested approach.
 
 ```dojo
 <div id="listView"></div>
@@ -58,9 +58,9 @@ The following example demonstrates how to implement the suggested approach.
 </script>
 ```
 
-## Integrating the Pager Widget
+## Integrating the Pager Component
 
-Using the Pager renders the widget as a separate element from the ListView.
+Using the Pager renders the component as a separate element from the ListView.
 
 To enable paging, instantiate a separate Pager control and bind it to the same DataSource.
 
@@ -91,7 +91,7 @@ To enable paging, instantiate a separate Pager control and bind it to the same D
 
 ## Advanced Configuration
 
-When you use the Pager widget and when the number of items, which are bound to a ListView, is larger than expected, the displayed items will be controlled by the `pager` setting.
+When you use the Pager component and when the number of items, which are bound to a ListView, is larger than expected, the displayed items will be controlled by the `pager` setting.
 
 1. Create a target element for rendering the `pager`. It is typically placed near the ListView.
 
@@ -108,7 +108,7 @@ When you use the Pager widget and when the number of items, which are bound to a
             </div>
         </script>
 
-1. Update the ListView configuration through its `pageable` property to state that the widget supports paging and to initialize the `pager`.
+1. Update the ListView configuration through its `pageable` property to state that the component supports paging and to initialize the `pager`.
 
         var dataSource = new kendo.data.DataSource({
             transport: {

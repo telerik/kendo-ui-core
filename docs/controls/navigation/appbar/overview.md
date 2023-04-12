@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery AppBar Documentation - AppBar Overview
-description: "Get started with the jQuery AppBar by Kendo UI and learn how to initialize the widget."
+description: "Get started with the jQuery AppBar by Kendo UI and learn how to initialize the component."
 slug: overview_kendoui_appbar_widget
 position: 1
 CTAControlName: AppBar
@@ -9,7 +9,7 @@ CTAControlName: AppBar
 
 # {{ site.product }} AppBar Overview
 
-The AppBar widget is used mainly for navigation. At the same time, it is template-driven, which makes it very flexible - it can render whatever you throw at it. To take full advantage of its functionality, you can include various [Content Items]({% slug items_kendoui_appbar_widget %}) in the AppBar widget, for example:
+The AppBar component is used mainly for navigation. At the same time, it is template-driven, which makes it very flexible - it can render whatever you throw at it. To take full advantage of its functionality, you can include various [Content Items]({% slug items_kendoui_appbar_widget %}) in the AppBar component, for example:
 * Titles
 * Icons
 * Actions (like redirect buttons)
@@ -22,7 +22,7 @@ Visit the [AppBar demo page](https://demos.telerik.com/kendo-ui/appbar/index) to
 
 ## Initializing the AppBar
 
-It is recommended to initialize the widget from a div HTML element.
+It is recommended to initialize the component from a div HTML element.
 
 The following example demonstrates how to initialize the AppBar from an existing `<div>` element.
 

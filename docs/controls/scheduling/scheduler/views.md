@@ -1,7 +1,7 @@
 ---
 title: Views
 page_title: jQuery Scheduler Documentation - Views
-description: "Get started with the jQuery Scheduler by Kendo UI and learn how to use the default views and create custom views in the widget."
+description: "Get started with the jQuery Scheduler by Kendo UI and learn how to use the default views and create custom views in the component."
 previous_url: /controls/scheduling/scheduler/how-to/howto-scheduler-customview-overview, /controls/scheduling/scheduler/how-to/custom-views/overview, /controls/scheduling/scheduler/custom-views
 slug: howto_scheduler_customview_overview
 position: 3

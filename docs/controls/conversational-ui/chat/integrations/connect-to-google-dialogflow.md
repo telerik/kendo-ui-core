@@ -1,16 +1,16 @@
 ---
 title: Google DialogFlow
 page_title: jQuery Chat Documentation - Google DialogFlow
-description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat widget to the Google DialogFlow."
+description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat component to the Google DialogFlow."
 previous_url: /controls/conversational-ui/chat/connect-to-google-dialogflow
 slug: connect_to_google_dialogflow
 ---
 
 # Google DialogFlow
 
-You can configure a [Chat `agent` class]({% slug connect_to_chatbot_service %}) that handles the communication between the [Chat](https://demos.telerik.com/kendo-ui/chat/index) widget and the [Google DialogFlow](https://dialogflow.com/).
+You can configure a [Chat `agent` class]({% slug connect_to_chatbot_service %}) that handles the communication between the [Chat](https://demos.telerik.com/kendo-ui/chat/index) component and the [Google DialogFlow](https://dialogflow.com/).
 
-In this case, the `postMessage` method of the agent class implements the logic that will be executed on user interaction. When the `textRequest()` promise of the DialogFlowClient is resolved, the `onResponse()` method of the agent is executed. It then passes the received data to the `renderMessages()` method that renders the response in the Chat widget.
+In this case, the `postMessage` method of the agent class implements the logic that will be executed on user interaction. When the `textRequest()` promise of the DialogFlowClient is resolved, the `onResponse()` method of the agent is executed. It then passes the received data to the `renderMessages()` method that renders the response in the Chat component.
 
 ```dojo
 <div id="chat"></div>

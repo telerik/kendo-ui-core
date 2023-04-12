@@ -24,9 +24,14 @@ The following example demonstrates how to set `row` and `altRow` templates by us
           #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
               <span class="k-icon k-i-none"></span>
           #}#
-          #if(data.hasChildren){#
-              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-          #}#
+          # if (data.hasChildren) { #
+              # if(data.model.expanded) { #
+                    #= kendo.ui.icon("caret-alt-down") #
+              # }
+              else { #
+                     #= kendo.ui.icon("caret-alt-right") #
+              # } #
+          # } #
       </td>
        <td colspan="2">
               <span style='color:green;'>#:data.model.lastName #</span>
@@ -43,10 +48,15 @@ The following example demonstrates how to set `row` and `altRow` templates by us
           #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
               <span class="k-icon k-i-none"></span>
           #}#
-          #if(data.hasChildren){#
-              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-          #}#
-              </td>
+          # if (data.hasChildren) { #
+               # if(data.model.expanded) { #
+                     #= kendo.ui.icon("caret-alt-down") #
+               # }
+               else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+               # } #
+          # } #
+       </td>
        <td colspan="2">
               <span style='color:blue;'>#:data.model.lastName #</span>
       </td>
@@ -83,9 +93,14 @@ Implement the templates in the script tags by using the [`data.model`](/api/java
           #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
               <span class="k-icon k-i-none"></span>
           #}#
-          #if(data.hasChildren){#
-              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-          #}#
+          # if (data.hasChildren) { #
+              # if(data.model.expanded) { #
+                    #= kendo.ui.icon("caret-alt-down") #
+              # }
+              else { #
+                     #= kendo.ui.icon("caret-alt-right") #
+              # } #
+          # } #
       </td>
        <td colspan="2">
             <span style='color:green;'>#:data.model.lastName #</span>
@@ -98,14 +113,19 @@ Implement the templates in the script tags by using the [`data.model`](/api/java
 
 <script id="altRowTemplate" type="text/x-kendo-template">
   <tr data-uid="#= data.model.uid #" class="k-alt">
-      <td colspan="2">
+       <td colspan="2">
           #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
               <span class="k-icon k-i-none"></span>
           #}#
-          #if(data.hasChildren){#
-              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-          #}#
-              </td>
+          # if (data.hasChildren) { #
+              # if(data.model.expanded) { #
+                    #= kendo.ui.icon("caret-alt-down") #
+              # }
+              else { #
+                     #= kendo.ui.icon("caret-alt-right") #
+              # } #
+          # } #
+       </td>
        <td colspan="2">
             <span style='color:blue;'>#:data.model.lastName #</span>
       </td>

@@ -1,7 +1,7 @@
 ---
 title: Actions
 page_title: jQuery Timeline Documentation - Actions
-description: "Action links in the Kendo UI jQuery Timeline widget allow you to provide extra details to the users."
+description: "Action links in the Kendo UI jQuery Timeline component allow you to provide extra details to the users."
 slug: actions_kendoui_timeline_widget
 position: 3
 ---

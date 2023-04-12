@@ -894,7 +894,7 @@ Specifies the url of the menu button to navigate to.
 
 ### items.overflow `String` *(default: "auto")*
 
-Specifies how the button behaves when the ToolBar is resized. Possible values are: "always", "never" or "auto" (default).
+Specifies how the button, or the template behaves when the ToolBar is resized. Possible values are: "always", "never" or "auto" (default). If the items contains a `template` and overflow is set to `always`, the template will never be rendered. If the item contains an `overflowTemplate` nad the overflow is set to `never`, the overflowTemplate will never be rendered.
 
 #### Example
 

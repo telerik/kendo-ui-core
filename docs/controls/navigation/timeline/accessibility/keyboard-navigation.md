@@ -10,10 +10,12 @@ position: 2
 
 The keyboard navigation of the TimeLine is always available.
 
-In Vertical mode when the TimeLine is focused, the first card gets focused. In Horizontal mode when the TimeLine is focused, the timeline scrollable wrap element gets focused. For a complete example, refer to the [demo on keyboard navigation of the TimeLine](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation).
+In its vertical mode when the TimeLine is focused, the first card gets focused. In its horizontal mode when the TimeLine is focused, the timeline scrollable `wrap` element gets focused.
 
-#### Focusing the widget with the ALT+W key combination in Horizontal mode
-The demo showcases how to focus the widget when the Vertical mode is used. In order to focus the widget with the ALT+W key combination in Horizontal mode, you should use the ".k-timeline-scrollable-wrap" class as a selector.
+For a complete example, refer to the [demo on keyboard navigation of the TimeLine](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation) showing how to focus the component when in the vertical mode.
+
+To focus the component with the `ALT` + `W` key combination when in its horizontal mode, use the `.k-timeline-scrollable-wrap` class as a selector.
+
 ```javascript
 $(document.body).keydown(function (e) {
     if (e.altKey && e.keyCode == 87) {
@@ -22,26 +24,26 @@ $(document.body).keydown(function (e) {
 });
 ```
 
-Kendo UI TimeLine supports the following keyboard shortcuts in **Vertical mode**:
+In vertical mode, the Kendo UI for jQuery TimeLine supports the following keyboard shortcuts:
 
-| SHORTCUT						| DESCRIPTION				                                                        |
-|:---                 |:---                                                                                |
-| `Tab`              | Focus the next card.                                                            |
-| `Shift + Tab`              | Focus the previous card.                                                             |
-| `Space`              | Toggle the expand/collapse state of the item.                                                             |
-| `Enter`              | Toggle the expand/collapse state of the item.                                                             |
+| SHORTCUT						| DESCRIPTION				       
+|:---                 |:---                      
+| `Tab`               | Focuses the next card.   
+| `Shift + Tab`       | Focuses the previous card.
+| `Space`             | Toggles the expand and collapse state of the item.                                            
+| `Enter`             | Toggles the expand and collapse state of the item.
 
-Kendo UI TimeLine supports the following keyboard shortcuts in **Horizontal mode**:
+In horizontal mode, the Kendo UI for jQuery TimeLine supports the following keyboard shortcuts:
 
-| SHORTCUT						| DESCRIPTION				                                                        |
-|:---                 |:---                                                                                |
-| `Enter`              | Selects the current event.                                                             |
-| `Space`              | Selects the current event.                                                              |
-| `Left Arrow`              | Focuses the previous date.                                                             |
-| `Right Arrow`              | Focuses the next date.                                                             |
+| SHORTCUT						| DESCRIPTION
+|:---                 |:---         
+| `Enter`             | Selects the current event.
+| `Space`             | Selects the current event.
+| `Left Arrow`        | Focuses the previous date.
+| `Right Arrow`       | Focuses the next date.   
 
 ## See Also
 
-* [Keyboard Navigation by the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation)
+* [Keyboard Navigation by the Kendo UI for jQuery TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in the TimeLine]({% slug accessibility_timeline_jquery %})

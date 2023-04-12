@@ -17,7 +17,7 @@ To provide better customer experience, the Chat offers support for predefined an
 
 ## Default Cards
 
-The Chat supports the `heroCards` option which can be displayed in the chat flow by manually calling the [`renderAttachments`](/api/javascript/ui/chat/methods/renderattachments) method of the widget.
+The Chat supports the `heroCards` option which can be displayed in the chat flow by manually calling the [`renderAttachments`](/api/javascript/ui/chat/methods/renderattachments) method of the component.
 
 ```dojo
 <div id="chat"></div>
@@ -69,7 +69,7 @@ You can also add images to the `heroCard` setting by passing the proper values t
 
 ## Suggested Actions
 
-The Chat also supports the implementation of suggested actions. To display the `suggestedActions` prompt, manually call the [`renderSuggestedActions`](/api/javascript/ui/chat/methods/rendersuggestedactions) method of the widget.
+The Chat also supports the implementation of suggested actions. To display the `suggestedActions` prompt, manually call the [`renderSuggestedActions`](/api/javascript/ui/chat/methods/rendersuggestedactions) method of the component.
 
 ```dojo
 <div id="chat"></div>
@@ -166,7 +166,7 @@ The following example demonstrates how to place a [Kendo UI Calendar]({% slug ov
 	  // Create a <div> from which the Calendar will be initialized.
 	  var calendarElement = $('<div>');
 
-	  // Initialize the Calendar widget by passing the provided value.
+	  // Initialize the Calendar component by passing the provided value.
 	  calendarElement.kendoCalendar({
 		value: options.value,
 		// Implement the logic that will be executed

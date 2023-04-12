@@ -1,14 +1,14 @@
 ---
 title: Getting Started
 page_title: jQuery Chip Documentation - Getting Started with the Chip
-description: "Get started with the jQuery Chip by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Chip by Kendo UI and learn how to create, initialize, and enable the component."
 slug: getting_started_kendoui_chip_widget
 position: 2
 ---
 
 # Getting Started with the Chip
 
-This guide demonstrates how to get up and running with the Kendo UI for jQuery Chip. 
+This guide demonstrates how to get up and running with the Kendo UI for jQuery Chip.
 
 After the completion of this guide, you will be able to achieve the following end result:
 
@@ -25,7 +25,7 @@ After the completion of this guide, you will be able to achieve the following en
 
 ## 1. Create a Select Element
 
-First, create a `<span>` element on the page where you will initialize the Chip widget.
+First, create a `<span>` element on the page where you will initialize the Chip component.
 
 ```html
 <span id="chip"></span>
@@ -33,7 +33,7 @@ First, create a `<span>` element on the page where you will initialize the Chip 
 
 ## 2. Initialize the Chip
 
-When you initialize the widget, all settings of the Chip will be provided in the script statement. Describe the configuration and event handlers of the widget in JavaScript.
+When you initialize the component, all settings of the Chip will be provided in the script statement. Describe the configuration and event handlers of the component in JavaScript.
 
 ```html
 <span id="chip"></span>
@@ -44,7 +44,7 @@ When you initialize the widget, all settings of the Chip will be provided in the
 </script>
 ```
 
-Once the basic initialization is completed, you can start adding additional configurations to the Chip. 
+Once the basic initialization is completed, you can start adding additional configurations to the Chip.
 
 ## 3. Add an Icon
 
@@ -75,12 +75,12 @@ Now you can use the [`label`](/api/javascript/ui/chip/configuration/label) optio
 	</script>
 ```
 
-## Next Steps 
+## Next Steps
 
-* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the Chip](https://demos.telerik.com/kendo-ui/chip/index)
 
-## See Also 
+## See Also
 
 * [JavaScript API Reference of the Chip](/api/javascript/ui/chip)
 * [Knowledge Base Section](/knowledge-base)

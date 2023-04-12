@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Sortable Documentation - Sortable Overview
-description: "Get started with the jQuery Sortable by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Sortable by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_sortable_widget
 position: 1
 ---
@@ -10,7 +10,7 @@ position: 1
 
 The Sortable provides a sortable drag-and-drop functionality to elements within a list.
 
-The Sortable does not support integration with the Kendo UI TreeList widget.
+The Sortable does not support integration with the Kendo UI TreeList component.
 
 * [Demo page for the Sortable](https://demos.telerik.com/kendo-ui/sortable/index)
 
@@ -38,7 +38,7 @@ The following example demonstrates how to initialize Sortable by using jQuery pl
 * [Items]({% slug items_kendoui_sortable %})
 * [Cursor]({% slug cursor_kendoui_sortable %})
 * [Placeholder]({% slug placeholder_kendoui_sortable %})
-* [Integration with other Kendo UI widgets]({% slug integrationwith_grid_sortable %})
+* [Integration with other Kendo UI components]({% slug integrationwith_grid_sortable %})
 * [Common Scenarios]({% slug scenarios_kendoui_sortable %})
 
 ## See Also

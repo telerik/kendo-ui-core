@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Gantt Documentation - Gantt Overview
-description: "Get started with the jQuery Gantt by Kendo UI and learn how to initialize the widget and use its events."
+description: "Get started with the jQuery Gantt by Kendo UI and learn how to initialize the component and use its events."
 slug: overview_kendoui_gantt_widget
 position: 1
 ---
@@ -21,7 +21,7 @@ The `kendo.data.GanttTask` object provides the following fields:
 * `end Date`&mdash;The date at which the task ends.
 * Expanded `Boolean`&mdash;Indicates if the task will be expanded.
 * `id Number`&mdash;The unique identifier of the Gantt task. Tasks, whose `id` is not set, are considered as `"new"`.
-* `orderId Number`&mdash;The index of the task. The orderId values should be unique and consecutive. 
+* `orderId Number`&mdash;The index of the task. The orderId values should be unique and consecutive.
 * `parentId Number`The unique identifier of the parent task. Tasks, whose `parentId` is not set or null, are considered as `"root-level"`.
 * `percentComplete Number`&mdash;The percentage of the task completion.
 * `start Date`&mdash;The date at which the task starts.
@@ -164,9 +164,9 @@ The Gantt exposes a set of [methods](/api/web/gantt#methods) and [fields](/api/w
     gantt.view("week"); // Go to the week view.
     </script>
 
-The Gantt also supports a set of [events](/api/web/gantt#events) to which you can subscribe. To handle the events, eiter specify the JavaScript function which will handle the event during the widget initialization, or use the `bind` method of the widget.
+The Gantt also supports a set of [events](/api/web/gantt#events) to which you can subscribe. To handle the events, eiter specify the JavaScript function which will handle the event during the component initialization, or use the `bind` method of the component.
 
-The event handler is the JavaScript function that is invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event specific data. To get the widget reference which fired the event, use the `sender` field of the event argument. The function context of the event handler that is available through the `this` keyword is set to the instance of the widget which fired the event.
+The event handler is the JavaScript function that is invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event specific data. To get the component reference which fired the event, use the `sender` field of the event argument. The function context of the event handler that is available through the `this` keyword is set to the instance of the component which fired the event.
 
 The following example demonstrates how to subscribe to a Gantt event during initialization.
 

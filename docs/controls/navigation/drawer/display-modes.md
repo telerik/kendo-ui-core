@@ -16,9 +16,9 @@ The overlay mode is not associated with any content. The Drawer appears on top o
 
 ## Push Mode
 
-The push mode is associated with specific page content and the element from which the widget is initialized has to wrap that content. When the drawer opens it will push that content to the side. It is designed for wider screens (desktop or tablet). To show the Drawer, either swipe or drag with mouse, or call the [`show()`](/api/javascript/ui/drawer/methods/show) method of the Drawer. The Drawer closes on click or tap of any of the options or on the associated content.
+The push mode is associated with specific page content and the element from which the component is initialized has to wrap that content. When the drawer opens it will push that content to the side. It is designed for wider screens (desktop or tablet). To show the Drawer, either swipe or drag with mouse, or call the [`show()`](/api/javascript/ui/drawer/methods/show) method of the Drawer. The Drawer closes on click or tap of any of the options or on the associated content.
 
-The height of the Drawer is determined by the higher content of the template of the widget or of the wrapped content with which it is associated. You can use the [`minHeight`](/api/javascript/ui/drawer/configuration/minheight) setting to prevent the content from changing its height as the user toggles the drawer options.
+The height of the Drawer is determined by the higher content of the template of the component or of the wrapped content with which it is associated. You can use the [`minHeight`](/api/javascript/ui/drawer/configuration/minheight) setting to prevent the content from changing its height as the user toggles the drawer options.
 
 ## Mini Mode
 

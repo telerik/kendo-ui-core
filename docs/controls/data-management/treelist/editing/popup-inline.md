@@ -1,7 +1,7 @@
 ---
 title: Popup and Inline
 page_title: jQuery TreeList Documentation - Popup and Inline Editing
-description: "Get started with the jQuery TreeList by Kendo UI and set the widget in popup or inline edit mode."
+description: "Get started with the jQuery TreeList by Kendo UI and set the component in popup or inline edit mode."
 slug: popupinlineeditmode_kendoui_treelist
 position: 2
 ---

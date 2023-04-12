@@ -10,7 +10,7 @@ position: 2
 
 The keyboard navigation of the Wizard is always available.
 
-The Wizard widget itself is not focusable, as the links within the widget are part of the tab sequence on the page. Thus, when navigating with the Tab key, the selected Step will be focused within the Wizard widget. For a complete example, refer to the [demo on keyboard navigation of the Wizard](https://demos.telerik.com/kendo-ui/wizard/keyboard-navigation).
+The Wizard component itself is not focusable, as the links within the component are part of the tab sequence on the page. Thus, when navigating with the Tab key, the selected Step will be focused within the Wizard component. For a complete example, refer to the [demo on keyboard navigation of the Wizard](https://demos.telerik.com/kendo-ui/wizard/keyboard-navigation).
 
 Kendo UI Wizard supports the following keyboard shortcuts:
 

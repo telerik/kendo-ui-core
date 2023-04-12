@@ -1,18 +1,18 @@
 ---
 title: Binding to a Shared DataSource
 page_title: jQuery Timeline Documentation - Shared DataSource Binding
-description: "Learn how to bind the the Kendo UI jQuery Timeline widget to a shared data source."
+description: "Learn how to bind the the Kendo UI jQuery Timeline component to a shared data source."
 slug: shared_datasource_kendoui_timeline_widget
 position: 6
 ---
 
 # Binding to a Shared DataSource
 
-The Kendo UI Timeline could be bound to a shared data source. Whenever a change external to the Kendo UI Timeline is present, the widget's data source and UI will be automatically updated.
+The Kendo UI Timeline could be bound to a shared data source. Whenever a change external to the Kendo UI Timeline is present, the component's data source and UI will be automatically updated.
 
 For a runnable example, refer to the [demo on binding to a shared data source](https://demos.telerik.com/kendo-ui/timeline/shared-datasource).
 
-The following example demonstrates how to bind two Kendo UI widgets to the same data source. Changes done from one of the widgets is automatically reflected in the data source and UI of the other widget.
+The following example demonstrates how to bind two Kendo UI components to the same data source. Changes done from one of the components is automatically reflected in the data source and UI of the other component.
 
 ```
 <div id="timeline"></div>

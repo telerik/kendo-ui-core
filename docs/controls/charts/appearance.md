@@ -9,7 +9,7 @@ position: 4
 
 # Appearance
 
-Unlike other Kendo UI widgets which use only CSS for styling, you can mainly control the appearance of the Chart elements by using JavaScript style options.
+Unlike other Kendo UI components which use only CSS for styling, you can mainly control the appearance of the Chart elements by using JavaScript style options.
 
 For more information on the structure of the Chart, refer to the articles on the [Chart building elements]({% slug seriestypeofcharts_widget %}).   
 
@@ -17,7 +17,7 @@ For more information on the structure of the Chart, refer to the articles on the
 
 The Charts come with [a set of predefined themes]({% slug themesandappearnce_kendoui_desktopwidgets %}). To select a theme, use the `theme` option. The theme name is case-insensitive.
 
-> As of the Kendo UI R2 2015 (2015.2.624) release, [all CSS code related to the rendering of data visualization widgets (Gauges, Charts, Barcodes, Diagrams, and Maps) is now moved to the CSS files of the widgets]({% slug breakingchanges2015_kendoui %}). As a result, you need to remove all legacy references to `kendo.dataviz.css` and `kendo.dataviz.[theme].css`.
+> As of the Kendo UI R2 2015 (2015.2.624) release, [all CSS code related to the rendering of data visualization components (Gauges, Charts, Barcodes, Diagrams, and Maps) is now moved to the CSS files of the components]({% slug breakingchanges2015_kendoui %}). As a result, you need to remove all legacy references to `kendo.dataviz.css` and `kendo.dataviz.[theme].css`.
 
 ```dojo
     <div id="chart"></div>

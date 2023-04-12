@@ -1,16 +1,16 @@
 ---
 title: Comparison
 page_title: jQuery PivotGridV2 Documentation - Comparison
-description: "Learn about the differences between the old and the new version of the Kendo UI PivotGrid widget."
+description: "Learn about the differences between the old and the new version of the Kendo UI PivotGrid component."
 slug: comparison_kendoui_pivotgridv2
 position: 2
 ---
 
 # Comparison
 
-As of the November 2021 release, Kendo UI introduces the brand new PivotGridV2 which aims to replace the old Kendo UI PivotGrid. In this article you will learn about the major differences between the two widgets and what to expect in the future.
+As of the November 2021 release, Kendo UI introduces the brand new PivotGridV2 which aims to replace the old Kendo UI PivotGrid. In this article you will learn about the major differences between the two components and what to expect in the future.
 
-- [Why Do Two PivotGrid Widgets Exist?](#why-do-two-pivotgrid-widgets-exist)
+- [Why Do Two PivotGrid Components Exist?](#why-do-two-pivotgrid-components-exist)
 - [What Can I Expect from the New PivotGridV2?](#what-can-i-expect-from-the-new-pivotgridv2)
     - [New Engine](#new-engine)
     - [Performance](#performance)
@@ -18,9 +18,9 @@ As of the November 2021 release, Kendo UI introduces the brand new PivotGridV2 w
     - [Customization](#customization)
 - [Summary](#summary)
 
-## Why Do Two PivotGrid Widgets Exist?
+## Why Do Two PivotGrid Components Exist?
 
-There are many developers who use and depend on the PivotGrid. Making any drastic changes to the source code of the old widget would undoubtedly interfere with their work. That is why the decision to introduce a second widget, was taken.
+There are many developers who use and depend on the PivotGrid. Making any drastic changes to the source code of the old component would undoubtedly interfere with their work. That is why the decision to introduce a second component, was taken.
 
 Тhe old and new versions of the PivotGrid can coexist. The old PivotGrid will not disappear with the upcoming release. This allows developers to smoothly transition to the new version without rushing their projects.
 
@@ -34,11 +34,11 @@ The engine for the new PivotGridV2 is a cross-team development effort, meaning t
 
 ### Performance
 
-Performance is another important aspect that is improved in the new PivotGridV2. Merging newly requested data on top of the already present data in the widget, will be much faster.
+Performance is another important aspect that is improved in the new PivotGridV2. Merging newly requested data on top of the already present data in the component, will be much faster.
 
 ### Design
 
-The new PivotGridV2 has a brand new design and some additional basic UX functionalities such as hiding the [`configurator`]({% slug overview_kendoui_pivotconfiguratorv2 %}) when it is not in use. This approach will provide the end user with much better experience when working with the widget.
+The new PivotGridV2 has a brand new design and some additional basic UX functionalities such as hiding the [`configurator`]({% slug overview_kendoui_pivotconfiguratorv2 %}) when it is not in use. This approach will provide the end user with much better experience when working with the component.
 
 ### Customization
 
@@ -51,7 +51,7 @@ Developers are encouraged to use the PivotGridV2 when starting new projects.
 Here's a quick summary to outline the benefits of the new PivotGridV2:
 
 - Brand-new engine which allows for quicker implementation of features and quicker bugfixes.
-- Improved performance of the entire widget.
+- Improved performance of the entire component.
 - Brand new design.
 - Easier to customize compared to the old PivotGrid.
 - Improved API as new features are implemented.

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Map Documentation - Map Overview
-description: "Get started with the jQuery Map by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery Map by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_mapwidget
 position: 1
 ---

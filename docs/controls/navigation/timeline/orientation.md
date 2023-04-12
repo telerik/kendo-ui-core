@@ -1,7 +1,7 @@
 ---
 title: Orientation
 page_title: jQuery Timeline Documentation - Orientation
-description: "See how to control the orientation of the Timeline widget for jQuery by Kendo UI."
+description: "See how to control the orientation of the Timeline component for jQuery by Kendo UI."
 slug: orientation_kendoui_timeline_widget
 position: 2
 ---
@@ -21,7 +21,7 @@ You can have the events render alternatingly on both sides of the axis by settin
 <script>
     $(document).ready(function () {
         $("#timeline").kendoTimeline({
-            orientation: "vertical", // Define the layout of the widget.
+            orientation: "vertical", // Define the layout of the component.
             alterMode: true, // Render the events on both sides of the axis in the vertical mode.
             collapsibleEvents: true, // Start all collapsed events in the vertical mode.
             dataSource: {
@@ -39,7 +39,7 @@ You can have the events render alternatingly on both sides of the axis by settin
         });
     });
 
-    // The literals in this example use the default field names the widget takes.
+    // The literals in this example use the default field names the component takes.
     var eventsData = [
         {
             description: "First event description.",
@@ -111,7 +111,7 @@ The horizontal mode does not support alternating rendering and collapsing of eve
 <script>
     $(document).ready(function () {
         $("#timeline").kendoTimeline({
-            orientation: "horizontal", // Defined the layout of the widget.
+            orientation: "horizontal", // Defined the layout of the component.
             dataSource: {
                 data: eventsData, // Defined later in this snippet.
                 schema: {
@@ -127,7 +127,7 @@ The horizontal mode does not support alternating rendering and collapsing of eve
         });
     });
 
-    // The literals in this example use the default field names the widget takes.
+    // The literals in this example use the default field names the component takes.
     var eventsData = [
         {
             description: "First event description.",

@@ -722,7 +722,7 @@ defaults:
         layout: "documentation"
         category: "default"
         product: "aspnet-core"
-        editable: troubleshoot
+        editable: true
         title_prefix: "ASP.NET Core"
         title_prefix_separator: " "
 -

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery PivotGrid Documentation - PivotGrid Overview
-description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to create and configure the widget."
+description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to create and configure the component."
 slug: overview_kendoui_pivotgrid_widget
 position: 1
 ---
@@ -16,7 +16,7 @@ The Kendo UI PivotGrid represents multidimensional data in a cross-tabular forma
 
 ## Basic Configuration
 
-1. Start with the initialization of the PivotGrid widget. Create the widget by defining an HTML <div> element.
+1. Start with the initialization of the PivotGrid component. Create the component by defining an HTML <div> element.
 
 		<!-- Define	 the HTML div that will hold the PivotGrid -->
 		<div id="pivotgrid">
@@ -27,7 +27,7 @@ The Kendo UI PivotGrid represents multidimensional data in a cross-tabular forma
         <script>
         	$(document).ready(function () {
             	$("#pivotgrid").kendoPivotGrid({
-					height: 200, // Define the height of the widget.
+					height: 200, // Define the height of the component.
 					dataSource: {
 						type: "xmla", // Define the type.
 						columns: [{ name: "[Date].[Calendar]" }], // Specify a dimension on columns.

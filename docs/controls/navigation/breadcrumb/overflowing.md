@@ -6,9 +6,9 @@ slug: overflowing_breadcrumb_widget
 position: 6
 ---
 
-# Overflowing 
+# Overflowing
 
-When the width of the Breadcrumb is not enough to display the entire path, the widget will show only the items that fit the available space. The rest will be hidden. If you click one of the visible items, the value of the widget will change and reveal the previously hidden item.
+When the width of the Breadcrumb is not enough to display the entire path, the component will show only the items that fit the available space. The rest will be hidden. If you click one of the visible items, the value of the component will change and reveal the previously hidden item.
 
 The below example demonstrates the overflowing feature.
 

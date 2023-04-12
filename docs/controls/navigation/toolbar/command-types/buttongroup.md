@@ -12,7 +12,7 @@ The ButtonGroup consists of multiple button elements that are visually separated
 
 In the command overflow popup, the ButtonGroup is rendered as a list of commands.
 
-The following example demonstrates how to define a ButtonGroup in the ToolBar widget.
+The following example demonstrates how to define a ButtonGroup in the ToolBar component.
 
     <div id="toolbar"></div>
 

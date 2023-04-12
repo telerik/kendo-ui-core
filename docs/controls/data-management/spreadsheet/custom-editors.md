@@ -110,7 +110,7 @@ After the editor is defined, you can apply it to any cell through the API.
 As a result, when the user selects `A5`, a button that shows the icon is displayed next to the cell. When clicked, the custom color picker pops up and allows the user to
 select a color.
 
-The `edit` method provides a complete flexibility. As an example, you can use a Popup widget&mdash;you are not obliged, nor required to use a Window. If you know that no two instances will be displayed simultaneously, cache the UI or create a fresh instance each time the `edit` is invoked. Note that the example above refers to a modal dialog.
+The `edit` method provides a complete flexibility. As an example, you can use a Popup component&mdash;you are not obliged, nor required to use a Window. If you know that no two instances will be displayed simultaneously, cache the UI or create a fresh instance each time the `edit` is invoked. Note that the example above refers to a modal dialog.
 
 ## See Also
 

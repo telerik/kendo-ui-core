@@ -15,7 +15,7 @@ The globalization functionality of the FileManager is enabled through:
 * [Localization of messages]({% slug localization_kendoui_filemanager_widget %})
 * [Right-to-left support]({% slug rtl_kendoui_filemanager_widget %})
 
-For more information on using localization, internationalization, and right-to-left languages with Kendo UI widgets, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
+For more information on using localization, internationalization, and right-to-left languages with Kendo UI components, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
 
 ## See Also
 

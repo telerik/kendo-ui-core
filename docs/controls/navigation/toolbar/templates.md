@@ -48,7 +48,7 @@ The following example demonstrates how to add a template command that is going t
         });
     </script>
 
-Custom template commands allow you to add other Kendo UI widgets in the ToolBar. The following example demonstrates how to implement a Kendo UI DropDown widget in the Kendo UI ToolBar.
+Custom template commands allow you to add other Kendo UI components in the ToolBar. The following example demonstrates how to implement a Kendo UI DropDown component in the Kendo UI ToolBar.
 
     <div id="toolbar"></div>
 

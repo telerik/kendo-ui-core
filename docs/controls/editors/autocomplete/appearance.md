@@ -20,9 +20,9 @@ For a live example, visit the [Appearance Demo of the AutoComplete](https://demo
 
 The Kendo UI AutoComplete supports the following styling options:
 
-- [`size`](#size)—configures the overall size of the component.
-- [`rounded`](#rounded)—configures the border radius for the tags.
-- [`fillMode`](#fillMode)—controls how the color is applied.
+- [`size`](#size)—Configures the overall size of the component.
+- [`rounded`](#rounded)—Configures the border radius for the tags.
+- [`fillMode`](#fillMode)—Controls how the color is applied.
 
 ### Size
 
@@ -68,7 +68,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/autoco
 - `full`—ellipse-like border radius
 - `none`—unset
 
-The default value is `medium` and it is applied to the `span.k-autocomplete` wrapping element through the `k-rounded-md` class. 
+The default value is `medium` and it is applied to the `span.k-autocomplete` wrapping element through the `k-rounded-md` class.
 
 The example below shows a basic AutoComplete configuration and how to set `rounded` to "full":
 
@@ -121,7 +121,7 @@ The changes are applied to the `span.k-autocomplete` wrapping element:
 
 ## Old vs New Rendering
 
-Below you will find the differences between the old and the new rendering. 
+Below you will find the differences between the old and the new rendering.
 
 The following example shows the wrapper rendering.
 
@@ -148,8 +148,8 @@ The following example shows the popup rendering without virtualization.
       <ul class="k-list k-reset">
         <li class="k-item">Patricio Simpson</li>
         ...
-        <li class="k-item k-first"> 
-            Ann Devon 
+        <li class="k-item k-first">
+            Ann Devon
             <div class="k-group">UK</div>
         </li>
       </ul>
@@ -157,7 +157,7 @@ The following example shows the popup rendering without virtualization.
     <div class="k-nodata">
       <div>No Data!</div>
     </div>
-    <div class="k-footer"> 
+    <div class="k-footer">
       [Footer template]
     </div>
 </div>
@@ -244,7 +244,7 @@ The following example shows the popup rendering with virtualization.
                 ...
                 <li class="k-list-item k-first">
                     <span class="k-list-item-text">
-                        Ernst Handel, Austria 
+                        Ernst Handel, Austria
                     </span>
                     <div class="k-list-item-group-label">Austria</div>
                 </li>
@@ -266,7 +266,7 @@ The following example shows the popup rendering with virtualization.
 
 ## Visual Backwards Compatibility
 
-To achieve the same look and feel as the old rendering, you must update the element references. 
+To achieve the same look and feel as the old rendering, you must update the element references.
 
 > When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
@@ -302,7 +302,7 @@ The following example showcases how to customize the styles of the **AutoComplet
     </script>
     <style>
       /*  NEW RENDERING */
-      /*  The style below will works with versions R1 2022 and later*/ 
+      /*  The style below will works with versions R1 2022 and later*/
 
       #autocomplete.k-input-inner{ /* customize the style input */
         background: lightgreen;
@@ -313,7 +313,7 @@ The following example showcases how to customize the styles of the **AutoComplet
       }    
 
       /*  OLD RENDERING */
-      /*  The style below will works with versions prior to R1 2022 */ 
+      /*  The style below will works with versions prior to R1 2022 */
 
       #autocomplete-list .k-item{ /* customize the styles of the items in the popup */
         background-color: #FFE5B4 !important;
@@ -349,7 +349,7 @@ With the new rendering different classes should be used in order to customize th
     <style>
 
       /*  NEW RENDERING */
-      /*  The styles below will work with versions R1 2022 or later*/ 
+      /*  The styles below will work with versions R1 2022 or later*/
 
       /*customize groupTemplate */
       #customers-list .k-list-item-group-label{
@@ -376,7 +376,7 @@ With the new rendering different classes should be used in order to customize th
       }
 
       /*  OLD RENDERING */
-      /*  The styles below will work with versions prior to R1 2022 */ 
+      /*  The styles below will work with versions prior to R1 2022 */
 
       /*customize groupTemplate */
       #customers-list .k-item>.k-group{

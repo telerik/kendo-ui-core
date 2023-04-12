@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview - Hybrid UI View
-description: "Use the hybrid mobile Kendo UI View widget, mark header and footer elements, and view parameters of navigational widgets and DOM elements."
+description: "Use the hybrid mobile Kendo UI View component, mark header and footer elements, and view parameters of navigational components and DOM elements."
 slug: overview_hybridview
 position: 1
 component: view
@@ -9,7 +9,7 @@ component: view
 
 # View Overview
 
-The [Hybrid UI View widget](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
+The [Hybrid UI View component](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
 
 ## Getting Started
 
@@ -39,11 +39,11 @@ The example below demonstrates a mobile View with a header and a footer.
 
 > **Important**
 >
-> Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected. Usually the footer hosts a mobile TabStrip widget, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.
+> Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected. Usually the footer hosts a mobile TabStrip component, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.
 
 ### Parameters
 
-Navigational widgets can pass additional URL parameters when navigating to Views. The parameters are accessible in the  view `show` event handlers.
+Navigational components can pass additional URL parameters when navigating to Views. The parameters are accessible in the  view `show` event handlers.
 
 The example below demonstrates a button with additional URL parameters.
 

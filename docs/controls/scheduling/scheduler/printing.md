@@ -10,7 +10,7 @@ position: 6
 
 When you print the Scheduler, its content has to be unscrollable.
 
-The following example demonstrates how to ensure that the widget expands and displays all events in the current view during printing. The code from the example works in Internet Explorer and Google Chrome.
+The following example demonstrates how to ensure that the component expands and displays all events in the current view during printing. The code from the example works in Internet Explorer and Google Chrome.
 
 	@media print {
 	   .k-scheduler,
@@ -38,9 +38,9 @@ The following example demonstrates how to trigger the same behavior in Firefox a
     }
 
 <!--*-->
-In addition, the Scheduler needs a fixed pixel width for itself or some of its ancestors. Otherwise, it may resize during printing which will cause the displayed absolutely positioned events to become misaligned. If the widget is part of a fluid layout, a fixed width can be set only for the printing task and then removed.
+In addition, the Scheduler needs a fixed pixel width for itself or some of its ancestors. Otherwise, it may resize during printing which will cause the displayed absolutely positioned events to become misaligned. If the component is part of a fluid layout, a fixed width can be set only for the printing task and then removed.
 
-> Due to a bug in Internet Explorer which is related to absolutely positioned elements inside tables, the Scheduler events will be printed over their correct time slots only if the widget fits in one page.
+> Due to a bug in Internet Explorer which is related to absolutely positioned elements inside tables, the Scheduler events will be printed over their correct time slots only if the component fits in one page.
 
     <button id="printPage" type="button">Print</button>
 

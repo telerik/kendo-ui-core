@@ -14,7 +14,7 @@ The incell (batch) edit mode renders an editor for each clicked cell and allows 
 
 With incell edit mode you do not need to use the command buttons for update because editing is initiated on cell click. Also, the commands in the toolbar include the **Save changes** and **Cancel changes** buttons which save or respectively cancel all changes with a single click.
 
-Due to the specifics of the TreeList, the widget does not support the creation of a child node for a new record&mdash;in order for a child to be created, the parent node must have an assigned `id`. However, since the `id` is assigned within the service on the `create` action, when the new record is not saved, it will not have `id`. The code within the `dataBound` event ensures that the **Create child** button is removed for all new records.
+Due to the specifics of the TreeList, the component does not support the creation of a child node for a new record&mdash;in order for a child to be created, the parent node must have an assigned `id`. However, since the `id` is assigned within the service on the `create` action, when the new record is not saved, it will not have `id`. The code within the `dataBound` event ensures that the **Create child** button is removed for all new records.
 
 The following example demonstrates how to implement the incell edit mode in the TreeList.
 

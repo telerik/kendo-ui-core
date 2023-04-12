@@ -8,7 +8,7 @@ position: 7
 
 # Common Scenarios
 
-This article provides common scenarios you might encounter when working with the Kendo UI Sortable widget.
+This article provides common scenarios you might encounter when working with the Kendo UI Sortable component.
 
 * [Persisting the current items order](#persisting-the-current-items-order)
 * [Handling items which contain input elements](#handling-items-with-input-elements)
@@ -30,7 +30,7 @@ The following example demonstrates how to persist the order of items in local st
     </script>
 
     <script>
-        var initialData = [ 1, 2, 3, 4, 5, 6, 7 ], //initial items order (used if there is no saved data
+        var initialData = [ 1, 2, 3, 4, 5, 6, 7 ], // The initial items order (used if there is no saved data
             localStorageSupport = (('localStorage' in window && window['localStorage'] !== null)),
             data,
             html;
@@ -44,20 +44,20 @@ The following example demonstrates how to persist the order of items in local st
         }
 
         html = kendo.render(kendo.template($("#tmp").html()), data); //render the HTML with the data
-        $("#sortable").html(html); //append the HTML to the Sortable container
+        $("#sortable").html(html); // Append the HTML to the Sortable container.
 
-        $("#sortable").kendoSortable({ //initialize the sortable widget
+        $("#sortable").kendoSortable({ // Initialize the Sortable component.
             filter: ".sortable",
             change: function(e) {
                 var item = data.splice(e.oldIndex, 1)[0]; //remove the item that has changed its order
-                data.splice(e.newIndex, 0, item); //add the item back using the newIndex
+                data.splice(e.newIndex, 0, item); // Add the item back by using the newIndex.
 
-                localStorage.setItem("sortableData", kendo.stringify(data)); //set the updated data in the local storage
+                localStorage.setItem("sortableData", kendo.stringify(data)); // Set the updated data in the local storage.
             }
         });
 
         $("#reset").click(function() {
-            localStorage.clear(); //clear the local storage
+            localStorage.clear(); // Clear the local storage.
             alert("Local storage is cleared. Please reload the page!");
         });
     </script>

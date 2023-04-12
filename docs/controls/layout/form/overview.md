@@ -1,24 +1,24 @@
 ---
 title: Overview
 page_title: Kendo UI for jQuery Form Documentation - Form Overview
-description: "Get started with the Kendo UI for jQuery Form and learn about its features and how to initialize the widget."
+description: "Get started with the Kendo UI for jQuery Form and learn about its features and how to initialize the component."
 slug: overview_kendoui_form_widget
 position: 1
 ---
 
 # {{ site.product }} Form Overview
 
-The Kendo UI Form widget allows you to generate and manage forms. Through a variety of configuration options, it makes creating and customizing forms a seamless experience. Achieve the desired form appearance by using default or custom editors, choose layout and orientation, display the editors in groups and columns, and configure validation.
+The Kendo UI Form component allows you to generate and manage forms. Through a variety of configuration options, it makes creating and customizing forms a seamless experience. Achieve the desired form appearance by using default or custom editors, choose layout and orientation, display the editors in groups and columns, and configure validation.
 
-* [Demo page for the Form](https://demos.telerik.com/kendo-ui/form/index) 
+* [Demo page for the Form](https://demos.telerik.com/kendo-ui/form/index)
 
 ## Initializing the Form
 
 To initialize the Form, use the `<form>` tag.
 
-The following example demonstrates how to initialize the Form from an existing `<form>` element. The `items` option is set, and it allows configuring Kendo UI widgets as form field editors.
+The following example demonstrates how to initialize the Form from an existing `<form>` element. The `items` option is set, and it allows configuring Kendo UI components as form field editors.
 
-Note, that `nodeName` should not be used as an id of the fields in the formData. 
+Note, that `nodeName` should not be used as an id of the fields in the formData.
 
 ```dojo
     <form id="form"></form>

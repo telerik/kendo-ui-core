@@ -11,29 +11,29 @@ The Kendo UI Pager is responsive by default. To disable the responsive behavior 
 
 ## Visible Elements
 
-The Pager widget determines which internal elements to render based on its width. When the Pager width is greater than or equal to 600 pixels, all elements are visible:
+The Pager component determines which internal elements to render based on its width. When the Pager width is greater than or equal to 600 pixels, all elements are visible:
 
 - [`Page Sizes Dropdown`](/api/javascript/ui/pager/configuration/pagesizes)
 - [`Numeric Page Number Buttons`](/api/javascript/ui/pager/configuration/numeric) or a [`Numeric Input`](/api/javascript/ui/pager/configuration/input) if the pager is an `input` one.
-- [`Info element`](/api/javascript/ui/pager/configuration/info) 
+- [`Info element`](/api/javascript/ui/pager/configuration/info)
 
 ## Breaking Points
 
 When the Pager width is greater than or equal to 600 pixels, all elements are visible:
 
-![Kendo UI for jQuery Pager widget at over 600px resolution](../../../images/pager-responsive/pager-over-600-resolution.png)
+![Kendo UI for jQuery Pager component at over 600px resolution](../../../images/pager-responsive/pager-over-600-resolution.png)
 
 When the Pager width is greater than 480 and less than 600 pixels, the label showing the current paging information is hidden:
 
-![Kendo UI for jQuery Pager widget between 480 and 600px resolution](../../../images/pager-responsive/pager-480-600-resolution.png)
+![Kendo UI for jQuery Pager component between 480 and 600px resolution](../../../images/pager-responsive/pager-480-600-resolution.png)
 
 When the Pager width is greater than 360 and less than 480 pixels, the current page is represented by a native `<select/>` element. The `pageSizes` dropdown and the label showing the current paging information are hidden.
 
-![Kendo UI for jQuery Pager widget between 360 and 480px resolution](../../../images/pager-responsive/pager-360-480-resolution.png)
+![Kendo UI for jQuery Pager component between 360 and 480px resolution](../../../images/pager-responsive/pager-360-480-resolution.png)
 
 When the Pager width is less than 360 pixels, the current page is represented by a native `<select/>` element. The `pageSizes` dropdown and the label showing the current paging information are hidden.
 
-![Kendo UI for jQuery Pager widget under 360 pixels](../../../images/pager-responsive/pager-under-360-resolution.png)
+![Kendo UI for jQuery Pager component under 360 pixels](../../../images/pager-responsive/pager-under-360-resolution.png)
 
 ## See Also
 

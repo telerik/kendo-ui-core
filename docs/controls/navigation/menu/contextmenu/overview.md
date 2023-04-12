@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery ContextMenu Documentation - ContextMenu Overview
-description: "Get started with the jQuery ContextMenu by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery ContextMenu by Kendo UI and learn how to create, initialize, and enable the component."
 previous_url: /controls/navigation/menu/contextmenu
 slug: overview_kendoui_contextmenu_widget
 position: 1
@@ -19,7 +19,7 @@ It provides rich styling for unordered lists of items, and can be used for both 
 
 You can initialize the ContextMenu by using HTML markup or a JSON `data` object.
 
-> Create the ContextMenu within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
+> Create the ContextMenu within a `$(document).ready()` statement because the component has to be initialized after the DOM is fully loaded.
 
 ### From HTML
 
@@ -99,7 +99,7 @@ By default, the ContextMenu is created as a child of the `<body>` element.
       </body>
 ```
 
-The following example demonstrates how the page markup from the previous example changes after the initialization of the ContextMenu. The widget is moved to become a child of the `<body>` element and its additional markup&mdash;the wrapper and the title bar&mdash;is generated.
+The following example demonstrates how the page markup from the previous example changes after the initialization of the ContextMenu. The component is moved to become a child of the `<body>` element and its additional markup&mdash;the wrapper and the title bar&mdash;is generated.
 
       <body>
         <div id="target"></div>

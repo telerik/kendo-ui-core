@@ -1,16 +1,16 @@
 ---
 title: Overview
 page_title: jQuery FileManager Documentation - FileManager Overview
-description: "Get started with the jQuery FileManager by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery FileManager by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_filemanager_widget
 position: 0
 ---
 
 # {{ site.product }} FileManager Overview
 
-The Kendo UI FileManager is an Explorer-like component enabling you to manage file and folders. 
+The Kendo UI FileManager is an Explorer-like component enabling you to manage file and folders.
 
-It enables you to organize and manage files and folders and provides you with a rich API for customization. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The widget is built entirely by Kendo UI for jQuery components: [Grid]({% slug overview_kendoui_grid_widget %}), [ListView]({% slug overview_kendoui_listview_widget %}), [TreeView]({% slug overview_kendoui_treeview_widget %}), [Toolbar]({% slug overview_kendoui_toolbar_widget %}), [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %}). 
+It enables you to organize and manage files and folders and provides you with a rich API for customization. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The component is built entirely by Kendo UI for jQuery components: [Grid]({% slug overview_kendoui_grid_widget %}), [ListView]({% slug overview_kendoui_listview_widget %}), [TreeView]({% slug overview_kendoui_treeview_widget %}), [Toolbar]({% slug overview_kendoui_toolbar_widget %}), [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %}). 
 
 * [Demo page for the FileManager](https://demos.telerik.com/kendo-ui/filemanager/index)
 
@@ -48,7 +48,7 @@ The following example demonstrates initialization of the FileManager with a loca
                 isDirectory: false,
                 hasDirectories: false,
                 path: "folder/Image2.jpg",
-                extension: ".jpg", 
+                extension: ".jpg",
                 size: 20,
                 createdUtc: new Date(),
               }

@@ -10,7 +10,7 @@ position: 1
 
 This guide is intended for the end user of the Spreadsheet.
 
-The document provides information about the functionalities of the widget for data entry and management.
+The document provides information about the functionalities of the component for data entry and management.
 
 ## Conventions
 
@@ -24,7 +24,7 @@ This guide uses the following conventions:
 
 ## Overview
 
-The Kendo UI Spreadsheet is used for the implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the touch and feel of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes while utilizing simpler and easy-to-master user interface.
+The Kendo UI Spreadsheet is used for the implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The component renders the touch and feel of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes while utilizing simpler and easy-to-master user interface.
 
 <center>![Kendo UI for jQuery Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
@@ -41,7 +41,7 @@ The Kendo UI Spreadsheet is used for the implementation of related data and its 
 
 ### Sheets
 
-When you open the Spreadsheet, the widget automatically generates a worksheet and applies to it a collection of default settings.
+When you open the Spreadsheet, the component automatically generates a worksheet and applies to it a collection of default settings.
 
 | What you want	| How to get there	|
 | :---					| :---				|

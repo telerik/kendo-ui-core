@@ -139,6 +139,37 @@
             var secondButton = buttonGroup.element.children().eq(1);
             assert.isOk(!secondButton.hasClass("k-selected"));
         });
+        it("selected button is passed to the selectedIndices array", function() {
+            buttonGroup = initializeButtonGroup({
+                items: [
+                    { text: "test1" },
+                    { text: "test2", selected: true }
+                ]
+            });
+
+            assert.equal(buttonGroup.selectedIndices.length, 1);
+            assert.equal(buttonGroup.selectedIndices[0], 1);
+        });
+        it("k-selected on a button is passed to the selectedIndices array", function() {
+            buttonGroupContainer.append($('<span>item0</span>'));
+            buttonGroupContainer.append($('<span class="k-selected">item2</span>'));
+            buttonGroup = initializeButtonGroup();
+
+            assert.equal(buttonGroup.selectedIndices.length, 1);
+            assert.equal(buttonGroup.selectedIndices[0], 1);
+        });
+        it("index passed to options is added to the selectedIndices array", function() {
+            buttonGroup = initializeButtonGroup({
+                index: 1,
+                items: [
+                    { text: "test1" },
+                    { text: "test2" }
+                ]
+            });
+
+            assert.equal(buttonGroup.selectedIndices.length, 1);
+            assert.equal(buttonGroup.selectedIndices[0], 1);
+        });
         it("custom attributes are added to item", function() {
             buttonGroup = initializeButtonGroup({
                 items: [

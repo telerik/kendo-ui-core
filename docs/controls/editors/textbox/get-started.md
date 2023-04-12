@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 page_title: jQuery TextBox Documentation - Getting Started with the TextBox
-description: "Get started with the jQuery TextBox by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery TextBox by Kendo UI and learn how to create, initialize, and enable the component."
 slug: getting_started_kendoui_textbox_widget
 position: 1
 ---
@@ -28,13 +28,13 @@ After the completion of this guide, you will be able to achieve the following en
 
 ## 1. Create an input Element
 
-First, create an `<input>` element on the page that will be used to initialize the widget.
+First, create an `<input>` element on the page that will be used to initialize the component.
 
 ```html
 <input id="textbox" />
 ```
 
-## 2. Initialize the TextBox 
+## 2. Initialize the TextBox
 
 In this step, you will initialize the TextBox from the `<input>` element. Upon its initialization, the TextBox wraps the `<input>` element with a `<span>` tag.
 
@@ -84,9 +84,9 @@ The TextBox enables you to configure the label by using the [`label`](https://do
 </script>
 ```
 
-## Next Steps 
+## Next Steps
 
-* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the TextBox](https://demos.telerik.com/kendo-ui/textbox/index)
 
 ## See Also 

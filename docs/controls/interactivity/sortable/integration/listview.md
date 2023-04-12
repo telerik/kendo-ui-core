@@ -1,18 +1,18 @@
 ---
 title: ListView
 page_title: jQuery Sortable Documentation - ListView Integration
-description: "Get started with the jQuery Sortable by Kendo UI and integrate the widget with the Kendo UI ListView."
+description: "Get started with the jQuery Sortable by Kendo UI and integrate the component with the Kendo UI ListView."
 slug: integrationwith_listview_sortable
 ---
 
 # ListView Integration
 
-You can use the [Kendo UI Sortable widget](https://demos.telerik.com/aspnet-core/sortable/index) to reorder the items in a ListView by dragging and dropping.
+You can use the [Kendo UI Sortable component](https://demos.telerik.com/aspnet-core/sortable/index) to reorder the items in a ListView by dragging and dropping.
 
 ## Prerequisites
 
-* [Overview of the Kendo UI Sortable widget]({% slug overview_kendoui_sortable_widget %})
-* [Overview of Kendo UI ListView widget]({% slug overview_kendoui_listview_widget %})
+* [Overview of the Kendo UI Sortable component]({% slug overview_kendoui_sortable_widget %})
+* [Overview of Kendo UI ListView component]({% slug overview_kendoui_listview_widget %})
 * [API reference of the Kendo UI DataSource component](/api/javascript/data/datasource#methods)
 
 ## Reordering of Sortable Items

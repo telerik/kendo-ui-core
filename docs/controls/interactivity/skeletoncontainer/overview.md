@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery SkeletonContainer Documentation - SkeletonContainer Overview
-description: "Get started with the jQuery SkeletonContainer by Kendo UI and learn how to initialize the widget."
+description: "Get started with the jQuery SkeletonContainer by Kendo UI and learn how to initialize the component."
 slug: overview_kendoui_skeletoncontainer_widget
 position: 1
 CTAControlName: SkeletonContainer
@@ -9,7 +9,7 @@ CTAControlName: SkeletonContainer
 
 # {{ site.product }} SkeletonContainer Overview
 
-The SkeletonContainer widget indicates to the user that the content is coming but has not yet been loaded. It aims at helping the user focus on progress and makes the page load time appear shorter.
+The SkeletonContainer component indicates to the user that the content is coming but has not yet been loaded. It aims at helping the user focus on progress and makes the page load time appear shorter.
 
 A SkeletonContainer is basically a simplified preview version of a page into which information is gradually loaded (i.e. via AJAX requests).
 
@@ -21,7 +21,7 @@ Visit the [SkeletonContainer demo page](https://demos.telerik.com/kendo-ui/Skele
 
 ## Initializing the SkeletonContainer
 
-It is recommended to initialize the widget from a div HTML element.
+It is recommended to initialize the component from a div HTML element.
 
 The following example demonstrates how to initialize the SkeletonContainer from an existing `<div>` element.
 
@@ -49,7 +49,7 @@ The following example demonstrates how to initialize the SkeletonContainer from 
 
 ## Functionality and Features
 
-The Kendo UI SkeletonContainer for jQuery accepts either a template or a CSS Grid. While the developer can pass merely anything at the template, the CSS Grid exposes an `item` object that has a set of predefined properties. Find out more about the CSS Grid setup here: 
+The Kendo UI SkeletonContainer for jQuery accepts either a template or a CSS Grid. While the developer can pass merely anything at the template, the CSS Grid exposes an `item` object that has a set of predefined properties. Find out more about the CSS Grid setup here:
 
 * [Items]({% slug items_kendoui_skeletoncontainer_widget %})
 
