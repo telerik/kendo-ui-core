@@ -425,6 +425,26 @@ it("enable() enables widget after readonly()", function() {
     assert.isOk(!autocomplete.wrapper.hasClass("k-disabled"));
 });
 
+it("enable(false) hides clear icon", function() {
+    var autocomplete = new AutoComplete(input, {
+        value: "Montana"
+    });
+
+    autocomplete.enable(false);
+
+    assert.isOk(autocomplete._clear.hasClass("k-hidden"));
+});
+
+it("readonly(true) hides clear icon", function() {
+    var autocomplete = new AutoComplete(input, {
+        value: "Montana"
+    });
+
+    autocomplete.readonly(true);
+
+    assert.isOk(autocomplete._clear.hasClass("k-hidden"));
+});
+
 it("AutoComplete honors readonly attribute", function() {
     var autocomplete = new AutoComplete(input.attr("readonly", true));
 
