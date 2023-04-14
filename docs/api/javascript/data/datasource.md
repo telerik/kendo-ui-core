@@ -378,6 +378,29 @@ The data item field to which the filter operator is applied.
     });
     </script>
 
+### filter.ignoreCase `Boolean` *(default: true)*
+
+The filter will ignore the casing of the value by default.
+
+#### Example - set the filter ignoreCase
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filter: { field: "name", operator: "startswith", value: "Jane", ignoreCase: false } // Value will be treated as "Jane" instead of "jane".
+    });
+    dataSource.fetch(function(){
+      var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(view.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(view[0].name); // displays "Jane Doe"
+    });
+    </script>
+
 ### filter.filters `Array`
 
 The nested filter expressions. Supports the same options as [`filter`](/api/javascript/data/datasource#configuration-filter). Filters can be nested indefinitely.

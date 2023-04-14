@@ -136,6 +136,29 @@ Implement the templates in the script tags by using the [`data.model`](/api/java
 </script>
 ```
 
+- Below you will find an example of a row template configured before the introduction of SVG icons in R1 2023:
+
+```html
+<script id="template" type="text/x-kendo-template">
+  <tr data-uid="#= data.model.uid #" >
+      <td colspan="2">
+          #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+              <span class="k-icon k-i-none"></span>
+          #}#
+          #if(data.hasChildren){#
+              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+          #}#
+      </td>
+       <td colspan="2">
+              <span style='color:green;'>#:data.model.lastName #</span>
+      </td>
+      <td colspan="2">
+              <span style='color:red;'>#: data.model.position #</span>
+      </td>
+  </tr>
+</script>
+```
+
 ## See Also
 
 * [Using Row Templates in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/rowtemplate)

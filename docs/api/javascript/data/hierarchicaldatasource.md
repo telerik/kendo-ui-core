@@ -429,6 +429,12 @@ Fires when data is changed. In addition to the [standard `change` event](/api/fr
 
 If the event was triggered by a child datasource, this field holds a reference to the parent node.
 
+##### e.action `String` (optional)
+
+In addition to the [standard `change` event](/api/framework/datasource#change) actions, the value can also be:
+
+* `"itemloaded"`
+
 #### Example
 
     <script>

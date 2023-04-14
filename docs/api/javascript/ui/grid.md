@@ -10172,6 +10172,7 @@ If set to true, the copied items will include the column headers.
         }
 
      </script>
+
 ### current
 
 Gets or sets the current cell for keyboard navigation.

@@ -6211,6 +6211,8 @@ declare namespace kendo.ui {
         collapseRow(row: string): void;
         collapseRow(row: Element): void;
         collapseRow(row: JQuery): void;
+        copySelectionToClipboard(): void;
+        copySelectionToClipboard(includeHeaders: Boolean): void;
         current(): JQuery;
         current(cell: JQuery): void;
         dataItem(row: string): kendo.data.ObservableObject;
