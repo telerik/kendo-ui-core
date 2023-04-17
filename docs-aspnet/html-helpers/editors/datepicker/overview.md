@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI DatePicker component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/datepicker, /helpers/editors/datepicker/overview
 slug: htmlhelpers_datepicker_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} DatePicker Overview
@@ -46,109 +46,28 @@ The following example demonstrates the basic configuration for the DatePicker.
 
 ## Functionality and Features
 
-* [Disabled dates]({% slug htmlhelpers_datepicker_aspnetcore_disableddates %})
-* [Selected dates]({% slug htmlhelpers_datepicker_aspnetcore_selecteddates %})
-* [Start view and navigation depth]({% slug htmlhelpers_datepicker_aspnetcore_navdepth %})
-* [Validation]({% slug htmlhelpers_datepicker_aspnetcore_validation %})
-* [Calendar types]({% slug htmlhelpers_datepicker_aspnetcore_calendartypes %})
-* [Week number column]({% slug htmlhelpers_datepicker_aspnetcore_weeknumbercolumn %})
-* [DateInput integration]({% slug htmlhelpers_datepicker_aspnetcore_dateinputintegration %})
-* [Templates]({% slug htmlhelpers_datepicker_aspnetcore_templates %})
-* [Accessibility]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %})
+|Feature|Description|
+|-------|-----------|
+| [Disabled dates]({% slug htmlhelpers_datepicker_aspnetcore_disableddates %}) | The DatePicker allows you to disable specific days that are not intended for user interaction. |
+| [Selected dates]({% slug htmlhelpers_datepicker_aspnetcore_selecteddates %}) | The DatePicker allows you to render a pre-selected date upon loading. |
+| [Start view and navigation depth]({% slug htmlhelpers_datepicker_aspnetcore_navdepth %}) | You can also set the initial view the DatePicker renders and define the navigation depth of its views. |
+| [Validation]({% slug htmlhelpers_datepicker_aspnetcore_validation %}) | The DatePicker keeps its input value unchanged even when the typed date is invalid. |
+| [Calendar types]({% slug htmlhelpers_datepicker_aspnetcore_calendartypes %}) | Even though, by default, the DatePicker supports only the Gregorian calendar, you can still work around this behavior and render other calendar types. |
+| [Week number column]({% slug htmlhelpers_datepicker_aspnetcore_weeknumbercolumn %}) | The DatePicker provides options for rendering a column which displays the number of the weeks within the current Month view. |
+| [DateInput integration]({% slug htmlhelpers_datepicker_aspnetcore_dateinputintegration %}) | The fluent integration between the DatePicker and the DateInput allows you to take advantage of the natively available features of both components. |
+| [Templates]({% slug htmlhelpers_datepicker_aspnetcore_templates %}) | You can customize the content and look and feel of the DatePicker by utilizing templates. |
+| [Accessibility]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %}) | The DatePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
 
-## Events
+## Next Steps
 
-You can subscribe to all DatePicker [events](/api/datepicker). For a complete example on DatePicker events, refer to the [demo on handling DatePicker events](https://demos.telerik.com/{{ site.platform }}/datepicker/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().DatePicker()
-      .Name("datepicker")
-      .Events(e => e
-            .Open("datepicker_open")
-            .Close("datepicker_close")
-            .Change("datepicker_change")
-      )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-datepicker name="datepicker"
-        on-open="datepicker_open"
-        on-close="datepicker_close"
-        on-change="datepicker_change"/>
-```
-{% endif %}
-```script.js
-    function datepicker_open() {
-        // Handle the open event.
-    }
-
-    function datepicker_close() {
-        // Handle the close event.
-    }
-
-    function datepicker_change() {
-        // Handle the change event.
-    }
-```
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().DatePicker()
-      .Name("datepicker")
-      .Events(e => e
-          .Open(@<text>
-            function() {
-                // Handle the open event inline.
-            }
-          </text>)
-          .Change(@<text>
-            function() {
-                // Handle the change event inline.
-            }
-            </text>)
-      )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-datepicker name="datepicker"
-        on-open='function(e)
-        {
-            // Handle the open event inline.
-        }'
-        on-change='function(e)
-        {
-            // Handle the change event inline.
-        }'/>
-```
-{% endif %}
-
-## Referencing Existing Instances
-
-To reference an existing Telerik UI DatePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [DatePicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker#methods) to control its behavior.
-
-        // Place the following after your Telerik UI DatePicker for {{ site.framework }} declaration.
-        <script>
-        $(function() {
-        // The Name() of the DatePicker is used to get its client-side instance.
-            var datepicker = $("#datepicker").data("kendoDatePicker");
-
-            //Use the "value" API method to get the DatePicker's value.
-            console.log(datepicker.value());
-        });
-        </script>
-
-## See Also
-
+* [Getting Started with the DatePicker]({% slug datepicker_getting_started %})
 * [Basic Usage of the DatePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/index)
 {% if site.core %}
 * [Basic Usage of the DatePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
 {% endif %}
+
+## See Also
+
 * [Using the API of the DatePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/api)
 * [Server-Side API](/api/datepicker)
+* [Knowledge Base Section](/knowledge-base)
