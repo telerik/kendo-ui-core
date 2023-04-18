@@ -156,7 +156,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## Next Steps
 
 * [Subscribing to DatePicker Events]({% slug events_datepicker %})
-* [Customizing the Appearance of the DatePicker]({% slug appearance_datepicker %})
+* [Customizing the Appearance of the DatePicker]({% slug appearance_datepicker_aspnetcore %})
 
 ## See Also
 
