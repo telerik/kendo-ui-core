@@ -1,92 +1,32 @@
 ---
 title: Overview
 page_title: jQuery Drawer Documentation - Drawer Overview
-description: "Get started with the jQuery Drawer by Kendo UI, initialize single or multiple buttons, and reference existing Button instances."
+description: "Try now the Kendo UI for jQuery Drawer component supporting options for initializing single or multiple buttons and referencing existing Button instances."
 slug: overview_kendoui_drawer_widget
-position: 1
+position: 0
 ---
 
 # {{ site.product }} Drawer Overview
 
-The Drawer is a dismissible panel used for navigation in responsive web applications or for changing a content of a section in the page.
+The Drawer is a dismissible panel used for navigation in responsive web applications or for changing the content of a page section.
 
-* [Demo page for the Drawer](https://demos.telerik.com/kendo-ui/drawer/index)
-
-## Initializing the Drawer
-
-You can initialize a Drawer by using an HTML element and a template or with MVVM.
-
-### From HTML
-
-You can create a Kendo UI Drawer by using an HTML element and a template.
-
-```dojo
-
-    <div id="overlay-drawer"></div>
-    <button class="k-button k-primary" onclick="show()">Show</button>
-    <div>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum doloribus illum earum itaque, numquam nesciunt voluptas officiis ullam aperiam enim optio facilis deleniti, ea mollitia esse, minima. Dolorum, consequuntur deserunt!
-    </div>
-    <script id="drawer-template" type="text/x-kendo-template">
-  		<ul>
-     		<li data-role='drawer-item'>First Item</li>
-     		<li data-role='drawer-separator'></li>
-     		<li data-role='drawer-item'>Second Item</li>
- 	 	 	  <li data-role='drawer-separator'></li>
-     		<li data-role='drawer-item'>Third Item</li>
-      </ul>
-    </script>
-
-    <script>
-      var drawer = $("#overlay-drawer").kendoDrawer({
-        template: $("#drawer-template").html(),
-      }).data("kendoDrawer");
-
-      function show(e) {
-        drawer.show();
-      }
-    </script>
-```
-
-### With MVVM
-
-The following example demonstrates how to initialize a Drawer with MVVM.
-
-```dojo
-
-    <div id="example">
-      <div data-role="drawer"
-           data-width="150"
-           data-mode="push"
-           data-template="<ul><li data-role='drawer-item'><span>First Item</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span>Second Item</span></li><li data-role='drawer-item' class='k-selected'><span>Third Item</span></li></ul>">
-        <h1 class="my-content">Swipe or drag me to the right <span class="k-icon k-i-arrow-chevron-right"></span></h1>
-      </div>
-    </div>
-    <script>
-      var viewModel = kendo.observable({});
-      kendo.bind($("#example"), viewModel);
-    </script>
-    <style>
-      .k-i-arrow-chevron-right {
-        font-size:  2em;
-      }
-
-      .my-content {
-        height: 200px;
-        text-align:center;
-      }
-    </style>
-    </div>
-```
+![Kendo UI for jQuery Drawer Overview](images/drawer-overview.png)
 
 ## Functionality and Features
 
-* [Display modes]({% slug displaymodes_kendoui_drawer %})
-* [Interaction modes]({% slug interaction_kendoui_drawer %})
-* [Templates]({% slug templates_kendoui_drawer %})
-* [Hierarchy]({% slug hierarchy_kendoui_drawer %})
+* [Display modes]({% slug displaymodes_kendoui_drawer %})–The Drawer provides a set of modes for handling the way the component is displayed.
+* [Interaction modes]({% slug interaction_kendoui_drawer %})–The Drawer provides a set of modes with which the user can interact, and positions in which the component can be rendered.
+* [Templates]({% slug templates_kendoui_drawer %})–The Drawer enables you to modify the appearance of its content.
+* [Hierarchy]({% slug hierarchy_kendoui_drawer %})–The Drawer enables you to create a hierarchical structure.
+
+## Next Steps
+
+* [Getting Started with the Kendo UI Drawer for jQuery]({% slug getting_started_kendoui_drawer_component %})
+* [Basic Usage of the jQuery Drawer (Demo)](https://demos.telerik.com/kendo-ui/drawer/index)
+* [JavaScript API Reference of the Drawer](/api/javascript/ui/drawer)
 
 ## See Also
 
-* [Basic Usage of the Drawer (Demo)](https://demos.telerik.com/kendo-ui/drawer/index)
-* [JavaScript API Reference of the Drawer](/api/javascript/ui/drawer)
+* [Product Page of the Kendo UI for jQuery Drawer](https://www.telerik.com/kendo-jquery-ui/drawer)
+* [Demo Pages for the jQuery Drawer](https://demos.telerik.com/kendo-ui/drawer/index)
+* [Knowledge Base Section](/knowledge-base)

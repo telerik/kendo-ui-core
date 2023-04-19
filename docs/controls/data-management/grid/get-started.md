@@ -238,11 +238,11 @@ Among other functionalities, the Grid supports editing and filtering. The [editi
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
+* [Demo Page for the Kendo UI for jQuery Data Grid](https://demos.telerik.com/kendo-ui/grid/index)
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)
 
 <script>
