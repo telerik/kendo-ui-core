@@ -10,6 +10,15 @@ position: 1
 
 This article lists the breaking or important changes in the 2023 releases of {{ site.product }}.
 
+## {{ site.product }} R2 2023 
+
+**FloatingActionButton**
+
+As part of the rendering unification of the components: 
+
+* The `Shape` configuration option and the `shape` API method are now removed.
+* The element with class `k-fab-items` is moved inside the element with class `k-fab-popup`.
+
 ## {{ site.product }} R1 2023 SP1
 
 Drop of the development and support of the LESS themes. 

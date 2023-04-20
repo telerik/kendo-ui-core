@@ -125,6 +125,33 @@ You can also bind the `DataSource` to remote data. The following example demonst
 ```
 {% endif %}
 
+## Setting Custom Color Ranges
+
+You can customize the TreeMap through the `Colors` configuration option by adding the desired color ranges:
+
+```HtmlHelper
+    @(Html.Kendo().TreeMap()
+        .Name("treeMap")
+        .DataSource(dataSource => dataSource
+            .Read(read => read
+                .Action("Population_Read", "TreeMap")
+            )
+            .Model(m => m.Children("Items"))
+        )
+        .Colors(color =>
+        {
+            color.AddRange("#0072c6", "#cbe2f3");
+            color.AddRange("#5db2ff", "#deeffe");
+            color.AddRange("#ff8f32", "#cbe7d0");
+            color.AddRange("#82ba00", "#e5f0cb");
+            color.AddRange("#ff8f32", "#fee8d5");
+            color.AddRange("#9e0a61", "#eccedf");
+            color.AddRange("#ac193d", "#eed0d7");
+        })
+        .ValueField("Value")
+        .TextField("Name")
+    )
+```
 
 ## Events
 
