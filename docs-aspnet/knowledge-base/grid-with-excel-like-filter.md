@@ -50,7 +50,7 @@ The following example demonstrates how to set the Grid with an **Excel-like** fi
         )
     )
 ```
-* Set the commmon DataSource for the columns that will be filtered through the [`Filterable`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridBoundColumnFilterableBuilder#kendomvcuifluentgridboundcolumnfilterablebuilder) configuration method.
+* Set the commmon DataSource for the columns that will be filtered through the [`Filterable`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridboundcolumnfilterablebuilder#kendomvcuifluentgridboundcolumnfilterablebuilder) configuration method.
 
 ```
     .Columns(columns =>
@@ -81,7 +81,7 @@ The following example demonstrates how to set the Grid with an **Excel-like** fi
          return result;
     }
 ```
-* Sort and set unique items in the [`FilterMenuInit`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#filtermenuinitsystemstring) event whilst removing the duplicate data items.
+* Sort and set unique items in the [`FilterMenuInit`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#filtermenuinitsystemstring) event whilst removing the duplicate data items.
 
 ```
     .Events(events => events.FilterMenuInit("onFilterMenuInit"))
@@ -95,7 +95,7 @@ The following example demonstrates how to set the Grid with an **Excel-like** fi
         })
     }
 ```
-* Update the data items by subscribing to the [`Change`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#changesystemstring) event of the DataSource.
+* Update the data items by subscribing to the [`Change`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/datasourceeventbuilder#changesystemstring) event of the DataSource.
 ```
     function onChange(e) {
             dataSourceShared.data(e.items);

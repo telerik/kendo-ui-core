@@ -55,5 +55,5 @@ To scaffold the TreeView HtmlHelper for ASP.NET MVC:
 ## See Also
 
 * [Basic Usage of the TreeView HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treeview/index)
-* [TreeViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [TreeViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/treeviewbuilder)
 * [TreeView Server-Side API](/api/treeview)

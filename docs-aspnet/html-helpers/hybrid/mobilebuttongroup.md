@@ -100,4 +100,4 @@ You can reference a hybrid ButtonGroup instance by using the code from the follo
 
 ## See Also
 
-* [Hybrid ButtonGroupBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileButtonGroupBuilder)
+* [Hybrid ButtonGroupBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilebuttongroupbuilder)

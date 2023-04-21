@@ -202,5 +202,5 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ## See Also
 
 * [Document Import and Export by the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/import-export)
-* [EditorBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [EditorBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/editorbuilder)
 * [Editor Server-Side API](/api/editor)

@@ -34,7 +34,7 @@ The example below relies on the following key steps:
 
 1. Create an external button to export the data when it is clicked.
 1. Use the client-side [`saveAsExcel` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveasexcel) to trigger the data export of each Grid.
-1. Handle the [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event of the two Grids and prevent their default action.
+1. Handle the [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event of the two Grids and prevent their default action.
 1. Create a new Workbook by using the sheets of the Grids Workbooks and save it through the [`kendo.saveAs()` method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/saveas).
 
 ```Index.cshtml

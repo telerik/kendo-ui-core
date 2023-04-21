@@ -49,7 +49,7 @@ How can I add a checkbox column to the TreeList which will set an initial checke
 
 ## Solution
 
-Use the [`template`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeListColumnBuilder#templatesystemstring) method of the TreeList column.
+Use the [`template`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/treelistcolumnbuilder#templatesystemstring) method of the TreeList column.
 
 ````
 columns.Add().Field(e => e.CheckBoxColumnField).Template(

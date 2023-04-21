@@ -32,7 +32,7 @@ How can I format the cell values during the export of the Grid to Excel?
 
 Use the [format](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format) option of the Workbook cell to set the format of the cell value.
 
-1. Handle the [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event of the Grid.
+1. Handle the [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event of the Grid.
 1. Get the Workbook sheet and loop through the array of the sheet rows.
 1. Specify the required cell format.
 

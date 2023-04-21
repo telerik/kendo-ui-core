@@ -19,4 +19,4 @@ For more information, refer to the article on how to [create Excel documents](ht
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder)

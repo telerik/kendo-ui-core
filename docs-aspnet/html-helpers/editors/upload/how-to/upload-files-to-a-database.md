@@ -13,5 +13,5 @@ To see the example, refer to the project on how to [upload files to a database](
 ## See Also
 
 * [Basic Usage by the Upload HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/upload)
-* [UploadBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [UploadBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/uploadbuilder)
 * [Upload Server-Side API](/api/upload)

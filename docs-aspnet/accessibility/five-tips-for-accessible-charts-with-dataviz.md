@@ -174,7 +174,7 @@ For the complete example, refer to the following [Telerik REPL](https://netcorer
         </table>
     </script>
 ```
-* Subscribe to the [`Change`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#changesystemstring) event of the DataSource and provide a handler. Inside the handler pass the template script into a Kendo UI template, render it with the DataSource, and add the table to the page.
+* Subscribe to the [`Change`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/datasourceeventbuilder#changesystemstring) event of the DataSource and provide a handler. Inside the handler pass the template script into a Kendo UI template, render it with the DataSource, and add the table to the page.
 
 ```
     .Events(events=>events.Change("onChange"))

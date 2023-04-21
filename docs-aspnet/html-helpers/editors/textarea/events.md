@@ -8,7 +8,7 @@ position: 6
 
 # Events
 
-The TextArea for {{ site.framework }} exposes the [`Change()` event](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/TextAreaEventBuilder) that you can use for capturing the TextArea's value during user interaction. 
+The TextArea for {{ site.framework }} exposes the [`Change()` event](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/textareaeventbuilder) that you can use for capturing the TextArea's value during user interaction. 
 
 For a complete example on TextArea events, refer to the [demo on using the events of the TextArea](https://demos.telerik.com/{{ site.platform }}/textarea/events).
 

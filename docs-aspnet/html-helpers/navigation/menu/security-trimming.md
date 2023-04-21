@@ -50,14 +50,14 @@ The security trimming functionality can be enabled through the `SecurityTrimming
 
 {% if site.mvc %}
 * [Basic Usage of the Menu HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/menu)
-* [MenuItemBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
-* [MenuBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [MenuItemBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/menuitembuilder)
+* [MenuBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/menubuilder)
 * [Menu Server-Side API](/api/menu)
 {% endif %}
 
 {%if site.core%}
 * [Basic Usage of the Menu HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-core/menu)
-* [MenuItemBuilder Server-Side API](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
-* [MenuBuilder Server-Side API](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [MenuItemBuilder Server-Side API](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/menuitembuilder)
+* [MenuBuilder Server-Side API](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/menubuilder)
 * [Menu Server-Side API](https://docs.telerik.com/aspnet-core/api/menu)
 {% endif %}

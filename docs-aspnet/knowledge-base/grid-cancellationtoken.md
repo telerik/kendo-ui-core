@@ -48,5 +48,5 @@ This feature is available both for MVC and Core Telerik UI toolsets. A full runn
 [Asynchronous Binding with Cancellation Token](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid)
 
 ## See Also
-* [ToDataSourceResultAsync - QueryableExtensions](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.Extensions/QueryableExtensions#todatasourceresultasyncsystemdatadatatablekendomvcuidatasourcerequest)
+* [ToDataSourceResultAsync - QueryableExtensions](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.extensions/queryableextensions#todatasourceresultasyncsystemdatadatatablekendomvcuidatasourcerequest)
 * [Asynchronous Programming - Microsoft Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/)

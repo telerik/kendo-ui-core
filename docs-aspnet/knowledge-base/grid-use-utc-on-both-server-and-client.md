@@ -112,9 +112,9 @@ To explore the complete example, see the project on how to [use UTC time on both
 ## See Also
 
 {% if site.core %}
-* [GridBuilder API Reference](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridbuilder)
 {% else %}
-* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder)
 {% endif %}
 
 

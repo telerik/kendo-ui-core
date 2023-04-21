@@ -27,9 +27,9 @@ I use the Grid's Excel Export configuration but I also need to export the conten
 ## Solution
 To export the content of the ColumnTemplates:
 {% if site.core %}
-1. Subscribe to the [ExcelExport Event](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) of the Grid.
+1. Subscribe to the [ExcelExport Event](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) of the Grid.
 {% else %}
-1. Subscribe to the [ExcelExport Event](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring)  of the Grid.
+1. Subscribe to the [ExcelExport Event](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring)  of the Grid.
 {% endif %}
 1. In the handler get the first sheet of the [workbook](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration). This allows you to modify its rows later.
 1. Access the Grid's client-side instance&mdash;it is available in the event's content. Then get the column by its index.

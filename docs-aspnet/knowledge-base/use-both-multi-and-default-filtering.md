@@ -29,7 +29,7 @@ How can I modify the {{ site.product }} Grid to use both multi-checkbox and defa
 
 ## Solution
 
-When the [`filterMenuInit`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#filtermenuinitsystemfuncsystemobjectsystemobject) event fires, append a Kendo UI ListView, which contains the checkboxes, to the filtering menu.
+When the [`filterMenuInit`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#filtermenuinitsystemfuncsystemobjectsystemobject) event fires, append a Kendo UI ListView, which contains the checkboxes, to the filtering menu.
 
 Refer to [this REPL](https://netcorerepl.telerik.com/wPFGcEYD51rmjpQ837) for a runnable sample of the snippet below.
 

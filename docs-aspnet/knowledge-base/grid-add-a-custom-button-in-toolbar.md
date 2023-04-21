@@ -29,7 +29,7 @@ res_type: kb
 Is there a way to create one button in the toolbar right aligned from the other buttons that opens a Kendo UI Window in the Kendo UI Grid?
 
 ## Solution
-One way you can add a custom button is to include a [custom command button](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#custom) in the toolbar.
+One way you can add a custom button is to include a [custom command button](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#custom) in the toolbar.
 
 ```razor
     //toolbar in Kendo UI Grid
@@ -60,5 +60,5 @@ Finally, add some style to right align the Kendo UI Button.
 ```
 
 ## See Also
-* [custom method - GridToolBarCommandFactory's API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#custom)
+* [custom method - GridToolBarCommandFactory's API Reference](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#custom)
 * [open method - Window API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/open)

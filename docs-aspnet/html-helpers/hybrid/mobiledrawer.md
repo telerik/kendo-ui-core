@@ -109,4 +109,4 @@ You can reference a hybrid Drawer instance by using the code from the following 
 
 ## See Also
 
-* [Hybrid DrawerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileDrawerBuilder)
+* [Hybrid DrawerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobiledrawerbuilder)

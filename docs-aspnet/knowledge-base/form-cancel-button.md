@@ -31,7 +31,7 @@ How can I integrate a **Cancel** button within the {{ site.product }} Form?
 To achieve the desired scenario: 
 
 1. Provide initial values for the Form through the `.FormData()` configuration option.
-1. Configure the Form buttons through the [`.ButtonTemplateId()`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/FormBuilder#buttonstemplateidsystemstring) configuration option and provide an `id` for the **Cancel** button.
+1. Configure the Form buttons through the [`.ButtonTemplateId()`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/formbuilder#buttonstemplateidsystemstring) configuration option and provide an `id` for the **Cancel** button.
 1. Attach a click handler for the **Cancel** button.
 1. Within the handler, get the `formData`, set the `form` fields programmatically, and make an Ajax request to the desired end-point.
 

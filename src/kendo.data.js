@@ -4124,7 +4124,7 @@ var __meta__ = {
                 var model = e.items[0],
                     resultData = result.data;
 
-                if (that._isGrouped()) {
+                if (that._isGrouped() && !this._isServerGrouped()) {
                     resultData = flattenGroups(resultData);
                 }
 

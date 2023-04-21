@@ -182,7 +182,7 @@ The usage of [Kendo Templates allows the developer to decide whether the display
 
 ### DataSourceRequest
 
-The [`DataSourceRequest`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI/DataSourceRequest) object contains information on how the data, requested by a the Kendo widget, should be paged, filtered, sorted, grouped. This information is further translated internally to System.Linq.Expressions.Expression class. In the end, the ToDataSourceResult executes a LINQ query based on the information contained DataSourceRequest object, passed to an action method. The DataSourceRequest object itself does not contain user-provided data and does not contain HTML.
+The [`DataSourceRequest`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui/datasourcerequest) object contains information on how the data, requested by a the Kendo widget, should be paged, filtered, sorted, grouped. This information is further translated internally to System.Linq.Expressions.Expression class. In the end, the ToDataSourceResult executes a LINQ query based on the information contained DataSourceRequest object, passed to an action method. The DataSourceRequest object itself does not contain user-provided data and does not contain HTML.
  
 ```
     //

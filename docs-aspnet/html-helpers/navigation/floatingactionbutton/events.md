@@ -8,7 +8,7 @@ position: 6
 
 # Events
 
-The FloatingActionButton for {{ site.framework }} [exposes the `Click()`, `Expand()`, and `Collapse()` events](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/FloatingActionButtonEventBuilder). For a complete example on  FloatingActionButton events, refer to the [demo on using the events of the FloatingActionButton](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/events).
+The FloatingActionButton for {{ site.framework }} [exposes the `Click()`, `Expand()`, and `Collapse()` events](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/floatingactionbuttoneventbuilder). For a complete example on  FloatingActionButton events, refer to the [demo on using the events of the FloatingActionButton](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/events).
 
 The following example demonstrates how to subscribe to the FloatingActionButton events.
 

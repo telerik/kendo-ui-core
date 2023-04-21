@@ -12,5 +12,5 @@ To see the example, refer to the project on how to [add a new value to the Grid 
 
 ## See Also
 
-* [AutoCompleteBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
-* [GridBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [AutoCompleteBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/autocompletebuilder)
+* [GridBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder)

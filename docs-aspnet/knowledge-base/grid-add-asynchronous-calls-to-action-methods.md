@@ -29,7 +29,7 @@ res_type: kb
 What is the best approach to using Async/Await in the Kendo UI Grid's action methods? 
 
 ## Solution
-Kendo.Mvc.Extensions contains QueryableExtensions which include the [ToDatasourceResultAsync method](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.Extensions/QueryableExtensions#todatasourceresultasyncsystemdatadatatablekendomvcuidatasourcerequest) for [asynchronous programming](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/).  The following contains the action methods from the [Kendo UI Grid's Editing Inline Live Demo](https://demos.telerik.com/aspnet-mvc/grid/editing-inline) using ToDataSourceResultAsync:
+Kendo.Mvc.Extensions contains QueryableExtensions which include the [ToDatasourceResultAsync method](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.extensions/queryableextensions#todatasourceresultasyncsystemdatadatatablekendomvcuidatasourcerequest) for [asynchronous programming](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/).  The following contains the action methods from the [Kendo UI Grid's Editing Inline Live Demo](https://demos.telerik.com/aspnet-mvc/grid/editing-inline) using ToDataSourceResultAsync:
 
 ```C#
         public async Task<ActionResult> EditingInline_Read([DataSourceRequest] DataSourceRequest request)
@@ -85,6 +85,6 @@ The ViewModel definition can be found here:
 
 
 ## See Also
-* [ToDataSourceResultAsync - QueryableExtensions](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.Extensions/QueryableExtensions#todatasourceresultasyncsystemdatadatatablekendomvcuidatasourcerequest)
+* [ToDataSourceResultAsync - QueryableExtensions](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.extensions/queryableextensions#todatasourceresultasyncsystemdatadatatablekendomvcuidatasourcerequest)
 * [Inline Editing - Kendo UI Grid Live Demo](https://demos.telerik.com/aspnet-mvc/grid/editing-inline)
 * [Asynchronous Programming - Microsoft Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/)

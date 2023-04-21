@@ -33,9 +33,9 @@ How can I prevent the sorting of the column which uses a header template and has
 ## Solution
 
 {% if site.core %}
-1. To integrate a checkbox within a Grid column's header, use the [`.ClientHeaderTemplate()`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#clientheadertemplatesystemstring) configuration option.
+1. To integrate a checkbox within a Grid column's header, use the [`.ClientHeaderTemplate()`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clientheadertemplatesystemstring) configuration option.
 {% else %}
-1. To integrate a checkbox within a Grid column's header, use the [`.ClientHeaderColumnTemplate()`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#groupheadercolumntemplatesystemaction) configuration option.
+1. To integrate a checkbox within a Grid column's header, use the [`.ClientHeaderColumnTemplate()`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#groupheadercolumntemplatesystemaction) configuration option.
 {% endif %}
 1. To allow the selection and deselection of the checkbox only, handle the `click` event of the checkboxes.
 1. To prevent the sorting of the column upon clicking a checkbox, use the conventional [`.stopPropagation()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) method for the event object.

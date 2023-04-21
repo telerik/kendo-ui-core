@@ -104,4 +104,4 @@ You can reference a hybrid TabStrip instance by using the [`jQuery.data()`](http
 
 ## See Also
 
-* [Hybrid TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
+* [Hybrid TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobiletabstripbuilder)

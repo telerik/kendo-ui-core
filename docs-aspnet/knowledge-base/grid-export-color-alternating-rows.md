@@ -32,7 +32,7 @@ How can I set the background color of the alternating rows of an exported Grid t
 
 Use the [background](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background) option of the Workbook cell to set the background color of the alternating table rows.
 
-1. Handle the [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event of the Grid.
+1. Handle the [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event of the Grid.
 1. Get the Workbook sheet and loop through the array of the sheet rows.
 1. Loop through the cells of the even rows.
 1. Specify the desired background color.

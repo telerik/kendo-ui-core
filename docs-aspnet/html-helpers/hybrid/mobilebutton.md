@@ -88,4 +88,4 @@ You can reference a hybrid Button instance by using the code from the following 
 
 ## See Also
 
-* [Hybrid ButtonBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileButtonBuilder)
+* [Hybrid ButtonBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilebuttonbuilder)

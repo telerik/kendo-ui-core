@@ -224,7 +224,7 @@ Next, add some basic content to the Drawer items by using the `Content()` method
 
 ## 5. Handle a Drawer Event
 
-The Drawer exposes an [`ItemClick()` event](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/DrawerEventBuilder) that you can handle and assign specific functions to the component. In this tutorial, you will use the `ItemClick()` event to display the content in the selected Drawer item.
+The Drawer exposes an [`ItemClick()` event](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/drawereventbuilder) that you can handle and assign specific functions to the component. In this tutorial, you will use the `ItemClick()` event to display the content in the selected Drawer item.
 
 To hide the content for the items that aren't currently selected, you will apply the `hidden` CSS style.
 

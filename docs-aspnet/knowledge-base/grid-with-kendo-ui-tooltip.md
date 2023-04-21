@@ -45,12 +45,12 @@ How can I show a Tooltip for the Telerik UI Grid for {{ site.framework }}?
         .Width(250)
     )
 ```
-* Specify a selector for elements, which the Tooltip will display within the grid, through the [`Filter`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/TooltipBuilderBase#filtersystemstring) configuration method.
+* Specify a selector for elements, which the Tooltip will display within the grid, through the [`Filter`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/tooltipbuilderbase#filtersystemstring) configuration method.
 
 ```
     .Filter("td:nth-child(3), th:nth-child(3)")
 ```
-* Provide a content handler for the Tooltip by using the [`ContentHandler`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/TooltipBuilderBase#contenthandlersystemstring) configuration method.
+* Provide a content handler for the Tooltip by using the [`ContentHandler`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/tooltipbuilderbase#contenthandlersystemstring) configuration method.
 
 ```
     .ContentHandler("contentHandler")

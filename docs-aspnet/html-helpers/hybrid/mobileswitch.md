@@ -88,4 +88,4 @@ You can reference a hybrid Switch instance by using the [`jQuery.data()`](http:/
 
 ## See Also
 
-* [Hybrid SwitchBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
+* [Hybrid SwitchBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobileswitchbuilder)

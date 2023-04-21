@@ -57,9 +57,9 @@ For a runnable example, refer to the [Telerik REPL example on expanding static i
 * `expandItems` goes through an array of `dataItems` and expands those that have children and aren't expanded.
 * `iterateChildren` goes through all the items that have children and applies the `expandItems` function.
 {% if site.core %}
-  When these functions are executed in the [`DataBound` event](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/PanelBarEventBuilder#databoundsystemstring) handler of the PanelBar, a recursion occurs. It terminates when all the items of the component are iterated and expanded.
+  When these functions are executed in the [`DataBound` event](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/panelbareventbuilder#databoundsystemstring) handler of the PanelBar, a recursion occurs. It terminates when all the items of the component are iterated and expanded.
 {% else %}
-  When these functions are executed in the [`DataBound` event](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/PanelBarEventBuilder#databoundsystemstring) handler of the PanelBar, a recursion occurs. It terminates when all the items of the component are iterated and expanded.
+  When these functions are executed in the [`DataBound` event](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/panelbareventbuilder#databoundsystemstring) handler of the PanelBar, a recursion occurs. It terminates when all the items of the component are iterated and expanded.
 {% endif %}
 * (Optional) Add another condition that determines whether the item is expanded based on its previous state or its data values.
 
