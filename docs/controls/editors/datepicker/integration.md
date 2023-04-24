@@ -22,6 +22,8 @@ To use the DateInput as the input element in a DatePicker, enable the [`dateInpu
     </script>
 ```
 
+To customize the placeholders of the DateInput set the [`messages.dateInput`](api/javascript/ui/datepicker/configuration/messages.dateinput) configuration.
+
 ## See Also
 
 * [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)

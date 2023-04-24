@@ -1794,5 +1794,31 @@
             });
         });
 
+        it("separator is positioned at the proper place in a scenario with overflow", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    { type: "button", text: "foo" },
+                    { type: "separator" },
+                    { type: "button", text: "foo" },
+                    { type: "button", text: "foo", overflow: "always" }
+                ]
+            }).data("kendoToolBar");
+
+            assert.equal(container.find(".k-separator").index(), 1);
+        });
+
+        it("spacer is positioned at the proper place in a scenario with overflow", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    { type: "button", text: "foo" },
+                    { type: "spacer" },
+                    { type: "button", text: "foo" },
+                    { type: "button", text: "foo", overflow: "always" }
+                ]
+            }).data("kendoToolBar");
+
+            assert.equal(container.find(".k-spacer").index(), 1);
+        });
+
     });
 }());

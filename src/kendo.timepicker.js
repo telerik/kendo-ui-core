@@ -1385,7 +1385,8 @@ var __meta__ = {
                     interval: options.interval,
                     size: options.size,
                     fillMode: options.fillMode,
-                    rounded: options.rounded
+                    rounded: options.rounded,
+                    messages: options.messages.dateInput
                 });
             }
             that._old = that._update(options.value || that.element.val());

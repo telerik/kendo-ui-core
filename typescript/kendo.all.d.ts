@@ -225,6 +225,15 @@ declare namespace kendo {
     function widgetInstance(element: JQuery, suite?: typeof kendo.mobile.ui): kendo.ui.Widget;
     function widgetInstance(element: JQuery, suite?: typeof kendo.dataviz.ui): kendo.ui.Widget;
 
+    interface MediaQueryHandler {
+        mediaQueryList: MediaQueryList;
+        onChange(callback: (e: MediaQueryListEvent) => void): MediaQueryHandler;
+        onEnter(callback: (e: MediaQueryListEvent) => void): MediaQueryHandler;
+        onLeave(callback: (e: MediaQueryListEvent) => void): MediaQueryHandler;
+        destroy(): void;
+    }
+
+    function mediaQuery(query: string): MediaQueryHandler;
 
     var ns: string;
 
@@ -3860,6 +3869,7 @@ declare namespace kendo.ui {
 
     interface DatePickerMessages {
         weekColumnHeader?: string;
+        dateInput?: DateInputMessages | undefined;
     }
 
     interface DatePickerOptions {
@@ -4049,6 +4059,7 @@ declare namespace kendo.ui {
 
     interface DateTimePickerMessages {
         weekColumnHeader?: string;
+        dateInput?: DateInputMessages | undefined;
     }
 
     interface DateTimePickerOptions {
@@ -11784,6 +11795,7 @@ declare namespace kendo.ui {
         format?: string | undefined;
         interval?: number | undefined;
         max?: Date | undefined;
+        messages?: TimePickerMessages | undefined;
         min?: Date | undefined;
         parseFormats?: any;
         rounded?: string | undefined;
@@ -11793,6 +11805,17 @@ declare namespace kendo.ui {
         change?(e: TimePickerChangeEvent): void;
         close?(e: TimePickerCloseEvent): void;
         open?(e: TimePickerOpenEvent): void;
+    }
+
+    interface TimePickerMessages {
+        now?: string;
+        hour?: string;
+        minute?: string;
+        second?: string;
+        millisecond?: string;
+        cancel?: string;
+        set?: string;
+        dateInput?: DateInputMessages | undefined;
     }
     interface TimePickerEvent {
         sender: TimePicker;

@@ -1,3 +1,5 @@
+import { defaultBreakpoints, mediaQuery } from './utils/mediaquery.js';
+
 var __meta__ = {
     id: "core",
     name: "Core",
@@ -2791,6 +2793,7 @@ function pad(number, digits, end) {
         isLocalUrl: function(url) {
             return url && !localUrlRe.test(url);
         },
+        mediaQuery: mediaQuery,
 
         expr: function(expression, safe, paramName) {
             expression = expression || "";
@@ -5259,6 +5262,8 @@ function pad(number, digits, end) {
         // Use external global flags for templates.
         kendo.debugTemplates = window.DEBUG_KENDO_TEMPLATES;
 
+        // Setup default mediaQuery breakpoints
+        kendo.setDefaults('breakpoints', defaultBreakpoints);
     })();
 
     // Implement type() as it has been depricated in jQuery

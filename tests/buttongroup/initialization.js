@@ -245,5 +245,19 @@
             assert.isOk(buttonGroup.element.children().eq(0).hasClass("k-rounded-full"));
             assert.isOk(buttonGroup.element.children().eq(1).hasClass("k-rounded-full"));
         });
+
+        it("encoded:false renders HTML as a Button content", function() {
+            buttonGroup = initializeButtonGroup({
+                items: [
+                    { text: "<b>test</b>", encoded: false },
+                    { text: "<b>test</b>", encoded: true }
+                ]
+            });
+
+            assert.equal(buttonGroup.element.children().eq(0).text(), "test");
+            assert.equal(buttonGroup.element.children().eq(0).find("b.k-button-text").length, 1);
+            assert.equal(buttonGroup.element.children().eq(1).text(), "<b>test</b>");
+            assert.equal(buttonGroup.element.children().eq(1).find(".k-button-text b").length, 0);
+        });
     });
 }());

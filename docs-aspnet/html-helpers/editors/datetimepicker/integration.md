@@ -6,9 +6,9 @@ slug: dateinputintegration_datetimepicker_aspnetcore
 position: 9
 ---
 {% if site.core %}
-    {% assign DateInput = "/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder#dateinputsystemboolean" %}
+    {% assign DateInput = "/api/kendo.mvc.ui.fluent/datetimepickerbuilder#dateinputsystemboolean" %}
 {% else %}
-    {% assign DateInput = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#dateinputsystemboolean" %}
+    {% assign DateInput = "/api/kendo.mvc.ui.fluent/datepickerbuilderbase#dateinputsystemboolean" %}
 {% endif %}
 
 # DateInput Integration
@@ -29,6 +29,8 @@ To use the DateInput as the input element in a DateTimePicker, enable the [`Date
                        date-input="true"/>
 ```
 {% endif %}
+
+To customize the placeholders of the DateInput use the [`Messages`](api/kendo.mvc.ui.fluent/datetimepickermessagessettingsbuilder) configuration and set the desired DateInput messages.
 
 ## See Also
 

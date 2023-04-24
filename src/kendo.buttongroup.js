@@ -280,7 +280,7 @@ var __meta__ = {
                 var text = item.text ? item.encoded === false ? item.text : kendo.htmlEncode(item.text) : "",
                     el = item.url ? $("<a href=" + item.url + ">") : $("<button>");
 
-                el.text(text);
+                el.html(text);
 
                 if (item.attributes) {
                     el.attr(item.attributes);
