@@ -38,9 +38,9 @@ In the sample URLs above, you must replace `[VERSION]`, [THEMEVERSION] and `[FIL
 
 ## Adding the Required CSS Files
 
-Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The minified versions of the `.css` files are available in the `themes` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/themes/[THEMEVERSION]/default/[FILENAME]`.
+Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The minified versions of the `.css` files are available in the `themes` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/themes/<version>/<theme>/<swatch>.css`.
 
-To load version `{{site.cdnVersion}}` of the desired visual theme, replace `[THEMEVERSION]` and `[FILENAME]` with their actual values, for example, `ttps://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`.
+To load version `{{site.themesCdnVersion}}` of the desired visual theme, replace `[THEMEVERSION]` and `[FILENAME]` with their actual values, for example, `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`.
 
 ## Adding the Required JavaScript Files
 
