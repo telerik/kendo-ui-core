@@ -46,6 +46,7 @@ The following example demonstrates the basic configuration for the TextArea.
 * [RTL Support]({% slug rtl_textarea_aspnetcore %})&mdash;The TextArea enables you to render its content content in a right-to-left direction for right-to-left languages.
 * [Events]({% slug events_textarea %})&mdash;The TextArea allows you to handle its events and implement custom functionality.
 
+>tip To learn more about the appearance, anatomy, and accessibility of the TextArea, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/textarea/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ## Next Steps
 

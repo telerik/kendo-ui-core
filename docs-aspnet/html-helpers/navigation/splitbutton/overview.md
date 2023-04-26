@@ -56,6 +56,8 @@ The following example demonstrates how to define the SplitButton.
 * [Icons]({% slug htmlhelpers_splitbutton_aspnetcore_icons %})&mdash;You can enchance the SplitButton's textual content by adding icons.
 * [Accessibility]({% slug accessibility_aspnetcore_splitbutton %})&mdash;You can access the SplitButton by different screen readers.
 
+>tip To learn more about the appearance, anatomy, and accessibility of the SplitButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/splitbutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## See Also
 
 * [Overview of the SplitButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/index)

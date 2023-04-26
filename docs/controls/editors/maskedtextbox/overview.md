@@ -40,6 +40,8 @@ To get a reference to an existing MaskedTextBox instance:
 
 The MaskedTextBox supports the implementation of [mask rules]({% slug masks_kendoui_maskedtextbox_widget %}) to validate its input value.
 
+>tip To learn more about the appearance, anatomy, and accessibility of the MaskedTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/maskedtextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Known Limitations
 
 To restrict the typed value, the MaskedTextBox "listens" to input events such as `keydown` and `keypress`.

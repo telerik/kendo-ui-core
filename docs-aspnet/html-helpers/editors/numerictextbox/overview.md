@@ -79,6 +79,8 @@ The NumericTextBox configuration options are passed as attributes.
 | [Input Restrictions]({% slug input_restrictions_numerictextbox_aspnetcore %})|You can restrict the accepted value to a specific range and also control its precision.|
 | [Events]({% slug events_numerictextbox_aspnetcore %})|The NumericTextBox exposes the `Change()` and `Spin()` events that allow you to control its behavior.|
 
+>tip To learn more about the appearance, anatomy, and accessibility of the NumericTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/numerictextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the NumericTextBox]({% slug aspnetcore_numerictextbox_getting_started %})

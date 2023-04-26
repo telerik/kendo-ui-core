@@ -29,6 +29,7 @@ The user input is restricted within the predefined options. To apply a keyboard 
 |[Globalization]({% slug globalization_dropdownlist_widget %})|The DropDownList supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_kendoui_ddl_widget %}) need to be supported. Additionally, the DropDownList supports [rendering in a right-to-left (RTL) direction]({% slug rtl_kendoui_ddl_widget %}).
 |[Accessibility]({% slug accessibility_kendoui_grid_widget %})|The DropDownList is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_ddl_widget %}).
 
+>tip To learn more about the appearance, anatomy, and accessibility of the DropDownList, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/dropdownlist/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ## Next Steps 
 

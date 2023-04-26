@@ -41,6 +41,8 @@ The following example demonstrates how to initialize the RadioButton.
 * [Checked RadioButton]({% slug modelbinding_radiobutton_aspnetcore %})
 * [Model binding]({% slug modelbinding_radiobutton_aspnetcore %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the RadioButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/radiobutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## See Also
 
 * [RadioButton Server-Side API](/api/radiobutton)

@@ -45,6 +45,8 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 * [Globalization]({% slug globalization_maskedtextbox_aspnetcore %})
 * [Accessibility]({% slug accessibility_maskedtextbox_aspnetcore %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the MaskedTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/maskedtextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Events
 
 You can subscribe to all MaskedTextBox events. For a complete example on basic MaskedTextBox events, refer to the [demo on using the events of the MaskedTextBox](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/events).

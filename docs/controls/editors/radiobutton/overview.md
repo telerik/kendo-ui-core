@@ -32,6 +32,7 @@ The following example demonstrates how to initialize the RadioButton from an exi
 * [Appearance]({% slug appearance_radiobutton_widget %})
 * [Label]({% slug label_radiobutton_widget %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the RadioButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/radiobutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ## See Also
 

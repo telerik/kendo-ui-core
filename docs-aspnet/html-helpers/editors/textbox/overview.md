@@ -47,6 +47,8 @@ The following example demonstrates the basic configuration for the TextBox.
 * [RTL support]({% slug rtl_textbox_aspnetcore %})—You can use the Right-to-left (RTL) support of the TextBox to render its content for right-to-left languages, such as Arabic, Hebrew, Chinese, or Japanese.
 * [Events]({% slug events_textbox_aspnetcore %})—The TextBox emits multiple events that you can handle and control the behavior of the component.
 
+>tip To learn more about the appearance, anatomy, and accessibility of the TextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/textbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the TextBox]({% slug aspnetcore_textbox_getting_started %})

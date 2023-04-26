@@ -62,6 +62,8 @@ The configuration options of the Switch are passed as attributes.
 
 The Switch provides [accessibility support]({% slug accessibility_aspnetcore_switch %}) through its keyboard navigation.
 
+>tip To learn more about the appearance, anatomy, and accessibility of the Switch, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/switch/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Events
 
 You can subscribe to all Switch events. For a complete example on basic Switch events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/{{ site.platform }}/switch/events).

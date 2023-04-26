@@ -21,6 +21,8 @@ By default, the widget renders **Spin** buttons which increase or decrease the v
 * [Globalization]({% slug globalization_numerictextbox %})&mdash;The NumericTextBox supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_numerictextbox %}) need to be supported. Additionally, the NumericTextBox supports [rendering in a right-to-left (RTL) direction]({% slug rtl_numerictextbox %}).
 * [Accessibility]({% slug accessibility_numerictextbox %})&mdash;The NumericTextBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_numerictextbox %}).
 
+>tip To learn more about the appearance, anatomy, and accessibility of the NumericTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/numerictextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the Kendo UI NumericTextBox for jQuery]({% slug getting_started_kendoui_numerictextbox_widget %})

@@ -22,6 +22,8 @@ The ComboBox displays a list of values, allowing for making a single selection f
 * [Appearance]({% slug appearance_kendoui_combobox %})
 * [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the ComboBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/combobox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the Kendo UI ComboBox for jQuery]({% slug getting_started_kendoui_combobox_widget %})

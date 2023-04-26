@@ -179,6 +179,8 @@ The DropDownList configuration options are passed as attributes.
 * [Templates]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %})—To control how the items, selected value, or a pop-up header are rendered, you can use the available templates.
 * [Accessibility]({% slug accessibility_aspnetcore_dropdownlist %})—The DropDownList is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
+>tip To learn more about the appearance, anatomy, and accessibility of the DropDownList, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/dropdownlist/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the DropDownList]({% slug aspnetcore_dropdownlist_getting_started %})

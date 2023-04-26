@@ -172,6 +172,8 @@ The following example demonstrates the basic configuration of the ComboBox.
 | [Cascading]({% slug htmlhelpers_combobox_cascading_aspnetcore %})|You can use a series of two or more cascaded ComboBoxes.|
 | [Accessibility]({% slug accessibility_aspnetcore_combobox %})|The ComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
 
+>tip To learn more about the appearance, anatomy, and accessibility of the ComboBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/combobox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the ComboBox]({% slug aspnetcore_combobox_getting_started %})

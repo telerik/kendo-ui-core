@@ -14,7 +14,7 @@ The Telerik UI CheckBox TagHelper and HtmlHelper for {{ site.framework }} are se
 The Telerik UI CheckBox HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI DataSource widget.
 {% endif %}
 
-The Telerik UI CheckBox for {{ site.framework }} is based on the convential HTML checkbox element. It allows you to add more customizable checkboxes to your application.
+The Telerik UI CheckBox for {{ site.framework }} is based on the conventional HTML checkbox element. It allows you to add more customizable checkboxes to your application.
 
 ## Initializing the CheckBox
 
@@ -35,6 +35,8 @@ The following example demonstrates how to define the CheckBox.
     </kendo-checkbox>
 ```
 {% endif %}
+
+>tip To learn more about the appearance, anatomy, and accessibility of the CheckBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/checkbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ## Two-way Binding
 

@@ -26,6 +26,8 @@ The MultiSelect displays a list of options and allows for multiple selections fr
 * [Globalization]({% slug globalization_multiselect %})
 * [Accessibility]({% slug accessibility_kendoui_multiselect_widget %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the MultiSelect, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/multiselect/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the Kendo UI MultiSelect for jQuery]({% slug getting_started_kendoui_multiselect_widget %})

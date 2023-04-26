@@ -42,6 +42,8 @@ The following example demonstrates how to initialize the SplitButton from a `<bu
 * [Icons]({% slug icons_kendoui_splitbutton_widget %})
 * [Accessibility]({% slug accessibility_kendoui_splitbutton_widget %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the SplitButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/splitbutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## See Also
 
 * [Overview of the SplitButton (Demo)](https://demos.telerik.com/kendo-ui/splitbutton/index)

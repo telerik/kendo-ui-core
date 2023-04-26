@@ -19,7 +19,7 @@ The component can be clicked or removed and supports various styling options. Th
 * [Customization]({% slug customization_kendoui_chip_widget %})&mdash;You can add a [`Select`] or [`Remove`] custom icon to the Chip as well as display avatars in it.
 * [Appearance]({% slug chip_styling_widget %})&mdash;The Chip delivers ready-to-use, predefined sets of styling options.
 
-
+>tip To learn more about the appearance, anatomy, and accessibility of the Chip, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/chip/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ## Next Steps
 

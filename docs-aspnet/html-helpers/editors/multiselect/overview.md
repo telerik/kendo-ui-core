@@ -170,7 +170,7 @@ The following example demonstrates the basic configuration of the MultiSelect. T
 * [Templates]({% slug htmlhelpers_multiselect_templates_aspnetcore %})—The templates allow you to customize the rendering of the items, tags, and pop-up header.
 * [Accessibility]({% slug accessibility_aspnetcore_multiselect %})—The MultiSelect is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
-
+>tip To learn more about the appearance, anatomy, and accessibility of the MultiSelect, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/multiselect/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ### MultiSelect Down Arrow
 

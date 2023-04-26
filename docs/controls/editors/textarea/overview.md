@@ -88,6 +88,8 @@ The following example demonstrates how to access an existing TextArea instance.
 
 * [Labels]({% slug labels_textarea %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the TextArea, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/textarea/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## See Also
 
 * [Basic Usage of the TextArea (Demo)](https://demos.telerik.com/kendo-ui/textarea/index)

@@ -55,6 +55,8 @@ The following example demonstrates how to initialize Kendo UI ButtonGroup from a
 * [Selection]({% slug selection_kendoui_buttongroup %})
 * [Accessibility]({% slug accessibility_buttongroup_jquery %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the ButtonGroup, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/buttongroup/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## See Also
 
 * [Basic Usage of the ButtonGroup (Demo)](https://demos.telerik.com/kendo-ui/buttongroup/index)

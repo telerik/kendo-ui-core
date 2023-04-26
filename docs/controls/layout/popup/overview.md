@@ -43,6 +43,8 @@ The following example demonstrates how to initialize the Popup and what its basi
 
 The Popup provides options for [aligning and appending it to elements and positioning it to specific points]({% slug alignposition_kendoui_popup %}).  
 
+>tip To learn more about the appearance, anatomy, and accessibility of the Popup, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/popup/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Events
 
 The Popup exposes the `activate`, `open`, `close`, and `deactivate` events. For more information, refer to the [JavaScript API reference of the Popup](/api/javascript/ui/popup).

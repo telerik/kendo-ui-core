@@ -57,6 +57,8 @@ The following example demonstrates how to initialize the ButtonGroup.
 * [Selection]({% slug selection_buttongroup_aspnetcore %})&mdash;You can control the number of buttons that the user can select in each ButtonGroup.
 * [Events]({% slug events_buttongroup_aspnetcore %})&mdash;You can handle the ButtonGroup events and implement custom functionalities.
 
+>tip To learn more about the appearance, anatomy, and accessibility of the ButtonGroup, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/buttongroup/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the ButtonGroup]({% slug aspnetcore_buttongroup_getting_started %})

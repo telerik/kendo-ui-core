@@ -35,6 +35,8 @@ To initialize the Switch, use a jQuery selector.
 * [Custom Switch]({% slug custom_kendoui_switch_widget %})
 * [Accessibility]({% slug accessibility_kendoui_switch %})
 
+>tip To learn more about the appearance, anatomy, and accessibility of the Switch, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/switch/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Referencing Existing Instances
 
 To reference an existing Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
