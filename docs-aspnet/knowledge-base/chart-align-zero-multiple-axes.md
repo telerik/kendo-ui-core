@@ -1,7 +1,7 @@
 ---
 title: Aligning Zero with Multiple Axes in the Chart
 page_title: Aligning Zero with Multiple Axes in the Chart
-description: "An example on how to align the zero value for multiple value axes in the {{ site.product }} Chart."
+description: An example on how to align the zero value for multiple value axes in the {{ site.product }} Chart.
 type: how-to
 slug: chart-align-zero-multiple-axes
 tags: telerik, chart, align, zero, multiple, axes, value
@@ -136,8 +136,8 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
+* [Telerik REPL: Align Zero with Multiple Axes in the Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500)
 * [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
-* [Telerik REPL: Align Zero with Multiple Axes in the Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500)

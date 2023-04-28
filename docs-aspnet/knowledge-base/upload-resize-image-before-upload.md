@@ -1,6 +1,6 @@
 ---
-title: Resize Images before Upload
-description: An example on how to resize an image that is selected by the user before it is uploaded to the server in the Telerik UI Upload for ASP.NET Core.
+title: Resizing Images before Upload
+description: An example on how to resize an image that is selected by the user before it is uploaded to the server in the {{ site.product }} Upload.
 type: how-to
 page_title: Resize Images before They Are Uploaded
 slug: upload-resize-image-before-upload
@@ -14,7 +14,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Upload for Progress® Telerik® UI for ASP.NET Core</td>
+		<td>{{ site.product }} Upload</td>
 	</tr>
 </table>
 
@@ -173,3 +173,31 @@ public class ResizeFileController : Controller
 * The Upload does not offer such a feature out of the box and the suggested workaround may have side effects or provoke issues, especially with a wider variety of images users can upload.
 * The automatic upload is disabled because the resizing of images on the client is asynchronous.
 * You may want to refactor the code to fit your coding standards. A few available comments denote areas that can be improved.
+
+## More {{ site.framework }} Upload Resources
+
+* [{{ site.framework }} Upload Documentation]({%slug htmlhelpers_upload_aspnetcore%})
+
+* [{{ site.framework }} Upload Demos](https://demos.telerik.com/{{ site.platform }}/upload)
+
+{% if site.core %}
+* [{{ site.framework }} Upload Product Page](https://www.telerik.com/aspnet-core-ui/upload)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Upload Product Page](https://www.telerik.com/aspnet-mvc/upload)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Server-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/upload)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

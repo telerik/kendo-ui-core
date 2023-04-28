@@ -1,6 +1,6 @@
 ---
-title: Display a LinearGauge in a Popover When Click on a Grid Cell
-description: How can I display a Popover with a LinearGauge that renders a Grid cell value on click?
+title: Display a LinearGauge in a Popover When Clicking on a Grid Cell
+description: How can I display a Popover with a LinearGauge that renders a Grid cell value on click? Find the solution in the Knowledge Base section of the {{ site.product }} documentation.
 type: how-to
 page_title: Display a LinearGauge in a Popover When Click on a Grid Cell
 slug: grid-linear-gauge-in-popover
@@ -20,24 +20,24 @@ component: grid, linearGauge, popover
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Grid for Progress® Telerik® {{ site.product_short }}</td>
+			<td>Progress® Telerik® {{ site.product_short }} Grid</td>
 		</tr>
 	</tbody>
 </table>
 
 ## Description
 
-How can I display a Popover with a LinearGauge that renders a Grid cell value when the user clicks on it?
+How can I display a [Popover](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/popover/overview) with a [LinearGauge](https://docs.telerik.com/{{ site.platform }}/html-helpers/gauges/lineargauge/overview) that renders a Grid cell value when the user clicks on it?
 
 ## Solution
 
-1. Add a custom class to the Grid columns that should display the LinearGauge when a specified cell is clicked.
+1. Add a custom class to the Grid columns that will display the LinearGauge when a specified cell is clicked.
 
     ```
         columns.Bound(p => p.Freight).HtmlAttributes(new { @class = "lGaugeCol"});
     ```
 
-1. Create a [Popover component](https://demos.telerik.com/{{ site.platform }}/popover/index) and handle its [Show](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PopoverEventBuilder#showsystemstring) and [Hide](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PopoverEventBuilder#hidesystemstring) events.
+1. Create a [Popover component](https://demos.telerik.com/{{ site.platform }}/popover/index) and handle its [`Show`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PopoverEventBuilder#showsystemstring) and [`Hide`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PopoverEventBuilder#hidesystemstring) events.
 
     ```
         @(Html.Kendo().Popover()
@@ -73,7 +73,7 @@ How can I display a Popover with a LinearGauge that renders a Grid cell value wh
 
     ```
 
-1. Initialize the [LinearGauge](https://demos.telerik.com/{{ site.platform }}/linear-gauge) in the Show event handler of the Popover.
+1. Initialize the [LinearGauge](https://demos.telerik.com/{{ site.platform }}/linear-gauge) in the `Show` event handler of the Popover.
 
     ```
         function onShow(e){
@@ -95,7 +95,7 @@ How can I display a Popover with a LinearGauge that renders a Grid cell value wh
 
     ```
 
-1. Destroy the LinearGauge in the Hide event handler of the Popover.
+1. Destroy the LinearGauge in the `Hide` event handler of the Popover.
 
     ```
         function onHide(e) {
@@ -106,8 +106,31 @@ How can I display a Popover with a LinearGauge that renders a Grid cell value wh
 
 For the complete implementation of the suggested approach, refer to [this REPL example](https://netcorerepl.telerik.com/mwkVvyPp311T2IIJ53).
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
- * [Popover Overview](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/popover/overview)
- * [LinearGauge Overview](https://docs.telerik.com/{{ site.platform }}/html-helpers/gauges/lineargauge/overview)
- * [LinearGauge Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge)
+
+* [Telerik REPL: Display a LinearGauge in a Popover When Clicking a Grid Cell](https://netcorerepl.telerik.com/mwkVvyPp311T2IIJ53)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

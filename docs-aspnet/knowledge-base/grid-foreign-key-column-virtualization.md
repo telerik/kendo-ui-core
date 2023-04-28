@@ -1,8 +1,8 @@
 ---
-title: Virtualization for the ForeignKey Column Editor in the Grid
-description: An example on how to virtualize the foreign key column editor in the Telerik {{ site.product_short }}.
+title: Implementing Virtualization for the Foreign Key Column Editor in the Grid
+description: An example on how to virtualize the foreign key column editor in the Telerik {{ site.product_short }} Data Grid.
 type: how-to
-page_title: Virtualize the Foreign Key Column Editor
+page_title: Virtualizing the Foreign Key Column Editor
 slug: grid-foreign-key-column-virtualization
 tags: grid, foreign, editor, key, virtualization, combo, virtual
 ticketid: 1418905, 1406973
@@ -25,9 +25,9 @@ component: grid
 
 ## Description
 
-I would like to implement the virtualization for the Foreign key column used in the kendogrid.
+I need to implement the virtualization for the Foreign Key column used in the {{ site.product }} Grid.
 
-As the list is big (around 10000 records), it takes time to bind. So planning to implement the dropdownlist virtualization for the list. How can I virtualize the foreign key column list that is already serialized in the ViewData?
+As the list is big (around 10000 records), it takes time to bind. So planning to implement the drop-down list virtualization for the list. How can I virtualize the Foreign Key column list that is already serialized in the `ViewData`?
 
 ## Solution
 
@@ -74,3 +74,31 @@ The virtual ComboBox and DropDownList usually have server operations, however th
         .Virtual(v => v.ValueMapper("valueMapper"))
     )
 ```
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

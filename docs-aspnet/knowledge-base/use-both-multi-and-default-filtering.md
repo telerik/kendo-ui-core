@@ -1,8 +1,8 @@
 ---
-title: Use Both Multi-Checkbox and Default Grid Filtering
+title: Using Both Multi-Checkbox and Default Grid Filtering
 description: An example on how to modify the Grid for {{ site.framework }} to use both its multi-checkbox and default filtering.
 type: how-to
-page_title: Use Multi-Checkbox and Default Filtering 
+page_title: Using Multi-Checkbox and Default Filtering 
 slug: use-both-multi-and-default-filtering
 tags: grid, filtering, multi, default
 ticketid: 1120044
@@ -163,8 +163,30 @@ Refer to [this REPL](https://netcorerepl.telerik.com/wPFGcEYD51rmjpQ837) for a r
     </style>
 ```
 
-## See Also
-* [Grid Custom data source(Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Client-side API FilterMenuInit Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit)
+## More {{ site.framework }} Grid Resources
 
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

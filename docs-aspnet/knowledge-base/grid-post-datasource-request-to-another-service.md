@@ -1,8 +1,8 @@
 ---
-title: Serialize DataSource Request of Grid and post it to another backend service
-description: An example on how to post the DataSourceRequest to another remote service on the server.
+title: Serialize DataSource Request of Grid and Post It to Another Backend Service
+description: An example on how to post the DataSourceRequest to another remote service on the server when working with the {{ site.product }} Grid. 
 type: how-to
-page_title: Post DataSourceReuqest to another data layer
+page_title: Post DataSourceReuqest to Another Data Layer
 slug: grid-post-datasource-request-to-another-service
 tags: grid, post, DataSourceRequest, HttpClient
 ticketid: 1442001
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
+  <td>{{ site.product }} Grid</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -29,7 +29,7 @@ component: grid
 
 ## Description
 
-I've started using SpreadStreamProcessing and am now trying to get it to work with my existing code. I would like to pass the DataSourceRequest to another method and use it to generate an excel file. How can I post the existing Request
+I've started using SpreadStreamProcessing and I'm now trying to get it to work with my existing code. I would like to pass the `DataSourceRequest` to another method and use it to generate an excel file. How can I post the existing request?
 
 ## Solution
 
@@ -63,3 +63,31 @@ I've started using SpreadStreamProcessing and am now trying to get it to work wi
     }
 
 ```
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

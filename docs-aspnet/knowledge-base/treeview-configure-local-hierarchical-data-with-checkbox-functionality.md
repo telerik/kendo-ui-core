@@ -1,8 +1,8 @@
 ---
-title: Configure Local Hierarchical Data with CheckBox Functionality
+title: Configuring Local Hierarchical Data with CheckBox Functionality
 description: Bind data from the model to the Kendo UI TreeView with local hierarchical data and checkbox functionality.
 type: how-to
-page_title: Set Hierarchy in Model with Checkbox Properties
+page_title: Setting Hierarchy in Model with Checkbox Properties
 slug: treeview-configure-local-hierarchical-data-with-checkbox-functionality
 position: 
 tags: treeview, checkbox, model
@@ -26,6 +26,7 @@ res_type: kb
 
 
 ## Description
+
 Is there a way to set the hierarchical configuration in the model to a Kendo UI TreeView locally with checkbox selection?
 
 ## Solution
@@ -127,10 +128,30 @@ The Kendo UI TreeView can be bound to a defined model from a controller and can 
         }
 ```
 
+## More {{ site.framework }} TreeView Resources
 
+* [{{ site.framework }} TreeView Documentation]({%slug htmlhelpers_treeview_aspnetcore%})
 
+* [{{ site.framework }} TreeView Demos](https://demos.telerik.com/{{ site.platform }}/treeview)
+
+{% if site.core %}
+* [{{ site.framework }} TreeView Product Page](https://www.telerik.com/aspnet-core-ui/treeview)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} TreeView Product Page](https://www.telerik.com/aspnet-mvc/treeview)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
-* [TreeView - Binding to Local Data Live Demo](https://demos.telerik.com/aspnet-mvc/treeview/local-data-binding)
-* [TreeView Checkboxes](https://docs.telerik.com/aspnet-mvc/html-helpers/navigation/treeview/checkboxes)
-* [TreeView Binding - Local Data Binding](https://docs.telerik.com/aspnet-mvc/html-helpers/navigation/treeview/binding#local-data-binding)
+
+* [Client-Side API Reference of the TreeView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [Server-Side API Reference of the TreeView for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/treeview)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

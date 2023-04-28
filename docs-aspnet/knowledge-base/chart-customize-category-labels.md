@@ -110,8 +110,8 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
+* [Telerik REPL: Customize the Category Labels of the Bar Chart](https://netcorerepl.telerik.com/cRYFEKlh02kX4pEE00)
 * [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
-* [Telerik REPL: Customize the Category Labels of the Bar Chart](https://netcorerepl.telerik.com/cRYFEKlh02kX4pEE00)

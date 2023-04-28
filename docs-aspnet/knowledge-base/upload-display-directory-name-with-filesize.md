@@ -70,3 +70,32 @@ How can I display the directory name and the total size of its content when work
 ```
 
 For the complete implementation of the suggested approach, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/mwEPueFY11892ccr56) example.
+
+## More {{ site.framework }} Upload Resources
+
+* [{{ site.framework }} Upload Documentation]({%slug htmlhelpers_upload_aspnetcore%})
+
+* [{{ site.framework }} Upload Demos](https://demos.telerik.com/{{ site.platform }}/upload)
+
+{% if site.core %}
+* [{{ site.framework }} Upload Product Page](https://www.telerik.com/aspnet-core-ui/upload)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Upload Product Page](https://www.telerik.com/aspnet-mvc/upload)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik REPL: Display Directory Name and File Size in Upload](https://netcorerepl.telerik.com/mwEPueFY11892ccr56)
+* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Server-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/upload)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

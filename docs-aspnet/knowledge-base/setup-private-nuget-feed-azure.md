@@ -1,5 +1,5 @@
 ---
-title: Set Up Private NuGet Feed for Azure
+title: Setting Up a Private NuGet Feed for Azure
 description: An example on how to set up the private NuGet feed in Azure to publish an ASP.NET Core application that references the Telerik UI for ASP.NET Core assembly.
 page_title: Set Up Private NuGet Feed for Azure
 type: how-to
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Telerik® UI for ASP.NET Core</td>
+  <td>Progress® Telerik® {{ site.product_short }}</td>
  </tr>
 </table>
 
@@ -123,6 +123,28 @@ Just like when using a Service Connection, go to the build pipeline and select t
 > Important: If you have nuget.org packages to restore in addition to the Telerik packages, leave the "Use packages from NuGet.org" option selected.
 
 
+## More {{ site.framework }} Resources
+
+* [{{ site.product }} Documentation]({%slug overview_aspnetmvc6_aspnetmvc%})
+
+* [{{ site.product }} Demos](https://demos.telerik.com/{{ site.platform }})
+
+{% if site.core %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-mvc)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Visual Studio Integration]({% slug overview_visualstudio_aspnetcore %})
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

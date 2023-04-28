@@ -1,8 +1,8 @@
 ---
-title: MultiSelect Select Many Elements When Shift Button is Hold Down  
+title: Selecting MultiSelect Items When Holding Shift Button
 description: How can I select one item in the MultiSelect and then, if the shift button is held down, select another item and all items between them?
 type: how-to
-page_title: MultiSelect Select Multiple Items
+page_title: Selecting MultiSelect Items When Holding Shift Button
 slug: multiselect-select-multiple-items-shift-is-down
 tags: multiselect, select, many, items, when, shift, key, button, hold
 res_type: kb
@@ -131,3 +131,31 @@ Example:
         }
     }
 ```
+
+## More {{ site.framework }} MultiSelect Resources
+
+* [{{ site.framework }} MultiSelect Documentation]({%slug htmlhelpers_multiselect_aspnetcore%})
+
+* [{{ site.framework }} MultiSelect Demos](https://demos.telerik.com/{{ site.platform }}/multiselect)
+
+{% if site.core %}
+* [{{ site.framework }} MultiSelect Product Page](https://www.telerik.com/aspnet-core-ui/multiselect)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} MultiSelect Product Page](https://www.telerik.com/aspnet-mvc/multiselect)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Server-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

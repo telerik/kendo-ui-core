@@ -1,7 +1,7 @@
 ---
-title: Add a Rotating-Image Functionality to the ImageEditor
-page_title: Add a Functionality for Rotating Images in the ImageEditor
-description: "An example on how to add a functionality for rotating images in the {{ site.product }} ImageEditor."
+title: Adding a Rotating-Image Functionality to the ImageEditor
+page_title: Adding a Rotating-Image Functionality to the ImageEditor
+description: Learn how to add a functionality for rotating images in the {{ site.product }} ImageEditor. Find the solution in the Knowledge Base section of the {{ site.product }} documentation.
 type: how-to
 slug: imageeditor-rotate-image
 tags: progress, telerik, aspnet, mvc, core, imageeditor, image, rotate, edit
@@ -14,7 +14,7 @@ component: imageeditor
 <table>
  <tr>
   <td>Product</td>
-  <td>{{ site.prodcut }} ImageEditor</td>
+  <td>{{ site.product }} ImageEditor</td>
  </tr>
  <tr>
   <td>Progress {{ site.product }} version</td>
@@ -79,4 +79,33 @@ To achieve the desired scenario:
 ```
 
 
-For a complete implementation of the suggested approach, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/cwEtcMkf58Vhoi8t58).
+For the complete implementation of approach suggested above, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/cwEtcMkf58Vhoi8t58).
+
+## More {{ site.framework }} ImageEditor Resources
+
+* [{{ site.framework }} ImageEditor Documentation]({%slug htmlhelpers_imageeditor_aspnetcore%})
+
+* [{{ site.framework }} ImageEditor Demos](https://demos.telerik.com/{{ site.platform }}/imageeditor)
+
+{% if site.core %}
+* [{{ site.framework }} ImageEditor Product Page](https://www.telerik.com/aspnet-core-ui/image-editor)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} ImageEditor Product Page](https://www.telerik.com/aspnet-mvc/image-editor)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik REPL: Adding a Rotating-Image Functionality to the ImageEditor](https://netcorerepl.telerik.com/cwEtcMkf58Vhoi8t58)
+* [Client-Side API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)
+* [Server-Side API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/imageeditor)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

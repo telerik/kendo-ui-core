@@ -1,8 +1,8 @@
 ---
-title: MultiSelect selection in a window, related to a DropDownList item.
-description: How can I relate a MultiSelect selection from a window to an item from a DropDownList?
+title: Using MultiSelect in a Window Related to DropDownList Item
+description: How can I relate a MultiSelect selection from a window to an item from a DropDownList? Find the solution in the Knowledge Base section of the {{ site.product }} documentation.
 type: how-to
-page_title: MultiSelect selection in a window, related to a DropDownList item
+page_title: Using MultiSelect in a Window Related to DropDownList Item
 slug: multiselect-selection-related-to-parent-dropdownlist
 tags: multiselect, dropdownlist, window, selection, relation
 res_type: kb
@@ -218,9 +218,33 @@ How can I implement a DropDownList where every item is related to a MultiSelect 
     }
 ```
 
-Here is a REPL example of the implementation above: [Example](https://netcorerepl.telerik.com/QwksPSlS24dfJjqy29)
+The following REPL example implements the steps described above: [Using MultiSelect in a Window Related to DropDownList Item](https://netcorerepl.telerik.com/QwksPSlS24dfJjqy29)
+
+## More {{ site.framework }} MultiSelect Resources
+
+* [{{ site.framework }} MultiSelect Documentation]({%slug htmlhelpers_multiselect_aspnetcore%})
+
+* [{{ site.framework }} MultiSelect Demos](https://demos.telerik.com/{{ site.platform }}/multiselect)
+
+{% if site.core %}
+* [{{ site.framework }} MultiSelect Product Page](https://www.telerik.com/aspnet-core-ui/multiselect)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} MultiSelect Product Page](https://www.telerik.com/aspnet-mvc/multiselect)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
-* [Demo of the Telerik UI for ASP.NET MVC DropDownList](https://demos.telerik.com/aspnet-mvc/dropdownlist)
-* [Demo of the Telerik UI for ASP.NET MVC MultiSelect](https://demos.telerik.com/aspnet-mvc/multiselect)
-* [Demo of the Telerik UI for ASP.NET MVC Window](https://demos.telerik.com/aspnet-mvc/window)
+
+* [Telerik REPL: Using MultiSelect in a Window Related to DropDownList Item](https://netcorerepl.telerik.com/QwksPSlS24dfJjqy29)
+* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Server-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

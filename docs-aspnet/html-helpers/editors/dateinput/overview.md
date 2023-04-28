@@ -57,6 +57,6 @@ The following example demonstrates the basic configuration for the DateInput.
 ## See Also
 
 * [Using the API of the DateInput HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/api)
-* [Knowledge Base Section](/knowledge-base)
 * [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput)
 * [Server-Side API](/api/dateinput)
+* [Knowledge Base Section](/knowledge-base)

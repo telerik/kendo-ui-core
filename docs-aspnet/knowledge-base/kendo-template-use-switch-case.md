@@ -1,5 +1,5 @@
 ---
-title: Use a switch case in client template
+title: Using a Switch Case in Client Template
 description: An example on how to render a conditional template using a switch case and the ViewBag.
 type: how-to
 page_title: Conditional client template
@@ -29,7 +29,7 @@ component: listview
 
 ## Description
 
-I am just starting to utilize the list view for .net core. I have not determined if possible to dynamically set the template based upon a condition, I am trying to base the condition on a ViewBag property. I know the ViewBag value is available in the template because I can show its value in a div.  However, I am not sure if it is possible to use in an if or switch condition, and if it is possible, what syntax I should use?
+I am just starting to utilize the list view for .net core. I have not determined if possible to dynamically set the template based upon a condition, I am trying to base the condition on a ViewBag property. I know the ViewBag value is available in the template because I can show its value in a div. However, I am not sure if it is possible to use in an if or switch condition, and if it is possible, what syntax I should use?
 
 ## Solution
 
@@ -52,3 +52,29 @@ You can set the template dynamically with the help of the [Kendo UI Template](ht
     </script>
 
 ```
+
+## More {{ site.framework }} Resources
+
+* [{{ site.product }} Documentation]({%slug overview_aspnetmvc6_aspnetmvc%})
+
+* [{{ site.product }} Demos](https://demos.telerik.com/{{ site.platform }})
+
+{% if site.core %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-mvc)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

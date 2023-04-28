@@ -1,6 +1,6 @@
 ---
-title: Create Nested Hierarchy of Components Using Grid Selectoins
-description: "An example on how to use Grid selection in hierarchy of Components"
+title: Creating Nested Hierarchy of Components Using Grid Selections
+description: An example on how to use the Grid selection in an hierarchy of components.
 type: how-to
 page_title: Use Grid selection in a hierarchy of components
 slug: grid-selection-in-nested-components
@@ -25,21 +25,22 @@ component: grid
 
 ## Description
 
-How can I use the selection of a Grid in a hierarchy of Components?
+How can I use the selection of a Grid in a hierarchy of components?
 
 ## Solution
 
 To achieve the desired scenario: 
 
-1. Implement a Custom Command Button in the Toolbar.
-1. Handle the ["Click"](https://api.jquery.com/click/) Event of the Custom Command Button.
-1. In the Click Event handler, get the selected rows of the Main Grid. Use the ["select"](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method for the case.
-1. Create a collection of the [dataItems](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) by using the selected rows.
-1. [Open](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/open) the Window.
-1. For the Content part of the Window, we are implementing a div element for the Telerik UI Wizard. Now we can initialize it.
-1. Implement the desired steps in the Wizard - Grid, Percent Input, Stored Procedure.
-1. Use the collection from point 4 as a dataSource for the newly created Grid.
-1. Here is an example:
+1. Implement a custom command button in the Toolbar.
+1. Handle the [`Click`](https://api.jquery.com/click/) event of the custom command button.
+1. In the `Click` event handler, get the selected rows of the main Grid. Use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method for the case.
+1. Create a collection of the [`dataItems`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) by using the selected rows.
+1. [Open](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/open) the [Window](https://demos.telerik.com/aspnet-mvc/window).
+1. For the content part of the Window, implement a div element for the {{ site.product }} [Wizard](https://demos.telerik.com/aspnet-mvc/wizard) component. Now you can initialize it.
+1. Implement the desired steps in the Wizard: Grid, Percent Input, and Stored Procedure.
+1. Use the collection from step 4 as a DataSource for the newly created Grid.
+
+The following sample code represents the steps described above.
 
 ```Index.cshtml
         @(Html.Kendo().Grid<TelerikMvcApp50.Models.OrderViewModel>()
@@ -163,8 +164,30 @@ To achieve the desired scenario:
 </script>
 ```
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Grid Overview Demo](https://demos.telerik.com/aspnet-mvc/grid)
-* [Window Overview Demo](https://demos.telerik.com/aspnet-mvc/window)
-* [Wizard Overview Demo](https://demos.telerik.com/aspnet-mvc/wizard)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -1,8 +1,8 @@
 ---
-title: Change Title of Multi-Column Header
-description: Replace the title of multi-column headers in a Kendo UI Grid
+title: Changing the Multi-Column Header Title
+description: Learn how to replace the title of multi-column headers in a {{ site.product }} Grid.
 type: how-to
-page_title: Set Multi-Column Header Programmatically
+page_title: Setting the Multi-Column Header Programmatically
 slug: grid-header-multicolumn-title-change
 position: 
 tags: grid, header, multicolumn, title, change, column
@@ -26,10 +26,11 @@ res_type: kb
 
 
 ## Description
-How can I change the title of a multi-column header in a Kendo UI Grid programmatically?
+
+How can I change the title of a multi-column header in the Data Grid programmatically when working with the {{ site.product }} components?
 
 ## Solution
-First, add a new class to the **Columns.Group.HeaderHtmlAttributes** property to act as a selector.
+First, add a new class to the `Columns.Group.HeaderHtmlAttributes` property to act as a selector.
 
 ```razor
    @(Html.Kendo().Grid<GridChangeMultiColHeader.Models.MyModel>()
@@ -63,5 +64,30 @@ Then, set the title using the [jQuery html method](https://api.jquery.com/html/)
    }
 ```
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
-* [html - jQuery API Documentation](https://api.jquery.com/html/)
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

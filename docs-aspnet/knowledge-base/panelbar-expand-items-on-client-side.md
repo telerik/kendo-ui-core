@@ -23,7 +23,7 @@ res_type: kb
 
 ## Description
 
-How can I iterate and expand the items of the PanelBar?
+How can I iterate and expand the items of the {{ site.product }} PanelBar?
 
 ## Solution
 
@@ -92,6 +92,31 @@ For a runnable example, refer to the [Telerik REPL example on expanding static i
 
 For a runnable example, refer to the [Telerik REPL example of the recursive expansion approach](https://netcorerepl.telerik.com/mQaXmMFO50mvlnre08).
 
+## More {{ site.framework }} PanelBar Resources
+
+* [{{ site.framework }} PanelBar Documentation]({%slug htmlhelpers_panelbar_aspnetcore%})
+
+* [{{ site.framework }} PanelBar Demos](https://demos.telerik.com/{{ site.platform }}/panelbar)
+
+{% if site.core %}
+* [{{ site.framework }} PanelBar Product Page](https://www.telerik.com/aspnet-core-ui/panelbar)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} PanelBar Product Page](https://www.telerik.com/aspnet-mvc/panelbar)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Client-Side API Reference of the PanelBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [Telerik REPL: Expanding PanelBar Items on the Client-Side](https://netcorerepl.telerik.com/mQaXmMFO50mvlnre08)
+* [Client-Side API Reference of the PanelBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [Server-Side API Reference of the PanelBar for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/panelbar)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -1,8 +1,8 @@
 ---
-title: Change Kendo UI Switch Messages Inside a Grid
-description: An example which shows two ways to change the messages for the Kendo UI Switch in a Grid
+title: Changing Switch Messages Inside a Grid
+description: An example which shows two ways to change the messages for the {{ site.product }} Switch in a Grid
 type: how-to
-page_title: Configure Messages for Checked and Unchecked Inside Grid
+page_title: Configuring Messages for Checked and Unchecked Inside Grid
 slug: switch-change-messages-inside-grid
 position: 
 tags: switch, grid, messages, change, databound
@@ -26,10 +26,12 @@ res_type: kb
 
 
 ## Description
-Is there is a way to change the Kendo UI Switch message Ok button and Cancel button while it is bound to a Kendo UI Grid row?
+
+Is there a way to change the Switch message **OK** button and **Cancel** button while it is bound to a {{ site.product }} Grid row?
 
 ## Solution
-The Kendo UI Switch can be set as a [ClientTemplate](https://docs.telerik.com/aspnet-mvc/helpers/data-management/grid/faq#how-can-i-use-kendo-ui-widgets-inside-grid-client-column-templates) inside a Kendo UI Grid.  The [switch's messages](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/configuration/messages) can be configured within the razor or changed during the [DataBound event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) using the setOptions method.  
+
+The Kendo UI Switch can be set as a [`ClientTemplate`](https://docs.telerik.com/aspnet-mvc/helpers/data-management/grid/faq#how-can-i-use-kendo-ui-widgets-inside-grid-client-column-templates) inside a Kendo UI Grid.  The [switch's messages](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/configuration/messages) can be configured within the razor or changed during the [`DataBound` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) using the `setOptions` method.  
 
 ```Razor
     @(Html.Kendo().Grid<SwitchInGridMessageChange.Models.OrderViewModel>()
@@ -77,7 +79,30 @@ The Kendo UI Switch can be set as a [ClientTemplate](https://docs.telerik.com/as
     }
 ```
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
-* [How can I use Kendo UI widgets inside Grid client column templates?](https://docs.telerik.com/aspnet-mvc/helpers/data-management/grid/faq#how-can-i-use-kendo-ui-widgets-inside-grid-client-column-templates)
-* [messages property - Kendo UI Switch jQuery API](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/configuration/messages)
-* [dataBound event - Kendo UI Switch jQuery API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

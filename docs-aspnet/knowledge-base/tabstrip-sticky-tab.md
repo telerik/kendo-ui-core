@@ -1,5 +1,5 @@
 ---
-title: Sticky tab in the TabStrip
+title: Sticky Tab in the TabStrip
 description: An example on how to make a sticky tab that is always visible in a scrollable TabStrip.
 type: how-to
 page_title: Sticky tab in the TabStrip
@@ -20,7 +20,7 @@ component: tabstrip
 
 ## Description
 
-How can I make the first tab of the TabStrip sticky? It should remain always visible when I scroll the tabs.
+How can I make the first tab of the TabStrip sticky? It must remain always visible when I scroll the tabs.
 
 ## Solution
 
@@ -71,3 +71,31 @@ Use the HtmlAttributes configuration option, to set a custom class (`always-visi
 	}
 </style>
 ```
+
+## More {{ site.framework }} TabStrip Resources
+
+* [{{ site.framework }} TabStrip Documentation]({%slug htmlhelpers_tabstrip_aspnetcore%})
+
+* [{{ site.framework }} TabStrip Demos](https://demos.telerik.com/{{ site.platform }}/tabstrip)
+
+{% if site.core %}
+* [{{ site.framework }} TabStrip Product Page](https://www.telerik.com/aspnet-core-ui/tabstrip)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} TabStrip Product Page](https://www.telerik.com/aspnet-mvc/tabstrip)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the TabStrip for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+* [Server-Side API Reference of the TabStrip for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/tabstrip)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

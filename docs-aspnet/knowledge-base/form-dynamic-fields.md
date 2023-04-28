@@ -1,8 +1,8 @@
 ---
-title: Dynamically add and remove Form items
-description: How can I add and remove fields in the Form at runtime?
+title: Dynamically Adding and Removing Form Items
+description: How can I add and remove fields in the Form at runtime when working with {{ site.product }}?
 type: how-to
-page_title: Dynamically add and remove Form items
+page_title: Dynamically Add and Remove Form Items
 slug: form-dynamic-items
 tags: form, dynamic, items, fields
 ticketid: 1562665
@@ -27,7 +27,7 @@ component: form
 
 ## Description
 
-How can I dynamically add and remove items in the Form?
+How can I dynamically add and remove items in the {{ site.product }} Form?
 
 ## Solution
 
@@ -176,7 +176,33 @@ This example demonstrates how to add/remove fields dynamically in the "Phones" F
 
 ```
 
-Refer to [this REPL](https://netcorerepl.telerik.com/cGaqQMPU08cIofKs54) for a runnable example.
+For a runnable example based on the code above, refer to the [REPL example on dynamically adding and removing Form items](https://netcorerepl.telerik.com/cGaqQMPU08cIofKs54).
+
+## More {{ site.framework }} Form Resources
+
+* [{{ site.framework }} Form Documentation](({%slug htmlhelpers_form_aspnetcore_overview%})
+
+* [{{ site.framework }} Form Demos](https://demos.telerik.com/{{ site.platform }}/form)
+
+{% if site.core %}
+* [{{ site.framework }} Form Product Page](https://www.telerik.com/aspnet-core-ui/form)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Form Product Page](https://www.telerik.com/aspnet-mvc/form)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
- * [Form client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+
+* [Telerik REPL: Dynamically Adding and Removing Form Items](https://netcorerepl.telerik.com/cGaqQMPU08cIofKs54)
+* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Server-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/form)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

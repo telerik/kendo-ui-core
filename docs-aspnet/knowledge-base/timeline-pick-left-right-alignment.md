@@ -14,7 +14,7 @@ component: form
 <table>
  <tr>
   <td>Product</td>
-  <td>{{ site.prodcut }} Timeline</td>
+  <td>{{ site.product }} Timeline</td>
  </tr>
  <tr>
   <td>Progress {{ site.product }} version</td>
@@ -79,6 +79,30 @@ To achieve the desired scenario:
 
 ```
 
+## More {{ site.framework }} Timeline Resources
+
+* [{{ site.framework }} Timeline Documentation]({%slug overview_htmlhelpers_timeline_aspnetcore%})
+
+* [{{ site.framework }} Timeline Demos](https://demos.telerik.com/{{ site.platform }}/timeline)
+
+{% if site.core %}
+* [{{ site.framework }} Timeline Product Page](https://www.telerik.com/aspnet-core-ui/timeline)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Timeline Product Page](https://www.telerik.com/aspnet-mvc/timeline)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [Client-Side API Reference of the Timeline for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [Server-Side API Reference of the Timeline for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/timeline)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

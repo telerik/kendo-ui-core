@@ -1,6 +1,6 @@
 ---
 title: Populating a Form DropDownList with Enum Values
-description: Learn how to  populate a DropDownList editor with Enum values and bind them to the model.
+description: Learn how to populate a DropDownList editor with Enum values and bind them to the model when woriking with {{ site.product }}.
 type: how-to
 page_title: Binding DropDownList to Enum Values
 slug: dropdownlist-bound-to-enum-values
@@ -28,14 +28,15 @@ res_type: kb
 
 ## Description
 
-I want to populate a DropDownList editor of a Form with the Enum values and bind them to the model.
+I want to populate a {{ site.product }} DropDownList editor of a Form with the Enum values and bind them to the model. How can I do this?
 
 ## Solution
 
-The desired result can be achieved by:
+To achieve the desired results:
 
-- Using the [Html.GetEnumSelectList<TEnum>()](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.getenumselectlist?view=aspnetcore-7.0#microsoft-aspnetcore-mvc-viewfeatures-htmlhelper-getenumselectlist-1) to get the SelectList of  the available options and
-- Using the BindTo() configuration of the DropDownList to bind to the returned SelectList.
+1. Use the [Html.GetEnumSelectList<TEnum>()](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.getenumselectlist?view=aspnetcore-7.0#microsoft-aspnetcore-mvc-viewfeatures-htmlhelper-getenumselectlist-1) to get the `SelectList` of the available options.
+
+1. Use the `BindTo()` configuration of the DropDownList to bind to the returned `SelectList`.
 
 Refer to [this REPL example](https://netcorerepl.telerik.com/mxORFgEN03Pjpclo16) for a runnable demo of the snippet below:
 
@@ -91,21 +92,31 @@ Refer to [this REPL example](https://netcorerepl.telerik.com/mxORFgEN03Pjpclo16)
 
 ```
 
-## See Also
-
-- [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
-- [Telerik REPL: Populating a Form DropDownList with Enum Values](https://netcorerepl.telerik.com/mxORFgEN03Pjpclo16)
-
 ## More {{ site.framework }} DropDownList Resources
 
-- [{{ site.framework }} DropDownList Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
-- [{{ site.framework }} DropDownList Demos](https://demos.telerik.com/{{ site.platform }}/dropdownlist/index)
+* [{{ site.framework }} DropDownList Documentation]({%slug htmlhelpers_dropdownlist_aspnetcore%})
+
+* [{{ site.framework }} DropDownList Demos](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
+
 {% if site.core %}
-- [{{ site.framework }} DropDownList Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
-- [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
-- [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+* [{{ site.framework }} DropDownList Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
 {% else %}
-- [{{ site.framework }} DropDownList Product Page](https://www.telerik.com/aspnet-mvc/dropdownlist)
-- [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
-- [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+* [{{ site.framework }} DropDownList Product Page](https://www.telerik.com/aspnet-mvc/dropdownlist)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
 {% endif %}
+
+## See Also
+
+* [Telerik REPL: Populating a Form DropDownList with Enum Values](https://netcorerepl.telerik.com/mxORFgEN03Pjpclo16)
+* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

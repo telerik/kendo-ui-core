@@ -1,7 +1,7 @@
 ---
-title: Remove DropDownList Items
-page_title: Remove Items from the DropDownList
-description: "An example on how to remove items from the {{ site.product }} DropDownList."
+title: Removing DropDownList Items
+page_title: Removing Items from the DropDownList
+description: Learn how to remove items from the {{ site.product }} DropDownList by following the steps in the Knowledge Base section of the {{ site.product }} components.
 slug: dropdownlist-remove-items
 tags: telerik, dropdownlist, remove, items, datasource
 component: dropdownlist
@@ -73,7 +73,31 @@ To achieve the desired scenario:
 
 For the complete implementation of the suggested approach, refer to the [Telerik REPL example on removing {{ site.product }} DropDownList items](https://netcorerepl.telerik.com/QQOXbxbx53N2swP026).
 
-## See Also 
+## More {{ site.framework }} DropDownList Resources
 
-* [API Reference of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [{{ site.framework }} DropDownList Documentation]({%slug htmlhelpers_dropdownlist_aspnetcore%})
+
+* [{{ site.framework }} DropDownList Demos](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
+
+{% if site.core %}
+* [{{ site.framework }} DropDownList Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} DropDownList Product Page](https://www.telerik.com/aspnet-mvc/dropdownlist)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
 * [Telerik REPL: Removing {{ site.product }} DropDownList Items](https://netcorerepl.telerik.com/QQOXbxbx53N2swP026)
+* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

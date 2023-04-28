@@ -26,9 +26,11 @@ res_type: kb
 
 
 ## Description
-I want to use Model Mapping, but my view model object and entities returned by Entity Framework are not identical. Thus when I follow the [Model mapping documentation](https://docs.telerik.com/aspnet-core/html-helpers/datasource/overview#model-mapping) I get an exception.
 
-I've an EF Core entity:
+I want to use Model Mapping, but my view model object and entities returned by Entity Framework are not identical. Thus, when I follow the [Model mapping documentation](https://docs.telerik.com/aspnet-core/html-helpers/datasource/overview#model-mapping) I get an exception.
+
+I have an EF Core entity:
+
 ```C#
 public class Product
 {
@@ -37,6 +39,7 @@ public class Product
 }
 ```
 And a corresponding ViewModel:
+
 ```C#
 public class ProductVM
 {
@@ -46,7 +49,9 @@ public class ProductVM
 ```
 
 ## Solution
+
 A possible approach to resolve the issue is to implement model mapping and map the different model properties to support filtering and sorting. The [solution](https://www.telerik.com/forums/todatasourceresult) below is suggested by Dave, a member of our forums, and shows how to map model properties so filtering and sorting can be used:
+
 ```C#
     public static class DataSourceRequestExtensions
     {
@@ -86,6 +91,7 @@ A possible approach to resolve the issue is to implement model mapping and map t
 ```
 
 Use the extension method to map the model properties so filtering and sorting works as expected:
+
 ```C#
         public ActionResult Grid_Read([DataSourceRequest] DataSourceRequest request)
         {
@@ -101,21 +107,35 @@ Use the extension method to map the model properties so filtering and sorting wo
         }
 ```
 
+## More {{ site.framework }} Grid and DataSource Resources
+
+* [{{ site.framework }} DataSource Documentation]({%slug htmlhelpers_datasource_aspnetcore%})
+
+* [{{ site.framework }} DataSource Demos](https://demos.telerik.com/{{ site.platform }}/datasource/index)
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side API Reference of the DataSource for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/datasource)
-
-## More {{ site.framework }} Grid Resources
-
-* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
-* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
-{% if site.core %}
-* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
-* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
-* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
-{% else %}
-* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
-* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
-* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
-{% endif %}
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

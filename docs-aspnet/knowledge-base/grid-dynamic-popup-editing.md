@@ -1,8 +1,8 @@
 ---
-title: Create a Dynamic Grid with Popup Editing
-description: An example on how to create a custom popup template with a dynamic Telerik UI Grid for ASP.NET Core.
+title: Creating a Dynamic Grid with Popup Editing
+description: An example on how to create a custom popup template with a dynamic {{ site.product }} Grid.
 type: how-to
-page_title: Create a Dynamic Grid with Popup Editing in ASP.NET Core
+page_title: Create a Dynamic Grid with Popup Editing
 slug: grid-dynamic-popup-editing
 tags: aspnet, core,  kendo, kendo-ui, grid, edit, custom, popup, template, dynamic, datatable
 ticketid: 1511419, 1522079
@@ -182,3 +182,30 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
 
 For the complete implementation of the suggested approach, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/blob/69137d5d7163206454d73ea1f1dbf40a42028237/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/DynamicPopupEditing.cshtml).
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
