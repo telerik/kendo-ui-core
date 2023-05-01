@@ -90,7 +90,7 @@ import "../kendo.icons.js";
                 let optionsMessagesHex = encode(options.messages.hex);
 
                 hexInputElement =
-                `<div class="k-vstack k-flex-1" data-${ns}bind="visible: isHEXMode">` +
+                `<div class="k-vstack" data-${ns}bind="visible: isHEXMode">` +
                     `<input type="text" data-${ns}bind="value: hex" data-${ns}role="textbox" data-${ns}size="${optionsSize}" tabindex="${optionsTabIndex}"  aria-label="${optionsMessagesHex}"/>` +
                     '<label class="k-colorgradient-input-label">HEX</label>' +
                 '</div>'
@@ -267,7 +267,7 @@ import "../kendo.icons.js";
         },
         _template: kendo.template((options) =>
                 '<div class="k-colorgradient-canvas k-hstack">' +
-                    '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div role="slider" aria-orientation="undefined" class="k-hsv-draghandle k-draghandle"></div></div>' +
+                    '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"><div role="slider" aria-orientation="undefined" class="k-hsv-draghandle k-draghandle"></div></div></div>' +
                     '<div class="k-hsv-controls k-hstack">' +
                         '<input class="k-hue-slider k-colorgradient-slider" />' +
                         (options.opacity ? '<input class="k-alpha-slider k-colorgradient-slider" />' : '') +

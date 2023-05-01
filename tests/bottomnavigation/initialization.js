@@ -57,7 +57,7 @@
         it("themeColor is primary by default", function() {
             var bottomNav = setup();
 
-            assert.isOk(bottomNav.element.hasClass("k-bottom-nav-primary"));
+            assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat-primary"));
         });
 
         it("themeColor is set to secondary", function() {
@@ -65,7 +65,7 @@
                 themeColor: "secondary"
             });
 
-            assert.isOk(bottomNav.element.hasClass("k-bottom-nav-secondary"));
+            assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat-secondary"));
         });
 
         it("themeColor cannot be set to custom value", function() {
@@ -73,18 +73,18 @@
                 themeColor: "custom"
             });
 
-            assert.isFalse(bottomNav.element.hasClass("k-bottom-nav-custom"));
+            assert.isFalse(bottomNav.element.hasClass("k-bottom-nav-flat-custom"));
         });
 
-        it("fill is flat y default", function() {
+        it("fillMode is flat by default", function() {
             var bottomNav = setup();
 
             assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat"));
         });
 
-        it("fill is set to a valid value", function() {
+        it("fillMode is set to a valid value", function() {
             var bottomNav = setup({
-                fill: "solid"
+                fillMode: "solid"
             });
 
             assert.isOk(bottomNav.element.hasClass("k-bottom-nav-solid"));

@@ -49,9 +49,9 @@ Toggles the shadow of the widget.
         });
     </script>
 
-### fill `String`  *(default: "flat")*
+### fillMode `String`  *(default: "flat")*
 
-Specifies how fill is applied to the BottomNavigation. Valid options are `flat` (default) and `solid`.
+Specifies which fillMode is applied to the BottomNavigation. Valid options are `flat` (default) and `solid`.
 
 #### Example
 
@@ -59,7 +59,7 @@ Specifies how fill is applied to the BottomNavigation. Valid options are `flat` 
 
     <script>
         $("#bottomnav").kendoBottomNavigation({
-            fill: "solid",
+            fillMode: "solid",
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
