@@ -71,7 +71,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 > Set the `class` of the table row to `k-alt` to get the default "alternating" look and feel.
 
 #### Example - specify alternating row template
-
+    <div id="grid"></div>
     <script>
       let encode = kendo.htmlEncode;
       
