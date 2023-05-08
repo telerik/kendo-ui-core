@@ -605,7 +605,7 @@ Returns a range with the current active selection.
 
 ### setDataSource
 
-Binds the sheet to a DataSource instance. For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source](/controls/data-management/spreadsheet/import-and-export-data/bind-to-data-source).
+Binds the sheet to a DataSource instance. For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source](/controls/spreadsheet/import-and-export-data/bind-to-data-source).
 
 #### Parameters
 

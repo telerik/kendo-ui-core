@@ -14,7 +14,7 @@ This article lists the breaking or important changes in the 2021 releases of Ken
 
 **ColorPicker**
 
-As of the end of 2021, the ColorPicker has a new design. As a result, some new features were introduced. If you prefer the old design of the widget, refer to [this section from our documentation](https://docs.telerik.com/kendo-ui/controls/editors/colorpicker/overview#old-design-of-the-colorpicker).
+As of the end of 2021, the ColorPicker has a new design. As a result, some new features were introduced. If you prefer the old design of the widget, refer to [this section from our documentation](https://docs.telerik.com/kendo-ui/controls/colorpicker/overview#old-design-of-the-colorpicker).
 
 ## Kendo UI 2021 R3
 

@@ -2668,7 +2668,7 @@ If set to `true` the column will be hidden when the grid is groupd via user iter
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked (frozen) in the grid. Also see [Locked Columns](/controls/data-management/grid/columns/locked-columns) help section for additional information.
+If set to `true` the column will be displayed as locked (frozen) in the grid. Also see [Locked Columns](/controls/grid/columns/locked-columns) help section for additional information.
 
 > **Important**: Row template and detail features are not supported in combination with column locking. If [multi-column headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to lock (freeze) a column at the topmost level only.
 
@@ -2793,7 +2793,7 @@ If set to `true` the grid will render a select column with checkboxes in each ce
 
 > Setting the [`columns.selectable`](/api/javascript/ui/grid/configuration/columns.selectable) to `true` overrides the [`selectable.mode`](/api/javascript/ui/grid/configuration/selectable.mode) configuration property if it is set to `"single"`.
 
-More about the Grid Selection feature you can find in [this documentation article](/controls/data-management/grid/selection).
+More about the Grid Selection feature you can find in [this documentation article](/controls/grid/selection).
 
 #### Example - enable multi-row selection by adding a select column with checkboxes
 
@@ -2928,7 +2928,7 @@ Determines the inital (from un-sorted to sorted state) sort direction. The suppo
 
 ### columns.sticky `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as sticky in the grid. Also see [Sticky Columns](/controls/data-management/grid/columns/sticky-columns) help section for additional information.
+If set to `true` the column will be displayed as sticky in the grid. Also see [Sticky Columns](/controls/grid/columns/sticky-columns) help section for additional information.
 
 > **Important**: Row template and detail features are not supported in combination with sticky columns. If [multi-column headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to stick a column at the topmost level only.
 
@@ -3033,7 +3033,7 @@ The width of the column. Numeric values are treated as pixels. The width option 
 * `em` sets the width relative to the font-size of the grid's element width
 * `rem` sets the width relative to font-size of the root element
 
-**For more important information, please refer to [Column Widths](/controls/data-management/grid/columns/widths)**.
+**For more important information, please refer to [Column Widths](/controls/grid/columns/widths)**.
 
 Grid options, including column widths, can be set programmatically after Grid initialization with the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
 
@@ -8690,7 +8690,7 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. Be de
 > There are a few important things to keep in mind when using `rowTemplate`.
 >
 >* The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `${uid}`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
->* If `rowTemplate` is used alongside with `detailTemplate`, the row (`<tr>`) element needs to have class `k-master-row`. The first `<td>` element of the row needs to have class `k-hierarchy-cell`. Check the [`Row Templates documentation`](/controls/data-management/grid/Templates/row-templates) for more information.
+>* If `rowTemplate` is used alongside with `detailTemplate`, the row (`<tr>`) element needs to have class `k-master-row`. The first `<td>` element of the row needs to have class `k-hierarchy-cell`. Check the [`Row Templates documentation`](/controls/grid/Templates/row-templates) for more information.
 
 #### Example - specify row template as a function
 
@@ -9751,7 +9751,7 @@ When using multicolumn headers, using an index is not allowed. In such scenarios
 
 > The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
 >
-> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
+> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/grid/appearance#widths), according to their content.
 >
 > Use `autoFitColumn` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
 
@@ -9820,7 +9820,7 @@ Applies the minimum possible width for all columns, so that all text fits withou
 
 > The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
 >
-> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/javascript/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
+> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/javascript/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/grid/appearance#widths), according to their content.
 >
 > Use `autoFitColumns` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
 

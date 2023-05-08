@@ -111,7 +111,7 @@ The [{{ site.product }} helpers which render data visualization]({% slug overvie
 The Telerik PDF generator is tested and supported in the following desktop browsers:
 * Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
 
-> Internet Explorer 9 and Safari do not support the PDF-related option for saving files. To achieve this, you need to [implement a server proxy](https://docs.telerik.com/kendo-ui/controls/data-management/grid/export/pdf-export#using-server-proxy).
+> Internet Explorer 9 and Safari do not support the PDF-related option for saving files. To achieve this, you need to [implement a server proxy](https://docs.telerik.com/kendo-ui/controls/grid/export/pdf-export#using-server-proxy).
 
 Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Even though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is not supported in mobile browsers and hybrid mobile applications.
 

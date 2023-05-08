@@ -165,7 +165,7 @@ As of the 2023 R1 SP1 release, to unify their support for the new [ThemeBuilder 
 * The `.k-text-success` and `.k-text-error` classes have been removed from the `.k-validation-message` element.
 * The `.k-file-information` class is now replaced with a `.k-file-summary` class.
 * The Upload action buttons are no longer wrapped in a `.k-upload-status` class but in the `.k-upload-actions` class.
-* The progress bar is now replaced with the [ProgressBar](/controls/interactivity/progressbar/overview) component without visible labels.
+* The progress bar is now replaced with the [ProgressBar](/controls/progressbar/overview) component without visible labels.
 
 **Pager**
 
@@ -242,7 +242,7 @@ As of the 2023 R1 SP1 release, to unify their support for the new [ThemeBuilder 
 
 * The `table` element has been replaced with a `<div>` element.
 * The toolbar is no longer wrapped inside the `.k-editor-toolbar-wrap` element.
-* The toolbar is no longer a `<ul>` with `<li>` elements, but a [Toolbar](/controls/navigation/toolbar/overview) component.
+* The toolbar is no longer a `<ul>` with `<li>` elements, but a [Toolbar](/controls/toolbar/overview) component.
 * The `.k-editor-toolbar` class is now added to the toolbar.
 * The `.k-resizable` class has been replaced with the `.k-editor-resizable` one.
 

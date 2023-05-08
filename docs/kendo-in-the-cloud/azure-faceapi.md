@@ -207,7 +207,7 @@ The following example demonstrates how to send files directly to Azure Face API 
 
 ## See Also
 
-* [Overview of the Upload Widget](https://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
+* [Overview of the Upload Widget](https://docs.telerik.com/kendo-ui/controls/upload/overview)
 * [API Reference of the Upload Widget](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Consuming Data from Azure Functions]({% slug azure_functions %})
 * [Binding to Azure Cosmos DB]({% slug azure_cosmos_db %})

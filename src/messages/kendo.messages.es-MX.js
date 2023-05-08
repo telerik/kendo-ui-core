@@ -600,4 +600,17 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* Wizard messages */
+if (kendo.ui.Wizard) {
+kendo.ui.Wizard.prototype.options.messages =
+$.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+  "reset": "Reiniciar",
+  "previous": "Anterior",
+  "next": "Siguiente",
+  "done": "Hecho",
+  "step": "Paso",
+  "of": "de"
+});
+}
+
 })(window.kendo.jQuery);

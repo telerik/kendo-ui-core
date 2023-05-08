@@ -69,17 +69,18 @@ The following table contains the name of the LESS theme and its SASS counterpart
 | `Moonlight` | `Classic - Moonlight` | In Research | TBA |
 | `Bootstrap 3` | `Bootstrap - Bootstrap 3` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-3.css |
 | `Bootstrap 3 Dark` | `Bootstrap - Bootstrap 3 Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-3-dark.css |
-| `Flat` | `Bootstrap - Turquoise` | In Progress | ETA March 2023 |
-| `Flat Dark` | `Bootstrap - Turquoise Dark` | In Progress | ETA March 2023 |
+| `Flat` | `Bootstrap - Turquoise` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-turquoise.css |
+| `Flat Dark` | `Bootstrap - Turquoise Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-turquoise-dark.css |
 | `Material` | `Material - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-main.css |
 | `Material Black` | `Material - Main Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-dark.css |
 | `Nova` | `Material - Nova` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-nova.css |
 | `Office 365` | `Fluent - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/fluent/fluent-main.css |
-| `High Contrast` | N/A | In Research | TBA |
+| `High Contrast` | `Classic - Lavender Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-lavender-dark.css |
+| `High Contrast Light` | `Classic - Lavender Light` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-lavender.css |
 | `Fiori` | N/A | Needs Validation | N/A |
-| `Uniform` | N/A | Needs Validation | N/A |
+| `Uniform` | `Classic - Uniform` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-uniform.css |
 
-> The Bootstrap and Material LESS themes will not have their own SASS swatches. The dedicated Bootstrap and Material SASS themes should be used instead.
+> The Sass swatches are alternative variants of the less themes. They are not 100% identical, but rather provide a similar/improved look-and-feel.
 
 The following example shows how to add the Clasic SASS theme to your project:
 

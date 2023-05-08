@@ -9,9 +9,9 @@ position: 1
 # {{ site.framework }} ColorGradient Overview
 
 {% if site.core %}
-The Telerik UI ColorGradient TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the [Kendo UI ColorGradient](https://docs.telerik.com/kendo-ui/controls/editors/colorgradient/overview) widget.
+The Telerik UI ColorGradient TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the [Kendo UI ColorGradient](https://docs.telerik.com/kendo-ui/controls/colorgradient/overview) widget.
 {% else %}
-The Telerik UI ColorGradient HtmlHelper for {{ site.framework }} is a server-side wrapper for the [Kendo UI ColorGradient](https://docs.telerik.com/kendo-ui/controls/editors/colorgradient/overview) widget.
+The Telerik UI ColorGradient HtmlHelper for {{ site.framework }} is a server-side wrapper for the [Kendo UI ColorGradient](https://docs.telerik.com/kendo-ui/controls/colorgradient/overview) widget.
 {% endif %}
 
 The ColorGradient is a component that renders a gradient color palette. It has a hue and an alpha slider and provides an input that allows you to enter a color or copy the selected one. 

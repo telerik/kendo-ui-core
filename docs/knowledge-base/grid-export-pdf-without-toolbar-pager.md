@@ -224,7 +224,7 @@ The following example demonstrates the outcome of the suggested approach.
 
 ## See Also
 
-* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/data-management/grid/export/pdf-export)
+* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/grid/export/pdf-export)
 * [Change Column Widths during PDF Export]({% slug grid-pdf-export-change-column-widths %})
 * [Exclude Certain Columns from the Exported PDF File]({% slug grid-exclude-columns-from-exported-pdf %})
 * [Show hidden columns during PDF Export]({% slug grid-pdf-show-hidden-columns %})

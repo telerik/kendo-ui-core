@@ -23,7 +23,7 @@ The helper controls the precision of the entered number by using the half-up rou
 You can restrict the value of the NumericTextBox to a specific range by using either of the following approaches:
 
 - Restrict the input value between a specific [`Min`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/NumericTextBoxBuilder#minsystemnullablet) and [`Max`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/NumericTextBoxBuilder#maxsystemnullablet) range. The typed value gets modified to fit the range on `blur`.
-- Use a custom Kendo UI Validator rule to restrict the input value. The invalid value remains unchanged and the user is notified for the incorrect input by an error message. For more information, refer to the article on the [custom validation rules](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview#custom-rules-for-validation).
+- Use a custom Kendo UI Validator rule to restrict the input value. The invalid value remains unchanged and the user is notified for the incorrect input by an error message. For more information, refer to the article on the [custom validation rules](https://docs.telerik.com/kendo-ui/controls/validator/overview#custom-rules-for-validation).
 
 ## See Also
 

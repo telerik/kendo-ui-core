@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the  DateRangePicker component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/daterangepicker, /helpers/editors/daterangepicker/overview
 slug: htmlhelpers_daterangepicker_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} DateRangePicker Overview
@@ -46,105 +46,17 @@ The following example demonstrates the basic configuration for the DateRangePick
 
 ## Functionality and Features
 
-* [Disabled dates]({% slug disableddates_daterangepicker_aspnetcore %})
-* [Selected dates]({% slug selecteddates_daterangepicker_aspnetcore %})
-* [Start view and navigation depth]({% slug navdepth_daterangepicker_aspnetcore %})
-* [Validation]({% slug validation_daterangepicker_aspnetcore %})
-* [Date formatting]({% slug dateformatting_daterangepicker_aspnetcore %})
-* [Calendar types]({% slug calendartypes_daterangepicker_aspnetcore %})
-* [Week number column]({% slug weeknumcolumn_daterangepicker_aspnetcore %})
-* [Globalization]({% slug globalization_daterangepicker_aspnetcore %})
-* [Accessibility]({% slug accessibility_daterangepicker_aspnetcore %})
-
-## Events
-
-You can subscribe to all DateRangePicker [events](/api/daterangepicker). For a complete example on basic DateRangePicker events, refer to the [demo on using the events of the DateRangePicker](https://demos.telerik.com/{{ site.platform }}/daterangepicker/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().DateRangePicker()
-      .Name("daterangepicker")
-      .Events(e => e
-            .Open("daterangepicker_open")
-            .Close("daterangepicker_close")
-            .Change("daterangepicker_change")
-      )
-    )
-
-    <script>
-    function daterangepicker_open() {
-        // Handle the open event.
-    }
-
-    function daterangepicker_close() {
-        // Handle the close event.
-    }
-
-    function daterangepicker_change() {
-        // Handle the change event.
-    }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-daterangepicker name="daterangepicker"
-                           on-open="daterangepicker_open"
-                           on-close="daterangepicker_close"
-                           on-change="daterangepicker_change">
-    </kendo-daterangepicker>
-
-    <script>
-    function daterangepicker_open() {
-        // Handle the open event.
-    }
-
-    function daterangepicker_close() {
-        // Handle the close event.
-    }
-
-    function daterangepicker_change() {
-        // Handle the change event.
-    }
-    </script>
-```
-{% endif %}
-
-{% if site.core %}
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().DateRangePicker()
-      .Name("daterangepicker")
-      .Events(e => e
-          .Open(@<text>
-            function() {
-                // Handle the open event inline.
-            }
-          </text>)
-          .Change(@<text>
-            function() {
-                // Handle the change event inline.
-            }
-            </text>)
-      )
-    )
-```
-```TagHelper
-    <kendo-daterangepicker name="daterangepicker"
-                           on-open="
-                           function(){
-                                // Handle the open event inline.
-                           }"
-                           on-change="
-                           function() {
-                               // Handle the change event inline.
-                           }">
-    </kendo-daterangepicker>
-```
-{% endif %}
+| Feature | Description |
+|---------|-------------|
+| [Disabled dates]({% slug disableddates_daterangepicker_aspnetcore %})|The DateRangePicker allows you to disable specific days that shouldn't be selected by the end user, such as weekends and national holidays.|
+| [Selected dates]({% slug selecteddates_daterangepicker_aspnetcore %})|The DateRangePicker allows you to define the minimum and maximum dates it displays and also render a pre-selected date range.|
+| [Start view and navigation depth]({% slug navdepth_daterangepicker_aspnetcore %})|The DateRangePicker enables you to set the initially rendered view and define the navigation depth of the views.|
+| [Validation]({% slug validation_daterangepicker_aspnetcore %})|The DateRangePicker does not automatically update the typed text when the typed text is invalid. Such changes in the input value may lead to unexpected behavior.|
+| [Date formatting]({% slug dateformatting_daterangepicker_aspnetcore %})|The DateRangePicker allows you to define its date formatting.|
+| [Calendar types]({% slug calendartypes_daterangepicker_aspnetcore %})|The DateRangePicker works with `Date` objects which support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar.|
+| [Week number column]({% slug weeknumcolumn_daterangepicker_aspnetcore %})|The DateRangePicker provides options for rendering a column which displays the number of the weeks within the current `Month` view.|
+| [Globalization]({% slug globalization_daterangepicker_aspnetcore %})|The DateRangePicker comes with globalization support that allows you to use the component in apps all over the world.|
+| [Accessibility]({% slug accessibility_daterangepicker_aspnetcore %})|The DateRangePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_daterangepicker_aspnetcore %}) for faster navigation.|
 
 ## Referencing Existing Instances
 
@@ -160,11 +72,15 @@ The following example demonstrates how to access an existing DateRangePicker ins
         });
         </script>
 
-## See Also
+## Next Steps
 
+* [Getting Started with the DateRangePicker]({% slug daterangepicker_getting_started %})
 * [Basic Usage of the DateRangePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/index)
 {% if site.core %}
 * [Basic Usage of the DateRangePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/tag-helper)
 {% endif %}
-* [Using the API of the DateRangePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/api)
-* [Server-Side API](/api/daterangepicker)
+
+## See Also
+
+* [Using the API of the DateRangePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/api)
+* [Knowledge Base Section](/knowledge-base)

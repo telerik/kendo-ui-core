@@ -163,7 +163,7 @@ Controls whether to bind the widget to the data source on initialization.
 ### cascadeFrom `String`
 
 Use it to set the Id of the parent MultiColumnComboBox widget.
-[Help topic showing how cascading functionality works](/controls/editors/multicolumncombobox/cascading)
+[Help topic showing how cascading functionality works](/controls/multicolumncombobox/cascading)
 
 #### Example
 
@@ -204,7 +204,7 @@ Use it to set the Id of the parent MultiColumnComboBox widget.
 ### cascadeFromField `String`
 
 Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/multicolumncombobox/configuration/datavaluefield).
-[Help topic showing how cascading functionality works](/controls/editors/multicolumncombobox/cascading)
+[Help topic showing how cascading functionality works](/controls/multicolumncombobox/cascading)
 
 #### Example
 

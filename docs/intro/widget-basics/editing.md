@@ -57,8 +57,8 @@ The following table lists the available data types.
 Data Type | Editor | Parser
 :-------: | :--------: | :------------------:
 `string`| `<input type="text" class="k-input k-textbox" name="fieldName" data-bind="value:fieldName">` | Internal method. String conversion.
-`number`| [`kendo.ui.NumericTextBox`](/controls/editors/numerictextbox/overview) | [`kendo.parseFloat()`](/api/javascript/kendo/methods/parsefloat)
-`date` | [`kendo.ui.DatePicker`](/controls/editors/datepicker/overview) | [`kendo.parseDate()`](/api/javascript/kendo/methods/parsedate)
+`number`| [`kendo.ui.NumericTextBox`](/controls/numerictextbox/overview) | [`kendo.parseFloat()`](/api/javascript/kendo/methods/parsefloat)
+`date` | [`kendo.ui.DatePicker`](/controls/datepicker/overview) | [`kendo.parseDate()`](/api/javascript/kendo/methods/parsedate)
 `boolean` | `<input type="checkbox" name="fieldName" data-type="boolean" data-bind="checked:fieldName">`| Internal method. Boolean conversion.
 `object` |  `<input type="text" class="k-input k-textbox" name="fieldName" data-bind="value:fieldName">` | Not processed. The value is passed as is.
 
@@ -146,7 +146,7 @@ The following rules apply to the editor template:
 
 ## Defining Default Model Values
 
-By default, the model fields have predefined values based on the field type. You can also define the field as `nullable`. To define a specific default value, use the `schema.model.fields.defaulValue` option. The `value` binding uses the model value to set the editor value. The value of the editor will be lost in favor of the model value.
+By default, the model fields have predefined values based on the field type. You can also define the field as `nullable`. To define a specific default value, use the `schema.model.fields.defaultValue` option. The `value` binding uses the model value to set the editor value. The value of the editor will be lost in favor of the model value.
 
     schema: {
         model: {
@@ -213,7 +213,7 @@ This section provides solutions for common issues you might encounter while conf
 * The model gets the new value, compares it to the current one and, if they are different, the new value is ready to be set.
 * UI validation is triggered. Note that it uses the editor element value to perform the validation check. However, it is invalid and hence the new value that we try to set is ignored.
 
-**Solution** Define a valid `defaulValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model/methods/define).
+**Solution** Define a valid `defaultValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model/methods/define).
 
 ## See Also
 

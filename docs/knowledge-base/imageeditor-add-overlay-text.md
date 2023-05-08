@@ -31,7 +31,7 @@ By getting the Image's [canvas](/api/javascript/ui/imageeditor/methods/getcanvas
 
 ### DatePicker
 
-The following example demonstrates how a [custom command](https://docs.telerik.com/kendo-ui/controls/editors/imageeditor/tools#adding-custom-commands-to-the-toolbar) can be created in the ImageEditor toolbar for adding a custom text over a loaded image.  
+The following example demonstrates how a [custom command](https://docs.telerik.com/kendo-ui/controls/imageeditor/tools#adding-custom-commands-to-the-toolbar) can be created in the ImageEditor toolbar for adding a custom text over a loaded image.  
 
 ```dojo
     <div id="imageEditor"></div>

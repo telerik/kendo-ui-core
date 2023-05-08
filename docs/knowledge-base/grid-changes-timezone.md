@@ -45,5 +45,5 @@ By default, JavaScript converts the dates and times to the local timezone, that 
 However, you can still work around this issue by referring to the following resources:
 
 * [Using UTC on Both Client and Server](https://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/utc-time-on-both-server-and-client)
-* [Localizing Date Formats](https://docs.telerik.com/kendo-ui/controls/data-management/grid/date-formats)
+* [Localizing Date Formats](https://docs.telerik.com/kendo-ui/controls/grid/date-formats)
 * [Applying Dates which Ignore Timezones](https://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/apply-dates-that-ignore-timezones)

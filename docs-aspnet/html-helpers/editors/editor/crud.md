@@ -14,7 +14,7 @@ The following example demonstrates how to save, read, update and delete a text d
 For a runnable project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples). The previously linked example assumes you have a {{ site.product }} and Entity framework installed and a local database set up.
 {% endif %}
 
-> This code has no applied XSS attack prevention and it is the responsibility of the developer to manage these security risks. For more information, refer to the article on [preventing cross-site scripting](https://docs.telerik.com/kendo-ui/controls/editors/editor/preventing-xss).
+> This code has no applied XSS attack prevention and it is the responsibility of the developer to manage these security risks. For more information, refer to the article on [preventing cross-site scripting](https://docs.telerik.com/kendo-ui/controls/editor/preventing-xss).
 
 The following example demonstrates how to define the database model.
 

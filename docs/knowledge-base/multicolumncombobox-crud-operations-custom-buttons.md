@@ -27,7 +27,7 @@ By design, the MulticolumnComboBox is a view-only widget which represents a drop
 
 To work around this issue:
 
-1. Use the [templates of the MulticolumnComboBox](https://docs.telerik.com/kendo-ui/controls/editors/multicolumncombobox/overview#templates) to add the buttons for the CRUD operations.
+1. Use the [templates of the MulticolumnComboBox](https://docs.telerik.com/kendo-ui/controls/multicolumncombobox/overview#templates) to add the buttons for the CRUD operations.
 1. Handle the events of the buttons to fire the necessary requests for those operations. For example, you can load partial views for the `Create` and `Edit` operations in a Kendo UI Window, and do a `POST` request to the controller to delete a record.
 
 For a runnable example, refer to the sample project on [CRUD operations with MultiColumnComboBox](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/MultiColumnComboBox/CRUD).

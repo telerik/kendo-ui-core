@@ -88,7 +88,7 @@ New
 </div>
 ```
 
-## Kendo UI R1 2022 SP2
+## Kendo UI 2022 R1 SP2
 
 **Button**
 

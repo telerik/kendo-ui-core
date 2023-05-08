@@ -90,4 +90,4 @@ Position the footer with the custom buttons at the bottom of the Window by using
 
 ## See Also
 
-* [Kendo UI Window Overview](https://docs.telerik.com/kendo-ui/controls/layout/window/overview)
+* [Kendo UI Window Overview](https://docs.telerik.com/kendo-ui/controls/window/overview)

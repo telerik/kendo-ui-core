@@ -19,7 +19,7 @@ If the strict CSP mode is enabled, some browser features are disabled by default
 
 ## (For R1 2023 SP1 and Later) Working with Telerik UI for {{ site.framework }} Components
 
-As of R1 2023 release, the Kendo UI scripts address the `unsafe-eval` directive for all components except for the [Spreadsheet](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview). For the bigger part of its core engine, the Kendo UI for jQuery Spreadsheet uses the `Function` evaluation, and rewriting the logic of the component will lead to a great number of breaking changes.
+As of R1 2023 release, the Kendo UI scripts address the `unsafe-eval` directive for all components except for the [Spreadsheet](https://docs.telerik.com/kendo-ui/controls/spreadsheet/overview). For the bigger part of its core engine, the Kendo UI for jQuery Spreadsheet uses the `Function` evaluation, and rewriting the logic of the component will lead to a great number of breaking changes.
 
 The rest of the Kendo UI components and internal mechanisms have been completely rewritten to discard the usage of the `eval()` and `new Function()` calls.
 

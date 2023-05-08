@@ -29,7 +29,7 @@ I have a requirement to validate an email address and web address for basic form
 
 ## Solution
 
-1. The [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview#validator-overview) can validate emails on the client using the HTML5 validation. To use the client side validation for emails, you should provide the type in the custom popup editor:
+1. The [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/validator/overview#validator-overview) can validate emails on the client using the HTML5 validation. To use the client side validation for emails, you should provide the type in the custom popup editor:
 
     ```
         <div class="k-edit-label">

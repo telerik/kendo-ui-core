@@ -41,4 +41,4 @@ To enable the scroll, the virtual scrolling requires that the initial records ta
 
 ## Solution
 
-Make sure that you meet all [requirements and the specifics](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#virtual-scrolling) of the virtual scrolling functionality.
+Make sure that you meet all [requirements and the specifics](https://docs.telerik.com/kendo-ui/controls/grid/appearance#virtual-scrolling) of the virtual scrolling functionality.

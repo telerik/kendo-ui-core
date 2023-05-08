@@ -111,4 +111,4 @@ It is possible to get hold of the destroyed items in the data source with the he
 
 ## See Also
 
-* [Editing the Kendo UI Grid Widget](https://docs.telerik.com/kendo-ui/controls/data-management/grid/editing)
+* [Editing the Kendo UI Grid Widget](https://docs.telerik.com/kendo-ui/controls/grid/editing)

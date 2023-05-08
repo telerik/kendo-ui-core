@@ -424,7 +424,7 @@ In this chapter you will learn about the Kendo UI ListView control and client-si
 
 #### Overview
 
-The purpose of [Kendo UI ListView](https://docs.telerik.com/kendo-ui/controls/data-management/listview/overview) is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner.
+The purpose of [Kendo UI ListView](https://docs.telerik.com/kendo-ui/controls/listview/overview) is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner.
 
 The ListView is designed to put you back in control when it comes to displaying data. It does not provide a default rendering of data-bound items, but, instead, relies entirely on templates to define how a list of items&mdash;including alternating items and items being edited&mdash;is displayed.
 

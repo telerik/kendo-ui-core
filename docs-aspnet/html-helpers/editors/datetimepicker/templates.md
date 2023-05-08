@@ -13,7 +13,7 @@ position: 10
 
 # Templates
 
-The DatePicker provides options for using and customizing its templates.  
+The DateTimePicker provides options for using and customizing its templates.  
 
 To customize the cell template in the **Month** view, use the [`MonthTemplate`](/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder#monthtemplatesystemstring) property. The calendar of the DateTimePicker loops over each cell and sets its HTML by using the month template. You can implement a dynamic template by using the {{ Dates }} option which is passed as an argument to the `MonthTemplate.Content` template. For the complete example, refer to the [demo on customizing the templates of the DateTimePicker](https://demos.telerik.com/{{ site.platform }}/datetimepicker/template).
 

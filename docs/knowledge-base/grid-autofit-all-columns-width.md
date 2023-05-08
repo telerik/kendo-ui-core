@@ -155,5 +155,5 @@ If you have to only set the `checked` property of the columns to `true`, use the
 ## See Also
 
 * [API Reference of the autoFitColumn Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/autofitcolumn)
-* [Appearance of the Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#width)
+* [Appearance of the Grid](https://docs.telerik.com/kendo-ui/controls/grid/appearance#width)
 * [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)

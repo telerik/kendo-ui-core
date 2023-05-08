@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/multicolumncombobox, /helpers/editors/multicolumncombobox/overview
 slug: htmlhelpers_multicolumncombobox_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} MultiColumnComboBox Overview
@@ -15,12 +15,13 @@ The Telerik UI MultiColumnComboBox TagHelper and HtmlHelper for {{ site.framewor
 The Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI MultiColumnComboBox widget.
 {% endif %}
 
-The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
+The MultiColumnComboBox visualizes large sets of data in a grid-like table.
 
 * [Demo page for the MultiColumnComboBox HtmlHelper](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/index)
 {% if site.core %}
 * [Demo page for the MultiColumnComboBox TagHelper](https://demos.telerik.com/aspnet-core/multicolumncombobox/tag-helper)
 {% endif %}
+
 ## Initializing the MultiColumnComboBox
 
 The following example demonstrates how to define the MultiColumnComboBox.
@@ -161,36 +162,24 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_multicolumncombobox_databinding_aspnetcore %})
-* [Columns]({% slug columns_multicolumncombobox_aspnetcore %})
-* [Filtering]({% slug filtering_multicolumncombobox_aspnetcore %})
-* [Virtualization]({% slug virtualization_multicolumncombobox_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_multicolumncombobox %})
+| Feature | Description |
+|---------|-------------|
+| [Data binding]({% slug htmlhelpers_multicolumncombobox_databinding_aspnetcore %})|The MultiColumnComboBox provides a set of options for binding it to data.|
+| [Columns]({% slug columns_multicolumncombobox_aspnetcore %})|The MultiColumnComboBox allows you to predefine the columns that will be rendered in its drop-down list through the `dropDownWidth` option.|
+| [Filtering]({% slug filtering_multicolumncombobox_aspnetcore %})|Apart from the standard filter options, the MultiColumnComboBox allows you to set fields against which the data will be filtered.|
+| [Virtualization]({% slug virtualization_multicolumncombobox_aspnetcore %})|You can configure a MultiColumnComboBox to use virtualization.|
+| [Accessibility]({% slug accessibility_aspnetcore_multicolumncombobox %})|The MultiColumnComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
+| [Cascading]({% slug htmlhelpers_multicolumncombobox_cascading %})|The cascading MultiColumnComboBox is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options that are based on the DataValueField in the previous MultiColumnComboBox.|
 
-## Events
+## Next Steps
 
-For a complete example on basic MultiColumnComboBox events, refer to the [demo on using the events of the MultiColumnComboBox](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/events).
-
-## Referencing Existing Instances
-
-To reference an existing MultiColumnComboBox instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiColumnComboBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox#methods) to control its behavior.
-
-```
-    // Place the following after your Telerik UI MultiColumnComboBox for {{ site.framework }} declaration.
-    <script>
-        $(document).ready(function() {
-            // The Name() of the MultiColumnComboBox is used to get its client-side instance.
-            var mccombobox = $("#multicolumncombobox").data("kendoMultiColumnComboBox");
-        });
-    </script>
-```
-
-## See Also
-
+* [Getting Started with the MultiColumnComboBox]({% slug multicolumncombobox_getting_started %})
 * [Basic Usage of the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/index)
 {% if site.core %}
 * [Basic Usage of the MultiColumnComboBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/tag-helper)
 {% endif %}
-* [Using the API of the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/api)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
-* [Server-Side API](/api/multicolumncombobox)
+
+## See Also
+
+* [Using the API of the MultiColumnComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/api)
+* [Knowledge Base Section](/knowledge-base)

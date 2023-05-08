@@ -2152,7 +2152,7 @@ The hint displayed by the widget when it is empty. Not set by default.
 
 > **Important**
 >
-> The options is only available in [Classic Mode](/controls/editors/editor/overview#classic-mode).
+> The options is only available in [Classic Mode](/controls/editor/overview#classic-mode).
 
 #### Example - specify the placeholder option
     <textarea id="editor"></textarea>
@@ -4442,7 +4442,7 @@ Defines text for search box placeholder.
 
 ### body `Element`
 
-The HTML element which represents the editor content area. In the [classic Editor mode](/controls/editors/editor/overview#classic-mode), this is the `<body>` element inside the `iframe`. In the [inline Editor mode](/controls/editors/editor/overview#inline-mode), this is the [element, from which the Editor is initialized](/intro/widget-basics/wrapper-element).
+The HTML element which represents the editor content area. In the [classic Editor mode](/controls/editor/overview#classic-mode), this is the `<body>` element inside the `iframe`. In the [inline Editor mode](/controls/editor/overview#inline-mode), this is the [element, from which the Editor is initialized](/intro/widget-basics/wrapper-element).
 
 #### Example
 

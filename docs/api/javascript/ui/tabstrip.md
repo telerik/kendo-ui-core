@@ -435,7 +435,7 @@ The feature requires `"top"` or `"bottom"` [`tabPosition`](/api/javascript/ui/ta
 
 Unless disabled, `scrollable` must be set to a JavaScript object, which represents the scrolling configuration.
 
-See [Scrollable Tabs](/controls/navigation/tabstrip/overview#configuration-Scrollable) for more information.
+See [Scrollable Tabs](/controls/tabstrip/overview#configuration-Scrollable) for more information.
 
 #### Example - disable scrolling
 

@@ -146,6 +146,6 @@ How can I disable timeslots for a specific day and style them?
 
 ## Notes
 
-For more information on modifying the appearance of slots, refer to [this example](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates).
+For more information on modifying the appearance of slots, refer to [this example](https://docs.telerik.com/kendo-ui/controls/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates).
 
 The functionality that the example demonstrates is not applicable to `MonthView` because [`slotTemplate` is not supported](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/views.slottemplate).

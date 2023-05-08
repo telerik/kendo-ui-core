@@ -29,7 +29,7 @@ Several {{ site.product }} components allow the user to input HTML or can displa
 
 ### Editor
 
-The [Editor]({% slug htmlhelpers_editor_aspnetcore %}) provides configuration options that help the developer prevent XSS attacks. By default, the Editor does not allow the execution of scripts inside its content area and also provides configuration options that allow the developer to implement custom sanitizing functionality. Read more on the XSS protection for the Editor in the [Preventing Cross-Site Scripting article](https://docs.telerik.com/kendo-ui/controls/editors/editor/preventing-xss).
+The [Editor]({% slug htmlhelpers_editor_aspnetcore %}) provides configuration options that help the developer prevent XSS attacks. By default, the Editor does not allow the execution of scripts inside its content area and also provides configuration options that allow the developer to implement custom sanitizing functionality. Read more on the XSS protection for the Editor in the [Preventing Cross-Site Scripting article](https://docs.telerik.com/kendo-ui/controls/editor/preventing-xss).
 
 ### Grid
 

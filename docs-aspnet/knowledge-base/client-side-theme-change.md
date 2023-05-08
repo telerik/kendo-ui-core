@@ -111,35 +111,22 @@ If you store the stylesheets within the application, an alternative approach is 
 
 ```razor
     @{
-        var specialThemes = new string[] { "nova", "bootstrap", "fiori", "material", "materialblack", "office365" };
-        var sassThemes = new string[] { "default-main", "bootstrap-main", "material-main" };
-        var commonThemeName = "common";
-        var mainHref = "https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/";
-        var isThemeSelected = Context.Request.Cookies.TryGetValue("theme", out string selectedTheme);
+        var mainHref = "https://kendo.cdn.telerik.com/themes/6.3.0/";
+        var selectedTheme = "classic/classic-main";
 
-        if (!isThemeSelected)
+        if (Request.Cookies["theme"] != null)
         {
-            selectedTheme = "default";
+            selectedTheme = Request.Cookies["theme"].Value;
         }
 
-        var themeHref = mainHref + selectedTheme + ".css";
-        var commonThemeHref = mainHref + commonThemeName + ".css";
-        if (specialThemes.Any(x => x == selectedTheme))
-        {
-            commonThemeName += "-" + selectedTheme.Replace("materialblack", "material");
-        }
-
-        if (sassThemes.Contains(selectedTheme) && selectedTheme == "custom")
+        if (selectedTheme == "custom")
         {
             <link rel="stylesheet" href="~/css/styles/kendo.custom.css" />
         }
-        else if (sassThemes.Contains(selectedTheme))
-        {
-            <link href=@themeHref rel="stylesheet" type="text/css" />
-        }
+
         else
         {
-            <link href=@commonThemeHref rel="stylesheet" type="text/css" />
+            var themeHref = mainHref + selectedTheme + ".css";
             <link href=@themeHref rel="stylesheet" type="text/css" />
         }
     }

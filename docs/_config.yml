@@ -36,89 +36,85 @@ navigation:
     "controls":
         title: "Components"
         position: 4
-    "controls/data-management":
-        title: "Data Management"
-    "controls/data-management/listview/binding":
+    "controls/listview/binding":
         title: "Data Binding"
         position: 2
-    "controls/data-management/listview/export":
+    "controls/listview/export":
         title: "Export"
         position: 5
-    "controls/data-management/filemanager/binding":
+    "controls/filemanager/binding":
         title: "Data Binding"
         position: 2
-    "controls/data-management/grid/binding":
+    "controls/grid/binding":
         title: "Data Binding"
         position: 4
-    "controls/data-management/grid/editing":
+    "controls/grid/editing":
         title: "Editing"
         position: 5
-    "controls/data-management/grid/grouping":
+    "controls/grid/grouping":
         title: "Grouping"
         position: 7
-    "controls/data-management/grid/columns":
+    "controls/grid/columns":
         title: "Columns"
         position: 13
-    "controls/data-management/grid/scrolling":
+    "controls/grid/scrolling":
         title: "Scroll Modes"
         position: 14
-    "controls/data-management/grid/export":
+    "controls/grid/export":
         title: "Export"
         position: 15
-    "controls/data-management/grid/Templates":
+    "controls/grid/Templates":
         title: "Templates"
         position: 16
-    "controls/data-management/grid/appearance":
+    "controls/grid/appearance":
         title: "Appearance"
         position: 17
-    "controls/data-management/grid/performance":
+    "controls/grid/performance":
         title: "Performance Tips"
         position: 18
-    "controls/data-management/pivotgrid/binding":
+    "controls/pivotgrid/binding":
         title: "Data Binding"
         position: 2
-    "controls/data-management/pivotgrid/export":
+    "controls/pivotgrid/export":
         title: "Export"
         position: 5
-    "controls/data-management/pivotgrid/how-to":
+    "controls/pivotgrid/how-to":
         title: "How To"
         position: 70
-    "controls/data-management/pivotgridv2/binding":
+    "controls/pivotgridv2/binding":
         title: "Data Binding"
         position: 2
-    "controls/data-management/pivotgridv2/export":
+    "controls/pivotgridv2/export":
         title: "Export"
         position: 5
-    "controls/data-management/spreadsheet/import-and-export-data":
+    "controls/spreadsheet/import-and-export-data":
         title: "Data Import and Export"
         position: 7
-    "controls/data-management/spreadsheet/localization-spreadsh":
+    "controls/spreadsheet/localization-spreadsh":
         title: "Localization"
         position: 8
-    "controls/data-management/spreadsheet/end-user":
+    "controls/spreadsheet/end-user":
         title: "End User"
         position: 9
-    "controls/data-management/treelist/editing":
+    "controls/treelist/editing":
         title: "Editing"
         position: 3
-    "controls/editors":
-        title: "Editors"
-    "controls/editors/datepicker/how-to":
+    "controls/datepicker/how-to":
         title: "How To"
         position: 70
-    "controls/editors/dropdowntree/binding":
+    "controls/dropdowntree/binding":
         title: "Data Binding"
         position: 2
-    "controls/editors/dropdownlist/how-to":
+    "controls/dropdownlist/how-to":
         title: "How To"
         position: 70
-    "controls/editors/multiselect/how-to":
+    "controls/multiselect/how-to":
         title: "How To"
         position: 70
-    "controls/editors/numerictextbox/how-to":
+    "controls/numerictextbox/how-to":
         title: "How To"
         position: 70
-    "controls/editors/upload/how-to":
+    "controls/upload/how-to":
         title: "How To"
         position: 70
     "controls/charts":
@@ -141,85 +137,65 @@ navigation:
     "controls/charts/treemap":
         title: "TreeMap"
         position: 9
-    "controls/gauges":
-        title: "Gauges"
-    "controls/barcodes":
-        title: "Barcodes"
-    "controls/diagrams-and-maps":
-        title: "Diagrams and Maps"
-    "controls/diagrams-and-maps/orgchart":
+    "controls/orgchart":
         title: "OrgChart"
-    "controls/scheduling":
-        title: "Scheduling"
-    "controls/layout":
-        title: "Layout"
-    "controls/layout/window/how-to":
+    "controls/window/how-to":
         title: "How To"
         position: 70
-    "controls/navigation":
-        title: "Navigation"
-    "controls/navigation/appbar":
+    "controls/appbar":
         title: "AppBar"
-    "controls/navigation/bottomnavigation":
+    "controls/bottomnavigation":
         title: "BottomNavigation"
-    "controls/navigation/breadcrumb":
+    "controls/breadcrumb":
         title: "Breadcrumb"
-    "controls/navigation/buttongroup":
+    "controls/buttongroup":
         title: "ButtonGroup"
-    "controls/navigation/drawer":
+    "controls/drawer":
         title: "Drawer"
-    "controls/navigation/dropdownbutton":
+    "controls/dropdownbutton":
         title: "DropDownButton"
-    "controls/navigation/menu/contextmenu":
+    "controls/menu/contextmenu":
         title: "ContextMenu"
         position: 6
-    "controls/navigation/splitbutton":
+    "controls/splitbutton":
         title: "SplitButton"
-    "controls/navigation/stepper":
+    "controls/stepper":
         title: "Stepper"
-    "controls/navigation/wizard":
+    "controls/wizard":
         title: "Wizard"
-    "controls/navigation/tabstrip/how-to":
+    "controls/tabstrip/how-to":
         title: "How To"
         position: 70
-    "controls/navigation/toolbar/command-types":
+    "controls/toolbar/command-types":
         title: "Command Types"
         position: 2
-    "controls/navigation/treeview/binding":
+    "controls/treeview/binding":
         title: "Data Binding"
         position: 2
-    "controls/editors/colorgradient":
+    "controls/colorgradient":
         title: "ColorGradient"
-    "controls/editors/imageeditor":
+    "controls/imageeditor":
         title: "Image Editor"
-    "controls/conversational-ui":
-        title: "Conversational UI"
-    "controls/conversational-ui/chat":
+    "controls/chat":
         title: "Chat"
-    "controls/conversational-ui/chat/integrations":
+    "controls/chat/integrations":
         title: "Integrations"
         position: 4
-    "controls/interactivity":
-        title: "Interactivity and UX"
-    "controls/interactivity/fx":
+    "controls/fx":
         title: "FX"
-    "controls/interactivity/draganddrop":
+    "controls/draganddrop":
         title: "Drag and Drop"
-    "controls/interactivity/loader":
+    "controls/loader":
         title: "Loader"
-    "controls/interactivity/skeletoncontainer":
+    "controls/skeletoncontainer":
         title: "SkeletonContainer"
-    "controls/interactivity/ripplecontainer":
+    "controls/ripplecontainer":
         title: "RippleContainer"
-    "controls/editors/captcha":
+    "controls/captcha":
         title: "Captcha"
-    "controls/interactivity/sortable/integration":
+    "controls/sortable/integration":
         title: "Integration"
         position: 6
-    "controls/media":
-        title: "Media"
-    "controls/pdf":
-        title: "PDF"
     "controls/hybrid":
         title: "Hybrid UI"
     "controls/hybrid/styles":
@@ -544,7 +520,7 @@ navigation:
         title: "Chip"
     "*chiplist":
         title: "ChipList"
-    "controls/scheduling/multiviewcalendar":
+    "controls/multiviewcalendar":
         title: "MultiViewCalendar"
     "*colorpalette":
         title: "ColorPalette"
@@ -1583,43 +1559,43 @@ defaults:
     ## Component Tags
 -
     scope:
-        path: "controls/gauges/lineargauge"
+        path: "controls/lineargauge"
     values:
         component: "gauges"
 
 -
     scope:
-        path: "controls/gauges/radialgauge"
+        path: "controls/radialgauge"
     values:
         component: "gauges"
 
 -
     scope:
-        path: "controls/editors/autocomplete"
+        path: "controls/autocomplete"
     values:
         component: "autocomplete"
 
 -
     scope:
-        path: "controls/layout/avatar"
+        path: "controls/avatar"
     values:
         component: "avatar"
 
 -
     scope:
-        path: "controls/barcodes/barcode"
+        path: "controls/barcode"
     values:
         component: "barcode"
 
 -
     scope:
-        path: "controls/navigation/button"
+        path: "controls/button"
     values:
         component: "button"
 
 -
     scope:
-        path: "controls/scheduling/calendar"
+        path: "controls/calendar"
     values:
         component: "calendar"
 
@@ -1631,25 +1607,25 @@ defaults:
 
 -
     scope:
-        path: "controls/editors/checkbox"
+        path: "controls/checkbox"
     values:
         component: "checkbox"
 
 -
     scope:
-        path: "controls/editors/checkboxgroup"
+        path: "controls/checkboxgroup"
     values:
         component: "checkboxgroup"
 
 -
     scope:
-        path: "controls/editors/colorpicker"
+        path: "controls/colorpicker"
     values:
         component: "color-picker"
 
 -
     scope:
-        path: "controls/editors/combobox"
+        path: "controls/combobox"
     values:
         component: "combobox"
 
@@ -1661,43 +1637,43 @@ defaults:
 
 -
     scope:
-        path: "controls/editors/datepicker"
+        path: "controls/datepicker"
     values:
         component: "date-time-pickers"
 
 -
     scope:
-        path: "controls/editors/timepicker"
+        path: "controls/timepicker"
     values:
         component: "date-time-pickers"
 
 -
     scope:
-        path: "controls/editors/timedurationpicker"
+        path: "controls/timedurationpicker"
     values:
         component: "date-time-pickers"
 
 -
     scope:
-        path: "controls/editors/dateinput"
+        path: "controls/dateinput"
     values:
         component: "dateinput"
 
 -
     scope:
-        path: "controls/diagrams-and-maps/diagram"
+        path: "controls/diagram"
     values:
         component: "diagram"
 
 -
     scope:
-        path: "controls/layout/dialog"
+        path: "controls/dialog"
     values:
         component: "dialog"
 
 -
     scope:
-        path: "controls/interactivity/draganddrop"
+        path: "controls/draganddrop"
     values:
         component: "drag-and-drop"
 
@@ -1709,31 +1685,31 @@ defaults:
 
 -
     scope:
-        path: "controls/editors/dropdownlist"
+        path: "controls/dropdownlist"
     values:
         component: "dropdownlist"
 
 
     scope:
-        path: "controls/editors/editor"
+        path: "controls/editor"
     values:
         component: "editor"
 
 -
     scope:
-        path: "controls/interactivity/fx"
+        path: "controls/fx"
     values:
         component: "effects"
 
 -
     scope:
-        path: "controls/interactivity/ripplecontainer"
+        path: "controls/ripplecontainer"
     values:
         component: "ripple-container"
 
 -
     scope:
-        path: "controls/scheduling/gantt"
+        path: "controls/gantt"
     values:
         component: "gantt"
 
@@ -1745,13 +1721,13 @@ defaults:
 
 -
     scope:
-        path: "controls/data-management/filemanager"
+        path: "controls/filemanager"
     values:
         component: "filemanager"
 
 -
     scope:
-        path: "controls/data-management/grid"
+        path: "controls/grid"
     values:
         component: "grid"
 
@@ -1763,13 +1739,13 @@ defaults:
 
 -
     scope:
-        path: "controls/editors/listbox"
+        path: "controls/listbox"
     values:
         component: "listbox"
 
 -
     scope:
-        path: "controls/data-management/listview"
+        path: "controls/listview"
     values:
         component: "listview"
 
@@ -1787,151 +1763,151 @@ defaults:
 
 -
     scope:
-        path: "controls/diagrams-and-maps/map"
+        path: "controls/map"
     values:
         component: "map"
 
 -
     scope:
-        path: "controls/editors/maskedtextbox"
+        path: "controls/maskedtextbox"
     values:
         component: "maskedtextbox"
 
 -
     scope:
-        path: "controls/media/mediaplayer"
+        path: "controls/mediaplayer"
     values:
         component: "mediaplayer"
 
 -
     scope:
-        path: "controls/navigation/menu"
+        path: "controls/menu"
     values:
         component: "menu"
 
 -
     scope:
-        path: "controls/navigation/actionsheet"
+        path: "controls/actionsheet"
     values:
         component: "ActionSheet"
 
 -
     scope:
-        path: "controls/editors/multiselect"
+        path: "controls/multiselect"
     values:
         component: "multi-select"
 
 -
     scope:
-        path: "controls/editors/multicolumncombobox"
+        path: "controls/multicolumncombobox"
     values:
         component: "multicolumn-combobox"
 
 -
     scope:
-        path: "controls/layout/form"
+        path: "controls/form"
     values:
         component: "form"
 
 -
     scope:
-        path: "controls/navigation/floatingactionbutton"
+        path: "controls/floatingactionbutton"
     values:
         component: "floatingactionbutton"
 
 -
     scope:
-        path: "controls/layout/expansionpanel"
+        path: "controls/expansionpanel"
     values:
         component: "expansionpanel"
 
 -
     scope:
-        path: "controls/layout/notification"
+        path: "controls/notification"
     values:
         component: "notification"
 
 -
     scope:
-        path: "controls/editors/numerictextbox"
+        path: "controls/numerictextbox"
     values:
         component: "numeric-textbox"
 
 -
     scope:
-        path: "controls/editors/radiobutton"
+        path: "controls/radiobutton"
     values:
         component: "radiobutton"
 
 -
     scope:
-        path: "controls/editors/radiogroup"
+        path: "controls/radiogroup"
     values:
         component: "radiogroup"
 
 -
     scope:
-        path: "controls/editors/rating"
+        path: "controls/rating"
     values:
         component: "rating"
 
 -
     scope:
-        path: "controls/editors/signature"
+        path: "controls/signature"
     values:
         component: "signature"
 
 -
     scope:
-        path: "controls/diagrams-and-maps/orgchart"
+        path: "controls/orgchart"
     values:
         component: "orgchart"
 -
     scope:
-        path: "controls/navigation/panelbar"
+        path: "controls/panelbar"
     values:
         component: "panelbar"
 
 -
     scope:
-        path: "controls/data-management/pivotgrid"
+        path: "controls/pivotgrid"
     values:
         component: "pivotgrid"
 
 -
     scope:
-        path: "controls/data-management/pivotgridv2"
+        path: "controls/pivotgridv2"
     values:
         component: "pivotgridv2"
 
 
 -
     scope:
-        path: "controls/layout/popover"
+        path: "controls/popover"
     values:
         component: "popover"
 
 -
     scope:
-        path: "controls/interactivity/progressbar"
+        path: "controls/progressbar"
     values:
         component: "progressbar"
 
 -
     scope:
-        path: "controls/interactivity/circularprogressbar"
+        path: "controls/circularprogressbar"
     values:
         component: "circularprogressbar"
 
 -
     scope:
-        path: "controls/barcodes/qrcode"
+        path: "controls/qrcode"
     values:
         component: "qrcode"
 
 -
     scope:
-        path: "controls/layout/responsivepanel"
+        path: "controls/responsivepanel"
     values:
         component: "responsivepanel"
 
@@ -1943,7 +1919,7 @@ defaults:
 
 -
     scope:
-        path: "controls/scheduling/scheduler"
+        path: "controls/scheduler"
     values:
         component: "scheduler"
 
@@ -1955,13 +1931,13 @@ defaults:
 
 -
     scope:
-        path: "controls/editors/slider"
+        path: "controls/slider"
     values:
         component: "slider"
 
 -
     scope:
-        path: "controls/interactivity/sortable"
+        path: "controls/sortable"
     values:
         component: "sortable"
 
@@ -1973,48 +1949,48 @@ defaults:
 
 -
     scope:
-        path: "controls/layout/splitter"
+        path: "controls/splitter"
     values:
         component: "splitter"
 
 -
     scope:
-        path: "controls/data-management/spreadsheet"
+        path: "controls/spreadsheet"
     values:
         component: "spreadsheet"
 
 -
     scope:
-        path: "controls/editors/switch"
+        path: "controls/switch"
     values:
         component: "switch"
 
     scope:
-        path: "controls/navigation/tabstrip"
+        path: "controls/tabstrip"
     values:
         component: "tabstrip"
 
 -
     scope:
-        path: "controls/data-management/taskboard"
+        path: "controls/taskboard"
     values:
         component: "taskboard"
 
 -
     scope:
-        path: "controls/editors/textarea"
+        path: "controls/textarea"
     values:
         component: "textarea"
 
 -
     scope:
-        path: "controls/editors/textbox"
+        path: "controls/textbox"
     values:
         component: "textbox"
 
 -
     scope:
-        path: "controls/editors/textarea"
+        path: "controls/textarea"
     values:
         component: "textarea"
 
@@ -2032,24 +2008,24 @@ defaults:
 
 -
     scope:
-        path: "controls/navigation/toolbar"
+        path: "controls/toolbar"
     values:
         component: "toolbar"
 
 -
     scope:
-        path: "controls/layout/tooltip"
+        path: "controls/tooltip"
     values:
         component: "tooltip"
 
     scope:
-        path: "controls/layout/tilelayout"
+        path: "controls/tilelayout"
     values:
         component: "tilelayout"
 
 -
     scope:
-        path: "controls/data-management/treelist"
+        path: "controls/treelist"
     values:
         component: "treelist"
 
@@ -2061,25 +2037,25 @@ defaults:
 
 -
     scope:
-        path: "controls/navigation/treeview"
+        path: "controls/treeview"
     values:
         component: "treeview"
 
 -
     scope:
-        path: "controls/editors/upload"
+        path: "controls/upload"
     values:
         component: "upload"
 
 -
     scope:
-        path: "controls/editors/validator"
+        path: "controls/validator"
     values:
         component: "validation"
 
 -
     scope:
-        path: "controls/layout/window"
+        path: "controls/window"
     values:
         component: "window"
 
@@ -2291,8 +2267,8 @@ footer:
   links:
     "Getting Started": https://docs.telerik.com/kendo-ui/intro/first-steps
     "Demos": https://demos.telerik.com/kendo-ui/
-    "Whats New": "https://www.telerik.com/support/whats-new/kendo-ui"
-    "Roadmap": https://www.telerik.com/support/whats-new/kendo-ui/roadmap
+    "Whats New": "https://www.telerik.com/support/whats-new/kendo-jquery-ui"
+    "Roadmap": https://www.telerik.com/support/whats-new/kendo-jquery-ui/roadmap
 -
   title: "Community"
   links:
