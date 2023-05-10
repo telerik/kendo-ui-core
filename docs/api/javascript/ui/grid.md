@@ -10862,6 +10862,8 @@ The new column width.
 
 Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event.
 
+> This call requires JSZip library included.
+	
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
 #### Example - manually initiate Excel export
