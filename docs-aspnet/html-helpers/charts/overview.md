@@ -15,9 +15,9 @@ position: 1
 # {{ site.framework }} Chart Overview
 
 {% if site.core %}
-The Chart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Chart widget. To add the component to your ASP.NET Core app, you can use either.
+[The Telerik UI Chart TagHelper and HtmlHelper for {{ site.framework }}](https://www.telerik.com/aspnet-core-ui/charts) are server-side wrappers for the Kendo UI Chart widget. To add the component to your ASP.NET Core app, you can use either.
 {% else %}
-The Telerik UI Chart HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Chart widget.
+[The Telerik UI Chart HtmlHelper for {{ site.framework }}](https://www.telerik.com/aspnet-mvc/charts) is a server-side wrapper for the Kendo UI Chart widget.
 {% endif %}
 
 The Chart uses modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_aspnetcore_htmlhelper %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.

@@ -9,7 +9,7 @@ position: 0
 
 # {{ site.product }} Chart Overview
 
-The Kendo UI Chart uses modern browser technologies to render high-quality data visualizations.
+[The Kendo UI Chart](https://www.telerik.com/kendo-jquery-ui/charts) uses modern browser technologies to render high-quality data visualizations.
 
 All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_widget %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.
 
