@@ -53,15 +53,14 @@ The following example demonstrates the default tool methods of the Editor.
             .Print()
             .Snippets(snippets => snippets
                 .Add("Signature", "<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>")
-                .Add("Kendo online demos", " <a href='https://demos.telerik.com/kendo-ui'>Kendo online demos</a> ")
+                .Add("Telerik UI for ASP.NET Core Demos", " <a href='https://demos.telerik.com/aspnet-core/'>Telerik UI for ASP.NET Core Online Demos</a> ")
             )
         )
     )
 ```
-```
 {% if site.core %}
 ```TagHelper
-        <kendo-editor  name="editor">
+        <kendo-editor name="editor">
         <tools>
             <tool name="bold">
             </tool>
@@ -159,11 +158,10 @@ The following example demonstrates the default tool methods of the Editor.
             </tool>
             <tool name="insertHtml">
                 <tool-items>
-                    <tool-item text="Signature" value="<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>">
-                    </tool-item>
-                    <tool-item text="Telerik UI online demos" value="<a href='https://demos.telerik.com/aspnet-core/'>Telerik UI for ASP.NET Core Online Demos</a> ">
-                </tool-item>
-            </tool-items>
+                    <tool-item text="Signature" value="<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>"> </tool-item>
+                    <tool-item text="Telerik UI for ASP.NET Core Demo" value="<a href='https://demos.telerik.com/aspnet-core/'>Telerik UI for ASP.NET Core Online Demos</a>"></tool-item>
+                </tool-items>
+            </tool>
         </tools>
     </kendo-editor>
 ```
@@ -211,7 +209,7 @@ The following example demonstrates these scenarios. Note the `Name()` method tha
         });
     </script>
 ```
-```
+
 {% if site.core %}
 ```TagHelper
     <kendo-editor name="editor">

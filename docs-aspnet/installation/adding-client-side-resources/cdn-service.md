@@ -27,7 +27,7 @@ To access the Kendo UI CDN services, you can use either the HTTP or the HTTPS pr
 The URLs of the Telerik CDN have the following structure:
 
 * `https://kendo.cdn.telerik.com/themes/[THEMEVERSION]/default/[FILENAME]`&mdash;The `themes` folder contains the [`.css` files](#adding-the-required-css-files) of the SASS themes for {{ site.product }} versions after R1 2023 SP1.
-* `https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`&mdash;The `styles` folder contains the [minified `.css` files](#adding-the-required-css-files) (SASS and LESS) for {{ site.product }} versions before R1 2023 SP1. 
+* `https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`&mdash;The `styles` folder contains the [`.css` files](#adding-the-required-css-files) (SASS and LESS) for {{ site.product }} versions before R1 2023 SP1. 
 * `https://kendo.cdn.telerik.com/[VERSION]/mjs/[FILENAME]`&mdash;The `mjs` folder contains the [JavaScript modules](#using-javascript-modules).
 * `https://kendo.cdn.telerik.com/[VERSION]/js/[FILENAME]`&mdash;The `js` folder contains the [bundled Kendo UI JavaScript files](#using-bundled-javascript).
 
@@ -38,7 +38,7 @@ In the sample URLs above, you must replace `[VERSION]`, [THEMEVERSION] and `[FIL
 
 ## Adding the Required CSS Files
 
-Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The minified versions of the `.css` files are available in the `themes` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/themes/<version>/<theme>/<swatch>.css`.
+Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The `.css` files are available in the `themes` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/themes/<version>/<theme>/<swatch>.css`.
 
 To load version `{{site.themesCdnVersion}}` of the desired visual theme, replace `[THEMEVERSION]` and `[FILENAME]` with their actual values, for example, `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`.
 

@@ -347,7 +347,7 @@ Referencing existing instances of a component allows you to build on top of thei
     </script>
     ```
 
-1. Use the [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datasource#methods) to control the behavior of the widget. In this example, you will force the DataSource to send a new read request to the backend with the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) method. Then, you will then handle the returned promise to access the data item of the returned page with the [`view`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/view) method of the DataSource.
+1. Use the [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datasource#methods) to control the behavior of the widget. In this example, you will force the DataSource to send a new read request to the backend with the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) method. Then, you will handle the returned promise to access the data item of the returned page with the [`view`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/view) method of the DataSource.
 
     ```script
     <script>

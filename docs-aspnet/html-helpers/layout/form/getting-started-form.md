@@ -28,6 +28,8 @@ Optionally, you can structure the document by adding the desired HTML elements l
 
 Binding a model to the Form will set the Form items internally to the Telerik Editor components that are suitable for the bound data. In addition, the data annotations of the model fields can be applied to the Form items.
 
+>tip Validate whether user inputs match the common e-mail format with the Regular Expression of the `Email` field. 
+
 ```C#
 	using System;
     using System.ComponentModel.DataAnnotations;
