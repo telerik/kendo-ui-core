@@ -97,7 +97,7 @@ var __meta__ = {
             options.min = parse(element.attr("min")) || parse(options.min);
             options.max = parse(element.attr("max")) || parse(options.max);
 
-            if (+options.max != +MAX || +options.min != +MIN) {
+            if (+options.max != +MAX || +options.min != +MIN || +options.startTime != +MIN || options.endTime != +MAX) {
                 this._specifiedRange = true;
             }
 
@@ -167,6 +167,8 @@ var __meta__ = {
             parseFormats: [],
             dates: [],
             disableDates: null,
+            startTime: null,
+            endTime: null,
             min: new DATE(MIN),
             max: new DATE(MAX),
             interval: 30,
@@ -634,6 +636,8 @@ var __meta__ = {
                 options = that.options,
                 min = options.min,
                 max = options.max,
+                startTime = options.startTime,
+                endTime = options.endTime,
                 dates = options.dates,
                 timeView = that.timeView,
                 current = that._value,
@@ -687,8 +691,8 @@ var __meta__ = {
 
                 if (!skip) {
                     if (isEqualDatePart(date, min)) {
-                        timeViewOptions.min = min;
-                        timeViewOptions.max = lastTimeOption(options.interval);
+                        timeViewOptions.min = startTime ? startTime : min;
+                        timeViewOptions.max = endTime ? endTime : lastTimeOption(options.interval);
                         rebind = true;
                     }
 
@@ -697,7 +701,7 @@ var __meta__ = {
                             timeView.dataBind([MAX]);
                             skip = true;
                         } else {
-                            timeViewOptions.max = max;
+                            timeViewOptions.max = endTime ? endTime : max;
                             timeViewOptions.maxSet = true;
                             if (!rebind) {
                                 timeViewOptions.min = MIN;
@@ -709,8 +713,8 @@ var __meta__ = {
 
                 if (!skip && ((!old && rebind) || (old && !isEqualDatePart(old, date)))) {
                     if (!rebind) {
-                        timeViewOptions.max = MAX;
-                        timeViewOptions.min = MIN;
+                        timeViewOptions.max = endTime ? endTime : MAX;
+                        timeViewOptions.min = startTime ? startTime : MIN;
                     }
 
                     timeView.bind();
@@ -757,6 +761,34 @@ var __meta__ = {
             if (stopPropagation) {
                 e.stopImmediatePropagation();
             }
+        },
+
+        _timeOption: function(arg) {
+            var that = this,
+            options = that.options,
+            timeOption = options[arg],
+            dateRangeOption = arg == "startTime" ? options.min : options.max,
+            option = arg == "startTime" ? new DATE(MIN) : new DATE(MAX),
+            date;
+
+            if ( timeOption ) {
+                option = new DATE(timeOption);
+            }
+
+            if (timeOption && dateRangeOption ) {
+                date = new Date(dateRangeOption.getFullYear(), dateRangeOption.getMonth(), dateRangeOption.getDate(), timeOption.getHours(), timeOption.getMinutes(), timeOption.getSeconds());
+                if (arg == "startTime" ) {
+                    that.options.min = date;
+                } else {
+                    that.options.max = date;
+                }
+            }
+
+            if ( options.componentType === "modern") {
+                option = dateRangeOption;
+            }
+
+            return option;
         },
 
         _views: function() {
@@ -837,11 +869,13 @@ var __meta__ = {
                 culture: options.culture,
                 height: options.componentType === "modern" ? null : options.height,
                 interval: options.interval,
-                min: options.componentType === "modern" ? options.min : new DATE(MIN),
-                max: options.componentType === "modern" ? options.max : new DATE(MAX),
+                startTime: options.startTime,
+                endTime: options.endTime,
+                min: that._timeOption("startTime"),
+                max: that._timeOption("endTime"),
                 dates: msMin === options.max.getTime() ? [new Date(msMin)] : [],
                 parseFormats: options.parseFormats,
-                validateDate: true,
+                validateDate: (options.startTime || options.endTime ) ? false : true,
                 change: function(value, trigger) {
                     value = that._applyTimeValue(value);
 

@@ -281,6 +281,19 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 > This functionality was added with the Q1 release of 2016.
 
+### endTime `Date`
+
+ If set, specifies the latest time the TimeView can show.
+
+#### Example - specify the start time for the TimeView
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            endTime: new Date(2023,1,3,18,30,0)
+        });
+    </script>
+
 ### fillMode `String`*(default: "solid")*
 
 Sets a value controlling how the color is applied. Can also be set to the following string values:
@@ -812,6 +825,19 @@ Sets a value controlling size of the component. Can also be set to the following
     <script>
         $("#datetimepicker").kendoDateTimePicker({
             start: "year"
+        });
+    </script>
+
+### startTime `Date`
+
+ If set, specifies the earliest time the TimeView can show.
+
+#### Example - specify the start time for the TimeView
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            startTime: new Date(2023,1,3,8,30,0)
         });
     </script>
 

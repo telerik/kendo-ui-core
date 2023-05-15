@@ -639,8 +639,8 @@ var __meta__ = {
                 this._currentlySelected = new Date();
             }
 
-            var max = this.options.max;
-            var min = this.options.min;
+            var max = this.options.endTime ? this.options.endTime : this.options.max;
+            var min = this.options.startTime ? this.options.startTime : this.options.min;
 
             if (this.options.validateDate) {
                 if (max.getFullYear() === this._currentlySelected.getFullYear() &&

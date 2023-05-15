@@ -4071,6 +4071,7 @@ declare namespace kendo.ui {
         dates?: any;
         depth?: string | undefined;
         disableDates?: any|Function | undefined;
+        endTime?: Date | undefined;
         fillMode?: string | undefined;
         footer?: boolean|string|Function | undefined;
         format?: string | undefined;
@@ -4085,6 +4086,7 @@ declare namespace kendo.ui {
         rounded?: string | undefined;
         size?: string | undefined;
         start?: string | undefined;
+        startTime?: Date | undefined;
         timeFormat?: string | undefined;
         value?: Date | undefined;
         change?(e: DateTimePickerChangeEvent): void;
@@ -9807,6 +9809,12 @@ declare namespace kendo.ui {
         views?: SchedulerMessagesViews | undefined;
     }
 
+    interface SchedulerOngoing {
+        cssClass?: string | undefined;
+        enabled?: boolean | undefined;
+        updateInterval?: number | undefined;
+    }
+
     interface SchedulerPdfMargin {
         bottom?: number|string | undefined;
         left?: number|string | undefined;
@@ -9846,6 +9854,20 @@ declare namespace kendo.ui {
 
     interface SchedulerToolbarItem {
         name?: string | undefined;
+    }
+
+    interface SchedulerToolbarItemsMobileOptions {
+        main?: ToolBarItem[] | undefined;
+        navigation?: ToolBarItem[] | undefined;
+    }
+
+    interface SchedulerToolbarItemsOptions {
+        desktop?: ToolBarItem[] | undefined;
+        mobile?: SchedulerToolbarItemsMobileOptions | undefined;
+    }
+
+    interface SchedulerToolbarOptions {
+        items?: ToolBarItem[]|SchedulerToolbarItemsOptions | undefined;
     }
 
     interface SchedulerViewEditable {
@@ -9921,6 +9943,7 @@ declare namespace kendo.ui {
         minorTickCount?: number | undefined;
         minorTimeHeaderTemplate?: string|Function | undefined;
         mobile?: boolean|string | undefined;
+        ongoingEvents?: boolean|SchedulerOngoing | undefined;
         pdf?: SchedulerPdf | undefined;
         resources?: SchedulerResource[] | undefined;
         selectable?: boolean | undefined;
@@ -9928,7 +9951,7 @@ declare namespace kendo.ui {
         snap?: boolean | undefined;
         startTime?: Date | undefined;
         timezone?: string | undefined;
-        toolbar?: SchedulerToolbarItem[] | undefined;
+        toolbar?: SchedulerToolbarItem[]|SchedulerToolbarOptions | undefined;
         views?: SchedulerView[] | undefined;
         width?: number|string | undefined;
         workDayStart?: Date | undefined;

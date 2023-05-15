@@ -25,7 +25,7 @@ However, note that due to the special and individual behavior of clickable eleme
 * [Globalization]({% slug globalization_button %})&mdash;The Button supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_button %}) need to be supported. Additionally, the Button supports [rendering in a right-to-left (RTL) direction]({% slug rtl_button %}).
 * [Accessibility]({% slug accessibility_button %})&mdash;The Button is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_button %}).
 
->tip To learn more about the appearance, anatomy, and accessibility of the Button, visit the [Telerik and Kendo UI Design System documentation](www.telerik.com/design-system/docs/components/button/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+>tip To learn more about the appearance, anatomy, and accessibility of the Button, visit the [Telerik and Kendo UI Design System documentation](https://www.telerik.com/design-system/docs/components/button/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ## Next Steps
 

@@ -168,7 +168,9 @@ You can continue experimenting with the code sample above by running it in the T
 ## Next Steps
 
 * [Configure the ImageEditor's Tools]({% slug htmlhelpers_imageeditor_tools_aspnetcore %})
+{% if site.core %}
 * [Use the ImageEditor in a Razor Page]({% slug htmlhelpers_imageeditor_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 
