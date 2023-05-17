@@ -193,7 +193,7 @@ To achieve the same look and feel as the old rendering, you must update the elem
 
 > When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
-The following example showcases how to customize the styles of the **ТTreeView** in both the new, and the old rendering:
+The following example showcases how to customize the styles of the **TreeView** in both the new, and the old rendering:
 
 ```dojo
     <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->

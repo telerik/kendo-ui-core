@@ -17,7 +17,7 @@ res_type: kb
   <td>Progress® Telerik® UI Grid for UI for {{ site.framework }}</td>
  </tr>
   <tr>
-  <td>Progress Тelerik UI version</td>
+  <td>Progress Telerik UI version</td>
   <td>2021.3.1207</td>
  </tr>
 </table>
@@ -59,13 +59,13 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/GmYHdEFR556Q5I6J58
         })
         .Pageable()
         .Sortable()
-        .Scrollable(scr=>scr.Height(430)) 
+        .Scrollable(scr=>scr.Height(430))
         .Filterable()
-        .Events(e=>e.Databound("databound")) 
-        .DataSource(dataSource => dataSource        
+        .Events(e=>e.Databound("databound"))
+        .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
-            .ServerOperation(false)        
+            .ServerOperation(false)
         )
     )
      <style>
@@ -147,13 +147,13 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/QGaPlMPA01Ynhx8P04
         })
         .Pageable()
         .Sortable()
-        .Scrollable(scr=>scr.Height(430)) 
+        .Scrollable(scr=>scr.Height(430))
         .Filterable()
-        .Events(e=>e.Databound("databound")) 
-        .DataSource(dataSource => dataSource        
+        .Events(e=>e.Databound("databound"))
+        .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
-            .ServerOperation(false)        
+            .ServerOperation(false)
         )
     )
     <style>
@@ -211,13 +211,13 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/mcuFlNuC05ge5RKB30
           .ClientRowTemplate("#=altRowTemplateString#")
           .Pageable()
           .Sortable()
-          .Scrollable(scr=>scr.Height(430)) 
+          .Scrollable(scr=>scr.Height(430))
           .Filterable()
-          .Events(e=>e.Databound("databound")) 
-          .DataSource(dataSource => dataSource        
+          .Events(e=>e.Databound("databound"))
+          .DataSource(dataSource => dataSource
               .Ajax()
               .PageSize(20)
-              .ServerOperation(false)        
+              .ServerOperation(false)
           )
       )
       <style>
@@ -248,7 +248,7 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/mcuFlNuC05ge5RKB30
             '<td class="#: getUnitsInStockClass(UnitsInStock) #">#: UnitsInStock #</td>' +
             '<td>#: Discontinued #</td>' +
             '</tr>';
-        
+
         var altRowTemplateString = rowTemplateString.replace('tr class="', 'tr class="k-alt ');
 
         function getUnitsInStockClass(units) {

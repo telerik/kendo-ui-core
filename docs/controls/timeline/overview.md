@@ -89,7 +89,7 @@ The following example demonstrates how to initialize the Timeline from a JSON `d
             description: "Third event description.",
             date: new Date(2015, 5, 25),
             subtitle: "My second trip this year",
-            title: "Malta, a Country of Кnights",
+            title: "Malta, a Country of Knights",
             images: [
                 {
                     src: "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Malta/Bibliotheca-National-Library_Marie-Lan-Nguyen.JPG?width=500&amp;height=500"

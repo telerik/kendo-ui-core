@@ -230,7 +230,7 @@ Defines the parent field to be used to retain value from. This value will be use
 
 ### cascadeOnCustomValue `Boolean` *(default: false)*
 
-Applicable to a parent ComboBox in а cascading scenario. If set to `true` cascading will be triggered upon custom input in the parent widget. When set to `false` (default) the child will not cascade and it will be disabled upon setting custom input in the parent ComboBox. Cascade on custom values works only when `cascadeFromParentField` is not set for the child combo, or it points to the `dataValueField` of the parent.
+Applicable to a parent ComboBox in a cascading scenario. If set to `true` cascading will be triggered upon custom input in the parent widget. When set to `false` (default) the child will not cascade and it will be disabled upon setting custom input in the parent ComboBox. Cascade on custom values works only when `cascadeFromParentField` is not set for the child combo, or it points to the `dataValueField` of the parent.
 
 #### Example
 

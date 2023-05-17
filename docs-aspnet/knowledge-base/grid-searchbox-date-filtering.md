@@ -1,5 +1,5 @@
 ---
-title: Using Search Box to Filter the Grid Data by Date 
+title: Using Search Box to Filter the Grid Data by Date
 description: Learn how to filter the Grid data by a DateTime field when using its Search box. Find the solution in the {{ site.product }} Knowledge Base.
 type: how-to
 page_title: Filter the Grid Data by a DateTime Field with the Search Tool
@@ -16,7 +16,7 @@ res_type: kb
   <td>{{ site.product }} Grid</td>
  </tr>
   <tr>
-  <td>Progress Тelerik UI for {{ site.framework }} version</td>
+  <td>Progress Telerik UI for {{ site.framework }} version</td>
   <td>2022.1.119</td>
  </tr>
 </table>
@@ -24,11 +24,11 @@ res_type: kb
 
 ## Description
 
-How can I filter the Grid's data by a `DateTime` field with the Search tool? It recognizes strings formatted like dates as integers, for example, 07/08/1996 is parsed as 07. 
+How can I filter the Grid's data by a `DateTime` field with the Search tool? It recognizes strings formatted like dates as integers, for example, 07/08/1996 is parsed as 07.
 
 ## Solution
 
-When the Grid is bound to a numeric field and the search input includes numbers the input is parsed as a number by default. 
+When the Grid is bound to a numeric field and the search input includes numbers the input is parsed as a number by default.
 
 To change this behavior, configure the `Schema.Model.Parse` property of the Numeric field to use a JavaScript handler function. To prevent the parsing of the date as a number, look for special date symbols in the handler and return null if there are any.
 

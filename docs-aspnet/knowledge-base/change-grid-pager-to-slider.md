@@ -1,6 +1,6 @@
 ---
-title: Changing the Grid Pager to а Slider
-page_title: Changing the Pager in the Data Grid to а Slider
+title: Changing the Grid Pager to a Slider
+page_title: Changing the Pager in the Data Grid to a Slider
 description: Learn how to change the default paging to a slider in the Telerik UI for {{ site.framework }} Grid.
 slug: change-grid-pager-to-slider
 tags: grid, pager, slider, core, mvc, telerik
@@ -71,7 +71,7 @@ To achieve the desired result:
 ```Script.js
     <script type="text/javascript">
        var sliderCreated = false; // Flag variable.
-    
+
        function onChange(e){
           var grid = $("#grid").data("kendoGrid"); // Obtain the Grid's reference.
           grid.dataSource.page(e.value); // Change the DataSource's page.

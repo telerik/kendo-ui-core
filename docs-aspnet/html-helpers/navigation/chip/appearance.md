@@ -48,7 +48,7 @@ The [`Size`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#sizekendomvcuicomponentsize) o
 - `ComponentSize.Large`—Large size.
 - `ComponentSize.None`—Unset.
 
-The structure of the class is `k-chip-{size}`. The default size value is `Мedium` and is applied to the rendered `div` element through the `k-chip-md` class.
+The structure of the class is `k-chip-{size}`. The default size value is `Medium` and is applied to the rendered `div` element through the `k-chip-md` class.
 
 ```html
 <div class="k-chip k-chip-md" >
@@ -57,7 +57,7 @@ The structure of the class is `k-chip-{size}`. The default size value is `Мediu
 
 ## Fill Mode
 
-The `FillMode` option controls the way the color is applied to the rendered `div`. 
+The `FillMode` option controls the way the color is applied to the rendered `div`.
 
 ```HtmlHelper
      @(Html.Kendo().Chip()
@@ -91,7 +91,7 @@ The structure of the Html class is `k-chip-{fillMode}`. The default `fillMode` v
 
 ## Theme Color
 
-The `ThemeColor` option controls the color that will be applied to the rendered Chip. 
+The `ThemeColor` option controls the color that will be applied to the rendered Chip.
 
 ```HtmlHelper
      @(Html.Kendo().Chip()

@@ -77,7 +77,7 @@ The option is applied to the wrapping span element through the `k-rounded-md` cl
 <span class="k-numerictextbox k-input k-rounded-md">
 ```
 
-Тhe `Rounded` option supports the following values:
+The `Rounded` option supports the following values:
 
 - `Small`
 - `Medium`
@@ -122,7 +122,7 @@ The following values are available for the `FillMode` option:
 
 The old rendering of the NumericTextBox consisted of two span wrapper elements:
 - a span wrapper element with the `k-numerictextbox` class
-- a nested span wrapper element with the `k-numeric-wrap` class that held all the styling information related to the widget 
+- a nested span wrapper element with the `k-numeric-wrap` class that held all the styling information related to the widget
 
 ```html
  <!-- OLD -->

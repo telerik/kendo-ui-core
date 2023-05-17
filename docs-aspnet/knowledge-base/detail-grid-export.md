@@ -21,7 +21,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Progress Тelerik UI version</td>
+  <td>Progress Telerik UI version</td>
   <td>2021.3.1207</td>
  </tr>
 </table>
@@ -36,7 +36,7 @@ The following examples demonstrate how to export detail Grids to Excel and merge
 
 To get the workbook of the detail Grids, the demos use the [`excelExport`](api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemfuncsystemobjectsystemobject) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](https://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
 
-The following example demonstrates how to export a detail Grid to Excel including the current page only. 
+The following example demonstrates how to export a detail Grid to Excel including the current page only.
 
 Refer to the [following REPL](https://netcorerepl.telerik.com/QwOFwYbU29KigMrU43) for a runnable sample of the code below.
 
@@ -156,7 +156,7 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/QwOFwYbU29KigMrU43
 </script>
 ```
 
-The following example demonstrates how to export a detail Grid to Excel including its all pages and details. To achieve this configure the Grid's [Excel `AllPages` property](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridExcelSettingsBuilder#allpagessystemboolean). 
+The following example demonstrates how to export a detail Grid to Excel including its all pages and details. To achieve this configure the Grid's [Excel `AllPages` property](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridExcelSettingsBuilder#allpagessystemboolean).
 
 Refer to the [following REPL](https://netcorerepl.telerik.com/cwkFQYbK53UW6qxu07) for a runnable sample.
 

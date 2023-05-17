@@ -122,7 +122,7 @@ For smaller sets of data, the {{ site.product_short }} AutoComplete also support
 {% endif %}
 ```Controller
     public JsonResult ServerFiltering_GetProducts()
-    {с
+    {
         using (var northwind = GetContext())
         {
             var products = northwind.Products.Select(product => new ProductViewModel

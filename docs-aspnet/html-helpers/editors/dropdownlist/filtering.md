@@ -116,7 +116,7 @@ For smaller sets of data, the {{ site.product_short }} DropDownList also support
 {% endif %}
 ```Controller
     public JsonResult ServerFiltering_GetProducts()
-    {с
+    {
         using (var northwind = GetContext())
         {
             var products = northwind.Products.Select(product => new ProductViewModel

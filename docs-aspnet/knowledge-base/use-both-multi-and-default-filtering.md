@@ -2,7 +2,7 @@
 title: Using Both Multi-Checkbox and Default Grid Filtering
 description: An example on how to modify the Grid for {{ site.framework }} to use both its multi-checkbox and default filtering.
 type: how-to
-page_title: Using Multi-Checkbox and Default Filtering 
+page_title: Using Multi-Checkbox and Default Filtering
 slug: use-both-multi-and-default-filtering
 tags: grid, filtering, multi, default
 ticketid: 1120044
@@ -18,7 +18,7 @@ component: grid
   <td>Progress® Telerik® UI Grid for UI for {{ site.framework }}</td>
  </tr>
  <tr>
-  <td>Progress Тelerik UI version</td>
+  <td>Progress Telerik UI version</td>
   <td>2021.3.1207</td>
  </tr>
 </table>
@@ -34,10 +34,10 @@ When the [`filterMenuInit`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.u
 Refer to [this REPL](https://netcorerepl.telerik.com/wPFGcEYD51rmjpQ837) for a runnable sample of the snippet below.
 
 ```dojo
-    //Grid definition also available in the Custom data source Demo       
-    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
-        .Name("Grid")    
-        .Columns(columns => {        
+    //Grid definition also available in the Custom data source Demo
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+        .Name("Grid")
+        .Columns(columns => {
             columns.Bound(p => p.ProductName);
             columns.Bound(p => p.UnitPrice).Width(140);
             columns.Bound(p => p.UnitsInStock).Width(140);
@@ -46,7 +46,7 @@ Refer to [this REPL](https://netcorerepl.telerik.com/wPFGcEYD51rmjpQ837) for a r
         })
         .ToolBar(toolbar => {
             toolbar.Create();
-            toolbar.Save();        
+            toolbar.Save();
         })
         .Editable(editable => editable.Mode(GridEditMode.InLine))
         .Pageable()
@@ -54,8 +54,8 @@ Refer to [this REPL](https://netcorerepl.telerik.com/wPFGcEYD51rmjpQ837) for a r
         .Sortable()
         .Scrollable()
         .Event(events=>events.FilterMenuInit("onFilterMenuInit"))
-        .DataSource(dataSource => dataSource        
-            .Custom()         
+        .DataSource(dataSource => dataSource
+            .Custom()
             .Batch(true)
             .PageSize(20)
             .Schema(schema => schema.Model(m => m.Id(p => p.ProductID)))
@@ -87,7 +87,7 @@ Refer to [this REPL](https://netcorerepl.telerik.com/wPFGcEYD51rmjpQ837) for a r
                 return { models: kendo.stringify(options.models) };
             }
         }
-        
+
         function onFilterMenuInit(e) {
             if (e.field == "ProductName") {
                 initCheckboxFilter.call(this, e);
@@ -110,7 +110,7 @@ Refer to [this REPL](https://netcorerepl.telerik.com/wPFGcEYD51rmjpQ837) for a r
                 e.preventDefault();
                 e.stopPropagation();
                 var filter = dataSource.filter() || { logic: "and", filters: [] };
-                var fieldFilters = $.map(element.find(":checkbox:checked"), function (input) {            
+                var fieldFilters = $.map(element.find(":checkbox:checked"), function (input) {
                     return {
                         field: field,
                         operator: "eq",

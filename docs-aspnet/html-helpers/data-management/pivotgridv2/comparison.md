@@ -22,7 +22,7 @@ As of the November 2021 release, {{ site.framework }} introduces the new PivotGr
 
 There are many developers who use and depend on the PivotGrid. Making any drastic changes to the source code of the old widget would undoubtedly interfere with their work. That is why the decision to introduce a second widget, was taken.
 
-Тhe old and new versions of the PivotGrid can coexist. The old PivotGrid will not disappear with the upcoming release. This allows developers to smoothly transition to the new version without rushing their projects.
+The old and new versions of the PivotGrid can coexist. The old PivotGrid will not disappear with the upcoming release. This allows developers to smoothly transition to the new version without rushing their projects.
 
 We have decided to keep the PivotGrid and introduce PivotGridV2 as a separate component. This approach allows us to avoid making breaking changes to the PivotGrid, which could affect many developers that use and depend on the PivotGrid. The old PivotGrid will not be removed in the upcoming release, which gives the developers the opportunity to smoothly transition to the new version.
 

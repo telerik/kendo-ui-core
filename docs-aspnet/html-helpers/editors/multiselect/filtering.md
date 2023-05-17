@@ -114,7 +114,7 @@ For smaller sets of data, the {{ site.product_short }} MultiSelect also supports
 {% endif %}
 ```Controller
     public JsonResult ServerFiltering_GetProducts()
-    {с
+    {
         using (var northwind = GetContext())
         {
             var products = northwind.Products.Select(product => new ProductViewModel

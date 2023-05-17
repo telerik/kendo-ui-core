@@ -31,7 +31,7 @@ I have a Grid where one of the columns requires a ComboBox editor template. What
 
 The desired behavior can be accomplished by using:
 
-- А separate data source for the Kendo UI ComboBox with a Read action and `Data()`:
+- A separate data source for the Kendo UI ComboBox with a Read action and `Data()`:
 
 ```
     @model int

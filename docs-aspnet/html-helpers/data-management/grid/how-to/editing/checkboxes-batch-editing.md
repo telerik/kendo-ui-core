@@ -1,7 +1,7 @@
 ---
 title: Edit Grids with Checkboxes in Batch Mode
 page_title: Edit Grids with Checkboxes in Batch Mode
-description: "Create a template column with а checkbox that updates the underlying model when its state is changed in a Kendo UI Grid in ASP.NET MVC applications."
+description: "Create a template column with a checkbox that updates the underlying model when its state is changed in a Kendo UI Grid in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/editing/checkboxes-batch-editing
 slug: howto_docheckboxesbatchediting_gridaspnetmvc
 ---

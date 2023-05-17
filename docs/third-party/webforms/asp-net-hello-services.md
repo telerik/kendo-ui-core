@@ -423,7 +423,7 @@ The example below demonstrates how to create a block of template HTML.
         // document ready function
         $(function() {
 
-            // select the Еmployees table from the page and
+            // select the Employees table from the page and
             // store it in a variable for later use.
             var $employees = $("#employees");
 

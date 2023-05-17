@@ -65,7 +65,7 @@ Yet another reason is that you explicitly specified that the Grid should make HT
         </transport>
     </datasource>
     // Omitted for brevity.
-    
+
 ```
 {% endif %}
 ```Controller
@@ -80,7 +80,7 @@ Yet another reason is that you explicitly specified that the Grid should make HT
 ## Limited Usage of Templates
 
 {% if site.core %}
-    Тhe Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates (like Group Header Templates) which makes the usage of `.ServerOperations(true)` in this case incompatible.
+    The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates (like Group Header Templates) which makes the usage of `.ServerOperations(true)` in this case incompatible.
 {% else %}
     An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable Grid is bound to a `DataTable` or `DataSet`. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
 

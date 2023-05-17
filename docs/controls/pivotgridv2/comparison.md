@@ -22,7 +22,7 @@ As of the November 2021 release, Kendo UI introduces the brand new PivotGridV2 w
 
 There are many developers who use and depend on the PivotGrid. Making any drastic changes to the source code of the old component would undoubtedly interfere with their work. That is why the decision to introduce a second component, was taken.
 
-Тhe old and new versions of the PivotGrid can coexist. The old PivotGrid will not disappear with the upcoming release. This allows developers to smoothly transition to the new version without rushing their projects.
+The old and new versions of the PivotGrid can coexist. The old PivotGrid will not disappear with the upcoming release. This allows developers to smoothly transition to the new version without rushing their projects.
 
 ## What Can I Expect from the New PivotGridV2?
 

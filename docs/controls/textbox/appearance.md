@@ -166,5 +166,5 @@ The following example showcases how to apply a background color to the **TextBox
 ## See Also
 
 * [Styling Overview Article]({% slug components_rendering_overview %})
-* [Appearance Demo of the TextBox](https://demos.telerik.com/kendo-ui/textbox/аppearance)
+* [Appearance Demo of the TextBox](https://demos.telerik.com/kendo-ui/textbox/appearance)
 * [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)

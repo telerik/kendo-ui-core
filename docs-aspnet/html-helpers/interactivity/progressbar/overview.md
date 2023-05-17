@@ -16,7 +16,7 @@ The Telerik UI ProgressBar HtmlHelper for {{ site.framework }} is a server-side 
 wrapper for the Kendo UI DataSource widget.
 {% endif %}
 
-The ProgressBar delivers rich functionality for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, reversed direction, minimum and maximum values, and animation duration. 
+The ProgressBar delivers rich functionality for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, reversed direction, minimum and maximum values, and animation duration.
 
 * [Demo page for the ProgressBar HtmlHelper](https://demos.telerik.com/{{ site.platform }}/progressbar/index)
 {% if site.core %}
@@ -37,7 +37,7 @@ The following example demonstrates how to define the ProgressBar.
     <script type="text-javascript">
         $(document).ready(function () {
             $("#progressbar").data("kendoProgressBar").value(50);
-        });   
+        });
     </script>
 ```
 {% if site.core %}
@@ -47,7 +47,7 @@ The following example demonstrates how to define the ProgressBar.
     <script type="text-javascript">
         $(document).ready(function () {
             $("#progressbar").data("kendoProgressBar").value(50);
-        });   
+        });
     </script>
 ```
 {% endif %}
@@ -71,9 +71,9 @@ The following example demonstrates the basic configuration of the ProgressBar.
             e.Change("onChange");
             e.Complete("onComplete");
         })
-        .Animation(а =>
+        .Animation(a =>
         {
-            а.Duration(500);
+            a.Duration(500);
         })
     )
 ```

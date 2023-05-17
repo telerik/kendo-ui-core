@@ -24,7 +24,7 @@ columns: [{
 For a runnable example, refer to the demo on [implementing sticky columns in the Grid](https://demos.telerik.com/kendo-ui/grid/sticky-columns).
 
 
-Тhe following Grid configuration ensures that it will be possible to scroll columns horizontally to make the feature work. If there is not enough horizontal space for the scrollbar, it will not appear.
+The following Grid configuration ensures that it will be possible to scroll columns horizontally to make the feature work. If there is not enough horizontal space for the scrollbar, it will not appear.
 * Enable [scrolling](/controls/grid/scrolling/overview).
 * [Stick columns initially](/api/javascript/ui/grid/configuration/columns.sticky) or [enable the stickable property](/api/javascript/ui/grid/configuration/columns.stickable) so users can stick column on the fly.
 * Set a Grid height.

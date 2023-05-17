@@ -8,7 +8,7 @@ position: 3
 
 # TileLayout Resizing
 
-The Kendo UI TileLayout widget allows you resize the containers by snapping to the available columns and row units. When enabled the user is able to alter the width or the height of а current item. 
+The Kendo UI TileLayout widget allows you resize the containers by snapping to the available columns and row units. When enabled the user is able to alter the width or the height of a current item. 
 
 The resizing takes advantage of the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) mechanism, meaning that the widget increases how the element spans and the browser takes care of how to re-arrange the items if necessary.
 

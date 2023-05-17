@@ -8,7 +8,7 @@ position: 7
 
 # Orientation
 
-The Form can render labels above or to the left of their respective editors. This behavior is controlled with the `Orientation` configuration option. 
+The Form can render labels above or to the left of their respective editors. This behavior is controlled with the `Orientation` configuration option.
 
 To configure orientation, use either of the following settings:
 
@@ -72,7 +72,7 @@ By default, the Form uses `vertical` orientation mode and renders the labels abo
 
 ## Horizontal Mode
 
-Set the `Оrientation` option to `horizontal`, if you want to render labels to the left of their editors. 
+Set the `Orientation` option to `horizontal`, if you want to render labels to the left of their editors.
 
 ```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()

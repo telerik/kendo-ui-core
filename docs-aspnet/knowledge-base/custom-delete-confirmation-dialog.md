@@ -17,7 +17,7 @@ res_type: kb
   <td>Progress Telerik UI Grid for {{ site.framework }}</td>
  </tr>
   <tr>
-  <td>Progress Тelerik UI version</td>
+  <td>Progress Telerik UI version</td>
   <td>2021.3.1207</td>
  </tr>
 </table>
@@ -38,7 +38,7 @@ To achieve this behavior, use the Window Component, a Kendo UI template, and the
 4. Attach another `click` event to the confirmation button, then use the Grid's DataSource [remove method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/remove) to delete the item.
 
 
-Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) to review the behavior of the snippet below. 
+Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) to review the behavior of the snippet below.
 
 ```
     @(Html.Kendo().Window()
@@ -57,9 +57,9 @@ Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) 
     </script>
 
 
-    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
-        .Name("Grid")    
-        .Columns(columns => {        
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+        .Name("Grid")
+        .Columns(columns => {
             columns.Bound(p => p.ProductName);
             columns.Bound(p => p.UnitPrice).Width(140);
             columns.Bound(p => p.UnitsInStock).Width(140);
@@ -71,15 +71,15 @@ Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) 
         })
         .ToolBar(toolbar => {
             toolbar.Create();
-            toolbar.Save();        
+            toolbar.Save();
         })
         .Editable(editable => editable.Mode(GridEditMode.InCell))
         .Pageable()
         .Navigatable()
         .Sortable()
         .Scrollable()
-        .DataSource(dataSource => dataSource        
-            .Custom()         
+        .DataSource(dataSource => dataSource
+            .Custom()
             .Batch(true)
             .PageSize(20)
             .Schema(schema => schema.Model(m => m.Id(p => p.ProductID)))
@@ -129,7 +129,7 @@ Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) 
             $("#noButton").click(function(){
                 window.close();
             })
-        }           
+        }
     </script>
 ```
 

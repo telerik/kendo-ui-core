@@ -23,7 +23,7 @@ How can I set up the private NuGet feed in Azure to publish an ASP.NET Core appl
 
 ## Solution
 
-Тwo options are available when restoring Telerik NuGet packages in your build definitions.
+Two options are available when restoring Telerik NuGet packages in your build definitions.
 
 * A Service Connection
 * Azure Artifacts
@@ -42,7 +42,7 @@ Both require that a private NuGet feed is set up along with a *nuget.config* fil
 
 ### Setting up the *nuget.config* file
 
-The NuGet config file allows you to set package sources as well as where to get the credentials. 
+The NuGet config file allows you to set package sources as well as where to get the credentials.
 
 1. Add `NuGet.config` to the WebApp project in Visual Studio.
 1. Add a new `NuGet.config` item to the same directory as the `project.json` file is located.
@@ -84,7 +84,7 @@ However, this could be a security issue in a CI/CD environment where another use
 
     ![{{ site.product_short }} Entering account credentials](images/service-connection-credentials.png)
 
-1. Once the setup is completed your build pipelines can now fetch packages from the Telerik NuGet feed. 
+1. Once the setup is completed your build pipelines can now fetch packages from the Telerik NuGet feed.
 
 ### Using the Telerik Service Connection
 

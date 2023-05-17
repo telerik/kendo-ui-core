@@ -8,7 +8,7 @@ position: 6
 
 # Known Limitations
 
-Тhe NumericTextBox has two known limitations that affect its behavior.
+The NumericTextBox has two known limitations that affect its behavior.
 
 ## Persisted Number of Decimals
 

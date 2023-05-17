@@ -8,7 +8,7 @@ position: 5
 
 # Templates
 
-The ListBox supports the use of [templates]({% slug overview_kendoui_templatescomponent %}) for its items that are passed as а function or string.
+The ListBox supports the use of [templates]({% slug overview_kendoui_templatescomponent %}) for its items that are passed as a function or string.
 
 ```dojo
 

@@ -14,7 +14,7 @@ As of the R1 SP1 2023 release, the Kendo UI for jQuery supports rendering of SVG
 
 ## What Are SVG Icons
 
-A Scalable Vector Graphics (SVG) icon is а web-friendly vector file format. Such files can be significantly resized without losing any of their quality, which makes them ideal for logos and complex online graphics. Apart from that, SVGs are written in XML code, meaning they store any text information as literal text rather than shapes. This storing approach allows search engines, like Google, to scan SVG graphics for keywords thus helping websites to move up in search rankings.
+A Scalable Vector Graphics (SVG) icon is a web-friendly vector file format. Such files can be significantly resized without losing any of their quality, which makes them ideal for logos and complex online graphics. Apart from that, SVGs are written in XML code, meaning they store any text information as literal text rather than shapes. This storing approach allows search engines, like Google, to scan SVG graphics for keywords thus helping websites to move up in search rankings.
 
 ## SVG vs. Font Icons
 

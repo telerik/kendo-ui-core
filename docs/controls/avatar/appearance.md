@@ -8,7 +8,7 @@ position: 2
 
 # Avatar Appearance
 
-The Аvatar allows you to set different styles based on its content.
+The Avatar allows you to set different styles based on its content.
 
 ## Rounding and Type
 
@@ -46,7 +46,7 @@ The following example demonstrates the `type` and `rounded` options of the Avata
 
 ## Theme Color
 
-The Аvatar allows you to specify predefined theme colors.
+The Avatar allows you to specify predefined theme colors.
 
 The available [themeColor](/api/javascript/ui/avatar/configuration/themeColor) values are:
 

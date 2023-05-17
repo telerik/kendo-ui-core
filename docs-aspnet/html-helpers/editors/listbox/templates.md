@@ -9,7 +9,7 @@ position: 3
 
 # Item Templates
 
-The ListBox provides templates for its items that are passed as а function or string.
+The ListBox provides templates for its items that are passed as a function or string.
 
 ```HtmlHelper
     @(Html.Kendo().ListBox()

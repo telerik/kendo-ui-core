@@ -47,12 +47,12 @@ The following example demonstrates how to define the Timeline. Note the tabs for
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-timeline name="Timeline" 
+    <kendo-timeline name="Timeline"
                     orientation="vertical"
                     datadatefield="EventDate"
                     datatitlefield="Title"
-                    datasubtitlefield="Subtitle" 
-                    datadescriptionfield="Description" 
+                    datasubtitlefield="Subtitle"
+                    datadescriptionfield="Description"
                     dataactionsfield="Actions"
                     dataimagesfield="Images"
                     alternating-mode="true"
@@ -111,7 +111,7 @@ public partial class Timeline : BaseController
 
         events.Add(new TimelineEventModel()
         {
-            Title = "Malta, a Country of Кnights",
+            Title = "Malta, a Country of Knights",
             Subtitle = "My second trip this year",
             Description = "Third event description.",
             EventDate = new System.DateTime(2015, 5, 25),
@@ -210,11 +210,11 @@ The following example demonstrates how to subscribe to events by using a handler
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-timeline name="Timeline" 
-                    datadatefield="EventDate" 
-                    datatitlefield="Title" 
-                    datasubtitlefield="Subtitle" 
-                    datadescriptionfield="Description" 
+    <kendo-timeline name="Timeline"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle"
+                    datadescriptionfield="Description"
                     dataactionsfield="Actions"
                     dataimagesfield="Images"
                     on-change="onChange"
@@ -242,15 +242,15 @@ The following example demonstrates how to subscribe to events by using a handler
         function onChange(e) {
                     console.log("OnChange: " + e.dataItem.Title);
                 }
-    
+
                 function onNavigate(e) {
                     console.log("OnNavigate: " + e.action);
                 }
-    
+
                 function onActionClick(e) {
                     console.log("OnActionClick: " + e.element.text());
                 }
-    
+
                 function onDataBound(e) {
                     console.log("OnDataBound: " + e.sender.dataSource.view().length);
                 }
@@ -288,11 +288,11 @@ The following example demonstrates how to subscribe to events by using a templat
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-timeline name="Timeline" 
-                    datadatefield="EventDate" 
-                    datatitlefield="Title" 
-                    datasubtitlefield="Subtitle" 
-                    datadescriptionfield="Description" 
+    <kendo-timeline name="Timeline"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle"
+                    datadescriptionfield="Description"
                     dataactionsfield="Actions"
                     dataimagesfield="Images"
                     on-change="function(e){
@@ -348,12 +348,12 @@ To access an existing Timeline instance, use the `.data()` jQuery method, execut
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-timeline name="Timeline" 
+    <kendo-timeline name="Timeline"
                     orientation="horizontal"
                     datadatefield="EventDate"
                     datatitlefield="Title"
-                    datasubtitlefield="Subtitle" 
-                    datadescriptionfield="Description" 
+                    datasubtitlefield="Subtitle"
+                    datadescriptionfield="Description"
                     dataactionsfield="Actions"
                     dataimagesfield="Images">
         <datasource>

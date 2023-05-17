@@ -1,6 +1,6 @@
 ---
 title: Resizing
-page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation - TileLayout Resizing 
+page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation - TileLayout Resizing
 description: "Learn how to enable and use the resizing functionality of the Telerik UI TileLayout component for {{ site.framework }}."
 slug: htmlhelpers_aspnet_tilelayout_resizing
 position: 3
@@ -8,7 +8,7 @@ position: 3
 
 # TileLayout Resizing
 
-The Telerik UI TileLayout for {{ site.framework }} allows you resize the containers by snapping to the available columns and row units. When enabled the user is able to alter the width or the height of а current item. 
+The Telerik UI TileLayout for {{ site.framework }} allows you resize the containers by snapping to the available columns and row units. When enabled the user is able to alter the width or the height of a current item.
 
 The resizing takes advantage of the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) mechanism, meaning that the widget increases how the element spans and the browser takes care of how to re-arrange the items if necessary.
 
@@ -41,7 +41,7 @@ The example below will render a grid with two rows and two columns which can be 
                 <container-header text="Item two"/>
             </container>
         </containers>
-    </kendo-tilelayout>   
+    </kendo-tilelayout>
 ```
 {% endif %}
 

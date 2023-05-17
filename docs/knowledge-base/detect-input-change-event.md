@@ -53,7 +53,7 @@ The following example demonstrates how to achieve the desired scenario.
     </div>
     <script>
       $(document).ready(function() {
-        function widgetChange(е) {
+        function widgetChange(e) {
           var value = this.value();
           $(".console").append("<p>event: change (widget) -- selected value: " + value + "</p>");
         };

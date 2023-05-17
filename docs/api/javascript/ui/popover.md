@@ -505,7 +505,7 @@ The supported values are:
 
 ### offset `Number`*(default: 0)*
 
-Specifies the offset (in pixels) between the Popover and the anchor. Тhe offset is rendered from the callout arrow.
+Specifies the offset (in pixels) between the Popover and the anchor. The offset is rendered from the callout arrow.
 
 #### Example - setting the Popover offset
 
