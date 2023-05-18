@@ -24,7 +24,7 @@ The following example demonstrates how to create a TextArea and set some of its 
 <script>
     $(document).ready(function(){
         $("#description").kendoTextArea({
-            value: "A library of 70+ UI components, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library",
+            value: "A library of 110+ UI components, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library",
             placeholder: "Description...",
             rows:5
         });
