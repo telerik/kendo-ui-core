@@ -36,7 +36,7 @@ How can I add add a row above the selected row in the Grid?
 
   <script>
     function toolbar_click(e) {
-      var index = $('tr.k-state-selected').index(); //index of the selected row
+      var index = $('tr.k-selected').index(); //index of the selected row
       var grid = $("#grid").data("kendoGrid");
       var dataSource = grid.dataSource;
       var newItem = dataSource.insert(index, {});

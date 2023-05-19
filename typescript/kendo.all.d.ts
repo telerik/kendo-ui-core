@@ -9813,6 +9813,7 @@ declare namespace kendo.ui {
         cssClass?: string | undefined;
         enabled?: boolean | undefined;
         updateInterval?: number | undefined;
+        useLocalTimezone?: boolean | undefined;
     }
 
     interface SchedulerPdfMargin {

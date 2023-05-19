@@ -3580,9 +3580,9 @@ Can be set to a string `phone` which will force the widget to use adaptive rende
         });
     </script>
 
-### ongoingEvents `Object`
+### ongoingEvents `Boolean|Object`
 
-The settings for the ongoing events highlight. The highlight is on by default. If you need to turn it off, set this option to `false`.
+The settings for the ongoing events highlight. The highlight is disabled by default. If you need to turn it on, set this option to `true`, or use a configuration object with its nested options.
 
 #### Example
 
@@ -3595,7 +3595,7 @@ The settings for the ongoing events highlight. The highlight is on by default. I
     var hour = currentTime.getHours();
 
     $("#scheduler").kendoScheduler({
-      ongoingEvents: false,
+      ongoingEvents: true,
       dataSource: [{
         id: 1,
         title: "test",
@@ -3621,6 +3621,7 @@ Specifies a custom CSS class applied to ongoing events. If not set, the default 
 
     $("#scheduler").kendoScheduler({
       ongoingEvents: {
+        enabled: true,
         cssClass: "customClass"
       },
       dataSource: [{
@@ -3638,9 +3639,9 @@ Specifies a custom CSS class applied to ongoing events. If not set, the default 
       }
     </style>
 
-### ongoingEvents.enabled `Boolean` *(default: true)*
+### ongoingEvents.enabled `Boolean` *(default: false)*
 
-Specifies if the ongoing events will be highlighted. Defaults to true.
+Specifies if the ongoing events will be highlighted. Defaults to false.
 
 #### Example
 
@@ -3654,7 +3655,7 @@ Specifies if the ongoing events will be highlighted. Defaults to true.
 
     $("#scheduler").kendoScheduler({
       ongoingEvents: {
-        enabled: false
+        enabled: true
       },
       dataSource: [{
         id: 1,
@@ -3681,6 +3682,7 @@ The update interval (in milliseconds) of the ongoing events highlight. Defaults 
 
     $("#scheduler").kendoScheduler({
       ongoingEvents: {
+        enabled: true,
         updateInterval: 60 * 60 * 1000 // one hour interval
       },
       dataSource: [{
@@ -3690,6 +3692,38 @@ The update interval (in milliseconds) of the ongoing events highlight. Defaults 
         end: new Date(year, month, day, hour + 1)
       }]
     });
+    </script>
+
+### ongoingEvents.useLocalTimezone `Boolean` *(default: true)*
+
+If set to `false` the ongoing events will be highlighted in the scheduler [timezone](/api/javascript/ui/scheduler/configuration/timezone). That means only events that happen at the moment (according to their `start` and `end` data) will be highlighted. In order the highlight on the ongoing events to be visually in sync with the `currentTimeMarker` in the widget, the `useLocalTimezone` configuration options of both must be set to the same value. This way the highlighted ongoing events will be placed over the `currentTimeMarker`.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+      var currentTime = new Date();
+      var year = currentTime.getFullYear();
+      var month = currentTime.getMonth();
+      var day = currentTime.getDate();
+      var hour = currentTime.getHours();
+
+      $("#scheduler").kendoScheduler({
+        timezone: "Etc/UTC",
+        ongoingEvents: {
+          enabled: true,
+          useLocalTimezone: false
+        },
+        currentTimeMarker: {
+          useLocalTimezone: false
+        },
+        dataSource: [{
+          id: 1,
+          title: "test",
+          start: new Date(year, month, day, hour - 1),
+          end: new Date(year, month, day, hour + 1)
+        }]
+      });
     </script>
 
 ### pdf `Object`
@@ -6939,26 +6973,28 @@ The end date of the period.
 #### Example - get a list of occurrences
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      views: ["week"],
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          title: "Interview",
-          recurrenceRule: "FREQ=DAILY"
-        }
-      ]
-    });
+      $("#scheduler").kendoScheduler({
+        date: new Date("2023/7/6"),
+        views: ["week"],
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2023/7/6 08:00 AM"),
+            end: new Date("2023/7/6 09:00 AM"),
+            title: "Interview",
+            recurrenceRule: "FREQ=DAILY"
+          }
+        ]
+      });
 
-    var scheduler = $("#scheduler").data("kendoScheduler");
+      setTimeout(function(){
+        var scheduler = $("#scheduler").data("kendoScheduler");
 
-    var events = scheduler.occurrencesInRange(new Date("2013/6/5"), new Date("2013/6/10"));
+        var events = scheduler.occurrencesInRange(new Date("2023/7/5"), new Date("2023/7/10"));
 
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(events);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(events);
+      }, 1500)
     </script>
 
 ### refresh

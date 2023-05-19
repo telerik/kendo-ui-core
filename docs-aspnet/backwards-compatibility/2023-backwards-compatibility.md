@@ -10,7 +10,7 @@ position: 1
 
 This article lists the breaking or important changes in the 2023 releases of {{ site.product }}.
 
-## {{ site.product }} R2 2023 
+## {{ site.product }} R1 2023 SP2 
 
 **FloatingActionButton**
 
@@ -103,6 +103,10 @@ As of the 2023 R1 SP1 release, to unify their support for the new [ThemeBuilder 
 * By default, the table elements inside the Grid are of medium-sized. The `.k-table-md` class is added to the `.k-table` element.
 * The `.k-grid-header-table` , `.k-grid-table`, and `.k-grid-footer-table` Grid-specific classes are now added to the header, body, and footer tables.
 * The `alt` rows now have the `.k-table-alt-row` class.
+
+> Important change
+
+* The Grid uses internally the Toolbar component and follows the it's accessibility specification. The ToolBar is a single tab stop component and when the `Navigatable()` option is enabled, pressing the `Tab` key navigates to and from the Toolbar. When focused, navigating to the previous or next focusable element is achieved via the arrow keys.
 
 **ListView**
 

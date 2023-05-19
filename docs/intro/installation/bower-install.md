@@ -25,7 +25,13 @@ The commercial distribution package is available as a private GitHub repository.
 
 During the installation of the Bower package, you may be requested to confirm your credentials more than once. For more information, refer to the Knowledge Base article on [how to store your username and password]({% slug troubleshoot_bower_storing_credentials %}).
 
-To install the commercial distribution package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command. 
+To install the commercial distribution package, run the following command:
+
+```
+bower install https://bower.telerik.com/bower-kendo-ui.git --config.shallowCloneHosts="bower.telerik.com"
+```
+
+We recommend specifying **shallowCloneHosts** config key on bower install as enabling the bower shallow cloning speed up the download tremendously. 
 
 To check the available commercial distribution versions of the package, run the `bower info kendo-ui --verbose` command.
 

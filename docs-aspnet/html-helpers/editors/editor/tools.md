@@ -195,7 +195,7 @@ The following example demonstrates these scenarios. Note the `Name()` method tha
 
     <script>
         function onCustomButtonExec(e) {
-            var editor = $(this).data("kendoEditor");
+            var editor = this;
             editor.exec("inserthtml", { value: "<hr />" });
         }
 

@@ -100,6 +100,10 @@ As of the 2023 R1 SP1 release, to unify their support for the new [ThemeBuilder 
 * The `.k-grid-header-table` , `.k-grid-table`, and `.k-grid-footer-table` Grid-specific classes are now added to the header, body, and footer tables.
 * The `alt` rows now have the `.k-table-alt-row` class.
 
+> Important change
+
+* The Grid uses internally the Toolbar component and follows the it's accessibility specification. The ToolBar is a single tab stop component and when navigation is enabled via the `navigatable:true` configuration, pressing the `Tab` key navigates to and from the Toolbar. When the Toolbar is focused, navigating to the previous or next focusable element is achieved via the arrow keys.
+
 **ListView**
 
 * The `.k-pager-wrap` class is now removed from the `.k-pager` element.
