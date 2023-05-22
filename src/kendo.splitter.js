@@ -358,7 +358,7 @@ var __meta__ = {
         },
         _updateSplitBar: function(splitbar, previousPane, nextPane, previousPaneEl) {
             var catIconIf = function(actionType, iconType, condition) {
-                    var icon = iconType ? ui.icon(iconType) : "";
+                    var icon = iconType ? ui.icon({ icon: iconType, size: "xsmall" }) : "";
                     return condition ? "<span class='k-" + actionType + "'>" + icon + "</span>" : "";
                 },
                 orientation = this.orientation,

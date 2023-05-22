@@ -21,12 +21,10 @@ The {{ site.product }} components are designed to support all major operating sy
 
 | PLATFORM          | VERSION               |
 | :---------------- | :-------------------- |
-| Windows           | XP or later           |
-| Windows Server    | Server 2003 or later  |
-| OS X              | 10.5 or later         |
-| Android           | 2.3 or later          |
-| iOS               | 6.0 or later          |
-| Windows Phone     | 8.0 or later          |
+| Windows           | The two latest versions at the time of the release. |
+| Mac OS            | The two latest versions at the time of the release. |
+| Android           | The two latest versions at the time of the release. |
+| iOS               | The two latest versions at the time of the release. |
 
 > * Telerik UI supports hybrid mouse and touch-screen devices.
 > * To allow any browser to run scripts, enable JavaScript in the browser.
@@ -78,38 +76,16 @@ Most [{{ site.product }} helpers]({% slug overview_aspnetmvc6_aspnetmvc %}#list-
 
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
-| Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-| Chrome            | Current and previous          |
-| Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
-| Opera             | 15 or later                   |
-| OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
-
-### Support for Data Visualizing Helpers
-
-The [{{ site.product }} helpers which render data visualization]({% slug overview_aspnetmvc6_aspnetmvc %}#list-of-helpers), such as the Charts, Gauges, Barcodes, Diagrams, and Maps, may require more recent browser versions according to the following table.
-
-* Fully supported browsers
-
-    | BROWSER           | SUPPORTED VERSIONS            |
-    | :---------------- | :---------------------------- |
-    | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-    | Chrome            | Current and previous          |
-    | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
-    | Opera             | 15 or later                   |
-    | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
-    | iOS Safari        | iOS 8 or later                |
-    | Chrome for Mobile | 21 or later                   |
-
-* Browsers with limited support
-
-    | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS                               |
-    | :---------------- | :---------------------------- | :-----------                              |
-    | Android           | 2.3                           | The Canvas rendering mode is only supported
+| Edge              | The two latest versions at the time of the release. |
+| Chrome            | The two latest versions at the time of the release. |
+| Firefox           | The two latest versions at the time of the release. This includes [Firefox ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/)). |
+| Opera             | The two latest versions at the time of the release. |
+| Safari (OS X)       | The two latest versions at the time of the release. |
 
 ### Support for PDF Export
 
 The Telerik PDF generator is tested and supported in the following desktop browsers:
-* Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
+* Latest Chrome, Edge, Firefox, Safari.
 
 > Internet Explorer 9 and Safari do not support the PDF-related option for saving files. To achieve this, you need to [implement a server proxy](https://docs.telerik.com/kendo-ui/controls/grid/export/pdf-export#using-server-proxy).
 

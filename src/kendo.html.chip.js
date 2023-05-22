@@ -56,7 +56,7 @@ var __meta__ = {
             that._addClasses();
 
             if (options.icon) {
-                that.wrapper.prepend($(kendo.ui.icon({ icon: options.icon, iconClass: `k-chip-icon${options.iconClass ? ` ${options.iconClass}` : '' }` })).attr(options.iconAttr));
+                that.wrapper.prepend($(kendo.ui.icon({ icon: options.icon, size: "small", iconClass: `k-chip-icon${options.iconClass ? ` ${options.iconClass}` : '' }` })).attr(options.iconAttr));
             } else if (options.iconClass) {
                 that.wrapper.prepend($("<span class='" + options.iconClass + "'></span>").attr(options.iconAttr));
             } else if (options.avatarClass) {
