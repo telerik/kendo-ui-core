@@ -119,3 +119,5 @@ Press `CTRL+F5` to build and run the application. You have a Grid and a DatePick
 * [Upgrade Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetcore %})
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
 * [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
+* [Migrating from MVC to Core MVC](https://docs.telerik.com/aspnet-core/installation/migrating)
+* [MS - Upgrade from ASP.NET Framework to ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-7.0)

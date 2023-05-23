@@ -26,7 +26,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 
 Use the DateTimePicker HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to a page:
 
-* The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the DateRangePicker element.
+* The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the DateTimePicker element.
 
 * The `Culture()` configuration method specifies the culture info used by the widget. `Date` and `time` values typically vary by culture. For example, the `"d"` standard format string indicates that a date and time value is to be displayed using a short date pattern. For the invariant culture, this pattern is `"MM/dd/yyyy"`. For the `fr-FR` culture, it is `"dd/MM/yyyy"`. For the `ja-JP` culture, it is `"yyyy/MM/dd"`.
 
@@ -56,7 +56,7 @@ Use the DateTimePicker HtmlHelper {% if site.core %}or TagHelper{% endif %} to a
 
 ## 3. Handle the DateTimePicker Events
 
-The DateTimePicker [exposes various events](/api/kendo.mvc.ui.fluent/datetimepickereventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the DateRangePicker.
+The DateTimePicker [exposes various events](/api/kendo.mvc.ui.fluent/datetimepickereventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the DateTimePicker.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI

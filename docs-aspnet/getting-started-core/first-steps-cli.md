@@ -160,3 +160,5 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 * [Installing UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
 * [Installing UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
+* [Migrating from MVC to Core MVC](https://docs.telerik.com/aspnet-core/installation/migrating)
+* [MS - Upgrade from ASP.NET Framework to ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-7.0)

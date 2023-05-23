@@ -244,3 +244,5 @@ Congratulations! You created a page that uses the [Telerik UI DatePicker]({% slu
 
 * [Using the UI for ASP.NET Core CDN Services]({% slug cdnservices_core %})
 * [Switch from Trial to Commercial License]({% slug upgrade_aspnetcore %}#switching-to-a-developer-license)
+* [Migrating from MVC to Core MVC](https://docs.telerik.com/aspnet-core/installation/migrating)
+* [MS - Upgrade from ASP.NET Framework to ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-7.0)
