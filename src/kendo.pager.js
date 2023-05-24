@@ -19,6 +19,10 @@ var __meta__ = {
         LAST = "caret-alt-to-right",
         PREV = "caret-alt-left",
         NEXT = "caret-alt-right",
+        FIRST_CONST = "caret-alt-to-left",
+        LAST_CONST = "caret-alt-to-right",
+        PREV_CONST = "caret-alt-left",
+        NEXT_CONST = "caret-alt-right",
         SIZE = "k-pager-mobile-md k-pager-mobile-sm",
         FOCUSABLE = ":kendoFocusable:not([tabindex='-1'])",
         CHANGE = "change",
@@ -111,6 +115,20 @@ var __meta__ = {
             that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
 
             isRtl = kendo.support.isRtl(element);
+
+            if (isRtl) {
+                FIRST = LAST_CONST;
+                LAST = FIRST_CONST;
+                PREV = NEXT_CONST;
+                NEXT = PREV_CONST;
+            } else {
+                FIRST = FIRST_CONST;
+                LAST = LAST_CONST;
+                PREV = PREV_CONST;
+                NEXT = NEXT_CONST;
+            }
+
+
             if (options.size) {
                 buttonSize = kendo.getValidCssClass("k-button-", "size", options.size);
                 dropDownClasses = "k-rounded-md " + kendo.getValidCssClass("k-picker-", "size", options.size);

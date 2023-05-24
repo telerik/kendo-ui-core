@@ -12,19 +12,7 @@ The Switch displays two exclusive choices.
 
 When initialized, the Switch renders the currently selected value. The Switch can be created from an `input` element of type `checkbox`. The default styling of the Switch widget for each of the [Sass-based Kendo UI for jQuery themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout. For more information and examples, refer to the article on implementing a [custom layout for the Switch](https://github.com/telerik/kendo-themes/wiki/Change-the-Switch-Layout).
 
-* [Demo page for the Switch](https://demos.telerik.com/kendo-ui/switch)
-
-## Initializing the Switch
-
-To create the Switch, use an HTML `<input>` element.
-
-    <input id="switch" />
-
-To initialize the Switch, use a jQuery selector.
-
-    $(document).ready(function() {
-        $("#switch").kendoSwitch();
-    });
+![Kendo UI for jQuery Switch Overview](switch-overview.png)
 
 ## Functionality and Features
 
@@ -35,11 +23,11 @@ To initialize the Switch, use a jQuery selector.
 * [Custom Switch]({% slug custom_kendoui_switch_widget %})
 * [Accessibility]({% slug accessibility_kendoui_switch %})
 
->tip To learn more about the appearance, anatomy, and accessibility of the Switch, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/switch/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+## Next Steps 
 
-## Referencing Existing Instances
-
-To reference an existing Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
+* [Getting Started with the Kendo UI Switch for jQuery]({% slug getting_started_kendoui_switch_widget %})
+* [Overview of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/index)
+* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)
 
 ## See Also
 

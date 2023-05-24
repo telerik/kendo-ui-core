@@ -8656,12 +8656,11 @@ If set to `true` the user could reorder the rows by dragging them. By default re
     });
     </script>
 
-### resizable `Boolean` *(default:false)*
+### resizable `Boolean|Object` *(default:false)*
 
-If set to `true`, users can resize columns by dragging the edges (resize handles) of their header cells. As of Kendo UI Q1 2015, users can also auto-fit a column by double-clicking
-its resize handle. In this case the column will assume the smallest possible width, which allows the column content to fit without wrapping.
+If object is used, it allows configuration of `resizable.columns` and `resizable.rows`. If set to `true`, only column resizing will be enabled.
 
-By default, column resizing is disabled.
+By default, column and row resizing is disabled.
 
 #### Example - enable column resizing
 
@@ -8682,6 +8681,61 @@ By default, column resizing is disabled.
 
 > Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
 the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
+
+#### resizable.columns `Boolean`
+
+If set to `true`, users can resize columns by dragging the edges (resize handles) of their header cells. As of Kendo UI Q1 2015, users can also auto-fit a column by double-clicking its resize handle. In this case the column will assume the smallest possible width, which allows the column content to fit without wrapping.
+
+By default, column resizing is disabled.
+
+#### Example - enable column resizing
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      resizable: {
+        columns: true
+      }
+    });
+    </script>
+
+> Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and 
+the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
+
+#### resizable.rows `Boolean`
+
+If set to `true`, users can resize Grid rows by dragging their bottom edge. Users can also auto-fit a row by double-clicking its bottom edge. In this case the row will assume the smallest possible height, which allows the cells content to be fully displayed.
+
+In scenario where row selection is enabled, users are allowed to resize all selected rows at once by performing the resize interaction on one of them.
+
+By default, row resizing is disabled.
+
+#### Example - enable column resizing
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      resizable: {
+        rows: true
+      }
+    });
+    </script>
 
 ### rowTemplate `String|Function`
 
@@ -14096,6 +14150,55 @@ If invoked prevents the rowReorder action - prevents the client-side reordering.
       rowReorder: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.row, e.rows, e.newIndex, e.oldIndex);
+      }
+    });
+    </script>
+
+### rowResize
+
+Fired when the user resizes a row (rows).
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.row `jQuery`
+
+A jQuery object holding a reference to the resized row element.
+
+##### e.rows `jQuery`
+
+A jQuery object holding a reference to all row elements that would be affected by the resizing. In scenario where row selection is enabled, users are allowed to resize all selected rows at once by performing the resize on one of them.
+
+##### e.newHeight `Number`
+
+The new row height.
+
+##### e.oldHeight `Number`
+
+The previous row height.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      resizable: { rows: true },
+      rowResize: function(e) {
+	      /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.row, e.newHeight, e.oldHeight);
       }
     });
     </script>

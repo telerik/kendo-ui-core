@@ -10,30 +10,20 @@ position: 1
 
 The CheckBox allows you to provide checkbox functionality to `<input />` elements, style them, set an encoded or decoded label, and disable the CheckBox.
 
-* [Demo page for the CheckBox](https://demos.telerik.com/kendo-ui/checkbox/index)
-
-## Initializing the CheckBox
-
-To initialize the CheckBox, use the `<input />` element.
-
-The following example demonstrates how to initialize the CheckBox from an existing `<input />` element.
-
-```dojo
-    <input id="checkbox" />
-
-    <script>
-        $("#checkbox").kendoCheckBox();
-    </script>
-```
+![Kendo UI for jQuery CheckBox Overview](checkbox-overview.png)
 
 ## Functionality and Features
 
 * [Appearance]({% slug appearance_checkbox_widget %})
 * [Label]({% slug label_checkbox_widget %})
 
->tip To learn more about the appearance, anatomy, and accessibility of the CheckBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/checkbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+## Next Steps 
+
+* [Getting Started with the Kendo UI CheckBox for jQuery]({% slug getting_started_kendoui_checkbox_widget %})
+* [Overview of the CheckBox (Demo)](https://demos.telerik.com/kendo-ui/checkbox/index)
+* [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)
 
 ## See Also
 
-* [Basic Usage of the CheckBox (Demo)](https://demos.telerik.com/kendo-ui/checkbox/index)
+* [Overview of the CheckBox (Demo)](https://demos.telerik.com/kendo-ui/checkbox/index)
 * [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)

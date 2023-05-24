@@ -1106,7 +1106,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
     });
 
     kendo.bind($("#example"), viewModel);
-
+    </script>
 
 ### virtual `Boolean|Object`*(default: false)*
 

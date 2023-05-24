@@ -1,7 +1,7 @@
 ---
-title: Access Selected DataValueField
-page_title: Access the Selected DataValueField on the change Event - ASP.NET MVC ListBox
-description: Learn how to access the selected DataValueField on the Kendo UI ListBox change event.
+title: Access Selected DataValueField in the ListBox
+page_title: Access the Selected DataValueField on the ListBox change Event - Kendo UI ListBox for ASP.NET MVC
+description: Learn how to access the selected DataValueField on the change event of the Kendo UI for jQuery ListBox component.
 slug: access-the-selected-data-value-field-on-the-listbox-change-event
 ticketid: 1118759
 type: how-to

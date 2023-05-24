@@ -544,14 +544,14 @@ var __meta__ = {
                "'></div></div>";
     }
 
-    function createButton(options, type, isHorizontal) {
+    function createButton(options, type, isHorizontal, isRtl) {
         var buttonIconName = "";
 
         if (isHorizontal) {
             if (type === "increase") {
-                buttonIconName = "caret-alt-right";
+                buttonIconName = isRtl ? "caret-alt-left" : "caret-alt-right";
             } else {
-                buttonIconName = "caret-alt-left";
+                buttonIconName = isRtl ? "caret-alt-right" : "caret-alt-left";
             }
         } else {
             if (type == "increase") {

@@ -792,8 +792,8 @@
                 suggest: combobox.suggest
             });
 
-            input.focus();
             combobox.dataSource.data(["Boo", "Foo"]);
+            input.focus();
 
             assert.equal(combobox.calls("suggest"), 0);
             assert.equal(combobox.text(), "Item2");

@@ -3,7 +3,7 @@ title: Read-Only Switch
 page_title: jQuery Switch Documentation - Read-Only Switch
 description: "Get started with the jQuery Switch by Kendo UI and set it into its read-only state."
 slug: readonly_kendoui_switch_widget
-position: 5
+position: 6
 ---
 
 # Read-Only Switch

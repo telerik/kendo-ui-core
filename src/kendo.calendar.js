@@ -74,10 +74,10 @@ var __meta__ = {
             century: 3
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
-        CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size }) => `<div class="k-header k-hstack">
-            <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: "caret-alt-left", iconClass: "k-button-icon" })}</span></a>
+        CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size, isRtl }) => `<div class="k-header k-hstack">
+            <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</span></a>
             <a tabindex="-1" href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>
-            <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: "caret-alt-right", iconClass: "k-button-icon" })}</a>
+            <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</a>
         </div>`,
         MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages }) => `<div class="k-calendar-header k-hstack">
             <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-flat-base k-rounded-md">
@@ -537,6 +537,10 @@ var __meta__ = {
             }
         },
 
+        isRtl: function() {
+            return kendo.support.isRtl(this.wrapper);
+        },
+
         _aria: function() {
             var table = this._table;
 
@@ -764,7 +768,7 @@ var __meta__ = {
                 min = that.options.min,
                 max = that.options.max,
                 currentValue = new DATE(+that._current),
-                isRtl = kendo.support.isRtl(that.wrapper),
+                isRtl = that.isRtl(),
                 isDisabled = that.options.disableDates,
                 value, prevent, method, temp;
 
@@ -1209,7 +1213,8 @@ var __meta__ = {
             if (!element.find(HEADERSELECTOR)[0]) {
                 element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, {
                     actionAttr: kendo.attr("action"),
-                    size: kendo.getValidCssClass("k-button-", "size", that.options.size)
+                    size: kendo.getValidCssClass("k-button-", "size", that.options.size),
+                    isRtl: that.isRtl()
                 })));
             }
 

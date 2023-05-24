@@ -343,29 +343,37 @@ The current value of the **ProgressBar**.
 
 #### Example - subscribe to the "change" event during initialization
 
-	<div id="progressbar"></div>
-	<script>
-	  $("#progressbar").kendoProgressBar({
-	    change: function(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-	      console.log("Value is " + e.value);
-	    }
-	  });
-	</script>
+    <button id="set">Set Value to 50</button>
+    <div id="progressbar"></div>
+    <script>
+      $("#progressbar").kendoProgressBar({
+        change: function(e) {
+          kendo.alert("Value is " + e.value);
+        }
+      });
+
+      $("#set").on("click", () => {
+        $("#progressbar").data("kendoProgressBar").value(50);
+      });
+    </script>
 
 #### Example - subscribe to the "change" event after initialization
 
+	<button id="set">Set Value to 50</button>
 	<div id="progressbar"></div>
 	<script>
 	  function onChange(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-	    console.log("Value is " + e.value);
+		kendo.alert("Value is " + e.value);
 	  }
 
 	  $("#progressbar").kendoProgressBar();
 
 	  var progressbar = $("#progressbar").data("kendoProgressBar");
 	  progressbar.bind("change", onChange);
+
+	  $("#set").on("click", () => {
+        $("#progressbar").data("kendoProgressBar").value(50);
+      });
 	</script>
 
 ### complete

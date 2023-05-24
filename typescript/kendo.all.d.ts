@@ -6629,6 +6629,11 @@ declare namespace kendo.ui {
         mode?: string | undefined;
     }
 
+    interface GridResizable {
+        columns?: boolean | undefined;
+        rows?: boolean | undefined;
+    }
+
     interface GridToolbarItem {
         iconClass?: string | undefined;
         name?: string | undefined;
@@ -6661,7 +6666,7 @@ declare namespace kendo.ui {
         pdf?: GridPdf | undefined;
         persistSelection?: boolean | undefined;
         reorderable?: boolean | undefined;
-        resizable?: boolean | undefined;
+        resizable?: boolean | GridResizable | undefined;
         rowTemplate?: string|Function | undefined;
         scrollable?: boolean | GridScrollable | undefined;
         search?: GridSearch | undefined;

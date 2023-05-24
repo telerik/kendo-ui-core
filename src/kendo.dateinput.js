@@ -48,10 +48,10 @@ var __meta__ = {
             var wrapperClass = (element.parent().attr("class") || "");
             var skipStyling = wrapperClass.indexOf("picker") >= 0 && wrapperClass.indexOf("rangepicker") < 0;
 
-            that.wrapper = element.wrap("<span class='k-dateinput k-input'></span>").parent();
             if (skipStyling) {
-                that.wrapper = that.wrapper.parent();
+                that.wrapper = that.element.parent();
             } else {
+                that.wrapper = element.wrap("<span class='k-dateinput k-input'></span>").parent();
                 that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
             }
             that.wrapper[0].style.cssText = element[0].style.cssText;

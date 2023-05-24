@@ -1,14 +1,15 @@
 ---
 title: Persist the State of the Grid alongside the Function Handlers
-description: "Persist the Grid state and include the function definitions in the saved options."
+description: Learn how to persist the state of the Kendo UI for jQuery Data Grid and include the function definitions in the saved options.
 type: how-to
 page_title: Persist the State of the Kendo UI Grid alongside the Function Handlers - Kendo UI for jQuery Data Grid
 slug: grid-persist-state-with-functions
-tags: grid, persist, state, save, options, restore, function, functions, handler, handlers
+tags: kendoui, jquery, data, grid, persist, state, save, options, restore, function, functions, handler, handlers
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
@@ -20,11 +21,13 @@ res_type: kb
 
 ## Description
 
-By default [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) cannot serialize function definitions. Event handlers and other similar Grid configurations are lost when the state is persisted with [`getOptions`](/api/javascript/ui/grid/methods/getoptions) and [`setOptions`](/api/javascript/ui/grid/methods/setoptions).
+By default, the [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method cannot serialize function definitions. Event handlers and other similar Grid configurations are lost when the state of the component is persisted with [`getOptions`](/api/javascript/ui/grid/methods/getoptions) and [`setOptions`](/api/javascript/ui/grid/methods/setoptions).
+
+How can I persist the state of the Data Grid and include the function definitions in the saved options?
 
 ## Solution
 
-Implement a custom [`JSON reviver`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter) which can serialize and deserialize the function definitions.
+To achieve the desired scenario, implement a custom JSON [`reviver`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter) parameter, which can serialize and deserialize the function definitions.
 
 ```dojo
 <script type="x-kendo/template" id="template">
@@ -60,7 +63,7 @@ Implement a custom [`JSON reviver`](https://developer.mozilla.org/en-US/docs/Web
                 serverFiltering: true,
                 serverSorting: true
             },
-            // Databound function that must also be saved in the options of the user.
+            // A dataBound function that must also be saved in the options of the user.
             dataBound: function (e) {
                 console.log("The DataBound event was fired.");
             },
@@ -73,7 +76,7 @@ Implement a custom [`JSON reviver`](https://developer.mozilla.org/en-US/docs/Web
                 field: "OrderID",
                 filterable: false
             },
-            /* Editable function that must also be saved in the options of the user */
+            /* An editable function that must also be saved in the options of the user. */
             { field: "Freight", editable: function () { return false; } },
             {
                 field: "OrderDate",
@@ -93,7 +96,7 @@ Implement a custom [`JSON reviver`](https://developer.mozilla.org/en-US/docs/Web
     $("#save").on("click", function (e) {
         e.preventDefault();
         var options = $("#grid").data("kendoGrid").getOptions();
-        // Stringify the grid options.
+        // Stringify the Grid options.
         var stringOptions = JSON.stringify(options);
         // Save them in the local storage.
         localStorage["kendo-grid-persist-options"] = stringOptions;
@@ -103,7 +106,7 @@ Implement a custom [`JSON reviver`](https://developer.mozilla.org/en-US/docs/Web
         e.preventDefault();
         var options = localStorage["kendo-grid-persist-options"];
         if (options) {
-            // Parse the options using the custom reviver.
+            // Parse the options by using the custom reviver.
             var parseOptions = JSON.parse(options, Function.deserialize);
 
             var grid = $("#grid").data("kendoGrid");
@@ -147,3 +150,9 @@ Implement a custom [`JSON reviver`](https://developer.mozilla.org/en-US/docs/Web
     }
 </script>
 ```
+
+## See Also
+
+* [JavaScript API Reference of the jQuery Data Grid](/api/javascript/ui/grid)
+* [jQuery Data Grid Overview Demo](https://demos.telerik.com/kendo-ui/grid/index)
+* [Persist the Multi-Checkbox Filter When the Grid Uses an External DataSource](/knowledge-base/grid-persist-checkbox-filter-with external-datasource)
