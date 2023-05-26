@@ -1,6 +1,6 @@
 ---
 title: Server Filtering
-page_title: Server f=Filtering
+page_title: Server Filtering
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure the component to work with server-side filtering."
 slug: htmlhelpers_scheduler_server_filtering_aspnetcore
 position: 7

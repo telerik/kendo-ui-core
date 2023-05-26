@@ -8656,7 +8656,7 @@ If set to `true` the user could reorder the rows by dragging them. By default re
     });
     </script>
 
-### resizable `Boolean|Object` *(default:false)*
+### resizable `Object|Boolean` *(default:false)*
 
 If object is used, it allows configuration of `resizable.columns` and `resizable.rows`. If set to `true`, only column resizing will be enabled.
 
@@ -8682,7 +8682,7 @@ By default, column and row resizing is disabled.
 > Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
 the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
-#### resizable.columns `Boolean`
+### resizable.columns `Boolean` *(default:false)*
 
 If set to `true`, users can resize columns by dragging the edges (resize handles) of their header cells. As of Kendo UI Q1 2015, users can also auto-fit a column by double-clicking its resize handle. In this case the column will assume the smallest possible width, which allows the column content to fit without wrapping.
 
@@ -8710,7 +8710,7 @@ By default, column resizing is disabled.
 > Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and 
 the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
-#### resizable.rows `Boolean`
+### resizable.rows `Boolean` *(default:false)*
 
 If set to `true`, users can resize Grid rows by dragging their bottom edge. Users can also auto-fit a row by double-clicking its bottom edge. In this case the row will assume the smallest possible height, which allows the cells content to be fully displayed.
 
