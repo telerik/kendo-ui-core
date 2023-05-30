@@ -4300,6 +4300,39 @@ This class can be used to obtain reference to the button after Gantt initializat
     });
     </script>
 
+Apart from the built-in tools, the Gantt fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      toolbar: [ {
+          type: "button",
+          text: "Button"
+      }, {
+          type: "button",
+          text: "Toggle",
+          togglable: true,
+          icon: "cancel"
+      }, {
+          type: "splitButton",
+          text: "SplitButton",
+          menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+      } ],
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }
+      ]
+    });
+    </script>
+
 ### toolbar.template `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button.

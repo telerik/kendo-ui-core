@@ -2985,7 +2985,7 @@ For additional and more complex examples that utilize column templates, visit th
     $("#grid").kendoGrid({
       columns: [ {
         field: "name",
-        template: ({ name }) => `<strong>${kendo.htmlEncode(name)}</strong>`
+        template: ({ name }) => `<strong>${kendo.htmlEncode(name)}</strong>` //name is the field name
       }],
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
@@ -9264,6 +9264,43 @@ The "search" built-in search panel for the grid.
         { name: "save" },
         { name: "cancel" }
       ],
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33},
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      editable: true
+    });
+    </script>
+
+Apart from the built-in tools, the Grid fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: [ {
+          type: "button",
+          text: "Button"
+      }, {
+          type: "button",
+          text: "Toggle",
+          togglable: true,
+          icon: "cancel"
+      }, {
+          type: "splitButton",
+          text: "SplitButton",
+          menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+      } ],
       columns: [
         { field: "name" },
         { field: "age" }

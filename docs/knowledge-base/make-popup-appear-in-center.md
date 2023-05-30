@@ -55,22 +55,22 @@ The example below demonstrates how to position a popup in the center of the brow
        var url = "http://jsonplaceholder.typicode.com/posts";
 
        function createAndShowPopup(){
-         kendoWindowAssign.kendoWindow({
-           width: "650px",
-           modal: true,
-           height: '120px',
-           iframe: true,
-           resizable: false,
-           title: title,
-           content: url,
-           visible: false
-         });
+        kendoWindowAssign.kendoWindow({
+          width: "650px",
+          modal: true,
+          height: '200px',
+          resizable: false,
+          title: title,
+          content: {
+            url: url,
+            dataType: "json"
+          },
+        });
 
-         var popup = $("#windowForAssign").data('kendoWindow');
-         popup.open();
-         popup.center();
-       }
-     </script>
+        var popup = $("#windowForAssign").data('kendoWindow');
+        popup.open();
+        popup.center();
+      }
 ```
 
 ## See Also

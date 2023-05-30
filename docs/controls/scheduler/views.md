@@ -75,6 +75,9 @@ The following source-code files contain the views implementation:
 
 You can override each method and property that are defined in the list by extending the respective class. In this way, the functionality and the appearance of the view will be altered by creating the new, custom view. For more information, refer to the `kendo.scheduler.dayview.js` and `kendo.scheduler.timelineview.js` files which contain definitions of views which extend the already defined `MultiDayView` and `TimelineView` views.
 
+For a runnable example please refer to this [Create Custom Scheduler Views by Inheriting Built-In Views example](/knowledge-base/custom-view).
+
+
 ## See Also
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)

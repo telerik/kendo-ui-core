@@ -136,6 +136,8 @@ Configures the items collection of the toolbar.
         });
     </script>
 
+Apart from the built-in tools, the ImageEditor fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+
 ### toolbar.items.type `String`
 Specifies the type of the button.
 

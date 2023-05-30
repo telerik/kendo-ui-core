@@ -269,7 +269,7 @@ var __meta__ = {
                     that._toggleResize(true);
                 }
 
-                that.wrapper = wrapper = kendo.wrap(element, options.autosize)
+                that.wrapper = wrapper = kendo.wrap(element, options.autosize, options._resizeOnWrap)
                     .css({
                         overflow: HIDDEN,
                         display: "block",

@@ -1358,6 +1358,31 @@ A Boolean value which indicates if the sheets-bar will be displayed.
 
 A Boolean value which indicates if the toolbar will be displayed.
 
+Apart from the built-in tools, the Spreadsheet Home, Insert and Data ToolBars fully expose the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: [ {
+                    type: "button",
+                    text: "Button"
+                }, {
+                    type: "button",
+                    text: "Toggle",
+                    togglable: true,
+                    icon: "cancel"
+                }, {
+                    type: "splitButton",
+                    text: "SplitButton",
+                    menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+                } ]
+            }
+        });
+    </script>
+
 ### toolbar.home `Boolean|Array` *(default: true)*
 
 A Boolean value which indicates if the **Home** tab or a collection of tools that will be shown in the **Home** tab will be displayed.

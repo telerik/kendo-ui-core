@@ -11,10 +11,10 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(panes.eq(0).width(), 148);
-            assert.equal(panes.eq(1).width(), 149);
-            assert.equal(panes.eq(1).offset().left - panes.offset().left, 156);
-            assert.equal(splitter.dom.find(".k-splitbar").offset().left - panes.offset().left, 148);
+            assert.equal(panes.eq(0).width(), 146);
+            assert.equal(panes.eq(1).width(), 147);
+            assert.equal(panes.eq(1).offset().left - panes.offset().left, 158);
+            assert.equal(splitter.dom.find(".k-splitbar").offset().left - panes.offset().left, 146);
         });
 
         it("fluid panes get their size after allocating space for fixed panes", function() {
@@ -25,7 +25,7 @@
             var panes = splitter.dom.find(".k-pane");
 
             assert.equal(panes.eq(0).width(), 100);
-            assert.equal(panes.eq(1).width(), 197);
+            assert.equal(panes.eq(1).width(), 193);
         });
 
         it("fluid panes get their size after allocating space for percentage panes", function() {
@@ -35,9 +35,9 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(panes.eq(0).width(), 29);
-            assert.equal(panes.eq(1).width(), 179);
-            assert.equal(panes.eq(2).width(), 88);
+            assert.equal(panes.eq(0).width(), 28);
+            assert.equal(panes.eq(1).width(), 174);
+            assert.equal(panes.eq(2).width(), 86);
         });
 
         it("sizes of percentage panes get properly rounded", function() {
@@ -55,8 +55,8 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(panes.eq(0).width(), 99);
-            assert.equal(panes.eq(1).width(), 99);
+            assert.equal(panes.eq(0).width(), 97);
+            assert.equal(panes.eq(1).width(), 97);
         });
     });
 
@@ -69,10 +69,10 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(Math.round(panes.eq(0).height()), 148);
-            assert.equal(Math.round(panes.eq(1).height()), 149);
-            assert.equal(Math.round(panes.eq(1).offset().top - panes.offset().top), 156);
-            assert.equal(Math.round(splitter.dom.find(".k-splitbar").offset().top - panes.offset().top), 148);
+            assert.equal(Math.round(panes.eq(0).height()), 146);
+            assert.equal(Math.round(panes.eq(1).height()), 147);
+            assert.equal(Math.round(panes.eq(1).offset().top - panes.offset().top), 158);
+            assert.equal(Math.round(splitter.dom.find(".k-splitbar").offset().top - panes.offset().top), 146);
         });
 
         it("fluid panes get their size after allocating space for fixed panes", function() {
@@ -87,7 +87,7 @@
             var panes = splitter.dom.find(".k-pane");
 
             assert.equal(panes.eq(0).height(), 100);
-            assert.equal(panes.eq(1).height(), 197);
+            assert.equal(panes.eq(1).height(), 193);
         });
 
         it("fluid panes get their size after allocating space for percentage panes", function() {
@@ -100,9 +100,9 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(panes.eq(0).height(), 29);
-            assert.equal(panes.eq(1).height(), 179);
-            assert.equal(panes.eq(2).height(), 88);
+            assert.equal(panes.eq(0).height(), 28);
+            assert.equal(panes.eq(1).height(), 174);
+            assert.equal(panes.eq(2).height(), 86);
         });
 
         it("sizes of percentage panes get properly rounded", function() {
@@ -124,8 +124,8 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(panes.eq(0).height(), 99);
-            assert.equal(panes.eq(1).height(), 99);
+            assert.equal(panes.eq(0).height(), 97);
+            assert.equal(panes.eq(1).height(), 97);
         });
 
         it("sub-pixel pane sizes", function() {
@@ -152,7 +152,7 @@
             var panes = splitter.dom.find(".k-pane");
 
             assert.equal(panes.eq(0).width(), 0);
-            assert.equal(panes.eq(1).width(), 197);
+            assert.equal(panes.eq(1).width(), 193);
         });
     });
 }());

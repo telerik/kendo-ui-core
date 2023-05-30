@@ -3790,7 +3790,21 @@ declare namespace kendo.ui {
         dayperiod?: string | undefined;
     }
 
+    interface DateInputSteps {
+        year?: Number | undefined;
+        month?: Number | undefined;
+        day?: Number | undefined;
+        millisecond?: Number | undefined;
+        hour?: Number | undefined;
+        minute?: Number | undefined;
+        second?: Number | undefined;
+    }
+
     interface DateInputOptions {
+        autoCorrectParts?: boolean | undefined;
+        autoSwitchKeys?: any | undefined;
+        autoSwitchParts?: boolean | undefined;
+        enableMouseWheel?: boolean | undefined;
         name?: string | undefined;
         fillMode?: string | undefined;
         format?: string | undefined;
@@ -3801,6 +3815,7 @@ declare namespace kendo.ui {
         messages?: DateInputMessages | undefined;
         rounded?: string | undefined;
         size?: string | undefined;
+        steps?: DateInputSteps | undefined;
         change?(e: DateInputChangeEvent): void;
     }
     interface DateInputEvent {
@@ -5000,7 +5015,8 @@ declare namespace kendo.ui {
         items?: EditorToolItem[] | undefined;
         palette?: string|any | undefined;
         columns?: number | undefined;
-        template?: string | undefined;
+        template?: string | Function | undefined;
+        ui?: ToolBarItem | undefined;
     }
 
     interface EditorExecParams {
@@ -6064,7 +6080,7 @@ declare namespace kendo.ui {
         showWorkDays?: boolean | undefined;
         showWorkHours?: boolean | undefined;
         taskTemplate?: string|Function | undefined;
-        toolbar?: GanttToolbarItem[] | undefined;
+        toolbar?: GanttToolbarItem[] | ToolBarItem[] | undefined;
         tooltip?: GanttTooltip | undefined;
         views?: GanttView[] | undefined;
         resources?: GanttResources | undefined;
@@ -6671,8 +6687,10 @@ declare namespace kendo.ui {
         scrollable?: boolean | GridScrollable | undefined;
         search?: GridSearch | undefined;
         selectable?: boolean|string | undefined;
+        size?: string | undefined;
         sortable?: boolean | GridSortable | undefined;
-        toolbar?: string | Function | (string | GridToolbarItem)[] | undefined;
+        toolbar?: string | Function | (string | GridToolbarItem)[] | ToolBarItem[] | undefined;
+        width?: number|string | undefined;
         beforeEdit?(e: GridBeforeEditEvent): void;
         cancel?(e: GridCancelEvent): void;
         cellClose?(e: GridCellCloseEvent): void;
@@ -10785,9 +10803,9 @@ declare namespace kendo.ui {
     }
 
     interface SpreadsheetToolbar {
-        home?: boolean|any | undefined;
-        insert?: boolean|any | undefined;
-        data?: boolean|any | undefined;
+        home?: boolean| ToolBarItem[] | any | undefined;
+        insert?: boolean| ToolBarItem[] | any | undefined;
+        data?: boolean| ToolBarItem[] | any | undefined;
     }
 
     interface SpreadsheetInsertSheetOptions {
@@ -12649,7 +12667,7 @@ declare namespace kendo.ui {
         search?: TreeListSearch | undefined;
         selectable?: boolean|string | undefined;
         sortable?: boolean | TreeListSortable | undefined;
-        toolbar?: TreeListToolbarItem[] | any | undefined;
+        toolbar?: TreeListToolbarItem[] | ToolBarItem[] | any | undefined;
         beforeEdit?(e: TreeListBeforeEditEvent): void;
         cancel?(e: TreeListCancelEvent): void;
         cellClose?(e: TreeListCellCloseEvent): void;

@@ -2588,7 +2588,7 @@ Specifies the [colors columns](/api/javascript/ui/colorpicker/configuration/colu
     });
     </script>
 
-### tools.template `String`
+### tools.template `String|Function`
 
 The kendo template that will be used for rendering the given tool.
 
@@ -2606,13 +2606,9 @@ The kendo template that will be used for rendering the given tool.
     });
     </script>
 
-The code below shows how to use a template and pass variables to it. This allows template reusage or making tweaks on the fly.
+The code below shows how to use a function template.
 
-#### Example using a Kendo UI template with variables
-
-    <script id="toolTemplate" type="text/x-kendo-template">
-        <button class='k-button'>#= myText #</button>
-    </script>
+#### Example using a function template
 
     <textarea id="editor"></textarea>
     <script>
@@ -2620,12 +2616,60 @@ The code below shows how to use a template and pass variables to it. This allows
       tools: [
         {
           name: "custom",
-          myText: "Button Text",
-          template: $("#toolTemplate").html()
+          template: function() {
+            return "<button class='k-button'>Save draft</button>"
+          }
         }
       ]
     });
     </script>
+
+### tools.ui `Object`
+
+Apart from the built-in tools, the Editor fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+
+All tools must have their `name` specified. All custom tools with no name will have "custom" automatically assigned as their name. As a result only one of them will be placed in the Editor ToolBar.
+
+#### Example - Custom tools via the ToolBar API
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        {
+            name: "text-btn",
+            ui: {
+                type: "button",
+                text: "Button",
+                showText: "always",
+                icon: null
+            }
+        },
+        {
+            name: "toggle-btn",
+            ui: {
+                type: "button",
+                text: "Toggle",
+                togglable: true,
+                icon: "cancel",
+                showText: "always"
+            }
+        },
+        {
+            name: "split-btn",
+            ui: {
+                type: "splitButton",
+                text: "SplitButton",
+                showText: "always",
+                icon: null,
+                menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+            }
+        }
+      ]
+    });
+    </script>
+
+Note that all tools have their `showText` option set to `overflow` and their `icon` set to `gear`. If the default state does not cover your scenario requirements, you will need to override those options.
 
 ### imageBrowser `Object`
 

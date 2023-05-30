@@ -710,7 +710,7 @@ Deactivates a tab specified as a selector. Note: Invoking this method will not t
 
     <div id="tabstrip">
         <ul>
-            <li id="tab1">Tab 1</li>
+            <li id="tab1" class="k-active">Tab 1</li>
             <li>Tab 2</li>
         </ul>
         <div>Content 1</div>
@@ -718,8 +718,9 @@ Deactivates a tab specified as a selector. Note: Invoking this method will not t
     </div>
 
     <script>
-        var tabToDeactivate = $("#tab1");
-        $("#tabstrip").kendoTabStrip().data("kendoTabStrip").deactivateTab(tabToDeactivate);
+      var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+      var tabToDeactivate = $("#tab1");
+      tabstrip.deactivateTab(tabToDeactivate);
     </script>
 
 #### Parameters

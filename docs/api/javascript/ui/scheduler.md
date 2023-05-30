@@ -4580,6 +4580,8 @@ If set to true the view will be initially shown in business hours mode. By defau
     });
     </script>
 
+To dynamically update the `showWorkHours` or any other option yo ucan use the [`setOptions`](/api/javascript/ui/widget/methods/setoptions) method.
+
 ### snap `Boolean` *(default: true)*
 
 If set to `true` the scheduler will snap events to the nearest slot during dragging (resizing or moving). Set it to `false` to allow free moving and resizing of events.

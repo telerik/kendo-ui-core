@@ -31,6 +31,68 @@ var packageMetadata = {
         formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
         boxShadowRegExp = /(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+)?/i,
         numberRegExp = /^(\+|-?)\d+(\.?)\d*$/,
+        MONTH = "month",
+        HOUR = "hour",
+        ZONE = "zone",
+        WEEKDAY = "weekday",
+        QUARTER = "quarter",
+        DATE_FIELD_MAP = {
+            "G": "era",
+            "y": "year",
+            "q": QUARTER,
+            "Q": QUARTER,
+            "M": MONTH,
+            "L": MONTH,
+            "d": "day",
+            "E": WEEKDAY,
+            "c": WEEKDAY,
+            "e": WEEKDAY,
+            "h": HOUR,
+            "H": HOUR,
+            "k": HOUR,
+            "K": HOUR,
+            "m": "minute",
+            "s": "second",
+            "a": "dayperiod",
+            "t": "dayperiod",
+            "x": ZONE,
+            "X": ZONE,
+            "z": ZONE,
+            "Z": ZONE
+        },
+        NAME_TYPES = {
+            month: {
+                type: "months",
+                minLength: 3,
+                standAlone: "L"
+            },
+
+            quarter: {
+                type: "quarters",
+                minLength: 3,
+                standAlone: "q"
+            },
+
+            weekday: {
+                type: "days",
+                minLength: {
+                    E: 0,
+                    c: 3,
+                    e: 3
+                },
+                standAlone: "c"
+            },
+
+            dayperiod: {
+                type: "dayPeriods",
+                minLength: 0
+            },
+
+            era: {
+                type: "eras",
+                minLength: 0
+            }
+        },
         FUNCTION = "function",
         STRING = "string",
         NUMBER = "number",
@@ -546,7 +608,7 @@ function pad(number, digits, end) {
 
 // Date and Number formatting
 (function() {
-    var dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|zzz|zz|z|"[^"]*"|'[^']*'/g,
+    var dateFormatRegExp = /EEEE|dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|zzz|zz|z|"[^"]*"|'[^']*'/g,
         standardFormatRegExp = /^(n|c|p|e)(\d*)$/i,
         literalRegExp = /(\\.)|(['][^']*[']?)|(["][^"]*["]?)/g,
         commaRegExp = /\,/g,
@@ -674,7 +736,7 @@ function pad(number, digits, end) {
             days = calendar.days,
             months = calendar.months;
 
-        format = calendar.patterns[format] || format;
+        format = format.pattern || calendar.patterns[format] || format;
 
         return format.replace(dateFormatRegExp, function(match) {
             var minutes;
@@ -687,7 +749,7 @@ function pad(number, digits, end) {
                 result = pad(date.getDate());
             } else if (match === "ddd") {
                 result = days.namesAbbr[date.getDay()];
-            } else if (match === "dddd") {
+            } else if (match === "dddd" || match === "EEEE") {
                 result = days.names[date.getDay()];
             } else if (match === "M") {
                 result = date.getMonth() + 1;
@@ -727,7 +789,7 @@ function pad(number, digits, end) {
                 result = pad(result);
             } else if (match === "fff") {
                 result = pad(date.getMilliseconds(), 3);
-            } else if (match === "tt") {
+            } else if (match === "tt" || match === "aa") {
                 result = date.getHours() < 12 ? calendar.AM[0] : calendar.PM[0];
             } else if (match === "zzz") {
                 minutes = date.getTimezoneOffset();
@@ -1754,7 +1816,7 @@ function pad(number, digits, end) {
         };
     }
 
-    function wrap(element, autosize) {
+    function wrap(element, autosize, resize) {
         var percentage,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
@@ -1804,7 +1866,10 @@ function pad(number, digits, end) {
 
         if (windowOuterWidth < outerWidth(parent)) {
             parent.addClass("k-animation-container-sm");
+            resize = true;
+        }
 
+        if (resize) {
             wrapResize(element, autosize);
         }
 
@@ -4425,6 +4490,150 @@ function pad(number, digits, end) {
             return new Date(currentDate.setFullYear(currentDate.getFullYear() + offset));
         }
 
+        function addLiteral(parts, value) {
+            var lastPart = parts[parts.length - 1];
+            if (lastPart && lastPart.type === "LITERAL") {
+                lastPart.pattern += value;
+            } else {
+                parts.push({
+                    type: "literal",
+                    pattern: value
+                });
+            }
+        }
+
+        function isHour12(pattern) {
+            return pattern === "h" || pattern === "K";
+        }
+
+        function dateNameType(formatLength) {
+            var nameType;
+            if (formatLength <= 3) {
+                nameType = "abbreviated";
+            } else if (formatLength === 4) {
+                nameType = "wide";
+            } else if (formatLength === 5) {
+                nameType = "narrow";
+            }
+
+            return nameType;
+        }
+
+        function startsWith(text, searchString, position) {
+            position = position || 0;
+            return text.indexOf(searchString, position) === position;
+        }
+
+        function datePattern(format, info) {
+            var calendar = info.calendar;
+            var result;
+            if (typeof format === "string") {
+                if (calendar.patterns[format]) {
+                    result = calendar.patterns[format];
+                } else {
+                    result = format;
+                }
+            }
+
+            if (!result) {
+                result = calendar.patterns.d;
+            }
+
+            return result;
+        }
+
+        function splitDateFormat(format) {
+            var info = kendo.culture();
+            var pattern = datePattern(format, info).replace("dddd", "EEEE").replace("tt", "aa");
+            var parts = [];
+            var dateFormatRegExp = /d{1,2}|E{1,6}|e{1,6}|c{3,6}|c{1}|M{1,5}|L{1,5}|y{1,4}|H{1,2}|h{1,2}|k{1,2}|K{1,2}|m{1,2}|a{1,5}|s{1,2}|S{1,3}|t{1,2}|z{1,4}|Z{1,5}|x{1,5}|X{1,5}|G{1,5}|q{1,5}|Q{1,5}|"[^"]*"|'[^']*'/g;
+
+            var lastIndex = dateFormatRegExp.lastIndex = 0;
+            var match = dateFormatRegExp.exec(pattern);
+            var specifier;
+            var type;
+            var part;
+            var names;
+            var minLength;
+            var patternLength;
+
+            while (match) {
+                var value = match[0];
+
+                if (lastIndex < match.index) {
+                    addLiteral(parts, pattern.substring(lastIndex, match.index));
+                }
+
+                if (startsWith(value, '"') || startsWith(value, "'")) {
+                    addLiteral(parts, value);
+                } else {
+                    specifier = value[0];
+                    type = DATE_FIELD_MAP[specifier];
+                    part = {
+                        type: type,
+                        pattern: value
+                    };
+
+                    if (type === "hour") {
+                        part.hour12 = isHour12(value);
+                    }
+
+                    names = NAME_TYPES[type];
+
+                    if (names) {
+                        minLength = typeof names.minLength === "number" ? names.minLength : names.minLength[specifier];
+                        patternLength = value.length;
+
+                        if (patternLength >= minLength && value !== "aa") {
+                            part.names = {
+                                type: names.type,
+                                nameType: dateNameType(patternLength),
+                                standAlone: names.standAlone === specifier
+                            };
+                        }
+                    }
+
+                    parts.push(part);
+                }
+
+                lastIndex = dateFormatRegExp.lastIndex;
+                match = dateFormatRegExp.exec(pattern);
+            }
+
+            if (lastIndex < pattern.length) {
+                addLiteral(parts, pattern.substring(lastIndex));
+            }
+
+            return parts;
+        }
+
+        function dateFormatNames(options) {
+            let { type, nameType } = options;
+            const info = kendo.culture();
+            if (nameType === "wide") {
+                nameType = "names";
+            }
+            if (nameType === "abbreviated") {
+                nameType = "namesAbbr";
+            }
+            if (nameType === "narrow") {
+                nameType = "namesShort";
+            }
+            let result = info.calendar[type][nameType];
+            if (!result) {
+                result = info.calendar[type]["name"];
+            }
+            return result;
+        }
+
+        function dateFieldName(options) {
+            const info = kendo.culture();
+            const dateFields = info.calendar.dateFields;
+            const fieldNameInfo = dateFields[options.type] || {};
+
+            return fieldNameInfo[options.nameType];
+        }
+
         return {
             adjustDST: adjustDST,
             dayOfWeek: dayOfWeek,
@@ -4449,6 +4658,9 @@ function pad(number, digits, end) {
             today: today,
             toInvariantTime: toInvariantTime,
             firstDayOfMonth: firstDayOfMonth,
+            splitDateFormat: splitDateFormat,
+            dateFieldName: dateFieldName,
+            dateFormatNames: dateFormatNames,
             lastDayOfMonth: lastDayOfMonth,
             weekInYear: weekInYear,
             getMilliseconds: getMilliseconds,

@@ -119,7 +119,7 @@
                 orientation: "horizontal"
             });
 
-            assert.equal(innerSplitter.find(">div:first").height(), 48);
+            assert.equal(innerSplitter.find(">div:first").height(), 46);
         });
 
         it("splibars between non-resizable and non-collapsible panes do not have a tabindex", function() {

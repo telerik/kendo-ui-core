@@ -131,28 +131,51 @@ Defines a new `Model` type by using the provided options. The returned value inh
 
 #### Example - define a model
 
+    <button id="update-name">Change Name</button>
+    <button id="update-age">Change Age</button>
+
     <script>
-    var Person = kendo.data.Model.define({
+      var Person = kendo.data.Model.define({
         id: "personId", // the identifier of the model
         fields: {
-            "name": {
-                type: "string"
-            },
-            "age": {
-                type: "number"
-            }
+          "personId": {
+            defaultValue: 0,
+            type: "number"
+          },
+          "name": {
+            type: "string"
+          },
+          "age": {
+            parse: (value) => kendo.parseInt(value), // Parse the value manually.
+            nullable: true, // Age can be null
+            editable: false, // Age cannot be edited.
+          }
         }
-    });
+      });
 
-    var person = new Person({
+      var person = new Person({
         name: "John Doe",
         age: 42
-    });
+      });
 
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(person.get("name")); // outputs "John Doe"
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(person.get("age")); // outputs 42
+      var person2 = new Person({
+        name: "James Doe",
+        age: null
+      });
+
+      $(document.body).append(`<div><h3>Person 1</h3><p>Name - ${person.get("name")}, Type - ${typeof(person.get("name"))}</p><p>Age - ${person.get("age")}, Type - ${typeof(person.get("age"))}</p></div>`);
+      $(document.body).append(`<div><h3>Person 2</h3><p>Name - ${person2.get("name")}, Type - ${typeof(person2.get("name"))}</p><p>Age - ${person2.get("age")}, Type - ${typeof(person2.get("age"))}</p></div>`);
+
+      $("#update-name").on("click", (e) => {
+        person.set("name", "Test Name");
+        $(document.body).append(`<div><h3>Updated Person 1</h3><p>Name - ${person.get("name")}, Type - ${typeof(person.get("name"))}</p><p>Age - ${person.get("age")}, Type - ${typeof(person.get("age"))}</p></div>`);
+      });
+      
+      // The age will not be updated through the `set` method because the field is not editable.
+      $("#update-age").on("click", (e) => {
+        person.set("age", 1645);
+        $(document.body).append(`<div><h3>Updated Person 1</h3><p>Name - ${person.get("name")}, Type - ${typeof(person.get("name"))}</p><p>Age - ${person.get("age")}, Type - ${typeof(person.get("age"))}</p></div>`);
+      });
     </script>
 
 #### Parameters

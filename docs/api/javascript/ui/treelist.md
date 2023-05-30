@@ -5615,6 +5615,46 @@ The sort mode. If set to `single`, the user can sort by one column at a time. If
       });
     </script>
 
+Apart from the built-in tools, the TreeList fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself. Note that all tools (commands) must have their name specified:
+
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        toolbar: [ {
+            name: "btn-cmd",
+            type: "button",
+            text: "Button"
+        }, {
+            name: "toggle-cmd",
+            type: "button",
+            text: "Toggle",
+            togglable: true,
+            icon: "cancel"
+        }, {
+            name: "split-cmd",
+            type: "splitButton",
+            text: "SplitButton",
+            menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+        } ],
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          mode: "multiple"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+          ]
+        }
+      });
+    </script>
+
 ### toolbar.click `Function`
 
 The `click` handler of the toolbar command. Used for custom toolbar commands.

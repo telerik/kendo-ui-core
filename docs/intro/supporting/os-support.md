@@ -17,12 +17,10 @@ The following table lists the operating systems and their versions that are comp
 
 | PLATFORM          | VERSION               |
 | :---------------- | :-------------------- |
-| Windows           | XP or later           |
-| Windows Server    | Server 2003 or later  |
-| OS X              | 10.5 or later         |
-| Android           | 2.3 or later          |
-| iOS               | 6.0 or later          |
-| Windows Phone     | 8.0 or later          |
+| Windows           | The two latest versions at the time of the release. |
+| Mac OS            | The two latest versions at the time of the release. |
+| Android           | The two latest versions at the time of the release. |
+| iOS               | The two latest versions at the time of the release. |
 
 ## See Also
 
