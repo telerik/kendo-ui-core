@@ -14,6 +14,10 @@ Represents the Kendo UI AutoComplete widget. Inherits from [Widget](/api/javascr
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
@@ -424,7 +428,7 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
         { id: 2, name: "Oranges" }
       ],
       dataTextField: "name",
-      label: { 
+      label: {
         content: "Fruits",
         floating: true
       }

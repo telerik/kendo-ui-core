@@ -11,6 +11,10 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
  Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar..The parameters available for the template are:
@@ -514,7 +518,7 @@ The following settings are available for the **start** value:
             start: "year"
         });
     </script>
-	
+
 ### startField `String`*(default: "")*
 
 Specifies the start field name for model binding.

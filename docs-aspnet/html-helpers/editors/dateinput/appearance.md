@@ -3,7 +3,7 @@ title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI DateInput for {{ site.framework }}."
 slug: appearance_dateinput
-position: 2
+position: 3
 ---
 
 # DateInput Appearance

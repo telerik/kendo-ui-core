@@ -23,6 +23,7 @@ import "./kendo.buttongroup.js";
 import "./kendo.bottomnavigation.js";
 import "./kendo.pager.js";
 import "./kendo.popup.js";
+import "./kendo.actionsheet.js";
 import "./kendo.notification.js";
 import "./kendo.tooltip.js";
 import "./kendo.splitbutton.js";

@@ -12,6 +12,10 @@ Represents the Kendo UI TimeDurationPicker widget. Inherits from [Widget](/api/j
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### columns `Array`
 
 The configuration of the picker columns. An array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the

@@ -295,7 +295,10 @@ var __meta__ = {
 
             that.element.attr("role", "listbox");
 
-            that.content = that.wrapper = that.element.wrap("<div unselectable='on' class='" + contentClasses + "'></div>").parent();
+            var contentSelector = "." + contentClasses.split(' ').join('.');
+            var wrapper = that.element.closest(contentSelector);
+
+            that.content = that.wrapper = wrapper.length ? wrapper : that.element.wrap("<div unselectable='on' class='" + contentClasses + "'></div>").parent();
 
             if (that.options.columns && that.options.columns.length) {
                 var thead = that.element.closest(".k-data-table").find('.k-table-thead');

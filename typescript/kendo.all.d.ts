@@ -2132,25 +2132,50 @@ declare namespace kendo.ui {
 
         close(): void;
         destroy(): void;
+        fullscreen(fullscreen: boolean): void;
         open(): void;
-
+        toggle(): void;
+        visible(): boolean;
     }
 
     interface ActionSheetItem {
         click?: Function | undefined;
         description?: string | undefined;
+        disabled?: boolean | undefined;
         group?: string | undefined;
+        icon?: string | undefined;
         iconClass?: string | undefined;
         iconColor?: string | undefined;
         iconSize?: number | undefined;
         text?: string | undefined;
     }
 
+    interface ActionSheetActionButton {
+        click?: Function | undefined;
+        disabled?: boolean | undefined;
+        fillMode?: string | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        text?: string | undefined;
+        themeColor?: string | undefined;
+    }
+
     interface ActionSheetOptions {
         name?: string | undefined;
+        adaptive?: boolean | undefined;
+        actionButtons?: ActionSheetActionButton[] | undefined;
+        closeButton?: boolean | undefined;
+        contentTemplate?: string | Function | undefined;
+        footerTemplate?: string | Function | undefined;
+        fullscreen?: boolean | undefined;
         items?: ActionSheetItem[] | undefined;
         title?: string | undefined;
+        subtitle?: string | undefined;
+        activate?(e: ActionSheetEvent): void;
         close?(e: ActionSheetEvent): void;
+        deactivate?(e: ActionSheetEvent): void;
         open?(e: ActionSheetEvent): void;
     }
     interface ActionSheetEvent {
@@ -2292,6 +2317,7 @@ declare namespace kendo.ui {
 
     interface AutoCompleteOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | AutoCompleteAnimation | undefined;
         autoWidth?: boolean | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
@@ -3505,6 +3531,7 @@ declare namespace kendo.ui {
 
     interface ComboBoxOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: ComboBoxAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -3889,6 +3916,7 @@ declare namespace kendo.ui {
 
     interface DatePickerOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | DatePickerAnimation | undefined;
         ARIATemplate?: string | undefined;
         componentType?: string | undefined;
@@ -3980,6 +4008,7 @@ declare namespace kendo.ui {
 
     interface DateRangePickerOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         ARIATemplate?: string | undefined;
         culture?: string | undefined;
         dates?: any;
@@ -4079,6 +4108,7 @@ declare namespace kendo.ui {
 
     interface DateTimePickerOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | DateTimePickerAnimation | undefined;
         ARIATemplate?: string | undefined;
         culture?: string | undefined;
@@ -4419,6 +4449,7 @@ declare namespace kendo.ui {
 
     interface DropDownListOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | DropDownListAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -4566,6 +4597,7 @@ declare namespace kendo.ui {
 
     interface DropDownTreeOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | DropDownTreeAnimation | undefined;
         autoBind?: boolean | undefined;
         autoClose?: boolean | undefined;
@@ -4850,6 +4882,7 @@ declare namespace kendo.ui {
     }
 
     interface EditorMessages {
+        auto?: string | undefined;
         accessibilityTab?: string | undefined;
         addColumnLeft?: string | undefined;
         addColumnRight?: string | undefined;
@@ -4874,8 +4907,11 @@ declare namespace kendo.ui {
         background?: string | undefined;
         bold?: string | undefined;
         border?: string | undefined;
+        borderColor?: string | undefined;
+        borderWidth?: string | undefined;
         style?: string | undefined;
         caption?: string | undefined;
+        captionAlignment?: string | undefined;
         cellMargin?: string | undefined;
         cellPadding?: string | undefined;
         cellSpacing?: string | undefined;
@@ -4919,6 +4955,7 @@ declare namespace kendo.ui {
         insertLowerRomanList?: string | undefined;
         italic?: string | undefined;
         overflowAnchor?: string | undefined;
+        fitToCell?: string | undefined;
         justifyCenter?: string | undefined;
         justifyFull?: string | undefined;
         justifyLeft?: string | undefined;
@@ -4931,6 +4968,8 @@ declare namespace kendo.ui {
         print?: string | undefined;
         rows?: string | undefined;
         selectAllCells?: string | undefined;
+        applyToColumn?: string | undefined;
+        applyToRow?: string | undefined;
         strikethrough?: string | undefined;
         subscript?: string | undefined;
         summary?: string | undefined;
@@ -4938,8 +4977,11 @@ declare namespace kendo.ui {
         tableAlignLeft?: string | undefined;
         tableAlignCenter?: string | undefined;
         tableAlignRight?: string | undefined;
+        tableBackground?: string | undefined;
         tableTab?: string | undefined;
         tableWizard?: string | undefined;
+        tableProperties?: string | undefined;
+        tableCellProperties?: string | undefined;
         underline?: string | undefined;
         units?: string | undefined;
         unlink?: string | undefined;
@@ -7648,6 +7690,7 @@ declare namespace kendo.ui {
 
     interface MultiColumnComboBoxOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: MultiColumnComboBoxAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -7803,6 +7846,7 @@ declare namespace kendo.ui {
 
     interface MultiSelectOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | MultiSelectAnimation | undefined;
         autoBind?: boolean | undefined;
         autoClose?: boolean | undefined;
@@ -11651,6 +11695,7 @@ declare namespace kendo.ui {
 
     interface TimeDurationPickerOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         columns?: TimeDurationPickerColumn[] | undefined;
         enable?: boolean | undefined;
         fillMode?: string | undefined;
@@ -11836,6 +11881,7 @@ declare namespace kendo.ui {
 
     interface TimePickerOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | TimePickerAnimation | undefined;
         culture?: string | undefined;
         dateInput?: boolean | undefined;

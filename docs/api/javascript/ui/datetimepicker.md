@@ -11,6 +11,10 @@ Represents the Kendo UI DateTimePicker widget. Inherits from [Widget](/api/javas
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the popups. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the popup will open and close instantly.
@@ -1138,7 +1142,7 @@ Changes the initial DateTimePicker configuration.
 
 The new configuration options.
 
-#### Example - update the minimum date that the calendar can show 
+#### Example - update the minimum date that the calendar can show
 
     <input id="datetimepicker" />
     <script>

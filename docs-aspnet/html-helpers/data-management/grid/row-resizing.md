@@ -96,6 +96,6 @@ The `RowResize` event fires when the user resizes one or more rows. You can subs
 ## See Also
 
 * [Row Resizing in the {{ site.product }} Grid](https://demos.telerik.com/{{ site.platform }}/grid/row-resizing)
-* [Grid events]({{% slug grid_events %}})
+* [Grid events]({% slug grid_events %})
 * [Server-side API](/api/grid)
 * [Client-side API of the Grid](/api/javascript/ui/grid)

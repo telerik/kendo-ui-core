@@ -55,7 +55,9 @@ function createMediaQuery(query) {
     };
 
     const destroy = () => {
-        mediaQueryList.removeEventListener(EVENT, onChangeHandler);
+        if (mediaQueryList) {
+            mediaQueryList.removeEventListener(EVENT, onChangeHandler);
+        }
         onEnterCallbacks = null;
         onLeaveCallbacks = null;
         onChangeHandlers = null;

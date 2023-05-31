@@ -204,9 +204,9 @@ Defines the text of the labels that are shown within the editor. Used primarily 
     </script>
 
 
-### messages.accessibilityTab `String` *(default: 'Accessibility')*
+### messages.accessibilityTab `String` *(default: 'Advanced')*
 
-The title of the Accessibility in the Table Wizard dialog.
+The title of the tab containing advanced and accessibility configurations in the Table Wizard dialog.
 
 #### Example
 
@@ -214,7 +214,7 @@ The title of the Accessibility in the Table Wizard dialog.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        accessibilityTab: "Accessibility"
+        accessibilityTab: "Advanced"
       }
     });
     </script>
@@ -475,6 +475,21 @@ The title of the tool that aligns the cell text.
     });
     </script>
 
+### messages.auto `String` *(default: 'Auto')*
+
+The placeholder for the numeric inputs in the Table Wizard dialogs.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        auto: "Auto"
+      }
+    });
+    </script>
+
 ### messages.tableAlignLeft `String` *(default: 'Table Align Left')*
 
 The title of the tool that aligns the table.
@@ -546,6 +561,36 @@ The title of the format painter tool button that applies the copied format.
     $("#editor").kendoEditor({
       messages: {
         applyFormat: "Apply the format that has been copied"
+      }
+    });
+    </script>
+
+### messages.applyToColumn `String` *(default: 'apply to column')*
+
+The hint for the Width input in the Cell properties Table Wizard dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        applyToColumn: "apply to column"
+      }
+    });
+    </script>
+
+### messages.applyToRow `String` *(default: 'apply to row')*
+
+The hint for the Height input in the Cell properties Table Wizard dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        applyToRow: "apply to row"
       }
     });
     </script>
@@ -625,6 +670,36 @@ The title of the tool that changes the border of tables.
     });
     </script>
 
+### messages.borderColor `String` *(default: 'Border color')*
+
+The title of the tool that changes the border color of tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        borderColor: "Border color"
+      }
+    });
+    </script>
+
+### messages.borderWidth `String` *(default: 'Border width')*
+
+The title of the tool that changes the border width of tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        borderWidth: "Border width"
+      }
+    });
+    </script>
+
 ### messages.style `String` *(default: 'Styles')*
 
 The title of the tool that applies styling to elements. Deprecated.
@@ -651,6 +726,21 @@ The title of the tool that adds caption to tables.
     $("#editor").kendoEditor({
       messages: {
         caption: "Caption"
+      }
+    });
+    </script>
+
+### messages.captionAlignment `String` *(default: 'Caption alignment')*
+
+The title of the tool that sets the caption alignment of tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        captionAlignment: "Caption alignment"
       }
     });
     </script>
@@ -895,7 +985,7 @@ The label of the insert button in all editor dialogs.
     });
     </script>
 
-### messages.dialogOk `String` *(default: 'Ok')*
+### messages.dialogOk `String` *(default: 'Confirm')*
 
 The title of the OK buttons in editor's dialogs.
 
@@ -905,7 +995,7 @@ The title of the OK buttons in editor's dialogs.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        dialogOk: "Ok"
+        dialogOk: "Confirm"
       }
     });
     </script>
@@ -966,6 +1056,21 @@ The caption for the file URL in the insertFile dialog.
     $("#editor").kendoEditor({
       messages: {
         fileWebAddress: "Web address"
+      }
+    });
+    </script>
+
+### messages.fitToCell `String` *(default: 'Fit to cell')*
+
+The text of the fit to cell option in the WrapText dropdown in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        fitToCell: "Fit to cell"
       }
     });
     </script>
@@ -1496,9 +1601,9 @@ The title of the Rows field in Table Wizard.
     });
     </script>
 
-### messages.selectAllCells `String` *(default: 'Select All Cells')*
+### messages.selectAllCells `String` *(default: 'Apply to all cells')*
 
-The title of the Select All Cells tool.
+The title of the Apply to all cells tool.
 
 #### Example
 
@@ -1506,7 +1611,7 @@ The title of the Select All Cells tool.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        selectAllCells: "Select All Cells"
+        selectAllCells: "Apply to all cells"
       }
     });
     </script>
@@ -1571,9 +1676,9 @@ The title of the tool that makes text superscript.
     });
     </script>
 
-### messages.tableTab `String` *(default: 'Table')*
+### messages.tableBackground `String` *(default: 'Table background')*
 
-The title of the Table tab in Table Wizard.
+The title of the Table background Wizard tool.
 
 #### Example
 
@@ -1581,7 +1686,52 @@ The title of the Table tab in Table Wizard.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        tableTab: "Table"
+        tableBackground: "Table background"
+      }
+    });
+    </script>
+
+### messages.tableCellProperties `String` *(default: 'Cell Properties')*
+
+The title of the Table Cell properties Wizard tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableCellProperties: "Cell Properties"
+      }
+    });
+    </script>
+
+### messages.tableProperties `String` *(default: 'Table Properties')*
+
+The title of the Table properties Wizard tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableProperties: "Table Properties"
+      }
+    });
+    </script>
+
+### messages.tableTab `String` *(default: 'General')*
+
+The title of the main Table tab in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableTab: "General"
       }
     });
     </script>

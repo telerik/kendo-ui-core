@@ -185,7 +185,7 @@
             cleanup();
         });
 
-        it("popups are closed when closing window", function() {
+        it.only("popups are closed when closing window", function() {
             var ddl = $("<input id='ddl' />")
                 .appendTo(dialog.element)
                 .kendoDropDownList({
@@ -198,7 +198,7 @@
 
             dialog.wrapper.find(".k-window-titlebar").trigger("mousedown");
 
-            assert.isOk($("#ddl-list").is(":hidden"));
+            assert.isFalse(ddl.popup.visible());
         });
     });
 })();

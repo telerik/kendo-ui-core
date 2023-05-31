@@ -12,6 +12,11 @@ Represents the Kendo UI TimePicker. Inherits from [Widget](/api/javascript/ui/wi
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the popup will open and close instantly.

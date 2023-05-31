@@ -274,12 +274,41 @@ var __meta__ = {
             clearTimeout(that._busy);
             clearTimeout(that._typingTimeout);
 
+            if (that.filterInput) {
+                that.filterInput.off(ns);
+            }
+
             that.wrapper.off(ns);
             that.tagList.off(ns);
             that.input.off(ns);
             that._clear.off(ns);
 
             List.fn.destroy.call(that);
+        },
+
+        _onActionSheetCreate: function() {
+            var that = this;
+
+            that.filterInput
+                .on("keydown" + ns, that._keydown.bind(that))
+                .on("input" + ns, that._search.bind(that))
+                .on("paste" + ns, that._search.bind(that))
+                .attr({
+                    "role": "combobox",
+                    "aria-expanded": false,
+                    "aria-controls": that.input.attr("aria-controls"),
+                    "aria-autocomplete": that.input.attr("aria-autocomplete"),
+                    "aria-describedby": that.input.attr("aria-describedby")
+                });
+
+            that.popup.bind("activate", () => {
+                that.filterInput.val(that.input.val());
+                that.filterInput.trigger("focus");
+            });
+
+            that.popup.bind("close", () => {
+                that.input.trigger("focus");
+            });
         },
 
         _aria: function() {
@@ -391,8 +420,12 @@ var __meta__ = {
             this.wrapper.addClass(FOCUSEDCLASS);
         },
 
-        _inputFocusout: function() {
+        _inputFocusout: function(e) {
             var that = this;
+
+            if (that.filterInput && e.relatedTarget === that.filterInput[0]) {
+                return;
+            }
 
             clearTimeout(that._typingTimeout);
 
@@ -643,7 +676,7 @@ var __meta__ = {
                 // Setting the below flag will prevent this from happening
                 that.popup._hovered = true;
                 that._initialOpen = false;
-                that.popup.open();
+                that.popup.open({ altTarget: that.wrapper.add(that.element).add(that.input) });
                 that._focusItem();
             }
         },
@@ -711,7 +744,7 @@ var __meta__ = {
 
         _inputValue: function() {
             var that = this;
-            var inputValue = that.input.val();
+            var inputValue = that.filterInput && activeElement() === that.filterInput[0] ? that.filterInput.val() : that.input.val();
 
             if (that.options.placeholder === inputValue) {
                 inputValue = "";
