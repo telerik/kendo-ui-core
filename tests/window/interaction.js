@@ -185,7 +185,7 @@
             cleanup();
         });
 
-        it.only("popups are closed when closing window", function() {
+        it("popups are closed when closing window", function() {
             var ddl = $("<input id='ddl' />")
                 .appendTo(dialog.element)
                 .kendoDropDownList({

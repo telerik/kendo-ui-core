@@ -76,6 +76,26 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
 ```
 {% endif %}
 
+## Model Binding
+
+The DateTimePicker component respects DataAnnotations when the `DateTimePickerFor(m=>m.Property)` method is used. Besides the `[Required]` attribute, the `[DisplayFormat]` and `[Range]` attributes are also supported. The [`Format`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#formatsystemstring) configuration will be set to the provided DisplayFormat and the [`Min`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#minsystemstring) and [`Max`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#maxsystemstring) configurations will be set based on the range provided.
+
+```HtmlHelper
+    @(Html.Kendo().DateTimePickerFor(m=>m.MyDateTimeProperty))
+```
+{% if site.core %}
+```TagHelper
+    <kendo-datetimepicker for="MyDateTimeProperty"
+    </kendo-datetimepicker>
+```
+{% endif %}
+```C#
+    [Required]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+    [Range(typeof(DateTime), minimum:"01/01/2023", maximum:"31/12/2023")]
+    public DateTime MyDateTimeProperty{ get; set; }
+```
+
 ## Functionality and Features
 
 | Feature | Description |

@@ -71,8 +71,8 @@ The following example demonstrates how to define the Chart.
             </category-axis-item>
         </category-axis>
         <series>
-            <series-item type="ChartSeriesType.Bar" 
-                        field="Value" 
+            <series-item type="ChartSeriesType.Bar"
+                        field="Value"
                         name="United States">
             </series-item>
         </series>
@@ -157,9 +157,7 @@ To configure the Chart, pass the configuration options as attributes:
 
     <category-axis>
         <category-axis-item categories='new string[] { "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "20010", "2011", }'>
-            <labels>
-                <chart-category-axis-labels-padding top="135" />
-            </labels>
+            <labels position="ChartAxisLabelsPosition.Start" />
             <line visible="false" />
         </category-axis-item>
     </category-axis>
@@ -184,7 +182,7 @@ You can also add a title to clearly indicate the role of the axis.
             series.Column(new double[] { 20, 25, 32 }).Name("Temperature").Axis("temperature");
             series.Column(new double[] { 45, 50, 80 }).Name("Humidity").Axis("humidity");
         })
-        .CategoryAxis(axis => axis            
+        .CategoryAxis(axis => axis
             .Categories("Aug", "Sep", "Oct")
             .AxisCrossingValue(0, 3)
         )
@@ -331,8 +329,8 @@ The following examples demonstrates how to subscribe to events by a handler name
 {% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
-    <kendo-chart name="chart" 
-                on-series-click="onSeriesClick" 
+    <kendo-chart name="chart"
+                on-series-click="onSeriesClick"
                 on-data-bound="onDataBound">
     </kendo-chart>
 ```

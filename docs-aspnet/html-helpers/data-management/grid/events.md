@@ -8,9 +8,9 @@ position: 5
 
 # Events
 
-You can subscribe to [all Grid events](/api/Kendo.Mvc.UI.Fluent/GridEventBuilder) and then use them to further customize the behavior of the Grid.
+You can subscribe to [all Grid events](/api/kendo.mvc.ui.fluent/grideventbuilder) and then use them to further customize the behavior of the Grid.
 
-The example below demonstrates how to use the [`Change` event](/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#changesystemstring) that the Grid generates when the user selects a table row or a cell.
+The example below demonstrates how to use the [`Change` event](/api/kendo.mvc.ui.fluent/grideventbuilder#changesystemstring) that the Grid generates when the user selects a table row or a cell.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
@@ -23,6 +23,7 @@ The example below demonstrates how to use the [`Change` event](/api/Kendo.Mvc.UI
             columns.Bound(c => c.Country).Title("Country").Width(150);
         })
         .Groupable()
+        .Selectable()
         .Events(events => events
             .Change("onChange")
         )
@@ -80,7 +81,7 @@ The example below demonstrates how to use the [`Change` event](/api/Kendo.Mvc.UI
 
 ## Next Steps
 
-* [API for Configuring the Grid Events](/api/Kendo.Mvc.UI.Fluent/GridEventBuilder)
+* [API for Configuring the Grid Events](/api/kendo.mvc.ui.fluent/grideventbuilder)
 * [Using the Grid Events (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/events)
 
 ## See Also

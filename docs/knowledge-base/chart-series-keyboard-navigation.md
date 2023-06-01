@@ -108,7 +108,7 @@ The following example showcases the full implementation of the logic with multip
               visible: false
             },
             labels: {
-              padding: {top: 135}
+              position: 'start'
             }
           },
           tooltip: {
@@ -134,7 +134,7 @@ The following example showcases the full implementation of the logic with multip
         let chart = $("#chart").data("kendoChart");
         let series = chart.findSeriesByIndex(0),
             seriesCount = chart.options.series.length,
-            dataCount = series._options.data.length, 
+            dataCount = series._options.data.length,
             key = e.keyCode;
 
         // ALT + W (forward)
@@ -150,7 +150,7 @@ The following example showcases the full implementation of the logic with multip
 
           // Force screen readers to announce the provided text.
           announceText(currentSeries._options.name + " year " + currentCategory.category + " value " + currentCategory.value);
-        } 
+        }
 
         // ALT + S (backward)
         if(e.altKey && key == 83) {
@@ -341,7 +341,7 @@ The following example showcases the full implementation of the logic with single
         let chart = $("#chart").data("kendoChart");
         let series = chart.findSeriesByIndex(0),
             seriesCount = chart.options.series.length,
-            dataCount = series._options.data.length, 
+            dataCount = series._options.data.length,
             key = e.keyCode;
 
         // ALT + W (forward)
@@ -351,7 +351,7 @@ The following example showcases the full implementation of the logic with single
 
           navigateForward(chart, dataCount, seriesCount);
           applyLabel(chart);
-        } 
+        }
 
         // ALT + S (backward)
         if(e.altKey && key == 83) {

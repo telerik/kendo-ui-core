@@ -139,29 +139,30 @@ var __meta__ = {
             }
             that._template();
 
-            if (options.previousNext) {
-                if (!that.element.find("[class*='-i-" + FIRST + "']").length) {
-                    that.element.append(icon(FIRST, options.messages.first, "k-pager-first", that._id, buttonSize));
+            if (options.previousNext || options.numeric) {
+                that._numericWrap = that.element.find(".k-pager-numbers-wrap");
 
-                    first(that.element, page, totalPages);
+                if (that._numericWrap.length === 0) {
+                    that._numericWrap = $("<div class='k-pager-numbers-wrap' />").appendTo(that.element);
+                }
+            }
+
+
+            if (options.previousNext) {
+                if (!that._numericWrap.find("[class*='-i-" + FIRST + "']").length) {
+                    that._numericWrap.append(icon(FIRST, options.messages.first, "k-pager-first", that._id, buttonSize));
+
+                    first(that._numericWrap, page, totalPages);
                 }
 
-                if (!that.element.find("[class*='-i-" + PREV + "']").length) {
-                    that.element.append(icon(PREV, options.messages.previous, null, that._id, buttonSize));
+                if (!that._numericWrap.find("[class*='-i-" + PREV + "']").length) {
+                    that._numericWrap.append(icon(PREV, options.messages.previous, null, that._id, buttonSize));
 
-                    prev(that.element, page, totalPages);
+                    prev(that._numericWrap, page, totalPages);
                 }
             }
 
             if (options.numeric) {
-                if (!that._numericWrap) {
-                    that._numericWrap = that.element.find(".k-pager-numbers-wrap");
-
-                    if (that._numericWrap.length === 0) {
-                        that._numericWrap = $("<div class='k-pager-numbers-wrap' />").appendTo(that.element);
-                    }
-                }
-
                 if (!that._numericSelect) {
                     that._numericSelect = that._numericWrap.find(".k-dropdown");
 
@@ -197,16 +198,16 @@ var __meta__ = {
             }
 
             if (options.previousNext) {
-                if (!that.element.find("[class*='-i-" + NEXT + "']").length) {
-                    that.element.append(icon(NEXT, options.messages.next, null, that._id, buttonSize));
+                if (!that._numericWrap.find("[class*='-i-" + NEXT + "']").length) {
+                    that._numericWrap.append(icon(NEXT, options.messages.next, null, that._id, buttonSize));
 
-                    next(that.element, page, totalPages);
+                    next(that._numericWrap, page, totalPages);
                 }
 
-                if (!that.element.find("[class*='-i-" + LAST + "']").length) {
-                    that.element.append(icon(LAST, options.messages.last, "k-pager-last", that._id, buttonSize));
+                if (!that._numericWrap.find("[class*='-i-" + LAST + "']").length) {
+                    that._numericWrap.append(icon(LAST, options.messages.last, "k-pager-last", that._id, buttonSize));
 
-                    last(that.element, page, totalPages);
+                    last(that._numericWrap, page, totalPages);
                 }
             }
 

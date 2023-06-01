@@ -71,7 +71,7 @@ var __meta__ = {
         groupSelector = ".k-menu-group",
         animationContainerSelector = ".k-animation-container",
         childAnimationContainerSelector = ".k-child-animation-container",
-        popupSelector = groupSelector + "," + animationContainerSelector,
+        popupSelector = ".k-menu-popup ," + animationContainerSelector,
         allItemsSelector = ":not(.k-list) > .k-item:not([role='treeitem'])",
         disabledSelector = ".k-item.k-disabled",
         itemSelector = ".k-item",
@@ -189,6 +189,10 @@ var __meta__ = {
 
             groupCssClass: function() {
                 return "k-group k-menu-group k-menu-group-md";
+            },
+
+            groupWrapperCssClass: function() {
+                return "k-menu-popup";
             },
 
             content: function(item) {
@@ -478,6 +482,7 @@ var __meta__ = {
             that._dataSource();
 
             that._updateClasses();
+            that._wrapGroups();
 
             that._animations(options);
 
@@ -682,7 +687,7 @@ var __meta__ = {
                 overflowWrapper.off(NS);
                 overflowWrapper.find(scrollButtonSelector).off(NS).remove();
                 overflowWrapper.children(animationContainerSelector).each(function(i, popupWrapper) {
-                    var ul = $(popupWrapper).find(".k-child-animation-container > " + groupSelector);
+                    var ul = $(popupWrapper).find(".k-child-animation-container > .k-menu-popup");
                     ul.off(MOUSEWHEEL);
                     var popupParentLi = popupParentItem(ul, overflowWrapper);
                     if (popupParentLi.length) {
@@ -801,6 +806,7 @@ var __meta__ = {
             }
 
             this._updateClasses();
+            this._wrapGroups();
             this._reinitOverflow(options);
 
             Widget.fn.setOptions.call(this, options);
@@ -847,7 +853,7 @@ var __meta__ = {
         append: function(item, referenceItem) {
             referenceItem = this.attemptGetItem(referenceItem);
 
-            var inserted = this._insert(item, referenceItem, referenceItem.length ? this._childPopupElement(referenceItem) : null);
+            var inserted = this._insert(item, referenceItem, referenceItem.length ? this._childPopupElement(referenceItem).children().eq(0) : null);
 
             each(inserted.items, function(i) {
                 inserted.group.append(this);
@@ -1024,7 +1030,7 @@ var __meta__ = {
                 }
             }
 
-            var visiblePopups = ">.k-popup:visible,>.k-animation-container > .k-child-animation-container > .k-popup:visible";
+            var visiblePopups = ">.k-popup:visible,>.k-animation-container > .k-child-animation-container > .k-menu-popup:visible";
             var closePopup = function() {
                 var popup = $(this).data(KENDOPOPUP);
                 if (popup) {
@@ -1051,29 +1057,29 @@ var __meta__ = {
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function() {
-                    var ul = li.find("> .k-menu-group, > .k-animation-container > .k-child-animation-container > .k-menu-group").filter(":hidden").first();
+                    var div = li.find("> .k-menu-popup, > .k-animation-container > .k-child-animation-container > .k-menu-popup").filter(":hidden").first();
                     var popup;
                     var overflowPopup;
 
-                    if (!ul[0] && overflowWrapper) {
+                    if (!div[0] && overflowWrapper) {
                         overflowPopup = that._getPopup(li);
-                        ul = overflowPopup && overflowPopup.element;
+                        div = overflowPopup && overflowPopup.element;
                     }
-                    if (ul.is(":visible")) {
+                    if (div.is(":visible")) {
                         return;
                     }
 
-                    if (ul[0] && that._triggerEvent({ item: li[0], type: OPEN }) === false) {
+                    if (div[0] && that._triggerEvent({ item: li[0], type: OPEN }) === false) {
 
-                        if (!ul.find(".k-menu-group")[0] && ul.children(".k-item").length > 1) {
+                        if (!div.find(".k-menu-popup")[0] && div.children(".k-menu-group").children(".k-item").length > 1) {
                             var windowHeight = $(window).height(),
                                 setScrolling = function() {
-                                    ul.css({ maxHeight: windowHeight - (kendo._outerHeight(ul) - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto" });
+                                    div.css({ maxHeight: windowHeight - (kendo._outerHeight(div) - div.height()) - kendo.getShadows(div).bottom, overflow: "auto" });
                                 };
 
                             setScrolling();
                         } else {
-                            ul.css({ maxHeight: "", overflow: "" });
+                            div.css({ maxHeight: "", overflow: "visible" });
                         }
 
                         li.data(ZINDEX, li.css(ZINDEX));
@@ -1084,7 +1090,7 @@ var __meta__ = {
                             li.parent().siblings(scrollButtonSelector).css({ zIndex: ++nextZindex });
                         }
 
-                        popup = ul.data(KENDOPOPUP);
+                        popup = div.data(KENDOPOPUP);
                         var root = li.parent().hasClass(MENU),
                             parentHorizontal = root && horizontal,
                             directions = parseDirection(direction, root, isRtl),
@@ -1092,7 +1098,7 @@ var __meta__ = {
                             openEffects = effects !== undefined ? effects : "slideIn:" + getEffectDirection(direction, root);
 
                         if (!popup) {
-                            popup = ul.kendoPopup({
+                            popup = div.kendoPopup({
                                 activate: function() { that._triggerEvent({ item: this.wrapper.parent(), type: ACTIVATE }); },
                                 deactivate: function(e) {
                                     that._closing = false;
@@ -1141,14 +1147,14 @@ var __meta__ = {
                                 }
                             }).data(KENDOPOPUP);
 
-                            ul.closest(animationContainerSelector).removeAttr(ROLE);
+                            div.closest(animationContainerSelector).removeAttr(ROLE);
                         } else {
-                            popup = ul.data(KENDOPOPUP);
+                            popup = div.data(KENDOPOPUP);
                             popup.options.origin = directions.origin;
                             popup.options.position = directions.position;
                             popup.options.animation.open.effects = openEffects;
                         }
-                        ul.removeAttr("aria-hidden");
+                        div.removeAttr("aria-hidden");
                         li.attr(ARIA_EXPANDED, true);
 
                         that._configurePopupOverflow(popup, li);
@@ -1323,7 +1329,7 @@ var __meta__ = {
 
         _getPopup: function(li) {
             var that = this;
-            var popup = li.find(".k-menu-group:not(.k-list-container):not(.k-calendar-container):visible").first().data(KENDOPOPUP);
+            var popup = li.find(".k-menu-popup:not(.k-list-container):not(.k-calendar-container):visible").first().data(KENDOPOPUP);
             var overflowWrapper = that._overflowWrapper();
 
             if (!popup && overflowWrapper) {
@@ -1388,6 +1394,27 @@ var __meta__ = {
             }
         },
 
+        _wrapGroups: function() {
+            var that = this;
+
+            that.element.find("li > ul")
+                .filter(function() {
+                    return !$(this).parent().hasClass("k-menu-popup");
+                })
+                .wrap("<div class='k-menu-popup k-popup'></div>")
+                .parent("div")
+                .attr("aria-hidden", that.element.is(":visible"))
+                .hide();
+
+            that.element.find("ul").each(function() {
+                var group = $(this);
+                var id = kendo.guid();
+                group.attr("id", id)
+                    .closest("li")
+                    .attr("aria-controls", id);
+            });
+        },
+
         _updateClasses: function() {
             var element = this.element,
                 nonContentGroupsSelector = ".k-menu-init div ul",
@@ -1408,8 +1435,6 @@ var __meta__ = {
                    })
                    .addClass("k-group k-menu-group k-menu-group-md")
                    .attr(ROLE, "menu")
-                   .hide()
-                   .attr("aria-hidden", element.is(":visible"))
                    .parent("li")
                    .attr("aria-haspopup", "true")
                    .end()
@@ -1758,7 +1783,7 @@ var __meta__ = {
 
             if (target != that.wrapper[0] && !$(target).is(":kendoFocusable")) {
                 e.stopPropagation();
-                $(target).closest(".k-content").closest(".k-menu-group").closest(".k-item").addClass(FOCUSEDSTATE);
+                $(target).closest(".k-content").closest(".k-menu-popup").closest(".k-item").addClass(FOCUSEDSTATE);
                 that.wrapper.trigger("focus");
                 return;
             }
@@ -1815,7 +1840,7 @@ var __meta__ = {
                     that._click({ target: target[0], preventDefault: function() {}, enterKey: true });
                     if (hasChildren && !hoverItem.hasClass(DISABLEDSTATE)) {
                         that.open(hoverItem);
-                        that._moveHover(hoverItem, that._childPopupElement(hoverItem).children().first());
+                        that._moveHover(hoverItem, that._childPopupElement(hoverItem).children().find("li").first());
                     } else if (hoverItem.is("li") && hoverItem.attr("role") === "menuitemcheckbox") {
                         hoverItem.find(".k-checkbox").attr("checked", true);
                     } else {
@@ -1852,7 +1877,7 @@ var __meta__ = {
             if (!item || !item.length || !item[0].nodeType) {
                 return false;
             }
-            return item.children(".k-menu-group, div.k-animation-container").length > 0 ||
+            return item.children(".k-menu-group, .k-menu-popup, div.k-animation-container").length > 0 ||
                 (!!item.data(POPUP_OPENER_ATTR) && !!this._overflowWrapper().children(popupGroupSelector(item.data(POPUP_OPENER_ATTR))));
         },
 
@@ -1912,7 +1937,7 @@ var __meta__ = {
                 that.close(item);
             } else if (hasChildren && !item.hasClass(DISABLEDSTATE)) {
                 that.open(item);
-                nextItem = that._childPopupElement(item).children().first();
+                nextItem = that._childPopupElement(item).children().find("li").first();
             } else if (that.options.orientation == "horizontal") {
                 parentItem = that._findRootParent(item);
                 overflowWrapper = that._overflowWrapper();
@@ -1974,7 +1999,7 @@ var __meta__ = {
                     return;
                 } else {
                     that.open(item);
-                    nextItem = that._childPopupElement(item).children().first();
+                    nextItem = that._childPopupElement(item).children().find("li").first();
                 }
             } else {
                 nextItem = item.nextAll(itemSelector + exclusionSelector).eq(0);
@@ -2051,7 +2076,7 @@ var __meta__ = {
                 nextItem = item.parent().closest(".k-item");
 
                 if (nextItem.length === 0) {
-                    groupId = item.closest(".k-group").data("group");
+                    groupId = item.closest(".k-menu-popup").data("group");
                     nextItem = that.wrapper.find(".k-item[data-groupparent='" + groupId + "']");
                 }
 
@@ -2063,7 +2088,7 @@ var __meta__ = {
         },
 
         _childPopupElement: function(item) {
-            var popupElement = item.find(".k-menu-group");
+            var popupElement = item.find(".k-menu-popup");
             var wrapper = this._overflowWrapper();
             if (!popupElement.length && wrapper) {
                 popupElement = itemPopup(item, wrapper);
@@ -2288,9 +2313,11 @@ var __meta__ = {
                     return `<div ${contCssAttributes} tabindex='-1'>${contentHtml || ''}</div>`;
                 }),
                 group: template((data) =>
-                    `<ul class='${data.groupCssClass(data.group)}' ${data.groupAttributes(data.group)} role='menu' aria-hidden='true'>` +
+                    `<div class='${data.groupWrapperCssClass(data.group)}' ${data.groupAttributes(data.group)}>` +
+                    `<ul class='${data.groupCssClass(data.group)}' id='${data.groupId}' role='menu'>` +
                     `${data.renderItems(data)}` +
-                    "</ul>"
+                    "</ul>" +
+                    "</div>"
                 ),
                 itemWrapper: template((data) => {
                     var item = data.item;
@@ -2312,7 +2339,8 @@ var __meta__ = {
                         group = data.group,
                         subGroup = data.subGroup;
                     var contentHtml = fieldAccessor("content")(item);
-                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items ? "aria-haspopup='true'" : ''}` +
+                    var groupId = kendo.guid();
+                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items) ? "aria-controls='" + groupId + '"' : '' }' ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items ? "aria-haspopup='true'" : ''}` +
                         `${item.enabled === false ? "aria-disabled='true'" : ''}` +
                         kendo.attr("uid") + `='${item.uid}' ` +
                         (item.items && item.items.length > 0 ?
@@ -2323,7 +2351,7 @@ var __meta__ = {
                         ">" +
                         `${this.templates.itemWrapper(data)}` +
                         (item.hasChildren || item.items ?
-                            `${subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } })}`
+                            `${subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded }, groupId: groupId })}`
                             : (item.content || item.contentUrl || contentHtml ?
                             `${data.renderContent(data)}`
                             : '')

@@ -208,12 +208,12 @@
             assert.equal(menu.find("[aria-disabled=true] span:first").text(), "foo");
         });
 
-        it("hidden attribute is added to the group when created from html", function() {
+        it("hidden attribute is added to the menu when created from html", function() {
             menu = $("<ul><li>foo<ul><li>bar</li></ul></li></ul>")
                 .appendTo(Mocha.fixture)
                 .kendoMenu();
 
-            assert.isOk(menu.find(".k-group[aria-hidden=true]").length);
+            assert.isOk(menu.find(".k-menu-popup[aria-hidden=true]").length);
         });
 
         it("aria-activedescendant is added to the wrapper when item is focused", function() {
