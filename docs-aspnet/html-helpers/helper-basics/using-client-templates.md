@@ -217,6 +217,65 @@ For example, you can define an external client template for a [Grid column]({% s
 
 
 Also, you can integrate Telerik UI for {{ site.framework }} components in the external client templates by using the [HTML Helpers](#adding-html-helpers-inside-external-client-templates) {% if site.core %}or [Tag Helpers](adding-tag-helpers-inside-external-client-templates){% endif %}.
+
+### Adding HTML Helpers inside External Client Templates
+
+By default, {% if site.core %}[every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug fundamentals_core%}#deferred-initialization){% else %}[every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug fundamentals_aspnetmvc%}#deferred-initialization){% endif %}. If the helper declaration is placed inside an external Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
+
+    <script id="template" type="text/x-kendo-template">
+        @(Html.Kendo().NumericTextBox()
+              .Name("age")
+              .ToClientTemplate()
+        )
+    </script>
+    <div id="container"></div>
+    <script>
+        $(function () {
+           var template = kendo.template($("#template").html());
+           $("#container").append(template);
+        })
+    </script>
+
+{% if site.core %}
+
+### Adding Tag Helpers inside External Client Templates
+
+The .NET framework ignores any Tag Helpers that are within script tags. To compile them correctly, when placing a Tag Helper within a Kendo UI Template, set the type to `text/html` and add the `is-in-client-template="true"` attribute.
+
+The following example demonstrates how to include Chart TagHelpers in the TileLayout TagHelper.
+
+        <!-- container chart templates -->
+        <script id="downloads-template" type="text/html">
+            <kendo-chart name="downloads" is-in-client-template="true">
+                <series>
+                    <series-item type="ChartSeriesType.Line" data="new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }">
+                    </series-item>
+                </series>
+            </kendo-chart>
+        </script>
+        <script id="devices-template" type="text/html">
+            <kendo-chart name="devices" is-in-client-template="true">
+                <series>
+                    <series-item type="ChartSeriesType.Donut" auto-fit="true" data='new dynamic[] {
+                        new {category = "Asia",value = 30.8,color = "\\#006634"},
+                        new {category = "Europe",value = 69.2,color = "\\#90cc38"}}'>
+                    </series-item>
+                </series>
+            </kendo-chart>
+        </script>
+        <kendo-tilelayout name="tilelayout" columns="2" resizable="true" reorderable="true">
+            <containers>
+                <container body-template-id="downloads-template" col-span="1" row-span="1">
+                    <container-header text="Weekly Recap-Downloads" />
+                </container>
+                <container body-template-id="devices-template" col-span="1" row-span="1">
+                    <container-header text="Devices" />
+                </container>
+            </containers>
+        </kendo-tilelayout>
+
+{% endif %}
+
 ## Partial Client Templates
 
 As of the R1 SP1 2023 release, the majority of the Telerik UI for {{ site.framework }} components expose the ability to include arbitrary client template content within the boundaries of a Partial View by using the respective component's new `TemplateView` method.
@@ -259,7 +318,7 @@ The example below illustrates how to incorporate the Grid Toolbar's template con
         </columns>
         <toolbar client-template-view="@Html.Partial("_ToolbarTemplatePartial")">
         </toolbar>
-        <datasource page="0" type="DataSourceTagHelperType.Ajax" page-size="20" server-operation="false">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20" server-operation="false">
             <schema data="Data" total="Total" errors="Errors">
                 <model id="ProductID"></model>
             </schema>
@@ -288,74 +347,82 @@ The example below illustrates how to incorporate the Grid Toolbar's template con
     </div>
 ```
 
-### Adding HTML Helpers inside External Client Templates
-
-By default, {% if site.core %}[every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug fundamentals_core%}#deferred-initialization){% else %}[every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug fundamentals_aspnetmvc%}#deferred-initialization){% endif %}. If the helper declaration is placed inside an external Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
-
-    <script id="template" type="text/x-kendo-template">
-        @(Html.Kendo().NumericTextBox()
-              .Name("age")
-              .ToClientTemplate()
-        )
-    </script>
-    <div id="container"></div>
-    <script>
-        $(function () {
-           var template = kendo.template($("#template").html());
-           $("#container").append(template);
-        })
-    </script>
-
-{% if site.core %}
-
-### Adding Tag Helpers inside External Client Templates
-
-.NET framework ignores any Tag Helpers that are within script tags. To compile them correctly, when placing a Tag Helper within a Kendo UI Template, set the type to `text/html` and add the `is-in-client-template="true"` attribute.
-
-The following example demonstrates how to include Chart TagHelpers in the TileLayout TagHelper.
-
-        <!-- container chart templates -->
-        <script id="downloads-template" type="text/html">
-            <kendo-chart name="downloads" is-in-client-template="true">
-                <series>
-                    <series-item type="ChartSeriesType.Line" data="new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }">
-                    </series-item>
-                </series>
-            </kendo-chart>
-        </script>
-        <script id="devices-template" type="text/html">
-            <kendo-chart name="devices" is-in-client-template="true">
-                <series>
-                    <series-item type="ChartSeriesType.Donut" auto-fit="true" data='new dynamic[] {
-                        new {category = "Asia",value = 30.8,color = "\\#006634"},
-                        new {category = "Europe",value = 69.2,color = "\\#90cc38"}}'>
-                    </series-item>
-                </series>
-            </kendo-chart>
-        </script>
-        <kendo-tilelayout name="tilelayout" columns="2" resizable="true" reorderable="true">
-            <containers>
-                <container body-template-id="downloads-template" col-span="1" row-span="1">
-                    <container-header text="Weekly Recap-Downloads" />
-                </container>
-                <container body-template-id="devices-template" col-span="1" row-span="1">
-                    <container-header text="Devices" />
-                </container>
-            </containers>
-        </kendo-tilelayout>
-
-{% endif %}
-
-
 ## Content Security Policy (CSP) Templates
 
 As of the R1 SP1 2023 release, Telerik UI for {{ site.framework }} addresses the [content security policy issues]({% slug troubleshooting_content_security_policy_aspnetmvc %}) related to the `usafe-eval` directive for components except for the Spreadsheet.
 
-To create CSP-compatible templates, Telerik UI for {{ site.framework }} introduces an overload of the components template methods that accept JS function name. It allows you to define the template content by a client side handler. This way, you can prevent the components from being dependent on the `unsafe-eval` and reuse the templates within multiple components in different application pages.
+To remove the `unsafe-eval` keyword from the meta tag of your application, you must convert all client templates ([inline](#inline-client-templates), [external](#external-client-templates), and [partial](#partial-client-templates) templates) into CSP-compatible templates. 
+
+To create CSP-compatible templates, use any of the following approaches:
+
+* [Using Template component](#using-the-template-component)
+* [Using Client-Side handler](#using-client-side-handler)
+
+### Using the Template Component
+
+As of R2 2023 release, you can take advantage of the [Template component]({% slug htmlhelpers_overview_template %}) that provides options for integrating a variety of Telerik UI for {{ site.framework }} components and `HTML` code into the templates of the components. You can declare the desired UI component into the Template component configuration and use all options as they are available in the nested component itself.
+
+In the preceding code:
+
+* The `AddHtml()` of the Template component inserts `HTML` into the column template of the TreeList. The `Title` is a property of the `Model` that binds to the TreeList.
+* The `TemplateComponentName()` defines the name of a custom Popup editor template, which is configured through the Template component.
+
+```HtmlHelper
+    @(Html.Kendo().TreeList<EmployeeViewModel>()
+        .Name("treelist")
+        .Columns(columns =>
+        {
+            columns.Add().Field(e => e.Name)
+                .Template(Html.Kendo().Template().AddHtml("<span style='color: green;'>${data.Name} - ${data.Title}</span>"));
+        })
+        .Editable(e => e.Mode("popup").TemplateComponentName("CustomPopupEditor"))
+        //Other configuration
+    )
+```
+```CustomPopupEditor.cshtml
+    //~/Views/Shared/EditorTemplates/CustomPopupEditor.cshtml
+
+    @model EmployeeViewModel
+
+    @(Html.Kendo().Template()
+        .AddHtml("<div class=\"k-edit-field\">")
+        .AddComponent(tbox => tbox
+            .TextBoxFor(model => model.Name)
+            .Label(l => l.Content("Full name:").Floating(true))
+        )
+        .AddHtml("</div>")
+    )
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-treelist name="treelist">
+        <columns>
+            <treelist-column field="Name">
+                <treelist-column-template>
+                    <span style="color: green;">${data.Name} - ${data.Title}</span>
+                </treelist-column-template>
+            </treelist-column>
+        </columns>
+        <editable enabled="true" mode="TreeListEditMode.PopUp">
+            <editable-template>
+                <kendo-textbox name="Name">
+                    <textbox-label floating="true" content="Full name:"/>
+                </kendo-textbox>
+            </editable-template>
+        </editable>
+        <!--Other configuration-->
+    </kendo-treelist>
+```
+{% endif %}
+
+### Using Client-Side Handler
+
+Telerik UI for {{ site.framework }} introduces an overload of the components template methods that accept a `JavaScript` function name. It allows you to define the template content through a client-side handler. This way, you can prevent the components from being dependent on the `unsafe-eval` and reuse the templates within multiple components in different application pages.
 
 The example below demonstrates how to load the [item template of a ComboBox]({% slug htmlhelpers_combobox_templates_aspnetcore %}#item-template) through a function handler.
 
-{% if site.core %}
 ```HtmlHelper
     @(Html.Kendo().ComboBox()
         .Name("customers")
@@ -372,6 +439,7 @@ The example below demonstrates how to load the [item template of a ComboBox]({% 
         .TemplateHandler("itemTemplateHandler")
     )
 ```
+{% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
@@ -386,30 +454,13 @@ The example below demonstrates how to load the [item template of a ComboBox]({% 
         </datasource>
     </kendo-combobox>
 ```
-{% else %}
-```HtmlHelper
-    @(Html.Kendo().ComboBox()
-        .Name("customers")
-        .DataTextField("ContactName")
-        .DataValueField("CustomerID")
-        .HtmlAttributes(new { style = "width: 100%;" })
-        .DataSource(source =>
-        {
-            source.Read(read =>
-            {
-                read.Action("Template_GetCustomers", "ComboBox");
-            });
-        })
-        .TemplateHandler("itemTemplateHandler")
-    )
-```
 {% endif %}
 ```scripts.js
     function itemTemplateHandler(data) {
         if(data.Country == "Germany"){
-            return `<div><b>${data.ContactName}</b></div>`
+            return `<div><b>${data.ContactName}</b></div>`;
         } else {
-            return `<div><i>${ContactTitle}</i> - <b>${ContactName}</b></div>`
+            return `<div><i>${data.ContactTitle}</i> - <b>${data.ContactName}</b></div>`;
         }
     }
 ```
@@ -417,8 +468,8 @@ The example below demonstrates how to load the [item template of a ComboBox]({% 
 ## See Also
 
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_aspnetmvc%})
+* [Template Overview]({% slug htmlhelpers_overview_template %})
 * [Kendo UI Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview)
-* [Kendo UI Templates Essentials](https://docs.telerik.com/kendo-ui/framework/templates/essentials)
 * [Getting Started with the Kendo UI Inline Templates](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline)
 * [Getting Started with Kendo UI External Templates](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external)
 * [Getting Started with Kendo UI Content Security Policy (CSP) Templates](https://docs.telerik.com/kendo-ui/framework/templates/get-started-csp-templates)

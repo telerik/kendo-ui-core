@@ -680,6 +680,11 @@ defaults:
         path: "html-helpers/scheduling/scheduler"
     values:
         title_prefix: "ASP.NET MVC Scheduler Component"
+-   
+    scope:
+        path: "html-helpers/template"
+    values:
+        title_prefix: "ASP.NET MVC Template Component"
 
 # Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
 # "foo": "Bar"
