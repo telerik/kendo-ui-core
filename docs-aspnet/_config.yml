@@ -675,8 +675,9 @@ navigation:
         title: "Validator"
      "*window":
         title: "Window"
-     "*templates":
-        title: "Templates"
+     "*template":
+        title: "Template"
+        isNew: true
      "*switch":
         title: "Switch"
      "*splitbutton":
@@ -1247,6 +1248,11 @@ defaults:
         path: "html-helpers/scheduling/scheduler"
     values:
         title_prefix: "ASP.NET Core Scheduler Component"
+-
+    scope:
+        path: "html-helpers/template"
+    values:
+        title_prefix: "ASP.NET Core Template Component"
 
 type_links:
     "kendo.Class": "/api/javascript/class"
