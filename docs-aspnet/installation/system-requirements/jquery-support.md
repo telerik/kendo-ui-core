@@ -17,7 +17,7 @@ The Kendo UI library is based on [jQuery](http://jquery.com/) and all Kendo UI b
 
 ## Supported Versions
 
-The current official {{ site.product }} version requires jQuery version 1.12.4. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing {{ site.product }}. In such cases, use the previous jQuery version until the release of the next official {{ site.product }} version that resolves the issue is released. 
+The current official {{ site.product }} version requires jQuery version 1.12.4. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing {{ site.product }}. In such cases, use the previous jQuery version until the release of the next official {{ site.product }} version that resolves the issue is released.
 
 Generally, the {{ site.product }} service packs and their related major releases ship with the same jQuery version. The jQuery version changes only with new major releases.
 
@@ -26,6 +26,7 @@ The following table provides a list of the jQuery versions that are compatible w
 {% if site.core %}
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [UI for ASP.NET Core 2023.2.606 (R2 2023)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r2-2023-(version-2023-2-606))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.7.0|
 | [UI for ASP.NET Core 2023.1.117 (R1 2023)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r1-2023-(version-2023-1-117))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
 | [UI for ASP.NET Core 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r3-2022-(version-2022-3-913))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
 | [UI for ASP.NET Core 2022.2.510 (R2 2022)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r2-2022-(version-2022-2-510))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
@@ -51,6 +52,7 @@ The following table provides a list of the jQuery versions that are compatible w
 {% else %}
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [UI for ASP.NET MVC 2023.2.606 (R2 2023)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2023-(version-2023-2-606))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.7.0|
 | [UI for ASP.NET MVC 2023.1.117 (R1 2023)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r1-2023-(version-2023-1-117))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
 | [UI for ASP.NET MVC 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2022-(version-2022-3-913))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
 | [UI for ASP.NET MVC 2022.2.510 (R2 2022)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2022-(version-2022-2-510))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
