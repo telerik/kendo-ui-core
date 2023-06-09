@@ -2254,7 +2254,7 @@ code_lang: true
 has_kb_portal: true
 has_cta_panels: true
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs
-download: https://www.telerik.com/download/kendo-ui
+download: https://www.telerik.com/try/kendo-ui
 nav:
   "Demos": https://demos.telerik.com/kendo-ui/
   "Release History": https://www.telerik.com/support/whats-new/kendo-ui/release-history
