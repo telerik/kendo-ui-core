@@ -728,7 +728,7 @@ var __meta__ = {
                 defs.push(deferred);
             });
 
-            $.when.apply($, defs).then(function() {
+            $.when.apply($, defs).done(function() {
                 result.resolve();
             });
 

@@ -79,20 +79,20 @@ var __meta__ = {
             <a tabindex="-1" href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>
             <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</a>
         </div>`,
-        MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages }) => `<div class="k-calendar-header k-hstack">
+        MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages, isRtl }) => `<div class="k-calendar-header k-hstack">
             <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-flat-base k-rounded-md">
                 <span class="k-button-text"></span>
             </button>
             <span class="k-spacer"></span>
             <span class="k-calendar-nav">
-                <button tabindex="-1" ${actionAttr}="prev" class="k-calendar-nav-prev k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
-                    ${kendo.ui.icon({ icon: "chevron-left", iconClass: "k-button-icon" })}
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
+                    ${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}
                 </button>
                 <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat k-button-flat-primary k-rounded-md">
                     <span class="k-button-text">${messages.today}</span>
                 </button>
-                <button tabindex="-1" ${actionAttr}="next" class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
-                    ${kendo.ui.icon({ icon: "chevron-right", iconClass: "k-button-icon" })}
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
+                    ${kendo.ui.icon({ icon: `chevron-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}
                 </button>
             </span>
         </div>`;

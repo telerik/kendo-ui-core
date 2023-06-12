@@ -1018,7 +1018,7 @@ import "./kendo.icons.js";
                 name: "Alert",
                 modal: true,
                 actions: [{
-                    text: () => `${encode(messages.okText)}`
+                    text: ({ messages }) => `${encode(messages.okText)}`
                 }]
             }
         });

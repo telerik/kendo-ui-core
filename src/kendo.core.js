@@ -5102,7 +5102,7 @@ function pad(number, digits, end) {
     var roundedValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'] ];
     //var alignValues = [ ['top start', 'top-start'], ['top end', 'top-end'], ['bottom start', 'bottom-start'], ['bottom end', 'bottom-end'] ];
     var positionModeValues = [ 'fixed', 'static', 'sticky', 'absolute' ];
-    var resizeValues = [ 'both', 'horizontal', 'vertical' ];
+    var resizeValues = [ ['both', 'resize'], ['horizontal', 'resize-x'], ['vertical', 'resize-y'] ];
     var overflowValues = [ 'auto', 'hidden', 'visible', 'scroll', 'clip' ];
 
     kendo.cssProperties = (function() {
@@ -5189,7 +5189,7 @@ function pad(number, digits, end) {
                 } else if (propName === "rounded") {
                     prefix = "k-rounded-";
                 } else if (propName === "resize") {
-                    prefix = "k-resize-";
+                    prefix = "k-";
                 } else if (propName === "overflow") {
                     prefix = "k-overflow-";
                 } else {

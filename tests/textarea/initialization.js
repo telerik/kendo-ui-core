@@ -179,12 +179,28 @@
             assert.isOk(widget.wrapper.hasClass("k-rounded-lg"));
         });
 
-        it("styling options - resize", function() {
+        it("styling options - resize both", function() {
             var widget = new TextArea(textarea, {
                 resize: "both"
             });
 
-            assert.isOk(widget.wrapper.hasClass("k-resize-both"));
+            assert.isOk(widget.wrapper.hasClass("k-resize"));
+        });
+
+        it("styling options - resize horizontal", function() {
+            var widget = new TextArea(textarea, {
+                resize: "horizontal"
+            });
+
+            assert.isOk(widget.wrapper.hasClass("k-resize-x"));
+        });
+
+        it("styling options - resize vertical", function() {
+            var widget = new TextArea(textarea, {
+                resize: "vertical"
+            });
+
+            assert.isOk(widget.wrapper.hasClass("k-resize-y"));
         });
 
         it("styling options - resize none", function() {
