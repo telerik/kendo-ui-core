@@ -24,9 +24,9 @@ How can I bind the TreeList to Hierarchical data and select the folder path when
 
 ## Solution
 
-To achieve the desired scenario: 
+To achieve the desired scenario:
 
-1. Customize the TreeList rows by using the `RowTemplateId` and `AltRowTemplateId` methods. 
+1. Customize the TreeList rows by using the `RowTemplateId` and `AltRowTemplateId` methods.
 1. Enable the `Selectable` option to allow multiple row selection: `.Selectable(s => s.Mode(TreeListSelectionMode.Multiple))`.
 1. Handle the `change` event of the TreeList, get the selected node, and manually select its parent nodes.
 
@@ -59,7 +59,11 @@ To achieve the desired scenario:
                     <span class="k-icon k-i-none"></span>
                 #}#
                 #if(data.hasChildren){#
-                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                    # if(data.model.expanded) { #
+                      #= kendo.ui.icon("caret-alt-down") #
+                	# } else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+                	# } #
                 #}#
                 <span class="k-sprite #: data.model.SpriteCssClass #"></span>
                 <span> #: data.model.Name # </span>
@@ -74,7 +78,11 @@ To achieve the desired scenario:
                     <span class="k-icon k-i-none"></span>
                 #}#
                 #if(data.hasChildren){#
-                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                    # if(data.model.expanded) { #
+                      #= kendo.ui.icon("caret-alt-down") #
+                	# } else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+                	# } #
                 #}#
                 <span class="k-sprite #: data.model.SpriteCssClass #"></span>
                 <span> #: data.model.Name # </span>
@@ -85,7 +93,7 @@ To achieve the desired scenario:
     <script>
         function findParentItems(allParentRows, selectedDataItem, selectedParentRows, level) {
             var treeList = $("#treelist").data("kendoTreeList");
-            
+
             for(var i = 0; i < allParentRows.length; i++) {
                 var currentDataItem = treeList.dataItem(allParentRows[i]);
                 var addedItem = $.inArray( allParentRows[i], selectedParentRows );

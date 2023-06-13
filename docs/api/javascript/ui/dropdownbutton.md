@@ -454,6 +454,24 @@ Collection of the items to show.
 
 Returns the menu items as DOM elements wrapped in jQuery collection.
 
+#### Example
+
+```Dojo
+    <button id="dropdownbutton" type="button">Button</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items:[
+                { id: "item1", text: "Item 1" },
+                { id: "item2", text: "Item 2" }
+            ]
+        });
+        var button = $("#dropdownbutton").data("kendoDropDownButton");
+        
+        var items = button.items();
+        console.log(items);
+    </script>
+```
+
 #### Returns
 
 `jQuery`

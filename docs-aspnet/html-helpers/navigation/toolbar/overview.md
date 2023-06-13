@@ -125,9 +125,9 @@ The following example demonstrates the basic configuration of the ToolBar.
             <item type="CommandType.Button" text="Toggle Button" togglable="true" />
             <item type="CommandType.SplitButton" text="Insert">
                 <menu-buttons>
-                    <toolbar-button text="Insert above" icon="insert-up" />
+                    <toolbar-button text="Insert above" icon="insert-top" />
                     <toolbar-button text="Insert between" icon="insert-middle" />
-                    <toolbar-button text="Insert below" icon="insert-down" />
+                    <toolbar-button text="Insert below" icon="insert-bottom" />
                 </menu-buttons>
             </item>
             <item type="CommandType.Separator" />

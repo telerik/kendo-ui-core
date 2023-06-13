@@ -39,9 +39,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
                 "type" => "splitButton",
                 "text" => "Insert",
                 "menuButtons" => array(
-                    array("text" => "Insert above", "icon" => "insert-n"),
-                    array("text" => "Insert between", "icon" => "insert-m"),
-                    array("text" => "Insert below", "icon" => "insert-s")
+                    array("text" => "Insert above", "icon" => "insert-top"),
+                    array("text" => "Insert between", "icon" => "insert-middle"),
+                    array("text" => "Insert below", "icon" => "insert-bottom")
                 )
             ),
 

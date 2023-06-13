@@ -9184,6 +9184,7 @@ declare namespace kendo.ui {
     interface PopoverAction {
         text?: string;
         click?: Function;
+        icon?: Function;
         iconClass?: Function;
     }
 
@@ -12469,6 +12470,7 @@ declare namespace kendo.ui {
 
     interface TreeListColumnCommandItem {
         className?: string | undefined;
+        icon?: string | undefined;
         imageClass?: string | undefined;
         click?: Function | undefined;
         name?: string | undefined;
@@ -12687,6 +12689,7 @@ declare namespace kendo.ui {
 
     interface TreeListToolbarItem {
         click?: Function | undefined;
+        icon?: string | undefined;
         imageClass?: string | undefined;
         name?: string | undefined;
         text?: string | undefined;

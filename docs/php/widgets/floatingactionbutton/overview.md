@@ -83,7 +83,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
         $fab->align("bottom center")
                 ->text("Bookmark")
-                ->icon("bookmark")
+                ->icon("star")
                 ->click("onClick");
 
         <script>

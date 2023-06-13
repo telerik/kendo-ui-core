@@ -53,11 +53,12 @@ A handler function to be called when the action button is clicked
         });
     </script>
 
-### actions.iconClass `Function`
+### actions.icon `String`
 
-The CSS class that will be used to display the icon inside the button
+The name of the icon to display inside the button.
 
-#### Example - set the click handler
+#### Example - set the icon name
+
     <span id="target">
         Some Content
     </span>
@@ -69,7 +70,30 @@ The CSS class that will be used to display the icon inside the button
             header: "Header text",
             body: "Content description",
             actionsLayout: "center",
-            actions: [{ text: "refresh", iconClass: "k-icon k-i-refresh" }, { iconClass: "k-icon k-i-edit" }]
+            actions: [{ text: "refresh", icon: "arrow-rotate-cw", iconClass: "refresh-icon" }, { icon: "pencil", iconClass: "edit-icon" }]
+          });
+        });
+    </script>
+
+
+### actions.iconClass `String`
+
+The CSS class that will be added to the icon element inside the button.
+
+#### Example - set the iconClass
+
+    <span id="target">
+        Some Content
+    </span>
+
+    <script>
+        $(document).ready(function() {
+          $("#target").kendoPopover({
+            showOn: "click",
+            header: "Header text",
+            body: "Content description",
+            actionsLayout: "center",
+            actions: [{ text: "refresh", icon: "arrow-rotate-cw", iconClass: "refresh-icon" }, { icon: "pencil", iconClass: "edit-icon" }]
           });
         });
     </script>

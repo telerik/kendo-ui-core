@@ -11,7 +11,7 @@ This article demonstrates how to add the Telerik UI Toolbar for {{ site.framewor
 
 For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)        
+```tab-HtmlHelper(csthml)
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -65,7 +65,7 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
             });
         });
     </script>
-	
+
 ```
 {% if site.core %}
 ```tab-TagHelper(cshtml)
@@ -78,9 +78,9 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
             </item>
             <item text="Insert" type="CommandType.SplitButton">
                 <menu-buttons>
-                    <toolbar-button icon="insert-up" text="Insert above" />
+                    <toolbar-button icon="insert-top" text="Insert above" />
                     <toolbar-button icon="insert-middle" text="Insert between" />
-                    <toolbar-button icon="insert-down" text="Insert below" />
+                    <toolbar-button icon="insert-bottom" text="Insert below" />
                 </menu-buttons>
             </item>
             <item type="CommandType.Separator">
@@ -113,7 +113,7 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
             </item>
         </toolbar-items>
     </kendo-toolbar>
-    
+
     <script>
         $(document).ready(function () {
             $("#dropdown").kendoDropDownList({
@@ -132,11 +132,11 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
     </script>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
-	
+```tab-PageModel(cshtml.cs)
+
     public void OnGet()
     {
 
     }
-    
+
 ```

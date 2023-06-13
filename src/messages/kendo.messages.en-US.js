@@ -1353,10 +1353,45 @@ $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
 });
 }
 
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+kendo.ui.TimePicker.prototype.options.messages =
+$.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+    set: "Set",
+    cancel: "Cancel",
+    hour: "hour",
+    minute: "minute",
+    second: "second",
+    millisecond: "millisecond",
+    now: "Now"
+});
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+kendo.ui.DateTimePicker.prototype.options.messages =
+$.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+    set: "Set",
+    cancel: "Cancel",
+    hour: "hour",
+    minute: "minute",
+    second: "second",
+    millisecond: "millisecond",
+    now: "Now",
+    date: "Date",
+    time: "Time",
+    today: "Today",
+    weekColumnHeader: ""
+});
+}
+
 /* Calendar */
 if (kendo.ui.Calendar) {
 kendo.ui.Calendar.prototype.options.messages =
 $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+    "today": "Today",
     "weekColumnHeader": "",
     "navigateTo": "Navigate to ",
     "parentViews": {

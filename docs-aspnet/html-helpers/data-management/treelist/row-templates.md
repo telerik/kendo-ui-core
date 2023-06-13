@@ -107,7 +107,7 @@ Additionally, for the expand/collapse icons to apear, you must create SVG icons 
 
 The TreeList in versions of {{ site.product_short }} prior to R1 2023 SP1 (2023.1.314) has a different rendering. SVG icons are not used in the old version, so creating SVG icons in the `DataBound` event handler is not applicable. However, the templates should be declared as shown below, because of the difference in the classes between the old and the new rendering of the component:
 
-```   
+```
 <script id="rowTemplate" type="text/x-kendo-template">
     <tr data-uid='#: data.model.uid #' role="row">
     <td role="gridcell">
@@ -115,7 +115,11 @@ The TreeList in versions of {{ site.product_short }} prior to R1 2023 SP1 (2023.
                 <span class="k-icon k-i-none"></span>
             #}#
             #if(data.hasChildren){#
-                <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                # if(data.model.expanded) { #
+                    #= kendo.ui.icon("caret-alt-down") #
+                # } else { #
+                    #= kendo.ui.icon("caret-alt-right") #
+                # } #
             #}#
        <div class='employee-photo'
         style='background-image: url(@Url.Content("~/content/web/treelist/people")/#: data.model.EmployeeId #.jpg);'></div>
@@ -137,7 +141,11 @@ The TreeList in versions of {{ site.product_short }} prior to R1 2023 SP1 (2023.
                 <span class="k-icon k-i-none"></span>
             #}#
             #if(data.hasChildren){#
-                <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                # if(data.model.expanded) { #
+                    #= kendo.ui.icon("caret-alt-down") #
+                # } else { #
+                    #= kendo.ui.icon("caret-alt-right") #
+                # } #
             #}#
        <div class='employee-photo'
         style='background-image: url(@Url.Content("~/content/web/treelist/people")/#: data.model.EmployeeId #.jpg);'></div>

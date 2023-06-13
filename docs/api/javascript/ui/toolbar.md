@@ -1025,7 +1025,7 @@ Defines a CSS class (or multiple classes separated by spaces) which will be used
     <script>
         $("#toolbar").kendoToolBar({
             items: [
-                { type: "button", text: "Foo", spriteCssClass: "tick" }
+                { type: "button", text: "Foo", icon: "check", spriteCssClass: "tick-icon" }
             ]
         });
     </script>

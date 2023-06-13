@@ -22,10 +22,10 @@ To specify a custom Remove icon, use the [`removeIcon`](api/javascript/ui/chip/c
 ```dojo
 	<span id="chip"></span>
 
-	<script>    
+	<script>
 	    $("#chip").kendoChip({
             removable: true,
-            removeIcon: "close",
+            removeIcon: "x",
             label: "Close"
         });
 	</script>
@@ -40,7 +40,7 @@ The `avatarClass` property allows you to define a CSS class or multiple classes 
 ```dojo
 	<span id="chip"></span>
 
-	<script>    
+	<script>
 	    $("#chip").kendoChip({
             avatarClass: "maria",
             label: "Maria"

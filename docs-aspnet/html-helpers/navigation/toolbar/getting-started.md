@@ -48,9 +48,9 @@ For the custom Format dropdown tool, use a template item. Add an input element i
             items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true);
             items.Add().Type(CommandType.SplitButton).Text("Insert").MenuButtons(menuButtons =>
             {
-                menuButtons.Add().Text("Insert above").Icon("insert-up");
+                menuButtons.Add().Text("Insert above").Icon("insert-top");
                 menuButtons.Add().Text("Insert between").Icon("insert-middle");
-                menuButtons.Add().Text("Insert below").Icon("insert-down");
+                menuButtons.Add().Text("Insert below").Icon("insert-bottom");
             });
             items.Add().Type(CommandType.Separator);
             items.Add().Template("<label>Format:</label>");
@@ -91,7 +91,7 @@ For the custom Format dropdown tool, use a template item. Add an input element i
 {% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
- 
+
     <kendo-toolbar name="ToolBar">
         <toolbar-items>
             <item text="Button" type="CommandType.Button">
@@ -100,11 +100,11 @@ For the custom Format dropdown tool, use a template item. Add an input element i
             </item>
             <item text="Insert" type="CommandType.SplitButton">
                 <menu-buttons>
-                    <toolbar-button icon="insert-up" text="Insert above">
+                    <toolbar-button icon="insert-top" text="Insert above">
                     </toolbar-button>
                     <toolbar-button icon="insert-middle" text="Insert between">
                     </toolbar-button>
-                    <toolbar-button icon="insert-down" text="Insert below">
+                    <toolbar-button icon="insert-bottom" text="Insert below">
                     </toolbar-button>
                 </menu-buttons>
             </item>

@@ -38,11 +38,11 @@ The following example demonstrates how to define the SplitButton.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-splitbutton name="splitButton" text="Paste" icon="paste">
+    <kendo-splitbutton name="splitButton" text="Paste" icon="clipboard">
         <splitbutton-items>
-            <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
-            <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
-            <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
+            <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
+            <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
+            <item id="paste-markdown" text="Paste Markdown" icon="clipboard-markdown"></item>
             <item id="paste-default" text="Set Default Paste"></item>
         </splitbutton-items>
     </kendo-splitbutton>

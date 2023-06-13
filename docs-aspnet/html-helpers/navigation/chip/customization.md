@@ -33,7 +33,7 @@ To specify a custom **Remove** icon, use the [`RemoveIcon`](/api/Kendo.Mvc.UI.Fl
 
     <kendo-chip name="chip"
                 removable="true"
-                removable-icon="close"
+                removable-icon="x"
                 label="Close">
     </kendo-chip>
 ```

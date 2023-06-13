@@ -309,7 +309,7 @@ Custom commands are supported by specifying the [`click`](/api/javascript/ui/tre
               click: function(e) {
                 // command button click handler
               },
-              imageClass: "k-i-info"
+              icon: "info-circle"
             },
             { name: "destroy" } // built-in "destroy" command
           ]}
@@ -354,6 +354,34 @@ The CSS class that is applied to the command button.
       }
     </style>
 
+### columns.command.icon `String`
+
+Specifies the icon's name of the command button.
+
+#### Example - setting the CSS class of the command icon
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "details",
+              text: "Details",
+              icon: "info-circle",
+              imageClass: "details-info"
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
 ### columns.command.imageClass `String`
 
 The CSS class that is applied to the icon span of the command button.
@@ -370,7 +398,8 @@ The CSS class that is applied to the icon span of the command button.
             {
               name: "details",
               text: "Details",
-              imageClass: "k-i-info"
+              icon: "info-circle",
+              imageClass: "details-info"
             }
           ]}
         ],
@@ -431,7 +460,7 @@ The name of the command. Commands can be built-in ("edit", "createChild" and "de
             {
               name: "details",
               text: "Details",
-              imageClass: "k-i-info"
+              icon: "info-circle"
             }
           ]}
         ],
@@ -444,7 +473,7 @@ The name of the command. Commands can be built-in ("edit", "createChild" and "de
 
 ### columns.command.text `String`
 
-The text that is displayed by the command button. If not set, the [`name`](/api/javascript/ui/treelist#configuration-columns.command.name) option is used as the button text.
+The text that is displayed by the command button. If not set, the [`name`](/api/javascript/ui/treelist#configuration-columns.command.name) option is used as the button text. To have an icon button with no text, you can set the `text` property to an empty string.
 
 #### Example - customizing the text of the command
 
@@ -458,6 +487,11 @@ The text that is displayed by the command button. If not set, the [`name`](/api/
             {
               name: "custom",
               text: "Details"
+            },
+            {
+              name: "details",
+              icon: "info-circle",
+              text: ""
             }
           ]}
         ],
@@ -2664,7 +2698,7 @@ If set to `true` the TreeList will export all pages of data. By default the Tree
         ],
         excel: {
           allPages: true
-        },        
+        },
         pageable: {
           pageSize: 10
         },
@@ -5695,6 +5729,27 @@ The `click` handler of the toolbar command. Used for custom toolbar commands.
       });
     </script>
 
+### toolbar.icon `String`
+
+Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
+
+#### Example - specifying the name of the command
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        toolbar: [{name: "custom", text: "About", icon: "info-circle", imageClass: "custom-info" }],
+        columns: [
+          "lastName",
+          "position"
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+        ]
+      });
+    </script>
+
 ### toolbar.imageClass `String`
 
 A class name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a class name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
@@ -5704,7 +5759,7 @@ A class name that will be rendered inside the toolbar button. When you set this 
     <div id="treeList"></div>
     <script>
       $("#treeList").kendoTreeList({
-        toolbar: [{name: "custom", text: "About", imageClass: "k-i-info" }],
+        toolbar: [{name: "custom", text: "About", icon: "info-circle", imageClass: "custom-info" }],
         columns: [
           "lastName",
           "position"

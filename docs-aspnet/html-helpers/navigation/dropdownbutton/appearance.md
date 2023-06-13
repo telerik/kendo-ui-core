@@ -49,11 +49,11 @@ The default `Size` value is `Medium`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="paste" size="ComponentSize.Medium">
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="clipboard" size="ComponentSize.Medium">
         <dropdownbutton-items>
-            <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
-            <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
-            <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
+            <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
+            <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
+            <item id="paste-markdown" text="Paste Markdown" icon="clipboard-markdown"></item>
         </dropdownbutton-items>
     </kendo-dropdownbutton>
 ```
@@ -85,11 +85,11 @@ The default `FillMode` value is `Solid`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="paste" fill-mode="FillMode.Solid">
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="clipboard" fill-mode="FillMode.Solid">
         <dropdownbutton-items>
-            <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
-            <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
-            <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
+            <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
+            <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
+            <item id="paste-markdown" text="Paste Markdown" icon="clipboard-markdown"></item>
         </dropdownbutton-items>
     </kendo-dropdownbutton>
 ```
@@ -128,11 +128,11 @@ The default `ThemeColor` value is `Base`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="paste" theme-color="ThemeColor.Base">
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="clipboard" theme-color="ThemeColor.Base">
         <dropdownbutton-items>
-            <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
-            <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
-            <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
+            <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
+            <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
+            <item id="paste-markdown" text="Paste Markdown" icon="clipboard-markdown"></item>
         </dropdownbutton-items>
     </kendo-dropdownbutton>
 ```
@@ -165,11 +165,11 @@ The default `Rounded` value is `Medium`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="paste" rounded="Rounded.Medium">
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="clipboard" rounded="Rounded.Medium">
         <dropdownbutton-items>
-            <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
-            <item id="paste-html" text="Paste as HTML" icon="paste-as-html"></item>
-            <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown"></item>
+            <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
+            <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
+            <item id="paste-markdown" text="Paste Markdown" icon="clipboard-markdown"></item>
         </dropdownbutton-items>
     </kendo-dropdownbutton>
 ```

@@ -33,8 +33,8 @@ The following example demonstrates how to define a ButtonGroup in the ToolBar co
         <toolbar-items>
             <item type="CommandType.ButtonGroup" id="btnGroup">
                 <buttons>
-                    <toolbar-button text="Prev" icon="arrow-w"></toolbar-button>
-                    <toolbar-button text="Next" icon="arrow-e"></toolbar-button>
+                    <toolbar-button text="Prev" icon="caret-alt-left"></toolbar-button>
+                    <toolbar-button text="Next" icon="caret-alt-right"></toolbar-button>
                 </buttons>
             </item>
         </toolbar-items>

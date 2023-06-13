@@ -68,7 +68,7 @@ In the `drop` event handler of the TreeView, get the dropped node and add it to 
 	});
 
 	function onDrop(e){          
-        if($(e.dropTarget).hasClass('k-list-scroller')){
+        if($(e.dropTarget).hasClass('k-list-content')){
           var item = e.sender.dataItem(e.sourceNode);         
           var listbox = $('#optional').data('kendoListBox');         
           listbox.add(item)

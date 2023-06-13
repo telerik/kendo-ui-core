@@ -13,7 +13,7 @@ Represents the Kendo UI SplitButton widget. Inherits from [Widget](/api/javascri
 
 ## Configuration
 
-### arrowIcon `String` *(default: 'arrow-s')*
+### arrowIcon `String` *(default: 'caret-alt-down')*
 
 The icon rendered for the arrow button of the **SplitButton**.
 
@@ -26,7 +26,7 @@ The icon rendered for the arrow button of the **SplitButton**.
             { text: "item 1" },
             { text: "item 2" }
         ],
-        arrowIcon: "arrow-n"
+        arrowIcon: "caret-alt-up"
     });
     </script>
 
@@ -320,7 +320,7 @@ Controls the main color applied to the button. Valid values are:  `"base"`, `"pr
         });
     </script>
 
-### messages `Object` 
+### messages `Object`
 
 Allows localization of the strings that are used in the widget.
 
@@ -339,7 +339,7 @@ Allows localization of the strings that are used in the widget.
         });
     </script>
 
-### messages.labelSuffix `String` 
+### messages.labelSuffix `String`
 
 Controls the label suffix that will be concatenated to the button's text and used for the aria-label attribute.
 
@@ -400,7 +400,7 @@ Collection of the items to disabled/enabled.
             ]
         });
         var button = $("#splitbutton").data("kendoSplitButton");
-        
+
         button.enable(false, "#item1");
     </script>
 
@@ -415,7 +415,7 @@ Collection of the items to disabled/enabled.
             ]
         });
         var button = $("#splitbutton").data("kendoSplitButton");
-        
+
         button.enable(false, $("#item1, #item2"));
     </script>
 
@@ -440,7 +440,7 @@ Collection of the items to hide.
             ]
         });
         var button = $("#splitbutton").data("kendoSplitButton");
-        
+
         button.hide($("#item1"));
     </script>
 
@@ -465,7 +465,7 @@ Collection of the items to show.
             ]
         });
         var button = $("#splitbutton").data("kendoSplitButton");
-        
+
         button.show($("#item1"));
     </script>
 
@@ -492,7 +492,7 @@ Opens the button menu.
             ]
         });
         var button = $("#splitbutton").data("kendoSplitButton");
-        
+
         button.open();
     </script>
 
@@ -511,7 +511,7 @@ Closes the button menu.
             ]
         });
         var button = $("#splitbutton").data("kendoSplitButton");
-        
+
         button.close();
     </script>
 
@@ -533,7 +533,7 @@ The DOM element fired the event wrapped in jQuery object.
 
 ##### e.id `String`
 
-The id of the element, which fired the event, wrapped in jQuery object. 
+The id of the element, which fired the event, wrapped in jQuery object.
 
 #### Example - subscribe to the "click" event during initialization
 
@@ -568,7 +568,7 @@ The id of the element, which fired the event, wrapped in jQuery object.
 
 ### open
 
-Fires when the menu button is opened. 
+Fires when the menu button is opened.
 
 #### Example
 
@@ -587,7 +587,7 @@ Fires when the menu button is opened.
 
 ### close
 
-Fires when the menu button is closed. 
+Fires when the menu button is closed.
 
 #### Example
 

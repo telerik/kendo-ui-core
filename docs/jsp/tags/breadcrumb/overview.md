@@ -62,11 +62,11 @@ The icons rendered for each element after the root icon. It is also clickable an
 
 ### Delimiter Icon
 
-The icons that separate the items of the Breadcrumb. 
+The icons that separate the items of the Breadcrumb.
 
 The example below demonstrates how you can alter the different icons.
 
-        <kendo:breadcrumb name="breadcrumb" delimiterIcon="line">
+        <kendo:breadcrumb name="breadcrumb" delimiterIcon="shape-line">
 			<kendo:breadcrumb-items>
 				<kendo:breadcrumb-item type="rootitem" href="https://demos.telerik.com/jsp-ui/" text="All Components" showText="true" icon="globe"></kendo:breadcrumb-item>
 				<kendo:breadcrumb-item type="item" href="/breadcrumb" text="Breadcrumb" showText="true" icon="gear" showIcon="true"></kendo:breadcrumb-item>
@@ -125,7 +125,7 @@ You are able to reference an existing Breadcrumb instance via the [`jQuery.data(
 				<kendo:breadcrumb-item type="item" href="/index" text="Basic Usage" showText="true"></kendo:breadcrumb-item>
 			</kendo:breadcrumb-items>
 		</kendo:breadcrumb>
-    
+
     // Put this after your Kendo Breadcrumb tag declaration
     <script>
     $(function() {

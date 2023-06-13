@@ -34,7 +34,7 @@ The following example demonstrates how to configure different icons.
     <kendo-stepper name="stepper">
         <steps>
             <step label="First" icon="home"></step>
-            <step label="Second" icon="attachment"></step>
+            <step label="Second" icon="paperclip"></step>
             <step label="Third" icon="save"></step>
         </steps>
     </kendo-stepper>
