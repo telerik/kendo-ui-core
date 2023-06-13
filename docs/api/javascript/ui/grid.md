@@ -9599,7 +9599,7 @@ The jQuery object which represents the grid footer element.
         columns: [
           { field: "name" },
           { field: "age",
-           footerTemplate: ({ age }) => `Min: ${encode(min)} Max: ${encode(max)}`
+            footerTemplate: ({ age }) => `Min: ${encode(age.min)} Max: ${encode(age.max)}`
           }
         ],
         dataSource: {

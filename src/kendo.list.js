@@ -1224,7 +1224,7 @@ var __meta__ = {
                 list._removeStaticHeader();
             }
 
-            list.popup = new ui.Popup(list.list.parent(), extend({}, list.options.popup, {
+            list.popup = new ui.Popup(list.list.parent().addClass("k-list-container"), extend({}, list.options.popup, {
                 anchor: list.wrapper,
                 open: list._openHandler.bind(list),
                 close: list._closeHandler.bind(list),

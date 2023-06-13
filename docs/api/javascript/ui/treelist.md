@@ -23,30 +23,36 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 
     <div id="treelist"></div>
     <script id="template" type="text/x-kendo-template">
-        <tr data-uid="#= data.model.uid #">
-            <td colspan="2">
+        <tr class="k-table-row" data-uid="#= data.model.uid #" role="row" >
+            <td class="k-table-td" colspan="2">
                 #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                    <span class="k-icon k-i-none"></span>
-                #}#
-                #if(data.hasChildren){#
-                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-                #}#
-
+                	<span class="k-icon k-i-none"></span>
+            		#}#
+             		# if (data.hasChildren) { #
+                	# if(data.model.expanded) { #
+                      #= kendo.ui.icon("caret-alt-down") #
+                	# } else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+                	# } #
+            		# } #
                 <strong>#: data.model.lastName # </strong>
                 <strong>#: data.model.position #</strong>
             </td>
         </tr>
     </script>
     <script id="altTemplate" type="text/x-kendo-template">
-        <tr data-uid="#= data.model.uid #" class="k-alt">
-            <td colspan="2">
+         <tr class="k-table-row k-alt" data-uid="#= data.model.uid #" role="row" >
+            <td class="k-table-td" colspan="2">
                 #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                    <span class="k-icon k-i-none"></span>
-                #}#
-                #if(data.hasChildren){#
-                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-                #}#
-
+                	<span class="k-icon k-i-none"></span>
+            		#}#
+             		# if (data.hasChildren) { #
+                	# if(data.model.expanded) { #
+                      #= kendo.ui.icon("caret-alt-down") #
+                	# } else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+                	# } #
+            		# } #
                 <strong>#: data.model.lastName # </strong>
                 <strong>#: data.model.position #</strong>
             </td>
@@ -5285,34 +5291,40 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. By de
 
         <div id="treelist"></div>
         <script id="template" type="text/x-kendo-template">
-            <tr data-uid="#= data.model.uid #">
-                <td colspan="2">
+            <tr class="k-table-row" data-uid="#= data.model.uid #" role="row" >
+                <td class="k-table-td" colspan="2">
                     #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                        <span class="k-icon k-i-none"></span>
-                    #}#
-                    #if(data.hasChildren){#
-                        <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-                    #}#
-
+                    	<span class="k-icon k-i-none"></span>
+                		#}#
+                 		# if (data.hasChildren) { #
+                    	# if(data.model.expanded) { #
+                          #= kendo.ui.icon("caret-alt-down") #
+                    	# } else { #
+                          #= kendo.ui.icon("caret-alt-right") #
+                    	# } #
+                		# } #
                     <strong>#: data.model.lastName # </strong>
                     <strong>#: data.model.position #</strong>
                 </td>
             </tr>
         </script>
         <script id="altTemplate" type="text/x-kendo-template">
-            <tr data-uid="#= data.model.uid #" class="k-alt">
-                <td colspan="2">
-                    #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                        <span class="k-icon k-i-none"></span>
-                    #}#
-                    #if(data.hasChildren){#
-                        <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-                    #}#
-
-                    <strong>#: data.model.lastName # </strong>
-                    <strong>#: data.model.position #</strong>
-                </td>
-            </tr>
+          <tr class="k-table-row k-alt" data-uid="#= data.model.uid #" role="row" >
+              <td class="k-table-td" colspan="2">
+                  #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                  	<span class="k-icon k-i-none"></span>
+              		#}#
+               		# if (data.hasChildren) { #
+                  	# if(data.model.expanded) { #
+                        #= kendo.ui.icon("caret-alt-down") #
+                  	# } else { #
+                        #= kendo.ui.icon("caret-alt-right") #
+                  	# } #
+              		# } #
+                  <strong>#: data.model.lastName # </strong>
+                  <strong>#: data.model.position #</strong>
+              </td>
+          </tr>
         </script>
         <script>
           $("#treelist").kendoTreeList({
@@ -5326,7 +5338,6 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. By de
                 { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
                 { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
                 { id: 3, parentId: 2, lastName: "Jason", position: "Director, Engineering" }
-
               ]
             }
           });

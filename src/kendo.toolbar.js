@@ -900,6 +900,10 @@ var __meta__ = {
             element.addClass(TOOLBAR_TOOLS_CLASSES[component]);
             this._addAttributes(options, element);
 
+            if (options.url) {
+                widgetElement.removeAttr(ROLE);
+            }
+
             if (hasButtons) {
                 element.find(DOT + KBUTTON).addClass(TOOLBAR_TOOL);
                 this._groupVisibleButtons(element);

@@ -225,11 +225,10 @@ var __meta__ = {
             var widthStyle = '';
 
             if (currentWidth) {
-                widthStyle += "style='width:";
-                widthStyle += currentWidthInt;
-                widthStyle += percentageUnitsRegex.test(currentWidth) ? "%" : "px";
-                widthStyle += ";'";
+                let widthValue = `${currentWidthInt}${percentageUnitsRegex.test(currentWidth) ? "%" : "px"}`;
+                widthStyle = `style="width: ${widthValue}; max-width: ${widthValue};"`;
             }
+
             item += "<span class='k-table-td' " + widthStyle + ">";
             item += templates["column" + i](dataItem);
             item += "</span>";

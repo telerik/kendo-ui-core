@@ -23,6 +23,8 @@ Defines a value determining whether the items will be animated. Valid options ar
     <div id="skeleton"></div>
     <script>
     $("#skeleton").kendoSkeletonContainer({
+        width: 200,
+        height: 300,
         grid: {
             items: [
                 {
@@ -59,6 +61,8 @@ Defines the number of columns.
     <div id="skeleton"></div>
     <script>
     $("#skeleton").kendoSkeletonContainer({
+        width: 200,
+        height: 300,
         grid: {
             items: [
                 {
@@ -168,6 +172,8 @@ An array with objects representing the settings of the component items.
     <div id="skeleton"></div>
     <script>
     $("#skeleton").kendoSkeletonContainer({
+        width: 200,
+        height: 300,
         grid: {
             items: [
                 {
@@ -199,6 +205,8 @@ A value that determines the start position of the item on the column axis.
     <div id="skeleton"></div>
     <script>
     $("#skeleton").kendoSkeletonContainer({
+        width: 200,
+        height: 300,
         grid: {
             items: [
                 {
@@ -230,6 +238,8 @@ A value that determines how many columns will the item span.
     <div id="skeleton"></div>
     <script>
     $("#skeleton").kendoSkeletonContainer({
+        width: 200,
+        height: 300,
         grid: {
             items: [
                 {
@@ -260,28 +270,32 @@ A value that determines the start position of the item on the row axis.
 #### Example - set the rowStart for an item
     <div id="skeleton"></div>
     <script>
-    $("#skeleton").kendoSkeletonContainer({
+      $("#skeleton").kendoSkeletonContainer({
+        animation: "wave",
+        height: 200,
+        width: 340,
         grid: {
-            items: [
-                {
-                    colStart: 1,
-                    colSpan: 1,
-                    rowStart: 1,
-                    rowSpan: 1,
-                    shape: "rectangle"
-                },
-                {
-                    colStart: 2,
-                    colSpan: 1,
-                    rowStart: 1,
-                    rowSpan: 1,
-                    shape: "rectangle"
-                }
-            ],
-            columns: 4,
-            rows: 4
-        }
-    });
+          items: [
+            {
+              colStart: 1,
+              colSpan: 1,
+              rowStart: 2,
+              rowSpan: 2,
+              shape: "rectangle"
+            },
+            {
+              colStart: 2,
+              colSpan: 1,
+              rowStart: 1,
+              rowSpan: 1,
+              shape: "circle"
+            }
+          ],
+          columns: 4,
+          rows: 4
+        },
+        animation: "wave"
+      });
     </script>
 
 ### grid.items.rowSpan `Number`
@@ -291,28 +305,32 @@ A value that determines how many rows will the item span.
 #### Example - set the rowSpan for an item
     <div id="skeleton"></div>
     <script>
-    $("#skeleton").kendoSkeletonContainer({
+      $("#skeleton").kendoSkeletonContainer({
+        animation: "wave",
+        height: 200,
+        width: 340,
         grid: {
-            items: [
-                {
-                    colStart: 1,
-                    colSpan: 1,
-                    rowStart: 1,
-                    rowSpan: 1,
-                    shape: "rectangle"
-                },
-                {
-                    colStart: 2,
-                    colSpan: 1,
-                    rowStart: 1,
-                    rowSpan: 1,
-                    shape: "rectangle"
-                }
-            ],
-            columns: 4,
-            rows: 4
-        }
-    });
+          items: [
+            {
+              colStart: 1,
+              colSpan: 1,
+              rowStart: 1,
+              rowSpan: 2,
+              shape: "rectangle"
+            },
+            {
+              colStart: 2,
+              colSpan: 1,
+              rowStart: 1,
+              rowSpan: 1,
+              shape: "circle"
+            }
+          ],
+          columns: 4,
+          rows: 4
+        },
+        animation: "wave"
+      });
     </script>
 
 ### grid.items.shape `String` *(default: 'text')*
@@ -327,6 +345,8 @@ A value that determines the shape of the item. Valid options are
     <div id="skeleton"></div>
     <script>
     $("#skeleton").kendoSkeletonContainer({
+        width: 200,
+        height: 300,
         grid: {
             items: [
                 {
@@ -358,6 +378,8 @@ Defines the number of rows.
     <div id="skeleton"></div>
     <script>
     $("#skeleton").kendoSkeletonContainer({
+        width: 200,
+        height: 300,
         grid: {
             items: [
                 {

@@ -956,19 +956,24 @@ Gets the list of DOM elements that represent the tabs.
 
 Reloads TabStrip tab(s) via AJAX.
 
+    <button id="btn">Reload</button>
     <div id="tabstrip"></div>
 
     <script>
-        var tabStrip = $("#tabstrip").kendoTabStrip({
-            dataTextField: "Name",
-            dataContentUrlField: "ContentUrl",
-            dataSource: [
-              { Name: "Tab1", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
-              { Name: "Tab2", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
-            ]
-        }).data("kendoTabStrip");
+      var tabStrip = $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataContentUrlField: "ContentUrl",
+        dataSource: [
+          { Name: "Tab1", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
+          { Name: "Tab2", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
+        ]
+      }).data("kendoTabStrip");
 
+      $('#btn').click(function(){
+        //The result can be observed in Network tab in the browser`s Developer Tools. 
+        //When the button is clicked a request for loading the content will be performed.
         tabStrip.reload("li:first");
+      })
     </script>
 
 #### Parameters

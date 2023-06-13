@@ -152,6 +152,7 @@ var __meta__ = {
             delete options.text;
             delete options.imageUrl;
             delete options.click;
+            delete options.iconClass;
 
             html.renderButton(that.arrowButton, options);
         },

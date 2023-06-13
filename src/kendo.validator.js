@@ -438,6 +438,14 @@ var __meta__ = {
                 widgetInstance = kendo.widgetInstance(input.closest(".k-signature"));
             }
 
+            if (input.is("[type=radio]")) {
+                widgetInstance = kendo.widgetInstance(input.closest(".k-radio-list"));
+            }
+
+            if (input.is("[type=checkbox]")) {
+                widgetInstance = kendo.widgetInstance(input.closest(".k-checkbox-list"));
+            }
+
             if (!valid && !input.data("captcha_validating")) {
                 that._errors[fieldName] = messageText;
                 var lblId = lbl.attr('id');
@@ -467,7 +475,7 @@ var __meta__ = {
                         widgetInstance = kendo.widgetInstance(input.closest(".k-checkbox-list"));
                     }
 
-                    if (widgetInstance && widgetInstance.wrapper && (widgetInstance.element !== widgetInstance.wrapper || widgetInstance.options.name == "Signature")) {
+                    if (widgetInstance && widgetInstance.wrapper && (widgetInstance.element !== widgetInstance.wrapper || ["Signature", "RadioGroup", "CheckBoxGroup"].indexOf(widgetInstance.options.name) > -1)) {
                         messageLabel.insertAfter(widgetInstance.wrapper);
                     } else if (parentElement && parentElement.nodeName === "LABEL") {
                         // Input inside label
