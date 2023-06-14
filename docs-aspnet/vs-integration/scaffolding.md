@@ -10,7 +10,12 @@ position: 15
 # Scaffolding for {{ site.product }}
 
 Since the 2022 R2 SP2 release, {{ site.product }} provides new way of generating Scaffolding templates as a convenient productivity feature. 
+
+{% if site.core %}
 ![{{ site.product_short }} Adding a new scaffolded item with the Telerik UI Scaffolder for Core](../images/scaffolding/core-scaffolder-add-new-item.png)
+{% else %}
+![{{ site.product_short }} Adding a new scaffolded item with the Telerik UI Scaffolder for MVC](../images/scaffolding/mvc-scaffolder-add-new-item.png)
+{% endif %}
 
 The new Scaffolder items in Visual Studio allow quick code generation and mocking of data for some of the most used data-bound components, such as the {{ site.framework }} Data Grid, TreeList, Scheduler, ListView, Gantt, Chart, Form and Editor.
 
