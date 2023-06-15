@@ -8,6 +8,10 @@ position: 1
 
 # Pane Overview
 
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
 The Hybrid UI Pane widget groups one or more mobile views within the main view application. The mobile SplitView widget allows a side by-side display of several panes. The mobile PopOver automatically instantiates a mobile Pane widget for its contents.
 
 The Hybrid UI Pane widget acts like an embedded mobile application, with most of the application features available&mdash;support for local and remote views, default layout and transition, lading, etc., with one exception being the browser history support. Navigating within the pane does not update the history state, so deep linking to a pane state is not supported.

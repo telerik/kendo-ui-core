@@ -317,7 +317,7 @@ public IActionResult Index(){
 
 ## (Optional) Reference Existing Form Instances
 
-Referencing existing component instances allows you to build on top of their configuration. To reference an existing Form instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Form client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
+Referencing existing component instances allows you to build on top of their configuration. To reference an existing Form instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Form client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/form#methods) to control its behavior.
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
@@ -329,12 +329,12 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the [Form client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/form#methods) to control the behavior of the widget. In this example, you will see how to clear the form programmatically.
 
-```script
-    <script>
-        var formReference = $("#formExample").data("kendoForm");
-		formReference.clear(); // Programmatically clear the inputs of the Form.
-    </script>
-```
+    ```script
+        <script>
+            var formReference = $("#formExample").data("kendoForm");
+            formReference.clear(); // Programmatically clear the inputs of the Form.
+        </script>
+    ```
 
 ## Next Steps
 
