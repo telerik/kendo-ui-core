@@ -2,6 +2,22 @@ import { files, cultures, messages, addKendoVersion, baseOptions, externals, rem
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import polyfill from 'rollup-plugin-polyfill';
 
+
+export function fixJQueryImport() {
+    return {
+        name: 'transform-fix-jquery-import',
+        renderChunk(code) {
+            code = code
+                .replace(/import 'jquery';/gm, 'import jQuery from "jquery";')
+                .replace(/require\('jquery'\)/gm, 'const jQuery = require("jquery");');
+
+            return {
+                code: code
+            };
+        }
+    };
+}
+
 /**
  * @type {import('rollup').RollupOptions}
  */
@@ -41,11 +57,13 @@ const configMap = (name) => ({
         format: 'cjs',
         dir: './dist/cjs',
         sourcemap: false,
+        exports: 'auto',
         ...baseOptions
     }],
     external: externals.filter(removeBundle(name)),
     treeshake: false,
     plugins: [
+        fixJQueryImport(),
         addKendoVersion(),
         name === 'kendo.core.js' ? polyfill(['jquery']) : null,
         nodeResolve(),
