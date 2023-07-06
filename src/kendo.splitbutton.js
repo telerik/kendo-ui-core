@@ -365,4 +365,5 @@ var __meta__ = {
     ui.plugin(SplitButton);
 
 })(window.kendo.jQuery);
+export default kendo;
 

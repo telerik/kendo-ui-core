@@ -18,6 +18,7 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
         Observable = kendo.Observable,
         UserEvents = kendo.UserEvents,
+        ClickMoveClick = kendo.ClickMoveClick,
         extend = $.extend,
         getOffset = kendo.getOffset,
         draggables = {},
@@ -626,6 +627,17 @@ var __meta__ = {
 
             that._activated = false;
 
+            if (this.options.clickMoveClick) {
+                that.clickMoveClick = new ClickMoveClick(that.element, {
+                    global: true,
+                    filter: that.options.filter,
+                    start: that._startClickMoveClick.bind(that),
+                    move: that._drag.bind(that),
+                    end: that._end.bind(that),
+                    cancel: that._onCancel.bind(that)
+                });
+            }
+
             that.userEvents = new UserEvents(that.element, {
                 global: true,
                 allowSelection: true,
@@ -635,7 +647,7 @@ var __meta__ = {
                 hold: that._hold.bind(that),
                 move: that._drag.bind(that),
                 end: that._end.bind(that),
-                cancel: that._cancel.bind(that),
+                cancel: that._onCancel.bind(that),
                 select: that._select.bind(that)
             });
 
@@ -667,7 +679,8 @@ var __meta__ = {
             ignore: null,
             holdToDrag: false,
             autoScroll: false,
-            dropped: false
+            dropped: false,
+            clickMoveClick: false
         },
 
         cancelHold: function() {
@@ -678,8 +691,13 @@ var __meta__ = {
             var that = this;
 
             if (e.keyCode === kendo.keys.ESC) {
-                that._trigger(DRAGCANCEL, { event: e });
                 that.userEvents.cancel();
+
+                if (that.clickMoveClick) {
+                    that.clickMoveClick.cancel();
+                }
+
+                this._trigger(DRAGCANCEL, { event: e });
             }
         },
 
@@ -694,9 +712,15 @@ var __meta__ = {
             if (cursorOffset) {
                coordinates = { left: e.x.location + cursorOffset.left, top: e.y.location + cursorOffset.top };
             } else {
-                that.hintOffset.left += e.x.delta;
-                that.hintOffset.top += e.y.delta;
-                coordinates = $.extend({}, that.hintOffset);
+                if (e.x.delta !== 0 || e.y.delta !== 0) {
+                    that.hintOffset.left += e.x.delta;
+                    that.hintOffset.top += e.y.delta;
+                    coordinates = $.extend({}, that.hintOffset);
+                } else {
+                    that.hintOffset.left = e.x.startLocation + e.x.initialDelta;
+                    that.hintOffset.top = e.y.startLocation + e.y.initialDelta;
+                    coordinates = $.extend({}, that.hintOffset);
+                }
             }
 
             if (boundaries) {
@@ -722,6 +746,12 @@ var __meta__ = {
             if (!this._shouldIgnoreTarget(e.event.target)) {
                 e.preventDefault();
             }
+        },
+
+        _startClickMoveClick: function(e) {
+            this._activated = true;
+
+            this._start(e);
         },
 
         _start: function(e) {
@@ -783,6 +813,11 @@ var __meta__ = {
 
             if (that._trigger(DRAGSTART, e)) {
                 that.userEvents.cancel();
+
+                if (that.clickMoveClick) {
+                    that.clickMoveClick.cancel();
+                }
+
                 that._afterEnd();
             }
 
@@ -928,6 +963,11 @@ var __meta__ = {
             this._cancel(this._trigger(DRAGEND, e));
         },
 
+        _onCancel: function(e) {
+            this._cancel();
+            this._trigger(DRAGCANCEL, { event: e });
+        },
+
         _cancel: function(isDefaultPrevented) {
             var that = this;
 
@@ -946,7 +986,6 @@ var __meta__ = {
                         that.hint.animate(that.currentTargetOffset, "fast", that._afterEndHandler);
                     }
                 }, 0);
-
             } else {
                 that._afterEnd();
             }
@@ -965,7 +1004,8 @@ var __meta__ = {
                     currentTarget: that.currentTarget,
                     initialTarget: e.touch ? e.touch.initialTouch : null,
                     dropTarget: e.dropTarget,
-                    elementUnderCursor: e.elementUnderCursor
+                    elementUnderCursor: e.elementUnderCursor,
+                    clickMoveClick: e.clickMoveClick
                 }
             ));
         },
@@ -1012,6 +1052,10 @@ var __meta__ = {
             that._afterEnd();
 
             that.userEvents.destroy();
+
+            if (that.clickMoveClick) {
+                that.clickMoveClick.destroy();
+            }
 
             this._scrollableParent = null;
             this._cursorElement = null;
@@ -1123,4 +1167,5 @@ var __meta__ = {
     };
 
  })(window.kendo.jQuery);
+export default kendo;
 

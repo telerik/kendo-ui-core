@@ -14241,7 +14241,7 @@ The available argument fields are:
 
 ### series.holeSize `Number`
 
-The diameter of the donut hole in pixels.
+The radius of the donut hole in pixels.
 
 > The `holeSize` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut".
 

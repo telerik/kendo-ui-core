@@ -20,6 +20,8 @@ The process draws on the following milestones:
  1. [Bind the Grid to data](#3-bind-the-grid-to-data)
  1. [Initialize the Grid](#4-initialize-the-grid)
  1. [Configure the Grid](#5-configure-the-grid)
+
+ >tip Visual Studio Code users can speed up the project creation by using the [Kendo UI Productivity Tools for Visual Studio Code](intro/installation/vscode-integration).
  
 ## 1. Download the Controls 
 

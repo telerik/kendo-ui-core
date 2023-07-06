@@ -124,4 +124,5 @@ var __meta__ = {
 
     ui.plugin(ModalView);
 })(window.kendo.jQuery);
+export default kendo;
 

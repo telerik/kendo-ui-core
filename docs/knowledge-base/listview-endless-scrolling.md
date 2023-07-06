@@ -33,6 +33,10 @@ How can I create an infinite scroll in the ListView?
 1. In the scroll handler, request new items by using the [`query`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-query) method of the additional data source.
 1. Once the requested items are received, add them to the data source of the ListView by using the [`add`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-add) method.
 
+> As of Kendo UI R2 2019 version this functionality comes out of the box by setting the [scrollable](/api/javascript/ui/listview/configuration/scrollable) property to `endless`.
+
+The following example demonstrates how to implement the described approach.
+
 ```dojo
     <div id="example">
 
@@ -85,6 +89,7 @@ How can I create an infinite scroll in the ListView?
 
           $("#listView").kendoListView({
             dataSource: dataSource,
+            contentElement: "",
             template: kendo.template($("#template").html())
           });
 

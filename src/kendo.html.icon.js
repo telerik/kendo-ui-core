@@ -232,4 +232,5 @@ var __meta__ = {
         values: ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse']
     }]);
 })(window.kendo.jQuery);
+export default kendo;
 

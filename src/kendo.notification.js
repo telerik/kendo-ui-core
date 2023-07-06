@@ -528,4 +528,5 @@ var __meta__ = {
     kendo.ui.plugin(Notification);
 
 })(window.kendo.jQuery);
+export default kendo;
 

@@ -902,4 +902,5 @@ var __meta__ = {
     ui.plugin(ScrollView);
 
 })(window.kendo.jQuery);
+export default kendo;
 

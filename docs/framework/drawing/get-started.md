@@ -1,81 +1,71 @@
 ---
-title: Basic Shapes
-page_title: Drawing of Basic Shapes - Kendo UI Drawing Library
-description: "Learn how to draw basic forms by using the Kendo UI Drawing API."
-previous_url: /framework/drawing/basic-shapes
-slug: basicshapes_drawingapi
-position: 2
+title: Getting Started
+page_title: Getting Started - Kendo UI for jQuery Drawing
+description: "Get started with the jQuery Drawing by Kendo UI and learn how to create visual elements."
+previous_url: /framework/drawing/dom-elements/basic-shapes, /framework/drawing/basic-shapes
+slug: getting_started_kendoui_drawing
+position: 1
 ---
 
-# Basic Shapes
+# Getting Started with the Drawing Library
 
-Scenes are constructed from a set of built-in basic shapes.
+This guide demonstrates how to use the Kendo UI for jQuery Drawing library to draw shapes on the screen. The following scene consists of a [`Path`](/api/javascript/drawing/path) (the violet border), [`Text`](/api/javascript/drawing/text), and an [`Image`](/api/javascript/drawing/image).
 
-## Getting Started
+After the completion of this guide, you will achieve the following result:
 
-The following **Figure 1** demonstrates a simple static scene.
-
-**Figure 1: Basic scene**
-
-![Kendo UI for jQuery Drawing API - Basic Scene](../images/basic-scene.png)
-
-In terms of the Drawing API, the **Figure 1** scene consists of a [`Path`](/api/javascript/drawing/path) (the violet border), [`Text`](/api/javascript/drawing/text), and an [`Image`](/api/javascript/drawing/image). The following example demonstrates the full code required to render the scene. Notice a number of structures that define the position, size, and appearance of each element.
-
+```dojo
     <div id="surface" style="width: 250px; height: 165px;"></div>
     <script>
-        // Import the Drawing API namespaces.
-        var geom = kendo.geometry;
-        var draw = kendo.drawing;
+      // Import the Drawing API namespaces.
+      var geom = kendo.geometry;
+      var draw = kendo.drawing;
 
-        // Create the square border by drawing a straight path.
-        var path = new draw.Path({
-            stroke: {
-                color: "#9999b6",
-                width: 2
-            }
-        });
+      // Create the square border by drawing a straight path.
+      var path = new draw.Path({
+        stroke: {
+          color: "#9999b6",
+          width: 2
+        }
+      });
 
-        // The path is constructed using a chain of commands.
-        path.moveTo(0, 0)
-            .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
-            .close();
+      // The path is constructed using a chain of commands.
+      path.moveTo(0, 0)
+        .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
+        .close();
 
-        // This rectangle defines the image position and size.
-        var imageRect = new geom.Rect(
-            new geom.Point(5, 5),
-            new geom.Size(50, 50)
-        );
+      // This rectangle defines the image position and size.
+      var imageRect = new geom.Rect(
+        new geom.Point(5, 5),
+        new geom.Size(50, 50)
+      );
 
-        // Create the image. Uses a URL to create a bitmap image.
-        var imageUrl = "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/diego.jpg";
-        var image = new draw.Image(imageUrl, imageRect);
+      // Create the image. Uses a URL to create a bitmap image.
+      var imageUrl = "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/diego.jpg";
+      var image = new draw.Image(imageUrl, imageRect);
 
-        // Create the text. The point defines the top left corner from where the text will be drawn.
-        var text = new draw.Text(
-            "Diego Roel",
-            new geom.Point(60, 25),
-            { font: "bold 15px Arial" }
-        );
+      // Create the text. The point defines the top left corner from where the text will be drawn.
+      var text = new draw.Text(
+        "Diego Roel",
+        new geom.Point(60, 25),
+        { font: "bold 15px Arial" }
+      );
 
-        // Place all the shapes in a group so they can be treated as a single entity.
-        var group = new draw.Group();
-        group.append(path, image, text);
+      // Place all the shapes in a group so they can be treated as a single entity.
+      var group = new draw.Group();
+      group.append(path, image, text);
 
-        // Translate the group to make the coordinates of the element relative.
-        group.transform(
-            geom.transform().translate(50, 50)
-        );
+      // Translate the group to make the coordinates of the element relative.
+      group.transform(
+        geom.transform().translate(50, 50)
+      );
 
-        // Create a drawing surface and render the scene.
-        var surface = draw.Surface.create($("#surface"));
-        surface.draw(group);
+      // Create a drawing surface and render the scene.
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(group);
     </script>
+```
 
-## Building Scenes
-
-This section demonstrates how to replicate the static scene from above and add an enclosing group for positioning.
-
-### Importing Namespaces
+## 1. Importing Namespaces
 
 The following example demonstrates how to import the two namespaces.
 
@@ -92,7 +82,7 @@ The `kendo.drawing` namespace contains elements, such as:
 * [`Image`](/api/javascript/dataviz/drawing/image)
 * [`Group`](/api/javascript/dataviz/drawing/group)
 
-### Drawing the Path
+## 2. Drawing the Path
 
 A [`Path`](/api/javascript/drawing/path) element is used for drawing straight lines, curves, or a combination of both.
 
@@ -120,7 +110,7 @@ A [`Path`](/api/javascript/drawing/path) element is used for drawing straight li
             }
         });
 
-### Drawing the Image
+## 3. Drawing the Image
 
 The [`Image`](/api/javascript/drawing/image) element draws a bitmap image from a given URL.
 
@@ -140,7 +130,7 @@ The [`Image`](/api/javascript/drawing/image) element draws a bitmap image from a
         var imageUrl = "https://demos.telerik.com/content/dataviz/diagram/people/diego.jpg";
         var image = new draw.Image(imageUrl, imageRect);
 
-### Drawing the Text
+## 4. Drawing the Text
 
 The [`Text`](/api/javascript/drawing/text) element draws a single line of text.
 
@@ -152,7 +142,7 @@ Set the appearance options, such as the font, by using [`configuration`](/api/ja
             { font: "bold 15px Arial" }
         );
 
-### Grouping the Shapes
+## 5. Grouping the Shapes
 
 It is convenient to treat a group of shapes as a single entity so that you can set the position of all elements at once.
 
@@ -161,13 +151,13 @@ It is convenient to treat a group of shapes as a single entity so that you can s
         var group = new draw.Group();
         group.append(path, image, text);
 
-1. Translate the parent group to effectively make the element coordinates relative.
+1. Translate the parent group to make the element coordinates relative.
 
         group.transform(
             geom.transform().translate(50, 50)
         );
 
-### Rendering the Scene
+## 6. Rendering the Scene
 
 To render the scene, use the [`Surface.create`](/api/javascript/drawing/surface#create) method. It selects an implementation that matches the capabilities of the browser. The default output is an SVG with a fallback to Canvas.
 
@@ -177,9 +167,18 @@ To render the scene, use the [`Surface.create`](/api/javascript/drawing/surface#
             surface.draw(group);
         </script>
 
-## See Also
+## Next Steps 
 
-* [Overview of the Drawing Library]({% slug overview_kendoui_drawingapi %})
-* [Exporting Drawings to PDF]({% slug pdfderawingexport_drawingapi %})
-* [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})
-* [Limitations and Browser Support for Kendo UI Drawing API]({% slug supportedbrowsers_drawingapi %})
+* [Drawing HTML Elements Overview]({% slug drawingofhtmlelements_drawingapi %})
+* [API Reference for the Drawing Surface](/api/javascript/drawing/surface)
+* [Demo Page for the Drawing Library](https://demos.telerik.com/kendo-ui/drawing/index)
+
+## See Also 
+
+* [Knowledge Base Section](/knowledge-base)
+
+<script>
+  window.onload = function() {
+    document.getElementsByClassName("btn-run")[0].click();
+  }
+</script>

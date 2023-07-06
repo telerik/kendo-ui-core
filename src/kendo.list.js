@@ -360,7 +360,7 @@ var __meta__ = {
         _noData: function() {
             var list = this;
             var noData = $(list.noData);
-            var template = list.options.noDataTemplate === true ? () => list.options.messages.noData : list.options.noDataTemplate;
+            var template = list.options.noDataTemplate === true ? () => htmlEncode(list.options.messages.noData) : list.options.noDataTemplate;
 
             list.angular("cleanup", function() { return { elements: noData }; });
             kendo.destroy(noData);
@@ -3167,4 +3167,5 @@ var __meta__ = {
     kendo.cssProperties.registerPrefix("List", "k-list-");
 
 })(window.kendo.jQuery);
+export default kendo;
 

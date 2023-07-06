@@ -73,4 +73,5 @@ var __meta__ = {
 
     ui.plugin(NavBar);
 })(window.kendo.jQuery);
+export default kendo;
 

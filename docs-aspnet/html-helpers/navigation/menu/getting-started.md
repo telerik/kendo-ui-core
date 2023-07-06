@@ -182,7 +182,7 @@ Next, use the `Animation()` method to configure the effects that the component r
 
 ## 4. Handle the Menu Events
 
-The Menu [exposes various events](/api/Kendo.Mvc.UI.Fluent/MenuEventBuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open()`, `Close()`, and `Select()` events to log messages in the browser's console.
+The Menu [exposes various events](/api/kendo.mvc.ui.fluent/menueventbuilder) that you can handle and further customize the functionality of the component. in this tutorial, you will use the `Open()`, `Close()`, and `Select()` events to log messages in the browser's console.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

@@ -202,7 +202,7 @@ When editing is performed, server validation is often needed. This section demon
             return Json(new[] { order }.ToDataSourceResult(request, ModelState));
         }
 
-1. Subscribe to the [`DataSource.Error()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#errorsystemstring) event handler. It is fired when model state errors or other unexpected problem occur when making the Ajax request. To prevent the popup from closing, get the Grid instance in the error event handler, prevent the Grid from `DataBinding`, and display the errors as a tooltip.
+1. Subscribe to the [`DataSource.Error()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datasourceeventbuilder#errorsystemstring) event handler. It is fired when model state errors or other unexpected problem occur when making the Ajax request. To prevent the popup from closing, get the Grid instance in the error event handler, prevent the Grid from `DataBinding`, and display the errors as a tooltip.
 
 ```HtmlHelper
     .DataSource(d =>

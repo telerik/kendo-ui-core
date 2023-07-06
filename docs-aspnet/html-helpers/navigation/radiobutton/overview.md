@@ -46,4 +46,4 @@ The following example demonstrates how to initialize the RadioButton.
 ## See Also
 
 * [RadioButton Server-Side API](/api/radiobutton)
-* [RadioButtonBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
+* [RadioButtonBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/radiobuttonbuilder)

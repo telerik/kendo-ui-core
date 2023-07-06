@@ -156,7 +156,7 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/QwOFwYbU29KigMrU43
 </script>
 ```
 
-The following example demonstrates how to export a detail Grid to Excel including its all pages and details. To achieve this configure the Grid's [Excel `AllPages` property](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridExcelSettingsBuilder#allpagessystemboolean).
+The following example demonstrates how to export a detail Grid to Excel including its all pages and details. To achieve this configure the Grid's [Excel `AllPages` property](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridexcelsettingsbuilder#allpagessystemboolean).
 
 Refer to the [following REPL](https://netcorerepl.telerik.com/cwkFQYbK53UW6qxu07) for a runnable sample.
 

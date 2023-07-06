@@ -257,4 +257,5 @@ var __meta__ = {
 
     ui.plugin(Switch);
 })(window.kendo.jQuery);
+export default kendo;
 

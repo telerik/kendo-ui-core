@@ -128,3 +128,4 @@ var Label = Widget.extend({
 });
 
 kendo.ui.plugin(Label);
+export default kendo;

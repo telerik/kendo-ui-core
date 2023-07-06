@@ -148,4 +148,5 @@ var __meta__ = {
 
     ui.plugin(ButtonGroup);
 })(window.kendo.jQuery);
+export default kendo;
 

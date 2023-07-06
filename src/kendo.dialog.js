@@ -1151,4 +1151,5 @@ import "./kendo.icons.js";
         kendo.prompt = kendoPrompt;
 
     })(window.kendo.jQuery);
+export default kendo;
 

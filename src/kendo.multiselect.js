@@ -1599,7 +1599,7 @@ var __meta__ = {
             }
 
             multipleTemplateFunc = data => encode(kendo.getter(options.dataTextField)(data));
-            singleTemplateFunc = ({ values }) => `${values.length} ${singleTag}`;
+            singleTemplateFunc = ({ values }) => `${values.length} ${encode(singleTag)}`;
 
             defaultTemplate = isMultiple ? multipleTemplateFunc : singleTemplateFunc;
 
@@ -1651,7 +1651,7 @@ var __meta__ = {
         },
 
         _arrowButton: function() {
-            var arrowTitle = this.options.messages.downArrow,
+            var arrowTitle = encode(this.options.messages.downArrow),
                 arrow = $(html.renderButton('<button type="button" aria-label="' + arrowTitle + '" class="k-input-button k-multiselect-toggle-button"></button>', $.extend({}, this.options, {
                     icon: "caret-alt-down"
                 })));
@@ -1748,4 +1748,5 @@ var __meta__ = {
     }]);
 
 })(window.kendo.jQuery);
+export default kendo;
 

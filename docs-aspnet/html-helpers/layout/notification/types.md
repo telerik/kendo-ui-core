@@ -50,5 +50,5 @@ The following example demonstrates the built-in Notification types.
 
 ## See Also
 
-* [NotificationBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
+* [NotificationBuilder Server-Side API](/api/kendo.mvc.ui.fluent/notificationbuilder)
 * [Notification Server-Side API](/api/notification)

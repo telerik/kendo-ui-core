@@ -28,7 +28,7 @@ How can I set the `NoRecords` template message to content from the controller?
 ## Solution
 
 1. Use a [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview.html) and pass the text by using the [`ViewData` setting of the controller](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controller.viewdata?view=aspnetcore-2.2).
-1. Configure the [`NoRecords` `TemplateID` of the Grid](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridNoRecordsSettingsBuilder) with the ID of the Kendo UI Template.
+1. Configure the [`NoRecords` `TemplateID` of the Grid](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridnorecordssettingsbuilder) with the ID of the Kendo UI Template.
 
 ```css
 <style>

@@ -45,7 +45,7 @@ The scenario relies on the following key steps:
 1. Create a "Save step" button and handle its `click` event. In the `click` event handler:
   * Get the currently active step and store its index in a global array `savedSteps`.
   * Add class "save" to the step HTML element.
-1. Create a Stepper and handle its [`Select`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/StepperEventBuilder#selectsystemstring) event. In the event handler:
+1. Create a Stepper and handle its [`Select`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/steppereventbuilder#selectsystemstring) event. In the event handler:
   * Iterate through the `validatedSteps`/`savedSteps` arrays and persist the added class of each step.
   * Add class "pending" to the steps that are not validated or saved. 
 1. Set the respective CSS attributes (`background-color` and `border-color`) to the classes "errors-step", "correct", "pending", and "save".

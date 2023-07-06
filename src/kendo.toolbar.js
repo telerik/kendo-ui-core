@@ -1124,7 +1124,7 @@ var __meta__ = {
                 templateItem = target.closest(DOT + TEMPLATE_ITEM),
                 isOverflowAnchor = target.is(DOT + OVERFLOW_ANCHOR);
 
-            if (!this.options.navigateOnTab && keyCode === keys.ESC && templateItem.length > 0) {
+            if (!this.options.navigateOnTab && !target.is(".k-toolbar-tool") && keyCode === keys.ESC && templateItem.length > 0) {
                 e.stopPropagation();
                 this._keyDeactivateTemplate(templateItem);
                 return;
@@ -1845,4 +1845,5 @@ var __meta__ = {
 
     kendo.ui.plugin(ToolBar);
 })(window.kendo.jQuery);
+export default kendo;
 

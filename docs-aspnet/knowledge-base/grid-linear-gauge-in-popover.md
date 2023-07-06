@@ -37,7 +37,7 @@ How can I display a [Popover](https://docs.telerik.com/{{ site.platform }}/html-
         columns.Bound(p => p.Freight).HtmlAttributes(new { @class = "lGaugeCol"});
     ```
 
-1. Create a [Popover component](https://demos.telerik.com/{{ site.platform }}/popover/index) and handle its [`Show`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PopoverEventBuilder#showsystemstring) and [`Hide`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PopoverEventBuilder#hidesystemstring) events.
+1. Create a [Popover component](https://demos.telerik.com/{{ site.platform }}/popover/index) and handle its [`Show`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/popovereventbuilder#showsystemstring) and [`Hide`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/popovereventbuilder#hidesystemstring) events.
 
     ```
         @(Html.Kendo().Popover()

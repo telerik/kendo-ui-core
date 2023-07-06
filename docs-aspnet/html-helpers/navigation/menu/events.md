@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI Menu for {{ site.framework }} [exposes a number of events](/api/Kendo.Mvc.UI.Fluent/MenuEventBuilder) that allow you to control and customize the UI component.
+The Telerik UI Menu for {{ site.framework }} [exposes a number of events](/api/kendo.mvc.ui.fluent/menueventbuilder) that allow you to control and customize the UI component.
 
 For a complete example on basic Menu events, refer to the [demo on using the events of the Menu](https://demos.telerik.com/{{ site.platform }}/menu/events).
 

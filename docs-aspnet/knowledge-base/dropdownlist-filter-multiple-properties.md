@@ -29,7 +29,7 @@ How can I filter the DropDownList data by multiple properties on the client-side
 
 ## Solution
 
-1. Subscribe to the [`Filtering`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DropDownListEventBuilder#filteringsystemstring) event.
+1. Subscribe to the [`Filtering`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlisteventbuilder#filteringsystemstring) event.
 1. Prevent the default behavior of the `Filtering` event.
 1. Use the dataSource [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method to apply the custom filtering.
 

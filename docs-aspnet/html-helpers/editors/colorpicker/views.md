@@ -8,7 +8,7 @@ position: 3
 
 # ColorPicker Views
 
-As of R3 SP1 of 2021 for the {{ site.product }} ColorPicker has a new design. One of the introduced new features is the [`.Views()`](/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder#viewssystemstring) configuration. It allows you to choose between a `gradient` and a `palette` view. You can also choose which the default view would be through the [`.View()`](/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder#viewkendomvcuicolorpickerview) option.
+As of R3 SP1 of 2021 for the {{ site.product }} ColorPicker has a new design. One of the introduced new features is the [`.Views()`](/api/kendo.mvc.ui.fluent/colorpickerbuilder#viewssystemstring) configuration. it allows you to choose between a `gradient` and a `palette` view. You can also choose the default view via the [`.View()`](/api/kendo.mvc.ui.fluent/colorpickerbuilder#viewkendomvcuicolorpickerview) option.
 
 ```HtmlHelper
     @(Html.Kendo().ColorPicker()

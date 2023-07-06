@@ -103,8 +103,8 @@ In order to activate the Horizontal Scrollbar, set width to the columns of the G
 
 In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. To prevent the restoration of the scroll position:
 
-1. Save the scroll position in the [`DataBinding()`](/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databindingsystemstring) event handler.
-1. Restore the scroll position in the [`DataBound()`](/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event handler.
+1. Save the scroll position in the [`DataBinding()`](/api/kendo.mvc.ui.fluent/grideventbuilder#databindingsystemstring) event handler.
+1. Restore the scroll position in the [`DataBound()`](/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event handler.
 
 The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the widget `wrapper`. If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 

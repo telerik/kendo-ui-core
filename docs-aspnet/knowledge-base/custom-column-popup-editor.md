@@ -28,9 +28,9 @@ How to add a custom popup editor for a column in the {{ site.product }} Grid?
 
 ## Solution
 
-1. Create a Window and integrate an editor through the [`.Content()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/WindowBuilder#contentsystemaction) configuration method.
+1. Create a Window and integrate an editor through the [`.Content()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/windowbuilder#contentsystemaction) configuration method.
 1. Decorate the Editor with the `data-bind` attribute for the corresponding field that will be edited.
-1. Add a button to the cell by creating a column template through the [`.ClientTemplateId()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#clienttemplateidsystemstring) configuration option.
+1. Add a button to the cell by creating a column template through the [`.ClientTemplateId()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplateidsystemstring) configuration option.
 1. To open the window, handle the `click` event of the button. To bind the editor to the current data item, use the [`bind()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/bind) method.
 
 ```Index.cshtml

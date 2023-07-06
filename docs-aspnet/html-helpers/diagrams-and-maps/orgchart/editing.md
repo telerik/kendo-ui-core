@@ -3,7 +3,7 @@ title: Editing
 page_title: Editing
 description: "Learn about the Editing capabilities of the Telerik UI OrgChart component for {{ site.framework }}."
 slug: htmlhelpers_orgchart_editing_aspnetcore
-position: 1
+position: 2
 ---
 
 # Editing

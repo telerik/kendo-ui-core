@@ -10,9 +10,9 @@ slug: htmlhelpers_charts_legend_aspnetcore
 The {{ site.product }} Chart supports customization of its legend, which displays the name of the configured data series.
 
 > * Series without a specified name will not display legend items.
-> * To render a legend item for the Pie, Donut, and Funnel series, set the [`categoryField`](/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#categoryfieldsystemstring) of the items.
+> * To render a legend item for the Pie, Donut, and Funnel series, set the [`categoryField`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#categoryfieldsystemstring) of the items.
 
-To customize the legend, use the [`Legend`](/api/Kendo.Mvc.UI.Fluent/ChartBuilder#legendsystemaction) configuration option.
+To customize the legend, use the [`Legend`](/api/kendo.mvc.ui.fluent/chartbuilder#legendsystemaction) configuration option.
 
 ## Positioning and Orientation
 
@@ -138,7 +138,7 @@ To exclude series from the legend, set their `VisibleInLegend` option to `false`
 
 You can configure the legend section of the Chart to render a title with customizable layout and content.
 
-To define a title, configure the [`Title`](/api/Kendo.Mvc.UI.Fluent/ChartLegendSettingsBuilder#titlesystemaction) property of the `Legend` configuration.
+To define a title, configure the [`Title`](/api/kendo.mvc.ui.fluent/chartlegendsettingsbuilder#titlesystemaction) property of the `Legend` configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Chart()

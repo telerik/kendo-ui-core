@@ -351,6 +351,7 @@ var __meta__ = {
     kendo.absoluteURL = absoluteURL;
     kendo.history = new History();
 })(window.kendo.jQuery);
+export default kendo;
 
 (function() {
     var kendo = window.kendo,

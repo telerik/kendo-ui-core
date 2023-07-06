@@ -11,14 +11,14 @@ position: 3
 
 The Rating allows you to control the precision with which an item is selected.
 
-To configure the [`Precision`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property, use either of the available properties:
+To configure the [`Precision`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#precisionsystemstring) property, use either of the available properties:
 
 * `item`&mdash;Selects the whole item.
 * `half`&mdash;Selects half of the item.
 
 ## Item Precision
 
-The item mode is the default precision mode of the Rating. If not configured, the widget will automatically set the [`Precision`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property to `"item"` which enables only whole stars to be selected by click or keyboard interaction.
+The item mode is the default precision mode of the Rating. If not configured, the widget will automatically set the [`Precision`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#precisionsystemstring) property to `"item"` which enables only whole stars to be selected by click or keyboard interaction.
 
 ```HtmlHelper
     @(Html.Kendo().Rating()
@@ -34,7 +34,7 @@ The item mode is the default precision mode of the Rating. If not configured, th
 
 ## Half Precision
 
-To configure he half precision mode of the Rating, set the [`Precision`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) option to `"half"` which allows you to set decimal values. The passed value is rounded during the rendering phase to display a full or half item based on the following value specifics:
+To configure he half precision mode of the Rating, set the [`Precision`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#precisionsystemstring) option to `"half"` which allows you to set decimal values. The passed value is rounded during the rendering phase to display a full or half item based on the following value specifics:
 * A value which is less than or equal to `.5` displays half an item.
 * A value which is greater than `.5` displays a full item.
 

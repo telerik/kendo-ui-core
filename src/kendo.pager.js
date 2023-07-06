@@ -14,6 +14,7 @@ var __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
+        encode = kendo.htmlEncode,
         template = kendo.template,
         FIRST = "caret-alt-to-left",
         LAST = "caret-alt-to-right",
@@ -188,9 +189,9 @@ var __meta__ = {
             if (options.input) {
                 if (!that.element.find(".k-pager-input").length) {
                    that.element.append('<span class="k-pager-input k-label">' +
-                       options.messages.page +
+                        encode(options.messages.page) +
                        '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" /></span>' +
-                       kendo.format(options.messages.of, totalPages) +
+                       encode(kendo.format(options.messages.of, totalPages)) +
                        '</span>');
                 }
 
@@ -216,13 +217,13 @@ var __meta__ = {
                     var pageSizes = options.pageSizes.length ? options.pageSizes : ["all", 5, 10, 20];
                     var pageItems = $.map(pageSizes, function(size) {
                         if (size.toLowerCase && size.toLowerCase() === "all") {
-                            return "<option value='all'>" + options.messages.allPages + "</option>";
+                            return "<option value='all'>" + encode(options.messages.allPages) + "</option>";
                         }
 
                         return "<option>" + size + "</option>";
                     });
 
-                    $('<span class="k-pager-sizes k-label"><select></select>' + options.messages.itemsPerPage + "</span>")
+                    $('<span class="k-pager-sizes k-label"><select></select>' + encode(options.messages.itemsPerPage) + "</span>")
                         .appendTo(that.element)
                         .find("select").html(pageItems.join("")).end()
                         .appendTo(that.element);
@@ -300,9 +301,9 @@ var __meta__ = {
         options: {
             name: "Pager",
             ARIATemplate: ({ page, totalPages }) => `Page navigation, page ${page} of ${totalPages}`,
-            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-flat-primary k-selected">${text}</span>`,
-            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-flat-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}>${text}</button>`,
-            numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${text}</option>`,
+            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-flat-primary k-selected">${encode(text)}</span>`,
+            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-flat-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}>${encode(text)}</button>`,
+            numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${encode(text)}</option>`,
             buttonCount: 10,
             autoBind: true,
             numeric: true,
@@ -470,7 +471,7 @@ var __meta__ = {
                     .find(".k-pager-input")
                     .html(that.options.messages.page +
                         '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" aria-label="' + that.options.messages.page + " " + page + '"></span>' +
-                        kendo.format(options.messages.of, totalPages))
+                        encode(kendo.format(options.messages.of, totalPages)))
                     .find("input")
                     .val(page)
                     .attr(DISABLED, total < 1)
@@ -761,4 +762,5 @@ var __meta__ = {
 
     ui.plugin(Pager);
 })(window.kendo.jQuery);
+export default kendo;
 

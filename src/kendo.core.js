@@ -622,6 +622,7 @@ function pad(number, digits, end) {
         objectToString = {}.toString;
 
     //cultures
+    kendo.cultures = kendo.cultures || {}; // Ensure cultures object exists
     kendo.cultures["en-US"] = {
         name: EN,
         numberFormat: {
@@ -5510,4 +5511,4 @@ function pad(number, digits, end) {
     }
 
 })(jQuery, window);
-
+export default kendo;

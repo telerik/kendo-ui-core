@@ -75,7 +75,7 @@ In some scenarios, it is required to configure the Window to load dynamic conten
     ```
     {% endif %}
 
-You can also use another [`.LoadContentFrom()`](/api/Kendo.Mvc.UI.Fluent/WindowBuilder#loadcontentfrommicrosoftaspnetcoreroutingroutevaluedictionary) overload to pass additional details to the action method returning the Window's content:
+You can also use another [`.LoadContentFrom()`](/api/kendo.mvc.ui.fluent/windowbuilder#loadcontentfrommicrosoftaspnetcoreroutingroutevaluedictionary) overload to pass additional details to the action method returning the Window's content:
 
 ```HtmlHelper
 @(Html.Kendo().Window()

@@ -6663,4 +6663,5 @@ var __meta__ = {
         BatchBuffer: BatchBuffer
     });
 })(window.kendo.jQuery);
+export default kendo;
 

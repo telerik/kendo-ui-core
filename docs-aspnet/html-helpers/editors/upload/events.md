@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI Upload for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder) that allow you to control and customize the behavior of the UI component.
+The Telerik UI Upload for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/uploadeventbuilder) that allow you to control and customize the behavior of the UI component.
 
 For a complete example on basic Upload events, refer to the [demo on using the events of the Upload](https://demos.telerik.com/{{ site.platform }}/upload/events).
 

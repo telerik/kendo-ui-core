@@ -106,7 +106,7 @@ The TimeDurationPicker enables you to specify your own [`separator`](/api/javasc
 
 ## 4. Handle a TimeDurationPicker Event
 
-The TimeDurationPicker exposes the `Open`, `Close`, and `Change` [events](/api/Kendo.Mvc.UI.Fluent/TimeDurationPickerEventBuilder) that you can handle and customize the component's functions. In this tutorial, you will use the `Open` and `Close` events to log a new entry in the browser's console.
+The TimeDurationPicker exposes the `Open`, `Close`, and `Change` [events](/api/kendo.mvc.ui.fluent/timedurationpickereventbuilder) that you can handle and customize the component's functions. In this tutorial, you will use the `Open` and `Close` events to log a new entry in the browser's console.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

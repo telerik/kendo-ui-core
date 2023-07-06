@@ -54,7 +54,9 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "done": "Done",
   "settings": "Column Settings",
   "lock": "Lock",
-  "unlock": "Unlock"
+  "unlock": "Unlock",
+  "movePrev": "Move Previous",
+  "moveNext": "Move Next"
 });
 }
 

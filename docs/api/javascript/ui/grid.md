@@ -3516,6 +3516,14 @@ The text message displayed in the column menu for locking a column.
     });
     </script>
 
+### columnMenu.messages.moveNext `String` *(default: "Move Next")*
+
+The text message that is displayed for the Move to next position column menu item.
+
+### columnMenu.messages.movePrev `String` *(default: "Move Previous")*
+
+The text message that is displayed for the Move to previous position column menu item.
+
 ### columnMenu.messages.reset `String` *(default: "Reset")*
 
 The text of the button which resets the columns filter.
@@ -8631,7 +8639,7 @@ Multi-level headers allow reordering only in same level.
 
 > Check [Column reordering](https://demos.telerik.com/kendo-ui/grid/column-reordering) for a live demo.
 
-### reorderable.rows `Boolean` *(default:false)*
+### reorderable.rows `Boolean|Object` *(default:false)*
 
 If set to `true` the user could reorder the rows by dragging them. By default reordering for rows is disabled. If the [selectable](/api/javascript/ui/grid/configuration/selectable) option is enabled for rows only selected rows will can be dragged and reordered.
 
@@ -8652,6 +8660,32 @@ If set to `true` the user could reorder the rows by dragging them. By default re
       ],
       reorderable: {
         rows: true
+      }
+    });
+    </script>
+
+### reorderable.rows.clickMoveClick `Boolean` *(default:true)*
+
+If set to `true` (default), when there is a drag column for the items in the Grid, the user will be allowed to reorder rows via click move click interaction as an alternative of the drag and drop one.
+
+#### Example - enable column reordering
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { draggable: true, width: "40px" },
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { id:1, name: "Jane Doe", age: 30 },
+        { id:2, name: "John Doe", age: 33 }
+      ],
+      reorderable: {
+        rows: {
+          clickMoveClick: false
+        }
       }
     });
     </script>

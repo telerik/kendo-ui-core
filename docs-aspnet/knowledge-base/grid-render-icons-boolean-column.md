@@ -31,7 +31,7 @@ How can I render icons for a Boolean column in the Telerik UI for {{ site.framew
 
 To achieve the desired scenario:
 
-1. Specify a column template for the Boolean column by using the [`ClientTemplate()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#clienttemplatesystemstring) configuration method and provide a function handler.
+1. Specify a column template for the Boolean column by using the [`ClientTemplate()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplatesystemstring) configuration method and provide a function handler.
 1. Within the handler, replace the default `true` and `false` values by using the conventional [Kendo UI Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/font-icons).
 
 

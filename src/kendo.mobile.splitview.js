@@ -141,4 +141,5 @@ var __meta__ = {
 
     ui.plugin(SplitView);
 })(window.kendo.jQuery);
+export default kendo;
 

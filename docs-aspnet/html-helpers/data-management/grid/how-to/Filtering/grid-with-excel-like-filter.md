@@ -17,6 +17,6 @@ The example utilizes the [Kendo UI shared DataSource](https://demos.telerik.com/
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
 * [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder)
 * [Overview of the MultiSelect HtmlHelper]({% slug htmlhelpers_multiselect_aspnetcore %})
-* [MultiSelectBuilder API Reference](https://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
+* [MultiSelectBuilder API Reference](https://docs.telerik.com/kendo-ui/aspnet-mvc/api/kendo.mvc.ui.fluent/multiselectbuilder)
 
 

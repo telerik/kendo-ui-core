@@ -20,6 +20,6 @@ The Drawing library provides options for specifying the basic parameters of the 
 
 ## See Also
 
-* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Getting Started with the Drawing Library]({% slug getting_started_kendoui_drawing %})
 * [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})
 * [Limitations and Browser Support for Kendo UI Drawing API]({% slug supportedbrowsers_drawingapi %})

@@ -73,3 +73,4 @@ var __meta__ = {
     kendo.ui.svgIcons = svgIcons;
     kendo.ui.icon = html.renderIcon;
 })(window.kendo.jQuery);
+export default kendo;

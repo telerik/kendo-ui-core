@@ -269,4 +269,5 @@ var __meta__ = {
     ui.plugin(Popup);
     ui.plugin(PopOver);
 })(window.kendo.jQuery);
+export default kendo;
 

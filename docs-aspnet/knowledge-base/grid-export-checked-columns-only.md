@@ -31,8 +31,8 @@ How can I create Excel documents by exporting the checked columns only in the {{
 
 To achieve the desired scenario:
 
-1. To handle the Excel export of the Grid, subscribe to the [`ExcelExport`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event.
-1. Enable the rows' persistence upon selection by using the [`.PersistSelection`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#persistselectionsystemboolean) configuration method.
+1. To handle the Excel export of the Grid, subscribe to the [`ExcelExport`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event.
+1. Enable the rows' persistence upon selection by using the [`.PersistSelection`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#persistselectionsystemboolean) configuration method.
 1. Within the handler, obtain the fields of the columns that you are going to add by using the client-side [`.columns()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns) method the Grid provides and map them to a **key-value** pair by using the [`.map()`](https://api.jquery.com/jquery.map/) method. 
 1. Push the cell headers from the previously obtained column fields.
 1. From there, get the selected Grid rows by using the built-in [`.selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/selectedkeynames) method, traverse through each of the items, and push their column values with the help of the previously obtained Grid column fields.

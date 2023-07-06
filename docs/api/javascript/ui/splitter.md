@@ -12,6 +12,22 @@ Represents the Kendo UI Splitter widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### clickMoveClick `Boolean` *(default: true)*
+
+Determines whether the click move click interaction would be enabled as an alternative of the drag and drop resizing of the Splitter. By default the alternative is enabled.
+
+#### Example
+
+    <div id="splitter">
+      <div>Pane A</div>
+      <div>Pane B</div>
+    </div>
+    <script>
+    $("#splitter").kendoSplitter({
+      clickMoveClick: false
+    });
+    </script>
+
 ### orientation `String` *(default: "horizontal")*
 
 Specifies the orientation of the widget. Supported values are *"horizontal"* and *"vertical"*.

@@ -181,4 +181,5 @@ var __meta__ = {
 
     ui.plugin(Collapsible);
 })(window.kendo.jQuery);
+export default kendo;
 

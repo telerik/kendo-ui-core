@@ -10,7 +10,7 @@ position: 5
 
 When you bind the DropDownTree through the `DataSource()` configuration option, each item can acquire specific properties.
 
-The following JSON example demonstrates how to pass item properties to the DropDownTree. You can configure the `text`, `value`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`DataTextField`](/api/Kendo.Mvc.UI.Fluent/DropDownTreeBuilder#datatextfieldsystemstring), [`DataValueField`](/api/Kendo.Mvc.UI.Fluent/DropDownTreeBuilder#datavaluefieldsystemstring), [`DataImageUrlField`](/api/Kendo.Mvc.UI.Fluent/DropDownTreeBuilder#dataimageurlfieldsystemstring), [`DataSpriteCssClassField`](/api/Kendo.Mvc.UI.Fluent/DropDownTreeBuilder#dataspritecssclassfieldsystemstring), and [`DataUrlField`](/api/Kendo.Mvc.UI.Fluent/DropDownTreeBuilder#dataurlfieldsystemstring) options respectively.
+The following JSON example demonstrates how to pass item properties to the DropDownTree. You can configure the `text`, `value`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`DataTextField`](/api/kendo.mvc.ui.fluent/dropdowntreebuilder#datatextfieldsystemstring), [`DataValueField`](/api/kendo.mvc.ui.fluent/dropdowntreebuilder#datavaluefieldsystemstring), [`DataImageUrlField`](/api/kendo.mvc.ui.fluent/dropdowntreebuilder#dataimageurlfieldsystemstring), [`DataSpriteCssClassField`](/api/kendo.mvc.ui.fluent/dropdowntreebuilder#dataspritecssclassfieldsystemstring), and [`DataUrlField`](/api/kendo.mvc.ui.fluent/dropdowntreebuilder#dataurlfieldsystemstring) options respectively.
 
     {
         "text":"Item text",

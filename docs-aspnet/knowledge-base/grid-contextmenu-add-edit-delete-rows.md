@@ -29,8 +29,8 @@ How can I use the ContextMenu to Add, Edit, or Remove rows in the Grid?
 ## Solution
 
 1. Create a {{ site.product }} ContextMenu that will have the `add`, `edit`, and `delete` actions whilst providing handlers.
-1. Set the [`Filter`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder#filtersystemstring) of the ContextMenu to the table data element (`td`).
-1. Store the currently selected row through the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event of the Grid.
+1. Set the [`Filter`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/contextmenubuilder#filtersystemstring) of the contextmenu to the table data element (`td`).
+1. Store the currently selected row through the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event of the Grid.
 1. Invoke the appropriate [client-side Grid methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) within the item handlers of the ContextMenu.
 
 ```Index.cshtml

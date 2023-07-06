@@ -8,7 +8,7 @@ position: 4
 
 # Events
 
-The Telerik UI ListView for {{ site.framework }} [exposes a number of JavaScript events](/api/Kendo.Mvc.UI.Fluent/ListViewEventBuilder) that allow you to control the behavior of the UI component.
+The Telerik UI ListView for {{ site.framework }} [exposes a number of JavaScript events](/api/kendo.mvc.ui.fluent/listvieweventbuilder) that allow you to control the behavior of the UI component.
 
 For a complete example of how to handle all ListView events triggered by user interaction, refer to the [demo on using the events of the ListView ](https://demos.telerik.com/{{ site.platform }}/listview/events).
 

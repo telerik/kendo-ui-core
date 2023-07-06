@@ -951,25 +951,31 @@ The configuration used to parse the remote service response.
 #### Example - specify the schema of the remote service
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "html5" } // search for tweets that contain "html5"
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service-core/products/read/",
+            contentType: "application/json",
+            type: "POST"
+          },
+          parameterMap: function (data, type) {
+            if (type == "read") {
+              return JSON.stringify(data);
+            }
+          }
+        },
+        schema: {
+          data: function(response) {
+            console.log(response)            
+            return response.Data; // the response from the service is { Data: [array of objects] }
+          }
         }
-      },
-      schema: {
-        data: function(response) {
-          return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
-        }
-      }
-    });
-    dataSource.fetch(function(){
-      var data = this.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data.length);
-    });
+      });
+      dataSource.fetch(function(){
+        var data = this.data();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(data.length);
+      });
     </script>
 
 ### schema.aggregates `Function|String`
@@ -1065,47 +1071,58 @@ The field from the server response which contains the data items. Can be set to 
 #### Example - specify the field which contains the data items as a string
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "html5" } // search for tweets that contain "html5"
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service-core/products/read/",
+            contentType: "application/json",
+            type: "POST"
+          },
+          parameterMap: function (data, type) {
+            if (type == "read") {
+              return JSON.stringify(data);
+            }
+          }
+        },
+        schema: {
+          data: "Data"
         }
-      },
-      schema: {
-        data: "statuses" // twitter's response is { "statuses": [ /* results */ ] }
-      }
-    });
-    dataSource.fetch(function(){
-      var data = this.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data.length);
-    });
+      });
+      dataSource.fetch(function(){
+        var data = this.data();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(data.length);
+      });
     </script>
 
 #### Example - specify the field which contains the data items as a function
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "html5" } // search for tweets that contain "html5"
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service-core/products/read/",
+            contentType: "application/json",
+            type: "POST"
+          },
+          parameterMap: function (data, type) {
+            if (type == "read") {
+              return JSON.stringify(data);
+            }
+          }
+        },
+        schema: {
+          data: function(response) {
+            console.log(response)            
+            return response.Data; // the response from the service is { Data: [array of objects] }
+          }
         }
-      },
-      schema: {
-        data: function(response) {
-          return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
-        }
-      }
-    });
-    dataSource.fetch(function(){
-      var data = this.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data.length);
-    });
+      });
+      dataSource.fetch(function(){
+        var data = this.data();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(data.length);
+      });
     </script>
 
 ### schema.errors `Function|String` *(default: "errors")*

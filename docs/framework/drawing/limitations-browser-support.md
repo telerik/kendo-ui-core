@@ -9,7 +9,7 @@ position: 7
 
 # Limitations and Browser Support
 
-Due to the specifics of their implementation, both the Drawing library and the [PDF Export implementations]({% slug introduction_pdfexport_kendoui %}) share certain limitations.
+Due to the specifics of their implementation, both the Drawing library and the [PDF Export implementations]({% slug pdfderawingexport_drawingapi %}) share certain limitations.
 
 * [General behavior](#general-behavior)
 * [Elements and styles](#elements-and-styles)
@@ -115,7 +115,7 @@ For more information on the provided [browser support]({% slug wbe_browserand_op
 ## See Also
 
 * [Overview of the Drawing Library]({% slug overview_kendoui_drawingapi %})
-* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Getting Started with the Drawing Library]({% slug getting_started_kendoui_drawing %})
 * [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})
 * [Exporting Drawings to PDF]({% slug pdfderawingexport_drawingapi %})
 * [Exporting Drawings to Images]({% slug exportpng_kendoui_drawingapi %})

@@ -2681,7 +2681,7 @@ Only applicable for the formatting tool. Specifies the context in which the opti
     });
     </script>
 
-### tools.palette `String|Array` *(default: null)*
+### tools.palette `String|Array` *(default: "websafe")*
 
 Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools. If you need to use the [color gradient](api/javascript/ui/colorgradient) view in the picker instead of the palette, set this value to null.
 
@@ -2691,8 +2691,7 @@ Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palet
     <script>
     $("#editor").kendoEditor({
         tools: [{
-            name: "foreColor",
-            palette: "websafe"
+            name: "foreColor"
         }]
     });
     </script>

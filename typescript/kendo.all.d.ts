@@ -237,6 +237,8 @@ declare namespace kendo {
 
     var ns: string;
 
+    var jQuery: JQuery;
+
     var keys: {
         INSERT: number;
         DELETE: number;
@@ -1781,6 +1783,7 @@ declare namespace kendo.ui {
     interface DraggableOptions {
         axis?: string | undefined;
         autoScroll?: boolean | undefined;
+        clickMoveClick?: boolean | undefined;
         container?: JQuery | undefined;
         cursorOffset?: any;
         distance?: number | undefined;
@@ -5940,6 +5943,7 @@ declare namespace kendo.ui {
     }
 
     interface GanttEditable {
+        clickMoveClick?: boolean | undefined;
         confirmation?: boolean | undefined;
         create?: boolean | undefined;
         dependencyCreate?: boolean | undefined;
@@ -6364,6 +6368,8 @@ declare namespace kendo.ui {
         apply?: string | undefined;
         reset?: string | undefined;
         buttonTitle?: string | undefined;
+        movePrev?: string | undefined;
+        moveNext?: string | undefined;
     }
 
     interface GridColumnMenu {
@@ -6697,6 +6703,15 @@ declare namespace kendo.ui {
         name?: string | undefined;
         template?: string|Function | undefined;
         text?: string | undefined;
+    }
+
+    interface GridReorderableRows {
+        clickMoveClick?: boolean | undefined;
+    }
+
+    interface GridReorderable {
+        rows?: boolean | GridReorderableRows | undefined;
+        columns?: boolean | undefined;
     }
 
     interface GridOptions {
@@ -10614,6 +10629,7 @@ declare namespace kendo.ui {
 
     interface SplitterOptions {
         name?: string | undefined;
+        clickMoveClick?: boolean | undefined;
         orientation?: string | undefined;
         panes?: SplitterPane[] | undefined;
         collapse?(e: SplitterCollapseEvent): void;
@@ -11616,6 +11632,10 @@ declare namespace kendo.ui {
         rows?: number | undefined;
     }
 
+    interface TileLayoutReorderable {
+        clickMoveClick?: boolean | undefined;
+    }
+
     interface TileLayoutOptions {
         name?: string | undefined;
         columns?: number | undefined;
@@ -11624,7 +11644,7 @@ declare namespace kendo.ui {
         gap?: TileLayoutGap | undefined;
         height?: string|number | undefined;
         navigatable?: boolean | undefined;
-        reorderable?: boolean | undefined;
+        reorderable?: boolean | TileLayoutReorderable | undefined;
         resizable?: boolean | undefined;
         rows?: number | undefined;
         rowsHeight?: string|number | undefined;
@@ -12459,6 +12479,8 @@ declare namespace kendo.ui {
         settings?: string | undefined;
         lock?: string | undefined;
         unlock?: string | undefined;
+        movePrev?: string | undefined;
+        moveNext?: string | undefined;
     }
 
     interface TreeListColumnMenu {
@@ -12507,6 +12529,7 @@ declare namespace kendo.ui {
         attributes?: any;
         columns?: any;
         command?: TreeListColumnCommandItem[] | undefined;
+        draggable?: boolean | undefined;
         editable?: Function | undefined;
         encoded?: boolean | undefined;
         expandable?: boolean | undefined;
@@ -12538,6 +12561,7 @@ declare namespace kendo.ui {
 
     interface TreeListEditableMove {
         reorderable?: boolean | undefined;
+        clickMoveClick?: boolean | undefined;
     }
 
     interface TreeListExcel {
@@ -12982,6 +13006,10 @@ declare namespace kendo.ui {
         retry?: string | undefined;
     }
 
+    interface TreeViewDragAndDrop {
+        clickMoveClick?: boolean | undefined;
+    }
+
     interface TreeViewOptions {
         name?: string | undefined;
         animation?: boolean | TreeViewAnimation | undefined;
@@ -12993,7 +13021,7 @@ declare namespace kendo.ui {
         dataSpriteCssClassField?: string | undefined;
         dataTextField?: string|any | undefined;
         dataUrlField?: string | undefined;
-        dragAndDrop?: boolean | undefined;
+        dragAndDrop?: boolean | TreeViewDragAndDrop | undefined;
         loadCompleted?(e: TreeViewEvent): void;
         loadOnDemand?: boolean | undefined;
         messages?: TreeViewMessages | undefined;

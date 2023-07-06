@@ -2807,4 +2807,5 @@ var __meta__ = {
     ui.plugin(ContextMenu);
 
 })(window.kendo.jQuery);
+export default kendo;
 

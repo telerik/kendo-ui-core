@@ -318,4 +318,5 @@ var __meta__ = {
 
     ui.plugin(Drawer);
 })(window.kendo.jQuery);
+export default kendo;
 

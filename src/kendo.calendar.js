@@ -17,6 +17,7 @@ var __meta__ = {
         Widget = ui.Widget,
         keys = kendo.keys,
         parse = kendo.parseDate,
+        encode = kendo.htmlEncode,
         adjustDST = kendo.date.adjustDST,
         weekInYear = kendo.date.weekInYear,
         Selectable = kendo.ui.Selectable,
@@ -89,7 +90,7 @@ var __meta__ = {
                     ${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}
                 </button>
                 <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat k-button-flat-primary k-rounded-md">
-                    <span class="k-button-text">${messages.today}</span>
+                    <span class="k-button-text">${kendo.htmlEncode(messages.today)}</span>
                 </button>
                 <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
                     ${kendo.ui.icon({ icon: `chevron-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}
@@ -429,7 +430,7 @@ var __meta__ = {
                 title.html('<span class="k-button-text">' + currentView.title(value, min, max, culture) + '</span>');
 
                 if (that.options.messages.parentViews && that._view.name !== CENTURY) {
-                    title.attr("title", that.options.messages.navigateTo + that.options.messages.parentViews[that._view.name]);
+                    title.attr("title", encode(that.options.messages.navigateTo + that.options.messages.parentViews[that._view.name]));
                 } else {
                     title.removeAttr("title");
                 }
@@ -1477,7 +1478,7 @@ var __meta__ = {
                 html += '<thead class="k-calendar-thead"><tr role="row" class="k-calendar-tr">';
 
                 if (isWeekColumnVisible) {
-                    html += '<th scope="col" class="k-calendar-th k-alt">' + options.messages.weekColumnHeader + '</th>';
+                    html += '<th scope="col" class="k-calendar-th k-alt">' + encode(options.messages.weekColumnHeader) + '</th>';
                 }
 
                 for (; idx < 7; idx++) {
@@ -2134,4 +2135,5 @@ var __meta__ = {
 
     kendo.calendar = calendar;
 })(window.kendo.jQuery);
+export default kendo;
 

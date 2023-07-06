@@ -14,7 +14,7 @@ The Chat toolbar is located below the input box of the component. You can displa
 
 ## Configuring the Items
 
-To configure the toolbar items, use the [`Toolbar.Buttons()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/ChatToolbarSettingsBuilder#buttonssystemaction) configuration method. Depending on the executed command in the toolbar, you can also implement a specific functionality by handling the [`ToolClick`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/ChatEventBuilder#toolclicksystemstring) event.
+To configure the toolbar items, use the [`Toolbar.Buttons()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/chattoolbarsettingsbuilder#buttonssystemaction) configuration method. Depending on the executed command in the toolbar, you can also implement a specific functionality by handling the [`ToolClick`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/chateventbuilder#toolclicksystemstring) event.
 
 The following example demonstrates how to configure the toolbar items for the Chat.
 

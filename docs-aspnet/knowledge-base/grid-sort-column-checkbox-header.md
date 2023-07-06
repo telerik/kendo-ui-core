@@ -79,7 +79,7 @@ How can I prevent the sorting of the column which uses a header template and has
 
 For the complete implementation of the suggested approach, refer to this [Telerik REPL Example](https://netcorerepl.telerik.com/wmaDmAvR194a6niJ25).
 
-* [DataSource Sort API](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/AjaxDataSourceBuilder#sortsystemaction)
+* [DataSource Sort API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ajaxdatasourcebuilder#sortsystemaction)
 
 
 ## More {{ site.framework }} Grid Resources

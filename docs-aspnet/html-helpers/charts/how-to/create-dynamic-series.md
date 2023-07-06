@@ -49,4 +49,4 @@ To see the full examples, refer to the GitHub repository of the [sample project 
 ## See Also
 
 * [Overview of the Chart HtmlHelper]({% slug htmlhelpers_dropdownlist_aspnetcore %})
-* [ChartBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)
+* [ChartBuilder Server-Side API](/api/kendo.mvc.ui.fluent/chartbuilder)

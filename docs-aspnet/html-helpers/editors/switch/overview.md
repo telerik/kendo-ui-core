@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI Switch for {{ site.framework }}."
 previous_url: /helpers/editors/switch/overview
 slug: overview_switchhelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Switch Overview
@@ -35,7 +35,8 @@ The following example demonstrates how to define the Switch.
 {% if site.core %}
 ```TagHelper
     <kendo-switch name="switch"
-            checked="true"></kendo-switch>
+            checked="true">
+    </kendo-switch>
 ```
 {% endif %}
 
@@ -43,95 +44,36 @@ The following example demonstrates how to define the Switch.
 
 The configuration options of the Switch are passed as attributes.
 
-```tab-HtmlHelper
+```HtmlHelper
     @(Html.Kendo().Switch()
         .Name("switch")
         .Checked(true)
         .Enabled(true))
 ```
-```tab-TagHelper
+{% if site.core %}
+```TagHelper
     <kendo-switch name="switch"
             checked="true"
-            enabled="true"></kendo-switch>
+            enabled="true">
+    </kendo-switch>
 ```
-
-
-
+{% endif %}
 
 ## Functionality and Features
 
-The Switch provides [accessibility support]({% slug accessibility_aspnetcore_switch %}) through its keyboard navigation.
+* [Appearance]({% slug switch_appearance %})&mdash;The Switch enables you to customize its appearance based on your requirements.
+* [Accessibility]({% slug accessibility_aspnetcore_switch %})&mdash;The Switch provides accessibility support through its keyboard navigation.
+* [Events]({% slug events_switch %})&mdash;The Switch allows you to handle its events and implement custom functionality.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the Switch, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/switch/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
-## Events
+## Next Steps
 
-You can subscribe to all Switch events. For a complete example on basic Switch events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/{{ site.platform }}/switch/events).
-
-### Handling by Handler Name
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().Switch()
-        .Name("switch")
-        .Events(e => e
-            .Change("change")
-        )
-    )
-    <script>
-        function change(e) {
-            //Handle the change event.
-        }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-<kendo-switch name="switch" on-change="change"></kendo-switch>
-<script>
-    function change(e) {
-        //Handle the change event.
-    }
-</script>
-```
-{% endif %}
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().Switch()
-        .Name("switch")
-        .Events(e => e
-            .Change(@<text>
-              function(e) {
-                  //Handle the change event inline.
-              }
-            </text>)
-        )
-    )
-```
-
-## Referencing Existing Instances
-
-To reference an existing Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch#methods) to control its behavior.
-
-```
-    // Place the following after your Telerik UI Switch for {{ site.framework }} declaration.
-    <script>
-        $(document).ready(function() {
-            // The Name() of the Switch is used to get its client-side instance.
-            var switch = $("#switch").data("kendoSwitch");
-        });
-    </script>
-```
+* [Getting Started with the Switch ]({% slug aspnetcore_switch_getting_started %})
+* [Basic Usage of the Switch for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch/index)
 
 ## See Also
 
-* [Basic Usage by the Switch HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch)
-{% if site.core %}
-* [Basic Usage of the Switch TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/switch/tag-helper)
-{% endif %}
-* [Using the API of the Switch HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch/api)
+* [Basic Usage by the Switch for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch)
+* [Using the API of the Switch for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch/api)
 * [Server-Side API](/api/switch)

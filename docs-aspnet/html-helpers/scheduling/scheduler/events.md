@@ -8,7 +8,7 @@ position: 4
 
 # Events
 
-The Telerik UI Scheduler for {{ site.framework }} [exposes a number of JavaScript events](/api/Kendo.Mvc.UI.Fluent/SchedulerEventBuilder) that allow you to control the behavior of the UI component.
+The Telerik UI Scheduler for {{ site.framework }} [exposes a number of JavaScript events](/api/kendo.mvc.ui.fluent/schedulereventbuilder) that allow you to control the behavior of the UI component.
 
 For a complete example of how to handle all Scheduler events triggered by user interaction, refer to the [demo on using the events of the  Scheduler ](https://demos.telerik.com/{{ site.platform }}/scheduler/events). For a runnable example on the `move` and `resize` events, refer to the [demo on the specific events](https://demos.telerik.com/{{ site.platform }}/scheduler/move-resize).
 

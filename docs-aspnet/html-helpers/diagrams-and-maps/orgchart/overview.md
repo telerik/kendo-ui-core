@@ -102,61 +102,21 @@ The following example demonstrates the basic configuration of the OrgChart compo
 
 ## Functionality and Features
 
-* [Binding]({% slug htmlhelpers_orgchart_databinding_aspnetcore %})
-* [Editing]({% slug htmlhelpers_orgchart_editing_aspnetcore %})
-* [Grouping]({% slug htmlhelpers_orgchart_grouping_aspnetcore %})
-* [Templates]({% slug htmlhelpers_orgchart_templates_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_orgchart %})
+* [Binding]({% slug htmlhelpers_orgchart_databinding_aspnetcore %})—You can bind the OrgChart to local or remote data.
+* [Editing]({% slug htmlhelpers_orgchart_editing_aspnetcore %})—The OrgChart provides a built-in editing functionality, which is enabled by default.
+* [Grouping]({% slug htmlhelpers_orgchart_grouping_aspnetcore %})—The OrgChart enables you to group root nodes or nodes that have the same parent.
+* [Templates]({% slug htmlhelpers_orgchart_templates_aspnetcore %})—The OrgChart allows you to customize its nodes and group headers by using [Kendo Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview).
+* [Accessibility]({% slug accessibility_aspnetcore_orgchart %})—The OrgChart is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
-## Events
+## Next Steps
 
-You can subscribe to all OrgChart [events](/api/orgchart). For a complete example on the OrgChart events, refer to the [OrgChart Events Demo](https://demos.telerik.com/{{ site.platform }}/orgchart/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().OrgChart()
-      .Name("orgchart")
-      .Events(e => e
-            .Select("onSelect")
-            .Change("onChange")
-      )
-    )
-    <script>
-    function onSelect(e) {
-        // Handle the "select" event.
-    }
-
-    function onChange(e) {
-        // Handle the "change" event.
-    }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-orgchart name="orgchart"
-                    on-select="onSelect"
-                    on-change="onChange">
-    </kendo-orgchart>
-    
-    <script>
-    function onSelect(e) {
-        // Handle the "select" event.
-    }
-
-    function onChange(e) {
-        // Handle the "change" event.
-    }
-    </script>
-```
-{% endif %}
-
-## See Also
-
+* [Getting Started with the OrgChart]({% slug orgchart_getting_started %})
 * [Basic Usage of the OrgChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart)
 {% if site.core %}
 * [Basic Usage of the OrgChart TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/orgchart/tag-helper)
 {% endif %}
+
+## See Also
+
 * [Using the API of the OrgChart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/api)
-* [Server-Side API](/api/orgchart)
-* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [Knowledge Base Section](/knowledge-base)

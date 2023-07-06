@@ -8,11 +8,11 @@ position: 4
 
 # Layout Containers
 
-The Telerik UI TileLayout for {{ site.framework }} component tiles are configured by using the [`Containers`](/api/Kendo.Mvc.UI.Fluent/TileLayoutBuilder#containerssystemactionkendomvcuifluenttilelayoutcontainerfactory) configurator. 
+The Telerik UI TileLayout for {{ site.framework }} component tiles are configured by using the [`Containers`](/api/kendo.mvc.ui.fluent/tilelayoutbuilder#containerssystemactionkendomvcuifluenttilelayoutcontainerfactory) configurator. 
 
 ## Dimensions
 
-Each tile can span across several rows and columns. The space that the tile takes up is determined by its container [`RowSpan()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutContainerBuilder#rowspansystemdouble) and [`ColSpan()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutContainerBuilder#colspansystemdouble).
+Each tile can span across several rows and columns. The space that the tile takes up is determined by its container [`RowSpan()`](/api/kendo.mvc.ui.fluent/tilelayoutcontainerbuilder#rowspansystemdouble) and [`ColSpan()`](/api/kendo.mvc.ui.fluent/tilelayoutcontainerbuilder#colspansystemdouble).
 
 ## Headers
 
@@ -20,11 +20,11 @@ The tiles can be configured with our without headers.
 
 > Headers are required if using the `Reorderable()` functionality of the widget.
 
-The headers render their content via the [`Header.Text()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutContainerHeaderSettingsBuilder#textsystemstring) which is plain text or by utilizing a [`Header.Template()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutContainerHeaderSettingsBuilder#templatesystemstring) or [`Header.TemplateId()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutContainerHeaderSettingsBuilder#templateidsystemstring).
+The headers render their content via the [`Header.Text()`](/api/kendo.mvc.ui.fluent/tilelayoutcontainerheadersettingsbuilder#textsystemstring) which is plain text or by utilizing a [`Header.Template()`](/api/kendo.mvc.ui.fluent/tilelayoutcontainerheadersettingsbuilder#templatesystemstring) or [`Header.TemplateId()`](/api/kendo.mvc.ui.fluent/tilelayoutcontainerheadersettingsbuilder#templateidsystemstring).
 
 ## Body content
 
-The main tile content is rendered from the [`BodyTemplate()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutContainerBuilder#bodytemplatesystemstring) that can also be plain text or a complex template with widgets in it. For complex widgets, the [`BodyTemplateId()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutContainerBuilder#bodytemplateidsystemstring) might be more suitable.
+The main tile content is rendered from the [`BodyTemplate()`](/api/kendo.mvc.ui.fluent/tilelayoutcontainerbuilder#bodytemplatesystemstring) that can also be plain text or a complex template with widgets in it. for complex widgets, the [`BodyTemplateId()`](/api/kendo.mvc.ui.fluent/tilelayoutcontainerbuilder#bodytemplateidsystemstring) might be more suitable.
 
 > When using widgets inside the template, their `ToClientTemplate()` method needs to be called.
 

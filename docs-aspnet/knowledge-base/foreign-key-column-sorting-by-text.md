@@ -70,7 +70,7 @@ The following example demonstrates how to enable the sort-by-text functionality 
         </script>
     ```
 
-1. Bind the additional text field using the [.Bound()](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridColumnFactory?&_ga=2.8632309.1913833702.1649765178-415541100.1638373975#boundsystemlinqexpressionsexpressionsystemfunctt1) configuration option and calculate the field by utilizing the [.ClientTemplate()](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#clienttemplatesystemstring) setting.
+1. Bind the additional text field using the [.Bound()](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridcolumnfactory?&_ga=2.8632309.1913833702.1649765178-415541100.1638373975#boundsystemlinqexpressionsexpressionsystemfunctt1) configuration option and calculate the field by utilizing the [.ClientTemplate()](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplatesystemstring) setting.
 
     ```
         @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()

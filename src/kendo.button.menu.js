@@ -412,4 +412,5 @@ var __meta__ = {
     ui.plugin(ButtonMenu);
 
 })(window.kendo.jQuery);
+export default kendo;
 

@@ -8,7 +8,7 @@ position: 10
 
 # Animations
 
-The Telerik UI Window for {{ site.framework }} allows you to customize the animation effects upon display via the [`Animation()`](/api/Kendo.Mvc.UI.Fluent/WindowBuilder#animationsystemactionkendomvcuifluentpopupanimationbuilder) configuration option.
+The Telerik UI Window for {{ site.framework }} allows you to customize the animation effects upon display via the [`Animation()`](/api/kendo.mvc.ui.fluent/windowbuilder#animationsystemactionkendomvcuifluentpopupanimationbuilder) configuration option.
 
 The Following example demonstrates how you can configure the [Animation effects](/api/Kendo.Mvc.UI/EffectsBuilder) for the Window:
 

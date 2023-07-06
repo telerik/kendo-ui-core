@@ -61,4 +61,5 @@ var __meta__ = {
     kendo.cssProperties.registerPrefix("HTMLChipList", "k-chip-list-");
 
 })(window.kendo.jQuery);
+export default kendo;
 

@@ -34,7 +34,7 @@ The following example demonstrates a Signature component with custom appearance 
 
 ## Background Color
 
-To modify the background color of the Signature container, use its [`BackgroundColor`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/SignatureBuilder#backgroundColor) configuration.
+To modify the background color of the Signature container, use its [`BackgroundColor`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/signaturebuilder#backgroundcolor) configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Signature()
@@ -49,7 +49,7 @@ To modify the background color of the Signature container, use its [`BackgroundC
 
 ## Stroke Color
 
-You can also change the stroke color of the Signature by using its [`Color`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/SignatureBuilder#color) configuration.
+You can also change the stroke color of the Signature by using its [`Color`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/signaturebuilder#color) configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Signature()
@@ -64,7 +64,7 @@ You can also change the stroke color of the Signature by using its [`Color`](htt
 
 ## Stroke Width
 
-To update the stroke width of the Signature, utilize its [`StrokeWidth`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/SignatureBuilder#strokewidth) configuration.
+To update the stroke width of the Signature, utilize its [`StrokeWidth`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/signaturebuilder#strokewidth) configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Signature()
@@ -80,5 +80,5 @@ To update the stroke width of the Signature, utilize its [`StrokeWidth`](https:/
 ## See Also
 
 * [Demo Page for the Signature](https://demos.telerik.com/{{ site.platform }}/signature)
-* [API Reference of the Signature](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/SignatureBuilder)
+* [API Reference of the Signature](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/signaturebuilder)
 * [Knowledge Base Section](/knowledge-base)

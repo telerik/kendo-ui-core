@@ -32,7 +32,7 @@ To enable the selection functionality of the TreeList, set the `Selectable` opti
 ```
 {% endif %}
 
-> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/TreeListEventBuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
+> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/treelisteventbuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
 
 ## Single Row Checkbox Selection
 

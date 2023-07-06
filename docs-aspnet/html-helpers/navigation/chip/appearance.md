@@ -41,7 +41,7 @@ The `Size` option controls how big or small the rendered `Chip` looks.
 ```
 {% endif %}
 
-The [`Size`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#sizekendomvcuicomponentsize) option accepts the following values:
+The [`Size`](/api/kendo.mvc.ui.fluent/chipbuilder#sizekendomvcuicomponentsize) option accepts the following values:
 
 - `ComponentSize.Small`—Small size.
 - (Default) `ComponentSize.Medium`—Medium size.
@@ -77,7 +77,7 @@ The `FillMode` option controls the way the color is applied to the rendered `div
 ```
 {% endif %}
 
-The [`FillMode`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#fillmodekendomvcuichipfillmode) option accepts the following values:
+The [`FillMode`](/api/kendo.mvc.ui.fluent/chipbuilder#fillmodekendomvcuichipfillmode) option accepts the following values:
 
 - (Default) `ChipFillMode.Solid`
 - `ChipFillMode.Outline`
@@ -111,7 +111,7 @@ The `ThemeColor` option controls the color that will be applied to the rendered 
 ```
 {% endif %}
 
-The [`ThemeColor`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#themecolorkendomvcuithemecolor) option accepts the following values:
+The [`ThemeColor`](/api/kendo.mvc.ui.fluent/chipbuilder#themecolorkendomvcuithemecolor) option accepts the following values:
 
 - (Default) `ChipThemeColor.Base`
 - `ChipThemeColor.Info`
@@ -149,7 +149,7 @@ The `Rounded` option controls how much border radius is applied to the rendered 
 ```
 {% endif %}
 
-The [`Rounded`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#roundedkendomvcuirounded) option accepts the following values:
+The [`Rounded`](/api/kendo.mvc.ui.fluent/chipbuilder#roundedkendomvcuirounded) option accepts the following values:
 
 - `Rounded.Small`—Small form.
 - (Default) `Rounded.Medium`—Medium form.

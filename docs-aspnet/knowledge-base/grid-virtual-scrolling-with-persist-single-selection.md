@@ -32,7 +32,7 @@ How can I persist the selected row in the Grid when the virtual scrolling functi
 
 The example below is implemented as per the following steps:
 
-1. Handle the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#changesystemstring) event of the Grid.
+1. Handle the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#changesystemstring) event of the Grid.
 1. Use the [`select()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) to get the selected table row.
 1. Get the data item of the selected row by using the [`dataItem()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem).
 1. Use the private `_selectedIds` object of the Grid to save the selected row.

@@ -29,7 +29,7 @@ How can I sort the multi-check items in the column filter menu of the {{ site.pr
 
 ## Solution
 
-1. Specify a [DataSource](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBoundColumnFilterableBuilder#datasourcesystemaction) in the `Filterable` configuration of the Grid column.
+1. Specify a [DataSource](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnfilterablebuilder#datasourcesystemaction) in the `Filterable` configuration of the Grid column.
 1. Configure the sort option of the DataSource and set the desired order.
 
 ```HtmlHelper

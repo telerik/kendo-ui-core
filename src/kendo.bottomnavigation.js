@@ -363,4 +363,5 @@ var __meta__ = {
 
     kendo.cssProperties.registerPrefix("BottomNavigation", "k-bottom-nav-");
 })(window.kendo.jQuery);
+export default kendo;
 

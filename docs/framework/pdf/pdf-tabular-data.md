@@ -119,6 +119,6 @@ To control the generated table, use any of the following options:
 ## See Also
 
 * [Overview of the Drawing Library]({% slug overview_kendoui_drawingapi %})
-* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Getting Started with the Drawing Library]({% slug getting_started_kendoui_drawing %})
 * [Exporting Drawings to PDF]({% slug pdfderawingexport_drawingapi %})
 * [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})

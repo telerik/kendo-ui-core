@@ -166,5 +166,5 @@ You can configure the MultiColumnComboBox to get its data from a remote source b
 ## See Also
 
 * [Basic Usage of the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/index)
-* [MultiColumnComboBoxBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/MultiColumnComboBoxBuilder)
+* [MultiColumnComboBoxBuilder Server-Side API](/api/kendo.mvc.ui.fluent/multicolumncomboboxbuilder)
 * [MultiColumnComboBox Server-Side API](/api/multicolumncombobox)

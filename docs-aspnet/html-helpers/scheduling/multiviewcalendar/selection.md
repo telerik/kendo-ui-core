@@ -11,7 +11,7 @@ position: 4
 
 The Telerik UI MultiViewCalendar allows the user to select multiple dates by using the multiple-view MultiViewCalendar selection mode.
 
-> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/MultiViewCalendarEventBuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
+> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/multiviewcalendareventbuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
 
 ```HtmlHelper
     @(Html.Kendo().MultiViewCalendar()

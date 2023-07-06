@@ -31,11 +31,11 @@ How can I implement an always visible DropDownList command template for the {{ s
 
 To achieve the desired scenario: 
 
-1. Specify a DropDownList command template by using the [`.Template()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridCustomActionCommandBuilder#templatesystemstring) configuration option for a custom command.
+1. Specify a DropDownList command template by using the [`.Template()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridcustomactioncommandbuilder#templatesystemstring) configuration option for a custom command.
 1. Within the template, specify an empty `<input>` tag and decorate it with a common class that will be used for rendering a DropDownList for each rows respectively.
 1. Create a common `DataSource` for the DropDownList.
-1. Traverse through each records by handling the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event of the Grid. To initialize the DropDownlists, use the previously decorated common class for the custom command input.
-1. Handle each of the command options by subscribing to the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DropDownListEventBuilder#changesystemstring) event of the DropDownLists.
+1. Traverse through each records by handling the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event of the Grid. To initialize the DropDownlists, use the previously decorated common class for the custom command input.
+1. Handle each of the command options by subscribing to the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlisteventbuilder#changesystemstring) event of the DropDownLists.
 
 ```Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()

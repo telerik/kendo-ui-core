@@ -13,7 +13,7 @@ This article lists some of the most frequently asked questions when working with
 
 ## How can I display HTML in Grid columns?
 
-By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entities that are included in its data. To prevent this, call the [`Encoded`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystemstring) method and pass `false` as its argument.
+By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entities that are included in its data. To prevent this, call the [`Encoded`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#formatsystemstring) method and pass `false` as its argument.
 
 ```HtmlHelper
     columns.Bound(o => o.Description).Encoded(false);
@@ -335,7 +335,7 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
 
 ## How can I change the format of bound columns?
 
-Use the [`Format`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystemstring) method. The value should be a valid [`number`](https://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](https://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-date-formats) format.
+Use the [`Format`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#formatsystemstring) method. the value should be a valid [`number`](https://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](https://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-date-formats) format.
 
 The following example demonstrates how to specify the format of a bound column.
 

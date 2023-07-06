@@ -808,7 +808,7 @@ A string, DOM element, or jQuery object which represents the item. A string is t
     });
 
     var listbox = $("#listBox").data("kendoListBox");
-    var dataItem = listbox.dataItem(".k-item:first");
+    var dataItem = listbox.dataItem(".k-list-item:first");
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.name); // displays "foo"
     </script>

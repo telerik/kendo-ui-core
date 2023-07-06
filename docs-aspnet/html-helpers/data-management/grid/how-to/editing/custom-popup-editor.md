@@ -12,7 +12,7 @@ The Grid provides an option for editing its data in a popup. You can modify the 
 
 To customize it the popup editor:
 
-1. Declare the name of the file that will render the content of the popup window by using the [`TemplateName`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEditingSettingsBuilder#templatenamesystemstring) extension method.
+1. Declare the name of the file that will render the content of the popup window by using the [`TemplateName`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder#templatenamesystemstring) extension method.
 
     ```
     @(Html.Kendo().Grid<TelerikProject.Models.Customer>()
@@ -38,4 +38,4 @@ For a full example, refer to the project on how to [customize the popup editor o
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder)

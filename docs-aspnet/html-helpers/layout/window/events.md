@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI Window for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/WindowEventBuilder) that allow you to control and customize the behavior of the UI component.
+The Telerik UI Window for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/windoweventbuilder) that allow you to control and customize the behavior of the UI component.
 
 For a complete example on basic Window events, refer to the [demo on using the events of the Window](https://demos.telerik.com/{{ site.platform }}/window/events).
 

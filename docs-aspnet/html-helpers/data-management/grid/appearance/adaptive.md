@@ -15,7 +15,7 @@ For example, when you filter or edit data on mobile, the system slides in a new 
 
 ## Enabling the Responsive Web Design
 
-To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
+To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
 
 * If set to `MobileMode.Auto`, the component will use adaptive rendering when viewed on a mobile browser.
 * If set to `MobileMode.Phone`, the component will be forced to use adaptive rendering regardless of the browser type.

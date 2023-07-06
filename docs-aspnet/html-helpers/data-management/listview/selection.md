@@ -10,7 +10,7 @@ position: 8
 
 By default, the selection functionality of the Telerik UI ListView for {{ site.framework }} is disabled.
 
-> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/ListViewEventBuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
+> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/listvieweventbuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
 
 ## Single Selection
 

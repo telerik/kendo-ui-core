@@ -1841,4 +1841,5 @@ var __meta__ = {
     kendo.ui.plugin(VirtualList);
 
 })(window.kendo.jQuery);
+export default kendo;
 

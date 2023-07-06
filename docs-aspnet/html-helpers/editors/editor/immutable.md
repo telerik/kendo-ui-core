@@ -14,7 +14,7 @@ For a runnable example, refer to the [demo on immutable elements in the Editor](
 
 ## Enabling Immutable Elements
 
-To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To prevent the user interaction with that element, you also need to enable the [`Immutables()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#immutablessystemactionkendomvcuifluenteditorimmutablessettingsbuilder) configuration method.
+To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To prevent the user interaction with that element, you also need to enable the [`Immutables()`](/api/kendo.mvc.ui.fluent/editorbuilder#immutablessystemactionkendomvcuifluenteditorimmutablessettingsbuilder) configuration method.
 
 ```HtmlHelper
     @(Html.Kendo().Editor()
@@ -33,7 +33,7 @@ To define the immutable elements in the content area, set the [`contenteditable`
 
 ## Serializing Immutables
 
-The [`Serialization()`](/api/Kendo.Mvc.UI.Fluent/EditorImmutablesSettingsBuilder#serializationsystemstring) method enables you to control the HTML representation of the immutable elements in the `viewHtml` dialog.
+The [`Serialization()`](/api/kendo.mvc.ui.fluent/editorimmutablessettingsbuilder#serializationsystemstring) method enables you to control the HTML representation of the immutable elements in the `viewHtml` dialog.
 
 The `immutables.serialization` configuration method accepts the following parameters:
 
@@ -106,7 +106,7 @@ The `immutables.serialization` configuration method accepts the following parame
 
 ## Deserializing Immutables
 
-The [`Deserialization()`](/api/Kendo.Mvc.UI.Fluent/EditorImmutablesSettingsBuilder#deserializationsystemfuncsystemobjectsystemobject) method does the opposite of the `Serialization()` one. `Deserialization()` takes the HTML representation from the `ViewHtml` dialog and alters the immutable DOM element based on the implemented logic in the callback function.
+The [`Deserialization()`](/api/kendo.mvc.ui.fluent/editorimmutablessettingsbuilder#deserializationsystemfuncsystemobjectsystemobject) method does the opposite of the `Serialization()` one. `Deserialization()` takes the HTML representation from the `ViewHtml` dialog and alters the immutable DOM element based on the implemented logic in the callback function.
 
 The following example demonstrates how to use the `Serialization()` and `Deserialization()` options to expose the CSS `text-align` property in the `ViewHtml` dialog so that the user is able to change it from the HTML code.
 

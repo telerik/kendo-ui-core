@@ -251,7 +251,7 @@ public class UserViewModel
 
 ## 4. Handle the Wizard Events
 
-The Wizard exposes various [events](/api/Kendo.Mvc.UI.Fluent/WizardEventBuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Done()` event to submit the form data to the server.
+The Wizard exposes various [events](/api/kendo.mvc.ui.fluent/wizardeventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Done()` event to submit the form data to the server.
 
 
 ```HtmlHelper

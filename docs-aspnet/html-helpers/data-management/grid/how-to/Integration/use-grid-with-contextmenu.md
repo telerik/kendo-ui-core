@@ -15,6 +15,6 @@ To see the example, refer to the project on how to [use the Kendo UI Grid with t
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
 * [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder)
 * [Overview of the ContextMenu HtmlHelper](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/contextmenubuilder)
-* [ContextMenuBuilder API Reference](https://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
+* [ContextMenuBuilder API Reference](https://docs.telerik.com/kendo-ui/aspnet-mvc/api/kendo.mvc.ui.fluent/contextmenubuilder)
 
 

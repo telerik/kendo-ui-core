@@ -260,4 +260,5 @@ var __meta__ = {
     ui.plugin(BackButton);
     ui.plugin(DetailButton);
 })(window.kendo.jQuery);
+export default kendo;
 

@@ -12,21 +12,21 @@ Pasting content from HTML and Microsoft (MS) Word documents to the Editor is ess
 
 ## Basic Concepts
 
-The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser. After the browser processes the content, the Editor applies the [`PasteCleanup()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#pastecleanupsystemactionkendomvcuifluenteditorpastecleanupsettingsbuilder) options which help control the content that will be pasted.
+The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser. After the browser processes the content, the Editor applies the [`PasteCleanup()`](/api/kendo.mvc.ui.fluent/editorbuilder#pastecleanupsystemactionkendomvcuifluenteditorpastecleanupsettingsbuilder) options which help control the content that will be pasted.
 
 ## Cleaning HTML on Paste
 
-The following list represents the built-in [`PasteCleanup()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder) options:
+The following list represents the built-in [`PasteCleanup()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder) options:
 
-* [`None()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#nonesystemboolean)&mdash;Disables all options which means that none of the `pasteCleanup` options will be executed. Disabled by default.
-* [`All()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#allsystemboolean)&mdash;Strips all HTML tags and leaves only plain text. Disabled by default.
-* [`KeepNewLines()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#keepnewlines)&mdash;Removes all HTML elements, such as the `all` option, but preserves new lines. Disabled by default.
-* [`Span()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#spansystemboolean)&mdash;Removes the `span` elements from the copied content. Disabled by default.
-* [`Css()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#csssystemboolean)&mdash;Removes the `style` and `class` attributes out of all HTML elements from the copied content. Disabled by default.
-* [`MsTags()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#mstagssystemboolean)&mdash;Strips the MS Word specific tags when pasting content and cleans up extra metadata. Enabled by default.
-* [`MsAllFormatting()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#msallformatting)&mdash;Strips the MS Word specific tags and removes the font-name and font-size decoration derived from MS Word. Disabled by default.
-* [`MsConvertLists()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#msconvertlistssystemboolean)&mdash;Converts MS Word lists to HTML lists. Enabled by default.
-* [`Custom()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#customsystemstring)&mdash;Uses a callback function to create [a custom `pasteCleanup` option](#creating-custom-pastecleanup-functions).
+* [`None()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#nonesystemboolean)&mdash;Disables all options which means that none of the `pasteCleanup` options will be executed. Disabled by default.
+* [`All()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#allsystemboolean)&mdash;Strips all HTML tags and leaves only plain text. Disabled by default.
+* [`KeepNewLines()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#keepnewlines)&mdash;Removes all HTML elements, such as the `all` option, but preserves new lines. Disabled by default.
+* [`Span()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#spansystemboolean)&mdash;Removes the `span` elements from the copied content. Disabled by default.
+* [`Css()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#csssystemboolean)&mdash;Removes the `style` and `class` attributes out of all HTML elements from the copied content. Disabled by default.
+* [`MsTags()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#mstagssystemboolean)&mdash;Strips the MS Word specific tags when pasting content and cleans up extra metadata. Enabled by default.
+* [`MsAllFormatting()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#msallformatting)&mdash;Strips the MS Word specific tags and removes the font-name and font-size decoration derived from MS Word. Disabled by default.
+* [`MsConvertLists()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#msconvertlistssystemboolean)&mdash;Converts MS Word lists to HTML lists. Enabled by default.
+* [`Custom()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#customsystemstring)&mdash;uses a callback function to create [a custom `pastecleanup` option](#creating-custom-pastecleanup-functions).
 
 The following example demonstrates how to copy the HTML content above the Editor and paste it in the content area. Because of the enabled `Span()` option, the `span` tags are removed.
 

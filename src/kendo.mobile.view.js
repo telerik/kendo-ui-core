@@ -712,4 +712,5 @@ var __meta__ = {
     ui.plugin(View);
     ui.plugin(Layout);
 })(window.kendo.jQuery);
+export default kendo;
 

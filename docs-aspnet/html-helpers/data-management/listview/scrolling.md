@@ -39,7 +39,7 @@ To control scrolling in the ListView, use its `Scrollable` property.
     )
 ```
 {% if site.core %}
-```
+```TagHelper
     <kendo-listview name="productListView"
                     tag-name="div"
                     template-id="template"

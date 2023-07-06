@@ -857,5 +857,6 @@ var __meta__ = {
     });
     ui.Popup.TabKeyTrap = TabKeyTrap;
 })(window.kendo.jQuery);
+export default kendo;
 
 

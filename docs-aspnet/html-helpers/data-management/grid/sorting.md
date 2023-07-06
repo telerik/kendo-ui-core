@@ -12,7 +12,7 @@ By default, the sorting functionality of the Telerik UI Grid for {{ site.framewo
 
 ## Getting Started
 
-To control the sorting in the Grid, use the [`Sortable`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#sortable) option. As a result, the default [single-column sorting](#single-column-sorting) functionality will be applied.
+To control the sorting in the Grid, use the [`Sortable`](/api/kendo.mvc.ui.fluent/gridbuilder#sortable) option. as a result, the default [single-column sorting](#single-column-sorting) functionality will be applied.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -40,7 +40,7 @@ The Grid supports the following sort modes:
 
 ### Single-Column Sorting
 
-By default, the Grid applies single-column sorting when the `Sortable()` method is enabled. Alternatively, you can configure single-column sort mode by setting the [`SortMode`]{% if site.core %}(/api/Kendo.Mvc.UI.Fluent/GridSortableSettingsBuilder#sortmodekendomvcuigridsortmode){% else %}(/api/Kendo.Mvc.UI.Fluent/GridSortSettingsBuilder#sortmodekendomvcuigridsortmode){% endif %}.
+By default, the Grid applies single-column sorting when the `Sortable()` method is enabled. Alternatively, you can configure single-column sort mode by setting the [`SortMode`]{% if site.core %}(/api/kendo.mvc.ui.fluent/gridsortablesettingsbuilder#sortmodekendomvcuigridsortmode){% else %}(/api/kendo.mvc.ui.fluent/gridsortsettingsbuilder#sortmodekendomvcuigridsortmode){% endif %}.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -61,7 +61,7 @@ By default, the Grid applies single-column sorting when the `Sortable()` method 
 
 ### Multi-Column Sorting
 
-To allow the multi-column sorting, set the [`SortMode()`]{% if site.core %}(/api/Kendo.Mvc.UI.Fluent/GridSortableSettingsBuilder#sortmodekendomvcuigridsortmode){% else %}(/api/Kendo.Mvc.UI.Fluent/GridSortSettingsBuilder#sortmodekendomvcuigridsortmode){% endif %} method to `MultipleColumn`.
+To allow the multi-column sorting, set the [`SortMode()`]{% if site.core %}(/api/kendo.mvc.ui.fluent/gridsortablesettingsbuilder#sortmodekendomvcuigridsortmode){% else %}(/api/kendo.mvc.ui.fluent/gridsortsettingsbuilder#sortmodekendomvcuigridsortmode){% endif %} method to `MultipleColumn`.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -79,9 +79,9 @@ To allow the multi-column sorting, set the [`SortMode()`]{% if site.core %}(/api
 ```
 {% endif %} 
 
-You can also specify if the columns can be unsorted by setting the [`AllowUnsort`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnSortableBuilder#allowunsortsystemboolean) property to `true` or `false`. For a runnable example, refer to the [demo on sorting in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/sorting).
+You can also specify if the columns can be unsorted by setting the [`AllowUnsort`](/api/kendo.mvc.ui.fluent/gridboundcolumnsortablebuilder#allowunsortsystemboolean) property to `true` or `false`. for a runnable example, refer to the [demo on sorting in the grid](https://demos.telerik.com/{{ site.platform }}/grid/sorting).
 
-With the multi-column sorting you can configure the Grid to display the sort indexes in the header by enabling the [`ShowIndexes`]{% if site.core %}(/api/Kendo.Mvc.UI.Fluent/GridSortableSettingsBuilder#showindexessystemboolean){% else %}(/api/Kendo.Mvc.UI.Fluent/GridSortSettingsBuilder#showindexessystemboolean){% endif %} property.
+With the multi-column sorting you can configure the Grid to display the sort indexes in the header by enabling the [`ShowIndexes`]{% if site.core %}(/api/kendo.mvc.ui.fluent/gridsortablesettingsbuilder#showindexessystemboolean){% else %}(/api/kendo.mvc.ui.fluent/gridsortsettingsbuilder#showindexessystemboolean){% endif %} property.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -105,7 +105,7 @@ With the multi-column sorting you can configure the Grid to display the sort ind
 
 The mixed sorting allows you to [single-sort](#single-column-sorting) columns by clicking their header and [multi-sort](#multi-column-sorting) columns by holding the `CTRL` key and clicking the columns header. A single-click (without holding the `CTRL` key) on any column un-sorts the currently sorted columns and applies single-sorting to the clicked column.
 
-To enable the mixed-column sorting, set the [`SortMode()`]{% if site.core %}(/api/Kendo.Mvc.UI.Fluent/GridSortableSettingsBuilder#sortmodekendomvcuigridsortmode){% else %}(/api/Kendo.Mvc.UI.Fluent/GridSortSettingsBuilder#sortmodekendomvcuigridsortmode){% endif %} option to `Mixed`.
+To enable the mixed-column sorting, set the [`SortMode()`]{% if site.core %}(/api/kendo.mvc.ui.fluent/gridsortablesettingsbuilder#sortmodekendomvcuigridsortmode){% else %}(/api/kendo.mvc.ui.fluent/gridsortsettingsbuilder#sortmodekendomvcuigridsortmode){% endif %} option to `Mixed`.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()

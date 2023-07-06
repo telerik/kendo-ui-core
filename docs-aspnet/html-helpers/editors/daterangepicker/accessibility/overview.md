@@ -18,7 +18,7 @@ For more information, refer to:
 
 The component follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. For more information, refer to the article on [WAI-ARIA support in {{ site.product }}]({% slug overview_accessibility %}#wai-aria).
 
-To customize the `aria-label` text of the currently focused cell in the calendar, use the [`ARIATemplate`](/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#ariatemplatesystemstring) configuration option.
+To customize the `aria-label` text of the currently focused cell in the calendar, use the [`ARIATemplate`](/api/kendo.mvc.ui.fluent/daterangepickerbuilder#ariatemplatesystemstring) configuration option.
 
 ## Section 508
 

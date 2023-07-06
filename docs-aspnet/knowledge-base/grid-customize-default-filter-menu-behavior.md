@@ -33,8 +33,8 @@ How can I customize the default behavior of the Filter Menu and persist the sing
 
 ## Solution
 
-1. Handle the [`Filter`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#filtersystemstring) event of the Grid and store the number of the applied column filters in a global JavaScript variable `filteredValues`.
-1. Handle the [`FilterMenuOpen`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#filtermenuopensystemstring) event of the Grid. Get references of both input fields, subscribe to their `Change` events, and store their values in global variables (`dtp1Value` and `dtp2Value`).
+1. Handle the [`Filter`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#filtersystemstring) event of the Grid and store the number of the applied column filters in a global JavaScript variable `filteredValues`.
+1. Handle the [`FilterMenuOpen`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#filtermenuopensystemstring) event of the grid. get references of both input fields, subscribe to their `Change` events, and store their values in global variables (`dtp1Value` and `dtp2Value`).
 1. Check if the Grid is filtered by the second input field and update its value by using the global variable `dtp2Value`.
 
 

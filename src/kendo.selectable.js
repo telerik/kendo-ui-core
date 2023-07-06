@@ -546,4 +546,5 @@ var __meta__ = {
     kendo.ui.plugin(Selectable);
 
 })(window.kendo.jQuery);
+export default kendo;
 

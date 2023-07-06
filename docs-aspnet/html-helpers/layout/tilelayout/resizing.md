@@ -14,7 +14,7 @@ The resizing takes advantage of the [CSS Grid](https://css-tricks.com/snippets/c
 
 ## Enabling the Resizable Feature of the TileLayout
 
-To enable the resizable feature of the TileLayout, set the [`Resizable()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutBuilder#resizable) method {% if site.mvc %}
+To enable the resizable feature of the TileLayout, set the [`Resizable()`](/api/kendo.mvc.ui.fluent/tilelayoutbuilder#resizable) method {% if site.mvc %}
 and pass `true` as a parameter{% endif %}. When resizable is enabled, the TileLayout items should have `RowSpan` and `ColSpan` defined.
 
 The example below will render a grid with two rows and two columns which can be resized both vertically and horizontally.
@@ -47,7 +47,7 @@ The example below will render a grid with two rows and two columns which can be 
 
 ## Event Handling
 
-The widget triggers a [`Resize()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutEventBuilder#resizesystemstringe) event which provides access to the resized container.
+The widget triggers a [`Resize()`](/api/kendo.mvc.ui.fluent/tilelayouteventbuilder#resizesystemstringe) event which provides access to the resized container.
 
 ```HtmlHelper
     .Events(e=>e.Resize("onResize"))

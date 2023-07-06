@@ -985,4 +985,5 @@ var __meta__ = {
 
     ui.plugin(NumericTextBox);
 })(window.kendo.jQuery);
+export default kendo;
 

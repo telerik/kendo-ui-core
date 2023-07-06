@@ -255,7 +255,7 @@ When editing is performed, server validation is often needed. This section demon
                 return Json(new[] { product }.ToDataSourceResult(request, ModelState));
             }
 
-1. Subscribe to the [`DataSource.Error()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#errorsystemstring) event handler. It is fired when model state errors or other unexpected problem occur when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
+1. Subscribe to the [`DataSource.Error()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datasourceeventbuilder#errorsystemstring) event handler. it is fired when model state errors or other unexpected problem occur when making the ajax request. in the event handler, display the errors and call the [`cancelchanges`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelchanges) method of the Grid.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()

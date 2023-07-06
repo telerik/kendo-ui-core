@@ -10,7 +10,7 @@ position: 7
 
 # Events
 
-The Telerik UI Notification for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/NotificationEventBuilder) that allow you to control and customize the behavior of the UI component.
+The Telerik UI Notification for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/notificationeventbuilder) that allow you to control and customize the behavior of the UI component.
 
 For a complete example on basic Notification events, refer to the [demo on using the events of the Notification](https://demos.telerik.com/{{ site.platform }}/notification/events).
 

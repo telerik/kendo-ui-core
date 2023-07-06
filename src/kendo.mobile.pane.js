@@ -363,4 +363,5 @@ var __meta__ = {
     };
     ui.plugin(Pane);
 })(window.kendo.jQuery);
+export default kendo;
 

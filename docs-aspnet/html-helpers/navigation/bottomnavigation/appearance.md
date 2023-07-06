@@ -8,7 +8,7 @@ position: 3
 
 # Appearance
 
-The Telerik BottomNavigation for {{ site.framework }} allows you to alter the appearance of the component by setting its [ItemFlow](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/BottomNavigationBuilder#itemflowkendomvcuibottomnavigationitemflow), [ThemeColor](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/BottomNavigationBuilder#themecolorkendomvcuibottomnavigationthemecolor), [Border](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/BottomNavigationBuilder#bordersystemboolean), [Shadow](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/BottomNavigationBuilder#shadowsystemboolean) and [Fill](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/BottomNavigationBuilder#fillkendomvcuibottomnavigationfill) options.
+The Telerik BottomNavigation for {{ site.framework }} allows you to alter the appearance of the component by setting its [ItemFlow](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#itemflowkendomvcuibottomnavigationitemflow), [ThemeColor](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#themecolorkendomvcuibottomnavigationthemecolor), [Border](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#bordersystemboolean), [Shadow](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#shadowsystemboolean) and [Fill](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#fillkendomvcuibottomnavigationfill) options.
 
 The example below demonstrates how to modify the appearance by using the above settings:
 

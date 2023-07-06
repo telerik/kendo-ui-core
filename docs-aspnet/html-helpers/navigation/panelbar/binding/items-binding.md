@@ -41,10 +41,10 @@ The PanelBar enables you to manually define the properties of each item.
     ```
     {% endif %}
 
-    > When the `Items` configuration is used, the component generates internally the required [HTML markup used for its initialization](https://docs.telerik.com/kendo-ui/controls/panelbar/overview#from-html). In this scenario the [DataBound](/api/Kendo.Mvc.UI.Fluent/PanelBarEventBuilder#databoundsystemstring) event is not fired.
+    > When the `Items` configuration is used, the component generates internally the required [HTML markup used for its initialization](https://docs.telerik.com/kendo-ui/controls/panelbar/overview#from-html). In this scenario the [DataBound](/api/kendo.mvc.ui.fluent/panelbareventbuilder#databoundsystemstring) event is not fired.
 
 ## See Also
 
 * [Basic Usage of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar)
-* [PanelBarBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBarBuilder Server-Side API](/api/kendo.mvc.ui.fluent/panelbarbuilder)
 * [PanelBar Server-Side API](/api/panelbar)

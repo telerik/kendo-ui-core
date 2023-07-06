@@ -63,7 +63,9 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "setColumnPosition": "Set Column Position",
   "apply": "Apply",
   "reset": "Reset",
-  "buttonTitle": "{0} edit column settings"
+  "buttonTitle": "{0} edit column settings",
+  "movePrev": "Move Previous",
+  "moveNext": "Move Next"
 });
 }
 

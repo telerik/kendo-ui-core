@@ -36,7 +36,7 @@ To enable editing:
         
         .Editable(e => e.Mode(GridEditMode.PopUp))
     
-    >For more information, refer to the [API options on the possible configurations](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#editablesystemactionkendomvcuifluentgrideditingsettingsbuildert).
+    >For more information, refer to the [API options on the possible configurations](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#editablesystemactionkendomvcuifluentgrideditingsettingsbuildert).
 
 2. Declare the endpoint to which the updated records will be sent: 
     ```

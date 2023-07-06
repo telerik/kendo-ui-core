@@ -11,6 +11,5 @@
     },
     "main": "js/kendo.ui.core.js",
     "module": "esm/kendo.ui.core.js",
-    "browser": "umd/kendo.ui.core.min.js",
     "typings": "index.d.ts"
 }

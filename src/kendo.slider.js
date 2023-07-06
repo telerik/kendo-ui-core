@@ -1750,4 +1750,5 @@ var __meta__ = {
     kendo.ui.plugin(RangeSlider);
 
 })(window.kendo.jQuery);
+export default kendo;
 

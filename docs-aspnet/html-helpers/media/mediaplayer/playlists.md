@@ -30,7 +30,7 @@ To change the existing source of the MediaPlayer, use the MediaPlayer client-sid
 
 ## Seeking Forward
 
-Some applications enforce the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`ForwardSeek()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/MediaPlayerBuilder#forwardseeksystemboolean) configuration method, which helps you to achieve this requirement.
+Some applications enforce the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`ForwardSeek()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/mediaplayerbuilder#forwardseeksystemboolean) configuration method, which helps you to achieve this requirement.
 
 ```HtmlHelper
     @(Html.Kendo().MediaPlayer()

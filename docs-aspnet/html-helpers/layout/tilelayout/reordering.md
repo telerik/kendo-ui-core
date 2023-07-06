@@ -14,7 +14,7 @@ The reordering takes advantage of the [CSS Grid](https://css-tricks.com/snippets
 
 ## Enabling the Reorderable Functionality of the TileLayout
 
-To enable the reorderable feature of the TileLayout, set the [`Reorderable()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutBuilder#reorderable) method {% if site.mvc %}
+To enable the reorderable feature of the TileLayout, set the [`Reorderable()`](/api/kendo.mvc.ui.fluent/tilelayoutbuilder#reorderable) method {% if site.mvc %}
 and pass `true` as a parameter{% endif %}.
 
 > To use the `Reorderable()` functionality, define headers.
@@ -56,7 +56,7 @@ The example below will render a grid with two columns which can be reordered bot
 
 ## Event Handling
 
-The widget triggers a [`Reorder()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutEventBuilder#reordersystemstring) event which provides access to the reordered container, the old and the new index.
+The widget triggers a [`Reorder()`](/api/kendo.mvc.ui.fluent/tilelayouteventbuilder#reordersystemstring) event which provides access to the reordered container, the old and the new index.
 
 ```HtmlHelper
     .Events(e=>e.Reorder("onReorder"))

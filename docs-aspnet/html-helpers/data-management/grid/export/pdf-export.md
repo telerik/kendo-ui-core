@@ -30,8 +30,8 @@ With regard to its PDF export, the Grid enables you to:
 To enable PDF export:
 
 1. Include the corresponding toolbar command and set the export settings.
-    * [Toolbar configuration](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#pdf)
-    * [PDF export configuration](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }})
+    * [Toolbar configuration](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#pdf)
+    * [PDF export configuration](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }})
 1. Include the Pako Deflate library in the page to enable compression.
 
 To initiate PDF export, press the **Toolbar** button or use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) and call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveaspdf) method.
@@ -77,7 +77,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ## Exporting All Pages
 
-By default, the Grid exports only the current page of data. To export all pages, use the [`AllPages()`](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }}#allpagessystemboolean) method.
+By default, the Grid exports only the current page of data. To export all pages, use the [`AllPages()`](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }}#allpagessystemboolean) method.
 
 > When the `AllPages()` method is used with and server paging (Ajax binding default), the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use server-side export.
 
@@ -157,7 +157,7 @@ You can specify a paper size that will be applied to the whole document. The con
 
 ## Specifying Page Templates
 
-The Grid allows you to specify a page [`TemplateId`](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }}#templateidsystemstring) and use the template to position the content, add headers, footers, and other elements. The styling of the exported document is done by using CSS. During the PDF export, the template is positioned in a container with the specified paper size.
+The Grid allows you to specify a page [`TemplateId`](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }}#templateidsystemstring) and use the template to position the content, add headers, footers, and other elements. The styling of the exported document is done by using CSS. During the PDF export, the template is positioned in a container with the specified paper size.
 
 > To use a page template, you have to set the paper size.
 
@@ -290,7 +290,7 @@ The Grid supports the following page template variables:
 
 ## Using Server Proxy
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy](https://docs.telerik.com/kendo-ui/framework/saving-files). To specify the server proxy URL, use the [`ProxyURL()`](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }}#proxyurlsystemstring) method.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy](https://docs.telerik.com/kendo-ui/framework/saving-files). To specify the server proxy URL, use the [`ProxyURL()`](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }}#proxyurlsystemstring) method.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<.ProductViewModel>()

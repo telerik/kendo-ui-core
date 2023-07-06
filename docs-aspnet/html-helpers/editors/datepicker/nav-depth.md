@@ -10,7 +10,7 @@ position: 4
 
 The DatePicker enables you to set the initial view it renders and define the navigation depth of the views.
 
-To define the initially rendered view, use the [`Start`](/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder#startkendomvcuicalendarview) option. To control the navigation depth, use the [`Depth`](/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder#depthkendomvcuicalendarview) option.
+To define the initially rendered view, use the [`Start`](/api/kendo.mvc.ui.fluent/datepickerbuilder#startkendomvcuicalendarview) option. to control the navigation depth, use the [`Depth`](/api/kendo.mvc.ui.fluent/datepickerbuilder#depthkendomvcuicalendarview) option.
 
 The **Calendar** view supports the following predefined views:
 * `Month`&mdash;Shows the days of the month.

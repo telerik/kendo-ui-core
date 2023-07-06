@@ -36,7 +36,7 @@ How can I use nested Model properties in the {{ site.framework }}'s Grid?
 
 ## Solution
 
-To bind a column of the Grid to a Model with nested properties you need to use a Custom DataSource which allows you to configure the `[From](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/CustomDataSourceModelFieldDescriptorBuilder#fromsystemstring)` configuration property of the `[Schema.Model.Field](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/CustomDataSourceModelDescriptorFactory#fieldsystemstring)`.
+To bind a column of the Grid to a Model with nested properties you need to use a Custom DataSource which allows you to configure the `[From](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/customdatasourcemodelfielddescriptorbuilder#fromsystemstring)` configuration property of the `[schema.model.field](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/customdatasourcemodeldescriptorfactory#fieldsystemstring)`.
 
 In addition when you use `From` together with CRUD operations and add new rows, you also have to define in `Schema.Model.Field` the original field or the sequence of nested fields which are used inside `From`.
 

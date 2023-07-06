@@ -595,4 +595,5 @@ var __meta__ = {
     ui.plugin(ActionSheet);
 
 })(window.kendo.jQuery);
+export default kendo;
 

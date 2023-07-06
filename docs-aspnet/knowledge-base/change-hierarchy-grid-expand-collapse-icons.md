@@ -31,8 +31,8 @@ How can I change the **Expand** and **Collapse** icons in the Telerik UI for {{ 
 To achieve the desired scenario:
 
 1. Update the **Expand** and **Collapse** icons by using the common classes provided by Kendo. For the full list of the available Kendo UI Web Font Icons, refer to the [list of Font icons](/styles-and-layout/sass-themes/font-icons#list-of-font-icons).
-1. To add initial text icons once the data is bound to the Grid, subscribe to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event.
-1. To add text to the **Expand** and **Collapse** icons, subscribe to both the [`DetailExpand`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#detailexpandsystemstring) and [`DetailCollapse`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#detailcollapsesystemstring) events and alter the initially provided style classes by using the conventional [removeClass()](https://api.jquery.com/removeclass/) and [text()](https://api.jquery.com/text/) jQuery methods.
+1. To add initial text icons once the data is bound to the Grid, subscribe to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event.
+1. To add text to the **Expand** and **Collapse** icons, subscribe to both the [`DetailExpand`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#detailexpandsystemstring) and [`DetailCollapse`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#detailcollapsesystemstring) events and alter the initially provided style classes by using the conventional [removeclass()](https://api.jquery.com/removeclass/) and [text()](https://api.jquery.com/text/) jQuery methods.
 
 ```Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()

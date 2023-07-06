@@ -56,7 +56,7 @@ Use the Chip HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the com
 
 ## 3. Add an Icon
 
-You can display an icon in the Chip by configuring the [`Icon`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#iconsystemstring) option. For more information about the variety of the icons supported by the Chip, refer to the article on [customizing the Chip]({% slug htmlhelpers_chip_aspnetcore_customization %}).
+You can display an icon in the Chip by configuring the [`Icon`](/api/kendo.mvc.ui.fluent/chipbuilder#iconsystemstring) option. for more information about the variety of the icons supported by the chip, refer to the article on [customizing the chip]({% slug htmlhelpers_chip_aspnetcore_customization %}).
 
 ```HtmlHelper
      @(Html.Kendo().Chip()
@@ -76,7 +76,7 @@ You can display an icon in the Chip by configuring the [`Icon`](/api/Kendo.Mvc.U
 
 ## 4. Add a Label  
 
-To display a label on the Chip, use the [`Label`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#labelsystemstring) option.
+To display a label on the Chip, use the [`Label`](/api/kendo.mvc.ui.fluent/chipbuilder#labelsystemstring) option.
 
 ```HtmlHelper
      @(Html.Kendo().Chip()

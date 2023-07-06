@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI MultiSelect for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/MultiSelectEventBuilder) that allow you to control and customize the behavior of the UI component.
+The Telerik UI MultiSelect for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/multiselecteventbuilder) that allow you to control and customize the behavior of the UI component.
 
 For a complete example on basic MultiSelect events, refer to the [demo on using the events of the MultiSelect](https://demos.telerik.com/{{ site.platform }}/multiselect/events).
 

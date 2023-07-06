@@ -520,7 +520,7 @@ import "./kendo.html.button.js";
                     this.dragging = null;
                 }
                 if (draggable) {
-                    this.dragging = new WindowDragging(this, draggable.dragHandle || KWINDOWTITLEBAR);
+                    this.dragging = new WindowDragging(this, draggable.dragHandle || KWINDOWTITLEBAR, draggable.clickMoveClick);
                 }
             },
 
@@ -2046,13 +2046,20 @@ import "./kendo.html.button.js";
             }
         };
 
-        function WindowDragging(wnd, dragHandle) {
-            var that = this;
+        function WindowDragging(wnd, dragHandle, clickMoveClick) {
+            var that = this,
+                filter = dragHandle;
+
+            if (clickMoveClick) {
+                filter += ",.k-overlay";
+            }
+
             that.owner = wnd;
             that._preventDragging = false;
             that._draggable = new Draggable(wnd.wrapper, {
                 filter: dragHandle,
                 group: wnd.wrapper.id + "-moving",
+                clickMoveClick: clickMoveClick,
                 dragstart: that.dragstart.bind(that),
                 drag: that.drag.bind(that),
                 dragend: that.dragend.bind(that),
@@ -2197,4 +2204,5 @@ import "./kendo.html.button.js";
         kendo.ui.plugin(Window);
 
     })(window.kendo.jQuery);
+export default kendo;
 

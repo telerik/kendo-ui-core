@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI SplitButton component for {{ site.framework }}."
+description: "The Telerik UI SplitButton component for {{ site.framework }} provides a styled UI button with the functionality of a dropdown element."
 previous_url: /helpers/navigation/splitbutton/overview
 slug: htmlhelpers_splitbutton_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} SplitButton Overview
@@ -54,15 +54,19 @@ The following example demonstrates how to define the SplitButton.
 * [Items]({% slug htmlhelpers_splitbutton_aspnetcore_items %})&mdash;You can configure the SplitButton by adding items to the popup.
 * [Appearance]({% slug htmlhelpers_splitbutton_aspnetcore_appearance %})&mdash;You can control the appearance of the SplitButton by configuring its styling options.
 * [Icons]({% slug htmlhelpers_splitbutton_aspnetcore_icons %})&mdash;You can enchance the SplitButton's textual content by adding icons.
-* [Accessibility]({% slug accessibility_aspnetcore_splitbutton %})&mdash;You can access the SplitButton by different screen readers.
+* [Accessibility]({% slug accessibility_aspnetcore_splitbutton %})&mdash;The SplitButton is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the SplitButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/splitbutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
+## Next Steps
+
+* [Getting Started with the SplitButton]({% slug aspnetcore_splitbutton_getting_started %})
+* [Basic Usage of the SplitButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/index)
+{% if site.core %}
+* [Basic Usage of the SplitButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitbutton/tag-helper)
+{% endif %}
+
 ## See Also
 
-* [Overview of the SplitButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/index)
-* [Using the Basic Events of the SplitButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/events)
-* [Applying the SplitButton API (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/api)
-* [Server-Side API](/api/splitbutton)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitbutton)
-
+* [Using the API of the SplitButton (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/api)
+* [Knowledge Base Section](/knowledge-base)

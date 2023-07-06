@@ -150,4 +150,5 @@ var __meta__ = {
     kendo.cssProperties.registerPrefix("HTMLRadioButton", "k-radio-");
 
 })(window.kendo.jQuery);
+export default kendo;
 

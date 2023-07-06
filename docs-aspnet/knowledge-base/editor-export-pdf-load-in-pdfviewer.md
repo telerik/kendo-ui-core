@@ -39,7 +39,7 @@ The example below relies on the following key steps:
 
 1. Create a hidden [Editor with specified PDF export settings](https://demos.telerik.com/{{ site.platform }}/editor/pdf-export), a [page template](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/page-templates), and a [PDFViewer](https://demos.telerik.com/{{ site.platform }}/pdfviewer).
 1. Override the default implementation of the [`saveAsPDF()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/saveaspdf) method of the Editor so the data about the PDF file is accessible in the returned promise in the PdfExport event handler.
-1. Handle the [`PdfExport event`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/EditorEventBuilder#pdfexportsystemfunc) of the Editor and pass the file to the PDFViewer by using the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) method.
+1. Handle the [`PdfExport event`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/editoreventbuilder#pdfexportsystemfunc) of the editor and pass the file to the PDFViewer by using the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) method.
 1. When the page is loaded, get a reference to the hidden Editor, set the page template in the Editor's PDF options, and trigger its `saveAsPDF()` method.
 
 

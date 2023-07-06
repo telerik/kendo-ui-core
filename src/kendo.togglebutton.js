@@ -112,3 +112,4 @@ import "./kendo.button.js";
         kendo.ui.plugin(ToggleButton);
 
     })(window.kendo.jQuery);
+export default kendo;

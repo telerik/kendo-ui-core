@@ -31,7 +31,7 @@ How can I select the days of the week from the {{ site.product }} DatePicker?
 
 1. Hide the initially rendered days of the week within the Popup Calendar of the DatePicker for {{ site.product }}.
 1. Create a flag variable which will hold the days of the week.
-1. To select the days of the week, handle the [`.MonthTemplate()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder#monthtemplatesystemstring) and pass the current date as an argument.
+1. To select the days of the week, handle the [`.MonthTemplate()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datepickerbuilder#monthtemplatesystemstring) and pass the current date as an argument.
 1. Within the function handler, parse the date argument to a [`Date`](https://www.w3schools.com/js/js_dates.asp) object. To get the current day, use the [`.getDay()`](https://www.w3schools.com/jsref/jsref_getday.asp) method and obtain it from the previously defined flag variable.
 
 ```Index.cshtml

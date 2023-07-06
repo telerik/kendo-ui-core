@@ -1571,4 +1571,5 @@ var __meta__ = {
     kendo.ui.plugin(TabStrip);
 
 })(window.kendo.jQuery);
+export default kendo;
 

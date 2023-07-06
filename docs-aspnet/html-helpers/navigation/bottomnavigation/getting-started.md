@@ -117,7 +117,7 @@ Use the BottomNavigation HtmlHelper {% if site.core %}or TagHelper{% endif %} to
 
 ## 3. Configure the Appearance
 
-To alter the [appearance]({% slug htmlhelpers_appearance_bottomnavigation_aspnetcore %}) of the component, use the [ThemeColor](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/BottomNavigationBuilder#themecolorkendomvcuibottomnavigationthemecolor) and [Fill](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/BottomNavigationBuilder#fillkendomvcuibottomnavigationfill) options. Additionally, you can set the desired HTML attributes.
+To alter the [appearance]({% slug htmlhelpers_appearance_bottomnavigation_aspnetcore %}) of the component, use the [ThemeColor](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#themecolorkendomvcuibottomnavigationthemecolor) and [fill](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#fillkendomvcuibottomnavigationfill) options. Additionally, you can set the desired HTML attributes.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

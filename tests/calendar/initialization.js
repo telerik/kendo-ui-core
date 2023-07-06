@@ -359,7 +359,7 @@ it("Full year 99 should initialize year 1900", function() {
 });
 
 it("Century view support dates less then 200 year", function() {
-    var minDate = new Date(Date.UTC(1000, 0, 1));
+    var minDate = new Date(Date.UTC(1000, 0, 2));
     minDate.setUTCFullYear(100); // set year to 100
 
     var cal = new Calendar(div, {

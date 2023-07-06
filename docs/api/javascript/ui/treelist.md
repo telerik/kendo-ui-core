@@ -502,6 +502,55 @@ The text that is displayed by the command button. If not set, the [`name`](/api/
       });
     </script>
 
+### columns.draggable `Boolean` *(default: false)*
+
+If set to `true` a draghandle will be rendered and the user could reorder the rows by dragging the row via the drag handle.
+
+> Note that the reordering operation is only a client-side operation and it does not reflect the order of any data that is bound to the server.
+
+#### Example
+
+      <div id="treelist"></div>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          },
+          height: 540,
+          editable: {
+            move: {
+              reorderable: true
+            }
+          },
+          columns: [
+            { draggable: true, width: "40px" },
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" }
+          ]
+        });
+      </script>
+
+
 ### columns.editable `Function`
 
 The JavaScript function that is executed when the cell or row is about to be opened for editing. The returned result will determine whether an editor for the column will be created.
@@ -2002,6 +2051,14 @@ The text message that is displayed for the filter menu item.
       });
     </script>
 
+### columnMenu.messages.moveNext `String` *(default: "Move Next")*
+
+The text message that is displayed for the Move to next position column menu item.
+
+### columnMenu.messages.movePrev `String` *(default: "Move Previous")*
+
+The text message that is displayed for the Move to previous position column menu item.
+
 ### columnMenu.messages.sortAscending `String` *(default: "Sort Ascending")*
 
 The text message that is displayed for the menu item which performs the ascending sort mode.
@@ -2445,6 +2502,53 @@ Enables the drag-and-drop UI of rows between parents.
             move: true
           },
           columns: [
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" }
+          ]
+        });
+      </script>
+
+### editable.move.clickMoveClick `Boolean` *(default: true)*
+
+If set to `true` (default), when there is a drag column for the items in the TreeList, the user will be allowed to reorder rows via click move click interaction as an alternative of the drag and drop one.
+
+#### Example
+
+      <div id="treelist"></div>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          },
+          height: 540,
+          editable: {
+            move: {
+              reorderable: true,
+              clickMoveClick: false
+            }
+          },
+          columns: [
+            { draggable: true, width: "40px" },
             { field: "FirstName", title: "First Name", width: 220 },
             { field: "LastName", title: "Last Name", width: 160 },
             { field: "Position" }
@@ -7891,8 +7995,8 @@ Pre-defined status classes are:
         ],
         drag: function(e) {
           // Replace the "add" icon with a "copy" icon. DO NOT REPLACE THE i-cancel status!
-          if(e.status === 'i-plus') {
-            e.setStatus("k-i-copy");
+          if(e.status === 'plus') {
+            e.setStatus("copy");
           }
         }
       });

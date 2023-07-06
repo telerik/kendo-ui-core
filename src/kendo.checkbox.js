@@ -47,4 +47,5 @@ var __meta__ = {
 
     ui.plugin(CheckBox);
 })(window.kendo.jQuery);
+export default kendo;
 

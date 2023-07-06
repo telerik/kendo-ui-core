@@ -28,9 +28,9 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
 
 ## Solution
 
-1. Create a separate `Custom` DataSource and specify the action method for the [`.Create()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/CustomDataSourceTransportBuilder#createsystemactionkendomvcuifluentcustomcrudoperationbuilder) method.
-1. Set the filter type for the DropDownList through the [`.Filter()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder#nodatatemplateidsystemstring).
-1. Specify a [`NoDataTemplate`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder#nodatatemplatesystemstring) which will display an add confirmation dialog. 
+1. Create a separate `Custom` DataSource and specify the action method for the [`.Create()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/customdatasourcetransportbuilder#createsystemactionkendomvcuifluentcustomcrudoperationbuilder) method.
+1. Set the filter type for the DropDownList through the [`.Filter()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlistbuilder#nodatatemplateidsystemstring).
+1. Specify a [`NoDataTemplate`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlistbuilder#nodatatemplatesystemstring) which will display an add confirmation dialog. 
 1. Inside the template, create a button and attach a handler that passes both the widget `id` and input `value`.
 1. [`Sync`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/sync) the data to update the records.
 

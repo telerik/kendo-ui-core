@@ -320,4 +320,5 @@ var __meta__ = {
     ui.plugin(Badge);
 
 })(window.kendo.jQuery);
+export default kendo;
 

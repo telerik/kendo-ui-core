@@ -472,9 +472,9 @@ Sets the field of the data item that provides the link URL of the nodes.
     });
     </script>
 
-### dragAndDrop `Boolean` *(default: false)*
+### dragAndDrop `Boolean|Object` *(default: false)*
 
-Disables (**false**) or enables (**true**) drag-and-drop of the nodes.
+Disables (**false**) or enables (**true**) drag-and-drop of the nodes. If configured as an object allows disabling click move click interaction as an alternative of dragging.
 
 #### Example
 
@@ -482,6 +482,27 @@ Disables (**false**) or enables (**true**) drag-and-drop of the nodes.
     <script>
     $("#treeview").kendoTreeView({
       dragAndDrop: true,
+      dataSource: [
+        { text: "foo" },
+        { text: "bar" }
+      ]
+    });
+    </script>
+
+### dragAndDrop.clickMoveClick `Boolean` *(default: false)*
+
+Disables (**false**) or enables (**true**) the click move click interaction as an alternative of dragging. The alternative is disabled by default.
+
+> Please note that this functionality would not play well when checkboxes are present in the TreeView. On each checkbox click the respective item will be grabbed to be moved. The same also applies for selection, as every selected item will also be grabbed.
+
+#### Example
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dragAndDrop: {
+        clickMoveClick: true
+      },
       dataSource: [
         { text: "foo" },
         { text: "bar" }

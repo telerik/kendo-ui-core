@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Splitter component for {{ site.framework }}."
+description: "The Telerik UI Splitter component for {{ site.framework }} provides a dynamic layout of resizable and collapsible panes."
 previous_url: /helpers/html-helpers/splitter, /helpers/layout/splitter/overview
 slug: htmlhelpers_splitter_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Splitter Overview
@@ -205,20 +205,20 @@ The following example demonstrates the basic configuration of the Splitter.
 
 ## Functionality and Features
 
-* [Auto-resizing to window]({% slug htmlhelpers_add_auto_resizing_splitter_to_window_aspnetcore %})
-* [Auto-resizing to content]({% slug htmlhelpers_expand_splitter_to_content_aspnetcore %})
-* [Auto-resizing the height]({% slug htmlhelpers_expand_splitter_to_100_height_aspnetcore %})
-* [Persisting the pane size]({% slug htmlhelpers_keep_pane_size_in_percentages_aspnetcore %})
+* [Auto-resizing to window]({% slug htmlhelpers_add_auto_resizing_splitter_to_window_aspnetcore %})—You can auto-resize the Splitter to fit to the Window component.
+* [Auto-resizing to content]({% slug htmlhelpers_expand_splitter_to_content_aspnetcore %})—You can expand the Splitter to fit the content within.
+* [Auto-resizing the height]({% slug htmlhelpers_expand_splitter_to_100_height_aspnetcore %})—You can make the Splitter expand vertically and resize together with the browser window.
+* [Persisting the pane size]({% slug htmlhelpers_keep_pane_size_in_percentages_aspnetcore %})—You can keep the Splitter pane sizes in percentages.
 
-## Events
+## Next Steps
 
-For a complete example on basic Splitter events, refer to the [demo on using the events of the Splitter](https://demos.telerik.com/{{ site.platform }}/splitter/events).
-
-## See Also
-
-* [Basic Usage of the Splitter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/index)
+* [Getting Started with the Splitter]({% slug aspnetcore_splitter_getting_started %})
+* [Basic Usage of the Splitter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter)
 {% if site.core %}
 * [Basic Usage of the Splitter TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/tag-helper)
 {% endif %}
+
+## See Also
+
 * [Using the API of the Splitter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/api)
-* [Server-Side API](/api/splitter)
+* [Knowledge Base Section](/knowledge-base)

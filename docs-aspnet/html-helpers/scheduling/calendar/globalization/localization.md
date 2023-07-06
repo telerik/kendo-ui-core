@@ -8,7 +8,7 @@ position: 2
 
 # Localization
 
-The Calendar provides options for localizing its user interface by utilizing its [`Culture`](/api/Kendo.Mvc.UI.Fluent/CalendarBuilder#culturesystemstring) property.
+The Calendar provides options for localizing its user interface by utilizing its [`Culture`](/api/kendo.mvc.ui.fluent/calendarbuilder#culturesystemstring) property.
 
 To enable the desired culture, add a reference to the script file before the Calendar is initialized and include the desired culture in the settings of the helper.
 

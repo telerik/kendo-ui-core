@@ -11,7 +11,7 @@ position: 7
 
 As of the 2014 Q3 release, you can save files on the client machine by using the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method.
 
-## Configuration
+## Getting Started
 
 To save a file on the client machine:
 

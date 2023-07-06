@@ -31,8 +31,8 @@ How can I integrate a Badge inside a custom command for a given row in the {{ si
 
 To achieve the desired scenario:
 
-1. Specify a custom class for the custom command by using the [`.HtmlAttributes()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridActionColumnBuilder?#htmlattributessystemobject) configuration option.
-1. To traverse through each of the rows, handle the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder?#databoundsystemstring) event of the Grid.
+1. Specify a custom class for the custom command by using the [`.HtmlAttributes()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridactioncolumnbuilder?#htmlattributessystemobject) configuration option.
+1. To traverse through each of the rows, handle the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder?#databoundsystemstring) event of the Grid.
 1. Within the handler, obtain the currently traversed row's data item instance by using the client-side [`.dataItem()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method the Grid provides. To get the respective custom command button for the associated row, use the previously specified custom class.
 1. Provide a unique id for the badges that you will create.
 1. Based on the value of a data item field, append a child element inside the Button. From the Button, initialize a Badge control. 

@@ -10,7 +10,7 @@ position: 5
 
 The Telerik UI MultiSelect for {{ site.framework }} provides options for displaying the items as individual (multiple) tags and as a single, summary tag. 
 
-To display single or multiple tags for the selected items set the [`TagMode()`](/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder#tagmodekendomvcuimultiselecttagmode) configuration option:
+To display single or multiple tags for the selected items set the [`TagMode()`](/api/kendo.mvc.ui.fluent/multiselectbuilder#tagmodekendomvcuimultiselecttagmode) configuration option:
 
 ```HtmlHelper
     @(Html.Kendo().MultiSelect()

@@ -17,7 +17,7 @@ When customizing the rendering of the Chip, you can:
 
 ## Adding Custom Remove Icons
 
-To specify a custom **Remove** icon, use the [`RemoveIcon`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#removeiconsystemstring) property of the Chip.
+To specify a custom **Remove** icon, use the [`RemoveIcon`](/api/kendo.mvc.ui.fluent/chipbuilder#removeiconsystemstring) property of the Chip.
 
 ```HtmlHelper
      @(Html.Kendo().Chip()
@@ -41,7 +41,7 @@ To specify a custom **Remove** icon, use the [`RemoveIcon`](/api/Kendo.Mvc.UI.Fl
 
 ## Displaying Avatars
 
-The Chip component treats the avatar as an icon. To display an avatar, pass a CSS class to the [`AvatarClass`](/api/Kendo.Mvc.UI.Fluent/ChipBuilder#avatarclasssystemstring) property.
+The Chip component treats the avatar as an icon. To display an avatar, pass a CSS class to the [`AvatarClass`](/api/kendo.mvc.ui.fluent/chipbuilder#avatarclasssystemstring) property.
 
 The `AvatarClass` property allows you to define a CSS class or multiple classes separated by spaces. These classes are applied to a `span` element inside the Chip.
 

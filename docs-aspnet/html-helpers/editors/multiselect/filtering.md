@@ -12,14 +12,14 @@ The {{ site.framework }} MultiSelect provides options for filtering its data and
 
 ## Server Filtering
 
-When using Server Filtering a reduced portion of the whole dataset is returned from the server. Displaying a subset of the whole data is useful when working with large datasets containing thousands of records. In such cases, you can improve the performance and loading times by defining a minimum filter length by using the [MinLength](/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder#minlengthsystemdouble) option. For example, if you set MinLength to 3, the {{ site.product_short }} MultiSelect will not send a request to the remote endpoint and start the filtering process until the user enters at least three characters.
+When using Server Filtering a reduced portion of the whole dataset is returned from the server. Displaying a subset of the whole data is useful when working with large datasets containing thousands of records. In such cases, you can improve the performance and loading times by defining a minimum filter length by using the [MinLength](/api/kendo.mvc.ui.fluent/multiselectbuilder#minlengthsystemdouble) option. For example, if you set MinLength to 3, the {{ site.product_short }} MultiSelect will not send a request to the remote endpoint and start the filtering process until the user enters at least three characters.
 
 > When you apply server filtering, only the source of the MultiSelect is filtered. To page and filter the dataset, use the [virtualization]({% slug htmlhelpers_multiselect_virtualization_aspnetcore %}) feature.
 
 To configure the {{ site.product_short }} MultiSelect for Server Filtering:
 
 1. Set the `ServerFiltering` option of the DataSource component to `true`.
-1. Set the [`Filter`](/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder#filterkendomvcuifiltertype) property of the MultiSelect.
+1. Set the [`Filter`](/api/kendo.mvc.ui.fluent/multiselectbuilder#filterkendomvcuifiltertype) property of the MultiSelect.
 
 The following example demonstrates how to configure MultiSelect for Server Filtering.
 

@@ -105,6 +105,68 @@ An object which represents a [filter](/api/javascript/ui/filter/configuration/ex
       $("#filter").data("kendoFilter").applyFilter();
     </script>
 
+
+#### Example - set nested filters
+
+    <button id="btn">Apply Filter</button>
+    <div id="filter"></div>
+    <br /><br />
+    <div id="grid"></div>
+    <script>
+      var data = [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 },
+        { name: "Mark Doe", age: 33 },
+        { name: "Janet Peterson", age: 38 },
+        { name: "Samuel Joen", age: 42 },
+        { name: "Robert Michael", age: 46 }
+      ];
+
+      var dataSource = new kendo.data.DataSource({
+        data: data,
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" },
+              age: { type: "number" }
+            }
+          }
+        }
+      });
+
+      $("#filter").kendoFilter({
+        dataSource: dataSource,
+        expression: {
+          logic: "and",
+          filters: [
+            { field: "name", value: "J", operator: "contains" },
+            // Nested filter
+            {
+              logic: "and",
+              filters: [
+                { field: "age", value: 31, operator: "gte" },
+                { field: "age", value: 39, operator: "lte" }
+              ]
+            }
+          ]
+        }
+      });
+
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: dataSource
+      });
+
+      $('#btn').on('click', function(){
+        $("#filter").data("kendoFilter").applyFilter();
+      })
+
+    </script>
+
+
 ### expressionPreview `Boolean` *(default: false)*
 
 If set to `true` the filter will visualize the filter expression that will be applied to the datasource.

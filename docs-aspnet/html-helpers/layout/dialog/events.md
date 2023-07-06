@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI Dialog component for {{ site.framework }} exposes the [`Close`, `Hide`, `InitOpen`, `Open`, and `Show` events](/api/Kendo.Mvc.UI.Fluent/DialogEventBuilder). You can handle these events to implement custom functionality.
+The Telerik UI Dialog component for {{ site.framework }} exposes the [`Close`, `Hide`, `InitOpen`, `Open`, and `Show` events](/api/kendo.mvc.ui.fluent/dialogeventbuilder). You can handle these events to implement custom functionality.
 
 For a complete example on basic Dialog events, refer to the [demo on using the events of the Dialog](https://demos.telerik.com/{{ site.platform }}/dialog/events).
 

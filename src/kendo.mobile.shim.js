@@ -124,4 +124,5 @@ var __meta__ = {
 
     ui.plugin(Shim);
 })(window.kendo.jQuery);
+export default kendo;
 

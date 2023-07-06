@@ -216,7 +216,7 @@ For example, you can define an external client template for a [Grid column]({% s
     {% endif %}
 
 
-Also, you can integrate Telerik UI for {{ site.framework }} components in the external client templates by using the [HTML Helpers](#adding-html-helpers-inside-external-client-templates) {% if site.core %}or [Tag Helpers](adding-tag-helpers-inside-external-client-templates){% endif %}.
+Also, you can integrate Telerik UI for {{ site.framework }} components in the external client templates by using the [HTML Helpers](#adding-html-helpers-inside-external-client-templates) {% if site.core %}or [Tag Helpers](#adding-tag-helpers-inside-external-client-templates){% endif %}.
 
 ### Adding HTML Helpers inside External Client Templates
 

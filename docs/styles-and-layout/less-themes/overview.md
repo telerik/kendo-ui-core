@@ -77,7 +77,7 @@ Some themes require a different common (base) stylesheet that applies different 
 Apart from the common stylesheet and theme stylesheet, you must make the following folders available in your application.
 
 * `/ThemeName/`&mdash;This is the folder, which contains all images required by the used Kendo UI theme. The folder name matches the theme name, e.g. `Default`, `Bootstrap`, `Silver`, etc. The theme image folders for unused themes can be removed.
-* `/fonts/`&mdash;This is where the `KendoUIGlyphs` and `DejaVu` font files reside. The `KendoUIGlyphs` font describes the Kendo UI font icons used by the web widgets. The `DejaVu` font is used by default during [PDF export]({% slug introduction_pdfexport_kendoui %}).
+* `/fonts/`&mdash;This is where the `KendoUIGlyphs` and `DejaVu` font files reside. The `KendoUIGlyphs` font describes the Kendo UI font icons used by the web widgets. The `DejaVu` font is used by default during [PDF export]({% slug pdfderawingexport_drawingapi %}).
 * `/images/`&mdash;This where the Kendo UI font icons for the mobile widgets reside.
 * `/textures/`&mdash;This is where some fallback theme images are stored for browsers that do not support the CSS3 linear gradients.
 

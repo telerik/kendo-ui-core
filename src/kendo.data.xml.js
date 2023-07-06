@@ -258,4 +258,5 @@ var __meta__ = {
         }
     });
 })(window.kendo.jQuery);
+export default kendo;
 

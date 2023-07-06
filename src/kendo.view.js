@@ -718,4 +718,5 @@ var __meta__ = {
     kendo.ViewClone = ViewClone;
 
 })(window.kendo.jQuery);
+export default kendo;
 

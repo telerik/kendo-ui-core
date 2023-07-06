@@ -168,10 +168,6 @@
                 "import": "导入",
                 "print": "打印"
             });
-        kendo.ui.Editor.defaultTools.pdf.options.template.options =
-            $.extend(true, kendo.ui.Editor.defaultTools.pdf.options.template.options, {
-                "title": "导出 PDF"
-            });
     }
 
     /* ImageBrowser messages */

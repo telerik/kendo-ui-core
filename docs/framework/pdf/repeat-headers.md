@@ -118,6 +118,6 @@ If you want the `<thead>` elements, or the headers of Kendo UI Grid widgets, to 
 ## See Also
 
 * [Multi-Page Content]({% slug multipagecontent_drawing %})
-* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Getting Started with the Drawing Library]({% slug getting_started_kendoui_drawing %})
 * [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})
 * [Limitations and Browser Support for Kendo UI Drawing API]({% slug supportedbrowsers_drawingapi %})

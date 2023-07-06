@@ -8,7 +8,7 @@ position: 10
 
 # Toolbar
 
-The [`ToolBar()`](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory) configuration option of the Grid allows you to add command buttons and allow the user to invoke built-in Grid funcitionalities. You can also define custom commands or use templates to customize the Toolbar of the {{ site.product }} Grid.
+The [`ToolBar()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory) configuration option of the Grid allows you to add command buttons and allow the user to invoke built-in Grid functionalities. You can also define custom commands or use templates to customize the Toolbar of the {{ site.product }} Grid.
 
 ## Built-In Commands
 
@@ -84,7 +84,7 @@ The following example demonstrates how to add a custom command to the Toolbar:
 
 ## Toolbar Template
 
-The {{site.product}} Grid also supports using a template for the Toolbar. You can define a template by using the [`ClientTemplate()`](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#clienttemplatesystemstring) or the [`ClientTemplateId()`](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#clienttemplateidsystemstring) configuration options.{% if site.core %} For TagHelper Grid configuration use the `client-template` or `client-template-id` properties.
+The {{site.product}} Grid also supports using a template for the Toolbar. You can define a template by using the [`ClientTemplate()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#clienttemplatesystemstring) or the [`ClientTemplateid()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#clienttemplateidsystemstring) configuration options.{% if site.core %} For TagHelper Grid configuration use the `client-template` or `client-template-id` properties.
 {% endif %} 
 
 ```HtmlHelper

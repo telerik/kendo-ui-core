@@ -8,7 +8,7 @@ position: 6
 
 # Events
 
-The Telerik UI ListBox for {{ site.framework }} [exposes a number of events](/api/Kendo.Mvc.UI.Fluent/ListBoxEventBuilder) that allow you to control the behavior of the UI component.
+The Telerik UI ListBox for {{ site.framework }} [exposes a number of events](/api/kendo.mvc.ui.fluent/listboxeventbuilder) that allow you to control the behavior of the UI component.
 
 For a complete example on basic ListBox events, refer to the [demo on using the events of the ListBox](https://demos.telerik.com/{{ site.platform }}/listbox/events).
 

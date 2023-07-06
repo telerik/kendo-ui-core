@@ -12,7 +12,7 @@ The Telerik UI Spreadsheet for {{ site.framework }} allows you to control the en
 
 ## Set Cell State at Initialization
 
-You can set the state of a cell during the initialization of the Spreadsheet for {{ site.framework }} by using the [`.Enable()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetRowCellBuilder#enablesystemboolean) configuration option:
+You can set the state of a cell during the initialization of the Spreadsheet for {{ site.framework }} by using the [`.Enable()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetrowcellbuilder#enablesystemboolean) configuration option:
 
 ```HtmlHelper
     @(Html.Kendo().Spreadsheet()

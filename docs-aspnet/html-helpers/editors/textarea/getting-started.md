@@ -110,7 +110,7 @@ To change the [appearance]({% slug textarea_appearance %}) of the TextArea, use 
 
 ## 5. Handle the TextArea Events
 
-The TextArea exposes various [events](/api/Kendo.Mvc.UI.Fluent/TextAreaEventBuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the TextArea changes through user interaction.
+The TextArea exposes various [events](/api/kendo.mvc.ui.fluent/textareaeventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the TextArea changes through user interaction.
 
 ```HtmlHelper
     @(Html.Kendo().TextArea()

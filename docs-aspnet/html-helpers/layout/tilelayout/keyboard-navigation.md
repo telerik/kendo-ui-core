@@ -3,7 +3,7 @@ title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} TileLayout by Telerik UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_aspnetcore_tilelayout
-position: 5
+position: 7
 ---
 
 # Keyboard Navigation

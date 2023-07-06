@@ -1320,4 +1320,5 @@ var __meta__ = {
 
     ui.plugin(ListView);
 })(window.kendo.jQuery);
+export default kendo;
 

@@ -90,4 +90,5 @@ var __meta__ = {
 
     ui.plugin(Loader);
 })(window.kendo.jQuery);
+export default kendo;
 

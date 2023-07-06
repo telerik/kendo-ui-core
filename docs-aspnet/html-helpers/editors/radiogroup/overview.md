@@ -1,9 +1,9 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI RadioGroup HtmlHelper for {{ site.framework }}."
+description: The Telerik UI RadioGroup component for {{ site.framework }} provides a styled UI element that allows you to select a single item from a list of options.
 slug: htmlhelpers_radiogroup_aspnetcore_overview
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} RadioGroup Overview
@@ -14,7 +14,7 @@ The Telerik UI RadioGroup TagHelper and HtmlHelper for {{ site.framework }} are 
 The Telerik UI RadioGroup HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI RadioGroup widget.
 {% endif %}
 
-The RadioGroup allows to check and uncheck radio buttons, set the position of the labels, attributes and custom css classes.
+The RadioGroup allows to check and uncheck radio buttons, set the position of the labels, attributes and custom CSS classes.
 
 * [Demo page for the RadioGroup HtmlHelper](https://demos.telerik.com/{{ site.platform }}/radiogroup/index)
 {% if site.core %}
@@ -76,15 +76,19 @@ The following example demonstrates the basic configuration for the RadioGroup.
 
 ## Functionality and Features
 
-* [Binding]({% slug htmlhelpers_radiogroup_binding_aspnetcore %})
-* [Label]({% slug htmlhelpers_radiogroup_aspnetcore_label %})
-* [Layout]({% slug htmlhelpers_radiogroup_aspnetcore_layout %})
+* [Binding]({% slug htmlhelpers_radiogroup_binding_aspnetcore %})—The component supports binding to a collection of data.
+* [Label]({% slug htmlhelpers_radiogroup_aspnetcore_label %})—Each RadioGroup item may have a label associated with it.
+* [Layout]({% slug htmlhelpers_radiogroup_aspnetcore_layout %})—The RadioGroup supports two types of layout: horizontal and vertical.
+
+## Next Steps
+
+* [Getting Started with the RadioGroup]({% slug aspnetcore_radiogroup_getting_started %})
+* [Basic Usage of the RadioGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiogroup)
+{% if site.core %}
+* [Basic Usage of the RadioGroup TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/radiogroup/tag-helper)
+{% endif %}
 
 ## See Also
 
-* [Basic Usage of the RadioGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiogroup/index)
-{% if site.core %}
-* [Basic Usage of the RadioGroup TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/aspnet-core/radiogroup/tag-helper)
-{% endif %}
 * [Using the API of the RadioGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiogroup/api)
-* [Server-Side API](/api/radiogroup)
+* [Knowledge Base Section](/knowledge-base)

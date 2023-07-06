@@ -463,9 +463,11 @@ var __meta__ = {
         },
 
         _cancel: function() {
-            this.draggedElement.show();
-            this.placeholder.remove();
-            this.draggable.dropped = true;
+            if (this.draggedElement) {
+                this.draggedElement.show();
+                this.placeholder.remove();
+                this.draggable.dropped = true;
+            }
         },
 
         _items: function() {
@@ -516,4 +518,5 @@ var __meta__ = {
 
     kendo.ui.plugin(Sortable);
 })(window.kendo.jQuery);
+export default kendo;
 

@@ -728,4 +728,5 @@ var __meta__ = {
     ui.plugin(MaskedTextBox);
 
 })(window.kendo.jQuery);
+export default kendo;
 

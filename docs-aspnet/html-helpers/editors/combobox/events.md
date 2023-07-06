@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI ComboBox for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/ComboBoxEventBuilder) that allow you to control and customize the behavior of the component.
+The Telerik UI ComboBox for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/comboboxeventbuilder) that allow you to control and customize the behavior of the component.
 
 For a complete example of the basic ComboBox events, refer to the [demo on using the events of the ComboBox](https://demos.telerik.com/{{ site.platform }}/combobox/events).
 

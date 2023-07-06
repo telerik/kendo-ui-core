@@ -30,12 +30,12 @@ How can I enable the copying of multiple rows from Excel and pasting them in the
 
 To achieve the desired scenario: 
 
-1. Configure the CRUD operations for the Grid, in which you want to implement the copy-paste functionality, by using the [`Batch()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/AjaxDataSourceBuilder#batchsystemboolean) configuration method for the Grid's DataSource to send all the requests at once.
+1. Configure the CRUD operations for the Grid, in which you want to implement the copy-paste functionality, by using the [`Batch()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ajaxdatasourcebuilder#batchsystemboolean) configuration method for the Grid's DataSource to send all the requests at once.
 1. To handle the user interaction for pasting, subscribe to the [`contextMenu`](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event) event, which is triggered, by clicking the right mouse button.
 1. Within the handler, create an empty text area which will act as a clipboard, and adjust its width and height to exclude the pager and the scrollbar.
 1. To map the pasted content directly within the Grid, handle the [`paste`](https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event) event. From there, create new data item instances by using the pasted content, and insert them into the Grid by using the [`insert()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/insert) client-side method of the Grid's DataSource.
 1. If the user clicks to edit but the context menu is open and the text area is over the Grid's body, handle the [`click`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) event and manually remove the created text area.
-1. To add a native UI look and feel, wire to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) and add the dirty indicator to each of the newly pasted items.
+1. To add a native UI look and feel, wire to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) and add the dirty indicator to each of the newly pasted items.
 
 ```Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()

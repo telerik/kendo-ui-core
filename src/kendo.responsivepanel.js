@@ -156,4 +156,5 @@ var __meta__ = {
 
     kendo.ui.plugin(ResponsivePanel);
 })(window.kendo.jQuery);
+export default kendo;
 

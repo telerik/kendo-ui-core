@@ -81,7 +81,7 @@ Describe the configuration and event handlers of the ChipList component in C#. O
 
 ## 3. Add Items with Labels
 
-You can add individual Chip items by passing objects to the [`Items`](/api/Kendo.Mvc.UI.Fluent/ChipListBuilder#itemssystemaction) array. For more information about the configurations of the different chips inside the ChipList, refer to the article on [customizing the ChipList]({% slug htmlhelpers_chiplist_aspnetcore_customization %}).
+You can add individual Chip items by passing objects to the [`Items`](/api/kendo.mvc.ui.fluent/chiplistbuilder#itemssystemaction) array. for more information about the configurations of the different chips inside the chiplist, refer to the article on [customizing the chiplist]({% slug htmlhelpers_chiplist_aspnetcore_customization %}).
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

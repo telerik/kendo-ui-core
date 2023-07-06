@@ -1836,6 +1836,52 @@ If set to `false` the user won't be able to create, modify or delete tasks and d
     });
     </script>
 
+### editable.clickMoveClick `Boolean` *(default: true)*
+
+If set to `true` (default), when there is a drag column for the items in the TreeList part of the Gantt, the user will be allowed to reorder rows via click move click interaction as an alternative of the drag and drop one.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      columns: [
+        { draggable: true, width: "40px" },
+        "title",
+        "start",
+        "end"
+      ]
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      editable: {
+      	clickMoveClick: false
+      }
+    });
+    </script>
+
 ### editable.confirmation `Boolean` *(default: true)*
 
 If set to `true` the Gantt will display a confirmation dialog when the user deletes a task or a dependency.

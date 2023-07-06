@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The ButtonGroup exposes a [`Select()` event](/api/Kendo.Mvc.UI.Fluent/ButtonGroupEventBuilder) that you can handle.
+The ButtonGroup exposes a [`Select()` event](/api/kendo.mvc.ui.fluent/buttongroupeventbuilder) that you can handle.
 
 For a complete example on basic ButtonGroup events, refer to the [demo on using the events of the ButtonGroup](https://demos.telerik.com/{{ site.platform }}/buttongroup/events).
 

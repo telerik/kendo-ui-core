@@ -59,7 +59,7 @@ How can I show success and error notification messages when editing Inline Grid?
         </script>
     ```
 
-1. Handle the [`RequestEnd` event of the DataSource](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#requeststartsystemfunc) that triggers when a remote request is finished. If the request type is `"update"` and the server response has no errors, display the Notification with the respective message for success.
+1. Handle the [`RequestEnd` event of the DataSource](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datasourceeventbuilder#requeststartsystemfunc) that triggers when a remote request is finished. If the request type is `"update"` and the server response has no errors, display the Notification with the respective message for success.
 
     ```
         @(Html.Kendo().Grid<GridViewModel>()
@@ -86,7 +86,7 @@ How can I show success and error notification messages when editing Inline Grid?
         </script>
     ```
 
-1. Handle the [`Error` event of the DataSource](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#errorsystemfunc) that triggers when the request to the remote endpoint fails. In the event handler, display the errors, call the `cancelChanges()` method of the Grid as is explained in [the handling `ModelState` errors section in the documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/editing/inline#handling-modelstate-errors), and display the Notification with the respective message for the error.
+1. Handle the [`Error` event of the DataSource](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datasourceeventbuilder#errorsystemfunc) that triggers when the request to the remote endpoint fails. in the event handler, display the errors, call the `cancelchanges()` method of the grid as is explained in [the handling `modelstate` errors section in the documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/editing/inline#handling-modelstate-errors), and display the Notification with the respective message for the error.
 
 
     ```

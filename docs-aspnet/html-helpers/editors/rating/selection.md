@@ -11,14 +11,14 @@ position: 2
 
 The Rating allows you to control the selection of its items.
 
-To configure the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property, use either of the following settings:
+To configure the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#selectionsystemstring) property, use either of the following settings:
 
 * `continuous`&mdash;Allows the selection of all items from the start to the end.
 * `single`&mdash;Allows the selection of a single item.
 
 ## Continuous Selection
 
-The continuous selection is the default selection mode of the Rating. If not configured, the Rating will automatically set the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"continuous"`.
+The continuous selection is the default selection mode of the Rating. If not configured, the Rating will automatically set the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#selectionsystemstring) property to `"continuous"`.
 
 ```HtmlHelper
     @(Html.Kendo().Rating()
@@ -34,7 +34,7 @@ The continuous selection is the default selection mode of the Rating. If not con
 
 ## Single Selection
 
-To configure the single selection mode, set the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"single"`.
+To configure the single selection mode, set the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#selectionsystemstring) property to `"single"`.
 
 ```HtmlHelper
     @(Html.Kendo().Rating()

@@ -14,7 +14,7 @@ For a runnable example, refer to the demo on [implementing sticky columns in the
 
 The following Grid configuration ensures that it will be possible to scroll columns horizontally to make the feature work. If there is not enough horizontal space for the scrollbar, it will not appear.
 * Enable [scrolling]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
-* [Stick columns initially](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#stickysystemboolean) or [enable the stickable property](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#stickablesystemboolean) so users can stick column on the fly.
+* [Stick columns initially](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#stickysystemboolean) or [enable the stickable property](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#stickablesystemboolean) so users can stick column on the fly.
 * Set a Grid height.
 * Set explicit pixel widths to all columns to allow the Grid to adjust the layout of the sticky and non-sticky columns.
 * Make sure that the Grid is not [initialized inside a hidden container]({% slug hidden_containers_aspnetcore_grid %}).

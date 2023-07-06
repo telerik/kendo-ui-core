@@ -36,7 +36,7 @@ The example below extends the [Grid Hierarchy Demo](https://demos.telerik.com/as
 The example relies on the following key steps:
 
 1. Add a Toolbar with an Export to Excel Button.
-1. Add an event handler to the client-side [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event. The event is then prevented to avoid exporting only the data in the parent grid.
+1. Add an event handler to the client-side [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event. The event is then prevented to avoid exporting only the data in the parent grid.
 1. Fetch the data for all detail Grids and append to the corresponding parent row.
 
 ```

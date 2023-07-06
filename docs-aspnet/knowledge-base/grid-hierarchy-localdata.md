@@ -24,7 +24,7 @@ To achieve the desired result follow the steps below:
 {% endif %}
   1. Follwo the requirements for configuring the [Hierarchy funtionliaty]({% slug hierarchy_grid_htmlhelper_aspnetcore %})
   1. Define a ClientTemplate with DataSource configured for Ajax binding and set the AutoBind configuration to `false`
-  1. Add an event handler to the [`DetailInit`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#detailinitsystemstring) event and use it to set teh data for the child Grid
+  1. Add an event handler to the [`DetailInit`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#detailinitsystemstring) event and use it to set teh data for the child Grid
 
   Check this [REPL for a runnable example](https://netcorerepl.telerik.com/wPlFuylo00Q9Ch7J51).
 

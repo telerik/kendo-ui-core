@@ -25,7 +25,7 @@ How can I persist the selected tab in the TabStrip when the user refreshes the p
 
 ## Solution
 
-1. Handle the [`Select`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/TabStripEventBuilder#selectsystemfunc) event of the TabStrip and get the name of the selected tab. Send it through an `AJAX` request to the server and store it.
+1. Handle the [`Select`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/tabstripeventbuilder#selectsystemfunc) event of the TabStrip and get the name of the selected tab. Send it through an `AJAX` request to the server and store it.
 
 	```View
 		@{

@@ -606,4 +606,5 @@ var __meta__ = {
 
     kendo.ui.plugin(Tooltip);
 })(window.kendo.jQuery);
+export default kendo;
 

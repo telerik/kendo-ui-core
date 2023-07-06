@@ -799,4 +799,5 @@ var __meta__ = {
 
     kendo.ui.plugin(Validator);
 })(window.kendo.jQuery);
+export default kendo;
 

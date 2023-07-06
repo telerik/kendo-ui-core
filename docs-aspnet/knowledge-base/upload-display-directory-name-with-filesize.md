@@ -28,8 +28,8 @@ How can I display the directory name and the total size of its content when work
 
 ## Solution
 
-1. Hide the file list menu through the [`.ShowFileList()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/UploadBuilder#showfilelistsystemboolean) configuration method.
-1. Subscribe to the [`Select`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#selectsystemstring) event.
+1. Hide the file list menu through the [`.ShowFileList()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/uploadbuilder#showfilelistsystemboolean) configuration method.
+1. Subscribe to the [`Select`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/uploadeventbuilder#selectsystemstring) event.
 1. Get both the directory name and total file size in the `Select` event handler, and append them to the widget wrapper.
 
 ```Index.cshtml

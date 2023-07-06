@@ -12,7 +12,7 @@ By default, the grouping functionality of the Telerik UI Grid for {{ site.framew
 
 For a runnable example, refer to the [demo on using aggregates in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/aggregates).
 
-To control grouping in the Grid, use the [`Groupable()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#groupable) method.
+To control grouping in the Grid, use the [`Groupable()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#groupable) method.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()

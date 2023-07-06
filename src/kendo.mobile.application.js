@@ -498,4 +498,5 @@ var __meta__ = {
     kendo.mobile.Application = Application;
     kendo.ui.plugin(Application, kendo.mobile, 'Mobile');
 })(window.kendo.jQuery);
+export default kendo;
 

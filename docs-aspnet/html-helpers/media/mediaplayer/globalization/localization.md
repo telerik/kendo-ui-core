@@ -11,7 +11,7 @@ position: 2
 
 You can localize the tooltip texts from the MediaPlayer interface through the `Messages` configuration options.
 
-For a complete list of localizable messages, refer to the [MediaPlayer server-side API](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/{% if site.core %}MediaPlayerMessagesSettingsBuilder{% else %}MediaPlayerMessagesBuilder{% endif %}).
+For a complete list of localizable messages, refer to the [MediaPlayer server-side API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/{% if site.core %}mediaplayermessagessettingsbuilder{% else %}mediaplayermessagesbuilder{% endif %}).
 
 ```HtmlHelper
     @(Html.Kendo().MediaPlayer()

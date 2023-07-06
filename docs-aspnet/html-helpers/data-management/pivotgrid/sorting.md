@@ -8,7 +8,7 @@ position: 4
 
 # Sorting
 
-The PivotGrid supports sorting both in the OLAP and flat data-binding scenarios. To enable the sortable functionality, use the [`Sortable()`](/api/Kendo.Mvc.UI.Fluent/PivotGridBuilder#sortable) method.
+The PivotGrid supports sorting both in the OLAP and flat data-binding scenarios. To enable the sortable functionality, use the [`Sortable()`](/api/kendo.mvc.ui.fluent/pivotgridbuilder#sortable) method.
 
 The PivotGrid supports sorting by the caption name of the members. The structure of the `sort` descriptor is similar to [the `sort` option of the `kendo.data.DataSource`](/api/datasource) and contains the following options:
 - `field`&mdash;The name of the dimension, for example, `[Date].[Calendar]`.

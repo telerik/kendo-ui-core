@@ -75,3 +75,4 @@ import "./kendo.mobile.switch.js";
 import "./kendo.mobile.tabstrip.js";
 import "./kendo.angular.js";
     "bundle all";
+export default kendo;

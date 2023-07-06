@@ -14,7 +14,7 @@ For a runnable example, refer to the [demo on endless scrolling of remote data i
 
 ## Getting Started
 
-To enable endless scrolling, set the [`Scrollable.Endless(true)`](/api/Kendo.Mvc.UI.Fluent/GridScrollSettingsBuilder#endlesssystemboolean) property to `true`.
+To enable endless scrolling, set the [`Scrollable.Endless(true)`](/api/kendo.mvc.ui.fluent/gridscrollsettingsbuilder#endlesssystemboolean) property to `true`.
 
 > For the functionality to work as expected, provide for the following requirements:
 > - Implement a vertical scrollbar.
