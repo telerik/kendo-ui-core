@@ -55,8 +55,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "settings": "Column Settings",
   "lock": "Lock",
   "unlock": "Unlock",
-  "movePrev": "Move Previous",
-  "moveNext": "Move Next"
+  "movePrev": "Move previous",
+  "moveNext": "Move next",
+  "groupColumn": "Group column",
+  "ungroupColumn": "Ungroup column"
 });
 }
 

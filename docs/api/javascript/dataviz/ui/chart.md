@@ -12552,6 +12552,130 @@ The data field containing the color applied when the open value is greater than 
     });
     </script>
 
+### series.drilldownField `String`
+
+The data field which contains the value to use to drill down into detailed data for the point.
+
+#### Example - use the chart series drilldown field to implement drilldown
+
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Total Sales By Company',
+          field: 'sales',
+          categoryField: 'company',
+          drilldownField: 'details',
+          data: [{
+              company: 'Company A',
+              sales: 100,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 80
+                  }, {
+                    product: 'Product 2',
+                    sales: 20
+                  }]
+              }
+          }, {
+              company: 'Company B',
+              sales: 200,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 40
+                  }, {
+                    product: 'Product 2',
+                    sales: 160
+                  }]
+              }
+          }]
+        }]
+      });
+
+      $('#breadcrumb').kendoChartBreadcrumb({
+        chart: "#chart"
+      });
+    </script>
+
+### series.drilldownSeriesFactory `Function`
+
+A function that creates the drilldown series for a given point.
+
+The function should accept a single parameter, the point `drilldownField` value.
+The function should return a series configuration object or a `Promise` that resolves to one.
+
+#### Example - use the chart series drilldownSeriesFactory function to implement dynamic drilldown
+
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      var vehiclesByModel = {
+        'Tesla': [{
+          model: 'Model 3',
+          count: 225350
+        }, {
+          model: 'Model Y',
+          count: 40159
+        }],
+        'VW': [{
+          model: 'ID.3',
+          count: 60274
+        }, {
+          model: 'ID.4',
+          count: 20302
+        }]
+      };
+
+      var vehiclesByMake = [{
+        company: 'Tesla',
+        count: 314159
+      }, {
+        company: 'VW',
+        count: 112645
+      }];
+
+      function drilldownByModel(make) {
+        const data = vehiclesByModel[make];
+        if (data) {
+          return {
+            type: 'column',
+            name: make + ' Sales by Model',
+            data,
+            field: 'count',
+            categoryField: 'model'
+          };
+        }
+      };
+
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Battery EVs registered in 2022',
+          data: vehiclesByMake,
+          field: 'count',
+          categoryField: 'company',
+          drilldownField: 'company',
+          drilldownSeriesFactory: drilldownByModel
+        }]
+      });
+
+      $('#breadcrumb').kendoChartBreadcrumb({
+        chart: "#chart"
+      });
+    </script>
+
 ### series.segmentSpacing `Number` *(default: 0)*
 
 The space in pixels between the different segments of the funnel chart.
@@ -38170,6 +38294,69 @@ Reloads the data and renders the chart.
     chart.refresh();
     </script>
 
+### resetDrilldownLevel
+
+Sets the current drill-down level for Drilldown Charts.
+
+* To return to a previous level, set the value to a number less than the current level.
+* To return to the root chart, set the value to 0.
+
+Setting the value to a number greater than the current level will have no effect.
+
+#### Example - use resetDrilldownLevel to get back to the root Chart
+
+    <button id="reset">Reset Drilldown</button>
+    <div id="chart"></div>
+    <script>
+      $("#reset").click(function() {
+        var chart = $("#chart").getKendoChart();
+        chart.resetDrilldownLevel(0);
+      });
+
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Total Sales By Company',
+          field: 'sales',
+          categoryField: 'company',
+          drilldownField: 'details',
+          data: [{
+              company: 'Company A',
+              sales: 100,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 80
+                  }, {
+                    product: 'Product 2',
+                    sales: 20
+                  }]
+              }
+          }, {
+              company: 'Company B',
+              sales: 200,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 40
+                  }, {
+                    product: 'Product 2',
+                    sales: 160
+                  }]
+              }
+          }]
+        }]
+      });
+    </script>
+
 ### resize
 
 Adjusts the chart layout to match the size of the container.
@@ -38785,6 +38972,111 @@ The widget instance which fired the event.
     });
     var chart = $("#chart").data("kendoChart");
     chart.bind("dragStart", chart_dragStart);
+    </script>
+
+### drilldown
+
+Fires when the user when the user wants to drill down on a specific point.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.drilldownSeries `Object`
+
+The configuration object for the newly created drilldown series.
+
+##### e.point `Object`
+
+The point to drill down into.
+
+##### e.preventDefault `Function`
+
+If invoked the drill down operation will be cancelled and the Chart will remain in the same state.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The configuration object for the series to drill down into.
+
+#### Example - subscribe to the "drilldown" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      drilldown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldown");
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "drilldown" event after initialization
+    <div id="chart"></div>
+    <script>
+    function onDrilldown(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("drilldown");
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("drilldown", onDrilldown);
+    </script>
+
+### drilldownLevelChange
+
+Fires when the drill-down level has changed.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.level `Number`
+
+The current drill-down level.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+
+#### Example - subscribe to the "drilldownLevelChange" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      drilldownLevelChange: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldownLevelChange: " + e.level);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "drilldown" event after initialization
+    <div id="chart"></div>
+    <script>
+    function onDrilldownLevelChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldownLevelChange: " + e.level);
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("drilldownLevelChange", onDrilldownLevelChange);
     </script>
 
 ### legendItemClick

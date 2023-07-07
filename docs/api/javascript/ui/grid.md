@@ -3516,13 +3516,21 @@ The text message displayed in the column menu for locking a column.
     });
     </script>
 
-### columnMenu.messages.moveNext `String` *(default: "Move Next")*
+### columnMenu.messages.moveNext `String` *(default: "Move next")*
 
 The text message that is displayed for the Move to next position column menu item.
 
-### columnMenu.messages.movePrev `String` *(default: "Move Previous")*
+### columnMenu.messages.movePrev `String` *(default: "Move previous")*
 
 The text message that is displayed for the Move to previous position column menu item.
+
+### columnMenu.messages.groupColumn `String` *(default: "Group column")*
+
+The text message that is displayed for the Group column menu item.
+
+### columnMenu.messages.ungroupColumn `String` *(default: "Ungroup column")*
+
+The text message that is displayed for the Ungroup column menu item.
 
 ### columnMenu.messages.reset `String` *(default: "Reset")*
 

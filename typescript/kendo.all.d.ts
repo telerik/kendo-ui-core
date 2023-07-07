@@ -6370,6 +6370,8 @@ declare namespace kendo.ui {
         buttonTitle?: string | undefined;
         movePrev?: string | undefined;
         moveNext?: string | undefined;
+        groupColumn?: string | undefined;
+        ungroupColumn?: string | undefined;
     }
 
     interface GridColumnMenu {
@@ -14934,6 +14936,7 @@ declare namespace kendo.dataviz.ui {
         redraw(): void;
         refresh(): void;
         resize(force?: boolean): void;
+        resetDrilldownLevel(level?: number): void;
         saveAsPDF(): void;
         setDataSource(dataSource: kendo.data.DataSource): void;
         setOptions(options: any): void;
@@ -16007,6 +16010,8 @@ declare namespace kendo.dataviz.ui {
         data?: any;
         downColor?: string|Function | undefined;
         downColorField?: string | undefined;
+        drilldownField?: string | undefined;
+        drilldownSeriesFactory?: Function | undefined;
         segmentSpacing?: number | undefined;
         summaryField?: string | undefined;
         neckRatio?: number | undefined;
@@ -17539,6 +17544,27 @@ declare namespace kendo.dataviz.ui {
         originalEvent?: any;
     }
 
+    interface ChartBreadcrumbOptions {
+        chart: string | Chart;
+        rootItem?: kendo.ui.BreadcrumbItem;
+    }
+
+    class ChartBreadcrumb extends kendo.ui.Widget {
+
+        static fn: ChartBreadcrumb;
+
+        options: ChartBreadcrumbOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Chart;
+
+        constructor(element: Element, options?: ChartBreadcrumbOptions);
+
+
+        destroy(): void;
+    }
 
     class Diagram extends kendo.ui.Widget {
 

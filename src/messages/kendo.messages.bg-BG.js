@@ -602,7 +602,9 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "reset": "Нулирай",
   "buttonTitle": "Меню за редактиране на колона {0}",
   "movePrev": "Премести на предишно",
-  "moveNext": "Премести на следващо"
+  "moveNext": "Премести на следващо",
+  "groupColumn": "Групирай колона",
+  "ungroupColumn": "Разгрупирай колона"
 });
 }
 

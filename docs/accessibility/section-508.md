@@ -12,9 +12,11 @@ position: 2
 
 These standards apply to electronic and information technology and contain technical criteria specific to various types of technologies and performance-based requirements which focus on functional capabilities of covered products.
 
-The following table is based on the [Voluntary Product Accessibility Template (VPAT)](https://www.itic.org/policy/accessibility/) requirements. It provides detailed explanation about the accessibility features Kendo UI delivers according to the [Section 508 Web content standards](https://www.section508.gov/content/learn/standards/quick-reference-guide#1194.22).
+## Voluntary Product Accessibility Template
 
-<a href="assets/KendoUI-VPAT2.4RevINT.doc" download>Here</a> you can download the latest version of the VPAT Template, describing the Kendo UI for jQuery accessibility compliance state.
+A [Voluntary Product Accessibility Template (VPAT®)](https://www.section508.gov/sell/vpat/) is a document that explains how information and communication technology (ICT) products such as software, hardware, electronic content, and support documentation meet (conform to) the Revised 508 Standards for IT accessibility.
+
+> You can review and download the latest version of the Kendo UI VPAT document <a href="assets/KendoUI-VPAT2.4RevINT.doc" download>here</a>.
 
 **Table 1. Section 1194.22 Web Information and Application Standards**
 
