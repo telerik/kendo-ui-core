@@ -3663,10 +3663,6 @@ function pad(number, digits, end) {
             kendo.init(element, kendo.mobile.ui, kendo.ui, kendo.dataviz.ui);
         },
 
-        appLevelNativeScrolling: function() {
-            return kendo.mobile.application && kendo.mobile.application.options && kendo.mobile.application.options.useNativeScrolling;
-        },
-
         roles: {},
 
         ui: {
@@ -4875,22 +4871,6 @@ function pad(number, digits, end) {
         }
 
         return start;
-    };
-
-    kendo.compileMobileDirective = function(element, scope) {
-        var angular = window.angular;
-
-        element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', '').replace('-', ''));
-
-        angular.element(element).injector().invoke(["$compile", function($compile) {
-            $compile(element)(scope);
-
-            if (!/^\$(digest|apply)$/.test(scope.$$phase)) {
-                scope.$digest();
-            }
-        }]);
-
-        return kendo.widgetInstance(element, kendo.mobile.ui);
     };
 
     kendo.antiForgeryTokens = function() {

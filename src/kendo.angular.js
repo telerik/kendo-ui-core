@@ -793,11 +793,7 @@ var __meta__ = {
         Upload: "input",
         Validator: "form",
         Button: "button",
-        MobileButton: "a",
-        MobileBackButton: "a",
-        MobileDetailButton: "a",
         ListView: "ul",
-        MobileListView: "ul",
         ScrollView: "div",
         PanelBar: "ul",
         TreeView: "ul",
@@ -807,29 +803,11 @@ var __meta__ = {
         Switch: "input"
     };
 
-    var SKIP_SHORTCUTS = [
-        'MobileView',
-        'MobileDrawer',
-        'MobileLayout',
-        'MobileSplitView',
-        'MobilePane',
-        'MobileModalView'
-    ];
+    var SKIP_SHORTCUTS = [];
 
-    var MANUAL_DIRECTIVES = [
-        'MobileApplication',
-        'MobileView',
-        'MobileModalView',
-        'MobileLayout',
-        'MobileActionSheet',
-        'MobileDrawer',
-        'MobileSplitView',
-        'MobilePane',
-        'MobileScrollView',
-        'MobilePopOver'
-    ];
+    var MANUAL_DIRECTIVES = [];
 
-    angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip', 'MobileScrollView', 'MobileScroller'], function(widget) {
+    angular.forEach(['MobileScroller'], function(widget) {
         MANUAL_DIRECTIVES.push(widget);
         widget = "kendo" + widget;
         module.directive(widget, function() {
@@ -883,9 +861,6 @@ var __meta__ = {
         if (MANUAL_DIRECTIVES.indexOf(name.replace("kendo", "")) > -1) {
             return;
         }
-
-        // here name should be like kendoMobileListView so kendo-mobile-list-view works,
-        // and shortcut like kendoMobilelistview, for kendo-mobilelistview
 
         make(name, name);
         if (shortcut != name) {
@@ -1240,183 +1215,8 @@ var __meta__ = {
         }
     });
 
-    {
-        // mobile/ButtonGroup does not have a "value" method, but looks
-        // like it would be useful.  We provide it here.
-
-        defadvice("mobile.ui.ButtonGroup", "value", function(mew) {
-            var self = this.self;
-            if (mew != null) {
-                self.select(self.element.children("li.km-button").eq(mew));
-                self.trigger("change");
-                self.trigger("select", { index: self.selectedIndex });
-            }
-            return self.selectedIndex;
-        });
-
-        defadvice("mobile.ui.ButtonGroup", "_select", function() {
-            this.next();
-            this.self.trigger("change");
-        });
-    }
-
-    // mobile directives
-    module
-    .directive('kendoMobileApplication', function() {
-        return {
-            terminal: true,
-            link: function(scope, element, attrs) {
-                createWidget(scope, element, attrs, 'kendoMobileApplication', 'kendoMobileApplication');
-            }
-        };
-    }).directive('kendoMobileView', function() {
-        return {
-            scope: true,
-            link: {
-                pre: function(scope, element, attrs) {
-                    attrs.defaultOptions = scope.viewOptions;
-                    attrs._instance = createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
-                },
-
-                post: function(scope, element, attrs) {
-                    attrs._instance._layout();
-                    attrs._instance._scroller();
-                }
-            }
-        };
-    }).directive('kendoMobileDrawer', function() {
-        return {
-            scope: true,
-            link: {
-                pre: function(scope, element, attrs) {
-                    attrs.defaultOptions = scope.viewOptions;
-                    attrs._instance = createWidget(scope, element, attrs, 'kendoMobileDrawer', 'kendoMobileDrawer');
-                },
-
-                post: function(scope, element, attrs) {
-                    attrs._instance._layout();
-                    attrs._instance._scroller();
-                }
-            }
-        };
-    }).directive('kendoMobileModalView', function() {
-        return {
-            scope: true,
-            link: {
-                pre: function(scope, element, attrs) {
-                    attrs.defaultOptions = scope.viewOptions;
-                    attrs._instance = createWidget(scope, element, attrs, 'kendoMobileModalView', 'kendoMobileModalView');
-                },
-
-                post: function(scope, element, attrs) {
-                    attrs._instance._layout();
-                    attrs._instance._scroller();
-                }
-            }
-        };
-    }).directive('kendoMobileSplitView', function() {
-        return {
-            terminal: true,
-            link: {
-                pre: function(scope, element, attrs) {
-                    attrs.defaultOptions = scope.viewOptions;
-                    attrs._instance = createWidget(scope, element, attrs, 'kendoMobileSplitView', 'kendoMobileSplitView');
-                },
-
-                post: function(scope, element, attrs) {
-                    attrs._instance._layout();
-                }
-            }
-        };
-    }).directive('kendoMobilePane', function() {
-        return {
-            terminal: true,
-            link: {
-                pre: function(scope, element, attrs) {
-                    attrs.defaultOptions = scope.viewOptions;
-                    createWidget(scope, element, attrs, 'kendoMobilePane', 'kendoMobilePane');
-                }
-            }
-        };
-    }).directive('kendoMobileLayout', function() {
-        return {
-            link: {
-                pre: function(scope, element, attrs) {
-                    createWidget(scope, element, attrs, 'kendoMobileLayout', 'kendoMobileLayout');
-                }
-            }
-        };
-    }).directive('kendoMobileActionSheet', function() {
-        return {
-            restrict: "A",
-            link: function(scope, element, attrs) {
-                element.find("a[k-action]").each(function() {
-                    $(this).attr("data-" + kendo.ns + "action", $(this).attr("k-action"));
-                });
-
-                createWidget(scope, element, attrs, 'kendoMobileActionSheet', 'kendoMobileActionSheet');
-            }
-        };
-    }).directive('kendoMobilePopOver', function() {
-        return {
-            terminal: true,
-            link: {
-                pre: function(scope, element, attrs) {
-                    attrs.defaultOptions = scope.viewOptions;
-                    createWidget(scope, element, attrs, 'kendoMobilePopOver', 'kendoMobilePopOver');
-                }
-            }
-        };
-    }).directive('kendoViewTitle', function() {
-        return {
-            restrict: "E",
-            replace: true,
-            template: function(element) {
-                return "<span data-" + kendo.ns + "role='view-title'>" + element.html() + "</span>";
-            }
-        };
-    }).directive('kendoMobileHeader', function() {
-            return {
-                restrict: "E",
-                link: function(scope, element) {
-                    element.addClass("km-header").attr("data-role", "header");
-                }
-            };
-    }).directive('kendoMobileFooter', function() {
-            return {
-                restrict: 'E',
-                link: function(scope, element) {
-                    element.addClass("km-footer").attr("data-role", "footer");
-                }
-            };
-    }).directive('kendoMobileScrollViewPage', function() {
-        return {
-            restrict: "E",
-            replace: true,
-            template: function(element) {
-                return "<div data-" + kendo.ns + "role='page'>" + element.html() + "</div>";
-            }
-        };
-    });
-
-    angular.forEach(['align', 'icon', 'rel', 'transition', 'actionsheetContext'], function(attr) {
-          var kAttr = "k" + attr.slice(0, 1).toUpperCase() + attr.slice(1);
-
-          module.directive(kAttr, function() {
-              return {
-                  restrict: 'A',
-                  priority: 2,
-                  link: function(scope, element, attrs) {
-                      element.attr(kendo.attr(kendo.toHyphens(attr)), scope.$eval(attrs[kAttr]));
-                  }
-              };
-          });
-    });
-
     var WIDGET_TEMPLATE_OPTIONS = {
         "TreeMap": [ "Template" ],
-        "MobileListView": [ "HeaderTemplate", "Template" ],
-        "MobileScrollView": [ "EmptyTemplate", "Template" ],
         "Grid": [ "AltRowTemplate", "DetailTemplate", "RowTemplate" ],
         "ListView": [ "EditTemplate", "Template", "AltTemplate" ],
         "Pager": [ "SelectTemplate", "LinkTemplate" ],
@@ -1479,4 +1279,3 @@ var __meta__ = {
 
 
 })(window.kendo.jQuery, window.angular);
-

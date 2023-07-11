@@ -47,42 +47,6 @@
             assert.equal(toHyphens("fooBarBaz"), "foo-bar-baz");
         });
 
-        it("widgetInstance supports array of namespaces as an argument", function() {
-            var testbed = $("<div data-role='barcode'></div><div data-role='scroller'></div><div data-role='calendar'></div>");
-            kendo.init(testbed, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
-
-            if (kendo.size(kendo.dataviz.ui.Barcode)) {
-                assert.isOk(kendo.widgetInstance(testbed.filter(".k-barcode"), [kendo.mobile.ui, kendo.dataviz.ui]));
-            }
-            assert.isOk(kendo.widgetInstance(testbed.filter(".km-scroll-wrapper"), [kendo.mobile.ui, kendo.dataviz.ui]));
-            assert.isOk(!kendo.widgetInstance(testbed.filter(".k-calendar"), [kendo.mobile.ui, kendo.dataviz.ui]));
-            kendo.destroy(testbed);
-        });
-
-        it("widgetInstance returns mobile view instances correctly", function() {
-            var testbed = $("<div data-role='view'>test</div>");
-            kendo.init(testbed, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
-
-            assert.isOk(kendo.widgetInstance(testbed.filter(".km-view"), [kendo.mobile.ui]));
-            kendo.destroy(testbed);
-        });
-
-        var directiveSelector = kendo.directiveSelector;
-
-        it("puts hyphens before 'view', 'bar', 'strip', 'over' words in the widget names", function() {
-            assert.equal(directiveSelector("modalview"), "kendo-mobile-modal-view");
-            assert.equal(directiveSelector("tabstrip"), "kendo-mobile-tab-strip");
-            assert.equal(directiveSelector("popover"), "kendo-mobile-pop-over");
-        });
-
-        it("works with multiple selectors", function() {
-            assert.equal(directiveSelector("modalview drawer"), "kendo-mobile-modal-view, kendo-mobile-drawer");
-        });
-
-        it("works with 'view' selector", function() {
-            assert.equal(directiveSelector("view"), "kendo-mobile-view");
-        });
-
         var getFileSizeMessage = kendo.getFileSizeMessage;
 
         it("returns correct message according to the size", function() {

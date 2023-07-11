@@ -1774,40 +1774,4 @@
             });
     }
 
-    /* Mobile ListView messages */
-    if (kendo.mobile.ui.ListView) {
-        kendo.mobile.ui.ListView.prototype.options.messages =
-            $.extend(true, kendo.mobile.ui.ListView.prototype.options.messages, {
-                "loadMoreText": "點擊載入更多",
-                "pullTemplate": "下拉刷新",
-                "releaseTemplate": "釋放刷新",
-                "refreshTemplate": "刷新中..."
-            });
-    }
-
-    /* Mobile Loader options */
-    if (kendo.mobile.ui.Loader) {
-        kendo.mobile.ui.Loader.prototype.options =
-            $.extend(true, kendo.mobile.ui.Loader.prototype.options, {
-                "loading": "<h1>載入中...</h1>"
-            });
-    }
-
-    /* Mobile Pane options */
-    if (kendo.mobile.ui.Pane) {
-        kendo.mobile.ui.Pane.prototype.options =
-            $.extend(true, kendo.mobile.ui.Pane.prototype.options, {
-                "loading": "<h1>載入中...</h1>"
-            });
-    }
-
-    /* Mobile Switch options */
-    if (kendo.mobile.ui.Switch) {
-        kendo.mobile.ui.Switch.prototype.options =
-            $.extend(true, kendo.mobile.ui.Switch.prototype.options, {
-                "onLabel": "開",
-                "offLabel": "關"
-            });
-    }
-
 })(window.kendo.jQuery);
