@@ -112,7 +112,12 @@ To handle this issue, use either of the following approaches:
     <button type="button" id="archiveButton"><span class="fa fa-archive"></span> Archive</button>
 
     <script>
-        $("#archiveButton").kendoDropDownButton();
+        $("#archiveButton").kendoDropDownButton({
+            items:[
+                { text: "Item 1"},
+                { text: "Item 2"},
+            ]
+        });
     </script>
     ```
 
