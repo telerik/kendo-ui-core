@@ -74,7 +74,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 
     <script>
       let encode = kendo.htmlEncode;
-      
+
       $("#grid").kendoGrid({
         dataSource: [ { name: "Jane Doe", age: 30 }, { name: "John Doe", age: 33 } ],
         altRowTemplate: ({ uid, name, age }) => `<tr data-uid="${uid}"><td colspan="2"><strong>${encode(name)} - </strong><strong>${encode(age)}</strong></td></tr>`
@@ -237,7 +237,7 @@ The table cells would look like this: `<td class="table-cell" style="text-align:
       }
 
       $("#grid").kendoGrid({
-        columns: [ 
+        columns: [
           {
             field: "name",
             title: "Name",
@@ -249,8 +249,8 @@ The table cells would look like this: `<td class="table-cell" style="text-align:
             attributes: ageAttributes
           }
         ],
-        dataSource: [ 
-          { name: "Anne Smith", age: 30, color: "#FFD68A" }, 
+        dataSource: [
+          { name: "Anne Smith", age: 30, color: "#FFD68A" },
           { name: "John Doe", age: 22, color: "#B2AC88" }
         ]
       });
@@ -7302,7 +7302,7 @@ Can be set to a string `phone` which will force the widget to use adaptive rende
 
 ### navigatable `Boolean` *(default: false)*
 
-If set to `true` the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
+If set to `true` the user could navigate the component using the keyboard navigation. By default keyboard navigation is disabled.
 
 #### Example - enable keyboard navigation
 
@@ -8749,7 +8749,7 @@ By default, column resizing is disabled.
     });
     </script>
 
-> Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and 
+> Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
 the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
 ### resizable.rows `Boolean` *(default:false)*
@@ -11548,7 +11548,7 @@ To unlock a column when it is the only one locked use the [`setOptions`](/api/ja
           { name: "John Doe", age: 33, hometown: "Boston, MA, USA", siblings: 1 }
         ]
       });
-      
+
       var grid = $("#grid").data("kendoGrid");
       var columns = grid.getOptions().columns;
       columns[0].locked = false;

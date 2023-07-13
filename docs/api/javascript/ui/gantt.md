@@ -2482,9 +2482,9 @@ If set to `true`, the user can reorder the columns in the GanttList section of t
     });
     </script>
 
-### navigatable `Boolean` *(default: false)*
+### navigatable `Boolean` *(default: true)*
 
-If set to `true` the user could navigate the widget using the keyboard. By default keyboard navigation is disabled.
+If set to `true` the user could navigate the widget using the keyboard. By default keyboard navigation is enabled.
 
 > Even when the keyboard navigation is disabled the user could delete selected tasks or dependencies with the `Del` key.
 

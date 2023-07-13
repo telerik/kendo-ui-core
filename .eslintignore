@@ -14,7 +14,7 @@ src/jszip.min.js
 src/pako_deflate.js
 src/pako_deflate.min.js
 
-src/pivotgrid/common.js
+src/pivotgrid/*.js
 src/signature/signature-pad.js
 src/drawing/kendo-drawing.js
 src/ooxml

@@ -33,6 +33,8 @@ The following example demonstrates how to add the localization script to a docum
 
 > Currently, translations are not available for every language and some of the localization files may be incomplete. For more information on where to find the full list of available translations, refer to the [section on contributing]({% slug overview_localization_kendoui%}#contribution).
 
+> Using HTML in the localization messages of the components is not supported. Localization messages are designed to use strings and no HTML can be passed to them.
+
 ## Creating New Localization Files
 
 The localization script replaces the default messages in the widget prototype with their equivalent translations. The file has to be named by following the `kendo.messages.<language>.js` convention. A [language code identifier list](https://msdn.microsoft.com/en-us/library/cc233965.aspx) is available for free download from the Microsoft developer network website.

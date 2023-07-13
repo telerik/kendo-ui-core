@@ -462,6 +462,10 @@ var __meta__ = {
 
             that.wrapper.addClass("k-splitter-resizing");
 
+            if (that._suppressResize) {
+                return;
+            }
+
             if (splitBarsCount === 0) {
                 splitBarsCount = panes.length - 1;
                 panes.slice(0, splitBarsCount)

@@ -8848,6 +8848,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         dataSource?: any|kendo.data.PivotDataSourceV2;
         filterable?: boolean | undefined;
+        navigatable?: boolean | undefined;
         sortable?: boolean|any;
         height?: number|string | undefined;
         messages?: PivotConfiguratorV2Messages | undefined;
@@ -9095,6 +9096,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         dataSource?: any|kendo.data.PivotDataSourceV2;
         autoBind?: boolean | undefined;
+        navigatable?: boolean | undefined;
         pdf?: PivotGridV2Pdf | undefined;
         columnWidth?: number | undefined;
         height?: number|string | undefined;
