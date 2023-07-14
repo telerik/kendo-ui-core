@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI MultiViewCalendar component for {{ site.framework }}."
+description: "The Telerik UI MultiViewCalendar component for {{ site.framework }} provides a styled UI Calendar with the capability of displaying multiple Views at the same time."
 previous_url: /helpers/scheduling/multiviewcalendar/overview
 slug: overview_multiviewcalendar_htmlhelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} MultiViewCalendar Overview
@@ -54,97 +54,20 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 
 ## Functionality and Features
 
-* [Active view]({% slug active_view_multiviewcalendar_htmlhelper_aspnetcore %})
-* [Multiple views]({% slug multiple_views_multiviewcalendar_htmlhelper_aspnetcore %})
-* [Selection]({% slug selection_multiviewcalendar_htmlhelper_aspnetcore %})
-* [Day template]({% slug day_template_multiviewcalendar_htmlhelper_aspnetcore %})
-* [Disable dates]({% slug disabled_dates_multiviewcalendar_htmlhelper_aspnetcore %})
-* [Week column]({% slug week_column_multiviewcalendar_htmlhelper_aspnetcore %})
-* [Keyboard navigation]({% slug keyboard_navigation_multiviewcalendar_htmlhelper_aspnetcore %})
+* [Active view]({% slug active_view_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;You can select one of the predefined Views of the MultiViewCalendar.
+* [Multiple views]({% slug multiple_views_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;The MultiViewCalendar allows you to define the number of views and months that are displayed at a time.
+* [Selection]({% slug selection_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;The component allows you to select multiple dates by using the multiple-view selection mode.
+* [Day template]({% slug day_template_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;The MultiViewCalendar enables you to customize the rendered day for the `month` view.
+* [Disable dates]({% slug disabled_dates_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;The MultiViewCalendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
+* [Week column]({% slug week_column_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;You can choose to render a column which displays the number of the weeks within the current `month` view.
+* [Keyboard navigation]({% slug keyboard_navigation_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;The keyboard navigation of the MultiViewCalendar is always available.
 
-## Events
+## Next Steps
 
-You can subscribe to all MultiViewCalendar events. 
-
-### Handling by Handler Name
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-        @(Html.Kendo().MultiViewCalendar()
-          .Name("MultiViewCalendar")
-          .Events(e => e
-                .Change("calendar_change")
-                .Navigate("calendar_navigate")
-          )
-        )
-        <script>
-        function calendar_navigate() {
-            // Handle the navigate event.
-        }
-
-        function calendar_change() {
-            // Handle the change event.
-        }
-        </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-multiviewcalendar name="multiviewcalendar" 
-                             on-change="calendar_change" 
-                             on-navigate="calendar_navigate">
-    </kendo-multiviewcalendar>
-    <script>
-        function calendar_navigate() {
-            // Handle the navigate event.
-        }
-
-        function calendar_change() {
-            // Handle the change event.
-        }
-    </script>
-```
-{% endif %}
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-  @(Html.Kendo().MultiViewCalendar()
-    .Name("MultiViewCalendar")
-    .Events(e => e
-        .Change(@<text>
-          function() {
-              // Handle the change event inline.
-          }
-        </text>)
-        .Navigate(@<text>
-          function() {
-              // Handle the navigate event inline.
-          }
-          </text>)
-    )
-  )
-```
-{% if site.core %}
-```TagHelper
-  <kendo-multiviewcalendar name="multiViewCalendar"
-                           on-change='function() {
-                                  //Handle the change event inline.
-                           }'
-                           on-navigate='function() {
-                                  //Handle the navigate event inline.
-                           }'>
-  </kendo-multiviewcalendar>
-```
-{% endif %}
+* [Getting Started with the MultiViewCalendar]({% slug aspnetcore_multiviewcalendar_getting_started %})
+* [Basic Usage of the MultiViewCalendar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/index)
 
 ## See Also
 
-* [Basic Usage of the MultiViewCalendar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar)
-{% if site.core %}
-* [Basic Usage of the MultiViewCalendar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar)
-{% endif %}
-* [Using the API of the MultiViewCalendar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/api)
-* [Server-Side API](/api/multiviewcalendar)
+* [Using the API of the MultiViewCalendar (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/api)
+* [Knowledge Base Section](/knowledge-base)
