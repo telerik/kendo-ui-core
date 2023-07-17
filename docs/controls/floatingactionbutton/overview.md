@@ -43,7 +43,7 @@ The following example demonstrates how to initialize the FloatingActionButton.
                     click: function () { console.log("print action"); },
                 }, {
                     label: "Email",
-                    icon: "envelop",
+                    icon: "envelope",
                     click: function () { console.log("email action"); }
                 }]
             });

@@ -54,7 +54,7 @@ The Kendo UI FloatingActionButton for PHP allows you to customize the appearance
             ->click(onItemClick);
 
         $email = new \Kendo\UI\FloatingActionButtonItem();
-        $email->icon("envelop")
+        $email->icon("envelope")
             ->label("Email")
             ->click(onItemClick);
 

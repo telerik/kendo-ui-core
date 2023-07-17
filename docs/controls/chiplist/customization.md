@@ -26,7 +26,7 @@ To define a custom attributes for the Chip inside the ChipList, use the [`items.
             items: [
                 { text: "Home", icon: "home", attributes: { "data-val" : "custom data attribute" } },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>

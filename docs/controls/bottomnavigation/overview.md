@@ -26,7 +26,7 @@ The following example demonstrates how to initialize the BottomNavigation from a
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>

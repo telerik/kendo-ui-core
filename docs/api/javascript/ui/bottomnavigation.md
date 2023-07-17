@@ -25,7 +25,7 @@ Toggles the border of the widget.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -44,7 +44,7 @@ Toggles the shadow of the widget.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -63,7 +63,7 @@ Specifies which fillMode is applied to the BottomNavigation. Valid options are `
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -82,7 +82,7 @@ Sets the position of the text label. Valid options are `vertical` and `horizonta
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -114,7 +114,7 @@ Specifies the theme color of the component. Valid options are:
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -132,7 +132,7 @@ Specifies the items of the BottomNavigation component.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -150,7 +150,7 @@ The URL (href) to which the item will navigate to.
             items: [
                 { text: "Home", icon: "home", url: "http://www.telerik.com" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -168,7 +168,7 @@ Contextual data to be used for events within the component.
             items: [
                 { text: "Home", icon: "home", data: { view: "home" } },
                 { text: "Info", icon: "info-circle", data: { view: "info" } },
-                { text: "Contact", icon: "envelop", data: { view: "info" } }
+                { text: "Contact", icon: "envelope", data: { view: "info" } }
             ],
             select: function (ev) {
                 alert(ev.data.view);
@@ -191,7 +191,7 @@ See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for mor
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -209,7 +209,7 @@ The text of the item. It is optional - if not set, no text will be rendered.
             items: [
                 { icon: "home" },
                 { icon: "info-circle" },
-                { icon: "envelop" }
+                { icon: "envelope" }
             ]
         });
     </script>
@@ -227,7 +227,7 @@ If false, the text will be able to render HTML.
             items: [
                 { text: "<strong>Home</strong>", icon: "home", encoded: false },
                 { text: "<strong>Info</strong>", icon: "info-circle", encoded: true },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -245,7 +245,7 @@ Defines the class name added to the icon element.
             items: [
                 { text: "Home", icon: "home", iconClass: "my-icon-class" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -263,7 +263,7 @@ Defines the class names of the item's element.
             items: [
                 { text: "Home", icon: "home", cssClass: "my-css-class" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -281,7 +281,7 @@ Defines custom attributes of the item's element.
             items: [
                 { text: "Home", icon: "home", attributes: { "data-val" : "custom data attribute" } },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -299,7 +299,7 @@ Toggles the enabled state of the item.
             items: [
                 { text: "Home", icon: "home", enabled: false },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -317,7 +317,7 @@ Toggles the selected state of the item.
             items: [
                 { text: "Home", icon: "home", selected: true },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -335,7 +335,7 @@ Sets a custom template for the item (overrides the `template` option).
             items: [
                 { text: "Home", icon: "home", template: "<span>#:text#</span>" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -353,7 +353,7 @@ Sets a custom template for the items.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ],
             template: "<span>#:text#</span>"
         });
@@ -373,7 +373,7 @@ Specifies CSS position of the BottomNavigation in the document. Valid options ar
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -405,7 +405,7 @@ Add item before an already existing item.
             ]
         }).data("kendoBottomNavigation");
 
-        bottomNav.add({ text: "Contact", icon: "envelop", attributes: { id: "email" } });
+        bottomNav.add({ text: "Contact", icon: "envelope", attributes: { id: "email" } });
         bottomNav.add({ text: "Info", icon: "info-circle" }, $("#email"));
     </script>
 
@@ -433,7 +433,7 @@ Specifies the state of the element.
             items: [
                 { text: "Home", icon: "home", enabled: false, attributes: { id: "home" } },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -464,7 +464,7 @@ The zero-based index of the item.
             items: [
                 { text: "Home", icon: "home", enabled: false },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -495,7 +495,7 @@ The id of the item.
             items: [
                 { text: "Home", icon: "home", enabled: false, attr: { id: "home" } },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -520,7 +520,7 @@ Gets items' elements in a jQuery array.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -546,7 +546,7 @@ The element to be removed.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -581,7 +581,7 @@ Forces the selected state to the specified one.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -608,7 +608,7 @@ A bool value to toggle the visibility state of the text element.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         }).data("kendoBottomNavigation");
 
@@ -652,7 +652,7 @@ If invoked prevents the item selection.
             items: [
                 { text: "Home", icon: "home", url: "http://www.telerik.com", data: { view: "home" } },
                 { text: "Info", icon: "info-circle", data: { view: "info" } },
-                { text: "Contact", icon: "envelop", data: { view: "email" } }
+                { text: "Contact", icon: "envelope", data: { view: "email" } }
             ],
             select: function (ev) {
                 var data = ev.data;
