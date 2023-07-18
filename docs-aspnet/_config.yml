@@ -698,7 +698,7 @@ baseurl: /aspnet-core
 cdnVersion: "2023.2.718"
 
 ## The themes CDN used
-themesCdnVersion: "6.5.1"
+themesCdnVersion: "6.6.0"
 
 ## The MVC Core version used
 mvcCoreVersion: "2023.2.718"
