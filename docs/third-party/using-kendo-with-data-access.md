@@ -141,4 +141,5 @@ The following example demonstrates some sample code you need.
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [Aurelia]({% slug aurelia_integration_kendoui %})
