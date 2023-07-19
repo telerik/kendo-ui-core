@@ -1,7 +1,7 @@
 ---
 title: Aurelia
 page_title: Aurelia - Kendo UI Third-Party Tools
-description: "Create Aurelia applications by using Kendo UI controls through applying the Aurelia-KendoUI Bridge."
+description: "Create Aurelia applications by using Kendo UI controls and applying the Aurelia-KendoUI Bridge."
 slug: aurelia_integration_kendoui
 ---
 
@@ -9,26 +9,26 @@ slug: aurelia_integration_kendoui
 
 [Aurelia](http://aurelia.io/) is an open-source, vanilla-JavaScript client framework for mobile, desktop, and web. It is written in ECMAScript 2016 and helps you create a maintainable, testable, and extensible UI.
 
-## Aurelia-KendoUI Bridge
+## Aurelia-Kendo UI Bridge
 
-The [Aurelia-KendoUI Bridge](http://aurelia-ui-toolkits.github.io/demo-kendo/#/about/about) creates native Aurelia components for the Kendo UI suite, so that developers are able to build Aurelia applications by using the Kendo UI toolkit. This interface is a structured and configurable collection of JavaScript classes. It wraps native Kendo UI controls and presents them as Aurelia components.
+The [Aurelia-Kendo UI Bridge](http://aurelia-ui-toolkits.github.io/demo-kendo/#/about/about) creates native Aurelia components for the Kendo UI suite so that developers can build Aurelia applications by using the Kendo UI toolkit. This interface is a structured and configurable collection of JavaScript classes. It wraps native Kendo UI controls and presents them as Aurelia components.
 
-The skeleton of the Bridge is the standard Aurelia plugin setup and the [KendoUI Components Catalog index](http://aurelia-ui-toolkits.github.io/demo-kendo/#/catalog-index) is the resulting output of its implementation and development.
+The skeleton of the Bridge is the standard Aurelia plugin setup and the [Kendo UI Components Catalog index](http://aurelia-ui-toolkits.github.io/demo-kendo/#/catalog-index) is the resulting output of its implementation and development.
 
-This Catalogue is an Aurelia application that serves two main purposes:
+This Catalog is an Aurelia application that serves two main purposes:
 
 * Allows developers to verify the correct function of the wrapper code, which presents the Kendo UI native control as an Aurelia component.
 * Continuously shares the status of the project by demonstrating different ways of using each component to render Kendo UI controls.
 
-For more information on the Aurelia-KendoUI Bridge functionalities, refer to [this blog post by Aurelia's founder, Rob Eisenberg](http://blog.durandal.io/2016/01/28/aurelia-and-kendo-ui/).
+For more information on the Aurelia-Kendo UI Bridge functionalities, refer to [this blog post by Aurelia's founder, Rob Eisenberg](http://blog.durandal.io/2016/01/28/aurelia-and-kendo-ui/).
 
 ## Prerequisites and Installation
 
-To get your project up and running, refer to the page on [installing the Aurelia-KendoUI Bridge](http://aurelia-ui-toolkits.github.io/demo-kendo/#/installation).
+To get your project up and running, refer to the page on [installing the Aurelia-Kendo UI Bridge](http://aurelia-ui-toolkits.github.io/demo-kendo/#/installation).
 
 ## Basic Usage
 
-The following example demonstrates code snippets for Grid components. For more runnable examples on all Aurelia-KendoUI controls the Bridge supports, refer to the [page of the Aurelia-KendoUI components catalog](http://aurelia-ui-toolkits.github.io/demo-kendo/#/samples/grid/basic-use).
+The following example demonstrates code snippets for Grid components. For more runnable examples of all Aurelia-Kendo UI controls that the Bridge supports, refer to the [Aurelia-Kendo UI components catalog](http://aurelia-ui-toolkits.github.io/demo-kendo/#/samples/grid/basic-use).
 
 ```tab-View
     <template>
@@ -101,3 +101,4 @@ The following example demonstrates code snippets for Grid components. For more r
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})

@@ -69,6 +69,10 @@ As of the 2022.3.1109 version, the `package.json` file comes with three [fields 
 
 To bundle the Kendo UI scripts by using one of the [module systems](#3-choose-a-module-system-to-use), you can use a plugin such as [rollup](https://rollupjs.org/guide/en/).
 
+> Starting from version 2023.3.718, the `kendo` instance is exported as a default export for the CommonJS and ECMAScript modules. This allows you to:
+> * Use the `import kendo from '@progress/kendo-ui'` syntax to import the Kendo UI scripts in your application. 
+> * Use the `kendo` instance to get the jQuery in which the Kendo UI widgets are defined. For example, `const $ = kendo.jQuery; $("#grid").kendoGrid({...});`.
+
 ### ECMAScript
 
 To bundle the ECMAScript files: 
@@ -237,4 +241,5 @@ To bundle the UMD files:
 * [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI for jQuery Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Module Bundlers]({% slug modulke_bundlers_integration_kendoui %})
 * [Using Script License Code]({% slug using-license-code %})
