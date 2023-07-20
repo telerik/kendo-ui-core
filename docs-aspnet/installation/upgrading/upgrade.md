@@ -35,7 +35,8 @@ To upgrade the version with NuGet or Bower:
 1. [Download]({% slug downloadinstall_aspnetcore %}#getting-the-binaries) the desired version from the **Download** section of your account.
 1. Replace all scripts, styles, and images that are related to Telerik UI for ASP.NET Core with the desired version of the framework.
 1. Change the reference to the new `Kendo.MVC` dll. Verify that the dll refers to the correct ASP.NET Core version.
-1. In the application, manually replace any references which point to the old Kendo UI resource files such as [scripts and styles]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
+
+> Both the `NuGet package` and the required [`client-side resources`]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) versions need to be identical.
 
 ## Switching to a Developer License
 
@@ -61,7 +62,8 @@ To upgrade your project with the Upgrade Project Wizard, refer to the following 
 1. Replace all scripts, styles, and images that are related to Telerik UI for ASP.NET MVC with the desired version of the framework.
 1. Download the desired version from the **Download** section of your account.
 1. Load the scripts and styles locally or from the [Kendo UI CDN Services]({% slug cdnservices_core %}).
-1. Change the reference to the new `Kendo.MVC` dll. Verify that the dll refers to the correct ASP.NET MVC version.
+
+> Both the `Kendo.Mvc.dll` and the required [`client-side resources`]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) versions need to be identical.
 
 ## Switching to a Developer License
 
