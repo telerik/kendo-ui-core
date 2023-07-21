@@ -185,54 +185,6 @@ To defer components globally:
         @Html.Kendo().DeferredScripts()
     ```
 
-If a component contains child components, such as editors or components defined inside client templates or partial views, and the global deferring is enabled, add the `AsChildComponent()` option in the helper configuration of each child component.
-
-> If the components are deferred through the global setting, you must add `AsChildComponent()` option to all child components.
-
-The following example demonstrates how to add the `AsChildComponent()` option to a [DateTimePicker]({% slug htmlhelpers_datetimepicker_aspnetcore %}) editor displayed in a globally deferred [Form]({% slug htmlhelpers_form_aspnetcore_overview %}) component.
-
-```HtmlHelper
-    @(Html.Kendo().Form<MyApplication.Models.FormItemsViewModels>()
-        .Name("exampleForm")
-        .HtmlAttributes(new { action = "Items", method = "POST" })
-        .Items(item =>
-        {
-            item.Add()
-            .Field(f => f.StartDate)
-            .Label(l => l.Text("Start date:"))
-            .Editor(e => e.DateTimePicker()
-                .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-                .DateInput()
-                .AsChildComponent()
-            );
-        })
-    )
-
-    @(Html.Kendo().DeferredScriptFile())
-```
-```TagHelper
-    <kendo-form name="exampleForm" form-data="@Model" method="POST" asp-action="Items">
-        <form-items>
-            <form-item field="StartDate" title="datetimepicker" html-attributes='new Dictionary<string, object> { { "style", "width: 100%" } }'>
-                <item-label text="Start date:" />
-                <datetimepicker-editor date-input="true" as-child-component="true"/>
-            </form-item>
-        </form-items>
-    </kendo-form>
-
-    @(Html.Kendo().DeferredScriptFile())
-```
-
-
-Another example of child components is the default [Grid editors]({% slug editortemplates_grid_aspnetcore %}), which are located in the `~/Views/Shared/EditorTemplates` folder. Ensure that each editor template used in the Grid has the `AsChildComponent()` method at the end of its configuration.
-
-```String.cshtml
-    @model object
-
-    @Html.Kendo().TextBoxFor(model => model).AsChildComponent()
-
-```
-
 ## Referencing Client-Side Objects
 
 You can get a reference to the client-side object that is initialized by the helper through the [`data`](http://api.jquery.com/data/) jQuery method. Use the `Name` of the component in an `ID` jQuery selector, and obtain the reference in a `document.ready` handler which is placed or called after the component is declared. This ensures that the component is already initialized and the client-side object exists. After you get the object reference, use the client-side API of the component.

@@ -136,41 +136,6 @@ Any components registered after it will not be included in the script.
         @Html.Kendo().DeferredScripts()
     ```
 
-If a component contains child components, such as editors or components defined inside client templates or partial views, and the global deferring is enabled, add the `AsChildComponent()` option in the helper configuration of each child component.
-
-> If the components are deferred through the global setting, you must add `AsChildComponent()` option to all child components.
-
-The following example demonstrates how to add the `AsChildComponent()` option to a [DateTimePicker]({% slug htmlhelpers_datetimepicker_aspnetcore %}) editor displayed in a globally deferred [Form]({% slug htmlhelpers_form_aspnetcore_overview %}) component.
-
-```HtmlHelper
-    @(Html.Kendo().Form<MyApplication.Models.FormItemsViewModels>()
-        .Name("exampleForm")
-        .HtmlAttributes(new { action = "Items", method = "POST" })
-        .Items(item =>
-        {
-            item.Add()
-            .Field(f => f.StartDate)
-            .Label(l => l.Text("Start date:"))
-            .Editor(e => e.DateTimePicker()
-                .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-                .DateInput()
-                .AsChildComponent()
-            );
-        })
-    )
-
-    @(Html.Kendo().DeferredScriptFile())
-```
-
-Another example of child components is the default [Grid editors]({% slug editortemplates_grid_aspnetcore %}), which are located in the `~/Views/Shared/EditorTemplates` folder. Ensure that each editor template used in the Grid has the `AsChildComponent()` method at the end of its configuration.
-
-```String.cshtml
-    @model object
-
-    @Html.Kendo().TextBoxFor(model => model).AsChildComponent()
-
-```
-
 ## Event Handling
 
 To subscribe to the client-side events that are exposed by a helper, use the `Events` method.

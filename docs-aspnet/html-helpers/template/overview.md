@@ -14,7 +14,7 @@ The Telerik UI Template TagHelper and HtmlHelper for {{ site.framework }} is an 
 The Telerik UI Template HtmlHelper for {{ site.framework }} is an integration component that can be used to customize the default appearance of the other Telerik UI for {{ site.framework }} components.
 {% endif %}
 
-The Template allows you to incorporate multiple helper components into the templating options of components like [Data Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}), [ListView]({% slug htmlhelpers_listview_aspnetcore %}), [TreeList]({% slug htmlhelpers_treelist_aspnetcore %}), and others that often require complex layout templates. The created templates are [CSP-compatible]({% slug troubleshooting_content_security_policy_aspnetmvc %}). Also, each component that is defined within the Template configuration will have the all the functionalities and options available in the stand-alone nested component. 
+The Template allows you to incorporate multiple helper components into the templating options of components like [Data Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}), [ListView]({% slug htmlhelpers_listview_aspnetcore %}), [TreeList]({% slug htmlhelpers_treelist_aspnetcore %}), and others that often require complex layout templates. The created templates are [CSP-compatible]({% slug troubleshooting_content_security_policy_aspnetmvc %}). Also, each component that is defined within the Template configuration will have all the functionalities and options available in the stand-alone nested component. 
 
 * [Demo page for the Template HtmlHelper](https://demos.telerik.com/{{ site.platform }}/template/index)
 {% if site.core %}
