@@ -1,14 +1,14 @@
 ---
-title:  Razor Page
+title:  Razor Pages
 page_title: Configure a DataSource for the DropDownTree for Remote Binding in Razor Page.
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI DropDownTree component for {{ site.framework }} in a Razor Page using CRUD Operations."
 slug: htmlhelpers_dropdowntree_razorpage_aspnetcore
-position: 3
+position: 5
 ---
 
-# DropDownTree Remote Data Binding in Razor Pages
+# DropDownTree in Razor Pages
 
-This article describes how to configure a Remote DataSource of a Telerik DropDownTree in a RazorPage scenario.
+This article describes how to configure a Remote DataSource of a Telerik DropDownTree in Razor Pages scenario.
 
 In order to set up the ComboBox component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`). See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
@@ -82,5 +82,5 @@ In order to set up the ComboBox component bindings, you need to configure the `R
 ## See Also
 
 * [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [DataBinding Overview]({% slug htmlhelpers_combobox_databinding_aspnetcore %})
+* [Data Binding Overview]({% slug htmlhelpers_dropdowntree_databinding_aspnetcore %})
 

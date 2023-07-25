@@ -87,6 +87,8 @@ The following example demonstrates how to define the Grid.
     }
 ```
 
+@[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
+
 ## Basic Configuration
 
 The Grid configuration options are passed as attributes of the helper. The Grid uses the [DataSource component]({% slug htmlhelpers_datasource_aspnetcore %}) to bind its data.

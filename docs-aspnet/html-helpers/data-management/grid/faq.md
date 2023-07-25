@@ -31,12 +31,14 @@ By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entiti
 
 {% if site.mvc %}
 
-* If the Grid is `server-bound`, use the `Template` method.
+* If the Grid is configured for [server binding]({% slug serverbinding_grid_aspnetmvc %}), use the `Template` method to customize the default column template.
 
   > The `Template` method needs a [templated Razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx) when used in Razor views. The bound item is available through the `@item` parameter.
 
     ```HtmlHelper
-          @(Html.Kendo().Grid<Models.Product>(Model)
+        @model IEnumerable<Product>
+
+          @(Html.Kendo().Grid(Model)
               .Name("Grid")
               .Columns(columns =>
               {
@@ -47,9 +49,13 @@ By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entiti
           )
     ```
 
-Here is another sample with DetailTemplates (common setting for the Grid, not specific to given Column):
+Here is another example that shows how to set the server-side detail template of the Grid through the [DetailTemplate()](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder#detailtemplatesystemfunc) option:
 
-    ```HtmlHelper
+```HtmlHelper
+    @model IEnumerable<Product>
+
+    @(Html.Kendo().Grid(Model)
+        .Name("Grid")
         .DetailTemplate(@<text>
             <div>ProductID: @item.ProductID</div>
             <div>ProductName: @item.ProductName</div>
@@ -58,7 +64,9 @@ Here is another sample with DetailTemplates (common setting for the Grid, not sp
             <div>UnitsOnOrder: @item.UnitsOnOrder</div>
             <div>Discontinued: @item.Discontinued</div>
         </text>)
-    ```
+        ...
+    )
+```
 
 It is important to note that you can use only-server templates when the Grid is `server-bound`. They are not available in Ajax or WebService binding mode. For these cases, you will need to use Client Templates.
 
@@ -363,9 +371,15 @@ The following example demonstrates how to add Kendo UI icons to custom command b
         .Name("grid")
         .Columns(columns =>
         {
-            columns.Command(command => { command.Custom("myCommand").Text("My Text").IconClass("k-icon k-i-custom"); });
+            columns.Command(command => { command.Custom("myCommand").Click("myCommandClick").Text("My Text").IconClass("k-icon k-i-custom"); });
         })
     )
+
+    <script>
+        function myCommandClick() {
+            console.log("custom command click event handler");
+        }
+    </script>
 ```
 {% if site.core %}
 ```TagHelper
@@ -373,11 +387,17 @@ The following example demonstrates how to add Kendo UI icons to custom command b
         <columns>
             <column>
                 <commands>
-                    <column-command name="myCommand" text="My Text" icon-class="k-icon k-i-custom" />
+                    <column-command name="myCommand" click="myCommandClick" text="My Text" icon-class="k-icon k-i-custom" />
                 </commands>
             </column>
         </columns>
     </kendo-grid>
+
+    <script>
+        function myCommandClick() {
+            console.log("custom command click event handler");
+        }
+    </script>
 ```
 {% endif %}
 

@@ -60,9 +60,9 @@ columns.Bound(p => p.ProductName).EditorTemplateName("CustomEditorName");
 
 ```
 ```AutoCompleteEditor.cshtml
+@model string
 
-@(Html.Kendo().AutoComplete()
-      .Name("ProductName")
+@(Html.Kendo().AutoCompleteFor(m => m)
       .Placeholder("Select name...")
       .BindTo(new List<string>() {
             "My new name 1",
@@ -72,9 +72,9 @@ columns.Bound(p => p.ProductName).EditorTemplateName("CustomEditorName");
 
 ```
 ```ComboBoxEditor.cshtml
+@model string
 
-@(Html.Kendo().ComboBox()
-      .Name("ProductName")
+@(Html.Kendo().ComboBoxFor(m => m)
       .Placeholder("Select name...")
       .BindTo(new List<string>() {
           "My new name 1",

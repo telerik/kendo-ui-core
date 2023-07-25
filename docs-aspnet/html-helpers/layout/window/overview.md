@@ -68,7 +68,7 @@ The following example demonstrates the basic configuration of the Window.
         .Actions(actions => actions.Refresh().Minimize().Maximize().Close())
         .LoadContentFrom("AjaxContent", "Window")
         .Draggable(false)
-        .Resizable(false)
+        .Resizable(resizable => resizable.Enabled(false))
     )
 
     <script type="text/javascript">

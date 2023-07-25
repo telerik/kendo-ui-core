@@ -157,12 +157,12 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
     public ActionResult Export(EditorExportData data)
     {
         var settings = new EditorDocumentsSettings();
-        settings.HtmlImportSettings.LoadFromUri += HtmlImportSettings_LoadFromUri;
+        settings.HtmlImportSettings.LoadImageFromUri += HtmlImportSettings_LoadImageFromUri;
 
-        return EditorExport.Export(data);
+        return EditorExport.Export(data, settings);
     }
 
-    private void HtmlImportSettings_LoadFromUri(object sender, LoadFromUriEventArgs e)
+    private void HtmlImportSettings_LoadImageFromUri(object sender, LoadImageFromUriEventArgs e)
     {
         var uri = e.Uri;
         var absoluteUrl = uri.StartsWith("http://") || uri.StartsWith("www.");
@@ -174,7 +174,7 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
                 using (var memoryStream = new MemoryStream())
                 {
                     fileStream.CopyTo(memoryStream);
-                    e.SetData(memoryStream.ToArray());
+                    e.SetImageInfo(memoryStream.ToArray(), "png");
                 }
             }
         }

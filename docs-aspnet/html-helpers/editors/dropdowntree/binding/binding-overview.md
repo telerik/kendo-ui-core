@@ -8,70 +8,12 @@ position: 1
 
 # Data Binding
 
-The DropDownTree component provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
+The DropDownTree component provides a set of options for data binding. The supported data-binding approaches are:
 
-## Declaring DropDownTree Items
-
-The DropDownTree allows you to declare all of its items within the helper declaration.
-
-The following example demonstrates how to configure a DropDownTree with three levels of hierarchy.
-
-```HtmlHelper
-    @(Html.Kendo().DropDownTree()
-        .Name("dropdowntree")
-        .Items(dropdowntree =>
-        {
-            dropdowntree.Add().Text("My Documents")
-                .Expanded(true)
-                .Items(root =>
-                {
-                    root.Add().Text("Kendo UI Project")
-                        .Expanded(true)
-                        .Items(project =>
-                        {
-                            project.Add().Text("about.html");
-                            project.Add().Text("index.html");
-                            project.Add().Text("logo.png");
-                        });
-
-                    root.Add().Text("New Web Site");
-                    root.Add().Text("Reports");
-                });
-        })
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-dropdowntree name="dropdowntree">
-        <items>
-            <dropdowntree-item expanded="true" text="My Documents">
-                <items>
-                    <dropdowntree-item expanded="true" text="Kendo UI Project">
-                        <items>
-                            <dropdowntree-item  text="about.html">
-                            </dropdowntree-item>
-                            <dropdowntree-item text="index.html">
-                            </dropdowntree-item>
-                            <dropdowntree-item text="logo.png">
-                            </dropdowntree-item>
-                        </items>
-                    </dropdowntree-item>
-                    <dropdowntree-item text="New Web Site">
-                    </dropdowntree-item>
-                    <dropdowntree-item text="Reports">
-                    </dropdowntree-item>
-                </items>
-            </dropdowntree-item>
-        </items>
-    </kendo-dropdowntree>
-```
-{% endif %}
-## DropDownTree Binding
-
-The DropDownTree supports the following data-binding approaches:
-
-* [Server binding]({% slug htmlhelpers_dropdowntree_serverbinding_aspnetcore %})
+* [Items binding]({% slug itemsbinding_dropdowntree %})
 * [Ajax binding]({% slug htmlhelpers_dropdowntree_ajaxbinding_aspnetcore %})
+* [Server binding]({% slug htmlhelpers_dropdowntree_serverbinding_aspnetcore %})
+{% if site.core %}* [Razor Pages]({% slug htmlhelpers_dropdowntree_razorpage_aspnetcore %}){% endif %}
 
 ## See Also
 

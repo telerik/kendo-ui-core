@@ -87,6 +87,6 @@ You can bind the DropDownTree locally on the server by passing the appropriate c
 
 ## See Also
 
-* [Ajax Data Binding by the DropDownTree HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/remote-data-binding)
+* [Local Data Binding by the DropDownTree for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/local-data-binding)
 * [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
 * [Server-Side API](/api/dropdowntree)

@@ -10,7 +10,7 @@ position: 5
 
 The Telerik UI ComboBox for {{ site.framework }} allows the user to filter the available items by their text so they can find the one they need more quickly.
 
-To enable the filtering, set the [`Filter`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/filtertype) to the desired filter operator.Supported options include `Contains`, `StartsWith` and `EndsWith`. When the filtering is enabled, the user can decide where the actual filtering happens:
+To enable the ComboBox filtering, set the desired filter operator through the [`Filter()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/comboboxbuilder#filtersystemstring) method. The supported options are `contains`, `startswith` and `endswith`. When the filtering is enabled, the user can decide where the actual filtering happens:
 
 * [Client Filtering](#client-filtering)
 * [Server Filtering](#server-filtering)
