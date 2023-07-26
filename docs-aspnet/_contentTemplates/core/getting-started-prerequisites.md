@@ -6,7 +6,7 @@ To successfully complete the tutorial, you need a project that is already config
 {% if site.core %}
 * You can use the [Telerik REPL](https://netcorerepl.telerik.com/) playground and skip installing the components on your system and configuring a project.  
 
-* You can prepare a Visual Studio project by following ether of these guides:
+* You can prepare a Visual Studio project by following either of these guides:
 
    * Creating a new pre-configured project for the Telerik UI for {{ site.framework }} components from [a project template]({% slug gettingstarted_project_template %}).
 

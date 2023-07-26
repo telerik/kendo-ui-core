@@ -79,6 +79,21 @@
             assert.isOk(selectee.hasClass(SELECTED));
         });
 
+        it("clicking on button svg does not select item", function() {
+            var selectable,
+                selectee,
+                path;
+
+            ul.find(">li:first").append(kendo.html.renderButton("<button></button>", { icon: "plus" }));
+            selectable = new Selectable(ul);
+            selectee = $(ul.find(">li")[0]);
+            path = $(selectee.find("path")[0]);
+
+            path.tap();
+
+            assert.isOk(!selectee.hasClass(SELECTED));
+        });
+
         it("unselect all previosly selected when select new element", function() {
             var selectable = new Selectable(ul);
             var selectees = ul.find(">li");

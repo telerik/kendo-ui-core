@@ -4251,6 +4251,7 @@ declare namespace kendo.ui {
         sender: Drawer;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+        item?: JQuery | undefined;
     }
 
     interface DrawerHideEvent extends DrawerEvent {
@@ -8029,7 +8030,7 @@ declare namespace kendo.ui {
 
     interface NotificationTemplate {
         type?: string | undefined;
-        template?: string | undefined;
+        template?: string | Function | undefined;
     }
 
     interface NotificationOptions {
