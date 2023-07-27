@@ -8,13 +8,53 @@ position: 2
 
 # TileLayout Reordering
 
-The Kendo UI TileLayout widget allows you rearrange the position of the tile containers with drag and drop. 
+The Kendo UI TileLayout widget allows you to rearrange the position of the tile containers with drag and drop and click-move-click. 
 
 The reordering takes advantage of the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) mechanism and changes the [css order](https://www.w3schools.com/cssref/css3_pr_order.asp) of the item and lets the browser handle the rest.
 
-## Enabling the reorderable functionality of the TileLayout
+## Enabling Click-Move-Click
 
-To enable the reorderable feature of the TileLayout, set the [`reorderable`](/api/javascript/ui/tilelayout/configuration/reorderable) property to `true`.
+As of Kendo UI R2 SP1 2023, users can reorder the TileLayout's containers by using the click-move-click functionality provided by the [`reorderable.clickMoveClick``](/api/javascript/ui/tilelayout/configuration/reorderable.clickmoveclick) option. Users can click a container to start moving it, and then click again to place it in its new position.
+
+```dojo
+    <script id="first" type="text/x-kendo-template">
+        <h3>A</h3>
+    </script>
+    <script id="second" type="text/x-kendo-template">
+        <h3>B</h3>
+    </script>
+    <div id="tilelayout"></div>
+    <script>
+        $("#tilelayout").kendoTileLayout({
+            containers: [
+                {
+                    colSpan: 1,
+                    rowSpan: 1,
+                    header: {
+                        text: "Item one"
+                    },
+                    bodyTemplate: kendo.template($("#first").html())
+                },
+                {
+                    colSpan: 1,
+                    rowSpan: 1,
+                    header: {
+                        text: "Item two"
+                    },
+                    bodyTemplate: kendo.template($("#second").html())
+                }
+            ],
+            columns: 4,
+            reorderable: {
+                clickMoveClick: true
+            }
+        });
+    </script>
+```
+
+## Enabling Drag and Drop
+
+To allow users to reorder tyles by dragging and dropping them, set the [`reorderable`](/api/javascript/ui/tilelayout/configuration/reorderable) property to `true`.
 
 > To use the `reorderable` functionality, define headers.
 

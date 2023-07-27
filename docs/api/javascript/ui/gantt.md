@@ -1850,7 +1850,7 @@ If set to `true` (default), when there is a drag column for the items in the Tre
         "title",
         "start",
         "end"
-      ]
+      ],
       dataSource: [
         {
           id: 1,

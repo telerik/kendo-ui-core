@@ -16,6 +16,40 @@ To enable the column menu implementation, set [`columnMenu:true`](/api/javascrip
 
 Further information about the available columnMenu configuration properties can be obtained from this [`API article`](/api/javascript/ui/grid/configuration/columnmenu).
 
+## Column Reordering
+
+As of Kendo UI R2 SP1 2023, the Grid's Column Menu provides an option to change the position of the target column by using **Move next** and **Move previous** buttons. To see this functionality in action, check the [Grid Column Menu demo](https://demos.telerik.com/kendo-ui/grid/column-menu).
+
+## Column Grouping
+
+As of Kendo UI R2 SP1 2023, the Grid's Column Menu provides an option that allows users to select the target column for grouping or ungrouping the Grid. To display the option item in the Column Menu, set the [`groupable`](/api/javascript/ui/grid/configuration/groupable) configuration to `true`.
+
+```dojo
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        columnMenu:true,
+        groupable:true,
+        pageable: true,
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+            { name: "Mike Doe", age: 31 },
+            { name: "Tom Doe", age: 35 },
+            { name: "Danny Doe", age: 37 }
+          ],
+          pageSize: 2, // The number of items displayed per page
+          page: 2 // Page 2 will be opened by default when the Grid loads.
+        }
+      });
+    </script>
+```
+
 ## Sort
 
 By default, the Grid column titles in the child column menu are not sorted. They have the same order as the columns in the Grid. To sort the column titles in the child menu, use the `columns.sort` configuration with `asc` or `desc` as the value..

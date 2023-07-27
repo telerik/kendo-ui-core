@@ -368,7 +368,7 @@ Defines the name of the button.
 
 ### toolbar.buttons.text `String`
 
-Defines the text that will be rendered in the button.
+Defines the text that will be used for the title of the icon button.
 
 #### Example
 
@@ -377,8 +377,8 @@ Defines the text that will be rendered in the button.
     $("#chat").kendoChat({
         toolbar: {
             buttons: [
-                { name: "ButtonA", text: "ButtonA" },
-                { name: "ButtonB", text: "ButtonB" }
+                { name: "ButtonA", text: "ButtonA", icon: "plus" },
+                { name: "ButtonB", text: "ButtonB", icon: "heart" }
             ]
         }
     });

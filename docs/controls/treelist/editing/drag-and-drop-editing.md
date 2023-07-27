@@ -6,6 +6,36 @@ slug: dragdropeditmode_kendoui_treelist
 position: 4
 ---
 
+# Row Click-Move-Click
+
+As of Kendo UI R2 SP1 2023, users can reorder the TreeList's rows can be by using the click-move-click functionality provided by the [`clickMoveClick`](/api/javascript/ui/treelist/configuration/editable.move.clickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
+
+```dojo
+    <div id="treeList"></div>
+    <script>
+    $("#treeList").kendoTreeList({
+        columns: [
+            {draggable:true },
+            { field: "name" },
+            { field: "age" }
+        ],
+        editable: {
+            move: {
+              reorderable: true,
+              clickMoveClick: true
+            }
+        },
+        dataSource: {
+        data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: null, name: "Jenny Doe", age: 14 }
+        ]
+        }
+    });
+    </script>
+```
+
 # Editing by Dragging and Dropping
 
 > Currently, the dragging and dropping of items (`editable.move = true` and `editable.move.reorderable`) is not supported with the incell edit mode of the TreeList because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. To work around this problem, refer to [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).

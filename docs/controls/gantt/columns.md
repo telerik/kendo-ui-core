@@ -14,6 +14,7 @@ The Gantt supports the following configuration options:
 
 - `attributes`&mdash;The HTML attributes of the table cell (`td`) that is rendered for the column.
 - `columns`&mdash;The columns which will be rendered as child columns under this group column header.
+- `draggable`&mdash;Renders a draggable icon to reorder the rows.
 - `editor`&mdash;Provides a way to specify a custom editing UI for the column.
 - `editable`&mdash;Indicates if the column can be edited.
 - `expandable`&mdash;If set to `true`, the column will show the icons that are used for expanding and collapsing child rows. By default, the first column of the TreeList is expandable.

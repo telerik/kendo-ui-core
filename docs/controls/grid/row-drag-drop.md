@@ -6,6 +6,32 @@ slug: draganddrop_kendoui_grid_widget
 position: 13
 ---
 
+# Row Click-Move-Click
+
+As of Kendo UI R2 SP1 2023, users can reorder the Grid's rows by using the click-move-click functionality provided by the [clickMoveClick](/api/javascript/ui/grid/configuration/reorderable.rows.clickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
+
+```dojo
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            columns: [
+                { draggable: true, width: "40px" },
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: [
+                { id:1, name: "Jane Doe", age: 30 },
+                { id:2, name: "John Doe", age: 33 }
+            ],
+            reorderable: {
+                rows: {
+                    clickMoveClick: true
+                }
+            }
+        });
+    </script>
+```
+
 # Row Drag and Drop
 
 The Drag and Drop functionality for the Grid rows allows you to move a single row or multitude rows between different parents in the same Grid or between different Kendo UI Grid instances.

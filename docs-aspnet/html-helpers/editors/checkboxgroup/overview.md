@@ -3,7 +3,7 @@ title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI CheckBoxGroup component for {{ site.framework }}."
 slug: htmlhelpers_checkboxgroup_aspnetcore_overview
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} CheckBoxGroup Overview
@@ -75,15 +75,18 @@ The following example demonstrates the basic configuration for the CheckBoxGroup
 
 ## Functionality and Features
 
-* [Binding]({% slug htmlhelpers_checkboxgroup_binding_aspnetcore %})
-* [Label]({% slug htmlhelpers_checkboxgroup_aspnetcore_label %})
-* [Layout]({% slug htmlhelpers_checkboxgroup_aspnetcore_layout %})
+* [Binding]({% slug htmlhelpers_checkboxgroup_binding_aspnetcore %})—You can bind the CheckBoxGroup's items by using its `Items` configuration method or the `BindTo` method to bind to a view model.
+* [Label]({% slug htmlhelpers_checkboxgroup_aspnetcore_label %})—The CheckBoxGroup allows you to customize the text and appearance of its labels.
+* [Layout]({% slug htmlhelpers_checkboxgroup_aspnetcore_layout %})—The CheckBoxGroup supports two types of layout - `horizontal` and `vertical`.
+
+## Next Steps
+
+* [Getting Started with the CheckBoxGroup]({% slug checkboxgroup_getting_started %})
+* [Basic Usage of the CheckBoxGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup)
 
 ## See Also
 
-* [Basic Usage of the CheckBoxGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/index)
-{% if site.core %}
-* [Basic Usage of the CheckBoxGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/index)
-{% endif %}
 * [Using the API of the CheckBoxGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/api)
+* [Client-Side API of the CheckBoxGroup](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkboxgroup)
 * [Server-Side API](/api/checkboxgroup)
+* [Knowledge Base Section](/knowledge-base)
