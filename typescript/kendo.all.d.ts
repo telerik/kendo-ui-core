@@ -3864,9 +3864,9 @@ declare namespace kendo.ui {
     }
 
     interface DatePickerMonth {
-        content?: string | undefined;
-        weekNumber?: string | undefined;
-        empty?: string | undefined;
+        content?: string | Function | undefined;
+        weekNumber?: string | Function | undefined;
+        empty?: string | Function | undefined;
     }
 
     interface DatePickerMessages {

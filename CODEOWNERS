@@ -3,12 +3,12 @@
 # MVC/Core Docs owners
 /docs-aspnet/ @eyupyusein @alestoya @yanisslav @aleksandarevangelatov @StoyanGoranov @mihaela-lukanova @antonmironovv @VicTachev @IvanDanchev
 # Source owners
-/src/ @Iankodj @ag-petrov @veselints
-/tests/ @Iankodj @ag-petrov @veselints
-/typescript/ @Iankodj @ag-petrov @veselints
+/src/ @Iankodj @ag-petrov @pepinho24
+/tests/ @Iankodj @ag-petrov @pepinho24
+/typescript/ @Iankodj @ag-petrov @pepinho24
 # Infrastructure owners
 /build/ @Iankodj @ag-petrov
-gulpfile.js @Iankodj @ag-petrov @veselints
+gulpfile.js @Iankodj @ag-petrov @pepinho24
 package.json @Iankodj @ag-petrov @MilenaCh @Dimitar-Goshev
 package-lock.json @Iankodj @ag-petrov @MilenaCh @Dimitar-Goshev
 # Workflow owners
