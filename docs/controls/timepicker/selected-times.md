@@ -24,6 +24,6 @@ The TimePicker sets the value only if the entered time is valid and within the d
 
 ## See Also
 
-* [Basic Usage of the TimePicker (Demo)](https://demos.telerik.com/kendo-ui/timepicker/index)
+* [Overview of the TimePicker (Demo)](https://demos.telerik.com/kendo-ui/timepicker/index)
 * [Using the API of the TimePicker (Demo)](https://demos.telerik.com/kendo-ui/timepicker/api)
 * [JavaScript API Reference of the TimePicker](/api/javascript/ui/timepicker)

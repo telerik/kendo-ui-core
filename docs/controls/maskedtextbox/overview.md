@@ -3,7 +3,7 @@ title: Overview
 page_title: jQuery MaskedTextBox Documentation - MaskedTextBox Overview
 description: "Get started with the jQuery MaskedTextBox by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_maskedtextbox_widget
-position: 1
+position: 0
 ---
 
 # {{ site.product }} MaskedTextBox Overview
@@ -12,33 +12,13 @@ The MaskedTextBox enables a controlled text input that is based on a specific fo
 
 The widget enables you to define its value and mask value, and set custom mask rules, prompt characters, and culture names. Each mask can contain mask rules and mask literals. The mask literals are automatically entered for the user and cannot be removed. You can also use the MaskedTextBox predefined rules which specify the required or optional digit, letter, or character input.
 
-* [Demo page for the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
-
-## Initializing the MaskedTextBox
-
-The following example demonstrates how to initialize the MaskedTextBox. When initialized, the MaskedTextBox decorates the `<input>` element with a `k-textbox` CSS class.
-
-    <input id="maskedtextbox" />
-    <script>
-        $(document).ready(function(){
-            $("#maskedtextbox").kendoMaskedTextBox({
-                mask: "000000"
-            });
-        });
-    </script>
-
-## Referencing Existing Instances
-
-To get a reference to an existing MaskedTextBox instance:
-
-1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
-1. Once a reference is established, use the [MaskedTextBox API](/api/javascript/ui/maskedtextbox) to control its behavior:
-
-    var maskedtextbox = $("#textbox").data("kendoMaskedTextBox");
+![Kendo UI for jQuery MaskedTextBox Overview](maskedtextbox-overview.png)
 
 ## Functionality and Features
 
-The MaskedTextBox supports the implementation of [mask rules]({% slug masks_kendoui_maskedtextbox_widget %}) to validate its input value.
+* [Validation]({% slug masks_kendoui_maskedtextbox_widget %})&mdash;Check how to use the pre-defined rules and how to customize them.
+* [Appearance]({% slug maskedtextbox_appearance %})&mdash;Explore the styling options of the MaskedTextBox component.
+* [Labels]({% slug labels_maskedtextbox %})&mdash;Check how you can use the label feature of the component.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the MaskedTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/maskedtextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
@@ -51,8 +31,14 @@ To restrict the typed value, the MaskedTextBox "listens" to input events such as
 
 You cannot work around these issues, because no other reliable way to detect typing in mobile browsers exist&mdash;virtual keyboard does not raise any other specific events.
 
+## Next Steps 
+
+* [Getting Started with the Kendo UI MaskedTextBox for jQuery]({% slug getting_started_kendoui_maskedtextbox %})
+* [Overview of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
+* [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)
+
 ## See Also
 
-* [Basic Usage of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
+* [Overview of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
 * [Using the API of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/api)
 * [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)

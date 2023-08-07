@@ -36,11 +36,11 @@ All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)
 
 * [Getting Started with the Kendo UI Chart for jQuery]({% slug getting_started_kendoui_chart_widget %})
 * [Basic Usage of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart/index)
-* [JavaScript API Reference of the Chart](/api/javascript/ui/chart)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
 
 ## See Also
 
 * [Basic Usage of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart/index)
 * [Using the Basic Events of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/events)
 * [Applying the Chart API (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/ui/chart)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
