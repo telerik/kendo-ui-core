@@ -25,10 +25,10 @@ The following example demonstrates how to initialize the OrgChart from an existi
         var data = [
             { id: 1, name: "Gevin Bell", title: "CEO"},
             { id: 2, name: "Clevey Thrustfield", title: "COO", parentId: 1},
-            { id: 3, name: "Carol Baker", title: "CFO", , parentId: 1 },
-            { id: 4, name: "Kendra Howell", title: "CMO", , parentId: 1},
+            { id: 3, name: "Carol Baker", title: "CFO", parentId: 1 },
+            { id: 4, name: "Kendra Howell", title: "CMO", parentId: 1},
             { id: 5, name: "Sean Rusell", title: "Financial Manager", parentId: 3},
-            { id: 6, name: "Steven North", title: "Senior Manager", , parentId: 3 },
+            { id: 6, name: "Steven North", title: "Senior Manager", parentId: 3 },
             { id: 7, name: "Michelle Hudson", title: "Operations Manager", parentId: 2},
             { id: 8, name: "Andrew Berry", title: "Accountant", parentId: 5 }            
         ];

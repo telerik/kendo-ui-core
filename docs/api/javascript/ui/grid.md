@@ -10865,7 +10865,7 @@ Renders all table rows using the current data items.
 
 Removes the specified table row from the grid. Also removes the corresponding data item from the data source.
 
-Executing of `removeRow` triggers the default execution of the Grid delete mechanism. If the Grid data source is configured with destroy remote data operation a delete request will be performed.
+Executing of `removeRow` triggers the default execution of the Grid delete mechanism. If the Grid data source is configured with destroy remote data operation a delete request will be performed. If the `editable` configuration is set to `true`, a confirmation dialog will appear before removing the row. You can disable it from the [`editable.confirmation`](/api/javascript/ui/grid/configuration/editable.confirmation) setting.
 
 Fires the [remove](/api/javascript/ui/grid/events/remove) event.
 

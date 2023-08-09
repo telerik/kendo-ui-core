@@ -4652,11 +4652,14 @@ The toolbar instance of the Kendo Editor.
 
 #### Example
 
+    <button  id="open">Open</button>
     <div id="editor"></div>
     <script>
-      $("#editor").kendoEditor();
-      var editor = $("#editor").data("kendoEditor");
-      editor.toolbar.window.open();
+      $("#open").kendoButton();
+      var editor = $("#editor").kendoEditor().data("kendoEditor");
+      $("#open").click(function(){
+        editor.windowInstance.open();
+      })
     </script>
 
 ## Methods

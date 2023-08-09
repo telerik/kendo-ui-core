@@ -29,20 +29,20 @@ How can I position a DropDownList popup in the content of the PanelBar?
 
 ## Solution
 
-1. Wrap the element, from which the DropDownList is initialized, in a container.
+- Wrap the element, from which the DropDownList is initialized, in a container.
 
 ```html
 <li><span id="ddl-container"><input type="text" id="ddl"/></span></li>
 ```
 
-2. Use the [`popup.appendTo`](/api/javascript/ui/dropdownlist/configuration/popup#popupappendto) option of the component, in order to configure the position of the popup to the container.
+- Use the [`popup.appendTo`](/api/javascript/ui/dropdownlist/configuration/popup#popupappendto) option of the component, in order to configure the position of the popup to the container.
 
 ```js
 popup: {
   appendTo: $('#ddl-container')
 }
 ```
-3. You may also need to configure the style of the `animation container` by setting its `top` and `left` position.
+- You may also need to configure the style of the `animation container` by setting its `top` and `left` position.
 
 ```css
 .k-animation-container{

@@ -59,7 +59,7 @@ A few requirements need to be met when the `rowTemplate` is used alongside a `de
     <script id="template" type="text/x-kendo-template">
         <tr class="k-master-row" data-uid="#= uid #">
         		<td class="k-hierarchy-cell">
-            	<a class="k-icon k-i-expand" href="\#" aria-label="Expand"></a>
+            	#=kendo.ui.icon($('<a href="\#" aria-label="Expand"></a>'), { icon: "caret-alt-right" })#
       			</td>
             <td>
                 <strong>#: name #</strong>
@@ -122,7 +122,7 @@ A few requirements need to be met when the `rowTemplate` is used alongside a `de
       });
       
       function rowTemplate(data) {
-        return '<tr class="k-master-row" data-uid="' + data.uid + '"><td class="k-hierarchy-cell"><a class="k-icon k-i-expand" href="\#" aria-label="Expand"></a></td><td><strong>' + data.name + '</strong></td><td><strong>' + data.age + '</strong></td></tr>';
+        return '<tr class="k-master-row" data-uid="' + data.uid + '"><td class="k-hierarchy-cell">'+kendo.ui.icon($('<a href="#" aria-label="Expand"></a>'), { icon: "caret-alt-right" })+'</td><td><strong>' + data.name + '</strong></td><td><strong>' + data.age + '</strong></td></tr>';
       }
     </script>
 ```
