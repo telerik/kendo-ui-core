@@ -88,12 +88,12 @@ The Charts come with [a set of predefined themes](https://docs.telerik.com/kendo
 
 ## Sass Themes
 
-As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes). When the theme is set to `inherit`, the Chart reads colors and fonts from the theme variables.
+As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes). When the theme is set to `sass`, the Chart reads colors and fonts from the theme variables.
 
 ```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
-        .Theme("inherit")
+        .Theme("sass")
         .Title("Site Visitors Stats /thousands/")
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
@@ -131,7 +131,7 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
         var categories = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" };
     }
 
-    <kendo-chart name="chart" theme="inherit">
+    <kendo-chart name="chart" theme="sass">
         <chart-title text="Site Visitors Stats /thousands/"></chart-title>
         <chart-legend position="ChartLegendPosition.Bottom"></chart-legend>
         <series-defaults type="ChartSeriesType.Column">
