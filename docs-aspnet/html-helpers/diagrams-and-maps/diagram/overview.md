@@ -4,7 +4,7 @@ page_title: Overview
 description: "Get started with the server-side wrapper for the Telerik UI Diagram component for {{ site.framework }}."
 previous_url: /helpers/diagrams-and-maps/diagram/overview
 slug: htmlhelpers_diagram_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Diagram Overview
@@ -60,30 +60,19 @@ The Diagram represents information in a schematic way and according to particula
     {% endif %}
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_diagram_aspnetcore_binding %})
-* [Editing]({% slug htmlhelpers_diagram_aspnetcore_editing %})
-* [Layout]({% slug htmlhelpers_diagram_aspnetcore_layout %})
-* [Shapes]({% slug htmlhelpers_diagram_aspnetcore_shapes_connections %})
-* [PDF export]({% slug htmlhelpers_diagram_aspnetcore_pdf_export %})
-* [Advanced export]({% slug htmlhelpers_diagram_aspnetcore_export %})
+* [Data binding]({% slug htmlhelpers_diagram_aspnetcore_binding %})&mdash;Configure the way of binding for the Diagram.
+* [Editing]({% slug htmlhelpers_diagram_aspnetcore_editing %})&mdash;You can enable editing operations for both the existing shapes and connections between them.
+* [Layout]({% slug htmlhelpers_diagram_aspnetcore_layout %})&mdash;The Diagram comes with built-in layout options that enable you to further alter its appearance.
+* [Shapes]({% slug htmlhelpers_diagram_aspnetcore_shapes_connections %})&mdash;The Diagram enables you to add various shapes.
+* [PDF export]({% slug htmlhelpers_diagram_aspnetcore_pdf_export %})&mdash;You have the ability to export the existing Diagram to a PDF document.
+* [Advanced export]({% slug htmlhelpers_diagram_aspnetcore_export %})&mdash;The Diagram enables you to further customize the exporting mechanism.
 
-## Events
+## Next Steps
 
-You can subscribe to all Diagram [events](/api/diagram). For a complete example on basic Diagram events, refer to the [demo on using the events of the Diagram](https://demos.telerik.com/{{ site.platform }}/diagram/events).
-
-## Referencing Existing Instances
-
-To reference an existing Kendo UI Diagram instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Diagram client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
-
-        // Place the following after the Diagram for {{ site.framework }} declaration.
-        <script>
-            $(function() {
-                // The Name() of the Diagram is used to get its client-side instance.
-                var diagram = $("#diagram").data("kendoDiagram");
-            });
-        </script>
+* [Getting Started with the Diagram]({% slug diagram_getting_started %})
+* [Basic Usage of the Diagram HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram/index)
 
 ## See Also
 
-* [Basic Usage of the Diagram HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram)
-* [Server-Side API](/api/diagram)
+* [Using the API of the Diagram for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram/api)
+* [Knowledge Base Section](/knowledge-base)

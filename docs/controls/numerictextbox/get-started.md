@@ -63,17 +63,6 @@ To apply a format to the rendered value, use the [`format`](/api/javascript/ui/n
 </script>
 ```
 
-## 4. Reference Existing NumericTextBox Instances
-
-You can now refer to the NumericTextBox instance and build on top of its existing configurations in the following way:
-
-1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
-1. Once a reference is established, use the [NumericTextBox API](/api/javascript/ui/numerictextbox) to control its behavior.
-
-        var numerictextbox = $("#numeric-textbox").data("kendoNumericTextBox");
-
-> To get a reference to the NumericTextBox, always use `id` instead of a class selector. Behind the scenes, the NumericTextBox creates a secondary element that represents the visual look of the widget and copies all non-`id` attributes including the class. When you use the class for referencing the widget, this behavior causes unexpected results.
-
 ## Next Steps 
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
@@ -81,7 +70,7 @@ You can now refer to the NumericTextBox instance and build on top of its existin
 
 ## See Also 
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
 * [Knowledge Base Section](/knowledge-base)
 
 <script>

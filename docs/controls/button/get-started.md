@@ -27,7 +27,7 @@ After the completion of this guide, you will be able to achieve the following en
 	</script>
 ```
 
-## 1. Create a select Element
+## 1. Create a Button Element
 
 First, create a `<button>` element on the page from which the Button component will be initialized.
 

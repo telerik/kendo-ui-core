@@ -39,7 +39,7 @@ It provides options for executing data operations, such as paging, sorting, filt
 ## Next Steps 
 
 * [Getting Started with the Kendo UI Grid for jQuery]({% slug getting_started_kendoui_grid_widget %})
-* [Basic Usage of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Demo Page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 
 ## See Also
