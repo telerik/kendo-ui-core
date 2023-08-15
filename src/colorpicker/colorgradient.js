@@ -584,6 +584,7 @@ import "../kendo.icons.js";
             }
 
             newSvg = $(contrastToolUtils.renderSvgCurveLine(metrics, that._getHSV(), backgroundColor)).addClass(svgClassName);
+            kendo.applyStylesFromKendoAttributes(newSvg, ["position", "overflow", "pointer-events", "left", "top", "z-index"]);
 
             hsvRect.find("." + svgClassName).remove();
             hsvRect.append(newSvg);

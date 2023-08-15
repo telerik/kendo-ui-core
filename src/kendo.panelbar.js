@@ -144,7 +144,7 @@ var __meta__ = {
          return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
     },
     groupAttributes: function(group) {
-        return group.expanded !== true ? " style='display:none'" : "";
+        return group.expanded !== true ? ` ${kendo.attr("style-display")}="none"` : "";
     },
     ariaHidden: function(group) {
         return group.expanded !== true;
@@ -153,7 +153,7 @@ var __meta__ = {
         return "k-panelbar-group k-group k-panel";
     },
     contentAttributes: function(content) {
-        return content.item.expanded !== true ? " style='display:none'" : "";
+        return content.item.expanded !== true ? ` ${kendo.attr("style-display")}="none"` : "";
     },
     content: function(item) {
         return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
@@ -611,10 +611,13 @@ var __meta__ = {
                         return $(value);
                     } else {
                         value.items = [];
-                        return $(that.renderItem({
+                        let itemElement = $(that.renderItem({
                             group: groupData,
                             item: extend(value, { index: idx })
                         }));
+
+                        kendo.applyStylesFromKendoAttributes(itemElement, ["display"]);
+                        return itemElement;
                     }
             });
 
@@ -846,10 +849,13 @@ var __meta__ = {
                     if (typeof value === "string") {
                         return $(value);
                     } else {
-                        return $(that.renderItem({
+                        let itemElement = $(that.renderItem({
                             group: groupData,
                             item: extend(value, { index: idx })
                         }));
+
+                        kendo.applyStylesFromKendoAttributes(itemElement, ["display"]);
+                        return itemElement;
                     }
             });
 
@@ -1232,7 +1238,9 @@ var __meta__ = {
             };
 
             if (isReferenceItem && !parent.length) {
-                parent = $(that.renderGroup({ group: groupData, options: that.options })).appendTo(referenceItem);
+                parent = $(that.renderGroup({ group: groupData, options: that.options }));
+                kendo.applyStylesFromKendoAttributes(parent, ["display"]);
+                parent.appendTo(referenceItem);
             }
 
             if (plain || Array.isArray(item) || item instanceof HierarchicalDataSource) { // is JSON or HierarchicalDataSource
@@ -1244,10 +1252,13 @@ var __meta__ = {
                     if (typeof value === "string") {
                         return $(value);
                     } else {
-                        return $(that.renderItem({
+                        let itemElement = $(that.renderItem({
                             group: groupData,
                             item: extend(value, { index: idx })
                         }));
+
+                        kendo.applyStylesFromKendoAttributes(itemElement, ["display"]);
+                        return itemElement;
                     }
                 });
                 if (isReferenceItem) {
@@ -1588,7 +1599,7 @@ var __meta__ = {
         },
 
         _addGroupElement: function(element) {
-            var group = $('<ul role="group" aria-hidden="true" class="k-panelbar-group k-group k-panel" style="display:none"></ul>');
+            var group = $('<ul role="group" aria-hidden="true" class="k-panelbar-group k-group k-panel"></ul>').hide();
 
             element.append(group);
             return group;

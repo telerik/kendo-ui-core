@@ -5248,6 +5248,20 @@ function pad(number, digits, end) {
     //kendo.registerCssClasses("align", alignValues);
     kendo.registerCssClasses("positionMode", positionModeValues);
 
+    kendo.applyStylesFromKendoAttributes = function(element, styleProps) {
+        let selector = styleProps.map(styleProp=> `[${kendo.attr(`style-${styleProp}`)}]`).join(',');
+        element.find(selector).addBack(selector).each((_, currentElement) => {
+            let $currentElement = $(currentElement);
+            styleProps.forEach(function(styleProp) {
+                let kendoAttr = kendo.attr(`style-${styleProp}`);
+                if ($currentElement.attr(kendoAttr)) {
+                    $currentElement.css(styleProp, $currentElement.attr(kendoAttr));
+                    $currentElement.removeAttr(kendoAttr);
+                }
+            });
+        });
+    };
+
     // jQuery deferred helpers
 
     // influenced from: https://gist.github.com/fearphage/4341799

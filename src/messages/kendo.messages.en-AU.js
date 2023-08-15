@@ -244,21 +244,21 @@ if (kendo.ui.FileManager) {
             },
             moveConfirm: {
                 title: "Confirm",
-                content: "<p style='text-align: center;'>Do you want to move or copy?</p>",
+                content: "<p class='k-text-center'>Do you want to move or copy?</p>",
                 okText: "Copy",
                 cancel: "Move",
                 close: "close"
             },
             deleteConfirm: {
                 title: "Confirm",
-                content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?<br/>You cannot undo this action.</p>",
+                content: "<p class='k-text-center'>Are you sure you want to delete the selected file(s)?<br/>You cannot undo this action.</p>",
                 okText: "Delete",
                 cancel: "Cancel",
                 close: "close"
             },
             renamePrompt: {
                 title: "Prompt",
-                content: "<p style='text-align: center;'>Enter new name for the file.</p>",
+                content: "<p class='k-text-center'>Enter new name for the file.</p>",
                 okText: "Rename",
                 cancel: "Cancel",
                 close: "close"

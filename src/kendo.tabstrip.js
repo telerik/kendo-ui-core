@@ -110,7 +110,7 @@ var __meta__ = {
                 return item.url ? "a" : "span";
             },
             contentAttributes: function(content) {
-                return content.active !== true ? " style='display:none' aria-hidden='true'" : "";
+                return content.active !== true ? ` ${kendo.attr("style-display")}="none" aria-hidden='true'` : "";
             },
             content: function(item) {
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
@@ -1031,9 +1031,12 @@ var __meta__ = {
 
                 contents = map( tab, function(value, idx) {
                             if (typeof value.content == "string" || value.contentUrl) {
-                                return $(TabStrip.renderContent({
+                                let tabstripContent = $(TabStrip.renderContent({
                                     item: extend(value, { index: idx })
                                 }));
+
+                                kendo.applyStylesFromKendoAttributes(tabstripContent, ["display"]);
+                                return tabstripContent;
                             }
                         });
             } else {

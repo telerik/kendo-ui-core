@@ -182,7 +182,10 @@ var __meta__ = {
             } else {
                 element.removeClass("k-table-alt-row");
             }
-            element.html(renderColumns(this.options, data.item, templates));
+
+            let renderedColumns = $(renderColumns(this.options, data.item, templates));
+            kendo.applyStylesFromKendoAttributes(renderedColumns, ["width", "max-width"]);
+            element.empty().append(renderedColumns);
         } else {
             element.find("." + GROUPITEM).remove();
             element.find(".k-list-item-text").html(itemTemplate(data.item || {}));
@@ -226,7 +229,7 @@ var __meta__ = {
 
             if (currentWidth) {
                 let widthValue = `${currentWidthInt}${percentageUnitsRegex.test(currentWidth) ? "%" : "px"}`;
-                widthStyle = `style="width: ${widthValue}; max-width: ${widthValue};"`;
+                widthStyle = `${kendo.attr("style-width")}="${widthValue}" ${kendo.attr("style-max-width")}="${widthValue}"`;
             }
 
             item += "<span class='k-table-td' " + widthStyle + ">";

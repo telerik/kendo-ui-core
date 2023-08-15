@@ -184,7 +184,7 @@ var __meta__ = {
             },
 
             groupAttributes: function(group) {
-                return group.expanded !== true ? " style='display:none'" : "";
+                return group.expanded !== true ? `${kendo.attr("style-display")}="none"` : "";
             },
 
             groupCssClass: function() {
@@ -920,6 +920,7 @@ var __meta__ = {
 
             if (referenceItem && !parent.length) {
                 parent = $(that.renderGroup({ group: groupData, options: that.options })).css("display", "none").appendTo(referenceItem);
+                kendo.applyStylesFromKendoAttributes(parent, ["display"]);
             }
 
             if (plain || isArray(item) || item instanceof kendo.data.ObservableArray) { // is JSON
@@ -927,10 +928,13 @@ var __meta__ = {
                             if (typeof value === "string") {
                                 return $(value).get();
                             } else {
-                                return $(that.renderItem({
+                                let itemElement = $(that.renderItem({
                                     group: groupData,
                                     item: extend(value, { index: idx })
-                                })).get();
+                                }));
+
+                                kendo.applyStylesFromKendoAttributes(itemElement, ["display"]);
+                                return itemElement.get();
                             }
                         }));
             } else {

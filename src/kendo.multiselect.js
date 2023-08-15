@@ -1394,6 +1394,8 @@ var __meta__ = {
 
                     that._setOption(getter(addedItem.dataItem), true);
                 }
+
+                kendo.applyStylesFromKendoAttributes(that.tagList, ["background-color"]);
             } else {
                 if (!that._maxTotal || that._maxTotal < total) {
                     that._maxTotal = total;
@@ -1439,6 +1441,8 @@ var __meta__ = {
                     maxTotal: that._maxTotal,
                     currentTotal: total
                 }));
+
+                kendo.applyStylesFromKendoAttributes(that.tagList, ["background-color"]);
             }
 
             that._refreshTagListAria();
