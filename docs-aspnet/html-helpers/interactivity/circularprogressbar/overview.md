@@ -3,55 +3,61 @@ title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Circular ProgressBar component for {{ site.framework }}."
 slug: htmlhelpers_circular_progressbar_aspnetcore
-position: 1
+position: 0
 ---
 
-# Cirular Progressbar Overview
+# Circular ProgressBar Overview
 
 {% if site.core %}
 The Telerik UI Circular ProgressBar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Circular ProgressBar widget.
 {% else %}
 The Telerik UI Circular ProgressBar HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Circular ProgressBar widget.
-wrapper for the Kendo UI DataSource widget.
 {% endif %}
 
-The ProgressBar allows you to display and track the progress of a task.
+The Circular ProgressBar allows you to display and track the progress of a task or process.
 
-The component gives you the flexibility to customize its appearance with a template, or set different colors for specific progress ranges.
+The component gives you the flexibility to customize its appearance with a template or set different colors for specific progress ranges.
 
-* [Demo page for the Circular ProgressBar](https://demos.telerik.com/{{ site.platform }}/circular-progressbar/index)
+* [Demo page for the Circular ProgressBar HtmlHelper](https://demos.telerik.com/{{ site.platform }}/circularprogressbar/index)
+{% if site.core %}
+* [Demo page for the Circular ProgressBar TagHelper](https://demos.telerik.com/aspnet-core/circularprogressbar/tag-helper)
+{% endif %}
 
-## Initializing the Cirular ProgressBar
+## Initializing the Circular ProgressBar
 
-The following example demonstrates how to define the Circular ProgressBar, get a reference to its client-side object, and set its value.
+The following example demonstrates how to define a Circular ProgressBar.
 
 ```HtmlHelper
     @(Html.Kendo().CircularProgressBar()
         .Name("progressbar")
         .Value(0)
     )
-
-    <script type="text-javascript">
-        $(document).ready(function () {
-            $("#progressbar").data("kendoCircularProgressBar").value(50);
-        });   
-    </script>
 ```
 {% if site.core %}
 ```TagHelper
     <kendo-circularprogressbar name="progressbar" value=0></kendo-circularprogressbar>
+```
+{% endif %}
 
-    <script type="text-javascript">
-        $(document).ready(function () {
-            $("#progressbar").data("kendoCircularProgressBar").value(50);
-        });   
-    </script>
+You can control the size of the Circular ProgressBar by setting its height through the `HtmlAttributes()` method{% if site.core %} when using the HtmlHelper definition or through the `style` attribute when using the TagHelper definition{% endif %}.
+
+```HtmlHelper
+    @(Html.Kendo().CircularProgressBar()
+        .Name("progressbar")
+        .HtmlAttributes(new {style = "height: 500px;"})
+        .Value(10)
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-circularprogressbar name="progressbar" value="10" style="height: 500px;">
+    </kendo-circularprogressbar>
 ```
 {% endif %}
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the ProgressBar.
+The following example shows the basic configuration of the Circular ProgressBar with different colors based on the current value and a template that displays the current value in the center of the progress bar.
 
 ```HtmlHelper
     @(Html.Kendo().CircularProgressBar()
@@ -90,13 +96,11 @@ The following example demonstrates the basic configuration of the ProgressBar.
 ```
 {% endif %}
 
-You can control the size of the Circular ProgressBar, by placing it in a `div` container with a specific height.
-
 ## Modes
 
-The Circular ProgressBar has two modes: `infinite` and `finite`.
+The Circular ProgressBar supports infinite and finite modes.
 
-* The `infinite` mode renders a Circular ProgressBar that is always spinning and with no clear indication of when the task will be completed. To enable the `infinite` mode, set the `Indeterminate` configuration option to `true`:
+* The infinite mode renders a Circular ProgressBar that is always spinning without an indication of when the task will be complete. To enable the infinite mode, set the `Indeterminate()` configuration option to `true`{% if site.core %} or add the `indeterminate` attribute when using the TagHelper mode{% endif %}:
 
     ```HtmlHelper
         @(Html.Kendo().CircularProgressBar()
@@ -118,7 +122,9 @@ The Circular ProgressBar has two modes: `infinite` and `finite`.
     ```
     {% endif %}
 
-* The `finite` mode is the default mode of the Circular ProgressBar. In this mode the component clearly indicates when the task will be completed. To update the value of the Circular ProgressBar, use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar/methods/value) API method. The following example showcases how to update the value every 50 milliseconds:
+* The finite mode is the default mode of the Circular ProgressBar. The component indicates the task completion. To update the value of the Circular ProgressBar dynamically, use the [`value()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar/methods/value) API method. 
+
+    The following example showcases how to update the Circular ProgressBar value every 50 milliseconds.
 
     ```HtmlHelper
         @(Html.Kendo().CircularProgressBar()
@@ -168,7 +174,7 @@ The Circular ProgressBar has two modes: `infinite` and `finite`.
 
 ## Colors
 
-You can customize the appearance of the Circular ProgressBar by setting different colors for specific ranges of the progress it displays. To configure the colors, use the `Colors` configuration option.
+You can customize the appearance of the Circular ProgressBar by setting different colors for specific ranges of the progress it displays. To configure the colors, use the `Colors` configuration{% if site.core %} when using the HtmlHelper declaration or the `<colors>` tag when using the TagHelper declaration{% endif %}.
 
 The following example demonstrates a Circular ProgressBar that changes its color based on the current value:
 
@@ -211,9 +217,9 @@ The following example demonstrates a Circular ProgressBar that changes its color
 
 ## Template
 
-You can use the `CenterTemplate` option, to display a custom message or an Html element in the center of the Circular ProgressBar.
+The `CenterTemplate()` option{% if site.core %} or the `center-template-id` TagHelper attribute{% endif %} allows you to display a custom message or the current value in the center of the Circular ProgressBar.
 
-The following example shows how to render custom text that matches the color of the Circular ProgressBar:
+The following example shows how to render the progress bar value in the center of the Circular ProgressBar and an icon that indicates when the progress bar completes.
 
 ```HtmlHelper
     @(Html.Kendo().CircularProgressBar()
@@ -237,38 +243,15 @@ The following example shows how to render custom text that matches the color of 
 ```
 {% endif %}
 
-## Referencing Existing Instances
+## Next Steps
 
-The following example demonstrates how to get a reference to an existing Telerik UI Circular ProgressBar instance. Once the reference is established, use the [Circular ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar#methods) to control its behavior.
-
-```HtmlHelper
-    @(Html.Kendo().CircularProgressBar()
-        .Name("progressbar")
-        .Value(0)
-    )
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // The Name() of the Circular ProgressBar is used to get its client-side instance.
-            $("#progressbar").data("kendoCircularProgressBar").value(50);
-        }); 
-    </script>
-```
+* [Getting Started with the Circular ProgressBar]({% slug circular_progressbar_getting_started %})
+* [Basic Usage of the Circular ProgressBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/circularprogressbar/index)
 {% if site.core %}
-```TagHelper
-    <kendo-circularprogressbar name="progressbar" value=0>
-    </kendo-circularprogressbar>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // The Name() of the Circular ProgressBar is used to get its client-side instance.
-            $("#progressbar").data("kendoCircularProgressBar").value(50);
-        }); 
-    </script>
-```
+* [Basic Usage of the Circular ProgressBar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/circularprogressbar/tag-helper)
 {% endif %}
 
 ## See Also
 
-* [Circular ProgressBar Overview (Demo)](https://demos.telerik.com/{{ site.platform }}/circular-progressbar/index)
-* [JavaScript API Reference of the Circular ProgressBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar)
+* [Using the API of the Circular ProgressBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/circularprogressbar/api)
+* [Knowledge Base Section](/knowledge-base)
