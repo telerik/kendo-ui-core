@@ -203,6 +203,27 @@ The root icon is clickable and resets the value of the component.
         });
 	</script>
 
+## size `String` *(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			size: "large",
+            rootIcon: "cloud",
+			value: 'Telerik UI/Navigation/Breadcrumb'
+        });
+	</script>
+
 ### value `String` *(default: "")*
 
 Defines the value/path of the component. Each segments is separated by a slash.

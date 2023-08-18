@@ -2512,6 +2512,7 @@ declare namespace kendo.ui {
         messages?: BreadcrumbMessages | undefined;
         navigational?: boolean | undefined;
         rootIcon?: string | undefined;
+        size?: string | undefined;
         value?: string | undefined;
 
         change?(e: BreadcrumbChangeEvent): void;
