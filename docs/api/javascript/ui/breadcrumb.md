@@ -203,7 +203,7 @@ The root icon is clickable and resets the value of the component.
         });
 	</script>
 
-## size `String` *(default: "medium")*
+### size `String` *(default: "medium")*
 
 Sets a value controlling size of the component. Can also be set to the following string values:
 

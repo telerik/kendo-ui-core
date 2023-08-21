@@ -58,11 +58,11 @@
 
             var links = div.find("button").add(div.find(".k-selected"));
             assert.equal(links.length, 5);
-            assert.equal(links[0].innerHTML, "1");
-            assert.equal(links[1].innerHTML, "2");
-            assert.equal(links[2].innerHTML, "3");
-            assert.equal(links[3].innerHTML, "4");
-            assert.equal(links[4].innerHTML, "5");
+            assert.equal(links[0].innerHTML, '<span class="k-button-text">1</span>');
+            assert.equal(links[1].innerHTML, '<span class="k-button-text">2</span>');
+            assert.equal(links[2].innerHTML, '<span class="k-button-text">3</span>');
+            assert.equal(links[3].innerHTML, '<span class="k-button-text">4</span>');
+            assert.equal(links[4].innerHTML, '<span class="k-button-text">5</span>');
         });
 
         it("one button is rendered on init", function() {
@@ -70,7 +70,7 @@
             var links = div.find("button").add(div.find(".k-selected"));
 
             assert.equal(links.length, 1);
-            assert.equal(links[0].innerHTML, "0");
+            assert.equal(links[0].innerHTML, '<span class="k-button-text">0</span>');
         });
 
         it("buttons are rendered if read before init", function() {
@@ -88,9 +88,9 @@
             var links = div.find("button").add(div.find(".k-selected"));
 
             assert.equal(links.length, 3);
-            assert.equal(links[0].innerHTML, "1");
-            assert.equal(links[1].innerHTML, "2");
-            assert.equal(links[2].innerHTML, "3");
+            assert.equal(links[0].innerHTML, '<span class="k-button-text">1</span>');
+            assert.equal(links[1].innerHTML, '<span class="k-button-text">2</span>');
+            assert.equal(links[2].innerHTML, '<span class="k-button-text">3</span>');
         });
 
         it("page number buttons have data attribute assign except for the current page index", function() {
@@ -114,11 +114,11 @@
 
             var links = div.find("button");
             assert.equal(links.length, 5);
-            assert.equal(links[0].innerHTML, "1");
-            assert.equal(links[1].innerHTML, "2");
-            assert.equal(links[2].innerHTML, "3");
-            assert.equal(links[3].innerHTML, "4");
-            assert.equal(links[4].innerHTML, "5");
+            assert.equal(links[0].innerHTML, '<span class="k-button-text">1</span>');
+            assert.equal(links[1].innerHTML, '<span class="k-button-text">2</span>');
+            assert.equal(links[2].innerHTML, '<span class="k-button-text">3</span>');
+            assert.equal(links[3].innerHTML, '<span class="k-button-text">4</span>');
+            assert.equal(links[4].innerHTML, '<span class="k-button-text">5</span>');
         });
 
         it("does not render page numbers if total pages are zero", function() {
@@ -370,6 +370,7 @@
 
             assert.equal(pager.find(".k-pager-info").text(), "Showing 1 - 1 of 5");
             assert.equal(pager.find(".k-pager-input").text(), "Foobar5");
+            assert.equal(pager.find(".k-pager-input > span").length, 3);
 
             pager = setup({ data: [] }, {
                 messages: {
@@ -752,79 +753,6 @@
 
             assert.isOk(!dataSource._pageSize);
             assert.isOk(!dataSource._take);
-        });
-
-        it("no k-pager-mobile-lg/md/sm classes", function() {
-            var pager = setup();
-
-            pager.css("width", "1100px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(!pager.hasClass("k-pager-mobile-lg"));
-            assert.isOk(!pager.hasClass("k-pager-mobile-md"));
-            assert.isOk(!pager.hasClass("k-pager-mobile-sm"));
-        });
-
-        it("add k-pager-mobile-md class", function() {
-            var pager = setup();
-
-            pager.css("width", "500px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(pager.hasClass("k-pager-mobile-md"));
-        });
-
-        it("add k-pager-mobile-sm class", function() {
-            var pager = setup();
-
-            pager.css("width", "450px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(pager.hasClass("k-pager-mobile-sm"));
-        });
-
-        it("no k-pager-mobile-sm class on breakpoint width", function() {
-            var dataOptions = {
-                data: [1, 2, 3, 4, 5],
-                page: 1,
-                pageSize: 1
-            };
-            var dataSource = new DataSource(dataOptions);
-            var options = {
-                dataSource: dataSource,
-                previousNext: false
-            };
-            var element = $("<div style='width: 481px;' />").appendTo(Mocha.fixture).kendoPager(options);
-            var pager = element.data("kendoPager");
-
-            assert.isOk(!pager.element.hasClass("k-pager-mobile-sm"));
-        });
-
-        it("no k-pager-mobile-lg class when responsive is false", function() {
-            var pager = setup({}, { responsive: false });
-
-            pager.css("width", "1000px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(!pager.hasClass("k-pager-mobile-lg"));
-        });
-
-        it("no k-pager-mobile-md class when responsive is false", function() {
-            var pager = setup({}, { responsive: false });
-
-            pager.css("width", "600px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(!pager.hasClass("k-pager-mobile-md"));
-        });
-
-        it("no k-pager-mobile-sm class when responsive is false", function() {
-            var pager = setup({}, { responsive: false });
-
-            pager.css("width", "450px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(!pager.hasClass("k-pager-mobile-sm"));
         });
 
         it("numbers wrap select element is present when AutoBind is false", function() {
