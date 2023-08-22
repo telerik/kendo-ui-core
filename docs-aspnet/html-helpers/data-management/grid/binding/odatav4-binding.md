@@ -871,6 +871,7 @@ To enable batch editing capabilities in an ASP.NET MVC Environment:
 
 * [OData-v4 Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata-v4)
 {% if site.core %}
+* [GitHub Example](https://github.com/telerik/ui-for-aspnet-core-examples/commit/1a513aae311b339349d61e65d4f12fe954e2afc8)
 * [Official Microsoft Documentation on Getting Started with {{ site.framework }} OData-v4](https://learn.microsoft.com/en-us/odata/webapi-8/getting-started?tabs=net60%2Cvisual-studio-2022%2Cvisual-studio)
 {% else %}
 * [Official Microsoft Documentation on Getting Started with {{ site.framework }} OData-v4](https://learn.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint)

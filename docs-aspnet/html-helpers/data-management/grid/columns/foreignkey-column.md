@@ -32,6 +32,22 @@ Binding the column to a local collection of items can be done by passing a valid
         </foreign-key-column>
 ```
 {% endif %}
+```Controller
+    public class GridController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewData["categories"] = GetCategories();
+            return View();
+        }
+    }
+```
+```ForeignKeyModel
+    public class CategoryViewModel{
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
+    }
+```
 
 ## Binding to a Remote Collection
 
@@ -51,7 +67,55 @@ In order to bind the column to a remote collection of items, supply a URL Action
         </datasource>
     </foreign-key-column>
 ```
+```Controller
+    public class GridController : Controller
+    {
+        public ActionResult Categories()
+        {
+            IEnumerable<CategoryViewModel> categories;
+            using (var dataContext = new SampleEntitiesDataContext())
+            {
+                 categories = dataContext.Categories
+                            .Select(c => new CategoryViewModel
+                            {
+                                CategoryID = c.CategoryID,
+                                CategoryName = c.CategoryName
+                            })
+                            .OrderBy(e => e.CategoryName).ToList();
+            }
+            return Json(categories);
+        }
+    }
+```
+{% else %}
+```Controller
+    public class GridController : Controller
+    {
+        public ActionResult Categories()
+        {
+            IEnumerable<CategoryViewModel> categories;
+            using (var dataContext = new SampleEntitiesDataContext())
+            {
+                 categories = dataContext.Categories
+                            .Select(c => new CategoryViewModel
+                            {
+                                CategoryID = c.CategoryID,
+                                CategoryName = c.CategoryName
+                            })
+                            .OrderBy(e => e.CategoryName).ToList();
+            }
+            return Json(categories, JsonRequestBehavior.AllowGet);
+        }
+    }
+```
 {% endif %}
+
+```ForeignKeyModel
+    public class CategoryViewModel{
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
+    }
+```
 ## See Also
 
 * [Foreign Key Column Local Binding (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/foreignkeycolumn)

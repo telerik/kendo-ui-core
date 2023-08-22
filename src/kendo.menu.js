@@ -2344,7 +2344,7 @@ var __meta__ = {
                         subGroup = data.subGroup;
                     var contentHtml = fieldAccessor("content")(item);
                     var groupId = kendo.guid();
-                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items) ? "aria-controls='" + groupId + '"' : '' }' ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items ? "aria-haspopup='true'" : ''}` +
+                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items) ? "aria-controls='" + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items ? "aria-haspopup='true'" : ''}` +
                         `${item.enabled === false ? "aria-disabled='true'" : ''}` +
                         kendo.attr("uid") + `='${item.uid}' ` +
                         (item.items && item.items.length > 0 ?
