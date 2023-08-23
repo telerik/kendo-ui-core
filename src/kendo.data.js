@@ -4612,12 +4612,15 @@ var __meta__ = {
         },
 
         _composeItemsFilter: function(group, parents) {
-            var filter = this.filter() || {
+            var filter = {
                 logic: "and",
                 filters: []
             };
 
-            filter.logic = 'and';
+            if (this.filter()) {
+                filter.filters.push(this.filter());
+            }
+
             filter = extend(true, {}, filter);
             filter.filters.push({
                 field: group.field,

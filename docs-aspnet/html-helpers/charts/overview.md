@@ -328,6 +328,7 @@ The Telerik UI for {{ site.framework }} Chart supports an extensive set of serie
 | [Funnel Charts]({% slug funnelchart_aspnetcore_htmlhelper %}) | Funnel Charts are suitable for representing stages in a sales process and for showing the amount of the potential revenue from each stage. |
 | [Line Charts]({% slug linecharts_aspnetcore_htmlhelper %}) | Line Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items. |
 | [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %}) | Pie Charts display data as single-series sectors from a two-dimensional circle which is useful for rendering data as a part of the whole. |
+| [Donut Charts]({% slug donutcharts_aspnetcore_htmlhelper %}) | Donut Charts are a Pie chart variation with the ability to display data as single-series sectors from a two-dimensional circle. |
 
 ## Referencing Existing Instances
 

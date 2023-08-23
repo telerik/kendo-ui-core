@@ -1412,6 +1412,24 @@
             assert.equal(result.logic, "and");
         });
 
+        it("_composeItemsFilter should add the existing filters to the filters array", function() {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                filter: { filters: [{ value: "ContactName", operator: "eq", field: "test" }, { value: "ShipAddress", operator: "contains", field: "test" }], logic: "or" },
+                group: [{
+                    field: 'ShipAddress'
+                }, {
+                    field: 'ContactName'
+                }],
+                groupPaging: true
+            });
+
+            var result = dataSource._composeItemsFilter({ field: 'ShipAddress', value: 'test' });
+
+            assert.equal(result.filters.length, 2);
+        });
+
         it("_composeItemsFilter should create a filter object which contains the values of the parent groups", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,

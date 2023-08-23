@@ -3,7 +3,7 @@ title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ColorGradient component for {{ site.framework }}."
 slug: htmlhelpers_overview_colorgradient
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} ColorGradient Overview
@@ -68,71 +68,16 @@ The following example shows a basic implementation of the control.
 
 ## Functionality and Features
 
-* [Formats]({% slug htmlhelpers_rgb_hex_formats_colorgradient %})
-* [Contrast Tool]({% slug htmlhelpers_contrast_tool_colorgradient %})
-* [Accessibility]({% slug htmlhelpers_accessibility_colorgradient %})
+* [Formats]({% slug htmlhelpers_rgb_hex_formats_colorgradient %})—The ColorGradient supports both RGB and HEX input formats. 
+* [Contrast Tool]({% slug htmlhelpers_contrast_tool_colorgradient %})—You can use the Color Contrast Tool that is built into the ColorGradient to check the color contrast ratio between two colors.
+* [Accessibility]({% slug htmlhelpers_accessibility_colorgradient %})—The ColorGradient is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
-## Events
+## Next Steps
 
-You can subscribe to the `change` [ColorGradient event](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorgradient#events), as is demonstrated in the following example.
-
-```HtmlHelper
-    @(Html.Kendo().ColorGradient()
-        .Name("colorGradient")
-        .Events(ev => ev.Change("colorgradient_change"))
-    )
-    <script>
-        function colorgradient_change(e) {
-          console.log("The newly selected color is ", e.value);
-        }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-colorgradient name="colorgradient" on-change="colorgradient_change">
-    </kendo-colorgradient>
-
-    <script>
-        function colorgradient_change(e) {
-          console.log("The newly selected color is ", e.value);
-        }
-    </script>
-```
-{% endif %}
-
-For a complete example, refer to the [demo on using the events of the ColorGradient](https://demos.telerik.com/{{ site.platform }}/colorgradient/events).
-
-## Referencing Existing Instances
-
-To reference an existing Telerik UI ColorGradient instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorGradient client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorgradient#methods) to control its behavior.
-
-```HtmlHelper
-    @(Html.Kendo().ColorGradient()
-        .Name("colorGradient")
-    )
-
-    //Get an instance of the ColorGradient by using its Name().
-    <script>
-    $(function() {
-        var colorGradientControl = $("#colorGradient").data("kendoColorGradient");
-    });
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-colorgradient name="colorgradient">
-    </kendo-colorgradient>
-
-    //Get an instance of the ColorGradient by using its Name().
-    <script>
-    $(function() {
-        var colorGradientControl = $("#colorgradient").data("kendoColorGradient");
-    });
-```
-{% endif %}
+* [Getting Started with the ColorGradient]({% slug aspnetcore_colorgradient_getting_started %})
+* [Basic Usage of the ColorGradient for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorgradient/index)
 
 ## See Also
 
-* [Basic Usage of the ColorGradient HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorgradient/index)
-* [Server-Side API](/api/colorgradient)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorgradient)
+* [Using the API of the ColorGradient for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorgradient/api)
+* [Knowledge Base Section](/knowledge-base)
