@@ -33,17 +33,12 @@ How can I display the Grid filter icon before the title?
 
 Due to the way the filter icon is positioned in the header, the filter icon receives the focus before the title because it is rendered in the DOM before the title. To change the position of the filter icon, use CSS.
 
-```dojo
+```
 	<style>
-	  .k-grid-header .k-grid-filter-menu, .k-grid-header .k-grid-column-menu{
-		margin-left: -5px!important;
-		margin-right: 0!important;
-
-	  }
-
-	  .k-grid-header .k-grid-filter-menu, .k-grid-header .k-grid-column-menu{
-		float: left!important;
-	  }
+	    .k-cell-inner{
+          display: flex !important;
+          flex-direction: row-reverse !important;
+        }
 	</style>
 ```
 
@@ -51,16 +46,11 @@ The following example demonstrates the full implementation of the suggested appr
 
 ```dojo
 <base href="https://demos.telerik.com/kendo-ui/grid/local-data-binding">
-  <style>
-      .k-grid-header .k-grid-filter-menu, .k-grid-header .k-grid-column-menu{
-        margin-left: -5px!important;
-        margin-right: 0!important;
-
-      }
-
-      .k-grid-header .k-grid-filter-menu, .k-grid-header .k-grid-column-menu{
-        float: left!important;
-      }
+    <style>
+        .k-cell-inner{
+          display: flex !important;
+          flex-direction: row-reverse !important;
+        }
     </style>
 
         <script src="../content/shared/js/people.js"></script>

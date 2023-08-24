@@ -30,6 +30,7 @@ How can I implement row numbers in a {{ site.product }} Grid?
 
 To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page) and [`pageSize()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
 
+{% if site.mvc %}
 ```Grid.cshtml
         @(Html.Kendo().Grid<App.Models.OrderViewModel>()
             .Name("grid")
@@ -47,6 +48,25 @@ To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/ken
             )
         )
 ```
+{% else %}
+```Grid.cshtml
+        @(Html.Kendo().Grid<App.Models.OrderViewModel>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Template("#= getRecord() #");
+                columns.Bound(p => p.OrderID).Filterable(false);
+            })
+            .Pageable()
+            .Events(ev=>ev.DataBinding("onDataBinding"))
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(20)
+                .Read(read => read.Action("Orders_Read", "Grid"))
+            )
+        )
+```
+{% endif %}
 ```script.js
     var record = 0;
     function getRecord() {
@@ -57,6 +77,8 @@ To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/ken
         record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
     }
 ```
+
+To see a complete example of the aforementioned approach, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/mnaCPzYf29fek3Mu39) example.
 
 ## More {{ site.framework }} Grid Resources
 
@@ -82,6 +104,9 @@ To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/ken
 ## See Also
 
 * [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+{% if site.core %}
+* [Adding Grid Row Numbers Telerik REPL for {{ site.framework }}](https://netcorerepl.telerik.com/mnaCPzYf29fek3Mu39)
+{% endif %}
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

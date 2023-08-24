@@ -3747,6 +3747,190 @@ The text message displayed in the column menu for unlocking a column.
     });
     </script>
 
+### contextMenu `Object|Boolean` *(default: false)*
+
+Configures the ContextMenus of the Grid.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: true,
+            editable: true,
+            sortable: true,
+            draggable: true,
+            reorderable: true,
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+    </script>
+
+### contextMenu.body `Array`
+
+Configures the items of the ContextMenu for the table body element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc". 
+
+You can also specify a custom item and accosiate it with a command.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                body: [
+                    "exportPDF",
+                    "exportExcel",
+                    { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                ]
+                // You can also concat to the default tools
+                // body: kendo.ui.grid.defaultBodyContextMenu.concat([
+                //     { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                // ])
+            },
+            editable: true,
+            sortable: true,
+            draggable: true,
+            reorderable: true,
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["CustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function() {
+                var that = this,
+                    grid = that.grid;
+
+                grid.saveAsPDF();
+            }
+        });
+    </script>
+
+
+### contextMenu.body.name `String`
+Specifies the name of the item.
+
+### contextMenu.body.text `String`
+Specifies the text of the item.
+
+### contextMenu.body.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.body.command `String`
+Specifies the command of the item.
+
+### contextMenu.head `Array`
+
+Configures the items of the ContextMenu for the table head element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc". 
+
+You can also specify a custom item and accosiate it with a command.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                head: [
+                    "sortAsc",
+                    "sortDesc",
+                    "exportExcel",
+                    { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                ]
+                // You can also concat to the default tools
+                // head: kendo.ui.grid.defaultHeadContextMenu.concat([
+                //     { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                // ])
+            },
+            editable: true,
+            sortable: true,
+            draggable: true,
+            reorderable: true,
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["CustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function() {
+                var that = this,
+                    grid = that.grid;
+
+                grid.saveAsPDF();
+            }
+        });
+    </script>
+
+
+### contextMenu.head.name `String`
+Specifies the name of the item.
+
+### contextMenu.head.text `String`
+Specifies the text of the item.
+
+### contextMenu.head.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.head.command `String`
+Specifies the command of the item.
+
+### contextMenu.close `Function`
+
+Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.open `Function`
+
+Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.activate `Function`
+
+Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.deactivate `Function`
+
+Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.select `Function`
+
+Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 

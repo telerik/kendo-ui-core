@@ -100,6 +100,10 @@ var __meta__ = {
                 var result = "k-item k-menu-item",
                     index = item.index;
 
+                if (item.separator) {
+                    result += " k-separator";
+                }
+
                 if (item.enabled === false) {
                     result += " k-disabled";
                 }
@@ -2344,7 +2348,7 @@ var __meta__ = {
                         subGroup = data.subGroup;
                     var contentHtml = fieldAccessor("content")(item);
                     var groupId = kendo.guid();
-                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items) ? "aria-controls='" + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items ? "aria-haspopup='true'" : ''}` +
+                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items ? "aria-haspopup='true'" : ''}` +
                         `${item.enabled === false ? "aria-disabled='true'" : ''}` +
                         kendo.attr("uid") + `='${item.uid}' ` +
                         (item.items && item.items.length > 0 ?
@@ -2353,8 +2357,8 @@ var __meta__ = {
                                 : " aria-expanded='false'")
                             : '') +
                         ">" +
-                        `${this.templates.itemWrapper(data)}` +
-                        (item.hasChildren || item.items ?
+                        `${!item.separator && !item.content ? this.templates.itemWrapper(data) : ''}` +
+                        ((item.hasChildren || item.items) ?
                             `${subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded }, groupId: groupId })}`
                             : (item.content || item.contentUrl || contentHtml ?
                             `${data.renderContent(data)}`
@@ -2388,6 +2392,7 @@ var __meta__ = {
                 item = options.item;
 
             return that.templates.item(extend(options, {
+                separator: item.separator ? that.templates.separator : empty,
                 sprite: that.templates.sprite,
                 itemWrapper: that.templates.itemWrapper,
                 renderContent: that.renderContent,

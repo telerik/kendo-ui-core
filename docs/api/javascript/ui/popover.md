@@ -128,6 +128,7 @@ A value indicating how the actions buttons will be positioned. Possible values a
 * `between`
 * `around`
 * `evenly`
+* `stretch`
 
 #### Example - position items
 

@@ -17,7 +17,7 @@ After the completion of this guide, you will be able to achieve the following en
 
       <script type="text/x-kendo-template" id="template">
         <div class="product">
-            <img src="../content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
             <h3>Product Name</h3>
             <p>#:ProductName#</p>
             <h3>Price</h3>

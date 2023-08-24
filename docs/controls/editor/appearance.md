@@ -29,12 +29,12 @@ The following example demonstrates how to set a height less than 200px.
 ```dojo
 <style>
 
-    table.small-editor
+    div.small-editor
     {
         height: 100px;
     }
 
-    table.small-editor iframe.k-content
+    div.small-editor iframe.k-content
     {
         height: 50px; /* 50px less than the Editor height */
     }
@@ -51,7 +51,7 @@ The following example demonstrates how to set a height less than 200px.
         // Initialize the classic Editor.
         $("#classicEditor").kendoEditor();
         // Apply custom sizing.
-        $("textarea.small-editor").closest("table.k-editor").addClass("small-editor");
+        $("textarea.small-editor").closest("div.k-editor").addClass("small-editor");
         // Initialize the inline Editor.
         $("#inlineEditor").kendoEditor();
     });

@@ -21693,6 +21693,17 @@ The supported values are:
 * "silver"
 * "uniform"
 
+#### Example
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      theme: "black",
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    </script>
+
 ### title `Object|String`
 
 The chart title configuration options or text.

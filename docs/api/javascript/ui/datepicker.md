@@ -457,6 +457,7 @@ The messages that DateInput uses.  Use it to customize or localize the placehold
     <input id="datepicker" />
     <script>
     $("#datepicker").kendoDatePicker({
+        dateInput: true,
         messages:{
             dateInput:{
                 "year": "year",

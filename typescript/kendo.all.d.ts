@@ -6675,6 +6675,18 @@ declare namespace kendo.ui {
         columns?: boolean | undefined;
     }
 
+    interface GridContextMenuItem {
+        name?: string | undefined;
+        text?: string | undefined;
+        icon?: string | undefined;
+        command?: string | undefined;
+    }
+
+    interface GridContextMenu extends ContextMenuOptions {
+        body?: GridContextMenuItem[] | undefined;
+        head?:GridContextMenuItem[] | undefined;
+    }
+
     interface GridOptions {
         name?: string | undefined;
         allowCopy?: boolean | GridAllowCopy | undefined;
@@ -6682,6 +6694,7 @@ declare namespace kendo.ui {
         autoBind?: boolean | undefined;
         columnResizeHandleWidth?: number | undefined;
         columns?: GridColumn[] | undefined;
+        contextMenu?: boolean | GridContextMenu | undefined;
         columnMenu?: boolean | GridColumnMenu | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
         detailTemplate?: string|Function | undefined;
