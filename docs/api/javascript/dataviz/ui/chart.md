@@ -8275,7 +8275,7 @@ A function that can be used to create a custom visual for the legend items. The 
 * options - the item options.
 * createVisual - a function that can be used to get the default visual.
 * series - the item series.
-* pointIndex - the index of the point in the series. Available for pie, donut and funnel series.
+* pointIndex - the index of the point in the series. Available for pie, donut, pyramid and funnel series.
 
 #### Example - using custom visual for the legend items
 
@@ -12678,9 +12678,9 @@ The function should return a series configuration object or a `Promise` that res
 
 ### series.segmentSpacing `Number` *(default: 0)*
 
-The space in pixels between the different segments of the funnel chart.
+The space in pixels between the different segments of the funnel and pyramid charts.
 
-> The `segmentSpacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+> The `segmentSpacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 #### Example - set the chart series segmentSpacing field
 
@@ -12787,7 +12787,7 @@ The last element is always created like a rectangle since there is no following 
 
 ### series.dynamicHeight `Boolean` *(default: true)*
 
-> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 When set to `false` all segments become with the same height, otherwise the height of each segment is based on its value.
 
@@ -14410,18 +14410,18 @@ The chart series label configuration.
 
 ### series.labels.align `String`
 
-The label alignment when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel" or "pie".
+The label alignment when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel", "pyramid" or "pie".
 
 The supported values  for "donut" and "pie" are:
 
 * "circle" - the labels are positioned in circle around the chart.
 * "column" - the labels are positioned in columns to the left and right of the chart.
 
-The supported values for "funnel" are:
+The supported values for "funnel" and "pyramid" are:
 
-* "center" - the labels are positioned in the center over the funnel segment.
-* "right" - the labels are positioned on the right side of the chart and do not (if there is enough space) overlap the funnel segment(s).
-* "left" - the labels are positioned on the left side of the chart and do not (if there is enough space) overlap the funnel segment(s).
+* "center" - the labels are positioned in the center over the segment.
+* "right" - the labels are positioned on the right side of the chart and do not (if there is enough space) overlap the segment(s).
+* "left" - the labels are positioned on the left side of the chart and do not (if there is enough space) overlap the segment(s).
 
 
 #### Example - set the chart series label alignment
@@ -14910,14 +14910,14 @@ The position of the labels.
 
 * "above" - the label is positioned at the top of the marker. **Applicable for series that render points, incl. bubble.**
 * "below" - the label is positioned at the bottom of the marker. **Applicable for series that render points, incl. bubble.**
-* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series.**
+* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, pyramid, radarColumn and waterfall series.**
 * "insideBase" - the label is positioned inside, near the base of the bar. **Applicable for bar, column and waterfall series.**
 * "insideEnd" - the label is positioned inside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series.**
 * "left" - the label is positioned to the left of the marker. **Applicable for series that render points, incl. bubble.**
 * "outsideEnd" - the label is positioned outside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.**
 * "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
 * "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
-* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
+* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel and pyramid series.**
 * "auto" - the from and to labels area positioned at the top/bottom(rangeArea series) or left/right(verticalRangeArea series) so that they are outside the filled area. **Applicable for rangeArea and verticalRangeArea series.**
 
 
@@ -17401,6 +17401,7 @@ The supported values are:
 * [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
 * [`donut`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.donut)
 * [`funnel`](/controls/charts/chart-types/funnel-charts)
+* [`pyramid`](/controls/charts/chart-types/pyramid-charts)
 * [`heatmap`](/controls/charts/chart-types/heatmap)
 * [`horizontalWaterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/horizontal)
 * [`line`](/controls/charts/chart-types/line-charts)
@@ -17462,7 +17463,7 @@ Sets the visible property of a chart series
 
 ### series.visibleInLegend `Boolean` *(default: true)*
 
-A value indicating whether to show the point category name (for funnel, donut and pie series)
+A value indicating whether to show the point category name (for funnel, pyramid, donut and pie series)
 or series name (for other available series types) in the legend.
 
 #### Example - hide a chart series from the legend
@@ -17484,7 +17485,7 @@ or series name (for other available series types) in the legend.
 
 The data item field which indicates whether to show the point category name in the legend.
 
-> The `visibleInLegendField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel", "donut" or "pie".
+> The `visibleInLegendField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel", "pyramid", "donut" or "pie".
 
 #### Example - set the chart series visible in legend field
 
@@ -17507,7 +17508,7 @@ The data item field which indicates whether to show the point category name in t
 
 ### series.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, pyramid, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -17526,7 +17527,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * startAngle - the segment start angle. Available for donut and pie series.
 * endAngle - the segment end angle. Available for donut and pie series.
 * center - the segment center point. Available for donut and pie series.
-* points - the segment points. Available for funnel, line and scatterLine series.
+* points - the segment points. Available for funnel, pyramid, line and scatterLine series.
 
 #### Example - using custom visual
 
@@ -19248,14 +19249,14 @@ The position of the labels.
 
 * "above" - the label is positioned at the top of the marker. **Applicable for series that render points, incl. bubble.**
 * "below" - the label is positioned at the bottom of the marker. **Applicable for series that render points, incl. bubble.**
-* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series.**
+* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, pyramid, radarColumn and waterfall series.**
 * "insideBase" - the label is positioned inside, near the base of the bar. **Applicable for bar, column and waterfall series.**
 * "insideEnd" - the label is positioned inside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series.**
 * "left" - the label is positioned to the left of the marker. **Applicable for series that render points, incl. bubble.**
 * "outsideEnd" - the label is positioned outside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.**
 * "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
-* "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
-* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
+* "top" - the label is positioned at the top of the segment. **Applicable for funnel and pyramid series.**
+* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel and pyramid series.**
 * "auto" - the from and to labels area positioned at the top/bottom(rangeArea series) or left/right(verticalRangeArea series) so that they are outside the filled area. **Applicable for rangeArea and verticalRangeArea series.**
 
 
@@ -19302,9 +19303,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -19485,9 +19486,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -19593,9 +19594,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -19877,6 +19878,7 @@ The supported values are:
 * column
 * donut
 * funnel
+* pyramid
 * line
 * ohlc
 * pie
@@ -20057,7 +20059,7 @@ The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/form
 
 Format placeholders:
 
-* Area, bar, column, funnel, line and pie
+* Area, bar, column, funnel, pyramid, line and pie
     *   {0} - value
 * Bubble
     *   {0} - x value
@@ -20330,7 +20332,7 @@ The verticalRangeArea chart series options. Accepts all values supported by the 
 
 ### seriesDefaults.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, pyramid, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -20349,7 +20351,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * startAngle - the segment start angle. Available for donut and pie series.
 * endAngle - the segment end angle. Available for donut and pie series.
 * center - the segment center point. Available for donut and pie series.
-* points - the segment points. Available for funnel, line and scatterLine series.
+* points - the segment points. Available for funnel, pyramid, line and scatterLine series.
 
 #### Example - using custom visual
 
@@ -22341,7 +22343,7 @@ The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/form
 
 Format placeholders:
 
-* Area, bar, column, funnel, line and pie
+* Area, bar, column, funnel, pyramid, line and pie
     *   {0} - value
 * Bubble
     *   {0} - x value
@@ -38605,7 +38607,7 @@ Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozil
 
 ### toggleHighlight
 
-Toggles the highlight of the series points or a segment for pie, donut and funnel charts.
+Toggles the highlight of the series points or a segment for pie, donut and funnel, pyramid charts.
 
 #### Parameters
 

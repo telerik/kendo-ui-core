@@ -1063,8 +1063,8 @@ var __meta__ = {
                 var li = $(this);
 
                 clearTimeout(li.data(TIMER));
-
-                li.data(TIMER, setTimeout(function() {
+                clearTimeout(that._timerTimeout);
+                that._timerTimeout = setTimeout(function() {
                     var div = li.find("> .k-menu-popup, > .k-animation-container > .k-child-animation-container > .k-menu-popup").filter(":hidden").first();
                     var popup;
                     var overflowPopup;
@@ -1173,7 +1173,9 @@ var __meta__ = {
                         that._initPopupScrolling(popup);
                     }
 
-                }, that.options.hoverDelay));
+                }, that.options.hoverDelay);
+
+                li.data(TIMER, that._timerTimeout);
             });
 
             return that;

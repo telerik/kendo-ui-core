@@ -1002,7 +1002,7 @@ var __meta__ = {
 
             if (length || that.options.noDataTemplate) {
                 // Check where animation container stays
-                popups = list.parent().add(list.closest(".k-animation-container")).show();
+                popups = list.parent().add(list.closest(".k-animation-container").add(list.closest(".k-child-animation-container"))).show();
 
                 if (!list.parent().is(":visible")) {
                     popups.hide();
