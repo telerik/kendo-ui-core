@@ -14,6 +14,29 @@ To enable the column menu, use the `ColumnMenu(true)` method. As a result, the c
 
 > As of the R3 2022 release, the Grid also provides the option to set this property on individual Column level. You can disable the menu for a specific column by setting it to `.ColumnMenu(false)`.
 
+## Column Reordering
+
+As of {{ site.product }} R2 SP1 2023, the Grid's Column Menu provides an option to change the position of the target column by using **Move next** and **Move previous** buttons. The functionality requires that reordering for the columns is enabled.
+
+```HtmlHelper
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("grid")
+        .Reorderable(reorder => reorder.Columns(true))
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <reorderable enabled="true" columns="true"/>
+    </kendo-grid>
+```
+{% endif %}
+
+To see this functionality in action, check the [Grid Column Menu demo](https://demos.telerik.com/{{site.platform}}/grid/column-menu).
+
+## Column Grouping
+
+As of {{ site.product }} R2 SP1 2023, the Grid's Column Menu provides an option that allows users to select the target column for grouping or ungrouping the Grid. To display the option item in the Column Menu, enable grouping via the [`Groupable`](/api/kendo.mvc.ui.fluent/gridbuilder#groupable) configuration.
 ## Sort
 
 The column menu allows you to control the visibility of each Grid column. For this purpose, the column menu renders a child column menu with a checkbox for each Grid column.
@@ -30,7 +53,7 @@ The below example demonstrates how to sort the column titles in the child menu i
 ```TagHelper
     <column-menu>
         <column-menu-columns sort="asc">
-            
+
         </column-menu-columns>
     </column-menu>
 ```
@@ -77,7 +100,7 @@ By default, the column menu of the Grid is initialized in the `classic` render m
     @(Html.Kendo().Grid()
             .Name("datePicker")
             .ColumnMenu(m=>{
-               m.ComponentType("modern"); 
+               m.ComponentType("modern");
             })
     )
 ```
@@ -85,7 +108,7 @@ By default, the column menu of the Grid is initialized in the `classic` render m
 ```TagHelper
 <kendo-grid name="grid">
     <column-menu component-type="modern">
-        
+
     </column-menu>
 </kendo-grid>
 ```

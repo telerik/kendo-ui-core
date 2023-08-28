@@ -450,6 +450,62 @@ The columns which will be rendered as child columns under this group column head
     });
     </script>
 
+### columns.draggable `Boolean` *(default: false)*
+
+If set to `true` a draghandle will be rendered and the user could reorder the rows by dragging the row via the drag handle.
+
+> Note that the reordering operation is only a client-side operation and it does not reflect the order of any data that is bound to the server.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      columns: [
+        { draggable: true },
+        "title",
+        "start",
+        "end"
+      ],
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        },
+        {
+          id: 3,
+          orderId: 2,
+          parentId: null,
+          title: "Task3",
+          start: new Date("2014/6/17 15:00"),
+          end: new Date("2014/6/17 17:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      editable: {
+        clickMoveClick: true
+      }
+    });
+    </script>
+
 ### columns.editable `Boolean` *(default: false)*
 
 Specifies whether this column can be edited by the user.

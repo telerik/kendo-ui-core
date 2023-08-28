@@ -4,7 +4,7 @@ page_title: ContextMenu
 description: "Learn the basics when working with the Telerik UI ContextMenu component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/menu/contextmenu
 slug: htmlhelpers_contextmenu_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} ContextMenu Overview
@@ -196,108 +196,19 @@ The following example demonstrates the basic configuration of the ContextMenu Ht
 ```
 {% endif %}
 
-## Events
 
-You can subscribe to all ContextMenu [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#events).
+## Functionality and Features
 
-### By Handler Names
+The ContextMenu derives from the Menu component and largely shares the same functionalities, features, and configuration options. To learn more about them, refer to the [Menu Overview]({% slug htmlhelpers_menu_aspnetcore %}#functionality-and-features) article.
 
-The following example demonstrates how to subscribe to events by a handler name.
+## Next Steps
 
-```HtmlHelper
-<div id="target">Click to open</div>
-
-@(Html.Kendo().ContextMenu()
-        .Name("contextmenu")
-        .Target("#target")
-        .ShowOn("click")
-        .Events(events => events
-            .Open("openMenu")
-            .Close("closeMenu")
-            .Select("onSelect")
-        )
-)
-<script>
-    function openMenu(){
-        // Handle the open event.
-    }
-
-    function closeMenu(){
-        // Handle the close event.
-    }
-
-    function onSelect(){
-        // Handle the select event.
-    }
-</script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-contextmenu name="contextmenu" target="#target" show-on="click"
-        on-open="openMenu" on-close="closeMenu" on-select="onSelect">
-    </kendo-contextmenu>
-
-    <script>
-    function openMenu(){
-        // Handle the open event.
-    }
-
-    function closeMenu(){
-        // Handle the close event.
-    }
-
-    function onSelect(){
-        // Handle the select event.
-    }
-</script>
-```
-{% endif %}
-
-### By Template Delegates
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-<div id="target">Click to open</div>
-
-@(Html.Kendo().ContextMenu()
-    .Name("contextmenu")
-    .Target("#target")
-    .ShowOn("click")
-    .Events(events => events
-        .Open(@<text>
-            function(){
-                // Handle the open event inline.
-            }
-        </text>)
-        .Close(@<text>
-            function(){
-                // Handle the close event inline.
-            }
-        </text>)
-    )
-)
-```
-
-### By HTML Attributes
-
-The following example demonstrates how to subscribe to the `select` event of a single ContextMenu item.
-
-```HtmlHelper
-<div id="target">Click to open</div>
-
-@(Html.Kendo().ContextMenu()
-    .Name("contextmenu")
-    .Target("#target")
-    .ShowOn("click")
-    .Items(items =>
-    {       
-        items.Add().Text("First Item");
-        items.Add().Text("Second Item").HtmlAttributes(new { @onclick = "alert('select');" });
-    })
-)
-```
+* [Getting Started with the ContextMenu]({% slug context_menu_getting_started %})
+* [Using the ContextMenu (Demo)](https://demos.telerik.com/aspnet-core/menu/context-menu)
 
 ## See Also
 
-* [Server-Side API](/api/menu)
+* [Using the API of the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/api)
+* [Client-Side API of the ContextMenu](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)
+* [Server-Side API of the ContextMenu](/api/contextmenu)
+* [Knowledge Base Section](/knowledge-base)

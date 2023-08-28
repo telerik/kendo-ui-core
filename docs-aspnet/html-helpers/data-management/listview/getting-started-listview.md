@@ -230,13 +230,13 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the [ListView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control the behavior of the widget. In this example, you will see how to turn on the [`selectable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/selectable) configuration with the use of the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions) method. Then you can use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select) method to programmatically select one of the items.
 
-```script
-    <script>
-        var listview = $("#listView").data("kendoListView");
-		listview.setOptions({selectable: "single"});  // Turn on the selectable mode of the ListView.
-        listview.select(listview.content.children().first()); // Select the first item.
-    </script>
-```
+    ```script
+        <script>
+            var listview = $("#listView").data("kendoListView");
+            listview.setOptions({selectable: "single"});  // Turn on the selectable mode of the ListView.
+            listview.select(listview.content.children().first()); // Select the first item.
+        </script>
+    ```
 
 {% if site.core %}
 ## Explore this Tutorial in REPL
