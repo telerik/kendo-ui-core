@@ -10,7 +10,7 @@
   "license": "Apache-2.0",
   "version": "1.0.0",
   "devDependencies": {
-    "@progress/kendo-svg-icons": "1.8.0",
+    "@progress/kendo-svg-icons": "1.9.0",
     "@progress/kendo-theme-bootstrap": "6.7.0",
     "@progress/kendo-theme-classic": "6.7.0",
     "@progress/kendo-theme-default": "6.7.0",
