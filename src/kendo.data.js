@@ -502,7 +502,7 @@ var __meta__ = {
         value = value || {};
 
         if (!isPrimitiveType(value)) {
-            protoKeys = Object.getOwnPropertyNames(Object.getPrototypeOf(value));
+            protoKeys = Object.getOwnPropertyNames(Object.getPrototypeOf(value)).filter(f => f.indexOf("__") !== 0);
         }
 
         keys = Object.getOwnPropertyNames(value).concat(protoKeys);
