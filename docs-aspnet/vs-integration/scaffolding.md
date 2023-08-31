@@ -9,7 +9,12 @@ position: 15
 
 # Scaffolding for {{ site.product }}
 
+{% if site.core %}
 Since the 2022 R2 SP2 release, {{ site.product }} provides new way of generating Scaffolding templates as a convenient productivity feature. 
+{% else %}
+Since the R2 2023 release, {{ site.product }} provides new way of generating Scaffolding templates as a convenient productivity feature. 
+{% endif %}
+
 
 {% if site.core %}
 ![{{ site.product_short }} Adding a new scaffolded item with the Telerik UI Scaffolder for Core](../images/scaffolding/core-scaffolder-add-new-item.png)
@@ -17,13 +22,13 @@ Since the 2022 R2 SP2 release, {{ site.product }} provides new way of generating
 ![{{ site.product_short }} Adding a new scaffolded item with the Telerik UI Scaffolder for MVC](../images/scaffolding/mvc-scaffolder-add-new-item.png)
 {% endif %}
 
-The new Scaffolder items in Visual Studio allow quick code generation and mocking of data for some of the most used data-bound components, such as the {{ site.framework }} Data Grid, TreeList, Scheduler, ListView, Gantt, Chart, Form and Editor.
+The new Scaffolder items in Visual Studio allow quick code generation and mocking of data for some of the most used data-bound components, such as the {{ site.framework }} [Data Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}), [TreeList]({% slug htmlhelpers_treelist_aspnetcore%}), [Scheduler]({% slug htmlhelpers_scheduler_aspnetcore%}), [ListView]({% slug htmlhelpers_listview_aspnetcore%}), [Gantt]({% slug htmlhelpers_gantt_aspnetcore%}), [Chart]({% slug htmlhelpers_charts_aspnetcore%}), [Form]({% slug htmlhelpers_form_aspnetcore_overview%}) and [Editor]({% slug htmlhelpers_editor_aspnetcore%}).
 
 ## Installation
 
-The Telerik UI Scaffolder supports both Visual Studio 2019 and 2022. The nice thing is that this feature comes built-in with the 2022 R2 SP2+ versions and no additional files or installments are required. This is possible due to the upgraded and modernized implementation by our VSX Team.
+The Telerik UI Scaffolder comes with the installer of the Telerik UI for {{ site.framework }} components version {% if site.core %} 2022 R2 SP2 {% else %} 2023 R2 {% endif %} and later. No additional installation files are required.
 
-All you need to do is to install a recent version of the {{ site.product }} .msi installer and the Telerik Extensions for Visual Studio will be installed automatically together with the Scaffolding items.
+To get the Scaffolding templates, download and install the latest version of the {{ site.product }} `.msi` installer and the Telerik Extensions for Visual Studio will be installed automatically together with the Scaffolding items.
 
 {% if site.core %}
 Alternatively, you can install the Extensions individually from the [VS MarketPlace](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions).
@@ -35,9 +40,18 @@ Alternatively, you can install the Extensions individually from the [VS MarketPl
 
 The {{ site.framework }} and VS already provide their own default Scaffolding items, but they shouldn't be confused with the new Telerik UI Scaffolding items.
 
-The Telerik templates are opened in a separate custom Window which can be accessed by right-clicking the project in Solution Explorer and choosing the Telerik UI for ASP.NET submenu containing the Add New Scaffolded Item option.
+To access the Telerik UI Scaffolding templates:
 
+1. Right-click the project in the VS **Solution Explorer**.
+1. Select the **Telerik UI for {{ site.framework }}** submenu.
+1. Select the **Add New Scaffolded Item** option.
+
+{% if site.core %}
 ![{{ site.product_short }} Using the Telerik UI Scaffolder for Core](../images/scaffolding/core-scaffolder.gif)
+{% else %}
+![{{ site.product_short }} Using the Telerik UI Scaffolder for MVC](../images/scaffolding/mvc-scaffolder.gif)
+{% endif %}
+
 
 Then, you are presented with several popular components you can choose from. You can also set the name of the new View and Controller files, as well as, a selection of other properties for different tools like the Grid and TreeList.
 

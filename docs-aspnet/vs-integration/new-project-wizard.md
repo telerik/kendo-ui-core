@@ -49,7 +49,6 @@ To start the wizard, use either of the following approaches:
 With the **Create New Project Wizard** you can select the desired:
 
 * Target framework
-* .NET Core version
 * Tag or HTML Helpers
 * Telerik UI Version
 * Project Template
@@ -62,12 +61,6 @@ The **Create New Project Wizard** allows you to select a target **Framework**.
 >Note
 > 
 >If the target **Framework** dropdown is disabled check the troubleshooting [section]({% slug troubleshooting_visualstudio_aspnetcore%}#the-target-framework-dropdown-is-disabled).
-
-![{{ site.product_short }} Selecting a target framework](../vs-integration/images/target-dropdown.png)
-
-### .NET Core version
-
-Click on the desired **{{ site.framework }}** version.
 
 ![{{ site.product_short }} The ASP.NET version options](../vs-integration/images/core-version.png)
 
