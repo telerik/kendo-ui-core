@@ -23,10 +23,14 @@ The following example demonstrates how to add a custom tool to the toolbar.
         $("#taskBoard").kendoTaskBoard({
             toolbar: {
                 items: [
-                    { type: "button", text: "Add Card", name: "addCard", text: "Add New Card", command: "CustomAddCardCommand", icon: "plus", showText: true },
+                    { name: "addColumn", icon: "plus-circle" }, //customize a built-in command
+                    { type: "button", text: "Add Card", name: "addCard", text: "Add New Card", command: "CustomAddCardCommand", icon: "plus", showText: true }, // define a custom command
                     "spacer",
                     "search"
                 ]
+            },
+            messages: {
+                addColumn: "New Column" // customize the text of a built-in command
             },
             dataOrderField: "order",
             dataSource: [

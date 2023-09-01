@@ -3,7 +3,7 @@ title: Using Client Templates
 page_title: Using Client Templates
 description: "Learn how to use client templates within the Telerik UI for {{ site.framework }} components."
 slug: client_templates_overview
-position: 2
+position: 4
 ---
 
 # Using Client Templates

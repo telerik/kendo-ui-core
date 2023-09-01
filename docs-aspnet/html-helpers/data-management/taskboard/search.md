@@ -21,11 +21,12 @@ The following example demonstrates how to show the default tools along with a cu
         .Name("taskBoard")
         .Toolbar(t => t.Items(items =>
         {
-            items.Add().Type("button").Command("AddColumnCommand").Name("addColumn").Text("Add Column").Icon("plus");
             items.Add().Type("button").Text("myCustomButton");
             items.Add().Type("spacer");
-            items.Add().Type("TaskBoardSearch").Command("SearchCommand").Name("search").Text("Search").Icon("search");
+            items.Add().Name("search").Icon("eye"); // add the Search tool and customize the icon
         }))
+        .Messages(messages => messages
+            .Search("Find Tasks")) //customize the Search tool placeholder
         .Columns(c =>
         {
             c.Add().Text("To-do").Status("todo");
@@ -57,9 +58,10 @@ The following example demonstrates how to show the default tools along with a cu
                 <item type="button" command="AddColumnCommand" name="addColumn" text="Add Column" icon="plus"></item>
                 <item type="button" text="myCustomButton"></item>
                 <item type="spacer"></item>
-                <item type="TaskBoardSearch" command="SearchCommand" name="search" text="Search" icon="search"></item>
+                <item name="search" icon="eye"></item>
             </items>
         </toolbar>
+        <messages search="Find Task"></messages>
         <taskboard-columns>
             <column text="To-do" status="todo"></column>
             <column text="In progress" status="inProgress"></column>

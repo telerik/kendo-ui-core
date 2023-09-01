@@ -43,11 +43,11 @@ To resolve the issue and prevent the components from being dependent on the `uns
 
 {% if site.core %}
 
-The `DeferredScriptFile` method simulates loading the initialization scripts as a `JS` file through `middleware` to ensure strict CSP compliance. You can either use the [global deferred initialization functionality]({% slug fundamentals_core%}#deferring-components-globally) to configure all Telerik UI for ASP.NET Core components as deferred globally or [defer each component separately]({% slug fundamentals_core%}#deferring-specific-components) by using the `Deferred` method.
+The `DeferredScriptFile` method simulates loading the initialization scripts as a `JS` file through `middleware` to ensure strict CSP compliance. You can either use the [global deferred initialization functionality]({% slug deferred_initialization_overview%}#deferring-components-globally) to configure all Telerik UI for ASP.NET Core components as deferred globally or [defer each component separately]({% slug deferred_initialization_overview%}#deferring-specific-components) by using the `Deferred` method.
 
 {% else %}
 
-The `DeferredScriptFile` method simulates loading the initialization scripts as a `JS` file through a `HttpModule` to ensure strict CSP compliance. You can either use the [global deferred initialization functionality]({% slug fundamentals_aspnetmvc%}#deferring-components-globally) to configure all Telerik UI for ASP.NET MVC components as deferred globally or [defer each component separately]({% slug fundamentals_aspnetmvc%}#deferring-specific-components) by using the `Deferred` method.
+The `DeferredScriptFile` method simulates loading the initialization scripts as a `JS` file through a `HttpModule` to ensure strict CSP compliance. You can either use the [global deferred initialization functionality]({% slug deferred_initialization_overview%}#deferring-components-globally) to configure all Telerik UI for ASP.NET MVC components as deferred globally or [defer each component separately]({% slug deferred_initialization_overview%}#deferring-specific-components) by using the `Deferred` method.
 
 {% endif %}
 
@@ -179,15 +179,7 @@ The engine for the Kendo UI [inline](https://docs.telerik.com/kendo-ui/framework
 
 The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does not support the strict CSP mode. Thus, in these previous versions, if the Content Security Policy (CSP) is enabled, you can set the [`script-src` policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) as follows:
 
-{% if site.core %}
-
-1. [Defer the individual components]({% slug fundamentals_core%}#deferring-specific-components):
-
-{% else %}
-
-1. [Defer the individual components]({% slug fundamentals_aspnetmvc%}#deferring-specific-components):
-
-{% endif %}
+1. [Defer the individual components]({% slug deferred_initialization_overview%}#deferring-specific-components):
 
     ```HtmlHelper
         @(Html.Kendo().PanelBar()
