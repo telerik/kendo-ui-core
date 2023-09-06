@@ -2889,15 +2889,10 @@ function pad(number, digits, end) {
 
         exprToArray: (expression, safe) => {
             expression = expression || "";
-            const FIELD_REGEX = /\[(?:(\d+)|['"](.*?)['"])\]|((?:(?!\[.*?\]|\.).)+)/g;
-            const fields = [];
 
-            expression.replace(FIELD_REGEX, (_, index, indexAccessor, field) => {
-                fields.push(kendo.isPresent(index) ? index : (indexAccessor || field));
-                return undefined;
-            });
-
-            return fields;
+            return expression.indexOf(".") >= 0 || expression.indexOf("[") >= 0 ?
+                expression.split(/[[\].]/).map(v => v.replace(/["']/g, '')).filter(v => v) :
+                expression === "" ? [] : [expression];
         },
 
         getter: function(expression, safe) {

@@ -1,80 +1,35 @@
 ---
 title: Overview
 page_title: jQuery PivotGrid Documentation - PivotGrid Overview
-description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to create and configure the component."
+description: "Try now the Kendo UI for jQuery PivotGrid component that is great for data analysis with OLAP & KPIs support."
 slug: overview_kendoui_pivotgrid_widget
-position: 1
+position: 0
 ---
 
 # {{ site.product }} PivotGrid Overview
 
 The Kendo UI PivotGrid represents multidimensional data in a cross-tabular format.
 
-* [Demo page for the PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index)
-
 > The new PivotGridV2 is now available. It offers a brand new design and a new future-proof architecture that allows the implementation of many upcoming functionalities. As PivotGridV2 aims to replace the legacy PivotGrid, it is recommended to use the PivotGridV2 in your new projects. For information about the differences between the PivotGrid and PivotGridV2, refer to the [Comparison]({% slug comparison_kendoui_pivotgridv2 %}) article.
 
-## Basic Configuration
-
-1. Start with the initialization of the PivotGrid component. Create the component by defining an HTML <div> element.
-
-		<!-- Define	 the HTML div that will hold the PivotGrid -->
-		<div id="pivotgrid">
-		</div>
-
-2. Configure PivotGrid to work with the Adventure Works cube that is hosted on https://demos.telerik.com.
-
-        <script>
-        	$(document).ready(function () {
-            	$("#pivotgrid").kendoPivotGrid({
-					height: 200, // Define the height of the component.
-					dataSource: {
-						type: "xmla", // Define the type.
-						columns: [{ name: "[Date].[Calendar]" }], // Specify a dimension on columns.
-						rows: [{ name: "[Product].[Category]" }], // Specify a dimension on rows.
-						measures: ["[Measures].[Internet Sales Amount]"], // Specify a measure to display.
-						transport: {
-                            connection: {
-                                catalog: "Adventure Works DW 2008R2", // Specify the name of the catalog.
-                                cube: "Adventure Works" // Specify the name of the cube.
-                            },
-                            read: {
-                                url: "https://demos.telerik.com/olap/msmdpump.dll", // Define the URL of the service.
-                                dataType: "text",
-                                contentType: "text/xml",
-                                type: "POST"
-                            }
-                        },
-						schema: {
-                            type: "xmla" // Specify the type of the schema.
-                        },
-					}
-				});
-        	});
-    	</script>
-
-The previous example outputs the following result.
-
-![Kendo UI for jQuery PivotGrid Overview](../../../images/pivotgrid-overview.png)
+![Kendo UI for jQuery PivotGrid Overview](images/pivotgrid_overview.png)
 
 ## Functionality and Features
 
-* [Data binding]({% slug databinding_kendoui_pivotgrid %})
-* [Comparison with the PivotGridV2]({% slug comparison_kendoui_pivotgridv2 %})
-* [Filtering]({% slug filtering_kendoui_pivotgrid %})
-* [Sorting]({% slug sorting_kendoui_pivotgrid %})
-* [Excel export]({% slug excelexport_functionality_pivotgrid %})
-* [PDF export]({% slug exporting_functionality_pivotgridwidget %})
+* [Data Binding]({% slug databinding_kendoui_pivotgrid %})&mdash;The Kendo UI PivotGrid supports data binding to an HTTP accessible Online Analytical Processing (OLAP) cube and to flat data.
+* [Filtering]({% slug filtering_kendoui_pivotgrid %})&mdash;The PivotGrid supports filtering both in the OLAP and flat data-binding scenarios.
+* [Sorting]({% slug sorting_kendoui_pivotgrid %})&mdash;The PivotGrid supports sorting both in the OLAP and flat data-binding scenarios.
+* [Excel Export]({% slug excelexport_functionality_pivotgrid %})&mdash;The PivotGrid enables you to export its content to Excel.
+* [PDF Export]({% slug exporting_functionality_pivotgridwidget %})&mdash;The PivotGrid provides a built-in PDF export functionality.
 
-## Referencing Existing Instances
+## Next Steps 
 
-To reference an existing PivotGrid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotGrid API](/api/web/pivotgrid) to control its behavior.
-
-The following example demonstrates how to access an existing PivotGrid instance.
-
-    var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+* [Getting Started with the Kendo UI PivotGrid for jQuery]({% slug getting_started_kendoui_pivotgrid_widget %})
+* [Demo Page for the PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 
 ## See Also
 
-* [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Demo Page for the jQuery PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [Knowledge Base Section](/knowledge-base)
