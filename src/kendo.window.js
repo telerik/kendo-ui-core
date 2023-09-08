@@ -320,6 +320,10 @@ import "./kendo.html.button.js";
                         return wrapper.data("isFront");
                     };
                 }
+
+                if (that._showWatermarkOverlay) {
+                    that._showWatermarkOverlay(that.wrapper[0]);
+                }
             },
 
             _buttonEnter: function(e) {

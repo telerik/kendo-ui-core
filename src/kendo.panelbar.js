@@ -213,7 +213,7 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.wrapper = that.element.addClass("k-panelbar");
+            element = that.wrapper = that.element.addClass("k-panelbar k-pos-relative");
             options = that.options;
 
             if (element[0].id) {
@@ -260,6 +260,10 @@ var __meta__ = {
             }
 
             kendo.notify(that);
+
+            if (that._showWatermarkOverlay) {
+                that._showWatermarkOverlay(that.wrapper[0]);
+            }
         },
 
         events: [

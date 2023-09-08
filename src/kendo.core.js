@@ -13,7 +13,7 @@ var packageMetadata = {
     productCodes: ['KENDOUICOMPLETE', 'KENDOUI', 'KENDOUI', 'KENDOUICOMPLETE'],
     publishDate: 0,
     version: '$KENDO_VERSION'.replace(/^\s+|\s+$/g, ''),
-    licensingDocsUrl: 'https://docs.telerik.com/kendo-ui/intro/installation/using-license-code'
+    licensingDocsUrl: 'https://docs.telerik.com/kendo-ui/intro/installation/using-license-code?utm_medium=product&utm_source=kendojquery&utm_campaign=kendo-ui-jquery-purchase-license-keys-warning'
 };
 
 
@@ -3002,7 +3002,9 @@ function pad(number, digits, end) {
         init: function(element, options) {
             var that = this;
 
-            validatePackage();
+            if (!validatePackage()) {
+                that._showWatermarkOverlay = addWatermarkOverlay;
+            }
 
             that.element = kendo.jQuery(element).handler(that);
 
@@ -5489,14 +5491,19 @@ function pad(number, digits, end) {
         };
     }());
 
-    var KendoLicensing = { validatePackage: function() {},setScriptKey: function() {} };
+    var KendoLicensing = { validatePackage: function() { return true; },setScriptKey: function() {} };
 
     window.KendoLicensing = {
         setScriptKey: KendoLicensing.setScriptKey
     };
 
     function validatePackage() {
-        KendoLicensing.validatePackage(packageMetadata);
+        return KendoLicensing.validatePackage(packageMetadata);
+    }
+
+    function addWatermarkOverlay(el) {
+        KendoLicensing.addWatermarkOverlay && KendoLicensing.addWatermarkOverlay(el, packageMetadata);
+        KendoLicensing.showBanner && KendoLicensing.showBanner(packageMetadata);
     }
 
 })(jQuery, window);

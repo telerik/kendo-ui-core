@@ -128,6 +128,28 @@ require("./kendo-ui-license.js");
 
 // The rest of the code.
 ```
+## Invalid License
+
+An invalid license can be caused by any of the following:
+
+* Using an invalid or expired commercial license.
+* Using an expired trial license.
+* Not installing your Kendo UI for jQuery license key.
+
+If you use Kendo UI for jQuery in your project with an expired or missing license, the following behavior will occur:
+
+1. A watermark will appear over specific components:
+    * Example of a watermark in the `Light Theme`:
+    ![Watermark over Grid with Light Theme](../installation/images/watermark-light-theme.PNG)     
+    * Example of a watermark in the `Dark Theme`:
+    ![Watermark over Grid with Dark Theme](../installation/images/watermark-dark-theme.PNG)
+1. A banner will appear on pages that use unlicensed Kendo UI for jQuery components.
+    ![Banner](../installation/images/banner.png)
+    * Clicking the ? button of the banner will take you to the Kendo UI for jQuery licensing documentation.
+    * Clicking the X button of the banner will close the banner until the page is reloaded or a license is activated.
+
+1. A warning message similar to the one below will be logged in the browser's console.
+![Invalid License Warning](../installation/images/license-warning.png)
 
 ## Frequently Asked Questions
 

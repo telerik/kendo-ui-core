@@ -83,6 +83,9 @@ import "./kendo.icons.js";
                 Widget.fn.init.call(that, element, options);
                 that._init(that.element, that.options);
                 kendo.notify(that);
+                if (that._showWatermarkOverlay) {
+                    that._showWatermarkOverlay(that.wrapper[0]);
+                }
             },
 
             _init: function(element, options) {

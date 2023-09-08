@@ -209,6 +209,10 @@ var __meta__ = {
             that._initialActivate();
             that.value(value);
             kendo.notify(that);
+
+            if (that._showWatermarkOverlay) {
+                that._showWatermarkOverlay(that.element[0]);
+            }
         },
 
         events: [
