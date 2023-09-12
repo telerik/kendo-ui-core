@@ -1,14 +1,14 @@
 ---
-title: Charts
+title: Accessibility
 page_title: Charts - Kendo UI Accessibility Support
 description: "Learn more tips and tricks how to make Kendo UI Charts accessible."
 slug: charts_accessibility_support
-position: 8
+position: 6
 ---
 
-# Charts
+# Charts Accessibility
 
-This article provides practical tips, code samples, and illustrative videos for making disabled users interact more easily with Kendo UI charts and graphs.
+This article provides practical tips, code samples, and illustrative videos for making disabled users interact with Kendo UI charts and graphs.
 
 ## Accessibility Standards
 
@@ -252,7 +252,7 @@ If you do not want to display the raw data with the Chart for all users on-scree
 * [HTML5 Accessibility: SVG Text (Paciello Group Blog Post)](https://developer.paciellogroup.com/blog/2011/08/html5-accessibility-chops-interactive-image-example/)
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.1 Compliance of Kendo UI Widgets]({% slug section508_wcag21_accessibility_support %})
+* [Section 508 and WCAG 2.1 Compliance of Kendo UI Components]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})

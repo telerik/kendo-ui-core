@@ -1,27 +1,33 @@
 ---
 title: Overview
 page_title: Overview - Kendo UI Accessibility Support
-description: "Learn about the general requirements web applications have to meet to be accessible and the Accessibility support Kendo UI controls provide."
+description: "Learn about the general requirements web applications have to meet to be accessible and the Accessibility support Kendo UI components provide."
 slug: overview_accessibility_support_kendoui
 position: 1
 ---
 
 # {{ site.product }} Accessibility Overview
 
-Refer to our [accessibility demos](https://demos.telerik.com/kendo-ui/accessibility), where accessibility level and compliance of the Kendo UI components can be tested.
+Websites and applications are accessible when they provide full control over their features through assistive technologies or keyboard navigation and thus enable users with disabilities to access their content.
 
-In terms of web components, accessibility means that the websites and applications provide full control over their features by enabling users with disabilities to access them through assistive technologies such as screen readers.
+>tip For more information about accessibility, see the [Telerik and Kendo UI Design System documentation](https://www.telerik.com/design-system/docs/foundation/accessibility/global-accessibility/).
 
-Assistive technologies work well for the most basic and text-driven websites and applications. However, the Web is dynamically changing and is now well beyond the realm of text-based experiences. As a result, assistive technologies struggle to keep up.
+Kendo UI for jQuery enables accessibility by considering the following aspects:
 
-Web developers can do a lot to bridge this gap between the current challenges which web applications pose to disabled users and the capabilities which assistive technologies support. By providing features, such as full keyboard support, high-contrast visual elements, and text-based equivalents of non-text elements, and by adhering to standards like [WAI-ARIA](https://www.w3.org/WAI/PF/aria-practices/), [WCAG 2.1](https://www.w3.org/TR/WCAG21/), and [Section 508](https://www.section508.gov), developers deliver completely accessible and rich Internet applications.
+* [Web Content Accessibility Guidelines (WCAG)]({% slug section508_wcag21_accessibility_support %})
+* [Section 508]({% slug section508_accessibility_support %})
+* [WAI-ARIA]({% slug wai_aria_accessibility_support %})
+* [Keyboard Navigation]({% slug keyboard_shortcuts_accessibility_support %})
+* [Themes & Swatches]({% slug high_contrast_theme_accessibility_support %})
 
-The Kendo UI for jQuery components are highly extensible and customizable. Depending on the level of customization applied, you may be introducing rendering that is not accessible. Therefore, it is recommended that web developers test any modifications and templates they create to ensure the components still meet the desired level of accessibility standards. Additionally, be mindful of components working with custom input (images, text, HTML content, and so on) and make sure your content is accessible, too.
+The Kendo UI for jQuery components are extensible and customizable. Depending on the level of customization applied, however, you can introduce rendering that is not accessible. Thus, we recommended web developers test any modifications and templates they create to ensure the components meet the desired level of accessibility standards. 
+
+Refer to the Kendo UI for jQuery [accessibility demos](https://demos.telerik.com/kendo-ui/accessibility), where you can test the accessibility level and compliance of the UI components.
 
 ## See Also
 
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.1 Compliance of Kendo UI Widgets]({% slug section508_wcag21_accessibility_support %})
+* [Section 508 and WCAG 2.1 Compliance of Kendo UI Components]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})

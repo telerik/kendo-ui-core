@@ -6116,7 +6116,7 @@ Tootlip
 arccosine
 arccotangent
 cosecant
- - ./accessibility/five-tips-for-accessible-charts-with-dataviz.md
+ - ./controls/charts/five-tips-for-accessible-charts-with-dataviz.md
 jsbin.com
 odowud
 000px
@@ -6136,7 +6136,7 @@ v3
 v2.0
  - ./README.md
 md
- - accessibility/five-tips-for-accessible-charts-with-dataviz.md
+ - controls/charts/five-tips-for-accessible-charts-with-dataviz.md
 jsbin.com
 odowud
 000px
