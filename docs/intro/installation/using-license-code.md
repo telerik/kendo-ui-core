@@ -12,11 +12,11 @@ This article describes how to activate the Kendo UI for jQuery scripts from the 
 
 Kendo UI for jQuery is a UI library distributed under a commercial license.
 
-As of the R2 2022 release, using any of the Kendo UI for jQuery components from the NPM distribution channel and as of R3 2022 from the CDN distribution requires a license registration. Depending on the license type you own, you can register an active trial license or a commercial license key.
+As of the R2 2022 release, using any of the Kendo UI for jQuery components from the NPM distribution channel and as of R3 2022 from the CDN distribution requires a license registration. Additionally, as of the R3 2023 release, you also need a license registration for the downloaded trial bundle and the `KendoUIProfessional.Trial` package. Depending on the license type you own, you can register an active trial license or a commercial license key.
 
 If you are experiencing any issues related to the license key, inform the team through the [available support channels]({% slug welcometo_kendoui %}#support-options).
 
->* The script license registration is required only for the commercial NPM package (`@progress/kendo-ui`) and the CDN distribution. The other Kendo UI for jQuery commercial distributions or script sources require only an active license. This means that you don't need license registration when using NuGet, Bower, and for locally downloaded Kendo UI bundles. 
+>* The script license registration is required only for the commercial NPM package (`@progress/kendo-ui`), the CDN distribution and downloaded trial bundles. The other Kendo UI for jQuery commercial distributions or script sources require only an active license. This means that you don't need license registration when using NuGet (except the `KendoUIProfessional.Trial` package), Bower, for locally downloaded Kendo UI bundles (except the trial bundle). 
 >* The license key will be distributed along with the scripts which cannot not be avoided. However, Progress recommends that you do not publicly announce it.
 
 The license key installation process involves the following steps:
@@ -168,6 +168,8 @@ This doesn’t affect your licensing key. The license key is generated against a
 * For CDN usage, version R3 2022 and later.
 
 * For NPM usage, version R2 2022 and later.
+
+* For trial bundle and the `KendoUIProfessional.Trial` NuGet package, version R3 2023 and later.
 
 ### Will projects stop working if I don't renew?
 
