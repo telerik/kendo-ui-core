@@ -3,7 +3,7 @@ title: Overview
 page_title: jQuery MultiViewCalendar Documentation - MultiViewCalendar Overview
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and learn how to initialize the component and use its events."
 slug: overview_kendoui_multiviewcalendar_widget
-position: 1
+position: 0
 ---
 
 # {{ site.product }} MultiViewCalendar Overview
@@ -12,51 +12,23 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 
 It supports the selection and navigation between dates as well as data templates and ranges for scheduling appointments.
 
-* [Demo page for the MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
-
-## Initializing the MultiViewCalendar
-
-To initialize the MultiViewCalendar, use a jQuery selector.
-
-```dojo
-    <div id="multiViewCalendar"></div>
-    <script>
-        $("#multiViewCalendar").kendoMultiViewCalendar();
-    </script>
-```
+![Kendo UI for jQuery MultiViewCalendar Overview](multiviewcalendar-overview.png)
 
 ## Functionality and Features
 
-* [Active view]({% slug active_view_multiviewcalendar %})
-* [Multiple views]({% slug multiple_views_multiviewcalendar %})
-* [Selection]({% slug selection_multiviewcalendar %})
-* [Day template]({% slug day_template_multiviewcalendar %})
-* [Disabled dates]({% slug disabled_dates_multiviewcalendar %})
-* [Week column]({% slug week_column_multiviewcalendar %})
-* [Accessibility]({% slug accessibility_muliviewcalendar %})
+* [Active View]({% slug active_view_multiviewcalendar %})&mdash;You can specify the active view in the component.
+* [Multiple Views]({% slug multiple_views_multiviewcalendar %})&mdash;The component allows you to display several months at a time.
+* [Selection]({% slug selection_multiviewcalendar %})&mdash;The MultiViewCalendar allows you to choose between various modes for selecting dates.
+* [Day Template]({% slug day_template_multiviewcalendar %})&mdash;You can use a template to customize layout of the cells representing the days in the view.
+* [Disabled Dates]({% slug disabled_dates_multiviewcalendar %})&mdash;The MultiViewCalendar allows you to disable dates so that they cannot be selected by the user.
+* [Week Column]({% slug week_column_multiviewcalendar %})&mdash;The component allows you to display a column indicating the number of the week.
+* [Accessibility]({% slug accessibility_muliviewcalendar %})&mdash;The MultiViewCalendar is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
-## Events
+## Next Steps
 
-The following example demonstrates basic MultiViewCalendar events.
-
-```dojo
-    <div id="multiViewCalendar"></div>
-    <script>
-        $("#multiViewCalendar").kendoMultiViewCalendar({
-            change: function() {
-                var value = this.value();
-                console.log(value); // The value is the selected date in the MultiViewCalendar.
-            },
-            navigate: function() {
-                var view = this.view();
-                console.log(view.name); // The name of the current view.
-
-                var current = this.current();
-                console.log(current); // The currently focused date.
-            }
-        });
-    </script>
-```
+* [Getting Started with the Kendo UI MultiViewCalendar for jQuery]({% slug getting_started_kendoui_multiviewcalendar_component %})
+* [Basic Usage of the jQuery MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
+* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
 
 ## See Also
 

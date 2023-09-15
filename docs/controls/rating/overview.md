@@ -3,41 +3,29 @@ title: Overview
 page_title: jQuery Rating Documentation - Rating Overview
 description: "Get started with the jQuery Rating by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_rating_widget
-position: 1
+position: 0
 ---
 
 # {{ site.product }} Rating Overview
 
 The Rating allows to intuitively rate by selecting number of items stars from a predefined maximum number of items.
 
-* [Demo page for the Rating](https://demos.telerik.com/kendo-ui/rating/index) 
-
-## Initializing the Rating
-
-To initialize the Rating, use the `<input />` tag.
-
-The number of starts that the widget will render depends on the `min` and `max` options. Alternatively, this can also be configured by adding `min` and `max` attributes to the `<input />` element of the Rating. If the `min` and `max` are not set, the widget will render with the default values from 1 to 5.
-
-The following example demonstrates how to initialize the Rating from an existing `<input />` element with defined data items.
-
-```dojo
-    <input id="rating" name="rating" />
-
-    <script>
-        $(document).ready(function(){
-            $("#rating").kendoRating();
-        });
-    </script>
-```
+![Kendo UI for jQuery Rating Overview](rating-overview.png)
 
 ## Functionality and Features
 
-* [Selection]({% slug selection_rating_widget %})
-* [Precision]({% slug precision_rating_widget %})
-* [Label]({% slug label_rating_widget %})
-* [Tooltip]({% slug tooltip_rating_widget %})
-* [Templates]({% slug templates_rating_widget %})
-* [Accessibility]({% slug accessibility_kendoui_rating_widget %})
+* [Selection]({% slug selection_rating_widget %})&mdash;The Rating supports two types of selection.
+* [Precision]({% slug precision_rating_widget %})&mdash;The Rating allows you to determine the value precision.
+* [Label]({% slug label_rating_widget %})&mdash;The component allows you to customize the label.
+* [Tooltip]({% slug tooltip_rating_widget %})&mdash;The Rating provides a tooltip when you hover over an item.
+* [Templates]({% slug templates_rating_widget %})&mdash;The Rating provides various templates to customize the item appearance.
+* [Accessibility]({% slug accessibility_kendoui_rating_widget %})&mdash;The Rating is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+
+## Next Steps 
+
+* [Getting Started with the Kendo UI Rating for jQuery]({% slug getting_started_kendoui_rating_widget %})
+* [Demo Page for the Rating](https://demos.telerik.com/kendo-ui/rating/index)
+* [JavaScript API Reference of the Rating](/api/javascript/ui/rating)
 
 ## See Also
 

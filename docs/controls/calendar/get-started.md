@@ -31,7 +31,7 @@ After the completion of this guide, you will achieve the following end result:
     </script>
 ```
 
-## 1. Create an Empty div Element
+## 1. Create an Empty Div Element
 
 First, create an empty `div` element from which the component will be initialized.
 
@@ -43,37 +43,47 @@ First, create an empty `div` element from which the component will be initialize
 
 In this step, you'll initialize the Calendar component from the empty `<div>` element.
 
-```javascript
-      $("#calendar").kendoCalendar({
-      });
+```html
+    <div id="calendar"></div>
+    <script>
+      $("#calendar").kendoCalendar();
+    </script>
 ```
 
 ## 3. Enable Selection
 
 You can enable the selection functionality by setting the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) property of the Calendar to `true`.
 
-```javascript
+```html
+    <div id="calendar"></div>
+    <script>
       $("#calendar").kendoCalendar({
         selectable: true
       });
+    </script>
 ```
 
 ## 4. Enable Week Numbers
 
 You can enable the week column by setting the [`weekNumber`](/api/javascript/ui/calendar/configuration/weeknumber) property of the Calendar to `true`.
 
-```javascript
+```html
+    <div id="calendar"></div>
+    <script>
       $("#calendar").kendoCalendar({
         selectable: true,
         weekNumber: true
       });
+    </script>
 ```
 
 ## 5. Configure the Month Template
 
 You can change the appearance of the dates by using the [`month`](/api/javascript/ui/calendar/configuration/month) configuration.
 
-```javascript
+```html
+    <div id="calendar"></div>
+    <script>
       $("#calendar").kendoCalendar({
         selectable: true,
         weekNumber: true,
@@ -86,6 +96,7 @@ You can change the appearance of the dates by using the [`month`](/api/javascrip
           }
         }
       });
+    </script>
 ```
 
 ## Next Steps
