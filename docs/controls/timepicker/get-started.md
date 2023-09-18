@@ -17,7 +17,7 @@ After the completion of this guide, you will be able to achieve the following en
 
     <script>
       // create TimePicker from input HTML element
-      $("#datetimepicker").kendoTimePicker({
+      $("#timepicker").kendoTimePicker({
         value: new Date(2023, 0, 1, 10, 30),
         min: new Date(2023, 0, 1, 8, 0, 0), //date part is ignored
         min: new Date(2023, 0, 1, 22, 0, 0), //date part is ignored
