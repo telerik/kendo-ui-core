@@ -10,35 +10,16 @@ position: 1
 
 The ImageEditor utilizes a canvas element and enables image editing. It allows you to open, edit and save edited images.
 
-* [Demo page for the ImageEditor](https://demos.telerik.com/kendo-ui/imageeditor/index)
-
-## Initializing the ImageEditor
-
-To initialize the ImageEditor, use an existing `div` element and a jQuery selector.
-```dojo
-    <div id="imageEditor"></div>
-    <script>
-      $(document).ready(function(){
-          $("#imageEditor").kendoImageEditor();
-      });
-    </script>
-```
-
 ## Functionality and Features
 
-* [Tools]({% slug tools_kendoui_imageeditor_widget %})
+* [Tools]({% slug tools_kendoui_imageeditor_widget %})&mdash;The ImageEditor provides a predefined collection of tools that are used to interact with the component.
+* [Keyboard Navigation]({% slug keynav_kendoui_imageeditor_widget %})&mdash;The ImageEditor has keyboard navigation that is always available and requires no configuration.
 
-## Events
+## Next Steps
 
-For an example on the ImageEditor events, refer to the [demo on using the events of the ImageEditor](https://demos.telerik.com/kendo-ui/imageeditor/events).
-
-## Referencing Existing Instances
-
-You can access an existing ImageEditor instance by using the `.data()` jQuery method. After the reference is established, use the [JavaScript API reference of the ImageEditor](/api/javascript/ui/imageeditor) to control its behavior.
-
-```
-    var imageEditor = $("#imageEditor").data("kendoImageEditor");
-```
+* [Getting Started with the Kendo UI ImageEditor for jQuery]({% slug getting_started_kendoui_imageeditor_widget %})
+* [Basic Usage of the ImageEditor (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/index)
+* [Basic Events in the ImageEditor (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/events)
 
 ## See Also
 

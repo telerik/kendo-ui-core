@@ -3,7 +3,7 @@ title: Tools
 page_title: jQuery ImageEditor Documentation - Tools
 description: "Get started with the jQuery ImageEditor by Kendo UI and use its tools."
 slug: tools_kendoui_imageeditor_widget
-position: 2
+position: 3
 ---
 
 # Tools
