@@ -61,7 +61,7 @@ After the completion of this guide, you will be able to achieve the following en
     </script>
 ```
 
-## 1. Create an Empty div Element
+## 1. Create an Empty Div Element
 
 First, create an empty `<div>` element on the page that will serve as the main container of the Grid component.
 

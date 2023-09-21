@@ -544,7 +544,9 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "exportToExcelSelection": "Selection",
     "exportToExcelSelectionNoHeaders": "Selection (No Headers)",
     "sortAsc": "Sort Ascending",
-    "sortDesc": "Sort Descending"
+    "sortDesc": "Sort Descending",
+    "moveGroupPrevious": "Move previous",
+    "moveGroupNext": "Move next",
   },
   "editable": {
     "cancelDelete": "Cancel",

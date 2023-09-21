@@ -12,7 +12,7 @@ The Kendo UI for jQuery Calendar renders a graphical calendar that provides navi
 
 The component also supports custom templates for its Month view and configuration options for minimum and maximum dates, a start view, and the depth of the navigation. The first day of the week depends on the applied [culture]({% slug culture_definition_kendoui_globalization %}).
 
-![Kendo UI for jQuery Calendar Overview](images/calendar_overview.png)
+![Kendo UI for jQuery Calendar Overview](images/calendar-overview.png)
 
 ## Functionality and Features
 

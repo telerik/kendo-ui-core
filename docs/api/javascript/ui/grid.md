@@ -3845,6 +3845,70 @@ Specifies the icon of the item.
 ### contextMenu.body.command `String`
 Specifies the command of the item.
 
+### contextMenu.groups `Array`
+
+Configures the items of the ContextMenu for the group elements in the Grid header. Those are some valid predifined tools: "separator", "moveGroupPrevious", "moveGroupNext". 
+
+You can also specify a custom item and accosiate it with a command.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                groups: [
+                    "moveGroupPrevious",
+                    "moveGroupNext",
+                    { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                ]
+                // You can also concat to the default tools
+                // body: kendo.ui.grid.defaultGroupsContextMenu.concat([
+                //     { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                // ])
+            },
+            groupable: true,
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["CustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function() {
+                var that = this,
+                    grid = that.grid;
+
+                // e.g., clear groups
+                grid.dataSource.group([]);
+            }
+        });
+    </script>
+
+
+### contextMenu.groups.name `String`
+Specifies the name of the item.
+
+### contextMenu.groups.text `String`
+Specifies the text of the item.
+
+### contextMenu.groups.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.groups.command `String`
+Specifies the command of the item.
+
 ### contextMenu.head `Array`
 
 Configures the items of the ContextMenu for the table head element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc". 
