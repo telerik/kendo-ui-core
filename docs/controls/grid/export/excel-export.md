@@ -213,16 +213,16 @@ To send the generated file to a remote service, prevent the default file saving 
 
 ## Server-Side Processing
 
-To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
+To export large datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
 * For examples on exporting Excel files, refer to the [RadSpreadProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 * For more information on the Grid server-side processing, refer to [this article](https://docs.telerik.com/aspnet-mvc/helpers/grid/excel-export#use-server-side-processing).
 
 ## Exclude Column From Exporting
 
-In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+In some scenarios, you may want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
 
-It can also be set to an Object containing different values for Excel and PDF exporting modes, providing separate options for each:
+You can also set it to an Object containing different values for Excel and PDF exporting modes, providing separate options for each:
 
 ```javascript
 columns: [
@@ -241,7 +241,7 @@ columns: [
 * If you use Kendo UI Q2 2014 SP2 (2014.2.1008) or earlier, the export requires a custom implementation. To achieve that task, either:
     * Use a server-side implementation to directly export the data that is otherwise displayed by the Grid, or
     * Use a client-side implementation to export the table HTML markup or the dataSource items of the Grid.
-* The Grid does not use [column templates](/api/javascript/ui/grid/configuration/columns.template) during the Excel export&mdash;it exports only the data. The reason for this behavior is that a column template might contain arbitrary HTML which cannot be converted to Excel column values. For more information on how to use a column template that does not contain HTML, refer to [this column template example]({% slug howto_use_column_template_grid %}).
+* The Grid does not use [column templates](/api/javascript/ui/grid/configuration/columns.template) during the Excel export&mdash;it exports only the data. The reason for this behavior is that a column template may contain arbitrary HTML which cannot be converted to Excel column values. For more information on how to use a column template that does not contain HTML, refer to [this column template example]({% slug howto_use_column_template_grid %}).
 * The Grid does not export its [detail template](/api/javascript/ui/grid/configuration/detailtemplate) for the same reason as it does not export its column templates. If the detail template contains another Grid, follow [the example on the exporting a detail Grid]({% slug howto_exportto_excel_masterand_detail_grid %}).
 * The Grid does not use [column formats](/api/javascript/ui/grid/configuration/columns.format) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells.
 

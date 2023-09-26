@@ -37,7 +37,7 @@ component: grid
 
 ## Description
 
-I have a Grid with nested children which are shown in detail templates.
+I have a Grid with nested children which are displayed in detail templates.
 
 Does the Grid feature a built-in solution to add an **Expand All** and **Collapse All** button in the header row? How can I expand and collapse all detail templates with the click of a button?
 

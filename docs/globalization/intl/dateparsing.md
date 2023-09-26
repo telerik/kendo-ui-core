@@ -32,12 +32,12 @@ The [`kendo.parseDate(string, format, cultureName)`](/api/javascript/kendo/metho
     kendo.parseDate("2012.07.16", "yyyy/MM/dd", "de-DE");
   	kendo.parseDate("2012.07.16", ["MM/dd/yyyy", "yyyy/MM/dd"], "de-DE");
 
-> * The `kendo.parseDate()` parses strings by incrementally matching an increasing portion of the date string until it satisfies the current corresponding format part. This may lead to unexpected results when parsing ambiguous date strings with no delimiters. For example, the parsing of `222015` with a `dMyyyy` format fails, because `"22"` is matched as `d` and there is no suitable string part left for the month.
+> * The `kendo.parseDate()` parses strings by incrementally matching an increasing portion of the date string until it satisfies the current corresponding format part. This may lead to unexpected results when parsing ambiguous date strings with no delimiters. For example, the parsing of `222015` with a `dMyyyy` format fails, because `"22"` is matched as `d` and that leaves no suitable string part for the month.
 > * In addition, parsing is permissive and ignores invalid strings which occur after the year.
 
-## Parsing by Exactly Matching the Format
+## Parsing by Entirely Matching the Format
 
-The [`kendo.parseExactDate(string, formats)`](/api/javascript/kendo/methods/parseexactdate) method will parse a string as a date. If the string does not match the format exactly the method will return `null`.
+The [`kendo.parseExactDate(string, formats)`](/api/javascript/kendo/methods/parseexactdate) method will parse a string as a date. If the string does not match the format entirely the method will return `null`.
 
     kendo.parseExactDate("3/4/2013", "MM/dd/yyyy") // Outputs "Mon Mar 04 2013 00:00:00".
     kendo.parseExactDate("3/4/2013", "MM/dd/yy") // Outputs "null".

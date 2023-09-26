@@ -14,7 +14,7 @@ By default, paging in the Grid is disabled.
 
 To enable the paging functionality of the Grid, set its `pageable` option to `true`.
 
-In order for paging to work properly:
+For paging to work properly:
 * Define the number of records for the Grid to display on each page.
 * Define the total number of records in the dataset.
 * Specify the `pageSize` on the data source and the field in the dataset that will contain the total number of records.

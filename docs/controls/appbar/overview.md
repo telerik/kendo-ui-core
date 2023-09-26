@@ -11,7 +11,7 @@ CTAControlName: AppBar
 
 The AppBar component is used mainly for navigation. At the same time, it is template-driven, which makes it very flexible—it can render whatever you throw at it. To take full advantage of its functionality, you can include various [Content Items]({% slug items_kendoui_appbar_widget %}) in the AppBar component.
 
-![Kendo UI for jQuery AppBar Overview](appbar-overview.png)
+![Kendo UI for jQuery AppBar Overview](appbar-overview.PNG)
 
 ## Functionality and Features
 

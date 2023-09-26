@@ -966,7 +966,7 @@ The new configuration options.
     <script>
     $("#timepicker").kendoTimePicker({
         min: new Date(2001, 0, 1, 8, 0, 0),
-        max: new Date(2013, 0, 1, 18, 0 0)
+        max: new Date(2013, 0, 1, 18, 0, 0)
     });
 
     var timepicker = $("#timepicker").data("kendoTimePicker");

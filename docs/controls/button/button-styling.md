@@ -13,7 +13,7 @@ position: 3
 
 In this article, you will find information about the new rendering of the Kendo UI Button.
 
-For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
+For additional information about the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the Button](https://demos.telerik.com/kendo-ui/button/appearance).
 
@@ -37,7 +37,7 @@ The following values are available for the [`size`](/api/javascript/ui/button/co
 - `lg`—large size
 - `none`—unset
 
-The default size value is `medium` and it is applied to the button element through the `k-button-md` class.
+The default size value is `medium` and is applied to the button element through the `k-button-md` class.
 
 ```html
 <button class="k-button k-button-md" >
@@ -56,7 +56,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/butto
 - `link`
 - `none`
 
-The default fillMode value is `solid` and it is applied to the button element through the `k-button-solid` class.
+The default fillMode value is `solid` and is applied to the button element through the `k-button-solid` class.
 
 ```html
 <button class="k-button k-button-solid" >
@@ -100,7 +100,7 @@ The default `themeColor` value is `base`. A button with default `fillMode` and `
 
 ### Rounded
 
-The `rounded` option controls how much border radius is applied to the rendered `button`. The structure of the class is `k-rounded-{size}`.
+The `rounded` option controls the extent to which border radius is applied to the rendered `button`. The structure of the class is `k-rounded-{size}`.
 
 The following values are available for the [`rounded`](/api/javascript/ui/button/configuration/rounded) option:
 
@@ -111,7 +111,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/button
 - `pill`
 - `none`—unset
 
-The default rounded value is `medium` and it is applied to the button element through the `k-rounded-md` class.
+The default rounded value is `medium` and is applied to the button element through the `k-rounded-md` class.
 
 ```html
 <button class="k-button k-rounded-md" >
@@ -128,7 +128,7 @@ The old rendering of the component consisted of a `button` element with a single
 <button class='k-button'></button>
 ```
 
-Currently, styles are split in multiple class names. Each class is scoped to a single button appearance property:
+Currently, styles are divided in multiple class names. Each class is scoped to a single button appearance property:
 
 ```html
 <!-- NEW -->
@@ -138,7 +138,7 @@ Currently, styles are split in multiple class names. Each class is scoped to a s
 
 ### Primary Button
 
-The `k-primary` class is substituted with the appropriate `themeColor` class. For example, when `fillMode` is `solid`, that class is `k-button-solid-primary`
+The `k-primary` class is substituted with the corresponding `themeColor` class. For example, when `fillMode` is `solid`, that class is `k-button-solid-primary`
 
 ```html
  <!-- OLD -->
@@ -153,7 +153,7 @@ The `k-primary` class is substituted with the appropriate `themeColor` class. Fo
 
 ### Flat Button
 
-The `k-flat` class is substituted with the appropriate `fillMode` and `themeColor` classes. For example, when `themeColor` is `base` those are: `k-button-flat` and `k-button-flat-base`.
+The `k-flat` class is substituted with the corresponding `fillMode` and `themeColor` classes. For example, when `themeColor` is `base` those are: `k-button-flat` and `k-button-flat-base`.
 
 ```html
  <!-- OLD -->
@@ -235,7 +235,7 @@ To achieve the same look and feel as the old rendering, you must update the elem
 
 > When you use a LESS theme, the new styling and rendering supports only the [default options](#options).
 
-A reference to the button element can still be obtained through the `k-button` class.
+A reference to the button element can continue to be obtained through the `k-button` class.
 
 ```javascript
 $(".k-button") // Returns a reference to the button element in the old and the new rendering.

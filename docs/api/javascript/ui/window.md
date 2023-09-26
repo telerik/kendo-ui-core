@@ -392,7 +392,7 @@ Restricts the dragging of the window through the specified element which will be
 
 ### iframe `Boolean`
 
-Explicitly states whether a content `iframe` will be created. For more information, refer to the documentation on [using `iframes`](/web/window/overview#using-iframes).
+Explicitly states whether a content `iframe` will be created. For more information, refer to the documentation on [using `iframes`](/controls/window/content).
 
 #### Example - loading the full page
 

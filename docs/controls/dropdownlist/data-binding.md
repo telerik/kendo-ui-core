@@ -12,11 +12,11 @@ The DropDownList enables you to initialize it by using the `<input>` or the `<se
 
 For more information on initializing the DropDownList through the `<option>` tag of an existing `<select>` element, refer to the [DropDownList **Overview** article]({% slug overview_kendoui_dropdownlist_widget %}#initializing-the-dropdownlist).
 
-> When you configure the local or remote data source of the DropDownList, enabling the paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_ddl_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
+> When you configure the local or remote data source of the DropDownList, enabling the paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_ddl_widget %}). In all other cases, enabling paging and setting `pageSize` is regarded as incorrect configuration.
 
 ## Binding to Local Data
 
-To initialize the DropDownList by binding the widget to a local data array and then utilizing the `<input>` or the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+To initialize the DropDownList by binding the widget to a local data array and then utilizing the `<input>` or the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Local arrays are suitable for limited value options.
 
 ```dojo
    <input id="dropdownlist">
@@ -37,7 +37,7 @@ To initialize the DropDownList by binding the widget to a local data array and t
 
 ## Binding to Remote Data
 
-To initialize the DropDownList by binding the widget to remote data arrays and then utilizing the `<input>` or the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets so that items can be loaded on demand when they are displayed. You can use the Data Source for serving data from a variety of data services such as [XML](https://en.wikipedia.org/wiki/XML), [JSON](https://en.wikipedia.org/wiki/JSON), and [JSONP](https://en.wikipedia.org/wiki/JSONP). For a complete example, refer to the [demo on binding the DropDownList to remote data](https://demos.telerik.com/kendo-ui/dropdownlist/remotedatasource).
+To initialize the DropDownList by binding the widget to remote data arrays and then utilizing the `<input>` or the `<select>` element, use the [Kendo UI Data Source]({% slug overview_kendoui_datasourcecomponent %}). The Data Source component is an abstraction for local and remote data. Remote data binding is suitable for larger data sets so that items can be loaded on demand when they are displayed. You can use the Data Source for serving data from a variety of data services such as [XML](https://en.wikipedia.org/wiki/XML), [JSON](https://en.wikipedia.org/wiki/JSON), and [JSONP](https://en.wikipedia.org/wiki/JSONP). For a complete example, refer to the [demo on binding the DropDownList to remote data](https://demos.telerik.com/kendo-ui/dropdownlist/remotedatasource).
 
 ```dojo
     <input id="dropdownlist">

@@ -158,7 +158,7 @@ You can set custom rules with the Validator by using its [`rules` configuration 
 
 When you implement your custom validation rules, consider the following specifics:
 
-* Each custom rule is run for each element in a form. If multiple inputs are available in the form and the validation has to apply only to a specific input, the custom validation code has to check the input before validating.
+* Each custom rule is executed for each element in a form. If multiple inputs are available in the form and the validation has to apply only to a specific input, the custom validation code has to check the input before validating.
 
         custom: function (input) {
             if (input.is("[name=firstName]")) {
@@ -179,7 +179,7 @@ When you implement your custom validation rules, consider the following specific
 
 By default, the Validator provides built-in messages which map to built-in validation rules. However, the widget also allows you to define custom messages which override the built-in messages. You can set the validation messages for Kendo Validator by using its [`messages` configuration option](/api/javascript/ui/validator/configuration/messages)
 
-> In order for the custom error messages to work properly, you are required to set a `name` attribute to the `input` element.
+> For the custom error messages to work properly, you are required to set a `name` attribute to the `input` element.
 
 The following example demonstrates how to define custom messages when the validation rules are not fulfilled.
 

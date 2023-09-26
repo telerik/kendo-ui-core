@@ -45,7 +45,7 @@ The following example demonstrates how to implement the suggested approach. In t
 * The `transport` defines the way you will communicate with the remote data source.
 * The `url` points to the location of the data to which you want to bind the component.
 * The `data` lists additional URL parameters that need to be sent to the remote endpoint.
-* The `dataType` indicates the format of the response in which the data source is expected to be (JSONP in the example). JSONP is a way of returning JSON from a cross-browser request without getting blocked. It wraps the JSON response in a callback to intentionally mislead the browser&mdash;however, it is not recommended to do so unless you are fully aware of the containing data.
+* The `dataType` indicates the format of the response in which the data source is expected to be (JSONP in the example). JSONP is a way of returning JSON from a cross-browser request without getting blocked. It wraps the JSON response in a callback to intentionally mislead the browser&mdash;however, it is not recommended to do so unless you are entirely aware of the containing data.
 * The `schema` indicates to the Grid what the schema of the response is.
 * The `data` functions as the JSON element that will be repeated&mdash;based on this element, Kendo UI binds each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
 * The `model` describes the structure of the data. By using it, you can specify the data type of each field in the data for proper handling as well as, when needed, explicitly state which is the unique id field.
@@ -88,7 +88,7 @@ The following example demonstrates how to implement the suggested approach. In t
 
 ### Adding the Data
 
-The previous example renders a Grid with auto-generated columns with a column for each field in the data items. To display only the needed fields in the Grid, provide a `columns` list and specify which element of the `items` array in the server response has to be shown in each particular column.
+The previous example renders a Grid with auto-generated columns with a column for each field in the data items. To display only the needed fields in the Grid, provide a `columns` list and specify which element of the `items` array in the server response you have to show in each particular column.
 
 The following example demonstrates how to specify the `field` attribute in the column array so that the Grid displays the required data from the response. The columns also have a `title` property which provides more user-friendly header titles for the columns.
 
@@ -184,7 +184,7 @@ The following example demonstrates how to indicate to the Grid the way you want 
 
 You can display more complex templates for the columns in the Grid (for example, multiple field values in a single column) while the content of the other columns is iterated to generate the template output. In such scenarios, use `rowTemplate` to describe the structure of the entire row inside a single template.
 
-The following example demonstrates how to fully customize the Grid by applying additional styles to it. The number of the `td` elements in the template matches the number of columns in the Grid definition.
+The following example demonstrates how to entirely customize the Grid by applying additional styles to it. The number of the `td` elements in the template matches the number of columns in the Grid definition.
 
 > The `html` code in the following example displays special script blocks which contain the templating syntax for the [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}). The JavaScript that is used is also mixed with the HTML content and the syntax of the templates is similar to the syntax that is applied in the creation of a PHP, Razor, or other server-side templating engine.
 
@@ -289,7 +289,7 @@ The Kendo UI Grid exposes two types of loading indicators:
 
 * The `loadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
 
-* The `skeleton` uses the [SkeletonContainer component]({% slug overview_kendoui_skeletoncontainer_widget %}) to show a simplified preview of each of the grid's cells. The `skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
+* The `skeleton` uses the [SkeletonContainer component]({% slug overview_kendoui_skeletoncontainer_widget %}) to show a simplified preview of each of the grid's cells. The `skeleton` loading type aims at helping the user gain an idea of what the content will look like when the loading completes. It also makes the page load time appear shorter.
 
 Check the `skeleton` loading type in action in the live demo below:
 

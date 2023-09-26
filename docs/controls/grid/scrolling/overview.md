@@ -80,12 +80,12 @@ When scrolling is enabled, the vertical scrollbar of the Grid is always visible 
 
 ## Restoring the Scroll Position
 
-In some scenarios, the scroll position of the Grid might be reset when the component is rebound. To prevent the restoration of the scroll position:
+In some scenarios, the scroll position of the Grid can be reset when the component is rebound. To prevent the restoration of the scroll position:
 
 1. Save the scroll position in the [`dataBinding`](/api/javascript/ui/grid/events/databinding) event.
 1. Restore the scroll position in the [`databound`](/api/javascript/ui/grid/events/databound) event.
 
-The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the component [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
+The scrollable container is `div.k-grid-content` and is possible to retrieve it as a child element of the component [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and is scrolled only horizontally.
 
     $(function () {
         // Initialize the variable which will hold the scroll positions.

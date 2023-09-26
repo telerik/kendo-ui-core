@@ -9,7 +9,7 @@ position: 1
 
 # {{ site.product }} Validator Overview
 
-The Kendo UI Validator widget offers an easy way to do client-side form validation.
+The Kendo UI Validator widget offers a simple way to do client-side form validation.
 
 Built around the HTML5 form validation attributes, it supports a variety of built-in validation rules and provides a convenient way for setting custom-rule handling. The Validator is a powerful framework component and essential for any application that collects user input.
 
