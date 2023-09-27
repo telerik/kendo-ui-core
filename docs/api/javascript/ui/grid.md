@@ -201,7 +201,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
 
 > Check [Aggregates](https://demos.telerik.com/kendo-ui/grid/aggregates) for a live demo.
 
-### columns.attributes `Object`
+### columns.attributes `Object|Function`
 
 [`HTML attributes`](https://www.w3schools.com/tags/ref_attributes.asp) of the table cell (`<td>`) rendered for the column.
 
