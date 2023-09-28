@@ -65,6 +65,14 @@
             assert.equal(links[4].innerHTML, '<span class="k-button-text">5</span>');
         });
 
+        it("setting responsive to false hides select by default", function() {
+            var div = setup({}, { responsive: false });
+
+            dataSource.read();
+
+            assert.isNotOk(div.data("kendoPager")._numericSelect.is(":visible"));
+        });
+
         it("one button is rendered on init", function() {
             var div = setup();
             var links = div.find("button").add(div.find(".k-selected"));

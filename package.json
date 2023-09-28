@@ -64,7 +64,10 @@
   "overrides": {
     "chokidar": "^3.0.0",
     "glob-stream": "^8.0.0",
-    "micromatch": "^4.0.0"
+    "micromatch": "^4.0.0",
+    "word-wrap": ">=1.2.4",
+    "semver": ">=7.5.2",
+    "semver-regex": ">=3.1.4"
   },
   "scripts": {
     "build": "npm ci && npx gulp build",

@@ -11893,6 +11893,7 @@ declare namespace kendo.ui {
         rounded?: string | undefined;
         size?: string | undefined;
         value?: Date | undefined;
+        focusTime?: Date | undefined;
         label?: string | Function | BaseLabel | undefined;
         change?(e: TimePickerChangeEvent): void;
         close?(e: TimePickerCloseEvent): void;

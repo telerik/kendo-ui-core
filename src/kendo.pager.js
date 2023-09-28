@@ -287,6 +287,8 @@ var __meta__ = {
                 } else if (options.numeric) {
                     that._numericSelect.hide();
                 }
+            } else if (that._numericSelect) {
+                that._numericSelect.hide();
             }
 
             kendo.notify(that);
