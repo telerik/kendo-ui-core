@@ -18,6 +18,8 @@ Kendo UI for jQuery maintains the [commercial Kendo UI for jQuery (Kendo UI Prof
 
 All official releases, service packs, and internal builds are uploaded to both distribution packages.
 
+> As of R3 2023 Kendo UI bundles does not include the jQuery library in their `js` directories and you can [`download jQuery using npm`](https://jquery.com/download/#downloading-jquery-using-npm-or-yarn) or use other source for the jQuery library.
+
 ### Commercial Distribution on NPM
 
 The commercial distribution NPM package is available as [`@progress/kendo-ui`](https://www.npmjs.com/package/@progress/kendo-ui) in the NPM registry. 

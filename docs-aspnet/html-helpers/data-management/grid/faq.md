@@ -299,7 +299,7 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
                             });
 
                         })
-                        .ToClientTemplate().Value
+                        .ToClientTemplate().ToString()
                     );
         })
         .Events(ev => ev.DataBound("initMenus"))
@@ -321,7 +321,7 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
                                 });
 
                             })
-                            .ToClientTemplate().Value)">
+                            .ToClientTemplate().ToString())">
             </column>
         </columns>
     </kendo-grid>

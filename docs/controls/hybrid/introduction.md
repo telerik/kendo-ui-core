@@ -85,7 +85,7 @@ Just as with other parts of the Kendo UI framework, adding Kendo UI to your appl
 	</head>
 	<body>
 
-		<script src="js/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 		<script src="js/kendo.all.min.js"></script>
 	</body>
 	</html>
@@ -124,7 +124,7 @@ The layout is the template of your application. The whole content from views, wh
 			</footer>
 		</section>
 
-		<script src="js/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 		<script src="js/kendo.all.min.js"></script>
 	</body>
 	</html>
@@ -167,7 +167,7 @@ Now that the application layout is defined, you need to define at least one view
 			</footer>
 		</section>
 
-		<script src="js/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 		<script src="js/kendo.all.min.js"></script>
 	</body>
 	</html>

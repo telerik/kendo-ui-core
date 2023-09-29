@@ -13234,6 +13234,50 @@ The data item field which contains the series value. **The field name should be 
     });
     </script>
 
+### series.for `String`
+
+The name of the parent series of the trendline.
+
+> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" or "movingAverageTrendline".
+
+#### Example - set the trendline parent series fromField
+
+	<div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          },
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Sales Trend (LINEAR)",
+        type: "linearTrendline",
+        for: "Sales By Quarter"
+      }]
+    });
+    </script>
+
 ### series.fromField `String` *(default: "min")*
 
 The data item field which contains the series from value.
@@ -13274,6 +13318,162 @@ The data item field which contains the series to value.
       },
       series: [{
         toField: "to"
+      }]
+    });
+    </script>
+
+### series.trendline `Object`
+
+The trendline configuration options.
+
+> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" or "movingAverageTrendline".
+
+#### Example - set the trendline options
+
+	<div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Sales Trend",
+        type: "movingAverageTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          period: 3
+        }
+      }]
+    });
+    </script>
+
+### series.trendline.forecast `Object`
+
+The trendline forecast settings. By default, the trendline does not display a forecast.
+
+> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" and the parent series are either date series, "scatter" or "scatterLine" series.
+
+#### Example - set the trendline forecast
+
+	  <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              date: new Date(2021, 0, 1),
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              date: new Date(2021, 3, 1),
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              date: new Date(2021, 6, 1),
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              date: new Date(2021, 9, 1),
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "date"
+      }, {
+        name: "Sales Trend",
+        type: "linearTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          forecast: {
+            before: 3,
+            after: 5
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.trendline.forecast.before `Number` *(default: 0)*
+
+The number of intervals to extend the trendline before the first data point.
+
+### series.trendline.forecast.after `Number` *(default: 0)*
+
+The number of intervals to extend the trendline after the last data point.
+
+### series.trendline.period `Number` *(default: 2)*
+
+The number of intervals to take when calculating averages. The value should be an integer greater than 2.
+
+> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "movingAverageTrendline".
+
+#### Example - set the moving average trendline period
+
+	<div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Sales Trend",
+        type: "movingAverageTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          period: 3
+        }
       }]
     });
     </script>
@@ -17405,6 +17605,8 @@ The supported values are:
 * [`heatmap`](/controls/charts/chart-types/heatmap)
 * [`horizontalWaterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/horizontal)
 * [`line`](/controls/charts/chart-types/line-charts)
+* [`linearTrendline`](/controls/charts/elements/trendlines)
+* [`movingAverageTrendline`](/controls/charts/elements/trendlines)
 * [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
 * [`pie`](/controls/charts/chart-types/pie-charts)
 * [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)

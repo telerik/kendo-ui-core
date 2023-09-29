@@ -26,6 +26,8 @@ The Kendo UI CDN provides the following services:
 
 The `.css` files are available at `https://kendo.cdn.telerik.com/themes/<version>/<theme>/<swatch>.css`. For example, you can load the `{{site.themesCdnVersion }}` version of the `Default` theme  from the `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css` location.
 
+> Starting with the 2023 R3 release the font icons are detached from the Kendo Themes CDN. You can find more details on how to reference the icons in your project [here](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage).
+
 ### Adding the Required JavaScript Files
 
 To import the required JavaScript files for the Kendo UI for jQuery components, use either of the following approaches:
@@ -73,7 +75,7 @@ Depending on the component you require, you can initialize the Kendo UI controls
         
         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
         
-        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
     </head>
     <body>
@@ -95,7 +97,7 @@ The following example demonstrates how to initialize a DropDownList with some ba
 
         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
-        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
     </head>

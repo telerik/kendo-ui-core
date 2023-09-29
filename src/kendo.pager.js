@@ -282,10 +282,13 @@ var __meta__ = {
                         that._numericSelect.show();
                         that.list.hide();
                     }
-                } else if (width <= 600) {
-                    info.hide();
-                } else if (options.numeric) {
-                    that._numericSelect.hide();
+                } else {
+                    if (width <= 600) {
+                        info.hide();
+                    }
+                    if (options.numeric) {
+                        that._numericSelect.hide();
+                    }
                 }
             } else if (that._numericSelect) {
                 that._numericSelect.hide();

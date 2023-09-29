@@ -56,7 +56,7 @@ To use Progress Telerik UI for PHP in your PHP website, follow the steps below:
 
         <link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
-        <script src="js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="js/kendo.web.min.js"></script>
 
 > **Important**
@@ -94,7 +94,7 @@ The example below demonstrates the complete source code.
         <head>
             <link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
             <link href="styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
-            <script src="js/jquery.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
             <script src="js/kendo.web.min.js"></script>
         </head>
         <body>

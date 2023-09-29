@@ -15634,6 +15634,16 @@ declare namespace kendo.dataviz.ui {
         width?: number|Function | undefined;
     }
 
+    interface ChartSeriesTrendlineForecast {
+        before?: number | undefined;
+        after?: number | undefined;
+    }
+
+    interface ChartSeriesTrendline {
+        forecast?: ChartSeriesTrendlineForecast | undefined;
+        period?: number | undefined;
+    }
+
     interface ChartSeriesItemConnectors {
         color?: string|Function | undefined;
         padding?: number | undefined;
@@ -16001,6 +16011,7 @@ declare namespace kendo.dataviz.ui {
         yErrorHighField?: string | undefined;
         explodeField?: string | undefined;
         field?: string | undefined;
+        for?: string | undefined;
         fromField?: string | undefined;
         toField?: string | undefined;
         noteTextField?: string | undefined;
@@ -16040,6 +16051,7 @@ declare namespace kendo.dataviz.ui {
         startAngle?: number | undefined;
         target?: ChartSeriesItemTarget | undefined;
         targetField?: string | undefined;
+        trendline?: ChartSeriesTrendline | undefined;
         tooltip?: ChartSeriesItemTooltip | undefined;
         type?: string | undefined;
         visible?: boolean | undefined;

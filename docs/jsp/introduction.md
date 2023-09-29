@@ -105,7 +105,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
         
         <link href="resources/styles/kendo.default-main.css" rel="stylesheet" type="text/css" />
-        <script src="resources/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="resources/js/kendo.web.min.js"></script>
 
 **Step 6** Configure your page to include the Kendo UI DataViz JavaScript and CSS files.
@@ -118,7 +118,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
         <link href="resources/styles/kendo.default-main.css" rel="stylesheet" type="text/css" />
 
-        <script src="resources/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="resources/js/kendo.dataviz.min.js"></script>
 
 **Step 7** Add taglib mapping to the Kendo UI tags.

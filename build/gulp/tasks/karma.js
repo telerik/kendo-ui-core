@@ -14,9 +14,9 @@ var TESTS = require(glob.sync('../../test-paths-*.js', { cwd: __dirname })[0]);
 
 var browserOption = argv.browser;
 var testsOption = argv.tests;
-var jqueryOption = argv.jquery;
+var jqueryOption = argv.jquery || '3.7.0';
 
-var tests, jquery, browsers;
+var tests, browsers;
 
 if (testsOption) {
     tests = [ testsOption ];
@@ -24,11 +24,7 @@ if (testsOption) {
     tests = [ "tests/!(download-builder)/**/*.js" ];
 }
 
-if (jqueryOption) {
-    jquery = "http://code.jquery.com/jquery-" + jqueryOption + ".min.js";
-} else {
-    jquery = 'src/jquery.js';
-}
+let jquery = "http://code.jquery.com/jquery-" + jqueryOption + ".min.js";
 
 if (browserOption) {
     browsers = [ browserOption ];
