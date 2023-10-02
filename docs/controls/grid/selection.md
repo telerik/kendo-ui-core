@@ -98,6 +98,12 @@ The following code snippet contains all of the ignored selectors:
 input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up,label.k-checkbox-label.k-no-text,.k-icon.k-i-collapse,.k-icon.k-i-expand,span.k-numeric-wrap,.k-focusable
 ```
 
+## Selection on Mobile Devices
+
+As of Kendo UI version R3 2023, the Selection functionality on mobile devices receives the following improvements:
+* Multiple selection with `tap` toggles the selected row or cell.
+* Multiple selection with the marquee tool requires `hold` & `slide` to activate. It indicates `hold` when selecting the row or cell.
+
 ## KB Articles on Selection
 
 * [Selecting or Deselecting All Rows with a Select All Header Checkbox]({% slug howto_select_deselect_all_rowswith_checkboxes_grid %})

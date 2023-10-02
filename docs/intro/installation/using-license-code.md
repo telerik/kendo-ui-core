@@ -32,8 +32,8 @@ The license key installation process involves the following steps:
 To acquire a license file, generate it:
 
 <!-- The following code is a web component - it should never be added as a code snippet. It is part of the web application to generate the license code for the clients. To check it out, log into your account and open the live doc page. -->
-<link rel="stylesheet" href="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.1.2/styles/license-key/styles.css" />
-<script src="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.1.2/scripts/license-key/index.js"></script>
+<link rel="stylesheet" href="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.3.5/styles/license-key/styles.css" />
+<script src="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.3.5/scripts/license-key/index.js"></script>
 
 <license-download-link
 product-codes="KENDOUICOMPLETE, KENDOUI, KENDOUIMVC, UIASPCORE"

@@ -4418,6 +4418,9 @@ The editing mode to use. The supported editing modes are "incell", "inline" and 
 
 > The "inline" and "popup" editing modes are triggered by the "edit" column command. Thus it is required to have a column with an "edit" command.
 
+> As of Kendo UI version R3 2023, the `incell` editing of cells on mobile devices is activated on `double tab` of a Grid cell.
+
+
 #### Example - specify inline editing mode
 
     <div id="grid"></div>

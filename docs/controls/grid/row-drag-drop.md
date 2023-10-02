@@ -102,6 +102,8 @@ When [`multiple selection`](/controls/grid/selection#multi-row-selection) is ena
 
 `Ctrl` + `Mouse left-click`
 
+>tip As of Kendo UI version R3 2023, the Row Drag and Drop on mobile devices activates on `hold` & `slide` of the row.
+
 ## Known Limitations
 
 * The Row Drag & Drop does not work in a combination with data sources that involve rendering rows in an order different than their natural one, such as [`sorting`](/controls/grid/sorting), [`filtering`](/controls/grid/filtering) and [`grouping`](/controls/grid/grouping/overview).
