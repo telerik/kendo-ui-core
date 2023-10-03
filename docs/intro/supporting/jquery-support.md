@@ -13,7 +13,7 @@ The Kendo UI library is based on [jQuery](https://jquery.com/).
 
 > To have the Kendo UI scripts to work as expected, include a reference to the jQuery library in the document before the scripts.
 
-> As of R3 2023 Kendo UI bundles does not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
+> As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
 ## Supported Versions
 

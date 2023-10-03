@@ -21,14 +21,14 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 
 	Removing this script is crucial because in the next step you add the jQuery script provided by Telerik. Having more than one script references causes errors.  
 
-1. Add the jQuery script hosted on the Telerik CDN to the `<head>`.
+1. Add the jQuery script to the `<head>` tag.
 
 		<head>
 		...
 		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
 		
-		@* Add the jQuery script from the Telerik CDN: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
+		@* Add the jQuery script from the jQuery CDN: *@
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 		</head>
 
 1. Add the Kendo UI scripts. The Kendo UI script files required by UI for ASP.NET MVC must be loaded in the `<head>` tag *after* the jQuery script.
@@ -36,7 +36,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		<head>
 		...
 		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
 		@* Add the Kendo UI scripts: *@
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
@@ -53,7 +53,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		@Styles.Render("~/Content/css")
 		@Scripts.Render("~/bundles/modernizr")
 		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>

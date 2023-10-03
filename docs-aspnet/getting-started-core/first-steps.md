@@ -174,7 +174,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 
 1. The Microsoft ASP.NET Core Web Application template comes with a jQuery script reference at the end of _Layout.cshtml file. Find the `jquery.min.js` script line in the `<body>` of the document and remove it.
 
-1. Add the `jQuery` script hosted on the Telerik CDN:
+1. Add the `jQuery` script hosted on the jQuery CDN:
 
 		<head>
 		...
@@ -182,8 +182,8 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		<link rel="stylesheet" href="~/css/site.css" />
 		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
 
-		@* Add the the jQuery script from the Telerik CDN: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
+		@* Add the jQuery script from the jQuery CDN: *@
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 		...
 		</head>
 
@@ -194,7 +194,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="~/css/site.css" />
 		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
 		@* Add the Kendo UI scripts: *@
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
@@ -203,6 +203,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 
 >* The `kendo.all.min.js` and `kendo.aspnetmvc.min.js` script must be loaded after the `jquery.min.js` script.
 >* `jQuery` must be loaded only once. Make sure there are no duplicate references elsewhere in the `_Layout`.
+>* As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
 If you prefer to include the client-side resources from a local source instead of CDNs, see the [Local Client-Side Resources]({% slug using_local_client_side_resources %}) article.
 

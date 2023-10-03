@@ -91,6 +91,33 @@ By default, the column menu of the Grid is initialized in the `classic` render m
     });
 ```
 
+As of R3 2023 version of the Kendo UI, the Grid component supports a new `tabbed` render mode that gives aims to deliver a more compact view of the component without sacrificing available space. This tabbed interface gives a neat way to organize items into related groups.
+
+```dojo
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columnMenu: {
+          autoSize: true,
+          componentType: "tabbed"
+        }
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+            { name: "Mike Doe", age: 31 },
+            { name: "Tom Doe", age: 35 },
+            { name: "Danny Doe", age: 37 }
+          ]
+        }
+      });
+    </script>
+```
+
 ## Disabling Column Menu for Specific Columns
 
 As of R3 2022, the Kendo UI Grid enables the developer to disable the columnMenu for specific columns.

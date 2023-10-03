@@ -33,7 +33,7 @@ First, you will add the Kendo UI assets to your HTML document. In this sample ca
 
 Always register jQuery before the Kendo UI script&mdash;otherwise, you will get [JavaScript errors]({% slug troubleshooting_common_issues_kendoui %}) when you try to initialize a Kendo UI component or use the Kendo UI API.
 
-> As of R3 2023 Kendo UI bundles does not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
+> As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
 To make sure all scripts are loaded, make a simple API call to render the [Kendo UI version](/api/javascript/kendo/fields/version).
 

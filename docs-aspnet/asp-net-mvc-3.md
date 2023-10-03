@@ -134,7 +134,7 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
 **Step 4** Include the jQuery JavaScript file from the CDN or a compatible version from other location. Add a `script` tag in within the `head` tag.
 
-        <script src="https://kendo.cdn.telerik.com/<kendo ui version>/js/jquery.min.js”></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 **Step 5** Include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after jQuery.
 

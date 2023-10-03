@@ -35,7 +35,7 @@ For access to internal builds over CDN, use private CDN services. Always impleme
         <title>Welcome to Kendo UI</title>
         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script>
             if (typeof jQuery == "undefined") {
                 // A fallback to the local jQuery.

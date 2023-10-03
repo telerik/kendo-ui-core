@@ -434,16 +434,33 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
         })
     </script>
 
-### interval `Number`*(default: 30)*
+### interval `Number|Object`*(default: "30" or "0" in modern picker)*
 
- Specifies the interval, between values in the popup list, in minutes.
+Specifies the interval between values in the popup list.
 
-#### Example - specify a time interval
+* When the [componentType](api/javascript/ui/datetimepicker/configuration/componenttype) is set to `classic`, the interval is specified in minutes (numeric values).
+* When the [componentType](api/javascript/ui/datetimepicker/configuration/componenttype) is set to `modern`, the interval is specified as an object of hours, minutes and seconds.
+
+#### Example - specify a time interval for the classic component type
 
     <input id="dateTimePicker" />
     <script>
     $("#dateTimePicker").kendoDateTimePicker({
         interval: 15
+    });
+    </script>
+
+#### Example - specify a time interval for the modern component type
+
+    <input id="dateTimePicker" />
+    <script>
+    $("#dateTimePicker").kendoDateTimePicker({
+        componentType: "modern",
+        interval: {
+            hour: 2,
+            minute: 10,
+            second: 15
+        }
     });
     </script>
 

@@ -438,6 +438,18 @@
             assert.isOk(selectee.hasClass(SELECTED));
         });
 
+        it("preventing changing event prevents selection", function() {
+            var selectable = new Selectable(ul),
+                selectee = $(ul.find(">li")[0]),
+                changingWasCalled = false;
+
+            selectable.bind("changing", function(e) { e.preventDefault(); changingWasCalled = true; });
+            selectee.tap();
+
+            assert.isOk(changingWasCalled);
+            assert.isOk(!selectee.hasClass(SELECTED));
+        });
+
         it("ctrlKey click on selected triggers change event", function() {
             var wasCalled = false,
                 selectable = new Selectable(ul, {

@@ -248,6 +248,7 @@ var __meta__ = {
             collapsible: false,
             navigatable: true,
             contentUrls: false,
+            applyMinHeight: true,
             scrollable: {
                 distance: DEFAULTDISTANCE
             }
@@ -408,7 +409,10 @@ var __meta__ = {
 
             // See https://github.com/telerik/kendo-ui-core/issues/6660
             var oldMinHeight = that.element.css('min-height');
-            that.element.css('min-height', that.element.outerHeight());
+
+            if (that.options.applyMinHeight) {
+                that.element.css('min-height', that.element.outerHeight());
+            }
 
             visibleContents.removeClass(ACTIVESTATE);
             that.tabGroup.find("." + TABONTOP).removeClass(TABONTOP);

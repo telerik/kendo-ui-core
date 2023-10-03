@@ -1553,6 +1553,10 @@ var __meta__ = {
                 hasCollapseAnimation = animationSettings.collapse && "effects" in animationSettings.collapse,
                 collapse = extend({}, animationSettings.expand, animationSettings.collapse);
 
+            if (element.hasClass("k-hidden")) {
+                element.removeClass("k-hidden");
+            }
+
             if (!hasCollapseAnimation) {
                 collapse = extend(collapse, { reverse: true });
             }

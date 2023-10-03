@@ -75,6 +75,7 @@ To get up and running with the project:
 
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
+	> * As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
   7.1 Since the Microsoft template project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
 

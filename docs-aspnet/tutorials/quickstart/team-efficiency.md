@@ -101,7 +101,7 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
         <link href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.bootstrap.min.css" rel="stylesheet"  type="text/css" />
         <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-        <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/jszip.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.all.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.aspnetmvc.min.js"></script>

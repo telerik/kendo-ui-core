@@ -193,6 +193,7 @@ var __meta__ = {
             items: [],
             resizable: true,
             navigateOnTab: false,
+            evaluateTemplates: false,
             size: "medium"
         },
 
@@ -798,7 +799,12 @@ var __meta__ = {
             }
 
             if (template && options.overflow !== OVERFLOW_ALWAYS) {
+                if (this.options.evaluateTemplates) {
+                    template = kendo.template(template);
+                }
+
                 template = isFunction(template) ? template(options) : template;
+
                 element = $(TEMPLATE_WRAPPER);
                 element.html(template);
 

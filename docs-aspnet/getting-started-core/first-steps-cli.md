@@ -109,6 +109,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
+	> * As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
 	5.1 Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
 

@@ -3175,6 +3175,31 @@ Can be set to a JavaScript object which represents the column menu configuration
 
 > Check [Column menu](https://demos.telerik.com/kendo-ui/grid/column-menu) for a live demo.
 
+### columnMenu.autoSize `Boolean` *(default: false)*
+
+If set to `true` the column menu would allow the user to fit one or all columns to the width of their content. This setting is available only when the `tabbed` [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is used.
+
+#### Example - disable column selection
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      columnMenu: {
+        autoSize: true,
+        componentType: "tabbed"
+      },
+      sortable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
 ### columnMenu.columns `Boolean|Object` *(default: true)*
 
 If set to `true` the column menu would allow the user to select (show and hide) grid columns. By default the column menu allows column selection.
@@ -3323,6 +3348,7 @@ If set to `true` the column menu would allow the user to filter the grid. By def
 
 * `"classic"` - Uses the standard rendering of the column menu.
 * `"modern"` - Uses new rendering with a fresh and modern look and feel.
+* `"tabbed"` - Uses the rendering of the `"modern"` menu, but splits its content into different tabs.
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
@@ -3384,7 +3410,7 @@ The text messages displayed in the column menu. Use it to customize or localize 
 
 The text of the button which applies the columns filter.
 
-> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern`.
+> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
 
 #### Example - column menu apply button text
 
@@ -3400,6 +3426,68 @@ The text of the button which applies the columns filter.
         componentType: "modern",
         messages: {
           apply: "Apply Columns"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.autoSizeColumn `String` *(default: "Autosize This Column")*
+
+The text of the autosize single column option.
+
+> The autosize option is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
+
+#### Example - column menu apply button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
+      ],
+      columnMenu: {
+        componentType: "tabbed",
+        autoSize: true,
+        messages: {
+          autoSizeColumn: "Custom Autosize this column"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.autoSizeAllColumns `String` *(default: "Autosize All Columns")*
+
+The text of the autosize single column option.
+
+> The autosize option is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
+
+#### Example - column menu apply button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
+      ],
+      columnMenu: {
+        componentType: "tabbed",
+        autoSize: true,
+        messages: {
+          autoSizeAllColumns: "Custom Autosize all columns"
         }
       },
       sortable: true,
@@ -3536,7 +3624,7 @@ The text message that is displayed for the Ungroup column menu item.
 
 The text of the button which resets the columns filter.
 
-> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern`.
+> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
 
 #### Example - column menu reset button text
 
@@ -12192,6 +12280,50 @@ The widget instance which fired the event.
           selectedRows.each(function(i, x) {
             $(x).find("td:not(:first)").addClass("k-disabled");
           });
+        }
+      });
+    </script>
+
+### changing
+
+Fired when the user is about to select a table row or cell.
+
+The event will be fired only when the Grid is [`selectable`](/api/javascript/ui/grid/configuration/selectable).
+
+#### Event Data
+
+##### e.sender `kendo.ui.Grid`
+
+The component instance which fired the event.
+
+##### e.target `jQuery`
+
+The target row that is about to be selected. If the Grid has checkbox selection enabled and the Select All checkbox in the header is clicked, the target is set to the checkbox element instead.
+
+##### e.originalEvent `event`
+
+The original JavaScript event that was fired.
+
+#### Example - prevent the selection of a row
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        selectable: "multiple, row",
+        changing: function(e) {
+          let dataItem = e.sender.dataItem(e.target);
+          // Prevent the selection if the row with age = 33 is about to be selected.
+          if (dataItem && dataItem.age === 33) {
+              e.preventDefault();
+          }
         }
       });
     </script>
