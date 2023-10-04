@@ -16,9 +16,6 @@ The Grid provides the following edit modes:
 * [Popup editing]({% slug popupediting_grid_aspnetcore %})
 * [Incell editing]({% slug batchediting_grid_aspnetcore %})
 * [Custom editors and validation]({% slug customediting_grid_aspnetcore %})
-* [WebAPI editing]({% slug webapi_editing_grid_aspnetmvc %})
-
-
     
 ## Getting Started
 

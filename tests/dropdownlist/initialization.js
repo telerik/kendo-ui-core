@@ -499,6 +499,12 @@
             assert.isOk(wrapper.hasClass("k-disabled"));
         });
 
+        it("filterable DropDownList persists disabled attribute after initialization", function() {
+            input.attr("disabled", "disabled").kendoDropDownList({ filter: "contains" });
+
+            assert.isOk(input.attr("disabled"));
+        });
+
         it("DropDownList disables on init", function() {
             input.kendoDropDownList({
                 enabled: false

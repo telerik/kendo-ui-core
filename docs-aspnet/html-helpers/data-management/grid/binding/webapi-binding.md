@@ -1,18 +1,76 @@
 ---
-title: WebAPI Editing
-page_title: WebAPI Editing - Telerik UI Grid Component
-description: "Implement CRUD data operations with a WebAPI controller for the Kendo UI Grid for {{ site.framework }}."
-previous_url: /helpers/grid/webapi-editing, /helpers/data-management/grid/webapi-editing
-slug: webapi_editing_grid_aspnetmvc
+title: WebApi Binding
+page_title: WebApi Binding
+description: "Learn how to enable the WebAPI binding capabilities of the Telerik UI Grid for {{ site.framework }}."
+slug: htmlhelpers_grid_webapi_binding
 ---
 
-# WebAPI Editing
+# WebAPI Binding
 
-You can implement the CRUD (Create, Read, Update, Destroy) data operations and a [WebAPI](http://www.asp.net/web-api) controller for the Telerik UI Grid for {{ site.framework }}.
+Web API is an application programming interface for a web application or server which utilizes the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) for communication. It enables you to make the server-side of the application more monolithic when it comes to establishing communication between clients and websites to have data access.
 
-For runnable examples, refer to the [demos on editing of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/webapi).
+For runnable examples, refer to the [demos on WebAPI binding of the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/webapi).
 
 > Defining a Schema.Model.Id is mandatory for the proper execution of the Update, Create and Destroy of the Grid.
+
+{% if site.mvc %}
+## Setting up the application for WebAPI Binding
+
+To ensure that the application is configured for both Web API binding capabilities: 
+
+1. Configure Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
+    ```
+          public class MvcApplication : System.Web.HttpApplication
+          {
+              protected void Application_Start()
+              {
+                  GlobalConfiguration.Configure(WebApiConfig.Register);
+                  RouteConfig.RegisterRoutes(RouteTable.Routes);
+              }
+          }
+    ```
+
+1. Create a file named `WebApiConfig.cs` inside the `App_Start` folder and configure the default WebAPI routing convention.
+    ```
+        public static class WebApiConfig
+        {
+            public static void Register(HttpConfiguration config)
+            {
+                // Web API configuration and services.
+                // Web API routes.
+                config.MapHttpAttributeRoutes();
+                config.Routes.MapHttpRoute(
+                    name: "DefaultApi",
+                    routeTemplate: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional }
+                );
+            }
+        }
+    ```
+{% endif %}
+
+## Adding a Web API Controller
+
+{% if site.mvc %}
+To support writing and reading data using WebAPI endpoints, the `ApiController` base class needs to be inherited for a given controller instance.
+
+```
+    public class TaskController : System.Web.Http.ApiController
+    {
+    }
+```
+{% else %}
+To support writing and reading data using WebAPI endpoints, the ControllerBase base class needs to be inherited for a given controller instance.
+
+```
+    [ApiController()]
+    [Route("api/[controller]")]
+    public class TaskController : BaseController
+    {
+    }
+```
+{% endif %}
+## Configuring the CRUD Operations
 
 {% if site.mvc %}
 1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC Web application. Name the application `KendoGridWebApiCRUD`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
@@ -31,7 +89,7 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
     ![{{ site.product_short }} Adding the Controller](../images/grid-api-controller.png)
 {% else %}
 1. Add a new class to the `~/Models` folder. The following example uses the `ProductViewModel` name.
-
+    ```
         public class ProductViewModel
         {
             public int ProductID { get; set; }
@@ -42,19 +100,32 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
             [UIHint("Integer")]
             public short? UnitsInStock { get; set; }
         }
+    ```
 {% endif %}
 
-1. Open `Controllers/ProductsController.cs`.
 1. Update the `Get` method as demonstrated by The following example.
-        {% if site.mvc %}
-        public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof    (WebApiDataSourceRequestModelBinder))DataSourceRequest request){% else %}
-        public DataSourceResult Get([DataSourceRequest]DataSourceRequest request){% endif %}
+   
+    {% if site.mvc %}
+    ```
+        public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof    (WebApiDataSourceRequestModelBinder))DataSourceRequest request)
         {
             return db.Products.ToDataSourceResult(request);
         }
+    ```
+    {% else %}
+    ```
+        [HttpGet]
+        public DataSourceResult Get([DataSourceRequest]DataSourceRequest request)
+        {
+            return db.Products.ToDataSourceResult(request);
+        }
+    ```
+    {% endif %}
 
 1. Update the `Post` method as demonstrated in The following example.
-        {% if site.mvc %}
+
+   {% if site.mvc %}
+   ```
         public HttpResponseMessage Post(Product product)
         {
             if (ModelState.IsValid)
@@ -75,19 +146,118 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
-        }{% else %}
+        }
+   ```
+   {% else %}
+   ```
         [HttpPost]
-        public IActionResult Post(ProductViewModel product)
+        public IActionResult Post([FromForm] ProductViewModel product)
         {
-			if (!ModelState.IsValid)
-			{
-				return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage));
+	    	if (!ModelState.IsValid)
+	    	{
+	    		return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage));
+           }
+
+	    	service.Create(product);
+
+	    	return new ObjectResult(new DataSourceResult { Data = new[] { product }, Total = 1 });
+	    }
+    ```
+    {% endif %}
+
+1. Update the `Put` method as demonstrated in The following example.
+    
+    {% if site.mvc %}
+    ```
+        public HttpResponseMessage Put(int id, TaskViewModel task)
+        {
+            if (ModelState.IsValid && id == task.TaskID)
+            {
+                try
+                {
+                    service.Update(task, null);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK);
             }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, errors);
+            }
+        }
+    ```
+    {% else %}
+    ```
+         [HttpPut("{id}")]
+         public IActionResult Put(int id, [FromForm] ProductViewModel product)
+         {
+	        	if (ModelState.IsValid && id == product.ProductID)
+	        	{
+	        		try
+	        		{
+	        			service.Update(product);
+	        		}
+	        		catch (DbUpdateConcurrencyException)
+	        		{
+	        			return new NotFoundResult();
+	        		}
+	        		return new StatusCodeResult(200);
+             }
+	        	else
+	        	{
+	        		return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage));
+	        	}
+	        } 
+     ```
+     {% endif %}
 
-			service.Create(product);
-
-			return new ObjectResult(new DataSourceResult { Data = new[] { product }, Total = 1 });
-		}{% endif %}
+1. Update the `Delete` method as demonstrated in the following example.
+     
+     {% if site.mvc %}
+     ```
+        public HttpResponseMessage Delete(int id)
+        {
+            ProductViewModel product = service.Read().FirstOrDefault(p => p.ProductID == id);
+    
+            if (product == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+    
+            try
+            {
+                service.Destroy(product);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+    
+            return Request.CreateResponse(HttpStatusCode.OK, product);
+        }
+       ```
+       {% else %}
+       ```
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {	
+			try
+			{
+				service.Destroy(new ProductViewModel { ProductID = id } );
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				return new NotFoundResult();
+			}
+			return new StatusCodeResult(200);
+		}
+       ```
+       {% endif %}
 
 1. In the view, configure the Grid to use the Products WebAPI controller.
 
@@ -167,13 +337,12 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
 ```
 {% endif %}
 
-1. Build and run the application.
+## Building the application
 
-    {% if site.mvc %}
-    ![{{ site.product_short }} The final result is a Grid with editing configured](../images/grid-inline-editing.png)
-    {% endif %}
+
+The final result is a Grid with configured editing![{{ site.product_short }} The final result is a Grid with editing configured](../images/grid-inline-editing.png)
 
 ## See Also
 
-* [Editing Approaches by the Grid HtmlHelper for ASP.NET MVC (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/editing)
+* [WebApi Binding for the Grid HtmlHelper for {{ site.product }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/webapi)
 * [Server-Side API](/api/grid)

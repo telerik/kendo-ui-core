@@ -18,6 +18,7 @@ Depending on the configuration of its [DataSource]({% slug htmlhelpers_datasourc
 {% endif %}
 * [Remote data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})
 * [SignalR data binding]({% slug htmlhelpers_grid_aspnetcore_signalrbinding %})
+* [WebApi Binding]({% slug htmlhelpers_grid_webapi_binding %})
 * [Custom Binding]({% slug custombinding_grid_aspnetmvc %}){% if site.mvc %} 
 * [Server Binding]({% slug serverbinding_grid_aspnetmvc %})
 
@@ -54,3 +55,4 @@ Check the `Skeleton` loading type in action in the live demo below:
 * [OData Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata)
 * [SignalR Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/signalr)
 * [Custom Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)
+* [Web Api Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/webapi)

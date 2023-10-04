@@ -122,6 +122,22 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### autoFill `Boolean`*(default: false)*
+
+ When enabled, the DatePicker will autofill the rest of the date to the current date when the component loses focus. For example, entering only the date, month or year portion of the date and blurring the component, the missing sections will be automatically completed.
+ Requires a [DateInput](/api/javascript/ui/dateinput) for editing the value.
+
+#### Example
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        dateInput: true
+        autoFill: true
+    });
+    </script>
+
+
 ### componentType `String`*(default: "classic")*
 
  Specifies the component type of the widget.

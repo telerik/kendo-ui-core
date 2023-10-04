@@ -1248,7 +1248,7 @@ var __meta__ = {
                     .prepend($(list.filterTemplate))
                     .find(".k-searchbox")
                     .append(list.filterInput);
-                list.enable();
+                list._enable();
             } : $.noop;
 
             list._postCreatePopup();
@@ -1311,7 +1311,7 @@ var __meta__ = {
                 list.popup.element
                     .find(".k-searchbox")
                     .append(list.filterInput);
-                list.enable();
+                list._enable();
             } : $.noop;
 
 

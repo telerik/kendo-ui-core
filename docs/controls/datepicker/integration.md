@@ -24,6 +24,23 @@ To use the DateInput as the input element in a DatePicker, enable the [`dateInpu
 
 To customize the placeholders of the DateInput set the [`messages.dateInput`](api/javascript/ui/datepicker/configuration/messages.dateinput) configuration.
 
+## AutoFill functionality
+
+With the DateInput integration enabled, you the AutoFill functionality can also be enabled via the [`autoFill`](api/javascript/ui/datepicker/configuration/autofill) configuration option.
+
+```dojo
+    <input id="datepicker" />
+
+    <script>
+    $("#datepicker").kendoDatePicker({
+        dateInput: true,
+        autoFill: true
+    });
+    </script>
+```
+
+When the AutoFill functionality is enabled you can complete any of the date segments in the DatePicker's DateInput and when the component looses focus the rest of the date will automatically be filled with the corresponding segment of the current date. For example, if the current date is 06 Jul 2023 and the user fills only the day portion as 15 and clicks on another input element the date will be autofilled to 15 Jul 2023.
+
 ## See Also
 
 * [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)

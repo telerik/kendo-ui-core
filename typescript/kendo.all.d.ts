@@ -4244,6 +4244,7 @@ declare namespace kendo.ui {
         minHeight?: number | undefined;
         mini?: boolean | DrawerMini | undefined;
         swipeToOpen?: boolean | undefined;
+        expanded?: boolean | undefined;
         hide?(e: DrawerHideEvent): void;
         show?(e: DrawerEvent): void;
         itemClick?(e: DrawerEvent): void;
@@ -6331,6 +6332,8 @@ declare namespace kendo.ui {
         moveNext?: string | undefined;
         groupColumn?: string | undefined;
         ungroupColumn?: string | undefined;
+        autoSizeColumn?: string | undefined;
+        autoSizeAllColumns?: string | undefined;
     }
 
     interface GridColumnMenu {
@@ -6339,6 +6342,7 @@ declare namespace kendo.ui {
         sortable?: boolean | undefined;
         messages?: GridColumnMenuMessages | undefined;
         componentType?: string | undefined;
+        autoSize?: boolean | undefined;
     }
 
     interface GridColumnCommandItemIconClass {
@@ -6726,6 +6730,7 @@ declare namespace kendo.ui {
         cancel?(e: GridCancelEvent): void;
         cellClose?(e: GridCellCloseEvent): void;
         change?(e: GridChangeEvent): void;
+        changing?(e: GridChangingEvent): void;
         columnHide?(e: GridColumnHideEvent): void;
         columnLock?(e: GridColumnLockEvent): void;
         columnMenuInit?(e: GridColumnMenuInitEvent): void;
@@ -6780,6 +6785,11 @@ declare namespace kendo.ui {
     }
 
     interface GridChangeEvent extends GridEvent {
+    }
+
+    interface GridChangingEvent extends GridEvent {
+        target?: JQuery | undefined;
+        originalEvent?: any;
     }
 
     interface GridColumnHideEvent extends GridEvent {
@@ -19138,10 +19148,10 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface QRCodeOverlay {
-        height?: number | undefined;
+        height?: number | string | undefined;
         type?: string | undefined;
-        url?: string | undefined;
-        width?: string | undefined;
+        imageUrl?: string | undefined;
+        width?: number | string | undefined;
     }
 
     interface QRCodeExportImageOptions {
