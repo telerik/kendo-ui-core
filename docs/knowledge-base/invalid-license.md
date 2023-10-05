@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting an Invalid Kendo UI License
 page_title: Troubleshooting an Invalid Kendo UI License
-description: "Find out what can cause a banner and a watermark to appear on pages with Kendo UI for jQuery components, and what triggers the message "License activation failed" message in the browser's console."
+description: Find out what can cause a banner and a watermark to appear on pages with Kendo UI for jQuery components, and what triggers the message "License activation failed" message in the browser's console.
 slug: invalid-license
 type: troubleshooting
 res_type: kb

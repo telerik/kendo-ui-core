@@ -193,6 +193,20 @@ Sets a value controlling how the color is applied. Can also be set to the follow
     });
     </script>
 
+### focusTime `Date`*(default: null)*
+
+ Specifies a time that will be focused inside the popup when opened.
+
+#### Example - specify a focus time
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        focusTime: new Date(2023, 10, 4, 8, 0, 0) //date part is ignored
+    });
+    </script>
+
+
 ### format `String`*(default: "h:mm tt")*
 
  Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.
