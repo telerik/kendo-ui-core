@@ -491,6 +491,34 @@ Sets the scroll amount (in pixels) applied when the user clicks on a scroll butt
 		});
 	</script>
 
+### sortable `Boolean` *(default: false)*
+
+If enabled, users will be able to sort the tabs by dragging them to the desired position.
+
+#### Example
+
+    <div id="tabstrip">
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			sortable: true
+		});
+	</script>
+
 ### tabPosition `String`*(default: "top")*
 
 Specifies the position of the widget tabs. Valid values are `"top"` (default), `"left"`, `"right"` and `"bottom"`.

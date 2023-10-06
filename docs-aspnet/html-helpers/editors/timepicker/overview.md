@@ -62,6 +62,7 @@ The TimePicker TagHelper configuration options are passed as attributes.
 ## Functionality and Features
 
 * [Selected time]({% slug htmlhelpers_timepicker_aspnetcore_selectedtimes %})—The TimePicker allows you to render a pre-selected time and also define the minimum and maximum time it displays.
+* [Focused time]({% slug htmlhelpers_timepicker_aspnetcore_focusedtime %})—The TimePicker allows you to define focused time when the pop-up is opened.
 * [Formats]({% slug formats_timepicker_aspnetcore %})—The TimePicker allows you to define its time formatting.
 * [Validation]({% slug htmlhelpers_timepicker_aspnetcore_validation %})—The TimePicker is designed to keep its input value unchanged even when the typed time is invalid.
 * [Globalization]({% slug globalization_timepicker_aspnetcore %})—The globalization process combines the translation of component messages (localization) with adapting them to specific cultures.
