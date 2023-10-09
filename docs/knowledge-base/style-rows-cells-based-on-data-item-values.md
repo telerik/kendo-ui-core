@@ -37,11 +37,11 @@ How can I customize the cells and rows of the Kendo UI Grid for jQuery based on 
 
 ## Solution
 
-Grid templates enable you to customize and style the content *inside* the table cells. However, your project might require the customization of the tables cells or rows of the Grid. Naturally, the custom styling is likely based on the values of the data items.
+Grid templates enable you to customize and style the content *inside* the table cells. However, when your project requires the customization of the tables cells or rows of the Grid, the custom styling is based on the values of the data items.
 
-Although the demos apply custom CSS classes, you can still use the demonstrated approaches even if you apply inline styles or other HTML attributes.
+Although the demos apply custom CSS classes, you can use the demonstrated approaches even if you apply inline styles or other HTML attributes.
 
-To customize the rows and cells based on the values of the data items, utilize any of the following approaches:
+To customize the rows and cells based on the values of the data items, use any of the following approaches:
 * [Iterate the table rows](#iterating-the-table-rows)
 * [Iterate the data items](#iterating-the-data-items)
 * [Use a row template](#using-a-row-template)
@@ -149,7 +149,7 @@ The usage of the `dataBound` handler and the iteration of the table rows is suit
 
 ## Iterate the Data Items
 
-The usage of the `dataBound` handler and the iteration of the data items is suitable only if you intend to customize part of the Grid rows. The approach loops through all data items of the Grid and accesses just the rows which match certain conditions.
+The usage of the `dataBound` handler and the iteration of the data items is suitable only if you intend to customize part of the Grid rows. The approach loops through all data items of the Grid and accesses only the rows which match the desired conditions.
 
 ```dojo
     <style>

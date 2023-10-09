@@ -11,17 +11,17 @@ position: 0
 > * R1 2023 is the last official release of Kendo jQuery, where Less Themes are supported and shipped with the product.
 > * With the upcoming R3 2023 release, the fonts will no longer be delivered with the Telerik and Kendo UI themes. To continue using the font icons, you must add a separate CDN reference to the font icons stylesheet.
 
-Kendo UI R1 2022 introduces new rendering for several components. As the new rendering implementation is an ongoing effort, there may be slight changes and touch-ups after the release. 
+Kendo UI R1 2022 introduces new rendering for some of the components. As the new rendering implementation is an ongoing effort, changes and touch-ups can occur after the release. 
 
 The new rendering will cover the entire list of the Kendo UI web components.
 
-> Larger visual updates like these can have implications in the form of visual regressions which can appear when upgrading from a version prior to R1 2022. 
+> Larger visual updates like these can have implications in the form of visual regressions which can appear when upgrading from a version before R1 2022. 
 >
-> The team have caught and resolved many visual regression issues while getting ready for R1 2022. However, it is possible that some additional post-release problems occur. The team will address all issues as quickly as possible and will continue to push out updates with fixes to the themes and components after the R1 2022 release.
+> The team have caught and resolved most of the visual regression issues while getting ready for R1 2022. However, it is possible that some additional post-release problems occur. The team will address all issues as quickly as possible and will continue to push out updates with fixes to the themes and components after the R1 2022 release.
 
 - [What Is the Reason behind These Changes?](#what-is-the-reason-behind-these-changes)
 - [Styling Options](#styling-options)
-- [Overriding Default Widget Options](#overriding-default-widget-options)
+- [Overriding Default Component Options](#overriding-default-widget-options)
 - [State Classes](#state-classes)
 - [List of Updated Components](#updated-components)
 - [Migrating from Less Themes](#less-themes-migration)
@@ -31,23 +31,23 @@ The new rendering will cover the entire list of the Kendo UI web components.
 
 The new rendering provides developers with the ability to change a particular styling option of a component. This helps to avoid the need of manually overriding the CSS styles of a component.
 
-One of the main reasons behind these changes is the feedback provided by the customers. Many of the users of Kendo UI express that currently the themes are difficult to customize and take more effort than they should.
+One of the main reasons behind these changes is the feedback provided by the customers. It shows that currently the themes are difficult to customize and require more effort.
 
-The emergence of design languages over the past few years is also an important factor. Many of our customers prefer to customize the default themes to better suit their business requirements, instead of using them straight out-of-the-box.
+The emergence of design languages over the past few years is also an important factor. Customers prefer to customize the default themes to fit their business requirements, instead of using them straight out-of-the-box.
 
-Ultimately, the new rendering aims to ease the customization of components and allow developers to implement any design requirements with less work.
+That said, the new rendering aims to ease the customization of components and allow developers to implement any design requirements with less work.
 
 ## Styling Options
 
-The styling options under the hood represent a set of CSS classes applied in the rendering to change the appearance of a component. Each different component may or may not support a particular option. For example a `textarea` element can have a configurable `overflow`, however this option doesn't make sense in the context of a `button` element. 
+The styling options under the hood represent a set of CSS classes applied in the rendering to change the appearance of a component. Each individual component supports different options. For example, a `textarea` element can have a configurable `overflow`, however, this option doesn't make sense in the context of a `button` element. 
 
 Check the **Appearance** documentation articles in the [Updated Components](#updated-components) section to learn about the available styling options for each component.
 
-## Overriding Default Widget Options
+## Overriding Default Component Options
 
-The new rendering implementations also enable you to globally change the default styling options of the widgets.
+The new rendering implementations also enable you to globally change the default styling options of the components.
 
-The following example showcases how to overwrite the default size of the Button widget. Note that if the code is placed at the root of the project right after the `kendo.all.min.js` script, all Kendo UI Button widgets will have a `large` size by default. If the code is placed at the beginning of a particular page, all Kendo UI Button widgets on that page will have a `large` size by default.
+The following example showcases how to overwrite the default size of the Button component. Note that if the code is placed at the root of the project right after the `kendo.all.min.js` script, all Kendo UI Button components will have a `large` size by default. If the code is placed at the beginning of a particular page, all Kendo UI Button components on that page will have a `large` size by default.
 
 ```html
 <script>
@@ -91,7 +91,7 @@ The following example showcases a full implementation of the override:
 
 ## State Classes
 
-Apart from the new styling options, the state classes have also been changed. The `k-state-default` class has been completely removed from the entire Kendo suite, except for the PivotGrid, where logic relies on it.
+Apart from the new styling options, the state classes have also been changed. The `k-state-default` class has been removed from the entire Kendo suite, except for the PivotGrid, where logic relies on it.
 
 The following table showcases the old and updated versions of the Kendo state classes:
 

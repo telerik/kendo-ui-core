@@ -27,16 +27,16 @@ You can search for icons by using the browser's default find bar (CTRL + F).
 
 ## What Are Icon Fonts
 
-Icon fonts are fonts which contain vector glyphs instead of letters and numbers. You can easily style them with CSS by using all styling properties that can be applied to a regular text in a modern browser.
+Icon fonts are fonts which contain vector glyphs instead of letters and numbers. You can style them with CSS by using all styling properties that can be applied to a regular text in a modern browser.
 
 ## Why Use Icon Fonts
 
-The utilization of icon fonts in a user interface (UI) naturally succeeds the somehow outdated [icon sprite technique](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Implementing_image_sprites_in_CSS).
+Using icon fonts in the UI naturally succeeds the outdated [icon sprite technique](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Implementing_image_sprites_in_CSS).
 
 Font icons demonstrate significant benefits such as:
 
-* [Improved scalability](#sizes)&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as easy as setting the `font-size` configuration option.
-* Improved design capabilities&mdash;You can easily apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
+* [Improved scalability](#sizes)&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling by setting the `font-size` configuration option.
+* Improved design capabilities&mdash;You can apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
 * Improved browser support&mdash;Font icons are browser-agnostic and are supported by all modern browsers.
 * Reduced number of HTTP requests&mdash;To load an icon font, you need a maximum of a few HTTP requests.
 * Reduced file size&mdash;A 100KB file contains approximately 500 vector icons.
@@ -78,7 +78,7 @@ Icon fonts support the following options for visual enhancement:
 
 The Kendo UI font icons are designed on a 16px grid base. To achieve a pixel-perfect icon display, scale up by maintaining the 16-unit measure (32, 48, 64, and so on).
 
-You can scale icons by just setting the `font-size` configuration option.
+You can scale icons by setting the `font-size` configuration option.
 
 ```dojo
 <span class="k-icon k-i-gear"></span>
@@ -118,7 +118,7 @@ To set the icon color, use the `color` CSS property.
 
 ### Applying Flipping
 
-To better accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
+To accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
 
 ```dojo
 <span class="k-icon k-i-pencil"></span>

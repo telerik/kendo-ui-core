@@ -13,15 +13,15 @@ position: 1
 > * The Less-based themes support only the default value of the [Size styling option]({% slug components_rendering_overview %}#size).
 > * As of 2022 R1, components receive the default value for the [Rounded styling option]({% slug components_rendering_overview %}#rounded) through the `k-rounded-md` class. Check the [Backwards Compatibility section](#backwards-compatibility) for more details.
 
-The appearance of the Kendo UI widgets entirely depends on styles defined by the applied CSS classes. The controls use no inline styles except for some very specific cases where you must set these styles with JavaScript and depending on the browser or configuration.
+The appearance of the Kendo UI components entirely depends on styles defined by the applied CSS classes. The components use no inline styles except for some specific cases where you must set these styles with JavaScript and depending on the browser or configuration.
 
 ![Kendo UI for jQuery Web Themes](web-themes.png)
 
 ## Adding a Theme to Your Project
 
-Setting a Kendo UI theme for any of the Kendo UI widgets, such as the [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index) or [Kendo UI Bar Chart](https://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
+Setting a Kendo UI theme for any of the Kendo UI components, such as the [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index) or [Kendo UI Bar Chart](https://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
 
-* `kendo.common.css`&mdash;This is a common (base) stylesheet. It applies styles related to element positioning and widget dimensions. It is a must for the widgets to look and function in a proper way.
+* `kendo.common.css`&mdash;This is a common (base) stylesheet. It applies styles related to element positioning and component dimensions. It is a must for the components to look and function in a proper way.
 * `kendo.[theme].css`&mdash;This stylesheet applies theme-specific styles such color palette, background gradients and patterns, etc.
 
 The following example demonstrates how to include the stylesheets to your project:
@@ -34,7 +34,7 @@ The following example demonstrates how to include the stylesheets to your projec
     </head>
 ```
 
-> * You must register the common CSS file before the theme CSS file because the theme CSS file may need to override common styles through selectors with the same CSS specifics.
+> * You must register the common CSS file before the theme CSS file because the theme CSS file needs to override common styles through selectors with the same CSS specifics.
 > * On the page and at any given time, you need to register only one pair of common and theme CSS files.
 
 The following example demonstrates how to include the default Less theme by using the Kendo CDN:
@@ -46,9 +46,9 @@ The following example demonstrates how to include the default Less theme by usin
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.mobile.all.min.css">
 ```
 
-## Widgets for Data Visualization
+## Components for Data Visualization
 
-The Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps use a mix of browser technologies to attain the required precision and responsiveness. Visualization is rendered as vector graphics with computed layout. In contrast, interactive features are built by using traditional HTML elements. As a result, the appearance settings of these widgets are split between declarative options and traditional CSS.
+The Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps use a mix of browser technologies to meet the required precision and responsiveness. Visualization is rendered as vector graphics with computed layout. In contrast, interactive features are built by using traditional HTML elements. As a result, the appearance settings of these components are split between declarative options and traditional CSS.
 
 The following example demonstrates how to define a theme for a Kendo UI Chart.
 
@@ -76,8 +76,8 @@ Some themes require a different common (base) stylesheet that applies different 
 
 Apart from the common stylesheet and theme stylesheet, you must make the following folders available in your application.
 
-* `/ThemeName/`&mdash;This is the folder, which contains all images required by the used Kendo UI theme. The folder name matches the theme name, e.g. `Default`, `Bootstrap`, `Silver`, etc. The theme image folders for unused themes can be removed.
-* `/fonts/`&mdash;This is where the `KendoUIGlyphs` and `DejaVu` font files reside. The `KendoUIGlyphs` font describes the Kendo UI font icons used by the web widgets. The `DejaVu` font is used by default during [PDF export]({% slug pdfderawingexport_drawingapi %}).
+* `/ThemeName/`&mdash;This is the folder, which contains all images required by the used Kendo UI theme. The folder name matches the theme name, for example. `Default`, `Bootstrap`, `Silver`, etc. The theme image folders for unused themes can be removed.
+* `/fonts/`&mdash;This is where the `KendoUIGlyphs` and `DejaVu` font files live. The `KendoUIGlyphs` font describes the Kendo UI font icons used by the web components. The `DejaVu` font is used by default during [PDF export]({% slug pdfderawingexport_drawingapi %}).
 * `/images/`&mdash;This where the Kendo UI font icons for the mobile widgets reside.
 * `/textures/`&mdash;This is where some fallback theme images are stored for browsers that do not support the CSS3 linear gradients.
 
@@ -95,7 +95,7 @@ The syntax of the generated classes is `k-[browser] k-[browser][majorVersion]`.
 
 ## Primitives
 
-The Kendo UI widgets use primitives, meaning that different HTML elements in different widgets use the same CSS classes to provide a level of abstraction and allow common styling. To learn how to modify the primitives, check the [Overriding Primitives]({% slug less_themes_customization_kendoui %}#overriding-primitives) section in the customization documentation.
+The Kendo UI components use primitives, meaning that different HTML elements in different components use the same CSS classes to provide a level of abstraction and allow common styling. To learn how to modify the primitives, check the [Overriding Primitives]({% slug less_themes_customization_kendoui %}#overriding-primitives) section in the customization documentation.
 
 You can use some CSS classes to apply borders and background colors to containers&mdash;for example, `k-info-colored`, `k-success-colored`, and `k-error-colored`. For more examples, refer to the [StylingPanels demo](https://demos.telerik.com/kendo-ui/styling/panels).
 
@@ -103,23 +103,23 @@ You can use some CSS classes to apply borders and background colors to container
 
 | CSS Class   | Behavior  |
 |:---         |:---       |
-| `k-widget`  | The class is applied to the widget wrapper to set a border, text and background color. In addition to `k-widget`, every widget has its own specific CSS class, such as `k-menu`, `k-panelbar`, `k-tabstrip`, etc.|
+| `k-widget`  | The class is applied to the component wrapper to set a border, text and background color. In addition to `k-widget`, every component has its own specific CSS class, such as `k-menu`, `k-panelbar`, `k-tabstrip`, etc.|
 | `k-header`  | Applied to Grid headers, Menu top level items, PanelBar top level items, TabStrip items, and DropDownLists to set a background image and a background color. |
 | `k-link`    | Applied to hyperlinks and clickable text items to set a text color.|
 | `k-button`  | Applied to elements that are expected to look like push buttons. The class sets a text color, background color, background image, and hover styling. This is the recommended class for styling form buttons.|
-| `k-input`   | Applied to textboxes inside input widgets like ComboBox and AutoComplete to set border, text and background color.|
-| `k-textbox` | Same as `k-input`, but used for standalone (generic) `input` elements that are not part of a widget. This is the recommended class for styling form `input` elements as it provides the same look, height, and vertical alignment as the Kendo UI input widgets.|
-| `k-checkbox`| Applied to checkboxes inside the TreeView widget, when checkboxes are enabled for it.|
+| `k-input`   | Applied to textboxes inside input components like ComboBox and AutoComplete to set border, text and background color.|
+| `k-textbox` | Same as `k-input`, but used for standalone (generic) `input` elements that are not part of a component. This is the recommended class for styling form `input` elements as it provides the same look, height, and vertical alignment as the Kendo UI input components.|
+| `k-checkbox`| Applied to checkboxes inside the TreeView component, when checkboxes are enabled for it.|
 | `k-group` and `k-content`| Applied to various containers to set a background and border color. |
 | `k-popup`   | Applied to popup containers that are detached from their opener component and are placed in the `body` element. |
 | `k-icon` and `k-sprite`| Applied to elements that display part of a sprite image as background to initialize their dimensions. |
 | `k-image`   | Applied to inline images to set their dimensions. |
-| `k-item`    | Applied to various repeating widget items, for example, Menu, TabStrip, TreeView, PanelBar, ComboBox, DropDownList, etc. This CSS class does not apply any particular global styles and sports `display: block`.|
+| `k-item`    | Applied to various repeating component items, for example, Menu, TabStrip, TreeView, PanelBar, ComboBox, DropDownList, etc. This CSS class does not apply any particular global styles and sports `display: block`.|
 | `k-first` and `k-last` | Set on the first and the last `k-item` respectively, where a special type of styling is needed, for example, rounded corners and removing borders. |
 
 ### The k-state Classes
 
-The appearance of a component may well depend on its state, which is also tied to CSS classes.
+The appearance of a component depends on its state, which is also tied to CSS classes.
 
 | `k-state` Class   | Behavior  |
 |:---               |:---       |
@@ -149,7 +149,7 @@ To revert back to the previous border-radius (9999px) value, use any of the foll
     </button>
 ```
    
-* If you are using widget initialization:
+* If you are using components initialization:
 
 ```dojo
     <button id="roundedButton"></button>

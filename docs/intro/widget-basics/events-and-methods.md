@@ -9,11 +9,11 @@ position: 5
 
 # Methods and Events
 
-All Kendo UI components (widgets) provide methods and events that you can use to query or modify their state at runtime, and to reference existing component instances.
+All Kendo UI components provide methods and events that you can use to query or modify their state at runtime, and to reference existing component instances.
 
 ## Referencing Existing Component Instances
 
-To obtain a reference to the specific component instance, either use the jQuery `data` method, or the `getKendo<WidgetName>` method.
+To get a reference to the specific component instance, either use the jQuery `data` method, or the `getKendo<ComponentName>` method.
 
 * The Kendo UI components are jQuery plugins. A common way to get a reference to a component instance is to use the [jQuery `data`](https://api.jquery.com/data/) method with the jQuery object of the component element, and pass the plugin name as a string.
 
@@ -33,7 +33,7 @@ To obtain a reference to the specific component instance, either use the jQuery 
         </script>
     ```
 
-* To get a reference to a component instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element applies to component initialization plugin methods too. This means that the plugin method, for example `kendoAutoComplete()`, does not return the component instance, but the jQuery object of the element.
+* To get a reference to a component instance, you can also use the `getKendo<ComponentName>` method. Note that the jQuery convention of returning the selected DOM element also applies to component initialization plugin methods. This means that the plugin method, for example `kendoAutoComplete()`, does not return the component instance, but the jQuery object of the element.
 
     ```
         <p>Animal: <input id="animal" /></p>
@@ -51,7 +51,7 @@ To obtain a reference to the specific component instance, either use the jQuery 
         </script>
     ```
 
-* If the code which will return a component instance returns `undefined`, then the component might still not be initialized or the selector can be wrong or missing. A common example is when a component is created in a `document.ready` handler but the component instance is referenced from code that was executed earlier.
+* If the code which will return a component instance returns `undefined`, then the component is potentially not initialized or the selector can be wrong or missing. A common example is when a component is created in a `document.ready` handler but the component instance is referenced from code that was executed earlier.
 
 ## Calling the Methods
 
@@ -110,7 +110,7 @@ The following example demonstrates how to bind events during component initializ
 
 ## Binding Events after Initialization
 
-All Kendo UI components provide the `bind` and the `one` method. Both methods attach event handlers to already existing component instances but the event handlers that are attached with `one` will be executed only once.
+All Kendo UI components provide the `bind` and the `one` method. Both methods attach event handlers to existing component instances but the event handlers that are attached with `one` will be executed only once.
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -142,7 +142,7 @@ All Kendo UI components provide the `bind` and the `one` method. Both methods at
 
 ## Using Event Handler Arguments
 
-Each Kendo UI component passes a single argument to the event handler&mdash;the so-called "event object". Usually, it has one or more fields which contain specific information for the event. All event objects have a `sender` field which provides a reference to the component instance that triggered the event. Passing additional custom event arguments to the handler is not supported. The full list and examples of the component events and the fields in the event objects is available in the [API reference](/api/javascript/kendo) section.
+Each Kendo UI component passes a single argument to the event handler&mdash;the so-called "event object". It has one or more fields which contain specific information for the event. All event objects have a `sender` field which provides a reference to the component instance that triggered the event. Passing additional custom event arguments to the handler is not supported. The full list and examples of the component events and the fields in the event objects is available in the [API reference](/api/javascript/kendo) section.
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -163,7 +163,7 @@ Each Kendo UI component passes a single argument to the event handler&mdash;the 
 
 ## Preventing Events
 
-Certain component events can be prevented by calling the `preventDefault` method of the event object. The effect of the event prevention is specific for each event and is documented in the [API reference](/api/javascript/kendo).
+Some component events can be prevented by calling the `preventDefault` method of the event object. The result of the event prevention is specific for each event and is documented in the [API reference](/api/javascript/kendo).
 
 ```
     <p>Animal: <input id="animal" /></p>

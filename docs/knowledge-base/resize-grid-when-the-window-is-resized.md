@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I resize and expand the Kendo UI Grid to a 100% height when the parent container or the browser window are resized too?
+How can I resize and expand the Kendo UI Grid to a 100% height when the parent container or the browser window are resized?
 
 ## Solution
 

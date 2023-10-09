@@ -11,16 +11,16 @@ position: 1
 
 The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) plays a central role in all web applications built with Kendo UI for jQuery.
 
-The DataSource is an abstraction for using local data (arrays of JavaScript objects) or remote data (web services returning JSON, JSONP, [oData](http://www.odata.org/), or XML). The DataSource fully supports CRUD (Create, Read, Update, Destroy) data operations and provides both client-side and server-side support for sorting, paging, filtering, grouping, and aggregates.
+The DataSource is an abstraction for using local data (arrays of JavaScript objects) or remote data (web services returning JSON, JSONP, [oData](http://www.odata.org/), or XML). The DataSource supports CRUD (Create, Read, Update, Destroy) data operations and provides both client-side and server-side support for sorting, paging, filtering, grouping, and aggregates.
 
-> It is a known limitation that you cannot name a DataSource field "data". 
+> A known limitation is the inability to name a DataSource field "data". 
 
 ## Functionality and Features
 
 * [DataSource Operations]({% slug datasourceoperations_kendoui_datasourcecomponent %})&mdash;The Kendo UI for jQuery DataSource provides both client-side and server-side support for sorting, paging, filtering, grouping, and aggregates.
-* [CRUD Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %})&mdash;The DataSource component fully supports CRUD (Create, Read, Update, Destroy) data operations.
+* [CRUD Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %})&mdash;The DataSource component supports CRUD (Create, Read, Update, Destroy) data operations.
 * [CORS Operations]({% slug corsdatafetching_anotherdomain_datasourcecomponent %})&mdash;With the DataSource, you can also perform Cross-Origin Resource Sharing as described in Todd Anglin's blog post from October 3, 2011.  
-* [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})&mdash;The DataSource operates in an offline mode which enables data-bound Kendo UI widgets to function without an active server connection.
+* [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})&mdash;The DataSource operates in an offline mode which enables data-bound Kendo UI components to function without an active server connection.
 * [Hierarchical DataSource]({% slug overview_hierarchical_datasourcecomponent %})&mdash;The `HierarchicalDataSource` component allows you to represent hierarchical data.
 
 ## Next Steps 

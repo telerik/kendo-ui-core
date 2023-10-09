@@ -32,7 +32,7 @@ res_type: kb
 
 ## Description
 
-How can I have the columns of a Kendo UI Grid automatically fit their width to accommodate their contents?
+How can I have the columns of a Kendo UI for jQuery Grid automatically fit their width to accommodate their contents?
 
 ## Solution
 

@@ -11,20 +11,20 @@ position: 3
 
 The Kendo UI library is based on [jQuery](https://jquery.com/).
 
-> To have the Kendo UI scripts to work as expected, include a reference to the jQuery library in the document before the scripts.
+> For the Kendo UI scripts to work as expected, include a reference to the jQuery library in the document before the scripts.
 
 > As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
 ## Supported Versions
 
-The current official version of Kendo UI requires jQuery version 1.12.4. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases, use the previous jQuery version until the next official Kendo UI version that resolves the issue is released. Normally, the jQuery version that is shipped with the Kendo UI service packs is not changed but is updated in major releases.
+The current official version of Kendo UI requires jQuery version 1.12.4. Each newly released jQuery version introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases, use the previous jQuery version until the next official Kendo UI version that resolves the issue is released. Normally, the jQuery version that is shipped with the Kendo UI service packs is not changed but is updated in major releases.
 
 The following table provides a list of the jQuery versions that are compatible with the major Kendo UI releases and their corresponding service packs.
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
 | [Kendo UI 2023.2.606 (R2 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2023-(version-2023-2-606))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.7.0|
-| [Kendo UI 2023.1.117 (R1 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2023-(version-2023-1-117))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
+| [Kendo UI 2023.1.117 (R1 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2023-(version-2023-1-117))|1.12.4| Also compatible with 1.10.x, 2.2.x, 3.6.1 and 3.6.4|
 | [Kendo UI 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-(version-2022-3-913))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
 | [Kendo UI 2022.2.510 (R2 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2022-(version-2022-2-510))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
 | [Kendo UI 2022.1.119 (R1 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2022-(version-2022-1-119))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.0|
@@ -63,7 +63,7 @@ The following table provides a list of the jQuery versions that are compatible w
 
 ## Working with Earlier Versions
 
-Occasionally, a legacy web application might require an earlier jQuery version with which Kendo UI is not compatible. In such cases, use a recent jQuery version together with the [jQuery Migrate plugin](https://github.com/jquery/jquery-migrate/). It restores the jQuery features that have been depreciated and provides for the required backward compatibility.
+Legacy web applications may require an earlier jQuery version with which Kendo UI is not compatible. In such cases, use a recent jQuery version together with the [jQuery Migrate plugin](https://github.com/jquery/jquery-migrate/). It restores the jQuery features that have been depreciated and provides for the required backward compatibility.
 
 ## See Also
 

@@ -29,7 +29,7 @@ You can quickly download the Kendo UI for jQuery controls after you log into [yo
 
 ## 2. Add the Required JavaScript and CSS Files
 
-First, you will add the Kendo UI assets to your HTML document. In this sample case, you will use the [Kendo UI CDN service]({% slug kendoui_cdn_services_installation %}). In other scenarios, you may want to [host the files locally]({% slug hosting_kendoui %}).
+First, you will add the Kendo UI assets to your HTML document. In this sample case, you will use the [Kendo UI CDN service]({% slug kendoui_cdn_services_installation %}). In other scenarios, you can [host the files locally]({% slug hosting_kendoui %}).
 
 Always register jQuery before the Kendo UI script&mdash;otherwise, you will get [JavaScript errors]({% slug troubleshooting_common_issues_kendoui %}) when you try to initialize a Kendo UI component or use the Kendo UI API.
 
@@ -54,9 +54,9 @@ To make sure all scripts are loaded, make a simple API call to render the [Kendo
 
 You will now create a [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) with some dummy orders which will later be used to bind a Grid.
 
-A hard-coded array of data items is the simplest way to create a `datasource`. In real-life scenarios, you may want to fetch [remote data]({% slug getting_started_kendoui_remote_data_binding %}) or configure [editing (CRUD operations)]({% slug cruddataoperations_kendoui_datasourcecomponent %}).
+A hard-coded array of data items is the simplest way to create a `datasource`. In real-life scenarios, you can fetch [remote data]({% slug getting_started_kendoui_remote_data_binding %}) or configure [editing (CRUD operations)]({% slug cruddataoperations_kendoui_datasourcecomponent %}).
 
-To ensure the correct implementation of the data operations, you need to configure the [data field types](/api/javascript/data/datasource/configuration/schema#schemamodel). In addition, you will apply a [page size](/api/javascript/data/datasource/configuration/pagesize) and a default [sorting](/api/javascript/data/datasource/configuration/sort) by `OrderDate`.
+To ensure the correct implementation of the data operations, you need to configure the [data field types](/api/javascript/data/datasource/configuration/schema#schemamodel). Also, you will apply a [page size](/api/javascript/data/datasource/configuration/pagesize) and a default [sorting](/api/javascript/data/datasource/configuration/sort) by `OrderDate`.
 
     var orderData = [
       { OrderID: 1, OrderDate: "2017-11-06T12:00:00", Freight: 12.34, ShipCity: "Antwerp", ShipCountry: "Belgium" },

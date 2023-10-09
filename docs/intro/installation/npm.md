@@ -73,7 +73,7 @@ To bundle the Kendo UI scripts by using one of the [module systems](#3-choose-a-
 
 > Starting from version 2023.3.718, the `kendo` instance is exported as a default export for the CommonJS and ECMAScript modules. This allows you to:
 > * Use the `import kendo from '@progress/kendo-ui'` syntax to import the Kendo UI scripts in your application. 
-> * Use the `kendo` instance to get the jQuery in which the Kendo UI widgets are defined. For example, `const $ = kendo.jQuery; $("#grid").kendoGrid({...});`.
+> * Use the `kendo` instance to get the jQuery in which the Kendo UI components are defined. For example, `const $ = kendo.jQuery; $("#grid").kendoGrid({...});`.
 
 ### ECMAScript
 

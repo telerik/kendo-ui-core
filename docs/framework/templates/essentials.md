@@ -18,7 +18,7 @@ The `#` (hash) sign allows you to:
 * Mark areas that will be replaced by data during the template execution.
 * Signify the beginning and end of custom JavaScript code within the template.
 
->tip While other templating libraries include shorthand, like `{ each }`, Kendo UI does not deliver helper syntax for loops and opts for using normal JavaScript instead of custom syntax sugar because it is faster and easier for JavaScript developers.
+>tip While other template libraries include shorthand, like `{ each }`, Kendo UI does not deliver helper syntax for loops and opts for using normal JavaScript instead of custom syntax sugar. This is faster and easier for JavaScript developers.
 
 To use the hash syntax, apply any of the following approaches:
 * Render values as HTML (`#= #`).
@@ -29,7 +29,7 @@ To use the hash syntax, apply any of the following approaches:
 
 When you use the Kendo UI template architecture while having hash characters inside your application or website content, consider the following specifics:   
 
-* If your template includes a `#` character literal, which is not part of a binding expression and is not a script code marker, you must escape that character. Otherwise, it will cause a template compilation error. For example, an error will be thrown if you use a `#` inside a URL hyperlink or a CSS color value. 
+* If your template includes a `#` character literal, which is not part of a binding expression and is not a script code marker, you must escape that character. Otherwise, it will cause a template compilation error. For example, an error will appear if you use a `#` inside a URL hyperlink or a CSS color value. 
   
   In JavaScript strings, you can escape the `#` literal with `\\\\#`. In external HTML script templates, you can escape the `#` literal with `\\#`.
 
@@ -87,7 +87,7 @@ The following example demonstrates the output if, in the same scenario, you have
 
 ## Handling External Templates and Expressions
 
-Normally, templates include expressions. While some templating frameworks invent their own re-implementation of JavaScript to provide expression sugar at the cost of performance, the Kendo UI Templates allow the execution of normal JavaScript inside templates thus favoring performance.
+Normally, templates include expressions. While some template frameworks invent their own re-implementation of JavaScript to provide expression sugar at the cost of performance, the Kendo UI Templates allow the execution of normal JavaScript inside templates thus favoring performance.
 
 The following example demonstrates how to display a list of items by using JavaScript and Kendo UI Templates.
 
