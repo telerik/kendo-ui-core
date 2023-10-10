@@ -10,7 +10,7 @@ position: 0
 
 The Rating allows to intuitively rate by selecting number of items stars from a predefined maximum number of items.
 
-![Kendo UI for jQuery Rating Overview](rating-overview.png)
+![Kendo UI for jQuery Rating Overview](rating-overview.PNG)
 
 ## Functionality and Features
 

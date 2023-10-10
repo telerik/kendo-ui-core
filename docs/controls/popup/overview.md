@@ -10,7 +10,7 @@ position: 0
 
 The Kendo UI Popup positions content next to a specific anchor.
 
-![Kendo UI for jQuery Popup](popup.png)
+![Kendo UI for jQuery Popup](popup.PNG)
 
 ## Functionality and Features
 

@@ -14,7 +14,7 @@ The user interface of the Pager is useful for paging data-bound components that 
 
  You can customize the page number templates or use an input for navigation to a specific page, toggle the visibility of previous and next buttons, include a pagesize dropdown and alter the information messages. The pager API also offers the ability to [localize its messages]({% slug localization_kendoui_pager_widget %}).
 
-![Kendo UI for jQuery Pager Overview](pager-overview.png)
+![Kendo UI for jQuery Pager Overview](pager-overview.PNG)
 
 ## Functionality and Features
 

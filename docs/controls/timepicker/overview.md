@@ -12,7 +12,7 @@ The TimePicker enables users to select time values from a predefined list or ent
 
 The widget supports configurable options for setting its format, minimum and maximum time, and the interval between the predefined values in the list.
 
-![Kendo UI for jQuery TimePicker Overview](timepicker-overview.png)
+![Kendo UI for jQuery TimePicker Overview](timepicker-overview.PNG)
 
 ## Functionality and Features
 

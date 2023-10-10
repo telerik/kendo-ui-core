@@ -12,7 +12,7 @@ The PDFViewer displays PDF files in the browser and consists of a toolbar and a 
 
 The default tools collection includes the `pager`, `open`, and `download` tools. For processing files, it supports the PDF.JS Processing and Telerik DPL Processing libraries. Among the key features the PDFViewer provides are the selection of a PDF processing library, a built-in paging mechanism, virtualization capabilities, a built-in default toolbar collection, and responsive capabilities and page scaling.
 
-![Kendo UI for jQuery PDFViewer Overview](pdfviewer-overview.png)
+![Kendo UI for jQuery PDFViewer Overview](pdfviewer-overview.PNG)
 
 ## Functionality and Features
 

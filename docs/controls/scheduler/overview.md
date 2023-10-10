@@ -20,7 +20,7 @@ As of the Kendo UI 2016 Q2 (2016.2.504) release:
 
 The change was driven by the [RFC 5545](http://tools.ietf.org/html/rfc5545#page-120) specification. Note that the previously demonstrated behavior had been incorrect.
 
-![Kendo UI for jQuery Scheduler Overview](scheduler-overview.png)
+![Kendo UI for jQuery Scheduler Overview](scheduler-overview.PNG)
 
 ## Functionality and Features
 

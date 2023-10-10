@@ -14,7 +14,7 @@ The Kendo UI TileLayout widget allows you configure a two-dimensional grid-based
 
 The TileLayout is based on the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) with all its features and uses additional JavaScript logic to provide resizing, reordering, and template customizations.
 
-![Kendo UI for jQuery TileLayout Overview](tilelayout-overview.png)
+![Kendo UI for jQuery TileLayout Overview](tilelayout-overview.PNG)
 
 ## Functionality and Features
 

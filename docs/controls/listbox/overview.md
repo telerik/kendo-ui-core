@@ -12,7 +12,7 @@ The ListBox provides suggestions depending on the typed text and allows multiple
 
 The component displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the component with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
-![Kendo UI for jQuery ListBox Overview](listbox-overview.png)
+![Kendo UI for jQuery ListBox Overview](listbox-overview.PNG)
 
 ## Functionality and Features
 

@@ -10,7 +10,7 @@ position: 0
 
 The Kendo UI Captcha component is a security measure that prevents automated spam from performing tasks such as form submissions in your application. The widget generates distorted images of letters and numbers that are easily decipherable to humans, but not to automated programs (spam bots).
 
-![Kendo UI for jQuery Captcha Overview](captcha-overview.png)
+![Kendo UI for jQuery Captcha Overview](captcha-overview.PNG)
 
 ## Functionality and Features
 

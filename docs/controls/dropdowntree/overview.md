@@ -12,7 +12,7 @@ The DropDownTree represents an editor of hierarchical data, rendered in a tree-l
 
 The DropDownTree is available in the Kendo UI for jQuery suite as of the Kendo UI R2 2018.
 
-![Kendo UI for jQuery DropDownTree Overview](dropdowntree-overview.png)
+![Kendo UI for jQuery DropDownTree Overview](dropdowntree-overview.PNG)
 
 ## Functionality and Features
 

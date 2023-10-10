@@ -10,7 +10,7 @@ position: 0
 
 The ButtonGroup is a container for two or more Buttons. Each Button in the component can be configured separately depending on the requirements of your project.
 
-![Kendo UI for jQuery ButtonGroup Overview](buttongroup-overview.png)
+![Kendo UI for jQuery ButtonGroup Overview](buttongroup-overview.PNG)
 
 ## Functionality and Features
 

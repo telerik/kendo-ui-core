@@ -12,7 +12,7 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 
 It supports the selection and navigation between dates as well as data templates and ranges for scheduling appointments.
 
-![Kendo UI for jQuery MultiViewCalendar Overview](multiviewcalendar-overview.png)
+![Kendo UI for jQuery MultiViewCalendar Overview](multiviewcalendar-overview.PNG)
 
 ## Functionality and Features
 
