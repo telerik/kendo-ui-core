@@ -11,13 +11,14 @@ position: 2
 
 {{ site.product }} is a set of server-side wrappers that wrap Kendo UI for jQuery widgets.
 
-The Kendo UI library is based on [jQuery](http://jquery.com/) and all Kendo UI bundles include the corresponding minified jQuery library in their `js` directories.
+The Kendo UI library is based on [jQuery](http://jquery.com/) and all Kendo UI bundles before R3 2023 include the corresponding minified jQuery library in their `js` directories.
 
+> As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 > In order for the Kendo UI scripts to work as expected, always include a reference to the jQuery library in the document before the scripts.
 
 ## Supported Versions
 
-The current official {{ site.product }} version requires jQuery version 1.12.4. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing {{ site.product }}. In such cases, use the previous jQuery version until the release of the next official {{ site.product }} version that resolves the issue is released.
+{{ site.product }} is compatible with jQuery 1.10.x, 2.2.x and 3.7.0. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing {{ site.product }}. In such cases, use the previous jQuery version until the release of the next official {{ site.product }} version that resolves the issue is released.
 
 Generally, the {{ site.product }} service packs and their related major releases ship with the same jQuery version. The jQuery version changes only with new major releases.
 
@@ -26,6 +27,7 @@ The following table provides a list of the jQuery versions that are compatible w
 {% if site.core %}
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [UI for ASP.NET Core 2023.3.1010 (R3 2023)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r3-2023-(version-2023-3-1010))|N/A| Compatible with 1.10.x, 2.2.x and 3.7.0|
 | [UI for ASP.NET Core 2023.2.606 (R2 2023)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r2-2023-(version-2023-2-606))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.7.0|
 | [UI for ASP.NET Core 2023.1.117 (R1 2023)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r1-2023-(version-2023-1-117))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
 | [UI for ASP.NET Core 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r3-2022-(version-2022-3-913))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
@@ -52,6 +54,7 @@ The following table provides a list of the jQuery versions that are compatible w
 {% else %}
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [UI for ASP.NET MVC 2023.3.1010 (R3 2023)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2023-(version-2023-3-1010))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.7.0|
 | [UI for ASP.NET MVC 2023.2.606 (R2 2023)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r2-2023-(version-2023-2-606))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.7.0|
 | [UI for ASP.NET MVC 2023.1.117 (R1 2023)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r1-2023-(version-2023-1-117))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|
 | [UI for ASP.NET MVC 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2022-(version-2022-3-913))|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.6.1|

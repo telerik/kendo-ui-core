@@ -8,11 +8,15 @@ position: 15
 
 # Row and Column Spanning
 
+The Row and Column spanning functionality allows to customize the appearance of the Grid and span cells between multiple row or columns. This feature is equal to 'cell merging' in Excel or 'row spanning' and 'column spanning' in HTML tables.
 
 ## Row Spanning
 
 The Row spanning functionality of the Grid enables you to span a cell between multiple rows.
-You can use the [`attributes`](/api/javascript/ui/grid/configuration/columns.attributes) function and calculate the span of each cell.
+You can use the [`attributes`](/api/javascript/ui/grid/configuration/columns.attributes) function and calculate the span of each cell. In the `attributes` function you can apply the `rowSpan` and `hidden` attributes to the cells.
+
+The [`rowspan`](https://www.w3schools.com/tags/att_rowspan.asp) attribute defines the number of rows a table cell needs to span. 
+The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be added to cells that should not be displayed when meets a condition.
 
 ```dojo
     <div id="grid"></div>
@@ -71,10 +75,61 @@ You can use the [`attributes`](/api/javascript/ui/grid/configuration/columns.att
 
 ## Column Spanning
 
-The Column spanning functionality enables you to span multiple columns in the Grid. This feature is equal to 'cell merging' in Excel or 'column spanning' in HTML tables.
-The Column spanning is available through the [`attributes`](/api/javascript/ui/grid/configuration/columns.attributes) function and its `hidden` property.
+The Column spanning functionality enables you to span multiple columns in the Grid. 
+
+The Column spanning is available through the [`attributes`](/api/javascript/ui/grid/configuration/columns.attributes) Grid function where you can apply the `colSpan` and `hidden` attributes to the cells.
+
+The [`colspan`](https://www.w3schools.com/tags/att_colspan.asp) attribute defines the number of columns a table cell needs to span. 
+The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be added to cells that should not be displayed when meets a condition.
 
 ```
+    { 
+        field: "pass", 
+        width: 100,
+        attributes: ({ pass }) => {
+            if (!pass) {
+              return {
+                // define two column of the Grid to span
+                colSpan: 2
+              };
+            }
+        }
+    },
+    {
+        field: "country", 
+        width: 300,
+        attributes: ({ pass }) => {
+            // set the condition in the attributes function
+            if (!pass) {
+                // add 'hidden' attribute to hide the cell if the pass property value is false
+                return { hidden: "hidden" };
+            }
+        }
+    }
+```
+Additionally, you can add different styling attributes or CSS classes to the `<td>` element of the cell. This allows you to style the spanned cells.
+
+```
+    { 
+    field: "pass", 
+        width: 100,
+           attributes: ({ pass }) => {
+            if (!pass) {
+              return {
+                colSpan: 2,
+                // apply CSS class to center the text in the cell
+                "class": "!k-text-center"
+              };
+            }
+        }
+    }
+```
+
+#### Example 
+
+The following example demonstrates how to span "pass" and "country" columns if the "pass" field value equals `false`.
+
+```dojo
 <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
@@ -122,7 +177,6 @@ The Column spanning is available through the [`attributes`](/api/javascript/ui/g
 
 ## See Also
 
-* [Row Spanning in the Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/row-spanning)
-* [Column Spanning in the Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/column-spanning)
+* [Row and Column Spanning in the Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/row-column-spanning)
 * [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/javascript/ui/grid)
 

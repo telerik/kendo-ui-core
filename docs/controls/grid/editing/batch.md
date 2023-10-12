@@ -12,7 +12,7 @@ The Grid enables you to make and save batch updates.
 
 To enable batch editing operations in the Grid, set the `batch` option of the data source to `true`. For a runnable example, refer to the [demo on setting the batch edit mode of the Grid](https://demos.telerik.com/kendo-ui/grid/editing).
 
->tip  As of Kendo UI version R3 2023, the `incell` editing of cells on mobile devices is activated on `double tab` of a Grid cell.
+>tip  As of Kendo UI version R3 2023, the `incell` editing of cells on mobile devices is activated on `double tap` of a Grid cell.
 
 ## KB Articles on Editing
 
