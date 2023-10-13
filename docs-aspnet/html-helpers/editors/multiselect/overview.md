@@ -168,7 +168,7 @@ The following example demonstrates the basic configuration of the MultiSelect. T
 * [Grouping]({% slug htmlhelpers_multiselect_grouping_aspnetcore %})—The built-in grouping features allows you to arrange the items in separate sets. 
 * [Virtualization]({% slug htmlhelpers_multiselect_virtualization_aspnetcore %})—To improve the performance when displaying a large number of records, take advantage of the MultiSelect virtualization.
 * [Templates]({% slug htmlhelpers_multiselect_templates_aspnetcore %})—The templates allow you to customize the rendering of the items, tags, and pop-up header.
-* [Accessibility]({% slug accessibility_aspnetcore_multiselect %})—The MultiSelect is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_aspnetcore_multiselect %})—The MultiSelect is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the MultiSelect, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/multiselect/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

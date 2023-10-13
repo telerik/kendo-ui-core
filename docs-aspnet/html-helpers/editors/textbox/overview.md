@@ -43,7 +43,7 @@ The following example demonstrates the basic configuration for the TextBox.
 
 * [Appearance]({% slug textbox_appearance %})—The TextBox comes with built-in styling options that allow you to customize the appearance of the component.
 * [Labels]({% slug htmlhelpers_labels_textbox %})—You can associate the TextBox with a label.
-* [Accessibility]({% slug accessibility_textbox_aspnetcore %})—The TextBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_textbox_aspnetcore %})—The TextBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 * [RTL support]({% slug rtl_textbox_aspnetcore %})—You can use the Right-to-left (RTL) support of the TextBox to render its content for right-to-left languages, such as Arabic, Hebrew, Chinese, or Japanese.
 * [Events]({% slug events_textbox_aspnetcore %})—The TextBox emits multiple events that you can handle and control the behavior of the component.
 

@@ -168,7 +168,7 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 | [Columns]({% slug columns_multicolumncombobox_aspnetcore %})|The MultiColumnComboBox allows you to predefine the columns that will be rendered in its drop-down list through the `dropDownWidth` option.|
 | [Filtering]({% slug filtering_multicolumncombobox_aspnetcore %})|Apart from the standard filter options, the MultiColumnComboBox allows you to set fields against which the data will be filtered.|
 | [Virtualization]({% slug virtualization_multicolumncombobox_aspnetcore %})|You can configure a MultiColumnComboBox to use virtualization.|
-| [Accessibility]({% slug accessibility_aspnetcore_multicolumncombobox %})|The MultiColumnComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
+| [Accessibility]({% slug accessibility_aspnetcore_multicolumncombobox %})|The MultiColumnComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
 | [Cascading]({% slug htmlhelpers_multicolumncombobox_cascading %})|The cascading MultiColumnComboBox is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options that are based on the DataValueField in the previous MultiColumnComboBox.|
 
 ## Next Steps

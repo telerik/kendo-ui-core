@@ -1,12 +1,12 @@
 ---
 title: Web Content Accessibility Guidelines (WCAG)
 page_title: Web Content Accessibility Guidelines (WCAG) - Kendo UI Accessibility Support
-description: "Learn more about the Web Content Accessibility Guidelines (WCAG) 2.1 Accesibility support provided by Kendo UI components."
+description: "Learn more about the Web Content Accessibility Guidelines (WCAG) 2.2 Accesibility support provided by Kendo UI components."
 slug: section508_wcag21_accessibility_support
 position: 2
 ---
 
-# WCAG 2.1 Compliance
+# WCAG 2.2 Compliance
 
 The [`Web Content Accessibility Guidelines (WCAG)`](https://www.w3.org/TR/WCAG/) which are set by the World Wide Web Consortium (W3C) define recommendations for making web content accessible to people with physical and cognitive disabilities. WCAG defines accessibility principles with their respective success criteria. Depending on the implemented success criteria by a web application, the WCAG provide the `A`, `AA`, and `AAA` levels of accessibility conformance.
 
@@ -18,9 +18,9 @@ The following table lists the Section 508 and WCAG compliance levels of support 
 
 > The described level of compliance in the table below is achievable with the **Ocean Blue A11y Sass Swatch.**
 
-**Table 1: 508 and WCAG 2.1 compliance with Kendo UI widgets**
+**Table 1: 508 and WCAG 2.2 compliance with Kendo UI widgets**
 
-|Component |WCAG 2.1| Accessibility Example |
+|Component |WCAG 2.2| Accessibility Example |
 |:---          |:---|:---
 |ActionSheet   |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
 |AppBar	       |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/appbar)|

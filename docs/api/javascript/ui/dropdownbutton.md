@@ -456,7 +456,6 @@ Returns the menu items as DOM elements wrapped in jQuery collection.
 
 #### Example
 
-```Dojo
     <button id="dropdownbutton" type="button">Button</button>
     <script>
         $("#dropdownbutton").kendoDropDownButton({
@@ -470,11 +469,6 @@ Returns the menu items as DOM elements wrapped in jQuery collection.
         var items = button.items();
         console.log(items);
     </script>
-```
-
-#### Returns
-
-`jQuery`
 
 ### open
 

@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: jQuery Popover Documentation - Popover Accessibility
-description: "Get started with the jQuery Popover by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the jQuery Popover by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_popover_widget
 position: 1
 ---
 
 # Popover Accessibility
 
-The Popover is accessible by screen readers and provides WAI-ARIA, Section 508, and WCAG 2.1.
+The Popover is accessible by screen readers and provides WAI-ARIA, Section 508, and WCAG 2.2.
 
 For more information, refer to [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}).
 
@@ -20,11 +20,11 @@ The component follows the WAI-ARIA Authoring Practices for implementing the keyb
 
 The Popover is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in Kendo UI for jQuery]({% slug section508_accessibility_support %}).
 
-## WCAG 2.1
+## WCAG 2.2
 
 The Popover supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/).
 
-For more information, refer to [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %}).
+For more information, refer to [WCAG 2.2 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %}).
 
 ## Accessibility Behavior
 

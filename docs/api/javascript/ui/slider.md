@@ -380,6 +380,28 @@ Adjusts the Slider layout to match the size of the container.
 
 Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
 
+#### Example - subscribe to the change event
+
+    <label>Temperature</label>
+    <input id="slider" class="temperature" />         
+
+    <script>
+        function sliderOnChange(e) {
+            console.log("Change :: new value is: " + e.value);
+        }
+
+        $(document).ready(function() {
+            $("#slider").kendoSlider({
+                change: sliderOnChange,
+                min: 0,
+                max: 30,
+                smallStep: 1,
+                largeStep: 10,
+                value: 18
+            });                    
+        });
+    </script>
+
 #### Event Data
 
 ##### e.value `Number`
@@ -389,6 +411,28 @@ Represents the updated value of the slider.
 ### slide
 
 Fires when the user drags the drag handle to a new position.
+
+#### Example - subscribe to the slide event
+
+    <label>Temperature</label>
+    <input id="slider" class="temperature" />         
+
+    <script>
+        function sliderOnSlide(e) {
+            console.log("Slide :: new slide value is: " + e.value);
+        }
+
+        $(document).ready(function() {
+            $("#slider").kendoSlider({
+                slide: sliderOnSlide,
+                min: 0,
+                max: 30,
+                smallStep: 1,
+                largeStep: 10,
+                value: 18
+            });                    
+        });
+    </script>
 
 #### Event Data
 

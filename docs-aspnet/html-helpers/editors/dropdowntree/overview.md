@@ -192,7 +192,7 @@ The following example demonstrates the basic configuration of the DropDownTree.
 | [Filtering]({% slug htmlhelpers_dropdowntree_filtering_aspnetcore %}) | You are able to filter the displayed DropDownTree items by their text value. |
 | [Items]({% slug htmlhelpers_dropdowntree_items_aspnetcore %}) | You can configure different options for the items of the component. |
 | [Templates]({% slug htmlhelpers_dropdowntree_templates_aspnetcore %}) | The DropDownTree supports customizing its look through templates. |
-| [Accessibility]({% slug accessibility_aspnetcore_dropdowntree %}) | The DropDownTree is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support. |
+| [Accessibility]({% slug accessibility_aspnetcore_dropdowntree %}) | The DropDownTree is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

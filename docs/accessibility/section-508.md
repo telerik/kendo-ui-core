@@ -102,7 +102,7 @@ The following example demonstrates how to specify a text for the week column hea
 ## See Also
 
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
-* [Section 508 and WCAG 2.1 Compliance of Kendo UI Components]({% slug section508_wcag21_accessibility_support %})
+* [Section 508 and WCAG 2.2 Compliance of Kendo UI Components]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})

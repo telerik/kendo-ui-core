@@ -1,7 +1,7 @@
 ---
 title: Accessibility
 page_title: jQuery ProgressBar Documentation - ProgressBar Accessibility
-description: "Get started with the jQuery ProgressBar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the jQuery ProgressBar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_progressbar_widget
 position: 3
 ---
@@ -18,9 +18,9 @@ When used as a loading indicator, the component should follow [the WAI-ARIA spec
 
 The ProgressBar is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in Kendo UI for jQuery]({% slug section508_accessibility_support %}).
 
-## WCAG 2.1
+## WCAG 2.2
 
-The ProgressBar supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
+The ProgressBar supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.2 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
 ## See Also
 

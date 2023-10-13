@@ -91,7 +91,7 @@ The following example demonstrates how to tie a pager to a data source and enabl
 * [Responsive Pager]({% slug responsive_pager_aspnet  %})—The Pager supports responsive design by default. 
 * [Pager Templates]({% slug templates_pager_aspnet %})—Customize the look and feel of the Pager with Kendo Templates.
 * [Globalization and Messages]({% slug globalization_pager_aspnet %})—The globalization process combines the translation of component messages (localization) with adapting them to specific cultures (internationalization and right-to-left support).
-* [Accessibility]({% slug accessibility_aspnetcore_pager %})—The Pager is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_aspnetcore_pager %})—The Pager is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 
 ## Next Steps

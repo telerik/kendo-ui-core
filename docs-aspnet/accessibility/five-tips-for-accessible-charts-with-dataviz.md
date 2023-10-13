@@ -21,7 +21,7 @@ Section 508 specifies the law which governs the creation of accessible software 
 
 The fundamental requirement that refers to and is fulfilled by the Kendo UI data visualization components is:
 * Section 508&mdash;"(a) A text equivalent for every non-text element shall be provided (e.g., via `alt`, `longdesc`, or in-element content)."
-* WCAG 2.1&mdash;"Guideline 1.1 Text Alternatives: Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language."
+* WCAG 2.2&mdash;"Guideline 1.1 Text Alternatives: Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language."
 
 Providing text equivalents for non-text content is a key tenant of accessibility. Visual content, such as images, animations, video, and audio resources, is a valuable asset for each web application and website. However, these visual elements are impossible to parse by screen readers and other assistive technologies and cannot be enjoyed by disabled users. That is why, both Section 508 and WCAG require that all non-decorative and non-text content has to be made accessible to assistive technologies.
 
@@ -256,7 +256,7 @@ If you do not want to display the raw data with the Chart for all users on-scree
 ## See Also
 
 * [Section 508](https://section508.gov/)
-* [WCAG 2.1 (Quick Reference)](https://www.w3.org/WAI/WCAG21/quickref/)
+* [WCAG 2.2 (Quick Reference)](https://www.w3.org/WAI/WCAG21/quickref/)
 * [W3C SVG Accessibility Guidelines](https://www.w3.org/TR/SVG-access/)
 * [HTML5 Accessibility: SVG Text (Paciello Group Blog Post)](https://developer.paciellogroup.com/blog/2011/08/html5-accessibility-chops-interactive-image-example/)
 * [Overview of Accessibility Features in {{ site.product }}]({% slug overview_accessibility %})

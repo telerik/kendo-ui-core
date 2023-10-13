@@ -31,7 +31,7 @@ Kendo UI is a well-suited solution when building SharePoint add-ins because of t
 * Easy integration with the SharePoint REST API.
 * Built-in themes, including one that matches the Office 365 look and feel.
 * Built-in export functionalities to most common office formats, such as Excel, PDF, and image files.
-* Widely-recognized accessibility standards like WAI-ARIA, WCAG 2.1, and Section 508.
+* Widely-recognized accessibility standards like WAI-ARIA, WCAG 2.2, and Section 508.
 
 ## Configuring DataSource
 

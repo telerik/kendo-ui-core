@@ -89,7 +89,7 @@ The following example demonstrates the basic configuration for the Breadcrumb.
 * [Items]({% slug htmlhelpers_breadcrumb_aspnetcore_items %})&mdash;The `items` configuration allows you to take full control over the Breadcrumb items by setting their icons, text content, and other attributes.
 * [Editing]({% slug htmlhelpers_breadcrumb_aspnetcore_editing %})&mdash;You can allow the users to edit the paths that the Breadcrumb sets.
 * [Navigation]({% slug htmlhelpers_breadcrumb_aspnetcore_navigation %})&mdash;By using the `Navigational` configuration, you can enable automatic navigation.
-* [Accessibility]({% slug accessibility_aspnetcore_breadcrumb %})&mdash;The Breadcrumb is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_aspnetcore_breadcrumb %})&mdash;The Breadcrumb is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 ## Next Steps
 

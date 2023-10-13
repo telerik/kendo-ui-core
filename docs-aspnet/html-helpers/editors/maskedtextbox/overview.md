@@ -43,7 +43,7 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 
 * [Mask rules]({% slug validation_maskedtextbox_aspnetcore %})—You can configure a variety of predefined masks as well as custom masks in the MaskedTextBox.
 * [Globalization]({% slug globalization_maskedtextbox_aspnetcore %})—The globalization process combines the translation of component messages (localization) with adapting them to specific cultures (internationalization and right-to-left support).
-* [Accessibility]({% slug accessibility_maskedtextbox_aspnetcore %})—The MaskedTextBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_maskedtextbox_aspnetcore %})—The MaskedTextBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the MaskedTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/maskedtextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

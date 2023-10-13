@@ -74,7 +74,21 @@ The element opacity.
 Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
 
 ### stroke `kendo.drawing.StrokeOptions`
-The stroke options of the text.
+The [stroke options](/api/javascript/drawing/stroke-options/) of the text.
+
+#### Example - set the stroke option of the Text
+
+    <div id="container"></div>
+    <script>
+        var svg = kendo.drawing.Surface.create($("#container"), { type: "svg" });
+        var text = new kendo.drawing.Text("Some Text", [100, 100], {
+            stroke: {
+                color: '#E4141B',
+                dashType: "dash"
+            }
+        })
+        svg.draw(text);
+    </script>
 
 ### tooltip `kendo.drawing.TooltipOptions`
 The tooltip options of the shape.

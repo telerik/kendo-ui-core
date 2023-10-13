@@ -169,7 +169,7 @@ The following example demonstrates the basic configuration of the Editor.
 | [Immutable elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})| By using the immutable feature, the Editor allows you to add HTML elements that cannot be edited by the user.|
 | [CRUD operations]({% slug htmlhelpers_crud_editor_aspnetcore %})| The Editor docs and demos demonstrate how to save, read, update, and delete text content in a database.|
 | [Styling the content]({% slug htmlhelpers_editor_styling_aspnetcore %})| You can choose between the default styling options for the Editor's content or add your custom styles.|
-| [Accessibility]({% slug accessibility_aspnetcore_editor %})| The Editor is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
+| [Accessibility]({% slug accessibility_aspnetcore_editor %})| The Editor is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
 
 ## Next Steps
 

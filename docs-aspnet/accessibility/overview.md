@@ -19,7 +19,7 @@ Refer to our [accessibility demos](https://demos.telerik.com/{{ site.platform }}
 Accessible websites and applications normally provide support for:
 
 * [Section 508](#section-508)
-* [W3C Web Content Accessibility Guidelines (WCAG) 2.1](#wcag-21)
+* [W3C Web Content Accessibility Guidelines (WCAG) 2.2](#wcag-22)
 * [WAI-ARIA](#wai-aria)
 * [Keyboard navigation requirements](#keyboard-navigation)
 
@@ -27,7 +27,7 @@ Accessible websites and applications normally provide support for:
 
 Section 508 of the Rehabilitation Act is a set of accessibility standards set by the U.S. General Services Administration (GSA). They apply to electronic and information technology and contain technical criteria specific to various types of technologies and performance-based requirements which focus on the functional capabilities of the listed products.
 
-### WCAG 2.1
+### WCAG 2.2
 
 The W3C Web Content Accessibility Guidelines set the standards for applications regarding the provision of accessible content. Depending on the number of guidelines that are followed when building an application, W3C defines three levels of accessibility conformance&mdash;A, AA, and AAA levels.
 

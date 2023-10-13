@@ -307,7 +307,7 @@ The following example demonstrates the basic configuration of the Gantt.
 | [Planned vs Actual]({% slug htmlhelpers_gantt_planned_vs_actual_aspnetcore %}) | You can compare the actual `start` and `end` dates with the originaly planned dates. |
 | [Resources]({% slug htmlhelpers_gantt_resources_aspnetcore %}) | The Gantt allows you to assign optional resources to the Gantt tasks. |
 | [Templates]({% slug htmlhelpers_gantt_templates_aspnetcore %}) | You can customizing the rendering of the Gantt tasks through templates. |
-| [Accessibility]({% slug accessibility_aspnetcore_gantt %}) | The Gantt is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support. |
+| [Accessibility]({% slug accessibility_aspnetcore_gantt %}) | The Gantt is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

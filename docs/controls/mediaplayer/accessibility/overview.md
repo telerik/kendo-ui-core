@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: jQuery MediaPlayer Documentation - MediaPlayer Accessibility
-description: "Get started with the jQuery MediaPlayer by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the jQuery MediaPlayer by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_mediaplayer_jquery
 position: 1
 ---
 
 # MediaPlayer Accessibility
 
-The MediaPlayer does not comply with the Section 508 and WCAG 2.1 requirements. Its major deficit is the lack of captions. Such a feature is not currently planned for implementation.
+The MediaPlayer does not comply with the Section 508 and WCAG 2.2 requirements. Its major deficit is the lack of captions. Such a feature is not currently planned for implementation.
 
 For more information on the keyboard navigation in the widget, please refer to the [Keyboard navigation demo of the Kendo UI MediaPlayer]({% slug keynav_mediaplayer_jquery %})
 

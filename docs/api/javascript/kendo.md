@@ -880,6 +880,29 @@ performance are available.
     $("#output").html(template({}));
     </script>
 
+#### Example - use a function in a template
+
+    <div id="example"></div>
+    <script id="javascriptTemplate" type="text/x-kendo-template">
+        <ul>
+        # for (var i = 0; i < data.length; i++) { #
+            <li>#= myCustomFunction(data[i]) #</li>
+        # } #
+        </ul>
+    </script>
+    <script type="text/javascript">
+        // Use a custom function inside the template and define it in the global JavaScript scope.
+        function myCustomFunction (str) {
+            return str.replace(".", " ");
+        }
+        // Get the external template definition by using a jQuery selector.
+        var template = kendo.template($("#javascriptTemplate").html());
+        // Create some dummy data.
+        var data = ["Todd.Holland", "Steve.Anglin", "Burke.Ballmer"];
+        var result = template(data); //Execute the template
+        $("#example").html(result); //Append the result
+    </script>
+
 #### Returns
 `Function` the compiled template as a JavaScript function. When called this function will return the generated HTML string.
 

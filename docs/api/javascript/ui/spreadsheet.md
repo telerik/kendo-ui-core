@@ -1997,7 +1997,7 @@ data.
 
 ### toJSON
 
-Serializes the workbook in the format that is defined in the [configuration](#configuration).
+Serializes the workbook in the format that is defined in the configuration.
 
 Note that this method is unable to serialize embedded images.  To
 properly save images you need to use [`saveJSON`](#methods-saveJSON),

@@ -13,7 +13,7 @@ In addition to providing WAI-ARIA and keyboard support, Kendo UI for jQuery ship
 
 ## Ocean Blue A11y Accessibility Swatch
 
-The [1.4.3 Contrast (Minimum)](https://www.w3.org/TR/WCAG21/#contrast-minimum) and [1.4.6 Contrast (Enhanced) Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG21/#contrast-enhanced) sections define the required contrast ratio for compliance.
+The [1.4.3 Contrast (Minimum)](https://www.w3.org/TR/WCAG22/#contrast-minimum) and [1.4.6 Contrast (Enhanced) Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG22/#contrast-enhanced) sections define the required contrast ratio for compliance.
 
 WCAG Level AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text. WCAG Level AAA requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text.
 
@@ -45,7 +45,7 @@ import '@progress/kendo-theme-default/dist/default-ocean-blue-a11y.scss';
 
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.1 Compliance of Kendo UI Components]({% slug section508_wcag21_accessibility_support %})
+* [Section 508 and WCAG 2.2 Compliance of Kendo UI Components]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})

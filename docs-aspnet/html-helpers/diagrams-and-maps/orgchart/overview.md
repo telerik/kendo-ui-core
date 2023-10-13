@@ -106,7 +106,7 @@ The following example demonstrates the basic configuration of the OrgChart compo
 * [Editing]({% slug htmlhelpers_orgchart_editing_aspnetcore %})—The OrgChart provides a built-in editing functionality, which is enabled by default.
 * [Grouping]({% slug htmlhelpers_orgchart_grouping_aspnetcore %})—The OrgChart enables you to group root nodes or nodes that have the same parent.
 * [Templates]({% slug htmlhelpers_orgchart_templates_aspnetcore %})—The OrgChart allows you to customize its nodes and group headers by using [Kendo Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview).
-* [Accessibility]({% slug accessibility_aspnetcore_orgchart %})—The OrgChart is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_aspnetcore_orgchart %})—The OrgChart is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 ## Next Steps
 

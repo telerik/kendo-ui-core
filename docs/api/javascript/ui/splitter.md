@@ -665,7 +665,7 @@ The collapsing pane of the Splitter.
 
 ### contentLoad
 
-Triggered when the content for a pane has finished loading.
+Triggered when the content for a pane has finished loading from a remote endpoint.
 
 #### Event Data
 
@@ -675,36 +675,53 @@ The pane whose content has been loaded.
 
 #### Example - subscribe to the "contentLoad" event during initialization
 
+    <base href="https://demos.telerik.com/kendo-ui/splitter/ajax"> 
     <div id="splitter">
-      <div>Pane A</div>
-      <div>Pane B</div>
+      <div></div>
+      <div></div>
     </div>
+
     <script>
-    $("#splitter").kendoSplitter({
-      panes: [ { content: "/foo" }, {} ],
-      contentLoad: function(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log($(e.pane).html() + " has been loaded");
+      $(document).ready(function() {
+        $("#splitter").kendoSplitter({
+          panes: [
+            { contentUrl: '../content/web/splitter/ajax/ajaxContent1.html' },
+            { contentUrl: '../content/web/splitter/ajax/ajaxContent2.html' }
+          ],
+          contentLoad: function(e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log($(e.pane).html() + " has been loaded");
+          }
+        });
+      });
+    </script> 
+
+    <style>
+      #splitter {
+        height: 480px;
       }
-    });
-    </script>
+    </style>
 
 #### Example - subscribe to the "contentLoad" event after initialization
 
+    <base href="https://demos.telerik.com/kendo-ui/splitter/ajax"> 
     <div id="splitter">
-      <div>Pane A</div>
-      <div>Pane B</div>
+      <div></div>
+      <div></div>
     </div>
     <script>
-    function splitter_contentLoad(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log($(e.pane).html() + " has been loaded");
-    }
-    $("#splitter").kendoSplitter({
-      panes: [ { content: "/foo" }, {} ]
-    });
-    var splitter = $("#splitter").data("kendoSplitter");
-    splitter.bind("contentLoad", splitter_contentLoad);
+      function splitter_contentLoad(e) {
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log($(e.pane).html() + " has been loaded");
+      }
+      $("#splitter").kendoSplitter({
+        panes: [
+          { contentUrl: '../content/web/splitter/ajax/ajaxContent1.html' },
+          { contentUrl: '../content/web/splitter/ajax/ajaxContent2.html' }
+        ]
+      });
+      var splitter = $("#splitter").data("kendoSplitter");
+      splitter.bind("contentLoad", splitter_contentLoad);
     </script>
 
 ### error

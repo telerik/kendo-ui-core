@@ -211,7 +211,7 @@ The following example demonstrates the basic configuration for the ListView.
 | [Scroll modes]({% slug htmlhelpers_listview_aspnetcore_scrolling %}) | ListView enables you to use the default scroll mode or utilize endless scrolling. |
 | [Selection]({% slug htmlhelpers_listview_aspnetcore_selection %}) | Choose between single or multiple selection mode. |
 | [Globalization]({% slug globalization_htmlhelpers_listview %}) | The ListView component allows you to adapt your apps for international users by translating the component messages and applying a right-to-left layout. |
-| [Accessibility]({% slug accessibility_htmlhelpers_listview %}) | The ListView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support. |
+| [Accessibility]({% slug accessibility_htmlhelpers_listview %}) | The ListView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

@@ -277,7 +277,7 @@ The following example demonstrates the basic configuration of the Menu.
 
 * [Binding]({% slug htmlhelpers_menu_databinding_aspnetcore %})&mdash;To bind the Menu to data, you can apply various approaches, for example, binding to a server end point, binding to a hierarchical model, or manually defining the properties of the Menu items.
 * [ContextMenu]({% slug htmlhelpers_contextmenu_aspnetcore %})&mdash;The ContextMenu displays hierarchical lists of items in a popup.
-* [Accessibility]({% slug accessibility_aspnetcore_menu %})&mdash;The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_aspnetcore_menu %})&mdash;The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 * [Security trimming]({% slug securitytrimming_menu_aspnetmvc %})&mdash;The built-in security trimming functionality of the Menu is enabled by default.
 * [Events]({% slug events_menu %})&mdash;The Menu emits various events that allow you to control what happens when the user interacts with it.
 

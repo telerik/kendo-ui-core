@@ -33,7 +33,7 @@ The following scenario demonstrates how to work with the NumericTextbox in terms
 
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.1 Compliance of Kendo UI Components]({% slug section508_wcag21_accessibility_support %})
+* [Section 508 and WCAG 2.2 Compliance of Kendo UI Components]({% slug section508_wcag21_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})
 * [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})

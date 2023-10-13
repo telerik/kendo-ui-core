@@ -1,8 +1,8 @@
 ---
 title: Overview
-page_title: "{{ site.product }} AutoComplete Documentation - AutoComplete Accessibility"
-description: "Get started with the {{ site.product }} AutoComplete and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_autocomplete
+page_title: jQuery AutoComplete Documentation | AutoComplete Accessibility
+description: "Get started with the jQuery AutoComplete by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+slug: accessibility_kendoui_autocomplete_widget
 position: 1
 ---
 
@@ -15,8 +15,8 @@ The AutoComplete is accessible by screen readers and provides WAI-ARIA, Section 
 > As it is stated in [WAI-ARIA 1.2](https://www.w3.org/TR/wai-aria-1.2/#combobox) *"The Guidance for combobox has changed significantly in ARIA 1.2 due to problems with implementation of the previous patterns"*. Therefore, we will keep the current state, even if it contradicts the WAI-ARIA 1.1 specification.
 
 For more information, refer to:
-* [Keyboard navigation by the Telerik UI AutoComplete]({% slug keynav_aspnetcore_autocomplete %})
-* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})
+* [Keyboard navigation by the Kendo UI AutoComplete]({% slug keynav_kendoui_autocomplete_widget %})
+* [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 
 
 
@@ -107,8 +107,13 @@ The AutoComplete has been tested with the following screen readers and browsers 
 
 The AutoComplete has been tested with [axe-core](https://github.com/dequelabs/axe-core).
 
+### Test Example
+
+A live test example of the AutoComplete component could be found here: https://demos.telerik.com/kendo-ui/accessibility/autocomplete
+
 ## See Also
 
-* [Keyboard Navigation by the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/keyboard-navigation)
-* [Keyboard Navigation by the AutoComplete HtmlHelper for {{ site.framework }}]({% slug keynav_aspnetcore_autocomplete %})
-* [Accessibility in {{ site.product }}]({% slug compliance_accessibility %})
+* [Keyboard Navigation by the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/keyboard-navigation)
+* [Keyboard Navigation by the AutoComplete]({% slug keynav_kendoui_autocomplete_widget %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

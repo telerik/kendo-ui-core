@@ -66,7 +66,7 @@ The TimePicker TagHelper configuration options are passed as attributes.
 * [Formats]({% slug formats_timepicker_aspnetcore %})—The TimePicker allows you to define its time formatting.
 * [Validation]({% slug htmlhelpers_timepicker_aspnetcore_validation %})—The TimePicker is designed to keep its input value unchanged even when the typed time is invalid.
 * [Globalization]({% slug globalization_timepicker_aspnetcore %})—The globalization process combines the translation of component messages (localization) with adapting them to specific cultures.
-* [Accessibility]({% slug accessibility_timepicker_aspnetcore %})—The TimePicker is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_timepicker_aspnetcore %})—The TimePicker is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 
 ## Next Steps

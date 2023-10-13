@@ -54,7 +54,7 @@ The following example demonstrates how to define the SplitButton.
 * [Items]({% slug htmlhelpers_splitbutton_aspnetcore_items %})&mdash;You can configure the SplitButton by adding items to the popup.
 * [Appearance]({% slug htmlhelpers_splitbutton_aspnetcore_appearance %})&mdash;You can control the appearance of the SplitButton by configuring its styling options.
 * [Icons]({% slug htmlhelpers_splitbutton_aspnetcore_icons %})&mdash;You can enchance the SplitButton's textual content by adding icons.
-* [Accessibility]({% slug accessibility_aspnetcore_splitbutton %})&mdash;The SplitButton is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_aspnetcore_splitbutton %})&mdash;The SplitButton is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the SplitButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/splitbutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

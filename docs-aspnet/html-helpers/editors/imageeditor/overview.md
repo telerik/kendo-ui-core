@@ -45,7 +45,7 @@ The following example demonstrates how to define the ImageEditor.
 
 * [Tools]({% slug htmlhelpers_imageeditor_tools_aspnetcore %})—The ImageEditor offers a collection of tools that allow the user to interact with the UI component.
 * [Events]({% slug events_imageeditor_aspnetcore %})—To control the behavior of the component upon user interaction, you can use the events that the component emits.
-* [Accessibility]({% slug accessibility_aspnetcore_imageeditor %})—The ImageEditor is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_aspnetcore_imageeditor %})—The ImageEditor is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 ## Next Steps
 

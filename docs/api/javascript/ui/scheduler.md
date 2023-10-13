@@ -6766,13 +6766,19 @@ Adds a new scheduler event and opens the edit form.
 The object containing the scheduler event fields.
 
 #### Example - add a new event
+    <button id='addEvent'>Add New Event</button>
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6")
-    });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    scheduler.addEvent({ title: "(No title)" });
+      
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6")
+      });
+      
+      var scheduler = $("#scheduler").data("kendoScheduler"); 
+      
+      $("#addEvent").click(function (){       
+        scheduler.addEvent({ title: "(No title)" }); 
+      })
     </script>
 
 ### cancelEvent

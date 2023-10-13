@@ -44,7 +44,7 @@ The following example demonstrates the basic configuration for the DateInput.
 * [Appearance](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/appearance)&mdash;You are able to customize the appearance of the DateInput by configuring its size, fill mode, and border radius.
 * [Floating Label](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/floating-label)&mdash;You can configure a floating label placeholder text for the DateInput. This label will float above that field and remain visible once the user starts interacting with that input.
 * [Globalization](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/globalization/localization)&mdash;You can employ globalization which adjusts the date formats (localization) and adapts the component to specific cultures (internationalization and right-to-left support).
-* [Accessibility](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/accessibility/overview)&mdash;The DateInput is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/accessibility/overview)&mdash;The DateInput is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 ## Next Steps
 
