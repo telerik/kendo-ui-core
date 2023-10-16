@@ -20,6 +20,7 @@ The process draws on the following milestones:
  1. [Bind the Grid to data](#3-bind-the-grid-to-data)
  1. [Initialize the Grid](#4-initialize-the-grid)
  1. [Configure the Grid](#5-configure-the-grid)
+ 1. [Add a license file to your app](#6-add-your-license-file)
 
  >tip Visual Studio Code users can speed up the project creation by using the [Kendo UI Productivity Tools for Visual Studio Code](intro/installation/vscode-integration).
  
@@ -250,7 +251,11 @@ The runnable example below demonstrates the final version of the page that you w
 </html>
 ```
 
-This is it! Now you are ready to dive more deeply into Kendo UI for jQuery and implement modern and slick web applications!
+## 6. Add Your License File
+
+Using any Kendo UI for jQuery assets from the [Kendo UI CDN]({% slug kendoui_cdn_services_installation %}), [Kendo UI NPM]({% slug kendoui_npm_packages_kendoui_installation %}) or the downloaded Kendo UI trial versions requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message]({% slug invalid-license %}) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Setting Up the License File]({% slug using-license-code %}) article.
 
 ## Next Steps
 

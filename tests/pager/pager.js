@@ -816,5 +816,20 @@
             });
 
         });
+
+        it("pager renders correctly when dataSource is read before pager initialization", function() {
+            var dataSource = new DataSource({
+                pageSize: 1,
+                data: [1, 2, 3]
+            });
+
+            dataSource.read();
+
+            var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                dataSource: dataSource,
+            });
+
+            assert.isOk(pager.find(".k-pager-numbers").css("display") !== "none");
+        });
     });
 }());

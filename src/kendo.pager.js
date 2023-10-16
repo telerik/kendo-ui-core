@@ -259,16 +259,16 @@ var __meta__ = {
                 .on(CHANGE + NS , "select.k-dropdown", that._numericSelectChange.bind(that))
                 .addClass("k-pager");
 
+            if (options.size) {
+                that.element.addClass(kendo.getValidCssClass("k-pager-", "size", options.size));
+            }
+
             if (options.autoBind) {
                 that.refresh();
             }
 
             that._resizeHandler = that.resize.bind(that, true);
             $(window).on("resize" + NS, that._resizeHandler);
-
-            if (options.size) {
-                that.element.addClass(kendo.getValidCssClass("k-pager-", "size", options.size));
-            }
 
             that._navigatable();
 

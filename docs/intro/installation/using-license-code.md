@@ -8,7 +8,7 @@ position: 5
 
 # Setting Up the License File
 
-Using any Kendo UI for jQuery scripts that are [installed through NPM]({% slug kendoui_npm_packages_kendoui_installation %}), imported through the [Kendo UI CDN]({% slug kendoui_cdn_services_installation %}), or downloaded as trial bundles requires your to provide a personal license file. Follow the steps in this article to download a license file, add it to your application, and then reference it.
+Using any Kendo UI for jQuery scripts that are [installed through NPM]({% slug kendoui_npm_packages_kendoui_installation %}), imported through the [Kendo UI CDN]({% slug kendoui_cdn_services_installation %}), or downloaded as trial bundles requires you to provide a personal license file. Follow the steps in this article to download a license file, add it to your application, and then reference it.
 
 Providing a license file is not required when using distribution methods such as NuGet, Bower, and locally downloaded Kendo UI commercial bundles.
 
@@ -25,7 +25,7 @@ To add a Kendo UI license file to your application:
 
 1. [Download a license file.](#1-get-a-license-file)
 2. [Add the license file in your application.](#2-add-the-license-file)
-2. [Add a Reference or Import the License File.](#3-add-a-reference-or-import-the-license-file)
+2. [Add a reference or import the license file.](#3-add-a-reference-or-import-the-license-file)
 
 ## 1. Get a License File
 
@@ -137,7 +137,7 @@ require("./kendo-ui-license.js");
 // The rest of the code.
 ```
 
-## Related Articles
+## Next Steps
 
 * [Troubleshooting an Invalid Kendo UI License]({% slug invalid-license %})
 * [License File Frequently Asked Questions]({% slug license-code-faq %})
