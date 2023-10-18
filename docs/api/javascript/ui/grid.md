@@ -9668,35 +9668,51 @@ Apart from the built-in tools, the Grid fully exposes the [ToolBar.items API](/a
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      toolbar: [ {
+      $("#grid").kendoGrid({
+        toolbar: [ {
           type: "button",
           text: "Button"
-      }, {
+        }, {
           type: "button",
           text: "Toggle",
           togglable: true,
           icon: "cancel"
-      }, {
+        }, {
           type: "splitButton",
           text: "SplitButton",
           menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
-      } ],
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33},
+        },{
+          name: "dropDownButton",
+          type: "dropDownButton",
+          text: "Country",
+          menuButtons: [
+            { id: "1", text: "Belgium" },
+            { id: "2", text: "France" }
+          ]
+        },{
+          name: "buttonGroup",
+          type: "buttonGroup",
+          buttons: [
+            { text: "Option 1", togglable: true },
+            { text: "Option 2", togglable: true },
+            { text: "Option 3", togglable: true }
+          ]
+        }],
+        columns: [
+          { field: "name" },
+          { field: "age" }
         ],
-        schema: {
-          model: { id: "id" }
-        }
-      },
-      editable: true
-    });
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33},
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        editable: true
+      });
     </script>
 
 ### toolbar.iconClass `String`

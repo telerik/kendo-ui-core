@@ -830,23 +830,23 @@ The operator type of the criterion.
 
 The supported types vary based on the inferred column data type (inferred):
 
-* `Text`
-    * `contains` - The text contains the value.
-    * `doesnotcontain` - The text does not contain the value.
-    * `startswith` - The text starts with the value.
-    * `endswith` - The text ends with the value.
-* `Date`
-    * `eq` - The date is the same as the value.
-    * `neq` - The date is not the same as the value.
-    * `lt` -  The date is before the value.
-    * `gt` -  The date is after the value.
-* `Number`
-    * `eq` - Is equal to the value.
-    * `neq` - Is not equal to the value.
-    * `gte` - Is greater than or equal to the value.
-    * `gt` - Is greater than the value.
-    * `lte` - Is less than or equal to the value.
-    * `lt` - Is less than the value.
+*   `Text`
+        - `contains` - The text contains the value.
+        - `doesnotcontain` - The text does not contain the value.
+        - `startswith` - The text starts with the value.
+        - `endswith` - The text ends with the value.
+*   `Date`
+        - `eq` - The date is the same as the value.
+        - `neq` - The date is not the same as the value.
+        - `lt` -  The date is before the value.
+        - `gt` -  The date is after the value.
+*   `Number`
+        - `eq` - Is equal to the value.
+        - `neq` - Is not equal to the value.
+        - `gte` - Is greater than or equal to the value.
+        - `gt` - Is greater than the value.
+        - `lte` - Is less than or equal to the value.
+        - `lt` - Is less than the value.
 
 ### sheets.filter.columns.criteria.value `String`
 

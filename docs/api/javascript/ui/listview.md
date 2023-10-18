@@ -2509,7 +2509,7 @@ The event handler function context (available via the `this` keyword) will be se
         ],
         dataBound: function() {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-          console.log("ListView is bound and ready to render.");
+          console.log("ListView is bound.");
         }
       });
     </script>

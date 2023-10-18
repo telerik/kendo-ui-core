@@ -729,6 +729,26 @@ Opens a Dialog and brings it on top of any other open Dialog or Window instances
     dialog.open();
     </script>
 
+### close
+
+Closes the Dialog.
+#### Example
+
+    <div id="dialog"></div>
+      <script>
+      $("#dialog").kendoDialog({
+        title: "Kendo Dialog Component",
+        content: "This is your Kendo Dialog.",
+        visible: true
+      });
+      var dialog = $("#dialog").data("kendoDialog");
+      
+      setTimeout(function(){
+        dialog.close();
+      },3000)
+      
+    </script>
+
 ### title `String` *(optional)*
 
 Gets or sets the title of a Dialog. Can be a text string. Supports chaining when used as a setter. If passed to the method, an HTML string would be escaped.
