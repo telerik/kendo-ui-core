@@ -9,17 +9,27 @@ position: 6
 
 # Content Security Policy
 
-[Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) is a supplementary security approach which helps you detect and handle specific security attacks such as Cross-Site Scripting (XSS) and data-injection ones.
+[Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) is a supplementary security approach which helps you prevent specific security attacks such as Cross-Site Scripting (XSS) and data-injections.
+
+>tipAs of R3 2023, {{ site.product }} is fully compatible with strict Content Security Policy. The `unsafe-inline` keyword is no longer required in the "style-src" directive.
+
+The following code shows how to turn on the strict CSP mode:
+
+ ```
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://kendo.cdn.telerik.com https://code.jquery.com/; style-src 'self' https://kendo.cdn.telerik.com;" />
+ ```
 
 If the strict CSP mode is enabled, some browser features are disabled by default:
 
-* Inline JavaScript, such as `<script></script>`, or DOM event attributes, such as `onclick`, are blocked. All script code must live in separate files that are served from the allow-listed domain.
+* Inline JavaScript and CSS, such as `<script></script>`, `<style></style>`, or DOM event attributes, such as `onclick`, are blocked. All JavaScript and CSS code must live in separate files that are served from the allow-listed domain.
 
 * Dynamic code evaluation through `eval()` and string arguments for both `setTimeout` and `setInterval` are blocked.
 
 ## (For R1 2023 SP1 and Later) Working with Telerik UI for {{ site.framework }} Components
 
-As of R1 2023 release, the Kendo UI scripts address the `unsafe-eval` directive for all components except for the [Spreadsheet](https://docs.telerik.com/kendo-ui/controls/spreadsheet/overview). For the bigger part of its core engine, the Kendo UI for jQuery Spreadsheet uses the `Function` evaluation, and rewriting the logic of the component will lead to a great number of breaking changes.
+As of R1 2023 release, the Kendo UI scripts address the `unsafe-eval` directive for all components except for the [Spreadsheet](https://docs.telerik.com/kendo-ui/controls/spreadsheet/overview).
+
+> For the bigger part of its core engine, the Kendo UI for jQuery Spreadsheet uses the `Function` evaluation, and rewriting the logic of the component will lead to a great number of breaking changes.
 
 The rest of the Kendo UI components and internal mechanisms have been rewritten to discard the usage of the `eval()` and `new Function()` calls.
 
