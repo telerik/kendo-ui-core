@@ -22,6 +22,7 @@ To get up and running with the project:
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Integrate UI for ASP.NET Core in the project](#integrating-ui-for-aspnet-core)
+1. [Add a license file to your app](#adding-your-license-file)
 
 ## Meeting the Requirements
 
@@ -147,6 +148,12 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
     ![{{ site.product_short }} The created sample page](../getting-started-core/images/sample-page.png)
 
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
+
+## Adding Your License File
+
+Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Adding a License File]({% slug using_license_code %}) article.
 
 ## Next Steps
 

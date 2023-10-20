@@ -85,9 +85,7 @@ You can now start adding components.
 
 ## Adding Components to the Application
 
-As a result of selecting the **GRID AND MENU** template, a Grid component has been added to the `Index.cshtml` view, and a Menu to the `_Layout.cshtml`. The Grid is configured and bound remotely to sample data returned by the `GridController`.
-
-[This article is giving additional information about the Initialization of the Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/getting-started/manual-setup#initializing-the-grid-htmlhelper)
+As a result of selecting the **GRID AND MENU** template, a Grid component has been added to the `Index.cshtml` view, and a Menu to the `_Layout.cshtml`. The Grid is configured and bound remotely to sample data returned by the `GridController`. The next step is to add an additional component to the application.
 
 Add a DatePicker to the `Index.cshtml` view:
 
@@ -105,6 +103,12 @@ Add a DatePicker to the `Index.cshtml` view:
 Press `CTRL+F5` to build and run the application. You have a Grid and a DatePicker on your page.
 
 ![{{ site.product_short }} Sample page showing a Grid and a DatePicker](../getting-started-mvc/images/grid-and-datepicker-mvc.png)
+
+## Adding Your License File
+
+Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Adding a License File]({% slug using_license_code %}) article.
 
 ## Next Steps
 

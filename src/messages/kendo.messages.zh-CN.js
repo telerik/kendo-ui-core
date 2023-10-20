@@ -1758,16 +1758,4 @@
             });
     }
 
-    /* Mobile Messages ------------------------------ */
-
-    /* Mobile Scroller messages */
-    if (kendo.mobile.ui.Scroller) {
-        kendo.mobile.ui.Scroller.prototype.options.messages =
-            $.extend(true, kendo.mobile.ui.Scroller.prototype.options.messages, {
-                "pullTemplate": "下拉刷新",
-                "releaseTemplate": "释放刷新",
-                "refreshTemplate": "刷新中..."
-            });
-    }
-
 })(window.kendo.jQuery);

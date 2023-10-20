@@ -34,6 +34,8 @@ In this tutorial, you will:
 
 1. [Add a Telerik UI component](#adding-a-telerik-ui-component).
 
+1. [Add a license file to your app](#adding-your-license-file).
+
 >tip How about a free Telerik UI onboarding course? Check out the [Video Onboarding]({%slug virtualclass_uiforcore%}) article and learn how to take advantage of the <a href="https://learn.telerik.com/learn" target="_blank">Telerik Virtual Classroom</a>.
 
 ## Prerequisites
@@ -233,6 +235,12 @@ Congratulations! You created a page that uses the [Telerik UI DatePicker]({% slu
 ![{{ site.product_short }} Sample page](../getting-started-core/images/sample-page.png)
 
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
+
+## Adding Your License File
+
+Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Adding a License File]({% slug using_license_code %}) article.
 
 ## Next Steps
 
