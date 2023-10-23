@@ -21,33 +21,78 @@ The Grid provides the following edit modes:
 
 To enable editing:
 
-1. Set the `editable` option: 
-    ```
-    @(Html.Kendo().Grid<ProductViewModel>()
-    .Name("Grid")
-    ...
-    .Editable(e => e.Enabled(true))
-    ```
+1. Set the `Editable` configuration: 
 
-    The default edit mode is [Inline](http://127.0.0.1:4000/{{ site.platform }}/html-helpers/data-management/grid/editing/inline). To use a different edit mode, specify it: 
+    ```HtmlHelper
+        @(Html.Kendo().Grid<ProductViewModel>()
+            .Name("Grid")
+            ...
+            .Editable(e => e.Enabled(true))
+        )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid">
+            <editable enabled="true"/>
+            <!-- Other configuration. -->
+        </kendo-grid>
+    ```
+    {% endif %}
+
+    The default edit mode is [Inline]({% slug inlineediting_grid_aspnetcore %}). To use a different edit mode, specify it through the `Mode` option: 
+
+    ```HtmlHelper
+        @(Html.Kendo().Grid<ProductViewModel>()
+            .Name("Grid")
+            ...
+            .Editable(e => e.Mode(GridEditMode.PopUp))
+        )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid">
+            <editable enabled="true" mode="popup"/>
+            <!-- Other configuration. -->
+        </kendo-grid>
+    ```
+    {% endif %}
         
-        .Editable(e => e.Mode(GridEditMode.PopUp))
-    
-    >For more information, refer to the [API options on the possible configurations](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#editablesystemactionkendomvcuifluentgrideditingsettingsbuildert).
+        
+    >For more information, refer to the {% if site.core %}[HtmlHelper API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder) and [TagHelper API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.taghelpers/grideditablesettingstaghelper) options on the possible configurations{% else %}[API options on the possible configurations](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder){% endif %}.
 
 2. Declare the endpoint to which the updated records will be sent: 
+
+    ```HtmlHelper
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(20)
+            ...
+            .Update("Editing_Update", "Grid")
+        )
     ```
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .PageSize(20)
-        ...
-        .Update("Editing_Update", "Grid")
+    {% if site.core %}
+    ```TagHelper
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+            <transport>
+                <!-- Other configuration. -->
+                <update url="@Url.Action("Editing_Update", "Grid")"/>
+            </transport>
+        </datasource>
     ```
+    {% endif %}
+
 3. Specify the `Id` of the `Model` within the `DataSource` declaration: 
 
+    ```HtmlHelper
+        .Model(model => model.Id(p => p.ProductID))
     ```
-    .Model(model => model.Id(p => p.ProductID))
+    {% if site.core %}
+    ```TagHelper
+        <model id="ProductID">
+            <!-- Other configuration. -->
+        </model>
     ```
+    {% endif %}
 
     >The `Model` method configures the model of the data source. For more information, refer to the article about the [`Model` definition](https://docs.telerik.com/{{ site.platform }}/html-helpers/datasource/model).
 
@@ -76,4 +121,7 @@ To enable editing:
 * [Custom Editor by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing-custom)
 * [Custom Validation Editing by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing-custom-validation)
 * [Find Out More in the Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
-* [Server-Side API](/api/grid)
+* [Server-Side HtmlHelper API](/api/grid)
+{% if site.core %}
+* [Server-Side TagHelper API](/api/taghelpers/grid)
+{% endif %}

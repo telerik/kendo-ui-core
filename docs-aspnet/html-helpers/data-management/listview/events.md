@@ -68,7 +68,5 @@ The following example demonstrates how to subscribe to the [`DataBound`](https:/
 
 ## See Also
 
-* [Using the API of the ListView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/api)
-* [Assigning predefined resources to the ListView (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/resources)
 * [Server-Side API of the ListView](/api/listview)
 * [Client-Side API of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)

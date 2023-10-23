@@ -10,6 +10,20 @@ position: 1
 
 This article lists the breaking or important changes in the 2023 releases of {{ site.product }}.
 
+## {{ site.product }} R3 2023
+
+> Important change
+
+**Web Font Icons**
+
+As of the 2023 R3 release, the font icons have been detached from the [Kendo UI Themes CDN]({% slug cdnservices_core %}) and have been extracted to a separate package. To continue using the font icons, reference the following stylesheet into your application:
+
+```
+    <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
+```
+
+The font icons are also available as an NPM package. For more information on how to install the NPM package, refer to the following [documentation](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage).
+
 ## {{ site.product }} R1 2023 SP2 
 
 **FloatingActionButton**

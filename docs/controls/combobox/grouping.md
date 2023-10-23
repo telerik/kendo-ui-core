@@ -95,7 +95,7 @@ To customize the group title which is displayed in the fixed group header positi
     $(document).ready(function() {
         $("#customers").kendoComboBox({
             height: 200,
-            fixedGroupedTemplate: "<strong>#:data#</strong>", // data is the title of the group.
+            fixedGroupTemplate: "<strong>#:data#</strong>", // data is the title of the group.
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             dataSource: {

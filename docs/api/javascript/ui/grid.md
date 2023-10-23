@@ -1868,7 +1868,18 @@ An html input element that will be rendered in the filter menu.
         }
       } ],
       filterable: true,
-      dataSource: [ { date: new Date() }, { date: new Date() } ]
+      dataSource: {
+          data:[ { date: new Date() }, { date: new Date() } ],
+          schema: {
+            model: {
+              fields: {
+                date: {
+                  type: "date"
+                }
+              }
+            }
+          }
+        }
     });
     </script>
 
@@ -1886,7 +1897,18 @@ An html input element that will be rendered in the filter menu.
         }
       } ],
         filterable: true,
-        dataSource: [ { date: new Date() }, { date: new Date() } ]
+        dataSource: {
+          data:[ { date: new Date() }, { date: new Date() } ],
+          schema: {
+            model: {
+              fields: {
+                date: {
+                  type: "date"
+                }
+              }
+            }
+          }
+        }
     });
     </script>
 

@@ -1,7 +1,7 @@
 ---
 title: First Steps on Windows
 page_title: First Steps with VS for Windows
-description: "Create a sample project that uses the Telerik UI components for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) in Visual Studio for Windows."
+description: "Create a sample project that uses the Telerik UI components for ASP.NET Core (ASP.NET Core MVC application) in Visual Studio for Windows."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started, /getting-started/getting-started, /getting-started/first-steps-default-project
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 1
@@ -10,9 +10,9 @@ permalink: /getting-started/first-steps
 
 # First Steps in {{ site.product }} with VS for Windows
 
-This tutorial demonstrates how to start working with Telerik UI for ASP.NET Core. You will implement the Telerik UI DatePicker for ASP.NET Core in your project by using its dedicated HtmlHelper or TagHelper. In this guide, you will download and implement the components by using NuGet and Visual Studio 2019 for Windows.
+This tutorial demonstrates how to start working with Telerik UI for ASP.NET Core. You will implement the Telerik UI DatePicker for ASP.NET Core in your project by using its dedicated HtmlHelper or TagHelper. In this guide, you will download and implement the components by using NuGet and Visual Studio 2022 for Windows.
 
-The approach demonstrated in this guide is applicable both for new projects and for already existing projects where you want to implement Telerik UI controls.
+The approach demonstrated in this guide is applicable both for new projects and for existing projects where you want to implement Telerik UI controls.
 
 >tipIf you want to start a new project from a template, you can [use the Telerik UI for ASP.NET Core Visual Studio extensions]({%slug gettingstarted_project_template%}) and create a new pre-configured application that has all necessary scripts, styles, and editor templates.
 
@@ -49,7 +49,7 @@ In this tutorial, you will:
 
 ## Creating the Application
 
-1. Open Visual Studio 2019 for Windows and select **Create a new project**.
+1. Open Visual Studio 2022 for Windows and select **Create a new project**.
 
 1. In the search box, enter **Model-View-Controller**, select the **ASP.NET Core Web App (Model-View-Controller)** C# template, and then select **Next**.
 

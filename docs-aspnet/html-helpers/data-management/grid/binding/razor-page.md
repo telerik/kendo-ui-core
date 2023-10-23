@@ -23,12 +23,37 @@ To enable CRUD operations in the Telerik UI Grid within a `RazorPage`:
 
 
     ```HtmlHelper
-        .DataSource(ds => ds.Ajax()
-            .Read(r => r.Url("/Grid/GridCrudOperations?handler=Read").Data("forgeryToken"))
-            .Update(u => u.Url("/Grid/GridCrudOperations?handler=Update").Data("forgeryToken"))
-            .Create(c => c.Url("/Grid/GridCrudOperations?handler=Create").Data("forgeryToken"))
-            .Destroy(d => d.Url("/Grid/GridCrudOperations?handler=Destroy").Data("forgeryToken"))
-            .Model(m => m.Id(id => id.OrderID))
+        @page
+        @model IndexModel
+
+        @using Kendo.Mvc.UI
+
+        @(Html.Kendo().Grid<OrderViewModel>()
+            .Name("grid")
+            .Editable()
+            .Scrollable()
+            .Pageable()
+            .ToolBar(t => t.Create())
+            .Columns(columns =>
+            {
+                columns.Bound(column => column.Freight);
+                columns.Bound(column => column.ShipName);
+                columns.Bound(column => column.ShipCity);
+                columns.Command(column =>
+                {
+                    column.Edit();
+                    column.Destroy();
+                }).Width(230);
+            })
+            .DataSource(ds => ds
+                .Ajax()
+                .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
+                .Update(u => u.Url("/Index?handler=Update").Data("forgeryToken"))
+                .Create(c => c.Url("/Index?handler=Create").Data("forgeryToken"))
+                .Destroy(d => d.Url("/Index?handler=Destroy").Data("forgeryToken"))
+                .Model(m => m.Id(id => id.OrderID))
+                .PageSize(10)
+            )
         )
     ```
     
@@ -90,9 +115,21 @@ To bind the Telerik UI Grid to a property from the PageModel:
     ```
         public class GridPageModel : PageModel
         {
-            public IList<OrderViewModel> orders;
+            [BindProperty]
+            public IList<OrderViewModel> orders { get; set; }
 
-            //other ActionMethods
+            public void OnGet()
+            {
+                orders = new List<OrderViewModel>();
+                // Populate the collection with data.
+                Enumerable.Range(1, 50).ToList().ForEach(i => orders.Add(new OrderViewModel
+                {
+                    OrderID = i + 1,
+                    Freight = i * 10,
+                    ShipName = "ShipName " + i,
+                    ShipCity = "ShipCity " + i
+                }));
+            }
         }
     ```
 
@@ -107,9 +144,24 @@ To bind the Telerik UI Grid to a property from the PageModel:
     ```HtmlHelper
         @(Html.Kendo().Grid<OrderViewModel>(Model.orders)
             .Name("grid")
+            .Scrollable()
+            .Pageable()
+            .Columns(columns =>
+            {
+                columns.Bound(column => column.Freight);
+                columns.Bound(column => column.ShipName);
+                columns.Bound(column => column.ShipCity);
+            })
+            .DataSource(ds => ds
+                .Ajax()
+                .PageSize(20)
+                .ServerOperation(false)
+            )
         )
     ```
 
 ## See Also
 
+* [Remote Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding)
+* [Local Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/local-data-binding)
 * [Server-Side API](/api/grid)

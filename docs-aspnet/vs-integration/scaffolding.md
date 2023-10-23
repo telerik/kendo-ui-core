@@ -1,7 +1,7 @@
 ---
 title: Scaffolding
 page_title: Scaffolding
-description: "Get started with {{ site.product }} and learn how to use the Kendo UI Scaffolder extensions."
+description: "Get started with {{ site.product }} and learn how to use the Telerik UI Scaffolder extensions."
 previous_url: /getting-started/scaffolding, /getting-started/installation/scaffolding, /installation/scaffolding, /scaffolding, /vs-integration-mvc/scaffolding, /html-helpers/data-management/grid/scaffolding, /html-helpers/charts/scaffolding, /html-helpers/scheduling/scheduler/scaffolding, /html-helpers/navigation/treeview/scaffolding
 slug: scaffolding_aspnetcore
 position: 15

@@ -67,4 +67,6 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 > * A jQuery script must be loaded only once. It must be placed only in the `<head>` tag of the `_Layout.cshtml` file. Make sure there are no duplicate jQuery references elsewhere in the `_Layout` file.
 > * The Kendo UI scripts, the Kendo UI CSS file must use a compatible version of the theme, and the `Kendo.Mvc.dll` referenced in the project must be the same version as the Kendo UI script files.
 
+If you prefer to include the Kendo UI scripts and styles from a local source instead of CDNs, refer to the [Local Client-Side Resources]({% slug using_local_client_side_resources %}) article.
+
 #end

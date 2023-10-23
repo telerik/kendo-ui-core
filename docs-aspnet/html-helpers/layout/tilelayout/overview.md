@@ -20,7 +20,7 @@ The component is based on the [CSS Grid](https://css-tricks.com/snippets/css/com
 
 * [Demo page for the TileLayout HtmlHelper](https://demos.telerik.com/{{ site.platform }}/tilelayout/index)
 {% if site.core %}
-* [Demo page for the TileLayout TagHelper](https://demos.telerik.com/{{ site.platform }}/tilelayout/taghelper) 
+* [Demo page for the TileLayout TagHelper](https://demos.telerik.com/{{ site.platform }}/tilelayout/tag-helper) 
 {% endif %}
 
 ## Initializing the TileLayout

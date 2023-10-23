@@ -10,9 +10,9 @@ position: 7
 
 By default, selection in the TreeList is disabled.
 
-> To boost the performance of the TreeList when it is rendering a huge number of items and selection is enabled, use paging and a reasonable page size.
+> To boost the performance of the TreeList when it loads a large dataset and the selection functionality is enabled, use paging and a reasonable page size.
 
-The Kendo UI Treelist exposes different modes of row selection:
+The TreeList exposes different modes of row selection:
 
 * [Row Selection](#row-selection)
 * [Row Checkbox Selection](#single-row-checkbox-selection)
@@ -53,7 +53,23 @@ To enable checkbox selection, add a column to the `columns` collection of the Tr
 ```
 {% endif %}
 
-In order to select or deselect all of the child items of the currently selected row, enable the `includeChildren` option:
+To get the currently selected items, you can use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods). The following example demonstrates how to access and store the data items of the selected TreeList items.
+
+ 1. Call the [`select()` client-side API method](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/select).  The method will return an array with the elements of the selected items.
+ 1. Loop through the selected items and call the [dataItem()](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/dataitem) method for each element to access the data item.
+
+```Script
+    var treeListWidget = $("#treeList").data("kendoTreeList"); // Get a reference to the defined TreeList component.
+    var selectedItemsElements = treeListWidget.select();
+    var selectedDataItems = [];
+    $.each(selectedItemsElements, function(){
+        let dataItem = treeListWidget.dataItem($(this)); // Access the data item.
+        selectedDataItems.push(dataItem); //Store the data item in an array.
+    });
+    console.log(selectedDataItems);
+```
+
+To select or deselect all child items of the currently selected row, enable the `IncludeChildren()` option:
 
 ```HtmlHelper
     columns.Add().Selectable(true).IncludeChildren();
@@ -75,5 +91,5 @@ In order to select or deselect all of the child items of the currently selected 
 
 ## See Also
 
-[Selection of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/checkbox-selection)
+* [Selection of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/checkbox-selection)
 * [Server-Side API](/api/selection)

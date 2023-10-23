@@ -45,7 +45,7 @@ The Kendo UI Sass-based themes are located on the Progress NPM registry:
 * **Kendo UI Material Theme**&mdash;Available as @progress/kendo-theme-material.
 * **Kendo UI Classic Theme**&mdash;Available as @progress/kendo-theme-classic.
 
-To access the Progress NPM registry, you need an active Telerik account with an active commercial license. For more information on how to access the NPM registry, refer to the [installation instructions for Kendo UI Professional]({https://docs.telerik.com/kendo-ui/intro/installation/npm}#kendo-ui-professional).
+To access the Progress NPM registry, you need an active Telerik account with an active commercial license. For more information on how to access the NPM registry, refer to the [installation instructions for Kendo UI Professional](https://docs.telerik.com/kendo-ui/intro/installation/npm).
 
 ## Using the Build Process of the Application
 

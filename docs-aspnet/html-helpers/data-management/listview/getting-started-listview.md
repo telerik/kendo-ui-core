@@ -101,73 +101,75 @@ Use the ListView HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
 * Set the `PageSize` of the DataSource, and use the `Pageable` property to enable the built-in pager of the ListView.
 
 ```HtmlHelper
-@using Kendo.Mvc.UI
+    @using Kendo.Mvc.UI
 
- @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
-    .Name("listView")
-    .TagName("div")
-    .DataSource(dataSource => dataSource
+    @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
+        .Name("listView")
+        .TagName("div")
+        .DataSource(dataSource => dataSource
             .Ajax()
             .Read(read => read.Action("Products_Read", "ListView"))
             .PageSize(21)
         )
-    .Pageable()
- )
+        .Pageable()
+    )
 ```
 {% if site.core %}
 ```TagHelper
-@addTagHelper *, Kendo.Mvc
+    @addTagHelper *, Kendo.Mvc
 
-<kendo-listview name="listView"
-                tag-name="div">
-    <datasource type="DataSourceTagHelperType.Ajax" page-size="21">
-        <transport>
-            <read url="@Url.Action("Products_Read", "ListView")" />
-        </transport>
-    </datasource>
-    <pageable enabled="true" />
-</kendo-listview>
+    <kendo-listview name="listView" tag-name="div">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="21">
+            <transport>
+                <read url="@Url.Action("Products_Read", "ListView")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-listview>
 ```
 {% endif %}
 
 ## 4. Declare the Read Action
 
-In the `ListView` controller, declare the `Read` action method. Use the name of the action that you set in the DataSource configuration from the previous step. 
+In the `ListView` Controller, declare the `Read` Action method. Use the name of the Action (for example, "Products_Read") that you set in the DataSource configuration from the previous step. 
 
-```Controller
-public ActionResult Index()
-{
-    return View();
-}
+```ListViewController.cs
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
 
-private List<ProductViewModel> products = new List<ProductViewModel>()new ProductViewModel {
-    new ProductViewModel { ProductID = 1, ProductName = "Chai", UnitPrice = 18, UnitsInStock = 39, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 2, ProductName = "Chang", UnitPrice = 19, UnitsInStock = 17, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 40 },
-    new ProductViewModel { ProductID = 3, ProductName = "Aniseed Syrup", UnitPrice = 10, UnitsInStock = 13, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 70 },
-    new ProductViewModel { ProductID = 4, ProductName = "Chef Anton's Cajun Seasoning", UnitPrice = 22, UnitsInStock = 53, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 5, ProductName = "Chef Anton's Gumbo Mix", UnitPrice = 21.35, UnitsInStock = 0, Discontinued = true, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 6, ProductName = "Grandma's Boysenberry Spread", UnitPrice = 25, UnitsInStock = 120, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 7, ProductName = "Uncle Bob's Organic Dried Pears", UnitPrice = 30, UnitsInStock = 15, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 8, ProductName = "Northwoods Cranberry Sauce", UnitPrice = 40, UnitsInStock = 6, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 9, ProductName = "Mishi Kobe Niku", UnitPrice = 97, UnitsInStock = 29, Discontinued = true, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 10, ProductName = "Ikura", UnitPrice = 31, UnitsInStock = 31, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 11, ProductName = "Queso Cabrales", UnitPrice = 21, UnitsInStock = 22, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 30 },
-    new ProductViewModel { ProductID = 12, ProductName = "Queso Manchego La Pastora", UnitPrice = 38, UnitsInStock = 86, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 13, ProductName = "Konbu", UnitPrice = 6, UnitsInStock = 24, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 14, ProductName = "Tofu", UnitPrice = 23.25, UnitsInStock = 35, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 }, 
-    new ProductViewModel { ProductID = 15, ProductName = "Genen Shouyu", UnitPrice = 15.5, UnitsInStock = 39, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 16, ProductName = "Pavlova", UnitPrice = 17.45, UnitsInStock = 29, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 17, ProductName = "Alice Mutton", UnitPrice = 39, UnitsInStock = 0, Discontinued = true, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 18, ProductName = "Carnarvon Tigers", UnitPrice = 62.5, UnitsInStock = 42, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 19, ProductName = "Teatime Chocolate Biscuits", UnitPrice = 9.2, UnitsInStock = 25, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 20, ProductName = "Sir Rodney's Marmalade", UnitPrice = 81, UnitsInStock = 40, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
-    new ProductViewModel { ProductID = 21, ProductName = "Sir Rodney's Scones", UnitPrice = 10, UnitsInStock = 3, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 40 }
-}
+    public ActionResult Index() // The Action that returns the View, where the ListView component is defined.
+    {
+        return View();
+    }
 
-public virtual JsonResult Basic_Usage_Read([DataSourceRequest] DataSourceRequest request)
-{
-    return Json(products.ToDataSourceResult(request));
-}
+    private List<ProductViewModel> products = new List<ProductViewModel>() {
+        new ProductViewModel { ProductID = 1, ProductName = "Chai", UnitPrice = 18, UnitsInStock = 39, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 2, ProductName = "Chang", UnitPrice = 19, UnitsInStock = 17, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 40 },
+        new ProductViewModel { ProductID = 3, ProductName = "Aniseed Syrup", UnitPrice = 10, UnitsInStock = 13, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 70 },
+        new ProductViewModel { ProductID = 4, ProductName = "Chef Anton's Cajun Seasoning", UnitPrice = 22, UnitsInStock = 53, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 5, ProductName = "Chef Anton's Gumbo Mix", UnitPrice = 21.35, UnitsInStock = 0, Discontinued = true, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 6, ProductName = "Grandma's Boysenberry Spread", UnitPrice = 25, UnitsInStock = 120, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 7, ProductName = "Uncle Bob's Organic Dried Pears", UnitPrice = 30, UnitsInStock = 15, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 8, ProductName = "Northwoods Cranberry Sauce", UnitPrice = 40, UnitsInStock = 6, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 9, ProductName = "Mishi Kobe Niku", UnitPrice = 97, UnitsInStock = 29, Discontinued = true, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 10, ProductName = "Ikura", UnitPrice = 31, UnitsInStock = 31, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 11, ProductName = "Queso Cabrales", UnitPrice = 21, UnitsInStock = 22, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 30 },
+        new ProductViewModel { ProductID = 12, ProductName = "Queso Manchego La Pastora", UnitPrice = 38, UnitsInStock = 86, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 13, ProductName = "Konbu", UnitPrice = 6, UnitsInStock = 24, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 14, ProductName = "Tofu", UnitPrice = 23.25, UnitsInStock = 35, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 }, 
+        new ProductViewModel { ProductID = 15, ProductName = "Genen Shouyu", UnitPrice = 15.5, UnitsInStock = 39, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 16, ProductName = "Pavlova", UnitPrice = 17.45, UnitsInStock = 29, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 17, ProductName = "Alice Mutton", UnitPrice = 39, UnitsInStock = 0, Discontinued = true, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 18, ProductName = "Carnarvon Tigers", UnitPrice = 62.5, UnitsInStock = 42, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 19, ProductName = "Teatime Chocolate Biscuits", UnitPrice = 9.2, UnitsInStock = 25, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 20, ProductName = "Sir Rodney's Marmalade", UnitPrice = 81, UnitsInStock = 40, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 0 },
+        new ProductViewModel { ProductID = 21, ProductName = "Sir Rodney's Scones", UnitPrice = 10, UnitsInStock = 3, Discontinued = false, LastSupply = new DateTime(2023, 03, 10, 00, 00, 00), UnitsOnOrder = 40 }
+    };
+
+    public JsonResult Products_Read([DataSourceRequest] DataSourceRequest request)
+    {
+        return Json(products.ToDataSourceResult(request));
+    }
 
 ```
 
@@ -176,34 +178,32 @@ public virtual JsonResult Basic_Usage_Read([DataSourceRequest] DataSourceRequest
 The ListView expects a mandatory `ClientTemplateId` configuration to render the data items received from the server.
 
 ```HtmlHelper
-@using Kendo.Mvc.UI
+    @using Kendo.Mvc.UI
 
- @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
-    .Name("listView")
-    .TagName("div")
-    .ClientTemplateId("template")
-    .DataSource(dataSource => dataSource
+    @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
+        .Name("listView")
+        .TagName("div")
+        .ClientTemplateId("template")
+        .DataSource(dataSource => dataSource
             .Ajax()
             .Read(read => read.Action("Products_Read", "ListView"))
             .PageSize(21)
         )
-    .Pageable()
- )
+        .Pageable()
+    )
 ```
 {% if site.core %}
 ```TagHelper
-@addTagHelper *, Kendo.Mvc
+    @addTagHelper *, Kendo.Mvc
 
-<kendo-listview name="listView"
-                tag-name="div"
-                template-id="template">
-    <datasource type="DataSourceTagHelperType.Ajax" page-size="21">
-        <transport>
-            <read url="@Url.Action("Products_Read", "ListView")" />
-        </transport>
-    </datasource>
-    <pageable enabled="true" />
-</kendo-listview>
+    <kendo-listview name="listView" tag-name="div" template-id="template">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="21">
+            <transport>
+                <read url="@Url.Action("Products_Read", "ListView")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-listview>
 ```
 {% endif %}
 ```Template
@@ -228,7 +228,7 @@ Referencing existing component instances allows you to build on top of their con
     </script>
     ```
 
-1. Use the [ListView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control the behavior of the widget. In this example, you will see how to turn on the [`selectable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/selectable) configuration with the use of the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions) method. Then you can use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select) method to programmatically select one of the items.
+1. Use the [ListView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control the behavior of the component. In this example, you will see how to turn on the [`selectable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/selectable) configuration by using the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions) method. Then you can use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select) method to programmatically select one of the items.
 
     ```script
         <script>
@@ -256,7 +256,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Using the API of the ListView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/api)
+* [Using the Events of the ListView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/events)
 * [Client-Side API of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
 * [Server-Side API of the ListView](/api/listview)
 * [Knowledge Base Section](/knowledge-base)

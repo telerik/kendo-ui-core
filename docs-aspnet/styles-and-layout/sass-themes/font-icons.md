@@ -8,9 +8,14 @@ position: 7
 
 # Web Font Icons
 
+> As of the 2023 R3 release, the font icons are detached from the [Kendo UI Themes CDN]({% slug cdnservices_core %}). If you use the Kendo UI CDN service to include the Kendo UI theme, to continue using the font icons, add a reference the following stylesheet into your application:
+    ```
+        <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
+    ```
+
 With the R1 2017 release, Telerik UI delivers integrated font icons intended for the web and data visualization components of the suite.
 
-> To make sure all the icons are displayed correctly, use one of the SASS themes. For more information on how to install an SASS theme, visit the [installation] ({% slug sassbasedthemes_installation%}) article.
+>tipTo make sure all the icons are displayed correctly, use one of the SASS themes. For more information on how to install a SASS theme, visit the [installation] ({% slug sassbasedthemes_installation%}) article.
 
 ## List of Font Icons
 

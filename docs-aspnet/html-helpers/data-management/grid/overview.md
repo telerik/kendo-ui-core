@@ -87,7 +87,9 @@ The following example demonstrates how to define the Grid.
     }
 ```
 
+{% if site.core %}
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
+{% endif %}
 
 ## Basic Configuration
 

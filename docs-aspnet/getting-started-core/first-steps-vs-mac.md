@@ -13,7 +13,7 @@ permalink: /getting-started/first-steps-vs-mac
 
 Welcome to the First Steps on Mac guide on getting started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core with Visual Studio for Mac!
 
-The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Mac 2019.
+The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Mac 2022.
 
 To get up and running with the project:
 
@@ -30,7 +30,7 @@ To get up and running with the project:
 
 ## Creating the Application
 
-1. Open Visual Studio for Mac 2019 and select **New**.
+1. Open Visual Studio for Mac 2022 and select **New**.
 1. Select **Web Application(Model-View-Controller) .NET Core** > **App** and click **Next**.
 1. Select the target framework of the project and click **Next**.
 1. Set a name and location for the project and click **Create**.    

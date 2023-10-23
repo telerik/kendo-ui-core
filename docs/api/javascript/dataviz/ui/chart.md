@@ -20771,7 +20771,7 @@ The supported values are:
       seriesDefaults: {
         notes: {
           icon: {
-            shape: "triangle"
+            type: "triangle"
           }
         }
       },

@@ -8,7 +8,7 @@ position: 5
 
 # Compatibility
 
-The following table lists the Telerik UI for {{ site.framework }} themes and the Kendo UI Sass themes versions, which are mutually compatible.
+The following table lists the Telerik UI for {{ site.framework }} versions and the Kendo UI Sass themes versions, which are mutually compatible.
 
 | Telerik UI for {{ site.framework }} | Kendo UI Sass Themes |
 |:---         |:---                     |

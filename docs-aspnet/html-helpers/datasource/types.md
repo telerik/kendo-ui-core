@@ -53,7 +53,9 @@ Additionally, you can use the `server-operation` or `.ServerOperation` property 
     )
 
     <script>
-        myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action
+        $(document).ready(function () {
+            myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action
+        });
     </script>  
 ```
 {% if site.core %}
@@ -92,8 +94,10 @@ Additionally, you can use the `server-operation` or `.ServerOperation` property 
     </kendo-datasource>
 
     <script>
-        myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action
-    </script>  
+        $(document).ready(function () {
+            myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action
+        });
+    </script>   
 ```
 {% endif %}
 ```HomeController
@@ -161,7 +165,9 @@ The WebAPI DataSource type of data binding is designed for WebAPI projects and w
     )
 
     <script>
-        myDataSource.read(); // A GET request will be sent to the ProductController Get action
+        $(document).ready(function () {
+            myDataSource.read(); // A GET request will be sent to the ProductController Get action
+        });
     </script>  
 ```
 {% if site.core %}
@@ -185,8 +191,10 @@ The WebAPI DataSource type of data binding is designed for WebAPI projects and w
     </kendo-datasource>
 
     <script>
-        myDataSource.read(); // A GET request will be sent to the ProductController Get action
-    </script>  
+        $(document).ready(function () {
+            myDataSource.read(); // A GET request will be sent to the ProductController Get action
+        });
+    </script> 
 ```
 {% endif %}
 ```ProductController
@@ -232,7 +240,9 @@ The following example demonstrates how to consume an OData service.
     )
     
     <script>
-       myDataSource.fetch();
+        $(document).ready(function () {
+            myDataSource.fetch();
+        });
     </script>
 ```
 {% if site.core %}
@@ -250,7 +260,9 @@ The following example demonstrates how to consume an OData service.
 	</kendo-datasource>
 
     <script>
-       myDataSource.fetch();
+        $(document).ready(function () {
+            myDataSource.fetch();
+        });
     </script>
 ```
 {% endif %}

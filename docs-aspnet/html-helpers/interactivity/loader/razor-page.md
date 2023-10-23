@@ -25,6 +25,20 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
 	    .ThemeColor(Model.ThemeColor)
 	)
 ```
+{% if site.core %}
+```tab-TagHelper(csthml)
+    @page
+	@model Telerik.Examples.RazorPages.Pages.Loader.LoaderIndexModel	
+
+	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+	@Html.AntiForgeryToken()
+
+    <kendo-loader name="loader"
+        size="Model.Size" 
+        themeColor="Model.ThemeColor">
+    </kendo-loader>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 	public class LoaderIndexModel : PageModel
     {

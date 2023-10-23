@@ -129,6 +129,16 @@ The [`ExcelExport()`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsyste
             /* Other configuration. */
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid" on-excel-export="excelExport">
+            <toolbar>
+                <toolbar-button name="excel"></toolbar-button>
+            </toolbar>
+            <!-- Other configuration. -->
+        </kendo-grid>
+    ```
+    {% endif %}
 
 1. In the handler, manipulate the generated workbook. The example alternates the [background color of the row cells](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background).
 
@@ -175,6 +185,22 @@ The Telerik UI Grid for {{ site.framework }} does not use the `ClientTemplate` d
             /* Other configuration. */
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid" on-excel-export="excelExport">
+            <toolbar>
+                <toolbar-button name="excel"></toolbar-button>
+            </toolbar>
+            <columns>
+                <column field="OrderID" width="100">
+                    <filterable enabled="false"/>
+                </column>
+                <column field="Freight" width="100" template="Freight: #: kendo.format('{0:c}', Freight) #" />
+            </columns>
+            <!-- Other configuration. -->
+        </kendo-grid>
+    ```
+    {% endif %}
 
 1. In the handler, manipulate the generated workbook. The example applies the column template to the cell by assigning it to the [rows.cells.value](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.value).
 
@@ -209,6 +235,22 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
             /* Other configuration. */
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid" on-excel-export="excelExport">
+            <toolbar>
+                <toolbar-button name="excel"></toolbar-button>
+            </toolbar>
+            <columns>
+                <column field="OrderID" width="100">
+                    <filterable enabled="false"/>
+                </column>
+                <column field="Freight" width="100" template="Freight: #: kendo.format('{0:c}', Freight) #" />
+            </columns>
+            <!-- Other configuration. -->
+        </kendo-grid>
+    ```
+    {% endif %}
 
 1. In the handler, manipulate the generated workbook. The example applies a format to the cell by assigning it to the [rows.cells.format](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format)
 
@@ -246,14 +288,28 @@ To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](ht
 In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [`Exportable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
 
 ```HtmlHelper
-columns.Bound(p => p.ProductName).Exportable(false);
+    columns.Bound(p => p.ProductName).Exportable(false);
+``` 
+{% if site.core %}
+```TagHelper
+    <column field="ProductName">
+        <exportable enabled="false"/>
+    </column>
 ```
+{% endif %}
 
 You can also set `Exportable` in a detailed fashion to include different values for Excel and PDF exporting modes, providing separate options for each:
 
 ```HtmlHelper
-columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
+    columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
 ```
+{% if site.core %}
+```TagHelper
+    <column field="ProductName">
+        <exportable enabled="true" pdf="true" excel="false"/>
+    </column>
+```
+{% endif %}
 
 In some scenarios, you may want to include instead of exclude columns. You can have defined Grid columns which are not displayed in the View mode and show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically and you'll need to specifically use `.Exportable(x=> x.Pdf(false).Excel(true));`.
 

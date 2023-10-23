@@ -61,6 +61,7 @@ The following example demonstrates the Loader in action.
 
 * [Appearance]({% slug htmlhelpers_loader_aspnetcore_appearance %})
 * [Integration]({% slug htmlhelpers_loader_aspnetcore_integration %})
+* [Accessibility]({% slug htmlhelpers_loader_aspnetcore_accessibility %})
 
 ## See Also
 

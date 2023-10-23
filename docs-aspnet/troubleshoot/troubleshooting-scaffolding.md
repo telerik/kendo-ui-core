@@ -1,14 +1,14 @@
 ---
 title: Scaffolding
 page_title: Scaffolding Troubleshooting
-description: "Learn about the solutions of issues that may occur while using the Kendo UI Scaffolder Visual Studio Extension."
+description: "Learn about the solutions of issues that may occur while using the Telerik UI Scaffolder Visual Studio Extension."
 slug: troubleshooting_scaffolding_aspnetmvc
 position: 2
 ---
 
 # Scaffolding
 
-This page provides solutions to common issues you may encounter while working with the Kendo UI Scaffolder Visual Studio extension.
+This page provides solutions to common issues you may encounter while working with the [Telerik UI Scaffolder]({% slug scaffolding_aspnetcore %}) Visual Studio extension.
 
 ## Common Scaffolding Issues
 
@@ -17,7 +17,7 @@ This page provides solutions to common issues you may encounter while working wi
 **Solution**
 
 * Make sure that you use a compatible Visual Studio version and that all listed requirements are fulfilled.
-* Check if the Kendo UI Scaffolder extension is listed in the **Tools** > **Extensions and Updates** list.
+* Check if the Telerik UI Scaffolder extension is listed in the **Tools** > **Extensions and Updates** list.
 
 ### Data Context Class DropDownList Is Empty
 
