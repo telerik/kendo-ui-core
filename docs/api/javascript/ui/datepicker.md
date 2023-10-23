@@ -132,7 +132,7 @@ The duration of the open animation in milliseconds.
     <input id="datepicker" />
     <script>
     $("#datepicker").kendoDatePicker({
-        dateInput: true
+        dateInput: true,
         autoFill: true
     });
     </script>
