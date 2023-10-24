@@ -301,8 +301,6 @@ var __meta__ = {
             var that = this;
 
             if (options.target) {
-                options.$angular = options.target.options.$angular;
-
                 if (options.target.pane) {
                     that._isMobile = true;
                 }
@@ -413,10 +411,6 @@ var __meta__ = {
         destroy: function() {
             var that = this;
 
-            that.angular("cleanup", function() {
-                return { elements: that.element };
-            });
-
             Widget.fn.destroy.call(that);
 
             that.options.model.unbind("set", that._validateProxy);
@@ -463,15 +457,6 @@ var __meta__ = {
                  addValidationRules(modelField, rules);
 
                  that.editor(field, modelField);
-            }
-
-            if (that.options.target) {
-                that.angular("compile", function() {
-                    return {
-                        elements: container,
-                        data: container.map(function() { return { dataItem: model }; })
-                    };
-                });
             }
 
             if (!length) {

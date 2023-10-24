@@ -255,10 +255,6 @@ var __meta__ = {
                 that.expand(content.parent(), false);
             }
 
-            if (!options.dataSource) {
-                that._angularCompile();
-            }
-
             kendo.notify(that);
 
             if (that._showWatermarkOverlay) {
@@ -300,42 +296,10 @@ var __meta__ = {
             dataTextField: null
         },
 
-        _angularCompile: function() {
-            var that = this;
-            that.angular("compile", function() {
-                return {
-                    elements: that.element.children("li"),
-                    data: [{ dataItem: that.options.$angular }]
-                };
-            });
-        },
-
-        _angularCompileElements: function(html, items) {
-            var that = this;
-            that.angular("compile", function() {
-                return {
-                    elements: html,
-                    data: $.map(items, function(item) {
-                        return [{ dataItem: item }];
-                    })
-                };
-            });
-        },
-
-        _angularCleanup: function() {
-            var that = this;
-
-            that.angular("cleanup", function() {
-                return { elements: that.element.children("li") };
-            });
-        },
-
         destroy: function() {
             Widget.fn.destroy.call(this);
 
             this.element.off(NS);
-
-            this._angularCleanup();
 
             kendo.destroy(this.element);
         },
@@ -634,7 +598,6 @@ var __meta__ = {
                     ns: ui
                 });
             }
-            this._angularCompileElements(rootItemsHtml, items);
         },
 
         _refreshChildren: function(item, parentNode) {
@@ -645,7 +608,6 @@ var __meta__ = {
             if (!items.length) {
                 updateItemHtml(parentNode);
                 children = parentNode.children(".k-group").children("li");
-                this._angularCompileElements(children, items);
             } else {
                 this.append(item.children, parentNode);
 
@@ -875,7 +837,6 @@ var __meta__ = {
                   }
                }
 
-            that._angularCompileElements(itemsHtml, items);
               if (that.dataItem(parentNode)) {
                   that.dataItem(parentNode).hasChildren = true;
                   that.updateArrow(parentNode);
@@ -902,10 +863,6 @@ var __meta__ = {
                 var elements = $.map(items, function(item) {
                     return that.findByUid(item.uid);
                 });
-
-                if (render) {
-                    that.angular("cleanup", function() { return { elements: elements }; });
-                }
 
                 for (i = 0; i < items.length; i++) {
                     context.item = item = items[i];
@@ -941,17 +898,6 @@ var __meta__ = {
                     if (nodeWrapper.length) {
                         this.trigger("itemChange", { item: nodeWrapper.find(".k-link").first(), data: item, ns: ui });
                     }
-                }
-
-                if (render) {
-                    that.angular("compile", function() {
-                        return {
-                            elements: elements,
-                            data: $.map(items, function(item) {
-                                return [{ dataItem: item }];
-                            })
-                        };
-                    });
                 }
             }
         },
@@ -1292,7 +1238,6 @@ var __meta__ = {
                 item = [item];
             }
 
-            that._angularCompileElements(items, item);
             return { items: items, group: parent };
         },
 
@@ -1691,9 +1636,7 @@ var __meta__ = {
                         return { elements: contentElement.get() };
                     }
                     try {
-                        that.angular("cleanup", getElements);
                         contentElement.html(data);
-                        that.angular("compile", getElements);
                     } catch (e) {
                         var console = window.console;
 

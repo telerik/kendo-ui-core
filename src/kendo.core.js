@@ -3008,8 +3008,6 @@ function pad(number, digits, end) {
 
             that.element = kendo.jQuery(element).handler(that);
 
-            that.angular("init", options);
-
             Observable.fn.init.call(that);
 
             var dataSource = options ? options.dataSource : null;
@@ -3122,15 +3120,6 @@ function pad(number, digits, end) {
         },
         _destroy: function() {
             this.destroy();
-        },
-        angular: function() {},
-
-        _muteAngularRebind: function(callback) {
-            this._muteRebind = true;
-
-            callback.call(this);
-
-            this._muteRebind = false;
         },
 
         _applyCssClasses: function(element) {
@@ -3252,21 +3241,8 @@ function pad(number, digits, end) {
     });
 
     var DataBoundWidget = Widget.extend({
-        // Angular consumes these.
         dataItems: function() {
             return this.dataSource.flatView();
-        },
-
-        _angularItems: function(cmd) {
-            var that = this;
-            that.angular(cmd, function() {
-                return {
-                    elements: that.items(),
-                    data: $.map(that.dataItems(), function(dataItem) {
-                        return { dataItem: dataItem };
-                    })
-                };
-            });
         }
     });
 

@@ -356,17 +356,5 @@
 
             assert.equal(masked.value(), "2-1__");
         });
-
-        it("Detach input event for $angular scenario", function() {
-            input.on("input", function() { assert.isOk(false); });
-            var masked = createMasked(input, "0-000");
-            masked.options.$angular = true;
-
-            masked.setOptions({ mask: "0-0" });
-            input.trigger("input");
-
-            assert.isOk(true);
-        });
-
     });
 }());

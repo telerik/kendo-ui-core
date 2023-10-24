@@ -62,6 +62,5 @@ import "./kendo.window.js";
 import "./kendo.virtuallist.js";
 import "./kendo.togglebutton.js";
 import "./kendo.icons.js";
-import "./kendo.angular.js";
     "bundle all";
 export default kendo;

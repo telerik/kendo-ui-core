@@ -545,19 +545,9 @@ var __meta__ = {
             var that = this;
 
             if (that.dataSource) {
-                that.angular("cleanup", function() {
-                    return {
-                        elements: that.element.children()
-                    };
-                });
                 that.element.empty();
 
                 that.append(that.dataSource.view(), that.element);
-                that.angular("compile", function() {
-                    return {
-                        elements: that.element.children()
-                    };
-                });
             }
         },
 

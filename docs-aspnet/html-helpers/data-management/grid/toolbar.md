@@ -21,6 +21,8 @@ You can configure the Toolbar and include any of the built-in commands:
         toolbar.Pdf();
         toolbar.Excel();
         toolbar.Search();
+        toolbar.Spacer();
+        toolbar.Separator();
     })
 ```
 {% if site.core %}
@@ -31,6 +33,8 @@ You can configure the Toolbar and include any of the built-in commands:
         <toolbar-button name="pdf"></toolbar-button>
         <toolbar-button name="excel"></toolbar-button>
         <toolbar-button name="search"></toolbar-button>
+        <toolbar-button name="spacer" type="spacer"></toolbar-button>
+        <toolbar-button name="separator" type="separator"></toolbar-button>
     </toolbar>
 ```
 {% endif %} 
@@ -43,6 +47,8 @@ You can configure the Toolbar and include any of the built-in commands:
 | Pdf | Exports the grid data in PDF format.| [PDF Export documentation]({% slug pdfexport_gridhelper_aspnetcore %})|
 | Excel | Exports the grid data in MS Excel format.| [Excel Export documentation]({% slug excelexport_gridhelper_aspnetcore %})|
 | Search | Adds the built-in search panel for the Grid.| [Search Panel documentation]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})|
+| Spacer | Moves the tools that are declared after it to the right side of the ToolBar.| |
+| Separator | Acts as a delimiter between the ToolBar commands.| |
 
 ## Custom Commands
 
@@ -81,6 +87,98 @@ The following example demonstrates how to add a custom command to the Toolbar:
     </script>
 ```
 {% endif %} 
+
+As of {{site.product}} R3 2023 SP1 you can use the [Template component]({% slug htmlhelpers_overview_template %}) to define custom ToolBar commands, alongside the default ToolBar commands.
+
+The following example demonstrates how you can add a Button and DropDownList components to the Grid's Toolbar, along with a default `Excel` command:
+
+```HtmlHelper
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(toolbar=> {
+            toolbar.Custom().ClientTemplate(
+                Html.Kendo().Template().AddComponent(c=>c
+                    .Button()
+                    .Name("refresh")
+                    .Icon("arrow-rotate-cw")
+                    .HtmlAttributes(new {title="Refresh"})
+                    .Events(ev=>ev.Click("refresh"))
+                ));
+            toolbar.Spacer();
+            toolbar.Custom().ClientTemplate(
+                Html.Kendo().Template()
+                .AddHtml("<label class=\"category-label\" for=\"category\">Show products by category:</label>")
+                .AddComponent(c => c
+                    .DropDownList()
+                    .Name("categories")
+                    .OptionLabel("All")
+                    .DataTextField("CategoryName")
+                    .DataValueField("CategoryID")
+                    .AutoBind(false)
+                    .Events(e => e.Change("categoriesChange"))
+                    .HtmlAttributes(new { style = "width: 150px;" })
+                    .DataSource(ds =>
+                    {
+                        ds.Read("ToolbarTemplate_Categories", "Grid");
+                    })
+                ));
+            toolbar.Separator();
+            toolbar.Excel();
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="500">
+        <toolbar>
+            <toolbar-button>
+                <toolbar-command-template>
+                    <kendo-button name="iconButton" icon="arrow-rotate-cw" on-click="refresh">
+                    </kendo-button>
+                </toolbar-command-template>
+            </toolbar-button>
+            <toolbar-button name="spacer" type="spacer" />
+            <toolbar-button>
+                <toolbar-command-template>
+                    <label class="category-label" for="category">Show products by category:</label>
+                    <kendo-dropdownlist name="categories" style="width:150px"
+                                        datatextfield="CategoryName"
+                                        datavaluefield="CategoryID"
+                                        option-label="All"
+                                        auto-bind="false"
+                                        on-change="categoriesChange">
+                        <datasource type="DataSourceTagHelperType.Custom">
+                            <transport>
+                                <read url="@Url.Action("ToolbarTemplate_Categories", "Grid")" />
+                            </transport>
+                        </datasource>
+                    </kendo-dropdownlist>
+                </toolbar-command-template>
+            </toolbar-button>
+            <toolbar-button name="separator" type="separator" />
+            <toolbar-button name="excel" />
+        </toolbar>
+    </kendo-grid>
+```
+{% endif %} 
+```JavaScript
+    <script>
+        function refresh() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.dataSource.read();
+        }
+        function categoriesChange() {
+            var value = this.value(),
+                grid = $("#grid").data("kendoGrid");
+
+            if (value) {
+                grid.dataSource.filter({ field: "CategoryID", operator: "eq", value: parseInt(value) });
+            } else {
+                grid.dataSource.filter({});
+            }
+        }
+    </script>
+```
 
 ## Toolbar Template
 
@@ -166,6 +264,89 @@ When you use a Toolbar Template, and you also want to use a built-in command, th
     </script>
 ```
 {% endif %} 
+
+{% if site.mvc %}
+### Server-side rendering of the ToolBar Template
+
+Rendering of the Toolbar on the server is supported via the [`.Template()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#templatesystemaction) configuration. The following example demonstrates how to define a server-side ToolBar Template:
+
+```HtmlHelper
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+    .Name("grid")
+    .ToolBar(toolbar =>
+    {
+        toolbar.Template(@<text>
+            <div class="refreshBtnContainer">
+                <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" title="Refresh"><span class="k-button-icon k-icon k-i-reload"></span></a>
+            </div>
+           <div class="toolbar">
+                    <label class="category-label" for="category">Show products by category:</label>
+                        @(Html.Kendo().DropDownList()
+                            .Name("categories")
+                            .OptionLabel("All")
+                            .DataTextField("CategoryName")
+                            .DataValueField("CategoryID")
+                            .AutoBind(false)
+                            .Events(e => e.Change("categoriesChange"))
+                            .HtmlAttributes(new { style = "width: 150px;" })
+                            .DataSource(ds =>
+                            {
+                                ds.Read("ToolbarTemplate_Categories", "Grid");
+                            })
+                        )
+                        </div>
+        </text>);
+    })
+```
+```JavaScript
+    <script>
+        $(document).ready( function () {
+            var grid = $("#grid");
+            grid.find(".k-grid-toolbar").on("click", ".k-pager-refresh", function (e) {
+                e.preventDefault();
+                grid.data("kendoGrid").dataSource.read();
+            });
+
+        });
+
+        function categoriesChange() {
+            var value = this.value(),
+                grid = $("#grid").data("kendoGrid");
+
+            if (value) {
+                grid.dataSource.filter({ field: "CategoryID", operator: "eq", value: parseInt(value) });
+            } else {
+                grid.dataSource.filter({});
+            }
+        }
+    </script>
+```
+```CSS
+    <style>
+        #grid .k-grid-toolbar
+        {
+            padding: .6em 1.3em .6em .4em;
+        }
+        .category-label
+        {
+            vertical-align: middle;
+            padding-right: .5em;
+        }
+        #category
+        {
+            vertical-align: middle;
+        }
+        .refreshBtnContainer {
+            display: inline-block;
+        }
+        .k-grid .toolbar {
+            margin-left: auto;
+            margin-right: 0;
+        }
+    </style>
+```
+
+{% endif %}
 
 ## See Also
 * [Batch Editing of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing)

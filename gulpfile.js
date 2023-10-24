@@ -70,7 +70,7 @@ function uglifyScripts(stream) {
 }
 
 function distThirdParty() {
-    return gulp.src('src/{jquery,angular,pako,jszip}*.*')
+    return gulp.src('src/{jquery,pako,jszip}*.*')
         .pipe(gulp.dest('dist/js'));
 }
 

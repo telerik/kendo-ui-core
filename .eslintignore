@@ -5,8 +5,6 @@
 src/module.js
 
 # dependencies to ignore
-src/angular.js
-src/angular.min.js
 src/jquery.js
 src/jquery.min.js
 src/jszip.js

@@ -436,10 +436,6 @@ var __meta__ = {
             } else {
                 element.html(contentOptions);
             }
-
-            that.angular("compile", function() {
-                return { elements: element };
-            });
         },
 
         _ajaxRequest: function(options) {

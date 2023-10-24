@@ -269,7 +269,6 @@ var __meta__ = {
             var header = $(list.header);
             var template = list.options.headerTemplate;
 
-            this._angularElement(header, "cleanup");
             kendo.destroy(header);
             header.remove();
 
@@ -286,8 +285,6 @@ var __meta__ = {
             if (list.list.parent.length > 0) {
                 list.list.before(header);
             }
-
-            this._angularElement(list.header, "compile");
         },
 
         _filterHeader: function() {
@@ -317,7 +314,6 @@ var __meta__ = {
             var $header;
             var columnsHeader = $(list.columnsHeader);
 
-            this._angularElement(columnsHeader, "cleanup");
             kendo.destroy(columnsHeader);
             columnsHeader.remove();
 
@@ -358,8 +354,6 @@ var __meta__ = {
 
             list.columnsHeader = columnsHeader = $header;
             list.list.prepend(columnsHeader);
-
-            this._angularElement(list.columnsHeader, "compile");
         },
 
         _noData: function() {
@@ -367,7 +361,6 @@ var __meta__ = {
             var noData = $(list.noData);
             var template = list.options.noDataTemplate === true ? () => htmlEncode(list.options.messages.noData) : list.options.noDataTemplate;
 
-            list.angular("cleanup", function() { return { elements: noData }; });
             kendo.destroy(noData);
             noData.remove();
 
@@ -386,7 +379,6 @@ var __meta__ = {
             var template = list.options.footerTemplate;
             var footerEl = this.options.columns && this.options.columns.length ? TABLE_FOOTER_EL : LIST_FOOTER_EL;
 
-            this._angularElement(footer, "cleanup");
             kendo.destroy(footer);
             footer.remove();
 
@@ -441,10 +433,6 @@ var __meta__ = {
 
             if (!options.template) {
                 options.template = (data) => htmlEncode(kendo.getter(options.dataTextField)(data));
-            }
-
-            if (currentOptions.$angular) {
-                options.$angular = currentOptions.$angular;
             }
 
             return options;
@@ -615,16 +603,6 @@ var __meta__ = {
             }
         },
 
-        _angularElement: function(element, action) {
-            if (!element) {
-                return;
-            }
-
-            this.angular(action, function() {
-                return { elements: element };
-            });
-        },
-
         _renderNoData: function() {
             var list = this;
             var noData = list.noData;
@@ -633,9 +611,7 @@ var __meta__ = {
                 return;
             }
 
-            this._angularElement(noData, "cleanup");
             noData.html(list.noDataTemplate({ instance: list }));
-            this._angularElement(noData, "compile");
         },
 
         _toggleNoData: function(show) {
@@ -655,9 +631,7 @@ var __meta__ = {
                 return;
             }
 
-            this._angularElement(footer, "cleanup");
             footer.html(list.footerTemplate({ instance: list }));
-            this._angularElement(footer, "compile");
         },
 
         _allowOpening: function() {
@@ -3042,7 +3016,6 @@ var __meta__ = {
             var result;
 
             that.trigger(DATA_BINDING);
-            that._angularItems("cleanup");
 
             that._fixedHeader();
 
@@ -3076,7 +3049,6 @@ var __meta__ = {
                 that._valueDeferred.resolve();
             }
 
-            that._angularItems("compile");
             that.trigger(DATA_BOUND);
         },
 

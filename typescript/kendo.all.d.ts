@@ -325,8 +325,6 @@ declare namespace kendo {
 
         trigger(eventName: string, e?: any): boolean;
         unbind(eventName?: string, handler?: any): Observable;
-
-        angular(eventName: string, handler: Function): void;
     }
 
     class UserEvents extends Observable {

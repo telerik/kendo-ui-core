@@ -168,10 +168,6 @@ var __meta__ = {
             this.header.html(templates.fixedGroupTemplate(data.group));
         }
 
-        this.angular("cleanup", function() {
-            return { elements: [ element ] };
-        });
-
         element
             .attr("data-uid", data.item ? data.item.uid : "")
             .attr("data-offset-index", data.index);
@@ -213,10 +209,6 @@ var __meta__ = {
         if (data.top !== undefined) {
             position(element[0], data.top);
         }
-
-        this.angular("compile", function() {
-            return { elements: [ element ], data: [ { dataItem: data.item, group: data.group, newGroup: data.newGroup } ] };
-        });
     }
 
     function renderColumns(options, dataItem, templates) {

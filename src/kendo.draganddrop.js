@@ -797,20 +797,6 @@ var __meta__ = {
 
             if (hint) {
                 that._hint();
-
-                that.angular("compile", function() {
-                    that.hint.removeAttr("ng-repeat");
-                    var scopeTarget = $(e.target);
-
-                    while (!scopeTarget.data("$$kendoScope") && scopeTarget.length) {
-                        scopeTarget = scopeTarget.parent();
-                    }
-
-                    return {
-                        elements: that.hint.get(),
-                        scopeFrom: scopeTarget.data("$$kendoScope")
-                    };
-                });
             }
 
             draggables[options.group] = that;
