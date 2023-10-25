@@ -9,9 +9,9 @@ position: 0
 # {{ site.framework }} DataSource Overview
 
 {% if site.core %}
-The Telerik UI DataSource TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DataSource widget.
+The Telerik UI DataSource TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI for jQuery DataSource.
 {% else %}
-The Telerik UI DataSource HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI DataSource widget.
+The Telerik UI DataSource HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI for jQuery DataSource.
 {% endif %}
 
 The DataSource is an abstraction for using local data or remote data. In most cases, the DataSource definition is declared as part of the configurations for the Telerik UI helpers. The standalone DataSource component is suitable for scenarios that require a shared data source.
@@ -23,7 +23,7 @@ The DataSource is an abstraction for using local data or remote data. In most ca
 
 ## Initialize the DataSource
 
-The following example demonstrates how to define the DataSource. You can use `Name()` to access the DataSource instance on the client and utilize the [API methods and events of the Kendo UI for jQuery DataSource widget](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource).
+The following example demonstrates how to define the DataSource. You can access the DataSource instance by `Name()` on the client and use the [API methods and events of the Kendo UI for jQuery DataSource widget](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource).
 
 ```HtmlHelper
     @(Html.Kendo().DataSource<OrderViewModel>()
@@ -32,8 +32,10 @@ The following example demonstrates how to define the DataSource. You can use `Na
     )
 
     <script>
-        myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action.
-    </script>
+        $(document).ready(function () {
+            myDataSource.read(); // A POST request will be sent to the HomeController "ReadOrders" action.
+        });
+    </script>  
 ```
 {% if site.core %}
 ```TagHelper
@@ -44,13 +46,15 @@ The following example demonstrates how to define the DataSource. You can use `Na
     </kendo-datasource>
 
     <script>
-        myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action.
-    </script>
+        $(document).ready(function () {
+            myDataSource.read(); // A POST request will be sent to the HomeController "ReadOrders" action.
+        });
+    </script>  
 ```
 {% endif %}
 ```HomeController
 
-    public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
+    public JsonResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
         // Orders can be IQueriable or IEnumerable.
         return Json(orders.ToDataSourceResult(request));
@@ -62,14 +66,14 @@ The following example demonstrates how to define the DataSource. You can use `Na
 > * As of the R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
 > * If impersonation is enabled, use the `ToDataSourceResultAsync` extension method with only one thread in your ASP.NET application. If you create a new thread, the impersonation in the newly created child thread decreases because, by default, all newly created child threads in ASP.NET run under the ASP.NET identity of the worker process. To change this behavior, explicitly impersonate the current identity within the code of the child thread.
 
-To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource HtmlHelper, add the following namespaces with `using` directives in the controller:
+To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource HtmlHelper, add the following namespaces with `using` directives in the Controller:
 
 ```
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 ```
 {% if site.core %}
-To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource TagHelper, in addition to the Kendo namespaces above, also add the following directive to the view:
+To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource TagHelper, in addition to the Kendo namespaces above, also add the following directive to the View:
 
 ```
     @addTagHelper *, Kendo.Mvc
@@ -153,11 +157,11 @@ To prevent Ajax response caching, refer to [this section from the Frequently Ask
 
 ## Model Mapping
 
-Sometimes it is convenient to use view model objects instead of entities returned by Entity Framework. For example, you may want to avoid serializing all Entity Framework properties as JSON or prevent serialization exceptions caused by circular references.
+In some cases, you may use view model objects instead of entities returned by Entity Framework. For example, you may want to avoid serializing all Entity Framework properties as JSON or prevent serialization exceptions caused by circular references.
 
-To map to a ViewModel on the fly pass a mapping lambda as a second parameter to the `ToDataSourceResult()` extension method.
+To map to a ViewModel on the fly, pass a mapping lambda as a second parameter to the `ToDataSourceResult()` extension method.
 
- > The naming of the model properties of the view model objects and entities returned by Entity Framework should match. If usage of different naming is desired implement [model mapping]({% slug datasource_model_mapping %}).
+ > The naming of the model properties of the view model objects and entities returned by Entity Framework must match. If usage of different naming is desired, implement [model mapping]({% slug datasource_model_mapping %}).
 
     public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
     {
@@ -199,4 +203,7 @@ To map to a ViewModel on the fly pass a mapping lambda as a second parameter to 
 ## See Also
 
 * [Knowledge Base Section](/knowledge-base)
-* [Server-Side API](/api/datasource)
+* [Server-Side HtmlHelper API](/api/datasource)
+{% if site.core %}
+* [Server-Side TagHelper API](/api/taghelpers/datasource)
+{% endif %}

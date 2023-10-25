@@ -6,14 +6,13 @@ slug: troubleshooting_telerik_nuget
 tags: long, nuget, package, installation
 ---
 
-
 # Troubleshooting Telerik NuGet
 
 This article provides solutions to common issues that you may observe when working with the Telerik NuGet server and the NuGet packages that it provides.
 
-## Issue: The NuGet Package Takes Too Long to Install or Update on Visual Studio
+## Issue: The NuGet Package Takes Time to Install or Update on Visual Studio
 
-The NuGet package takes too long to install or update on Visual Studio. How to improve the installation and update times?
+The NuGet package takes a long time to install or update on Visual Studio. How to improve the installation and update times?
 
 ### Solution
 
@@ -36,9 +35,9 @@ As an alternative, you can [reset your Telerik NuGet Feed credentials from the W
 
 Make sure that the Telerik NuGet Feed is live at [https://status.telerik.com/](https://status.telerik.com/).
 
-## Issue: Resetting Telerik Nuget Credentials
+## Issue: Resetting Telerik NuGet Credentials
 
-On Windows, if you enter and save wrong credentials for the Telerik NuGet or if you change your Telerik credentials, you won't have access to the desired NuGet packages. Before you can enter the correct user name and password, you must clear the saved credentials.
+On Windows, if you enter and save wrong credentials for the Telerik NuGet or if you change your Telerik credentials, you will not have access to the desired NuGet packages. Before entering the correct user name and password, you must clear the saved credentials.
 
 ### Solution 1: Resetting The Credentials in NuGet.config
 
@@ -46,7 +45,7 @@ Try resetting your credentials by using the approach suggested in the [Telerik N
 
 ### Solution 2: Windows Credentials Manager
 
-Alternatively, use Windows Credentials Manager to remove the saved credentials:
+Use the Windows Credentials Manager to remove the saved credentials:
 
 1. In Visual Studio navigate to **Tools** > **NuGet Package Manager** > **Package Manager Settings**. Select **NuGet Package Manager**, click **Package Sources**, and remove the listed Telerik NuGet package source.
 1. Close Visual Studio.
@@ -56,5 +55,5 @@ Alternatively, use Windows Credentials Manager to remove the saved credentials:
     * `nuget.telerik.com`
     * `VSCredentials_nuget.telerik.com`
 ![{{ site.product_short }} Remove credentials from Windows Credential Manager](../knowledge-base/images/windows-credential-manager.png)
-1. Add the Telerik NuGet Feed again, and then enter the correct credentials. For more details, see the [Installing with Nuget]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) article.
-1. If desired, verify the NuGet credentials by inspecting the `NuGet.config` file located in `%AppData%\NuGet\NuGet.config`
+1. Add the Telerik NuGet Feed again, and then enter the correct credentials. For more details, refer to the [Installing with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) article.
+1. Verify the NuGet credentials by inspecting the `NuGet.config` file located in `%AppData%\NuGet\NuGet.config`

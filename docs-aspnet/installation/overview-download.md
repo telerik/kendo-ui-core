@@ -11,18 +11,18 @@ position: 1
 
 This article outlines the approaches for downloading and installing the binaries with the {{ site.product }} components and for providing the client-side resources. This approach is applicable only for Windows users.
 
-Installing the {{ site.product }} provides the opportuity to:
+Installing the {{ site.product }} provides the opportunity to:
 
 * Use the Telerik UI controls offline (no Internet connection required).
 * Running the demos in offline mode.
 * Implementing new features in the application by using wizards and templates.
 
-The {{ site.product }} components are server-side wrappers for the [Kendo UI for jQuery components](https://www.telerik.com/kendo-jquery-ui). To configure a working application, you must provide both the binaries and the client-side resources:
+The {{ site.product }} components are server-side wrappers for the [Kendo UI for jQuery widgets](https://www.telerik.com/kendo-jquery-ui). To configure a working application, you must provide both the binaries and the client-side resources:
 
 {% if site.core %}
-* [Binaries](#getting-the-binaries)&mdash;they are available as NuGet packages and you can get them by using one of the [automated installers](#getting-the-binaries) or directly from the [Telerik NuGet server]({% slug nuget_install_aspnetmvc6_aspnetmvc %}). The binaries allow you to utilize the Telerik UI [HtmlHelpers and TagHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}).
+* [Binaries](#getting-the-binaries)&mdash;they are available as NuGet packages and you can get them by using one of the [automated installers](#getting-the-binaries) or directly from the [Telerik NuGet server]({% slug nuget_install_aspnetmvc6_aspnetmvc %}). The binaries allow you to use the Telerik UI [HtmlHelpers and TagHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}).
 {% else %}
-* [Binaries](#getting-the-binaries)&mdash;they are available as `dll` files and you can get them by using the [automated installer](#getting-the-binaries) or directly from the [Telerik NuGet server]({% slug nuget_install_aspnetmvc6_aspnetmvc %}). The binaries allow you to utilize the Telerik UI [HtmlHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}).
+* [Binaries](#getting-the-binaries)&mdash;they are available as `dll` files and you can get them by using the [automated installer](#getting-the-binaries) or directly from the [Telerik NuGet server]({% slug nuget_install_aspnetmvc6_aspnetmvc %}). The binaries allow you to use the Telerik UI [HtmlHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}).
 {% endif %}
 
 * [Client-side resources](#providing-the-client-side-resources)&mdash;these are the JavaScript and CSS files that are required by the Telerik UI components.
@@ -30,7 +30,7 @@ The {{ site.product }} components are server-side wrappers for the [Kendo UI for
 ## Requirements
 
 {% if site.core %}
-Telerik UI for ASP.NET Core requires .NET Core. To install .NET core, follow the instructions on <a href="https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites" target="_blank">Microsoft's .NET Core documentation site</a>.
+Telerik UI for ASP.NET Core requires [.NET](https://dotnet.microsoft.com/en-us/). To install .NET, follow the instructions on <a href="https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites" target="_blank">Microsoft's .NET documentation site</a>.
 {% else %}
 Telerik UI for ASP.NET MVC requires the .NET Framework. To download the current version of the .NET Framework, [visit Microsoft's website](https://dotnet.microsoft.com/download/dotnet-framework).
 {% endif %}
@@ -72,7 +72,7 @@ To download the {{ site.product }} binaries with the components, you can use eit
 
 ## Providing the Client-Side Resources
 
-Regardless of the method that you use to download and install the {{ site.product }} binaries, you must always [include the client-side JavaScript and CSS files in your project]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}). The reason is that the {{ site.product }} are server-side wrappers for the [Kendo UI for jQuery components](https://www.telerik.com/kendo-jquery-ui).
+Regardless of the method that you use to download and install the {{ site.product }} binaries, you must always [include the client-side JavaScript and CSS files in your project]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}). The reason is that the {{ site.product }} are server-side wrappers for the [Kendo UI for jQuery widgets](https://www.telerik.com/kendo-jquery-ui).
 
 If you use the automated installer or the archive with the setup files, you will have all needed client-side resources locally on your machine. Alternatively, you can provide them as online resources by using the Telerik CDN. For more information, see [Providing Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 

@@ -1,7 +1,7 @@
 ---
 title: JSON Serialization
 page_title: JSON Serialization
-description: "How to configure JSON Serialization when working with Grid and other data-bound widgets."
+description: "How to configure JSON Serialization when working with Grid and other data-bound components."
 previous_url: /getting-started/prerequisites/environment-support, /getting-started/prerequisites/json-serialization, /compatibility/json-serialization
 slug: jsonserialization_core
 position: 5
@@ -9,15 +9,15 @@ position: 5
 
 # JSON Serialization
 
-When you use Grid or other data-bound widgets in your code, make sure that the property name casing doesn't change during serialization.
+When you use Grid or other data-bound components, ensure that the property name casing does not change during serialization.
 
-Data-bound Telerik UI components like the Grid depend on Pascal case-formatted response from the server. However, the default casing for JSON strings in ASP.NET Core is the Camel case. If the serializer changes the casing to Camel, the data-bound widget cannot display the data correctly.
+Data-bound Telerik UI components like the Grid depend on Pascal case-formatted response from the server. However, the default casing for JSON strings in ASP.NET Core is Camel case. If the serializer changes the casing to Camel, the data-bound component cannot display the data correctly.
 
 This document describes the recommended approaches to maintain the Pascal case in different ASP.NET Core versions.
 
 ## Configure JSON Serialization in ASP.NET Core 6 and the Minimal Hosting Model
 
-For applications using .NET 6 and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model) open the `Program.cs` file. To set the serialization options for the application use any of the approaches demonstrated below.
+For applications using .NET 6 and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model), open the `Program.cs` file. To set the serialization options of the application, use any of the approaches demonstrated below.
 
 * Use the default serialization that is delivered with ASP.NET Core (recommended approach).
 	```
@@ -34,7 +34,7 @@ For applications using .NET 6 and the [minimal hosting model](https://docs.micro
 	builder.Services.AddKendo();
 	```
 
-* Use the `Newtonsoft` library.
+* Use the [`Newtonsoft`](https://www.newtonsoft.com/json) library.
 
 	```
 	var builder = WebApplication.CreateBuilder(args);
@@ -50,9 +50,9 @@ For applications using .NET 6 and the [minimal hosting model](https://docs.micro
 	```
 ## Configure JSON Serialization in ASP.NET Core 3 through ASP.NET Core 5
 
-There are three ways to configure the JSON serialization in ASP.NET Core 3 to 5:
+To configure the JSON serialization in ASP.NET Core 3 to 5, use any of the following approaches:
 
-* The recommended approach is to use the default serialization that is delivered with ASP.NET Core. To configure it, locate the `ConfigureServices` method and update it by adding the code below.
+* The recommended approach is to use the default serialization that is delivered with ASP.NET Core. Locate the `ConfigureServices` method and update it by adding the code below.
 
 	```
     public void ConfigureServices(IServiceCollection services)
@@ -68,7 +68,7 @@ There are three ways to configure the JSON serialization in ASP.NET Core 3 to 5:
 	}
 	```
 
-* The first alternative approach is to maintain the property names casing globally. Locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
+* Maintain the property names casing globally. Locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
 
 	```
 	...
@@ -88,7 +88,7 @@ There are three ways to configure the JSON serialization in ASP.NET Core 3 to 5:
 	}
 	```
 
-* The second alternative approach is to use the default JSON serialization throughout the application and include the built-in `System.Text.Json.JsonSerializerOptions` in the controller action method response.
+* Use the default JSON serialization throughout the application and include the built-in `System.Text.Json.JsonSerializerOptions` in the Controller Action method response.
 
 	```
 	...

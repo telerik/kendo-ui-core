@@ -1817,7 +1817,7 @@ function pad(number, digits, end) {
         };
     }
 
-    function wrap(element, autosize, resize) {
+    function wrap(element, autosize, resize, shouldCorrectWidth = true) {
         var percentage,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
@@ -1860,7 +1860,7 @@ function pad(number, digits, end) {
                 });
             }
         } else {
-            wrapResize(element, autosize);
+            wrapResize(element, autosize, shouldCorrectWidth);
         }
 
         parent = parent.parent();
@@ -1871,13 +1871,13 @@ function pad(number, digits, end) {
         }
 
         if (resize) {
-            wrapResize(element, autosize);
+            wrapResize(element, autosize, shouldCorrectWidth);
         }
 
         return parent;
     }
 
-    function wrapResize(element, autosize) {
+    function wrapResize(element, autosize, shouldCorrectWidth) {
         var percentage,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
@@ -1900,7 +1900,9 @@ function pad(number, digits, end) {
             if (!visible) {
                 element.add(parent).show();
             }
-            parent.css("width", ""); // Needed to get correct width dimensions
+            if (shouldCorrectWidth) {
+                parent.css("width", ""); // Needed to get correct width dimensions
+            }
             parent.css({
                 width: autosize ? outerWidth(element) + 1 : outerWidth(element),
             });

@@ -260,6 +260,20 @@
             }, tooltip.options.hideAfter);
         });
 
+        it("popup width remains the same on subsequent shows", function() {
+            var tooltip = new Tooltip(container, { content: "Tooltip content for this element" }),
+                originalWidth = 0,
+                latestWidth = 0;
+
+            tooltip.show(container);
+            originalWidth = tooltip.popup.element.width();
+            tooltip.hide();
+            tooltip.show(container);
+            latestWidth = tooltip.popup.element.width();
+
+            assert.equal(originalWidth, latestWidth);
+        });
+
         it("title attributes are temporary removed", function() {
             container.attr("title", "foo");
 

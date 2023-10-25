@@ -11,7 +11,7 @@ position: 5
 
 The Kendo UI client-side resources like JavaScript files and CSS files are available online through the Kendo CDN service. Including the client-side resources in your project is essential because the Telerik UI helpers are wrappers over the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/intro/first-steps).
 
-> As of the R3 2022 release, you must install a license file in your application in order to access the resources provided by the CDN service. For more information, check [Using Script License File]({% slug using_license_code %}).
+> As of the R3 2022 release, you must install a license file in your application to access the resources provided by the CDN service. For more information, check [Using Script License File]({% slug using_license_code %}).
 
 Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on the CDN.
 
@@ -24,7 +24,7 @@ To access the Kendo UI CDN services, you can use either the HTTP or the HTTPS pr
 
 ## Understanding the CDN Structure
 
-The URLs of the Telerik CDN have the following structure:
+The URLs of the CDN service have the following structure:
 
 * `https://kendo.cdn.telerik.com/themes/[THEMEVERSION]/default/[FILENAME]`&mdash;The `themes` folder contains the [`.css` files](#adding-the-required-css-files) of the SASS themes for {{ site.product }} versions after R1 2023 SP1.
 * `https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`&mdash;The `styles` folder contains the [`.css` files](#adding-the-required-css-files) (SASS and LESS) for {{ site.product }} versions before R1 2023 SP1. 
@@ -40,14 +40,14 @@ In the sample URLs above, you must replace `[VERSION]`, [THEMEVERSION] and `[FIL
 
 Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The `.css` files are available in the `themes` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/themes/<version>/<theme>/<swatch>.css`.
 
-To load version `{{site.themesCdnVersion}}` of the desired visual theme, replace `[THEMEVERSION]` and `[FILENAME]` with their actual values, for example, `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`.
+To load version `{{site.themesCdnVersion}}` of the desired visual theme, replace `[THEMEVERSION]` and `[FILENAME]` with their values, for example, `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`.
 
 ## Adding the Required JavaScript Files
 
 To import the JavaScript files required for the Telerik UI components, apply either of the following approaches:
 
- * [Using the JavaScript modules](#using-javascript-modules)—[A new approach introduced with version `2022.3.1109`]({% slug core_ecmascript_overview %}).
- * [Using the bundled JavaScript](#using-bundled-javascript)—The traditional way of including the Kendo UI scripts.
+ * [Using the JavaScript modules](#using-javascript-modules)&mdash;[A new approach introduced with version `2022.3.1109`]({% slug core_ecmascript_overview %}).
+ * [Using the bundled JavaScript](#using-bundled-javascript)&mdash;The traditional way of including the Kendo UI scripts.
 
 ### Using JavaScript Modules
 
@@ -78,7 +78,7 @@ The two examples below demonstrate how to include individual component modules a
 
 The Kendo UI JavaScript files for the traditional format are located in the `js` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/[VERSION]/js/[FILENAME]`.
 
-To load version `{{site.cdnVersion}}` of the bundled Kendo JavaScript files, replace `[VERSION]` and `[FILENAME]` with their actual values, for example, `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js`.
+To load version `{{site.cdnVersion}}` of the bundled Kendo JavaScript files, replace `[VERSION]` and `[FILENAME]` with their values, for example, `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js`.
 
 ## Using the CDN in Your Project
 

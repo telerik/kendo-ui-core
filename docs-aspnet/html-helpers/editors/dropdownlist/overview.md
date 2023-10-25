@@ -81,22 +81,22 @@ The DropDownList configuration options are passed as attributes.
 {% if site.core %}
 ```HtmlHelper
     @(Html.Kendo().DropDownList()
-          .Name("products")
-          .DataTextField("ProductName")
-          .DataValueField("ProductID")
-          .HtmlAttributes(new { style = "width:100%;" })
-          .Filter(FilterType.Contains)
-          .DataSource(source => source
-              .Read(read => read.Action("GetProducts", "Home"))
-          )
+        .Name("products")
+        .DataTextField("ProductName")
+        .DataValueField("ProductID")
+        .HtmlAttributes(new { style = "width:100%;" })
+        .Filter(FilterType.Contains)
+        .DataSource(source => source
+            .Read(read => read.Action("GetProducts", "Home"))
+        )
     )
 ```
 ```TagHelper
     <kendo-dropdownlist name="products" filter="FilterType.Contains"
-                        placeholder="Select product"
-                        datatextfield="ProductName"
-                        datavaluefield="ProductID"
-                        style="width: 100%;">
+        placeholder="Select product"
+        datatextfield="ProductName"
+        datavaluefield="ProductID"
+        style="width: 100%;">
         <datasource>
             <transport>
                 <read url="@Url.Action("GetProducts", "Home")" />
@@ -173,13 +173,13 @@ The DropDownList configuration options are passed as attributes.
 
 ## Functionality and Features
 
-* [Binding]({% slug htmlhelpers_dropdownlist_ajaxbinding_aspnetcore %})—The DropDownList supports multiple data binding approaches: server, model, custom, and ajax binding. 
-* [Grouping]({% slug htmlhelpers_dropdownlist_grouping_aspnetcore %})—You can bind the DropDownList to grouped data sources.
-* [Virtualization]({% slug htmlhelpers_dropdownlist_virtualization_aspnetcore %})—The virtualization feature of the DropDownList allows you to display large datasets.
-* [Templates]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %})—To control how the items, selected value, or a pop-up header are rendered, you can use the available templates.
-* [Accessibility]({% slug accessibility_aspnetcore_dropdownlist %})—The DropDownList is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
+* [Binding]({% slug htmlhelpers_dropdownlist_ajaxbinding_aspnetcore %})&mdash;The DropDownList supports multiple data binding approaches: server, model, custom, and ajax binding. 
+* [Grouping]({% slug htmlhelpers_dropdownlist_grouping_aspnetcore %})&mdash;You can bind the DropDownList to grouped data sources.
+* [Virtualization]({% slug htmlhelpers_dropdownlist_virtualization_aspnetcore %})&mdash;The virtualization feature of the DropDownList allows you to display large datasets.
+* [Templates]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %})&mdash;To control how the items, selected value, or a pop-up header are rendered, you can use the available templates.
+* [Accessibility]({% slug accessibility_aspnetcore_dropdownlist %})&mdash;The DropDownList is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
->tip To learn more about the appearance, anatomy, and accessibility of the DropDownList, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/dropdownlist/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+>tip To learn more about the appearance, anatomy, and accessibility of the DropDownList, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/dropdownlist/)&mdash;an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ## Next Steps
 

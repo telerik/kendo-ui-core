@@ -322,6 +322,7 @@ var __meta__ = {
             }
 
             this.popup._hovered = true;
+            this.popup._shouldCorrectWidth = false;
             this.popup.open();
         }
     });

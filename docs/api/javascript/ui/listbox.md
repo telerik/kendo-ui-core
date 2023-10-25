@@ -888,7 +888,7 @@ Indicates whether the items should be enabled or disabled.
     });
     // get a reference to the list view widget
     var listBox = $("#listBox").data("kendoListBox");
-    listBox.enable(".k-item:first", false);
+    listBox.enable(".k-list-item:first", false);
     </script>
 
 ### items
@@ -961,7 +961,7 @@ The new position of the item in the list.
     $("#listBox").kendoListBox();
     var listBox = $("#listBox").data("kendoListBox");
     // moves first item to position with index 2
-    listBox.reorder(".k-item:first", 2);
+    listBox.reorder(".k-list-item:first", 2);
     </script>
 
 ### remove

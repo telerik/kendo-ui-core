@@ -1,23 +1,20 @@
 ---
 title: Grid in Razor Pages
-page_title: The Telerik UI Grid in RazorPages
-description: "Telerik UI Grid for {{ site.framework }} in a RazorPages application."
+page_title: The Telerik UI Grid in Razor Pages
+description: "Telerik UI Grid for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_gridhelper_aspnetcore
 position: 2
 ---
 
 # Telerik UI Grid in Razor Pages
 
+Razor Pages are an alternative to the MVC pattern. Razor Pages make page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cs` file (by design, the two files have the same name). You can seamlessly integrate the Telerik UI Grid for {{ site.framework }} in Razor Pages applications.
 
-Razor Pages are an alternative to the MVC pattern. Razor Pages make page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cs` file (generally, the two files have the same name). You can seamlessly integrate the Telerik UI Grid for {{ site.framework }} in Razor Pages applications.
-
-
-For a runnable example, refer to the [Grid in RazorPages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Grid/GridCrudOperations.cshtml).
+For a runnable example, refer to the [Grid in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Grid/GridCrudOperations.cshtml).
 
 ## Getting Started
 
-To enable CRUD operations in the Telerik UI Grid within a `RazorPage`:
-
+To enable CRUD operations in the Telerik UI Grid within a Razor Pages application:
 
 1. Setup CRUD URLs in the `DataSource` along with a `Model.Id`. The URL in these methods must refer to the name of the method in the `PageModel`.
 
@@ -57,14 +54,14 @@ To enable CRUD operations in the Telerik UI Grid within a `RazorPage`:
         )
     ```
     
-1. Add an AntiForgeryToken on top of the RazorPage
+1. Add an `AntiForgeryToken` on top of the page.
 
     ```
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
 
-1. Send the AntiForgeryToken with each POST request of the page. Additional paratemers can also be supplied.
+1. Send the `AntiForgeryToken` with each POST request of the page. Additional parameters can also be supplied.
 
     ```
         <script>
@@ -74,7 +71,7 @@ To enable CRUD operations in the Telerik UI Grid within a `RazorPage`:
         </script>
     ```
     
-1. Within the `.cs` file, introduce ActionMethod for each of the CRUD operations
+1. Within the `.cs` file, introduce an Action method for each of the CRUD operations.
 
     ```
         public JsonResult OnPostRead([DataSourceRequest] DataSourceRequest request)
@@ -107,9 +104,9 @@ To enable CRUD operations in the Telerik UI Grid within a `RazorPage`:
 
 ## Binding the Grid to a PageModel property
 
-To bind the Telerik UI Grid to a property from the PageModel:
+To bind the Grid to a property from the PageModel, follow the next steps:
 
-1. Add a property to the PageModel that holds the collection of data for the grid.
+1. Add a property to the PageModel that holds the data collection that must be loaded in the Grid.
 
 
     ```
@@ -133,13 +130,13 @@ To bind the Telerik UI Grid to a property from the PageModel:
         }
     ```
 
-1. Declare the PageModel at the top of the RazorPage
+1. Declare the PageModel at the top of the page.
 
     ```
         @model GridPageModel
     ```
 
-1. Bind the Grid to the collection property
+1. Bind the Grid to the collection property and disable the server data operations (`ServerOperations(false)`).
 
     ```HtmlHelper
         @(Html.Kendo().Grid<OrderViewModel>(Model.orders)
@@ -164,4 +161,5 @@ To bind the Telerik UI Grid to a property from the PageModel:
 
 * [Remote Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding)
 * [Local Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/local-data-binding)
-* [Server-Side API](/api/grid)
+* [Server-Side HtmlHelper API](/api/grid)
+* [Server-Side TagHelper API](/api/taghelpers/grid)
