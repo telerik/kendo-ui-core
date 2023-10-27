@@ -39,7 +39,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
 		@* Add the Kendo UI scripts: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
+		<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
 		</head>
@@ -54,7 +54,7 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 		@Scripts.Render("~/bundles/modernizr")
 		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
 		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
+		<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
 		

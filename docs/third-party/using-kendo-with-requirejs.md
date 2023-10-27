@@ -71,7 +71,7 @@ The following example demonstrates how to use a bundle script with RequireJS.
       require.config({
         paths: {
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "jszip": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min",
+          "jszip": "https://unpkg.com/jszip@3.10.1/dist/jszip.min",
           "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min",
         }
       });

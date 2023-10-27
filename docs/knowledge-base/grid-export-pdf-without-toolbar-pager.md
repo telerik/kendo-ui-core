@@ -147,7 +147,7 @@ The following example demonstrates the outcome of the suggested approach.
   </script>
 
   <!-- Load Pako ZLIB library to enable PDF compression -->
-  <script src="//kendo.cdn.telerik.com/2016.1.112/js/pako_deflate.min.js"></script>
+  <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
   <script>
     $("#grid").kendoGrid({

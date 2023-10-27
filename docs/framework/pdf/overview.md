@@ -50,9 +50,15 @@ The Gauges and Barcodes can be exported to PDF by using the `exportPDF()` method
 
 ## Compression
 
+> Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
 The PDF generator supports compression through the JavaScript [Pako library](https://github.com/nodeca/pako). To automatically enable the compression, load Pako with a `<script>` tag (`window.pako` is available). Compression can make a big difference in the output file size when you are using custom TTF fonts or images with alpha channel, such as PNGs with transparency.
 
-> Besides drastically reducing the output size, Pako enables the browser to use less memory while rendering the PDF. Chrome often crashes on generating very large PDF files and including this library will mitigate the problem. The Pako library is bundled with Kendo UI as `pako_deflate.min.js`.
+```html
+<script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
+```
+
+> Besides drastically reducing the output size, Pako enables the browser to use less memory while rendering the PDF. Chrome often crashes on generating very large PDF files and including this library will mitigate the problem.
 
 ## Supported Browsers
 

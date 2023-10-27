@@ -29,9 +29,9 @@ How can I print the Kendo UI Scheduler on multiple pages when agenda view is sel
 1. As the first row becomes two rows height, you will need to fix the rowspan.
 
 ````dojo
-	<script src="http://kendo.cdn.telerik.com/2016.2.714/js/jszip.min.js"></script>
+	<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/2016.2.714/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     <div id="example">
       <button id="export" class="k-button">Export to PDF</button>
       <div id="scheduler"></div>

@@ -55,7 +55,7 @@ You can alter the generated workbook to include a column with formulas by follow
 ```
 
 ```dojo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     <div id="grid" ></div>
     <script>

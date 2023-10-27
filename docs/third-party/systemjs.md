@@ -180,7 +180,6 @@ The following example demonstrates the configuration for SystemJS 0.20.x.
       		"kendo.view.min": "lib/kendo/kendo.view.min.js",
       		"kendo.virtuallist.min": "lib/kendo/kendo.virtuallist.min.js",
       		"kendo.window.min": "lib/kendo/kendo.window.min.js",
-      		"pako_deflate.min": "lib/kendo/pako_deflate.min.js",
       		"kendoaspnetmvc": "lib/kendo/kendo.aspnetmvc.min.js",
       		"kendodatavizbarcode": "lib/kendo/kendo.dataviz.barcode.min.js",
       		"kendodatavizchart": "lib/kendo/kendo.dataviz.chart.min.js",

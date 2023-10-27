@@ -24,6 +24,8 @@ To enable the Excel export option of the Grid:
     * [Excel export configuration](/api/javascript/ui/grid/configuration/excel)
 1. Include the JSZip script on the page. For more information, refer to the article with the [requirements]({% slug introduction_excelexport_kendoui %}#requirements).
 
+> Starting with v2023.3.1115 the JSZip library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
 To initiate Excel export through code, call the [`saveAsExcel`](/api/javascript/ui/grid/methods/saveasexcel) method.
 
 > * By default, the Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
@@ -39,7 +41,7 @@ For more information, refer to the [online demo on Excel export](https://demos.t
 The following example demonstrates how to enable the Excel export functionality of the Grid.
 
 ```dojo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     <div id="grid"></div>
     <script>
@@ -82,7 +84,7 @@ By default, the Grid exports only the current page of data. To export all pages,
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use [server-side export](#server-side-processing).
 
 ```dojo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     <div id="grid"></div>
     <script>
@@ -127,7 +129,7 @@ Each row has a `type` field that can be used to distinguish between the various 
 - `"data"`
 
 ```dojo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     <div class="k-rtl">
       <div id="grid" ></div>
@@ -175,7 +177,7 @@ By default, each Grid exports its content in a separate Excel sheet. For more in
 To send the generated file to a remote service, prevent the default file saving and post the `base64` encoded contents.
 
 ```dojo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     <div id="grid"></div>
     <script>

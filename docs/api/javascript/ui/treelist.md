@@ -4826,10 +4826,9 @@ Configures the PDF export settings of the TreeList.
 Exports all TreeList pages, starting from the first one.
 
 > **Note:** Chrome is known to crash when generating very large PDF-s.  A solution to this is to include the
-> [Pako](http://nodeca.github.io/pako/) library, which is bundled with Kendo as `pako_deflate.min.js`.  Simply loading
-> this library with a `<script>` tag will enable compression in PDF, e.g.:
+> [Pako](http://nodeca.github.io/pako/) library. Simply loading this library with a `<script>` tag will enable compression in PDF, e.g.:
 >
-> `<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>`
+> `<script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>`
 
 #### Example - export all pages
 

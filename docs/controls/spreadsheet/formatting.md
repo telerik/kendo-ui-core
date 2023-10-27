@@ -34,7 +34,7 @@ This following example is the same as the previous one, with the difference to d
 The following example demonstrates how to format the Spreadsheet conditionally.
 
 ```dojo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     <div id="example">
     <div id="spreadsheet" style="width: 100%;"></div>

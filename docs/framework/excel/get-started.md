@@ -65,18 +65,20 @@ After the completion of this guide, you will achieve the following result:
 
 ## 1. Requirements
 
+> Starting with v2023.3.1115 the JSZip library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
 To take full advantage of the Excel Export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
 
 ```
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 ```
 
 JSZip is part of the Kendo UI distribution and is also available through the Kendo UI CDN:
 
 ```
-<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 ```
 
 > * If you do not include JSZip in the page, Kendo UI will raise a runtime exception.

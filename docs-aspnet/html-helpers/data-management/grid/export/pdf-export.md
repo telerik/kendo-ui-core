@@ -34,6 +34,8 @@ To enable PDF export:
     * [PDF export configuration](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }})
 1. Include the Pako Deflate library in the page to enable compression.
 
+> Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
 To initiate PDF export, press the **Toolbar** button or use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) and call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveaspdf) method.
 
 > * By default, the Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
@@ -43,7 +45,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ```HtmlHelper
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     @(Html.Kendo().Grid<.ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Pdf())
@@ -59,7 +61,7 @@ The following example demonstrates how to enable the PDF export functionality of
 {% if site.core %}
 ```TagHelper
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2022.1.301/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <kendo-grid name="grid">
         <toolbar>
@@ -400,7 +402,7 @@ The following example demonstrates how to handle custom fonts.
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     @(Html.Kendo().Grid<.ProductViewModel>()
         .Name("grid")
@@ -440,7 +442,7 @@ The following example demonstrates how to handle custom fonts.
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <kendo-grid name="grid">
         <toolbar>

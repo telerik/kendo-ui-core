@@ -51,7 +51,7 @@ To handle this issue, [make the fonts available for embedding]({% slug pdfderawi
 </script>
 
 <!-- Load the Pako ZLIB library to enable PDF compression. -->
-<script src="//kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+<script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
 <script>
     $(".export-pdf").click(function() {

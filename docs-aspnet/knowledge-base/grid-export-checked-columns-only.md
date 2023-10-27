@@ -39,7 +39,7 @@ To achieve the desired scenario:
 1. Create a common function that will be responsible for creating the workbook document.
 
 ```Index.cshtml
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script> // To take full advantage of the Excel export   feature, download the JSZip library and include the file.
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script> // To take full advantage of the Excel export   feature, download the JSZip library and include the file.
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")

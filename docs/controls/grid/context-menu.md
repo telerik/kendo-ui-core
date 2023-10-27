@@ -30,7 +30,7 @@ The valid predefined tools are: *"separator", "create", "edit", "destroy", "sele
 In the example below all predefined commands are included in a customized order.
 
 ```dojo
-    <script src="https://kendo.cdn.telerik.com/2023.2.718/js/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     <div id="example">
     	<div id="grid"></div>

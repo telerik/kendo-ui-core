@@ -960,6 +960,31 @@
             assert.deepEqual(result, new Date(2012, 2, 25, 4, 30, 10, 123));
         });
 
+        it("parseDate works correctly with leading zero in month", function() {
+            var result = parse("2023/007", "yyyy/MM", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6));
+        });
+
+        it("parseDate works correctly with leading zero in day", function() {
+            var result = parse("2023/07/021", "yyyy/MM/dd", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21));
+        });
+
+        it("parseDate works correctly with leading zero in hours", function() {
+            var result = parse("2023/07/21 011", "yyyy/MM/dd HH", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21, 11));
+        });
+
+        it("parseDate works correctly with leading zero in minutes", function() {
+            var result = parse("2023/07/21 11:039", "yyyy/MM/dd HH:mm", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21, 11, 39));
+        });
+
+        it("parseDate works correctly with leading zero in seconds", function() {
+            var result = parse("2023/07/21 11:39:048", "yyyy/MM/dd HH:mm:ss", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21, 11, 39, 48));
+        });
+
         it("parseExact method parses date string with UTC 'Z' zone designator", function() {
             var utcDate = new Date(Date.UTC(2014, 4, 21, 0, 0, 0));
             var result = kendo.parseDate("2014-05-21 00:00:00Z", "yyyy-MM-dd HH:mm:sszz");

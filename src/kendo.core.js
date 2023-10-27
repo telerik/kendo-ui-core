@@ -1334,7 +1334,11 @@ function pad(number, digits, end) {
         return newLocalInfo;
     }
 
-    function parseExact(value, format, culture, strict) {
+    function unpadZero(value) {
+        return value.replace(/^0*/, '');
+    }
+
+    function parseExact(value, format, culture, strict, shouldUnpadZeros) {
         if (!value) {
             return null;
         }
@@ -1351,8 +1355,22 @@ function pad(number, digits, end) {
                 return i;
             },
             getNumber = function(size) {
-                var rg = numberRegExp[size] || new RegExp('^\\d{1,' + size + '}'),
-                    match = value.substr(valueIdx, size).match(rg);
+                var rg, match, part = "";
+                if (size === 2) {
+                    for (let i = 0; i <= size; i++) {
+                        part += value[valueIdx + i] || "";
+                    }
+                }
+
+                // If the value comes in the form of 021, 022, 023 we must trim the leading zero otherwise the result will be 02 in all three cases instead of 21/22/23.
+                if (shouldUnpadZeros && part.length === 3 && Number.isInteger(Number(part))) {
+                    part = unpadZero(part);
+                } else {
+                    part = value.substr(valueIdx, size);
+                }
+
+                rg = numberRegExp[size] || new RegExp('^\\d{1,' + size + '}');
+                match = part.match(rg);
 
                 if (match) {
                     match = match[0];
@@ -1671,7 +1689,7 @@ function pad(number, digits, end) {
         return formats;
     }
 
-    function internalParseDate(value, formats, culture, strict) {
+    function internalParseDate(value, formats, culture, strict, shouldUnpadZeros) {
         if (objectToString.call(value) === "[object Date]") {
             return value;
         }
@@ -1709,7 +1727,7 @@ function pad(number, digits, end) {
         length = formats.length;
 
         for (; idx < length; idx++) {
-            date = parseExact(value, formats[idx], culture, strict);
+            date = parseExact(value, formats[idx], culture, strict, shouldUnpadZeros);
             if (date) {
                 return date;
             }
@@ -1718,8 +1736,8 @@ function pad(number, digits, end) {
         return date;
     }
 
-    kendo.parseDate = function(value, formats, culture) {
-        return internalParseDate(value, formats, culture, false);
+    kendo.parseDate = function(value, formats, culture, shouldUnpadZeros) {
+        return internalParseDate(value, formats, culture, false, shouldUnpadZeros);
     };
 
     kendo.parseExactDate = function(value, formats, culture) {

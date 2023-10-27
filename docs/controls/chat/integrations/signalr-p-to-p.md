@@ -62,12 +62,11 @@ To create the Peer-to-Peer Chat, first you have to implement the SignalR Hub, an
 1. On the `_Layout.cshtml` page and in the `<head>` tag, add a reference to Kendo UI and SignalR:
 
 ```
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2023.1.117/styles/kendo.default-ocean-blue.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-ocean-blue.css">
 
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.1.117/js/angular.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.1.117/js/jszip.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.1.117/js/kendo.all.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.2/signalr.min.js"></script>
 ```
 

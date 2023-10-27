@@ -15,8 +15,10 @@ position: 5
 
 The [Pako Deflate library](https://nodeca.github.io/pako/#Deflate) enables the compression of the files that will be exported to PDF. To enable the PDF export, you need to load Pako in the specified page.
 
+> Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
 For more information on the available PDF export options by Kendo UI, refer to the articles on [PDF Export](https://docs.telerik.com/kendo-ui/framework/pdf/overview) and [PDF output by the Drawing library](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/overview).
 
@@ -32,12 +34,8 @@ Include the JSZip library:
 To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-
-JSZip is part of the Kendo UI distribution and is also available through the Kendo UI CDN.
-
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
 
 > * If you do not include JSZip in the page, Kendo UI will raise a runtime exception.
 

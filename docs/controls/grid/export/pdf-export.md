@@ -22,6 +22,8 @@ To enable PDF export:
     * [PDF export configuration](/api/javascript/ui/grid/configuration/pdf)
 1. Include the Pako Deflate library in the page to enable compression.
 
+> Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
 To initiate PDF export through code, call the [`saveAsPdf`](/api/javascript/ui/grid/methods/saveaspdf) method.
 
 > * By default, Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
@@ -31,7 +33,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ```dojo
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script>
@@ -315,7 +317,7 @@ The following example demonstrates how to handle custom fonts.
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script>

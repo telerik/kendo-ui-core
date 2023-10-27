@@ -25,7 +25,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ```HtmlHelper
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     @(Html.Kendo().Scheduler<SchedulerModel>()
         .Name("scheduler")
@@ -46,7 +46,7 @@ The following example demonstrates how to enable the PDF export functionality of
 {% if site.core %}
 ```TagHelper
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     
     <kendo-scheduler name="scheduler">
         <pdf file-name="Kendo UI Scheduler Export.pdf"/>

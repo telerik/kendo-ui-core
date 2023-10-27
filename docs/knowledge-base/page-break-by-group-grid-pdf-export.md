@@ -64,7 +64,7 @@ pdf: { 
       </script>
 
       <!-- Load Pako ZLIB library to enable PDF compression -->
-      <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+      <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
       <script type="x/kendo-template" id="page-template">
       <div class="page-template">

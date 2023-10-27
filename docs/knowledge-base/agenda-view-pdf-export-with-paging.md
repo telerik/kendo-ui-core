@@ -40,9 +40,9 @@ How can I export the Kendo UI Scheduler Agenda view to a paged PDF?
 To achieve the desired scenario, use the [drawing API]({% slug multipagecontent_drawing %}#automatic-page-breaking) as demonstrated in the following example.
 
 ```dojo
-    <script src="//kendo.cdn.telerik.com/2016.2.504/js/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/2016.2.504/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     <div id="example">
       <button id="export" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base">Export to PDF</button>
       <div id="scheduler"></div>

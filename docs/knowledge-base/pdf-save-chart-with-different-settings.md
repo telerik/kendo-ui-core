@@ -159,7 +159,7 @@ The following example demonstrates how to achieve this behavior.
       </script>
 
       <!-- Load Pako ZLIB library to enable PDF compression -->
-      <script src="//kendo.cdn.telerik.com/2016.2.504/js/pako_deflate.min.js"></script>
+      <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     </div>
 ```

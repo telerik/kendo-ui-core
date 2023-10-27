@@ -97,14 +97,13 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@ViewBag.Title - UI for MVC / Kendo Quick Start Guide</title>
-        <link href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.common-bootstrap.min.css" rel="stylesheet"   type="text/css" />
-        <link href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.bootstrap.min.css" rel="stylesheet"  type="text/css" />
+        <link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-ocean-blue.css" rel="stylesheet"  type="text/css" />
         <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/jszip.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.aspnetmvc.min.js"></script>
+        <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"></script>
         <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
         <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
         @Styles.Render("~/Content/css")

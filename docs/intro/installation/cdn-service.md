@@ -98,7 +98,7 @@ The following example demonstrates how to initialize a DropDownList with some ba
         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+        <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
     </head>
     <body>

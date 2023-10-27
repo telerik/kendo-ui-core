@@ -22,17 +22,19 @@ After completing this guide, you will achieve the following results:
 
 @[template](/_contentTemplates/core/getting-started-directives.md#gs-adding-directives)
 
+> Starting with v2023.3.1115 the JSZip library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
 * Add the [JSZip](https://stuk.github.io/jszip/) library that is used internally by the Spreadsheet:
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
-<script src="~/shared/jszip.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
 ```
 {% if site.core %}
 ```TagHelper
 @addTagHelper *, Kendo.Mvc
-<script src="~/shared/jszip.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
 ```
 {% endif %}
@@ -104,7 +106,7 @@ Use the Spreadsheet HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
-<script src="~/shared/jszip.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")
@@ -187,7 +189,7 @@ Use the Spreadsheet HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
 {% if site.core %}
 ```TagHelper
 @addTagHelper *, Kendo.Mvc
-<script src="~/shared/jszip.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
 <kendo-spreadsheet name="spreadsheet" style="width: 100%">
     <toolbar enabled="false" />
@@ -285,7 +287,7 @@ The Spreadsheet exposes numerous client-side events that you can handle to custo
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
-<script src="~/shared/jszip.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")
@@ -380,7 +382,7 @@ The Spreadsheet exposes numerous client-side events that you can handle to custo
 {% if site.core %}
 ```TagHelper
 @addTagHelper *, Kendo.Mvc
-<script src="~/shared/jszip.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
 <kendo-spreadsheet name="spreadsheet" style="width: 100%" on-data-binding="onDataBinding" on-data-bound="onDataBound">
     <toolbar enabled="false" />

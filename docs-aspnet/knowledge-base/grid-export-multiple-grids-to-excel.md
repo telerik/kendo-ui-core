@@ -84,7 +84,7 @@ The example below relies on the following key steps:
     )
 ```
 ```JavaScript
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
     <script>
         // Use Promises to sync the exports.
         var promises = [

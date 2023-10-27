@@ -36,7 +36,7 @@ The following example demonstrates how to send files directly to Azure Face API 
       <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"/>
 
       <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/jszip.min.js"></script>
+      <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
       <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/kendo.all.min.js"></script>
 
     </head>

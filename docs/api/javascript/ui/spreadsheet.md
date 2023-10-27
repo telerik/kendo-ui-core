@@ -1785,7 +1785,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/sp
     </script>
 
     <!-- Load JSZIP library to enable Excel export -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
 ### saveAsPDF
 
@@ -1829,7 +1829,7 @@ An `options` object with the same structure as the [`pdf`](/api/javascript/ui/sp
     </script>
 
     <!-- Load Pako library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
 ### sheetByName
 

@@ -28,7 +28,7 @@ The following sections provide step-by-step instructions and examples on getting
 
     ```HtmlHelper
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+        <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 
         @(Html.Kendo().Grid<OrderViewModel>()
