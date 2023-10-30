@@ -3,6 +3,7 @@ title: WebApi Binding
 page_title: WebApi Binding
 description: "Learn how to enable the WebAPI binding capabilities of the Telerik UI Grid for {{ site.framework }}."
 slug: htmlhelpers_grid_webapi_binding
+previous_url: /html-helpers/data-management/grid/editing/webapi, /helpers/grid/webapi-editing, /helpers/data-management/grid/webapi-editing
 ---
 
 # WebAPI Binding

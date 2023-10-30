@@ -59,7 +59,6 @@ The below example demonstrates how to sort the column titles in the child menu i
 ```
 {% endif %}
 
-
 ## Group
 
 The `ColumnMenu()` method accepts a `GridColumnMenuSettingsBuilder` that enables grouping of the columns in the child menu. The `Columns()` group method expects a collection of the model properties. The menu will automatically use the title of the grid columns if such is defined
@@ -92,22 +91,28 @@ The following example demonstrates how to group columns by providing the model f
 
 ## Column Menu Types
 
-As of R1 2021 version of the Telerik UI for {{ site.framework }} suite, the Grid component introduces the `modern` render mode that aims to deliver a fresh look and feel.
+The Telerik UI for {{ site.framework }} Grid provides the following Column Menu component types:
 
-By default, the column menu of the Grid is initialized in the `classic` render mode. To set it to `modern`, configure the options of the widget as follows:
+| Column Menu Type  | Description |
+| ----              | ----        |
+| `classic`         | The default rendering mode of the Grid's Column Menu |
+| `modern`          | Introduced with R1 2021 version of the Telerik UI for {{ site.framework }} suite. The `modern` rendering mode aims to deliver a fresh look and feel to the Grid's Column Menu |
+| `tabbed`          | Introduced with R3 SP1 2023 version of the Telerik UI for {{ site.framework }} suite. The `tabbed` component type delivers a more compact view without sacrificing the available space. The tabbed interface provides a neat way to organize items into related groups. |
+
+By default, the column menu of the Grid is initialized in the `classic` render mode. To set it to `modern` or `tabbed`, configure the `ColumnMenu.ComponentType` option of the {{ site.product }} Grid as demonstrated below:
 
 ```HtmlHelper
     @(Html.Kendo().Grid()
             .Name("datePicker")
             .ColumnMenu(m=>{
-               m.ComponentType("modern");
+               m.ComponentType("tabbed");
             })
     )
 ```
 {% if site.core %}
 ```TagHelper
 <kendo-grid name="grid">
-    <column-menu component-type="modern">
+    <column-menu component-type="tabbed">
 
     </column-menu>
 </kendo-grid>

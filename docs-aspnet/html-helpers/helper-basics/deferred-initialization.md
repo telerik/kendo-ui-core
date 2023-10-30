@@ -191,6 +191,8 @@ Any components registered after it will not be included in the script.
 
 {% endif %}
 
+>tip The functionality of the StackLayout and the GridLayout components relies on inline styles. When the application is configured to defer the initialization of all components and return a `JS` file, as demonstrated above, the use of inline styles in those components will also be deferred. In this scenrio an additional stylesheet will be served by {% if site.core %}the middleware{% else %}the `HttpModule`{% endif %}.
+
 ## Deferring Dynamically Loaded Components
 
 When deferring the components globally and calling the `DeferredScriptFile()` method, the simulated `JS` file stores the initialization scripts of the components that are defined in the currently loaded View.

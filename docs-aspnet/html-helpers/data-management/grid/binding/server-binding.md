@@ -32,6 +32,7 @@ The Grid supports the following client-side events when it is in server binding 
 > * The other client-side events, which are related to data-binding and CRUD data operations, will not be raised when the Grid is configured for server binding.
 > * Locked columns are not supported. To support locked columns, use [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}) instead.
 > * Showing or hiding of columns and reordering with the `GroupHeaderColumnTemplate` in server-binding scenarios is not supported. The reason is that in server-binding scenarios the Kendo UI for jQuery DataSource instance does not have groups and aggregates information. Therefore, the templates for the group rows cannot be compiled on the client side. If your project requires such a scenario, use [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}).
+> * Rows spanning is not supported. To support both rows and columns spanning, use [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}) instead and refer to the [Row and Column Spanning]({% slug grid_aspnetcore_spanning %}) article for configuration details.
 
 ## Getting Started
 

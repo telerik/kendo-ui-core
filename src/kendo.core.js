@@ -1363,7 +1363,7 @@ function pad(number, digits, end) {
                 }
 
                 // If the value comes in the form of 021, 022, 023 we must trim the leading zero otherwise the result will be 02 in all three cases instead of 21/22/23.
-                if (shouldUnpadZeros && part.length === 3 && Number.isInteger(Number(part))) {
+                if (shouldUnpadZeros && part.length === 3 && Number.isInteger(Number(part)) && Number(part) > 0) {
                     part = unpadZero(part);
                 } else {
                     part = value.substr(valueIdx, size);
