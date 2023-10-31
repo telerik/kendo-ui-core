@@ -11,7 +11,7 @@ position: 6
 
 [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) is a supplementary security approach which helps you prevent specific security attacks such as Cross-Site Scripting (XSS) and data-injections.
 
->tipAs of R3 2023, {{ site.product }} is fully compatible with strict Content Security Policy. The `unsafe-inline` keyword is no longer required in the "style-src" directive.
+> As of R3 2023, the `unsafe-inline` keyword is no longer required in the "style-src" directive except for the [`Editor`]({% slug htmlhelpers_editor_aspnetcore %}), [`ReponsivePanel`]({% slug htmlhelpers_responsivepanel_aspnetcore %}), [`GridLayout`]({% slug htmlhelpers_aspnet_gridlayout_overview %}), and [`StackLayout`]({% slug htmlhelpers_aspnet_stacklayout_overview %}) components. The rendering of these components will be improved to achieve complete compatibility with strict Content Security Policy.
 
 The following code shows how to turn on the strict CSP mode:
 
