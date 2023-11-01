@@ -1,16 +1,20 @@
 ---
-title: The Telerik UI ListBox in RazorPages
-page_title: The Telerik UI ListBox in RazorPages
-description: "Telerik UI ListBox for {{ site.framework }} in a RazorPages application."
+title: Razor Pages
+page_title: Razor Pages
+description: "Telerik UI ListBox for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_listBoxhelper_aspnetcore
 position: 1
 ---
 
-# Telerik UI ListBox in RazorPages
+# ListBox in Razor Pages
 
-`RazorPage` is an alternative to the MVC pattern that makes page-focused coding easier and more productive. It consists of a `cshtml` file and a `cs` file (generally the two files have the same name). The Telerik UI ListBox for {{ site.framework }} can be integrated in such an application seamlessly.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For a runnable example, refer to the [ListBox in RazorPages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ListBox).
+You can seamlessly integrate the Telerik UI ListBox for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the ListBox component in a Razor Pages scenario.
+
+For the complete project, refer to the [ListBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ListBox/ListBoxBinding.cshtml).
 
 ## Getting Started
 

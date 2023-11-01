@@ -28,7 +28,7 @@ When migrating from font icons to SVG icons, you will face two possible scenario
     The following example shows a font icon without customizations used in {{ site.product }} versions prior to R2 2023: 
 
     ``` 
-    <span class="k-icon k-i-camera"></span> 
+    <span class="k-icon k-font-icon k-i-camera"></span> 
     ``` 
 
     To set an SVG icon in R2 2023 and later versions, use the `kendo.ui.icon` utility: 
@@ -52,7 +52,7 @@ When migrating from font icons to SVG icons, you will face two possible scenario
         } 
     </style> 
 
-    <span class="k-icon k-i-camera"></span> 
+    <span class="k-icon k-font-icon k-i-camera"></span> 
     ``` 
 
     To set an SVG icon in R2 2023 and later versions, replace the font icon with an SVG icon by using `kendo.ui.icon` or add `.k-svg-icon` to the selector. 

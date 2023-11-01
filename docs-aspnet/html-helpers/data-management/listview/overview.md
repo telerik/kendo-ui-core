@@ -219,6 +219,7 @@ The following example demonstrates the basic configuration for the ListView.
 * [Basic Usage of the ListView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/index)
 {% if site.core %}
 * [Basic Usage of the ListView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/tag-helper)
+* [ListView in Razor Pages]({% slug htmlhelpers_listview_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

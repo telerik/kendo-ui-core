@@ -200,6 +200,7 @@ The following example demonstrates the basic configuration of the DropDownTree.
 * [Basic Usage of the DropDownTree HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/index)
 {% if site.core %}
 * [Basic Usage of the DropDownTree TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/tag-helper)
+* [DropDownTree in Razor Pages]({% slug htmlhelpers_dropdowntree_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

@@ -51,6 +51,7 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 * [Basic Usage of the MaskedTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/index)
 {% if site.core %}
 * [Basic Usage of the MaskedTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/maskedtextbox/tag-helper)
+* [MaskedTextBox in Razor Pages]({% slug razorpages_maskedtextboxhelper_aspnetcore %})
 {% endif %}
 
 ## See Also

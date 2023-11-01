@@ -39,6 +39,5 @@ It provides options for using custom templates for its **Month** view, setting m
 ## See Also 
 
 * [Binding the DatePicker over MVVM (Demo)](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
-* [Using the DatePicker with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/datepicker/angular)
 * [Applying the DatePicker API (Demo)](https://demos.telerik.com/kendo-ui/datepicker/api)
 * [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)

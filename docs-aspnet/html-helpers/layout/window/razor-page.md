@@ -1,16 +1,20 @@
 ---
-title:  Razor Page
-page_title: Configure a Window in Razor Page.
-description: "An example on how to configure the Telerik UI Window component for {{ site.framework }} in a Razor Page."
+title: Razor Pages
+page_title: Razor Pages
+description: "An example on how to configure the Telerik UI Window component for {{ site.framework }} in a Razor Pages."
 slug: htmlhelpers_window_razorpage_aspnetcore
 position: 8
 ---
 
-# Razor Page
+# Window in Razor Pages
 
-This article describes how to configure the Telerik UI Window for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-The example below demonstrates how to load content in Window from the server. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Window for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Window component in a Razor Pages scenario.
+
+For the complete project, refer to the [Window in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Window/WindowIndex.cshtml).
 
 ```tab-HtmlHelper(cshtml)  	
 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

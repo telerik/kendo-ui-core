@@ -1,45 +1,60 @@
 ---
 title: Razor Pages
-page_title: Configure a DataSource for the Telerik UI Sparkline for Remote Binding in Razor Pages.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Sparkline component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) in Razor Pages."
+page_title: Razor Pages
+description: "An example on how to configure remote binding DataSource to populate the Telerik UI Sparkline component for {{ site.framework }} in Razor Pages."
 slug: htmlhelper_sparkline_razorpages_aspnetcore
-position: 4
+position: 3
 ---
 # Sparkline in Razor Pages
 
-Razor Pages are an alternative to the MVC pattern. Razor Pages make page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cs` file (generally, the two files have the same name). You can seamlessly integrate the Telerik UI Sparkline for {{ site.framework }} in Razor Pages applications.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name).
 
-For a runnable example, refer to the [Sparkline in RazorPages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Sparkline).
+You can seamlessly integrate the Telerik UI Sparkline for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure a basic Sparkline component in a Razor Pages scenario.
+
+For the complete project, refer to the [Sparkline in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Sparkline/SparklineRemoteBidning.cshtml).
 
 ## Getting Started
 
-The most flexible form of data binding is to use the [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component. To bind the Telerik UI Sparkline to a data set within a RazorPage:
+The most flexible form of data binding is to use the [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component. To bind the Sparkline to a data set received from a remote endpoint within a Razor Pages application, follow the next steps:
 
-1. Configure the Read URL in the `DataSource`. The URL must refer to the method name in the `PageModel`:
+1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper
-        .DataSource(ds => ds
-            .Read(r => r.Url("/Sparkline/SparklineRemoteBidning?handler=Read").Data("forgeryToken"))
+    ```HtmlHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @(Html.Kendo().Sparkline()
+            .Name("sparkline-weather")
+            .DataSource(ds => ds
+                .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
             )
+            ...
+        )
     ```
-    {% if site.core %}
-    ```TagHelper
-        <datasource type="DataSourceTagHelperType.Ajax">
-            <transport>
-                <read url="/Sparkline/SparklineRemoteBidning?handler=Read" data="forgeryToken" />
-            </transport>
-        </datasource>
+    ```TagHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        <kendo-sparkline name="sparkline-weather">
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read type="post" url="/Index?handler=Read" data="forgeryToken" />
+                </transport>
+            </datasource>
+            <!--Other configuration-->
+        </kendo-sparkline>
     ```
-    {% endif %}
 
-2. Add an AntiForgeryToken at the top of the RazorPage:
+1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```HtmlHelper
+    ```
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
 
-3. Send the AntiForgeryToken with the Read request of the page. Additional parameters can also be supplied:
+1. Send the `AntiForgeryToken` with the Read request.
 
     ```
         <script>
@@ -49,9 +64,41 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
         </script>
     ```
 
-4. Within the `.cs` file, introduce `JsonResult` to return the data set:
+    Additional parameters can also be supplied.
 
-    ```tab-.cs
+    ```
+        <script>
+            function forgeryToken() {
+                return {
+                    __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
+                    additionalParameter: "test"
+                }
+            }
+        </script>
+    ```
+
+1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
+
+    ```tab-Index.cshtml.cs
+        public static List<Weather> items;
+
+        public void OnGet()
+        {
+            var random = new Random();
+            if (items == null)
+            {
+                // Populate the "items" collection with data.
+                items = new List<Weather>();
+                Enumerable.Range(0, 30).ToList().ForEach(i => items.Add(new Weather
+                {
+                    Id = i,
+                    Rain = random.Next(0, 10),
+                    TMax = random.Next(2, 11),
+                    Wind = random.Next(8, 30)
+                }));
+            }
+        }
+
         public JsonResult OnPostRead()
         {
             return new JsonResult(items);
@@ -59,15 +106,18 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
     ```
     ```tab-Model
         public class Weather
-    {
-        public int Id { get; set; }
-        public double Rain { get; set; }
-        public double TMax { get; set; }
-        public double Wind { get; set; }
-    }
+        {
+            public int Id { get; set; }
+            public double Rain { get; set; }
+            public double TMax { get; set; }
+            public double Wind { get; set; }
+        }
     ```
 
 ## See Also
 
-* [Basic Usage of the Sparklines HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/sparklines/index)
-* [Server-Side API](/api/sparkline)
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Sparkline](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sparkline)
+* [Server-Side HtmlHelper API of the Sparkline](/api/sparkline)
+* [Server-Side TagHelper API of the Sparkline](/api/taghelpers/sparkline)
+* [Knowledge Base Section](/knowledge-base)

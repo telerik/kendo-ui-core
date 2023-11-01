@@ -13,6 +13,7 @@ Depending on the configuration of its [DataSource]({% slug htmlhelpers_datasourc
 
 {% if site.core %}
 * [Local data binding]({% slug htmlhelpers_grid_aspnetcore_localbinding %})
+* [Razor Pages binding]({% slug razorpages_gridhelper_aspnetcore %})
 {% else %}
 * [Server binding binding]({% slug serverbinding_grid_aspnetmvc %})
 {% endif %}

@@ -1,18 +1,20 @@
 ---
 title:  Razor Pages
-page_title: Configure a Telerik UI ScrollView in Razor Pages.
+page_title: Razor Pages
 description: "An example on how to configure a ScrollView in Razor Pages."
 slug: htmlhelpers_scrollview_razorpage_aspnetcore
 position: 5
 ---
 
-# Razor Page
+# ScrollView in Razor Pages
 
-This article shows how to perform CRUD operations with the ScrollView component in Razor Pages.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-To set up the ScrollView component bindings, you need to configure the `Create`, `Read`, `Update`, `Delete` methods of its `DataSource` instance. The URLs in these methods must refer to the method names in the PageModel.```
+You can seamlessly integrate the Telerik UI ScrollView for {{ site.framework }} in Razor Pages applications.
 
-See the implementation details in the sample below. A complete project with Razor Pages examples is available in this [ASP.NET Core Examples repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+This article describes how to configure the ScrollView component in a Razor Pages scenario.
+
+For the complete project, refer to the [ScrollView in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ScrollView/ScrollViewBinding.cshtml).
 
 ```tab-HtmlHelper(csthml)
 @page

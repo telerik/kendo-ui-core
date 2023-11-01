@@ -87,4 +87,7 @@ The Chat provides an option for creating a [Peer-to-Peer Chat application by usi
 ## See Also
 
 * [Basic Usage of the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/index)
+{% if site.core %}
+* [Chat in Razor Pages]({% slug htmlhelpers_chat_razorpage_aspnetcore %})
+{% endif %}
 * [Server-Side API of the Chat for {{ site.framework }}](/api/chat)

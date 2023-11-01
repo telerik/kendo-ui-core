@@ -287,6 +287,7 @@ The following example demonstrates the basic configuration of the Menu.
 * [Basic Usage of the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/index)
 {% if site.core %}
 * [Basic Usage of the Menu TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/tag-helper)
+* [Menu in Razor Pages]({% slug htmlhelpers_menu_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

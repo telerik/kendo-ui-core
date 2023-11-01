@@ -71,6 +71,9 @@ The Diagram represents information in a schematic way and according to particula
 
 * [Getting Started with the Diagram]({% slug diagram_getting_started %})
 * [Basic Usage of the Diagram HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram/index)
+{% if site.core %}
+* [Diagram in Razor Pages]({% slug razorpages_diagramhelper_aspnetcore %})
+{% endif %}
 
 ## See Also
 

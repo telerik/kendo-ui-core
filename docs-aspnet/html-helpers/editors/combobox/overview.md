@@ -180,6 +180,7 @@ The following example demonstrates the basic configuration of the ComboBox.
 * [Basic Usage of the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/index)
 {% if site.core %}
 * [Basic Usage of the ComboBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/tag-helper)
+* [ComboBox in Razor Pages]({% slug htmlhelpers_combobox_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

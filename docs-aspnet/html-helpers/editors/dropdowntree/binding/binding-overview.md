@@ -13,7 +13,7 @@ The DropDownTree component provides a set of options for data binding. The suppo
 * [Items binding]({% slug itemsbinding_dropdowntree %})
 * [Ajax binding]({% slug htmlhelpers_dropdowntree_ajaxbinding_aspnetcore %})
 * [Server binding]({% slug htmlhelpers_dropdowntree_serverbinding_aspnetcore %})
-{% if site.core %}* [Razor Pages]({% slug htmlhelpers_dropdowntree_razorpage_aspnetcore %}){% endif %}
+{% if site.core %}* [Razor Pages binding]({% slug htmlhelpers_dropdowntree_razorpage_aspnetcore %}){% endif %}
 
 ## See Also
 

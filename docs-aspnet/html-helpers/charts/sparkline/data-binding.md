@@ -88,6 +88,9 @@ The following example demonstrates how to bind the Sparkline Chart to remote dat
 
 ## See Also
 
+{% if site.core %}
+* [Sparkline in Razor Pages]({% slug htmlhelper_sparkline_razorpages_aspnetcore %})
+{% endif %}
 * [Local Data Binding by the Sparkline HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sparklines/local-data-binding)
 * [Remote Data Binding by the Sparkline HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sparklines/remote-data-binding)
 * [Server-Side API](/api/sparkline)

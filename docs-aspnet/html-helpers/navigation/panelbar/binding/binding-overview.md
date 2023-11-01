@@ -66,6 +66,9 @@ The PanelBar supports the following data-binding approaches:
 {% if site.mvc %}* [Sitemap binding]({% slug sitemapbinding_panelbarhelper_aspnetmvc %}){% endif %}
 * [Server binding]({% slug htmlhelpers_panelbar_serverbinding_aspnetcore %})
 * [Ajax binding]({% slug htmlhelpers_panelbar_ajaxbinding_aspnetcore %})
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_panelbar_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

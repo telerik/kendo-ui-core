@@ -14,7 +14,7 @@ This tutorial demonstrates how to start working with Telerik UI for ASP.NET Core
 
 The approach demonstrated in this guide is applicable both for new projects and for existing projects where you want to implement Telerik UI controls.
 
->tipIf you want to start a new project from a template, you can [use the Telerik UI for ASP.NET Core Visual Studio extensions]({%slug gettingstarted_project_template%}) and create a new pre-configured application that has all necessary scripts, styles, and editor templates.
+>tip If you want to start a new project from a template, you can [use the Telerik UI for ASP.NET Core Visual Studio extensions]({%slug gettingstarted_project_template%}) and create a new pre-configured application that has all necessary scripts, styles, and editor templates.
 
 In this tutorial, you will:
 
@@ -70,7 +70,7 @@ The next step is to add the Telerik NuGet Feed to Visual Studio:
 * If you use a free trial license, go to [Add the Telerik NuGet Feed for Trial License Users](#adding-the-telerik-nuget-feed-for-trial-license-users).
 * If you purchased a commercial license, go to [Add the Telerik NuGet Feed for Users with Commercial License](#adding-the-telerik-nuget-feed-for-users-with-commercial-license).
 
->tipIf you have already configured the Telerik NuGet feed in Visual Studio, jump to [Add the NuGet Package](#adding-the-nuget-package).
+>tip If you have already configured the Telerik NuGet feed in Visual Studio, jump to [Add the NuGet Package](#adding-the-nuget-package).
 
 ### Adding the Telerik NuGet Feed for Trial License Users
 
@@ -94,7 +94,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
     ![{{ site.product_short }} Download Progress Control Panel](../getting-started-core/images/download-control-panel-2022.png)
 
-1. Run the Progress Control Panel exe.
+1. Run the Progress Control Panel `exe`.
 
 1. On the Login screen, check the **set up Telerik NuGet package source** option.
 
@@ -116,7 +116,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 1. Select the **Browse** tab, and then enter `Telerik.UI.for.AspNet.Core` in the search field.
 
-	>tipIf this is the first time you use the Telerik NuGet feed, you must enter the credentials for your Telerik account.
+	>tip If this is the first time you use the Telerik NuGet feed, you must enter the credentials for your Telerik account.
 
 1. Select the project's checkbox and then select **Install**. As a result, a line similar to `<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />` is added to your `.csproj` file.
 
@@ -211,7 +211,7 @@ If you prefer to include the client-side resources from a local source instead o
 
 ## Adding a Telerik UI Component
 
-Utilize the Telerik UI DatePicker component by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
+Use the Telerik UI DatePicker component by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
 ```HtmlHelper
 	<div class="text-center">

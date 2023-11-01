@@ -66,6 +66,9 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 
 * [Getting Started with the MultiViewCalendar]({% slug aspnetcore_multiviewcalendar_getting_started %})
 * [Basic Usage of the MultiViewCalendar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/index)
+{% if site.core %}
+* [MultiViewCalendar in Razor Pages]({% slug razorpages_multiviewcalendar_aspnetcore %})
+{% endif %}
 
 ## See Also
 

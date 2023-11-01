@@ -46,4 +46,7 @@ The following example demonstrates how to initialize the RadioButton.
 ## See Also
 
 * [RadioButton Server-Side API](/api/radiobutton)
+{% if site.core %}
+* [RadioButton in Razor Pages]({% slug razor_page_radiobutton_aspnetcore %})
+{% endif %}
 * [RadioButtonBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/radiobuttonbuilder)

@@ -17,6 +17,9 @@ The supported data-binding approaches are:
 * [Server binding]({% slug htmlhelpers_autocomplete_serverbinding_aspnetcore %})
 * [Custom binding]({% slug custombinding_autocomplete_aspnetmvc %})
 * [Model binding]({% slug modelbinding_autocomplete_aspnetmvc %})
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_autocomplete_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

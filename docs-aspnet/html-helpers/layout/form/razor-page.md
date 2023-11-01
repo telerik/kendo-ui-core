@@ -1,14 +1,18 @@
 ---
-title:  Razor Page
-page_title: Configure a Form in a Razor Page.
+title: Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Form component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_form_razorpage_aspnetcore
 position: 8
 ---
 
-# Razor Page
+# Form in Razor Pages
 
-This article describes how to configure the Telerik UI Form for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+
+You can seamlessly integrate the Telerik UI Form for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Form component in a Razor Pages scenario.
 
 When a complex model is used, which is the case with the Razor Page scenario, the Form needs to have the FormData configuration set. As the Form makes a POST request antiforgery token needs to be added. This can be achieved, for example, by appending a hidden input to the Form.
 

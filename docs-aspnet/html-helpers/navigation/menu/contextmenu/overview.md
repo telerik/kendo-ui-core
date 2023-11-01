@@ -205,6 +205,9 @@ The ContextMenu derives from the Menu component and largely shares the same func
 
 * [Getting Started with the ContextMenu]({% slug context_menu_getting_started %})
 * [Using the ContextMenu (Demo)](https://demos.telerik.com/aspnet-core/menu/context-menu)
+{% if site.core %}
+* [ContextMenu in Razor Pages]({% slug htmlhelpers_contextmenu_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

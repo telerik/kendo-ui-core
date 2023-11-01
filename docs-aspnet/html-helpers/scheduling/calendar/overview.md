@@ -165,4 +165,7 @@ To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`]
 * [Basic Usage of the Calendar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/calendar/tag-helper)
 {% endif %}
 * [Using the API of the Calendar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/calendar/api)
+{% if site.core %}
+* [Calendar in Razor Pages]({% slug razorpages_calendar_aspnetcore %})
+{% endif %}
 * [Server-Side API](/api/calendar)

@@ -11,8 +11,7 @@ position: 1
 
 To integrate with Visual Studio, Telerik provides the Progress&reg; Telerik&reg; UI for {{ site.framework }} Visual Studio (VS) Extensions. They enhance the experience in developing web applications with {{ site.product }}.
 
-The VS Extensions come with handy templates that ease the creation of new projects. They also help you add {{ site.product }} to an existing project or upgrade the {{ site.product_short }} version.
-The {{ site.product }} VS extensions support VS 2022, 2019 and 2017, and are distributed through the {{ site.product }} installer and the Visual Studio Marketplace.
+The VS Extensions come with handy templates that ease the creation of new projects. They also help you add {{ site.product }} to an existing project or upgrade the {{ site.product_short }} version. The {{ site.product }} VS extensions support VS 2022, 2019 and 2017, and are distributed through the [{{ site.product }} installer]({% slug msi_install_aspnetmvc6_aspnetmvc %}) and the [Visual Studio Marketplace](https://marketplace.visualstudio.com/).
 
 {% if site.has_cta_panels == true %}
 {% include cta-panel-introduction.html %}
@@ -26,7 +25,7 @@ The VS extensions provide wizards that allow you to automate the following proce
 {% endif %}
    * Select the {{ site.framework }} version and target framework.
    * Select the {{ site.product }} version that you want to use.
-* [Project Conversion]({%slug convertprojectwizard_visualstudio_aspnetcore%})&mdash;automatically configures any already existing {{ site.framework }} application to use the Telerik UI components, and turns it into a complete Telerik application. The wizard lets you select between using CDN or local files for the client-side resources.
+* [Project Conversion]({%slug convertprojectwizard_visualstudio_aspnetcore%})&mdash;automatically configures any existing {{ site.framework }} application to use the Telerik UI components, and turns it into a complete Telerik application. The wizard lets you select between using CDN or local files for the client-side resources.
 * [Project Configuration]({% slug projectwizardconfig_visualstudio_aspnetcore %})&mdash;allows you to change the visual theme and to configure the right-to-left support, localization, and CDN use in existing projects that are already configured to use the Telerik UI components.
 * [Update notifications]({% slug latestversionretrieval_visualstudio_aspnetcore %})&mdash;the VS Extensions notify you when a new  version of {{ site.product }} is available and allow you to upgrade your applications.
 * The Project Creation and Conversion wizards let you select a visual theme so that only the necessary CSS files are included.
@@ -62,7 +61,7 @@ When the download is complete, navigate to the download folder and click on the 
 1. Select the extension and click **Download**.
 1. Visual Studio will apply the changes automatically once you close all Microsoft Visual Studio windows.
 
-## Using the Telerik VS Extensions in VS 2019
+## Using the Telerik VS Extensions in VS 2019 and later
 
 - To access the VS extensions from the VS Toolbar, go to **Extensions > Telerik > {{ site.product }}**. Choose one of the two options -  **Create New Project** or **Convert to Telerik Application**.
 

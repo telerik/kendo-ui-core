@@ -295,6 +295,7 @@ The following example demonstrates the basic configuration of the Scheduler.
 * [Basic Usage of the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/index)
 {% if site.core %}
 * [Basic Usage of the Scheduler TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/tag-helper)
+* [Scheduler in Razor Pages]({% slug htmlhelpers_scheduler_razorpage_aspnetcore%})
 {% endif %}
 
 ## See Also

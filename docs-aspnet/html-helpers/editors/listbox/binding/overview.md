@@ -16,6 +16,9 @@ The supported data-binding approaches are:
 * [Local data binding]({% slug htmlhelpers_listbox_local_aspnetcore %})
 * [Binding to arrays]({% slug htmlhelpers_listbox_array_binding_aspnetcore %})
 * [Remote data binding]({% slug htmlhelpers_listbox_remote_aspnetcore %})
+{% if site.core %}
+* [Razor Pages binding]({% slug razorpages_listBoxhelper_aspnetcore %})
+{% endif %}
 
 ## See Also
 

@@ -124,6 +124,7 @@ The following example demonstrates the basic configuration of the Window.
 * [Basic Usage of the Window HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/index)
 {% if site.core %}
 * [Basic Usage of the Window TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/tag-helper)
+* [Window in Razor Pages]({% slug htmlhelpers_window_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

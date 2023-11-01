@@ -177,6 +177,7 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 * [Basic Usage of the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/index)
 {% if site.core %}
 * [Basic Usage of the MultiColumnComboBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/tag-helper)
+* [MultiColumnComboBox in Razor Pages]({% slug htmlhelpers_multicolumncombobox_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

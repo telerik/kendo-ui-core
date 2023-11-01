@@ -1,16 +1,20 @@
 ---
-title: The Telerik UI Timeline in RazorPages
-page_title: The Telerik UI Timeline in RazorPages
-description: "Telerik UI Timeline for {{ site.framework }} in a RazorPages application."
+title: Razor Pages
+page_title: Razor Pages
+description: "Telerik UI Timeline for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_timelinehelper_aspnetcore
 position: 7
 ---
 
-# Telerik UI Timeline in RazorPages
+# Timeline in Razor Pages
 
-`RazorPage` is an alternative to the MVC pattern that makes page-focused coding easier and more productive. It consists of a `cshtml` file and a `cs` file (generally the two files have the same name). The Telerik UI Timeline for {{ site.framework }} can be integrated in such an application seamlessly.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For a runnable example, refer to the [Timeline in RazorPages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Timeline).
+You can seamlessly integrate the Telerik UI Timeline for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Timeline component in a Razor Pages scenario.
+
+For the complete project, refer to the [Timeline in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Timeline/TimelineBinding.cshtml).
 
 ## Getting Started
 

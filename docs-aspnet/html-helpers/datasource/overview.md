@@ -199,7 +199,9 @@ To map to a ViewModel on the fly, pass a mapping lambda as a second parameter to
 * [Basic Usage of the DataSource HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datasource/index)
 {% if site.core %}
 * [Basic Usage of the DataSource TagHelper](https://demos.telerik.com/aspnet-core/datasource/tag-helper)
+* [DataSource in Razor Pages]({% slug htmlhelpers_datasource_aspnetcore_razor_page %})
 {% endif %}
+
 ## See Also
 
 * [Knowledge Base Section](/knowledge-base)

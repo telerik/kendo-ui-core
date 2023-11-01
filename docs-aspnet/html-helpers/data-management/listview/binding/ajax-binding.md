@@ -4,7 +4,7 @@ page_title: Ajax Binding
 description: "Configure the Telerik UI ListView for AJAX binding and easily enable client-data processing during AJAX binding."
 previous_url: /helpers/data-management/listview/binding
 slug: htmlhelpers_listview_aspnetcore_ajaxbinding
-position: 3
+position: 1
 ---
 
 # Ajax Binding

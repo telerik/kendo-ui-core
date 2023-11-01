@@ -174,6 +174,7 @@ The following example demonstrates the basic configuration of two connected List
 * [Basic Usage of the ListBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/index)
 {% if site.core %}
 * [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
+* [ListBox in Razor Pages]({% slug razorpages_listBoxhelper_aspnetcore %})
 {% endif %}
 
 ## See Also

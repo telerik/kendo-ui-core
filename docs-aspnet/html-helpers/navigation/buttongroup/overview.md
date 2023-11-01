@@ -65,6 +65,7 @@ The following example demonstrates how to initialize the ButtonGroup.
 * [Basic Usage of the ButtonGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/index)
 {% if site.core %}
 * [Basic Usage of the ButtonGroup TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/tag-helper)
+* [ButtonGroup in Razor Pages]({% slug htmlhelpers_buttongroup_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

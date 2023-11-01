@@ -71,6 +71,9 @@ The configuration options of the Switch are passed as attributes.
 
 * [Getting Started with the Switch ]({% slug aspnetcore_switch_getting_started %})
 * [Basic Usage of the Switch for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch/index)
+{% if site.core %}
+* [Switch in Razor Pages]({% slug htmlhelpers_switch_aspnetcore_razor_page %})
+{% endif %}
 
 ## See Also
 

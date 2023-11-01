@@ -14,6 +14,9 @@ The MultiSelect provides a set of options for binding it to data.
 The supported data-binding approaches are:
 
 * [Ajax binding]({% slug htmlhelpers_multiselect_ajaxbinding_aspnetcore %})
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_multiselect_razorpage_aspnetcore %})
+{% endif %}
 * [Server binding]({% slug htmlhelpers_multiselect_serverbinding_aspnetcore %})
 * [Custom data binding]({% slug htmlhelpers_multiselect_todatasourceresultbinding_aspnetcore %})
 * Model binding

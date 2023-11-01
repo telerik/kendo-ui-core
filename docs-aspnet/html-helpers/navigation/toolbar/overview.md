@@ -187,6 +187,7 @@ For more advanced configuration options you can check:
 * [Basic Usage of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/index)
 {% if site.core %}
 * [Basic Usage of the ToolBar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
+* [ToolBar in Razor Pages]({% slug htmlhelpers_toolbar_aspnetcore_razor_page %})
 {% endif %}
 
 ## See Also

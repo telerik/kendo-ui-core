@@ -1,16 +1,20 @@
 ---
-title:  Razor Page
-page_title: Configure a Dialog in Razor Page.
+title: Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Dialog component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_dialog_razorpage_aspnetcore
 position: 5
 ---
 
-# Razor Page
+# Dialog in Razor Pages
 
-This article describes how to configure the Telerik UI Dialog for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-The example below demonstrates how to pass antiforgery token when an action from the Dialog is clicked. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Dialog for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Dialog component in a Razor Pages scenario.
+
+For the complete project, refer to the [Dialog in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Dialog/DialogIndex.cshtml).
 
 ```tab-HtmlHelper(csthml)  	
 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

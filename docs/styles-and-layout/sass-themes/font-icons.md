@@ -46,18 +46,18 @@ Font icons demonstrate significant benefits such as:
 To use the Kendo UI font icons:
 
  1. [Load]({% slug sassbasedthemes_installation_kendoui %}) a Kendo UI theme into your project.
- 2. Assign a `k-icon` CSS class followed by a predefined class from the [list of font icons](#list-of-font-icons) to an HTML tag. For example, the `<span>` element as demonstrated in the following example.
+ 2. Assign a `k-font-icon` CSS class followed by a predefined class from the [list of font icons](#list-of-font-icons) to an HTML tag. For example, the `<span>` element as demonstrated in the following example.
 
-    ```dojo
-     <span class="k-icon k-i-calendar"></span>
+    ```
+     <span class="k-icon k-font-icon k-i-calendar"></span>
     ```
 
 ## Rendering with Unicode Numbers
 
 Though the web icon font comes with a set of predefined CSS classes, you might need to use the icons with a custom CSS class name. To achieve this, set a `:before` pseudo content value for the relevant icon.
 
-```dojo
-<span class="k-icon my-custom-icon-class"></span>
+```
+<span class="k-icon k-font-icon my-custom-icon-class"></span>
 
 <style>
     .my-custom-icon-class:before {
@@ -80,11 +80,11 @@ The Kendo UI font icons are designed on a 16px grid base. To achieve a pixel-per
 
 You can scale icons by setting the `font-size` configuration option.
 
-```dojo
-<span class="k-icon k-i-gear"></span>
-<span class="k-icon k-i-gear k-icon-32"></span>
-<span class="k-icon k-i-gear k-icon-48"></span>
-<span class="k-icon k-i-gear k-icon-64"></span>
+```
+<span class="k-icon k-font-icon k-i-gear"></span>
+<span class="k-icon k-font-icon k-i-gear k-icon-32"></span>
+<span class="k-icon k-font-icon k-i-gear k-icon-48"></span>
+<span class="k-icon k-font-icon k-i-gear k-icon-64"></span>
 
 <style>
     .k-icon-32 {
@@ -105,9 +105,9 @@ You can scale icons by setting the `font-size` configuration option.
 
 To set the icon color, use the `color` CSS property.
 
-```dojo
-<span class="k-icon k-i-gear" style="color: blue;"></span>
-<span class="k-icon k-i-gear colored-icon"></span>
+```
+<span class="k-icon k-font-icon k-i-gear" style="color: blue;"></span>
+<span class="k-icon k-font-icon k-i-gear colored-icon"></span>
 
 <style>
     .colored-icon {
@@ -121,10 +121,10 @@ To set the icon color, use the `color` CSS property.
 To accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
 
 ```dojo
-<span class="k-icon k-i-pencil"></span>
-<span class="k-icon k-i-pencil k-flip-h"></span>
-<span class="k-icon k-i-pencil k-flip-v"></span>
-<span class="k-icon k-i-pencil k-flip-h k-flip-v"></span>
+<span class="k-icon k-font-icon k-i-pencil"></span>
+<span class="k-icon k-font-icon k-i-pencil k-flip-h"></span>
+<span class="k-icon k-font-icon k-i-pencil k-flip-v"></span>
+<span class="k-icon k-font-icon k-i-pencil k-flip-h k-flip-v"></span>
 ```
 
 <style>

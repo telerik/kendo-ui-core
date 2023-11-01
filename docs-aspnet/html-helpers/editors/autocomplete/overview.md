@@ -200,6 +200,7 @@ The following example demonstrates the basic configuration of the AutoComplete.
 * [Basic Usage of the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/index)
 {% if site.core %}
 * [Basic Usage of the AutoComplete TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
+* [AutoComplete in Razor Pages]({% slug   htmlhelpers_autocomplete_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

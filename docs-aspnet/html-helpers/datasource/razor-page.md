@@ -1,12 +1,12 @@
 ---
-title: Razor Page
-page_title: Razor Page
+title: Razor Pages
+page_title: Razor Pages
 description: "Learn how to configure the Telerik UI DataSource component for {{ site.framework }} in Razor Page scenario"
 slug: htmlhelpers_datasource_aspnetcore_razor_page
 position: 10
 ---
 
-# Razor Page
+# DataSource in Razor Pages
 
 When configuring the DataSource for a Razor Page scenario it is important to keep several specifics of the ASP.NET Razor Pages framework in mind:
 

@@ -1,14 +1,22 @@
 ---
 title:  Razor Pages
-page_title: Configure a DataSource for the Telerik UI MediaPlayer for Remote Binding in Razor Pages.
+page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI MediaPlayer component for {{ site.framework }} in Razor Pages."
 slug: htmlhelpers_mediaplayer_razorpage_aspnetcore
 position: 3
 ---
 
-# Razor Page
+# MediaPlayer in Razor Pages
 
-This article showcases how to create a Telerik MediaPlayer with a playlist and bind its data to a remote DataSource in Razor Pages.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+
+You can seamlessly integrate the Telerik UI MediaPlayer for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the MediaPlayer component in a Razor Pages scenario.
+
+For the complete project, refer to the [MediaPlayer in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MediaPlayer).
+
+## Getting Started
 
 The following example uses two widgets: a MediaPlayer and a ListView, which serves as a playlist. There are two main steps in the suggested implementation:
 

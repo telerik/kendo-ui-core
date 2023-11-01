@@ -218,6 +218,7 @@ To enable the down arrow for toggling the popup container as in the Telerik UI D
 * [Basic Usage of the MultiSelect HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/index)
 {% if site.core %}
 * [Basic Usage of the MultiSelect TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/tag-helper)
+* [MultiSelect in Razor Pages]({% slug htmlhelpers_multiselect_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

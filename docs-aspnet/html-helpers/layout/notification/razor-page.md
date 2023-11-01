@@ -1,16 +1,20 @@
 ---
-title:  Razor Page
-page_title: Configure a Notification in Razor Page.
+title:  Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Notification component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_notification_razorpage_aspnetcore
 position: 6
 ---
 
-# Razor Page
+# Notification in Razor Pages
 
-This article describes an example how to configure the Telerik UI Notification for {{ site.framework }} in a RazorPage scenario and get its value from the server.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Notification for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Notification component in a Razor Pages scenario.
+
+For the complete project, refer to the [Notification in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Notification/NotificationIndex.cshtml).
 
 ```tab-HtmlHelper(csthml)        
 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

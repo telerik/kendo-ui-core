@@ -389,6 +389,7 @@ To access an existing Timeline instance, use the `.data()` jQuery method, execut
 * [Basic Usage of the Timeline (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/index)
 {% if site.core %}
 * [Basic Usage of the Timeline TagHelper (Demo)](https://demos.telerik.com/aspnet-core/timeline/tag-helper)
+* [Timeline in Razor Pages]({% slug razorpages_timelinehelper_aspnetcore %})
 {% endif %}
 * [Using the Events of the Timeline (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/events)
 * [Applying the Timeline API (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/api)

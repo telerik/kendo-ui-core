@@ -97,6 +97,7 @@ The following example demonstrates the basic configuration for the Breadcrumb.
 * [Basic Usage of the Breadcrumb HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/breadcrumb/index)
 {% if site.core %}
 * [Basic Usage of the Breadcrumb Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/breadcrumb/tag-helper)
+* [Breadcrumb in Razor Pages]({% slug htmlhelpers_breadcrumb_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

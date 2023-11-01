@@ -31,6 +31,5 @@ The TextArea converts a `<textarea>` element into a styled textarea.
 * [Overview of the TextArea (Demo)](https://demos.telerik.com/kendo-ui/textarea/index)
 * [Using the Basic Events of the TextArea (Demo)](https://demos.telerik.com/kendo-ui/textarea/events)
 * [Binding the TextArea over MVVM (Demo)](https://demos.telerik.com/kendo-ui/textarea/mvvm)
-* [Using the TextArea with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/textarea/angular)
 * [Applying the TextArea API (Demo)](https://demos.telerik.com/kendo-ui/textarea/api)
 * [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)

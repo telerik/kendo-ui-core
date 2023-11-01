@@ -1,16 +1,20 @@
 ---
 title:  Razor Pages
-page_title: Configure a Telerik UI DateInput with Globalization in Razor Pages.
+page_title: Razor Pages
 description: "An example on how to configure a DateInput with Globalization in Razor Pages."
 slug: htmlhelpers_dateinput_razorpage_aspnetcore
 position: 5
 ---
 
-# Razor Page
+# DateInput in Razor Pages
 
-This article demonstrates how to set up the DateInput component in a Razor Pages scenario and how to configure it for Globalization.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-See the implementation details in the example below. For the full project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI DateInput for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the DateInput component in a Razor Pages scenario.
+
+For the complete project, refer to the [DateInput in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DateInput/DateInputIndex.cshtml).
 
 ```tab-HtmlHelper(csthml)
 @page

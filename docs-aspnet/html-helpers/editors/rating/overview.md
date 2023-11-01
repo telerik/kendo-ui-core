@@ -77,6 +77,9 @@ The following example demonstrates the basic configuration for the Rating.
 
 * [Getting Start with the Rating]({% slug getting_started_rating %})
 * [Basic Usage of the Rating for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/rating/index)
+{% if site.core %}
+* [Rating in Razor Pages]({% slug htmlhelpers_rating_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

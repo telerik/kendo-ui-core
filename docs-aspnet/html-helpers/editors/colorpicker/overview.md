@@ -91,6 +91,7 @@ The following example demonstrates how to configure the tile size, columns, `cha
 * [Basic Usage of the ColorPicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/index)
 {% if site.core %}
 * [Basic Usage of the ColorPicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/tag-helper)
+* [ColorPicker in Razor Pages]({% slug htmlhelpers_colorpicker_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

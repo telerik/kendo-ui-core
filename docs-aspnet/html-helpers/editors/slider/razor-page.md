@@ -1,16 +1,20 @@
 ---
-title:  Razor Page
-page_title: Configure the Slider in a Razor Page.
+title: Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Slider component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_slider_razorpage_aspnetcore
 position: 2
 ---
 
-# Razor Page
+# Slider in Razor Pages
 
-This article describes how to configure the [Telerik UI Slider for {{ site.framework }}](https://www.telerik.com/aspnet-core-ui/slider) in a RazorPages scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-See the Slider configuration in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Slider for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Slider component in a Razor Pages scenario.
+
+For the complete project, refer to the [Slider in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Slider/SliderIndex.cshtml).
 
 ```tab-HtmlHelper(csthml)
 @page

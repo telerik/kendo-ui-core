@@ -193,6 +193,7 @@ To reference an existing PanelBar instance, use the [`jQuery.data()`](http://api
 * [Basic Usage of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar)
 {% if site.core %}
 * [Basic Usage of the PanelBar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar/tag-helper)
+* [PanelBar in Razor Pages]({% slug htmlhelpers_panelbar_razorpage_aspnetcore%})
 {% endif %}
 * [Using the API of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/api)
 * [PanelBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)

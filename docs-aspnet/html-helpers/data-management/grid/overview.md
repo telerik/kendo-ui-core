@@ -188,6 +188,7 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 * [Basic Usage of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/index)
 {% if site.core %}
 * [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
+* [Grid in Razor Pages]({% slug razorpages_gridhelper_aspnetcore %})
 {% endif %}
 * [Using the API of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/api)
 

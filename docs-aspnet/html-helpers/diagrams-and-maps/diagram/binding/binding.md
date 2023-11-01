@@ -3,7 +3,7 @@ title: Remote Binding
 page_title: Remote Data Binding
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} featuring a built-in DataSource which allows you to bind the Diagram to remote data."
 slug: htmlhelpers_diagram_aspnetcore_binding
-position: 2
+position: 1
 ---
 
 # Remote Binding

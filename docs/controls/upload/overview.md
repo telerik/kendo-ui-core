@@ -41,6 +41,5 @@ The Upload provides a set of [default API configuration options](/api/javascript
 * [Basic Usage of the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/index)
 * [Using the Basic Events of the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/events)
 * [Binding the Upload over MVVM (Demo)](https://demos.telerik.com/kendo-ui/upload/mvvm)
-* [Using the Upload with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/upload/angular)
 * [Applying the Upload API (Demo)](https://demos.telerik.com/kendo-ui/upload/api)
 * [JavaScript API Reference of the Upload](/api/javascript/ui/upload)

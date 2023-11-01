@@ -87,6 +87,7 @@ The NumericTextBox configuration options are passed as attributes.
 * [Basic Usage of the NumericTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/index)
 {% if site.core %}
 * [Basic Usage of the NumericTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
+* [NumericTextBox in Razor Pages]({% slug razorpages_numerictextboxhelper_aspnetcore %})
 {% endif %}
 ## See Also
 

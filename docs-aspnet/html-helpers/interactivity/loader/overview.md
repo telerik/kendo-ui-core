@@ -68,5 +68,6 @@ The following example demonstrates the Loader in action.
 * [Overview of the Loader HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/loader/index)
 {% if site.core %}
 * [Basic Usage of the Loader TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/loader/tag-helper)
+* [Loader in Razor Pages]({% slug htmlhelpers_loader_aspnetcore_razor_page %})
 {% endif %}
 * [Server-Side API](/api/loader)

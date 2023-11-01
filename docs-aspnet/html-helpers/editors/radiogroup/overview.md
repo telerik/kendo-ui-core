@@ -86,6 +86,7 @@ The following example demonstrates the basic configuration for the RadioGroup.
 * [Basic Usage of the RadioGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiogroup)
 {% if site.core %}
 * [Basic Usage of the RadioGroup TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/radiogroup/tag-helper)
+* [RadioGroup in Razor Pages]({% slug htmlhelpers_radiogroup_aspnetcore_razor_page %})
 {% endif %}
 
 ## See Also

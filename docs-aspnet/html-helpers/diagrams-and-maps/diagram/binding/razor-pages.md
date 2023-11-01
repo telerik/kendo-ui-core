@@ -1,22 +1,24 @@
 ---
-title: The Telerik UI Diagram in RazorPages
-page_title: The Telerik UI Diagram in RazorPages
+title: Razor Pages
+page_title: Razor Pages
 description: "Telerik UI Diagram for {{ site.framework }} in a RazorPages application."
 slug: razorpages_diagramhelper_aspnetcore
 position: 2
 ---
 
-# Telerik UI Diagram in Razor Pages
+# Diagram in Razor Pages
 
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-Razor Pages are an alternative to the MVC pattern. Razor Pages make page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cs` file (generally, the two files have the same name). You can seamlessly integrate the Telerik UI Diagram for {{ site.framework }} in Razor Pages applications.
+You can seamlessly integrate the Telerik UI Diagram for {{ site.framework }} in Razor Pages applications.
 
-For a runnable example, refer to the [Diagram in RazorPages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Diagram).
+This article describes how to configure the Diagram component in a Razor Pages scenario.
+
+For the complete project, refer to the [Diagram in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Diagram/DiagramEditing.cshtml).
 
 ## Getting Started
 
 To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
-
 
 1. Setup CRUD URLs in the `DataSource` and `ConnectionsDataSource` along with a `Model.Id`. The URL in these methods must refer to the name of the method in the `PageModel`.
 

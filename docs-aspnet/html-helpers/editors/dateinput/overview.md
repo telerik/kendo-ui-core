@@ -52,6 +52,7 @@ The following example demonstrates the basic configuration for the DateInput.
 * [Basic Usage of the DateInput HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/index)
 {% if site.core %}
 * [Basic Usage of the DateInput TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dateinput/tag-helper)
+* [DateInput in Razor Pages]({% slug htmlhelpers_dateinput_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

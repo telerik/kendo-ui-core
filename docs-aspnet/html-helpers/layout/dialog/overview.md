@@ -105,6 +105,7 @@ The following example demonstrates a basic Dialog configuration.
 * [Basic Usage of the Dialog HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog)
 {% if site.core %}
 * [Basic Usage of the Dialog TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dialog/tag-helper)
+* [Dialog in Razor Pages]({% slug htmlhelpers_dialog_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

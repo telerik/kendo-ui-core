@@ -124,6 +124,7 @@ For a complete example on basic PDFViewer events, refer to the [demo on using th
 * [Basic Usage of the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/index)
 {% if site.core %}
 * [Basic Usage of the PDFViewer TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/tag-helper)
+* [PDFViewer in Razor Pages]({% slug htmlhelpers_pdfviewer_aspnetcore_razor_page %})
 {% endif %}
 * [Using the API of the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/api)
 * [Server-Side API](/api/pdfviewer)

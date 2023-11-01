@@ -124,6 +124,7 @@ The following example demonstrates the basic configuration of the Notification.
 * [Basic Usage of the Notification HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/notification)
 {% if site.core %}
 * [Basic Usage of the Notification TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/notification/tag-helper)
+* [Notification in Razor Pages]({% slug htmlhelpers_notification_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

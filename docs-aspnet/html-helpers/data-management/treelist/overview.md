@@ -172,6 +172,7 @@ The following example demonstrates how to define the TreeList.
 * [Basic Usage of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/index)
 {% if site.core %}
 * [Basic Usage of the TreeList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
+* [TreeList in Razor Pages]({% slug htmlhelpers_treelist_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

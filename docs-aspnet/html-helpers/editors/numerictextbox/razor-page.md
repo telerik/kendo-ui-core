@@ -1,16 +1,20 @@
 ---
 title: Razor Pages
-page_title: The Telerik UI NumericTextBox in RazorPages
+page_title: Razor Pages
 description: "Telerik UI NumericTextBox for {{ site.framework }} in a RazorPages application."
 slug: razorpages_numerictextboxhelper_aspnetcore
 position: 6
 ---
 
-# Telerik UI NumericTextBox in Razor Pages
+# NumericTextBox in Razor Pages
 
-Razor Pages are an alternative to the MVC pattern. Razor Pages make page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cs` file (generally, the two files have the same name). You can seamlessly integrate the Telerik UI NumericTextBox for {{ site.framework }} in Razor Pages applications.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For a runnable example, refer to the [NumericTextBox in RazorPages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/NumericTextBox/NumericTextBoxBinding.cshtml).
+You can seamlessly integrate the Telerik UI NumericTextBox for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the NumericTextBox component in a Razor Pages scenario.
+
+For the complete project, refer to the [NumericTextBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/NumericTextBox/NumericTextBoxBinding.cshtml).
 
 ## Getting Started
 

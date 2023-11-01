@@ -88,5 +88,8 @@ The following example demonstrates the basic configuration for the CheckBoxGroup
 
 * [Using the API of the CheckBoxGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/api)
 * [Client-Side API of the CheckBoxGroup](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkboxgroup)
+{% if site.core %}
+* [CheckBoxGroup in Razor Pages]({% slug htmlhelpers_checkboxgroup_aspnetcore_razor_page %})
+{% endif %}
 * [Server-Side API](/api/checkboxgroup)
 * [Knowledge Base Section](/knowledge-base)

@@ -1,16 +1,20 @@
 ---
 title: Razor Pages
-page_title: The Telerik UI MaskedTextBox in RazorPages
+page_title: Razor Pages
 description: "Telerik UI MaskedTextBox for {{ site.framework }} in a RazorPages application."
 slug: razorpages_maskedtextboxhelper_aspnetcore
 position: 5
 ---
 
-# Telerik UI MaskedTextBox in Razor Pages
+# MaskedTextBox in Razor Pages
 
-Razor Pages are an alternative to the MVC pattern. Razor Pages make page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cs` file (generally, the two files have the same name). You can seamlessly integrate the Telerik UI MaskedTextBox for {{ site.framework }} in Razor Pages applications.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For a runnable example, refer to the [MaskedTextBox in RazorPages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MaskedTextBox/MaskedTextBoxEditing.cshtml).
+You can seamlessly integrate the Telerik UI MaskedTextBox for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the MaskedTextBox component in a Razor Pages scenario.
+
+For the complete project, refer to the [MaskedTextBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MaskedTextBox/MaskedTextBoxEditing.cshtml).
 
 ## Getting Started
 

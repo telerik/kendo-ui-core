@@ -95,6 +95,7 @@ The following example demonstrates the available configuration options for the B
 * [Basic Usage of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/index)
 {% if site.core %}
 * [Basic Usage of the Button TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/tag-helper)
+* [Button in Razor Pages]({% slug htmlhelpers_button_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

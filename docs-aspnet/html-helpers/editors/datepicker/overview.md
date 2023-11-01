@@ -84,6 +84,7 @@ The DatePicker component respects DataAnnotations when the `DatePickerFor(m=>m.P
 * [Basic Usage of the DatePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/index)
 {% if site.core %}
 * [Basic Usage of the DatePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
+* [DatePicker in Razor Pages]({% slug razorpages_datepicker_aspnetcore %})
 {% endif %}
 
 ## See Also

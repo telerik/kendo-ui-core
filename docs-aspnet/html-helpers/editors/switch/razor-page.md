@@ -1,15 +1,19 @@
 ---
-title: Razor Page
-page_title: Razor Page
+title: Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Switch component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_switch_aspnetcore_razor_page
 ---
 
-# Razor Page
+# Switch in Razor Pages
 
-This article demonstrates how to configure the Telerik UI Switch component for {{ site.framework }} in a RazorPage.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Switch for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Switch component in a Razor Pages scenario.
+
+For the complete project, refer to the [Switch in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Switch/SwitchIndex.cshtml).
 
 ```tab-HtmlHelper(csthml)        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

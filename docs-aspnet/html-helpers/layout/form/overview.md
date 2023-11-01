@@ -115,6 +115,7 @@ The following example demonstrates how to define the Form.
 * [Basic Usage of the Form HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/form/index)
 {% if site.core %}
 * [Basic Usage of the Form TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/form/tag-helper)
+* [Form in Razor Pages]({% slug htmlhelpers_form_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

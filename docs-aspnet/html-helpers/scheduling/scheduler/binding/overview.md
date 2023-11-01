@@ -16,7 +16,7 @@ The supported data-binding approaches are:
 * [Server binding]({% slug htmlhelpers_scheduler_serverbinding_aspnetcore %})
 {% if site.core %}
 * [SignalR binding]({% slug htmlhelpers_scheduler_signalr_binding_aspnetcore %})
-* [Razor Page binding]({% slug htmlhelpers_scheduler_razorpage_aspnetcore %})
+* [Razor Pages binding]({% slug htmlhelpers_scheduler_razorpage_aspnetcore %})
 {% endif %}
 * [WebApi binding]({% slug htmlhelpers_scheduler_webapi_binding %})
 

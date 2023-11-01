@@ -3,7 +3,7 @@ title: Overview
 page_title: Overview
 description: "Discover the Telerik UI Captcha component for {{ site.framework }} control, and learn how to start using it."
 slug: htmlhelpers_captcha_overview
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Captcha Overview
@@ -107,6 +107,7 @@ To reference an existing Captcha instance, use the [`jQuery.data()`](https://api
 * [Basic Usage of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/index)
 {% if site.core %}
 * [Basic Usage of the Captcha TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/captcha/tag-helper)
+* [Captcha in Razor Pages]({% slug htmlhelpers_captcha_razorpage_aspnetcore %})
 {% endif %}
 * [Using the API of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/api)
 * [Server-Side API](/api/captcha)

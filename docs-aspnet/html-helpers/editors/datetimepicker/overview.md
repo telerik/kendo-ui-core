@@ -117,6 +117,7 @@ The DateTimePicker component respects DataAnnotations when the `DateTimePickerFo
 * [Basic Usage of the DateTimePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/index)
 {% if site.core %}
 * [Basic Usage of the DateTimePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/tag-helper)
+* [DateTimePicker in Razor Pages]({% slug razorpages_datetimepicker_aspnetcore %})
 {% endif %}
 
 ## See Also

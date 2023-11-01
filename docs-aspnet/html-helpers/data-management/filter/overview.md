@@ -183,6 +183,7 @@ To refer to an existing Filter instance use the `jQuery.data()` method. Once a r
 * [Basic Usage of the Filter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter/index)
 {% if site.core %}
 * [Basic Usage of the Filter TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/filter/tag-helper)
+* [Filter in Razor Pages]({% slug razorpages_filterhelper_aspnetcore %})
 {% endif %}
 * [Filter Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter)
 * [Filter Server-Side API](/api/filter)

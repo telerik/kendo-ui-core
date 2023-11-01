@@ -53,6 +53,7 @@ The following example demonstrates how to define the ImageEditor.
 * [Basic Usage of the ImageEditor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/index)
 {% if site.core %}
 * [Basic Usage of the ImageEditor TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/imageeditor/tag-helper)
+* [ImageEditor in Razor Pages]({% slug htmlhelpers_imageeditor_razorpage_aspnetcore%})
 {% endif %}
 
 ## See Also

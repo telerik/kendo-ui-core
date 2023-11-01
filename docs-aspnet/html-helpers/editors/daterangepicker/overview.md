@@ -78,6 +78,7 @@ The following example demonstrates how to access an existing DateRangePicker ins
 * [Basic Usage of the DateRangePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/index)
 {% if site.core %}
 * [Basic Usage of the DateRangePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/tag-helper)
+* [DateRangePicker in Razor Pages]({% slug htmlhelpers_daterangepicker_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

@@ -349,6 +349,9 @@ To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jq
 
 * [Getting Started with the Bar Chart]({% slug bar_chart_getting_started %})
 * [Basic Usage of the Chart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/charts)
+{% if site.core %}
+* [Chart in Razor Pages]({% slug htmlhelper_chart_razorpages_aspnetcore %})
+{% endif %}
 
 ## See Also
 
