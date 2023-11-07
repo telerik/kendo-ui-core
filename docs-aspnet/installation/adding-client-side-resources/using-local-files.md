@@ -128,9 +128,9 @@ To add the client-side resources to your project:
 
         bundles.IgnoreList.Clear();
 
-1. Open the layout of the application. By default, if using ASPX, it is `Views/Shared/_Layout.cshtml`, or `Site.master`.
+1. Open the layout of the application. By default, if using ASPX, the location will be `Views/Shared/_Layout.cshtml`, or `Site.master`.
 
-1. For SASS themes - add reference to the respective css file, e.g. `default-main.css`. For {{ site.product }} versions older than R1 2023 SP1 and LESS themes - render the {{ site.product }} style bundle. 
+1. For SASS themes - add reference to the respective CSS file, for example `default-main.css`. For {{ site.product }} versions older than R1 2023 SP1 and LESS themes - render the {{ site.product }} style bundle. 
 
 
     ```Razor
@@ -144,7 +144,7 @@ To add the client-side resources to your project:
         <%: Styles.Render("~/Content/kendo/css") %>
     ```
 
-1. Move the jQuery bundle to the `head` tag of the page. By default, it is located at the end of the page.
+1. Move the jQuery bundle to the `head` tag of the page. By default, its location will be at the end of the page.
 
 1. Render the {{ site.product }} script bundle after jQuery. Make sure that the jQuery version you load is [supported]({% slug jquerysupport_core %})
 
@@ -218,7 +218,7 @@ To add the client-side resources to your project:
 
 Starting with {{ site.product }} version `2022.3.1109`, you can choose between three module systems that allow you to [import the client-side assets]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) into your project: ECMAScript, UMD, and CommonJS.
 
-The files for all of these module systems are available in the [downloaded zip or 7z archive](#adding-the-resources) or in the local installation directory of {{ site.product }}:
+The files for all these module systems are available in the [downloaded zip or 7z archive](#adding-the-resources) or in the local installation directory of {{ site.product }}:
 
 * ECMAScript—The script files are located in the **mjs** folder. Available as of `2022.3.1109`.
 * UMD—The script files are located in the **umd** folder. Available as of `2022.3.1109`.

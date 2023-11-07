@@ -413,7 +413,7 @@ var __meta__ = {
 
         _resize: function(size) {
             var that = this;
-            if (!that._lastWidth || !that.options.responsive) {
+            if (!that.element.is(":visible") || !that._lastWidth || !that.options.responsive) {
                 return;
             }
 

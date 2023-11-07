@@ -84,7 +84,7 @@ The Grid uses the current column order, visibility, and dimensions to generate t
 
 By default, the Telerik UI Grid for {{ site.framework }} exports only the current page of data. To export all pages, set the `AllPages` option to `true`.
 
-> When the `AllPages` option is set to `true`, the Grid makes a `read` request for all data. If the data items are too many, the browser may become unresponsive. For such scenarios, implement a server-side export.
+> When you have enabled the `AllPages` option as `true`, the Grid makes a `read` request for all data. If the data items are many, the browser may become unresponsive. For such scenarios, implement a server-side export.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
@@ -280,12 +280,12 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 
 ## Server-Side Processing
 
-To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
+To export large datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
 
 ## Excluding Columns from Exporting
 
-In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [`Exportable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+In some scenarios, you will want to hide given column or multiple columns from being exported. This can be achieved using the [`Exportable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
 
 ```HtmlHelper
     columns.Bound(p => p.ProductName).Exportable(false);
@@ -311,9 +311,9 @@ You can also set `Exportable` in a detailed fashion to include different values 
 ```
 {% endif %}
 
-In some scenarios, you may want to include instead of exclude columns. You can have defined Grid columns which are not displayed in the View mode and show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically and you'll need to specifically use `.Exportable(x=> x.Pdf(false).Excel(true));`.
+In some scenarios, you may want to include instead of exclude columns. You can have defined Grid columns which are not displayed in the View mode and show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically and you'll need to  use `.Exportable(x=> x.Pdf(false).Excel(true));` explicitly.
 
-It is also important to note the difference between the `.Hidden()` and `.Visible()` properties of a Grid column. `.Hidden()` will hide the column only visually by using CSS. `.Visible()` will prevent the column from rendering at all.
+Also, note the difference between the `.Hidden()` and `.Visible()` properties of a Grid column. `.Hidden()` will hide the column only visually by using CSS. `.Visible()` will prevent the column from rendering at all.
 
 
 ## Known Limitations
@@ -321,7 +321,7 @@ It is also important to note the difference between the `.Hidden()` and `.Visibl
 * The Grid and its DataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.
 * The maximum size of the exported file has a system-specific limit. For large data sets, use the server-side solution which is provided by the [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) as part of the [Document Processing Library](https://docs.telerik.com/devtools/document-processing/introduction).
 * Exporting the Grid to Excel in older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information, refer to [the `ProxyURL` configuration section](/api/kendo.mvc.ui.fluent/gridexcel{% if site.core %}settings{% endif %}builder#proxyurlsystemstring).
-* The Grid does not use the column [`ClientTemplate`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplatesystemstring) during the Excel export&mdash;it exports only the data. the reason for this behavior is that a column template might contain arbitrary HTML which cannot be converted to excel column values. for more information on how to use a column template that does not contain HTML, refer to [this column template example](#setting-the-column-templates).
+* The Grid does not use the column [`ClientTemplate`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplatesystemstring) during the Excel export&mdash;it exports only the data. the reason for this behavior is that a column template has a chance to contain arbitrary HTML which cannot be converted to excel column values. for more information on how to use a column template that does not contain HTML, refer to [this column template example](#setting-the-column-templates).
 * The Grid does not export its [`ClientDetailTemplateId`](/api/kendo.mvc.ui.fluent/gridbuilder#clientdetailtemplateidsystemstring) for the same reason as it does not export its column templates.
 * The Grid does not use [column formats](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#formatsystemstring) during the Excel export because some Kendo UI formats are incompatible with excel. To format the cell values, set the cell [`format`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells.
 

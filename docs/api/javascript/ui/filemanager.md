@@ -1330,9 +1330,10 @@ The command arguments.
             }
         });
 
-        var fileManager = $("#fileManager").data("kendoFileManager");
+    	var fileManager = $("#fileManager").data("kendoFileManager");
 
-      	fileManager.executeCommand("CreateFolderCommand");
+   	fileManager.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } });
+    	$("#details-toggle").getKendoSwitch().toggle();
     </script>
 
 ### getSelected
