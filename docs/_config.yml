@@ -1521,6 +1521,8 @@ defaults:
         path: "php"
     values:
         product: "php-ui"
+        announcementUrl: "http://www.telerik.com/webapi/announcements/getmarkup?url=https://demos.telerik.com/php-ui"
+        announcement: Telerik UI for PHP will be retired on December 1, 2023. <a href="https://www.telerik.com/php-ui/end-of-life">Learn more</a> about the discontinuation, your options and alternatives. 
 -
     scope:
         path: "api/php"
@@ -1528,6 +1530,8 @@ defaults:
         product: "php-ui"
         editable: false
         has_api_toc: true
+        announcementUrl: "http://www.telerik.com/webapi/announcements/getmarkup?url=https://demos.telerik.com/php-ui"
+        announcement: Telerik UI for PHP will be retired on December 1, 2023. <a href="https://www.telerik.com/php-ui/end-of-life">Learn more</a> about the discontinuation, your options and alternatives. 
 -
     scope:
         path: "api/jsp"
@@ -1535,11 +1539,15 @@ defaults:
         product: "jsp-ui"
         editable: false
         has_api_toc: true
+        announcementUrl: "http://www.telerik.com/webapi/announcements/getmarkup?url=https://demos.telerik.com/jsp-ui"
+        announcement: Telerik UI for JSP will be retired on December 1, 2023. <a href="https://www.telerik.com/jsp-ui/end-of-life">Learn more</a> about the discontinuation, your options and alternatives.
 -
     scope:
         path: "jsp"
     values:
         product: "jsp-ui"
+        announcementUrl: "http://www.telerik.com/webapi/announcements/getmarkup?url=https://demos.telerik.com/jsp-ui"
+        announcement: Telerik UI for JSP will be retired on December 1, 2023. <a href="https://www.telerik.com/jsp-ui/end-of-life">Learn more</a> about the discontinuation, your options and alternatives.
 -
     scope:
         path: "api"
