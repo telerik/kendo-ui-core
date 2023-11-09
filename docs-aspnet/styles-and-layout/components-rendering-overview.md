@@ -35,7 +35,7 @@ We use a set of CSS classes and depending on the value of the corresponding styl
 
 In the old rendering styling was applied through a single class with a `k-` prefix, for example `k-button`. The new rendering has a separate CSS class for each styling property.
 
-The new rendering of the components supports several common options on a component level:
+The new rendering of the affected components supports several common options on a component level:
 
 - [`ThemeColor`](#theme-color)
 - [`Size`](#size)
@@ -43,9 +43,9 @@ The new rendering of the components supports several common options on a compone
 - [`Rounded`](#rounded)
 - [`FillMode`](#fill-mode)
 
-Each component has its own appearance documentation article with information about the supported options and their values.
+Each updated component has its own appearance documentation article with information about the supported options and their values.
 
-For a list of all the updated components and their respective articles, see the [Updated Components](#updated-components) section.
+For a list of all the updated components which are affected by this change and their corresponding articles, see the [Updated Components](#updated-components) section.
 
 ### Theme Color
 

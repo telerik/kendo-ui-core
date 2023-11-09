@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to configure the Telerik UI RadioButton for {{ site.framework }} in a Razor Pages scenario."
 slug: razor_page_radiobutton_aspnetcore
-position: 4
+position: 7
 ---
 
 # RadioButton in Razor Pages

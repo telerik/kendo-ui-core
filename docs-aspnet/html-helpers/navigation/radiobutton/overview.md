@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI RadioButton component for {{ site.framework }}."
+description: "Learn more about the Telerik UI RadioButton component for {{ site.framework }} and its built-in features like model binding, initially checked state, and a setting to disable the button."
 previous_url: /helpers/navigation/radiobutton/overview
 slug: htmlhelpers_radiobutton_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} RadioButton Overview
@@ -37,11 +37,17 @@ The following example demonstrates how to initialize the RadioButton.
 
 ## Functionality and Features
 
-* [Disabled RadioButton]({% slug disabledstate_radiobutton_aspnetcore %})
-* [Checked RadioButton]({% slug modelbinding_radiobutton_aspnetcore %})
-* [Model binding]({% slug modelbinding_radiobutton_aspnetcore %})
+* [Disabled RadioButton]({% slug disabledstate_radiobutton_aspnetcore %})—You can disable the RadioButton through its `.Enable(false)` configuration. 
+* [Checked RadioButton]({% slug modelbinding_radiobutton_aspnetcore %})—The `Checked(true)` option allows you to initially check the component.
+* [Model binding]({% slug modelbinding_radiobutton_aspnetcore %})—The RadioButton supports binding to a model.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the RadioButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/radiobutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
+
+## Next Steps
+
+* [Getting Started with the RadioButton]({% slug  aspnetcore_radiobutton_getting_started %})
+* [Basic Usage of the RadioButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiobutton)
 
 ## See Also
 
@@ -50,3 +56,5 @@ The following example demonstrates how to initialize the RadioButton.
 * [RadioButton in Razor Pages]({% slug razor_page_radiobutton_aspnetcore %})
 {% endif %}
 * [RadioButtonBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/radiobuttonbuilder)
+* [Knowledge Base Section](/knowledge-base)
+

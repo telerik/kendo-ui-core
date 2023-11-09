@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI PDFViewer component for {{ site.framework }}."
+description: "Learn more about the Telerik UI PDFViewer component for {{ site.framework }}, and discover its built-in features like the toolbar and the supported events."
 previous_url: /helpers/pdf/pdfviewer/overview
 slug: htmlhelpers_pdfviewer_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} PDFViewer Overview
@@ -24,7 +24,7 @@ The PDFViewer displays PDF files in the browser and consists of a toolbar and a 
 
 ## Initializing the PDFViewer
 
-You can initialize the PDFViewer from HTML either by [using PDF.JS](#using-pdfjs) or [with the Telerik Document Processing library](#using-telerik-document-processing).
+You can initialize the PDFViewer from HTML either by using [PDF.JS](#using-pdfjs) or [the Telerik Document Processing library](#using-telerik-document-processing).
 
 ### Using PDF.JS
 
@@ -111,13 +111,16 @@ The following example demonstrates how to initialize the PDFViewer by using the 
 
 ## Functionality and Features
 
-* [PDF.js processing]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore %})
-* [DPL processing]({% slug htmlhelpers_pdfviewer_dpl_processing_aspnetcore %})
-* [Toolbar and tools]({% slug htmlhelpers_pdfviewer_toolbar_aspnetcore %})
+* [PDF.js processing]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore %})—You can configure the PDFViewer to use the PDF.js library for PDF processing and visualization. 
+* [DPL processing]({% slug htmlhelpers_pdfviewer_dpl_processing_aspnetcore %})—The component can use the Telerik Document Processing library to process and visualize a PDF document.
+* [Toolbar and tools]({% slug htmlhelpers_pdfviewer_toolbar_aspnetcore %})—The PDFViewer offers diverse tools and commands.
+* [Events]({% slug events_pdfviewer_aspnetcore %})—To control the behavior of the component upon user interaction, you can use the events that the component emits.
 
-## Events
+## Next Steps
 
-For a complete example on basic PDFViewer events, refer to the [demo on using the events of the PDFViewer](https://demos.telerik.com/{{ site.platform }}/pdfviewer/events).
+* [Getting Started with the PDFViewer]({% slug aspnetcore_pdfviewer_getting_started %})
+* [Basic Usage of the PDFViewer HtmlHelper and TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer)
+* [Using the PDFViewer with the Telerik Document Processing library (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/dpl-processing)
 
 ## See Also
 
@@ -127,4 +130,4 @@ For a complete example on basic PDFViewer events, refer to the [demo on using th
 * [PDFViewer in Razor Pages]({% slug htmlhelpers_pdfviewer_aspnetcore_razor_page %})
 {% endif %}
 * [Using the API of the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/api)
-* [Server-Side API](/api/pdfviewer)
+* [Knowledge Base Section](/knowledge-base)

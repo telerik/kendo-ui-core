@@ -61,7 +61,7 @@ To achieve the desired results, map database models with `DateTimeOffset` fields
             {
                 CreateMap<Car, CarViewModel>();
                 CreateMap<CarViewModel, Car>();
-                CreateMap<DateTime, DateTimeOffset>();
+                CreateMap<DateTime, DateTimeOffset>().ConstructUsing(x => new DateTimeOffset(x));
                 CreateMap<DateTimeOffset, DateTime>();
             }
         }

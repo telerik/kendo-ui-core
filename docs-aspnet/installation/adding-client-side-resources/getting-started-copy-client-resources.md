@@ -37,7 +37,7 @@ You can use the following methods for adding the Kendo client-side resources to 
 Depending on the Telerik UI components that you use in your project, you may need lighter scripts that support only the components in your application. You have the choice to select scripts for individual components or to create your custom scripts. For more details, see [Creating Your Own Custom Script Bundles]({% slug custombundles_core %}).
 
 {% else %}
-Depending on the Telerik UI components that you use in your project, you may need only the scripts that support the components in your application. To identify the scripts that you must include in your application, check the documents under [**Installation** > **Providing Client-Side Resources** > **Creating Custom Script Bundles**]({% slug custombundles_core %}). For example, to find out what scripts are required to use the Telerik UI Charts, see the [Individual Scripts for Charts]({% slug script_filesfor_charts_widgets %}) document.
+Depending on the Telerik UI components that you use in your project, you may need only the scripts that support the components in your application. To find the scripts that you must include in your application, check the documents under [**Installation** > **Providing Client-Side Resources** > **Creating Custom Script Bundles**]({% slug custombundles_core %}). For example, to find out what scripts are required to use the Telerik UI Charts, see the [Individual Scripts for Charts]({% slug script_filesfor_charts_widgets %}) document.
 
 Clients with a commercial license can use the [Custom Download Builder tool](https://www.telerik.com/download/custom-download) to create a single JavaScript file which contains the dependencies only for the required widgets and features.
 

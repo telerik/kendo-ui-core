@@ -336,7 +336,7 @@ The Grid exposes different client-side events that you can handle and use to cus
 
 Referencing existing instances allows you to build on top of their configuration. To reference an existing Grid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method:
 
-1. Use the `id` attribute of the component instance to establish a reference.
+1. Use the `id` attribute of the component instance to get a client-side reference.
 
     ```script
     <script>
