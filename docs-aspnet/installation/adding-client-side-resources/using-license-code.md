@@ -38,7 +38,7 @@ To get a license file, generate it:
 
 {% if site.core %}
 <license-download-link
-product-codes="KENDOUICOMPLETE, KENDOUI, KENDOUIMVC, UIASPCORE"
+product-codes="KENDOUICOMPLETE, KENDOUI, KENDOUIMVC, UIASPCORE, KENDOMVC"
 product-name="Telerik UI for ASP.NET Core";
 purchase-url="https://www.telerik.com/purchase/aspnet-core-ui"
 trial-url="https://www.telerik.com/try/aspnet-core-ui"
@@ -46,7 +46,7 @@ download-code-url="https://docs.telerik.com/kendo-ui/my-license/download">
 </license-download-link>
 {% else %}
 <license-download-link
-product-codes="KENDOUICOMPLETE, KENDOUI, KENDOUIMVC, UIASPCORE"
+product-codes="KENDOUICOMPLETE, KENDOUI, KENDOUIMVC, UIASPCORE, KENDOMVC"
 product-name="Telerik UI for ASP.NET MVC";
 purchase-url="https://www.telerik.com/purchase/aspnet-mvc"
 trial-url="https://www.telerik.com/try/ui-for-asp.net-mvc"
@@ -99,7 +99,7 @@ Add the `kendo-ui-license.js` file as a script reference right after the `kendo.
 
 ## Next Steps
 
-* [License File Frequently Asked Questions (Kendo UI for jQuery Documentation)](https://docs.telerik.com/kendo-ui/intro/installation/license-code-faq) 
+* [License File Frequently Asked Questions (Kendo UI for jQuery Documentation)](https://docs.telerik.com/kendo-ui/intro/installation/license-code-faq)
 * [Troubleshooting a Failed Client-Side Assets License Activation (Kendo UI for jQuery Knowledge Base)](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license)
 
 ## See Also

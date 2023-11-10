@@ -38,7 +38,7 @@ To acquire a license file, generate it.
 <script src="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.3.5/scripts/license-key/index.js"></script>
 
 <license-download-link
-product-codes="KENDOUICOMPLETE, KENDOUI, KENDOUIMVC, UIASPCORE"
+product-codes="KENDOUICOMPLETE, KENDOUI, KENDOUIMVC, UIASPCORE, KENDOMVC"
 product-name="Kendo UI for jQuery";
 purchase-url="https://www.telerik.com/purchase/kendo-ui"
 trial-url="https://www.telerik.com/try/kendo-ui"

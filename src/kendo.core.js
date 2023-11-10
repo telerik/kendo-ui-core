@@ -10,7 +10,7 @@ var __meta__ = {
 var packageMetadata = {
     name: '@progress/kendo-ui',
     productName: 'Kendo UI',
-    productCodes: ['KENDOUICOMPLETE', 'KENDOUI', 'KENDOUI', 'KENDOUICOMPLETE'],
+    productCodes: ['KENDOUICOMPLETE', 'KENDOUI', 'UIASPCORE', 'KENDOMVC', 'KENDOUIMVC'],
     publishDate: 0,
     version: '$KENDO_VERSION'.replace(/^\s+|\s+$/g, ''),
     licensingDocsUrl: 'https://docs.telerik.com/kendo-ui/intro/installation/using-license-code?utm_medium=product&utm_source=kendojquery&utm_campaign=kendo-ui-jquery-purchase-license-keys-warning'

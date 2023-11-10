@@ -79,10 +79,10 @@ private string GetCaptchaText(string captchaId)
 
 ## Functionality and Features
 
-* [Captcha Server-side Provider]({% slug htmlhelpers_captcha_provider %})
-* [Validation]({% slug htmlhelpers_captcha_validation %})
-* [Audio Content]({% slug htmlhelpers_captcha_audio %})
-* [Accessibility]({% slug htmlhelpers_captcha_accessibility %})
+* [Captcha Server-side Provider]({% slug htmlhelpers_captcha_provider %})&mdash;You can implement a server-side provider for the Captcha component.
+* [Validation]({% slug htmlhelpers_captcha_validation %})&mdash;The Captcha offers validation capabilities.
+* [Audio Content]({% slug htmlhelpers_captcha_audio %})&mdash;You can present your own audio content to the user.
+* [Accessibility]({% slug htmlhelpers_captcha_accessibility %})&mdash;The Captcha and the entire Telerik toolset implement convenient accessibility features.
 
 ## Events
 
@@ -102,12 +102,15 @@ To reference an existing Captcha instance, use the [`jQuery.data()`](https://api
     </script>
 ```
 
-## See Also
+## Next Steps
 
-* [Basic Usage of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/index)
+* [Getting Started with the Captcha]({% slug aspnetcore_captcha_getting_started %})
+* [Basic Usage of the Captcha for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/index)
 {% if site.core %}
-* [Basic Usage of the Captcha TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/captcha/tag-helper)
 * [Captcha in Razor Pages]({% slug htmlhelpers_captcha_razorpage_aspnetcore %})
 {% endif %}
-* [Using the API of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/api)
-* [Server-Side API](/api/captcha)
+
+## See Also
+
+* [Using the API of the Captcha (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/api)
+* [Knowledge Base Section](/knowledge-base)
