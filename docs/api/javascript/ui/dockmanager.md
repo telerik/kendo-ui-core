@@ -668,7 +668,7 @@ Toggles the visibility of a pane.
                         content: "Pane content"
                     },{
                         type: "content",
-                        id: "hiddenPaneId"
+                        id: "hiddenPaneId",
                         header: "Pane 2",
                         content: "Hidden Pane",
                         visible: false
@@ -685,7 +685,7 @@ Toggles the visibility of a pane.
                         }
                     }]
                 }
-            }).data("kendoDockManager);
+            }).data("kendoDockManager");
 
             dockmanager.toggle("hiddenPaneId") //Toggles the visibility of a pane.
     </script>
