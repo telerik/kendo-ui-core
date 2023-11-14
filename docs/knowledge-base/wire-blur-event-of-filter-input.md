@@ -3,7 +3,7 @@ title: Wire the blur Event of the Filter Input in the MultiSelect
 page_title: Wire the blur Event of the Filter Input in the MultiSelect
 description: "Learn how to bind to the blur event of the filter input element in the Kendo UI MultiSelect component."
 previous_url: /controls/editors/multiselect/how-to/wire-blur-event-of-filter-input, /controls/editors/multiselect/how-to/filtering/wire-blur-event-of-filter-input
-slug: howto_wire_blur_event_ofthe_filtеr_input_multiselect
+slug: howto_wire_blur_event_ofthe_filter_input_multiselect
 tags: telerik, kendo, jquery, multiselect, wire, blur, event, of, the, filter, input
 component: multiselect
 type: how-to

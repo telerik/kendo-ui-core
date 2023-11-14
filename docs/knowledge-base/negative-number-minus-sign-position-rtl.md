@@ -49,4 +49,4 @@ For the full implementation of the approach, refer to [this Dojo example](https:
 
 * [Globalization in Kendo UI](https://docs.telerik.com/kendo-ui/framework/globalization/overview).
 * [Culture Definition in Kendo UI](https://docs.telerik.com/kendo-ui/framework/globalization/definecultureinfo).
-* [Right-to-Left (RTL) Support in Kendo UI](https://docs.telerik.com/kendo-ui/accessibility/supporting-rtl-languages)
+* [Right-to-Left (RTL) Support in Kendo UI](https://docs.telerik.com/kendo-ui/globalization/supporting-rtl-languages)

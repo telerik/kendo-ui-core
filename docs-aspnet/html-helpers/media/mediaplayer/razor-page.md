@@ -1,14 +1,22 @@
 ---
 title:  Razor Pages
-page_title: Configure a DataSource for the Telerik UI MediaPlayer for Remote Binding in Razor Pages.
+page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI MediaPlayer component for {{ site.framework }} in Razor Pages."
 slug: htmlhelpers_mediaplayer_razorpage_aspnetcore
 position: 3
 ---
 
-# Razor Page
+# MediaPlayer in Razor Pages
 
-This article showcases how to create a Telerik MediaPlayer with a playlist and bind its data to a remote DataSource in Razor Pages.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+
+You can seamlessly integrate the Telerik UI MediaPlayer for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the MediaPlayer component in a Razor Pages scenario.
+
+For the complete project, refer to the [MediaPlayer in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MediaPlayer).
+
+## Getting Started
 
 The following example uses two widgets: a MediaPlayer and a ListView, which serves as a playlist. There are two main steps in the suggested implementation:
 
@@ -140,7 +148,129 @@ See the implementation details in the example below. For the full project with R
     }
 </style>
 ```
+{% if site.core %}
+```tab-TagHelper(csthml)
+@page
+@addTagHelper "*, Kendo.Mvc"
+@model Telerik.Examples.RazorPages.Pages.MediaPlayer.MediaPlayerPlaylistModel
+@{
+    ViewData["Title"] = "MediaPlayerPlaylist";
+}
 
+@using Telerik.Examples.RazorPages.Models
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
+
+// Create a template for the ListView(Playlist).
+<script type="text/x-kendo-template" id="template">
+    <li class="k-item k-state-default" onmouseover="$(this).addClass('k-hover')"
+        onmouseout="$(this).removeClass('k-hover')">
+        <span>
+            <img src="#:Poster#" />
+            <h5>#:Title#</h5>
+        </span>
+    </li>
+</script>
+
+<kendo-mediaplayer name="mediaPlayer"
+    auto-play="false"
+    style="height:720px">
+</kendo-mediaplayer>
+
+<div class="k-list-container playlist">
+    <kendo-listview name="listView"
+        tag-name="ul"
+        template-id="template"
+        on-change="onChange"
+        on-data-bound="onDataBound">
+        <selectable enabled="true"/>
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Page("/MediaPlayer/MediaPlayerPlaylist?handler=Read")" data="forgeryToken" />
+            </transport>
+        </datasource>
+    </kendo-listview>
+</div>
+
+<script>
+    function forgeryToken() {
+        return kendo.antiForgeryTokens();
+    }
+    function onChange() {
+        var index = this.select().index();
+        var dataItem = this.dataSource.view()[index];
+        
+        // Play the video that was selected from the playlist.
+        $("#mediaPlayer").data("kendoMediaPlayer").media({
+            title: dataItem.Title,
+            poster: dataItem.Poster,
+            source: dataItem.Source
+        });
+    }
+
+    // Select the first video when the page loads.
+    function onDataBound() {
+        this.select(this.content.children().first());
+    }
+</script>
+
+<style>
+    .k-mediaplayer {
+        float: left;
+        box-sizing: border-box;
+        width: 70%;
+    }
+    .playlist {
+        float: left;
+        height: 720px;
+        overflow: auto;
+        width: 30%;
+    }
+    @@media(max-width: 800px) {
+        .playlist,
+        .k-mediaplayer {
+            width: 100%;
+        }
+    }
+    .playlist ul, .playlist li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    .playlist .k-item {
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        padding: 14px 15px;
+    }
+        .playlist .k-item:last-child {
+            border-bottom-width: 0;
+        }
+    .playlist span {
+        cursor: pointer;
+        display: block;
+        overflow: hidden;
+        text-decoration: none;
+    }
+        .playlist span img {
+            border: 0 none;
+            display: block;
+            height: 56px;
+            object-fit: cover;
+            width: 100px;
+            float: left;
+        }
+    .playlist h5 {
+        display: block;
+        font-weight: normal;
+        margin: 0;
+        overflow: hidden;
+        padding-left: 10px;
+        text-align: left;
+    }
+</style>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)
 using System.Collections.Generic;
 using Kendo.Mvc.Extensions;

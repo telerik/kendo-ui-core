@@ -1,7 +1,7 @@
 ---
 title: Adding a Badge to a Custom Command in the Grid
 page_title: Adding a Badge to a Custom Command in the Grid
-description: "An example on how to add a badge to a custom command in the {{ site.product }} Grid."
+description: An example on how to add a badge to a custom command in the {{ site.product }} Grid.
 slug: grid-custom-command-add-badge
 tags: telerik, grid, custom, command, add, badge
 component: grid
@@ -31,8 +31,8 @@ How can I integrate a Badge inside a custom command for a given row in the {{ si
 
 To achieve the desired scenario:
 
-1. Specify a custom class for the custom command by using the [`.HtmlAttributes()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridActionColumnBuilder?#htmlattributessystemobject) configuration option.
-1. To traverse through each of the rows, handle the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder?#databoundsystemstring) event of the Grid.
+1. Specify a custom class for the custom command by using the [`.HtmlAttributes()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridactioncolumnbuilder?#htmlattributessystemobject) configuration option.
+1. To traverse through each of the rows, handle the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder?#databoundsystemstring) event of the Grid.
 1. Within the handler, obtain the currently traversed row's data item instance by using the client-side [`.dataItem()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method the Grid provides. To get the respective custom command button for the associated row, use the previously specified custom class.
 1. Provide a unique id for the badges that you will create.
 1. Based on the value of a data item field, append a child element inside the Button. From the Button, initialize a Badge control. 
@@ -98,4 +98,33 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 * [Client-Side API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side API Reference of the Grid](https://docs.telerik.com/{{ site.platform }}/api/grid)
-* [Telerik REPL: Add Badge to a custom command in the Grid](https://netcorerepl.telerik.com/cGlQvqvR164D3E7V21)
+
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik REPL: Adding Badge to a Custom Command in the Grid for {{ site.framework }}](https://netcorerepl.telerik.com/cGlQvqvR164D3E7V21)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

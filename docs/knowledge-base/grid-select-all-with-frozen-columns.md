@@ -24,7 +24,7 @@ How can I create a checkbox column for selecting rows in the Grid and render a *
 
 ## Solution
 
-Manually select all records within the `click` event of the checkbox for selecting all records in the header. Note that a Grid with locked (frozen) columns renders two separate tables for its data.
+Manually select all records within the `click` event of the checkbox for selecting all records in the header. Note that a Grid with locked (frozen) columns renders two separate tables for its data. As an alternative, you can check the [Checkbox Selection Demo of the Grid](https://demos.telerik.com/kendo-ui/grid/checkbox-selection).
 
 ```dojo
    <div id="grid"></div>
@@ -193,6 +193,7 @@ Manually select all records within the `click` event of the checkbox for selecti
 
       //on dataBound event restore previous selected rows:
       function onDataBound(e) {
+        $('.k-checkbox').kendoCheckBox();
         var view = this.dataSource.view();
         for(var i = 0; i < view.length;i++){
           if(checkedIds[view[i].id]){

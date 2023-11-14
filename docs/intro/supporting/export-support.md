@@ -15,9 +15,9 @@ Kendo UI for jQuery integrates the Pako and JSZip libraries to support the conte
 The [Pako Deflate library](https://nodeca.github.io/pako/#Deflate) enables the compression of the files that will be exported to PDF. To enable the PDF export, you need to load Pako in the specified page.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
-For more information on the available PDF export options by Kendo UI, refer to the articles on [PDF Export]({% slug introduction_pdfexport_kendoui %}) and [PDF output by the Drawing library]({% slug pdfderawingexport_drawingapi %}).
+For more information on the available PDF export options by Kendo UI, refer to the articles on [PDF Export]({% slug pdfderawingexport_drawingapi %}) and [PDF output by the Drawing library]({% slug pdfderawingexport_drawingapi %}).
 
 ## JSZip Library
 
@@ -27,7 +27,7 @@ For more information on the available Excel export options by Kendo UI, refer to
 
 ## See Also
 
-* [PDF Export]({% slug introduction_pdfexport_kendoui %})
+* [PDF Export]({% slug pdfderawingexport_drawingapi %})
 * [PDF Output by the Drawing Library]({% slug pdfderawingexport_drawingapi %})
 * [PDF Output Known Limitations]({% slug supportedbrowsers_drawingapi %})
 * [Excel Export]({% slug introduction_excelexport_kendoui %})

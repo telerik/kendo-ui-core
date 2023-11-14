@@ -17,6 +17,8 @@ Kendo UI for jQuery maintains the [commercial Kendo UI for jQuery (Kendo UI Prof
 
 All official releases, service packs, and internal builds are uploaded to both distribution packages.
 
+> As of R3 2023 Kendo UI bundles does not include the jQuery library in their `js` directories and you should install the jQuery bower package `bower install jquery` or use other source for the jQuery library.
+
 ### Commercial Distribution on Bower
 
 > The commercial Kendo UI Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-components).
@@ -25,7 +27,13 @@ The commercial distribution package is available as a private GitHub repository.
 
 During the installation of the Bower package, you may be requested to confirm your credentials more than once. For more information, refer to the Knowledge Base article on [how to store your username and password]({% slug troubleshoot_bower_storing_credentials %}).
 
-To install the commercial distribution package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command. 
+To install the commercial distribution package, run the following command:
+
+```
+bower install https://bower.telerik.com/bower-kendo-ui.git --config.shallowCloneHosts="bower.telerik.com"
+```
+
+We recommend specifying **shallowCloneHosts** config key on bower install as enabling the bower shallow cloning speed up the download tremendously. 
 
 To check the available commercial distribution versions of the package, run the `bower info kendo-ui --verbose` command.
 
@@ -59,7 +67,7 @@ Once the scripts and styles are available in your project directory, you can use
     <title>Kendo UI with Bower</title>
 
     <link rel="stylesheet" href="bower_components\kendo-ui\styles\kendo.default-main.min.css">
-    <script src="bower_components\kendo-ui\js\jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components\jquery\dist\jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="bower_components\kendo-ui\js\kendo.all.min.js" type="text/javascript" charset="utf-8"></script>
   </head>
 </html>
@@ -77,7 +85,7 @@ Depending on the component you require, you can initialize the Kendo UI controls
       <title>Kendo UI with Bower</title>
 
       <link rel="stylesheet" href="bower_components\kendo-ui\styles\kendo.default-main.min.css">
-      <script src="bower_components\kendo-ui\js\jquery.min.js" type="text/javascript" charset="utf-8"></script>
+      <script src="bower_components\jquery\dist\jquery.min.js" type="text/javascript" charset="utf-8"></script>
       <script src="bower_components\kendo-ui\js\kendo.all.min.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
@@ -98,7 +106,7 @@ The following example demonstrates how to initialize a DropDownList with some ba
       <title>Kendo UI with Bower</title>
 
       <link rel="stylesheet" href="bower_components\kendo-ui\styles\kendo.default-main.min.css">      
-      <script src="bower_components\kendo-ui\js\jquery.min.js" type="text/javascript" charset="utf-8"></script>
+      <script src="bower_components\jquery\dist\jquery.min.js" type="text/javascript" charset="utf-8"></script>
       <script src="bower_components\kendo-ui\js\kendo.all.min.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>

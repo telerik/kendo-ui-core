@@ -1,8 +1,8 @@
 ---
-title: Persist Filter Menu Value when a Grid Column is Filtered by a Single Value
+title: Persist Filter Menu Value When a Grid Column is Filtered by a Single Value
 description: How can I customize the default behavior of the Grid Filter Menu and persist the second input value when a column is filtered only by the second input?
 type: how-to
-page_title: Persist the Second Value in the Filter Menu when a Grid Column is Filtered only by the Second Input
+page_title: Persist the Second Value in the Filter Menu When a Grid Column is Filtered Only by the Second Input
 slug: grid-customize-default-filter-menu-behavior
 tags: grid, filter, menu, value, persist, input
 ticketid: 1579319
@@ -33,8 +33,8 @@ How can I customize the default behavior of the Filter Menu and persist the sing
 
 ## Solution
 
-1. Handle the [`Filter`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#filtersystemstring) event of the Grid and store the number of the applied column filters in a global JavaScript variable `filteredValues`.
-1. Handle the [`FilterMenuOpen`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#filtermenuopensystemstring) event of the Grid. Get references of both input fields, subscribe to their `Change` events, and store their values in global variables (`dtp1Value` and `dtp2Value`).
+1. Handle the [`Filter`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#filtersystemstring) event of the Grid and store the number of the applied column filters in a global JavaScript variable `filteredValues`.
+1. Handle the [`FilterMenuOpen`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#filtermenuopensystemstring) event of the grid. get references of both input fields, subscribe to their `Change` events, and store their values in global variables (`dtp1Value` and `dtp2Value`).
 1. Check if the Grid is filtered by the second input field and update its value by using the global variable `dtp2Value`.
 
 
@@ -114,7 +114,33 @@ How can I customize the default behavior of the Filter Menu and persist the sing
     </script>
 ```
 
-Refer to [this REPL](https://netcorerepl.telerik.com/wckjQOGb25n0E3GK50) for a runnable example.
+For a runnable example based on the code above, refer to [this REPL](https://netcorerepl.telerik.com/wckjQOGb25n0E3GK50).
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
-* [Server-Side API](/api/grid)
+
+* [Telerik REPL: Persist Filter Menu Value When a Grid Column is Filtered by a Single Value](https://netcorerepl.telerik.com/wckjQOGb25n0E3GK50)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

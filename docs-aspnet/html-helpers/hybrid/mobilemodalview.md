@@ -107,4 +107,4 @@ You can reference a hybrid ModalView instance by using the code from the followi
 
 ## See Also
 
-* [Hybrid ModalViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileModalViewBuilder)
+* [Hybrid ModalViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilemodalviewbuilder)

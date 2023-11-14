@@ -133,4 +133,4 @@ Get a reference to the Form instance and set the value of the required model fie
 
 ## See Also
 
-* [Form Overview](https://docs.telerik.com/kendo-ui/controls/layout/form/overview)
+* [Form Overview](https://docs.telerik.com/kendo-ui/controls/form/overview)

@@ -60,10 +60,14 @@ The following example demonstrates the complete implementation of the suggested 
 
 ```dojo
     <style>
+      .nameFilter{
+        height:10px;
+      }
       .nameFilter > .k-grid-filter-menu {
+        height:10px !important;
         padding: 0;
         left: 0;
-        bottom: 0;
+        bottom: 0px !important;
       }
     </style>
   

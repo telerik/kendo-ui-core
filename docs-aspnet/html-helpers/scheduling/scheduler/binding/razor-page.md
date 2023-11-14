@@ -1,16 +1,24 @@
 ---
-title:  Razor Page
-page_title: Configure a DataSource for the Scheduler for Remote Binding in Razor Page.
+title:  Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Scheduler component for {{ site.framework }} in a Razor Page using CRUD Operations."
 slug: htmlhelpers_scheduler_razorpage_aspnetcore
 position: 3
 ---
 
-# Razor Page
+# Scheduler in Razor Pages
 
-This article describes how to configure a the DataSource of a Telerik UI Scheduler for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-In order to set up the Scheduler component bindings, you need to configure the `Create`,`Read`,`Update` and `Destroy` methods of its `DataSource` instance. The URL in this method should refer the name of the corresponding method in the PageModel. In this method, you can also pass additional parameters, such as antiforgery token (see `forgeryToken`). Note that the CRUD methods listed above make POST requests, thus the `OnPost()` handlers should be configured. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Scheduler for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Scheduler component in a Razor Pages scenario.
+
+For the complete project, refer to the [Scheduler in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Scheduler/SchedulerCrudOperations.cshtml).
+
+## Getting Started
+
+In order to set up the Scheduler component bindings, you need to configure the `Create`,`Read`,`Update` and `Destroy` methods of its `DataSource` instance. The URL in this method should refer the name of the corresponding method in the PageModel. In this method, you can also pass additional parameters, such as antiforgery token (see `forgeryToken`). Note that the CRUD methods listed above make POST requests, thus the `OnPost()` handlers should be configured.
 
 ```tab-HtmlHelper(csthml)        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

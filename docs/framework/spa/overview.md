@@ -12,7 +12,7 @@ position: 1
 
 # Single-Page Application Overview
 
-The [Kendo UI Single-Page Application (SPA)](https://demos.telerik.com/kendo-ui/spa/index) is a set of classes which aim at simplifying the building of rich client-side based web applications.
+The [Kendo UI Single-Page Application (SPA)](https://demos.telerik.com/kendo-ui/websushi) is a set of classes which aim at simplifying the building of rich client-side based web applications.
 
 For more information about the SPA pattern, refer to the [Wikipedia article](https://en.wikipedia.org/wiki/Single-page_application).
 

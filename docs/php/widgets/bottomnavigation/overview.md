@@ -25,7 +25,7 @@ The BottomNavigation provides a set of [default API configuration options](/api/
         $inboxItem->text("Inbox")
             ->template('<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top:2px; left:55px"></span>')
             ->data(array('view' => 'inbox'))
-            ->icon("envelop")
+            ->icon("envelope")
             ->selected(true);
 
         $calendarItem = new \Kendo\UI\BottomNavigationItem();
@@ -60,7 +60,7 @@ The Kendo UI BottomNavigation's items configuration allows setting various prope
         $inboxItem->text("Inbox")
             ->template('<span class="k-bottom-nav-item-icon k-icon k-i-email"></span><span class="k-bottom-nav-item-text">Inbox</span><span id="badgeInbox" style="top:2px; left:55px"></span>')
             ->data(array('view' => 'inbox'))
-            ->icon("envelop")
+            ->icon("envelope")
             ->selected(true);
 
         $calendarItem = new \Kendo\UI\BottomNavigationItem();
@@ -88,7 +88,7 @@ The Kendo UI BottomNavigation for PHP allows you to alter the appearance of the 
         $inboxItem = new \Kendo\UI\BottomNavigationItem();
         $inboxItem->text("Inbox")
             ->data(array('view' => 'inbox'))
-            ->icon("envelop")
+            ->icon("envelope")
             ->selected(true);
 
         $calendarItem = new \Kendo\UI\BottomNavigationItem();
@@ -124,7 +124,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
         $inboxItem = new \Kendo\UI\BottomNavigationItem();
         $inboxItem->text("Inbox")
             ->data(array('view' => 'inbox'))
-            ->icon("envelop")
+            ->icon("envelope")
             ->selected(true);
 
         $calendarItem = new \Kendo\UI\BottomNavigationItem();

@@ -275,9 +275,6 @@ var __meta__ = {
             var that = this;
 
             if (that._maskLength) {
-                if (that.options.$angular) {//detach "input" event in angular scenario to keep the ng-model consistent and updated only when the change event of the textbox is raised.
-                    that.element.off(INPUT);
-                }
                 that.element
                     .on(ns(KEYDOWN), that._keydown.bind(that))
                     .on(ns(DROP), that._drop.bind(that))
@@ -728,4 +725,5 @@ var __meta__ = {
     ui.plugin(MaskedTextBox);
 
 })(window.kendo.jQuery);
+export default kendo;
 

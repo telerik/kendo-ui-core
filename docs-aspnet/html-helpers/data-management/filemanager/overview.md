@@ -161,5 +161,8 @@ Visit the [Client API section](https://docs.telerik.com/kendo-ui/api/javascript/
 ## See Also
 
 * [Basic Usage of the FileManager (Demo)](https://demos.telerik.com/{{ site.platform }}/filemanager/index)
+{% if site.core %}
+* [FileManager in Razor Pages]({% slug htmlhelpers_filemanager_razorpage_aspnetcore %})
+{% endif %}
 * [Binding Overview of the FileManager]({% slug htmlhelpers_filemanager_aspnetcore_binding_overview %})
 * [Globalization in {{ site.product }}]({% slug overview_globalization_core %})

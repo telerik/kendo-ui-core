@@ -62,6 +62,10 @@ var __meta__ = {
     var TRANSFER_FROM = "transferFrom";
     var TRANSFER_ALL_TO = "transferAllTo";
     var TRANSFER_ALL_FROM = "transferAllFrom";
+    var CARET_ALT_RIGHT = "caret-alt-right";
+    var CARET_ALT_LEFT = "caret-alt-left";
+    var CARET_ALT_DOUBLE_RIGHT = "caret-double-alt-right";
+    var CARET_ALT_DOUBLE_LEFT = "caret-double-alt-left";
     var DRAGGEDCLASS = "k-ghost";
     var UNIQUE_ID = "uid";
     var ID = "id";
@@ -1539,12 +1543,28 @@ var __meta__ = {
         },
         _createTools: function() {
             var that = this;
+            var isRtl = kendo.support.isRtl(that.element);
             var tools = that.options.tools;
             var toolsLength = tools.length;
             var toolsMessages = that.options.messages.tools;
             var toolList = that.element;
             var tool;
             var i;
+
+            ToolBar.defaultTools = kendo.deepExtend({}, ToolBar.defaultTools, {
+                transferTo: {
+                    icon: isRtl ? CARET_ALT_LEFT : CARET_ALT_RIGHT
+                },
+                transferFrom: {
+                    icon: isRtl ? CARET_ALT_RIGHT : CARET_ALT_LEFT
+                },
+                transferAllTo: {
+                    icon: isRtl ? CARET_ALT_DOUBLE_LEFT : CARET_ALT_DOUBLE_RIGHT
+                },
+                transferAllFrom: {
+                    icon: isRtl ? CARET_ALT_DOUBLE_RIGHT : CARET_ALT_DOUBLE_LEFT
+                }
+            });
 
             for (i = 0; i < toolsLength; i++) {
                 tool = extend({}, ToolBar.defaultTools[tools[i]], { text: toolsMessages[tools[i]] });
@@ -1667,19 +1687,19 @@ var __meta__ = {
         },
         transferTo: {
             command: TRANSFER_TO,
-            icon: "caret-alt-right"
+            icon: CARET_ALT_RIGHT
         },
         transferFrom: {
             command: TRANSFER_FROM,
-            icon: "caret-alt-left"
+            icon: CARET_ALT_LEFT
         },
         transferAllTo: {
             command: TRANSFER_ALL_TO,
-            icon: "caret-double-alt-right"
+            icon: CARET_ALT_DOUBLE_RIGHT
         },
         transferAllFrom: {
             command: TRANSFER_ALL_FROM,
-            icon: "caret-double-alt-left"
+            icon: CARET_ALT_DOUBLE_LEFT
         }
     };
 
@@ -1692,4 +1712,5 @@ var __meta__ = {
     }
 
 })(window.kendo.jQuery);
+export default kendo;
 

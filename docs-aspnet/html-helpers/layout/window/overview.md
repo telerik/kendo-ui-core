@@ -68,7 +68,7 @@ The following example demonstrates the basic configuration of the Window.
         .Actions(actions => actions.Refresh().Minimize().Maximize().Close())
         .LoadContentFrom("AjaxContent", "Window")
         .Draggable(false)
-        .Resizable(false)
+        .Resizable(resizable => resizable.Enabled(false))
     )
 
     <script type="text/javascript">
@@ -116,7 +116,7 @@ The following example demonstrates the basic configuration of the Window.
 | [Integration with forms]({% slug htmlhelpers_window_forms_aspnetcore %}) |The Window has a built-in integration with the Form component.|
 | [Custom actions]({% slug htmlhelpers_window_customactions_aspnetcore %}) |One of the powerful capabilities of the Window is customizing its actions.|
 | [Animations]({% slug htmlhelpers_window_animations_aspnetcore %}) |The Window provides rich animation configuration.|
-| [Accessibility]({% slug accessibility_aspnetcore_window %}) |The Window is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
+| [Accessibility]({% slug accessibility_aspnetcore_window %}) |The Window is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
 
 ## Next Steps
 
@@ -124,6 +124,7 @@ The following example demonstrates the basic configuration of the Window.
 * [Basic Usage of the Window HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/index)
 {% if site.core %}
 * [Basic Usage of the Window TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/tag-helper)
+* [Window in Razor Pages]({% slug htmlhelpers_window_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

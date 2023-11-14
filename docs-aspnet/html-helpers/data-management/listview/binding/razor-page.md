@@ -1,18 +1,26 @@
 ---
 title:  Razor Pages
-page_title: Configure a DataSource for the Telerik UI ListView for Remote Binding in Razor Pages.
+page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI ListView component for {{ site.framework }} in Razor Pages using CRUD Operations."
 slug: htmlhelpers_listview_razorpage_aspnetcore
-position: 1
+position: 2
 ---
 
-# Razor Page
+# ListView in Razor Pages
 
-### ListView CRUD Operations in Razor Pages
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-This article showcases how to perform CRUD operations with the ListView component in a Razor Pages scenario.
+You can seamlessly integrate the Telerik UI ListView for {{ site.framework }} in Razor Pages applications.
 
-To set up the ListView component bindings, you need to configure the `Create`, `Read`, `Update`, `Delete` methods of its `DataSource` instance. The URLs in these methods must refer to the methods names in the PageModel. See the implementation details in the example below. For the complete project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+This article describes how to configure the ListView component in a Razor Pages scenario.
+
+For the complete project, refer to the [ListView in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ListView/ListViewCrudOperations.cshtml).
+
+## Getting Started
+
+This article showcases how to perform CRUD operations with the Telerik UI for {{ site.framework }} ListView component in a Razor Pages scenario.
+
+To set up the ListView component bindings, you need to configure the `Create`, `Read`, `Update`, `Delete` methods of its `DataSource` instance. The URLs in these methods must refer to the methods names in the PageModel. See the implementation details in the example below.
 
 ```tab-HtmlHelper
 @page

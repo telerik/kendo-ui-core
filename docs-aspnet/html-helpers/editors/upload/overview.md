@@ -217,6 +217,7 @@ An Upload widget configured in such way offers support for multiple file selecti
 * [Basic Usage of the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload)
 {% if site.core %}
 * [Basic Usage of the Upload TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/tag-helper)
+* [Upload in Razor Pages]({% slug htmlhelpers_upload_razorpage_aspnetcore %})
 {% endif %}
 * [Using the API of the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/api)
 

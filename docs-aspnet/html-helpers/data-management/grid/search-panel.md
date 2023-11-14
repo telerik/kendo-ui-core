@@ -22,30 +22,15 @@ To enable the search panel functionality, include the `Search` option to the too
         .Name("Grid")
         .ToolBar(t => t.Search()) // Enable the Search panel.
         ...
+    )
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
-            </transport>
-        </datasource>
+    <kendo-grid name="grid">
         <toolbar>
             <toolbar-button name="search"></toolbar-button>
         </toolbar>
-
-        <groupable enabled="true" />
-        <sortable enabled="true" />
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-        </pageable>
-        <filterable enabled="true" />
-        <columns>
-            <column field="ContactName" title="Contact Name" width="240" />
-            <column field="ContactTitle" title="Contact Title" />
-            <column field="CompanyName" title="Company Name" />
-            <column field="Country" title="Country" width="150" />
-        </columns>
+        ...
     </kendo-grid>
 ```
 {% endif %}
@@ -54,22 +39,31 @@ To enable the search panel functionality, include the `Search` option to the too
 You can also customize which fields to search through the data when a value is entered in the search input.
 
 ```HtmlHelper
-    ...
-    .Search(s=> 
-    { 
-        s.Field(c => c.ContactName);
-        s.Field(c => c.CompanyName); 
-    })
+    @(Html.Kendo().Grid<CustomerViewModel>()
+        .Name("Grid")
+        .ToolBar(t => t.Search())
+        .Search(s=> 
+        { 
+            s.Field(c => c.ContactName);
+            s.Field(c => c.CompanyName); 
+        })
+        ...
+    )
+
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550">
-        <search fields="@(new string[] { "ContactName", "Country"})">
-        </search>
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="search"></toolbar-button>
+        </toolbar>
+        <search fields="@(new string[] { "ContactName", "Country"})"></search>
+        ...
+    </kendo-grid>
 ```
 {% endif %}
 
-## Specify the filter operator
+## Specify the Filter Operator
 
 As of Kendo UI 2021 R3 SP1, you can specify filter operators for each filter type. With this update, you can filter non-string types.
 
@@ -77,18 +71,20 @@ The following example demonstrates how to specify which fields to include in the
 
 ```HtmlHelper
     .Search(s => {
-            s.Field(o => o.OrderID, "eq");
-            s.Field(o => o.Freight, "gt");
-            s.Field(o => o.ShipName, "contains");
-            s.Field(o => o.ShipCity, "contains");
+        s.Field(o => o.OrderID, "eq");
+        s.Field(o => o.Freight, "gt");
+        s.Field(o => o.ShipName, "contains");
+        s.Field(o => o.ShipCity, "contains");
     })
 ```
 {% if site.core %}
 ```TagHelper
     <search fields-extended="@(new object[]
-            {new {Name = "OrderID", Operator = "eq"},
-                new {Name = "ShipName", Operator = "contains"},
-                new {Name = "ShipCity", Operator = "contains"}})">
+        {
+            new {Name = "OrderID", Operator = "eq"},
+            new {Name = "ShipName", Operator = "contains"},
+            new {Name = "ShipCity", Operator = "contains"}
+        })">
     </search>
 ```
 {% endif %}
@@ -98,6 +94,29 @@ The following example demonstrates how to specify which fields to include in the
 The code snippets from above can be seen in action in the following demo:
 
 * [Search Panel of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/search-panel)
+
+## Modify the Default Search Panel Message
+
+The default search panel message is `Search...`. You can modify it by using the `Text()` method in the toolbar configuration.
+
+```HtmlHelper
+    @(Html.Kendo().Grid<CustomerViewModel>()
+        .Name("Grid")
+        .ToolBar(t => t.Search().Text("Search username..."))
+        ...
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="search" text="Search username..."></toolbar-button>
+        </toolbar>
+        ...
+    </kendo-grid>
+```
+{% endif %}
+
 
 ## Known Limitations
 

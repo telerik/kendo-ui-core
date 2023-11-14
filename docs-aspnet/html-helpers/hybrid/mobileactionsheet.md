@@ -106,4 +106,4 @@ You can reference a hybrid ActionSheet instance by using the code from the follo
 
 ## See Also
 
-* [Hybrid ActionSheetBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/MobileActionSheetBuilder)
+* [Hybrid ActionSheetBuilder Server-Side API](/api/kendo.mvc.ui.fluent/mobileactionsheetbuilder)

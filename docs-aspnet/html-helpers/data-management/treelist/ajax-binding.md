@@ -58,7 +58,19 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
         }
 
 1. Return the `TreeDataSourceResult` as JSON. Configure the Telerik UI TreeList for Ajax binding.
+        {% if site.core %}
+        public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? id)
+        {
+            var result = ((EmployeeDirectoryService) employeeDirectory).GetAllRemote().ToTreeDataSourceResult(request,
+                e => e.EmployeeId,
+                e => e.ReportsTo,
+                e => id.HasValue ? e.ReportsTo == parentId : e.ReportsTo == null,
+                e => e
+            );
 
+            return Json(result);
+        }
+        {% else %}
         public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? id)
         {
             var result = ((EmployeeDirectoryService) employeeDirectory).GetAllRemote().ToTreeDataSourceResult(request,
@@ -70,6 +82,7 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        {% endif %}
 
 1. In the view, configure the TreeList to use the action method created in the previous steps.
 

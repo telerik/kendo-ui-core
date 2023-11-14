@@ -30,6 +30,8 @@ installation/json-serialization.md,
 installation/adding-client-side-resources/using-libman.md,
 vs-integration/snippets.md,
 vs-code-integration/*,
+asp-net-mvc-3.md,
+asp-net-mvc-4.md,
 knowledge-base/checkbox-list-post.md,
 knowledge-base/daterangepicker-bind-to-model-and-post.md,
 knowledge-base/daterangepicker-messages-input-text-change.md,
@@ -124,9 +126,9 @@ html-helpers/media/mediaplayer/razor-page.md,
 html-helpers/overview-taghelpers.md]
 
 exclude_navigation: ["knowledge-base/*",
-api/Kendo.Mvc/*,
-api/Kendo.Mvc.UI/*,
-api/Kendo.Mvc.UI.Fluent/*,
+api/kendo.mvc/*,
+api/kendo.mvc.ui/*,
+api/kendo.mvc.ui.fluent/*,
 asp-net-mvc-3.html,
 asp-net-mvc-4.html,
 getting-started-mvc/*]
@@ -678,6 +680,11 @@ defaults:
         path: "html-helpers/scheduling/scheduler"
     values:
         title_prefix: "ASP.NET MVC Scheduler Component"
+-   
+    scope:
+        path: "html-helpers/template"
+    values:
+        title_prefix: "ASP.NET MVC Template Component"
 
 # Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
 # "foo": "Bar"

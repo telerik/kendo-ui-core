@@ -1,4 +1,6 @@
-import "./kendo.calendar.js";
+// The current file development is no longer in active phase but the code will be kept as is.
+// Please be advised that we have discontinued the sync for this file with the commercial version of Kendo UI for jQuery.
+// To take advantage of new features please visit (https://www.telerik.com/kendo-jquery-ui) and consider upgrading to a commercial license.import "./kendo.calendar.js";
 import "./kendo.popup.js";
 import "./kendo.dateinput.js";
 import "./kendo.html.button.js";
@@ -904,7 +906,8 @@ var __meta__ = {
                     fillMode: options.fillMode,
                     rounded: options.rounded,
                     min: options.min,
-                    max: options.max
+                    max: options.max,
+                    messages: options.messages.dateInput
                 });
             }
         },

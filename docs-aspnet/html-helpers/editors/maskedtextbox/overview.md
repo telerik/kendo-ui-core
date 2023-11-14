@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI MaskedTextBox for {{ site.framework }}."
 previous_url: /helpers/html-helpers/maskedtextbox, /helpers/editors/maskedtextbox/overview
 slug: htmlhelpers_maskedtextbox_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} MaskedTextBox Overview
@@ -41,86 +41,21 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 
 ## Functionality and Features
 
-* [Mask rules]({% slug validation_maskedtextbox_aspnetcore %})
-* [Globalization]({% slug globalization_maskedtextbox_aspnetcore %})
-* [Accessibility]({% slug accessibility_maskedtextbox_aspnetcore %})
+* [Mask rules]({% slug validation_maskedtextbox_aspnetcore %})—You can configure a variety of predefined masks as well as custom masks in the MaskedTextBox.
+* [Globalization]({% slug globalization_maskedtextbox_aspnetcore %})—The globalization process combines the translation of component messages (localization) with adapting them to specific cultures (internationalization and right-to-left support).
+* [Accessibility]({% slug accessibility_maskedtextbox_aspnetcore %})—The MaskedTextBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
-## Events
+>tip To learn more about the appearance, anatomy, and accessibility of the MaskedTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/maskedtextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
-You can subscribe to all MaskedTextBox events. For a complete example on basic MaskedTextBox events, refer to the [demo on using the events of the MaskedTextBox](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-  @(Html.Kendo().MaskedTextBox()
-        .Name("maskedtextbox")
-        .Events(e => e
-            .Change("maskedtextbox_change")
-        )
-  )
-  <script>
-  function maskedtextbox_change() {
-      // Handle the change event.
-  }
-  </script>
-```
-{% if site.core %}
-```TagHelper
-  <kendo-maskedtextbox name="maskedtextbox" on-change="maskedtextbox_change"></kendo-maskedtextbox>
-  <script>
-  function maskedtextbox_change() {
-      // Handle the change event.
-  }
-  </script>
-```
-{% endif %}
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-    
-```HtmlHelper
-    @(Html.Kendo().MaskedTextBox()
-        .Name("maskedtextbox")
-        .Events(e => e
-            .Change(@<text>
-                function() {
-                    // Handle the change event inline.
-                }
-            </text>)
-        )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-maskedtextbox name="maskedtextbox"
-                         on-change="
-                         function() {
-                           // Handle the change event inline.
-                         }">
-    </kendo-maskedtextbox>
-```
-{% endif %}
-
-## Referencing Existing Instances
-
-To reference an existing Telerik UI MaskedTextBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [MaskedTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#methods) to control its behavior.
-
-The following example demonstrates how to access an existing MaskedTextBox instance.
-
-      // Place the following after your Telerik UI MaskedTextBox for {{ site.framework }} declaration.
-      <script>
-      $(function() {
-          // The Name() of the MaskedTextBox is used to get its client-side instance.
-          var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
-      });
-      </script>
-
-## See Also
-
+## Next Steps
 * [Basic Usage of the MaskedTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/index)
 {% if site.core %}
 * [Basic Usage of the MaskedTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/maskedtextbox/tag-helper)
+* [MaskedTextBox in Razor Pages]({% slug razorpages_maskedtextboxhelper_aspnetcore %})
 {% endif %}
-* [Using the API of the MaskedTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/api)
-* [Server-Side API](/api/maskedtextbox)
+
+## See Also
+* [Using the API of the MaskedTextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/api)
+* [Knowledge Base Section](/knowledge-base)
+
+

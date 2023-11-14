@@ -793,7 +793,7 @@
             previous: "Zur vorherigen Seite",
             next: "Zur nächsten Seite",
             last: "Zur letzten Seite",
-            of: " von {0} ",
+            of: "von",
             page: "Seite",
             pages: "Seiten"
           },

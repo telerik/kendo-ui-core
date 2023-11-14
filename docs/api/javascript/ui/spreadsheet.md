@@ -72,7 +72,7 @@ The width of the header column in pixels.
 
 Configures the Excel export settings of the Spreadsheet.
 
-### excel.fileName `String` *(default: "Spreadsheet.xslx")*
+### excel.fileName `String` *(default: "Spreadsheet.xlsx")*
 
 Specifies the file name of the exported Excel file.
 
@@ -108,7 +108,7 @@ If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/
 
 ### excel.proxyURL `String` *(default: null)*
 
-The URL of the server side proxy which will stream the file to the end user. A proxy will be used when the browser is not capable of saving files locally. Such browsers are IE version 9 and lower and Safari. The developer is responsible for implementing the server-side proxy. The proxy will return the decoded file with the `Content-Disposition` header set to `attachment; filename="<fileName.xslx>"`.
+The URL of the server side proxy which will stream the file to the end user. A proxy will be used when the browser is not capable of saving files locally. Such browsers are IE version 9 and lower and Safari. The developer is responsible for implementing the server-side proxy. The proxy will return the decoded file with the `Content-Disposition` header set to `attachment; filename="<fileName.xlsx>"`.
 
 The proxy will receive a POST request with the following parameters in the request body:
 * `contentType` - The MIME type of the file.
@@ -830,23 +830,23 @@ The operator type of the criterion.
 
 The supported types vary based on the inferred column data type (inferred):
 
-* `Text`
-    * `contains` - The text contains the value.
-    * `doesnotcontain` - The text does not contain the value.
-    * `startswith` - The text starts with the value.
-    * `endswith` - The text ends with the value.
-* `Date`
-    * `eq` - The date is the same as the value.
-    * `neq` - The date is not the same as the value.
-    * `lt` -  The date is before the value.
-    * `gt` -  The date is after the value.
-* `Number`
-    * `eq` - Is equal to the value.
-    * `neq` - Is not equal to the value.
-    * `gte` - Is greater than or equal to the value.
-    * `gt` - Is greater than the value.
-    * `lte` - Is less than or equal to the value.
-    * `lt` - Is less than the value.
+*   `Text`
+        - `contains` - The text contains the value.
+        - `doesnotcontain` - The text does not contain the value.
+        - `startswith` - The text starts with the value.
+        - `endswith` - The text ends with the value.
+*   `Date`
+        - `eq` - The date is the same as the value.
+        - `neq` - The date is not the same as the value.
+        - `lt` -  The date is before the value.
+        - `gt` -  The date is after the value.
+*   `Number`
+        - `eq` - Is equal to the value.
+        - `neq` - Is not equal to the value.
+        - `gte` - Is greater than or equal to the value.
+        - `gt` - Is greater than the value.
+        - `lte` - Is less than or equal to the value.
+        - `lt` - Is less than the value.
 
 ### sheets.filter.columns.criteria.value `String`
 
@@ -1358,6 +1358,31 @@ A Boolean value which indicates if the sheets-bar will be displayed.
 
 A Boolean value which indicates if the toolbar will be displayed.
 
+Apart from the built-in tools, the Spreadsheet Home, Insert and Data ToolBars fully expose the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: [ {
+                    type: "button",
+                    text: "Button"
+                }, {
+                    type: "button",
+                    text: "Toggle",
+                    togglable: true,
+                    icon: "cancel"
+                }, {
+                    type: "splitButton",
+                    text: "SplitButton",
+                    menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+                } ]
+            }
+        });
+    </script>
+
 ### toolbar.home `Boolean|Array` *(default: true)*
 
 A Boolean value which indicates if the **Home** tab or a collection of tools that will be shown in the **Home** tab will be displayed.
@@ -1760,7 +1785,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/sp
     </script>
 
     <!-- Load JSZIP library to enable Excel export -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
 ### saveAsPDF
 
@@ -1804,7 +1829,7 @@ An `options` object with the same structure as the [`pdf`](/api/javascript/ui/sp
     </script>
 
     <!-- Load Pako library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
 ### sheetByName
 
@@ -1972,7 +1997,7 @@ data.
 
 ### toJSON
 
-Serializes the workbook in the format that is defined in the [configuration](#configuration).
+Serializes the workbook in the format that is defined in the configuration.
 
 Note that this method is unable to serialize embedded images.  To
 properly save images you need to use [`saveJSON`](#methods-saveJSON),

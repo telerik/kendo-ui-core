@@ -638,6 +638,213 @@ var __meta__ = {
         }
     });
 
+    var ClickMoveClick = Observable.extend({
+        init: function(element, options) {
+            var that = this,
+                filter,
+                ns = kendo.guid();
+
+            options = options || {};
+            filter = that.filter = options.filter;
+            that.touches = [];
+            that._maxTouches = 1;
+            that.eventNS = ns;
+            that._downStarted = 0;
+
+            element = $(element).handler(that);
+            Observable.fn.init.call(that);
+
+            extend(that, {
+                element: element,
+                // the touch events lock to the element anyway, so no need for the global setting
+                surface: options.global && ENABLE_GLOBAL_SURFACE ? $(element[0].ownerDocument.documentElement) : $(options.surface || element),
+                stopPropagation: options.stopPropagation,
+                pressed: false
+            });
+
+            that.surface.handler(that)
+                .on(kendo.applyEventMap("move", ns), "_move")
+                .on(kendo.applyEventMap("cancel up", ns), "cancel");
+
+            element.on(kendo.applyEventMap("down", ns), filter, "_down")
+                .on(kendo.applyEventMap("up", ns), filter, "_up");
+
+            that.bind([
+                START,
+                MOVE,
+                END,
+                HOLD,
+                CANCEL,
+                SELECT
+            ], options);
+        },
+
+        _down: function(e) {
+            if (e.which && e.which > 1) {
+                this.cancel();
+            } else {
+                this._downStarted = new Date().getTime();
+                this._downTarget = e.target;
+            }
+        },
+
+        _up: function(e) {
+            var currentMilestone = new Date().getTime(),
+                currentTarget = e.target;
+
+            if ((!e.which || e.which === 1) &&
+                currentMilestone < this._downStarted + CLICK_DELAY &&
+                currentTarget === this._downTarget) {
+                    if (this.touches && this.touches.length > 0) {
+                        this._end(e);
+                    } else {
+                        this._start(e);
+                    }
+
+                    this._preventCancel = true;
+            } else {
+                this.cancel();
+            }
+
+            this._downStarted = 0;
+            this._downTarget = null;
+        },
+
+        destroy: function() {
+            var that = this;
+
+            if (that._destroyed) {
+                return;
+            }
+
+            that._destroyed = true;
+
+            that.element.kendoDestroy(that.eventNS);
+            that.surface.kendoDestroy(that.eventNS);
+            that.element.removeData("handler");
+            that.surface.removeData("handler");
+            that._disposeAll();
+
+            that.unbind();
+            delete that.surface;
+            delete that.element;
+            delete that.currentTarget;
+        },
+
+        capture: function() {
+            ClickMoveClick.current = this;
+        },
+
+        cancel: function() {
+            if (this._preventCancel) {
+                this._preventCancel = false;
+                return;
+            } else if (this.touches && this.touches.length > 0) {
+                this._disposeAll();
+                this.trigger(CANCEL);
+            }
+        },
+
+        notify: function(eventName, data) {
+            data.clickMoveClick = true;
+            return this.trigger(eventName, extend(data, { type: eventName }));
+        },
+
+        _maxTouchesReached: function() {
+            return this.touches.length >= this._maxTouches;
+        },
+
+        _disposeAll: function() {
+            var touches = this.touches;
+
+            while (touches.length > 0) {
+                touches.pop().dispose();
+            }
+        },
+
+        _start: function(e) {
+            var that = this,
+                idx = 0,
+                filter = that.filter,
+                target,
+                touches = getTouches(e),
+                length = touches.length,
+                touch,
+                which = e.which;
+
+            if ((which && which > 1) || (that._maxTouchesReached())) {
+                return;
+            }
+
+            ClickMoveClick.current = null;
+
+            that.currentTarget = e.currentTarget;
+
+            if (that.stopPropagation) {
+                e.stopPropagation();
+            }
+
+            for (; idx < length; idx ++) {
+                if (that._maxTouchesReached()) {
+                    break;
+                }
+
+                touch = touches[idx];
+
+                if (filter) {
+                    target = $(touch.currentTarget);
+                } else {
+                    target = that.element;
+                }
+
+                if (!target.length) {
+                    continue;
+                }
+
+                touch = new Touch(that, target, touch);
+                that.touches.push(touch);
+                touch.press();
+                touch._start(touch);
+            }
+        },
+
+        _move: function(e) {
+            this._eachTouch("move", e);
+        },
+
+        _end: function(e) {
+            this._eachTouch("move", e);
+            this._eachTouch("end", e);
+        },
+
+        _eachTouch: function(methodName, e) {
+            var that = this,
+                dict = {},
+                touches = getTouches(e),
+                activeTouches = that.touches,
+                idx,
+                touch,
+                touchInfo,
+                matchingTouch;
+
+            for (idx = 0; idx < activeTouches.length; idx ++) {
+                touch = activeTouches[idx];
+                dict[touch.id] = touch;
+            }
+
+            for (idx = 0; idx < touches.length; idx ++) {
+                touchInfo = touches[idx];
+                matchingTouch = dict[touchInfo.id];
+
+                if (matchingTouch) {
+                    matchingTouch.x.move(touchInfo.location);
+                    matchingTouch.y.move(touchInfo.location);
+                    matchingTouch[methodName](touchInfo);
+                }
+            }
+        }
+    });
+
     UserEvents.defaultThreshold = function(value) {
         DEFAULT_THRESHOLD = value;
     };
@@ -649,5 +856,7 @@ var __meta__ = {
     kendo.getTouches = getTouches;
     kendo.touchDelta = touchDelta;
     kendo.UserEvents = UserEvents;
+    kendo.ClickMoveClick = ClickMoveClick;
  })(window.kendo.jQuery);
+export default kendo;
 

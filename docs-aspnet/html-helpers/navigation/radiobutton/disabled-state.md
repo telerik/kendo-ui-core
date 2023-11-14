@@ -4,7 +4,7 @@ page_title: Disabled RadioButton
 description: "Enable or disable the Telerik UI RadioButton for {{ site.framework }}."
 previous_url: /helpers/navigation/radiobutton/disabled-state
 slug: disabledstate_radiobutton_aspnetcore
-position: 2
+position: 4
 ---
 
 # Disabled RadioButton
@@ -32,4 +32,4 @@ The following example demonstrates how to use the `.Enable()` configuration opti
 ## See Also
 
 * [RadioButton Server-Side API](/api/radiobutton)
-* [RadioButtonBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
+* [RadioButtonBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/radiobuttonbuilder)

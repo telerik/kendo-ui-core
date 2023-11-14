@@ -301,4 +301,5 @@ var __meta__ = {
 
     ui.plugin(TextArea);
 })(window.kendo.jQuery);
+export default kendo;
 

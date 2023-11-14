@@ -18,7 +18,7 @@ The Breadcrumb provides a set of [default API configuration options](/api/php/Ke
 **Step 1** Make sure you followed all the steps in the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
 **Step 2** Create a [Breadcrumb](/api/php/Kendo/UI/Breadcrumb):
-    
+
         $breadcrumb = new \Kendo\UI\Breadcrumb('breadcrumb');
 
         $rootItem = new \Kendo\UI\BreadcrumbItem();
@@ -79,7 +79,7 @@ The icons rendered for each element after the root icon. It is also clickable an
 
 ### Delimiter Icon
 
-The icons that separate the items of the Breadcrumb. 
+The icons that separate the items of the Breadcrumb.
 
 The example below demonstrates how you can alter the different icons.
 
@@ -113,7 +113,7 @@ The example below demonstrates how you can alter the different icons.
             $breadcrumb->addItem($rootItem);
             $breadcrumb->addItem($firstItem);
             $breadcrumb->addItem($secondItem);
-            $breadcrumb->delimiterIcon("line");
+            $breadcrumb->delimiterIcon("shape-line");
 
             echo $breadcrumb->render();
      ?>
@@ -161,7 +161,7 @@ The below example demonstrates how to enable editing of the Breadcrumb.
 
 ## Event Handling
 
-You can subscribe to the [events](/api/javascript/ui/breadcrumb#events) handler name. 
+You can subscribe to the [events](/api/javascript/ui/breadcrumb#events) handler name.
 
 ### Specify Function Names
 

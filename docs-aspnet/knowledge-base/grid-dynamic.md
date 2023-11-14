@@ -1,8 +1,8 @@
 ---
-title: Dynamic Grid
-description: An example on how to bind the grid to a DataTable with dynamic title and Editors and in Razor Pages.
+title: Implementing a Dynamic Grid
+description: An example on how to bind the {{ site.product }} Grid to a DataTable with dynamic title and Editors in Razor Pages.
 type: how-to
-page_title: Dynamic Grid in ASP.NET Core
+page_title: Implementing a Dynamic Grid in ASP.NET Core
 slug: grid-dynamic
 tags: aspnet, core,  kendo, kendo-ui, grid, edit, operations, caption, title, dynamic, datatype, razor, page
 ticketid: 1455029, 1497302, 1479749, 1478314, 1455574
@@ -21,9 +21,9 @@ component: grid
 
 ## Description
 
-I am trying to bind a DataTable to a ASP.NET Kendo Grid. The main reason for this is that the grid needs to be dynamic with a different number of columns etc. Although I've seen an example of this is MVC, I can't get this to work in ASP.NET Core. I need help with
+I am trying to bind a DataTable to a {{ site.product }} Grid. The main reason for this is that the grid needs to be dynamic with a different number of columns etc. Although I've seen an example of this is MVC, I can't get this to work in ASP.NET Core. I need help with:
 
-1. [Basic dynamic grid binding to DataTable](#basic-dynamic-binding)
+1. [Basic dynamic Grid binding to DataTable](#basic-dynamic-binding)
 1. [Dynamic name of column as per model value from backend](#dynamic-column-titles)
 1. [Dynamic editing](#dynamic-editing)
 1. [Bind to a DataTable in a Razor page](#dynamic-grid-in-razor-page)
@@ -349,7 +349,33 @@ To define editors based on a condition, you can use a switch case as shown below
     }
 ```
 
+
+For a runnable example of a dynamic Grid with editing, check the [UI for ASP.NET Core Examples](https://github.com/telerik/ui-for-aspnet-core-examples).
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [A runnable example of a dynamic grid with editing](https://github.com/telerik/ui-for-aspnet-core-examples)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

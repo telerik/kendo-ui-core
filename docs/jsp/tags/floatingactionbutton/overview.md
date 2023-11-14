@@ -61,7 +61,7 @@ The Kendo UI FloatingActionButton for JSP allows you to customize the appearance
             themeColor="success"
             size="medium">
             <kendo:floatingActionButton-items>
-                <kendo:floatingActionButton-item icon="email" label="Email" click="onItemClick"></kendo:floatingActionButton-item>
+                <kendo:floatingActionButton-item icon="envelop" label="Email" click="onItemClick"></kendo:floatingActionButton-item>
                 <kendo:floatingActionButton-item icon="twitter" label="Twitter" click="onItemClick"></kendo:floatingActionButton-item>
             </kendo:floatingActionButton-items>
         </kendo:floatingActionButton>
@@ -93,7 +93,7 @@ You can subscribe to all [events exposed by Kendo UI FloatingActionButton](/api/
 You are able to reference an existing FloatingActionButton instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [FloatingActionButton API](/api/javascript/ui/floatingactionbutton#methods) to control its behavior.
 
     <kendo:floatingActionButton name="fab"</kendo:floatingActionButton>
-    
+
     // Put this after your Kendo FloatingActionButton tag declaration
     <script>
     $(function() {

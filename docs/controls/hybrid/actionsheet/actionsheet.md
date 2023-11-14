@@ -9,6 +9,10 @@ component: actionsheet_mobile
 
 # ActionSheet Overview
 
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
 The [Hybrid UI ActionSheet widget](https://demos.telerik.com/kendo-ui/m/index#actionsheet/index) displays a set of choices related to a task the user initiates.
 
 ## Getting Started

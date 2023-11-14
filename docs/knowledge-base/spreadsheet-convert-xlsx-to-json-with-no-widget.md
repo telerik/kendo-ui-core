@@ -35,7 +35,7 @@ Use a `kendo.spreadsheet.Workbook` object.
 <br/>
 <div>
   2. Click to print the file JSON on the console
-  <input type="button" value="Click tо read file" id="btn" />
+  <input type="button" value="Click to read file" id="btn" />
 </div>
 
 <script>

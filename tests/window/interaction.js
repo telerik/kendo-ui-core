@@ -198,7 +198,7 @@
 
             dialog.wrapper.find(".k-window-titlebar").trigger("mousedown");
 
-            assert.isOk($("#ddl-list").is(":hidden"));
+            assert.isFalse(ddl.popup.visible());
         });
     });
 })();

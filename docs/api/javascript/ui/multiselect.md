@@ -11,6 +11,10 @@ Represents the Kendo UI MultiSelect widget. Inherits from [Widget](/api/javascri
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
@@ -550,7 +554,7 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
             },
             group: { field: "Country" }
         },
-        label: { 
+        label: {
             content: "Customers",
             floating: true
         }
@@ -1133,7 +1137,7 @@ set a custom a [tagTemplate](/api/javascript/ui/multiselect#configuration-tagTem
                 { id: 3, name: "Bananas" }
             ],
             dataTextField: "name",
-            dataValueField: "id",            
+            dataValueField: "id",
             tagMode: "single"
         });
     </script>

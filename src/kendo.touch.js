@@ -162,4 +162,5 @@ var __meta__ = {
 
     kendo.ui.plugin(Touch);
 })(window.kendo.jQuery);
+export default kendo;
 

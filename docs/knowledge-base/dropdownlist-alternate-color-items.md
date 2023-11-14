@@ -77,4 +77,4 @@ Use the following CSS rules:
 
 ## See Also
 
-* [DropDownList Overview](https://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/overview)
+* [DropDownList Overview](https://docs.telerik.com/kendo-ui/controls/dropdownlist/overview)

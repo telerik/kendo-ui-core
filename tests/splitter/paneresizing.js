@@ -69,8 +69,8 @@
             startResizing(splitter);
 
             // min and max will be calculated with the previous pane as the origin, taking splitbar width into account
-            assert.equal(resizingHandler._min(), 47);
-            assert.equal(resizingHandler._max(), 162);
+            assert.equal(resizingHandler._min(), 43);
+            assert.equal(resizingHandler._max(), 158);
         });
 
         it("resizing constraints calculated from splitbar width", function() {
@@ -119,7 +119,7 @@
             startResizing(splitter);
 
             assert.equal(resizingHandler._min(), 60);
-            assert.equal(resizingHandler._max(), 162);
+            assert.equal(resizingHandler._max(), 158);
         });
 
         it("resizing constraints for middle panes", function() {
@@ -129,11 +129,11 @@
 
             startResizing(splitter, { currentTarget: splitter.dom.find(".k-splitbar").eq(1) });
 
-            assert.equal(resizingHandler._min(), 106);
-            assert.equal(resizingHandler._max(), 302);
+            assert.equal(resizingHandler._min(), 107);
+            assert.equal(resizingHandler._max(), 297);
         });
 
-        it("resizing.stop modifies pane sizes", function() {
+        it("resizing.dragend modifies pane sizes", function() {
             splitter = create();
 
             var resizingHandler = splitter.object.resizing,
@@ -144,13 +144,13 @@
 
             startResizing(splitter, { currentTarget: splitBar, x: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ x: { location: initialSplitBarPosition + 5 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
 
             assert.equal(parseInt(panes[0].offsetWidth), (initialPaneSizes[0] + 5));
             assert.equal(parseInt(panes[1].offsetWidth), (initialPaneSizes[1] - 5));
         });
 
-        it("resizing.stop for middle panes", function() {
+        it("resizing.dragend for middle panes", function() {
             splitter = create({}, 4, { width: 421 });
 
             var resizingHandler = splitter.object.resizing,
@@ -161,13 +161,13 @@
 
             startResizing(splitter, { currentTarget: splitBar, x: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ x: { location: initialSplitBarPosition + 5 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
 
             assert.equal(panes[1].offsetWidth, initialPaneSizes[1] + 5);
             assert.equal(panes[2].offsetWidth, initialPaneSizes[2] - 5);
         });
 
-        it("resizing.stop with variable splitbar widths", function() {
+        it("resizing.dragend with variable splitbar widths", function() {
             splitter = create({}, 4, { width: 421 });
 
             var resizingHandler = splitter.object.resizing,
@@ -182,13 +182,13 @@
 
             startResizing(splitter, { currentTarget: splitBar, x: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ x: { location: initialSplitBarPosition + 5 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
 
             assert.equal(panes[1].offsetWidth, initialPaneSizes[1] + 5);
             assert.equal(panes[2].offsetWidth, initialPaneSizes[2] - 5);
         });
 
-        it("resizing.stop fires splitter resize", function() {
+        it("resizing.dragend fires splitter resize", function() {
             var triggered = false;
 
             splitter = create({ resize: function() { triggered = true; } });
@@ -197,12 +197,12 @@
                 resizingHandler = splitter.object.resizing;
 
             startResizing(splitter);
-            resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: 0 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, x: { location: 0 } });
 
             assert.isOk(triggered);
         });
 
-        it("resizing.stop for panes with constraints", function() {
+        it("resizing.dragend for panes with constraints", function() {
             splitter = create({ panes: [{ min: "50px" }, {}] });
 
             var resizingHandler = splitter.object.resizing,
@@ -212,13 +212,13 @@
 
             startResizing(splitter, { currentTarget: splitBar, x: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ x: { location: 0 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: 0 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, x: { location: 0 } });
 
             assert.equal(panes[0].offsetWidth, 50);
-            assert.equal(panes[1].offsetWidth, 147);
+            assert.equal(panes[1].offsetWidth, 143);
         });
 
-        it("resizing.stop assigns percentage sizes when resizing fluid panes", function() {
+        it("resizing.dragend assigns percentage sizes when resizing fluid panes", function() {
             splitter = create({ panes: [{ size: "100px" }, {}] });
 
             var resizingHandler = splitter.object.resizing,
@@ -228,13 +228,13 @@
 
             startResizing(splitter, { currentTarget: splitBar, x: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ x: { location: initialSplitBarPosition + 5 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar });
 
             assert.isOk(isPixelSize(panes.eq(0).data("pane").size));
             assert.isOk(isFluid(panes.eq(1).data("pane").size));
         });
 
-        it("resizing.stop assigns percentage sizes when resizing fluid panes", function() {
+        it("resizing.dragend assigns percentage sizes when resizing fluid panes", function() {
             splitter = create({ panes: [{}, { size: "100px" }] });
 
             var resizingHandler = splitter.object.resizing,
@@ -244,7 +244,7 @@
 
             startResizing(splitter, { currentTarget: splitBar, x: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ x: { location: initialSplitBarPosition + 5 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: 0 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, x: { location: 0 } });
 
             assert.isOk(isFluid(panes.eq(0).data("pane").size));
             assert.isOk(isPixelSize(panes.eq(1).data("pane").size));
@@ -302,8 +302,8 @@
 
 
             // min and max will be calculated with the previous pane as the origin, taking splitbar height into account
-            assert.equal(resizingHandler._min(), 47);
-            assert.equal(resizingHandler._max(), 162);
+            assert.equal(resizingHandler._min(), 43);
+            assert.equal(resizingHandler._max(), 158);
         });
 
         it("resizing constraints calculated from pane extremes", function() {
@@ -317,7 +317,7 @@
             startResizing(splitter);
 
             assert.equal(resizingHandler._min(), 60);
-            assert.equal(resizingHandler._max(), 162);
+            assert.equal(resizingHandler._max(), 158);
         });
 
         it("resizing constraints for middle panes", function() {
@@ -327,11 +327,11 @@
 
             startResizing(splitter, { currentTarget: splitter.dom.find(".k-splitbar").eq(1) });
 
-            assert.equal(resizingHandler._min(), 106);
-            assert.equal(resizingHandler._max(), 302);
+            assert.equal(resizingHandler._min(), 107);
+            assert.equal(resizingHandler._max(), 297);
         });
 
-        it("resizing.stop modifies pane sizes", function() {
+        it("resizing.dragend modifies pane sizes", function() {
             splitter = create({ orientation: "vertical" });
 
             var resizingHandler = splitter.object.resizing,
@@ -342,13 +342,13 @@
 
             startResizing(splitter, { currentTarget: splitBar, y: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ y: { location: initialSplitBarPosition + 5 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
 
             assert.closeTo(parseInt(panes[0].offsetHeight), initialPaneSizes[0] + 5, 1);
             assert.closeTo(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5, 1);
         });
 
-        it("resizing.stop for middle panes", function() {
+        it("resizing.dragend for middle panes", function() {
             splitter = create({ orientation: "vertical" }, 4, { height: 421 });
 
             var resizingHandler = splitter.object.resizing,
@@ -359,13 +359,13 @@
 
             startResizing(splitter, { currentTarget: splitBar, y: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ y: { location: initialSplitBarPosition + 5 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
 
             assert.closeTo(parseInt(panes[1].offsetHeight), initialPaneSizes[1] + 5, 1);
             assert.closeTo(parseInt(panes[2].offsetHeight), initialPaneSizes[2] - 5, 1);
         });
 
-        it("resizing.stop fires splitter resize", function() {
+        it("resizing.dragend fires splitter resize", function() {
             var triggered = false;
 
             splitter = create({ orientation: "vertical", resize: function() { triggered = true; } });
@@ -374,12 +374,12 @@
                 resizingHandler = splitter.object.resizing;
 
             startResizing(splitter, { currentTarget: splitBar, y: { location: 0 } });
-            resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: 0 } });
+            resizingHandler._resizable._dragend({ currentTarget: splitBar, y: { location: 0 } });
 
             assert.isOk(triggered);
         });
 
-        it("resizing.stop does not resize splitter if Esc key was hit", function() {
+        it("resizing.dragend does not resize splitter if Esc key was hit", function() {
             splitter = create({ orientation: "vertical" });
 
             var resizingHandler = splitter.object.resizing,
@@ -390,13 +390,13 @@
 
             resizingHandler._resizable._start({ currentTarget: splitBar, y: { location: initialSplitBarPosition } });
             resizingHandler._resizable._resize({ y: { location: initialSplitBarPosition + 5 } });
-            resizingHandler._resizable._stop({ keyCode: 27, currentTarget: splitBar });
+            resizingHandler._resizable._dragend({ keyCode: 27, currentTarget: splitBar });
 
             assert.equal(parseInt(panes[0].offsetHeight), initialPaneSizes[0]);
             assert.equal(parseInt(panes[1].offsetHeight), initialPaneSizes[1]);
         });
 
-        it("resizing.stop does not fire resize when cancelling drag with Esc", function() {
+        it("resizing.dragend does not fire resize when cancelling drag with Esc", function() {
             var triggered = false;
 
             splitter = create({ orientation: "vertical" });
@@ -407,7 +407,7 @@
             splitter.object.bind("resize", function() { triggered = true; });
 
             startResizing(splitter, { currentTarget: splitBar, y: { location: 0 } });
-            resizingHandler._resizable._stop({ keyCode: 27, currentTarget: splitBar });
+            resizingHandler._resizable._dragend({ keyCode: 27, currentTarget: splitBar });
 
             assert.isOk(!triggered);
         });

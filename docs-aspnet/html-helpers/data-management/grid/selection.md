@@ -10,7 +10,7 @@ position: 8
 
 By default, the selection functionality of the Telerik UI Grid for {{ site.framework }} is disabled.
 
-> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#changesystemstring) event will now be fired only when the Grid performs selection or deselection.
+> As of the 2022 R3 release, the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#changesystemstring) event will now be fired only when the Grid performs selection or deselection.
 
 ## Getting Started
 
@@ -39,7 +39,7 @@ The Grid supports the following select modes:
 
 You can set the select mode of the Grid to `Multiple` or `Single`. Additionally, the component provides the `Row` and `Cell` select types which allow multiple or single selection of rows or cells.
 
-> If the [`Selectable.Mode`] configuration property is set to `GridSelectionMode.Single`, configuring the [`Select`](/api/Kendo.Mvc.UI.Fluent/GridColumnFactory#select) column of the Grid overrides [`Selectable.Mode`] and sets the selection mode to `Multiple`. 
+> If the [`Selectable.Mode`] configuration property is set to `GridSelectionMode.Single`, configuring the [`Select`](/api/kendo.mvc.ui.fluent/gridcolumnfactory#select) column of the Grid overrides [`Selectable.Mode`] and sets the selection mode to `Multiple`. 
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()

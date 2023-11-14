@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Accessibility
-description: "Get started with the {{ site.product_short }} MediaPlayer by Telerik UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the {{ site.product_short }} MediaPlayer by Telerik UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 previous_url: /helpers/media/mediaplayer/accessibility/overview
 slug: htmlhelpers_mediaplayer_accessibility_overview_aspnetcore
 position: 1
@@ -9,7 +9,7 @@ position: 1
 
 # MediaPlayer Accessibility
 
-The MediaPlayer is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+The MediaPlayer is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 For more information, refer to:
 * [Keyboard navigation in the Telerik UI MediaPlayer for {{ site.framework }}]({% slug htmlhelpers_mediaplayer_accessibility_keyboard_navigation_aspnetcore %})
@@ -23,13 +23,13 @@ The MediaPlayer follows the WAI-ARIA Authoring Practices for implementing the ke
 
 The MediaPlayer is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in Kendo UI for jQuery]({% slug overview_accessibility %}#section-508).
 
-## WCAG 2.1
+## WCAG 2.2
 
 The MediaPlayer supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/).
 
 For more information, refer to:
-* [WCAG 2.1 support by the MediaPlayer (demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer)
-* [WCAG 2.1 compliance in {{ site.product_short }} ]({% slug overview_accessibility %}#wcag-21)
+* [WCAG 2.2 support by the MediaPlayer (demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer)
+* [WCAG 2.2 compliance in {{ site.product_short }} ]({% slug overview_accessibility %}#wcag-21)
 
 ## See Also
 

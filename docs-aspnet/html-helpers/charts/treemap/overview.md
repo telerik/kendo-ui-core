@@ -125,6 +125,33 @@ You can also bind the `DataSource` to remote data. The following example demonst
 ```
 {% endif %}
 
+## Setting Custom Color Ranges
+
+You can customize the TreeMap through the `Colors` configuration option by adding the desired color ranges:
+
+```HtmlHelper
+    @(Html.Kendo().TreeMap()
+        .Name("treeMap")
+        .DataSource(dataSource => dataSource
+            .Read(read => read
+                .Action("Population_Read", "TreeMap")
+            )
+            .Model(m => m.Children("Items"))
+        )
+        .Colors(color =>
+        {
+            color.AddRange("#0072c6", "#cbe2f3");
+            color.AddRange("#5db2ff", "#deeffe");
+            color.AddRange("#ff8f32", "#cbe7d0");
+            color.AddRange("#82ba00", "#e5f0cb");
+            color.AddRange("#ff8f32", "#fee8d5");
+            color.AddRange("#9e0a61", "#eccedf");
+            color.AddRange("#ac193d", "#eed0d7");
+        })
+        .ValueField("Value")
+        .TextField("Name")
+    )
+```
 
 ## Events
 
@@ -215,4 +242,7 @@ To reference an existing Kendo UI TreeMap instance, use the [`jQuery.data()`](ht
 
 * [Basic Usage of the TreeMap HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap/index)
 * [Basic Usage of the TreeMap TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/tag-helper)
+{% if site.core %}
+* [TreeMap in Razor Pages]({% slug razorpages_treemap_aspnetcore %})
+{% endif %}
 * [Server-Side API](/api/treemap)

@@ -1,6 +1,6 @@
 ---
 title: Adding Tooltips to Buttons
-description: An example on how to set a tooltip for a Button in {{ site.product }}.
+description: An example on how to set a Tooltip for a Button in {{ site.product }}.
 type: how-to
 page_title: Adding Tooltips to Buttons
 slug: button-add-tooltip-hover-text
@@ -24,7 +24,7 @@ res_type: kb
 
 ## Description
 
-How can I add a {{ site.product }}Tooltip to a Button?
+How can I add a {{ site.product }} Tooltip to a Button?
 
 ## Solution
 

@@ -116,4 +116,4 @@ You can reference a hybrid SplitView instance by using the [`jQuery.data()`](htt
 
 ## See Also
 
-* [Hybrid SplitViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
+* [Hybrid SplitViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilesplitviewbuilder)

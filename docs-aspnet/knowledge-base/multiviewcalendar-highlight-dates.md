@@ -1,8 +1,8 @@
 ---
-title: Highlight dates in the MultiViewCalendar
-description: An example on how to highlight specific dates in the MultiViewCalendar.
+title: Highlighting Dates in the MultiViewCalendar
+description: How can I highlight specific dates in the MultiViewCalendar? Find the solution in the Knowledge Base section of the {{ site.product }} documentation.
 type: how-to
-page_title: Highlight dates in the MultiViewCalendar
+page_title: Highlighting Dates in the MultiViewCalendar
 slug: multiviewcalendar-highlight-dates
 tags: aspnet, mvc, core, dotnet-core, kendo, kendo-ui, multiviewcalendar, date, dates, highlight
 res_type: kb
@@ -14,13 +14,13 @@ component: multiviewcalendar
 <table>
  <tr>
   <td>Product</td>
-  <td>MultiViewCalendar for Progress® Telerik® UI for ASP.NET MVC</td>
+  <td>{{ site.product }} MultiViewCalendar</td>
  </tr>
 </table>
 
 ## Description
 
-How can I highlight some of the dates in the MultiViewCalendar?
+How can I highlight some of the dates in the {{ site.product }} MultiViewCalendar?
 
 ## Solution
 
@@ -89,3 +89,31 @@ You can use the following approach:
 	}
 </style>
 ```
+
+## More {{ site.framework }} MultiViewCalendar Resources
+
+* [{{ site.framework }} MultiViewCalendar Documentation]({%slug overview_multiviewcalendar_htmlhelper_aspnetcore%})
+
+* [{{ site.framework }} MultiViewCalendar Demos](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar)
+
+{% if site.core %}
+* [{{ site.framework }} MultiViewCalendar Product Page](https://www.telerik.com/aspnet-core-ui/core-multiviewcalendar)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} MultiViewCalendar Product Page](https://www.telerik.com/aspnet-mvc/mvc-multiviewcalendar)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the MultiViewCalendar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Server-Side API Reference of the MultiViewCalendar for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiviewcalendar)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

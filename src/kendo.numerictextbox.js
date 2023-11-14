@@ -131,12 +131,6 @@ var __meta__ = {
                  that.readonly(element.is("[readonly]"));
              }
 
-             that.angular("compile", function() {
-                 return {
-                     elements: that._text.get()
-                 };
-             });
-
              that._label();
              that._ariaLabel(that._text);
              that._applyCssClasses();
@@ -985,4 +979,5 @@ var __meta__ = {
 
     ui.plugin(NumericTextBox);
 })(window.kendo.jQuery);
+export default kendo;
 

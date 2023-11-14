@@ -8,7 +8,7 @@ position: 5
 
 # Events
 
-The DropDownButton component [exposes the `Click()`, `Open()`, and `Close()` events](/api/Kendo.Mvc.UI.Fluent/DropDownButtonEventBuilder) that you can handle and further customize the functionality of the component.
+The DropDownButton component [exposes the `Click()`, `Open()`, and `Close()` events](/api/kendo.mvc.ui.fluent/dropdownbuttoneventbuilder) that you can handle and further customize the functionality of the component.
 
 For a complete example on basic DropDownButton events, refer to the [demo on using the events of the DropDownButton](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/events).
 
@@ -76,7 +76,7 @@ For a complete example on basic DropDownButton events, refer to the [demo on usi
 ## Next Steps
 
 * [Using the DropDownButton Events (Demo)](https://demos.telerik.com/aspnet-core/dropdownbutton/events)
-* [API for Configuring DropDownButton events](/api/Kendo.Mvc.UI.Fluent/DropDownButtonEventBuilder)
+* [API for Configuring DropDownButton events](/api/kendo.mvc.ui.fluent/dropdownbuttoneventbuilder)
 
 ## See Also
 

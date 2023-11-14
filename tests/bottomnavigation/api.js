@@ -44,23 +44,23 @@
         it("setOptions method toggles themeColor classes", function() {
             var bottomNav = setup();
 
-            assert.isOk(bottomNav.element.hasClass("k-bottom-nav-primary"));
+            assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat-primary"));
 
             bottomNav.setOptions({
                 themeColor: "secondary"
             });
 
-            assert.isFalse(bottomNav.element.hasClass("k-bottom-nav-primary"));
-            assert.isOk(bottomNav.element.hasClass("k-bottom-nav-secondary"));
+            assert.isFalse(bottomNav.element.hasClass("k-bottom-nav-flat-primary"));
+            assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat-secondary"));
         });
 
-        it("setOptions method handles fill classes", function() {
+        it("setOptions method handles fillMode classes", function() {
             var bottomNav = setup();
 
             assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat"));
 
             bottomNav.setOptions({
-                fill: "solid"
+                fillMode: "solid"
             });
 
             assert.isFalse(bottomNav.element.hasClass("k-bottom-nav-flat"));

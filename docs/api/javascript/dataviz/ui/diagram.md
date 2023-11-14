@@ -5046,7 +5046,7 @@ A function that returns a visual element to render for a given shape. The follow
 * [Image](/api/javascript/dataviz/diagram/image)
 * [Layout](/api/javascript/dataviz/diagram/layout)
 
-> The origin of the visual bounding box has to be `(0, 0)`. If you have a complex path which coordinates cannot be easily adjusted, then position the element as demonstrated in [this](/controls/diagrams-and-maps/diagram/how-to/adjust-path-origin) example.
+> The origin of the visual bounding box has to be `(0, 0)`. If you have a complex path which coordinates cannot be easily adjusted, then position the element as demonstrated in [this](/controls/diagram/how-to/adjust-path-origin) example.
 
 #### Example - declaring a custom visual for Diagram shapes
     <div id="diagram"></div>

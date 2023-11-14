@@ -3,7 +3,7 @@ title: Remote Binding
 page_title: Remote Data Binding
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} featuring a built-in DataSource which allows you to bind the Diagram to remote data."
 slug: htmlhelpers_diagram_aspnetcore_binding
-position: 2
+position: 1
 ---
 
 # Remote Binding
@@ -29,6 +29,21 @@ To bind the Diagram to remote data, specify the `DataSource` option. You can eit
             // Other configuration.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-diagram name="diagram" on-data-bound="onDataBound">
+        <hierarchical-datasource server-operation="false">
+            <transport>
+                <read url="@Url.Action("_OrgChart", "Diagram")" />
+            </transport>
+            <schema>
+                <hierarchical-model children="Items"></hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+        <shape-defaults visual="visualTemplate"></shape-defaults>
+    </kendo-diagram>
+```
+{% endif %}
 ```Controller
         public ActionResult _OrgChart()
         {
@@ -64,6 +79,26 @@ To create a network of visuals and customize the appearance of the Diagram, set 
               .Events(events => events.DataBound("onDataBound"))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-diagram name="diagram" on-data-bound="onDataBound">
+        <hierarchical-datasource server-operation="false">
+            <transport>
+                <read url="@Url.Action("_OrgChart", "Diagram")" />
+            </transport>
+            <schema>
+                <hierarchical-model children="Items"></hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+        <editable enabled="false" />
+        <layout type="DiagramLayoutType.Layered"></layout>
+        <shape-defaults visual="visualTemplate"></shape-defaults>
+        <connection-defaults>
+            <stroke color="#979797" width="2" />
+        </connection-defaults>
+    </kendo-diagram>
+```
+{% endif %}
 ```JavaScript
         <script>
             function visualTemplate(options) {

@@ -19,6 +19,9 @@ The supported data-binding approaches are:
 * Model binding
     1. [Local binding]({% slug htmlhelpers_combobox_modelbinding_aspnetcore %}#local-data)
     2. [Remote binding]({% slug htmlhelpers_combobox_modelbinding_aspnetcore %}#remote-data)
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_combobox_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

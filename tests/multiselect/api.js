@@ -520,6 +520,18 @@
             assert.equal(multiselect.tagList.children(".k-chip[class*=k-disabled]").length, 0);
         });
 
+        it("enable(true) enables chips added after enable(false)", function() {
+            popuplateSelect();
+            var multiselect = new MultiSelect(select);
+
+            multiselect.enable(false);
+            multiselect.value([0, 1]);
+
+            multiselect.enable(true);
+            multiselect.tagList.find(".k-i-x-circle,.k-svg-i-x-circle").eq(0).click();
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+        });
+
         it("MultiSelect does not pass placeholder on search", function() {
             var multiselect = new MultiSelect(select, {
                 autoBind: false,

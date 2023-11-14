@@ -17,6 +17,7 @@ var __meta__ = {
         Widget = ui.Widget,
         keys = kendo.keys,
         parse = kendo.parseDate,
+        encode = kendo.htmlEncode,
         adjustDST = kendo.date.adjustDST,
         weekInYear = kendo.date.weekInYear,
         Selectable = kendo.ui.Selectable,
@@ -74,25 +75,25 @@ var __meta__ = {
             century: 3
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
-        CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size }) => `<div class="k-header k-hstack">
-            <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: "caret-alt-left", iconClass: "k-button-icon" })}</span></a>
+        CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size, isRtl }) => `<div class="k-header k-hstack">
+            <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</span></a>
             <a tabindex="-1" href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>
-            <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: "caret-alt-right", iconClass: "k-button-icon" })}</a>
+            <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</a>
         </div>`,
-        MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages }) => `<div class="k-calendar-header k-hstack">
+        MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages, isRtl }) => `<div class="k-calendar-header k-hstack">
             <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-flat-base k-rounded-md">
                 <span class="k-button-text"></span>
             </button>
             <span class="k-spacer"></span>
             <span class="k-calendar-nav">
-                <button tabindex="-1" ${actionAttr}="prev" class="k-calendar-nav-prev k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
-                    ${kendo.ui.icon({ icon: "chevron-left", iconClass: "k-button-icon" })}
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
+                    ${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}
                 </button>
                 <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat k-button-flat-primary k-rounded-md">
-                    <span class="k-button-text">${messages.today}</span>
+                    <span class="k-button-text">${kendo.htmlEncode(messages.today)}</span>
                 </button>
-                <button tabindex="-1" ${actionAttr}="next" class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
-                    ${kendo.ui.icon({ icon: "chevron-right", iconClass: "k-button-icon" })}
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
+                    ${kendo.ui.icon({ icon: `chevron-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}
                 </button>
             </span>
         </div>`;
@@ -429,7 +430,7 @@ var __meta__ = {
                 title.html('<span class="k-button-text">' + currentView.title(value, min, max, culture) + '</span>');
 
                 if (that.options.messages.parentViews && that._view.name !== CENTURY) {
-                    title.attr("title", that.options.messages.navigateTo + that.options.messages.parentViews[that._view.name]);
+                    title.attr("title", encode(that.options.messages.navigateTo + that.options.messages.parentViews[that._view.name]));
                 } else {
                     title.removeAttr("title");
                 }
@@ -535,6 +536,10 @@ var __meta__ = {
                 that._changeView = !value || view && view.compare(value, that._current) !== 0;
                 that.navigate(value);
             }
+        },
+
+        isRtl: function() {
+            return kendo.support.isRtl(this.wrapper);
         },
 
         _aria: function() {
@@ -764,7 +769,7 @@ var __meta__ = {
                 min = that.options.min,
                 max = that.options.max,
                 currentValue = new DATE(+that._current),
-                isRtl = kendo.support.isRtl(that.wrapper),
+                isRtl = that.isRtl(),
                 isDisabled = that.options.disableDates,
                 value, prevent, method, temp;
 
@@ -1209,7 +1214,8 @@ var __meta__ = {
             if (!element.find(HEADERSELECTOR)[0]) {
                 element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, {
                     actionAttr: kendo.attr("action"),
-                    size: kendo.getValidCssClass("k-button-", "size", that.options.size)
+                    size: kendo.getValidCssClass("k-button-", "size", that.options.size),
+                    isRtl: that.isRtl()
                 })));
             }
 
@@ -1472,7 +1478,7 @@ var __meta__ = {
                 html += '<thead class="k-calendar-thead"><tr role="row" class="k-calendar-tr">';
 
                 if (isWeekColumnVisible) {
-                    html += '<th scope="col" class="k-calendar-th k-alt">' + options.messages.weekColumnHeader + '</th>';
+                    html += '<th scope="col" class="k-calendar-th k-alt">' + encode(options.messages.weekColumnHeader) + '</th>';
                 }
 
                 for (; idx < 7; idx++) {
@@ -2129,4 +2135,5 @@ var __meta__ = {
 
     kendo.calendar = calendar;
 })(window.kendo.jQuery);
+export default kendo;
 

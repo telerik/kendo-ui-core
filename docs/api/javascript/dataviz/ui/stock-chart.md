@@ -1238,6 +1238,15 @@ The text of the title.
 
 If set to `true` the chart will display the pane title. By default the pane title is visible.
 
+### navigator.position `String` *(default: "bottom")*
+
+The position of the navigator.
+
+The supported values are:
+
+* "top" - the navigator is positioned on the top
+* "bottom" - the navigator is positioned on the bottom (default)
+
 ### navigator.series `Array`
 
 Array of series definitions.

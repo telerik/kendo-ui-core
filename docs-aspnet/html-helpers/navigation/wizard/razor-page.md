@@ -1,14 +1,18 @@
 ---
-title:  Razor Page
-page_title: Configure a Wizard in a Razor Page.
+title:  Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Wizard component for {{ site.framework }} in a Razor Pages."
 slug: htmlhelpers_wizard_razorpage_aspnetcore
 position: 5
 ---
 
-# Razor Page
+# Wizard in Razor Pages
 
-This article describes how to configure the Telerik UI Wizard for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+
+You can seamlessly integrate the Telerik UI Wizard for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Wizard component in a Razor Pages scenario.
 
 ## Standard Submit
 

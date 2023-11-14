@@ -542,21 +542,21 @@ if (kendo.ui.FileManager) {
             },
             moveConfirm: {
                 title: ' ',
-                content: '<p style=\'text-align: center;\'>Czy chcesz przenieść zaznaczone pliki, czy skopiować?</p>',
+                content: '<p class=\'k-text-center\'>Czy chcesz przenieść zaznaczone pliki, czy skopiować?</p>',
                 okText: 'Kopiuj',
                 cancel: 'Przenieś',
                 close: 'Zamknij'
             },
             deleteConfirm: {
                 title: 'Potwierdź usunięcie',
-                content: '<p style=\'text-align: center;\'>Czy na pewno chcesz usunąć zaznaczone pliki?<br/>Nie ma możliwości cofnięcia tej operacji.</p>',
+                content: '<p class=\'k-text-center\'>Czy na pewno chcesz usunąć zaznaczone pliki?<br/>Nie ma możliwości cofnięcia tej operacji.</p>',
                 okText: 'Usuń',
                 cancel: 'Anuluj',
                 close: 'Zamknij'
             },
             renamePrompt: {
                 title: 'Zmień nazwę',
-                content: '<p style=\'text-align: center;\'>Wprowadź nową nazwę pliku</p>',
+                content: '<p class=\'k-text-center\'>Wprowadź nową nazwę pliku</p>',
                 okText: 'Zastosuj',
                 cancel: 'Anuluj',
                 close: 'Zamknij'

@@ -74,7 +74,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 
     <script>
       let encode = kendo.htmlEncode;
-      
+
       $("#grid").kendoGrid({
         dataSource: [ { name: "Jane Doe", age: 30 }, { name: "John Doe", age: 33 } ],
         altRowTemplate: ({ uid, name, age }) => `<tr data-uid="${uid}"><td colspan="2"><strong>${encode(name)} - </strong><strong>${encode(age)}</strong></td></tr>`
@@ -180,29 +180,28 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
             { firstName: "Jane", lastName: "Doe", age: 30 },
             { firstName: "John", lastName: "Doe", age: 33 }
           ]
+        },
+        groupable: true,
+        scrollable: false,
+        dataSource: {
+          data: [
+            { firstName: "Jane", lastName: "Doe", age: 30 },
+            { firstName: "John", lastName: "Doe", age: 33 }
+          ],
+          group: {
+            field: "age", aggregates: [
+              { field: "age", aggregate: "count" },
+              { field: "age", aggregate: "min"},
+              { field: "age", aggregate: "max" }
+            ]
+          }
         }
-      ],
-      groupable: true,
-      scrollable: false,
-      dataSource: {
-        data: [
-          { firstName: "Jane", lastName: "Doe", age: 30 },
-          { firstName: "John", lastName: "Doe", age: 33 }
-        ],
-        group: {
-          field: "age", aggregates: [
-            { field: "age", aggregate: "count" },
-            { field: "age", aggregate: "min"},
-            { field: "age", aggregate: "max" }
-          ]
-        }
-      }
-    });
+      });
     </script>
 
 > Check [Aggregates](https://demos.telerik.com/kendo-ui/grid/aggregates) for a live demo.
 
-### columns.attributes `Object`
+### columns.attributes `Object|Function`
 
 [`HTML attributes`](https://www.w3schools.com/tags/ref_attributes.asp) of the table cell (`<td>`) rendered for the column.
 
@@ -217,7 +216,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
         field: "name",
         title: "Name",
         attributes: {
-          "class": "table-cell k-text-right",
+          "class": "table-cell !k-text-right",
           style: "font-size: 14px"
         }
       } ],
@@ -226,6 +225,36 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
     </script>
 
 The table cells would look like this: `<td class="table-cell" style="text-align: right; font-size: 14px">...</td>`.
+
+> Since R2 2023 attributes logic has changed due to Kendo templates evaluation rendering updates. Now we deliver a new attributes overload that accepts a single string parameter and the name of the JS handler that returns the attributes.
+
+#### Example - set cells background color using a dynamic property value
+
+    <div id="grid"></div>
+    <script>
+      let ageAttributes = (data) => {
+        return { style: `background-color: ${data.color} ` }
+      }
+
+      $("#grid").kendoGrid({
+        columns: [
+          {
+            field: "name",
+            title: "Name",
+            attributes: { "class": "table-cell !k-text-right" }
+          },
+          {
+            field: "age",
+            title: "Age",
+            attributes: ageAttributes
+          }
+        ],
+        dataSource: [
+          { name: "Anne Smith", age: 30, color: "#FFD68A" },
+          { name: "John Doe", age: 22, color: "#B2AC88" }
+        ]
+      });
+    </script>
 
 ### columns.columnMenu `Boolean` *(default: true)*
 
@@ -1839,7 +1868,18 @@ An html input element that will be rendered in the filter menu.
         }
       } ],
       filterable: true,
-      dataSource: [ { date: new Date() }, { date: new Date() } ]
+      dataSource: {
+          data:[ { date: new Date() }, { date: new Date() } ],
+          schema: {
+            model: {
+              fields: {
+                date: {
+                  type: "date"
+                }
+              }
+            }
+          }
+        }
     });
     </script>
 
@@ -1857,7 +1897,18 @@ An html input element that will be rendered in the filter menu.
         }
       } ],
         filterable: true,
-        dataSource: [ { date: new Date() }, { date: new Date() } ]
+        dataSource: {
+          data:[ { date: new Date() }, { date: new Date() } ],
+          schema: {
+            model: {
+              fields: {
+                date: {
+                  type: "date"
+                }
+              }
+            }
+          }
+        }
     });
     </script>
 
@@ -2535,7 +2586,7 @@ HTML attributes of the column header. The grid renders a table header cell (`<th
       columns: [{
         field: "name",
         headerAttributes: {
-          "class": "table-header-cell k-text-right",
+          "class": "table-header-cell !k-text-right",
           style: "font-size: 14px"
         }
       }],
@@ -2639,7 +2690,7 @@ If set to `true` the column will be hidden when the grid is groupd via user iter
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked (frozen) in the grid. Also see [Locked Columns](/controls/data-management/grid/columns/locked-columns) help section for additional information.
+If set to `true` the column will be displayed as locked (frozen) in the grid. Also see [Locked Columns](/controls/grid/columns/locked-columns) help section for additional information.
 
 > **Important**: Row template and detail features are not supported in combination with column locking. If [multi-column headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to lock (freeze) a column at the topmost level only.
 
@@ -2764,7 +2815,7 @@ If set to `true` the grid will render a select column with checkboxes in each ce
 
 > Setting the [`columns.selectable`](/api/javascript/ui/grid/configuration/columns.selectable) to `true` overrides the [`selectable.mode`](/api/javascript/ui/grid/configuration/selectable.mode) configuration property if it is set to `"single"`.
 
-More about the Grid Selection feature you can find in [this documentation article](/controls/data-management/grid/selection).
+More about the Grid Selection feature you can find in [this documentation article](/controls/grid/selection).
 
 #### Example - enable multi-row selection by adding a select column with checkboxes
 
@@ -2899,7 +2950,7 @@ Determines the inital (from un-sorted to sorted state) sort direction. The suppo
 
 ### columns.sticky `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as sticky in the grid. Also see [Sticky Columns](/controls/data-management/grid/columns/sticky-columns) help section for additional information.
+If set to `true` the column will be displayed as sticky in the grid. Also see [Sticky Columns](/controls/grid/columns/sticky-columns) help section for additional information.
 
 > **Important**: Row template and detail features are not supported in combination with sticky columns. If [multi-column headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to stick a column at the topmost level only.
 
@@ -2956,7 +3007,7 @@ For additional and more complex examples that utilize column templates, visit th
     $("#grid").kendoGrid({
       columns: [ {
         field: "name",
-        template: ({ name }) => `<strong>${kendo.htmlEncode(name)}</strong>`
+        template: ({ name }) => `<strong>${kendo.htmlEncode(name)}</strong>` //name is the field name
       }],
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
@@ -3004,7 +3055,7 @@ The width of the column. Numeric values are treated as pixels. The width option 
 * `em` sets the width relative to the font-size of the grid's element width
 * `rem` sets the width relative to font-size of the root element
 
-**For more important information, please refer to [Column Widths](/controls/data-management/grid/columns/widths)**.
+**For more important information, please refer to [Column Widths](/controls/grid/columns/widths)**.
 
 Grid options, including column widths, can be set programmatically after Grid initialization with the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
 
@@ -3145,6 +3196,31 @@ Can be set to a JavaScript object which represents the column menu configuration
     </script>
 
 > Check [Column menu](https://demos.telerik.com/kendo-ui/grid/column-menu) for a live demo.
+
+### columnMenu.autoSize `Boolean` *(default: false)*
+
+If set to `true` the column menu would allow the user to fit one or all columns to the width of their content. This setting is available only when the `tabbed` [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is used.
+
+#### Example - disable column selection
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      columnMenu: {
+        autoSize: true,
+        componentType: "tabbed"
+      },
+      sortable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
 
 ### columnMenu.columns `Boolean|Object` *(default: true)*
 
@@ -3294,6 +3370,7 @@ If set to `true` the column menu would allow the user to filter the grid. By def
 
 * `"classic"` - Uses the standard rendering of the column menu.
 * `"modern"` - Uses new rendering with a fresh and modern look and feel.
+* `"tabbed"` - Uses the rendering of the `"modern"` menu, but splits its content into different tabs.
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
@@ -3355,7 +3432,7 @@ The text messages displayed in the column menu. Use it to customize or localize 
 
 The text of the button which applies the columns filter.
 
-> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern`.
+> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
 
 #### Example - column menu apply button text
 
@@ -3371,6 +3448,68 @@ The text of the button which applies the columns filter.
         componentType: "modern",
         messages: {
           apply: "Apply Columns"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.autoSizeColumn `String` *(default: "Autosize This Column")*
+
+The text of the autosize single column option.
+
+> The autosize option is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
+
+#### Example - column menu apply button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
+      ],
+      columnMenu: {
+        componentType: "tabbed",
+        autoSize: true,
+        messages: {
+          autoSizeColumn: "Custom Autosize this column"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.autoSizeAllColumns `String` *(default: "Autosize All Columns")*
+
+The text of the autosize single column option.
+
+> The autosize option is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
+
+#### Example - column menu apply button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
+      ],
+      columnMenu: {
+        componentType: "tabbed",
+        autoSize: true,
+        messages: {
+          autoSizeAllColumns: "Custom Autosize all columns"
         }
       },
       sortable: true,
@@ -3487,11 +3626,27 @@ The text message displayed in the column menu for locking a column.
     });
     </script>
 
+### columnMenu.messages.moveNext `String` *(default: "Move next")*
+
+The text message that is displayed for the Move to next position column menu item.
+
+### columnMenu.messages.movePrev `String` *(default: "Move previous")*
+
+The text message that is displayed for the Move to previous position column menu item.
+
+### columnMenu.messages.groupColumn `String` *(default: "Group column")*
+
+The text message that is displayed for the Group column menu item.
+
+### columnMenu.messages.ungroupColumn `String` *(default: "Ungroup column")*
+
+The text message that is displayed for the Ungroup column menu item.
+
 ### columnMenu.messages.reset `String` *(default: "Reset")*
 
 The text of the button which resets the columns filter.
 
-> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern`.
+> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
 
 #### Example - column menu reset button text
 
@@ -3702,6 +3857,254 @@ The text message displayed in the column menu for unlocking a column.
     });
     </script>
 
+### contextMenu `Object|Boolean` *(default: false)*
+
+Configures the ContextMenus of the Grid.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: true,
+            editable: true,
+            sortable: true,
+            draggable: true,
+            reorderable: true,
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+    </script>
+
+### contextMenu.body `Array`
+
+Configures the items of the ContextMenu for the table body element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc". 
+
+You can also specify a custom item and accosiate it with a command.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                body: [
+                    "exportPDF",
+                    "exportExcel",
+                    { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                ]
+                // You can also concat to the default tools
+                // body: kendo.ui.grid.defaultBodyContextMenu.concat([
+                //     { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                // ])
+            },
+            editable: true,
+            sortable: true,
+            draggable: true,
+            reorderable: true,
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["CustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function() {
+                var that = this,
+                    grid = that.grid;
+
+                grid.saveAsPDF();
+            }
+        });
+    </script>
+
+
+### contextMenu.body.name `String`
+Specifies the name of the item.
+
+### contextMenu.body.text `String`
+Specifies the text of the item.
+
+### contextMenu.body.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.body.command `String`
+Specifies the command of the item.
+
+### contextMenu.groups `Array`
+
+Configures the items of the ContextMenu for the group elements in the Grid header. Those are some valid predifined tools: "separator", "moveGroupPrevious", "moveGroupNext". 
+
+You can also specify a custom item and accosiate it with a command.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                groups: [
+                    "moveGroupPrevious",
+                    "moveGroupNext",
+                    { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                ]
+                // You can also concat to the default tools
+                // body: kendo.ui.grid.defaultGroupsContextMenu.concat([
+                //     { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                // ])
+            },
+            groupable: true,
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["CustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function() {
+                var that = this,
+                    grid = that.grid;
+
+                // e.g., clear groups
+                grid.dataSource.group([]);
+            }
+        });
+    </script>
+
+
+### contextMenu.groups.name `String`
+Specifies the name of the item.
+
+### contextMenu.groups.text `String`
+Specifies the text of the item.
+
+### contextMenu.groups.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.groups.command `String`
+Specifies the command of the item.
+
+### contextMenu.head `Array`
+
+Configures the items of the ContextMenu for the table head element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc". 
+
+You can also specify a custom item and accosiate it with a command.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                head: [
+                    "sortAsc",
+                    "sortDesc",
+                    "exportExcel",
+                    { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                ]
+                // You can also concat to the default tools
+                // head: kendo.ui.grid.defaultHeadContextMenu.concat([
+                //     { name: "MyCustomCommand", text: "My Custom Command", icon: "gear", command: "CustomCommand" }
+                // ])
+            },
+            editable: true,
+            sortable: true,
+            draggable: true,
+            reorderable: true,
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["CustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function() {
+                var that = this,
+                    grid = that.grid;
+
+                grid.saveAsPDF();
+            }
+        });
+    </script>
+
+
+### contextMenu.head.name `String`
+Specifies the name of the item.
+
+### contextMenu.head.text `String`
+Specifies the text of the item.
+
+### contextMenu.head.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.head.command `String`
+Specifies the command of the item.
+
+### contextMenu.close `Function`
+
+Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.open `Function`
+
+Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.activate `Function`
+
+Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.deactivate `Function`
+
+Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.select `Function`
+
+Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
@@ -4124,6 +4527,9 @@ If set to `true` the user can delete data items from the grid by clicking the "d
 The editing mode to use. The supported editing modes are "incell", "inline" and "popup".
 
 > The "inline" and "popup" editing modes are triggered by the "edit" column command. Thus it is required to have a column with an "edit" command.
+
+> As of Kendo UI version R3 2023, the `incell` editing of cells on mobile devices is activated on `double tap` of a Grid cell.
+
 
 #### Example - specify inline editing mode
 
@@ -7257,7 +7663,7 @@ Can be set to a string `phone` which will force the widget to use adaptive rende
 
 ### navigatable `Boolean` *(default: false)*
 
-If set to `true` the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
+If set to `true` the user could navigate the component using the keyboard navigation. By default keyboard navigation is disabled.
 
 #### Example - enable keyboard navigation
 
@@ -8042,10 +8448,9 @@ Configures the Kendo UI Grid PDF export settings.
 Exports all grid pages, starting from the first one.
 
 > **Note:** Chrome is known to crash when generating very large PDF-s.  A solution to this is to include the
-> [Pako](http://nodeca.github.io/pako/) library, which is bundled with Kendo as `pako_deflate.min.js`.  Simply loading
-> this library with a `<script>` tag will enable compression in PDF, e.g.:
+> [Pako](http://nodeca.github.io/pako/) library.  Simply loading this library with a `<script>` tag will enable compression in PDF, e.g.:
 >
-> `<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>`
+> `<script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>`
 >
 > The allPages export is not supported when virtual scrolling is enabled.
 
@@ -8602,7 +9007,7 @@ Multi-level headers allow reordering only in same level.
 
 > Check [Column reordering](https://demos.telerik.com/kendo-ui/grid/column-reordering) for a live demo.
 
-### reorderable.rows `Boolean` *(default:false)*
+### reorderable.rows `Boolean|Object` *(default:false)*
 
 If set to `true` the user could reorder the rows by dragging them. By default reordering for rows is disabled. If the [selectable](/api/javascript/ui/grid/configuration/selectable) option is enabled for rows only selected rows will can be dragged and reordered.
 
@@ -8627,12 +9032,37 @@ If set to `true` the user could reorder the rows by dragging them. By default re
     });
     </script>
 
-### resizable `Boolean` *(default:false)*
+### reorderable.rows.clickMoveClick `Boolean` *(default:true)*
 
-If set to `true`, users can resize columns by dragging the edges (resize handles) of their header cells. As of Kendo UI Q1 2015, users can also auto-fit a column by double-clicking
-its resize handle. In this case the column will assume the smallest possible width, which allows the column content to fit without wrapping.
+If set to `true` (default), when there is a drag column for the items in the Grid, the user will be allowed to reorder rows via click move click interaction as an alternative of the drag and drop one.
 
-By default, column resizing is disabled.
+#### Example - enable column reordering
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { draggable: true, width: "40px" },
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { id:1, name: "Jane Doe", age: 30 },
+        { id:2, name: "John Doe", age: 33 }
+      ],
+      reorderable: {
+        rows: {
+          clickMoveClick: false
+        }
+      }
+    });
+    </script>
+
+### resizable `Object|Boolean` *(default:false)*
+
+If object is used, it allows configuration of `resizable.columns` and `resizable.rows`. If set to `true`, only column resizing will be enabled.
+
+By default, column and row resizing is disabled.
 
 #### Example - enable column resizing
 
@@ -8654,6 +9084,61 @@ By default, column resizing is disabled.
 > Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
 the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
+### resizable.columns `Boolean` *(default:false)*
+
+If set to `true`, users can resize columns by dragging the edges (resize handles) of their header cells. As of Kendo UI Q1 2015, users can also auto-fit a column by double-clicking its resize handle. In this case the column will assume the smallest possible width, which allows the column content to fit without wrapping.
+
+By default, column resizing is disabled.
+
+#### Example - enable column resizing
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      resizable: {
+        columns: true
+      }
+    });
+    </script>
+
+> Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
+the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
+
+### resizable.rows `Boolean` *(default:false)*
+
+If set to `true`, users can resize Grid rows by dragging their bottom edge. Users can also auto-fit a row by double-clicking its bottom edge. In this case the row will assume the smallest possible height, which allows the cells content to be fully displayed.
+
+In scenario where row selection is enabled, users are allowed to resize all selected rows at once by performing the resize interaction on one of them.
+
+By default, row resizing is disabled.
+
+#### Example - enable column resizing
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      resizable: {
+        rows: true
+      }
+    });
+    </script>
+
 ### rowTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders rows. Be default renders a table row (`<tr>`) for every data source item.
@@ -8661,7 +9146,7 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. Be de
 > There are a few important things to keep in mind when using `rowTemplate`.
 >
 >* The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `${uid}`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
->* If `rowTemplate` is used alongside with `detailTemplate`, the row (`<tr>`) element needs to have class `k-master-row`. The first `<td>` element of the row needs to have class `k-hierarchy-cell`. Check the [`Row Templates documentation`](/controls/data-management/grid/Templates/row-templates) for more information.
+>* If `rowTemplate` is used alongside with `detailTemplate`, the row (`<tr>`) element needs to have class `k-master-row`. The first `<td>` element of the row needs to have class `k-hierarchy-cell`. Check the [`Row Templates documentation`](/controls/grid/Templates/row-templates) for more information.
 
 #### Example - specify row template as a function
 
@@ -9198,6 +9683,59 @@ The "search" built-in search panel for the grid.
     });
     </script>
 
+Apart from the built-in tools, the Grid fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        toolbar: [ {
+          type: "button",
+          text: "Button"
+        }, {
+          type: "button",
+          text: "Toggle",
+          togglable: true,
+          icon: "cancel"
+        }, {
+          type: "splitButton",
+          text: "SplitButton",
+          menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+        },{
+          name: "dropDownButton",
+          type: "dropDownButton",
+          text: "Country",
+          menuButtons: [
+            { id: "1", text: "Belgium" },
+            { id: "2", text: "France" }
+          ]
+        },{
+          name: "buttonGroup",
+          type: "buttonGroup",
+          buttons: [
+            { text: "Option 1", togglable: true },
+            { text: "Option 2", togglable: true },
+            { text: "Option 3", togglable: true }
+          ]
+        }],
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33},
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        editable: true
+      });
+    </script>
+
 ### toolbar.iconClass `String`
 
 The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button that will be rendered in the toolbar.
@@ -9479,7 +10017,7 @@ The jQuery object which represents the grid footer element.
         columns: [
           { field: "name" },
           { field: "age",
-           footerTemplate: ({ age }) => `Min: ${encode(min)} Max: ${encode(max)}`
+            footerTemplate: ({ age }) => `Min: ${encode(age.min)} Max: ${encode(age.max)}`
           }
         ],
         dataSource: {
@@ -9722,7 +10260,7 @@ When using multicolumn headers, using an index is not allowed. In such scenarios
 
 > The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
 >
-> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
+> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/grid/appearance#widths), according to their content.
 >
 > Use `autoFitColumn` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
 
@@ -9791,7 +10329,7 @@ Applies the minimum possible width for all columns, so that all text fits withou
 
 > The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
 >
-> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/javascript/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
+> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/javascript/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/grid/appearance#widths), according to their content.
 >
 > Use `autoFitColumns` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
 
@@ -10143,6 +10681,7 @@ If set to true, the copied items will include the column headers.
         }
 
      </script>
+
 ### current
 
 Gets or sets the current cell for keyboard navigation.
@@ -10513,7 +11052,7 @@ Hides the specified grid column.
 
 The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection.
 
-When using multicolumn headers, using an index will hide a top-level column together will all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
+When using multicolumn headers, using an index will hide a top-level column together with all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
 #### Example - hide a column by index
 
@@ -10702,7 +11241,7 @@ Renders all table rows using the current data items.
 
 Removes the specified table row from the grid. Also removes the corresponding data item from the data source.
 
-Executing of `removeRow` triggers the default execution of the Grid delete mechanism. If the Grid data source is configured with destroy remote data operation a delete request will be performed.
+Executing of `removeRow` triggers the default execution of the Grid delete mechanism. If the Grid data source is configured with destroy remote data operation a delete request will be performed. If the `editable` configuration is set to `true`, a confirmation dialog will appear before removing the row. You can disable it from the [`editable.confirmation`](/api/javascript/ui/grid/configuration/editable.confirmation) setting.
 
 Fires the [remove](/api/javascript/ui/grid/events/remove) event.
 
@@ -11248,7 +11787,7 @@ Shows the specified column.
 
 The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection.
 
-When using multicolumn headers, using an index will hide a top-level column together will all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
+When using multicolumn headers, using an index will hide a top-level column together with all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
 #### Example - show a hidden column by index
 
@@ -11385,7 +11924,7 @@ To unlock a column when it is the only one locked use the [`setOptions`](/api/ja
           { name: "John Doe", age: 33, hometown: "Boston, MA, USA", siblings: 1 }
         ]
       });
-      
+
       var grid = $("#grid").data("kendoGrid");
       var columns = grid.getOptions().columns;
       columns[0].locked = false;
@@ -11778,6 +12317,50 @@ The widget instance which fired the event.
           selectedRows.each(function(i, x) {
             $(x).find("td:not(:first)").addClass("k-disabled");
           });
+        }
+      });
+    </script>
+
+### changing
+
+Fired when the user is about to select a table row or cell.
+
+The event will be fired only when the Grid is [`selectable`](/api/javascript/ui/grid/configuration/selectable).
+
+#### Event Data
+
+##### e.sender `kendo.ui.Grid`
+
+The component instance which fired the event.
+
+##### e.target `jQuery`
+
+The target row that is about to be selected. If the Grid has checkbox selection enabled and the Select All checkbox in the header is clicked, the target is set to the checkbox element instead.
+
+##### e.originalEvent `event`
+
+The original JavaScript event that was fired.
+
+#### Example - prevent the selection of a row
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        selectable: "multiple, row",
+        changing: function(e) {
+          let dataItem = e.sender.dataItem(e.target);
+          // Prevent the selection if the row with age = 33 is about to be selected.
+          if (dataItem && dataItem.age === 33) {
+              e.preventDefault();
+          }
         }
       });
     </script>
@@ -14066,6 +14649,55 @@ If invoked prevents the rowReorder action - prevents the client-side reordering.
       rowReorder: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.row, e.rows, e.newIndex, e.oldIndex);
+      }
+    });
+    </script>
+
+### rowResize
+
+Fired when the user resizes a row (rows).
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.row `jQuery`
+
+A jQuery object holding a reference to the resized row element.
+
+##### e.rows `jQuery`
+
+A jQuery object holding a reference to all row elements that would be affected by the resizing. In scenario where row selection is enabled, users are allowed to resize all selected rows at once by performing the resize on one of them.
+
+##### e.newHeight `Number`
+
+The new row height.
+
+##### e.oldHeight `Number`
+
+The previous row height.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      resizable: { rows: true },
+      rowResize: function(e) {
+	      /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.row, e.newHeight, e.oldHeight);
       }
     });
     </script>

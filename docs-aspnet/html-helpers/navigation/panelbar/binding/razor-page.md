@@ -1,16 +1,22 @@
 ---
-title:  Razor Page
-page_title: Configure a DataSource for the PanelBar for Remote Binding in Razor Page.
+title: Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI PanelBar component for {{ site.framework }} ."
 slug: htmlhelpers_panelbar_razorpage_aspnetcore
 position: 5
 ---
 
-# Razor Page
+# PanelBar in Razor Pages
 
-This article describes how to configure a Remote DataSource of a Telerik PanelBar in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-In order to set up the PanelBar component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI PanelBar for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the PanelBar component in a Razor Pages scenario.
+
+For the complete project, refer to the [PanelBar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/PanelBar/PanelBarRemoteDate.cshtml).
+
+In order to set up the PanelBar component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel.
 
 ```tab-HtmlHelper(cshtml)   
      

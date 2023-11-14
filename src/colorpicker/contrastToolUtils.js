@@ -107,7 +107,8 @@ import "../kendo.core.js";
                 svgPath(getPaths(AAA_CONTRAST, STEP_COUNT, false), bezierCommandCalc) +
                 svgPath(getPaths(AAA_CONTRAST, STEP_COUNT, true), bezierCommandCalc);
 
-        return '<svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; overflow: visible; pointer-events: none; left: 0px; top: 0px; z-index: 3;" >' +
+        return `<svg xmlns="http://www.w3.org/2000/svg" ${kendo.attr("style-position")}="absolute" ${kendo.attr("style-overflow")}="visible" ${kendo.attr("style-pointer-events")}="none" ` +
+                `${kendo.attr("style-left")}="0px" ${kendo.attr("style-top")}="0px" ${kendo.attr("style-z-index")}="3" >` +
                     paths  + '</svg>';
     }
 

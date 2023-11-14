@@ -1,19 +1,53 @@
 ---
-title: The Telerik UI DatePicker in RazorPages
-page_title: The Telerik UI DatePicker in RazorPages
+title: Razor Pages
+page_title: Razor Pages
 description: "Telerik UI DatePicker for {{ site.framework }} in a RazorPages application."
 slug: razorpages_datepicker_aspnetcore
 position: 7
 ---
 
-# Telerik UI DatePicker in RazorPages
+# DatePicker in Razor Pages
 
-`RazorPage` is an alternative to the MVC pattern that makes page-focused coding easier and more productive. It consists of a `cshtml` file and a `cs` file (generally the two files have the same name). The Telerik UI DatePicker for {{ site.framework }} can be integrated in such an application seamlessly.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For a runnable example, you can refer to the following DateTimePicker sample, which in this case applies for the DatePicker widget as well in the same fashion:
+You can seamlessly integrate the Telerik UI DatePicker for {{ site.framework }} in Razor Pages applications.
 
-[DateTimePicker in RazorPages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DateTimePicker)
+This article describes how to configure the DatePicker component in a Razor Pages scenario.
 
+For the complete project, refer to the [DatePicker in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DateTimePicker/DateTimePickerIndex.cshtml).
+
+```tab-HtmlHelper(cshtml)
+@page
+
+<div>
+    <h4>Select a date range</h4>
+    @(Html.Kendo().DatePicker()
+        .Name("datepicker")
+    )
+</div>
+
+```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+@page
+
+<div>
+    <h4>Select a date range</h4>
+    <kendo-datepicker name="datepicker">
+    </kendo-datepicker>
+</div>
+
+```
+{% endif %}
+
+```tab-PageModel(cshtml.cs)
+
+ public void OnGet()
+ {
+
+ }
+  
+```
 
 ## See Also
 

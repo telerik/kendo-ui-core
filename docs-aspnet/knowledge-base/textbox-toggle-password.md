@@ -1,8 +1,8 @@
 ---
-title: Show and Hide Passwords in TextBox
+title: Show and Hide Passwords in a TextBox
 description: An example on how to show and hide the input of a {{ site.product }} TextBox.
 type: how-to
-page_title: Show and Hide a Password in TextBox
+page_title: Show and Hide a Password in a TextBox
 slug: textbox-toggle-password
 tags: texbox, password, show, hide, toggle, preview
 res_type: kb
@@ -14,7 +14,7 @@ component: textbox
 <table>
  <tr>
   <td>Product</td>
-  <td>{{ site.prodcut }} TextBox</td>
+  <td>{{ site.product }} TextBox</td>
  </tr>
  <tr>
   <td>Progress {{ site.product }} version</td>
@@ -58,3 +58,32 @@ How can I toggle sensitive data, such as passwords, so that the user can preview
 ```
 
 For the complete implementation of the suggested approach, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/GckrEqvI37R0V54u19) example.
+
+## More {{ site.framework }} TextBox Resources
+
+* [{{ site.framework }} TextBox Documentation]({%slug htmlhelpers_overview_textbox%})
+
+* [{{ site.framework }} TextBox Demos](https://demos.telerik.com/{{ site.platform }}/textbox)
+
+{% if site.core %}
+* [{{ site.framework }} TextBox Product Page](https://www.telerik.com/aspnet-core-ui/textbox)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} TextBox Product Page](https://www.telerik.com/aspnet-mvc/textbox)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik REPL: Show and Hide Passwords in TextBox](https://netcorerepl.telerik.com/GckrEqvI37R0V54u19)
+* [Client-Side API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox)
+* [Server-Side API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/textbox)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

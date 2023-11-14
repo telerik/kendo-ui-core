@@ -32,7 +32,7 @@
         });
 
         it("StaticList adds listbox role to the element", function() {
-            var list = new StaticList(element);
+            var list = new StaticList(element, {});
 
             assert.equal(element.attr("role"), "listbox");
         });

@@ -8,7 +8,7 @@ position: 6
 
 # Events
 
-The Telerik UI Wizard for {{ site.framework }} [exposes a number of events](/api/Kendo.Mvc.UI.Fluent/WizardEventBuilder) that allow you to control the behavior of the UI component.
+The Telerik UI Wizard for {{ site.framework }} [exposes a number of events](/api/kendo.mvc.ui.fluent/wizardeventbuilder) that allow you to control the behavior of the UI component.
 
 For a complete example on basic Wizard events, refer to the [demo on using the events of the Wizard](https://demos.telerik.com/{{ site.platform }}/wizard/events).
 

@@ -220,6 +220,10 @@ import "./kendo.html.button.js";
 
                     that.title(that.options.title);
                     that._dimensions();
+
+                    if (options._footerTemplate) {
+                        that.wrapper.append(kendo.template(options._footerTemplate)(options._footerMessages));
+                    }
                 }
 
                 that.minTop = that.minLeft = -Infinity;
@@ -315,6 +319,10 @@ import "./kendo.html.button.js";
                     this._tabKeyTrap.shouldTrap = function() {
                         return wrapper.data("isFront");
                     };
+                }
+
+                if (that._showWatermarkOverlay) {
+                    that._showWatermarkOverlay(that.wrapper[0]);
                 }
             },
 
@@ -516,7 +524,7 @@ import "./kendo.html.button.js";
                     this.dragging = null;
                 }
                 if (draggable) {
-                    this.dragging = new WindowDragging(this, draggable.dragHandle || KWINDOWTITLEBAR);
+                    this.dragging = new WindowDragging(this, draggable.dragHandle || KWINDOWTITLEBAR, draggable.clickMoveClick);
                 }
             },
 
@@ -966,24 +974,9 @@ import "./kendo.html.button.js";
                     return content.html();
                 }
 
-                this.angular("cleanup", function() {
-                    return { elements: content.children() };
-                });
-
                 kendo.destroy(this.element.children());
 
                 content.empty().html(html);
-
-                this.angular("compile", function() {
-                    var a = [];
-                    for (var i = content.length; --i >= 0;) {
-                        a.push({ dataItem: data });
-                    }
-                    return {
-                        elements: content.children(),
-                        data: a
-                    };
-                });
 
                 return this;
             },
@@ -2042,13 +2035,20 @@ import "./kendo.html.button.js";
             }
         };
 
-        function WindowDragging(wnd, dragHandle) {
-            var that = this;
+        function WindowDragging(wnd, dragHandle, clickMoveClick) {
+            var that = this,
+                filter = dragHandle;
+
+            if (clickMoveClick) {
+                filter += ",.k-overlay";
+            }
+
             that.owner = wnd;
             that._preventDragging = false;
             that._draggable = new Draggable(wnd.wrapper, {
                 filter: dragHandle,
                 group: wnd.wrapper.id + "-moving",
+                clickMoveClick: clickMoveClick,
                 dragstart: that.dragstart.bind(that),
                 drag: that.drag.bind(that),
                 dragend: that.dragend.bind(that),
@@ -2193,4 +2193,5 @@ import "./kendo.html.button.js";
         kendo.ui.plugin(Window);
 
     })(window.kendo.jQuery);
+export default kendo;
 

@@ -68,7 +68,7 @@ $(function() {
           if (ctrlKey) {
             e.preventDefault();
 
-            //https://docs.telerik.com/kendo-ui/api/framework/schedulerevent#methods-clone
+            //https://docs.telerik.com/kendo-ui/api/javascript/data/schedulerevent/methods/clone
             var newEvent = e.event.clone({
               start: e.start,
               end: e.end

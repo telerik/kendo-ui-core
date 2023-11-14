@@ -647,7 +647,7 @@ var __meta__ = {
         },
 
         _locate: function(selectors) {
-            return this.$angular ? directiveSelector(selectors) : roleSelector(selectors);
+            return roleSelector(selectors);
         },
 
         _findViewElement: function(url) {
@@ -718,4 +718,5 @@ var __meta__ = {
     kendo.ViewClone = ViewClone;
 
 })(window.kendo.jQuery);
+export default kendo;
 

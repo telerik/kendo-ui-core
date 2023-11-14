@@ -38,60 +38,64 @@ How can I reset the expand or collapse state of the Kendo UI PivotGrid?
 
 ## Solution
 
-The following example demonstrates how to reset the expand/collapse state and fetch the data again in a Kendo UI PivotGrid widget.
+The following example demonstrates how to reset the expand/collapse state and fetch the data again in a Kendo UI PivotGrid component.
 
 ```dojo
-<div id="example">
-    <ol>
+    <div id="example">
+      <ol>
         <li>Expand "CY 2005" member</li>
         <li>Click "reset" button</li>
-    <ol>
-    <br />
-    <button id="reset">Reset</button>
-    <br />
-    <div id="pivotgrid"></div>
+        <ol>
+          <br />
+          <button id="reset">Reset</button>
+          <br />
+          <div id="pivotgrid"></div>
 
-    <script>
-        $(document).ready(function () {
-            var pivotgrid = $("#pivotgrid").kendoPivotGrid({
+          <script>
+            $(document).ready(function () {
+              var pivotgrid = $("#pivotgrid").kendoPivotGrid({
                 filterable: true,
                 columnWidth: 200,
                 height: 580,
                 dataSource: {
-                    type: "xmla",
-                    columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
-                    rows: [{ name: "[Geography].[City]" }],
-                    measures: ["[Measures].[Internet Sales Amount]"],
-                    transport: {
-                        connection: {
-                            catalog: "Adventure Works DW 2008R2",
-                            cube: "Adventure Works"
-                        },
-                        read: "https://demos.telerik.com/olap/msmdpump.dll",
-                      parameterMap: function(options, type) {
-                        var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
-
-                        //modify the query here if needed
-
-                        return query;
-                      }
+                  type: "xmla",
+                  columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+                  rows: [{ name: "[Geography].[City]" }],
+                  measures: ["[Measures].[Internet Sales Amount]"],
+                  transport: {
+                    connection: {
+                      catalog: "Adventure Works DW 2008R2",
+                      cube: "Adventure Works"
                     },
-                    schema: {
-                        type: "xmla"
-                    },
-                    error: function (e) {
-                        alert("error: " + kendo.stringify(e.errors[0]));
+                    read: "https://demos.telerik.com/olap/msmdpump.dll",
+                    parameterMap: function(options, type) {
+                      var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
+
+                      //modify the query here if needed
+
+                      return query;
                     }
+                  },
+                  schema: {
+                    type: "xmla"
+                  },
+                  error: function (e) {
+                    alert("error: " + kendo.stringify(e.errors[0]));
+                  }
                 }
-            }).data("kendoPivotGrid");
+              }).data("kendoPivotGrid");
 
-            $("#reset").click(function() {
-                pivotgrid.dataSource.trigger("stateReset");
-                pivotgrid.dataSource.read();
+              $("#reset").click(function() {
+                // Create a new dataSource instance using the same options.
+                let clonedOptions = pivotgrid.dataSource.options,
+                    newDs = new kendo.data.PivotDataSource(clonedOptions);
+
+                // Set the dataSource.
+                pivotgrid.setDataSource(newDs);
+              });
             });
-        });
-    </script>
-</div>
+          </script>
+          </div>
 ```
 
 ## See Also

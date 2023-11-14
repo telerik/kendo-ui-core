@@ -61,7 +61,7 @@
             pager._keyDown(enter);
             var activeElement = $(document.activeElement);
             assert.isOk(activeElement.hasClass("k-button"));
-            assert.equal(activeElement.text(), "1");
+            assert.equal(activeElement.find(".k-button-text").text(), "1");
             assert.isOk(!element.hasClass("k-focus"));
         });
 

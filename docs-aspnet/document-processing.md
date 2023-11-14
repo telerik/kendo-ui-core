@@ -53,6 +53,19 @@ Telerik Document Processing supports [.NET Standard 2.0](https://github.com/dotn
 
 >In case you need a version of Telerik Document Processing compatible with [.NET Framework 4.0](https://dotnet.microsoft.com/download/dotnet-framework/net40) or later, check the suites which you can use to obtain the binaries from in the [Installing on Your Computer](https://docs.telerik.com/devtools/document-processing/getting-started/installing-on-your-computer) help topic.
 
+## DPL Configuration Wizard 
+
+Adding DPL NuGet references to the project using the `dpl` folder in the distribution that the project uses. There are a couple of images showing how the wizard is launched and its main page.
+
+### Wizard launch context menu:
+![{{ site.product_short }} DPL wizard launch context menu](images/context-menu-dpl.png)
+
+### Wizard launch main menu:
+![{{ site.product_short }} DPL wizard launch main menu](images/main-menu-dpl.png)
+
+### Wizard main page:
+![{{ site.product_short }} DPL wizard main page:](images/wizard-main-page-dpl.png)
+
 ## Licensing
 
 Telerik Document Processing is available as part of the following suites:

@@ -8,7 +8,7 @@ position: 9
 
 # Custom Actions
 
-You can create custom actions for the Window via the [`Actions.Custom()`](/api/Kendo.Mvc.UI.Fluent/WindowActionsBuilder#customsystemstring) configuration option. 
+You can create custom actions for the Window via the [`Actions.Custom()`](/api/kendo.mvc.ui.fluent/windowactionsbuilder#customsystemstring) configuration option. 
 
 The Window then renders `k-icon` and `k-i-actionname` CSS classes for the action but does not automatically attach a `click` event handler to it. While the Kendo UI stylesheets provide a `"custom"` icon for custom actions, you can use an icon name of your choice. To capture and handle the `click` events, follow the standard approach:
 

@@ -60,8 +60,8 @@ it('div inside menu is assigned .k-content class', function() {
 });
 
 it('UL elements inside content don\'t get k-menu-group class', function() {
-    assert.isOk(!menu.element.find("div ul").is(".k-group"));
-    assert.isOk(!menu.element.find("div ul").is(".k-menu-group"));
+    assert.isOk(!menu.element.find("div.k-content ul").is(".k-group"));
+    assert.isOk(!menu.element.find("div.k-content ul").is(".k-menu-group"));
 });
 
 it('menu is inside scroll wrapper', function() {

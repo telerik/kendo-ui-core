@@ -1,16 +1,21 @@
 ---
 title: Font Icons
 page_title: Font Icons
-description: "Learn about the available Telerik UI Font Icons."
+description: "Learn more about what icon fonts are and how to define, implement, and render the available Telerik UI Font Icons out of the supported list."
 slug: webfonticons_aspnetmvc6_aspnetmvc
-position: 6
+position: 7
 ---
 
 # Web Font Icons
 
+> As of the 2023 R3 release, the font icons are detached from the [Kendo UI Themes CDN]({% slug cdnservices_core %}). If you use the Kendo UI CDN service to include the Kendo UI theme, to continue using the font icons, add a reference the following stylesheet into your application:
+    ```
+        <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
+    ```
+
 With the R1 2017 release, Telerik UI delivers integrated font icons intended for the web and data visualization components of the suite.
 
-> To make sure all the icons are displayed correctly, use one of the SASS themes. For more information on how to install an SASS theme, visit the [installation] ({% slug sassbasedthemes_installation%}) article.
+>tip To make sure all the icons are displayed correctly, use one of the SASS themes. For more information on how to install a SASS theme, visit the [installation] ({% slug sassbasedthemes_installation%}) article.
 
 ## List of Font Icons
 
@@ -28,15 +33,15 @@ Icon fonts are fonts that contain vector glyphs instead of letters and numbers. 
 
 ## Why Use Icon Fonts
 
-Using icon fonts in a user interface (UI) naturally succeeds the somehow outdated [icon sprite technique](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Implementing_image_sprites_in_CSS).
+Using icon fonts in a user interface (UI) naturally succeeds the outdated [icon sprite technique](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Implementing_image_sprites_in_CSS).
 
 Font icons demonstrate significant benefits such as:
 
-* [Improved scalability](#sizes)&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as easy as setting the `font-size` configuration option.
-* Improved design capabilities&mdash;You can easily apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
+* [Improved scalability](#sizes)&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as convenient as setting the `font-size` configuration option.
+* Improved design capabilities&mdash;You can apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
 * Improved browser support&mdash;Font icons are browser-agnostic and are supported by all modern browsers.
 * Reduced number of HTTP requests&mdash;To load an icon font, you need a maximum of a few HTTP requests.
-* Reduced file size&mdash;A 100KB file contains approximately 500 vector icons.
+* Reduced file size&mdash;A 100KB file contains around 500 vector icons.
 
 ## Basic Usage
 
@@ -51,7 +56,7 @@ To use the Telerik UI font icons:
 
 ## Rendering with Unicode Numbers
 
-Though the web icon font comes with a set of predefined CSS classes, you might need to use the icons with a custom CSS class name. To achieve this, set a `:before` pseudo content value for the relevant icon.
+Though the web icon font comes with a set of predefined CSS classes, you will need to use the icons with a custom CSS class name. To achieve this, set a `:before` pseudo content value for the relevant icon.
 
 ```
 <span class="k-icon my-custom-icon-class"></span>
@@ -74,7 +79,7 @@ Icon fonts support the following options for visual enhancement:
 
 The Telerik UI font icons are designed on a 16px grid base. To achieve a pixel-perfect icon display, scale up by maintaining the 16-unit measure (32, 48, 64, and so on).
 
-You can scale icons by just setting the `font-size` configuration option.
+You can scale icons by setting the `font-size` configuration option.
 
 ```
 <span class="k-icon k-i-gear"></span>
@@ -110,7 +115,7 @@ To set the icon color, use the `color` CSS property.
 
 ### Applying Flipping
 
-To better accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
+To conveniently accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
 
 ```
     <span class="k-icon k-i-pencil"></span>
@@ -127,9 +132,9 @@ To better accommodate an icon in your application, flip it by using the `k-flip-
     }
 
     .icons-frame {
-        width: 100%; 
-        height: 100%; 
-        background-color: rgb(248, 248, 248); 
+        width: 100%;
+        height: 100%;
+        background-color: rgb(248, 248, 248);
         border: 2px dashed rgb(235, 236, 238);
     }
 </style>

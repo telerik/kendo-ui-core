@@ -14,6 +14,8 @@ The Editor exposes the capability of editing a data table as any other (X)HTML. 
 * [Editing a table](#editing-a-table)
 * [Available **Table**, **Cell**, and **Accessibility** tab options](#available-options)
 
+> As of the R3 2023 Release, the `Table Wizard` transmutes into two separate `Table` and `Cell` properties popup elements.
+
 To enable the table editing, add the `TableEditing` tool to the configuration of the component:
 
 ```HtmlHelper
@@ -28,7 +30,9 @@ To enable the table editing, add the `TableEditing` tool to the configuration of
 ```TagHelper
     <kendo-editor name="editor" style="height:440px" aria-label="editor">
       <tools>
-        <tool name="tableWizard">
+        <tool name="tableProperties">
+        </tool>
+        <tool name="tableCellProperties">
         </tool>
         <tool name="createTable">
         </tool>
@@ -116,7 +120,7 @@ The **Table** tab provides the following options:
 
 The **Cell** tab provides the following options:
 
-* **Select All Cells**&mdash;Applies the changes to all cells in the table.
+* **Apply to all cells**&mdash;Applies the changes to all cells in the table.
 * **Width**&mdash;Changes the width of the cell or cells (in pixels, em, or percent).
 * **Height**&mdash;Changes the height of the cell or cells (in pixels, em, or percent).
 * **Cell Margin**&mdash;Defines the margin of the cell or cells.
@@ -130,6 +134,8 @@ The **Cell** tab provides the following options:
 * **Wrap text**&mdash;When unchecked, applies a `white-space: nowrap` style to the cells ([`white-space` property](http://www.w3schools.com/cssref/pr_text_white-space.asp)).
 
 ### Accessibility Tab
+
+> As of the R3 2023 Release, the accessibility tab becomes a section in the `Advanced` tab in the new `Table Properties` popup.
 
 The **Accessibility** tab provides the following options:
 

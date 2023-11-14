@@ -13,7 +13,7 @@ The Scheduler supports adaptive enhancements such as changes in styling and beha
 
 For example, when editing on a mobile device, the edit container will slide in a new screen for the user, which is a departure from the more desktop-like popup behaviors.
 
-To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
+To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/schedulerbuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
 
 * If set to `MobileMode.Auto`, the component will use adaptive rendering when viewed on a mobile browser.
 * If set to `MobileMode.Phone`, the component will be forced to use adaptive rendering regardless of the browser type.

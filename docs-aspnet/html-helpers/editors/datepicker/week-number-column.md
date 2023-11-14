@@ -10,7 +10,7 @@ position: 7
 
 The DatePicker provides options for rendering a column which displays the number of the weeks within the current **Month** view.
 
-To render the week number column, enable the [`WeekNumber`](/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder#weeknumbersystemboolean) property.
+To render the week number column, enable the [`WeekNumber`](/api/kendo.mvc.ui.fluent/datepickerbuilder#weeknumbersystemboolean) property.
 
 ```HtmlHelper
     @(Html.Kendo().DatePicker()

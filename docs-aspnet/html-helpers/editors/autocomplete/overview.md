@@ -192,7 +192,7 @@ The following example demonstrates the basic configuration of the AutoComplete.
 * [Grouping]({% slug htmlhelpers_autocomplete_grouping_aspnetcore %})—You can group the data that is displayed in the AutoComplete.
 * [Templates]({% slug htmlhelpers_autocomplete_templates_aspnetcore %})—To take full control over the rendering of the AutoComplete items, popup header, and popup footer, you can use the available templates.
 * [Virtualization]({% slug virtualization_autocomplete_aspnetcore %})—The built-in virtualization allows you to display large datasets.
-* [Accessibility]({% slug accessibility_aspnetcore_autocomplete %})—The AutoComplete is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug accessibility_aspnetcore_autocomplete %})—The AutoComplete is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 ## Next Steps
 
@@ -200,6 +200,7 @@ The following example demonstrates the basic configuration of the AutoComplete.
 * [Basic Usage of the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/index)
 {% if site.core %}
 * [Basic Usage of the AutoComplete TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
+* [AutoComplete in Razor Pages]({% slug   htmlhelpers_autocomplete_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

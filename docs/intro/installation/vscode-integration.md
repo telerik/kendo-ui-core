@@ -8,9 +8,9 @@ position: 70
 
 # Kendo UI Productivity Tools for Visual Studio Code
 
-The **Kendo UI Productivity Tools for Visual Studio Code** is an extension for <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> that enhances the application development experience with Kendo UI for jQuery.
+The Kendo UI Productivity Tools for Visual Studio Code is an extension for <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> that enhances the application development experience with Kendo UI for jQuery. This extension facilitates the creation of projects through a wizard directly in Visual Studio Code.
 
-As its primary advantage, the VS Code extension facilitates the creation of projects through a wizard directly in Visual Studio Code.
+The Kendo UI Productivity Tools deliver a Kendo UI Template Wizard that eases the development efforts by providing an interface for creating new projects that are pre-configured for Kendo UI components. The Template Wizard provides a **Blank** project template, which can be further enhanced by the addition of more pages with Grids, Charts, Forms, and others. The wizard lets configure the desired visual theme for your application by choosing between the Default, Bootstrap, and Material themes. The end result is a ready-to-run application with all required configurations and dependencies. This enables you to immediately start using the Kendo UI components.
 
 ## 1. Get the Extension
 
@@ -21,10 +21,10 @@ You can get the extension in either of the following ways:
 
 ## 2. Create the Kendo UI Project
 
-To create a Kendo UI for jQuery project:
+To create a Kendo UI for jQuery project with the Kendo UI Template Wizard:
 
-1. Press `Ctrl`+`Shift`+`P` (for Windows or Linux), or `Cmd`+`Shift`+`P` (on Mac) to open the VSCode extension launcher.
-1. Type/Select `Kendo UI Template Wizard: Launch` and press `Enter` to launch the extension.
+1. Press `Ctrl`+`Shift`+`P` (for Windows or Linux), or `Cmd`+`Shift`+`P` (on Mac) to open the VS Code extension launcher.
+1. Type or select `Kendo UI Template Wizard: Launch` and press `Enter` to launch the extension.
 
     ![Kendo UI for jQuery Launch Kendo UI Template Extension](../../images/launch-extension.png)
 
@@ -63,11 +63,31 @@ To create a Kendo UI for jQuery project:
 
 ## 4. Generate the Snippets
 
-The Kendo UI Productivity Tools for Visual Studio Code extension can generate code snippets with sample configuration for the Kendo UI components. To add a code snippet for a Kendo UI component:
+The Kendo UI Productivity Tools extension provides a handy feature that improves the daily development with the Kendo UI library—code snippets. Snippets simplify and speed up the implementation of Kendo UI components in your project. They help the development process by providing a quick way for adding the components directly in the source code, while also including predefined tab stops for the required options.
 
-1. Open a `js` file or add a `<script>` tag.
-1. Type `kj-short`. Alternatively, type `kj-component`&mdash;where you replace "component" with the name of the desired component, for example, `kj-dropdownlist`.
+To add a code snippet for a Kendo UI component:
 
+1. Open the source code in the IDE and click where you want to insert the Kendo UI for jQuery component.
+1. To list the Kendo UI for jQuery snippets, type the `kj-` snippet prefix.
+1. Continue by typing the name of the component that you want to insert. Some components are provided by multiple snippets which allow you to create them in various ways depending on the desired configuration, for example, `kj-grid` and `kj-grid-remote`.
+1. Press `Enter` to insert the desired component in the source code.
+1. (Optional) If the component provides placeholders for specific properties, you can iterate and provide them by pressing the `Tab` key
+
+## Scaffolders
+
+The Kendo UI Productivity Tools extension for Visual Studio Code includes a scaffolding feature, which enables you to generate complex KendoReact components from an interactive wizard-like user interface.
+
+To use the `Scaffolders` functionality, follow the steps below:
+
+1. In the VS Code explorer panel, right-click a folder in your jQuery app .
+
+    ![Kendo UI for jQuery Launch Kendo UI Scafoolders](images/scaffolders-new-item.PNG)
+
+1. Select a component from the list. Currently, the Data Grid, Chart, Form, and Scheduler components support scaffolding.
+
+    ![Kendo UI for jQuery Select Kendo UI Component](images/scaffolders-choose-component.PNG)
+    
+1. Click the **Create** button.
 
 ## See Also
 

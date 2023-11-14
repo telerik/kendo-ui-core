@@ -29,7 +29,7 @@ The `Icon()` method displays the appropriate [Kendo UI for jQuery font icon](htt
 ```
 {% if site.core %}
 ```TagHelper
-	<kendo-button name="buttonDelete" type="button" icon="delete"></kendo-button>
+	<kendo-button name="buttonDelete" type="button" icon="trash"></kendo-button>
 ```
 
 Alternatively, use the `icon-class` attribute to set a custom icon. It accepts a CSS class (or multiple space-separated CSS classes).

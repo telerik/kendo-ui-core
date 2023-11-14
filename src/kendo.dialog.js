@@ -83,6 +83,9 @@ import "./kendo.icons.js";
                 Widget.fn.init.call(that, element, options);
                 that._init(that.element, that.options);
                 kendo.notify(that);
+                if (that._showWatermarkOverlay) {
+                    that._showWatermarkOverlay(that.wrapper[0]);
+                }
             },
 
             _init: function(element, options) {
@@ -881,23 +884,8 @@ import "./kendo.icons.js";
                     return content.html();
                 }
 
-                this.angular("cleanup", function() {
-                    return { elements: content.children() };
-                });
-
                 kendo.destroy(content.children());
                 content.html(html);
-
-                this.angular("compile", function() {
-                    var a = [];
-                    for (var i = content.length; --i >= 0;) {
-                        a.push({ dataItem: data });
-                    }
-                    return {
-                        elements: content.children(),
-                        data: a
-                    };
-                });
 
                 that.options.content = html;
 
@@ -1018,7 +1006,7 @@ import "./kendo.icons.js";
                 name: "Alert",
                 modal: true,
                 actions: [{
-                    text: () => `${encode(messages.okText)}`
+                    text: ({ messages }) => `${encode(messages.okText)}`
                 }]
             }
         });
@@ -1151,4 +1139,5 @@ import "./kendo.icons.js";
         kendo.prompt = kendoPrompt;
 
     })(window.kendo.jQuery);
+export default kendo;
 

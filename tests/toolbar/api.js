@@ -834,28 +834,16 @@
             assert.isOk(!($("#dropDownButton_wrapper").hasClass("k-state-hidden")));
         });
 
-        // togglebale option does not make sense for splitbutton
-        it.skip("toggle method toggles splitButton's togglabale option", function() {
+        it("add method inserts the new item before the overflowAnchor", function() {
             var toolbar = container.kendoToolBar({
                 items: [
-                    {
-                        type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
-                            { id: "option1", text: "Option 1", togglable: true, group: "myGroup" },
-                            { id: "option2", text: "Option 2", togglable: true, group: "myGroup" },
-                            { id: "option3", text: "Option 3", togglable: true, group: "myGroup" }
-                        ]
-                    }
+                    { type: "button", id: "foo", text: "foo" }
                 ]
             }).data("kendoToolBar");
 
-            toolbar.toggle($("#option1"), true);
+            toolbar.add({ type: "button", text: "New Button", id: "newButton" });
 
-            assert.isOk($("#option1").hasClass("k-selected"));
-
-            toolbar.toggle($("#option2"), true);
-
-            assert.isOk(!$("#option1").hasClass("k-selected"));
-            assert.isOk($("#option2").hasClass("k-selected"));
+            assert.equal(toolbar.overflowAnchor.prev()[0], toolbar.element.find("#newButton")[0]);
         });
 
     });

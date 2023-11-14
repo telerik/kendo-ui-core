@@ -1,9 +1,9 @@
 ---
 title: Overview
 page_title: Telerik UI Signature for {{ site.framework }} Documentation - Signature Overview
-description: "Learn the basics when working with the Telerik UI Signature for {{ site.framework }}."
+description: "The Telerik UI Signature component for {{ site.framework }} provides a styled UI element that enables the user to create handwritten signatures."
 slug: overview_telerikui_signature_component
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Signature Overview
@@ -35,99 +35,17 @@ The following example demonstrates the basic configuration for the Signature.
 
 ## Functionality and Features
 
-* [Image Export]({% slug image_export_telerikui_signature_component %})
-* [Form Integration]({% slug form_integration_telerikui_signature_component %})
+* [Image Export]({% slug image_export_telerikui_signature_component %})—You can export the Signature to a PNG file.
+* [Form Integration]({% slug form_integration_telerikui_signature_component %})—The Signature allows you to integrate it inside a Telerik UI Form component.
 
-## Events
+## Next Steps
 
-You can subscribe to all Signature [events](/api/signature). For a complete example on Signature events, refer to the [demo on handling Signature events](https://demos.telerik.com/{{ site.platform }}/signature/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().Signature()
-      .Name("signature")
-      .Events(e => e
-            .Open("signature_open")
-            .Close("signature_close")
-            .Change("signature_change")
-      )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-signature name="signature"
-        on-open="signature_open"
-        on-close="signature_close"
-        on-change="signature_change"/>
-```
-{% endif %}
-```script.js
-    function signature_open() {
-        // Handle the open event.
-    }
-
-    function signature_close() {
-        // Handle the close event.
-    }
-
-    function signature_change() {
-        // Handle the change event.
-    }
-```
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().Signature()
-      .Name("signature")
-      .Events(e => e
-          .Open(@<text>
-            function() {
-                // Handle the open event inline.
-            }
-          </text>)
-          .Change(@<text>
-            function() {
-                // Handle the change event inline.
-            }
-            </text>)
-      )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-signature name="signature"
-        on-open='function(e)
-        {
-            // Handle the open event inline.
-        }'
-        on-change='function(e)
-        {
-            // Handle the change event inline.
-        }'/>
-```
-{% endif %}
-
-## Referencing Existing Instances
-
-To reference an existing Telerik UI Signature for {{ site.framework }} instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Signature client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/signature#methods) to control its behavior.
-
-        // Place the following after your Telerik UI Signature for {{ site.framework }} declaration.
-        <script>
-        $(function() {
-        // The Name() of the Signature is used to get its client-side instance.
-            var signature = $("#signature").data("kendoSignature");
-
-            //Use the "value" API method to get the Signature's value.
-            console.log(signature.value());
-        });
-        </script>
+* [Getting Started with the Signature]({% slug aspnetcore_signature_getting_started %})
+* [Basic Usage of the Signature Component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/signature)
 
 ## See Also
 
+* [Using the API of the Signature HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/signature/api)
 * [Demo Page for the Signature](https://demos.telerik.com/{{ site.platform }}/signature)
-* [API Reference of the Signature](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/SignatureBuilder)
+* [API Reference of the Signature](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/signaturebuilder)
 * [Knowledge Base Section](/knowledge-base)

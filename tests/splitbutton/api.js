@@ -139,6 +139,17 @@
             $("#item1").click();
         });
 
+        it("SplitButton click event triggered from menu item with id set via attributes", function(done) {
+            var dropDownButton = new SplitButton(button, {
+                 items: [ { attributes: { id: "idSet" }, click: function(ev) {
+                    assert.equal(ev.target.id, "idSet");
+                    done();
+                } } ],
+            });
+
+            $("#idSet").click();
+        });
+
         it("SplitButton open event is triggered on arrow button click", function(done) {
             var splitButton = new SplitButton(button, {
                  items: defaultItems,

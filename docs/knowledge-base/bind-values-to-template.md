@@ -120,4 +120,4 @@ The following example demonstrates how to achieve the desired scenario.
 * [Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
 * [Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
-* [Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
+* [Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filter_input_multiselect %})

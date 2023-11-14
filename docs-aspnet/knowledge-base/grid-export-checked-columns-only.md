@@ -1,7 +1,7 @@
 ---
 title: Exporting Checked Columns Only in the Grid
 page_title: Exporting Checked Columns Only in the Grid
-description: "An example on how to create Excel documents by exporting the checked columns only in the {{ site.product }} Grid."
+description: An example on how to create Excel documents by exporting the checked columns only in the {{ site.product }} Grid.
 slug: grid-export-checked-columns-only
 tags: telerik, grid, export, checked, columns, only, rows, excel
 component: grid
@@ -31,15 +31,15 @@ How can I create Excel documents by exporting the checked columns only in the {{
 
 To achieve the desired scenario:
 
-1. To handle the Excel export of the Grid, subscribe to the [`ExcelExport`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event.
-1. Enable the rows' persistence upon selection by using the [`.PersistSelection`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#persistselectionsystemboolean) configuration method.
+1. To handle the Excel export of the Grid, subscribe to the [`ExcelExport`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event.
+1. Enable the rows' persistence upon selection by using the [`.PersistSelection`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#persistselectionsystemboolean) configuration method.
 1. Within the handler, obtain the fields of the columns that you are going to add by using the client-side [`.columns()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns) method the Grid provides and map them to a **key-value** pair by using the [`.map()`](https://api.jquery.com/jquery.map/) method. 
 1. Push the cell headers from the previously obtained column fields.
 1. From there, get the selected Grid rows by using the built-in [`.selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/selectedkeynames) method, traverse through each of the items, and push their column values with the help of the previously obtained Grid column fields.
 1. Create a common function that will be responsible for creating the workbook document.
 
 ```Index.cshtml
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script> // To take full advantage of the Excel export   feature, download the JSZip library and include the file.
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script> // To take full advantage of the Excel export   feature, download the JSZip library and include the file.
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
@@ -120,8 +120,31 @@ To achieve the desired scenario:
 
 For the complete implementation of the suggested approach, refer to the [Telerik REPL example on exporting checked columns only in the Grid](https://netcorerepl.telerik.com/cclcYfFd35PFgwhC55).
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Client-Side API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [Server-Side API Reference of the Grid](https://docs.telerik.com/{{ site.platform }}/api/grid)
-* [Telerik REPL: Export checked columns only in the Grid](https://netcorerepl.telerik.com/cclcYfFd35PFgwhC55)
+* [Telerik REPL: Exporting Checked Columns Only in the Grid](https://netcorerepl.telerik.com/cclcYfFd35PFgwhC55)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

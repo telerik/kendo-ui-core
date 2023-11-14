@@ -81,4 +81,4 @@ The following example demonstrates the full implementation of the suggested appr
 ## See Also
 
 * [Demo on Adding Images in the Kendo UI Button](https://demos.telerik.com/kendo-ui/button/images)
-* [Kendo UI Documentation on Image Icons in the Button](https://docs.telerik.com/kendo-ui/controls/navigation/button/overview#image-icons)
+* [Kendo UI Documentation on Image Icons in the Button](https://docs.telerik.com/kendo-ui/controls/button/overview#image-icons)

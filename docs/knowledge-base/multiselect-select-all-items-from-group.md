@@ -32,47 +32,46 @@ How can I select all items from a group in the MultiSelect by clicking the group
 1. Get all items from the clicked group and pass them to the `value` method to select them.
 
 ```dojo
-<style>
-    .k-group-header {
+    <style>
+      .k-list-item-group-label {
         cursor: default;
-    }
-</style>
+      }
+    </style>
 
-<select id="customers"></select>
+    <select id="customers"></select>
 
-<script>
-    $(document).ready(function () {
+    <script>
+      $(document).ready(function () {
         $("#customers").kendoMultiSelect({
-            placeholder: "Select customers...",
-            dataTextField: "ContactName",
-            dataValueField: "CustomerID",
-            height: 400,
-            dataSource: {
-                type: "odata",
-                transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
-                },
-                group: { field: "Country" }
-            }
+          placeholder: "Select customers...",
+          dataTextField: "ContactName",
+          dataValueField: "CustomerID",
+          height: 400,
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+          }
         });
 
-        $(".k-list-scroller").delegate(".k-group", "click", groupClick);
-        $(".k-list-container").delegate(".k-group-header", "click", groupClick);
+        $(".k-list-scroller").delegate(".k-list-item-group-label", "click", groupClick);
 
         function groupClick() {
-            var ms = $("#customers").data("kendoMultiSelect");
-            var data = ms.dataSource.data();
-            var msValue = [];
+          var ms = $("#customers").data("kendoMultiSelect");
+          var data = ms.dataSource.data();
+          var msValue = [];
 
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].Country == this.textContent) {
-                    msValue.push(data[i].CustomerID);
-                }
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].Country == this.textContent) {
+              msValue.push(data[i].CustomerID);
             }
+          }
 
-            ms.value(msValue);
-            ms.close();
+          ms.value(msValue);
+          ms.close();
         }
-    });
-</script>
+      });
+    </script>
 ```

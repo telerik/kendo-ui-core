@@ -135,7 +135,7 @@ To change the [appearance]({% slug htmlhelpers_appearance_floatingactionbutton_a
 
 ## 5. Handle the FloatingActionButton Events
 
-The FloatingActionButton [exposes the `Click()`, `Expand()`, and `Collapse()` events](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/FloatingActionButtonEventBuilder) that you can handle and assign specific functions to the component. In this tutorial, you will use these events to log messages in the browser's console.
+The FloatingActionButton [exposes the `Click()`, `Expand()`, and `Collapse()` events](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/floatingactionbuttoneventbuilder) that you can handle and assign specific functions to the component. In this tutorial, you will use these events to log messages in the browser's console.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

@@ -80,9 +80,10 @@ tag-helpers/*,
 knowledge-base/switch-change-messages-inside-grid.md]
 
 exclude_navigation: ["knowledge-base/*",
-api/Kendo.Mvc/*,
-api/Kendo.Mvc.UI/*,
-api/Kendo.Mvc.UI.Fluent/*,
+api/kendo.mvc/*,
+api/kendo.mvc.ui/*,
+api/kendo.mvc.ui.fluent/*,
+api/kendo.mvc.taghelpers/*,
 getting-started-core/*]
 
 navigation:
@@ -92,6 +93,12 @@ navigation:
      "api":
         title: "API Reference"
         position: 0
+     "api/kendo.mvc.extensions":
+        title: "Kendo.Mvc.Extensions"
+        position: 1
+     "api/taghelpers":
+        title: "TagHelpers API Reference"
+        position: 2
      "getting-started":
         title: "Getting Started"
         position: 2
@@ -367,7 +374,7 @@ navigation:
         title: "Appbar"
      "html-helpers/navigation/bottomnavigation":
         title: "BottomNavigation"
-        isNew: true 
+        isNew: true
      "html-helpers/navigation/breadcrumb":
         title: "Breadcrumb"
      "html-helpers/navigation/floatingactionbutton":
@@ -628,6 +635,8 @@ navigation:
         title: "Sortable"
      "*splitter":
         title: "Splitter"
+     "*dockmanager":
+        title: "DockManager"
      "*stacklayout":
         title: "StackLayout"
      "*gridlayout":
@@ -668,8 +677,9 @@ navigation:
         title: "Validator"
      "*window":
         title: "Window"
-     "*templates":
-        title: "Templates"
+     "*template":
+        title: "Template"
+        isNew: true
      "*switch":
         title: "Switch"
      "*splitbutton":
@@ -687,10 +697,13 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2023.1.117"
+cdnVersion: "2023.3.1114"
+
+## The themes CDN used
+themesCdnVersion: "7.0.2"
 
 ## The MVC Core version used
-mvcCoreVersion: "2023.1.117"
+mvcCoreVersion: "2023.3.1114"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
@@ -712,7 +725,7 @@ defaults:
         layout: "documentation"
         category: "default"
         product: "aspnet-core"
-        editable: troubleshoot
+        editable: true
         title_prefix: "ASP.NET Core"
         title_prefix_separator: " "
 -
@@ -1237,6 +1250,11 @@ defaults:
         path: "html-helpers/scheduling/scheduler"
     values:
         title_prefix: "ASP.NET Core Scheduler Component"
+-
+    scope:
+        path: "html-helpers/template"
+    values:
+        title_prefix: "ASP.NET Core Template Component"
 
 type_links:
     "kendo.Class": "/api/javascript/class"

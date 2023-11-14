@@ -30,8 +30,6 @@ The following example demonstrates the configuration for SystemJS up to 0.20 ver
     <html>
     <head>
       <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion  }}/default/default-main.css">
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
@@ -182,7 +180,6 @@ The following example demonstrates the configuration for SystemJS 0.20.x.
       		"kendo.view.min": "lib/kendo/kendo.view.min.js",
       		"kendo.virtuallist.min": "lib/kendo/kendo.virtuallist.min.js",
       		"kendo.window.min": "lib/kendo/kendo.window.min.js",
-      		"pako_deflate.min": "lib/kendo/pako_deflate.min.js",
       		"kendoaspnetmvc": "lib/kendo/kendo.aspnetmvc.min.js",
       		"kendodatavizbarcode": "lib/kendo/kendo.dataviz.barcode.min.js",
       		"kendodatavizchart": "lib/kendo/kendo.dataviz.chart.min.js",
@@ -277,4 +274,5 @@ The following example demonstrates the configuration for SystemJS 0.20.x.
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [Aurelia]({% slug aurelia_integration_kendoui %})

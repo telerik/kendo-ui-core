@@ -11,64 +11,26 @@ position: 1
 
 The [Kendo UI components and framework components](https://demos.telerik.com/kendo-ui/) are designed to support all major web browsers and deliver a cross-browser compatibility, standards compliance, and touch-device support.
 
-However, depending on the specifics of your project, the controls you use, and the versions of the components, their browser support may vary.
-
-## Regular Support
-
 Most [Kendo UI components]({% slug welcometo_kendoui %}#list-of-components) have no specific limitations as of the browser versions they support.
 
 > Some features may not be available due to browser limitations.
 
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
-| Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-| Chrome            | Current and previous          |
-| Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history)
-|                   | ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
-| Opera             | 15 or later                   |
-| OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
-
-## Support for Kendo UI Hybrid
-
-The [hybrid UI components and framework components]({% slug welcometo_kendoui %}#list-of-components) are intended for Cordova-based deployments and support the mobile device browsers and corresponding web view components listed in the following table.
-
-| BROWSER           | SUPPORTED VERSIONS               |
-| :---------------- | :------------------------------- |
-| Chrome            | Current and previous             |
-| Firefox           | Not supported                    |
-| OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
-
-## Support for Data Visualizing Components
-
-The [Kendo UI components which render data visualization]({% slug welcometo_kendoui %}#list-of-components), such as the Charts, Gauges, Barcodes, Diagrams, and Maps, may require more recent browser versions according to the following table.
-
-**Fully supported browsers**
-
-| BROWSER           | SUPPORTED VERSIONS            |
-| :---------------- | :---------------------------- |
-| Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-| Chrome            | Current and previous          |
-| Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
-| Opera             | 15 or later                   |
-| OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
-| iOS Safari        | iOS 8 or later                |
-| Chrome for Mobile | 21 or later                   |
-
-**Browsers with limited support**
-
-| BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS                               |
-| :---------------- | :---------------------------- | :-----------                              |
-|                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
-| Android           | 2.3                           | The Canvas rendering mode is only supported
+| Edge              | The two latest versions at the time of the release. |
+| Chrome            | The two latest versions at the time of the release.          |
+| Firefox           | The two latest versions at the time of the release. This includes [Firefox ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/)).|
+| Opera             | The two latest versions at the time of the release.                  |
+| Safari (OS X)     | The two latest versions at the time of the release.|
 
 ## Support for PDF Export
 
 The Kendo UI PDF generator is tested and supported in the following desktop browsers:
-* Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
+* Latest Chrome, Firefox, Safari, Edge.
 
 > Safari do not support the PDF-related option for saving files. To enable PDF export, you need to [implement a server proxy]({% slug exporting_pdf_kendoui_grid_widget %}#server-proxy).
 
-Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Even though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is not supported in mobile browsers and hybrid mobile applications.
+Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Even though exporting in PDF will work on some mobile devices in specific scenarios, PDF export is not supported in mobile browsers and hybrid mobile applications.
 
 ## Providing Best Performance
 
@@ -85,11 +47,11 @@ To boost the performance of your project:
 * Exporting a zoomed-in or zoomed-out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported.
 
-    > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended DOCTYPEs include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPEs](https://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](https://www.w3.org/).
+    > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended DOCTYPEs include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and must not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPEs](https://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](https://www.w3.org/).
 
 * Windows Universal apps and [Cordova for Windows 10](https://cordova.apache.org/docs/en/5.1.1/guide/platforms/win8/win10-support.html) environments are not supported, due to the [sandbox restrictions of the environment](https://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx#Automatic_script_filtering). The recommended UI suite for this environment is [UI for Windows Universal](https://www.telerik.com/windows-universal-ui).
 * Unexpected behaviors that occur only in a hybrid application, but not in a standalone supported browser, are by default considered to be triggered by the hybrid environment and unrelated to Kendo UI.
-* It is highly advisable to use [Internet Explorer Edge mode](https://docs.microsoft.com/en-us/archive/blogs/ie/ies-compatibility-features-for-site-developers) over a META tag or an HTTP header:
+* It is advisable to use [Internet Explorer Edge mode](https://docs.microsoft.com/en-us/archive/blogs/ie/ies-compatibility-features-for-site-developers) over a META tag or an HTTP header:
 
     ```
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

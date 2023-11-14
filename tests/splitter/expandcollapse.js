@@ -266,8 +266,8 @@
 
             splitter.object.collapse(".k-pane:last");
 
-            assert.equal(splitter.dom.find(".k-pane:first").width(), splitter.dom.width() - 8);
-            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetLeft, splitter.dom.width() - 8);
+            assert.equal(splitter.dom.find(".k-pane:first").width(), splitter.dom.width() - 12);
+            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetLeft, splitter.dom.width() - 12);
         });
 
         it("collapsing the last fluid pane in vertical splitter distributes remaining size to neighbour pane", function() {
@@ -281,8 +281,8 @@
 
             splitter.object.collapse(".k-pane:last");
 
-            assert.equal(splitter.dom.find(".k-pane:first").height(), splitter.dom.height() - 8);
-            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetTop, splitter.dom.height() - 8);
+            assert.equal(splitter.dom.find(".k-pane:first").height(), splitter.dom.height() - 12);
+            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetTop, splitter.dom.height() - 12);
         });
 
         it("collapsing a pane adds an overflow:hidden style to it", function() {
@@ -346,7 +346,7 @@
 
             splitter.dom.find(".k-i-caret-alt-down").click();
 
-            assert.equal(splitter.dom.find(".k-pane:first").width(), 98);
+            assert.equal(splitter.dom.find(".k-pane:first").width(), 96);
         });
 
         it("panes can be collapsed after resizing", function() {

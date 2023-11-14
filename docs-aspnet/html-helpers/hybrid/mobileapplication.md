@@ -161,4 +161,4 @@ You can reference a hybrid Application instance by using the code from the follo
 
 ## See Also
 
-* [Hybrid ApplicationBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileApplicationBuilder)
+* [Hybrid ApplicationBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobileapplicationbuilder)

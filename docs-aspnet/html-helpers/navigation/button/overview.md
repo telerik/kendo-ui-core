@@ -87,12 +87,15 @@ The following example demonstrates the available configuration options for the B
 * [Badge Button]({% slug badges_button_aspnetcore %})&mdash;You can add a Badge to the Button to conveniently show its status, a notification, or a short message.
 * [Events]({% slug events_button_aspnetcore %})&mdash;The Button allows you to handle its click event and implement custom functionality.
 
+>tip To learn more about the appearance, anatomy, and accessibility of the Button, visit the [Telerik and Kendo UI Design System documentation](www.telerik.com/design-system/docs/components/button/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
+
 ## Next Steps
 
 * [Getting Started with the Button]({% slug aspnetcore_button_getting_started %})
 * [Basic Usage of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/index)
 {% if site.core %}
 * [Basic Usage of the Button TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/tag-helper)
+* [Button in Razor Pages]({% slug htmlhelpers_button_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

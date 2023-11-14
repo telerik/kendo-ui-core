@@ -18,7 +18,7 @@ The ASP.NET Razor Pages framework was introduced in ASP.NET Core 2.0 as an alter
 
 * The `@model` directive specifies the type of the data that the page is expected to work with. The page uses the PageModel class itself as a view model. The required data is exposed as properties.
 * The page handles requests directly, without using a controller. A naming convention is used to find the appropriate handler method to execute in the PageModel class. Handler methods are prefixed with the word `On` followed by the HTTP verb used for the request that they process: `OnGet`, `OnPost`, `OnGetAsync` and `OnPostAsync`. Following this convention, additional handlers can be included, for example `OnGetHelloWorld`.
-* Razor Pages automatically implement antiforgery validation, which protects against cross-site request forgery (XSRF/CSRF) attacks.
+* Razor Pages automatically implement anti-forgery validation, which protects against cross-site request forgery (XSRF/CSRF) attacks.
 
 You can find more information on Razor Pages in the [Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/)
 
@@ -39,7 +39,10 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 1. Add the `@model` directive and an AntiForgeryToken on top of the Razor page:
 
     ``` 
+        @page
         @model IndexModel
+
+        @using Kendo.Mvc.UI
 
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
@@ -98,12 +101,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
                     </commands>
                 </column>
             </columns>
-            <datasource type="DataSourceTagHelperType.Ajax" page-size="10" 
-                server-aggregates="true"
-                server-filtering="true"
-                server-grouping="true"
-                server-paging="true"
-                server-sorting="true">
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
                 <transport>
                     <read url="/Index?handler=Read" data="forgeryToken" />
                     <create url="/Index?handler=Create" data="forgeryToken" />
@@ -114,6 +112,9 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
                     <model id="OrderID">
                         <fields>
                             <field name="OrderID" type="number" editable="false"></field>
+                            <field name="Freight" type="number"></field>
+                            <field name="ShipName" type="string"></field>
+                            <field name="ShipCity" type="string"></field>
                         </fields>
                     </model>
                 </schema>
@@ -205,7 +206,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
 You can post data to the PageModel by binding the model properties to editors and submitting the entire model through a form. The example below demonstrates how to post the selected option from the [AutoComplete component]({% slug htmlhelpers_autocomplete_aspnetcore %}) to the PageModel:
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper-RazorPage(csthml)
     @page
     @model IndexModel
 
@@ -227,6 +228,36 @@ You can post data to the PageModel by binding the model properties to editors an
                     })
                     .Separator(", ")
                 )
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Send</button>
+            </div>
+        </div>
+    </form>
+```
+```tab-TagHelper-RazorPage(csthml)
+    @page
+    @model IndexModel
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    @{
+        var countries_data = new List<string>() { "France", "Germany", "United Kingdom" };
+    }
+
+    <form id="formExample" class="form-horizontal" method="post">
+        <div class="form-group">
+            <label for="ShipName">Ship name:</label>
+            <div class="col-sm-10">
+                <kendo-autocomplete for="ShipName"
+                    filter="FilterType.StartsWith"
+                    placeholder="Select country..."
+                    bind-to="countries_data"
+                    separator=", ">
+                </kendo-autocomplete>
             </div>
         </div>
         <div class="form-group">
@@ -269,7 +300,7 @@ The table below contains links to available examples of using Telerik UI for ASP
 
 ## Anti-request Forgery
 
-Razor pages are automatically protected from [XSRF/CSRF](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-3.1&tabs=visual-studio#xsrf). This is why, when you bind a Telerik component to page methods, you need to pass an antiforgery token, in order to validate the request. For that purpose, you can use [kendo.antiForgeryTokens();](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens#antiforgerytokens). More on the anti-request forgery could be found on [Microsoft documentation](https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-3.1)
+Razor pages are automatically protected from [XSRF/CSRF](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-3.1&tabs=visual-studio#xsrf). This is why, when you bind a Telerik component to page methods, you need to pass an anti-forgery token, to validate the request. For that purpose, you can use [kendo.antiForgeryTokens();](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens#antiforgerytokens). More on anti-forgery you can find on [Microsoft documentation](https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-3.1)
 
 ## Known Limitations
 

@@ -63,7 +63,7 @@ For more details, refer to the following articles:
 * [https://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/cancelchanges](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/cancelchanges)
 * [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/configuration/columns.command](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command)
 
-To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
+To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](https://docs.telerik.com/kendo-ui/controls/grid/appearance#restore-scroll-positions).
 
 ````dojo
 <div id="example">

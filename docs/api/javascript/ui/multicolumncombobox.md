@@ -12,6 +12,10 @@ Represents the Kendo UI MultiColumnComboBox widget. Inherits from [Widget](/api/
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
@@ -163,7 +167,7 @@ Controls whether to bind the widget to the data source on initialization.
 ### cascadeFrom `String`
 
 Use it to set the Id of the parent MultiColumnComboBox widget.
-[Help topic showing how cascading functionality works](/controls/editors/multicolumncombobox/cascading)
+[Help topic showing how cascading functionality works](/controls/multicolumncombobox/cascading)
 
 #### Example
 
@@ -204,7 +208,7 @@ Use it to set the Id of the parent MultiColumnComboBox widget.
 ### cascadeFromField `String`
 
 Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/multicolumncombobox/configuration/datavaluefield).
-[Help topic showing how cascading functionality works](/controls/editors/multicolumncombobox/cascading)
+[Help topic showing how cascading functionality works](/controls/multicolumncombobox/cascading)
 
 #### Example
 
@@ -278,7 +282,7 @@ Defines the parent field to be used to retain value from. This value will be use
 
 ### cascadeOnCustomValue `Boolean` *(default: false)*
 
-Applicable to a parent MultiColumnComboBox in а cascading scenario. If set to `true` cascading will be triggered upon custom input in the parent widget. When set to `false` (default) the child will not cascade and it will be disabled upon setting custom input in the parent MultiColumnComboBox. Cascade on custom values works only when `cascadeFromParentField` is not set for the child combo, or it points to the `dataValueField` of the parent.
+Applicable to a parent MultiColumnComboBox in a cascading scenario. If set to `true` cascading will be triggered upon custom input in the parent widget. When set to `false` (default) the child will not cascade and it will be disabled upon setting custom input in the parent MultiColumnComboBox. Cascade on custom values works only when `cascadeFromParentField` is not set for the child combo, or it points to the `dataValueField` of the parent.
 
 #### Example
 
@@ -918,7 +922,7 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
         { id: 2, name: "Oranges" }
       ],
       dataTextField: "name",
-      label: { 
+      label: {
         content: "Fruits",
         floating: true
       }

@@ -45,7 +45,7 @@ To achieve the desired scenario:
                 <h6>
                     Kendo UI is a comprehensive HTML5 user interface framework for building interactive and
                     high-performance websites and applications.
-                    It comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets,
+                    It comes with a library of 110+ UI widgets, an abundance of data-visualization gadgets,
                     client-side data source, and a built-in MVVM (Model-View-ViewModel) library.
                 </h6>
                 <h6>

@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Breadcrumb [exposes `Click()` and `Change()` events](/api/Kendo.Mvc.UI.Fluent/BreadcrumbEventBuilder) that you can handle to customize the functions of the component.
+The Breadcrumb [exposes `Click()` and `Change()` events](/api/kendo.mvc.ui.fluent/breadcrumbeventbuilder) that you can handle to customize the functions of the component.
 
 For a complete example on basic Breadcrumb events, refer to the [demo on using the events of the Breadcrumb](https://demos.telerik.com/{{ site.platform }}/breadcrumb/events).
 
@@ -79,7 +79,7 @@ For a complete example on basic Breadcrumb events, refer to the [demo on using t
 ## Next Steps
 
 * [Using the Breadcrumb Events (Demo)](https://demos.telerik.com/aspnet-core/breadcrumb/events)
-* [API for Configuring Breadcrumb events](/api/Kendo.Mvc.UI.Fluent/BreadcrumbEventBuilder)
+* [API for Configuring Breadcrumb events](/api/kendo.mvc.ui.fluent/breadcrumbeventbuilder)
 
 ## See Also
 

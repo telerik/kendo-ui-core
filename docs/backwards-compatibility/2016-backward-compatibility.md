@@ -41,7 +41,7 @@ The widget will not bind on `open` if `autoBind` is set to `false` and `minLengt
 
 **Validator**
 
-The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overridden by [specifying a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
+The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overridden by [specifying a custom rule](/controls/validator/overview#custom-rules-for-validation) with the `email` key.
 
 **Chart**
 

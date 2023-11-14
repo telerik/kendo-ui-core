@@ -19,11 +19,11 @@ For additional information about the Sass themes, visit the [Sass-Based Themes](
 
 > The Less-based themes support only the default values of the new [Components Styling Options]({% slug components_rendering_overview %}#styling-options).
 
-The Less-based themes will receive the new [styling options]({% slug components_rendering_overview %}#styling-options) just like the Sass themes. However, in 2023 the Less themes will be officially deprecated. Customers who continue to use Less themes after their deprecation will not be able to take advantage of the latest visual updates, features, and bug fixes. Also, the 2023 and later Kendo UI versions will be incompatible with the Less themes and you won't be able to upgrade the product version either.
+The Less-based themes will receive the new [styling options]({% slug components_rendering_overview %}#styling-options) like the Sass themes. However, in 2023 the Less themes will be officially deprecated. Customers who continue to use Less themes after their deprecation will not be able to take advantage of the latest visual updates, features, and bug fixes. Also, the 2023 and later Kendo UI versions will be incompatible with the Less themes and you won't be able to upgrade the product version either.
 
 The reason behind the deprecation of the Less-based themes is that they take a tremendous amount of time and resources to be kept updated.
 
-The Sass-based themes provide several unique swatches that are based on the main theme and can be updated at once. This enables the timely design and color scheme changes of the components which, in turn, leaves more time for new themes and swatches to be developed.
+The Sass-based themes provide unique swatches that are based on the main theme and can be updated at once. This enables the timely design and color scheme changes of the components which, in turn, leaves more time for new themes and swatches to be developed.
 
 With the Less-based themes, each individual theme has its own code base. Any time a component is updated or introduced, you must recreate each Less theme to ensure that the new addition is rendered without problems.
 
@@ -42,7 +42,7 @@ If you aren’t using this combination and instead use a single CSS file like `k
 
 ## How Do I Migrate to a Sass Theme?
 
-The migration to a Sass theme is a very straightforward process:
+The migration to a Sass theme is a straightforward process:
 
 1. Remove the old Less theme references, for example:
 
@@ -72,19 +72,20 @@ The following table contains the name of the Less theme and its Sass counterpart
 
 > The Bootstrap and Material Less themes will not have their own Sass swatches. Instead, use the dedicated Bootstrap and Material Sass themes.
 
-> These are alternative variants to the LESS themes and they do not provide a one-to-one conversion, but rather a similar and improved look-and-feel.
+> These are alternative variants to the LESS themes and they do not provide a one-to-one conversion, but a similar and improved look-and-feel.
 
-| Less Theme   | Sass Theme | Status | Sass Theme CDN
+| Less Theme   | Sass Theme Swatch | Status | Sass Theme CDN
 |:---         |:---        |:---        |:---
 | `Default` | `Classic - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-main.css |
 | `Default Dark` | `Classic - Main Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-main-dark.css |
 | `Black` | `Classic - Opal Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-opal-dark.css |
 | `Blue Opal` | `Classic - Opal` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-opal.css |
-| `Silver` | `Classic - Silver` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-silver.min.css |
-| `Metro` | `Classic - Metro` | In Research | TBA |
-| `Metro Black` | `Classic - Metro Dark` | In Research | TBA |
-| `Moonlight` | `Classic - Moonlight` | In Research | TBA |
-| `Bootstrap 3` | `Bootstrap - Bootstrap 3` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-3.css |
+| `Silver` | `Classic - Silver` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-silver.css |
+| `Metro` | `Classic - Metro` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-metro.css |
+| `Metro Black` | `Classic - Metro Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-metro-dark.css |
+| `Moonlight` | `Classic - Moonlight` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-moonlight.css |
+| `Uniform` | `Classic - Uniform` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-uniform.css |
+| `Bootstrap 3` | `Bootstrap - Bootstrap 3` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-bootstrap-3-dark.css |
 | `Bootstrap 3 Dark` | `Bootstrap - Bootstrap 3 Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-3-dark.css |
 | `Flat` | `Bootstrap - Turquoise` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-turquoise.css |
 | `Flat Dark` | `Bootstrap - Turquoise Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-turquoise-dark.css |
@@ -94,7 +95,6 @@ The following table contains the name of the Less theme and its Sass counterpart
 | `Office 365` | `Fluent - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/fluent/fluent-main.css |
 | `High Contrast` | N/A | In Research | TBA |
 | `Fiori` | N/A | Needs Validation | N/A |
-| `Uniform` | N/A | Needs Validation | N/A |
 
 The following example demonstrates how to add a theme to your project. Note that you have to add the snippet to the `head` element of the page.
 

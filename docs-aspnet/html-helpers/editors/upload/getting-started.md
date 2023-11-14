@@ -141,7 +141,7 @@ The next step is to specify the mode of operation for the Upload. In this tutori
 
 ## 4. Handle the Upload Events
 
-The Upload exposes various [events](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Upload` event to capture one or more files and the `Success` event to verify whether the upload operation has been completed successfully.
+The Upload exposes various [events](/api/kendo.mvc.ui.fluent/uploadeventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Upload` event to capture one or more files and the `Success` event to verify whether the upload operation has been completed successfully.
 
 ```HtmlHelper
     @(Html.Kendo().Upload()

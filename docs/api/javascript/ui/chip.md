@@ -72,7 +72,7 @@ See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for mor
     <script>
         $('#chip').kendoChip({
             removable: true,
-            removeIcon: 'close',
+            removeIcon: 'x',
             themeColor: 'success'
         });
     </script>

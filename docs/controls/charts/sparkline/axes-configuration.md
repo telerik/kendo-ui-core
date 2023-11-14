@@ -8,7 +8,7 @@ position: 3
 
 # Axes Configuration
 
-The Sparkline widget is a categorical (discrete) chart and has an implicit category and a value axis.
+The Sparkline component is a categorical (discrete) chart and has an implicit category and a value axis.
 
 The axis orientation (horizontal or vertical) is inferred from the series type.
 

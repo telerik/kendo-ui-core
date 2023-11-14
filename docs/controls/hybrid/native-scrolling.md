@@ -8,6 +8,10 @@ position: 2
 
 # Native Scrolling
 
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
 As of Kendo UI Q3 2013, the [hybrid Kendo UI Application widget](https://demos.telerik.com/kendo-ui/m/index#application/loadingpopup) supports the `useNativeScrolling` configuration option, which is set to `false` by default. The introduction of this new feature is mostly due to the changes in browser behavior that were introduced in iOS7. The option, however, can be enabled on other platforms too.
 
 ## Native vs. Emulated Scrolling

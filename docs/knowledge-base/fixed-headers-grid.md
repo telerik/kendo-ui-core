@@ -54,7 +54,6 @@ The following examples demonstrates the full code implementation.
 
 ```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.flat.min.css"/>
     <h1>&darr; SCROLL &darr;</h1>
     <div id="products"></div>
 

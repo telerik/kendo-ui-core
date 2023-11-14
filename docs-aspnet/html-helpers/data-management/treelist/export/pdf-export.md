@@ -17,8 +17,8 @@ For a runnable example, refer to the [demo on exporting the TreeList to PDF](htt
 To enable PDF export:
 
 1. Include the corresponding toolbar command and set the export settings.
-    * [Toolbar configuration](/api/Kendo.Mvc.UI.Fluent/TreeListToolbarFactory#pdf)
-    * [PDF export configuration](/api/Kendo.Mvc.UI.Fluent/TreeListBuilder#pdfsystemactionkendomvcuifluenttreelistpdfsettingsbuildert)
+    * [Toolbar configuration](/api/kendo.mvc.ui.fluent/treelisttoolbarfactory#pdf)
+    * [PDF export configuration](/api/kendo.mvc.ui.fluent/treelistbuilder#pdfsystemactionkendomvcuifluenttreelistpdfsettingsbuildert)
 1. Include the Pako Deflate library in the page to enable compression.
 
 To initiate the PDF export, press the **Toolbar** button or use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist) and call the [`saveAsPDF`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/saveaspdf) method.
@@ -28,7 +28,7 @@ The following example demonstrates how to enable the PDF export functionality of
 ```HtmlHelper
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
@@ -47,7 +47,7 @@ The following example demonstrates how to enable the PDF export functionality of
 ```TagHelper
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <kendo-treelist name="treelist">
         <toolbar>
@@ -89,15 +89,15 @@ The following example demonstrates how to handle custom fonts.
         // NOTE: Only required if the Kendo UI stylesheets are loaded
         // from a different origin, for example, kendo.cdn.telerik.com.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
@@ -127,15 +127,15 @@ The following example demonstrates how to handle custom fonts.
         // NOTE: Only required if the Kendo UI stylesheets are loaded
         // from a different origin, for example, kendo.cdn.telerik.com.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <kendo-treelist name="treelist">
         <toolbar>

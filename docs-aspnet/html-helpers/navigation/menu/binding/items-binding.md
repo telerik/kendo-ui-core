@@ -42,6 +42,6 @@ The Menu enables you to manually define the properties of each item.
 ## See Also
 
 * [Basic Usage of the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu)
-* [MenuItemBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
-* [MenuBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [MenuItemBuilder Server-Side API](/api/kendo.mvc.ui.fluent/menuitembuilder)
+* [MenuBuilder Server-Side API](/api/kendo.mvc.ui.fluent/menubuilder)
 * [Menu Server-Side API](/api/menu)

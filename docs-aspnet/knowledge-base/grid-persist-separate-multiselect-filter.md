@@ -1,6 +1,6 @@
 ---
 title: Persist Separated MultiSelect Filters for a Telerik UI Grid in the SessionStorage
-description: How can I persist the applied filters from separated MultiSelects to a Telerik UI Grid
+description: How can I persist the applied filters from separated MultiSelects to a {{ site.product }} Grid? Find the solution in the {{ site.product }} Knowledge Base.
 type: how-to
 page_title: Persist The Filter State of a Telerik UI Grid When Using Outside Placed MultiSelects
 slug: grid-persist-separate-multiselect-filter
@@ -26,21 +26,22 @@ component: grid
 
 ## Description
 
-How to reload the filtered state of a Telerik UI Grid applied from separated MultiSelects?
+How to reload the filtered state of a {{ site.product }} Grid applied from separated MultiSelect components?
 
 ## Solution
 
 The example below is implemented as per the following steps:
 
-1. Implement a Custom "Apply Filters" Button along with the separated from the Grid MultiSelects.
-1. Use the ["Click"](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) Event of the "Apply Filters" Custom button.
-1. In the Event handler, get the [values](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/methods/value) of the MultiSelects.
-1. Implement a custom logic creating a filter for the [dataSource](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) of the Telerik UI Grid by using the values of the MultiSelects(step 2) and main logic "or".
-1. Apply the filter(from point 4).
-1. Save the values of the MultiSelects to variables in the "SessionStorage".
-1. For the "document.ready" scope(when returning to the application page) - check if the SessionStorage has saved values of the MultiSelects. If yes - use them to filter the Grid.
-1. The held values in the SessionStorage could be used in order to set them to their MultiSelects instances in the document.ready scope.
-1. Here is an example:
+1. Implement a custom **Apply Filters** button along with the MultiSelect components that are separated from the Grid.
+1. Use the [`Click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of the custom **Apply Filters** button.
+1. In the Event handler, get the [`values`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/methods/value) of the MultiSelects.
+1. Implement a custom logic creating a filter for the [DataSource](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) of the {{ site.product }} Grid by using the values of the MultiSelect components (step 2) and main logic `OR`.
+1. Apply the filter from the previous step.
+1. Save the values of the MultiSelect components to variables in the `SessionStorage`.
+1. For the `document.ready` scope (when returning to the application page), check if the `SessionStorage` has any saved values for the MultiSelect components. If it has, use them to filter the Grid.
+1. You can use the values held in the `SessionStorage` to set them to their MultiSelect instances in the `document.ready` scope.
+
+The following examples demonstrates the steps described above.
 
 ```Index.cshtml
     @(Html.Kendo().MultiSelect()
@@ -192,7 +193,30 @@ The example below is implemented as per the following steps:
     </script>
 ```
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
- * [Grid server-side API methods](https://docs.telerik.com/aspnet-mvc/api/grid)
- * [Grid cient-side API methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods)
- * [MVC MultiSelect demo](https://demos.telerik.com/aspnet-mvc/multiselect)
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

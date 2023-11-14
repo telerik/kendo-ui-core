@@ -33,7 +33,7 @@ var __meta__ = {
             HTMLBase.fn.init.call(that, element, options);
             that.wrapper = that.element.addClass(KBUTTON);
 
-            if (!that.element.attr("type")) {
+            if (!that.element.attr("type") && that.options.type) {
                 that.element.attr("type", that.options.type);
             }
 
@@ -141,4 +141,5 @@ var __meta__ = {
     }]);
 
 })(window.kendo.jQuery);
+export default kendo;
 

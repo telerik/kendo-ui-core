@@ -109,6 +109,17 @@
             $("#item1").click();
         });
 
+        it("DropDownButton click event triggered from menu item with id set via attributes", function(done) {
+            var dropDownButton = new DropDownButton(button, {
+                 items: [ { attributes: { id: "idSet" }, click: function(ev) {
+                    assert.equal(ev.target.id, "idSet");
+                    done();
+                } } ],
+            });
+
+            $("#idSet").click();
+        });
+
         it("DropDownButton open event is triggered on button click", function(done) {
             var dropDownButton = new DropDownButton(button, {
                  items: defaultItems,

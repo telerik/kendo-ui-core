@@ -35,13 +35,13 @@ The Telerik UI Menu enables you to bind it to a hierarchical model.
         .Name("menu") // The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
         .BindTo(Model, mappings =>
         {
-            mappings.For<category>(binding => binding // Define the first level of the Menu.
+            mappings.For<Category>(binding => binding // Define the first level of the Menu.
                 .ItemDataBound((item, category) => // Define the mapping between the Menu item properties and the model properties.
                     {
                     item.Text = category.CategoryName;
                     })
                 .Children(category => category.Products)); // Define which property of the model contains the children.
-            mappings.For<product>(binding => binding
+            mappings.For<Product>(binding => binding
                 .ItemDataBound((item, product) =>
                 {
                     item.Text = product.ProductName;
@@ -50,24 +50,24 @@ The Telerik UI Menu enables you to bind it to a hierarchical model.
     )
     ```
     {% if site.core %}
-```TagHelper
-@{
-    var menuItems = Model.Select(category =>
-    {
-        return new MenuItemBase
-        {
-            Text = category.CategoryName,
-            Children = category.Products.Select(product =>
+    ```TagHelper
+        @{
+            var menuItems = Model.Select(category =>
             {
-                return new MenuItemBase { Text = product.ProductName };
-            })
-        };
-    });
-}
+                return new MenuItemBase
+                {
+                    Text = category.CategoryName,
+                    Children = category.Products.Select(product =>
+                    {
+                        return new MenuItemBase { Text = product.ProductName };
+                    })
+                };
+            });
+        }
 
-    <kendo-menu name="Menu" bind-to="menuItems">
-    </kendo-menu>
-```
+        <kendo-menu name="menu" bind-to="menuItems">
+        </kendo-menu>
+    ```
 {% endif %}
 
 

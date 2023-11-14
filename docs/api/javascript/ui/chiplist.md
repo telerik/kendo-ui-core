@@ -308,7 +308,7 @@ Defines custom attributes of the Chip's element.
             items: [
                 { text: "Home", icon: "home", attributes: { "data-val" : "custom data attribute" } },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ]
         });
     </script>
@@ -340,7 +340,7 @@ Add item before an already existing item.
             ]
         }).data("kendoChipList");
 
-        chiplist.add({ label: "Contact", icon: "envelop", attributes: { id: "email" } });
+        chiplist.add({ label: "Contact", icon: "envelope", attributes: { id: "email" } });
         chiplist.add({ label: "Info", icon: "info-circle" }, $("#email"));
     </script>
 
@@ -368,7 +368,7 @@ Specifies the state of the element.
             items: [
                 { label: "Home", icon: "home", enabled: false, attributes: { id: "home" } },
                 { label: "Info", icon: "info-circle" },
-                { label: "Contact", icon: "envelop" }
+                { label: "Contact", icon: "envelope" }
             ]
         }).data("kendoChipList");
 
@@ -399,7 +399,7 @@ The zero-based index of the item.
             items: [
                 { label: "Home", icon: "home", enabled: false },
                 { label: "Info", icon: "info-circle" },
-                { label: "Contact", icon: "envelop" }
+                { label: "Contact", icon: "envelope" }
             ]
         }).data("kendoChipList");
 
@@ -430,7 +430,7 @@ The id of the item.
             items: [
                 { label: "Home", icon: "home", enabled: false, attr: { id: "home" } },
                 { label: "Info", icon: "info-circle" },
-                { label: "Contact", icon: "envelop" }
+                { label: "Contact", icon: "envelope" }
             ]
         }).data("kendoChipList");
 
@@ -455,7 +455,7 @@ Gets items' elements in a jQuery array.
             items: [
                 { label: "Home", icon: "home" },
                 { label: "Info", icon: "info-circle" },
-                { label: "Contact", icon: "envelop" }
+                { label: "Contact", icon: "envelope" }
             ]
         }).data("kendoChipList");
 
@@ -481,7 +481,7 @@ The element to be removed.
             items: [
                 { label: "Home", icon: "home" },
                 { label: "Info", icon: "info-circle" },
-                { label: "Contact", icon: "envelop" }
+                { label: "Contact", icon: "envelope" }
             ]
         }).data("kendoChipList");
 
@@ -517,7 +517,7 @@ Forces the selected state to the specified one.
             items: [
                 { label: "Home", icon: "home" },
                 { label: "Info", icon: "info-circle" },
-                { label: "Contact", icon: "envelop" }
+                { label: "Contact", icon: "envelope" }
             ]
         }).data("kendoChipList");
 
@@ -560,7 +560,7 @@ If invoked prevents the Chip item selection.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ],
             select: function (ev) {
                 var item = ev.item;
@@ -599,7 +599,7 @@ If invoked prevents the ChipList from removing the Chip item.
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
-                { text: "Contact", icon: "envelop" }
+                { text: "Contact", icon: "envelope" }
             ],
             remove: function (ev) {
                 var item = ev.item;

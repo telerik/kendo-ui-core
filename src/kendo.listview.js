@@ -1,4 +1,6 @@
-import "./kendo.data.js";
+// The current file development is no longer in active phase but the code will be kept as is.
+// Please be advised that we have discontinued the sync for this file with the commercial version of Kendo UI for jQuery.
+// To take advantage of new features please visit (https://www.telerik.com/kendo-jquery-ui) and consider upgrading to a commercial license.import "./kendo.data.js";
 import "./kendo.editable.js";
 import "./kendo.selectable.js";
 import "./kendo.pager.js";
@@ -366,17 +368,9 @@ var __meta__ = {
                     if (item.length > 0) {
                         idx = item.index();
 
-                        that.angular("cleanup", function() {
-                            return { elements: [ item ] };
-                        });
-
                         item.replaceWith(template(data));
                         item = that.items().eq(idx);
                         item.attr(kendo.attr("uid"), data.uid);
-
-                        that.angular("compile", function() {
-                            return { elements: [ item ], data: [ { dataItem: data } ] };
-                        });
 
                         that.trigger("itemChange", {
                             item: item,
@@ -391,8 +385,6 @@ var __meta__ = {
             if (that.trigger(DATABINDING, { action: e.action || "rebind", items: e.items, index: e.index })) {
                 return;
             }
-
-            that._angularItems("cleanup");
 
             if (!endlessAppend) {
                 that._destroyEditable();
@@ -450,7 +442,6 @@ var __meta__ = {
             }
 
             that._setContentHeight();
-            that._angularItems("compile");
 
             that._progress(false);
             that._endlessFetchInProgress = null;
@@ -875,10 +866,6 @@ var __meta__ = {
                     template = that.altTemplate;
                 }
 
-                that.angular("cleanup", function() {
-                    return { elements: [ editable.element ] };
-                });
-
                 data = that._modelFromElement(editable.element);
                 that._destroyEditable();
 
@@ -892,10 +879,6 @@ var __meta__ = {
                 if (that._hasBindingTarget()) {
                     kendo.bind(item, data);
                 }
-
-                that.angular("compile", function() {
-                    return { elements: [ item ], data: [ { dataItem: data } ] };
-                });
             }
             return true;
         },

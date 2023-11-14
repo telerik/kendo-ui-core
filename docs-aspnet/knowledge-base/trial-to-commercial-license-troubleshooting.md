@@ -45,10 +45,34 @@ There are several common reasons for the observed behavior:
 
     In case you have configured any build/release pipelines while testing the {{site.product}} Trial package, it is possible that a reference to the component library has been pushed to source control and is being used for rebuilding the project.
 
-## See Also
+## Getting Started with {{ site.product }}
 
 * [First steps on Visual Studio for Windows (online guide)]({% slug gettingstarted_project_template %})
 * [First steps on Visual Studio for Mac (online guide)]({% slug gettingstarted_firststeps_vsmac %})
 * [First steps with CLI (online guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 
+## More {{ site.framework }} Resources
 
+* [{{ site.product }} Documentation]({%slug overview_aspnetmvc6_aspnetmvc%})
+
+* [{{ site.product }} Demos](https://demos.telerik.com/{{ site.platform }})
+
+{% if site.core %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-mvc)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

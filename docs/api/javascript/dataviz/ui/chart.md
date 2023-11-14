@@ -8275,7 +8275,7 @@ A function that can be used to create a custom visual for the legend items. The 
 * options - the item options.
 * createVisual - a function that can be used to get the default visual.
 * series - the item series.
-* pointIndex - the index of the point in the series. Available for pie, donut and funnel series.
+* pointIndex - the index of the point in the series. Available for pie, donut, pyramid and funnel series.
 
 #### Example - using custom visual for the legend items
 
@@ -12552,11 +12552,135 @@ The data field containing the color applied when the open value is greater than 
     });
     </script>
 
+### series.drilldownField `String`
+
+The data field which contains the value to use to drill down into detailed data for the point.
+
+#### Example - use the chart series drilldown field to implement drilldown
+
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Total Sales By Company',
+          field: 'sales',
+          categoryField: 'company',
+          drilldownField: 'details',
+          data: [{
+              company: 'Company A',
+              sales: 100,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 80
+                  }, {
+                    product: 'Product 2',
+                    sales: 20
+                  }]
+              }
+          }, {
+              company: 'Company B',
+              sales: 200,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 40
+                  }, {
+                    product: 'Product 2',
+                    sales: 160
+                  }]
+              }
+          }]
+        }]
+      });
+
+      $('#breadcrumb').kendoChartBreadcrumb({
+        chart: "#chart"
+      });
+    </script>
+
+### series.drilldownSeriesFactory `Function`
+
+A function that creates the drilldown series for a given point.
+
+The function should accept a single parameter, the point `drilldownField` value.
+The function should return a series configuration object or a `Promise` that resolves to one.
+
+#### Example - use the chart series drilldownSeriesFactory function to implement dynamic drilldown
+
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      var vehiclesByModel = {
+        'Tesla': [{
+          model: 'Model 3',
+          count: 225350
+        }, {
+          model: 'Model Y',
+          count: 40159
+        }],
+        'VW': [{
+          model: 'ID.3',
+          count: 60274
+        }, {
+          model: 'ID.4',
+          count: 20302
+        }]
+      };
+
+      var vehiclesByMake = [{
+        company: 'Tesla',
+        count: 314159
+      }, {
+        company: 'VW',
+        count: 112645
+      }];
+
+      function drilldownByModel(make) {
+        const data = vehiclesByModel[make];
+        if (data) {
+          return {
+            type: 'column',
+            name: make + ' Sales by Model',
+            data,
+            field: 'count',
+            categoryField: 'model'
+          };
+        }
+      };
+
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Battery EVs registered in 2022',
+          data: vehiclesByMake,
+          field: 'count',
+          categoryField: 'company',
+          drilldownField: 'company',
+          drilldownSeriesFactory: drilldownByModel
+        }]
+      });
+
+      $('#breadcrumb').kendoChartBreadcrumb({
+        chart: "#chart"
+      });
+    </script>
+
 ### series.segmentSpacing `Number` *(default: 0)*
 
-The space in pixels between the different segments of the funnel chart.
+The space in pixels between the different segments of the funnel and pyramid charts.
 
-> The `segmentSpacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+> The `segmentSpacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 #### Example - set the chart series segmentSpacing field
 
@@ -12663,7 +12787,7 @@ The last element is always created like a rectangle since there is no following 
 
 ### series.dynamicHeight `Boolean` *(default: true)*
 
-> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 When set to `false` all segments become with the same height, otherwise the height of each segment is based on its value.
 
@@ -13110,6 +13234,50 @@ The data item field which contains the series value. **The field name should be 
     });
     </script>
 
+### series.for `String`
+
+The name of the parent series of the trendline.
+
+> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" or "movingAverageTrendline".
+
+#### Example - set the trendline parent series fromField
+
+	<div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          },
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Sales Trend (LINEAR)",
+        type: "linearTrendline",
+        for: "Sales By Quarter"
+      }]
+    });
+    </script>
+
 ### series.fromField `String` *(default: "min")*
 
 The data item field which contains the series from value.
@@ -13150,6 +13318,162 @@ The data item field which contains the series to value.
       },
       series: [{
         toField: "to"
+      }]
+    });
+    </script>
+
+### series.trendline `Object`
+
+The trendline configuration options.
+
+> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" or "movingAverageTrendline".
+
+#### Example - set the trendline options
+
+	<div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Sales Trend",
+        type: "movingAverageTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          period: 3
+        }
+      }]
+    });
+    </script>
+
+### series.trendline.forecast `Object`
+
+The trendline forecast settings. By default, the trendline does not display a forecast.
+
+> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" and the parent series are either date series, "scatter" or "scatterLine" series.
+
+#### Example - set the trendline forecast
+
+	  <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              date: new Date(2021, 0, 1),
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              date: new Date(2021, 3, 1),
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              date: new Date(2021, 6, 1),
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              date: new Date(2021, 9, 1),
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "date"
+      }, {
+        name: "Sales Trend",
+        type: "linearTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          forecast: {
+            before: 3,
+            after: 5
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.trendline.forecast.before `Number` *(default: 0)*
+
+The number of intervals to extend the trendline before the first data point.
+
+### series.trendline.forecast.after `Number` *(default: 0)*
+
+The number of intervals to extend the trendline after the last data point.
+
+### series.trendline.period `Number` *(default: 2)*
+
+The number of intervals to take when calculating averages. The value should be an integer greater than 2.
+
+> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "movingAverageTrendline".
+
+#### Example - set the moving average trendline period
+
+	<div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Sales Trend",
+        type: "movingAverageTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          period: 3
+        }
       }]
     });
     </script>
@@ -14241,7 +14565,7 @@ The available argument fields are:
 
 ### series.holeSize `Number`
 
-The diameter of the donut hole in pixels.
+The radius of the donut hole in pixels.
 
 > The `holeSize` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut".
 
@@ -14286,18 +14610,18 @@ The chart series label configuration.
 
 ### series.labels.align `String`
 
-The label alignment when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel" or "pie".
+The label alignment when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel", "pyramid" or "pie".
 
 The supported values  for "donut" and "pie" are:
 
 * "circle" - the labels are positioned in circle around the chart.
 * "column" - the labels are positioned in columns to the left and right of the chart.
 
-The supported values for "funnel" are:
+The supported values for "funnel" and "pyramid" are:
 
-* "center" - the labels are positioned in the center over the funnel segment.
-* "right" - the labels are positioned on the right side of the chart and do not (if there is enough space) overlap the funnel segment(s).
-* "left" - the labels are positioned on the left side of the chart and do not (if there is enough space) overlap the funnel segment(s).
+* "center" - the labels are positioned in the center over the segment.
+* "right" - the labels are positioned on the right side of the chart and do not (if there is enough space) overlap the segment(s).
+* "left" - the labels are positioned on the left side of the chart and do not (if there is enough space) overlap the segment(s).
 
 
 #### Example - set the chart series label alignment
@@ -14786,14 +15110,14 @@ The position of the labels.
 
 * "above" - the label is positioned at the top of the marker. **Applicable for series that render points, incl. bubble.**
 * "below" - the label is positioned at the bottom of the marker. **Applicable for series that render points, incl. bubble.**
-* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series.**
+* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, pyramid, radarColumn and waterfall series.**
 * "insideBase" - the label is positioned inside, near the base of the bar. **Applicable for bar, column and waterfall series.**
 * "insideEnd" - the label is positioned inside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series.**
 * "left" - the label is positioned to the left of the marker. **Applicable for series that render points, incl. bubble.**
 * "outsideEnd" - the label is positioned outside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.**
 * "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
 * "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
-* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
+* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel and pyramid series.**
 * "auto" - the from and to labels area positioned at the top/bottom(rangeArea series) or left/right(verticalRangeArea series) so that they are outside the filled area. **Applicable for rangeArea and verticalRangeArea series.**
 
 
@@ -17277,9 +17601,12 @@ The supported values are:
 * [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
 * [`donut`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.donut)
 * [`funnel`](/controls/charts/chart-types/funnel-charts)
+* [`pyramid`](/controls/charts/chart-types/pyramid-charts)
 * [`heatmap`](/controls/charts/chart-types/heatmap)
 * [`horizontalWaterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/horizontal)
 * [`line`](/controls/charts/chart-types/line-charts)
+* [`linearTrendline`](/controls/charts/elements/trendlines)
+* [`movingAverageTrendline`](/controls/charts/elements/trendlines)
 * [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
 * [`pie`](/controls/charts/chart-types/pie-charts)
 * [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)
@@ -17338,7 +17665,7 @@ Sets the visible property of a chart series
 
 ### series.visibleInLegend `Boolean` *(default: true)*
 
-A value indicating whether to show the point category name (for funnel, donut and pie series)
+A value indicating whether to show the point category name (for funnel, pyramid, donut and pie series)
 or series name (for other available series types) in the legend.
 
 #### Example - hide a chart series from the legend
@@ -17360,7 +17687,7 @@ or series name (for other available series types) in the legend.
 
 The data item field which indicates whether to show the point category name in the legend.
 
-> The `visibleInLegendField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel", "donut" or "pie".
+> The `visibleInLegendField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel", "pyramid", "donut" or "pie".
 
 #### Example - set the chart series visible in legend field
 
@@ -17383,7 +17710,7 @@ The data item field which indicates whether to show the point category name in t
 
 ### series.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, pyramid, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -17402,7 +17729,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * startAngle - the segment start angle. Available for donut and pie series.
 * endAngle - the segment end angle. Available for donut and pie series.
 * center - the segment center point. Available for donut and pie series.
-* points - the segment points. Available for funnel, line and scatterLine series.
+* points - the segment points. Available for funnel, pyramid, line and scatterLine series.
 
 #### Example - using custom visual
 
@@ -19124,14 +19451,14 @@ The position of the labels.
 
 * "above" - the label is positioned at the top of the marker. **Applicable for series that render points, incl. bubble.**
 * "below" - the label is positioned at the bottom of the marker. **Applicable for series that render points, incl. bubble.**
-* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series.**
+* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, pyramid, radarColumn and waterfall series.**
 * "insideBase" - the label is positioned inside, near the base of the bar. **Applicable for bar, column and waterfall series.**
 * "insideEnd" - the label is positioned inside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series.**
 * "left" - the label is positioned to the left of the marker. **Applicable for series that render points, incl. bubble.**
 * "outsideEnd" - the label is positioned outside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.**
 * "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
-* "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
-* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
+* "top" - the label is positioned at the top of the segment. **Applicable for funnel and pyramid series.**
+* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel and pyramid series.**
 * "auto" - the from and to labels area positioned at the top/bottom(rangeArea series) or left/right(verticalRangeArea series) so that they are outside the filled area. **Applicable for rangeArea and verticalRangeArea series.**
 
 
@@ -19178,9 +19505,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -19361,9 +19688,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -19469,9 +19796,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -19753,6 +20080,7 @@ The supported values are:
 * column
 * donut
 * funnel
+* pyramid
 * line
 * ohlc
 * pie
@@ -19933,7 +20261,7 @@ The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/form
 
 Format placeholders:
 
-* Area, bar, column, funnel, line and pie
+* Area, bar, column, funnel, pyramid, line and pie
     *   {0} - value
 * Bubble
     *   {0} - x value
@@ -20206,7 +20534,7 @@ The verticalRangeArea chart series options. Accepts all values supported by the 
 
 ### seriesDefaults.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, pyramid, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -20225,7 +20553,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * startAngle - the segment start angle. Available for donut and pie series.
 * endAngle - the segment end angle. Available for donut and pie series.
 * center - the segment center point. Available for donut and pie series.
-* points - the segment points. Available for funnel, line and scatterLine series.
+* points - the segment points. Available for funnel, pyramid, line and scatterLine series.
 
 #### Example - using custom visual
 
@@ -20443,7 +20771,7 @@ The supported values are:
       seriesDefaults: {
         notes: {
           icon: {
-            shape: "triangle"
+            type: "triangle"
           }
         }
       },
@@ -21569,6 +21897,17 @@ The supported values are:
 * "silver"
 * "uniform"
 
+#### Example
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      theme: "black",
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    </script>
+
 ### title `Object|String`
 
 The chart title configuration options or text.
@@ -22206,7 +22545,7 @@ The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/form
 
 Format placeholders:
 
-* Area, bar, column, funnel, line and pie
+* Area, bar, column, funnel, pyramid, line and pie
     *   {0} - value
 * Bubble
     *   {0} - x value
@@ -38170,6 +38509,69 @@ Reloads the data and renders the chart.
     chart.refresh();
     </script>
 
+### resetDrilldownLevel
+
+Sets the current drill-down level for Drilldown Charts.
+
+* To return to a previous level, set the value to a number less than the current level.
+* To return to the root chart, set the value to 0.
+
+Setting the value to a number greater than the current level will have no effect.
+
+#### Example - use resetDrilldownLevel to get back to the root Chart
+
+    <button id="reset">Reset Drilldown</button>
+    <div id="chart"></div>
+    <script>
+      $("#reset").click(function() {
+        var chart = $("#chart").getKendoChart();
+        chart.resetDrilldownLevel(0);
+      });
+
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Total Sales By Company',
+          field: 'sales',
+          categoryField: 'company',
+          drilldownField: 'details',
+          data: [{
+              company: 'Company A',
+              sales: 100,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 80
+                  }, {
+                    product: 'Product 2',
+                    sales: 20
+                  }]
+              }
+          }, {
+              company: 'Company B',
+              sales: 200,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 40
+                  }, {
+                    product: 'Product 2',
+                    sales: 160
+                  }]
+              }
+          }]
+        }]
+      });
+    </script>
+
 ### resize
 
 Adjusts the chart layout to match the size of the container.
@@ -38201,7 +38603,7 @@ Saves the Chart as a PDF file using the options specified in [options.pdf](/api/
 
 #### Example - export the Chart to PDF
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     <button id="exportBtn">Export to PDF</button>
     <div id="chart" style="width: 600px; height: 400px;"></div>
     <script>
@@ -38407,7 +38809,7 @@ Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozil
 
 ### toggleHighlight
 
-Toggles the highlight of the series points or a segment for pie, donut and funnel charts.
+Toggles the highlight of the series points or a segment for pie, donut and funnel, pyramid charts.
 
 #### Parameters
 
@@ -38785,6 +39187,111 @@ The widget instance which fired the event.
     });
     var chart = $("#chart").data("kendoChart");
     chart.bind("dragStart", chart_dragStart);
+    </script>
+
+### drilldown
+
+Fires when the user when the user wants to drill down on a specific point.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.drilldownSeries `Object`
+
+The configuration object for the newly created drilldown series.
+
+##### e.point `Object`
+
+The point to drill down into.
+
+##### e.preventDefault `Function`
+
+If invoked the drill down operation will be cancelled and the Chart will remain in the same state.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The configuration object for the series to drill down into.
+
+#### Example - subscribe to the "drilldown" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      drilldown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldown");
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "drilldown" event after initialization
+    <div id="chart"></div>
+    <script>
+    function onDrilldown(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("drilldown");
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("drilldown", onDrilldown);
+    </script>
+
+### drilldownLevelChange
+
+Fires when the drill-down level has changed.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.level `Number`
+
+The current drill-down level.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+
+#### Example - subscribe to the "drilldownLevelChange" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      drilldownLevelChange: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldownLevelChange: " + e.level);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "drilldown" event after initialization
+    <div id="chart"></div>
+    <script>
+    function onDrilldownLevelChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldownLevelChange: " + e.level);
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("drilldownLevelChange", onDrilldownLevelChange);
     </script>
 
 ### legendItemClick

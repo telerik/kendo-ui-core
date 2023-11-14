@@ -1,6 +1,6 @@
 ---
 title: Export PDF file from an Editor and Load it into a PDFViewer
-description: How can I export a PDF file from a hidden Editor and load it into a PDFViewer?
+description: How can I export a PDF file from a hidden Editor and load it into a PDFViewer? Follow the steps in the Knowledge Base section of the {{ site.product }} components.
 type: how-to
 page_title: Export PDF file from an Editor and Load it into a PDFViewer
 slug: editor-export-pdf-load-in-pdfviewer
@@ -39,7 +39,7 @@ The example below relies on the following key steps:
 
 1. Create a hidden [Editor with specified PDF export settings](https://demos.telerik.com/{{ site.platform }}/editor/pdf-export), a [page template](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/page-templates), and a [PDFViewer](https://demos.telerik.com/{{ site.platform }}/pdfviewer).
 1. Override the default implementation of the [`saveAsPDF()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/saveaspdf) method of the Editor so the data about the PDF file is accessible in the returned promise in the PdfExport event handler.
-1. Handle the [`PdfExport event`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/EditorEventBuilder#pdfexportsystemfunc) of the Editor and pass the file to the PDFViewer by using the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) method.
+1. Handle the [`PdfExport event`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/editoreventbuilder#pdfexportsystemfunc) of the editor and pass the file to the PDFViewer by using the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) method.
 1. When the page is loaded, get a reference to the hidden Editor, set the page template in the Editor's PDF options, and trigger its `saveAsPDF()` method.
 
 
@@ -118,8 +118,34 @@ The example below relies on the following key steps:
         </script>
     ```
 
-Refer to [this REPL](https://netcorerepl.telerik.com/wmFaGhGv31uIA5d258) for a runnable example.
+For a runnable example based on the code above, refer to the [REPL example on exporting a PDF file from an Editor](https://netcorerepl.telerik.com/wmFaGhGv31uIA5d258).
+
+## More {{ site.framework }} Editor Resources
+
+* [{{ site.framework }} Editor Documentation]({%slug htmlhelpers_editor_aspnetcore%})
+
+* [{{ site.framework }} Editor Demos](https://demos.telerik.com/{{ site.platform }}/editor)
+
+{% if site.core %}
+* [{{ site.framework }} Editor Product Page](https://www.telerik.com/aspnet-core-ui/editor)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Editor Product Page](https://www.telerik.com/aspnet-mvc/editor)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
- * [Editor Client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
- * [PDFViewer Client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+
+* [Telerik REPL: Exporting a PDF File from an Editor and Loading It into a PDFViewer](https://netcorerepl.telerik.com/wmFaGhGv31uIA5d258)
+* [Client-Side API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [Client-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [Server-Side API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/editor)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

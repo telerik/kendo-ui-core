@@ -2,7 +2,7 @@
 title: Send Anti-Forgery Token with Grid Requests in ASP.NET Core and ASP.NET MVC Projects
 description: An example on how to send an anti-forgery token with the requests of a Grid in ASP.NET Core and ASP.NET MVC projects.
 type: how-to
-page_title: Send Anti-Forgery Token with Grid Requests in ASP.NET Core and ASP.NET MVC Projects | {{ site.product }} Grid
+page_title: Send Anti-Forgery Token with Grid Requests in ASP.NET Core and ASP.NET MVC Projects
 slug: grid-send-antiforgery-token
 tags: kendo, grid, core, mvc, anti, forgery, token, antiforgery, send, antiforgerytoken
 res_type: kb
@@ -24,7 +24,7 @@ component: grid
 
 ## Description
 
-How can I send an anti-forgery token with the requests of a Telerik UI Grid in ASP.NET Core and ASP.NET MVC projects?
+How can I send an anti-forgery token with the requests of a {{ site.product }} Grid in ASP.NET Core and ASP.NET MVC projects?
 
 ## Solution
 
@@ -122,3 +122,31 @@ How can I send an anti-forgery token with the requests of a Telerik UI Grid in A
     </script>
 ```
 The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens which are found on the page.
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

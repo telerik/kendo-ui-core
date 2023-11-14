@@ -63,4 +63,4 @@ Configure a `buttonsTemplate` and add the html for the reset button. On click of
 
 ## See Also
 
-* [Form Overview](https://docs.telerik.com/kendo-ui/controls/layout/form/overview)
+* [Form Overview](https://docs.telerik.com/kendo-ui/controls/form/overview)

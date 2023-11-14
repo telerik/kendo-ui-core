@@ -1,16 +1,20 @@
 ---
 title:  Razor Pages
-page_title: Configure a Telerik UI DateRangePicker in Razor Pages.
+page_title: Razor Pages
 description: "An example on how to configure a DateRangePicker with a default value in Razor Pages."
 slug: htmlhelpers_daterangepicker_razorpage_aspnetcore
 position: 9
 ---
 
-# Razor Page
+# DateRangePicker in Razor Pages
 
-This article demonstrates how to set up the DateRangePicker component in a Razor Pages scenario and how to add a default value.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-See the implementation details in the example below. For the full project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI DateRangePicker for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the DateRangePicker component in a Razor Pages scenario.
+
+For the complete project, refer to the [DateRangePicker in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DateRangePicker/DateRangePickerIndex.cshtml).
 
 ```tab-HtmlHelper(cshtml)
 @page

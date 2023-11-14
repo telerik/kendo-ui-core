@@ -600,7 +600,11 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "setColumnPosition": "Задай позиция на колоната",
   "apply": "Приложи",
   "reset": "Нулирай",
-  "buttonTitle": "Меню за редактиране на колона {0}"
+  "buttonTitle": "Меню за редактиране на колона {0}",
+  "movePrev": "Премести на предишно",
+  "moveNext": "Премести на следващо",
+  "groupColumn": "Групирай колона",
+  "ungroupColumn": "Разгрупирай колона"
 });
 }
 
@@ -1308,7 +1312,7 @@ if (kendo.ui.PDFViewer) {
                 previous: "Отиди на предишната страница",
                 next: "Отиди на следващата страница",
                 last: "Отиди на последната страница",
-                of: " от {0} ",
+                of: "от",
                 page: "страница",
                 pages: "страници"
             },

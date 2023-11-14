@@ -169,6 +169,19 @@
             assert.equal(splitButton.menu.list.children("li").eq(0).text(), "item 1");
             assert.equal(splitButton.menu.list.children("li").eq(1).text(), "item 2");
         });
+
+        it("SplitButton renders custom classes applied to its item", function() {
+            button.attr("type", "submit");
+            var splitButton = new SplitButton(button, { items: [
+                { text: "Insert between", attributes: { "class": "my-custom-class" } }
+            ] });
+
+            var item = splitButton.menu.element.find(".k-item");
+
+            assert.equal(item.length, 1);
+            assert.isOk(item.hasClass("my-custom-class"));
+            assert.isOk(item.hasClass("k-menu-item"));
+        });
     });
 
     describe("SplitButton - disabled states", function() {

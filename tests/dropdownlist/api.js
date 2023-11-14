@@ -1031,6 +1031,20 @@
             dropdownlist.value("item2");
         });
 
+        it("setOptions adds filter header", function() {
+            dropdownlist = new DropDownList(input, {
+                dataSource: ["item1", "item2"],
+            });
+
+            assert.isOk(!dropdownlist.filterInput);
+
+            dropdownlist.setOptions({
+                filter: "contains"
+            });
+
+            assert.isOk(dropdownlist.filterInput);
+        });
+
         it("setOptions remove filter header", function() {
             dropdownlist = new DropDownList(input, {
                 dataSource: ["item1", "item2"],

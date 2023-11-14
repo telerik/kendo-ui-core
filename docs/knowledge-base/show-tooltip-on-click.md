@@ -85,7 +85,7 @@ The following example demonstrates how to show the tooltip of a Kendo UI Chart u
             visible: false
           },
           labels: {
-            padding: {top: 135}
+            position: 'start'
           }
         },
         tooltip: {

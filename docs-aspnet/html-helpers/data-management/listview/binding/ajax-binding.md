@@ -4,7 +4,7 @@ page_title: Ajax Binding
 description: "Configure the Telerik UI ListView for AJAX binding and easily enable client-data processing during AJAX binding."
 previous_url: /helpers/data-management/listview/binding
 slug: htmlhelpers_listview_aspnetcore_ajaxbinding
-position: 2
+position: 1
 ---
 
 # Ajax Binding
@@ -59,6 +59,22 @@ To configure the ListView for {{ site.framework }} for Ajax binding:
             .Pageable()
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-listview name="ListView"
+                        tag-name="div"
+                        template-id="template"
+                        style="height:350px;">
+            <scrollable enabled="true" />
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="6">
+                <transport>
+                    <read url="@Url.Action("Orders_Read", "ListView")" />
+                </transport>
+            </datasource>
+            <pageable enabled="true" />
+        </kendo-listview>
+    ```
+    {% endif %}
     ```Template
         <script type="text/x-kendo-tmpl" id="template">
             <div class="order">
@@ -181,17 +197,49 @@ To pass additional parameters to the action method:
                 };
             }
         </script>
-
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-listview name="ListView"
+                        tag-name="div"
+                        template-id="template">
+            <scrollable enabled="true" />
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="6">
+                <transport>
+                    <read url="@Url.Action("Orders_Read", "ListView")" data="additionalData" />
+                </transport>
+            </datasource>
+            <pageable enabled="true" />
+        </kendo-listview>
+        <script>
+            function additionalData() {
+                return {
+                    firstName: "John",
+                    lastName: "Doe"
+                };
+            }
+        </script>
+    ```
+    {% endif %}
 ## Processing Client Data
 
 By default, the Telerik UI ListView for {{ site.framework }} requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.
 
-```HtmlHelper
-    .DataSource(dataSource => dataSource
-        .ServerOperation(false) // All data will be requested at once and data operations will be applied client-side.
-        .Read(read => read.Action("Orders_Read", "ListView"))
-    )
-```
+    ```HtmlHelper
+        .DataSource(dataSource => dataSource
+            .ServerOperation(false) // All data will be requested at once and data operations will be applied client-side.
+            .Read(read => read.Action("Orders_Read", "ListView"))
+        )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <datasource type="DataSourceTagHelperType.Ajax" server-operation="false">
+            <transport>
+                <read url="@Url.Action("Orders_Read", "ListView")"/>
+            </transport>
+        </datasource>
+    ```
+    {% endif %}
 
 ## See Also
 

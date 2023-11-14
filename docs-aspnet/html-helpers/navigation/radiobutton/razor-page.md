@@ -1,16 +1,20 @@
 ---
-title: Razor Page
-page_title: Configure the RadioButton in Razor Page
-description: "Learn how to configure the Telerik UI RadioButton for {{ site.framework }} in Razor Page scenario."
+title: Razor Pages
+page_title: Razor Pages
+description: "Learn how to configure the Telerik UI RadioButton for {{ site.framework }} in a Razor Pages scenario."
 slug: razor_page_radiobutton_aspnetcore
-position: 4
+position: 7
 ---
 
-# Razor Page
+# RadioButton in Razor Pages
 
-This article demonstrates how to configure the Telerik UI RadioButton HtmlHelper for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI RadioButton for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the RadioButton component in a Razor Pages scenario.
+
+For the complete project, refer to the [RadioButton in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/RadioButon/RadioButtonIndex.cshtml).
 
 ```tab-HtmlHelper(cshtml)
     @page

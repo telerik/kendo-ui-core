@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI TextBox for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/TextBoxEventBuilder) that allow you to control and customize the behavior of the UI component.
+The Telerik UI TextBox for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/textboxeventbuilder) that allow you to control and customize the behavior of the UI component.
 
 For a complete example on basic TextBox events, refer to the [demo on using the events of the TextBox](https://demos.telerik.com/{{ site.platform }}/textbox/events).
 

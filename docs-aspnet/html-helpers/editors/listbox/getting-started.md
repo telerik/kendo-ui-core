@@ -327,7 +327,7 @@ Handle the `DataBound` event of the ListBox, which fires when the data is receiv
 
 ## 4. Handle the ListBox Events
 
-The ListBox exposes various [events](/api/Kendo.Mvc.UI.Fluent/ListBoxEventBuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Reorder` event to track when the items are reordered.
+The ListBox exposes various [events](/api/kendo.mvc.ui.fluent/listboxeventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Reorder` event to track when the items are reordered.
 
 
 ```HtmlHelper

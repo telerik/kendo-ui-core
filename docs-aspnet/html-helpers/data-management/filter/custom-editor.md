@@ -12,9 +12,9 @@ The Filter provides the possibility to use custom editors for scenarios requirin
 
 ## Implementing Custom Editors
 
-To implement a custom editor you need to specify the [`.EditorTemplateHandler()`](/api/Kendo.Mvc.UI.Fluent/FilterFieldBuilder#editortemplatehandlersystemstring), [`.EditorTemplateId()`](/api/Kendo.Mvc.UI.Fluent/FilterFieldBuilder#editortemplateidsystemstring) or [`.EditorTemplate()`](/api/Kendo.Mvc.UI.Fluent/FilterFieldBuilder#editortemplatesystemstring) options of the Filter's Field configuration. The value of this field will point to the editor template that will be used by the {{ site.product }} Filter to render the editor.
+To implement a custom editor you need to specify the [`.EditorTemplateHandler()`](/api/kendo.mvc.ui.fluent/filterfieldbuilder#editortemplatehandlersystemstring), [`.EditorTemplateid()`](/api/kendo.mvc.ui.fluent/filterfieldbuilder#editortemplateidsystemstring) or [`.EditorTemplate()`](/api/kendo.mvc.ui.fluent/filterfieldbuilder#editortemplatesystemstring) options of the Filter's Field configuration. The value of this field will point to the editor template that will be used by the {{ site.product }} Filter to render the editor.
 
-The following example demonstrates how to create a custom editor using the [`.EditorTemplateHandler()`](/api/Kendo.Mvc.UI.Fluent/FilterFieldBuilder#editortemplatehandlersystemstring) configuration option:
+The following example demonstrates how to create a custom editor using the [`.EditorTemplateHandler()`](/api/kendo.mvc.ui.fluent/filterfieldbuilder#editortemplatehandlersystemstring) configuration option:
 
 ```HtmlHelper
     @(Html.Kendo().Filter<Kendo.Mvc.Examples.Models.ProductViewModel>()

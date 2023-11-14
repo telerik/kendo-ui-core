@@ -20,6 +20,7 @@ To get up and running with the project:
 1. [Include the Telerik UI for ASP.NET MVC client-side resources](#including-the-client-side-resources)
 1. [Initialize the HtmlHelper](#initializing-the-htmlhelper)
 1. [Build and run the application](#building-and-running-the-application)
+1. [Add a license file to your app](#adding-your-license-file)
 
 ## Prerequisites
 
@@ -165,6 +166,12 @@ Additionally, import the namespace for the model that you created in step 1.
 Press `CTRL+F5` to build and run the application. As a result, the following sample page is created.
 
 ![{{ site.product_short }} Sample page](../getting-started-mvc/images/sample-page.png)
+
+## Adding Your License File
+
+Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Adding a License File]({% slug using_license_code %}) article.
 
 ## Next Steps
 

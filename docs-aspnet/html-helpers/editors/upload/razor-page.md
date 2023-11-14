@@ -1,16 +1,20 @@
 ---
-title:  Razor Page
-page_title: Configure the Upload in a Razor Page.
+title: Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Upload component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_upload_razorpage_aspnetcore
 position: 8
 ---
 
-# Razor Page
+# Upload in Razor Pages
 
-This article describes how to configure the Telerik UI Upload component for {{ site.framework }} in a RazorPages scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-See the Upload configuration in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Upload for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Upload component in a Razor Pages scenario.
+
+For the complete project, refer to the [Upload in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Upload/UploadIndex.cshtml).
 
 ```tab-HtmlHelper(cshtml)
 @page

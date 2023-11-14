@@ -245,6 +245,7 @@ To reference an existing Telerik UI ScrollView instance, use the [`jQuery.data()
 * [Basic Usage of the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/index)
 {% if site.core %}
 * [Basic Usage of the ScrollView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/tag-helper)
+* [ScrollView in Razor Pages]({% slug htmlhelpers_scrollview_razorpage_aspnetcore %})
 {% endif %}
 * [Using the API of the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/api)
 * [ScrollView Server-Side API](/api/scrollview)

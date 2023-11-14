@@ -196,6 +196,7 @@ The following example demonstrates the basic configuration of the TabStrip.
 * [Basic Usage of the TabStrip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tabstrip/index)
 {% if site.core %}
 * [Basic Usage of the TabStrip TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/tag-helper)
+* [TabStrip in Razor Pages]({% slug htmlhelpers_tabstrip_aspnetcore_razor_page %})
 {% endif %}
 
 ## See Also

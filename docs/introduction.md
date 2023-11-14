@@ -41,7 +41,7 @@ The following table lists the Kendo UI tools and framework utilities that are av
 | [AngularJS Integration Overview]({% slug angularjs_integration_directives %}) & [Demos](https://demos.telerik.com/kendo-ui/integration/index) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Bootstrap Integration Overview & Demos]({% slug sassbasedthemes_kendoui %}) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [MVVM Integration Overview]({% slug overview_mvvmpattern_kendoui %}) & [Demos](https://demos.telerik.com/kendo-ui/mvvm/index)      | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
-| [PDF Export Overview]({% slug introduction_pdfexport_kendoui %}) & [Demos](https://demos.telerik.com/kendo-ui/pdf-export/index)      | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
+| [PDF Export Overview]({% slug pdfderawingexport_drawingapi %}) & [Demos](https://demos.telerik.com/kendo-ui/pdf-export/index)      | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [Single-Page Application Overview]({% slug overview_kendoui_singlepageapplication %}) & [Demos](https://demos.telerik.com/kendo-ui/spa/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Templates Overview]({% slug overview_kendoui_templatescomponent %}) & [Demos](https://demos.telerik.com/kendo-ui/templates/index)        | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Theme Builder Demos](https://demos.telerik.com/kendo-ui/themebuilder)        | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |

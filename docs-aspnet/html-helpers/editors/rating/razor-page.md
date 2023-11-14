@@ -1,16 +1,20 @@
 ---
-title:  Razor Page
-page_title: Configure a Rating in Razor Page.
+title: Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Rating component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_rating_razorpage_aspnetcore
 position: 7
 ---
 
-# Razor Page
+# Rating in Razor Pages
 
-This article describes how to configure the Telerik UI Rating for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Rating for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Rating component in a Razor Pages scenario.
+
+For the complete project, refer to the [Rating in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Rating/RatingIndex.cshtml).
 
 ```tab-HtmlHelper(csthml)        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

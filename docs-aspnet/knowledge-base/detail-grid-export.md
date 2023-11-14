@@ -1,7 +1,7 @@
 ---
-title: Export Detail Grids
-page_title:  Export Detail Grids
-description: "Get started with {{ site.framework }} enabling you to export to Excel master and detail Grids."
+title: Exporting Detail Grids
+page_title:  Exporting Detail Grids
+description: Learn how to export master and detail Grids to Excel when working with the {{ site.product }}.
 slug: howto_exportto_excel_masterand_detail_grid
 tags: grid, export, detail, grids
 component: grid
@@ -21,7 +21,7 @@ res_type: kb
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>Progress Тelerik UI version</td>
+  <td>Progress Telerik UI version</td>
   <td>2021.3.1207</td>
  </tr>
 </table>
@@ -36,7 +36,7 @@ The following examples demonstrate how to export detail Grids to Excel and merge
 
 To get the workbook of the detail Grids, the demos use the [`excelExport`](api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemfuncsystemobjectsystemobject) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](https://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
 
-The following example demonstrates how to export a detail Grid to Excel including the current page only. 
+The following example demonstrates how to export a detail Grid to Excel including the current page only.
 
 Refer to the [following REPL](https://netcorerepl.telerik.com/QwOFwYbU29KigMrU43) for a runnable sample of the code below.
 
@@ -156,7 +156,7 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/QwOFwYbU29KigMrU43
 </script>
 ```
 
-The following example demonstrates how to export a detail Grid to Excel including its all pages and details. To achieve this configure the Grid's [Excel AllPages property](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridExcelSettingsBuilder#allpagessystemboolean). 
+The following example demonstrates how to export a detail Grid to Excel including its all pages and details. To achieve this configure the Grid's [Excel `AllPages` property](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridexcelsettingsbuilder#allpagessystemboolean).
 
 Refer to the [following REPL](https://netcorerepl.telerik.com/cwkFQYbK53UW6qxu07) for a runnable sample.
 
@@ -277,6 +277,35 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/cwkFQYbK53UW6qxu07
 </script>
 ```
 
+Refer to the [following REPL](https://netcorerepl.telerik.com/cwkFQYbK53UW6qxu07) for a runnable sample.
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+* [{{ site.framework }} Grid Detail Template Demo](https://demos.telerik.com/{{ site.platform }}/grid/detailtemplate)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
-* [Grid Detail Template (Demo)](https://demos.telerik.com/aspnet-core/grid/detailtemplate)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+
+* [Telerik REPL: Exporting a Detail Grid to Excel by Including All Pages and Details](https://netcorerepl.telerik.com/cwkFQYbK53UW6qxu07)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

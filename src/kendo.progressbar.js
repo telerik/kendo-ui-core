@@ -511,4 +511,5 @@ var __meta__ = {
 
     kendo.ui.plugin(ProgressBar);
 })(window.kendo.jQuery);
+export default kendo;
 

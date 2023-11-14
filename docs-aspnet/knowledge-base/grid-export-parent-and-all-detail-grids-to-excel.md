@@ -1,8 +1,8 @@
 ---
-title: Export Detail Grids and Merge their Workbooks with the Parent Grid Workbook.
+title: Exporting Detail Grids and Merging their Workbooks with the Parent Grid Workbook.
 description: Learn how to use the excelExport event to export a parent Grid and all detail Grids to Excel.
 type: how-to
-page_title: Export parent and all detail Grids to Excel.
+page_title: Exporting Parent Grid and All Detail Grids to Excel.
 slug: aspnetcore_export_detail_grids_to_excel
 position:
 tags: grid, export, excel, hierarchy, detail,
@@ -26,15 +26,17 @@ res_type: kb
 
 
 ## Description
-How can I export a parent Grid and all of the detail Grids to Excel?
+
+How can I export a parent Grid and all detail Grids to Excel when working with {{ site.product }}?
 
 ## Solution
+
 The example below extends the [Grid Hierarchy Demo](https://demos.telerik.com/aspnet-core/grid/hierarchy) to demonstrate how to export to Excel the data from all detail Grids and merge their workbooks with the parent Grid workbook.
 
 The example relies on the following key steps:
 
 1. Add a Toolbar with an Export to Excel Button.
-1. Add an event handler to the client-side [ExcelExport](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event. The event is then prevented to avoid exporting only the data in the parent grid.
+1. Add an event handler to the client-side [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event. The event is then prevented to avoid exporting only the data in the parent grid.
 1. Fetch the data for all detail Grids and append to the corresponding parent row.
 
 ```
@@ -140,8 +142,33 @@ The example relies on the following key steps:
 </script>
 ```
 
-Refer to [this REPL](https://netcorerepl.telerik.com/QGOKQDvS30QKTkiV55) for a runnable example.
+For a runnable example with the code above, refer to the REPL project on [exporting a parent Grid and all detail Grids to Excel](https://netcorerepl.telerik.com/QGOKQDvS30QKTkiV55).
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
- * [Excel Export Overview](https://docs.telerik.com/kendo-ui/framework/excel/introduction)
- * [kendo.ooxml.Workbook client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
+
+* [Telerik REPL: Exporting Detail Grids and Merging Their Workbooks with the Parent](https://netcorerepl.telerik.com/QGOKQDvS30QKTkiV55)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

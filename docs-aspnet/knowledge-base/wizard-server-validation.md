@@ -1,6 +1,6 @@
 ---
-title: Implement Server Validation for Wizard
-description: An example on how to Implement Server Validation for Wizard.
+title: Implementing Server Validation for the Wizard Component
+description: An example on how to implement server validation for the {{ site.product }} Wizard component.
 type: how-to
 page_title: Implement Server Validation for Wizard
 slug: wizard-server-validation
@@ -15,13 +15,13 @@ component: wizard
 <table>
  <tr>
   <td>Product</td>
-  <td>Wizard for Progress® Telerik® UI for ASP.NET MVC</td>
+  <td>{{ site.product }} Wizard</td>
  </tr>
 </table>
 
 ## Description
 
-I want to implement server-side Validation with the Wizard component.
+How can I implement server-side validation with the Wizard component?
 
 ## Solution
 
@@ -179,4 +179,31 @@ You can achieve this requirement using the following approach:
     }
 ```
 
+## More {{ site.framework }} Wizard Resources
+
+* [{{ site.framework }} Wizard Documentation]({%slug htmlhelpers_wizard_aspnetcore_overview%})
+
+* [{{ site.framework }} Wizard Demos](https://demos.telerik.com/{{ site.platform }}/wizard)
+
+{% if site.core %}
+* [{{ site.framework }} Wizard Product Page](https://www.telerik.com/aspnet-core-ui/wizard)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Wizard Product Page](https://www.telerik.com/aspnet-mvc/wizard)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
+* [Server-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/wizard)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
 

@@ -64,7 +64,6 @@ The following example demonstrates how to initialize the FloatingActionButton, c
                                 align-offset-horizontal="50"
                                 position-mode="FloatingActionButtonPositionMode.Absolute"
                                 icon="share"
-                                shape="FloatingActionButtonShape.Pill"
                                 size="FloatingActionButtonSize.Medium"
                                 theme-color="FloatingActionButtonThemeColor.Info">
         <floatingactionbutton-items>
@@ -88,9 +87,9 @@ The following example demonstrates how to initialize the FloatingActionButton, c
 ## Functionality and Features
 
 * [Alignment]({% slug htmlhelpers_alignment_floatingactionbutton_aspnetcore %})&mdash;The FloatingActionButton provides options that allow you to manipulate the position of the component.
-* [Appearance]({% slug htmlhelpers_appearance_floatingactionbutton_aspnetcore %})&mdash;You can set the size, shape, color, icon, and text of the FloatingActionButton by using the built-in appearance options.
+* [Appearance]({% slug htmlhelpers_appearance_floatingactionbutton_aspnetcore %})&mdash;You can set the size, color, icon, and text of the FloatingActionButton by using the built-in appearance options.
 * [Templates]({% slug htmlhelpers_templates_floatingactionbutton_aspnetcore %})&mdash;The item templates allow you to control the rendering of the items in the FloatingActionButton popup.
-* [Accessibility]({% slug htmlhelpers_accessibility_floatingactionbutton_aspnetcore %})&mdash;The FloatingActionButton is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug htmlhelpers_accessibility_floatingactionbutton_aspnetcore %})&mdash;The FloatingActionButton is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 * [Events]({% slug events_floatingactionbutton %})&mdash;The FloatingActionButton emits `Click()`, `Expand()`, and `Collapse()` events that you can use to trigger specific actions.
 
 ## Next Steps

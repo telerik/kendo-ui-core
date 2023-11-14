@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Charts Documentation - StockChart Overview
-description: "Get started with the jQuery StockChart by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery StockChart by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_stockcharts
 position: 1
 ---
@@ -10,9 +10,9 @@ position: 1
 
 The StockChart is a specialized control visualizing the price movement of any financial instrument over a certain period of time.
 
-StockCharts include extensive touch support and a navigator pane for easy browsing of extended time periods. Generally, StockCharts extend the Kendo UI Chart widget and share most of its features.
+StockCharts include extensive touch support and a navigator pane for easy browsing of extended time periods. Generally, StockCharts extend the Kendo UI Chart component and share most of its features.
 
-All of the following series types that are supported by the StockChart are also accessible from a Kendo UI Chart widget:
+All of the following series types that are supported by the StockChart are also accessible from a Kendo UI Chart component:
 
 * [Candlestick](https://en.wikipedia.org/wiki/Candlestick_chart)
 * [Open-high-low-close (OHLC)](https://en.wikipedia.org/wiki/Open-high-low-close_chart)

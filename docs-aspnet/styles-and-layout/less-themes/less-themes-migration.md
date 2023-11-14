@@ -44,7 +44,7 @@ The migration to a SASS theme is straightforward:
 
    ```html
         <!-- The following styles are required for the SASS Default theme. -->
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.default-main.min.css" />
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
    ```
 
 With the new rendering of the components, some of CSS classes used in the old rendering will be removed. If you use any of those classes to customize a component, you will have to update the selectors of your custom CSS rules. Otherwise the customizations will no longer work. For more details, see the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) section of the [Components Rendering Overview]({% slug components_rendering_overview %}) article.
@@ -59,32 +59,33 @@ The following table contains the name of the LESS theme and its SASS counterpart
 
 | Less Theme   | Sass Theme | Status | Sass Theme CDN
 |:---         |:---        |:---        |:---
-| `Default` | `Classic - Main` | Available | https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.classic-main.min.css |
-| `Default Dark` | `Classic - Main Dark` | Available | https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.classic-main-dark.min.css |
-| `Black` | `Classic - Opal Dark` | In Progress | ETA March 2023 |
-| `Blue Opal` | `Classic - Opal` | Available | https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.classic-opal.min.css |
-| `Silver` | `Classic - Silver` | Available | https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.classic-silver.min.css |
+| `Default` | `Classic - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-main.css |
+| `Default Dark` | `Classic - Main Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-main-dark.css |
+| `Black` | `Classic - Opal Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-opal-dark.css |
+| `Blue Opal` | `Classic - Opal` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-opal.css |
+| `Silver` | `Classic - Silver` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-silver.css |
 | `Metro` | `Classic - Metro` | In Research | TBA |
 | `Metro Black` | `Classic - Metro Dark` | In Research | TBA |
 | `Moonlight` | `Classic - Moonlight` | In Research | TBA |
-| `Bootstrap 3` | `Bootstrap - Bootstrap 3` | In Progress | ETA March 2023 |
-| `Bootstrap 3 Dark` | `Bootstrap - Bootstrap 3 Dark` | In Progress | ETA March 2023 |
-| `Flat` | `Bootstrap - Turquoise` | In Progress | ETA March 2023 |
-| `Flat Dark` | `Bootstrap - Turquoise Dark` | In Progress | ETA March 2023 |
-| `Material` | `Material - Main` | Available | https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.material-main.min.css |
-| `Material Black` | `Material - Main Dark` | Available | https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.material-main-dark.min.css|
-| `Nova` | `Material - Nova` | Available | https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.material-nova.min.css |
-| `Office 365` | `Fluent - Main` | Available | https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.fluent-main.min.css |
-| `High Contrast` | N/A | In Research | TBA |
+| `Bootstrap 3` | `Bootstrap - Bootstrap 3` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-3.css |
+| `Bootstrap 3 Dark` | `Bootstrap - Bootstrap 3 Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-3-dark.css |
+| `Flat` | `Bootstrap - Turquoise` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-turquoise.css |
+| `Flat Dark` | `Bootstrap - Turquoise Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-turquoise-dark.css |
+| `Material` | `Material - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-main.css |
+| `Material Black` | `Material - Main Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-dark.css |
+| `Nova` | `Material - Nova` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/material/material-nova.css |
+| `Office 365` | `Fluent - Main` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/fluent/fluent-main.css |
+| `High Contrast` | `Classic - Lavender Dark` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-lavender-dark.css |
+| `High Contrast Light` | `Classic - Lavender Light` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-lavender.css |
 | `Fiori` | N/A | Needs Validation | N/A |
-| `Uniform` | N/A | Needs Validation | N/A |
+| `Uniform` | `Classic - Uniform` | Available | https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-uniform.css |
 
-> The Bootstrap and Material LESS themes will not have their own SASS swatches. The dedicated Bootstrap and Material SASS themes should be used instead.
+> The Sass swatches are alternative variants of the less themes. They are not 100% identical, but rather provide a similar/improved look-and-feel.
 
 The following example shows how to add the Clasic SASS theme to your project:
 
 ```html
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.classic-main.min.css" /> 
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/classic/classic-main.css" /> 
 ```
 
 The reference above must be added to the `head` element of the Layout.

@@ -115,5 +115,5 @@ Toggles the visibility of the related configurator
         configurator: "configurator"
     });
 
-    $("#pivotbutton").getPivotConfiguratorButton().toggle();
+    $("#pivotbutton").getKendoPivotConfiguratorButton().toggle();
     </script>

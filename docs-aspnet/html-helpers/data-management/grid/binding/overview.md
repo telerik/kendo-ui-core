@@ -13,11 +13,13 @@ Depending on the configuration of its [DataSource]({% slug htmlhelpers_datasourc
 
 {% if site.core %}
 * [Local data binding]({% slug htmlhelpers_grid_aspnetcore_localbinding %})
+* [Razor Pages binding]({% slug razorpages_gridhelper_aspnetcore %})
 {% else %}
 * [Server binding binding]({% slug serverbinding_grid_aspnetmvc %})
 {% endif %}
 * [Remote data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})
 * [SignalR data binding]({% slug htmlhelpers_grid_aspnetcore_signalrbinding %})
+* [WebApi Binding]({% slug htmlhelpers_grid_webapi_binding %})
 * [Custom Binding]({% slug custombinding_grid_aspnetmvc %}){% if site.mvc %} 
 * [Server Binding]({% slug serverbinding_grid_aspnetmvc %})
 
@@ -40,7 +42,7 @@ The Telerik UI Grid for {{ site.framework }} exposes two types of loading indica
 
 * The `GridLoaderType.LoadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
 
-* The `GridLoaderType.Skeleton` uses the [SkeletonContainer widget](https://docs.telerik.com/kendo-ui/controls/interactivity/skeletoncontainer/overview) to show a simplified preview of each of the grid's cells. The `Skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
+* The `GridLoaderType.Skeleton` uses the [SkeletonContainer widget](https://docs.telerik.com/kendo-ui/controls/skeletoncontainer/overview) to show a simplified preview of each of the grid's cells. The `Skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
 
 Check the `Skeleton` loading type in action in the live demo below:
 
@@ -54,3 +56,4 @@ Check the `Skeleton` loading type in action in the live demo below:
 * [OData Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata)
 * [SignalR Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/signalr)
 * [Custom Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)
+* [Web Api Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/webapi)

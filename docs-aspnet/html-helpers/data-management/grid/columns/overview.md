@@ -107,7 +107,7 @@ Bound columns support many settings and amongst the most used are the following 
 ```
 
 
-The [`Columns`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#columnssystemactionkendomvcuifluentgridcolumnfactoryt) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
+The [`Columns`](/api/kendo.mvc.ui.fluent/gridbuilder#columnssystemactionkendomvcuifluentgridcolumnfactoryt) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
 
 * A [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 

@@ -14,7 +14,7 @@ The Splitter provides several options for setting the content of the panes.
 
 ## Static Content
 
-You can set the HTML for each Splitter pane via the [`Content()`](/api/Kendo.Mvc.UI.Fluent/SplitterPaneBuilder#contentsystemaction) configuration option.
+You can set the HTML for each Splitter pane via the [`Content()`](/api/kendo.mvc.ui.fluent/splitterpanebuilder#contentsystemaction) configuration option.
 
 The following example demonstrates how to configure the HTML Content for the Splitter:
 
@@ -69,7 +69,7 @@ The following example demonstrates how to configure the HTML Content for the Spl
 
 ## Asynchronously loading content
 
-The Splitter provides built-in support for asynchronously loading content from URLs via the [`LoadContentFrom()`](/api/Kendo.Mvc.UI.Fluent/SplitterPaneBuilder#loadcontentfromsystemstring) coniguration option. These URLs should return HTML fragments that will be loaded in the pane of a Splitter. To load a whole page in an `iframe`, specify the complete URL, for example, https://www.telerik.com/.
+The Splitter provides built-in support for asynchronously loading content from URLs via the [`LoadContentFrom()`](/api/kendo.mvc.ui.fluent/splitterpanebuilder#loadcontentfromsystemstring) coniguration option. These URLs should return HTML fragments that will be loaded in the pane of a Splitter. To load a whole page in an `iframe`, specify the complete URL, for example, https://www.telerik.com/.
 
 The following example demonstrates how to load the Splitter content asynchronously.
 

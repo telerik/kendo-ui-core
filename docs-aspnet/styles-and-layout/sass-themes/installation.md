@@ -18,10 +18,10 @@ To get the Sass-based Kendo UI themes for {{ site.framework }}, you can:
 
 To get a complete theme by using its pre-built CSS files, apply either of the following approaches:
 
-- Use the CSS files that are shipped with the Kendo UI distribution. For example, the **Default** theme is distributed as `styles/kendo.default-main.min.css`.
+- Use the CSS files that are shipped with the Kendo UI distribution. For example, the **Default** theme is distributed as `styles/default-main.css`.
 
   ```html
-  <link rel="stylesheet" href="pathToLocalFile/styles/kendo.default-main.min.css" />
+  <link rel="stylesheet" href="pathToLocalFile/styles/default-main.css" />
   ```
 
 - Use the NPM package which contains a pre-built `dist/all.css` CSS file for the theme. For more information on how to obtain the NPM package, refer to the following [section on using NPM packages](#using-npm-packages).
@@ -33,7 +33,7 @@ The Kendo UI Sass-based themes are hosted on the official [Kendo UI CDN](https:/
 The following example showcases how to include the **Default** theme from the CDN:
 
 ```html
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default-main.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 ```
 
 ## Using NPM Packages
@@ -45,7 +45,7 @@ The Kendo UI Sass-based themes are located on the Progress NPM registry:
 * **Kendo UI Material Theme**&mdash;Available as @progress/kendo-theme-material.
 * **Kendo UI Classic Theme**&mdash;Available as @progress/kendo-theme-classic.
 
-To access the Progress NPM registry, you need an active Telerik account with an active commercial license. For more information on how to access the NPM registry, refer to the [installation instructions for Kendo UI Professional]({https://docs.telerik.com/kendo-ui/intro/installation/npm}#kendo-ui-professional).
+To access the Progress NPM registry, you need an active Telerik account with an active commercial license. For more information on how to access the NPM registry, refer to the [installation instructions for Kendo UI Professional](https://docs.telerik.com/kendo-ui/intro/installation/npm).
 
 ## Using the Build Process of the Application
 

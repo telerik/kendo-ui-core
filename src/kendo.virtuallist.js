@@ -168,10 +168,6 @@ var __meta__ = {
             this.header.html(templates.fixedGroupTemplate(data.group));
         }
 
-        this.angular("cleanup", function() {
-            return { elements: [ element ] };
-        });
-
         element
             .attr("data-uid", data.item ? data.item.uid : "")
             .attr("data-offset-index", data.index);
@@ -182,7 +178,10 @@ var __meta__ = {
             } else {
                 element.removeClass("k-table-alt-row");
             }
-            element.html(renderColumns(this.options, data.item, templates));
+
+            let renderedColumns = $(renderColumns(this.options, data.item, templates));
+            kendo.applyStylesFromKendoAttributes(renderedColumns, ["width", "max-width"]);
+            element.empty().append(renderedColumns);
         } else {
             element.find("." + GROUPITEM).remove();
             element.find(".k-list-item-text").html(itemTemplate(data.item || {}));
@@ -210,10 +209,6 @@ var __meta__ = {
         if (data.top !== undefined) {
             position(element[0], data.top);
         }
-
-        this.angular("compile", function() {
-            return { elements: [ element ], data: [ { dataItem: data.item, group: data.group, newGroup: data.newGroup } ] };
-        });
     }
 
     function renderColumns(options, dataItem, templates) {
@@ -225,11 +220,10 @@ var __meta__ = {
             var widthStyle = '';
 
             if (currentWidth) {
-                widthStyle += "style='width:";
-                widthStyle += currentWidthInt;
-                widthStyle += percentageUnitsRegex.test(currentWidth) ? "%" : "px";
-                widthStyle += ";'";
+                let widthValue = `${currentWidthInt}${percentageUnitsRegex.test(currentWidth) ? "%" : "px"}`;
+                widthStyle = `${kendo.attr("style-width")}="${widthValue}" ${kendo.attr("style-max-width")}="${widthValue}"`;
             }
+
             item += "<span class='k-table-td' " + widthStyle + ">";
             item += templates["column" + i](dataItem);
             item += "</span>";
@@ -295,7 +289,10 @@ var __meta__ = {
 
             that.element.attr("role", "listbox");
 
-            that.content = that.wrapper = that.element.wrap("<div unselectable='on' class='" + contentClasses + "'></div>").parent();
+            var contentSelector = "." + contentClasses.split(' ').join('.');
+            var wrapper = that.element.closest(contentSelector);
+
+            that.content = that.wrapper = wrapper.length ? wrapper : that.element.wrap("<div unselectable='on' class='" + contentClasses + "'></div>").parent();
 
             if (that.options.columns && that.options.columns.length) {
                 var thead = that.element.closest(".k-data-table").find('.k-table-thead');
@@ -725,7 +722,7 @@ var __meta__ = {
                 defs.push(deferred);
             });
 
-            $.when.apply($, defs).then(function() {
+            $.when.apply($, defs).done(function() {
                 result.resolve();
             });
 
@@ -1839,4 +1836,5 @@ var __meta__ = {
     kendo.ui.plugin(VirtualList);
 
 })(window.kendo.jQuery);
+export default kendo;
 

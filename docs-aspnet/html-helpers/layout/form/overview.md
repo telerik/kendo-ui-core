@@ -99,151 +99,26 @@ The following example demonstrates how to define the Form.
 ```
 {% endif %}
 
-## Referencing Existing Instances
-
-The following example demonstrates a basic configuration for the Form and how to get a reference to an existing Form client-side instance:
-
-```HtmlHelper
-    @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
-        .Name("exampleForm")
-        .HtmlAttributes(new { action = "Index", method = "POST" })
-        .Validatable(v =>
-        {
-            v.ValidateOnBlur(false);
-            v.ValidationSummary(vs => vs.Enable(true));
-        })
-        .Items(items =>
-        {
-            items.AddGroup()
-                .Label("Registration Form")
-                .Items(i =>
-                {
-                    i.Add()
-                        .Field(f => f.FirstName)
-                        .Label(l => l.Text("First Name:"));
-                    i.Add()
-                        .Field(f => f.LastName)
-                        .Label(l => l.Text("Last Name:"));
-                    i.Add()
-                        .Field(f => f.Password)
-                        .Label(l => l.Text("Password:"))
-                        .Hint("Hint: enter alphanumeric characters only.");
-                    i.Add()
-                        .Field(f => f.Email)
-                        .Label(l => l.Text("Email:"));
-                    i.Add()
-                        .Field(f => f.Agree)
-                        .Label(l => l.Text("Agree to Terms:"));
-                });
-        });
-    )
-
-    <script>
-    $(document).ready(function () {
-    // The Name() of the Form is used to get its client-side instance.
-    var form = $("#exampleForm").data("kendoForm");
-    });
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-form name="tagHelperForm" form-data="@Model" method="POST" asp-controller="Form" asp-action="Tag_Helper">
-        <validatable validate-on-blur="true" validation-summary="true" />
-        <form-items>
-            <form-item type="group">
-                <item-label text="Registration Form" />
-                <form-items>
-                    <form-item field="FirstName">
-                        <item-label text="First Name:" />
-
-                    </form-item>
-                    <form-item field="LastName">
-                        <item-label text="Last Name:" />
-
-                    </form-item>
-                </form-items>
-            </form-item>
-        </form-items>
-    </kendo-form>
-
-    <script>
-        $(document).ready(function () {
-        // The Name() of the Form is used to get its client-side instance.
-        var form = $("#tagHelperForm").data("kendoForm");
-        });
-    </script>
-```
-{% endif %}
-
 ## Functionality and Features
+|Feature|Description|
+|-------|-----------|
+| [Items]({% slug htmlhelpers_form_aspnetcore_items %})| The configuration of the Form Items allows you to customize their appearance and behavior. |
+| [Layout]({% slug htmlhelpers_form_aspnetcore_layout %})| You can choose between the default and `Grid` layout. |
+| [Groups]({% slug htmlhelpers_form_aspnetcore_groups %})| The Form allows you to group the input fields in logical sections. |
+| [Orientation]({% slug htmlhelpers_form_aspnetcore_orientation %})|  You can choose between a `vertical` or `horizontal` orientation of the labels in the Form. |
+| [Validation]({% slug htmlhelpers_form_aspnetcore_validation %})| The Form has a built-in validator to enable seamless client-side validaiton. |
+| [Accessibility]({% slug htmlhelpers_form_aspnetcore_accessibility %})| The Form is accessible by screen readers and provides WAI-ARIA, Section 508, and WCAG 2.2 support. |
+| [Hidden Fields]({% slug htmlhelpers_form_aspnetcore_hiddenfields %})| You can hide certain fields like the `ID`. |
+## Next Steps
 
-* [Items]({% slug htmlhelpers_form_aspnetcore_items %})
-* [Layout]({% slug htmlhelpers_form_aspnetcore_layout %})
-* [Groups]({% slug htmlhelpers_form_aspnetcore_groups %})
-* [Orientation]({% slug htmlhelpers_form_aspnetcore_orientation %})
-* [Validation]({% slug htmlhelpers_form_aspnetcore_validation %})
-* [Accessibility]({% slug htmlhelpers_form_aspnetcore_accessibility %})
-* [Hidden Fields]({% slug htmlhelpers_form_aspnetcore_hiddenfields %})
-
+* [Getting Started with the Form]({% slug form_getting_started %})
+* [Basic Usage of the Form HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/form/index)
 {% if site.core %}
-
-## Events
-
-You can subscribe to all events of the Form component.
-
-The following example shows a Form configured to handle its `validate`, `submit` and `clear` events.
-
-```TagHelper
-    <kendo-form name="exampleForm" form-data="@Model" method="POST" asp-action="Items" on-validate-field="onFormValidateField" on-submit="onFormSubmit" on-clear="onFormClear">
-        <validatable validate-on-blur="true" validation-summary="true" />
-        <form-items>
-            <form-item type="group">
-                <item-label text="Registration Form" />
-                <form-items>
-                    <form-item field="TextBox">
-                        <item-label text="TextBox:"/>
-                        <textbox-editor placeholder="TextBox"></textbox-editor>
-                    </form-item>
-                    <form-item field="NumericTextBox">
-                        <item-label text="NumericTextBox:" />
-                        <numerictextbox-editor></numerictextbox-editor>
-                    </form-item>  
-                </form-items>
-            </form-item>
-            <form-item type="group">
-                 <form-item field="MaskedTextBox">
-                        <item-label text="MaskedTextBox:" optional="true" />
-                        <maskedtextbox-editor></maskedtextbox-editor>
-                    </form-item>
-                    <form-item field="DatePicker">
-                        <item-label text="DatePicker:" optional="true" />
-                    </form-item>
-            </form-item>
-        </form-items>
-    </kendo-form>
-
-    <script>
-        function onFormValidateField(e) {
-            $("#validation-success").html("");
-        }
-
-        function onFormSubmit(e) {
-            e.preventDefault();
-            $("#validation-success").html("<div class='k-messagebox k-messagebox-success'>Form data is valid!</div>");
-        }
-
-        function onFormClear(e) {
-            $("#validation-success").html("");
-        }
-    </script>
-```
+* [Basic Usage of the Form TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/form/tag-helper)
+* [Form in Razor Pages]({% slug htmlhelpers_form_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also
 
-* [Basic Usage of the Form HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/form/index)
-{% if site.core %}
-* [Basic Usage of the Form TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/form/tag-helper)
-{% endif %}
-* [Using the API of the Form HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/form/api)
+* [Using the API of the Form for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/form/api)
 * [Server-Side API](/api/form)

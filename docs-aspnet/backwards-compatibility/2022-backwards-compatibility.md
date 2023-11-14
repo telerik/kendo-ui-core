@@ -70,7 +70,7 @@ As of the 2022 R1 SP2 release the `Shape` configuration option of the Button com
 
 **Scheduler**
 
-As of the 2022 R1 SP1 release the Scheduler exposes a modified keyboard navigation behavior. The main reason behind the change is to make the widget a single Tab stop element on the page. This would allow easier navigation to and away from the Scheduler. Further details on the new keyboard navigation behavior could be found on the [Keyboard Navigation demo](https://demos.telerik.com/{{ site.platform }}/scheduler/selection).
+As of the 2022 R1 SP1 release the Scheduler exposes a modified keyboard navigation behavior. The main reason behind the change is to make the widget a single Tab stop element on the page. This would allow easier navigation to and away from the Scheduler. Further details on the new keyboard navigation behavior could be found on the [Keyboard Navigation demo](https://demos.telerik.com/{{ site.platform }}/scheduler/keyboard-navigation).
 
 ## {{ site.product }} 2022 R1
 

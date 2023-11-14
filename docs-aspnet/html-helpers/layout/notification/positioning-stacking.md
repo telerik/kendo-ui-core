@@ -77,5 +77,5 @@ The following example demonstrates how to enable static notifications.
 ## See Also
 
 * [Positioning and Stacking by the Notification HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/notification/position-stacking)
-* [NotificationBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
+* [NotificationBuilder Server-Side API](/api/kendo.mvc.ui.fluent/notificationbuilder)
 * [Notification Server-Side API](/api/notification)

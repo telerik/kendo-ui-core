@@ -283,4 +283,5 @@ var __meta__ = {
     ui.plugin(DropDownButton);
 
 })(window.kendo.jQuery);
+export default kendo;
 

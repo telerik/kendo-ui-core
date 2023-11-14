@@ -45,7 +45,7 @@ The scenario relies on the following key steps:
 1. Create a "Save step" button and handle its `click` event. In the `click` event handler:
   * Get the currently active step and store its index in a global array `savedSteps`.
   * Add class "save" to the step HTML element.
-1. Create a Stepper and handle its [`Select`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/StepperEventBuilder#selectsystemstring) event. In the event handler:
+1. Create a Stepper and handle its [`Select`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/steppereventbuilder#selectsystemstring) event. In the event handler:
   * Iterate through the `validatedSteps`/`savedSteps` arrays and persist the added class of each step.
   * Add class "pending" to the steps that are not validated or saved. 
 1. Set the respective CSS attributes (`background-color` and `border-color`) to the classes "errors-step", "correct", "pending", and "save".
@@ -355,9 +355,34 @@ The scenario relies on the following key steps:
   </style>
 
 ```
-Refer to [this REPL](https://netcorerepl.telerik.com/QcaDcJYW13RlZJBb39) for a runnable example.
+
+For a runnable example implementing the steps above, refer to [this REPL](https://netcorerepl.telerik.com/QcaDcJYW13RlZJBb39).
+
+## More {{ site.framework }} Stepper Resources
+
+* [{{ site.framework }} Stepper Documentation]({%slug htmlhelpers_stepper_aspnetcore_overview%})
+
+* [{{ site.framework }} Stepper Demos](https://demos.telerik.com/{{ site.platform }}/stepper)
+
+{% if site.core %}
+* [{{ site.framework }} Stepper Product Page](https://www.telerik.com/aspnet-core-ui/stepper)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Stepper Product Page](https://www.telerik.com/aspnet-mvc/stepper)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
 
 ## See Also
 
-* [Server-Side API](/api/stepper)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/stepper#methods)
+* [Telerik REPL: Dynamically Change the Color of the Stepper Steps](https://netcorerepl.telerik.com/QcaDcJYW13RlZJBb39)
+* [Client-Side API Reference of the Stepper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/stepper)
+* [Server-Side API Reference of the Stepper for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/stepper)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -82,7 +82,7 @@ The option adds a class `k-rounded-full` to the `span.k-switch-track` element th
 </span>
 ```
 
-Тhe `TrackRounded` option supports the following values:
+The `TrackRounded` option supports the following values:
 
 - `Small`
 - `Medium`
@@ -93,7 +93,7 @@ The option adds a class `k-rounded-full` to the `span.k-switch-track` element th
 
 ### ThumbRounded
 
-The `ThumbRounded()` method controls how much border radius is applied to thumb of the Switch. 
+The `ThumbRounded()` method controls how much border radius is applied to thumb of the Switch.
 
 ```HtmlHelper
 @(Html.Kendo().Switch()
@@ -114,7 +114,7 @@ The option adds a class `k-rounded-full` to the `span.k-switch-thumb` element fo
 </span>
 ```
 
-Тhe `ThumbRounded` option supports the following values:
+The `ThumbRounded` option supports the following values:
 
 - `Small`
 - `Medium`
@@ -180,17 +180,17 @@ The following example showcases how to customize the styles of the **Switch** in
 ```
      <style>
       /*  NEW RENDERING */
-      /*  The style below will works with versions R1 2022 and later */ 
+      /*  The style below will works with versions R1 2022 and later */
       .k-switch .k-switch-thumb{
         border-color: blue !important;
         background-color: pink !important;
         border-width: 3px !important;
-      }    
+      }
       .k-switch .k-switch-track{
         border: 2px solid orange !important;
-      }    
+      }
         /*  OLD RENDERING */
-        /*  The style below will works with versions prior to R1 2022 */ 
+        /*  The style below will works with versions prior to R1 2022 */
       .k-switch .k-switch-handle{
         border-color: green !important;
         background-color: purple !important;

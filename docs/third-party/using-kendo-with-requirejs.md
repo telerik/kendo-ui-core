@@ -71,7 +71,7 @@ The following example demonstrates how to use a bundle script with RequireJS.
       require.config({
         paths: {
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "jszip": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min",
+          "jszip": "https://unpkg.com/jszip@3.10.1/dist/jszip.min",
           "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min",
         }
       });
@@ -98,9 +98,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -202,4 +200,5 @@ The following example demonstrates how to use a [custom Kendo script created wit
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [Aurelia]({% slug aurelia_integration_kendoui %})

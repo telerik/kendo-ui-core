@@ -12,6 +12,57 @@ Represents the Kendo UI DateInput widget. Inherits from [Widget](/api/javascript
 
 ## Configuration
 
+### autoCorrectParts `Boolean`*(default: true)*
+
+Sets a value that indicates whether to automatically correct the segment when out of range
+
+#### Example - sets the autoCorrectParts
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        autoCorrectParts: false
+    });
+    </script>
+
+### autoSwitchKeys  `Array`
+
+A string array representing keys that when pressed will force a move to the next segment. By default the culture specific symbols that match `/` and `:` are used.
+
+#### Example - sets the autoSwitchKeys
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        autoSwitchKeys: ["-", "/", ":"]
+    });
+    </script>
+
+### autoSwitchParts `Boolean`*(default: false)*
+
+A value indicating whether to automatically move to the next segment after a valid value is provided for the current
+
+#### Example - sets the autoSwitchParts
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        autoSwitchParts: true
+    });
+    </script>
+
+### enableMouseWheel `Boolean`*(default: true)*
+
+A value indicating whether the mouse scroll can be used to increase/decrease the segments values
+
+#### Example - sets the autoSwitchParts
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        enableMouseWheel: false
+    });
+    </script>
 
 ### fillMode `String`*(default: "solid")*
 
@@ -249,6 +300,140 @@ Sets a value controlling size of the component. Can also be set to the following
     <script>
     $("#dateinput").kendoDateInput({
         size: "large"
+    });
+    </script>
+
+### steps `Object`
+
+An object with the different steps for incrementing/decrementing the various segments
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            hour: 2,
+            minute: 10
+        }
+    });
+    </script>
+
+### steps.day `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the year segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            day: 2
+        }
+    });
+    </script>
+
+### steps.hour `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the hour segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+       steps: {
+         hour: 2
+       }
+    });
+    </script>
+
+### steps.millisecond `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the millisecond segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            millisecond: 10
+        }
+    });
+    </script>
+
+### steps.minute `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the minute segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            minute: 10
+        }
+    });
+    </script>
+
+### steps.month `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the month segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            month: 2
+        }
+    });
+    </script>
+
+### steps.second `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the second segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            second: 10
+        }
+    });
+    </script>
+
+### steps.year `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the year segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            year: 2
+        }
+    });
+    </script>
+
+### twoDigitYearMax `Number`
+
+The maximum year value that is considered part of the current century.
+
+#### Example - sets the twoDigitYearMax
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        twoDigitYearMax: 89
     });
     </script>
 

@@ -368,30 +368,6 @@ Controls what border radius is applied to a button. Valid values are: `"small"`,
         });
     </script>
 
-### shape  `String` *(default: 'pill')*
-
-Specifies the shape of the FloatingActionButton.
-
-* `"rectangle"`
-* `"square"`
-
-#### Example
-
-    <button id="fab-shape"></button>
-
-	<script>
-        $('#fab-shape').kendoFloatingActionButton({
-            icon: 'home',
-            shape: 'rectangle',
-            items: [{
-                icon: 'print',
-                title: 'print action title',
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-                click: function() { console.log('print action'); }
-            }]
-        });
-    </script>
-
 ### size  `String` *(default: 'medium')*
 
 Specifies the size of the FloatingActionButton. Valid options are `"small"`, `"medium"`, `"large"` and `"none"`.
@@ -589,31 +565,6 @@ The new options.
             align: 'top start'
         });
     </script>
-
-
-### shape
-
-Sets or gets the FloatingActionButton shape. See [`floatingactionbutton.options.shape`](/api/javascript/ui/floatingactionbutton/configuration/shape) for valid options.
-
-#### Parameters
-
-##### shape `String`
-
-The new shape of the button.
-
-#### Example
-
-    <button id="fab"></button>
-
-	<script>
-        var fab = $('#fab').kendoFloatingActionButton({
-            text: 'Actions',
-            icon: 'home'
-        }).getKendoFloatingActionButton();
-
-        fab.shape('rectangle');
-    </script>
-
 
 ### show
 

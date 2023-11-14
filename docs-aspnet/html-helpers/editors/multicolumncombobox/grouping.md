@@ -18,5 +18,5 @@ To group the data by using the [custom DataSource configuration]({% slug htmlhel
 ## See Also
 
 * [Grouping by the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/grouping)
-* [MultiColumnComboBoxBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/MultiColumnComboBoxBuilder)
+* [MultiColumnComboBoxBuilder Server-Side API](/api/kendo.mvc.ui.fluent/multicolumncomboboxbuilder)
 * [MultiColumnComboBox Server-Side API](/api/multicolumncombobox)

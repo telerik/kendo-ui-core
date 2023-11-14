@@ -3,12 +3,12 @@ var buttonGroup;
 var ButtonGroup = kendo.ui.ButtonGroup;
 
 function setupDom() {
-    buttonGroupContainer = $('<ul id="buttonGroup">' +
-        '        <li>item0</li>' +
-        '        <li>item1</li>' +
-        '        <li>item2</li>' +
-        '        <li>item3</li>' +
-        '    </ul>');
+    buttonGroupContainer = $('<div id="buttonGroup">' +
+        '        <span>item0</span>' +
+        '        <span>item1</span>' +
+        '        <span>item2</span>' +
+        '        <span>item3</span>' +
+        '    </div>');
     Mocha.fixture.append(buttonGroupContainer);
 }
 function setupEmptyButtonGroup() {

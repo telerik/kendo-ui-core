@@ -1,7 +1,7 @@
 ---
 title: Aligning Zero with Multiple Axes in the Chart
 page_title: Aligning Zero with Multiple Axes in the Chart
-description: "An example on how to align the zero value for multiple value axes in the {{ site.product }} Chart."
+description: An example on how to align the zero value for multiple value axes in the {{ site.product }} Chart.
 type: how-to
 slug: chart-align-zero-multiple-axes
 tags: telerik, chart, align, zero, multiple, axes, value
@@ -30,12 +30,12 @@ I have a {{ site.product }} Chart with multiple axes. One has negative values an
 ## Solution
 
 {% if site.core %}
-1. Update both the [`.Min()`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/ChartValueAxisBuilder?#minsystemdouble) and [`.Max()`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/ChartValueAxisBuilder?#maxsystemdouble) configuration methods for the value axes so they include both positive and negative values.
-1. To handle the zero values within a particular value axis, pass a function along with the current value as an argument through the [`.Template()`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/ChartValueAxisLabelsSettingsBuilder?#templatesystemstring) configuration option for its labels.
+1. Update both the [`.Min()`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/chartvalueaxisbuilder?#minsystemdouble) and [`.Max()`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/chartvalueaxisbuilder?#maxsystemdouble) configuration methods for the value axes so they include both positive and negative values.
+1. To handle the zero values within a particular value axis, pass a function along with the current value as an argument through the [`.Template()`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/chartvalueaxislabelssettingsbuilder?#templatesystemstring) configuration option for its labels.
 1. Within the function, make an assertion for any negative values with the help of the function's argument. Based on the evaluation, either return an empty result or that of the value.
 {% else %}
-1. Update both the [`.Min()`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#minsystemdouble) and [`.Max()`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#maxsystemdouble) configuration methods for the value axes so they include both positive and negative values.
-1. To handle the zero values within a particular value axis, pass a function along with the current value as an argument through the [`.Template()`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#templatesystemstring) configuration option for its labels.
+1. Update both the [`.Min()`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/chartnumericaxisbuilder#minsystemdouble) and [`.Max()`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/chartnumericaxisbuilder#maxsystemdouble) configuration methods for the value axes so they include both positive and negative values.
+1. To handle the zero values within a particular value axis, pass a function along with the current value as an argument through the [`.Template()`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/chartaxislabelsbuilder#templatesystemstring) configuration option for its labels.
 1. Within the function, make an assertion for any negative values with the help of the function's argument. Based on the evaluation, either return an empty result or that of the value.
 {% endif %}
 
@@ -136,8 +136,8 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
+* [Telerik REPL: Align Zero with Multiple Axes in the Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500)
 * [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
-* [Telerik REPL: Align Zero with Multiple Axes in the Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500)

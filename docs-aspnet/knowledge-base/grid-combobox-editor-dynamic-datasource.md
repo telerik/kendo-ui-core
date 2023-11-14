@@ -1,8 +1,8 @@
 ---
-title: Grid ComboBox DataSource Based on Model Property
-description: How to pass data into editor template in order to dynamically determine what it binds to
+title: Implementing a Dynamic ComboBox in the Grid
+description: How to pass data to the ComboBox editor template in order to dynamically determine what it binds to. The ComboBox is used in one of the {{ site.product }} Grid columns.
 type: how-to
-page_title: Dynamic ComboBox Editor DataSource
+page_title: Implementing a Dynamic ComboBox Editor in the Grid
 slug: grid-combobox-editor-dynamic-datasource
 tags: aspnet, mvc, ComboBox, editor, kendo-ui, grid, datasource, model, dynamic, value
 res_type: kb
@@ -25,13 +25,13 @@ component: grid, datasource
 
 ## Description
 
-I have a grid with where one of the columns requires a combobox editor template. What the combobox will be populated with, however, depends on a property of the item that generated the grid. Is there a way to pass this property to the editor template and then have it dynamically bind to the correct list based on the passed in property?
+I have a Grid where one of the columns requires a ComboBox editor template. What the ComboBox will be populated with, however, depends on a property of the item that generated the Grid. Is there a way to pass this property to the editor template and then have it dynamically bind to the correct list based on the passed in property?
 
 ## Solution
 
-The desired behaviour can be accomplished by using:
+The desired behavior can be accomplished by using:
 
-- А separate data source for the Kendo UI ComboBox with a Read action and `Data()`:
+- A separate data source for the Kendo UI ComboBox with a Read action and `Data()`:
 
 ```
     @model int
@@ -88,7 +88,30 @@ The desired behaviour can be accomplished by using:
     }
 ```
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [API Reference of the DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -80,6 +80,7 @@ The following example demonstrates how to define the Wizard.
 * [Basic Usage of the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/index)
 {% if site.core %}
 * [Basic Usage of the Wizard TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/wizard/index)
+* [Wizard in Razor Pages]({% slug htmlhelpers_wizard_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

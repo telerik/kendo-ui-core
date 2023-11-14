@@ -8,6 +8,10 @@ position: 1
 
 # {{ site.product }} ScrollView Overview
 
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
 The Hybrid UI ScrollView widget scrolls content that is wider than the mobile device screen.
 
 The Hybrid Application by Kendo UI automatically initializes the mobile ScrollView for every element with `role` data attribute set to `scrollview` and present in the markup of the views. Alternatively, it can be initialized by using jQuery plugin syntax in the containing mobile View `init` event handler.

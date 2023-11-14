@@ -1,12 +1,13 @@
 import "./kendo.data.js";
 import "./kendo.icons.js";
+import "./kendo.sortable.js";
 
 var __meta__ = {
     id: "tabstrip",
     name: "TabStrip",
     category: "web",
     description: "The TabStrip widget displays a collection of tabs with associated tab content.",
-    depends: [ "data", "icons" ],
+    depends: [ "data", "icons", "sortable" ],
     features: [ {
         id: "tabstrip-fx",
         name: "Animation",
@@ -68,13 +69,14 @@ var __meta__ = {
         templates = {
             content: (data) =>
                 `<div class='k-tabstrip-content k-content' ${data.contentAttributes(data)} tabindex='0'>${data.content(data.item)}</div>`,
-            itemWrapper: ({ tag, item , contentUrl, textAttributes, image, sprite, text }) =>
+            textWrapper: ({ tag, item , contentUrl, textAttributes, image, sprite, text }) =>
                 `<${tag(item)} class='k-link' ${contentUrl(item)} ${textAttributes(item)}>` +
                     `${image(item)}${sprite(item)}${text(item)}` +
                 `</${tag(item)}>`,
-            item: (data) =>
+            item: (data) =>templates.itemWrapper(data,`${data.textWrapper(data)}`),
+            itemWrapper: (data, item) =>
                 `<li class='${data.wrapperCssClass(data.group, data.item)}' role='tab' ${data.item.active ? "aria-selected='true'" : ''}>` +
-                    `${data.itemWrapper(data)}` +
+                    item +
                 "</li>",
             image: ({ imageUrl }) => `<img class='k-image' alt='' src='${imageUrl}' />`,
             sprite: ({ spriteCssClass }) => `<span class='k-sprite ${spriteCssClass}'></span>`,
@@ -110,7 +112,7 @@ var __meta__ = {
                 return item.url ? "a" : "span";
             },
             contentAttributes: function(content) {
-                return content.active !== true ? " style='display:none' aria-hidden='true'" : "";
+                return content.active !== true ? ` ${kendo.attr("style-display")}="none" aria-hidden='true'` : "";
             },
             content: function(item) {
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
@@ -199,6 +201,7 @@ var __meta__ = {
 
             that._tabPosition();
             that._scrollable();
+            that._sortable();
             that._processContentUrls();
             that._attachEvents();
 
@@ -209,6 +212,10 @@ var __meta__ = {
             that._initialActivate();
             that.value(value);
             kendo.notify(that);
+
+            if (that._showWatermarkOverlay) {
+                that._showWatermarkOverlay(that.element[0]);
+            }
         },
 
         events: [
@@ -232,6 +239,7 @@ var __meta__ = {
             dataSpriteCssClass: "",
             dataContentUrlField: "",
             tabPosition: "top",
+            tabTemplate: null,
             animation: {
                 open: {
                     effects: "expand:vertical fadeIn",
@@ -244,9 +252,11 @@ var __meta__ = {
             collapsible: false,
             navigatable: true,
             contentUrls: false,
+            applyMinHeight: true,
             scrollable: {
                 distance: DEFAULTDISTANCE
-            }
+            },
+            sortable: false
         },
 
         setDataSource: function(dataSource) {
@@ -363,6 +373,8 @@ var __meta__ = {
                             kendo.resize(contentHolder);
                         } }, animation, {
                             complete: function() {
+                                // See https://github.com/telerik/kendo-ui-core/issues/6660
+                                that.element.css('min-height', oldMinHeight);
                                 item.removeAttr("data-animating");
 
                                 that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
@@ -402,14 +414,14 @@ var __meta__ = {
 
             // See https://github.com/telerik/kendo-ui-core/issues/6660
             var oldMinHeight = that.element.css('min-height');
-            that.element.css('min-height', that.element.outerHeight());
 
-            visibleContents
-                    .removeClass(ACTIVESTATE);
+            if (that.options.applyMinHeight) {
+                that.element.css('min-height', that.element.outerHeight());
+            }
 
+            visibleContents.removeClass(ACTIVESTATE);
             that.tabGroup.find("." + TABONTOP).removeClass(TABONTOP);
-                    item.addClass(TABONTOP) // change these directly to bring the tab on top.
-                        .css("z-index");
+            item.addClass(TABONTOP).css("z-index");
 
             if (kendo.size(animation.effects)) {
                 item.kendoAddClass(ACTIVESTATE, { duration: animation.duration });
@@ -428,8 +440,6 @@ var __meta__ = {
             } else {
                 showContent();
             }
-
-            that.element.css('min-height', oldMinHeight);
 
             return true;
         },
@@ -543,7 +553,6 @@ var __meta__ = {
                             }, 40);
                         }
 
-                        that.angular("cleanup", function() { return { elements: content.get() }; });
                         kendo.destroy(content);
                         content.html(data);
                     } catch (e) {
@@ -558,8 +567,6 @@ var __meta__ = {
                     if (complete) {
                         complete.call(that, content);
                     }
-
-                    that.angular("compile", function() { return { elements: content.get() }; });
 
                     that.trigger(CONTENTLOAD, { item: element[0], contentElement: content[0] });
                 }
@@ -588,7 +595,6 @@ var __meta__ = {
                 } else {
                     that.wrapper.append(contents);
                 }
-                that.angular("compile", function() { return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
@@ -701,7 +707,6 @@ var __meta__ = {
                 referenceContent.after(contents);
 
                 that._moveUrlItem(fromIndex, $(this).index());
-                that.angular("compile", function() { return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
@@ -730,7 +735,6 @@ var __meta__ = {
                 referenceContent.before(contents);
 
                 that._moveUrlItem(fromIndex, $(this).index());
-                that.angular("compile", function() { return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
@@ -773,6 +777,11 @@ var __meta__ = {
                 tab = {
                     text: text(view[idx])
                 };
+
+                if (options.tabTemplate) {
+                    tab.model = view[idx];
+                    tab.template = options.tabTemplate;
+                }
 
                 if (options.dataEncodedField) {
                     tab.encoded = encoded(view[idx]);
@@ -1034,9 +1043,12 @@ var __meta__ = {
 
                 contents = map( tab, function(value, idx) {
                             if (typeof value.content == "string" || value.contentUrl) {
-                                return $(TabStrip.renderContent({
+                                let tabstripContent = $(TabStrip.renderContent({
                                     item: extend(value, { index: idx })
                                 }));
+
+                                kendo.applyStylesFromKendoAttributes(tabstripContent, ["display"]);
+                                return tabstripContent;
                             }
                         });
             } else {
@@ -1375,6 +1387,44 @@ var __meta__ = {
             });
         },
 
+        _sortable: function() {
+            var that = this,
+            options = that.options,
+            position = options.tabPosition,
+            axis = position === 'left' || position === 'right' ? 'y' : 'x';
+
+            if (!that.options.sortable) {
+                return;
+            }
+
+            that.sortable = new kendo.ui.Sortable(that.tabGroup, {
+                filter: "li.k-tabstrip-item",
+                axis,
+                container: that.tabWrapper,
+                hint: el => `<div id='hint' class='k-tabstrip k-tabstrip-${position}'>
+                                <div class= 'k-tabstrip-items-wrapper k-hstack'>
+                                    <ul class='k-tabstrip-items k-reset'>
+                                        <li class='k-item k-tabstrip-item k-first k-active k-tab-on-${position}'>${el.html()}</li>
+                                    </ul>
+                                </div>
+                            </div>`,
+                change: that._sortChange.bind(that),
+                start: e => that.activateTab(e.item)
+            });
+
+        },
+
+        _sortChange: function(e) {
+            var that = this,
+                reference = that.tabGroup.children().eq(e.newIndex);
+
+            if (e.oldIndex < e.newIndex) {
+                that.insertAfter(e.item, reference);
+            } else {
+                that.insertBefore(e.item, reference);
+            }
+        },
+
         _tabPosition: function() {
             var that = this,
                 tabPosition = that.options.tabPosition;
@@ -1557,13 +1607,18 @@ var __meta__ = {
             options = extend({ tabStrip: {}, group: {} }, options);
 
             var empty = templates.empty,
-                item = options.item;
+                item = options.item,
+                templateOptions = extend(options, {
+                    image: item.imageUrl ? templates.image : empty,
+                    sprite: item.spriteCssClass ? templates.sprite : empty,
+                    textWrapper: templates.textWrapper
+                }, rendering);
 
-            return templates.item(extend(options, {
-                image: item.imageUrl ? templates.image : empty,
-                sprite: item.spriteCssClass ? templates.sprite : empty,
-                itemWrapper: templates.itemWrapper
-            }, rendering));
+                if (item.template) {
+                    return templates.itemWrapper(templateOptions, kendo.template(item.template)(item.model));
+                }
+
+            return templates.item(templateOptions);
         },
 
         renderContent: function(options) {
@@ -1574,4 +1629,5 @@ var __meta__ = {
     kendo.ui.plugin(TabStrip);
 
 })(window.kendo.jQuery);
+export default kendo;
 

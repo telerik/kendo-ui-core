@@ -1,8 +1,8 @@
 ---
-title: Resize to Match the Visible Column Widths When Hiding or Showing Grid Columns
+title: Resizing the Grid to Match the Visible Column Widths
 description: How can I resize the Grid to match the visible column widths when hiding or showing columns while the sum of the column widths is less than the initial width of the Grid?
 type: how-to
-page_title: Resize When Hiding or Showing Columns
+page_title: Resizing When Hiding or Showing Columns
 slug: grid-auto-resize-when-hiding-showing-columns
 tags: grid, auto, resize, when, hiding, showing, columns, match, width
 res_type: kb
@@ -25,7 +25,7 @@ How can I resize the Grid to match the visible column widths when hiding or show
 
 ## Solution 1
 
-Enforce a min-width style to the table element using only CSS:
+Enforce a `min-width` style to the table element using only CSS:
 ```
   <style>
     #grid table {
@@ -37,7 +37,8 @@ Enforce a min-width style to the table element using only CSS:
 ## Solution 2
 
 1. Create a function to calculate the sum of widths of all visible columns `getAllColumnsWidth(e)`.
-2. Call a method that sets the Grid's width, use [dataBound](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound), [columnShow](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnshow) and [columnHide](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) events.
+
+1. Call a method that sets the Grid's width, use [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound), [`columnShow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnshow), and [`columnHide`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) events.
 
 ```View
 
@@ -125,3 +126,31 @@ function onDataBound(e) {
         public string ShipCity { get; internal set; }
     }
 ```
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

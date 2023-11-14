@@ -16,7 +16,7 @@ var __meta__ = {
     var HIDDEN = 'k-hidden';
 
     var iconTemplate = ({ icon }) => kendo.ui.icon($(`<span class='k-badge-icon'></span>`), { icon: icon });
-    var svgIconTemplate = ({ icon }) => `<span class='k-badge-icon k-svg-icon'>${icon}</span>`;
+    var svgIconTemplate = ({ icon }) => `<span class='k-badge-icon k-svg-icon k-icon'>${icon}</span>`;
 
     var Badge = Widget.extend({
         init: function(element, options) {
@@ -320,4 +320,5 @@ var __meta__ = {
     ui.plugin(Badge);
 
 })(window.kendo.jQuery);
+export default kendo;
 

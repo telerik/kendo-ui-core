@@ -117,4 +117,4 @@ To adjust the size of the rows in both the body and the header, use CSS and spec
 
 ## See Also
 
-* [Setting the Height of the Kendo UI Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#height)
+* [Setting the Height of the Kendo UI Grid](https://docs.telerik.com/kendo-ui/controls/grid/appearance#height)

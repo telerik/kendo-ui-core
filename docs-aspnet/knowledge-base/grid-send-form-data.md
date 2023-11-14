@@ -31,7 +31,7 @@ How can I pass a serialized form as an additional parameter to my controller whe
 
 To achieve the desired results:
 
-1. Provide a function handler by using the [`Data()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/CrudOperationBuilder#datasystemstring) configuration option for the `Read` method of the Grid.
+1. Provide a function handler by using the [`Data()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/crudoperationbuilder#datasystemstring) configuration option for the `Read` method of the Grid.
 1. To get the form field as key-value pairs, utilize the [`serializeArray()`](http://api.jquery.com/serializeArray/) within the handler.
 1. Traverse through each of the fields, and alter them into your required format, which will then be displayed as a JSON object.
 1. Map the external fields to the JSON object.

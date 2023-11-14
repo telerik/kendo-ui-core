@@ -53,15 +53,14 @@ The following example demonstrates the default tool methods of the Editor.
             .Print()
             .Snippets(snippets => snippets
                 .Add("Signature", "<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>")
-                .Add("Kendo online demos", " <a href='https://demos.telerik.com/kendo-ui'>Kendo online demos</a> ")
+                .Add("Telerik UI for ASP.NET Core Demos", " <a href='https://demos.telerik.com/aspnet-core/'>Telerik UI for ASP.NET Core Online Demos</a> ")
             )
         )
     )
 ```
-```
 {% if site.core %}
 ```TagHelper
-        <kendo-editor  name="editor">
+        <kendo-editor name="editor">
         <tools>
             <tool name="bold">
             </tool>
@@ -159,11 +158,10 @@ The following example demonstrates the default tool methods of the Editor.
             </tool>
             <tool name="insertHtml">
                 <tool-items>
-                    <tool-item text="Signature" value="<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>">
-                    </tool-item>
-                    <tool-item text="Telerik UI online demos" value="<a href='https://demos.telerik.com/aspnet-core/'>Telerik UI for ASP.NET Core Online Demos</a> ">
-                </tool-item>
-            </tool-items>
+                    <tool-item text="Signature" value="<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>"> </tool-item>
+                    <tool-item text="Telerik UI for ASP.NET Core Demo" value="<a href='https://demos.telerik.com/aspnet-core/'>Telerik UI for ASP.NET Core Online Demos</a>"></tool-item>
+                </tool-items>
+            </tool>
         </tools>
     </kendo-editor>
 ```
@@ -173,13 +171,114 @@ The following example demonstrates the default tool methods of the Editor.
 
 To define the custom tools of the Editor, use the `CustomButton()` and `CustomTemplate()` methods. You can use `CustomButton()` for scenarios where only a single action has to be executed upon a button click. The custom template allows you to define a more complicated tool and also embed other widgets within the Editor toolbar. You can use `CustomTemplate()` for creating a DropDownList which changes the background color for the editable area of the Editor.
 
-The following example demonstrates these scenarios. Note the `Name()` method that is used for the `CustomButton()` configuration. The passed string value will be later used to populate the class for the `<span>` element for whose tool icon the `:before` pseudo element is used. In this case, the final result for that class will be `k-i-custom`. As the `k-i-custom` class is used by one of the Kendo UI for jQuery icons, the respective icon will be displayed for the tool button. Note that the `undo` and `redo` tool names are reserved (forbidden). For a runnable example, refer to the [demo on custom tools in the Editor](https://demos.telerik.com/{{ site.platform }}/editor/custom-tools).
+### Using the Template Component
+
+The {{ site.product }} v2023.2.606 introduced the new [Template Component]({% slug htmlhelpers_overview_template %}). You can use it to define custom Tools for the Toolbar. The following example demonstrates how to add a custom Button and custom DropDownList as tools using the Template Component.
+
+```HtmlHelper
+    @(Html.Kendo().Editor()
+          .Name("editor")
+          .Tools(tools => tools
+            .Clear()
+            .CustomTemplate(x => x
+                .Name("customDropDownList")
+                .Template(
+                    Html.Kendo().Template()
+                        .AddHtml("<label for='templateTool' style='vertical-align:middle;'>Background:</label>")
+                        .AddComponent(c=>c.DropDownList()
+                            .Name("templateTool")
+                            .BindTo(new List<SelectListItem>() {
+                                new SelectListItem() {
+                                    Text = "none",
+                                    Value = ""
+                                },
+                                new SelectListItem() {
+                                    Text = "yellow",
+                                    Value = "#ff9"
+                                },
+                                new SelectListItem() {
+                                    Text = "green",
+                                    Value = "#dfd"
+                                }
+                            })
+                            .Events(ev=>ev.Change("templateToolChange"))
+                        )
+                    )
+            )
+            .CustomButton(x => x.Name("customButton").ToolTip("Insert a horizontal rule").Exec(@<text>
+                    function(e) {
+                    var editor = this;
+                    editor.exec("inserthtml", { value: "<hr />" });
+                    }
+            </text>))
+          )
+    )
+
+    <script>
+        function templateToolChange(e){
+            $("#editor").data("kendoEditor").body.style.backgroundColor = e.sender.value();
+        }
+    </script>
+```
+
+{% if site.core %}
+```TagHelper
+    @{
+        var dropDownListOptions = new List<SelectListItem>() {
+                                new SelectListItem() {
+                                    Text = "none",
+                                    Value = ""
+                                },
+                                new SelectListItem() {
+                                    Text = "yellow",
+                                    Value = "#ff9"
+                                },
+                                new SelectListItem() {
+                                    Text = "green",
+                                    Value = "#dfd"
+                                }
+                            };
+    }
+
+    <kendo-editor name="editor">
+        <tools>
+            <tool name="customDropDownList">
+                <tool-template>
+                    <label for='templateTool' style='vertical-align:middle;'>Background:</label>
+                    <kendo-dropdownlist name="templateTool"
+                        bind-to="@dropDownListOptions"
+                        on-change="onTemplateToolChange">
+                    </kendo-dropdownlist>
+                </tool-template>
+            </tool>
+            <tool name="custom" tooltip="Insert a horizontal rule" exec="@{<text>
+                    function(e) {
+                    var editor = $(this).data("kendoEditor");
+                    editor.exec("inserthtml", { value: "<hr />" });
+                    }
+            </text>}">
+            </tool>
+        </tools>
+    </kendo-editor>
+
+    <script>
+        function onTemplateToolChange(e) {
+            $("#editor").data("kendoEditor").body.style.backgroundColor = e.sender.value();
+        }
+    </script>
+```
+{% endif %}
+
+### Using Kendo Template
+
+The following example demonstrates the same scenarios implemented using Kendo Templates. Note the `Name()` method that is used for the `CustomButton()` configuration. The passed string value will be later used to populate the class for the `<span>` element for whose tool icon the `:before` pseudo element is used. In this case, the final result for that class will be `k-i-custom`. As the `k-i-custom` class is used by one of the Kendo UI for jQuery icons, the respective icon will be displayed for the tool button. Note that the `undo` and `redo` tool names are reserved (forbidden). For a runnable example, refer to the [demo on custom tools in the Editor](https://demos.telerik.com/{{ site.platform }}/editor/custom-tools).
 
 ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("editor")
         .Tools(t => t
             .CustomTemplate(x => x
+                .Name("customDropDownList)
                 .Template("<label for='templateTool' style='vertical-align:middle;'>Background:</label>" +
                     "<select id='templateTool'>" +
                         "<option value=''>none</option>" +
@@ -188,7 +287,7 @@ The following example demonstrates these scenarios. Note the `Name()` method tha
                     "</select>")
             )
             .CustomButton(x => x
-                .Name("custom")
+                .Name("customButton")
                 .Tooltip("Insert a horizontal rule")
                 .Exec("onCustomButtonExec")
             )
@@ -197,7 +296,7 @@ The following example demonstrates these scenarios. Note the `Name()` method tha
 
     <script>
         function onCustomButtonExec(e) {
-            var editor = $(this).data("kendoEditor");
+            var editor = this;
             editor.exec("inserthtml", { value: "<hr />" });
         }
 
@@ -211,7 +310,7 @@ The following example demonstrates these scenarios. Note the `Name()` method tha
         });
     </script>
 ```
-```
+
 {% if site.core %}
 ```TagHelper
     <kendo-editor name="editor">

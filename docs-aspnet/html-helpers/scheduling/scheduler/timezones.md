@@ -18,6 +18,7 @@ To set a timezone to the Scheduler, set the `timezone` option. `timezone` indica
 > * When you bind the Scheduler to a remote service, keep the `timezone` option always set to, for example, `"Etc/UTC"`.
 > * When the `timezone` option of the Scheduler is not set, the current system timezone offset is used.
 > * The recommended `Date` format for sending and receiving Scheduler event dates is [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) with a **Z** zone designator (UTC date). The same format is used by the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method, which converts JavaScript `Date` objects to JSON strings.
+> The kendo.timezones.min.js file must be included in order to use timezones other than "Etc/UTC".
 
 The following example demonstrates how to set `"Etc/UTC"` timezone to the Scheduler.
 

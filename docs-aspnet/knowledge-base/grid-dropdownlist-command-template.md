@@ -1,5 +1,5 @@
 ---
-title: Create a DropDownList Command Column in the Grid
+title: Creating a DropDownList Command Column in the Grid
 description: "An example on how to add a DropDownList commands template within the {{ site.product }} Grid."
 type: how-to
 page_title: Implement Always Visible DropDownList Command Templates in the Grid 
@@ -31,11 +31,11 @@ How can I implement an always visible DropDownList command template for the {{ s
 
 To achieve the desired scenario: 
 
-1. Specify a DropDownList command template by using the [`.Template()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridCustomActionCommandBuilder#templatesystemstring) configuration option for a custom command.
+1. Specify a DropDownList command template by using the [`.Template()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridcustomactioncommandbuilder#templatesystemstring) configuration option for a custom command.
 1. Within the template, specify an empty `<input>` tag and decorate it with a common class that will be used for rendering a DropDownList for each rows respectively.
 1. Create a common `DataSource` for the DropDownList.
-1. Traverse through each records by handling the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event of the Grid. To initialize the DropDownlists, use the previously decorated common class for the custom command input.
-1. Handle each of the command options by subscribing to the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DropDownListEventBuilder#changesystemstring) event of the DropDownLists.
+1. Traverse through each records by handling the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event of the Grid. To initialize the DropDownlists, use the previously decorated common class for the custom command input.
+1. Handle each of the command options by subscribing to the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlisteventbuilder#changesystemstring) event of the DropDownLists.
 
 ```Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
@@ -116,8 +116,31 @@ To achieve the desired scenario:
 
 For the complete implementation of the suggested approach, refer to the [Telerik REPL example on implementing a DropDownList command column in the Grid](https://netcorerepl.telerik.com/ccaZvdPx13soCW7O04).
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [API Reference of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
-* [Telerik REPL: Implement DropDownList Command Columns in the Grid](https://netcorerepl.telerik.com/ccaZvdPx13soCW7O04)
+* [Telerik REPL: Implementing a DropDownList Command Column in the Grid](https://netcorerepl.telerik.com/ccaZvdPx13soCW7O04)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

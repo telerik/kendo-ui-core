@@ -48,6 +48,10 @@ How can I change the format of a date column during the Excel export in the Kend
             var dateCells = [];
 
             for (var i = 0; i < fields.length; i++) {
+                if (fields[i].hidden) { // required if grid contains hidden column/s or user hides column/s
+                    fields.splice(i, 1);
+                };
+
                 var currentField = fields[i].field;
                 var currentModel = fieldsModels[currentField];
 
@@ -130,4 +134,4 @@ How can I change the format of a date column during the Excel export in the Kend
 
 ## See Also
 
-* [Setting the Cell Format of the Grid during Excel Export](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/cell-format)
+* [Setting the Cell Format of the Grid during Excel Export](https://docs.telerik.com/kendo-ui/controls/grid/how-to/excel/cell-format)

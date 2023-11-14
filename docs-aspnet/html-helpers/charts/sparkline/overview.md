@@ -63,4 +63,7 @@ To create the Sparklines, add the component tags to the view and provide it with
 ## See Also
 
 * [Basic Usage of the Sparkline HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sparklines/index)
+{% if site.core %}
+* [Sparkline in Razor Pages]({% slug htmlhelper_sparkline_razorpages_aspnetcore %})
+{% endif %}
 * [Server-Side API](/api/sparkline)

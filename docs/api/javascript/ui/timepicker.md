@@ -12,6 +12,11 @@ Represents the Kendo UI TimePicker. Inherits from [Widget](/api/javascript/ui/wi
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the popup will open and close instantly.
@@ -188,6 +193,20 @@ Sets a value controlling how the color is applied. Can also be set to the follow
     });
     </script>
 
+### focusTime `Date`*(default: null)*
+
+ Specifies a time that will be focused inside the popup when opened.
+
+#### Example - specify a focus time
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        focusTime: new Date(2023, 10, 4, 8, 0, 0) //date part is ignored
+    });
+    </script>
+
+
 ### format `String`*(default: "h:mm tt")*
 
  Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.
@@ -287,16 +306,33 @@ bel: `$("#timepicker").data("kendoTimePicker").label.floatingLabel.refresh(
     </script>
 
 
-### interval `Number`*(default: "30")*
+### interval `Number|Object`*(default: "30" or "0" in modern picker)*
 
-Specifies the interval, between values in the popup list, in minutes.
+Specifies the interval between values in the popup list.
 
-#### Example - specify a time interval
+* When the [componentType](api/javascript/ui/timepicker/configuration/componenttype) is set to `classic`, the interval is specified in minutes (numeric values).
+* When the [componentType](api/javascript/ui/timepicker/configuration/componenttype) is set to `modern`, the interval is specified as an object of hours, minutes and seconds.
+
+#### Example - specify a time interval for the classic component type
 
     <input id="timepicker" />
     <script>
     $("#timepicker").kendoTimePicker({
         interval: 15
+    });
+    </script>
+
+#### Example - specify a time interval for the modern component type
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        componentType: "modern",
+        interval: {
+            hour: 2,
+            minute: 10,
+            second: 15
+        }
     });
     </script>
 
@@ -479,6 +515,62 @@ Allows customization of the **Set** button text in the TimePicker.
         }
       });
     </script>
+
+### messages.dateInput `Object`
+
+The messages that DateInput uses.  Use it to customize or localize the placeholders of each date/time part.
+
+#### Example - customize column menu messages
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        messages:{
+            dateInput:{
+                "year": "year",
+                "month": "month",
+                "day": "day",
+                "weekday": "day of the week",
+                "hour": "hours",
+                "minute": "minutes",
+                "second": "seconds",
+                "dayperiod": "AM/PM"
+            }
+        }
+    });
+    </script>
+
+### messages.dateInput.year `String` *(default: "year")*
+
+The placeholder for the years part.
+
+### messages.dateInput.month `String` *(default: "month")*
+
+The placeholder for the months part.
+
+### messages.dateInput.day `String` *(default: "day")*
+
+The placeholder for the day of the month part.
+
+### messages.dateInput.weekday `String` *(default: "day of the week")*
+
+The placeholder for the day of the week part.
+
+### messages.dateInput.hour `String` *(default: "hours")*
+
+The placeholder for the hours part.
+
+### messages.dateInput.minute `String` *(default: "minutes")*
+
+The placeholder for the minutes part.
+
+### messages.dateInput.second `String` *(default: "seconds")*
+
+The placeholder for the seconds part.
+
+### messages.dateInput.dayperiod `String` *(default: "AM/PM")*
+
+The placeholder for the AM/PM part.
 
 ### min `Date`*(default: "00:00")*
 
@@ -905,7 +997,7 @@ The new configuration options.
     <script>
     $("#timepicker").kendoTimePicker({
         min: new Date(2001, 0, 1, 8, 0, 0),
-        max: new Date(2013, 0, 1, 18, 0 0)
+        max: new Date(2013, 0, 1, 18, 0, 0)
     });
 
     var timepicker = $("#timepicker").data("kendoTimePicker");

@@ -107,7 +107,11 @@ var __meta__ = {
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
                 })
-                .on("focusout" + ns, function() {
+                .on("focusout" + ns, function(ev) {
+                    if (that.filterInput && ev.relatedTarget === that.filterInput[0]) {
+                        return;
+                    }
+
                     that._change();
                     that._placeholder();
                     that.close();
@@ -176,6 +180,40 @@ var __meta__ = {
             fillMode: "solid",
             rounded: "medium",
             label: null
+        },
+
+        _onActionSheetCreate: function() {
+            var that = this;
+
+            if (that.filterInput) {
+                that.filterInput
+                    .on("keydown" + ns, that._keydown.bind(that))
+                    .on("keypress" + ns, that._keypress.bind(that))
+                    .on("input" + ns, that._search.bind(that))
+                    .on("paste" + ns, that._search.bind(that))
+                    .attr({
+                        autocomplete: AUTOCOMPLETEVALUE,
+                        role: "combobox",
+                        "aria-expanded": false
+                    });
+
+                that.popup.bind("activate", () => {
+                    that.filterInput.val(that.element.val());
+                    that.filterInput.trigger("focus");
+                });
+
+                that.popup.bind("deactivate", () => {
+                    that.element.trigger("focus");
+                });
+            }
+        },
+
+        _onCloseButtonPressed: function() {
+            var that = this;
+
+            if (that.filterInput && activeElement() === that.filterInput[0]) {
+                that.element.val(that.filterInput.val());
+            }
         },
 
         _dataSource: function() {
@@ -258,6 +296,8 @@ var __meta__ = {
                        .attr(ARIA_DISABLED, disable)
                        .attr(ARIA_READONLY, readonly);
             }
+
+            that._toggleCloseVisibility();
         },
 
         close: function() {
@@ -279,6 +319,10 @@ var __meta__ = {
             that._clear.off(ns);
             that.wrapper.off(ns);
 
+            if (that.filterInput) {
+                that.filterInput.off(ns);
+            }
+
             List.fn.destroy.call(that);
         },
 
@@ -296,14 +340,15 @@ var __meta__ = {
             ignoreCase = options.ignoreCase,
             separator = that._separator(),
             length,
-            accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
+            accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering,
+            element = that.filterInput && activeElement() === that.filterInput[0] ? that.filterInput : that.element;
 
             word = word || that._accessor();
 
             clearTimeout(that._typingTimeout);
 
             if (separator) {
-                word = wordAtCaret(caret(that.element)[0], word, separator);
+                word = wordAtCaret(caret(element)[0], word, separator);
             }
 
             length = word.length;
@@ -444,7 +489,7 @@ var __meta__ = {
             var data = that.dataSource.flatView();
             var length = data.length;
             var groupsLength = that.dataSource._group ? that.dataSource._group.length : 0;
-            var isActive = that.element[0] === activeElement();
+            var isActive = that.element[0] === activeElement() || that.filterInput && that.filterInput[0] === activeElement();
             var action;
 
             that._renderFooter();
@@ -554,6 +599,10 @@ var __meta__ = {
             that._old = value;
             that._oldText = value;
 
+            if (that.filterInput && activeElement() === that.filterInput[0]) {
+                that.element.val(that.filterInput.val());
+            }
+
             if (valueUpdated || itemSelected) {
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
@@ -569,7 +618,7 @@ var __meta__ = {
 
         _accessor: function(value) {
             var that = this,
-                element = that.element[0];
+                element = that.filterInput && activeElement() === that.filterInput[0] ? that.filterInput[0] : that.element[0];
 
             if (value !== undefined) {
                 element.value = value === null ? "" : value;
@@ -682,7 +731,7 @@ var __meta__ = {
             that._loading.addClass(HIDDENCLASS);
             that.element.attr("aria-busy", false);
             that._busy = null;
-            that._showClear();
+            that._toggleCloseVisibility();
         },
 
         _showBusy: function() {
@@ -796,7 +845,9 @@ var __meta__ = {
         },
 
         _toggleCloseVisibility: function() {
-            if (this.value()) {
+            var preventShow = this.element.is(":disabled") || this.element.is("[readonly]");
+
+            if (this.value() && !preventShow) {
                 this._showClear();
             } else {
                 this._hideClear();
@@ -845,4 +896,5 @@ var __meta__ = {
         values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
     }]);
 })(window.kendo.jQuery);
+export default kendo;
 

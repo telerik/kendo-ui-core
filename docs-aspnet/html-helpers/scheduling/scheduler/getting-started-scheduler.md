@@ -28,7 +28,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 
 Declare the `TaskViewModel` view model. It must implement the `ISchedulerEvent` interface.
 
-```C#
+```Model
 	using Kendo.Mvc.UI;
 
     public class TaskViewModel : ISchedulerEvent
@@ -91,6 +91,20 @@ Declare the `TaskViewModel` view model. It must implement the `ISchedulerEvent` 
                 OwnerID = OwnerID
             };
         }
+    }
+```
+```Interface
+    public interface ISchedulerEvent
+    {
+        string Title { get; set; }
+        string Description { get; set; }
+        bool IsAllDay { get; set; }
+        DateTime Start { get; set; }
+        DateTime End { get; set; }
+        string StartTimezone { get; set; }
+        string EndTimezone { get; set; }
+        string RecurrenceRule { get; set; }
+        string RecurrenceException { get; set; }
     }
 ```
 
@@ -354,5 +368,5 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Using the API of the Scheduler for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/api)
 * [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Server-Side API of the Scheduler](/api/grid)
+* [Server-Side API of the Scheduler](/api/scheduler)
 * [Knowledge Base Section](/knowledge-base)

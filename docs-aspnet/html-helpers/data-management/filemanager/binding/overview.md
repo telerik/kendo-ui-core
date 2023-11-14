@@ -1065,6 +1065,9 @@ The following list provides information about the default requests and responses
 ```
 
 ## See Also
+{% if site.core %}
+* [FileManager in Razor Pages]({% slug htmlhelpers_filemanager_razorpage_aspnetcore %})
+{% endif %}
 * [Overview of {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_overview %})
 * [Navigation in {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_navigation %})
 * [Preview Panes in {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_previewpane %})

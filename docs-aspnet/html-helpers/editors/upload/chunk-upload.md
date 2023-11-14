@@ -59,15 +59,8 @@ To enable the chunk upload:
 
     namespace ProjectName.Controllers
     {
-      public partial class UploadController : Controller
+      public class UploadController : Controller
       {
-        public IWebHostingEnvironment WebHostEnvironment { get; set; }
-
-        public UploadController(IWebHostEnvironment webHostEnvironment)
-        {
-            WebHostEnvironment = webHostEnvironment;
-        }
-
         public class ChunkMetaData
         {
             public string UploadUid { get; set; }
@@ -103,7 +96,7 @@ To enable the chunk upload:
             }
         }
 
-        public ActionResult ChunkSave(IEnumerable<IFormFile> files, string metaData)
+        public async Task<ActionResult> ChunkSave(IEnumerable<IFormFile> files, string metaData)
         {
             if (metaData == null)
             {
@@ -163,7 +156,7 @@ To enable the chunk upload:
             return Content("");
         }
 
-        public ActionResult Save(IEnumerable<IFormFile> files)
+        public async Task<ActionResult> Save(IEnumerable<IFormFile> files)
         {
             // The Name of the Upload component is "files".
             if (files != null)

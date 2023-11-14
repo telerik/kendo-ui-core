@@ -3,7 +3,7 @@ title: Grouping
 page_title: Grouping
 description: "Configure the Telerik UI ListView for {{ site.framework }} to implement grouping functionality."
 slug: htmlhelpers_listview_aspnetcore_grouping
-position: 8
+position: 9
 ---
 
 # Grouping

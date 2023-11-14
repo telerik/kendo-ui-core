@@ -13,7 +13,7 @@ The Grid provides options for visualizing the relations between parent and child
 * To implement hierarchy in the Grid HtmlHelper, use the `ClientDetailTemplateId()` method and filter the records in the child table based on the parent key field value. For a runnable example, refer to the [demo on using hierarchy in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/hierarchy).
 
 {% if site.core %}
-* To implement hierarchy in the Grid TagHelper, use the `DetailInit` function that initializes the detail Grids by using the [Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview). 
+* To implement hierarchy in the Grid TagHelper, use the `DetailInit` function that initializes the detail Grids by using the [Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/grid/overview). 
 {% endif %}
 
 ```HtmlHelper

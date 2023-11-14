@@ -8,10 +8,17 @@ position: 5
 
 # Compatibility
 
-The following table lists the Telerik UI for {{ site.framework }} themes and the Kendo UI Sass themes versions, which are mutually compatible.
+The following table lists the Telerik UI for {{ site.framework }} versions and the Kendo UI Sass themes versions, which are mutually compatible.
 
 | Telerik UI for {{ site.framework }} | Kendo UI Sass Themes |
 |:---         |:---                     |
+| Telerik UI 2023.3.1114 (R3 2023 SP1) | @progress/kendo-theme-bootstrap@7.0.2<br>@progress/kendo-theme-classic@7.0.2<br>@progress/kendo-theme-default@7.0.2<br>@progress/kendo-theme-fluent@7.0.2<br>@progress/kendo-theme-material@7.0.2 |
+| Telerik UI 2023.3.1010 (R3 2023) | @progress/kendo-theme-bootstrap@7.0.1<br>@progress/kendo-theme-classic@7.0.1<br>@progress/kendo-theme-default@7.0.1<br>@progress/kendo-theme-fluent@7.0.1<br>@progress/kendo-theme-material@7.0.1 |
+| Telerik UI 2023.2.829 (R2 2023 SP2) | @progress/kendo-theme-bootstrap@6.7.0<br>@progress/kendo-theme-classic@6.7.0<br>@progress/kendo-theme-default@6.7.0<br>@progress/kendo-theme-fluent@6.7.0<br>@progress/kendo-theme-material@6.7.0 |
+| Telerik UI 2023.2.718 (R2 2023 SP1) | @progress/kendo-theme-bootstrap@6.6.0<br>@progress/kendo-theme-classic@6.6.0<br>@progress/kendo-theme-default@6.6.0<br>@progress/kendo-theme-fluent@6.6.0<br>@progress/kendo-theme-material@6.6.0 |
+| Telerik UI 2023.2.606 (R2 2023) | @progress/kendo-theme-bootstrap@6.4.0<br>@progress/kendo-theme-classic@6.4.0<br>@progress/kendo-theme-default@6.4.0<br>@progress/kendo-theme-fluent@6.4.0<br>@progress/kendo-theme-material@6.4.0 |
+| Telerik UI 2023.1.425 (R1 2023 SP2) | @progress/kendo-theme-bootstrap@6.3.0<br>@progress/kendo-theme-classic@6.3.0<br>@progress/kendo-theme-default@6.3.0<br>@progress/kendo-theme-fluent@6.3.0<br>@progress/kendo-theme-material@6.3.0 |
+| Telerik UI 2023.1.314 (R1 2023 SP1) | @progress/kendo-theme-bootstrap@6.2.0<br>@progress/kendo-theme-classic@6.2.0<br>@progress/kendo-theme-default@6.2.0<br>@progress/kendo-theme-fluent@6.2.0<br>@progress/kendo-theme-material@6.2.0 |
 | Telerik UI 2023.1.117 (R1 2023) | @progress/kendo-theme-bootstrap@5.10.0<br>@progress/kendo-theme-classic@5.10.0<br>@progress/kendo-theme-default@5.10.0<br>@progress/kendo-theme-fluent@5.10.0<br>@progress/kendo-theme-material@5.10.0 |
 | Telerik UI 2022.3.1109 (R3 2022 SP1) | @progress/kendo-theme-bootstrap@5.10.0<br>@progress/kendo-theme-default@5.10.0<br>@progress/kendo-theme-material@5.10.0<br>@progress/kendo-theme-classic@5.10.0<br>@progress/kendo-theme-fluent@5.10.0 |
 | Telerik UI 2022.3.913 (R3 2022) | @progress/kendo-theme-bootstrap@5.8.0<br>@progress/kendo-theme-default@5.8.0<br>@progress/kendo-theme-material@5.8.0<br>@progress/kendo-theme-classic@5.8.0<br>@progress/kendo-theme-fluent@5.8.0 |

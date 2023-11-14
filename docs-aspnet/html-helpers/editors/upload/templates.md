@@ -10,7 +10,7 @@ position: 9
 
 The Telerik UI Upload for {{ site.framework }} allows you to implement templates to customize the rendering of the files in the file list of the Upload component.
 
-To configure the Telerik UI Upload for {{ site.framework }} to use a template use the [`Template()`](/api/Kendo.Mvc.UI.Fluent/UploadBuilder#templatesystemstring) or  [`TemplateId()`](/api/Kendo.Mvc.UI.Fluent/UploadBuilder#templateidsystemstring) configuration option.
+To configure the Telerik UI Upload for {{ site.framework }} to use a template use the [`Template()`](/api/kendo.mvc.ui.fluent/uploadbuilder#templatesystemstring) or  [`Templateid()`](/api/kendo.mvc.ui.fluent/uploadbuilder#templateidsystemstring) configuration option.
 
 When the Upload is configured to use a template, the content of the template replaces some of the HTML elements of the Telerik UI Upload for {{ site.framework }} that are rendered by default. The following example demonstrates how you can use a custom template and display a validation message conditionally:
 

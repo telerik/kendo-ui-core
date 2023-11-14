@@ -89,21 +89,21 @@ if (kendo.ui.FileManager) {
           },
           moveConfirm: {
               title: ' ',
-              content: '<p style=\'text-align: center;\'>Voulez-vous déplacer les fichiers sélectionnés ou les copier?</p>',
+              content: '<p class=\'k-text-center\'>Voulez-vous déplacer les fichiers sélectionnés ou les copier?</p>',
               okText: 'Copier',
               cancel: 'Déplacer',
               close: 'Fermer'
           },
           deleteConfirm: {
               title: 'Confirmation de l\'effacement',
-              content: '<p style=\'text-align: center;\'>Voulez-vous vraiment supprimer les fichiers sélectionnés?<br/>Il n\'est pas possible d\'annuler cette opération.</p>',
+              content: '<p class=\'k-text-center\'>Voulez-vous vraiment supprimer les fichiers sélectionnés?<br/>Il n\'est pas possible d\'annuler cette opération.</p>',
               okText: 'Supprimer',
               cancel: 'Annuler',
               close: 'Fermer'
           },
           renamePrompt: {
               title: 'Renommer',
-              content: '<p style=\'text-align: center;\'>Entrez un nouveau nom de fichier</p>',
+              content: '<p class=\'k-text-center\'>Entrez un nouveau nom de fichier</p>',
               okText: 'Renommer',
               cancel: 'Annuler',
               close: 'Fermer'
@@ -184,6 +184,67 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 });
 }
 
+/* Gantt messages */
+
+if (kendo.ui.Gantt) {
+  kendo.ui.Gantt.prototype.options.messages =
+    $.extend(true, kendo.ui.Gantt.prototype.options.messages, {
+      "actions": {
+        "addChild": "Ajouter descendant",
+        "append": "Ajouter une Tâche",
+        "insertAfter": "Ajouter après",
+        "insertBefore": "Ajouter avant",
+        "pdf": "Exporter en PDF"
+      },
+      "cancel": "Annuler",
+      "deleteDependencyWindowTitle": "Effacer la dépendance",
+      "deleteTaskWindowTitle": "Effacer la tâche",
+      "destroy": "Effacer)",
+      "editor": {
+        "assingButton": "Assigner",
+        "editorTitle": "Tâche",
+        "end": "Fin",
+        "percentComplete": "Complété",
+        "resources": "Ressources",
+        "resourcesEditorTitle": "Ressources",
+        "resourcesHeader": "Ressources",
+        "start": "Début",
+        "title": "Titre",
+        "unitsHeader": "Unité"
+      },
+      "save": "Sauvegarder",
+      "views": {
+        "day": "Jours",
+        "end": "Fin",
+        "month": "Mois",
+        "start": "Début",
+        "week": "Semaine",
+        "year": "Année"
+      }
+    });
+}
+
+/* GanttList messages */
+
+if (kendo.ui.GanttList) {
+  kendo.ui.GanttList.prototype.options.messages =
+    $.extend(true, kendo.ui.GanttList.prototype.options.messages, {
+      "noRows": "Aucun enregistrement à afficher",
+      "loading": "Chargement...",
+      "requestFailed": "La requête a échoué.",
+      "retry": "Réessayer",
+      "commands": {
+        "edit": "Modifier",
+        "update": "Mettre à jour",
+        "canceledit": "Annuler",
+        "create": "Créer",
+        "createchild": "Créer un élément enfant",
+        "destroy": "Supprimer",
+        "excel": "Export Excel",
+        "pdf": "Export PDF"
+      }
+    });
+}
 /* RecurrenceEditor messages */
 
 if (kendo.ui.RecurrenceEditor) {
@@ -616,6 +677,21 @@ if (kendo.ui.Dialog) {
 kendo.ui.Dialog.prototype.options.messages =
 $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
   "close": "Fermer"
+});
+}
+
+/* Calendar */
+
+if (kendo.ui.Calendar) {
+kendo.ui.Calendar.prototype.options.messages =
+$.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+  "weekColumnHeader": "S",
+  "navigateTo": "Naviguer à la vue ",
+  "parentViews": {
+    "month": "de l'année",
+    "year": "de la décennie",
+    "decade": "du centenaire"
+  }
 });
 }
 

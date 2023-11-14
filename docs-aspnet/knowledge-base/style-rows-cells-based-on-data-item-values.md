@@ -1,7 +1,7 @@
 ---
 title: Style Grid Table Rows and Cells Based on Values
 page_title: Style Grid Table Rows and Cells by Data Item Values
-description: "An example on how to customize the tables cells and rows styles of the Telerik UI Grid for {{ site.framework }} based on data items values."
+description: Learn how to customize the tables cells and rows styles of the Telerik UI Grid for {{ site.framework }} based on data items values.
 slug: howto_customize_rowsand_cells_basedon_dataitem_values_grid
 tags: customize, grid, rows, cells, basedon, data, item, value
 component: grid
@@ -17,7 +17,7 @@ res_type: kb
   <td>Progress® Telerik® UI Grid for UI for {{ site.framework }}</td>
  </tr>
   <tr>
-  <td>Progress Тelerik UI version</td>
+  <td>Progress Telerik UI version</td>
   <td>2021.3.1207</td>
  </tr>
 </table>
@@ -59,13 +59,13 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/GmYHdEFR556Q5I6J58
         })
         .Pageable()
         .Sortable()
-        .Scrollable(scr=>scr.Height(430)) 
+        .Scrollable(scr=>scr.Height(430))
         .Filterable()
-        .Events(e=>e.Databound("databound")) 
-        .DataSource(dataSource => dataSource        
+        .Events(e=>e.Databound("databound"))
+        .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
-            .ServerOperation(false)        
+            .ServerOperation(false)
         )
     )
      <style>
@@ -147,13 +147,13 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/QGaPlMPA01Ynhx8P04
         })
         .Pageable()
         .Sortable()
-        .Scrollable(scr=>scr.Height(430)) 
+        .Scrollable(scr=>scr.Height(430))
         .Filterable()
-        .Events(e=>e.Databound("databound")) 
-        .DataSource(dataSource => dataSource        
+        .Events(e=>e.Databound("databound"))
+        .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
-            .ServerOperation(false)        
+            .ServerOperation(false)
         )
     )
     <style>
@@ -211,13 +211,13 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/mcuFlNuC05ge5RKB30
           .ClientRowTemplate("#=altRowTemplateString#")
           .Pageable()
           .Sortable()
-          .Scrollable(scr=>scr.Height(430)) 
+          .Scrollable(scr=>scr.Height(430))
           .Filterable()
-          .Events(e=>e.Databound("databound")) 
-          .DataSource(dataSource => dataSource        
+          .Events(e=>e.Databound("databound"))
+          .DataSource(dataSource => dataSource
               .Ajax()
               .PageSize(20)
-              .ServerOperation(false)        
+              .ServerOperation(false)
           )
       )
       <style>
@@ -248,7 +248,7 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/mcuFlNuC05ge5RKB30
             '<td class="#: getUnitsInStockClass(UnitsInStock) #">#: UnitsInStock #</td>' +
             '<td>#: Discontinued #</td>' +
             '</tr>';
-        
+
         var altRowTemplateString = rowTemplateString.replace('tr class="', 'tr class="k-alt ');
 
         function getUnitsInStockClass(units) {
@@ -263,6 +263,30 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/mcuFlNuC05ge5RKB30
       </script>
 ```
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
-* [Grid Custom data source (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

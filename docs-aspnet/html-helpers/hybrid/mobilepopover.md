@@ -100,4 +100,4 @@ You can reference a hybrid PopOver instance by using the code from the following
 
 ## See Also
 
-* [Hybrid PopOverBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)
+* [Hybrid PopOverBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilepopoverbuilder)

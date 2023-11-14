@@ -121,12 +121,25 @@ Because this approach is not related to the functionality of the Kendo UI suite,
           dataTextField: "text",
           dataValueField: "value",
           change: function (e) {
-            var href = $('head > link')[0].href;
-            var myRegexp = new RegExp("kendo.cdn.telerik.com/(.*)?/styles", "g");
-            var version = myRegexp.exec(href)[1];
-            var curHref = 'https://kendo.cdn.telerik.com/'+version+'/styles/kendo.'+ e.sender.value() +'.min.css';
+            var themeName = $("#theme")
+            .data("kendoDropDownList")
+            .text()
+            .toLowerCase();
+            var swatch = this.value();
 
-            $('head > link')[0].href = curHref;
+            $("link").each(function () {
+              if (this.href.indexOf("/themes/") != -1) {
+                var themeVersion = this.href.split("/")[4];
+                var curHref = "https://kendo.cdn.telerik.com/themes/" +
+                    themeVersion +
+                    "/" +
+                    themeName +
+                    "/" +
+                    swatch +
+                    ".css";
+                this.href = curHref;
+              }
+            });           
           }
         });
 

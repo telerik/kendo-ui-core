@@ -4,7 +4,7 @@ page_title: Data Binding
 description: "Learn how to bind the Telerik UI StockChart component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) to data."
 previous_url: /helpers/charts/stockchart/data-binding
 slug: databinding_stockchart_aspnetcore
-position: 2
+position: 4
 ---
 {% if site.core %}
     {% assign DateField = "/api/Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
@@ -51,6 +51,41 @@ The following example demonstrates a StockChart in a single data-source binding 
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-stockchart name="stockChartTag"
+            date-field="Date">
+        <chart-title text=" The Boeing Company \n (NYSE:BA)"></chart-title>
+        <datasource>
+            <transport>
+                <read  url="@Url.Action("_BoeingStockData", "Financial")"/>
+            </transport>
+             <schema>
+                <model>
+                    <fields>
+                        <field name="Date" type="date"></field>
+                        <field name="Close" type="number"></field>
+                        <field name="Volume" type="number"></field>
+                        <field name="Open" type="number"></field>
+                        <field name="High" type="number"></field>
+                        <field name="Low" type="number"></field>
+                        <field name="Symbol" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+        <series>
+            <series-item type="ChartSeriesType.Candlestick" open-field="Open" high-field="High" low-field="Low" close-field="Close"></series-item>
+        </series>
+        <navigator>
+            <navigator-series>
+                <series-item type="ChartSeriesType.Area" field="Close"></series-item>
+            </navigator-series>
+            <select from="new DateTime(2009,02,05)" to="new DateTime(2011,10,07)"></select>
+        </navigator>
+    </kendo-stockchart>
+```
+{% endif %}
 
 ## Master and Navigator Data-Source Mode
 
@@ -98,6 +133,46 @@ The following example demonstrates a StockChart in the master and navigator data
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-stockchart name="stockChart"
+                      date-field="Date">
+        <chart-title text="The ACME Company"></chart-title>
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("_StockData", "Financial")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="Date" type="date"></field>
+                        <field name="Close" type="number"></field>
+                        <field name="Volume" type="number"></field>
+                        <field name="Open" type="number"></field>
+                        <field name="High" type="number"></field>
+                        <field name="Low" type="number"></field>
+                        <field name="Symbol" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+        <navigator>
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("_StockData", "Financial")" />
+                </transport>
+            </datasource>
+            <navigator-series>
+                <series-item type="ChartSeriesType.Area" field="High"></series-item>
+            </navigator-series>
+            <select from="new DateTime(2017,02,05)" to="new DateTime(2019,10,07)"></select>
+        </navigator>
+        <series>
+            <series-item type="ChartSeriesType.Candlestick" open-field="Open" high-field="High" low-field="Low" close-field="Close"></series-item>
+        </series>
+    </kendo-stockchart>
+```
+{% endif %}
 
 The following example demonstrates a sample filter submitted by the StockChart for the main data source. The `filter` field is always `Date` regardless of the `DateField` setting.
 

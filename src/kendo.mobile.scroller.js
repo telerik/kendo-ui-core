@@ -701,4 +701,5 @@ var __meta__ = {
 
     ui.plugin(Scroller);
 })(window.kendo.jQuery);
+export default kendo;
 

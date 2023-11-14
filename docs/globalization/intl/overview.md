@@ -40,12 +40,12 @@ To define the current culture:
 1. Add the required culture script to the page, as demonstrated in the example below.
 
     ```
-        <script src="jquery.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="kendo.all.min.js"></script>
         <script src="kendo.culture.en-GB.js"></script>
 
         <!-- or when using the Kendo UI CDN -->
-        <script src="https://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.en-GB.min.js"></script>
     ```

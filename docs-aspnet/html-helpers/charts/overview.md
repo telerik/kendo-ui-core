@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI Chart component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/charts/charts, /helpers/html-helpers/charts, /helpers/html-helpers/charts/chart/overview, /helpers/charts/overview
 slug: htmlhelpers_charts_aspnetcore
-position: 1
+position: 0
 ---
 {% if site.core %}
     {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultssettingsbuildert" %}
@@ -15,25 +15,16 @@ position: 1
 # {{ site.framework }} Chart Overview
 
 {% if site.core %}
-The Chart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Chart widget. To add the component to your ASP.NET Core app, you can use either.
+[The Telerik UI Chart TagHelper and HtmlHelper for {{ site.framework }}](https://www.telerik.com/aspnet-core-ui/charts) are server-side wrappers for the Kendo UI Chart widget. To add the component to your ASP.NET Core app, you can use either.
 {% else %}
-The Telerik UI Chart HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Chart widget.
+[The Telerik UI Chart HtmlHelper for {{ site.framework }}](https://www.telerik.com/aspnet-mvc/charts) is a server-side wrapper for the Kendo UI Chart widget.
 {% endif %}
 
-The Chart uses modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_aspnetcore_htmlhelper %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.
+The Chart uses modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_aspnetcore_htmlhelper %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and others.
 
 {% if site.has_cta_panels == true %}
 {% include cta-panel-introduction.html %}
 {% endif %}
-
-The Chart contains the following [building block elements]({% slug htmlhelpers_charts_dataseries_aspnetcore %}):
-
-* Title
-* Legend
-* Chart Area
-* Plot Area
-* Axes
-* Series
 
 The following image displays the structure of the Chart.
 
@@ -71,8 +62,8 @@ The following example demonstrates how to define the Chart.
             </category-axis-item>
         </category-axis>
         <series>
-            <series-item type="ChartSeriesType.Bar" 
-                        field="Value" 
+            <series-item type="ChartSeriesType.Bar"
+                        field="Value"
                         name="United States">
             </series-item>
         </series>
@@ -88,7 +79,18 @@ The following example demonstrates how to define the Chart.
     }
 ```
 
-### Basic Configuration
+The Chart contains the following [building block elements]({% slug htmlhelpers_charts_dataseries_aspnetcore %}):
+
+| Element | Description |
+|---------|-------------|
+| Title | The Chart provides extensive configuration options for its title. [See the client-side properties for the `Title` of the Chart component](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/title). |
+| Legend | The Chart provides extensive configuration options for its legend. [See the client-side properties for the `Legend` of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/legend). |
+| Chart area | The chart area represents the entire visible area of the Chart. [See the client-side properties for the `Chart Area` of the Chart component](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/chartarea). | 
+| Plot Area | The plot area displays the series in the Chart. [See the client-side properties for the `Plot Area ` of the Chart component](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/plotarea). |
+| Axis defaults | The Chart provides default options that are valid for all Chart axes. This element accepts the options supported by [`categoryAxis`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis), [`valueAxis`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/valueaxis), [`xAxis`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/xaxis), and [`yAxis`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-yAxis). |
+| Series | The Chart provides various configuration options for its series. The series type is determined by the value of the type field. If a type value is missing, the type is assumed to be the one specified in `seriesDefaults`. |    
+
+## Basic Configuration
 
 To configure the Chart, pass the configuration options as attributes:
 
@@ -157,9 +159,7 @@ To configure the Chart, pass the configuration options as attributes:
 
     <category-axis>
         <category-axis-item categories='new string[] { "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "20010", "2011", }'>
-            <labels>
-                <chart-category-axis-labels-padding top="135" />
-            </labels>
+            <labels position="ChartAxisLabelsPosition.Start" />
             <line visible="false" />
         </category-axis-item>
     </category-axis>
@@ -169,7 +169,7 @@ To configure the Chart, pass the configuration options as attributes:
 ```
 {% endif %}
 
-#### Axis Title
+### Axis Title
 
 You can also add a title to clearly indicate the role of the axis.
 
@@ -184,7 +184,7 @@ You can also add a title to clearly indicate the role of the axis.
             series.Column(new double[] { 20, 25, 32 }).Name("Temperature").Axis("temperature");
             series.Column(new double[] { 45, 50, 80 }).Name("Humidity").Axis("humidity");
         })
-        .CategoryAxis(axis => axis            
+        .CategoryAxis(axis => axis
             .Categories("Aug", "Sep", "Oct")
             .AxisCrossingValue(0, 3)
         )
@@ -246,7 +246,7 @@ You can also add a title to clearly indicate the role of the axis.
 
 ![{{ site.product_short }} Chart with axis titles](images/chart-axis-titles.png)
 
-#### Plot Bands
+### Plot Bands
 
 The Chart enables you to configure each axis to display bands with different colors for predefined value ranges. The category index (zero-based) is used as a value for the category axis.
 
@@ -288,7 +288,7 @@ The Chart enables you to configure each axis to display bands with different col
 
 ![{{ site.product_short }} Chart with axis plot bands](images/chart-plot-bands.png)
 
-#### Global Settings
+### Global Settings
 
 You may also need to apply global settings that affect all axes. In such cases, use [`AxisDefaults`]({{ AxisDefaults }}).
 
@@ -308,66 +308,27 @@ You may also need to apply global settings that affect all axes. In such cases, 
 
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_charts_databinding_aspnetcore %})
-* [Appearance]({% slug htmlhelpers_charts_appearance_aspnetcore %})
+* [Data binding]({% slug htmlhelpers_charts_databinding_aspnetcore %})—You can populate the Telerik UI Chart for {{ site.framework }} with data by binding it to inline data, local data, or remote data.
+* [Appearance]({% slug htmlhelpers_charts_appearance_aspnetcore %})—Unlike other {{ site.product }} components which use only CSS for styling, you can control the appearance of the Chart elements primarily by using JavaScript style options.
+* [Scaffolding](% slug scaffoldingchart_aspnetmvc %)—The Chart for {{ site.framework }} enables you to use the Kendo UI Scaffolder Visual Studio extension.
 
-## Events
+## Chart Types
 
-You can subscribe to all Chart [events](/api/chart). For a complete example on basic Chart events, refer to the [demo on using the events of the Chart](https://demos.telerik.com/{{ site.platform }}/chart-api/events).
+The Telerik UI for {{ site.framework }} Chart supports an extensive set of series types.
 
-### Handling by Handler Name
-
-The following examples demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
-        .Name("chart")
-        .Events(events => events
-            .SeriesClick("onSeriesClick")
-            .DataBound("onDataBound")
-        )
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-    <kendo-chart name="chart" 
-                on-series-click="onSeriesClick" 
-                on-data-bound="onDataBound">
-    </kendo-chart>
-```
-{% endif %}
-```script.js
-    <script>
-        function onSeriesClick(e) {
-            // Handle the seriesClick event
-        }
-
-        function onDataBound(e) {
-            // Handle the dataBound event
-        }
-    </script>
-```
-
-### Handling by Template Delegate
-
-```HtmlHelper
-    @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
-        .Name("chart")
-        .Events(events => events
-            .SeriesClick(@<text>
-                function() {
-                    // Handle the seriesClick event
-                }
-            </text>)
-            .DataBound(@<text>
-                function() {
-                    // Handle the dataBound event
-                }
-            </text>)
-        )
-    )
-```
+| Chart type | Description |
+|---------|-------------|
+| [Categorical Charts]({% slug htmlhelpers_categoricalcharts_aspnetcore %})  | Categorical Charts use a single category axis and a single value axis. |
+| [Scatter Charts]({% slug htmlhelpers_scattercharts_aspnetcore %}) | Scatter Charts display data as points that are defined by the values of their items. |
+| [Area Charts]({% slug areacharts_aspnetcore_htmlhelper %}) | Area Charts display quantitative data by using continuous lines that pass through points defined by the values of their items. |
+| [Bar Charts]({% slug barcharts_aspnetcore_htmlhelper %}) | Bar Charts display data using horizontal or vertical bars whose length varies according to their values. |
+| [Box Plot Charts]({% slug boxplotcharts_aspnetcore_htmlhelper %}) | Box Plot Charts are useful for displaying variations in statistical samples of data and data details in a small space. |
+| [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %}) | Bubble Charts display data as points with coordinates and sizes determined by the values of their items. |
+| [Bullet Charts]({% slug bulletcharts_aspnetcore_htmlhelper %}) | Bullet Charts represent a variation of the [Bar Chart]({% slug overview_barcharthelper_aspnetcore %}). |
+| [Funnel Charts]({% slug funnelchart_aspnetcore_htmlhelper %}) | Funnel Charts are suitable for representing stages in a sales process and for showing the amount of the potential revenue from each stage. |
+| [Line Charts]({% slug linecharts_aspnetcore_htmlhelper %}) | Line Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items. |
+| [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %}) | Pie Charts display data as single-series sectors from a two-dimensional circle which is useful for rendering data as a part of the whole. |
+| [Donut Charts]({% slug donutcharts_aspnetcore_htmlhelper %}) | Donut Charts are a Pie chart variation with the ability to display data as single-series sectors from a two-dimensional circle. |
 
 ## Referencing Existing Instances
 
@@ -384,9 +345,18 @@ To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jq
 ```
 
 
+## Next Steps
+
+* [Getting Started with the Bar Chart]({% slug bar_chart_getting_started %})
+* [Basic Usage of the Chart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/charts)
+{% if site.core %}
+* [Chart in Razor Pages]({% slug htmlhelper_chart_razorpages_aspnetcore %})
+{% endif %}
+
 ## See Also
 
-* [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Bar Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts/index)
-* [Basic Usage of the Line Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
-* [Server-Side API](/api/chart)
+* [All Chart Types]({% slug overview_charttypes_charts %})
+* [Bar Chart]({% slug overview_barcharthelper_aspnetcore %})
+* [Sparkline]({% slug overview_sparklineshelper_aspnetcore %})
+* [StockChart]({% slug overview_stockcharthelper_aspnetcore %})
+* [Knowledge Base Section](/knowledge-base)

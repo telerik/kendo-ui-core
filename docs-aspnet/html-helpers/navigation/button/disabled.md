@@ -11,7 +11,7 @@ position: 2
 
 The business logic of an application often requires a certain button to be temporarily disabled or enabled.
 
-You can initially configure the Button as disabled through its [`.Enable()`](/api/Kendo.Mvc.UI.Fluent/ButtonBuilder#enablesystemboolean) setting. Additionally, you can enable or disable the Button at any time with JavaScript by using its [`enable()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/methods/enable) with a Boolean argument. 
+You can initially configure the Button as disabled through its [`.Enable()`](/api/kendo.mvc.ui.fluent/buttonbuilder#enablesystemboolean) setting. additionally, you can enable or disable the button at any time with javascript by using its [`enable()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/methods/enable) with a Boolean argument. 
 
 The following example demonstrates how to enable and disable the Button through the `enable` attribute.
 
@@ -79,5 +79,5 @@ To reference an existing Button instance, use the [`jQuery.data()`](http://api.j
 
 * [Basic Usage of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button)
 * [Using the API of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/api)
-* [ButtonBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/ButtonBuilder)
+* [ButtonBuilder Server-Side API](/api/kendo.mvc.ui.fluent/buttonbuilder)
 * [Button Server-Side API](/api/button)

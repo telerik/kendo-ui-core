@@ -306,6 +306,63 @@ Optional namespace too look in when instantiating Kendo UI widgets. The valid na
 
      kendo.init($("#view"), kendo.mobile.ui, kendo.ui);
      </script>
+     
+### mediaQuery
+
+Enables you to handle media queries in JavaScript using the [MediaQueryList](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList) object. The method returns an object with the `mediaQueryList` field and the `onChange`, `onEnter`, `onLeave`, and `destroy` methods. The `onChange`, `onEnter` and `onLeave` methods accepts a callback function that will be executed when the media query is matched or not matched. The callback function will be passed a single argument - the [MediaQueryListEvent](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryListEvent) instance and return the `mediaQuery` object that enables you to pipe more handlers.
+
+The `onChange` method will be executed when the media query is matched or not matched. The `onEnter` method will be executed when the media query is matched and when the `mediaQuery` is initialized and media is matched. The `onLeave` method will be executed when the media query is not matched.
+
+The `destroy` method will remove the event listeners and destroy the `MediaQueryList` instance. Note that developers should call the `destroy` method when the media query is no longer needed.
+
+#### Parameters
+
+##### media `String`
+
+The media query that will create the [MediaQueryList instance](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList).
+
+#### Example - Using a string
+
+    <script>
+        const mediaQueryListener = kendo.mediaQuery('(max-width: 500px)')
+                                    .onEnter(() => {
+                                        console.log('entered 500px width');
+                                    });
+    </script>
+
+#### Example - Piping more handlers
+
+    <script>
+        const mediaQueryListener = kendo.mediaQuery('(min-width: 500px) and (max-width: 1000px)')
+                                    .onChange(() => {
+                                        console.log('changed screen width between 500px and 1000px');
+                                    })
+                                    .onEnter(() => {
+                                        console.log('entered screen width between 500px and 1000px');
+                                    })
+                                    .onEnter(() => {
+                                        // some other logic
+                                    })
+                                    .onLeave(() => {
+                                        console.log('left screen width between 500px and 1000px');
+                                    });
+    </script>
+
+#### Example - Destroying the media query listener
+
+    <script>
+        const mediaQueryListener = kendo.mediaQuery('(min-width: 500px) and (max-width: 1000px)')
+                                    .onEnter(() => {
+                                        console.log('entered screen width between 500px and 1000px');
+                                    });
+
+        mediaQueryListener.destroy();
+    </script>
+
+#### Returns
+
+`Object` with the `mediaQueryList` field and the `onChange`, `onEnter`, `onLeave` and `destroy` methods.
+
 
 
 ### observableFileManagerData
@@ -821,6 +878,29 @@ performance are available.
     <script>
     var template = kendo.template($("#template").html());
     $("#output").html(template({}));
+    </script>
+
+#### Example - use a function in a template
+
+    <div id="example"></div>
+    <script id="javascriptTemplate" type="text/x-kendo-template">
+        <ul>
+        # for (var i = 0; i < data.length; i++) { #
+            <li>#= myCustomFunction(data[i]) #</li>
+        # } #
+        </ul>
+    </script>
+    <script type="text/javascript">
+        // Use a custom function inside the template and define it in the global JavaScript scope.
+        function myCustomFunction (str) {
+            return str.replace(".", " ");
+        }
+        // Get the external template definition by using a jQuery selector.
+        var template = kendo.template($("#javascriptTemplate").html());
+        // Create some dummy data.
+        var data = ["Todd.Holland", "Steve.Anglin", "Burke.Ballmer"];
+        var result = template(data); //Execute the template
+        $("#example").html(result); //Append the result
     </script>
 
 #### Returns

@@ -4,7 +4,7 @@ page_title: Data Binding
 description: "Learn the basics about binding the Telerik UI Chart component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) to data."
 previous_url: /helpers/html-helpers/charts/chart/data-binding, /helpers/charts/data-binding
 slug: htmlhelpers_charts_databinding_aspnetcore
-position: 2
+position: 1
 ---
 
 # Data Binding
@@ -469,6 +469,9 @@ To bind to remote data by using the DataSource component:
 
 ## See Also
 
+{% if site.core %}
+* [Chart in Razor Pages]({% slug htmlhelper_chart_razorpages_aspnetcore %})
+{% endif %}
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)

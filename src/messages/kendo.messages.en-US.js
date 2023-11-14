@@ -63,7 +63,11 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "setColumnPosition": "Set Column Position",
   "apply": "Apply",
   "reset": "Reset",
-  "buttonTitle": "{0} edit column settings"
+  "buttonTitle": "{0} edit column settings",
+  "movePrev": "Move previous",
+  "moveNext": "Move next",
+  "groupColumn": "Group column",
+  "ungroupColumn": "Ungroup column"
 });
 }
 
@@ -82,6 +86,7 @@ $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages,{
 if (kendo.ui.Editor) {
 kendo.ui.Editor.prototype.options.messages =
 $.extend(true, kendo.ui.Editor.prototype.options.messages,{
+  "auto": "Auto",
   "bold": "Bold",
   "italic": "Italic",
   "search": "Search",
@@ -145,12 +150,16 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "addRowBelow": "Add row below",
   "deleteRow": "Delete row",
   "deleteColumn": "Delete column",
-  "dialogOk": "Ok",
+  "dialogOk": "Confirm",
+  "tableBackground": "Table background",
+  "tableCellProperties": "Cell properties",
+  "tableProperties": "Table properties",
   "tableWizard": "Table Wizard",
-  "tableTab": "Table",
+  "tableTab": "General",
   "cellTab": "Cell",
-  "accessibilityTab": "Accessibility",
+  "accessibilityTab": "Advanced",
   "caption": "Caption",
+  "captionAlignment": "Caption alignment",
   "summary": "Summary",
   "width": "Width",
   "height": "Height",
@@ -163,9 +172,12 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "cssClass": "CSS Class",
   "id": "ID",
   "border": "Border",
+  "borderColor": "Border color",
+  "borderWidth": "Border width",
   "borderStyle": "Border Style",
   "collapseBorders": "Collapse borders",
   "wrapText": "Wrap text",
+  "fitToCell": "Fit to cell",
   "associateCellsWithHeaders": "Associate headers",
   "alignLeft": "Align Left",
   "alignCenter": "Align Center",
@@ -182,7 +194,9 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "alignRemove": "Remove Alignment",
   "columns": "Columns",
   "rows": "Rows",
-  "selectAllCells": "Select All Cells",
+  "selectAllCells": "Apply to all cells",
+  "applyToColumn": "apply to column",
+  "applyToRow": "apply to row",
   "print": "Print",
   "headerRows": "Header Rows",
   "headerColumns": "Header Columns",
@@ -262,21 +276,21 @@ if (kendo.ui.FileManager) {
             },
             moveConfirm: {
                 title: "Confirm",
-                content: "<p style='text-align: center;'>Do you want to move or copy?</p>",
+                content: "<p class='k-text-center'>Do you want to move or copy?</p>",
                 okText: "Copy",
                 cancel: "Move",
                 close: "close"
             },
             deleteConfirm: {
                 title: "Confirm",
-                content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?<br/>You cannot undo this action.</p>",
+                content: "<p class='k-text-center'>Are you sure you want to delete the selected file(s)?<br/>You cannot undo this action.</p>",
                 okText: "Delete",
                 cancel: "Cancel",
                 close: "close"
             },
             renamePrompt: {
                 title: "Prompt",
-                content: "<p style='text-align: center;'>Enter new name for the file.</p>",
+                content: "<p class='k-text-center'>Enter new name for the file.</p>",
                 okText: "Rename",
                 cancel: "Cancel",
                 close: "close"
@@ -524,8 +538,27 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Export to PDF",
     "save": "Save changes",
     "select": "Select",
-    "update": "Update",
-    "search": "Search..."
+    "update": "Save",
+    "search": "Search...",
+    "selectRow": "Select Row",
+    "selectAllRows": "All rows",
+    "clearSelection": "Clear selection",
+    "copySelection": "Copy selection",
+    "copySelectionNoHeaders": "Copy selection (No Headers)",
+    "reorderRow": "Reorder row",
+    "reorderRowUp": "Up",
+    "reorderRowDown": "Down",
+    "reorderRowTop": "Top",
+    "reorderRowBottom": "Bottom",
+    "exportPdf": "Export to PDF",
+    "exportExcel": "Export to Excel",
+    "exportToExcelAll": "All",
+    "exportToExcelSelection": "Selection",
+    "exportToExcelSelectionNoHeaders": "Selection (No Headers)",
+    "sortAsc": "Sort Ascending",
+    "sortDesc": "Sort Descending",
+    "moveGroupPrevious": "Move previous",
+    "moveGroupNext": "Move next",
   },
   "editable": {
     "cancelDelete": "Cancel",
@@ -581,7 +614,7 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
     "retry": "Retry",
     "commands": {
         "edit": "Edit",
-        "update": "Update",
+        "update": "Save",
         "canceledit": "Cancel",
         "create": "Add new record",
         "createchild": "Add child record",
@@ -1343,10 +1376,45 @@ $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
 });
 }
 
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+kendo.ui.TimePicker.prototype.options.messages =
+$.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+    set: "Set",
+    cancel: "Cancel",
+    hour: "hour",
+    minute: "minute",
+    second: "second",
+    millisecond: "millisecond",
+    now: "Now"
+});
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+kendo.ui.DateTimePicker.prototype.options.messages =
+$.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+    set: "Set",
+    cancel: "Cancel",
+    hour: "hour",
+    minute: "minute",
+    second: "second",
+    millisecond: "millisecond",
+    now: "Now",
+    date: "Date",
+    time: "Time",
+    today: "Today",
+    weekColumnHeader: ""
+});
+}
+
 /* Calendar */
 if (kendo.ui.Calendar) {
 kendo.ui.Calendar.prototype.options.messages =
 $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+    "today": "Today",
     "weekColumnHeader": "",
     "navigateTo": "Navigate to ",
     "parentViews": {
@@ -1513,7 +1581,7 @@ if (kendo.ui.PDFViewer) {
                 previous: "Go to the previous page",
                 next: "Go to the next page",
                 last: "Go to the last page",
-                of: " of {0} ",
+                of: "of",
                 page: "page",
                 pages: "pages"
             },

@@ -4,7 +4,7 @@ page_title: StockChart Overview
 description: "Learn the basics when working with the Telerik UI StockChart component for {{ site.framework }}."
 previous_url: /helpers/charts/stockchart/overview
 slug: overview_stockcharthelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} StockChart Overview
@@ -51,6 +51,35 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
             .DateField("Date")
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-stockchart name="stockChart"
+                date-field="Date">
+            <chart-title text=" The Boeing Company (NYSE:BA)"></chart-title>
+            <datasource custom-type="aspnetmvc-ajax"
+                    server-paging="true"
+                    server-filtering="true"
+                    server-grouping="true">
+                <transport>
+                    <read  url="@Url.Action("_BoeingStockData", "Financial")"/>
+                </transport>
+                 <schema>
+                <model>
+                    <fields>
+                        <field name="Date" type="date"></field>
+                        <field name="Close" type="number"></field>
+                        <field name="Volume" type="number"></field>
+                        <field name="Open" type="number"></field>
+                        <field name="High" type="number"></field>
+                        <field name="Low" type="number"></field>
+                        <field name="Symbol" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+            </datasource>
+        </kendo-stockchart>
+    ```
+    {% endif %}
     ```Model
         public class StockDataPoint
         {
@@ -109,7 +138,7 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
                 .Action("_BoeingStockData", "Home")
             ))
             .DateField("Date")
-                    .Series(series => {
+            .Series(series => {
                 series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
             })
             .Navigator(nav => nav
@@ -119,103 +148,58 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-stockchart name="stockChart"
+                date-field="Date">
+            <chart-title text=" The Boeing Company (NYSE:BA)"></chart-title>
+            <datasource custom-type="aspnetmvc-ajax"
+                    server-paging="true"
+                    server-filtering="true"
+                    server-grouping="true">
+                <transport>
+                    <read  url="@Url.Action("_BoeingStockData", "Financial")"/>
+                </transport>
+                 <schema>
+                <model>
+                    <fields>
+                        <field name="Date" type="date"></field>
+                        <field name="Close" type="number"></field>
+                        <field name="Volume" type="number"></field>
+                        <field name="Open" type="number"></field>
+                        <field name="High" type="number"></field>
+                        <field name="Low" type="number"></field>
+                        <field name="Symbol" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+            </datasource>
+            <series>
+                <series-item type="ChartSeriesType.Candlestick" open-field="Open" high-field="High" low-field="Low" close-field="Close"></series-item>
+            </series>
+            <navigator>
+            <navigator-series>
+                    <series-item type="ChartSeriesType.Line" field="Volume"></series-item>
+                </navigator-series>
+                <select from="new DateTime(2009,02,05)" to="new DateTime(2011,10,07)"></select>
+            </navigator>
+        </kendo-stockchart>
+    ```
+    {% endif %}
 
 ## Functionality and Features
 
-The StockChart provides options for [binding it to data]({% slug databinding_stockchart_aspnetcore %}).
+* [Data Binding]({% slug databinding_stockchart_aspnetcore %})&mdash;You can bind the StockChart to local or remote data.
+* [Navigator]({% slug navigator_stockchart_aspnetcore%})&mdash; The StockChart allows you to represent a pane that is placed at the bottom of the chart that can change the date interval in the main panes.
 
-## Events
 
-You can subscribe to all StockChart [events](/api/Kendo.Mvc.UI.Fluent/ChartEventBuilder).
+## Next Steps
 
-### Handling Events by Handler Name
+* [Getting Started with the StockChart]({% slug stockchart_getting_started %})
+* [Basic Usage of the StockChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial)
 
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-    	.Name("stockChart")
-    	.Title("The Boeing Company (NYSE:BA)")
-    	.DateField("Date")
-    	.Series(series => {
-    	    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    	}){% if site.core %}
-        .Events((Action<Kendo.Mvc.UI.Fluent.StockChartEventBuilder>)(x => 
-            x.DataBound("stockChart_dataBound")
-            .SeriesClick("stockChart_seriesClick")
-            )
-        )
-        {% else %}
-    	.Events(e => e
-    	  .DataBound("stockChart_dataBound")
-    	  .SeriesClick("stockChart_seriesClick")
-    	){% endif %}
-    )
-
-    <script>
-        function stockChart_dataBound(e) {
-            // Handle the dataBound event.
-        }
-
-        function stockChart_seriesClick(e) {
-            // Handle the seriesClick event.
-        }
-    </script>
-```
-
-### Handling Events by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-    	.Name("stockChart")
-    	.Title("The Boeing Company (NYSE:BA)")
-    	.DateField("Date")
-    	.Series(series => {
-    	    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    	}){% if site.core %}
-        .Events((Action<Kendo.Mvc.UI.Fluent.StockChartEventBuilder>)(e => e
-    	  .DataBound(@<text>
-    	       function(e) {
-    	           //Handle the dataBound event inline.
-    	       }
-    	  </text>)
-    	  .SeriesClick(@<text>
-    	       function(e) {
-    	           //Handle the seriesClick event inline.
-    	       }
-    	  </text>)
-    	 )
-        ){% else %}
-    	.Events(e => e
-    	  .DataBound(@<text>
-    	       function(e) {
-    	           //Handle the dataBound event inline.
-    	       }
-    	  </text>)
-    	  .SeriesClick(@<text>
-    	       function(e) {
-    	           //Handle the seriesClick event inline.
-    	       }
-    	  </text>)
-    	){% endif %}
-    )
-```
-
-## Referencing Existing Instances
-
-To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [StockChart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
-
-    // Place the following after the declaration of the Barcode for {{ site.framework }}.
-    <script>
-        $(function() {
-            // The Name() of the StockChart is used to get its client-side instance.
-            var chart = $("#stockChart").data("kendoStockChart");
-        });
-    </script>
 
 ## See Also
 
-* [Basic Usage of the StockChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial/index)
 * [Server-Side API of the StockChart for {{ site.framework }}](/api/stockchart)
+* [Knowledge Base Section](/knowledge-base)

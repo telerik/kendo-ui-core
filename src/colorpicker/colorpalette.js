@@ -199,9 +199,7 @@ import "../kendo.core.js";
             item.addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
         },
         _template: kendo.template(({colors, columns, tileSize, value, id}) => {
-            let startPart =
-            '<div class="k-colorpalette-table-wrap">' +
-            '<table class="k-colorpalette-table k-palette" role="presentation"><tr role="row">';
+            let startPart = '<table class="k-colorpalette-table" role="presentation"><tr role="row">';
 
             let cellElements = "";
             for (var i = 0; i < colors.length; ++i) {
@@ -211,7 +209,7 @@ import "../kendo.core.js";
                 }
 
                 cellElements +=
-                `<td role="gridcell" unselectable="on" style="background-color:${colors[i].toCss()}"` +
+                `<td role="gridcell" unselectable="on" ${kendo.attr("style-background-color")}="${colors[i].toCss()}"` +
                     `${selected ? " aria-selected=true" : ""} ` +
                     `${(id && i === 0) ? 'id=\\"' + id + '\\" ' : '' } ` +
 
@@ -219,7 +217,7 @@ import "../kendo.core.js";
                     `aria-label="${colors[i].toCss()}"></td>`;
             }
 
-            let endPart = '</tr></table></div>';
+            let endPart = '</tr></table>';
             return startPart + cellElements + endPart;
         }),
         _tileSize: function() {
@@ -264,7 +262,8 @@ import "../kendo.core.js";
         _wrapper: function() {
             var options = this.options,
                 colors = this._colors(),
-                wrapper;
+                wrapper,
+                templateElement;
 
             if (this.element.is("input")) {
                 wrapper = this.element.addClass("k-hidden").wrap("<div>").parent();
@@ -272,15 +271,18 @@ import "../kendo.core.js";
                 wrapper = this.element;
             }
 
+            templateElement = $(this._template({
+                colors: colors,
+                columns: options.columns,
+                tileSize: options.tileSize,
+                value: this._value,
+                id: options.ariaId
+            }));
+
+            kendo.applyStylesFromKendoAttributes(templateElement, ["background-color"]);
             wrapper.addClass("k-colorpalette")
                 .attr("role", "grid")
-                .append($(this._template({
-                    colors: colors,
-                    columns: options.columns,
-                    tileSize: options.tileSize,
-                    value: this._value,
-                    id: options.ariaId
-                })))
+                .append(templateElement)
                 .attr("tabindex", this._tabIndex);
 
             this.wrapper = wrapper;

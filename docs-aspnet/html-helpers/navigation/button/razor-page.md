@@ -1,16 +1,20 @@
 ---
-title:  Razor Page
-page_title: Configure a submit Button in Razor Page.
+title:  Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Button component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_button_razorpage_aspnetcore
 position: 4
 ---
 
-# Razor Page
+# Button in Razor Pages
 
-This article describes how to configure the Telerik UI Button for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-The example below demonstrates how to pass antiforgery token when a Button is clicked. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Button for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Button component in a Razor Pages scenario.
+
+For the complete project, refer to the [Button in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Button/ButtonIndex.cshtml).
 
 ```tab-HtmlHelper(csthml) 
        

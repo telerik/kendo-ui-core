@@ -222,8 +222,10 @@ var __meta__ = {
                 anchor: openPopup[0] ? openPopup : document.body,
                 origin: that._popupOrigin,
                 position: that._popupPosition,
+                _resizeOnWrap: true,
                 animation: options.animation,
                 copyAnchorStyles: false,
+                autosize: true,
                 modal: true,
                 collision: "",
                 isRtl: that._isRtl,
@@ -239,7 +241,7 @@ var __meta__ = {
 
             that._attachPopupEvents(options, popup);
 
-            wrapper.removeClass("k-group k-reset");
+            wrapper.removeClass("k-group k-reset k-popup");
 
             if (openPopup[0]) {
                 popup.open();
@@ -254,6 +256,7 @@ var __meta__ = {
 
                 popup.open(x, y);
             }
+            wrapper.removeClass("k-popup");
 
             popup.wrapper.addClass(that._guid).css(extend({ margin: 0,zIndex: 10050 }, that._popupPaddings));
 
@@ -334,6 +337,7 @@ var __meta__ = {
                 .hide()
                 .kendoAnimate(animation.open || false);
 
+            wrapper.css("display", "");
             initializedNotifications = that.getNotifications();
             initializedNotifications.each(function(idx, element) {
                 that._attachStaticEvents(options, $(element));
@@ -358,9 +362,6 @@ var __meta__ = {
 
         _triggerHide: function(element) {
             this.trigger(HIDE, { element: element });
-            this.angular("cleanup", function() {
-                return { elements: element };
-            });
         },
 
         show: function(content, type, safe) {
@@ -406,13 +407,6 @@ var __meta__ = {
 
                 wrapper.find(".k-notification-content").attr("id", contentId);
                 wrapper.attr("aria-describedby", contentId);
-
-                that.angular("compile", function() {
-                    return {
-                        elements: wrapper,
-                        data: [{ dataItem: args }]
-                    };
-                });
 
                 if ($(options.appendTo)[0]) {
                     that._showStatic(wrapper, options);
@@ -524,4 +518,5 @@ var __meta__ = {
     kendo.ui.plugin(Notification);
 
 })(window.kendo.jQuery);
+export default kendo;
 

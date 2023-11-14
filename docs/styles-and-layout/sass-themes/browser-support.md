@@ -3,7 +3,7 @@ title: Browser Support
 page_title: Browser Support - Sass Themes
 description: "Find out which browsers support the Kendo UI Sass Themes."
 slug: sassbasedthemes_browser_kendoui
-position: 8
+position: 9
 ---
 
 # Browser Support

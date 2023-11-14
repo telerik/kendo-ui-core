@@ -1,7 +1,7 @@
 ---
-title: Change Theme On The Client 
+title: Changing the Theme On The Client
 page_title: Change Theme On The Client
-description: "How to Change The {{ site.product }} Application Theme On The Client"
+description: How to enable the users to change the {{ site.product }} application theme on the client?
 slug: howto_changethemeontheclient
 previous_url: /styles-and-layout/client-side-theme-change
 tags: change, theme, client, dropdown
@@ -25,11 +25,12 @@ How can I allow the user to change the theme in my {{ site.product }} applicatio
 
 ## Solution
 
-The Step by Step guide below demonstrates how to allow the user to change the theme of the application. The approach demonstrated uses cookies to store the theme selected by the user. For a runnable example, refer to the GitHub repo on how to [change the theme on the client]{% if site.core %}(https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/StylesAndLayout/ClientThemeChange.cshtml){% else %}(https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/styles-and-layout/ChangingThemesOnTheClient){% endif %}.
+The step-by-step guide below demonstrates how to allow the user to change the theme of the application. The demonstrated approach uses cookies to store the theme selected by the user.
 
-### Adding a DropDownList for theme selection
+### 1. Adding a DropDownList for Theme Selection
 
-Add a {{ site.product_short }} DropDownList to the _Layout.cshtml file for theme selection.
+Add a {{ site.product_short }} DropDownList to the `_Layout.cshtml` file for theme selection.
+
 ```razor
     @(Html.Kendo().DropDownList()
         .Name("themeSelector")
@@ -49,100 +50,112 @@ Add a {{ site.product_short }} DropDownList to the _Layout.cshtml file for theme
     )
 ```
 
-### Sending information on the selected theme to the server
+### 2. Sending Information about the Theme to the Server
 
-Upon selection of a theme, pass the selected theme name to an action method responsible for setting the theme.
+1. Upon selection of a theme, pass the selected theme name to an action method responsible for setting the theme.
 
-```javascript
-    function themeSelection(e) {
-        var selectedTheme = e.sender.dataItem();
-        $.post({
-            url: "/Home/SetTheme",
-            data: { selection: selectedTheme.ThemeId },
-            success: function (data) {
-                window.location = data.url;
-            }
-    });
-```
+    ```javascript
+        function themeSelection(e) {
+            var selectedTheme = e.sender.dataItem();
+            $.post({
+                url: "/Home/SetTheme",
+                data: { selection: selectedTheme.ThemeId },
+                success: function (data) {
+                    window.location = data.url;
+                }
+        });
+    ```
 
-Append the name of the selected theme to a cookie.
+1. Append the name of the selected theme to a cookie.
+
 {% if site.core %}
-```Controller
-    [HttpPost]
-    public IActionResult SetTheme(string selection)
-    {
-        CookieOptions cookie = new CookieOptions();
-        cookie.Expires = DateTime.Now.AddMinutes(10);
+    ```Controller
+        [HttpPost]
+        public IActionResult SetTheme(string selection)
+        {
+            CookieOptions cookie = new CookieOptions();
+            cookie.Expires = DateTime.Now.AddMinutes(10);
 
-        Response.Cookies.Append("theme", selection, cookie);
-        var returnUrl = Request.Headers["Referer"].ToString();
-        return Json(new { result = "Redirect", url = returnUrl });
-    }
-```
+            Response.Cookies.Append("theme", selection, cookie);
+            var returnUrl = Request.Headers["Referer"].ToString();
+            return Json(new { result = "Redirect", url = returnUrl });
+        }
+    ```
 {% else %}
-```Controller
-    [HttpPost]
-    public ActionResult SetTheme(string selection)
-    {
-        HttpCookie cookie = Request.Cookies.Get("theme");
-        if(cookie == null)
+    ```Controller
+        [HttpPost]
+        public ActionResult SetTheme(string selection)
         {
-            cookie = new HttpCookie("theme", selection) { Expires = DateTime.Now.AddMinutes(10) };
-        }
-        else
-        {
-            cookie.Value = selection;
-        }
+            HttpCookie cookie = Request.Cookies.Get("theme");
+            if(cookie == null)
+            {
+                cookie = new HttpCookie("theme", selection) { Expires = DateTime.Now.AddMinutes(10) };
+            }
+            else
+            {
+                cookie.Value = selection;
+            }
 
-        HttpContext.Response.AppendCookie(cookie);
-        var returnUrl = Request.Headers["Referer"].ToString();
-        return Json(new { result = "Redirect", url = returnUrl });
-    }
-```
+            HttpContext.Response.AppendCookie(cookie);
+            var returnUrl = Request.Headers["Referer"].ToString();
+            return Json(new { result = "Redirect", url = returnUrl });
+        }
+    ```
 {% endif %}
 
-### Loading the selected theme
+### 3. Loading the Selected Theme
 
-Set the theme in the _Layout.cshtml file, by following the requirements discussed in the [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) article. In the current example, the selected theme name is retrieved from the cookie and the CDN url for theme is generated. An alternative approach, if stylesheets are stored within the application, would be to generate the url to the stylesheet for the selected theme.
+Set the theme in the `_Layout.cshtml` file by following the requirements discussed in the [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) article. In the current example, the selected theme name is retrieved from the cookie and the CDN URL for theme is generated. 
+
+If you store the stylesheets within the application, an alternative approach is to generate the URL to the stylesheet for the selected theme.
 
 ```razor
     @{
-        var specialThemes = new string[] { "nova", "bootstrap", "fiori", "material", "materialblack", "office365" };
-        var sassThemes = new string[] { "default-v2", "bootstrap-v4", "material-v2" };
-        var commonThemeName = "common";
-        var mainHref = "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.";
-        var isThemeSelected = Context.Request.Cookies.TryGetValue("theme", out string selectedTheme);
+        var mainHref = "https://kendo.cdn.telerik.com/themes/6.3.0/";
+        var selectedTheme = "classic/classic-main";
 
-        if (!isThemeSelected)
+        if (Request.Cookies["theme"] != null)
         {
-            selectedTheme = "default";
+            selectedTheme = Request.Cookies["theme"].Value;
         }
 
-        var themeHref = mainHref + selectedTheme + ".min.css";
-        var commonThemeHref = mainHref + commonThemeName + ".min.css";
-        if (specialThemes.Any(x => x == selectedTheme))
-        {
-            commonThemeName += "-" + selectedTheme.Replace("materialblack", "material");
-        }
-
-        if (sassThemes.Contains(selectedTheme) && selectedTheme == "custom")
+        if (selectedTheme == "custom")
         {
             <link rel="stylesheet" href="~/css/styles/kendo.custom.css" />
         }
-        else if (sassThemes.Contains(selectedTheme))
-        {
-            <link href=@themeHref rel="stylesheet" type="text/css" />
-        }
+
         else
         {
-            <link href=@commonThemeHref rel="stylesheet" type="text/css" />
+            var themeHref = mainHref + selectedTheme + ".css";
             <link href=@themeHref rel="stylesheet" type="text/css" />
         }
     }
 ```
 
+## More {{ site.framework }} DropDownList Resources
+
+* [{{ site.framework }} DropDownList Documentation]({%slug htmlhelpers_dropdownlist_aspnetcore%})
+
+* [{{ site.framework }} DropDownList Demos](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
+
+{% if site.core %}
+* [{{ site.framework }} DropDownList Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} DropDownList Product Page](https://www.telerik.com/aspnet-mvc/dropdownlist)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
-* [Sass ThemeBuilder]({% slug sass_theme_builder %})
-* [Cards]({% slug cards_aspnetmvc6_aspnetmvc %})
+* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

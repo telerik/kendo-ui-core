@@ -118,15 +118,6 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Sortable](https://demos.telerik.com/kendo-ui/sortable/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Styling](https://demos.telerik.com/kendo-ui/styling/index)            | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| **Hybrid UI**     |
-| [Widgets](https://demos.telerik.com/kendo-ui/m/index)                  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [Mobile Application](https://demos.telerik.com/kendo-ui/m/index)       | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [Mobile Forms](https://demos.telerik.com/kendo-ui/m/index)             | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [Mobile Layout](https://demos.telerik.com/kendo-ui/m/index)            | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [Mobile SplitView](https://demos.telerik.com/kendo-ui/m/index)         | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [Mobile Theme Builder](https://demos.telerik.com/kendo-ui/mobilethemebuilder)| :white_check_mark: | :white_check_mark: | :white_check_mark:     |
-| [Mobile Touch Events](https://demos.telerik.com/kendo-ui/m/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [Mobile View](https://demos.telerik.com/kendo-ui/m/index)              | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | **Tools, Frameworks and Utilities**   |
 | [Chrome Inspector](https://chrome.google.com/webstore/category/apps)   | :white_check_mark:   | :white_check_mark: | :white_check_mark:         |
 | [DataSource](https://demos.telerik.com/kendo-ui/datasource/index)      | :white_check_mark:   | :white_check_mark: | :white_check_mark:         |

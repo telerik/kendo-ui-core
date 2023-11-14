@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI DropDownList for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/DropDownListEventBuilder) that allow you to control and customize the behavior of the component.
+The Telerik UI DropDownList for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/dropdownlisteventbuilder) that allow you to control and customize the behavior of the component.
 
 For a complete example of the basic DropDownList events, refer to the [demo on using the events of the DropDownList](https://demos.telerik.com/{{ site.platform }}/dropdownlist/events).
 

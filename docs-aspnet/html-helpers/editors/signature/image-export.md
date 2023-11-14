@@ -61,4 +61,4 @@ To achieve this functionality, retrieve the base64 value of the Signature by usi
 ## See Also
 
 * [Image Export of the Signature (Demo)](https://demos.telerik.com/{{ site.platform }}/signature/export-image)
-* [API Reference of the Signature](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/SignatureBuilder)
+* [API Reference of the Signature](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/signaturebuilder)

@@ -170,7 +170,9 @@ The following example demonstrates the basic configuration of the ComboBox.
 | [Filtering]({% slug htmlhelpers_combobox_filtering_aspnetcore %})| You can display only a subset of the available data by using the server-side filtering of the ComboBox.|
 | [Templates]({% slug htmlhelpers_combobox_templates_aspnetcore %})|To take full control over the rendering of the ComboBox items, popup header, and popup footer, you can use the available templates.|
 | [Cascading]({% slug htmlhelpers_combobox_cascading_aspnetcore %})|You can use a series of two or more cascaded ComboBoxes.|
-| [Accessibility]({% slug accessibility_aspnetcore_combobox %})|The ComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.|
+| [Accessibility]({% slug accessibility_aspnetcore_combobox %})|The ComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
+
+>tip To learn more about the appearance, anatomy, and accessibility of the ComboBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/combobox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
 ## Next Steps
 
@@ -178,6 +180,7 @@ The following example demonstrates the basic configuration of the ComboBox.
 * [Basic Usage of the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/index)
 {% if site.core %}
 * [Basic Usage of the ComboBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/tag-helper)
+* [ComboBox in Razor Pages]({% slug htmlhelpers_combobox_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

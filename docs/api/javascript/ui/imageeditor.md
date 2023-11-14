@@ -55,6 +55,21 @@ Sets the url (or base64 string) for the image to open.
     });
     </script>
 
+### imageLabel `String`
+
+Sets the label used for the `<canvas>` element to describe the image contents.
+
+#### Example
+
+    <div id="imageEditor"></div>
+    <script>
+    $("#imageEditor").kendoImageEditor({
+        imageUrl: "image.jpg",
+        imageLabel: "Fontana del Moro by night, Piazza Navona, Rome, Italy."
+    });
+    </script>
+
+
 ### saveAs `Object`
 
 Sets the saveAs options for the save command. Utilizes the [kendo.saveAs](/api/javascript/kendo/methods/saveas) method.
@@ -120,6 +135,8 @@ Configures the items collection of the toolbar.
             }
         });
     </script>
+
+Apart from the built-in tools, the ImageEditor fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
 
 ### toolbar.items.type `String`
 Specifies the type of the button.

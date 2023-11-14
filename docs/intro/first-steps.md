@@ -20,6 +20,9 @@ The process draws on the following milestones:
  1. [Bind the Grid to data](#3-bind-the-grid-to-data)
  1. [Initialize the Grid](#4-initialize-the-grid)
  1. [Configure the Grid](#5-configure-the-grid)
+ 1. [Add a license file to your app](#6-add-your-license-file)
+
+ >tip Visual Studio Code users can speed up the project creation by using the [Kendo UI Productivity Tools for Visual Studio Code](intro/installation/vscode-integration).
  
 ## 1. Download the Controls 
 
@@ -27,9 +30,11 @@ You can quickly download the Kendo UI for jQuery controls after you log into [yo
 
 ## 2. Add the Required JavaScript and CSS Files
 
-First, you will add the Kendo UI assets to your HTML document. In this sample case, you will use the [Kendo UI CDN service]({% slug kendoui_cdn_services_installation %}). In other scenarios, you may want to [host the files locally]({% slug hosting_kendoui %}).
+First, you will add the Kendo UI assets to your HTML document. In this sample case, you will use the [Kendo UI CDN service]({% slug kendoui_cdn_services_installation %}). In other scenarios, you can [host the files locally]({% slug hosting_kendoui %}).
 
 Always register jQuery before the Kendo UI script&mdash;otherwise, you will get [JavaScript errors]({% slug troubleshooting_common_issues_kendoui %}) when you try to initialize a Kendo UI component or use the Kendo UI API.
+
+> As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
 To make sure all scripts are loaded, make a simple API call to render the [Kendo UI version](/api/javascript/kendo/fields/version).
 
@@ -50,9 +55,9 @@ To make sure all scripts are loaded, make a simple API call to render the [Kendo
 
 You will now create a [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) with some dummy orders which will later be used to bind a Grid.
 
-A hard-coded array of data items is the simplest way to create a `datasource`. In real-life scenarios, you may want to fetch [remote data]({% slug getting_started_kendoui_remote_data_binding %}) or configure [editing (CRUD operations)]({% slug cruddataoperations_kendoui_datasourcecomponent %}).
+A hard-coded array of data items is the simplest way to create a `datasource`. In real-life scenarios, you can fetch [remote data]({% slug getting_started_kendoui_remote_data_binding %}) or configure [editing (CRUD operations)]({% slug cruddataoperations_kendoui_datasourcecomponent %}).
 
-To ensure the correct implementation of the data operations, you need to configure the [data field types](/api/javascript/data/datasource/configuration/schema#schemamodel). In addition, you will apply a [page size](/api/javascript/data/datasource/configuration/pagesize) and a default [sorting](/api/javascript/data/datasource/configuration/sort) by `OrderDate`.
+To ensure the correct implementation of the data operations, you need to configure the [data field types](/api/javascript/data/datasource/configuration/schema#schemamodel). Also, you will apply a [page size](/api/javascript/data/datasource/configuration/pagesize) and a default [sorting](/api/javascript/data/datasource/configuration/sort) by `OrderDate`.
 
     var orderData = [
       { OrderID: 1, OrderDate: "2017-11-06T12:00:00", Freight: 12.34, ShipCity: "Antwerp", ShipCountry: "Belgium" },
@@ -159,7 +164,7 @@ The runnable example below demonstrates the final version of the page that you w
 
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
   </head>
   <body>
@@ -246,7 +251,11 @@ The runnable example below demonstrates the final version of the page that you w
 </html>
 ```
 
-This is it! Now you are ready to dive more deeply into Kendo UI for jQuery and implement modern and slick web applications!
+## 6. Add Your License File
+
+Using any Kendo UI for jQuery assets from the [Kendo UI CDN]({% slug kendoui_cdn_services_installation %}), [Kendo UI NPM]({% slug kendoui_npm_packages_kendoui_installation %}) or the downloaded Kendo UI trial versions requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message]({% slug invalid-license %}) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Setting Up the License File]({% slug using-license-code %}) article.
 
 ## Next Steps
 

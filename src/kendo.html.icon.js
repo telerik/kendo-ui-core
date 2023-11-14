@@ -13,9 +13,9 @@ var __meta__ = {
         extend = $.extend,
         HTMLBase = kendo.html.HTMLBase;
 
-    var KICON = 'k-icon';
+    var KFONTICON = 'k-icon k-font-icon';
     var KI_PREFFIX = 'k-i-';
-    var KSVGICON = 'k-svg-icon';
+    var KSVGICON = 'k-icon k-svg-icon';
     var KSVG_PREFFIX = 'k-svg-i-';
 
     var FLIP_PREFIX = 'k-flip-';
@@ -131,11 +131,11 @@ var __meta__ = {
             var that = this,
                 // Find if there is an existing k-i- class appended to the element.
                 currentIconClass = that.element[0].className.split(" ").find(x => x.includes(KI_PREFFIX)),
-                className = `${KI_PREFFIX}${that.options.icon}`;
+                className = that.options.icon ? `${that.options.icon.startsWith(KI_PREFFIX) ? "" : KI_PREFFIX}${that.options.icon}` : "";
 
             that._className = className;
             that.wrapper = that.element
-                .addClass(KICON)
+                .addClass(KFONTICON)
                 .removeClass(currentIconClass) // Remove any existing icons.
                 .addClass(className)
                 .addClass(that.options.iconClass || '');
@@ -186,13 +186,13 @@ var __meta__ = {
                 .addClass(KSVGICON)
                 .removeClass(currentIconClass) // Remove any existing icons.
                 .addClass(className)
-                .addClass(iconClass || '');
+                .addClass(iconClass || '')
+                .attr("aria-hidden", true);
 
             if ($.isPlainObject(icon)) {
                 svgElm.attr('viewBox', icon.viewBox || '')
                     .attr({
                         'viewBox': icon.viewBox || '',
-                        'aria-hidden': 'true',
                         'focusable': 'false',
                         'xmlns': 'http://www.w3.org/2000/svg'
                     })
@@ -232,4 +232,5 @@ var __meta__ = {
         values: ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse']
     }]);
 })(window.kendo.jQuery);
+export default kendo;
 

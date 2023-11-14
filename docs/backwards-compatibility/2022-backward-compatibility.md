@@ -88,7 +88,7 @@ New
 </div>
 ```
 
-## Kendo UI R1 2022 SP2
+## Kendo UI 2022 R1 SP2
 
 **Button**
 
@@ -98,7 +98,7 @@ As of the 2022 R1 SP2 release the `shape` configuration option of the Button com
 
 **Scheduler**
 
-As of the 2022 R1 SP1 release the Scheduler exposes a modified keyboard navigation behavior. The main reason behind the change is to make the widget a single Tab stop element on the page. This allows for easier navigation to and away from the Scheduler. For further details on the new keyboard navigation behavior, refer to the [Keyboard Navigation demo](https://demos.telerik.com/kendo-ui/scheduler/selection).
+As of the 2022 R1 SP1 release the Scheduler exposes a modified keyboard navigation behavior. The main reason behind the change is to make the widget a single Tab stop element on the page. This allows for easier navigation to and away from the Scheduler. For further details on the new keyboard navigation behavior, refer to the [Keyboard Navigation demo](https://demos.telerik.com/kendo-ui/scheduler/keyboard-navigation).
 
 ## Kendo UI 2022 R1
 

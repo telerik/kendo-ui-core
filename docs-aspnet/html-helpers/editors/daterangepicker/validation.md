@@ -12,7 +12,7 @@ The DateRangePicker is designed to keep its input value unchanged even when the 
 
 This behavior is set because the DateRangePicker does not automatically update the typed text when the typed text is invalid. Such a change in the input value may lead to unexpected behavior.
 
-To validate the input value of the DateRangePicker, use a client-validation framework such as the [Kendo UI Validator for jQuery](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview). In this way, you can provide an error message to end users which prompts them to do the right actions for them to resolve the issue.
+To validate the input value of the DateRangePicker, use a client-validation framework such as the [Kendo UI Validator for jQuery](https://docs.telerik.com/kendo-ui/controls/validator/overview). In this way, you can provide an error message to end users which prompts them to do the right actions for them to resolve the issue.
 
 ## See Also
 

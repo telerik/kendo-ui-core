@@ -128,4 +128,5 @@ var __meta__ = {
 
     ui.plugin(ToggleInputBase);
 })(window.kendo.jQuery);
+export default kendo;
 

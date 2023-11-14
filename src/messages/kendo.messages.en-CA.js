@@ -54,7 +54,11 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "done": "Done",
   "settings": "Column Settings",
   "lock": "Lock",
-  "unlock": "Unlock"
+  "unlock": "Unlock",
+  "movePrev": "Move previous",
+  "moveNext": "Move next",
+  "groupColumn": "Group column",
+  "ungroupColumn": "Ungroup column"
 });
 }
 
@@ -241,21 +245,21 @@ if (kendo.ui.FileManager) {
             },
             moveConfirm: {
                 title: "Confirm",
-                content: "<p style='text-align: center;'>Do you want to move or copy?</p>",
+                content: "<p class='k-text-center'>Do you want to move or copy?</p>",
                 okText: "Copy",
                 cancel: "Move",
                 close: "close"
             },
             deleteConfirm: {
                 title: "Confirm",
-                content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?<br/>You cannot undo this action.</p>",
+                content: "<p class='k-text-center'>Are you sure you want to delete the selected file(s)?<br/>You cannot undo this action.</p>",
                 okText: "Delete",
                 cancel: "Cancel",
                 close: "close"
             },
             renamePrompt: {
                 title: "Prompt",
-                content: "<p style='text-align: center;'>Enter new name for the file.</p>",
+                content: "<p class='k-text-center'>Enter new name for the file.</p>",
                 okText: "Rename",
                 cancel: "Cancel",
                 close: "close"
@@ -491,7 +495,27 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Export to PDF",
     "save": "Save changes",
     "select": "Select",
-    "update": "Update"
+    "update": "Update",
+    "search": "Search...",
+    "selectRow": "Select Row",
+    "selectAllRows": "All rows",
+    "clearSelection": "Clear selection",
+    "copySelection": "Copy selection",
+    "copySelectionNoHeaders": "Copy selection (No Headers)",
+    "reorderRow": "Reorder row",
+    "reorderRowUp": "Up",
+    "reorderRowDown": "Down",
+    "reorderRowTop": "Top",
+    "reorderRowBottom": "Bottom",
+    "exportPdf": "Export to PDF",
+    "exportExcel": "Export to Excel",
+    "exportToExcelAll": "All",
+    "exportToExcelSelection": "Selection",
+    "exportToExcelSelectionNoHeaders": "Selection (No Headers)",
+    "sortAsc": "Sort Ascending",
+    "sortDesc": "Sort Descending",
+    "moveGroupPrevious": "Move previous",
+    "moveGroupNext": "Move next",
   },
   "editable": {
     "cancelDelete": "Cancel",
@@ -1346,7 +1370,7 @@ if (kendo.ui.PDFViewer) {
                 previous: "Go to the previous page",
                 next: "Go to the next page",
                 last: "Go to the last page",
-                of: " of {0} ",
+                of: "of",
                 page: "page",
                 pages: "pages"
             },

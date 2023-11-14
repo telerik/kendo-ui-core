@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the DateTimePicker component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/datetimepicker, /helpers/editors/datetimepicker/overview
 slug: htmlhelpers_datetimepicker_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} DateTimePicker Overview
@@ -76,113 +76,51 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
 ```
 {% endif %}
 
+## Model Binding
+
+The DateTimePicker component respects DataAnnotations when the `DateTimePickerFor(m=>m.Property)` method is used. Besides the `[Required]` attribute, the `[DisplayFormat]` and `[Range]` attributes are also supported. The [`Format`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#formatsystemstring) configuration will be set to the provided DisplayFormat and the [`Min`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#minsystemstring) and [`Max`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#maxsystemstring) configurations will be set based on the range provided.
+
+```HtmlHelper
+    @(Html.Kendo().DateTimePickerFor(m=>m.MyDateTimeProperty))
+```
+{% if site.core %}
+```TagHelper
+    <kendo-datetimepicker for="MyDateTimeProperty"
+    </kendo-datetimepicker>
+```
+{% endif %}
+```C#
+    [Required]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+    [Range(typeof(DateTime), minimum:"01/01/2023", maximum:"31/12/2023")]
+    public DateTime MyDateTimeProperty{ get; set; }
+```
+
 ## Functionality and Features
 
-* [Disabled dates]({% slug disableddates_datetimepicker_aspnetcore %})
-* [Selected dates]({% slug selecteddates_datetimepicker_aspnetcore %})
-* [Start view and navigation depth]({% slug navdepth_datetimepicker_aspnetcore %})
-* [Validation]({% slug validation_datetimepicker_aspnetcore %})
-* [Date and time formatting]({% slug datetimeformatting_datetimepicker_aspnetcore %})
-* [Calendar types]({% slug calendartypes_datetimepicker_aspnetcore %})
-* [Week number column]({% slug weeknumcolumn_datetimepicker_aspnetcore %})
-* [DateInput integration]({% slug dateinputintegration_datetimepicker_aspnetcore %})
-* [Templates]({% slug templates_datetimepicker_aspnetcore %})
-* [Globalization]({% slug globalization_datetimepicker_aspnetcore %})
-* [Accessibility]({% slug accessibility_datetimepicker_aspnetcore %})
+| Feature | Description |
+|---------|-------------|
+| [Disabled dates]({% slug disableddates_datetimepicker_aspnetcore %})|The DateTimePicker allows you to disable specific days that shouldn't be selected by the end user, such as weekends and national holidays.|
+| [Selected dates]({% slug selecteddates_datetimepicker_aspnetcore %})|The DateTimePicker allows you to render a pre-selected date and also define the minimum and maximum dates it displays.|
+| [Start view and navigation depth]({% slug navdepth_datetimepicker_aspnetcore %})|The DateTimePicker enables you to set the rendered initial view and define the navigation depth of the views.|
+| [Validation]({% slug validation_datetimepicker_aspnetcore %})|The DateTimePicker does not automatically update the typed text when the typed text is invalid. Such changes in the input value may lead to unexpected behavior.|
+| [Date and time formatting]({% slug datetimeformatting_datetimepicker_aspnetcore %})|The DateTimePicker allows you to define its date and time formatting.|
+| [Calendar types]({% slug calendartypes_datetimepicker_aspnetcore %})|By default, the DatePicker works with `Date` objects which support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar.|
+| [Week number column]({% slug weeknumcolumn_datetimepicker_aspnetcore %})|The DateTimePicker provides options for rendering a column which displays the number of the weeks within the current `Month` view.|
+| [Templates]({% slug templates_datetimepicker_aspnetcore %})|The DateTimePicker provides options for using and customizing its templates.|
+| [Globalization]({% slug globalization_datetimepicker_aspnetcore %})|The DateTimePicker comes with globalization support that allows you to use the component in apps all over the world.|
+| [Accessibility]({% slug accessibility_datetimepicker_aspnetcore %})|The DateRangePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_daterangepicker_aspnetcore %}) for faster navigation.|
 
-## Events
+## Next Steps
 
-You can subscribe to all DateTimePicker [events](/api/datetimepicker). For a complete example on basic DateTimePicker events, refer to the [demo on using the events of the DateTimePicker](https://demos.telerik.com/{{ site.platform }}/datetimepicker/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().DateTimePicker()
-      .Name("datetimepicker")
-      .Events(e => e
-            .Open("datetimepicker_open")
-            .Close("datetimepicker_close")
-            .Change("datetimepicker_change")
-      )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-datetimepicker name="datetimepicker"
-        on-open="datetimepicker_open"
-        on-close="datetimepicker_close"
-        on-change="datetimepicker_open"/>
-```
-{% endif %}
-```JavaScript
-    function datetimepicker_open() {
-        // Handle the open event.
-    }
-
-    function datetimepicker_close() {
-        // Handle the close event.
-    }
-
-    function datetimepicker_change() {
-        // Handle the change event.
-    }
-
-```
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().DateTimePicker()
-        .Name("datetimepicker")
-        .Events(e => e
-            .Open(@<text>
-                function() {
-                    // Handle the open event inline.
-                }
-            </text>)
-            .Change(@<text>
-                function() {
-                    // Handle the change event inline.
-                }
-                </text>)
-        )
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-datetimepicker name="datetimepicker"
-        on-open='function(e)
-        {
-            // Handle the open event inline.
-        }'
-        on-change='function(e)
-        {
-            / Handle the change event inline.
-        }'/>
-```
-{% endif %}
-
-## Referencing Existing Instances
-
-To reference an existing  DateTimePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateTimePicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker#methods) to control its behavior.
-
-The following example demonstrates how to access an existing DateTimePicker instance.
-
-      // Place the following after your DateTimePicker for {{ site.framework }} declaration.
-      <script>
-      $(function() {
-      // The Name() of the DateTimePicker is used to get its client-side instance.
-          var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
-      });
-      </script>
-
-## See Also
-
+* [Getting Started with the DateTimePicker]({% slug datetimepicker_getting_started %})
 * [Basic Usage of the DateTimePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/index)
 {% if site.core %}
 * [Basic Usage of the DateTimePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/tag-helper)
+* [DateTimePicker in Razor Pages]({% slug razorpages_datetimepicker_aspnetcore %})
 {% endif %}
-* [Using the API of the DateTimePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/api)
-* [Server-Side API](/api/datetimepicker)
+
+## See Also
+
+* [Using the API of the DateTimePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/api)
+* [Knowledge Base Section](/knowledge-base)

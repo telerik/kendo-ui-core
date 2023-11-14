@@ -1,6 +1,6 @@
 ---
-title: Enable Grid Operations for Grid Object Column
-description: An example on how to enable the Grid operations (sorting, filtering, grouping) for a column which represents a compound object with Telerik UI for ASP.NET Core.
+title: Enabling Grid Operations for a Grid Object Column
+description: An example on how to enable the Grid operations (sorting, filtering, and grouping) for a column which represents a compound object with {{ site.product }}.
 type: how-to
 page_title: Enable Grid Operations for Compound Object Column
 slug: grid-enable-operations-for-object-column
@@ -20,7 +20,7 @@ component: grid
 
 ## Description
 
-How can I enable sorting, filtering, and grouping for a column which holds complex object values by using the Grid HtmlHelper?
+How can I enable sorting, filtering, and grouping for a column which holds complex object values by using the Grid HtmlHelper in {{ site.product }}?
 
 ## Solution
 
@@ -111,6 +111,30 @@ public class GridController : Controller
 
 For the complete implementation on how to enable sorting, filtering, and grouping in a Kendo UI Grid for ASP.NET Core when a Grid column represents complex object values, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/EnableOperationsForObjectColumn.cshtml) demonstrates how to.
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

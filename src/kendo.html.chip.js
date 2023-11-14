@@ -45,6 +45,7 @@ var __meta__ = {
             removeIconClass: "",
             content: "",
             text: "",
+            actions: [],
             stylingOptions: [ "size", "rounded", "fillMode", "themeColor" ]
         },
         _wrapper: function() {
@@ -56,11 +57,11 @@ var __meta__ = {
             that._addClasses();
 
             if (options.icon) {
-                that.wrapper.prepend($(kendo.ui.icon({ icon: options.icon, iconClass: `k-chip-icon${options.iconClass ? ` ${options.iconClass}` : '' }` })).attr(options.iconAttr));
+                that.wrapper.prepend($(kendo.ui.icon({ icon: options.icon, size: "small", iconClass: `k-chip-icon${options.iconClass ? ` ${options.iconClass}` : '' }` })).attr(options.iconAttr));
             } else if (options.iconClass) {
                 that.wrapper.prepend($("<span class='" + options.iconClass + "'></span>").attr(options.iconAttr));
             } else if (options.avatarClass) {
-                that.wrapper.prepend($("<span class='k-chip-avatar k-avatar " + options.avatarClass + "'></span>").attr(options.iconAttr));
+                that.wrapper.prepend($("<span class='k-chip-avatar k-avatar k-avatar-md k-avatar-solid k-avatar-solid-primary k-rounded-full " + options.avatarClass + "'></span>").attr(options.iconAttr));
             }
 
             that.element.addClass("k-chip-content");
@@ -80,8 +81,28 @@ var __meta__ = {
                 that.wrapper.addClass("k-disabled");
             }
 
+            if ((options.actions && options.actions.length > 0) || options.removable) {
+                that._actions();
+            }
+
+
+        },
+        _actions: function() {
+            var that = this,
+                options = that.options;
+
+            that.actionsWrapper = $("<span class='k-chip-actions'></span>");
+            that.actionsWrapper.appendTo(that.wrapper);
+
+            if (options.actions && options.actions.length > 0) {
+                for (var i = 0; i < options.actions.length; i++) {
+                    var action = options.actions[i];
+                    that.actionsWrapper.append($(`<span class='k-chip-action ${action.iconClass ? action.iconClass : ''}'>${kendo.ui.icon({ icon: action.icon, iconClass: "k-chip-icon" })}</span>`).attr(action.attr ? action.attr : {}));
+                }
+            }
+
             if (options.removable) {
-                that.wrapper.append($(`<span class='k-chip-action k-chip-remove-action'>${kendo.ui.icon({ icon: options.removeIcon, iconClass: "k-chip-icon" })}</span>`).attr(options.removableAttr));
+                that.actionsWrapper.append($(`<span class='k-chip-action k-chip-remove-action'>${kendo.ui.icon({ icon: options.removeIcon, iconClass: "k-chip-icon" })}</span>`).attr(options.removableAttr));
             }
         }
     });
@@ -99,4 +120,5 @@ var __meta__ = {
     }]);
 
 })(window.kendo.jQuery);
+export default kendo;
 

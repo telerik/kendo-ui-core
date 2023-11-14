@@ -1,4 +1,6 @@
-import "./kendo.calendar.js";
+// The current file development is no longer in active phase but the code will be kept as is.
+// Please be advised that we have discontinued the sync for this file with the commercial version of Kendo UI for jQuery.
+// To take advantage of new features please visit (https://www.telerik.com/kendo-jquery-ui) and consider upgrading to a commercial license.import "./kendo.calendar.js";
 import "./kendo.popup.js";
 import "./kendo.dateinput.js";
 import "./kendo.html.button.js";
@@ -639,8 +641,8 @@ var __meta__ = {
                 this._currentlySelected = new Date();
             }
 
-            var max = this.options.max;
-            var min = this.options.min;
+            var max = this.options.endTime ? this.options.endTime : this.options.max;
+            var min = this.options.startTime ? this.options.startTime : this.options.min;
 
             if (this.options.validateDate) {
                 if (max.getFullYear() === this._currentlySelected.getFullYear() &&
@@ -1385,7 +1387,8 @@ var __meta__ = {
                     interval: options.interval,
                     size: options.size,
                     fillMode: options.fillMode,
-                    rounded: options.rounded
+                    rounded: options.rounded,
+                    messages: options.messages.dateInput
                 });
             }
             that._old = that._update(options.value || that.element.val());

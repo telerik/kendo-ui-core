@@ -43,7 +43,7 @@ The following list provides the most common reasons for FUOC to occur:
 
 With Kendo UI, you are more likely to experience such issues with widgets such as a DropDownList or ComboBox which hide the user input altogether. This behavior also applies to the ASP.NET MVC and ASP.NET Core suites because they also [create jQuery widgets](https://docs.telerik.com/aspnet-mvc/getting-started/kendo-ui-vs-mvc-wrappers) behind the scenes.
 
-Kendo UI widgets are [instantiated only after the document has been loaded and parsed](https://docs.telerik.com/kendo-ui/controls/navigation/panelbar/overview#initialization). At that point, the necessary classes are added and the browser can style them according to the stylesheets that are present&mdash;in this case, the Kendo UI stylesheets are most relevant as they are the targeted appearance.
+Kendo UI widgets are [instantiated only after the document has been loaded and parsed](https://docs.telerik.com/kendo-ui/controls/panelbar/overview#initialization). At that point, the necessary classes are added and the browser can style them according to the stylesheets that are present&mdash;in this case, the Kendo UI stylesheets are most relevant as they are the targeted appearance.
 
 The following examples are of symptoms which pertain to Kendo UI widgets:
 * I have a ComboBox that shows as a normal text box and displays the model data until the DataSource is loaded.

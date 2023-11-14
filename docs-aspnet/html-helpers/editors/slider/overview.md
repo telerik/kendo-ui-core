@@ -176,6 +176,7 @@ To reference an existing Telerik UI Slider instance, use the [`jQuery.data()`](h
 * [Basic Usage by the Slider HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/slider)
 {% if site.core %}
 * [Basic Usage of the Slider TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/tag-helper)
+* [Slider in Razor Pages]({% slug htmlhelpers_slider_razorpage_aspnetcore %})
 {% endif %}
 * [Using the API of the Slider HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/slider/api)
 * [Server-Side API](/api/slider)

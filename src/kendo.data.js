@@ -228,8 +228,9 @@ var __meta__ = {
                     this.trigger(CHANGE, {
                         action: "remove",
                         index: index,
-                        items: result
+                        items: this.omitCache && this.omitCache.length ? result.concat(this.omitCache) : result
                     });
+                    this.omitCache = [];
                 }
 
                 for (i = 0, len = result.length; i < len; i++) {
@@ -501,7 +502,7 @@ var __meta__ = {
         value = value || {};
 
         if (!isPrimitiveType(value)) {
-            protoKeys = Object.getOwnPropertyNames(Object.getPrototypeOf(value));
+            protoKeys = Object.getOwnPropertyNames(Object.getPrototypeOf(value)).filter(f => f.indexOf("__") !== 0);
         }
 
         keys = Object.getOwnPropertyNames(value).concat(protoKeys);
@@ -1623,24 +1624,32 @@ var __meta__ = {
             result = new Query(that.data),
             descriptor;
 
+            var getFilteredData = (g, data) => {
+                data = data || new Query(allData).filter([{
+                    field: g.field,
+                    operator: "eq",
+                    value: g.value,
+                    ignoreCase: false
+                }]);
+
+                return data;
+            };
+
             if (descriptors.length > 0) {
                 descriptor = descriptors[0];
 
                 if (options && options.groupPaging) {
                     result = new Query(allData).groupAllData(descriptor, allData).select(function(group) {
-                        var data = new Query(allData).filter([{
-                            field: group.field,
-                            operator: "eq",
-                            value: group.value,
-                            ignoreCase: false
-                        }]);
-                        var items = descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray(), options).toArray() : group.items;
+                        var cachedFilteredData;
+
+                        var items = descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), getFilteredData(group, cachedFilteredData).toArray(), options).toArray() : group.items;
+
                         return {
                             field: group.field,
                             value: group.value,
                             hasSubgroups: descriptors.length > 1,
                             items: items,
-                            aggregates: data.aggregate(descriptor.aggregates),
+                            aggregates: descriptor.aggregates && descriptor.aggregates.length ? getFilteredData(group, cachedFilteredData).aggregate(descriptor.aggregates) : {},
                             uid: kendo.guid(),
                             itemCount: items.length,
                             subgroupCount: items.length
@@ -1649,13 +1658,13 @@ var __meta__ = {
 
                 } else {
                     result = result.groupBy(descriptor).select(function(group) {
-                        var data = new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value, ignoreCase: false } ]);
+                        var cachedFilteredData;
                         return {
                             field: group.field,
                             value: group.value,
-                            items: descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray()).toArray() : group.items,
+                            items: descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), getFilteredData(group, cachedFilteredData).toArray()).toArray() : group.items,
                             hasSubgroups: descriptors.length > 1,
-                            aggregates: data.aggregate(descriptor.aggregates)
+                            aggregates: descriptor.aggregates && descriptor.aggregates.length ? getFilteredData(group, cachedFilteredData).aggregate(descriptor.aggregates) : {},
                         };
                     });
                 }
@@ -3054,9 +3063,9 @@ var __meta__ = {
             }
         },
 
-        _removeItems: function(items, removePristine) {
-            if (!isArray(items)) {
-                items = [items];
+        _removeItems: function(itemsToRemove, removePristine) {
+            if (!isArray(itemsToRemove)) {
+                itemsToRemove = [itemsToRemove];
             }
 
             var shouldRemovePristine = typeof removePristine !== "undefined" ? removePristine : true;
@@ -3065,15 +3074,29 @@ var __meta__ = {
             var autoSync = this.options.autoSync;
             this.options.autoSync = false;
             try {
-                for (var idx = 0; idx < items.length; idx ++) {
-                    var item = items[idx];
+                for (var idx = 0; idx < itemsToRemove.length; idx ++) {
+                    var item = itemsToRemove[idx];
                     var model = this._createNewModel(item);
                     var found = false;
+                    var index = idx;
 
                     this._eachItem(this._data, function(items) {
+                        // Ensure all children of a parent are removed before the change event is triggered.
+                        if (index !== itemsToRemove.length - 1) {
+                            items.omitChangeEvent = true;
+                            items.omitCache = [];
+                        } else {
+                            items.omitChangeEvent = false;
+                        }
+
                         for (var idx = 0; idx < items.length; idx++) {
                             var item = items.at(idx);
                             if (item.id === model.id) {
+                                /* When the change event is omitted, certain calculations such as 'total' are broken because only the last item reaches the change handler.
+                                   Keep track of all child items that had their change event omitted and when the change is finally triggered, concat them to the result.*/
+                                if (items.omitChangeEvent) {
+                                    items.omitCache.push(item);
+                                }
                                 destroyed.push(item);
                                 items.splice(idx, 1);
                                 found = true;
@@ -4109,7 +4132,7 @@ var __meta__ = {
                 var model = e.items[0],
                     resultData = result.data;
 
-                if (that._isGrouped()) {
+                if (that._isGrouped() && !this._isServerGrouped()) {
                     resultData = flattenGroups(resultData);
                 }
 
@@ -4597,12 +4620,15 @@ var __meta__ = {
         },
 
         _composeItemsFilter: function(group, parents) {
-            var filter = this.filter() || {
+            var filter = {
                 logic: "and",
                 filters: []
             };
 
-            filter.logic = 'and';
+            if (this.filter()) {
+                filter.filters.push(this.filter());
+            }
+
             filter = extend(true, {}, filter);
             filter.filters.push({
                 field: group.field,
@@ -6648,4 +6674,5 @@ var __meta__ = {
         BatchBuffer: BatchBuffer
     });
 })(window.kendo.jQuery);
+export default kendo;
 

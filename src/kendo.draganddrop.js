@@ -18,6 +18,7 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
         Observable = kendo.Observable,
         UserEvents = kendo.UserEvents,
+        ClickMoveClick = kendo.ClickMoveClick,
         extend = $.extend,
         getOffset = kendo.getOffset,
         draggables = {},
@@ -626,6 +627,17 @@ var __meta__ = {
 
             that._activated = false;
 
+            if (this.options.clickMoveClick) {
+                that.clickMoveClick = new ClickMoveClick(that.element, {
+                    global: true,
+                    filter: that.options.filter,
+                    start: that._startClickMoveClick.bind(that),
+                    move: that._drag.bind(that),
+                    end: that._end.bind(that),
+                    cancel: that._onCancel.bind(that)
+                });
+            }
+
             that.userEvents = new UserEvents(that.element, {
                 global: true,
                 allowSelection: true,
@@ -635,8 +647,9 @@ var __meta__ = {
                 hold: that._hold.bind(that),
                 move: that._drag.bind(that),
                 end: that._end.bind(that),
-                cancel: that._cancel.bind(that),
-                select: that._select.bind(that)
+                cancel: that._onCancel.bind(that),
+                select: that._select.bind(that),
+                press: that._press.bind(that),
             });
 
             if (kendo.support.touch) {
@@ -666,8 +679,11 @@ var __meta__ = {
             filter: null,
             ignore: null,
             holdToDrag: false,
+            showHintOnHold: false,
             autoScroll: false,
-            dropped: false
+            dropped: false,
+            clickMoveClick: false,
+            preventOsHoldFeatures: false
         },
 
         cancelHold: function() {
@@ -678,8 +694,13 @@ var __meta__ = {
             var that = this;
 
             if (e.keyCode === kendo.keys.ESC) {
-                that._trigger(DRAGCANCEL, { event: e });
                 that.userEvents.cancel();
+
+                if (that.clickMoveClick) {
+                    that.clickMoveClick.cancel();
+                }
+
+                this._trigger(DRAGCANCEL, { event: e });
             }
         },
 
@@ -694,9 +715,15 @@ var __meta__ = {
             if (cursorOffset) {
                coordinates = { left: e.x.location + cursorOffset.left, top: e.y.location + cursorOffset.top };
             } else {
-                that.hintOffset.left += e.x.delta;
-                that.hintOffset.top += e.y.delta;
-                coordinates = $.extend({}, that.hintOffset);
+                if (e.x.delta !== 0 || e.y.delta !== 0) {
+                    that.hintOffset.left += e.x.delta;
+                    that.hintOffset.top += e.y.delta;
+                    coordinates = $.extend({}, that.hintOffset);
+                } else {
+                    that.hintOffset.left = e.x.startLocation + e.x.initialDelta;
+                    that.hintOffset.top = e.y.startLocation + e.y.initialDelta;
+                    coordinates = $.extend({}, that.hintOffset);
+                }
             }
 
             if (boundaries) {
@@ -724,19 +751,15 @@ var __meta__ = {
             }
         },
 
-        _start: function(e) {
+        _startClickMoveClick: function(e) {
+            this._activated = true;
+
+            this._start(e);
+        },
+
+        _hint: function() {
             var that = this,
-                options = that.options,
-                container = options.container ? $(options.container) : null,
-                hint = options.hint;
-
-            if (this._shouldIgnoreTarget(e.touch.initialTouch) || (options.holdToDrag && !that._activated)) {
-                that.userEvents.cancel();
-                return;
-            }
-
-            that.currentTarget = e.target;
-            that.currentTargetOffset = getOffset(that.currentTarget);
+                hint = that.options.hint;
 
             if (hint) {
                 if (that.hint) {
@@ -755,20 +778,25 @@ var __meta__ = {
                     top: offset.top
                 })
                 .appendTo(document.body);
+            }
+        },
 
-                that.angular("compile", function() {
-                    that.hint.removeAttr("ng-repeat");
-                    var scopeTarget = $(e.target);
+        _start: function(e) {
+            var that = this,
+                options = that.options,
+                container = options.container ? $(options.container) : null,
+                hint = options.hint;
 
-                    while (!scopeTarget.data("$$kendoScope") && scopeTarget.length) {
-                        scopeTarget = scopeTarget.parent();
-                    }
+            if (this._shouldIgnoreTarget(e.touch.initialTouch) || (options.holdToDrag && !that._activated)) {
+                that.userEvents.cancel();
+                return;
+            }
 
-                    return {
-                        elements: that.hint.get(),
-                        scopeFrom: scopeTarget.data("$$kendoScope")
-                    };
-                });
+            that.currentTarget = e.target;
+            that.currentTargetOffset = getOffset(that.currentTarget);
+
+            if (hint) {
+                that._hint();
             }
 
             draggables[options.group] = that;
@@ -783,6 +811,11 @@ var __meta__ = {
 
             if (that._trigger(DRAGSTART, e)) {
                 that.userEvents.cancel();
+
+                if (that.clickMoveClick) {
+                    that.clickMoveClick.cancel();
+                }
+
                 that._afterEnd();
             }
 
@@ -796,6 +829,9 @@ var __meta__ = {
                 this.userEvents.cancel();
             } else {
                 this._activated = true;
+                if (this.options.showHintOnHold) {
+                    this._hint();
+                }
             }
         },
 
@@ -915,6 +951,16 @@ var __meta__ = {
             }
         },
 
+        _press: function(ev) {
+            if (this.options.preventOsHoldFeatures) {
+                ev.target.css('-webkit-user-select', 'none');
+                ev.target.attr('unselectable', 'on');
+                ev.target.one('contextmenu', (ev) => {
+                    ev.preventDefault();
+                });
+            }
+        },
+
         _end: function(e) {
             this._withDropTarget(this._elementUnderCursor(e), function(target, targetElement) {
                 if (target) {
@@ -926,6 +972,11 @@ var __meta__ = {
             clearInterval(this._scrollInterval);
             this._scrollInterval = null;
             this._cancel(this._trigger(DRAGEND, e));
+        },
+
+        _onCancel: function(e) {
+            this._cancel();
+            this._trigger(DRAGCANCEL, { event: e });
         },
 
         _cancel: function(isDefaultPrevented) {
@@ -946,7 +997,6 @@ var __meta__ = {
                         that.hint.animate(that.currentTargetOffset, "fast", that._afterEndHandler);
                     }
                 }, 0);
-
             } else {
                 that._afterEnd();
             }
@@ -965,7 +1015,8 @@ var __meta__ = {
                     currentTarget: that.currentTarget,
                     initialTarget: e.touch ? e.touch.initialTouch : null,
                     dropTarget: e.dropTarget,
-                    elementUnderCursor: e.elementUnderCursor
+                    elementUnderCursor: e.elementUnderCursor,
+                    clickMoveClick: e.clickMoveClick
                 }
             ));
         },
@@ -1012,6 +1063,10 @@ var __meta__ = {
             that._afterEnd();
 
             that.userEvents.destroy();
+
+            if (that.clickMoveClick) {
+                that.clickMoveClick.destroy();
+            }
 
             this._scrollableParent = null;
             this._cursorElement = null;
@@ -1123,4 +1178,5 @@ var __meta__ = {
     };
 
  })(window.kendo.jQuery);
+export default kendo;
 

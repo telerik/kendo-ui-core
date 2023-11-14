@@ -290,14 +290,13 @@ it.skip('open should apply max-height and overflow styles to group UL', function
 
 it('open should not apply max-height and overflow styles to group UL if it has children groups', function(done) {
     var item = getRootItem(0).parent(),
-        ul = item.find(".k-group").css({ maxHeight: 1, overflow: "auto" });
+        ul = item.find(".k-group").parent().css({ maxHeight: 1, overflow: "auto" });
 
     menu.open(item);
 
     setTimeout(function() {
-        var maxHeightStyle = parseInt(ul.css("max-height"), 10),
-            overflowStyle = ul.css("overflow");
-
+        var maxHeightStyle = parseInt(ul.parent().css("max-height"), 10),
+            overflowStyle = ul.parent().css("overflow");
         assert.isOk(isNaN(maxHeightStyle));
         assert.notEqual(overflowStyle, "auto");
         done();
@@ -336,7 +335,7 @@ it('configure with popupCollision overrides the default', function(done) {
     menu.open(item);
 
     setTimeout(function() {
-        assert.isOk(item.find(".k-group").eq(0).data("kendoPopup").options.collision == "flip");
+        assert.isOk(item.find(".k-group").eq(0).parent().data("kendoPopup").options.collision == "flip");
         done();
     }, 1);
 });
@@ -400,9 +399,9 @@ it("Adding dynamic content element renders properly on root and inner levels", f
     ]);
 
     assert.isOk(m.element.children("li:first").children("div.k-content.k-menu-group.k-group")[0]);
-    assert.isOk(m.element.find("> li:last > ul > li:first").children("div.k-content.k-menu-group.k-group")[0]);
+    assert.isOk(m.element.find("> li:last > div > ul > li:first").children("div.k-content.k-menu-group.k-group")[0]);
     assert.isOk(!m.element.children("li:first").children("div.k-content.k-menu-group.k-group").is(":visible"));
-    assert.isOk(!m.element.find("> li:last > ul > li:first").children("div.k-content.k-menu-group.k-group").is(":visible"));
+    assert.isOk(!m.element.find("> li:last > div > ul > li:first").children("div.k-content.k-menu-group.k-group").is(":visible"));
 
     m.destroy();
 });
@@ -412,7 +411,7 @@ it("The new group of a newly inserted node is not visible", function() {
 
     m.append({text: 'appended'}, m.element.find(".target"));
 
-    assert.equal(m.element.find(".target .k-menu-group.k-group").css("display"), "none");
+    assert.equal(m.element.find(".target .k-menu-popup").css("display"), "none");
 
     m.destroy();
 });
@@ -451,7 +450,7 @@ it("Adding dynamic contentUrl element renders contents on root and inner levels"
     ]);
 
     assert.isOk(m.element.children("li:first").children("div.k-content")[0]);
-    assert.isOk(m.element.find("> li:last > ul > li:first").children("div.k-content")[0]);
+    assert.isOk(m.element.find("> li:last > div > ul > li:first").children("div.k-content")[0]);
     m.destroy();
 });
 

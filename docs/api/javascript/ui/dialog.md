@@ -310,6 +310,38 @@ Specifies the content of a **Dialog**.
     });
     </script>
 
+#### Example - use a template to define the Dialog's content
+
+  <script id="template-dialog" type="text/x-kendo-template">
+    <div class="form-group">
+    <label>Label (Question)</label>
+    <textarea id="editor" rows="10" cols="30"></textarea>
+    </div>
+  </script>
+
+  <div id="dialog"></div>
+  <script>
+    $("#dialog").kendoDialog({
+      width: '450px',
+      title: 'Multiple Choice',
+      closable: false,
+      modal: false,
+      content: kendo.template($('#template-dialog').html()),
+      actions: [
+        { text: 'Cancel' },
+        {
+          text: 'Save',
+          primary: true,
+
+        }
+      ],
+      initOpen: function() {
+        $('#editor').kendoEditor();
+        $('#upImport').kendoUpload();
+      }
+    });
+  </script>
+
 ### height `Number | String`
 
 Specifies height of the dialog.
@@ -695,6 +727,26 @@ Opens a Dialog and brings it on top of any other open Dialog or Window instances
     });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.open();
+    </script>
+
+### close
+
+Closes the Dialog.
+#### Example
+
+    <div id="dialog"></div>
+      <script>
+      $("#dialog").kendoDialog({
+        title: "Kendo Dialog Component",
+        content: "This is your Kendo Dialog.",
+        visible: true
+      });
+      var dialog = $("#dialog").data("kendoDialog");
+      
+      setTimeout(function(){
+        dialog.close();
+      },3000)
+      
     </script>
 
 ### title `String` *(optional)*

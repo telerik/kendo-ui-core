@@ -1582,4 +1582,5 @@ var __meta__ = {
         return Math.max(inner.width / outer.width, inner.height / outer.height);
     };
 })(window.kendo.jQuery);
+export default kendo;
 

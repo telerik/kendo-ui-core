@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-You can subscribe to the `Change` and `Spin` [NumericTextBox events](/api/Kendo.Mvc.UI.Fluent/NumericTextBoxEventBuilder) and further customize the functionality of the component.
+You can subscribe to the `Change` and `Spin` [NumericTextBox events](/api/kendo.mvc.ui.fluent/numerictextboxeventbuilder) and further customize the functionality of the component.
 
 For a complete example on basic NumericTextBox events, refer to the [demo on using the events of the NumericTextBox](https://demos.telerik.com/{{ site.platform }}/numerictextbox/events).
 

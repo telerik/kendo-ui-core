@@ -117,4 +117,5 @@ var __meta__ = {
     });
     ui.plugin(FloatingLabel);
 })(window.kendo.jQuery);
+export default kendo;
 

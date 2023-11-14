@@ -23,30 +23,36 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 
     <div id="treelist"></div>
     <script id="template" type="text/x-kendo-template">
-        <tr data-uid="#= data.model.uid #">
-            <td colspan="2">
+        <tr class="k-table-row" data-uid="#= data.model.uid #" role="row" >
+            <td class="k-table-td" colspan="2">
                 #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                    <span class="k-icon k-i-none"></span>
-                #}#
-                #if(data.hasChildren){#
-                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-                #}#
-
+                	<span class="k-icon k-i-none"></span>
+            		#}#
+             		# if (data.hasChildren) { #
+                	# if(data.model.expanded) { #
+                      #= kendo.ui.icon("caret-alt-down") #
+                	# } else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+                	# } #
+            		# } #
                 <strong>#: data.model.lastName # </strong>
                 <strong>#: data.model.position #</strong>
             </td>
         </tr>
     </script>
     <script id="altTemplate" type="text/x-kendo-template">
-        <tr data-uid="#= data.model.uid #" class="k-alt">
-            <td colspan="2">
+         <tr class="k-table-row k-alt" data-uid="#= data.model.uid #" role="row" >
+            <td class="k-table-td" colspan="2">
                 #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                    <span class="k-icon k-i-none"></span>
-                #}#
-                #if(data.hasChildren){#
-                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-                #}#
-
+                	<span class="k-icon k-i-none"></span>
+            		#}#
+             		# if (data.hasChildren) { #
+                	# if(data.model.expanded) { #
+                      #= kendo.ui.icon("caret-alt-down") #
+                	# } else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+                	# } #
+            		# } #
                 <strong>#: data.model.lastName # </strong>
                 <strong>#: data.model.position #</strong>
             </td>
@@ -303,7 +309,7 @@ Custom commands are supported by specifying the [`click`](/api/javascript/ui/tre
               click: function(e) {
                 // command button click handler
               },
-              imageClass: "k-i-info"
+              icon: "info-circle"
             },
             { name: "destroy" } // built-in "destroy" command
           ]}
@@ -348,6 +354,34 @@ The CSS class that is applied to the command button.
       }
     </style>
 
+### columns.command.icon `String`
+
+Specifies the icon's name of the command button.
+
+#### Example - setting the CSS class of the command icon
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "details",
+              text: "Details",
+              icon: "info-circle",
+              imageClass: "details-info"
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
 ### columns.command.imageClass `String`
 
 The CSS class that is applied to the icon span of the command button.
@@ -364,7 +398,8 @@ The CSS class that is applied to the icon span of the command button.
             {
               name: "details",
               text: "Details",
-              imageClass: "k-i-info"
+              icon: "info-circle",
+              imageClass: "details-info"
             }
           ]}
         ],
@@ -425,7 +460,7 @@ The name of the command. Commands can be built-in ("edit", "createChild" and "de
             {
               name: "details",
               text: "Details",
-              imageClass: "k-i-info"
+              icon: "info-circle"
             }
           ]}
         ],
@@ -438,7 +473,7 @@ The name of the command. Commands can be built-in ("edit", "createChild" and "de
 
 ### columns.command.text `String`
 
-The text that is displayed by the command button. If not set, the [`name`](/api/javascript/ui/treelist#configuration-columns.command.name) option is used as the button text.
+The text that is displayed by the command button. If not set, the [`name`](/api/javascript/ui/treelist#configuration-columns.command.name) option is used as the button text. To have an icon button with no text, you can set the `text` property to an empty string.
 
 #### Example - customizing the text of the command
 
@@ -452,6 +487,11 @@ The text that is displayed by the command button. If not set, the [`name`](/api/
             {
               name: "custom",
               text: "Details"
+            },
+            {
+              name: "details",
+              icon: "info-circle",
+              text: ""
             }
           ]}
         ],
@@ -461,6 +501,55 @@ The text that is displayed by the command button. If not set, the [`name`](/api/
         ]
       });
     </script>
+
+### columns.draggable `Boolean` *(default: false)*
+
+If set to `true` a draghandle will be rendered and the user could reorder the rows by dragging the row via the drag handle.
+
+> Note that the reordering operation is only a client-side operation and it does not reflect the order of any data that is bound to the server.
+
+#### Example
+
+      <div id="treelist"></div>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          },
+          height: 540,
+          editable: {
+            move: {
+              reorderable: true
+            }
+          },
+          columns: [
+            { draggable: true, width: "40px" },
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" }
+          ]
+        });
+      </script>
+
 
 ### columns.editable `Function`
 
@@ -1962,6 +2051,14 @@ The text message that is displayed for the filter menu item.
       });
     </script>
 
+### columnMenu.messages.moveNext `String` *(default: "Move Next")*
+
+The text message that is displayed for the Move to next position column menu item.
+
+### columnMenu.messages.movePrev `String` *(default: "Move Previous")*
+
+The text message that is displayed for the Move to previous position column menu item.
+
 ### columnMenu.messages.sortAscending `String` *(default: "Sort Ascending")*
 
 The text message that is displayed for the menu item which performs the ascending sort mode.
@@ -2412,6 +2509,53 @@ Enables the drag-and-drop UI of rows between parents.
         });
       </script>
 
+### editable.move.clickMoveClick `Boolean` *(default: true)*
+
+If set to `true` (default), when there is a drag column for the items in the TreeList, the user will be allowed to reorder rows via click move click interaction as an alternative of the drag and drop one.
+
+#### Example
+
+      <div id="treelist"></div>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          },
+          height: 540,
+          editable: {
+            move: {
+              reorderable: true,
+              clickMoveClick: false
+            }
+          },
+          columns: [
+            { draggable: true, width: "40px" },
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" }
+          ]
+        });
+      </script>
+
 ### editable.move.reorderable `Boolean` *(default: false)*
 
 Enables reordering of rows via a drag-and-drop UI.
@@ -2658,7 +2802,7 @@ If set to `true` the TreeList will export all pages of data. By default the Tree
         ],
         excel: {
           allPages: true
-        },        
+        },
         pageable: {
           pageSize: 10
         },
@@ -4481,7 +4625,7 @@ The label that is displayed after the drop-down list for the page size.
                 ]
             },
             pageable: {
-                pageSize: 2,
+                pageSizes: [2, 5],
                 input: true,
                 messages: {
                     itemsPerPage: "data items per page"
@@ -4682,10 +4826,9 @@ Configures the PDF export settings of the TreeList.
 Exports all TreeList pages, starting from the first one.
 
 > **Note:** Chrome is known to crash when generating very large PDF-s.  A solution to this is to include the
-> [Pako](http://nodeca.github.io/pako/) library, which is bundled with Kendo as `pako_deflate.min.js`.  Simply loading
-> this library with a `<script>` tag will enable compression in PDF, e.g.:
+> [Pako](http://nodeca.github.io/pako/) library. Simply loading this library with a `<script>` tag will enable compression in PDF, e.g.:
 >
-> `<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>`
+> `<script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>`
 
 #### Example - export all pages
 
@@ -5285,34 +5428,40 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. By de
 
         <div id="treelist"></div>
         <script id="template" type="text/x-kendo-template">
-            <tr data-uid="#= data.model.uid #">
-                <td colspan="2">
+            <tr class="k-table-row" data-uid="#= data.model.uid #" role="row" >
+                <td class="k-table-td" colspan="2">
                     #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                        <span class="k-icon k-i-none"></span>
-                    #}#
-                    #if(data.hasChildren){#
-                        <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-                    #}#
-
+                    	<span class="k-icon k-i-none"></span>
+                		#}#
+                 		# if (data.hasChildren) { #
+                    	# if(data.model.expanded) { #
+                          #= kendo.ui.icon("caret-alt-down") #
+                    	# } else { #
+                          #= kendo.ui.icon("caret-alt-right") #
+                    	# } #
+                		# } #
                     <strong>#: data.model.lastName # </strong>
                     <strong>#: data.model.position #</strong>
                 </td>
             </tr>
         </script>
         <script id="altTemplate" type="text/x-kendo-template">
-            <tr data-uid="#= data.model.uid #" class="k-alt">
-                <td colspan="2">
-                    #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                        <span class="k-icon k-i-none"></span>
-                    #}#
-                    #if(data.hasChildren){#
-                        <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-                    #}#
-
-                    <strong>#: data.model.lastName # </strong>
-                    <strong>#: data.model.position #</strong>
-                </td>
-            </tr>
+          <tr class="k-table-row k-alt" data-uid="#= data.model.uid #" role="row" >
+              <td class="k-table-td" colspan="2">
+                  #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                  	<span class="k-icon k-i-none"></span>
+              		#}#
+               		# if (data.hasChildren) { #
+                  	# if(data.model.expanded) { #
+                        #= kendo.ui.icon("caret-alt-down") #
+                  	# } else { #
+                        #= kendo.ui.icon("caret-alt-right") #
+                  	# } #
+              		# } #
+                  <strong>#: data.model.lastName # </strong>
+                  <strong>#: data.model.position #</strong>
+              </td>
+          </tr>
         </script>
         <script>
           $("#treelist").kendoTreeList({
@@ -5326,7 +5475,6 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. By de
                 { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
                 { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
                 { id: 3, parentId: 2, lastName: "Jason", position: "Director, Engineering" }
-
               ]
             }
           });
@@ -5615,6 +5763,46 @@ The sort mode. If set to `single`, the user can sort by one column at a time. If
       });
     </script>
 
+Apart from the built-in tools, the TreeList fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself. Note that all tools (commands) must have their name specified:
+
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        toolbar: [ {
+            name: "btn-cmd",
+            type: "button",
+            text: "Button"
+        }, {
+            name: "toggle-cmd",
+            type: "button",
+            text: "Toggle",
+            togglable: true,
+            icon: "cancel"
+        }, {
+            name: "split-cmd",
+            type: "splitButton",
+            text: "SplitButton",
+            menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+        } ],
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          mode: "multiple"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+          ]
+        }
+      });
+    </script>
+
 ### toolbar.click `Function`
 
 The `click` handler of the toolbar command. Used for custom toolbar commands.
@@ -5644,6 +5832,27 @@ The `click` handler of the toolbar command. Used for custom toolbar commands.
       });
     </script>
 
+### toolbar.icon `String`
+
+Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
+
+#### Example - specifying the name of the command
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        toolbar: [{name: "custom", text: "About", icon: "info-circle", imageClass: "custom-info" }],
+        columns: [
+          "lastName",
+          "position"
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+        ]
+      });
+    </script>
+
 ### toolbar.imageClass `String`
 
 A class name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a class name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
@@ -5653,7 +5862,7 @@ A class name that will be rendered inside the toolbar button. When you set this 
     <div id="treeList"></div>
     <script>
       $("#treeList").kendoTreeList({
-        toolbar: [{name: "custom", text: "About", imageClass: "k-i-info" }],
+        toolbar: [{name: "custom", text: "About", icon: "info-circle", imageClass: "custom-info" }],
         columns: [
           "lastName",
           "position"
@@ -7785,8 +7994,8 @@ Pre-defined status classes are:
         ],
         drag: function(e) {
           // Replace the "add" icon with a "copy" icon. DO NOT REPLACE THE i-cancel status!
-          if(e.status === 'i-plus') {
-            e.setStatus("k-i-copy");
+          if(e.status === 'plus') {
+            e.setStatus("copy");
           }
         }
       });

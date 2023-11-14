@@ -29,7 +29,7 @@ res_type: kb
 
 ## Description
 
-Sometimes the server may return a response with different fields and values depending on user input or another external variable. In such cases, the developer doesn't know what columns and fields will be available in the Grid, nor what the type of these fields will be. 
+In some cases, the server returns a response with different fields and values depending on user input or another external variable. Thus, the developer doesn't know what columns and fields will be available in the Grid, nor what the type of these fields will be.
 
 This article showcases how to dynamically generate the Kendo UI Grid by using the response data and without knowing the names and types of the columns and fields.
 

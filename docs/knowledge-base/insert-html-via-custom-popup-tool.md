@@ -76,7 +76,7 @@ For additional information about the code used in the example, refer to the foll
                   '</div>' +
                 '</div>';
 
-            var editor = $(this).data("kendoEditor");
+            var editor = this;
 
             // Store the Editor range object.
             // Needed for IE.

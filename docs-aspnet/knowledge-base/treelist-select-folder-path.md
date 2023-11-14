@@ -1,8 +1,8 @@
 ---
 title: Select the Folder Path When Clicking a TreeList Node
-description: An example of how to bind the Telerik UI TreeList for ASP.NET {{ site.framework }} to Hierarchical data and select the folder path when a node is clicked.
+description: An example of how to bind the Telerik UI TreeList for ASP.NET {{ site.framework }} to hierarchical data and select the folder path when a node is clicked.
 type: how-to
-page_title: Select the Folder Path When Clicking a Telerik UI TreeList for ASP.NET {{ site.framework }} Node
+page_title: Select the Folder Path When Clicking a TreeList Node
 slug: treelist-select-folder-path
 tags: treelist, hierarchical, folder, path, tree
 ticketid: 1558365
@@ -24,9 +24,9 @@ How can I bind the TreeList to Hierarchical data and select the folder path when
 
 ## Solution
 
-To achieve the desired scenario: 
+To achieve the desired scenario:
 
-1. Customize the TreeList rows by using the `RowTemplateId` and `AltRowTemplateId` methods. 
+1. Customize the TreeList rows by using the `RowTemplateId` and `AltRowTemplateId` methods.
 1. Enable the `Selectable` option to allow multiple row selection: `.Selectable(s => s.Mode(TreeListSelectionMode.Multiple))`.
 1. Handle the `change` event of the TreeList, get the selected node, and manually select its parent nodes.
 
@@ -59,7 +59,11 @@ To achieve the desired scenario:
                     <span class="k-icon k-i-none"></span>
                 #}#
                 #if(data.hasChildren){#
-                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                    # if(data.model.expanded) { #
+                      #= kendo.ui.icon("caret-alt-down") #
+                	# } else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+                	# } #
                 #}#
                 <span class="k-sprite #: data.model.SpriteCssClass #"></span>
                 <span> #: data.model.Name # </span>
@@ -74,7 +78,11 @@ To achieve the desired scenario:
                     <span class="k-icon k-i-none"></span>
                 #}#
                 #if(data.hasChildren){#
-                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                    # if(data.model.expanded) { #
+                      #= kendo.ui.icon("caret-alt-down") #
+                	# } else { #
+                      #= kendo.ui.icon("caret-alt-right") #
+                	# } #
                 #}#
                 <span class="k-sprite #: data.model.SpriteCssClass #"></span>
                 <span> #: data.model.Name # </span>
@@ -85,7 +93,7 @@ To achieve the desired scenario:
     <script>
         function findParentItems(allParentRows, selectedDataItem, selectedParentRows, level) {
             var treeList = $("#treelist").data("kendoTreeList");
-            
+
             for(var i = 0; i < allParentRows.length; i++) {
                 var currentDataItem = treeList.dataItem(allParentRows[i]);
                 var addedItem = $.inArray( allParentRows[i], selectedParentRows );
@@ -184,6 +192,30 @@ To achieve the desired scenario:
     }
 ```
 
+## More {{ site.framework }} TreeList Resources
+
+* [{{ site.framework }} TreeList Documentation]({%slug htmlhelpers_treelist_aspnetcore%})
+
+* [{{ site.framework }} TreeList Demos](https://demos.telerik.com/{{ site.platform }}/treelist)
+
+{% if site.core %}
+* [{{ site.framework }} TreeList Product Page](https://www.telerik.com/aspnet-core-ui/treelist)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} TreeList Product Page](https://www.telerik.com/aspnet-mvc/treelist)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
-* [Using Row Templates in the TreeList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/rowtemplate)
-* [TreeList Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+
+* [Client-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Server-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/treelist)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

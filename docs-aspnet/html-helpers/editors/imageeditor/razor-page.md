@@ -1,16 +1,22 @@
 ---
-title:  Razor Page
-page_title: Configure a submit ImageEditor in Razor Page.
+title:  Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI ImageEditor component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_imageeditor_razorpage_aspnetcore
 position: 3
 ---
 
-# Razor Page
+# ImageEditor in Razor Pages
 
-This article describes how to configure the Telerik UI ImageEditor for {{ site.framework }} in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-The example below demonstrates how to configure the ImageEditor to forward the content to a proxyURL in a RazorPage scenario even if the browser supports saving files locally. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI ImageEditor for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the ImageEditor component in a Razor Pages scenario.
+
+For the complete project, refer to the [ImageEditor in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ImageEditor/ImageEditorIndex.cshtml).
+
+The example below demonstrates how to configure the ImageEditor to forward the content to a proxyURL in a Razor Pages scenario even if the browser supports saving files locally.
 
 ```tab-HtmlHelper(cshtml) 
        

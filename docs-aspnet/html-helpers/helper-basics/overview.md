@@ -29,7 +29,7 @@ The Telerik UI for {{ site.framework }} HTML helpers:
 * Enable Visual Studio Extensions for automatic creation of new {{ site.product }} applications and for automatic updating of the Telerik UI version.
 * Enable you to use scaffolding to generate component declarations and related controller action methods.
 
-The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> components:
+The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery widgets</a>:
 
 * Allow for a complete server-platform independence.
 * Provide full control over the placement of the initialization scripts.
@@ -65,7 +65,7 @@ The {{ site.product_short }} helpers:
 * Enable Visual Studio Extensions for automatic creation of new {{ site.product }} applications and for automatic updating of the Telerik UI version.
 * Enable you to use scaffolding to generate component declarations and related controller action methods.
 
-The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> components:
+The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery widgets</a>:
 
 * Allow for a complete server-platform independence.
 * Provide full control over the placement of the initialization scripts.

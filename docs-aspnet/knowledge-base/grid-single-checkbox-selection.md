@@ -1,6 +1,6 @@
 ---
-title: Select Only One Grid Row with the Checkbox selectable column
-description: Remove the master checkbox of the built-in checkbox column in the Telerik UI Grid. Limit the selection to ine selected Grid row only.
+title: Selecting a Single Grid Row with the CheckBox Selectable Column
+description: Remove the master checkbox of the built-in checkbox column in the {{ site.product }} Grid. Limit the selection to only one selected Grid row.
 type: how-to
 page_title: Limit the Selection to a Single Row
 slug: grid-singe-checkbox-selection
@@ -24,10 +24,11 @@ res_type: kb
 I want to remove the master checkbox of the built-in checkbox column in the Telerik UI Grid. How can I limit the selection to one selected Grid row only?
 
 ## Solution
+
 1. Remove the master checkbox by adding an empty header template to the column.
-2. Subscribe for the [click](https://api.jquery.com/click/) event of the checkboxes by using a jQuery selector.
-3. In the `click` event handler, get the row and the row classes by using the [closest](https://api.jquery.com/closest/) jQuery method.
-4. Based on the row classes, use the [clearSelection](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection) method of the Grid.
+2. Subscribe for the [`click`](https://api.jquery.com/click/) event of the checkboxes by using a jQuery selector.
+3. In the `click` event handler, get the row and the row classes by using the [`closest`](https://api.jquery.com/closest/) jQuery method.
+4. Based on the row classes, use the [`clearSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection) method of the Grid.
 
 ```View
 
@@ -101,3 +102,31 @@ $(document).ready(function () {
         public string ShipCity { get; internal set; }
     }
 ```
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

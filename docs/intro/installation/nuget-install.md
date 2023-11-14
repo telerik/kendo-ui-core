@@ -14,6 +14,8 @@ Progress maintains the Telerik NuGet Feed for registered users and all Kendo UI 
 
 >The legacy https://nuget.telerik.com/nuget server is now deprecated. Make sure to switch to the new https://nuget.telerik.com/v3/index.json server, which is faster, lighter, and reduces the number of requests from your NuGet client.
 
+> As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can [`download jQuery using NuGet package manager`](https://subscription.packtpub.com/book/web-development/9781782173113/1/ch01lvl1sec12/using-nuget-package-manager-to-download-jquery) or use other source for the jQuery library.
+
 ## 1. Choose the Required Package
 
 The Telerik NuGet Feed provides the following Kendo UI for jQuery packages:

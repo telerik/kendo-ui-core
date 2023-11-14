@@ -7,7 +7,7 @@ slug: events_bottomnavigation
 
 # Events
 
-The BottomNavigation [exposes a `Select()` event](/api/Kendo.Mvc.UI.Fluent/BottomNavigationEventBuilder) that you can handle to customize the functions of the component. Using this event allows you to switch between the content of the BottomNavigation items.
+The BottomNavigation [exposes a `Select()` event](/api/kendo.mvc.ui.fluent/bottomnavigationeventbuilder) that you can handle to customize the functions of the component. Using this event allows you to switch between the content of the BottomNavigation items.
 
 For a complete example on basic BottomNavigation events, refer to the [demo on using the events of the BottomNavigation](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/events).
 
@@ -93,7 +93,7 @@ For a complete example on basic BottomNavigation events, refer to the [demo on u
 ## Next Steps
 
 * [Using the BottomNavigation Events (Demo)](https://demos.telerik.com/aspnet-core/bottomnavigation/events)
-* [API for Configuring BottomNavigation events](/api/Kendo.Mvc.UI.Fluent/BottomNavigationEventBuilder)
+* [API for Configuring BottomNavigation events](/api/kendo.mvc.ui.fluent/bottomnavigationeventbuilder)
 
 ## See Also
 

@@ -144,7 +144,7 @@ var __meta__ = {
          return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
     },
     groupAttributes: function(group) {
-        return group.expanded !== true ? " style='display:none'" : "";
+        return group.expanded !== true ? ` ${kendo.attr("style-display")}="none"` : "";
     },
     ariaHidden: function(group) {
         return group.expanded !== true;
@@ -153,7 +153,7 @@ var __meta__ = {
         return "k-panelbar-group k-group k-panel";
     },
     contentAttributes: function(content) {
-        return content.item.expanded !== true ? " style='display:none'" : "";
+        return content.item.expanded !== true ? ` ${kendo.attr("style-display")}="none"` : "";
     },
     content: function(item) {
         return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
@@ -213,7 +213,7 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.wrapper = that.element.addClass("k-panelbar");
+            element = that.wrapper = that.element.addClass("k-panelbar k-pos-relative");
             options = that.options;
 
             if (element[0].id) {
@@ -255,11 +255,11 @@ var __meta__ = {
                 that.expand(content.parent(), false);
             }
 
-            if (!options.dataSource) {
-                that._angularCompile();
-            }
-
             kendo.notify(that);
+
+            if (that._showWatermarkOverlay) {
+                that._showWatermarkOverlay(that.wrapper[0]);
+            }
         },
 
         events: [
@@ -296,42 +296,10 @@ var __meta__ = {
             dataTextField: null
         },
 
-        _angularCompile: function() {
-            var that = this;
-            that.angular("compile", function() {
-                return {
-                    elements: that.element.children("li"),
-                    data: [{ dataItem: that.options.$angular }]
-                };
-            });
-        },
-
-        _angularCompileElements: function(html, items) {
-            var that = this;
-            that.angular("compile", function() {
-                return {
-                    elements: html,
-                    data: $.map(items, function(item) {
-                        return [{ dataItem: item }];
-                    })
-                };
-            });
-        },
-
-        _angularCleanup: function() {
-            var that = this;
-
-            that.angular("cleanup", function() {
-                return { elements: that.element.children("li") };
-            });
-        },
-
         destroy: function() {
             Widget.fn.destroy.call(this);
 
             this.element.off(NS);
-
-            this._angularCleanup();
 
             kendo.destroy(this.element);
         },
@@ -611,10 +579,13 @@ var __meta__ = {
                         return $(value);
                     } else {
                         value.items = [];
-                        return $(that.renderItem({
+                        let itemElement = $(that.renderItem({
                             group: groupData,
                             item: extend(value, { index: idx })
                         }));
+
+                        kendo.applyStylesFromKendoAttributes(itemElement, ["display"]);
+                        return itemElement;
                     }
             });
 
@@ -627,7 +598,6 @@ var __meta__ = {
                     ns: ui
                 });
             }
-            this._angularCompileElements(rootItemsHtml, items);
         },
 
         _refreshChildren: function(item, parentNode) {
@@ -638,7 +608,6 @@ var __meta__ = {
             if (!items.length) {
                 updateItemHtml(parentNode);
                 children = parentNode.children(".k-group").children("li");
-                this._angularCompileElements(children, items);
             } else {
                 this.append(item.children, parentNode);
 
@@ -846,10 +815,13 @@ var __meta__ = {
                     if (typeof value === "string") {
                         return $(value);
                     } else {
-                        return $(that.renderItem({
+                        let itemElement = $(that.renderItem({
                             group: groupData,
                             item: extend(value, { index: idx })
                         }));
+
+                        kendo.applyStylesFromKendoAttributes(itemElement, ["display"]);
+                        return itemElement;
                     }
             });
 
@@ -865,7 +837,6 @@ var __meta__ = {
                   }
                }
 
-            that._angularCompileElements(itemsHtml, items);
               if (that.dataItem(parentNode)) {
                   that.dataItem(parentNode).hasChildren = true;
                   that.updateArrow(parentNode);
@@ -892,10 +863,6 @@ var __meta__ = {
                 var elements = $.map(items, function(item) {
                     return that.findByUid(item.uid);
                 });
-
-                if (render) {
-                    that.angular("cleanup", function() { return { elements: elements }; });
-                }
 
                 for (i = 0; i < items.length; i++) {
                     context.item = item = items[i];
@@ -931,17 +898,6 @@ var __meta__ = {
                     if (nodeWrapper.length) {
                         this.trigger("itemChange", { item: nodeWrapper.find(".k-link").first(), data: item, ns: ui });
                     }
-                }
-
-                if (render) {
-                    that.angular("compile", function() {
-                        return {
-                            elements: elements,
-                            data: $.map(items, function(item) {
-                                return [{ dataItem: item }];
-                            })
-                        };
-                    });
                 }
             }
         },
@@ -1232,7 +1188,9 @@ var __meta__ = {
             };
 
             if (isReferenceItem && !parent.length) {
-                parent = $(that.renderGroup({ group: groupData, options: that.options })).appendTo(referenceItem);
+                parent = $(that.renderGroup({ group: groupData, options: that.options }));
+                kendo.applyStylesFromKendoAttributes(parent, ["display"]);
+                parent.appendTo(referenceItem);
             }
 
             if (plain || Array.isArray(item) || item instanceof HierarchicalDataSource) { // is JSON or HierarchicalDataSource
@@ -1244,10 +1202,13 @@ var __meta__ = {
                     if (typeof value === "string") {
                         return $(value);
                     } else {
-                        return $(that.renderItem({
+                        let itemElement = $(that.renderItem({
                             group: groupData,
                             item: extend(value, { index: idx })
                         }));
+
+                        kendo.applyStylesFromKendoAttributes(itemElement, ["display"]);
+                        return itemElement;
                     }
                 });
                 if (isReferenceItem) {
@@ -1277,7 +1238,6 @@ var __meta__ = {
                 item = [item];
             }
 
-            that._angularCompileElements(items, item);
             return { items: items, group: parent };
         },
 
@@ -1538,6 +1498,10 @@ var __meta__ = {
                 hasCollapseAnimation = animationSettings.collapse && "effects" in animationSettings.collapse,
                 collapse = extend({}, animationSettings.expand, animationSettings.collapse);
 
+            if (element.hasClass("k-hidden")) {
+                element.removeClass("k-hidden");
+            }
+
             if (!hasCollapseAnimation) {
                 collapse = extend(collapse, { reverse: true });
             }
@@ -1588,7 +1552,7 @@ var __meta__ = {
         },
 
         _addGroupElement: function(element) {
-            var group = $('<ul role="group" aria-hidden="true" class="k-panelbar-group k-group k-panel" style="display:none"></ul>');
+            var group = $('<ul role="group" aria-hidden="true" class="k-panelbar-group k-group k-panel"></ul>').hide();
 
             element.append(group);
             return group;
@@ -1672,9 +1636,7 @@ var __meta__ = {
                         return { elements: contentElement.get() };
                     }
                     try {
-                        that.angular("cleanup", getElements);
                         contentElement.html(data);
-                        that.angular("compile", getElements);
                     } catch (e) {
                         var console = window.console;
 
@@ -1778,4 +1740,5 @@ var __meta__ = {
 kendo.ui.plugin(PanelBar);
 
 })(window.kendo.jQuery);
+export default kendo;
 

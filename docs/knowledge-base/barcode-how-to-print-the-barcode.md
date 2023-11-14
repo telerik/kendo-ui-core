@@ -43,7 +43,7 @@ Open a new window and place the Barcode DOM elements on the page.
           var divToPrint=document.getElementById('toPrint');
           var newWin=window.open('','Print-Window');
           newWin.document.open();
-          newWin.document.write('<head> <link href="https://kendo.cdn.telerik.com/themes/5.11.0/default/default-main.css" rel="stylesheet" /></head>  <body onload="window.print()">'+divToPrint.innerHTML+'</body>');
+          newWin.document.write('<head> <link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" /></head>  <body onload="window.print()">'+divToPrint.innerHTML+'</body>');
           newWin.document.close();
         })
       });

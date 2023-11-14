@@ -112,5 +112,6 @@ You can subscribe to all Stepper events.
 * [Basic Usage of the Stepper HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/index)
 {% if site.core %}
 * [Basic Usage of the Stepper TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/stepper/tag-helper)
+* [Stepper in Razor Pages]({% slug htmlhelpers_stepper_razorpage_aspnetcore %})
 {% endif %}
 * [Using the API of the Stepper HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/api)

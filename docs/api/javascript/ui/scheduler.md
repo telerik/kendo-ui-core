@@ -3580,6 +3580,152 @@ Can be set to a string `phone` which will force the widget to use adaptive rende
         });
     </script>
 
+### ongoingEvents `Boolean|Object`
+
+The settings for the ongoing events highlight. The highlight is disabled by default. If you need to turn it on, set this option to `true`, or use a configuration object with its nested options.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var month = currentTime.getMonth();
+    var day = currentTime.getDate();
+    var hour = currentTime.getHours();
+
+    $("#scheduler").kendoScheduler({
+      ongoingEvents: true,
+      dataSource: [{
+        id: 1,
+        title: "test",
+        start: new Date(year, month, day, hour - 1),
+        end: new Date(year, month, day, hour + 1)
+      }]
+    });
+    </script>
+
+### ongoingEvents.cssClass `String` *(default: null)*
+
+Specifies a custom CSS class applied to ongoing events. If not set, the default `k-event-ongoing` class will be applied.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var month = currentTime.getMonth();
+    var day = currentTime.getDate();
+    var hour = currentTime.getHours();
+
+    $("#scheduler").kendoScheduler({
+      ongoingEvents: {
+        enabled: true,
+        cssClass: "customClass"
+      },
+      dataSource: [{
+        id: 1,
+        title: "test",
+        start: new Date(year, month, day, hour - 1),
+        end: new Date(year, month, day, hour + 1)
+      }]
+    });
+    </script>
+
+    <style>
+      .k-scheduler .k-event.customClass {
+        border: 3px solid black;
+      }
+    </style>
+
+### ongoingEvents.enabled `Boolean` *(default: false)*
+
+Specifies if the ongoing events will be highlighted. Defaults to false.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var month = currentTime.getMonth();
+    var day = currentTime.getDate();
+    var hour = currentTime.getHours();
+
+    $("#scheduler").kendoScheduler({
+      ongoingEvents: {
+        enabled: true
+      },
+      dataSource: [{
+        id: 1,
+        title: "test",
+        start: new Date(year, month, day, hour - 1),
+        end: new Date(year, month, day, hour + 1)
+      }]
+    });
+    </script>
+
+### ongoingEvents.updateInterval `Number` *(default: 60000)*
+
+The update interval (in milliseconds) of the ongoing events highlight. Defaults to `60000` (a minute).
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var month = currentTime.getMonth();
+    var day = currentTime.getDate();
+    var hour = currentTime.getHours();
+
+    $("#scheduler").kendoScheduler({
+      ongoingEvents: {
+        enabled: true,
+        updateInterval: 60 * 60 * 1000 // one hour interval
+      },
+      dataSource: [{
+        id: 1,
+        title: "test",
+        start: new Date(year, month, day, hour - 1),
+        end: new Date(year, month, day, hour + 1)
+      }]
+    });
+    </script>
+
+### ongoingEvents.useLocalTimezone `Boolean` *(default: true)*
+
+If set to `false` the ongoing events will be highlighted in the scheduler [timezone](/api/javascript/ui/scheduler/configuration/timezone). That means only events that happen at the moment (according to their `start` and `end` data) will be highlighted. In order the highlight on the ongoing events to be visually in sync with the `currentTimeMarker` in the widget, the `useLocalTimezone` configuration options of both must be set to the same value. This way the highlighted ongoing events will be placed over the `currentTimeMarker`.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+      var currentTime = new Date();
+      var year = currentTime.getFullYear();
+      var month = currentTime.getMonth();
+      var day = currentTime.getDate();
+      var hour = currentTime.getHours();
+
+      $("#scheduler").kendoScheduler({
+        timezone: "Etc/UTC",
+        ongoingEvents: {
+          enabled: true,
+          useLocalTimezone: false
+        },
+        currentTimeMarker: {
+          useLocalTimezone: false
+        },
+        dataSource: [{
+          id: 1,
+          title: "test",
+          start: new Date(year, month, day, hour - 1),
+          end: new Date(year, month, day, hour + 1)
+        }]
+      });
+    </script>
+
 ### pdf `Object`
 
 Configures the Kendo UI Scheduler PDF export settings.
@@ -4434,6 +4580,8 @@ If set to true the view will be initially shown in business hours mode. By defau
     });
     </script>
 
+To dynamically update the `showWorkHours` or any other option yo ucan use the [`setOptions`](/api/javascript/ui/widget/methods/setoptions) method.
+
 ### snap `Boolean` *(default: true)*
 
 If set to `true` the scheduler will snap events to the nearest slot during dragging (resizing or moving). Set it to `false` to allow free moving and resizing of events.
@@ -4546,9 +4694,9 @@ The complete list of the supported timezones is available in the [List of IANA t
     });
     </script>
 
-### toolbar `Array`
+### toolbar `Array|Object`
 
-List of commands that the scheduler will display in its toolbar as buttons. Currently supports only the "pdf" and "search" commands.
+When Array of commands is passed, it accepts the "pdf" and "search" commands that the scheduler will display alongside its built-in ToolBar tools. The "pdf" and "search" tools will be rendered in a fixed place within the ToolBar that cannot be changed.
 
 The "pdf" command exports the scheduler in PDF format. The "search" option allows searching through Scheduler events titles.
 
@@ -4576,6 +4724,280 @@ The "pdf" command exports the scheduler in PDF format. The "search" option allow
     <script>
     $("#scheduler").kendoScheduler({
       toolbar: [ { name: "pdf" } ],
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+When an object having an `items` field is used, that will entirely replace all tools in the Scheduler ToolBar (including the default ones). Hence, the developer will need to declare them manually in order make them appear in the component. The default order of the Scheduler tools is: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. Note that if more than one view is defined, the last default tool is `views`, otherwise `views` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdfMobile` and `search` tools should be explicitly enabled in order to be visible.
+
+By using the `items` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+
+#### Example - specify the toolbar items
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      toolbar: {
+        items: [
+          ["previous", "next"],
+          {
+            name: "custom",
+            type: "button",
+            text: "Custom Button"
+          },
+          { type: "spacer" },
+          "search",
+          "views"
+        ]
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### toolbar.items `Array|Object`
+
+When the `items` field receives an array, it will entirely replace all tools in the Scheduler ToolBar (including the default once). Hence, the developer will need to declare them manually in order make them appear in the component. The default order of the Scheduler tools is: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. Note that if more than one view is defined, the last default tool is `views`, otherwise `views` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdfMobile` and `search` tools should be explicitly enabled in order to be visible.
+
+By using the `items` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+
+#### Example - pass an array to the items field
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      toolbar: {
+        items: [
+          ["previous", "next"],
+          {
+            name: "custom",
+            type: "button",
+            text: "Custom Button"
+          },
+          { type: "spacer" },
+          "search",
+          "views"
+        ]
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+#### Example - pass an object to the items field
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      mobile: true,
+      toolbar: {
+        items: {
+          desktop: [["previous", "next"], "current", "pdf", { type: "spacer" }, "search", "views"],
+          mobile: {
+            main: ["pdfMobile", { type: "spacer" }, "search", "viewsMobile"],
+            navigation: ["previousMobile", { type: "spacer" }, "currentMobile", { type: "spacer" }, "nextMobile"]
+          }
+        }
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### toolbar.items.desktop `Array`
+
+Will specify all tools rendered in the Scheduler ToolBar with its non-adaptive rendering. If not explicitly set here, the component will render its built-in tools in the following order: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. Note that if more than one view is defined, the last default tool is `views`, otherwise `views` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdf` and `search` tools should be explicitly enabled in order to be visible.
+
+By using the `items.desktop` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      toolbar: {
+        items: {
+          desktop: [
+            ["previous", "next"],
+            {
+              name: "custom",
+              type: "button",
+              text: "Custom Button"
+            },
+            { type: "spacer" },
+            "search",
+            "views"
+          ]
+        }
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### toolbar.items.mobile `Object`
+
+Will specify all tools rendered in the Scheduler ToolBar with its adaptive rendering. By default, there are two ToolBars rendered in the Scheduler in that mode:
+
+- `main` (or upper) ToolBar contains the following built-in tools: `[ [ "pdfMobile", "calendar", "create" ], { type: "spacer" }, "search", "viewsMobile" ]`. Note that if more than one view is defined, the last default tool is `viewsMobile`, otherwise `viewsMobile` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdfMobile` and `search` tools should be explicitly enabled in order to be visible;
+- `navigation` (or lower) ToolBar contains the following built-in tools: `[ "previousMobile", { type: "spacer" }, "currentMobile", { type: "spacer" }, "nextMobile" ]`;
+
+By using the `items.mobile` field, you can specify any kind and number of custom tools for the above two ToolBars. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      mobile: "phone",
+      toolbar: {
+        items: {
+          mobile: {
+              main: [
+                "pdfMobile",
+                {
+                  name: "custom",
+                  type: "button",
+                  text: "Custom Button"
+                },
+                { type: "spacer" },
+                "search",
+                "viewsMobile"
+              ],
+              navigation: [
+                "previousMobile",
+                { type: "spacer" },
+                {
+                  name: "custom2",
+                  type: "button",
+                  text: "Custom 2"
+                },
+                { type: "spacer" },
+                "nextMobile"
+              ]
+          }
+        }
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### toolbar.items.mobile.main `Object`
+
+Will specify all tools rendered in the main (upper) Scheduler ToolBar with its adaptive rendering. If not explicitly set here, the component will render its built-in tools in the following order: `[ [ "pdfMobile", "calendar", "create" ], { type: "spacer" }, "search", "viewsMobile" ]`. Note that if more than one view is defined, the last default tool is `viewsMobile`, otherwise `viewsMobile` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdfMobile` and `search` tools should be explicitly enabled in order to be visible.
+
+By using the `items.mobile.main` field, you can specify any kind and number of custom tools for that ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      mobile: "phone",
+      toolbar: {
+        items: {
+          mobile: {
+              main: [
+                "pdfMobile",
+                {
+                  name: "custom",
+                  type: "button",
+                  text: "Custom Button"
+                },
+                { type: "spacer" },
+                "search",
+                "viewsMobile"
+              ],
+              navigation: [ ]
+          }
+        }
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### toolbar.items.mobile.navigation `Object`
+
+Will specify all tools rendered in the navigation (lower) Scheduler ToolBar with its adaptive rendering. If not explicitly set here, the component will render its built-in tools in the following order: `[ "previousMobile", { type: "spacer" }, "currentMobile", { type: "spacer" }, "nextMobile" ]`.
+
+By using the `items.mobile.navigation` field, you can specify any kind and number of custom tools for that ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      mobile: "phone",
+      toolbar: {
+        items: {
+          mobile: {
+              main: [ ],
+              navigation: [
+                "previousMobile",
+                { type: "spacer" },
+                {
+                  name: "custom2",
+                  type: "button",
+                  text: "Custom 2"
+                },
+                { type: "spacer" },
+                "nextMobile"
+              ]
+          }
+        }
+      },
       date: new Date("2013/6/6"),
       dataSource: [
         {
@@ -6344,13 +6766,19 @@ Adds a new scheduler event and opens the edit form.
 The object containing the scheduler event fields.
 
 #### Example - add a new event
+    <button id='addEvent'>Add New Event</button>
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6")
-    });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    scheduler.addEvent({ title: "(No title)" });
+      
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6")
+      });
+      
+      var scheduler = $("#scheduler").data("kendoScheduler"); 
+      
+      $("#addEvent").click(function (){       
+        scheduler.addEvent({ title: "(No title)" }); 
+      })
     </script>
 
 ### cancelEvent
@@ -6553,26 +6981,28 @@ The end date of the period.
 #### Example - get a list of occurrences
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      views: ["week"],
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          title: "Interview",
-          recurrenceRule: "FREQ=DAILY"
-        }
-      ]
-    });
+      $("#scheduler").kendoScheduler({
+        date: new Date("2023/7/6"),
+        views: ["week"],
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2023/7/6 08:00 AM"),
+            end: new Date("2023/7/6 09:00 AM"),
+            title: "Interview",
+            recurrenceRule: "FREQ=DAILY"
+          }
+        ]
+      });
 
-    var scheduler = $("#scheduler").data("kendoScheduler");
+      setTimeout(function(){
+        var scheduler = $("#scheduler").data("kendoScheduler");
 
-    var events = scheduler.occurrencesInRange(new Date("2013/6/5"), new Date("2013/6/10"));
+        var events = scheduler.occurrencesInRange(new Date("2023/7/5"), new Date("2023/7/10"));
 
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(events);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(events);
+      }, 1500)
     </script>
 
 ### refresh

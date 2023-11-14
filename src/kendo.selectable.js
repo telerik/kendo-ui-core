@@ -18,12 +18,14 @@ var __meta__ = {
         ACTIVE = "k-selecting",
         SELECTABLE = "k-selectable",
         CHANGE = "change",
+        CHANGING = "changing",
         NS = ".kendoSelectable",
         UNSELECT = "unselect",
         UNSELECTING = "k-unselecting",
-        INPUTSELECTOR_ICONSSELECTOR_FONT = "span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,.k-icon.k-i-caret-alt-down,.k-icon.k-i-caret-alt-right",
+        INPUTSELECTOR_ICONSSELECTOR_FONT = "span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,.k-icon.k-i-caret-alt-down,.k-icon.k-i-caret-alt-right,.k-icon.k-i-caret-alt-left",
         INPUTSELECTOR_ICONSSELECTOR_SVG = INPUTSELECTOR_ICONSSELECTOR_FONT.replaceAll('k-i', 'k-svg-i'),
-        INPUTSELECTOR = `input,a,textarea,.k-multiselect-wrap,select,button,${INPUTSELECTOR_ICONSSELECTOR_FONT},${INPUTSELECTOR_ICONSSELECTOR_SVG},.k-button>span,.k-button>img,label.k-checkbox-label.k-no-text,span.k-numeric-wrap,.k-focusable`,
+        INPUTSELECTOR_SVG_PARTS = INPUTSELECTOR_ICONSSELECTOR_SVG.split(",").map((selector) => selector + " *").join(","),
+        INPUTSELECTOR = `input,a,textarea,.k-multiselect-wrap,select,button,${INPUTSELECTOR_ICONSSELECTOR_FONT},${INPUTSELECTOR_ICONSSELECTOR_SVG},${INPUTSELECTOR_SVG_PARTS},.k-button>span,.k-button>span *,.k-button>img,label.k-checkbox-label.k-no-text,span.k-numeric-wrap,.k-focusable`,
         msie = kendo.support.browser.msie,
         supportEventDelegation = false,
         extend = $.extend;
@@ -69,6 +71,7 @@ var __meta__ = {
             if (multiple) {
                 if (dragToSelect) {
                     that.userEvents
+                        .bind("hold", that._hold.bind(that))
                         .bind("start", that._start.bind(that))
                         .bind("move", that._move.bind(that))
                         .bind("end", that._end.bind(that));
@@ -78,17 +81,19 @@ var __meta__ = {
             }
         },
 
-        events: [CHANGE, UNSELECT],
+        events: [CHANGE, CHANGING, UNSELECT],
 
         options: {
             name: "Selectable",
             filter: ">*",
             inputSelectors: INPUTSELECTOR,
             multiple: false,
+            holdToDrag: false,
             dragToSelect: true,
             relatedTarget: $.noop,
             ignoreOverlapped: false,
-            addIdToRanges: false
+            addIdToRanges: false,
+            toggleable: false,
         },
 
         _isElement: function(target) {
@@ -110,6 +115,7 @@ var __meta__ = {
         _tap: function(e) {
             var target = $(e.target),
                 that = this,
+                options = that.options,
                 ctrlKey = e.event.ctrlKey || e.event.metaKey,
                 multiple = that.options.multiple,
                 shiftKey = multiple && e.event.shiftKey,
@@ -124,6 +130,10 @@ var __meta__ = {
             }
 
             if (!this._allowSelection(e.event.target)) {
+                return;
+            }
+
+            if (that.trigger(CHANGING, { target: target, originalEvent: e.event })) {
                 return;
             }
 
@@ -149,10 +159,10 @@ var __meta__ = {
                     that._lastRange = target;
                 } else {
                     that._lastRange = null;
-                    if (selected && ctrlKey) {
+                    if (selected && (ctrlKey || options.toggleable)) {
                         that._unselect(target);
                         that._notify(CHANGE, e);
-                    } else if (ctrlKey) {
+                    } else if (ctrlKey || options.toggleable) {
                         that.value(target, e);
                         that._notify(CHANGE, e);
                     } else if (!selected || that.value().length > 1) {
@@ -166,6 +176,19 @@ var __meta__ = {
             }
         },
 
+        _hold: function(e) {
+            if (this.options.holdToDrag) {
+                // serves as a drag hint to indicate start of selection
+                this._tap(e);
+            }
+
+            this._activated = true;
+        },
+
+        _isActivated: function() {
+            return this.options.holdToDrag ? this._activated : true;
+        },
+
         _start: function(e) {
             var that = this,
                 target = $(e.target),
@@ -174,7 +197,12 @@ var __meta__ = {
                 currentElement,
                 ctrlKey = e.event.ctrlKey || e.event.metaKey;
 
-            if (!this._allowSelection(e.event.target)) {
+            if (!that._isActivated() || !this._allowSelection(e.event.target)) {
+                return;
+            }
+
+            if (that.trigger(CHANGING, { target: target, originalEvent: e.event })) {
+                that.userEvents.cancel();
                 return;
             }
 
@@ -226,6 +254,10 @@ var __meta__ = {
                     height: abs(e.y.initialDelta)
                 };
 
+            if (!that._isActivated()) {
+                return;
+            }
+
             that._marquee.css(position);
 
             that._invalidateSelectables(position, (e.event.ctrlKey || e.event.metaKey));
@@ -237,6 +269,12 @@ var __meta__ = {
             var that = this,
             rangeSelectedAttr = kendo.attr("range-selected"),
             uid = kendo.guid();
+
+            if (!that._isActivated()) {
+                return;
+            }
+
+            that._activated = false;
 
             that._marquee.remove();
 
@@ -546,4 +584,5 @@ var __meta__ = {
     kendo.ui.plugin(Selectable);
 
 })(window.kendo.jQuery);
+export default kendo;
 

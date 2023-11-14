@@ -22,6 +22,7 @@ To get up and running with the project:
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Integrate UI for ASP.NET Core in the project](#integrating-ui-for-aspnet-core)
+1. [Add a license file to your app](#adding-your-license-file)
 
 ## Meeting the Requirements
 
@@ -109,6 +110,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
+	> * As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
 	5.1 Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
 
@@ -116,7 +118,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
   5.3 After `jQuery`, copy and paste the scripts from this snippet. Make sure that the versions match `Kendo.Mvc.dll`.
 
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" />
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
       <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
       <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
 
@@ -147,6 +149,12 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
 
+## Adding Your License File
+
+Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Adding a License File]({% slug using_license_code %}) article.
+
 ## Next Steps
 
 * [Use data-bound widgets]({% slug jsonserialization_core %})
@@ -160,3 +168,5 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 * [Installing UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
 * [Installing UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
+* [Migrating from MVC to Core MVC](https://docs.telerik.com/aspnet-core/installation/migrating)
+* [MS - Upgrade from ASP.NET Framework to ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-7.0)

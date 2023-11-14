@@ -4,7 +4,7 @@ import path from 'path';
 import { baseOptions, root } from './rollup.config';
 
 const files = glob.sync('**/kendo.*.js', { cwd: root })
-    .filter((file) => !['angular.js', 'angular.min.js', 'jquery.js', 'jquery.min.js', 'jszip.js', 'jszip.min.js'].includes(file));
+    .filter((file) => !['jquery.js', 'jquery.min.js', 'jszip.js', 'jszip.min.js'].includes(file));
 
 const resolvedFiles = files.map(f => path.resolve(root, f));
 

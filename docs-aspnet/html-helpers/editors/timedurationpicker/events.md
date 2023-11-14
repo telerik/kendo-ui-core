@@ -8,7 +8,7 @@ position: 7
 
 # TimeDurationPicker Events
 
-You can subscribe to the `Open`, `Close`, and `Change` [TimeDurationPicker events](/api/Kendo.Mvc.UI.Fluent/TimeDurationPickerEventBuilder) and further customize the functionality of the component.
+You can subscribe to the `Open`, `Close`, and `Change` [TimeDurationPicker events](/api/kendo.mvc.ui.fluent/timedurationpickereventbuilder) and further customize the functionality of the component.
 
 For a complete example on basic TimeDurationPicker events, refer to the [demo on using the events of the TimeDurationPicker](https://demos.telerik.com/{{ site.platform }}/timedurationpicker/events).
 

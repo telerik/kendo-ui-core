@@ -29,11 +29,11 @@ Several {{ site.product }} components allow the user to input HTML or can displa
 
 ### Editor
 
-The [Editor]({% slug htmlhelpers_editor_aspnetcore %}) provides configuration options that help the developer prevent XSS attacks. By default, the Editor does not allow the execution of scripts inside its content area and also provides configuration options that allow the developer to implement custom sanitizing functionality. Read more on the XSS protection for the Editor in the [Preventing Cross-Site Scripting article](https://docs.telerik.com/kendo-ui/controls/editors/editor/preventing-xss).
+The [Editor]({% slug htmlhelpers_editor_aspnetcore %}) provides configuration options that help the developer prevent XSS attacks. By default, the Editor does not allow the execution of scripts inside its content area and also provides configuration options that allow the developer to implement custom sanitizing functionality. Read more on the XSS protection for the Editor in the [Preventing Cross-Site Scripting article](https://docs.telerik.com/kendo-ui/controls/editor/preventing-xss).
 
 ### Grid
 
-The Columns [`.Encoded()`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#encodedsystemboolean) configuration option of the [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) helper provides the possibility to display non-encoded HTML value, if set to `false`. {% if site.core %} For the [Grid TagHelper]({% slug htmlhelpers_grid_aspnetcore_overview %}), use the column `encoded` attribute.{% endif %} In such scenarios, it is important to sanitize the values on the server, to ensure only safe HTML is rendered.
+The Columns [`.Encoded()`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#encodedsystemboolean) configuration option of the [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) helper provides the possibility to display non-encoded HTML value, if set to `false`. {% if site.core %} for the [Grid TagHelper]({% slug htmlhelpers_grid_aspnetcore_overview %}), use the column `encoded` attribute.{% endif %} In such scenarios, it is important to sanitize the values on the server, to ensure only safe HTML is rendered.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
@@ -62,7 +62,7 @@ The Columns [`.Encoded()`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#encod
 
 ### Spreadsheet
 
-When the [`Html()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetRowCellBuilder#htmlsystemboolean) configuration option of the [Spreadsheet]({% slug htmlhelpers_spreadsheet_aspnetcore %}) is set to `true`, or the client-side [`html` method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/html) is used, the user is allowed to input HTML. {% if site.core %} When using the TagHelper implementaion of the component, enable the cell `html` attribute.{% endif %} In such scenarios, it is important to sanitize cell values on the server to ensure only safe html is passed.
+When the [`Html()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetrowcellbuilder#htmlsystemboolean) configuration option of the [spreadsheet]({% slug htmlhelpers_spreadsheet_aspnetcore %}) is set to `true`, or the client-side [`html` method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/html) is used, the user is allowed to input HTML. {% if site.core %} When using the TagHelper implementaion of the component, enable the cell `html` attribute.{% endif %} In such scenarios, it is important to sanitize cell values on the server to ensure only safe html is passed.
 
 ```HtmlHelper
     @(Html.Kendo().Spreadsheet()
@@ -120,7 +120,7 @@ When the [`Html()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetRowCellBuilder#html
 
 ### PanelBar
 
-The [PanelBar]({% slug htmlhelpers_panelbar_aspnetcore %}) [`Items`](/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder#itemssystemactionkendomvcuifluentpanelbaritemfactory) configuration option allows the developer to disable the encoding for a particular item. {% if site.core %} For the [PanelBar TagHelper]({% slug htmlhelpers_panelbar_aspnetcore %}), disable the `encoded` attribute in the `panelbar-item` tag.{% endif %}
+The [PanelBar]({% slug htmlhelpers_panelbar_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/panelbarbuilder#itemssystemactionkendomvcuifluentpanelbaritemfactory) configuration option allows the developer to disable the encoding for a particular item. {% if site.core %} for the [panelbar taghelper]({% slug htmlhelpers_panelbar_aspnetcore %}), disable the `encoded` attribute in the `panelbar-item` tag.{% endif %}
 
 ```HtmlHelper
     @(Html.Kendo().PanelBar()
@@ -149,7 +149,7 @@ In such scenarios, the use of HTML for the item text is allowed. The developer s
 
 ### Menu
 
-The [Menu]({% slug htmlhelpers_menu_aspnetcore %}) [`Items`](/api/Kendo.Mvc.UI.Fluent/MenuBuilder#itemssystemactionkendomvcuifluentmenuitemfactory) configuration option {% if site.core %}or the  `menu-item` tag {% endif %} allows the developer to disable the encoding for a menu item. 
+The [Menu]({% slug htmlhelpers_menu_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/menubuilder#itemssystemactionkendomvcuifluentmenuitemfactory) configuration option {% if site.core %}or the  `menu-item` tag {% endif %} allows the developer to disable the encoding for a menu item. 
 
 ```HtmlHelper
     @(Html.Kendo().Menu()
@@ -182,7 +182,7 @@ The usage of [Kendo Templates allows the developer to decide whether the display
 
 ### DataSourceRequest
 
-The [`DataSourceRequest`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI/DataSourceRequest) object contains information on how the data, requested by a the Kendo widget, should be paged, filtered, sorted, grouped. This information is further translated internally to System.Linq.Expressions.Expression class. In the end, the ToDataSourceResult executes a LINQ query based on the information contained DataSourceRequest object, passed to an action method. The DataSourceRequest object itself does not contain user-provided data and does not contain HTML.
+The [`DataSourceRequest`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui/datasourcerequest) object contains information on how the data, requested by a the Kendo widget, should be paged, filtered, sorted, grouped. This information is further translated internally to System.Linq.Expressions.Expression class. In the end, the ToDataSourceResult executes a LINQ query based on the information contained DataSourceRequest object, passed to an action method. The DataSourceRequest object itself does not contain user-provided data and does not contain HTML.
  
 ```
     //

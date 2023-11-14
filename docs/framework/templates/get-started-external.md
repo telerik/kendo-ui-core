@@ -55,7 +55,7 @@ After the completion of this guide, you will be able to create an external templ
 
 First, define an external template by setting up a script block in your HTML with the `text/x-kendo-template` type. 
 
-> The type of `text/x-kendo-template` is not specifically required. When using Visual Studio, you can maintain Syntax Highlighting by setting the type to `text/html`. Except for `text/javascript` if the type is not used as a template, you can use virtually any value to prevent the browser from rendering the block at runtime.
+> The type of `text/x-kendo-template` is not explicitly required. When using Visual Studio, you can maintain Syntax Highlighting by setting the type to `text/html`. Except for `text/javascript` if the type is not used as a template, you can use virtually any value to prevent the browser from rendering the block at runtime.
 
 ```
     <script type="text/x-kendo-template">

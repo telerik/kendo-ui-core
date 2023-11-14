@@ -7,7 +7,7 @@ slug: htmlhelper_datasourcefilter
 
 # Filters
 
-To request filtered data on initial load, configure the filters with the [`FilterDescriptorFactory`](/api/Kendo.Mvc.UI.Fluent/DataSourceFilterDescriptorFactory). The `ToDataSourceResult()` extension method will return only the filtered data in the response object.
+To request filtered data on initial load, configure the filters with the [`FilterDescriptorFactory`](/api/kendo.mvc.ui.fluent/datasourcefilterdescriptorfactory). the `ToDataSourceResult()` extension method will return only the filtered data in the response object.
 
 * The `Filter` method sets the initial filters.
 

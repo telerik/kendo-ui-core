@@ -33,9 +33,9 @@ How can I prevent the sorting of the column which uses a header template and has
 ## Solution
 
 {% if site.core %}
-1. To integrate a checkbox within a Grid column's header, use the [`.ClientHeaderTemplate()`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#clientheadertemplatesystemstring) configuration option.
+1. To integrate a checkbox within a Grid column's header, use the [`.ClientHeaderTemplate()`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clientheadertemplatesystemstring) configuration option.
 {% else %}
-1. To integrate a checkbox within a Grid column's header, use the [`.ClientHeaderColumnTemplate()`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#groupheadercolumntemplatesystemaction) configuration option.
+1. To integrate a checkbox within a Grid column's header, use the [`.ClientHeaderColumnTemplate()`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#groupheadercolumntemplatesystemaction) configuration option.
 {% endif %}
 1. To allow the selection and deselection of the checkbox only, handle the `click` event of the checkboxes.
 1. To prevent the sorting of the column upon clicking a checkbox, use the conventional [`.stopPropagation()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) method for the event object.
@@ -79,7 +79,34 @@ How can I prevent the sorting of the column which uses a header template and has
 
 For the complete implementation of the suggested approach, refer to this [Telerik REPL Example](https://netcorerepl.telerik.com/wmaDmAvR194a6niJ25).
 
+* [DataSource Sort API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ajaxdatasourcebuilder#sortsystemaction)
+
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [DataSource Sort API](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/AjaxDataSourceBuilder#sortsystemaction)
-* [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik REPL: Prevent Sorting with CheckBox in Header](https://netcorerepl.telerik.com/wmaDmAvR194a6niJ25)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

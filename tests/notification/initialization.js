@@ -107,7 +107,7 @@
 
             var defaultFunc = notification._getCompiled();
             var params = { typeIcon: "info", content: "foo", closeButton: false };
-            var defaultOutput = '<span title="info" class="k-svg-icon k-svg-i-info-circle"><svg viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M288 352h32v32H192v-32h32v-96h-32v-32h96v128zm0-224h-64v64h64v-64zm192 128c0 123.7-100.3 224-224 224S32 379.7 32 256 132.3 32 256 32s224 100.3 224 224zm-32 0c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"></path></svg></span><div class="k-notification-content">foo</div>';
+            var defaultOutput = '<span title="info" class="k-icon k-svg-icon k-svg-i-info-circle" aria-hidden="true"><svg viewBox="0 0 512 512" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M288 352h32v32H192v-32h32v-96h-32v-32h96v128zm0-224h-64v64h64v-64zm192 128c0 123.7-100.3 224-224 224S32 379.7 32 256 132.3 32 256 32s224 100.3 224 224zm-32 0c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"></path></svg></span><div class="k-notification-content">foo</div>';
             assert.equal(typeof defaultFunc, "function");
             assert.equal(defaultFunc(params), defaultOutput);
         });

@@ -1,16 +1,22 @@
 ---
-title:  Razor Page
-page_title: Configure a DataSource for the DropDownList for Remote Binding in Razor Page.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI DropDownList component for {{ site.framework }} in a Razor Page using CRUD Operations."
+title:  Razor Pages
+page_title: Razor Pages
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI DropDownList component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_dropdownlist_razorpage_aspnetcore
 position: 3
 ---
 
-# Razor Page
+# DropDownList in Razor Pages
 
-This article describes how to configure a Remote DataSource of a Telerik DropDownList in a RazorPage scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-In order to set up the DropDownList component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`). See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI DropDownList for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the DropDownList component in a Razor Pages scenario.
+
+For the complete project, refer to the [DropDownList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownList/DropDownListCrudOps.cshtml).
+
+In order to set up the DropDownList component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
 
 ```tab-HtmlHelper(csthml)        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

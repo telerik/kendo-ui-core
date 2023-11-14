@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Button exposes a [`Click()` event](/api/Kendo.Mvc.UI.Fluent/ButtonEventBuilder) that you can handle. 
+The Button exposes a [`Click()` event](/api/kendo.mvc.ui.fluent/buttoneventbuilder) that you can handle. 
 
 For a complete example on basic Button events, refer to the [demo on using the events of the Button](https://demos.telerik.com/{{ site.platform }}/button/events).
 

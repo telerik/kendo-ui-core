@@ -11,6 +11,10 @@ Represents the Kendo UI DateTimePicker widget. Inherits from [Widget](/api/javas
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the popups. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the popup will open and close instantly.
@@ -281,6 +285,19 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 > This functionality was added with the Q1 release of 2016.
 
+### endTime `Date`
+
+ If set, specifies the latest time the TimeView can show.
+
+#### Example - specify the start time for the TimeView
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            endTime: new Date(2023,1,3,18,30,0)
+        });
+    </script>
+
 ### fillMode `String`*(default: "solid")*
 
 Sets a value controlling how the color is applied. Can also be set to the following string values:
@@ -417,16 +434,33 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
         })
     </script>
 
-### interval `Number`*(default: 30)*
+### interval `Number|Object`*(default: "30" or "0" in modern picker)*
 
- Specifies the interval, between values in the popup list, in minutes.
+Specifies the interval between values in the popup list.
 
-#### Example - specify a time interval
+* When the [componentType](api/javascript/ui/datetimepicker/configuration/componenttype) is set to `classic`, the interval is specified in minutes (numeric values).
+* When the [componentType](api/javascript/ui/datetimepicker/configuration/componenttype) is set to `modern`, the interval is specified as an object of hours, minutes and seconds.
+
+#### Example - specify a time interval for the classic component type
 
     <input id="dateTimePicker" />
     <script>
     $("#dateTimePicker").kendoDateTimePicker({
         interval: 15
+    });
+    </script>
+
+#### Example - specify a time interval for the modern component type
+
+    <input id="dateTimePicker" />
+    <script>
+    $("#dateTimePicker").kendoDateTimePicker({
+        componentType: "modern",
+        interval: {
+            hour: 2,
+            minute: 10,
+            second: 15
+        }
     });
     </script>
 
@@ -474,6 +508,62 @@ Allows customization of the week column header text in the Calendar. Set the val
         }
      })
     </script>
+
+### messages.dateInput `Object`
+
+The messages that DateInput uses.  Use it to customize or localize the placeholders of each date/time part.
+
+#### Example - customize column menu messages
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages:{
+            dateInput:{
+                "year": "year",
+                "month": "month",
+                "day": "day",
+                "weekday": "day of the week",
+                "hour": "hours",
+                "minute": "minutes",
+                "second": "seconds",
+                "dayperiod": "AM/PM"
+            }
+        }
+    });
+    </script>
+
+### messages.dateInput.year `String` *(default: "year")*
+
+The placeholder for the years part.
+
+### messages.dateInput.month `String` *(default: "month")*
+
+The placeholder for the months part.
+
+### messages.dateInput.day `String` *(default: "day")*
+
+The placeholder for the day of the month part.
+
+### messages.dateInput.weekday `String` *(default: "day of the week")*
+
+The placeholder for the day of the week part.
+
+### messages.dateInput.hour `String` *(default: "hours")*
+
+The placeholder for the hours part.
+
+### messages.dateInput.minute `String` *(default: "minutes")*
+
+The placeholder for the minutes part.
+
+### messages.dateInput.second `String` *(default: "seconds")*
+
+The placeholder for the seconds part.
+
+### messages.dateInput.dayperiod `String` *(default: "AM/PM")*
+
+The placeholder for the AM/PM part.
 
 ### min `Date`*(default: Date(1900, 0, 1))*
 
@@ -756,6 +846,19 @@ Sets a value controlling size of the component. Can also be set to the following
     <script>
         $("#datetimepicker").kendoDateTimePicker({
             start: "year"
+        });
+    </script>
+
+### startTime `Date`
+
+ If set, specifies the earliest time the TimeView can show.
+
+#### Example - specify the start time for the TimeView
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            startTime: new Date(2023,1,3,8,30,0)
         });
     </script>
 
@@ -1056,7 +1159,7 @@ Changes the initial DateTimePicker configuration.
 
 The new configuration options.
 
-#### Example - update the minimum date that the calendar can show 
+#### Example - update the minimum date that the calendar can show
 
     <input id="datetimepicker" />
     <script>

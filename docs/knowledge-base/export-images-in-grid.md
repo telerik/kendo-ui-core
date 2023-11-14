@@ -34,7 +34,7 @@ The following example demonstrates how to customize the Excel document so that i
 
 ```dojo
 <base href="https://demos.telerik.com/kendo-ui/grid/basic-usage">
-<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 <div id="example">
     <div id="grid"></div>
 

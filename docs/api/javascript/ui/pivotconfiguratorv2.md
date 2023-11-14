@@ -888,6 +888,36 @@ The text of the "not equal" filter operator.
     });
     </script>
 
+
+### navigatable `Boolean` *(default: false)*
+
+If set to `true` the user could navigate the component using the keyboard navigation. By default keyboard navigation is disabled.
+
+#### Example - enable keyboard navigation
+
+    <div id="configurator"></div>
+    <script>
+    $("#configurator").kendoPivotConfiguratorV2({
+        filterable: true,
+        navigatable: true,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
+> Check [Keyboard navigation](https://demos.telerik.com/kendo-ui/pivotgridv2/keyboard-navigation) for a live demo.
+
 ### orientation `String` *(default: "vertical")*
 
 Defines a value indicating the type of layout that the configurator has. Possible values are:

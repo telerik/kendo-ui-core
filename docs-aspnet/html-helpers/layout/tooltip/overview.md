@@ -109,6 +109,7 @@ To reference an existing Tooltip instance, use the [`jQuery.data()`](https://api
 * [Basic Usage of the Tooltip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tooltip)
 {% if site.core %}
 * [Basic Usage of the Tooltip TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip/index)
+* [Tooltip in Razor Pages]({% slug htmlhelpers_tooltip_aspnetcore_razor_page %})
 {% endif %}
 * [Using the API of the Tooltip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tooltip/api)
 * [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)

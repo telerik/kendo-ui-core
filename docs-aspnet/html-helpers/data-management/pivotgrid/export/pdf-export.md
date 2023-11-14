@@ -15,7 +15,7 @@ By default, PDF export is enabled when `kendo.all.min.js`, `kendo.web.min.js`, o
 To initiate PDF export by using code, call the [`saveAsPDF`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid/methods/saveaspdf) method.
 
 For more information, refer to the following resources:
-* [Configuring the export to PDF](/api/Kendo.Mvc.UI.Fluent/PivotGridBuilder)
+* [Configuring the export to PDF](/api/kendo.mvc.ui.fluent/pivotgridbuilder)
 * [Exporting the PivotGrid to PDF (demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/pdf-export)
 
 To customize the appearance of the exported PDF file, refer to the articles on the [PDF output by the Kendo UI Drawing library](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/overview).

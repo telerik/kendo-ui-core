@@ -70,7 +70,7 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
                   e.sender.unbind("activate");
                   e.item.find(".custom-class").remove();
                   e.item.find('.k-filter-item').find('[role="menuitemcheckbox"]').remove();
-                  $("<span class='custom-class'><label class='k-link' style='padding: 10px 40px 10px 0px;'><input class='chbx' type='checkbox' checked onclick='checkAllMenu(this)'/>Select All</label></span>").prependTo(e.item.find(".k-animation-container"));
+                    $("<span class='custom-class'><label class='k-link' style='padding: 10px 40px 10px 0px;'><input class='chbx k-checkbox k-checkbox-md k-rounded-md' type='checkbox' checked onclick='checkAllMenu(this)'/>Select All</label></span>").prependTo(e.item.find(".k-animation-container"));
                 }
               });
             },
@@ -120,7 +120,7 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
 
         function checkAllMenu(el) {
           var checked = el.checked;
-          $(el).parents(".custom-class").siblings("ul").find("li").each(function (e) {
+           $(el).parents(".custom-class").siblings(".k-child-animation-container").find("li").each(function (e) {
             if (!$(this).hasClass("custom-class") && $(this).find("input")[0].checked !== checked) {
               $(this).find("input").click();
               $(this).removeClass("k-hover");

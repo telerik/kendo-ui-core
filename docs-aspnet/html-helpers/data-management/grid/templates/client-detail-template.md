@@ -23,7 +23,7 @@ To configure the client detail template:
 To configure the Grid for {{ site.framework }} to display additional details of the **Product** entity from the **Northwind** database:
 
 {% if site.mvc %}
-1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridClientDetailTemplate`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridClientDetailTemplate`. If you have chosen not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
     ![{{ site.product_short }} A new entity data model](../images/grid-entity-data-model.png)
@@ -32,7 +32,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
     ![{{ site.product_short }} Choosing the connection](../images/grid-entity-data-model.png)
 
-1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
+1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as set by default. Click **Finish**.
 
     ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
 {% endif %}
@@ -115,7 +115,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
     ```
     {% endif %}
 
-1. Define the client template using the [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
+1. Define the client template using the [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the data item&mdash;Product entity&mdash; bound to the Grid.
 
     > Each `#` symbol that is not part of a template expression&mdash;`#: #`, `# #` or `#= #`&mdash;must be escaped&mdash;`\\#`.
 
@@ -183,7 +183,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 To configure the Grid for {{ site.framework }} to display all **Product** entities that are available per the **Category** entity from the **Northwind** database:
 
 {% if site.mvc %}
-1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridClientHierarchy`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridClientHierarchy`. If you have chosen not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
     ![{{ site.product_short }} A new entity data model](../images/grid-entity-data-model.png)
@@ -192,7 +192,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
 
     ![{{ site.product_short }} Choosing the connection](../images/grid-entity-data-model.png)
 
-1. Choose the **Products** and **Categories** tables from **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
+1. Choose the **Products** and **Categories** tables from **Which database objects do you want to include in your model?**. Leave all other options as set by default. Click **Finish**.
 {% endif %}
 
 1. Open `HomeController.cs` and add a new action method which will return the **Category** entities as JSON. The Grid makes Ajax requests to this action.
@@ -294,7 +294,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
     ```
     {% endif %}
 
-1. Define the client template using [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
+1. Define the client template using [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the **Category** entity bound to the Grid. The template itself contains another Grid bound to the `Products_Read` action.
 
     > * Always call the `ToClientTemplate` method when using {{ site.product }} helpers in a client template.
     > * Escape the `#` characters used for a template expression when using a column `ClientTemplate` in a detail template, so that the expression is evaluated in the correct context.

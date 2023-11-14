@@ -30,9 +30,11 @@ With regard to its PDF export, the Grid enables you to:
 To enable PDF export:
 
 1. Include the corresponding toolbar command and set the export settings.
-    * [Toolbar configuration](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory#pdf)
-    * [PDF export configuration](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }})
+    * [Toolbar configuration](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#pdf)
+    * [PDF export configuration](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }})
 1. Include the Pako Deflate library in the page to enable compression.
+
+> Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
 
 To initiate PDF export, press the **Toolbar** button or use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) and call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveaspdf) method.
 
@@ -43,7 +45,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ```HtmlHelper
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     @(Html.Kendo().Grid<.ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Pdf())
@@ -59,7 +61,7 @@ The following example demonstrates how to enable the PDF export functionality of
 {% if site.core %}
 ```TagHelper
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2022.1.301/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <kendo-grid name="grid">
         <toolbar>
@@ -77,7 +79,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ## Exporting All Pages
 
-By default, the Grid exports only the current page of data. To export all pages, use the [`AllPages()`](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }}#allpagessystemboolean) method.
+By default, the Grid exports only the current page of data. To export all pages, use the [`AllPages()`](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }}#allpagessystemboolean) method.
 
 > When the `AllPages()` method is used with and server paging (Ajax binding default), the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use server-side export.
 
@@ -157,7 +159,7 @@ You can specify a paper size that will be applied to the whole document. The con
 
 ## Specifying Page Templates
 
-The Grid allows you to specify a page [`TemplateId`](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }}#templateidsystemstring) and use the template to position the content, add headers, footers, and other elements. The styling of the exported document is done by using CSS. During the PDF export, the template is positioned in a container with the specified paper size.
+The Grid allows you to specify a page [`TemplateId`](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }}#templateidsystemstring) and use the template to position the content, add headers, footers, and other elements. The styling of the exported document is done by using CSS. During the PDF export, the template is positioned in a container with the specified paper size.
 
 > To use a page template, you have to set the paper size.
 
@@ -290,7 +292,7 @@ The Grid supports the following page template variables:
 
 ## Using Server Proxy
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy](https://docs.telerik.com/kendo-ui/framework/saving-files). To specify the server proxy URL, use the [`ProxyURL()`](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }}#proxyurlsystemstring) method.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy](https://docs.telerik.com/kendo-ui/framework/saving-files). To specify the server proxy URL, use the [`ProxyURL()`](/api/kendo.mvc.ui.fluent/{{ pdfbuilder }}#proxyurlsystemstring) method.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<.ProductViewModel>()
@@ -392,15 +394,15 @@ The following example demonstrates how to handle custom fonts.
         // NOTE: Only required if the Kendo UI stylesheets are loaded
         // from a different origin, for example, kendo.cdn.telerik.com.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     @(Html.Kendo().Grid<.ProductViewModel>()
         .Name("grid")
@@ -432,15 +434,15 @@ The following example demonstrates how to handle custom fonts.
         // NOTE: Only required if the Kendo UI stylesheets are loaded
         // from a different origin, for example, kendo.cdn.telerik.com.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}    /styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <kendo-grid name="grid">
         <toolbar>

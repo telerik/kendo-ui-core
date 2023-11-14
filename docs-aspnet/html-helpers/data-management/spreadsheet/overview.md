@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI Spreadsheet component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/spreadsheet, /helpers/data-management/spreadsheet/overview
 slug: htmlhelpers_spreadsheet_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Spreadsheet Overview
@@ -972,109 +972,29 @@ The following example demonstrates the basic configuration for the Spreadsheet c
 
 ## Functionality and Features
 
-* [Comments]({% slug htmlhelpers_spreadsheet_comments_aspnetcore %})
-* [Custom functions]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %})
-* [Cell formatting]({% slug htmlhelpers_spreadsheet_formatting_aspnetcore %})
-* [Images]({% slug htmlhelpers_spreadsheet_images_aspnetcore %})
-* [Import and export of data]({% slug htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore %})
-* [End user guide]({% slug htmlhelpers_spreadsheet_user_guide_aspnetcore %})
-* [Sorting and Filtering]({% slug htmlhelpers_spreadsheet_sorting_filtering_aspnetcore %})
-* [Disabled Cells]({% slug htmlhelpers_spreadsheet_disabled_cells_aspnetcore %})
-* [Validation]({% slug htmlhelpers_spreadsheet_validation_aspnetcore %})
-* [Custom Cell Editors]({% slug htmlhelpers_spreadsheet_custom_cell_editors_aspnetcore %})
+| Feature | Description |
+|---------|-------------|
+| [Comments]({% slug htmlhelpers_spreadsheet_comments_aspnetcore %}) | The Spreadsheet allows the user to insert comments within each cell. |
+| [Custom functions]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %}) | You can customize the behavior of the Spreadsheet with formulas. |
+| [Cell formatting]({% slug htmlhelpers_spreadsheet_formatting_aspnetcore %}) | The Spreadsheet supports cell-formatting options such as formatting of strings, text, numbers, dates, and time. |
+| [Images]({% slug htmlhelpers_spreadsheet_images_aspnetcore %}) | The Spreadsheet supports the placing of images in its sheets. |
+| [Import and export of data]({% slug htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore %}) | The Spreadsheet can consume data from the server-side and then export an Excel file. |
+| [End user guide]({% slug htmlhelpers_spreadsheet_user_guide_aspnetcore %}) | You can provide ready-made comprehensive guides about the Spreadsheet to your users. |
+| [Sorting and Filtering]({% slug htmlhelpers_spreadsheet_sorting_filtering_aspnetcore %}) | The Spreadsheet for ASP.NET Core allows you to set predefined sort and filter settings. |
+| [Disabled Cells]({% slug htmlhelpers_spreadsheet_disabled_cells_aspnetcore %}) | You can control the enabled and disabled state of the cells. |
+| [Validation]({% slug htmlhelpers_spreadsheet_validation_aspnetcore %}) | The Spreadsheet allows you to validate if the user-provided input meets the expected requirements. |
+| [Custom Cell Editors]({% slug htmlhelpers_spreadsheet_custom_cell_editors_aspnetcore %}) | The component supports custom cell editors that aids users enter correct values with ease.  |
 
-## Events
+## Next Steps
 
-You can subscribe to all Spreadsheet [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#events). For a complete example on basic Spreadsheet events, refer to the [demo on using the events of the Spreadsheet](https://demos.telerik.com/{{ site.platform }}/spreadsheet/events).
-
-The following example demonstrates how to subscribe to the `changing` and `change` events.
-
-```HtmlHelper
-    @(Html.Kendo().Spreadsheet()
-        .Name("spreadsheet")
-        .Events(events => events
-            .Changing("onChanging")
-            .Change("onChange")
-        )
-        .Sheets(sheets =>
-        {
-            sheets.Add()
-                .Name("Sheet1")
-                .Columns(columns =>
-                {
-                    columns.Add().Width(115);
-                })
-                .Rows(rows =>
-                {
-                    rows.Add().Height(25).Cells(cells =>
-                    {
-                        cells.Add()
-                            .Value("ID")
-                            .TextAlign(SpreadsheetTextAlign.Center);
-                    });
-                });
-        })
-    )
-
-    <script>
-        function onChanging(e) {
-            // Handle the changing event.
-        }
-
-        function onChange(e) {
-            // Handle the change event.
-        }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-spreadsheet name="spreadsheet" on-changing="onChanging" on-change="onChange">
-        <sheets>
-            <sheet name="Sheet1">
-                <columns>
-                    <sheet-column width="115">
-                    </sheet-column>
-                </columns>
-                <rows>
-                    <sheet-row height="25">
-                        <cells>
-                            <cell value="ID" text-align="SpreadsheetTextAlign.Center">
-                            </cell>
-                        </cells>
-                    </sheet-row>
-                </rows>
-            </sheet>
-        </sheets>
-    </kendo-spreadsheet>
-
-    <script>
-        function onChanging(e) {
-            // Handle the changing event.
-        }
-
-        function onChange(e) {
-            // Handle the change event.
-        }
-    </script>
-```
-{% endif %}
-
-## Referencing Existing Instances
-
-To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
-
-    // Place the following after the Spreadsheet for {{ site.framework }} declaration.
-    <script>
-        $(document).ready(function() {
-            // The Name() of the Spreadsheet is used to get its client-side instance.
-            var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-        });
-    </script>
-
-## See Also
-
+* [Getting Started with the Spreadsheet]({% slug spreadsheet_getting_started %})
 * [Basic Usage of the Spreadsheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/index)
 {% if site.core %}
 * [Basic Usage of the Spreadsheet TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
 {% endif %}
+
+## See Also
+
 * [Server-Side API](/api/spreadsheet)
+* [Knowledge Base Section](/knowledge-base)
+

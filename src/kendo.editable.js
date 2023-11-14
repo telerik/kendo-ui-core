@@ -1,4 +1,6 @@
-import "./kendo.checkbox.js";
+// The current file development is no longer in active phase but the code will be kept as is.
+// Please be advised that we have discontinued the sync for this file with the commercial version of Kendo UI for jQuery.
+// To take advantage of new features please visit (https://www.telerik.com/kendo-jquery-ui) and consider upgrading to a commercial license.import "./kendo.checkbox.js";
 import "./kendo.dropdownlist.js";
 import "./kendo.datepicker.js";
 import "./kendo.numerictextbox.js";
@@ -13,7 +15,6 @@ var __meta__ = {
     depends: [ "checkbox", "dropdownlist", "datepicker", "numerictextbox", "validator", "binder", "icons" ],
     hidden: true
 };
-
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -41,12 +42,12 @@ var __meta__ = {
     }
 
     function convertToValueBinding(container) {
-        container.find(":input:not(:button, .k-combobox .k-input, .k-checkbox-list .k-checkbox, .k-radio-list .k-radio, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file])").each(function() {
+        container.find(":input:not(:button, .k-combobox .k-input, .k-checkbox-list .k-checkbox, .k-radio-list .k-radio, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file]), [" + kendo.attr("role") + "=radiogroup]").each(function() {
             var bindAttr = kendo.attr("bind"),
                 binding = this.getAttribute(bindAttr) || "",
                 bindingName = this.type === "checkbox" || this.type === "radio" ? "checked:" : "value:",
                 isAntiForgeryToken = this.getAttribute("name") === Editable.antiForgeryTokenName,
-                fieldName = this.name;
+                fieldName = this.attributes.name && this.attributes.name.value;
 
             if (binding.indexOf(bindingName) === -1 && fieldName && !isAntiForgeryToken) {
                 binding += (binding.length ? "," : "") + bindingName + fieldName;
@@ -300,8 +301,6 @@ var __meta__ = {
             var that = this;
 
             if (options.target) {
-                options.$angular = options.target.options.$angular;
-
                 if (options.target.pane) {
                     that._isMobile = true;
                 }
@@ -412,10 +411,6 @@ var __meta__ = {
         destroy: function() {
             var that = this;
 
-            that.angular("cleanup", function() {
-                return { elements: that.element };
-            });
-
             Widget.fn.destroy.call(that);
 
             that.options.model.unbind("set", that._validateProxy);
@@ -462,15 +457,6 @@ var __meta__ = {
                  addValidationRules(modelField, rules);
 
                  that.editor(field, modelField);
-            }
-
-            if (that.options.target) {
-                that.angular("compile", function() {
-                    return {
-                        elements: container,
-                        data: container.map(function() { return { dataItem: model }; })
-                    };
-                });
             }
 
             if (!length) {

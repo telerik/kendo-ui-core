@@ -25,7 +25,7 @@ component: grid
 
 ## Description
 
-I want to create a shopping list by using the selected Grid rows and a Kendo UI ListBox. How can I achieve this functionality?
+How can I create a shopping list by using the selected Grid rows and a Kendo UI for jQuery ListBox?
 
 > The following example obtains the selected rows of the current page only.
 
@@ -37,7 +37,7 @@ To get the `dataItem` for each selected row:
 1. Loop through the rows by using the [`each`](https://api.jquery.com/each/) jQuery method.
 1. Get every row data by using the [`dataItem`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
 1. Push the `dataItem` to an array.
-1. Add the selected items to the ListBox widget by using the [`data`](/api/javascript/data/datasource/methods/data) method.
+1. Add the selected items to the ListBox component by using the [`data`](/api/javascript/data/datasource/methods/data) method.
 
 ```dojo
     <div id="example">
@@ -123,7 +123,7 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 1. Get the `id` field values of the selected rows through the [`selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/selectedkeynames) method.
 2. Traverse the Grid data to match the data items holding these `id` values.
 3. Push the `dataItems` of the selected rows to an array.
-4. Add the selected items to the ListBox widget by using the [`data`](/api/javascript/data/datasource/methods/data) method.
+4. Add the selected items to the ListBox component by using the [`data`](/api/javascript/data/datasource/methods/data) method.
 
 ```dojo
     <div id="example">

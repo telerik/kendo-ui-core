@@ -87,7 +87,7 @@ var __meta__ = {
             options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || document.body);
 
             that.element.hide()
-                .addClass("k-popup k-group k-reset")
+                .addClass("k-popup")
                 .toggleClass("k-rtl", !!options.isRtl)
                 .appendTo(options.appendTo)
                 .attr("aria-hidden", true)
@@ -237,6 +237,7 @@ var __meta__ = {
         open: function(x, y) {
             var that = this,
                 fixed = { isFixed: !isNaN(parseInt(y,10)), x: x, y: y },
+                shouldCorrectWidth = that._shouldCorrectWidth,
                 element = that.element,
                 options = that.options,
                 animation, wrapper,
@@ -269,7 +270,7 @@ var __meta__ = {
                     that._toggleResize(true);
                 }
 
-                that.wrapper = wrapper = kendo.wrap(element, options.autosize)
+                that.wrapper = wrapper = kendo.wrap(element, options.autosize, options._resizeOnWrap, shouldCorrectWidth)
                     .css({
                         overflow: HIDDEN,
                         display: "block",
@@ -298,7 +299,7 @@ var __meta__ = {
                 that.flipped = that._position(fixed);
                 animation = that._openAnimation();
 
-                if (options.anchor != BODY) {
+                if (options.anchor != BODY && !that.element.hasClass("k-tooltip")) {
                     that._showDirClass(animation);
                 }
 
@@ -757,7 +758,7 @@ var __meta__ = {
     var tabKeyTrapNS = "kendoTabKeyTrap";
     var focusableNodesSelector = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex], *[contenteditable]";
     var TabKeyTrap = Class.extend({
-        init: function(element) {
+        init: function(element, options) {
             this.element = $(element);
             this.element.autoApplyNS(tabKeyTrapNS);
         },
@@ -788,7 +789,9 @@ var __meta__ = {
             var sortedElements = this._sortFocusableElements(elements);
             var next = this._nextFocusable(e, sortedElements);
 
-            this._focus(next);
+            if (next) {
+                this._focus(next);
+            }
 
             e.preventDefault();
         },
@@ -855,5 +858,6 @@ var __meta__ = {
     });
     ui.Popup.TabKeyTrap = TabKeyTrap;
 })(window.kendo.jQuery);
+export default kendo;
 
 

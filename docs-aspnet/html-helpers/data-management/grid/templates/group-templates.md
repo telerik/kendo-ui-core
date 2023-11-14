@@ -64,7 +64,7 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 {% else %}
 ## Limitations
 
-Тhe Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates which makes the usage of `.ServerOperations(true)` in this case incompatible.
+The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates which makes the usage of `.ServerOperations(true)` in this case incompatible.
 {% endif %}
 
 ## See Also

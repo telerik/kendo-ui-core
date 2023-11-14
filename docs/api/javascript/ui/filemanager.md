@@ -381,6 +381,8 @@ Configures the items collection of the toolbar.
         });
     </script>
 
+Apart from the built-in tools, the FileManager fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+
 ### toolbar.items.type `String`
 Specifies the type of the button.
 
@@ -1328,9 +1330,10 @@ The command arguments.
             }
         });
 
-        var fileManager = $("#fileManager").data("kendoFileManager");
+    	var fileManager = $("#fileManager").data("kendoFileManager");
 
-      	fileManager.executeCommand("CreateFolderCommand");
+   	fileManager.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } });
+    	$("#details-toggle").getKendoSwitch().toggle();
     </script>
 
 ### getSelected

@@ -139,15 +139,15 @@ The following example demonstrates the outcome of the suggested approach.
     // NOTE: Only required if the Kendo UI stylesheets are loaded
     // from a different origin, e.g. cdn.kendostatic.com
     kendo.pdf.defineFont({
-      "DejaVu Sans"             : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans.ttf",
-      "DejaVu Sans|Bold"        : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-      "DejaVu Sans|Bold|Italic" : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-      "DejaVu Sans|Italic"      : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+      "DejaVu Sans"             : "//kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
+      "DejaVu Sans|Bold"        : "//kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+      "DejaVu Sans|Bold|Italic" : "//kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+      "DejaVu Sans|Italic"      : "//kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
     });
   </script>
 
   <!-- Load Pako ZLIB library to enable PDF compression -->
-  <script src="//kendo.cdn.telerik.com/2016.1.112/js/pako_deflate.min.js"></script>
+  <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
   <script>
     $("#grid").kendoGrid({
@@ -224,7 +224,7 @@ The following example demonstrates the outcome of the suggested approach.
 
 ## See Also
 
-* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/data-management/grid/export/pdf-export)
+* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/grid/export/pdf-export)
 * [Change Column Widths during PDF Export]({% slug grid-pdf-export-change-column-widths %})
 * [Exclude Certain Columns from the Exported PDF File]({% slug grid-exclude-columns-from-exported-pdf %})
 * [Show hidden columns during PDF Export]({% slug grid-pdf-show-hidden-columns %})

@@ -14,12 +14,18 @@ var __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
+        mediaQuery = kendo.mediaQuery,
+        support = kendo.support,
+        encode = kendo.htmlEncode,
         template = kendo.template,
         FIRST = "caret-alt-to-left",
         LAST = "caret-alt-to-right",
         PREV = "caret-alt-left",
         NEXT = "caret-alt-right",
-        SIZE = "k-pager-mobile-md k-pager-mobile-sm",
+        FIRST_CONST = "caret-alt-to-left",
+        LAST_CONST = "caret-alt-to-right",
+        PREV_CONST = "caret-alt-left",
+        NEXT_CONST = "caret-alt-right",
         FOCUSABLE = ":kendoFocusable:not([tabindex='-1'])",
         CHANGE = "change",
         NS = ".kendoPager",
@@ -29,7 +35,7 @@ var __meta__ = {
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-button-flat-base k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon(className)}</button>`;
+        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-button-flat-base k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
 
     function button(options) {
         return options.template( {
@@ -90,9 +96,10 @@ var __meta__ = {
     var Pager = Widget.extend( {
         init: function(element, options) {
             var that = this, page, totalPages;
-            var sizeClassName = null;
             var buttonSize = "";
             var dropDownClasses = "";
+            var width;
+            var info;
 
             Widget.fn.init.call(that, element, options);
 
@@ -111,6 +118,19 @@ var __meta__ = {
             that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
 
             isRtl = kendo.support.isRtl(element);
+
+            if (isRtl) {
+                FIRST = LAST_CONST;
+                LAST = FIRST_CONST;
+                PREV = NEXT_CONST;
+                NEXT = PREV_CONST;
+            } else {
+                FIRST = FIRST_CONST;
+                LAST = LAST_CONST;
+                PREV = PREV_CONST;
+                NEXT = NEXT_CONST;
+            }
+
             if (options.size) {
                 buttonSize = kendo.getValidCssClass("k-button-", "size", options.size);
                 dropDownClasses = "k-rounded-md " + kendo.getValidCssClass("k-picker-", "size", options.size);
@@ -121,34 +141,35 @@ var __meta__ = {
             }
             that._template();
 
-            if (options.previousNext) {
-                if (!that.element.find(FIRST).length) {
-                    that.element.append(icon(FIRST, options.messages.first, "k-pager-first", that._id, buttonSize));
+            if (options.previousNext || options.numeric) {
+                that._numericWrap = that.element.find(".k-pager-numbers-wrap");
 
-                    first(that.element, page, totalPages);
+                if (that._numericWrap.length === 0) {
+                    that._numericWrap = $("<div class='k-pager-numbers-wrap' />").appendTo(that.element);
+                }
+            }
+
+
+            if (options.previousNext) {
+                if (!that._numericWrap.find("[class*='-i-" + FIRST + "']").length) {
+                    that._numericWrap.append(icon(FIRST, options.messages.first, "k-pager-first", that._id, buttonSize));
+
+                    first(that._numericWrap, page, totalPages);
                 }
 
-                if (!that.element.find(PREV).length) {
-                    that.element.append(icon(PREV, options.messages.previous, null, that._id, buttonSize));
+                if (!that._numericWrap.find("[class*='-i-" + PREV + "']").length) {
+                    that._numericWrap.append(icon(PREV, options.messages.previous, null, that._id, buttonSize));
 
-                    prev(that.element, page, totalPages);
+                    prev(that._numericWrap, page, totalPages);
                 }
             }
 
             if (options.numeric) {
-                if (!that._numericWrap) {
-                    that._numericWrap = that.element.find(".k-pager-numbers-wrap");
-
-                    if (that._numericWrap.length === 0) {
-                        that._numericWrap = $("<div class='k-pager-numbers-wrap' />").appendTo(that.element);
-                    }
-                }
-
                 if (!that._numericSelect) {
                     that._numericSelect = that._numericWrap.find(".k-dropdown");
 
                     if (that._numericSelect.length === 0) {
-                       that._numericSelect = $("<select aria-label='" + that.options.messages.numbersSelectLabel + "' class='k-dropdown k-picker k-dropdown-list " + dropDownClasses + "' />").appendTo(that._numericWrap);
+                       that._numericSelect = $("<select aria-label='" + that.options.messages.numbersSelectLabel + "' class='k-dropdown k-picker k-picker-solid k-dropdown-list " + dropDownClasses + "' />").appendTo(that._numericWrap);
                     }
                 }
 
@@ -169,9 +190,9 @@ var __meta__ = {
             if (options.input) {
                 if (!that.element.find(".k-pager-input").length) {
                    that.element.append('<span class="k-pager-input k-label">' +
-                       options.messages.page +
+                        encode(options.messages.page) +
                        '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" /></span>' +
-                       kendo.format(options.messages.of, totalPages) +
+                       encode(kendo.format(options.messages.of, totalPages)) +
                        '</span>');
                 }
 
@@ -179,16 +200,16 @@ var __meta__ = {
             }
 
             if (options.previousNext) {
-                if (!that.element.find(NEXT).length) {
-                    that.element.append(icon(NEXT, options.messages.next, null, that._id, buttonSize));
+                if (!that._numericWrap.find("[class*='-i-" + NEXT + "']").length) {
+                    that._numericWrap.append(icon(NEXT, options.messages.next, null, that._id, buttonSize));
 
-                    next(that.element, page, totalPages);
+                    next(that._numericWrap, page, totalPages);
                 }
 
-                if (!that.element.find(LAST).length) {
-                    that.element.append(icon(LAST, options.messages.last, "k-pager-last", that._id, buttonSize));
+                if (!that._numericWrap.find("[class*='-i-" + LAST + "']").length) {
+                    that._numericWrap.append(icon(LAST, options.messages.last, "k-pager-last", that._id, buttonSize));
 
-                    last(that.element, page, totalPages);
+                    last(that._numericWrap, page, totalPages);
                 }
             }
 
@@ -197,13 +218,13 @@ var __meta__ = {
                     var pageSizes = options.pageSizes.length ? options.pageSizes : ["all", 5, 10, 20];
                     var pageItems = $.map(pageSizes, function(size) {
                         if (size.toLowerCase && size.toLowerCase() === "all") {
-                            return "<option value='all'>" + options.messages.allPages + "</option>";
+                            return "<option value='all'>" + encode(options.messages.allPages) + "</option>";
                         }
 
                         return "<option>" + size + "</option>";
                     });
 
-                    $('<span class="k-pager-sizes k-label"><select></select>' + options.messages.itemsPerPage + "</span>")
+                    $('<span class="k-pager-sizes"><select></select><span>' + encode(options.messages.itemsPerPage) + "</span></span>")
                         .appendTo(that.element)
                         .find("select").html(pageItems.join("")).end()
                         .appendTo(that.element);
@@ -238,6 +259,10 @@ var __meta__ = {
                 .on(CHANGE + NS , "select.k-dropdown", that._numericSelectChange.bind(that))
                 .addClass("k-pager");
 
+            if (options.size) {
+                that.element.addClass(kendo.getValidCssClass("k-pager-", "size", options.size));
+            }
+
             if (options.autoBind) {
                 that.refresh();
             }
@@ -245,17 +270,29 @@ var __meta__ = {
             that._resizeHandler = that.resize.bind(that, true);
             $(window).on("resize" + NS, that._resizeHandler);
 
-            sizeClassName = that._getWidthSizeClass(that.element.outerWidth());
-
-            if (sizeClassName) {
-                that.element.addClass(sizeClassName);
-            }
-
-            if (options.size) {
-                that.element.addClass(kendo.getValidCssClass("k-pager-", "size", options.size));
-            }
-
             that._navigatable();
+
+            if (that.options.responsive) {
+                width = that.element.outerWidth();
+                info = that.element.find(".k-pager-info");
+                if (width <= 480) {
+                    info.hide();
+                    that.element.find(".k-pager-sizes").children().hide();
+                    if (options.numeric) {
+                        that._numericSelect.show();
+                        that.list.hide();
+                    }
+                } else {
+                    if (width <= 600) {
+                        info.hide();
+                    }
+                    if (options.numeric) {
+                        that._numericSelect.hide();
+                    }
+                }
+            } else if (that._numericSelect) {
+                that._numericSelect.hide();
+            }
 
             kendo.notify(that);
         },
@@ -281,9 +318,9 @@ var __meta__ = {
         options: {
             name: "Pager",
             ARIATemplate: ({ page, totalPages }) => `Page navigation, page ${page} of ${totalPages}`,
-            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-flat-primary k-selected">${text}</span>`,
-            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-flat-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}>${text}</button>`,
-            numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${text}</option>`,
+            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-flat-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
+            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-flat-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
+            numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${encode(text)}</option>`,
             buttonCount: 10,
             autoBind: true,
             numeric: true,
@@ -334,17 +371,179 @@ var __meta__ = {
             });
         },
 
-        _resize: function(size) {
-            if (size.width) {
-                var sizeClassName = this._getWidthSizeClass(size.width);
-                var el = this.element;
+        _adaptiveStep: function(step, hide, availableWidth) {
+            var that = this;
+            switch (step) {
+                case 0:
+                    return that._toggleButtons(hide, availableWidth);
+                case 1:
+                    return that._toggleRefresh(hide, availableWidth);
+                case 2:
+                    return that._togglePagerInfo(hide, availableWidth);
+                case 3:
+                    return that._toggleInputSizesLabel(hide, availableWidth);
+                case 4:
+                    return that._togglePageSizesLabel(hide, availableWidth);
+                case 5:
+                    return that._togglePageSizesDropDown(hide, availableWidth);
+                case 6:
+                    return that._togglePageInputs(hide, availableWidth);
+                default:
+                 break;
+              }
+        },
 
-                if (!sizeClassName) {
-                    el.removeClass(SIZE);
-                } else if (!el.hasClass(sizeClassName)) {
-                    el.removeClass(SIZE);
-                    el.addClass(sizeClassName);
+        _calculateNeededWidth: function() {
+            var sumWidth = 0;
+            var gap = parseInt(this.element.css("gap"));
+            this.element.children().each(function() {
+                const element = $(this);
+                const pagerInfo = element.hasClass("k-pager-info");
+                if (pagerInfo) {
+                    element.removeClass("k-pager-info k-label");
                 }
+                sumWidth += element.is(":visible") ? element.width() : 0;
+                sumWidth += gap;
+                if (pagerInfo) {
+                    element.addClass("k-pager-info k-label");
+                }
+            });
+            return sumWidth;
+        },
+
+        _resize: function(size) {
+            var that = this;
+            if (!that.element.is(":visible") || !that._lastWidth || !that.options.responsive) {
+                return;
+            }
+
+            if (that._lastWidth < size.width) {
+                for (let i = 6; i >= 0; i--) {
+                    const availableWidth = that._calculateNeededWidth();
+                    if (size.width < availableWidth) {
+                        break;
+                    }
+                    const shouldBreak = that._adaptiveStep(i, false, size.width - availableWidth);
+                    if (shouldBreak) {
+                        break;
+                    }
+                }
+            } else if (that._lastWidth > size.width) {
+                for (let i = 0; i < 7; i++) {
+                    if (size.width > that._calculateNeededWidth()) {
+                        break;
+                    }
+                    that._adaptiveStep(i, true);
+                }
+            }
+            that._lastWidth = size.width;
+        },
+
+        _toggleButtons: function(hide, availableWidth) {
+            if (!this._numericWrap || !this.list || !this._numericSelect) {
+                return;
+            }
+
+            if (hide) {
+                this._numericSelect.show();
+                this.list.hide();
+            } else if (availableWidth && ((this.list.width() - this._numericSelect.width()) < availableWidth)) {
+                this._numericSelect.hide();
+                this.list.show();
+            }
+        },
+
+        _toggleRefresh: function(hide, availableWidth) {
+            if (!this.options.refresh) {
+                return;
+            }
+            const refreshContainer = this.element.find(".k-pager-refresh");
+
+            if (hide) {
+                refreshContainer.hide();
+            } else if (availableWidth && (refreshContainer.width() < availableWidth)) {
+                refreshContainer.show();
+            } else {
+                return true;
+            }
+        },
+
+        _togglePagerInfo: function(hide, availableWidth) {
+            if (!this.options.info) {
+                return;
+            }
+            const infoBox = this.element.find(".k-pager-info");
+            if (hide) {
+                infoBox.hide();
+            } else if (availableWidth && (infoBox.width() < availableWidth)) {
+                infoBox.show();
+            } else if (!infoBox.is(":visible")) {
+                return true;
+            }
+        },
+
+        _toggleInputSizesLabel: function(hide, availableWidth) {
+            if (!this.options.input) {
+                return;
+            }
+            const inputElements = this.element.find(".k-pager-input").children();
+            const labels = inputElements.eq(0).add(inputElements.eq(2));
+
+            if (hide) {
+                labels.hide();
+            } else if (availableWidth && ((inputElements.eq(0).width() + inputElements.eq(2).width()) < availableWidth)) {
+                labels.show();
+            } else {
+                return true;
+            }
+        },
+
+
+        _togglePageSizesLabel: function(hide, availableWidth) {
+            if (!this.options.pageSizes) {
+                return;
+            }
+            const label = this.element.find(".k-pager-sizes").children().eq(1);
+
+            if (hide) {
+                label.hide();
+            } else if (availableWidth && (label.width() < availableWidth)) {
+                label.show();
+            } else {
+                return true;
+            }
+        },
+
+        _togglePageSizesDropDown: function(hide, availableWidth) {
+            if (!this.options.pageSizes) {
+                return;
+            }
+
+            const picker = this.element.find(".k-pager-sizes .k-picker");
+
+            if (hide) {
+                picker.hide();
+            } else if (availableWidth && (picker.width() < availableWidth)) {
+                picker.show();
+            } else {
+                return true;
+            }
+        },
+
+
+        _togglePageInputs: function(hide, availableWidth) {
+            var options = this.options;
+
+            if (!options.input || !this._numericSelect) {
+                return;
+            }
+
+            if (hide) {
+                this._numericSelect.hide();
+            } else if (availableWidth && (this._numericSelect.width() < availableWidth) && !this.list.is(":visible")) {
+                this._numericSelect.show();
+            } else {
+                return true;
             }
         },
 
@@ -449,9 +648,9 @@ var __meta__ = {
             if (options.input) {
                 that.element
                     .find(".k-pager-input")
-                    .html(that.options.messages.page +
+                    .html('<span>' + encode(that.options.messages.page) + '</span>' +
                         '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" aria-label="' + that.options.messages.page + " " + page + '"></span>' +
-                        kendo.format(options.messages.of, totalPages))
+                        '<span>' + encode(kendo.format(options.messages.of, totalPages)) + '</span>')
                     .find("input")
                     .val(page)
                     .attr(DISABLED, total < 1)
@@ -489,6 +688,13 @@ var __meta__ = {
             that._restoreFocus(start, end, totalPages);
             that._excludeChildrenFromTab();
             that._updateAria();
+
+            if (totalPages) {
+                that._lastWidth = kendo._outerWidth(that.element) + 12;
+                that.resize(true);
+            } else if (that._lastWidth) {
+              that._lastWidth = kendo._outerWidth(that.element);
+            }
         },
 
         _excludeChildrenFromTab: function() {
@@ -724,22 +930,9 @@ var __meta__ = {
                 }
             }
         },
-
-        _getWidthSizeClass: function(width) {
-            var that = this,
-                sizes = SIZE.split(" ");
-
-            if (!that.options.responsive) {
-                return null;
-            } else if (width <= 480) {
-                return sizes[1];
-            } else if (width <= 600) {
-                return sizes[0];
-            }
-            return null;
-        }
     });
 
     ui.plugin(Pager);
 })(window.kendo.jQuery);
+export default kendo;
 

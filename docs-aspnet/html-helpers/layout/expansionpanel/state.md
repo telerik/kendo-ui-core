@@ -1,26 +1,26 @@
 ---
 title: Default State
-page_title: ExpansionPanel Default State
+page_title: Default State
 description: "Learn how to enable and use the default state functionality of the Telerik UI ExpansionPanel component for {{ site.framework }}"
 slug: state_htmlhelpers_expansionpanel_aspnetcore
 position: 2
 ---
 
-# ExpansionPanel Default State
+# Default State
 
-You can configure the default state of the Telerik UI ExpansionPanel for {{ site.framework }} by using the `Disabled`, `Expanded`, `Toggleable` and `Animation` properties.
+You can configure a default state of the Telerik UI ExpansionPanel for {{ site.framework }} by using the `Disabled`, `Expanded`, `Toggleable` and `Animation` properties.
 
-## ExpansionPanel Disabled State
+## Disabled State
 
-You can disable the Kendo UI ExpansionPanel component and make the user unable to expand or collapse the panel. To configure this state, set the [`Disabled`](/api/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#disabledsystemboolean) property to `true`.
+To disable the component and prevent the user to expand or collapse the panel, set the [`Disabled`](/api/kendo.mvc.ui.fluent/expansionpanelbuilder#disabledsystemboolean) property to `true`.
 
 ```HtmlHelper
     @(Html.Kendo().ExpansionPanel()
-            .Name("brazil")
-            .Title("Brazil")
-            .SubTitle("South America")
-            .Disabled(true)
-            .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
+        .Name("brazil")
+        .Title("Brazil")
+        .SubTitle("South America")
+        .Disabled(true)
+        .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
     )
 ```
 {% if site.core %}
@@ -33,17 +33,17 @@ You can disable the Kendo UI ExpansionPanel component and make the user unable t
 ```
 {% endif %}
 
-## ExpansionPanel Expanded State
+## Expanded State
 
-The Kendo UI ExpansionPanel component can be expanded by default. To configure this state, set the [`Expanded`](/api/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#expandedsystemboolean) property to `true`.
+The ExpansionPanel can be rendered in an expanded state by default. To configure this state, set the [`Expanded`](/api/kendo.mvc.ui.fluent/expansionpanelbuilder#expandedsystemboolean) property to `true`.
 
 ```HtmlHelper
     @(Html.Kendo().ExpansionPanel()
-                .Name("brazil")
-                .Title("Brazil")
-                .SubTitle("South America")
-                .Expanded(true)
-                .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
+        .Name("brazil")
+        .Title("Brazil")
+        .SubTitle("South America")
+        .Expanded(true)
+        .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
     )
 ```
 {% if site.core %}
@@ -56,17 +56,17 @@ The Kendo UI ExpansionPanel component can be expanded by default. To configure t
 ```
 {% endif %}
 
-## ExpansionPanel Toggleable State
+## Toggleable State
 
-By default, the user can expand or collapse the ExpansionPanel. To prevent this, set the [`Toggleable`](/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#toggleablesystemboolean) property to `false`.
+By default, the user can expand or collapse the ExpansionPanel. To prevent this behavior, set the [`Toggleable`](/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#toggleablesystemboolean) property to `false`.
 
 ```HtmlHelper
     @(Html.Kendo().ExpansionPanel()
-            .Name("brazil")
-            .Title("Brazil")
-            .SubTitle("South America")
-            .Toggleable(false)
-            .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
+        .Name("brazil")
+        .Title("Brazil")
+        .SubTitle("South America")
+        .Toggleable(false)
+        .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
     )
 ```
 {% if site.core %}
@@ -79,17 +79,17 @@ By default, the user can expand or collapse the ExpansionPanel. To prevent this,
 ```
 {% endif %}
 
-## ExpansionPanel Animation State
+## Animation State
 
-You can disable the ExpansionPanel visual animations that appear when the user expands or collapses the panel. To disable the animations, set the [`Animation`](/api/Kendo.Mvc.UI.Fluent/ExpansionPanelBuilder#animationsystemboolean) property to `false`.
+You can disable the ExpansionPanel visual animations that appear when the user expands or collapses the panel by setting the [`Animation`](/api/kendo.mvc.ui.fluent/expansionpanelbuilder#animationsystemboolean) option to `false`.
 
 ```HtmlHelper
     @(Html.Kendo().ExpansionPanel()
-            .Name("brazil")
-            .Title("Brazil")
-            .SubTitle("South America")
-            .Animation(false)
-            .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
+        .Name("brazil")
+        .Title("Brazil")
+        .SubTitle("South America")
+        .Animation(false)
+        .Content("The word 'Brazil' likely comes from the Portuguese word for brazilwood, a tree that once grew plentifully along the Brazilian coast. In Portuguese, brazilwood is called pau-brasil, with the word brasil commonly given the etymology 'red like an ember', formed from brasa ('ember') and the suffix -il (from -iculum or -ilium).")
     )
 ```
 {% if site.core %}
@@ -104,6 +104,5 @@ You can disable the ExpansionPanel visual animations that appear when the user e
 
 ## See Also
 
-* [Overview of the ExpansionPanel (Demo)](https://demos.telerik.com/{{ site.platform }}/expansionpanel/index)
-* [Client-side API Reference of the TileLayout](/api/expansionpanel)
-* [Keyboard Navigation]({% slug keynav_htmlhelpers_expansionpanel_aspnetcore %})
+* [ExpansionPanel Server-Side API for {{ site.framework}}](/api/expansionpanel)
+* [ExpansionPanel Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel)

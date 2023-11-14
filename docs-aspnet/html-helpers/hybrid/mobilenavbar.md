@@ -79,4 +79,4 @@ You can reference a hybrid NavBar instance by using the code from the following 
 
 ## See Also
 
-* [Hybrid NavBarBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileNavBarBuilder)
+* [Hybrid NavBarBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilenavbarbuilder)

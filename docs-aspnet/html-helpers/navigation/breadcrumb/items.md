@@ -25,7 +25,7 @@ The following example demonstrates how the attributes of the Breadcrumb items ca
                 .Icon("home")
                 .ShowIcon(true)
                 .ItemClass("root")
-                .IconClass("root")
+                .IconClass("home")
                 .LinkClass("root");
             items.Add()
                 .Type(BreadcrumbItemType.Item)

@@ -35,7 +35,7 @@ How can I create a "required if" validation that only demands an input if anothe
 
 ## Solution
 
-Denote the desired input in an attribute on the validated element and implement a [custom validation rule](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview#custom-rules-for-validation).
+Denote the desired input in an attribute on the validated element and implement a [custom validation rule](https://docs.telerik.com/kendo-ui/controls/validator/overview#custom-rules-for-validation).
 
 The code comments contain tips for the suggested implementation. For more information, refer to the following key points:
 
@@ -143,6 +143,6 @@ The code comments contain tips for the suggested implementation. For more inform
 
 ## See Also
 
-* [Custom Validator Rules](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview#custom-rules-for-validation)
+* [Custom Validator Rules](https://docs.telerik.com/kendo-ui/controls/validator/overview#custom-rules-for-validation)
 * [Demo on Custom Validation Rules](https://demos.telerik.com/kendo-ui/validator/custom-validation)
 * [API Reference of the kendo.widgetInstance() Method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/widgetinstance)

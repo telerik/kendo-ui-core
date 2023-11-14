@@ -339,7 +339,7 @@ Gets or sets the editor of the cells in the range.
 
 ##### value `String` *optional*
 
-The name of the custom cell editor, registered as [described in this help article](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
+The name of the custom cell editor, registered as [described in this help article](https://docs.telerik.com/kendo-ui/controls/spreadsheet/custom-editors)
 
 #### Returns
 

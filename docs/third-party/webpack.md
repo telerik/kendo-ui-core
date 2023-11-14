@@ -19,15 +19,10 @@ The Kendo UI NPM package is available as [`@progress/kendo-ui`](https://www.npmj
 > * The typescript step is optional&mdash;the NPM package can be consumed from vanilla JavaScript or with the Babel transpiler.
 > * The Kendo UI [TypeScript typings are global](https://github.com/typings/typings/blob/master/docs/faq.md#what-are-global-dependencies). This means that TypeScript will complain if you try to import the `kendo` object. Use the global reference instead.
 
-```typescript
-// This won't work
-import kendo from 'kendo-ui-core';
+> Starting from version 2023.3.718, the `kendo` instance is exported as a default export for the CommonJS and ECMAScript modules. This allows you to:
+> * Use the `import kendo from '@progress/kendo-ui'` syntax to import the Kendo UI scripts in your application. 
+> * Use the `kendo` instance to get the jQuery in which the Kendo UI widgets are defined. For example, `const $ = kendo.jQuery; $("#grid").kendoGrid({...});`.
 
-// This works
-import 'kendo-ui-core'; //or import '@progress/kendo-ui' to install the Kendo UI package
-
-console.log(kendo);
-```
 ## Using in JavaScript and TypeScript Applications
 
 To see the runnable examples on how to use Kendo UI with Webpack in both JavaScript and TypeScript applications, refer to the following [sample repository](https://github.com/telerik/kendo-ui-npm-example).

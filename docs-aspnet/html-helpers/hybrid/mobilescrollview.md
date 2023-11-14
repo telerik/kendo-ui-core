@@ -107,4 +107,4 @@ You can reference a hybrid ScrollView instance by using the code from the follow
 
 ## See Also
 
-* [Hybrid ScrollViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileScrollViewBuilder)
+* [Hybrid ScrollViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilescrollviewbuilder)

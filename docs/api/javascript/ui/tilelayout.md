@@ -526,7 +526,7 @@ A value indicating whether keyboard navigation will be enabled.
     });
     </script>
 
-### reorderable `Boolean` *(default: false)*
+### reorderable `Boolean|Object` *(default: false)*
 
 Determines whether the reordering functionality will be enabled.
 
@@ -562,6 +562,46 @@ Determines whether the reordering functionality will be enabled.
         reorderable: true
     });
     </script>
+
+### reorderable.clickMoveClick `Boolean` *(default: true)*
+
+Determines whether the click move click interaction would be enabled as an alternative of the drag and drop reorder. By default the alternative is enabled.
+
+#### Example - enable reordering
+    <script id="first" type="text/x-kendo-template">
+    <h3>A</h3>
+    </script>
+    <script id="second" type="text/x-kendo-template">
+        <h3>B</h3>
+    </script>
+    <div id="tilelayout"></div>
+    <script>
+    $("#tilelayout").kendoTileLayout({
+        containers: [
+            {
+                colSpan: 1,
+                rowSpan: 1,
+                header: {
+                    text: "Item one"
+                },
+                bodyTemplate: kendo.template($("#first").html())
+            },
+            {
+                colSpan: 1,
+                rowSpan: 1,
+                header: {
+                    text: "Item two"
+                },
+                bodyTemplate: kendo.template($("#second").html())
+            }
+        ],
+        columns: 4,
+        reorderable: {
+            clickMoveClick: false
+        }
+    });
+    </script>
+
 
 ### resizable `Boolean` *(default: false)*
 

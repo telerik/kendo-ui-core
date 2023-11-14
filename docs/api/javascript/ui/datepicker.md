@@ -12,6 +12,10 @@ Represents the Kendo UI DatePicker widget. Inherits from [Widget](/api/javascrip
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the calendar popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the calendar popup will open and close instantly.
@@ -117,6 +121,22 @@ The duration of the open animation in milliseconds.
         ARIATemplate: ({ current }) => `Date: ${kendo.toString(current, 'G')}`
     });
     </script>
+
+### autoFill `Boolean`*(default: false)*
+
+ When enabled, the DatePicker will autofill the rest of the date to the current date when the component loses focus. For example, entering only the date, month or year portion of the date and blurring the component, the missing sections will be automatically completed.
+ Requires a [DateInput](/api/javascript/ui/dateinput) for editing the value.
+
+#### Example
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        dateInput: true,
+        autoFill: true
+    });
+    </script>
+
 
 ### componentType `String`*(default: "classic")*
 
@@ -443,6 +463,63 @@ Allows customization of the week column header text in the Calendar. Set the val
         }
      })
     </script>
+
+### messages.dateInput `Object`
+
+The messages that DateInput uses.  Use it to customize or localize the placeholders of each date/time part.
+
+#### Example - customize column menu messages
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        dateInput: true,
+        messages:{
+            dateInput:{
+                "year": "year",
+                "month": "month",
+                "day": "day",
+                "weekday": "day of the week",
+                "hour": "hours",
+                "minute": "minutes",
+                "second": "seconds",
+                "dayperiod": "AM/PM"
+            }
+        }
+    });
+    </script>
+
+### messages.dateInput.year `String` *(default: "year")*
+
+The placeholder for the years part.
+
+### messages.dateInput.month `String` *(default: "month")*
+
+The placeholder for the months part.
+
+### messages.dateInput.day `String` *(default: "day")*
+
+The placeholder for the day of the month part.
+
+### messages.dateInput.weekday `String` *(default: "day of the week")*
+
+The placeholder for the day of the week part.
+
+### messages.dateInput.hour `String` *(default: "hours")*
+
+The placeholder for the hours part.
+
+### messages.dateInput.minute `String` *(default: "minutes")*
+
+The placeholder for the minutes part.
+
+### messages.dateInput.second `String` *(default: "seconds")*
+
+The placeholder for the seconds part.
+
+### messages.dateInput.dayperiod `String` *(default: "AM/PM")*
+
+The placeholder for the AM/PM part.
 
 ### min `Date`*(default: Date(1900, 0, 1))*
 

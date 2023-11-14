@@ -36,6 +36,23 @@ The following example demonstrates how the `Layout` method generates a Diagram w
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-diagram name="diagram">
+        <hierarchical-datasource server-operation="false">
+            <transport>
+                <read url="@Url.Action("_DiagramTree", "Diagram")" />
+            </transport>
+            <schema>
+                <hierarchical-model children="Items"></hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+        <layout type="DiagramLayoutType.Tree" subtype="DiagramLayoutSubtype.Down"
+            horizontal-separation="30" vertical-separation="20" />
+        <shape-defaults width="40" height="40" />
+    </kendo-diagram>
+```
+{% endif %}
 
 ## Layout Types
 

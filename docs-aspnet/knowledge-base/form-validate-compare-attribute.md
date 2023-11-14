@@ -1,8 +1,8 @@
 ---
-title: How can I validate properties decorated with the Compare attribute?
-description: "An example on how to validate fields decorated with the Compare attribute."
+title: Validating Properties Decorated with the Compare Attribute?
+description: "An example on how to validate fields decorated with the Compare attribute when working with the {{ site.product }} Form component."
 type: how-to
-page_title: Validate model property decorated with the Compare attribute
+page_title: Validate a Model Property Decorated with the Compare Attribute
 slug: validate-compare-attribute
 tags: form, validate, compare, attribute, validator, client, unobtrusive
 ticketid: 1584229
@@ -25,7 +25,7 @@ res_type: kb
 
 ## Description
 
-How can I validate properties decorated with the `[Compare]` attribute when using the Form? For example:
+How can I validate properties decorated with the `Compare` attribute when using the Form? For example:
 
 ```csharp
     public class User
@@ -92,3 +92,31 @@ You can achieve this by extending the Form's built-in Kendo Validator:
         return View(viewModel);
     }
 ```
+
+## More {{ site.framework }} Form Resources
+
+* [{{ site.framework }} Form Documentation](({%slug htmlhelpers_form_aspnetcore_overview%})
+
+* [{{ site.framework }} Form Demos](https://demos.telerik.com/{{ site.platform }}/form)
+
+{% if site.core %}
+* [{{ site.framework }} Form Product Page](https://www.telerik.com/aspnet-core-ui/form)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Form Product Page](https://www.telerik.com/aspnet-mvc/form)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Server-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/form)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

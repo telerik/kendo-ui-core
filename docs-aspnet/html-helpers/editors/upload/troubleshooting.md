@@ -70,5 +70,5 @@ The issue is caused by a bug in Safari and occurs only when the **Windows authen
 
 * [Basic Usage by the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload)
 * [Using the API of the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/api)
-* [UploadBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [UploadBuilder Server-Side API](/api/kendo.mvc.ui.fluent/uploadbuilder)
 * [Upload Server-Side API](/api/upload)

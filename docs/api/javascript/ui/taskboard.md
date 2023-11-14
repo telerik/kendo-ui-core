@@ -2668,6 +2668,8 @@ Configures the Tools of the TaskBoard
       });
     </script>
 
+Apart from the built-in tools, the TaskBoard fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+
 ### toolbar.items `Array`
 
 Configures the items collection of the toolbar.

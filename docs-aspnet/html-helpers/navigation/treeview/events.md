@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI TreeView for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/TreeViewEventBuilder) that allow you to control and customize the behavior of the UI component.
+The Telerik UI TreeView for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/treevieweventbuilder) that allow you to control and customize the behavior of the UI component.
 
 For a complete example on basic TreeView events, refer to the [demo on using the events of the TreeView](https://demos.telerik.com/{{ site.platform }}/treeview/events).
 

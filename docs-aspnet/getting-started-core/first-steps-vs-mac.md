@@ -13,7 +13,7 @@ permalink: /getting-started/first-steps-vs-mac
 
 Welcome to the First Steps on Mac guide on getting started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core with Visual Studio for Mac!
 
-The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Mac 2019.
+The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Mac 2022.
 
 To get up and running with the project:
 
@@ -21,6 +21,7 @@ To get up and running with the project:
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Add the UI for ASP.NET Core NuGet package](#adding-the-nuget-package)
+1. [Add a license file to your app](#adding-your-license-file)
 
 ## Meeting the Requirements
 
@@ -29,7 +30,7 @@ To get up and running with the project:
 
 ## Creating the Application
 
-1. Open Visual Studio for Mac 2019 and select **New**.
+1. Open Visual Studio for Mac 2022 and select **New**.
 1. Select **Web Application(Model-View-Controller) .NET Core** > **App** and click **Next**.
 1. Select the target framework of the project and click **Next**.
 1. Set a name and location for the project and click **Create**.    
@@ -75,6 +76,7 @@ To get up and running with the project:
 
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
+	> * As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
   7.1 Since the Microsoft template project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
 
@@ -82,7 +84,7 @@ To get up and running with the project:
 
 	7.3 After `jQuery`, copy and paste the scripts from this snippet. Make sure that the versions match the installed `Kendo.Mvc.dll`.
 
-		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-main.min.css" />
+		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>   			
 
@@ -112,6 +114,12 @@ If you prefer to include the client-side resources from a local source instead o
     ![{{ site.product_short }} The created sample page](../getting-started-core/images/mac-sample-page.png)
 
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
+
+## Adding Your License File
+
+Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Adding a License File]({% slug using_license_code %}) article.
 
 ## Next Steps
 

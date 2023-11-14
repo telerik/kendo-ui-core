@@ -38,9 +38,9 @@ The `Title` property of the Chart accepts a `string` or a Lambda expression as i
 ## Setting the Subtitle
 
 {% if site.core %}
-The {{ site.product }} Chart supports configuring an additional subtitle by setting the [`subtitle`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/ChartBuilder#subtitlesystemaction) option.
+The {{ site.product }} Chart supports configuring an additional subtitle by setting the [`subtitle`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/chartbuilder#subtitlesystemaction) option.
 {% else %}
-The {{ site.product }} Chart supports configuring an additional subtitle by using the [`subtitle`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ChartBuilder#subtitlesystemaction) option.
+The {{ site.product }} Chart supports configuring an additional subtitle by using the [`subtitle`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/chartbuilder#subtitlesystemaction) option.
 {% endif %}
 
 The following example demonstrates how to configure a subtitle:

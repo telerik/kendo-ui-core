@@ -47,14 +47,14 @@ How can I configure and customize the MultiSelect to behave as a TagBox?
 		var currentId = 1;
 
 		function onDataBound(e) {
-			$('.k-multiselect .k-input').unbind('keyup');
-			$('.k-multiselect .k-input').on('keyup', onClickEnter);
+			$('.k-multiselect .k-input-inner').unbind('keyup');
+			$('.k-multiselect .k-input-inner').on('keyup', onClickEnter);
 		}
 		function onClickEnter(e) {
 			if (e.keyCode === 13) {
 				var widget = $('#products').getKendoMultiSelect();
 				var dataSource = widget.dataSource;
-				var input = $('.k-multiselect .k-input');
+				var input = $('.k-multiselect .k-input-inner');
 				var value = input.val().trim();
 				if (!value || value.length === 0) {
 					return;

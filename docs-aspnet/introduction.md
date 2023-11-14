@@ -16,7 +16,7 @@ position: 1
 
 Thank you for choosing Progress<sup>®</sup> Telerik<sup>®</sup> {{ site.product_short }}!  
 
-[{{ site.product }}](https://www.telerik.com/{{ telerik_product_url }}) is a set of 110+ performance optimized components that allow you to deliver high-quality applications faster. These components come in the form of HTML{% if site.core %} and Tag{% endif %} helpers that wrap the [HTML/JavaScript Kendo UI widgets](https://docs.telerik.com/kendo-ui/introduction) and bring them to .NET {{ site.framework_short }}. From client-side perspective, the vanilla HTML/JavaScript Kendo UI widgets and their {{ site.framework }} server-side wrappers represent the same functionalities and provide the same capabilities.
+[{{ site.product }}](https://www.telerik.com/{{ telerik_product_url }}) is a set of 110+ performance optimized components that allow you to deliver high-quality applications faster. These components come in the form of HTML{% if site.core %} and Tag{% endif %} helpers that wrap the [HTML/JavaScript Kendo UI widgets](https://docs.telerik.com/kendo-ui/introduction) and bring them to .NET {{ site.framework_short }}. From client-side perspective, the vanilla HTML/JavaScript Kendo UI widgets and their {{ site.framework }} server-side wrappers have the same functionality and provide the same capabilities.
 
 
 The {{ site.product }} HTML{% if site.core %} and Tag{% endif %} helpers:
@@ -39,10 +39,10 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
 To make your first steps with {{ site.product_short }}, you can {% if site.core %}<a href="https://www.telerik.com/aspnet-core-ui" target="_blank">start a free trial</a>{% else %}<a href="https://www.telerik.com/aspnet-mvc" target="_blank">start a free trial</a>{% endif %} and check some of the getting started tutorials:
 
 {% if site.core %}
-* [First Steps with {{ site.product_short }} on Visual Studio for Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})&mdash;A tutorial demonstrating how to start using {{ site.product }} in new or already existing projects.
+* [First Steps with {{ site.product_short }} on Visual Studio for Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})&mdash;A tutorial demonstrating how to start using {{ site.product }} in new or existing projects.
 * [Using a Project Template in VS for Windows]({% slug gettingstarted_project_template %})&mdash;The easiest way to create a new project with {{ site.product }}.
 * [First Steps with {{ site.product_short }} on Visual Studio for Mac]({% slug gettingstarted_firststeps_vsmac %})&mdash;Create your first project with {{ site.product }} controls on macOS.
-* [First Steps with {{ site.product_short }} with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})&mdash;Use .NET CLI to create a project that uses {{ site.product }} controls.
+* [First Steps with {{ site.product_short }} and CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})&mdash;Use .NET CLI to create a project that uses {{ site.product }} controls.
 * [Video Onboarding]({% slug virtualclass_uiforcore %})&mdash;A free course developed to help you get started with the Telerik UI for ASP.NET Core components and features.
 
 To get a quick overview of  {{ site.product_short }}, you can also see the following video:
@@ -53,19 +53,19 @@ To get a quick overview of  {{ site.product_short }}, you can also see the follo
 * [First Steps with {{ site.product_short }}]({% slug gettingstarted_aspnetmvc %})&mdash;Create your first project with {{ site.product }} controls by using a project template.
 * [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})&mdash;Learn how to add the Telerik NuGet server to Visual Studio and to install the {{ site.product }} controls in your project.
 * [Scaffolding the Telerik UI for ASP.NET MVC project]({% slug scaffolding_aspnetcore %})&mdash;Learn how to use standard scaffolding to generate MVC-helper declarations together with the related Controller action methods.
-* [Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})&mdash;Learn the basics about the {{ site.product }} HtmlHelpers.
+* [Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})&mdash;Learn the basics about the {{ site.product }} HTML Helpers.
 * [Integrating the Telerik UI for ASP.NET MVC project with Visual Studio]({% slug overview_visualstudio_aspnetcore %})&mdash;Take advantage of the Visual Studio extensions that help you with the project creation and configuration.
 * [Video Onboarding]({% slug virtualclass_uiformvc %})&mdash;A free course developed to help you get started with the Telerik UI for ASP.NET MVC components and features
 {% endif %}
 
 ## Support Options
 
-For any issues you might encounter while working with {{ site.product_short }}, use any of the available support channels:
+For any issues you may come across while working with {{ site.product_short }}, use any of the available support channels:
 
 * {{ site.product_short }} license holders and active trialists can take advantage of the outstanding customer support delivered by the developers building the library. To submit a support ticket, use the [{{ site.product_short }} dedicated support](https://www.telerik.com/account/support-tickets/) system.
 * [{{ site.product_short }} forums](https://www.telerik.com/forums/{{ telerik_product_url }}) are part of the free support you can get from the community and from the {{ site.product_short }} team on all kinds of general issues.
 * [{{ site.product_short }} feedback portal](https://feedback.telerik.com/{{ telerik_product_url }}) and [{{ site.product_short }} roadmap](https://www.telerik.com/support/whats-new/kendo-ui/roadmap) provide information on the features in discussion and also the planned ones for release.
-* You may still need a tailor-made solution for your project. In such cases, go straight to [Progress Services](https://www.progress.com/services).
+* In case you need a tailor-made solution for your project, go straight to [Progress Services](https://www.progress.com/services).
 
 ## Learning Resources
 

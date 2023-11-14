@@ -14,5 +14,5 @@ To see the example, refer to the project on how to [bind the TreeView to XML](ht
 ## See Also
 
 * [Basic Usage of the TreeView HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treeview/index)
-* [TreeViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [TreeViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/treeviewbuilder)
 * [TreeView Server-Side API](/api/treeview)

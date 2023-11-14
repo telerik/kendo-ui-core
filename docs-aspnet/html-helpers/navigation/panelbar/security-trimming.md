@@ -23,5 +23,5 @@ For more information on using a custom `AuthorizeAttribute`, refer to [this arti
 ## See Also
 
 * [Basic Usage of the PanelBar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/panelbar)
-* [PanelBarBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBarBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/panelbarbuilder)
 * [PanelBar Server-Side API](/api/panelbar)

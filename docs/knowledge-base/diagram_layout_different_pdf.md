@@ -43,15 +43,15 @@ To handle this issue, [make the fonts available for embedding]({% slug pdfderawi
     // Import the DejaVu Sans font for embedding.
 
     kendo.pdf.defineFont({
-        "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
-        "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-        "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-        "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
+        "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
     });
 </script>
 
 <!-- Load the Pako ZLIB library to enable PDF compression. -->
-<script src="//kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+<script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
 <script>
     $(".export-pdf").click(function() {

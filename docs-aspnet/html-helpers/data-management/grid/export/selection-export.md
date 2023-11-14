@@ -21,14 +21,14 @@ The following sections provide step-by-step instructions and examples on getting
 ### Enabling Excel Export
 
 1. Configure the [Selectable]({% slug htmlhelpers_grid_aspnetcore_selection %}) property and apply the following settings:
-    * Set the [Selection Mode]({% slug htmlhelpers_grid_aspnetcore_selection %}#select-modes) to [Multiple](/api/Kendo.Mvc.UI.Fluent/GridSelectionSettingsBuilder#modekendomvcuigridselectionmode).
-    * Set the [Selection Type]({% slug htmlhelpers_grid_aspnetcore_selection %}#select-modes) to [Cell](/api/Kendo.Mvc.UI.Fluent/GridSelectionSettingsBuilder#typekendomvcuigridselectiontype).
+    * Set the [Selection Mode]({% slug htmlhelpers_grid_aspnetcore_selection %}#select-modes) to [Multiple](/api/kendo.mvc.ui.fluent/gridselectionsettingsbuilder#modekendomvcuigridselectionmode).
+    * Set the [Selection Type]({% slug htmlhelpers_grid_aspnetcore_selection %}#select-modes) to [Cell](/api/kendo.mvc.ui.fluent/gridselectionsettingsbuilder#typekendomvcuigridselectiontype).
 
 1. To take full advantage of the Excel export feature, download the [JSZip library](https://stuk.github.io/jszip/) and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% slug exportsupport_core %}#jszip-library).
 
     ```HtmlHelper
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+        <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 
         @(Html.Kendo().Grid<OrderViewModel>()

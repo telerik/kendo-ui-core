@@ -45,10 +45,10 @@ The configuration later in this article will be used to get the editor HTML for 
 
 The following example demonstrates the code that will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
-    ```HtmlHelper
-        @(Html.EditorFor(o => o.OrderDate);
-        @(Html.EditorFor(o => o.ShipCountry);
-    ```
+```HtmlHelper
+    @(Html.EditorFor(o => o.OrderDate);
+    @(Html.EditorFor(o => o.ShipCountry);
+```
 
 If the Grid is configured for popup editing, it will use the [`Html.EditorForModel`]({% if site.mvc %}https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorfor.aspx{% else %}https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper-1.editorfor?view=aspnetcore-3.1{% endif %}) to get the editor HTML for the whole model.
 
@@ -76,12 +76,12 @@ Your project may require you to create a custom editor for a specific property. 
             public string EmployeeName { get; set; }
         }
 
-1. Create an editor template for the `Employee` property. The template will display a Kendo UI for jQuery DropDownList with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`. In case the Editor Templates folder does not exist, you must add it manually.
+1. Create an editor template for the `Employee` property. The template will display a [DropDownList]({% slug htmlhelpers_dropdownlist_aspnetcore %}) editor with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`. In case the Editor Templates folder does not exist, you must add it manually.
 1. Add the DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
 
     ```HtmlHelper
         @(Html.Kendo().DropDownList()
-            .Name("Employee") // The name of the widget has to be the same as the name of the property.
+            .Name("Employee") // The name of the component has to be the same as the name of the property.
             .DataValueField("EmployeeID") // The value of the drop-down is taken from the EmployeeID property.
             .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
             .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
@@ -132,10 +132,21 @@ Your project may require you to create a custom editor for a specific property. 
             public Employee Employee { get; set; }
         }
 
+    If the Grid is configured for InLine editing, use the [`EditorTemplateName()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#editortemplatenamesystemstring) method to set the name of the created custom editor template.
+
+    ```
+        .Editable(editable => editable.Mode(GridEditMode.InLine))
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Employee).ClientTemplate("#=Employee.EmployeeName#").EditorTemplateName("EmployeeEditor").Sortable(false).Width(180);
+        })
+    ```
+
 1. Specify default value for the column in the Model of the DataSource.
 
             .DataSource(dataSource => dataSource
                 .Ajax()
+                .Batch(true)
                 .Model(model =>
                 {
                     model.Id(p => p.OrderID);
@@ -153,32 +164,30 @@ Your project may require you to create a custom editor for a specific property. 
 
 ## TagHelper Editor Templates
 
-To configure Editor Templates when using TagHelper define them in a `[Kendo Template](https://docs.telerik.com/kendo-ui/framework/templates/overview)`. 
+To configure Editor Templates when using Grid TagHelper define them by using a client-side function. Pass the name of the handler in the column `editor` attribute.
 
 ```
     <kendo-grid name="Grid">
-        <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
-            <schema data="Data" total="Total">
-                <model id="ProductID">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20" batch="true"
+            <schema data="Data" total="Total" errors="Errors">
+                <model id="OrderID">
                     <fields>
-                        <field name="ProductID" type="number" editable="false"></field>
-                        <field name="ProductName" type="string"></field>
+                        <field name="OrderID" type="number" editable="false"></field>
+                        <field name="Employee" default-value='new Kendo.Mvc.Examples.Models.Employee() { EmployeeID = 1, EmployeeName = "EmployeeName" }'></field>
                     </fields>
                 </model>
             </schema>
             <transport>
-                    <read url="@Url.Action("Products_Read" "Grid")" />
-                    <update url="@Url.Action("Products_Update" "Grid")" />
-                    <create url="@Url.Action("Products_Create" "Grid")" />
-                    <destroy url="@Url.Action("Products_Destroy" "Grid")" />
+                    <read url="@Url.Action("Orders_Read" "Grid")" />
+                    <update url="@Url.Action("Update" "Grid")" />
+                    <create url="@Url.Action("Create" "Grid")" />
+                    <destroy url="@Url.Action("Destroy" "Grid")" />
             </transport>
         </datasource>
         <columns>
-            <column field="ProductName" />
-            <column field="ProductID" />
+            <column field="Employee" width="180" template="#=Employee.EmployeeName#" editor="ClientEmployeeEditor"/>
             <column width="160">
                 <commands>
-                    <column-command text="Edit" name="edit"></column-command>
                     <column-command text="Delete" name="destroy"></column-command>
                 </commands>
             </column>
@@ -187,8 +196,25 @@ To configure Editor Templates when using TagHelper define them in a `[Kendo Temp
             <toolbar-button name="create"></toolbar-button> 
             <toolbar-button name="save"></toolbar-button>
         </toolbar>
-        <editable mode="inline" template-id=""/>
+        <editable mode="incell"/>
     </kendo-grid>
+
+    <script type="text/javascript">
+        function ClientEmployeeEditor(container, options) {
+            $('<input required name="Employee">')
+                .appendTo(container)
+                .kendoDropDownList({
+                    autoBind: false,
+                    dataTextField: "EmployeeName",
+                    dataValueField: "EmployeeID",
+                    dataSource: {
+                        transport: {
+                            read: '@Url.Action("ReadEmployees","Grid")'
+                        }
+                    }
+                });
+        }
+    </script>
 ```
 {% endif %}
 

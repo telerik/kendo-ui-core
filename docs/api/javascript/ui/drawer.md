@@ -32,6 +32,22 @@ Specifies if the Drawer will be automatically collapsed when an item is clicked.
         });
     </script>
 
+### expanded `Boolean` *(default: false)*
+
+Specifies if the Drawer will be expanded by default.
+
+    <div id="drawer">
+      <div>Content area content.</div>
+    </div>
+    <script>
+      $("#drawer").kendoDrawer({
+        expanded: true,
+        mode: "push",
+        template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+        position: 'left'
+      });
+    </script>
+
 ### position `String` *(default: 'left')*
 
 The position of the drawer. Can be `left` (default) or `right`.

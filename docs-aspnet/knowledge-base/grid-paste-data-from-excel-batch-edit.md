@@ -1,7 +1,7 @@
 ---
 title: Copying and Pasting Multiple Excel Rows to the Grid
 page_title: Copying and Pasting Multiple Rows from Excel to the Grid
-description: An example on how to copy and paste rows from Excel into the Telerik UI for {{ site.product }} Grid.
+description: An example on how to copy and paste rows from Excel into the {{ site.product }} Grid.
 type: how-to
 slug: grid-paste-data-from-excel-batch-edit
 tags: grid, excel, copy, paste, multiple, rows, batch, edit, crud, telerik, core, mvc
@@ -30,12 +30,12 @@ How can I enable the copying of multiple rows from Excel and pasting them in the
 
 To achieve the desired scenario: 
 
-1. Configure the CRUD operations for the Grid, in which you want to implement the copy-paste functionality, by using the [`Batch()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/AjaxDataSourceBuilder#batchsystemboolean) configuration method for the Grid's DataSource to send all the requests at once.
+1. Configure the CRUD operations for the Grid, in which you want to implement the copy-paste functionality, by using the [`Batch()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ajaxdatasourcebuilder#batchsystemboolean) configuration method for the Grid's DataSource to send all the requests at once.
 1. To handle the user interaction for pasting, subscribe to the [`contextMenu`](https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event) event, which is triggered, by clicking the right mouse button.
 1. Within the handler, create an empty text area which will act as a clipboard, and adjust its width and height to exclude the pager and the scrollbar.
 1. To map the pasted content directly within the Grid, handle the [`paste`](https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event) event. From there, create new data item instances by using the pasted content, and insert them into the Grid by using the [`insert()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/insert) client-side method of the Grid's DataSource.
 1. If the user clicks to edit but the context menu is open and the text area is over the Grid's body, handle the [`click`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) event and manually remove the created text area.
-1. To add a native UI look and feel, wire to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) and add the dirty indicator to each of the newly pasted items.
+1. To add a native UI look and feel, wire to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) and add the dirty indicator to each of the newly pasted items.
 
 ```Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
@@ -139,8 +139,31 @@ To achieve the desired scenario:
 
 For the complete implementation of the suggested approach, refer to the [Telerik REPL example on copying and pasting multiple rows from Excel to the Grid](https://netcorerepl.telerik.com/wGFcGiYB12uGd1J329).
 
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Client-Side API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [Server-Side API Reference of the Grid](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik REPL: Copy and Paste Multiple Rows From Excel to the Grid](https://netcorerepl.telerik.com/wGFcGiYB12uGd1J329)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

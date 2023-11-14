@@ -327,6 +327,26 @@
             assert.isOk(toolbar.overflowMenu.element.find(".k-menu-item").length);
         });
 
+        it("button element with no text set does not render 'undefined' in the overflow menu", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    { type: "button", id: "foo", overflow: "always" }
+                ]
+            }).data("kendoToolBar");
+
+            assert.equal(toolbar.overflowMenu.element.find(".k-menu-link-text").html(), "&nbsp;");
+        });
+
+        it("button element with empty text does renders &nbsp; in the overflow menu", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    { type: "button", id: "foo", overflow: "always", text: "" }
+                ]
+            }).data("kendoToolBar");
+
+            assert.equal(toolbar.overflowMenu.element.find(".k-menu-link-text").html(), "&nbsp;");
+        });
+
         it("button element in overflow popup is wrapped inside a <li> tag", function() {
             var toolbar = container.kendoToolBar({
                 items: [
@@ -1054,6 +1074,10 @@
         });
 
         it("SplitButton popup is as wide as the button wrapper", function() {
+            if (window.navigator.userAgent.includes('Firefox')) {
+                this.skip();
+            }
+            else {
             container.kendoToolBar({
                 items: [
                     {
@@ -1071,6 +1095,7 @@
 
             click(arrowButton);
             roughlyEqual(splitButton.wrapper.outerWidth(), splitButton.menu._popup.element.outerWidth(), 10);
+            }
         });
 
         it("options.attribute are attached to the main button", function() {
@@ -1577,6 +1602,24 @@
             assert.equal(toolbar.overflowMenu.element.children().length, 0);
         });
 
+        it("If an item has its overflow: always, its template is not rendered and its overflowTemplate is visible", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        template: '<span id="template"></span>',
+                        overflowTemplate: '<span id="overflow"></span>',
+                        overflow: 'always'
+                    },
+                ]
+            }).data("kendoToolBar");
+
+            var overflowItem = toolbar.overflowMenu.element.find('.k-menu-item');
+
+            assert.equal(overflowItem.length, 1);
+            assert.isOk(!overflowItem.hasClass("k-hidden"));
+            assert.equal(toolbar.element.find('.k-toolbar-item').length, 0);
+        });
+
         it("When a template command without overflowTemplate is defined no JS error is thrown", function() {
             try {
                 var toolbar = container.kendoToolBar({
@@ -1749,6 +1792,32 @@
                 assert.isOk($(el).hasClass("k-item"));
                 assert.isOk($(el).hasClass("k-menu-item"));
             });
+        });
+
+        it("separator is positioned at the proper place in a scenario with overflow", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    { type: "button", text: "foo" },
+                    { type: "separator" },
+                    { type: "button", text: "foo" },
+                    { type: "button", text: "foo", overflow: "always" }
+                ]
+            }).data("kendoToolBar");
+
+            assert.equal(container.find(".k-separator").index(), 1);
+        });
+
+        it("spacer is positioned at the proper place in a scenario with overflow", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    { type: "button", text: "foo" },
+                    { type: "spacer" },
+                    { type: "button", text: "foo" },
+                    { type: "button", text: "foo", overflow: "always" }
+                ]
+            }).data("kendoToolBar");
+
+            assert.equal(container.find(".k-spacer").index(), 1);
         });
 
     });

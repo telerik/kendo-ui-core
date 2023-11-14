@@ -35,7 +35,7 @@ The Drawing library supports the export of drawings to bitmap images in a PNG fi
 
 ## See Also
 
-* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Getting Started with the Drawing Library]({% slug getting_started_kendoui_drawing %})
 * [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})
 * [Exporting Drawings to PDF]({% slug pdfderawingexport_drawingapi %})
 * [Exporting Drawings to SVG]({% slug exportpng_kendoui_drawingapi %})

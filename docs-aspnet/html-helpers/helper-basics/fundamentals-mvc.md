@@ -41,135 +41,6 @@ You have to set the `Name` option of the helper. The value will be used as the `
 
 Alternatively, you can use the `NumericTextBoxFor` helper method. All Telerik UI helpers which accept a value can be initialized with the `[WidgetName]For` method. For example, to initialize the DatePicker, use `DatePickerFor`. These methods automatically set the `Name` of the helper, so setting it explicitly is not needed. In this way, `@Html.Kendo().NumericTextBoxFor(model => model.Age)` is the same as `@Html.Kendo().NumericTextBox().Name("Age").Value(Model.Age)`.
 
-## Deferred Initialization
-
-By default, the helpers output the initialization script of the component immediately after its HTML markup. This scenario may not always be desired&mdash;for example, if the script files are registered at the bottom of the page, or when you nest components.
-
-To defer the initialization script, apply either of the following approaches:
-
- * [Defer only certain components](#deferring-specific-components)
- * [Defer all components globally](#deferring-components-globally)
-
-### Deferring Specific Components
-
-> Avoid deferring child components such as editors, components initialized inside client templates, or inside ([inline or external Kendo UI templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)). Otherwise, the initialization script of each child component will appear outside the parent component.
-
-To defer individual components:
-
-1. Call the `Deferred` method of the helper. This approach suppresses the immediate rendering of the script statement.
-
-          @(Html.Kendo().NumericTextBox()
-                .Name("age")
-                .Deferred()
-          )
-
-1. Serialize the component initialization script by using any of the following methods:
-
-* Call the `DeferredScripts` method. As a result, all previously deferred initialization statements will be output as an inline script.
-
-          @Html.Kendo().DeferredScripts()
-
-    The `DeferredScripts` method accepts a `Boolean` parameter which determines whether script elements will be automatically rendered. This behavior is useful for rendering the deferred initialization scripts inside existing script element.
-
-          <script>
-              @Html.Kendo().DeferredScripts(false)
-          </script>
-
-    To render the deferred initialization script of a particular helper, use the `DeferredScriptsFor` method.
-
-          @(Html.Kendo().NumericTextBox()
-                .Name("age")
-                .Deferred()
-          )
-          <!-- other code -->
-          @Html.Kendo().DeferredScriptsFor("age")
-
-    You can also use the `DeferredScriptsFor` method to suppress the output of `script` elements around the initialization script.
-
-        <script>
-        @Html.Kendo().DeferredScriptsFor("age", false)
-        </script>
-
-* Use the `DeferredScriptFile` method to serialize the deferred initialization script to a file.
-
-          @Html.Kendo().DeferredScriptFile()
-
-
-### Deferring Components Globally
-
-As of the R1 2023 SP1 release, you can configure a global option to defer the initialization scripts of all components in your application and avoid setting the deferred option for every component.
-
-To defer components globally:
-
-1. Enable the `DeferToScriptFiles` setting in the `Global.asax.cs` file.
-
-    ```
-        KendoMvc.Setup(x =>
-        {
-            x.DeferToScriptFiles = true;
-        });
-    ```
-
-1. Configure a `HttpModule` in the `Web.config` file that returns the cached scripts when the browser request them.
-
-    ```
-    <configuration>
-        ...
-        <system.webServer>
-            <modules>
-                <add name="KendoDeferredScriptsModule" type="Kendo.Mvc.KendoDeferredScriptsModule"  />
-            </modules>
-        </system.webServer>
-        ...
-    </configuration>
-    ```
-
-1. Serialize the script tag into a file by adding `@(Html.Kendo().DeferredScriptFile())` after all components declarations. Any components registered after it will not be included in the script.
-
-    Alternatively, call the `DeferredScripts` method to format the components scripts as inline script.
-
-    ```Serialization_to_file
-        @(Html.Kendo().DeferredScriptFile())
-    ```
-    ```Serialization_to_inline_script
-        @Html.Kendo().DeferredScripts()
-    ```
-
-If a component contains child components, such as editors or components defined inside client templates or partial views, and the global deferring is enabled, add the `AsChildComponent()` option in the helper configuration of each child component.
-
-> If the components are deferred through the global setting, you must add `AsChildComponent()` option to all child components.
-
-The following example demonstrates how to add the `AsChildComponent()` option to a [DateTimePicker]({% slug htmlhelpers_datetimepicker_aspnetcore %}) editor displayed in a globally deferred [Form]({% slug htmlhelpers_form_aspnetcore_overview %}) component.
-
-```HtmlHelper
-    @(Html.Kendo().Form<MyApplication.Models.FormItemsViewModels>()
-        .Name("exampleForm")
-        .HtmlAttributes(new { action = "Items", method = "POST" })
-        .Items(item =>
-        {
-            item.Add()
-            .Field(f => f.StartDate)
-            .Label(l => l.Text("Start date:"))
-            .Editor(e => e.DateTimePicker()
-                .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-                .DateInput()
-                .AsChildComponent()
-            );
-        })
-    )
-
-    @(Html.Kendo().DeferredScriptFile())
-```
-
-Another example of child components is the default [Grid editors]({% slug editortemplates_grid_aspnetcore %}), which are located in the `~/Views/Shared/EditorTemplates` folder. Ensure that each editor template used in the Grid has the `AsChildComponent()` method at the end of its configuration.
-
-```String.cshtml
-    @model object
-
-    @Html.Kendo().TextBoxFor(model => model).AsChildComponent()
-
-```
-
 ## Event Handling
 
 To subscribe to the client-side events that are exposed by a helper, use the `Events` method.
@@ -228,22 +99,6 @@ If you have deferred the initialization of the component, make sure you get its 
     });
     </script>
 
-## Using Client Templates
-
-By default, every Telerik UI helper renders a script element with an initialization statement. If the helper declaration is placed inside a Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
-
-    <script id="template" type="text/x-kendo-template">
-        @(Html.Kendo().NumericTextBox()
-              .Name("age").ToClientTemplate()
-        )
-    </script>
-    <div id="container"></div>
-    <script>
-        $(function () {
-           var template = kendo.template($("#template").html());
-           $("#container").append( template ({}) );
-        })
-    </script>
 
 ## Rendering of Forms
 
@@ -266,6 +121,8 @@ This approach is required with components such as the Window, TabStrip, Splitter
     }
 
 ## Bundling Resources
+
+For the SASS themes, Telerik is shipping one file and bundling is not needed. If you are using UI for ASP.NET MVC R1 2023 (version 2023.1.117) or older version with LESS themes follow the instructions below.
 
 Bundling combines resources and improves the loading time by reducing the number of requests to the server. By default, bundling is disabled in development (debug configuration).
 
@@ -323,5 +180,7 @@ The explanations and requirements in this section are applicable to all styleshe
 
 ## See Also
 
+* [Deferred Initialization]({% slug deferred_initialization_overview %})
+* [Using Client Templates]({% slug client_templates_overview %})
 * [Telerik UI for ASP.NET MVC Download and Installation]({% slug downloadinstall_aspnetcore %})
 * [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})

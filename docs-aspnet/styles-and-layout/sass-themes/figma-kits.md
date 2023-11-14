@@ -4,7 +4,7 @@ page_title: Telerik and Kendo UI Design Kits for Figma
 description: "Discover the {{ site.product }} UI Design Kits for Figma and learn how to use them to create stylish applications."
 previous_url: /styles-and-layout/figma-kits
 slug: figma_kits_aspnetmvc6_aspnetmvc
-position: 8
+position: 9
 ---
 
 {% if site.core %}

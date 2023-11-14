@@ -31,7 +31,7 @@ The following example demonstrates how to use the default tooltip of the Rating.
 
 ## Disabling the Tooltips
 
-Setting the [`Tooltip`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) property to `false` prevents the items to display tooltips when hovered.
+Setting the [`Tooltip`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#tooltipsystemstring) property to `false` prevents the items to display tooltips when hovered.
 
 ```HtmlHelper
     @(Html.Kendo().Rating()

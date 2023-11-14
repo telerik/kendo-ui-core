@@ -1,6 +1,6 @@
 ---
 title: Formatting Grid DateTime Data Fields to Use UTC    
-description: "Learn how to use UTC formatting on both the server and the client for {{ site.product }} Grid DateTime data fields."
+description: Learn how to use UTC formatting on both the server and the client for {{ site.product }} Grid DateTime data fields.
 type: how-to
 page_title: Use UTC in Both Client and Server Grids 
 slug: grid-use-utc-on-server-and-client
@@ -109,12 +109,30 @@ To apply the explicit transformation:
 
 To explore the complete example, see the project on how to [use UTC time on both the client and the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/utc-on-server-and-client).
 
-## See Also
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
 
 {% if site.core %}
-* [GridBuilder API Reference](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
 {% else %}
-* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
 {% endif %}
 
+## See Also
 
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

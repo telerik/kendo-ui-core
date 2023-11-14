@@ -89,6 +89,6 @@ Create a method to dynamically calculate the Diagram viewport dimensions and sca
 ```
 ## See Also
 
-* [Diagram Overview](https://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/overview)
-* [Persist Shape Properties](https://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/how-to/persist-shape-properties)
-* [Diagram Layout](https://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/layout)
+* [Diagram Overview](https://docs.telerik.com/kendo-ui/controls/diagram/overview)
+* [Persist Shape Properties](https://docs.telerik.com/kendo-ui/controls/diagram/how-to/persist-shape-properties)
+* [Diagram Layout](https://docs.telerik.com/kendo-ui/controls/diagram/layout)

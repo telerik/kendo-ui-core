@@ -167,4 +167,4 @@ You can reference a hybrid Layout instance by using the [`jQuery.data()`](http:/
     
 ## See Also
 
-* [Hybrid ListViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileListViewBuilder)
+* [Hybrid ListViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilelistviewbuilder)

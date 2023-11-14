@@ -14,9 +14,9 @@ This article describes how to configure your system for the Telerik NuGet source
 [NuGet](https://www.nuget.org) is a popular .NET package manager. Telerik maintains a NuGet feed with official {{ site.product }} releases and service packs. These packages are available only for registered users with an active trial or commercial license. In the Telerik NuGet feed, you will see only the packages that are licensed to your account.
 
 {% if site.core %}
->tipLooking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}) to add Telerik UI to the project.
+>tip Looking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}) to add Telerik UI to the project.
 {% else %}
->tipLooking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug setupwithnuget_aspnetmvc%}) to add Telerik UI to the project.
+>tip Looking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug setupwithnuget_aspnetmvc%}) to add Telerik UI to the project.
 {% endif %}
 
 ## Setting Up the Telerik NuGet Feed
@@ -162,7 +162,7 @@ Refer to the [Telerik NuGet feed instructional video](https://youtu.be/c3m_BLMXN
 
 After setting up the Telerik NuGet package source, install the packages either through the [Package Manager Dialog](https://docs.nuget.org/consume/package-manager-dialog) or the [Package Manager Console](http://docs.nuget.org/Consume/Package-Manager-Console).
 
-The NuGet packages allow you to use the Telerik UI {% if site.core %}TagHelpers and HtmlHelpers{% else %} HtmlHelpers {% endif %} in your application. For the UI components to render correctly, you must also provide the required [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
+The NuGet packages allow you to use the Telerik UI {% if site.core %}Tag Helpers and HTML Helpers{% else %} HTML Helpers {% endif %} in your application. For the UI components to render correctly, you must also provide the required [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
 >tip To check the status of the Progress Live Services, like Telerik NuGet, Kendo UI CDN, Kendo UI Dojo playground and others, visit the [Progress<sup>®</sup> Telerik<sup>®</sup> Live Services Status Page](http://status.telerik.com/).
 
@@ -170,12 +170,15 @@ The NuGet packages allow you to use the Telerik UI {% if site.core %}TagHelpers 
 
 The NuGet feed provides the following packages related to UI for ASP.NET Core and UI for ASP.NET MVC:
 
+{% if site.core %}
 - `Telerik.UI.for.AspNet.Core`&mdash;Telerik UI for ASP.NET Core Commercial.
 - `Telerik.UI.for.AspNet.Core.Trial`&mdash;Telerik UI for ASP.NET Core Trial.
+{% else %}
 - `Telerik.UI.for.AspNet.Mvc5`&mdash;Telerik UI for ASP.NET MVC 5 Commercial.
 - `Telerik.UI.for.AspNet.Mvc5.Trial`&mdash;Telerik UI for ASP.NET MVC 5 Trial.
 
 >As of the R3 2022 release, NuGet packages for MVC 3 and MVC 4 are no longer provided for Telerik UI for ASP.NET MVC.
+{% endif %}
 
 For more information on the list of the provided Kendo UI packages, refer to the article on [installing Kendo UI for jQuery with NuGet](https://docs.telerik.com/kendo-ui/intro/installation/nuget-install).
 

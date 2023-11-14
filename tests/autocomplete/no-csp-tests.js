@@ -1,54 +1,6 @@
 (function() {
     var dom;
 
-    describe("AutoComplete AngularJS integration - No CSP", function() {
-        afterEach(function() {
-            kendo.destroy(Mocha.fixture);
-        });
-
-        ngTest("autocomplete compiles header template", function() {
-            angular.module("kendo.tests").controller("mine", function($scope) {
-                $scope.selectedColors = ["red", "green"];
-
-                $scope.selectOptions = {
-                    dataSource: ["red", "green", "blue"],
-                    headerTemplate: "<div>{{text}}<div>",
-                    valuePrimitive: true
-                };
-
-                $scope.text = "My text";
-            });
-
-            Mocha.fixture.html('<div ng-controller=mine><input kendo-autocomplete  k-ng-model=selectedColors k-options=selectOptions /></div>');
-        },
-
-            function() {
-                var header = Mocha.fixture.find("input").getKendoAutoComplete().header;
-                assert.equal(header.text(), "My text");
-            });
-
-        ngTest("autocomplete compiles footer template", function() {
-            angular.module("kendo.tests").controller("mine", function($scope) {
-                $scope.selectOptions = {
-                    dataSource: ["red", "green", "blue"],
-                    footerTemplate: "<div>{{text}}<div>",
-                    valuePrimitive: true
-                };
-
-                $scope.text = "My text";
-            });
-
-            Mocha.fixture.html('<div ng-controller=mine><input kendo-autocomplete  k-ng-model=selectedColors k-options=selectOptions /></div>');
-        },
-
-            function() {
-                var widget = Mocha.fixture.find("input").getKendoAutoComplete();
-                widget.search("red");
-
-                assert.equal(widget.footer.text(), "My text");
-            });
-    });
-
     describe("autocomplete mvvm - No CSP", function() {
         beforeEach(function() {
             Mocha.fixture.append(

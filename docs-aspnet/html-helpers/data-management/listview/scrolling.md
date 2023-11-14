@@ -3,7 +3,7 @@ title: Scroll Modes
 page_title: Scrolling
 description: "Configure the Telerik UI ListView for {{ site.framework }} to enable its scrolling functionality."
 slug: htmlhelpers_listview_aspnetcore_scrolling
-position: 6
+position: 7
 ---
 
 # Scroll Modes
@@ -38,6 +38,22 @@ To control scrolling in the ListView, use its `Scrollable` property.
         .Pageable() // Enable paging.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="productListView"
+                    tag-name="div"
+                    template-id="template"
+                    style="height:350px;">
+        <scrollable enabled="true" />
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read", "ListView")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-listview>
+```
+{% endif %}
 
 ## Endless Scrolling
 
@@ -57,7 +73,7 @@ The following example demonstrates how to enable the endless scroll mode of the 
     </script>
 ```
 ```HtmlHelper
-    @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
+    @(Html.Kendo().ListView()
         .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the ListView.
         .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
         .ClientTemplateId("template") // This template will be used for rendering the ListView items.
@@ -69,6 +85,22 @@ The following example demonstrates how to enable the endless scroll mode of the 
         .Pageable() // Enable paging.
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="productListView"
+                    tag-name="div"
+                    template-id="template"
+                    style="height:350px;">
+        <scrollable mode="ListViewScrollableMode.Endless" />
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read", "ListView")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+    </kendo-listview>
+```
+{% endif %}
 
 ## See Also
 

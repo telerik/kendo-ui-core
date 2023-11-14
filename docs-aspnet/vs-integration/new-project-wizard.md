@@ -17,6 +17,8 @@ To use the project templates, you start the **Create New Project Wizard** provid
 
 To use the **Create New Project Wizard**, [install the {{ site.product }} Extension]({% slug overview_visualstudio_aspnetcore %}#installing-the-extensions).
 
+>If you have an older version of the Telerik Extensions for Visual Studio and you want to create a new {{ site.product }} project with version 2023.1.314 (R1 2023 SP1), or a newer version of the components, you must first update the Telerik Extension. To download and install the latest version of the Telerik Extensions, follow the [Installing from Visual Studio Marketplace]({% slug overview_visualstudio_aspnetcore %}#installing-from-visual-studio-marketplace) instructions.
+
 ## Using the Wizard
 
 >The exact steps to start the wizard may vary between the different Visual Studio versions. The following instructions describe the steps for Visual Studio 2019.
@@ -47,7 +49,6 @@ To start the wizard, use either of the following approaches:
 With the **Create New Project Wizard** you can select the desired:
 
 * Target framework
-* .NET Core version
 * Tag or HTML Helpers
 * Telerik UI Version
 * Project Template
@@ -60,12 +61,6 @@ The **Create New Project Wizard** allows you to select a target **Framework**.
 >Note
 > 
 >If the target **Framework** dropdown is disabled check the troubleshooting [section]({% slug troubleshooting_visualstudio_aspnetcore%}#the-target-framework-dropdown-is-disabled).
-
-![{{ site.product_short }} Selecting a target framework](../vs-integration/images/target-dropdown.png)
-
-### .NET Core version
-
-Click on the desired **{{ site.framework }}** version.
 
 ![{{ site.product_short }} The ASP.NET version options](../vs-integration/images/core-version.png)
 

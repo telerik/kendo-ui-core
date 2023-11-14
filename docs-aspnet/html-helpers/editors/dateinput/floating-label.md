@@ -3,7 +3,7 @@ title: Floating Label
 page_title: Floating Label
 description: "Learn how to initialize a floating label for the Telerik UI DateInput component for {{ site.framework }}."
 slug: htmlhelpers_dateinput_floatinglabel_aspnetcore
-position: 2
+position: 4
 ---
 
 # Floating Label

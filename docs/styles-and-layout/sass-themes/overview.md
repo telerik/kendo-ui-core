@@ -23,12 +23,12 @@ Currently, Kendo UI delivers the following Sass themes:
 
 > R1 2023 is the last official release of Kendo jQuery, where Less Themes are supported and shipped with the product.
 
-Apart from being written in a different language, the Sass-based themes are slightly different from the Less-based ones. This article outlines those differences and demonstrates how to use the Sass-based themes.
+The Sass-based themes are different from the Less-based ones as they are written in a different language. This article outlines those differences and demonstrates how to use the Sass-based themes.
 
 In Kendo UI, the Sass-based themes demonstrate the following differences from the Less-based ones:
 - Each Sass-based theme is represented by a single CSS file that combines the layout and the themes of the components. As a result, you do not need to match a theme with its common file.
-- Based on the widget you work with, the Sass-based themes can build a part of the widget theme in a similar way the Download Builder trims unused scripts.
-- The Sass-based themes are available on NPM. Each theme is stored as an NPM package and can be easily upgraded.
+- Based on the component you work with, the Sass-based themes can build a part of the component theme in a similar way the Download Builder trims unused scripts.
+- The Sass-based themes are available on NPM. Each theme is stored as an NPM package and can be upgraded as such.
 - Each Sass-based theme is compatible with the [Kendo UI components for Angular](https://www.telerik.com/kendo-angular-ui/). This enables you to port parts of your application to Angular 2 while maintaining their styling.
 
 ## Contribution

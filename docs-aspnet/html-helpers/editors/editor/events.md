@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI Editor for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/EditorEventBuilder) that allow you to control and customize the behavior of the component.
+The Telerik UI Editor for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/editoreventbuilder) that allow you to control and customize the behavior of the component.
 
 For a complete example of the basic Editor events, refer to the [demo on using the events of the Editor](https://demos.telerik.com/{{ site.platform }}/editor/events).
 

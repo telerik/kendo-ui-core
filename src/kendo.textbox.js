@@ -279,4 +279,5 @@ var __meta__ = {
 
     ui.plugin(TextBox);
 })(window.kendo.jQuery);
+export default kendo;
 

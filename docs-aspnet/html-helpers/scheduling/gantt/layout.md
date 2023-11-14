@@ -14,7 +14,7 @@ The layout of the Gantt consists of a GanttList and a Timeline sections. They ar
 
 The GanttList of the Gantt extends the TreeList widget and offers its functionality. For more details on the configuration and features of the TreeList, refer to its documentation and demos.
 
-* [TreeList Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/treelist/overview)
+* [TreeList Documentation](https://docs.telerik.com/kendo-ui/controls/treelist/overview)
 * [TreeList Demos](https://demos.telerik.com/kendo-ui/treelist/index)
 * [TreeList API](/api/javascript/ui/treelist)
 

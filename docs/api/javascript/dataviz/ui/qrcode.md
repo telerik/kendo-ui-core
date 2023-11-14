@@ -274,7 +274,7 @@ In case the element has width or height of zero, a default value of 200 pixels w
 
 ### value `Number|String`
 
-Sets the value of the QRCode. More about the the value of the QRCode can be found in the [Encoding](/controls/barcodes/qrcode/encodings) documentation article.
+Sets the value of the QRCode. More about the the value of the QRCode can be found in the [Encoding](/controls/qrcode/encodings) documentation article.
 
 #### Example
 

@@ -368,7 +368,7 @@ Defines the name of the button.
 
 ### toolbar.buttons.text `String`
 
-Defines the text that will be rendered in the button.
+Defines the text that will be used for the title of the icon button.
 
 #### Example
 
@@ -377,8 +377,8 @@ Defines the text that will be rendered in the button.
     $("#chat").kendoChat({
         toolbar: {
             buttons: [
-                { name: "ButtonA", text: "ButtonA" },
-                { name: "ButtonB", text: "ButtonB" }
+                { name: "ButtonA", text: "ButtonA", icon: "plus" },
+                { name: "ButtonB", text: "ButtonB", icon: "heart" }
             ]
         }
     });
@@ -432,8 +432,26 @@ Enables or disables the scrollable behavior of the toolbar.
         toolbar: {
             scrollable: true,
             buttons: [
-                { name: "ButtonA", attr: { "class": "myClass" } },
-                { name: "ButtonB", attr: { "class": "myClass" } }
+                { "name": "camera", "icon": "camera" },
+                { "name": "image", "icon": "image" },
+                { "name": "image-export", "icon": "image-export" },
+                { "name": "brush", "icon": "brush" },
+                { "name": "droplet", "icon": "droplet" },
+                { "name": "shapes", "icon": "shapes" },
+                { "name": "invert-colors", "icon": "invert-colors" },
+                { "name": "palette", "icon": "palette" },
+                { "name": "zoom-actual-size", "icon": "zoom-actual-size" },
+                { "name": "photos", "icon": "photos" },
+                { "name": "file-wrench", "icon": "file-wrench" },
+                { "name": "share", "icon": "share" },
+                { "name": "user", "icon": "user" },
+                { "name": "inbox", "icon": "inbox" },
+                { "name": "rss", "icon": "rss" },
+                { "name": "folder", "icon": "folder" },
+                { "name": "code", "icon": "code" },
+                { "name": "cloud", "icon": "cloud" },
+                { "name": "parameters", "icon": "parameters" },
+                { "name": "graph", "icon": "graph" }
             ]
         }
     });

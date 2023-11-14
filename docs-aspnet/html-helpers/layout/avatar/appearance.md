@@ -8,7 +8,7 @@ position: 2
 
 # Avatar Appearance
 
-The Аvatar allows you to set different styles based on its content.
+The Avatar allows you to set different styles based on its content.
 
 ## Type
 
@@ -68,7 +68,7 @@ The following example demonstrates the `Rounded` option of the Avatar:
 
 ## Theme Color
 
-The Аvatar allows you to specify predefined theme colors.
+The Avatar allows you to specify predefined theme colors.
 
 The available `ThemeColor` values are:
 

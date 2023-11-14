@@ -29,7 +29,7 @@ The Telerik UI Editor for {{ site.framework }} comes with a built-in option to e
 ```
 {% endif %}
 
-Customizations such as file name, font size, export of all pages can be added to the [`Pdf`](/api/Kendo.Mvc.UI.Fluent/EditorPdfSettingsBuilder) option of the widget:
+Customizations such as file name, font size, export of all pages can be added to the [`Pdf`](/api/kendo.mvc.ui.fluent/editorpdfsettingsbuilder) option of the widget:
 
 ```HtmlHelper
     @(Html.Kendo().Editor()

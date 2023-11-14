@@ -6,7 +6,7 @@ slug: htmlhelpers_multicolumncombobox_cascading
 position: 8
 ---
 
-# Cascading 
+# Cascading
 
 The cascading MultiColumnComboBox is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options that are based on the DataValueField in the previous MultiColumnComboBox.
 
@@ -56,11 +56,11 @@ The child MultiColumnComboBox cascades from the parent one if the `CascadeFrom` 
 ```
 {% endif %}
 
-## Cascading on Custom Parent Input 
+## Cascading on Custom Parent Input
 
-To allow custom input in the MultiColumnComboBox, set the `CascadeOnCustomValue` of the parent MultiColumnComboBox in а cascading scenario to `true`. As a result, cascading will be triggered upon custom input in the parent component. When `CascadeOnCustomValue` is set to its default `false` configuration, the child will not cascade and will be disabled upon setting custom input in the parent MultiColumnComboBox. Cascading on custom values works only when `CascadeFromParentField` is not set for the child component or points to the `DataValueField` of the parent.
+To allow custom input in the MultiColumnComboBox, set the `CascadeOnCustomValue` of the parent MultiColumnComboBox in a cascading scenario to `true`. As a result, cascading will be triggered upon custom input in the parent component. When `CascadeOnCustomValue` is set to its default `false` configuration, the child will not cascade and will be disabled upon setting custom input in the parent MultiColumnComboBox. Cascading on custom values works only when `CascadeFromParentField` is not set for the child component or points to the `DataValueField` of the parent.
 
-The following example shows how to implement the cascading functionality of the MultiColumnComboBox based on custom parent input. 
+The following example shows how to implement the cascading functionality of the MultiColumnComboBox based on custom parent input.
 
 ```HtmlHelper
 	@(Html.Kendo().MultiColumnComboBox()

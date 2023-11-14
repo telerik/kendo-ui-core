@@ -1,16 +1,24 @@
 ---
 title:  Razor Pages
-page_title: Configure a DataSource for the TreeList for Remote Binding in Razor Pages.
+page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI TreeList component for {{ site.framework }} in a Razor Pages using CRUD Operations."
 slug: htmlhelpers_treelist_razorpage_aspnetcore
-position: 1
+position: 2
 ---
 
-# Razor Page
+# TreeList in Razor Pages
 
-### TreeList CRUD Operations in Razor Pages
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-This article showcases how to perform CRUD operations with the TreeList component in a Razor Pages scenario.
+You can seamlessly integrate the Telerik UI TreeList for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the TreeList component in a Razor Pages scenario.
+
+For the complete project, refer to the [TreeList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/TreeList/TreeListCrudOperations.cshtml).
+
+## Getting Started
+
+This article showcases how to perform CRUD operations with the Telerik UI for {{ site.framework }}TreeList component in a Razor Pages scenario.
 
 To set up the TreeList component bindings:
 

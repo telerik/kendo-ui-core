@@ -322,6 +322,7 @@ var __meta__ = {
             }
 
             this.popup._hovered = true;
+            this.popup._shouldCorrectWidth = false;
             this.popup.open();
         }
     });
@@ -436,10 +437,6 @@ var __meta__ = {
             } else {
                 element.html(contentOptions);
             }
-
-            that.angular("compile", function() {
-                return { elements: element };
-            });
         },
 
         _ajaxRequest: function(options) {
@@ -495,7 +492,7 @@ var __meta__ = {
             }
 
             if (current && current[0] != target[0]) {
-                that.popup.close();
+                that.popup.close(true);
                 that.popup.element.kendoStop(true, true);// animation can be too long to hide the element before it is shown again
             }
 
@@ -606,4 +603,5 @@ var __meta__ = {
 
     kendo.ui.plugin(Tooltip);
 })(window.kendo.jQuery);
+export default kendo;
 

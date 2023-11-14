@@ -90,7 +90,7 @@ The following example demonstrates the basic configuration for the BottomNavigat
 * [Items]({% slug htmlhelpers_items_bottomnavigation_aspnetcore %})&mdash;The items configuration allows you to set various attributes like icons and text.
 * [Appearance]({% slug htmlhelpers_appearance_bottomnavigation_aspnetcore %})&mdash;The built-in appearance configuration allows you to customize the component.
 * [Templates]({% slug htmlhelpers_templates_bottomnavigation_aspnetcore %})&mdash;The templates give you control over the rendering of the BottomNavigation items.
-* [Accessibility]({% slug htmlhelpers_accessibility_bottomnavigation_aspnetcore %})&mdash;The BottomNavigation supports accessibility standards like WAI-ARIA, Section 508, WCAG 2.1, and provides keyboard support.
+* [Accessibility]({% slug htmlhelpers_accessibility_bottomnavigation_aspnetcore %})&mdash;The BottomNavigation supports accessibility standards like WAI-ARIA, Section 508, WCAG 2.2, and provides keyboard support.
 * [Events]({% slug events_bottomnavigation %})&mdash;Use the `Select()` event to control the functions of the component.
 
 ## Next Steps

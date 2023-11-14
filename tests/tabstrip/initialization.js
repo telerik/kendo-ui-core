@@ -108,5 +108,16 @@
             assert.equal(tabstrip.wrapper.find("div[tabindex=0]").length, 2);
         });
 
+        it("function tab template is applied correctly", function() {
+            tabstrip = new kendo.ui.TabStrip(dom, {
+                dataContentField: "content",
+                tabTemplate: data => `<span class='customClass'>${data.text}</span>`,
+                dataSource: [{
+                    text: "one", content: "Content one"
+                }]
+            });
+
+            assert.equal(tabstrip.wrapper.find("span.customClass").text(), "one");
+        });
     });
 }());

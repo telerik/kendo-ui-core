@@ -212,4 +212,4 @@ Extend the view and override the functions that are responsible for rendering th
 
 ## See Also
 
-* [Demo on Creating Custom Views through Inheriting Built-In Views](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/custom-views/custom-view)
+* [Demo on Creating Custom Views through Inheriting Built-In Views](https://docs.telerik.com/kendo-ui/controls/scheduler/how-to/custom-views/custom-view)

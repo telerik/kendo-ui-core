@@ -149,10 +149,10 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "FirstProject.dll"]
 ```
 
-## Resources 
+## Related NuGet Resources 
 
-* Telerik Documentation: 
-  * [Telerik UI for ASP.NET Core - Setting Up the nuget.config File](https://docs.telerik.com/aspnet-core/installation/nuget-install#setup-with-nugetconfig)
+* Telerik Documentation:
+  * [{{ site.product }} - Setting Up the nuget.config File]({%slug nuget_install_aspnetmvc6_aspnetmvc%}#setup-with-nugetconfig)
   * [Azure DevOps and Telerik NuGet](https://www.telerik.com/blogs/azure-devops-and-telerik-nuget-packages)
   * [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys)
 
@@ -162,3 +162,29 @@ ENTRYPOINT ["dotnet", "FirstProject.dll"]
   * [Consuming packages from authenticated feeds](https://docs.microsoft.com/en-us/nuget/consume-packages/consuming-packages-authenticated-feeds?Wt.mc_id=DX_MVP5000553)
   * [packageSourceCredentials](https://learn.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesourcecredentials)
   * [Package source mapping section](https://learn.microsoft.com/en-us/nuget/reference/nuget-config-file#package-source-mapping-section)
+
+## More {{ site.framework }} Resources
+
+* [{{ site.product }} Documentation]({%slug overview_aspnetmvc6_aspnetmvc%})
+
+* [{{ site.product }} Demos](https://demos.telerik.com/{{ site.platform }})
+
+{% if site.core %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-mvc)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -16,7 +16,10 @@ The supported data-binding approaches are:
 * [Ajax binding]({% slug htmlhelpers_multicolumncombobox_ajaxbinding_aspnetcore %})
 * [Server binding]({% slug htmlhelpers_multicolumncombobox_serverbinding_aspnetcore %})
 * [Custom binding]({% slug custombinding_multicolumncombobox_aspnetmvc %})
-* [Model binding]({% slug modelbinding_multicolumncombobox_aspnetmvc %})/
+* [Model binding]({% slug modelbinding_multicolumncombobox_aspnetmvc %})
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_multicolumncombobox_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

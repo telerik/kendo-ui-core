@@ -13,5 +13,5 @@ To see the example, refer to the project on how to [validate the timeslot availa
 ## See Also
 
 * [Basic Usage of the Scheduler HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler)
-* [SchedulerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [SchedulerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/schedulerbuilder)
 * [Scheduler Server-Side API](/api/scheduler)

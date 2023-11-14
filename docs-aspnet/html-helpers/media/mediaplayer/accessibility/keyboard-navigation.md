@@ -33,6 +33,16 @@ The MediaPlayer supports the following keyboard shortcuts:
         .HtmlAttributes(new { style = "height:360px; width:640px" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-mediaplayer 
+        name="mediaplayer"
+        navigatable="true"
+        style = "height:360px; width:640px">
+        <media title="Our Company Culture - Lesson 1" source="Video/video1.mp4" />
+    </kendo-mediaplayer>
+```
+{% endif %}
 
 ## See Also
 

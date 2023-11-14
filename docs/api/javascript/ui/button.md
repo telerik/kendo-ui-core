@@ -139,7 +139,7 @@ Controls how the color is applied to the button. Valid values are: `"solid"`, `"
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be applied as background image of a `span` element inside the **Button**.
 The `span` element can be added automatically by the widget, or an existing element can be used, if it has a `k-icon` CSS class applied.
-For a list of available icon names, please refer to the [Icons demo](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
+For a list of available icon names, please refer to the [Icon Button article](https://docs.telerik.com/kendo-ui/controls/button/icons).
 
 #### Example
 

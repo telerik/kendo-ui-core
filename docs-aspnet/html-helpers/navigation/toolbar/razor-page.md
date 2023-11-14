@@ -1,17 +1,21 @@
 ---
-title: Razor Page
-page_title: Razor Page
+title: Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Toolbar component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_toolbar_aspnetcore_razor_page
 ---
 
-# Razor Page
+# ToolBar in Razor Pages
 
-This article demonstrates how to add the Telerik UI Toolbar for {{ site.framework }} to a RazorPage.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI ToolBar for {{ site.framework }} in Razor Pages applications.
 
-```tab-HtmlHelper(csthml)        
+This article describes how to configure the ToolBar component in a Razor Pages scenario.
+
+For the complete project, refer to the [ToolBar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Toolbar/ToolbarIndex.cshtml).
+
+```tab-HtmlHelper(csthml)
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -65,7 +69,7 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
             });
         });
     </script>
-	
+
 ```
 {% if site.core %}
 ```tab-TagHelper(cshtml)
@@ -78,9 +82,9 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
             </item>
             <item text="Insert" type="CommandType.SplitButton">
                 <menu-buttons>
-                    <toolbar-button icon="insert-up" text="Insert above" />
+                    <toolbar-button icon="insert-top" text="Insert above" />
                     <toolbar-button icon="insert-middle" text="Insert between" />
-                    <toolbar-button icon="insert-down" text="Insert below" />
+                    <toolbar-button icon="insert-bottom" text="Insert below" />
                 </menu-buttons>
             </item>
             <item type="CommandType.Separator">
@@ -113,7 +117,7 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
             </item>
         </toolbar-items>
     </kendo-toolbar>
-    
+
     <script>
         $(document).ready(function () {
             $("#dropdown").kendoDropDownList({
@@ -132,11 +136,11 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
     </script>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
-	
+```tab-PageModel(cshtml.cs)
+
     public void OnGet()
     {
 
     }
-    
+
 ```

@@ -8,9 +8,9 @@ position: 5
 
 # RGB and HEX Input Formats
 
-With R3 SP1 of 2021 release support for both RGB and HEX formats for the {{ site.product }} ColorPicker was introduced. The available input formats for the component can be specified through [`.Formats()`](/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder#formatssystemstring) configuration. To choose the default format, use the [`.Format()`](/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder#formatkendomvcuicolorpickerformat) option.
+With R3 SP1 of 2021 release support for both RGB and HEX formats for the {{ site.product }} ColorPicker was introduced. The available input formats for the component can be specified through [`.Formats()`](/api/kendo.mvc.ui.fluent/colorpickerbuilder#formatssystemstring) configuration. to choose the default format, use the [`.Format()`](/api/kendo.mvc.ui.fluent/colorpickerbuilder#formatkendomvcuicolorpickerformat) option.
 
-The example below demonstrates thow to configure the {{ site.product }} ColorPicker with a different default view:
+The example below demonstrates how to configure the {{ site.product }} ColorPicker with a different default view:
 
 ```HtmlHelper
     <div>

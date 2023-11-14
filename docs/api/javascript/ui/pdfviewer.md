@@ -349,6 +349,8 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
         });
     </script>
 
+Apart from the built-in tools, the PDFViewer fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+
 ### toolbar.items.type `String`
 
 ### toolbar.items.overflow `String`
@@ -458,7 +460,7 @@ Specifies the localization messages of the toolbar.
 
 ### messages.toolbar.pager.last `String` *(default: "Go to the last page")*
 
-### messages.toolbar.pager.of `String` *(default: " of {0} ")*
+### messages.toolbar.pager.of `String` *(default: "of")*
 
 ### messages.toolbar.pager.page `String` *(default: "page")*
 

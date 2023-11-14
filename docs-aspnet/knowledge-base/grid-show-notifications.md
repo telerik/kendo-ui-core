@@ -1,6 +1,6 @@
 ---
-title: Show Notifications in an Inline Editable Grid
-description: How can I show success and error notification messages when editing Inline Grid?
+title: Showing Notifications in an Inline Editable Grid
+description: How can I show success and error notification messages when editing the Grid inline? Find the solution in the {{ site.product }} Knowledge Base.
 type: how-to
 page_title: Show Notifications when Editing Inline Grid
 slug: grid-show-notifications
@@ -59,7 +59,7 @@ How can I show success and error notification messages when editing Inline Grid?
         </script>
     ```
 
-1. Handle the [`RequestEnd` event of the DataSource](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#requeststartsystemfunc) that triggers when a remote request is finished. If the request type is `"update"` and the server response has no errors, display the Notification with the respective message for success.
+1. Handle the [`RequestEnd` event of the DataSource](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datasourceeventbuilder#requeststartsystemfunc) that triggers when a remote request is finished. If the request type is `"update"` and the server response has no errors, display the Notification with the respective message for success.
 
     ```
         @(Html.Kendo().Grid<GridViewModel>()
@@ -86,7 +86,7 @@ How can I show success and error notification messages when editing Inline Grid?
         </script>
     ```
 
-1. Handle the [`Error` event of the DataSource](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#errorsystemfunc) that triggers when the request to the remote endpoint fails. In the event handler, display the errors, call the `cancelChanges()` method of the Grid as is explained in [the handling `ModelState` errors section in the documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/editing/inline#handling-modelstate-errors), and display the Notification with the respective message for the error.
+1. Handle the [`Error` event of the DataSource](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datasourceeventbuilder#errorsystemfunc) that triggers when the request to the remote endpoint fails. in the event handler, display the errors, call the `cancelchanges()` method of the grid as is explained in [the handling `modelstate` errors section in the documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/editing/inline#handling-modelstate-errors), and display the Notification with the respective message for the error.
 
 
     ```
@@ -126,6 +126,35 @@ How can I show success and error notification messages when editing Inline Grid?
         </script>
     ```
 
+
+
+
+
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
- * [Notification Overview](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/notification/overview)
- * [Grid Inline Editing](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/editing/inline)
+
+* [Inline Editing in the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/editing/inline)
+* [Notification Component for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/notification/overview)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)

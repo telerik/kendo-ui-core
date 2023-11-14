@@ -44,9 +44,9 @@ The exact implementation in other scenarios varies, depending on the business lo
 The following example demonstrates how to use a position index&mdash;that is, it sets a caret position inside the Editor to a specified index.
 
 ```dojo
-    <div id="example" style="margin: 2em;">
-        <p><button id="setPosition" class="k-button">Click</button></p>
-        <div id="editor">Some text to focus and edit.</div>
+    <div id="example">
+        <p><button id="setPosition" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">Click</button></p>
+        <textarea id="editor">Some text to focus and edit.</textarea>
     </div>
 
     <script>
@@ -75,17 +75,21 @@ The following example demonstrates how to use a position index&mdash;that is, it
 The following example demonstrates how to search for a string&mdash;that is, it sets the a caret position to the start of a string.
 
 ```dojo
-    <div id="example" style="margin: 2em;">
-      <p><input id="stringToFocus" class="k-textbox" type="text" value="focus" /> <button id="setPosition" class="k-button">Click</button></p>
-      <div id="editor" style="margin: 5em 0 0">
+    <div id="example">
+      <p>
+        <input id="stringToFocus" class="k-textbox" type="text" value="focus" style="width: 20%" /> 
+        <button id="setPosition" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">Click</button>
+      </p>
+      <textarea id="editor" style="margin: 5em 0 0">
         <p>Random paragraph 1.</p>
         <p>Some text to focus and edit.</p>
-      </div>
+      </textarea>
     </div>
 
     <script>
       $(document).ready(function() {
         $("#editor").kendoEditor();
+        $("#stringToFocus").kendoTextBox();
 
 
         function findNodeOfString(container, str) {
@@ -93,8 +97,8 @@ The following example demonstrates how to search for a string&mdash;that is, it 
             container,
             NodeFilter.SHOW_TEXT,
             function(node) {
-        			return node.nodeValue.indexOf(str) >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-    				});
+              return node.nodeValue.indexOf(str) >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            });
 
           return nodeIterator.nextNode();
         }

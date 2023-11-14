@@ -22,10 +22,14 @@ The following example demonstrates how to add a custom tool to the toolbar.
         .Name("taskBoard")
         .Toolbar(t => t.Items(items =>
         {
-            items.Add().Type("button").Command("CustomAddCardCommand").Name("addCard").Text("Add New Card").Icon("plus");
+            items.Add().Type("button").Command("AddColumnCommand").Name("addColumn").Icon("plus-circle"); //customize a default command
+            items.Add().Type("button").Command("CustomAddCardCommand").Name("addCard").Text("Add New Card").Icon("plus"); //define a custom command
             items.Add().Type("spacer");
-            items.Add().Name("search");
+            items.Add().Name("search").Icon("eye"); // add the Search tool and customize the icon
         }))
+         .Messages(messages => messages
+            .Search("Find Tasks") //customize the Search tool placeholder
+            .AddColumn("New Column")) // customize the text of the default AddColumn command
         .Columns(c =>
         {
             c.Add().Text("To-do").Status("todo");
@@ -54,11 +58,13 @@ The following example demonstrates how to add a custom tool to the toolbar.
 	    bind-to="cards">
         <toolbar>
             <items>
-                <item type="button" command="CustomAddCardCommand" name="addCard" text="Add New Card" icon="plus"></item>
+                <item type="button" command="AddColumnCommand" name="addColumn" icon="plus-circle"></item> //customize a default command
+                <item type="button" command="CustomAddCardCommand" name="addCard" icon="plus"></item> //define a custom command
                 <item type="spacer"></item>
-                <item name="search"></item>
+                <item name="search" icon="search"></item>
             </items>
         </toolbar>
+        <messages search="Find Task" add-column="New Column"></messages> //customize the Search tool placeholder and the text of the default AddColumn command
         <taskboard-columns>
             <column text="To-do" status="todo"></column>
             <column text="In progress" status="inProgress"></column>

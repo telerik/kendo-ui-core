@@ -27,11 +27,11 @@ The following example demonstrates how to configure the SplitButton items.
 ```
 {% if site.core %}
 ```TagHelper
-   <kendo-splitbutton name="splitButton" text="Paste" icon="paste">
+   <kendo-splitbutton name="splitButton" text="Paste" icon="clipboard">
         <splitbutton-items>
-            <item id="keep-text" text="Keep Text Only" icon="paste-plain-text"></item>
-            <item id="paste-html" text="Paste as HTML" icon="paste-as-html" hidden="true"></item>
-            <item id="paste-markdown" text="Paste Markdown" icon="paste-markdown" enabled="false"></item>
+            <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
+            <item id="paste-html" text="Paste as HTML" icon="clipboard-code" hidden="true"></item>
+            <item id="paste-markdown" text="Paste Markdown" icon="clipboard-markdown" enabled="false"></item>
             <item id="favourite" text="Mark As Favourite" image-url="@Url.Content("~/content/shared/icons/16/star.png")"></item>
         </splitbutton-items>
    </kendo-splitbutton>

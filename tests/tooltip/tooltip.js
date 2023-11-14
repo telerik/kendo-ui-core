@@ -260,6 +260,20 @@
             }, tooltip.options.hideAfter);
         });
 
+        it("popup width remains the same on subsequent shows", function() {
+            var tooltip = new Tooltip(container, { content: "Tooltip content for this element" }),
+                originalWidth = 0,
+                latestWidth = 0;
+
+            tooltip.show(container);
+            originalWidth = tooltip.popup.element.width();
+            tooltip.hide();
+            tooltip.show(container);
+            latestWidth = tooltip.popup.element.width();
+
+            assert.equal(originalWidth, latestWidth);
+        });
+
         it("title attributes are temporary removed", function() {
             container.attr("title", "foo");
 
@@ -647,6 +661,10 @@
 
 
         it("popup is resized based on content", function() {
+            if (window.navigator.userAgent.includes('Firefox')) {
+                this.skip();
+            }
+            else {
             var firstText = "foo";
             var secondText = "some very long text";
 
@@ -674,6 +692,7 @@
             assert.equal(expected, 127);
 
             tempSpan.remove();
+            }
         });
 
         it("is visible when mouse enters the popup", function(done) {

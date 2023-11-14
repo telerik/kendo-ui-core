@@ -3,7 +3,7 @@ title: Columns
 page_title: Columns
 description: "Configure the columns of the Telerik UI Gantt component for {{ site.framework }}."
 slug: htmlhelpers_gantt_columns_aspnetcore
-position: 4
+position: 8
 ---
 
 # Columns

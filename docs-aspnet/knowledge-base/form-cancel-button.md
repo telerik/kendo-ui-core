@@ -1,7 +1,7 @@
 ---
-title: Integrate a Cancel Button within the Form
+title: Integrating a Cancel Button within the Form
 page_title: Implement a Cancel Button within the Form
-description: "An example on how to integrate a Cancel button within the {{ site.product }} Form."
+description: An example on how to integrate a Cancel button within the {{ site.product }} Form. Follow the steps in the Knowledge Base section of the {{ site.product }} components.
 type: how-to
 slug: form-cancel-button
 tags: progress, telerik, aspnet, mvc, core, add, integrate, implement, form, cancel, button
@@ -14,7 +14,7 @@ component: form
 <table>
  <tr>
   <td>Product</td>
-  <td>{{ site.prodcut }} Form</td>
+  <td>{{ site.product }} Form</td>
  </tr>
  <tr>
   <td>Progress {{ site.product }} version</td>
@@ -31,7 +31,7 @@ How can I integrate a **Cancel** button within the {{ site.product }} Form?
 To achieve the desired scenario: 
 
 1. Provide initial values for the Form through the `.FormData()` configuration option.
-1. Configure the Form buttons through the [`.ButtonTemplateId()`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/FormBuilder#buttonstemplateidsystemstring) configuration option and provide an `id` for the **Cancel** button.
+1. Configure the Form buttons through the [`.ButtonTemplateId()`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/formbuilder#buttonstemplateidsystemstring) configuration option and provide an `id` for the **Cancel** button.
 1. Attach a click handler for the **Cancel** button.
 1. Within the handler, get the `formData`, set the `form` fields programmatically, and make an Ajax request to the desired end-point.
 
@@ -95,6 +95,30 @@ To achieve the desired scenario:
    })
 ```
 
+## More {{ site.framework }} Form Resources
+
+* [{{ site.framework }} Form Documentation](({%slug htmlhelpers_form_aspnetcore_overview%})
+
+* [{{ site.framework }} Form Demos](https://demos.telerik.com/{{ site.platform }}/form)
+
+{% if site.core %}
+* [{{ site.framework }} Form Product Page](https://www.telerik.com/aspnet-core-ui/form)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Form Product Page](https://www.telerik.com/aspnet-mvc/form)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [Form Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Server-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/form)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -63,6 +63,28 @@ If set to `true` the widget will auto-scroll the container when the mouse/finger
       }
     </style>
 
+### clickMoveClick `Boolean` *(default: false)*
+
+Determines whether the click move click interaction would be enabled as an alternative of the drag and drop move. By default the alternative is disabled.
+
+#### Example
+
+    <div id="draggable"></div>
+
+    <script>
+      $("#draggable").kendoDraggable({
+        clickMoveClick: true
+      });
+    </script>
+    <style>
+      #draggable {
+        width: 50px;
+        height: 50px;
+        background-color: orange;
+        border: 2px solid green;
+      }
+    </style>
+
 ### container `String | jQuery`*(default: null)*
 
 If set, the hint movement is constrained to the container boundaries.

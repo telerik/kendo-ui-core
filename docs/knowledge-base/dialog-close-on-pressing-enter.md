@@ -41,16 +41,18 @@ How can I close a Kendo UI Dialog by pressing the `Enter` key?
 1. Call its `close` method.
 
 ```dojo
-	<script>
-	   $(document).ready(function (e) {
-			$(document).keypress(function (e) {
-				if (e.which == 13) {
-					if ($(".k-dialog").css("display") == "block") {
-						$("#myDialogId").data("kendoDialog").close();
-					}
-				}
-			});
-		});
-	});
-	</script>
+	<div id='dialog'>My Kendo Dialog</div>
+    <script>
+      $(document).ready(function (e) {
+        $("#dialog").kendoDialog();
+
+      });
+      $(document).keypress(function (e) {
+        if (e.which == 13) {
+          if ($(".k-dialog").css("display") == "flex") {
+            $("#dialog").data("kendoDialog").close();
+          }
+        }
+      });
+    </script>
 ```

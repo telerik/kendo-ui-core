@@ -3,7 +3,7 @@ title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ImageEditor component for {{ site.framework }}."
 slug: htmlhelpers_imageeditor_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} ImageEditor Overview
@@ -43,47 +43,19 @@ The following example demonstrates how to define the ImageEditor.
 
 ## Functionality and Features
 
-* [Tools]({% slug htmlhelpers_imageeditor_tools_aspnetcore %})
+* [Tools]({% slug htmlhelpers_imageeditor_tools_aspnetcore %})—The ImageEditor offers a collection of tools that allow the user to interact with the UI component.
+* [Events]({% slug events_imageeditor_aspnetcore %})—To control the behavior of the component upon user interaction, you can use the events that the component emits.
+* [Accessibility]({% slug accessibility_aspnetcore_imageeditor %})—The ImageEditor is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
-## Events
+## Next Steps
 
-The following example demonstrates how to handle ImageEditor events on the client-side. For a complete example on basic ImageEditor events, refer to the [demo on using the events of the ImageEditor](https://demos.telerik.com/{{ site.platform }}/imageeditor/events).
-
-```HtmlHelper
-    @(Html.Kendo().ImageEditor()
-        .Name("imageEditor")
-        .Events(e => e
-            .ImageLoaded("onImageLoaded")
-        )
-    )
-
-    <script>
-        function onImageLoaded(e) {
-            console.log("Image loaded");
-        }
-    </script>
-```
+* [Getting Started with the ImageEditor]({% slug aspnetcore_imageeditor_getting_started %})
+* [Basic Usage of the ImageEditor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/index)
 {% if site.core %}
-```TagHelper
-    <kendo-imageeditor name="imageEditor" 
-                       width="500" 
-                       height="500" 
-                       on-image-loaded="onImageLoaded">
-    </kendo-imageeditor>
-    <script>
-        function onImageLoaded(e) {
-            console.log("Image loaded");
-        }
-    </script>
-```    
+* [Basic Usage of the ImageEditor TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/imageeditor/tag-helper)
+* [ImageEditor in Razor Pages]({% slug htmlhelpers_imageeditor_razorpage_aspnetcore%})
 {% endif %}
 
 ## See Also
-
-* [Basic Usage of the ImageEditor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor)
-{% if site.core %}
-* [Basic Usage of the ImageEditor TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/imageeditor/tag-helper)
-{% endif %}
-* [Using the API of the ImageEditor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/api)
-* [Server-Side API](/api/imageeditor)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)
+* [Using the API of the ImageEditor for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/api)
+* [Knowledge Base Section](/knowledge-base)

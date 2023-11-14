@@ -8,7 +8,7 @@ position: 7
 
 # Events
 
-The Telerik UI TabStrip for {{ site.framework }} exposes multiple [events](/api/Kendo.Mvc.UI.Fluent/TabStripEventBuilder) that allow you to control and customize the behavior of the UI component.
+The Telerik UI TabStrip for {{ site.framework }} exposes multiple [events](/api/kendo.mvc.ui.fluent/tabstripeventbuilder) that allow you to control and customize the behavior of the UI component.
 
 For a complete example on basic TabStrip events, refer to the [demo on using the events of the TabStrip](https://demos.telerik.com/{{ site.platform }}/tabstrip/events).
 

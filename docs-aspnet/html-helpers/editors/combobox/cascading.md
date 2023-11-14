@@ -87,9 +87,9 @@ The child ComboBox cascades from the parent one if the `CascadeFrom` option is d
 
 For a runnable example, refer to the [demo on cascading comboboxes](https://demos.telerik.com/{{ site.platform }}/combobox/cascadingcombobox).
 
-## Cascading on Custom Parent Input 
+## Cascading on Custom Parent Input
 
-To allow custom input in the ComboBox, set the `CascadeOnCustomValue` of the parent ComboBox in а cascading scenario to `true`. As a result, cascading will be triggered upon custom input in the parent component. When `CascadeOnCustomValue` is set to its default `false` configuration, the child will not cascade and will be disabled upon setting custom input in the parent ComboBox. Cascading on custom values works only when `CascadeFromParentField` is not set for the child component or points to the `DataValueField` of the parent.
+To allow custom input in the ComboBox, set the `CascadeOnCustomValue` of the parent ComboBox in a cascading scenario to `true`. As a result, cascading will be triggered upon custom input in the parent component. When `CascadeOnCustomValue` is set to its default `false` configuration, the child will not cascade and will be disabled upon setting custom input in the parent ComboBox. Cascading on custom values works only when `CascadeFromParentField` is not set for the child component or points to the `DataValueField` of the parent.
 
 When the custom parent input is enabled, the child ComboBox takes the following actions during initialization:
 
@@ -101,7 +101,7 @@ When the custom parent input is enabled, the child ComboBox takes the following 
 > * The cascading functionality works only when you define the `cascadeFrom` property and initialize the parent ComboBox.
 > * The `filter` operator is always `"eq"`. To filter the data, the child ComboBox uses the `dataValueField` option of the parent ComboBox.
 
-The following example shows how to implement the cascading functionality of the ComboBox based on custom parent input. 
+The following example shows how to implement the cascading functionality of the ComboBox based on custom parent input.
 
 ```HtmlHelper
     @(Html.Kendo().ComboBox()

@@ -608,7 +608,7 @@ The example below will initialize the sub menus to open to the left.
 
 #### Example
 
-    <div id="target">Target</div>
+    <div style='margin-left:100px' id="target">Target</div>
     <ul id="context-menu">
         <li>Item 1
             <ul>

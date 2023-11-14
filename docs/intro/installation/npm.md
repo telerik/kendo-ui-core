@@ -18,6 +18,8 @@ Kendo UI for jQuery maintains the [commercial Kendo UI for jQuery (Kendo UI Prof
 
 All official releases, service packs, and internal builds are uploaded to both distribution packages.
 
+> As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can [`download jQuery using npm`](https://jquery.com/download/#downloading-jquery-using-npm-or-yarn) or use other source for the jQuery library.
+
 ### Commercial Distribution on NPM
 
 The commercial distribution NPM package is available as [`@progress/kendo-ui`](https://www.npmjs.com/package/@progress/kendo-ui) in the NPM registry. 
@@ -68,6 +70,10 @@ As of the 2022.3.1109 version, the `package.json` file comes with three [fields 
 - `browser`—Points to the UMD `kendo.all.min.js` script in the `umd` folder.
 
 To bundle the Kendo UI scripts by using one of the [module systems](#3-choose-a-module-system-to-use), you can use a plugin such as [rollup](https://rollupjs.org/guide/en/).
+
+> Starting from version 2023.3.718, the `kendo` instance is exported as a default export for the CommonJS and ECMAScript modules. This allows you to:
+> * Use the `import kendo from '@progress/kendo-ui'` syntax to import the Kendo UI scripts in your application. 
+> * Use the `kendo` instance to get the jQuery in which the Kendo UI components are defined. For example, `const $ = kendo.jQuery; $("#grid").kendoGrid({...});`.
 
 ### ECMAScript
 
@@ -237,4 +243,5 @@ To bundle the UMD files:
 * [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI for jQuery Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [Using Script License Code]({% slug using-license-code %})

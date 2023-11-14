@@ -99,6 +99,35 @@ data source is fired. By default the widget will bind to the data source specifi
     dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
     </script>
 
+### navigatable `Boolean` *(default: false)*
+
+If set to `true` the user could navigate the component using the keyboard navigation. By default keyboard navigation is disabled.
+
+#### Example - enable keyboard navigation
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        navigatable: true,
+        height: 550,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
+> Check [Keyboard navigation](https://demos.telerik.com/kendo-ui/pivotgridv2/keyboard-navigation) for a live demo.
+
 ### pdf `Object`
 
 Configures the Kendo UI PivotGridV2 PDF export settings.
@@ -129,6 +158,7 @@ The author of the PDF document.
                 },
                 read: 'https://demos.telerik.com/olap/msmdpump.dll'
             }
+        }
     });
     </script>
 

@@ -45,7 +45,7 @@ To export the Map to a PDF format document, use the [`exportPdf()`](https://docs
     )
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="@Url.Content("~/shared/pako.min.js")"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <script>
         $(document).ready( function () {
@@ -100,7 +100,7 @@ To export the Map to a PDF format document, use the [`exportPdf()`](https://docs
     </kendo-map>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="@Url.Content("~/shared/pako.min.js")"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <script>
         $(document).ready( function () {

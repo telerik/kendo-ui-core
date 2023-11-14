@@ -1,8 +1,8 @@
 ---
-title: Change Grid Height When Using Frozen Columns
-description: How can I resize a Kendo UI Grid which has frozen columns?
+title: Changing Grid Height When Using Frozen Columns
+description: How can I resize a {{ site.product }} Grid which has frozen columns?
 type: how-to
-page_title: Change Grid Height When Using Frozen Columns
+page_title: Changing Grid Height When Using Frozen Columns
 slug: grid-change-height-when-using-frozen-columns
 tags: aspnet, mvc, grid, change, height, when, using, frozen, columns, locked
 res_type: kb
@@ -20,12 +20,13 @@ component: grid
 
 ## Description
 
-How can I resize a Telerik UI Grid which has frozen columns?
+How can I resize a {{ site.product }} Grid which has frozen columns?
 
-## Solution 
+## Solution
+
 The frozen column functionality requires the Grid to have fixed height. However, the suggested approach ensures that the Grid is able to calculate and construct its layout properly during resizing.
 
-The following example demonstrates how to change the height style of the 'div' wrapper element and then call the [resize](https://docs.telerik.com/kendo-ui/styles-and-layout/using-kendo-in-responsive-web-pages#individual-widget-resizing) method of the Grid.
+The following example demonstrates how to change the height style of the `div` wrapper element and then call the [`resize`](https://docs.telerik.com/kendo-ui/styles-and-layout/using-kendo-in-responsive-web-pages#individual-widget-resizing) method of the Grid.
 
 ```Index.cshtml
 
@@ -87,3 +88,31 @@ The following example demonstrates how to change the height style of the 'div' w
     }
 
 ```
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

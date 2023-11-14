@@ -1,6 +1,6 @@
 ---
-title: Grid Toolbar Template
-description: An example on how to create a Toolbar template in the Telerik UI Grid for ASP.NET Core.
+title: Creating Custom Grid Toolbar Template
+description: Learn how to create a custom Toolbar template in the {{ site.product }} Grid. Find the solution in the Knowledge Base section of the {{ site.product }} documentation.
 type: how-to
 page_title: Create a Custom Toolbar in Grid
 slug: grid-toolbar-template
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
+  <td>{{ site.product }} Grid</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -25,12 +25,12 @@ component: grid
 
 ## Description
 
-We recently upgraded our ASP.NET MVC 5 to ASP.NET MVC Core 2.0.1 (running on net471), however we're running into some issues. The `.ToolBar( t => t.Template(` does not exist anymore and we had a dropdown list and a button we want to implement.
-Is there a workaround for it or if it needs to be replaced by something else what would be the best approch?
+We recently upgraded our ASP.NET MVC 5 to ASP.NET MVC Core 2.0.1 (running on net471), however we're running into some issues. The `.ToolBar( t => t.Template(` does not exist anymore and we had a drop-down list and a button we want to implement.
+Is there a workaround for it or if it needs to be replaced by something else what would be the best approach?
 
 ## Solution
 
-Indeed the change which ASP.NET Core have made affects the server rendering, however, you can still have the same toolbar template using a client template. Here is how:
+Indeed the changes in ASP.NET Core affect the server rendering, however, you can still have the same toolbar template using a client template. Here is how:
 
 1. Add the toolbar configuration like this:
     `.ToolBar(t=>t.ClientTemplateId("toolbar")) // this should be the script tag id`
@@ -93,4 +93,33 @@ Indeed the change which ASP.NET Core have made affects the server rendering, how
     </style>
 ```
 
-Here is a [REPL example demonstrating the above with v2021.3.914](https://netcorerepl.telerik.com/wFFlaIlQ04WzH8VM43)
+Here is a [REPL example demonstrating the above with version 2021.3.914](https://netcorerepl.telerik.com/wFFlaIlQ04WzH8VM43)
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik REPL: Creating Custom Grid Toolbar Template](https://netcorerepl.telerik.com/wFFlaIlQ04WzH8VM43)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -1,8 +1,8 @@
 ---
-title: Customize the Delete confirmation dialog
-description: "An example on how to customize the Delete confirmation dialog in the {{ site.product }} Grid."
+title: Customizing the Delete Confirmation Dialog
+description: An example on how to customize the Delete confirmation dialog in the {{ site.product }} Grid.
 type: how-to
-page_title: Customize the Delete confirmation dialog
+page_title: Customize the Delete Confirmation Dialog
 slug: grid-custom-delete-confirmation-dialog
 tags: mvc, core, grid, custom, delete, confirmation, dialog
 res_type: kb
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>{{ site.prodcut }} Grid</td>
+  <td>{{ site.product }} Grid</td>
  </tr>
  <tr>
   <td>Progress {{ site.product }} version</td>
@@ -24,14 +24,14 @@ component: grid
 
 ## Description
 
-How can I customize the Delete confirmation dialog in the {{ site.product }} Grid
+How can I customize the **Delete** confirmation dialog in the {{ site.product }} Grid?
 
 ## Solution
 
 1. Declare a custom Dialog.
 1. Include a [custom command button](https://demos.telerik.com/kendo-ui/grid/custom-command).
-1. Hook up for the [Click](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of the command button.
-1. When the click event is triggered, get a reference to the row in which the button is positioned and open the dialog. Save the current record in a global variable.
+1. Hook up for the [`Click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of the command button.
+1. When the `Click` event is triggered, get a reference to the row in which the button is positioned and open the dialog. Save the current record in a global variable.
 1. In the custom dialog, add two options to confirm/cancel the deletion.
 1. On confirm delete the record.
 1. On cancel close the Dialog. 
@@ -93,4 +93,33 @@ How can I customize the Delete confirmation dialog in the {{ site.product }} Gri
         }
 ```
 
-For the complete implementation of the suggested approach, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/mwkMYsFG19Xfgl0512) example.
+For the complete implementation of the suggested approach, refer to the [Telerik REPL project on customizing the delete confirmation dialog](https://netcorerepl.telerik.com/mwkMYsFG19Xfgl0512).
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik REPL: Customizing the Delete Confirmation Dialog](https://netcorerepl.telerik.com/mwkMYsFG19Xfgl0512)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

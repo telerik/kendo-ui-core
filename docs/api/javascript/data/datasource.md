@@ -378,6 +378,29 @@ The data item field to which the filter operator is applied.
     });
     </script>
 
+### filter.ignoreCase `Boolean` *(default: true)*
+
+The filter will ignore the casing of the value by default.
+
+#### Example - set the filter ignoreCase
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filter: { field: "name", operator: "startswith", value: "Jane", ignoreCase: false } // Value will be treated as "Jane" instead of "jane".
+    });
+    dataSource.fetch(function(){
+      var view = dataSource.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(view.length); // displays "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(view[0].name); // displays "Jane Doe"
+    });
+    </script>
+
 ### filter.filters `Array`
 
 The nested filter expressions. Supports the same options as [`filter`](/api/javascript/data/datasource#configuration-filter). Filters can be nested indefinitely.
@@ -928,25 +951,31 @@ The configuration used to parse the remote service response.
 #### Example - specify the schema of the remote service
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "html5" } // search for tweets that contain "html5"
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service-core/products/read/",
+            contentType: "application/json",
+            type: "POST"
+          },
+          parameterMap: function (data, type) {
+            if (type == "read") {
+              return JSON.stringify(data);
+            }
+          }
+        },
+        schema: {
+          data: function(response) {
+            console.log(response)            
+            return response.Data; // the response from the service is { Data: [array of objects] }
+          }
         }
-      },
-      schema: {
-        data: function(response) {
-          return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
-        }
-      }
-    });
-    dataSource.fetch(function(){
-      var data = this.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data.length);
-    });
+      });
+      dataSource.fetch(function(){
+        var data = this.data();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(data.length);
+      });
     </script>
 
 ### schema.aggregates `Function|String`
@@ -1042,47 +1071,58 @@ The field from the server response which contains the data items. Can be set to 
 #### Example - specify the field which contains the data items as a string
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "html5" } // search for tweets that contain "html5"
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service-core/products/read/",
+            contentType: "application/json",
+            type: "POST"
+          },
+          parameterMap: function (data, type) {
+            if (type == "read") {
+              return JSON.stringify(data);
+            }
+          }
+        },
+        schema: {
+          data: "Data"
         }
-      },
-      schema: {
-        data: "statuses" // twitter's response is { "statuses": [ /* results */ ] }
-      }
-    });
-    dataSource.fetch(function(){
-      var data = this.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data.length);
-    });
+      });
+      dataSource.fetch(function(){
+        var data = this.data();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(data.length);
+      });
     </script>
 
 #### Example - specify the field which contains the data items as a function
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "html5" } // search for tweets that contain "html5"
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service-core/products/read/",
+            contentType: "application/json",
+            type: "POST"
+          },
+          parameterMap: function (data, type) {
+            if (type == "read") {
+              return JSON.stringify(data);
+            }
+          }
+        },
+        schema: {
+          data: function(response) {
+            console.log(response)            
+            return response.Data; // the response from the service is { Data: [array of objects] }
+          }
         }
-      },
-      schema: {
-        data: function(response) {
-          return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
-        }
-      }
-    });
-    dataSource.fetch(function(){
-      var data = this.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data.length);
-    });
+      });
+      dataSource.fetch(function(){
+        var data = this.data();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(data.length);
+      });
     </script>
 
 ### schema.errors `Function|String` *(default: "errors")*

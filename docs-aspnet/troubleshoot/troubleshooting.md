@@ -493,7 +493,7 @@ You have two alternative options to tackle this scenario:
 * Clear the `ModelState` in the controller's action method after the `POST`.
 * Set `Encode(false)` for the Editor and set an `[AllowHtml]` attribute to the model property, so that the Editor's value is submitted non-encoded.
 
-For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues](https://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshooting).
+For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues](https://docs.telerik.com/kendo-ui/controls/editor/troubleshooting).
 
 ## See Also
 
@@ -510,11 +510,11 @@ For additional tips on the Editor widget, refer to the [troubleshooting article 
 * [Common Issues in Kendo UI Excel Export](https://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
 * [Common Issues in Kendo UI Charts](https://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
 * [Performance Issues in Kendo UI Widgets for Data Visualization](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Common Issues in Kendo UI ComboBox](https://docs.telerik.com/kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Diagram](https://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
-* [Common Issues in Kendo UI DropDownList](https://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Editor](https://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Upload](https://docs.telerik.com/kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI ComboBox](https://docs.telerik.com/kendo-ui/controls/combobox/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Diagram](https://docs.telerik.com/kendo-ui/controls/diagram/troubleshoot/common-issues)
+* [Common Issues in Kendo UI DropDownList](https://docs.telerik.com/kendo-ui/controls/dropdownlist/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Editor](https://docs.telerik.com/kendo-ui/controls/editor/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/multiselect/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduler/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Upload](https://docs.telerik.com/kendo-ui/controls/upload/troubleshoot/troubleshooting)
 * [Common Issues Related to Styling, Appearance, and Rendering](https://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

@@ -1,6 +1,6 @@
 ---
 title: Updating and Adding Text to the Expand and Collapse Icons in the Hierarchy Grid
-description: "An example on how to update and add text to the Expand and Collapse icons for the Telerik UI for {{ site.framework }} hierarchical Grid."
+description: An example on how to update and add text to the Expand and Collapse icons for the Telerik UI for {{ site.framework }} hierarchical Grid.
 type: how-to
 page_title: Updating and Adding Text to the Expand and Collapse Icons in the Hierarchy Grid
 slug: update-hierarchy-grid-expand-collapse-icons
@@ -31,8 +31,8 @@ How can I change the **Expand** and **Collapse** icons in the Telerik UI for {{ 
 To achieve the desired scenario:
 
 1. Update the **Expand** and **Collapse** icons by using the common classes provided by Kendo. For the full list of the available Kendo UI Web Font Icons, refer to the [list of Font icons](/styles-and-layout/sass-themes/font-icons#list-of-font-icons).
-1. To add initial text icons once the data is bound to the Grid, subscribe to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event.
-1. To add text to the **Expand** and **Collapse** icons, subscribe to both the [`DetailExpand`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#detailexpandsystemstring) and [`DetailCollapse`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#detailcollapsesystemstring) events and alter the initially provided style classes by using the conventional [removeClass()](https://api.jquery.com/removeclass/) and [text()](https://api.jquery.com/text/) jQuery methods.
+1. To add initial text icons once the data is bound to the Grid, subscribe to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event.
+1. To add text to the **Expand** and **Collapse** icons, subscribe to both the [`DetailExpand`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#detailexpandsystemstring) and [`DetailCollapse`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#detailcollapsesystemstring) events and alter the initially provided style classes by using the conventional [removeclass()](https://api.jquery.com/removeclass/) and [text()](https://api.jquery.com/text/) jQuery methods.
 
 ```Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
@@ -156,8 +156,8 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
+* [Telerik REPL: Add and Update the Expand and Collapse Icons in the Grid for {{ site.framework }}](https://netcorerepl.telerik.com/GnuPvvcu03wZcuCT49)
 * [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
-* [Telerik REPL: Add and Update the Expand and Collapse Icons in the Grid for {{ site.framework }}](https://netcorerepl.telerik.com/GnuPvvcu03wZcuCT49)

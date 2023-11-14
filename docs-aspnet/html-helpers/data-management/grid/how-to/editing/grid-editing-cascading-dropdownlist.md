@@ -13,6 +13,6 @@ To see the example, refer to the project on how to configure the Kendo UI Grid t
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder)
 * [Overview of the DropDownList HtmlHelper]({% slug htmlhelpers_dropdownlist_aspnetcore %})
-* [DropDownListBuilder API Reference](https://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+* [DropDownListBuilder API Reference](https://docs.telerik.com/kendo-ui/aspnet-mvc/api/kendo.mvc.ui.fluent/dropdownlistbuilder)

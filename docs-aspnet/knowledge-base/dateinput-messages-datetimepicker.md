@@ -1,7 +1,7 @@
 ---
-title: Set the DateInput Messages of the DateTimePicker
-page_title: Set the DateInput Messages of the DateTimePicker
-description: "An example on how to set the {{ site.product }} DateInput messages of the DateTimePicker."
+title: Setting the DateInput Messages of the DateTimePicker
+page_title: Setting the DateInput Messages of the DateTimePicker
+description: An example on how to set the {{ site.product }} DateInput messages of the DateTimePicker.
 slug: datetimepicker-dateinput-messages-change
 tags: telerik, dateinput, messages, datetimepicker, placeholder
 component: datetimepicker
@@ -59,6 +59,32 @@ To achieve the desired scenario, reference the `dateInput` of the DateTimePicker
 
 For the complete implementation of the suggested approach, refer to the [Telerik REPL example on setting the date input messages of the DateTimePicker](https://netcorerepl.telerik.com/cwPlmlFH31nEdqv650).
 
-## See Also 
 
-* [API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+## More {{ site.framework }} DateTimePicker Resources
+
+* [{{ site.framework }} DateTimePicker Documentation]({%slug htmlhelpers_datetimepicker_aspnetcore%})
+
+* [{{ site.framework }} DateTimePicker Demos](https://demos.telerik.com/{{ site.platform }}/datetimepicker/index)
+
+{% if site.core %}
+* [{{ site.framework }} DateTimePicker Product Page](https://www.telerik.com/aspnet-core-ui/date-and-time-pickers)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} DateTimePicker Product Page](https://www.telerik.com/aspnet-mvc/datetimepicker)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik REPL: Setting the Date Input Messages of the DateTimePicker](https://netcorerepl.telerik.com/cwPlmlFH31nEdqv650)
+* [Client-Side API Reference of the DateTimePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [Server-Side API Reference of the DateTimePicker for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/datetimepicker)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

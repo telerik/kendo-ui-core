@@ -11,7 +11,7 @@ position: 6
 
 SignalR allows you to add real-time functionality to your Grid. SignalR takes care of everything behind the scenes that makes real-time client-to-server and server-to-client communications possible. This is useful in collaborative scenarios where multiple parties are editing the Grid simultaneously or in apps that utilize push notifications.
 
-You can use it with both the Telerik UI helpers for MVC and Core because they wrap the [Kendo UI for jQuery Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
+You can use it with both the Telerik UI helpers for MVC and Core because they wrap the [Kendo UI for jQuery Grid](https://docs.telerik.com/kendo-ui/controls/grid/overview).
 
  For a runnable example, refer to the [demo on SignalR binding of the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/signalr).
 

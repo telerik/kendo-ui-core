@@ -1,4 +1,6 @@
-import "./kendo.core.js";
+// The current file development is no longer in active phase but the code will be kept as is.
+// Please be advised that we have discontinued the sync for this file with the commercial version of Kendo UI for jQuery.
+// To take advantage of new features please visit (https://www.telerik.com/kendo-jquery-ui) and consider upgrading to a commercial license.import "./kendo.core.js";
 import "./kendo.label.js";
 import "./kendo.icons.js";
 
@@ -48,10 +50,10 @@ var __meta__ = {
             var wrapperClass = (element.parent().attr("class") || "");
             var skipStyling = wrapperClass.indexOf("picker") >= 0 && wrapperClass.indexOf("rangepicker") < 0;
 
-            that.wrapper = element.wrap("<span class='k-dateinput k-input'></span>").parent();
             if (skipStyling) {
-                that.wrapper = that.wrapper.parent();
+                that.wrapper = that.element.parent();
             } else {
+                that.wrapper = element.wrap("<span class='k-dateinput k-input'></span>").parent();
                 that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
             }
             that.wrapper[0].style.cssText = element[0].style.cssText;
