@@ -1,22 +1,18 @@
 ---
-title: Orientation
-page_title: jQuery Timeline Documentation - Orientation
-description: "See how to control the orientation of the Timeline component for jQuery by Kendo UI."
-slug: orientation_kendoui_timeline_widget
-position: 3
+title: Getting Started
+page_title: jQuery TimeLine Documentation - Getting Started with the TimeLine
+description: "Get started with the jQuery TimeLine by Kendo UI and learn how to create, initialize, and enable the component."
+slug: getting_started_kendoui_timeline_component
+position: 2
 ---
 
-# Orientation
+# Getting Started with the TimeLine 
 
-The Timeline can render its events in a [vertical](#vertical) or [horizontal](#horizontal) list.
+This guide demonstrates how to get up and running with the Kendo UI for jQuery TimeLine .
 
-## Vertical Mode
+After the completion of this guide, you will achieve the following end result:
 
-By default, the Timeline is vertical with its events arranged on one side of the axis and all events are expanded.
-
-You can have the events render alternatingly on both sides of the axis by setting its `alterMode` option to `true`. If you set the `collapsibleEvents` option to `true`, all events will start out collapsed. The user can then expand a particular event to see more than its title and subtitle.
-
-```
+```dojo
 <div id="timeline"></div>
 <script>
     $(document).ready(function () {
@@ -24,23 +20,12 @@ You can have the events render alternatingly on both sides of the axis by settin
             orientation: "vertical", // Define the layout of the component.
             alterMode: true, // Render the events on both sides of the axis in the vertical mode.
             collapsibleEvents: true, // Start all collapsed events in the vertical mode.
-            dataSource: {
-                data: eventsData, // Defined later in this snippet.
-                schema: {
-                    model: {
-                        fields: {
-                            date: {
-                                type: "date"
-                            },
-                        }
-                    }
-                }
-            }
+            dataSource: timeLineDataSource
         });
     });
 
     // The literals in this example use the default field names the component takes.
-    var eventsData = [
+    let eventsData = [
         {
             description: "First event description.",
             date: new Date(2015, 4, 15),
@@ -93,42 +78,50 @@ You can have the events render alternatingly on both sides of the axis by settin
             ]
         }
     ];
+
+    let timeLineDataSource = new kendo.data.DataSource({
+        data: eventsData, // Defined later in this snippet.
+        schema: {
+            model: {
+                fields: {
+                    date: {
+                        type: "date"
+                    },
+                }
+            }
+        }
+    });
 </script>
 ```
 
-## Horizontal Mode
+## 1. Create a Div Element
 
-To use the horizontal rendering, set the `orientation` option of the Timeline to `horizontal`.
+First, create a `<div>` element on the page that will be used to initialize the component. The content of the `<div>` will be used as content for the TimeLine.
 
-In the horizontal mode, the Timeline renders buttons which the user can click or tap to navigate between periods. One of the events is always rendered below the time axis and the user can select another event to reveal its details.
-
-The horizontal mode renders the event details on demand (only when they are selected) and is responsive (renders as many of the events as there is room on the axis for).
-
-The horizontal mode does not support alternating rendering and collapsing of events.
-
+```html
+    <div id="timeline"></div>
 ```
-<div id="timeline"></div>
-<script>
-    $(document).ready(function () {
-        $("#timeline").kendoTimeline({
-            orientation: "horizontal", // Defined the layout of the component.
-            dataSource: {
-                data: eventsData, // Defined later in this snippet.
-                schema: {
-                    model: {
-                        fields: {
-                            date: {
-                                type: "date"
-                            },
-                        }
-                    }
+
+## 2. Specify the Data Source
+
+In this step, you will specify a [`dataSource`](/api/javascript/ui/autocomplete/configuration/datasource) instance and pass local data to it.
+
+```html
+    let timeLineDataSource = new kendo.data.DataSource({
+        data: eventsData, // Defined later in this snippet.
+        schema: {
+            model: {
+                fields: {
+                    date: {
+                        type: "date"
+                    },
                 }
             }
-        });
+        }
     });
 
-    // The literals in this example use the default field names the component takes.
-    var eventsData = [
+        // The literals in this example use the default field names the component takes.
+    let eventsData = [
         {
             description: "First event description.",
             date: new Date(2015, 4, 15),
@@ -164,7 +157,7 @@ The horizontal mode does not support alternating rendering and collapsing of eve
             ]
         },
         {
-            description: "Third event descriptionm.",
+            description: "Third event description.",
             date: new Date(2015, 5, 25),
             subtitle: "My second trip this year",
             title: "Malta, a Country of Knights",
@@ -181,10 +174,51 @@ The horizontal mode does not support alternating rendering and collapsing of eve
             ]
         }
     ];
-</script>
 ```
 
-## See Also
+## 3. Initialize the TimeLine
 
-* [Horizontal Orientation of the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/horizontal)
-* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)
+In this step, you will initialize the TimeLine from the `<div>` element.
+
+```dojo
+<div id="timeline"></div>
+<script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: timeLineDataSource //pass the data source instance
+        });
+    });
+```
+
+## 4. Apply Configuration Settings
+
+Here, you will define the `vertical` layout of the component, set the events rendering on both sides of the axis, and start all collapsed events in the vertical mode.
+
+```dojo
+<div id="timeline"></div>
+<script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            orientation: "vertical", // Define the layout of the component.
+            alterMode: true, // Render the events on both sides of the axis in the vertical mode.
+            collapsibleEvents: true, // Start all collapsed events in the vertical mode.
+            dataSource: timeLineDataSource // Define the data source instance.
+        });
+    });
+```
+
+## Next Steps
+
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
+* [Demo Page for the TimeLine](https://demos.telerik.com/kendo-ui/timeline/index)
+
+## See Also 
+
+* [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
+* [Knowledge Base Section](/knowledge-base)
+
+<script>
+  window.onload = function() {
+    document.getElementsByClassName("btn-run")[0].click();
+  }
+</script>

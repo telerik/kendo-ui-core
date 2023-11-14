@@ -3,7 +3,7 @@ title: Multiple Sources
 page_title: jQuery MediaPlayer Documentation - Multiple Sources
 description: "Get started with the jQuery MediaPlayer by Kendo UI and add multiple sources to the same video."
 slug: multiplesources_kendoui_mediaplayer
-position: 2
+position: 3
 ---
 
 # Multiple Sources
